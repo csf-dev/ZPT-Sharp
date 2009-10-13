@@ -1,0 +1,42 @@
+﻿<UserCombinePreferences version="1.0" filename="/home/craig/projects/Arguments.cs/Arguments.cs.mds">
+  <Files>
+    <File name="src/UnixArguments.cs" line="197" column="46" />
+    <File name="src/tests/TestUnixArguments.cs" line="47" column="61" />
+  </Files>
+  <Views>
+    <ViewMemento id="ProjectPad">
+      <Node expanded="True">
+        <Node name="Arguments.cs" expanded="True">
+          <Node name="src" expanded="True">
+            <Node name="tests" expanded="True" />
+            <Node name="UnixArguments.cs" selected="True" />
+          </Node>
+        </Node>
+      </Node>
+    </ViewMemento>
+    <ViewMemento id="ClassPad">
+      <Node expanded="True">
+        <Node name="Arguments.cs" expanded="True">
+          <Node name="CraigFowler" expanded="True">
+            <Node name="UnixArguments" expanded="True" />
+          </Node>
+        </Node>
+      </Node>
+    </ViewMemento>
+    <ViewMemento id="MonoDevelop.NUnit.TestPad">
+      <Node expanded="True">
+        <Node name="Arguments.cs" expanded="True">
+          <Node name="Test" expanded="True">
+            <Node name="CraigFowler" expanded="True">
+              <Node name="TestUnixArguments" expanded="True" selected="True" />
+            </Node>
+          </Node>
+        </Node>
+      </Node>
+    </ViewMemento>
+  </Views>
+  <Properties>
+    <Property key="ActiveWindow" value="/home/craig/projects/Arguments.cs/src/UnixArguments.cs" />
+    <Property key="ActiveConfiguration" value="Debug" />
+  </Properties>
+</UserCombinePreferences>
