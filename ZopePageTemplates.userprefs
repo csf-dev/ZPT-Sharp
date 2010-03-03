@@ -21,7 +21,7 @@
               <Node name="Web" expanded="True">
                 <Node name="ZPT" expanded="True">
                   <Node name="Tales" expanded="True">
-                    <Node name="CraigFowler.Web.ZPT.Tales.StringExpression" selected="True" />
+                    <Node name="CraigFowler.Web.ZPT.Tales.TalesExpression" selected="True" />
                   </Node>
                 </Node>
               </Node>

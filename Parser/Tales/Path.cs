@@ -1,5 +1,5 @@
 //  
-//  PathExpression.cs
+//  Path.cs
 //  
 //  Author:
 //       Craig Fowler <craig@craigfowler.me.uk>
@@ -25,42 +25,44 @@ using System.Collections.Generic;
 namespace CraigFowler.Web.ZPT.Tales
 {
   /// <summary>
-  /// <para>Represents a <see cref="TalesExpression"/> that represents a 'path' type expression.</para>
+  /// <para>Represents an individual path used within a <see cref="PathExpression"/>.</para>
   /// </summary>
-  public class PathExpression : TalesExpression
+  public class Path
   {
-    #region constants
+    private const char PARTS_SEPARATOR = '/';
     
-    private const char PATH_SEPARATOR = '|';
+    private string rawPath;
     
-    #endregion
-    
-    #region properties
-    
-    /// <summary>
-    /// <para>Read-only.  Gets a queue of the paths that are present in the expression body of this expression.</para>
-    /// <para>Independant paths are searated by the pipe character '|'.</para>
-    /// </summary>
-    public Queue<Path> Paths
+    public string Text
     {
       get {
-        Queue<Path> output = new Queue<Path>();
+        return rawPath;
+      }
+      private set {
+        rawPath = value;
+      }
+    }
+    
+    public Queue<string> Parts
+    {
+      get {
+        Queue<string> output = new Queue<string>();
         
-        foreach(string path in Body.Split(new char[] {PATH_SEPARATOR}))
+        foreach(string part in Text.Split(new char[] {PARTS_SEPARATOR}))
         {
-          output.Enqueue(new Path(path));
+          if(!String.IsNullOrEmpty(part))
+          {
+            output.Enqueue(part);
+          }
         }
         
         return output;
       }
     }
-    
-    #endregion
-    
-    #region constructor
-    
-    public PathExpression(string expression, TalesContext context) : base(expression, context) {}
-    
-    #endregion
+      
+    public Path(string path)
+    {
+      Text = path;
+    }
   }
 }

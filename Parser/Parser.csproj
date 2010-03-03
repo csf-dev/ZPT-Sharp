@@ -41,6 +41,7 @@
     <Compile Include="Tales\StringExpression.cs" />
     <Compile Include="Tales\TalesContext.cs" />
     <Compile Include="Tales\DefaultValueMarker.cs" />
+    <Compile Include="Tales\Path.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

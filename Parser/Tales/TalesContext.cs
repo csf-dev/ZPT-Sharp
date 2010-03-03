@@ -191,13 +191,13 @@ namespace CraigFowler.Web.ZPT.Tales
     
     #region methods
     
-    public bool ReferenceValid(string path)
+    public bool ReferenceValid(Path path)
     {
       // TODO: Determine whether the given path reference is valid for the current context
       throw new NotImplementedException();
     }
     
-    public object EvaluateReference(string path)
+    public object EvaluateReference(Path path)
     {
       // TODO: Evaluate and return the outcome of a path reference.
       throw new NotImplementedException();
@@ -327,7 +327,7 @@ namespace CraigFowler.Web.ZPT.Tales
     /// within their own constructors if they choose.
     /// </para>
     /// </summary>
-    private virtual void initialiseMandatoryRootContexts()
+    private void initialiseMandatoryRootContexts()
     {
       RootContexts = new Dictionary<string, object>();
       
