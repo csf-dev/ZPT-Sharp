@@ -1,0 +1,1216 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TestRecord xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Results>
+    <UnitTestResult>
+      <TestDate>2010-03-06T13:42:00</TestDate>
+      <Status>Success Failure</Status>
+      <TotalFailures>1</TotalFailures>
+      <TotalSuccess>1</TotalSuccess>
+      <TotalIgnored>0</TotalIgnored>
+      <Time />
+      <Message>Child test failed</Message>
+    </UnitTestResult>
+    <UnitTestResult>
+      <TestDate>2010-03-06T13:43:31</TestDate>
+      <Status>Success</Status>
+      <TotalFailures>0</TotalFailures>
+      <TotalSuccess>2</TotalSuccess>
+      <TotalIgnored>0</TotalIgnored>
+      <Time />
+    </UnitTestResult>
+    <UnitTestResult>
+      <TestDate>2010-03-06T19:54:34</TestDate>
+      <Status>Success Failure</Status>
+      <TotalFailures>2</TotalFailures>
+      <TotalSuccess>3</TotalSuccess>
+      <TotalIgnored>0</TotalIgnored>
+      <Time />
+      <Message>Child test failed</Message>
+    </UnitTestResult>
+    <UnitTestResult>
+      <TestDate>2010-03-06T19:55:08</TestDate>
+      <Status>Success Failure</Status>
+      <TotalFailures>2</TotalFailures>
+      <TotalSuccess>3</TotalSuccess>
+      <TotalIgnored>0</TotalIgnored>
+      <Time />
+      <Message>Child test failed</Message>
+    </UnitTestResult>
+    <UnitTestResult>
+      <TestDate>2010-03-06T19:55:22</TestDate>
+      <Status>Success Failure</Status>
+      <TotalFailures>1</TotalFailures>
+      <TotalSuccess>4</TotalSuccess>
+      <TotalIgnored>0</TotalIgnored>
+      <Time />
+      <Message>Child test failed</Message>
+    </UnitTestResult>
+    <UnitTestResult>
+      <TestDate>2010-03-06T19:57:35</TestDate>
+      <Status>Success Failure</Status>
+      <TotalFailures>1</TotalFailures>
+      <TotalSuccess>4</TotalSuccess>
+      <TotalIgnored>0</TotalIgnored>
+      <Time />
+      <Message>Child test failed</Message>
+    </UnitTestResult>
+    <UnitTestResult>
+      <TestDate>2010-03-06T19:59:05</TestDate>
+      <Status>Success Failure</Status>
+      <TotalFailures>1</TotalFailures>
+      <TotalSuccess>4</TotalSuccess>
+      <TotalIgnored>0</TotalIgnored>
+      <Time />
+      <Message>Child test failed</Message>
+    </UnitTestResult>
+    <UnitTestResult>
+      <TestDate>2010-03-06T20:07:05</TestDate>
+      <Status>Success</Status>
+      <TotalFailures>0</TotalFailures>
+      <TotalSuccess>5</TotalSuccess>
+      <TotalIgnored>0</TotalIgnored>
+      <Time />
+    </UnitTestResult>
+  </Results>
+  <Tests>
+    <TestRecord Name="Test">
+      <Results>
+        <UnitTestResult>
+          <TestDate>2010-03-06T13:42:00</TestDate>
+          <Status>Success Failure</Status>
+          <TotalFailures>1</TotalFailures>
+          <TotalSuccess>1</TotalSuccess>
+          <TotalIgnored>0</TotalIgnored>
+          <Time />
+          <Message>Child test failed</Message>
+        </UnitTestResult>
+        <UnitTestResult>
+          <TestDate>2010-03-06T13:43:31</TestDate>
+          <Status>Success</Status>
+          <TotalFailures>0</TotalFailures>
+          <TotalSuccess>2</TotalSuccess>
+          <TotalIgnored>0</TotalIgnored>
+          <Time />
+        </UnitTestResult>
+        <UnitTestResult>
+          <TestDate>2010-03-06T19:54:34</TestDate>
+          <Status>Success Failure</Status>
+          <TotalFailures>2</TotalFailures>
+          <TotalSuccess>3</TotalSuccess>
+          <TotalIgnored>0</TotalIgnored>
+          <Time />
+          <Message>Child test failed</Message>
+        </UnitTestResult>
+        <UnitTestResult>
+          <TestDate>2010-03-06T19:55:08</TestDate>
+          <Status>Success Failure</Status>
+          <TotalFailures>2</TotalFailures>
+          <TotalSuccess>3</TotalSuccess>
+          <TotalIgnored>0</TotalIgnored>
+          <Time />
+          <Message>Child test failed</Message>
+        </UnitTestResult>
+        <UnitTestResult>
+          <TestDate>2010-03-06T19:55:22</TestDate>
+          <Status>Success Failure</Status>
+          <TotalFailures>1</TotalFailures>
+          <TotalSuccess>4</TotalSuccess>
+          <TotalIgnored>0</TotalIgnored>
+          <Time />
+          <Message>Child test failed</Message>
+        </UnitTestResult>
+        <UnitTestResult>
+          <TestDate>2010-03-06T19:57:35</TestDate>
+          <Status>Success Failure</Status>
+          <TotalFailures>1</TotalFailures>
+          <TotalSuccess>4</TotalSuccess>
+          <TotalIgnored>0</TotalIgnored>
+          <Time />
+          <Message>Child test failed</Message>
+        </UnitTestResult>
+        <UnitTestResult>
+          <TestDate>2010-03-06T19:59:05</TestDate>
+          <Status>Success Failure</Status>
+          <TotalFailures>1</TotalFailures>
+          <TotalSuccess>4</TotalSuccess>
+          <TotalIgnored>0</TotalIgnored>
+          <Time />
+          <Message>Child test failed</Message>
+        </UnitTestResult>
+        <UnitTestResult>
+          <TestDate>2010-03-06T20:07:05</TestDate>
+          <Status>Success</Status>
+          <TotalFailures>0</TotalFailures>
+          <TotalSuccess>5</TotalSuccess>
+          <TotalIgnored>0</TotalIgnored>
+          <Time />
+        </UnitTestResult>
+      </Results>
+      <Tests>
+        <TestRecord Name="CraigFowler">
+          <Results>
+            <UnitTestResult>
+              <TestDate>2010-03-06T13:42:00</TestDate>
+              <Status>Success Failure</Status>
+              <TotalFailures>1</TotalFailures>
+              <TotalSuccess>1</TotalSuccess>
+              <TotalIgnored>0</TotalIgnored>
+              <Time />
+              <Message>Child test failed</Message>
+            </UnitTestResult>
+            <UnitTestResult>
+              <TestDate>2010-03-06T13:43:31</TestDate>
+              <Status>Success</Status>
+              <TotalFailures>0</TotalFailures>
+              <TotalSuccess>2</TotalSuccess>
+              <TotalIgnored>0</TotalIgnored>
+              <Time />
+            </UnitTestResult>
+            <UnitTestResult>
+              <TestDate>2010-03-06T19:54:34</TestDate>
+              <Status>Success Failure</Status>
+              <TotalFailures>2</TotalFailures>
+              <TotalSuccess>3</TotalSuccess>
+              <TotalIgnored>0</TotalIgnored>
+              <Time />
+              <Message>Child test failed</Message>
+            </UnitTestResult>
+            <UnitTestResult>
+              <TestDate>2010-03-06T19:55:08</TestDate>
+              <Status>Success Failure</Status>
+              <TotalFailures>2</TotalFailures>
+              <TotalSuccess>3</TotalSuccess>
+              <TotalIgnored>0</TotalIgnored>
+              <Time />
+              <Message>Child test failed</Message>
+            </UnitTestResult>
+            <UnitTestResult>
+              <TestDate>2010-03-06T19:55:22</TestDate>
+              <Status>Success Failure</Status>
+              <TotalFailures>1</TotalFailures>
+              <TotalSuccess>4</TotalSuccess>
+              <TotalIgnored>0</TotalIgnored>
+              <Time />
+              <Message>Child test failed</Message>
+            </UnitTestResult>
+            <UnitTestResult>
+              <TestDate>2010-03-06T19:57:35</TestDate>
+              <Status>Success Failure</Status>
+              <TotalFailures>1</TotalFailures>
+              <TotalSuccess>4</TotalSuccess>
+              <TotalIgnored>0</TotalIgnored>
+              <Time />
+              <Message>Child test failed</Message>
+            </UnitTestResult>
+            <UnitTestResult>
+              <TestDate>2010-03-06T19:59:05</TestDate>
+              <Status>Success Failure</Status>
+              <TotalFailures>1</TotalFailures>
+              <TotalSuccess>4</TotalSuccess>
+              <TotalIgnored>0</TotalIgnored>
+              <Time />
+              <Message>Child test failed</Message>
+            </UnitTestResult>
+            <UnitTestResult>
+              <TestDate>2010-03-06T20:07:05</TestDate>
+              <Status>Success</Status>
+              <TotalFailures>0</TotalFailures>
+              <TotalSuccess>5</TotalSuccess>
+              <TotalIgnored>0</TotalIgnored>
+              <Time />
+            </UnitTestResult>
+          </Results>
+          <Tests>
+            <TestRecord Name="Web">
+              <Results>
+                <UnitTestResult>
+                  <TestDate>2010-03-06T13:42:00</TestDate>
+                  <Status>Success Failure</Status>
+                  <TotalFailures>1</TotalFailures>
+                  <TotalSuccess>1</TotalSuccess>
+                  <TotalIgnored>0</TotalIgnored>
+                  <Time />
+                  <Message>Child test failed</Message>
+                </UnitTestResult>
+                <UnitTestResult>
+                  <TestDate>2010-03-06T13:43:31</TestDate>
+                  <Status>Success</Status>
+                  <TotalFailures>0</TotalFailures>
+                  <TotalSuccess>2</TotalSuccess>
+                  <TotalIgnored>0</TotalIgnored>
+                  <Time />
+                </UnitTestResult>
+                <UnitTestResult>
+                  <TestDate>2010-03-06T19:54:34</TestDate>
+                  <Status>Success Failure</Status>
+                  <TotalFailures>2</TotalFailures>
+                  <TotalSuccess>3</TotalSuccess>
+                  <TotalIgnored>0</TotalIgnored>
+                  <Time />
+                  <Message>Child test failed</Message>
+                </UnitTestResult>
+                <UnitTestResult>
+                  <TestDate>2010-03-06T19:55:08</TestDate>
+                  <Status>Success Failure</Status>
+                  <TotalFailures>2</TotalFailures>
+                  <TotalSuccess>3</TotalSuccess>
+                  <TotalIgnored>0</TotalIgnored>
+                  <Time />
+                  <Message>Child test failed</Message>
+                </UnitTestResult>
+                <UnitTestResult>
+                  <TestDate>2010-03-06T19:55:22</TestDate>
+                  <Status>Success Failure</Status>
+                  <TotalFailures>1</TotalFailures>
+                  <TotalSuccess>4</TotalSuccess>
+                  <TotalIgnored>0</TotalIgnored>
+                  <Time />
+                  <Message>Child test failed</Message>
+                </UnitTestResult>
+                <UnitTestResult>
+                  <TestDate>2010-03-06T19:57:35</TestDate>
+                  <Status>Success Failure</Status>
+                  <TotalFailures>1</TotalFailures>
+                  <TotalSuccess>4</TotalSuccess>
+                  <TotalIgnored>0</TotalIgnored>
+                  <Time />
+                  <Message>Child test failed</Message>
+                </UnitTestResult>
+                <UnitTestResult>
+                  <TestDate>2010-03-06T19:59:05</TestDate>
+                  <Status>Success Failure</Status>
+                  <TotalFailures>1</TotalFailures>
+                  <TotalSuccess>4</TotalSuccess>
+                  <TotalIgnored>0</TotalIgnored>
+                  <Time />
+                  <Message>Child test failed</Message>
+                </UnitTestResult>
+                <UnitTestResult>
+                  <TestDate>2010-03-06T20:07:05</TestDate>
+                  <Status>Success</Status>
+                  <TotalFailures>0</TotalFailures>
+                  <TotalSuccess>5</TotalSuccess>
+                  <TotalIgnored>0</TotalIgnored>
+                  <Time />
+                </UnitTestResult>
+              </Results>
+              <Tests>
+                <TestRecord Name="ZPT">
+                  <Results>
+                    <UnitTestResult>
+                      <TestDate>2010-03-06T13:42:00</TestDate>
+                      <Status>Success Failure</Status>
+                      <TotalFailures>1</TotalFailures>
+                      <TotalSuccess>1</TotalSuccess>
+                      <TotalIgnored>0</TotalIgnored>
+                      <Time />
+                      <Message>Child test failed</Message>
+                    </UnitTestResult>
+                    <UnitTestResult>
+                      <TestDate>2010-03-06T13:43:31</TestDate>
+                      <Status>Success</Status>
+                      <TotalFailures>0</TotalFailures>
+                      <TotalSuccess>2</TotalSuccess>
+                      <TotalIgnored>0</TotalIgnored>
+                      <Time />
+                    </UnitTestResult>
+                    <UnitTestResult>
+                      <TestDate>2010-03-06T19:54:34</TestDate>
+                      <Status>Success Failure</Status>
+                      <TotalFailures>2</TotalFailures>
+                      <TotalSuccess>3</TotalSuccess>
+                      <TotalIgnored>0</TotalIgnored>
+                      <Time />
+                      <Message>Child test failed</Message>
+                    </UnitTestResult>
+                    <UnitTestResult>
+                      <TestDate>2010-03-06T19:55:08</TestDate>
+                      <Status>Success Failure</Status>
+                      <TotalFailures>2</TotalFailures>
+                      <TotalSuccess>3</TotalSuccess>
+                      <TotalIgnored>0</TotalIgnored>
+                      <Time />
+                      <Message>Child test failed</Message>
+                    </UnitTestResult>
+                    <UnitTestResult>
+                      <TestDate>2010-03-06T19:55:22</TestDate>
+                      <Status>Success Failure</Status>
+                      <TotalFailures>1</TotalFailures>
+                      <TotalSuccess>4</TotalSuccess>
+                      <TotalIgnored>0</TotalIgnored>
+                      <Time />
+                      <Message>Child test failed</Message>
+                    </UnitTestResult>
+                    <UnitTestResult>
+                      <TestDate>2010-03-06T19:57:35</TestDate>
+                      <Status>Success Failure</Status>
+                      <TotalFailures>1</TotalFailures>
+                      <TotalSuccess>4</TotalSuccess>
+                      <TotalIgnored>0</TotalIgnored>
+                      <Time />
+                      <Message>Child test failed</Message>
+                    </UnitTestResult>
+                    <UnitTestResult>
+                      <TestDate>2010-03-06T19:59:05</TestDate>
+                      <Status>Success Failure</Status>
+                      <TotalFailures>1</TotalFailures>
+                      <TotalSuccess>4</TotalSuccess>
+                      <TotalIgnored>0</TotalIgnored>
+                      <Time />
+                      <Message>Child test failed</Message>
+                    </UnitTestResult>
+                    <UnitTestResult>
+                      <TestDate>2010-03-06T20:07:05</TestDate>
+                      <Status>Success</Status>
+                      <TotalFailures>0</TotalFailures>
+                      <TotalSuccess>5</TotalSuccess>
+                      <TotalIgnored>0</TotalIgnored>
+                      <Time />
+                    </UnitTestResult>
+                  </Results>
+                  <Tests>
+                    <TestRecord Name="Tales">
+                      <Results>
+                        <UnitTestResult>
+                          <TestDate>2010-03-06T13:42:00</TestDate>
+                          <Status>Success Failure</Status>
+                          <TotalFailures>1</TotalFailures>
+                          <TotalSuccess>1</TotalSuccess>
+                          <TotalIgnored>0</TotalIgnored>
+                          <Time />
+                          <Message>Child test failed</Message>
+                        </UnitTestResult>
+                        <UnitTestResult>
+                          <TestDate>2010-03-06T13:43:31</TestDate>
+                          <Status>Success</Status>
+                          <TotalFailures>0</TotalFailures>
+                          <TotalSuccess>2</TotalSuccess>
+                          <TotalIgnored>0</TotalIgnored>
+                          <Time />
+                        </UnitTestResult>
+                        <UnitTestResult>
+                          <TestDate>2010-03-06T19:54:34</TestDate>
+                          <Status>Success Failure</Status>
+                          <TotalFailures>2</TotalFailures>
+                          <TotalSuccess>3</TotalSuccess>
+                          <TotalIgnored>0</TotalIgnored>
+                          <Time />
+                          <Message>Child test failed</Message>
+                        </UnitTestResult>
+                        <UnitTestResult>
+                          <TestDate>2010-03-06T19:55:08</TestDate>
+                          <Status>Success Failure</Status>
+                          <TotalFailures>2</TotalFailures>
+                          <TotalSuccess>3</TotalSuccess>
+                          <TotalIgnored>0</TotalIgnored>
+                          <Time />
+                          <Message>Child test failed</Message>
+                        </UnitTestResult>
+                        <UnitTestResult>
+                          <TestDate>2010-03-06T19:55:22</TestDate>
+                          <Status>Success Failure</Status>
+                          <TotalFailures>1</TotalFailures>
+                          <TotalSuccess>4</TotalSuccess>
+                          <TotalIgnored>0</TotalIgnored>
+                          <Time />
+                          <Message>Child test failed</Message>
+                        </UnitTestResult>
+                        <UnitTestResult>
+                          <TestDate>2010-03-06T19:57:35</TestDate>
+                          <Status>Success Failure</Status>
+                          <TotalFailures>1</TotalFailures>
+                          <TotalSuccess>4</TotalSuccess>
+                          <TotalIgnored>0</TotalIgnored>
+                          <Time />
+                          <Message>Child test failed</Message>
+                        </UnitTestResult>
+                        <UnitTestResult>
+                          <TestDate>2010-03-06T19:59:05</TestDate>
+                          <Status>Success Failure</Status>
+                          <TotalFailures>1</TotalFailures>
+                          <TotalSuccess>4</TotalSuccess>
+                          <TotalIgnored>0</TotalIgnored>
+                          <Time />
+                          <Message>Child test failed</Message>
+                        </UnitTestResult>
+                        <UnitTestResult>
+                          <TestDate>2010-03-06T20:07:05</TestDate>
+                          <Status>Success</Status>
+                          <TotalFailures>0</TotalFailures>
+                          <TotalSuccess>5</TotalSuccess>
+                          <TotalIgnored>0</TotalIgnored>
+                          <Time />
+                        </UnitTestResult>
+                      </Results>
+                      <Tests>
+                        <TestRecord Name="TestTalesContext">
+                          <Results>
+                            <UnitTestResult>
+                              <TestDate>2010-03-06T13:05:05</TestDate>
+                              <Status>Success</Status>
+                              <TotalFailures>0</TotalFailures>
+                              <TotalSuccess>1</TotalSuccess>
+                              <TotalIgnored>0</TotalIgnored>
+                              <Time />
+                            </UnitTestResult>
+                            <UnitTestResult>
+                              <TestDate>2010-03-06T13:42:00</TestDate>
+                              <Status>Success</Status>
+                              <TotalFailures>0</TotalFailures>
+                              <TotalSuccess>1</TotalSuccess>
+                              <TotalIgnored>0</TotalIgnored>
+                              <Time />
+                            </UnitTestResult>
+                            <UnitTestResult>
+                              <TestDate>2010-03-06T13:43:31</TestDate>
+                              <Status>Success</Status>
+                              <TotalFailures>0</TotalFailures>
+                              <TotalSuccess>1</TotalSuccess>
+                              <TotalIgnored>0</TotalIgnored>
+                              <Time />
+                            </UnitTestResult>
+                            <UnitTestResult>
+                              <TestDate>2010-03-06T19:54:34</TestDate>
+                              <Status>Success</Status>
+                              <TotalFailures>0</TotalFailures>
+                              <TotalSuccess>1</TotalSuccess>
+                              <TotalIgnored>0</TotalIgnored>
+                              <Time />
+                            </UnitTestResult>
+                            <UnitTestResult>
+                              <TestDate>2010-03-06T19:55:08</TestDate>
+                              <Status>Success</Status>
+                              <TotalFailures>0</TotalFailures>
+                              <TotalSuccess>1</TotalSuccess>
+                              <TotalIgnored>0</TotalIgnored>
+                              <Time />
+                            </UnitTestResult>
+                            <UnitTestResult>
+                              <TestDate>2010-03-06T19:55:22</TestDate>
+                              <Status>Success</Status>
+                              <TotalFailures>0</TotalFailures>
+                              <TotalSuccess>1</TotalSuccess>
+                              <TotalIgnored>0</TotalIgnored>
+                              <Time />
+                            </UnitTestResult>
+                            <UnitTestResult>
+                              <TestDate>2010-03-06T19:57:35</TestDate>
+                              <Status>Success</Status>
+                              <TotalFailures>0</TotalFailures>
+                              <TotalSuccess>1</TotalSuccess>
+                              <TotalIgnored>0</TotalIgnored>
+                              <Time />
+                            </UnitTestResult>
+                            <UnitTestResult>
+                              <TestDate>2010-03-06T19:59:05</TestDate>
+                              <Status>Success</Status>
+                              <TotalFailures>0</TotalFailures>
+                              <TotalSuccess>1</TotalSuccess>
+                              <TotalIgnored>0</TotalIgnored>
+                              <Time />
+                            </UnitTestResult>
+                            <UnitTestResult>
+                              <TestDate>2010-03-06T20:07:05</TestDate>
+                              <Status>Success</Status>
+                              <TotalFailures>0</TotalFailures>
+                              <TotalSuccess>1</TotalSuccess>
+                              <TotalIgnored>0</TotalIgnored>
+                              <Time />
+                            </UnitTestResult>
+                          </Results>
+                          <Tests>
+                            <TestRecord Name="TestConstructor">
+                              <Results>
+                                <UnitTestResult>
+                                  <TestDate>2010-03-06T13:05:05</TestDate>
+                                  <Status>Success</Status>
+                                  <TotalFailures>0</TotalFailures>
+                                  <TotalSuccess>1</TotalSuccess>
+                                  <TotalIgnored>0</TotalIgnored>
+                                  <Time />
+                                  <Message>Test successful
+
+Execution time: 0.03ms</Message>
+                                  <ConsoleOutput />
+                                  <ConsoleError />
+                                </UnitTestResult>
+                                <UnitTestResult>
+                                  <TestDate>2010-03-06T13:42:00</TestDate>
+                                  <Status>Success</Status>
+                                  <TotalFailures>0</TotalFailures>
+                                  <TotalSuccess>1</TotalSuccess>
+                                  <TotalIgnored>0</TotalIgnored>
+                                  <Time />
+                                  <Message>Test successful
+
+Execution time: 0.00ms</Message>
+                                  <ConsoleOutput />
+                                  <ConsoleError />
+                                </UnitTestResult>
+                                <UnitTestResult>
+                                  <TestDate>2010-03-06T13:43:31</TestDate>
+                                  <Status>Success</Status>
+                                  <TotalFailures>0</TotalFailures>
+                                  <TotalSuccess>1</TotalSuccess>
+                                  <TotalIgnored>0</TotalIgnored>
+                                  <Time />
+                                  <Message>Test successful
+
+Execution time: 0.00ms</Message>
+                                  <ConsoleOutput />
+                                  <ConsoleError />
+                                </UnitTestResult>
+                                <UnitTestResult>
+                                  <TestDate>2010-03-06T19:54:34</TestDate>
+                                  <Status>Success</Status>
+                                  <TotalFailures>0</TotalFailures>
+                                  <TotalSuccess>1</TotalSuccess>
+                                  <TotalIgnored>0</TotalIgnored>
+                                  <Time />
+                                  <Message>Test successful
+
+Execution time: 0.00ms</Message>
+                                  <ConsoleOutput />
+                                  <ConsoleError />
+                                </UnitTestResult>
+                                <UnitTestResult>
+                                  <TestDate>2010-03-06T19:55:08</TestDate>
+                                  <Status>Success</Status>
+                                  <TotalFailures>0</TotalFailures>
+                                  <TotalSuccess>1</TotalSuccess>
+                                  <TotalIgnored>0</TotalIgnored>
+                                  <Time />
+                                  <Message>Test successful
+
+Execution time: 0.00ms</Message>
+                                  <ConsoleOutput />
+                                  <ConsoleError />
+                                </UnitTestResult>
+                                <UnitTestResult>
+                                  <TestDate>2010-03-06T19:55:22</TestDate>
+                                  <Status>Success</Status>
+                                  <TotalFailures>0</TotalFailures>
+                                  <TotalSuccess>1</TotalSuccess>
+                                  <TotalIgnored>0</TotalIgnored>
+                                  <Time />
+                                  <Message>Test successful
+
+Execution time: 0.00ms</Message>
+                                  <ConsoleOutput />
+                                  <ConsoleError />
+                                </UnitTestResult>
+                                <UnitTestResult>
+                                  <TestDate>2010-03-06T19:57:35</TestDate>
+                                  <Status>Success</Status>
+                                  <TotalFailures>0</TotalFailures>
+                                  <TotalSuccess>1</TotalSuccess>
+                                  <TotalIgnored>0</TotalIgnored>
+                                  <Time />
+                                  <Message>Test successful
+
+Execution time: 0.00ms</Message>
+                                  <ConsoleOutput />
+                                  <ConsoleError />
+                                </UnitTestResult>
+                                <UnitTestResult>
+                                  <TestDate>2010-03-06T19:59:05</TestDate>
+                                  <Status>Success</Status>
+                                  <TotalFailures>0</TotalFailures>
+                                  <TotalSuccess>1</TotalSuccess>
+                                  <TotalIgnored>0</TotalIgnored>
+                                  <Time />
+                                  <Message>Test successful
+
+Execution time: 0.00ms</Message>
+                                  <ConsoleOutput />
+                                  <ConsoleError />
+                                </UnitTestResult>
+                                <UnitTestResult>
+                                  <TestDate>2010-03-06T20:07:05</TestDate>
+                                  <Status>Success</Status>
+                                  <TotalFailures>0</TotalFailures>
+                                  <TotalSuccess>1</TotalSuccess>
+                                  <TotalIgnored>0</TotalIgnored>
+                                  <Time />
+                                  <Message>Test successful
+
+Execution time: 0.00ms</Message>
+                                  <ConsoleOutput />
+                                  <ConsoleError />
+                                </UnitTestResult>
+                              </Results>
+                              <Tests />
+                            </TestRecord>
+                          </Tests>
+                        </TestRecord>
+                        <TestRecord Name="TestPathExpression">
+                          <Results>
+                            <UnitTestResult>
+                              <TestDate>2010-03-06T13:42:00</TestDate>
+                              <Status>Failure</Status>
+                              <TotalFailures>1</TotalFailures>
+                              <TotalSuccess>0</TotalSuccess>
+                              <TotalIgnored>0</TotalIgnored>
+                              <Time />
+                              <Message>Child test failed</Message>
+                            </UnitTestResult>
+                            <UnitTestResult>
+                              <TestDate>2010-03-06T13:43:31</TestDate>
+                              <Status>Success</Status>
+                              <TotalFailures>0</TotalFailures>
+                              <TotalSuccess>1</TotalSuccess>
+                              <TotalIgnored>0</TotalIgnored>
+                              <Time />
+                            </UnitTestResult>
+                            <UnitTestResult>
+                              <TestDate>2010-03-06T19:54:34</TestDate>
+                              <Status>Success</Status>
+                              <TotalFailures>0</TotalFailures>
+                              <TotalSuccess>1</TotalSuccess>
+                              <TotalIgnored>0</TotalIgnored>
+                              <Time />
+                            </UnitTestResult>
+                            <UnitTestResult>
+                              <TestDate>2010-03-06T19:55:08</TestDate>
+                              <Status>Success</Status>
+                              <TotalFailures>0</TotalFailures>
+                              <TotalSuccess>1</TotalSuccess>
+                              <TotalIgnored>0</TotalIgnored>
+                              <Time />
+                            </UnitTestResult>
+                            <UnitTestResult>
+                              <TestDate>2010-03-06T19:55:22</TestDate>
+                              <Status>Success</Status>
+                              <TotalFailures>0</TotalFailures>
+                              <TotalSuccess>1</TotalSuccess>
+                              <TotalIgnored>0</TotalIgnored>
+                              <Time />
+                            </UnitTestResult>
+                            <UnitTestResult>
+                              <TestDate>2010-03-06T19:57:35</TestDate>
+                              <Status>Success</Status>
+                              <TotalFailures>0</TotalFailures>
+                              <TotalSuccess>1</TotalSuccess>
+                              <TotalIgnored>0</TotalIgnored>
+                              <Time />
+                            </UnitTestResult>
+                            <UnitTestResult>
+                              <TestDate>2010-03-06T19:59:05</TestDate>
+                              <Status>Success</Status>
+                              <TotalFailures>0</TotalFailures>
+                              <TotalSuccess>1</TotalSuccess>
+                              <TotalIgnored>0</TotalIgnored>
+                              <Time />
+                            </UnitTestResult>
+                            <UnitTestResult>
+                              <TestDate>2010-03-06T20:07:05</TestDate>
+                              <Status>Success</Status>
+                              <TotalFailures>0</TotalFailures>
+                              <TotalSuccess>1</TotalSuccess>
+                              <TotalIgnored>0</TotalIgnored>
+                              <Time />
+                            </UnitTestResult>
+                          </Results>
+                          <Tests>
+                            <TestRecord Name="TestPathPieces">
+                              <Results>
+                                <UnitTestResult>
+                                  <TestDate>2010-03-06T13:42:00</TestDate>
+                                  <Status>Failure</Status>
+                                  <TotalFailures>1</TotalFailures>
+                                  <TotalSuccess>0</TotalSuccess>
+                                  <TotalIgnored>0</TotalIgnored>
+                                  <Time />
+                                  <Message>  Correct text for first path
+  Expected string length 11 but was 12. Strings differ at index 11.
+  Expected: "foo/bar/baz"
+  But was:  "foo/bar/baz "
+  ----------------------^
+</Message>
+                                  <StackTrace>  at NUnit.Framework.Assert.That (System.Object actual, NUnit.Framework.Constraints.Constraint constraint, System.String message, System.Object[] args) [0x00000] 
+  at NUnit.Framework.Assert.AreEqual (System.Object expected, System.Object actual, System.String message, System.Object[] args) [0x00000] 
+  at NUnit.Framework.Assert.AreEqual (System.Object expected, System.Object actual, System.String message) [0x00000] 
+  at Test.CraigFowler.Web.ZPT.Tales.TestPathExpression.TestPathPieces () [0x0002a] in /home/craig/projects/ZopePageTemplates/Test.Parser/Tales/TestPathExpression.cs:22 
+  at (wrapper managed-to-native) System.Reflection.MonoMethod:InternalInvoke (object,object[],System.Exception&amp;)
+  at System.Reflection.MonoMethod.Invoke (System.Object obj, BindingFlags invokeAttr, System.Reflection.Binder binder, System.Object[] parameters, System.Globalization.CultureInfo culture) [0x00000] </StackTrace>
+                                  <ConsoleOutput />
+                                  <ConsoleError />
+                                </UnitTestResult>
+                                <UnitTestResult>
+                                  <TestDate>2010-03-06T13:43:31</TestDate>
+                                  <Status>Success</Status>
+                                  <TotalFailures>0</TotalFailures>
+                                  <TotalSuccess>1</TotalSuccess>
+                                  <TotalIgnored>0</TotalIgnored>
+                                  <Time />
+                                  <Message>Test successful
+
+Execution time: 0.02ms</Message>
+                                  <ConsoleOutput />
+                                  <ConsoleError />
+                                </UnitTestResult>
+                                <UnitTestResult>
+                                  <TestDate>2010-03-06T19:54:34</TestDate>
+                                  <Status>Success</Status>
+                                  <TotalFailures>0</TotalFailures>
+                                  <TotalSuccess>1</TotalSuccess>
+                                  <TotalIgnored>0</TotalIgnored>
+                                  <Time />
+                                  <Message>Test successful
+
+Execution time: 0.01ms</Message>
+                                  <ConsoleOutput />
+                                  <ConsoleError />
+                                </UnitTestResult>
+                                <UnitTestResult>
+                                  <TestDate>2010-03-06T19:55:08</TestDate>
+                                  <Status>Success</Status>
+                                  <TotalFailures>0</TotalFailures>
+                                  <TotalSuccess>1</TotalSuccess>
+                                  <TotalIgnored>0</TotalIgnored>
+                                  <Time />
+                                  <Message>Test successful
+
+Execution time: 0.01ms</Message>
+                                  <ConsoleOutput />
+                                  <ConsoleError />
+                                </UnitTestResult>
+                                <UnitTestResult>
+                                  <TestDate>2010-03-06T19:55:22</TestDate>
+                                  <Status>Success</Status>
+                                  <TotalFailures>0</TotalFailures>
+                                  <TotalSuccess>1</TotalSuccess>
+                                  <TotalIgnored>0</TotalIgnored>
+                                  <Time />
+                                  <Message>Test successful
+
+Execution time: 0.02ms</Message>
+                                  <ConsoleOutput />
+                                  <ConsoleError />
+                                </UnitTestResult>
+                                <UnitTestResult>
+                                  <TestDate>2010-03-06T19:57:35</TestDate>
+                                  <Status>Success</Status>
+                                  <TotalFailures>0</TotalFailures>
+                                  <TotalSuccess>1</TotalSuccess>
+                                  <TotalIgnored>0</TotalIgnored>
+                                  <Time />
+                                  <Message>Test successful
+
+Execution time: 0.01ms</Message>
+                                  <ConsoleOutput />
+                                  <ConsoleError />
+                                </UnitTestResult>
+                                <UnitTestResult>
+                                  <TestDate>2010-03-06T19:59:05</TestDate>
+                                  <Status>Success</Status>
+                                  <TotalFailures>0</TotalFailures>
+                                  <TotalSuccess>1</TotalSuccess>
+                                  <TotalIgnored>0</TotalIgnored>
+                                  <Time />
+                                  <Message>Test successful
+
+Execution time: 0.01ms</Message>
+                                  <ConsoleOutput />
+                                  <ConsoleError />
+                                </UnitTestResult>
+                                <UnitTestResult>
+                                  <TestDate>2010-03-06T20:07:05</TestDate>
+                                  <Status>Success</Status>
+                                  <TotalFailures>0</TotalFailures>
+                                  <TotalSuccess>1</TotalSuccess>
+                                  <TotalIgnored>0</TotalIgnored>
+                                  <Time />
+                                  <Message>Test successful
+
+Execution time: 0.02ms</Message>
+                                  <ConsoleOutput />
+                                  <ConsoleError />
+                                </UnitTestResult>
+                              </Results>
+                              <Tests />
+                            </TestRecord>
+                          </Tests>
+                        </TestRecord>
+                        <TestRecord Name="TestPath">
+                          <Results>
+                            <UnitTestResult>
+                              <TestDate>2010-03-06T19:54:34</TestDate>
+                              <Status>Success Failure</Status>
+                              <TotalFailures>2</TotalFailures>
+                              <TotalSuccess>1</TotalSuccess>
+                              <TotalIgnored>0</TotalIgnored>
+                              <Time />
+                              <Message>Child test failed</Message>
+                            </UnitTestResult>
+                            <UnitTestResult>
+                              <TestDate>2010-03-06T19:55:08</TestDate>
+                              <Status>Success Failure</Status>
+                              <TotalFailures>2</TotalFailures>
+                              <TotalSuccess>1</TotalSuccess>
+                              <TotalIgnored>0</TotalIgnored>
+                              <Time />
+                              <Message>Child test failed</Message>
+                            </UnitTestResult>
+                            <UnitTestResult>
+                              <TestDate>2010-03-06T19:55:22</TestDate>
+                              <Status>Success Failure</Status>
+                              <TotalFailures>1</TotalFailures>
+                              <TotalSuccess>2</TotalSuccess>
+                              <TotalIgnored>0</TotalIgnored>
+                              <Time />
+                              <Message>Child test failed</Message>
+                            </UnitTestResult>
+                            <UnitTestResult>
+                              <TestDate>2010-03-06T19:57:35</TestDate>
+                              <Status>Success Failure</Status>
+                              <TotalFailures>1</TotalFailures>
+                              <TotalSuccess>2</TotalSuccess>
+                              <TotalIgnored>0</TotalIgnored>
+                              <Time />
+                              <Message>Child test failed</Message>
+                            </UnitTestResult>
+                            <UnitTestResult>
+                              <TestDate>2010-03-06T19:59:05</TestDate>
+                              <Status>Success Failure</Status>
+                              <TotalFailures>1</TotalFailures>
+                              <TotalSuccess>2</TotalSuccess>
+                              <TotalIgnored>0</TotalIgnored>
+                              <Time />
+                              <Message>Child test failed</Message>
+                            </UnitTestResult>
+                            <UnitTestResult>
+                              <TestDate>2010-03-06T20:07:05</TestDate>
+                              <Status>Success</Status>
+                              <TotalFailures>0</TotalFailures>
+                              <TotalSuccess>3</TotalSuccess>
+                              <TotalIgnored>0</TotalIgnored>
+                              <Time />
+                            </UnitTestResult>
+                          </Results>
+                          <Tests>
+                            <TestRecord Name="TestConstructor">
+                              <Results>
+                                <UnitTestResult>
+                                  <TestDate>2010-03-06T19:54:34</TestDate>
+                                  <Status>Success</Status>
+                                  <TotalFailures>0</TotalFailures>
+                                  <TotalSuccess>1</TotalSuccess>
+                                  <TotalIgnored>0</TotalIgnored>
+                                  <Time />
+                                  <Message>Test successful
+
+Execution time: 0.01ms</Message>
+                                  <ConsoleOutput />
+                                  <ConsoleError />
+                                </UnitTestResult>
+                                <UnitTestResult>
+                                  <TestDate>2010-03-06T19:55:08</TestDate>
+                                  <Status>Success</Status>
+                                  <TotalFailures>0</TotalFailures>
+                                  <TotalSuccess>1</TotalSuccess>
+                                  <TotalIgnored>0</TotalIgnored>
+                                  <Time />
+                                  <Message>Test successful
+
+Execution time: 0.01ms</Message>
+                                  <ConsoleOutput />
+                                  <ConsoleError />
+                                </UnitTestResult>
+                                <UnitTestResult>
+                                  <TestDate>2010-03-06T19:55:22</TestDate>
+                                  <Status>Success</Status>
+                                  <TotalFailures>0</TotalFailures>
+                                  <TotalSuccess>1</TotalSuccess>
+                                  <TotalIgnored>0</TotalIgnored>
+                                  <Time />
+                                  <Message>Test successful
+
+Execution time: 0.02ms</Message>
+                                  <ConsoleOutput />
+                                  <ConsoleError />
+                                </UnitTestResult>
+                                <UnitTestResult>
+                                  <TestDate>2010-03-06T19:57:35</TestDate>
+                                  <Status>Success</Status>
+                                  <TotalFailures>0</TotalFailures>
+                                  <TotalSuccess>1</TotalSuccess>
+                                  <TotalIgnored>0</TotalIgnored>
+                                  <Time />
+                                  <Message>Test successful
+
+Execution time: 0.01ms</Message>
+                                  <ConsoleOutput />
+                                  <ConsoleError />
+                                </UnitTestResult>
+                                <UnitTestResult>
+                                  <TestDate>2010-03-06T19:59:05</TestDate>
+                                  <Status>Success</Status>
+                                  <TotalFailures>0</TotalFailures>
+                                  <TotalSuccess>1</TotalSuccess>
+                                  <TotalIgnored>0</TotalIgnored>
+                                  <Time />
+                                  <Message>Test successful
+
+Execution time: 0.01ms</Message>
+                                  <ConsoleOutput />
+                                  <ConsoleError />
+                                </UnitTestResult>
+                                <UnitTestResult>
+                                  <TestDate>2010-03-06T20:07:05</TestDate>
+                                  <Status>Success</Status>
+                                  <TotalFailures>0</TotalFailures>
+                                  <TotalSuccess>1</TotalSuccess>
+                                  <TotalIgnored>0</TotalIgnored>
+                                  <Time />
+                                  <Message>Test successful
+
+Execution time: 0.01ms</Message>
+                                  <ConsoleOutput />
+                                  <ConsoleError />
+                                </UnitTestResult>
+                              </Results>
+                            </TestRecord>
+                            <TestRecord Name="TestParts">
+                              <Results>
+                                <UnitTestResult>
+                                  <TestDate>2010-03-06T19:54:34</TestDate>
+                                  <Status>Failure</Status>
+                                  <TotalFailures>1</TotalFailures>
+                                  <TotalSuccess>0</TotalSuccess>
+                                  <TotalIgnored>0</TotalIgnored>
+                                  <Time />
+                                  <Message>  Number of parts
+  Expected: 3
+  But was:  &lt; "foo", "bar", "baz" &gt;
+</Message>
+                                  <StackTrace>  at NUnit.Framework.Assert.That (System.Object actual, NUnit.Framework.Constraints.Constraint constraint, System.String message, System.Object[] args) [0x00000] 
+  at NUnit.Framework.Assert.AreEqual (System.Object expected, System.Object actual, System.String message, System.Object[] args) [0x00000] 
+  at NUnit.Framework.Assert.AreEqual (System.Object expected, System.Object actual, System.String message) [0x00000] 
+  at Test.CraigFowler.Web.ZPT.Tales.TestPath.TestParts () [0x00011] in /home/craig/projects/ZopePageTemplates/Test.Parser/Tales/TestPath.cs:24 
+  at (wrapper managed-to-native) System.Reflection.MonoMethod:InternalInvoke (object,object[],System.Exception&amp;)
+  at System.Reflection.MonoMethod.Invoke (System.Object obj, BindingFlags invokeAttr, System.Reflection.Binder binder, System.Object[] parameters, System.Globalization.CultureInfo culture) [0x00000] </StackTrace>
+                                  <ConsoleOutput />
+                                  <ConsoleError />
+                                </UnitTestResult>
+                                <UnitTestResult>
+                                  <TestDate>2010-03-06T19:55:08</TestDate>
+                                  <Status>Failure</Status>
+                                  <TotalFailures>1</TotalFailures>
+                                  <TotalSuccess>0</TotalSuccess>
+                                  <TotalIgnored>0</TotalIgnored>
+                                  <Time />
+                                  <Message>  First part
+  Expected string length 4 but was 3. Strings differ at index 3.
+  Expected: "foo3"
+  But was:  "foo"
+  --------------^
+</Message>
+                                  <StackTrace>  at NUnit.Framework.Assert.That (System.Object actual, NUnit.Framework.Constraints.Constraint constraint, System.String message, System.Object[] args) [0x00000] 
+  at NUnit.Framework.Assert.AreEqual (System.Object expected, System.Object actual, System.String message, System.Object[] args) [0x00000] 
+  at NUnit.Framework.Assert.AreEqual (System.Object expected, System.Object actual, System.String message) [0x00000] 
+  at Test.CraigFowler.Web.ZPT.Tales.TestPath.TestParts () [0x00027] in /home/craig/projects/ZopePageTemplates/Test.Parser/Tales/TestPath.cs:25 
+  at (wrapper managed-to-native) System.Reflection.MonoMethod:InternalInvoke (object,object[],System.Exception&amp;)
+  at System.Reflection.MonoMethod.Invoke (System.Object obj, BindingFlags invokeAttr, System.Reflection.Binder binder, System.Object[] parameters, System.Globalization.CultureInfo culture) [0x00000] </StackTrace>
+                                  <ConsoleOutput />
+                                  <ConsoleError />
+                                </UnitTestResult>
+                                <UnitTestResult>
+                                  <TestDate>2010-03-06T19:55:22</TestDate>
+                                  <Status>Success</Status>
+                                  <TotalFailures>0</TotalFailures>
+                                  <TotalSuccess>1</TotalSuccess>
+                                  <TotalIgnored>0</TotalIgnored>
+                                  <Time />
+                                  <Message>Test successful
+
+Execution time: 0.01ms</Message>
+                                  <ConsoleOutput />
+                                  <ConsoleError />
+                                </UnitTestResult>
+                                <UnitTestResult>
+                                  <TestDate>2010-03-06T19:57:35</TestDate>
+                                  <Status>Success</Status>
+                                  <TotalFailures>0</TotalFailures>
+                                  <TotalSuccess>1</TotalSuccess>
+                                  <TotalIgnored>0</TotalIgnored>
+                                  <Time />
+                                  <Message>Test successful
+
+Execution time: 0.00ms</Message>
+                                  <ConsoleOutput />
+                                  <ConsoleError />
+                                </UnitTestResult>
+                                <UnitTestResult>
+                                  <TestDate>2010-03-06T19:59:05</TestDate>
+                                  <Status>Success</Status>
+                                  <TotalFailures>0</TotalFailures>
+                                  <TotalSuccess>1</TotalSuccess>
+                                  <TotalIgnored>0</TotalIgnored>
+                                  <Time />
+                                  <Message>Test successful
+
+Execution time: 0.01ms</Message>
+                                  <ConsoleOutput />
+                                  <ConsoleError />
+                                </UnitTestResult>
+                                <UnitTestResult>
+                                  <TestDate>2010-03-06T20:07:05</TestDate>
+                                  <Status>Success</Status>
+                                  <TotalFailures>0</TotalFailures>
+                                  <TotalSuccess>1</TotalSuccess>
+                                  <TotalIgnored>0</TotalIgnored>
+                                  <Time />
+                                  <Message>Test successful
+
+Execution time: 0.00ms</Message>
+                                  <ConsoleOutput />
+                                  <ConsoleError />
+                                </UnitTestResult>
+                              </Results>
+                            </TestRecord>
+                            <TestRecord Name="TestPartsWithWhitespace">
+                              <Results>
+                                <UnitTestResult>
+                                  <TestDate>2010-03-06T19:54:34</TestDate>
+                                  <Status>Failure</Status>
+                                  <TotalFailures>1</TotalFailures>
+                                  <TotalSuccess>0</TotalSuccess>
+                                  <TotalIgnored>0</TotalIgnored>
+                                  <Time />
+                                  <Message>  Number of parts
+  Expected: 3
+  But was:  &lt; "foo", " bar baz", "sample  part" &gt;
+</Message>
+                                  <StackTrace>  at NUnit.Framework.Assert.That (System.Object actual, NUnit.Framework.Constraints.Constraint constraint, System.String message, System.Object[] args) [0x00000] 
+  at NUnit.Framework.Assert.AreEqual (System.Object expected, System.Object actual, System.String message, System.Object[] args) [0x00000] 
+  at NUnit.Framework.Assert.AreEqual (System.Object expected, System.Object actual, System.String message) [0x00000] 
+  at Test.CraigFowler.Web.ZPT.Tales.TestPath.TestPartsWithWhitespace () [0x00011] in /home/craig/projects/ZopePageTemplates/Test.Parser/Tales/TestPath.cs:40 
+  at (wrapper managed-to-native) System.Reflection.MonoMethod:InternalInvoke (object,object[],System.Exception&amp;)
+  at System.Reflection.MonoMethod.Invoke (System.Object obj, BindingFlags invokeAttr, System.Reflection.Binder binder, System.Object[] parameters, System.Globalization.CultureInfo culture) [0x00000] </StackTrace>
+                                  <ConsoleOutput />
+                                  <ConsoleError />
+                                </UnitTestResult>
+                                <UnitTestResult>
+                                  <TestDate>2010-03-06T19:55:08</TestDate>
+                                  <Status>Failure</Status>
+                                  <TotalFailures>1</TotalFailures>
+                                  <TotalSuccess>0</TotalSuccess>
+                                  <TotalIgnored>0</TotalIgnored>
+                                  <Time />
+                                  <Message>  Second part
+  Expected string length 8 but was 3. Strings differ at index 0.
+  Expected: " bar baz"
+  But was:  "foo"
+  -----------^
+</Message>
+                                  <StackTrace>  at NUnit.Framework.Assert.That (System.Object actual, NUnit.Framework.Constraints.Constraint constraint, System.String message, System.Object[] args) [0x00000] 
+  at NUnit.Framework.Assert.AreEqual (System.Object expected, System.Object actual, System.String message, System.Object[] args) [0x00000] 
+  at NUnit.Framework.Assert.AreEqual (System.Object expected, System.Object actual, System.String message) [0x00000] 
+  at Test.CraigFowler.Web.ZPT.Tales.TestPath.TestPartsWithWhitespace () [0x0005b] in /home/craig/projects/ZopePageTemplates/Test.Parser/Tales/TestPath.cs:47 
+  at (wrapper managed-to-native) System.Reflection.MonoMethod:InternalInvoke (object,object[],System.Exception&amp;)
+  at System.Reflection.MonoMethod.Invoke (System.Object obj, BindingFlags invokeAttr, System.Reflection.Binder binder, System.Object[] parameters, System.Globalization.CultureInfo culture) [0x00000] </StackTrace>
+                                  <ConsoleOutput />
+                                  <ConsoleError />
+                                </UnitTestResult>
+                                <UnitTestResult>
+                                  <TestDate>2010-03-06T19:55:22</TestDate>
+                                  <Status>Failure</Status>
+                                  <TotalFailures>1</TotalFailures>
+                                  <TotalSuccess>0</TotalSuccess>
+                                  <TotalIgnored>0</TotalIgnored>
+                                  <Time />
+                                  <Message>  Second part
+  Expected string length 8 but was 3. Strings differ at index 0.
+  Expected: " bar baz"
+  But was:  "foo"
+  -----------^
+</Message>
+                                  <StackTrace>  at NUnit.Framework.Assert.That (System.Object actual, NUnit.Framework.Constraints.Constraint constraint, System.String message, System.Object[] args) [0x00000] 
+  at NUnit.Framework.Assert.AreEqual (System.Object expected, System.Object actual, System.String message, System.Object[] args) [0x00000] 
+  at NUnit.Framework.Assert.AreEqual (System.Object expected, System.Object actual, System.String message) [0x00000] 
+  at Test.CraigFowler.Web.ZPT.Tales.TestPath.TestPartsWithWhitespace () [0x0005b] in /home/craig/projects/ZopePageTemplates/Test.Parser/Tales/TestPath.cs:47 
+  at (wrapper managed-to-native) System.Reflection.MonoMethod:InternalInvoke (object,object[],System.Exception&amp;)
+  at System.Reflection.MonoMethod.Invoke (System.Object obj, BindingFlags invokeAttr, System.Reflection.Binder binder, System.Object[] parameters, System.Globalization.CultureInfo culture) [0x00000] </StackTrace>
+                                  <ConsoleOutput />
+                                  <ConsoleError />
+                                </UnitTestResult>
+                                <UnitTestResult>
+                                  <TestDate>2010-03-06T19:57:35</TestDate>
+                                  <Status>Failure</Status>
+                                  <TotalFailures>1</TotalFailures>
+                                  <TotalSuccess>0</TotalSuccess>
+                                  <TotalIgnored>0</TotalIgnored>
+                                  <Time />
+                                  <Message>  Second part
+  Expected string length 8 but was 3. Strings differ at index 0.
+  Expected: " bar baz"
+  But was:  "foo"
+  -----------^
+</Message>
+                                  <StackTrace>  at NUnit.Framework.Assert.That (System.Object actual, NUnit.Framework.Constraints.Constraint constraint, System.String message, System.Object[] args) [0x00000] 
+  at NUnit.Framework.Assert.AreEqual (System.Object expected, System.Object actual, System.String message, System.Object[] args) [0x00000] 
+  at NUnit.Framework.Assert.AreEqual (System.Object expected, System.Object actual, System.String message) [0x00000] 
+  at Test.CraigFowler.Web.ZPT.Tales.TestPath.TestPartsWithWhitespace () [0x0005b] in /home/craig/projects/ZopePageTemplates/Test.Parser/Tales/TestPath.cs:47 
+  at (wrapper managed-to-native) System.Reflection.MonoMethod:InternalInvoke (object,object[],System.Exception&amp;)
+  at System.Reflection.MonoMethod.Invoke (System.Object obj, BindingFlags invokeAttr, System.Reflection.Binder binder, System.Object[] parameters, System.Globalization.CultureInfo culture) [0x00000] </StackTrace>
+                                  <ConsoleOutput />
+                                  <ConsoleError />
+                                </UnitTestResult>
+                                <UnitTestResult>
+                                  <TestDate>2010-03-06T19:59:05</TestDate>
+                                  <Status>Failure</Status>
+                                  <TotalFailures>1</TotalFailures>
+                                  <TotalSuccess>0</TotalSuccess>
+                                  <TotalIgnored>0</TotalIgnored>
+                                  <Time />
+                                  <Message>  Second part
+  Expected string length 8 but was 3. Strings differ at index 0.
+  Expected: " bar baz"
+  But was:  "foo"
+  -----------^
+</Message>
+                                  <StackTrace>  at NUnit.Framework.Assert.That (System.Object actual, NUnit.Framework.Constraints.Constraint constraint, System.String message, System.Object[] args) [0x00000] 
+  at NUnit.Framework.Assert.AreEqual (System.Object expected, System.Object actual, System.String message, System.Object[] args) [0x00000] 
+  at NUnit.Framework.Assert.AreEqual (System.Object expected, System.Object actual, System.String message) [0x00000] 
+  at Test.CraigFowler.Web.ZPT.Tales.TestPath.TestPartsWithWhitespace () [0x00068] in /home/craig/projects/ZopePageTemplates/Test.Parser/Tales/TestPath.cs:49 
+  at (wrapper managed-to-native) System.Reflection.MonoMethod:InternalInvoke (object,object[],System.Exception&amp;)
+  at System.Reflection.MonoMethod.Invoke (System.Object obj, BindingFlags invokeAttr, System.Reflection.Binder binder, System.Object[] parameters, System.Globalization.CultureInfo culture) [0x00000] </StackTrace>
+                                  <ConsoleOutput>foo
+foo
+foo
+</ConsoleOutput>
+                                  <ConsoleError />
+                                </UnitTestResult>
+                                <UnitTestResult>
+                                  <TestDate>2010-03-06T20:07:05</TestDate>
+                                  <Status>Success</Status>
+                                  <TotalFailures>0</TotalFailures>
+                                  <TotalSuccess>1</TotalSuccess>
+                                  <TotalIgnored>0</TotalIgnored>
+                                  <Time />
+                                  <Message>Test successful
+
+Execution time: 0.01ms</Message>
+                                  <ConsoleOutput>foo
+ bar baz
+sample  part
+</ConsoleOutput>
+                                  <ConsoleError />
+                                </UnitTestResult>
+                              </Results>
+                            </TestRecord>
+                          </Tests>
+                        </TestRecord>
+                      </Tests>
+                    </TestRecord>
+                  </Tests>
+                </TestRecord>
+              </Tests>
+            </TestRecord>
+          </Tests>
+        </TestRecord>
+      </Tests>
+    </TestRecord>
+  </Tests>
+</TestRecord>

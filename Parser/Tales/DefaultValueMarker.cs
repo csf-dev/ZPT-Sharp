@@ -24,10 +24,35 @@ using System;
 namespace CraigFowler.Web.ZPT.Tales
 {
   /// <summary>
-  /// <para>A simple marker for the TALES 'default value' root context.</para>
+  /// <para>A simple marker type for the TALES 'default value' root context.</para>
   /// </summary>
   public class DefaultValueMarker
   {
+    #region public methods
+    
+    public override bool Equals (object obj)
+    {
+      bool output = false;
+      
+      if(obj is DefaultValueMarker)
+      {
+        output = true;
+      }
+      
+      return output;
+    }
+    
+    public override int GetHashCode ()
+    {
+      return "TALES PATH EXPRESSION DEFAULT VALUE MARKER".GetHashCode();
+    }
+    
+    #endregion
+    
+    #region constructor
+    
     public DefaultValueMarker() {}
+    
+    #endregion
   }
 }

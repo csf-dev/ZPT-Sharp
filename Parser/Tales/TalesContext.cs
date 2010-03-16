@@ -278,6 +278,10 @@ namespace CraigFowler.Web.ZPT.Tales
     
     /// <summary>
     /// <para>Merges two string dictionaries of definitions and object references.</para>
+    /// <para>
+    /// If the <paramref name="child"/> dictionary contains entries that have the same name as entries in
+    /// <paramref name="parent"/> then the child entries will take precedence.
+    /// </para>
     /// </summary>
     /// <param name="parent">
     /// A <see cref="Dictionary<System.String, System.Object>"/>
@@ -343,7 +347,7 @@ namespace CraigFowler.Web.ZPT.Tales
     #region constructors
     
     /// <summary>
-    /// <para>Initialises this instance with default values.</para>
+    /// <para>Overloaded.  Initialises this instance with default values.</para>
     /// </summary>
     public TalesContext()
     {
@@ -354,6 +358,14 @@ namespace CraigFowler.Web.ZPT.Tales
       Attributes = new Dictionary<string, string>();
       
       initialiseMandatoryRootContexts();
+    }
+    
+    /// <summary>
+    /// <para>Overloaded.  Initialises this instance a given parent context.</para>
+    /// </summary>
+    public TalesContext(TalesContext parent) : this()
+    {
+      ParentContext = parent;
     }
     
     #endregion

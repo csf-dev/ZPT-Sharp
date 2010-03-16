@@ -35,6 +35,12 @@ namespace CraigFowler.Web.ZPT.Tales
     
     #endregion
     
+    #region fields
+    
+    private Queue<Path> paths;
+    
+    #endregion
+    
     #region properties
     
     /// <summary>
@@ -44,22 +50,37 @@ namespace CraigFowler.Web.ZPT.Tales
     public Queue<Path> Paths
     {
       get {
-        Queue<Path> output = new Queue<Path>();
-        
-        foreach(string path in Body.Split(new char[] {PATH_SEPARATOR}))
-        {
-          output.Enqueue(new Path(path));
-        }
-        
-        return output;
+        return paths;
       }
+      private set {
+        paths = value;
+      }
+    }
+    
+    #endregion
+    
+    #region private methods
+    
+    private Queue<Path> extractPaths(string expression)
+    {
+      Queue<Path> output = new Queue<Path>();
+      
+      foreach(string path in expression.Split(new char[] {PATH_SEPARATOR}))
+      {
+        output.Enqueue(new Path(path));
+      }
+      
+      return output;
     }
     
     #endregion
     
     #region constructor
     
-    public PathExpression(string expression, TalesContext context) : base(expression, context) {}
+    public PathExpression(string expression, TalesContext context) : base(expression, context)
+    {
+      Paths = extractPaths(Body);
+    }
     
     #endregion
   }

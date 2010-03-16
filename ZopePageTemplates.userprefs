@@ -3,7 +3,12 @@
   <MonoDevelop.Ide.DebuggingService>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService>
-  <MonoDevelop.Ide.Workbench ctype="Workbench">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Parser/Tales/TalesContext.cs" ctype="Workbench">
+    <Files>
+      <File FileName="Test.Parser/Tales/TestPathExpression.cs" Line="9" Column="3" />
+      <File FileName="Parser/Tales/PathExpression.cs" Line="82" Column="34" />
+      <File FileName="Parser/Tales/TalesContext.cs" Line="206" Column="15" />
+    </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State expanded="True">
@@ -11,6 +16,9 @@
             <Node name="Tales" expanded="True">
               <Node name="TalesContext.cs" selected="True" />
             </Node>
+          </Node>
+          <Node name="Test.Parser" expanded="True">
+            <Node name="Tales" expanded="True" />
           </Node>
         </State>
       </Pad>
@@ -21,7 +29,40 @@
               <Node name="Web" expanded="True">
                 <Node name="ZPT" expanded="True">
                   <Node name="Tales" expanded="True">
-                    <Node name="CraigFowler.Web.ZPT.Tales.TalesExpression" selected="True" />
+                    <Node name="CraigFowler.Web.ZPT.Tales.TalesContext" selected="True" />
+                  </Node>
+                </Node>
+              </Node>
+            </Node>
+          </Node>
+          <Node name="Test.Parser" expanded="True">
+            <Node name="Test" expanded="True">
+              <Node name="CraigFowler" expanded="True">
+                <Node name="Web" expanded="True">
+                  <Node name="ZPT" expanded="True">
+                    <Node name="Tales" expanded="True">
+                      <Node name="Test.CraigFowler.Web.ZPT.Tales.TestTalesContext" expanded="True" />
+                    </Node>
+                  </Node>
+                </Node>
+              </Node>
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+      <Pad Id="MonoDevelop.Debugger.WatchPad">
+        <State />
+      </Pad>
+      <Pad Id="MonoDevelop.NUnit.TestPad">
+        <State expanded="True" selected="True">
+          <Node name="Test.Parser" expanded="True">
+            <Node name="Test" expanded="True">
+              <Node name="CraigFowler" expanded="True">
+                <Node name="Web" expanded="True">
+                  <Node name="ZPT" expanded="True">
+                    <Node name="Tales" expanded="True">
+                      <Node name="TestPath" expanded="True" />
+                    </Node>
                   </Node>
                 </Node>
               </Node>

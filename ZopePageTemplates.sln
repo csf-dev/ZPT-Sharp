@@ -3,12 +3,18 @@ Microsoft Visual Studio Solution File, Format Version 10.00
 # Visual Studio 2008
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Parser", "Parser\Parser.csproj", "{B887669F-17F7-45E9-BE79-A87570BFFA80}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test.Parser", "Test.Parser\Test.Parser.csproj", "{9E6F7F15-7283-4D12-B3F7-4E7D18ED860D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9E6F7F15-7283-4D12-B3F7-4E7D18ED860D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9E6F7F15-7283-4D12-B3F7-4E7D18ED860D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9E6F7F15-7283-4D12-B3F7-4E7D18ED860D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9E6F7F15-7283-4D12-B3F7-4E7D18ED860D}.Release|Any CPU.Build.0 = Release|Any CPU
 		{B887669F-17F7-45E9-BE79-A87570BFFA80}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{B887669F-17F7-45E9-BE79-A87570BFFA80}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B887669F-17F7-45E9-BE79-A87570BFFA80}.Release|Any CPU.ActiveCfg = Release|Any CPU
