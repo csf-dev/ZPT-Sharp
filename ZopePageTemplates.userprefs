@@ -44,9 +44,6 @@
       <Pad Id="MonoDevelop.Debugger.WatchPad">
         <State />
       </Pad>
-      <Pad Id="MonoDevelop.NUnit.TestPad">
-        <State expanded="True" selected="True" />
-      </Pad>
     </Pads>
   </MonoDevelop.Ide.Workbench>
 </Properties>
