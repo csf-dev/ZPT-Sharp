@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!--This file represents the results of running a test suite-->
+<test-results name="/home/craig/projects/ZopePageTemplates/ZopePageTemplates.nunit" total="5" failures="0" not-run="0" date="2010-05-14" time="22:04:29">
+  <environment nunit-version="2.4.7.0" clr-version="2.0.50727.1433" os-version="Unix 2.6.32.686" platform="Unix" cwd="/home/craig/Documents" machine-name="craig-laptop" user="craig" user-domain="craig-laptop" />
+  <culture-info current-culture="en-GB" current-uiculture="en-GB" />
+  <test-suite name="/home/craig/projects/ZopePageTemplates/ZopePageTemplates.nunit" success="True" time="0.127" asserts="0">
+    <results>
+      <test-suite name="/home/craig/projects/ZopePageTemplates/bin/Debug/Test.Parser.dll" success="True" time="0.125" asserts="0">
+        <results>
+          <test-suite name="Test" success="True" time="0.125" asserts="0">
+            <results>
+              <test-suite name="CraigFowler" success="True" time="0.125" asserts="0">
+                <results>
+                  <test-suite name="Web" success="True" time="0.125" asserts="0">
+                    <results>
+                      <test-suite name="ZPT" success="True" time="0.125" asserts="0">
+                        <results>
+                          <test-suite name="Tales" success="True" time="0.119" asserts="0">
+                            <results>
+                              <test-suite name="TestPath" success="True" time="0.052" asserts="0">
+                                <results>
+                                  <test-case name="Test.CraigFowler.Web.ZPT.Tales.TestPath.TestConstructor" executed="True" success="True" time="0.010" asserts="1" />
+                                  <test-case name="Test.CraigFowler.Web.ZPT.Tales.TestPath.TestParts" executed="True" success="True" time="0.003" asserts="5" />
+                                  <test-case name="Test.CraigFowler.Web.ZPT.Tales.TestPath.TestPartsWithWhitespace" executed="True" success="True" time="0.001" asserts="5" />
+                                </results>
+                              </test-suite>
+                              <test-suite name="TestPathExpression" success="True" time="0.025" asserts="0">
+                                <results>
+                                  <test-case name="Test.CraigFowler.Web.ZPT.Tales.TestPathExpression.TestPathPieces" executed="True" success="True" time="0.008" asserts="2" />
+                                </results>
+                              </test-suite>
+                              <test-suite name="TestTalesContext" success="True" time="0.021" asserts="0">
+                                <results>
+                                  <test-case name="Test.CraigFowler.Web.ZPT.Tales.TestTalesContext.TestConstructor" executed="True" success="True" time="0.005" asserts="3" />
+                                </results>
+                              </test-suite>
+                            </results>
+                          </test-suite>
+                        </results>
+                      </test-suite>
+                    </results>
+                  </test-suite>
+                </results>
+              </test-suite>
+            </results>
+          </test-suite>
+        </results>
+      </test-suite>
+    </results>
+  </test-suite>
+</test-results>
