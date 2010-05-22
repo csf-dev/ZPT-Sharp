@@ -34,18 +34,19 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AssemblyInfo.cs" />
-    <Compile Include="Tales\TalesExpression.cs" />
     <Compile Include="Tales\ExpressionType.cs" />
-    <Compile Include="Tales\InverseBooleanExpression.cs" />
-    <Compile Include="Tales\PathExpression.cs" />
-    <Compile Include="Tales\StringExpression.cs" />
     <Compile Include="Tales\TalesContext.cs" />
     <Compile Include="Tales\DefaultValueMarker.cs" />
     <Compile Include="Tales\Path.cs" />
+    <Compile Include="Tales\Expressions\InverseBooleanExpression.cs" />
+    <Compile Include="Tales\Expressions\PathExpression.cs" />
+    <Compile Include="Tales\Expressions\StringExpression.cs" />
+    <Compile Include="Tales\Expressions\TalesExpression.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
     <Folder Include="Tales\" />
+    <Folder Include="Tales\Expressions\" />
   </ItemGroup>
   <ProjectExtensions>
     <MonoDevelop>

@@ -21,7 +21,7 @@
 
 using System;
 
-namespace CraigFowler.Web.ZPT.Tales
+namespace CraigFowler.Web.ZPT.Tales.Expressions
 {
   public class StringExpression : TalesExpression
   {

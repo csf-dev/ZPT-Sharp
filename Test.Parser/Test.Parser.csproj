@@ -37,11 +37,13 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Tales\" />
+    <Folder Include="Mocks\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Tales\TestTalesContext.cs" />
     <Compile Include="Tales\TestPathExpression.cs" />
     <Compile Include="Tales\TestPath.cs" />
+    <Compile Include="Mocks\MockObject.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Parser\Parser.csproj">

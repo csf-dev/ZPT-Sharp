@@ -22,7 +22,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace CraigFowler.Web.ZPT.Tales
+namespace CraigFowler.Web.ZPT.Tales.Expressions
 {
   /// <summary>
   /// <para>Represents a <see cref="TalesExpression"/> that represents a 'path' type expression.</para>
@@ -37,7 +37,7 @@ namespace CraigFowler.Web.ZPT.Tales
     
     #region fields
     
-    private Queue<Path> paths;
+    private Queue<TalesPath> paths;
     
     #endregion
     
@@ -47,7 +47,7 @@ namespace CraigFowler.Web.ZPT.Tales
     /// <para>Read-only.  Gets a queue of the paths that are present in the expression body of this expression.</para>
     /// <para>Independant paths are searated by the pipe character '|'.</para>
     /// </summary>
-    public Queue<Path> Paths
+    public Queue<TalesPath> Paths
     {
       get {
         return paths;
@@ -61,13 +61,13 @@ namespace CraigFowler.Web.ZPT.Tales
     
     #region private methods
     
-    private Queue<Path> extractPaths(string expression)
+    private Queue<TalesPath> extractPaths(string expression)
     {
-      Queue<Path> output = new Queue<Path>();
+      Queue<TalesPath> output = new Queue<TalesPath>();
       
       foreach(string path in expression.Split(new char[] {PATH_SEPARATOR}))
       {
-        output.Enqueue(new Path(path));
+        output.Enqueue(new TalesPath(path));
       }
       
       return output;

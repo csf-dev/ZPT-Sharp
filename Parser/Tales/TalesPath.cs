@@ -27,7 +27,7 @@ namespace CraigFowler.Web.ZPT.Tales
   /// <summary>
   /// <para>Represents an individual path used within a <see cref="PathExpression"/>.</para>
   /// </summary>
-  public class Path
+  public class TalesPath
   {
     #region constants
     
@@ -38,7 +38,7 @@ namespace CraigFowler.Web.ZPT.Tales
     #region fields
     
     private string rawPath;
-    private Queue<string> parts;
+    private List<string> parts;
     
     #endregion
     
@@ -53,17 +53,16 @@ namespace CraigFowler.Web.ZPT.Tales
         return rawPath;
       }
       private set {
-        if(value == null)
-        {
-          rawPath = null;
-        }
-        else
+        rawPath = null;
+        
+        if(value != null)
         {
           rawPath = value.Trim();
-          if(rawPath == String.Empty)
-          {
-            rawPath = null;
-          }
+        }
+        
+        if(String.IsNullOrEmpty(rawPath))
+        {
+          rawPath = null;
         }
       }
     }
@@ -74,7 +73,7 @@ namespace CraigFowler.Web.ZPT.Tales
     /// characters.
     /// </para>
     /// </summary>
-    public Queue<string> Parts
+    public List<string> Parts
     {
       get {
         return parts;
@@ -82,6 +81,42 @@ namespace CraigFowler.Web.ZPT.Tales
       private set {
         parts = value;
       }
+    }
+    
+    #endregion
+    
+    #region methods
+    
+    /// <summary>
+    /// <para>Returns a string representation of this path instance.</para>
+    /// </summary>
+    /// <returns>
+    /// A <see cref="System.String"/>
+    /// </returns>
+    public override string ToString ()
+    {
+      return this.ToString(this.Parts.Count);
+    }
+    
+    /// <summary>
+    /// <para>
+    /// Returns a string representation of this path instance, showing only the given number of path pieces.
+    /// </para>
+    /// </summary>
+    /// <param name="partCount">
+    /// A <see cref="System.Int32"/>
+    /// </param>
+    /// <returns>
+    /// A <see cref="System.String"/>
+    /// </returns>
+    public string ToString(int partCount)
+    {
+      if(partCount < 0)
+      {
+        throw new ArgumentOutOfRangeException("partCount", "Parameter 'partCount' must be more than or equal to one.");
+      }
+      
+      return String.Join(PARTS_SEPARATOR.ToString(), this.Parts.ToArray(), 0, partCount);
     }
     
     #endregion
@@ -102,9 +137,9 @@ namespace CraigFowler.Web.ZPT.Tales
     /// <exception cref="FormatException">
     /// If the given <paramref name="path" /> contains a component that is null or empty then this exception is raised.
     /// </exception>
-    private Queue<string> extractParts(string path)
+    private List<string> ExtractPathParts(string path)
     {
-      Queue<string> output = new Queue<string>();
+      List<string> output = new List<string>();
       
       foreach(string part in path.Split(new char[] { PARTS_SEPARATOR }))
       {
@@ -115,7 +150,7 @@ namespace CraigFowler.Web.ZPT.Tales
         }
         else
         {
-          output.Enqueue(part);
+          output.Add(part);
         }
       }
       
@@ -135,10 +170,10 @@ namespace CraigFowler.Web.ZPT.Tales
     /// <exception cref="FormatException">
     /// If the given <paramref name="path" /> contains a component that is null or empty then this exception is raised.
     /// </exception>
-    public Path(string path)
+    public TalesPath(string path)
     {
-      Text = path;
-      Parts = extractParts(Text);
+      this.Text = path;
+      this.Parts = this.ExtractPathParts(this.Text);
     }
     
     #endregion

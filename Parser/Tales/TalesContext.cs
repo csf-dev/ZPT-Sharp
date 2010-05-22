@@ -21,12 +21,16 @@
 
 using System;
 using System.Collections.Generic;
+using System.Reflection;
 
 namespace CraigFowler.Web.ZPT.Tales
 {
   /// <summary>
-  /// <para>Describes the contexts for a <see cref="TalesExpression"/> instance.</para>
+  /// <para>Represents a context for which a <see cref="TalesExpression"/> instance is evaluated against.</para>
   /// </summary>
+  /// <remarks>
+  /// <para>A context is essentially a 'folder'</para>
+  /// </remarks>
   public class TalesContext
   {
     #region constants
@@ -67,9 +71,9 @@ namespace CraigFowler.Web.ZPT.Tales
     }
     
     /// <summary>
-    /// <para>Read-only.  Returns an editable dictionary of local definitions that are made in this context.</para>
+    /// <para>Read-only.  Returns an editable dictionary of local aliases that are made in this context.</para>
     /// </summary>
-    public Dictionary<string,object> LocalDefinitions
+    public Dictionary<string,object> ContextAliases
     {
       get {
         return localDefinitions;
@@ -80,65 +84,15 @@ namespace CraigFowler.Web.ZPT.Tales
     }
     
     /// <summary>
-    /// <para>
-    /// Read-only.  Generates and returns a dictionary of the effective definitions in this context, by recursing
-    /// through the <see cref="ParentContext"/>.  Definitions closer to the 'local' level will hide/override/shadow
-    /// definitions made at the parent level(s).  This generated value is ephemeral and not for editing.
-    /// </para>
-    /// </summary>
-    public Dictionary<string,object> Definitions
-    {
-      get {
-        Dictionary<string,object> output;
-        
-        if(ParentContext != null)
-        {
-          output = mergeDictionaries(ParentContext.Definitions, this.LocalDefinitions);
-        }
-        else
-        {
-          output = mergeDictionaries(null, this.LocalDefinitions);
-        }
-        
-        return output;
-      }
-    }
-    
-    /// <summary>
     /// <para>Read-only.  Returns an editable dictionary of local repeat variables that are made in this context.</para>
     /// </summary>
-    public Dictionary<string,object> LocalRepeatVariables
+    public Dictionary<string,object> RepeatVariables
     {
       get {
         return localRepeatVariables;
       }
       private set {
         localRepeatVariables = value;
-      }
-    }
-    
-    /// <summary>
-    /// <para>
-    /// Read-only.  Generates and returns a dictionary of the effective repeat variables in this context, by recursing
-    /// through the <see cref="ParentContext"/>.  Variables closer to the 'local' level will hide/override/shadow
-    /// variables made at the parent level(s).  This generated value is ephemeral and not for editing.
-    /// </para>
-    /// </summary>
-    public Dictionary<string,object> RepeatVariables
-    {
-      get {
-        Dictionary<string,object> output;
-        
-        if(ParentContext != null)
-        {
-          output = mergeDictionaries(ParentContext.RepeatVariables, this.LocalRepeatVariables);
-        }
-        else
-        {
-          output = mergeDictionaries(null, this.LocalRepeatVariables);
-        }
-        
-        return output;
       }
     }
     
@@ -191,16 +145,43 @@ namespace CraigFowler.Web.ZPT.Tales
     
     #region methods
     
-    public bool ReferenceValid(Path path)
+    public bool ReferenceValid(TalesPath path)
     {
       // TODO: Determine whether the given path reference is valid for the current context
       throw new NotImplementedException();
     }
     
-    public object EvaluateReference(Path path)
+    public object EvaluateReference(TalesPath path)
     {
-      // TODO: Evaluate and return the outcome of a path reference.
-      throw new NotImplementedException();
+      bool rootFound;
+      object rootObject, output;
+      
+      if(path == null)
+      {
+        throw new ArgumentNullException("path");
+      }
+      else if(path.Parts.Count == 0)
+      {
+        throw new ArgumentOutOfRangeException("path", "This path has no parts.");
+      }
+      
+      rootObject = GetRootObject(path.Parts[0], out rootFound);
+      
+      if(!rootFound)
+      {
+        throw new FormatException("This context does not contain a root object for the beginning of the path.");
+      }
+      
+      if(path.Parts.Count == 1)
+      {
+        output = rootObject;
+      }
+      else
+      {
+        output = EvaluateReference(path, 1, rootObject);
+      }
+      
+      return output;
     }
     
     #endregion
@@ -240,17 +221,14 @@ namespace CraigFowler.Web.ZPT.Tales
     /// and that the parameter <paramref name="found"/> should be checked in order to determine whether the object
     /// exists but was legitimately set to null, or whether it does not exist.
     /// </returns>
-    private object getStartReference(string identifier, out bool found)
+    private object GetRootObject(string identifier, out bool found)
     {
-      object output;
-      Dictionary<string,object> definitions;
+      object output = null;
+      Dictionary<string,object> definitions = this.GetDefinitions();
       
-      definitions = this.Definitions;
-      
-      if(identifier == null || identifier == String.Empty)
+      if(String.IsNullOrEmpty(identifier))
       {
         found = false;
-        output = null;
       }
       else if(identifier == CONTEXT_ROOT_REFERENCE)
       {
@@ -262,15 +240,74 @@ namespace CraigFowler.Web.ZPT.Tales
         found = true;
         output = definitions[identifier];
       }
-      else if(RootContexts.ContainsKey(identifier))
+      else if(this.RootContexts.ContainsKey(identifier))
       {
         found = true;
-        output = RootContexts[identifier];
+        output = this.RootContexts[identifier];
       }
       else
       {
         found = false;
-        output = null;
+      }
+      
+      return output;
+    }
+    
+    private object EvaluateReference(TalesPath path, int pathPosition, object parentObject)
+    {
+      object output = null, thisObject = null;
+      MemberInfo[] members;
+      MemberInfo applicableMember;
+      
+      if(pathPosition < path.Parts.Count)
+      {
+        if(parentObject == null)
+        {
+          throw new ArgumentNullException("currentObject");
+        }
+        
+        members = parentObject.GetType().GetMember(path.Parts[pathPosition]);
+        
+        if(members.Length == 0)
+        {
+          throw new FormatException(String.Format("Could not find member '{0}' within the path.",
+                                                  path.Parts[pathPosition]));
+        }
+        
+        // FIXME: Really we should be smarter about choosing a member here, but for now we just take the first one.
+        applicableMember = members[0];
+        
+        switch(applicableMember.MemberType)
+        {
+        case MemberTypes.Property:
+          PropertyInfo property = applicableMember as PropertyInfo;
+          if(!property.CanRead || !property.GetGetMethod().IsPublic)
+          {
+            throw new NotSupportedException("Property is not readable");
+          }
+          thisObject = property.GetValue(parentObject, null);
+          break;
+        case MemberTypes.Field:
+          FieldInfo field = applicableMember as FieldInfo;
+          if(!field.IsPublic)
+          {
+            throw new NotSupportedException("Field is not readable");
+          }
+          thisObject = field.GetValue(parentObject);
+          break;
+        case MemberTypes.Method:
+          throw new NotImplementedException("Methods aren't supported yet");
+        default:
+          throw new NotSupportedException(String.Format("Unsupported member type: '{0}'",
+                                                        applicableMember.MemberType.ToString()));
+        }
+        
+        pathPosition ++;
+        output = EvaluateReference(path, pathPosition, thisObject);
+      }
+      else
+      {
+        output = parentObject;
       }
       
       return output;
@@ -292,7 +329,7 @@ namespace CraigFowler.Web.ZPT.Tales
     /// <returns>
     /// A <see cref="Dictionary<System.String, System.Object>"/>
     /// </returns>
-    private Dictionary<string,object> mergeDictionaries(Dictionary<string,object> parent,
+    private Dictionary<string,object> MergeDictionaries(Dictionary<string,object> parent,
                                                         Dictionary<string,object> child)
     {
       Dictionary<string,object> output = new Dictionary<string, object>();
@@ -331,15 +368,71 @@ namespace CraigFowler.Web.ZPT.Tales
     /// within their own constructors if they choose.
     /// </para>
     /// </summary>
-    private void initialiseMandatoryRootContexts()
+    private void InitialiseMandatoryRootContexts()
     {
-      RootContexts = new Dictionary<string, object>();
+      this.RootContexts = new Dictionary<string, object>();
       
-      RootContexts.Add(NOTHING_REFERENCE, null);
-      RootContexts.Add(DEFAULT_REFERENCE, new DefaultValueMarker());
-      RootContexts.Add(REPEAT_REFERENCE, RepeatVariables);
-      RootContexts.Add(OPTIONS_REFERENCE, Options);
-      RootContexts.Add(ATTRIBUTES_REFERENCE, Attributes);
+      this.RootContexts.Add(NOTHING_REFERENCE, null);
+      this.RootContexts.Add(DEFAULT_REFERENCE, new DefaultValueMarker());
+      this.RootContexts.Add(REPEAT_REFERENCE, this.GetRepeatVariables());
+      this.RootContexts.Add(OPTIONS_REFERENCE, Options);
+      this.RootContexts.Add(ATTRIBUTES_REFERENCE, Attributes);
+    }
+    
+    
+    /// <summary>
+    /// <para>
+    /// Read-only.  Generates and returns a dictionary of the effective definitions in this context, by recursing
+    /// through the <see cref="ParentContext"/>.
+    /// </para>
+    /// <para>
+    /// Definitions closer to the 'local' level will hide/override/shadow definitions made at the parent
+    /// level(s).  This generated value is ephemeral and not for editing.
+    /// </para>
+    /// </summary>
+    /// <returns>
+    /// A <see cref="Dictionary"/> of objects, indexed by <see cref="System.String"/> keys.
+    /// </returns>
+    private Dictionary<string,object> GetDefinitions()
+    {
+      Dictionary<string,object> output;
+      
+      if(this.ParentContext != null)
+      {
+        output = MergeDictionaries(this.ParentContext.GetDefinitions(), this.ContextAliases);
+      }
+      else
+      {
+        output = MergeDictionaries(null, this.ContextAliases);
+      }
+      
+      return output;
+    }
+    
+    /// <summary>
+    /// <para>
+    /// Read-only.  Generates and returns a dictionary of the effective repeat variables in this context, by recursing
+    /// through the <see cref="ParentContext"/>.  Variables closer to the 'local' level will hide/override/shadow
+    /// variables made at the parent level(s).  This generated value is ephemeral and not for editing.
+    /// </para>
+    /// </summary>
+    /// <returns>
+    /// A <see cref="Dictionary"/> of objects, indexed by <see cref="System.String"/> keys.
+    /// </returns>
+    private Dictionary<string,object> GetRepeatVariables()
+    {
+      Dictionary<string,object> output;
+      
+      if(this.ParentContext != null)
+      {
+        output = MergeDictionaries(this.ParentContext.GetRepeatVariables(), this.RepeatVariables);
+      }
+      else
+      {
+        output = MergeDictionaries(null, this.RepeatVariables);
+      }
+      
+      return output;
     }
     
     #endregion
@@ -351,13 +444,13 @@ namespace CraigFowler.Web.ZPT.Tales
     /// </summary>
     public TalesContext()
     {
-      ParentContext = null;
-      LocalDefinitions = new Dictionary<string, object>();
-      LocalRepeatVariables = new Dictionary<string, object>();
-      Options = new Dictionary<string, object>();
-      Attributes = new Dictionary<string, string>();
+      this.ParentContext = null;
+      this.ContextAliases = new Dictionary<string, object>();
+      this.RepeatVariables = new Dictionary<string, object>();
+      this.Options = new Dictionary<string, object>();
+      this.Attributes = new Dictionary<string, string>();
       
-      initialiseMandatoryRootContexts();
+      this.InitialiseMandatoryRootContexts();
     }
     
     /// <summary>
@@ -365,7 +458,7 @@ namespace CraigFowler.Web.ZPT.Tales
     /// </summary>
     public TalesContext(TalesContext parent) : this()
     {
-      ParentContext = parent;
+      this.ParentContext = parent;
     }
     
     #endregion
