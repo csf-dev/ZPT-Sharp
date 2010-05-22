@@ -5,19 +5,22 @@
   </MonoDevelop.Ide.DebuggingService>
   <MonoDevelop.Ide.Workbench ActiveDocument="Parser/Tales/TalesContext.cs" ctype="Workbench">
     <Files>
-      <File FileName="Parser/Tales/TalesContext.cs" Line="284" Column="11" />
-      <File FileName="Parser/Tales/Path.cs" Line="119" Column="52" />
+      <File FileName="Parser/Tales/TalesContext.cs" Line="34" Column="3" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State expanded="True">
           <Node name="Parser" expanded="True">
             <Node name="Tales" expanded="True">
+              <Node name="Expressions" expanded="True" />
               <Node name="TalesContext.cs" selected="True" />
             </Node>
           </Node>
           <Node name="Test.Parser" expanded="True">
-            <Node name="Tales" expanded="True" />
+            <Node name="Mocks" expanded="True" />
+            <Node name="Tales" expanded="True">
+              <Node name="Expressions" expanded="True" />
+            </Node>
           </Node>
         </State>
       </Pad>
@@ -28,7 +31,8 @@
               <Node name="Web" expanded="True">
                 <Node name="ZPT" expanded="True">
                   <Node name="Tales" expanded="True">
-                    <Node name="CraigFowler.Web.ZPT.Tales.Path" selected="True" />
+                    <Node name="CraigFowler.Web.ZPT.Tales.TalesContext" selected="True" />
+                    <Node name="Expressions" expanded="True" />
                   </Node>
                 </Node>
               </Node>
@@ -39,7 +43,9 @@
               <Node name="CraigFowler" expanded="True">
                 <Node name="Web" expanded="True">
                   <Node name="ZPT" expanded="True">
-                    <Node name="Tales" expanded="True" />
+                    <Node name="Tales" expanded="True">
+                      <Node name="Expressions" expanded="True" />
+                    </Node>
                   </Node>
                 </Node>
               </Node>

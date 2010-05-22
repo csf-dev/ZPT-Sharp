@@ -43,20 +43,33 @@ namespace CraigFowler.Web.ZPT.Tales.Expressions
     
     #region fields
     
-    private string rawExpression;
+    private string prefix, body;
     private TalesContext context;
+    private TalesExpression inner;
+    private ExpressionType type;
     
     #endregion
     
     #region properties
     
     /// <summary>
-    /// <para>Read-only.  Gets the raw expression that this instance represents.</para>
+    /// <para>Read-only.  Gets the raw text of the expression that this instance represents.</para>
     /// </summary>
-    public string Expression
+    public virtual string ExpressionText
     {
       get {
-        return rawExpression;
+        string output;
+        
+        if(this.ExpressionPrefix != null)
+        {
+          output = String.Format("{0}{1}", this.ExpressionPrefix, this.ExpressionBody);
+        }
+        else
+        {
+          output = this.ExpressionBody;
+        }
+        
+        return output;
       }
       private set {
         if(value == null)
@@ -64,34 +77,51 @@ namespace CraigFowler.Web.ZPT.Tales.Expressions
           throw new ArgumentNullException("value");
         }
         
-        rawExpression = value;
+        this.ExpressionPrefix = GetExpressionPrefix(value);
+        this.ExpressionBody = (this.ExpressionPrefix != null)? value.Substring(this.ExpressionPrefix.Length) : value;
+      }
+    }
+    
+    /// <summary>
+    /// <para>Read-only.  Gets the prefix portion of the <see cref="ExpressionText"/>, if present.</para>
+    /// <para>If this expression has no prefix then this property will return a null reference.</para>
+    /// <seealso cref="GetExpressionPrefix(String)"/>
+    /// </summary>
+    public string ExpressionPrefix
+    {
+      get {
+        return prefix;
+      }
+      private set {
+        if(String.IsNullOrEmpty(value))
+        {
+          prefix = null;
+        }
+        else
+        {
+          prefix = value;
+        }
       }
     }
     
     /// <summary>
     /// <para>
-    /// Read-only.  Gets the prefix portion of the <see cref="Expression"/> if present.  If the expression does not
-    /// carry a prefix then this property will return an empty string.
+    /// Read-only.  Gets the expression body, the part of the <see cref="ExpressionText"/> that follows the
+    /// <see cref="ExpressionPrefix"/>.  This includes leading and trailing whitespace (if present).
     /// </para>
-    /// <seealso cref="getPrefix(String)"/>
     /// </summary>
-    public string Prefix
+    public string ExpressionBody
     {
       get {
-        return getPrefix(Expression);
+        return body;
       }
-    }
-    
-    /// <summary>
-    /// <para>
-    /// Read-only.  Gets the expression body, the part of the <see cref="Expression"/> that follows the
-    /// <see cref="Prefix"/>.  This includes leading and trailing whitespace (if present).
-    /// </para>
-    /// </summary>
-    public string Body
-    {
-      get {
-        return Expression.Substring(Prefix.Length);
+      private set {
+        if(value == null)
+        {
+          throw new ArgumentNullException("value");
+        }
+        
+        body = value;
       }
     }
     
@@ -113,9 +143,102 @@ namespace CraigFowler.Web.ZPT.Tales.Expressions
       }
     }
     
+    /// <summary>
+    /// <para>
+    /// Read-only.  Gets the <see cref="ExpressionType"/> that indicates which type of expression this instance
+    /// represents.
+    /// </para>
+    /// </summary>
+    public ExpressionType ExpressionType
+    {
+      get {
+        return type;
+      }
+      protected set {
+        type = value;
+      }
+    }
+    
+    /// <summary>
+    /// <para>
+    /// Gets and sets a reference to a <see cref="TalesExpression"/> instance if this expression (by its nature)
+    /// contains an inner expression.
+    /// </para>
+    /// </summary>
+    public TalesExpression InnerExpression
+    {
+      get {
+        return inner;
+      }
+      protected set {
+        inner = value;
+      }
+    }
+    
+    /// <summary>
+    /// <para>
+    /// Read-only.  Returns a boolean representation of <see cref="Value"/> using the rules for converting values to
+    /// boolean specified in the TALES specification.
+    /// </para>
+    /// </summary>
+    public bool BooleanValue
+    {
+      get {
+        return ConvertToBoolean(this.Value);
+      }
+    }
+    
+    /// <summary>
+    /// <para>
+    /// Read-only.  Provides a shortcut convenience property getter that internally makes use of <see cref="GetValue"/>.
+    /// </para>
+    /// <para>
+    /// This property getter will not raise exceptions.  In the case that <see cref="GetValue"/> raises one then this
+    /// property will return a null reference.
+    /// </para>
+    /// </summary>
+    public object Value
+    {
+      get {
+        object output;
+        
+        try
+        {
+          output = GetValue();
+        }
+        catch(Exception)
+        {
+          // Since this is a property getter, any exception should result in a null return value
+          output = null;
+        }
+        
+        return output;
+      }
+    }
+    
     #endregion
     
-    #region public methods
+    #region private and abstract methods
+    
+    public abstract object GetValue();
+    
+    /// <summary>
+    /// <para>
+    /// Returns a boolean representation of the given <see cref="System.Object"/> using the TALES rules for converting
+    /// to boolean.
+    /// </para>
+    /// </summary>
+    /// <param name="input">
+    /// A <see cref="System.Object"/>
+    /// </param>
+    /// <returns>
+    /// A <see cref="System.Boolean"/>
+    /// </returns>
+    private bool ConvertToBoolean(object input)
+    {
+      // TODO: Write this to convert an object to a boolean using the rules of TALES.
+      throw new NotImplementedException();
+    }
     
     #endregion
     
@@ -132,8 +255,10 @@ namespace CraigFowler.Web.ZPT.Tales.Expressions
     /// </param>
     protected TalesExpression(string expressionText, TalesContext expressionContext)
     {
-      Expression = expressionText;
-      Context = expressionContext;
+      this.ExpressionText = expressionText;
+      this.Context = expressionContext;
+      this.ExpressionType = ExpressionType.Unknown;
+      this.InnerExpression = null;
     }
     
     #endregion
@@ -155,7 +280,7 @@ namespace CraigFowler.Web.ZPT.Tales.Expressions
     /// <returns>
     /// An object that implements <see cref="TalesExpression"/>.
     /// </returns>
-    /// <exception cref="ArgumentException">
+    /// <exception cref="FormatException">
     /// If the expression type cannot be determined from <paramref name="expression"/> then this exception is raised.
     /// </exception>
     public static TalesExpression ExpressionFactory(string expression, TalesContext context)
@@ -163,7 +288,7 @@ namespace CraigFowler.Web.ZPT.Tales.Expressions
       TalesExpression output;
       ExpressionType type;
       
-      type = determineExpressionType(expression);
+      type = DetermineExpressionType(expression);
       
       switch(type)
       {
@@ -177,8 +302,10 @@ namespace CraigFowler.Web.ZPT.Tales.Expressions
         output = new StringExpression(expression, context);
         break;
       default:
-        throw new NotSupportedException("Unsupported expression type");
+        throw new FormatException("Could parse thes expression into a recognised type.");
       }
+      
+      output.ExpressionType = type;
       
       return output;
     }
@@ -196,7 +323,7 @@ namespace CraigFowler.Web.ZPT.Tales.Expressions
     /// <returns>
     /// An <see cref="ExpressionType"/>
     /// </returns>
-    private static ExpressionType determineExpressionType(string input)
+    private static ExpressionType DetermineExpressionType(string input)
     {
       ExpressionType output;
       string prefix;
@@ -210,7 +337,7 @@ namespace CraigFowler.Web.ZPT.Tales.Expressions
         throw new ArgumentOutOfRangeException("input", "Expression may not be empty");
       }
       
-      prefix = getPrefix(input);
+      prefix = GetExpressionPrefix(input);
       
       switch(prefix)
       {
@@ -241,7 +368,7 @@ namespace CraigFowler.Web.ZPT.Tales.Expressions
     /// A <see cref="System.String"/>, the prefix portion of the <paramref name="expression"/>.  If this is not present
     /// then an empty string is returned.
     /// </returns>
-    private static string getPrefix(string expression)
+    private static string GetExpressionPrefix(string expression)
     {
       string output = String.Empty;
       

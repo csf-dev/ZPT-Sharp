@@ -6,7 +6,7 @@ using CraigFowler.Web.ZPT.Tales;
 namespace Test.CraigFowler.Web.ZPT.Tales
 {
   [TestFixture]
-  public class TestPath
+  public class TestTalesPath
   {
     [Test]
     public void TestConstructor()

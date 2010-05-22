@@ -59,9 +59,18 @@ namespace CraigFowler.Web.ZPT.Tales.Expressions
     
     #endregion
     
+    #region methods
+    
+    public override object GetValue()
+    {
+      throw new NotImplementedException();
+    }
+    
+    #endregion
+    
     #region private methods
     
-    private Queue<TalesPath> extractPaths(string expression)
+    private Queue<TalesPath> ExtractPaths(string expression)
     {
       Queue<TalesPath> output = new Queue<TalesPath>();
       
@@ -77,9 +86,9 @@ namespace CraigFowler.Web.ZPT.Tales.Expressions
     
     #region constructor
     
-    public PathExpression(string expression, TalesContext context) : base(expression, context)
+    internal PathExpression(string expression, TalesContext context) : base(expression, context)
     {
-      Paths = extractPaths(Body);
+      this.Paths = ExtractPaths(ExpressionBody);
     }
     
     #endregion

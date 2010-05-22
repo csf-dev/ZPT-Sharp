@@ -233,7 +233,7 @@ namespace CraigFowler.Web.ZPT.Tales
       else if(identifier == CONTEXT_ROOT_REFERENCE)
       {
         found = true;
-        output = RootContexts;
+        output = this.RootContexts;
       }
       else if(definitions.ContainsKey(identifier))
       {

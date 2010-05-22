@@ -25,6 +25,15 @@ namespace CraigFowler.Web.ZPT.Tales.Expressions
 {
   public class StringExpression : TalesExpression
   {
-    public StringExpression(string expression, TalesContext context) : base(expression, context) {}
+    #region methods
+    
+    public override object GetValue()
+    {
+      throw new NotImplementedException();
+    }
+    
+    #endregion
+
+    internal StringExpression(string expression, TalesContext context) : base(expression, context) {}
   }
 }

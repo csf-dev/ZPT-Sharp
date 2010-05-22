@@ -25,6 +25,22 @@ namespace CraigFowler.Web.ZPT.Tales.Expressions
 {
   public class InverseBooleanExpression : TalesExpression
   {
-    public InverseBooleanExpression(string expression, TalesContext context) : base(expression, context) {}
+    #region methods
+    
+    public override object GetValue()
+    {
+      throw new NotImplementedException();
+    }
+    
+    #endregion
+    
+    #region constructor
+    
+    internal InverseBooleanExpression(string expression, TalesContext context) : base(expression, context)
+    {
+      this.InnerExpression = TalesExpression.ExpressionFactory(this.ExpressionBody, context);
+    }
+    
+    #endregion
   }
 }
