@@ -192,33 +192,42 @@ namespace CraigFowler.Web.ZPT.Tales
     /// and that the parameter <paramref name="found"/> should be checked in order to determine whether the object
     /// exists but was legitimately set to null, or whether it does not exist.
     /// </returns>
-    public object GetRootObject(string identifier, out bool found)
+    /// <exception cref="ArgumentNullException">
+    /// If the parameter <paramref name="identifier"/> is null.
+    /// </exception>
+    /// <exception cref="ArgumentOutOfRangeException">
+    /// If the parameter <paramref name="identifier"/> is an empty string OR if no matching root object reference can
+    /// be found in this context.
+    /// </exception>
+    public object GetRootObject(string identifier)
     {
-      object output = null;
+      object output;
       Dictionary<string,object> definitions = this.GetAliases();
       
-      if(String.IsNullOrEmpty(identifier))
+      if(identifier == null)
       {
-        found = false;
+        throw new ArgumentNullException("identifier");
+      }
+      else if(identifier == String.Empty)
+      {
+        throw new ArgumentOutOfRangeException("identifier", "The identifier must not be an empty string.");
       }
       else if(identifier == CONTEXT_ROOT_REFERENCE)
       {
-        found = true;
         output = this.RootContexts;
       }
       else if(definitions.ContainsKey(identifier))
       {
-        found = true;
         output = definitions[identifier];
       }
       else if(this.RootContexts.ContainsKey(identifier))
       {
-        found = true;
         output = this.RootContexts[identifier];
       }
       else
       {
-        found = false;
+        throw new ArgumentOutOfRangeException("identifier",
+                                              "No root object can be found matching the given identifier.");
       }
       
       return output;

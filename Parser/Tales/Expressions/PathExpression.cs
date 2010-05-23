@@ -123,10 +123,20 @@ namespace CraigFowler.Web.ZPT.Tales.Expressions
     /// <returns>
     /// A <see cref="System.Object"/>
     /// </returns>
+    /// <exception cref="ArgumentNullException">
+    /// If the <paramref name="path"/> is null.
+    /// </exception>
+    /// <exception cref="ArgumentOutOfRangeException">
+    /// If the <see cref="TalesPath.Parts.Count"/> of the parts in the <paramref name="path"/> is zero.
+    /// </exception>
+    /// <exception cref="TalesException">
+    /// If there i a problem evaluating the <paramref name="path"/>.  This could be caused by a problem in fetching
+    /// the root object reference from the <see cref="TalesExpression.Context"/> or if an unknown (or null) reference
+    /// is followed whilst traversing the path.
+    /// </exception>
     private object EvaluatePath(TalesPath path)
     {
       object rootReference, output;
-      bool rootFound;
       
       if(path == null)
       {
@@ -134,14 +144,21 @@ namespace CraigFowler.Web.ZPT.Tales.Expressions
       }
       else if(path.Parts.Count == 0)
       {
-        throw new ArgumentOutOfRangeException("path", "This path has no parts.");
+        throw new ArgumentOutOfRangeException("path", "The path has no parts.");
       }
-
-      rootReference = this.Context.GetRootObject(path.Parts[0], out rootFound);
       
-      if(!rootFound)
+      try
       {
-        throw new FormatException("The context does not contain a root object for the beginning of this path.");
+        rootReference = this.Context.GetRootObject(path.Parts[0]);
+      }
+      catch(ArgumentException ex)
+      {
+        TalesException talesException;
+        talesException = new TalesException("Could not fetch the root object of the path from the current context",
+                                            ex);
+        talesException.Data.Add("path", path);
+        talesException.Data.Add("context", this.Context);
+        throw talesException;
       }
       
       if(path.Parts.Count == 1)
@@ -162,7 +179,7 @@ namespace CraigFowler.Web.ZPT.Tales.Expressions
     /// <param name="path">
     /// A <see cref="TalesPath"/>
     /// </param>
-    /// <param name="pathPosition">
+    /// <param name="position">
     /// A <see cref="System.Int32"/>
     /// </param>
     /// <param name="parentObject">
@@ -171,34 +188,28 @@ namespace CraigFowler.Web.ZPT.Tales.Expressions
     /// <returns>
     /// A <see cref="System.Object"/>
     /// </returns>
-    private object EvaluatePath(TalesPath path, int pathPosition, object parentObject)
+    /// <exception cref="ArgumentNullException">
+    /// If the <paramref name="parentObject"/> is null and this is not the last step in traversing the
+    /// <paramref name="path"/>.
+    /// </exception>
+    private object EvaluatePath(TalesPath path, int position, object parentObject)
     {
       object output = null, thisObject = null;
-      MemberInfo[] members;
-      MemberInfo applicableMember;
+      MemberInfo currentMember;
       
-      if(pathPosition < path.Parts.Count)
+      if(position < path.Parts.Count)
       {
-        if(parentObject == null)
-        {
-          throw new ArgumentNullException("currentObject");
-        }
+        currentMember = SelectMember(parentObject, path.Parts[position]);
         
-        members = parentObject.GetType().GetMember(path.Parts[pathPosition]);
-        
-        if(members.Length == 0)
-        {
-          throw new FormatException(String.Format("Could not find member '{0}' within the path.",
-                                                  path.Parts[pathPosition]));
-        }
-        
-        // FIXME: Really we should be smarter about choosing a member here, but for now we just take the first one.
-        applicableMember = members[0];
-        
-        switch(applicableMember.MemberType)
+        /* FIXME: This needs refactoring - probably splitting into two private methods.
+         * One gets values from fields, the other invokes and gets return values from methods.
+         * We can handle properties (and parameterised properties) with the 'methods' handler, because we can get their
+         * getter methods using reflection.
+         */
+        switch(currentMember.MemberType)
         {
         case MemberTypes.Property:
-          PropertyInfo property = applicableMember as PropertyInfo;
+          PropertyInfo property = currentMember as PropertyInfo;
           if(!property.CanRead || !property.GetGetMethod().IsPublic)
           {
             throw new NotSupportedException("Property is not readable");
@@ -206,7 +217,7 @@ namespace CraigFowler.Web.ZPT.Tales.Expressions
           thisObject = property.GetValue(parentObject, null);
           break;
         case MemberTypes.Field:
-          FieldInfo field = applicableMember as FieldInfo;
+          FieldInfo field = currentMember as FieldInfo;
           if(!field.IsPublic)
           {
             throw new NotSupportedException("Field is not readable");
@@ -217,11 +228,12 @@ namespace CraigFowler.Web.ZPT.Tales.Expressions
           throw new NotImplementedException("Methods aren't supported yet");
         default:
           throw new NotSupportedException(String.Format("Unsupported member type: '{0}'",
-                                                        applicableMember.MemberType.ToString()));
+                                                        currentMember.MemberType.ToString()));
         }
         
-        pathPosition ++;
-        output = EvaluatePath(path, pathPosition, thisObject);
+        // And now we recurse into ourself, traversing another piece of the path each time we go.
+        position ++;
+        output = EvaluatePath(path, position, thisObject);
       }
       else
       {
@@ -229,6 +241,56 @@ namespace CraigFowler.Web.ZPT.Tales.Expressions
       }
       
       return output;
+    }
+    
+    /// <summary>
+    /// <para>
+    /// Selects a member from a <paramref name="containingObject"/> based on its <see cref="MemberInfo.Name"/>.
+    /// </para>
+    /// </summary>
+    /// <param name="containingObject">
+    /// A <see cref="System.Object"/>
+    /// </param>
+    /// <param name="memberIdentifier">
+    /// A <see cref="System.String"/>
+    /// </param>
+    /// <returns>
+    /// A <see cref="MemberInfo"/>
+    /// </returns>
+    private MemberInfo SelectMember(object containingObject, string memberIdentifier)
+    {
+      MemberInfo[] members;
+      Type containingType;
+      
+      // Quick sanity-check for some impossible situations
+      if(containingObject == null)
+      {
+        throw new ArgumentNullException("containingObject");
+      }
+      else if(String.IsNullOrEmpty(memberIdentifier))
+      {
+        throw new ArgumentException("Member identifier may not be null or empty.", "memberIdentifier");
+      }
+      
+      containingType = containingObject.GetType();
+      members = containingType.GetMember(memberIdentifier);
+      
+      if(members.Length == 0)
+      {
+        TalesException ex = new TalesException("No members of the target type match the given identifier.");
+        ex.Data.Add("identifier", memberIdentifier);
+        ex.Data.Add("target type", containingType);
+        throw ex;
+      }
+      else if(members.Length != 1)
+      {
+        TalesException ex = new TalesException("Ambiguous reference to more than one member of the target type.");
+        ex.Data.Add("identifier", memberIdentifier);
+        ex.Data.Add("target type", containingType);
+        throw ex;
+      }
+      
+      return members[0];
     }
     
     #endregion

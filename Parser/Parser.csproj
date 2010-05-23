@@ -42,6 +42,7 @@
     <Compile Include="Tales\TalesPath.cs" />
     <Compile Include="Tales\ExpressionType.cs" />
     <Compile Include="Tales\TalesExpression.cs" />
+    <Compile Include="Tales\TalesException.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
