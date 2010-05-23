@@ -42,10 +42,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Tales\TestTalesContext.cs" />
-    <Compile Include="Tales\TestPath.cs" />
     <Compile Include="Mocks\MockObject.cs" />
     <Compile Include="Tales\Expressions\TestPathExpression.cs" />
     <Compile Include="Tales\Expressions\TestTalesExpression.cs" />
+    <Compile Include="Tales\TalesIntegrationTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Parser\Parser.csproj">

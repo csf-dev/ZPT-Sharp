@@ -45,7 +45,6 @@ namespace CraigFowler.Web.ZPT.Tales.Expressions
     
     private string prefix, body;
     private TalesContext context;
-    private TalesExpression inner;
     private ExpressionType type;
     
     #endregion
@@ -161,22 +160,6 @@ namespace CraigFowler.Web.ZPT.Tales.Expressions
     
     /// <summary>
     /// <para>
-    /// Gets and sets a reference to a <see cref="TalesExpression"/> instance if this expression (by its nature)
-    /// contains an inner expression.
-    /// </para>
-    /// </summary>
-    public TalesExpression InnerExpression
-    {
-      get {
-        return inner;
-      }
-      protected set {
-        inner = value;
-      }
-    }
-    
-    /// <summary>
-    /// <para>
     /// Read-only.  Returns a boolean representation of <see cref="Value"/> using the rules for converting values to
     /// boolean specified in the TALES specification.
     /// </para>
@@ -258,7 +241,6 @@ namespace CraigFowler.Web.ZPT.Tales.Expressions
       this.ExpressionText = expressionText;
       this.Context = expressionContext;
       this.ExpressionType = ExpressionType.Unknown;
-      this.InnerExpression = null;
     }
     
     #endregion
@@ -283,7 +265,7 @@ namespace CraigFowler.Web.ZPT.Tales.Expressions
     /// <exception cref="FormatException">
     /// If the expression type cannot be determined from <paramref name="expression"/> then this exception is raised.
     /// </exception>
-    public static TalesExpression ExpressionFactory(string expression, TalesContext context)
+    internal static TalesExpression ExpressionFactory(string expression, TalesContext context)
     {
       TalesExpression output;
       ExpressionType type;

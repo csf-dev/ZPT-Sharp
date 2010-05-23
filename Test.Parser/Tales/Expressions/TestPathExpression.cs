@@ -17,7 +17,7 @@ namespace Test.CraigFowler.Web.ZPT.Tales.Expressions
       string path = "foo/bar/baz | spong/wibble | blah";
       
       context = new TalesContext();
-      expression = TalesExpression.ExpressionFactory(path, context) as PathExpression;
+      expression = context.CreateExpression(path) as PathExpression;
       
       Assert.AreEqual(3, expression.Paths.Count, "3 pieces to the path");
       Assert.AreEqual("foo/bar/baz", expression.Paths.Peek().Text, "Correct text for first path");

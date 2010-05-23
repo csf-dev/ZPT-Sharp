@@ -13,7 +13,7 @@ namespace Test.CraigFowler.Web.ZPT.Tales.Expressions
     public void TestExpressionFactoryInverseBoolean()
     {
       string expressionText = "not:foo/bar";
-      TalesExpression expression = TalesExpression.ExpressionFactory(expressionText, new TalesContext());
+      TalesExpression expression = new TalesContext().CreateExpression(expressionText);
       
       Assert.IsInstanceOfType(typeof(InverseBooleanExpression), expression, "Expression is correct type");
       Assert.AreEqual(ExpressionType.InverseBoolean, expression.ExpressionType, "Expression reports the correct type");
@@ -23,7 +23,7 @@ namespace Test.CraigFowler.Web.ZPT.Tales.Expressions
     public void TestExpressionFactoryPath()
     {
       string expressionText = "path:foo/bar";
-      TalesExpression expression = TalesExpression.ExpressionFactory(expressionText, new TalesContext());
+      TalesExpression expression = new TalesContext().CreateExpression(expressionText);
       
       Assert.IsInstanceOfType(typeof(PathExpression), expression, "Expression is correct type");
       Assert.AreEqual(ExpressionType.Path, expression.ExpressionType, "Expression reports the correct type");
@@ -33,7 +33,7 @@ namespace Test.CraigFowler.Web.ZPT.Tales.Expressions
     public void TestExpressionFactoryString()
     {
       string expressionText = "string:foo bar baz";
-      TalesExpression expression = TalesExpression.ExpressionFactory(expressionText, new TalesContext());
+      TalesExpression expression = new TalesContext().CreateExpression(expressionText);
       
       Assert.IsInstanceOfType(typeof(StringExpression), expression, "Expression is correct type");
       Assert.AreEqual(ExpressionType.String, expression.ExpressionType, "Expression reports the correct type");
@@ -43,7 +43,7 @@ namespace Test.CraigFowler.Web.ZPT.Tales.Expressions
     public void TestExpressionFactoryDefault()
     {
       string expressionText = "foo/bar";
-      TalesExpression expression = TalesExpression.ExpressionFactory(expressionText, new TalesContext());
+      TalesExpression expression = new TalesContext().CreateExpression(expressionText);
       
       Assert.IsInstanceOfType(typeof(PathExpression), expression, "Expression is correct type");
       Assert.AreEqual(ExpressionType.Path, expression.ExpressionType, "Expression reports the correct type");
@@ -53,7 +53,7 @@ namespace Test.CraigFowler.Web.ZPT.Tales.Expressions
     public void TextExpressionText()
     {
       string expressionText = "path:foo/bar";
-      TalesExpression expression = TalesExpression.ExpressionFactory(expressionText, new TalesContext());
+      TalesExpression expression = new TalesContext().CreateExpression(expressionText);
       
       Assert.AreEqual("path:", expression.ExpressionPrefix, "Correct prefix");
       Assert.AreEqual("foo/bar", expression.ExpressionBody, "Correct body");
@@ -64,7 +64,7 @@ namespace Test.CraigFowler.Web.ZPT.Tales.Expressions
     public void TextExpressionTextNoPrefix()
     {
       string expressionText = "foo/bar";
-      TalesExpression expression = TalesExpression.ExpressionFactory(expressionText, new TalesContext());
+      TalesExpression expression = new TalesContext().CreateExpression(expressionText);
       
       Assert.IsNull(expression.ExpressionPrefix, "Correct prefix");
       Assert.AreEqual("foo/bar", expression.ExpressionBody, "Correct body");
@@ -75,17 +75,22 @@ namespace Test.CraigFowler.Web.ZPT.Tales.Expressions
     public void TestInnerExpression()
     {
       string expressionText = "not:foo/bar";
-      TalesExpression expression = TalesExpression.ExpressionFactory(expressionText, new TalesContext());
+      TalesExpression expression = new TalesContext().CreateExpression(expressionText);
       
       Assert.IsInstanceOfType(typeof(InverseBooleanExpression), expression, "Expression is correct type");
       Assert.AreEqual(ExpressionType.InverseBoolean, expression.ExpressionType, "Expression reports the correct type");
       
-      Assert.IsNotNull(expression.InnerExpression, "Inner expression is not null");
-      Assert.IsInstanceOfType(typeof(PathExpression), expression.InnerExpression, "Inner expression is correct type");
+      Assert.IsNotNull(((InverseBooleanExpression) expression).InnerExpression,
+                       "Inner expression is not null");
+      Assert.IsInstanceOfType(typeof(PathExpression),
+                              ((InverseBooleanExpression) expression).InnerExpression,
+                              "Inner expression is correct type");
       Assert.AreEqual(ExpressionType.Path,
-                      expression.InnerExpression.ExpressionType,
+                      ((InverseBooleanExpression) expression).InnerExpression.ExpressionType,
                       "Inner expression reports the correct type");
-      Assert.AreEqual("foo/bar", expression.InnerExpression.ExpressionBody, "Inner expression has correct body");
+      Assert.AreEqual("foo/bar",
+                      ((InverseBooleanExpression) expression).InnerExpression.ExpressionBody,
+                      "Inner expression has correct body");
     }
   }
 }

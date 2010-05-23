@@ -22,6 +22,7 @@
 using System;
 using System.Collections.Generic;
 using System.Reflection;
+using CraigFowler.Web.ZPT.Tales.Expressions;
 
 namespace CraigFowler.Web.ZPT.Tales
 {
@@ -182,6 +183,21 @@ namespace CraigFowler.Web.ZPT.Tales
       }
       
       return output;
+    }
+    
+    /// <summary>
+    /// <para>Creates a new <see cref="TalesExpression"/> using this context and the given expression string.</para>
+    /// </summary>
+    /// <param name="expressionText">
+    /// A <see cref="System.String"/>
+    /// </param>
+    /// <returns>
+    /// A <see cref="TalesExpression"/>
+    /// </returns>
+    /// <seealso cref="TalesExpression.ExpressionFactory"/>
+    public TalesExpression CreateExpression(string expressionText)
+    {
+      return TalesExpression.ExpressionFactory(expressionText, this);
     }
     
     #endregion
