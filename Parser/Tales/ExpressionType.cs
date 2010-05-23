@@ -21,7 +21,7 @@
 
 using System;
 
-namespace CraigFowler.Web.ZPT.Tales.Expressions
+namespace CraigFowler.Web.ZPT.Tales
 {
   /// <summary>
   /// <para>Indicates a type of TALES expression.</para>

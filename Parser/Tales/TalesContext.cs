@@ -21,8 +21,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Reflection;
-using CraigFowler.Web.ZPT.Tales.Expressions;
 
 namespace CraigFowler.Web.ZPT.Tales
 {
@@ -74,7 +72,7 @@ namespace CraigFowler.Web.ZPT.Tales
     /// <summary>
     /// <para>Read-only.  Returns an editable dictionary of local aliases that are made in this context.</para>
     /// </summary>
-    public Dictionary<string,object> ContextAliases
+    public Dictionary<string, object> Aliases
     {
       get {
         return localDefinitions;
@@ -87,7 +85,7 @@ namespace CraigFowler.Web.ZPT.Tales
     /// <summary>
     /// <para>Read-only.  Returns an editable dictionary of local repeat variables that are made in this context.</para>
     /// </summary>
-    public Dictionary<string,object> RepeatVariables
+    public Dictionary<string, object> RepeatVariables
     {
       get {
         return localRepeatVariables;
@@ -119,7 +117,7 @@ namespace CraigFowler.Web.ZPT.Tales
     /// used on.
     /// </para>
     /// </summary>
-    public Dictionary<string,string> Attributes
+    public Dictionary<string, string> Attributes
     {
       get {
         return attributes;
@@ -146,45 +144,6 @@ namespace CraigFowler.Web.ZPT.Tales
     
     #region methods
     
-    public bool ReferenceValid(TalesPath path)
-    {
-      // TODO: Determine whether the given path reference is valid for the current context
-      throw new NotImplementedException();
-    }
-    
-    public object EvaluateReference(TalesPath path)
-    {
-      bool rootFound;
-      object rootObject, output;
-      
-      if(path == null)
-      {
-        throw new ArgumentNullException("path");
-      }
-      else if(path.Parts.Count == 0)
-      {
-        throw new ArgumentOutOfRangeException("path", "This path has no parts.");
-      }
-      
-      rootObject = GetRootObject(path.Parts[0], out rootFound);
-      
-      if(!rootFound)
-      {
-        throw new FormatException("This context does not contain a root object for the beginning of the path.");
-      }
-      
-      if(path.Parts.Count == 1)
-      {
-        output = rootObject;
-      }
-      else
-      {
-        output = EvaluateReference(path, 1, rootObject);
-      }
-      
-      return output;
-    }
-    
     /// <summary>
     /// <para>Creates a new <see cref="TalesExpression"/> using this context and the given expression string.</para>
     /// </summary>
@@ -199,10 +158,6 @@ namespace CraigFowler.Web.ZPT.Tales
     {
       return TalesExpression.ExpressionFactory(expressionText, this);
     }
-    
-    #endregion
-    
-    #region private methods
     
     /// <summary>
     /// <para>
@@ -237,10 +192,10 @@ namespace CraigFowler.Web.ZPT.Tales
     /// and that the parameter <paramref name="found"/> should be checked in order to determine whether the object
     /// exists but was legitimately set to null, or whether it does not exist.
     /// </returns>
-    private object GetRootObject(string identifier, out bool found)
+    public object GetRootObject(string identifier, out bool found)
     {
       object output = null;
-      Dictionary<string,object> definitions = this.GetDefinitions();
+      Dictionary<string,object> definitions = this.GetAliases();
       
       if(String.IsNullOrEmpty(identifier))
       {
@@ -269,65 +224,9 @@ namespace CraigFowler.Web.ZPT.Tales
       return output;
     }
     
-    private object EvaluateReference(TalesPath path, int pathPosition, object parentObject)
-    {
-      object output = null, thisObject = null;
-      MemberInfo[] members;
-      MemberInfo applicableMember;
-      
-      if(pathPosition < path.Parts.Count)
-      {
-        if(parentObject == null)
-        {
-          throw new ArgumentNullException("currentObject");
-        }
-        
-        members = parentObject.GetType().GetMember(path.Parts[pathPosition]);
-        
-        if(members.Length == 0)
-        {
-          throw new FormatException(String.Format("Could not find member '{0}' within the path.",
-                                                  path.Parts[pathPosition]));
-        }
-        
-        // FIXME: Really we should be smarter about choosing a member here, but for now we just take the first one.
-        applicableMember = members[0];
-        
-        switch(applicableMember.MemberType)
-        {
-        case MemberTypes.Property:
-          PropertyInfo property = applicableMember as PropertyInfo;
-          if(!property.CanRead || !property.GetGetMethod().IsPublic)
-          {
-            throw new NotSupportedException("Property is not readable");
-          }
-          thisObject = property.GetValue(parentObject, null);
-          break;
-        case MemberTypes.Field:
-          FieldInfo field = applicableMember as FieldInfo;
-          if(!field.IsPublic)
-          {
-            throw new NotSupportedException("Field is not readable");
-          }
-          thisObject = field.GetValue(parentObject);
-          break;
-        case MemberTypes.Method:
-          throw new NotImplementedException("Methods aren't supported yet");
-        default:
-          throw new NotSupportedException(String.Format("Unsupported member type: '{0}'",
-                                                        applicableMember.MemberType.ToString()));
-        }
-        
-        pathPosition ++;
-        output = EvaluateReference(path, pathPosition, thisObject);
-      }
-      else
-      {
-        output = parentObject;
-      }
-      
-      return output;
-    }
+    #endregion
+    
+    #region private methods
     
     /// <summary>
     /// <para>Merges two string dictionaries of definitions and object references.</para>
@@ -380,24 +279,6 @@ namespace CraigFowler.Web.ZPT.Tales
     
     /// <summary>
     /// <para>
-    /// Initialises the mandatory root context items.  Implementor classes may choose to add further root contexts
-    /// within their own constructors if they choose.
-    /// </para>
-    /// </summary>
-    private void InitialiseMandatoryRootContexts()
-    {
-      this.RootContexts = new Dictionary<string, object>();
-      
-      this.RootContexts.Add(NOTHING_REFERENCE, null);
-      this.RootContexts.Add(DEFAULT_REFERENCE, new DefaultValueMarker());
-      this.RootContexts.Add(REPEAT_REFERENCE, this.GetRepeatVariables());
-      this.RootContexts.Add(OPTIONS_REFERENCE, Options);
-      this.RootContexts.Add(ATTRIBUTES_REFERENCE, Attributes);
-    }
-    
-    
-    /// <summary>
-    /// <para>
     /// Read-only.  Generates and returns a dictionary of the effective definitions in this context, by recursing
     /// through the <see cref="ParentContext"/>.
     /// </para>
@@ -409,17 +290,17 @@ namespace CraigFowler.Web.ZPT.Tales
     /// <returns>
     /// A <see cref="Dictionary"/> of objects, indexed by <see cref="System.String"/> keys.
     /// </returns>
-    private Dictionary<string,object> GetDefinitions()
+    private Dictionary<string,object> GetAliases()
     {
       Dictionary<string,object> output;
       
       if(this.ParentContext != null)
       {
-        output = MergeDictionaries(this.ParentContext.GetDefinitions(), this.ContextAliases);
+        output = MergeDictionaries(this.ParentContext.GetAliases(), this.Aliases);
       }
       else
       {
-        output = MergeDictionaries(null, this.ContextAliases);
+        output = MergeDictionaries(null, this.Aliases);
       }
       
       return output;
@@ -461,12 +342,18 @@ namespace CraigFowler.Web.ZPT.Tales
     public TalesContext()
     {
       this.ParentContext = null;
-      this.ContextAliases = new Dictionary<string, object>();
+      this.Aliases = new Dictionary<string, object>();
       this.RepeatVariables = new Dictionary<string, object>();
       this.Options = new Dictionary<string, object>();
       this.Attributes = new Dictionary<string, string>();
       
-      this.InitialiseMandatoryRootContexts();
+      // Initialise the root contexts dictionary
+      this.RootContexts = new Dictionary<string, object>();
+      this.RootContexts.Add(NOTHING_REFERENCE, null);
+      this.RootContexts.Add(DEFAULT_REFERENCE, new DefaultValueMarker());
+      this.RootContexts.Add(REPEAT_REFERENCE, this.GetRepeatVariables());
+      this.RootContexts.Add(OPTIONS_REFERENCE, Options);
+      this.RootContexts.Add(ATTRIBUTES_REFERENCE, Attributes);
     }
     
     /// <summary>

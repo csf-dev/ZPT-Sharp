@@ -19,21 +19,18 @@
 //  You should have received a copy of the GNU General Public License
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+using CraigFowler.Web.ZPT.Tales.Expressions;
 using System;
+using System.Collections;
 
-namespace CraigFowler.Web.ZPT.Tales.Expressions
+namespace CraigFowler.Web.ZPT.Tales
 {
   /// <summary>
-  /// <para>Describes a single TALES expression.</para>
+  /// <para>Abstract base class for all TALES expressions.</para>
   /// </summary>
   public abstract class TalesExpression
   {
     #region constants
-    
-    private const string
-      INVERSE_BOOLEN_PREFIX             = "not:",
-      PATH_PREFIX                       = "path:",
-      STRING_PREFIX                     = "string:";
     
     // This is only used for expressions that have no prefix.  They are assumed to be of this type.
     private const ExpressionType
@@ -158,47 +155,6 @@ namespace CraigFowler.Web.ZPT.Tales.Expressions
       }
     }
     
-    /// <summary>
-    /// <para>
-    /// Read-only.  Returns a boolean representation of <see cref="Value"/> using the rules for converting values to
-    /// boolean specified in the TALES specification.
-    /// </para>
-    /// </summary>
-    public bool BooleanValue
-    {
-      get {
-        return ConvertToBoolean(this.Value);
-      }
-    }
-    
-    /// <summary>
-    /// <para>
-    /// Read-only.  Provides a shortcut convenience property getter that internally makes use of <see cref="GetValue"/>.
-    /// </para>
-    /// <para>
-    /// This property getter will not raise exceptions.  In the case that <see cref="GetValue"/> raises one then this
-    /// property will return a null reference.
-    /// </para>
-    /// </summary>
-    public object Value
-    {
-      get {
-        object output;
-        
-        try
-        {
-          output = GetValue();
-        }
-        catch(Exception)
-        {
-          // Since this is a property getter, any exception should result in a null return value
-          output = null;
-        }
-        
-        return output;
-      }
-    }
-    
     #endregion
     
     #region private and abstract methods
@@ -206,21 +162,125 @@ namespace CraigFowler.Web.ZPT.Tales.Expressions
     public abstract object GetValue();
     
     /// <summary>
-    /// <para>
-    /// Returns a boolean representation of the given <see cref="System.Object"/> using the TALES rules for converting
-    /// to boolean.
-    /// </para>
+    /// <para>Invokes <see cref="GetValue"/> and then returns the boolean equivalent of the resolved value.</para>
     /// </summary>
-    /// <param name="input">
-    /// A <see cref="System.Object"/>
-    /// </param>
+    /// <remarks>
+    /// <para>
+    /// From the TALES specification 1.3 - http://wiki.zope.org/ZPT/TALESSpecification13 relating to 'not' expressions:
+    /// </para>
+    /// <para>
+    /// If the expression supplied does not evaluate to a boolean value, not  will issue a warning and coerce the
+    /// expression's value into a boolean type based on the following rules:
+    /// </para>
+    /// <list type="number">
+    /// <item>integer 0 is false</item>
+    /// <item>integer > 0 is true</item>
+    /// <item>an empty string or other sequence is false</item>
+    /// <item>a non-empty string or other sequence is true</item>
+    /// <item>a non-value (e.g. void, None, Nil, NULL, etc) is false</item>
+    /// <item>all other values are implementation-dependent</item>
+    /// </list>
+    /// <para>
+    /// If no expression string is supplied, an error should be generated.
+    /// </para>
+    /// <para>This implementation further defines that:</para>
+    /// <list type="number">
+    /// <item>
+    /// Any nonzero number (or that does not become zero upon casting to a <see cref="System.Single"/>) is true.  This
+    /// includes negative numbers.
+    /// </item>
+    /// <item>
+    /// Item 5 in the list above (checking for null values) is performed before items 3 and 4.
+    /// </item>
+    /// <item>
+    /// Item 4 refers to sequences.  In this implementation then an object is considered a sequence if it implements
+    /// <see cref="ICollection"/>.  In this case its <see cref="ICollection.Count"/> property is checked to determine
+    /// its length.
+    /// </item>
+    /// <item>
+    /// An implementation-specific step that is taken is the attempt to use the <see cref="IConvertible"/> interface
+    /// also with <see cref="Convert.ToBoolean(Object)"/> to perform the conversion to boolean.
+    /// </item>
+    /// <item>
+    /// Finally, if the value still cannot be coerced to <see cref="Boolean"/> by any other means, false is returned.
+    /// </item>
+    /// </list>
+    /// </remarks>
     /// <returns>
     /// A <see cref="System.Boolean"/>
     /// </returns>
-    private bool ConvertToBoolean(object input)
+    public bool GetBooleanValue()
     {
-      // TODO: Write this to convert an object to a boolean using the rules of TALES.
-      throw new NotImplementedException();
+      object resolvedValue = GetValue();
+      bool output = false, success = false;
+      
+      // If the value is already boolean then return that
+      if(resolvedValue is Boolean)
+      {
+        output = (bool) resolvedValue;
+        success = true;
+      }
+      
+      // If the value can be converted to a number then output true if the number is non-zero (false otherwise)
+      if(!success)
+      {
+        try
+        {
+          float floatValue = (float) resolvedValue;
+          output = (floatValue != 0);
+          success = true;
+        }
+        catch(InvalidCastException)
+        {
+          // The resolved value is not a number, for it cannot be cast to a float.
+          success = false;
+        }
+      }
+      
+      // If the value is null then output false
+      if(!success && resolvedValue == null)
+      {
+        output = false;
+        success = true;
+      }
+      
+      // If the value is a string the output true if it is non-empty (false otherwise)
+      if(!success && resolvedValue is String)
+      {
+        String stringValue = resolvedValue as String;
+        output = (stringValue.Length > 0);
+        success = true;
+      }
+      
+      // If the value is an ICollection then output true if it has more than zero elements (false otherwise)
+      if(!success && resolvedValue is ICollection)
+      {
+        ICollection iCollectionValue = resolvedValue as ICollection;
+        output = (iCollectionValue.Count > 0);
+        success = true;
+      }
+      
+      // If the value is an IConvertible then output its conversion to boolean
+      if(!success && resolvedValue is IConvertible)
+      {
+        try
+        {
+          IConvertible convertableValue = resolvedValue as IConvertible;
+          output = Convert.ToBoolean(convertableValue);
+          success = true;
+        }
+        catch(InvalidCastException)
+        {
+          // We could not convert to boolean in this way
+          success = false;
+        }
+      }
+      
+      /* Return the output value.
+       * If all of the attempts above failed to produce a conclusive output value then it will contain the default
+       * value of 'false'.
+       */
+      return output;
     }
     
     #endregion
@@ -323,13 +383,13 @@ namespace CraigFowler.Web.ZPT.Tales.Expressions
       
       switch(prefix)
       {
-      case INVERSE_BOOLEN_PREFIX:
+      case InverseBooleanExpression.Prefix:
         output = ExpressionType.InverseBoolean;
         break;
-      case PATH_PREFIX:
+      case PathExpression.Prefix:
         output = ExpressionType.Path;
         break;
-      case STRING_PREFIX:
+      case StringExpression.Prefix:
         output = ExpressionType.String;
         break;
       default:
@@ -354,17 +414,17 @@ namespace CraigFowler.Web.ZPT.Tales.Expressions
     {
       string output = String.Empty;
       
-      if(expression.StartsWith(INVERSE_BOOLEN_PREFIX))
+      if(expression.StartsWith(InverseBooleanExpression.Prefix))
       {
-        output = INVERSE_BOOLEN_PREFIX;
+        output = InverseBooleanExpression.Prefix;
       }
-      else if(expression.StartsWith(PATH_PREFIX))
+      else if(expression.StartsWith(PathExpression.Prefix))
       {
-        output = PATH_PREFIX;
+        output = PathExpression.Prefix;
       }
-      else if(expression.StartsWith(STRING_PREFIX))
+      else if(expression.StartsWith(StringExpression.Prefix))
       {
-        output = STRING_PREFIX;
+        output = StringExpression.Prefix;
       }
       
       return output;

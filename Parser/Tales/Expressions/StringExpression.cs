@@ -25,6 +25,12 @@ namespace CraigFowler.Web.ZPT.Tales.Expressions
 {
   public class StringExpression : TalesExpression
   {
+    #region constants
+    
+    public const string Prefix = "string:";
+    
+    #endregion
+    
     #region methods
     
     public override object GetValue()

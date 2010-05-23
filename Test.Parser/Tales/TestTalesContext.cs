@@ -2,6 +2,7 @@
 using System;
 using NUnit.Framework;
 using CraigFowler.Web.ZPT.Tales;
+using CraigFowler.Web.ZPT.Tales.Expressions;
 using Test.CraigFowler.Web.ZPT.Mocks;
 
 namespace Test.CraigFowler.Web.ZPT.Tales
@@ -27,15 +28,15 @@ namespace Test.CraigFowler.Web.ZPT.Tales
     {
       MockObject mock = new MockObject(true);
       TalesContext context = new TalesContext();
-      TalesPath path = new TalesPath("mock/InnerObject/IntegerValue");
+      TalesExpression expression = context.CreateExpression("mock/InnerObject/IntegerValue");
       object testObj;
       int testInt;
       
       mock.InnerObject.IntegerValue = 2;
       
-      context.ContextAliases.Add("mock", mock);
+      context.Aliases.Add("mock", mock);
       
-      testObj = context.EvaluateReference(path);
+      testObj = expression.GetValue();
       
       Assert.IsInstanceOfType(typeof(Int32), testObj, "Test object is correct type");
       testInt = (int) testObj;

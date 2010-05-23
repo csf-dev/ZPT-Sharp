@@ -25,6 +25,12 @@ namespace CraigFowler.Web.ZPT.Tales.Expressions
 {
   public class InverseBooleanExpression : TalesExpression
   {
+    #region constants
+    
+    public const string Prefix = "not:";
+    
+    #endregion
+    
     #region fields
     
     private TalesExpression inner;
@@ -54,7 +60,7 @@ namespace CraigFowler.Web.ZPT.Tales.Expressions
     
     public override object GetValue()
     {
-      throw new NotImplementedException();
+      return !this.InnerExpression.GetBooleanValue();
     }
     
     #endregion

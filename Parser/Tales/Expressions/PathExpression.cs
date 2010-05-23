@@ -21,6 +21,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Reflection;
 
 namespace CraigFowler.Web.ZPT.Tales.Expressions
 {
@@ -31,13 +32,14 @@ namespace CraigFowler.Web.ZPT.Tales.Expressions
   {
     #region constants
     
-    private const char PATH_SEPARATOR = '|';
+    private const char PATH_SEPARATOR   = '|';
+    public const string Prefix          = "path:";
     
     #endregion
     
     #region fields
     
-    private Queue<TalesPath> paths;
+    private List<TalesPath> paths;
     
     #endregion
     
@@ -47,7 +49,7 @@ namespace CraigFowler.Web.ZPT.Tales.Expressions
     /// <para>Read-only.  Gets a queue of the paths that are present in the expression body of this expression.</para>
     /// <para>Independant paths are searated by the pipe character '|'.</para>
     /// </summary>
-    public Queue<TalesPath> Paths
+    public List<TalesPath> Paths
     {
       get {
         return paths;
@@ -63,20 +65,167 @@ namespace CraigFowler.Web.ZPT.Tales.Expressions
     
     public override object GetValue()
     {
-      throw new NotImplementedException();
+      bool success = false;
+      object output = null;
+      
+      for(int i = 0; !success && i < this.Paths.Count; i++)
+      {
+        try
+        {
+          output = EvaluatePath(this.Paths[i]);
+          success = true;
+        }
+        catch(Exception)
+        {
+          success = false;
+        }
+      }
+      
+      if(!success)
+      {
+        throw new FormatException("Could not evaluate any of the given paths.");
+      }
+      
+      return output;
     }
     
     #endregion
     
     #region private methods
     
-    private Queue<TalesPath> ExtractPaths(string expression)
+    /// <summary>
+    /// <para>Extracts a <see cref="List"/> of <see cref="TalesPath"/> from the given string.</para>
+    /// </summary>
+    /// <param name="expression">
+    /// A <see cref="System.String"/>
+    /// </param>
+    /// <returns>
+    /// A <see cref="List<TalesPath>"/>
+    /// </returns>
+    private List<TalesPath> ExtractPaths(string expression)
     {
-      Queue<TalesPath> output = new Queue<TalesPath>();
+      List<TalesPath> output = new List<TalesPath>();
       
       foreach(string path in expression.Split(new char[] {PATH_SEPARATOR}))
       {
-        output.Enqueue(new TalesPath(path));
+        output.Add(new TalesPath(path));
+      }
+      
+      return output;
+    }
+    
+    /// <summary>
+    /// <para>Overloaded. Evaluates a single <see cref="TalesPath"/> to an object reference.</para>
+    /// </summary>
+    /// <param name="path">
+    /// A <see cref="TalesPath"/>
+    /// </param>
+    /// <returns>
+    /// A <see cref="System.Object"/>
+    /// </returns>
+    private object EvaluatePath(TalesPath path)
+    {
+      object rootReference, output;
+      bool rootFound;
+      
+      if(path == null)
+      {
+        throw new ArgumentNullException("path");
+      }
+      else if(path.Parts.Count == 0)
+      {
+        throw new ArgumentOutOfRangeException("path", "This path has no parts.");
+      }
+
+      rootReference = this.Context.GetRootObject(path.Parts[0], out rootFound);
+      
+      if(!rootFound)
+      {
+        throw new FormatException("The context does not contain a root object for the beginning of this path.");
+      }
+      
+      if(path.Parts.Count == 1)
+      {
+        output = rootReference;
+      }
+      else
+      {
+        output = EvaluatePath(path, 1, rootReference);
+      }
+      
+      return output;
+    }
+    
+    /// <summary>
+    /// <para>Overloaded.  Evaluates a portion of a <see cref="TalesPath"/> to an object reference.</para>
+    /// </summary>
+    /// <param name="path">
+    /// A <see cref="TalesPath"/>
+    /// </param>
+    /// <param name="pathPosition">
+    /// A <see cref="System.Int32"/>
+    /// </param>
+    /// <param name="parentObject">
+    /// A <see cref="System.Object"/>
+    /// </param>
+    /// <returns>
+    /// A <see cref="System.Object"/>
+    /// </returns>
+    private object EvaluatePath(TalesPath path, int pathPosition, object parentObject)
+    {
+      object output = null, thisObject = null;
+      MemberInfo[] members;
+      MemberInfo applicableMember;
+      
+      if(pathPosition < path.Parts.Count)
+      {
+        if(parentObject == null)
+        {
+          throw new ArgumentNullException("currentObject");
+        }
+        
+        members = parentObject.GetType().GetMember(path.Parts[pathPosition]);
+        
+        if(members.Length == 0)
+        {
+          throw new FormatException(String.Format("Could not find member '{0}' within the path.",
+                                                  path.Parts[pathPosition]));
+        }
+        
+        // FIXME: Really we should be smarter about choosing a member here, but for now we just take the first one.
+        applicableMember = members[0];
+        
+        switch(applicableMember.MemberType)
+        {
+        case MemberTypes.Property:
+          PropertyInfo property = applicableMember as PropertyInfo;
+          if(!property.CanRead || !property.GetGetMethod().IsPublic)
+          {
+            throw new NotSupportedException("Property is not readable");
+          }
+          thisObject = property.GetValue(parentObject, null);
+          break;
+        case MemberTypes.Field:
+          FieldInfo field = applicableMember as FieldInfo;
+          if(!field.IsPublic)
+          {
+            throw new NotSupportedException("Field is not readable");
+          }
+          thisObject = field.GetValue(parentObject);
+          break;
+        case MemberTypes.Method:
+          throw new NotImplementedException("Methods aren't supported yet");
+        default:
+          throw new NotSupportedException(String.Format("Unsupported member type: '{0}'",
+                                                        applicableMember.MemberType.ToString()));
+        }
+        
+        pathPosition ++;
+        output = EvaluatePath(path, pathPosition, thisObject);
+      }
+      else
+      {
+        output = parentObject;
       }
       
       return output;
