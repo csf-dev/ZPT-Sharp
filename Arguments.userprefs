@@ -6,12 +6,7 @@
   <MonoDevelop.Ide.Workbench ctype="Workbench">
     <Pads>
       <Pad Id="ProjectPad">
-        <State expanded="True">
-          <Node name="Commandline" expanded="True">
-            <Node name="UnixParameters.cs" selected="True" />
-          </Node>
-          <Node name="Test.Commandline" expanded="True" />
-        </State>
+
       </Pad>
       <Pad Id="ClassPad">
         <State expanded="True" selected="True">
@@ -27,8 +22,7 @@
         <State expanded="True">
           <Node name="Test.Commandline" expanded="True">
             <Node name="Test" expanded="True">
-              <Node name="Commandline" expanded="True">
-                <Node name="TestUnixParameters" expanded="True" selected="True" />
+              <Node name="CraigFowler" expanded="True">
               </Node>
             </Node>
           </Node>

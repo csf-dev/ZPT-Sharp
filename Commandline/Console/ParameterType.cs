@@ -1,7 +1,7 @@
 
 using System;
 
-namespace CraigFowler
+namespace CraigFowler.Console
 {
   public enum ParameterType : int
   {

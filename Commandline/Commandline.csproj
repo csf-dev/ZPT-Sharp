@@ -32,11 +32,11 @@
     <Reference Include="System" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ParameterDefinition.cs" />
-    <Compile Include="CommandlineParameterProcessor.cs" />
-    <Compile Include="ParameterStyle.cs" />
-    <Compile Include="ParameterProcessorBase.cs" />
-    <Compile Include="ParameterType.cs" />
-    <Compile Include="UnixParameters.cs" />
+    <Compile Include="Console\CommandlineParameterProcessor.cs" />
+    <Compile Include="Console\ParameterDefinition.cs" />
+    <Compile Include="Console\ParameterProcessorBase.cs" />
+    <Compile Include="Console\ParameterStyle.cs" />
+    <Compile Include="Console\ParameterType.cs" />
+    <Compile Include="Console\UnixParameters.cs" />
   </ItemGroup>
 </Project>

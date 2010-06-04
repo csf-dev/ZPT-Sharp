@@ -2,7 +2,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace CraigFowler
+namespace CraigFowler.Console
 {
   public abstract class ParameterProcessorBase
   {

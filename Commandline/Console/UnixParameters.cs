@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 
-namespace CraigFowler
+namespace CraigFowler.Console
 {
   public class UnixParameters : ParameterProcessorBase
   {
