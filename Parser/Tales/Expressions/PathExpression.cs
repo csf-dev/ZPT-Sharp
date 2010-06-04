@@ -201,34 +201,46 @@ namespace CraigFowler.Web.ZPT.Tales.Expressions
       {
         currentMember = SelectMember(parentObject, path.Parts[position]);
         
-        /* FIXME: This needs refactoring - probably splitting into two private methods.
-         * One gets values from fields, the other invokes and gets return values from methods.
-         * We can handle properties (and parameterised properties) with the 'methods' handler, because we can get their
-         * getter methods using reflection.
-         */
         switch(currentMember.MemberType)
         {
         case MemberTypes.Property:
           PropertyInfo property = currentMember as PropertyInfo;
-          if(!property.CanRead || !property.GetGetMethod().IsPublic)
+          if(property.CanRead)
           {
-            throw new NotSupportedException("Property is not readable");
+            thisObject = InvokeMethod(property.GetGetMethod(), parentObject, path, ref position);
           }
-          thisObject = property.GetValue(parentObject, null);
+          else
+          {
+            TalesException ex = new TalesException("Cannot traverse a non-readable property.");
+            ex.Data.Add("member", currentMember);
+            ex.Data.Add("target type", parentObject.GetType());
+            throw ex;
+          }
+          break;
+        case MemberTypes.Method:
+          MethodInfo method = currentMember as MethodInfo;
+          thisObject = InvokeMethod(method, parentObject, path, ref position);
           break;
         case MemberTypes.Field:
           FieldInfo field = currentMember as FieldInfo;
-          if(!field.IsPublic)
+          if(field.IsPublic)
           {
-            throw new NotSupportedException("Field is not readable");
+            thisObject = field.GetValue(parentObject);
           }
-          thisObject = field.GetValue(parentObject);
+          else
+          {
+            TalesException ex = new TalesException("Cannot traverse a non-readable field.");
+            ex.Data.Add("member", currentMember);
+            ex.Data.Add("target type", parentObject.GetType());
+            throw ex;
+          }
           break;
-        case MemberTypes.Method:
-          throw new NotImplementedException("Methods aren't supported yet");
         default:
-          throw new NotSupportedException(String.Format("Unsupported member type: '{0}'",
-                                                        currentMember.MemberType.ToString()));
+          TalesException ex = new TalesException("The member type encountered whilst traversing the path expression " +
+                                                 "is not supported.");
+          ex.Data.Add("member", currentMember);
+          ex.Data.Add("target type", parentObject.GetType());
+          throw ex;
         }
         
         // And now we recurse into ourself, traversing another piece of the path each time we go.
@@ -291,6 +303,60 @@ namespace CraigFowler.Web.ZPT.Tales.Expressions
       }
       
       return members[0];
+    }
+    
+    /// <summary>
+    /// <para>Invokes the given method with parameters (if applicable) and returns the value.</para>
+    /// </summary>
+    /// <param name="method">
+    /// A <see cref="MethodInfo"/>
+    /// </param>
+    /// <param name="targetObject">
+    /// A <see cref="System.Object"/>
+    /// </param>
+    /// <param name="path">
+    /// A <see cref="TalesPath"/>
+    /// </param>
+    /// <param name="basePosition">
+    /// A <see cref="System.Int32"/>
+    /// </param>
+    /// <returns>
+    /// A <see cref="System.Object"/>
+    /// </returns>
+    private object InvokeMethod(MethodInfo method, object targetObject, TalesPath path, ref int basePosition)
+    {
+      object[] parameterValues = new object[method.GetParameters().Length];
+      
+      if(method.ReturnType == typeof(void))
+      {
+        ArgumentOutOfRangeException ex;
+        ex = new ArgumentOutOfRangeException("Cannot invoke and traverse a method with a void return type.");
+        ex.Data.Add("method name", method.Name);
+        ex.Data.Add("target type", targetObject.GetType());
+        throw ex;
+      }
+      
+      // Extract all of the parameter information from the path (where applicable)
+      for(int i = 0; i < parameterValues.Length; i++)
+      {
+        if(basePosition +1 >= path.Parts.Count)
+        {
+          IndexOutOfRangeException ex;
+          ex = new IndexOutOfRangeException("Parameters to the given method require more path pieces than are " +
+                                            "available.");
+          ex.Data.Add("parameter count", parameterValues.Length);
+          ex.Data.Add("method name", method.Name);
+          ex.Data.Add("target type", targetObject.GetType());
+          throw ex;
+        }
+        else
+        {
+          basePosition ++;
+          parameterValues[i] = path.Parts[basePosition];
+        }
+      }
+      
+      return method.Invoke(targetObject, parameterValues);
     }
     
     #endregion

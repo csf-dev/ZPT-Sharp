@@ -42,5 +42,26 @@ namespace Test.CraigFowler.Web.ZPT.Tales
       testInt = (int) testObj;
       Assert.AreEqual(2, testInt, "Test integer has correct value");
     }
+    
+    [Test]
+    [Ignore("This test is screwed up because of ambiguity between the object and a parameterised property")]
+    public void TestParsePathExpressionWithIndexedProperty()
+    {
+      MockObject mock = new MockObject(true);
+      TalesContext context = new TalesContext();
+      TalesExpression expression = context.CreateExpression("mock/InnerObject/IntegerValue");
+      object testObj;
+      int testInt;
+      
+      mock.InnerObject.IntegerValue = 2;
+      
+      context.Aliases.Add("mock", mock);
+      
+      testObj = expression.GetValue();
+      
+      Assert.IsInstanceOfType(typeof(Int32), testObj, "Test object is correct type");
+      testInt = (int) testObj;
+      Assert.AreEqual(2, testInt, "Test integer has correct value");
+    }
   }
 }
