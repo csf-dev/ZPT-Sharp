@@ -119,6 +119,29 @@ namespace CraigFowler.Web.ZPT.Tales
       return String.Join(PARTS_SEPARATOR.ToString(), this.Parts.ToArray(), 0, partCount);
     }
     
+    public override bool Equals (object obj)
+    {
+      bool output;
+      
+      if(obj != null && obj is TalesPath)
+      {
+        output = ((TalesPath) obj).Text == this.Text;
+      }
+      else
+      {
+        output = false;
+      }
+      
+      return output;
+    }
+    
+    public override int GetHashCode ()
+    {
+      return (this.Text != null)? this.Text.GetHashCode() : "{NULL PATH}".GetHashCode();
+    }
+
+
+    
     #endregion
     
     #region private methods
@@ -139,9 +162,13 @@ namespace CraigFowler.Web.ZPT.Tales
     /// </exception>
     private List<string> ExtractPathParts(string path)
     {
+      string[] rawParts;
       List<string> output = new List<string>();
       
-      foreach(string part in path.Split(new char[] { PARTS_SEPARATOR }))
+      // In case the input is null then we create zero parts
+      rawParts = (path == null)? new string[0] : path.Split(new char[] { PARTS_SEPARATOR });
+      
+      foreach(string part in rawParts)
       {
         if(String.IsNullOrEmpty(part))
         {

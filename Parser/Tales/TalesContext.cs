@@ -21,6 +21,7 @@
 
 using System;
 using System.Collections.Generic;
+using CraigFowler.Web.ZPT.Tales.Exceptions;
 
 namespace CraigFowler.Web.ZPT.Tales
 {
@@ -204,6 +205,7 @@ namespace CraigFowler.Web.ZPT.Tales
       object output;
       Dictionary<string,object> definitions = this.GetAliases();
       
+      // Quick sanity-check of the parameter
       if(identifier == null)
       {
         throw new ArgumentNullException("identifier");
@@ -212,7 +214,9 @@ namespace CraigFowler.Web.ZPT.Tales
       {
         throw new ArgumentOutOfRangeException("identifier", "The identifier must not be an empty string.");
       }
-      else if(identifier == CONTEXT_ROOT_REFERENCE)
+      
+      // Now find the relevant object that the identifier refers to
+      if(identifier == CONTEXT_ROOT_REFERENCE)
       {
         output = this.RootContexts;
       }
@@ -226,8 +230,7 @@ namespace CraigFowler.Web.ZPT.Tales
       }
       else
       {
-        throw new ArgumentOutOfRangeException("identifier",
-                                              "No root object can be found matching the given identifier.");
+        throw new RootObjectNotFoundException(identifier);
       }
       
       return output;

@@ -350,7 +350,7 @@ namespace CraigFowler.Web.ZPT.Tales
         output = new StringExpression(expression, context);
         break;
       default:
-        throw new FormatException("Could parse thes expression into a recognised type.");
+        throw new FormatException("Could not determine the type of the expression.");
       }
       
       output.ExpressionType = type;
@@ -382,7 +382,7 @@ namespace CraigFowler.Web.ZPT.Tales
       }
       else if(input == String.Empty)
       {
-        throw new ArgumentOutOfRangeException("input", "Expression may not be empty");
+        throw new ArgumentOutOfRangeException("input", "Empty expressions are not permitted");
       }
       
       prefix = GetExpressionPrefix(input);

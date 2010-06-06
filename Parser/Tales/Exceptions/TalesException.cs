@@ -21,7 +21,7 @@
 
 using System;
 
-namespace CraigFowler.Web.ZPT.Tales
+namespace CraigFowler.Web.ZPT.Tales.Exceptions
 {
   /// <summary>
   /// <para>Base class for exceptions encountered whilst parsing and evaluating TALES expressions.</para>

@@ -4,6 +4,7 @@ using NUnit.Framework;
 using CraigFowler.Web.ZPT.Tales;
 using CraigFowler.Web.ZPT.Tales.Expressions;
 using CraigFowler.Web.ZPT.Mocks;
+using CraigFowler.Web.ZPT.Tales.Exceptions;
 
 namespace Test.CraigFowler.Web.ZPT.Tales
 {
@@ -15,6 +16,7 @@ namespace Test.CraigFowler.Web.ZPT.Tales
     
     private MockObject mock;
     private MockObjectWithConflict conflict;
+    private MockWithoutIndexer noIndexer;
     
     #endregion
     
@@ -27,6 +29,16 @@ namespace Test.CraigFowler.Web.ZPT.Tales
       }
       set {
         mock = value;
+      }
+    }
+    
+    protected MockWithoutIndexer MockWithoutIndexer
+    {
+      get {
+        return noIndexer;
+      }
+      set {
+        noIndexer = value;
       }
     }
     
@@ -49,11 +61,12 @@ namespace Test.CraigFowler.Web.ZPT.Tales
     {
       this.Mock = new MockObject(true);
       this.MockWithConflict = new MockObjectWithConflict();
+      this.MockWithoutIndexer = new MockWithoutIndexer();
     }
     
     #endregion
     
-    #region tests
+    #region success tests
     
     [Test]
     public void TestParseSimplePathExpression()
@@ -69,6 +82,28 @@ namespace Test.CraigFowler.Web.ZPT.Tales
       context.Aliases.Add("mock", this.Mock);
       
       expression = context.CreateExpression("mock/InnerObject/IntegerValue");
+      
+      testObj = expression.GetValue();
+      
+      Assert.IsInstanceOfType(typeof(Int32), testObj, "Test object is correct type");
+      testInt = (int) testObj;
+      Assert.AreEqual(2, testInt, "Test integer has correct value");
+    }
+    
+    [Test]
+    public void TestParseTwoPathExpressions()
+    {
+      TalesContext context;
+      TalesExpression expression;
+      object testObj;
+      int testInt;
+      
+      this.Mock.InnerObject.IntegerValue = 2;
+      
+      context = new TalesContext();
+      context.Aliases.Add("mock", this.Mock);
+      
+      expression = context.CreateExpression("zzinvalid/bar | mock/InnerObject/IntegerValue");
       
       testObj = expression.GetValue();
       
@@ -97,28 +132,6 @@ namespace Test.CraigFowler.Web.ZPT.Tales
       Assert.IsInstanceOfType(typeof(Int32), testObj, "Test object is correct type");
       testInt = (int) testObj;
       Assert.AreEqual(2, testInt, "Test integer has correct value");
-    }
-    
-    [Test]
-    [ExpectedException(ExceptionType = typeof(DuplicateMemberException),
-                       ExpectedMessage = "The given identifier pointed to an ambiguous member reference.")]
-    public void TestDuplicateAlias()
-    {
-      TalesContext context;
-      TalesExpression expression;
-      object testObj;
-      
-      context = new TalesContext();
-      context.Aliases.Add("mock", this.MockWithConflict);
-      
-      expression = context.CreateExpression("mock/Duplicate");
-      
-      testObj = expression.GetValue();
-      
-      Console.WriteLine ("TestDuplicateAlias has failed, the object it found was: {0}", testObj);
-      
-      Assert.Fail("If we reach this point then the test failed");
-      Assert.IsNull(testObj, "Not really a test, just prevents a compiler warning");
     }
     
     [Test]
@@ -204,6 +217,175 @@ namespace Test.CraigFowler.Web.ZPT.Tales
       Assert.IsInstanceOfType(typeof(MockObject), testObj, "Test object is correct type");
       innerObj = (MockObject) testObj;
       Assert.AreEqual(20, innerObj.IntegerValue, "Test object is correct");
+    }
+    
+    #endregion
+    
+    #region failure tests
+    
+    [Test]
+    [ExpectedException(ExceptionType = typeof(TraversalException),
+                       ExpectedMessage = "Could not traverse any of the given paths.")]
+    public void TestDuplicateAlias()
+    {
+      TalesContext context;
+      TalesExpression expression;
+      object testObj;
+      
+      context = new TalesContext();
+      context.Aliases.Add("mock", this.MockWithConflict);
+      
+      expression = context.CreateExpression("mock/Duplicate");
+      
+      testObj = expression.GetValue();
+      
+      Console.WriteLine ("TestDuplicateAlias has failed, the object it found was: {0}", testObj);
+      
+      Assert.Fail("If we reach this point then the test failed");
+      Assert.IsNull(testObj, "Not really a test, just prevents a compiler warning");
+    }
+    
+    [Test]
+    [ExpectedException(ExceptionType = typeof(TraversalException))]
+    public void TestNonExistantRootObject()
+    {
+      TalesContext context;
+      TalesExpression expression;
+      object testObj;
+      
+      context = new TalesContext();
+      expression = context.CreateExpression("foo/bar");
+      
+      testObj = expression.GetValue();
+      Assert.Fail("If the test reaches this point then we failed");
+      Assert.IsNull(testObj, "Not a real test, but prevents a compiler warning");
+    }
+    
+    [Test]
+    [ExpectedException(ExceptionType = typeof(TraversalException))]
+    public void TestEmptyPathString()
+    {
+      TalesContext context;
+      TalesExpression expression;
+      object testObj;
+      
+      context = new TalesContext();
+      expression = context.CreateExpression("path:");
+      
+      try
+      {
+        testObj = expression.GetValue();
+      }
+      catch(TraversalException ex)
+      {
+        Assert.AreEqual(1, ex.Attempts.Count, "Correct number of attempts made");
+        Assert.IsInstanceOfType(typeof(PathInvalidException),
+                                ex.Attempts[new TalesPath("")],
+                                "First failed attempt is correct type");
+        throw;
+      }
+      
+      Assert.Fail("If the test reaches this point then we failed");
+      Assert.IsNull(testObj, "Not a real test, but prevents a compiler warning");
+    }
+    
+    [Test]
+    [ExpectedException(ExceptionType = typeof(TraversalException))]
+    public void TestParseTwoInvalidPathExpressions()
+    {
+      TalesContext context;
+      TalesExpression expression;
+      object testObj;
+      
+      this.Mock.InnerObject.IntegerValue = 2;
+      
+      context = new TalesContext();
+      context.Aliases.Add("mock", this.Mock);
+      
+      expression = context.CreateExpression("zzinvalid/bar | foo/baz");
+      
+      try
+      {
+        testObj = expression.GetValue();
+      }
+      catch(TraversalException ex)
+      {
+        Assert.AreEqual(2, ex.Attempts.Count, "Correct number of attempts made");
+        Assert.IsInstanceOfType(typeof(RootObjectNotFoundException),
+                                ex.Attempts[new TalesPath("zzinvalid/bar")],
+                                "First failed attempt is correct type");
+        Assert.IsTrue(ex.PermanentError, "This problem is permanent because it relates to the root of the context");
+        throw;
+      }
+      
+      Assert.Fail("If the test reaches this point then we failed");
+      Assert.IsNull(testObj, "Not a real test, but prevents a compiler warning");
+    }
+    
+    [Test]
+    [ExpectedException(ExceptionType = typeof(TraversalException))]
+    public void TestParseTwoInvalidPathExpressionsNonPermanent()
+    {
+      TalesContext context;
+      TalesExpression expression;
+      object testObj;
+      
+      this.Mock.InnerObject.IntegerValue = 2;
+      
+      context = new TalesContext();
+      context.Aliases.Add("mock", this.Mock);
+      
+      expression = context.CreateExpression("zzinvalid/bar | mock/nonexistant/reallynonexistant");
+      
+      try
+      {
+        testObj = expression.GetValue();
+      }
+      catch(TraversalException ex)
+      {
+        Assert.AreEqual(2, ex.Attempts.Count, "Correct number of attempts made");
+        Assert.IsInstanceOfType(typeof(PathException),
+                                ex.Attempts[new TalesPath("mock/nonexistant/reallynonexistant")],
+                                "Second failed attempt is correct type");
+        Assert.IsFalse(ex.PermanentError, "This problem is not permanent because it's a dictionary.");
+        throw;
+      }
+      
+      Assert.Fail("If the test reaches this point then we failed");
+      Assert.IsNull(testObj, "Not a real test, but prevents a compiler warning");
+    }
+    
+    [Test]
+    [ExpectedException(ExceptionType = typeof(TraversalException))]
+    public void TestParseTwoInvalidPathExpressionsPermanent()
+    {
+      TalesContext context;
+      TalesExpression expression;
+      object testObj;
+      
+      this.Mock.InnerObject.IntegerValue = 2;
+      
+      context = new TalesContext();
+      context.Aliases.Add("mock", this.MockWithoutIndexer);
+      
+      expression = context.CreateExpression("zzinvalid/bar | mock/invalid");
+      
+      try
+      {
+        testObj = expression.GetValue();
+      }
+      catch(TraversalException ex)
+      {
+        Assert.AreEqual(2, ex.Attempts.Count, "Correct number of attempts made");
+        Assert.IsInstanceOfType(typeof(PathInvalidException),
+                                ex.Attempts[new TalesPath("mock/invalid")],
+                                "Second failed attempt is correct type");
+        Assert.IsTrue(ex.PermanentError, "Permanent because there was no way that the given member could exist.");
+        throw;
+      }
+      
+      Assert.Fail("If the test reaches this point then we failed");
+      Assert.IsNull(testObj, "Not a real test, but prevents a compiler warning");
     }
     
     #endregion

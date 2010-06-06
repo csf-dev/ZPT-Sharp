@@ -48,6 +48,7 @@
     <Compile Include="Tales\TalesIntegrationTests.cs" />
     <Compile Include="Mocks\TestMockObject.cs" />
     <Compile Include="Mocks\MockObjectWithConflict.cs" />
+    <Compile Include="Mocks\MockWithoutIndexer.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Parser\Parser.csproj">

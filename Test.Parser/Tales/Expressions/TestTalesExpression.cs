@@ -92,5 +92,31 @@ namespace Test.CraigFowler.Web.ZPT.Tales.Expressions
                       ((InverseBooleanExpression) expression).InnerExpression.ExpressionBody,
                       "Inner expression has correct body");
     }
+    
+    [Test]
+    [ExpectedException(ExceptionType = typeof(ArgumentOutOfRangeException))]
+    public void TestEmptyExpression()
+    {
+      TalesContext context;
+      TalesExpression expression;
+      
+      context = new TalesContext();
+      expression = context.CreateExpression("");
+      Assert.Fail("If the test reaches this point then we failed");
+      Assert.IsNull(expression, "Not a real test, but prevents a compiler warning");
+    }
+    
+    [Test]
+    [ExpectedException(ExceptionType = typeof(ArgumentNullException))]
+    public void TestNullExpression()
+    {
+      TalesContext context;
+      TalesExpression expression;
+      
+      context = new TalesContext();
+      expression = context.CreateExpression(null);
+      Assert.Fail("If the test reaches this point then we failed");
+      Assert.IsNull(expression, "Not a real test, but prevents a compiler warning");
+    }
   }
 }

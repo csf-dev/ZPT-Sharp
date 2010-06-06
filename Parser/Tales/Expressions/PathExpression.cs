@@ -22,6 +22,7 @@
 using System;
 using System.Collections.Generic;
 using System.Reflection;
+using CraigFowler.Web.ZPT.Tales.Exceptions;
 
 namespace CraigFowler.Web.ZPT.Tales.Expressions
 {
@@ -72,18 +73,32 @@ namespace CraigFowler.Web.ZPT.Tales.Expressions
     {
       bool success = false;
       object output = null;
+      TraversalException potentialException;
+      
+      /* We construct this exception, but we don't know if we are going to throw it yet.  We only throw it if the
+       * whole traversal process is a failure.
+       */
+      potentialException = new TraversalException();
       
       for(int i = 0;
           success == false && i < this.Paths.Count;
           i++)
       {
-        output = EvaluatePath(this.Paths[i]);
-        success = true;
+        try
+        {
+          output = EvaluatePath(this.Paths[i]);
+          success = true;
+        }
+        catch(TalesException ex)
+        {
+          potentialException.Attempts.Add(this.Paths[i], ex);
+        }
       }
       
+      // If we never succeded in evaluating any of the paths we were given then throw the traversal exception.
       if(!success)
       {
-        throw new FormatException("Could not evaluate any of the given paths.");
+        throw potentialException;
       }
       
       return output;
@@ -141,11 +156,11 @@ namespace CraigFowler.Web.ZPT.Tales.Expressions
       // Quick sanity check on the path parameter
       if(path == null)
       {
-        throw new ArgumentNullException("path");
+        throw new PathInvalidException(path, "The path must not be null.");
       }
       else if(path.Parts.Count == 0)
       {
-        throw new ArgumentOutOfRangeException("path", "The path has no parts.");
+        throw new PathInvalidException(path, "The path has no parts.");
       }
       
       // Make an attempt to get a reference to the root of the path expression from the current context
@@ -155,12 +170,7 @@ namespace CraigFowler.Web.ZPT.Tales.Expressions
       }
       catch(ArgumentException ex)
       {
-        TalesException talesException;
-        talesException = new TalesException("Could not fetch the root object of the path from the current context",
-                                            ex);
-        talesException.Data.Add("path", path);
-        talesException.Data.Add("context", this.Context);
-        throw talesException;
+        throw new PathInvalidException(path, ex);
       }
       
       // Now traverse the parts of the path
@@ -203,7 +213,19 @@ namespace CraigFowler.Web.ZPT.Tales.Expressions
       
       if(position < path.Parts.Count)
       {
-        currentMember = SelectMember(parentObject, path.Parts[position], out indexer);
+        try
+        {
+          currentMember = SelectMember(parentObject, path.Parts[position], out indexer);
+        }
+        catch(ArgumentException ex)
+        {
+          throw new PathException(path, ex);
+        }
+        
+        if(currentMember == null)
+        {
+          throw new PathInvalidException(path, "No member could be selected using the current path.");
+        }
         
         switch(currentMember.MemberType)
         {

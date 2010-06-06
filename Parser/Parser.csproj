@@ -42,14 +42,19 @@
     <Compile Include="Tales\TalesPath.cs" />
     <Compile Include="Tales\ExpressionType.cs" />
     <Compile Include="Tales\TalesExpression.cs" />
-    <Compile Include="Tales\TalesException.cs" />
     <Compile Include="Tales\TalesAliasAttribute.cs" />
-    <Compile Include="Tales\DuplicateMemberException.cs" />
+    <Compile Include="Tales\Exceptions\DuplicateMemberException.cs" />
+    <Compile Include="Tales\Exceptions\RootObjectNotFoundException.cs" />
+    <Compile Include="Tales\Exceptions\TalesException.cs" />
+    <Compile Include="Tales\Exceptions\InvalidPathException.cs" />
+    <Compile Include="Tales\Exceptions\TraversalException.cs" />
+    <Compile Include="Tales\Exceptions\PathException.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
     <Folder Include="Tales\" />
     <Folder Include="Tales\Expressions\" />
+    <Folder Include="Tales\Exceptions\" />
   </ItemGroup>
   <ProjectExtensions>
     <MonoDevelop>
