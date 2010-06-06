@@ -32,8 +32,13 @@ namespace CraigFowler.Web.ZPT.Tales.Expressions
   {
     #region constants
     
-    private const char PATH_SEPARATOR   = '|';
-    public const string Prefix          = "path:";
+    private const char PATH_SEPARATOR             = '|';
+    private const string INDEXER_IDENTIFIER       = "Item";
+    
+    /// <summary>
+    /// <para>The prefix used to indicate that the current expression is a path expression.</para>
+    /// </summary>
+    public const string Prefix                    = "path:";
     
     #endregion
     
@@ -68,17 +73,12 @@ namespace CraigFowler.Web.ZPT.Tales.Expressions
       bool success = false;
       object output = null;
       
-      for(int i = 0; !success && i < this.Paths.Count; i++)
+      for(int i = 0;
+          success == false && i < this.Paths.Count;
+          i++)
       {
-        try
-        {
-          output = EvaluatePath(this.Paths[i]);
-          success = true;
-        }
-        catch(Exception)
-        {
-          success = false;
-        }
+        output = EvaluatePath(this.Paths[i]);
+        success = true;
       }
       
       if(!success)
@@ -138,6 +138,7 @@ namespace CraigFowler.Web.ZPT.Tales.Expressions
     {
       object rootReference, output;
       
+      // Quick sanity check on the path parameter
       if(path == null)
       {
         throw new ArgumentNullException("path");
@@ -147,6 +148,7 @@ namespace CraigFowler.Web.ZPT.Tales.Expressions
         throw new ArgumentOutOfRangeException("path", "The path has no parts.");
       }
       
+      // Make an attempt to get a reference to the root of the path expression from the current context
       try
       {
         rootReference = this.Context.GetRootObject(path.Parts[0]);
@@ -161,6 +163,7 @@ namespace CraigFowler.Web.ZPT.Tales.Expressions
         throw talesException;
       }
       
+      // Now traverse the parts of the path
       if(path.Parts.Count == 1)
       {
         output = rootReference;
@@ -196,10 +199,11 @@ namespace CraigFowler.Web.ZPT.Tales.Expressions
     {
       object output = null, thisObject = null;
       MemberInfo currentMember;
+      bool indexer;
       
       if(position < path.Parts.Count)
       {
-        currentMember = SelectMember(parentObject, path.Parts[position]);
+        currentMember = SelectMember(parentObject, path.Parts[position], out indexer);
         
         switch(currentMember.MemberType)
         {
@@ -207,7 +211,7 @@ namespace CraigFowler.Web.ZPT.Tales.Expressions
           PropertyInfo property = currentMember as PropertyInfo;
           if(property.CanRead)
           {
-            thisObject = InvokeMethod(property.GetGetMethod(), parentObject, path, ref position);
+            thisObject = InvokeMethod(property.GetGetMethod(), parentObject, path, ref position, false);
           }
           else
           {
@@ -219,7 +223,7 @@ namespace CraigFowler.Web.ZPT.Tales.Expressions
           break;
         case MemberTypes.Method:
           MethodInfo method = currentMember as MethodInfo;
-          thisObject = InvokeMethod(method, parentObject, path, ref position);
+          thisObject = InvokeMethod(method, parentObject, path, ref position, indexer);
           break;
         case MemberTypes.Field:
           FieldInfo field = currentMember as FieldInfo;
@@ -269,10 +273,12 @@ namespace CraigFowler.Web.ZPT.Tales.Expressions
     /// <returns>
     /// A <see cref="MemberInfo"/>
     /// </returns>
-    private MemberInfo SelectMember(object containingObject, string memberIdentifier)
+    private MemberInfo SelectMember(object containingObject, string memberIdentifier, out bool isIndexer)
     {
-      MemberInfo[] members;
+      MemberInfo foundFromAlias = null, foundFromName = null, foundFromIndexer = null, output = null;
       Type containingType;
+      object[] attributes;
+      MemberInfo[] members;
       
       // Quick sanity-check for some impossible situations
       if(containingObject == null)
@@ -284,25 +290,83 @@ namespace CraigFowler.Web.ZPT.Tales.Expressions
         throw new ArgumentException("Member identifier may not be null or empty.", "memberIdentifier");
       }
       
+      isIndexer = false;
+      
+      // Get the type of the object that we were passed
       containingType = containingObject.GetType();
-      members = containingType.GetMember(memberIdentifier);
       
-      if(members.Length == 0)
+      // Perform a linear search through the type's members to find one with the alias we are looking for.
+      foreach(MemberInfo member in containingType.GetMembers())
       {
-        TalesException ex = new TalesException("No members of the target type match the given identifier.");
-        ex.Data.Add("identifier", memberIdentifier);
-        ex.Data.Add("target type", containingType);
-        throw ex;
-      }
-      else if(members.Length != 1)
-      {
-        TalesException ex = new TalesException("Ambiguous reference to more than one member of the target type.");
-        ex.Data.Add("identifier", memberIdentifier);
-        ex.Data.Add("target type", containingType);
-        throw ex;
+        attributes = member.GetCustomAttributes(typeof(TalesAliasAttribute), true);
+        
+        foreach(object attribute in attributes)
+        {
+          if(((TalesAliasAttribute) attribute).Alias == memberIdentifier)
+          {
+            if(foundFromAlias == null)
+            {
+              foundFromAlias = member;
+            }
+            else
+            {
+              TalesException ex = new DuplicateMemberException(memberIdentifier, true);
+              ex.Data.Add("target type", containingType);
+              throw ex;
+            }
+          }
+        }
       }
       
-      return members[0];
+      // If we haven't found a member yet then try picking one using its name
+      if(foundFromAlias == null)
+      {
+        members = containingType.GetMember(memberIdentifier);
+      
+        if(members.Length == 1)
+        {
+          foundFromName = members[0];
+        }
+        else if(members.Length > 1)
+        {
+          TalesException ex = new DuplicateMemberException(memberIdentifier, false);
+          ex.Data.Add("target type", containingType);
+          throw ex;
+        }
+      }
+      
+      // If we still haven't found a member then if this happens to have an indexer then try that!
+      if(foundFromAlias == null && foundFromName == null)
+      {
+        members = containingType.GetMember(INDEXER_IDENTIFIER);
+        
+        if(members.Length == 1 && members[0].MemberType == MemberTypes.Property)
+        {
+          PropertyInfo indexer = members[0] as PropertyInfo;
+          MethodInfo indexerGet = indexer.GetGetMethod();
+          if(indexerGet.GetParameters().Length == 1)
+          {
+            foundFromIndexer = indexerGet;
+          }
+        }
+      }
+      
+      // Decide what we are returning
+      if(foundFromAlias != null)
+      {
+        output = foundFromAlias;
+      }
+      else if(foundFromName != null)
+      {
+        output = foundFromName;
+      }
+      else if(foundFromIndexer != null)
+      {
+        output = foundFromIndexer;
+        isIndexer = true;
+      }
+      
+      return output;
     }
     
     /// <summary>
@@ -323,9 +387,14 @@ namespace CraigFowler.Web.ZPT.Tales.Expressions
     /// <returns>
     /// A <see cref="System.Object"/>
     /// </returns>
-    private object InvokeMethod(MethodInfo method, object targetObject, TalesPath path, ref int basePosition)
+    private object InvokeMethod(MethodInfo method,
+                                object targetObject,
+                                TalesPath path,
+                                ref int basePosition,
+                                bool useCurrentPosition)
     {
       object[] parameterValues = new object[method.GetParameters().Length];
+      int parameterPosition = useCurrentPosition? basePosition : basePosition +1;
       
       if(method.ReturnType == typeof(void))
       {
@@ -339,7 +408,7 @@ namespace CraigFowler.Web.ZPT.Tales.Expressions
       // Extract all of the parameter information from the path (where applicable)
       for(int i = 0; i < parameterValues.Length; i++)
       {
-        if(basePosition +1 >= path.Parts.Count)
+        if(parameterPosition >= path.Parts.Count)
         {
           IndexOutOfRangeException ex;
           ex = new IndexOutOfRangeException("Parameters to the given method require more path pieces than are " +
@@ -351,8 +420,8 @@ namespace CraigFowler.Web.ZPT.Tales.Expressions
         }
         else
         {
-          basePosition ++;
-          parameterValues[i] = path.Parts[basePosition];
+          parameterValues[i] = path.Parts[parameterPosition];
+          parameterPosition ++;
         }
       }
       

@@ -44,6 +44,7 @@
     <Compile Include="Tales\TalesExpression.cs" />
     <Compile Include="Tales\TalesException.cs" />
     <Compile Include="Tales\TalesAliasAttribute.cs" />
+    <Compile Include="Tales\DuplicateMemberException.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

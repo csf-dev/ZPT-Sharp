@@ -17,6 +17,14 @@ namespace CraigFowler.Web.ZPT.Mocks
     [TalesAlias("Duplicate")]
     public string OtherDuplicate;
     
+    public string this [string key]
+    {
+      get {
+        return "foo";
+      }
+      set { }
+    }
+    
     public MockObjectWithConflict()
     {
       this.SomeProperty = "foo";

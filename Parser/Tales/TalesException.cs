@@ -23,6 +23,9 @@ using System;
 
 namespace CraigFowler.Web.ZPT.Tales
 {
+  /// <summary>
+  /// <para>Base class for exceptions encountered whilst parsing and evaluating TALES expressions.</para>
+  /// </summary>
   public class TalesException : Exception
   {
     #region contants
@@ -32,7 +35,32 @@ namespace CraigFowler.Web.ZPT.Tales
     
     #endregion
     
+    #region fields
+    
+    private bool fatal;
+    
+    #endregion
+    
     #region properties
+    
+    /// <summary>
+    /// <para>
+    /// Gets and sets a value that indicates whether this exception indicates a permanent error in parsing the
+    /// expression.
+    /// </para>
+    /// <para>
+    /// In a permanent error, changing the values within the domain model will not help resolving the error.
+    /// </para>
+    /// </summary>
+    public virtual bool PermanentError
+    {
+      get {
+        return fatal;
+      }
+      protected set {
+        fatal = value;
+      }
+    }
     
     #endregion
     
@@ -44,7 +72,10 @@ namespace CraigFowler.Web.ZPT.Tales
     
     public TalesException(Exception inner) : this(DEFAULT_MESSAGE, inner) {}
     
-    public TalesException(string message, Exception inner) : base(message, inner) {}
+    public TalesException(string message, Exception inner) : base(message, inner)
+    {
+      this.PermanentError = true;
+    }
     
     #endregion
   }

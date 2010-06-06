@@ -100,7 +100,8 @@ namespace Test.CraigFowler.Web.ZPT.Tales
     }
     
     [Test]
-    [ExpectedException(ExceptionType = typeof(TalesException), ExpectedMessage = "Encountered duplicate TALES alias")]
+    [ExpectedException(ExceptionType = typeof(DuplicateMemberException),
+                       ExpectedMessage = "The given identifier pointed to an ambiguous member reference.")]
     public void TestDuplicateAlias()
     {
       TalesContext context;
@@ -113,6 +114,9 @@ namespace Test.CraigFowler.Web.ZPT.Tales
       expression = context.CreateExpression("mock/Duplicate");
       
       testObj = expression.GetValue();
+      
+      Console.WriteLine ("TestDuplicateAlias has failed, the object it found was: {0}", testObj);
+      
       Assert.Fail("If we reach this point then the test failed");
       Assert.IsNull(testObj, "Not really a test, just prevents a compiler warning");
     }
