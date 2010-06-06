@@ -3,20 +3,12 @@
   <MonoDevelop.Ide.DebuggingService>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService>
-  <MonoDevelop.Ide.Workbench ActiveDocument="Test.Parser/Mocks/MockObject.cs" ctype="Workbench">
-    <Files>
-      <File FileName="Parser/Tales/Expressions/PathExpression.cs" Line="339" Column="82" />
-      <File FileName="Test.Parser/Tales/Expressions/TestPathExpression.cs" Line="10" Column="3" />
-      <File FileName="Test.Parser/Mocks/MockObject.cs" Line="62" Column="47" />
-      <File FileName="Test.Parser/Tales/TestTalesContext.cs" Line="39" Column="23" />
-    </Files>
+  <MonoDevelop.Ide.Workbench ctype="Workbench">
     <Pads>
       <Pad Id="ProjectPad">
         <State expanded="True">
           <Node name="Parser" expanded="True">
-            <Node name="Tales" expanded="True">
-              <Node name="Expressions" expanded="True" />
-            </Node>
+            <Node name="Tales" expanded="True" />
           </Node>
           <Node name="Test.Parser" expanded="True">
             <Node name="Mocks" expanded="True">
@@ -40,28 +32,12 @@
             <Node name="CraigFowler" expanded="True">
               <Node name="Web" expanded="True">
                 <Node name="ZPT" expanded="True">
-                  <Node name="Tales" expanded="True">
-                    <Node name="Expressions" expanded="True" />
-                  </Node>
+                  <Node name="Tales" expanded="True" />
                 </Node>
               </Node>
             </Node>
           </Node>
-          <Node name="Test.Parser" expanded="True">
-            <Node name="Test" expanded="True">
-              <Node name="CraigFowler" expanded="True">
-                <Node name="Web" expanded="True">
-                  <Node name="ZPT" expanded="True">
-                    <Node name="Mocks" expanded="True" />
-                    <Node name="Tales" expanded="True">
-                      <Node name="Expressions" expanded="True" />
-                      <Node name="Test.CraigFowler.Web.ZPT.Tales.TestTalesContext" expanded="True" selected="True" />
-                    </Node>
-                  </Node>
-                </Node>
-              </Node>
-            </Node>
-          </Node>
+          <Node name="Test.Parser" expanded="True" />
         </State>
       </Pad>
       <Pad Id="MonoDevelop.Debugger.WatchPad">

@@ -46,6 +46,8 @@
     <Compile Include="Tales\Expressions\TestPathExpression.cs" />
     <Compile Include="Tales\Expressions\TestTalesExpression.cs" />
     <Compile Include="Tales\TalesIntegrationTests.cs" />
+    <Compile Include="Mocks\TestMockObject.cs" />
+    <Compile Include="Mocks\MockObjectWithConflict.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Parser\Parser.csproj">

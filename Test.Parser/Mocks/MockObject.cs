@@ -1,8 +1,9 @@
 
 using System;
 using System.Collections.Generic;
+using CraigFowler.Web.ZPT.Tales;
 
-namespace Test.CraigFowler.Web.ZPT.Mocks
+namespace CraigFowler.Web.ZPT.Mocks
 {
   public class MockObject
   {
@@ -14,7 +15,9 @@ namespace Test.CraigFowler.Web.ZPT.Mocks
     
     #region public fields
     
+    [TalesAlias("inner")]
     public MockObject InnerObject;
+    
     public int IntegerValue;
     
     #endregion
@@ -37,7 +40,7 @@ namespace Test.CraigFowler.Web.ZPT.Mocks
         
         return output;
       }
-      private set {
+      set {
         if(dict.ContainsKey(key))
         {
           dict[key] = value;
@@ -51,6 +54,7 @@ namespace Test.CraigFowler.Web.ZPT.Mocks
     
     #endregion
     
+    #region constructors
     
     public MockObject() : this(false) {}
     
@@ -63,5 +67,7 @@ namespace Test.CraigFowler.Web.ZPT.Mocks
       this["foo"] = "bar";
       this["baz"] = "sample";
     }
+    
+    #endregion
   }
 }

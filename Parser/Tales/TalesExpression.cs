@@ -159,6 +159,12 @@ namespace CraigFowler.Web.ZPT.Tales
     
     #region private and abstract methods
     
+    /// <summary>
+    /// <para>Evauluates this expression and returns its value.</para>
+    /// </summary>
+    /// <returns>
+    /// A <see cref="System.Object"/>
+    /// </returns>
     public abstract object GetValue();
     
     /// <summary>

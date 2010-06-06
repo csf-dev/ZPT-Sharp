@@ -233,6 +233,17 @@ namespace CraigFowler.Web.ZPT.Tales
       return output;
     }
     
+    /// <summary>
+    /// <para>Creates and returns a new <see cref="TalesContext"/> using the current context as the parent.</para>
+    /// </summary>
+    /// <returns>
+    /// A <see cref="TalesContext"/>
+    /// </returns>
+    public TalesContext CreateChildContext()
+    {
+      return new TalesContext(this);
+    }
+    
     #endregion
     
     #region private methods
@@ -368,7 +379,7 @@ namespace CraigFowler.Web.ZPT.Tales
     /// <summary>
     /// <para>Overloaded.  Initialises this instance a given parent context.</para>
     /// </summary>
-    public TalesContext(TalesContext parent) : this()
+    private TalesContext(TalesContext parent) : this()
     {
       this.ParentContext = parent;
     }
