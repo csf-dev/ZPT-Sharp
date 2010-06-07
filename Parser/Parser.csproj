@@ -46,9 +46,9 @@
     <Compile Include="Tales\Exceptions\DuplicateMemberException.cs" />
     <Compile Include="Tales\Exceptions\RootObjectNotFoundException.cs" />
     <Compile Include="Tales\Exceptions\TalesException.cs" />
-    <Compile Include="Tales\Exceptions\InvalidPathException.cs" />
     <Compile Include="Tales\Exceptions\TraversalException.cs" />
     <Compile Include="Tales\Exceptions\PathException.cs" />
+    <Compile Include="Tales\Exceptions\PathInvalidException.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

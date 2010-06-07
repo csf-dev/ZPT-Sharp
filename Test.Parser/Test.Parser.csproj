@@ -49,6 +49,7 @@
     <Compile Include="Mocks\TestMockObject.cs" />
     <Compile Include="Mocks\MockObjectWithConflict.cs" />
     <Compile Include="Mocks\MockWithoutIndexer.cs" />
+    <Compile Include="Tales\Expressions\TestStringExpression.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Parser\Parser.csproj">

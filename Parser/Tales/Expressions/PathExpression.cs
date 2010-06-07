@@ -237,7 +237,7 @@ namespace CraigFowler.Web.ZPT.Tales.Expressions
           }
           else
           {
-            TalesException ex = new TalesException("Cannot traverse a non-readable property.");
+            TalesException ex = new PathInvalidException(path, "Cannot traverse a non-readable property.");
             ex.Data.Add("member", currentMember);
             ex.Data.Add("target type", parentObject.GetType());
             throw ex;
@@ -255,15 +255,16 @@ namespace CraigFowler.Web.ZPT.Tales.Expressions
           }
           else
           {
-            TalesException ex = new TalesException("Cannot traverse a non-readable field.");
+            TalesException ex = new PathInvalidException(path, "Cannot traverse a non-readable field.");
             ex.Data.Add("member", currentMember);
             ex.Data.Add("target type", parentObject.GetType());
             throw ex;
           }
           break;
         default:
-          TalesException ex = new TalesException("The member type encountered whilst traversing the path expression " +
-                                                 "is not supported.");
+          TalesException ex = new PathInvalidException(path,
+                                                       "Encountered an unsupported member type whilst " +
+                                                       "traversing the path.");
           ex.Data.Add("member", currentMember);
           ex.Data.Add("target type", parentObject.GetType());
           throw ex;
