@@ -261,6 +261,90 @@ namespace Test.CraigFowler.Web.ZPT.Tales
       Assert.AreEqual("Hello Craig, how are you?  The weather is sunny!", stringObj, "Test object is correct");
     }
     
+    [Test]
+    public void TestParsePathExpressionFromUnambiguousIndexer()
+    {
+      TalesContext context;
+      TalesExpression expression;
+      object testObj;
+      string testString;
+      
+      context = new TalesContext();
+      context.Aliases.Add("mock", this.Mock);
+      
+      expression = context.CreateExpression("mock/unambiguous/baz");
+      
+      try
+      {
+        testObj = expression.GetValue();
+      }
+      catch(TraversalException ex)
+      {
+        Console.WriteLine (ex);
+        
+        foreach(TalesException attempt in ex.Attempts.Values)
+        {
+          Console.WriteLine (attempt.ToString());
+          Console.WriteLine (attempt.Data["path"].ToString());
+        }
+        
+        throw;
+      }
+      
+      Assert.IsInstanceOfType(typeof(String), testObj, "Test object is correct type");
+      testString = (string) testObj;
+      Assert.AreEqual("sample", testString, "Test string has correct value");
+    }
+    
+    [Test]
+    public void TestEmptyPathString()
+    {
+      TalesContext context;
+      TalesExpression expression;
+      object testObj;
+      
+      context = new TalesContext();
+      expression = context.CreateExpression("path:");
+      
+      testObj = expression.GetValue();
+      
+      Assert.IsNull(testObj, "The test object should come out null - an empty path string means a null return");
+    }
+    
+    [Test]
+    public void TestEmptyExpressionString()
+    {
+      TalesContext context;
+      TalesExpression expression;
+      object testObj;
+      
+      context = new TalesContext();
+      expression = context.CreateExpression("");
+      
+      testObj = expression.GetValue();
+      
+      Assert.IsNull(testObj, "The test object should come out null - an empty path string means a null return");
+    }
+    
+    [Test]
+    public void TestEmptyStringExpression()
+    {
+      TalesContext context;
+      TalesExpression expression;
+      object testObj;
+      string stringObj;
+      
+      context = new TalesContext();
+      expression = context.CreateExpression("string:");
+      
+      testObj = expression.GetValue();
+      
+      Assert.IsNotNull(testObj, "Test object is not null");
+      Assert.IsInstanceOfType(typeof(string), testObj, "Test object is correct type");
+      stringObj = (string) testObj;
+      Assert.AreEqual(String.Empty, stringObj, "String has correct value");
+    }
+    
     #endregion
     
     #region failure tests
@@ -299,34 +383,6 @@ namespace Test.CraigFowler.Web.ZPT.Tales
       expression = context.CreateExpression("foo/bar");
       
       testObj = expression.GetValue();
-      Assert.Fail("If the test reaches this point then we failed");
-      Assert.IsNull(testObj, "Not a real test, but prevents a compiler warning");
-    }
-    
-    [Test]
-    [ExpectedException(ExceptionType = typeof(TraversalException))]
-    public void TestEmptyPathString()
-    {
-      TalesContext context;
-      TalesExpression expression;
-      object testObj;
-      
-      context = new TalesContext();
-      expression = context.CreateExpression("path:");
-      
-      try
-      {
-        testObj = expression.GetValue();
-      }
-      catch(TraversalException ex)
-      {
-        Assert.AreEqual(1, ex.Attempts.Count, "Correct number of attempts made");
-        Assert.IsInstanceOfType(typeof(PathInvalidException),
-                                ex.Attempts[new TalesPath("")],
-                                "First failed attempt is correct type");
-        throw;
-      }
-      
       Assert.Fail("If the test reaches this point then we failed");
       Assert.IsNull(testObj, "Not a real test, but prevents a compiler warning");
     }
@@ -392,6 +448,8 @@ namespace Test.CraigFowler.Web.ZPT.Tales
         Assert.IsFalse(ex.PermanentError, "This problem is not permanent because it's a dictionary.");
         throw;
       }
+      
+      Console.WriteLine ("TestParseTwoInvalidPathExpressionsNonPermanent failed: '{0}' was found.", testObj);
       
       Assert.Fail("If the test reaches this point then we failed");
       Assert.IsNull(testObj, "Not a real test, but prevents a compiler warning");

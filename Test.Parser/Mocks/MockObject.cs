@@ -20,10 +20,13 @@ namespace CraigFowler.Web.ZPT.Mocks
     
     public int IntegerValue;
     
+    public bool BooleanValue;
+    
     #endregion
     
     #region properties
     
+    [TalesAlias("unambiguous")]
     public string this [string key]
     {
       get {
@@ -66,6 +69,8 @@ namespace CraigFowler.Web.ZPT.Mocks
       dict = new Dictionary<string, string>();
       this["foo"] = "bar";
       this["baz"] = "sample";
+      
+      this.BooleanValue = true;
     }
     
     #endregion

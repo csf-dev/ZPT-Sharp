@@ -94,7 +94,6 @@ namespace Test.CraigFowler.Web.ZPT.Tales.Expressions
     }
     
     [Test]
-    [ExpectedException(ExceptionType = typeof(ArgumentOutOfRangeException))]
     public void TestEmptyExpression()
     {
       TalesContext context;
@@ -102,8 +101,7 @@ namespace Test.CraigFowler.Web.ZPT.Tales.Expressions
       
       context = new TalesContext();
       expression = context.CreateExpression("");
-      Assert.Fail("If the test reaches this point then we failed");
-      Assert.IsNull(expression, "Not a real test, but prevents a compiler warning");
+      Assert.IsInstanceOfType(typeof(PathExpression), expression, "Expression is of correct type");
     }
     
     [Test]

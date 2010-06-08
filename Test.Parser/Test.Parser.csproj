@@ -50,6 +50,9 @@
     <Compile Include="Mocks\MockObjectWithConflict.cs" />
     <Compile Include="Mocks\MockWithoutIndexer.cs" />
     <Compile Include="Tales\Expressions\TestStringExpression.cs" />
+    <Compile Include="Tales\Expressions\TestBuiltinPathExpressions.cs" />
+    <Compile Include="Tales\Expressions\TestInverseBooleanExpression.cs" />
+    <Compile Include="Tales\TalesBenchmarks.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Parser\Parser.csproj">

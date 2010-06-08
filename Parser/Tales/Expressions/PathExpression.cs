@@ -86,7 +86,15 @@ namespace CraigFowler.Web.ZPT.Tales.Expressions
       {
         try
         {
-          output = EvaluatePath(this.Paths[i]);
+          if(this.Paths[i].Parts.Count == 0)
+          {
+            output = null;
+          }
+          else
+          {
+            output = EvaluatePath(this.Paths[i]);
+          }
+          
           success = true;
         }
         catch(TalesException ex)
@@ -213,6 +221,11 @@ namespace CraigFowler.Web.ZPT.Tales.Expressions
       
       if(position < path.Parts.Count)
       {
+        if(parentObject == null)
+        {
+          throw new PathException(path, "Encountered a null reference part-way through traversing a path.");
+        }
+        
         try
         {
           currentMember = SelectMember(parentObject, path.Parts[position], out indexer);
@@ -233,7 +246,7 @@ namespace CraigFowler.Web.ZPT.Tales.Expressions
           PropertyInfo property = currentMember as PropertyInfo;
           if(property.CanRead)
           {
-            thisObject = InvokeMethod(property.GetGetMethod(), parentObject, path, ref position, false);
+            thisObject = InvokeMethod(property.GetGetMethod(), parentObject, path, ref position, indexer);
           }
           else
           {
@@ -417,7 +430,10 @@ namespace CraigFowler.Web.ZPT.Tales.Expressions
                                 bool useCurrentPosition)
     {
       object[] parameterValues = new object[method.GetParameters().Length];
-      int parameterPosition = useCurrentPosition? basePosition : basePosition +1;
+      int offset = useCurrentPosition? 0 : 1;
+      
+      // If we are not using the current position as the reference then begin by incrementing by 1
+      basePosition = basePosition + (useCurrentPosition? 0 : 1);
       
       if(method.ReturnType == typeof(void))
       {
@@ -431,7 +447,7 @@ namespace CraigFowler.Web.ZPT.Tales.Expressions
       // Extract all of the parameter information from the path (where applicable)
       for(int i = 0; i < parameterValues.Length; i++)
       {
-        if(parameterPosition >= path.Parts.Count)
+        if(basePosition >= path.Parts.Count)
         {
           IndexOutOfRangeException ex;
           ex = new IndexOutOfRangeException("Parameters to the given method require more path pieces than are " +
@@ -443,8 +459,9 @@ namespace CraigFowler.Web.ZPT.Tales.Expressions
         }
         else
         {
-          parameterValues[i] = path.Parts[parameterPosition];
-          parameterPosition ++;
+          parameterValues[i] = path.Parts[basePosition];
+          basePosition += offset;
+          offset = 1;
         }
       }
       

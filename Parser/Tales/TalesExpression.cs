@@ -220,8 +220,15 @@ namespace CraigFowler.Web.ZPT.Tales
       object resolvedValue = GetValue();
       bool output = false, success = false;
       
+      // If the value is null then output false
+      if(resolvedValue == null)
+      {
+        output = false;
+        success = true;
+      }
+      
       // If the value is already boolean then return that
-      if(resolvedValue is Boolean)
+      if(!success && resolvedValue is Boolean)
       {
         output = (bool) resolvedValue;
         success = true;
@@ -241,13 +248,6 @@ namespace CraigFowler.Web.ZPT.Tales
           // The resolved value is not a number, for it cannot be cast to a float.
           success = false;
         }
-      }
-      
-      // If the value is null then output false
-      if(!success && resolvedValue == null)
-      {
-        output = false;
-        success = true;
       }
       
       // If the value is a string the output true if it is non-empty (false otherwise)
@@ -379,10 +379,6 @@ namespace CraigFowler.Web.ZPT.Tales
       if(input == null)
       {
         throw new ArgumentNullException("input");
-      }
-      else if(input == String.Empty)
-      {
-        throw new ArgumentOutOfRangeException("input", "Empty expressions are not permitted");
       }
       
       prefix = GetExpressionPrefix(input);
