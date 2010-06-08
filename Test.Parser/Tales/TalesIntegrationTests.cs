@@ -219,6 +219,48 @@ namespace Test.CraigFowler.Web.ZPT.Tales
       Assert.AreEqual(20, innerObj.IntegerValue, "Test object is correct");
     }
     
+    [Test]
+    public void TestSimpleStringExpression()
+    {
+      TalesContext context;
+      TalesExpression expression;
+      object testObj;
+      string stringObj;
+      
+      context = new TalesContext();
+      
+      expression = context.CreateExpression("string:Hello Craig, how are you?");
+      
+      testObj = expression.GetValue();
+      
+      Assert.IsInstanceOfType(typeof(string), testObj, "Test object is correct type");
+      stringObj = (string) testObj;
+      Assert.AreEqual("Hello Craig, how are you?", stringObj, "Test object is correct");
+    }
+    
+    [Test]
+    public void TestStringExpressionWithReplacement()
+    {
+      TalesContext context;
+      TalesExpression expression;
+      object testObj;
+      string stringObj;
+      
+      context = new TalesContext();
+      context.Aliases.Add("mock", this.Mock);
+      
+      this.Mock["name"] = "Craig";
+      this.Mock["weather"] = "sunny!";
+      
+      expression = context.CreateExpression("string:Hello ${mock/name}, how are you?  The weather is $mock/weather");
+      
+      testObj = expression.GetValue();
+      
+      Assert.IsInstanceOfType(typeof(string), testObj, "Test object is correct type");
+      stringObj = (string) testObj;
+      Assert.AreEqual("Hello Craig, how are you?  The weather is sunny!", stringObj, "Test object is correct");
+    }
+    
     #endregion
     
     #region failure tests

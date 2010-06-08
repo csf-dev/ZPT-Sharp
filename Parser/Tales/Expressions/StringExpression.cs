@@ -20,6 +20,7 @@
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
+using System.Text.RegularExpressions;
 
 namespace CraigFowler.Web.ZPT.Tales.Expressions
 {
@@ -29,13 +30,56 @@ namespace CraigFowler.Web.ZPT.Tales.Expressions
     
     public const string Prefix = "string:";
     
+    private const string
+      LOCATE_REPLACEMENTS     = @"(?<=(?<!\$)(?:\$\$)*)\$(?:(?:\{(?'var'[\w/ ]+)\})|(?'var'[\w/]+)|(?'var'\$))",
+      PERFORM_REPLACEMENTS    = @"\$(?:(?:\{([\w/ ]+)\})|([\w/]+))",
+      REPLACE_ESCAPED_DOLLARS = @"\$\$",
+      
+      // Careful! It looks like we're replacing two dollars with two dollars but in regex a $ symbol escapes itself!
+      DOLLAR_REPLACEMENT      = @"$$";
+    
+    private static readonly Regex
+      MatchReplacements       = new Regex(LOCATE_REPLACEMENTS, RegexOptions.Compiled),
+      ReplaceVariables        = new Regex(PERFORM_REPLACEMENTS, RegexOptions.Compiled),
+      ReplaceEscapedDollars   = new Regex(REPLACE_ESCAPED_DOLLARS, RegexOptions.Compiled);
+    
     #endregion
     
     #region methods
     
     public override object GetValue()
     {
-      throw new NotImplementedException();
+      string output = this.ExpressionBody, pathExpression;
+      MatchCollection variableReplacements;
+      Match currentMatch;
+      
+      // Locate all of the places within the input string that require variable replacements
+      variableReplacements = MatchReplacements.Matches(output);
+      
+      for(int i = variableReplacements.Count - 1; i >= 0; i--)
+      {
+        currentMatch = variableReplacements[i];
+        pathExpression = currentMatch.Groups["var"].Value;
+        
+        /* If we have matched '$$' then this is just an escaped dollar symbol, otherwise we have a replacement
+         * to perform, taking the identifier text as a path expression.
+         */
+        if(pathExpression != "$")
+        {
+          /* We need to construct and evaluate a path-type expression from the current context and replace with
+           * whatever we find from that.
+           */
+          PathExpression replacement = new PathExpression(pathExpression, this.Context);
+          output = ReplaceVariables.Replace(output, replacement.GetValue().ToString(), 1, currentMatch.Index);
+        }
+        else
+        {
+          // Just replace the doubled-up dollar symbols with their replacement
+          output = ReplaceEscapedDollars.Replace(output, REPLACE_ESCAPED_DOLLARS, 1, currentMatch.Index);
+        }
+      }
+      
+      return output;
     }
     
     #endregion
