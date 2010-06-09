@@ -27,11 +27,18 @@ namespace CraigFowler.Web.ZPT.Tales.Exceptions
   {
     #region constants
     
-    private const string DEFAULT_MESSAGE = "The TALES path expression is invalid.";
+    private const string
+      DEFAULT_MESSAGE         = "The TALES path expression cannot be traversed, it is invalid.",
+      INVALID_MESSAGE         = "The TALES path expression contains invalid characters.";
     
     #endregion
     
     #region constructors
+    
+    public PathInvalidException(string rawPath) : this(null, INVALID_MESSAGE, null)
+    {
+      this.RawPath = rawPath;
+    }
     
     public PathInvalidException(TalesPath path) : this(path, DEFAULT_MESSAGE, null) {}
     

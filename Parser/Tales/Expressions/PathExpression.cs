@@ -23,6 +23,7 @@ using System;
 using System.Collections.Generic;
 using System.Reflection;
 using CraigFowler.Web.ZPT.Tales.Exceptions;
+using System.Text.RegularExpressions;
 
 namespace CraigFowler.Web.ZPT.Tales.Expressions
 {
@@ -34,7 +35,12 @@ namespace CraigFowler.Web.ZPT.Tales.Expressions
     #region constants
     
     private const char PATH_SEPARATOR             = '|';
-    private const string INDEXER_IDENTIFIER       = "Item";
+    private const string
+      INDEXER_IDENTIFIER                          = "Item",
+      VALID_PATH_EXPRESSION_PATTERN               = @"^[-a-z0-9 _.,~/?|]*$";
+    
+    private readonly Regex ValidPathExpression    = new Regex(VALID_PATH_EXPRESSION_PATTERN,
+                                                              RegexOptions.Compiled | RegexOptions.IgnoreCase);
     
     /// <summary>
     /// <para>The prefix used to indicate that the current expression is a path expression.</para>
@@ -128,6 +134,12 @@ namespace CraigFowler.Web.ZPT.Tales.Expressions
     private List<TalesPath> ExtractPaths(string expression)
     {
       List<TalesPath> output = new List<TalesPath>();
+      
+      // Detect an invalid path here and throw an exception straight away
+      if(!ValidPathExpression.Match(expression).Success)
+      {
+        throw new PathInvalidException(expression);
+      }
       
       foreach(string path in expression.Split(new char[] {PATH_SEPARATOR}))
       {

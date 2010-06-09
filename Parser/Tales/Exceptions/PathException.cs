@@ -55,6 +55,16 @@ namespace CraigFowler.Web.ZPT.Tales.Exceptions
       }
     }
     
+    public string RawPath
+    {
+      get {
+        return (string) this.Data["rawPath"];
+      }
+      set {
+        this.Data["rawPath"] = value;
+      }
+    }
+    
     #endregion
     
     #region constructors
@@ -69,6 +79,7 @@ namespace CraigFowler.Web.ZPT.Tales.Exceptions
     {
       this.PermanentError = false;
       this.Path = path;
+      this.RawPath = null;
     }
     
     #endregion
