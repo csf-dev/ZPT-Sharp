@@ -37,7 +37,7 @@ namespace CraigFowler.Web.ZPT.Tales.Expressions
     private const char PATH_SEPARATOR             = '|';
     private const string
       INDEXER_IDENTIFIER                          = "Item",
-      VALID_PATH_EXPRESSION_PATTERN               = @"^[-a-z0-9 _.,~/?|]*$";
+      VALID_PATH_EXPRESSION_PATTERN               = @"^(\??[-a-z0-9 _.,~]+){0,1}(/(\??[-a-z0-9 _.,~]+))*(\|(\??[-a-z0-9 _.,~]+){0,1}(/(\??[-a-z0-9 _.,~]+))*)*$";
     
     private readonly Regex ValidPathExpression    = new Regex(VALID_PATH_EXPRESSION_PATTERN,
                                                               RegexOptions.Compiled | RegexOptions.IgnoreCase);
@@ -230,9 +230,18 @@ namespace CraigFowler.Web.ZPT.Tales.Expressions
       object output = null, thisObject = null;
       MemberInfo currentMember;
       bool indexer;
+      string currentPathPart;
       
       if(position < path.Parts.Count)
       {
+        currentPathPart = path.Parts[position];
+        
+        // This handles the case for a variable-substitution within a path
+        if(currentPathPart.StartsWith("?"))
+        {
+          currentPathPart = EvaluateSingleVariable(currentPathPart);
+        }
+        
         if(parentObject == null)
         {
           throw new PathException(path, "Encountered a null reference part-way through traversing a path.");
@@ -240,7 +249,7 @@ namespace CraigFowler.Web.ZPT.Tales.Expressions
         
         try
         {
-          currentMember = SelectMember(parentObject, path.Parts[position], out indexer);
+          currentMember = SelectMember(parentObject, currentPathPart, out indexer);
         }
         catch(ArgumentException ex)
         {
@@ -415,6 +424,21 @@ namespace CraigFowler.Web.ZPT.Tales.Expressions
       }
       
       return output;
+    }
+    
+    /// <summary>
+    /// <para>Evaluates a small 'inner' TALES path expression (in fact this may only contain a single variable).</para>
+    /// </summary>
+    /// <param name="variable">
+    /// A <see cref="System.String"/>
+    /// </param>
+    /// <returns>
+    /// A <see cref="System.String"/>
+    /// </returns>
+    private string EvaluateSingleVariable(string variable)
+    {
+      PathExpression innerExpression = new PathExpression(variable.Substring(1), this.Context);
+      return innerExpression.GetValue().ToString();
     }
     
     /// <summary>

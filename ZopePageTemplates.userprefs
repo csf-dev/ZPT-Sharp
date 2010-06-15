@@ -7,7 +7,15 @@
     <Pads>
       <Pad Id="ProjectPad">
         <State expanded="True">
-          <Node name="Parser" expanded="True" selected="True">
+          <Node name="Parser" expanded="True">
+            <Node name="Tales" expanded="True">
+              <Node name="Exceptions" expanded="True" />
+              <Node name="Expressions" expanded="True">
+                <Node name="PathExpression.cs" selected="True" />
+              </Node>
+            </Node>
+          </Node>
+          <Node name="Test.Parser" expanded="True">
             <Node name="Tales" expanded="True" />
           </Node>
         </State>
@@ -18,13 +26,30 @@
           <Option id="NestedNamespaces" value="True" />
           <Option id="PublicProtectedApiOnly" value="True" />
           <Option id="PublicApiOnly" value="False" />
-          <Option id="GroupByType" value="True" />
           <Option id="GroupByAccess" value="True" />
+          <Option id="GroupByType" value="True" />
           <Node name="Parser" expanded="True">
             <Node name="CraigFowler" expanded="True">
               <Node name="Web" expanded="True">
                 <Node name="ZPT" expanded="True">
-                  <Node name="Tales" expanded="True" />
+                  <Node name="Tales" expanded="True">
+                    <Node name="Expressions" expanded="True" />
+                  </Node>
+                </Node>
+              </Node>
+            </Node>
+          </Node>
+          <Node name="Test.Parser" expanded="True">
+            <Node name="Test" expanded="True">
+              <Node name="CraigFowler" expanded="True">
+                <Node name="Web" expanded="True">
+                  <Node name="ZPT" expanded="True">
+                    <Node name="Tales" expanded="True">
+                      <Node name="Test.CraigFowler.Web.ZPT.Tales.TalesIntegrationTests" expanded="True">
+                        <Node name="TestParseSimplePathExpression" selected="True" />
+                      </Node>
+                    </Node>
+                  </Node>
                 </Node>
               </Node>
             </Node>

@@ -91,6 +91,29 @@ namespace Test.CraigFowler.Web.ZPT.Tales
     }
     
     [Test]
+    public void TestParseSimplePathExpressionWithVariableSubstitution()
+    {
+      TalesContext context;
+      TalesExpression expression;
+      object testObj;
+      int testInt;
+      
+      this.Mock.InnerObject.IntegerValue = 2;
+      
+      context = new TalesContext();
+      context.Aliases.Add("mock", this.Mock);
+      context.Aliases.Add("myVar", "InnerObject");
+      
+      expression = context.CreateExpression("mock/?myVar/IntegerValue");
+      
+      testObj = expression.GetValue();
+      
+      Assert.IsInstanceOfType(typeof(Int32), testObj, "Test object is correct type");
+      testInt = (int) testObj;
+      Assert.AreEqual(2, testInt, "Test integer has correct value");
+    }
+    
+    [Test]
     public void TestParseTwoPathExpressions()
     {
       TalesContext context;
