@@ -35,12 +35,19 @@ namespace CraigFowler.Web.ZPT.Tales.Expressions
     #region constants
     
     private const char PATH_SEPARATOR             = '|';
+    
+    /* That regex pattern looks pretty uninteligible.  See:
+     * 
+     * Test.CraigFowler.Web.ZPT.Tales.Expressions.TestPathExpression
+     * 
+     * for some examples of what it is meant to match.
+     */
     private const string
       INDEXER_IDENTIFIER                          = "Item",
-      VALID_PATH_EXPRESSION_PATTERN               = @"^(\??[-a-z0-9 _.,~]+){0,1}(/(\??[-a-z0-9 _.,~]+))*(\|(\??[-a-z0-9 _.,~]+){0,1}(/(\??[-a-z0-9 _.,~]+))*)*$";
+      VALID_PATH_EXPRESSION_PATTERN               = @"^((\??[-\w .,~]+)(/(\??[-\w .,~]+))*)?(\|((\??[-\w .,~]+)(/(\??[-\w .,~]+))*)?)*$";
     
-    private readonly Regex ValidPathExpression    = new Regex(VALID_PATH_EXPRESSION_PATTERN,
-                                                              RegexOptions.Compiled | RegexOptions.IgnoreCase);
+    private static readonly Regex
+      ValidPathExpression                         = new Regex(VALID_PATH_EXPRESSION_PATTERN, RegexOptions.Compiled);
     
     /// <summary>
     /// <para>The prefix used to indicate that the current expression is a path expression.</para>
@@ -118,6 +125,8 @@ namespace CraigFowler.Web.ZPT.Tales.Expressions
       return output;
     }
     
+    
+    
     #endregion
     
     #region private methods
@@ -136,7 +145,7 @@ namespace CraigFowler.Web.ZPT.Tales.Expressions
       List<TalesPath> output = new List<TalesPath>();
       
       // Detect an invalid path here and throw an exception straight away
-      if(!ValidPathExpression.Match(expression).Success)
+      if(!IsValid(expression))
       {
         throw new PathInvalidException(expression);
       }
@@ -511,6 +520,15 @@ namespace CraigFowler.Web.ZPT.Tales.Expressions
     internal PathExpression(string expression, TalesContext context) : base(expression, context)
     {
       this.Paths = ExtractPaths(ExpressionBody);
+    }
+    
+    #endregion
+
+    #region static methods
+    
+    public static bool IsValid(string expression)
+    {
+      return (expression != null)? ValidPathExpression.Match(expression).Success : false;
     }
     
     #endregion
