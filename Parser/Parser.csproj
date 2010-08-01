@@ -49,12 +49,14 @@
     <Compile Include="Tales\Exceptions\TraversalException.cs" />
     <Compile Include="Tales\Exceptions\PathException.cs" />
     <Compile Include="Tales\Exceptions\PathInvalidException.cs" />
+    <Compile Include="Tal\RepeatVariable.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
     <Folder Include="Tales\" />
     <Folder Include="Tales\Expressions\" />
     <Folder Include="Tales\Exceptions\" />
+    <Folder Include="Tal\" />
   </ItemGroup>
   <ProjectExtensions>
     <MonoDevelop>

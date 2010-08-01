@@ -39,6 +39,7 @@
     <Folder Include="Tales\" />
     <Folder Include="Mocks\" />
     <Folder Include="Tales\Expressions\" />
+    <Folder Include="Tal\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Tales\TestTalesContext.cs" />
@@ -53,6 +54,7 @@
     <Compile Include="Tales\Expressions\TestBuiltinPathExpressions.cs" />
     <Compile Include="Tales\Expressions\TestInverseBooleanExpression.cs" />
     <Compile Include="Tales\TalesBenchmarks.cs" />
+    <Compile Include="Tal\TestRepeatVariable.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Parser\Parser.csproj">
