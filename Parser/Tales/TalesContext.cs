@@ -48,7 +48,7 @@ namespace CraigFowler.Web.ZPT.Tales
     #region fields
     
     private TalesContext parentContext;
-    private Dictionary<string,object> localDefinitions, rootContexts, localRepeatVariables, options;
+    private Dictionary<string,object> localDefinitions, rootContexts, localRepeatVariables, options, globalDefinitions;
     private Dictionary<string,string> attributes;
     
     #endregion
@@ -73,13 +73,26 @@ namespace CraigFowler.Web.ZPT.Tales
     /// <summary>
     /// <para>Read-only.  Returns an editable dictionary of local aliases that are made in this context.</para>
     /// </summary>
-    public Dictionary<string, object> Aliases
+    public Dictionary<string, object> LocalDefinitions
     {
       get {
         return localDefinitions;
       }
       private set {
         localDefinitions = value;
+      }
+    }
+    
+    /// <summary>
+    /// <para>Read-only.  Returns an editable dictionary of global aliases that are visible to this context.</para>
+    /// </summary>
+    public Dictionary<string, object> GlobalDefinitions
+    {
+      get {
+        return globalDefinitions;
+      }
+      private set {
+        globalDefinitions = value;
       }
     }
     
@@ -319,11 +332,11 @@ namespace CraigFowler.Web.ZPT.Tales
       
       if(this.ParentContext != null)
       {
-        output = MergeDictionaries(this.ParentContext.GetAliases(), this.Aliases);
+        output = MergeDictionaries(this.ParentContext.GetAliases(), this.LocalDefinitions);
       }
       else
       {
-        output = MergeDictionaries(null, this.Aliases);
+        output = MergeDictionaries(null, this.LocalDefinitions);
       }
       
       return output;
@@ -365,7 +378,8 @@ namespace CraigFowler.Web.ZPT.Tales
     public TalesContext()
     {
       this.ParentContext = null;
-      this.Aliases = new Dictionary<string, object>();
+      this.LocalDefinitions = new Dictionary<string, object>();
+      this.GlobalDefinitions = new Dictionary<string, object>();
       this.RepeatVariables = new Dictionary<string, object>();
       this.Options = new Dictionary<string, object>();
       this.Attributes = new Dictionary<string, string>();
@@ -384,7 +398,13 @@ namespace CraigFowler.Web.ZPT.Tales
     /// </summary>
     private TalesContext(TalesContext parent) : this()
     {
+      if(parent == null)
+      {
+        throw new ArgumentNullException("parent");
+      }
+      
       this.ParentContext = parent;
+      this.GlobalDefinitions = parent.GlobalDefinitions;
     }
     
     #endregion

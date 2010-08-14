@@ -52,7 +52,7 @@ namespace Test.CraigFowler.Web.ZPT.Tales
       mock.InnerObject.IntegerValue = 2;
       
       context = new TalesContext();
-      context.Aliases.Add("mock", mock);
+      context.LocalDefinitions.Add("mock", mock);
       
       expression = context.CreateExpression("mock/InnerObject/IntegerValue");
       
