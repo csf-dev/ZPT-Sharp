@@ -18,7 +18,7 @@ namespace Test.CraigFowler.Web.ZPT.Tales.Expressions
       object testObj;
       bool testBool;
       
-      context.LocalDefinitions.Add("mock", mock);
+      context.AddDefinition("mock", mock);
       
       testObj = expression.GetValue();
       
@@ -39,7 +39,7 @@ namespace Test.CraigFowler.Web.ZPT.Tales.Expressions
       
       mock.BooleanValue = false;
       
-      context.LocalDefinitions.Add("mock", mock);
+      context.AddDefinition("mock", mock);
       
       testObj = expression.GetValue();
       
@@ -60,7 +60,7 @@ namespace Test.CraigFowler.Web.ZPT.Tales.Expressions
       
       mock.IntegerValue = 5;
       
-      context.LocalDefinitions.Add("mock", mock);
+      context.AddDefinition("mock", mock);
       
       testObj = expression.GetValue();
       
@@ -81,7 +81,7 @@ namespace Test.CraigFowler.Web.ZPT.Tales.Expressions
       
       mock.IntegerValue = 0;
       
-      context.LocalDefinitions.Add("mock", mock);
+      context.AddDefinition("mock", mock);
       
       testObj = expression.GetValue();
       
@@ -102,7 +102,7 @@ namespace Test.CraigFowler.Web.ZPT.Tales.Expressions
       
       mock.IntegerValue = -3;
       
-      context.LocalDefinitions.Add("mock", mock);
+      context.AddDefinition("mock", mock);
       
       testObj = expression.GetValue();
       
@@ -123,7 +123,7 @@ namespace Test.CraigFowler.Web.ZPT.Tales.Expressions
       
       mock["someString"] = String.Empty;
       
-      context.LocalDefinitions.Add("mock", mock);
+      context.AddDefinition("mock", mock);
       
       testObj = expression.GetValue();
       
@@ -144,7 +144,7 @@ namespace Test.CraigFowler.Web.ZPT.Tales.Expressions
       
       mock["someString"] = " ";
       
-      context.LocalDefinitions.Add("mock", mock);
+      context.AddDefinition("mock", mock);
       
       testObj = expression.GetValue();
       
@@ -163,7 +163,7 @@ namespace Test.CraigFowler.Web.ZPT.Tales.Expressions
       object testObj;
       bool testBool;
       
-      context.LocalDefinitions.Add("mock", mock);
+      context.AddDefinition("mock", mock);
       
       testObj = expression.GetValue();
       
@@ -182,7 +182,7 @@ namespace Test.CraigFowler.Web.ZPT.Tales.Expressions
       object testObj;
       bool testBool;
       
-      context.LocalDefinitions.Add("mock", mock);
+      context.AddDefinition("mock", mock);
       
       testObj = expression.GetValue();
       

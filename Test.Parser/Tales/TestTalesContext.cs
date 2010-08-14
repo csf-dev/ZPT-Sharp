@@ -13,12 +13,8 @@ namespace Test.CraigFowler.Web.ZPT.Tales
     [Test]
     public void TestConstructor()
     {
-      TalesContext context;
-      
-      context = new TalesContext();
-      
+      TalesContext context = new TalesContext();
       Assert.IsNotNull(context, "Context not null");
-      Assert.IsNull(context.ParentContext, "Parent context is null");
     }
     
     [Test]
@@ -30,10 +26,7 @@ namespace Test.CraigFowler.Web.ZPT.Tales
       child = parent.CreateChildContext();
       
       Assert.IsNotNull(parent, "Context not null");
-      Assert.IsNull(parent.ParentContext, "Parent context is null");
-      
       Assert.IsNotNull(child, "Child is not null");
-      Assert.AreEqual(parent, child.ParentContext, "Parent context is as expected");
     }
     
     [Test]
@@ -66,7 +59,7 @@ namespace Test.CraigFowler.Web.ZPT.Tales
       
       mock.InnerObject.IntegerValue = 2;
       
-      context.LocalDefinitions.Add("mock", mock);
+      context.AddDefinition("mock", mock);
       
       testObj = expression.GetValue();
       

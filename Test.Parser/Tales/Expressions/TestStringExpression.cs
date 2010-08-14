@@ -16,6 +16,9 @@ namespace Test.CraigFowler.Web.ZPT.Tales.Expressions
 
     [Test]
     [Category("Information")]
+    [Description("This is not even a real test of the codebase, rather a trial-run of some of the code I planned to " +
+                 "use in the StringExpression class.  It is really just a PoC that I used once before writing the " +
+                 "actual implementation.")]
     public void TestReplacementFromVariable()
     {
       string inputString = @"Hello ${name}, you have $$100!  The weather is $weather";

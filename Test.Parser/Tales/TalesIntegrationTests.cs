@@ -79,7 +79,7 @@ namespace Test.CraigFowler.Web.ZPT.Tales
       this.Mock.InnerObject.IntegerValue = 2;
       
       context = new TalesContext();
-      context.LocalDefinitions.Add("mock", this.Mock);
+      context.AddDefinition("mock", this.Mock);
       
       expression = context.CreateExpression("mock/InnerObject/IntegerValue");
       
@@ -101,8 +101,8 @@ namespace Test.CraigFowler.Web.ZPT.Tales
       this.Mock.InnerObject.IntegerValue = 2;
       
       context = new TalesContext();
-      context.LocalDefinitions.Add("mock", this.Mock);
-      context.LocalDefinitions.Add("myVar", "InnerObject");
+      context.AddDefinition("mock", this.Mock);
+      context.AddDefinition("myVar", "InnerObject");
       
       expression = context.CreateExpression("mock/?myVar/IntegerValue");
       
@@ -124,7 +124,7 @@ namespace Test.CraigFowler.Web.ZPT.Tales
       this.Mock.InnerObject.IntegerValue = 2;
       
       context = new TalesContext();
-      context.LocalDefinitions.Add("mock", this.Mock);
+      context.AddDefinition("mock", this.Mock);
       
       expression = context.CreateExpression("zzinvalid/bar | mock/InnerObject/IntegerValue");
       
@@ -146,7 +146,7 @@ namespace Test.CraigFowler.Web.ZPT.Tales
       this.Mock.InnerObject.IntegerValue = 2;
       
       context = new TalesContext();
-      context.LocalDefinitions.Add("mock", this.Mock);
+      context.AddDefinition("mock", this.Mock);
       
       expression = context.CreateExpression("mock/inner/IntegerValue");
       
@@ -166,7 +166,7 @@ namespace Test.CraigFowler.Web.ZPT.Tales
       string testString;
       
       context = new TalesContext();
-      context.LocalDefinitions.Add("mock", this.Mock);
+      context.AddDefinition("mock", this.Mock);
       
       expression = context.CreateExpression("mock/baz");
       
@@ -186,7 +186,7 @@ namespace Test.CraigFowler.Web.ZPT.Tales
       string testString;
       
       context = new TalesContext();
-      context.LocalDefinitions.Add("mock", this.MockWithConflict);
+      context.AddDefinition("mock", this.MockWithConflict);
       
       expression = context.CreateExpression("mock/SomeProperty");
       
@@ -208,7 +208,7 @@ namespace Test.CraigFowler.Web.ZPT.Tales
       this.Mock["IntegerValue"] = "Some value";
       
       context = new TalesContext();
-      context.LocalDefinitions.Add("mock", this.Mock);
+      context.AddDefinition("mock", this.Mock);
       
       expression = context.CreateExpression("mock/IntegerValue");
       
@@ -231,7 +231,7 @@ namespace Test.CraigFowler.Web.ZPT.Tales
       this.Mock.InnerObject.IntegerValue = 20;
       
       context = new TalesContext();
-      context.LocalDefinitions.Add("mock", this.Mock);
+      context.AddDefinition("mock", this.Mock);
       
       expression = context.CreateExpression("mock/inner");
       
@@ -270,7 +270,7 @@ namespace Test.CraigFowler.Web.ZPT.Tales
       string stringObj;
       
       context = new TalesContext();
-      context.LocalDefinitions.Add("mock", this.Mock);
+      context.AddDefinition("mock", this.Mock);
       
       this.Mock["name"] = "Craig";
       this.Mock["weather"] = "sunny!";
@@ -293,7 +293,7 @@ namespace Test.CraigFowler.Web.ZPT.Tales
       string testString;
       
       context = new TalesContext();
-      context.LocalDefinitions.Add("mock", this.Mock);
+      context.AddDefinition("mock", this.Mock);
       
       expression = context.CreateExpression("mock/unambiguous/baz");
       
@@ -382,7 +382,7 @@ namespace Test.CraigFowler.Web.ZPT.Tales
       object testObj;
       
       context = new TalesContext();
-      context.LocalDefinitions.Add("mock", this.MockWithConflict);
+      context.AddDefinition("mock", this.MockWithConflict);
       
       expression = context.CreateExpression("mock/Duplicate");
       
@@ -421,7 +421,7 @@ namespace Test.CraigFowler.Web.ZPT.Tales
       this.Mock.InnerObject.IntegerValue = 2;
       
       context = new TalesContext();
-      context.LocalDefinitions.Add("mock", this.Mock);
+      context.AddDefinition("mock", this.Mock);
       
       expression = context.CreateExpression("zzinvalid/bar | foo/baz");
       
@@ -454,7 +454,7 @@ namespace Test.CraigFowler.Web.ZPT.Tales
       this.Mock.InnerObject.IntegerValue = 2;
       
       context = new TalesContext();
-      context.LocalDefinitions.Add("mock", this.Mock);
+      context.AddDefinition("mock", this.Mock);
       
       expression = context.CreateExpression("zzinvalid/bar | mock/nonexistant/reallynonexistant");
       
@@ -489,7 +489,7 @@ namespace Test.CraigFowler.Web.ZPT.Tales
       this.Mock.InnerObject.IntegerValue = 2;
       
       context = new TalesContext();
-      context.LocalDefinitions.Add("mock", this.MockWithoutIndexer);
+      context.AddDefinition("mock", this.MockWithoutIndexer);
       
       expression = context.CreateExpression("zzinvalid/bar | mock/invalid");
       

@@ -50,6 +50,7 @@
     <Compile Include="Tales\Exceptions\PathException.cs" />
     <Compile Include="Tales\Exceptions\PathInvalidException.cs" />
     <Compile Include="Tal\RepeatVariable.cs" />
+    <Compile Include="Tales\DefinitionType.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

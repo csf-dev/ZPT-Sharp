@@ -43,12 +43,15 @@ namespace CraigFowler.Web.ZPT.Tales
       OPTIONS_REFERENCE       = "options",
       ATTRIBUTES_REFERENCE    = "attrs";
     
+    private const DefinitionType
+      DEFAULT_DEFINITION_TYPE = DefinitionType.Local;
+    
     #endregion
     
     #region fields
     
     private TalesContext parentContext;
-    private Dictionary<string,object> localDefinitions, rootContexts, localRepeatVariables, options, globalDefinitions;
+    private Dictionary<string,object> localDefinitions, rootContexts, localRepeatVariables, options;
     private Dictionary<string,string> attributes;
     
     #endregion
@@ -60,7 +63,7 @@ namespace CraigFowler.Web.ZPT.Tales
     /// Gets or sets the <see cref="TalesContext"/> that is the immediate parent of this context.  May be null.
     /// </para>
     /// </summary>
-    public TalesContext ParentContext
+    protected TalesContext ParentContext
     {
       get {
         return parentContext;
@@ -73,7 +76,7 @@ namespace CraigFowler.Web.ZPT.Tales
     /// <summary>
     /// <para>Read-only.  Returns an editable dictionary of local aliases that are made in this context.</para>
     /// </summary>
-    public Dictionary<string, object> LocalDefinitions
+    protected Dictionary<string, object> VariableDefinitions
     {
       get {
         return localDefinitions;
@@ -84,22 +87,9 @@ namespace CraigFowler.Web.ZPT.Tales
     }
     
     /// <summary>
-    /// <para>Read-only.  Returns an editable dictionary of global aliases that are visible to this context.</para>
-    /// </summary>
-    public Dictionary<string, object> GlobalDefinitions
-    {
-      get {
-        return globalDefinitions;
-      }
-      private set {
-        globalDefinitions = value;
-      }
-    }
-    
-    /// <summary>
     /// <para>Read-only.  Returns an editable dictionary of local repeat variables that are made in this context.</para>
     /// </summary>
-    public Dictionary<string, object> RepeatVariables
+    protected Dictionary<string, object> RepeatVariables
     {
       get {
         return localRepeatVariables;
@@ -260,6 +250,52 @@ namespace CraigFowler.Web.ZPT.Tales
       return new TalesContext(this);
     }
     
+    /// <summary>
+    /// <para>Overloaded.  Adds a new definition to the current context.</para>
+    /// </summary>
+    /// <param name="alias">
+    /// A <see cref="System.String"/>
+    /// </param>
+    /// <param name="content">
+    /// A <see cref="System.Object"/>
+    /// </param>
+    /// <param name="type">
+    /// A <see cref="DefinitionType"/>
+    /// </param>
+    public void AddDefinition(string alias, object content, DefinitionType type)
+    {
+      if(alias == null)
+      {
+        throw new ArgumentNullException("alias");
+      }
+      else if(alias == String.Empty)
+      {
+        throw new ArgumentOutOfRangeException("alias", "Definition alias may not be an empty string.");
+      }
+      
+      this.VariableDefinitions[alias] = content;
+      
+      if(type == DefinitionType.Global && this.ParentContext != null)
+      {
+        this.ParentContext.AddDefinition(alias, content, DefinitionType.Global);
+      }
+    }
+    
+    /// <summary>
+    /// <para>Overloaded.  Adds a new definition to the current context using the default definition type.</para>
+    /// <seealso cref="DefinitionType"/>
+    /// </summary>
+    /// <param name="alias">
+    /// A <see cref="System.String"/>
+    /// </param>
+    /// <param name="content">
+    /// A <see cref="System.Object"/>
+    /// </param>
+    public void AddDefinition(string alias, object content)
+    {
+      AddDefinition(alias, content, DEFAULT_DEFINITION_TYPE);
+    }
+    
     #endregion
     
     #region private methods
@@ -332,11 +368,11 @@ namespace CraigFowler.Web.ZPT.Tales
       
       if(this.ParentContext != null)
       {
-        output = MergeDictionaries(this.ParentContext.GetAliases(), this.LocalDefinitions);
+        output = MergeDictionaries(this.ParentContext.GetAliases(), this.VariableDefinitions);
       }
       else
       {
-        output = MergeDictionaries(null, this.LocalDefinitions);
+        output = MergeDictionaries(null, this.VariableDefinitions);
       }
       
       return output;
@@ -378,8 +414,7 @@ namespace CraigFowler.Web.ZPT.Tales
     public TalesContext()
     {
       this.ParentContext = null;
-      this.LocalDefinitions = new Dictionary<string, object>();
-      this.GlobalDefinitions = new Dictionary<string, object>();
+      this.VariableDefinitions = new Dictionary<string, object>();
       this.RepeatVariables = new Dictionary<string, object>();
       this.Options = new Dictionary<string, object>();
       this.Attributes = new Dictionary<string, string>();
@@ -404,7 +439,6 @@ namespace CraigFowler.Web.ZPT.Tales
       }
       
       this.ParentContext = parent;
-      this.GlobalDefinitions = parent.GlobalDefinitions;
     }
     
     #endregion
