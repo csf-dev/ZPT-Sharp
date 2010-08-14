@@ -3,11 +3,7 @@
   <MonoDevelop.Ide.DebuggingService>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService>
-  <MonoDevelop.Ide.Workbench ActiveDocument="Parser/Tal/RepeatVariable.cs" ctype="Workbench">
-    <Files>
-      <File FileName="Parser/Tal/RepeatVariable.cs" Line="326" Column="32" />
-      <File FileName="Test.Parser/Tal/TestRepeatVariable.cs" Line="22" Column="25" />
-    </Files>
+  <MonoDevelop.Ide.Workbench ctype="Workbench">
     <Pads>
       <Pad Id="ProjectPad">
         <State expanded="True">
@@ -19,7 +15,6 @@
           </Node>
           <Node name="Test.Parser" expanded="True">
             <Node name="Tal" expanded="True" />
-            <Node name="Tales" expanded="True" />
           </Node>
         </State>
       </Pad>
@@ -29,8 +24,8 @@
           <Option id="NestedNamespaces" value="True" />
           <Option id="PublicProtectedApiOnly" value="True" />
           <Option id="PublicApiOnly" value="False" />
-          <Option id="GroupByAccess" value="True" />
           <Option id="GroupByType" value="True" />
+          <Option id="GroupByAccess" value="True" />
           <Node name="Parser" expanded="True">
             <Node name="CraigFowler" expanded="True">
               <Node name="Web" expanded="True">
