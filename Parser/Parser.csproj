@@ -31,6 +31,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AssemblyInfo.cs" />
@@ -51,6 +52,9 @@
     <Compile Include="Tales\Exceptions\PathInvalidException.cs" />
     <Compile Include="Tal\RepeatVariable.cs" />
     <Compile Include="Tales\DefinitionType.cs" />
+    <Compile Include="Tal\TalDocument.cs" />
+    <Compile Include="Tal\TalNode.cs" />
+    <Compile Include="Tal\IHasTalesContext.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
