@@ -25,7 +25,7 @@ using System.Collections.Generic;
 namespace CraigFowler.Web.ZPT.Tales
 {
   /// <summary>
-  /// <para>Represents an individual path used within a <see cref="PathExpression"/>.</para>
+  /// <para>Represents an individual path used within a <see cref="Expressions.PathExpression"/>.</para>
   /// </summary>
   public class TalesPath
   {
@@ -119,6 +119,21 @@ namespace CraigFowler.Web.ZPT.Tales
       return String.Join(PARTS_SEPARATOR.ToString(), this.Parts.ToArray(), 0, partCount);
     }
     
+    /// <summary>
+    /// <para>Overridden.  Evaluates whether this instance equals the given <paramref name="obj"/>.</para>
+    /// </summary>
+    /// <remarks>
+    /// <para>
+    /// This will only return true if <paramref name="obj"/> is a <see cref="TalesPath"/> and its
+    /// <see cref="TalesPath.Text"/> matches the Text property on this instance.
+    /// </para>
+    /// </remarks>
+    /// <param name="obj">
+    /// A <see cref="System.Object"/>
+    /// </param>
+    /// <returns>
+    /// A <see cref="System.Boolean"/>
+    /// </returns>
     public override bool Equals (object obj)
     {
       bool output;
@@ -135,6 +150,12 @@ namespace CraigFowler.Web.ZPT.Tales
       return output;
     }
     
+    /// <summary>
+    /// <para>Gets a hash code for this instance.</para>
+    /// </summary>
+    /// <returns>
+    /// A <see cref="System.Int32"/>
+    /// </returns>
     public override int GetHashCode ()
     {
       return (this.Text != null)? this.Text.GetHashCode() : "{NULL PATH}".GetHashCode();
@@ -155,7 +176,7 @@ namespace CraigFowler.Web.ZPT.Tales
     /// A <see cref="System.String"/>
     /// </param>
     /// <returns>
-    /// A <see cref="Queue<System.String>"/>
+    /// A collection of <see cref="System.String"/> instances.
     /// </returns>
     /// <exception cref="FormatException">
     /// If the given <paramref name="path" /> contains a component that is null or empty then this exception is raised.

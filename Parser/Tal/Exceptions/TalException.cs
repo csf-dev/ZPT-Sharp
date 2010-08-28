@@ -1,5 +1,5 @@
 //  
-//  TalesException.cs
+//  TalException.cs
 //  
 //  Author:
 //       Craig Fowler <craig@craigfowler.me.uk>
@@ -21,17 +21,19 @@
 
 using System;
 
-namespace CraigFowler.Web.ZPT.Tales.Exceptions
+namespace CraigFowler.Web.ZPT.Tal.Exceptions
 {
   /// <summary>
-  /// <para>Base class for exceptions encountered whilst parsing and evaluating TALES expressions.</para>
+  /// <para>
+  /// Represents an <see cref="Exception"/> encountered when parsing or processing a <see cref="TalDocument"/> or a
+  /// <see cref="TalElement"/>.
+  /// </para>
   /// </summary>
-  public abstract class TalesException : Exception
+  public class TalException : Exception
   {
-    #region contants
+    #region constants
     
-    private const string
-      DEFAULT_MESSAGE         = "There was an error relating to a TALES expression.";
+    private const string DEFAULT_MESSAGE = "There was an error relating to a TAL document or element";
     
     #endregion
     
@@ -52,7 +54,7 @@ namespace CraigFowler.Web.ZPT.Tales.Exceptions
     /// In a permanent error, changing the values within the domain model will not help resolving the error.
     /// </para>
     /// </summary>
-    public virtual bool PermanentError
+    public bool PermanentError
     {
       get {
         return fatal;
@@ -69,7 +71,7 @@ namespace CraigFowler.Web.ZPT.Tales.Exceptions
     /// <summary>
     /// <para>Initialises this instance with default values.</para>
     /// </summary>
-    public TalesException() : this(DEFAULT_MESSAGE, null) {}
+    public TalException() : this(DEFAULT_MESSAGE, null) {}
     
     /// <summary>
     /// <para>Initialises this instance with an exception message.</para>
@@ -77,7 +79,7 @@ namespace CraigFowler.Web.ZPT.Tales.Exceptions
     /// <param name="message">
     /// A <see cref="System.String"/>
     /// </param>
-    public TalesException(string message) : this(message, null) {}
+    public TalException(string message) : this(message, null) {}
     
     /// <summary>
     /// <para>Initialises this instance with an inner exception.</para>
@@ -85,7 +87,7 @@ namespace CraigFowler.Web.ZPT.Tales.Exceptions
     /// <param name="inner">
     /// A <see cref="Exception"/>
     /// </param>
-    public TalesException(Exception inner) : this(DEFAULT_MESSAGE, inner) {}
+    public TalException(Exception inner) : this(DEFAULT_MESSAGE, inner) {}
     
     /// <summary>
     /// <para>Initialises this instance with an exception message and an inner exception.</para>
@@ -96,7 +98,7 @@ namespace CraigFowler.Web.ZPT.Tales.Exceptions
     /// <param name="inner">
     /// A <see cref="Exception"/>
     /// </param>
-    public TalesException(string message, Exception inner) : base(message, inner)
+    public TalException(string message, Exception inner) : base(message, inner)
     {
       this.PermanentError = true;
     }

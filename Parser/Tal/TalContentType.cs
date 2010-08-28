@@ -1,5 +1,5 @@
 //  
-//  IHasTalesContext.cs
+//  TalContentType.cs
 //  
 //  Author:
 //       Craig Fowler <craig@craigfowler.me.uk>
@@ -20,12 +20,25 @@
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
-using CraigFowler.Web.ZPT.Tales;
 
 namespace CraigFowler.Web.ZPT.Tal
 {
-  public interface IHasTalesContext
+  /// <summary>
+  /// <para>Enumerates the types of TAL content that can be written when rendering a <see cref="TalElement"/>.</para>
+  /// </summary>
+  public enum TalContentType : int
   {
-    TalesContext TalesContext { get; }
+    /// <summary>
+    /// <para>
+    /// Indicates that the content should be written directly as text, thus all special XML characters should be
+    /// escaped.
+    /// </para>
+    /// </summary>
+    Text            = 1,
+    
+    /// <summary>
+    /// <para>Indicates that the content should be writen verbatim, retaining any embedded XML structure.</para>
+    /// </summary>
+    Structure
   }
 }

@@ -24,6 +24,12 @@ using System.Collections.Generic;
 
 namespace CraigFowler.Web.ZPT.Tales.Exceptions
 {
+  /// <summary>
+  /// <para>
+  /// Represents a <see cref="TalesException"/> encountered when none of a collection of <see cref="TalesPath"/>
+  /// instances could be traversed.
+  /// </para>
+  /// </summary>
   public class TraversalException : TalesException
   {
     #region constants
@@ -40,6 +46,12 @@ namespace CraigFowler.Web.ZPT.Tales.Exceptions
     
     #region properties
     
+    /// <summary>
+    /// <para>
+    /// Read-only.  Gets a ictionary of <see cref="TalesException"/> instances representing the problems encountered in
+    /// traversing paths, indexed by the <see cref="TalesPath"/> that they are associated with.
+    /// </para>
+    /// </summary>
     public Dictionary<TalesPath, TalesException> Attempts
     {
       get {
@@ -50,6 +62,9 @@ namespace CraigFowler.Web.ZPT.Tales.Exceptions
       }
     }
     
+    /// <summary>
+    /// <para>Overridden.  Gets whether this is a permanent error.</para>
+    /// </summary>
     public override bool PermanentError
     {
       get {
@@ -57,6 +72,9 @@ namespace CraigFowler.Web.ZPT.Tales.Exceptions
         
         foreach(TalesPath path in this.Attempts.Keys)
         {
+          /* If just one of the errors encountered whilst traversing the paths was not permanent, then this error is
+           * not permanent either.
+           */
           if(this.Attempts[path] != null && this.Attempts[path].PermanentError == false)
           {
             output = false;
@@ -72,6 +90,9 @@ namespace CraigFowler.Web.ZPT.Tales.Exceptions
     
     #region constructor
     
+    /// <summary>
+    /// <para>Initialises this instance with default values and an empty <see cref="Attempts"/> collection.</para>
+    /// </summary>
     public TraversalException() : base(DEFAULT_MESSAGE, null)
     {
       this.Attempts = new Dictionary<TalesPath, TalesException>();

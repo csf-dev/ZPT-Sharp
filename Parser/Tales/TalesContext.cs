@@ -22,6 +22,7 @@
 using System;
 using System.Collections.Generic;
 using CraigFowler.Web.ZPT.Tales.Exceptions;
+using CraigFowler.Web.ZPT.Tal;
 
 namespace CraigFowler.Web.ZPT.Tales
 {
@@ -63,7 +64,7 @@ namespace CraigFowler.Web.ZPT.Tales
     /// Gets or sets the <see cref="TalesContext"/> that is the immediate parent of this context.  May be null.
     /// </para>
     /// </summary>
-    protected TalesContext ParentContext
+    public TalesContext ParentContext
     {
       get {
         return parentContext;
@@ -166,7 +167,11 @@ namespace CraigFowler.Web.ZPT.Tales
     /// <summary>
     /// <para>
     /// Gets a reference to the object that serves as the 'start-point' of a path reference from an identifier string.
-    /// The following priority order is used:
+    /// </para>
+    /// </summary>
+    /// <remarks>
+    /// <para>
+    /// The following priority order is used to search for the requested reference:
     /// </para>
     /// <list type="number">
     /// <item>If it is the special string CONTEXTS then return the special root contexts dictionary.</item>
@@ -176,20 +181,9 @@ namespace CraigFowler.Web.ZPT.Tales
     /// </item>
     /// <item>If the identifier has not been found then set "found" to false and return null.</item>
     /// </list>
-    /// </summary>
+    /// </remarks>
     /// <param name="identifier">
     /// A <see cref="System.String"/> - the starting object name in a TALES 'path' string.
-    /// </param>
-    /// <param name="found">
-    /// <para>
-    /// A <see cref="System.Boolean"/>, if the object reference was found (that is, it exists as a definition) then this
-    /// parameter will output true.  If the given object reference does not exist as a definition, nor is it a builtin
-    /// root context then this will output false.
-    /// </para>
-    /// <para>
-    /// Note that this will be set to true even if the given object is null.  It will only be false if no such
-    /// definition exists.
-    /// </para>
     /// </param>
     /// <returns>
     /// A <see cref="System.Object"/> - the object reference to the start point of the path.  Note that this may be null
@@ -200,8 +194,10 @@ namespace CraigFowler.Web.ZPT.Tales
     /// If the parameter <paramref name="identifier"/> is null.
     /// </exception>
     /// <exception cref="ArgumentOutOfRangeException">
-    /// If the parameter <paramref name="identifier"/> is an empty string OR if no matching root object reference can
-    /// be found in this context.
+    /// If the parameter <paramref name="identifier"/> is an empty string.
+    /// </exception>
+    /// <exception cref="RootObjectNotFoundException">
+    /// If the reference requested by the parameter <paramref name="identifier"/> cannot be found in this context.
     /// </exception>
     public object GetRootObject(string identifier)
     {
@@ -296,6 +292,57 @@ namespace CraigFowler.Web.ZPT.Tales
       AddDefinition(alias, content, DEFAULT_DEFINITION_TYPE);
     }
     
+    /// <summary>
+    /// <para>Overloaded.  Adds a new definition for a TAL <see cref="RepeatVariable"/>.</para>
+    /// </summary>
+    /// <param name="alias">
+    /// A <see cref="System.String"/>, the alias to use for this variable.
+    /// </param>
+    /// <param name="repeatVariable">
+    /// A <see cref="RepeatVariable"/>, the variable to add.
+    /// </param>
+    public void AddRepeatVariable(string alias, RepeatVariable repeatVariable)
+    {
+      if(alias == null)
+      {
+        throw new ArgumentNullException("alias");
+      }
+      else if(alias == String.Empty)
+      {
+        throw new ArgumentOutOfRangeException("alias", "The variable name may not be an empty string.");
+      }
+      else if(repeatVariable == null)
+      {
+        throw new ArgumentNullException("repeatVariable");
+      }
+      
+      this.RepeatVariables[alias] = repeatVariable;
+    }
+    
+    /// <summary>
+    /// <para>
+    /// Overloaded.  Creates a new <see cref="RepeatVariable"/>, adds it to this context as a new definition and then
+    /// returns the newly-created variable.
+    /// </para>
+    /// </summary>
+    /// <param name="alias">
+    /// A <see cref="System.String"/>, the alias to use for this variable.
+    /// </param>
+    /// <param name="expression">
+    /// A <see cref="System.String"/>,the expression to use with which to create the new <see cref="RepeatVariable"/>.
+    /// </param>
+    /// <returns>
+    /// A <see cref="RepeatVariable"/>, the newly-created variable that has been added to this context.
+    /// </returns>
+    public RepeatVariable AddRepeatVariable(string alias, string expression)
+    {
+      RepeatVariable variable = new RepeatVariable(this.CreateExpression(expression).GetValue());
+      
+      AddRepeatVariable(alias, variable);
+      
+      return variable;
+    }
+    
     #endregion
     
     #region private methods
@@ -308,13 +355,13 @@ namespace CraigFowler.Web.ZPT.Tales
     /// </para>
     /// </summary>
     /// <param name="parent">
-    /// A <see cref="Dictionary<System.String, System.Object>"/>
+    /// A dictionary of <see cref="System.String"/> and <see cref="System.Object"/>
     /// </param>
     /// <param name="child">
-    /// A <see cref="Dictionary<System.String, System.Object>"/>
+    /// A dictionary of <see cref="System.String"/> and <see cref="System.Object"/>
     /// </param>
     /// <returns>
-    /// A <see cref="Dictionary<System.String, System.Object>"/>
+    /// A dictionary of <see cref="System.String"/> and <see cref="System.Object"/>
     /// </returns>
     private Dictionary<string,object> MergeDictionaries(Dictionary<string,object> parent,
                                                         Dictionary<string,object> child)
@@ -360,7 +407,7 @@ namespace CraigFowler.Web.ZPT.Tales
     /// </para>
     /// </summary>
     /// <returns>
-    /// A <see cref="Dictionary"/> of objects, indexed by <see cref="System.String"/> keys.
+    /// A dictionary of <see cref="System.Object"/>, indexed by <see cref="System.String"/> keys.
     /// </returns>
     private Dictionary<string,object> GetAliases()
     {
@@ -386,7 +433,7 @@ namespace CraigFowler.Web.ZPT.Tales
     /// </para>
     /// </summary>
     /// <returns>
-    /// A <see cref="Dictionary"/> of objects, indexed by <see cref="System.String"/> keys.
+    /// A dictionary of <see cref="System.Object"/>, indexed by <see cref="System.String"/> keys.
     /// </returns>
     private Dictionary<string,object> GetRepeatVariables()
     {

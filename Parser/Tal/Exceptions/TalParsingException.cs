@@ -1,5 +1,5 @@
 //  
-//  TalesException.cs
+//  TalProcessingException.cs
 //  
 //  Author:
 //       Craig Fowler <craig@craigfowler.me.uk>
@@ -21,23 +21,19 @@
 
 using System;
 
-namespace CraigFowler.Web.ZPT.Tales.Exceptions
+namespace CraigFowler.Web.ZPT.Tal.Exceptions
 {
   /// <summary>
-  /// <para>Base class for exceptions encountered whilst parsing and evaluating TALES expressions.</para>
+  /// <para>
+  /// Represents a <see cref="TalException"/> encountered whilst parsing a <see cref="TalDocument"/> or a
+  /// <see cref="TalElement"/>.
+  /// </para>
   /// </summary>
-  public abstract class TalesException : Exception
+  public class TalParsingException : TalException
   {
-    #region contants
+    #region constants
     
-    private const string
-      DEFAULT_MESSAGE         = "There was an error relating to a TALES expression.";
-    
-    #endregion
-    
-    #region fields
-    
-    private bool fatal;
+    private const string DEFAULT_MESSAGE = "There was a fatal error whilst parsing a TAL document or element.";
     
     #endregion
     
@@ -45,20 +41,16 @@ namespace CraigFowler.Web.ZPT.Tales.Exceptions
     
     /// <summary>
     /// <para>
-    /// Gets and sets a value that indicates whether this exception indicates a permanent error in parsing the
-    /// expression.
-    /// </para>
-    /// <para>
-    /// In a permanent error, changing the values within the domain model will not help resolving the error.
+    /// Gets and sets the <see cref="System.String"/> (usually a TAL attribute value) that has caused this error.
     /// </para>
     /// </summary>
-    public virtual bool PermanentError
+    public string ProblemString
     {
       get {
-        return fatal;
+        return (string) this.Data["problematic statement"];
       }
-      protected set {
-        fatal = value;
+      set {
+        this.Data["problematic statement"] = value;
       }
     }
     
@@ -69,15 +61,7 @@ namespace CraigFowler.Web.ZPT.Tales.Exceptions
     /// <summary>
     /// <para>Initialises this instance with default values.</para>
     /// </summary>
-    public TalesException() : this(DEFAULT_MESSAGE, null) {}
-    
-    /// <summary>
-    /// <para>Initialises this instance with an exception message.</para>
-    /// </summary>
-    /// <param name="message">
-    /// A <see cref="System.String"/>
-    /// </param>
-    public TalesException(string message) : this(message, null) {}
+    public TalParsingException() : this(DEFAULT_MESSAGE, null) {}
     
     /// <summary>
     /// <para>Initialises this instance with an inner exception.</para>
@@ -85,7 +69,15 @@ namespace CraigFowler.Web.ZPT.Tales.Exceptions
     /// <param name="inner">
     /// A <see cref="Exception"/>
     /// </param>
-    public TalesException(Exception inner) : this(DEFAULT_MESSAGE, inner) {}
+    public TalParsingException(Exception inner) : this(DEFAULT_MESSAGE, inner) {}
+    
+    /// <summary>
+    /// <para>Initialises this instance with an exception message.</para>
+    /// </summary>
+    /// <param name="message">
+    /// A <see cref="System.String"/>
+    /// </param>
+    public TalParsingException(string message) : this(message, null) {}
     
     /// <summary>
     /// <para>Initialises this instance with an exception message and an inner exception.</para>
@@ -96,7 +88,7 @@ namespace CraigFowler.Web.ZPT.Tales.Exceptions
     /// <param name="inner">
     /// A <see cref="Exception"/>
     /// </param>
-    public TalesException(string message, Exception inner) : base(message, inner)
+    public TalParsingException(string message, Exception inner) : base(message, inner)
     {
       this.PermanentError = true;
     }

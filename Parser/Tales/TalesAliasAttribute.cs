@@ -23,11 +23,20 @@ using System;
 
 namespace CraigFowler.Web.ZPT.Tales
 {
+  /// <summary>
+  /// <para>Used to indicate an alias that TALES may use to refer to a member.</para>
+  /// </summary>
+  /// <remarks>
+  /// <para>This attribute is valid on properties, methods and fields.</para>
+  /// </remarks>
   [AttributeUsage(AttributeTargets.Property | AttributeTargets.Method | AttributeTargets.Field)]
   public class TalesAliasAttribute : Attribute
   {
     private string alias;
     
+    /// <summary>
+    /// <para>Gets and sets the string alias that TALES may use to refer to the member.</para>
+    /// </summary>
     public string Alias
     {
       get {
@@ -43,6 +52,12 @@ namespace CraigFowler.Web.ZPT.Tales
       }
     }
     
+    /// <summary>
+    /// <para>Default constructor initialises this instance with the given <paramref name="memberAlias"/>.</para>
+    /// </summary>
+    /// <param name="memberAlias">
+    /// A <see cref="System.String"/>
+    /// </param>
     public TalesAliasAttribute(string memberAlias)
     {
       this.Alias = memberAlias;

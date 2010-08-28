@@ -28,9 +28,24 @@ namespace CraigFowler.Web.ZPT.Tales
   /// </summary>
   public enum ExpressionType : int
   {
+    /// <summary>
+    /// <para>An unknown expression type.</para>
+    /// </summary>
     Unknown         = 0,
+    
+    /// <summary>
+    /// <para>A <see cref="Expressions.InverseBooleanExpression"/>.</para>
+    /// </summary>
     InverseBoolean,
+    
+    /// <summary>
+    /// <para>A <see cref="Expressions.PathExpression"/>.</para>
+    /// </summary>
     Path,
+    
+    /// <summary>
+    /// <para>A <see cref="Expressions.StringExpression"/>.</para>
+    /// </summary>
     String
   }
 }

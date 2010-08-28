@@ -27,11 +27,25 @@ using System.Text;
 
 namespace CraigFowler.Web.ZPT.Tal
 {
-  public class TalDocument : XmlDocument, IHasTalesContext
+  /// <summary>
+  /// <para>
+  /// A ZPT template document.  This is a <see cref="XmlDocument"/> that contains ZPT-specific logic to assist in
+  /// rendering the final output.
+  /// </para>
+  /// </summary>
+  public class TalDocument : XmlDocument, ITalElement
   {
     #region constants
     
+    /// <summary>
+    /// <para>Read-only.  Constant represents the registered XML namespace for TAL.</para>
+    /// </summary>
     public const string TalNamespace = "http://xml.zope.org/namespaces/tal";
+    
+    /// <summary>
+    /// <para>Read-only.  Constant represents the registered XML namespace for METAL.</para>
+    /// </summary>
+    public const string MetalNamespace = "http://xml.zope.org/namespaces/metal";
     
     #endregion
     
@@ -43,12 +57,15 @@ namespace CraigFowler.Web.ZPT.Tal
     
     #region properties
     
+    /// <summary>
+    /// <para>Gets and sets the <see cref="TalesContext"/> for this TAL document.</para>
+    /// </summary>
     public TalesContext TalesContext
     {
       get {
         return context;
       }
-      private set {
+      set {
         if(value == null)
         {
           throw new ArgumentNullException("value");
@@ -62,12 +79,12 @@ namespace CraigFowler.Web.ZPT.Tal
     
     #region methods
     
-    public override void WriteTo (XmlWriter w)
-    {
-      // TODO: Write this TAL document to the given writer
-      throw new NotImplementedException();
-    }
-    
+    /// <summary>
+    /// <para>Overloaded.  Convenience method that renders the output of this document to a string.</para>
+    /// </summary>
+    /// <returns>
+    /// A <see cref="System.String"/>, the rendered output document.
+    /// </returns>
     public string Render()
     {
       StringBuilder output = new StringBuilder();
@@ -76,40 +93,55 @@ namespace CraigFowler.Web.ZPT.Tal
       {
         using (XmlWriter xmlWriter = new XmlTextWriter(writer))
         {
-          this.WriteTo(xmlWriter);
+          this.Render(xmlWriter);
         }
       }
       
       return output.ToString();
     }
     
-    private TalElement CreateTalElement(XmlElement elementToCopy)
+    /// <summary>
+    /// <para>Overloaded.  Renders the output of this document to the given <see cref="XmlWriter"/>.</para>
+    /// </summary>
+    /// <param name="writer">
+    /// An <see cref="XmlWriter"/> to write the rendere output of this document to.
+    /// </param>
+    public void Render(XmlWriter writer)
     {
-      return TalElement.CreateFromXmlNode(elementToCopy, this);
+      foreach(XmlNode node in this.ChildNodes)
+      {
+        if(node is ITalElement)
+        {
+          ((ITalElement) node).Render(writer);
+        }
+        else
+        {
+          node.WriteTo(writer);
+        }
+      }
+    }
+    
+    /// <summary>
+    /// <para>Gets the parent TALES context.  Always returns null, since the root/document element has no parent.</para>
+    /// </summary>
+    /// <returns>
+    /// Always returns null.
+    /// </returns>
+    public TalesContext GetParentTalesContext()
+    {
+      return null;
     }
     
     #endregion
     
     #region constructor
     
+    /// <summary>
+    /// <para>Initialises this instance with a new/empty <see cref="TalesContext"/>.</para>
+    /// </summary>
     public TalDocument() : base()
     {
       this.TalesContext = new TalesContext();
-    }
-    
-    protected TalDocument(XmlDocument document) : this()
-    {
-      // TODO: Create this copy-constructor
-      throw new NotImplementedException();
-    }
-    
-    #endregion
-    
-    #region static methods
-    
-    public TalDocument ParseXmlDocument(XmlDocument document)
-    {
-      return new TalDocument(document);
     }
     
     #endregion

@@ -23,6 +23,12 @@ using System;
 
 namespace CraigFowler.Web.ZPT.Tales.Exceptions
 {
+  /// <summary>
+  /// <para>
+  /// Represents a <see cref="TalesException"/> raised because the root object in a TALES
+  /// <see cref="CraigFowler.Web.ZPT.Tales.Expressions.PathExpression"/> could not be found.
+  /// </para>
+  /// </summary>
   public class RootObjectNotFoundException : TalesException
   {
     #region constants
@@ -61,8 +67,23 @@ namespace CraigFowler.Web.ZPT.Tales.Exceptions
     
     #region constructor
     
+    /// <summary>
+    /// <para>Initialises this instance with the given <paramref name="path"/>.</para>
+    /// </summary>
+    /// <param name="path">
+    /// A <see cref="TalesPath"/>
+    /// </param>
     public RootObjectNotFoundException(TalesPath path) : this(path, null) {}
     
+    /// <summary>
+    /// <para>Initialises this instance with the given <paramref name="path"/> and an inner exception.</para>
+    /// </summary>
+    /// <param name="path">
+    /// A <see cref="TalesPath"/>
+    /// </param>
+    /// <param name="inner">
+    /// A <see cref="Exception"/>
+    /// </param>
     public RootObjectNotFoundException(TalesPath path, Exception inner) : base(DEFAULT_MESSAGE, inner)
     {
       this.PermanentError = true;
@@ -76,8 +97,28 @@ namespace CraigFowler.Web.ZPT.Tales.Exceptions
       }
     }
     
+    /// <summary>
+    /// <para>
+    /// Initialises this instance with the given <paramref name="identifier"/> for the root object in the path.
+    /// </para>
+    /// </summary>
+    /// <param name="identifier">
+    /// A <see cref="System.String"/>
+    /// </param>
     public RootObjectNotFoundException(string identifier) : this(identifier, null) {}
     
+    /// <summary>
+    /// <para>
+    /// Initialises this instance with the given <paramref name="identifier"/> for the root object in the path and an
+    /// inner exception.
+    /// </para>
+    /// </summary>
+    /// <param name="identifier">
+    /// A <see cref="System.String"/>
+    /// </param>
+    /// <param name="inner">
+    /// A <see cref="Exception"/>
+    /// </param>
     public RootObjectNotFoundException(string identifier, Exception inner) : base(DEFAULT_MESSAGE, inner)
     {
       this.PermanentError = true;

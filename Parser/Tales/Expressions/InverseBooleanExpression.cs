@@ -23,10 +23,22 @@ using System;
 
 namespace CraigFowler.Web.ZPT.Tales.Expressions
 {
+  /// <summary>
+  /// <para>Represents an 'inverse boolean' <see cref="TalesExpression"/>.</para>
+  /// </summary>
+  /// <remarks>
+  /// <para>
+  /// These expression types contain a 'child' expression.  When evaluating an inverse boolean expression, the child
+  /// expression is first evaluated and then the boolean inverse is returned.
+  /// </para>
+  /// </remarks>
   public class InverseBooleanExpression : TalesExpression
   {
     #region constants
     
+    /// <summary>
+    /// <para>Read-only.  Constant representing the registered prefix for this type of expression.</para>
+    /// </summary>
     public const string Prefix = "not:";
     
     #endregion
@@ -39,6 +51,9 @@ namespace CraigFowler.Web.ZPT.Tales.Expressions
     
     #region properties
     
+    /// <summary>
+    /// <para>Rea-only.  Gets the 'inner' <see cref="TalesExpression"/> for this instance.</para>
+    /// </summary>
     public TalesExpression InnerExpression
     {
       get {
@@ -58,6 +73,12 @@ namespace CraigFowler.Web.ZPT.Tales.Expressions
     
     #region methods
     
+    /// <summary>
+    /// <para>Overridden.  Gets the value of this expression.</para>
+    /// </summary>
+    /// <returns>
+    /// A <see cref="System.Object"/>, which will always be a <see cref="System.Boolean"/>.
+    /// </returns>
     public override object GetValue()
     {
       return !this.InnerExpression.GetBooleanValue();
@@ -67,6 +88,18 @@ namespace CraigFowler.Web.ZPT.Tales.Expressions
     
     #region constructor
     
+    /// <summary>
+    /// <para>
+    /// Initialises this instance with the given information.  This includes determining the
+    /// <see cref="InnerExpression"/>.
+    /// </para>
+    /// </summary>
+    /// <param name="expression">
+    /// A <see cref="System.String"/>
+    /// </param>
+    /// <param name="context">
+    /// A <see cref="TalesContext"/>
+    /// </param>
     internal InverseBooleanExpression(string expression, TalesContext context) : base(expression, context)
     {
       this.InnerExpression = context.CreateExpression(this.ExpressionBody);

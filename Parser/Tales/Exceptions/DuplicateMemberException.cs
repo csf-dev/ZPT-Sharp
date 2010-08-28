@@ -97,6 +97,15 @@ namespace CraigFowler.Web.ZPT.Tales.Exceptions
     
     #region constructors
     
+    /// <summary>
+    /// <para>Initialises this instance with the given information.</para>
+    /// </summary>
+    /// <param name="identifier">
+    /// A <see cref="System.String"/>
+    /// </param>
+    /// <param name="alias">
+    /// A <see cref="System.Boolean"/>
+    /// </param>
     public DuplicateMemberException(string identifier, bool alias) : base("The given identifier pointed to an " +
                                                                           "ambiguous member reference.")
     {

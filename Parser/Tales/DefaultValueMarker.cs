@@ -30,6 +30,20 @@ namespace CraigFowler.Web.ZPT.Tales
   {
     #region public methods
     
+    /// <summary>
+    /// <para>Overridden.  Determines equality with another object.</para>
+    /// </summary>
+    /// <remarks>
+    /// <para>
+    /// This will only return true if the <paramref name="obj"/> is another <see cref="DefaultValueMarker"/>.
+    /// </para>
+    /// </remarks>
+    /// <param name="obj">
+    /// A <see cref="System.Object"/> to compare with.
+    /// </param>
+    /// <returns>
+    /// A <see cref="System.Boolean"/> indicating whether or not this instance is equal to <paramref name="obj"/>.
+    /// </returns>
     public override bool Equals (object obj)
     {
       bool output = false;
@@ -42,6 +56,12 @@ namespace CraigFowler.Web.ZPT.Tales
       return output;
     }
     
+    /// <summary>
+    /// <para>Overridden.  Gets a hash code for this instance.</para>
+    /// </summary>
+    /// <returns>
+    /// A <see cref="System.Int32"/>
+    /// </returns>
     public override int GetHashCode ()
     {
       return "TALES PATH EXPRESSION DEFAULT VALUE MARKER".GetHashCode();
@@ -51,6 +71,9 @@ namespace CraigFowler.Web.ZPT.Tales
     
     #region constructor
     
+    /// <summary>
+    /// <para>Default constructor for a <see cref="DefaultValueMarker"/>.</para>
+    /// </summary>
     public DefaultValueMarker() {}
     
     #endregion

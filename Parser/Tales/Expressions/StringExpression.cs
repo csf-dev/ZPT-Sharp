@@ -24,10 +24,16 @@ using System.Text.RegularExpressions;
 
 namespace CraigFowler.Web.ZPT.Tales.Expressions
 {
+  /// <summary>
+  /// <para>Represents a string <see cref="TalesExpression"/>.</para>
+  /// </summary>
   public class StringExpression : TalesExpression
   {
     #region constants
     
+    /// <summary>
+    /// <para>Read-only.  Gets a constant that is the prefix for a string expression type.</para>
+    /// </summary>
     public const string Prefix = "string:";
     
     private const string
@@ -47,6 +53,12 @@ namespace CraigFowler.Web.ZPT.Tales.Expressions
     
     #region methods
     
+    /// <summary>
+    /// <para>Overridden.  Gets the value of this expression.</para>
+    /// </summary>
+    /// <returns>
+    /// A <see cref="System.Object"/>
+    /// </returns>
     public override object GetValue()
     {
       string output = this.ExpressionBody, pathExpression;

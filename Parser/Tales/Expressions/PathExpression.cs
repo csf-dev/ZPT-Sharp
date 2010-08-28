@@ -82,6 +82,12 @@ namespace CraigFowler.Web.ZPT.Tales.Expressions
     
     #region methods
     
+    /// <summary>
+    /// <para>Overridden.  Gets the value of this expression.</para>
+    /// </summary>
+    /// <returns>
+    /// A <see cref="System.Object"/>
+    /// </returns>
     public override object GetValue()
     {
       bool success = false;
@@ -132,13 +138,13 @@ namespace CraigFowler.Web.ZPT.Tales.Expressions
     #region private methods
     
     /// <summary>
-    /// <para>Extracts a <see cref="List"/> of <see cref="TalesPath"/> from the given string.</para>
+    /// <para>Extracts a collection of <see cref="TalesPath"/> from the given string.</para>
     /// </summary>
     /// <param name="expression">
     /// A <see cref="System.String"/>
     /// </param>
     /// <returns>
-    /// A <see cref="List<TalesPath>"/>
+    /// A collection of <see cref="TalesPath"/> instances.
     /// </returns>
     private List<TalesPath> ExtractPaths(string expression)
     {
@@ -171,7 +177,7 @@ namespace CraigFowler.Web.ZPT.Tales.Expressions
     /// If the <paramref name="path"/> is null.
     /// </exception>
     /// <exception cref="ArgumentOutOfRangeException">
-    /// If the <see cref="TalesPath.Parts.Count"/> of the parts in the <paramref name="path"/> is zero.
+    /// If the count of the parts in the <paramref name="path"/> is zero.
     /// </exception>
     /// <exception cref="TalesException">
     /// If there i a problem evaluating the <paramref name="path"/>.  This could be caused by a problem in fetching
@@ -336,6 +342,9 @@ namespace CraigFowler.Web.ZPT.Tales.Expressions
     /// <param name="memberIdentifier">
     /// A <see cref="System.String"/>
     /// </param>
+    /// <param name="isIndexer">
+    /// A <see cref="System.Boolean"/>
+    /// </param>
     /// <returns>
     /// A <see cref="MemberInfo"/>
     /// </returns>
@@ -465,6 +474,9 @@ namespace CraigFowler.Web.ZPT.Tales.Expressions
     /// <param name="basePosition">
     /// A <see cref="System.Int32"/>
     /// </param>
+    /// <param name="useCurrentPosition">
+    /// A <see cref="System.Boolean"/>
+    /// </param>
     /// <returns>
     /// A <see cref="System.Object"/>
     /// </returns>
@@ -517,6 +529,15 @@ namespace CraigFowler.Web.ZPT.Tales.Expressions
     
     #region constructor
     
+    /// <summary>
+    /// <para>Initialises this instance and constructs the <see cref="Paths"/> property.</para>
+    /// </summary>
+    /// <param name="expression">
+    /// A <see cref="System.String"/>
+    /// </param>
+    /// <param name="context">
+    /// A <see cref="TalesContext"/>
+    /// </param>
     internal PathExpression(string expression, TalesContext context) : base(expression, context)
     {
       this.Paths = ExtractPaths(ExpressionBody);
@@ -526,6 +547,18 @@ namespace CraigFowler.Web.ZPT.Tales.Expressions
 
     #region static methods
     
+    /// <summary>
+    /// <para>
+    /// Validates the given <paramref name="expression"/> as a <see cref="PathExpression"/> and returns a boolean
+    /// indicating its validity.
+    /// </para>
+    /// </summary>
+    /// <param name="expression">
+    /// A <see cref="System.String"/>
+    /// </param>
+    /// <returns>
+    /// A <see cref="System.Boolean"/>
+    /// </returns>
     public static bool IsValid(string expression)
     {
       return (expression != null)? ValidPathExpression.Match(expression).Success : false;

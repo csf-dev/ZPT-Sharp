@@ -20,6 +20,8 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <ConsolePause>false</ConsolePause>
+    <GenerateDocumentation>true</GenerateDocumentation>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>none</DebugType>
@@ -28,6 +30,8 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <ConsolePause>false</ConsolePause>
+    <GenerateDocumentation>true</GenerateDocumentation>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -53,8 +57,11 @@
     <Compile Include="Tal\RepeatVariable.cs" />
     <Compile Include="Tales\DefinitionType.cs" />
     <Compile Include="Tal\TalDocument.cs" />
-    <Compile Include="Tal\TalNode.cs" />
-    <Compile Include="Tal\IHasTalesContext.cs" />
+    <Compile Include="Tal\ITalElement.cs" />
+    <Compile Include="Tal\TalElement.cs" />
+    <Compile Include="Tal\Exceptions\TalException.cs" />
+    <Compile Include="Tal\Exceptions\TalParsingException.cs" />
+    <Compile Include="Tal\TalContentType.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
@@ -62,6 +69,7 @@
     <Folder Include="Tales\Expressions\" />
     <Folder Include="Tales\Exceptions\" />
     <Folder Include="Tal\" />
+    <Folder Include="Tal\Exceptions\" />
   </ItemGroup>
   <ProjectExtensions>
     <MonoDevelop>
