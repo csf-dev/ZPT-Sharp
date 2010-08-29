@@ -71,10 +71,10 @@ namespace CraigFowler.Web.ZPT.Tal
     
     private const string
       DEFINE_STATEMENTS_PATTERN                   = @"([^;]|;;)+",
-      DEFINE_SPECIFICATION_PATTERN                = @"^\s*((global|local) )?([a-zA-Z0-9]+) (.+)$",
+      DEFINE_SPECIFICATION_PATTERN                = @"^[\n\s]*((global|local) )?([a-zA-Z0-9]+) (.+)$",
       CONTENT_OR_REPLACE_SPECIFICATION_PATTERN    = @"^((text|structure) )?(.+)$",
       REPEAT_SPECIFICATION_PATTERN                = @"^([a-zA-Z0-9]+) (.+)$",
-      ATTRIBUTES_SPECIFICATION_PATTERN            = @"^(([^: ]+):)?([^ ]+) (.+)$";
+      ATTRIBUTES_SPECIFICATION_PATTERN            = @"^[\n\s]*(([^: ]+):)?([^ ]+) (.+)$";
     
     /// <summary>
     /// <para>
@@ -286,7 +286,7 @@ namespace CraigFowler.Web.ZPT.Tal
         foreach(Match statementMatch in statementMatches)
         {
           string
-            statement = statementMatch.Value,
+            statement = statementMatch.Value.Replace(";;", ";"),
             variableName,
             expression;
           DefinitionType type = DefinitionType.Local;
@@ -575,7 +575,7 @@ namespace CraigFowler.Web.ZPT.Tal
         foreach(Match statementMatch in statementMatches)
         {
           string
-            statement = statementMatch.Value,
+            statement = statementMatch.Value.Replace(";;", ";"),
             prefix = null,
             localName,
             expression;
