@@ -73,7 +73,8 @@ namespace CraigFowler.Web.ZPT.Tal
       DEFINE_STATEMENTS_PATTERN                   = @"([^;]|;;)+",
       DEFINE_SPECIFICATION_PATTERN                = @"^\s*((global|local) )?([a-zA-Z0-9]+) (.+)$",
       CONTENT_OR_REPLACE_SPECIFICATION_PATTERN    = @"^((text|structure) )?(.+)$",
-      REPEAT_SPECIFICATION_PATTERN                = @"^([a-zA-Z0-9]+) (.+)$";
+      REPEAT_SPECIFICATION_PATTERN                = @"^([a-zA-Z0-9]+) (.+)$",
+      ATTRIBUTES_SPECIFICATION_PATTERN            = @"^(([^: ]+):)?([^ ]+) (.+)$";
     
     /// <summary>
     /// <para>
@@ -105,6 +106,14 @@ namespace CraigFowler.Web.ZPT.Tal
     /// </summary>
     public static readonly Regex RepeatSpecification = new Regex(REPEAT_SPECIFICATION_PATTERN,
                                                                  RegexOptions.Compiled);
+    
+    /// <summary>
+    /// <para>
+    /// Read-only.  Gets a <see cref="Regex"/> that matches the specification for an 'attributes' attribute value.
+    /// </para>
+    /// </summary>
+    public static readonly Regex AttributesSpecification = new Regex(ATTRIBUTES_SPECIFICATION_PATTERN,
+                                                                     RegexOptions.Compiled);
     
     #endregion
     
@@ -475,29 +484,61 @@ namespace CraigFowler.Web.ZPT.Tal
                                                      out TalContentType contentType,
                                                      out bool replaceElement)
     {
-//      bool output;
-//      string contentAttribute;
-//      
-//      /* First try looking for a "replace" attribute, then if that fails a "content" attribute.
-//       * If we find either then we are writing content to the document.
-//       */
-//      contentAttribute = GetTalAttribute("replace");
-//      if(contentAttribute != String.Empty)
-//      {
-//        replaceElement = true;
-//        output = true;
-//      }
-//      else
-//      {
-//        contentAttribute = GetTalAttribute("content");
-//        output = (contentAttribute != String.Empty);
-//        replaceElement = false;
-//      }
+      bool output;
+      string contentAttribute;
       
-      // TODO: Finish this method - need to determine the content type and get the content
-      throw new NotImplementedException();
+      // Just default values for these parameters
+      content = null;
+      contentType = TalContentType.Text;
+      replaceElement = false;
       
-//      return output;
+      /* First try looking for a "replace" attribute, then if that fails a "content" attribute.
+       * If we find either then we are writing content to the document.
+       */
+      contentAttribute = GetTalAttribute("replace");
+      if(contentAttribute != String.Empty)
+      {
+        replaceElement = true;
+        output = true;
+      }
+      else
+      {
+        contentAttribute = GetTalAttribute("content");
+        output = (contentAttribute != String.Empty);
+        replaceElement = false;
+      }
+      
+      // If we are providing some content then we figure out what it is
+      if(output)
+      {
+        Match contentStatement = ContentOrReplaceSpecification.Match(contentAttribute);
+        
+        if(!contentStatement.Success)
+        {
+          TalParsingException ex = new TalParsingException("Error whilst parsing a 'content' or 'replace' attribute.");
+          ex.ProblemString = contentAttribute;
+          throw ex;
+        }
+        
+        if(contentStatement.Groups[2].Success)
+        {
+          switch(contentStatement.Groups[2].Value)
+          {
+          case TextTypeIdentifier:
+            contentType = TalContentType.Text;
+            break;
+          case StructureTypeIdentifier:
+            contentType = TalContentType.Structure;
+            break;
+          default:
+            throw new NotSupportedException("Unsupported content type.");
+          }
+        }
+        
+        content = contentStatement.Groups[3].Value;
+      }
+      
+      return output;
     }
     
     /// <summary>
@@ -520,10 +561,83 @@ namespace CraigFowler.Web.ZPT.Tal
       return output;
     }
     
+    /// <summary>
+    /// <para>Handles the TAL 'attributes' attribute.</para>
+    /// </summary>
     private void ProcessTalAttributesAttribute()
     {
-      // TODO: Process the 'attributes' attribute
-      throw new NotImplementedException();
+      string attributeValue = GetTalAttribute("attributes");
+      
+      if(attributeValue != String.Empty)
+      {
+        MatchCollection statementMatches = DefineStatements.Matches(attributeValue);
+        
+        foreach(Match statementMatch in statementMatches)
+        {
+          string
+            statement = statementMatch.Value,
+            prefix = null,
+            localName,
+            expression;
+          Match attributesStatementMatch = AttributesSpecification.Match(statement);
+          object expressionResult;
+          XmlAttribute attribute;
+          
+          if(!attributesStatementMatch.Success)
+          {
+            TalParsingException ex = new TalParsingException("Error whilst parsing an 'attributes' attribute.");
+            ex.ProblemString = statement;
+            throw ex;
+          }
+          
+          if(attributesStatementMatch.Groups[2].Success)
+          {
+            prefix = attributesStatementMatch.Groups[2].Value;
+          }
+          
+          localName = attributesStatementMatch.Groups[3].Value;
+          expression = attributesStatementMatch.Groups[4].Value;
+          
+          if(prefix != null)
+          {
+            attribute = this.Attributes[localName, this.GetNamespaceOfPrefix(prefix)];
+          }
+          else
+          {
+            attribute = this.Attributes[localName];
+          }
+          
+          expressionResult = this.TalesContext.CreateExpression(expression).GetValue();
+          
+          /* How it works
+           * ------------
+           * * If the expressionResult is non-null then the attribute is created or set to the result
+           * * If the attribute already exists and the expressionResult is null tnen the attribute is removed
+           */
+          if(expressionResult != null)
+          {
+            if(prefix != null)
+            {
+              this.SetAttribute(localName, this.GetNamespaceOfPrefix(prefix), expressionResult.ToString());
+            }
+            else
+            {
+              this.SetAttribute(localName, expressionResult.ToString());
+            }
+          }
+          else if(attribute != null && expressionResult == null)
+          {
+            if(prefix != null)
+            {
+              this.RemoveAttribute(localName, this.GetNamespaceOfPrefix(prefix));
+            }
+            else
+            {
+              this.RemoveAttribute(localName);
+            }
+          }
+        }
+      }
     }
     
     /// <summary>
