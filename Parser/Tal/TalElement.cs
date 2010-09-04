@@ -450,6 +450,7 @@ namespace CraigFowler.Web.ZPT.Tal
         collectionExpression = statement.Groups[2].Value;
         
         repeatVariable = this.TalesContext.AddRepeatVariable(alias, collectionExpression);
+        
         output = true;
       }
       else
@@ -535,7 +536,7 @@ namespace CraigFowler.Web.ZPT.Tal
           }
         }
         
-        content = contentStatement.Groups[3].Value;
+        content = this.TalesContext.CreateExpression(contentStatement.Groups[3].Value).GetValue().ToString();
       }
       
       return output;
@@ -652,7 +653,7 @@ namespace CraigFowler.Web.ZPT.Tal
     private void ProcessElementContent(XmlWriter writer)
     {
       object contentToWrite;
-      bool replaceElement, writeContent;
+      bool replaceElement, writeContent, omitTag;
       TalContentType contentType;
       
       // Determine whether we are writing any custom content or not
@@ -661,7 +662,11 @@ namespace CraigFowler.Web.ZPT.Tal
       // Handle the 'omit-tag' attribute
       if(!replaceElement)
       {
-        replaceElement = ProcessTalOmitTagAttribute();
+        omitTag = ProcessTalOmitTagAttribute();
+        if(omitTag)
+        {
+          replaceElement = true;
+        }
       }
       
       if(!replaceElement)
@@ -703,7 +708,21 @@ namespace CraigFowler.Web.ZPT.Tal
         
         writer.WriteEndElement();
       }
-    }
+      else
+      {
+        foreach(XmlNode node in this.ChildNodes)
+        {
+          if(node is ITalElement)
+          {
+            ((ITalElement) node).Render(writer);
+          }
+          else
+          {
+            node.WriteTo(writer);
+          }
+        }
+      }
+    } 
     
     /// <summary>
     /// <para>Overloaded.  Writes the content of this TAL node to an <see cref="XmlWriter"/>.</para>

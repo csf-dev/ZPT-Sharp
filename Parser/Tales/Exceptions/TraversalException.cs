@@ -48,7 +48,7 @@ namespace CraigFowler.Web.ZPT.Tales.Exceptions
     
     /// <summary>
     /// <para>
-    /// Read-only.  Gets a ictionary of <see cref="TalesException"/> instances representing the problems encountered in
+    /// Read-only.  Gets a dictionary of <see cref="TalesException"/> instances representing the problems encountered in
     /// traversing paths, indexed by the <see cref="TalesPath"/> that they are associated with.
     /// </para>
     /// </summary>

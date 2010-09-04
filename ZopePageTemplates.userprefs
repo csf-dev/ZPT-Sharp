@@ -3,26 +3,10 @@
   <MonoDevelop.Ide.DebuggingService>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService>
-  <MonoDevelop.Ide.Workbench ActiveDocument="Test.Parser/Tal/TestTalElement.cs" ctype="Workbench">
-    <Files>
-      <File FileName="Parser/Tal/TalElement.cs" Line="115" Column="57" />
-      <File FileName="Test.Parser/Tal/TestTalElement.cs" Line="158" Column="46" />
-    </Files>
+  <MonoDevelop.Ide.Workbench ctype="Workbench">
     <Pads>
       <Pad Id="ProjectPad">
-        <State expanded="True">
-          <Node name="Parser" expanded="True">
-            <Node name="Tal" expanded="True" />
-          </Node>
-          <Node name="Test.Parser" expanded="True">
-            <Node name="Tal" expanded="True">
-              <Node name="TestTalElement.cs" selected="True" />
-            </Node>
-            <Node name="Tales" expanded="True">
-              <Node name="Expressions" expanded="True" />
-            </Node>
-          </Node>
-        </State>
+        <State expanded="True" selected="True" />
       </Pad>
       <Pad Id="ClassPad">
         <State expanded="True">
@@ -30,26 +14,8 @@
           <Option id="NestedNamespaces" value="True" />
           <Option id="PublicProtectedApiOnly" value="True" />
           <Option id="PublicApiOnly" value="False" />
-          <Option id="GroupByType" value="True" />
           <Option id="GroupByAccess" value="True" />
-          <Node name="Parser" expanded="True">
-            <Node name="CraigFowler" expanded="True">
-              <Node name="Web" expanded="True">
-                <Node name="ZPT" expanded="True" />
-              </Node>
-            </Node>
-          </Node>
-          <Node name="Test.Parser" expanded="True">
-            <Node name="Test" expanded="True">
-              <Node name="CraigFowler" expanded="True">
-                <Node name="Web" expanded="True">
-                  <Node name="ZPT" expanded="True">
-                    <Node name="Tal" expanded="True" />
-                  </Node>
-                </Node>
-              </Node>
-            </Node>
-          </Node>
+          <Option id="GroupByType" value="True" />
         </State>
       </Pad>
       <Pad Id="MonoDevelop.Debugger.WatchPad">

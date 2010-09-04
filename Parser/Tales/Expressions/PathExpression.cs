@@ -488,6 +488,7 @@ namespace CraigFowler.Web.ZPT.Tales.Expressions
     {
       object[] parameterValues = new object[method.GetParameters().Length];
       int offset = useCurrentPosition? 0 : 1;
+      object output = null;
       
       // If we are not using the current position as the reference then begin by incrementing by 1
       basePosition = basePosition + (useCurrentPosition? 0 : 1);
@@ -522,7 +523,25 @@ namespace CraigFowler.Web.ZPT.Tales.Expressions
         }
       }
       
-      return method.Invoke(targetObject, parameterValues);
+      try
+      {
+        output = method.Invoke(targetObject, parameterValues);
+      }
+      catch(Exception ex)
+      {
+        string exMessage = String.Format("Encountered an error whilst invoking method '{0}', whilst traversing a " +
+                                         "path expression.",
+                                         method.Name);
+        Exception inner = new PathException(path, exMessage, ex);
+        
+        ex.Data.Add("parameter count", parameterValues.Length);
+        ex.Data.Add("method name", method.Name);
+        ex.Data.Add("target type", targetObject.GetType());
+        
+        throw inner;
+      }
+      
+      return output;
     }
     
     #endregion

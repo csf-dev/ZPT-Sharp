@@ -214,6 +214,9 @@ namespace CraigFowler.Web.ZPT.Tales
         throw new ArgumentOutOfRangeException("identifier", "The identifier must not be an empty string.");
       }
       
+      // Need to re-generate the repeat references
+      this.RootContexts[REPEAT_REFERENCE] = this.GetRepeatVariables();
+      
       // Now find the relevant object that the identifier refers to
       if(identifier == CONTEXT_ROOT_REFERENCE)
       {
@@ -470,7 +473,6 @@ namespace CraigFowler.Web.ZPT.Tales
       this.RootContexts = new Dictionary<string, object>();
       this.RootContexts.Add(NOTHING_REFERENCE, null);
       this.RootContexts.Add(DEFAULT_REFERENCE, new DefaultValueMarker());
-      this.RootContexts.Add(REPEAT_REFERENCE, this.GetRepeatVariables());
       this.RootContexts.Add(OPTIONS_REFERENCE, Options);
       this.RootContexts.Add(ATTRIBUTES_REFERENCE, Attributes);
     }

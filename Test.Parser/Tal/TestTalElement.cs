@@ -2,12 +2,70 @@
 using System;
 using NUnit.Framework;
 using CraigFowler.Web.ZPT.Tal;
+using System.Xml;
+using CraigFowler.Web.ZPT.Mocks;
+using System.Collections.Generic;
+using CraigFowler.Web.ZPT.Tales.Exceptions;
+using CraigFowler.Web.ZPT.Tales;
 
 namespace Test.CraigFowler.Web.ZPT.Tal
 {
   [TestFixture]
   public class TestTalElement
   {
+    #region general tests and supporting methods
+    
+    [Test]
+    [Description("Contains no asserts but ensures that the constructor functions.")]
+    public void TestConstructor()
+    {
+      TalDocument document = CreateTestTalDocument();
+      Assert.IsNotNull(document, "Document is not null");
+    }
+    
+    /// <summary>
+    /// <para>Creates a valid mock TAL document.</para>
+    /// </summary>
+    /// <remarks>
+    /// <para>The document that this code creates is as follows:</para>
+    /// <code>
+    /// <html xmlns="http://www.w3.org/1999/xhtml"><head><title>Foo</title></head><body><div>Bar</div></body></html>
+    /// </code>
+    /// </remarks>
+    /// <returns>
+    /// A <see cref="TalDocument"/>
+    /// </returns>
+    private TalDocument CreateTestTalDocument()
+    {
+      TalDocument output = new TalDocument();
+      XmlNode htmlElement, headElement, titleElement, bodyElement, divElement;
+      
+      htmlElement = new TalElement(String.Empty, "html", "http://www.w3.org/1999/xhtml", output);
+      output.AppendChild(htmlElement);
+      
+      headElement = new TalElement(String.Empty, "head", "http://www.w3.org/1999/xhtml", output);
+      htmlElement.AppendChild(headElement);
+      
+      titleElement = new TalElement(String.Empty, "title", "http://www.w3.org/1999/xhtml", output);
+      headElement.AppendChild(titleElement);
+      
+      titleElement.AppendChild(output.CreateTextNode("Foo"));
+      
+      bodyElement = new TalElement(String.Empty, "body", "http://www.w3.org/1999/xhtml", output);
+      htmlElement.AppendChild(bodyElement);
+      
+      divElement = new TalElement(String.Empty, "div", "http://www.w3.org/1999/xhtml", output);
+      bodyElement.AppendChild(divElement);
+      
+      divElement.AppendChild(output.CreateTextNode("Bar"));
+      
+      return output;
+    }
+    
+    #endregion
+    
+    #region regex tests
+    
     [Test]
     [Description("Tests the Regex that splits 'define' statements apart")]
     public void TestDefineStatements()
@@ -203,5 +261,203 @@ namespace Test.CraigFowler.Web.ZPT.Tal
                       TalElement.AttributesSpecification.Match(attributeWithWhitespace).Groups[4].Value,
                       "Correct match for group 4 of the attribute with whitespace");
     }
+    
+    #endregion
+    
+    #region attribute tests
+    
+    [Test]
+    public void TestRenderWithDefineAttribute()
+    {
+      TalDocument document = CreateTestTalDocument();
+      TalElement element;
+      MockObject mock = new MockObject();
+      
+      element = (TalElement) document.GetElementsByTagName("div")[0];
+      element.SetAttribute("condition", TalDocument.TalNamespace, "bool");
+      element.SetAttribute("define", TalDocument.TalNamespace, "bool test/BooleanValue");
+      
+      document.TalesContext.AddDefinition("test", mock);
+      
+      Assert.AreEqual("<html xmlns=\"http://www.w3.org/1999/xhtml\"><head><title>Foo</title></head>" +
+                      "<body><div>Bar</div></body></html>",
+                      document.Render(),
+                      "Document renders correctly without the condition");
+      
+      mock.BooleanValue = false;
+      
+      
+      Assert.AreEqual("<html xmlns=\"http://www.w3.org/1999/xhtml\"><head><title>Foo</title></head>" +
+                      "<body /></html>",
+                      document.Render(),
+                      "Document renders correctly with the condition");
+    }
+    
+    [Test]
+    public void TestRenderWithMultipleDefineAttributes()
+    {
+      TalDocument document = CreateTestTalDocument();
+      TalElement element;
+      MockObject mock = new MockObject();
+      
+      element = (TalElement) document.GetElementsByTagName("div")[0];
+      element.SetAttribute("condition", TalDocument.TalNamespace, "bool");
+      
+      element = (TalElement) document.GetElementsByTagName("title")[0];
+      element.SetAttribute("content", TalDocument.TalNamespace, "string:Foo ${stringValue}");
+      
+      element = (TalElement) document.GetElementsByTagName("html")[0];
+      element.SetAttribute("define", TalDocument.TalNamespace, @"stringValue test/unambiguous/foo;
+                                                                 bool test/BooleanValue");
+      
+      document.TalesContext.AddDefinition("test", mock);
+      
+      Assert.AreEqual("<html xmlns=\"http://www.w3.org/1999/xhtml\"><head><title>Foo bar</title></head>" +
+                      "<body><div>Bar</div></body></html>",
+                      document.Render(),
+                      "Document renders correctly without the condition");
+      
+      mock.BooleanValue = false;
+      
+      
+      Assert.AreEqual("<html xmlns=\"http://www.w3.org/1999/xhtml\"><head><title>Foo bar</title></head>" +
+                      "<body /></html>",
+                      document.Render(),
+                      "Document renders correctly with the condition");
+    }
+    
+    [Test]
+    public void TestRenderWithConditionAttribute()
+    {
+      TalDocument document = CreateTestTalDocument();
+      TalElement element;
+      MockObject mock = new MockObject();
+      
+      element = (TalElement) document.GetElementsByTagName("div")[0];
+      element.SetAttribute("condition", TalDocument.TalNamespace, "test/BooleanValue");
+      
+      document.TalesContext.AddDefinition("test", mock);
+      
+      Assert.AreEqual("<html xmlns=\"http://www.w3.org/1999/xhtml\"><head><title>Foo</title></head>" +
+                      "<body><div>Bar</div></body></html>",
+                      document.Render(),
+                      "Document renders correctly without the condition");
+      
+      mock.BooleanValue = false;
+      
+      Assert.AreEqual("<html xmlns=\"http://www.w3.org/1999/xhtml\"><head><title>Foo</title></head>" +
+                      "<body /></html>",
+                      document.Render(),
+                      "Document renders correctly with the condition");
+    }
+    
+    [Test]
+    public void TestRenderWithRepeatAttribute()
+    {
+      List<string> list = new List<string>();
+      TalDocument document = CreateTestTalDocument();
+      TalElement element;
+      string renderedOutput = String.Empty;
+      
+      list.Add("foo");
+      list.Add("bar");
+      list.Add("baz");
+      
+      document.TalesContext.AddDefinition("list", list);
+      element = (TalElement) document.GetElementsByTagName("div")[0];
+      element.SetAttribute("repeat", TalDocument.TalNamespace, "item list");
+      element.SetAttribute("content",
+                           TalDocument.TalNamespace,
+                           "string:Item is ${item} which is even? ${repeat/item/even}");
+      
+      try
+      {
+        renderedOutput = document.Render();
+      }
+      catch(TraversalException ex)
+      {
+        foreach(TalesPath path in ex.Attempts.Keys)
+        {
+          Console.WriteLine ("Path:      {0}\nException: {1}", path.ToString(), ex.Attempts[path].ToString());
+        }
+      }
+      
+      Assert.AreEqual("<html xmlns=\"http://www.w3.org/1999/xhtml\"><head><title>Foo</title></head>" +
+                      "<body><div>Item is foo which is even? True</div>" +
+                      "<div>Item is bar which is even? False</div>" +
+                      "<div>Item is baz which is even? True</div></body></html>",
+                      renderedOutput,
+                      "Document renders correctly");
+    }
+    
+    [Test]
+    public void TestRenderWithContentAttribute()
+    {
+      TalDocument document = CreateTestTalDocument();
+      TalElement element;
+      MockObject mock = new MockObject();
+      
+      element = (TalElement) document.GetElementsByTagName("div")[0];
+      element.SetAttribute("content", TalDocument.TalNamespace, "test/BooleanValue");
+      
+      document.TalesContext.AddDefinition("test", mock);
+      
+      Assert.AreEqual("<html xmlns=\"http://www.w3.org/1999/xhtml\"><head><title>Foo</title></head>" +
+                      "<body><div>True</div></body></html>",
+                      document.Render(),
+                      "Document renders correctly with true");
+      
+      mock.BooleanValue = false;
+      
+      Assert.AreEqual("<html xmlns=\"http://www.w3.org/1999/xhtml\"><head><title>Foo</title></head>" +
+                      "<body><div>False</div></body></html>",
+                      document.Render(),
+                      "Document renders correctly with false");
+    }
+    
+    [Test]
+    public void TestRenderWithOmitTagAttribute()
+    {
+      TalDocument document = CreateTestTalDocument();
+      TalElement element;
+      MockObject mock = new MockObject();
+      
+      element = (TalElement) document.GetElementsByTagName("div")[0];
+      element.SetAttribute("omit-tag", TalDocument.TalNamespace, "test/BooleanValue");
+      
+      document.TalesContext.AddDefinition("test", mock);
+      
+      Assert.AreEqual("<html xmlns=\"http://www.w3.org/1999/xhtml\"><head><title>Foo</title></head>" +
+                      "<body>Bar</body></html>",
+                      document.Render(),
+                      "Document renders correctly with true");
+      
+      mock.BooleanValue = false;
+      
+      Assert.AreEqual("<html xmlns=\"http://www.w3.org/1999/xhtml\"><head><title>Foo</title></head>" +
+                      "<body><div>Bar</div></body></html>",
+                      document.Render(),
+                      "Document renders correctly with false");
+    }
+    
+    [Test]
+    public void TestRenderWithAttributesAttribute()
+    {
+      TalDocument document = CreateTestTalDocument();
+      TalElement element;
+      MockObject mock = new MockObject();
+      
+      element = (TalElement) document.GetElementsByTagName("div")[0];
+      element.SetAttribute("attributes", TalDocument.TalNamespace, "class test/BooleanValue");
+      
+      document.TalesContext.AddDefinition("test", mock);
+      
+      Assert.AreEqual("<html xmlns=\"http://www.w3.org/1999/xhtml\"><head><title>Foo</title></head>" +
+                      "<body><div class=\"True\">Bar</div></body></html>",
+                      document.Render(),
+                      "Document renders correctly");
+    }
+    
+    #endregion
   }
 }

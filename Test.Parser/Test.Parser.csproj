@@ -34,6 +34,7 @@
     <Reference Include="nunit.framework, Version=2.4.7.0, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77">
       <Package>nunit</Package>
     </Reference>
+    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Tales\" />
@@ -56,6 +57,7 @@
     <Compile Include="Tales\TalesBenchmarks.cs" />
     <Compile Include="Tal\TestRepeatVariable.cs" />
     <Compile Include="Tal\TestTalElement.cs" />
+    <Compile Include="Tal\TestTalDocument.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Parser\Parser.csproj">
