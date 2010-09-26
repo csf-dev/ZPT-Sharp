@@ -37,11 +37,15 @@ namespace CraigFowler.Web.ZPT.Tales.Expressions
     public const string Prefix = "string:";
     
     private const string
-      LOCATE_REPLACEMENTS     = @"(?<=(?<!\$)(?:\$\$)*)\$(?:(?:\{(?'var'[\w/ ]+)\})|(?'var'[\w/]+)|(?'var'\$))",
+      LOCATE_REPLACEMENTS     = @"(?<=(?<!\$)(?:\$\$)*)\$(?:(?:\{(?'var'[-\w .,~/|]+)\})|(?'var'[-\w.,~/]+)|(?'var'\$))",
       PERFORM_REPLACEMENTS    = @"\$(?:(?:\{([\w/ ]+)\})|([\w/]+))",
       REPLACE_ESCAPED_DOLLARS = @"\$\$",
       
-      // Careful! It looks like we're replacing two dollars with two dollars but in regex a $ symbol escapes itself!
+      /* Careful!
+       * This makes it look like we're replacing two dollars with two dollars but in a regex replacement
+       * specification a dollar symbol escapes itself!
+       * This is because regex uses the syntax $1, $2 etc for numeric replacements.
+       */
       DOLLAR_REPLACEMENT      = @"$$";
     
     private static readonly Regex

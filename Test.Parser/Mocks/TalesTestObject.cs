@@ -1,6 +1,7 @@
 
 using System;
 using System.Collections.Generic;
+using CraigFowler.Web.ZPT.Tales;
 
 namespace CraigFowler.Web.ZPT.Mocks
 {
@@ -9,7 +10,13 @@ namespace CraigFowler.Web.ZPT.Mocks
 	/// </summary>
 	public class TalesTestObject
 	{
+		#region fields
+		
 		private Dictionary<string, object> data;
+		
+		#endregion
+		
+		#region properties
 		
 		/// <summary>
 		/// <para>Gets and sets values within this mock instance.</para>
@@ -26,6 +33,29 @@ namespace CraigFowler.Web.ZPT.Mocks
 				data[key] = value;
 			}
 		}
+		
+		#endregion
+		
+		#region methods
+		
+		/// <summary>
+		/// <para>Creates a new <see cref="TalesContext"/> from this instance.</para>
+		/// </summary>
+		public TalesContext CreateContext()
+		{
+			TalesContext output = new TalesContext();
+			
+			foreach(string key in data.Keys)
+			{
+				output.AddDefinition(key, data[key]);
+			}
+			
+			return output;
+		}
+		
+		#endregion
+		
+		#region constructor
 		
 		/// <summary>
 		/// <para>Initialises this instance ready for tests.</para>
@@ -58,6 +88,10 @@ namespace CraigFowler.Web.ZPT.Mocks
 			data["ErrorGenerator"] = new ExceptionThrower();
 		}
 		
+		#endregion
+		
+		#region inner class
+		
 		/// <summary>
 		/// <para>Utility class to generate and throw exceptions.</para>
 		/// </summary>
@@ -67,6 +101,10 @@ namespace CraigFowler.Web.ZPT.Mocks
 			/// <para>Read-only.  Constant value gets the default exception message.</para>
 			/// </summary>
 			public const string ExceptionMessage = "Exception thrown as requested";
+			
+			public static readonly string[] ExceptionTypes = new string[] { "ArgumentException",
+																																			"InvalidOperationException",
+																																		  "Undefined" };
 			
 			/// <summary>
 			/// <para>Always throws an exception - the exact type depending upon the <paramref name="key"/>.</para>
@@ -96,5 +134,7 @@ namespace CraigFowler.Web.ZPT.Mocks
 				}
 			}
 		}
+		
+		#endregion
 	}
 }

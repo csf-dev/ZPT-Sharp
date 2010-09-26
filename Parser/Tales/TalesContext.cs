@@ -34,6 +34,28 @@ namespace CraigFowler.Web.ZPT.Tales
   /// </remarks>
   public class TalesContext
   {
+		/* There are still a few extra bits of functionality that I want to add into TALES:
+		 * 
+		 * TODO: Add in functionality to instantiate a type if it is referenced within a TALES expression
+		 * That is - if a System.Type is aliased into an expression and it is referenced, then the type is instantiated
+		 * using its default/parameterless constructor and that new instance is used as the basis for the rest of the
+		 * path expression.
+		 * This must always select the parameterless constructor by default.  It will only select a different constructor if
+		 * that other constructor has a TalesConstructor attribute decorating it (specifying that it is the constructor
+		 * to use when TALES is instantiating instances of the object).  Only one constructor per type may be decorated
+		 * in this way.
+		 * 
+		 * TODO: Add in support for TALES namespaces - these are a bit like extension methods in C# 3.0 and up
+		 * A path expression:  "member/joinDate/formatter:toShortDate" would evaluate "member/joinDate" and then pass that
+		 * as a parameter to toShortDate within a special helper type that was aliased as a namespace using the name
+		 * "formatter".
+		 * These namespace aliases are a new type of alias and represent the registering of these special helper classes
+		 * that can perform operations on the results of a path expression and may also be implemented inline (and thus
+		 * chained).  For example:  "member/joinDate/formatter:toShortDate/formatter:toUppercase" might output the member's
+		 * join date as a short date in all-uppercase.
+		 * See http://wiki.zope.org/zope3/talesns.html for more info (it's not in the TALES 1/3 spec).
+		 */
+		
     #region constants
     
     private const string

@@ -34,7 +34,7 @@ namespace CraigFowler.Web.ZPT.Tales.Expressions
   {
     #region constants
     
-    private const char PATH_SEPARATOR             = '|';
+    private const char PATH_SEPARATOR   = '|';
     
     /* That regex pattern looks pretty uninteligible.  See:
      * 
@@ -43,16 +43,16 @@ namespace CraigFowler.Web.ZPT.Tales.Expressions
      * for some examples of what it is meant to match.
      */
     private const string
-      INDEXER_IDENTIFIER                          = "Item",
-      VALID_PATH_EXPRESSION_PATTERN               = @"^((\??[-\w .,~]+)(/(\??[-\w .,~]+))*)?(\|((\??[-\w .,~]+)(/(\??[-\w .,~]+))*)?)*$";
+      INDEXER_IDENTIFIER                = "Item",
+      VALID_PATH_EXPRESSION_PATTERN     = @"^(([-\w .,~]+)(/(\??[-\w .,~]+))*)?(\|(([-\w .,~]+)(/(\??[-\w .,~]+))*)?)*$";
     
     private static readonly Regex
-      ValidPathExpression                         = new Regex(VALID_PATH_EXPRESSION_PATTERN, RegexOptions.Compiled);
+      ValidPathExpression               = new Regex(VALID_PATH_EXPRESSION_PATTERN, RegexOptions.Compiled);
     
     /// <summary>
     /// <para>The prefix used to indicate that the current expression is a path expression.</para>
     /// </summary>
-    public const string Prefix                    = "path:";
+    public const string Prefix          = "path:";
     
     #endregion
     
@@ -131,8 +131,6 @@ namespace CraigFowler.Web.ZPT.Tales.Expressions
       return output;
     }
     
-    
-    
     #endregion
     
     #region private methods
@@ -208,15 +206,8 @@ namespace CraigFowler.Web.ZPT.Tales.Expressions
         throw new PathInvalidException(path, ex);
       }
       
-      // Now traverse the parts of the path
-      if(path.Parts.Count == 1)
-      {
-        output = rootReference;
-      }
-      else
-      {
-        output = EvaluatePath(path, 1, rootReference);
-      }
+      // Now traverse the rest of the parts of the path
+      output = EvaluatePath(path, 1, rootReference);
       
       return output;
     }
@@ -245,7 +236,7 @@ namespace CraigFowler.Web.ZPT.Tales.Expressions
       object output = null, thisObject = null;
       MemberInfo currentMember;
       bool indexer;
-      string currentPathPart;
+      string currentPathPart, memberName;
       
       if(position < path.Parts.Count)
       {
@@ -254,8 +245,12 @@ namespace CraigFowler.Web.ZPT.Tales.Expressions
         // This handles the case for a variable-substitution within a path
         if(currentPathPart.StartsWith("?"))
         {
-          currentPathPart = EvaluateSingleVariable(currentPathPart);
+          memberName = EvaluateSingleVariable(currentPathPart);
         }
+				else
+				{
+					memberName = currentPathPart;
+				}
         
         if(parentObject == null)
         {
@@ -264,7 +259,7 @@ namespace CraigFowler.Web.ZPT.Tales.Expressions
         
         try
         {
-          currentMember = SelectMember(parentObject, currentPathPart, out indexer);
+          currentMember = SelectMember(parentObject, memberName, out indexer);
         }
         catch(ArgumentException ex)
         {
@@ -455,8 +450,12 @@ namespace CraigFowler.Web.ZPT.Tales.Expressions
     /// </returns>
     private string EvaluateSingleVariable(string variable)
     {
+			string output;
       PathExpression innerExpression = new PathExpression(variable.Substring(1), this.Context);
-      return innerExpression.GetValue().ToString();
+			
+			output = innerExpression.GetValue().ToString();
+			
+      return output;
     }
     
     /// <summary>
@@ -517,7 +516,14 @@ namespace CraigFowler.Web.ZPT.Tales.Expressions
         }
         else
         {
-          parameterValues[i] = path.Parts[basePosition];
+					string parameterValue = path.Parts[basePosition];
+					
+					if(parameterValue.StartsWith("?"))
+					{
+						parameterValue = EvaluateSingleVariable(parameterValue);
+					}
+					
+          parameterValues[i] = parameterValue;
           basePosition += offset;
           offset = 1;
         }

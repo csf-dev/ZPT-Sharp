@@ -60,6 +60,7 @@
     <Compile Include="Tal\TestTalElement.cs" />
     <Compile Include="Tal\TestTalDocument.cs" />
     <Compile Include="Mocks\TalesTestObject.cs" />
+    <Compile Include="Tales\TestExpressions.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Parser\Parser.csproj">
