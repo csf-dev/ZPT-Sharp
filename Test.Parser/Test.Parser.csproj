@@ -59,6 +59,7 @@
     <Compile Include="Tal\TestRepeatVariable.cs" />
     <Compile Include="Tal\TestTalElement.cs" />
     <Compile Include="Tal\TestTalDocument.cs" />
+    <Compile Include="Mocks\TalesTestObject.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Parser\Parser.csproj">
