@@ -682,11 +682,11 @@ namespace CraigFowler.Web.ZPT.Tal
       {
         writer.WriteStartElement(this.Prefix, this.LocalName, this.NamespaceURI);
         
+				
         foreach(XmlAttribute attribute in this.Attributes)
         {
-          if(attribute.NamespaceURI != TalDocument.TalNamespace &&
-             attribute.NamespaceURI != TalDocument.MetalNamespace)
-          {
+          if(OKToRenderAttribute(attribute))
+					{
             writer.WriteAttributeString(attribute.Prefix,
                                         attribute.LocalName,
                                         attribute.NamespaceURI,
@@ -751,8 +751,7 @@ namespace CraigFowler.Web.ZPT.Tal
         // Write all of its attributes
         foreach(XmlAttribute attribute in this.Attributes)
         {
-          if(attribute.NamespaceURI != TalDocument.TalNamespace &&
-             attribute.NamespaceURI != TalDocument.MetalNamespace)
+          if(OKToRenderAttribute(attribute))
           {
             writer.WriteAttributeString(attribute.Prefix,
                                         attribute.LocalName,
@@ -814,6 +813,50 @@ namespace CraigFowler.Web.ZPT.Tal
       
       return this.GetAttribute(attributeName, TalDocument.TalNamespace);
     }
+		
+		/// <summary>
+		/// <para>Determines whether the given <paramref name="attribute"/> should be rendered in the final output.</para>
+		/// </summary>
+		/// <remarks>
+		/// <para>
+		/// TAL and METAL attributes should never be rendered, nor should 'xmlns' declarations for these namespaces.
+		/// </para>
+		/// </remarks>
+		/// <param name="attribute">
+		/// A <see cref="XmlAttribute"/>, the candidate attribute
+		/// </param>
+		/// <returns>
+		/// A <see cref="System.Boolean"/> indicating whether the <paramref name="attribute"/> should be rendered or not.
+		/// </returns>
+		private bool OKToRenderAttribute(XmlAttribute attribute)
+		{
+			bool output;
+			
+			if(attribute == null)
+			{
+				throw new ArgumentNullException("attribute");
+			}
+			
+			if(attribute.NamespaceURI == TalDocument.TalNamespace ||
+			   attribute.NamespaceURI == TalDocument.MetalNamespace)
+			{
+				// It's an attribute in one of the namespaces that we are choosing not to render
+				output = false;
+			}
+			else if(attribute.NamespaceURI == TalDocument.XmlnsNamespace &&
+			        (attribute.Value == TalDocument.TalNamespace || attribute.Value == TalDocument.MetalNamespace))
+			{
+				// It's a namespace declaration for one of the namespaces that we are choosing not to render
+				output = false;
+			}
+			else
+			{
+				// It's some other kind of attribute that should be rendered
+				output = true;
+			}
+			
+			return output;
+		}
     
     #endregion
 
@@ -841,6 +884,35 @@ namespace CraigFowler.Web.ZPT.Tal
     {
       this.TalesContext = new TalesContext();
     }
+		
+		/// <summary>
+		/// <para>Serves as a copy-constructor for an <see cref="XmlElement"/> node.</para>
+		/// </summary>
+		/// <param name="elementToClone">
+		/// A <see cref="XmlElement"/>
+		/// </param>
+		public TalElement(XmlElement elementToClone) : this(elementToClone.Prefix,
+		                                                    elementToClone.LocalName,
+		                                                    elementToClone.NamespaceURI,
+		                                                    (TalDocument) elementToClone.OwnerDocument)
+		{
+			foreach(XmlAttribute attribute in elementToClone.Attributes)
+			{
+				this.SetAttribute(attribute.LocalName, attribute.NamespaceURI, attribute.Value);
+			}
+			
+			foreach(XmlNode node in elementToClone.ChildNodes)
+			{
+				if(node.NodeType == XmlNodeType.Element)
+				{
+					this.AppendChild(new TalElement((XmlElement) node));
+				}
+				else
+				{
+					this.AppendChild(node);
+				}
+			}
+		}
     
     #endregion
   }

@@ -47,6 +47,11 @@ namespace CraigFowler.Web.ZPT.Tal
     /// </summary>
     public const string MetalNamespace = "http://xml.zope.org/namespaces/metal";
     
+		/// <summary>
+		/// <para>Read-only.  Constant value gets the XML namespace for the 'xmlns' attribute.</para>
+		/// </summary>
+		public const string XmlnsNamespace = "http://www.w3.org/2000/xmlns/";
+		
     #endregion
     
     #region fields
@@ -132,6 +137,39 @@ namespace CraigFowler.Web.ZPT.Tal
       return null;
     }
     
+		/// <summary>
+		/// <para>
+		/// Overridden.  Reads a node from an <see cref="XmlReader"/> and returns either a simple <see cref="XmlNode"/> or
+		/// - if the node type indicated is appropriate, a <see cref="TalElement"/> node.
+		/// </para>
+		/// </summary>
+		/// <param name="reader">
+		/// A <see cref="XmlReader"/>
+		/// </param>
+		/// <returns>
+		/// A <see cref="XmlNode"/>
+		/// </returns>
+		public override XmlNode ReadNode (XmlReader reader)
+		{
+			XmlNode output;
+			
+			if(reader == null)
+			{
+				throw new ArgumentNullException("reader");
+			}
+			
+			output = base.ReadNode(reader);
+			
+			// If we are dealing with an XmlElement node then clone it as a TalElement node and return that instead.
+			if(output != null && output.NodeType == XmlNodeType.Element)
+			{
+				output = new TalElement((XmlElement) output);
+			}
+			
+			return output;
+		}
+
+		
     #endregion
     
     #region constructor

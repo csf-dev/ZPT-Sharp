@@ -35,6 +35,7 @@
       <Package>nunit</Package>
     </Reference>
     <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Tales\" />
@@ -66,4 +67,7 @@
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <ItemGroup>
+    <None Include="Unit-tests.config" />
+  </ItemGroup>
 </Project>

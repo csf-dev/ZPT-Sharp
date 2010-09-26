@@ -3,10 +3,21 @@
   <MonoDevelop.Ide.DebuggingService>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService>
-  <MonoDevelop.Ide.Workbench ctype="Workbench">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Test.Parser/Tal/TestTalDocument.cs" ctype="Workbench">
+    <Files>
+      <File FileName="Test.Parser/Tal/TestTalDocument.cs" Line="28" Column="4" />
+      <File FileName="Test.Parser/Tal/TestTalElement.cs" Line="269" Column="11" />
+      <File FileName="Parser/Tal/TalElement.cs" Line="84" Column="5" />
+      <File FileName="Parser/Tal/TalDocument.cs" Line="43" Column="75" />
+    </Files>
     <Pads>
       <Pad Id="ProjectPad">
-        <State expanded="True" selected="True" />
+        <State expanded="True">
+          <Node name="Test.Parser" expanded="True">
+            <Node name="References" selected="True" />
+            <Node name="Tal" expanded="True" />
+          </Node>
+        </State>
       </Pad>
       <Pad Id="ClassPad">
         <State expanded="True">
@@ -16,6 +27,26 @@
           <Option id="PublicApiOnly" value="False" />
           <Option id="GroupByAccess" value="True" />
           <Option id="GroupByType" value="True" />
+          <Node name="Parser" expanded="True">
+            <Node name="CraigFowler" expanded="True">
+              <Node name="Web" expanded="True">
+                <Node name="ZPT" expanded="True" />
+              </Node>
+            </Node>
+          </Node>
+          <Node name="Test.Parser" expanded="True">
+            <Node name="Test" expanded="True">
+              <Node name="CraigFowler" expanded="True">
+                <Node name="Web" expanded="True">
+                  <Node name="ZPT" expanded="True">
+                    <Node name="Tal" expanded="True">
+                      <Node name="Test.CraigFowler.Web.ZPT.Tal.TestTalDocument" expanded="True" selected="True" />
+                    </Node>
+                  </Node>
+                </Node>
+              </Node>
+            </Node>
+          </Node>
         </State>
       </Pad>
       <Pad Id="MonoDevelop.Debugger.WatchPad">
