@@ -10,6 +10,7 @@ namespace Test.CraigFowler.Web.ZPT.Tales
 {
 	[TestFixture]
 	[Description("These are a batch of tests imported from the Zope source code.")]
+	[Category("Integration")]
 	public class TestExpressions
 	{
 		#region private variables

@@ -98,6 +98,10 @@ namespace CraigFowler.Web.ZPT.Tal
       {
         using (XmlWriter xmlWriter = new XmlTextWriter(writer))
         {
+					xmlWriter.Settings.NewLineChars = "\n";
+					xmlWriter.Settings.IndentChars = "  ";
+					xmlWriter.Settings.Indent = true;
+					
           this.Render(xmlWriter);
         }
       }
@@ -122,6 +126,7 @@ namespace CraigFowler.Web.ZPT.Tal
         else
         {
           node.WriteTo(writer);
+					writer.WriteWhitespace(writer.Settings.NewLineChars);
         }
       }
     }

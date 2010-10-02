@@ -46,14 +46,6 @@ namespace CraigFowler.Web.ZPT.Tal
     TalesContext GetParentTalesContext();
     
     /// <summary>
-    /// <para>Renders this node and its children to a string.</para>
-    /// </summary>
-    /// <returns>
-    /// A <see cref="System.String"/>
-    /// </returns>
-    string Render();
-    
-    /// <summary>
     /// <para>Renders this node and its children to the given <see cref="XmlWriter"/> instance.</para>
     /// </summary>
     /// <param name="writer">

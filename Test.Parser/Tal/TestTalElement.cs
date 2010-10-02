@@ -7,6 +7,8 @@ using CraigFowler.Web.ZPT.Mocks;
 using System.Collections.Generic;
 using CraigFowler.Web.ZPT.Tales.Exceptions;
 using CraigFowler.Web.ZPT.Tales;
+using System.Text;
+using System.IO;
 
 namespace Test.CraigFowler.Web.ZPT.Tal
 {
@@ -281,7 +283,7 @@ namespace Test.CraigFowler.Web.ZPT.Tal
       
       Assert.AreEqual("<html xmlns=\"http://www.w3.org/1999/xhtml\"><head><title>Foo</title></head>" +
                       "<body><div>Bar</div></body></html>",
-                      document.Render(),
+                      RenderWithTestOptions(document),
                       "Document renders correctly without the condition");
       
       mock.BooleanValue = false;
@@ -289,7 +291,7 @@ namespace Test.CraigFowler.Web.ZPT.Tal
       
       Assert.AreEqual("<html xmlns=\"http://www.w3.org/1999/xhtml\"><head><title>Foo</title></head>" +
                       "<body /></html>",
-                      document.Render(),
+                      RenderWithTestOptions(document),
                       "Document renders correctly with the condition");
     }
     
@@ -314,7 +316,7 @@ namespace Test.CraigFowler.Web.ZPT.Tal
       
       Assert.AreEqual("<html xmlns=\"http://www.w3.org/1999/xhtml\"><head><title>Foo bar</title></head>" +
                       "<body><div>Bar</div></body></html>",
-                      document.Render(),
+                      RenderWithTestOptions(document),
                       "Document renders correctly without the condition");
       
       mock.BooleanValue = false;
@@ -322,7 +324,7 @@ namespace Test.CraigFowler.Web.ZPT.Tal
       
       Assert.AreEqual("<html xmlns=\"http://www.w3.org/1999/xhtml\"><head><title>Foo bar</title></head>" +
                       "<body /></html>",
-                      document.Render(),
+                      RenderWithTestOptions(document),
                       "Document renders correctly with the condition");
     }
     
@@ -340,14 +342,14 @@ namespace Test.CraigFowler.Web.ZPT.Tal
       
       Assert.AreEqual("<html xmlns=\"http://www.w3.org/1999/xhtml\"><head><title>Foo</title></head>" +
                       "<body><div>Bar</div></body></html>",
-                      document.Render(),
+                      RenderWithTestOptions(document),
                       "Document renders correctly without the condition");
       
       mock.BooleanValue = false;
       
       Assert.AreEqual("<html xmlns=\"http://www.w3.org/1999/xhtml\"><head><title>Foo</title></head>" +
                       "<body /></html>",
-                      document.Render(),
+                      RenderWithTestOptions(document),
                       "Document renders correctly with the condition");
     }
     
@@ -372,7 +374,7 @@ namespace Test.CraigFowler.Web.ZPT.Tal
       
       try
       {
-        renderedOutput = document.Render();
+      	renderedOutput = RenderWithTestOptions(document);
       }
       catch(TraversalException ex)
       {
@@ -404,14 +406,14 @@ namespace Test.CraigFowler.Web.ZPT.Tal
       
       Assert.AreEqual("<html xmlns=\"http://www.w3.org/1999/xhtml\"><head><title>Foo</title></head>" +
                       "<body><div>True</div></body></html>",
-                      document.Render(),
+                      RenderWithTestOptions(document),
                       "Document renders correctly with true");
       
       mock.BooleanValue = false;
       
       Assert.AreEqual("<html xmlns=\"http://www.w3.org/1999/xhtml\"><head><title>Foo</title></head>" +
                       "<body><div>False</div></body></html>",
-                      document.Render(),
+                      RenderWithTestOptions(document),
                       "Document renders correctly with false");
     }
     
@@ -429,14 +431,14 @@ namespace Test.CraigFowler.Web.ZPT.Tal
       
       Assert.AreEqual("<html xmlns=\"http://www.w3.org/1999/xhtml\"><head><title>Foo</title></head>" +
                       "<body>Bar</body></html>",
-                      document.Render(),
+                      RenderWithTestOptions(document),
                       "Document renders correctly with true");
       
       mock.BooleanValue = false;
       
       Assert.AreEqual("<html xmlns=\"http://www.w3.org/1999/xhtml\"><head><title>Foo</title></head>" +
                       "<body><div>Bar</div></body></html>",
-                      document.Render(),
+                      RenderWithTestOptions(document),
                       "Document renders correctly with false");
     }
     
@@ -454,10 +456,32 @@ namespace Test.CraigFowler.Web.ZPT.Tal
       
       Assert.AreEqual("<html xmlns=\"http://www.w3.org/1999/xhtml\"><head><title>Foo</title></head>" +
                       "<body><div class=\"True\">Bar</div></body></html>",
-                      document.Render(),
+                      RenderWithTestOptions(document),
                       "Document renders correctly");
     }
     
     #endregion
+		
+		#region supporting methods
+		
+		public string RenderWithTestOptions(TalDocument document)
+		{
+			StringBuilder output = new StringBuilder();
+			
+			using(TextWriter textWriter = new StringWriter(output))
+			{
+				using(XmlWriter writer = new XmlTextWriter(textWriter))
+				{
+					writer.Settings.Indent = false;
+					writer.Settings.NewLineChars = String.Empty;
+					
+					document.Render(writer);
+				}
+			}
+			
+			return output.ToString();
+		}
+		
+		#endregion
   }
 }

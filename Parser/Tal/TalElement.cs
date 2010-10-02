@@ -146,27 +146,34 @@ namespace CraigFowler.Web.ZPT.Tal
     #endregion
     
     #region methods
-    
+		
     /// <summary>
-    /// <para>Overloaded.  Convenience method that renders the output of this document to a string.</para>
+    /// <para>Overloaded.  Renders the output of this TAL element to the given <see cref="XmlWriter"/>.</para>
     /// </summary>
-    /// <returns>
-    /// A <see cref="System.String"/>, the rendered output document.
-    /// </returns>
-    public string Render()
-    {
-      StringBuilder output = new StringBuilder();
-      
-      using(TextWriter writer = new StringWriter(output))
-      {
-        using (XmlWriter xmlWriter = new XmlTextWriter(writer))
-        {
-          this.Render(xmlWriter);
-        }
-      }
-      
-      return output.ToString();
-    }
+    /// <remarks>
+    /// <para>The order of operation for TAL directives is listed below.</para>
+    /// <para>
+    /// Note that I am using the TAL 1.4.1 'proposed' ordering method.  That is, processing omit-tag before attributes.
+    /// For more information about this, see the comment at the bottom of
+    /// <c>http://wiki.zope.org/ZPT/TALSpecification14</c> and also the page
+    /// <c>https://bugs.launchpad.net/zope.tal/+bug/430662</c>.
+    /// </para>
+    /// <list type="number">
+    /// <item>define</item>
+    /// <item>condition</item>
+    /// <item>repeat</item>
+    /// <item>content or replace</item>
+    /// <item>omit-tag</item>
+    /// <item>attributes</item>
+    /// </list>
+    /// </remarks>
+    /// <param name="writer">
+    /// An <see cref="XmlWriter"/> to write the rendered output of this element to.
+    /// </param>
+		public void Render(XmlWriter writer)
+		{
+			this.Render(writer, 0);
+		}
     
     /// <summary>
     /// <para>Overloaded.  Renders the output of this TAL element to the given <see cref="XmlWriter"/>.</para>
@@ -191,7 +198,10 @@ namespace CraigFowler.Web.ZPT.Tal
     /// <param name="writer">
     /// An <see cref="XmlWriter"/> to write the rendered output of this element to.
     /// </param>
-    public void Render(XmlWriter writer)
+    /// <param name="indentLevel">
+    /// A <see cref="System.Int32"/> that represents the indentation level.
+    /// </param>
+    private void Render(XmlWriter writer, int indentLevel)
     {
       this.TalesContext.ParentContext = this.GetParentTalesContext();
       
@@ -220,12 +230,12 @@ namespace CraigFowler.Web.ZPT.Tal
             while(currentRepeatVariable.MoveNext())
             {
               this.TalesContext.AddDefinition(repeatAlias, currentRepeatVariable.Current);
-              ProcessElementContent(writer);
+              ProcessElementContent(writer, indentLevel);
             }
           }
           else
           {
-            ProcessElementContent(writer);
+            ProcessElementContent(writer, indentLevel);
           }
         }
       }
@@ -243,7 +253,7 @@ namespace CraigFowler.Web.ZPT.Tal
         
         if(handled)
         {
-          WriteContentTo(content, writer, type, false);
+          WriteContentTo(content, writer, type, false, indentLevel);
         }
         else
         {
@@ -647,10 +657,13 @@ namespace CraigFowler.Web.ZPT.Tal
     /// <param name="writer">
     /// An <see cref="XmlWriter"/> to write the element content to.
     /// </param>
+    /// <param name="indentLevel">
+    /// A <see cref="System.Int32"/> that represents the indentation level.
+    /// </param>
     /// <remarks>
     /// <para>Collectively these are the 'content', 'replace', 'omit-tag' and 'attributes' attributes.</para>
     /// </remarks>
-    private void ProcessElementContent(XmlWriter writer)
+    private void ProcessElementContent(XmlWriter writer, int indentLevel)
     {
       object contentToWrite;
       bool replaceElement, writeContent, omitTag;
@@ -676,12 +689,19 @@ namespace CraigFowler.Web.ZPT.Tal
       
       if(writeContent)
       {
-        WriteContentTo(contentToWrite, writer, contentType, replaceElement);
+        WriteContentTo(contentToWrite, writer, contentType, replaceElement, indentLevel);
       }
       else if(!replaceElement)
       {
+        // Open the new element
+				if(writer.Settings.Indent)
+				{
+					for(int i = 0; i < indentLevel; i++)
+					{
+						writer.WriteWhitespace(writer.Settings.IndentChars);
+					}
+				}
         writer.WriteStartElement(this.Prefix, this.LocalName, this.NamespaceURI);
-        
 				
         foreach(XmlAttribute attribute in this.Attributes)
         {
@@ -693,33 +713,72 @@ namespace CraigFowler.Web.ZPT.Tal
                                         attribute.Value);
           }
         }
+				
+				if(!String.IsNullOrEmpty(writer.Settings.NewLineChars))
+				{
+					writer.WriteWhitespace(writer.Settings.NewLineChars);
+				}
         
         foreach(XmlNode node in this.ChildNodes)
         {
-          if(node is ITalElement)
+          if(node is TalElement)
           {
-            ((ITalElement) node).Render(writer);
+            ((TalElement) node).Render(writer, indentLevel + 1);
           }
           else
           {
-            node.WriteTo(writer);
-          }
+						if(writer.Settings.Indent)
+						{
+							for(int i = 0; i < indentLevel + 1; i++)
+							{
+								writer.WriteWhitespace(writer.Settings.IndentChars);
+							}
+						}
+	          node.WriteTo(writer);
+						if(!String.IsNullOrEmpty(writer.Settings.NewLineChars))
+						{
+							writer.WriteWhitespace(writer.Settings.NewLineChars);
+						}
+	        }
         }
         
+        // Close the element
+				if(writer.Settings.Indent)
+				{
+					for(int i = 0; i < indentLevel; i++)
+					{
+						writer.WriteWhitespace(writer.Settings.IndentChars);
+					}
+				}
         writer.WriteEndElement();
+				if(!String.IsNullOrEmpty(writer.Settings.NewLineChars))
+				{
+					writer.WriteWhitespace(writer.Settings.NewLineChars);
+				}
       }
       else
       {
         foreach(XmlNode node in this.ChildNodes)
         {
-          if(node is ITalElement)
+          if(node is TalElement)
           {
-            ((ITalElement) node).Render(writer);
+            ((TalElement) node).Render(writer, indentLevel + 1);
           }
           else
           {
+						if(writer.Settings.Indent)
+						{
+							for(int i = 0; i < indentLevel + 1; i++)
+							{
+								writer.WriteWhitespace(writer.Settings.IndentChars);
+							}
+						}
             node.WriteTo(writer);
-          }
+						if(!String.IsNullOrEmpty(writer.Settings.NewLineChars))
+						{
+							writer.WriteWhitespace(writer.Settings.NewLineChars);
+						}
+	        }
         }
       }
     } 
@@ -741,11 +800,25 @@ namespace CraigFowler.Web.ZPT.Tal
     /// <param name="replaceElement">
     /// A <see cref="System.Boolean"/> indicating whether the entire element should be replaced or not.
     /// </param>
-    private void WriteContentTo(object content, XmlWriter writer, TalContentType contentType, bool replaceElement)
+    /// <param name="indentLevel">
+    /// A <see cref="System.Int32"/> that represents the indentation level.
+    /// </param>
+    private void WriteContentTo(object content,
+		                            XmlWriter writer,
+		                            TalContentType contentType,
+		                            bool replaceElement,
+		                            int indentLevel)
     {
       if(!replaceElement)
       {
         // Open the new element
+				if(writer.Settings.Indent)
+				{
+					for(int i = 0; i < indentLevel + 1; i++)
+					{
+						writer.WriteWhitespace(writer.Settings.IndentChars);
+					}
+				}
         writer.WriteStartElement(this.Prefix, this.LocalName, this.NamespaceURI);
         
         // Write all of its attributes
@@ -759,7 +832,20 @@ namespace CraigFowler.Web.ZPT.Tal
                                         attribute.Value);
           }
         }
-        
+				
+				if(!String.IsNullOrEmpty(writer.Settings.NewLineChars))
+				{
+					writer.WriteWhitespace(writer.Settings.NewLineChars);
+				}
+				
+				if(writer.Settings.Indent)
+				{
+					for(int i = 0; i < indentLevel + 1; i++)
+					{
+						writer.WriteWhitespace(writer.Settings.IndentChars);
+					}
+				}
+      	
         // Write the text inside the element
         if(contentType == TalContentType.Structure)
         {
@@ -769,12 +855,36 @@ namespace CraigFowler.Web.ZPT.Tal
         {
           writer.WriteString(content.ToString());
         }
+				
+				if(!String.IsNullOrEmpty(writer.Settings.NewLineChars))
+				{
+					writer.WriteWhitespace(writer.Settings.NewLineChars);
+				}
         
         // Close the element
+				if(writer.Settings.Indent)
+				{
+					for(int i = 0; i < indentLevel; i++)
+					{
+						writer.WriteWhitespace(writer.Settings.IndentChars);
+					}
+				}
         writer.WriteEndElement();
+				if(!String.IsNullOrEmpty(writer.Settings.NewLineChars))
+				{
+					writer.WriteWhitespace(writer.Settings.NewLineChars);
+				}
       }
       else
       {
+				if(writer.Settings.Indent)
+				{
+					for(int i = 0; i < indentLevel + 1; i++)
+					{
+						writer.WriteWhitespace(writer.Settings.IndentChars);
+					}
+				}
+				
         // We're just writing the text inside the element
         if(contentType == TalContentType.Structure)
         {
@@ -784,6 +894,11 @@ namespace CraigFowler.Web.ZPT.Tal
         {
           writer.WriteString(content.ToString());
         }
+				
+				if(!String.IsNullOrEmpty(writer.Settings.NewLineChars))
+				{
+					writer.WriteWhitespace(writer.Settings.NewLineChars);
+				}
       }
     }
     

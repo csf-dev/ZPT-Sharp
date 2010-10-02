@@ -12,6 +12,35 @@ namespace Test.CraigFowler.Web.ZPT.Tal
   [TestFixture]
   public class TestTalDocument
   {
+		#region constants
+		
+		private const string
+			EXPECTED_RENDERING = @"<html xmlns=""http://www.w3.org/1999/xhtml"">
+  <head>
+    <title>
+      Foo
+    </title>
+  </head>
+  <body>
+    <div>
+      Bar
+    </div>
+  </body>
+</html>
+",
+			EXPECTED_RENDERING_FALSE = @"<html xmlns=""http://www.w3.org/1999/xhtml"">
+  <head>
+    <title>
+      Foo
+    </title>
+  </head>
+  <body>
+  </body>
+</html>
+";
+		
+		#endregion
+		
 		#region tests
 		
     [Test]
@@ -33,19 +62,11 @@ namespace Test.CraigFowler.Web.ZPT.Tal
 			
       document.TalesContext.AddDefinition("test", mock);
       
-      Assert.AreEqual("<html xmlns=\"http://www.w3.org/1999/xhtml\">" +
-      								"<head><title>Foo</title></head>" +
-                      "<body><div>Bar</div></body></html>",
-                      document.Render(),
-                      "Document renders correctly without the condition");
+      Assert.AreEqual(EXPECTED_RENDERING, document.Render(), "Document renders correctly without the condition");
       
       mock.BooleanValue = false;
       
-      Assert.AreEqual("<html xmlns=\"http://www.w3.org/1999/xhtml\">" +
-      								"<head><title>Foo</title></head>" +
-                      "<body /></html>",
-                      document.Render(),
-                      "Document renders correctly with the condition");
+      Assert.AreEqual(EXPECTED_RENDERING_FALSE, document.Render(), "Document renders correctly with the condition");
 		}
 		
 		#endregion
@@ -61,7 +82,7 @@ namespace Test.CraigFowler.Web.ZPT.Tal
 		/// <returns>
 		/// A <see cref="System.String"/>
 		/// </returns>
-		private string GetTestFileName(string relativeFilename)
+		public string GetTestFileName(string relativeFilename)
 		{
 			string
 				basePath = ConfigurationManager.AppSettings["test-data-path"],

@@ -1,23 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <VisualState xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ShowCheckBoxes="false">
   <TopNode>[0-1000]/home/craig/Projects/ZopePageTemplates/ZopePageTemplates.nunit</TopNode>
-  <SelectedNode>[0-1112]Test.CraigFowler.Web.ZPT.Tales.Expressions</SelectedNode>
+  <SelectedNode>[0-1000]/home/craig/Projects/ZopePageTemplates/ZopePageTemplates.nunit</SelectedNode>
   <SelectedCategories>Information</SelectedCategories>
   <ExcludeCategories>true</ExcludeCategories>
   <Nodes>
     <Node UniqueName="[0-1000]/home/craig/Projects/ZopePageTemplates/ZopePageTemplates.nunit" Expanded="true">
       <Nodes>
-        <Node UniqueName="[0-1106]/home/craig/Projects/ZopePageTemplates/bin/Debug/Test.Parser.dll" Expanded="true">
+        <Node UniqueName="[0-1108]/home/craig/Projects/ZopePageTemplates/bin/Debug/Test.Parser.dll" Expanded="true">
           <Nodes>
-            <Node UniqueName="[0-1107]Test" Expanded="true">
+            <Node UniqueName="[0-1109]Test" Expanded="true">
               <Nodes>
-                <Node UniqueName="[0-1108]Test.CraigFowler" Expanded="true">
+                <Node UniqueName="[0-1110]Test.CraigFowler" Expanded="true">
                   <Nodes>
-                    <Node UniqueName="[0-1109]Test.CraigFowler.Web" Expanded="true">
+                    <Node UniqueName="[0-1111]Test.CraigFowler.Web" Expanded="true">
                       <Nodes>
-                        <Node UniqueName="[0-1110]Test.CraigFowler.Web.ZPT" Expanded="true">
+                        <Node UniqueName="[0-1112]Test.CraigFowler.Web.ZPT" Expanded="true">
                           <Nodes>
-                            <Node UniqueName="[0-1113]Test.CraigFowler.Web.ZPT.Mocks" Expanded="true">
+                            <Node UniqueName="[0-1115]Test.CraigFowler.Web.ZPT.Mocks" Expanded="true">
                               <Nodes>
                                 <Node UniqueName="[0-1040]Test.CraigFowler.Web.ZPT.Mocks.TestMockObject">
                                   <Nodes>
@@ -27,8 +27,13 @@
                                 </Node>
                               </Nodes>
                             </Node>
-                            <Node UniqueName="[0-1114]Test.CraigFowler.Web.ZPT.Tal" Expanded="true">
+                            <Node UniqueName="[0-1116]Test.CraigFowler.Web.ZPT.Tal" Expanded="true">
                               <Nodes>
+                                <Node UniqueName="[0-1106]Test.CraigFowler.Web.ZPT.Tal.TalIntegrationTests">
+                                  <Nodes>
+                                    <Node UniqueName="[0-1107]Test.CraigFowler.Web.ZPT.Tal.TalIntegrationTests.TestRenderDocuments" />
+                                  </Nodes>
+                                </Node>
                                 <Node UniqueName="[0-1062]Test.CraigFowler.Web.ZPT.Tal.TestRepeatVariable">
                                   <Nodes>
                                     <Node UniqueName="[0-1073]Test.CraigFowler.Web.ZPT.Tal.TestRepeatVariable.TestCurrent" />
@@ -44,10 +49,10 @@
                                     <Node UniqueName="[0-1066]Test.CraigFowler.Web.ZPT.Tal.TestRepeatVariable.TestStart" />
                                   </Nodes>
                                 </Node>
-                                <Node UniqueName="[0-1088]Test.CraigFowler.Web.ZPT.Tal.TestTalDocument">
+                                <Node UniqueName="[0-1088]Test.CraigFowler.Web.ZPT.Tal.TestTalDocument" Expanded="true">
                                   <Nodes>
                                     <Node UniqueName="[0-1089]Test.CraigFowler.Web.ZPT.Tal.TestTalDocument.TestConstructor" />
-                                    <Node UniqueName="[0-1090]Test.CraigFowler.Web.ZPT.Tal.TestTalDocument.TestReadNode" />
+                                    <Node UniqueName="[0-1090]Test.CraigFowler.Web.ZPT.Tal.TestTalDocument.TestReadNode" Expanded="true" />
                                   </Nodes>
                                 </Node>
                                 <Node UniqueName="[0-1074]Test.CraigFowler.Web.ZPT.Tal.TestTalElement">
@@ -69,11 +74,11 @@
                                 </Node>
                               </Nodes>
                             </Node>
-                            <Node UniqueName="[0-1111]Test.CraigFowler.Web.ZPT.Tales" Expanded="true">
+                            <Node UniqueName="[0-1113]Test.CraigFowler.Web.ZPT.Tales" Expanded="true">
                               <Nodes>
-                                <Node UniqueName="[0-1112]Test.CraigFowler.Web.ZPT.Tales.Expressions" Expanded="true">
+                                <Node UniqueName="[0-1114]Test.CraigFowler.Web.ZPT.Tales.Expressions" Expanded="true">
                                   <Nodes>
-                                    <Node UniqueName="[0-1103]Test.CraigFowler.Web.ZPT.Tales.Expressions.CSharpEvaluatorProofOfConcept" Expanded="true">
+                                    <Node UniqueName="[0-1103]Test.CraigFowler.Web.ZPT.Tales.Expressions.CSharpEvaluatorProofOfConcept">
                                       <Nodes>
                                         <Node UniqueName="[0-1104]Test.CraigFowler.Web.ZPT.Tales.Expressions.CSharpEvaluatorProofOfConcept.TestBooleanExpression" />
                                         <Node UniqueName="[0-1105]Test.CraigFowler.Web.ZPT.Tales.Expressions.CSharpEvaluatorProofOfConcept.TestStaticVariable" />
@@ -155,7 +160,7 @@
                                     <Node UniqueName="[0-1030]Test.CraigFowler.Web.ZPT.Tales.TalesIntegrationTests.TestStringExpressionWithReplacement" />
                                   </Nodes>
                                 </Node>
-                                <Node UniqueName="[0-1091]Test.CraigFowler.Web.ZPT.Tales.TestExpressions" Expanded="true">
+                                <Node UniqueName="[0-1091]Test.CraigFowler.Web.ZPT.Tales.TestExpressions">
                                   <Nodes>
                                     <Node UniqueName="[0-1097]Test.CraigFowler.Web.ZPT.Tales.TestExpressions.TestBadInitialDynamic" />
                                     <Node UniqueName="[0-1096]Test.CraigFowler.Web.ZPT.Tales.TestExpressions.TestDynamic" />
