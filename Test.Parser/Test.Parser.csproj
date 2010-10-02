@@ -36,6 +36,7 @@
     </Reference>
     <Reference Include="System.Xml" />
     <Reference Include="System.Configuration" />
+    <Reference Include="Mono.CSharp" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Tales\" />
@@ -61,6 +62,7 @@
     <Compile Include="Tal\TestTalDocument.cs" />
     <Compile Include="Mocks\TalesTestObject.cs" />
     <Compile Include="Tales\TestExpressions.cs" />
+    <Compile Include="Tales\Expressions\CSharpEvaluatorProofOfConcept.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Parser\Parser.csproj">

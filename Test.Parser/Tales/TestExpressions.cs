@@ -138,6 +138,19 @@ namespace Test.CraigFowler.Web.ZPT.Tales
 		
 		#endregion
 		
+		#region hybrid path tests
+		
+		public void TestHybridPathExpressions()
+		{
+			TalesContext context = new TalesContext();
+			context.AddDefinition("one", 1);
+			
+			Assert.AreEqual("x", context.CreateExpression("foo | string:x").GetValue());
+			Assert.AreEqual(1, context.CreateExpression("foo | string:$one").GetValue());
+		}
+		
+		#endregion
+		
 		#region invalid expressions
 		
 		[Test]

@@ -3,10 +3,24 @@
   <MonoDevelop.Ide.DebuggingService>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService>
-  <MonoDevelop.Ide.Workbench ctype="Workbench">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Test.Parser/Tales/Expressions/CSharpEvaluatorProofOfConcept.cs" ctype="Workbench">
+    <Files>
+      <File FileName="Test.Parser/Tales/Expressions/CSharpEvaluatorProofOfConcept.cs" Line="13" Column="17" />
+      <File FileName="Test.Parser/Mocks/MockObject.cs" Line="6" Column="36" />
+    </Files>
     <Pads>
       <Pad Id="ProjectPad">
-        <State expanded="True" />
+        <State expanded="True">
+          <Node name="Test.Parser" expanded="True">
+            <Node name="References" expanded="True" />
+            <Node name="Mocks" expanded="True" />
+            <Node name="Tales" expanded="True">
+              <Node name="Expressions" expanded="True">
+                <Node name="CSharpEvaluatorProofOfConcept.cs" selected="True" />
+              </Node>
+            </Node>
+          </Node>
+        </State>
       </Pad>
       <Pad Id="ClassPad">
         <State expanded="True">
@@ -14,18 +28,21 @@
           <Option id="NestedNamespaces" value="True" />
           <Option id="PublicProtectedApiOnly" value="True" />
           <Option id="PublicApiOnly" value="False" />
-          <Option id="GroupByAccess" value="True" />
           <Option id="GroupByType" value="True" />
-          <Node name="Parser" expanded="True">
+          <Option id="GroupByAccess" value="True" />
+          <Node name="Parser" expanded="True" />
+          <Node name="Test.Parser" expanded="True">
             <Node name="CraigFowler" expanded="True">
               <Node name="Web" expanded="True">
                 <Node name="ZPT" expanded="True">
-                  <Node name="Tales" expanded="True" />
+                  <Node name="Mocks" expanded="True">
+                    <Node name="CraigFowler.Web.ZPT.Mocks.MockObject" expanded="True" selected="True" />
+                  </Node>
                 </Node>
               </Node>
             </Node>
+            <Node name="Test" expanded="True" />
           </Node>
-          <Node name="Test.Parser" selected="True" />
         </State>
       </Pad>
       <Pad Id="MonoDevelop.Debugger.WatchPad">
@@ -33,4 +50,8 @@
       </Pad>
     </Pads>
   </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches ctype="PinnedWatchStore" />
 </Properties>
