@@ -67,5 +67,33 @@ namespace Test.CraigFowler.Web.ZPT.Tales
       testInt = (int) testObj;
       Assert.AreEqual(2, testInt, "Test integer has correct value");
     }
-  }
+
+		[Test]
+		[Category("Integration")]
+		[Description("This test is designed to test a specific case in relation to a recently-discovered bug")]
+		public void TestSpecificExpressions()
+		{
+			MockObject mock = new MockObject(true);
+			TalesContext
+				firstLevelContext = new TalesContext(),
+				secondLevelContext,
+				thirdLevelContext;
+			
+			firstLevelContext.AddDefinition("mock", mock);
+			mock["first"] = "First test";
+			mock["second"] = "Second test";
+			mock["third"] = "Third test";
+			mock["fourth"] = "Fourth test";
+			mock.BooleanValue = false;
+			
+			secondLevelContext = firstLevelContext.CreateChildContext();
+			secondLevelContext.AddDefinition("obj", mock.InnerObject);
+			
+			thirdLevelContext = secondLevelContext.CreateChildContext();
+			
+			Assert.AreEqual("sample", thirdLevelContext.CreateExpression("obj/unambiguous/baz").GetValue(), "First assert");
+			Assert.IsFalse(thirdLevelContext.CreateExpression("mock/BooleanValue").GetBooleanValue(), "Second assert");
+			Assert.IsTrue(thirdLevelContext.CreateExpression("mock/inner/BooleanValue").GetBooleanValue(), "Third assert");
+		}
+	}
 }

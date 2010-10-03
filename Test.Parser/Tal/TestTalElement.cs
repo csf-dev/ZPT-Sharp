@@ -1,14 +1,14 @@
 
 using System;
-using NUnit.Framework;
-using CraigFowler.Web.ZPT.Tal;
+using System.Collections.Generic;
+using System.IO;
+using System.Text;
 using System.Xml;
 using CraigFowler.Web.ZPT.Mocks;
-using System.Collections.Generic;
-using CraigFowler.Web.ZPT.Tales.Exceptions;
+using CraigFowler.Web.ZPT.Tal;
 using CraigFowler.Web.ZPT.Tales;
-using System.Text;
-using System.IO;
+using CraigFowler.Web.ZPT.Tales.Exceptions;
+using NUnit.Framework;
 
 namespace Test.CraigFowler.Web.ZPT.Tal
 {
@@ -64,6 +64,27 @@ namespace Test.CraigFowler.Web.ZPT.Tal
       return output;
     }
     
+		[Test]
+		[Description("This test is for a flaw that was found in the copy constructor for a TalElement")]
+		public void TestCopyConstructor()
+		{
+			XmlElement elementToCopy;
+			TalElement clonedElement;
+			XmlDocument xmlDoc = new XmlDocument();
+			
+			elementToCopy = (XmlElement) xmlDoc.CreateNode(XmlNodeType.Element, "div", "http://example.com");
+			elementToCopy.AppendChild(xmlDoc.CreateTextNode("This is a test"));
+			elementToCopy.AppendChild(xmlDoc.CreateNode(XmlNodeType.Element, "span", "http://example.com"));
+			elementToCopy.ChildNodes[1].AppendChild(xmlDoc.CreateTextNode("Contents of the span"));
+			elementToCopy.AppendChild(xmlDoc.CreateTextNode("This comes after the test"));
+			
+			Assert.AreEqual(3, elementToCopy.ChildNodes.Count, "Correct number of child nodes on the XML element");
+			
+			clonedElement = new TalElement(elementToCopy);
+			
+			Assert.AreEqual(3, clonedElement.ChildNodes.Count, "Correct number of child nodes on the TAL element");
+		}
+		
     #endregion
     
     #region regex tests

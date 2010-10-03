@@ -719,8 +719,10 @@ namespace CraigFowler.Web.ZPT.Tal
 					writer.WriteWhitespace(writer.Settings.NewLineChars);
 				}
         
-        foreach(XmlNode node in this.ChildNodes)
+        for(int i = 0; i < this.ChildNodes.Count; i++)
         {
+					XmlNode node = this.ChildNodes[i];
+					
           if(node is TalElement)
           {
             ((TalElement) node).Render(writer, indentLevel + 1);
@@ -729,7 +731,7 @@ namespace CraigFowler.Web.ZPT.Tal
           {
 						if(writer.Settings.Indent)
 						{
-							for(int i = 0; i < indentLevel + 1; i++)
+							for(int j = 0; j < indentLevel + 1; j++)
 							{
 								writer.WriteWhitespace(writer.Settings.IndentChars);
 							}
@@ -995,7 +997,7 @@ namespace CraigFowler.Web.ZPT.Tal
     public TalElement(string prefix,
                       string localName,
                       string namespaceURI,
-                      TalDocument document) : base(prefix, localName, namespaceURI, document)
+                      XmlDocument document) : base(prefix, localName, namespaceURI, document)
     {
       this.TalesContext = new TalesContext();
     }
@@ -1009,22 +1011,31 @@ namespace CraigFowler.Web.ZPT.Tal
 		public TalElement(XmlElement elementToClone) : this(elementToClone.Prefix,
 		                                                    elementToClone.LocalName,
 		                                                    elementToClone.NamespaceURI,
-		                                                    (TalDocument) elementToClone.OwnerDocument)
+		                                                    (XmlDocument) elementToClone.OwnerDocument)
 		{
-			foreach(XmlAttribute attribute in elementToClone.Attributes)
+			/* For some strange reason I can't use a foreach here.  If I do it ends up going into a crazy endless loop
+			 * when it hits certain node types.
+			 */
+			for(int i = 0; i < elementToClone.Attributes.Count; i++)
 			{
+				XmlAttribute attribute = elementToClone.Attributes[i];
 				this.SetAttribute(attribute.LocalName, attribute.NamespaceURI, attribute.Value);
 			}
 			
-			foreach(XmlNode node in elementToClone.ChildNodes)
+			/* For some strange reason I can't use a foreach here.  If I do it ends up going into a crazy endless loop
+			 * when it hits certain node types.
+			 */
+			for(int i = 0; i < elementToClone.ChildNodes.Count ; i++)
 			{
+				XmlNode node = elementToClone.ChildNodes[i];
+				
 				if(node.NodeType == XmlNodeType.Element)
 				{
 					this.AppendChild(new TalElement((XmlElement) node));
 				}
 				else
 				{
-					this.AppendChild(node);
+					this.AppendChild(node.CloneNode(true));
 				}
 			}
 		}

@@ -20,8 +20,7 @@ namespace Test.CraigFowler.Web.ZPT.Tal
 		{
 			List<FileInfo> inputFiles, outputFiles;
 			
-			inputFiles = GetTestFiles("input");
-			outputFiles = GetTestFiles("output");
+			GetTestFiles(out inputFiles, out outputFiles);
 			
 			for(int i = 0; i < inputFiles.Count; i++)
 			{
@@ -70,19 +69,58 @@ namespace Test.CraigFowler.Web.ZPT.Tal
 					Assert.Fail(String.Format("Encountered an exception whilst rendering file '{0}'.", inputFilename));
 				}
 				
+				Console.WriteLine ("Expected:\n{0}\n\nActual:\n{1}", expectedOutput, renderedOutput);
 				
 				Assert.AreEqual(expectedOutput,
 				                renderedOutput,
-				                String.Format("Test rendering of '{0}' matches '{1}'",
-				                              inputFilename,
-				                              outputFilename));
+				                String.Format("Test rendering of '{0}' matches '{1}'", inputFilename, outputFilename));
 			}
+		}
+		
+		[Test]
+		public void TestLoadDocuments()
+		{
+			List<FileInfo> inputFiles, outputFiles;
+			
+			GetTestFiles(out inputFiles, out outputFiles);
+			
+			for(int i = 0; i < inputFiles.Count; i++)
+			{
+				TalDocument document = new TalDocument();
+				string inputFilename = inputFiles[i].FullName;
+				document.Load(inputFilename);
+				Assert.IsNotNull(document);
+			}
+		}
+		
+		[Test]
+		[Description("This test checks the integrity of the XML document - for some reason the div element seems to " +
+								 "have fewer children than it should?")]
+		public void TestDocumentIntegrity()
+		{
+			string testFilename;
+			TalDocument talDoc = new TalDocument();
+			XmlDocument xmlDoc = new XmlDocument();
+			XmlElement node;
+			
+			testFilename = Path.Combine(ConfigurationManager.AppSettings["test-data-path"],
+			                            "input/testTalDocumentWithMockObject.xhtml");
+			
+			xmlDoc.Load(testFilename);
+			node = xmlDoc.GetElementById("testNode");
+			
+			Assert.AreEqual(5, node.ChildNodes.Count, "Correct number of child nodes - XML document");
+			
+			talDoc.Load(testFilename);
+			node = talDoc.GetElementById("testNode");
+			
+			Assert.AreEqual(5, node.ChildNodes.Count, "Correct number of child nodes - TAL document");
 		}
 		
 		#region supporting methods
 		
 		/// <summary>
-		/// <para>Gets a collection of the files within the given test data path.</para>
+		/// <para>Overloaded.  Gets a collection of the files within the given test data path.</para>
 		/// </summary>
 		/// <param name="directoryPath">
 		/// A <see cref="System.String"/>
@@ -120,6 +158,24 @@ namespace Test.CraigFowler.Web.ZPT.Tal
 			}
 			
 			return output;
+		}
+		
+		/// <summary>
+		/// <para>
+		/// Overloaded.  Gets two collections of files containing test TAL documents and the expected renderings of
+		/// those documents.
+		/// </para>
+		/// </summary>
+		/// <param name="inputFiles">
+		/// A <see cref="List<FileInfo>"/>
+		/// </param>
+		/// <param name="outputFiles">
+		/// A <see cref="List<FileInfo>"/>
+		/// </param>
+		public void GetTestFiles(out List<FileInfo> inputFiles, out List<FileInfo> outputFiles)
+		{
+			inputFiles = GetTestFiles("input");
+			outputFiles = GetTestFiles("output");
 		}
 		
 		#endregion

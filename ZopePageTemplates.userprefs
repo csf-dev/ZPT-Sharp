@@ -3,22 +3,26 @@
   <MonoDevelop.Ide.DebuggingService>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService>
-  <MonoDevelop.Ide.Workbench ActiveDocument="Test.Parser/Tales/Expressions/CSharpEvaluatorProofOfConcept.cs" ctype="Workbench">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Test.Parser/Tal/TalIntegrationTests.cs" ctype="Workbench">
     <Files>
-      <File FileName="Test.Parser/Tales/Expressions/CSharpEvaluatorProofOfConcept.cs" Line="13" Column="17" />
-      <File FileName="Test.Parser/Mocks/MockObject.cs" Line="6" Column="36" />
+      <File FileName="Test.Parser/Tal/TalIntegrationTests.cs" Line="72" Column="90" />
+      <File FileName="Test.Parser/Mocks/MockObject.cs" Line="59" Column="5" />
+      <File FileName="Test.Parser/Tales/TestTalesContext.cs" Line="80" Column="13" />
+      <File FileName="Parser/Tal/TalDocument.cs" Line="171" Column="25" />
+      <File FileName="Parser/Tal/TalElement.cs" Line="1028" Column="17" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State expanded="True">
+          <Node name="Parser" expanded="True">
+            <Node name="Tal" expanded="True" />
+          </Node>
           <Node name="Test.Parser" expanded="True">
-            <Node name="References" expanded="True" />
             <Node name="Mocks" expanded="True" />
-            <Node name="Tales" expanded="True">
-              <Node name="Expressions" expanded="True">
-                <Node name="CSharpEvaluatorProofOfConcept.cs" selected="True" />
-              </Node>
+            <Node name="Tal" expanded="True">
+              <Node name="TalIntegrationTests.cs" selected="True" />
             </Node>
+            <Node name="Tales" expanded="True" />
           </Node>
         </State>
       </Pad>
@@ -30,18 +34,34 @@
           <Option id="PublicApiOnly" value="False" />
           <Option id="GroupByType" value="True" />
           <Option id="GroupByAccess" value="True" />
-          <Node name="Parser" expanded="True" />
+          <Node name="Parser" expanded="True">
+            <Node name="CraigFowler" expanded="True">
+              <Node name="Web" expanded="True">
+                <Node name="ZPT" expanded="True">
+                  <Node name="Tal" expanded="True" />
+                </Node>
+              </Node>
+            </Node>
+          </Node>
           <Node name="Test.Parser" expanded="True">
             <Node name="CraigFowler" expanded="True">
               <Node name="Web" expanded="True">
                 <Node name="ZPT" expanded="True">
-                  <Node name="Mocks" expanded="True">
-                    <Node name="CraigFowler.Web.ZPT.Mocks.MockObject" expanded="True" selected="True" />
+                  <Node name="Mocks" expanded="True" />
+                </Node>
+              </Node>
+            </Node>
+            <Node name="Test" expanded="True">
+              <Node name="CraigFowler" expanded="True">
+                <Node name="Web" expanded="True">
+                  <Node name="ZPT" expanded="True">
+                    <Node name="Tal" expanded="True">
+                      <Node name="Test.CraigFowler.Web.ZPT.Tal.TestTalElement" expanded="True" selected="True" />
+                    </Node>
                   </Node>
                 </Node>
               </Node>
             </Node>
-            <Node name="Test" expanded="True" />
           </Node>
         </State>
       </Pad>
