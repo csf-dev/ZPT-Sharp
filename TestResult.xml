@@ -1,61 +1,48 @@
 ﻿<?xml version="1.0" encoding="utf-8" standalone="no"?>
 <!--This file represents the results of running a test suite-->
-<test-results name="/home/craig/Projects/ZopePageTemplates/ZopePageTemplates.nunit" total="91" failures="1" not-run="1" date="2010-10-03" time="02:50:18">
+<test-results name="/home/craig/Projects/ZopePageTemplates/ZopePageTemplates.nunit" total="91" failures="0" not-run="1" date="2010-10-11" time="00:18:30">
   <environment nunit-version="2.4.7.0" clr-version="2.0.50727.1433" os-version="Unix 2.6.35.6" platform="Unix" cwd="/home/craig/Documents" machine-name="craig-laptop" user="craig" user-domain="craig-laptop" />
   <culture-info current-culture="en-GB" current-uiculture="en-GB" />
-  <test-suite name="/home/craig/Projects/ZopePageTemplates/ZopePageTemplates.nunit" success="False" time="8.235" asserts="0">
+  <test-suite name="/home/craig/Projects/ZopePageTemplates/ZopePageTemplates.nunit" success="True" time="9.721" asserts="0">
     <results>
-      <test-suite name="/home/craig/Projects/ZopePageTemplates/bin/Debug/Test.Parser.dll" success="False" time="8.234" asserts="0">
+      <test-suite name="/home/craig/Projects/ZopePageTemplates/bin/Debug/Test.Parser.dll" success="True" time="9.718" asserts="0">
         <results>
-          <test-suite name="Test" success="False" time="8.233" asserts="0">
+          <test-suite name="Test" success="True" time="9.718" asserts="0">
             <results>
-              <test-suite name="CraigFowler" success="False" time="8.233" asserts="0">
+              <test-suite name="CraigFowler" success="True" time="9.718" asserts="0">
                 <results>
-                  <test-suite name="Web" success="False" time="8.233" asserts="0">
+                  <test-suite name="Web" success="True" time="9.718" asserts="0">
                     <results>
-                      <test-suite name="ZPT" success="False" time="8.233" asserts="0">
+                      <test-suite name="ZPT" success="True" time="9.718" asserts="0">
                         <results>
-                          <test-suite name="Tal" success="False" time="7.314" asserts="0">
+                          <test-suite name="Tal" success="True" time="8.594" asserts="0">
                             <results>
-                              <test-suite name="TalIntegrationTests" description="These are a batch of tests imported from the Zope source code." success="False" time="6.792" asserts="0">
+                              <test-suite name="TalIntegrationTests" description="These are a batch of tests imported from the Zope source code." success="True" time="8.285" asserts="0">
                                 <categories>
                                   <category name="Integration" />
                                 </categories>
                                 <results>
-                                  <test-case name="Test.CraigFowler.Web.ZPT.Tal.TalIntegrationTests.TestDocumentIntegrity" description="This test checks the integrity of the XML document - for some reason the div element seems to have fewer children than it should?" executed="True" success="True" time="2.878" asserts="2" />
-                                  <test-case name="Test.CraigFowler.Web.ZPT.Tal.TalIntegrationTests.TestLoadDocuments" executed="True" success="True" time="2.559" asserts="2" />
-                                  <test-case name="Test.CraigFowler.Web.ZPT.Tal.TalIntegrationTests.TestRenderDocuments" executed="True" success="False" time="1.313" asserts="1">
-                                    <failure>
-                                      <message><![CDATA[  Test rendering of '/home/craig/Projects/ZopePageTemplates/doc/Test data/input/testTalDocumentWithMockObject.xhtml' matches '/home/craig/Projects/ZopePageTemplates/doc/Test data/output/testTalDocumentWithMockObject.xhtml'
-  Expected string length 468 but was 514. Strings differ at index 183.
-  Expected: "...">\n  <head>\n    <title>\n      This is a test TALES documen..."
-  But was:  "...">\n  <head>\n    <title>\n      \n      This is a test TALES ..."
-  -----------------------------------------------^
-]]></message>
-                                      <stack-trace><![CDATA[at Test.CraigFowler.Web.ZPT.Tal.TalIntegrationTests.TestRenderDocuments () [0x00000] in <filename unknown>:0
-at (wrapper managed-to-native) System.Reflection.MonoMethod:InternalInvoke (object,object[],System.Exception&)
-at System.Reflection.MonoMethod.Invoke (System.Object obj, BindingFlags invokeAttr, System.Reflection.Binder binder, System.Object[] parameters, System.Globalization.CultureInfo culture) [0x00000] in <filename unknown>:0
-]]></stack-trace>
-                                    </failure>
-                                  </test-case>
+                                  <test-case name="Test.CraigFowler.Web.ZPT.Tal.TalIntegrationTests.TestDocumentIntegrity" description="This test checks the integrity of the XML document - for some reason the div element seems to have fewer children than it should?" executed="True" success="True" time="2.796" asserts="2" />
+                                  <test-case name="Test.CraigFowler.Web.ZPT.Tal.TalIntegrationTests.TestLoadDocuments" executed="True" success="True" time="2.706" asserts="2" />
+                                  <test-case name="Test.CraigFowler.Web.ZPT.Tal.TalIntegrationTests.TestRenderDocuments" executed="True" success="True" time="2.744" asserts="2" />
                                 </results>
                               </test-suite>
-                              <test-suite name="TestRepeatVariable" success="True" time="0.181" asserts="0">
+                              <test-suite name="TestRepeatVariable" success="True" time="0.079" asserts="0">
                                 <results>
                                   <test-case name="Test.CraigFowler.Web.ZPT.Tal.TestRepeatVariable.TestCurrent" executed="True" success="True" time="0.001" asserts="5" />
-                                  <test-case name="Test.CraigFowler.Web.ZPT.Tal.TestRepeatVariable.TestEnd" executed="True" success="True" time="0.001" asserts="5" />
+                                  <test-case name="Test.CraigFowler.Web.ZPT.Tal.TestRepeatVariable.TestEnd" executed="True" success="True" time="0.002" asserts="5" />
                                   <test-case name="Test.CraigFowler.Web.ZPT.Tal.TestRepeatVariable.TestEven" executed="True" success="True" time="0.001" asserts="4" />
                                   <test-case name="Test.CraigFowler.Web.ZPT.Tal.TestRepeatVariable.TestEvenAfterEndOfRange" executed="True" success="True" time="0.001" asserts="0" />
                                   <test-case name="Test.CraigFowler.Web.ZPT.Tal.TestRepeatVariable.TestEvenBeforeStartOfRange" executed="True" success="True" time="0.000" asserts="0" />
                                   <test-case name="Test.CraigFowler.Web.ZPT.Tal.TestRepeatVariable.TestGenerateLetterReference" executed="True" success="True" time="0.001" asserts="6" />
                                   <test-case name="Test.CraigFowler.Web.ZPT.Tal.TestRepeatVariable.TestLength" executed="True" success="True" time="0.000" asserts="1" />
                                   <test-case name="Test.CraigFowler.Web.ZPT.Tal.TestRepeatVariable.TestLetter" executed="True" success="True" time="0.001" asserts="4" />
-                                  <test-case name="Test.CraigFowler.Web.ZPT.Tal.TestRepeatVariable.TestMoveNext" executed="True" success="True" time="0.001" asserts="13" />
+                                  <test-case name="Test.CraigFowler.Web.ZPT.Tal.TestRepeatVariable.TestMoveNext" executed="True" success="True" time="0.000" asserts="13" />
                                   <test-case name="Test.CraigFowler.Web.ZPT.Tal.TestRepeatVariable.TestOdd" executed="True" success="True" time="0.000" asserts="4" />
                                   <test-case name="Test.CraigFowler.Web.ZPT.Tal.TestRepeatVariable.TestStart" executed="True" success="True" time="0.001" asserts="4" />
                                 </results>
                               </test-suite>
-                              <test-suite name="TestTalDocument" success="True" time="0.045" asserts="0">
+                              <test-suite name="TestTalDocument" success="True" time="0.032" asserts="0">
                                 <results>
                                   <test-case name="Test.CraigFowler.Web.ZPT.Tal.TestTalDocument.TestConstructor" description="Contains no asserts but ensures that the constructor works." executed="True" success="True" time="0.001" asserts="0" />
                                   <test-case name="Test.CraigFowler.Web.ZPT.Tal.TestTalDocument.TestReadNode" executed="True" success="True" time="0.002" asserts="2">
@@ -65,7 +52,7 @@ at System.Reflection.MonoMethod.Invoke (System.Object obj, BindingFlags invokeAt
                                   </test-case>
                                 </results>
                               </test-suite>
-                              <test-suite name="TestTalElement" success="True" time="0.245" asserts="0">
+                              <test-suite name="TestTalElement" success="True" time="0.099" asserts="0">
                                 <results>
                                   <test-case name="Test.CraigFowler.Web.ZPT.Tal.TestTalElement.TestAttributesSpecification" description="Test the Regex that handles 'attributes' statements" executed="True" success="True" time="0.001" asserts="14" />
                                   <test-case name="Test.CraigFowler.Web.ZPT.Tal.TestTalElement.TestConstructor" description="Contains no asserts but ensures that the constructor functions." executed="True" success="True" time="0.001" asserts="1" />
@@ -73,57 +60,57 @@ at System.Reflection.MonoMethod.Invoke (System.Object obj, BindingFlags invokeAt
                                   <test-case name="Test.CraigFowler.Web.ZPT.Tal.TestTalElement.TestCopyConstructor" description="This test is for a flaw that was found in the copy constructor for a TalElement" executed="True" success="True" time="0.001" asserts="2" />
                                   <test-case name="Test.CraigFowler.Web.ZPT.Tal.TestTalElement.TestDefineSpecification" description="Test the Regex that catures the parts of a 'define' statement" executed="True" success="True" time="0.001" asserts="18" />
                                   <test-case name="Test.CraigFowler.Web.ZPT.Tal.TestTalElement.TestDefineStatements" description="Tests the Regex that splits 'define' statements apart" executed="True" success="True" time="0.001" asserts="5" />
-                                  <test-case name="Test.CraigFowler.Web.ZPT.Tal.TestTalElement.TestRenderWithAttributesAttribute" executed="True" success="True" time="0.002" asserts="1" />
+                                  <test-case name="Test.CraigFowler.Web.ZPT.Tal.TestTalElement.TestRenderWithAttributesAttribute" executed="True" success="True" time="0.001" asserts="1" />
                                   <test-case name="Test.CraigFowler.Web.ZPT.Tal.TestTalElement.TestRenderWithConditionAttribute" executed="True" success="True" time="0.001" asserts="2" />
                                   <test-case name="Test.CraigFowler.Web.ZPT.Tal.TestTalElement.TestRenderWithContentAttribute" executed="True" success="True" time="0.001" asserts="2" />
                                   <test-case name="Test.CraigFowler.Web.ZPT.Tal.TestTalElement.TestRenderWithDefineAttribute" executed="True" success="True" time="0.001" asserts="2" />
-                                  <test-case name="Test.CraigFowler.Web.ZPT.Tal.TestTalElement.TestRenderWithMultipleDefineAttributes" executed="True" success="True" time="0.006" asserts="2" />
+                                  <test-case name="Test.CraigFowler.Web.ZPT.Tal.TestTalElement.TestRenderWithMultipleDefineAttributes" executed="True" success="True" time="0.002" asserts="2" />
                                   <test-case name="Test.CraigFowler.Web.ZPT.Tal.TestTalElement.TestRenderWithOmitTagAttribute" executed="True" success="True" time="0.001" asserts="2" />
-                                  <test-case name="Test.CraigFowler.Web.ZPT.Tal.TestTalElement.TestRenderWithRepeatAttribute" executed="True" success="True" time="0.004" asserts="1" />
+                                  <test-case name="Test.CraigFowler.Web.ZPT.Tal.TestTalElement.TestRenderWithRepeatAttribute" executed="True" success="True" time="0.003" asserts="1" />
                                   <test-case name="Test.CraigFowler.Web.ZPT.Tal.TestTalElement.TestRepeatSpecification" description="Test the Regex that handles 'repeat' statements" executed="True" success="True" time="0.000" asserts="3" />
                                 </results>
                               </test-suite>
                             </results>
                           </test-suite>
-                          <test-suite name="Tales" success="True" time="0.919" asserts="0">
+                          <test-suite name="Tales" success="True" time="1.084" asserts="0">
                             <results>
-                              <test-suite name="Expressions" success="True" time="0.605" asserts="0">
+                              <test-suite name="Expressions" success="True" time="0.774" asserts="0">
                                 <results>
-                                  <test-suite name="CSharpEvaluatorProofOfConcept" success="True" time="0.383" asserts="0">
+                                  <test-suite name="CSharpEvaluatorProofOfConcept" success="True" time="0.528" asserts="0">
                                     <results>
-                                      <test-case name="Test.CraigFowler.Web.ZPT.Tales.Expressions.CSharpEvaluatorProofOfConcept.TestBooleanExpression" executed="True" success="True" time="0.308" asserts="2" />
-                                      <test-case name="Test.CraigFowler.Web.ZPT.Tales.Expressions.CSharpEvaluatorProofOfConcept.TestStaticVariable" executed="True" success="True" time="0.036" asserts="2" />
+                                      <test-case name="Test.CraigFowler.Web.ZPT.Tales.Expressions.CSharpEvaluatorProofOfConcept.TestBooleanExpression" executed="True" success="True" time="0.488" asserts="2" />
+                                      <test-case name="Test.CraigFowler.Web.ZPT.Tales.Expressions.CSharpEvaluatorProofOfConcept.TestStaticVariable" executed="True" success="True" time="0.037" asserts="2" />
                                     </results>
                                   </test-suite>
-                                  <test-suite name="TestBuiltinPathExpressions" success="True" time="0.023" asserts="0">
+                                  <test-suite name="TestBuiltinPathExpressions" success="True" time="0.035" asserts="0">
                                     <results>
-                                      <test-case name="Test.CraigFowler.Web.ZPT.Tales.Expressions.TestBuiltinPathExpressions.TestDEFAULTExpression" executed="True" success="True" time="0.000" asserts="2" />
-                                      <test-case name="Test.CraigFowler.Web.ZPT.Tales.Expressions.TestBuiltinPathExpressions.TestDEFAULTExpressionWithRootContext" executed="True" success="True" time="0.000" asserts="2" />
+                                      <test-case name="Test.CraigFowler.Web.ZPT.Tales.Expressions.TestBuiltinPathExpressions.TestDEFAULTExpression" executed="True" success="True" time="0.001" asserts="2" />
+                                      <test-case name="Test.CraigFowler.Web.ZPT.Tales.Expressions.TestBuiltinPathExpressions.TestDEFAULTExpressionWithRootContext" executed="True" success="True" time="0.001" asserts="2" />
                                       <test-case name="Test.CraigFowler.Web.ZPT.Tales.Expressions.TestBuiltinPathExpressions.TestNothingExpression" executed="True" success="True" time="0.000" asserts="1" />
                                       <test-case name="Test.CraigFowler.Web.ZPT.Tales.Expressions.TestBuiltinPathExpressions.TestNothingExpressionWithRootContext" executed="True" success="True" time="0.001" asserts="1" />
                                     </results>
                                   </test-suite>
-                                  <test-suite name="TestInverseBooleanExpression" success="True" time="0.078" asserts="0">
+                                  <test-suite name="TestInverseBooleanExpression" success="True" time="0.068" asserts="0">
                                     <results>
                                       <test-case name="Test.CraigFowler.Web.ZPT.Tales.Expressions.TestInverseBooleanExpression.TestBooleanFalse" executed="True" success="True" time="0.001" asserts="2" />
                                       <test-case name="Test.CraigFowler.Web.ZPT.Tales.Expressions.TestInverseBooleanExpression.TestBooleanTrue" executed="True" success="True" time="0.001" asserts="2" />
-                                      <test-case name="Test.CraigFowler.Web.ZPT.Tales.Expressions.TestInverseBooleanExpression.TestEmptyString" executed="True" success="True" time="0.000" asserts="2" />
+                                      <test-case name="Test.CraigFowler.Web.ZPT.Tales.Expressions.TestInverseBooleanExpression.TestEmptyString" executed="True" success="True" time="0.001" asserts="2" />
                                       <test-case name="Test.CraigFowler.Web.ZPT.Tales.Expressions.TestInverseBooleanExpression.TestNegativeInteger" executed="True" success="True" time="0.001" asserts="2" />
                                       <test-case name="Test.CraigFowler.Web.ZPT.Tales.Expressions.TestInverseBooleanExpression.TestNonConvertible" executed="True" success="True" time="0.001" asserts="2" />
-                                      <test-case name="Test.CraigFowler.Web.ZPT.Tales.Expressions.TestInverseBooleanExpression.TestNull" executed="True" success="True" time="0.001" asserts="2" />
+                                      <test-case name="Test.CraigFowler.Web.ZPT.Tales.Expressions.TestInverseBooleanExpression.TestNull" executed="True" success="True" time="0.000" asserts="2" />
                                       <test-case name="Test.CraigFowler.Web.ZPT.Tales.Expressions.TestInverseBooleanExpression.TestPositiveInteger" executed="True" success="True" time="0.001" asserts="2" />
                                       <test-case name="Test.CraigFowler.Web.ZPT.Tales.Expressions.TestInverseBooleanExpression.TestString" executed="True" success="True" time="0.001" asserts="2" />
-                                      <test-case name="Test.CraigFowler.Web.ZPT.Tales.Expressions.TestInverseBooleanExpression.TestZeroInteger" executed="True" success="True" time="0.000" asserts="2" />
+                                      <test-case name="Test.CraigFowler.Web.ZPT.Tales.Expressions.TestInverseBooleanExpression.TestZeroInteger" executed="True" success="True" time="0.001" asserts="2" />
                                     </results>
                                   </test-suite>
-                                  <test-suite name="TestPathExpression" success="True" time="0.007" asserts="0">
+                                  <test-suite name="TestPathExpression" success="True" time="0.011" asserts="0">
                                     <results>
                                       <test-case name="Test.CraigFowler.Web.ZPT.Tales.Expressions.TestPathExpression.TestInvalidExpressions" executed="True" success="True" time="0.000" asserts="1" />
                                       <test-case name="Test.CraigFowler.Web.ZPT.Tales.Expressions.TestPathExpression.TestPathPieces" executed="True" success="True" time="0.001" asserts="2" />
                                       <test-case name="Test.CraigFowler.Web.ZPT.Tales.Expressions.TestPathExpression.TestValidExpressions" executed="True" success="True" time="0.000" asserts="9" />
                                     </results>
                                   </test-suite>
-                                  <test-suite name="TestTalesExpression" success="True" time="0.075" asserts="0">
+                                  <test-suite name="TestTalesExpression" success="True" time="0.070" asserts="0">
                                     <results>
                                       <test-case name="Test.CraigFowler.Web.ZPT.Tales.Expressions.TestTalesExpression.TestEmptyExpression" executed="True" success="True" time="0.000" asserts="1" />
                                       <test-case name="Test.CraigFowler.Web.ZPT.Tales.Expressions.TestTalesExpression.TestExpressionFactoryDefault" executed="True" success="True" time="0.000" asserts="2" />
@@ -138,13 +125,13 @@ at System.Reflection.MonoMethod.Invoke (System.Object obj, BindingFlags invokeAt
                                   </test-suite>
                                 </results>
                               </test-suite>
-                              <test-suite name="TalesIntegrationTests" success="True" time="0.175" asserts="0">
+                              <test-suite name="TalesIntegrationTests" success="True" time="0.136" asserts="0">
                                 <categories>
                                   <category name="Integration" />
                                 </categories>
                                 <results>
                                   <test-case name="Test.CraigFowler.Web.ZPT.Tales.TalesIntegrationTests.TestAliasBeforeIndexer" executed="True" success="True" time="0.001" asserts="2" />
-                                  <test-case name="Test.CraigFowler.Web.ZPT.Tales.TalesIntegrationTests.TestAliasedMembersBeforeNormalMembers" executed="True" success="True" time="0.000" asserts="2" />
+                                  <test-case name="Test.CraigFowler.Web.ZPT.Tales.TalesIntegrationTests.TestAliasedMembersBeforeNormalMembers" executed="True" success="True" time="0.001" asserts="2" />
                                   <test-case name="Test.CraigFowler.Web.ZPT.Tales.TalesIntegrationTests.TestDuplicateAlias" executed="True" success="True" time="0.001" asserts="0" />
                                   <test-case name="Test.CraigFowler.Web.ZPT.Tales.TalesIntegrationTests.TestEmptyExpressionString" executed="True" success="True" time="0.000" asserts="1" />
                                   <test-case name="Test.CraigFowler.Web.ZPT.Tales.TalesIntegrationTests.TestEmptyPathString" executed="True" success="True" time="0.000" asserts="1" />
@@ -152,11 +139,11 @@ at System.Reflection.MonoMethod.Invoke (System.Object obj, BindingFlags invokeAt
                                   <test-case name="Test.CraigFowler.Web.ZPT.Tales.TalesIntegrationTests.TestNonExistantRootObject" executed="True" success="True" time="0.000" asserts="0" />
                                   <test-case name="Test.CraigFowler.Web.ZPT.Tales.TalesIntegrationTests.TestNormalMemberBeforeIndexer" executed="True" success="True" time="0.001" asserts="2" />
                                   <test-case name="Test.CraigFowler.Web.ZPT.Tales.TalesIntegrationTests.TestParsePathExpressionFromIndexer" executed="True" success="True" time="0.001" asserts="2" />
-                                  <test-case name="Test.CraigFowler.Web.ZPT.Tales.TalesIntegrationTests.TestParsePathExpressionFromUnambiguousIndexer" executed="True" success="True" time="0.001" asserts="2" />
+                                  <test-case name="Test.CraigFowler.Web.ZPT.Tales.TalesIntegrationTests.TestParsePathExpressionFromUnambiguousIndexer" executed="True" success="True" time="0.002" asserts="2" />
                                   <test-case name="Test.CraigFowler.Web.ZPT.Tales.TalesIntegrationTests.TestParseSimplePathExpression" executed="True" success="True" time="0.001" asserts="2" />
                                   <test-case name="Test.CraigFowler.Web.ZPT.Tales.TalesIntegrationTests.TestParseSimplePathExpressionUsingAlias" executed="True" success="True" time="0.001" asserts="2" />
                                   <test-case name="Test.CraigFowler.Web.ZPT.Tales.TalesIntegrationTests.TestParseSimplePathExpressionWithVariableSubstitution" executed="True" success="True" time="0.001" asserts="2" />
-                                  <test-case name="Test.CraigFowler.Web.ZPT.Tales.TalesIntegrationTests.TestParseTwoInvalidPathExpressions" executed="True" success="True" time="0.002" asserts="3" />
+                                  <test-case name="Test.CraigFowler.Web.ZPT.Tales.TalesIntegrationTests.TestParseTwoInvalidPathExpressions" executed="True" success="True" time="0.001" asserts="3" />
                                   <test-case name="Test.CraigFowler.Web.ZPT.Tales.TalesIntegrationTests.TestParseTwoInvalidPathExpressionsNonPermanent" executed="True" success="True" time="0.001" asserts="3" />
                                   <test-case name="Test.CraigFowler.Web.ZPT.Tales.TalesIntegrationTests.TestParseTwoInvalidPathExpressionsPermanent" executed="True" success="True" time="0.001" asserts="3" />
                                   <test-case name="Test.CraigFowler.Web.ZPT.Tales.TalesIntegrationTests.TestParseTwoPathExpressions" executed="True" success="True" time="0.001" asserts="2" />
@@ -164,12 +151,12 @@ at System.Reflection.MonoMethod.Invoke (System.Object obj, BindingFlags invokeAt
                                   <test-case name="Test.CraigFowler.Web.ZPT.Tales.TalesIntegrationTests.TestStringExpressionWithReplacement" executed="True" success="True" time="0.001" asserts="2" />
                                 </results>
                               </test-suite>
-                              <test-suite name="TestExpressions" description="These are a batch of tests imported from the Zope source code." success="True" time="0.091" asserts="0">
+                              <test-suite name="TestExpressions" description="These are a batch of tests imported from the Zope source code." success="True" time="0.077" asserts="0">
                                 <categories>
                                   <category name="Integration" />
                                 </categories>
                                 <results>
-                                  <test-case name="Test.CraigFowler.Web.ZPT.Tales.TestExpressions.TestBadInitialDynamic" executed="True" success="True" time="0.001" asserts="0" />
+                                  <test-case name="Test.CraigFowler.Web.ZPT.Tales.TestExpressions.TestBadInitialDynamic" executed="True" success="True" time="0.002" asserts="0" />
                                   <test-case name="Test.CraigFowler.Web.ZPT.Tales.TestExpressions.TestDynamic" executed="True" success="True" time="0.002" asserts="1" />
                                   <test-case name="Test.CraigFowler.Web.ZPT.Tales.TestExpressions.TestInvalidExpressions" executed="True" success="True" time="0.002" asserts="0" />
                                   <test-case name="Test.CraigFowler.Web.ZPT.Tales.TestExpressions.TestLongPath" executed="True" success="True" time="0.001" asserts="1" />
@@ -178,15 +165,15 @@ at System.Reflection.MonoMethod.Invoke (System.Object obj, BindingFlags invokeAt
                                       <message><![CDATA[Support for constructing classes is not yet included in my implementation of TALES.]]></message>
                                     </reason>
                                   </test-case>
-                                  <test-case name="Test.CraigFowler.Web.ZPT.Tales.TestExpressions.TestOrPath" executed="True" success="True" time="0.002" asserts="4" />
+                                  <test-case name="Test.CraigFowler.Web.ZPT.Tales.TestExpressions.TestOrPath" executed="True" success="True" time="0.001" asserts="4" />
                                   <test-case name="Test.CraigFowler.Web.ZPT.Tales.TestExpressions.TestPath" executed="True" success="True" time="0.001" asserts="1" />
                                   <test-case name="Test.CraigFowler.Web.ZPT.Tales.TestExpressions.TestSimple" executed="True" success="True" time="0.000" asserts="1" />
                                   <test-case name="Test.CraigFowler.Web.ZPT.Tales.TestExpressions.TestString" executed="True" success="True" time="0.000" asserts="1" />
-                                  <test-case name="Test.CraigFowler.Web.ZPT.Tales.TestExpressions.TestStringSub" executed="True" success="True" time="0.000" asserts="1" />
+                                  <test-case name="Test.CraigFowler.Web.ZPT.Tales.TestExpressions.TestStringSub" executed="True" success="True" time="0.001" asserts="1" />
                                   <test-case name="Test.CraigFowler.Web.ZPT.Tales.TestExpressions.TestStringSubComplex" executed="True" success="True" time="0.001" asserts="1" />
                                 </results>
                               </test-suite>
-                              <test-suite name="TestTalesContext" success="True" time="0.039" asserts="0">
+                              <test-suite name="TestTalesContext" success="True" time="0.026" asserts="0">
                                 <results>
                                   <test-case name="Test.CraigFowler.Web.ZPT.Tales.TestTalesContext.TestConstructor" executed="True" success="True" time="0.000" asserts="1" />
                                   <test-case name="Test.CraigFowler.Web.ZPT.Tales.TestTalesContext.TestCreateChildContext" executed="True" success="True" time="0.000" asserts="2" />

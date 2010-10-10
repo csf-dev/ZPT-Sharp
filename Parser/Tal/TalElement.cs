@@ -666,21 +666,16 @@ namespace CraigFowler.Web.ZPT.Tal
     private void ProcessElementContent(XmlWriter writer, int indentLevel)
     {
       object contentToWrite;
-      bool replaceElement, writeContent, omitTag;
+      bool replaceElement, writeContent;
       TalContentType contentType;
       
       // Determine whether we are writing any custom content or not
       writeContent = ProcessTalContentOrReplaceAttribute(out contentToWrite, out contentType, out replaceElement);
       
-      // Handle the 'omit-tag' attribute
-      if(!replaceElement)
-      {
-        omitTag = ProcessTalOmitTagAttribute();
-        if(omitTag)
-        {
-          replaceElement = true;
-        }
-      }
+      /* Handle the 'omit-tag' attribute.
+       * If we are not already replacing the element then perhaps we will if there an omit-tag attribute present.
+       */
+			replaceElement = replaceElement? true : ProcessTalOmitTagAttribute();
       
       if(!replaceElement)
       {
@@ -693,98 +688,166 @@ namespace CraigFowler.Web.ZPT.Tal
       }
       else if(!replaceElement)
       {
-        // Open the new element
-				if(writer.Settings.Indent)
-				{
-					for(int i = 0; i < indentLevel; i++)
-					{
-						writer.WriteWhitespace(writer.Settings.IndentChars);
-					}
-				}
-        writer.WriteStartElement(this.Prefix, this.LocalName, this.NamespaceURI);
+        // Indentation before the start of the new element
+				WriteIndentation(writer, indentLevel);
 				
-        foreach(XmlAttribute attribute in this.Attributes)
-        {
-          if(OKToRenderAttribute(attribute))
-					{
-            writer.WriteAttributeString(attribute.Prefix,
-                                        attribute.LocalName,
-                                        attribute.NamespaceURI,
-                                        attribute.Value);
-          }
-        }
+        // The start element itself
+				WriteStartElement(writer);
+        
+        // The element's child nodes
+				WriteChildNodes(writer, indentLevel);
+        
+        // Indentation before the end of the element
+				WriteIndentation(writer, indentLevel);
 				
-				if(!String.IsNullOrEmpty(writer.Settings.NewLineChars))
-				{
-					writer.WriteWhitespace(writer.Settings.NewLineChars);
-				}
-        
-        for(int i = 0; i < this.ChildNodes.Count; i++)
-        {
-					XmlNode node = this.ChildNodes[i];
-					
-          if(node is TalElement)
-          {
-            ((TalElement) node).Render(writer, indentLevel + 1);
-          }
-          else
-          {
-						if(writer.Settings.Indent)
-						{
-							for(int j = 0; j < indentLevel + 1; j++)
-							{
-								writer.WriteWhitespace(writer.Settings.IndentChars);
-							}
-						}
-	          node.WriteTo(writer);
-						if(!String.IsNullOrEmpty(writer.Settings.NewLineChars))
-						{
-							writer.WriteWhitespace(writer.Settings.NewLineChars);
-						}
-	        }
-        }
-        
-        // Close the element
-				if(writer.Settings.Indent)
-				{
-					for(int i = 0; i < indentLevel; i++)
-					{
-						writer.WriteWhitespace(writer.Settings.IndentChars);
-					}
-				}
-        writer.WriteEndElement();
-				if(!String.IsNullOrEmpty(writer.Settings.NewLineChars))
-				{
-					writer.WriteWhitespace(writer.Settings.NewLineChars);
-				}
+        // The end element itself
+        WriteEndElement(writer);
       }
       else
       {
-        foreach(XmlNode node in this.ChildNodes)
+				WriteChildNodes(writer, indentLevel);
+      }
+		}
+		
+		/// <summary>
+		/// <para>Writes the child nodes of this TAL node to the given <see cref="XmlWriter"/>.</para>
+		/// </summary>
+		/// <param name="writer">
+		/// A <see cref="XmlWriter"/>
+		/// </param>
+		/// <param name="indentLevel">
+		/// A <see cref="System.Int32"/>
+		/// </param>
+		private void WriteChildNodes(XmlWriter writer, int indentLevel)
+		{
+      foreach(XmlNode node in this.ChildNodes)
+      {
+        if(node is TalElement)
         {
-          if(node is TalElement)
-          {
-            ((TalElement) node).Render(writer, indentLevel + 1);
-          }
-          else
-          {
-						if(writer.Settings.Indent)
-						{
-							for(int i = 0; i < indentLevel + 1; i++)
-							{
-								writer.WriteWhitespace(writer.Settings.IndentChars);
-							}
-						}
-            node.WriteTo(writer);
-						if(!String.IsNullOrEmpty(writer.Settings.NewLineChars))
-						{
-							writer.WriteWhitespace(writer.Settings.NewLineChars);
-						}
-	        }
+          ((TalElement) node).Render(writer, indentLevel + 1);
+        }
+        else
+        {
+					if(node is XmlText)
+					{
+						((XmlText) node).Value = NormaliseWhitespace(((XmlText) node).Value);
+					}
+					
+					WriteIndentation(writer, indentLevel + 1);
+					
+          node.WriteTo(writer);
+					
+					if(!String.IsNullOrEmpty(writer.Settings.NewLineChars))
+					{
+						writer.WriteWhitespace(writer.Settings.NewLineChars);
+					}
         }
       }
-    } 
+		}
+		
+		/// <summary>
+		/// <para>
+		/// Writes the start of an XML element and all of its attributes.
+		/// </para>
+		/// </summary>
+		/// <remarks>
+		/// <para>
+		/// This method is responsible for writing the element itself and all of its attributes as well as inserting a new
+		/// line character.  It is not responsible for any indentation.  The indentation must be performed before and after
+		/// this method is used (as appropriate).
+		/// </para>
+		/// </remarks>
+		/// <param name="writer">
+		/// A <see cref="XmlWriter"/>
+		/// </param>
+		private void WriteStartElement(XmlWriter writer)
+		{
+			// Write the element itself
+      writer.WriteStartElement(this.Prefix, this.LocalName, this.NamespaceURI);
+      
+      // Write all of its attributes
+      foreach(XmlAttribute attribute in this.Attributes)
+      {
+        if(OKToRenderAttribute(attribute))
+        {
+          writer.WriteAttributeString(attribute.Prefix,
+                                      attribute.LocalName,
+                                      attribute.NamespaceURI,
+                                      attribute.Value);
+        }
+      }
+			
+			// Write the trailling newline
+			if(!String.IsNullOrEmpty(writer.Settings.NewLineChars))
+			{
+				writer.WriteWhitespace(writer.Settings.NewLineChars);
+			}
+		}
+		
+		/// <summary>
+		/// <para>Writed the end of an XML element.</para>
+		/// </summary>
+		/// <remarks>
+		/// <para>
+		/// This method is responsible for writing the end element itself as well as inserting a new
+		/// line character.  It is not responsible for any indentation.  The indentation must be performed before and after
+		/// this method is used (as appropriate).
+		/// </para>
+		/// </remarks>
+		/// <param name="writer">
+		/// A <see cref="XmlWriter"/>
+		/// </param>
+		private void WriteEndElement(XmlWriter writer)
+		{
+			// Write the end element itself
+			writer.WriteEndElement();
+			
+			// Write the trailling newline
+			if(!String.IsNullOrEmpty(writer.Settings.NewLineChars))
+			{
+				writer.WriteWhitespace(writer.Settings.NewLineChars);
+			}
+		}
     
+		/// <summary>
+		/// <para>Writes indentation characters as appropriate.</para>
+		/// </summary>
+		/// <param name="writer">
+		/// A <see cref="XmlWriter"/>
+		/// </param>
+		/// <param name="indentLevel">
+		/// A <see cref="System.Int32"/>
+		/// </param>
+		private void WriteIndentation(XmlWriter writer, int indentLevel)
+		{
+			if(writer.Settings.Indent)
+			{
+				for(int i = 0; i < indentLevel; i++)
+				{
+					writer.WriteWhitespace(writer.Settings.IndentChars);
+				}
+			}
+		}
+		
+		/// <summary>
+		/// <para>Normalises whitespace within a given input string.</para>
+		/// </summary>
+		/// <param name="nodeContent">
+		/// A <see cref="System.String"/>
+		/// </param>
+		/// <returns>
+		/// A <see cref="System.String"/>
+		/// </returns>
+		private string NormaliseWhitespace(string nodeContent)
+		{
+			string output;
+			
+			output = Regex.Replace(nodeContent, "\n", String.Empty);
+			output = Regex.Replace(output, @"\s+", " ");
+			
+			return output.Trim();
+		}
+		
     /// <summary>
     /// <para>Overloaded.  Writes the content of this TAL node to an <see cref="XmlWriter"/>.</para>
     /// </summary>
@@ -813,90 +876,50 @@ namespace CraigFowler.Web.ZPT.Tal
     {
       if(!replaceElement)
       {
-        // Open the new element
-				if(writer.Settings.Indent)
-				{
-					for(int i = 0; i < indentLevel + 1; i++)
-					{
-						writer.WriteWhitespace(writer.Settings.IndentChars);
-					}
-				}
-        writer.WriteStartElement(this.Prefix, this.LocalName, this.NamespaceURI);
+        // Indentation before the start of the new element
+				WriteIndentation(writer, indentLevel);
+				
+        // The start element itself
+				WriteStartElement(writer);
         
-        // Write all of its attributes
-        foreach(XmlAttribute attribute in this.Attributes)
-        {
-          if(OKToRenderAttribute(attribute))
-          {
-            writer.WriteAttributeString(attribute.Prefix,
-                                        attribute.LocalName,
-                                        attribute.NamespaceURI,
-                                        attribute.Value);
-          }
-        }
-				
-				if(!String.IsNullOrEmpty(writer.Settings.NewLineChars))
-				{
-					writer.WriteWhitespace(writer.Settings.NewLineChars);
-				}
-				
-				if(writer.Settings.Indent)
-				{
-					for(int i = 0; i < indentLevel + 1; i++)
-					{
-						writer.WriteWhitespace(writer.Settings.IndentChars);
-					}
-				}
-      	
-        // Write the text inside the element
+        // The content of the element
         if(contentType == TalContentType.Structure)
         {
           writer.WriteRaw(content.ToString());
         }
         else
         {
-          writer.WriteString(content.ToString());
+          writer.WriteString(NormaliseWhitespace(content.ToString()));
         }
 				
+				// The newline after the content
 				if(!String.IsNullOrEmpty(writer.Settings.NewLineChars))
 				{
 					writer.WriteWhitespace(writer.Settings.NewLineChars);
 				}
         
-        // Close the element
-				if(writer.Settings.Indent)
-				{
-					for(int i = 0; i < indentLevel; i++)
-					{
-						writer.WriteWhitespace(writer.Settings.IndentChars);
-					}
-				}
-        writer.WriteEndElement();
-				if(!String.IsNullOrEmpty(writer.Settings.NewLineChars))
-				{
-					writer.WriteWhitespace(writer.Settings.NewLineChars);
-				}
+        // Indentation before the end of the element
+				WriteIndentation(writer, indentLevel);
+				
+        // The end element itself
+        WriteEndElement(writer);
       }
       else
       {
-				if(writer.Settings.Indent)
-				{
-					for(int i = 0; i < indentLevel + 1; i++)
-					{
-						writer.WriteWhitespace(writer.Settings.IndentChars);
-					}
-				}
+        // Indentation before the start of the new element
+				WriteIndentation(writer, indentLevel);
 				
-        // We're just writing the text inside the element
+        // The content of the element
         if(contentType == TalContentType.Structure)
         {
           writer.WriteRaw(content.ToString());
         }
         else
         {
-          writer.WriteString(content.ToString());
+          writer.WriteString(NormaliseWhitespace(content.ToString()));
         }
 				
+				// The newline after the content
 				if(!String.IsNullOrEmpty(writer.Settings.NewLineChars))
 				{
 					writer.WriteWhitespace(writer.Settings.NewLineChars);
