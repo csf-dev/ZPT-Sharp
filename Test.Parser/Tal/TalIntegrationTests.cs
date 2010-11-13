@@ -103,16 +103,39 @@ namespace Test.CraigFowler.Web.ZPT.Tal
 			XmlDocument xmlDoc = new XmlDocument();
 			XmlElement node;
 			
+			if(ConfigurationManager.AppSettings["test-data-path"] == null)
+			{
+				throw new InvalidOperationException("Configuration location is null.");
+			}
+			
 			testFilename = Path.Combine(ConfigurationManager.AppSettings["test-data-path"],
 			                            "input/testTalDocumentWithMockObject.xhtml");
 			
+			if(!File.Exists(testFilename))
+			{
+				throw new FileNotFoundException("The test file was not found", testFilename);
+			}
+			
 			xmlDoc.Load(testFilename);
-			node = xmlDoc.GetElementById("testNode");
+			
+			Console.WriteLine (xmlDoc.OuterXml);
+			
+			node = (XmlElement) xmlDoc.GetElementsByTagName("div")[0];
+			
+			if(node == null)
+			{
+				throw new InvalidOperationException("The target XML node is null.");
+			}
 			
 			Assert.AreEqual(5, node.ChildNodes.Count, "Correct number of child nodes - XML document");
 			
 			talDoc.Load(testFilename);
-			node = talDoc.GetElementById("testNode");
+			node = (XmlElement) talDoc.GetElementsByTagName("div")[0];
+			
+			if(node == null)
+			{
+				throw new InvalidOperationException("The target TAL node is null.");
+			}
 			
 			Assert.AreEqual(5, node.ChildNodes.Count, "Correct number of child nodes - TAL document");
 		}

@@ -1,3 +1,5 @@
 bin/
 *.pidb
 *.desktop
+*.userprefs
+TestResult.xml
