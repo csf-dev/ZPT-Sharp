@@ -69,7 +69,10 @@ namespace Test.CraigFowler.Web.ZPT.Tal
 					Assert.Fail(String.Format("Encountered an exception whilst rendering file '{0}'.", inputFilename));
 				}
 				
-				Console.WriteLine ("Expected:\n{0}\n\nActual:\n{1}", expectedOutput, renderedOutput);
+				if(renderedOutput != expectedOutput)
+				{
+					Console.WriteLine ("Expected:\n{0}\n\nActual:\n{1}", expectedOutput, renderedOutput);
+				}
 				
 				Assert.AreEqual(expectedOutput,
 				                renderedOutput,
@@ -117,8 +120,6 @@ namespace Test.CraigFowler.Web.ZPT.Tal
 			}
 			
 			xmlDoc.Load(testFilename);
-			
-			Console.WriteLine (xmlDoc.OuterXml);
 			
 			node = (XmlElement) xmlDoc.GetElementsByTagName("div")[0];
 			
