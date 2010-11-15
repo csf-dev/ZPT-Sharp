@@ -148,6 +148,158 @@ namespace Test.CraigFowler.Web.ZPT.Tal
 			Assert.AreEqual(5, node.ChildNodes.Count, "Correct number of child nodes - TAL document");
 		}
 		
+		[Test]
+		[Category("Benchmark")]
+		[Category("Integration")]
+		[Explicit("This test runs a few hundred iterations for benchmarking purposes")]
+		public void TestBenchmarkTalDocument()
+		{
+			string
+				directoryName = Path.Combine(ConfigurationManager.AppSettings["test-data-path"], "input"),
+				output = null;
+			FileInfo inputFile = new FileInfo(Path.Combine(directoryName, "testTalDocumentWithMockObject.xhtml"));
+			TalDocument document;
+			StringBuilder renderingBuilder;
+			MockObject mock = new MockObject(true);
+			
+			int startTicks, endTicks, duration, iterations = 50;
+			
+			if(!inputFile.Exists)
+			{
+				throw new FileNotFoundException("The test file does not exist.");
+			}
+			
+			startTicks = Environment.TickCount;
+			
+			for(int i = 0; i < iterations; i++)
+			{
+				// Load the input document and also the expected output
+				document = new TalDocument();
+				document.Load(inputFile.FullName);
+				
+				// Configure the mock object
+				document.TalesContext.AddDefinition("mock", mock);
+				mock["first"] = "First test";
+				mock["second"] = "Second test";
+				mock["third"] = "Third test";
+				mock["fourth"] = "Fourth test";
+				mock.BooleanValue = false;
+				
+				try
+				{
+					renderingBuilder = new StringBuilder();
+					
+					using(TextWriter writer = new StringWriter(renderingBuilder))
+					{
+						using(XmlWriter xmlWriter = new XmlTextWriter(writer))
+						{
+							xmlWriter.Settings.Indent = true;
+							xmlWriter.Settings.IndentChars = "  ";
+							xmlWriter.Settings.NewLineChars = "\n";
+							
+							document.Render(xmlWriter);
+						}
+					}
+					
+					output = renderingBuilder.ToString();
+				}
+				catch(Exception ex)
+				{
+					Console.WriteLine (ex.ToString());
+					
+					if(ex is PathInvalidException)
+					{
+						Console.WriteLine (((PathInvalidException) ex).RawPath);
+					}
+					
+					Assert.Fail(String.Format("Encountered an exception whilst rendering file '{0}'.", inputFile.FullName));
+				}
+			}
+			
+			endTicks = Environment.TickCount;
+			
+			duration = endTicks - startTicks;
+			
+			Console.WriteLine (output);
+			Console.WriteLine ("Benchmark took {0} ticks for {1} iterations", duration, iterations);
+		}
+		
+		[Test]
+		[Category("Benchmark")]
+		[Category("Integration")]
+		[Explicit("This test runs a few hundred iterations for benchmarking purposes")]
+		public void TestBenchmarkTalDocumentWithOnlyStringExpressions()
+		{
+			string
+				directoryName = Path.Combine(ConfigurationManager.AppSettings["test-data-path"], "input"),
+				output = null;
+			FileInfo inputFile = new FileInfo(Path.Combine(directoryName, "test03a.html"));
+			TalDocument document;
+			StringBuilder renderingBuilder;
+			MockObject mock = new MockObject(true);
+			
+			int startTicks, endTicks, duration, iterations = 50;
+			
+			if(!inputFile.Exists)
+			{
+				throw new FileNotFoundException("The test file does not exist.");
+			}
+			
+			startTicks = Environment.TickCount;
+			
+			for(int i = 0; i < iterations; i++)
+			{
+				// Load the input document and also the expected output
+				document = new TalDocument();
+				document.Load(inputFile.FullName);
+				
+				// Configure the mock object
+				document.TalesContext.AddDefinition("mock", mock);
+				mock["first"] = "First test";
+				mock["second"] = "Second test";
+				mock["third"] = "Third test";
+				mock["fourth"] = "Fourth test";
+				mock.BooleanValue = false;
+				
+				try
+				{
+					renderingBuilder = new StringBuilder();
+					
+					using(TextWriter writer = new StringWriter(renderingBuilder))
+					{
+						using(XmlWriter xmlWriter = new XmlTextWriter(writer))
+						{
+							xmlWriter.Settings.Indent = true;
+							xmlWriter.Settings.IndentChars = "  ";
+							xmlWriter.Settings.NewLineChars = "\n";
+							
+							document.Render(xmlWriter);
+						}
+					}
+					
+					output = renderingBuilder.ToString();
+				}
+				catch(Exception ex)
+				{
+					Console.WriteLine (ex.ToString());
+					
+					if(ex is PathInvalidException)
+					{
+						Console.WriteLine (((PathInvalidException) ex).RawPath);
+					}
+					
+					Assert.Fail(String.Format("Encountered an exception whilst rendering file '{0}'.", inputFile.FullName));
+				}
+			}
+			
+			endTicks = Environment.TickCount;
+			
+			duration = endTicks - startTicks;
+			
+			Console.WriteLine (output);
+			Console.WriteLine ("Benchmark took {0} ticks for {1} iterations", duration, iterations);
+		}
+		
 		#region supporting methods
 		
 		/// <summary>
