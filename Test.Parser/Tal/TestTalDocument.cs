@@ -17,22 +17,16 @@ namespace Test.CraigFowler.Web.ZPT.Tal
 		private const string
 			EXPECTED_RENDERING = @"<html xmlns=""http://www.w3.org/1999/xhtml"">
   <head>
-    <title>
-      Foo
-    </title>
+    <title>Foo</title>
   </head>
   <body>
-    <div>
-      Bar
-    </div>
+    <div>Bar</div>
   </body>
 </html>
 ",
 			EXPECTED_RENDERING_FALSE = @"<html xmlns=""http://www.w3.org/1999/xhtml"">
   <head>
-    <title>
-      Foo
-    </title>
+    <title>Foo</title>
   </head>
   <body>
   </body>

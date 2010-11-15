@@ -394,6 +394,9 @@ namespace CraigFowler.Web.ZPT.Tales
       case StringExpression.Prefix:
         output = ExpressionType.String;
         break;
+      case StringExpression.AlternativePrefix:
+        output = ExpressionType.String;
+        break;
       default:
         output = DEFAULT_EXPRESSION_TYPE;
         break;
@@ -428,6 +431,10 @@ namespace CraigFowler.Web.ZPT.Tales
       {
         output = StringExpression.Prefix;
       }
+			else if(expression.StartsWith(StringExpression.AlternativePrefix))
+			{
+				output = StringExpression.AlternativePrefix;
+			}
       
       return output;
     }

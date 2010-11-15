@@ -203,6 +203,11 @@ namespace CraigFowler.Web.ZPT.Tal
     /// </param>
     private void Render(XmlWriter writer, int indentLevel)
     {
+			Render(writer, indentLevel, false, false);
+    }
+		
+    private void Render(XmlWriter writer, int indentLevel, bool isLastOfChain, bool previousNodeWasText)
+		{
       this.TalesContext.ParentContext = this.GetParentTalesContext();
       
       /* Developer's note
@@ -230,12 +235,12 @@ namespace CraigFowler.Web.ZPT.Tal
             while(currentRepeatVariable.MoveNext())
             {
               this.TalesContext.AddDefinition(repeatAlias, currentRepeatVariable.Current);
-              ProcessElementContent(writer, indentLevel);
+              ProcessElementContent(writer, indentLevel, isLastOfChain, previousNodeWasText);
             }
           }
           else
           {
-            ProcessElementContent(writer, indentLevel);
+            ProcessElementContent(writer, indentLevel, isLastOfChain, previousNodeWasText);
           }
         }
       }
@@ -260,7 +265,8 @@ namespace CraigFowler.Web.ZPT.Tal
           throw;
         }
       }
-    }
+		}
+
     
     /// <summary>
     /// <para>Gets the parent <see cref="TalesContext"/> from the <see cref="XmlElement.ParentNode"/>.</para>
@@ -665,8 +671,13 @@ namespace CraigFowler.Web.ZPT.Tal
     /// </remarks>
     private void ProcessElementContent(XmlWriter writer, int indentLevel)
     {
+			ProcessElementContent(writer, indentLevel, false, false);
+		}
+		
+    private void ProcessElementContent(XmlWriter writer, int indentLevel, bool isLastOfChain, bool previousNodeWasText)
+    {
       object contentToWrite;
-      bool replaceElement, writeContent;
+      bool replaceElement, writeContent, isTextOnly, isEmpty;
       TalContentType contentType;
       
       // Determine whether we are writing any custom content or not
@@ -684,28 +695,39 @@ namespace CraigFowler.Web.ZPT.Tal
       
       if(writeContent)
       {
-        WriteContentTo(contentToWrite, writer, contentType, replaceElement, indentLevel);
+        WriteContentTo(contentToWrite, writer, contentType, replaceElement, indentLevel, previousNodeWasText);
+				
+				if(isLastOfChain && previousNodeWasText && !String.IsNullOrEmpty(writer.Settings.NewLineChars))
+				{
+						writer.WriteWhitespace(writer.Settings.NewLineChars);
+				}
       }
       else if(!replaceElement)
       {
-        // Indentation before the start of the new element
-				WriteIndentation(writer, indentLevel);
-				
+				if(!previousNodeWasText)
+				{
+	        // Indentation before the start of the new element
+					WriteIndentation(writer, indentLevel);
+				}
+
         // The start element itself
-				WriteStartElement(writer);
+				WriteStartElement(writer, false);
         
         // The element's child nodes
-				WriteChildNodes(writer, indentLevel);
+				WriteChildNodes(writer, indentLevel, out isTextOnly, out isEmpty);
         
-        // Indentation before the end of the element
-				WriteIndentation(writer, indentLevel);
+				if(!isTextOnly && !isEmpty)
+				{
+	        // Indentation before the end of the element
+					WriteIndentation(writer, indentLevel);
+				}
 				
         // The end element itself
         WriteEndElement(writer);
       }
       else
       {
-				WriteChildNodes(writer, indentLevel);
+				WriteChildNodes(writer, indentLevel, out isTextOnly, out isEmpty);
       }
 		}
 		
@@ -718,28 +740,52 @@ namespace CraigFowler.Web.ZPT.Tal
 		/// <param name="indentLevel">
 		/// A <see cref="System.Int32"/>
 		/// </param>
-		private void WriteChildNodes(XmlWriter writer, int indentLevel)
+		/// <param name="isTextOnly">
+		/// A <see cref="System.Boolean"/>
+		/// </param>
+		/// <param name="isEmpty">
+		/// A <see cref="System.Boolean"/>
+		/// </param>
+		private void WriteChildNodes(XmlWriter writer, int indentLevel, out bool isTextOnly, out bool isEmpty)
 		{
-      foreach(XmlNode node in this.ChildNodes)
+			bool isLastOfChain, previousNodeWasText = false;
+			
+			isTextOnly = (this.ChildNodes.Count == 1 && this.ChildNodes[0] is XmlText);
+			isEmpty = (this.ChildNodes.Count == 0);
+			
+			if(!isEmpty && !isTextOnly && !String.IsNullOrEmpty(writer.Settings.NewLineChars))
+			{
+					writer.WriteWhitespace(writer.Settings.NewLineChars);
+			}
+			
+      for(int i = 0; i < this.ChildNodes.Count; i++)
       {
+				XmlNode node = this.ChildNodes[i];
+				isLastOfChain = (!isTextOnly && i == this.ChildNodes.Count - 1);
+				
         if(node is TalElement)
         {
-          ((TalElement) node).Render(writer, indentLevel + 1);
+          ((TalElement) node).Render(writer, indentLevel + 1, isLastOfChain, previousNodeWasText);
+					previousNodeWasText = false;
         }
         else
         {
 					if(node is XmlText)
 					{
-						((XmlText) node).Value = NormaliseWhitespace(((XmlText) node).Value);
+						WriteText(writer, ((XmlText) node).Value, false);
+						previousNodeWasText = true;
 					}
-					
-					WriteIndentation(writer, indentLevel + 1);
-					
-          node.WriteTo(writer);
-					
-					if(!String.IsNullOrEmpty(writer.Settings.NewLineChars))
+					else
 					{
-						writer.WriteWhitespace(writer.Settings.NewLineChars);
+						WriteIndentation(writer, indentLevel + 1);
+					
+	          node.WriteTo(writer);
+						
+						if(!String.IsNullOrEmpty(writer.Settings.NewLineChars))
+						{
+							writer.WriteWhitespace(writer.Settings.NewLineChars);
+						}
+						previousNodeWasText = false;
 					}
         }
       }
@@ -747,7 +793,7 @@ namespace CraigFowler.Web.ZPT.Tal
 		
 		/// <summary>
 		/// <para>
-		/// Writes the start of an XML element and all of its attributes.
+		/// Overloaded.  Writes the start of an XML element and all of its attributes.
 		/// </para>
 		/// </summary>
 		/// <remarks>
@@ -762,8 +808,31 @@ namespace CraigFowler.Web.ZPT.Tal
 		/// </param>
 		private void WriteStartElement(XmlWriter writer)
 		{
+			WriteStartElement(writer, true);
+		}
+		
+		/// <summary>
+		/// <para>
+		/// Overloaded.  Writes the start of an XML element and all of its attributes.
+		/// </para>
+		/// </summary>
+		/// <remarks>
+		/// <para>
+		/// This method is responsible for writing the element itself and all of its attributes as well as inserting a new
+		/// line character.  It is not responsible for any indentation.  The indentation must be performed before and after
+		/// this method is used (as appropriate).
+		/// </para>
+		/// </remarks>
+		/// <param name="writer">
+		/// A <see cref="XmlWriter"/>
+		/// </param>
+		/// <param name="includeTrailingNewLine">
+		/// A <see cref="System.Boolean"/>
+		/// </param>
+		private void WriteStartElement(XmlWriter writer, bool includeTrailingNewLine)
+		{
 			// Write the element itself
-      writer.WriteStartElement(this.Prefix, this.LocalName, this.NamespaceURI);
+      writer.WriteStartElement(this.Prefix, this.LocalName.ToLower(), this.NamespaceURI);
       
       // Write all of its attributes
       foreach(XmlAttribute attribute in this.Attributes)
@@ -778,7 +847,7 @@ namespace CraigFowler.Web.ZPT.Tal
       }
 			
 			// Write the trailling newline
-			if(!String.IsNullOrEmpty(writer.Settings.NewLineChars))
+			if(includeTrailingNewLine && !String.IsNullOrEmpty(writer.Settings.NewLineChars))
 			{
 				writer.WriteWhitespace(writer.Settings.NewLineChars);
 			}
@@ -830,23 +899,38 @@ namespace CraigFowler.Web.ZPT.Tal
 		}
 		
 		/// <summary>
-		/// <para>Normalises whitespace within a given input string.</para>
+		/// <para>Writes text content to the output stream.</para>
 		/// </summary>
-		/// <param name="nodeContent">
+		/// <param name="writer">
+		/// A <see cref="XmlWriter"/>
+		/// </param>
+		/// <param name="textToWrite">
 		/// A <see cref="System.String"/>
 		/// </param>
-		/// <returns>
-		/// A <see cref="System.String"/>
-		/// </returns>
-		private string NormaliseWhitespace(string nodeContent)
+		/// <param name="writeAsStructure">
+		/// A <see cref="System.Boolean"/>
+		/// </param>
+		private void WriteText(XmlWriter writer, string textToWrite, bool writeAsStructure)
 		{
-			string output;
-			
-			output = Regex.Replace(nodeContent, "\n", String.Empty);
-			output = Regex.Replace(output, @"\s+", " ");
-			
-			return output.Trim();
+			if(writeAsStructure)
+			{
+				writer.WriteRaw(textToWrite);
+			}
+			else
+			{
+				writer.WriteString(textToWrite);
+			}
 		}
+		
+    private void WriteContentTo(object content,
+		                            XmlWriter writer,
+		                            TalContentType contentType,
+		                            bool replaceElement,
+		                            int indentLevel)
+		{
+			WriteContentTo(content, writer, contentType, replaceElement, indentLevel, false);
+		}
+
 		
     /// <summary>
     /// <para>Overloaded.  Writes the content of this TAL node to an <see cref="XmlWriter"/>.</para>
@@ -868,62 +952,58 @@ namespace CraigFowler.Web.ZPT.Tal
     /// <param name="indentLevel">
     /// A <see cref="System.Int32"/> that represents the indentation level.
     /// </param>
+    /// <param name="previousNodeWasText">
+    /// A <see cref="System.Boolean"/>
+    /// </param>
     private void WriteContentTo(object content,
 		                            XmlWriter writer,
 		                            TalContentType contentType,
 		                            bool replaceElement,
-		                            int indentLevel)
+		                            int indentLevel,
+		                            bool previousNodeWasText)
     {
       if(!replaceElement)
       {
-        // Indentation before the start of the new element
-				WriteIndentation(writer, indentLevel);
+				if(!previousNodeWasText)
+				{
+	        // Indentation before the start of the new element
+					WriteIndentation(writer, indentLevel);
+				}
 				
         // The start element itself
-				WriteStartElement(writer);
+				WriteStartElement(writer, false);
         
         // The content of the element
-        if(contentType == TalContentType.Structure)
-        {
-          writer.WriteRaw(content.ToString());
-        }
-        else
-        {
-          writer.WriteString(NormaliseWhitespace(content.ToString()));
-        }
+				WriteText(writer, content.ToString(), contentType == TalContentType.Structure);
 				
 				// The newline after the content
-				if(!String.IsNullOrEmpty(writer.Settings.NewLineChars))
-				{
-					writer.WriteWhitespace(writer.Settings.NewLineChars);
-				}
+//				if(!String.IsNullOrEmpty(writer.Settings.NewLineChars))
+//				{
+//					writer.WriteWhitespace(writer.Settings.NewLineChars);
+//				}
         
         // Indentation before the end of the element
-				WriteIndentation(writer, indentLevel);
+//				WriteIndentation(writer, indentLevel);
 				
         // The end element itself
         WriteEndElement(writer);
       }
       else
       {
-        // Indentation before the start of the new element
-				WriteIndentation(writer, indentLevel);
+				if(!previousNodeWasText)
+				{
+	        // Indentation before the start of the new element
+					WriteIndentation(writer, indentLevel);
+				}
 				
         // The content of the element
-        if(contentType == TalContentType.Structure)
-        {
-          writer.WriteRaw(content.ToString());
-        }
-        else
-        {
-          writer.WriteString(NormaliseWhitespace(content.ToString()));
-        }
+				WriteText(writer, content.ToString(), contentType == TalContentType.Structure);
 				
 				// The newline after the content
-				if(!String.IsNullOrEmpty(writer.Settings.NewLineChars))
-				{
-					writer.WriteWhitespace(writer.Settings.NewLineChars);
-				}
+//				if(!String.IsNullOrEmpty(writer.Settings.NewLineChars))
+//				{
+//					writer.WriteWhitespace(writer.Settings.NewLineChars);
+//				}
       }
     }
     

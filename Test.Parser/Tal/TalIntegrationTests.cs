@@ -7,6 +7,7 @@ using System.Configuration;
 using System.Xml;
 using System.Text;
 using CraigFowler.Web.ZPT.Mocks;
+using CraigFowler.Web.ZPT.Tales.Exceptions;
 
 namespace Test.CraigFowler.Web.ZPT.Tal
 {
@@ -66,6 +67,12 @@ namespace Test.CraigFowler.Web.ZPT.Tal
 				catch(Exception ex)
 				{
 					Console.WriteLine (ex.ToString());
+					
+					if(ex is PathInvalidException)
+					{
+						Console.WriteLine (((PathInvalidException) ex).RawPath);
+					}
+					
 					Assert.Fail(String.Format("Encountered an exception whilst rendering file '{0}'.", inputFilename));
 				}
 				

@@ -35,6 +35,13 @@ namespace CraigFowler.Web.ZPT.Tales.Expressions
     /// <para>Read-only.  Gets a constant that is the prefix for a string expression type.</para>
     /// </summary>
     public const string Prefix = "string:";
+		
+		/// <summary>
+    /// <para>
+    /// Read-only.  Gets a constant that represents an alternative acceptable prefix for a string expression type.
+    /// </para>
+		/// </summary>
+		public const string AlternativePrefix = "str:";
     
     private const string
       LOCATE_REPLACEMENTS     = @"(?<=(?<!\$)(?:\$\$)*)\$(?:(?:\{(?'var'[-\w .,~/|]+)\})|(?'var'[-\w.,~/]+)|(?'var'\$))",
