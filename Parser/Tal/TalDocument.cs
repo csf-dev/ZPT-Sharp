@@ -174,6 +174,42 @@ namespace CraigFowler.Web.ZPT.Tal
 			return output;
 		}
 
+		/// <summary>
+		/// <para>Override load method for performance-saving.</para>
+		/// </summary>
+		/// <remarks>
+		/// <para>
+		/// This is only needed in mono due to performance issues with <see cref="XmlDocument.Load(Stream)"/> in mono.
+		/// </para>
+		/// </remarks>
+		/// <param name="inStream">
+		/// A <see cref="Stream"/>
+		/// </param>
+		public override void Load (Stream inStream)
+		{
+			XmlReader reader;
+			reader = new XmlTextReader(inStream, this.NameTable);
+			base.Load(reader);
+		}
+		
+		/// <summary>
+		/// <para>Override load method for performance-saving.</para>
+		/// </summary>
+		/// <remarks>
+		/// <para>
+		/// This is only needed in mono due to performance issues with <see cref="XmlDocument.Load(Stream)"/> in mono.
+		/// </para>
+		/// </remarks>
+		/// <param name="filename">
+		/// A <see cref="System.String"/>
+		/// </param>
+		public override void Load (string filename)
+		{
+			using (Stream fileStream = new FileStream(filename, FileMode.Open, FileAccess.Read, FileShare.Read))
+			{
+				this.Load(fileStream);
+			}
+		}
 		
     #endregion
     

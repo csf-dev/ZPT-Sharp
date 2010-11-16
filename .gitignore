@@ -3,3 +3,4 @@ bin/
 *.desktop
 *.userprefs
 TestResult.xml
+.directory
