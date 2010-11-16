@@ -31,14 +31,31 @@ namespace CraigFowler.Web.ZPT.Tales
   {
     #region constants
     
-    private const char PARTS_SEPARATOR = '/';
+    private const char
+			PARTS_SEPARATOR 									= '/',
+			PREFIX_SEPARATOR									= ':';
+    
+    /// <summary>
+    /// <para>
+    /// Read-only.  Constant indicates the identifier for making a 'global' variable definition in the
+    /// <see cref="TalesContext"/>.
+    /// </para>
+    /// </summary>
+    public const string GlobalDefinitionIdentifier = "global";
+    
+    /// <summary>
+    /// <para>
+    /// Read-only.  Constant indicates the identifier for making a 'local' variable definition in the
+    /// <see cref="TalesContext"/>.
+    /// </para>
+    /// </summary>
+    public const string LocalDefinitionIdentifier = "local";
     
     #endregion
     
     #region fields
     
     private string rawPath;
-    private List<string> parts;
     
     #endregion
     
@@ -75,13 +92,42 @@ namespace CraigFowler.Web.ZPT.Tales
     /// </summary>
     public List<string> Parts
     {
-      get {
-        return parts;
-      }
-      private set {
-        parts = value;
-      }
+      get;
+      private set;
     }
+		
+		/// <summary>
+		/// <para>Read-only.  Gets the prefix for this TALES path.</para>
+		/// </summary>
+		public string Prefix
+		{
+			get;
+			private set;
+		}
+		
+		/// <summary>
+		/// <para>
+		/// Read-only.  Gets a nullable <see cref="DefinitionType"/> based on the current value of <see cref="Prefix"/>.
+		/// </para>
+		/// </summary>
+		public DefinitionType? VariableType
+		{
+			get {
+				DefinitionType? output = null;
+				
+				switch(this.Prefix)
+				{
+				case LocalDefinitionIdentifier:
+					output = DefinitionType.Local;
+					break;
+				case GlobalDefinitionIdentifier:
+					output = DefinitionType.Global;
+					break;
+				}
+				
+				return output;
+			}
+		}
     
     #endregion
     
@@ -111,12 +157,21 @@ namespace CraigFowler.Web.ZPT.Tales
     /// </returns>
     public string ToString(int partCount)
     {
+			string output;
+			
       if(partCount < 0)
       {
         throw new ArgumentOutOfRangeException("partCount", "Parameter 'partCount' must be more than or equal to one.");
       }
       
-      return String.Join(PARTS_SEPARATOR.ToString(), this.Parts.ToArray(), 0, partCount);
+			output = String.Join(PARTS_SEPARATOR.ToString(), this.Parts.ToArray(), 0, partCount);
+			
+			if(!String.IsNullOrEmpty(this.Prefix))
+			{
+				output = String.Format("{0}:{1}", this.Prefix, output);
+			}
+			
+      return output;
     }
     
     /// <summary>
@@ -160,8 +215,6 @@ namespace CraigFowler.Web.ZPT.Tales
     {
       return (this.Text != null)? this.Text.GetHashCode() : "{NULL PATH}".GetHashCode();
     }
-
-
     
     #endregion
     
@@ -175,32 +228,55 @@ namespace CraigFowler.Web.ZPT.Tales
     /// <param name="path">
     /// A <see cref="System.String"/>
     /// </param>
+    /// <param name="prefix">
+    /// A <see cref="System.String"/>, the prefix for the path that this instance is to represent.
+    /// </param>
     /// <returns>
     /// A collection of <see cref="System.String"/> instances.
     /// </returns>
     /// <exception cref="FormatException">
     /// If the given <paramref name="path" /> contains a component that is null or empty then this exception is raised.
     /// </exception>
-    private List<string> ExtractPathParts(string path)
+    private List<string> ExtractPathParts(string path, out string prefix)
     {
       string[] rawParts;
       List<string> output = new List<string>();
-      
-      // In case the input is null then we create zero parts
-      rawParts = (path == null)? new string[0] : path.Split(new char[] { PARTS_SEPARATOR });
-      
-      foreach(string part in rawParts)
-      {
-        if(String.IsNullOrEmpty(part))
-        {
-          throw new FormatException("The given path is not a correctly-formatted path specification.  " +
-                                    "A part of the path is null or an empty string.");
-        }
-        else
-        {
-          output.Add(part);
-        }
-      }
+			
+			if(path != null)
+			{
+				int prefixEnd = path.IndexOf(PREFIX_SEPARATOR);
+				string remainingPath;
+				
+				if(prefixEnd >= 1)
+				{
+					prefix = path.Substring(0, prefixEnd);
+					remainingPath = path.Substring(prefixEnd + 1);
+				}
+				else
+				{
+					prefix = null;
+					remainingPath = path;
+				}
+				
+				rawParts = remainingPath.Split(new char[] { PARTS_SEPARATOR });
+				
+	      foreach(string part in rawParts)
+	      {
+	        if(String.IsNullOrEmpty(part))
+	        {
+	          throw new FormatException("The given path is not a correctly-formatted path specification.  " +
+	                                    "A part of the path is null or an empty string.");
+	        }
+	        else
+	        {
+	          output.Add(part);
+	        }
+	      }
+			}
+			else
+			{
+				prefix = null;
+			}
       
       return output;
     }
@@ -220,8 +296,11 @@ namespace CraigFowler.Web.ZPT.Tales
     /// </exception>
     public TalesPath(string path)
     {
+			string prefix;
+			
       this.Text = path;
-      this.Parts = this.ExtractPathParts(this.Text);
+      this.Parts = this.ExtractPathParts(this.Text, out prefix);
+			this.Prefix = prefix;
     }
     
     #endregion

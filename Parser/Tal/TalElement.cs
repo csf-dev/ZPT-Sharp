@@ -39,22 +39,6 @@ namespace CraigFowler.Web.ZPT.Tal
     
     /// <summary>
     /// <para>
-    /// Read-only.  Constant indicates the identifier for making a 'global' variable definition in the
-    /// <see cref="TalesContext"/>.
-    /// </para>
-    /// </summary>
-    public const string GlobalDefinitionIdentifier = "global";
-    
-    /// <summary>
-    /// <para>
-    /// Read-only.  Constant indicates the identifier for making a 'local' variable definition in the
-    /// <see cref="TalesContext"/>.
-    /// </para>
-    /// </summary>
-    public const string LocalDefinitionIdentifier = "local";
-    
-    /// <summary>
-    /// <para>
     /// Read-only.  Constant indicates the identifier used for indicating that content should be written as
     /// <see cref="TalContentType.Text"/>.
     /// </para>
@@ -319,10 +303,10 @@ namespace CraigFowler.Web.ZPT.Tal
           {
             switch(partsMatch.Groups[2].Value)
             {
-            case GlobalDefinitionIdentifier:
+            case TalesPath.GlobalDefinitionIdentifier:
               type = DefinitionType.Global;
               break;
-            case LocalDefinitionIdentifier:
+            case TalesPath.LocalDefinitionIdentifier:
               type = DefinitionType.Local;
               break;
             }

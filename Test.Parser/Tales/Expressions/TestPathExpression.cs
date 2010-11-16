@@ -34,8 +34,10 @@ namespace Test.CraigFowler.Web.ZPT.Tales.Expressions
                                           "",
                                           "|foo",
                                           "foo|",
-                                          "foo/../bar" };
-      
+                                          "foo/../bar",
+																					"local:foo/bar",
+																					"global:foo/bar" };
+			
       for(int i = 0; i < testPaths.Length; i++)
       {
         Assert.IsTrue(PathExpression.IsValid(testPaths[i]),
