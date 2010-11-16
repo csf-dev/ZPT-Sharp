@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <VisualState xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ShowCheckBoxes="false">
   <TopNode>[0-1000]/home/craig/Projects/ZopePageTemplates/ZopePageTemplates.nunit</TopNode>
-  <SelectedNode>[0-1000]/home/craig/Projects/ZopePageTemplates/ZopePageTemplates.nunit</SelectedNode>
-  <SelectedCategories>Information</SelectedCategories>
-  <ExcludeCategories>true</ExcludeCategories>
+  <SelectedNode>[0-1061]Test.CraigFowler.Web.ZPT.Tales.TalesBenchmarks</SelectedNode>
+  <SelectedCategories>Benchmark</SelectedCategories>
+  <ExcludeCategories>false</ExcludeCategories>
   <Nodes>
     <Node UniqueName="[0-1000]/home/craig/Projects/ZopePageTemplates/ZopePageTemplates.nunit" Expanded="true">
       <Nodes>
@@ -57,7 +57,7 @@
                                     <Node UniqueName="[0-1092]Test.CraigFowler.Web.ZPT.Tal.TestTalDocument.TestReadNode" />
                                   </Nodes>
                                 </Node>
-                                <Node UniqueName="[0-1075]Test.CraigFowler.Web.ZPT.Tal.TestTalElement">
+                                <Node UniqueName="[0-1075]Test.CraigFowler.Web.ZPT.Tal.TestTalElement" Expanded="true">
                                   <Nodes>
                                     <Node UniqueName="[0-1082]Test.CraigFowler.Web.ZPT.Tal.TestTalElement.TestAttributesSpecification" />
                                     <Node UniqueName="[0-1076]Test.CraigFowler.Web.ZPT.Tal.TestTalElement.TestConstructor" />
@@ -137,10 +137,10 @@
                                 </Node>
                                 <Node UniqueName="[0-1061]Test.CraigFowler.Web.ZPT.Tales.TalesBenchmarks">
                                   <Nodes>
-                                    <Node UniqueName="[0-1062]Test.CraigFowler.Web.ZPT.Tales.TalesBenchmarks.TestBenchmarkPathExpressions" />
+                                    <Node UniqueName="[0-1062]Test.CraigFowler.Web.ZPT.Tales.TalesBenchmarks.TestBenchmarkPathExpressions" Expanded="true" />
                                   </Nodes>
                                 </Node>
-                                <Node UniqueName="[0-1021]Test.CraigFowler.Web.ZPT.Tales.TalesIntegrationTests">
+                                <Node UniqueName="[0-1021]Test.CraigFowler.Web.ZPT.Tales.TalesIntegrationTests" Expanded="true">
                                   <Nodes>
                                     <Node UniqueName="[0-1029]Test.CraigFowler.Web.ZPT.Tales.TalesIntegrationTests.TestAliasBeforeIndexer" />
                                     <Node UniqueName="[0-1027]Test.CraigFowler.Web.ZPT.Tales.TalesIntegrationTests.TestAliasedMembersBeforeNormalMembers" />
@@ -163,7 +163,7 @@
                                     <Node UniqueName="[0-1031]Test.CraigFowler.Web.ZPT.Tales.TalesIntegrationTests.TestStringExpressionWithReplacement" />
                                   </Nodes>
                                 </Node>
-                                <Node UniqueName="[0-1093]Test.CraigFowler.Web.ZPT.Tales.TestExpressions">
+                                <Node UniqueName="[0-1093]Test.CraigFowler.Web.ZPT.Tales.TestExpressions" Expanded="true">
                                   <Nodes>
                                     <Node UniqueName="[0-1099]Test.CraigFowler.Web.ZPT.Tales.TestExpressions.TestBadInitialDynamic" />
                                     <Node UniqueName="[0-1098]Test.CraigFowler.Web.ZPT.Tales.TestExpressions.TestDynamic" />
@@ -178,7 +178,7 @@
                                     <Node UniqueName="[0-1103]Test.CraigFowler.Web.ZPT.Tales.TestExpressions.TestStringSubComplex" />
                                   </Nodes>
                                 </Node>
-                                <Node UniqueName="[0-1001]Test.CraigFowler.Web.ZPT.Tales.TestTalesContext">
+                                <Node UniqueName="[0-1001]Test.CraigFowler.Web.ZPT.Tales.TestTalesContext" Expanded="true">
                                   <Nodes>
                                     <Node UniqueName="[0-1002]Test.CraigFowler.Web.ZPT.Tales.TestTalesContext.TestConstructor" />
                                     <Node UniqueName="[0-1003]Test.CraigFowler.Web.ZPT.Tales.TestTalesContext.TestCreateChildContext" />
