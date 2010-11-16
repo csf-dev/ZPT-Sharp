@@ -671,6 +671,13 @@ namespace CraigFowler.Web.ZPT.Tal
        * If we are not already replacing the element then perhaps we will if there an omit-tag attribute present.
        */
 			replaceElement = replaceElement? true : ProcessTalOmitTagAttribute();
+			
+			// Don't render any elements in the TAL or METAL namespaces
+			if(!replaceElement)
+			{
+				replaceElement = (this.NamespaceURI == TalDocument.TalNamespace ||
+				                  this.NamespaceURI == TalDocument.MetalNamespace);
+			}
       
       if(!replaceElement)
       {
