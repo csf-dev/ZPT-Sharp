@@ -155,12 +155,9 @@ namespace Test.CraigFowler.Web.ZPT.Tal
 		public void TestBenchmarkTalDocument()
 		{
 			string
-				directoryName = Path.Combine(ConfigurationManager.AppSettings["test-data-path"], "input"),
-				output = null;
+		 	  output = null,
+				directoryName = Path.Combine(ConfigurationManager.AppSettings["test-data-path"], "input");
 			FileInfo inputFile = new FileInfo(Path.Combine(directoryName, "testTalDocumentWithMockObject.xhtml"));
-			TalDocument document;
-			StringBuilder renderingBuilder;
-			MockObject mock = new MockObject(true);
 			
 			int startTicks, endTicks, duration, iterations = 50;
 			
@@ -173,47 +170,7 @@ namespace Test.CraigFowler.Web.ZPT.Tal
 			
 			for(int i = 0; i < iterations; i++)
 			{
-				// Load the input document and also the expected output
-				document = new TalDocument();
-				document.Load(inputFile.FullName);
-				
-				// Configure the mock object
-				document.TalesContext.AddDefinition("mock", mock);
-				mock["first"] = "First test";
-				mock["second"] = "Second test";
-				mock["third"] = "Third test";
-				mock["fourth"] = "Fourth test";
-				mock.BooleanValue = false;
-				
-				try
-				{
-					renderingBuilder = new StringBuilder();
-					
-					using(TextWriter writer = new StringWriter(renderingBuilder))
-					{
-						using(XmlWriter xmlWriter = new XmlTextWriter(writer))
-						{
-							xmlWriter.Settings.Indent = true;
-							xmlWriter.Settings.IndentChars = "  ";
-							xmlWriter.Settings.NewLineChars = "\n";
-							
-							document.Render(xmlWriter);
-						}
-					}
-					
-					output = renderingBuilder.ToString();
-				}
-				catch(Exception ex)
-				{
-					Console.WriteLine (ex.ToString());
-					
-					if(ex is PathInvalidException)
-					{
-						Console.WriteLine (((PathInvalidException) ex).RawPath);
-					}
-					
-					Assert.Fail(String.Format("Encountered an exception whilst rendering file '{0}'.", inputFile.FullName));
-				}
+				output = PerformBenchmarkIteration(inputFile);
 			}
 			
 			endTicks = Environment.TickCount;
@@ -359,6 +316,56 @@ namespace Test.CraigFowler.Web.ZPT.Tal
 		{
 			inputFiles = GetTestFiles("input");
 			outputFiles = GetTestFiles("output");
+		}
+		
+		private string PerformBenchmarkIteration(FileInfo inputFile)
+		{
+			StringBuilder renderingBuilder;
+			MockObject mock = new MockObject(true);
+			TalDocument document = new TalDocument();
+			string output = null;
+			
+			document.Load(inputFile.FullName);
+			
+			// Configure the mock object
+			document.TalesContext.AddDefinition("mock", mock);
+			mock["first"] = "First test";
+			mock["second"] = "Second test";
+			mock["third"] = "Third test";
+			mock["fourth"] = "Fourth test";
+			mock.BooleanValue = false;
+			
+			try
+			{
+				renderingBuilder = new StringBuilder();
+				
+				using(TextWriter writer = new StringWriter(renderingBuilder))
+				{
+					using(XmlWriter xmlWriter = new XmlTextWriter(writer))
+					{
+						xmlWriter.Settings.Indent = true;
+						xmlWriter.Settings.IndentChars = "  ";
+						xmlWriter.Settings.NewLineChars = "\n";
+						
+						document.Render(xmlWriter);
+					}
+				}
+				
+				output = renderingBuilder.ToString();
+			}
+			catch(Exception ex)
+			{
+				Console.WriteLine (ex.ToString());
+				
+				if(ex is PathInvalidException)
+				{
+					Console.WriteLine (((PathInvalidException) ex).RawPath);
+				}
+				
+				Assert.Fail(String.Format("Encountered an exception whilst rendering file '{0}'.", inputFile.FullName));
+			}
+			
+			return output;
 		}
 		
 		#endregion

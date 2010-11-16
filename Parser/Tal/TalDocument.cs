@@ -173,55 +173,38 @@ namespace CraigFowler.Web.ZPT.Tal
 			
 			return output;
 		}
-
-		/// <summary>
-		/// <para>Override load method for performance-saving.</para>
-		/// </summary>
-		/// <remarks>
-		/// <para>
-		/// This is only needed in mono due to performance issues with <see cref="XmlDocument.Load(Stream)"/> in mono.
-		/// </para>
-		/// </remarks>
-		/// <param name="inStream">
-		/// A <see cref="Stream"/>
-		/// </param>
-		public override void Load (Stream inStream)
-		{
-			XmlReader reader;
-			reader = new XmlTextReader(inStream, this.NameTable);
-			base.Load(reader);
-		}
-		
-		/// <summary>
-		/// <para>Override load method for performance-saving.</para>
-		/// </summary>
-		/// <remarks>
-		/// <para>
-		/// This is only needed in mono due to performance issues with <see cref="XmlDocument.Load(Stream)"/> in mono.
-		/// </para>
-		/// </remarks>
-		/// <param name="filename">
-		/// A <see cref="System.String"/>
-		/// </param>
-		public override void Load (string filename)
-		{
-			using (Stream fileStream = new FileStream(filename, FileMode.Open, FileAccess.Read, FileShare.Read))
-			{
-				this.Load(fileStream);
-			}
-		}
 		
     #endregion
     
     #region constructor
     
     /// <summary>
-    /// <para>Initialises this instance with a new/empty <see cref="TalesContext"/>.</para>
+    /// <para>
+    /// Initialises this instance with a new/empty <see cref="TalesContext"/> that also prevents resolving of DTDs
+    /// in order to improve performance.
+    /// </para>
     /// </summary>
-    public TalDocument() : base()
-    {
+    public TalDocument() : this(false) {}
+		
+		/// <summary>
+    /// <para>
+    /// Initialises this instance with a new/empty <see cref="TalesContext"/> with a given setting for whether DTDs
+    /// will be resolved or not.
+    /// </para>
+		/// </summary>
+		/// <param name="useDTDResolver">
+		/// A <see cref="System.Boolean"/> that determines whether DTDs are resolved or not.  Setting this to false will
+		/// greatly improve performance.
+		/// </param>
+		public TalDocument (bool useDTDResolver) : base()
+		{
       this.TalesContext = new TalesContext();
-    }
+			
+			if(!useDTDResolver)
+			{
+				this.XmlResolver = null;
+			}
+		}
     
     #endregion
   }
