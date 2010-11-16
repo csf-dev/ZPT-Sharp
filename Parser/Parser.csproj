@@ -70,6 +70,7 @@
     <Folder Include="Tales\Exceptions\" />
     <Folder Include="Tal\" />
     <Folder Include="Tal\Exceptions\" />
+    <Folder Include="CraigFowler\" />
   </ItemGroup>
   <ProjectExtensions>
     <MonoDevelop>

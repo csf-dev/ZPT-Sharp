@@ -17,12 +17,12 @@ namespace Test.CraigFowler.Web.ZPT.Tales
     [Test]
     public void TestBenchmarkPathExpressions()
     {
-      int startTicks, endTicks;
+      int startTicks, endTicks, iterations = 10000;
       double totalTime;
       
       startTicks = System.Environment.TickCount;
       
-      for(int i = 0; i < 10000; i++)
+      for(int i = 0; i < iterations; i++)
       {
         ParsePathExpression();
       }
@@ -31,10 +31,10 @@ namespace Test.CraigFowler.Web.ZPT.Tales
       
       totalTime = (endTicks - startTicks) / 1000d;
       
-      Console.WriteLine ("Performed 10,000 parsings in {0} seconds.\n" +
+      Console.WriteLine ("Performed {2} parsings in {0} seconds.\n" +
                          "That would be {1} milliseconds per operation",
                          totalTime,
-                         totalTime / 10d);
+                         totalTime / 10d, iterations);
     }
     
     #endregion

@@ -173,19 +173,38 @@ namespace CraigFowler.Web.ZPT.Tal
 			
 			return output;
 		}
-
 		
     #endregion
     
     #region constructor
     
     /// <summary>
-    /// <para>Initialises this instance with a new/empty <see cref="TalesContext"/>.</para>
+    /// <para>
+    /// Initialises this instance with a new/empty <see cref="TalesContext"/> that also prevents resolving of DTDs
+    /// in order to improve performance.
+    /// </para>
     /// </summary>
-    public TalDocument() : base()
-    {
+    public TalDocument() : this(false) {}
+		
+		/// <summary>
+    /// <para>
+    /// Initialises this instance with a new/empty <see cref="TalesContext"/> with a given setting for whether DTDs
+    /// will be resolved or not.
+    /// </para>
+		/// </summary>
+		/// <param name="useDTDResolver">
+		/// A <see cref="System.Boolean"/> that determines whether DTDs are resolved or not.  Setting this to false will
+		/// greatly improve performance.
+		/// </param>
+		public TalDocument (bool useDTDResolver) : base()
+		{
       this.TalesContext = new TalesContext();
-    }
+			
+			if(!useDTDResolver)
+			{
+				this.XmlResolver = null;
+			}
+		}
     
     #endregion
   }
