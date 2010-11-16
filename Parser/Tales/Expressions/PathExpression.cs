@@ -44,7 +44,7 @@ namespace CraigFowler.Web.ZPT.Tales.Expressions
      */
     private const string
       INDEXER_IDENTIFIER                = "Item",
-      VALID_PATH_EXPRESSION_PATTERN     = @"^(([-\w .,~]+)(/(\??[-\w .,~]+))*)?(\|(([-\w .,~]+)(/(\??[-\w .,~]+))*)?)*$";
+      VALID_PATH_EXPRESSION_PATTERN     = @"^(((local|global):)?([-\w .,~]+)(/(\??[-\w .,~]+))*)?(\|(((local|global):)?([-\w .,~]+)(/(\??[-\w .,~]+))*)?)*$";
     
     private static readonly Regex
       ValidPathExpression               = new Regex(VALID_PATH_EXPRESSION_PATTERN, RegexOptions.Compiled);
