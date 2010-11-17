@@ -129,37 +129,59 @@ namespace CraigFowler.Web.ZPT.Tal
     
     #endregion
     
-    #region methods
-		
-    /// <summary>
-    /// <para>Overloaded.  Renders the output of this TAL element to the given <see cref="XmlWriter"/>.</para>
-    /// </summary>
-    /// <remarks>
-    /// <para>The order of operation for TAL directives is listed below.</para>
-    /// <para>
-    /// Note that I am using the TAL 1.4.1 'proposed' ordering method.  That is, processing omit-tag before attributes.
-    /// For more information about this, see the comment at the bottom of
-    /// <c>http://wiki.zope.org/ZPT/TALSpecification14</c> and also the page
-    /// <c>https://bugs.launchpad.net/zope.tal/+bug/430662</c>.
-    /// </para>
-    /// <list type="number">
-    /// <item>define</item>
-    /// <item>condition</item>
-    /// <item>repeat</item>
-    /// <item>content or replace</item>
-    /// <item>omit-tag</item>
-    /// <item>attributes</item>
-    /// </list>
-    /// </remarks>
-    /// <param name="writer">
-    /// An <see cref="XmlWriter"/> to write the rendered output of this element to.
-    /// </param>
-		public void Render(XmlWriter writer)
-		{
-			this.Render(writer, 0);
-		}
+		#region methods
     
     /// <summary>
+    /// <para>Gets the parent <see cref="TalesContext"/> from the <see cref="XmlElement.ParentNode"/>.</para>
+    /// <para>If this is the root node in the document then the context from the doument node will be returned.</para>
+    /// </summary>
+    /// <returns>
+    /// A <see cref="TalesContext"/> instance.
+    /// </returns>
+    public TalesContext GetParentTalesContext()
+    {
+      XmlNode parentNode = this.ParentNode;
+      
+      while(parentNode != null && !(parentNode is ITalElement))
+      {
+        parentNode = (XmlElement) parentNode.ParentNode;
+      }
+      
+      return (parentNode == null)? null : ((ITalElement) parentNode).TalesContext;
+    }
+    
+    /// <summary>
+    /// <para>
+    /// Gets the contents of the requested TAL attribute residing on this element node.
+    /// Returns <see cref="System.String.Empty"/> if the attribute is not defined or if it contains an empty value.
+    /// </para>
+    /// </summary>
+    /// <param name="attributeName">
+    /// A <see cref="System.String"/>, the name of the attribute requested.
+    /// </param>
+    /// <returns>
+    /// A <see cref="System.String"/>, the content of the attribute or an empty string if the given attribute is not
+    /// defined on this element (or contains an empty value).
+    /// </returns>
+    private string GetTalAttribute(string attributeName)
+    {
+      if(attributeName == null)
+      {
+        throw new ArgumentNullException("attributeName");
+      }
+      else if(attributeName == String.Empty)
+      {
+        throw new ArgumentOutOfRangeException("attributeName", "Attribute name must not be an empty string.");
+      }
+      
+      return this.GetAttribute(attributeName, TalDocument.TalNamespace);
+    }
+		
+		#endregion
+		
+    #region rendering methods
+		
+    /// <summary>
     /// <para>Overloaded.  Renders the output of this TAL element to the given <see cref="XmlWriter"/>.</para>
     /// </summary>
     /// <remarks>
@@ -179,18 +201,39 @@ namespace CraigFowler.Web.ZPT.Tal
     /// <item>attributes</item>
     /// </list>
     /// </remarks>
-    /// <param name="writer">
+		/// <param name="writer">
     /// An <see cref="XmlWriter"/> to write the rendered output of this element to.
-    /// </param>
-    /// <param name="indentLevel">
-    /// A <see cref="System.Int32"/> that represents the indentation level.
-    /// </param>
-    private void Render(XmlWriter writer, int indentLevel)
-    {
-			Render(writer, indentLevel, false, false);
-    }
+		/// </param>
+		public void Render(XmlWriter writer)
+		{
+			TalOutput output = new TalOutput(writer);
+			this.Render(output);
+		}
 		
-    private void Render(XmlWriter writer, int indentLevel, bool isLastOfChain, bool previousNodeWasText)
+    /// <summary>
+    /// <para>Overloaded.  Renders the output of this TAL element to the given <see cref="XmlWriter"/>.</para>
+    /// </summary>
+    /// <remarks>
+    /// <para>The order of operation for TAL directives is listed below.</para>
+    /// <para>
+    /// Note that I am using the TAL 1.4.1 'proposed' ordering method.  That is, processing omit-tag before attributes.
+    /// For more information about this, see the comment at the bottom of
+    /// <c>http://wiki.zope.org/ZPT/TALSpecification14</c> and also the page
+    /// <c>https://bugs.launchpad.net/zope.tal/+bug/430662</c>.
+    /// </para>
+    /// <list type="number">
+    /// <item>define</item>
+    /// <item>condition</item>
+    /// <item>repeat</item>
+    /// <item>content or replace</item>
+    /// <item>omit-tag</item>
+    /// <item>attributes</item>
+    /// </list>
+    /// </remarks>
+    /// <param name="output">
+    /// A <see cref="TalOutput"/> instance to use for writing the rendered output of this element to.
+    /// </param>
+		public void Render(TalOutput output)
 		{
       this.TalesContext.ParentContext = this.GetParentTalesContext();
       
@@ -219,30 +262,29 @@ namespace CraigFowler.Web.ZPT.Tal
             while(currentRepeatVariable.MoveNext())
             {
               this.TalesContext.AddDefinition(repeatAlias, currentRepeatVariable.Current);
-              ProcessElementContent(writer, indentLevel, isLastOfChain, previousNodeWasText);
+              WriteElementContent(output);
             }
           }
           else
           {
-            ProcessElementContent(writer, indentLevel, isLastOfChain, previousNodeWasText);
+            WriteElementContent(output);
           }
         }
       }
       catch(Exception ex)
       {
         bool handled;
-        object content = null;
-        TalContentType type;
+        TalContent content;
         
         /* Any exceptions raised in the above block could be handled by a TAL 'on-error' attribute.
          * If the attribute handles the error then write the appropriate content.
          * If not, then rethrow the exception to be caught by a lower-down TalElement.
          */
-        content = ProcessTalOnErrorAttribute(ex, out type, out handled);
+        content = ProcessTalOnErrorAttribute(ex, out handled);
         
         if(handled)
         {
-          WriteContentTo(content, writer, type, false, indentLevel);
+					output.WriteContent(content);
         }
         else
         {
@@ -250,26 +292,39 @@ namespace CraigFowler.Web.ZPT.Tal
         }
       }
 		}
-
-    
-    /// <summary>
-    /// <para>Gets the parent <see cref="TalesContext"/> from the <see cref="XmlElement.ParentNode"/>.</para>
-    /// <para>If this is the root node in the document then the context from the doument node will be returned.</para>
-    /// </summary>
-    /// <returns>
-    /// A <see cref="TalesContext"/> instance.
-    /// </returns>
-    public TalesContext GetParentTalesContext()
+		
+		/// <summary>
+		/// <para>Processes the content of a TAL element and writes it to the <paramref name="output"/> instance.</para>
+		/// </summary>
+		/// <param name="output">
+		/// A <see cref="TalOutput"/>
+		/// </param>
+    private void WriteElementContent(TalOutput output)
     {
-      XmlNode parentNode = this.ParentNode;
+      TalContent content;
       
-      while(parentNode != null && !(parentNode is ITalElement))
+      // Determine whether we are writing any custom content or not
+      content = ProcessTalContentOrReplaceAttribute();
+      
+      /* Handle the 'omit-tag' attribute.
+       * If we are not already replacing the element then perhaps we will if there an omit-tag attribute present.
+       */
+			if(content.WriteElement)
+			{
+				content.WriteElement = ProcessTalOmitTagAttribute();
+			}
+      
+      if(content.WriteElement)
       {
-        parentNode = (XmlElement) parentNode.ParentNode;
+        ProcessTalAttributesAttribute();
       }
-      
-      return (parentNode == null)? null : ((ITalElement) parentNode).TalesContext;
-    }
+			
+			output.WriteContent(content);
+		}
+		
+    #endregion
+		
+		#region processing TAL attributes
     
     /// <summary>
     /// <para>Handles that TAL 'define' attribute.</para>
@@ -348,21 +403,25 @@ namespace CraigFowler.Web.ZPT.Tal
     /// <param name="ex">
     /// An <see cref="Exception"/>, the exception that must be handled.
     /// </param>
-    /// <param name="contentType">
-    /// A <see cref="TalContentType"/> indicating how the return value should be treated.
-    /// </param>
     /// <param name="handled">
     /// A <see cref="System.Boolean"/> indicating whether the error is handled or not.  If it is not handled then the
     /// exception will be rethrown.
     /// </param>
     /// <returns>
-    /// A <see cref="System.Object"/>, the content that is to be displayed.
+    /// A <see cref="TalContent"/> instance, the content that is to be displayed.
     /// </returns>
-    private object ProcessTalOnErrorAttribute(Exception ex, out TalContentType contentType, out bool handled)
+    private TalContent ProcessTalOnErrorAttribute(Exception ex, out bool handled)
     {
       string attributeValue = GetTalAttribute("on-error");
-      object output = null;
+      object discoveredOutput = null;
+			TalContentType contentType = TalContentType.Text;
+			TalContent output = null;
+			
+			handled = false;
       
+			/* If this condition does not match then the handled output variable will remain as "false" and
+			 * the output will be null.
+			 */
       if(attributeValue != String.Empty)
       {
         Match statementMatch = ContentOrReplaceSpecification.Match(attributeValue);
@@ -397,20 +456,14 @@ namespace CraigFowler.Web.ZPT.Tal
             throw new NotSupportedException("Unsupported TAL content type");
           }
         }
-        else
-        {
-          contentType = TalContentType.Text;
-        }
         
         expression = statementMatch.Groups[3].Value;
-        output = this.TalesContext.CreateExpression(expression).GetValue();
+        discoveredOutput = this.TalesContext.CreateExpression(expression).GetValue();
+				
+				output = new TalContent(discoveredOutput, this);
+				output.Type = contentType;
+				
         handled = true;
-      }
-      else
-      {
-        // In this case, there's no error handler here.  Set handled to false and let the exception be re-thrown.
-        contentType = TalContentType.Text;
-        handled = false;
       }
       
       return output;
@@ -469,29 +522,17 @@ namespace CraigFowler.Web.ZPT.Tal
     /// both attributes exist on the same element.
     /// </para>
     /// </summary>
-    /// <param name="content">
-    /// A <see cref="System.Object"/> containing the content to be written to the XML output.
-    /// </param>
-    /// <param name="contentType">
-    /// A <see cref="TalContentType"/> indicating how the <paramref name="content"/> should be treated.
-    /// </param>
-    /// <param name="replaceElement">
-    /// A <see cref="System.Boolean"/> indicating whether or not the parent XML element should be replaced or preserved.
-    /// </param>
     /// <returns>
-    /// A <see cref="System.Boolean"/> indicating whether or not there is custom content to write.
+    /// A <see cref="TalContent"/> that represents the content to be written.
     /// </returns>
-    private bool ProcessTalContentOrReplaceAttribute(out object content,
-                                                     out TalContentType contentType,
-                                                     out bool replaceElement)
+    private TalContent ProcessTalContentOrReplaceAttribute()
     {
-      bool output;
+      TalContent output;
+			object discoveredContent = null;
+			bool
+				foundOutputContent = false,
+				writeElement = true;
       string contentAttribute;
-      
-      // Just default values for these parameters
-      content = null;
-      contentType = TalContentType.Text;
-      replaceElement = false;
       
       /* First try looking for a "replace" attribute, then if that fails a "content" attribute.
        * If we find either then we are writing content to the document.
@@ -499,20 +540,20 @@ namespace CraigFowler.Web.ZPT.Tal
       contentAttribute = GetTalAttribute("replace");
       if(contentAttribute != String.Empty)
       {
-        replaceElement = true;
-        output = true;
+        foundOutputContent = true;
+        writeElement = false;
       }
       else
       {
         contentAttribute = GetTalAttribute("content");
-        output = (contentAttribute != String.Empty);
-        replaceElement = false;
+        foundOutputContent = (contentAttribute != String.Empty);
       }
       
       // If we are providing some content then we figure out what it is
-      if(output)
+      if(foundOutputContent)
       {
         Match contentStatement = ContentOrReplaceSpecification.Match(contentAttribute);
+				TalContentType contentType = TalContentType.Text;
         
         if(!contentStatement.Success)
         {
@@ -536,9 +577,17 @@ namespace CraigFowler.Web.ZPT.Tal
           }
         }
         
-        content = this.TalesContext.CreateExpression(contentStatement.Groups[3].Value).GetValue().ToString();
+        discoveredContent = this.TalesContext.CreateExpression(contentStatement.Groups[3].Value).GetValue();
+				
+				output = new TalContent(discoveredContent, this);
+				output.Type = contentType;
+				output.WriteElement = writeElement;
       }
-      
+			else
+			{
+				output = new TalContent(this, writeElement);
+			}
+			
       return output;
     }
     
@@ -546,17 +595,17 @@ namespace CraigFowler.Web.ZPT.Tal
     /// <para>Handles the TAL 'omit-tag' attribute.</para>
     /// </summary>
     /// <returns>
-    /// A <see cref="System.Boolean"/> indicating whether the element tag should be omitted or not.
+    /// A <see cref="System.Boolean"/> indicating whether the element tag should be written or not.
     /// </returns>
     private bool ProcessTalOmitTagAttribute()
     {
       string omitTagAttribute;
-      bool output = false;
+      bool output = true;
       
       omitTagAttribute = GetTalAttribute("omit-tag");
       if(omitTagAttribute != String.Empty)
       {
-        output = this.TalesContext.CreateExpression(omitTagAttribute).GetBooleanValue();
+        output = !this.TalesContext.CreateExpression(omitTagAttribute).GetBooleanValue();
       }
       
       return output;
@@ -619,11 +668,14 @@ namespace CraigFowler.Web.ZPT.Tal
           {
             if(prefix != null)
             {
-              this.SetAttribute(localName, this.GetNamespaceOfPrefix(prefix), expressionResult.ToString());
+              this.SetAttribute(localName,
+							                  this.GetNamespaceOfPrefix(prefix),
+							                  expressionResult.ToString());
             }
             else
             {
-              this.SetAttribute(localName, expressionResult.ToString());
+              this.SetAttribute(localName,
+							                  expressionResult.ToString());
             }
           }
           else if(attribute != null && expressionResult == null)
@@ -640,436 +692,8 @@ namespace CraigFowler.Web.ZPT.Tal
         }
       }
     }
-    
-    /// <summary>
-    /// <para>Processes the content of a TAL element.</para>
-    /// </summary>
-    /// <param name="writer">
-    /// An <see cref="XmlWriter"/> to write the element content to.
-    /// </param>
-    /// <param name="indentLevel">
-    /// A <see cref="System.Int32"/> that represents the indentation level.
-    /// </param>
-    /// <remarks>
-    /// <para>Collectively these are the 'content', 'replace', 'omit-tag' and 'attributes' attributes.</para>
-    /// </remarks>
-    private void ProcessElementContent(XmlWriter writer, int indentLevel)
-    {
-			ProcessElementContent(writer, indentLevel, false, false);
-		}
 		
-    private void ProcessElementContent(XmlWriter writer, int indentLevel, bool isLastOfChain, bool previousNodeWasText)
-    {
-      object contentToWrite;
-      bool replaceElement, writeContent, isTextOnly, isEmpty;
-      TalContentType contentType;
-      
-      // Determine whether we are writing any custom content or not
-      writeContent = ProcessTalContentOrReplaceAttribute(out contentToWrite, out contentType, out replaceElement);
-      
-      /* Handle the 'omit-tag' attribute.
-       * If we are not already replacing the element then perhaps we will if there an omit-tag attribute present.
-       */
-			replaceElement = replaceElement? true : ProcessTalOmitTagAttribute();
-			
-			// Don't render any elements in the TAL or METAL namespaces
-			if(!replaceElement)
-			{
-				replaceElement = (this.NamespaceURI == TalDocument.TalNamespace ||
-				                  this.NamespaceURI == TalDocument.MetalNamespace);
-			}
-      
-      if(!replaceElement)
-      {
-        ProcessTalAttributesAttribute();
-      }
-      
-      if(writeContent)
-      {
-        WriteContentTo(contentToWrite, writer, contentType, replaceElement, indentLevel, previousNodeWasText);
-				
-				if(isLastOfChain && previousNodeWasText && !String.IsNullOrEmpty(writer.Settings.NewLineChars))
-				{
-						writer.WriteWhitespace(writer.Settings.NewLineChars);
-				}
-      }
-      else if(!replaceElement)
-      {
-				if(!previousNodeWasText)
-				{
-	        // Indentation before the start of the new element
-					WriteIndentation(writer, indentLevel);
-				}
-
-        // The start element itself
-				WriteStartElement(writer, false);
-        
-        // The element's child nodes
-				WriteChildNodes(writer, indentLevel, out isTextOnly, out isEmpty);
-        
-				if(!isTextOnly && !isEmpty)
-				{
-	        // Indentation before the end of the element
-					WriteIndentation(writer, indentLevel);
-				}
-				
-        // The end element itself
-        WriteEndElement(writer);
-      }
-      else
-      {
-				WriteChildNodes(writer, indentLevel, out isTextOnly, out isEmpty);
-      }
-		}
-		
-		/// <summary>
-		/// <para>Writes the child nodes of this TAL node to the given <see cref="XmlWriter"/>.</para>
-		/// </summary>
-		/// <param name="writer">
-		/// A <see cref="XmlWriter"/>
-		/// </param>
-		/// <param name="indentLevel">
-		/// A <see cref="System.Int32"/>
-		/// </param>
-		/// <param name="isTextOnly">
-		/// A <see cref="System.Boolean"/>
-		/// </param>
-		/// <param name="isEmpty">
-		/// A <see cref="System.Boolean"/>
-		/// </param>
-		private void WriteChildNodes(XmlWriter writer, int indentLevel, out bool isTextOnly, out bool isEmpty)
-		{
-			bool isLastOfChain, previousNodeWasText = false;
-			
-			isTextOnly = (this.ChildNodes.Count == 1 && this.ChildNodes[0] is XmlText);
-			isEmpty = (this.ChildNodes.Count == 0);
-			
-			if(!isEmpty && !isTextOnly && !String.IsNullOrEmpty(writer.Settings.NewLineChars))
-			{
-					writer.WriteWhitespace(writer.Settings.NewLineChars);
-			}
-			
-      for(int i = 0; i < this.ChildNodes.Count; i++)
-      {
-				XmlNode node = this.ChildNodes[i];
-				isLastOfChain = (!isTextOnly && i == this.ChildNodes.Count - 1);
-				
-        if(node is TalElement)
-        {
-          ((TalElement) node).Render(writer, indentLevel + 1, isLastOfChain, previousNodeWasText);
-					previousNodeWasText = false;
-        }
-        else
-        {
-					if(node is XmlText)
-					{
-						WriteText(writer, ((XmlText) node).Value, false);
-						previousNodeWasText = true;
-					}
-					else
-					{
-						WriteIndentation(writer, indentLevel + 1);
-					
-	          node.WriteTo(writer);
-						
-						if(!String.IsNullOrEmpty(writer.Settings.NewLineChars))
-						{
-							writer.WriteWhitespace(writer.Settings.NewLineChars);
-						}
-						previousNodeWasText = false;
-					}
-        }
-      }
-		}
-		
-		/// <summary>
-		/// <para>
-		/// Overloaded.  Writes the start of an XML element and all of its attributes.
-		/// </para>
-		/// </summary>
-		/// <remarks>
-		/// <para>
-		/// This method is responsible for writing the element itself and all of its attributes as well as inserting a new
-		/// line character.  It is not responsible for any indentation.  The indentation must be performed before and after
-		/// this method is used (as appropriate).
-		/// </para>
-		/// </remarks>
-		/// <param name="writer">
-		/// A <see cref="XmlWriter"/>
-		/// </param>
-		private void WriteStartElement(XmlWriter writer)
-		{
-			WriteStartElement(writer, true);
-		}
-		
-		/// <summary>
-		/// <para>
-		/// Overloaded.  Writes the start of an XML element and all of its attributes.
-		/// </para>
-		/// </summary>
-		/// <remarks>
-		/// <para>
-		/// This method is responsible for writing the element itself and all of its attributes as well as inserting a new
-		/// line character.  It is not responsible for any indentation.  The indentation must be performed before and after
-		/// this method is used (as appropriate).
-		/// </para>
-		/// </remarks>
-		/// <param name="writer">
-		/// A <see cref="XmlWriter"/>
-		/// </param>
-		/// <param name="includeTrailingNewLine">
-		/// A <see cref="System.Boolean"/>
-		/// </param>
-		private void WriteStartElement(XmlWriter writer, bool includeTrailingNewLine)
-		{
-			// Write the element itself
-      writer.WriteStartElement(this.Prefix, this.LocalName.ToLower(), this.NamespaceURI);
-      
-      // Write all of its attributes
-      foreach(XmlAttribute attribute in this.Attributes)
-      {
-        if(OKToRenderAttribute(attribute))
-        {
-          writer.WriteAttributeString(attribute.Prefix,
-                                      attribute.LocalName,
-                                      attribute.NamespaceURI,
-                                      attribute.Value);
-        }
-      }
-			
-			// Write the trailling newline
-			if(includeTrailingNewLine && !String.IsNullOrEmpty(writer.Settings.NewLineChars))
-			{
-				writer.WriteWhitespace(writer.Settings.NewLineChars);
-			}
-		}
-		
-		/// <summary>
-		/// <para>Writed the end of an XML element.</para>
-		/// </summary>
-		/// <remarks>
-		/// <para>
-		/// This method is responsible for writing the end element itself as well as inserting a new
-		/// line character.  It is not responsible for any indentation.  The indentation must be performed before and after
-		/// this method is used (as appropriate).
-		/// </para>
-		/// </remarks>
-		/// <param name="writer">
-		/// A <see cref="XmlWriter"/>
-		/// </param>
-		private void WriteEndElement(XmlWriter writer)
-		{
-			// Write the end element itself
-			writer.WriteEndElement();
-			
-			// Write the trailling newline
-			if(!String.IsNullOrEmpty(writer.Settings.NewLineChars))
-			{
-				writer.WriteWhitespace(writer.Settings.NewLineChars);
-			}
-		}
-    
-		/// <summary>
-		/// <para>Writes indentation characters as appropriate.</para>
-		/// </summary>
-		/// <param name="writer">
-		/// A <see cref="XmlWriter"/>
-		/// </param>
-		/// <param name="indentLevel">
-		/// A <see cref="System.Int32"/>
-		/// </param>
-		private void WriteIndentation(XmlWriter writer, int indentLevel)
-		{
-			if(writer.Settings.Indent)
-			{
-				for(int i = 0; i < indentLevel; i++)
-				{
-					writer.WriteWhitespace(writer.Settings.IndentChars);
-				}
-			}
-		}
-		
-		/// <summary>
-		/// <para>Writes text content to the output stream.</para>
-		/// </summary>
-		/// <param name="writer">
-		/// A <see cref="XmlWriter"/>
-		/// </param>
-		/// <param name="textToWrite">
-		/// A <see cref="System.String"/>
-		/// </param>
-		/// <param name="writeAsStructure">
-		/// A <see cref="System.Boolean"/>
-		/// </param>
-		private void WriteText(XmlWriter writer, string textToWrite, bool writeAsStructure)
-		{
-			if(writeAsStructure)
-			{
-				writer.WriteRaw(textToWrite);
-			}
-			else
-			{
-				writer.WriteString(textToWrite);
-			}
-		}
-		
-    private void WriteContentTo(object content,
-		                            XmlWriter writer,
-		                            TalContentType contentType,
-		                            bool replaceElement,
-		                            int indentLevel)
-		{
-			WriteContentTo(content, writer, contentType, replaceElement, indentLevel, false);
-		}
-
-		
-    /// <summary>
-    /// <para>Overloaded.  Writes the content of this TAL node to an <see cref="XmlWriter"/>.</para>
-    /// </summary>
-    /// <param name="content">
-    /// A <see cref="System.String"/>, the content to write.
-    /// </param>
-    /// <param name="writer">
-    /// A <see cref="XmlWriter"/>, the writer instance to write to.
-    /// </param>
-    /// <param name="contentType">
-    /// A <see cref="TalContentType"/> indicating whether the content should be treated as text or XML structure.  If
-    /// <see cref="TalContentType.Text"/> is indicated then greater-than, less-than and ampersand symbols are escaped
-    /// to their XML entity equivalents.  Otherwise the <paramref name="content"/> is left as-is.
-    /// </param>
-    /// <param name="replaceElement">
-    /// A <see cref="System.Boolean"/> indicating whether the entire element should be replaced or not.
-    /// </param>
-    /// <param name="indentLevel">
-    /// A <see cref="System.Int32"/> that represents the indentation level.
-    /// </param>
-    /// <param name="previousNodeWasText">
-    /// A <see cref="System.Boolean"/>
-    /// </param>
-    private void WriteContentTo(object content,
-		                            XmlWriter writer,
-		                            TalContentType contentType,
-		                            bool replaceElement,
-		                            int indentLevel,
-		                            bool previousNodeWasText)
-    {
-      if(!replaceElement)
-      {
-				if(!previousNodeWasText)
-				{
-	        // Indentation before the start of the new element
-					WriteIndentation(writer, indentLevel);
-				}
-				
-        // The start element itself
-				WriteStartElement(writer, false);
-        
-        // The content of the element
-				WriteText(writer, content.ToString(), contentType == TalContentType.Structure);
-				
-				// The newline after the content
-//				if(!String.IsNullOrEmpty(writer.Settings.NewLineChars))
-//				{
-//					writer.WriteWhitespace(writer.Settings.NewLineChars);
-//				}
-        
-        // Indentation before the end of the element
-//				WriteIndentation(writer, indentLevel);
-				
-        // The end element itself
-        WriteEndElement(writer);
-      }
-      else
-      {
-				if(!previousNodeWasText)
-				{
-	        // Indentation before the start of the new element
-					WriteIndentation(writer, indentLevel);
-				}
-				
-        // The content of the element
-				WriteText(writer, content.ToString(), contentType == TalContentType.Structure);
-				
-				// The newline after the content
-//				if(!String.IsNullOrEmpty(writer.Settings.NewLineChars))
-//				{
-//					writer.WriteWhitespace(writer.Settings.NewLineChars);
-//				}
-      }
-    }
-    
-    /// <summary>
-    /// <para>
-    /// Gets the contents of the requested TAL attribute residing on this element node.
-    /// Returns <see cref="System.String.Empty"/> if the attribute is not defined or if it contains an empty value.
-    /// </para>
-    /// </summary>
-    /// <param name="attributeName">
-    /// A <see cref="System.String"/>, the name of the attribute requested.
-    /// </param>
-    /// <returns>
-    /// A <see cref="System.String"/>, the content of the attribute or an empty string if the given attribute is not
-    /// defined on this element (or contains an empty value).
-    /// </returns>
-    private string GetTalAttribute(string attributeName)
-    {
-      if(attributeName == null)
-      {
-        throw new ArgumentNullException("attributeName");
-      }
-      else if(attributeName == String.Empty)
-      {
-        throw new ArgumentOutOfRangeException("attributeName", "Attribute name must not be an empty string.");
-      }
-      
-      return this.GetAttribute(attributeName, TalDocument.TalNamespace);
-    }
-		
-		/// <summary>
-		/// <para>Determines whether the given <paramref name="attribute"/> should be rendered in the final output.</para>
-		/// </summary>
-		/// <remarks>
-		/// <para>
-		/// TAL and METAL attributes should never be rendered, nor should 'xmlns' declarations for these namespaces.
-		/// </para>
-		/// </remarks>
-		/// <param name="attribute">
-		/// A <see cref="XmlAttribute"/>, the candidate attribute
-		/// </param>
-		/// <returns>
-		/// A <see cref="System.Boolean"/> indicating whether the <paramref name="attribute"/> should be rendered or not.
-		/// </returns>
-		private bool OKToRenderAttribute(XmlAttribute attribute)
-		{
-			bool output;
-			
-			if(attribute == null)
-			{
-				throw new ArgumentNullException("attribute");
-			}
-			
-			if(attribute.NamespaceURI == TalDocument.TalNamespace ||
-			   attribute.NamespaceURI == TalDocument.MetalNamespace)
-			{
-				// It's an attribute in one of the namespaces that we are choosing not to render
-				output = false;
-			}
-			else if(attribute.NamespaceURI == TalDocument.XmlnsNamespace &&
-			        (attribute.Value == TalDocument.TalNamespace || attribute.Value == TalDocument.MetalNamespace))
-			{
-				// It's a namespace declaration for one of the namespaces that we are choosing not to render
-				output = false;
-			}
-			else
-			{
-				// It's some other kind of attribute that should be rendered
-				output = true;
-			}
-			
-			return output;
-		}
-    
-    #endregion
+		#endregion
 
     #region constructors
     

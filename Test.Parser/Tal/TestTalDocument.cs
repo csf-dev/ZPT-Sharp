@@ -22,16 +22,23 @@ namespace Test.CraigFowler.Web.ZPT.Tal
   <body>
     <div>Bar</div>
   </body>
-</html>
-",
+</html>",
 			EXPECTED_RENDERING_FALSE = @"<html xmlns=""http://www.w3.org/1999/xhtml"">
   <head>
     <title>Foo</title>
   </head>
   <body>
+    
   </body>
-</html>
-";
+</html>",
+			EXPECTED_CONTENT = @"<html xmlns=""http://www.w3.org/1999/xhtml"" xmlns:tal=""http://xml.zope.org/namespaces/tal"">
+  <head>
+    <title>Foo</title>
+  </head>
+  <body>
+    <div tal:condition=""bool"" tal:define=""bool test/BooleanValue"">Bar</div>
+  </body>
+</html>";
 		
 		#endregion
 		
@@ -50,12 +57,23 @@ namespace Test.CraigFowler.Web.ZPT.Tal
 		public void TestReadNode()
 		{
 			TalDocument document = new TalDocument();
+			
+			document.Load(GetTestFileName("simple-tal-document.xml"));
+			
+      Assert.AreEqual(EXPECTED_CONTENT, document.OuterXml, "Document has been read correctly.");
+		}
+		
+		[Test]
+		[Category("Integration")]
+		public void TestRender()
+		{
+			TalDocument document = new TalDocument();
       MockObject mock = new MockObject();
 			
 			document.Load(GetTestFileName("simple-tal-document.xml"));
 			
       document.TalesContext.AddDefinition("test", mock);
-      
+			
       Assert.AreEqual(EXPECTED_RENDERING, document.Render(), "Document renders correctly without the condition");
       
       mock.BooleanValue = false;

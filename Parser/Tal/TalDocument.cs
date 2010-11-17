@@ -52,6 +52,10 @@ namespace CraigFowler.Web.ZPT.Tal
 		/// </summary>
 		public const string XmlnsNamespace = "http://www.w3.org/2000/xmlns/";
 		
+		private const string
+			DEFAULT_NEWLINE_CHARACTERS									= "\n",
+			DEFAULT_INDENT_CHARACTERS 									= "  ";
+		
     #endregion
     
     #region fields
@@ -79,7 +83,32 @@ namespace CraigFowler.Web.ZPT.Tal
         context = value;
       }
     }
+		
+		/// <summary>
+		/// <para>
+		/// Gets and sets whether or not this document should force the reindentation and reformatting of the document on
+		/// rendering.  This property is only applicable if <see cref="PreserveWhitespace"/> is false.
+		/// </para>
+		/// </summary>
+		public bool ReformatDocument
+		{
+			get;
+			set;
+		}
     
+		/// <summary>
+		/// <para>
+		/// Read-only.  Determines whether the rendering process should reformat the output document.  This will only be
+		/// true if both <see cref="PreserveWhitespace"/> is false and also <see cref="ReformatDocument"/> is true.
+		/// </para>
+		/// </summary>
+		private bool ReformatRenderedOutput
+		{
+			get {
+				return (!this.PreserveWhitespace && this.ReformatDocument);
+			}
+		}
+		
     #endregion
     
     #region methods
@@ -92,21 +121,21 @@ namespace CraigFowler.Web.ZPT.Tal
     /// </returns>
     public string Render()
     {
-      StringBuilder output = new StringBuilder();
+      StringBuilder builder = new StringBuilder();
       
-      using(TextWriter writer = new StringWriter(output))
+      using(TextWriter writer = new StringWriter(builder))
       {
         using (XmlWriter xmlWriter = new XmlTextWriter(writer))
         {
-					xmlWriter.Settings.NewLineChars = "\n";
-					xmlWriter.Settings.IndentChars = "  ";
+					xmlWriter.Settings.NewLineChars = DEFAULT_NEWLINE_CHARACTERS;
+					xmlWriter.Settings.IndentChars = DEFAULT_INDENT_CHARACTERS;
 					xmlWriter.Settings.Indent = true;
 					
           this.Render(xmlWriter);
         }
       }
       
-      return output.ToString();
+      return builder.ToString();
     }
     
     /// <summary>
@@ -117,20 +146,35 @@ namespace CraigFowler.Web.ZPT.Tal
     /// </param>
     public void Render(XmlWriter writer)
     {
+			TalOutput output = new TalOutput(writer);
+			
+			output.PerformReformatting = this.ReformatRenderedOutput;
+			
+			Render(output);
+    }
+		
+		/// <summary>
+    /// <para>Overloaded.  Renders this node and its children using the given <see cref="TalOutput"/> instance.</para>
+		/// </summary>
+		/// <param name="output">
+		/// A <see cref="TalOutput"/>
+		/// </param>
+		public void Render(TalOutput output)
+		{
       foreach(XmlNode node in this.ChildNodes)
       {
         if(node is ITalElement)
         {
-          ((ITalElement) node).Render(writer);
+          ((ITalElement) node).Render(output);
         }
         else
         {
-          node.WriteTo(writer);
-					writer.WriteWhitespace(writer.Settings.NewLineChars);
+          node.WriteTo(output.Writer);
+					output.WriteNewLine();
         }
       }
-    }
-    
+		}
+		
     /// <summary>
     /// <para>Gets the parent TALES context.  Always returns null, since the root/document element has no parent.</para>
     /// </summary>
@@ -176,7 +220,7 @@ namespace CraigFowler.Web.ZPT.Tal
 		
     #endregion
     
-    #region constructor
+    #region constructors
     
     /// <summary>
     /// <para>
@@ -199,6 +243,8 @@ namespace CraigFowler.Web.ZPT.Tal
 		public TalDocument (bool useDTDResolver) : base()
 		{
       this.TalesContext = new TalesContext();
+			this.PreserveWhitespace = true;
+			this.ReformatDocument = false;
 			
 			if(!useDTDResolver)
 			{

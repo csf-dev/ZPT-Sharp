@@ -52,5 +52,13 @@ namespace CraigFowler.Web.ZPT.Tal
     /// A <see cref="XmlWriter"/>
     /// </param>
     void Render(XmlWriter writer);
+		
+		/// <summary>
+    /// <para>Renders this node and its children using the given <see cref="TalOutput"/> instance.</para>
+		/// </summary>
+		/// <param name="output">
+		/// A <see cref="TalOutput"/>
+		/// </param>
+		void Render(TalOutput output);
   }
 }
