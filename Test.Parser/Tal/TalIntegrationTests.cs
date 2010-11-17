@@ -126,6 +126,7 @@ namespace Test.CraigFowler.Web.ZPT.Tal
 				throw new FileNotFoundException("The test file was not found", testFilename);
 			}
 			
+			xmlDoc.PreserveWhitespace = true;
 			xmlDoc.Load(testFilename);
 			
 			node = (XmlElement) xmlDoc.GetElementsByTagName("div")[0];
@@ -135,7 +136,7 @@ namespace Test.CraigFowler.Web.ZPT.Tal
 				throw new InvalidOperationException("The target XML node is null.");
 			}
 			
-			Assert.AreEqual(5, node.ChildNodes.Count, "Correct number of child nodes - XML document");
+			Assert.AreEqual(7, node.ChildNodes.Count, "Correct number of child nodes - XML document");
 			
 			talDoc.Load(testFilename);
 			node = (XmlElement) talDoc.GetElementsByTagName("div")[0];
@@ -145,7 +146,7 @@ namespace Test.CraigFowler.Web.ZPT.Tal
 				throw new InvalidOperationException("The target TAL node is null.");
 			}
 			
-			Assert.AreEqual(5, node.ChildNodes.Count, "Correct number of child nodes - TAL document");
+			Assert.AreEqual(7, node.ChildNodes.Count, "Correct number of child nodes - TAL document");
 		}
 		
 		[Test]
