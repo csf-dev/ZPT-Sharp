@@ -125,11 +125,24 @@ namespace CraigFowler.Web.ZPT.Tal
 				throw new ArgumentNullException("content");
 			}
 			
+			/* TODO: Improve this method so that it handles empty nodes a little more gracefully.
+			 * If the node is empty then we want to write a minimised self-closing element, without writing any whitespace
+			 * between the start and end of the element.
+			 * 
+			 * This should be done only if:
+			 * * The element is being written
+			 * * The element has no child nodes
+			 * * We are not writing any custom content to the node.
+			 */
+			
+			// Deal with the start element if it is being written
 			if(content.WriteElement)
 			{
-				WriteStartElement(content.CurrentElement);
+				WriteStartElement(content);
+				IncreaseIndentation();
 			}
 			
+			// Deal with the content inside the element
 			if(content.WriteContent)
 			{
 				WriteText(content);
@@ -139,9 +152,11 @@ namespace CraigFowler.Web.ZPT.Tal
 				WriteChildNodes(content.CurrentElement);
 			}
 			
+			// Deal with the end element if it is being written
 			if(content.WriteElement)
 			{
-				WriteEndElement();
+				WithdrawIndentation();
+				WriteEndElement(content);
 			}
 			
 		}
@@ -155,15 +170,23 @@ namespace CraigFowler.Web.ZPT.Tal
 		/// instance deems that it is appropriate to do so.
 		/// </para>
 		/// </remarks>
-		/// <param name="node">
-		/// A <see cref="XmlNode"/>
+		/// <param name="content">
+		/// A <see cref="TalContent"/>
 		/// </param>
-		public void WriteStartElement(XmlNode node)
+		public void WriteStartElement(TalContent content)
 		{
-			if(node == null)
+			XmlNode node;
+			
+			if(content == null)
 			{
-				throw new ArgumentNullException("node");
+				throw new ArgumentNullException("content");
 			}
+			else if(content.CurrentElement == null)
+			{
+				throw new ArgumentException("The content does not contain a TAL element node.", "content");
+			}
+			
+			node = content.CurrentElement;
 			
 			// Indent before the start-node
 			WriteIndent();
@@ -185,8 +208,11 @@ namespace CraigFowler.Web.ZPT.Tal
         }
       }
 			
-			// Write a trailing newline
-			WriteNewLine();
+			// If the element is not an empty node then write a trailing newline.
+			if(!content.IsEmptyNode)
+			{
+				WriteNewLine();
+			}
 		}
 		
 		/// <summary>
@@ -202,8 +228,26 @@ namespace CraigFowler.Web.ZPT.Tal
 		/// this method is used (as appropriate).
 		/// </para>
 		/// </remarks>
-		public void WriteEndElement()
+		/// <param name="content">
+		/// A <see cref="TalContent"/> that describes the node to be written.
+		/// </param>
+		public void WriteEndElement(TalContent content)
 		{
+			if(content == null)
+			{
+				throw new ArgumentNullException("content");
+			}
+			else if(content.CurrentElement == null)
+			{
+				throw new ArgumentException("The content does not contain a TAL element node.", "content");
+			}
+			
+			// If the element is not an empty node then write the leading indentation
+			if(!content.IsEmptyNode)
+			{
+				WriteIndent();
+			}
+			
 			// Write the end element itself
 			this.Writer.WriteEndElement();
 			
@@ -264,7 +308,7 @@ namespace CraigFowler.Web.ZPT.Tal
 		}
 		
 		/// <summary>
-		/// <para>Writes the child nodes for the given <see cref="TalElement"/> node.</para>
+		/// <para>Writes the child nodes for the given <see cref="TalElement"/>.</para>
 		/// </summary>
 		/// <param name="node">
 		/// A <see cref="TalElement"/>
@@ -276,8 +320,6 @@ namespace CraigFowler.Web.ZPT.Tal
 				throw new ArgumentNullException("node");
 			}
 
-			this.IncreaseIndentation();
-
 			for(int i = 0; i < node.ChildNodes.Count; i++)
 			{
 				XmlNode child = node.ChildNodes[i];
@@ -288,8 +330,8 @@ namespace CraigFowler.Web.ZPT.Tal
 				}
 				else if(child is XmlText)
 				{
-					TalContent content = new TalContent(((XmlText) child).Value);
-					WriteText(content);
+					TalContent innerContent = new TalContent(((XmlText) child).Value);
+					WriteText(innerContent);
 				}
 				else
 				{
@@ -298,8 +340,6 @@ namespace CraigFowler.Web.ZPT.Tal
 					WriteNewLine();
 				}
 			}
-			
-			this.WithdrawIndentation();
 		}
 		
 		#endregion

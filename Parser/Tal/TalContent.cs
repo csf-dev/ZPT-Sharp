@@ -113,6 +113,18 @@ namespace CraigFowler.Web.ZPT.Tal
 			set;
 		}
 		
+		/// <summary>
+		/// <para>Read-only.  Gets whether this content describes an empty node with no content.</para>
+		/// </summary>
+		public bool IsEmptyNode
+		{
+			get {
+				return (this.WriteElement &&
+				        !this.WriteContent &&
+				        this.CurrentElement.ChildNodes.Count == 0);
+			}
+		}
+		
 		#endregion
 		
 		#region constructors

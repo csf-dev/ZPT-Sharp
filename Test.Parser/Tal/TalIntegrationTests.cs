@@ -86,6 +86,69 @@ namespace Test.CraigFowler.Web.ZPT.Tal
 				                String.Format("Test rendering of '{0}' matches '{1}'", inputFilename, outputFilename));
 			}
 		}
+		[Test]
+		[Category("Information")]
+		public void TestRenderDocumentsWithoutWhitespace()
+		{
+			List<FileInfo> inputFiles, outputFiles;
+			
+			GetTestFiles(out inputFiles, out outputFiles);
+			
+			for(int i = 0; i < inputFiles.Count; i++)
+			{
+				TalDocument document = new TalDocument();
+				string
+					inputFilename = inputFiles[i].FullName,
+					renderedOutput = null;
+				StringBuilder renderingBuilder;
+				MockObject mock = new MockObject(true);
+				
+				// Load the input document and also the expected output
+				document.PreserveWhitespace = false;
+				document.ReformatDocument = true;
+				document.Load(inputFilename);
+				
+				// Configure the mock object
+				document.TalesContext.AddDefinition("mock", mock);
+				mock["first"] = "First test";
+				mock["second"] = "Second test";
+				mock["third"] = "Third test";
+				mock["fourth"] = "Fourth test";
+				mock.BooleanValue = false;
+				
+				try
+				{
+					renderingBuilder = new StringBuilder();
+					
+					using(TextWriter writer = new StringWriter(renderingBuilder))
+					{
+						using(XmlWriter xmlWriter = new XmlTextWriter(writer))
+						{
+							xmlWriter.Settings.Indent = true;
+							xmlWriter.Settings.IndentChars = "  ";
+							xmlWriter.Settings.NewLineChars = "\n";
+							
+							document.Render(xmlWriter);
+						}
+					}
+					
+					renderedOutput = renderingBuilder.ToString();
+				}
+				catch(Exception ex)
+				{
+					Console.WriteLine (ex.ToString());
+					
+					if(ex is PathInvalidException)
+					{
+						Console.WriteLine (((PathInvalidException) ex).RawPath);
+					}
+					
+					Assert.Fail(String.Format("Encountered an exception whilst rendering file '{0}'.", inputFilename));
+				}
+				
+				Console.WriteLine ("Document:\n{0}\n\nRendering:\n{1}", inputFilename, renderedOutput);
+			}
+		}
 		
 		[Test]
 		public void TestLoadDocuments()
