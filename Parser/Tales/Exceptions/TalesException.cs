@@ -26,18 +26,12 @@ namespace CraigFowler.Web.ZPT.Tales.Exceptions
   /// <summary>
   /// <para>Base class for exceptions encountered whilst parsing and evaluating TALES expressions.</para>
   /// </summary>
-  public abstract class TalesException : Exception
+  public class TalesException : Exception
   {
     #region contants
     
     private const string
       DEFAULT_MESSAGE         = "There was an error relating to a TALES expression.";
-    
-    #endregion
-    
-    #region fields
-    
-    private bool fatal;
     
     #endregion
     
@@ -55,10 +49,10 @@ namespace CraigFowler.Web.ZPT.Tales.Exceptions
     public virtual bool PermanentError
     {
       get {
-        return fatal;
+        return (bool) this.Data["Fatal"];
       }
       protected set {
-        fatal = value;
+        this.Data["Fatal"] = value;
       }
     }
     

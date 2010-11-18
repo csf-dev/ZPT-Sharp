@@ -21,6 +21,8 @@
 
 using System;
 using System.Collections.Generic;
+using System.IO;
+using CraigFowler.Web.ZPT.Tales.Exceptions;
 
 namespace CraigFowler.Web.ZPT.Tales
 {
@@ -56,6 +58,7 @@ namespace CraigFowler.Web.ZPT.Tales
     #region fields
     
     private string rawPath;
+		private List<string> parts;
     
     #endregion
     
@@ -92,8 +95,17 @@ namespace CraigFowler.Web.ZPT.Tales
     /// </summary>
     public List<string> Parts
     {
-      get;
-      private set;
+      get {
+				return parts;
+			}
+      private set {
+				if(value == null)
+				{
+					throw new ArgumentNullException("value");
+				}
+				
+				parts = value;
+			}
     }
 		
 		/// <summary>
@@ -161,7 +173,7 @@ namespace CraigFowler.Web.ZPT.Tales
 			
       if(partCount < 0)
       {
-        throw new ArgumentOutOfRangeException("partCount", "Parameter 'partCount' must be more than or equal to one.");
+        throw new ArgumentOutOfRangeException("partCount", "Parameter 'partCount' must be more than or equal to zero.");
       }
       
 			output = String.Join(PARTS_SEPARATOR.ToString(), this.Parts.ToArray(), 0, partCount);
@@ -216,6 +228,40 @@ namespace CraigFowler.Web.ZPT.Tales
       return (this.Text != null)? this.Text.GetHashCode() : "{NULL PATH}".GetHashCode();
     }
     
+		/// <summary>
+		/// <para>Creates and returns a new <see cref="TalesPath"/> instance based on a subset of this path.</para>
+		/// </summary>
+		/// <param name="startPosition">
+		/// A <see cref="System.Int32"/>, the zero-based index position (based on the collection <see cref="Parts"/>) at
+		/// which to begin the sub-path.
+		/// </param>
+		/// <returns>
+		/// A <see cref="TalesPath"/> representing the resultant sub-path.
+		/// </returns>
+		public TalesPath SubPath(int startPosition)
+		{
+			return this.SubPath(startPosition, (this.Parts.Count - startPosition));
+		}
+		
+		/// <summary>
+		/// <para>Creates and returns a new <see cref="TalesPath"/> instance based on a subset of this path.</para>
+		/// </summary>
+		/// <param name="startPosition">
+		/// A <see cref="System.Int32"/>, the zero-based index position (based on the collection <see cref="Parts"/>) at
+		/// which to begin the sub-path.
+		/// </param>
+		/// <param name="count">
+		/// A <see cref="System.Int32"/>, the number of path parts to include within the sub-path.
+		/// </param>
+		/// <returns>
+		/// A <see cref="TalesPath"/> representing the resultant sub-path.
+		/// </returns>
+		public TalesPath SubPath(int startPosition, int count)
+		{
+			List<string> newParts = this.Parts.GetRange(startPosition, count);
+			return new TalesPath(newParts);
+		}
+		
     #endregion
     
     #region private methods
@@ -283,8 +329,17 @@ namespace CraigFowler.Web.ZPT.Tales
     
     #endregion
     
-    #region constructor
+    #region constructors
     
+		/// <summary>
+		/// <para>Private constructor initialises properties to empty values.</para>
+		/// </summary>
+		private TalesPath ()
+		{
+			this.Text = null;
+			this.Prefix = null;
+		}
+		
     /// <summary>
     /// <para>Initialises this instance with a new path string.</para>
     /// </summary>
@@ -294,13 +349,100 @@ namespace CraigFowler.Web.ZPT.Tales
     /// <exception cref="FormatException">
     /// If the given <paramref name="path" /> contains a component that is null or empty then this exception is raised.
     /// </exception>
-    public TalesPath(string path)
+    public TalesPath(string path) : this()
     {
 			string prefix;
 			
       this.Text = path;
       this.Parts = this.ExtractPathParts(this.Text, out prefix);
 			this.Prefix = prefix;
+    }
+		
+		/// <summary>
+		/// <para>
+		/// Initialises an instance with a given list of <paramref name="parts"/> that should be used as the path.
+		/// </para>
+		/// </summary>
+		/// <param name="parts">
+		/// A collection of <see cref="System.String"/> that will become the parts of the path.
+		/// </param>
+		protected TalesPath(List<string> parts) : this()
+		{
+			this.Parts = parts;
+			this.Text = this.ToString();
+		}
+    
+    /// <summary>
+    /// <para>Initialises this instance with an enumerable collection of <see cref="System.String"/>.</para>
+    /// </summary>
+    /// <param name="parts">
+    /// An enumerable collection of <see cref="System.String"/>
+    /// </param>
+    public TalesPath(IEnumerable<string> parts) : this()
+    {
+      if(parts == null)
+      {
+        throw new ArgumentNullException("parts");
+      }
+      
+      this.Parts = new List<string>();
+      this.Parts.AddRange(parts);
+      this.Text = this.ToString();
+      
+    }
+    
+    #endregion
+    
+    #region static methods
+    
+    /// <summary>
+    /// <para>
+    /// Gets a <see cref="TalesPath"/> instance that represents the relative path of <paramref name="childPath"/> from
+    /// <paramref name="basePath"/>.
+    /// </para>
+    /// </summary>
+    /// <param name="basePath">
+    /// A <see cref="FileSystemInfo"/>
+    /// </param>
+    /// <param name="childPath">
+    /// A <see cref="FileSystemInfo"/>
+    /// </param>
+    /// <returns>
+    /// A <see cref="TalesPath"/>
+    /// </returns>
+    public static TalesPath GetRelativePath(FileSystemInfo basePath, FileSystemInfo childPath)
+    {
+      string
+        baseName,
+        childName,
+        relativePath;
+      
+      if(basePath == null)
+      {
+        throw new ArgumentNullException("basePath");
+      }
+      else if(childPath == null)
+      {
+        throw new ArgumentNullException("childPath");
+      }
+      
+      baseName = basePath.FullName;
+      childName = childPath.FullName;
+      
+      if(!childName.StartsWith(baseName))
+      {
+        string message = "Cannot create a relative TalesPath; the child path is not a child of the base path.";
+        TalesException ex = new TalesException(message);
+        ex.Data["Base path"] = basePath;
+        ex.Data["Child path"] = childPath;
+        
+        throw ex;
+      }
+      
+      relativePath = childName.Substring(baseName.Length + 1);
+      relativePath = relativePath.Replace('\\', '/');
+      
+      return new TalesPath(relativePath);
     }
     
     #endregion

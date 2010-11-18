@@ -8,6 +8,7 @@ using System.Xml;
 using System.Text;
 using CraigFowler.Web.ZPT.Mocks;
 using CraigFowler.Web.ZPT.Tales.Exceptions;
+using CraigFowler.Web.ZPT;
 
 namespace Test.CraigFowler.Web.ZPT.Tal
 {
@@ -171,17 +172,13 @@ namespace Test.CraigFowler.Web.ZPT.Tal
 								 "have fewer children than it should?")]
 		public void TestDocumentIntegrity()
 		{
+      TestConfiguration config = new TestConfiguration();
 			string testFilename;
 			TalDocument talDoc = new TalDocument();
 			XmlDocument xmlDoc = new XmlDocument();
 			XmlElement node;
 			
-			if(ConfigurationManager.AppSettings["test-data-path"] == null)
-			{
-				throw new InvalidOperationException("Configuration location is null.");
-			}
-			
-			testFilename = Path.Combine(ConfigurationManager.AppSettings["test-data-path"],
+      testFilename = Path.Combine(config.GetTestDataDirectoryInfo().FullName,
 			                            "input/testTalDocumentWithMockObject.xhtml");
 			
 			if(!File.Exists(testFilename))
@@ -190,6 +187,7 @@ namespace Test.CraigFowler.Web.ZPT.Tal
 			}
 			
 			xmlDoc.PreserveWhitespace = true;
+			xmlDoc.XmlResolver = null;
 			xmlDoc.Load(testFilename);
 			
 			node = (XmlElement) xmlDoc.GetElementsByTagName("div")[0];

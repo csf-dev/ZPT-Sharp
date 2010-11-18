@@ -33,7 +33,7 @@ namespace CraigFowler.Web.ZPT.Tal
   /// rendering the final output.
   /// </para>
   /// </summary>
-  public class TalDocument : XmlDocument, ITalElement
+  public class TalDocument : XmlDocument, ITemplateDocument, ITalElement
   {
     #region constants
     
@@ -102,7 +102,7 @@ namespace CraigFowler.Web.ZPT.Tal
 		/// true if both <see cref="PreserveWhitespace"/> is false and also <see cref="ReformatDocument"/> is true.
 		/// </para>
 		/// </summary>
-		private bool ReformatRenderedOutput
+		protected bool ReformatRenderedOutput
 		{
 			get {
 				return (!this.PreserveWhitespace && this.ReformatDocument);
@@ -119,7 +119,7 @@ namespace CraigFowler.Web.ZPT.Tal
     /// <returns>
     /// A <see cref="System.String"/>, the rendered output document.
     /// </returns>
-    public string Render()
+    public virtual string Render()
     {
       StringBuilder builder = new StringBuilder();
       
@@ -144,7 +144,7 @@ namespace CraigFowler.Web.ZPT.Tal
     /// <param name="writer">
     /// An <see cref="XmlWriter"/> to write the rendere output of this document to.
     /// </param>
-    public void Render(XmlWriter writer)
+    public virtual void Render(XmlWriter writer)
     {
 			TalOutput output = new TalOutput(writer);
 			
@@ -159,7 +159,7 @@ namespace CraigFowler.Web.ZPT.Tal
 		/// <param name="output">
 		/// A <see cref="TalOutput"/>
 		/// </param>
-		public void Render(TalOutput output)
+		public virtual void Render(TalOutput output)
 		{
       foreach(XmlNode node in this.ChildNodes)
       {

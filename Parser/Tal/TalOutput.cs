@@ -95,7 +95,7 @@ namespace CraigFowler.Web.ZPT.Tal
 		{
 			if(this.PerformReformatting)
 			{
-				WriteWhitespace(this.Writer);
+        this.Writer.WriteWhitespace(this.Writer.Settings.NewLineChars);
 			}
 		}
 		
@@ -106,10 +106,13 @@ namespace CraigFowler.Web.ZPT.Tal
 		/// </summary>
 		public void WriteIndent()
 		{
-			if(this.PerformReformatting)
-			{
-				WriteWhitespace(this.Writer, this.CurrentIndentationLevel);
-			}
+			if(this.PerformReformatting && this.Writer.Settings.Indent)
+      {
+        for(int i = 0; i < this.CurrentIndentationLevel; i++)
+        {
+          this.Writer.WriteWhitespace(this.Writer.Settings.IndentChars);
+        }
+      }
 		}
 		
 		/// <summary>
@@ -124,16 +127,6 @@ namespace CraigFowler.Web.ZPT.Tal
 			{
 				throw new ArgumentNullException("content");
 			}
-			
-			/* TODO: Improve this method so that it handles empty nodes a little more gracefully.
-			 * If the node is empty then we want to write a minimised self-closing element, without writing any whitespace
-			 * between the start and end of the element.
-			 * 
-			 * This should be done only if:
-			 * * The element is being written
-			 * * The element has no child nodes
-			 * * We are not writing any custom content to the node.
-			 */
 			
 			// Deal with the start element if it is being written
 			if(content.WriteElement)
@@ -445,58 +438,6 @@ namespace CraigFowler.Web.ZPT.Tal
 			this.CurrentIndentationLevel = 0;
 			this.PerformReformatting = false;
 			this.Writer = writer;
-		}
-		
-		#endregion
-		
-		#region static methods
-		
-		/// <summary>
-		/// <para>
-		/// Overloaded.  Writes indentation characters to the given <paramref name="writer"/>.  The number of sets of
-		/// characters to write is determined by the <paramref name="indentLevel"/>.
-		/// </para>
-		/// </summary>
-		/// <param name="writer">
-		/// A <see cref="XmlWriter"/> to write the indentation characters to.
-		/// </param>
-		/// <param name="indentLevel">
-		/// A <see cref="System.Int32"/>, the level of indentation.
-		/// </param>
-		public static void WriteWhitespace(XmlWriter writer, int indentLevel)
-		{
-			if(writer == null)
-			{
-				throw new ArgumentNullException("writer");
-			}
-			else if(indentLevel < 0)
-			{
-				throw new ArgumentOutOfRangeException("indentLevel", "Indent level cannot be less than zero.");
-			}
-			
-			if(writer.Settings.Indent)
-			{
-				for(int i = 0; i < indentLevel; i++)
-				{
-					writer.WriteWhitespace(writer.Settings.IndentChars);
-				}
-			}
-		}
-		
-		/// <summary>
-		/// <para>Overloaded.  Writes a newline character to the given <paramref name="writer"/>.</para>
-		/// </summary>
-		/// <param name="writer">
-		/// A <see cref="XmlWriter"/> to write the newline to.
-		/// </param>
-		public static void WriteWhitespace(XmlWriter writer)
-		{
-			if(writer == null)
-			{
-				throw new ArgumentNullException("writer");
-			}
-			
-			writer.WriteWhitespace(writer.Settings.NewLineChars);
 		}
 		
 		#endregion

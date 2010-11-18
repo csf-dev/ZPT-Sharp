@@ -24,7 +24,7 @@ namespace CraigFowler.Web.ZPT.Tal
 {
 	/// <summary>
 	/// <para>
-	/// Describes TAL content to be written to a <see cref="TalOutput"/> instance.
+	/// A data structure that describes content to be written to a <see cref="TalOutput"/> instance.
 	/// </para>
 	/// </summary>
 	public class TalContent

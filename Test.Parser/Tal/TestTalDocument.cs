@@ -6,6 +6,7 @@ using System.IO;
 using System.Configuration;
 using System.Xml;
 using CraigFowler.Web.ZPT.Mocks;
+using CraigFowler.Web.ZPT;
 
 namespace Test.CraigFowler.Web.ZPT.Tal
 {
@@ -96,16 +97,15 @@ namespace Test.CraigFowler.Web.ZPT.Tal
 		/// </returns>
 		private string GetTestFileName(string relativeFilename)
 		{
-			string
-				basePath = ConfigurationManager.AppSettings["test-data-path"],
-				testFilePath;
+      DirectoryInfo basePath = new TestConfiguration().GetTestDataDirectoryInfo();
+			string testFilePath;
 			
-			if(!Directory.Exists(basePath))
+			if(!basePath.Exists)
 			{
 				throw new DirectoryNotFoundException("Test data base path not found.");
 			}
 			
-			testFilePath = Path.Combine(basePath, relativeFilename);
+			testFilePath = Path.Combine(basePath.FullName, relativeFilename);
 			
 			if(!File.Exists(testFilePath))
 			{

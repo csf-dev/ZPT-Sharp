@@ -1,0 +1,6 @@
+This is a root directory for containing ZPT document files.  It is used by the unit test fixture:
+
+Test.CraigFowler.Web.ZPT.TestTemplateDocumentCollection
+
+Additionally, this README file is part of the test itself, since it does not match the filename pattern "*.pt" for
+searching for ZPT document files.

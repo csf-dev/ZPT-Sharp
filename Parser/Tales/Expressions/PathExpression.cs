@@ -235,7 +235,7 @@ namespace CraigFowler.Web.ZPT.Tales.Expressions
     {
       object output = null, thisObject = null;
       MemberInfo currentMember;
-      bool indexer;
+      bool suppressPathAdvancement;
       string currentPathPart, memberName;
       
       if(position < path.Parts.Count)
@@ -259,7 +259,9 @@ namespace CraigFowler.Web.ZPT.Tales.Expressions
         
         try
         {
-          currentMember = SelectMember(parentObject, memberName, out indexer);
+          currentMember = SelectMember(parentObject,
+                                       memberName,
+                                       out suppressPathAdvancement);
         }
         catch(ArgumentException ex)
         {
@@ -277,7 +279,11 @@ namespace CraigFowler.Web.ZPT.Tales.Expressions
           PropertyInfo property = currentMember as PropertyInfo;
           if(property.CanRead)
           {
-            thisObject = InvokeMethod(property.GetGetMethod(), parentObject, path, ref position, indexer);
+            thisObject = InvokeMethod(property.GetGetMethod(),
+                                      parentObject,
+                                      path,
+                                      ref position,
+                                      suppressPathAdvancement);
           }
           else
           {
@@ -289,7 +295,11 @@ namespace CraigFowler.Web.ZPT.Tales.Expressions
           break;
         case MemberTypes.Method:
           MethodInfo method = currentMember as MethodInfo;
-          thisObject = InvokeMethod(method, parentObject, path, ref position, indexer);
+          thisObject = InvokeMethod(method,
+                                    parentObject,
+                                    path,
+                                    ref position,
+                                    suppressPathAdvancement);
           break;
         case MemberTypes.Field:
           FieldInfo field = currentMember as FieldInfo;
@@ -337,13 +347,13 @@ namespace CraigFowler.Web.ZPT.Tales.Expressions
     /// <param name="memberIdentifier">
     /// A <see cref="System.String"/>
     /// </param>
-    /// <param name="isIndexer">
+    /// <param name="suppressPathAdvancement">
     /// A <see cref="System.Boolean"/>
     /// </param>
     /// <returns>
     /// A <see cref="MemberInfo"/>
     /// </returns>
-    private MemberInfo SelectMember(object containingObject, string memberIdentifier, out bool isIndexer)
+    private MemberInfo SelectMember(object containingObject, string memberIdentifier, out bool suppressPathAdvancement)
     {
       MemberInfo foundFromAlias = null, foundFromName = null, foundFromIndexer = null, output = null;
       Type containingType;
@@ -360,7 +370,7 @@ namespace CraigFowler.Web.ZPT.Tales.Expressions
         throw new ArgumentException("Member identifier may not be null or empty.", "memberIdentifier");
       }
       
-      isIndexer = false;
+      suppressPathAdvancement = false;
       
       // Get the type of the object that we were passed
       containingType = containingObject.GetType();
@@ -433,7 +443,7 @@ namespace CraigFowler.Web.ZPT.Tales.Expressions
       else if(foundFromIndexer != null)
       {
         output = foundFromIndexer;
-        isIndexer = true;
+        suppressPathAdvancement = true;
       }
       
       return output;
@@ -473,7 +483,7 @@ namespace CraigFowler.Web.ZPT.Tales.Expressions
     /// <param name="basePosition">
     /// A <see cref="System.Int32"/>
     /// </param>
-    /// <param name="useCurrentPosition">
+    /// <param name="suppressPositionAdvancement">
     /// A <see cref="System.Boolean"/>
     /// </param>
     /// <returns>
@@ -483,14 +493,16 @@ namespace CraigFowler.Web.ZPT.Tales.Expressions
                                 object targetObject,
                                 TalesPath path,
                                 ref int basePosition,
-                                bool useCurrentPosition)
+                                bool suppressPositionAdvancement)
     {
       object[] parameterValues = new object[method.GetParameters().Length];
-      int offset = useCurrentPosition? 0 : 1;
+      int offset = suppressPositionAdvancement? 0 : 1;
       object output = null;
       
-      // If we are not using the current position as the reference then begin by incrementing by 1
-      basePosition = basePosition + (useCurrentPosition? 0 : 1);
+      if(targetObject == null)
+      {
+        throw new ArgumentNullException("targetObject");
+      }
       
       if(method.ReturnType == typeof(void))
       {
@@ -516,7 +528,7 @@ namespace CraigFowler.Web.ZPT.Tales.Expressions
         }
         else
         {
-					string parameterValue = path.Parts[basePosition];
+					string parameterValue = path.Parts[basePosition + offset];
 					
 					if(parameterValue.StartsWith("?"))
 					{
@@ -525,7 +537,6 @@ namespace CraigFowler.Web.ZPT.Tales.Expressions
 					
           parameterValues[i] = parameterValue;
           basePosition += offset;
-          offset = 1;
         }
       }
       

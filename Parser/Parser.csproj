@@ -15,7 +15,7 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugType>none</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>..\bin\Debug</OutputPath>
+    <OutputPath>bin\Debug</OutputPath>
     <DefineConstants>DEBUG</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -26,7 +26,7 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>none</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>..\bin\Release</OutputPath>
+    <OutputPath>bin\Release</OutputPath>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <ConsolePause>false</ConsolePause>
@@ -64,6 +64,23 @@
     <Compile Include="Tal\TalContentType.cs" />
     <Compile Include="Tal\TalOutput.cs" />
     <Compile Include="Tal\TalContent.cs" />
+    <Compile Include="Metal\MetalDocument.cs" />
+    <Compile Include="ZptDocument.cs" />
+    <Compile Include="Metal\MetalElement.cs" />
+    <Compile Include="ITemplateDocument.cs" />
+    <Compile Include="ZptMetadata.cs" />
+    <Compile Include="ZptDocumentType.cs" />
+    <Compile Include="IZptDocument.cs" />
+    <Compile Include="Tales\TalesStructureProvider.cs" />
+    <Compile Include="Tales\Exceptions\TalesStructureException.cs" />
+    <Compile Include="Tales\Exceptions\TalesStructureErrorType.cs" />
+    <Compile Include="Tales\TalesIgnoreAttribute.cs" />
+    <Compile Include="Metal\MetalMacro.cs" />
+    <Compile Include="Metal\MetalSlot.cs" />
+    <Compile Include="Metal\Exceptions\MetalException.cs" />
+    <Compile Include="ZptDocumentCollection.cs" />
+    <Compile Include="Metal\IMetalDocument.cs" />
+    <Compile Include="Metal\MetalMacroCollection.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
@@ -72,6 +89,8 @@
     <Folder Include="Tales\Exceptions\" />
     <Folder Include="Tal\" />
     <Folder Include="Tal\Exceptions\" />
+    <Folder Include="Metal\" />
+    <Folder Include="Metal\Exceptions\" />
   </ItemGroup>
   <ProjectExtensions>
     <MonoDevelop>

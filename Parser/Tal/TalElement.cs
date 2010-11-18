@@ -177,6 +177,80 @@ namespace CraigFowler.Web.ZPT.Tal
       return this.GetAttribute(attributeName, TalDocument.TalNamespace);
     }
 		
+    /// <summary>
+    /// <para>
+    /// Populates this node with attributes and the child nodes of the given <paramref name="elementToClone"/>.
+    /// </para>
+    /// </summary>
+    /// <param name="elementToClone">
+    /// An <see cref="XmlElement"/>
+    /// </param>
+    protected virtual void CloneFrom(XmlElement elementToClone)
+    {
+      this.CloneAttributesFrom(elementToClone);
+      this.CloneChildNodesFrom(elementToClone);
+    }
+    
+    /// <summary>
+    /// <para>
+    /// Populates this node with the <see cref="XmlAttribute"/> instances found from the
+    /// <paramref name="elementToClone"/>.
+    /// </para>
+    /// </summary>
+    /// <param name="elementToClone">
+    /// A <see cref="XmlElement"/>
+    /// </param>
+    protected virtual void CloneAttributesFrom(XmlElement elementToClone)
+    {
+      if(elementToClone == null)
+      {
+        throw new ArgumentNullException("elementToClone");
+      }
+      
+      /* For some strange reason I can't use a foreach here.  If I do it ends up going into a crazy endless loop
+       * when it hits certain node types.
+       */
+      for(int i = 0; i < elementToClone.Attributes.Count; i++)
+      {
+        XmlAttribute attribute = elementToClone.Attributes[i];
+        this.SetAttribute(attribute.LocalName, attribute.NamespaceURI, attribute.Value);
+      }
+    }
+    
+    /// <summary>
+    /// <para>
+    /// Populates this node with the <see cref="XmlNode"/> instances (child nodes) from the
+    /// <paramref name="elementToClone"/>.
+    /// </para>
+    /// </summary>
+    /// <param name="elementToClone">
+    /// A <see cref="XmlElement"/>
+    /// </param>
+    protected virtual void CloneChildNodesFrom(XmlElement elementToClone)
+    {
+      if(elementToClone == null)
+      {
+        throw new ArgumentNullException("elementToClone");
+      }
+      
+      /* For some strange reason I can't use a foreach here.  If I do it ends up going into a crazy endless loop
+       * when it hits certain node types.
+       */
+      for(int i = 0; i < elementToClone.ChildNodes.Count ; i++)
+      {
+        XmlNode node = elementToClone.ChildNodes[i];
+        
+        if(node.NodeType == XmlNodeType.Element)
+        {
+          this.AppendChild(new TalElement((XmlElement) node));
+        }
+        else
+        {
+          this.AppendChild(node.CloneNode(true));
+        }
+      }
+    }
+    
 		#endregion
 		
     #region rendering methods
@@ -729,33 +803,9 @@ namespace CraigFowler.Web.ZPT.Tal
 		public TalElement(XmlElement elementToClone) : this(elementToClone.Prefix,
 		                                                    elementToClone.LocalName,
 		                                                    elementToClone.NamespaceURI,
-		                                                    (XmlDocument) elementToClone.OwnerDocument)
+		                                                    elementToClone.OwnerDocument)
 		{
-			/* For some strange reason I can't use a foreach here.  If I do it ends up going into a crazy endless loop
-			 * when it hits certain node types.
-			 */
-			for(int i = 0; i < elementToClone.Attributes.Count; i++)
-			{
-				XmlAttribute attribute = elementToClone.Attributes[i];
-				this.SetAttribute(attribute.LocalName, attribute.NamespaceURI, attribute.Value);
-			}
-			
-			/* For some strange reason I can't use a foreach here.  If I do it ends up going into a crazy endless loop
-			 * when it hits certain node types.
-			 */
-			for(int i = 0; i < elementToClone.ChildNodes.Count ; i++)
-			{
-				XmlNode node = elementToClone.ChildNodes[i];
-				
-				if(node.NodeType == XmlNodeType.Element)
-				{
-					this.AppendChild(new TalElement((XmlElement) node));
-				}
-				else
-				{
-					this.AppendChild(node.CloneNode(true));
-				}
-			}
+      this.CloneFrom(elementToClone);
 		}
     
     #endregion

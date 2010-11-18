@@ -1,10 +1,10 @@
 //  
-//  TalException.cs
+//  MetalException.cs
 //  
 //  Author:
 //       Craig Fowler <craig@craigfowler.me.uk>
 // 
-//  Copyright (c) 2010 Craig Fowler
+//  Copyright (c) 2011 Craig Fowler
 // 
 //  This program is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -18,22 +18,19 @@
 // 
 //  You should have received a copy of the GNU General Public License
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
 using System;
-
-namespace CraigFowler.Web.ZPT.Tal.Exceptions
+namespace CraigFowler.Web.ZPT.Metal.Exceptions
 {
   /// <summary>
   /// <para>
-  /// Represents an <see cref="Exception"/> encountered when parsing or processing a <see cref="TalDocument"/> or a
-  /// <see cref="TalElement"/>.
+  /// Represents an <see cref="Exception"/> that is raised in relation to handling of METAL macros.
   /// </para>
   /// </summary>
-  public class TalException : Exception
+  public class MetalException : Exception
   {
     #region constants
     
-    private const string DEFAULT_MESSAGE = "There was an error relating to a TAL document or element";
+    private const string DEFAULT_MESSAGE = "There was an error relating to a METAL document or element";
     
     #endregion
     
@@ -61,7 +58,7 @@ namespace CraigFowler.Web.ZPT.Tal.Exceptions
     /// <summary>
     /// <para>Initialises this instance with default values.</para>
     /// </summary>
-    public TalException() : this(DEFAULT_MESSAGE, null) {}
+    public MetalException() : this(DEFAULT_MESSAGE, null) {}
     
     /// <summary>
     /// <para>Initialises this instance with an exception message.</para>
@@ -69,7 +66,7 @@ namespace CraigFowler.Web.ZPT.Tal.Exceptions
     /// <param name="message">
     /// A <see cref="System.String"/>
     /// </param>
-    public TalException(string message) : this(message, null) {}
+    public MetalException(string message) : this(message, null) {}
     
     /// <summary>
     /// <para>Initialises this instance with an inner exception.</para>
@@ -77,7 +74,7 @@ namespace CraigFowler.Web.ZPT.Tal.Exceptions
     /// <param name="inner">
     /// A <see cref="Exception"/>
     /// </param>
-    public TalException(Exception inner) : this(DEFAULT_MESSAGE, inner) {}
+    public MetalException(Exception inner) : this(DEFAULT_MESSAGE, inner) {}
     
     /// <summary>
     /// <para>Initialises this instance with an exception message and an inner exception.</para>
@@ -88,7 +85,7 @@ namespace CraigFowler.Web.ZPT.Tal.Exceptions
     /// <param name="inner">
     /// A <see cref="Exception"/>
     /// </param>
-    public TalException(string message, Exception inner) : base(message, inner)
+    public MetalException(string message, Exception inner) : base(message, inner)
     {
       this.PermanentError = true;
     }
@@ -96,3 +93,4 @@ namespace CraigFowler.Web.ZPT.Tal.Exceptions
     #endregion
   }
 }
+

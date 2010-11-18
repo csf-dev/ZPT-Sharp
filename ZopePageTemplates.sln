@@ -26,11 +26,15 @@ Global
 		$0.TextStylePolicy = $1
 		$1.FileWidth = 120
 		$1.TabWidth = 2
-		$1.inheritsSet = Mono
+		$1.NoTabsAfterNonTabs = True
+		$1.inheritsSet = VisualStudio
 		$1.inheritsScope = text/plain
 		$1.scope = text/plain
 		$0.DotNetNamingPolicy = $2
 		$2.DirectoryNamespaceAssociation = PrefixedHierarchical
 		$2.ResourceNamePolicy = FileName
+		$0.StandardHeader = $3
+		$3.Text = 
+		$3.inheritsSet = Apache2License
 	EndGlobalSection
 EndGlobal

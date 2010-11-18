@@ -14,7 +14,7 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugType>none</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>..\bin\Debug</OutputPath>
+    <OutputPath>bin\Debug</OutputPath>
     <DefineConstants>DEBUG</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -22,7 +22,7 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>none</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>..\bin\Release</OutputPath>
+    <OutputPath>bin\Release</OutputPath>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
@@ -43,6 +43,7 @@
     <Folder Include="Mocks\" />
     <Folder Include="Tales\Expressions\" />
     <Folder Include="Tal\" />
+    <Folder Include="Metal\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Tales\TestTalesContext.cs" />
@@ -64,6 +65,12 @@
     <Compile Include="Tales\TestExpressions.cs" />
     <Compile Include="Tales\Expressions\CSharpEvaluatorProofOfConcept.cs" />
     <Compile Include="Tal\TalIntegrationTests.cs" />
+    <Compile Include="TestZptMetadata.cs" />
+    <Compile Include="Mocks\ZptChildDocument.cs" />
+    <Compile Include="Tales\TestTalesStructureProvider.cs" />
+    <Compile Include="TestConfiguration.cs" />
+    <Compile Include="TestZptDocumentCollection.cs" />
+    <Compile Include="Metal\TestMetalDocument.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Parser\Parser.csproj">
@@ -73,8 +80,43 @@
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
-    <None Include="Unit-tests.config">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    <None Include="Tales\TestTalesPath.cs">
+      <Visible>False</Visible>
     </None>
+    <None Include="Test data\simple-tal-document.pt" />
+    <None Include="Test data\simple-tal-document.pt.metadata" />
+    <None Include="Test data\simple-tal-document.xml" />
+    <None Include="Test data\Document Root\README" />
+    <None Include="Test data\Document Root\one.pt" />
+    <None Include="Test data\Document Root\two.pt" />
+    <None Include="Test data\Document Root\three\five.pt" />
+    <None Include="Test data\Document Root\three\four\INVALID.xml" />
+    <None Include="Test data\input\test02.html" />
+    <None Include="Test data\input\test02.xml" />
+    <None Include="Test data\input\test03.html" />
+    <None Include="Test data\input\test03.xml" />
+    <None Include="Test data\input\test03a.html" />
+    <None Include="Test data\input\test03a.xml" />
+    <None Include="Test data\input\test09.xml" />
+    <None Include="Test data\input\test16.xml" />
+    <None Include="Test data\input\test17.xml" />
+    <None Include="Test data\input\testTalDocumentWithMockObject.xhtml" />
+    <None Include="Test data\input\testTalDocumentWithOnlyStringExpressions.xhtml" />
+    <None Include="Test data\output\test02.html" />
+    <None Include="Test data\output\test02.xml" />
+    <None Include="Test data\output\test03.html" />
+    <None Include="Test data\output\test03.xml" />
+    <None Include="Test data\output\test03a.html" />
+    <None Include="Test data\output\test03a.xml" />
+    <None Include="Test data\output\test09.xml" />
+    <None Include="Test data\output\test16.xml" />
+    <None Include="Test data\output\test17.xml" />
+    <None Include="Test data\output\testTalDocumentWithMockObject.xhtml" />
+    <None Include="Test data\output\testTalDocumentWithOnlyStringExpressions.xhtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Unit-tests.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 </Project>

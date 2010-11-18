@@ -1,6 +1,8 @@
 bin/
+obj/
 *.pidb
 *.desktop
 *.userprefs
 TestResult.xml
 .directory
+ZopePageTemplates.VisualState.xml
