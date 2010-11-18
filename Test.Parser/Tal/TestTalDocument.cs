@@ -94,7 +94,7 @@ namespace Test.CraigFowler.Web.ZPT.Tal
 		/// <returns>
 		/// A <see cref="System.String"/>
 		/// </returns>
-		public string GetTestFileName(string relativeFilename)
+		private string GetTestFileName(string relativeFilename)
 		{
 			string
 				basePath = ConfigurationManager.AppSettings["test-data-path"],
