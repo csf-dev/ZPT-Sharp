@@ -218,6 +218,44 @@ namespace CraigFowler.Web.ZPT.Tal
 			return output;
 		}
 		
+    /// <summary>
+    /// <para>
+    /// Overridden.  Imports an <see cref="XmlNode"/> into this document instance, so that the node may be used as if
+    /// it were a first-class part of this document.
+    /// </para>
+    /// </summary>
+    /// <param name="node">
+    /// An <see cref="XmlNode"/> to clone as a member of this document.
+    /// </param>
+    /// <param name="deep">
+    /// A <see cref="System.Boolean"/> that indicates whether a deep or shallow copy is to be performed.  In a
+    /// <see cref="TalDocument"/> this should almost always be true.
+    /// </param>
+    /// <returns>
+    /// The newly-imported <see cref="XmlNode"/> instance.
+    /// </returns>
+    public override XmlNode ImportNode (XmlNode node, bool deep)
+    {
+      XmlNode output;
+      
+      if(node is XmlElement)
+      {
+        if(!deep)
+        {
+          throw new NotSupportedException("Importing XML element nodes into a TAL document as shallow " +
+                                          "copies is not supported.");
+        }
+        
+        output = new TalElement((XmlElement) node, this);
+      }
+      else
+      {
+        output = base.ImportNode (node, deep);
+      }
+      
+      return output;
+    }
+    
     #endregion
     
     #region constructors

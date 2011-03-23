@@ -76,7 +76,6 @@
     <Compile Include="Tales\Exceptions\TalesStructureErrorType.cs" />
     <Compile Include="Tales\TalesIgnoreAttribute.cs" />
     <Compile Include="Metal\MetalMacro.cs" />
-    <Compile Include="Metal\MetalSlot.cs" />
     <Compile Include="Metal\Exceptions\MetalException.cs" />
     <Compile Include="ZptDocumentCollection.cs" />
     <Compile Include="Metal\IMetalDocument.cs" />

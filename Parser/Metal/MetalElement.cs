@@ -104,13 +104,13 @@ namespace CraigFowler.Web.ZPT.Metal
         
         if(node.NodeType == XmlNodeType.Element)
         {
-          MetalElement element = MetalElementFactory((XmlElement) node);
+          MetalElement element = MetalElementFactory((XmlElement) node, this.OwnerDocument);
           
           this.AppendChild(element);
         }
         else
         {
-          this.AppendChild(node.CloneNode(true));
+          this.AppendChild(this.OwnerDocument.ImportNode(node, true));
         }
       }
     }
@@ -218,40 +218,51 @@ namespace CraigFowler.Web.ZPT.Metal
     /// A <see cref="Tales.TalesContext"/>
     /// </param>
     /// <returns>
-    /// A dictionary of <see cref="System.String"/> and <see cref="MetalElement"/>
+    /// <para>
+    /// A dictionary of <see cref="System.String"/> and <see cref="MetalElement"/>.
+    /// </para>
+    /// <para>
+    /// If <see cref="GetUseMacro(Tales.TalesContext)"/> returns a non-null <see cref="MetalMacro"/> instance then this
+    /// method will always return a non-null collection, although it may be empty (if the use-macro directive contains
+    /// no fill-slot directives).
+    /// </para>
     /// </returns>
+    /// <exception cref="MetalException">
+    /// If <see cref="GetUseMacro(Tales.TalesContext)"/> returns a null reference (indicating that this element
+    /// instance does not contain a 'use-macro' directive).
+    /// </exception>
     public Dictionary<string,MetalElement> GetFilledSlots(Tales.TalesContext context)
     {
-      Dictionary<string,MetalElement> output = null;
+      Dictionary<string,MetalElement> output = new Dictionary<string, MetalElement>();
       MetalMacro useMacro = GetUseMacro(context);
       
-      if(useMacro != null)
+      if(useMacro == null)
       {
-        output = new Dictionary<string, MetalElement>();
+        throw new MetalException("This METAL element does not contain a 'use-macro' directive.");
+      }
         
-        foreach(XmlNode node in this.SelectNodes(String.Format("./*[@metal:{0}]", FillSlotAttributeName),
-                                                 new XmlNamespaceManager(this.OwnerDocument.NameTable)))
+      foreach(XmlNode node in this.SelectNodes(String.Format("./*[@metal:{0}]", FillSlotAttributeName),
+                                               new XmlNamespaceManager(this.OwnerDocument.NameTable)))
+      {
+        if(node is MetalElement)
         {
-          if(node is MetalElement)
+          MetalElement element = (MetalElement) node;
+          string name = element.GetAttribute(FillSlotAttributeName, TalDocument.MetalNamespace);
+          
+          if(String.IsNullOrEmpty(name))
           {
-            MetalElement element = (MetalElement) node;
-            string name = element.GetAttribute(FillSlotAttributeName, TalDocument.MetalNamespace);
-            
-            if(String.IsNullOrEmpty(name))
-            {
-              throw new InvalidOperationException("Null or empty fill-slot name.");
-            }
-            
-            output.Add(name, element);
+            throw new InvalidOperationException("Null or empty fill-slot name.");
           }
-          else
-          {
-            string message = "A non-MetalElement node was found whilst looking for fill-slot definitions";
-            InvalidOperationException ex = new InvalidOperationException(message);
-            ex.Data["Node"] = node;
-            ex.Data["Current element"] = this;
-            throw ex;
-          }
+          
+          output.Add(name, element);
+        }
+        else
+        {
+          string message = "A non-MetalElement node was found whilst looking for fill-slot definitions";
+          InvalidOperationException ex = new InvalidOperationException(message);
+          ex.Data["Node"] = node;
+          ex.Data["Current element"] = this;
+          throw ex;
         }
       }
       
@@ -275,14 +286,12 @@ namespace CraigFowler.Web.ZPT.Metal
     /// A <see cref="System.String"/>
     /// </param>
     /// <param name="document">
-    /// A <see cref="TalDocument"/>
+    /// An <see cref="XmlDocument"/>
     /// </param>
     public MetalElement(string prefix,
                       	string localName,
                       	string namespaceURI,
-                      	XmlDocument document) : base(prefix, localName, namespaceURI, document)
-    {
-    }
+                      	XmlDocument document) : base(prefix, localName, namespaceURI, document) {}
 		
 		/// <summary>
 		/// <para>Serves as a copy-constructor for an <see cref="XmlElement"/> node.</para>
@@ -290,13 +299,24 @@ namespace CraigFowler.Web.ZPT.Metal
 		/// <param name="elementToClone">
 		/// A <see cref="XmlElement"/>
 		/// </param>
-		public MetalElement(XmlElement elementToClone) : this(elementToClone.Prefix,
-                                                          elementToClone.LocalName,
-                                                          elementToClone.NamespaceURI,
-                                                          elementToClone.OwnerDocument)
-		{
+		public MetalElement(XmlElement elementToClone) : this(elementToClone, elementToClone.OwnerDocument) {}
+    
+    /// <summary>
+    /// <para>Serves as a copy-constructor for an <see cref="XmlElement"/> node.</para>
+    /// </summary>
+    /// <param name="elementToClone">
+    /// A <see cref="XmlElement"/>
+    /// </param>
+    /// <param name="ownerDocument">
+    /// A <see cref="XmlDocument"/>
+    /// </param>
+    public MetalElement(XmlElement elementToClone, XmlDocument ownerDocument) : this(elementToClone.Prefix,
+                                                                                     elementToClone.LocalName,
+                                                                                     elementToClone.NamespaceURI,
+                                                                                     ownerDocument)
+    {
       this.CloneFrom(elementToClone);
-		}
+    }
 		
 		#endregion
     
@@ -313,6 +333,23 @@ namespace CraigFowler.Web.ZPT.Metal
     /// </returns>
     public static MetalElement MetalElementFactory(XmlElement elementToClone)
     {
+      return MetalElement.MetalElementFactory(elementToClone, elementToClone.OwnerDocument);
+    }
+    
+    /// <summary>
+    /// <para>Factory method creates a new class instance that implements <see cref="MetalElement"/>.</para>
+    /// </summary>
+    /// <param name="elementToClone">
+    /// A <see cref="XmlElement"/>
+    /// </param>
+    /// <param name="ownerDocument">
+    /// An <see cref="XmlDocument"/>
+    /// </param>
+    /// <returns>
+    /// A <see cref="MetalElement"/>
+    /// </returns>
+    public static MetalElement MetalElementFactory(XmlElement elementToClone, XmlDocument ownerDocument)
+    {
       MetalElement output;
       
       if(elementToClone == null)
@@ -328,24 +365,19 @@ namespace CraigFowler.Web.ZPT.Metal
       if(elementToClone.HasAttribute(DefineMacroAttributeName, TalDocument.MetalNamespace))
       {
         IMetalDocument metalDocument = elementToClone.OwnerDocument as IMetalDocument;
-        MetalMacro macro = new MetalMacro(elementToClone);
+        MetalMacro macro = new MetalMacro(elementToClone, ownerDocument);
         
         metalDocument.Macros[macro.MacroName] = macro;
         output = macro;
       }
-      else if(elementToClone.HasAttribute(DefineSlotAttributeName, TalDocument.MetalNamespace))
-      {
-        MetalSlot slot = new MetalSlot(elementToClone);
-        
-        output = slot;
-      }
       else
       {
-        output = new MetalElement(elementToClone);
+        output = new MetalElement(elementToClone, ownerDocument);
       }
       
       return output;
     }
+
     
     #endregion
 	}

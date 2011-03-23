@@ -12,7 +12,6 @@ using System.Collections.Generic;
 namespace Test.CraigFowler.Web.ZPT.Metal
 {
   [TestFixture]
-  [Category("Integration")]
   public class TestMetalDocument
   {
     #region properties
@@ -36,6 +35,7 @@ namespace Test.CraigFowler.Web.ZPT.Metal
     }
     
     [Test]
+    [Category("Integration")]
     public void TestGetUseMacro()
     {
       TalesContext context = new TalesContext();
@@ -84,6 +84,7 @@ Exception
     }
     
     [Test]
+    [Category("Integration")]
     public void TestRetrieveMacroUsingTalesExpression()
     {
       MetalDocument innerDoc = new MetalDocument();
@@ -111,6 +112,60 @@ Exception
       MetalMacro macro = context.CreateExpression("documents/foo/bar/macros/test").GetValue() as MetalMacro;
       
       Assert.AreEqual("test", macro.MacroName, "Correct macro name");
+    }
+    
+    [Test]
+    public void TestImportNode()
+    {
+      MetalDocument
+        doc1 = new MetalDocument(),
+        doc2 = new MetalDocument();
+      XmlNode imported;
+      
+      doc1.LoadXml(@"
+<html xmlns=""http://www.w3.org/1999/xhtml""
+      xmlns:tal=""http://xml.zope.org/namespaces/tal""
+      xmlns:metal=""http://xml.zope.org/namespaces/metal"">
+<head>
+<title>Macro test document</title>
+</head>
+<body>
+  <h1>What this file is</h1>
+  <p>This document is a test of the METAL macro system.  Parts of this document are delegated out to METAL macros.</p>
+  <p metal:use-macro=""documents/three/macro-test-macro1/macros/test"" id=""useMacroNode"">
+    This is default text provided by the master document.
+  </p>
+</body>
+</html>");
+      
+      doc2.LoadXml(@"
+<html xmlns=""http://www.w3.org/1999/xhtml""
+      xmlns:tal=""http://xml.zope.org/namespaces/tal""
+      xmlns:metal=""http://xml.zope.org/namespaces/metal"">
+<head>
+<title>Macro test document</title>
+</head>
+<body>
+  <h1>What this file is</h1>
+  <p>This document is a test of the METAL macro system.  Parts of this document are delegated out to METAL macros.</p>
+  <p metal:use-macro=""documents/three/macro-test-macro1/macros/test"" id=""useMacroNode"">
+    This is default text provided by the master document.
+  </p>
+</body>
+</html>");
+      
+      imported = doc1.ImportNode(doc2.GetElementsByTagName("p", "http://www.w3.org/1999/xhtml")[1], true);
+      
+      Assert.IsNotNull(imported, "Imported node is not null");
+      Assert.IsNotNull(imported.FirstChild.Value, "Imported node value is not null");
+      
+      Assert.AreEqual("This is default text provided by the master document.",
+                      imported.FirstChild.Value.Trim(),
+                      "Correct node value");
+      
+      doc1.GetElementsByTagName("body", "http://www.w3.org/1999/xhtml")[0].AppendChild(imported);
+      
+      Console.WriteLine (doc1.OuterXml);
     }
     
     #endregion

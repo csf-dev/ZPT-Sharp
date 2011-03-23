@@ -242,11 +242,11 @@ namespace CraigFowler.Web.ZPT.Tal
         
         if(node.NodeType == XmlNodeType.Element)
         {
-          this.AppendChild(new TalElement((XmlElement) node));
+          this.AppendChild(new TalElement((XmlElement) node, this.OwnerDocument));
         }
         else
         {
-          this.AppendChild(node.CloneNode(true));
+          this.AppendChild(this.OwnerDocument.ImportNode(node, true));
         }
       }
     }
@@ -800,13 +800,27 @@ namespace CraigFowler.Web.ZPT.Tal
 		/// <param name="elementToClone">
 		/// A <see cref="XmlElement"/>
 		/// </param>
-		public TalElement(XmlElement elementToClone) : this(elementToClone.Prefix,
-		                                                    elementToClone.LocalName,
-		                                                    elementToClone.NamespaceURI,
-		                                                    elementToClone.OwnerDocument)
-		{
+		public TalElement(XmlElement elementToClone) : this(elementToClone, elementToClone.OwnerDocument) {}
+    
+    /// <summary>
+    /// <para>
+    /// Serves as a copy-constructor for an <see cref="XmlElement"/> node that injects a new owner document into the
+    /// newly-created node.
+    /// </para>
+    /// </summary>
+    /// <param name="elementToClone">
+    /// A <see cref="XmlElement"/>
+    /// </param>
+    /// <param name="newOwner">
+    /// A <see cref="TalDocument"/>
+    /// </param>
+    public TalElement(XmlElement elementToClone, XmlDocument newOwner) : this(elementToClone.Prefix,
+                                                                              elementToClone.LocalName,
+                                                                              elementToClone.NamespaceURI,
+                                                                              newOwner)
+    {
       this.CloneFrom(elementToClone);
-		}
+    }
     
     #endregion
   }

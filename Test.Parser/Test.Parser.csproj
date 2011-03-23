@@ -71,6 +71,7 @@
     <Compile Include="TestConfiguration.cs" />
     <Compile Include="TestZptDocumentCollection.cs" />
     <Compile Include="Metal\TestMetalDocument.cs" />
+    <Compile Include="Metal\TestMetalElement.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Parser\Parser.csproj">
