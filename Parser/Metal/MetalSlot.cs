@@ -33,7 +33,7 @@ namespace CraigFowler.Web.ZPT.Metal
     #region properties
     
     /// <summary>
-    /// <para>Gets and sets the name of this slot within the <see cref="ParentMacro"/>.</para>
+    /// <para>Gets and sets the name of this slot within the .</para>
     /// </summary>
     public string SlotName {
       get;

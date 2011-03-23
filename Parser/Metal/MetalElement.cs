@@ -23,6 +23,7 @@ using System.Xml;
 using CraigFowler.Web.ZPT.Tal;
 using CraigFowler.Web.ZPT.Tales;
 using CraigFowler.Web.ZPT.Metal.Exceptions;
+using System.Collections.Generic;
 
 namespace CraigFowler.Web.ZPT.Metal
 {
@@ -63,29 +64,15 @@ namespace CraigFowler.Web.ZPT.Metal
     #region properties
     
     /// <summary>
-    /// <para>Read-only.  Gets the name of the <see cref="MetalSlot"/> that this element fills.</para>
+    /// <para>
+    /// Read-only.  Gets a reference to a <see cref="MetalMacro"/> that <see cref="GetUseMacro(Tales.TalesContext)"/>
+    /// has cached (to prevent repeated resolution of expressions to fetch a macro instance).
+    /// </para>
     /// </summary>
-    protected string FillSlotName
+    protected MetalMacro CachedUseMacro
     {
       get;
       private set;
-    }
-    
-    /// <summary>
-    /// <para>Read-only.  Gets a reference to the <see cref="MetalSlot"/> that this element fills.</para>
-    /// </summary>
-    public MetalSlot FillSlot
-    {
-      get;
-      private set;
-    }
-    
-    /// <summary>
-    /// <para>Gets and sets a reference to the parent <see cref="MetalMacro"/> that this slot resides within.</para>
-    /// </summary>
-    public MetalMacro ParentMacro {
-      get;
-      protected set;
     }
     
     #endregion
@@ -118,7 +105,6 @@ namespace CraigFowler.Web.ZPT.Metal
         if(node.NodeType == XmlNodeType.Element)
         {
           MetalElement element = MetalElementFactory((XmlElement) node);
-          element.ParentMacro = this.ParentMacro;
           
           this.AppendChild(element);
         }
@@ -143,8 +129,15 @@ namespace CraigFowler.Web.ZPT.Metal
     }
     
     /// <summary>
-    /// <para>Gets a <see cref="MetalMacro"/> instance for which to use with this element.</para>
+    /// <para>Overloaded.  Gets a <see cref="MetalMacro"/> instance for which to use with this element.</para>
     /// </summary>
+    /// <remarks>
+    /// <para>
+    /// This method provides caching via the <see cref="CachedUseMacro"/> property.  After the initial call to this
+    /// method, subsequent calls will return the cached instance rather than re-evaluating the use-macro expression
+    /// repeatedly.
+    /// </para>
+    /// </remarks>
     /// <param name="context">
     /// A <see cref="Tales.TalesContext"/>
     /// </param>
@@ -152,6 +145,32 @@ namespace CraigFowler.Web.ZPT.Metal
     /// A <see cref="MetalMacro"/>
     /// </returns>
     public MetalMacro GetUseMacro(Tales.TalesContext context)
+    {
+      return this.GetUseMacro(context, false);
+    }
+    
+    /// <summary>
+    /// <para>Overloaded.  Gets a <see cref="MetalMacro"/> instance for which to use with this element.</para>
+    /// </summary>
+    /// <remarks>
+    /// <para>
+    /// This method provides caching via the <see cref="CachedUseMacro"/> property.  After the initial call to this
+    /// method, subsequent calls will return the cached instance rather than re-evaluating the use-macro expression
+    /// repeatedly.  This overload provides a mechanism to bypass that cache, via the <paramref name="bypassCache"/>
+    /// parameter.
+    /// </para>
+    /// </remarks>
+    /// <param name="context">
+    /// A <see cref="Tales.TalesContext"/> to use for the discovery of the macro.
+    /// </param>
+    /// <param name="bypassCache">
+    /// A <see cref="System.Boolean"/> that determines whether or not <see cref="CachedUseMacro"/> is used or not
+    /// (if present)
+    /// </param>
+    /// <returns>
+    /// A <see cref="MetalMacro"/>
+    /// </returns>
+    public MetalMacro GetUseMacro(Tales.TalesContext context, bool bypassCache)
     {
       MetalMacro output = null;
       string path = this.GetUseMacroPath();
@@ -161,7 +180,12 @@ namespace CraigFowler.Web.ZPT.Metal
         throw new ArgumentNullException("context");
       }
       
-      if(path != null)
+      if(!bypassCache)
+      {
+        output = this.CachedUseMacro;
+      }
+      
+      if(output == null && path != null)
       {
         TalesExpression expression = context.CreateExpression(path);
         object expressionValue = expression.GetValue();
@@ -173,6 +197,61 @@ namespace CraigFowler.Web.ZPT.Metal
           MetalException ex = new MetalException("Error retrieving macro whilst parsing 'use-macro' directive.");
           ex.Data["Path"] = path;
           throw ex;
+        }
+        
+        if(!bypassCache)
+        {
+          this.CachedUseMacro = output;
+        }
+      }
+      
+      return output;
+    }
+    
+    /// <summary>
+    /// <para>
+    /// Gets a collection of the child elements of the current element that contain METAL 'fill-slot' attributes,
+    /// indexed by the value of the name of the slot that they fill.
+    /// </para>
+    /// </summary>
+    /// <param name="context">
+    /// A <see cref="Tales.TalesContext"/>
+    /// </param>
+    /// <returns>
+    /// A dictionary of <see cref="System.String"/> and <see cref="MetalElement"/>
+    /// </returns>
+    public Dictionary<string,MetalElement> GetFilledSlots(Tales.TalesContext context)
+    {
+      Dictionary<string,MetalElement> output = null;
+      MetalMacro useMacro = GetUseMacro(context);
+      
+      if(useMacro != null)
+      {
+        output = new Dictionary<string, MetalElement>();
+        
+        foreach(XmlNode node in this.SelectNodes(String.Format("./*[@metal:{0}]", FillSlotAttributeName),
+                                                 new XmlNamespaceManager(this.OwnerDocument.NameTable)))
+        {
+          if(node is MetalElement)
+          {
+            MetalElement element = (MetalElement) node;
+            string name = element.GetAttribute(FillSlotAttributeName, TalDocument.MetalNamespace);
+            
+            if(String.IsNullOrEmpty(name))
+            {
+              throw new InvalidOperationException("Null or empty fill-slot name.");
+            }
+            
+            output.Add(name, element);
+          }
+          else
+          {
+            string message = "A non-MetalElement node was found whilst looking for fill-slot definitions";
+            InvalidOperationException ex = new InvalidOperationException(message);
+            ex.Data["Node"] = node;
+            ex.Data["Current element"] = this;
+            throw ex;
+          }
         }
       }
       
@@ -203,9 +282,6 @@ namespace CraigFowler.Web.ZPT.Metal
                       	string namespaceURI,
                       	XmlDocument document) : base(prefix, localName, namespaceURI, document)
     {
-      this.FillSlotName = null;
-      this.FillSlot = null;
-      this.ParentMacro = null;
     }
 		
 		/// <summary>
