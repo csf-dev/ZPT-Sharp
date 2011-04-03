@@ -127,6 +127,18 @@ namespace CraigFowler.Web.ZPT.Tal
       }
     }
     
+    /// <summary>
+    /// <para>
+    /// Read-only.  Gets the <see cref="OwnerDocument"/> for this element as an <see cref="ITemplateDocument"/>.
+    /// </para>
+    /// </summary>
+    protected ITemplateDocument OwnerTemplateDocument
+    {
+      get {
+        return (ITemplateDocument) this.OwnerDocument;
+      }
+    }
+    
     #endregion
     
 		#region methods
@@ -307,7 +319,7 @@ namespace CraigFowler.Web.ZPT.Tal
     /// <param name="output">
     /// A <see cref="TalOutput"/> instance to use for writing the rendered output of this element to.
     /// </param>
-		public void Render(TalOutput output)
+		public virtual void Render(TalOutput output)
 		{
       this.TalesContext.ParentContext = this.GetParentTalesContext();
       

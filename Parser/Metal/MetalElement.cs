@@ -75,6 +75,19 @@ namespace CraigFowler.Web.ZPT.Metal
       private set;
     }
     
+    /// <summary>
+    /// <para>
+    /// Read-only.  Gets the <see cref="TalesContext"/> for performing METAL-related actions.  This is equivalent to
+    /// the TALES context of the owner document (since TAL-style define directives are not available for METAL).
+    /// </para>
+    /// </summary>
+    protected TalesContext MetalContext
+    {
+      get {
+        return this.OwnerTemplateDocument.TalesContext;
+      }
+    }
+    
     #endregion
     
     #region methods
@@ -125,7 +138,14 @@ namespace CraigFowler.Web.ZPT.Metal
     /// </returns>
     protected string GetUseMacroPath()
     {
-      return this.GetAttribute(UseMacroAttributeName, TalDocument.MetalNamespace);
+      string output = this.GetAttribute(UseMacroAttributeName, TalDocument.MetalNamespace);
+      
+      if(output == String.Empty)
+      {
+        output = null;
+      }
+      
+      return output;
     }
     
     /// <summary>
@@ -180,12 +200,11 @@ namespace CraigFowler.Web.ZPT.Metal
         throw new ArgumentNullException("context");
       }
       
-      if(!bypassCache)
+      if(this.CachedUseMacro != null && !bypassCache)
       {
         output = this.CachedUseMacro;
       }
-      
-      if(output == null && path != null)
+      else if(path != null)
       {
         TalesExpression expression = context.CreateExpression(path);
         object expressionValue = expression.GetValue();
@@ -194,8 +213,11 @@ namespace CraigFowler.Web.ZPT.Metal
         
         if(output == null)
         {
-          MetalException ex = new MetalException("Error retrieving macro whilst parsing 'use-macro' directive.");
+          MetalException ex = new MetalException("Error retrieving macro; a 'use-macro' path expression is present " +
+                                                 "but it does not evaluate to a METAL macro.");
           ex.Data["Path"] = path;
+          ex.Data["Expression value"] = expressionValue;
+          ex.Data["Expression value type"] = (expressionValue != null)? expressionValue.GetType().FullName : "null";
           throw ex;
         }
         
@@ -235,14 +257,17 @@ namespace CraigFowler.Web.ZPT.Metal
     {
       Dictionary<string,MetalElement> output = new Dictionary<string, MetalElement>();
       MetalMacro useMacro = GetUseMacro(context);
+      XmlNamespaceManager namespaceManager = new XmlNamespaceManager(this.OwnerDocument.NameTable);
       
       if(useMacro == null)
       {
         throw new MetalException("This METAL element does not contain a 'use-macro' directive.");
       }
-        
+      
+      namespaceManager.AddNamespace("metal", TalDocument.MetalNamespace);
+      
       foreach(XmlNode node in this.SelectNodes(String.Format("./*[@metal:{0}]", FillSlotAttributeName),
-                                               new XmlNamespaceManager(this.OwnerDocument.NameTable)))
+                                               namespaceManager))
       {
         if(node is MetalElement)
         {
@@ -267,6 +292,142 @@ namespace CraigFowler.Web.ZPT.Metal
       }
       
       return output;
+    }
+    
+    /// <summary>
+    /// <para>Overridden.  Renders this node to the output stream.</para>
+    /// </summary>
+    /// <param name="output">
+    /// A <see cref="TalOutput"/>
+    /// </param>
+    public override void Render (TalOutput output)
+    {
+      MetalMacro macroElement = GetUseMacro(this.MetalContext);
+      
+      if(macroElement != null)
+      {
+        this.SpliceWith(macroElement, output);
+      }
+      else
+      {
+        base.Render (output);
+      }
+    }
+    
+    /// <summary>
+    /// <para>
+    /// Overloaded.  Splices the given <paramref name="element"/> as a replacement for this element node.
+    /// </para>
+    /// </summary>
+    /// <param name="element">
+    /// A <see cref="MetalElement"/>
+    /// </param>
+    /// <param name="output">
+    /// A <see cref="TalOutput"/>
+    /// </param>
+    public void SpliceWith(MetalElement element, TalOutput output)
+    {
+      this.SpliceWith(element, output, null, false);
+    }
+    
+    /// <summary>
+    /// <para>
+    /// Overloaded.  Splices the given <paramref name="element"/> as a replacement for this element node.
+    /// </para>
+    /// </summary>
+    /// <param name="element">
+    /// A <see cref="MetalElement"/>
+    /// </param>
+    /// <param name="output">
+    /// A <see cref="TalOutput"/>
+    /// </param>
+    /// <param name="skipRendering">
+    /// A <see cref="System.Boolean"/>
+    /// </param>
+    public void SpliceWith(MetalElement element, TalOutput output, bool skipRendering)
+    {
+      this.SpliceWith(element, output, null, skipRendering);
+    }
+    
+    /// <summary>
+    /// Overloaded.  Splices the given <paramref name="element"/> as a replacement for this element node, performing
+    /// slot-replacements where appropriate.
+    /// </summary>
+    /// <param name="element">
+    /// A <see cref="MetalElement"/>
+    /// </param>
+    /// <param name="output">
+    /// A <see cref="TalOutput"/>
+    /// </param>
+    /// <param name="slotReplacements">
+    /// A dictionary of <see cref="System.String"/> and <see cref="MetalElement"/>
+    /// </param>
+    /// <param name="skipRendering">
+    /// A <see cref="System.Boolean"/> that determines whether or not to skip rendering of the newly-imported node.
+    /// </param>
+    public void SpliceWith(MetalElement element,
+                           TalOutput output,
+                           Dictionary<string, MetalElement> slotReplacements,
+                           bool skipRendering)
+    {
+      MetalElement importedElement;
+      bool performSlotReplacements;
+      
+      if(element == null)
+      {
+        throw new ArgumentNullException("element");
+      }
+      else if(output == null)
+      {
+        throw new ArgumentNullException("output");
+      }
+      
+      importedElement = (MetalElement) this.OwnerDocument.ImportNode(element, true);
+      performSlotReplacements = (importedElement is MetalMacro);
+      
+      if(performSlotReplacements == false && slotReplacements != null)
+      {
+        throw new NotSupportedException("The element to splice in is not a METAL macro, but slot replacements " +
+                                        "have been provided.  This is unsupported.");
+      }
+      else if(performSlotReplacements)
+      {
+        MetalMacro importedMacro = (MetalMacro) importedElement;
+        Dictionary<string, MetalElement> slots = importedMacro.GetAvailableSlots();
+        
+        foreach(string key in slotReplacements.Keys)
+        {
+          if(!slots.ContainsKey(key))
+          {
+            throw new MetalException(String.Format("Attempt to fill slot named '{0}' but the macro used does not " +
+                                                   "provide a slot by that name.",
+                                                   key));
+          }
+          
+          slots[key].SpliceWith(slotReplacements[key], output, true);
+        }
+      }
+      
+      this.ParentNode.ReplaceChild(importedElement, this);
+      
+      if(!skipRendering)
+      {
+        importedElement.Render(output);
+      }
+    }
+    
+    /// <summary>
+    /// Overloaded.  Splices the given <paramref name="macro"/> as a replacement for this element node.
+    /// </summary>
+    /// <param name="macro">
+    /// A <see cref="MetalMacro"/>
+    /// </param>
+    /// <param name="output">
+    /// A <see cref="TalOutput"/>
+    /// </param>
+    public void SpliceWith(MetalMacro macro, TalOutput output)
+    {
+      this.SpliceWith(macro, output, this.GetFilledSlots(this.MetalContext), false);
     }
     
     #endregion

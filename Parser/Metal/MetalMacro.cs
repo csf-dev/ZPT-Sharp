@@ -69,33 +69,42 @@ namespace CraigFowler.Web.ZPT.Metal
     /// <summary>
     /// <para>Overloaded. Retrieves the available METAL macro slots available within this macro.</para>
     /// </summary>
-    /// <param name="context">
-    /// A <see cref="Tales.TalesContext"/>
-    /// </param>
     /// <returns>
     /// A dictionary of <see cref="System.String"/> and <see cref="MetalElement"/>
     /// </returns>
-    public Dictionary<string, MetalElement> GetAvailableSlots(Tales.TalesContext context)
+    public Dictionary<string, MetalElement> GetAvailableSlots()
     {
-      return this.GetAvailableSlots(context, false);
+      return this.GetAvailableSlots(false);
     }
     
     /// <summary>
     /// <para>Overloaded. Retrieves the available METAL macro slots available within this macro.</para>
     /// </summary>
-    /// <param name="context">
-    /// A <see cref="Tales.TalesContext"/>
-    /// </param>
     /// <param name="bypassCache">
     /// A <see cref="System.Boolean"/>
     /// </param>
     /// <returns>
     /// A dictionary of <see cref="System.String"/> and <see cref="MetalElement"/>
     /// </returns>
-    public Dictionary<string, MetalElement> GetAvailableSlots(Tales.TalesContext context,bool bypassCache)
+    public Dictionary<string, MetalElement> GetAvailableSlots(bool bypassCache)
     {
-      // TODO: Write this method
-      throw new NotImplementedException();
+      Dictionary<string, MetalElement> output;
+      
+      if(this.CachedSlots != null && !bypassCache)
+      {
+        output = this.CachedSlots;
+      }
+      else
+      {
+        output = this.DiscoverSlots();
+        
+        if(!bypassCache)
+        {
+          this.CachedSlots = output;
+        }
+      }
+      
+      return output;
     }
     
     /// <summary>
@@ -151,9 +160,12 @@ namespace CraigFowler.Web.ZPT.Metal
     protected Dictionary<string, MetalElement> DiscoverSlots()
     {
       Dictionary<string, MetalElement> output = new Dictionary<string, MetalElement>();
+      XmlNamespaceManager namespaceManager = new XmlNamespaceManager(this.OwnerDocument.NameTable);
+      
+      namespaceManager.AddNamespace("metal", TalDocument.MetalNamespace);
       
       foreach(XmlNode node in this.SelectNodes(String.Format("./*[@metal:{0}]", DefineSlotAttributeName),
-                                               new XmlNamespaceManager(this.OwnerDocument.NameTable)))
+                                               namespaceManager))
       {
         if(node is MetalElement)
         {
