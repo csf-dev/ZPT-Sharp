@@ -161,8 +161,10 @@ namespace CraigFowler.Web.ZPT.Tal
 		/// </param>
 		public virtual void Render(TalOutput output)
 		{
-      foreach(XmlNode node in this.ChildNodes)
+      for(int i = 0; i < this.ChildNodes.Count; i++)
       {
+        XmlNode node = this.ChildNodes[i];
+        
         if(node is ITalElement)
         {
           ((ITalElement) node).Render(output);

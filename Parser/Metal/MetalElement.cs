@@ -266,7 +266,8 @@ namespace CraigFowler.Web.ZPT.Metal
       
       namespaceManager.AddNamespace("metal", TalDocument.MetalNamespace);
       
-      foreach(XmlNode node in this.SelectNodes(String.Format("./*[@metal:{0}]", FillSlotAttributeName),
+      foreach(XmlNode node in this.SelectNodes(String.Format("descendant::*[@metal:{0}]",
+                                                             FillSlotAttributeName),
                                                namespaceManager))
       {
         if(node is MetalElement)
@@ -399,9 +400,13 @@ namespace CraigFowler.Web.ZPT.Metal
         {
           if(!slots.ContainsKey(key))
           {
-            throw new MetalException(String.Format("Attempt to fill slot named '{0}' but the macro used does not " +
-                                                   "provide a slot by that name.",
-                                                   key));
+            string message = String.Format("Attempt to fill slot named '{0}' but the macro used does not provide a " +
+                                           "slot by that name.",
+                                           key);
+            
+            MetalException ex = new MetalException(message);
+            ex.Data["Slots available"] = slots;
+            throw ex;
           }
           
           slots[key].SpliceWith(slotReplacements[key], output, true);
@@ -525,7 +530,7 @@ namespace CraigFowler.Web.ZPT.Metal
       
       if(elementToClone.HasAttribute(DefineMacroAttributeName, TalDocument.MetalNamespace))
       {
-        IMetalDocument metalDocument = elementToClone.OwnerDocument as IMetalDocument;
+        IMetalDocument metalDocument = ownerDocument as IMetalDocument;
         MetalMacro macro = new MetalMacro(elementToClone, ownerDocument);
         
         metalDocument.Macros[macro.MacroName] = macro;

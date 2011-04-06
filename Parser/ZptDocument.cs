@@ -24,6 +24,7 @@ using CraigFowler.Web.ZPT.Metal;
 using System.Reflection;
 using System.Collections.Generic;
 using CraigFowler.Web.ZPT.Tales;
+using System.IO;
 
 namespace CraigFowler.Web.ZPT
 {
@@ -183,7 +184,9 @@ namespace CraigFowler.Web.ZPT
 		#region static methods
 		
 		/// <summary>
-		/// <para>Constructs a new object instance that implements <see cref="IZptDocument"/> and returns it.</para>
+		/// <para>
+    /// Overloaded.  Constructs a new object instance that implements <see cref="IZptDocument"/> and returns it.
+    /// </para>
 		/// </summary>
 		/// <param name="metadata">
 		/// A <see cref="ZptMetadata"/> instance that describes the document to create.
@@ -213,6 +216,40 @@ namespace CraigFowler.Web.ZPT
 			createdInstance = constructor.Invoke(new object[] { metadata });
 			return (IZptDocument) createdInstance;
 		}
+    
+    /// <summary>
+    /// <para>
+    /// Overloaded.  Constructs a new object instance that implements <see cref="IZptDocument"/> and returns it.
+    /// </para>
+    /// </summary>
+    /// <param name="documentPath">
+    /// A <see cref="System.String"/> containing a filesystem path to a ZPT document file.  The metadata and document
+    /// instance will be created based on the contents of this file.
+    /// </param>
+    /// <returns>
+    /// A <see cref="IZptDocument"/>
+    /// </returns>
+    public static IZptDocument DocumentFactory(string documentPath)
+    {
+      return DocumentFactory(ZptMetadata.GetMetadata(documentPath));
+    }
+    
+    /// <summary>
+    /// <para>
+    /// Overloaded.  Constructs a new object instance that implements <see cref="IZptDocument"/> and returns it.
+    /// </para>
+    /// </summary>
+    /// <param name="documentFile">
+    /// A <see cref="FileInfo"/> describing the filesystem location of a ZPT document file.  The metadata and document
+    /// instance will be created based on the contents of this file.
+    /// </param>
+    /// <returns>
+    /// A <see cref="IZptDocument"/>
+    /// </returns>
+    public static IZptDocument DocumentFactory(FileInfo documentFile)
+    {
+      return DocumentFactory(ZptMetadata.GetMetadata(documentFile));
+    }
 		
 		#endregion
 	}

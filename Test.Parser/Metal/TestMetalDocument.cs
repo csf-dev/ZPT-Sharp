@@ -193,22 +193,20 @@ Exception
       DirectoryInfo testDataPath = config.GetTestDataDirectoryInfo().GetDirectories("Document Root")[0];
       ZptDocumentCollection testData = ZptDocumentCollection.CreateFromFilesystem(testDataPath);
       ZptDocument document = ((ZptDocument) ((TalesStructureProvider) testData["three"])["macro-test-macro3"]);
+      XmlDocument renderedDocument = new XmlDocument();
       
       document.GetTemplateDocument().TalesContext.AddDefinition("documents", testData);
       
-      try
-      {
-        Console.WriteLine (document.GetTemplateDocument().Render());
-      }
-      catch(Exception ex)
-      {
-        foreach(object key in ex.Data.Keys)
-        {
-          Console.WriteLine ("{0,-20} : {1}", key, ex.Data[key]);
-        }
-        
-        throw;
-      }
+      renderedDocument.LoadXml(document.GetTemplateDocument().Render());
+      Assert.AreEqual("This is a slot 1 filler from the master document",
+                      renderedDocument.GetElementsByTagName("span", "http://www.w3.org/1999/xhtml")[0].InnerXml.Trim(),
+                      "First span contents correct");
+      Assert.AreEqual("This is slot 2 from the macro",
+                      renderedDocument.GetElementsByTagName("span", "http://www.w3.org/1999/xhtml")[1].InnerXml.Trim(),
+                      "Second span contents correct");
+      Assert.AreEqual("This is a slot 3 filler from the master document",
+                      renderedDocument.GetElementsByTagName("span", "http://www.w3.org/1999/xhtml")[2].InnerXml.Trim(),
+                      "Third span contents correct");
     }
     
     #endregion

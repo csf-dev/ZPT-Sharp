@@ -164,7 +164,8 @@ namespace CraigFowler.Web.ZPT.Metal
       
       namespaceManager.AddNamespace("metal", TalDocument.MetalNamespace);
       
-      foreach(XmlNode node in this.SelectNodes(String.Format("./*[@metal:{0}]", DefineSlotAttributeName),
+      foreach(XmlNode node in this.SelectNodes(String.Format("descendant::*[@metal:{0}]",
+                                                             DefineSlotAttributeName),
                                                namespaceManager))
       {
         if(node is MetalElement)

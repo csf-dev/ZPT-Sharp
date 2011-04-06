@@ -104,14 +104,6 @@ namespace Test.CraigFowler.Web.ZPT.Tales
 			              "Not a real assert, just here to prevent a compiler warning for not using 'expression'.");
 		}
 		
-		[Test]
-		[Ignore("Support for constructing classes is not yet included in my implementation of TALES.")]
-		public void TestOldStyleClassIsCalled()
-		{
-			TalesExpression expression = context.CreateExpression("someClass");
-			Assert.IsInstanceOfType(typeof(MockObject), expression.GetValue());
-		}
-		
 		#endregion
 		
 		#region string expression tests

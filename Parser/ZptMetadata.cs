@@ -57,9 +57,14 @@ namespace CraigFowler.Web.ZPT
 		public static readonly string ZptTemplateMetadataExtension = String.Format("{0}{1}",
 		                                                                           ZptTemplateDocumentExtension,
 		                                                                           METADATA_EXTENSION_SUFFIX);
-		
-		private const string DOCUMENT_INTERFACE_NAME = "CraigFowler.Web.ZPT.IZptDocument";
-		
+		/// <summary>
+    /// <para>
+    /// Read-only runtime constant.  Gets a <see cref="System.Type"/> reference to the interface that all ZPT document
+    /// classes must implement.
+    /// </para>
+    /// </summary>
+    public static readonly Type RequiredDocumentInterface = typeof(IZptDocument);
+    
 		#endregion
 		
 		#region fields
@@ -98,7 +103,7 @@ namespace CraigFowler.Web.ZPT
 					throw new ArgumentNullException("value");
 				}
 				
-				bool implementsIZptDocument = (value.GetInterface(DOCUMENT_INTERFACE_NAME, false) == typeof(IZptDocument));
+				bool implementsIZptDocument = ImplementsRequiredInterface(value);
 				
 				// If we found a type that implements IZptDocument then we use it, otherwise throw an exception
 				if(implementsIZptDocument)
@@ -315,7 +320,7 @@ namespace CraigFowler.Web.ZPT
 		#region static methods
 		
 		/// <summary>
-		/// <para>Gets an instance of <see cref="ZptMetadata"/> for a ZPT template document.</para>
+		/// <para>Overloaded.  Gets an instance of <see cref="ZptMetadata"/> for a ZPT template document.</para>
 		/// </summary>
     /// <remarks>
     /// <para>
@@ -340,37 +345,72 @@ namespace CraigFowler.Web.ZPT
 		/// </exception>
 		public static ZptMetadata GetMetadata(string documentFilePath)
 		{
-			FileInfo documentFile, metadataFile;
-			ZptMetadata output;
-			
-			if(documentFilePath == null)
-			{
-				throw new ArgumentNullException("documentFilePath");
-			}
-			
-			documentFile = new FileInfo(documentFilePath);
-			
-			if(!documentFile.Exists)
-			{
-				throw new FileNotFoundException("The ZPT template document file was not found", documentFile.FullName);
-			}
-			
-			metadataFile = GetMetadataFileInfo(documentFile.FullName);
-			
-			// It's OK if the metadata file does not exist.  If it doesn't then just use the default metadata settings.
-			if(!metadataFile.Exists)
-			{
-				output = new ZptMetadata();
-			}
-			else
-			{
-				output = CreateMetadataFromXml(metadataFile);
-			}
-			
-			output.DocumentFilePath = documentFile.FullName;
-			
-			return output;
+      FileInfo documentFile;
+      
+      if(documentFilePath == null)
+      {
+        throw new ArgumentNullException("documentFilePath");
+      }
+      
+      documentFile = new FileInfo(documentFilePath);
+      
+      return GetMetadata(documentFile);
 		}
+    
+    /// <summary>
+    /// <para>Overloaded.  Gets an instance of <see cref="ZptMetadata"/> for a ZPT template document.</para>
+    /// </summary>
+    /// <remarks>
+    /// <para>
+    /// In any non-exception scenario this method will always return a non-null <see cref="ZptMetadata"/> instance.
+    /// If the template file has no explicit metadata defined then a default metadata instance will be created for that
+    /// template.
+    /// </para>
+    /// </remarks>
+    /// <param name="documentFile">
+    /// A <see cref="FileInfo"/> that describes the location of the ZPT document file.  The metadata file will be
+    /// automatically detected based on its extension.
+    /// <seealso cref="ZptTemplateMetadataExtension"/>
+    /// </param>
+    /// <returns>
+    /// A <see cref="ZptMetadata"/> instance for the ZPT template file.
+    /// </returns>
+    /// <exception cref="ArgumentNullException">
+    /// <paramref name="documentFile"/> is null.
+    /// </exception>
+    /// <exception cref="FileNotFoundException">
+    /// No template file can be found at <paramref name="documentFile"/>.
+    /// </exception>
+    public static ZptMetadata GetMetadata(FileInfo documentFile)
+    {
+      FileInfo metadataFile;
+      ZptMetadata output;
+      
+      if(documentFile == null)
+      {
+        throw new ArgumentNullException("documentFile");
+      }
+      else if(!documentFile.Exists)
+      {
+        throw new FileNotFoundException("The ZPT template document file was not found", documentFile.FullName);
+      }
+      
+      metadataFile = GetMetadataFileInfo(documentFile.FullName);
+      
+      // It's OK if the metadata file does not exist.  If it doesn't then just use the default metadata settings.
+      if(!metadataFile.Exists)
+      {
+        output = new ZptMetadata();
+      }
+      else
+      {
+        output = CreateMetadataFromXml(metadataFile);
+      }
+      
+      output.DocumentFilePath = documentFile.FullName;
+      
+      return output;
+    }
 		
 		/// <summary>
 		/// <para>Gets information about the document metadata file, based on the path of the template file itself.</para>
@@ -438,26 +478,18 @@ namespace CraigFowler.Web.ZPT
 		/// <param name="typeToRegister">
 		/// A <see cref="Type"/>
 		/// </param>
-		/// <returns>
-		/// A <see cref="System.Boolean"/>
-		/// </returns>
-		public static bool RegisterDocumentClass(Type typeToRegister)
+		public static void RegisterDocumentClass(Type typeToRegister)
 		{
-			bool output;
-			
 			if(typeToRegister == null)
 			{
 				throw new ArgumentNullException("typeToRegister");
 			}
-			else if(typeToRegister.GetInterface(DOCUMENT_INTERFACE_NAME) != typeof(IZptDocument))
+			else if(!ImplementsRequiredInterface(typeToRegister))
 			{
 				throw new ArgumentOutOfRangeException("typeToRegister", "The type does not implement IZptDocument.");
 			}
 			
-			output = !ForeignDocumentClasses.ContainsKey(typeToRegister.FullName);
-			ForeignDocumentClasses[typeToRegister.FullName] = typeToRegister;
-			
-			return output;
+      ForeignDocumentClasses.Add(typeToRegister.FullName, typeToRegister);
 		}
 		
 		/// <summary>
@@ -481,6 +513,28 @@ namespace CraigFowler.Web.ZPT
 			return ForeignDocumentClasses.Remove(typeToRegister.FullName);
 		}
 		
+    /// <summary>
+    /// <para>
+    /// Determines whether or not the given <paramref name="targetType"/> implements the required interface to
+    /// correctly describe a ZPT document.
+    /// </para>
+    /// </summary>
+    /// <param name="targetType">
+    /// A <see cref="Type"/>
+    /// </param>
+    /// <returns>
+    /// A <see cref="System.Boolean"/>
+    /// </returns>
+    public static bool ImplementsRequiredInterface(Type targetType)
+    {
+      if(targetType == null)
+      {
+        throw new ArgumentNullException("targetType");
+      }
+      
+      return (targetType.GetInterface(RequiredDocumentInterface.FullName) == RequiredDocumentInterface);
+    }
+    
 		#endregion
 	}
 }
