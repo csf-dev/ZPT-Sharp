@@ -69,12 +69,30 @@ namespace CraigFowler.Web.ZPT.Metal
     }
     
     /// <summary>
+    /// <para>Read-only.  Gets whether or not this macro instance represents an expanded macro or not.</para>
+    /// </summary>
+    public bool IsExpanded
+    {
+      get;
+      private set;
+    }
+    
+    /// <summary>
     /// <para>Read-only.  Gets the name of this macro within the parent METAL document.</para>
     /// </summary>
     public string MacroName
     {
       get;
       private set;
+    }
+    
+    /// <summary>
+    /// <para>Gets and sets a collection of the slots that this macro has inherited by way of macro extension.</para>
+    /// </summary>
+    public Dictionary<string,MetalElement> InheritedSlots
+    {
+      get;
+      set;
     }
     
     #endregion
@@ -119,6 +137,17 @@ namespace CraigFowler.Web.ZPT.Metal
         }
       }
       
+      if(this.InheritedSlots != null)
+      {
+        foreach(string slotName in this.InheritedSlots.Keys)
+        {
+          if(!output.ContainsKey(slotName))
+          {
+            output.Add(slotName, this.InheritedSlots[slotName]);
+          }
+        }
+      }
+      
       return output;
     }
     
@@ -135,13 +164,16 @@ namespace CraigFowler.Web.ZPT.Metal
     {
       if(!hasCachedExtendMacro)
       {
-        object macro;
+        MetalMacro macro;
         PathExpression extendPath = new PathExpression(this.GetAttribute(MetalElement.ExtendMacroAttributeName,
                                                                          TalDocument.MetalNamespace),
                                                        context);
-        macro = extendPath.GetValue();
+        macro = extendPath.GetValue() as MetalMacro;
         
-        this.CachedExtendMacro = macro as MetalMacro;
+        if(macro != null)
+        {
+          this.CachedExtendMacro = macro.Expand(false, context);
+        }
         hasCachedExtendMacro = true;
       }
       
@@ -176,7 +208,8 @@ namespace CraigFowler.Web.ZPT.Metal
          * fully expanded macro stored in this instance.  We expand the macro that we are extending from as well,
          * just in case it also extends another macro.
          */
-        output = (extendMacro != null)? this.ExtendFrom(extendMacro.Expand(false, context)) : this;
+        output = (extendMacro != null)? this.ExtendFrom(extendMacro) : this;
+        output.IsExpanded = true;
         
         if(!bypassCache)
         {
@@ -236,9 +269,25 @@ namespace CraigFowler.Web.ZPT.Metal
     /// </returns>
     public override MetalMacro GetUseMacro(Tales.TalesContext context, bool bypassCache)
     {
-      MetalMacro extendMacro = this.GetExtendMacro(this.MetalContext);
+      MetalMacro output, extendMacro, useMacro;
       
-      return (extendMacro != null)? extendMacro : base.GetUseMacro(context, bypassCache);
+      extendMacro = this.GetExtendMacro(context);
+      useMacro = base.GetUseMacro(context, bypassCache);
+      
+      if(extendMacro != null && extendMacro != this)
+      {
+        output = extendMacro;
+      }
+      else if(useMacro != null && useMacro != this)
+      {
+        output = useMacro;
+      }
+      else
+      {
+        output = null;
+      }
+      
+      return output;
     }
 
     
@@ -258,15 +307,20 @@ namespace CraigFowler.Web.ZPT.Metal
       MetalMacro output;
       Dictionary<string, MetalElement> availableSlots, filledSlots;
       
-      
       if(extendMacro == null)
       {
         throw new ArgumentNullException("extendMacro");
       }
+      else if(!extendMacro.IsExpanded)
+      {
+        throw new ArgumentException("Macro to extend from is not expanded.");
+      }
       
       output = (MetalMacro) this.OwnerDocument.ImportNode(extendMacro, true);
+      output.InheritedSlots = extendMacro.GetAvailableSlots();
+      
       availableSlots = output.GetAvailableSlots();
-      filledSlots = this.GetFilledSlots(this.MetalContext);
+      filledSlots = this.GetFilledSlots();
       
       foreach(string key in filledSlots.Keys)
       {
@@ -299,6 +353,7 @@ namespace CraigFowler.Web.ZPT.Metal
     /// </param>
     protected override void CloneFrom (XmlElement elementToClone)
     {
+      MetalMacro cloneMacro = elementToClone as MetalMacro;
       base.CloneFrom (elementToClone);
       
       if(!this.HasAttribute(MetalElement.DefineMacroAttributeName, TalDocument.MetalNamespace))
@@ -310,6 +365,28 @@ namespace CraigFowler.Web.ZPT.Metal
       }
       
       this.MacroName = this.GetAttribute(MetalElement.DefineMacroAttributeName, TalDocument.MetalNamespace);
+      
+      // If the element to clone is a macro already then clone a few of its important properties also
+      if(cloneMacro != null)
+      {
+        Dictionary<string, MetalElement> filledSlots = this.GetFilledSlots();
+        
+        foreach(string name in cloneMacro.InheritedSlots.Keys)
+        {
+          if(filledSlots.ContainsKey(name))
+          {
+            this.InheritedSlots.Add(name, filledSlots[name]);
+          }
+          else
+          {
+            MetalElement imported = (MetalElement) this.OwnerDocument.ImportNode(cloneMacro.InheritedSlots[name],
+                                                                                 true);
+            this.InheritedSlots.Add(name, imported);
+          }
+        }
+        
+        this.IsExpanded = cloneMacro.IsExpanded;
+      }
     }
 
     /// <summary>
@@ -325,33 +402,77 @@ namespace CraigFowler.Web.ZPT.Metal
       
       namespaceManager.AddNamespace("metal", TalDocument.MetalNamespace);
       
-      foreach(XmlNode node in this.SelectNodes(String.Format("descendant::*[@metal:{0}]",
+      foreach(XmlNode node in this.SelectNodes(String.Format("descendant::*[@metal:{0}] | descendant::metal:*[@{0}]",
                                                              DefineSlotAttributeName),
                                                namespaceManager))
       {
-        if(node is MetalElement)
+        AddSlot(node, ref output);
+      }
+      
+      if(this.GetExtendMacro(this.MetalContext) != null)
+      {
+        foreach(XmlNode node in this.SelectNodes(String.Format("descendant::*[@metal:{0}] | descendant::metal:*[@{0}]",
+                                                               FillSlotAttributeName),
+                                                 namespaceManager))
         {
-          MetalElement element = (MetalElement) node;
-          string name = element.GetAttribute(DefineSlotAttributeName, TalDocument.MetalNamespace);
-          
-          if(String.IsNullOrEmpty(name))
-          {
-            throw new InvalidOperationException("Null or empty define-slot name.");
-          }
-          
-          output.Add(name, element);
-        }
-        else
-        {
-          string message = "A non-MetalElement node was found whilst looking for define-slot definitions";
-          InvalidOperationException ex = new InvalidOperationException(message);
-          ex.Data["Node"] = node;
-          ex.Data["Current element"] = this;
-          throw ex;
+          AddSlot(node, ref output);
         }
       }
       
+      
       return output;
+    }
+    
+    /// <summary>
+    /// <para>Adds a slot to an output list of available slots to fill.</para>
+    /// </summary>
+    /// <param name="node">
+    /// An <see cref="XmlNode"/>
+    /// </param>
+    /// <param name="output">
+    /// A dictionary of <see cref="System.String"/> and <see cref="MetalElement"/>.
+    /// </param>
+    protected void AddSlot(XmlNode node, ref Dictionary<string, MetalElement> output)
+    {
+      MetalElement element = node as MetalElement;
+      string name = null;
+      
+      if(element == null)
+      {
+        string message = "A non-MetalElement node was found whilst looking for define-slot definitions";
+        InvalidOperationException ex = new InvalidOperationException(message);
+        ex.Data["Node"] = node;
+        ex.Data["Current element"] = this;
+        throw ex;
+      }
+      
+      if(element.HasAttribute(DefineSlotAttributeName, TalDocument.MetalNamespace))
+      {
+        name = element.GetAttribute(DefineSlotAttributeName, TalDocument.MetalNamespace);
+      }
+      else if(this.GetExtendMacro(this.MetalContext) != null &&
+              element.HasAttribute(FillSlotAttributeName, TalDocument.MetalNamespace))
+      {
+        name = element.GetAttribute(FillSlotAttributeName, TalDocument.MetalNamespace);
+      }
+      else if(element.NamespaceURI == TalDocument.MetalNamespace &&
+              element.HasAttribute(DefineSlotAttributeName))
+      {
+        name = element.GetAttribute(DefineSlotAttributeName);
+      }
+      else if(this.GetExtendMacro(this.MetalContext) != null &&
+              element.NamespaceURI == TalDocument.MetalNamespace &&
+              element.HasAttribute(FillSlotAttributeName))
+      {
+        name = element.GetAttribute(FillSlotAttributeName);
+      }
+      
+      if(String.IsNullOrEmpty(name))
+      {
+        throw new InvalidOperationException("Null or empty define-slot name.");
+      }
+      
+      output.Add(name, element);
     }
     
     #endregion
@@ -380,6 +501,10 @@ namespace CraigFowler.Web.ZPT.Metal
     {
       this.CachedSlots = null;
       this.CachedExtendMacro = null;
+      this.CachedExpandedMacro = null;
+      this.IsExpanded = false;
+      this.MacroName = null;
+      this.InheritedSlots = new Dictionary<string, MetalElement>();
       
       hasCachedExtendMacro = false;
     }

@@ -227,6 +227,11 @@ namespace CraigFowler.Web.ZPT.Metal
         }
       }
       
+      if(output != null)
+      {
+        output = output.Expand(false, context);
+      }
+      
       return output;
     }
     
@@ -236,9 +241,6 @@ namespace CraigFowler.Web.ZPT.Metal
     /// indexed by the value of the name of the slot that they fill.
     /// </para>
     /// </summary>
-    /// <param name="context">
-    /// A <see cref="Tales.TalesContext"/>
-    /// </param>
     /// <returns>
     /// <para>
     /// A dictionary of <see cref="System.String"/> and <see cref="MetalElement"/>.
@@ -253,16 +255,10 @@ namespace CraigFowler.Web.ZPT.Metal
     /// If <see cref="GetUseMacro(Tales.TalesContext)"/> returns a null reference (indicating that this element
     /// instance does not contain a 'use-macro' directive).
     /// </exception>
-    public Dictionary<string,MetalElement> GetFilledSlots(Tales.TalesContext context)
+    public Dictionary<string,MetalElement> GetFilledSlots()
     {
       Dictionary<string,MetalElement> output = new Dictionary<string, MetalElement>();
-      MetalMacro useMacro = this.GetUseMacro(context);
       XmlNamespaceManager namespaceManager = new XmlNamespaceManager(this.OwnerDocument.NameTable);
-      
-      if(useMacro == null)
-      {
-        throw new MetalException("This METAL element does not contain a 'use-macro' directive.");
-      }
       
       namespaceManager.AddNamespace("metal", TalDocument.MetalNamespace);
       
@@ -303,11 +299,11 @@ namespace CraigFowler.Web.ZPT.Metal
     /// </param>
     public override void Render (TalOutput output)
     {
-      MetalMacro macroElement = GetUseMacro(this.MetalContext);
+      MetalMacro macroElement = this.GetUseMacro(this.MetalContext);
       
       if(macroElement != null)
       {
-        this.SpliceWith(macroElement.Expand(false, this.MetalContext), output);
+        this.SpliceWith(macroElement, output);
       }
       else
       {
@@ -391,10 +387,22 @@ namespace CraigFowler.Web.ZPT.Metal
         throw new NotSupportedException("The element to splice in is not a METAL macro, but slot replacements " +
                                         "have been provided.  This is unsupported.");
       }
+      else if(performSlotReplacements && slotReplacements == null)
+      {
+        throw new ArgumentNullException("slotReplacements",
+                                        "Slot replacements may not be null when we are splicing with a METAL macro.");
+      }
       else if(performSlotReplacements)
       {
         MetalMacro importedMacro = (MetalMacro) importedElement;
-        Dictionary<string, MetalElement> slots = importedMacro.GetAvailableSlots();
+        Dictionary<string, MetalElement> slots;
+        
+        if(!importedMacro.IsExpanded)
+        {
+          throw new MetalException("METAL macro is not expanded.");
+        }
+        
+        slots = importedMacro.GetAvailableSlots();
         
         foreach(string key in slotReplacements.Keys)
         {
@@ -413,7 +421,16 @@ namespace CraigFowler.Web.ZPT.Metal
         }
       }
       
-      this.ParentNode.ReplaceChild(importedElement, this);
+      // Replace the current node with the node from the 
+      if(this.ParentNode == null)
+      {
+        this.OwnerDocument.RemoveAll();
+        this.OwnerDocument.AppendChild(importedElement);
+      }
+      else
+      {
+        this.ParentNode.ReplaceChild(importedElement, this);
+      }
       
       if(!skipRendering)
       {
@@ -432,7 +449,7 @@ namespace CraigFowler.Web.ZPT.Metal
     /// </param>
     public void SpliceWith(MetalMacro macro, TalOutput output)
     {
-      this.SpliceWith(macro, output, this.GetFilledSlots(this.MetalContext), false);
+      this.SpliceWith(macro, output, this.GetFilledSlots(), false);
     }
     
     #endregion
@@ -539,6 +556,10 @@ namespace CraigFowler.Web.ZPT.Metal
       else
       {
         output = new MetalElement(elementToClone, ownerDocument);
+        if(elementToClone is MetalElement)
+        {
+          output.CachedUseMacro = ((MetalElement) elementToClone).CachedUseMacro;
+        }
       }
       
       return output;
