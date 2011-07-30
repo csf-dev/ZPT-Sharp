@@ -61,7 +61,7 @@ namespace Test.CraigFowler.Web.ZPT
 			ZptMetadata metadata;
 			IZptDocument document;
 			
-			Assert.IsTrue(ZptMetadata.RegisterDocumentClass(typeof(ZptChildDocument)), "Register the new document type");
+			ZptMetadata.RegisterDocumentClass(typeof(ZptChildDocument));
 			
 			metadata = new ZptMetadata();
 			metadata.DocumentClassName = "CraigFowler.Web.ZPT.Mocks.ZptChildDocument";
@@ -93,6 +93,15 @@ namespace Test.CraigFowler.Web.ZPT
 			Assert.AreEqual(EXPECTED_TEST_DOCUMENT_RENDERING, document.Render(), "Correct rendering of loaded document");
 		}
 		
+    [Test]
+    public void TestImplementsRequiredInterface()
+    {
+      Assert.IsTrue(ZptMetadata.ImplementsRequiredInterface(typeof(ZptDocument)),
+                    "ZptDocument implements the required interface");
+      Assert.IsFalse(ZptMetadata.ImplementsRequiredInterface(typeof(System.String)),
+                    "System.String does not implement the required interface");
+    }
+    
 		#endregion
 	}
 }

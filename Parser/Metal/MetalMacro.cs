@@ -24,6 +24,7 @@ using System.Xml;
 using CraigFowler.Web.ZPT.Tal;
 using CraigFowler.Web.ZPT.Tales;
 using CraigFowler.Web.ZPT.Metal.Exceptions;
+using CraigFowler.Web.ZPT.Tales.Expressions;
 
 namespace CraigFowler.Web.ZPT.Metal
 {
@@ -32,13 +33,37 @@ namespace CraigFowler.Web.ZPT.Metal
 	/// </summary>
 	public class MetalMacro : MetalElement
 	{
+    #region fields
+    
+    private bool hasCachedExtendMacro;
+    
+    #endregion
+    
     #region properties
     
     /// <summary>
-    /// <para>Read-only.  Gets the slots that this macro contains.</para>
+    /// <para>
+    /// Read-only.  Gets a cached dictionary of <see cref="System.String"/> and <see cref="MetalElement"/> that
+    /// contains the METAL slots found within this macro.
+    /// </para>
     /// </summary>
-    public Dictionary<string, MetalSlot> Slots
-    {
+    protected Dictionary<string, MetalElement> CachedSlots  {
+      get;
+      private set;
+    }
+    
+    /// <summary>
+    /// <para>Read-only.  Gets a cached <see cref="MetalMacro"/> that this instance extends.</para>
+    /// </summary>
+    protected MetalMacro CachedExtendMacro  {
+      get;
+      private set;
+    }
+    
+    /// <summary>
+    /// <para>A cached <see cref="MetalMacro"/> that was created during the <see cref="Expand"/> process.</para>
+    /// </summary>
+    protected MetalMacro CachedExpandedMacro {
       get;
       private set;
     }
@@ -52,29 +77,215 @@ namespace CraigFowler.Web.ZPT.Metal
       private set;
     }
     
-    /// <summary>
-    /// <para>
-    /// Read-only.  Gets a <see cref="TalesPath"/> for the <see cref="MetalMacro"/> that this instance extends.
-    /// </para>
-    /// </summary>
-    public TalesPath ExtendMacroPath
-    {
-      get;
-      private set;
-    }
-    
-    /// <summary>
-    /// <para>Read-only.  Gets a reference to the <see cref="MetalMacro"/> that this instance extends.</para>
-    /// </summary>
-    public MetalMacro ExtendMacro
-    {
-      get;
-      private set;
-    }
-    
     #endregion
     
     #region methods
+    
+    /// <summary>
+    /// <para>Overloaded. Retrieves the available METAL macro slots available within this macro.</para>
+    /// </summary>
+    /// <returns>
+    /// A dictionary of <see cref="System.String"/> and <see cref="MetalElement"/>
+    /// </returns>
+    public Dictionary<string, MetalElement> GetAvailableSlots()
+    {
+      return this.GetAvailableSlots(false);
+    }
+    
+    /// <summary>
+    /// <para>Overloaded. Retrieves the available METAL macro slots available within this macro.</para>
+    /// </summary>
+    /// <param name="bypassCache">
+    /// A <see cref="System.Boolean"/>
+    /// </param>
+    /// <returns>
+    /// A dictionary of <see cref="System.String"/> and <see cref="MetalElement"/>
+    /// </returns>
+    public Dictionary<string, MetalElement> GetAvailableSlots(bool bypassCache)
+    {
+      Dictionary<string, MetalElement> output;
+      
+      if(this.CachedSlots != null && !bypassCache)
+      {
+        output = this.CachedSlots;
+      }
+      else
+      {
+        output = this.DiscoverSlots();
+        
+        if(!bypassCache)
+        {
+          this.CachedSlots = output;
+        }
+      }
+      
+      return output;
+    }
+    
+    /// <summary>
+    /// <para>Gets a reference to a <see cref="MetalMacro"/> that this macro instance should extend.</para>
+    /// </summary>
+    /// <param name="context">
+    /// A <see cref="Tales.TalesContext"/>
+    /// </param>
+    /// <returns>
+    /// A <see cref="MetalMacro"/>, which might be null if this instance does not extend a macro.
+    /// </returns>
+    public MetalMacro GetExtendMacro(Tales.TalesContext context)
+    {
+      if(!hasCachedExtendMacro)
+      {
+        object macro;
+        PathExpression extendPath = new PathExpression(this.GetAttribute(MetalElement.ExtendMacroAttributeName,
+                                                                         TalDocument.MetalNamespace),
+                                                       context);
+        macro = extendPath.GetValue();
+        
+        this.CachedExtendMacro = macro as MetalMacro;
+        hasCachedExtendMacro = true;
+      }
+      
+      return this.CachedExtendMacro;
+    }
+    
+    /// <summary>
+    /// <para>
+    /// Fully expands a METAL macro element by getting any macros that it extends and splicing them into this macro.
+    /// The returned/aggregate macro contains all of the slots from all macros in the inheritance chain.
+    /// </para>
+    /// </summary>
+    /// <param name="bypassCache">
+    /// A <see cref="System.Boolean"/> that indicates whether or not to bypass the caching of the macro expansion
+    /// process.
+    /// </param>
+    /// <param name="context">
+    /// A <see cref="TalesContext"/> with which to use for locating the macro.
+    /// </param>
+    /// <returns>
+    /// A <see cref="MetalMacro"/>
+    /// </returns>
+    public MetalMacro Expand(bool bypassCache, TalesContext context)
+    {
+      MetalMacro output;
+      
+      if(this.CachedExpandedMacro == null || bypassCache)
+      {
+        MetalMacro extendMacro = this.GetExtendMacro(context);
+        
+        /* If there is a macro to extend from then get the result of that extension, otherwise we already have a
+         * fully expanded macro stored in this instance.  We expand the macro that we are extending from as well,
+         * just in case it also extends another macro.
+         */
+        output = (extendMacro != null)? this.ExtendFrom(extendMacro.Expand(false, context)) : this;
+        
+        if(!bypassCache)
+        {
+          this.CachedExpandedMacro = output;
+        }
+      }
+      else
+      {
+        output = this.CachedExpandedMacro;
+      }
+      
+      return output;
+    }
+    
+    /// <summary>
+    /// <para>Overridden.  Renders this node to the output stream.</para>
+    /// </summary>
+    /// <remarks>
+    /// <para>
+    /// METAL macros that extend other macros should be expanded before they are rendered.  Otherwise they are rendered
+    /// normally.
+    /// </para>
+    /// </remarks>
+    /// <param name="output">
+    /// A <see cref="TalOutput"/>
+    /// </param>
+    public override void Render (TalOutput output)
+    {
+      if(this.GetExtendMacro(this.MetalContext) != null)
+      {
+        this.Expand(false, this.MetalContext).Render(output);
+      }
+      else
+      {
+        base.Render(output);
+      }
+    }
+    
+    /// <summary>
+    /// <para>
+    /// Overridden, overloaded.  Gets a <see cref="MetalMacro"/> instance for which to use with this element.
+    /// </para>
+    /// </summary>
+    /// <remarks>
+    /// <para>
+    /// This method is additionally capable of discovering and returning an <c>extend-macro</c> if appropriate.
+    /// </para>
+    /// </remarks>
+    /// <param name="context">
+    /// A <see cref="Tales.TalesContext"/>
+    /// </param>
+    /// <param name="bypassCache">
+    /// A <see cref="System.Boolean"/>
+    /// </param>
+    /// <returns>
+    /// A <see cref="MetalMacro"/>
+    /// </returns>
+    public override MetalMacro GetUseMacro(Tales.TalesContext context, bool bypassCache)
+    {
+      MetalMacro extendMacro = this.GetExtendMacro(this.MetalContext);
+      
+      return (extendMacro != null)? extendMacro : base.GetUseMacro(context, bypassCache);
+    }
+
+    
+    /// <summary>
+    /// <para>
+    /// Creates a new <see cref="MetalMacro"/> instance that is the result of an <c>extend-macro</c> directive.
+    /// </para>
+    /// </summary>
+    /// <param name="extendMacro">
+    /// A <see cref="MetalMacro"/> - the macro to extend from.
+    /// </param>
+    /// <returns>
+    /// A <see cref="MetalMacro"/> that is the result of the extension.
+    /// </returns>
+    protected MetalMacro ExtendFrom(MetalMacro extendMacro)
+    {
+      MetalMacro output;
+      Dictionary<string, MetalElement> availableSlots, filledSlots;
+      
+      
+      if(extendMacro == null)
+      {
+        throw new ArgumentNullException("extendMacro");
+      }
+      
+      output = (MetalMacro) this.OwnerDocument.ImportNode(extendMacro, true);
+      availableSlots = output.GetAvailableSlots();
+      filledSlots = this.GetFilledSlots(this.MetalContext);
+      
+      foreach(string key in filledSlots.Keys)
+      {
+        if(!availableSlots.ContainsKey(key))
+        {
+          string message = String.Format("Attempt to fill slot named '{0}' but the macro used does not provide a " +
+                                         "slot by that name.",
+                                         key);
+          
+          MetalException ex = new MetalException(message);
+          ex.Data["Slots available"] = availableSlots;
+          throw ex;
+        }
+        
+        availableSlots[key].ParentNode.ReplaceChild(filledSlots[key], availableSlots[key]);
+      }
+      
+      return output;
+    }
     
     /// <summary>
     /// <para>
@@ -89,113 +300,58 @@ namespace CraigFowler.Web.ZPT.Metal
     protected override void CloneFrom (XmlElement elementToClone)
     {
       base.CloneFrom (elementToClone);
-      this.GetMacroInformation();
-    }
-    
-    /// <summary>
-    /// <para>
-    /// Populates the members of this instance:  <see cref="MacroName"/> and <see cref="Slots"/> with information
-    /// found on the element and its children.
-    /// </para>
-    /// </summary>
-    protected virtual void GetMacroInformation()
-    {
+      
       if(!this.HasAttribute(MetalElement.DefineMacroAttributeName, TalDocument.MetalNamespace))
       {
-        string message = String.Format("The current element does not contain a {0}:{1} attribute.  " +
+        string message = String.Format("The current element does not contain a metal:{0} attribute.  " +
                                        "It is not a METAL macro definition.",
-                                       TalDocument.MetalNamespace,
                                        MetalElement.DefineMacroAttributeName);
         throw new MetalException(message);
       }
       
-      // Get the macro name (mandatory)
       this.MacroName = this.GetAttribute(MetalElement.DefineMacroAttributeName, TalDocument.MetalNamespace);
-      
-      // Get the TALES path to another macro that this macro extends (optional)
-      if(this.HasAttribute(MetalElement.ExtendMacroAttributeName, TalDocument.MetalNamespace))
-      {
-        this.ExtendMacroPath = new TalesPath(this.GetAttribute(MetalElement.ExtendMacroAttributeName,
-                                                               TalDocument.MetalNamespace));
-      }
-      else
-      {
-        this.ExtendMacroPath = null;
-      }
-      
-      // Get the slots defined within this macro (might be none)
-      this.Slots = DiscoverSlots();
     }
 
     /// <summary>
     /// <para>Overloaded.  Discovers METAL slot definitions within this <see cref="MetalMacro"/> node instance.</para>
     /// </summary>
     /// <returns>
-    /// A disctionary of <see cref="System.String"/> and <see cref="MetalSlot"/>
+    /// A disctionary of <see cref="System.String"/> and <see cref="MetalElement"/>
     /// </returns>
-    protected Dictionary<string, MetalSlot> DiscoverSlots()
+    protected Dictionary<string, MetalElement> DiscoverSlots()
     {
-      Dictionary<string, MetalSlot> output = new Dictionary<string, MetalSlot>();
+      Dictionary<string, MetalElement> output = new Dictionary<string, MetalElement>();
+      XmlNamespaceManager namespaceManager = new XmlNamespaceManager(this.OwnerDocument.NameTable);
       
-      // Discover MetalSlots within the macro node.
-      this.DiscoverSlots(this, ref output);
+      namespaceManager.AddNamespace("metal", TalDocument.MetalNamespace);
+      
+      foreach(XmlNode node in this.SelectNodes(String.Format("descendant::*[@metal:{0}]",
+                                                             DefineSlotAttributeName),
+                                               namespaceManager))
+      {
+        if(node is MetalElement)
+        {
+          MetalElement element = (MetalElement) node;
+          string name = element.GetAttribute(DefineSlotAttributeName, TalDocument.MetalNamespace);
+          
+          if(String.IsNullOrEmpty(name))
+          {
+            throw new InvalidOperationException("Null or empty define-slot name.");
+          }
+          
+          output.Add(name, element);
+        }
+        else
+        {
+          string message = "A non-MetalElement node was found whilst looking for define-slot definitions";
+          InvalidOperationException ex = new InvalidOperationException(message);
+          ex.Data["Node"] = node;
+          ex.Data["Current element"] = this;
+          throw ex;
+        }
+      }
       
       return output;
-    }
-    
-    /// <summary>
-    /// <para>
-    /// Overloaded.  Discovers METAL slot definitions within a <see cref="XmlElement"/> and its children.
-    /// This method will recurse into itself where appropriate.
-    /// </para>
-    /// </summary>
-    /// <param name="currentNode">
-    /// A <see cref="XmlElement"/>
-    /// </param>
-    /// <param name="output">
-    /// A dictionary of <see cref="System.String"/> and <see cref="MetalSlot"/>
-    /// </param>
-    protected void DiscoverSlots(XmlElement currentNode, ref Dictionary<string, MetalSlot> output)
-    {
-      if(currentNode == null)
-      {
-        throw new ArgumentNullException("currentNode");
-      }
-      else if(output == null)
-      {
-        throw new ArgumentNullException("output");
-      }
-      
-      /* If the current node is a MetalSlot then we probably want to add it to the output collection.  The only
-       * possible hiccup could be if we encounter the same slot twice within a macro (slot names must be unique within
-       * a macro).
-       */
-      if(currentNode is MetalSlot)
-      {
-        MetalSlot slot = (MetalSlot) currentNode;
-        
-        if(output.ContainsKey(slot.SlotName))
-        {
-          throw new MetalException(String.Format("Duplicate definition for METAL slot '{0}'", slot.SlotName));
-        }
-        
-        output.Add(slot.SlotName, slot);
-      }
-      
-      /* Recurse into ourself for every XmlElement contained within the current element in order to discover
-       * more slots.
-       * 
-       * Another workaround for the 'foreach' bug - there's a danger that if I use foreach here I will end up
-       */
-      for(int i = 0; i < currentNode.ChildNodes.Count; i++)
-      {
-        XmlNode node = currentNode.ChildNodes[i];
-        
-        if(node is XmlElement)
-        {
-          DiscoverSlots((XmlElement) node, ref output);
-        }
-      }
     }
     
     #endregion
@@ -222,10 +378,10 @@ namespace CraigFowler.Web.ZPT.Metal
                       string namespaceURI,
                       XmlDocument document) : base(prefix, localName, namespaceURI, document)
     {
-      this.Slots = new Dictionary<string, MetalSlot>();
-      this.MacroName = null;
-      this.ExtendMacro = null;
-      this.ExtendMacroPath = null;
+      this.CachedSlots = null;
+      this.CachedExtendMacro = null;
+      
+      hasCachedExtendMacro = false;
     }
     
     /// <summary>
@@ -234,10 +390,21 @@ namespace CraigFowler.Web.ZPT.Metal
     /// <param name="elementToClone">
     /// A <see cref="XmlElement"/>
     /// </param>
-    public MetalMacro(XmlElement elementToClone) : this(elementToClone.Prefix,
-                                                        elementToClone.LocalName,
-                                                        elementToClone.NamespaceURI,
-                                                        elementToClone.OwnerDocument)
+    public MetalMacro(XmlElement elementToClone) : this(elementToClone, elementToClone.OwnerDocument) {}
+    
+    /// <summary>
+    /// <para>Serves as a copy-constructor for an <see cref="XmlElement"/> node.</para>
+    /// </summary>
+    /// <param name="elementToClone">
+    /// A <see cref="XmlElement"/>
+    /// </param>
+    /// <param name="ownerDocument">
+    /// An <see cref="XmlDocument"/>
+    /// </param>
+    public MetalMacro(XmlElement elementToClone, XmlDocument ownerDocument) : this(elementToClone.Prefix,
+                                                                                   elementToClone.LocalName,
+                                                                                   elementToClone.NamespaceURI,
+                                                                                   ownerDocument)
     {
       this.CloneFrom(elementToClone);
     }

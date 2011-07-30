@@ -18,6 +18,8 @@ namespace Test.CraigFowler.Web.ZPT.Tal
 	public class TalIntegrationTests
 	{
 		[Test]
+    [Explicit("See ignore notes")]
+    [Ignore("This test is being moved to the METAL integration tests, as the input/output directories now contain METAL documents.")]
 		public void TestRenderDocuments()
 		{
 			List<FileInfo> inputFiles, outputFiles;
@@ -87,7 +89,8 @@ namespace Test.CraigFowler.Web.ZPT.Tal
 				                String.Format("Test rendering of '{0}' matches '{1}'", inputFilename, outputFilename));
 			}
 		}
-		[Test]
+		
+    [Test]
 		[Category("Information")]
 		public void TestRenderDocumentsWithoutWhitespace()
 		{

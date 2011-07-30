@@ -23,6 +23,7 @@ using System.Xml;
 using CraigFowler.Web.ZPT.Tal;
 using CraigFowler.Web.ZPT.Tales;
 using CraigFowler.Web.ZPT.Metal.Exceptions;
+using System.Collections.Generic;
 
 namespace CraigFowler.Web.ZPT.Metal
 {
@@ -63,29 +64,28 @@ namespace CraigFowler.Web.ZPT.Metal
     #region properties
     
     /// <summary>
-    /// <para>Read-only.  Gets the name of the <see cref="MetalSlot"/> that this element fills.</para>
+    /// <para>
+    /// Read-only.  Gets a reference to a <see cref="MetalMacro"/> that <see cref="GetUseMacro(Tales.TalesContext)"/>
+    /// has cached (to prevent repeated resolution of expressions to fetch a macro instance).
+    /// </para>
     /// </summary>
-    protected string FillSlotName
+    protected MetalMacro CachedUseMacro
     {
       get;
       private set;
     }
     
     /// <summary>
-    /// <para>Read-only.  Gets a reference to the <see cref="MetalSlot"/> that this element fills.</para>
+    /// <para>
+    /// Read-only.  Gets the <see cref="TalesContext"/> for performing METAL-related actions.  This is equivalent to
+    /// the TALES context of the owner document (since TAL-style define directives are not available for METAL).
+    /// </para>
     /// </summary>
-    public MetalSlot FillSlot
+    protected TalesContext MetalContext
     {
-      get;
-      private set;
-    }
-    
-    /// <summary>
-    /// <para>Gets and sets a reference to the parent <see cref="MetalMacro"/> that this slot resides within.</para>
-    /// </summary>
-    public MetalMacro ParentMacro {
-      get;
-      protected set;
+      get {
+        return this.OwnerTemplateDocument.TalesContext;
+      }
     }
     
     #endregion
@@ -117,14 +117,13 @@ namespace CraigFowler.Web.ZPT.Metal
         
         if(node.NodeType == XmlNodeType.Element)
         {
-          MetalElement element = MetalElementFactory((XmlElement) node);
-          element.ParentMacro = this.ParentMacro;
+          MetalElement element = MetalElementFactory((XmlElement) node, this.OwnerDocument);
           
           this.AppendChild(element);
         }
         else
         {
-          this.AppendChild(node.CloneNode(true));
+          this.AppendChild(this.OwnerDocument.ImportNode(node, true));
         }
       }
     }
@@ -139,12 +138,26 @@ namespace CraigFowler.Web.ZPT.Metal
     /// </returns>
     protected string GetUseMacroPath()
     {
-      return this.GetAttribute(UseMacroAttributeName, TalDocument.MetalNamespace);
+      string output = this.GetAttribute(UseMacroAttributeName, TalDocument.MetalNamespace);
+      
+      if(output == String.Empty)
+      {
+        output = null;
+      }
+      
+      return output;
     }
     
     /// <summary>
-    /// <para>Gets a <see cref="MetalMacro"/> instance for which to use with this element.</para>
+    /// <para>Overloaded.  Gets a <see cref="MetalMacro"/> instance for which to use with this element.</para>
     /// </summary>
+    /// <remarks>
+    /// <para>
+    /// This method provides caching via the <see cref="CachedUseMacro"/> property.  After the initial call to this
+    /// method, subsequent calls will return the cached instance rather than re-evaluating the use-macro expression
+    /// repeatedly.
+    /// </para>
+    /// </remarks>
     /// <param name="context">
     /// A <see cref="Tales.TalesContext"/>
     /// </param>
@@ -152,6 +165,32 @@ namespace CraigFowler.Web.ZPT.Metal
     /// A <see cref="MetalMacro"/>
     /// </returns>
     public MetalMacro GetUseMacro(Tales.TalesContext context)
+    {
+      return this.GetUseMacro(context, false);
+    }
+    
+    /// <summary>
+    /// <para>Overloaded.  Gets a <see cref="MetalMacro"/> instance for which to use with this element.</para>
+    /// </summary>
+    /// <remarks>
+    /// <para>
+    /// This method provides caching via the <see cref="CachedUseMacro"/> property.  After the initial call to this
+    /// method, subsequent calls will return the cached instance rather than re-evaluating the use-macro expression
+    /// repeatedly.  This overload provides a mechanism to bypass that cache, via the <paramref name="bypassCache"/>
+    /// parameter.
+    /// </para>
+    /// </remarks>
+    /// <param name="context">
+    /// A <see cref="Tales.TalesContext"/> to use for the discovery of the macro.
+    /// </param>
+    /// <param name="bypassCache">
+    /// A <see cref="System.Boolean"/> that determines whether or not <see cref="CachedUseMacro"/> is used or not
+    /// (if present)
+    /// </param>
+    /// <returns>
+    /// A <see cref="MetalMacro"/>
+    /// </returns>
+    public virtual MetalMacro GetUseMacro(Tales.TalesContext context, bool bypassCache)
     {
       MetalMacro output = null;
       string path = this.GetUseMacroPath();
@@ -161,7 +200,11 @@ namespace CraigFowler.Web.ZPT.Metal
         throw new ArgumentNullException("context");
       }
       
-      if(path != null)
+      if(this.CachedUseMacro != null && !bypassCache)
+      {
+        output = this.CachedUseMacro;
+      }
+      else if(path != null)
       {
         TalesExpression expression = context.CreateExpression(path);
         object expressionValue = expression.GetValue();
@@ -170,13 +213,226 @@ namespace CraigFowler.Web.ZPT.Metal
         
         if(output == null)
         {
-          MetalException ex = new MetalException("Error retrieving macro whilst parsing 'use-macro' directive.");
+          MetalException ex = new MetalException("Error retrieving macro; a 'use-macro' path expression is present " +
+                                                 "but it does not evaluate to a METAL macro.");
           ex.Data["Path"] = path;
+          ex.Data["Expression value"] = expressionValue;
+          ex.Data["Expression value type"] = (expressionValue != null)? expressionValue.GetType().FullName : "null";
+          throw ex;
+        }
+        
+        if(!bypassCache)
+        {
+          this.CachedUseMacro = output;
+        }
+      }
+      
+      return output;
+    }
+    
+    /// <summary>
+    /// <para>
+    /// Gets a collection of the child elements of the current element that contain METAL 'fill-slot' attributes,
+    /// indexed by the value of the name of the slot that they fill.
+    /// </para>
+    /// </summary>
+    /// <param name="context">
+    /// A <see cref="Tales.TalesContext"/>
+    /// </param>
+    /// <returns>
+    /// <para>
+    /// A dictionary of <see cref="System.String"/> and <see cref="MetalElement"/>.
+    /// </para>
+    /// <para>
+    /// If <see cref="GetUseMacro(Tales.TalesContext)"/> returns a non-null <see cref="MetalMacro"/> instance then this
+    /// method will always return a non-null collection, although it may be empty (if the use-macro directive contains
+    /// no fill-slot directives).
+    /// </para>
+    /// </returns>
+    /// <exception cref="MetalException">
+    /// If <see cref="GetUseMacro(Tales.TalesContext)"/> returns a null reference (indicating that this element
+    /// instance does not contain a 'use-macro' directive).
+    /// </exception>
+    public Dictionary<string,MetalElement> GetFilledSlots(Tales.TalesContext context)
+    {
+      Dictionary<string,MetalElement> output = new Dictionary<string, MetalElement>();
+      MetalMacro useMacro = this.GetUseMacro(context);
+      XmlNamespaceManager namespaceManager = new XmlNamespaceManager(this.OwnerDocument.NameTable);
+      
+      if(useMacro == null)
+      {
+        throw new MetalException("This METAL element does not contain a 'use-macro' directive.");
+      }
+      
+      namespaceManager.AddNamespace("metal", TalDocument.MetalNamespace);
+      
+      foreach(XmlNode node in this.SelectNodes(String.Format("descendant::*[@metal:{0}]",
+                                                             FillSlotAttributeName),
+                                               namespaceManager))
+      {
+        if(node is MetalElement)
+        {
+          MetalElement element = (MetalElement) node;
+          string name = element.GetAttribute(FillSlotAttributeName, TalDocument.MetalNamespace);
+          
+          if(String.IsNullOrEmpty(name))
+          {
+            throw new InvalidOperationException("Null or empty fill-slot name.");
+          }
+          
+          output.Add(name, element);
+        }
+        else
+        {
+          string message = "A non-MetalElement node was found whilst looking for fill-slot definitions";
+          InvalidOperationException ex = new InvalidOperationException(message);
+          ex.Data["Node"] = node;
+          ex.Data["Current element"] = this;
           throw ex;
         }
       }
       
       return output;
+    }
+    
+    /// <summary>
+    /// <para>Overridden.  Renders this node to the output stream.</para>
+    /// </summary>
+    /// <param name="output">
+    /// A <see cref="TalOutput"/>
+    /// </param>
+    public override void Render (TalOutput output)
+    {
+      MetalMacro macroElement = GetUseMacro(this.MetalContext);
+      
+      if(macroElement != null)
+      {
+        this.SpliceWith(macroElement.Expand(false, this.MetalContext), output);
+      }
+      else
+      {
+        base.Render (output);
+      }
+    }
+    
+    /// <summary>
+    /// <para>
+    /// Overloaded.  Splices the given <paramref name="element"/> as a replacement for this element node.
+    /// </para>
+    /// </summary>
+    /// <param name="element">
+    /// A <see cref="MetalElement"/>
+    /// </param>
+    /// <param name="output">
+    /// A <see cref="TalOutput"/>
+    /// </param>
+    public void SpliceWith(MetalElement element, TalOutput output)
+    {
+      this.SpliceWith(element, output, null, false);
+    }
+    
+    /// <summary>
+    /// <para>
+    /// Overloaded.  Splices the given <paramref name="element"/> as a replacement for this element node.
+    /// </para>
+    /// </summary>
+    /// <param name="element">
+    /// A <see cref="MetalElement"/>
+    /// </param>
+    /// <param name="output">
+    /// A <see cref="TalOutput"/>
+    /// </param>
+    /// <param name="skipRendering">
+    /// A <see cref="System.Boolean"/>
+    /// </param>
+    public void SpliceWith(MetalElement element, TalOutput output, bool skipRendering)
+    {
+      this.SpliceWith(element, output, null, skipRendering);
+    }
+    
+    /// <summary>
+    /// Overloaded.  Splices the given <paramref name="element"/> as a replacement for this element node, performing
+    /// slot-replacements where appropriate.
+    /// </summary>
+    /// <param name="element">
+    /// A <see cref="MetalElement"/>
+    /// </param>
+    /// <param name="output">
+    /// A <see cref="TalOutput"/>
+    /// </param>
+    /// <param name="slotReplacements">
+    /// A dictionary of <see cref="System.String"/> and <see cref="MetalElement"/>
+    /// </param>
+    /// <param name="skipRendering">
+    /// A <see cref="System.Boolean"/> that determines whether or not to skip rendering of the newly-imported node.
+    /// </param>
+    public void SpliceWith(MetalElement element,
+                           TalOutput output,
+                           Dictionary<string, MetalElement> slotReplacements,
+                           bool skipRendering)
+    {
+      MetalElement importedElement;
+      bool performSlotReplacements;
+      
+      if(element == null)
+      {
+        throw new ArgumentNullException("element");
+      }
+      else if(output == null)
+      {
+        throw new ArgumentNullException("output");
+      }
+      
+      importedElement = (MetalElement) this.OwnerDocument.ImportNode(element, true);
+      performSlotReplacements = (importedElement is MetalMacro);
+      
+      if(performSlotReplacements == false && slotReplacements != null)
+      {
+        throw new NotSupportedException("The element to splice in is not a METAL macro, but slot replacements " +
+                                        "have been provided.  This is unsupported.");
+      }
+      else if(performSlotReplacements)
+      {
+        MetalMacro importedMacro = (MetalMacro) importedElement;
+        Dictionary<string, MetalElement> slots = importedMacro.GetAvailableSlots();
+        
+        foreach(string key in slotReplacements.Keys)
+        {
+          if(!slots.ContainsKey(key))
+          {
+            string message = String.Format("Attempt to fill slot named '{0}' but the macro used does not provide a " +
+                                           "slot by that name.",
+                                           key);
+            
+            MetalException ex = new MetalException(message);
+            ex.Data["Slots available"] = slots;
+            throw ex;
+          }
+          
+          slots[key].SpliceWith(slotReplacements[key], output, true);
+        }
+      }
+      
+      this.ParentNode.ReplaceChild(importedElement, this);
+      
+      if(!skipRendering)
+      {
+        importedElement.Render(output);
+      }
+    }
+    
+    /// <summary>
+    /// Overloaded.  Splices the given <paramref name="macro"/> as a replacement for this element node.
+    /// </summary>
+    /// <param name="macro">
+    /// A <see cref="MetalMacro"/>
+    /// </param>
+    /// <param name="output">
+    /// A <see cref="TalOutput"/>
+    /// </param>
+    public void SpliceWith(MetalMacro macro, TalOutput output)
+    {
+      this.SpliceWith(macro, output, this.GetFilledSlots(this.MetalContext), false);
     }
     
     #endregion
@@ -196,17 +452,12 @@ namespace CraigFowler.Web.ZPT.Metal
     /// A <see cref="System.String"/>
     /// </param>
     /// <param name="document">
-    /// A <see cref="TalDocument"/>
+    /// An <see cref="XmlDocument"/>
     /// </param>
     public MetalElement(string prefix,
                       	string localName,
                       	string namespaceURI,
-                      	XmlDocument document) : base(prefix, localName, namespaceURI, document)
-    {
-      this.FillSlotName = null;
-      this.FillSlot = null;
-      this.ParentMacro = null;
-    }
+                      	XmlDocument document) : base(prefix, localName, namespaceURI, document) {}
 		
 		/// <summary>
 		/// <para>Serves as a copy-constructor for an <see cref="XmlElement"/> node.</para>
@@ -214,13 +465,24 @@ namespace CraigFowler.Web.ZPT.Metal
 		/// <param name="elementToClone">
 		/// A <see cref="XmlElement"/>
 		/// </param>
-		public MetalElement(XmlElement elementToClone) : this(elementToClone.Prefix,
-                                                          elementToClone.LocalName,
-                                                          elementToClone.NamespaceURI,
-                                                          elementToClone.OwnerDocument)
-		{
+		public MetalElement(XmlElement elementToClone) : this(elementToClone, elementToClone.OwnerDocument) {}
+    
+    /// <summary>
+    /// <para>Serves as a copy-constructor for an <see cref="XmlElement"/> node.</para>
+    /// </summary>
+    /// <param name="elementToClone">
+    /// A <see cref="XmlElement"/>
+    /// </param>
+    /// <param name="ownerDocument">
+    /// A <see cref="XmlDocument"/>
+    /// </param>
+    public MetalElement(XmlElement elementToClone, XmlDocument ownerDocument) : this(elementToClone.Prefix,
+                                                                                     elementToClone.LocalName,
+                                                                                     elementToClone.NamespaceURI,
+                                                                                     ownerDocument)
+    {
       this.CloneFrom(elementToClone);
-		}
+    }
 		
 		#endregion
     
@@ -237,6 +499,23 @@ namespace CraigFowler.Web.ZPT.Metal
     /// </returns>
     public static MetalElement MetalElementFactory(XmlElement elementToClone)
     {
+      return MetalElement.MetalElementFactory(elementToClone, elementToClone.OwnerDocument);
+    }
+    
+    /// <summary>
+    /// <para>Factory method creates a new class instance that implements <see cref="MetalElement"/>.</para>
+    /// </summary>
+    /// <param name="elementToClone">
+    /// A <see cref="XmlElement"/>
+    /// </param>
+    /// <param name="ownerDocument">
+    /// An <see cref="XmlDocument"/>
+    /// </param>
+    /// <returns>
+    /// A <see cref="MetalElement"/>
+    /// </returns>
+    public static MetalElement MetalElementFactory(XmlElement elementToClone, XmlDocument ownerDocument)
+    {
       MetalElement output;
       
       if(elementToClone == null)
@@ -251,25 +530,20 @@ namespace CraigFowler.Web.ZPT.Metal
       
       if(elementToClone.HasAttribute(DefineMacroAttributeName, TalDocument.MetalNamespace))
       {
-        IMetalDocument metalDocument = elementToClone.OwnerDocument as IMetalDocument;
-        MetalMacro macro = new MetalMacro(elementToClone);
+        IMetalDocument metalDocument = ownerDocument as IMetalDocument;
+        MetalMacro macro = new MetalMacro(elementToClone, ownerDocument);
         
         metalDocument.Macros[macro.MacroName] = macro;
         output = macro;
       }
-      else if(elementToClone.HasAttribute(DefineSlotAttributeName, TalDocument.MetalNamespace))
-      {
-        MetalSlot slot = new MetalSlot(elementToClone);
-        
-        output = slot;
-      }
       else
       {
-        output = new MetalElement(elementToClone);
+        output = new MetalElement(elementToClone, ownerDocument);
       }
       
       return output;
     }
+
     
     #endregion
 	}

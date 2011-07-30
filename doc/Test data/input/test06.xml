@@ -1,6 +1,7 @@
+<?xml version="1.0" ?>
 <html>
   <body xmlns:m="http://xml.zope.org/namespaces/metal"
-        m:use-macro="tests/input/test05.html/body">
+        m:use-macro="documents/test05/macros/body">
     dummy body in test6
   </body>
 </html>

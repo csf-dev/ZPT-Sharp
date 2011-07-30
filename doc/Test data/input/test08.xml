@@ -1,13 +1,9 @@
 <?xml version="1.0" ?>
-<table>
-<!-- macro definition with slots -->
+<table xmlns:m="http://xml.zope.org/namespaces/metal" m:use-macro="documents/test07_macrodef/macros/myTable">
+<!-- macro use with slots -->
   <tr>
-    <td>Top Left</td>
-    <td>Top Right</td>
-  </tr>
-  <tr>
-    <td>Bottom left</td>
-    <td><span>
+    <td>
+      <span m:fill-slot="bottomRight">
       <h1>Some headline</h1>
       <p>This is the real contents of the bottom right slot.</p>
       <p>It is supposed to contain a lot of text.  Blah, blah, blab.
@@ -43,6 +39,7 @@
       Blabber, blabber, blah.  Baah, baah, barb.  Blah, blah, blab.
       Blabber, blabber, blah.  Baah, baah, barb.  Blah, blah, blab.
       Blabber, blabber, blah.  Baah, baah, barb.</p>
-      </span></td>
+      </span>
+    </td>
   </tr>
 </table>

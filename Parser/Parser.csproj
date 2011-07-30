@@ -13,7 +13,7 @@
     <newfilesearch>OnLoadAutoInsert</newfilesearch>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugType>none</DebugType>
+    <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>bin\Debug</OutputPath>
     <DefineConstants>DEBUG</DefineConstants>
@@ -22,6 +22,7 @@
     <ConsolePause>false</ConsolePause>
     <GenerateDocumentation>true</GenerateDocumentation>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <DebugSymbols>true</DebugSymbols>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>none</DebugType>
@@ -76,7 +77,6 @@
     <Compile Include="Tales\Exceptions\TalesStructureErrorType.cs" />
     <Compile Include="Tales\TalesIgnoreAttribute.cs" />
     <Compile Include="Metal\MetalMacro.cs" />
-    <Compile Include="Metal\MetalSlot.cs" />
     <Compile Include="Metal\Exceptions\MetalException.cs" />
     <Compile Include="ZptDocumentCollection.cs" />
     <Compile Include="Metal\IMetalDocument.cs" />
