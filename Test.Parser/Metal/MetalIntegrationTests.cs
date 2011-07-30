@@ -7,6 +7,8 @@ using System.Configuration;
 using System.Collections.Generic;
 using CraigFowler.Web.ZPT.Mocks;
 using System.Collections;
+using CraigFowler.Web.ZPT.Tales.Exceptions;
+using CraigFowler.Web.ZPT.Tales;
 
 namespace Test.CraigFowler.Web.ZPT.Metal
 {
@@ -76,8 +78,20 @@ namespace Test.CraigFowler.Web.ZPT.Metal
         template.TalesContext.AddDefinition("mock", GetMockObject());
         template.TalesContext.AddDefinition("documents", this.Documents);
         
-        documentOutput = template.Render();
-        Assert.AreEqual(expectedOutput, documentOutput, String.Format("File {0} rendered successfully.",
+        try
+        {
+          documentOutput = template.Render();
+        }
+        catch(TraversalException ex)
+        {
+          foreach(TalesPath path in ex.Attempts.Keys)
+          {
+            Console.Error.WriteLine("{0}: {1}", path.ToString(), ex.Attempts[path].Message);
+          }
+          throw;
+        }
+        
+        Assert.AreEqual(expectedOutput, documentOutput, String.Format("Rendering test: {0}",
                                                                       this.InputFiles[i].FullName));
       }
         

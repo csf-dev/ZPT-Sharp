@@ -190,7 +190,7 @@ namespace CraigFowler.Web.ZPT.Metal
     /// <returns>
     /// A <see cref="MetalMacro"/>
     /// </returns>
-    public MetalMacro GetUseMacro(Tales.TalesContext context, bool bypassCache)
+    public virtual MetalMacro GetUseMacro(Tales.TalesContext context, bool bypassCache)
     {
       MetalMacro output = null;
       string path = this.GetUseMacroPath();
@@ -256,7 +256,7 @@ namespace CraigFowler.Web.ZPT.Metal
     public Dictionary<string,MetalElement> GetFilledSlots(Tales.TalesContext context)
     {
       Dictionary<string,MetalElement> output = new Dictionary<string, MetalElement>();
-      MetalMacro useMacro = GetUseMacro(context);
+      MetalMacro useMacro = this.GetUseMacro(context);
       XmlNamespaceManager namespaceManager = new XmlNamespaceManager(this.OwnerDocument.NameTable);
       
       if(useMacro == null)
@@ -307,7 +307,7 @@ namespace CraigFowler.Web.ZPT.Metal
       
       if(macroElement != null)
       {
-        this.SpliceWith(macroElement, output);
+        this.SpliceWith(macroElement.Expand(false, this.MetalContext), output);
       }
       else
       {

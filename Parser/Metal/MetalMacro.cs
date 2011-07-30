@@ -24,6 +24,7 @@ using System.Xml;
 using CraigFowler.Web.ZPT.Tal;
 using CraigFowler.Web.ZPT.Tales;
 using CraigFowler.Web.ZPT.Metal.Exceptions;
+using CraigFowler.Web.ZPT.Tales.Expressions;
 
 namespace CraigFowler.Web.ZPT.Metal
 {
@@ -32,6 +33,12 @@ namespace CraigFowler.Web.ZPT.Metal
 	/// </summary>
 	public class MetalMacro : MetalElement
 	{
+    #region fields
+    
+    private bool hasCachedExtendMacro;
+    
+    #endregion
+    
     #region properties
     
     /// <summary>
@@ -49,6 +56,14 @@ namespace CraigFowler.Web.ZPT.Metal
     /// <para>Read-only.  Gets a cached <see cref="MetalMacro"/> that this instance extends.</para>
     /// </summary>
     protected MetalMacro CachedExtendMacro  {
+      get;
+      private set;
+    }
+    
+    /// <summary>
+    /// <para>A cached <see cref="MetalMacro"/> that was created during the <see cref="Expand"/> process.</para>
+    /// </summary>
+    protected MetalMacro CachedExpandedMacro {
       get;
       private set;
     }
@@ -118,12 +133,158 @@ namespace CraigFowler.Web.ZPT.Metal
     /// </returns>
     public MetalMacro GetExtendMacro(Tales.TalesContext context)
     {
-      // TODO: Write this method
-      throw new NotImplementedException();
+      if(!hasCachedExtendMacro)
+      {
+        object macro;
+        PathExpression extendPath = new PathExpression(this.GetAttribute(MetalElement.ExtendMacroAttributeName,
+                                                                         TalDocument.MetalNamespace),
+                                                       context);
+        macro = extendPath.GetValue();
+        
+        this.CachedExtendMacro = macro as MetalMacro;
+        hasCachedExtendMacro = true;
+      }
       
-//        this.ExtendMacroPath = new TalesPath(this.GetAttribute(MetalElement.ExtendMacroAttributeName,
-//                                                               TalDocument.MetalNamespace));
+      return this.CachedExtendMacro;
+    }
+    
+    /// <summary>
+    /// <para>
+    /// Fully expands a METAL macro element by getting any macros that it extends and splicing them into this macro.
+    /// The returned/aggregate macro contains all of the slots from all macros in the inheritance chain.
+    /// </para>
+    /// </summary>
+    /// <param name="bypassCache">
+    /// A <see cref="System.Boolean"/> that indicates whether or not to bypass the caching of the macro expansion
+    /// process.
+    /// </param>
+    /// <param name="context">
+    /// A <see cref="TalesContext"/> with which to use for locating the macro.
+    /// </param>
+    /// <returns>
+    /// A <see cref="MetalMacro"/>
+    /// </returns>
+    public MetalMacro Expand(bool bypassCache, TalesContext context)
+    {
+      MetalMacro output;
       
+      if(this.CachedExpandedMacro == null || bypassCache)
+      {
+        MetalMacro extendMacro = this.GetExtendMacro(context);
+        
+        /* If there is a macro to extend from then get the result of that extension, otherwise we already have a
+         * fully expanded macro stored in this instance.  We expand the macro that we are extending from as well,
+         * just in case it also extends another macro.
+         */
+        output = (extendMacro != null)? this.ExtendFrom(extendMacro.Expand(false, context)) : this;
+        
+        if(!bypassCache)
+        {
+          this.CachedExpandedMacro = output;
+        }
+      }
+      else
+      {
+        output = this.CachedExpandedMacro;
+      }
+      
+      return output;
+    }
+    
+    /// <summary>
+    /// <para>Overridden.  Renders this node to the output stream.</para>
+    /// </summary>
+    /// <remarks>
+    /// <para>
+    /// METAL macros that extend other macros should be expanded before they are rendered.  Otherwise they are rendered
+    /// normally.
+    /// </para>
+    /// </remarks>
+    /// <param name="output">
+    /// A <see cref="TalOutput"/>
+    /// </param>
+    public override void Render (TalOutput output)
+    {
+      if(this.GetExtendMacro(this.MetalContext) != null)
+      {
+        this.Expand(false, this.MetalContext).Render(output);
+      }
+      else
+      {
+        base.Render(output);
+      }
+    }
+    
+    /// <summary>
+    /// <para>
+    /// Overridden, overloaded.  Gets a <see cref="MetalMacro"/> instance for which to use with this element.
+    /// </para>
+    /// </summary>
+    /// <remarks>
+    /// <para>
+    /// This method is additionally capable of discovering and returning an <c>extend-macro</c> if appropriate.
+    /// </para>
+    /// </remarks>
+    /// <param name="context">
+    /// A <see cref="Tales.TalesContext"/>
+    /// </param>
+    /// <param name="bypassCache">
+    /// A <see cref="System.Boolean"/>
+    /// </param>
+    /// <returns>
+    /// A <see cref="MetalMacro"/>
+    /// </returns>
+    public override MetalMacro GetUseMacro(Tales.TalesContext context, bool bypassCache)
+    {
+      MetalMacro extendMacro = this.GetExtendMacro(this.MetalContext);
+      
+      return (extendMacro != null)? extendMacro : base.GetUseMacro(context, bypassCache);
+    }
+
+    
+    /// <summary>
+    /// <para>
+    /// Creates a new <see cref="MetalMacro"/> instance that is the result of an <c>extend-macro</c> directive.
+    /// </para>
+    /// </summary>
+    /// <param name="extendMacro">
+    /// A <see cref="MetalMacro"/> - the macro to extend from.
+    /// </param>
+    /// <returns>
+    /// A <see cref="MetalMacro"/> that is the result of the extension.
+    /// </returns>
+    protected MetalMacro ExtendFrom(MetalMacro extendMacro)
+    {
+      MetalMacro output;
+      Dictionary<string, MetalElement> availableSlots, filledSlots;
+      
+      
+      if(extendMacro == null)
+      {
+        throw new ArgumentNullException("extendMacro");
+      }
+      
+      output = (MetalMacro) this.OwnerDocument.ImportNode(extendMacro, true);
+      availableSlots = output.GetAvailableSlots();
+      filledSlots = this.GetFilledSlots(this.MetalContext);
+      
+      foreach(string key in filledSlots.Keys)
+      {
+        if(!availableSlots.ContainsKey(key))
+        {
+          string message = String.Format("Attempt to fill slot named '{0}' but the macro used does not provide a " +
+                                         "slot by that name.",
+                                         key);
+          
+          MetalException ex = new MetalException(message);
+          ex.Data["Slots available"] = availableSlots;
+          throw ex;
+        }
+        
+        availableSlots[key].ParentNode.ReplaceChild(filledSlots[key], availableSlots[key]);
+      }
+      
+      return output;
     }
     
     /// <summary>
@@ -219,6 +380,8 @@ namespace CraigFowler.Web.ZPT.Metal
     {
       this.CachedSlots = null;
       this.CachedExtendMacro = null;
+      
+      hasCachedExtendMacro = false;
     }
     
     /// <summary>
