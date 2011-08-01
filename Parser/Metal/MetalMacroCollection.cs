@@ -66,6 +66,24 @@ namespace CraigFowler.Web.ZPT.Metal
     
     #endregion
     
+    #region methods
+    
+    /// <summary>
+    /// <para>Gets whether or not this collection contains the named macro.</para>
+    /// </summary>
+    /// <param name="name">
+    /// A <see cref="System.String"/>
+    /// </param>
+    /// <returns>
+    /// A <see cref="System.Boolean"/>
+    /// </returns>
+    public bool ContainsMacro(string name)
+    {
+      return this.UnderlyingCollection.ContainsKey(name);
+    }
+    
+    #endregion
+    
     #region constructor
     
     /// <summary>

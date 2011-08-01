@@ -54,7 +54,8 @@ namespace CraigFowler.Web.ZPT.Tal
 		
 		private const string
 			DEFAULT_NEWLINE_CHARACTERS									= "\n",
-			DEFAULT_INDENT_CHARACTERS 									= "  ";
+			DEFAULT_INDENT_CHARACTERS 									= "  ",
+      TEMPLATE_OBJECT_IDENTIFIER                  = "template";
 		
     #endregion
     
@@ -283,6 +284,8 @@ namespace CraigFowler.Web.ZPT.Tal
 		public TalDocument (bool useDTDResolver) : base()
 		{
       this.TalesContext = new TalesContext();
+      this.TalesContext.AddDefinition(TEMPLATE_OBJECT_IDENTIFIER, this);
+      
 			this.PreserveWhitespace = true;
 			this.ReformatDocument = false;
 			

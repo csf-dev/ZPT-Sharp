@@ -164,7 +164,7 @@ namespace CraigFowler.Web.ZPT.Tal
     
     /// <summary>
     /// <para>
-    /// Gets the contents of the requested TAL attribute residing on this element node.
+    /// Overloaded.  Gets the contents of the requested TAL attribute residing on this element node.
     /// Returns <see cref="System.String.Empty"/> if the attribute is not defined or if it contains an empty value.
     /// </para>
     /// </summary>
@@ -177,6 +177,30 @@ namespace CraigFowler.Web.ZPT.Tal
     /// </returns>
     private string GetTalAttribute(string attributeName)
     {
+      bool discardedBoolean;
+      return GetTalAttribute(attributeName, out discardedBoolean);
+    }
+    
+    /// <summary>
+    /// <para>
+    /// Overloaded.  Gets the contents of the requested TAL attribute residing on this element node.
+    /// Returns <see cref="System.String.Empty"/> if the attribute is not defined or if it contains an empty value.
+    /// </para>
+    /// </summary>
+    /// <param name="attributeName">
+    /// A <see cref="System.String"/>, the name of the attribute requested.
+    /// </param>
+    /// <param name="attributePresent">
+    /// A <see cref="System.Boolean"/> that indicates whether the attribute was present or not.
+    /// </param>
+    /// <returns>
+    /// A <see cref="System.String"/>, the content of the attribute or an empty string if the given attribute is not
+    /// defined on this element (or contains an empty value).
+    /// </returns>
+    private string GetTalAttribute(string attributeName, out bool attributePresent)
+    {
+      string output;
+      
       if(attributeName == null)
       {
         throw new ArgumentNullException("attributeName");
@@ -186,7 +210,23 @@ namespace CraigFowler.Web.ZPT.Tal
         throw new ArgumentOutOfRangeException("attributeName", "Attribute name must not be an empty string.");
       }
       
-      return this.GetAttribute(attributeName, TalDocument.TalNamespace);
+      if(this.HasAttribute(attributeName, TalDocument.TalNamespace))
+      {
+        output = this.GetAttribute(attributeName, TalDocument.TalNamespace);
+        attributePresent = true;
+      }
+      else if(this.NamespaceURI == TalDocument.TalNamespace && this.HasAttribute(attributeName))
+      {
+        output = this.GetAttribute(attributeName);
+        attributePresent = true;
+      }
+      else
+      {
+        output = String.Empty;
+        attributePresent = false;
+      }
+      
+      return output;
     }
 		
     /// <summary>
@@ -665,9 +705,16 @@ namespace CraigFowler.Web.ZPT.Tal
         
         discoveredContent = this.TalesContext.CreateExpression(contentStatement.Groups[3].Value).GetValue();
 				
-				output = new TalContent(discoveredContent, this);
-				output.Type = contentType;
-				output.WriteElement = writeElement;
+        if(discoveredContent != null && !discoveredContent.Equals(DefaultValueMarker.Marker))
+        {
+          output = new TalContent(discoveredContent, this);
+          output.Type = contentType;
+          output.WriteElement = writeElement;
+        }
+        else
+        {
+          output = new TalContent(this, writeElement);
+        }
       }
 			else
 			{
@@ -686,10 +733,26 @@ namespace CraigFowler.Web.ZPT.Tal
     private bool ProcessTalOmitTagAttribute()
     {
       string omitTagAttribute;
-      bool output = true;
+      bool output, hasOmitTagAttribute;
       
-      omitTagAttribute = GetTalAttribute("omit-tag");
-      if(omitTagAttribute != String.Empty)
+      omitTagAttribute = GetTalAttribute("omit-tag", out hasOmitTagAttribute);
+      
+      /* Remember that we are returning whether or not we are going to write the tag element or not.
+       * A return value of 'false' indicates that we are omitting the tag.  True indicates that we are going to write
+       * the tag afterall.
+       * 
+       * Also remember the special case (according to the spec) that on an empty value we treat it as "do not write"
+       * instead of the usual behaviour of treating the expression the other way.
+       */
+      if(!hasOmitTagAttribute)
+      {
+        output = true;
+      }
+      else if(omitTagAttribute == String.Empty)
+      {
+        output = false;
+      }
+      else
       {
         output = !this.TalesContext.CreateExpression(omitTagAttribute).GetBooleanValue();
       }
