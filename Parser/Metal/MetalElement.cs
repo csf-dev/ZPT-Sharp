@@ -37,27 +37,29 @@ namespace CraigFowler.Web.ZPT.Metal
     /// <summary>
     /// <para>Read-only constant gets the XML element name of a METAL macro-definition attribute.</para>
     /// </summary>
-    protected const string DefineMacroAttributeName          = "define-macro";
+    protected const string DefineMacroAttributeName         = "define-macro";
     
     /// <summary>
     /// <para>Read-only constant gets the XML element name of a METAL macro-extension attribute.</para>
     /// </summary>
-    protected const string ExtendMacroAttributeName          = "extend-macro";
+    protected const string ExtendMacroAttributeName         = "extend-macro";
     
     /// <summary>
     /// <para>Read-only constant gets the XML element name of a METAL macro-invocation attribute.</para>
     /// </summary>
-    protected const string UseMacroAttributeName             = "use-macro";
+    protected const string UseMacroAttributeName            = "use-macro";
     
     /// <summary>
     /// <para>Read-only constant gets the XML element name of a METAL slot-definition attribute.</para>
     /// </summary>
-    protected const string DefineSlotAttributeName           = "define-slot";
+    protected const string DefineSlotAttributeName          = "define-slot";
     
     /// <summary>
     /// <para>Read-only constant gets the XML element name of a METAL slot-usage attribute.</para>
     /// </summary>
-    protected const string FillSlotAttributeName             = "fill-slot";
+    protected const string FillSlotAttributeName            = "fill-slot";
+    
+    private const string MACRO_NAME_TAL_VARIABLE            = "macroname";
     
     #endregion
     
@@ -430,6 +432,8 @@ namespace CraigFowler.Web.ZPT.Metal
           
           slots[key].SpliceWith(slotReplacements[key], output, true);
         }
+        
+        importedMacro.TalesContext.AddDefinition(MACRO_NAME_TAL_VARIABLE, importedMacro.MacroName);
       }
       
       // Replace the current node with the node from the 
