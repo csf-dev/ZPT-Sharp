@@ -1,13 +1,12 @@
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
+using CraigFowler.Web.ZPT.Mvc;
 using CraigFowler.Web.ZPT;
+using CraigFowler.Samples.Mvc.Views.Home;
 
-namespace SampleMvcSite
+namespace CraigFowler.Samples.Mvc
 {
   public class MvcApplication : System.Web.HttpApplication
   {
@@ -22,6 +21,8 @@ namespace SampleMvcSite
     protected void Application_Start ()
     {
       RegisterRoutes (RouteTable.Routes);
+      
+      ZptMetadata.RegisterDocumentClasses(System.Reflection.Assembly.GetExecutingAssembly());
       
       ViewEngines.Engines.Clear();
       ViewEngines.Engines.Add(new ZptViewEngine());

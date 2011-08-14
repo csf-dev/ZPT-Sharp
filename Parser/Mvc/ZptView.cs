@@ -2,7 +2,7 @@ using System;
 using System.Web.Mvc;
 using System.IO;
 
-namespace CraigFowler.Web.ZPT
+namespace CraigFowler.Web.ZPT.Mvc
 {
   /// <summary>
   /// <para>Represents an <see cref="IView"/> that represents a ZPT page.</para>
@@ -43,7 +43,7 @@ namespace CraigFowler.Web.ZPT
     /// </param>
     public void Render (ViewContext viewContext, TextWriter writer)
     {
-      ZptDocument document = this.Engine.GetZptDocument(this.RelativeViewPath);
+      IZptDocument document = this.Engine.GetZptDocument(this.RelativeViewPath);
       ITemplateDocument template = document.GetTemplateDocument();
       
       template.TalesContext.AddDefinition("documents", this.Engine.GetViewCache());

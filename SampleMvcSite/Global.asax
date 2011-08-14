@@ -1,1 +1,1 @@
-<%@ Application Inherits="SampleMvcSite.MvcApplication" %>
+<%@ Application Inherits="CraigFowler.Samples.Mvc.MvcApplication" %>

@@ -1,0 +1,21 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      metal:use-macro="documents/Layout/outer-page/macros/mainPage">
+<head>
+<title metal:fill-slot="pageTitle">This is a test page</title>
+</head>
+<body>
+<div metal:fill-slot="region-main" class="region-main">
+  <h1>This is a sample page</h1>
+  <p>This page is created with some lovely sample content!</p>
+  <p>
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras eget velit sit amet tellus sagittis semper. Nam tristique volutpat eros, nec laoreet sapien varius at. Vivamus convallis faucibus eros eget vestibulum. Quisque ac nunc a turpis vulputate facilisis. Proin sollicitudin lectus id nulla malesuada vitae iaculis metus varius. Aliquam vitae laoreet tellus. Sed vel tellus id odio iaculis tempor. Donec ut ipsum nisl. Nunc tristique viverra condimentum. Cras suscipit ipsum quis purus laoreet semper. Phasellus massa turpis, viverra sit amet porttitor sit amet, auctor nec risus. Integer a ante et lorem mollis molestie eu bibendum tortor. Duis eu ligula enim.
+  </p>
+  <p>
+    Etiam viverra facilisis ullamcorper. Donec ac purus quam, sit amet auctor nisi. Phasellus semper velit at libero consectetur vel volutpat libero rutrum. Curabitur vel est nulla, facilisis vestibulum ipsum. Vestibulum non velit nulla. Maecenas fringilla convallis sollicitudin. Nam vulputate molestie nulla, nec blandit mauris sodales vitae. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Phasellus ante nulla, convallis ut pulvinar vitae, porta in risus. Suspendisse egestas est sollicitudin orci mattis at tincidunt nisi consectetur. Ut eros ligula, vestibulum quis blandit ut, commodo in massa.
+  </p>
+</div>
+</body>
+</html>

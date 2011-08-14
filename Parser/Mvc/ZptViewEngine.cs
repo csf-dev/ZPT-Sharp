@@ -4,7 +4,7 @@ using System.Web;
 using System.IO;
 using CraigFowler.Web.ZPT.Tales;
 
-namespace CraigFowler.Web.ZPT
+namespace CraigFowler.Web.ZPT.Mvc
 {
   /// <summary>
   /// <para>Provides an MVC2 <see cref="IViewEngine"/> implementation for serving ZPT pages.</para>
@@ -41,12 +41,12 @@ namespace CraigFowler.Web.ZPT
     /// <returns>
     /// A <see cref="ZptDocument"/>
     /// </returns>
-    public ZptDocument GetZptDocument(string path)
+    public IZptDocument GetZptDocument(string path)
     {
-      ZptDocument output;
+      IZptDocument output;
       ZptDocumentCollection viewCache = GetViewCache();
       
-      output = viewCache.RetrieveItem(ReformatPath(path)) as ZptDocument;
+      output = viewCache.RetrieveItem(ReformatPath(path)) as IZptDocument;
       
       if(output == null)
       {
