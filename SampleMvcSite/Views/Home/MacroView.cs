@@ -1,17 +1,16 @@
 using System;
 using CraigFowler.Web.ZPT;
+using CraigFowler.Web.ZPT.Tales;
 
 namespace CraigFowler.Samples.Mvc.Views.Home
 {
   public class MacroView : ZptDocument
   {
-    public override ITemplateDocument GetTemplateDocument ()
+    private static int AttemptCount = 0;
+    
+    protected override void AssignModelData (TalesContext talesContext)
     {
-      ITemplateDocument output = base.GetTemplateDocument ();
-      
-      output.TalesContext.AddDefinition("foo", "bar");
-      
-      return output;
+      talesContext.AddDefinition("foo", AttemptCount++);
     }
     
     public MacroView (ZptMetadata metadata) : base(metadata) {}

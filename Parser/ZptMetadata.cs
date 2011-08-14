@@ -70,6 +70,7 @@ namespace CraigFowler.Web.ZPT
 		#region fields
 		
 		private Type documentClass;
+    private static Type defaultDocumentClass;
 		
 		#endregion
 		
@@ -95,21 +96,28 @@ namespace CraigFowler.Web.ZPT
 		public Type DocumentClass
 		{
 			get {
-				return documentClass;
+        Type output = documentClass;
+        
+        if(output == null)
+        {
+          output = DefaultDocumentClass;
+        }
+        
+				return output;
 			}
 			set {
+        /* If we are passed a null reference then fall back to the default type.
+         * If we are passed a concrete type then try using that (if it implements the required interface)
+         * Otherwise throw an exception.
+         */
 				if(value == null)
 				{
-					throw new ArgumentNullException("value");
+					documentClass = DefaultDocumentClass;
 				}
-				
-				bool implementsIZptDocument = ImplementsRequiredInterface(value);
-				
-				// If we found a type that implements IZptDocument then we use it, otherwise throw an exception
-				if(implementsIZptDocument)
-				{
-					documentClass = value;
-				}
+        else if(ImplementsRequiredInterface(value))
+        {
+          documentClass = value;
+        }
 				else
 				{
 					throw new ArgumentOutOfRangeException("value",
@@ -161,6 +169,35 @@ namespace CraigFowler.Web.ZPT
 			get;
 			set;
 		}
+    
+    /// <summary>
+    /// <para>Gets and sets a default value for <see cref="DocumentClass"/>.</para>
+    /// </summary>
+    public static Type DefaultDocumentClass
+    {
+      get {
+        return defaultDocumentClass;
+      }
+      set {
+        /* If we are passed a null reference then throw an exception (this property may not be null).
+         * If we are passed a concrete type then try using that (if it implements the required interface)
+         * Otherwise throw an exception.
+         */
+        if(value == null)
+        {
+          throw new ArgumentNullException("value");
+        }
+        else if(ImplementsRequiredInterface(value))
+        {
+          defaultDocumentClass = value;
+        }
+        else
+        {
+          throw new ArgumentOutOfRangeException("value",
+                                                "The type passed to this property does not implement IZptDocument.");
+        }
+      }
+    }
 		
 		/// <summary>
 		/// <para>
@@ -303,8 +340,8 @@ namespace CraigFowler.Web.ZPT
 		public ZptMetadata()
 		{
 			this.DocumentType = ZptDocumentType.Metal;
-			this.DocumentClass = typeof(ZptDocument);
 			this.DocumentFilePath = null;
+      this.DocumentClass = null;
 		}
 		
 		/// <summary>
@@ -313,6 +350,7 @@ namespace CraigFowler.Web.ZPT
 		static ZptMetadata()
 		{
 			ForeignDocumentClasses = new Dictionary<string, Type>();
+      DefaultDocumentClass = typeof(ZptDocument);
 		}
 		
 		#endregion

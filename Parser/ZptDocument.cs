@@ -108,13 +108,15 @@ namespace CraigFowler.Web.ZPT
 		/// <returns>
 		/// An object instance that implements <see cref="ITemplateDocument"/>.
 		/// </returns>
-		public virtual ITemplateDocument GetTemplateDocument()
+		public ITemplateDocument GetTemplateDocument()
 		{
 			if(this.UnderlyingDocument == null)
 			{
 				this.UnderlyingDocument = this.Metadata.LoadDocument();
 			}
-			
+      
+      this.AssignModelData(this.UnderlyingDocument.TalesContext);
+      
 			return this.UnderlyingDocument;
 		}
     
@@ -146,6 +148,32 @@ namespace CraigFowler.Web.ZPT
       }
       
       return this.MacroCache;
+    }
+    
+    /// <summary>
+    /// <para>
+    /// Helper method to perform assignments of data (perhaps from a domain model of some kind) to the root
+    /// <see cref="TalesContext"/> of the ZPT document that is to be rendered by this view.
+    /// </para>
+    /// </summary>
+    /// <remarks>
+    /// <para>
+    /// This method does nothing on its own, it serves as a hook that implementing classes may override in order to
+    /// provide data to the TALES context of the view that will be rendering.
+    /// </para>
+    /// <para>
+    /// In a derived class, data may be added to the <paramref name="talesContext"/> using the
+    /// <see cref="TalesContext.AddDefinition(string,object)"/> method.  These definitions are added at the root level
+    /// of the TALES context of the document.  This data to be added may be taken from a domain model of some kind or
+    /// from a session state or any other source.
+    /// </para>
+    /// </remarks>
+    /// <param name="talesContext">
+    /// A <see cref="TalesContext"/>
+    /// </param>
+    protected virtual void AssignModelData(TalesContext talesContext)
+    {
+      // Intentionally do nothing here.  It is up to implementing classes to add code to overrides of this method.
     }
 		
 		#endregion
