@@ -4,9 +4,9 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Mvc.Ajax;
-using SampleMvcSite.Content;
+using CraigFowler.Samples.Mvc.Content;
 
-namespace Controllers
+namespace CraigFowler.Samples.Mvc.Controllers
 {
   [HandleError]
   public class HomeController : Controller

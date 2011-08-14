@@ -7,8 +7,21 @@
 <title>This is a sample MVC page</title>
 </head>
 <body>
-<h1>Sample page</h1>
+<h1>Sample page with the codebehind property <span tal:replace="foo" /></h1>
 <p tal:content="Message">This is a sample message</p>
 <div metal:use-macro="documents/userMacro/macros/userTools" />
+<div metal:use-macro="template/macros/reused">
+  <p>A paragraph of text.</p>
+  <p metal:fill-slot="slot1">
+    This is the replacement filler for slot 1, which contains my age of
+    <span tal:content="currentUser/age">over 9000</span>.
+  </p>
+</div>
+
+<div metal:define-macro="reused">
+  <p>This is a paragraph of reused content for <span tal:content="currentUser/username">My username</span>.</p>
+  <p metal:define-slot="slot1">This is some sample filler for slot 1.</p>
+</div>
+
 </body>
 </html>

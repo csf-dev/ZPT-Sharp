@@ -8,7 +8,7 @@
     <ProjectGuid>{BF4327CD-BE29-4EB6-AFEA-25C714B96410}</ProjectGuid>
     <ProjectTypeGuids>{349C5851-65DF-11DA-9384-00065B846F21};{603C0E0B-DB56-11DC-BE95-000D561079B0};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
-    <RootNamespace>SampleMvcSite</RootNamespace>
+    <RootNamespace>CraigFowler.Samples.Mvc</RootNamespace>
     <AssemblyName>SampleMvcSite</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
   </PropertyGroup>
@@ -57,6 +57,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Content\Member.cs" />
+    <Compile Include="Views\Home\MacroView.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Web.config" />
@@ -73,13 +74,14 @@
     </MonoDevelop>
   </ProjectExtensions>
   <ItemGroup>
-    <ProjectReference Include="..\ZptViewEngine\ZptViewEngine.csproj">
-      <Project>{CF167892-FD20-424C-9184-F947D136AB51}</Project>
-      <Name>ZptViewEngine</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Parser\Parser.csproj">
       <Project>{B887669F-17F7-45E9-BE79-A87570BFFA80}</Project>
       <Name>Parser</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Views\userMacro.pt" />
+    <None Include="Views\Home\home.pt" />
+    <None Include="Views\Home\macro.pt" />
   </ItemGroup>
 </Project>

@@ -1,7 +1,7 @@
 using System;
 using CraigFowler.Web.ZPT.Tales;
 
-namespace SampleMvcSite.Content
+namespace CraigFowler.Samples.Mvc.Content
 {
   /// <summary>
   /// <para>Stub class for testing a member-like object.</para>
