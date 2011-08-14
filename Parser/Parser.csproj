@@ -8,7 +8,7 @@
     <ProjectGuid>{B887669F-17F7-45E9-BE79-A87570BFFA80}</ProjectGuid>
     <OutputType>Library</OutputType>
     <RootNamespace>CraigFowler.Web.ZPT</RootNamespace>
-    <AssemblyName>parser</AssemblyName>
+    <AssemblyName>zpt-parser</AssemblyName>
     <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
     <newfilesearch>OnLoadAutoInsert</newfilesearch>
   </PropertyGroup>
