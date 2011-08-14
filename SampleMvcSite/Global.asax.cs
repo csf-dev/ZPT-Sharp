@@ -22,7 +22,7 @@ namespace CraigFowler.Samples.Mvc
     {
       RegisterRoutes (RouteTable.Routes);
       
-      ZptMetadata.RegisterDocumentClass(typeof(MacroView));
+      ZptMetadata.RegisterDocumentClasses(System.Reflection.Assembly.GetExecutingAssembly());
       
       ViewEngines.Engines.Clear();
       ViewEngines.Engines.Add(new ZptViewEngine());

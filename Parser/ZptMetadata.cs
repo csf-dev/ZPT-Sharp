@@ -491,6 +491,41 @@ namespace CraigFowler.Web.ZPT
 			
       ForeignDocumentClasses.Add(typeToRegister.FullName, typeToRegister);
 		}
+    
+    /// <summary>
+    /// <para>
+    /// Registers all of the compatible types within an <see cref="Assembly"/> using
+    /// <see cref="RegisterDocumentClass"/>.
+    /// </para>
+    /// </summary>
+    /// <remarks>
+    /// <para>
+    /// This method is a shortcut to separately calling <see cref="RegisterDocumentClass"/> on each type within an
+    /// <see cref="Assembly"/>.  Instead this method scans the assembly for every compatible type and registers them.
+    /// </para>
+    /// </remarks>
+    /// <param name="fromAssembly">
+    /// A <see cref="Assembly"/>
+    /// </param>
+    public static void RegisterDocumentClasses(Assembly fromAssembly)
+    {
+      Type[] allTypes;
+      
+      if(fromAssembly == null)
+      {
+        throw new ArgumentNullException("fromAssembly");
+      }
+      
+      allTypes = fromAssembly.GetExportedTypes();
+      
+      foreach(Type type in allTypes)
+      {
+        if(ImplementsRequiredInterface(type))
+        {
+          RegisterDocumentClass(type);
+        }
+      }
+    }
 		
 		/// <summary>
 		/// <para>
