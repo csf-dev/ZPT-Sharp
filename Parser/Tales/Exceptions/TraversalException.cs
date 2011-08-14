@@ -85,6 +85,25 @@ namespace CraigFowler.Web.ZPT.Tales.Exceptions
       }
     }
 
+    /// <summary>
+    /// <para>Overridden.  Gets the exception message.</para>
+    /// </summary>
+    public override string Message
+    {
+      get {
+        string output = base.Message;
+        
+#if DEBUG
+        output += " Attempted paths:";
+        foreach(TalesPath path in this.Attempts.Keys)
+        {
+          output += String.Format(" {0}", path.ToString());
+        }
+#endif
+        
+        return output;
+      }
+    }
     
     #endregion
     

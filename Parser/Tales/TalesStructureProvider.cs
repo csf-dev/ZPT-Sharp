@@ -98,6 +98,7 @@ namespace CraigFowler.Web.ZPT.Tales
 				throw new ArgumentNullException("relativePath");
 			}
 			
+      StoreItem(relativePath.Parts, 0, item);
 			try
 			{
 				StoreItem(relativePath.Parts, 0, item);
@@ -145,6 +146,51 @@ namespace CraigFowler.Web.ZPT.Tales
       }
     }
 		
+    /// <summary>
+    /// <para>
+    /// Overloaded.  Retrieves a single item from this instance, from a location identified by <paramref name="path"/>.
+    /// </para>
+    /// </summary>
+    /// <param name="path">
+    /// A <see cref="System.String"/>
+    /// </param>
+    /// <returns>
+    /// A <see cref="System.Object"/>
+    /// </returns>
+    public object RetrieveItem(string path)
+    {
+      TalesPath talesPath = new TalesPath(path);
+      return this.RetrieveItem(talesPath);
+    }
+    
+    /// <summary>
+    /// <para>
+    /// Overloaded.  Retrieves a single item from this instance, from a location identified by <paramref name="path"/>.
+    /// </para>
+    /// </summary>
+    /// <param name="path">
+    /// A <see cref="TalesPath"/>
+    /// </param>
+    /// <returns>
+    /// A <see cref="System.Object"/>
+    /// </returns>
+    public object RetrieveItem(TalesPath path)
+    {
+      TalesContext context = new TalesContext();
+      
+      if(path == null)
+      {
+        throw new ArgumentNullException("path");
+      }
+      else if(path.Parts.Count < 1)
+      {
+        throw new ArgumentException("TALES path has no parts.", "path");
+      }
+      
+      context.AddDefinition(path.Parts[0], this);
+      return context.CreateExpression(path.ToString()).GetValue();
+    }
+    
 		/// <summary>
 		/// <para>
 		/// Overloaded.  Stores an item either within this instance or (if a deeper level of hierarchy is indicated) at a

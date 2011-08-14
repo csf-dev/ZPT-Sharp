@@ -174,9 +174,40 @@ namespace CraigFowler.Web.ZPT
     public static ZptDocumentCollection CreateFromFilesystem(DirectoryInfo basePath, string filenamePattern)
     {
       ZptDocumentCollection output = new ZptDocumentCollection();
+      
+      CreateFromFilesystem(basePath, filenamePattern, ref output);
+      
+      return output;
+    }
+    
+    /// <summary>
+    /// <para>
+    /// Overloaded.  Creates a new <see cref="ZptDocumentCollection"/> from the ZPT template files found within a
+    /// given path, matching a given filename pattern.  This overload will populate an existing collection with the
+    /// view files found.
+    /// </para>
+    /// </summary>
+    /// <param name="basePath">
+    /// A <see cref="DirectoryInfo"/>
+    /// </param>
+    /// <param name="filenamePattern">
+    /// A <see cref="System.String"/>
+    /// </param>
+    /// <param name="output">
+    /// A <see cref="ZptDocumentCollection"/>
+    /// </param>
+    protected static void CreateFromFilesystem(DirectoryInfo basePath,
+                                               string filenamePattern,
+                                               ref ZptDocumentCollection output)
+    {
       TalesPath relativePath;
       ZptMetadata metadata;
       string searchPattern;
+
+      if(output == null)
+      {
+        throw new ArgumentNullException("output");
+      }
       
       if(basePath == null)
       {
@@ -205,13 +236,7 @@ namespace CraigFowler.Web.ZPT
         
         output.StoreItem(relativePath, ZptDocument.DocumentFactory(metadata));
       }
-      
-      return output;
     }
-    
-    #endregion
-    
-    #region static methods
     
     /// <summary>
     /// <para>
