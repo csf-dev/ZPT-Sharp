@@ -14,6 +14,39 @@ namespace Test.CraigFowler.Web.ZPT.Metal
   [TestFixture]
   public class TestMetalDocument
   {
+    #region constants
+    
+    private const string MULTIPLE_MACRO_DOCUMENT = @"<html xmlns:metal=""http://xml.zope.org/namespaces/metal"">
+<span metal:define-macro=""INNER"">
+  <span metal:define-slot=""INNERSLOT"">INNERSLOT</span>
+</span>
+
+<xxx metal:use-macro=""template/macros/INNER"">
+  <xxx metal:fill-slot=""INNERSLOT"">inner-argument</xxx>
+</xxx>
+
+<div metal:define-macro=""OUTER"">
+<div metal:use-macro=""template/macros/INNER"">
+  <xxx metal:define-slot=""OUTERSLOT"" metal:fill-slot=""INNERSLOT"">
+    OUTERSLOT
+  </xxx>
+</div>
+</div>
+
+<div metal:use-macro=""template/macros/OUTER"">
+<span>
+  <xxx>
+    <div metal:fill-slot=""OUTERSLOT"">outer-argument</div>
+  </xxx>
+</span>
+</div>
+
+<div metal:use-macro=""template/macros/OUTER"">
+</div>
+</html>";
+    
+    #endregion
+    
     #region properties
     
     public TestConfiguration Config
@@ -207,6 +240,26 @@ Exception
       Assert.AreEqual("This is a slot 3 filler from the master document",
                       renderedDocument.GetElementsByTagName("span", "http://www.w3.org/1999/xhtml")[2].InnerXml.Trim(),
                       "Third span contents correct");
+    }
+    
+    [Test]
+    [Category("Integration")]
+    public void TestMultipleMacrosInSingleDocument()
+    {
+      MetalDocument document = new MetalDocument();
+      document.LoadXml(MULTIPLE_MACRO_DOCUMENT);
+      
+      Assert.IsNotNull(document.Macros["INNER"], "INNER macro exists");
+      Assert.IsNotNull(document.Macros["OUTER"], "OUTER macro exists");
+      
+      Assert.AreEqual(1, document.Macros["INNER"].GetAvailableSlots().Count, "INNER macro has one slot available.");
+      Assert.AreEqual(1, document.Macros["OUTER"].GetAvailableSlots().Count, "OUTER macro has one slot available.");
+      
+      Assert.IsTrue(document.Macros["INNER"].GetAvailableSlots().ContainsKey("INNERSLOT"),
+                    "INNER macro has a slot named INNERSLOT");
+      
+      Assert.IsTrue(document.Macros["OUTER"].GetAvailableSlots().ContainsKey("OUTERSLOT"),
+                    "OUTER macro has a slot named OUTERSLOT");
     }
     
     #endregion

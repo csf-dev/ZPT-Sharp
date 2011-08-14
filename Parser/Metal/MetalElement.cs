@@ -37,27 +37,29 @@ namespace CraigFowler.Web.ZPT.Metal
     /// <summary>
     /// <para>Read-only constant gets the XML element name of a METAL macro-definition attribute.</para>
     /// </summary>
-    protected const string DefineMacroAttributeName          = "define-macro";
+    protected const string DefineMacroAttributeName         = "define-macro";
     
     /// <summary>
     /// <para>Read-only constant gets the XML element name of a METAL macro-extension attribute.</para>
     /// </summary>
-    protected const string ExtendMacroAttributeName          = "extend-macro";
+    protected const string ExtendMacroAttributeName         = "extend-macro";
     
     /// <summary>
     /// <para>Read-only constant gets the XML element name of a METAL macro-invocation attribute.</para>
     /// </summary>
-    protected const string UseMacroAttributeName             = "use-macro";
+    protected const string UseMacroAttributeName            = "use-macro";
     
     /// <summary>
     /// <para>Read-only constant gets the XML element name of a METAL slot-definition attribute.</para>
     /// </summary>
-    protected const string DefineSlotAttributeName           = "define-slot";
+    protected const string DefineSlotAttributeName          = "define-slot";
     
     /// <summary>
     /// <para>Read-only constant gets the XML element name of a METAL slot-usage attribute.</para>
     /// </summary>
-    protected const string FillSlotAttributeName             = "fill-slot";
+    protected const string FillSlotAttributeName            = "fill-slot";
+    
+    private const string MACRO_NAME_TAL_VARIABLE            = "macroname";
     
     #endregion
     
@@ -227,6 +229,11 @@ namespace CraigFowler.Web.ZPT.Metal
         }
       }
       
+      if(output != null)
+      {
+        output = output.Expand(false, context);
+      }
+      
       return output;
     }
     
@@ -236,9 +243,6 @@ namespace CraigFowler.Web.ZPT.Metal
     /// indexed by the value of the name of the slot that they fill.
     /// </para>
     /// </summary>
-    /// <param name="context">
-    /// A <see cref="Tales.TalesContext"/>
-    /// </param>
     /// <returns>
     /// <para>
     /// A dictionary of <see cref="System.String"/> and <see cref="MetalElement"/>.
@@ -253,16 +257,10 @@ namespace CraigFowler.Web.ZPT.Metal
     /// If <see cref="GetUseMacro(Tales.TalesContext)"/> returns a null reference (indicating that this element
     /// instance does not contain a 'use-macro' directive).
     /// </exception>
-    public Dictionary<string,MetalElement> GetFilledSlots(Tales.TalesContext context)
+    public Dictionary<string,MetalElement> GetFilledSlots()
     {
       Dictionary<string,MetalElement> output = new Dictionary<string, MetalElement>();
-      MetalMacro useMacro = this.GetUseMacro(context);
       XmlNamespaceManager namespaceManager = new XmlNamespaceManager(this.OwnerDocument.NameTable);
-      
-      if(useMacro == null)
-      {
-        throw new MetalException("This METAL element does not contain a 'use-macro' directive.");
-      }
       
       namespaceManager.AddNamespace("metal", TalDocument.MetalNamespace);
       
@@ -303,11 +301,11 @@ namespace CraigFowler.Web.ZPT.Metal
     /// </param>
     public override void Render (TalOutput output)
     {
-      MetalMacro macroElement = GetUseMacro(this.MetalContext);
+      MetalMacro macroElement = this.GetUseMacro(this.MetalContext);
       
       if(macroElement != null)
       {
-        this.SpliceWith(macroElement.Expand(false, this.MetalContext), output);
+        this.SpliceWith(macroElement, output);
       }
       else
       {
@@ -391,15 +389,38 @@ namespace CraigFowler.Web.ZPT.Metal
         throw new NotSupportedException("The element to splice in is not a METAL macro, but slot replacements " +
                                         "have been provided.  This is unsupported.");
       }
+      else if(performSlotReplacements && slotReplacements == null)
+      {
+        throw new ArgumentNullException("slotReplacements",
+                                        "Slot replacements may not be null when we are splicing with a METAL macro.");
+      }
       else if(performSlotReplacements)
       {
         MetalMacro importedMacro = (MetalMacro) importedElement;
-        Dictionary<string, MetalElement> slots = importedMacro.GetAvailableSlots();
+        Dictionary<string, MetalElement> slots;
+        
+        if(!importedMacro.IsExpanded)
+        {
+          throw new MetalException("METAL macro is not expanded.");
+        }
+        
+        slots = importedMacro.GetAvailableSlots();
         
         foreach(string key in slotReplacements.Keys)
         {
           if(!slots.ContainsKey(key))
           {
+#if DEBUG
+            List<string> available = new List<string>();
+            available.AddRange(slots.Keys);
+            Console.Error.WriteLine("Available slots were {0}.", String.Join(", ", available.ToArray()));
+            Console.Error.WriteLine();
+            Console.Error.WriteLine(importedMacro.OuterXml);
+            Console.Error.WriteLine();
+            Console.Error.WriteLine(this.OuterXml);
+            Console.Error.WriteLine();
+#endif
+            
             string message = String.Format("Attempt to fill slot named '{0}' but the macro used does not provide a " +
                                            "slot by that name.",
                                            key);
@@ -411,9 +432,20 @@ namespace CraigFowler.Web.ZPT.Metal
           
           slots[key].SpliceWith(slotReplacements[key], output, true);
         }
+        
+        importedMacro.TalesContext.AddDefinition(MACRO_NAME_TAL_VARIABLE, importedMacro.MacroName);
       }
       
-      this.ParentNode.ReplaceChild(importedElement, this);
+      // Replace the current node with the node from the 
+      if(this.ParentNode == null)
+      {
+        this.OwnerDocument.RemoveAll();
+        this.OwnerDocument.AppendChild(importedElement);
+      }
+      else
+      {
+        this.ParentNode.ReplaceChild(importedElement, this);
+      }
       
       if(!skipRendering)
       {
@@ -432,7 +464,7 @@ namespace CraigFowler.Web.ZPT.Metal
     /// </param>
     public void SpliceWith(MetalMacro macro, TalOutput output)
     {
-      this.SpliceWith(macro, output, this.GetFilledSlots(this.MetalContext), false);
+      this.SpliceWith(macro, output, this.GetFilledSlots(), false);
     }
     
     #endregion
@@ -533,12 +565,21 @@ namespace CraigFowler.Web.ZPT.Metal
         IMetalDocument metalDocument = ownerDocument as IMetalDocument;
         MetalMacro macro = new MetalMacro(elementToClone, ownerDocument);
         
-        metalDocument.Macros[macro.MacroName] = macro;
+        if(ownerDocument != elementToClone.OwnerDocument ||
+           !metalDocument.Macros.ContainsMacro(macro.MacroName))
+        {
+          metalDocument.Macros[macro.MacroName] = macro;
+        }
+        
         output = macro;
       }
       else
       {
         output = new MetalElement(elementToClone, ownerDocument);
+        if(elementToClone is MetalElement)
+        {
+          output.CachedUseMacro = ((MetalElement) elementToClone).CachedUseMacro;
+        }
       }
       
       return output;

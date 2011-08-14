@@ -9,6 +9,7 @@ using CraigFowler.Web.ZPT.Mocks;
 using System.Collections;
 using CraigFowler.Web.ZPT.Tales.Exceptions;
 using CraigFowler.Web.ZPT.Tales;
+using CraigFowler.Web.ZPT.Metal.Exceptions;
 
 namespace Test.CraigFowler.Web.ZPT.Metal
 {
@@ -69,6 +70,8 @@ namespace Test.CraigFowler.Web.ZPT.Metal
       
       for(int i = 0; i < this.InputFiles.Count; i++)
       {
+//        Console.WriteLine ("Testing document {0}", this.InputFiles[i].FullName);
+        
         // Load the input document as well as the expected output
         IZptDocument document = ZptDocument.DocumentFactory(this.InputFiles[i]);
         string expectedOutput = File.ReadAllText(this.OutputFiles[i].FullName);
@@ -86,13 +89,29 @@ namespace Test.CraigFowler.Web.ZPT.Metal
         {
           foreach(TalesPath path in ex.Attempts.Keys)
           {
-            Console.Error.WriteLine("{0}: {1}", path.ToString(), ex.Attempts[path].Message);
+            Console.Error.WriteLine("Whilst processing {2}\n{0}: {1}",
+                                    path.ToString(),
+                                    ex.Attempts[path].Message,
+                                    this.InputFiles[i].FullName);
           }
           throw;
         }
+        catch(MetalException ex)
+        {
+          Console.Error.WriteLine("Whilst processing {0}\n{1}", this.InputFiles[i].FullName, ex.Message);
+          throw;
+        }
         
-        Assert.AreEqual(expectedOutput, documentOutput, String.Format("Rendering test: {0}",
-                                                                      this.InputFiles[i].FullName));
+        try
+        {
+          Assert.AreEqual(expectedOutput, documentOutput, String.Format("Rendering test: {0}",
+                                                                        this.InputFiles[i].FullName));
+        }
+        catch(AssertionException)
+        {
+          Console.WriteLine ("Rendered output:\n{0}\n\nExpected:\n{1}", documentOutput, expectedOutput);
+          throw;
+        }
       }
         
         // This is some more verbose debugging code that can be used to handle more complex failure scenarios.

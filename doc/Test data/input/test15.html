@@ -1,20 +1,21 @@
+<html xmlns:metal="http://xml.zope.org/namespaces/metal">
 <span metal:define-macro="INNER">
   <span metal:define-slot="INNERSLOT">INNERSLOT</span>
 </span>
 
-<xxx metal:use-macro="INNER">
+<xxx metal:use-macro="template/macros/INNER">
   <xxx metal:fill-slot="INNERSLOT">inner-argument</xxx>
 </xxx>
 
 <div metal:define-macro="OUTER">
-<div metal:use-macro="INNER">
+<div metal:use-macro="template/macros/INNER">
   <xxx metal:define-slot="OUTERSLOT" metal:fill-slot="INNERSLOT">
     OUTERSLOT
   </xxx>
 </div>
 </div>
 
-<div metal:use-macro="OUTER">
+<div metal:use-macro="template/macros/OUTER">
 <span>
   <xxx>
     <div metal:fill-slot="OUTERSLOT">outer-argument</div>
@@ -22,5 +23,6 @@
 </span>
 </div>
 
-<div metal:use-macro="OUTER">
+<div metal:use-macro="template/macros/OUTER">
 </div>
+</html>
