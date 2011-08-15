@@ -57,9 +57,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Content\Member.cs" />
     <Compile Include="Views\Home\MacroView.cs" />
     <Compile Include="Controllers\TestController.cs" />
+    <Compile Include="Models\Member.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Web.config" />
@@ -71,6 +71,9 @@
   <ProjectExtensions>
     <MonoDevelop>
       <Properties VerifyCodeBehindFields="true" VerifyCodeBehindEvents="true">
+        <Policies>
+          <StandardHeader inheritsSet="GPLv3License" />
+        </Policies>
         <XspParameters Port="8080" Address="127.0.0.1" SslMode="None" SslProtocol="Default" KeyType="None" CertFile="" KeyFile="" PasswordOptions="None" Password="" Verbose="true" />
       </Properties>
     </MonoDevelop>

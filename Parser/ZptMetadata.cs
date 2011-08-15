@@ -20,14 +20,14 @@
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Reflection;
+using System.Text;
+using System.Xml;
 using System.Xml.Serialization;
 using CraigFowler.Web.ZPT.Metal;
 using CraigFowler.Web.ZPT.Tal;
-using System.Text;
-using System.Reflection;
-using System.Collections.Generic;
-using System.Xml;
 
 namespace CraigFowler.Web.ZPT
 {

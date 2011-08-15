@@ -75,6 +75,7 @@
     <Compile Include="Metal\TestMetalElement.cs" />
     <Compile Include="Metal\MetalIntegrationTests.cs" />
     <Compile Include="Metal\TestMetalMacro.cs" />
+    <Compile Include="Tales\TestTalesPath.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Parser\Parser.csproj">
@@ -84,43 +85,17 @@
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
-    <None Include="Tales\TestTalesPath.cs">
-      <Visible>False</Visible>
-    </None>
-    <None Include="Test data\simple-tal-document.pt" />
-    <None Include="Test data\simple-tal-document.pt.metadata" />
-    <None Include="Test data\simple-tal-document.xml" />
-    <None Include="Test data\Document Root\README" />
-    <None Include="Test data\Document Root\one.pt" />
-    <None Include="Test data\Document Root\two.pt" />
-    <None Include="Test data\Document Root\three\five.pt" />
-    <None Include="Test data\Document Root\three\four\INVALID.xml" />
-    <None Include="Test data\input\test02.html" />
-    <None Include="Test data\input\test02.xml" />
-    <None Include="Test data\input\test03.html" />
-    <None Include="Test data\input\test03.xml" />
-    <None Include="Test data\input\test03a.html" />
-    <None Include="Test data\input\test03a.xml" />
-    <None Include="Test data\input\test09.xml" />
-    <None Include="Test data\input\test16.xml" />
-    <None Include="Test data\input\test17.xml" />
-    <None Include="Test data\input\testTalDocumentWithMockObject.xhtml" />
-    <None Include="Test data\input\testTalDocumentWithOnlyStringExpressions.xhtml" />
-    <None Include="Test data\output\test02.html" />
-    <None Include="Test data\output\test02.xml" />
-    <None Include="Test data\output\test03.html" />
-    <None Include="Test data\output\test03.xml" />
-    <None Include="Test data\output\test03a.html" />
-    <None Include="Test data\output\test03a.xml" />
-    <None Include="Test data\output\test09.xml" />
-    <None Include="Test data\output\test16.xml" />
-    <None Include="Test data\output\test17.xml" />
-    <None Include="Test data\output\testTalDocumentWithMockObject.xhtml" />
-    <None Include="Test data\output\testTalDocumentWithOnlyStringExpressions.xhtml" />
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="Unit-tests.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
+  <ProjectExtensions>
+    <MonoDevelop>
+      <Properties>
+        <Policies>
+          <StandardHeader inheritsSet="GPLv3License" />
+        </Policies>
+      </Properties>
+    </MonoDevelop>
+  </ProjectExtensions>
 </Project>

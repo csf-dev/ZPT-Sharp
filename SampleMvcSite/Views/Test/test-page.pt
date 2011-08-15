@@ -5,6 +5,9 @@
       metal:use-macro="documents/Layout/outer-page/macros/mainPage">
 <head>
 <title metal:fill-slot="pageTitle">This is a test page</title>
+<style type="text/css">
+body { background-color: yellow; }
+</style>
 </head>
 <body>
 <div metal:fill-slot="region-main" class="region-main">

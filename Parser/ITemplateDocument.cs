@@ -18,10 +18,12 @@
 // 
 //  You should have received a copy of the GNU General Public License
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
 using System;
 using CraigFowler.Web.ZPT.Tales;
 using CraigFowler.Web.ZPT.Tal;
 using System.Xml;
+
 namespace CraigFowler.Web.ZPT
 {
 	/// <summary>
