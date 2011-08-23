@@ -88,5 +88,7 @@
     <None Include="Views\userMacro.pt" />
     <None Include="Views\Home\home.pt" />
     <None Include="Views\Home\macro.pt" />
+    <None Include="Views\Test\test-page.pt" />
+    <None Include="Views\Layout\outer-page.pt" />
   </ItemGroup>
 </Project>
