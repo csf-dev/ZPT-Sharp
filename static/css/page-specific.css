@@ -1,0 +1,30 @@
+.region_content.index .what_next {
+  padding: 0;
+  margin: 0 0 0 -20px;
+  overflow: auto;
+  list-style: outside none;
+  font-size: 95%;
+}
+.region_content.index .what_next>* {
+  float: left;
+  width: 280px;
+  margin: 0 0 20px 20px;
+  height: 120px;
+  padding: 10px;
+  background-color: #19C;
+  overflow: hidden;
+}
+.region_content.index .what_next h3 {
+  font-weight: bold;
+  font-size: 100%;
+  font-style: normal;
+  margin: 0 0 1em;
+  padding: 0;
+}
+.region_content.index .what_next h3 a {
+  color: #FFF;
+  border-width: 0;
+}
+.region_content.index .what_next p {
+  color: #EEE;
+}
