@@ -5,7 +5,7 @@ as a .NET MVC v2 ViewEngine
 
 Firstly - THIS SOFTWARE IS DISTRIBUTED FREE OF CHARGE WITHOUT ANY WARRANTY OF
 ANY SORT.  Please see the attached license document (LICENCE).  The current
-state of this project is a 'tentative alpha' release.  That means that it might
+state of this project is a 'tentative alpha 1' release.  That means that it might
 not work, that it might destroy your data, ruin your country's economy and kick
 your neighbours puppy.  Certainly don't use this for anything mission-critical!
 
@@ -13,10 +13,17 @@ Secondly, a quick nod to https://github.com/lck/SharpTAL - it seems that the
 two of us developed our implementations in parallel and I only found out about
 SharpTAL once I had nearly finished my own.  SharpTAL was made public first.
 
-At some point I need to write a more thorough introduction and README for this
-project but for now, assuming you know how to use the ASP.NET MVC v2, compile
-the Parser project and then take a look at the SampleMvcSite project for how
-to integrate ZPT into your MVC project as a custom ViewEngine.
+As of 23rd August 2011, API documentation (auto-generated from the source files
+as well as C# documentation comments, using doxygen) is available at:
+http://craigfowler.github.com/ZPT-Sharp
+The auto-generated docs will not remain as the root of the github pages site
+however, so avoid deep-linking into it for now.  At some point there needs to
+be a more thorough effort made to document ZPT-Sharp, what it does and how to
+get started with it.
+
+For now, assuming you know how to use the ASP.NET MVC v2, compile the Parser
+project and then take a look at the SampleMvcSite project for how to integrate
+ZPT into your MVC project as a custom ViewEngine.
 
 As the first paragraph notes, this is very new software and it hasn't yet been
 used 'in the wild'.  It could be riddled with bugs and security issues.  That
