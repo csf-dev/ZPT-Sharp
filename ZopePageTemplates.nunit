@@ -1,7 +1,7 @@
 ﻿<NUnitProject>
   <Settings activeconfig="Debug" />
-  <Config name="Debug" appbase="Test.Parser/bin/Debug" configfile="Unit-tests.config" binpathtype="Auto">
-    <assembly path="Test.Parser.dll" />
+  <Config name="Debug" appbase="Test.CraigFowler.Web.ZPT/bin/Debug" configfile="Unit-tests.config" binpathtype="Auto">
+    <assembly path="Test.CraigFowler.Web.ZPT.dll" />
   </Config>
   <Config name="Release" appbase="Test.Parser/bin/Release" configfile="Unit-tests.config" binpathtype="Auto">
     <assembly path="Test.Parser.dll" />
