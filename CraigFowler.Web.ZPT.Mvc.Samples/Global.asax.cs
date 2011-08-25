@@ -1,5 +1,5 @@
 //  
-//  TestController.cs
+//  Global.asax.cs
 //  
 //  Author:
 //       Craig Fowler <craig@craigfowler.me.uk>
@@ -19,15 +19,31 @@
 //  You should have received a copy of the GNU General Public License
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-using System.Web.Mvc;
 
-namespace CraigFowler.Samples.Mvc.Controllers
+using System.Web;
+using System.Web.Mvc;
+using System.Web.Routing;
+
+namespace CraigFowler.Web.ZPT.Mvc.Samples
 {
-  public class TestController : Controller
+  public class MvcApplication : System.Web.HttpApplication
   {
-    public ActionResult Index()
+    public static void RegisterRoutes (RouteCollection routes)
     {
-      return View("test-page");
+      routes.IgnoreRoute ("{resource}.axd/{*pathInfo}");
+      
+      routes.MapRoute ("Default", "{controller}/{action}/{id}", new { controller = "Home", action = "Index", id = "" });
+      
+    }
+
+    protected void Application_Start ()
+    {
+      RegisterRoutes (RouteTable.Routes);
+      
+      ZptMetadata.RegisterDocumentClasses(System.Reflection.Assembly.GetExecutingAssembly());
+      
+      ViewEngines.Engines.Clear();
+      ViewEngines.Engines.Add(new ZptViewEngine());
     }
   }
 }

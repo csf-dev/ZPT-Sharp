@@ -8,9 +8,10 @@
     <ProjectGuid>{BF4327CD-BE29-4EB6-AFEA-25C714B96410}</ProjectGuid>
     <ProjectTypeGuids>{349C5851-65DF-11DA-9384-00065B846F21};{603C0E0B-DB56-11DC-BE95-000D561079B0};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
-    <RootNamespace>CraigFowler.Samples.Mvc</RootNamespace>
-    <AssemblyName>SampleMvcSite</AssemblyName>
+    <RootNamespace>CraigFowler.Web.ZPT.Mvc.Samples</RootNamespace>
+    <AssemblyName>CraigFowler.Web.ZPT.Mvc.Samples</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <newfilesearch>OnLoad</newfilesearch>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -21,14 +22,18 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <ConsolePause>false</ConsolePause>
+    <CheckForOverflowUnderflow>true</CheckForOverflowUnderflow>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>none</DebugType>
-    <Optimize>false</Optimize>
+    <Optimize>true</Optimize>
     <OutputPath>bin</OutputPath>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <ConsolePause>false</ConsolePause>
+    <CheckForOverflowUnderflow>true</CheckForOverflowUnderflow>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -65,6 +70,7 @@
     <Content Include="Views\Web.config" />
     <Content Include="Web.config" />
     <Content Include="Global.asax" />
+    <Content Include="static\reset.css" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v9.0\WebApplications\Microsoft.WebApplication.targets" />
@@ -79,9 +85,9 @@
     </MonoDevelop>
   </ProjectExtensions>
   <ItemGroup>
-    <ProjectReference Include="..\Parser\Parser.csproj">
+    <ProjectReference Include="..\CraigFowler.Web.ZPT\CraigFowler.Web.ZPT.csproj">
       <Project>{B887669F-17F7-45E9-BE79-A87570BFFA80}</Project>
-      <Name>Parser</Name>
+      <Name>CraigFowler.Web.ZPT</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
@@ -90,5 +96,15 @@
     <None Include="Views\Home\macro.pt" />
     <None Include="Views\Test\test-page.pt" />
     <None Include="Views\Layout\outer-page.pt" />
+    <None Include="Views\Home\macro.pt.metadata" />
+    <None Include="bin\CraigFowler.Web.ZPT.dll.mdb">
+      <Visible>False</Visible>
+    </None>
+    <None Include="bin\SampleMvcSite.dll.mdb">
+      <Visible>False</Visible>
+    </None>
+    <None Include="bin\zpt-parser.dll.mdb">
+      <Visible>False</Visible>
+    </None>
   </ItemGroup>
 </Project>

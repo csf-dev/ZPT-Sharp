@@ -8,7 +8,7 @@
     <ProjectGuid>{9E6F7F15-7283-4D12-B3F7-4E7D18ED860D}</ProjectGuid>
     <OutputType>Library</OutputType>
     <RootNamespace>Test.CraigFowler.Web.ZPT</RootNamespace>
-    <AssemblyName>Test.Parser</AssemblyName>
+    <AssemblyName>Test.CraigFowler.Web.ZPT</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -19,6 +19,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <DebugSymbols>true</DebugSymbols>
+    <CheckForOverflowUnderflow>true</CheckForOverflowUnderflow>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>none</DebugType>
@@ -26,6 +27,7 @@
     <OutputPath>bin\Release</OutputPath>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <CheckForOverflowUnderflow>true</CheckForOverflowUnderflow>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -78,9 +80,9 @@
     <Compile Include="Tales\TestTalesPath.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Parser\Parser.csproj">
+    <ProjectReference Include="..\CraigFowler.Web.ZPT\CraigFowler.Web.ZPT.csproj">
       <Project>{B887669F-17F7-45E9-BE79-A87570BFFA80}</Project>
-      <Name>Parser</Name>
+      <Name>CraigFowler.Web.ZPT</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

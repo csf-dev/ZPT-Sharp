@@ -1,5 +1,5 @@
 //  
-//  MacroView.cs
+//  Member.cs
 //  
 //  Author:
 //       Craig Fowler <craig@craigfowler.me.uk>
@@ -19,21 +19,35 @@
 //  You should have received a copy of the GNU General Public License
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-using CraigFowler.Web.ZPT;
+using System;
 using CraigFowler.Web.ZPT.Tales;
 
-namespace CraigFowler.Samples.Mvc.Views.Home
+namespace CraigFowler.Web.ZPT.Mvc.Samples.Models
 {
-  public class MacroView : ZptDocument
+  /// <summary>
+  /// <para>Stub class for testing a member-like object.</para>
+  /// </summary>
+  public class Member
   {
-    private static int AttemptCount = 0;
-    
-    protected override void AssignModelData (TalesContext talesContext)
+    /// <summary>
+    /// <para>Username</para>
+    /// </summary>
+    [TalesAlias("username")]
+    public string Username
     {
-      talesContext.AddDefinition("foo", AttemptCount++);
+      get;
+      set;
     }
     
-    public MacroView (ZptMetadata metadata) : base(metadata) {}
+    /// <summary>
+    /// <para>Age in years</para>
+    /// </summary>
+    [TalesAlias("age")]
+    public int Age
+    {
+      get;
+      set;
+    }
   }
 }
 

@@ -128,7 +128,7 @@ namespace Test.CraigFowler.Web.ZPT.Metal
         }
         catch(AssertionException)
         {
-          Console.WriteLine ("Rendered output:\n{0}\n\nExpected:\n{1}", documentOutput, expectedOutput);
+          Console.Error.WriteLine ("Rendered output:\n{0}\n\nExpected:\n{1}", documentOutput, expectedOutput);
           throw;
         }
       }

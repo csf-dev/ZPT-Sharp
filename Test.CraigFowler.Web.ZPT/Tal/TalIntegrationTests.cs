@@ -90,11 +90,11 @@ namespace Test.CraigFowler.Web.ZPT.Tal
 				}
 				catch(Exception ex)
 				{
-					Console.WriteLine (ex.ToString());
+					Console.Error.WriteLine (ex.ToString());
 					
 					if(ex is PathInvalidException)
 					{
-						Console.WriteLine (((PathInvalidException) ex).RawPath);
+						Console.Error.WriteLine (((PathInvalidException) ex).RawPath);
 					}
 					
 					Assert.Fail(String.Format("Encountered an exception whilst rendering file '{0}'.", inputFilename));
@@ -102,7 +102,7 @@ namespace Test.CraigFowler.Web.ZPT.Tal
 				
 				if(renderedOutput != expectedOutput)
 				{
-					Console.WriteLine ("Expected:\n{0}\n\nActual:\n{1}", expectedOutput, renderedOutput);
+					Console.Error.WriteLine ("Expected:\n{0}\n\nActual:\n{1}", expectedOutput, renderedOutput);
 				}
 				
 				Assert.AreEqual(expectedOutput,
@@ -112,7 +112,6 @@ namespace Test.CraigFowler.Web.ZPT.Tal
 		}
 		
     [Test]
-		[Category("Information")]
 		public void TestRenderDocumentsWithoutWhitespace()
 		{
 			List<FileInfo> inputFiles, outputFiles;
@@ -122,9 +121,7 @@ namespace Test.CraigFowler.Web.ZPT.Tal
 			for(int i = 0; i < inputFiles.Count; i++)
 			{
 				TalDocument document = new TalDocument();
-				string
-					inputFilename = inputFiles[i].FullName,
-					renderedOutput = null;
+				string inputFilename = inputFiles[i].FullName;
 				StringBuilder renderingBuilder;
 				MockObject mock = new MockObject(true);
 				
@@ -141,6 +138,8 @@ namespace Test.CraigFowler.Web.ZPT.Tal
 				mock["fourth"] = "Fourth test";
 				mock.BooleanValue = false;
 				
+        document.TalesContext.AddDefinition("macroname", "page");
+        
 				try
 				{
 					renderingBuilder = new StringBuilder();
@@ -157,21 +156,20 @@ namespace Test.CraigFowler.Web.ZPT.Tal
 						}
 					}
 					
-					renderedOutput = renderingBuilder.ToString();
+					Assert.IsNotNull(renderingBuilder.ToString(), String.Format("Output for '{0}' is not null.", inputFilename));
 				}
 				catch(Exception ex)
 				{
-					Console.WriteLine (ex.ToString());
+          Console.Error.WriteLine("Encountered an error whilst rendering file '{0}'", inputFilename);
 					
 					if(ex is PathInvalidException)
 					{
-						Console.WriteLine (((PathInvalidException) ex).RawPath);
+						Console.Error.WriteLine ("Exception was a PathInvalidException.  The raw path was: ",
+                                     ((PathInvalidException) ex).RawPath);
 					}
-					
-					Assert.Fail(String.Format("Encountered an exception whilst rendering file '{0}'.", inputFilename));
+          
+          throw;
 				}
-				
-				Console.WriteLine ("Document:\n{0}\n\nRendering:\n{1}", inputFilename, renderedOutput);
 			}
 		}
 		
@@ -324,11 +322,11 @@ namespace Test.CraigFowler.Web.ZPT.Tal
 				}
 				catch(Exception ex)
 				{
-					Console.WriteLine (ex.ToString());
+					Console.Error.WriteLine (ex.ToString());
 					
 					if(ex is PathInvalidException)
 					{
-						Console.WriteLine (((PathInvalidException) ex).RawPath);
+						Console.Error.WriteLine (((PathInvalidException) ex).RawPath);
 					}
 					
 					Assert.Fail(String.Format("Encountered an exception whilst rendering file '{0}'.", inputFile.FullName));
@@ -441,11 +439,11 @@ namespace Test.CraigFowler.Web.ZPT.Tal
 			}
 			catch(Exception ex)
 			{
-				Console.WriteLine (ex.ToString());
+				Console.Error.WriteLine (ex.ToString());
 				
 				if(ex is PathInvalidException)
 				{
-					Console.WriteLine (((PathInvalidException) ex).RawPath);
+					Console.Error.WriteLine (((PathInvalidException) ex).RawPath);
 				}
 				
 				Assert.Fail(String.Format("Encountered an exception whilst rendering file '{0}'.", inputFile.FullName));

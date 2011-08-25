@@ -111,7 +111,7 @@ namespace Test.CraigFowler.Web.ZPT.Metal
       {
         foreach(TalesPath path in ex.Attempts.Keys)
         {
-          Console.WriteLine (@"Traversal exception information:
+          Console.Error.WriteLine (@"Traversal exception information:
 
 Path
 ----
@@ -120,15 +120,15 @@ Path
 Exception
 ---------
 {1}",
-                             path.ToString(),
-                             ex.Attempts[path].ToString());
+                                   path.ToString(),
+                                   ex.Attempts[path].ToString());
         }
         
         throw;
       }
       catch(MetalException ex)
       {
-        Console.WriteLine ("Exception information.  Path = {0}", ex.Data["Path"]);
+        Console.Error.WriteLine ("Exception information.  Path = {0}", ex.Data["Path"]);
         throw;
       }
       

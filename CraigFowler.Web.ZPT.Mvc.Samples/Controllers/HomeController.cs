@@ -1,5 +1,5 @@
 //  
-//  Member.cs
+//  HomeController.cs
 //  
 //  Author:
 //       Craig Fowler <craig@craigfowler.me.uk>
@@ -19,34 +19,25 @@
 //  You should have received a copy of the GNU General Public License
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-using System;
-using CraigFowler.Web.ZPT.Tales;
+using System.Web.Mvc;
+using CraigFowler.Web.ZPT.Mvc.Samples.Models;
 
-namespace CraigFowler.Samples.Mvc.Models
+namespace CraigFowler.Web.ZPT.Mvc.Samples.Controllers
 {
-  /// <summary>
-  /// <para>Stub class for testing a member-like object.</para>
-  /// </summary>
-  public class Member
+  [HandleError]
+  public class HomeController : Controller
   {
-    /// <summary>
-    /// <para>Username</para>
-    /// </summary>
-    [TalesAlias("username")]
-    public string Username
+    public ActionResult Index ()
     {
-      get;
-      set;
-    }
-    
-    /// <summary>
-    /// <para>Age in years</para>
-    /// </summary>
-    [TalesAlias("age")]
-    public int Age
-    {
-      get;
-      set;
+      Member member = new Member();
+      
+      member.Username = "Craig Fowler";
+      member.Age = 29;
+      
+      ViewData["Message"] = "Welcome to ASP.NET MVC on Mono!";
+      ViewData["currentUser"] = member;
+      
+      return View ("macro");
     }
   }
 }

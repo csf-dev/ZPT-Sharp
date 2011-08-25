@@ -411,17 +411,6 @@ namespace CraigFowler.Web.ZPT.Metal
         {
           if(!slots.ContainsKey(key))
           {
-#if DEBUG
-            List<string> available = new List<string>();
-            available.AddRange(slots.Keys);
-            Console.Error.WriteLine("Available slots were {0}.", String.Join(", ", available.ToArray()));
-            Console.Error.WriteLine();
-            Console.Error.WriteLine(importedMacro.OuterXml);
-            Console.Error.WriteLine();
-            Console.Error.WriteLine(this.OuterXml);
-            Console.Error.WriteLine();
-#endif
-            
             string message = String.Format("Attempt to fill slot named '{0}' but the macro used does not provide a " +
                                            "slot by that name.",
                                            key);

@@ -1,5 +1,5 @@
 //  
-//  HomeController.cs
+//  TestController.cs
 //  
 //  Author:
 //       Craig Fowler <craig@craigfowler.me.uk>
@@ -20,24 +20,14 @@
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System.Web.Mvc;
-using CraigFowler.Samples.Mvc.Models;
 
-namespace CraigFowler.Samples.Mvc.Controllers
+namespace CraigFowler.Web.ZPT.Mvc.Samples.Controllers
 {
-  [HandleError]
-  public class HomeController : Controller
+  public class TestController : Controller
   {
-    public ActionResult Index ()
+    public ActionResult Index()
     {
-      Member member = new Member();
-      
-      member.Username = "Craig Fowler";
-      member.Age = 29;
-      
-      ViewData["Message"] = "Welcome to ASP.NET MVC on Mono!";
-      ViewData["currentUser"] = member;
-      
-      return View ("macro");
+      return View("test-page");
     }
   }
 }

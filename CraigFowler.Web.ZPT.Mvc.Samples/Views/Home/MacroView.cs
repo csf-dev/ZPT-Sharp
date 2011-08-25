@@ -1,5 +1,5 @@
 //  
-//  Global.asax.cs
+//  MacroView.cs
 //  
 //  Author:
 //       Craig Fowler <craig@craigfowler.me.uk>
@@ -19,34 +19,21 @@
 //  You should have received a copy of the GNU General Public License
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-
-using System.Web;
-using System.Web.Mvc;
-using System.Web.Routing;
 using CraigFowler.Web.ZPT;
-using CraigFowler.Web.ZPT.Mvc;
+using CraigFowler.Web.ZPT.Tales;
 
-namespace CraigFowler.Samples.Mvc
+namespace CraigFowler.Web.ZPT.Mvc.Samples.Views.Home
 {
-  public class MvcApplication : System.Web.HttpApplication
+  public class MacroView : ZptDocument
   {
-    public static void RegisterRoutes (RouteCollection routes)
+    private static int AttemptCount = 0;
+    
+    protected override void AssignModelData (TalesContext talesContext)
     {
-      routes.IgnoreRoute ("{resource}.axd/{*pathInfo}");
-      
-      routes.MapRoute ("Default", "{controller}/{action}/{id}", new { controller = "Home", action = "Index", id = "" });
-      
+      talesContext.AddDefinition("foo", AttemptCount++);
     }
-
-    protected void Application_Start ()
-    {
-      RegisterRoutes (RouteTable.Routes);
-      
-      ZptMetadata.RegisterDocumentClasses(System.Reflection.Assembly.GetExecutingAssembly());
-      
-      ViewEngines.Engines.Clear();
-      ViewEngines.Engines.Add(new ZptViewEngine());
-    }
+    
+    public MacroView (ZptMetadata metadata) : base(metadata) {}
   }
 }
 

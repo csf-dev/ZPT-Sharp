@@ -109,7 +109,7 @@ namespace Test.CraigFowler.Web.ZPT.Tales
 			{
 				foreach(TalesPath path in ex.Attempts.Keys)
 				{
-					Console.WriteLine ("Path: '{0}', Exception: {1}", path.ToString(), ex.Attempts[path].ToString());
+					Console.Error.WriteLine ("Path: '{0}', Exception: {1}", path.ToString(), ex.Attempts[path].ToString());
 				}
 				
 				throw;

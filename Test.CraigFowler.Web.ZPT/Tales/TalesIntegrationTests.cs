@@ -322,12 +322,12 @@ namespace Test.CraigFowler.Web.ZPT.Tales
       }
       catch(TraversalException ex)
       {
-        Console.WriteLine (ex);
+        Console.Error.WriteLine (ex);
         
         foreach(TalesException attempt in ex.Attempts.Values)
         {
-          Console.WriteLine (attempt.ToString());
-          Console.WriteLine (attempt.Data["path"].ToString());
+          Console.Error.WriteLine (attempt.ToString());
+          Console.Error.WriteLine (attempt.Data["path"].ToString());
         }
         
         throw;
@@ -406,7 +406,7 @@ namespace Test.CraigFowler.Web.ZPT.Tales
       
       testObj = expression.GetValue();
       
-      Console.WriteLine ("TestDuplicateAlias has failed, the object it found was: {0}", testObj);
+      Console.Error.WriteLine ("TestDuplicateAlias has failed, the object it found was: {0}", testObj);
       
       Assert.Fail("If we reach this point then the test failed");
       Assert.IsNull(testObj, "Not really a test, just prevents a compiler warning");
@@ -490,7 +490,7 @@ namespace Test.CraigFowler.Web.ZPT.Tales
         throw;
       }
       
-      Console.WriteLine ("TestParseTwoInvalidPathExpressionsNonPermanent failed: '{0}' was found.", testObj);
+      Console.Error.WriteLine ("TestParseTwoInvalidPathExpressionsNonPermanent failed: '{0}' was found.", testObj);
       
       Assert.Fail("If the test reaches this point then we failed");
       Assert.IsNull(testObj, "Not a real test, but prevents a compiler warning");
