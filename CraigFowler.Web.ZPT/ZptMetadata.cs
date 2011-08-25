@@ -42,7 +42,7 @@ namespace CraigFowler.Web.ZPT
 		/// <summary>
 		/// <para>Read-only.  Constant gets the filename extension for document template files.</para>
 		/// </summary>
-		public const string ZptTemplateDocumentExtension = ".pt";
+		public static readonly string ZptTemplateDocumentExtension = ".pt";
 		
 		/// <summary>
 		/// <para>Read-only.  Constant gets the XML namespace for ZPT metadata.</para>

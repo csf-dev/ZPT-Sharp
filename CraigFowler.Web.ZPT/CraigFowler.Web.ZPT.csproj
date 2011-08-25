@@ -85,6 +85,7 @@
     <Compile Include="Metal\MetalMacroCollection.cs" />
     <Compile Include="Mvc\ZptView.cs" />
     <Compile Include="Mvc\ZptViewEngine.cs" />
+    <Compile Include="ZptPageBuilder.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
@@ -96,6 +97,8 @@
     <Folder Include="Metal\" />
     <Folder Include="Metal\Exceptions\" />
     <Folder Include="Mvc\" />
+    <Folder Include="Builder\" />
+    <Folder Include="Builder\" />
   </ItemGroup>
   <ProjectExtensions>
     <MonoDevelop>
