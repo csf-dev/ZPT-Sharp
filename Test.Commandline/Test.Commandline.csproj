@@ -8,6 +8,7 @@
     <ProjectGuid>{C7643872-99A4-4511-B4FC-022AEE483274}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AssemblyName>Test.Commandline</AssemblyName>
+    <RootNamespace>Test.CraigFowler.Cli</RootNamespace>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -42,6 +43,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="TestUnixParameters.cs" />
+    <Compile Include="TestUnixParametersWithAttributes.cs" />
+    <Compile Include="Mocks\ErroneousParametersEnumeration.cs" />
+    <Compile Include="Mocks\ParametersEnumeration.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <ItemGroup>
+    <Folder Include="Mocks\" />
+  </ItemGroup>
 </Project>

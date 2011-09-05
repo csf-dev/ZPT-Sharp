@@ -1,147 +1,183 @@
 
-using System;
+using CraigFowler.Cli;
 using NUnit.Framework;
-using CraigFowler.Console;
 
-namespace Test.CraigFowler.Console
+namespace Test.CraigFowler.Cli
 {
   [TestFixture]
-  public class TestParameterParserUnix
+  public class TestParameterProcessorUnix
   {
+    #region tests
+    
     [Test]
     public void TestLongParamsNoValues()
     {
-      ParameterParser processor;
+      IParameterParser processor = this.SetUpParamaterParser(ParameterType.NoValue);
       string[] commandline = {"--one", "--Number-Two", "foobarbaz", "--four"};
+      ParsedParameters output;
       
-      processor = new ParameterParser(ParameterStyle.Unix, commandline);
-      processor.Definitions.Add(new ParameterDefinition("one", new string[1] {"one"}));
-      processor.Definitions.Add(new ParameterDefinition("two", new string[1] {"Number-Two"}));
-      processor.Definitions.Add(new ParameterDefinition("three", new string[1] {"four"}));
+      Assert.AreEqual(3, processor.ParameterCount, "Number of params");
       
-      Assert.AreEqual(3, processor.Parameters.Count, "Number of params");
-      Assert.IsNull(processor.Parameters["one"], "Parameter 'one' is present and null");
-      Assert.IsNull(processor.Parameters["two"], "Parameter 'two' is present and null");
-      Assert.IsNull(processor.Parameters["three"], "Parameter 'three' is present and null");
-      Assert.AreEqual(1, processor.RemainingText.Length, "One remaining text item");
-      Assert.AreEqual("foobarbaz", processor.RemainingText[0], "Remaining text is correct");
+      output = processor.Parse(commandline);
+      
+      Assert.IsTrue(output.HasParameter("one"), "Parameter 'one' is present");
+      
+      Assert.IsTrue(output.HasParameter("two"), "Parameter 'two' is present");
+      
+      Assert.IsTrue(output.HasParameter("three"), "Parameter 'three' is present");
+      
+      Assert.AreEqual(1, output.GetRemainingArguments().Count, "One remaining text item");
+      Assert.AreEqual("foobarbaz", output.GetRemainingArguments()[0], "Remaining text is correct");
     }
     
     [Test]
     public void TestLongParamsWithValue()
     {
-      ParameterParser processor;
-      ParameterDefinition def;
+      IParameterParser processor = this.SetUpParamaterParser(ParameterType.ValueRequired);
       string[] commandline = {"--one", "--Number-Two", "foobarbaz", "--four"};
+      ParsedParameters output;
       
-      processor = new ParameterParser(ParameterStyle.Unix, commandline);
-      processor.Definitions.Add(new ParameterDefinition("one", new string[1] {"one"}));
-      def = new ParameterDefinition("two", new string[1] {"Number-Two"});
-      def.Type = ParameterType.ValueRequired;
-      processor.Definitions.Add(def);
-      processor.Definitions.Add(new ParameterDefinition("three", new string[1] {"four"}));
+      Assert.AreEqual(3, processor.ParameterCount, "Number of params");
       
-      Assert.AreEqual(3, processor.Parameters.Count, "Number of params");
-      Assert.IsNull(processor.Parameters["one"], "Parameter 'one' is present and null");
-      Assert.AreEqual("foobarbaz", processor.Parameters["two"], "Parameter 'two' is present and has correct value");
-      Assert.IsNull(processor.Parameters["three"], "Parameter 'three' is present and null");
+      output = processor.Parse(commandline);
+      
+      Assert.IsTrue(output.HasParameter("one"), "Parameter 'one' is present");
+      
+      Assert.IsTrue(output.HasParameter("two"), "Parameter 'two' is present");
+      Assert.AreEqual("foobarbaz", output.GetValue<string>("two"), "Parameter 'two' has correct value");
+      
+      Assert.IsTrue(output.HasParameter("three"), "Parameter 'three' is present");
+      
+      Assert.AreEqual(0, output.GetRemainingArguments().Count, "No remaining text items");
     }
     
     [Test]
     public void TestShortParamsNoValues()
     {
-      ParameterParser processor;
+      IParameterParser processor = this.SetUpParamaterParser(ParameterType.NoValue);
       string[] commandline = {"-o", "-t", "foobarbaz", "-f"};
+      ParsedParameters output;
       
-      processor = new ParameterParser(ParameterStyle.Unix, commandline);
-      processor.Definitions.Add(new ParameterDefinition("one", null, new string[] {"o"}));
-      processor.Definitions.Add(new ParameterDefinition("two", null, new string[] {"t"}));
-      processor.Definitions.Add(new ParameterDefinition("three", null, new string[] {"f"}));
+      Assert.AreEqual(3, processor.ParameterCount, "Number of params");
       
-      Assert.AreEqual(3, processor.Parameters.Count, "Number of params");
-      Assert.IsNull(processor.Parameters["one"], "Parameter 'one' is present and null");
-      Assert.IsNull(processor.Parameters["two"], "Parameter 'two' is present and null");
-      Assert.IsNull(processor.Parameters["three"], "Parameter 'three' is present and null");
-      Assert.AreEqual(1, processor.RemainingText.Length, "One remaining text item");
-      Assert.AreEqual("foobarbaz", processor.RemainingText[0], "Remaining text is correct");
+      output = processor.Parse(commandline);
+      
+      Assert.IsTrue(output.HasParameter("one"), "Parameter 'one' is present");
+      
+      Assert.IsTrue(output.HasParameter("two"), "Parameter 'two' is present");
+      
+      Assert.IsTrue(output.HasParameter("three"), "Parameter 'three' is present");
+      
+      Assert.AreEqual(1, output.GetRemainingArguments().Count, "One remaining text item");
+      Assert.AreEqual("foobarbaz", output.GetRemainingArguments()[0], "Remaining text is correct");
     }
     
     [Test]
     public void TestShortParamsWithValue()
     {
-      ParameterParser processor;
-      ParameterDefinition def;
+      IParameterParser processor = this.SetUpParamaterParser(ParameterType.ValueRequired);
       string[] commandline = {"-o", "-t", "foobarbaz", "-f"};
+      ParsedParameters output;
       
-      processor = new ParameterParser(ParameterStyle.Unix, commandline);
-      processor.Definitions.Add(new ParameterDefinition("one", null, new string[] {"o"}));
-      def = new ParameterDefinition("two", null, new string[] {"t"});
-      def.Type = ParameterType.ValueRequired;
-      processor.Definitions.Add(def);
-      processor.Definitions.Add(new ParameterDefinition("three", null, new string[] {"f"}));
+      Assert.AreEqual(3, processor.ParameterCount, "Number of params");
       
-      Assert.AreEqual(3, processor.Parameters.Count, "Number of params");
-      Assert.IsNull(processor.Parameters["one"], "Parameter 'one' is present and null");
-      Assert.AreEqual("foobarbaz", processor.Parameters["two"], "Parameter 'two' is present and has correct value");
-      Assert.IsNull(processor.Parameters["three"], "Parameter 'three' is present and null");
+      output = processor.Parse(commandline);
+      
+      Assert.IsTrue(output.HasParameter("one"), "Parameter 'one' is present");
+      
+      Assert.IsTrue(output.HasParameter("two"), "Parameter 'two' is present");
+      Assert.AreEqual("foobarbaz", output.GetValue<string>("two"), "Parameter 'two' has correct value");
+      
+      Assert.IsTrue(output.HasParameter("three"), "Parameter 'three' is present");
+      
+      Assert.AreEqual(0, output.GetRemainingArguments().Count, "No remaining text items");
     }
     
     [Test]
     public void TestShortParamsAndRemainingText()
     {
-      ParameterParser processor;
-      ParameterDefinition def;
+      IParameterParser processor = this.SetUpParamaterParser(ParameterType.ValueRequired);
       string[] commandline = {"some action", "-o", "-t", "foobarbaz", "-f"};
+      ParsedParameters output;
       
-      processor = new ParameterParser(ParameterStyle.Unix, commandline);
-      processor.Definitions.Add(new ParameterDefinition("one", null, new string[] {"o"}));
-      def = new ParameterDefinition("two", null, new string[] {"t"});
-      def.Type = ParameterType.ValueRequired;
-      processor.Definitions.Add(def);
-      processor.Definitions.Add(new ParameterDefinition("three", null, new string[] {"f"}));
+      Assert.AreEqual(3, processor.ParameterCount, "Number of params");
       
-      Assert.AreEqual(3, processor.Parameters.Count, "Number of params");
-      Assert.IsNull(processor.Parameters["one"], "Parameter 'one' is present and null");
-      Assert.AreEqual("foobarbaz", processor.Parameters["two"], "Parameter 'two' is present and has correct value");
-      Assert.IsNull(processor.Parameters["three"], "Parameter 'three' is present and null");
+      output = processor.Parse(commandline);
       
-      Assert.AreEqual(1, processor.RemainingText.Length, "Correct amount of remaining text");
-      Assert.AreEqual("some action", processor.RemainingText[0], "The remaining text");
+      Assert.IsTrue(output.HasParameter("one"), "Parameter 'one' is present");
+      
+      Assert.IsTrue(output.HasParameter("two"), "Parameter 'two' is present");
+      Assert.AreEqual("foobarbaz", output.GetValue<string>("two"), "Parameter 'two' has correct value");
+      
+      Assert.IsTrue(output.HasParameter("three"), "Parameter 'three' is present");
+      
+      Assert.AreEqual(1, output.GetRemainingArguments().Count, "Correct amount of remaining text");
+      Assert.AreEqual("some action", output.GetRemainingArguments()[0], "Remaining text is correct");
     }
     
     [Test]
     public void TestHelpParameter()
     {
-      ParameterParser processor;
-      ParameterDefinition param;
+      IParameterParser processor;
       string[] commandline = {"--help"};
+      ParsedParameters output;
       
-      processor = new ParameterParser(ParameterStyle.Unix, commandline);
+      processor = new UnixParameters();
+      processor.RegisterParameter<string>("run-scheduled-task",
+                                          ParameterType.ValueRequired,
+                                          new string[] { "run-scheduled-task" },
+                                          new string[] { "s" });
+      processor.RegisterParameter<string>("verbose",
+                                          ParameterType.NoValue,
+                                          new string[] { "verbose" },
+                                          new string[] { "v" });
+      processor.RegisterParameter<string>("quiet",
+                                          ParameterType.NoValue,
+                                          new string[] { "quiet" },
+                                          new string[] { "q" });
+      processor.RegisterParameter<string>("help",
+                                          ParameterType.NoValue,
+                                          new string[] { "help" },
+                                          new string[] { "h" });
       
-      param = new ParameterDefinition("run-scheduled-task",
-                                      new string[] {"run-scheduled-task"},
-                                      new string[] {"s"});
-      param.Type = ParameterType.ValueRequired;
-      processor.Definitions.Add(param);
+      output = processor.Parse(commandline);
       
-      param = new ParameterDefinition("verbose",
-                                      new string[] {"verbose"},
-                                      new string[] {"v"});
-      param.Type = ParameterType.FlagOnly;
-      processor.Definitions.Add(param);
+      Assert.IsTrue(output.HasParameter("help"), "Help key is present");
+    }
+    
+    #endregion
+    
+    #region helper methods
+    
+    /// <summary>
+    /// <para>Creates and configures a <see cref="IParameterParser"/> instance for testing.</para>
+    /// </summary>
+    /// <param name="paramaterTwoType">
+    /// A <see cref="ParameterType"/>
+    /// </param>
+    /// <returns>
+    /// A <see cref="IParameterParser"/>
+    /// </returns>
+    private IParameterParser SetUpParamaterParser(ParameterType paramaterTwoType)
+    {
+      IParameterParser output;
       
-      param = new ParameterDefinition("quiet",
-                                      new string[] {"quiet"},
-                                      new string[] {"q"});
-      param.Type = ParameterType.FlagOnly;
-      processor.Definitions.Add(param);
+      output = new UnixParameters();
+      output.RegisterParameter<string>("one",
+                                       ParameterType.NoValue,
+                                       new string[] { "one" },
+                                       new string[] { "o" });
+      output.RegisterParameter<string>("two",
+                                       paramaterTwoType,
+                                       new string[] { "Number-Two" },
+                                       new string[] { "t" });
+      output.RegisterParameter<string>("three",
+                                       ParameterType.NoValue,
+                                       new string[] { "four" },
+                                       new string[] { "f" });
       
-      param = new ParameterDefinition("help",
-                                      new string[] {"help"},
-                                      new string[] {"h"});
-      param.Type = ParameterType.FlagOnly;
-      processor.Definitions.Add(param);
-      
-      Assert.IsTrue(processor.Parameters.ContainsKey("help"), "Help key is present");
+      return output;
   }
+    
+    #endregion
 }

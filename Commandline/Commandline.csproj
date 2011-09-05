@@ -8,8 +8,8 @@
     <ProjectGuid>{649F3CAD-600C-4427-ACD1-C470A26B7288}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AssemblyName>Commandline</AssemblyName>
-    <newfilesearch>OnLoadAutoInsert</newfilesearch>
-    <RootNamespace>CraigFowler</RootNamespace>
+    <newfilesearch>OnLoad</newfilesearch>
+    <RootNamespace>CraigFowler.Cli</RootNamespace>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -19,24 +19,35 @@
     <DefineConstants>DEBUG</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <CheckForOverflowUnderflow>true</CheckForOverflowUnderflow>
+    <GenerateDocumentation>true</GenerateDocumentation>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>none</DebugType>
-    <Optimize>false</Optimize>
+    <Optimize>true</Optimize>
     <OutputPath>bin\Release</OutputPath>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <CheckForOverflowUnderflow>true</CheckForOverflowUnderflow>
+    <GenerateDocumentation>true</GenerateDocumentation>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
   </PropertyGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
     <Reference Include="System" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Console\CommandlineParameterProcessor.cs" />
-    <Compile Include="Console\ParameterDefinition.cs" />
-    <Compile Include="Console\ParameterProcessorBase.cs" />
-    <Compile Include="Console\ParameterStyle.cs" />
-    <Compile Include="Console\ParameterType.cs" />
-    <Compile Include="Console\UnixParameters.cs" />
+    <Compile Include="IParameter.cs" />
+    <Compile Include="ParameterStyle.cs" />
+    <Compile Include="Parameter.cs" />
+    <Compile Include="ParsedParameters.cs" />
+    <Compile Include="ParameterType.cs" />
+    <Compile Include="IParameterParser.cs" />
+    <Compile Include="ParameterParser.cs" />
+    <Compile Include="ParameterAttribute.cs" />
+    <Compile Include="ParameterLongNamesAttribute.cs" />
+    <Compile Include="ParameterShortNamesAttribute.cs" />
+    <Compile Include="UnixParameters.cs" />
   </ItemGroup>
 </Project>

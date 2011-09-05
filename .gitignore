@@ -4,3 +4,6 @@
 *.mdb
 *.exe
 *.orig
+TestResult.xml
+CommandLineArgs.userprefs
+CommandLineArgs.VisualState.xml
