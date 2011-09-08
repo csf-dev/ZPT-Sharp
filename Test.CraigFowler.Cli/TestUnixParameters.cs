@@ -198,7 +198,8 @@ namespace Test.CraigFowler.Cli
                                        new string[] { "f" });
       
       return output;
-  }
+    }
     
     #endregion
+  }
 }
