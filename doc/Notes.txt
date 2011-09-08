@@ -1,0 +1,29 @@
+The long-term plan for Arguments.cs is to support the general Linux standard of
+doing things, as well as the general Windows standard of doing things ... that
+is:
+
+== Linux ==
+/path/to/executable --long-switch --long-param value -S "value 2" -RhTea ACTION
+
+== Windows ==
+c:\path\to\executable ACTION /t value /s
+
+== Usage ==
+In order to be robust, the system needs a way of being told which arguments it
+supports:
+
+Use the RegisterParameter method in order to add a new supported parameter.
+By default, if takesValue is not specified then it is assumed NOT to take a
+value.
+
+=== UnixArguments ===
+RegisterParameter(name : string) : void
+RegisterParameter(name : string, alias : string) : void
+RegisterParameter(name : string, takesValue : bool) : void
+RegisterParameter(name : string, aliases : string[]) : void
+RegisterParameter(name : string, alias : string, takesValue : bool) : void
+RegisterParameter(name : string, aliases : string[], takesValue : bool) : void
+
+=== WindowsArguments ===
+RegisterParameter(name : string) : void
+RegisterParameter(name : string, takesValue : bool) : void
