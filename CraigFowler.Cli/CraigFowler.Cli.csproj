@@ -7,7 +7,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{649F3CAD-600C-4427-ACD1-C470A26B7288}</ProjectGuid>
     <OutputType>Library</OutputType>
-    <AssemblyName>Commandline</AssemblyName>
+    <AssemblyName>CraigFowler.Cli</AssemblyName>
     <newfilesearch>OnLoad</newfilesearch>
     <RootNamespace>CraigFowler.Cli</RootNamespace>
   </PropertyGroup>
@@ -15,7 +15,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>bin\Debug</OutputPath>
+    <OutputPath>bin</OutputPath>
     <DefineConstants>DEBUG</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -26,7 +26,7 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>none</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>bin\Release</OutputPath>
+    <OutputPath>bin</OutputPath>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <CheckForOverflowUnderflow>true</CheckForOverflowUnderflow>
@@ -49,5 +49,13 @@
     <Compile Include="ParameterLongNamesAttribute.cs" />
     <Compile Include="ParameterShortNamesAttribute.cs" />
     <Compile Include="UnixParameters.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\CraigFowler.Cli.dll.mdb">
+      <Visible>False</Visible>
+    </None>
+    <None Include="bin\CraigFowler.Cli.xml">
+      <Visible>False</Visible>
+    </None>
   </ItemGroup>
 </Project>

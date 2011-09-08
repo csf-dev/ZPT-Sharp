@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <doc>
     <assembly>
-        <name>/home/craig/Projects/Arguments/Commandline/bin/Debug/Commandline</name>
+        <name>/home/craig/Projects/Arguments/CraigFowler.Cli/bin/Debug/Commandline</name>
     </assembly>
     <members>
         <member name="T:CraigFowler.Cli.IParameter">

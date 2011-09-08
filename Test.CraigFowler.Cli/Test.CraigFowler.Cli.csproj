@@ -7,14 +7,14 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{C7643872-99A4-4511-B4FC-022AEE483274}</ProjectGuid>
     <OutputType>Library</OutputType>
-    <AssemblyName>Test.Commandline</AssemblyName>
+    <AssemblyName>Test.CraigFowler.Cli</AssemblyName>
     <RootNamespace>Test.CraigFowler.Cli</RootNamespace>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>bin\Debug</OutputPath>
+    <OutputPath>bin</OutputPath>
     <DefineConstants>DEBUG</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -22,7 +22,7 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>none</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>bin\Release</OutputPath>
+    <OutputPath>bin</OutputPath>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
@@ -36,9 +36,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Commandline\Commandline.csproj">
+    <ProjectReference Include="..\CraigFowler.Cli\CraigFowler.Cli.csproj">
       <Project>{649F3CAD-600C-4427-ACD1-C470A26B7288}</Project>
-      <Name>Commandline</Name>
+      <Name>CraigFowler.Cli</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

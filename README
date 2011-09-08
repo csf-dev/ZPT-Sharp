@@ -1,0 +1,22 @@
+--------------------------------------------------------------------------------
+Command line arguments, a helper library for C# for parsing and working with
+command line paramaters and arguments.
+--------------------------------------------------------------------------------
+
+Firstly - THIS SOFTWARE IS DISTRIBUTED FREE OF CHARGE WITHOUT ANY WARRANTY OF
+ANY SORT.  Please see the attached license document (LICENCE).
+
+This project is a very simple way (but time-saving) way of dealing with
+parameters and arguments for command-line-interface (CLI) applications.
+
+I quite often find myself having to write applications of this sort; often I
+will want to script a process that performs some logic that is just too involved
+for shell-scripting to be of use.  Also (when creating web applications) I will
+often want a small application, that I can call using a task-scheduler such as
+cron, that can act as an alternative UI layer to my domain model logic.
+
+Parsing commandline parameters would appear to be a simple task but once there
+are more than just one or two parameters available it becomes repetitive and
+tiresome to parse them in a flexible and sane manner.  The long-term goal of
+this is to provide a flexible API that handles this and exposes strongly-named
+objects that the main application API can make use of.
