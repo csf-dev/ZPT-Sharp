@@ -7,3 +7,5 @@
 TestResult.xml
 CommandLineArgs.userprefs
 CommandLineArgs.VisualState.xml
+bin/
+test-results/
