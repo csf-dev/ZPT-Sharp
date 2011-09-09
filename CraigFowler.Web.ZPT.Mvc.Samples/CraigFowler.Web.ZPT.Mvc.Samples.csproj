@@ -106,5 +106,8 @@
     <None Include="bin\zpt-parser.dll.mdb">
       <Visible>False</Visible>
     </None>
+    <None Include="bin\CraigFowler.Web.ZPT.Mvc.Samples.dll.mdb">
+      <Visible>False</Visible>
+    </None>
   </ItemGroup>
 </Project>
