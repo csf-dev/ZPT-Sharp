@@ -454,6 +454,69 @@ namespace CraigFowler.Cli
       return ((IList<Type>) PermittedParameterTypes).Contains(paramType);
     }
     
+    /// <summary>
+    /// <para>Factory method creates and returns a new <see cref="IParameterParser"/> instance.</para>
+    /// </summary>
+    /// <param name="style">
+    /// A <see cref="ParameterStyle"/>
+    /// </param>
+    /// <returns>
+    /// A <see cref="IParameterParser"/>
+    /// </returns>
+    public static IParameterParser ParserFactory(ParameterStyle style)
+    {
+      IParameterParser output;
+      
+      switch(style)
+      {
+      case ParameterStyle.Unix:
+        output = new UnixParameters();
+        break;
+      default:
+        throw new NotSupportedException("Unsupported or unrecognised parameter style.");
+      }
+      
+      return output;
+    }
+    
+    /// <summary>
+    /// <para>
+    /// Overloaded.  Static convenience method parses the <paramref name="rawCommandLine"/> as parameters, using
+    /// parameter definitions exposed within <paramref name="parameterEnumeration"/> and the
+    /// <see cref="ParameterStyle"/> indicated by <paramref name="style"/>.
+    /// </para>
+    /// </summary>
+    /// <param name="rawCommandLine">
+    /// A collection of <see cref="System.String"/>
+    /// </param>
+    /// <param name="style">
+    /// A <see cref="ParameterStyle"/>
+    /// </param>
+    /// <param name="parameterEnumeration">
+    /// A <see cref="Type"/>
+    /// </param>
+    /// <returns>
+    /// A generic type that implements <see cref="ParsedParameters"/>
+    /// </returns>
+    public static TParameters Parse<TParameters>(IList<string> rawCommandLine,
+                                                 ParameterStyle style,
+                                                 Type parameterEnumeration) where TParameters : ParsedParameters, new()
+    {
+      IParameterParser parser;
+      TParameters output;
+      ParsedParameters looseOutput;
+      
+      parser = ParserFactory(style);
+      output = new TParameters();
+      looseOutput = output;
+      
+      parser.RegisterParameters(parameterEnumeration);
+      
+      parser.Parse(rawCommandLine, ref looseOutput);
+      
+      return output;
+    }
+    
     #endregion
   }
 }

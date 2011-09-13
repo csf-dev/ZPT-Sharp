@@ -24,6 +24,7 @@ using System;
 using CraigFowler.Web.ZPT.Mocks;
 using CraigFowler.Web.ZPT.Tales;
 using NUnit.Framework;
+using System.Collections.Generic;
 
 namespace Test.CraigFowler.Web.ZPT.Tales
 {
@@ -115,5 +116,43 @@ namespace Test.CraigFowler.Web.ZPT.Tales
 			Assert.IsFalse(thirdLevelContext.CreateExpression("mock/BooleanValue").GetBooleanValue(), "Second assert");
 			Assert.IsTrue(thirdLevelContext.CreateExpression("mock/inner/BooleanValue").GetBooleanValue(), "Third assert");
 		}
+    
+    [Test]
+    [Category("Integration")]
+    [Description("A test to help me fix a specific bug where options definitions seem not to work")]
+    public void TestOptionsPathExpression()
+    {
+      TalesContext
+        firstLevelContext = new TalesContext(),
+        secondLevelContext,
+        thirdLevelContext;
+      
+      firstLevelContext.Options.Add("foo", "bar");
+      secondLevelContext = firstLevelContext.CreateChildContext();
+      thirdLevelContext = secondLevelContext.CreateChildContext();
+      
+      Assert.IsNotNull(thirdLevelContext.CreateExpression("options").GetValue(), "Options is not null");
+      
+      Assert.IsInstanceOfType(typeof(Dictionary<string,object>),
+                              thirdLevelContext.CreateExpression("options").GetValue(),
+                              "Options is correct type");
+      
+      Assert.IsTrue(((Dictionary<string,object>) thirdLevelContext.CreateExpression("options").GetValue()).ContainsKey("foo"),
+                    "Options dictionary contains expected item");
+      
+      Assert.AreEqual("bar",
+                      ((Dictionary<string,object>) thirdLevelContext.CreateExpression("options").GetValue())["foo"],
+                      "Options dictionary 'foo' item is as expected");
+      
+      Assert.AreEqual("bar",
+                      thirdLevelContext.CreateExpression("options/foo").GetValue(),
+                      "Expression value is as expected.");
+      
+      thirdLevelContext.GetToplevelContext().Options.Add("spong", "wibble");
+      
+      Assert.AreEqual("wibble",
+                      thirdLevelContext.CreateExpression("options/spong").GetValue(),
+                      "Expression value is as expected after being spliced in.");
+    }
 	}
 }

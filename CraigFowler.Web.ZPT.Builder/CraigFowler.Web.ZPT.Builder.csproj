@@ -8,7 +8,7 @@
     <ProjectGuid>{687221BC-2CE9-43ED-8343-EA35BF5ABAA4}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <RootNamespace>CraigFowler.Web.ZPT.Builder</RootNamespace>
-    <AssemblyName>CraigFowler.Web.Zpt.Builder</AssemblyName>
+    <AssemblyName>CraigFowler.Web.ZPT.Builder</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <newfilesearch>OnLoad</newfilesearch>
   </PropertyGroup>
@@ -24,7 +24,7 @@
     <CheckForOverflowUnderflow>true</CheckForOverflowUnderflow>
     <GenerateDocumentation>true</GenerateDocumentation>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
-    <Commandlineparameters>-o /home/craig/Desktop/zpt-output ../../doc/Test\ data/page-build/</Commandlineparameters>
+    <Commandlineparameters>-o /home/craig/Desktop/doc-output "/home/craig/Projects/ZopePageTemplates/doc/Documentation website src" -c "baseUrl=http://www.craigfowler.me.uk/"</Commandlineparameters>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>none</DebugType>
@@ -36,9 +36,6 @@
     <GenerateDocumentation>true</GenerateDocumentation>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
   </PropertyGroup>
-  <ItemGroup>
-    <Content Include="app.desktop" />
-  </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>
     <MonoDevelop>
@@ -71,16 +68,5 @@
     <Compile Include="EntryPoint.cs" />
     <Compile Include="BuilderParameterType.cs" />
     <Compile Include="BuilderParameters.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="bin\CraigFowler.Web.Zpt.Builder.xml">
-      <Visible>False</Visible>
-    </None>
-    <None Include="bin\CraigFowler.Web.ZPT.dll.mdb">
-      <Visible>False</Visible>
-    </None>
-    <None Include="bin\CraigFowler.Web.Zpt.Builder.exe.mdb">
-      <Visible>False</Visible>
-    </None>
   </ItemGroup>
 </Project>
