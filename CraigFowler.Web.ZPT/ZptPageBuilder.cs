@@ -230,33 +230,7 @@ namespace CraigFowler.Web.ZPT
       }
       
       // Create a DirectoryInfo instance for the output directory that will contain our rendered pages.
-      if(this.OutputPath == null)
-      {
-        DirectoryInfo inputParent = inputPath.Parent;
-        DirectoryInfo[] viableOutputDirectories = inputParent.GetDirectories(DEFAULT_OUTPUT_DIRECTORY_NAME,
-                                                                             SearchOption.TopDirectoryOnly);
-        
-        if(viableOutputDirectories.Length == 0)
-        {
-          outputPath = inputParent.CreateSubdirectory(DEFAULT_OUTPUT_DIRECTORY_NAME);
-        }
-        else
-        {
-          outputPath = viableOutputDirectories[0];
-        }
-      }
-      else
-      {
-        outputPath = new DirectoryInfo(this.OutputPath);
-      }
-      
-      // At this point the output directory should definitely exist, just check that's true in case something is wrong.
-      if(!outputPath.Exists)
-      {
-        string message = String.Format("The output document path '{0}' does not exist (or could not be created).",
-                                       outputPath.FullName);
-        throw new DirectoryNotFoundException(message);
-      }
+      outputPath = this.GetOutputDirectory(inputPath);
       
       // Clear the output directory ready to receive the new output.
       foreach(DirectoryInfo subdirectory in outputPath.GetDirectories())
@@ -277,6 +251,43 @@ namespace CraigFowler.Web.ZPT
       {
         throw new InvalidOperationException("The pattern for matching input files cannot be null.");
       }
+    }
+    
+    /// <summary>
+    /// <para>Gets a <see cref="DirectoryInfo"/> instance for the output directory.</para>
+    /// </summary>
+    /// <param name="inputPath">
+    /// A <see cref="DirectoryInfo"/>
+    /// </param>
+    /// <returns>
+    /// A <see cref="DirectoryInfo"/>
+    /// </returns>
+    private DirectoryInfo GetOutputDirectory(DirectoryInfo inputPath)
+    {
+      DirectoryInfo output;
+      string outputPath = this.OutputPath;
+      
+      if(String.IsNullOrEmpty(outputPath))
+      {
+        DirectoryInfo inputParent = inputPath.Parent;
+        outputPath = Path.Combine(inputParent.FullName, DEFAULT_OUTPUT_DIRECTORY_NAME);
+      }
+      
+      output = new DirectoryInfo(outputPath);
+      
+      if(!output.Exists && output.Parent.Exists)
+      {
+        output.Parent.CreateSubdirectory(output.Name);
+      }
+      else if(!output.Exists)
+      {
+        string message = String.Format("The output document path '{0}' does not exist and nor does its parent " +
+                                       "directory.",
+                                       output.FullName);
+        throw new DirectoryNotFoundException(message);
+      }
+      
+      return output;
     }
     
     /// <summary>

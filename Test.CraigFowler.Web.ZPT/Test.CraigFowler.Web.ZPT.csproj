@@ -79,10 +79,6 @@
     <Compile Include="Metal\TestMetalMacro.cs" />
     <Compile Include="Tales\TestTalesPath.cs" />
     <Compile Include="TestZptPageBuilder.cs" />
-    <Compile Include="Cli\TestUnixParameters.cs" />
-    <Compile Include="Cli\TestUnixParametersWithAttributes.cs" />
-    <Compile Include="Cli\Mocks\ErroneousParametersEnumeration.cs" />
-    <Compile Include="Cli\Mocks\ParametersEnumeration.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CraigFowler.Web.ZPT\CraigFowler.Web.ZPT.csproj">
