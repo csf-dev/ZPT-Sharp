@@ -13,17 +13,18 @@ Secondly, a quick nod to https://github.com/lck/SharpTAL - it seems that the
 two of us developed our implementations in parallel and I only found out about
 SharpTAL once I had nearly finished my own.  SharpTAL was made public first.
 
-As of 23rd August 2011, API documentation (auto-generated from the source files
-as well as C# documentation comments, using doxygen) is available at:
-http://craigfowler.github.com/ZPT-Sharp
-The auto-generated docs will not remain as the root of the github pages site
-however, so avoid deep-linking into it for now.  At some point there needs to
-be a more thorough effort made to document ZPT-Sharp, what it does and how to
-get started with it.
+As of 16th September 2011, the auto-generated API documentation (created using
+DoxyGen) has been moved to http://csf-software-development.github.com/ZPT-Sharp/api-doxygen/
 
-For now, assuming you know how to use the ASP.NET MVC v2, compile the Parser
-project and then take a look at the SampleMvcSite project for how to integrate
-ZPT into your MVC project as a custom ViewEngine.
+http://csf-software-development.github.com/ZPT-Sharp/ contains some initial work on the
+documentation website for this project (see github issue #11).  It is in a very
+early state and nowhere near complete but I feel that /some/ documentation is
+better than /no/ documentation.  I will be adding to it as time goes by.
+
+To get using ZPT-Sharp right now alongside ASP.NET MVC v2, compile the project
+CraigFowler.Web.ZPT and copy the DLL into your bin/ directory.  Then take a
+look at http://csf-software-development.github.com/ZPT-Sharp/quickstart-mvc.html and also
+the CraigFowler.Web.ZPT.Mvc.Samples project for how to get started.
 
 As the first paragraph notes, this is very new software and it hasn't yet been
 used 'in the wild'.  It could be riddled with bugs and security issues.  That
