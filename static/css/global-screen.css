@@ -137,12 +137,12 @@ body {
 }
 .region_content a {
   text-decoration: none;
-  color: #000;
+  color: #009;
   border-bottom: 1px solid #DDD;
   padding-bottom: 2px;
 }
 .region_content a:hover {
-  border-color: #555;
+  border-color: #00C;
 }
 .region_content ul,
 .region_content ol {
@@ -186,6 +186,7 @@ body {
   background: #FFFBEA;
   padding: 1px;
   border: 1px solid #FFF3C6;
+  white-space: nowrap;
 }
 .region_content code.block {
   display: block;
@@ -197,6 +198,23 @@ body {
   border-bottom: 1px dotted #555;
   padding-bottom: 2px;
   cursor: help;
+}
+.region_content table {
+  width: 100%;
+}
+.region_content table th {
+  background-color: #BCF2FF;
+  font-weight: bold;
+}
+.region_content table,
+.region_content table th,
+.region_content table td {
+  border-collapse: collapse;
+  border: 1px solid #7FE7FF;
+}
+.region_content table th,
+.region_content table td {
+  padding: 0.1em 0.4em;
 }
 
 /* -----------------------------------------------------------------------------

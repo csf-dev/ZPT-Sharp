@@ -28,3 +28,7 @@
 .region_content.index .what_next p {
   color: #EEE;
 }
+
+.region_content.page_builder_manual table.parameter_summary {
+  font-size: 80%;
+}

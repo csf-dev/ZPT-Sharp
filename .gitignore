@@ -10,3 +10,5 @@ TestResult.xml
 ZopePageTemplates.VisualState.xml
 CommandLineArgs.userprefs
 CommandLineArgs.VisualState.xml
+doc/
+doc/zpt-output/
