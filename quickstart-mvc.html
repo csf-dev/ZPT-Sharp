@@ -23,7 +23,6 @@
   <div class="region_main">
     <div class="main_navigation">
       
-      
         <h5>Main navigation</h5>
         <ul>
           <li><a href="index.html">Home</a></li>
@@ -42,6 +41,7 @@
           <li><a href="api-doxygen/" title="Auto-generated API documentation, using DoxyGen">API documentation</a></li>
         </ul>
       
+      
     </div>
     <div class="region_content">
       <h1>ZPT-Sharp Quick-start for ASP.NET MVC</h1>
@@ -55,6 +55,10 @@
         The steps below assume that you have a working ASP.NET MVC configuration set up already.
       </p>
       <ol>
+        <li>
+          Compile the assembly <code>CraigFowler.Web.ZPT.dll</code> and place it in either the <code>/bin</code>
+          directory of your web application or into your <acronym title="Global Assembly Cache">GAC</acronym>.
+        </li>
         <li>
           Register <code>CraigFowler.Web.ZPT.Mvc.ZptViewEngine</code> in your global.asax.cs and tell ZPT-Sharp to
           search assemblies for types that you are using as <strong>view classes</strong> (see optional step 4).  There
@@ -74,9 +78,8 @@
           Your templates can optionally make use of
           <a href="view-classes.html" title="Guide to using ZPT view classes">view classes</a>, providing them with
           further functionality.  A view class could be thought of as similar to an ASP.NET code-behind class but in an
-          MVC environment it is more limited in its scope; view classes should be limited to reading information from
-          your model and providing additional TALES definitions for the template to use.
-          View classes all implement the interface <code>CraigFowler.Web.ZPT.IZptDocument</code>.
+          MVC environment it is more limited in its scope.  View classes should be limited to reading information from
+          your model and providing TALES variable definitions for the template to use.
         </li>
       </ol>
       <p>
@@ -123,19 +126,19 @@ protected void Application_Start ()
       This documentation website is copyright ©
       <a href="http://www.craigfowler.me.uk/" title="Craig Fowler's website">Craig Fowler</a>
       (and
-      <a href="https://github.com/craigfowler/ZPT-Sharp/contributors" title="See all contributors to ZPT Sharp">other contributors</a>
+      <a href="https://github.com/CSF-Software-Development/ZPT-Sharp/contributors" title="See all contributors to ZPT Sharp">other contributors</a>
       as applicable)<br />
       All documentation/website content is licensed freely under the
       <a href="http://www.gnu.org/licenses/fdl-1.3.txt" title="GNU Free Documentation License version 1.3">GNU FDL v1.3</a>
     </p>
     <p>
       This documentation was last compiled at
-      <span class="compile_timestamp">13 October 2011</span>
+      <span class="compile_timestamp">18 October 2011</span>
     </p>
   </div>
 </div>
 <div class="github_banner">
-  <a href="https://github.com/craigfowler/ZPT-Sharp" title="ZPT-Sharp on github">Fork me on GitHub</a>
+  <a href="https://github.com/CSF-Software-Development/ZPT-Sharp" title="ZPT-Sharp on github">Fork me on GitHub</a>
 </div>
 
 

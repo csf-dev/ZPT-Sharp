@@ -78,8 +78,9 @@ body {
   margin: 0 0 1em;
   font-size: 90%;
 }
-.main_navigation .other_resources {
-  margin: 1em 0 0;
+.main_navigation .other_resources,
+.main_navigation .document_navigation h5 {
+  margin-top: 1em;
 }
 
 /* -----------------------------------------------------------------------------
@@ -140,6 +141,13 @@ body {
   color: #009;
   border-bottom: 1px solid #DDD;
   padding-bottom: 2px;
+}
+.region_content a.code {
+  font-family: "DejaVu Sans Mono", "Lucida Console", "Courier New", Courier, monospace;
+  font-size: 90%;
+  background: #FFFBEA;
+  white-space: nowrap;
+  padding: 1px 1px 2px;
 }
 .region_content a:hover {
   border-color: #00C;
