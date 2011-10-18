@@ -48,6 +48,16 @@ namespace Test.CraigFowler.Web.ZPT
 </html>";
 		
 		#endregion
+    
+    #region set up
+    
+    [SetUp]
+    public void SetUp()
+    {
+      ZptMetadata.UnregisterDocumentClass(typeof(ZptChildDocument));
+    }
+    
+    #endregion
 		
 		#region tests
 		
@@ -90,6 +100,20 @@ namespace Test.CraigFowler.Web.ZPT
 			document = ZptDocument.DocumentFactory(metadata);
 			Assert.IsInstanceOfType(typeof(ZptChildDocument), document, "Document is expected type");
 		}
+    
+    [Test]
+    [Category("Integration")]
+    public void TestDocumentClassNameWithoutRegistration()
+    {
+      ZptMetadata metadata;
+      IZptDocument document;
+      
+      metadata = new ZptMetadata();
+      metadata.DocumentClassName = "CraigFowler.Web.ZPT.Mocks.ZptChildDocument";
+      
+      document = ZptDocument.DocumentFactory(metadata);
+      Assert.IsInstanceOfType(typeof(ZptChildDocument), document, "Document is expected type");
+    }
 		
 		[Test]
 		public void TestGetMetadata()

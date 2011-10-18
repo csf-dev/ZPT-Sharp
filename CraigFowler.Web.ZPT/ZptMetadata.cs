@@ -139,24 +139,7 @@ namespace CraigFowler.Web.ZPT
 				return this.DocumentClass.FullName;
 			}
 			set {
-				Type discoveredType;
-				
-				discoveredType = Type.GetType(value, false);
-				
-				if(discoveredType == null)
-				{
-					if(ForeignDocumentClasses.ContainsKey(value))
-					{
-						discoveredType = ForeignDocumentClasses[value];
-					}
-					else
-					{
-						throw new ArgumentOutOfRangeException("Could not load a type of the given name and it was not found " +
-																									"amongst the collection of registered 'foreign' document classes.");
-					}
-				}
-				
-				this.DocumentClass = discoveredType;
+				this.DocumentClass = this.GetDocumentClass(value);
 			}
 		}
 		
@@ -201,10 +184,17 @@ namespace CraigFowler.Web.ZPT
 		
 		/// <summary>
 		/// <para>
-		/// Read-only.  Gets a collection of the 'foreign' document classes that can provide <see cref="IZptDocument"/>.
+		/// Read-only.  Gets a cache of the 'foreign' document classes that can provide <see cref="IZptDocument"/>.
 		/// </para>
 		/// </summary>
-		protected static Dictionary<string,Type> ForeignDocumentClasses
+    /// <remarks>
+    /// <para>
+    /// This cache is provided so that the methods <see cref="GetDocumentClass"/> and <see cref="SearchForClass"/>
+    /// can (as often as possible) return their results from a cache.  The search performed by
+    /// <see cref="SearchForClass"/> is a very expensive one and ideally we don't want to be repeating it very often!
+    /// </para>
+    /// </remarks>
+		protected static Dictionary<string,Type> CachedDocumentClasses
 		{
 			get;
 			private set;
@@ -330,6 +320,106 @@ namespace CraigFowler.Web.ZPT
 			}
 		}
 		
+    /// <summary>
+    /// <para>
+    /// Gets a <see cref="System.Type"/> that corresponds to the given <paramref name="className"/>.  This type must
+    /// implement <see cref="IZptDocument"/>.
+    /// </para>
+    /// </summary>
+    /// <param name="className">
+    /// A <see cref="System.String"/>
+    /// </param>
+    /// <returns>
+    /// A <see cref="Type"/>
+    /// </returns>
+    private Type GetDocumentClass(string className)
+    {
+      Type output;
+      
+      if(className == null)
+      {
+        throw new ArgumentNullException("className");
+      }
+      
+      output = Type.GetType(className, false);
+      
+      if(output == null)
+      {
+        if(CachedDocumentClasses.ContainsKey(className))
+        {
+          output = CachedDocumentClasses[className];
+        }
+        else
+        {
+          output = this.SearchForClass(className);
+        }
+      }
+      
+      if(output == null)
+      {
+        throw new ArgumentOutOfRangeException("Could not load a type of the given name and it was not found " +
+                                              "amongst the collection of registered 'foreign' document classes.");
+      }
+      
+      return output;
+    }
+    
+    /// <summary>
+    /// <para>
+    /// Performs a search through <see cref="AppDomain.CurrentDomain"/> for a <see cref="System.Type"/> that matches
+    /// the name <paramref name="className"/>.
+    /// </para>
+    /// </summary>
+    /// <param name="className">
+    /// A <see cref="System.String"/>
+    /// </param>
+    /// <returns>
+    /// A <see cref="Type"/> instance if a matching type was found, or else a null reference if no type was found in
+    /// the current app domain.
+    /// </returns>
+    private Type SearchForClass(string className)
+    {
+      Type output = null;
+      AppDomain domain = AppDomain.CurrentDomain;
+      
+      foreach(Assembly assembly in domain.GetAssemblies())
+      {
+        Type[] types;
+        
+        try
+        {
+          types = assembly.GetExportedTypes();
+        }
+        catch(NotSupportedException)
+        {
+          types = assembly.GetTypes();
+        }
+        
+        foreach(Type type in types)
+        {
+          if(ImplementsRequiredInterface(type)
+             && type.FullName == className)
+          {
+            output = type;
+            break;
+          }
+        }
+        
+        if(output != null)
+        {
+          break;
+        }
+      }
+      
+      // Cache the result so that we don't need to perform this (incredibly expensive) search again!
+      if(output != null)
+      {
+        CachedDocumentClasses[output.FullName] = output;
+      }
+      
+      return output;
+    }
+    
 		#endregion
 		
 		#region constructors
@@ -349,7 +439,7 @@ namespace CraigFowler.Web.ZPT
 		/// </summary>
 		static ZptMetadata()
 		{
-			ForeignDocumentClasses = new Dictionary<string, Type>();
+			CachedDocumentClasses = new Dictionary<string, Type>();
       DefaultDocumentClass = typeof(ZptDocument);
 		}
 		
@@ -527,12 +617,12 @@ namespace CraigFowler.Web.ZPT
 				throw new ArgumentOutOfRangeException("typeToRegister", "The type does not implement IZptDocument.");
 			}
 			
-      ForeignDocumentClasses.Add(typeToRegister.FullName, typeToRegister);
+      CachedDocumentClasses.Add(typeToRegister.FullName, typeToRegister);
 		}
     
     /// <summary>
     /// <para>
-    /// Registers all of the compatible types within an <see cref="Assembly"/> using
+    /// Overloaded.  Registers all of the compatible types within an <see cref="Assembly"/> using
     /// <see cref="RegisterDocumentClass"/>.
     /// </para>
     /// </summary>
@@ -554,7 +644,14 @@ namespace CraigFowler.Web.ZPT
         throw new ArgumentNullException("fromAssembly");
       }
       
-      allTypes = fromAssembly.GetExportedTypes();
+      try
+      {
+        allTypes = fromAssembly.GetExportedTypes();
+      }
+      catch(NotSupportedException)
+      {
+        allTypes = fromAssembly.GetTypes();
+      }
       
       foreach(Type type in allTypes)
       {
@@ -562,6 +659,28 @@ namespace CraigFowler.Web.ZPT
         {
           RegisterDocumentClass(type);
         }
+      }
+    }
+    
+    /// <summary>
+    /// <para>
+    /// Overloaded.  Registers all of the compatible types within all of the <see cref="Assembly"/> instances found
+    /// within the current <see cref="AppDomain.CurrentDomain"/>.
+    /// </para>
+    /// </summary>
+    /// <remarks>
+    /// <para>
+    /// This method is a shortcut to separately calling <see cref="RegisterDocumentClasses(Assembly)"/> on every
+    /// assembly within the current app domain.  Be aware that this could be an expensive call but it will fully
+    /// populate the cache of document classes in such a way that no assembly-searching will be needed again unless
+    /// new assemblies (containing document classes) are dynamically loaded into the app domain.
+    /// </para>
+    /// </remarks>
+    public static void RegisterDocumentClasses()
+    {
+      foreach(Assembly assembly in AppDomain.CurrentDomain.GetAssemblies())
+      {
+        RegisterDocumentClasses(assembly);
       }
     }
 		
@@ -583,7 +702,7 @@ namespace CraigFowler.Web.ZPT
 				throw new ArgumentNullException("typeToRegister");
 			}
 			
-			return ForeignDocumentClasses.Remove(typeToRegister.FullName);
+			return CachedDocumentClasses.Remove(typeToRegister.FullName);
 		}
 		
     /// <summary>
