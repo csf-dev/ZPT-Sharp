@@ -13,10 +13,6 @@ namespace CraigFowler.Web.ZPT.Builder
   /// </summary>
   public class BuilderParameters : ParsedParameters
   {
-    #region constants
-    
-    #endregion
-    
     #region parameter properties
     
     /// <summary>
@@ -182,7 +178,7 @@ namespace CraigFowler.Web.ZPT.Builder
         
         foreach(string optionDefinition in allOptions)
         {
-          string[] optionParts = optionDefinition.Split(new char[] {'='}, 1);
+          string[] optionParts = optionDefinition.Split(new char[] {'='}, 2);
           
           if(optionParts.Length == 2)
           {

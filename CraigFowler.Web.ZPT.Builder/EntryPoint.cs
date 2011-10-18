@@ -18,19 +18,12 @@ namespace CraigFowler.Web.ZPT.Builder
     /// </param>
     public static void Main(string[] commandLine)
     {
-      BuilderParameters parameters;
-      ParsedParameters castParams;
-      IParameterParser parameterParser;
-      ZptPageBuilder builder;
+      BuilderParameters parameters = ParameterParser.Parse<BuilderParameters>(commandLine,
+                                                                              ParameterStyle.Unix,
+                                                                              typeof(BuilderParameterType));
       
-      parameterParser = new UnixParameters();
-      parameterParser.RegisterParameters(typeof(BuilderParameterType));
       
-      parameters = new BuilderParameters();
-      castParams = parameters;
-      parameterParser.Parse(commandLine, ref castParams);
-      
-      builder = parameters.ZptPageBuilderFactory();
+      ZptPageBuilder builder = parameters.ZptPageBuilderFactory();
       builder.BuildPages();
     }
     

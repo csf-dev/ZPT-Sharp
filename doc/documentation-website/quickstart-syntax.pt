@@ -1,0 +1,86 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      metal:use-macro="documents/macros/base-template/macros/document-structure">
+<head>
+<title metal:fill-slot="title">Zope Page Templates Syntax Quick-start</title>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<base href="." />
+<style>
+@import url(static/css/default-styles.css);
+</style>
+</head>
+<body>
+<div class="page">
+  <div class="region_header dummy">
+    Header content is imported here
+  </div>
+  <div class="region_main">
+    <div class="main_navigation">
+      <div class="dummy">
+        Main navigation is imported here
+      </div>
+    </div>
+    <div class="region_content" metal:fill-slot="region_content">
+      <h1>Zope Page Templates Syntax Quick-start</h1>
+      <p><strong class="todo">Write this page</strong></p>
+      <h2>In the mean-time …</h2>
+      <p>
+        I intend this page to serve as a friendly tutorial for learning the ZPT syntax.  In its entirety that's three
+        'languages', of which TAL is probably the most important.  Below is a summary of the three languages,
+        <em>including links to their <strong>specification documents</strong></em>.
+      </p>
+      <ul>
+        <li>
+          <p>
+            <acronym title="Template Atrribute Language Expression Syntax">TALES</acronym> is the language that is used
+            to write expressions for TAL and METAL.  Whenever a TAL or METAL directive needs to use some kind of value
+            or variable, that variable reference is written using TALES.
+          </p>
+          <p>
+            The most frequently-used type of expression is the path expression which expresses a 
+            reference into a variable using forward-slashes (like a web address or filesystem path) where developers
+            might expect periods.  <em>For reference (and until this page is written), you can find the complete
+            <a href="http://wiki.zope.org/ZPT/TALESSpecification13">TALES specification</a>
+            on Zope's website.</em>
+          </p>
+        </li>
+        <li>
+          <p>
+            <acronym title="Template Attribute Language">TAL</acronym> is the language that is used to insert dynamic
+            data into a ZPT document.  It has syntax for inserting content into tags, replacing tags with content,
+            looping through collections and repeating a block of XML/HTML for each iteration
+            (including retreiving data from those iterations) and other dynamic-content-rendering functions.
+          </p>
+          <p>
+            TAL is probably the most important of the three languages that make up the core of ZPT.
+            <em> For reference (and until this page is written), you can find the complete
+            <a href="http://wiki.zope.org/ZPT/TALSpecification14">TAL specification</a>
+            on Zope's website.</em>
+          </p>
+        </li>
+        <li>
+          <p>
+            <acronym title="Macro Expansion Template Attribute Language">METAL</acronym> is a language that allows
+            re-usable areas of content (macros) to be included within ZPT documents.  Those familiar with ASP.NET
+            could think of METAL as accomplishing what master pages and user controls accomplish.
+          </p>
+          <p>
+            METAL is all about defining macros and slots within those macros.  Other documents may then use those macros
+            and optionally fill the slots with their own content.  I personally find it a more elegant solution than
+            <code>.Master</code> and <code>.ascx</code> because only one system is required to accomplish both of those
+            roles.  <em>For reference (and until this page is written), you can find the complete
+            <a href="htpp://wiki.zope.org/ZPT/METALSpecification11">METAL specification</a>
+            on Zope's website.</em>
+          </p>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="region_footer dummy">
+    Footer content is imported here
+  </div>
+</div>
+</body>
+</html>

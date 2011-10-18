@@ -426,7 +426,9 @@ namespace CraigFowler.Web.ZPT.Metal
         importedMacro.TalesContext.AddDefinition(MACRO_NAME_TAL_VARIABLE, importedMacro.MacroName);
       }
       
-      // Replace the current node with the node from the 
+      /* If this element refers to the root element of the document then the imported node becomes the new root,
+       * otherwise just swap this node for the imported one.
+       */
       if(this.ParentNode == null)
       {
         this.OwnerDocument.RemoveAll();

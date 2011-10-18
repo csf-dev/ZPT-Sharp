@@ -248,6 +248,16 @@ namespace CraigFowler.Web.ZPT.Tales
       {
         output = definitions[identifier];
       }
+      else if(identifier == OPTIONS_REFERENCE)
+      {
+        /* HACK: Special case, this doesn't seem to want to work without forking it out like this.
+         * 
+         * The 'options' collection is special like this because it is only ever (by its nature) defined at the root
+         * of the context tree.  If we are asked for the options then we go all of the way back to the root in order to
+         * find them.
+         */
+        output = this.GetToplevelContext().Options;
+      }
       else if(this.RootContexts.ContainsKey(identifier))
       {
         output = this.RootContexts[identifier];
@@ -368,9 +378,51 @@ namespace CraigFowler.Web.ZPT.Tales
       return variable;
     }
     
+    /// <summary>
+    /// <para>
+    /// Overloaded.  Gets a top-level <see cref="TalesContext"/> from the inheritance/parent chain of the current
+    /// instance.
+    /// </para>
+    /// </summary>
+    /// <returns>
+    /// A <see cref="TalesContext"/>
+    /// </returns>
+    public TalesContext GetToplevelContext()
+    {
+      return this.GetToplevelContext(this);
+    }
+    
     #endregion
     
     #region private methods
+    
+    /// <summary>
+    /// <para>
+    /// Overloaded.  Gets a top-level <see cref="TalesContext"/> from the inheritance/parent chain of the given
+    /// <paramref name="context"/>
+    /// </para>
+    /// </summary>
+    /// <param name="context">
+    /// A <see cref="TalesContext"/>
+    /// </param>
+    /// <returns>
+    /// A <see cref="TalesContext"/>
+    /// </returns>
+    private TalesContext GetToplevelContext(TalesContext context)
+    {
+      TalesContext output;
+      
+      if(context.ParentContext != null)
+      {
+        output = this.GetToplevelContext(context.ParentContext);
+      }
+      else
+      {
+        output = context;
+      }
+      
+      return output;
+    }
     
     /// <summary>
     /// <para>Merges two string dictionaries of definitions and object references.</para>
@@ -483,9 +535,14 @@ namespace CraigFowler.Web.ZPT.Tales
     /// <summary>
     /// <para>Overloaded.  Initialises this instance with default values.</para>
     /// </summary>
-    public TalesContext()
+    public TalesContext() : this(null) {}
+    
+    /// <summary>
+    /// <para>Overloaded.  Initialises this instance a given parent context.</para>
+    /// </summary>
+    private TalesContext(TalesContext parent)
     {
-      this.ParentContext = null;
+      this.ParentContext = parent;
       this.VariableDefinitions = new Dictionary<string, object>();
       this.RepeatVariables = new Dictionary<string, object>();
       this.Options = new Dictionary<string, object>();
@@ -493,23 +550,21 @@ namespace CraigFowler.Web.ZPT.Tales
       
       // Initialise the root contexts dictionary
       this.RootContexts = new Dictionary<string, object>();
-      this.RootContexts.Add(NOTHING_REFERENCE, null);
-      this.RootContexts.Add(DEFAULT_REFERENCE, new DefaultValueMarker());
-      this.RootContexts.Add(OPTIONS_REFERENCE, Options);
-      this.RootContexts.Add(ATTRIBUTES_REFERENCE, Attributes);
-    }
-    
-    /// <summary>
-    /// <para>Overloaded.  Initialises this instance a given parent context.</para>
-    /// </summary>
-    private TalesContext(TalesContext parent) : this()
-    {
-      if(parent == null)
-      {
-        throw new ArgumentNullException("parent");
-      }
       
-      this.ParentContext = parent;
+      if(this.ParentContext == null)
+      {
+        this.RootContexts.Add(NOTHING_REFERENCE, null);
+        this.RootContexts.Add(DEFAULT_REFERENCE, new DefaultValueMarker());
+        this.RootContexts.Add(OPTIONS_REFERENCE, this.Options);
+        this.RootContexts.Add(ATTRIBUTES_REFERENCE, this.Attributes);
+      }
+      else
+      {
+        this.RootContexts.Add(NOTHING_REFERENCE, parent.RootContexts[NOTHING_REFERENCE]);
+        this.RootContexts.Add(DEFAULT_REFERENCE, parent.RootContexts[DEFAULT_REFERENCE]);
+        this.RootContexts.Add(OPTIONS_REFERENCE, parent.RootContexts[OPTIONS_REFERENCE]);
+        this.RootContexts.Add(ATTRIBUTES_REFERENCE, parent.RootContexts[ATTRIBUTES_REFERENCE]);
+      }
     }
     
     #endregion
