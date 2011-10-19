@@ -1,5 +1,0 @@
-The processing order for TALES names
-====================================
-1) Explicit aliases of members
-2) A member of the given name
-3) An indexer (if available)

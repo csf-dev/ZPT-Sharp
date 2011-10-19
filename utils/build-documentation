@@ -16,5 +16,12 @@ else
   output_option=""
 fi
 
+if [ ! -e "${builder_app}" ]
+then
+  echo "Cannot find the page builder application at '${builder_app}'"
+  echo "Has the solution been compiled?"
+  exit 1
+fi
+
 $builder_app -e html -c "baseUrl=http://csf-software-development.github.com/ZPT-Sharp/;timestamp=${current_timestamp}" $output_option "$input_path"
 cp -r "${input_path}/static" "${output_path}"

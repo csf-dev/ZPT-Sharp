@@ -1,0 +1,14 @@
+#!/bin/bash
+
+solution_root="`dirname $0`/.."
+cd $solution_root
+
+action_param="${1:--n}"
+
+git clean $action_param -dx -e "*.xml" -e "*.userprefs" -e "*.pidb"
+
+if [ "$action_param" = "-n" ]
+then
+  echo "---"
+  echo "Not removing any content, run 'clean-solution -f' to perform the actual cleanup"
+fi
