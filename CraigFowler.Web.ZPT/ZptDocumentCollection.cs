@@ -146,6 +146,23 @@ namespace CraigFowler.Web.ZPT
     /// given path.
     /// </para>
     /// </summary>
+    /// <param name="path">
+    /// A <see cref="System.String"/>
+    /// </param>
+    /// <returns>
+    /// A <see cref="ZptDocumentCollection"/>
+    /// </returns>
+    public static ZptDocumentCollection CreateFromFilesystem(string path)
+    {
+      return CreateFromFilesystem(new DirectoryInfo(path), DefaultTemplateDocumentPattern);
+    }
+    
+    /// <summary>
+    /// <para>
+    /// Overloaded.  Creates a new <see cref="ZptDocumentCollection"/> from the ZPT template files found within a
+    /// given path.
+    /// </para>
+    /// </summary>
     /// <param name="basePath">
     /// A <see cref="DirectoryInfo"/>
     /// </param>

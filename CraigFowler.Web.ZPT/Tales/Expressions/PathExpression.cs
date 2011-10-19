@@ -24,6 +24,7 @@ using System.Collections.Generic;
 using System.Reflection;
 using CraigFowler.Web.ZPT.Tales.Exceptions;
 using System.Text.RegularExpressions;
+using System.Runtime.Serialization;
 
 namespace CraigFowler.Web.ZPT.Tales.Expressions
 {
@@ -546,6 +547,19 @@ namespace CraigFowler.Web.ZPT.Tales.Expressions
       }
       catch(Exception ex)
       {
+        Exception interestingException = ex;
+        
+        while((interestingException is TargetInvocationException)
+              && interestingException.InnerException != null)
+        {
+          interestingException = interestingException.InnerException;
+        }
+        
+        if(interestingException is ZptDocumentParsingException)
+        {
+          throw interestingException;
+        }
+        
         string exMessage = String.Format("Encountered an error whilst invoking method '{0}', whilst traversing a " +
                                          "path expression.",
                                          method.Name);

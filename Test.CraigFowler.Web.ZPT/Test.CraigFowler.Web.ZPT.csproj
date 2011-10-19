@@ -79,6 +79,7 @@
     <Compile Include="Metal\TestMetalMacro.cs" />
     <Compile Include="Tales\TestTalesPath.cs" />
     <Compile Include="TestZptPageBuilder.cs" />
+    <Compile Include="ZptIntegrationTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CraigFowler.Web.ZPT\CraigFowler.Web.ZPT.csproj">

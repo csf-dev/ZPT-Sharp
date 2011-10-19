@@ -86,6 +86,7 @@
     <Compile Include="Mvc\ZptView.cs" />
     <Compile Include="Mvc\ZptViewEngine.cs" />
     <Compile Include="ZptPageBuilder.cs" />
+    <Compile Include="ZptDocumentParsingException.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

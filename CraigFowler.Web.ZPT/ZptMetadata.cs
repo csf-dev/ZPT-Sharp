@@ -252,7 +252,22 @@ namespace CraigFowler.Web.ZPT
 				throw new NotSupportedException("The selected document type is not supported.");
 			}
 			
-			output.Load(fileInfo.FullName);
+      try
+      {
+        output.Load(fileInfo.FullName);
+      }
+      catch(XmlException ex)
+      {
+        ZptDocumentParsingException newException;
+        string message = String.Format("XmlException encountered whilst loading template file '{0}'.",
+                                       fileInfo.FullName);
+        
+        newException = new ZptDocumentParsingException(message, ex);
+        newException.Filename = fileInfo.FullName;
+        
+        throw newException;
+      }
+			
 			
 			return output;
 		}

@@ -22,6 +22,7 @@
 using System;
 using System.Collections.Generic;
 using CraigFowler.Web.ZPT.Tales.Exceptions;
+using System.Text;
 
 namespace CraigFowler.Web.ZPT.Tales
 {
@@ -33,6 +34,14 @@ namespace CraigFowler.Web.ZPT.Tales
 	/// </summary>
 	public class TalesStructureProvider
 	{
+    #region constants
+    
+    private const string
+      INDENT                  = "» ",
+      SEPARATOR               = " : ";
+    
+    #endregion
+    
 		#region properties
 		
 		/// <summary>
@@ -190,6 +199,97 @@ namespace CraigFowler.Web.ZPT.Tales
       
       context.AddDefinition(path.Parts[0], this);
       return context.CreateExpression(path.ToString()).GetValue();
+    }
+    
+    /// <summary>
+    /// <para>
+    /// Overridden, overridden.  Creates and returns a human-readable string representation of this instance.
+    /// </para>
+    /// </summary>
+    /// <remarks>
+    /// <para>
+    /// In a debugging build this method returns a hierarchical representation of this object and all of its contents.
+    /// In a non-debug build it returns far less information.
+    /// </para>
+    /// </remarks>
+    /// <returns>
+    /// A <see cref="System.String"/>
+    /// </returns>
+    public override string ToString()
+    {
+      string output;
+      
+#if DEBUG
+      output = this.GetContents();
+#else
+      output = base.ToString();
+#endif
+      
+      return output;
+    }
+    
+    /// <summary>
+    /// <para>Overloaded.  Gets the complete contents of this instance as a hierarchical tree representation.</para>
+    /// </summary>
+    /// <returns>
+    /// A <see cref="System.String"/>
+    /// </returns>
+    public string GetContents()
+    {
+      StringBuilder output = new StringBuilder();
+      
+      this.GetContents(0, output);
+      
+      return output.ToString();
+    }
+    
+    /// <summary>
+    /// <para>Overloaded.  Gets the complete contents of this instance as a hierarchical tree representation.</para>
+    /// </summary>
+    /// <param name="indentLevel">
+    /// A <see cref="System.Int32"/>
+    /// </param>
+    /// <returns>
+    /// A <see cref="System.String"/>
+    /// </returns>
+    protected void GetContents(int indentLevel, StringBuilder builder)
+    {
+      string indentString = String.Empty;
+      
+      if(builder == null)
+      {
+        throw new ArgumentNullException("builder");
+      }
+      else if(indentLevel < 0)
+      {
+        throw new ArgumentOutOfRangeException("indentLevel", "Indentation level cannot be less than zero.");
+      }
+      
+      if(indentLevel == 0)
+      {
+        builder.AppendFormat("ROOT{0}{1}\n", SEPARATOR, this.GetType().Name);
+      }
+      
+      indentLevel++;
+      for(int i = 0; i < indentLevel; i++)
+      {
+        indentString += INDENT;
+      }
+      
+      foreach(string key in this.UnderlyingCollection.Keys)
+      {
+        object item = this.UnderlyingCollection[key];
+        builder.AppendFormat("{0}{1}{2}{3}\n",
+                             indentString,
+                             key,
+                             SEPARATOR,
+                             (item != null)? item.GetType().Name : "null");
+        
+        if(item is TalesStructureProvider)
+        {
+          ((TalesStructureProvider) item).GetContents(indentLevel, builder);
+        }
+      }
     }
     
 		/// <summary>
