@@ -100,7 +100,7 @@ namespace CraigFowler.Web.ZPT.Tales
 		/// <param name="item">
 		/// A <see cref="System.Object"/> to store at the specified point within the hierarchy of this instance.
 		/// </param>
-		[TalesIgnore]
+		[TalesMember(true)]
     public virtual void StoreItem(TalesPath relativePath, object item)
 		{
 			if(relativePath == null)
@@ -132,7 +132,7 @@ namespace CraigFowler.Web.ZPT.Tales
     /// A <see cref="TalesPath"/> that indicates the path (relative to the position of this structure provider in
     /// a TALES hierarchy) at which to remove the contents.
     /// </param>
-    [TalesIgnore]
+    [TalesMember(true)]
     public void RemoveItem(TalesPath relativePath)
     {
       if(relativePath == null)

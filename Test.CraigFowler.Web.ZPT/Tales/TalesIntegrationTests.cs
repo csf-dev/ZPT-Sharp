@@ -407,9 +407,6 @@ namespace Test.CraigFowler.Web.ZPT.Tales
       testObj = expression.GetValue();
       
       Console.Error.WriteLine ("TestDuplicateAlias has failed, the object it found was: {0}", testObj);
-      
-      Assert.Fail("If we reach this point then the test failed");
-      Assert.IsNull(testObj, "Not really a test, just prevents a compiler warning");
     }
     
     [Test]

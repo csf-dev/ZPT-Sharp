@@ -39,7 +39,7 @@ namespace CraigFowler.Web.ZPT.Metal
     /// Read-only.  Gets a collection of the <see cref="MetalMacro"/>s that are defined within this document.
     /// </para>
     /// </summary>
-    [TalesAlias("macros")]
+    [TalesMember("macros")]
     public MetalMacroCollection Macros
     {
       get;

@@ -50,7 +50,6 @@
     <Compile Include="Tales\TalesPath.cs" />
     <Compile Include="Tales\ExpressionType.cs" />
     <Compile Include="Tales\TalesExpression.cs" />
-    <Compile Include="Tales\TalesAliasAttribute.cs" />
     <Compile Include="Tales\Exceptions\DuplicateMemberException.cs" />
     <Compile Include="Tales\Exceptions\RootObjectNotFoundException.cs" />
     <Compile Include="Tales\Exceptions\TalesException.cs" />
@@ -77,7 +76,6 @@
     <Compile Include="Tales\TalesStructureProvider.cs" />
     <Compile Include="Tales\Exceptions\TalesStructureException.cs" />
     <Compile Include="Tales\Exceptions\TalesStructureErrorType.cs" />
-    <Compile Include="Tales\TalesIgnoreAttribute.cs" />
     <Compile Include="Metal\MetalMacro.cs" />
     <Compile Include="Metal\Exceptions\MetalException.cs" />
     <Compile Include="ZptDocumentCollection.cs" />
@@ -87,6 +85,7 @@
     <Compile Include="Mvc\ZptViewEngine.cs" />
     <Compile Include="ZptPageBuilder.cs" />
     <Compile Include="ZptDocumentParsingException.cs" />
+    <Compile Include="Tales\TalesMemberAttribute.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

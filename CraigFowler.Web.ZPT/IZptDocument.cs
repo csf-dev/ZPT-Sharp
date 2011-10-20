@@ -61,7 +61,7 @@ namespace CraigFowler.Web.ZPT
     /// <returns>
     /// A dictionary of <see cref="MetalMacro"/>, indexed by <see cref="System.String"/>
     /// </returns>
-    [TalesAlias("macros")]
+    [TalesMember("macros")]
     MetalMacroCollection GetMacros();
 	}
 }

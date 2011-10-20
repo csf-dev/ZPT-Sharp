@@ -1,5 +1,5 @@
 //  
-//  MockObject.cs
+//  TalesIgnoreMock.cs
 //  
 //  Author:
 //       Craig Fowler <craig@craigfowler.me.uk>
@@ -18,81 +18,72 @@
 // 
 //  You should have received a copy of the GNU General Public License
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
-
+using System;
 using System.Collections.Generic;
 using CraigFowler.Web.ZPT.Tales;
 
 namespace CraigFowler.Web.ZPT.Mocks
 {
-  public class MockObject
+  /// <summary>
+  /// <para>Mock object to test the order of discovery for members on an object.</para>
+  /// </summary>
+  public class TalesIgnoreMock
   {
     #region private fields
     
-    private Dictionary<string, string> dict;
+    private Dictionary<string, int> privateDictionary;
     
     #endregion
     
     #region public fields
     
-    [TalesMember("inner")]
-    public MockObject InnerObject;
+    public int TestFieldOne;
     
-    public int IntegerValue;
+    [TalesMember(true)]
+    public int TestFieldTwo;
     
-    public bool BooleanValue;
+    public int TestFieldThree;
+    
+    [TalesMember("TestFieldThree")]
+    public int TestFieldFour;
+    
+    [TalesMember(true)]
+    public int TestFieldFive;
     
     #endregion
     
     #region properties
     
-    [TalesMember("unambiguous")]
-    public string this [string key]
+    public int this [string key]
     {
       get {
-        string output;
-        
-        if(dict.ContainsKey(key))
-        {
-          output = dict[key];
-        }
-        else
-        {
-          output = null;
-        }
-        
-        return output;
+        return privateDictionary[key];
       }
       set {
-        if(dict.ContainsKey(key))
-        {
-          dict[key] = value;
-        }
-        else
-        {
-          dict.Add(key, value);
-        }
+        privateDictionary[key] = value;
       }
     }
     
     #endregion
     
-    #region constructors
+    #region constructor
     
-    public MockObject() : this(false) {}
-    
-    public MockObject(bool createInner)
+    public TalesIgnoreMock ()
     {
-      this.InnerObject = createInner? new MockObject() : null;
-      this.IntegerValue = 0;
+      privateDictionary = new Dictionary<string, int>();
       
-      dict = new Dictionary<string, string>();
-      this["foo"] = "bar";
-      this["baz"] = "sample";
+      this["TestFieldOne"] = 10;
+      this["TestFieldTwo"] = 20;
+      this["TestFieldThree"] = 30;
       
-      this.BooleanValue = true;
+      this.TestFieldOne = 1;
+      this.TestFieldTwo = 2;
+      this.TestFieldThree = 3;
+      this.TestFieldFour = 4;
+      this.TestFieldFive = 5;
     }
     
     #endregion
   }
 }
+

@@ -80,6 +80,8 @@
     <Compile Include="Tales\TestTalesPath.cs" />
     <Compile Include="TestZptPageBuilder.cs" />
     <Compile Include="ZptIntegrationTests.cs" />
+    <Compile Include="Tales\TestTalesIgnoreAttribute.cs" />
+    <Compile Include="Mocks\TalesIgnoreMock.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CraigFowler.Web.ZPT\CraigFowler.Web.ZPT.csproj">

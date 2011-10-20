@@ -51,7 +51,7 @@ namespace CraigFowler.Web.ZPT.Tales.Exceptions
       get {
         return (bool) this.Data["Fatal"];
       }
-      protected set {
+      set {
         this.Data["Fatal"] = value;
       }
     }

@@ -32,7 +32,7 @@ namespace CraigFowler.Web.ZPT.Mvc.Samples.Models
     /// <summary>
     /// <para>Username</para>
     /// </summary>
-    [TalesAlias("username")]
+    [TalesMember("username")]
     public string Username
     {
       get;
@@ -42,7 +42,7 @@ namespace CraigFowler.Web.ZPT.Mvc.Samples.Models
     /// <summary>
     /// <para>Age in years</para>
     /// </summary>
-    [TalesAlias("age")]
+    [TalesMember("age")]
     public int Age
     {
       get;

@@ -356,10 +356,9 @@ namespace CraigFowler.Web.ZPT.Tales.Expressions
     /// </returns>
     private MemberInfo SelectMember(object containingObject, string memberIdentifier, out bool suppressPathAdvancement)
     {
-      MemberInfo foundFromAlias = null, foundFromName = null, foundFromIndexer = null, output = null;
+      MemberInfo output = null;
+      bool success = false;
       Type containingType;
-      object[] attributes;
-      MemberInfo[] members;
       
       // Quick sanity-check for some impossible situations
       if(containingObject == null)
@@ -379,72 +378,83 @@ namespace CraigFowler.Web.ZPT.Tales.Expressions
       // Perform a linear search through the type's members to find one with the alias we are looking for.
       foreach(MemberInfo member in containingType.GetMembers())
       {
-        attributes = member.GetCustomAttributes(typeof(TalesAliasAttribute), true);
+        object[] attributes = member.GetCustomAttributes(typeof(TalesMemberAttribute), true);
         
-        foreach(object attribute in attributes)
+        if(attributes.Length == 1)
         {
-          if(((TalesAliasAttribute) attribute).Alias == memberIdentifier)
+          TalesMemberAttribute attribute = (TalesMemberAttribute) attributes[0];
+          
+          if(attribute.Alias == memberIdentifier && success)
           {
-            if(foundFromAlias == null)
-            {
-              foundFromAlias = member;
-            }
-            else
-            {
-              TalesException ex = new DuplicateMemberException(memberIdentifier, true);
-              ex.Data.Add("target type", containingType);
-              throw ex;
-            }
+            DuplicateMemberException ex = new DuplicateMemberException(memberIdentifier, true);
+            ex.Data.Add("Target type", containingType);
+            throw ex;
+          }
+          else if(attribute.Alias == memberIdentifier)
+          {
+            output = member;
+            success = true;
           }
         }
       }
       
       // If we haven't found a member yet then try picking one using its name
-      if(foundFromAlias == null)
+      if(!success)
       {
-        members = containingType.GetMember(memberIdentifier);
+        MemberInfo[] members = containingType.GetMember(memberIdentifier);
       
-        if(members.Length == 1)
-        {
-          foundFromName = members[0];
-        }
-        else if(members.Length > 1)
+        if(members.Length > 1)
         {
           TalesException ex = new DuplicateMemberException(memberIdentifier, false);
           ex.Data.Add("target type", containingType);
           throw ex;
         }
-      }
-      
-      // If we still haven't found a member then if this happens to have an indexer then try that!
-      if(foundFromAlias == null && foundFromName == null)
-      {
-        members = containingType.GetMember(INDEXER_IDENTIFIER);
-        
-        if(members.Length == 1 && members[0].MemberType == MemberTypes.Property)
+        else if(members.Length == 1)
         {
-          PropertyInfo indexer = members[0] as PropertyInfo;
-          MethodInfo indexerGet = indexer.GetGetMethod();
-          if(indexerGet.GetParameters().Length == 1)
+          object[] attributes = members[0].GetCustomAttributes(typeof(TalesMemberAttribute), true);
+          
+          if(attributes.Length == 0
+             || (attributes.Length == 1
+                 && ((TalesMemberAttribute) attributes[0]).Ignore == false))
           {
-            foundFromIndexer = indexerGet;
+            output = members[0];
+            success = true;
           }
         }
       }
       
-      // Decide what we are returning
-      if(foundFromAlias != null)
+      /* If we still haven't found a member then see if the type we are examining has an indexer.
+       * If it does then use that!
+       */
+      if(!success)
       {
-        output = foundFromAlias;
-      }
-      else if(foundFromName != null)
-      {
-        output = foundFromName;
-      }
-      else if(foundFromIndexer != null)
-      {
-        output = foundFromIndexer;
-        suppressPathAdvancement = true;
+        MemberInfo[] members = containingType.GetMember(INDEXER_IDENTIFIER);
+        
+        if(members.Length > 1)
+        {
+          TalesException ex = new DuplicateMemberException(memberIdentifier, false);
+          ex.Data.Add("target type", containingType);
+          throw ex;
+        }
+        else if(members.Length == 1 && members[0].MemberType == MemberTypes.Property)
+        {
+          object[] attributes = members[0].GetCustomAttributes(typeof(TalesMemberAttribute), true);
+          
+          if(attributes.Length == 0
+             || (attributes.Length == 1
+                 && ((TalesMemberAttribute) attributes[0]).Ignore == false))
+          {
+            PropertyInfo indexer = members[0] as PropertyInfo;
+            MethodInfo getterMethod = indexer.GetGetMethod();
+            
+            if(getterMethod.GetParameters().Length == 1)
+            {
+              output = getterMethod;
+              suppressPathAdvancement = true;
+              success = true;
+            }
+          }
+        }
       }
       
       return output;

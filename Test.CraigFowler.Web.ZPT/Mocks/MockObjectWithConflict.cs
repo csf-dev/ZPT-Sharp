@@ -28,13 +28,13 @@ namespace CraigFowler.Web.ZPT.Mocks
   {
     public string SomeProperty;
     
-    [TalesAlias("SomeProperty")]
+    [TalesMember("SomeProperty")]
     public string OtherProperty;
     
-    [TalesAlias("Duplicate")]
+    [TalesMember("Duplicate")]
     public string SomeDuplicate;
     
-    [TalesAlias("Duplicate")]
+    [TalesMember("Duplicate")]
     public string OtherDuplicate;
     
     public string this [string key]

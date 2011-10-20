@@ -50,7 +50,7 @@ namespace CraigFowler.Web.ZPT.Tal
     /// <summary>
     /// <para>Read-only.  Gets the index of the current iteration (zero-based).</para>
     /// </summary>
-    [TalesAlias("index")]
+    [TalesMember("index")]
     public int Index
     {
       get {
@@ -72,7 +72,7 @@ namespace CraigFowler.Web.ZPT.Tal
     /// plus one.
     /// </para>
     /// </summary>
-    [TalesAlias("number")]
+    [TalesMember("number")]
     public int Number
     {
       get {
@@ -83,7 +83,7 @@ namespace CraigFowler.Web.ZPT.Tal
     /// <summary>
     /// <para>Read-only.  Gets whether the <see cref="Index"/> indicates an even-numbered iteration.</para>
     /// </summary>
-    [TalesAlias("even")]
+    [TalesMember("even")]
     public bool Even
     {
       get {
@@ -95,7 +95,7 @@ namespace CraigFowler.Web.ZPT.Tal
     /// <summary>
     /// <para>Read-only.  Gets whether the <see cref="Index"/> indicates an odd-numbered iteration.</para>
     /// </summary>
-    [TalesAlias("odd")]
+    [TalesMember("odd")]
     public bool Odd
     {
       get {
@@ -109,7 +109,7 @@ namespace CraigFowler.Web.ZPT.Tal
     /// <see cref="UnderlyingCollection"/>.
     /// </para>
     /// </summary>
-    [TalesAlias("start")]
+    [TalesMember("start")]
     public bool Start
     {
       get {
@@ -124,7 +124,7 @@ namespace CraigFowler.Web.ZPT.Tal
     /// <see cref="UnderlyingCollection"/>.
     /// </para>
     /// </summary>
-    [TalesAlias("end")]
+    [TalesMember("end")]
     public bool End
     {
       get {
@@ -136,7 +136,7 @@ namespace CraigFowler.Web.ZPT.Tal
     /// <summary>
     /// <para>Read-only.  Gets the length of the <see cref="UnderlyingCollection"/>.</para>
     /// </summary>
-    [TalesAlias("length")]
+    [TalesMember("length")]
     public int Length
     {
       get {
@@ -150,7 +150,7 @@ namespace CraigFowler.Web.ZPT.Tal
     /// </para>
     /// <seealso cref="GenerateLetterReference(int)"/>
     /// </summary>
-    [TalesAlias("letter")]
+    [TalesMember("letter")]
     public string Letter
     {
       get {
@@ -169,7 +169,7 @@ namespace CraigFowler.Web.ZPT.Tal
     /// <remarks>
     /// <para>This property returns an uppercase version of <see cref="Letter"/>.</para>
     /// </remarks>
-    [TalesAlias("Letter")]
+    [TalesMember("Letter")]
     public string UppercaseLetter
     {
       get {
@@ -183,6 +183,7 @@ namespace CraigFowler.Web.ZPT.Tal
     /// <see cref="Index"/>.
     /// </para>
     /// </summary>
+    [TalesMember(true)]
     public object Current
     {
       get {
@@ -197,6 +198,7 @@ namespace CraigFowler.Web.ZPT.Tal
     /// <see cref="RepeatVariable"/>.
     /// </para>
     /// </summary>
+    [TalesMember(true)]
     protected IList UnderlyingCollection
     {
       get {
@@ -224,6 +226,7 @@ namespace CraigFowler.Web.ZPT.Tal
     /// <see cref="UnderlyingCollection"/>.  If this action would have placed <see cref="Index"/> past the end of the
     /// underlying collection then this method returns false.
     /// </returns>
+    [TalesMember(true)]
     public bool MoveNext()
     {
       this.Index ++;
@@ -239,6 +242,7 @@ namespace CraigFowler.Web.ZPT.Tal
     /// <exception cref="NotSupportedException">
     /// This method will ALWAYS throw an exception.  It should not be used.
     /// </exception>
+    [TalesMember(true)]
     public void Reset()
     {
       throw new NotSupportedException("Resetting the repeat variable is not supported");
@@ -250,6 +254,7 @@ namespace CraigFowler.Web.ZPT.Tal
     /// is less than the length of the <see cref="UnderlyingCollection"/>.
     /// </para>
     /// </summary>
+    [TalesMember(true)]
     private void CheckThatIndexIsInRange()
     {
       if(this.Index < 0)
