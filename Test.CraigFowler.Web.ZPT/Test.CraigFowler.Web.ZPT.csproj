@@ -82,6 +82,7 @@
     <Compile Include="ZptIntegrationTests.cs" />
     <Compile Include="Tales\TestTalesIgnoreAttribute.cs" />
     <Compile Include="Mocks\TalesIgnoreMock.cs" />
+    <Compile Include="Mocks\MockNamespaceModule.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CraigFowler.Web.ZPT\CraigFowler.Web.ZPT.csproj">

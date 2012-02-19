@@ -24,6 +24,7 @@ using CraigFowler.Web.ZPT.Mocks;
 using CraigFowler.Web.ZPT.Tales;
 using CraigFowler.Web.ZPT.Tales.Exceptions;
 using NUnit.Framework;
+using Test.CraigFowler.Web.ZPT.Mocks;
 
 namespace Test.CraigFowler.Web.ZPT.Tales
 {
@@ -413,6 +414,47 @@ namespace Test.CraigFowler.Web.ZPT.Tales
       Assert.IsInstanceOfType(typeof(Int32), testObj, "Test object is still correct type");
       testInt = (int) testObj;
       Assert.AreEqual(3, testInt, "Test integer still has correct value");
+    }
+    
+    [Test]
+    public void TestNamespaceOperation()
+    {
+      TalesContext context;
+      TalesExpression expression;
+      object testObj;
+      string testString;
+      
+      TalesPath.RegisterNamespaceOperationModule(new MockNamespaceModule());
+      
+      context = new TalesContext();
+      context.AddDefinition("mock", this.Mock);
+      
+      expression = context.CreateExpression("mock/BooleanValue/namespaceModule:FormatBoolean");
+      
+      try
+      {
+        testObj = expression.GetValue();
+      }
+      catch(TraversalException ex)
+      {
+        foreach(TalesPath path in ex.Attempts.Keys)
+        {
+          Console.Error.WriteLine("Path: {0}\nException\n{1}", path.ToString(), ex.Attempts[path].ToString());
+        }
+        throw;
+      }
+      
+      Assert.IsInstanceOfType(typeof(string), testObj, "Test object is correct type");
+      testString = (string) testObj;
+      Assert.AreEqual("Positive dog fort!", testString, "Test string has correct value");
+      
+      this.Mock.BooleanValue = false;
+      
+      testObj = expression.GetValue();
+      
+      Assert.IsInstanceOfType(typeof(string), testObj, "Test object is still correct type");
+      testString = (string) testObj;
+      Assert.AreEqual("That's a negative red lobster!", testString, "Test string still has correct value");
     }
     
     #endregion

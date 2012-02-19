@@ -42,7 +42,7 @@ namespace Test.CraigFowler.Web.ZPT.Tales
       Assert.IsNotNull(path);
       
       Assert.AreEqual(3, path.Parts.Count, "Number of parts");
-      Assert.AreEqual("foo", path.Parts[0], "First part");
+      Assert.AreEqual("foo", path.Parts[0].Text, "First part");
       
       path = new TalesPath("  foo/bar baz/sample");
       Assert.IsNotNull(path);
@@ -59,13 +59,28 @@ namespace Test.CraigFowler.Web.ZPT.Tales
       Assert.IsNotNull(path);
       Assert.AreEqual(3, path.Parts.Count, "Number of parts");
       
-      part1 = path.Parts[0];
-      part2 = path.Parts[1];
-      part3 = path.Parts[2];
+      part1 = path.Parts[0].Text;
+      part2 = path.Parts[1].Text;
+      part3 = path.Parts[2].Text;
       
       Assert.AreEqual("foo", part1, "First part");
       Assert.AreEqual(" bar baz", part2, "Second part");
       Assert.AreEqual("sample  part", part3, "Third part");
+    }
+    
+    [Test]
+    public void TestCreatePart()
+    {
+      ITalesPathPart part = TalesPath.CreatePart("foo");
+      Assert.IsInstanceOfType(typeof(StandardTalesPathPart), part, "Standard path part");
+      Assert.AreEqual("foo", part.Text, "Correct text for standard path part");
+      
+      part = TalesPath.CreatePart("foo:bar");
+      Assert.IsInstanceOfType(typeof(TalesNamespaceOperationPart), part, "Namespace path part");
+      Assert.AreEqual("foo:bar", part.Text, "Correct text for namespace path part");
+      
+      Assert.AreEqual("foo", ((TalesNamespaceOperationPart) part).NamespaceModuleIdentifier, "Correct namespace name");
+      Assert.AreEqual("bar", ((TalesNamespaceOperationPart) part).OperationIdentifier, "Correct operation name");
     }
   }
 }

@@ -46,7 +46,7 @@ namespace CraigFowler.Web.ZPT.Tales.Expressions
      */
     private const string
       INDEXER_IDENTIFIER                = "Item",
-      VALID_PATH_EXPRESSION_PATTERN     = @"^(((local|global):)?([-\w .,~]+)(/(\??[-\w .,~]+))*)?(\|(((local|global):)?([-\w .,~]+)(/(\??[-\w .,~]+))*)?)*$";
+      VALID_PATH_EXPRESSION_PATTERN     = @"^(((local|global):)?([-\w .,~]+)(/(\??[-\w .,~:]+))*)?(\|(((local|global):)?([-\w .,~]+)(/(\??[-\w .,~:]+))*)?)*$";
     
     private static readonly Regex
       ValidPathExpression               = new Regex(VALID_PATH_EXPRESSION_PATTERN, RegexOptions.Compiled);
@@ -201,7 +201,7 @@ namespace CraigFowler.Web.ZPT.Tales.Expressions
       // Make an attempt to get a reference to the root of the path expression from the current context
       try
       {
-        rootReference = this.Context.GetRootObject(path.Parts[0]);
+        rootReference = this.Context.GetRootObject(path.Parts[0].Text);
       }
       catch(ArgumentException ex)
       {
@@ -238,97 +238,114 @@ namespace CraigFowler.Web.ZPT.Tales.Expressions
       object output = null, thisObject = null;
       MemberInfo currentMember;
       bool suppressPathAdvancement;
-      string currentPathPart, memberName;
+      string memberName;
       
       if(position < path.Parts.Count)
       {
-        currentPathPart = path.Parts[position];
-        
-        // This handles the case for a variable-substitution within a path
-        if(currentPathPart.StartsWith("?"))
+        if(path.Parts[position] is StandardTalesPathPart)
         {
-          memberName = EvaluateSingleVariable(currentPathPart);
-        }
-				else
-				{
-					memberName = currentPathPart;
-				}
-        
-        if(parentObject == null)
-        {
-          throw new PathException(path, "Encountered a null reference part-way through traversing a path.");
-        }
-        
-        try
-        {
-          currentMember = SelectMember(parentObject,
-                                       memberName,
-                                       out suppressPathAdvancement);
-        }
-        catch(ArgumentException ex)
-        {
-          throw new PathException(path, ex);
-        }
-        
-        if(currentMember == null)
-        {
-          throw new PathInvalidException(path, "No member could be selected using the current path.");
-        }
-        
-        switch(currentMember.MemberType)
-        {
-        case MemberTypes.Property:
-          PropertyInfo property = currentMember as PropertyInfo;
-          if(property.CanRead)
+          string currentPathPart = path.Parts[position].Text;
+          
+          // This handles the case for a variable-substitution within a path
+          if(currentPathPart.StartsWith("?"))
           {
-            thisObject = InvokeMethod(property.GetGetMethod(),
+            memberName = EvaluateSingleVariable(currentPathPart);
+          }
+  				else
+  				{
+  					memberName = currentPathPart;
+  				}
+          
+          if(parentObject == null)
+          {
+            throw new PathException(path, "Encountered a null reference part-way through traversing a path.");
+          }
+          
+          try
+          {
+            currentMember = SelectMember(parentObject,
+                                         memberName,
+                                         out suppressPathAdvancement);
+          }
+          catch(ArgumentException ex)
+          {
+            throw new PathException(path, ex);
+          }
+          
+          if(currentMember == null)
+          {
+            throw new PathInvalidException(path, "No member could be selected using the current path.");
+          }
+          
+          switch(currentMember.MemberType)
+          {
+          case MemberTypes.Property:
+            PropertyInfo property = currentMember as PropertyInfo;
+            if(property.CanRead)
+            {
+              thisObject = InvokeMethod(property.GetGetMethod(),
+                                        parentObject,
+                                        path,
+                                        ref position,
+                                        suppressPathAdvancement);
+            }
+            else
+            {
+              TalesException ex = new PathInvalidException(path, "Cannot traverse a non-readable property.");
+              ex.Data.Add("member", currentMember);
+              ex.Data.Add("target type", parentObject.GetType());
+              throw ex;
+            }
+            break;
+          case MemberTypes.Method:
+            MethodInfo method = currentMember as MethodInfo;
+            thisObject = InvokeMethod(method,
                                       parentObject,
                                       path,
                                       ref position,
                                       suppressPathAdvancement);
-          }
-          else
-          {
-            TalesException ex = new PathInvalidException(path, "Cannot traverse a non-readable property.");
+            break;
+          case MemberTypes.Field:
+            FieldInfo field = currentMember as FieldInfo;
+            if(field.IsPublic)
+            {
+              thisObject = field.GetValue(parentObject);
+            }
+            else
+            {
+              TalesException ex = new PathInvalidException(path, "Cannot traverse a non-readable field.");
+              ex.Data.Add("member", currentMember);
+              ex.Data.Add("target type", parentObject.GetType());
+              throw ex;
+            }
+            break;
+          default:
+            TalesException ex = new PathInvalidException(path,
+                                                         "Encountered an unsupported member type whilst " +
+                                                         "traversing the path.");
             ex.Data.Add("member", currentMember);
             ex.Data.Add("target type", parentObject.GetType());
             throw ex;
           }
-          break;
-        case MemberTypes.Method:
-          MethodInfo method = currentMember as MethodInfo;
-          thisObject = InvokeMethod(method,
-                                    parentObject,
-                                    path,
-                                    ref position,
-                                    suppressPathAdvancement);
-          break;
-        case MemberTypes.Field:
-          FieldInfo field = currentMember as FieldInfo;
-          if(field.IsPublic)
-          {
-            thisObject = field.GetValue(parentObject);
-          }
-          else
-          {
-            TalesException ex = new PathInvalidException(path, "Cannot traverse a non-readable field.");
-            ex.Data.Add("member", currentMember);
-            ex.Data.Add("target type", parentObject.GetType());
-            throw ex;
-          }
-          break;
-        default:
-          TalesException ex = new PathInvalidException(path,
-                                                       "Encountered an unsupported member type whilst " +
-                                                       "traversing the path.");
-          ex.Data.Add("member", currentMember);
-          ex.Data.Add("target type", parentObject.GetType());
-          throw ex;
+          
+          // And now we recurse into ourself, traversing another piece of the path each time we go.
+          position ++;
+          output = EvaluatePath(path, position, thisObject);
         }
-        
-        // And now we recurse into ourself, traversing another piece of the path each time we go.
-        position ++;
-        output = EvaluatePath(path, position, thisObject);
+        else if(path.Parts[position] is TalesNamespaceOperationPart)
+        {
+          TalesNamespaceOperationPart part = (TalesNamespaceOperationPart) path.Parts[position];
+          ITalesNamespaceOperationModule module = TalesPath.GetNamespaceOperationModule(part.NamespaceModuleIdentifier);
+          MethodInfo method = module.GetType().GetMethod(part.OperationIdentifier, new Type[] { typeof(object) });
+          TalesNamespaceOperation operation = (TalesNamespaceOperation) Delegate.CreateDelegate(typeof(TalesNamespaceOperation),
+                                                                                                module,
+                                                                                                method);
+          return operation(parentObject);
+        }
+        else
+        {
+          throw new InvalidOperationException("Unrecognised path part.");
+        }
       }
       else
       {
@@ -457,10 +474,6 @@ namespace CraigFowler.Web.ZPT.Tales.Expressions
         {
           object[] attributes = filteredMembers[0].GetCustomAttributes(typeof(TalesMemberAttribute), true);
           
-          Console.WriteLine ("{0}: special name '{1}'",
-                             filteredMembers[0].Name,
-                             ((MethodInfo) filteredMembers[0]).IsSpecialName);
-          
           if(attributes.Length == 0
              || (attributes.Length == 1
                  && ((TalesMemberAttribute) attributes[0]).Ignore == false))
@@ -588,7 +601,7 @@ namespace CraigFowler.Web.ZPT.Tales.Expressions
         }
         else
         {
-					string parameterValue = path.Parts[basePosition + offset];
+					string parameterValue = path.Parts[basePosition + offset].Text;
 					
 					if(parameterValue.StartsWith("?"))
 					{

@@ -63,6 +63,23 @@ namespace CraigFowler.Web.ZPT.Tales.Exceptions
       }
     }
     
+    /// <summary>
+    /// <para>Overridden.  Gets a human-readable error message for this exception.</para>
+    /// </summary>
+    public override string Message
+    {
+      get {
+        if(this.Identifier != null)
+        {
+          return String.Format("{0}, object alias: '{1}'", base.Message, this.Identifier);
+        }
+        else
+        {
+          return base.Message;
+        }
+      }
+    }
+    
     #endregion
     
     #region constructor
@@ -93,7 +110,7 @@ namespace CraigFowler.Web.ZPT.Tales.Exceptions
       }
       else
       {
-        this.Identifier = path.Parts[0];
+        this.Identifier = path.Parts[0].Text;
       }
     }
     

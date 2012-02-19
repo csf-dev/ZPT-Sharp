@@ -276,7 +276,7 @@ namespace CraigFowler.Web.ZPT
       TalesPath output = TalesPath.GetRelativePath(basePath, file);
       
       // Strip the filename extension from the last part of the path
-      output.Parts[output.Parts.Count - 1] = FileExtension.Replace(output.Parts[output.Parts.Count - 1], String.Empty);
+      output.Parts[output.Parts.Count - 1] = TalesPath.CreatePart(FileExtension.Replace(output.Parts[output.Parts.Count - 1].Text, String.Empty));
       
       return output;
     }

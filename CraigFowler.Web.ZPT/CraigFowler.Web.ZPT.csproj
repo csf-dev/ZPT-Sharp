@@ -87,6 +87,11 @@
     <Compile Include="ZptPageBuilder.cs" />
     <Compile Include="ZptDocumentParsingException.cs" />
     <Compile Include="Tales\TalesMemberAttribute.cs" />
+    <Compile Include="Tales\StandardTalesPathPart.cs" />
+    <Compile Include="Tales\ITalesPathPart.cs" />
+    <Compile Include="Tales\TalesNamespaceOperationPart.cs" />
+    <Compile Include="Tales\ITalesNamespaceOperationModule.cs" />
+    <Compile Include="Tales\TalesNamespaceOperation.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

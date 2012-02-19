@@ -57,7 +57,8 @@ namespace Test.CraigFowler.Web.ZPT.Tales.Expressions
                                           "foo|",
                                           "foo/../bar",
 																					"local:foo/bar",
-																					"global:foo/bar" };
+																					"global:foo/bar",
+                                          "mock/BooleanValue/namespaceModule:FormatBoolean" };
 			
       for(int i = 0; i < testPaths.Length; i++)
       {
@@ -80,6 +81,34 @@ namespace Test.CraigFowler.Web.ZPT.Tales.Expressions
                                      i,
                                      testPaths[i]));
       }
+    }
+    
+    [Test]
+    public void TestCompositeNamespacedExpression()
+    {
+      TalesContext context = new TalesContext();
+      PathExpression expression = (PathExpression) context.CreateExpression("mock/BooleanValue/namespaceModule:FormatBoolean");
+      
+      Assert.AreEqual(1, expression.Paths.Count, "Correct number of paths");
+      Assert.AreEqual(3, expression.Paths[0].Parts.Count, "Correct number of parts in first path");
+      Assert.IsInstanceOfType(typeof(StandardTalesPathPart),
+                              expression.Paths[0].Parts[0],
+                              "First path part is correct type");
+      Assert.IsInstanceOfType(typeof(StandardTalesPathPart),
+                              expression.Paths[0].Parts[1],
+                              "Second path part is correct type");
+      Assert.IsInstanceOfType(typeof(TalesNamespaceOperationPart),
+                              expression.Paths[0].Parts[2],
+                              "Third path part is correct type");
+      Assert.AreEqual("mock", expression.Paths[0].Parts[0].Text, "First path correct text");
+      Assert.AreEqual("BooleanValue", expression.Paths[0].Parts[1].Text, "Second path correct text");
+      
+      Assert.AreEqual("namespaceModule",
+                      ((TalesNamespaceOperationPart) expression.Paths[0].Parts[2]).NamespaceModuleIdentifier,
+                      "Third path correct namespace module");
+      Assert.AreEqual("FormatBoolean",
+                      ((TalesNamespaceOperationPart) expression.Paths[0].Parts[2]).OperationIdentifier,
+                      "Third path correct operation");
     }
   }
 }

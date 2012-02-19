@@ -197,7 +197,7 @@ namespace CraigFowler.Web.ZPT.Tales
         throw new ArgumentException("TALES path has no parts.", "path");
       }
       
-      context.AddDefinition(path.Parts[0], this);
+      context.AddDefinition(path.Parts[0].Text, this);
       return context.CreateExpression(path.ToString()).GetValue();
     }
     
@@ -310,7 +310,7 @@ namespace CraigFowler.Web.ZPT.Tales
 		/// <param name="item">
 		/// A <see cref="System.Object"/> to store at the tip of the path described by <paramref name="pathParts"/>.
 		/// </param>
-		protected void StoreItem(List<string> pathParts, int currentPosition, object item)
+		protected void StoreItem(List<ITalesPathPart> pathParts, int currentPosition, object item)
 		{
 			bool atLastPosition;
 			string currentName;
@@ -325,7 +325,7 @@ namespace CraigFowler.Web.ZPT.Tales
 			}
 			
 			atLastPosition = (currentPosition == pathParts.Count - 1);
-			currentName = pathParts[currentPosition];
+			currentName = pathParts[currentPosition].Text;
 			
 			if(atLastPosition)
 			{
@@ -367,7 +367,7 @@ namespace CraigFowler.Web.ZPT.Tales
     /// A <see cref="System.Int32"/> that indicates the current position (zero-based) in traversing the
     /// <paramref name="pathParts"/>.
     /// </param>
-    protected void RemoveItem(List<string> pathParts, int currentPosition)
+    protected void RemoveItem(List<ITalesPathPart> pathParts, int currentPosition)
     {
       bool atLastPosition;
       string currentName;
@@ -382,7 +382,7 @@ namespace CraigFowler.Web.ZPT.Tales
       }
       
       atLastPosition = (currentPosition == pathParts.Count - 1);
-      currentName = pathParts[currentPosition];
+      currentName = pathParts[currentPosition].Text;
       
       if(atLastPosition)
       {

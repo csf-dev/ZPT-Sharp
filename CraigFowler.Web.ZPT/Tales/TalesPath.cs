@@ -23,6 +23,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using CraigFowler.Web.ZPT.Tales.Exceptions;
+using System.Text;
 
 namespace CraigFowler.Web.ZPT.Tales
 {
@@ -36,6 +37,11 @@ namespace CraigFowler.Web.ZPT.Tales
     private const char
 			PARTS_SEPARATOR 									= '/',
 			PREFIX_SEPARATOR									= ':';
+    
+    /// <summary>
+    /// <para>The separator that indicates a TALES namespace operation.</para>
+    /// </summary>
+    public static readonly char NamespacePrefixSeparator = ':';
     
     /// <summary>
     /// <para>
@@ -58,7 +64,7 @@ namespace CraigFowler.Web.ZPT.Tales
     #region fields
     
     private string rawPath;
-		private List<string> parts;
+		private List<ITalesPathPart> parts;
     
     #endregion
     
@@ -93,7 +99,7 @@ namespace CraigFowler.Web.ZPT.Tales
     /// characters.
     /// </para>
     /// </summary>
-    public List<string> Parts
+    public List<ITalesPathPart> Parts
     {
       get {
 				return parts;
@@ -169,21 +175,29 @@ namespace CraigFowler.Web.ZPT.Tales
     /// </returns>
     public string ToString(int partCount)
     {
-			string output;
+      StringBuilder output = new StringBuilder();
 			
       if(partCount < 0)
       {
         throw new ArgumentOutOfRangeException("partCount", "Parameter 'partCount' must be more than or equal to zero.");
       }
       
-			output = String.Join(PARTS_SEPARATOR.ToString(), this.Parts.ToArray(), 0, partCount);
+      if(!String.IsNullOrEmpty(this.Prefix))
+      {
+        output.AppendFormat("{0}:", this.Prefix);
+      }
+      
+      for(int i = 0; i < this.Parts.Count; i++)
+      {
+        ITalesPathPart part = this.Parts[i];
+        output.Append(part.Text);
+        if(i < (this.Parts.Count - 1))
+        {
+          output.Append(PARTS_SEPARATOR);
+        }
+      }
 			
-			if(!String.IsNullOrEmpty(this.Prefix))
-			{
-				output = String.Format("{0}:{1}", this.Prefix, output);
-			}
-			
-      return output;
+      return output.ToString();
     }
     
     /// <summary>
@@ -258,7 +272,7 @@ namespace CraigFowler.Web.ZPT.Tales
 		/// </returns>
 		public TalesPath SubPath(int startPosition, int count)
 		{
-			List<string> newParts = this.Parts.GetRange(startPosition, count);
+			List<ITalesPathPart> newParts = this.Parts.GetRange(startPosition, count);
 			return new TalesPath(newParts);
 		}
 		
@@ -290,19 +304,23 @@ namespace CraigFowler.Web.ZPT.Tales
 			
 			if(path != null)
 			{
-				int prefixEnd = path.IndexOf(PREFIX_SEPARATOR);
-				string remainingPath;
-				
-				if(prefixEnd >= 1)
-				{
-					prefix = path.Substring(0, prefixEnd);
-					remainingPath = path.Substring(prefixEnd + 1);
-				}
-				else
-				{
-					prefix = null;
-					remainingPath = path;
-				}
+        string remainingPath;
+        string[] possiblePrefixes = new string[] {
+          (LocalDefinitionIdentifier + PREFIX_SEPARATOR),
+          (GlobalDefinitionIdentifier + PREFIX_SEPARATOR)
+        };
+        
+        prefix = null;
+        remainingPath = path;
+        
+        foreach(string possiblePrefix in possiblePrefixes)
+        {
+          if(path.StartsWith(possiblePrefix))
+          {
+            prefix = path.Substring(0, possiblePrefix.Length - 1);
+            remainingPath = path.Substring(possiblePrefix.Length);
+          }
+        }
 				
 				rawParts = remainingPath.Split(new char[] { PARTS_SEPARATOR });
 				
@@ -323,6 +341,30 @@ namespace CraigFowler.Web.ZPT.Tales
 			{
 				prefix = null;
 			}
+      
+      return output;
+    }
+    
+    /// <summary>
+    /// <para>
+    /// Creates a collection of <see cref="ITalesPathPart"/> from a collection of <see cref="System.String"/>
+    /// 'raw components' of a TALES path.
+    /// </para>
+    /// </summary>
+    /// <param name="rawParts">
+    /// A collection of <see cref="System.String"/>
+    /// </param>
+    /// <returns>
+    /// A collection of <see cref="ITalesPathPart"/>
+    /// </returns>
+    private List<ITalesPathPart> ConvertPathParts(IEnumerable<string> rawParts)
+    {
+      List<ITalesPathPart> output = new List<ITalesPathPart>();
+      
+      foreach(string part in rawParts)
+      {
+        output.Add(CreatePart(part));
+      }
       
       return output;
     }
@@ -354,8 +396,22 @@ namespace CraigFowler.Web.ZPT.Tales
 			string prefix;
 			
       this.Text = path;
-      this.Parts = this.ExtractPathParts(this.Text, out prefix);
+      this.Parts = this.ConvertPathParts(this.ExtractPathParts(this.Text, out prefix));
 			this.Prefix = prefix;
+    }
+    
+    /// <summary>
+    /// <para>
+    /// Initialises an instance with a given list of <paramref name="parts"/> that should be used as the path.
+    /// </para>
+    /// </summary>
+    /// <param name="parts">
+    /// A collection of <see cref="ITalesPathPart"/> that will become the parts of the path.
+    /// </param>
+    public TalesPath(List<ITalesPathPart> parts) : this()
+    {
+      this.Parts = parts;
+      this.Text = this.ToString();
     }
 		
 		/// <summary>
@@ -368,7 +424,7 @@ namespace CraigFowler.Web.ZPT.Tales
 		/// </param>
 		protected TalesPath(List<string> parts) : this()
 		{
-			this.Parts = parts;
+			this.Parts = this.ConvertPathParts(parts);
 			this.Text = this.ToString();
 		}
     
@@ -385,10 +441,23 @@ namespace CraigFowler.Web.ZPT.Tales
         throw new ArgumentNullException("parts");
       }
       
-      this.Parts = new List<string>();
-      this.Parts.AddRange(parts);
+      this.Parts = this.ConvertPathParts(parts);
       this.Text = this.ToString();
-      
+    }
+    
+    static TalesPath()
+    {
+      RegisteredNamespaceOperationModules = new Dictionary<string, ITalesNamespaceOperationModule>();
+    }
+    
+    #endregion
+    
+    #region static properties
+    
+    protected static Dictionary<string, ITalesNamespaceOperationModule> RegisteredNamespaceOperationModules
+    {
+      get;
+      private set;
     }
     
     #endregion
@@ -443,6 +512,81 @@ namespace CraigFowler.Web.ZPT.Tales
       relativePath = relativePath.Replace('\\', '/');
       
       return new TalesPath(relativePath);
+    }
+    
+    /// <summary>
+    /// <para>Creates and returns an appropriate <see cref="ITalesPathPart"/> from a raw path part.</para>
+    /// </summary>
+    /// <param name="rawPart">
+    /// A <see cref="System.String"/>
+    /// </param>
+    /// <returns>
+    /// A <see cref="ITalesPathPart"/>
+    /// </returns>
+    public static ITalesPathPart CreatePart(string rawPart)
+    {
+      ITalesPathPart output;
+      
+      if(String.IsNullOrEmpty(rawPart))
+      {
+        throw new ArgumentException("Raw path part may not be null or empty.", "rawPart");
+      }
+      
+      if(rawPart.Contains(NamespacePrefixSeparator.ToString()))
+      {
+        output = new TalesNamespaceOperationPart(rawPart);
+      }
+      else
+      {
+        output = new StandardTalesPathPart(rawPart);
+      }
+      
+      return output;
+    }
+    
+    /// <summary>
+    /// <para>Overloaded.  Registers a <see cref="ITalesNamespaceOperationModule"/> for future usage.</para>
+    /// </summary>
+    /// <param name="module">
+    /// A <see cref="ITalesNamespaceOperationModule"/>
+    /// </param>
+    public static void RegisterNamespaceOperationModule(ITalesNamespaceOperationModule module)
+    {
+      RegisterNamespaceOperationModule(module, null);
+    }
+    
+    /// <summary>
+    /// <para>Overloaded.  Registers a <see cref="ITalesNamespaceOperationModule"/> for future usage.</para>
+    /// </summary>
+    /// <param name="module">
+    /// A <see cref="ITalesNamespaceOperationModule"/>
+    /// </param>
+    /// <param name="alias">
+    /// A <see cref="System.String"/>
+    /// </param>
+    public static void RegisterNamespaceOperationModule(ITalesNamespaceOperationModule module, string alias)
+    {
+      if(module == null)
+      {
+        throw new ArgumentNullException("module");
+      }
+      
+      string usedAlias = alias ?? module.DefaultAlias;
+      RegisteredNamespaceOperationModules.Add(usedAlias, module);
+    }
+    
+    /// <summary>
+    /// <para>Gets a previously-registered <see cref="ITalesNamespaceOperationModule"/> by its name</para>
+    /// </summary>
+    /// <param name="name">
+    /// A <see cref="System.String"/>
+    /// </param>
+    /// <returns>
+    /// A <see cref="ITalesNamespaceOperationModule"/>
+    /// </returns>
+    public static ITalesNamespaceOperationModule GetNamespaceOperationModule(string name)
+    {
+      return RegisteredNamespaceOperationModules.ContainsKey(name) ? RegisteredNamespaceOperationModules[name] : null;
     }
     
     #endregion
