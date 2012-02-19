@@ -75,6 +75,12 @@ namespace CraigFowler.Web.ZPT.Mocks
       }
     }
     
+    public IList<string> List
+    {
+      get;
+      set;
+    }
+    
     #endregion
     
     #region constructors
@@ -91,6 +97,8 @@ namespace CraigFowler.Web.ZPT.Mocks
       this["baz"] = "sample";
       
       this.BooleanValue = true;
+      
+      this.List = new List<string>();
     }
     
     #endregion

@@ -387,6 +387,34 @@ namespace Test.CraigFowler.Web.ZPT.Tales
       Assert.AreEqual(String.Empty, stringObj, "String has correct value");
     }
     
+    [Test]
+    public void TestParseSimplePathExpressionWithInterface()
+    {
+      TalesContext context;
+      TalesExpression expression;
+      object testObj;
+      int testInt;
+      
+      context = new TalesContext();
+      context.AddDefinition("mock", this.Mock);
+      
+      expression = context.CreateExpression("mock/List/Count");
+      
+      testObj = expression.GetValue();
+      
+      Assert.IsInstanceOfType(typeof(Int32), testObj, "Test object is correct type");
+      testInt = (int) testObj;
+      Assert.AreEqual(0, testInt, "Test integer has correct value");
+      
+      this.Mock.List = new string[] { "foo", "bar", "baz" };
+      
+      testObj = expression.GetValue();
+      
+      Assert.IsInstanceOfType(typeof(Int32), testObj, "Test object is still correct type");
+      testInt = (int) testObj;
+      Assert.AreEqual(3, testInt, "Test integer still has correct value");
+    }
+    
     #endregion
     
     #region failure tests

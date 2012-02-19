@@ -25,6 +25,7 @@ using System.Reflection;
 using CraigFowler.Web.ZPT.Tales.Exceptions;
 using System.Text.RegularExpressions;
 using System.Runtime.Serialization;
+using System.Linq;
 
 namespace CraigFowler.Web.ZPT.Tales.Expressions
 {
@@ -423,11 +424,59 @@ namespace CraigFowler.Web.ZPT.Tales.Expressions
         }
       }
       
+      /* If we haven't found a member by this stage then try looking for explicit interface implementations.
+       */
+      if(!success)
+      {
+        /* HACK: I'm depending on the way that the compiler names things here - there should be a better way of doing this.
+         * 
+         * I am, of course, referring to the stringly-typed ways in which explicit interface implementations will be
+         * named either "*.MemberName" or "*.get_MemberName" (and the previous part of the member name is the name
+         * of the interface that defines it.
+         * 
+         * Perhaps get a list of the defining interfaces and try to concatenate the names in some way, so I am
+         * matching more of the method name?
+         */
+        IList<MemberInfo>
+          members = containingType.GetMembers(BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.DeclaredOnly),
+          filteredMembers = (from x in members.AsQueryable()
+                             where (x.Name.EndsWith("." + memberIdentifier)
+                                    || x.Name.EndsWith(".get_" + memberIdentifier))
+                                   && ((x is MethodInfo
+                                        && ((MethodInfo) x).IsFinal
+                                        && ((MethodInfo) x).IsPrivate))
+                             select x).ToList();
+        
+        if(filteredMembers.Count > 1)
+        {
+          TalesException ex = new DuplicateMemberException(memberIdentifier, false);
+          ex.Data.Add("target type", containingType);
+          throw ex;
+        }
+        else if(filteredMembers.Count == 1)
+        {
+          object[] attributes = filteredMembers[0].GetCustomAttributes(typeof(TalesMemberAttribute), true);
+          
+          Console.WriteLine ("{0}: special name '{1}'",
+                             filteredMembers[0].Name,
+                             ((MethodInfo) filteredMembers[0]).IsSpecialName);
+          
+          if(attributes.Length == 0
+             || (attributes.Length == 1
+                 && ((TalesMemberAttribute) attributes[0]).Ignore == false))
+          {
+            output = filteredMembers[0];
+            success = true;
+          }
+        }
+      }
+      
       /* If we still haven't found a member then see if the type we are examining has an indexer.
        * If it does then use that!
        */
       if(!success)
       {
+        // HACK: We don't need this - use GetDefaultMembers() instead
         MemberInfo[] members = containingType.GetMember(INDEXER_IDENTIFIER);
         
         if(members.Length > 1)
