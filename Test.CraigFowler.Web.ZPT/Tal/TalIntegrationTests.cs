@@ -76,12 +76,13 @@ namespace Test.CraigFowler.Web.ZPT.Tal
 					
 					using(TextWriter writer = new StringWriter(renderingBuilder))
 					{
-						using(XmlWriter xmlWriter = new XmlTextWriter(writer))
-						{
-							xmlWriter.Settings.Indent = true;
-							xmlWriter.Settings.IndentChars = "  ";
-							xmlWriter.Settings.NewLineChars = "\n";
-							
+            using(XmlWriter xmlWriter = XmlWriter.Create(writer, new XmlWriterSettings() {
+              Indent = true,
+              IndentChars = "  ",
+              NewLineChars = "\n",
+              OmitXmlDeclaration = true
+            }))
+            {
 							document.Render(xmlWriter);
 						}
 					}
@@ -146,12 +147,12 @@ namespace Test.CraigFowler.Web.ZPT.Tal
 					
 					using(TextWriter writer = new StringWriter(renderingBuilder))
 					{
-						using(XmlWriter xmlWriter = new XmlTextWriter(writer))
+						using(XmlWriter xmlWriter = XmlTextWriter.Create(writer, new XmlWriterSettings() {
+              Indent = true,
+              IndentChars = "  ",
+              NewLineChars = "\n"
+            }))
 						{
-							xmlWriter.Settings.Indent = true;
-							xmlWriter.Settings.IndentChars = "  ";
-							xmlWriter.Settings.NewLineChars = "\n";
-							
 							document.Render(xmlWriter);
 						}
 					}
@@ -210,7 +211,15 @@ namespace Test.CraigFowler.Web.ZPT.Tal
 			
 			xmlDoc.PreserveWhitespace = true;
 			xmlDoc.XmlResolver = null;
-			xmlDoc.Load(testFilename);
+      using(TextReader reader = new StreamReader(testFilename))
+      {
+        using(XmlReader xmlReader = XmlReader.Create(reader, new XmlReaderSettings() {
+          ValidationType = ValidationType.None,
+          ProhibitDtd = false,
+          XmlResolver = null
+        }))
+          xmlDoc.Load(xmlReader);
+      }
 			
 			node = (XmlElement) xmlDoc.GetElementsByTagName("div")[0];
 			
@@ -308,12 +317,12 @@ namespace Test.CraigFowler.Web.ZPT.Tal
 					
 					using(TextWriter writer = new StringWriter(renderingBuilder))
 					{
-						using(XmlWriter xmlWriter = new XmlTextWriter(writer))
-						{
-							xmlWriter.Settings.Indent = true;
-							xmlWriter.Settings.IndentChars = "  ";
-							xmlWriter.Settings.NewLineChars = "\n";
-							
+            using(XmlWriter xmlWriter = XmlWriter.Create(writer, new XmlWriterSettings() {
+              Indent = true,
+              IndentChars = "  ",
+              NewLineChars = "\n"
+            }))
+            {
 							document.Render(xmlWriter);
 						}
 					}
@@ -425,12 +434,12 @@ namespace Test.CraigFowler.Web.ZPT.Tal
 				
 				using(TextWriter writer = new StringWriter(renderingBuilder))
 				{
-					using(XmlWriter xmlWriter = new XmlTextWriter(writer))
+					using(XmlWriter xmlWriter = XmlWriter.Create(writer, new XmlWriterSettings() {
+            Indent = true,
+            IndentChars = "  ",
+            NewLineChars = "\n"
+          }))
 					{
-						xmlWriter.Settings.Indent = true;
-						xmlWriter.Settings.IndentChars = "  ";
-						xmlWriter.Settings.NewLineChars = "\n";
-						
 						document.Render(xmlWriter);
 					}
 				}

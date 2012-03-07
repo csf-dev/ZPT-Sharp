@@ -512,11 +512,12 @@ namespace Test.CraigFowler.Web.ZPT.Tal
 			
 			using(TextWriter textWriter = new StringWriter(output))
 			{
-				using(XmlWriter writer = new XmlTextWriter(textWriter))
+				using(XmlWriter writer = XmlWriter.Create(textWriter, new XmlWriterSettings() {
+          Indent = false,
+          NewLineChars = String.Empty,
+          OmitXmlDeclaration = true
+        }))
 				{
-					writer.Settings.Indent = false;
-					writer.Settings.NewLineChars = String.Empty;
-					
 					document.Render(writer);
 				}
 			}

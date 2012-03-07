@@ -24,6 +24,7 @@ using System.Xml;
 using CraigFowler.Web.ZPT.Tales;
 using System.IO;
 using System.Text;
+using System.Net;
 
 namespace CraigFowler.Web.ZPT.Tal
 {
@@ -128,9 +129,12 @@ namespace CraigFowler.Web.ZPT.Tal
       {
         using (XmlWriter xmlWriter = new XmlTextWriter(writer))
         {
-					xmlWriter.Settings.NewLineChars = DEFAULT_NEWLINE_CHARACTERS;
-					xmlWriter.Settings.IndentChars = DEFAULT_INDENT_CHARACTERS;
-					xmlWriter.Settings.Indent = true;
+          if(xmlWriter.Settings != null)
+          {
+            xmlWriter.Settings.NewLineChars = DEFAULT_NEWLINE_CHARACTERS;
+            xmlWriter.Settings.IndentChars = DEFAULT_INDENT_CHARACTERS;
+            xmlWriter.Settings.Indent = true;
+          }
 					
           this.Render(xmlWriter);
         }
@@ -257,6 +261,26 @@ namespace CraigFowler.Web.ZPT.Tal
       }
       
       return output;
+    }
+    
+    /// <summary>
+    /// <para>Overridden.  Loads XML input from the specified <paramref name="filename"/>.</para>
+    /// </summary>
+    /// <param name='filename'>
+    /// A <see cref="System.String"/>
+    /// </param>
+    public override void Load (string filename)
+    {
+      using(TextReader reader = new StreamReader(filename))
+      {
+        XmlReader xmlReader = XmlReader.Create(reader, new XmlReaderSettings() {
+          ValidationType = ValidationType.None,
+          ProhibitDtd = false,
+          XmlResolver = null
+        });
+        
+        this.Load(xmlReader);
+      }
     }
     
     #endregion
