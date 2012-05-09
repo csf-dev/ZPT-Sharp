@@ -424,7 +424,7 @@ namespace Test.CraigFowler.Web.ZPT.Tales
       object testObj;
       string testString;
       
-      TalesPath.RegisterNamespaceOperationModule(new MockNamespaceModule());
+      TalesPath.RegisterNamespaceOperationModules(typeof(MockNamespaceModule));
       
       context = new TalesContext();
       context.AddDefinition("mock", this.Mock);

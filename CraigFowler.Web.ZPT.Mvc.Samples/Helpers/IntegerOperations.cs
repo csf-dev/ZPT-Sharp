@@ -1,5 +1,5 @@
 //  
-//  MockNamespaceModule.cs
+//  IntegerOperations.cs
 //  
 //  Author:
 //       Craig Fowler <craig@craigfowler.me.uk>
@@ -21,20 +21,20 @@
 using System;
 using CraigFowler.Web.ZPT.Tales;
 
-namespace CraigFowler.Web.ZPT.Mocks
+namespace CraigFowler.Web.ZPT.Mvc.Samples.Helpers
 {
-  public class MockNamespaceModule : ITalesNamespaceOperationModule
+  public class IntegerOperations : ITalesNamespaceOperationModule
   {
     public string DefaultAlias {
       get {
-        return "namespaceModule";
+        return "integer";
       }
     }
     
-    public object FormatBoolean(object input)
+    public object FormatInteger(object input)
     {
-      bool typedInput = (bool) input;
-      return typedInput? "Positive dog fort!" : "That's a negative red lobster!";
+      int typedInput = (int) input;
+      return String.Format("over {0}", typedInput - 1);
     }
   }
 }

@@ -372,8 +372,10 @@ namespace CraigFowler.Web.ZPT
       
       if(output == null)
       {
-        throw new ArgumentOutOfRangeException("Could not load a type of the given name and it was not found " +
-                                              "amongst the collection of registered 'foreign' document classes.");
+        string message = String.Format("Could not load document type `{0}', should it have been registered " +
+                                       "as a 'foreign' document type?",
+                                       className);
+        throw new ArgumentOutOfRangeException(message);
       }
       
       return output;

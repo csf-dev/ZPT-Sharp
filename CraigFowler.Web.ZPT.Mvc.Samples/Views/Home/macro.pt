@@ -14,7 +14,7 @@
   <p>A paragraph of text.</p>
   <p metal:fill-slot="slot1">
     This is the replacement filler for slot 1, which contains my age of
-    <span tal:content="currentUser/age">over 9000</span>.
+    <span tal:content="currentUser/age/integer:FormatInteger">over 9000</span>.
   </p>
 </div>
 

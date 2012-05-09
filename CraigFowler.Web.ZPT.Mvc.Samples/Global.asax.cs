@@ -23,6 +23,7 @@
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
+using CraigFowler.Web.ZPT.Tales;
 
 namespace CraigFowler.Web.ZPT.Mvc.Samples
 {
@@ -41,6 +42,7 @@ namespace CraigFowler.Web.ZPT.Mvc.Samples
       RegisterRoutes (RouteTable.Routes);
       
       ZptMetadata.RegisterDocumentClasses(System.Reflection.Assembly.GetExecutingAssembly());
+      TalesPath.RegisterNamespaceOperationModules(System.Reflection.Assembly.GetExecutingAssembly());
       
       ViewEngines.Engines.Clear();
       ViewEngines.Engines.Add(new ZptViewEngine());

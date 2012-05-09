@@ -45,13 +45,14 @@
     <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Web.Abstractions" />
     <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Web.Mvc, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" />
+    <Reference Include="System.Web.Mvc, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
+      <Package>system.web.mvc2</Package>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Content\" />
     <Folder Include="Models\" />
-    <Folder Include="Scripts\" />
     <Folder Include="Views\Test\" />
+    <Folder Include="Helpers\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\HomeController.cs" />
@@ -61,6 +62,7 @@
     <Compile Include="Views\Home\MacroView.cs" />
     <Compile Include="Controllers\TestController.cs" />
     <Compile Include="Models\Member.cs" />
+    <Compile Include="Helpers\IntegerOperations.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Web.config" />

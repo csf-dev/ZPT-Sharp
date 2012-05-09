@@ -24,6 +24,7 @@ using System.Collections.Generic;
 using System.IO;
 using CraigFowler.Web.ZPT.Tales.Exceptions;
 using System.Text;
+using System.Reflection;
 
 namespace CraigFowler.Web.ZPT.Tales
 {
@@ -587,6 +588,55 @@ namespace CraigFowler.Web.ZPT.Tales
     public static ITalesNamespaceOperationModule GetNamespaceOperationModule(string name)
     {
       return RegisteredNamespaceOperationModules.ContainsKey(name) ? RegisteredNamespaceOperationModules[name] : null;
+    }
+    
+    /// <summary>
+    /// <para>
+    /// Overloaded.  Registers all types found in the given <paramref name="fromAssembly"/> that implement
+    /// <see cref="ITalesNamespaceOperationModule"/> as namespace operation modules.
+    /// </para>
+    /// </summary>
+    /// <param name='fromAssembly'>
+    /// An <see cref="Assembly"/>
+    /// </param>
+    /// <exception cref='ArgumentNullException'>
+    /// Is thrown when an argument passed to a method is invalid because it is <see langword="null" /> .
+    /// </exception>
+    public static void RegisterNamespaceOperationModules(Assembly fromAssembly)
+    {
+      if(fromAssembly == null)
+      {
+        throw new ArgumentNullException("fromAssembly");
+      }
+      
+      foreach(Type type in fromAssembly.GetExportedTypes())
+      {
+        ConstructorInfo constructor;
+        
+        if(type.GetInterface(typeof(ITalesNamespaceOperationModule).FullName) != typeof(ITalesNamespaceOperationModule))
+        {
+          continue;
+        }
+        
+        constructor = type.GetConstructor(Type.EmptyTypes);
+        RegisterNamespaceOperationModule((ITalesNamespaceOperationModule) constructor.Invoke(null));
+      }
+    }
+    
+    /// <summary>
+    /// <para>
+    /// Overloaded.  Registers all types found in the same <see cref="Assembly"/> as
+    /// <paramref name="fromAssemblyOfType"/> that implement <see cref="ITalesNamespaceOperationModule"/> as namespace
+    /// operation modules.
+    /// </para>
+    /// </summary>
+    /// <param name='fromAssemblyOfType'>
+    /// A <see cref="Type"/>
+    /// </param>
+    public static void RegisterNamespaceOperationModules(Type fromAssemblyOfType)
+    {
+      Assembly assembly = Assembly.GetAssembly(fromAssemblyOfType);
+      RegisterNamespaceOperationModules(assembly);
     }
     
     #endregion
