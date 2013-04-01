@@ -3,15 +3,22 @@ ZPT Sharp, an implementation of Zope Page Templates in C#,
 as a .NET MVC v2 ViewEngine
 --------------------------------------------------------------------------------
 
-Firstly - THIS SOFTWARE IS DISTRIBUTED FREE OF CHARGE WITHOUT ANY WARRANTY OF
+** IMPORTANT NOTE **
+I have discovered some serious showstopper issues with architecture of this
+project that make it completely unsuitable for use in production environments.
+It is likely that the project will go through at least a partial rewrite before
+it is deemed suitable for any serious use.
+
+THIS SOFTWARE IS DISTRIBUTED FREE OF CHARGE WITHOUT ANY WARRANTY OF
 ANY SORT.  Please see the attached license document (LICENCE).  The current
 state of this project is a 'tentative alpha 2' release.  That means that it might
 not work, that it might destroy your data, ruin your country's economy and kick
 your neighbours puppy.  Certainly don't use this for anything mission-critical!
 
-Secondly, a quick nod to https://github.com/lck/SharpTAL - it seems that the
-two of us developed our implementations in parallel and I only found out about
-SharpTAL once I had nearly finished my own.  SharpTAL was made public first.
+I would like to take this opportunity to make a quick nod to
+https://github.com/lck/SharpTAL - it seems that the two of us developed our
+implementations in parallel and I only found out about SharpTAL once I had nearly
+finished my own.  SharpTAL was made public first.
 
 As of 16th September 2011, the auto-generated API documentation (created using
 DoxyGen) has been moved to http://csf-software-development.github.com/ZPT-Sharp/api-doxygen/
@@ -25,15 +32,5 @@ To get using ZPT-Sharp right now alongside ASP.NET MVC v2, compile the project
 CraigFowler.Web.ZPT and copy the DLL into your bin/ directory.  Then take a
 look at http://csf-software-development.github.com/ZPT-Sharp/quickstart-mvc.html and also
 the CraigFowler.Web.ZPT.Mvc.Samples project for how to get started.
-
-As the first paragraph notes, this is very new software and it hasn't yet been
-used 'in the wild'.  It could be riddled with bugs and security issues.  That
-said, I would love if some hobbyists and/or those with non-mission-critical
-projects would use this, to give some testing in small-scale production
-environments.  As far as I am concerned, enough of the required features have been
-completed that this project is erady for my own use in development projects.
-
-I would like to perform some serious refactoring and tidy-up though before I
-declare this project "beta 1".
 
 Enjoy!
