@@ -35,9 +35,19 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AssemblyInfo.cs" />
+    <Compile Include="..\Common\CommonAssemblyInfo.cs">
+      <Link>CommonAssemblyInfo.cs</Link>
+    </Compile>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <ItemGroup>
+    <ProjectReference Include="..\CSF\CSF\CSF.csproj">
+      <Project>{E563D7BC-1AB1-4AFB-8533-51315437C6E6}</Project>
+      <Name>CSF</Name>
+    </ProjectReference>
+  </ItemGroup>
 </Project>
