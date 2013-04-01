@@ -1,4 +1,7 @@
-.directory
-.desktop
 bin/
 obj/
+TestResult.xml
+*.VisualState.xml
+*.userprefs
+*.orig
+*.directory
