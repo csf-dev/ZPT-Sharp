@@ -1,4 +1,0 @@
-<zptMetadata xmlns="http://xml.craigfowler.me.uk/namespaces/ZptMetadata">
-  <documentType>Metal</documentType>
-  <className>CraigFowler.Web.ZPT.Mvc.Samples.Views.Home.MacroView</className>
-</zptMetadata>
