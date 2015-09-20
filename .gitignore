@@ -1,6 +1,8 @@
 bin/
 obj/
 TestResult.xml
+TestResult.formatted.xml
+packages/*/
 *.VisualState.xml
 *.userprefs
 *.orig

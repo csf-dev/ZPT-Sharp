@@ -34,12 +34,22 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="HtmlAgilityPack">
+      <HintPath>..\packages\HtmlAgilityPack.1.4.9\lib\Net45\HtmlAgilityPack.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AssemblyInfo.cs" />
     <Compile Include="..\Common\CommonAssemblyInfo.cs">
       <Link>CommonAssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="ZptDocument.cs" />
+    <Compile Include="ZptHtmlDocument.cs" />
+    <Compile Include="ZptXmlDocument.cs" />
+    <Compile Include="Tales\Model.cs" />
+    <Compile Include="RenderingContext.cs" />
+    <Compile Include="Tales\ExpressionResult.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
@@ -47,5 +57,16 @@
       <Project>{E563D7BC-1AB1-4AFB-8533-51315437C6E6}</Project>
       <Name>CSF</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Tales\" />
+    <Folder Include="Metal\" />
+    <Folder Include="Tal\" />
+    <Folder Include="Documents\" />
+    <Folder Include="Documents\Html\" />
+    <Folder Include="Documents\Xml\" />
   </ItemGroup>
 </Project>
