@@ -5,15 +5,16 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{7228188F-FD67-4C28-9BAC-E36E11D6ADBB}</ProjectGuid>
     <OutputType>Library</OutputType>
-    <RootNamespace>Test.CSF.ZPT</RootNamespace>
-    <AssemblyName>Test.CSF.ZPT</AssemblyName>
+    <RootNamespace>Test.CSF.Zpt</RootNamespace>
+    <AssemblyName>Test.CSF.Zpt</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <ReleaseVersion>0.3.0</ReleaseVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>bin\Debug</OutputPath>
+    <OutputPath>..\bin\Debug</OutputPath>
     <DefineConstants>DEBUG;</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -22,7 +23,7 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>full</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>bin\Release</OutputPath>
+    <OutputPath>..\bin\Release</OutputPath>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <ConsolePause>false</ConsolePause>
@@ -38,9 +39,39 @@
     <Reference Include="Moq">
       <HintPath>..\packages\Moq.4.2.1507.0118\lib\net40\Moq.dll</HintPath>
     </Reference>
+    <Reference Include="HtmlAgilityPack">
+      <HintPath>..\packages\HtmlAgilityPack.1.4.9\lib\Net45\HtmlAgilityPack.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml" />
+    <Reference Include="log4net">
+      <HintPath>..\packages\log4net.2.0.3\lib\net40-full\log4net.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
     <None Include="packages.config" />
+    <None Include="Test.CSF.Zpt.dll.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Rendering\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Rendering\TestHtmlElement.cs" />
+    <Compile Include="GlobalSetupFixture.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Rendering\TestHtmlElement.html" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CSF\CSF\CSF.csproj">
+      <Project>{E563D7BC-1AB1-4AFB-8533-51315437C6E6}</Project>
+      <Name>CSF</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CSF.Zpt\CSF.Zpt.csproj">
+      <Project>{16E957BB-347C-4EE1-815F-19AC296FB9E0}</Project>
+      <Name>CSF.Zpt</Name>
+    </ProjectReference>
   </ItemGroup>
 </Project>

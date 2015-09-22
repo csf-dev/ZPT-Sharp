@@ -1,5 +1,6 @@
 bin/
 obj/
+logs/
 TestResult.xml
 TestResult.formatted.xml
 packages/*/

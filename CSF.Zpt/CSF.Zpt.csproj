@@ -50,6 +50,16 @@
     <Compile Include="Tales\Model.cs" />
     <Compile Include="RenderingContext.cs" />
     <Compile Include="Tales\ExpressionResult.cs" />
+    <Compile Include="Rendering\Element.cs" />
+    <Compile Include="Rendering\Attribute.cs" />
+    <Compile Include="Rendering\ElementVisitor.cs" />
+    <Compile Include="Rendering\MetalVisitor.cs" />
+    <Compile Include="Rendering\TalVisitor.cs" />
+    <Compile Include="Rendering\HtmlAttribute.cs" />
+    <Compile Include="Rendering\HtmlElement.cs" />
+    <Compile Include="Rendering\ElementExtensions.cs" />
+    <Compile Include="Rendering\MetalMacroFinder.cs" />
+    <Compile Include="Rendering\Metal.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
@@ -63,10 +73,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Tales\" />
-    <Folder Include="Metal\" />
     <Folder Include="Tal\" />
-    <Folder Include="Documents\" />
-    <Folder Include="Documents\Html\" />
-    <Folder Include="Documents\Xml\" />
+    <Folder Include="Rendering\" />
   </ItemGroup>
 </Project>

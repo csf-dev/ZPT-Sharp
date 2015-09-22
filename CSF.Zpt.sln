@@ -10,7 +10,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{B99672
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSF", "CSF\CSF\CSF.csproj", "{E563D7BC-1AB1-4AFB-8533-51315437C6E6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test.CSF.ZPT", "Test.CSF.ZPT\Test.CSF.ZPT.csproj", "{7228188F-FD67-4C28-9BAC-E36E11D6ADBB}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test.CSF.Zpt", "Test.CSF.Zpt\Test.CSF.Zpt.csproj", "{7228188F-FD67-4C28-9BAC-E36E11D6ADBB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
