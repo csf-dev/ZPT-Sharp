@@ -58,8 +58,10 @@
     <Compile Include="Rendering\HtmlAttribute.cs" />
     <Compile Include="Rendering\HtmlElement.cs" />
     <Compile Include="Rendering\ElementExtensions.cs" />
-    <Compile Include="Rendering\MetalMacroFinder.cs" />
     <Compile Include="Rendering\Metal.cs" />
+    <Compile Include="Rendering\Tal.cs" />
+    <Compile Include="Rendering\MacroExpander.cs" />
+    <Compile Include="Rendering\MacroFinder.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

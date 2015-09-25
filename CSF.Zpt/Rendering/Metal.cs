@@ -10,6 +10,16 @@ namespace CSF.Zpt.Rendering
     #region constants
 
     /// <summary>
+    /// Gets the XML namespace for METAL: Macro Expansion Template Attribute Language.
+    /// </summary>
+    public static readonly string Namespace = "http://xml.zope.org/namespaces/metal";
+
+    /// <summary>
+    /// Gets the name of the default attribute/element name prefix.
+    /// </summary>
+    public static readonly string DefaultPrefix = "metal";
+
+    /// <summary>
     /// Gets the name of the define-macro attribute.
     /// </summary>
     public static readonly string DefineMacroAttribute = "define-macro";

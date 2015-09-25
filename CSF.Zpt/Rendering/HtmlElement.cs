@@ -188,7 +188,22 @@ namespace CSF.Zpt.Rendering
         throw new ArgumentNullException("node");
       }
 
-      _node = node;
+      HtmlNode actualNode;
+
+      if(node.NodeType == HtmlNodeType.Document)
+      {
+        actualNode = node.FirstChild;
+      }
+      else if(node.NodeType != HtmlNodeType.Element)
+      {
+        throw new ArgumentException("Node must be an HTML 'element' node.", "node");
+      }
+      else
+      {
+        actualNode = node;
+      }
+
+      _node = actualNode;
     }
 
     #endregion

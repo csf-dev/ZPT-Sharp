@@ -60,6 +60,7 @@
   <ItemGroup>
     <Compile Include="Rendering\TestHtmlElement.cs" />
     <Compile Include="GlobalSetupFixture.cs" />
+    <Compile Include="Rendering\TestMacroFinder.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Rendering\TestHtmlElement.html" />

@@ -58,6 +58,21 @@ namespace CSF.Zpt.Tales
     }
 
     #endregion
+
+    #region constructor
+
+    /// <summary>
+    /// Initializes a new instance of the <see cref="CSF.Zpt.Tales.ExpressionResult"/> class.
+    /// </summary>
+    /// <param name="success">If set to <c>true</c> then the current instance represents a successful evaluation.</param>
+    /// <param name="result">The result of the expression evaluation (if the evaluation was a success).</param>
+    public ExpressionResult(bool success, object result)
+    {
+      _success = success;
+      _result = result;
+    }
+
+    #endregion
   }
 }
 

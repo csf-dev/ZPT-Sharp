@@ -15,7 +15,6 @@ namespace Test.CSF.Zpt.Rendering
 
     private string _htmlSource;
     private HtmlDocument _document;
-    private log4net.ILog _logger;
 
     #endregion
 
@@ -30,8 +29,6 @@ namespace Test.CSF.Zpt.Rendering
     [SetUp]
     public void Setup()
     {
-      _logger = log4net.LogManager.GetLogger(this.GetType());
-
       _document = new HtmlDocument();
       _document.LoadHtml(_htmlSource);
     }
@@ -57,7 +54,7 @@ namespace Test.CSF.Zpt.Rendering
     public void TestGetChildElements()
     {
       // Arrange
-      var sut = new HtmlElement(_document.DocumentNode.FirstChild);
+      var sut = new HtmlElement(_document.DocumentNode);
 
       // Act
       var result = sut.GetChildElements();
@@ -154,6 +151,26 @@ namespace Test.CSF.Zpt.Rendering
 </body>
 </html>";
       Assert.AreEqual(expectedDom, _document.DocumentNode.OuterHtml, "Correct modified HTML");
+    }
+
+    [Test(Description = "Test that an HtmlElement instance can be constructed from an element node")]
+    public void TestConstructorElementNode()
+    {
+      // Act
+      new HtmlElement(_document.DocumentNode.FirstChild);
+
+      // Assert
+      Assert.Pass("Test passes because no exception encountered");
+    }
+
+    [Test(Description = "Test that an HtmlElement instance can be constructed from a document node")]
+    public void TestConstructorDocumentNode()
+    {
+      // Act
+      new HtmlElement(_document.DocumentNode);
+
+      // Assert
+      Assert.Pass("Test passes because no exception encountered");
     }
 
     #endregion

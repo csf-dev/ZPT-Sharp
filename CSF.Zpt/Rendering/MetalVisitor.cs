@@ -12,7 +12,7 @@ namespace CSF.Zpt.Rendering
   {
     #region fields
 
-    private MetalMacroFinder _macroFinder;
+    private MacroExpander _macroExpander;
 
     #endregion
 
@@ -35,50 +35,8 @@ namespace CSF.Zpt.Rendering
         throw new ArgumentNullException("model");
       }
 
-      bool output;
-
-      var macro = _macroFinder.GetUsedMacro(element, model);
-
-      if(macro != null)
-      {
-        macro = element.ReplaceWith(macro);
-
-        var slotsToHandle = (from defineSlot in this.GetElementsByValue(macro, Metal.DefineSlotAttribute)
-                             join fillSlot in this.GetElementsByValue(element, Metal.FillSlotAttribute)
-                             on defineSlot.Key equals fillSlot.Key
-                             select new { Slot = defineSlot.Value, Filler = fillSlot.Value });
-
-        foreach(var replacement in slotsToHandle)
-        {
-          replacement.Slot.ReplaceWith(replacement.Filler);
-        }
-
-        output = false;
-      }
-      else
-      {
-        output = true;
-      }
-
-      return output;
-    }
-
-    /// <summary>
-    /// Gets a collection of child elements which are decorated by METAL attributes.  These elements are indexed by the
-    /// value of that attribute.
-    /// </summary>
-    /// <returns>A collection of elements, and their attribute values.</returns>
-    /// <param name="rootElement">The root element from which to search.</param>
-    /// <param name="desiredAttribute">The name of the desired attribute.</param>
-    private IDictionary<string,Element> GetElementsByValue(Element rootElement,
-                                                           string desiredAttribute)
-    {
-      return rootElement.SearchChildrenByMetalAttribute(desiredAttribute)
-        .Select(x => new {
-          Element = x,
-          Attribute = x.GetMetalAttribute(desiredAttribute)
-        })
-        .ToDictionary(k => k.Attribute.Value, v => v.Element);
+      var result = _macroExpander.Expand(element, model);
+      return (result == element);
     }
 
     #endregion
@@ -90,7 +48,7 @@ namespace CSF.Zpt.Rendering
     /// </summary>
     public MetalVisitor()
     {
-      _macroFinder = new MetalMacroFinder();
+      _macroExpander = new MacroExpander();
     }
 
     #endregion

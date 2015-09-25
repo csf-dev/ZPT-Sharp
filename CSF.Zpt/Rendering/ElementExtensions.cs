@@ -23,8 +23,8 @@ namespace CSF.Zpt.Rendering
         throw new ArgumentNullException("element");
       }
 
-      return element.GetAttribute(ZptDocument.MetalNamespace,
-                                  ZptDocument.MetalAttributePrefix,
+      return element.GetAttribute(Metal.Namespace,
+                                  Metal.DefaultPrefix,
                                   attributeName);
     }
 
@@ -42,8 +42,8 @@ namespace CSF.Zpt.Rendering
         throw new ArgumentNullException("element");
       }
 
-      return element.GetAttribute(ZptDocument.TalNamespace,
-                                  ZptDocument.TalAttributePrefix,
+      return element.GetAttribute(Tal.Namespace,
+                                  Tal.DefaultPrefix,
                                   attributeName);
     }
 
@@ -61,8 +61,8 @@ namespace CSF.Zpt.Rendering
         throw new ArgumentNullException("element");
       }
 
-      return element.SearchChildrenByAttribute(ZptDocument.MetalNamespace,
-                                               ZptDocument.MetalAttributePrefix,
+      return element.SearchChildrenByAttribute(Metal.Namespace,
+                                               Metal.DefaultPrefix,
                                                attributeName);
     }
 
@@ -80,8 +80,8 @@ namespace CSF.Zpt.Rendering
         throw new ArgumentNullException("element");
       }
 
-      return element.SearchChildrenByAttribute(ZptDocument.TalNamespace,
-                                               ZptDocument.TalAttributePrefix,
+      return element.SearchChildrenByAttribute(Tal.Namespace,
+                                               Tal.DefaultPrefix,
                                                attributeName);
     }
 

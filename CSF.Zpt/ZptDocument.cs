@@ -10,48 +10,6 @@ namespace CSF.Zpt
   /// </summary>
   public abstract class ZptDocument
   {
-    #region constants
-
-    /// <summary>
-    /// Constant value indicates the XML namespace for TAL: Template Attribute Language.
-    /// </summary>
-    public static readonly string TalNamespace = "http://xml.zope.org/namespaces/tal";
-
-    /// <summary>
-    /// Constant value indicates the XML namespace for METAL: Macro Expansion Template Attribute Language.
-    /// </summary>
-    public static readonly string MetalNamespace = "http://xml.zope.org/namespaces/metal";
-
-    /// <summary>
-    /// Gets the default attribute prefix for TAL attributes.
-    /// </summary>
-    /// <remarks>
-    /// <para>
-    /// For XML documents this is only a default prefix, since element matching is really handled via the namespace
-    /// <see cref="TalNamespace"/>, and the prefix is only an alias defined using an <c>xmlns</c> directive.
-    /// </para>
-    /// <para>
-    /// For HTML documents, which do not have or use namespaces, this prefix is absolute.
-    /// </para>
-    /// </remarks>
-    public static readonly string TalAttributePrefix = "tal";
-
-    /// <summary>
-    /// Gets the default attribute prefix for METAL attributes.
-    /// </summary>
-    /// <remarks>
-    /// <para>
-    /// For XML documents this is only a default prefix, since element matching is really handled via the namespace
-    /// <see cref="MetalNamespace"/>, and the prefix is only an alias defined using an <c>xmlns</c> directive.
-    /// </para>
-    /// <para>
-    /// For HTML documents, which do not have or use namespaces, this prefix is absolute.
-    /// </para>
-    /// </remarks>
-    public static readonly string MetalAttributePrefix = "metal";
-
-    #endregion
-
     #region methods
 
     /// <summary>
