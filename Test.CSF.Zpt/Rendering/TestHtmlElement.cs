@@ -5,6 +5,8 @@ using CSF.Zpt.Rendering;
 using HtmlAgilityPack;
 using NUnit.Framework;
 using Ploeh.AutoFixture;
+using Moq;
+using System.Linq;
 
 namespace Test.CSF.Zpt.Rendering
 {
@@ -15,6 +17,7 @@ namespace Test.CSF.Zpt.Rendering
 
     private string _htmlSource;
     private HtmlDocument _document;
+    private SourceFileInfo _sourceFile;
 
     #endregion
 
@@ -24,6 +27,7 @@ namespace Test.CSF.Zpt.Rendering
     public void FixtureSetup()
     {
       _htmlSource = Assembly.GetExecutingAssembly().GetManifestResourceText(this.GetType(), "TestHtmlElement.html");
+      _sourceFile = Mock.Of<SourceFileInfo>();
     }
 
     [SetUp]
@@ -41,7 +45,8 @@ namespace Test.CSF.Zpt.Rendering
     public void TestToString()
     {
       // Arrange
-      var sut = new HtmlElement(_document.DocumentNode);
+      var sut = new HtmlElement(_document.DocumentNode,
+                                _sourceFile);
 
       // Act
       var result = sut.ToString();
@@ -54,7 +59,8 @@ namespace Test.CSF.Zpt.Rendering
     public void TestGetChildElements()
     {
       // Arrange
-      var sut = new HtmlElement(_document.DocumentNode);
+      var sut = new HtmlElement(_document.DocumentNode,
+                                _sourceFile);
 
       // Act
       var result = sut.GetChildElements();
@@ -69,7 +75,8 @@ namespace Test.CSF.Zpt.Rendering
     public void TestSearchChildrenByAttribute()
     {
       // Arrange
-      var sut = new HtmlElement(_document.DocumentNode);
+      var sut = new HtmlElement(_document.DocumentNode,
+                                _sourceFile);
       var fixture = new Fixture();
 
       // Act
@@ -85,7 +92,8 @@ namespace Test.CSF.Zpt.Rendering
     public void TestGetAttributes()
     {
       // Arrange
-      var sut = new HtmlElement(_document.DocumentNode.FirstChild.ChildNodes[3].ChildNodes[1].ChildNodes[1]);
+      var sut = new HtmlElement(_document.DocumentNode.FirstChild.ChildNodes[3].ChildNodes[1].ChildNodes[1],
+                                _sourceFile);
 
       // Act
       var results = sut.GetAttributes();
@@ -104,7 +112,8 @@ namespace Test.CSF.Zpt.Rendering
     public void TestGetAttribute(string prefix, string name, string expectedName, string expectedValue)
     {
       // Arrange
-      var sut = new HtmlElement(_document.DocumentNode.FirstChild.ChildNodes[3].ChildNodes[1].ChildNodes[1]);
+      var sut = new HtmlElement(_document.DocumentNode.FirstChild.ChildNodes[3].ChildNodes[1].ChildNodes[1],
+                                _sourceFile);
       var fixture = new Fixture();
 
       // Act
@@ -120,11 +129,13 @@ namespace Test.CSF.Zpt.Rendering
     public void TestReplaceWith()
     {
       // Arrange
-      var sut = new HtmlElement(_document.DocumentNode.FirstChild.ChildNodes[3].ChildNodes[1].ChildNodes[1]);
+      var sut = new HtmlElement(_document.DocumentNode.FirstChild.ChildNodes[3].ChildNodes[1].ChildNodes[1],
+                                _sourceFile);
       var replacementHtml = "<p>Replacement element</p>";
       var secondDocument = new HtmlDocument();
       secondDocument.LoadHtml(replacementHtml);
-      var secondElement = new HtmlElement(secondDocument.DocumentNode.FirstChild);
+      var secondElement = new HtmlElement(secondDocument.DocumentNode.FirstChild,
+                                          _sourceFile);
 
       // Act
       var result = sut.ReplaceWith(secondElement);
@@ -157,7 +168,8 @@ namespace Test.CSF.Zpt.Rendering
     public void TestConstructorElementNode()
     {
       // Act
-      new HtmlElement(_document.DocumentNode.FirstChild);
+      new HtmlElement(_document.DocumentNode.FirstChild,
+                      _sourceFile);
 
       // Assert
       Assert.Pass("Test passes because no exception encountered");
@@ -167,10 +179,51 @@ namespace Test.CSF.Zpt.Rendering
     public void TestConstructorDocumentNode()
     {
       // Act
-      new HtmlElement(_document.DocumentNode);
+      new HtmlElement(_document.DocumentNode,
+                      _sourceFile);
 
       // Assert
       Assert.Pass("Test passes because no exception encountered");
+    }
+
+    [Test]
+    public void TestAddCommentBefore()
+    {
+      // Arrange
+      var docElement = new HtmlElement(_document.DocumentNode,
+                                       _sourceFile);
+      var sut = docElement.GetChildElements()[1].GetChildElements()[0].GetChildElements().First();
+      string expectedResult = @"<html>
+<head>
+<title>Document title</title>
+</head>
+<body>
+<header>
+  <!-- Foo bar baz -->
+  <div custom:parent_attrib=""Attribute value one"" class=""class_one class_two"">
+    <ul>
+      <li custom:child_attrib=""foo"">Foo content</li>
+      <li custom:child_attrib=""bar"">Bar content</li>
+      <li custom:child_attrib=""baz"">Baz content</li>
+    </ul>
+  </div>
+  Page header
+</header>
+<section>
+  <header>
+    <h1 id=""page_heading"">Page heading</h1>
+  </header>
+  <p>A paragraph of content</p>
+</section>
+<footer>Page footer</footer>
+</body>
+</html>";
+
+      // Act
+      sut.AddCommentBefore("Foo bar baz");
+
+      // Assert
+      Assert.AreEqual(expectedResult, docElement.ToString());
     }
 
     #endregion

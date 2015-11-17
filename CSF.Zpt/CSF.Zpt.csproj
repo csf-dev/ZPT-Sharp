@@ -62,6 +62,9 @@
     <Compile Include="Rendering\Tal.cs" />
     <Compile Include="Rendering\MacroExpander.cs" />
     <Compile Include="Rendering\MacroFinder.cs" />
+    <Compile Include="Rendering\SourceFileInfo.cs" />
+    <Compile Include="Rendering\XmlElement.cs" />
+    <Compile Include="Rendering\XmlAttribute.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

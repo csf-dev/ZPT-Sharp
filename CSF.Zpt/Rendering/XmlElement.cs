@@ -1,39 +1,41 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.Xml;
 using System.Linq;
 using System.Text.RegularExpressions;
-using HtmlAgilityPack;
+using System.IO;
+using System.Text;
 
 namespace CSF.Zpt.Rendering
 {
   /// <summary>
-  /// Implementation of <see cref="Element"/> based on documents parsed using the HTML Agility Pack.
+  /// Implementation of <see cref="Element"/> based on documents parsed using <c>System.Xml</c>.
   /// </summary>
-  public class HtmlElement : Element
+  public class XmlElement : Element
   {
     #region constants
 
     private const string
       INDENT_PATTERN        = @"([ \t]+)$",
-      HTML_COMMENT_START    = "<!-- ",
-      HTML_COMMENT_END      = " -->\n";
+      XML_COMMENT_START    = "<!-- ",
+      XML_COMMENT_END      = " -->\n";
+
     private static readonly Regex Indent = new Regex(INDENT_PATTERN, RegexOptions.Compiled);
 
     #endregion
 
     #region fields
 
-    private HtmlNode _node;
+    private XmlNode _node;
 
     #endregion
 
     #region properties
 
     /// <summary>
-    /// Gets the HTML node object wrapped by the current instance.
+    /// Gets the XML node object wrapped by the current instance.
     /// </summary>
     /// <value>The node.</value>
-    public HtmlNode Node
+    public virtual XmlNode Node
     {
       get {
         return _node;
@@ -57,12 +59,27 @@ namespace CSF.Zpt.Rendering
 
     /// <summary>
     /// Returns a <see cref="System.String"/> that represents the current
-    /// <see cref="CSF.Zpt.Rendering.HtmlElement"/>.
+    /// <see cref="CSF.Zpt.Rendering.XmlElement"/>.
     /// </summary>
-    /// <returns>A <see cref="System.String"/> that represents the current <see cref="CSF.Zpt.Rendering.HtmlElement"/>.</returns>
+    /// <returns>A <see cref="System.String"/> that represents the current <see cref="CSF.Zpt.Rendering.XmlElement"/>.</returns>
     public override string ToString()
     {
-      return this.Node.OuterHtml;
+      string output;
+
+      using(var stream = new MemoryStream())
+      {
+        var encoding = new UTF8Encoding(false);
+
+        using(var xmlWriter = new XmlTextWriter(stream, encoding))
+        {
+          xmlWriter.Formatting = Formatting.Indented;
+          this.Node.WriteTo(xmlWriter);
+        }
+
+        output = encoding.GetString(stream.ToArray());
+      }
+
+      return output;
     }
 
     /// <summary>
@@ -72,15 +89,18 @@ namespace CSF.Zpt.Rendering
     /// <param name="replacement">Replacement.</param>
     public override Element ReplaceWith(Element replacement)
     {
-      var repl = replacement as HtmlElement;
+      var repl = replacement as XmlElement;
       if(repl == null)
       {
-        throw new ArgumentException("The replacement must be a non-null instance of HtmlElement.",
+        throw new ArgumentException("The replacement must be a non-null instance of XmlElement.",
                                     "replacement");
       }
 
-      var parent = this.GetParent();
-      return new HtmlElement(parent.ReplaceChild(repl.Node, this.Node), repl.SourceFile);
+      var importedNode = this.Node.OwnerDocument.ImportNode(repl.Node, true);
+
+      this.GetParent().ReplaceChild(importedNode, this.Node);
+
+      return new XmlElement(importedNode, repl.SourceFile);
     }
 
     /// <summary>
@@ -90,8 +110,9 @@ namespace CSF.Zpt.Rendering
     public override Element[] GetChildElements()
     {
       return this.Node.ChildNodes
-        .Where(x => x.NodeType == HtmlNodeType.Element)
-        .Select(x => new HtmlElement(x, this.SourceFile))
+        .Cast<XmlNode>()
+        .Where(x => x.NodeType == XmlNodeType.Element)
+        .Select(x => new XmlElement(x, this.SourceFile))
         .ToArray();
     }
 
@@ -102,7 +123,8 @@ namespace CSF.Zpt.Rendering
     public override Attribute[] GetAttributes()
     {
       return this.Node.Attributes
-        .Select(x => new HtmlAttribute(x))
+        .Cast<System.Xml.XmlAttribute>()
+        .Select(x => new XmlAttribute(x))
         .ToArray();
     }
 
@@ -120,13 +142,29 @@ namespace CSF.Zpt.Rendering
       {
         throw new ArgumentNullException("name");
       }
+      else if(name.Length == 0)
+      {
+        throw new ArgumentException("Name must not be an empty string.", "name");
+      }
 
-      var attribName = this.GetName(prefix, name);
+      string query;
+      var nsManager = new XmlNamespaceManager(new NameTable());
 
-      var htmlAttribute = this.Node.Attributes
-        .FirstOrDefault(x => x.Name == attribName);
+      if(String.IsNullOrEmpty(attributeNamespace))
+      {
+        query = String.Concat("@", name);
+      }
+      else
+      {
+        nsManager.AddNamespace("search", attributeNamespace);
+        query = String.Concat("@search:", name);
+      }
 
-      return (htmlAttribute != null)? new HtmlAttribute(htmlAttribute) : null;
+      var xmlAttribute = this.Node.SelectNodes(query, nsManager)
+        .Cast<System.Xml.XmlAttribute>()
+        .FirstOrDefault();
+
+      return (xmlAttribute != null)? new XmlAttribute(xmlAttribute) : null;
     }
 
     /// <summary>
@@ -139,12 +177,31 @@ namespace CSF.Zpt.Rendering
     /// <param name="name">The attribute name.</param>
     public override Element[] SearchChildrenByAttribute(string attributeNamespace, string prefix, string name)
     {
-      string attribName = this.GetName(prefix, name);
+      if(name == null)
+      {
+        throw new ArgumentNullException("name");
+      }
+      else if(name.Length == 0)
+      {
+        throw new ArgumentException("Name must not be an empty string.", "name");
+      }
 
-      return (from node in this.Node.Descendants()
-              from attrib in node.Attributes
-              where attrib.Name == attribName
-              select new HtmlElement(node, this.SourceFile))
+      string query;
+      var nsManager = new XmlNamespaceManager(new NameTable());
+
+      if(String.IsNullOrEmpty(attributeNamespace))
+      {
+        query = String.Concat("//*[@", name, "]");
+      }
+      else
+      {
+        nsManager.AddNamespace("search", attributeNamespace);
+        query = String.Concat("//*[@search:", name, "]");
+      }
+
+      return this.Node.SelectNodes(query, nsManager)
+        .Cast<XmlNode>()
+        .Select(x => new XmlElement(x, this.SourceFile))
         .ToArray();
     }
 
@@ -164,18 +221,18 @@ namespace CSF.Zpt.Rendering
 
       var previousNode = this.Node.PreviousSibling;
       if(previousNode != null
-         && previousNode.NodeType == HtmlNodeType.Text)
+         && previousNode.NodeType == XmlNodeType.Text)
       {
-        HtmlTextNode previousText = (HtmlTextNode) previousNode;
-        var indentMatch = Indent.Match(previousText.Text);
+        XmlText previousText = (XmlText) previousNode;
+        var indentMatch = Indent.Match(previousText.Value);
         if(indentMatch.Success)
         {
           indent = indentMatch.Value;
         }
       }
 
-      string commentText = String.Concat(HTML_COMMENT_START, comment, HTML_COMMENT_END, indent);
-      var commentNode = this.Node.OwnerDocument.CreateComment(commentText);
+//      string commentText = String.Concat(XML_COMMENT_START, comment, XML_COMMENT_END, indent);
+      var commentNode = this.Node.OwnerDocument.CreateComment(comment);
 
       parent.InsertBefore(commentNode, this.Node);
     }
@@ -215,7 +272,7 @@ namespace CSF.Zpt.Rendering
     /// Gets the parent of the current <see cref="Node"/>.
     /// </summary>
     /// <returns>The parent node.</returns>
-    private HtmlNode GetParent()
+    private XmlNode GetParent()
     {
       var output = this.Node.ParentNode;
 
@@ -232,26 +289,26 @@ namespace CSF.Zpt.Rendering
     #region constructor
 
     /// <summary>
-    /// Initializes a new instance of the <see cref="CSF.Zpt.Rendering.HtmlElement"/> class.
+    /// Initializes a new instance of the <see cref="CSF.Zpt.Rendering.XmlElement"/> class.
     /// </summary>
-    /// <param name="node">The source HTML node.</param>
+    /// <param name="node">The source XML Node.</param>
     /// <param name="sourceFile">Information about the element's source file.</param>
-    public HtmlElement(HtmlNode node, SourceFileInfo sourceFile) : base(sourceFile)
+    public XmlElement(XmlNode node, SourceFileInfo sourceFile) : base(sourceFile)
     {
       if(node == null)
       {
         throw new ArgumentNullException("node");
       }
 
-      HtmlNode actualNode;
+      XmlNode actualNode;
 
-      if(node.NodeType == HtmlNodeType.Document)
+      if(node.NodeType == XmlNodeType.Document)
       {
         actualNode = node.FirstChild;
       }
-      else if(node.NodeType != HtmlNodeType.Element)
+      else if(node.NodeType != XmlNodeType.Element)
       {
-        throw new ArgumentException("Node must be an HTML 'element' node.", "node");
+        throw new ArgumentException("Node must be an XML 'element' node.", "node");
       }
       else
       {

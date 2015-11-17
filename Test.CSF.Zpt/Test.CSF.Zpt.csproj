@@ -62,9 +62,11 @@
     <Compile Include="GlobalSetupFixture.cs" />
     <Compile Include="Rendering\TestMacroFinder.cs" />
     <Compile Include="Rendering\TestMacroExpander.cs" />
+    <Compile Include="Rendering\TestXmlElement.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Rendering\TestHtmlElement.html" />
+    <EmbeddedResource Include="Rendering\TestXmlElement.xml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CSF\CSF\CSF.csproj">

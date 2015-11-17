@@ -13,10 +13,10 @@ namespace CSF.Zpt.Rendering
     /// <summary>
     /// Visit the given element and perform modifications as required.
     /// </summary>
-    /// <returns><c>true</c> if the element is to remain; <c>false</c> if not</returns>
+    /// <returns>A reference to the element which has been visited.  This might be the input <paramref name="element"/> or a replacement.</returns>
     /// <param name="element">The element to visit.</param>
     /// <param name="model">The object model provided as context to the visitor.</param>
-    public abstract bool Visit(Element element, Model model);
+    public abstract Element Visit(Element element, Model model);
 
     /// <summary>
     /// Visits the given element, and then recursively visits all of its child elements.
@@ -34,15 +34,12 @@ namespace CSF.Zpt.Rendering
         throw new ArgumentNullException("model");
       }
 
-      var continueVisiting = this.Visit(element, model);
+      var visited = this.Visit(element, model);
 
-      if(continueVisiting)
+      var children = visited.GetChildElements();
+      foreach(var child in children)
       {
-        var children = element.GetChildElements();
-        foreach(var child in children)
-        {
-          this.VisitRecursively(child, model);
-        }
+        this.VisitRecursively(child, model);
       }
     }
 

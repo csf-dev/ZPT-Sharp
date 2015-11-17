@@ -13,6 +13,7 @@ namespace CSF.Zpt
     #region fields
 
     private HtmlDocument _document;
+    private SourceFileInfo _sourceFile;
 
     #endregion
 
@@ -26,6 +27,17 @@ namespace CSF.Zpt
     {
       get {
         return _document;
+      }
+    }
+
+    /// <summary>
+    /// Gets information about the document's source file.
+    /// </summary>
+    /// <value>The source file.</value>
+    public virtual SourceFileInfo SourceFile
+    {
+      get {
+        return _sourceFile;
       }
     }
 
@@ -95,7 +107,7 @@ namespace CSF.Zpt
     /// <returns>The rendering model.</returns>
     protected override Element GetRootElement()
     {
-      return new HtmlElement(this.Document.DocumentNode);
+      return new HtmlElement(this.Document.DocumentNode, this.SourceFile);
     }
 
     #endregion
@@ -106,14 +118,20 @@ namespace CSF.Zpt
     /// Initializes a new instance of the <see cref="CSF.Zpt.ZptHtmlDocument"/> class.
     /// </summary>
     /// <param name="document">An HTML document from which to create the current instance.</param>
-    public ZptHtmlDocument(HtmlDocument document)
+    /// <param name="sourceFile">Information about the document's source file.</param>
+    public ZptHtmlDocument(HtmlDocument document, SourceFileInfo sourceFile)
     {
       if(document == null)
       {
         throw new ArgumentNullException("document");
       }
+      if(sourceFile == null)
+      {
+        throw new ArgumentNullException("sourceFile");
+      }
 
       _document = document;
+      _sourceFile = sourceFile;
     }
 
     #endregion

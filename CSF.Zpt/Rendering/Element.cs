@@ -8,6 +8,12 @@ namespace CSF.Zpt.Rendering
   /// </summary>
   public abstract class Element
   {
+    #region fields
+
+    private SourceFileInfo _sourceFile;
+
+    #endregion
+
     #region properties
 
     /// <summary>
@@ -15,6 +21,17 @@ namespace CSF.Zpt.Rendering
     /// </summary>
     /// <value>The name.</value>
     public abstract string Name { get; }
+
+    /// <summary>
+    /// Gets information about the source file for the current element.
+    /// </summary>
+    /// <value>The source file.</value>
+    public virtual SourceFileInfo SourceFile
+    {
+      get {
+        return _sourceFile;
+      }
+    }
 
     #endregion
 
@@ -67,6 +84,35 @@ namespace CSF.Zpt.Rendering
     /// <param name="prefix">The attribute prefix.</param>
     /// <param name="name">The attribute name.</param>
     public abstract Element[] SearchChildrenByAttribute(string attributeNamespace, string prefix, string name);
+
+    /// <summary>
+    /// Adds a new comment to the DOM immediately before the current element.
+    /// </summary>
+    /// <param name="comment">The comment text.</param>
+    public abstract void AddCommentBefore(string comment);
+
+    #endregion
+
+    #region constructor
+
+    /// <summary>
+    /// Fake constructor for Mocking framework usage only.  Do not call.
+    /// </summary>
+    protected Element() {}
+
+    /// <summary>
+    /// Initializes a new instance of the <see cref="CSF.Zpt.Rendering.Element"/> class.
+    /// </summary>
+    /// <param name="sourceFile">Information about the element's source file.</param>
+    public Element(SourceFileInfo sourceFile)
+    {
+      if(sourceFile == null)
+      {
+        throw new ArgumentNullException("sourceFile");
+      }
+
+      _sourceFile = sourceFile;
+    }
 
     #endregion
   }
