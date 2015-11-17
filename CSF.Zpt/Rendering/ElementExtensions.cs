@@ -85,6 +85,34 @@ namespace CSF.Zpt.Rendering
                                                attributeName);
     }
 
+    /// <summary>
+    /// Recursively searches for METAL attributes and removes them from their parent element.
+    /// </summary>
+    /// <param name="element">The element from which to perform the purge.</param>
+    public static void PurgeMetalAttributes(this Element element)
+    {
+      if(element == null)
+      {
+        throw new ArgumentNullException("element");
+      }
+
+      element.PurgeAttributes(Metal.Namespace, Metal.DefaultPrefix);
+    }
+
+    /// <summary>
+    /// Recursively searches for TAL attributes and removes them from their parent element.
+    /// </summary>
+    /// <param name="element">The element from which to perform the purge.</param>
+    public static void PurgeTalAttributes(this Element element)
+    {
+      if(element == null)
+      {
+        throw new ArgumentNullException("element");
+      }
+
+      element.PurgeAttributes(Tal.Namespace, Tal.DefaultPrefix);
+    }
+
     #endregion
   }
 }

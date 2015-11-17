@@ -21,9 +21,10 @@ namespace CSF.Zpt.Rendering
     /// <summary>
     /// Visits the given element, and then recursively visits all of its child elements.
     /// </summary>
+    /// <returns>A reference to the element which has been visited.  This might be the input <paramref name="element"/> or a replacement.</returns>
     /// <param name="element">The element to visit.</param>
     /// <param name="model">The object model provided as context to the visitor.</param>
-    public virtual void VisitRecursively(Element element, Model model)
+    public virtual Element VisitRecursively(Element element, Model model)
     {
       if(element == null)
       {
@@ -41,6 +42,8 @@ namespace CSF.Zpt.Rendering
       {
         this.VisitRecursively(child, model);
       }
+
+      return visited;
     }
 
     #endregion

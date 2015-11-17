@@ -86,6 +86,14 @@ namespace CSF.Zpt.Rendering
     public abstract Element[] SearchChildrenByAttribute(string attributeNamespace, string prefix, string name);
 
     /// <summary>
+    /// Recursively searches for attributes with a given namespace or prefix and removes them from their parent
+    /// element.
+    /// </summary>
+    /// <param name="attributeNamespace">The attribute namespace.</param>
+    /// <param name="prefix">The attribute prefix.</param>
+    public abstract void PurgeAttributes(string attributeNamespace, string prefix);
+
+    /// <summary>
     /// Adds a new comment to the DOM immediately before the current element.
     /// </summary>
     /// <param name="comment">The comment text.</param>

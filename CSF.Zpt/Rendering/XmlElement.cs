@@ -191,18 +191,52 @@ namespace CSF.Zpt.Rendering
 
       if(String.IsNullOrEmpty(attributeNamespace))
       {
-        query = String.Concat("//*[@", name, "]");
+        query = String.Concat(".//*[@", name, "]");
       }
       else
       {
         nsManager.AddNamespace("search", attributeNamespace);
-        query = String.Concat("//*[@search:", name, "]");
+        query = String.Concat(".//*[@search:", name, "]");
       }
 
       return this.Node.SelectNodes(query, nsManager)
         .Cast<XmlNode>()
         .Select(x => new XmlElement(x, this.SourceFile))
         .ToArray();
+    }
+
+    /// <summary>
+    /// Recursively searches for attributes with a given namespace or prefix and removes them from their parent
+    /// element.
+    /// </summary>
+    /// <param name="attributeNamespace">The attribute namespace.</param>
+    /// <param name="prefix">The attribute prefix.</param>
+    public override void PurgeAttributes(string attributeNamespace, string prefix)
+    {
+      if(attributeNamespace == null)
+      {
+        throw new ArgumentNullException("attributeNamespace");
+      }
+
+      var elements = this.Node
+        .SelectNodes(".//*")
+        .Cast<System.Xml.XmlElement>()
+        .Union(new [] { (System.Xml.XmlElement) this.Node })
+        .ToArray();
+
+      var toRemove = (from ele in elements
+                      from attrib in ele.Attributes.Cast<System.Xml.XmlAttribute>()
+                      where
+                        attrib.NamespaceURI == attributeNamespace
+                        || (attrib.NamespaceURI == "http://www.w3.org/2000/xmlns/"
+                            && attrib.Value == attributeNamespace)
+                      select new { Element = ele, Attribute = attrib })
+        .ToArray();
+
+      foreach(var item in toRemove)
+      {
+        item.Element.RemoveAttributeNode(item.Attribute);
+      }
     }
 
     /// <summary>
@@ -231,7 +265,6 @@ namespace CSF.Zpt.Rendering
         }
       }
 
-//      string commentText = String.Concat(XML_COMMENT_START, comment, XML_COMMENT_END, indent);
       var commentNode = this.Node.OwnerDocument.CreateComment(comment);
 
       parent.InsertBefore(commentNode, this.Node);

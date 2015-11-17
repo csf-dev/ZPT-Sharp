@@ -149,6 +149,35 @@ namespace CSF.Zpt.Rendering
     }
 
     /// <summary>
+    /// Recursively searches for attributes with a given namespace or prefix and removes them from their parent
+    /// element.
+    /// </summary>
+    /// <param name="attributeNamespace">The attribute namespace.</param>
+    /// <param name="prefix">The attribute prefix.</param>
+    public override void PurgeAttributes(string attributeNamespace, string prefix)
+    {
+      if(prefix == null)
+      {
+        throw new ArgumentNullException("prefix");
+      }
+
+      var nodes = this.Node
+        .Descendants()
+        .Union(new [] { this.Node })
+        .ToArray();
+
+      var toRemove = (from node in nodes
+                      from attrib in node.Attributes
+                      where attrib.Name.StartsWith(String.Concat(prefix, ":"))
+                      select new { Element = node, Attribute = attrib });
+
+      foreach(var item in toRemove)
+      {
+        item.Element.Attributes.Remove(item.Attribute);
+      }
+    }
+
+    /// <summary>
     /// Adds a new comment to the DOM immediately before the current element.
     /// </summary>
     /// <param name="comment">The comment text.</param>

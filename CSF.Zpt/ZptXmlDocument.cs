@@ -13,6 +13,7 @@ namespace CSF.Zpt
     #region fields
 
     private XmlDocument _document;
+    private SourceFileInfo _sourceFile;
 
     #endregion
 
@@ -22,10 +23,21 @@ namespace CSF.Zpt
     /// Gets the original XML document.
     /// </summary>
     /// <value>The original XML document.</value>
-    public virtual XmlDocument XmlDocument
+    public virtual XmlDocument Document
     {
       get {
         return _document;
+      }
+    }
+
+    /// <summary>
+    /// Gets information about the document's source file.
+    /// </summary>
+    /// <value>The source file.</value>
+    public virtual SourceFileInfo SourceFile
+    {
+      get {
+        return _sourceFile;
       }
     }
 
@@ -40,8 +52,17 @@ namespace CSF.Zpt
     /// <param name="context">The rendering context, containing the object model of data available to the document.</param>
     public XmlDocument RenderXml(RenderingContext context)
     {
-      // TODO: Write this implementation
-      throw new NotImplementedException();
+      if(context == null)
+      {
+        throw new ArgumentNullException("context");
+      }
+
+      var element = this.RenderElement(context);
+
+      var output = new XmlDocument();
+      output.LoadXml(element.ToString());
+
+      return output;
     }
 
     /// <summary>
@@ -62,8 +83,25 @@ namespace CSF.Zpt
     /// <param name="element">The element to render.</param>
     protected override void Render(TextWriter writer, Element element)
     {
-      // TODO: Write this implementation
-      throw new NotImplementedException();
+      if(writer == null)
+      {
+        throw new ArgumentNullException("writer");
+      }
+      if(element == null)
+      {
+        throw new ArgumentNullException("element");
+      }
+
+      var xmlElement = element as Rendering.XmlElement;
+      if(xmlElement == null)
+      {
+        throw new ArgumentException("Element must be an instance of XmlElement.", "element");
+      }
+
+      using(var xmlWriter = new XmlTextWriter(writer))
+      {
+        xmlElement.Node.WriteTo(xmlWriter);  
+      }
     }
 
     /// <summary>
@@ -72,8 +110,7 @@ namespace CSF.Zpt
     /// <returns>The rendering model.</returns>
     protected override Element GetRootElement()
     {
-      // TODO: Write this implementation
-      throw new NotImplementedException();
+      return new Rendering.XmlElement(this.Document.DocumentElement, this.SourceFile);
     }
 
     #endregion
@@ -84,14 +121,20 @@ namespace CSF.Zpt
     /// Initializes a new instance of the <see cref="CSF.Zpt.ZptXmlDocument"/> class.
     /// </summary>
     /// <param name="document">An XML document from which to create the current instance.</param>
-    public ZptXmlDocument(XmlDocument document)
+    /// <param name="sourceFile">Information about the document's source file.</param>
+    public ZptXmlDocument(XmlDocument document, SourceFileInfo sourceFile)
     {
       if(document == null)
       {
         throw new ArgumentNullException("document");
       }
+      if(sourceFile == null)
+      {
+        throw new ArgumentNullException("sourceFile");
+      }
 
       _document = document;
+      _sourceFile = sourceFile;
     }
 
     #endregion

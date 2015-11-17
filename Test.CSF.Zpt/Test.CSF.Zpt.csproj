@@ -63,10 +63,13 @@
     <Compile Include="Rendering\TestMacroFinder.cs" />
     <Compile Include="Rendering\TestMacroExpander.cs" />
     <Compile Include="Rendering\TestXmlElement.cs" />
+    <Compile Include="Rendering\MetalVisitorIntegrationTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Rendering\TestHtmlElement.html" />
     <EmbeddedResource Include="Rendering\TestXmlElement.xml" />
+    <EmbeddedResource Include="Rendering\MetalVisitorIntegrationTests.1.xml" />
+    <EmbeddedResource Include="Rendering\MetalVisitorIntegrationTests.2.xml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CSF\CSF\CSF.csproj">

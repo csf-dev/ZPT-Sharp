@@ -38,6 +38,21 @@ namespace CSF.Zpt.Rendering
       return _macroExpander.Expand(element, model);
     }
 
+    /// <summary>
+    /// Visits the given element, and then recursively visits all of its child elements.
+    /// </summary>
+    /// <returns>A reference to the element which has been visited.  This might be the input <paramref name="element"/> or a replacement.</returns>
+    /// <param name="element">The element to visit.</param>
+    /// <param name="model">The object model provided as context to the visitor.</param>
+    public override Element VisitRecursively(Element element, Model model)
+    {
+      var output = base.VisitRecursively(element, model);
+
+      output.PurgeMetalAttributes();
+
+      return output;
+    }
+
     #endregion
 
     #region constructor
@@ -45,9 +60,15 @@ namespace CSF.Zpt.Rendering
     /// <summary>
     /// Initializes a new instance of the <see cref="CSF.Zpt.Rendering.MetalVisitor"/> class.
     /// </summary>
-    public MetalVisitor()
+    public MetalVisitor() : this(null) {}
+
+    /// <summary>
+    /// Initializes a new instance of the <see cref="CSF.Zpt.Rendering.MetalVisitor"/> class.
+    /// </summary>
+    /// <param name="expander">The macro expander to use.</param>
+    public MetalVisitor(MacroExpander expander)
     {
-      _macroExpander = new MacroExpander();
+      _macroExpander = expander?? new MacroExpander();
     }
 
     #endregion
