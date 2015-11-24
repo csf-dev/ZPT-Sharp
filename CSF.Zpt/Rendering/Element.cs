@@ -11,6 +11,7 @@ namespace CSF.Zpt.Rendering
     #region fields
 
     private SourceFileInfo _sourceFile;
+    private bool _isRoot, _isImported;
 
     #endregion
 
@@ -30,6 +31,28 @@ namespace CSF.Zpt.Rendering
     {
       get {
         return _sourceFile;
+      }
+    }
+
+    /// <summary>
+    /// Gets a value indicating whether this instance is the root of its parent document.
+    /// </summary>
+    /// <value><c>true</c> if this instance is the root element; otherwise, <c>false</c>.</value>
+    public virtual bool IsRoot
+    {
+      get {
+        return _isRoot;
+      }
+    }
+
+    /// <summary>
+    /// Gets a value indicating whether this instance represents an element imported from another document tree.
+    /// </summary>
+    /// <value><c>true</c> if this instance is imported; otherwise, <c>false</c>.</value>
+    public virtual bool IsImported
+    {
+      get {
+        return _isImported;
       }
     }
 
@@ -99,6 +122,17 @@ namespace CSF.Zpt.Rendering
     /// <param name="comment">The comment text.</param>
     public abstract void AddCommentBefore(string comment);
 
+    /// <summary>
+    /// Clone this instance into a new Element instance, which may be manipulated without affecting the original.
+    /// </summary>
+    public abstract Element Clone();
+
+    /// <summary>
+    /// Gets the file location (typically a line number) for the current instance.
+    /// </summary>
+    /// <returns>The file location.</returns>
+    public abstract string GetFileLocation();
+
     #endregion
 
     #region constructor
@@ -112,7 +146,11 @@ namespace CSF.Zpt.Rendering
     /// Initializes a new instance of the <see cref="CSF.Zpt.Rendering.Element"/> class.
     /// </summary>
     /// <param name="sourceFile">Information about the element's source file.</param>
-    public Element(SourceFileInfo sourceFile)
+    /// <param name="isRoot">Whether or not this is the root element.</param>
+    /// <param name="isImported">Whether or not this element is imported.</param>
+    public Element(SourceFileInfo sourceFile,
+                   bool isRoot,
+                   bool isImported)
     {
       if(sourceFile == null)
       {
@@ -120,6 +158,8 @@ namespace CSF.Zpt.Rendering
       }
 
       _sourceFile = sourceFile;
+      _isRoot = isRoot;
+      _isImported = isImported;
     }
 
     #endregion

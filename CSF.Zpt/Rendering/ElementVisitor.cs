@@ -8,6 +8,27 @@ namespace CSF.Zpt.Rendering
   /// </summary>
   public abstract class ElementVisitor
   {
+    #region fields
+
+    private RenderingOptions _options;
+
+    #endregion
+
+    #region properties
+
+    /// <summary>
+    /// Gets the rendering options.
+    /// </summary>
+    /// <value>The rendering options.</value>
+    protected RenderingOptions RenderingOptions
+    {
+      get {
+        return _options;
+      }
+    }
+
+    #endregion
+
     #region methods
 
     /// <summary>
@@ -44,6 +65,19 @@ namespace CSF.Zpt.Rendering
       }
 
       return visited;
+    }
+
+    #endregion
+
+    #region constructor
+
+    /// <summary>
+    /// Initializes a new instance of the <see cref="CSF.Zpt.Rendering.ElementVisitor"/> class.
+    /// </summary>
+    /// <param name="options">Rendering options.</param>
+    public ElementVisitor(RenderingOptions options)
+    {
+      _options = options?? new RenderingOptions();
     }
 
     #endregion

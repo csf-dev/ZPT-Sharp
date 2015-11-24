@@ -16,13 +16,15 @@ namespace CSF.Zpt
     /// Renders the document to a <c>System.String</c>.
     /// </summary>
     /// <param name="context">The rendering context, containing the object model of data available to the document.</param>
-    public virtual string Render(RenderingContext context)
+    /// <param name="options">The rendering options to use.  If <c>null</c> then default options are used.</param>
+    public virtual string Render(RenderingContext context,
+                                 RenderingOptions options = null)
     {
       var output = new StringBuilder();
 
       using(var writer = new StringWriter(output))
       {
-        this.Render(writer, context);
+        this.Render(writer, context, this.GetOptions(options));
       }
 
       return output.ToString();
@@ -33,7 +35,10 @@ namespace CSF.Zpt
     /// </summary>
     /// <param name="writer">The text writer to render to.</param>
     /// <param name="context">The rendering context, containing the object model of data available to the document.</param>
-    public virtual void Render(TextWriter writer, RenderingContext context)
+    /// <param name="options">The rendering options to use.  If <c>null</c> then default options are used.</param>
+    public virtual void Render(TextWriter writer,
+                               RenderingContext context,
+                               RenderingOptions options = null)
     {
       if(writer == null)
       {
@@ -44,7 +49,8 @@ namespace CSF.Zpt
         throw new ArgumentNullException("context");
       }
 
-      this.Render(writer, this.RenderElement(context));
+      var opts = this.GetOptions(options);
+      this.Render(writer, this.RenderElement(context, opts), opts);
     }
 
     /// <summary>
@@ -52,19 +58,33 @@ namespace CSF.Zpt
     /// </summary>
     /// <returns>The result of the rendering process.</returns>
     /// <param name="context">The rendering context, containing the object model of data available to the document.</param>
-    protected virtual Element RenderElement(RenderingContext context)
+    /// <param name="options">The rendering options to use.  If <c>null</c> then default options are used.</param>
+    protected virtual Element RenderElement(RenderingContext context,
+                                            RenderingOptions options)
     {
       if(context == null)
       {
         throw new ArgumentNullException("context");
       }
 
-      var output = this.GetRootElement();
+      var output = this.GetRootElement().Clone();
+      var opts = this.GetOptions(options);
 
-      new MetalVisitor().VisitRecursively(output, context.MetalContext);
-      new TalVisitor().VisitRecursively(output, context.TalContext);
+      new MetalVisitor(options: opts).VisitRecursively(output, context.MetalContext);
+      new SourceAnnotationVisitor(options: opts).VisitRecursively(output, context.MetalContext);
+      new TalVisitor(options: opts).VisitRecursively(output, context.TalContext);
 
       return output;
+    }
+
+    /// <summary>
+    /// Gets a set of rendering options, or constructs a default set of options if a <c>null</c> reference is passed.
+    /// </summary>
+    /// <returns>The final non-null options.</returns>
+    /// <param name="options">Options.</param>
+    protected virtual RenderingOptions GetOptions(RenderingOptions options)
+    {
+      return options?? new RenderingOptions();
     }
 
     /// <summary>
@@ -72,7 +92,10 @@ namespace CSF.Zpt
     /// </summary>
     /// <param name="writer">The text writer to render to.</param>
     /// <param name="element">The element to render.</param>
-    protected abstract void Render(TextWriter writer, Element element);
+    /// <param name="options">The rendering options to use.  If <c>null</c> then default options are used.</param>
+    protected abstract void Render(TextWriter writer,
+                                   Element element,
+                                   RenderingOptions options);
 
     /// <summary>
     /// Creates a rendering model from the current instance.

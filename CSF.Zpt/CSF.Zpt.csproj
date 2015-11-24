@@ -65,6 +65,8 @@
     <Compile Include="Rendering\SourceFileInfo.cs" />
     <Compile Include="Rendering\XmlElement.cs" />
     <Compile Include="Rendering\XmlAttribute.cs" />
+    <Compile Include="Rendering\RenderingOptions.cs" />
+    <Compile Include="Rendering\SourceAnnotationVisitor.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

@@ -80,7 +80,9 @@ namespace CSF.Zpt.Rendering
       }
 
       var parent = this.GetParent();
-      return new HtmlElement(parent.ReplaceChild(repl.Node, this.Node), repl.SourceFile);
+      return new HtmlElement(parent.ReplaceChild(repl.Node, this.Node),
+                             repl.SourceFile,
+                             isImported: true);
     }
 
     /// <summary>
@@ -241,6 +243,25 @@ namespace CSF.Zpt.Rendering
     }
 
     /// <summary>
+    /// Clone this instance into a new Element instance, which may be manipulated without affecting the original.
+    /// </summary>
+    public override Element Clone()
+    {
+      var clone = _node.Clone();
+
+      return new HtmlElement(clone, this.SourceFile);
+    }
+
+    /// <summary>
+    /// Gets the file location (typically a line number) for the current instance.
+    /// </summary>
+    /// <returns>The file location.</returns>
+    public override string GetFileLocation()
+    {
+      return String.Format("Line {0}", _node.Line);
+    }
+
+    /// <summary>
     /// Gets the parent of the current <see cref="Node"/>.
     /// </summary>
     /// <returns>The parent node.</returns>
@@ -265,7 +286,12 @@ namespace CSF.Zpt.Rendering
     /// </summary>
     /// <param name="node">The source HTML node.</param>
     /// <param name="sourceFile">Information about the element's source file.</param>
-    public HtmlElement(HtmlNode node, SourceFileInfo sourceFile) : base(sourceFile)
+    /// <param name="isRoot">Whether or not this is the root element.</param>
+    /// <param name="isImported">Whether or not this element is imported.</param>
+    public HtmlElement(HtmlNode node,
+                       SourceFileInfo sourceFile,
+                       bool isRoot = false,
+                       bool isImported = false) : base(sourceFile, isRoot, isImported)
     {
       if(node == null)
       {

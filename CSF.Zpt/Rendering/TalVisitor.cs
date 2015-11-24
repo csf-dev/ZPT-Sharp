@@ -23,6 +23,19 @@ namespace CSF.Zpt.Rendering
     }
 
     #endregion
+
+    #region constructor
+
+    /// <summary>
+    /// Initializes a new instance of the <see cref="CSF.Zpt.Rendering.TalVisitor"/> class.
+    /// </summary>
+    /// <param name="options">Rendering options.</param>
+    public TalVisitor(RenderingOptions options = null) : base(options: options)
+    {
+      
+    }
+
+    #endregion
   }
 }
 

@@ -145,13 +145,8 @@ namespace CSF.Zpt.Rendering
     /// <summary>
     /// Initializes a new instance of the <see cref="CSF.Zpt.Rendering.MacroExpander"/> class.
     /// </summary>
-    public MacroExpander() : this(null) {}
-
-    /// <summary>
-    /// Initializes a new instance of the <see cref="CSF.Zpt.Rendering.MacroExpander"/> class.
-    /// </summary>
     /// <param name="finder">A macro finder instance, or a null reference (in which case one will be constructed).</param>
-    public MacroExpander(MacroFinder finder)
+    public MacroExpander(MacroFinder finder = null)
     {
       _macroFinder = finder?? new MacroFinder();
     }

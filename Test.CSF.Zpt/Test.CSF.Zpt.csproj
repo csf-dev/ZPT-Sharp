@@ -64,6 +64,7 @@
     <Compile Include="Rendering\TestMacroExpander.cs" />
     <Compile Include="Rendering\TestXmlElement.cs" />
     <Compile Include="Rendering\MetalVisitorIntegrationTests.cs" />
+    <Compile Include="Rendering\TestSourceAnnotationVisitor.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Rendering\TestHtmlElement.html" />

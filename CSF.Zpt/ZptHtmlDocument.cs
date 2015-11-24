@@ -50,14 +50,17 @@ namespace CSF.Zpt
     /// </summary>
     /// <returns>The rendered HTML document.</returns>
     /// <param name="context">The rendering context, containing the object model of data available to the document.</param>
-    public HtmlDocument RenderHtml(RenderingContext context)
+    /// <param name="options">The rendering options to use.  If <c>null</c> then default options are used.</param>
+    public HtmlDocument RenderHtml(RenderingContext context,
+                                   RenderingOptions options = null)
     {
       if(context == null)
       {
         throw new ArgumentNullException("context");
       }
 
-      var element = this.RenderElement(context);
+      var opts = this.GetOptions(options);
+      var element = this.RenderElement(context, opts);
 
       var output = new HtmlDocument();
       output.LoadHtml(element.ToString());
@@ -70,9 +73,14 @@ namespace CSF.Zpt
     /// </summary>
     /// <param name="writer">The text writer to render to.</param>
     /// <param name="context">The rendering context, containing the object model of data available to the document.</param>
-    public override void Render(TextWriter writer, RenderingContext context)
+    /// <param name="options">The rendering options to use.  If <c>null</c> then default options are used.</param>
+    public override void Render(TextWriter writer,
+                                RenderingContext context,
+                                RenderingOptions options = null)
     {
-      var doc = this.RenderHtml(context);
+      var opts = this.GetOptions(options);
+
+      var doc = this.RenderHtml(context, opts);
       doc.Save(writer);
     }
 
@@ -81,7 +89,10 @@ namespace CSF.Zpt
     /// </summary>
     /// <param name="writer">The text writer to render to.</param>
     /// <param name="element">The element to render.</param>
-    protected override void Render(TextWriter writer, Element element)
+    /// <param name="options">The rendering options to use.  If <c>null</c> then default options are used.</param>
+    protected override void Render(TextWriter writer,
+                                   Element element,
+                                   RenderingOptions options)
     {
       if(writer == null)
       {
@@ -107,7 +118,7 @@ namespace CSF.Zpt
     /// <returns>The rendering model.</returns>
     protected override Element GetRootElement()
     {
-      return new HtmlElement(this.Document.DocumentNode, this.SourceFile);
+      return new HtmlElement(this.Document.DocumentNode, this.SourceFile, isRoot: true);
     }
 
     #endregion

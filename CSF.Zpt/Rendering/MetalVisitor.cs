@@ -60,13 +60,10 @@ namespace CSF.Zpt.Rendering
     /// <summary>
     /// Initializes a new instance of the <see cref="CSF.Zpt.Rendering.MetalVisitor"/> class.
     /// </summary>
-    public MetalVisitor() : this(null) {}
-
-    /// <summary>
-    /// Initializes a new instance of the <see cref="CSF.Zpt.Rendering.MetalVisitor"/> class.
-    /// </summary>
     /// <param name="expander">The macro expander to use.</param>
-    public MetalVisitor(MacroExpander expander)
+    /// <param name="options">The rendering options.</param>
+    public MetalVisitor(MacroExpander expander = null,
+                        RenderingOptions options = null) : base(options: options)
     {
       _macroExpander = expander?? new MacroExpander();
     }
