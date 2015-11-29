@@ -1,5 +1,5 @@
 ﻿using System;
-using CSF.Zpt.Tales;
+using CSF.Zpt.Rendering;
 
 namespace CSF.Zpt
 {

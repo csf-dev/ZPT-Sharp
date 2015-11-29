@@ -15,7 +15,7 @@ namespace CSF.Zpt.Rendering
     /// </summary>
     /// <param name="element">Element.</param>
     /// <param name="model">Model.</param>
-    public override Element Visit(Element element, CSF.Zpt.Tales.Model model)
+    public override Element Visit(Element element, Model model)
     {
       if(element == null)
       {
@@ -58,7 +58,7 @@ namespace CSF.Zpt.Rendering
     /// <returns>A reference to the element which has been visited.  This might be the input <paramref name="element"/> or a replacement.</returns>
     /// <param name="element">The element to visit.</param>
     /// <param name="model">The object model provided as context to the visitor.</param>
-    public override Element VisitRecursively(Element element, CSF.Zpt.Tales.Model model)
+    public override Element VisitRecursively(Element element, Model model)
     {
       return this.RenderingOptions.AddSourceFileAnnotation? base.VisitRecursively(element, model) : element;
     }

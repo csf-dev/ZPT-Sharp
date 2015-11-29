@@ -47,9 +47,7 @@
     <Compile Include="ZptDocument.cs" />
     <Compile Include="ZptHtmlDocument.cs" />
     <Compile Include="ZptXmlDocument.cs" />
-    <Compile Include="Tales\Model.cs" />
     <Compile Include="RenderingContext.cs" />
-    <Compile Include="Tales\ExpressionResult.cs" />
     <Compile Include="Rendering\Element.cs" />
     <Compile Include="Rendering\Attribute.cs" />
     <Compile Include="Rendering\ElementVisitor.cs" />
@@ -67,6 +65,11 @@
     <Compile Include="Rendering\XmlAttribute.cs" />
     <Compile Include="Rendering\RenderingOptions.cs" />
     <Compile Include="Rendering\SourceAnnotationVisitor.cs" />
+    <Compile Include="Rendering\ExpressionResult.cs" />
+    <Compile Include="Rendering\Model.cs" />
+    <Compile Include="Rendering\ModelEvaluationException.cs" />
+    <Compile Include="Rendering\TalDefineAttributeHandler.cs" />
+    <Compile Include="Rendering\ITalAttributeHandler.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

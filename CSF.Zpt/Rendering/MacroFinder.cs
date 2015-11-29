@@ -1,5 +1,4 @@
 ﻿using System;
-using CSF.Zpt.Tales;
 
 namespace CSF.Zpt.Rendering
 {

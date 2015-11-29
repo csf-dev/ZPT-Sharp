@@ -1,7 +1,6 @@
 ﻿using System;
 using NUnit.Framework;
 using CSF.Zpt.Rendering;
-using CSF.Zpt.Tales;
 using Moq;
 using System.Reflection;
 using CSF.Reflection;
@@ -15,7 +14,6 @@ namespace Test.CSF.Zpt.Rendering
     #region fields
 
     private Mock<Model> _model;
-    private MetalVisitor _sut;
 
     private string _xmlStringOne, _xmlStringTwo;
     private System.Xml.XmlDocument _documentOne, _documentTwo;
@@ -47,7 +45,6 @@ namespace Test.CSF.Zpt.Rendering
     public void Setup()
     {
       _model = new Mock<Model>(MockBehavior.Strict);
-      _sut = new MetalVisitor();
     }
 
     #endregion
@@ -68,8 +65,10 @@ namespace Test.CSF.Zpt.Rendering
       _model.Setup(x => x.Evaluate("macro-two")).Returns(new ExpressionResult(true, macroTwo));
       _model.Setup(x => x.Evaluate("macro-base")).Returns(new ExpressionResult(true, macroBase));
 
+      var sut = new MetalVisitor();
+
       // Act
-      _sut.VisitRecursively(document, _model.Object);
+      sut.VisitRecursively(document, _model.Object);
       var result = document.ToString();
 
       // Assert

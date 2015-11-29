@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace CSF.Zpt.Tales
+namespace CSF.Zpt.Rendering
 {
   /// <summary>
   /// Represents the result of evaluating a TALES expression.
@@ -27,34 +27,32 @@ namespace CSF.Zpt.Tales
       }
     }
 
-    /// <summary>
-    /// Gets the result.
-    /// </summary>
-    /// <value>The result.</value>
-    public object Result
-    {
-      get {
-        return _result;
-      }
-    }
-
     #endregion
 
     #region methods
 
     /// <summary>
-    /// Gets the result, typed as requested.
+    /// Gets the result.
     /// </summary>
     /// <returns>The result.</returns>
-    /// <typeparam name="TResult">The expected result type.</typeparam>
-    public TResult GetResult<TResult>()
+    public object GetResult()
     {
       if(!this.EvaluationSuccess)
       {
         throw new InvalidOperationException("The result may not be retrieved; check EvaluationSuccess first.");
       }
 
-      return (TResult) this.Result;
+      return _result;
+    }
+
+    /// <summary>
+    /// Gets the result, as a typed object instance.
+    /// </summary>
+    /// <returns>The result.</returns>
+    /// <typeparam name="TResult">The expected result type.</typeparam>
+    public TResult GetResult<TResult>()
+    {
+      return (TResult) this.GetResult();
     }
 
     #endregion

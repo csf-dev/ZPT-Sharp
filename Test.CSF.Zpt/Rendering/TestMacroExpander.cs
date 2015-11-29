@@ -2,7 +2,6 @@
 using NUnit.Framework;
 using Moq;
 using CSF.Zpt.Rendering;
-using CSF.Zpt.Tales;
 
 namespace Test.CSF.Zpt.Rendering
 {

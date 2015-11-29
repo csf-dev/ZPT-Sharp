@@ -1,6 +1,5 @@
 ﻿using System;
 using CSF.Zpt.Rendering;
-using CSF.Zpt.Tales;
 using Moq;
 using NUnit.Framework;
 

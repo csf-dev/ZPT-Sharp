@@ -1,5 +1,4 @@
 ﻿using System;
-using CSF.Zpt.Tales;
 
 namespace CSF.Zpt.Rendering
 {
@@ -18,8 +17,34 @@ namespace CSF.Zpt.Rendering
     /// <param name="model">The object model provided as context to the visitor.</param>
     public override Element Visit(Element element, Model model)
     {
+      if(element == null)
+      {
+        throw new ArgumentNullException("element");
+      }
+      if(model == null)
+      {
+        throw new ArgumentNullException("model");
+      }
+
+      new TalDefineAttributeHandler().Handle(element, model);
+
       // TODO: Write this implementation
       throw new NotImplementedException();
+    }
+
+    /// <summary>
+    /// Visits the given element, and then recursively visits all of its child elements.
+    /// </summary>
+    /// <returns>The recursively.</returns>
+    /// <param name="element">Element.</param>
+    /// <param name="model">Model.</param>
+    public override Element VisitRecursively(Element element, Model model)
+    {
+      var output = base.VisitRecursively(element, model);
+
+      output.PurgeTalAttributes();
+
+      return output;
     }
 
     #endregion
