@@ -26,35 +26,26 @@ namespace Test.CSF.Zpt.Rendering
         .Select(x => new SourceFileInfo(x))
         .ToArray();
 
+      foreach(var ele in elements)
+      {
+        ele.SetupGet(x => x.IsRoot).Returns(false);
+        ele.Setup(x => x.GetChildElements()).Returns(new Element[0]);
+        ele.SetupGet(x => x.SourceFile).Returns(sourceInfos[1]);
+        ele.SetupGet(x => x.IsImported).Returns(true);
+        ele
+          .Setup(x => x.GetFileLocation())
+          .Returns(() => String.Format("Element {0}", Array.IndexOf(elements, ele) + 1));
+      }
       elements[0].SetupGet(x => x.IsRoot).Returns(true);
-      elements[1].SetupGet(x => x.IsRoot).Returns(false);
-      elements[2].SetupGet(x => x.IsRoot).Returns(false);
-      elements[3].SetupGet(x => x.IsRoot).Returns(false);
-      elements[4].SetupGet(x => x.IsRoot).Returns(false);
 
       elements[0].Setup(x => x.GetChildElements()).Returns(new [] { elements[1].Object });
       elements[1].Setup(x => x.GetChildElements()).Returns(new [] { elements[2].Object, elements[3].Object, elements[4].Object });
-      elements[2].Setup(x => x.GetChildElements()).Returns(new Element[0]);
-      elements[3].Setup(x => x.GetChildElements()).Returns(new Element[0]);
-      elements[4].Setup(x => x.GetChildElements()).Returns(new Element[0]);
 
       elements[0].SetupGet(x => x.SourceFile).Returns(sourceInfos[0]);
-      elements[1].SetupGet(x => x.SourceFile).Returns(sourceInfos[1]);
-      elements[2].SetupGet(x => x.SourceFile).Returns(sourceInfos[1]);
-      elements[3].SetupGet(x => x.SourceFile).Returns(sourceInfos[1]);
       elements[4].SetupGet(x => x.SourceFile).Returns(sourceInfos[2]);
 
       elements[0].SetupGet(x => x.IsImported).Returns(false);
-      elements[1].SetupGet(x => x.IsImported).Returns(true);
       elements[2].SetupGet(x => x.IsImported).Returns(false);
-      elements[3].SetupGet(x => x.IsImported).Returns(true);
-      elements[4].SetupGet(x => x.IsImported).Returns(true);
-
-      elements[0].Setup(x => x.GetFileLocation()).Returns("Element 1");
-      elements[1].Setup(x => x.GetFileLocation()).Returns("Element 2");
-      elements[2].Setup(x => x.GetFileLocation()).Returns("Element 3");
-      elements[3].Setup(x => x.GetFileLocation()).Returns("Element 4");
-      elements[4].Setup(x => x.GetFileLocation()).Returns("Element 5");
 
       foreach(var ele in elements)
       {

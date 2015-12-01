@@ -67,6 +67,8 @@
     <Compile Include="Rendering\TestSourceAnnotationVisitor.cs" />
     <Compile Include="Rendering\TestElementVisitor.cs" />
     <Compile Include="Rendering\DummyModel.cs" />
+    <Compile Include="Rendering\TestModel.cs" />
+    <Compile Include="Rendering\TestTalVisitor.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Rendering\TestHtmlElement.html" />

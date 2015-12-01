@@ -14,6 +14,7 @@ namespace CSF.Zpt.Rendering
 
     private Model _parent, _root;
     private Dictionary<string,object> _localDefinitions, _globalDefinitions;
+    private object _error;
 
     #endregion
 
@@ -42,10 +43,21 @@ namespace CSF.Zpt.Rendering
     }
 
     /// <summary>
+    /// Gets information about an error, or a <c>null</c> reference if no error was encountered.
+    /// </summary>
+    /// <value>The error.</value>
+    public virtual object Error
+    {
+      get {
+        return _error;
+      }
+    }
+
+    /// <summary>
     /// Gets a reference to the parent model (if applicable).
     /// </summary>
     /// <value>The parent.</value>
-    protected virtual Model Parent
+    public virtual Model Parent
     {
       get {
         return _parent;
@@ -95,6 +107,24 @@ namespace CSF.Zpt.Rendering
       }
 
       this.Root.GlobalDefinitions[name] = value;
+    }
+
+    /// <summary>
+    /// Adds information about an encountered error to the current model instance.
+    /// </summary>
+    /// <param name="error">Error.</param>
+    public virtual void AddError(object error)
+    {
+      if(error == null)
+      {
+        throw new ArgumentNullException("error");
+      }
+      else if(_error != null)
+      {
+        throw new InvalidOperationException("The current instance must not already contain error information.");
+      }
+
+      _error = error;
     }
 
     /// <summary>
@@ -149,6 +179,7 @@ namespace CSF.Zpt.Rendering
 
       if(this.LocalDefinitions.ContainsKey(name))
       {
+        output = true;
         result = this.LocalDefinitions[name];
       }
       else if(this.Parent != null)

@@ -31,7 +31,19 @@ namespace Test.CSF.Zpt.Rendering
     /// <param name="expression">The expression to evaluate.</param>
     public override ExpressionResult Evaluate(string expression)
     {
-      return new ExpressionResult(false, null);
+      object result;
+      ExpressionResult output;
+
+      if(this.TryGetItem(expression, out result))
+      {
+        output = new ExpressionResult(true, result);
+      }
+      else
+      {
+        output = new ExpressionResult(false, null);
+      }
+
+      return output;
     }
 
     #endregion

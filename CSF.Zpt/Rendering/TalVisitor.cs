@@ -64,12 +64,13 @@ namespace CSF.Zpt.Rendering
       {
         output = base.VisitRecursively(element, model);
       }
-      catch(Exception)
+      catch(RenderingException ex)
       {
         output = new [] { element };
 
         if(element.GetTalAttribute(Tal.OnErrorAttribute) != null)
         {
+          model.AddError(ex);
           _errorHandler.Handle(element, model);
         }
         else
