@@ -70,6 +70,12 @@
     <Compile Include="Rendering\ModelEvaluationException.cs" />
     <Compile Include="Rendering\TalDefineAttributeHandler.cs" />
     <Compile Include="Rendering\ITalAttributeHandler.cs" />
+    <Compile Include="Rendering\TalConditionAttributeHandler.cs" />
+    <Compile Include="Rendering\TalRepeatAttributeHandler.cs" />
+    <Compile Include="Rendering\TalContentOrReplaceAttributeHandler.cs" />
+    <Compile Include="Rendering\TalAttributesAttributeHandler.cs" />
+    <Compile Include="Rendering\TalOmitTagAttributeHandler.cs" />
+    <Compile Include="Rendering\TalOnErrorAttributeHandler.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

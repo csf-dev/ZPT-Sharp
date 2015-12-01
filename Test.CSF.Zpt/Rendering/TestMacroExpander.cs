@@ -33,7 +33,7 @@ namespace Test.CSF.Zpt.Rendering
     public void TestExpand()
     {
       // Arrange
-      var model = Mock.Of<Model>();
+      var model = Mock.Of<DummyModel>();
       var attribute = Mock.Of<global::CSF.Zpt.Rendering.Attribute>();
       var original = new Mock<Element>();
       Element
@@ -64,7 +64,7 @@ namespace Test.CSF.Zpt.Rendering
     public void TestExpandNoUsage()
     {
       // Arrange
-      var model = Mock.Of<Model>();
+      var model = Mock.Of<DummyModel>();
       var original = new Mock<Element>();
       _finder.Setup(x => x.GetUsedMacro(original.Object, model)).Returns((Element) null);
 
@@ -82,7 +82,7 @@ namespace Test.CSF.Zpt.Rendering
     public void TestExpandAndReplace()
     {
       // Arrange
-      var model = Mock.Of<Model>();
+      var model = Mock.Of<DummyModel>();
       var attribute = Mock.Of<global::CSF.Zpt.Rendering.Attribute>();
       var original = new Mock<Element>();
       Element

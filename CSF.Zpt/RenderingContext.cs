@@ -45,11 +45,6 @@ namespace CSF.Zpt
     /// <summary>
     /// Initializes a new instance of the <see cref="CSF.Zpt.RenderingContext"/> class.
     /// </summary>
-    public RenderingContext() : this(new Model(), new Model()) {}
-
-    /// <summary>
-    /// Initializes a new instance of the <see cref="CSF.Zpt.RenderingContext"/> class.
-    /// </summary>
     /// <param name="metalContext">The METAL context.</param>
     /// <param name="talContext">The TAL context.</param>
     public RenderingContext(Model metalContext, Model talContext)

@@ -65,7 +65,7 @@ namespace Test.CSF.Zpt.Rendering
       var sut = new SourceAnnotationVisitor(options: options);
 
       // Act
-      sut.VisitRecursively(elements[0].Object, Mock.Of<Model>());
+      sut.VisitRecursively(elements[0].Object, new Mock<DummyModel>() { CallBase = true }.Object);
 
       // Assert
       elements[0].Verify(x => x.AddCommentBefore("One, Element 1"), Times.Once());

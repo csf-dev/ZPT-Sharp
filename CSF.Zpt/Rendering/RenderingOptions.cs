@@ -7,6 +7,12 @@ namespace CSF.Zpt.Rendering
   /// </summary>
   public class RenderingOptions
   {
+    #region fields
+
+    private static RenderingOptions _defaultOptions;
+
+    #endregion
+
     #region properties
 
     /// <summary>
@@ -27,9 +33,32 @@ namespace CSF.Zpt.Rendering
     /// Initializes a new instance of the <see cref="CSF.Zpt.Rendering.RenderingOptions"/> class.
     /// </summary>
     /// <param name="addSourceFileAnnotation">Indicates whether or not source file annotation is to be added.</param>
-    public RenderingOptions(bool addSourceFileAnnotation = false)
+    public RenderingOptions(bool addSourceFileAnnotation)
     {
       this.AddSourceFileAnnotation = addSourceFileAnnotation;
+    }
+
+    /// <summary>
+    /// Initializes the <see cref="CSF.Zpt.Rendering.RenderingOptions"/> class.
+    /// </summary>
+    static RenderingOptions()
+    {
+      _defaultOptions = new RenderingOptions(addSourceFileAnnotation: false);
+    }
+
+    #endregion
+
+    #region static properties
+
+    /// <summary>
+    /// Gets a set of <see cref="RenderingOptions"/> representing the defaults.
+    /// </summary>
+    /// <value>The default rendering options.</value>
+    public static RenderingOptions Default
+    {
+      get {
+        return _defaultOptions;
+      }
     }
 
     #endregion

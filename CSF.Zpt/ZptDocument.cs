@@ -84,7 +84,7 @@ namespace CSF.Zpt
     /// <param name="options">Options.</param>
     protected virtual RenderingOptions GetOptions(RenderingOptions options)
     {
-      return options?? new RenderingOptions();
+      return options?? RenderingOptions.Default;
     }
 
     /// <summary>

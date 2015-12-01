@@ -77,6 +77,12 @@ namespace CSF.Zpt.Rendering
     public abstract Element ReplaceWith(Element replacement);
 
     /// <summary>
+    /// Gets the element which is the parent of the current instance.
+    /// </summary>
+    /// <returns>The parent element.</returns>
+    public abstract Element GetParentElement();
+
+    /// <summary>
     /// Gets a collection of the child elements from the current source element.
     /// </summary>
     /// <returns>The children.</returns>
@@ -109,6 +115,31 @@ namespace CSF.Zpt.Rendering
     public abstract Element[] SearchChildrenByAttribute(string attributeNamespace, string prefix, string name);
 
     /// <summary>
+    /// Recursively searches upwards in the DOM tree, returning the first (closest) ancestor element which has an
+    /// attribute matching the given criteria.
+    /// </summary>
+    /// <returns>The closest ancestor element, or a <c>null</c> reference if no ancestor was found.</returns>
+    /// <param name="attributeNamespace">The attribute namespace.</param>
+    /// <param name="prefix">The attribute prefix.</param>
+    /// <param name="name">The attribute name.</param>
+    public virtual Element SearchAncestorsByAttribute(string attributeNamespace, string prefix, string name)
+    {
+      Element output = null;
+
+      var currentElement = this;
+      while(output == null && currentElement != null)
+      {
+        if(currentElement.GetAttribute(attributeNamespace, prefix, name) != null)
+        {
+          output = currentElement;
+        }
+        currentElement = currentElement.GetParentElement();
+      }
+
+      return output;
+    }
+
+    /// <summary>
     /// Recursively searches for attributes with a given namespace or prefix and removes them from their parent
     /// element.
     /// </summary>
@@ -132,6 +163,11 @@ namespace CSF.Zpt.Rendering
     /// </summary>
     /// <returns>The file location.</returns>
     public abstract string GetFileLocation();
+
+    /// <summary>
+    /// Removes the current element from the DOM.
+    /// </summary>
+    public abstract void Remove();
 
     #endregion
 

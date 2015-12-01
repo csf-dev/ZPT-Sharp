@@ -20,7 +20,7 @@ namespace Test.CSF.Zpt.Rendering
                                                                Metal.DefaultPrefix,
                                                                Metal.UseMacroAttribute) == attribute),
         referencedElement = Mock.Of<Element>();
-      var model = Mock.Of<Model>(x => x.Evaluate(It.IsAny<string>()) == new ExpressionResult(true, referencedElement));
+      var model = Mock.Of<DummyModel>(x => x.Evaluate(It.IsAny<string>()) == new ExpressionResult(true, referencedElement));
 
       var sut = new MacroFinder();
 
@@ -40,7 +40,7 @@ namespace Test.CSF.Zpt.Rendering
         originalElement = Mock.Of<Element>(x => x.GetAttribute(Metal.Namespace,
                                                                Metal.DefaultPrefix,
                                                                Metal.UseMacroAttribute) == attribute);
-      var model = Mock.Of<Model>(x => x.Evaluate(It.IsAny<string>()) == new ExpressionResult(false, null));
+      var model = Mock.Of<DummyModel>(x => x.Evaluate(It.IsAny<string>()) == new ExpressionResult(false, null));
 
       var sut = new MacroFinder();
 
@@ -59,7 +59,7 @@ namespace Test.CSF.Zpt.Rendering
         originalElement = Mock.Of<Element>(x => x.GetAttribute(Metal.Namespace,
                                                                Metal.DefaultPrefix,
                                                                Metal.UseMacroAttribute) == (global::CSF.Zpt.Rendering.Attribute) null);
-      var model = Mock.Of<Model>();
+      var model = Mock.Of<DummyModel>();
 
       var sut = new MacroFinder();
 
@@ -80,7 +80,7 @@ namespace Test.CSF.Zpt.Rendering
                                                                Metal.DefaultPrefix,
                                                                Metal.ExtendMacroAttribute) == attribute),
         referencedElement = Mock.Of<Element>();
-      var model = Mock.Of<Model>(x => x.Evaluate(It.IsAny<string>()) == new ExpressionResult(true, referencedElement));
+      var model = Mock.Of<DummyModel>(x => x.Evaluate(It.IsAny<string>()) == new ExpressionResult(true, referencedElement));
 
       var sut = new MacroFinder();
 
@@ -100,7 +100,7 @@ namespace Test.CSF.Zpt.Rendering
         originalElement = Mock.Of<Element>(x => x.GetAttribute(Metal.Namespace,
                                                                Metal.DefaultPrefix,
                                                                Metal.ExtendMacroAttribute) == attribute);
-      var model = Mock.Of<Model>(x => x.Evaluate(It.IsAny<string>()) == new ExpressionResult(false, null));
+      var model = Mock.Of<DummyModel>(x => x.Evaluate(It.IsAny<string>()) == new ExpressionResult(false, null));
 
       var sut = new MacroFinder();
 
@@ -119,7 +119,7 @@ namespace Test.CSF.Zpt.Rendering
         originalElement = Mock.Of<Element>(x => x.GetAttribute(Metal.Namespace,
                                                                Metal.DefaultPrefix,
                                                                Metal.ExtendMacroAttribute) == (global::CSF.Zpt.Rendering.Attribute) null);
-      var model = Mock.Of<Model>();
+      var model = Mock.Of<DummyModel>();
 
       var sut = new MacroFinder();
 

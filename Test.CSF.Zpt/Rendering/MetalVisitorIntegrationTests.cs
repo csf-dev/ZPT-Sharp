@@ -13,7 +13,7 @@ namespace Test.CSF.Zpt.Rendering
   {
     #region fields
 
-    private Mock<Model> _model;
+    private Mock<DummyModel> _model;
 
     private string _xmlStringOne, _xmlStringTwo;
     private System.Xml.XmlDocument _documentOne, _documentTwo;
@@ -44,7 +44,8 @@ namespace Test.CSF.Zpt.Rendering
     [SetUp]
     public void Setup()
     {
-      _model = new Mock<Model>(MockBehavior.Strict);
+      _model = new Mock<DummyModel>() { CallBase = true };
+      _model.Setup(x => x.CreateChildModel()).Returns(_model.Object);
     }
 
     #endregion

@@ -19,7 +19,7 @@ namespace CSF.Zpt.Rendering
     /// Gets the rendering options.
     /// </summary>
     /// <value>The rendering options.</value>
-    protected RenderingOptions RenderingOptions
+    protected virtual RenderingOptions RenderingOptions
     {
       get {
         return _options;
@@ -36,7 +36,7 @@ namespace CSF.Zpt.Rendering
     /// <returns>A reference to the element which has been visited.  This might be the input <paramref name="element"/> or a replacement.</returns>
     /// <param name="element">The element to visit.</param>
     /// <param name="model">The object model provided as context to the visitor.</param>
-    public abstract Element Visit(Element element, Model model);
+    public abstract Element[] Visit(Element element, Model model);
 
     /// <summary>
     /// Visits the given element, and then recursively visits all of its child elements.
@@ -44,7 +44,7 @@ namespace CSF.Zpt.Rendering
     /// <returns>A reference to the element which has been visited.  This might be the input <paramref name="element"/> or a replacement.</returns>
     /// <param name="element">The element to visit.</param>
     /// <param name="model">The object model provided as context to the visitor.</param>
-    public virtual Element VisitRecursively(Element element, Model model)
+    public virtual Element[] VisitRecursively(Element element, Model model)
     {
       if(element == null)
       {
@@ -55,15 +55,18 @@ namespace CSF.Zpt.Rendering
         throw new ArgumentNullException("model");
       }
 
-      var visited = this.Visit(element, model);
+      var output = this.Visit(element, model);
 
-      var children = visited.GetChildElements();
-      foreach(var child in children)
+      foreach(var item in output)
       {
-        this.VisitRecursively(child, model);
+        var children = item.GetChildElements();
+        foreach(var child in children)
+        {
+          this.VisitRecursively(child, model.CreateChildModel());
+        }
       }
 
-      return visited;
+      return output;
     }
 
     #endregion
@@ -76,7 +79,7 @@ namespace CSF.Zpt.Rendering
     /// <param name="options">Rendering options.</param>
     public ElementVisitor(RenderingOptions options)
     {
-      _options = options?? new RenderingOptions();
+      _options = options?? RenderingOptions.Default;
     }
 
     #endregion

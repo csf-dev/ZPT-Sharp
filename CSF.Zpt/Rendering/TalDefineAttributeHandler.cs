@@ -5,7 +5,7 @@ using System.Linq;
 namespace CSF.Zpt.Rendering
 {
   /// <summary>
-  /// Handler for a TAL <c>define</c> attribute.
+  /// Implementation of <see cref="ITalAttributeHandler"/> which handles a <c>tal:define</c> attribute.
   /// </summary>
   public class TalDefineAttributeHandler : ITalAttributeHandler
   {
@@ -27,9 +27,10 @@ namespace CSF.Zpt.Rendering
     /// <summary>
     /// Handle the related attribute types which exist upon the element, if any.
     /// </summary>
+    /// <returns>A collection of elements which are present in the DOM after this handler has completed its work.</returns>
     /// <param name="element">Element.</param>
     /// <param name="model">Model.</param>
-    public void Handle(Element element, Model model)
+    public Element[] Handle(Element element, Model model)
     {
       if(element == null)
       {
@@ -65,7 +66,7 @@ namespace CSF.Zpt.Rendering
             };
           }
 
-          if(value != Model.CancelAction)
+          if(!value.CancelsAction())
           {
             if(item.Scope == GLOBAL_SCOPE)
             {
@@ -78,6 +79,8 @@ namespace CSF.Zpt.Rendering
           }
         }
       }
+
+      return new[] { element };
     }
 
     #endregion

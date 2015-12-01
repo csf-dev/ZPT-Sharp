@@ -86,6 +86,15 @@ namespace CSF.Zpt.Rendering
     }
 
     /// <summary>
+    /// Gets the element which is the parent of the current instance.
+    /// </summary>
+    /// <returns>The parent element.</returns>
+    public override Element GetParentElement()
+    {
+      return (this.Node.ParentNode != null)? new HtmlElement(this.Node.ParentNode, this.SourceFile) : null;
+    }
+
+    /// <summary>
     /// Gets a collection of the child elements from the current source element.
     /// </summary>
     /// <returns>The children.</returns>
@@ -259,6 +268,14 @@ namespace CSF.Zpt.Rendering
     public override string GetFileLocation()
     {
       return String.Format("Line {0}", _node.Line);
+    }
+
+    /// <summary>
+    /// Removes the current element from the DOM.
+    /// </summary>
+    public override void Remove()
+    {
+      this.GetParent().RemoveChild(this.Node);
     }
 
     /// <summary>

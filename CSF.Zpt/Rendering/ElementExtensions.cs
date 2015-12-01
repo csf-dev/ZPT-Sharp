@@ -48,6 +48,44 @@ namespace CSF.Zpt.Rendering
     }
 
     /// <summary>
+    /// Recursively searches upwards in the DOM tree, returning the first (closest) ancestor element which has a METAL
+    /// attribute matching the given name.
+    /// </summary>
+    /// <returns>The closest ancestor element, or a <c>null</c> reference if no ancestor was found.</returns>
+    /// <param name="element">The element from which to begin the search.</param>
+    /// <param name="attributeName">The attribute name.</param>
+    public static Element SearchAncestorsByMetalAttribute(this Element element, string attributeName)
+    {
+      if(element == null)
+      {
+        throw new ArgumentNullException("element");
+      }
+
+      return element.SearchAncestorsByAttribute(Metal.Namespace,
+                                                Metal.DefaultPrefix,
+                                                attributeName);
+    }
+
+    /// <summary>
+    /// Recursively searches upwards in the DOM tree, returning the first (closest) ancestor element which has a TAL
+    /// attribute matching the given name.
+    /// </summary>
+    /// <returns>The closest ancestor element, or a <c>null</c> reference if no ancestor was found.</returns>
+    /// <param name="element">The element from which to begin the search.</param>
+    /// <param name="attributeName">The attribute name.</param>
+    public static Element SearchAncestorsByTalAttribute(this Element element, string attributeName)
+    {
+      if(element == null)
+      {
+        throw new ArgumentNullException("element");
+      }
+
+      return element.SearchAncestorsByAttribute(Tal.Namespace,
+                                                Tal.DefaultPrefix,
+                                                attributeName);
+    }
+
+    /// <summary>
     /// Recursively searches the children of the current instance, returning a collection of elements which have a
     /// matching METAL attribute.
     /// </summary>

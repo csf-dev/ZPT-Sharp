@@ -23,7 +23,7 @@ namespace CSF.Zpt.Rendering
     /// <returns>A reference to the element which has been visited.  This might be the input <paramref name="element"/> or a replacement.</returns>
     /// <param name="element">The element to visit.</param>
     /// <param name="model">The object model provided as context to the visitor.</param>
-    public override Element Visit(Element element, Model model)
+    public override Element[] Visit(Element element, Model model)
     {
       if(element == null)
       {
@@ -34,7 +34,7 @@ namespace CSF.Zpt.Rendering
         throw new ArgumentNullException("model");
       }
 
-      return _macroExpander.Expand(element, model);
+      return new [] { _macroExpander.Expand(element, model) };
     }
 
     /// <summary>
@@ -43,11 +43,14 @@ namespace CSF.Zpt.Rendering
     /// <returns>A reference to the element which has been visited.  This might be the input <paramref name="element"/> or a replacement.</returns>
     /// <param name="element">The element to visit.</param>
     /// <param name="model">The object model provided as context to the visitor.</param>
-    public override Element VisitRecursively(Element element, Model model)
+    public override Element[] VisitRecursively(Element element, Model model)
     {
       var output = base.VisitRecursively(element, model);
 
-      output.PurgeMetalAttributes();
+      foreach(var item in output)
+      {
+        item.PurgeMetalAttributes();
+      }
 
       return output;
     }

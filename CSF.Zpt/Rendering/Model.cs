@@ -169,11 +169,6 @@ namespace CSF.Zpt.Rendering
     #region constructor
 
     /// <summary>
-    /// Constructor exists for framework/testing use only - its use is not advised.
-    /// </summary>
-    protected Model() {}
-
-    /// <summary>
     /// Initializes a new instance of the <see cref="CSF.Zpt.Rendering.Model"/> class.
     /// </summary>
     /// <param name="parent">A reference to the parent model instance, if applicable.</param>
