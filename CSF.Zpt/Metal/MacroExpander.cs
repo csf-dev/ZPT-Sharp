@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using CSF.Zpt.Rendering;
+using CSF.Zpt.Resources;
 
 namespace CSF.Zpt.Metal
 {
@@ -60,8 +61,9 @@ namespace CSF.Zpt.Metal
       }
       if(macro.GetMetalAttribute(ZptConstants.Metal.DefineMacroAttribute) == null)
       {
-        string message = String.Format("The macro must have a '{0}' attribute present.",
-                                       ZptConstants.Metal.DefineMacroAttribute);
+        string message = String.Format(ExceptionMessages.MetalMacroMustBeDefined,
+                                       ZptConstants.Metal.DefineMacroAttribute,
+                                       ZptConstants.Metal.Namespace);
         throw new ArgumentException(message, "macro");
       }
 

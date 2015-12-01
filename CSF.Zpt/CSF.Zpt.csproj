@@ -76,6 +76,9 @@
     <Compile Include="Tal\TalRepeatAttributeHandler.cs" />
     <Compile Include="Tal\TalVisitor.cs" />
     <Compile Include="Rendering\RenderingContext.cs" />
+    <Compile Include="Resources\ExceptionMessages.Designer.cs">
+      <DependentUpon>ExceptionMessages.resx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
@@ -92,5 +95,13 @@
     <Folder Include="Tal\" />
     <Folder Include="Rendering\" />
     <Folder Include="Metal\" />
+    <Folder Include="Resources\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\ExceptionMessages.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LogicalName>ExceptionMessages.resx</LogicalName>
+      <LastGenOutput>ExceptionMessages.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
 </Project>

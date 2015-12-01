@@ -1,5 +1,6 @@
 ﻿using System;
 using CSF.Zpt.Rendering;
+using CSF.Zpt.Resources;
 
 namespace CSF.Zpt.Tal
 {
@@ -40,7 +41,9 @@ namespace CSF.Zpt.Tal
         }
         catch(Exception ex)
         {
-          string message = String.Format("An error was encountered evaluating an expression whilst processing a 'tal:condition' attribute, see the inner exception for more details.\nSource expression: {0}",
+          string message = String.Format(ExceptionMessages.ExpressionEvaluationExceptionFormat,
+                                         ZptConstants.Tal.DefaultPrefix,
+                                         ZptConstants.Tal.ConditionAttribute,
                                          attribute.Value);
           throw new ModelEvaluationException(message, ex) {
             ExpressionText = attribute.Value

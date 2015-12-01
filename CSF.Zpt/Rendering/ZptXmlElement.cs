@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using System.IO;
 using System.Text;
+using CSF.Zpt.Resources;
 
 namespace CSF.Zpt.Rendering
 {
@@ -91,8 +92,9 @@ namespace CSF.Zpt.Rendering
       var repl = replacement as ZptXmlElement;
       if(repl == null)
       {
-        throw new ArgumentException("The replacement must be a non-null instance of XmlElement.",
-                                    "replacement");
+        string message = String.Format(ExceptionMessages.ReplacementElementMustBeCorrectType,
+                                       typeof(ZptXmlElement).Name);
+        throw new ArgumentException(message, "replacement");
       }
 
       var importedNode = this.Node.OwnerDocument.ImportNode(repl.Node, true);
@@ -154,7 +156,7 @@ namespace CSF.Zpt.Rendering
       }
       else if(name.Length == 0)
       {
-        throw new ArgumentException("Name must not be an empty string.", "name");
+        throw new ArgumentException(ExceptionMessages.NameMustNotBeEmptyString, "name");
       }
 
       string query;
@@ -193,7 +195,7 @@ namespace CSF.Zpt.Rendering
       }
       else if(name.Length == 0)
       {
-        throw new ArgumentException("Name must not be an empty string.", "name");
+        throw new ArgumentException(ExceptionMessages.NameMustNotBeEmptyString, "name");
       }
 
       string query;
@@ -294,7 +296,7 @@ namespace CSF.Zpt.Rendering
       }
       else if(name.Length == 0)
       {
-        throw new ArgumentException("Name must not be an empty string.", "name");
+        throw new ArgumentException(ExceptionMessages.NameMustNotBeEmptyString, "name");
       }
 
       string output;
@@ -348,7 +350,7 @@ namespace CSF.Zpt.Rendering
 
       if(output == null)
       {
-        throw new InvalidOperationException("The current node must not be the root of the DOM.");
+        throw new InvalidOperationException(ExceptionMessages.CannotGetParentFromRootNode);
       }
 
       return output;
@@ -383,7 +385,8 @@ namespace CSF.Zpt.Rendering
       }
       else if(node.NodeType != XmlNodeType.Element)
       {
-        throw new ArgumentException("Node must be an XML 'element' node.", "node");
+        string message = String.Format(ExceptionMessages.IncorrectWrappedNodeType, "XML", "element");
+        throw new ArgumentException(message, "node");
       }
       else
       {

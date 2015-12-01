@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
 using HtmlAgilityPack;
+using CSF.Zpt.Resources;
 
 namespace CSF.Zpt.Rendering
 {
@@ -74,8 +75,9 @@ namespace CSF.Zpt.Rendering
       var repl = replacement as ZptHtmlElement;
       if(repl == null)
       {
-        throw new ArgumentException("The replacement must be a non-null instance of HtmlElement.",
-                                    "replacement");
+        string message = String.Format(ExceptionMessages.ReplacementElementMustBeCorrectType,
+                                       typeof(ZptHtmlElement).Name);
+        throw new ArgumentException(message, "replacement");
       }
 
       var parent = this.GetParent();
@@ -233,7 +235,7 @@ namespace CSF.Zpt.Rendering
       }
       else if(name.Length == 0)
       {
-        throw new ArgumentException("Name must not be an empty string.", "name");
+        throw new ArgumentException(ExceptionMessages.NameMustNotBeEmptyString, "name");
       }
 
       string output;
@@ -287,7 +289,7 @@ namespace CSF.Zpt.Rendering
 
       if(output == null)
       {
-        throw new InvalidOperationException("The current node must not be the root of the DOM.");
+        throw new InvalidOperationException(ExceptionMessages.CannotGetParentFromRootNode);
       }
 
       return output;
@@ -322,7 +324,8 @@ namespace CSF.Zpt.Rendering
       }
       else if(node.NodeType != HtmlNodeType.Element)
       {
-        throw new ArgumentException("Node must be an HTML 'element' node.", "node");
+        string message = String.Format(ExceptionMessages.IncorrectWrappedNodeType, "HTML", "element");
+        throw new ArgumentException(message, "node");
       }
       else
       {

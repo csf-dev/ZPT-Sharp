@@ -2,6 +2,7 @@
 using System.IO;
 using HtmlAgilityPack;
 using CSF.Zpt.Rendering;
+using CSF.Zpt.Resources;
 
 namespace CSF.Zpt
 {
@@ -106,7 +107,9 @@ namespace CSF.Zpt
       var htmlElement = element as ZptHtmlElement;
       if(htmlElement == null)
       {
-        throw new ArgumentException("Element must be an instance of HtmlElement.", "element");
+        string message = String.Format(ExceptionMessages.RenderedElementIncorrectType,
+                                       typeof(ZptHtmlElement).Name);
+        throw new ArgumentException(message, "element");
       }
 
       htmlElement.Node.WriteTo(writer);

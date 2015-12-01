@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using CSF.Zpt.Resources;
 
 namespace CSF.Zpt.Rendering
 {
@@ -121,7 +122,7 @@ namespace CSF.Zpt.Rendering
       }
       else if(_error != null)
       {
-        throw new InvalidOperationException("The current instance must not already contain error information.");
+        throw new InvalidOperationException(ExceptionMessages.ModelMustNotAlreadyContainAnError);
       }
 
       _error = error;

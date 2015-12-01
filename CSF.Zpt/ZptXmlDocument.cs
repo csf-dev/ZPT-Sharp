@@ -2,6 +2,7 @@
 using System.Xml;
 using System.IO;
 using CSF.Zpt.Rendering;
+using CSF.Zpt.Resources;
 
 namespace CSF.Zpt
 {
@@ -102,10 +103,12 @@ namespace CSF.Zpt
         throw new ArgumentNullException("element");
       }
 
-      var xmlElement = element as Rendering.ZptXmlElement;
+      var xmlElement = element as ZptXmlElement;
       if(xmlElement == null)
       {
-        throw new ArgumentException("Element must be an instance of XmlElement.", "element");
+        string message = String.Format(ExceptionMessages.RenderedElementIncorrectType,
+                                       typeof(ZptXmlElement).Name);
+        throw new ArgumentException(message, "element");
       }
 
       using(var xmlWriter = new XmlTextWriter(writer))
