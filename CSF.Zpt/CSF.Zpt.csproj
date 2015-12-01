@@ -47,29 +47,13 @@
     <Compile Include="ZptDocument.cs" />
     <Compile Include="ZptHtmlDocument.cs" />
     <Compile Include="ZptXmlDocument.cs" />
-    <Compile Include="RenderingContext.cs" />
     <Compile Include="Rendering\ElementVisitor.cs" />
-    <Compile Include="Rendering\MetalVisitor.cs" />
-    <Compile Include="Rendering\TalVisitor.cs" />
     <Compile Include="Rendering\ElementExtensions.cs" />
-    <Compile Include="Rendering\Metal.cs" />
-    <Compile Include="Rendering\Tal.cs" />
-    <Compile Include="Rendering\MacroExpander.cs" />
-    <Compile Include="Rendering\MacroFinder.cs" />
     <Compile Include="Rendering\SourceFileInfo.cs" />
     <Compile Include="Rendering\RenderingOptions.cs" />
-    <Compile Include="Rendering\SourceAnnotationVisitor.cs" />
     <Compile Include="Rendering\ExpressionResult.cs" />
     <Compile Include="Rendering\Model.cs" />
     <Compile Include="Rendering\ModelEvaluationException.cs" />
-    <Compile Include="Rendering\TalDefineAttributeHandler.cs" />
-    <Compile Include="Rendering\ITalAttributeHandler.cs" />
-    <Compile Include="Rendering\TalConditionAttributeHandler.cs" />
-    <Compile Include="Rendering\TalRepeatAttributeHandler.cs" />
-    <Compile Include="Rendering\TalContentOrReplaceAttributeHandler.cs" />
-    <Compile Include="Rendering\TalAttributesAttributeHandler.cs" />
-    <Compile Include="Rendering\TalOmitTagAttributeHandler.cs" />
-    <Compile Include="Rendering\TalOnErrorAttributeHandler.cs" />
     <Compile Include="Rendering\RenderingException.cs" />
     <Compile Include="Rendering\ZptAttribute.cs" />
     <Compile Include="Rendering\ZptElement.cs" />
@@ -77,6 +61,21 @@
     <Compile Include="Rendering\ZptHtmlElement.cs" />
     <Compile Include="Rendering\ZptXmlElement.cs" />
     <Compile Include="Rendering\ZptXmlAttribute.cs" />
+    <Compile Include="Metal\MacroExpander.cs" />
+    <Compile Include="Metal\MacroFinder.cs" />
+    <Compile Include="ZptConstants.cs" />
+    <Compile Include="Metal\MetalVisitor.cs" />
+    <Compile Include="Metal\SourceAnnotationVisitor.cs" />
+    <Compile Include="Tal\ITalAttributeHandler.cs" />
+    <Compile Include="Tal\TalAttributesAttributeHandler.cs" />
+    <Compile Include="Tal\TalConditionAttributeHandler.cs" />
+    <Compile Include="Tal\TalContentOrReplaceAttributeHandler.cs" />
+    <Compile Include="Tal\TalDefineAttributeHandler.cs" />
+    <Compile Include="Tal\TalOmitTagAttributeHandler.cs" />
+    <Compile Include="Tal\TalOnErrorAttributeHandler.cs" />
+    <Compile Include="Tal\TalRepeatAttributeHandler.cs" />
+    <Compile Include="Tal\TalVisitor.cs" />
+    <Compile Include="Rendering\RenderingContext.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
@@ -92,5 +91,6 @@
     <Folder Include="Tales\" />
     <Folder Include="Tal\" />
     <Folder Include="Rendering\" />
+    <Folder Include="Metal\" />
   </ItemGroup>
 </Project>

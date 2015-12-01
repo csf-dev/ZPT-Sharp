@@ -1,6 +1,7 @@
 ﻿using System;
+using CSF.Zpt.Rendering;
 
-namespace CSF.Zpt.Rendering
+namespace CSF.Zpt.Metal
 {
   /// <summary>
   /// Type which finds the usage of METAL macros.
@@ -18,7 +19,7 @@ namespace CSF.Zpt.Rendering
     /// <param name="model">The METAL model.</param>
     public virtual ZptElement GetUsedMacro(ZptElement element, Model model)
     {
-      return this.GetReferencedMacro(element, model, Metal.UseMacroAttribute);
+      return this.GetReferencedMacro(element, model, ZptConstants.Metal.UseMacroAttribute);
     }
 
     /// <summary>
@@ -30,7 +31,7 @@ namespace CSF.Zpt.Rendering
     /// <param name="model">The METAL model.</param>
     public virtual ZptElement GetExtendedMacro(ZptElement macro, Model model)
     {
-      return this.GetReferencedMacro(macro, model, Metal.ExtendMacroAttribute);
+      return this.GetReferencedMacro(macro, model, ZptConstants.Metal.ExtendMacroAttribute);
     }
 
     /// <summary>

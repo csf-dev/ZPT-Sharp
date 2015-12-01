@@ -1,12 +1,12 @@
 ﻿using System;
+using CSF.Zpt.Rendering;
 
-namespace CSF.Zpt.Rendering
+namespace CSF.Zpt.Tal
 {
   /// <summary>
-  /// Implementation of <see cref="ITalAttributeHandler"/> which handles either a <c>tal:content</c> or
-  /// <c>tal:replace</c> attribute.
+  /// Implementation of <see cref="ITalAttributeHandler"/> which handles a <c>tal:attributes</c> attribute.
   /// </summary>
-  public class TalContentOrReplaceAttributeHandler : ITalAttributeHandler
+  public class TalAttributesAttributeHandler : ITalAttributeHandler
   {
     #region methods
 

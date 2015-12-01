@@ -1,7 +1,7 @@
 ﻿using System;
 using CSF.Zpt.Rendering;
 
-namespace CSF.Zpt
+namespace CSF.Zpt.Rendering
 {
   /// <summary>
   /// Represents the object model, presented to a <see cref="ZptDocument"/> when it is rendered.
@@ -17,10 +17,10 @@ namespace CSF.Zpt
     #region properties
 
     /// <summary>
-    /// Gets the rendering context available to the METAL environment.
+    /// Gets the object model available to the METAL environment.
     /// </summary>
-    /// <value>The METAL context.</value>
-    public virtual Model MetalContext
+    /// <value>The METAL model.</value>
+    public virtual Model MetalModel
     {
       get {
         return _metalContext;
@@ -28,10 +28,10 @@ namespace CSF.Zpt
     }
 
     /// <summary>
-    /// Gets the rendering context available to the TAL environment.
+    /// Gets the object model available to the TAL environment.
     /// </summary>
-    /// <value>The TAL context.</value>
-    public virtual Model TalContext
+    /// <value>The TAL model.</value>
+    public virtual Model TalModel
     {
       get {
         return _talContext;
@@ -40,10 +40,23 @@ namespace CSF.Zpt
 
     #endregion
 
+    #region methods
+
+    /// <summary>
+    /// Creates and returns a new child rendering context.
+    /// </summary>
+    /// <returns>The child context.</returns>
+    public virtual RenderingContext CreateChildContext()
+    {
+      return new RenderingContext(this.MetalModel.CreateChildModel(), this.TalModel.CreateChildModel());
+    }
+
+    #endregion
+
     #region constructors
 
     /// <summary>
-    /// Initializes a new instance of the <see cref="CSF.Zpt.RenderingContext"/> class.
+    /// Initializes a new instance of the <see cref="CSF.Zpt.Rendering.RenderingContext"/> class.
     /// </summary>
     /// <param name="metalContext">The METAL context.</param>
     /// <param name="talContext">The TAL context.</param>

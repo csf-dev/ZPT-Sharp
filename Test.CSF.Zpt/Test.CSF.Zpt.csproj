@@ -56,25 +56,31 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Rendering\" />
+    <Folder Include="Metal\" />
+    <Folder Include="Tal\" />
+    <Folder Include="Util\" />
+    <Folder Include="Util\Autofixture\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Rendering\TestHtmlElement.cs" />
     <Compile Include="GlobalSetupFixture.cs" />
-    <Compile Include="Rendering\TestMacroFinder.cs" />
-    <Compile Include="Rendering\TestMacroExpander.cs" />
     <Compile Include="Rendering\TestXmlElement.cs" />
-    <Compile Include="Rendering\MetalVisitorIntegrationTests.cs" />
-    <Compile Include="Rendering\TestSourceAnnotationVisitor.cs" />
     <Compile Include="Rendering\TestElementVisitor.cs" />
-    <Compile Include="Rendering\DummyModel.cs" />
     <Compile Include="Rendering\TestModel.cs" />
-    <Compile Include="Rendering\TestTalVisitor.cs" />
+    <Compile Include="Metal\MetalVisitorIntegrationTests.cs" />
+    <Compile Include="Metal\TestMacroExpander.cs" />
+    <Compile Include="Metal\TestMacroFinder.cs" />
+    <Compile Include="Metal\TestSourceAnnotationVisitor.cs" />
+    <Compile Include="Tal\TestTalVisitor.cs" />
+    <Compile Include="Util\Autofixture\RenderingContextCustomisation.cs" />
+    <Compile Include="Util\DummyModel.cs" />
+    <Compile Include="Util\Autofixture\DummyModelCustomisation.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Rendering\TestHtmlElement.html" />
     <EmbeddedResource Include="Rendering\TestXmlElement.xml" />
-    <EmbeddedResource Include="Rendering\MetalVisitorIntegrationTests.1.xml" />
-    <EmbeddedResource Include="Rendering\MetalVisitorIntegrationTests.2.xml" />
+    <EmbeddedResource Include="Metal\MetalVisitorIntegrationTests.1.xml" />
+    <EmbeddedResource Include="Metal\MetalVisitorIntegrationTests.2.xml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CSF\CSF\CSF.csproj">

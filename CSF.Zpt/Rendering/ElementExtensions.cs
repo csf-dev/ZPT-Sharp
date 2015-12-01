@@ -23,8 +23,8 @@ namespace CSF.Zpt.Rendering
         throw new ArgumentNullException("element");
       }
 
-      return element.GetAttribute(Metal.Namespace,
-                                  Metal.DefaultPrefix,
+      return element.GetAttribute(ZptConstants.Metal.Namespace,
+                                  ZptConstants.Metal.DefaultPrefix,
                                   attributeName);
     }
 
@@ -42,8 +42,8 @@ namespace CSF.Zpt.Rendering
         throw new ArgumentNullException("element");
       }
 
-      return element.SearchAncestorsByAttribute(Metal.Namespace,
-                                                Metal.DefaultPrefix,
+      return element.SearchAncestorsByAttribute(ZptConstants.Metal.Namespace,
+                                                ZptConstants.Metal.DefaultPrefix,
                                                 attributeName);
     }
 
@@ -61,8 +61,8 @@ namespace CSF.Zpt.Rendering
         throw new ArgumentNullException("element");
       }
 
-      return element.SearchChildrenByAttribute(Metal.Namespace,
-                                               Metal.DefaultPrefix,
+      return element.SearchChildrenByAttribute(ZptConstants.Metal.Namespace,
+                                               ZptConstants.Metal.DefaultPrefix,
                                                attributeName);
     }
 
@@ -77,7 +77,7 @@ namespace CSF.Zpt.Rendering
         throw new ArgumentNullException("element");
       }
 
-      element.PurgeAttributes(Metal.Namespace, Metal.DefaultPrefix);
+      element.PurgeAttributes(ZptConstants.Metal.Namespace, ZptConstants.Metal.DefaultPrefix);
     }
 
     #endregion
@@ -98,8 +98,8 @@ namespace CSF.Zpt.Rendering
         throw new ArgumentNullException("element");
       }
 
-      return element.GetAttribute(Tal.Namespace,
-                                  Tal.DefaultPrefix,
+      return element.GetAttribute(ZptConstants.Tal.Namespace,
+                                  ZptConstants.Tal.DefaultPrefix,
                                   attributeName);
     }
 
@@ -117,8 +117,8 @@ namespace CSF.Zpt.Rendering
         throw new ArgumentNullException("element");
       }
 
-      return element.SearchAncestorsByAttribute(Tal.Namespace,
-                                                Tal.DefaultPrefix,
+      return element.SearchAncestorsByAttribute(ZptConstants.Tal.Namespace,
+                                                ZptConstants.Tal.DefaultPrefix,
                                                 attributeName);
     }
 
@@ -136,8 +136,8 @@ namespace CSF.Zpt.Rendering
         throw new ArgumentNullException("element");
       }
 
-      return element.SearchChildrenByAttribute(Tal.Namespace,
-                                               Tal.DefaultPrefix,
+      return element.SearchChildrenByAttribute(ZptConstants.Tal.Namespace,
+                                               ZptConstants.Tal.DefaultPrefix,
                                                attributeName);
     }
 
@@ -152,7 +152,7 @@ namespace CSF.Zpt.Rendering
         throw new ArgumentNullException("element");
       }
 
-      element.PurgeAttributes(Tal.Namespace, Tal.DefaultPrefix);
+      element.PurgeAttributes(ZptConstants.Tal.Namespace, ZptConstants.Tal.DefaultPrefix);
     }
 
     #endregion

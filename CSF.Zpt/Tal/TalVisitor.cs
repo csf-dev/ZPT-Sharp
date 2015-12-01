@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Linq;
+using CSF.Zpt.Rendering;
 
-namespace CSF.Zpt.Rendering
+namespace CSF.Zpt.Tal
 {
   /// <summary>
   /// Visitor type which is used to work upon an <see cref="ZptElement"/> and perform TAL-related functionality.
@@ -22,16 +23,19 @@ namespace CSF.Zpt.Rendering
     /// </summary>
     /// <returns>A reference to the element which has been visited.  This might be the input <paramref name="element"/> or a replacement.</returns>
     /// <param name="element">The element to visit.</param>
-    /// <param name="model">The object model provided as context to the visitor.</param>
-    public override ZptElement[] Visit(ZptElement element, Model model)
+    /// <param name="context">The rendering context provided to the visitor.</param>
+    /// <param name="options">The rendering options to use.</param>
+    public override ZptElement[] Visit(ZptElement element,
+                                       RenderingContext context,
+                                       RenderingOptions options)
     {
       if(element == null)
       {
         throw new ArgumentNullException("element");
       }
-      if(model == null)
+      if(context == null)
       {
-        throw new ArgumentNullException("model");
+        throw new ArgumentNullException("context");
       }
 
 
@@ -40,7 +44,7 @@ namespace CSF.Zpt.Rendering
       foreach(var handler in _handlers)
       {
         var elementsAfterProcessing = (from ele in output
-                                       from handled in handler.Handle(ele, model)
+                                       from handled in handler.Handle(ele, context.TalModel)
                                        select handled)
           .ToArray();
 
@@ -54,24 +58,27 @@ namespace CSF.Zpt.Rendering
     /// Visits the given element, and then recursively visits all of its child elements.
     /// </summary>
     /// <returns>The recursively.</returns>
-    /// <param name="element">Element.</param>
-    /// <param name="model">Model.</param>
-    public override ZptElement[] VisitRecursively(ZptElement element, Model model)
+    /// <param name="element">The element to visit.</param>
+    /// <param name="context">The rendering context provided to the visitor.</param>
+    /// <param name="options">The rendering options to use.</param>
+    public override ZptElement[] VisitRecursively(ZptElement element,
+                                                  RenderingContext context,
+                                                  RenderingOptions options)
     {
       ZptElement[] output;
 
       try
       {
-        output = base.VisitRecursively(element, model);
+        output = base.VisitRecursively(element, context, options);
       }
       catch(RenderingException ex)
       {
         output = new [] { element };
 
-        if(element.GetTalAttribute(Tal.OnErrorAttribute) != null)
+        if(element.GetTalAttribute(ZptConstants.Tal.OnErrorAttribute) != null)
         {
-          model.AddError(ex);
-          _errorHandler.Handle(element, model);
+          context.TalModel.AddError(ex);
+          _errorHandler.Handle(element, context.TalModel);
         }
         else
         {
@@ -92,14 +99,12 @@ namespace CSF.Zpt.Rendering
     #region constructor
 
     /// <summary>
-    /// Initializes a new instance of the <see cref="CSF.Zpt.Rendering.TalVisitor"/> class.
+    /// Initializes a new instance of the <see cref="CSF.Zpt.Tal.TalVisitor"/> class.
     /// </summary>
-    /// <param name="options">Rendering options.</param>
     /// <param name="handlers">A collection of <see cref="ITalAttributeHandler"/> to process.</param>
     /// <param name="errorHandler">An <see cref="ITalAttributeHandler"/> which should be used to handle any errors.</param>
-    public TalVisitor(RenderingOptions options = null,
-                      ITalAttributeHandler[] handlers = null,
-                      ITalAttributeHandler errorHandler = null) : base(options: options)
+    public TalVisitor(ITalAttributeHandler[] handlers = null,
+                      ITalAttributeHandler errorHandler = null)
     {
       _handlers = handlers?? new ITalAttributeHandler[] {
         new TalDefineAttributeHandler(),

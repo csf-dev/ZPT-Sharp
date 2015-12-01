@@ -3,6 +3,8 @@ using NUnit.Framework;
 using CSF.Zpt.Rendering;
 using System.Linq;
 using Ploeh.AutoFixture;
+using Test.CSF.Zpt.Util.Autofixture;
+using Test.CSF.Zpt.Util;
 
 namespace Test.CSF.Zpt.Rendering
 {
@@ -18,11 +20,12 @@ namespace Test.CSF.Zpt.Rendering
     {
       // Arrange
       var fixture = new Fixture();
+      new DummyModelCustomisation().Customize(fixture);
 
       var models = new Model[levelsOfNesting + 1];
       for(int i = 0; i < models.Length; i++)
       {
-        models[i] = (i == 0)? new DummyModel(null, null) : models[i - 1].CreateChildModel();
+        models[i] = (i == 0)? fixture.Create<DummyModel>() : models[i - 1].CreateChildModel();
       }
 
       var obj = fixture.Create<object>();
@@ -45,11 +48,12 @@ namespace Test.CSF.Zpt.Rendering
     {
       // Arrange
       var fixture = new Fixture();
+      new DummyModelCustomisation().Customize(fixture);
 
       var models = new Model[levelsOfNesting + 1];
       for(int i = 0; i < models.Length; i++)
       {
-        models[i] = (i == 0)? new DummyModel(null, null) : models[i - 1].CreateChildModel();
+        models[i] = (i == 0)? fixture.Create<DummyModel>() : models[i - 1].CreateChildModel();
       }
 
       var obj = fixture.Create<object>();
@@ -73,11 +77,12 @@ namespace Test.CSF.Zpt.Rendering
     {
       // Arrange
       var fixture = new Fixture();
+      new DummyModelCustomisation().Customize(fixture);
 
       var models = new Model[levelsOfNesting + 1];
       for(int i = 0; i < models.Length; i++)
       {
-        models[i] = (i == 0)? new DummyModel(null, null) : models[i - 1].CreateChildModel();
+        models[i] = (i == 0)? fixture.Create<DummyModel>() : models[i - 1].CreateChildModel();
       }
 
       var obj = fixture.Create<object>();

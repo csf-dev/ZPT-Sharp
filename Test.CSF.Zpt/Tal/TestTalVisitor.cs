@@ -1,10 +1,15 @@
 ﻿using System;
+using Test.CSF.Zpt.Rendering;
 using CSF.Zpt.Rendering;
 using NUnit.Framework;
 using Moq;
 using System.Linq;
+using CSF.Zpt.Tal;
+using CSF.Zpt;
+using Ploeh.AutoFixture;
+using Test.CSF.Zpt.Util.Autofixture;
 
-namespace Test.CSF.Zpt.Rendering
+namespace Test.CSF.Zpt.Tal
 {
   [TestFixture]
   public class TestTalVisitor
@@ -16,6 +21,9 @@ namespace Test.CSF.Zpt.Rendering
     public void TestVisit()
     {
       // Arrange
+      var fixture = new Fixture();
+      new RenderingContextCustomisation().Customize(fixture);
+
       var elements = Enumerable.Range(0,7).Select(x => new Mock<ZptElement>()).ToArray();
       var topElement = elements[0].Object;
       var secondElements  = elements.Skip(1).Take(2).ToArray();
@@ -40,7 +48,7 @@ namespace Test.CSF.Zpt.Rendering
                                errorHandler: Mock.Of<ITalAttributeHandler>());
 
       // Act
-      var result = sut.Visit(topElement, Mock.Of<DummyModel>());
+      var result = sut.Visit(topElement, fixture.Create<RenderingContext>(), fixture.Create<RenderingOptions>());
 
       // Assert
       Assert.NotNull(result, "Result nullability");
@@ -56,6 +64,9 @@ namespace Test.CSF.Zpt.Rendering
     public void TestVisitRecursivelyWithError(int nestingLevel)
     {
       // Arrange
+      var fixture = new Fixture();
+      new RenderingContextCustomisation().Customize(fixture);
+
       var elements = Enumerable
         .Range(0, nestingLevel + 1)
         .Select(x => new Mock<ZptElement>())
@@ -65,7 +76,7 @@ namespace Test.CSF.Zpt.Rendering
         elements[i].Setup(x => x.GetChildElements()).Returns(new [] { elements[i + 1].Object });
       }
       elements[0]
-        .Setup(x => x.GetAttribute(Tal.Namespace, Tal.DefaultPrefix, Tal.OnErrorAttribute))
+        .Setup(x => x.GetAttribute(ZptConstants.Tal.Namespace, ZptConstants.Tal.DefaultPrefix, ZptConstants.Tal.OnErrorAttribute))
         .Returns(Mock.Of<global::CSF.Zpt.Rendering.ZptAttribute>());
 
       var generalHandler = new Mock<ITalAttributeHandler>();
@@ -89,7 +100,7 @@ namespace Test.CSF.Zpt.Rendering
                                errorHandler: errorHandler.Object);
 
       // Act
-      sut.VisitRecursively(elements[0].Object, new Mock<DummyModel>() { CallBase = true }.Object);
+      sut.VisitRecursively(elements[0].Object, fixture.Create<RenderingContext>(), fixture.Create<RenderingOptions>());
 
       // Assert
       errorHandler .Verify(x => x.Handle(elements[0].Object, It.IsAny<Model>()), Times.Once());

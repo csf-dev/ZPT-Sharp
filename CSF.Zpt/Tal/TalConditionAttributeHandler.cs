@@ -1,6 +1,7 @@
 ﻿using System;
+using CSF.Zpt.Rendering;
 
-namespace CSF.Zpt.Rendering
+namespace CSF.Zpt.Tal
 {
   /// <summary>
   /// Implementation of <see cref="ITalAttributeHandler"/> which handles a <c>tal:condition</c> attribute.
@@ -28,7 +29,7 @@ namespace CSF.Zpt.Rendering
 
       ZptElement[] output = new [] { element };
 
-      var attribute = element.GetTalAttribute(Tal.ConditionAttribute);
+      var attribute = element.GetTalAttribute(ZptConstants.Tal.ConditionAttribute);
       if(attribute != null)
       {
         var value = model.Evaluate(attribute.Value);

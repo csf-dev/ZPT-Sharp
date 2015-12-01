@@ -1,11 +1,12 @@
 ﻿using System;
+using CSF.Zpt.Rendering;
 
-namespace CSF.Zpt.Rendering
+namespace CSF.Zpt.Tal
 {
   /// <summary>
-  /// Implementation of <see cref="ITalAttributeHandler"/> which handles a <c>tal:omit-tag</c> attribute.
+  /// Implementation of <see cref="ITalAttributeHandler"/> which handles a <c>tal:on-error</c> attribute.
   /// </summary>
-  public class TalOmitTagAttributeHandler : ITalAttributeHandler
+  public class TalOnErrorAttributeHandler : ITalAttributeHandler
   {
     #region methods
 

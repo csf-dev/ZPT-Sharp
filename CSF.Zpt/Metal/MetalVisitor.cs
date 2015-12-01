@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Linq;
 using System.Collections.Generic;
+using CSF.Zpt.Rendering;
 
-namespace CSF.Zpt.Rendering
+namespace CSF.Zpt.Metal
 {
   /// <summary>
   /// Visitor type which is used to work upon an <see cref="ZptElement"/> and perform METAL-related functionality.
@@ -22,19 +23,22 @@ namespace CSF.Zpt.Rendering
     /// </summary>
     /// <returns>A reference to the element which has been visited.  This might be the input <paramref name="element"/> or a replacement.</returns>
     /// <param name="element">The element to visit.</param>
-    /// <param name="model">The object model provided as context to the visitor.</param>
-    public override ZptElement[] Visit(ZptElement element, Model model)
+    /// <param name="context">The rendering context provided to the visitor.</param>
+    /// <param name="options">The rendering options to use.</param>
+    public override ZptElement[] Visit(ZptElement element,
+                                       RenderingContext context,
+                                       RenderingOptions options)
     {
       if(element == null)
       {
         throw new ArgumentNullException("element");
       }
-      if(model == null)
+      if(context == null)
       {
-        throw new ArgumentNullException("model");
+        throw new ArgumentNullException("context");
       }
 
-      return new [] { _macroExpander.Expand(element, model) };
+      return new [] { _macroExpander.Expand(element, context.MetalModel) };
     }
 
     /// <summary>
@@ -42,10 +46,13 @@ namespace CSF.Zpt.Rendering
     /// </summary>
     /// <returns>A reference to the element which has been visited.  This might be the input <paramref name="element"/> or a replacement.</returns>
     /// <param name="element">The element to visit.</param>
-    /// <param name="model">The object model provided as context to the visitor.</param>
-    public override ZptElement[] VisitRecursively(ZptElement element, Model model)
+    /// <param name="context">The rendering context provided to the visitor.</param>
+    /// <param name="options">The rendering options to use.</param>
+    public override ZptElement[] VisitRecursively(ZptElement element,
+                                                  RenderingContext context,
+                                                  RenderingOptions options)
     {
-      var output = base.VisitRecursively(element, model);
+      var output = base.VisitRecursively(element, context, options);
 
       foreach(var item in output)
       {
@@ -60,12 +67,10 @@ namespace CSF.Zpt.Rendering
     #region constructor
 
     /// <summary>
-    /// Initializes a new instance of the <see cref="CSF.Zpt.Rendering.MetalVisitor"/> class.
+    /// Initializes a new instance of the <see cref="CSF.Zpt.Metal.MetalVisitor"/> class.
     /// </summary>
     /// <param name="expander">The macro expander to use.</param>
-    /// <param name="options">The rendering options.</param>
-    public MetalVisitor(MacroExpander expander = null,
-                        RenderingOptions options = null) : base(options: options)
+    public MetalVisitor(MacroExpander expander = null)
     {
       _macroExpander = expander?? new MacroExpander();
     }

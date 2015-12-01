@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using CSF.Zpt.Rendering;
 
-namespace CSF.Zpt.Rendering
+namespace CSF.Zpt.Metal
 {
   /// <summary>
   /// Expands a METAL macro and splices it into its source document.
@@ -57,10 +58,10 @@ namespace CSF.Zpt.Rendering
       {
         throw new ArgumentNullException("macro");
       }
-      if(macro.GetMetalAttribute(Metal.DefineMacroAttribute) == null)
+      if(macro.GetMetalAttribute(ZptConstants.Metal.DefineMacroAttribute) == null)
       {
         string message = String.Format("The macro must have a '{0}' attribute present.",
-                                       Metal.DefineMacroAttribute);
+                                       ZptConstants.Metal.DefineMacroAttribute);
         throw new ArgumentException(message, "macro");
       }
 
@@ -87,8 +88,8 @@ namespace CSF.Zpt.Rendering
         throw new ArgumentNullException("macro");
       }
 
-      var slotsToHandle = (from defineSlot in this.GetElementsByValue(macro, Metal.DefineSlotAttribute)
-                           join fillSlot in this.GetElementsByValue(sourceElement, Metal.FillSlotAttribute)
+      var slotsToHandle = (from defineSlot in this.GetElementsByValue(macro, ZptConstants.Metal.DefineSlotAttribute)
+                           join fillSlot in this.GetElementsByValue(sourceElement, ZptConstants.Metal.FillSlotAttribute)
                            on defineSlot.Key equals fillSlot.Key
                            select new { Slot = defineSlot.Value, Filler = fillSlot.Value });
 
@@ -142,7 +143,7 @@ namespace CSF.Zpt.Rendering
     #region constructor
 
     /// <summary>
-    /// Initializes a new instance of the <see cref="CSF.Zpt.Rendering.MacroExpander"/> class.
+    /// Initializes a new instance of the <see cref="CSF.Zpt.Metal.MacroExpander"/> class.
     /// </summary>
     /// <param name="finder">A macro finder instance, or a null reference (in which case one will be constructed).</param>
     public MacroExpander(MacroFinder finder = null)

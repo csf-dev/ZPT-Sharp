@@ -1,10 +1,14 @@
 ﻿using System;
 using NUnit.Framework;
 using CSF.Zpt.Rendering;
+using Test.CSF.Zpt.Rendering;
 using Moq;
 using System.Linq;
+using CSF.Zpt.Metal;
+using Ploeh.AutoFixture;
+using Test.CSF.Zpt.Util.Autofixture;
 
-namespace Test.CSF.Zpt.Rendering
+namespace Test.CSF.Zpt.Metal
 {
   [TestFixture]
   public class TestSourceAnnotationVisitor
@@ -15,6 +19,9 @@ namespace Test.CSF.Zpt.Rendering
     public void TestVisitRecursively()
     {
       // Arrange
+      var fixture = new Fixture();
+      new RenderingContextCustomisation().Customize(fixture);
+
       var repo = new MockRepository(MockBehavior.Strict);
       repo.CallBase = true;
 
@@ -53,10 +60,10 @@ namespace Test.CSF.Zpt.Rendering
       }
 
       var options = new RenderingOptions(addSourceFileAnnotation: true);
-      var sut = new SourceAnnotationVisitor(options: options);
+      var sut = new SourceAnnotationVisitor();
 
       // Act
-      sut.VisitRecursively(elements[0].Object, new Mock<DummyModel>() { CallBase = true }.Object);
+      sut.VisitRecursively(elements[0].Object, fixture.Create<RenderingContext>(), options);
 
       // Assert
       elements[0].Verify(x => x.AddCommentBefore("One, Element 1"), Times.Once());

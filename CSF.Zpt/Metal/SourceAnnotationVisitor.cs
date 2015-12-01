@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Linq;
+using CSF.Zpt.Rendering;
 
-namespace CSF.Zpt.Rendering
+namespace CSF.Zpt.Metal
 {
   /// <summary>
   /// Element visitor which adds source file annotation.
@@ -13,20 +14,23 @@ namespace CSF.Zpt.Rendering
     /// <summary>
     /// Visit the given element and perform modifications as required.
     /// </summary>
-    /// <param name="element">Element.</param>
-    /// <param name="model">Model.</param>
-    public override ZptElement[] Visit(ZptElement element, Model model)
+    /// <param name="element">The element to visit.</param>
+    /// <param name="context">The rendering context provided to the visitor.</param>
+    /// <param name="options">The rendering options to use.</param>
+    public override ZptElement[] Visit(ZptElement element,
+                                       RenderingContext context,
+                                       RenderingOptions options)
     {
       if(element == null)
       {
         throw new ArgumentNullException("element");
       }
-      if(model == null)
+      if(context == null)
       {
-        throw new ArgumentNullException("model");
+        throw new ArgumentNullException("context");
       }
 
-      if(this.RenderingOptions.AddSourceFileAnnotation)
+      if(options.AddSourceFileAnnotation)
       {
         if(element.IsRoot)
         {
@@ -57,10 +61,13 @@ namespace CSF.Zpt.Rendering
     /// </remarks>
     /// <returns>A reference to the element which has been visited.  This might be the input <paramref name="element"/> or a replacement.</returns>
     /// <param name="element">The element to visit.</param>
-    /// <param name="model">The object model provided as context to the visitor.</param>
-    public override ZptElement[] VisitRecursively(ZptElement element, Model model)
+    /// <param name="context">The rendering context provided to the visitor.</param>
+    /// <param name="options">The rendering options to use.</param>
+    public override ZptElement[] VisitRecursively(ZptElement element,
+                                                  RenderingContext context,
+                                                  RenderingOptions options)
     {
-      return this.RenderingOptions.AddSourceFileAnnotation? base.VisitRecursively(element, model) : new [] { element };
+      return options.AddSourceFileAnnotation? base.VisitRecursively(element, context, options) : new [] { element };
     }
 
     #endregion
@@ -89,16 +96,6 @@ namespace CSF.Zpt.Rendering
 
       element.AddCommentBefore(commentText);
     }
-
-    #endregion
-
-    #region constructor
-
-    /// <summary>
-    /// Initializes a new instance of the <see cref="CSF.Zpt.Rendering.SourceAnnotationVisitor"/> class.
-    /// </summary>
-    /// <param name="options">Options.</param>
-    public SourceAnnotationVisitor(RenderingOptions options = null) : base(options) {}
 
     #endregion
   }

@@ -10,6 +10,12 @@ namespace CSF.Zpt
   /// </summary>
   public abstract class ZptDocument
   {
+    #region fields
+
+    private ElementVisitor[] _visitors;
+
+    #endregion
+
     #region methods
 
     /// <summary>
@@ -70,9 +76,10 @@ namespace CSF.Zpt
       var output = this.GetRootElement().Clone();
       var opts = this.GetOptions(options);
 
-      new MetalVisitor(options: opts).VisitRecursively(output, context.MetalContext);
-      new SourceAnnotationVisitor(options: opts).VisitRecursively(output, context.MetalContext);
-      new TalVisitor(options: opts).VisitRecursively(output, context.TalContext);
+      foreach(var visitor in _visitors)
+      {
+        visitor.VisitRecursively(output, context, opts);
+      }
 
       return output;
     }
@@ -102,6 +109,23 @@ namespace CSF.Zpt
     /// </summary>
     /// <returns>The rendering model.</returns>
     protected abstract ZptElement GetRootElement();
+
+    #endregion
+
+    #region constructor
+
+    /// <summary>
+    /// Initializes a new instance of the <see cref="CSF.Zpt.ZptDocument"/> class.
+    /// </summary>
+    /// <param name="visitors">A collection of the visitor types to use.</param>
+    public ZptDocument(ElementVisitor[] visitors)
+    {
+      _visitors = visitors?? new ElementVisitor[] {
+        new CSF.Zpt.Metal.MetalVisitor(),
+        new CSF.Zpt.Metal.SourceAnnotationVisitor(),
+        new CSF.Zpt.Tal.TalVisitor(),
+      };
+    }
 
     #endregion
   }

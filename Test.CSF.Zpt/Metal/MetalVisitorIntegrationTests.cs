@@ -1,11 +1,16 @@
 ﻿using System;
 using NUnit.Framework;
 using CSF.Zpt.Rendering;
+using Test.CSF.Zpt.Rendering;
 using Moq;
 using System.Reflection;
 using CSF.Reflection;
+using Test.CSF.Zpt.Util;
+using CSF.Zpt.Metal;
+using Ploeh.AutoFixture;
+using Test.CSF.Zpt.Util.Autofixture;
 
-namespace Test.CSF.Zpt.Rendering
+namespace Test.CSF.Zpt.Metal
 {
   [TestFixture]
   [Category("Integration")]
@@ -13,7 +18,8 @@ namespace Test.CSF.Zpt.Rendering
   {
     #region fields
 
-    private Mock<DummyModel> _model;
+    private IFixture _fixture;
+    private DummyModel _model;
 
     private string _xmlStringOne, _xmlStringTwo;
     private System.Xml.XmlDocument _documentOne, _documentTwo;
@@ -44,8 +50,11 @@ namespace Test.CSF.Zpt.Rendering
     [SetUp]
     public void Setup()
     {
-      _model = new Mock<DummyModel>() { CallBase = true };
-      _model.Setup(x => x.CreateChildModel()).Returns(_model.Object);
+      _fixture = new Fixture();
+      new DummyModelCustomisation().Customize(_fixture);
+
+      _model = _fixture.Create<DummyModel>();
+      Mock.Get(_model).Setup(x => x.CreateChildModel()).Returns(_model);
     }
 
     #endregion
@@ -62,14 +71,16 @@ namespace Test.CSF.Zpt.Rendering
       var macroTwo = new ZptXmlElement(_documentTwo.DocumentElement.ChildNodes[1], sourceFile);
       var macroBase = new ZptXmlElement(_documentTwo.DocumentElement.ChildNodes[2], sourceFile);
 
-      _model.Setup(x => x.Evaluate("macro-one")).Returns(new ExpressionResult(true, macroOne));
-      _model.Setup(x => x.Evaluate("macro-two")).Returns(new ExpressionResult(true, macroTwo));
-      _model.Setup(x => x.Evaluate("macro-base")).Returns(new ExpressionResult(true, macroBase));
+      _model.AddLocal("macro-one", macroOne);
+      _model.AddLocal("macro-two", macroTwo);
+      _model.AddLocal("macro-base", macroBase);
 
       var sut = new MetalVisitor();
 
       // Act
-      sut.VisitRecursively(document, _model.Object);
+      sut.VisitRecursively(document,
+                           new RenderingContext(_model, _fixture.Create<DummyModel>()),
+                           _fixture.Create<RenderingOptions>());
       var result = document.ToString();
 
       // Assert

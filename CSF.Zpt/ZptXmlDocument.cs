@@ -132,7 +132,10 @@ namespace CSF.Zpt
     /// </summary>
     /// <param name="document">An XML document from which to create the current instance.</param>
     /// <param name="sourceFile">Information about the document's source file.</param>
-    public ZptXmlDocument(XmlDocument document, SourceFileInfo sourceFile)
+    /// <param name="visitors">A collection of the visitor types to use.</param>
+    public ZptXmlDocument(XmlDocument document,
+                          SourceFileInfo sourceFile,
+                          ElementVisitor[] visitors = null) : base(visitors)
     {
       if(document == null)
       {

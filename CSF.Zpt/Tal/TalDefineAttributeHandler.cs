@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Text.RegularExpressions;
 using System.Linq;
+using CSF.Zpt.Rendering;
 
-namespace CSF.Zpt.Rendering
+namespace CSF.Zpt.Tal
 {
   /// <summary>
   /// Implementation of <see cref="ITalAttributeHandler"/> which handles a <c>tal:define</c> attribute.
@@ -41,7 +42,7 @@ namespace CSF.Zpt.Rendering
         throw new ArgumentNullException("model");
       }
 
-      var attrib = element.GetTalAttribute(Tal.DefineAttribute);
+      var attrib = element.GetTalAttribute(ZptConstants.Tal.DefineAttribute);
 
       if(attrib != null)
       {

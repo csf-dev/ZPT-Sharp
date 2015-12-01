@@ -1,11 +1,12 @@
 ﻿using System;
+using CSF.Zpt.Rendering;
 
-namespace CSF.Zpt.Rendering
+namespace CSF.Zpt.Tal
 {
   /// <summary>
-  /// Implementation of <see cref="ITalAttributeHandler"/> which handles a <c>tal:attributes</c> attribute.
+  /// Implementation of <see cref="ITalAttributeHandler"/> which handles a <c>tal:repeat</c> attribute.
   /// </summary>
-  public class TalAttributesAttributeHandler : ITalAttributeHandler
+  public class TalRepeatAttributeHandler : ITalAttributeHandler
   {
     #region methods
 

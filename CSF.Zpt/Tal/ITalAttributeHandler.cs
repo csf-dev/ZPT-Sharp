@@ -1,6 +1,7 @@
 ﻿using System;
+using CSF.Zpt.Rendering;
 
-namespace CSF.Zpt.Rendering
+namespace CSF.Zpt.Tal
 {
   /// <summary>
   /// Interface for a type which handles a type of TAL attribute upon an element.

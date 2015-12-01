@@ -1,7 +1,7 @@
 ﻿using System;
 using CSF.Zpt.Rendering;
 
-namespace Test.CSF.Zpt.Rendering
+namespace Test.CSF.Zpt.Util
 {
   /// <summary>
   /// Dummy implementation of <see cref="Model"/> which cannot evaluate anything.
