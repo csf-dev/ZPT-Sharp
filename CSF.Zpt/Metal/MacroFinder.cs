@@ -58,8 +58,17 @@ namespace CSF.Zpt.Metal
 
       if(attrib != null)
       {
-        var result = model.Evaluate(attrib.Value);
-        output = result.EvaluationSuccess? result.GetResult<ZptElement>() : null;
+        ExpressionResult result;
+
+        try
+        {
+          result = model.Evaluate(attrib.Value);
+          output = result.GetResult<ZptElement>();
+        }
+        catch(Exception)
+        {
+          output = null;
+        }
       }
       else
       {

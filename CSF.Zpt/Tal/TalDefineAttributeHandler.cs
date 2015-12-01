@@ -57,25 +57,30 @@ namespace CSF.Zpt.Tal
 
         foreach(var item in items)
         {
-          var value = model.Evaluate(item.Expression);
-          if(!value.EvaluationSuccess)
+          ExpressionResult result;
+
+          try
           {
-            string message = String.Format("It must be possible to evaluate the expression.\nSource expression: {0}",
+            result = model.Evaluate(item.Expression);
+          }
+          catch(Exception ex)
+          {
+            string message = String.Format("An error was encountered evaluating an expression whilst processing a 'tal:define' attribute, see the inner exception for more details.\nSource expression: {0}",
                                            item.Expression);
-            throw new ModelEvaluationException(message) {
+            throw new ModelEvaluationException(message, ex) {
               ExpressionText = item.Expression
             };
           }
 
-          if(!value.CancelsAction())
+          if(!result.CancelsAction())
           {
             if(item.Scope == GLOBAL_SCOPE)
             {
-              model.AddGlobal(item.Name, value);
+              model.AddGlobal(item.Name, result.GetResult());
             }
             else
             {
-              model.AddLocal(item.Name, value);
+              model.AddLocal(item.Name, result.GetResult());
             }
           }
         }

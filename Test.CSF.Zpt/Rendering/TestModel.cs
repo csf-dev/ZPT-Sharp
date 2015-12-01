@@ -37,7 +37,6 @@ namespace Test.CSF.Zpt.Rendering
 
       // Assert
       Assert.NotNull(result, "Result nullability");
-      Assert.IsTrue(result.EvaluationSuccess, "Evaluation success");
       Assert.AreSame(obj, result.GetResult(), "Result value");
     }
 
@@ -65,7 +64,6 @@ namespace Test.CSF.Zpt.Rendering
 
       // Assert
       Assert.NotNull(result, "Result nullability");
-      Assert.IsTrue(result.EvaluationSuccess, "Evaluation success");
       Assert.AreSame(obj, result.GetResult(), "Result value");
     }
 
@@ -96,7 +94,6 @@ namespace Test.CSF.Zpt.Rendering
 
       // Assert
       Assert.NotNull(result, "Result nullability");
-      Assert.IsTrue(result.EvaluationSuccess, "Evaluation success");
       Assert.AreSame(obj2, result.GetResult(), "Result value");
     }
 

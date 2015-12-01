@@ -6,7 +6,7 @@ namespace CSF.Zpt.Rendering
   /// Represents an exception which is raised whilst evaluating an expression within a <see cref="Model"/>.
   /// </summary>
   [Serializable]
-  public class ModelEvaluationException : Exception
+  public class ModelEvaluationException : RenderingException
   {
     #region properties
 

@@ -36,11 +36,13 @@ namespace Test.CSF.Zpt.Util
 
       if(this.TryGetItem(expression, out result))
       {
-        output = new ExpressionResult(true, result);
+        output = new ExpressionResult(result);
       }
       else
       {
-        output = new ExpressionResult(false, null);
+        string message = String.Format("The item '{0}' was not found in the model.",
+                                       expression);
+        throw new InvalidOperationException(message);
       }
 
       return output;

@@ -9,23 +9,7 @@ namespace CSF.Zpt.Rendering
   {
     #region fields
 
-    private bool _success;
     private object _result;
-
-    #endregion
-
-    #region properties
-
-    /// <summary>
-    /// Gets a value indicating whether the expression evaluation was a success.
-    /// </summary>
-    /// <value><c>true</c> if the evaluation was a success; otherwise, <c>false</c>.</value>
-    public bool EvaluationSuccess
-    {
-      get {
-        return _success;
-      }
-    }
 
     #endregion
 
@@ -37,11 +21,6 @@ namespace CSF.Zpt.Rendering
     /// <returns>The result.</returns>
     public virtual object GetResult()
     {
-      if(!this.EvaluationSuccess)
-      {
-        throw new InvalidOperationException("The result may not be retrieved; check EvaluationSuccess first.");
-      }
-
       return _result;
     }
 
@@ -95,11 +74,9 @@ namespace CSF.Zpt.Rendering
     /// <summary>
     /// Initializes a new instance of the <see cref="CSF.Zpt.Rendering.ExpressionResult"/> class.
     /// </summary>
-    /// <param name="success">If set to <c>true</c> then the current instance represents a successful evaluation.</param>
-    /// <param name="result">The result of the expression evaluation (if the evaluation was a success).</param>
-    public ExpressionResult(bool success, object result)
+    /// <param name="result">The result of the expression evaluation.</param>
+    public ExpressionResult(object result)
     {
-      _success = success;
       _result = result;
     }
 

@@ -43,7 +43,7 @@ namespace Test.CSF.Zpt.Metal
                                                                 ZptConstants.Metal.UseMacroAttribute) == attribute),
         referencedElement = Mock.Of<ZptElement>();
       var model = _fixture.Create<DummyModel>();
-      Mock.Get(model).Setup(x => x.Evaluate(It.IsAny<string>())).Returns(new ExpressionResult(true, referencedElement));
+      Mock.Get(model).Setup(x => x.Evaluate(It.IsAny<string>())).Returns(new ExpressionResult(referencedElement));
 
       var sut = new MacroFinder();
 
@@ -64,7 +64,7 @@ namespace Test.CSF.Zpt.Metal
                                                                 ZptConstants.Metal.DefaultPrefix,
                                                                 ZptConstants.Metal.UseMacroAttribute) == attribute);
       var model = _fixture.Create<DummyModel>();
-      Mock.Get(model).Setup(x => x.Evaluate(It.IsAny<string>())).Returns(new ExpressionResult(false, null));
+      Mock.Get(model).Setup(x => x.Evaluate(It.IsAny<string>())).Throws<InvalidOperationException>();
 
       var sut = new MacroFinder();
 
@@ -105,7 +105,7 @@ namespace Test.CSF.Zpt.Metal
                                                                 ZptConstants.Metal.ExtendMacroAttribute) == attribute),
         referencedElement = Mock.Of<ZptElement>();
       var model = _fixture.Create<DummyModel>();
-      Mock.Get(model).Setup(x => x.Evaluate(It.IsAny<string>())).Returns(new ExpressionResult(true, referencedElement));
+      Mock.Get(model).Setup(x => x.Evaluate(It.IsAny<string>())).Returns(new ExpressionResult(referencedElement));
 
       var sut = new MacroFinder();
 
@@ -126,7 +126,7 @@ namespace Test.CSF.Zpt.Metal
                                                                 ZptConstants.Metal.DefaultPrefix,
                                                                 ZptConstants.Metal.ExtendMacroAttribute) == attribute);
       var model = _fixture.Create<DummyModel>();
-      Mock.Get(model).Setup(x => x.Evaluate(It.IsAny<string>())).Returns(new ExpressionResult(false, null));
+      Mock.Get(model).Setup(x => x.Evaluate(It.IsAny<string>())).Throws<InvalidOperationException>();
 
       var sut = new MacroFinder();
 

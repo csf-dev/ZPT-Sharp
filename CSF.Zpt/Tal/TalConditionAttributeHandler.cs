@@ -32,10 +32,23 @@ namespace CSF.Zpt.Tal
       var attribute = element.GetTalAttribute(ZptConstants.Tal.ConditionAttribute);
       if(attribute != null)
       {
-        var value = model.Evaluate(attribute.Value);
-        bool includeElement = (value.EvaluationSuccess && !value.CancelsAction())? value.GetResultAsBoolean() : true;
+        ExpressionResult result;
 
-        if(!includeElement)
+        try
+        {
+          result = model.Evaluate(attribute.Value);
+        }
+        catch(Exception ex)
+        {
+          string message = String.Format("An error was encountered evaluating an expression whilst processing a 'tal:condition' attribute, see the inner exception for more details.\nSource expression: {0}",
+                                         attribute.Value);
+          throw new ModelEvaluationException(message, ex) {
+            ExpressionText = attribute.Value
+          };
+        }
+
+        var removeElement = result.CancelsAction()? false : !result.GetResultAsBoolean();
+        if(removeElement)
         {
           element.Remove();
           output = new ZptElement[0];
