@@ -1,15 +1,16 @@
 ﻿using System;
+using System.Xml;
 
 namespace CSF.Zpt.Rendering
 {
   /// <summary>
-  /// Implementation of <see cref="Attribute"/> for an HTML attribute.
+  /// Implementation of <see cref="Attribute"/> for an XML attribute.
   /// </summary>
-  public class HtmlAttribute : Attribute
+  public class ZptXmlAttribute : ZptAttribute
   {
     #region fields
 
-    private HtmlAgilityPack.HtmlAttribute _original;
+    private XmlAttribute _original;
 
     #endregion
 
@@ -42,10 +43,10 @@ namespace CSF.Zpt.Rendering
     #region constructor
 
     /// <summary>
-    /// Initializes a new instance of the <see cref="CSF.Zpt.Rendering.HtmlAttribute"/> class.
+    /// Initializes a new instance of the <see cref="CSF.Zpt.Rendering.ZptXmlAttribute"/> class.
     /// </summary>
     /// <param name="original">The original (wrapped) attribute.</param>
-    public HtmlAttribute(HtmlAgilityPack.HtmlAttribute original)
+    public ZptXmlAttribute(XmlAttribute original)
     {
       if(original == null)
       {

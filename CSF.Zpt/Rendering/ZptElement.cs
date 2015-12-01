@@ -6,7 +6,7 @@ namespace CSF.Zpt.Rendering
   /// <summary>
   /// Represents an element node in a ZPT document.
   /// </summary>
-  public abstract class Element
+  public abstract class ZptElement
   {
     #region fields
 
@@ -61,11 +61,10 @@ namespace CSF.Zpt.Rendering
     #region methods
 
     /// <summary>
-    /// Returns a <see cref="System.String"/> that represents the current
-    /// <see cref="CSF.Zpt.Rendering.Element"/>.
+    /// Returns a <see cref="System.String"/> that represents the current <see cref="ZptElement"/>.
     /// </summary>
     /// <returns>
-    /// A <see cref="System.String"/> that represents the current <see cref="CSF.Zpt.Rendering.Element"/>.
+    /// A <see cref="System.String"/> that represents the current <see cref="ZptElement"/>.
     /// </returns>
     public abstract new string ToString();
 
@@ -74,25 +73,25 @@ namespace CSF.Zpt.Rendering
     /// </summary>
     /// <returns>A reference to the replacement element, in its new DOM.</returns>
     /// <param name="replacement">Replacement.</param>
-    public abstract Element ReplaceWith(Element replacement);
+    public abstract ZptElement ReplaceWith(ZptElement replacement);
 
     /// <summary>
     /// Gets the element which is the parent of the current instance.
     /// </summary>
     /// <returns>The parent element.</returns>
-    public abstract Element GetParentElement();
+    public abstract ZptElement GetParentElement();
 
     /// <summary>
     /// Gets a collection of the child elements from the current source element.
     /// </summary>
     /// <returns>The children.</returns>
-    public abstract Element[] GetChildElements();
+    public abstract ZptElement[] GetChildElements();
 
     /// <summary>
     /// Gets a collection of the attributes present upon the current element.
     /// </summary>
     /// <returns>The attributes.</returns>
-    public abstract Attribute[] GetAttributes();
+    public abstract ZptAttribute[] GetAttributes();
 
     /// <summary>
     /// Gets an attribute which matches the given criteria, or a <c>null</c> reference is no matching attribute is
@@ -102,7 +101,7 @@ namespace CSF.Zpt.Rendering
     /// <param name="attributeNamespace">The attribute namespace.</param>
     /// <param name="prefix">The attribute prefix.</param>
     /// <param name="name">The attribute name.</param>
-    public abstract Attribute GetAttribute(string attributeNamespace, string prefix, string name);
+    public abstract ZptAttribute GetAttribute(string attributeNamespace, string prefix, string name);
 
     /// <summary>
     /// Recursively searches the children of the current instance, returning a collection of elements which have an
@@ -112,7 +111,7 @@ namespace CSF.Zpt.Rendering
     /// <param name="attributeNamespace">The attribute namespace.</param>
     /// <param name="prefix">The attribute prefix.</param>
     /// <param name="name">The attribute name.</param>
-    public abstract Element[] SearchChildrenByAttribute(string attributeNamespace, string prefix, string name);
+    public abstract ZptElement[] SearchChildrenByAttribute(string attributeNamespace, string prefix, string name);
 
     /// <summary>
     /// Recursively searches upwards in the DOM tree, returning the first (closest) ancestor element which has an
@@ -122,9 +121,9 @@ namespace CSF.Zpt.Rendering
     /// <param name="attributeNamespace">The attribute namespace.</param>
     /// <param name="prefix">The attribute prefix.</param>
     /// <param name="name">The attribute name.</param>
-    public virtual Element SearchAncestorsByAttribute(string attributeNamespace, string prefix, string name)
+    public virtual ZptElement SearchAncestorsByAttribute(string attributeNamespace, string prefix, string name)
     {
-      Element output = null;
+      ZptElement output = null;
 
       var currentElement = this;
       while(output == null && currentElement != null)
@@ -156,7 +155,7 @@ namespace CSF.Zpt.Rendering
     /// <summary>
     /// Clone this instance into a new Element instance, which may be manipulated without affecting the original.
     /// </summary>
-    public abstract Element Clone();
+    public abstract ZptElement Clone();
 
     /// <summary>
     /// Gets the file location (typically a line number) for the current instance.
@@ -176,15 +175,15 @@ namespace CSF.Zpt.Rendering
     /// <summary>
     /// Fake constructor for Mocking framework usage only.  Do not call.
     /// </summary>
-    protected Element() {}
+    protected ZptElement() {}
 
     /// <summary>
-    /// Initializes a new instance of the <see cref="CSF.Zpt.Rendering.Element"/> class.
+    /// Initializes a new instance of the <see cref="CSF.Zpt.Rendering.ZptElement"/> class.
     /// </summary>
     /// <param name="sourceFile">Information about the element's source file.</param>
     /// <param name="isRoot">Whether or not this is the root element.</param>
     /// <param name="isImported">Whether or not this element is imported.</param>
-    public Element(SourceFileInfo sourceFile,
+    public ZptElement(SourceFileInfo sourceFile,
                    bool isRoot,
                    bool isImported)
     {

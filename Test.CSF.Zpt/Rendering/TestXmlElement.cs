@@ -44,7 +44,7 @@ namespace Test.CSF.Zpt.Rendering
     public void TestToString()
     {
       // Arrange
-      var sut = new XmlElement(_document.DocumentElement,
+      var sut = new ZptXmlElement(_document.DocumentElement,
                                _sourceFile);
 
       // Act
@@ -58,7 +58,7 @@ namespace Test.CSF.Zpt.Rendering
     public void TestGetChildElements()
     {
       // Arrange
-      var sut = new XmlElement(_document.DocumentElement,
+      var sut = new ZptXmlElement(_document.DocumentElement,
                                 _sourceFile);
 
       // Act
@@ -74,7 +74,7 @@ namespace Test.CSF.Zpt.Rendering
     public void TestSearchChildrenByAttribute()
     {
       // Arrange
-      var sut = new XmlElement(_document.DocumentElement,
+      var sut = new ZptXmlElement(_document.DocumentElement,
                                 _sourceFile);
       var fixture = new Fixture();
 
@@ -93,7 +93,7 @@ namespace Test.CSF.Zpt.Rendering
     public void TestGetAttributes()
     {
       // Arrange
-      var sut = new XmlElement(_document.DocumentElement.ChildNodes[1].FirstChild.FirstChild,
+      var sut = new ZptXmlElement(_document.DocumentElement.ChildNodes[1].FirstChild.FirstChild,
                                 _sourceFile);
 
       // Act
@@ -113,7 +113,7 @@ namespace Test.CSF.Zpt.Rendering
     public void TestGetAttribute(string ns, string name, string expectedName, string expectedValue)
     {
       // Arrange
-      var sut = new XmlElement(_document.DocumentElement.ChildNodes[1].FirstChild.FirstChild,
+      var sut = new ZptXmlElement(_document.DocumentElement.ChildNodes[1].FirstChild.FirstChild,
                                _sourceFile);
       var fixture = new Fixture();
 
@@ -130,12 +130,12 @@ namespace Test.CSF.Zpt.Rendering
     public void TestReplaceWith()
     {
       // Arrange
-      var sut = new XmlElement(_document.DocumentElement.ChildNodes[1].FirstChild.FirstChild,
+      var sut = new ZptXmlElement(_document.DocumentElement.ChildNodes[1].FirstChild.FirstChild,
                                 _sourceFile);
       var replacementHtml = "<p>Replacement element</p>";
       var secondDocument = new System.Xml.XmlDocument();
       secondDocument.LoadXml(replacementHtml);
-      var secondElement = new XmlElement(secondDocument.DocumentElement,
+      var secondElement = new ZptXmlElement(secondDocument.DocumentElement,
                                           _sourceFile);
 
       // Act
@@ -163,7 +163,7 @@ namespace Test.CSF.Zpt.Rendering
   </body>
 </html>";
       Assert.AreEqual(expectedDom,
-                      new XmlElement(_document.DocumentElement, _sourceFile).ToString(),
+                      new ZptXmlElement(_document.DocumentElement, _sourceFile).ToString(),
                       "Correct modified HTML");
     }
 
@@ -171,7 +171,7 @@ namespace Test.CSF.Zpt.Rendering
     public void TestConstructorElementNode()
     {
       // Act
-      new XmlElement(_document.DocumentElement.FirstChild,
+      new ZptXmlElement(_document.DocumentElement.FirstChild,
                       _sourceFile);
 
       // Assert
@@ -182,7 +182,7 @@ namespace Test.CSF.Zpt.Rendering
     public void TestConstructorDocumentElement()
     {
       // Act
-      new XmlElement(_document.DocumentElement,
+      new ZptXmlElement(_document.DocumentElement,
                       _sourceFile);
 
       // Assert
@@ -193,7 +193,7 @@ namespace Test.CSF.Zpt.Rendering
     public void TestAddCommentBefore()
     {
       // Arrange
-      var docElement = new XmlElement(_document.DocumentElement,
+      var docElement = new ZptXmlElement(_document.DocumentElement,
                                        _sourceFile);
       var sut = docElement.GetChildElements()[1].GetChildElements()[0].GetChildElements().First();
       string expectedResult = @"<html xmlns:custom=""http://ns.csf-dev.com/custom"">

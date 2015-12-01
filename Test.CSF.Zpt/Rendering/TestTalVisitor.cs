@@ -16,7 +16,7 @@ namespace Test.CSF.Zpt.Rendering
     public void TestVisit()
     {
       // Arrange
-      var elements = Enumerable.Range(0,7).Select(x => new Mock<Element>()).ToArray();
+      var elements = Enumerable.Range(0,7).Select(x => new Mock<ZptElement>()).ToArray();
       var topElement = elements[0].Object;
       var secondElements  = elements.Skip(1).Take(2).ToArray();
       var thirdElements   = elements.Skip(3).Take(2);
@@ -25,7 +25,7 @@ namespace Test.CSF.Zpt.Rendering
       var handlers = Enumerable.Range(0, 2).Select(x => new Mock<ITalAttributeHandler>()).ToArray();
 
       handlers[0]
-        .Setup(x => x.Handle(It.IsAny<Element>(), It.IsAny<Model>()))
+        .Setup(x => x.Handle(It.IsAny<ZptElement>(), It.IsAny<Model>()))
         .Returns(secondElements.Select(x => x.Object).ToArray());
       handlers[1]
         .Setup(x => x.Handle(secondElements[0].Object, It.IsAny<Model>()))
@@ -58,7 +58,7 @@ namespace Test.CSF.Zpt.Rendering
       // Arrange
       var elements = Enumerable
         .Range(0, nestingLevel + 1)
-        .Select(x => new Mock<Element>())
+        .Select(x => new Mock<ZptElement>())
         .ToArray();
       for(int i = 0; i < nestingLevel; i++)
       {
@@ -66,12 +66,12 @@ namespace Test.CSF.Zpt.Rendering
       }
       elements[0]
         .Setup(x => x.GetAttribute(Tal.Namespace, Tal.DefaultPrefix, Tal.OnErrorAttribute))
-        .Returns(Mock.Of<global::CSF.Zpt.Rendering.Attribute>());
+        .Returns(Mock.Of<global::CSF.Zpt.Rendering.ZptAttribute>());
 
       var generalHandler = new Mock<ITalAttributeHandler>();
       generalHandler
-        .Setup(x => x.Handle(It.IsAny<Element>(), It.IsAny<Model>()))
-        .Returns((Element ele, Model mod) => new[] { ele });
+        .Setup(x => x.Handle(It.IsAny<ZptElement>(), It.IsAny<Model>()))
+        .Returns((ZptElement ele, Model mod) => new[] { ele });
       generalHandler
         .Setup(x => x.Handle(elements[nestingLevel].Object, It.IsAny<Model>()))
         .Throws<RenderingException>();
@@ -81,7 +81,7 @@ namespace Test.CSF.Zpt.Rendering
       var errorHandler = new Mock<ITalAttributeHandler>();
       errorHandler
         .Setup(x => x.Handle(elements[0].Object, It.IsAny<Model>()))
-        .Callback((Element ele, Model mod) => {
+        .Callback((ZptElement ele, Model mod) => {
           errorObject = mod.Error;
         });
 

@@ -45,7 +45,7 @@ namespace Test.CSF.Zpt.Rendering
     public void TestToString()
     {
       // Arrange
-      var sut = new HtmlElement(_document.DocumentNode,
+      var sut = new ZptHtmlElement(_document.DocumentNode,
                                 _sourceFile);
 
       // Act
@@ -59,7 +59,7 @@ namespace Test.CSF.Zpt.Rendering
     public void TestGetChildElements()
     {
       // Arrange
-      var sut = new HtmlElement(_document.DocumentNode,
+      var sut = new ZptHtmlElement(_document.DocumentNode,
                                 _sourceFile);
 
       // Act
@@ -75,7 +75,7 @@ namespace Test.CSF.Zpt.Rendering
     public void TestSearchChildrenByAttribute()
     {
       // Arrange
-      var sut = new HtmlElement(_document.DocumentNode,
+      var sut = new ZptHtmlElement(_document.DocumentNode,
                                 _sourceFile);
       var fixture = new Fixture();
 
@@ -92,7 +92,7 @@ namespace Test.CSF.Zpt.Rendering
     public void TestGetAttributes()
     {
       // Arrange
-      var sut = new HtmlElement(_document.DocumentNode.FirstChild.ChildNodes[3].ChildNodes[1].ChildNodes[1],
+      var sut = new ZptHtmlElement(_document.DocumentNode.FirstChild.ChildNodes[3].ChildNodes[1].ChildNodes[1],
                                 _sourceFile);
 
       // Act
@@ -112,7 +112,7 @@ namespace Test.CSF.Zpt.Rendering
     public void TestGetAttribute(string prefix, string name, string expectedName, string expectedValue)
     {
       // Arrange
-      var sut = new HtmlElement(_document.DocumentNode.FirstChild.ChildNodes[3].ChildNodes[1].ChildNodes[1],
+      var sut = new ZptHtmlElement(_document.DocumentNode.FirstChild.ChildNodes[3].ChildNodes[1].ChildNodes[1],
                                 _sourceFile);
       var fixture = new Fixture();
 
@@ -129,12 +129,12 @@ namespace Test.CSF.Zpt.Rendering
     public void TestReplaceWith()
     {
       // Arrange
-      var sut = new HtmlElement(_document.DocumentNode.FirstChild.ChildNodes[3].ChildNodes[1].ChildNodes[1],
+      var sut = new ZptHtmlElement(_document.DocumentNode.FirstChild.ChildNodes[3].ChildNodes[1].ChildNodes[1],
                                 _sourceFile);
       var replacementHtml = "<p>Replacement element</p>";
       var secondDocument = new HtmlDocument();
       secondDocument.LoadHtml(replacementHtml);
-      var secondElement = new HtmlElement(secondDocument.DocumentNode.FirstChild,
+      var secondElement = new ZptHtmlElement(secondDocument.DocumentNode.FirstChild,
                                           _sourceFile);
 
       // Act
@@ -168,7 +168,7 @@ namespace Test.CSF.Zpt.Rendering
     public void TestConstructorElementNode()
     {
       // Act
-      new HtmlElement(_document.DocumentNode.FirstChild,
+      new ZptHtmlElement(_document.DocumentNode.FirstChild,
                       _sourceFile);
 
       // Assert
@@ -179,7 +179,7 @@ namespace Test.CSF.Zpt.Rendering
     public void TestConstructorDocumentNode()
     {
       // Act
-      new HtmlElement(_document.DocumentNode,
+      new ZptHtmlElement(_document.DocumentNode,
                       _sourceFile);
 
       // Assert
@@ -190,7 +190,7 @@ namespace Test.CSF.Zpt.Rendering
     public void TestAddCommentBefore()
     {
       // Arrange
-      var docElement = new HtmlElement(_document.DocumentNode,
+      var docElement = new ZptHtmlElement(_document.DocumentNode,
                                        _sourceFile);
       var sut = docElement.GetChildElements()[1].GetChildElements()[0].GetChildElements().First();
       string expectedResult = @"<html>

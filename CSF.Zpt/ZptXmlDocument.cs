@@ -90,7 +90,7 @@ namespace CSF.Zpt
     /// <param name="element">The element to render.</param>
     /// <param name="options">The rendering options to use.  If <c>null</c> then default options are used.</param>
     protected override void Render(TextWriter writer,
-                                   Element element,
+                                   ZptElement element,
                                    RenderingOptions options)
     {
       if(writer == null)
@@ -102,7 +102,7 @@ namespace CSF.Zpt
         throw new ArgumentNullException("element");
       }
 
-      var xmlElement = element as Rendering.XmlElement;
+      var xmlElement = element as Rendering.ZptXmlElement;
       if(xmlElement == null)
       {
         throw new ArgumentException("Element must be an instance of XmlElement.", "element");
@@ -118,9 +118,9 @@ namespace CSF.Zpt
     /// Creates a rendering model from the current instance.
     /// </summary>
     /// <returns>The rendering model.</returns>
-    protected override Element GetRootElement()
+    protected override ZptElement GetRootElement()
     {
-      return new Rendering.XmlElement(this.Document.DocumentElement, this.SourceFile, isRoot: true);
+      return new Rendering.ZptXmlElement(this.Document.DocumentElement, this.SourceFile, isRoot: true);
     }
 
     #endregion

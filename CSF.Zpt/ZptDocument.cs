@@ -54,13 +54,13 @@ namespace CSF.Zpt
     }
 
     /// <summary>
-    /// Renders the current document, returning an <see cref="Element"/> representing the rendered result.
+    /// Renders the current document, returning an <see cref="ZptElement"/> representing the rendered result.
     /// </summary>
     /// <returns>The result of the rendering process.</returns>
     /// <param name="context">The rendering context, containing the object model of data available to the document.</param>
     /// <param name="options">The rendering options to use.  If <c>null</c> then default options are used.</param>
-    protected virtual Element RenderElement(RenderingContext context,
-                                            RenderingOptions options)
+    protected virtual ZptElement RenderElement(RenderingContext context,
+                                               RenderingOptions options)
     {
       if(context == null)
       {
@@ -94,14 +94,14 @@ namespace CSF.Zpt
     /// <param name="element">The element to render.</param>
     /// <param name="options">The rendering options to use.  If <c>null</c> then default options are used.</param>
     protected abstract void Render(TextWriter writer,
-                                   Element element,
+                                   ZptElement element,
                                    RenderingOptions options);
 
     /// <summary>
     /// Creates a rendering model from the current instance.
     /// </summary>
     /// <returns>The rendering model.</returns>
-    protected abstract Element GetRootElement();
+    protected abstract ZptElement GetRootElement();
 
     #endregion
   }

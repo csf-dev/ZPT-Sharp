@@ -48,21 +48,15 @@
     <Compile Include="ZptHtmlDocument.cs" />
     <Compile Include="ZptXmlDocument.cs" />
     <Compile Include="RenderingContext.cs" />
-    <Compile Include="Rendering\Element.cs" />
-    <Compile Include="Rendering\Attribute.cs" />
     <Compile Include="Rendering\ElementVisitor.cs" />
     <Compile Include="Rendering\MetalVisitor.cs" />
     <Compile Include="Rendering\TalVisitor.cs" />
-    <Compile Include="Rendering\HtmlAttribute.cs" />
-    <Compile Include="Rendering\HtmlElement.cs" />
     <Compile Include="Rendering\ElementExtensions.cs" />
     <Compile Include="Rendering\Metal.cs" />
     <Compile Include="Rendering\Tal.cs" />
     <Compile Include="Rendering\MacroExpander.cs" />
     <Compile Include="Rendering\MacroFinder.cs" />
     <Compile Include="Rendering\SourceFileInfo.cs" />
-    <Compile Include="Rendering\XmlElement.cs" />
-    <Compile Include="Rendering\XmlAttribute.cs" />
     <Compile Include="Rendering\RenderingOptions.cs" />
     <Compile Include="Rendering\SourceAnnotationVisitor.cs" />
     <Compile Include="Rendering\ExpressionResult.cs" />
@@ -77,6 +71,12 @@
     <Compile Include="Rendering\TalOmitTagAttributeHandler.cs" />
     <Compile Include="Rendering\TalOnErrorAttributeHandler.cs" />
     <Compile Include="Rendering\RenderingException.cs" />
+    <Compile Include="Rendering\ZptAttribute.cs" />
+    <Compile Include="Rendering\ZptElement.cs" />
+    <Compile Include="Rendering\ZptHtmlAttribute.cs" />
+    <Compile Include="Rendering\ZptHtmlElement.cs" />
+    <Compile Include="Rendering\ZptXmlElement.cs" />
+    <Compile Include="Rendering\ZptXmlAttribute.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

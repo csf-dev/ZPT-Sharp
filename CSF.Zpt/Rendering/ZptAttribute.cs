@@ -3,9 +3,9 @@
 namespace CSF.Zpt.Rendering
 {
   /// <summary>
-  /// Represents an <see cref="Element"/> attribute.
+  /// Represents an <see cref="ZptElement"/> attribute.
   /// </summary>
-  public abstract class Attribute
+  public abstract class ZptAttribute
   {
     #region properties
 

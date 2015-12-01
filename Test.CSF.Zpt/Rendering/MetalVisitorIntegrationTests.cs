@@ -57,10 +57,10 @@ namespace Test.CSF.Zpt.Rendering
     {
       // Arrange
       var sourceFile = Mock.Of<SourceFileInfo>();
-      var document = new XmlElement(_documentOne.DocumentElement, sourceFile);
-      var macroOne = new XmlElement(_documentTwo.DocumentElement.ChildNodes[0], sourceFile);
-      var macroTwo = new XmlElement(_documentTwo.DocumentElement.ChildNodes[1], sourceFile);
-      var macroBase = new XmlElement(_documentTwo.DocumentElement.ChildNodes[2], sourceFile);
+      var document = new ZptXmlElement(_documentOne.DocumentElement, sourceFile);
+      var macroOne = new ZptXmlElement(_documentTwo.DocumentElement.ChildNodes[0], sourceFile);
+      var macroTwo = new ZptXmlElement(_documentTwo.DocumentElement.ChildNodes[1], sourceFile);
+      var macroBase = new ZptXmlElement(_documentTwo.DocumentElement.ChildNodes[2], sourceFile);
 
       _model.Setup(x => x.Evaluate("macro-one")).Returns(new ExpressionResult(true, macroOne));
       _model.Setup(x => x.Evaluate("macro-two")).Returns(new ExpressionResult(true, macroTwo));

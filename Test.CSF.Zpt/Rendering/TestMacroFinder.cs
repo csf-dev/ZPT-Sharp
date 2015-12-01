@@ -14,12 +14,12 @@ namespace Test.CSF.Zpt.Rendering
     public void TestGetUsedMacro()
     {
       // Arrange
-      var attribute = Mock.Of<global::CSF.Zpt.Rendering.Attribute>();
-      Element
-        originalElement = Mock.Of<Element>(x => x.GetAttribute(Metal.Namespace,
+      var attribute = Mock.Of<global::CSF.Zpt.Rendering.ZptAttribute>();
+      ZptElement
+        originalElement = Mock.Of<ZptElement>(x => x.GetAttribute(Metal.Namespace,
                                                                Metal.DefaultPrefix,
                                                                Metal.UseMacroAttribute) == attribute),
-        referencedElement = Mock.Of<Element>();
+        referencedElement = Mock.Of<ZptElement>();
       var model = Mock.Of<DummyModel>(x => x.Evaluate(It.IsAny<string>()) == new ExpressionResult(true, referencedElement));
 
       var sut = new MacroFinder();
@@ -35,9 +35,9 @@ namespace Test.CSF.Zpt.Rendering
     public void TestGetUsedMacroEvaluationFailure()
     {
       // Arrange
-      var attribute = Mock.Of<global::CSF.Zpt.Rendering.Attribute>();
-      Element
-        originalElement = Mock.Of<Element>(x => x.GetAttribute(Metal.Namespace,
+      var attribute = Mock.Of<global::CSF.Zpt.Rendering.ZptAttribute>();
+      ZptElement
+        originalElement = Mock.Of<ZptElement>(x => x.GetAttribute(Metal.Namespace,
                                                                Metal.DefaultPrefix,
                                                                Metal.UseMacroAttribute) == attribute);
       var model = Mock.Of<DummyModel>(x => x.Evaluate(It.IsAny<string>()) == new ExpressionResult(false, null));
@@ -55,10 +55,10 @@ namespace Test.CSF.Zpt.Rendering
     public void TestGetUsedMacroNoAttribute()
     {
       // Arrange
-      Element
-        originalElement = Mock.Of<Element>(x => x.GetAttribute(Metal.Namespace,
+      ZptElement
+        originalElement = Mock.Of<ZptElement>(x => x.GetAttribute(Metal.Namespace,
                                                                Metal.DefaultPrefix,
-                                                               Metal.UseMacroAttribute) == (global::CSF.Zpt.Rendering.Attribute) null);
+                                                               Metal.UseMacroAttribute) == (global::CSF.Zpt.Rendering.ZptAttribute) null);
       var model = Mock.Of<DummyModel>();
 
       var sut = new MacroFinder();
@@ -74,12 +74,12 @@ namespace Test.CSF.Zpt.Rendering
     public void TestGetExtendedMacro()
     {
       // Arrange
-      var attribute = Mock.Of<global::CSF.Zpt.Rendering.Attribute>();
-      Element
-        originalElement = Mock.Of<Element>(x => x.GetAttribute(Metal.Namespace,
+      var attribute = Mock.Of<global::CSF.Zpt.Rendering.ZptAttribute>();
+      ZptElement
+        originalElement = Mock.Of<ZptElement>(x => x.GetAttribute(Metal.Namespace,
                                                                Metal.DefaultPrefix,
                                                                Metal.ExtendMacroAttribute) == attribute),
-        referencedElement = Mock.Of<Element>();
+        referencedElement = Mock.Of<ZptElement>();
       var model = Mock.Of<DummyModel>(x => x.Evaluate(It.IsAny<string>()) == new ExpressionResult(true, referencedElement));
 
       var sut = new MacroFinder();
@@ -95,9 +95,9 @@ namespace Test.CSF.Zpt.Rendering
     public void TestGetExtendedMacroEvaluationFailure()
     {
       // Arrange
-      var attribute = Mock.Of<global::CSF.Zpt.Rendering.Attribute>();
-      Element
-        originalElement = Mock.Of<Element>(x => x.GetAttribute(Metal.Namespace,
+      var attribute = Mock.Of<global::CSF.Zpt.Rendering.ZptAttribute>();
+      ZptElement
+        originalElement = Mock.Of<ZptElement>(x => x.GetAttribute(Metal.Namespace,
                                                                Metal.DefaultPrefix,
                                                                Metal.ExtendMacroAttribute) == attribute);
       var model = Mock.Of<DummyModel>(x => x.Evaluate(It.IsAny<string>()) == new ExpressionResult(false, null));
@@ -115,10 +115,10 @@ namespace Test.CSF.Zpt.Rendering
     public void TestGetExtendedMacroNoAttribute()
     {
       // Arrange
-      Element
-        originalElement = Mock.Of<Element>(x => x.GetAttribute(Metal.Namespace,
+      ZptElement
+        originalElement = Mock.Of<ZptElement>(x => x.GetAttribute(Metal.Namespace,
                                                                Metal.DefaultPrefix,
-                                                               Metal.ExtendMacroAttribute) == (global::CSF.Zpt.Rendering.Attribute) null);
+                                                               Metal.ExtendMacroAttribute) == (global::CSF.Zpt.Rendering.ZptAttribute) null);
       var model = Mock.Of<DummyModel>();
 
       var sut = new MacroFinder();

@@ -91,7 +91,7 @@ namespace CSF.Zpt
     /// <param name="element">The element to render.</param>
     /// <param name="options">The rendering options to use.  If <c>null</c> then default options are used.</param>
     protected override void Render(TextWriter writer,
-                                   Element element,
+                                   ZptElement element,
                                    RenderingOptions options)
     {
       if(writer == null)
@@ -103,7 +103,7 @@ namespace CSF.Zpt
         throw new ArgumentNullException("element");
       }
 
-      var htmlElement = element as HtmlElement;
+      var htmlElement = element as ZptHtmlElement;
       if(htmlElement == null)
       {
         throw new ArgumentException("Element must be an instance of HtmlElement.", "element");
@@ -116,9 +116,9 @@ namespace CSF.Zpt
     /// Creates a rendering model from the current instance.
     /// </summary>
     /// <returns>The rendering model.</returns>
-    protected override Element GetRootElement()
+    protected override ZptElement GetRootElement()
     {
-      return new HtmlElement(this.Document.DocumentNode, this.SourceFile, isRoot: true);
+      return new ZptHtmlElement(this.Document.DocumentNode, this.SourceFile, isRoot: true);
     }
 
     #endregion

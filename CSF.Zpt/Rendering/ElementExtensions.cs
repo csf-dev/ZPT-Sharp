@@ -3,7 +3,7 @@
 namespace CSF.Zpt.Rendering
 {
   /// <summary>
-  /// Extension methods for the <see cref="Element"/> type and its subtypes.
+  /// Extension methods for the <see cref="ZptElement"/> type and its subtypes.
   /// </summary>
   public static class ElementExtensions
   {
@@ -16,7 +16,7 @@ namespace CSF.Zpt.Rendering
     /// <returns>The attribute, or a <c>null</c> reference.</returns>
     /// <param name="element">The element from which to get attributes.</param>
     /// <param name="attributeName">The attribute name.</param>
-    public static Attribute GetMetalAttribute(this Element element, string attributeName)
+    public static ZptAttribute GetMetalAttribute(this ZptElement element, string attributeName)
     {
       if(element == null)
       {
@@ -35,7 +35,7 @@ namespace CSF.Zpt.Rendering
     /// <returns>The closest ancestor element, or a <c>null</c> reference if no ancestor was found.</returns>
     /// <param name="element">The element from which to begin the search.</param>
     /// <param name="attributeName">The attribute name.</param>
-    public static Element SearchAncestorsByMetalAttribute(this Element element, string attributeName)
+    public static ZptElement SearchAncestorsByMetalAttribute(this ZptElement element, string attributeName)
     {
       if(element == null)
       {
@@ -54,7 +54,7 @@ namespace CSF.Zpt.Rendering
     /// <returns>The matching child elements.</returns>
     /// <param name="element">The element from which to perform the search.</param>
     /// <param name="attributeName">The attribute name.</param>
-    public static Element[] SearchChildrenByMetalAttribute(this Element element, string attributeName)
+    public static ZptElement[] SearchChildrenByMetalAttribute(this ZptElement element, string attributeName)
     {
       if(element == null)
       {
@@ -70,7 +70,7 @@ namespace CSF.Zpt.Rendering
     /// Recursively searches for METAL attributes and removes them from their parent element.
     /// </summary>
     /// <param name="element">The element from which to perform the purge.</param>
-    public static void PurgeMetalAttributes(this Element element)
+    public static void PurgeMetalAttributes(this ZptElement element)
     {
       if(element == null)
       {
@@ -91,7 +91,7 @@ namespace CSF.Zpt.Rendering
     /// <returns>The attribute, or a <c>null</c> reference.</returns>
     /// <param name="element">The element from which to get attributes.</param>
     /// <param name="attributeName">The attribute name.</param>
-    public static Attribute GetTalAttribute(this Element element, string attributeName)
+    public static ZptAttribute GetTalAttribute(this ZptElement element, string attributeName)
     {
       if(element == null)
       {
@@ -110,7 +110,7 @@ namespace CSF.Zpt.Rendering
     /// <returns>The closest ancestor element, or a <c>null</c> reference if no ancestor was found.</returns>
     /// <param name="element">The element from which to begin the search.</param>
     /// <param name="attributeName">The attribute name.</param>
-    public static Element SearchAncestorsByTalAttribute(this Element element, string attributeName)
+    public static ZptElement SearchAncestorsByTalAttribute(this ZptElement element, string attributeName)
     {
       if(element == null)
       {
@@ -129,7 +129,7 @@ namespace CSF.Zpt.Rendering
     /// <returns>The matching child elements.</returns>
     /// <param name="element">The element from which to perform the search.</param>
     /// <param name="attributeName">The attribute name.</param>
-    public static Element[] SearchChildrenByTalAttribute(this Element element, string attributeName)
+    public static ZptElement[] SearchChildrenByTalAttribute(this ZptElement element, string attributeName)
     {
       if(element == null)
       {
@@ -145,7 +145,7 @@ namespace CSF.Zpt.Rendering
     /// Recursively searches for TAL attributes and removes them from their parent element.
     /// </summary>
     /// <param name="element">The element from which to perform the purge.</param>
-    public static void PurgeTalAttributes(this Element element)
+    public static void PurgeTalAttributes(this ZptElement element)
     {
       if(element == null)
       {

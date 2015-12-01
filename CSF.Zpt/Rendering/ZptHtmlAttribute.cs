@@ -3,13 +3,13 @@
 namespace CSF.Zpt.Rendering
 {
   /// <summary>
-  /// Implementation of <see cref="Attribute"/> for an XML attribute.
+  /// Implementation of <see cref="Attribute"/> for an HTML attribute.
   /// </summary>
-  public class XmlAttribute : Attribute
+  public class ZptHtmlAttribute : ZptAttribute
   {
     #region fields
 
-    private System.Xml.XmlAttribute _original;
+    private HtmlAgilityPack.HtmlAttribute _original;
 
     #endregion
 
@@ -42,10 +42,10 @@ namespace CSF.Zpt.Rendering
     #region constructor
 
     /// <summary>
-    /// Initializes a new instance of the <see cref="CSF.Zpt.Rendering.XmlAttribute"/> class.
+    /// Initializes a new instance of the <see cref="CSF.Zpt.Rendering.ZptHtmlAttribute"/> class.
     /// </summary>
     /// <param name="original">The original (wrapped) attribute.</param>
-    public XmlAttribute(System.Xml.XmlAttribute original)
+    public ZptHtmlAttribute(HtmlAgilityPack.HtmlAttribute original)
     {
       if(original == null)
       {

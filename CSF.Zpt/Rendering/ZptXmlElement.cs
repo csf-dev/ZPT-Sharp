@@ -8,9 +8,9 @@ using System.Text;
 namespace CSF.Zpt.Rendering
 {
   /// <summary>
-  /// Implementation of <see cref="Element"/> based on documents parsed using <c>System.Xml</c>.
+  /// Implementation of <see cref="ZptElement"/> based on documents parsed using <c>System.Xml</c>.
   /// </summary>
-  public class XmlElement : Element
+  public class ZptXmlElement : ZptElement
   {
     #region constants
 
@@ -58,10 +58,9 @@ namespace CSF.Zpt.Rendering
     #region methods
 
     /// <summary>
-    /// Returns a <see cref="System.String"/> that represents the current
-    /// <see cref="CSF.Zpt.Rendering.XmlElement"/>.
+    /// Returns a <see cref="System.String"/> that represents the current <see cref="ZptXmlElement"/>.
     /// </summary>
-    /// <returns>A <see cref="System.String"/> that represents the current <see cref="CSF.Zpt.Rendering.XmlElement"/>.</returns>
+    /// <returns>A <see cref="System.String"/> that represents the current <see cref="ZptXmlElement"/>.</returns>
     public override string ToString()
     {
       string output;
@@ -87,9 +86,9 @@ namespace CSF.Zpt.Rendering
     /// </summary>
     /// <returns>A reference to the replacement element, in its new DOM.</returns>
     /// <param name="replacement">Replacement.</param>
-    public override Element ReplaceWith(Element replacement)
+    public override ZptElement ReplaceWith(ZptElement replacement)
     {
-      var repl = replacement as XmlElement;
+      var repl = replacement as ZptXmlElement;
       if(repl == null)
       {
         throw new ArgumentException("The replacement must be a non-null instance of XmlElement.",
@@ -100,7 +99,7 @@ namespace CSF.Zpt.Rendering
 
       this.GetParent().ReplaceChild(importedNode, this.Node);
 
-      return new XmlElement(importedNode,
+      return new ZptXmlElement(importedNode,
                             repl.SourceFile,
                             isImported: true);
     }
@@ -109,21 +108,21 @@ namespace CSF.Zpt.Rendering
     /// Gets the element which is the parent of the current instance.
     /// </summary>
     /// <returns>The parent element.</returns>
-    public override Element GetParentElement()
+    public override ZptElement GetParentElement()
     {
-      return (this.Node.ParentNode != null)? new XmlElement(this.Node.ParentNode, this.SourceFile) : null;
+      return (this.Node.ParentNode != null)? new ZptXmlElement(this.Node.ParentNode, this.SourceFile) : null;
     }
 
     /// <summary>
     /// Gets a collection of the child elements from the current source element.
     /// </summary>
     /// <returns>The children.</returns>
-    public override Element[] GetChildElements()
+    public override ZptElement[] GetChildElements()
     {
       return this.Node.ChildNodes
         .Cast<XmlNode>()
         .Where(x => x.NodeType == XmlNodeType.Element)
-        .Select(x => new XmlElement(x, this.SourceFile))
+        .Select(x => new ZptXmlElement(x, this.SourceFile))
         .ToArray();
     }
 
@@ -131,11 +130,11 @@ namespace CSF.Zpt.Rendering
     /// Gets a collection of the attributes present upon the current element.
     /// </summary>
     /// <returns>The attributes.</returns>
-    public override Attribute[] GetAttributes()
+    public override ZptAttribute[] GetAttributes()
     {
       return this.Node.Attributes
         .Cast<System.Xml.XmlAttribute>()
-        .Select(x => new XmlAttribute(x))
+        .Select(x => new ZptXmlAttribute(x))
         .ToArray();
     }
 
@@ -147,7 +146,7 @@ namespace CSF.Zpt.Rendering
     /// <param name="attributeNamespace">The attribute namespace.</param>
     /// <param name="prefix">The attribute prefix.</param>
     /// <param name="name">The attribute name.</param>
-    public override Attribute GetAttribute(string attributeNamespace, string prefix, string name)
+    public override ZptAttribute GetAttribute(string attributeNamespace, string prefix, string name)
     {
       if(name == null)
       {
@@ -175,7 +174,7 @@ namespace CSF.Zpt.Rendering
         .Cast<System.Xml.XmlAttribute>()
         .FirstOrDefault();
 
-      return (xmlAttribute != null)? new XmlAttribute(xmlAttribute) : null;
+      return (xmlAttribute != null)? new ZptXmlAttribute(xmlAttribute) : null;
     }
 
     /// <summary>
@@ -186,7 +185,7 @@ namespace CSF.Zpt.Rendering
     /// <param name="attributeNamespace">The attribute namespace.</param>
     /// <param name="prefix">The attribute prefix.</param>
     /// <param name="name">The attribute name.</param>
-    public override Element[] SearchChildrenByAttribute(string attributeNamespace, string prefix, string name)
+    public override ZptElement[] SearchChildrenByAttribute(string attributeNamespace, string prefix, string name)
     {
       if(name == null)
       {
@@ -212,7 +211,7 @@ namespace CSF.Zpt.Rendering
 
       return this.Node.SelectNodes(query, nsManager)
         .Cast<XmlNode>()
-        .Select(x => new XmlElement(x, this.SourceFile))
+        .Select(x => new ZptXmlElement(x, this.SourceFile))
         .ToArray();
     }
 
@@ -315,11 +314,11 @@ namespace CSF.Zpt.Rendering
     /// <summary>
     /// Clone this instance into a new Element instance, which may be manipulated without affecting the original.
     /// </summary>
-    public override Element Clone()
+    public override ZptElement Clone()
     {
       var clone = _node.Clone();
 
-      return new XmlElement(clone, this.SourceFile);
+      return new ZptXmlElement(clone, this.SourceFile);
     }
 
     /// <summary>
@@ -360,16 +359,16 @@ namespace CSF.Zpt.Rendering
     #region constructor
 
     /// <summary>
-    /// Initializes a new instance of the <see cref="CSF.Zpt.Rendering.XmlElement"/> class.
+    /// Initializes a new instance of the <see cref="CSF.Zpt.Rendering.ZptXmlElement"/> class.
     /// </summary>
     /// <param name="node">The source XML Node.</param>
     /// <param name="sourceFile">Information about the element's source file.</param>
     /// <param name="isRoot">Whether or not this is the root element.</param>
     /// <param name="isImported">Whether or not this element is imported.</param>
-    public XmlElement(XmlNode node,
-                      SourceFileInfo sourceFile,
-                      bool isRoot = false,
-                      bool isImported = false) : base(sourceFile, isRoot, isImported)
+    public ZptXmlElement(XmlNode node,
+                         SourceFileInfo sourceFile,
+                         bool isRoot = false,
+                         bool isImported = false) : base(sourceFile, isRoot, isImported)
     {
       if(node == null)
       {

@@ -19,8 +19,8 @@ namespace Test.CSF.Zpt.Rendering
       // Arrange
       var sut = new Mock<ElementVisitor>((object) null) { CallBase = true };
       sut
-        .Setup(x => x.Visit(It.IsAny<Element>(), It.IsAny<Model>()))
-        .Returns((Element ele, Model mod) => new [] { ele });
+        .Setup(x => x.Visit(It.IsAny<ZptElement>(), It.IsAny<Model>()))
+        .Returns((ZptElement ele, Model mod) => new [] { ele });
 
       var models = Enumerable.Range(0,2)
         .Select(x => new Mock<DummyModel>() { CallBase = true })
@@ -30,7 +30,7 @@ namespace Test.CSF.Zpt.Rendering
       topModel.Setup(x => x.CreateChildModel()).Returns(secondLevelModel.Object);
 
       var elements = Enumerable.Range(0,3)
-        .Select(x => new Mock<Element>())
+        .Select(x => new Mock<ZptElement>())
         .ToArray();
       var topElement = elements.First();
       var secondLevelElements = elements
@@ -42,7 +42,7 @@ namespace Test.CSF.Zpt.Rendering
         .Returns(secondLevelElements.Select(x => x.Object).ToArray());
       foreach(var item in secondLevelElements)
       {
-        item.Setup(x => x.GetChildElements()).Returns(new Element[0]);
+        item.Setup(x => x.GetChildElements()).Returns(new ZptElement[0]);
       }
 
       // Act

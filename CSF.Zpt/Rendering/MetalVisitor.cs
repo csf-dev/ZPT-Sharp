@@ -5,7 +5,7 @@ using System.Collections.Generic;
 namespace CSF.Zpt.Rendering
 {
   /// <summary>
-  /// Visitor type which is used to work upon an <see cref="Element"/> and perform METAL-related functionality.
+  /// Visitor type which is used to work upon an <see cref="ZptElement"/> and perform METAL-related functionality.
   /// </summary>
   public class MetalVisitor : ElementVisitor
   {
@@ -23,7 +23,7 @@ namespace CSF.Zpt.Rendering
     /// <returns>A reference to the element which has been visited.  This might be the input <paramref name="element"/> or a replacement.</returns>
     /// <param name="element">The element to visit.</param>
     /// <param name="model">The object model provided as context to the visitor.</param>
-    public override Element[] Visit(Element element, Model model)
+    public override ZptElement[] Visit(ZptElement element, Model model)
     {
       if(element == null)
       {
@@ -43,7 +43,7 @@ namespace CSF.Zpt.Rendering
     /// <returns>A reference to the element which has been visited.  This might be the input <paramref name="element"/> or a replacement.</returns>
     /// <param name="element">The element to visit.</param>
     /// <param name="model">The object model provided as context to the visitor.</param>
-    public override Element[] VisitRecursively(Element element, Model model)
+    public override ZptElement[] VisitRecursively(ZptElement element, Model model)
     {
       var output = base.VisitRecursively(element, model);
 

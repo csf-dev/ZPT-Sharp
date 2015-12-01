@@ -18,7 +18,7 @@ namespace Test.CSF.Zpt.Rendering
       var repo = new MockRepository(MockBehavior.Strict);
       repo.CallBase = true;
 
-      var elements = repo.Of<Element>()
+      var elements = repo.Of<ZptElement>()
         .Take(5)
         .Select(x => Mock.Get(x))
         .ToArray();
@@ -29,7 +29,7 @@ namespace Test.CSF.Zpt.Rendering
       foreach(var ele in elements)
       {
         ele.SetupGet(x => x.IsRoot).Returns(false);
-        ele.Setup(x => x.GetChildElements()).Returns(new Element[0]);
+        ele.Setup(x => x.GetChildElements()).Returns(new ZptElement[0]);
         ele.SetupGet(x => x.SourceFile).Returns(sourceInfos[1]);
         ele.SetupGet(x => x.IsImported).Returns(true);
         ele

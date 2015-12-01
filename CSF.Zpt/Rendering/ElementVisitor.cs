@@ -3,7 +3,7 @@
 namespace CSF.Zpt.Rendering
 {
   /// <summary>
-  /// Base class for visitor types which visit and potentially modify an <see cref="Element"/> instance.
+  /// Base class for visitor types which visit and potentially modify an <see cref="ZptElement"/> instance.
   /// </summary>
   public abstract class ElementVisitor
   {
@@ -36,7 +36,7 @@ namespace CSF.Zpt.Rendering
     /// <returns>A reference to the element which has been visited.  This might be the input <paramref name="element"/> or a replacement.</returns>
     /// <param name="element">The element to visit.</param>
     /// <param name="model">The object model provided as context to the visitor.</param>
-    public abstract Element[] Visit(Element element, Model model);
+    public abstract ZptElement[] Visit(ZptElement element, Model model);
 
     /// <summary>
     /// Visits the given element, and then recursively visits all of its child elements.
@@ -44,7 +44,7 @@ namespace CSF.Zpt.Rendering
     /// <returns>A reference to the element which has been visited.  This might be the input <paramref name="element"/> or a replacement.</returns>
     /// <param name="element">The element to visit.</param>
     /// <param name="model">The object model provided as context to the visitor.</param>
-    public virtual Element[] VisitRecursively(Element element, Model model)
+    public virtual ZptElement[] VisitRecursively(ZptElement element, Model model)
     {
       if(element == null)
       {

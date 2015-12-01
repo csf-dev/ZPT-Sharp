@@ -22,7 +22,7 @@ namespace CSF.Zpt.Rendering
     /// </summary>
     /// <param name="original">The original element.</param>
     /// <param name="model">The METAL object model.</param>
-    public Element Expand(Element original, Model model)
+    public ZptElement Expand(ZptElement original, Model model)
     {
       if(original == null)
       {
@@ -43,7 +43,7 @@ namespace CSF.Zpt.Rendering
     /// <param name="original">The original element.</param>
     /// <param name="macro">The macro element to replace the original.</param>
     /// <param name="model">The METAL object model.</param>
-    public Element ExpandAndReplace(Element original, Element macro, Model model)
+    public ZptElement ExpandAndReplace(ZptElement original, ZptElement macro, Model model)
     {
       if(model == null)
       {
@@ -76,7 +76,7 @@ namespace CSF.Zpt.Rendering
     /// </summary>
     /// <param name="sourceElement">Source element.</param>
     /// <param name="macro">Macro.</param>
-    private void FillSlots(Element sourceElement, Element macro)
+    private void FillSlots(ZptElement sourceElement, ZptElement macro)
     {
       if(sourceElement == null)
       {
@@ -105,7 +105,7 @@ namespace CSF.Zpt.Rendering
     /// <returns>A collection of elements, and their attribute values.</returns>
     /// <param name="rootElement">The root element from which to search.</param>
     /// <param name="desiredAttribute">The name of the desired attribute.</param>
-    private IDictionary<string,Element> GetElementsByValue(Element rootElement,
+    private IDictionary<string,ZptElement> GetElementsByValue(ZptElement rootElement,
                                                            string desiredAttribute)
     {
       return rootElement.SearchChildrenByMetalAttribute(desiredAttribute)
@@ -122,7 +122,7 @@ namespace CSF.Zpt.Rendering
     /// <returns>The METAL macro element, after all required extension has been applied.</returns>
     /// <param name="macro">The macro element.</param>
     /// <param name="model">The METAL object model.</param>
-    private Element ApplyMacroExtension(Element macro, Model model)
+    private ZptElement ApplyMacroExtension(ZptElement macro, Model model)
     {
       if(macro == null)
       {

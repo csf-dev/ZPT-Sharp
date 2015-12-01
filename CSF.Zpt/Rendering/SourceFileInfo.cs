@@ -4,7 +4,7 @@ using System.IO;
 namespace CSF.Zpt.Rendering
 {
   /// <summary>
-  /// Provides information about the source file from which an <see cref="Element"/> is derived.
+  /// Provides information about the source file from which an <see cref="ZptElement"/> is derived.
   /// </summary>
   public class SourceFileInfo : IEquatable<SourceFileInfo>
   {

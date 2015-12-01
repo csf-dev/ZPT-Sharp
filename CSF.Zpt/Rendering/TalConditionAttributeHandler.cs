@@ -15,7 +15,7 @@ namespace CSF.Zpt.Rendering
     /// <returns>A collection of elements which are present in the DOM after this handler has completed its work.</returns>
     /// <param name="element">Element.</param>
     /// <param name="model">Model.</param>
-    public Element[] Handle(Element element, Model model)
+    public ZptElement[] Handle(ZptElement element, Model model)
     {
       if(element == null)
       {
@@ -26,7 +26,7 @@ namespace CSF.Zpt.Rendering
         throw new ArgumentNullException("model");
       }
 
-      Element[] output = new [] { element };
+      ZptElement[] output = new [] { element };
 
       var attribute = element.GetTalAttribute(Tal.ConditionAttribute);
       if(attribute != null)
@@ -37,7 +37,7 @@ namespace CSF.Zpt.Rendering
         if(!includeElement)
         {
           element.Remove();
-          output = new Element[0];
+          output = new ZptElement[0];
         }
       }
 

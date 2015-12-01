@@ -13,7 +13,7 @@ namespace CSF.Zpt.Rendering
     /// <returns>A collection of elements which are present in the DOM after this handler has completed its work.</returns>
     /// <param name="element">Element.</param>
     /// <param name="model">Model.</param>
-    Element[] Handle(Element element, Model model);
+    ZptElement[] Handle(ZptElement element, Model model);
   }
 }
 

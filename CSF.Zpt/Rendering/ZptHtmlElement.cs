@@ -7,9 +7,9 @@ using HtmlAgilityPack;
 namespace CSF.Zpt.Rendering
 {
   /// <summary>
-  /// Implementation of <see cref="Element"/> based on documents parsed using the HTML Agility Pack.
+  /// Implementation of <see cref="ZptElement"/> based on documents parsed using the HTML Agility Pack.
   /// </summary>
-  public class HtmlElement : Element
+  public class ZptHtmlElement : ZptElement
   {
     #region constants
 
@@ -56,10 +56,9 @@ namespace CSF.Zpt.Rendering
     #region methods
 
     /// <summary>
-    /// Returns a <see cref="System.String"/> that represents the current
-    /// <see cref="CSF.Zpt.Rendering.HtmlElement"/>.
+    /// Returns a <see cref="System.String"/> that represents the current <see cref="ZptHtmlElement"/>.
     /// </summary>
-    /// <returns>A <see cref="System.String"/> that represents the current <see cref="CSF.Zpt.Rendering.HtmlElement"/>.</returns>
+    /// <returns>A <see cref="System.String"/> that represents the current <see cref="ZptHtmlElement"/>.</returns>
     public override string ToString()
     {
       return this.Node.OuterHtml;
@@ -70,9 +69,9 @@ namespace CSF.Zpt.Rendering
     /// </summary>
     /// <returns>A reference to the replacement element, in its new DOM.</returns>
     /// <param name="replacement">Replacement.</param>
-    public override Element ReplaceWith(Element replacement)
+    public override ZptElement ReplaceWith(ZptElement replacement)
     {
-      var repl = replacement as HtmlElement;
+      var repl = replacement as ZptHtmlElement;
       if(repl == null)
       {
         throw new ArgumentException("The replacement must be a non-null instance of HtmlElement.",
@@ -80,7 +79,7 @@ namespace CSF.Zpt.Rendering
       }
 
       var parent = this.GetParent();
-      return new HtmlElement(parent.ReplaceChild(repl.Node, this.Node),
+      return new ZptHtmlElement(parent.ReplaceChild(repl.Node, this.Node),
                              repl.SourceFile,
                              isImported: true);
     }
@@ -89,20 +88,20 @@ namespace CSF.Zpt.Rendering
     /// Gets the element which is the parent of the current instance.
     /// </summary>
     /// <returns>The parent element.</returns>
-    public override Element GetParentElement()
+    public override ZptElement GetParentElement()
     {
-      return (this.Node.ParentNode != null)? new HtmlElement(this.Node.ParentNode, this.SourceFile) : null;
+      return (this.Node.ParentNode != null)? new ZptHtmlElement(this.Node.ParentNode, this.SourceFile) : null;
     }
 
     /// <summary>
     /// Gets a collection of the child elements from the current source element.
     /// </summary>
     /// <returns>The children.</returns>
-    public override Element[] GetChildElements()
+    public override ZptElement[] GetChildElements()
     {
       return this.Node.ChildNodes
         .Where(x => x.NodeType == HtmlNodeType.Element)
-        .Select(x => new HtmlElement(x, this.SourceFile))
+        .Select(x => new ZptHtmlElement(x, this.SourceFile))
         .ToArray();
     }
 
@@ -110,10 +109,10 @@ namespace CSF.Zpt.Rendering
     /// Gets a collection of the attributes present upon the current element.
     /// </summary>
     /// <returns>The attributes.</returns>
-    public override Attribute[] GetAttributes()
+    public override ZptAttribute[] GetAttributes()
     {
       return this.Node.Attributes
-        .Select(x => new HtmlAttribute(x))
+        .Select(x => new ZptHtmlAttribute(x))
         .ToArray();
     }
 
@@ -125,7 +124,7 @@ namespace CSF.Zpt.Rendering
     /// <param name="attributeNamespace">The attribute namespace.</param>
     /// <param name="prefix">The attribute prefix.</param>
     /// <param name="name">The attribute name.</param>
-    public override Attribute GetAttribute(string attributeNamespace, string prefix, string name)
+    public override ZptAttribute GetAttribute(string attributeNamespace, string prefix, string name)
     {
       if(name == null)
       {
@@ -137,7 +136,7 @@ namespace CSF.Zpt.Rendering
       var htmlAttribute = this.Node.Attributes
         .FirstOrDefault(x => x.Name == attribName);
 
-      return (htmlAttribute != null)? new HtmlAttribute(htmlAttribute) : null;
+      return (htmlAttribute != null)? new ZptHtmlAttribute(htmlAttribute) : null;
     }
 
     /// <summary>
@@ -148,14 +147,14 @@ namespace CSF.Zpt.Rendering
     /// <param name="attributeNamespace">The attribute namespace.</param>
     /// <param name="prefix">The attribute prefix.</param>
     /// <param name="name">The attribute name.</param>
-    public override Element[] SearchChildrenByAttribute(string attributeNamespace, string prefix, string name)
+    public override ZptElement[] SearchChildrenByAttribute(string attributeNamespace, string prefix, string name)
     {
       string attribName = this.GetName(prefix, name);
 
       return (from node in this.Node.Descendants()
               from attrib in node.Attributes
               where attrib.Name == attribName
-              select new HtmlElement(node, this.SourceFile))
+              select new ZptHtmlElement(node, this.SourceFile))
         .ToArray();
     }
 
@@ -254,11 +253,11 @@ namespace CSF.Zpt.Rendering
     /// <summary>
     /// Clone this instance into a new Element instance, which may be manipulated without affecting the original.
     /// </summary>
-    public override Element Clone()
+    public override ZptElement Clone()
     {
       var clone = _node.Clone();
 
-      return new HtmlElement(clone, this.SourceFile);
+      return new ZptHtmlElement(clone, this.SourceFile);
     }
 
     /// <summary>
@@ -299,13 +298,13 @@ namespace CSF.Zpt.Rendering
     #region constructor
 
     /// <summary>
-    /// Initializes a new instance of the <see cref="CSF.Zpt.Rendering.HtmlElement"/> class.
+    /// Initializes a new instance of the <see cref="CSF.Zpt.Rendering.ZptHtmlElement"/> class.
     /// </summary>
     /// <param name="node">The source HTML node.</param>
     /// <param name="sourceFile">Information about the element's source file.</param>
     /// <param name="isRoot">Whether or not this is the root element.</param>
     /// <param name="isImported">Whether or not this element is imported.</param>
-    public HtmlElement(HtmlNode node,
+    public ZptHtmlElement(HtmlNode node,
                        SourceFileInfo sourceFile,
                        bool isRoot = false,
                        bool isImported = false) : base(sourceFile, isRoot, isImported)
