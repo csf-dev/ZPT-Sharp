@@ -5,9 +5,9 @@ using CSF.Zpt.Resources;
 namespace CSF.Zpt.Tal
 {
   /// <summary>
-  /// Implementation of <see cref="ITalAttributeHandler"/> which handles a <c>tal:condition</c> attribute.
+  /// Implementation of <see cref="IAttributeHandler"/> which handles a <c>tal:condition</c> attribute.
   /// </summary>
-  public class TalConditionAttributeHandler : ITalAttributeHandler
+  public class ConditionAttributeHandler : IAttributeHandler
   {
     #region methods
 

@@ -51,7 +51,7 @@ namespace CSF.Zpt.Rendering
       else
       {
         var type = result.GetType();
-        output = (!type.IsValueType || result != Activator.CreateInstance(type));
+        output = (!type.IsValueType || !result.Equals(Activator.CreateInstance(type)));
       }
 
       return output;

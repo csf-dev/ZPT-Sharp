@@ -93,5 +93,11 @@ namespace CSF.Zpt.Resources {
                 return ResourceManager.GetString("IncorrectWrappedNodeType", resourceCulture);
             }
         }
+        
+        internal static string TalAttributeParsingError {
+            get {
+                return ResourceManager.GetString("TalAttributeParsingError", resourceCulture);
+            }
+        }
     }
 }

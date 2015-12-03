@@ -7,20 +7,22 @@ using CSF.Zpt.Resources;
 namespace CSF.Zpt.Tal
 {
   /// <summary>
-  /// Implementation of <see cref="ITalAttributeHandler"/> which handles a <c>tal:define</c> attribute.
+  /// Implementation of <see cref="IAttributeHandler"/> which handles a <c>tal:define</c> attribute.
   /// </summary>
-  public class TalDefineAttributeHandler : ITalAttributeHandler
+  public class DefineAttributeHandler : IAttributeHandler
   {
     #region constants
 
     private const string
       GLOBAL_SCOPE        = "global",
       DEFINITION_PATTERN  = "^(?:(local|global) )?([^ ]+) (.+)$",
-      ITEM_PATTERN        = @"((?:[^;]|;;)+)\s*(?:;(?!;))?\s*";
+      ITEM_PATTERN        = @"((?:[^;]|;;)+)\s*(?:;(?!;))?\s*",
+      ESCAPED_SEMICOLON   = ";;",
+      SEMICOLON           = ";";
 
     private static readonly Regex
       Definition          = new Regex(DEFINITION_PATTERN, RegexOptions.Compiled),
-      Item                = new Regex(ITEM_PATTERN, RegexOptions.Compiled);
+      ItemMatcher         = new Regex(ITEM_PATTERN, RegexOptions.Compiled);
 
     #endregion
 
@@ -47,13 +49,27 @@ namespace CSF.Zpt.Tal
 
       if(attrib != null)
       {
-        var definitionText = attrib.Value;
+        var itemMatches = ItemMatcher
+          .Matches(attrib.Value)
+          .Cast<Match>()
+          .Select(x => Definition.Match(x.Groups[1].Value));
 
-        var items = (from match in Item.Matches(definitionText).Cast<Match>()
-                     let def = Definition.Match(match.Groups[1].Value)
-                     select new { Scope = def.Groups[1].Value,
-                                  Name = def.Groups[2].Value,
-                                  Expression = def.Groups[3].Value })
+        if(itemMatches.Any(x => !x.Success))
+        {
+          string message = String.Format(Resources.ExceptionMessages.TalAttributeParsingError,
+                                         String.Concat(attrib.Name),
+                                         attrib.Value);
+          throw new ParserException(message) {
+            SourceElementName = element.Name,
+            SourceAttributeName = attrib.Name,
+            SourceAttributeValue = attrib.Value
+          };
+        }
+
+        var items = itemMatches
+          .Select(x => new {  Scope = x.Groups[1].Value,
+                              Name = x.Groups[2].Value,
+                              Expression = x.Groups[3].Value })
           .ToArray();
 
         foreach(var item in items)
@@ -62,7 +78,8 @@ namespace CSF.Zpt.Tal
 
           try
           {
-            result = model.Evaluate(item.Expression);
+            var unescapedExpression = this.UnescapeSemicolons(item.Expression);
+            result = model.Evaluate(unescapedExpression);
           }
           catch(Exception ex)
           {
@@ -90,6 +107,21 @@ namespace CSF.Zpt.Tal
       }
 
       return new[] { element };
+    }
+
+    /// <summary>
+    /// Unescapes doubled-up semicolons into singular semicolons.
+    /// </summary>
+    /// <returns>The unescaped string.</returns>
+    /// <param name="expression">A source expression which may contain escaped semicolons.</param>
+    private string UnescapeSemicolons(string expression)
+    {
+      if(expression == null)
+      {
+        throw new ArgumentNullException("expression");
+      }
+
+      return expression.Replace(ESCAPED_SEMICOLON, SEMICOLON);
     }
 
     #endregion

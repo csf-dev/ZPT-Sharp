@@ -66,19 +66,20 @@
     <Compile Include="ZptConstants.cs" />
     <Compile Include="Metal\MetalVisitor.cs" />
     <Compile Include="Metal\SourceAnnotationVisitor.cs" />
-    <Compile Include="Tal\ITalAttributeHandler.cs" />
-    <Compile Include="Tal\TalAttributesAttributeHandler.cs" />
-    <Compile Include="Tal\TalConditionAttributeHandler.cs" />
-    <Compile Include="Tal\TalContentOrReplaceAttributeHandler.cs" />
-    <Compile Include="Tal\TalDefineAttributeHandler.cs" />
-    <Compile Include="Tal\TalOmitTagAttributeHandler.cs" />
-    <Compile Include="Tal\TalOnErrorAttributeHandler.cs" />
-    <Compile Include="Tal\TalRepeatAttributeHandler.cs" />
     <Compile Include="Tal\TalVisitor.cs" />
     <Compile Include="Rendering\RenderingContext.cs" />
     <Compile Include="Resources\ExceptionMessages.Designer.cs">
       <DependentUpon>ExceptionMessages.resx</DependentUpon>
     </Compile>
+    <Compile Include="Tal\ParserException.cs" />
+    <Compile Include="Tal\IAttributeHandler.cs" />
+    <Compile Include="Tal\AttributesAttributeHandler.cs" />
+    <Compile Include="Tal\RepeatAttributeHandler.cs" />
+    <Compile Include="Tal\OnErrorAttributeHandler.cs" />
+    <Compile Include="Tal\OmitTagAttributeHandler.cs" />
+    <Compile Include="Tal\DefineAttributeHandler.cs" />
+    <Compile Include="Tal\ContentOrReplaceAttributeHandler.cs" />
+    <Compile Include="Tal\ConditionAttributeHandler.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
@@ -100,7 +101,6 @@
   <ItemGroup>
     <EmbeddedResource Include="Resources\ExceptionMessages.resx">
       <Generator>ResXFileCodeGenerator</Generator>
-      <LogicalName>ExceptionMessages.resx</LogicalName>
       <LastGenOutput>ExceptionMessages.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>

@@ -4,9 +4,9 @@ using CSF.Zpt.Rendering;
 namespace CSF.Zpt.Tal
 {
   /// <summary>
-  /// Implementation of <see cref="ITalAttributeHandler"/> which handles a <c>tal:omit-tag</c> attribute.
+  /// Implementation of <see cref="IAttributeHandler"/> which handles a <c>tal:omit-tag</c> attribute.
   /// </summary>
-  public class TalOmitTagAttributeHandler : ITalAttributeHandler
+  public class OmitTagAttributeHandler : IAttributeHandler
   {
     #region methods
 

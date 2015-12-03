@@ -4,10 +4,9 @@ using CSF.Zpt.Rendering;
 namespace CSF.Zpt.Tal
 {
   /// <summary>
-  /// Implementation of <see cref="ITalAttributeHandler"/> which handles either a <c>tal:content</c> or
-  /// <c>tal:replace</c> attribute.
+  /// Implementation of <see cref="IAttributeHandler"/> which handles a <c>tal:on-error</c> attribute.
   /// </summary>
-  public class TalContentOrReplaceAttributeHandler : ITalAttributeHandler
+  public class OnErrorAttributeHandler : IAttributeHandler
   {
     #region methods
 

@@ -11,8 +11,8 @@ namespace CSF.Zpt.Tal
   {
     #region fields
 
-    private ITalAttributeHandler[] _handlers;
-    private ITalAttributeHandler _errorHandler;
+    private IAttributeHandler[] _handlers;
+    private IAttributeHandler _errorHandler;
 
     #endregion
 
@@ -101,21 +101,21 @@ namespace CSF.Zpt.Tal
     /// <summary>
     /// Initializes a new instance of the <see cref="CSF.Zpt.Tal.TalVisitor"/> class.
     /// </summary>
-    /// <param name="handlers">A collection of <see cref="ITalAttributeHandler"/> to process.</param>
-    /// <param name="errorHandler">An <see cref="ITalAttributeHandler"/> which should be used to handle any errors.</param>
-    public TalVisitor(ITalAttributeHandler[] handlers = null,
-                      ITalAttributeHandler errorHandler = null)
+    /// <param name="handlers">A collection of <see cref="IAttributeHandler"/> to process.</param>
+    /// <param name="errorHandler">An <see cref="IAttributeHandler"/> which should be used to handle any errors.</param>
+    public TalVisitor(IAttributeHandler[] handlers = null,
+                      IAttributeHandler errorHandler = null)
     {
-      _handlers = handlers?? new ITalAttributeHandler[] {
-        new TalDefineAttributeHandler(),
-        new TalConditionAttributeHandler(),
-        new TalRepeatAttributeHandler(),
-        new TalContentOrReplaceAttributeHandler(),
-        new TalAttributesAttributeHandler(),
-        new TalOmitTagAttributeHandler(),
+      _handlers = handlers?? new IAttributeHandler[] {
+        new DefineAttributeHandler(),
+        new ConditionAttributeHandler(),
+        new RepeatAttributeHandler(),
+        new ContentOrReplaceAttributeHandler(),
+        new AttributesAttributeHandler(),
+        new OmitTagAttributeHandler(),
       };
 
-      _errorHandler = errorHandler?? new TalOnErrorAttributeHandler();
+      _errorHandler = errorHandler?? new OnErrorAttributeHandler();
     }
 
     #endregion

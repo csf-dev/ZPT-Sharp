@@ -75,6 +75,9 @@
     <Compile Include="Util\Autofixture\RenderingContextCustomisation.cs" />
     <Compile Include="Util\DummyModel.cs" />
     <Compile Include="Util\Autofixture\DummyModelCustomisation.cs" />
+    <Compile Include="Tal\TestDefineAttributeHandler.cs" />
+    <Compile Include="Tal\TestConditionAttributeHandler.cs" />
+    <Compile Include="Rendering\TestExpressionResult.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Rendering\TestHtmlElement.html" />

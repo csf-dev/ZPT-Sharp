@@ -37,4 +37,8 @@ Source expression: {2}</value>
   <data name="IncorrectWrappedNodeType" xml:space="preserve">
     <value>The wrapped node must be an {0} '{1}' node.</value>
   </data>
+  <data name="TalAttributeParsingError" xml:space="preserve">
+    <value>Parser error whilst handling a '{0}' TAL attribute, the attribute value is invalid.
+Attribute value:{1}</value>
+  </data>
 </root>

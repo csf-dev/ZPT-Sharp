@@ -30,7 +30,7 @@ namespace Test.CSF.Zpt.Tal
       var thirdElements   = elements.Skip(3).Take(2);
       var fourthElements  = elements.Skip(5).Take(2);
 
-      var handlers = Enumerable.Range(0, 2).Select(x => new Mock<ITalAttributeHandler>()).ToArray();
+      var handlers = Enumerable.Range(0, 2).Select(x => new Mock<IAttributeHandler>()).ToArray();
 
       handlers[0]
         .Setup(x => x.Handle(It.IsAny<ZptElement>(), It.IsAny<Model>()))
@@ -45,7 +45,7 @@ namespace Test.CSF.Zpt.Tal
       var expectedElements = thirdElements.Select(x => x.Object).Union(fourthElements.Select(x => x.Object));
 
       var sut = new TalVisitor(handlers: handlers.Select(x => x.Object).ToArray(), 
-                               errorHandler: Mock.Of<ITalAttributeHandler>());
+                               errorHandler: Mock.Of<IAttributeHandler>());
 
       // Act
       var result = sut.Visit(topElement, fixture.Create<RenderingContext>(), fixture.Create<RenderingOptions>());
@@ -79,7 +79,7 @@ namespace Test.CSF.Zpt.Tal
         .Setup(x => x.GetAttribute(ZptConstants.Tal.Namespace, ZptConstants.Tal.DefaultPrefix, ZptConstants.Tal.OnErrorAttribute))
         .Returns(Mock.Of<global::CSF.Zpt.Rendering.ZptAttribute>());
 
-      var generalHandler = new Mock<ITalAttributeHandler>();
+      var generalHandler = new Mock<IAttributeHandler>();
       generalHandler
         .Setup(x => x.Handle(It.IsAny<ZptElement>(), It.IsAny<Model>()))
         .Returns((ZptElement ele, Model mod) => new[] { ele });
@@ -89,7 +89,7 @@ namespace Test.CSF.Zpt.Tal
 
       object errorObject = null;
 
-      var errorHandler = new Mock<ITalAttributeHandler>();
+      var errorHandler = new Mock<IAttributeHandler>();
       errorHandler
         .Setup(x => x.Handle(elements[0].Object, It.IsAny<Model>()))
         .Callback((ZptElement ele, Model mod) => {
