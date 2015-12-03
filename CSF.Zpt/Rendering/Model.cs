@@ -15,6 +15,7 @@ namespace CSF.Zpt.Rendering
 
     private Model _parent, _root;
     private Dictionary<string,object> _localDefinitions, _globalDefinitions;
+    private Dictionary<ZptElement,RepetitionInfo> _repetitionInfo;
     private object _error;
 
     #endregion
@@ -111,6 +112,21 @@ namespace CSF.Zpt.Rendering
     }
 
     /// <summary>
+    /// Adds a collection of repetition information to the current instance.
+    /// </summary>
+    /// <param name="info">The repetition information.</param>
+    public virtual void AddRepetitionInfo(RepetitionInfo[] info)
+    {
+      if(info == null)
+      {
+        throw new ArgumentNullException("info");
+      }
+
+      // TODO: Write this implementation
+      throw new NotImplementedException();
+    }
+
+    /// <summary>
     /// Adds information about an encountered error to the current model instance.
     /// </summary>
     /// <param name="error">Error.</param>
@@ -138,31 +154,44 @@ namespace CSF.Zpt.Rendering
     /// Evaluate the specified expression and return the result.
     /// </summary>
     /// <param name="expression">The expression to evaluate.</param>
-    public abstract ExpressionResult Evaluate(string expression);
+    /// <param name="element">The element for which we are evaluating a result.</param>
+    public abstract ExpressionResult Evaluate(string expression, ZptElement element);
 
     /// <summary>
     /// Tries to get a named item from the current instance.
     /// </summary>
     /// <returns><c>true</c>, if an item was found, <c>false</c> otherwise.</returns>
     /// <param name="name">The item name.</param>
+    /// <param name="element">The element for which we are evaluating a result.</param>
     /// <param name="result">Exposes the item which was found.</param>
-    protected virtual bool TryGetItem(string name, out object result)
+    protected virtual bool TryGetItem(string name, ZptElement element, out object result)
     {
-      bool output = this.TryRecursivelyGetLocalItem(name, out result);
+      bool output = false;
+      result = null;
 
-      if(!output)
+      if(_repetitionInfo != null
+         && _repetitionInfo.ContainsKey(element))
       {
-        output = this.Root.GlobalDefinitions.ContainsKey(name);
-
-        if(output)
+        var candidate = _repetitionInfo[element];
+        if(candidate.Name == name)
         {
-          result = this.Root.GlobalDefinitions[name];
+          output = true;
+          result = candidate.Value;
         }
       }
 
       if(!output)
       {
-        result = null;
+        output = this.TryRecursivelyGetLocalItem(name, out result);
+      }
+
+      if(!output)
+      {
+        if(this.Root.GlobalDefinitions.ContainsKey(name))
+        {
+          output = true;
+          result = this.Root.GlobalDefinitions[name];
+        }
       }
 
       return output;

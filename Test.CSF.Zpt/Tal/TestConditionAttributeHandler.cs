@@ -34,6 +34,8 @@ namespace Test.CSF.Zpt.Tal
       _model = _autofixture.Create<DummyModel>();
       _element = new Mock<ZptElement>() { CallBase = true };
 
+      _element.Setup(x => x.Remove());
+
       _sut = new ConditionAttributeHandler();
     }
 
@@ -58,8 +60,8 @@ namespace Test.CSF.Zpt.Tal
       Assert.NotNull(result, "Result nullability");
       Assert.AreEqual(1, result.Length, "Count of results");
       Assert.AreSame(_element.Object, result[0], "Correct element returned");
-      Mock.Get(_model).Verify(x => x.AddLocal(It.IsAny<string>(), It.IsAny<object>()), Times.Never());
-      Mock.Get(_model).Verify(x => x.AddGlobal(It.IsAny<string>(), It.IsAny<object>()), Times.Never());
+
+      _element.Verify(x => x.Remove(), Times.Never());
     }
 
     //          Condition   Cancel    Expect element
@@ -80,9 +82,8 @@ namespace Test.CSF.Zpt.Tal
         .Returns(Mock.Of<ZptAttribute>(x => x.Value == _autofixture.Create<string>()));
 
       Mock.Get(_model)
-        .Setup(x => x.Evaluate(It.IsAny<string>()))
+        .Setup(x => x.Evaluate(It.IsAny<string>(), _element.Object))
         .Returns(new ExpressionResult(cancelsAction? Model.CancelAction : conditionValue));
-      _element.Setup(x => x.Remove());
 
       // Act
       var result = _sut.Handle(_element.Object, _model);
@@ -100,10 +101,8 @@ namespace Test.CSF.Zpt.Tal
         Assert.AreEqual(0, result.Length, "Count of results");
         _element.Verify(x => x.Remove(), Times.Once());
       }
-      Mock.Get(_model).Verify(x => x.Evaluate(It.IsAny<string>()), Times.Once());
+      Mock.Get(_model).Verify(x => x.Evaluate(It.IsAny<string>(), _element.Object), Times.Once());
     }
-
-
 
     #endregion
   }

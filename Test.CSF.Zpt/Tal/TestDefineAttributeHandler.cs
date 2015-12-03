@@ -83,7 +83,9 @@ namespace Test.CSF.Zpt.Tal
         .Returns(Mock.Of<ZptAttribute>(x => x.Value == attributeVal));
       
       var obj = _autofixture.Create<object>();
-      Mock.Get(_model).Setup(x => x.Evaluate(expression)).Returns(new ExpressionResult(obj));
+      Mock.Get(_model)
+        .Setup(x => x.Evaluate(expression, _element.Object))
+        .Returns(new ExpressionResult(obj));
 
       // Act
       var result = _sut.Handle(_element.Object, _model);
@@ -92,7 +94,7 @@ namespace Test.CSF.Zpt.Tal
       Assert.NotNull(result, "Result nullability");
       Assert.AreEqual(1, result.Length, "Count of results");
       Assert.AreSame(_element.Object, result[0], "Correct element returned");
-      Mock.Get(_model).Verify(x => x.Evaluate(expression), Times.Once());
+      Mock.Get(_model).Verify(x => x.Evaluate(expression, _element.Object), Times.Once());
       Mock.Get(_model).Verify(x => x.AddLocal(variableName, obj),
                               expectGlobal? Times.Never() : Times.Once());
       Mock.Get(_model).Verify(x => x.AddGlobal(variableName, obj),
@@ -121,7 +123,7 @@ namespace Test.CSF.Zpt.Tal
       };
       foreach(var item in expressionsAndResults)
       {
-        Mock.Get(_model).Setup(x => x.Evaluate(item.Expression)).Returns(new ExpressionResult(item.Result));
+        Mock.Get(_model).Setup(x => x.Evaluate(item.Expression, _element.Object)).Returns(new ExpressionResult(item.Result));
       }
 
       // Act
@@ -133,7 +135,7 @@ namespace Test.CSF.Zpt.Tal
       Assert.AreSame(_element.Object, result[0], "Correct element returned");
       foreach(var item in expressionsAndResults)
       {
-        Mock.Get(_model).Verify(x => x.Evaluate(item.Expression), Times.Once());
+        Mock.Get(_model).Verify(x => x.Evaluate(item.Expression, _element.Object), Times.Once());
         Mock.Get(_model).Verify(x => x.AddLocal(item.Key, item.Result),
                                 item.Global? Times.Never() : Times.Once());
         Mock.Get(_model).Verify(x => x.AddGlobal(item.Key, item.Result),
@@ -163,7 +165,7 @@ namespace Test.CSF.Zpt.Tal
       };
       foreach(var item in expressionsAndResults)
       {
-        Mock.Get(_model).Setup(x => x.Evaluate(item.Expression)).Returns(new ExpressionResult(item.Result));
+        Mock.Get(_model).Setup(x => x.Evaluate(item.Expression, _element.Object)).Returns(new ExpressionResult(item.Result));
       }
 
       // Act
@@ -175,7 +177,7 @@ namespace Test.CSF.Zpt.Tal
       Assert.AreSame(_element.Object, result[0], "Correct element returned");
       foreach(var item in expressionsAndResults)
       {
-        Mock.Get(_model).Verify(x => x.Evaluate(item.Expression), Times.Once());
+        Mock.Get(_model).Verify(x => x.Evaluate(item.Expression, _element.Object), Times.Once());
 
         if(item.Result != Model.CancelAction)
         {
@@ -206,7 +208,7 @@ namespace Test.CSF.Zpt.Tal
         .Returns(Mock.Of<ZptAttribute>(x => x.Value == attributeVal));
       
       Mock.Get(_model)
-        .Setup(x => x.Evaluate(It.IsAny<string>()))
+        .Setup(x => x.Evaluate(It.IsAny<string>(), _element.Object))
         .Returns(new ExpressionResult(_autofixture.Create<object>()));
 
       // Act

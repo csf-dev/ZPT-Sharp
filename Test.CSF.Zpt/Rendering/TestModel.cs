@@ -33,7 +33,7 @@ namespace Test.CSF.Zpt.Rendering
       models[0].AddLocal(key, obj);
 
       // Act
-      var result = models[levelsOfNesting].Evaluate(key);
+      var result = models[levelsOfNesting].Evaluate(key, null);
 
       // Assert
       Assert.NotNull(result, "Result nullability");
@@ -60,7 +60,7 @@ namespace Test.CSF.Zpt.Rendering
       models[0].AddGlobal(key, obj);
 
       // Act
-      var result = models[levelsOfNesting].Evaluate(key);
+      var result = models[levelsOfNesting].Evaluate(key, null);
 
       // Assert
       Assert.NotNull(result, "Result nullability");
@@ -90,7 +90,7 @@ namespace Test.CSF.Zpt.Rendering
       models[overrideLevel].AddLocal(key, obj2);
 
       // Act
-      var result = models[levelsOfNesting].Evaluate(key);
+      var result = models[levelsOfNesting].Evaluate(key, null);
 
       // Assert
       Assert.NotNull(result, "Result nullability");

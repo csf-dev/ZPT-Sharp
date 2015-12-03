@@ -78,6 +78,7 @@
     <Compile Include="Tal\TestDefineAttributeHandler.cs" />
     <Compile Include="Tal\TestConditionAttributeHandler.cs" />
     <Compile Include="Rendering\TestExpressionResult.cs" />
+    <Compile Include="Tal\TestRepeatAttributeHandler.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Rendering\TestHtmlElement.html" />

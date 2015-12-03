@@ -29,12 +29,13 @@ namespace Test.CSF.Zpt.Util
     /// </para>
     /// </remarks>
     /// <param name="expression">The expression to evaluate.</param>
-    public override ExpressionResult Evaluate(string expression)
+    /// <param name="element">The element for which we are evaluating a result.</param>
+    public override ExpressionResult Evaluate(string expression, ZptElement element)
     {
       object result;
       ExpressionResult output;
 
-      if(this.TryGetItem(expression, out result))
+      if(this.TryGetItem(expression, element, out result))
       {
         output = new ExpressionResult(result);
       }

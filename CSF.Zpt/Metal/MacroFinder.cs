@@ -62,7 +62,7 @@ namespace CSF.Zpt.Metal
 
         try
         {
-          result = model.Evaluate(attrib.Value);
+          result = model.Evaluate(attrib.Value, element);
           output = result.GetResult<ZptElement>();
         }
         catch(Exception)

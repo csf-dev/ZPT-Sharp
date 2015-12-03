@@ -79,7 +79,7 @@ namespace CSF.Zpt.Tal
           try
           {
             var unescapedExpression = this.UnescapeSemicolons(item.Expression);
-            result = model.Evaluate(unescapedExpression);
+            result = model.Evaluate(unescapedExpression, element);
           }
           catch(Exception ex)
           {

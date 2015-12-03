@@ -37,7 +37,7 @@ namespace CSF.Zpt.Tal
 
         try
         {
-          result = model.Evaluate(attribute.Value);
+          result = model.Evaluate(attribute.Value, element);
         }
         catch(Exception ex)
         {
