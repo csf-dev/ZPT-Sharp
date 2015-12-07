@@ -87,6 +87,19 @@ namespace CSF.Zpt.Rendering
     }
 
     /// <summary>
+    /// Inserts a new child element into the current element's child elements.  The new child will be the previous
+    /// sibling before a given existing child.
+    /// </summary>
+    /// <returns>The newly-added element.</returns>
+    /// <param name="existing">An existing child element, before which the child will be inserted.</param>
+    /// <param name="newChild">The new child element to insert.</param>
+    public override ZptElement InsertBefore(ZptElement existing, ZptElement newChild)
+    {
+      // TODO: Write this implementation
+      throw new NotImplementedException();
+    }
+
+    /// <summary>
     /// Inserts a new child element into the current element's child elements.  The new child will be the next
     /// sibling after a given existing child.
     /// </summary>

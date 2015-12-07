@@ -56,8 +56,9 @@ namespace CSF.Zpt.Tal
 
         if(itemMatches.Any(x => !x.Success))
         {
-          string message = String.Format(Resources.ExceptionMessages.TalAttributeParsingError,
-                                         String.Concat(attrib.Name),
+          string message = String.Format(Resources.ExceptionMessages.ZptAttributeParsingError,
+                                         ZptConstants.Tal.DefaultPrefix,
+                                         ZptConstants.Tal.DefineAttribute,
                                          attrib.Value);
           throw new ParserException(message) {
             SourceElementName = element.Name,
@@ -75,15 +76,15 @@ namespace CSF.Zpt.Tal
         foreach(var item in items)
         {
           ExpressionResult result;
+          var unescapedExpression = this.UnescapeSemicolons(item.Expression);
 
           try
           {
-            var unescapedExpression = this.UnescapeSemicolons(item.Expression);
             result = model.Evaluate(unescapedExpression, element);
           }
           catch(Exception ex)
           {
-            string message = String.Format(ExceptionMessages.ExpressionEvaluationExceptionFormat,
+            string message = String.Format(ExceptionMessages.ExpressionEvaluationException,
                                            ZptConstants.Tal.DefaultPrefix,
                                            ZptConstants.Tal.DefineAttribute,
                                            item.Expression);

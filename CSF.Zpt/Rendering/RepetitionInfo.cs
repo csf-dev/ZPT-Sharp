@@ -33,7 +33,7 @@ namespace CSF.Zpt.Rendering
     /// Gets the count of items in the repetition.
     /// </summary>
     /// <value>The count.</value>
-    public uint Count
+    public int Count
     {
       get;
       private set;
@@ -43,7 +43,7 @@ namespace CSF.Zpt.Rendering
     /// Gets the index of the current iteration.
     /// </summary>
     /// <value>The index.</value>
-    public uint Index
+    public int Index
     {
       get;
       private set;
@@ -71,7 +71,7 @@ namespace CSF.Zpt.Rendering
     /// <param name="count">Count.</param>
     /// <param name="value">Value.</param>
     /// <param name="element">Element.</param>
-    public RepetitionInfo(string name, uint index, uint count, object value, ZptElement element)
+    public RepetitionInfo(string name, int index, int count, object value, ZptElement element)
     {
       if(name == null)
       {

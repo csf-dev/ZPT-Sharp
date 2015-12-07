@@ -41,7 +41,7 @@ namespace CSF.Zpt.Tal
         }
         catch(Exception ex)
         {
-          string message = String.Format(ExceptionMessages.ExpressionEvaluationExceptionFormat,
+          string message = String.Format(ExceptionMessages.ExpressionEvaluationException,
                                          ZptConstants.Tal.DefaultPrefix,
                                          ZptConstants.Tal.ConditionAttribute,
                                          attribute.Value);

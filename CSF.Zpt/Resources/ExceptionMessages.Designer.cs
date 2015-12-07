@@ -46,9 +46,9 @@ namespace CSF.Zpt.Resources {
             }
         }
         
-        internal static string ExpressionEvaluationExceptionFormat {
+        internal static string ExpressionEvaluationException {
             get {
-                return ResourceManager.GetString("ExpressionEvaluationExceptionFormat", resourceCulture);
+                return ResourceManager.GetString("ExpressionEvaluationException", resourceCulture);
             }
         }
         
@@ -94,9 +94,15 @@ namespace CSF.Zpt.Resources {
             }
         }
         
-        internal static string TalAttributeParsingError {
+        internal static string ZptAttributeParsingError {
             get {
-                return ResourceManager.GetString("TalAttributeParsingError", resourceCulture);
+                return ResourceManager.GetString("ZptAttributeParsingError", resourceCulture);
+            }
+        }
+        
+        internal static string TalRepeatExpressionMustEvaluateToIEnumerable {
+            get {
+                return ResourceManager.GetString("TalRepeatExpressionMustEvaluateToIEnumerable", resourceCulture);
             }
         }
     }

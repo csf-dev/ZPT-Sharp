@@ -12,7 +12,7 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="ExpressionEvaluationExceptionFormat" xml:space="preserve">
+  <data name="ExpressionEvaluationException" xml:space="preserve">
     <value>An error was encountered evaluating an expression whilst processing a '{0}:{1}' attribute, see the inner exception for more details.
 Source expression: {2}</value>
   </data>
@@ -37,8 +37,12 @@ Source expression: {2}</value>
   <data name="IncorrectWrappedNodeType" xml:space="preserve">
     <value>The wrapped node must be an {0} '{1}' node.</value>
   </data>
-  <data name="TalAttributeParsingError" xml:space="preserve">
-    <value>Parser error whilst handling a '{0}' TAL attribute, the attribute value is invalid.
-Attribute value:{1}</value>
+  <data name="ZptAttributeParsingError" xml:space="preserve">
+    <value>Parser error whilst handling a '{0}:{1}' ZPT attribute, the attribute value is invalid.
+Attribute value:{2}</value>
+  </data>
+  <data name="TalRepeatExpressionMustEvaluateToIEnumerable" xml:space="preserve">
+    <value>The result of the TAL 'tal:repeat' expression must be an object which implements `{0}' or a null reference.
+Expression:{1}</value>
   </data>
 </root>

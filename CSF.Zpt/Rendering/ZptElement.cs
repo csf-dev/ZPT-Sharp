@@ -76,6 +76,15 @@ namespace CSF.Zpt.Rendering
     public abstract ZptElement ReplaceWith(ZptElement replacement);
 
     /// <summary>
+    /// Inserts a new child element into the current element's child elements.  The new child will be the previous
+    /// sibling before a given existing child.
+    /// </summary>
+    /// <returns>The newly-added element.</returns>
+    /// <param name="existing">An existing child element, before which the child will be inserted.</param>
+    /// <param name="newChild">The new child element to insert.</param>
+    public abstract ZptElement InsertBefore(ZptElement existing, ZptElement newChild);
+
+    /// <summary>
     /// Inserts a new child element into the current element's child elements.  The new child will be the next
     /// sibling after a given existing child.
     /// </summary>
