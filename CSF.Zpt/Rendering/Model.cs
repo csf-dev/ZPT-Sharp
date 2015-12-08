@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using CSF.Zpt.Resources;
+using System.Linq;
 
 namespace CSF.Zpt.Rendering
 {
@@ -122,8 +123,8 @@ namespace CSF.Zpt.Rendering
         throw new ArgumentNullException("info");
       }
 
-      // TODO: Write this implementation
-      throw new NotImplementedException();
+      _repetitionInfo = info
+        .ToDictionary(k => k.AssociatedElement, v => v);
     }
 
     /// <summary>
