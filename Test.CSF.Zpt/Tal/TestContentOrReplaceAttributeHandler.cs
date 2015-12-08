@@ -66,8 +66,8 @@ namespace Test.CSF.Zpt.Tal
 
       // Assert
       Assert.NotNull(result, "Result nullability");
-      Assert.AreEqual(1, result.Length, "Count of results");
-      Assert.AreSame(_element.Object, result[0], "Correct element returned");
+      Assert.AreEqual(1, result.Elements.Length, "Count of results");
+      Assert.AreSame(_element.Object, result.Elements[0], "Correct element returned");
 
       _element.Verify(x => x.Remove(),
                       Times.Never());
@@ -107,8 +107,8 @@ namespace Test.CSF.Zpt.Tal
 
       // Assert
       Assert.NotNull(result, "Result nullability");
-      Assert.AreEqual(1, result.Length, "Count of results");
-      Assert.AreSame(_element.Object, result[0], "Correct element returned");
+      Assert.AreEqual(1, result.Elements.Length, "Count of results");
+      Assert.AreSame(_element.Object, result.Elements[0], "Correct element returned");
 
       _element.Verify(x => x.Remove(),
                       Times.Never());
@@ -144,8 +144,8 @@ namespace Test.CSF.Zpt.Tal
 
       // Assert
       Assert.NotNull(result, "Result nullability");
-      Assert.AreEqual(1, result.Length, "Count of results");
-      Assert.AreSame(_element.Object, result[0], "Correct element returned");
+      Assert.AreEqual(1, result.Elements.Length, "Count of results");
+      Assert.AreSame(_element.Object, result.Elements[0], "Correct element returned");
 
       _element.Verify(x => x.Remove(),
                       Times.Never());
@@ -181,8 +181,8 @@ namespace Test.CSF.Zpt.Tal
 
       // Assert
       Assert.NotNull(result, "Result nullability");
-      Assert.AreEqual(1, result.Length, "Count of results");
-      Assert.AreSame(_element.Object, result[0], "Correct element returned");
+      Assert.AreEqual(1, result.Elements.Length, "Count of results");
+      Assert.AreSame(_element.Object, result.Elements[0], "Correct element returned");
 
       _element.Verify(x => x.Remove(),
                       Times.Never());
@@ -218,8 +218,8 @@ namespace Test.CSF.Zpt.Tal
 
       // Assert
       Assert.NotNull(result, "Result nullability");
-      Assert.AreEqual(1, result.Length, "Count of results");
-      Assert.AreSame(_element.Object, result[0], "Correct element returned");
+      Assert.AreEqual(1, result.Elements.Length, "Count of results");
+      Assert.AreSame(_element.Object, result.Elements[0], "Correct element returned");
 
       _element.Verify(x => x.Remove(),
                       Times.Never());
@@ -255,8 +255,8 @@ namespace Test.CSF.Zpt.Tal
 
       // Assert
       Assert.NotNull(result, "Result nullability");
-      Assert.AreEqual(1, result.Length, "Count of results");
-      Assert.AreSame(_element.Object, result[0], "Correct element returned");
+      Assert.AreEqual(1, result.Elements.Length, "Count of results");
+      Assert.AreSame(_element.Object, result.Elements[0], "Correct element returned");
 
       _element.Verify(x => x.Remove(),
                       Times.Never());
@@ -292,8 +292,8 @@ namespace Test.CSF.Zpt.Tal
 
       // Assert
       Assert.NotNull(result, "Result nullability");
-      Assert.AreEqual(1, result.Length, "Count of results");
-      Assert.AreSame(_element.Object, result[0], "Correct element returned");
+      Assert.AreEqual(1, result.Elements.Length, "Count of results");
+      Assert.AreSame(_element.Object, result.Elements[0], "Correct element returned");
 
       _element.Verify(x => x.Remove(),
                       Times.Never());
@@ -333,8 +333,8 @@ namespace Test.CSF.Zpt.Tal
 
       // Assert
       Assert.NotNull(result, "Result nullability");
-      Assert.AreEqual(1, result.Length, "Count of results");
-      Assert.AreSame(_element.Object, result[0], "Correct element returned");
+      Assert.AreEqual(1, result.Elements.Length, "Count of results");
+      Assert.AreSame(_element.Object, result.Elements[0], "Correct element returned");
 
       _element.Verify(x => x.Remove(),
                       Times.Never());
@@ -370,8 +370,8 @@ namespace Test.CSF.Zpt.Tal
 
       // Assert
       Assert.NotNull(result, "Result nullability");
-      Assert.AreEqual(1, result.Length, "Count of results");
-      Assert.AreSame(_element.Object, result[0], "Correct element returned");
+      Assert.AreEqual(1, result.Elements.Length, "Count of results");
+      Assert.AreSame(_element.Object, result.Elements[0], "Correct element returned");
 
       _element.Verify(x => x.Remove(),
                       Times.Never());
@@ -407,8 +407,8 @@ namespace Test.CSF.Zpt.Tal
 
       // Assert
       Assert.NotNull(result, "Result nullability");
-      Assert.AreEqual(1, result.Length, "Count of results");
-      Assert.AreSame(_element.Object, result[0], "Correct element returned");
+      Assert.AreEqual(1, result.Elements.Length, "Count of results");
+      Assert.AreSame(_element.Object, result.Elements[0], "Correct element returned");
 
       _element.Verify(x => x.Remove(),
                       Times.Never());
@@ -444,7 +444,7 @@ namespace Test.CSF.Zpt.Tal
 
       // Assert
       Assert.NotNull(result, "Result nullability");
-      Assert.AreEqual(0, result.Length, "Count of results");
+      Assert.AreEqual(0, result.Elements.Length, "Count of results");
 
       _element.Verify(x => x.Remove(),
                       Times.Once());
@@ -480,7 +480,7 @@ namespace Test.CSF.Zpt.Tal
 
       // Assert
       Assert.NotNull(result, "Result nullability");
-      Assert.AreEqual(0, result.Length, "Count of results");
+      Assert.AreEqual(0, result.Elements.Length, "Count of results");
 
       _element.Verify(x => x.Remove(),
                       Times.Once());
@@ -516,7 +516,7 @@ namespace Test.CSF.Zpt.Tal
 
       // Assert
       Assert.NotNull(result, "Result nullability");
-      Assert.AreEqual(0, result.Length, "Count of results");
+      Assert.AreEqual(0, result.Elements.Length, "Count of results");
 
       _element.Verify(x => x.Remove(),
                       Times.Once());
@@ -558,8 +558,8 @@ namespace Test.CSF.Zpt.Tal
 
       // Assert
       Assert.NotNull(result, "Result nullability");
-      Assert.AreEqual(1, result.Length, "Count of results");
-      Assert.AreSame(_element.Object, result[0], "Correct element returned");
+      Assert.AreEqual(1, result.Elements.Length, "Count of results");
+      Assert.AreSame(_element.Object, result.Elements[0], "Correct element returned");
 
       _element.Verify(x => x.Remove(),
                       Times.Never());
@@ -597,8 +597,8 @@ namespace Test.CSF.Zpt.Tal
 
       // Assert
       Assert.NotNull(result, "Result nullability");
-      Assert.AreEqual(1, result.Length, "Count of results");
-      Assert.AreSame(_element.Object, result[0], "Correct element returned");
+      Assert.AreEqual(1, result.Elements.Length, "Count of results");
+      Assert.AreSame(_element.Object, result.Elements[0], "Correct element returned");
 
       _element.Verify(x => x.Remove(),
                       Times.Never());
@@ -636,8 +636,8 @@ namespace Test.CSF.Zpt.Tal
 
       // Assert
       Assert.NotNull(result, "Result nullability");
-      Assert.AreEqual(1, result.Length, "Count of results");
-      Assert.AreSame(_element.Object, result[0], "Correct element returned");
+      Assert.AreEqual(1, result.Elements.Length, "Count of results");
+      Assert.AreSame(_element.Object, result.Elements[0], "Correct element returned");
 
       _element.Verify(x => x.Remove(),
                       Times.Never());

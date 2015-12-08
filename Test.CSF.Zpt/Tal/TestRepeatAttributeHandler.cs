@@ -64,8 +64,8 @@ namespace Test.CSF.Zpt.Tal
 
       // Assert
       Assert.NotNull(result, "Result nullability");
-      Assert.AreEqual(1, result.Length, "Count of results");
-      Assert.AreSame(_element.Object, result[0], "Correct element returned");
+      Assert.AreEqual(1, result.Elements.Length, "Count of results");
+      Assert.AreSame(_element.Object, result.Elements[0], "Correct element returned");
 
       _element.Verify(x => x.Remove(), Times.Never());
       _parent.Verify(x => x.InsertBefore(It.IsAny<ZptElement>(), It.IsAny<ZptElement>()), Times.Never());
@@ -94,8 +94,8 @@ namespace Test.CSF.Zpt.Tal
       _element.Verify(x => x.Remove(), Times.Never());
       _parent.Verify(x => x.InsertBefore(It.IsAny<ZptElement>(), It.IsAny<ZptElement>()), Times.Never());
 
-      Assert.AreEqual(1, result.Length, "Count of results");
-      Assert.AreSame(_element.Object, result[0], "Correct element returned");
+      Assert.AreEqual(1, result.Elements.Length, "Count of results");
+      Assert.AreSame(_element.Object, result.Elements[0], "Correct element returned");
     }
 
     [Test]
@@ -121,8 +121,8 @@ namespace Test.CSF.Zpt.Tal
       _element.Verify(x => x.Remove(), Times.Never());
       _parent.Verify(x => x.InsertBefore(It.IsAny<ZptElement>(), It.IsAny<ZptElement>()), Times.Never());
 
-      Assert.AreEqual(1, result.Length, "Count of results");
-      Assert.AreSame(_element.Object, result[0], "Correct element returned");
+      Assert.AreEqual(1, result.Elements.Length, "Count of results");
+      Assert.AreSame(_element.Object, result.Elements[0], "Correct element returned");
     }
 
     [Test]
@@ -148,7 +148,7 @@ namespace Test.CSF.Zpt.Tal
       _element.Verify(x => x.Remove(), Times.Once());
       _parent.Verify(x => x.InsertBefore(It.IsAny<ZptElement>(), It.IsAny<ZptElement>()), Times.Never());
 
-      Assert.AreEqual(0, result.Length, "Count of results");
+      Assert.AreEqual(0, result.Elements.Length, "Count of results");
     }
 
     [Test]
@@ -178,7 +178,7 @@ namespace Test.CSF.Zpt.Tal
         .Verify(x => x.AddRepetitionInfo(It.Is<RepetitionInfo[]>(r => r.Length == 4 && r.All(i => i.Name == "foo"))),
                 Times.Once());
       
-      Assert.AreEqual(4, result.Length, "Count of results");
+      Assert.AreEqual(4, result.Elements.Length, "Count of results");
     }
 
     #endregion

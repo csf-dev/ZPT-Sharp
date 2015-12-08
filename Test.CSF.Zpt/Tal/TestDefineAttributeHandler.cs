@@ -56,8 +56,8 @@ namespace Test.CSF.Zpt.Tal
 
       // Assert
       Assert.NotNull(result, "Result nullability");
-      Assert.AreEqual(1, result.Length, "Count of results");
-      Assert.AreSame(_element.Object, result[0], "Correct element returned");
+      Assert.AreEqual(1, result.Elements.Length, "Count of results");
+      Assert.AreSame(_element.Object, result.Elements[0], "Correct element returned");
       Mock.Get(_model).Verify(x => x.AddLocal(It.IsAny<string>(), It.IsAny<object>()), Times.Never());
       Mock.Get(_model).Verify(x => x.AddGlobal(It.IsAny<string>(), It.IsAny<object>()), Times.Never());
     }
@@ -92,8 +92,8 @@ namespace Test.CSF.Zpt.Tal
 
       // Assert
       Assert.NotNull(result, "Result nullability");
-      Assert.AreEqual(1, result.Length, "Count of results");
-      Assert.AreSame(_element.Object, result[0], "Correct element returned");
+      Assert.AreEqual(1, result.Elements.Length, "Count of results");
+      Assert.AreSame(_element.Object, result.Elements[0], "Correct element returned");
       Mock.Get(_model).Verify(x => x.Evaluate(expression, _element.Object), Times.Once());
       Mock.Get(_model).Verify(x => x.AddLocal(variableName, obj),
                               expectGlobal? Times.Never() : Times.Once());
@@ -131,8 +131,8 @@ namespace Test.CSF.Zpt.Tal
 
       // Assert
       Assert.NotNull(result, "Result nullability");
-      Assert.AreEqual(1, result.Length, "Count of results");
-      Assert.AreSame(_element.Object, result[0], "Correct element returned");
+      Assert.AreEqual(1, result.Elements.Length, "Count of results");
+      Assert.AreSame(_element.Object, result.Elements[0], "Correct element returned");
       foreach(var item in expressionsAndResults)
       {
         Mock.Get(_model).Verify(x => x.Evaluate(item.Expression, _element.Object), Times.Once());
@@ -173,8 +173,8 @@ namespace Test.CSF.Zpt.Tal
 
       // Assert
       Assert.NotNull(result, "Result nullability");
-      Assert.AreEqual(1, result.Length, "Count of results");
-      Assert.AreSame(_element.Object, result[0], "Correct element returned");
+      Assert.AreEqual(1, result.Elements.Length, "Count of results");
+      Assert.AreSame(_element.Object, result.Elements[0], "Correct element returned");
       foreach(var item in expressionsAndResults)
       {
         Mock.Get(_model).Verify(x => x.Evaluate(item.Expression, _element.Object), Times.Once());

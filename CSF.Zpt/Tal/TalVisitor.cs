@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using CSF.Zpt.Rendering;
+using System.Collections.Generic;
 
 namespace CSF.Zpt.Tal
 {
@@ -39,19 +40,24 @@ namespace CSF.Zpt.Tal
       }
 
 
-      var output = new [] { element };
+      IEnumerable<AttributeHandlingResult> output = new [] { new AttributeHandlingResult(new [] { element }, true) };
 
       foreach(var handler in _handlers)
       {
-        var elementsAfterProcessing = (from ele in output
-                                       from handled in handler.Handle(ele, context.TalModel)
-                                       select handled)
-          .ToArray();
+        var elementsAfterProcessing = (from batch in output.Where(x => x.ContinueHandling)
+                                       from ele in batch.Elements
+                                       let handledBatch = handler.Handle(ele, context.TalModel)
+                                       select handledBatch);
 
-        output = elementsAfterProcessing;
+        output = output
+          .Where(x => !x.ContinueHandling)
+          .Union(elementsAfterProcessing)
+          .ToArray();
       }
 
-      return output;
+      return output
+        .SelectMany(x => x.Elements)
+        .ToArray();
     }
 
     /// <summary>

@@ -14,10 +14,10 @@ namespace CSF.Zpt.Tal
     /// <summary>
     /// Handle the related attribute types which exist upon the element, if any.
     /// </summary>
-    /// <returns>A collection of elements which are present in the DOM after this handler has completed its work.</returns>
+    /// <returns>A response type providing information about the result of this operation.</returns>
     /// <param name="element">Element.</param>
     /// <param name="model">Model.</param>
-    public ZptElement[] Handle(ZptElement element, Model model)
+    public AttributeHandlingResult Handle(ZptElement element, Model model)
     {
       if(element == null)
       {
@@ -28,7 +28,7 @@ namespace CSF.Zpt.Tal
         throw new ArgumentNullException("model");
       }
 
-      ZptElement[] output = new [] { element };
+      AttributeHandlingResult output = new AttributeHandlingResult(new [] { element }, true);
 
       var attribute = element.GetTalAttribute(ZptConstants.Tal.ConditionAttribute);
       if(attribute != null)
@@ -54,7 +54,7 @@ namespace CSF.Zpt.Tal
         if(removeElement)
         {
           element.Remove();
-          output = new ZptElement[0];
+          output = new AttributeHandlingResult(new ZptElement[0], false);
         }
       }
 

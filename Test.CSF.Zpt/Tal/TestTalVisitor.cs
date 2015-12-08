@@ -34,13 +34,13 @@ namespace Test.CSF.Zpt.Tal
 
       handlers[0]
         .Setup(x => x.Handle(It.IsAny<ZptElement>(), It.IsAny<Model>()))
-        .Returns(secondElements.Select(x => x.Object).ToArray());
+        .Returns(new AttributeHandlingResult(secondElements.Select(x => x.Object).ToArray(), true));
       handlers[1]
         .Setup(x => x.Handle(secondElements[0].Object, It.IsAny<Model>()))
-        .Returns(thirdElements.Select(x => x.Object).ToArray());
+        .Returns(new AttributeHandlingResult(thirdElements.Select(x => x.Object).ToArray(), true));
       handlers[1]
         .Setup(x => x.Handle(secondElements[1].Object, It.IsAny<Model>()))
-        .Returns(fourthElements.Select(x => x.Object).ToArray());
+        .Returns(new AttributeHandlingResult(fourthElements.Select(x => x.Object).ToArray(), true));
 
       var expectedElements = thirdElements.Select(x => x.Object).Union(fourthElements.Select(x => x.Object));
 
@@ -82,7 +82,7 @@ namespace Test.CSF.Zpt.Tal
       var generalHandler = new Mock<IAttributeHandler>();
       generalHandler
         .Setup(x => x.Handle(It.IsAny<ZptElement>(), It.IsAny<Model>()))
-        .Returns((ZptElement ele, Model mod) => new[] { ele });
+        .Returns((ZptElement ele, Model mod) => new AttributeHandlingResult(new[] { ele }, true));
       generalHandler
         .Setup(x => x.Handle(elements[nestingLevel].Object, It.IsAny<Model>()))
         .Throws<RenderingException>();

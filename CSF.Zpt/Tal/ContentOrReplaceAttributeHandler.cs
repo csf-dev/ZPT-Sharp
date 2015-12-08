@@ -26,10 +26,10 @@ namespace CSF.Zpt.Tal
     /// <summary>
     /// Handle the related attribute types which exist upon the element, if any.
     /// </summary>
-    /// <returns>A collection of elements which are present in the DOM after this handler has completed its work.</returns>
+    /// <returns>A response type providing information about the result of this operation.</returns>
     /// <param name="element">Element.</param>
     /// <param name="model">Model.</param>
-    public ZptElement[] Handle(ZptElement element, Model model)
+    public AttributeHandlingResult Handle(ZptElement element, Model model)
     {
       if(element == null)
       {
@@ -40,7 +40,7 @@ namespace CSF.Zpt.Tal
         throw new ArgumentNullException("model");
       }
 
-      ZptElement[] output;
+      AttributeHandlingResult output;
       string attribName;
 
       var attrib = this.GetAttribute(element, out attribName);
@@ -52,19 +52,19 @@ namespace CSF.Zpt.Tal
 
         if(expressionResult.CancelsAction())
         {
-          output = new [] { element };
+          output = new AttributeHandlingResult(new [] { element }, true);
         }
         else if(expressionResult.GetResult() == null)
         {
           if(attribName == ZptConstants.Tal.ContentAttribute)
           {
             element.RemoveAllChildren();
-            output = new [] { element };
+            output = new AttributeHandlingResult(new [] { element }, true);
           }
           else
           {
             element.Remove();
-            output = new ZptElement[0];
+            output = new AttributeHandlingResult(new ZptElement[0], false);
           }
         }
         else
@@ -73,18 +73,19 @@ namespace CSF.Zpt.Tal
           {
             element.ReplaceChildrenWith(expressionResult.GetResult<string>(),
                                         mode == STRUCTURE_INDICATOR);
-            output = new [] { element };
+            output = new AttributeHandlingResult(new [] { element }, true);
           }
           else
           {
-            output = element.ReplaceWith(expressionResult.GetResult<string>(),
-                                         mode == STRUCTURE_INDICATOR);
+            var elements = element.ReplaceWith(expressionResult.GetResult<string>(),
+                                               mode == STRUCTURE_INDICATOR);
+            output = new AttributeHandlingResult(elements, false);
           }
         }
       }
       else
       {
-        output = new [] { element };
+        output = new AttributeHandlingResult(new [] { element }, true);
       }
 
       return output;

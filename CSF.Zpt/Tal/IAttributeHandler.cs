@@ -11,10 +11,10 @@ namespace CSF.Zpt.Tal
     /// <summary>
     /// Handle the related attribute types which exist upon the element, if any.
     /// </summary>
-    /// <returns>A collection of elements which are present in the DOM after this handler has completed its work.</returns>
+    /// <returns>A response type providing information about the result of this operation.</returns>
     /// <param name="element">Element.</param>
     /// <param name="model">Model.</param>
-    ZptElement[] Handle(ZptElement element, Model model);
+    AttributeHandlingResult Handle(ZptElement element, Model model);
   }
 }
 

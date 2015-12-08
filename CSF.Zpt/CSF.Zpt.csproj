@@ -81,6 +81,7 @@
     <Compile Include="Tal\ContentOrReplaceAttributeHandler.cs" />
     <Compile Include="Tal\ConditionAttributeHandler.cs" />
     <Compile Include="Rendering\RepetitionInfo.cs" />
+    <Compile Include="Tal\AttributeHandlingResult.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
