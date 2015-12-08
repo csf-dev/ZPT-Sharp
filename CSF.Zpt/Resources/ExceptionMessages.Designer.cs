@@ -105,5 +105,11 @@ namespace CSF.Zpt.Resources {
                 return ResourceManager.GetString("TalRepeatExpressionMustEvaluateToIEnumerable", resourceCulture);
             }
         }
+        
+        internal static string ContentAndReplaceAttributesCannotCoexist {
+            get {
+                return ResourceManager.GetString("ContentAndReplaceAttributesCannotCoexist", resourceCulture);
+            }
+        }
     }
 }

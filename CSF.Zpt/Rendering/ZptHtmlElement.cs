@@ -87,6 +87,29 @@ namespace CSF.Zpt.Rendering
     }
 
     /// <summary>
+    /// Replaces the current element instance with the given content.
+    /// </summary>
+    /// <returns>A collection of <see cref="ZptElement"/>, indicating the element(s) which replaced the current instance.</returns>
+    /// <param name="content">The content with which to replace the current element.</param>
+    /// <param name="interpretContentAsStructure">If set to <c>true</c> then the content is interpreted as structure.</param>
+    public override ZptElement[] ReplaceWith(string content, bool interpretContentAsStructure)
+    {
+      // TODO: Write this implementation
+      throw new NotImplementedException();
+    }
+
+    /// <summary>
+    /// Removes all children of the current element instance and replaces them with the given content.
+    /// </summary>
+    /// <param name="content">The content with which to replace the children of the current element.</param>
+    /// <param name="interpretContentAsStructure">If set to <c>true</c> then the content is interpreted as structure.</param>
+    public override void ReplaceChildrenWith(string content, bool interpretContentAsStructure)
+    {
+      // TODO: Write this implementation
+      throw new NotImplementedException();
+    }
+
+    /// <summary>
     /// Inserts a new child element into the current element's child elements.  The new child will be the previous
     /// sibling before a given existing child.
     /// </summary>
@@ -303,6 +326,15 @@ namespace CSF.Zpt.Rendering
     public override void Remove()
     {
       this.GetParent().RemoveChild(this.Node);
+    }
+
+    /// <summary>
+    /// Removes all child elements from the current element.
+    /// </summary>
+    public override void RemoveAllChildren()
+    {
+      // TODO: Write this implementation
+      throw new NotImplementedException();
     }
 
     /// <summary>

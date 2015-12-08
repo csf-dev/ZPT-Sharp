@@ -42,7 +42,11 @@ Source expression: {2}</value>
 Attribute value:{2}</value>
   </data>
   <data name="TalRepeatExpressionMustEvaluateToIEnumerable" xml:space="preserve">
-    <value>The result of the TAL 'tal:repeat' expression must be an object which implements `{0}' or a null reference.
+    <value>The result of the TAL 'tal:repeat' expression must either implement `{0}' or be a null reference.
 Expression:{1}</value>
+  </data>
+  <data name="ContentAndReplaceAttributesCannotCoexist" xml:space="preserve">
+    <value>An element must not have both a 'tal:content' and a 'tal:replace' attribute; they are mutually exclusive.
+Element name:{0}</value>
   </data>
 </root>

@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Text.RegularExpressions;
 using CSF.Zpt.Rendering;
+using CSF.Zpt.Resources;
 
 namespace CSF.Zpt.Tal
 {
@@ -9,6 +11,16 @@ namespace CSF.Zpt.Tal
   /// </summary>
   public class ContentOrReplaceAttributeHandler : IAttributeHandler
   {
+    #region constants
+
+    private const string
+      ATTRIBUTE_VALUE_PATTERN                   = "^(?:(text|structure) )?(.+)$",
+      STRUCTURE_INDICATOR                       = "structure";
+
+    private static readonly Regex ValueMatcher  = new Regex(ATTRIBUTE_VALUE_PATTERN, RegexOptions.Compiled);
+
+    #endregion
+
     #region methods
 
     /// <summary>
@@ -19,8 +31,131 @@ namespace CSF.Zpt.Tal
     /// <param name="model">Model.</param>
     public ZptElement[] Handle(ZptElement element, Model model)
     {
-      // TODO: Write this implementation
-      throw new NotImplementedException();
+      if(element == null)
+      {
+        throw new ArgumentNullException("element");
+      }
+      if(model == null)
+      {
+        throw new ArgumentNullException("model");
+      }
+
+      ZptElement[] output;
+      string attribName;
+
+      var attrib = this.GetAttribute(element, out attribName);
+
+      if(attrib != null)
+      {
+        string mode;
+        var expressionResult = this.GetAttributeResult(attrib, element, model, out mode);
+
+        if(expressionResult.CancelsAction())
+        {
+          output = new [] { element };
+        }
+        else if(expressionResult.GetResult() == null)
+        {
+          if(attribName == ZptConstants.Tal.ContentAttribute)
+          {
+            element.RemoveAllChildren();
+            output = new [] { element };
+          }
+          else
+          {
+            element.Remove();
+            output = new ZptElement[0];
+          }
+        }
+        else
+        {
+          if(attribName == ZptConstants.Tal.ContentAttribute)
+          {
+            element.ReplaceChildrenWith(expressionResult.GetResult<string>(),
+                                        mode == STRUCTURE_INDICATOR);
+            output = new [] { element };
+          }
+          else
+          {
+            output = element.ReplaceWith(expressionResult.GetResult<string>(),
+                                         mode == STRUCTURE_INDICATOR);
+          }
+        }
+      }
+      else
+      {
+        output = new [] { element };
+      }
+
+      return output;
+    }
+
+    /// <summary>
+    /// Gets either the TAL 'content' or 'replace' attribute from the given element.
+    /// </summary>
+    /// <returns>The attribute, or a <c>null</c> reference.</returns>
+    /// <param name="element">The element from which to get an attribute.</param>
+    /// <param name="attribName">Exposes the name of the attribute.</param>
+    private ZptAttribute GetAttribute(ZptElement element, out string attribName)
+    {
+      ZptAttribute
+        contentAttrib = element.GetTalAttribute(ZptConstants.Tal.ContentAttribute),
+        replaceAttrib = element.GetTalAttribute(ZptConstants.Tal.ReplaceAttribute),
+        output;
+
+      if(contentAttrib != null
+         && replaceAttrib != null)
+      {
+        string message = String.Format(ExceptionMessages.ContentAndReplaceAttributesCannotCoexist,
+                                       element.Name);
+        throw new ParserException(message) {
+          SourceElementName = element.Name
+        };
+      }
+      else if(contentAttrib != null)
+      {
+        output = contentAttrib;
+        attribName = ZptConstants.Tal.ContentAttribute;
+      }
+      else
+      {
+        output = replaceAttrib;
+        attribName = ZptConstants.Tal.ReplaceAttribute;
+      }
+
+      return output;
+    }
+
+    /// <summary>
+    /// Gets the result of the attribute value.
+    /// </summary>
+    /// <returns>The attribute result.</returns>
+    /// <param name="attribute">The content or replace attribute.</param>
+    /// <param name="element">The current element.</param>
+    /// <param name="model">The model.</param>
+    /// <param name="mode">Exposes the mode (either <c>text</c>, <c>structure</c> or a <c>null</c> reference).</param>
+    private ExpressionResult GetAttributeResult(ZptAttribute attribute,
+                                                ZptElement element,
+                                                Model model,
+                                                out string mode)
+    {
+      var match = ValueMatcher.Match(attribute.Value);
+
+      if(!match.Success)
+      {
+        string message = String.Format(ExceptionMessages.ZptAttributeParsingError,
+                                         ZptConstants.Tal.DefaultPrefix,
+                                       attribute.Name,
+                                       attribute.Value);
+        throw new ParserException(message) {
+          SourceAttributeName = attribute.Name,
+          SourceAttributeValue = attribute.Value,
+          SourceElementName = element.Name
+        };
+      }
+
+      mode = match.Groups[1].Value;
+      return model.Evaluate(match.Groups[2].Value, element);
     }
 
     #endregion
