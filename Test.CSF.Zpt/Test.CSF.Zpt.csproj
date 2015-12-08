@@ -80,6 +80,7 @@
     <Compile Include="Rendering\TestExpressionResult.cs" />
     <Compile Include="Tal\TestRepeatAttributeHandler.cs" />
     <Compile Include="Tal\TestContentOrReplaceAttributeHandler.cs" />
+    <Compile Include="Tal\TestOmitTagAttributeHandler.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Rendering\TestHtmlElement.html" />

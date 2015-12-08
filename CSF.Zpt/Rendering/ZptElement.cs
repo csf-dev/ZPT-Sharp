@@ -197,6 +197,11 @@ namespace CSF.Zpt.Rendering
     public abstract string GetFileLocation();
 
     /// <summary>
+    /// Omits the current element, replacing it with its children.
+    /// </summary>
+    public abstract void Omit();
+
+    /// <summary>
     /// Removes the current element from the DOM.
     /// </summary>
     public abstract void Remove();

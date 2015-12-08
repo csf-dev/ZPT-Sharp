@@ -321,6 +321,15 @@ namespace CSF.Zpt.Rendering
     }
 
     /// <summary>
+    /// Omits the current element, replacing it with its children.
+    /// </summary>
+    public override void Omit()
+    {
+      // TODO: Write this implementation
+      throw new NotImplementedException();
+    }
+
+    /// <summary>
     /// Removes the current element from the DOM.
     /// </summary>
     public override void Remove()
