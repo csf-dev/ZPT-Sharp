@@ -50,11 +50,11 @@ namespace CSF.Zpt.Tal
         string mode;
         var expressionResult = this.GetAttributeResult(attrib, element, model, out mode);
 
-        if(expressionResult.CancelsAction())
+        if(expressionResult.CancelsAction)
         {
           output = new AttributeHandlingResult(new [] { element }, true);
         }
-        else if(expressionResult.GetResult() == null)
+        else if(expressionResult.Result == null)
         {
           if(attribName == ZptConstants.Tal.ContentAttribute)
           {

@@ -93,15 +93,15 @@ namespace CSF.Zpt.Tal
             };
           }
 
-          if(!result.CancelsAction())
+          if(!result.CancelsAction)
           {
             if(item.Scope == GLOBAL_SCOPE)
             {
-              model.AddGlobal(item.Name, result.GetResult());
+              model.AddGlobal(item.Name, result.Result);
             }
             else
             {
-              model.AddLocal(item.Name, result.GetResult());
+              model.AddLocal(item.Name, result.Result);
             }
           }
         }

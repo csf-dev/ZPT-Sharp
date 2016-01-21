@@ -13,26 +13,33 @@ namespace CSF.Zpt.Rendering
 
     #endregion
 
+    #region properties
+
+    /// <summary>
+    /// Gets the result of this expression evaluation.
+    /// </summary>
+    /// <value>The result.</value>
+    public virtual object Result
+    {
+      get {
+        return _result;
+      }
+    }
+
+    /// <summary>
+    /// Gets a value indicating whether this <see cref="CSF.Zpt.Rendering.ExpressionResult"/> cancels the action.
+    /// </summary>
+    /// <value><c>true</c> if the result cancels the action; otherwise, <c>false</c>.</value>
+    public virtual bool CancelsAction
+    {
+      get {
+        return this.Result == Model.CancelAction;
+      }
+    }
+
+    #endregion
+
     #region methods
-
-    /// <summary>
-    /// Gets the result.
-    /// </summary>
-    /// <returns>The result.</returns>
-    public virtual object GetResult()
-    {
-      return _result;
-    }
-
-    /// <summary>
-    /// Gets a value determining whether the result cancels the action.
-    /// </summary>
-    /// <returns><c>true</c>, if the result cancels the action, <c>false</c> otherwise.</returns>
-    public virtual bool CancelsAction()
-    {
-      var result = this.GetResult();
-      return result == Model.CancelAction;
-    }
 
     /// <summary>
     /// Invokes <see cref="M:GetResult()"/> and returns the result as a <c>System.Boolean</c> equivalent.
@@ -42,16 +49,14 @@ namespace CSF.Zpt.Rendering
     {
       bool output;
 
-      var result = this.GetResult();
-
-      if(result == null)
+      if(this.Result == null)
       {
         output = false;
       }
       else
       {
-        var type = result.GetType();
-        output = (!type.IsValueType || !result.Equals(Activator.CreateInstance(type)));
+        var type = this.Result.GetType();
+        output = (!type.IsValueType || !this.Result.Equals(Activator.CreateInstance(type)));
       }
 
       return output;
@@ -64,7 +69,7 @@ namespace CSF.Zpt.Rendering
     /// <typeparam name="TResult">The expected result type.</typeparam>
     public virtual TResult GetResult<TResult>()
     {
-      return (TResult) this.GetResult();
+      return (TResult) this.Result;
     }
 
     #endregion

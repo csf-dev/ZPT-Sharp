@@ -191,6 +191,29 @@ namespace CSF.Zpt.Rendering
     }
 
     /// <summary>
+    /// Sets the value of an attribute.
+    /// </summary>
+    /// <param name="prefix">The attribute namespace prefix.</param>
+    /// <param name="name">The attribute name.</param>
+    /// <param name="value">The attribute value.</param>
+    public override void SetAttribute(string prefix, string name, string value)
+    {
+      // TODO: Write this implementation
+      throw new NotImplementedException();
+    }
+
+    /// <summary>
+    /// Removes a named attribute.
+    /// </summary>
+    /// <param name="prefix">The attribute namespace prefix.</param>
+    /// <param name="name">The attribute name.</param>
+    public override void RemoveAttribute(string prefix, string name)
+    {
+      // TODO: Write this implementation
+      throw new NotImplementedException();
+    }
+
+    /// <summary>
     /// Recursively searches the children of the current instance, returning a collection of elements which have an
     /// attribute matching the given criteria.
     /// </summary>
@@ -323,7 +346,10 @@ namespace CSF.Zpt.Rendering
     /// <summary>
     /// Omits the current element, replacing it with its children.
     /// </summary>
-    public override void Omit()
+    /// <returns>
+    /// A collection of the <see cref="ZptElement"/> instances which were children of the element traversed
+    /// </returns>
+    public override ZptElement[] Omit()
     {
       // TODO: Write this implementation
       throw new NotImplementedException();

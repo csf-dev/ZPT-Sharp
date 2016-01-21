@@ -137,6 +137,40 @@ namespace CSF.Zpt.Rendering
     public abstract ZptAttribute GetAttribute(string attributeNamespace, string prefix, string name);
 
     /// <summary>
+    /// Sets the value of an attribute.
+    /// </summary>
+    /// <param name="name">The attribute name.</param>
+    /// <param name="value">The attribute value.</param>
+    public virtual void SetAttribute(string name, string value)
+    {
+      this.SetAttribute(null, name, value);
+    }
+
+    /// <summary>
+    /// Sets the value of an attribute.
+    /// </summary>
+    /// <param name="prefix">The attribute namespace prefix.</param>
+    /// <param name="name">The attribute name.</param>
+    /// <param name="value">The attribute value.</param>
+    public abstract void SetAttribute(string prefix, string name, string value);
+
+    /// <summary>
+    /// Removes a named attribute.
+    /// </summary>
+    /// <param name="name">The attribtue name.</param>
+    public virtual void RemoveAttribute(string name)
+    {
+      this.RemoveAttribute(null, name);
+    }
+
+    /// <summary>
+    /// Removes a named attribute.
+    /// </summary>
+    /// <param name="prefix">The attribute namespace prefix.</param>
+    /// <param name="name">The attribute name.</param>
+    public abstract void RemoveAttribute(string prefix, string name);
+
+    /// <summary>
     /// Recursively searches the children of the current instance, returning a collection of elements which have an
     /// attribute matching the given criteria.
     /// </summary>
@@ -199,7 +233,10 @@ namespace CSF.Zpt.Rendering
     /// <summary>
     /// Omits the current element, replacing it with its children.
     /// </summary>
-    public abstract void Omit();
+    /// <returns>
+    /// A collection of the <see cref="ZptElement"/> instances which were children of the element traversed
+    /// </returns>
+    public abstract ZptElement[] Omit();
 
     /// <summary>
     /// Removes the current element from the DOM.

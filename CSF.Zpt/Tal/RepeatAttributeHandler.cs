@@ -124,7 +124,7 @@ namespace CSF.Zpt.Tal
         };
       }
 
-      if(result.CancelsAction())
+      if(result.CancelsAction)
       {
         output = null;
       }
