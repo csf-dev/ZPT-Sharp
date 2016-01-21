@@ -39,25 +39,24 @@ namespace CSF.Zpt.Tal
         throw new ArgumentNullException("context");
       }
 
-
-      IEnumerable<AttributeHandlingResult> output = new [] { new AttributeHandlingResult(new [] { element }, true) };
+      IEnumerable<ZptElement>
+        output = new [] { element },
+        newlyExposedElements = new ZptElement[0];
 
       foreach(var handler in _handlers)
       {
-        var elementsAfterProcessing = (from batch in output.Where(x => x.ContinueHandling)
-                                       from ele in batch.Elements
-                                       let handledBatch = handler.Handle(ele, context.TalModel)
-                                       select handledBatch);
+        var handlingResult = (from ele in output
+                              let processedBatch = handler.Handle(ele, context.TalModel)
+                              where processedBatch.ContinueHandling
+                              select processedBatch);
 
-        output = output
-          .Where(x => !x.ContinueHandling)
-          .Union(elementsAfterProcessing)
-          .ToArray();
+        newlyExposedElements = newlyExposedElements.Union(handlingResult.SelectMany(x => x.NewlyExposedElements));
+        output = handlingResult.Where(x => x.ContinueHandling).SelectMany(x => x.Elements);
       }
 
-      return output
-        .SelectMany(x => x.Elements)
-        .ToArray();
+      output = output.Union(newlyExposedElements.SelectMany(x => this.Visit(x, context, options)));
+
+      return output.ToArray();
     }
 
     /// <summary>

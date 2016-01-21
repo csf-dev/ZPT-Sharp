@@ -31,6 +31,17 @@ namespace CSF.Zpt.Tal
       private set;
     }
 
+    /// <summary>
+    /// Gets a collection of elements which are newly-exposed after a handling operation has completed.  These
+    /// elements must be processed from scratch and not included in further processing.
+    /// </summary>
+    /// <value>The newly-exposed elements.</value>
+    public ZptElement[] NewlyExposedElements
+    {
+      get;
+      private set;
+    }
+
     #endregion
 
     #region constructor
@@ -38,9 +49,12 @@ namespace CSF.Zpt.Tal
     /// <summary>
     /// Initializes a new instance of the <see cref="CSF.Zpt.Tal.AttributeHandlingResult"/> class.
     /// </summary>
-    /// <param name="elements">Elements.</param>
+    /// <param name="elements">The elements which remain after processing.</param>
     /// <param name="continueHandling">If set to <c>true</c> continue handling.</param>
-    public AttributeHandlingResult(ZptElement[] elements, bool continueHandling)
+    /// <param name="newlyExposedElements">An optional collection of elements which are newly-exposed but must be processed from scratch.</param>
+    public AttributeHandlingResult(ZptElement[] elements,
+                                   bool continueHandling,
+                                   ZptElement[] newlyExposedElements = null)
     {
       if(elements == null)
       {
@@ -49,6 +63,7 @@ namespace CSF.Zpt.Tal
 
       this.Elements = elements;
       this.ContinueHandling = continueHandling;
+      this.NewlyExposedElements = newlyExposedElements?? new ZptElement[0];
     }
 
     #endregion
