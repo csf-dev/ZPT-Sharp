@@ -18,8 +18,37 @@ namespace CSF.Zpt.Tal
     /// <param name="model">Model.</param>
     public AttributeHandlingResult Handle(ZptElement element, Model model)
     {
-      // TODO: Write this implementation
-      throw new NotImplementedException();
+      if(element == null)
+      {
+        throw new ArgumentNullException("element");
+      }
+      if(model == null)
+      {
+        throw new ArgumentNullException("model");
+      }
+
+      AttributeHandlingResult output;
+      var attrib = element.GetTalAttribute(ZptConstants.Tal.OmitTagAttribute);
+
+      if(attrib != null)
+      {
+        var result = model.Evaluate(attrib.Value, element);
+        if(!result.CancelsAction && result.GetResultAsBoolean())
+        {
+          var children = element.Omit();
+          output = new AttributeHandlingResult(new ZptElement[0], false, children);
+        }
+        else
+        {
+          output = new AttributeHandlingResult(new [] { element }, true);
+        }
+      }
+      else
+      {
+        output = new AttributeHandlingResult(new [] { element }, true);
+      }
+
+      return output;
     }
 
     #endregion
