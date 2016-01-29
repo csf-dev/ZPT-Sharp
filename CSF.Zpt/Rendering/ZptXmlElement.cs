@@ -435,6 +435,19 @@ namespace CSF.Zpt.Rendering
     }
 
     /// <summary>
+    /// Determines whether or not the current instance is in the specified namespace.
+    /// </summary>
+    /// <returns>
+    /// <c>true</c> if this instance is in the specified namespace; otherwise, <c>false</c>.
+    /// </returns>
+    /// <param name="nSpace">The namespace for which to test.</param>
+    public override bool IsInNamespace(ZptNamespace nSpace)
+    {
+      // TODO: Write this implementation
+      throw new NotImplementedException();
+    }
+
+    /// <summary>
     /// Gets the parent of the current <see cref="Node"/>.
     /// </summary>
     /// <returns>The parent node.</returns>

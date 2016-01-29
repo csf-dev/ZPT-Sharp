@@ -116,8 +116,8 @@ namespace CSF.Zpt.Tal
         new ConditionAttributeHandler(),
         new RepeatAttributeHandler(),
         new ContentOrReplaceAttributeHandler(),
-        new AttributesAttributeHandler(),
         new OmitTagAttributeHandler(),
+        new AttributesAttributeHandler(),
       };
 
       _errorHandler = errorHandler?? new OnErrorAttributeHandler();

@@ -30,8 +30,16 @@ namespace CSF.Zpt.Tal
       AttributeHandlingResult output;
       var attrib = element.GetTalAttribute(ZptConstants.Tal.OmitTagAttribute);
 
-      if(attrib != null)
+      if(element.IsInNamespace(ZptConstants.Metal.Namespace)
+         || element.IsInNamespace(ZptConstants.Tal.Namespace))
       {
+        // Special case, for all elements in the "special" namespaces, we treat them with the omit-tag functionality
+        var children = element.Omit();
+        output = new AttributeHandlingResult(new ZptElement[0], false, children);
+      }
+      else if(attrib != null)
+      {
+        // Normal handling by detecting an attribute and using its value
         var result = model.Evaluate(attrib.Value, element);
         if(!result.CancelsAction && result.GetResultAsBoolean())
         {

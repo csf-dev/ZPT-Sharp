@@ -244,7 +244,14 @@ namespace CSF.Zpt.Rendering
     /// </summary>
     public abstract void RemoveAllChildren();
 
-
+    /// <summary>
+    /// Determines whether or not the current instance is in the specified namespace.
+    /// </summary>
+    /// <returns>
+    /// <c>true</c> if this instance is in the specified namespace; otherwise, <c>false</c>.
+    /// </returns>
+    /// <param name="nSpace">The namespace for which to test.</param>
+    public abstract bool IsInNamespace(ZptNamespace nSpace);
 
     #endregion
 

@@ -90,7 +90,7 @@ namespace CSF.Zpt
       private static readonly ZptNamespace _namespace;
 
       /// <summary>
-      /// Gets the namespace for METAL: TAL: Template Attribute Language.
+      /// Gets the namespace for TAL: Template Attribute Language.
       /// </summary>
       /// <value>The namespace.</value>
       public static ZptNamespace Namespace
