@@ -10,7 +10,7 @@ using System.Linq;
 namespace Test.CSF.Zpt.Rendering
 {
   [TestFixture]
-  public class TestXmlElement
+  public class TestZptXmlElement
   {
     #region fields
 
@@ -25,7 +25,7 @@ namespace Test.CSF.Zpt.Rendering
     [TestFixtureSetUp]
     public void FixtureSetup()
     {
-      _xmlSource = Assembly.GetExecutingAssembly().GetManifestResourceText(this.GetType(), "TestXmlElement.xml");
+      _xmlSource = Assembly.GetExecutingAssembly().GetManifestResourceText(this.GetType(), "TestZptXmlElement.xml");
       _sourceFile = Mock.Of<SourceFileInfo>();
     }
 

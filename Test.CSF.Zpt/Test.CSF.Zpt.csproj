@@ -62,9 +62,7 @@
     <Folder Include="Util\Autofixture\" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Rendering\TestHtmlElement.cs" />
     <Compile Include="GlobalSetupFixture.cs" />
-    <Compile Include="Rendering\TestXmlElement.cs" />
     <Compile Include="Rendering\TestElementVisitor.cs" />
     <Compile Include="Rendering\TestModel.cs" />
     <Compile Include="Metal\MetalVisitorIntegrationTests.cs" />
@@ -82,12 +80,14 @@
     <Compile Include="Tal\TestContentOrReplaceAttributeHandler.cs" />
     <Compile Include="Tal\TestAttributesAttributeHandler.cs" />
     <Compile Include="Tal\TestOmitTagAttributeHandler.cs" />
+    <Compile Include="Rendering\TestZptHtmlElement.cs" />
+    <Compile Include="Rendering\TestZptXmlElement.cs" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Rendering\TestHtmlElement.html" />
-    <EmbeddedResource Include="Rendering\TestXmlElement.xml" />
     <EmbeddedResource Include="Metal\MetalVisitorIntegrationTests.1.xml" />
     <EmbeddedResource Include="Metal\MetalVisitorIntegrationTests.2.xml" />
+    <EmbeddedResource Include="Rendering\TestZptHtmlElement.html" />
+    <EmbeddedResource Include="Rendering\TestZptXmlElement.xml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CSF\CSF\CSF.csproj">

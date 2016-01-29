@@ -11,7 +11,7 @@ using System.Linq;
 namespace Test.CSF.Zpt.Rendering
 {
   [TestFixture]
-  public class TestHtmlElement
+  public class TestZptHtmlElement
   {
     #region fields
 
@@ -26,7 +26,7 @@ namespace Test.CSF.Zpt.Rendering
     [TestFixtureSetUp]
     public void FixtureSetup()
     {
-      _htmlSource = Assembly.GetExecutingAssembly().GetManifestResourceText(this.GetType(), "TestHtmlElement.html");
+      _htmlSource = Assembly.GetExecutingAssembly().GetManifestResourceText(this.GetType(), "TestZptHtmlElement.html");
       _sourceFile = Mock.Of<SourceFileInfo>();
     }
 
