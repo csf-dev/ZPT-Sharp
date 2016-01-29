@@ -42,17 +42,17 @@ namespace CSF.Zpt.Metal
     }
 
     /// <summary>
-    /// Visits the given element, and then recursively visits all of its child elements.
+    /// Visits a root element and all of its child element.
     /// </summary>
-    /// <returns>A reference to the element which has been visited.  This might be the input <paramref name="element"/> or a replacement.</returns>
-    /// <param name="element">The element to visit.</param>
-    /// <param name="context">The rendering context provided to the visitor.</param>
-    /// <param name="options">The rendering options to use.</param>
-    public override ZptElement[] VisitRecursively(ZptElement element,
-                                                  RenderingContext context,
-                                                  RenderingOptions options)
+    /// <returns>The root element(s), after the visiting process is complete.</returns>
+    /// <param name="rootElement">Root element.</param>
+    /// <param name="context">Context.</param>
+    /// <param name="options">Options.</param>
+    public override ZptElement[] VisitRoot(ZptElement rootElement,
+                                           RenderingContext context,
+                                           RenderingOptions options)
     {
-      var output = base.VisitRecursively(element, context, options);
+      var output = base.VisitRoot(rootElement, context, options);
 
       foreach(var item in output)
       {

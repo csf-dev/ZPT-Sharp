@@ -76,9 +76,9 @@ namespace CSF.Zpt.Resources {
             }
         }
         
-        internal static string ReplacementElementMustBeCorrectType {
+        internal static string ElementMustBeCorrectType {
             get {
-                return ResourceManager.GetString("ReplacementElementMustBeCorrectType", resourceCulture);
+                return ResourceManager.GetString("ElementMustBeCorrectType", resourceCulture);
             }
         }
         

@@ -75,7 +75,7 @@ namespace CSF.Zpt.Rendering
       var repl = replacement as ZptHtmlElement;
       if(repl == null)
       {
-        string message = String.Format(ExceptionMessages.ReplacementElementMustBeCorrectType,
+        string message = String.Format(ExceptionMessages.ElementMustBeCorrectType,
                                        typeof(ZptHtmlElement).Name);
         throw new ArgumentException(message, "replacement");
       }

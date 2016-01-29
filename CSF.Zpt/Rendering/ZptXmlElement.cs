@@ -92,7 +92,7 @@ namespace CSF.Zpt.Rendering
       var repl = replacement as ZptXmlElement;
       if(repl == null)
       {
-        string message = String.Format(ExceptionMessages.ReplacementElementMustBeCorrectType,
+        string message = String.Format(ExceptionMessages.ElementMustBeCorrectType,
                                        typeof(ZptXmlElement).Name);
         throw new ArgumentException(message, "replacement");
       }

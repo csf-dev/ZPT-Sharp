@@ -28,8 +28,8 @@ Source expression: {2}</value>
   <data name="NameMustNotBeEmptyString" xml:space="preserve">
     <value>The name must not be an empty string.</value>
   </data>
-  <data name="ReplacementElementMustBeCorrectType" xml:space="preserve">
-    <value>The replacement element must be a non-null instance of `{0}'.</value>
+  <data name="ElementMustBeCorrectType" xml:space="preserve">
+    <value>The element must be a non-null instance of `{0}'.</value>
   </data>
   <data name="CannotGetParentFromRootNode" xml:space="preserve">
     <value>When getting the parent node, the current node must not be the root of the DOM.</value>

@@ -91,6 +91,22 @@ namespace CSF.Zpt.Tal
         }
       }
 
+      return output;
+    }
+
+    /// <summary>
+    /// Visits a root element and all of its child element.
+    /// </summary>
+    /// <returns>The root element(s), after the visiting process is complete.</returns>
+    /// <param name="rootElement">Root element.</param>
+    /// <param name="context">Context.</param>
+    /// <param name="options">Options.</param>
+    public override ZptElement[] VisitRoot(ZptElement rootElement,
+                                           RenderingContext context,
+                                           RenderingOptions options)
+    {
+      var output = base.VisitRoot(rootElement, context, options);
+
       foreach(var item in output)
       {
         item.PurgeTalAttributes();

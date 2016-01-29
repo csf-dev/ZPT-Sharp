@@ -62,7 +62,7 @@ namespace Test.CSF.Zpt.Metal
     #region tests
 
     [Test]
-    public void TestVisit()
+    public void TestVisitRoot()
     {
       // Arrange
       var sourceFile = Mock.Of<SourceFileInfo>();
@@ -78,9 +78,9 @@ namespace Test.CSF.Zpt.Metal
       var sut = new MetalVisitor();
 
       // Act
-      sut.VisitRecursively(document,
-                           new RenderingContext(_model, _fixture.Create<DummyModel>()),
-                           _fixture.Create<RenderingOptions>());
+      sut.VisitRoot(document,
+                    new RenderingContext(_model, _fixture.Create<DummyModel>()),
+                    _fixture.Create<RenderingOptions>());
       var result = document.ToString();
 
       // Assert
