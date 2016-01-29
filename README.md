@@ -1,11 +1,13 @@
 ZPT-Sharp
 =========
 
-Implementation of Zope Page Templates (ZPT) in C#, for use as a .NET MVC v2 ViewEngine
+Implementation of Zope Page Templates (ZPT) in C#,
+intended for eventual use as an ASP.NET MVC ViewEngine
 
 ---
 
-The current state of this project is that it requires a rewrite from scratch.  Whilst
+The current state of this project is that it is undergoing a rewrite from scratch.  Whilst
 parts worked in the original version, there were some serious deficiencies which must be
-addressed.  This rewrite is on hold.  I do not suggest trying to use the previous version,
-as it contains 'showstopper' bugs.
+addressed.  I do not suggest trying to use that previous version, as it contains
+some serious showstopper bugs which are all-but unfixable within the architecture in which
+it was designed.
