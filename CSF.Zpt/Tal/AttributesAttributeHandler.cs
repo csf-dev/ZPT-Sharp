@@ -56,7 +56,7 @@ namespace CSF.Zpt.Tal
         if(itemMatches.Any(x => !x.Success))
         {
           string message = String.Format(Resources.ExceptionMessages.ZptAttributeParsingError,
-                                         ZptConstants.Tal.DefaultPrefix,
+                                         ZptConstants.Tal.Namespace,
                                          ZptConstants.Tal.AttributesAttribute,
                                          attrib.Value);
           throw new ParserException(message) {
@@ -84,7 +84,7 @@ namespace CSF.Zpt.Tal
           catch(Exception ex)
           {
             string message = String.Format(Resources.ExceptionMessages.ExpressionEvaluationException,
-                                           ZptConstants.Tal.DefaultPrefix,
+                                           ZptConstants.Tal.Namespace,
                                            ZptConstants.Tal.AttributesAttribute,
                                            item.Expression);
             throw new ModelEvaluationException(message, ex) {
@@ -94,6 +94,7 @@ namespace CSF.Zpt.Tal
 
           if(!result.CancelsAction)
           {
+            var nspace = new ZptNamespace(prefix: item.Prefix);
             if(result.Result == null)
             {
               if(String.IsNullOrEmpty(item.Prefix))
@@ -102,7 +103,7 @@ namespace CSF.Zpt.Tal
               }
               else
               {
-                element.RemoveAttribute(item.Prefix, item.AttributeName);
+                element.RemoveAttribute(nspace, item.AttributeName);
               }
             }
             else
@@ -113,7 +114,7 @@ namespace CSF.Zpt.Tal
               }
               else
               {
-                element.SetAttribute(item.Prefix, item.AttributeName, result.Result.ToString());
+                element.SetAttribute(nspace, item.AttributeName, result.Result.ToString());
               }
             }
           }

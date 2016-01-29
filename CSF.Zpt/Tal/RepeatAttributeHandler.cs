@@ -83,7 +83,7 @@ namespace CSF.Zpt.Tal
       if(!attribMatch.Success)
       {
         string message = String.Format(ExceptionMessages.ZptAttributeParsingError,
-                                       ZptConstants.Tal.DefaultPrefix,
+                                       ZptConstants.Tal.Namespace,
                                        ZptConstants.Tal.RepeatAttribute,
                                        attribute.Value);
         throw new ParserException(message) {
@@ -116,7 +116,7 @@ namespace CSF.Zpt.Tal
       catch(Exception ex)
       {
         string message = String.Format(ExceptionMessages.ExpressionEvaluationException,
-                                       ZptConstants.Tal.DefaultPrefix,
+                                       ZptConstants.Tal.Namespace,
                                        ZptConstants.Tal.DefineAttribute,
                                        expression);
         throw new ModelEvaluationException(message, ex) {

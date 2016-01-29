@@ -55,7 +55,6 @@ namespace Test.CSF.Zpt.Tal
       // Arrange
       _element
         .Setup(x => x.GetAttribute(ZptConstants.Tal.Namespace,
-                                   ZptConstants.Tal.DefaultPrefix,
                                    ZptConstants.Tal.RepeatAttribute))
         .Returns((ZptAttribute) null);
 
@@ -77,7 +76,6 @@ namespace Test.CSF.Zpt.Tal
       // Arrange
       _element
         .Setup(x => x.GetAttribute(ZptConstants.Tal.Namespace,
-                                   ZptConstants.Tal.DefaultPrefix,
                                    ZptConstants.Tal.RepeatAttribute))
         .Returns((ZptAttribute) Mock.Of<ZptAttribute>(x => x.Value == "foo bar"));
 
@@ -104,7 +102,6 @@ namespace Test.CSF.Zpt.Tal
       // Arrange
       _element
         .Setup(x => x.GetAttribute(ZptConstants.Tal.Namespace,
-                                   ZptConstants.Tal.DefaultPrefix,
                                    ZptConstants.Tal.RepeatAttribute))
         .Returns((ZptAttribute) Mock.Of<ZptAttribute>(x => x.Value == "foo bar"));
 
@@ -131,7 +128,6 @@ namespace Test.CSF.Zpt.Tal
       // Arrange
       _element
         .Setup(x => x.GetAttribute(ZptConstants.Tal.Namespace,
-                                   ZptConstants.Tal.DefaultPrefix,
                                    ZptConstants.Tal.RepeatAttribute))
         .Returns((ZptAttribute) Mock.Of<ZptAttribute>(x => x.Value == "foo bar"));
 
@@ -157,7 +153,6 @@ namespace Test.CSF.Zpt.Tal
       // Arrange
       _element
         .Setup(x => x.GetAttribute(ZptConstants.Tal.Namespace,
-                                   ZptConstants.Tal.DefaultPrefix,
                                    ZptConstants.Tal.RepeatAttribute))
         .Returns((ZptAttribute) Mock.Of<ZptAttribute>(x => x.Value == "foo bar"));
 

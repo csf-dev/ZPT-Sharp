@@ -39,7 +39,6 @@ namespace Test.CSF.Zpt.Metal
       var attribute = Mock.Of<global::CSF.Zpt.Rendering.ZptAttribute>();
       ZptElement
       originalElement = Mock.Of<ZptElement>(x => x.GetAttribute(ZptConstants.Metal.Namespace,
-                                                                ZptConstants.Metal.DefaultPrefix,
                                                                 ZptConstants.Metal.UseMacroAttribute) == attribute),
         referencedElement = Mock.Of<ZptElement>();
       var model = _fixture.Create<DummyModel>();
@@ -63,7 +62,6 @@ namespace Test.CSF.Zpt.Metal
       var attribute = Mock.Of<global::CSF.Zpt.Rendering.ZptAttribute>();
       ZptElement
       originalElement = Mock.Of<ZptElement>(x => x.GetAttribute(ZptConstants.Metal.Namespace,
-                                                                ZptConstants.Metal.DefaultPrefix,
                                                                 ZptConstants.Metal.UseMacroAttribute) == attribute);
       var model = _fixture.Create<DummyModel>();
       Mock.Get(model)
@@ -85,7 +83,6 @@ namespace Test.CSF.Zpt.Metal
       // Arrange
       ZptElement
       originalElement = Mock.Of<ZptElement>(x => x.GetAttribute(ZptConstants.Metal.Namespace,
-                                                                ZptConstants.Metal.DefaultPrefix,
                                                                 ZptConstants.Metal.UseMacroAttribute) == (global::CSF.Zpt.Rendering.ZptAttribute) null);
       var model = _fixture.Create<DummyModel>();
 
@@ -105,7 +102,6 @@ namespace Test.CSF.Zpt.Metal
       var attribute = Mock.Of<global::CSF.Zpt.Rendering.ZptAttribute>();
       ZptElement
       originalElement = Mock.Of<ZptElement>(x => x.GetAttribute(ZptConstants.Metal.Namespace,
-                                                                ZptConstants.Metal.DefaultPrefix,
                                                                 ZptConstants.Metal.ExtendMacroAttribute) == attribute),
         referencedElement = Mock.Of<ZptElement>();
       var model = _fixture.Create<DummyModel>();
@@ -129,7 +125,6 @@ namespace Test.CSF.Zpt.Metal
       var attribute = Mock.Of<global::CSF.Zpt.Rendering.ZptAttribute>();
       ZptElement
       originalElement = Mock.Of<ZptElement>(x => x.GetAttribute(ZptConstants.Metal.Namespace,
-                                                                ZptConstants.Metal.DefaultPrefix,
                                                                 ZptConstants.Metal.ExtendMacroAttribute) == attribute);
       var model = _fixture.Create<DummyModel>();
       Mock.Get(model)
@@ -151,7 +146,6 @@ namespace Test.CSF.Zpt.Metal
       // Arrange
       ZptElement
       originalElement = Mock.Of<ZptElement>(x => x.GetAttribute(ZptConstants.Metal.Namespace,
-                                                                ZptConstants.Metal.DefaultPrefix,
                                                                 ZptConstants.Metal.ExtendMacroAttribute) == (global::CSF.Zpt.Rendering.ZptAttribute) null);
       var model = _fixture.Create<DummyModel>();
 

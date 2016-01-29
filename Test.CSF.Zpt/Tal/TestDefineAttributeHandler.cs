@@ -47,7 +47,6 @@ namespace Test.CSF.Zpt.Tal
       // Arrange
       _element
         .Setup(x => x.GetAttribute(ZptConstants.Tal.Namespace,
-                                   ZptConstants.Tal.DefaultPrefix,
                                    ZptConstants.Tal.DefineAttribute))
         .Returns((ZptAttribute) null);
 
@@ -78,7 +77,6 @@ namespace Test.CSF.Zpt.Tal
       // Arrange
       _element
         .Setup(x => x.GetAttribute(ZptConstants.Tal.Namespace,
-                                   ZptConstants.Tal.DefaultPrefix,
                                    ZptConstants.Tal.DefineAttribute))
         .Returns(Mock.Of<ZptAttribute>(x => x.Value == attributeVal));
       
@@ -111,7 +109,6 @@ namespace Test.CSF.Zpt.Tal
                               key string:This is a test;; it contains a semicolon!";
       _element
         .Setup(x => x.GetAttribute(ZptConstants.Tal.Namespace,
-                                   ZptConstants.Tal.DefaultPrefix,
                                    ZptConstants.Tal.DefineAttribute))
         .Returns(Mock.Of<ZptAttribute>(x => x.Value == attributeVal));
 
@@ -153,7 +150,6 @@ namespace Test.CSF.Zpt.Tal
                               key string:This is a test;; it contains a semicolon!";
       _element
         .Setup(x => x.GetAttribute(ZptConstants.Tal.Namespace,
-                                   ZptConstants.Tal.DefaultPrefix,
                                    ZptConstants.Tal.DefineAttribute))
         .Returns(Mock.Of<ZptAttribute>(x => x.Value == attributeVal));
 
@@ -203,7 +199,6 @@ namespace Test.CSF.Zpt.Tal
       // Arrange
       _element
         .Setup(x => x.GetAttribute(ZptConstants.Tal.Namespace,
-                                   ZptConstants.Tal.DefaultPrefix,
                                    ZptConstants.Tal.DefineAttribute))
         .Returns(Mock.Of<ZptAttribute>(x => x.Value == attributeVal));
       

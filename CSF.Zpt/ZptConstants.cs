@@ -1,4 +1,5 @@
 ﻿using System;
+using CSF.Zpt.Rendering;
 
 namespace CSF.Zpt
 {
@@ -12,15 +13,30 @@ namespace CSF.Zpt
     /// </summary>
     public static class Metal
     {
-      /// <summary>
-      /// Gets the XML namespace for METAL: Macro Expansion Template Attribute Language.
-      /// </summary>
-      public static readonly string Namespace = "http://xml.zope.org/namespaces/metal";
+      private static readonly ZptNamespace _namespace;
 
       /// <summary>
-      /// Gets the name of the default attribute/element name prefix.
+      /// Gets the namespace for METAL: Macro Expansion Template Attribute Language.
       /// </summary>
-      public static readonly string DefaultPrefix = "metal";
+      /// <value>The namespace.</value>
+      public static ZptNamespace Namespace
+      {
+        get {
+          return _namespace;
+        }
+      }
+
+      /// <summary>
+      /// Gets the namespace URI for METAL: Macro Expansion Template Attribute Language.
+      /// </summary>
+      [Obsolete("Prefer the Namespace static property instead.")]
+      public static readonly string NamespaceUri;
+
+      /// <summary>
+      /// Gets the default attribute/element namespace prefix.
+      /// </summary>
+      [Obsolete("Prefer the Namespace static property instead.")]
+      public static readonly string DefaultPrefix;
 
       /// <summary>
       /// Gets the name of the define-macro attribute.
@@ -51,6 +67,19 @@ namespace CSF.Zpt
       /// Gets the name of the 'modelname' variable in the METAL model.
       /// </summary>
       public static readonly string MacroNameModelName = "macroname";
+
+      /// <summary>
+      /// Initializes the <see cref="T:CSF.Zpt.ZptConstants+Metal"/> class.
+      /// </summary>
+      static Metal()
+      {
+        #pragma warning disable 618
+        NamespaceUri = "http://xml.zope.org/namespaces/metal";
+        DefaultPrefix = "metal";
+
+        _namespace = new ZptNamespace(DefaultPrefix, NamespaceUri);
+        #pragma warning restore 618
+      }
     }
 
     /// <summary>
@@ -58,14 +87,29 @@ namespace CSF.Zpt
     /// </summary>
     public static class Tal
     {
-      /// <summary>
-      /// Gets the XML namespace for TAL: Template Attribute Language.
-      /// </summary>
-      public static readonly string Namespace = "http://xml.zope.org/namespaces/tal";
+      private static readonly ZptNamespace _namespace;
 
       /// <summary>
-      /// Gets the name of the default attribute/element name prefix.
+      /// Gets the namespace for METAL: TAL: Template Attribute Language.
       /// </summary>
+      /// <value>The namespace.</value>
+      public static ZptNamespace Namespace
+      {
+        get {
+          return _namespace;
+        }
+      }
+
+      /// <summary>
+      /// Gets the XML namespace URI for TAL: Template Attribute Language.
+      /// </summary>
+      [Obsolete("Prefer the Namespace static property instead.")]
+      public static readonly string NamespaceUri = "http://xml.zope.org/namespaces/tal";
+
+      /// <summary>
+      /// Gets the default attribute/element namespace prefix.
+      /// </summary>
+      [Obsolete("Prefer the Namespace static property instead.")]
       public static readonly string DefaultPrefix = "tal";
 
       /// <summary>
@@ -107,6 +151,19 @@ namespace CSF.Zpt
       /// Gets the name of the omit-tag attribute.
       /// </summary>
       public static readonly string OmitTagAttribute = "omit-tag";
+
+      /// <summary>
+      /// Initializes the <see cref="T:CSF.Zpt.ZptConstants+Tal"/> class.
+      /// </summary>
+      static Tal()
+      {
+        #pragma warning disable 618
+        NamespaceUri = "http://xml.zope.org/namespaces/tal";
+        DefaultPrefix = "tal";
+
+        _namespace = new ZptNamespace(DefaultPrefix, NamespaceUri);
+        #pragma warning restore 618
+      }
     }
   }
 }

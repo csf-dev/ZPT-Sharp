@@ -76,11 +76,9 @@ namespace Test.CSF.Zpt.Rendering
       // Arrange
       var sut = new ZptXmlElement(_document.DocumentElement,
                                 _sourceFile);
-      var fixture = new Fixture();
 
       // Act
-      var results = sut.SearchChildrenByAttribute("http://ns.csf-dev.com/custom",
-                                                  fixture.Create<string>(),
+      var results = sut.SearchChildrenByAttribute(new ZptNamespace(uri: "http://ns.csf-dev.com/custom"),
                                                   "parent_attrib");
 
       // Assert
@@ -115,10 +113,9 @@ namespace Test.CSF.Zpt.Rendering
       // Arrange
       var sut = new ZptXmlElement(_document.DocumentElement.ChildNodes[1].FirstChild.FirstChild,
                                _sourceFile);
-      var fixture = new Fixture();
 
       // Act
-      var result = sut.GetAttribute(ns, fixture.Create<string>(), name);
+      var result = sut.GetAttribute(new ZptNamespace(uri: ns), name);
 
       // Assert
       Assert.NotNull(result, "Result nullability");

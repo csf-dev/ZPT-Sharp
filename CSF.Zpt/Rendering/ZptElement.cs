@@ -132,9 +132,8 @@ namespace CSF.Zpt.Rendering
     /// </summary>
     /// <returns>The attribute, or a <c>null</c> reference.</returns>
     /// <param name="attributeNamespace">The attribute namespace.</param>
-    /// <param name="prefix">The attribute prefix.</param>
     /// <param name="name">The attribute name.</param>
-    public abstract ZptAttribute GetAttribute(string attributeNamespace, string prefix, string name);
+    public abstract ZptAttribute GetAttribute(ZptNamespace attributeNamespace, string name);
 
     /// <summary>
     /// Sets the value of an attribute.
@@ -143,16 +142,16 @@ namespace CSF.Zpt.Rendering
     /// <param name="value">The attribute value.</param>
     public virtual void SetAttribute(string name, string value)
     {
-      this.SetAttribute(null, name, value);
+      this.SetAttribute(ZptNamespace.Default, name, value);
     }
 
     /// <summary>
     /// Sets the value of an attribute.
     /// </summary>
-    /// <param name="prefix">The attribute namespace prefix.</param>
+    /// <param name="attributeNamespace">The attribute namespace.</param>
     /// <param name="name">The attribute name.</param>
     /// <param name="value">The attribute value.</param>
-    public abstract void SetAttribute(string prefix, string name, string value);
+    public abstract void SetAttribute(ZptNamespace attributeNamespace, string name, string value);
 
     /// <summary>
     /// Removes a named attribute.
@@ -160,15 +159,15 @@ namespace CSF.Zpt.Rendering
     /// <param name="name">The attribtue name.</param>
     public virtual void RemoveAttribute(string name)
     {
-      this.RemoveAttribute(null, name);
+      this.RemoveAttribute(ZptNamespace.Default, name);
     }
 
     /// <summary>
     /// Removes a named attribute.
     /// </summary>
-    /// <param name="prefix">The attribute namespace prefix.</param>
+    /// <param name="attributeNamespace">The attribute namespace.</param>
     /// <param name="name">The attribute name.</param>
-    public abstract void RemoveAttribute(string prefix, string name);
+    public abstract void RemoveAttribute(ZptNamespace attributeNamespace, string name);
 
     /// <summary>
     /// Recursively searches the children of the current instance, returning a collection of elements which have an
@@ -176,9 +175,8 @@ namespace CSF.Zpt.Rendering
     /// </summary>
     /// <returns>The matching child elements.</returns>
     /// <param name="attributeNamespace">The attribute namespace.</param>
-    /// <param name="prefix">The attribute prefix.</param>
     /// <param name="name">The attribute name.</param>
-    public abstract ZptElement[] SearchChildrenByAttribute(string attributeNamespace, string prefix, string name);
+    public abstract ZptElement[] SearchChildrenByAttribute(ZptNamespace attributeNamespace, string name);
 
     /// <summary>
     /// Recursively searches upwards in the DOM tree, returning the first (closest) ancestor element which has an
@@ -186,16 +184,15 @@ namespace CSF.Zpt.Rendering
     /// </summary>
     /// <returns>The closest ancestor element, or a <c>null</c> reference if no ancestor was found.</returns>
     /// <param name="attributeNamespace">The attribute namespace.</param>
-    /// <param name="prefix">The attribute prefix.</param>
     /// <param name="name">The attribute name.</param>
-    public virtual ZptElement SearchAncestorsByAttribute(string attributeNamespace, string prefix, string name)
+    public virtual ZptElement SearchAncestorsByAttribute(ZptNamespace attributeNamespace, string name)
     {
       ZptElement output = null;
 
       var currentElement = this;
       while(output == null && currentElement != null)
       {
-        if(currentElement.GetAttribute(attributeNamespace, prefix, name) != null)
+        if(currentElement.GetAttribute(attributeNamespace, name) != null)
         {
           output = currentElement;
         }
@@ -210,8 +207,7 @@ namespace CSF.Zpt.Rendering
     /// element.
     /// </summary>
     /// <param name="attributeNamespace">The attribute namespace.</param>
-    /// <param name="prefix">The attribute prefix.</param>
-    public abstract void PurgeAttributes(string attributeNamespace, string prefix);
+    public abstract void PurgeAttributes(ZptNamespace attributeNamespace);
 
     /// <summary>
     /// Adds a new comment to the DOM immediately before the current element.
@@ -248,6 +244,8 @@ namespace CSF.Zpt.Rendering
     /// </summary>
     public abstract void RemoveAllChildren();
 
+
+
     #endregion
 
     #region constructor
@@ -264,8 +262,8 @@ namespace CSF.Zpt.Rendering
     /// <param name="isRoot">Whether or not this is the root element.</param>
     /// <param name="isImported">Whether or not this element is imported.</param>
     public ZptElement(SourceFileInfo sourceFile,
-                   bool isRoot,
-                   bool isImported)
+                      bool isRoot,
+                      bool isImported)
     {
       if(sourceFile == null)
       {

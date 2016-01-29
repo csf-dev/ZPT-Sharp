@@ -52,12 +52,10 @@ namespace Test.CSF.Zpt.Tal
       // Arrange
       _element
         .Setup(x => x.GetAttribute(ZptConstants.Tal.Namespace,
-                                   ZptConstants.Tal.DefaultPrefix,
                                    ZptConstants.Tal.ContentAttribute))
         .Returns((ZptAttribute) null);
       _element
         .Setup(x => x.GetAttribute(ZptConstants.Tal.Namespace,
-                                   ZptConstants.Tal.DefaultPrefix,
                                    ZptConstants.Tal.ReplaceAttribute))
         .Returns((ZptAttribute) null);
 
@@ -89,12 +87,10 @@ namespace Test.CSF.Zpt.Tal
       // Arrange
       _element
         .Setup(x => x.GetAttribute(ZptConstants.Tal.Namespace,
-                                   ZptConstants.Tal.DefaultPrefix,
                                    ZptConstants.Tal.ContentAttribute))
         .Returns((ZptAttribute) Mock.Of<ZptAttribute>(x => x.Value == "bar"));
       _element
         .Setup(x => x.GetAttribute(ZptConstants.Tal.Namespace,
-                                   ZptConstants.Tal.DefaultPrefix,
                                    ZptConstants.Tal.ReplaceAttribute))
         .Returns((ZptAttribute) null);
 
@@ -126,12 +122,10 @@ namespace Test.CSF.Zpt.Tal
       // Arrange
       _element
         .Setup(x => x.GetAttribute(ZptConstants.Tal.Namespace,
-                                   ZptConstants.Tal.DefaultPrefix,
                                    ZptConstants.Tal.ContentAttribute))
         .Returns((ZptAttribute) Mock.Of<ZptAttribute>(x => x.Value == "text bar"));
       _element
         .Setup(x => x.GetAttribute(ZptConstants.Tal.Namespace,
-                                   ZptConstants.Tal.DefaultPrefix,
                                    ZptConstants.Tal.ReplaceAttribute))
         .Returns((ZptAttribute) null);
 
@@ -163,12 +157,10 @@ namespace Test.CSF.Zpt.Tal
       // Arrange
       _element
         .Setup(x => x.GetAttribute(ZptConstants.Tal.Namespace,
-                                   ZptConstants.Tal.DefaultPrefix,
                                    ZptConstants.Tal.ContentAttribute))
         .Returns((ZptAttribute) Mock.Of<ZptAttribute>(x => x.Value == "structure bar"));
       _element
         .Setup(x => x.GetAttribute(ZptConstants.Tal.Namespace,
-                                   ZptConstants.Tal.DefaultPrefix,
                                    ZptConstants.Tal.ReplaceAttribute))
         .Returns((ZptAttribute) null);
 
@@ -200,12 +192,10 @@ namespace Test.CSF.Zpt.Tal
       // Arrange
       _element
         .Setup(x => x.GetAttribute(ZptConstants.Tal.Namespace,
-                                   ZptConstants.Tal.DefaultPrefix,
                                    ZptConstants.Tal.ContentAttribute))
         .Returns((ZptAttribute) null);
       _element
         .Setup(x => x.GetAttribute(ZptConstants.Tal.Namespace,
-                                   ZptConstants.Tal.DefaultPrefix,
                                    ZptConstants.Tal.ReplaceAttribute))
         .Returns((ZptAttribute) Mock.Of<ZptAttribute>(x => x.Value == "bar"));
 
@@ -237,12 +227,10 @@ namespace Test.CSF.Zpt.Tal
       // Arrange
       _element
         .Setup(x => x.GetAttribute(ZptConstants.Tal.Namespace,
-                                   ZptConstants.Tal.DefaultPrefix,
                                    ZptConstants.Tal.ContentAttribute))
         .Returns((ZptAttribute) null);
       _element
         .Setup(x => x.GetAttribute(ZptConstants.Tal.Namespace,
-                                   ZptConstants.Tal.DefaultPrefix,
                                    ZptConstants.Tal.ReplaceAttribute))
         .Returns((ZptAttribute) Mock.Of<ZptAttribute>(x => x.Value == "text bar"));
 
@@ -274,12 +262,10 @@ namespace Test.CSF.Zpt.Tal
       // Arrange
       _element
         .Setup(x => x.GetAttribute(ZptConstants.Tal.Namespace,
-                                   ZptConstants.Tal.DefaultPrefix,
                                    ZptConstants.Tal.ContentAttribute))
         .Returns((ZptAttribute) null);
       _element
         .Setup(x => x.GetAttribute(ZptConstants.Tal.Namespace,
-                                   ZptConstants.Tal.DefaultPrefix,
                                    ZptConstants.Tal.ReplaceAttribute))
         .Returns((ZptAttribute) Mock.Of<ZptAttribute>(x => x.Value == "structure bar"));
 
@@ -315,12 +301,10 @@ namespace Test.CSF.Zpt.Tal
       // Arrange
       _element
         .Setup(x => x.GetAttribute(ZptConstants.Tal.Namespace,
-                                   ZptConstants.Tal.DefaultPrefix,
                                    ZptConstants.Tal.ContentAttribute))
         .Returns((ZptAttribute) Mock.Of<ZptAttribute>(x => x.Value == "bar"));
       _element
         .Setup(x => x.GetAttribute(ZptConstants.Tal.Namespace,
-                                   ZptConstants.Tal.DefaultPrefix,
                                    ZptConstants.Tal.ReplaceAttribute))
         .Returns((ZptAttribute) null);
 
@@ -352,12 +336,10 @@ namespace Test.CSF.Zpt.Tal
       // Arrange
       _element
         .Setup(x => x.GetAttribute(ZptConstants.Tal.Namespace,
-                                   ZptConstants.Tal.DefaultPrefix,
                                    ZptConstants.Tal.ContentAttribute))
         .Returns((ZptAttribute) Mock.Of<ZptAttribute>(x => x.Value == "text bar"));
       _element
         .Setup(x => x.GetAttribute(ZptConstants.Tal.Namespace,
-                                   ZptConstants.Tal.DefaultPrefix,
                                    ZptConstants.Tal.ReplaceAttribute))
         .Returns((ZptAttribute) null);
 
@@ -389,12 +371,10 @@ namespace Test.CSF.Zpt.Tal
       // Arrange
       _element
         .Setup(x => x.GetAttribute(ZptConstants.Tal.Namespace,
-                                   ZptConstants.Tal.DefaultPrefix,
                                    ZptConstants.Tal.ContentAttribute))
         .Returns((ZptAttribute) Mock.Of<ZptAttribute>(x => x.Value == "structure bar"));
       _element
         .Setup(x => x.GetAttribute(ZptConstants.Tal.Namespace,
-                                   ZptConstants.Tal.DefaultPrefix,
                                    ZptConstants.Tal.ReplaceAttribute))
         .Returns((ZptAttribute) null);
 
@@ -426,12 +406,10 @@ namespace Test.CSF.Zpt.Tal
       // Arrange
       _element
         .Setup(x => x.GetAttribute(ZptConstants.Tal.Namespace,
-                                   ZptConstants.Tal.DefaultPrefix,
                                    ZptConstants.Tal.ContentAttribute))
         .Returns((ZptAttribute) null);
       _element
         .Setup(x => x.GetAttribute(ZptConstants.Tal.Namespace,
-                                   ZptConstants.Tal.DefaultPrefix,
                                    ZptConstants.Tal.ReplaceAttribute))
         .Returns((ZptAttribute) Mock.Of<ZptAttribute>(x => x.Value == "bar"));
 
@@ -462,12 +440,10 @@ namespace Test.CSF.Zpt.Tal
       // Arrange
       _element
         .Setup(x => x.GetAttribute(ZptConstants.Tal.Namespace,
-                                   ZptConstants.Tal.DefaultPrefix,
                                    ZptConstants.Tal.ContentAttribute))
         .Returns((ZptAttribute) null);
       _element
         .Setup(x => x.GetAttribute(ZptConstants.Tal.Namespace,
-                                   ZptConstants.Tal.DefaultPrefix,
                                    ZptConstants.Tal.ReplaceAttribute))
         .Returns((ZptAttribute) Mock.Of<ZptAttribute>(x => x.Value == "text bar"));
 
@@ -498,12 +474,10 @@ namespace Test.CSF.Zpt.Tal
       // Arrange
       _element
         .Setup(x => x.GetAttribute(ZptConstants.Tal.Namespace,
-                                   ZptConstants.Tal.DefaultPrefix,
                                    ZptConstants.Tal.ContentAttribute))
         .Returns((ZptAttribute) null);
       _element
         .Setup(x => x.GetAttribute(ZptConstants.Tal.Namespace,
-                                   ZptConstants.Tal.DefaultPrefix,
                                    ZptConstants.Tal.ReplaceAttribute))
         .Returns((ZptAttribute) Mock.Of<ZptAttribute>(x => x.Value == "structure bar"));
 
@@ -538,12 +512,10 @@ namespace Test.CSF.Zpt.Tal
       // Arrange
       _element
         .Setup(x => x.GetAttribute(ZptConstants.Tal.Namespace,
-                                   ZptConstants.Tal.DefaultPrefix,
                                    ZptConstants.Tal.ContentAttribute))
         .Returns((ZptAttribute) Mock.Of<ZptAttribute>(x => x.Value == "bar"));
       _element
         .Setup(x => x.GetAttribute(ZptConstants.Tal.Namespace,
-                                   ZptConstants.Tal.DefaultPrefix,
                                    ZptConstants.Tal.ReplaceAttribute))
         .Returns((ZptAttribute) null);
 
@@ -577,12 +549,10 @@ namespace Test.CSF.Zpt.Tal
       // Arrange
       _element
         .Setup(x => x.GetAttribute(ZptConstants.Tal.Namespace,
-                                   ZptConstants.Tal.DefaultPrefix,
                                    ZptConstants.Tal.ContentAttribute))
         .Returns((ZptAttribute) Mock.Of<ZptAttribute>(x => x.Value == "text bar"));
       _element
         .Setup(x => x.GetAttribute(ZptConstants.Tal.Namespace,
-                                   ZptConstants.Tal.DefaultPrefix,
                                    ZptConstants.Tal.ReplaceAttribute))
         .Returns((ZptAttribute) null);
 
@@ -616,12 +586,10 @@ namespace Test.CSF.Zpt.Tal
       // Arrange
       _element
         .Setup(x => x.GetAttribute(ZptConstants.Tal.Namespace,
-                                   ZptConstants.Tal.DefaultPrefix,
                                    ZptConstants.Tal.ContentAttribute))
         .Returns((ZptAttribute) Mock.Of<ZptAttribute>(x => x.Value == "structure bar"));
       _element
         .Setup(x => x.GetAttribute(ZptConstants.Tal.Namespace,
-                                   ZptConstants.Tal.DefaultPrefix,
                                    ZptConstants.Tal.ReplaceAttribute))
         .Returns((ZptAttribute) null);
 
@@ -655,12 +623,10 @@ namespace Test.CSF.Zpt.Tal
       // Arrange
       _element
         .Setup(x => x.GetAttribute(ZptConstants.Tal.Namespace,
-                                   ZptConstants.Tal.DefaultPrefix,
                                    ZptConstants.Tal.ContentAttribute))
         .Returns((ZptAttribute) null);
       _element
         .Setup(x => x.GetAttribute(ZptConstants.Tal.Namespace,
-                                   ZptConstants.Tal.DefaultPrefix,
                                    ZptConstants.Tal.ReplaceAttribute))
         .Returns((ZptAttribute) Mock.Of<ZptAttribute>(x => x.Value == "bar"));
 
@@ -692,12 +658,10 @@ namespace Test.CSF.Zpt.Tal
       // Arrange
       _element
         .Setup(x => x.GetAttribute(ZptConstants.Tal.Namespace,
-                                   ZptConstants.Tal.DefaultPrefix,
                                    ZptConstants.Tal.ContentAttribute))
         .Returns((ZptAttribute) null);
       _element
         .Setup(x => x.GetAttribute(ZptConstants.Tal.Namespace,
-                                   ZptConstants.Tal.DefaultPrefix,
                                    ZptConstants.Tal.ReplaceAttribute))
         .Returns((ZptAttribute) Mock.Of<ZptAttribute>(x => x.Value == "text bar"));
 
@@ -729,12 +693,10 @@ namespace Test.CSF.Zpt.Tal
       // Arrange
       _element
         .Setup(x => x.GetAttribute(ZptConstants.Tal.Namespace,
-                                   ZptConstants.Tal.DefaultPrefix,
                                    ZptConstants.Tal.ContentAttribute))
         .Returns((ZptAttribute) null);
       _element
         .Setup(x => x.GetAttribute(ZptConstants.Tal.Namespace,
-                                   ZptConstants.Tal.DefaultPrefix,
                                    ZptConstants.Tal.ReplaceAttribute))
         .Returns((ZptAttribute) Mock.Of<ZptAttribute>(x => x.Value == "structure bar"));
 
@@ -771,12 +733,10 @@ namespace Test.CSF.Zpt.Tal
       // Arrange
       _element
         .Setup(x => x.GetAttribute(ZptConstants.Tal.Namespace,
-                                   ZptConstants.Tal.DefaultPrefix,
                                    ZptConstants.Tal.ContentAttribute))
         .Returns((ZptAttribute) Mock.Of<ZptAttribute>());
       _element
         .Setup(x => x.GetAttribute(ZptConstants.Tal.Namespace,
-                                   ZptConstants.Tal.DefaultPrefix,
                                    ZptConstants.Tal.ReplaceAttribute))
         .Returns((ZptAttribute) Mock.Of<ZptAttribute>());
 

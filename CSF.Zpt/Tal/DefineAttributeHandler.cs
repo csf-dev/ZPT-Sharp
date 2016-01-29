@@ -57,7 +57,7 @@ namespace CSF.Zpt.Tal
         if(itemMatches.Any(x => !x.Success))
         {
           string message = String.Format(Resources.ExceptionMessages.ZptAttributeParsingError,
-                                         ZptConstants.Tal.DefaultPrefix,
+                                         ZptConstants.Tal.Namespace,
                                          ZptConstants.Tal.DefineAttribute,
                                          attrib.Value);
           throw new ParserException(message) {
@@ -85,7 +85,7 @@ namespace CSF.Zpt.Tal
           catch(Exception ex)
           {
             string message = String.Format(ExceptionMessages.ExpressionEvaluationException,
-                                           ZptConstants.Tal.DefaultPrefix,
+                                           ZptConstants.Tal.Namespace,
                                            ZptConstants.Tal.DefineAttribute,
                                            item.Expression);
             throw new ModelEvaluationException(message, ex) {

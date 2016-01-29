@@ -47,7 +47,6 @@ namespace Test.CSF.Zpt.Tal
       // Arrange
       _element
         .Setup(x => x.GetAttribute(ZptConstants.Tal.Namespace,
-                                   ZptConstants.Tal.DefaultPrefix,
                                    ZptConstants.Tal.OmitTagAttribute))
         .Returns((ZptAttribute) null);
 
@@ -75,7 +74,6 @@ namespace Test.CSF.Zpt.Tal
       // Arrange
       _element
         .Setup(x => x.GetAttribute(ZptConstants.Tal.Namespace,
-                                   ZptConstants.Tal.DefaultPrefix,
                                    ZptConstants.Tal.OmitTagAttribute))
         .Returns(Mock.Of<ZptAttribute>(x => x.Value == _autofixture.Create<string>()));
       _element

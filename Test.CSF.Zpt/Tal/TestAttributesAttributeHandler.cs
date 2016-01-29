@@ -47,7 +47,6 @@ namespace Test.CSF.Zpt.Tal
       // Arrange
       _element
         .Setup(x => x.GetAttribute(ZptConstants.Tal.Namespace,
-                                   ZptConstants.Tal.DefaultPrefix,
                                    ZptConstants.Tal.AttributesAttribute))
         .Returns((ZptAttribute) null);
 
@@ -58,11 +57,11 @@ namespace Test.CSF.Zpt.Tal
       Assert.NotNull(result, "Result nullability");
       Assert.AreEqual(1, result.Elements.Length, "Count of results");
       Assert.AreSame(_element.Object, result.Elements[0], "Correct element returned");
-      _element.Verify(x => x.SetAttribute(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>()),
+      _element.Verify(x => x.SetAttribute(It.IsAny<ZptNamespace>(), It.IsAny<string>() ,It.IsAny<string>()),
                       Times.Never());
       _element.Verify(x => x.SetAttribute(It.IsAny<string>(), It.IsAny<string>()),
                       Times.Never());
-      _element.Verify(x => x.RemoveAttribute(It.IsAny<string>(), It.IsAny<string>()),
+      _element.Verify(x => x.RemoveAttribute(It.IsAny<ZptNamespace>(), It.IsAny<string>()),
                       Times.Never());
       _element.Verify(x => x.RemoveAttribute(It.IsAny<string>()),
                       Times.Never());
@@ -81,7 +80,6 @@ namespace Test.CSF.Zpt.Tal
       // Arrange
       _element
         .Setup(x => x.GetAttribute(ZptConstants.Tal.Namespace,
-                                   ZptConstants.Tal.DefaultPrefix,
                                    ZptConstants.Tal.AttributesAttribute))
         .Returns(Mock.Of<ZptAttribute>(a => a.Value == value));
       
@@ -98,8 +96,8 @@ namespace Test.CSF.Zpt.Tal
       Assert.AreEqual(1, result.Elements.Length, "Count of results");
       Assert.AreSame(_element.Object, result.Elements[0], "Correct element returned");
       Mock.Get(_model).Verify(x => x.Evaluate(expectedExpression, _element.Object), Times.Once());
-      _element.Verify(x => x.SetAttribute(expectedPrefix, expectedName, expressionResult), Times.Once());
-      _element.Verify(x => x.RemoveAttribute(It.IsAny<string>(), It.IsAny<string>()),
+      _element.Verify(x => x.SetAttribute(It.Is<ZptNamespace>(ns => ns.Prefix == expectedPrefix), expectedName, expressionResult), Times.Once());
+      _element.Verify(x => x.RemoveAttribute(It.IsAny<ZptNamespace>(), It.IsAny<string>()),
                       Times.Never());
       _element.Verify(x => x.RemoveAttribute(It.IsAny<string>()),
                       Times.Never());
@@ -113,7 +111,6 @@ namespace Test.CSF.Zpt.Tal
       string attributeValue = (prefix != null)? String.Format("{0}:{1} {2}", prefix, name, expression) : String.Format("{0} {1}", name, expression);
       _element
         .Setup(x => x.GetAttribute(ZptConstants.Tal.Namespace,
-                                   ZptConstants.Tal.DefaultPrefix,
                                    ZptConstants.Tal.AttributesAttribute))
         .Returns(Mock.Of<ZptAttribute>(a => a.Value == attributeValue));
 
@@ -129,8 +126,8 @@ namespace Test.CSF.Zpt.Tal
       Assert.AreEqual(1, result.Elements.Length, "Count of results");
       Assert.AreSame(_element.Object, result.Elements[0], "Correct element returned");
       Mock.Get(_model).Verify(x => x.Evaluate(expression, _element.Object), Times.Once());
-      _element.Verify(x => x.RemoveAttribute(prefix, name), Times.Once());
-      _element.Verify(x => x.SetAttribute(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>()),
+      _element.Verify(x => x.RemoveAttribute(It.Is<ZptNamespace>(ns => ns.Prefix == prefix), name), Times.Once());
+      _element.Verify(x => x.SetAttribute(It.IsAny<ZptNamespace>(), It.IsAny<string>(), It.IsAny<string>()),
                       Times.Never());
       _element.Verify(x => x.SetAttribute(It.IsAny<string>(), It.IsAny<string>()),
                       Times.Never());
@@ -144,7 +141,6 @@ namespace Test.CSF.Zpt.Tal
       string attributeValue = (prefix != null)? String.Format("{0}:{1} {2}", prefix, name, expression) : String.Format("{0} {1}", name, expression);
       _element
         .Setup(x => x.GetAttribute(ZptConstants.Tal.Namespace,
-                                   ZptConstants.Tal.DefaultPrefix,
                                    ZptConstants.Tal.AttributesAttribute))
         .Returns(Mock.Of<ZptAttribute>(a => a.Value == attributeValue));
 
@@ -160,11 +156,11 @@ namespace Test.CSF.Zpt.Tal
       Assert.AreEqual(1, result.Elements.Length, "Count of results");
       Assert.AreSame(_element.Object, result.Elements[0], "Correct element returned");
       Mock.Get(_model).Verify(x => x.Evaluate(expression, _element.Object), Times.Once());
-      _element.Verify(x => x.SetAttribute(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>()),
+      _element.Verify(x => x.SetAttribute(It.IsAny<ZptNamespace>(), It.IsAny<string>(), It.IsAny<string>()),
                       Times.Never());
       _element.Verify(x => x.SetAttribute(It.IsAny<string>(), It.IsAny<string>()),
                       Times.Never());
-      _element.Verify(x => x.RemoveAttribute(It.IsAny<string>(), It.IsAny<string>()),
+      _element.Verify(x => x.RemoveAttribute(It.IsAny<ZptNamespace>(), It.IsAny<string>()),
                       Times.Never());
       _element.Verify(x => x.RemoveAttribute(It.IsAny<string>()),
                       Times.Never());
@@ -181,7 +177,6 @@ namespace Test.CSF.Zpt.Tal
                              prefix:four expressionFour;";
       _element
         .Setup(x => x.GetAttribute(ZptConstants.Tal.Namespace,
-                                   ZptConstants.Tal.DefaultPrefix,
                                    ZptConstants.Tal.AttributesAttribute))
         .Returns(Mock.Of<ZptAttribute>(a => a.Value == attributeValue));
 
@@ -211,10 +206,10 @@ namespace Test.CSF.Zpt.Tal
       Assert.NotNull(result, "Result nullability");
       Assert.AreEqual(1, result.Elements.Length, "Count of results");
       Assert.AreSame(_element.Object, result.Elements[0], "Correct element returned");
-      _element.Verify(x => x.SetAttribute(null, "one", (string) expressionOneResult), Times.Once());
-      _element.Verify(x => x.RemoveAttribute(null, "two"), Times.Once());
-      _element.Verify(x => x.SetAttribute(null, "three", It.IsAny<string>()), Times.Never());
-      _element.Verify(x => x.SetAttribute("prefix", "four", (string) expressionFourResult), Times.Once());
+      _element.Verify(x => x.SetAttribute(It.Is<ZptNamespace>(ns => ns.Prefix == null), "one", (string) expressionOneResult), Times.Once());
+      _element.Verify(x => x.RemoveAttribute(It.Is<ZptNamespace>(ns => ns.Prefix == null), "two"), Times.Once());
+      _element.Verify(x => x.SetAttribute(It.Is<ZptNamespace>(ns => ns.Prefix == null), "three", It.IsAny<string>()), Times.Never());
+      _element.Verify(x => x.SetAttribute(It.Is<ZptNamespace>(ns => ns.Prefix == "prefix"), "four", (string) expressionFourResult), Times.Once());
     }
 
     #endregion

@@ -115,7 +115,7 @@ namespace Test.CSF.Zpt.Tal
         elements[i].Setup(x => x.GetChildElements()).Returns(new [] { elements[i + 1].Object });
       }
       elements[0]
-        .Setup(x => x.GetAttribute(ZptConstants.Tal.Namespace, ZptConstants.Tal.DefaultPrefix, ZptConstants.Tal.OnErrorAttribute))
+        .Setup(x => x.GetAttribute(ZptConstants.Tal.Namespace, ZptConstants.Tal.OnErrorAttribute))
         .Returns(Mock.Of<global::CSF.Zpt.Rendering.ZptAttribute>());
 
       var generalHandler = new Mock<IAttributeHandler>();

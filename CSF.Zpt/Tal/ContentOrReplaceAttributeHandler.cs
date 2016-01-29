@@ -145,7 +145,7 @@ namespace CSF.Zpt.Tal
       if(!match.Success)
       {
         string message = String.Format(ExceptionMessages.ZptAttributeParsingError,
-                                         ZptConstants.Tal.DefaultPrefix,
+                                       ZptConstants.Tal.Namespace,
                                        attribute.Name,
                                        attribute.Value);
         throw new ParserException(message) {

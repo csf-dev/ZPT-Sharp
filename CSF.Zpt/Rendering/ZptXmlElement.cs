@@ -195,9 +195,8 @@ namespace CSF.Zpt.Rendering
     /// </summary>
     /// <returns>The attribute, or a <c>null</c> reference.</returns>
     /// <param name="attributeNamespace">The attribute namespace.</param>
-    /// <param name="prefix">The attribute prefix.</param>
     /// <param name="name">The attribute name.</param>
-    public override ZptAttribute GetAttribute(string attributeNamespace, string prefix, string name)
+    public override ZptAttribute GetAttribute(ZptNamespace attributeNamespace, string name)
     {
       if(name == null)
       {
@@ -207,17 +206,21 @@ namespace CSF.Zpt.Rendering
       {
         throw new ArgumentException(ExceptionMessages.NameMustNotBeEmptyString, "name");
       }
+      if(attributeNamespace == null)
+      {
+        throw new ArgumentNullException("attributeNamespace");
+      }
 
       string query;
       var nsManager = new XmlNamespaceManager(new NameTable());
 
-      if(String.IsNullOrEmpty(attributeNamespace))
+      if(String.IsNullOrEmpty(attributeNamespace.Uri))
       {
         query = String.Concat("@", name);
       }
       else
       {
-        nsManager.AddNamespace("search", attributeNamespace);
+        nsManager.AddNamespace("search", attributeNamespace.Uri);
         query = String.Concat("@search:", name);
       }
 
@@ -231,10 +234,10 @@ namespace CSF.Zpt.Rendering
     /// <summary>
     /// Sets the value of an attribute.
     /// </summary>
-    /// <param name="prefix">The attribute namespace prefix.</param>
+    /// <param name="attributeNamespace">The attribute namespace.</param>
     /// <param name="name">The attribute name.</param>
     /// <param name="value">The attribute value.</param>
-    public override void SetAttribute(string prefix, string name, string value)
+    public override void SetAttribute(ZptNamespace attributeNamespace, string name, string value)
     {
       // TODO: Write this implementation
       throw new NotImplementedException();
@@ -243,9 +246,9 @@ namespace CSF.Zpt.Rendering
     /// <summary>
     /// Removes a named attribute.
     /// </summary>
-    /// <param name="prefix">The attribute namespace prefix.</param>
+    /// <param name="attributeNamespace">The attribute namespace.</param>
     /// <param name="name">The attribute name.</param>
-    public override void RemoveAttribute(string prefix, string name)
+    public override void RemoveAttribute(ZptNamespace attributeNamespace, string name)
     {
       // TODO: Write this implementation
       throw new NotImplementedException();
@@ -257,9 +260,8 @@ namespace CSF.Zpt.Rendering
     /// </summary>
     /// <returns>The matching child elements.</returns>
     /// <param name="attributeNamespace">The attribute namespace.</param>
-    /// <param name="prefix">The attribute prefix.</param>
     /// <param name="name">The attribute name.</param>
-    public override ZptElement[] SearchChildrenByAttribute(string attributeNamespace, string prefix, string name)
+    public override ZptElement[] SearchChildrenByAttribute(ZptNamespace attributeNamespace, string name)
     {
       if(name == null)
       {
@@ -273,13 +275,13 @@ namespace CSF.Zpt.Rendering
       string query;
       var nsManager = new XmlNamespaceManager(new NameTable());
 
-      if(String.IsNullOrEmpty(attributeNamespace))
+      if(String.IsNullOrEmpty(attributeNamespace.Uri))
       {
         query = String.Concat(".//*[@", name, "]");
       }
       else
       {
-        nsManager.AddNamespace("search", attributeNamespace);
+        nsManager.AddNamespace("search", attributeNamespace.Uri);
         query = String.Concat(".//*[@search:", name, "]");
       }
 
@@ -294,8 +296,7 @@ namespace CSF.Zpt.Rendering
     /// element.
     /// </summary>
     /// <param name="attributeNamespace">The attribute namespace.</param>
-    /// <param name="prefix">The attribute prefix.</param>
-    public override void PurgeAttributes(string attributeNamespace, string prefix)
+    public override void PurgeAttributes(ZptNamespace attributeNamespace)
     {
       if(attributeNamespace == null)
       {
@@ -311,9 +312,9 @@ namespace CSF.Zpt.Rendering
       var toRemove = (from ele in elements
                       from attrib in ele.Attributes.Cast<System.Xml.XmlAttribute>()
                       where
-                        attrib.NamespaceURI == attributeNamespace
+                        attrib.NamespaceURI == attributeNamespace.Uri
                         || (attrib.NamespaceURI == "http://www.w3.org/2000/xmlns/"
-                            && attrib.Value == attributeNamespace)
+                            && attrib.Value == attributeNamespace.Uri)
                       select new { Element = ele, Attribute = attrib })
         .ToArray();
 

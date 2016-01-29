@@ -24,7 +24,6 @@ namespace CSF.Zpt.Rendering
       }
 
       return element.GetAttribute(ZptConstants.Metal.Namespace,
-                                  ZptConstants.Metal.DefaultPrefix,
                                   attributeName);
     }
 
@@ -43,7 +42,6 @@ namespace CSF.Zpt.Rendering
       }
 
       return element.SearchAncestorsByAttribute(ZptConstants.Metal.Namespace,
-                                                ZptConstants.Metal.DefaultPrefix,
                                                 attributeName);
     }
 
@@ -62,7 +60,6 @@ namespace CSF.Zpt.Rendering
       }
 
       return element.SearchChildrenByAttribute(ZptConstants.Metal.Namespace,
-                                               ZptConstants.Metal.DefaultPrefix,
                                                attributeName);
     }
 
@@ -77,7 +74,7 @@ namespace CSF.Zpt.Rendering
         throw new ArgumentNullException("element");
       }
 
-      element.PurgeAttributes(ZptConstants.Metal.Namespace, ZptConstants.Metal.DefaultPrefix);
+      element.PurgeAttributes(ZptConstants.Metal.Namespace);
     }
 
     #endregion
@@ -99,7 +96,6 @@ namespace CSF.Zpt.Rendering
       }
 
       return element.GetAttribute(ZptConstants.Tal.Namespace,
-                                  ZptConstants.Tal.DefaultPrefix,
                                   attributeName);
     }
 
@@ -118,7 +114,6 @@ namespace CSF.Zpt.Rendering
       }
 
       return element.SearchAncestorsByAttribute(ZptConstants.Tal.Namespace,
-                                                ZptConstants.Tal.DefaultPrefix,
                                                 attributeName);
     }
 
@@ -137,7 +132,6 @@ namespace CSF.Zpt.Rendering
       }
 
       return element.SearchChildrenByAttribute(ZptConstants.Tal.Namespace,
-                                               ZptConstants.Tal.DefaultPrefix,
                                                attributeName);
     }
 
@@ -152,7 +146,7 @@ namespace CSF.Zpt.Rendering
         throw new ArgumentNullException("element");
       }
 
-      element.PurgeAttributes(ZptConstants.Tal.Namespace, ZptConstants.Tal.DefaultPrefix);
+      element.PurgeAttributes(ZptConstants.Tal.Namespace);
     }
 
     #endregion

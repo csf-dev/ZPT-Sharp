@@ -48,14 +48,12 @@ namespace Test.CSF.Zpt.Metal
       var original = new Mock<ZptElement>();
       ZptElement
       macro = Mock.Of<ZptElement>(x => x.GetAttribute(ZptConstants.Metal.Namespace,
-                                                      ZptConstants.Metal.DefaultPrefix,
                                                       ZptConstants.Metal.DefineMacroAttribute) == attribute
-                                      && x.SearchChildrenByAttribute(It.IsAny<string>(),
-                                                                     It.IsAny<string>(),
-                                                                     It.IsAny<string>()) == new ZptElement[0]);
+                                       && x.SearchChildrenByAttribute(It.IsAny<ZptNamespace>(),
+                                                                      It.IsAny<string>()) == new ZptElement[0]);
       _finder.Setup(x => x.GetUsedMacro(original.Object, model)).Returns(macro);
       original
-        .Setup(x => x.SearchChildrenByAttribute(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>()))
+        .Setup(x => x.SearchChildrenByAttribute(It.IsAny<ZptNamespace>(), It.IsAny<string>()))
         .Returns(new ZptElement[0]);
       original
         .Setup(x => x.ReplaceWith(macro))
@@ -97,13 +95,11 @@ namespace Test.CSF.Zpt.Metal
       var original = new Mock<ZptElement>();
       ZptElement
         macro = Mock.Of<ZptElement>(x => x.GetAttribute(ZptConstants.Metal.Namespace,
-                                                        ZptConstants.Metal.DefaultPrefix,
                                                         ZptConstants.Metal.DefineMacroAttribute) == attribute
-                                      && x.SearchChildrenByAttribute(It.IsAny<string>(),
-                                                                     It.IsAny<string>(),
-                                                                     It.IsAny<string>()) == new ZptElement[0]);
+                                         && x.SearchChildrenByAttribute(It.IsAny<ZptNamespace>(),
+                                                                        It.IsAny<string>()) == new ZptElement[0]);
       original
-        .Setup(x => x.SearchChildrenByAttribute(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>()))
+        .Setup(x => x.SearchChildrenByAttribute(It.IsAny<ZptNamespace>(), It.IsAny<string>()))
         .Returns(new ZptElement[0]);
       original
         .Setup(x => x.ReplaceWith(macro))

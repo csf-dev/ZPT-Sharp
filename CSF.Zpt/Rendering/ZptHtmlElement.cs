@@ -173,16 +173,19 @@ namespace CSF.Zpt.Rendering
     /// </summary>
     /// <returns>The attribute, or a <c>null</c> reference.</returns>
     /// <param name="attributeNamespace">The attribute namespace.</param>
-    /// <param name="prefix">The attribute prefix.</param>
     /// <param name="name">The attribute name.</param>
-    public override ZptAttribute GetAttribute(string attributeNamespace, string prefix, string name)
+    public override ZptAttribute GetAttribute(ZptNamespace attributeNamespace, string name)
     {
+      if(attributeNamespace == null)
+      {
+        throw new ArgumentNullException("attributeNamespace");
+      }
       if(name == null)
       {
         throw new ArgumentNullException("name");
       }
 
-      var attribName = this.GetName(prefix, name);
+      var attribName = this.GetName(attributeNamespace.Prefix, name);
 
       var htmlAttribute = this.Node.Attributes
         .FirstOrDefault(x => x.Name == attribName);
@@ -193,10 +196,10 @@ namespace CSF.Zpt.Rendering
     /// <summary>
     /// Sets the value of an attribute.
     /// </summary>
-    /// <param name="prefix">The attribute namespace prefix.</param>
+    /// <param name="attributeNamespace">The attribute namespace.</param>
     /// <param name="name">The attribute name.</param>
     /// <param name="value">The attribute value.</param>
-    public override void SetAttribute(string prefix, string name, string value)
+    public override void SetAttribute(ZptNamespace attributeNamespace, string name, string value)
     {
       // TODO: Write this implementation
       throw new NotImplementedException();
@@ -205,9 +208,9 @@ namespace CSF.Zpt.Rendering
     /// <summary>
     /// Removes a named attribute.
     /// </summary>
-    /// <param name="prefix">The attribute namespace prefix.</param>
+    /// <param name="attributeNamespace">The attribute namespace.</param>
     /// <param name="name">The attribute name.</param>
-    public override void RemoveAttribute(string prefix, string name)
+    public override void RemoveAttribute(ZptNamespace attributeNamespace, string name)
     {
       // TODO: Write this implementation
       throw new NotImplementedException();
@@ -219,11 +222,10 @@ namespace CSF.Zpt.Rendering
     /// </summary>
     /// <returns>The matching child elements.</returns>
     /// <param name="attributeNamespace">The attribute namespace.</param>
-    /// <param name="prefix">The attribute prefix.</param>
     /// <param name="name">The attribute name.</param>
-    public override ZptElement[] SearchChildrenByAttribute(string attributeNamespace, string prefix, string name)
+    public override ZptElement[] SearchChildrenByAttribute(ZptNamespace attributeNamespace, string name)
     {
-      string attribName = this.GetName(prefix, name);
+      string attribName = this.GetName(attributeNamespace.Prefix, name);
 
       return (from node in this.Node.Descendants()
               from attrib in node.Attributes
@@ -237,12 +239,11 @@ namespace CSF.Zpt.Rendering
     /// element.
     /// </summary>
     /// <param name="attributeNamespace">The attribute namespace.</param>
-    /// <param name="prefix">The attribute prefix.</param>
-    public override void PurgeAttributes(string attributeNamespace, string prefix)
+    public override void PurgeAttributes(ZptNamespace attributeNamespace)
     {
-      if(prefix == null)
+      if(attributeNamespace == null)
       {
-        throw new ArgumentNullException("prefix");
+        throw new ArgumentNullException("attributeNamespace");
       }
 
       var nodes = this.Node
@@ -252,7 +253,7 @@ namespace CSF.Zpt.Rendering
 
       var toRemove = (from node in nodes
                       from attrib in node.Attributes
-                      where attrib.Name.StartsWith(String.Concat(prefix, ":"))
+                      where attrib.Name.StartsWith(String.Concat(attributeNamespace.Prefix, ":"))
                       select new { Element = node, Attribute = attrib });
 
       foreach(var item in toRemove)

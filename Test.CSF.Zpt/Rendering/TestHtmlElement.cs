@@ -77,10 +77,9 @@ namespace Test.CSF.Zpt.Rendering
       // Arrange
       var sut = new ZptHtmlElement(_document.DocumentNode,
                                 _sourceFile);
-      var fixture = new Fixture();
 
       // Act
-      var results = sut.SearchChildrenByAttribute(fixture.Create<string>(), "custom", "parent_attrib");
+      var results = sut.SearchChildrenByAttribute(new ZptNamespace(prefix: "custom"), "parent_attrib");
 
       // Assert
       Assert.NotNull(results, "Result nullability");
@@ -114,10 +113,9 @@ namespace Test.CSF.Zpt.Rendering
       // Arrange
       var sut = new ZptHtmlElement(_document.DocumentNode.FirstChild.ChildNodes[3].ChildNodes[1].ChildNodes[1],
                                 _sourceFile);
-      var fixture = new Fixture();
 
       // Act
-      var result = sut.GetAttribute(fixture.Create<string>(), prefix, name);
+      var result = sut.GetAttribute(new ZptNamespace(prefix: prefix), name);
 
       // Assert
       Assert.NotNull(result, "Result nullability");

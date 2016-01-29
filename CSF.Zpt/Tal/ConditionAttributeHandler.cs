@@ -42,7 +42,7 @@ namespace CSF.Zpt.Tal
         catch(Exception ex)
         {
           string message = String.Format(ExceptionMessages.ExpressionEvaluationException,
-                                         ZptConstants.Tal.DefaultPrefix,
+                                         ZptConstants.Tal.Namespace,
                                          ZptConstants.Tal.ConditionAttribute,
                                          attribute.Value);
           throw new ModelEvaluationException(message, ex) {
