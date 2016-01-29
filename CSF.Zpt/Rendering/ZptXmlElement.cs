@@ -114,8 +114,12 @@ namespace CSF.Zpt.Rendering
     /// <param name="interpretContentAsStructure">If set to <c>true</c> then the content is interpreted as structure.</param>
     public override ZptElement[] ReplaceWith(string content, bool interpretContentAsStructure)
     {
-      // TODO: Write this implementation
-      throw new NotImplementedException();
+      var newNode = this.Import(content, interpretContentAsStructure);
+
+      var output = this.GetParent().InsertBefore(newNode, this.Node);
+      this.Remove();
+
+      return interpretContentAsStructure? new[] { new ZptXmlElement(output, this.SourceFile) } : new ZptElement[0];
     }
 
     /// <summary>
@@ -125,8 +129,9 @@ namespace CSF.Zpt.Rendering
     /// <param name="interpretContentAsStructure">If set to <c>true</c> then the content is interpreted as structure.</param>
     public override void ReplaceChildrenWith(string content, bool interpretContentAsStructure)
     {
-      // TODO: Write this implementation
-      throw new NotImplementedException();
+      var newNode = this.Import(content, interpretContentAsStructure);
+      this.RemoveAllChildren();
+      this.Node.AppendChild(newNode);
     }
 
     /// <summary>
@@ -138,8 +143,26 @@ namespace CSF.Zpt.Rendering
     /// <param name="newChild">The new child element to insert.</param>
     public override ZptElement InsertBefore(ZptElement existing, ZptElement newChild)
     {
-      // TODO: Write this implementation
-      throw new NotImplementedException();
+      ZptXmlElement
+        existingElement = existing as ZptXmlElement,
+        newChildElement = newChild as ZptXmlElement;
+      if(existingElement == null)
+      {
+        string message = String.Format(ExceptionMessages.ElementMustBeCorrectType,
+                                       typeof(ZptXmlElement).Name);
+        throw new ArgumentException(message, "existing");
+      }
+      if(newChildElement == null)
+      {
+        string message = String.Format(ExceptionMessages.ElementMustBeCorrectType,
+                                       typeof(ZptXmlElement).Name);
+        throw new ArgumentException(message, "newChild");
+      }
+
+      var importedNode = this.Node.OwnerDocument.ImportNode(newChildElement.Node, true);
+
+      var output = this.Node.InsertBefore(importedNode, existingElement.Node);
+      return new ZptXmlElement(output, newChild.SourceFile, isImported: true);
     }
 
     /// <summary>
@@ -151,8 +174,26 @@ namespace CSF.Zpt.Rendering
     /// <param name="newChild">The new child element to insert.</param>
     public override ZptElement InsertAfter(ZptElement existing, ZptElement newChild)
     {
-      // TODO: Write this implementation
-      throw new NotImplementedException();
+      ZptXmlElement
+        existingElement = existing as ZptXmlElement,
+        newChildElement = newChild as ZptXmlElement;
+      if(existingElement == null)
+      {
+        string message = String.Format(ExceptionMessages.ElementMustBeCorrectType,
+                                       typeof(ZptXmlElement).Name);
+        throw new ArgumentException(message, "existing");
+      }
+      if(newChildElement == null)
+      {
+        string message = String.Format(ExceptionMessages.ElementMustBeCorrectType,
+                                       typeof(ZptXmlElement).Name);
+        throw new ArgumentException(message, "newChild");
+      }
+
+      var importedNode = this.Node.OwnerDocument.ImportNode(newChildElement.Node, true);
+
+      var output = this.Node.InsertAfter(importedNode, existingElement.Node);
+      return new ZptXmlElement(output, newChild.SourceFile, isImported: true);
     }
 
     /// <summary>
@@ -239,8 +280,31 @@ namespace CSF.Zpt.Rendering
     /// <param name="value">The attribute value.</param>
     public override void SetAttribute(ZptNamespace attributeNamespace, string name, string value)
     {
-      // TODO: Write this implementation
-      throw new NotImplementedException();
+      if(attributeNamespace == null)
+      {
+        throw new ArgumentNullException("attributeNamespace");
+      }
+      if(name == null)
+      {
+        throw new ArgumentNullException("name");
+      }
+
+      var attribs = this.Node.Attributes.Cast<XmlAttribute>()
+        .Where(x => x.LocalName == name
+                    && (attributeNamespace.Uri == null
+                        || x.NamespaceURI == attributeNamespace.Uri))
+        .ToArray();
+
+      if(!attribs.Any())
+      {
+        attribs = new [] { this.Node.OwnerDocument.CreateAttribute(attributeNamespace.Prefix, name, attributeNamespace.Uri) };
+        this.Node.Attributes.Append(attribs[0]);
+      }
+
+      foreach(var attrib in attribs)
+      {
+        attrib.Value = value;
+      }
     }
 
     /// <summary>
@@ -250,8 +314,25 @@ namespace CSF.Zpt.Rendering
     /// <param name="name">The attribute name.</param>
     public override void RemoveAttribute(ZptNamespace attributeNamespace, string name)
     {
-      // TODO: Write this implementation
-      throw new NotImplementedException();
+      if(attributeNamespace == null)
+      {
+        throw new ArgumentNullException("attributeNamespace");
+      }
+      if(name == null)
+      {
+        throw new ArgumentNullException("name");
+      }
+
+      var attribs = this.Node.Attributes
+        .Cast<XmlAttribute>()
+        .Where(x => x.LocalName == name
+                    && (attributeNamespace.Uri == null
+                        || x.NamespaceURI == attributeNamespace.Uri))
+        .ToArray();
+      foreach(var attrib in attribs)
+      {
+        this.Node.Attributes.Remove(attrib);
+      }
     }
 
     /// <summary>
@@ -413,8 +494,19 @@ namespace CSF.Zpt.Rendering
     /// </returns>
     public override ZptElement[] Omit()
     {
-      // TODO: Write this implementation
-      throw new NotImplementedException();
+      var children = this.Node.ChildNodes.Cast<XmlNode>().ToArray();
+      var parent = this.GetParent();
+
+      foreach(var child in children)
+      {
+        parent.InsertBefore(child, this.Node);
+      }
+      parent.RemoveChild(this.Node);
+
+      return children
+        .Where(x => x.NodeType == XmlNodeType.Element)
+        .Select(x => new ZptXmlElement(x, this.SourceFile))
+        .ToArray();
     }
 
     /// <summary>
@@ -430,8 +522,11 @@ namespace CSF.Zpt.Rendering
     /// </summary>
     public override void RemoveAllChildren()
     {
-      // TODO: Write this implementation
-      throw new NotImplementedException();
+      var children = this.Node.ChildNodes.Cast<XmlNode>().ToArray();
+      foreach(var child in children)
+      {
+        this.Node.RemoveChild(child);
+      }
     }
 
     /// <summary>
@@ -443,8 +538,23 @@ namespace CSF.Zpt.Rendering
     /// <param name="nSpace">The namespace for which to test.</param>
     public override bool IsInNamespace(ZptNamespace nSpace)
     {
-      // TODO: Write this implementation
-      throw new NotImplementedException();
+      if(nSpace == null)
+      {
+        throw new ArgumentNullException("nSpace");
+      }
+
+      bool output;
+
+      if(nSpace.Uri != null)
+      {
+        output = this.Node.NamespaceURI == nSpace.Uri;
+      }
+      else
+      {
+        output = String.IsNullOrEmpty(this.Node.NamespaceURI);
+      }
+
+      return output;
     }
 
     /// <summary>
@@ -458,6 +568,32 @@ namespace CSF.Zpt.Rendering
       if(output == null)
       {
         throw new InvalidOperationException(ExceptionMessages.CannotGetParentFromRootNode);
+      }
+
+      return output;
+    }
+
+    /// <summary>
+    /// Imports the given text as a new <c>XmlNode</c>.
+    /// </summary>
+    /// <returns>A collection of the imported nodes.</returns>
+    /// <param name="text">The text to import.</param>
+    /// <param name="treatAsXml">If set to <c>true</c> then the text is treated as XML.</param>
+    private XmlNode Import(string text, bool treatAsXml)
+    {
+      string toImport = text?? String.Empty;
+
+      XmlNode output;
+
+      if(treatAsXml)
+      {
+        var doc = new XmlDocument();
+        doc.LoadXml(toImport);
+        output = this.Node.OwnerDocument.ImportNode(doc.DocumentElement, true);
+      }
+      else
+      {
+        output = this.Node.OwnerDocument.CreateTextNode(toImport);
       }
 
       return output;
