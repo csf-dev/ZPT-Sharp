@@ -124,6 +124,196 @@ namespace Test.CSF.Zpt.Rendering
     }
 
     [Test]
+    public void TestSetAttribute()
+    {
+      // Arrange
+      var sut = new ZptHtmlElement(_document.DocumentNode.FirstChild.ChildNodes[3].ChildNodes[1].ChildNodes[1],
+                                   _sourceFile);
+
+      // Act
+      sut.SetAttribute("foo", "bar");
+
+      // Assert
+      var expectedDom = @"<html>
+<head>
+<title>Document title</title>
+</head>
+<body>
+<header>
+  <div custom:parent_attrib=""Attribute value one"" class=""class_one class_two"" foo=""bar"">
+    <ul>
+      <li custom:child_attrib=""foo"">Foo content</li>
+      <li custom:child_attrib=""bar"">Bar content</li>
+      <li custom:child_attrib=""baz"">Baz content</li>
+    </ul>
+  </div>
+  Page header
+</header>
+<section>
+  <header>
+    <h1 id=""page_heading"">Page heading</h1>
+  </header>
+  <p>A paragraph of content</p>
+</section>
+<footer>Page footer</footer>
+</body>
+</html>";
+      Assert.AreEqual(expectedDom, _document.DocumentNode.OuterHtml, "Correct modified HTML");
+    }
+
+    [Test]
+    public void TestSetAttributeWithNamespace()
+    {
+      // Arrange
+      var sut = new ZptHtmlElement(_document.DocumentNode.FirstChild.ChildNodes[3].ChildNodes[1].ChildNodes[1],
+                                   _sourceFile);
+
+      // Act
+      sut.SetAttribute(new ZptNamespace(prefix: "ns"), "foo", "bar");
+
+      // Assert
+      var expectedDom = @"<html>
+<head>
+<title>Document title</title>
+</head>
+<body>
+<header>
+  <div custom:parent_attrib=""Attribute value one"" class=""class_one class_two"" ns:foo=""bar"">
+    <ul>
+      <li custom:child_attrib=""foo"">Foo content</li>
+      <li custom:child_attrib=""bar"">Bar content</li>
+      <li custom:child_attrib=""baz"">Baz content</li>
+    </ul>
+  </div>
+  Page header
+</header>
+<section>
+  <header>
+    <h1 id=""page_heading"">Page heading</h1>
+  </header>
+  <p>A paragraph of content</p>
+</section>
+<footer>Page footer</footer>
+</body>
+</html>";
+      Assert.AreEqual(expectedDom, _document.DocumentNode.OuterHtml, "Correct modified HTML");
+    }
+
+    [Test]
+    public void TestRemoveAttribute()
+    {
+      // Arrange
+      var sut = new ZptHtmlElement(_document.DocumentNode.FirstChild.ChildNodes[3].ChildNodes[1].ChildNodes[1],
+                                   _sourceFile);
+
+      // Act
+      sut.RemoveAttribute("class");
+
+      // Assert
+      var expectedDom = @"<html>
+<head>
+<title>Document title</title>
+</head>
+<body>
+<header>
+  <div custom:parent_attrib=""Attribute value one"">
+    <ul>
+      <li custom:child_attrib=""foo"">Foo content</li>
+      <li custom:child_attrib=""bar"">Bar content</li>
+      <li custom:child_attrib=""baz"">Baz content</li>
+    </ul>
+  </div>
+  Page header
+</header>
+<section>
+  <header>
+    <h1 id=""page_heading"">Page heading</h1>
+  </header>
+  <p>A paragraph of content</p>
+</section>
+<footer>Page footer</footer>
+</body>
+</html>";
+      Assert.AreEqual(expectedDom, _document.DocumentNode.OuterHtml, "Correct modified HTML");
+    }
+
+    [Test]
+    public void TestRemoveAttributeWithNamespace()
+    {
+      // Arrange
+      var sut = new ZptHtmlElement(_document.DocumentNode.FirstChild.ChildNodes[3].ChildNodes[1].ChildNodes[1],
+                                   _sourceFile);
+
+      // Act
+      sut.RemoveAttribute(new ZptNamespace(prefix: "custom"), "parent_attrib");
+
+      // Assert
+      var expectedDom = @"<html>
+<head>
+<title>Document title</title>
+</head>
+<body>
+<header>
+  <div class=""class_one class_two"">
+    <ul>
+      <li custom:child_attrib=""foo"">Foo content</li>
+      <li custom:child_attrib=""bar"">Bar content</li>
+      <li custom:child_attrib=""baz"">Baz content</li>
+    </ul>
+  </div>
+  Page header
+</header>
+<section>
+  <header>
+    <h1 id=""page_heading"">Page heading</h1>
+  </header>
+  <p>A paragraph of content</p>
+</section>
+<footer>Page footer</footer>
+</body>
+</html>";
+      Assert.AreEqual(expectedDom, _document.DocumentNode.OuterHtml, "Correct modified HTML");
+    }
+
+    [Test]
+    public void TestPurgeAttributes()
+    {
+      // Arrange
+      var sut = new ZptHtmlElement(_document.DocumentNode.FirstChild.ChildNodes[3].ChildNodes[1].ChildNodes[1],
+                                   _sourceFile);
+
+      // Act
+      sut.PurgeAttributes(new ZptNamespace(prefix: "custom"));
+
+      // Assert
+      var expectedDom = @"<html>
+<head>
+<title>Document title</title>
+</head>
+<body>
+<header>
+  <div class=""class_one class_two"">
+    <ul>
+      <li>Foo content</li>
+      <li>Bar content</li>
+      <li>Baz content</li>
+    </ul>
+  </div>
+  Page header
+</header>
+<section>
+  <header>
+    <h1 id=""page_heading"">Page heading</h1>
+  </header>
+  <p>A paragraph of content</p>
+</section>
+<footer>Page footer</footer>
+</body>
+</html>";
+      Assert.AreEqual(expectedDom, _document.DocumentNode.OuterHtml, "Correct modified HTML");
+    }
+
+    [Test]
     public void TestReplaceWith()
     {
       // Arrange
@@ -148,6 +338,234 @@ namespace Test.CSF.Zpt.Rendering
 <body>
 <header>
   <p>Replacement element</p>
+  Page header
+</header>
+<section>
+  <header>
+    <h1 id=""page_heading"">Page heading</h1>
+  </header>
+  <p>A paragraph of content</p>
+</section>
+<footer>Page footer</footer>
+</body>
+</html>";
+      Assert.AreEqual(expectedDom, _document.DocumentNode.OuterHtml, "Correct modified HTML");
+    }
+
+    [Test]
+    public void TestReplaceWithString()
+    {
+      // Arrange
+      var sut = new ZptHtmlElement(_document.DocumentNode.FirstChild.ChildNodes[3].ChildNodes[1].ChildNodes[1],
+                                   _sourceFile);
+
+      // Act
+      var result = sut.ReplaceWith("<p>Replacement element</p>", false);
+
+      // Assert
+      Assert.NotNull(result, "Result nullability");
+      Assert.AreEqual(0, result.Length, "Count of results");
+      var expectedDom = @"<html>
+<head>
+<title>Document title</title>
+</head>
+<body>
+<header>
+  &lt;p&gt;Replacement element&lt;/p&gt;
+  Page header
+</header>
+<section>
+  <header>
+    <h1 id=""page_heading"">Page heading</h1>
+  </header>
+  <p>A paragraph of content</p>
+</section>
+<footer>Page footer</footer>
+</body>
+</html>";
+      Assert.AreEqual(expectedDom, _document.DocumentNode.OuterHtml, "Correct modified HTML");
+    }
+
+    [Test]
+    public void TestReplaceWithStringStructure()
+    {
+      // Arrange
+      var sut = new ZptHtmlElement(_document.DocumentNode.FirstChild.ChildNodes[3].ChildNodes[1].ChildNodes[1],
+                                   _sourceFile);
+
+      // Act
+      var result = sut.ReplaceWith("<p>Replacement <strong>element</strong></p>", true);
+
+      // Assert
+      Assert.NotNull(result, "Result nullability");
+      Assert.AreEqual(1, result.Length, "Count of results");
+      var expectedDom = @"<html>
+<head>
+<title>Document title</title>
+</head>
+<body>
+<header>
+  <p>Replacement <strong>element</strong></p>
+  Page header
+</header>
+<section>
+  <header>
+    <h1 id=""page_heading"">Page heading</h1>
+  </header>
+  <p>A paragraph of content</p>
+</section>
+<footer>Page footer</footer>
+</body>
+</html>";
+      Assert.AreEqual(expectedDom, _document.DocumentNode.OuterHtml, "Correct modified HTML");
+    }
+
+    [Test]
+    public void TestReplaceChildrenWithString()
+    {
+      // Arrange
+      var sut = new ZptHtmlElement(_document.DocumentNode.FirstChild.ChildNodes[3].ChildNodes[1].ChildNodes[1],
+                                   _sourceFile);
+
+      // Act
+      sut.ReplaceChildrenWith("<p>Replacement element</p>", false);
+
+      // Assert
+      var expectedDom = @"<html>
+<head>
+<title>Document title</title>
+</head>
+<body>
+<header>
+  <div custom:parent_attrib=""Attribute value one"" class=""class_one class_two"">&lt;p&gt;Replacement element&lt;/p&gt;</div>
+  Page header
+</header>
+<section>
+  <header>
+    <h1 id=""page_heading"">Page heading</h1>
+  </header>
+  <p>A paragraph of content</p>
+</section>
+<footer>Page footer</footer>
+</body>
+</html>";
+      Assert.AreEqual(expectedDom, _document.DocumentNode.OuterHtml, "Correct modified HTML");
+    }
+
+    [Test]
+    public void TestReplaceChildrenWithStringStructure()
+    {
+      // Arrange
+      var sut = new ZptHtmlElement(_document.DocumentNode.FirstChild.ChildNodes[3].ChildNodes[1].ChildNodes[1],
+                                   _sourceFile);
+
+      // Act
+      sut.ReplaceChildrenWith("<p>Replacement <strong>element</strong></p>", true);
+
+      // Assert
+      var expectedDom = @"<html>
+<head>
+<title>Document title</title>
+</head>
+<body>
+<header>
+  <div custom:parent_attrib=""Attribute value one"" class=""class_one class_two""><p>Replacement <strong>element</strong></p></div>
+  Page header
+</header>
+<section>
+  <header>
+    <h1 id=""page_heading"">Page heading</h1>
+  </header>
+  <p>A paragraph of content</p>
+</section>
+<footer>Page footer</footer>
+</body>
+</html>";
+      Assert.AreEqual(expectedDom, _document.DocumentNode.OuterHtml, "Correct modified HTML");
+    }
+
+    [Test]
+    public void TestInsertBefore()
+    {
+      // Arrange
+      var sut = new ZptHtmlElement(_document.DocumentNode.FirstChild.ChildNodes[3].ChildNodes[1].ChildNodes[1].ChildNodes[1],
+                                   _sourceFile);
+      var replacementHtml = "<li>New element</li>";
+      var secondDocument = new HtmlDocument();
+      secondDocument.LoadHtml(replacementHtml);
+      var secondElement = new ZptHtmlElement(secondDocument.DocumentNode.FirstChild,
+                                             _sourceFile);
+
+      var referenceElement = new ZptHtmlElement(_document.DocumentNode.FirstChild.ChildNodes[3].ChildNodes[1].ChildNodes[1].ChildNodes[1].ChildNodes[3],
+                                                _sourceFile);
+
+      // Act
+      var result = sut.InsertBefore(referenceElement, secondElement);
+
+      // Assert
+      Assert.NotNull(result, "Result nullability");
+      Assert.AreEqual("li", result.Name, "Result name");
+      var expectedDom = @"<html>
+<head>
+<title>Document title</title>
+</head>
+<body>
+<header>
+  <div custom:parent_attrib=""Attribute value one"" class=""class_one class_two"">
+    <ul>
+      <li custom:child_attrib=""foo"">Foo content</li>
+      <li>New element</li><li custom:child_attrib=""bar"">Bar content</li>
+      <li custom:child_attrib=""baz"">Baz content</li>
+    </ul>
+  </div>
+  Page header
+</header>
+<section>
+  <header>
+    <h1 id=""page_heading"">Page heading</h1>
+  </header>
+  <p>A paragraph of content</p>
+</section>
+<footer>Page footer</footer>
+</body>
+</html>";
+      Assert.AreEqual(expectedDom, _document.DocumentNode.OuterHtml, "Correct modified HTML");
+          }
+
+    [Test]
+    public void TestInsertAfter()
+    {
+      // Arrange
+      var sut = new ZptHtmlElement(_document.DocumentNode.FirstChild.ChildNodes[3].ChildNodes[1].ChildNodes[1].ChildNodes[1],
+                                   _sourceFile);
+      var replacementHtml = "<li>New element</li>";
+      var secondDocument = new HtmlDocument();
+      secondDocument.LoadHtml(replacementHtml);
+      var secondElement = new ZptHtmlElement(secondDocument.DocumentNode.FirstChild,
+                                             _sourceFile);
+
+      var referenceElement = new ZptHtmlElement(_document.DocumentNode.FirstChild.ChildNodes[3].ChildNodes[1].ChildNodes[1].ChildNodes[1].ChildNodes[3],
+                                                _sourceFile);
+
+      // Act
+      var result = sut.InsertAfter(referenceElement, secondElement);
+
+      // Assert
+      Assert.NotNull(result, "Result nullability");
+      Assert.AreEqual("li", result.Name, "Result name");
+      var expectedDom = @"<html>
+<head>
+<title>Document title</title>
+</head>
+<body>
+<header>
+  <div custom:parent_attrib=""Attribute value one"" class=""class_one class_two"">
+    <ul>
+      <li custom:child_attrib=""foo"">Foo content</li>
+      <li custom:child_attrib=""bar"">Bar content</li><li>New element</li>
+      <li custom:child_attrib=""baz"">Baz content</li>
+    </ul>
+  </div>
   Page header
 </header>
 <section>
@@ -222,6 +640,78 @@ namespace Test.CSF.Zpt.Rendering
 
       // Assert
       Assert.AreEqual(expectedResult, docElement.ToString());
+    }
+
+    [Test]
+    public void TestIsInNamespace()
+    {
+      // Arrange
+      var doc = new HtmlDocument();
+      doc.LoadHtml("<foo><ns:bar /></foo>");
+
+      var sut = new ZptHtmlElement(doc.DocumentNode.FirstChild.ChildNodes[0], _sourceFile, isRoot: true);
+
+      // Act
+      var result = sut.IsInNamespace(new ZptNamespace(prefix: "ns"));
+
+      // Assert
+      Assert.IsTrue(result);
+    }
+
+    [Test]
+    public void TestIsInNamespaceDefault()
+    {
+      // Arrange
+      var doc = new HtmlDocument();
+      doc.LoadHtml("<foo><bar /></foo>");
+
+      var sut = new ZptHtmlElement(doc.DocumentNode.FirstChild.ChildNodes[0], _sourceFile, isRoot: true);
+
+      // Act
+      var result = sut.IsInNamespace(ZptNamespace.Default);
+
+      // Assert
+      Assert.IsTrue(result);
+    }
+
+    [Test]
+    public void TestOmit()
+    {
+      // Arrange
+      var sut = new ZptHtmlElement(_document.DocumentNode.FirstChild.ChildNodes[3].ChildNodes[1].ChildNodes[1],
+                                   _sourceFile);
+
+      // Act
+      var result = sut.Omit();
+
+      // Assert
+      Assert.NotNull(result, "Result nullability");
+      Assert.AreEqual(1, result.Length, "Result length");
+      var expectedDom = @"<html>
+<head>
+<title>Document title</title>
+</head>
+<body>
+<header>
+  
+    <ul>
+      <li custom:child_attrib=""foo"">Foo content</li>
+      <li custom:child_attrib=""bar"">Bar content</li>
+      <li custom:child_attrib=""baz"">Baz content</li>
+    </ul>
+  
+  Page header
+</header>
+<section>
+  <header>
+    <h1 id=""page_heading"">Page heading</h1>
+  </header>
+  <p>A paragraph of content</p>
+</section>
+<footer>Page footer</footer>
+</body>
+</html>";
+      Assert.AreEqual(expectedDom, _document.DocumentNode.OuterHtml, "Correct modified HTML");
     }
 
     #endregion

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using HtmlAgilityPack;
 using CSF.Zpt.Resources;
+using System.Web;
 
 namespace CSF.Zpt.Rendering
 {
@@ -17,7 +18,8 @@ namespace CSF.Zpt.Rendering
     private const string
       INDENT_PATTERN        = @"([ \t]+)$",
       HTML_COMMENT_START    = "<!-- ",
-      HTML_COMMENT_END      = " -->\n";
+      HTML_COMMENT_END      = " -->\n",
+      PREFIX_SEPARATOR      = ":";
     private static readonly Regex Indent = new Regex(INDENT_PATTERN, RegexOptions.Compiled);
 
     #endregion
@@ -82,8 +84,8 @@ namespace CSF.Zpt.Rendering
 
       var parent = this.GetParent();
       return new ZptHtmlElement(parent.ReplaceChild(repl.Node, this.Node),
-                             repl.SourceFile,
-                             isImported: true);
+                                repl.SourceFile,
+                                isImported: true);
     }
 
     /// <summary>
@@ -94,8 +96,19 @@ namespace CSF.Zpt.Rendering
     /// <param name="interpretContentAsStructure">If set to <c>true</c> then the content is interpreted as structure.</param>
     public override ZptElement[] ReplaceWith(string content, bool interpretContentAsStructure)
     {
-      // TODO: Write this implementation
-      throw new NotImplementedException();
+      var newNodes = this.Import(content, interpretContentAsStructure);
+
+      var parent = this.GetParent();
+      foreach(var node in newNodes)
+      {
+        parent.InsertBefore(node, this.Node);
+      }
+      this.Remove();
+
+      return newNodes
+        .Where(x => x.NodeType == HtmlNodeType.Element)
+        .Select(x => new ZptHtmlElement(x, this.SourceFile))
+        .ToArray();
     }
 
     /// <summary>
@@ -105,8 +118,13 @@ namespace CSF.Zpt.Rendering
     /// <param name="interpretContentAsStructure">If set to <c>true</c> then the content is interpreted as structure.</param>
     public override void ReplaceChildrenWith(string content, bool interpretContentAsStructure)
     {
-      // TODO: Write this implementation
-      throw new NotImplementedException();
+      var newNodes = this.Import(content, interpretContentAsStructure);
+
+      this.Node.RemoveAllChildren();
+      foreach(var node in newNodes)
+      {
+        this.Node.AppendChild(node);
+      }
     }
 
     /// <summary>
@@ -118,8 +136,24 @@ namespace CSF.Zpt.Rendering
     /// <param name="newChild">The new child element to insert.</param>
     public override ZptElement InsertBefore(ZptElement existing, ZptElement newChild)
     {
-      // TODO: Write this implementation
-      throw new NotImplementedException();
+      ZptHtmlElement
+        existingElement = existing as ZptHtmlElement,
+        newChildElement = newChild as ZptHtmlElement;
+      if(existingElement == null)
+      {
+        string message = String.Format(ExceptionMessages.ElementMustBeCorrectType,
+                                       typeof(ZptHtmlElement).Name);
+        throw new ArgumentException(message, "existing");
+      }
+      if(newChildElement == null)
+      {
+        string message = String.Format(ExceptionMessages.ElementMustBeCorrectType,
+                                       typeof(ZptHtmlElement).Name);
+        throw new ArgumentException(message, "newChild");
+      }
+
+      var output = this.Node.InsertBefore(newChildElement.Node, existingElement.Node);
+      return new ZptHtmlElement(output, newChild.SourceFile, isImported: true);
     }
 
     /// <summary>
@@ -131,8 +165,24 @@ namespace CSF.Zpt.Rendering
     /// <param name="newChild">The new child element to insert.</param>
     public override ZptElement InsertAfter(ZptElement existing, ZptElement newChild)
     {
-      // TODO: Write this implementation
-      throw new NotImplementedException();
+      ZptHtmlElement
+        existingElement = existing as ZptHtmlElement,
+        newChildElement = newChild as ZptHtmlElement;
+      if(existingElement == null)
+      {
+        string message = String.Format(ExceptionMessages.ElementMustBeCorrectType,
+                                       typeof(ZptHtmlElement).Name);
+        throw new ArgumentException(message, "existing");
+      }
+      if(newChildElement == null)
+      {
+        string message = String.Format(ExceptionMessages.ElementMustBeCorrectType,
+                                       typeof(ZptHtmlElement).Name);
+        throw new ArgumentException(message, "newChild");
+      }
+
+      var output = this.Node.InsertAfter(newChildElement.Node, existingElement.Node);
+      return new ZptHtmlElement(output, newChild.SourceFile, isImported: true);
     }
 
     /// <summary>
@@ -185,7 +235,7 @@ namespace CSF.Zpt.Rendering
         throw new ArgumentNullException("name");
       }
 
-      var attribName = this.GetName(attributeNamespace.Prefix, name);
+      var attribName = this.GetNameWithPrefix(attributeNamespace, name);
 
       var htmlAttribute = this.Node.Attributes
         .FirstOrDefault(x => x.Name == attribName);
@@ -201,8 +251,17 @@ namespace CSF.Zpt.Rendering
     /// <param name="value">The attribute value.</param>
     public override void SetAttribute(ZptNamespace attributeNamespace, string name, string value)
     {
-      // TODO: Write this implementation
-      throw new NotImplementedException();
+      if(attributeNamespace == null)
+      {
+        throw new ArgumentNullException("attributeNamespace");
+      }
+      if(name == null)
+      {
+        throw new ArgumentNullException("name");
+      }
+
+      var formattedName = this.GetNameWithPrefix(attributeNamespace, name);
+      this.Node.SetAttributeValue(formattedName, value);
     }
 
     /// <summary>
@@ -212,8 +271,21 @@ namespace CSF.Zpt.Rendering
     /// <param name="name">The attribute name.</param>
     public override void RemoveAttribute(ZptNamespace attributeNamespace, string name)
     {
-      // TODO: Write this implementation
-      throw new NotImplementedException();
+      if(attributeNamespace == null)
+      {
+        throw new ArgumentNullException("attributeNamespace");
+      }
+      if(name == null)
+      {
+        throw new ArgumentNullException("name");
+      }
+
+      var formattedName = this.GetNameWithPrefix(attributeNamespace, name);
+      var attribs = this.Node.Attributes.Where(x => x.Name == formattedName).ToArray();
+      foreach(var attrib in attribs)
+      {
+        attrib.Remove();
+      }
     }
 
     /// <summary>
@@ -225,7 +297,7 @@ namespace CSF.Zpt.Rendering
     /// <param name="name">The attribute name.</param>
     public override ZptElement[] SearchChildrenByAttribute(ZptNamespace attributeNamespace, string name)
     {
-      string attribName = this.GetName(attributeNamespace.Prefix, name);
+      string attribName = this.GetNameWithPrefix(attributeNamespace, name);
 
       return (from node in this.Node.Descendants()
               from attrib in node.Attributes
@@ -253,12 +325,13 @@ namespace CSF.Zpt.Rendering
 
       var toRemove = (from node in nodes
                       from attrib in node.Attributes
-                      where attrib.Name.StartsWith(String.Concat(attributeNamespace.Prefix, ":"))
-                      select new { Element = node, Attribute = attrib });
+                      where attrib.Name.StartsWith(String.Concat(attributeNamespace.Prefix, PREFIX_SEPARATOR))
+                      select attrib)
+        .ToArray();
 
       foreach(var item in toRemove)
       {
-        item.Element.Attributes.Remove(item.Attribute);
+        item.Remove();
       }
     }
 
@@ -295,37 +368,6 @@ namespace CSF.Zpt.Rendering
     }
 
     /// <summary>
-    /// Gets an element or attribute name based upon its prefix and name.
-    /// </summary>
-    /// <returns>The assembled name.</returns>
-    /// <param name="prefix">The name prefix.</param>
-    /// <param name="name">The name.</param>
-    private string GetName(string prefix, string name)
-    {
-      if(name == null)
-      {
-        throw new ArgumentNullException("name");
-      }
-      else if(name.Length == 0)
-      {
-        throw new ArgumentException(ExceptionMessages.NameMustNotBeEmptyString, "name");
-      }
-
-      string output;
-
-      if(String.IsNullOrEmpty(prefix))
-      {
-        output = name;
-      }
-      else
-      {
-        output = String.Concat(prefix, ":", name);
-      }
-
-      return output;
-    }
-
-    /// <summary>
     /// Clone this instance into a new Element instance, which may be manipulated without affecting the original.
     /// </summary>
     public override ZptElement Clone()
@@ -352,8 +394,19 @@ namespace CSF.Zpt.Rendering
     /// </returns>
     public override ZptElement[] Omit()
     {
-      // TODO: Write this implementation
-      throw new NotImplementedException();
+      var children = this.Node.ChildNodes.ToArray();
+      var parent = this.GetParent();
+
+      foreach(var child in children)
+      {
+        parent.InsertBefore(child, this.Node);
+      }
+      this.Node.Remove();
+
+      return children
+        .Where(x => x.NodeType == HtmlNodeType.Element)
+        .Select(x => new ZptHtmlElement(x, this.SourceFile))
+        .ToArray();
     }
 
     /// <summary>
@@ -369,8 +422,7 @@ namespace CSF.Zpt.Rendering
     /// </summary>
     public override void RemoveAllChildren()
     {
-      // TODO: Write this implementation
-      throw new NotImplementedException();
+      this.Node.RemoveAllChildren();
     }
 
     /// <summary>
@@ -382,8 +434,23 @@ namespace CSF.Zpt.Rendering
     /// <param name="nSpace">The namespace for which to test.</param>
     public override bool IsInNamespace(ZptNamespace nSpace)
     {
-      // TODO: Write this implementation
-      throw new NotImplementedException();
+      if(nSpace == null)
+      {
+        throw new ArgumentNullException("nSpace");
+      }
+
+      bool output;
+
+      if(nSpace.Prefix != null)
+      {
+        output = this.Node.Name.StartsWith(String.Concat(nSpace.Prefix, PREFIX_SEPARATOR));
+      }
+      else
+      {
+        output = !this.Node.Name.Contains(PREFIX_SEPARATOR);
+      }
+
+      return output;
     }
 
     /// <summary>
@@ -400,6 +467,57 @@ namespace CSF.Zpt.Rendering
       }
 
       return output;
+    }
+
+    /// <summary>
+    /// Imports the given text as a new <c>HtmlNode</c>.
+    /// </summary>
+    /// <returns>A collection of the imported nodes.</returns>
+    /// <param name="text">The text to import.</param>
+    /// <param name="treatAsHtml">If set to <c>true</c> then the text is treated as HTML.</param>
+    private HtmlNode[] Import(string text, bool treatAsHtml)
+    {
+      string toImport = text?? String.Empty;
+
+      HtmlNode[] output;
+
+      if(treatAsHtml)
+      {
+        var doc = new HtmlDocument();
+        doc.LoadHtml(toImport);
+        output = doc.DocumentNode.ChildNodes.ToArray();
+      }
+      else
+      {
+        var sanitised = HttpUtility.HtmlEncode(toImport);
+        output = new HtmlNode[] { this.Node.OwnerDocument.CreateTextNode(sanitised) };
+      }
+
+      return output;
+    }
+
+    /// <summary>
+    /// Gets an element or attribute name, adding a namespace prefix where appropriate.
+    /// </summary>
+    /// <returns>The formatted name.</returns>
+    /// <param name="nSpace">A namespace.</param>
+    /// <param name="name">An element or attribute name.</param>
+    private string GetNameWithPrefix(ZptNamespace nSpace, string name)
+    {
+      if(name == null)
+      {
+        throw new ArgumentNullException("name");
+      }
+      else if(name.Length == 0)
+      {
+        throw new ArgumentException(ExceptionMessages.NameMustNotBeEmptyString, "name");
+      }
+      if(nSpace == null)
+      {
+        throw new ArgumentNullException("nSpace");
+      }
+
+      return (nSpace.Prefix != null)? String.Concat(nSpace.Prefix, PREFIX_SEPARATOR, name) : name;
     }
 
     #endregion
