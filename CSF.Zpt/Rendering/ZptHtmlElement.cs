@@ -120,7 +120,7 @@ namespace CSF.Zpt.Rendering
     {
       var newNodes = this.Import(content, interpretContentAsStructure);
 
-      this.Node.RemoveAllChildren();
+      this.RemoveAllChildren();
       foreach(var node in newNodes)
       {
         this.Node.AppendChild(node);
