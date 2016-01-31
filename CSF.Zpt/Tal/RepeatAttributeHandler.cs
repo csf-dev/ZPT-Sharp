@@ -132,7 +132,7 @@ namespace CSF.Zpt.Tal
       {
         try
         {
-          output = result.GetResult<IEnumerable>();
+          output = result.GetValue<IEnumerable>();
         }
         catch(InvalidCastException ex)
         {

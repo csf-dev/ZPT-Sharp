@@ -54,7 +54,7 @@ namespace CSF.Zpt.Tal
         {
           output = new AttributeHandlingResult(new [] { element }, true);
         }
-        else if(expressionResult.Result == null)
+        else if(expressionResult.Value == null)
         {
           if(attribName == ZptConstants.Tal.ContentAttribute)
           {
@@ -71,13 +71,13 @@ namespace CSF.Zpt.Tal
         {
           if(attribName == ZptConstants.Tal.ContentAttribute)
           {
-            element.ReplaceChildrenWith(expressionResult.GetResult<string>(),
+            element.ReplaceChildrenWith(expressionResult.GetValue<string>(),
                                         mode == STRUCTURE_INDICATOR);
             output = new AttributeHandlingResult(new [] { element }, true);
           }
           else
           {
-            var elements = element.ReplaceWith(expressionResult.GetResult<string>(),
+            var elements = element.ReplaceWith(expressionResult.GetValue<string>(),
                                                mode == STRUCTURE_INDICATOR);
             output = new AttributeHandlingResult(elements, false);
           }

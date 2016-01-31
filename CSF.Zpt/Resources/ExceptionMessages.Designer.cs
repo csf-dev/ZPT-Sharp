@@ -100,6 +100,18 @@ namespace CSF.Zpt.Resources {
             }
         }
         
+        internal static string TalesExpressionEvaluatorNotFoundForPrefix {
+            get {
+                return ResourceManager.GetString("TalesExpressionEvaluatorNotFoundForPrefix", resourceCulture);
+            }
+        }
+        
+        internal static string InvalidTalesExpressionPrefix {
+            get {
+                return ResourceManager.GetString("InvalidTalesExpressionPrefix", resourceCulture);
+            }
+        }
+        
         internal static string TalRepeatExpressionMustEvaluateToIEnumerable {
             get {
                 return ResourceManager.GetString("TalRepeatExpressionMustEvaluateToIEnumerable", resourceCulture);

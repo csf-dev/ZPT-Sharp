@@ -97,11 +97,11 @@ namespace CSF.Zpt.Tal
           {
             if(item.Scope == GLOBAL_SCOPE)
             {
-              model.AddGlobal(item.Name, result.Result);
+              model.AddGlobal(item.Name, result.Value);
             }
             else
             {
-              model.AddLocal(item.Name, result.Result);
+              model.AddLocal(item.Name, result.Value);
             }
           }
         }

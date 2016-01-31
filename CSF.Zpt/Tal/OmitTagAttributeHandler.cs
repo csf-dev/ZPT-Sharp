@@ -41,7 +41,7 @@ namespace CSF.Zpt.Tal
       {
         // Normal handling by detecting an attribute and using its value
         var result = model.Evaluate(attrib.Value, element);
-        if(!result.CancelsAction && result.GetResultAsBoolean())
+        if(!result.CancelsAction && result.GetValueAsBoolean())
         {
           var children = element.Omit();
           output = new AttributeHandlingResult(new ZptElement[0], false, children);

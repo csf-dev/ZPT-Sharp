@@ -95,7 +95,7 @@ namespace CSF.Zpt.Tal
           if(!result.CancelsAction)
           {
             var nspace = new ZptNamespace(prefix: item.Prefix);
-            if(result.Result == null)
+            if(result.Value == null)
             {
               if(String.IsNullOrEmpty(item.Prefix))
               {
@@ -110,11 +110,11 @@ namespace CSF.Zpt.Tal
             {
               if(String.IsNullOrEmpty(item.Prefix))
               {
-                element.SetAttribute(item.AttributeName, result.Result.ToString());
+                element.SetAttribute(item.AttributeName, result.Value.ToString());
               }
               else
               {
-                element.SetAttribute(nspace, item.AttributeName, result.Result.ToString());
+                element.SetAttribute(nspace, item.AttributeName, result.Value.ToString());
               }
             }
           }

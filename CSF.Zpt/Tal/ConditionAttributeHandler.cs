@@ -50,7 +50,7 @@ namespace CSF.Zpt.Tal
           };
         }
 
-        var removeElement = result.CancelsAction? false : !result.GetResultAsBoolean();
+        var removeElement = result.CancelsAction? false : !result.GetValueAsBoolean();
         if(removeElement)
         {
           element.Remove();

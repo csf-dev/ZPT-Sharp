@@ -9,20 +9,20 @@ namespace CSF.Zpt.Rendering
   {
     #region fields
 
-    private object _result;
+    private object _value;
 
     #endregion
 
     #region properties
 
     /// <summary>
-    /// Gets the result of this expression evaluation.
+    /// Gets the result value of this expression evaluation.
     /// </summary>
-    /// <value>The result.</value>
-    public virtual object Result
+    /// <value>The value.</value>
+    public virtual object Value
     {
       get {
-        return _result;
+        return _value;
       }
     }
 
@@ -33,7 +33,7 @@ namespace CSF.Zpt.Rendering
     public virtual bool CancelsAction
     {
       get {
-        return this.Result == Model.CancelAction;
+        return this.Value == Model.CancelAction;
       }
     }
 
@@ -42,34 +42,34 @@ namespace CSF.Zpt.Rendering
     #region methods
 
     /// <summary>
-    /// Invokes <see cref="M:GetResult()"/> and returns the result as a <c>System.Boolean</c> equivalent.
+    /// Invokes <see cref="M:GetValue()"/> and returns the value as a <c>System.Boolean</c> equivalent.
     /// </summary>
-    /// <returns><c>true</c>, if the result indicates truth, <c>false</c> otherwise.</returns>
-    public virtual bool GetResultAsBoolean()
+    /// <returns><c>true</c>, if the value indicates truth, <c>false</c> otherwise.</returns>
+    public virtual bool GetValueAsBoolean()
     {
       bool output;
 
-      if(this.Result == null)
+      if(this.Value == null)
       {
         output = false;
       }
       else
       {
-        var type = this.Result.GetType();
-        output = (!type.IsValueType || !this.Result.Equals(Activator.CreateInstance(type)));
+        var type = this.Value.GetType();
+        output = (!type.IsValueType || !this.Value.Equals(Activator.CreateInstance(type)));
       }
 
       return output;
     }
 
     /// <summary>
-    /// Gets the result, as a typed object instance.
+    /// Gets the result value, as a typed object instance.
     /// </summary>
-    /// <returns>The result.</returns>
-    /// <typeparam name="TResult">The expected result type.</typeparam>
-    public virtual TResult GetResult<TResult>()
+    /// <returns>The value.</returns>
+    /// <typeparam name="TResult">The expected value type.</typeparam>
+    public virtual TResult GetValue<TResult>()
     {
-      return (TResult) this.Result;
+      return (TResult) this.Value;
     }
 
     #endregion
@@ -79,10 +79,10 @@ namespace CSF.Zpt.Rendering
     /// <summary>
     /// Initializes a new instance of the <see cref="CSF.Zpt.Rendering.ExpressionResult"/> class.
     /// </summary>
-    /// <param name="result">The result of the expression evaluation.</param>
-    public ExpressionResult(object result)
+    /// <param name="value">The result value of the expression evaluation.</param>
+    public ExpressionResult(object value)
     {
-      _result = result;
+      _value = value;
     }
 
     #endregion

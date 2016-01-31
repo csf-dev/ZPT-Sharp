@@ -22,7 +22,7 @@ namespace Test.CSF.Zpt.Rendering
       var sut = new ExpressionResult(value);
 
       // Act
-      var result = sut.GetResultAsBoolean();
+      var result = sut.GetValueAsBoolean();
 
       // Assert
       Assert.AreEqual(expectedValue, result);

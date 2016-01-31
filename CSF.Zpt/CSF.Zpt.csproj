@@ -84,6 +84,15 @@
     <Compile Include="Rendering\RepetitionInfo.cs" />
     <Compile Include="Tal\AttributeHandlingResult.cs" />
     <Compile Include="Rendering\ZptNamespace.cs" />
+    <Compile Include="Tales\ExpressionEvaluator.cs" />
+    <Compile Include="Tales\TalesModel.cs" />
+    <Compile Include="Tales\PathExpressionEvaluator.cs" />
+    <Compile Include="Tales\StringExpressionEvaluator.cs" />
+    <Compile Include="Tales\NotExpressionEvaluator.cs" />
+    <Compile Include="Tales\Expression.cs" />
+    <Compile Include="Tales\InvalidExpressionException.cs" />
+    <Compile Include="Tales\ITalesConvertible.cs" />
+    <Compile Include="Tales\EvaluatorRegistry.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

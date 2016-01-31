@@ -41,6 +41,13 @@ Source expression: {2}</value>
     <value>Parser error whilst handling a '{0}:{1}' ZPT attribute, the attribute value is invalid.
 Attribute value:{2}</value>
   </data>
+  <data name="TalesExpressionEvaluatorNotFoundForPrefix" xml:space="preserve">
+    <value>No implementation of `{0}' could be located for TALES prefix '{1}'.
+Expression:{2}</value>
+  </data>
+  <data name="InvalidTalesExpressionPrefix" xml:space="preserve">
+    <value>A TALES expression prefix must be a non-empty string, containing only alphanumeric characters.</value>
+  </data>
   <data name="TalRepeatExpressionMustEvaluateToIEnumerable" xml:space="preserve">
     <value>The result of the TAL 'tal:repeat' expression must either implement `{0}' or be a null reference.
 Expression:{1}</value>

@@ -50,14 +50,14 @@ namespace CSF.Zpt.Tal
         {
           output = new AttributeHandlingResult(new [] { element }, true);
         }
-        else if(expressionResult.Result == null)
+        else if(expressionResult.Value == null)
         {
           element.RemoveAllChildren();
           output = new AttributeHandlingResult(new [] { element }, true);
         }
         else
         {
-          element.ReplaceChildrenWith(expressionResult.GetResult<string>(),
+          element.ReplaceChildrenWith(expressionResult.GetValue<string>(),
                                       mode == STRUCTURE_INDICATOR);
           output = new AttributeHandlingResult(new [] { element }, true);
         }
