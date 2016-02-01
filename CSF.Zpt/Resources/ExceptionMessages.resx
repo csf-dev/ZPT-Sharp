@@ -45,6 +45,9 @@ Attribute value:{2}</value>
     <value>No implementation of `{0}' could be located for TALES prefix '{1}'.
 Expression:{2}</value>
   </data>
+  <data name="TalesExpressionEvaluatorNotFoundByType" xml:space="preserve">
+    <value>No implementation of `{0}' could be located of the type `{1}'.</value>
+  </data>
   <data name="InvalidTalesExpressionPrefix" xml:space="preserve">
     <value>A TALES expression prefix must be a non-empty string, containing only alphanumeric characters.</value>
   </data>

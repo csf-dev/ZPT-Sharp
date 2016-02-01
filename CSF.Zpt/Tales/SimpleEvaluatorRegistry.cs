@@ -19,7 +19,8 @@ namespace CSF.Zpt.Tales
 
     #region fields
 
-    private IDictionary<string,IExpressionEvaluator> _evaluators;
+    private IDictionary<string,IExpressionEvaluator> _evaluatorsByPrefix;
+    private IDictionary<Type,IExpressionEvaluator> _evaluatorsByType;
     private IExpressionEvaluator _defaultEvaluator;
 
     #endregion
@@ -43,9 +44,9 @@ namespace CSF.Zpt.Tales
 
       if(prefix != null)
       {
-        if(_evaluators.ContainsKey(prefix))
+        if(_evaluatorsByPrefix.ContainsKey(prefix))
         {
-          output = _evaluators[prefix];
+          output = _evaluatorsByPrefix[prefix];
         }
         else
         {
@@ -64,6 +65,38 @@ namespace CSF.Zpt.Tales
       }
 
       return output;
+    }
+
+    /// <summary>
+    /// Gets an expression evaluator matching a desired type.
+    /// </summary>
+    /// <returns>The evaluator instance.</returns>
+    /// <typeparam name="TEvaluator">The desired evaluator type.</typeparam>
+    public IExpressionEvaluator GetEvaluator<TEvaluator>() where TEvaluator : IExpressionEvaluator
+    {
+      return this.GetEvaluator(typeof(TEvaluator));
+    }
+
+    /// <summary>
+    /// Gets an expression evaluator matching a desired type.
+    /// </summary>
+    /// <returns>The evaluator instance.</returns>
+    /// <param name="evaluatorType">The desired evaluator type.</param>
+    public IExpressionEvaluator GetEvaluator(Type evaluatorType)
+    {
+      if(evaluatorType == null)
+      {
+        throw new ArgumentNullException("evaluatorType");
+      }
+      else if(!_evaluatorsByType.ContainsKey(evaluatorType))
+      {
+        string message = String.Format(Resources.ExceptionMessages.TalesExpressionEvaluatorNotFoundByType,
+                                       typeof(IExpressionEvaluator).FullName,
+                                       evaluatorType);
+        throw new Rendering.ModelEvaluationException(message);
+      }
+
+      return _evaluatorsByType[evaluatorType];
     }
 
     #endregion
@@ -85,21 +118,27 @@ namespace CSF.Zpt.Tales
     }
 
     /// <summary>
-    /// Organises a collection of evaluators, returning a dictionary-based collection, with all of the instances indexed
-    /// by their <see cref="IExpressionEvaluator.ExpressionPrefix"/>.
+    /// Organises a collection of evaluators, initialising the state of the current instance.
     /// </summary>
-    /// <returns>The organised evaluators.</returns>
     /// <param name="evaluators">A collection of expression evaluators.</param>
-    private IDictionary<string,IExpressionEvaluator> OrganiseEvaluators(IEnumerable<IExpressionEvaluator> evaluators)
+    /// <param name="defaultEvaluatorType">The default expression evaluator type.</param>
+    private void OrganiseEvaluators(IEnumerable<IExpressionEvaluator> evaluators, Type defaultEvaluatorType)
     {
       if(evaluators == null)
       {
         throw new ArgumentNullException("evaluators");
       }
 
-      return evaluators
+      _defaultEvaluator = evaluators
+        .Single(x => x.GetType() == defaultEvaluatorType);
+
+      _evaluatorsByPrefix = evaluators
         .Where(x => x != null)
         .ToDictionary(k => k.ExpressionPrefix, v => v);
+
+      _evaluatorsByType = evaluators
+        .Where(x => x != null)
+        .ToDictionary(k => k.GetType(), v => v);
     }
 
     #endregion
@@ -124,8 +163,7 @@ namespace CSF.Zpt.Tales
       }
 
       var evaluators = this.InstantiateEvaluators(evaluatorTypes);
-      _defaultEvaluator = evaluators.Single(x => x.GetType() == defaultEvaluatorType);
-      _evaluators = OrganiseEvaluators(evaluators);
+      this.OrganiseEvaluators(evaluators, defaultEvaluatorType);
     }
 
     /// <summary>
