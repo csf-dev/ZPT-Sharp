@@ -88,6 +88,7 @@
     <Compile Include="Tales\TestExpression.cs" />
     <Compile Include="Tales\TestTalesModel.cs" />
     <Compile Include="Tales\TestNotExpressionEvaluator.cs" />
+    <Compile Include="Util\Autofixture\TalesModelCustomisation.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Metal\MetalVisitorIntegrationTests.1.xml" />
