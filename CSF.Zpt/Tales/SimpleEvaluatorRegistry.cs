@@ -6,20 +6,21 @@ using System.Reflection;
 namespace CSF.Zpt.Tales
 {
   /// <summary>
-  /// Registry object which provides access to instances of <see cref="ExpressionEvaluator"/>.
+  /// Simple implementation of <see cref="IExpressionEvaluator"/> which keeps a collection of the available evaluators
+  /// in an <c>IDictionary</c>, indexed by their applicable prefixes.
   /// </summary>
-  public class EvaluatorRegistry
+  public class SimpleEvaluatorRegistry : IEvaluatorRegistry
   {
     #region constants
 
-    private static EvaluatorRegistry _default;
+    private static SimpleEvaluatorRegistry _default;
 
     #endregion
 
     #region fields
 
-    private IDictionary<string,ExpressionEvaluator> _evaluators;
-    private ExpressionEvaluator _defaultEvaluator;
+    private IDictionary<string,IExpressionEvaluator> _evaluators;
+    private IExpressionEvaluator _defaultEvaluator;
 
     #endregion
 
@@ -30,14 +31,14 @@ namespace CSF.Zpt.Tales
     /// </summary>
     /// <returns>The evaluator.</returns>
     /// <param name="expression">The expression.</param>
-    public ExpressionEvaluator GetEvaluator(Expression expression)
+    public virtual IExpressionEvaluator GetEvaluator(Expression expression)
     {
       if(expression == null)
       {
         throw new ArgumentNullException("expression");
       }
 
-      ExpressionEvaluator output;
+      IExpressionEvaluator output;
       var prefix = expression.GetPrefix();
 
       if(prefix != null)
@@ -49,7 +50,7 @@ namespace CSF.Zpt.Tales
         else
         {
           string message = String.Format(Resources.ExceptionMessages.TalesExpressionEvaluatorNotFoundForPrefix,
-                                         typeof(ExpressionEvaluator).FullName,
+                                         typeof(IExpressionEvaluator).FullName,
                                          prefix,
                                          expression);
           throw new InvalidExpressionException(message) {
@@ -74,22 +75,22 @@ namespace CSF.Zpt.Tales
     /// </summary>
     /// <returns>The created evaluators.</returns>
     /// <param name="types">The evaluator types.</param>
-    private IEnumerable<ExpressionEvaluator> InstantiateEvaluators(IEnumerable<Type> types)
+    private IEnumerable<IExpressionEvaluator> InstantiateEvaluators(IEnumerable<Type> types)
     {
       return types
         .Where(x => x != null
-                    && typeof(ExpressionEvaluator).IsAssignableFrom(x))
+                    && typeof(IExpressionEvaluator).IsAssignableFrom(x))
         .Select(x => Activator.CreateInstance(x, new object[] { this }))
-        .Cast<ExpressionEvaluator>();
+        .Cast<IExpressionEvaluator>();
     }
 
     /// <summary>
     /// Organises a collection of evaluators, returning a dictionary-based collection, with all of the instances indexed
-    /// by their <see cref="ExpressionEvaluator.ExpressionPrefix"/>.
+    /// by their <see cref="IExpressionEvaluator.ExpressionPrefix"/>.
     /// </summary>
     /// <returns>The organised evaluators.</returns>
     /// <param name="evaluators">A collection of expression evaluators.</param>
-    private IDictionary<string,ExpressionEvaluator> OrganiseEvaluators(IEnumerable<ExpressionEvaluator> evaluators)
+    private IDictionary<string,IExpressionEvaluator> OrganiseEvaluators(IEnumerable<IExpressionEvaluator> evaluators)
     {
       if(evaluators == null)
       {
@@ -106,12 +107,12 @@ namespace CSF.Zpt.Tales
     #region constructor
 
     /// <summary>
-    /// Initializes a new instance of the <see cref="CSF.Zpt.Tales.EvaluatorRegistry"/> class.
+    /// Initializes a new instance of the <see cref="CSF.Zpt.Tales.SimpleEvaluatorRegistry"/> class.
     /// </summary>
     /// <param name="evaluatorTypes">A collection of expression evaluator types.</param>
     /// <param name="defaultEvaluatorType">The default expression evaluator type.</param>
-    public EvaluatorRegistry(IEnumerable<Type> evaluatorTypes,
-                             Type defaultEvaluatorType)
+    public SimpleEvaluatorRegistry(IEnumerable<Type> evaluatorTypes,
+                                   Type defaultEvaluatorType)
     {
       if(evaluatorTypes == null)
       {
@@ -128,9 +129,9 @@ namespace CSF.Zpt.Tales
     }
 
     /// <summary>
-    /// Initializes the <see cref="CSF.Zpt.Tales.EvaluatorRegistry"/> class.
+    /// Initializes the <see cref="CSF.Zpt.Tales.SimpleEvaluatorRegistry"/> class.
     /// </summary>
-    static EvaluatorRegistry()
+    static SimpleEvaluatorRegistry()
     {
       var evaluatorTypes = new [] {
         typeof(PathExpressionEvaluator),
@@ -138,7 +139,7 @@ namespace CSF.Zpt.Tales
         typeof(NotExpressionEvaluator),
       };
 
-      _default = new EvaluatorRegistry(evaluatorTypes, typeof(PathExpressionEvaluator));
+      _default = new SimpleEvaluatorRegistry(evaluatorTypes, typeof(PathExpressionEvaluator));
     }
 
     #endregion
@@ -149,7 +150,7 @@ namespace CSF.Zpt.Tales
     /// Gets the default evaluator registry.
     /// </summary>
     /// <value>The default registry.</value>
-    public static EvaluatorRegistry Default
+    public static SimpleEvaluatorRegistry Default
     {
       get {
         return _default;

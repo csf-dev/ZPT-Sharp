@@ -4,13 +4,13 @@ using CSF.Zpt.Rendering;
 namespace CSF.Zpt.Tales
 {
   /// <summary>
-  /// Base class for a TALES expression evaluator implementation.
+  /// Base class for a TALES expression evaluator implementation, implements <see cref="IExpressionEvaluator"/>.
   /// </summary>
-  public abstract class ExpressionEvaluator
+  public abstract class ExpressionEvaluatorBase : IExpressionEvaluator
   {
     #region fields
 
-    private EvaluatorRegistry _evaluatorRegistry;
+    private IEvaluatorRegistry _evaluatorRegistry;
 
     #endregion
 
@@ -26,7 +26,7 @@ namespace CSF.Zpt.Tales
     /// Gets the expression evaluator registry.
     /// </summary>
     /// <value>The evaluator registry.</value>
-    protected EvaluatorRegistry EvaluatorRegistry
+    protected virtual IEvaluatorRegistry EvaluatorRegistry
     {
       get {
         return _evaluatorRegistry;
@@ -50,10 +50,10 @@ namespace CSF.Zpt.Tales
     #region constructor
 
     /// <summary>
-    /// Initializes a new instance of the <see cref="CSF.Zpt.Tales.ExpressionEvaluator"/> class.
+    /// Initializes a new instance of the <see cref="CSF.Zpt.Tales.ExpressionEvaluatorBase"/> class.
     /// </summary>
     /// <param name="evaluatorRegistry">Evaluator registry.</param>
-    public ExpressionEvaluator(EvaluatorRegistry evaluatorRegistry)
+    public ExpressionEvaluatorBase(IEvaluatorRegistry evaluatorRegistry)
     {
       if(evaluatorRegistry == null)
       {

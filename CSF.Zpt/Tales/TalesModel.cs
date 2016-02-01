@@ -14,7 +14,7 @@ namespace CSF.Zpt.Tales
   {
     #region fields
 
-    private EvaluatorRegistry _registry;
+    private IEvaluatorRegistry _registry;
 
     #endregion
 
@@ -77,7 +77,7 @@ namespace CSF.Zpt.Tales
     /// <param name="evaluatorRegistry">The expression evaluator registry.</param>
     public TalesModel(Model parent,
                       Model root,
-                      EvaluatorRegistry evaluatorRegistry) : base(parent, root)
+                      IEvaluatorRegistry evaluatorRegistry) : base(parent, root)
     {
       if(evaluatorRegistry == null)
       {

@@ -6,10 +6,10 @@ using System.Linq;
 namespace CSF.Zpt.Tales
 {
   /// <summary>
-  /// Implementation of <see cref="ExpressionEvaluator"/> which evaluates a 'child' expression, converts the result to
+  /// Implementation of <see cref="ExpressionEvaluatorBase"/> which evaluates a 'child' expression, converts the result to
   /// boolean and then negates it.
   /// </summary>
-  public class NotExpressionEvaluator : ExpressionEvaluator
+  public class NotExpressionEvaluator : ExpressionEvaluatorBase
   {
     #region constants
 
@@ -83,6 +83,10 @@ namespace CSF.Zpt.Tales
       {
         output = false;
       }
+      else if(result.Value is bool)
+      {
+        output = (bool) result.Value;
+      }
       else if(result.Value.Equals(0))
       {
         output = false;
@@ -113,7 +117,7 @@ namespace CSF.Zpt.Tales
     /// Initializes a new instance of the <see cref="CSF.Zpt.Tales.NotExpressionEvaluator"/> class.
     /// </summary>
     /// <param name="registry">Registry.</param>
-    public NotExpressionEvaluator(EvaluatorRegistry registry) : base(registry) {}
+    public NotExpressionEvaluator(IEvaluatorRegistry registry) : base(registry) {}
 
     #endregion
   }

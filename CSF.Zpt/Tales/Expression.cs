@@ -124,20 +124,17 @@ namespace CSF.Zpt.Tales
     /// <param name="content">Content.</param>
     public static Expression Create(string prefix, string content)
     {
-      if(prefix == null)
-      {
-        throw new ArgumentNullException("prefix");
-      }
       if(content == null)
       {
         throw new ArgumentNullException("content");
       }
-      if(!PrefixValidator.IsMatch(prefix))
+      if(prefix != null
+         && !PrefixValidator.IsMatch(prefix))
       {
         throw new FormatException(Resources.ExceptionMessages.InvalidTalesExpressionPrefix);
       }
 
-      return new Expression(String.Concat(prefix, ":", content));
+      return new Expression((prefix != null)? String.Concat(prefix, ":", content) : content);
     }
 
     #endregion

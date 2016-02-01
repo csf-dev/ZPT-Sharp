@@ -4,9 +4,9 @@ using CSF.Zpt.Rendering;
 namespace CSF.Zpt.Tales
 {
   /// <summary>
-  /// Implementation of <see cref="ExpressionEvaluator"/> which handles TALES path expressions.
+  /// Implementation of <see cref="ExpressionEvaluatorBase"/> which handles TALES path expressions.
   /// </summary>
-  public class PathExpressionEvaluator : ExpressionEvaluator
+  public class PathExpressionEvaluator : ExpressionEvaluatorBase
   {
     #region constants
 
@@ -51,7 +51,7 @@ namespace CSF.Zpt.Tales
     /// Initializes a new instance of the <see cref="CSF.Zpt.Tales.PathExpressionEvaluator"/> class.
     /// </summary>
     /// <param name="registry">Registry.</param>
-    public PathExpressionEvaluator(EvaluatorRegistry registry) : base(registry) {}
+    public PathExpressionEvaluator(IEvaluatorRegistry registry) : base(registry) {}
 
     #endregion
   }

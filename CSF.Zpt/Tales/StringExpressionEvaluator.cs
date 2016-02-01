@@ -4,9 +4,9 @@ using CSF.Zpt.Rendering;
 namespace CSF.Zpt.Tales
 {
   /// <summary>
-  /// Implementation of <see cref="ExpressionEvaluator"/> which creates string values, with optional interpolation.
+  /// Implementation of <see cref="ExpressionEvaluatorBase"/> which creates string values, with optional interpolation.
   /// </summary>
-  public class StringExpressionEvaluator : ExpressionEvaluator
+  public class StringExpressionEvaluator : ExpressionEvaluatorBase
   {
     #region constants
 
@@ -51,7 +51,7 @@ namespace CSF.Zpt.Tales
     /// Initializes a new instance of the <see cref="CSF.Zpt.Tales.StringExpressionEvaluator"/> class.
     /// </summary>
     /// <param name="registry">Registry.</param>
-    public StringExpressionEvaluator(EvaluatorRegistry registry) : base(registry) {}
+    public StringExpressionEvaluator(IEvaluatorRegistry registry) : base(registry) {}
 
     #endregion
   }

@@ -32,14 +32,12 @@
     <Reference Include="System" />
     <Reference Include="nunit.framework">
       <HintPath>..\packages\NUnit.2.6.3\lib\nunit.framework.dll</HintPath>
-      <Package>nunit-2.6.3</Package>
     </Reference>
     <Reference Include="Ploeh.AutoFixture">
       <HintPath>..\packages\AutoFixture.3.34.2\lib\net40\Ploeh.AutoFixture.dll</HintPath>
     </Reference>
     <Reference Include="Moq">
       <HintPath>..\packages\Moq.4.2.1507.0118\lib\net40\Moq.dll</HintPath>
-      <Package>moq-4.0</Package>
     </Reference>
     <Reference Include="HtmlAgilityPack">
       <HintPath>..\packages\HtmlAgilityPack.1.4.9\lib\Net45\HtmlAgilityPack.dll</HintPath>
@@ -47,7 +45,6 @@
     <Reference Include="System.Xml" />
     <Reference Include="log4net">
       <HintPath>..\packages\log4net.2.0.3\lib\net40-full\log4net.dll</HintPath>
-      <Package>log4net-1.2.11</Package>
     </Reference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
@@ -63,6 +60,7 @@
     <Folder Include="Tal\" />
     <Folder Include="Util\" />
     <Folder Include="Util\Autofixture\" />
+    <Folder Include="Tales\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="GlobalSetupFixture.cs" />
@@ -86,6 +84,10 @@
     <Compile Include="Rendering\TestZptHtmlElement.cs" />
     <Compile Include="Rendering\TestZptXmlElement.cs" />
     <Compile Include="Tal\TestOnErrorAttributeHandler.cs" />
+    <Compile Include="Tales\TestEvaluatorRegistry.cs" />
+    <Compile Include="Tales\TestExpression.cs" />
+    <Compile Include="Tales\TestTalesModel.cs" />
+    <Compile Include="Tales\TestNotExpressionEvaluator.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Metal\MetalVisitorIntegrationTests.1.xml" />
