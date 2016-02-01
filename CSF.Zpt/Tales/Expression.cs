@@ -17,7 +17,7 @@ namespace CSF.Zpt.Tales
     private static readonly Regex
       PrefixMatcher         = new Regex(PREFIX_PATTERN, RegexOptions.Compiled),
       PrefixValidator       = new Regex(VALID_PREFIX_PATTERN, RegexOptions.Compiled),
-      ContentMatcher        = new Regex(CONTENT_PATTERN, RegexOptions.Compiled);
+      ContentMatcher        = new Regex(CONTENT_PATTERN, RegexOptions.Compiled | RegexOptions.Singleline);
 
     #endregion
 
