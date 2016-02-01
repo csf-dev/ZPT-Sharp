@@ -95,6 +95,7 @@
     <Compile Include="Tales\ExpressionEvaluatorBase.cs" />
     <Compile Include="Tales\IEvaluatorRegistry.cs" />
     <Compile Include="Tales\SimpleEvaluatorRegistry.cs" />
+    <Compile Include="Tales\ITalesPathHandler.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
