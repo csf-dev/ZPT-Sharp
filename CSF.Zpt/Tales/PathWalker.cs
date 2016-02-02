@@ -111,7 +111,7 @@ namespace CSF.Zpt.Tales
     /// Initializes a new instance of the <see cref="CSF.Zpt.Tales.PathWalker"/> class.
     /// </summary>
     /// <param name="path">Path.</param>
-    internal PathWalker(Path path)
+    public PathWalker(Path path)
     {
       if(path == null)
       {

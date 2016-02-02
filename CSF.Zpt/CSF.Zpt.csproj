@@ -102,10 +102,9 @@
     <Compile Include="Tales\PathWalker.cs" />
     <Compile Include="Tales\TraversalException.cs" />
     <Compile Include="Tales\ObjectTraverser.cs" />
-    <Compile Include="Tales\MethodTraversal.cs" />
+    <Compile Include="Tales\TraversalWrapper`1.cs" />
     <Compile Include="Tales\TraversalWrapper.cs" />
-    <Compile Include="Tales\StringIndexTraversal.cs" />
-    <Compile Include="Tales\IntegerIndexTraversal.cs" />
+    <Compile Include="Tales\FuncByRef.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

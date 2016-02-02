@@ -90,6 +90,10 @@
     <Compile Include="Tales\TestNotExpressionEvaluator.cs" />
     <Compile Include="Tales\TestStringExpressionEvaluator.cs" />
     <Compile Include="Util\Autofixture\TalesModelCustomisation.cs" />
+    <Compile Include="Tales\TestPath.cs" />
+    <Compile Include="Tales\TestPathWalker.cs" />
+    <Compile Include="Tales\TestObjectTraverser.cs" />
+    <Compile Include="Util\DummyObjectWithField.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Metal\MetalVisitorIntegrationTests.1.xml" />
