@@ -84,7 +84,6 @@
     <Compile Include="Rendering\TestZptHtmlElement.cs" />
     <Compile Include="Rendering\TestZptXmlElement.cs" />
     <Compile Include="Tal\TestOnErrorAttributeHandler.cs" />
-    <Compile Include="Tales\TestEvaluatorRegistry.cs" />
     <Compile Include="Tales\TestExpression.cs" />
     <Compile Include="Tales\TestTalesModel.cs" />
     <Compile Include="Tales\TestNotExpressionEvaluator.cs" />
@@ -95,6 +94,7 @@
     <Compile Include="Tales\TestObjectTraverser.cs" />
     <Compile Include="Util\DummyObjectWithField.cs" />
     <Compile Include="Tales\TestPathExpressionEvaluator.cs" />
+    <Compile Include="Tales\TestSimpleEvaluatorRegistry.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Metal\MetalVisitorIntegrationTests.1.xml" />

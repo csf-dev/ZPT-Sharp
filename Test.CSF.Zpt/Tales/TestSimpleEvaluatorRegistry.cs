@@ -6,7 +6,7 @@ using Ploeh.AutoFixture;
 namespace Test.CSF.Zpt.Tales
 {
   [TestFixture]
-  public class TestEvaluatorRegistry
+  public class TestSimpleEvaluatorRegistry
   {
     #region fields
 
