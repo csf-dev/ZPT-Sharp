@@ -48,6 +48,19 @@ Expression:{2}</value>
   <data name="TalesExpressionEvaluatorNotFoundByType" xml:space="preserve">
     <value>No implementation of `{0}' could be located of the type `{1}'.</value>
   </data>
+  <data name="TalesPathPartMustNotBeEmpty" xml:space="preserve">
+    <value>TALES path expressions may not contain empty path parts.</value>
+  </data>
+  <data name="CouldNotWalkAnyPaths" xml:space="preserve">
+    <value>None of the TALES paths provided could be traversed successfully.</value>
+  </data>
+  <data name="CouldNotWalkAnyPathsWithExpression" xml:space="preserve">
+    <value>None of the TALES paths provided could be traversed successfully.
+Source expression:{0}</value>
+  </data>
+  <data name="NoCurrentComponentToWalk" xml:space="preserve">
+    <value>There must be a current `{0}', did you forget to call '{1}' first?</value>
+  </data>
   <data name="InvalidTalesExpressionPrefix" xml:space="preserve">
     <value>A TALES expression prefix must be a non-empty string, containing only alphanumeric characters.</value>
   </data>

@@ -65,6 +65,23 @@ namespace CSF.Zpt.Tales
       return evaluator.Evaluate(talesExpression, element, this);
     }
 
+    /// <summary>
+    /// Attempts to get a object instance from the root of the current model.
+    /// </summary>
+    /// <returns>
+    /// <c>true</c>, if a root item was found matching the given <paramref name="name"/>, <c>false</c> otherwise.
+    /// </returns>
+    /// <param name="name">The name of the desired item.</param>
+    /// <param name="element">The ZPT element for which the item search is being performed.</param>
+    /// <param name="result">
+    /// Exposes the found object if this method returns <c>true</c>.  The value is undefined if this method returns
+    /// <c>false</c>.
+    /// </param>
+    public bool TryGetRootObject(string name, ZptElement element, out object result)
+    {
+      return base.TryGetItem(name, element, out result);
+    }
+
     #endregion
 
     #region constructor

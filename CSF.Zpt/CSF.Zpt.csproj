@@ -96,6 +96,16 @@
     <Compile Include="Tales\IEvaluatorRegistry.cs" />
     <Compile Include="Tales\SimpleEvaluatorRegistry.cs" />
     <Compile Include="Tales\ITalesPathHandler.cs" />
+    <Compile Include="Tales\PathComponent.cs" />
+    <Compile Include="Tales\Path.cs" />
+    <Compile Include="Tales\PathPart.cs" />
+    <Compile Include="Tales\PathWalker.cs" />
+    <Compile Include="Tales\TraversalException.cs" />
+    <Compile Include="Tales\ObjectTraverser.cs" />
+    <Compile Include="Tales\MethodTraversal.cs" />
+    <Compile Include="Tales\TraversalWrapper.cs" />
+    <Compile Include="Tales\StringIndexTraversal.cs" />
+    <Compile Include="Tales\IntegerIndexTraversal.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

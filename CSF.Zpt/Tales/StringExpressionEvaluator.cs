@@ -18,7 +18,7 @@ namespace CSF.Zpt.Tales
     private const string
       ESCAPED_PLACEHOLDER   = @"\$\$",
       SINGLE_PLACEHOLDER    = @"$",
-      REPLACEMENT_PATTERN   = @"\$(?:(?:\{([^}]+)\})|([a-zA-Z0-9_/@]+))";
+      REPLACEMENT_PATTERN   = @"\$(?:(?:\{([a-zA-Z0-9 /_.,~|?-]+)\})|([a-zA-Z0-9_/]+))";
 
     private static readonly Regex
       Unescaper             = new Regex(ESCAPED_PLACEHOLDER),
@@ -102,7 +102,7 @@ namespace CSF.Zpt.Tales
     /// </summary>
     /// <returns>The result of the application of placeholders.</returns>
     /// <param name="input">The input string.</param>
-    /// <param name="escapeSequenceIndices">A collection containing the indices of escaped placeholder sequences.</param>
+    /// <param name="escapedPlaceholderIndices">A collection containing the indices of escaped placeholder sequences.</param>
     /// <param name="element">The ZPT element.</param>
     /// <param name="model">The TALES model.</param>
     private string ApplyPlaceholderReplacements(string input,
