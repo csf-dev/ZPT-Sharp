@@ -145,6 +145,14 @@ namespace CSF.Zpt.Tales
       return output;
     }
 
+    /// <summary>
+    /// Attempts to get a root object, from which to begin traversal of the path.
+    /// </summary>
+    /// <returns><c>true</c>, if the root object was retrieved, <c>false</c> otherwise.</returns>
+    /// <param name="walker">A TALES path walker.</param>
+    /// <param name="element">A ZPT element.</param>
+    /// <param name="model">The TALES model.</param>
+    /// <param name="result">Exposes the result of this operation.</param>
     private bool TryGetTraversalRoot(PathWalker walker,
                                      ZptElement element,
                                      TalesModel model,
@@ -166,6 +174,14 @@ namespace CSF.Zpt.Tales
       return output;
     }
 
+    /// <summary>
+    /// Attempts to get a part-name for traversal, expanding interpolated part-names if appropriate.
+    /// </summary>
+    /// <returns><c>true</c>, if a part name was resolved, <c>false</c> otherwise.</returns>
+    /// <param name="part">A TALES path part.</param>
+    /// <param name="element">A ZPT element.</param>
+    /// <param name="model">The TALES model.</param>
+    /// <param name="result">Exposes the result of this operation.</param>
     private bool TryGetPartName(PathPart part, ZptElement element, TalesModel model, out string result)
     {
       result = part.Value;

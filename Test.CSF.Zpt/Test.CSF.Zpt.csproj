@@ -94,6 +94,7 @@
     <Compile Include="Tales\TestPathWalker.cs" />
     <Compile Include="Tales\TestObjectTraverser.cs" />
     <Compile Include="Util\DummyObjectWithField.cs" />
+    <Compile Include="Tales\TestPathExpressionEvaluator.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Metal\MetalVisitorIntegrationTests.1.xml" />

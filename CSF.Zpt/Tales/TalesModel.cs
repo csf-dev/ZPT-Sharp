@@ -50,7 +50,7 @@ namespace CSF.Zpt.Tales
     /// </summary>
     /// <param name="talesExpression">The TALES expression to evaluate.</param>
     /// <param name="element">The element for which we are evaluating a result.</param>
-    public ExpressionResult Evaluate(Expression talesExpression, ZptElement element)
+    public virtual ExpressionResult Evaluate(Expression talesExpression, ZptElement element)
     {
       if(talesExpression == null)
       {
@@ -77,7 +77,7 @@ namespace CSF.Zpt.Tales
     /// Exposes the found object if this method returns <c>true</c>.  The value is undefined if this method returns
     /// <c>false</c>.
     /// </param>
-    public bool TryGetRootObject(string name, ZptElement element, out object result)
+    public virtual bool TryGetRootObject(string name, ZptElement element, out object result)
     {
       return base.TryGetItem(name, element, out result);
     }
