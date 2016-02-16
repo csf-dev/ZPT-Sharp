@@ -36,7 +36,7 @@ namespace Test.CSF.Zpt.Tales
                                It.IsAny<TalesModel>()))
         .Returns(new ExpressionResult(expressionResult));
 
-      var model = new TalesModel(null, null, registry);
+      var model = new TalesModel(registry);
 
       var sut = new NotExpressionEvaluator(registry);
 
@@ -65,7 +65,7 @@ namespace Test.CSF.Zpt.Tales
                                It.IsAny<TalesModel>()))
         .Returns(new ExpressionResult(Model.CancelAction));
 
-      var model = new TalesModel(null, null, registry);
+      var model = new TalesModel(registry);
 
       var sut = new NotExpressionEvaluator(registry);
 
@@ -96,7 +96,7 @@ namespace Test.CSF.Zpt.Tales
                                It.IsAny<TalesModel>()))
         .Returns(new ExpressionResult(convertible));
 
-      var model = new TalesModel(null, null, registry);
+      var model = new TalesModel(registry);
 
       var sut = new NotExpressionEvaluator(registry);
 

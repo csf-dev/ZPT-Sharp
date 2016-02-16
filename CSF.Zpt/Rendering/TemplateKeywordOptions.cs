@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using CSF.Zpt.Tales;
 
-namespace CSF.Zpt.Tales
+namespace CSF.Zpt.Rendering
 {
   /// <summary>
   /// Represents a collection of keyword-options passed to a template.
@@ -48,11 +49,14 @@ namespace CSF.Zpt.Tales
     /// <summary>
     /// Gets the keyword-option present at the given key, identified as a TALES path fragment.
     /// </summary>
-    /// <returns>The result of the path traversal.</returns>
+    /// <returns><c>true</c> if the path traversal was a success; <c>false</c> otherwise.</returns>
     /// <param name="pathFragment">The path fragment.</param>
-    public object HandleTalesPath(string pathFragment)
+    /// <param name="result">Exposes the result if the traversal was a success</param>
+    public bool HandleTalesPath(string pathFragment, out object result)
     {
-      return this[pathFragment];
+      bool output = _options.ContainsKey(pathFragment);
+      result = output? _options[pathFragment] : null;
+      return output;
     }
 
     #endregion
@@ -60,7 +64,7 @@ namespace CSF.Zpt.Tales
     #region constructor
 
     /// <summary>
-    /// Initializes a new instance of the <see cref="CSF.Zpt.Tales.TemplateKeywordOptions"/> class.
+    /// Initializes a new instance of the <see cref="CSF.Zpt.Rendering.TemplateKeywordOptions"/> class.
     /// </summary>
     /// <param name="options">Options.</param>
     public TemplateKeywordOptions(IDictionary<string,object> options = null)

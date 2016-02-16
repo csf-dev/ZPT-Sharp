@@ -115,6 +115,25 @@ namespace CSF.Zpt.Rendering
     public abstract ZptElement GetParentElement();
 
     /// <summary>
+    /// Gets an ordered element chain, starting with the current element and including all of its parent elements from
+    /// closest to furthest ancestors.
+    /// </summary>
+    /// <returns>The element chain.</returns>
+    public virtual ZptElement[] GetElementChain()
+    {
+      List<ZptElement> output = new List<ZptElement>();
+      ZptElement current = this;
+
+      while(current != null)
+      {
+        output.Add(current);
+        current = current.GetParentElement();
+      }
+
+      return output.ToArray();
+    }
+
+    /// <summary>
     /// Gets a collection of the child elements from the current source element.
     /// </summary>
     /// <returns>The children.</returns>
@@ -252,6 +271,12 @@ namespace CSF.Zpt.Rendering
     /// </returns>
     /// <param name="nSpace">The namespace for which to test.</param>
     public abstract bool IsInNamespace(ZptNamespace nSpace);
+
+    /// <summary>
+    /// Gets a collection of the original attribute values for the current element.
+    /// </summary>
+    /// <returns>The original attributes.</returns>
+    public abstract OriginalAttributeValuesCollection GetOriginalAttributes();
 
     #endregion
 

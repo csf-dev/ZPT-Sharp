@@ -95,6 +95,7 @@
     <Compile Include="Util\DummyObjectWithField.cs" />
     <Compile Include="Tales\TestPathExpressionEvaluator.cs" />
     <Compile Include="Tales\TestSimpleEvaluatorRegistry.cs" />
+    <Compile Include="Util\Autofixture\ZptElementCustomisation.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Metal\MetalVisitorIntegrationTests.1.xml" />

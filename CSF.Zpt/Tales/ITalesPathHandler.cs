@@ -53,9 +53,10 @@ namespace CSF.Zpt.Tales
     /// value may also implement <see cref="ITalesPathHandler"/> if desired.
     /// </para>
     /// </remarks>
-    /// <returns>The result of the path traversal.</returns>
+    /// <returns><c>true</c> if the path traversal was a success; <c>false</c> otherwise.</returns>
     /// <param name="pathFragment">The path fragment.</param>
-    object HandleTalesPath(string pathFragment);
+    /// <param name="result">Exposes the result if the traversal was a success</param>
+    bool HandleTalesPath(string pathFragment, out object result);
   }
 }
 

@@ -37,7 +37,7 @@ namespace Test.CSF.Zpt.Tales
 
       var source = new Mock<ITalesPathHandler>();
       var output = _autofixture.Create<object>();
-      source.Setup(x => x.HandleTalesPath(path)).Returns(output);
+      source.Setup(x => x.HandleTalesPath(path, out output)).Returns(true);
 
       // Act
       object exposedOuput;

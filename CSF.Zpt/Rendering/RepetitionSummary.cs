@@ -1,11 +1,12 @@
 ﻿using System;
+using CSF.Zpt.Tales;
 
-namespace CSF.Zpt.Tales
+namespace CSF.Zpt.Rendering
 {
   /// <summary>
-  /// Represents information about a repetition.
+  /// Represents summary information about a repetition.
   /// </summary>
-  public class RepeatVariable : ITalesPathHandler
+  public class RepetitionSummary : ITalesPathHandler
   {
     #region constants
 
@@ -136,52 +137,63 @@ namespace CSF.Zpt.Tales
     /// <summary>
     /// Gets a specific piece of repeat information by name (a TALES path fragment).
     /// </summary>
-    /// <returns>The result of the path traversal.</returns>
+    /// <returns><c>true</c> if the path traversal was a success; <c>false</c> otherwise.</returns>
     /// <param name="pathFragment">The path fragment.</param>
-    public object HandleTalesPath(string pathFragment)
+    /// <param name="result">Exposes the result if the traversal was a success</param>
+    public bool HandleTalesPath(string pathFragment, out object result)
     {
-      object output;
+      bool output;
 
       switch(pathFragment)
       {
       case INDEX_IDENTIFIER:
-        output = this.Index;
+        result = this.Index;
+        output = true;
         break;
 
       case NUMBER_IDENTIFIER:
-        output = this.Number;
+        result = this.Number;
+        output = true;
         break;
 
       case EVEN_IDENTIFIER:
-        output = this.Even;
+        result = this.Even;
+        output = true;
         break;
 
       case ODD_IDENTIFIER:
-        output = this.Odd;
+        result = this.Odd;
+        output = true;
         break;
 
       case START_IDENTIFIER:
-        output = this.Start;
+        result = this.Start;
+        output = true;
         break;
 
       case END_IDENTIFIER:
-        output = this.End;
+        result = this.End;
+        output = true;
         break;
 
       case LENGTH_IDENTIFIER:
-        output = this.Length;
+        result = this.Length;
+        output = true;
         break;
 
       case LETTER_IDENTIFIER:
-        output = this.LowerLetter;
+        result = this.LowerLetter;
+        output = true;
         break;
 
       case UPPER_LETTER_IDENTIFIER:
-        output = this.UpperLetter;
+        result = this.UpperLetter;
+        output = true;
         break;
 
       default:
-        output = null;
+        result = null;
+        output = false;
         break;
       }
 
@@ -193,11 +205,11 @@ namespace CSF.Zpt.Tales
     #region constructor
 
     /// <summary>
-    /// Initializes a new instance of the <see cref="CSF.Zpt.Tales.RepeatVariable"/> class.
+    /// Initializes a new instance of the <see cref="CSF.Zpt.Rendering.RepetitionSummary"/> class.
     /// </summary>
     /// <param name="index">Index.</param>
     /// <param name="length">Length.</param>
-    public RepeatVariable(int index, int length)
+    public RepetitionSummary(int index, int length)
     {
       if(index < 0)
       {

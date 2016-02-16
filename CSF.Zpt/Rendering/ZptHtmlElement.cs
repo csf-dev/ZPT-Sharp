@@ -191,7 +191,8 @@ namespace CSF.Zpt.Rendering
     /// <returns>The parent element.</returns>
     public override ZptElement GetParentElement()
     {
-      return (this.Node.ParentNode != null)? new ZptHtmlElement(this.Node.ParentNode, this.SourceFile) : null;
+      var parent = this.Node.ParentNode;
+      return (parent != null && parent.NodeType == HtmlNodeType.Element)? new ZptHtmlElement(parent, this.SourceFile) : null;
     }
 
     /// <summary>
@@ -518,6 +519,16 @@ namespace CSF.Zpt.Rendering
       }
 
       return (nSpace.Prefix != null)? String.Concat(nSpace.Prefix, PREFIX_SEPARATOR, name) : name;
+    }
+
+    /// <summary>
+    /// Gets a collection of the original attribute values for the current element.
+    /// </summary>
+    /// <returns>The original attributes.</returns>
+    public override OriginalAttributeValuesCollection GetOriginalAttributes()
+    {
+      // TODO: Write this implementation
+      throw new NotImplementedException();
     }
 
     #endregion

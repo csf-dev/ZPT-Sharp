@@ -21,6 +21,7 @@ namespace Test.CSF.Zpt.Rendering
       // Arrange
       var fixture = new Fixture();
       new DummyModelCustomisation().Customize(fixture);
+      new ZptElementCustomisation().Customize(fixture);
 
       var models = new Model[levelsOfNesting + 1];
       for(int i = 0; i < models.Length; i++)
@@ -33,7 +34,7 @@ namespace Test.CSF.Zpt.Rendering
       models[0].AddLocal(key, obj);
 
       // Act
-      var result = models[levelsOfNesting].Evaluate(key, null);
+      var result = models[levelsOfNesting].Evaluate(key, fixture.Create<ZptElement>());
 
       // Assert
       Assert.NotNull(result, "Result nullability");
@@ -48,6 +49,7 @@ namespace Test.CSF.Zpt.Rendering
       // Arrange
       var fixture = new Fixture();
       new DummyModelCustomisation().Customize(fixture);
+      new ZptElementCustomisation().Customize(fixture);
 
       var models = new Model[levelsOfNesting + 1];
       for(int i = 0; i < models.Length; i++)
@@ -60,7 +62,7 @@ namespace Test.CSF.Zpt.Rendering
       models[0].AddGlobal(key, obj);
 
       // Act
-      var result = models[levelsOfNesting].Evaluate(key, null);
+      var result = models[levelsOfNesting].Evaluate(key, fixture.Create<ZptElement>());
 
       // Assert
       Assert.NotNull(result, "Result nullability");
@@ -76,6 +78,7 @@ namespace Test.CSF.Zpt.Rendering
       // Arrange
       var fixture = new Fixture();
       new DummyModelCustomisation().Customize(fixture);
+      new ZptElementCustomisation().Customize(fixture);
 
       var models = new Model[levelsOfNesting + 1];
       for(int i = 0; i < models.Length; i++)
@@ -90,7 +93,7 @@ namespace Test.CSF.Zpt.Rendering
       models[overrideLevel].AddLocal(key, obj2);
 
       // Act
-      var result = models[levelsOfNesting].Evaluate(key, null);
+      var result = models[levelsOfNesting].Evaluate(key, fixture.Create<ZptElement>());
 
       // Assert
       Assert.NotNull(result, "Result nullability");

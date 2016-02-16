@@ -12,6 +12,12 @@ namespace CSF.Zpt.Tales
   /// </summary>
   public class TalesModel : Model
   {
+    #region constants
+
+    private const string CONTEXTS = "CONTEXTS";
+
+    #endregion
+
     #region fields
 
     private IEvaluatorRegistry _registry;
@@ -26,7 +32,9 @@ namespace CSF.Zpt.Tales
     /// <returns>The child model.</returns>
     public override Model CreateChildModel()
     {
-      return new TalesModel(this, this.Root, _registry);
+      TalesModel output = new TalesModel(this, this.Root, _registry);
+      output.RepetitionInfo = new RepetitionInfoCollection(this.RepetitionInfo);
+      return output;
     }
 
     /// <summary>
@@ -79,12 +87,55 @@ namespace CSF.Zpt.Tales
     /// </param>
     public virtual bool TryGetRootObject(string name, ZptElement element, out object result)
     {
-      return base.TryGetItem(name, element, out result);
+      if(element == null)
+      {
+        throw new ArgumentNullException("element");
+      }
+
+      bool output;
+
+      if(name == CONTEXTS)
+      {
+        output = true;
+        result = new BuiltinContextsContainer(this.GetKeywordOptions(),
+                                              this.GetRepetitionSummaries(element),
+                                              element.GetOriginalAttributes());
+      }
+      else
+      {
+        output = base.TryGetItem(name, element, out result);
+      }
+
+      if(!output)
+      {
+        var contexts = new BuiltinContextsContainer(this.GetKeywordOptions(),
+                                                    this.GetRepetitionSummaries(element),
+                                                    element.GetOriginalAttributes());
+        output = contexts.HandleTalesPath(name, out result);
+      }
+
+      return output;
     }
 
     #endregion
 
     #region constructor
+
+    /// <summary>
+    /// Initializes a new instance of the <see cref="CSF.Zpt.Tales.TalesModel"/> class.
+    /// </summary>
+    /// <param name="evaluatorRegistry">Evaluator registry.</param>
+    /// <param name="options">Options.</param>
+    public TalesModel(IEvaluatorRegistry evaluatorRegistry,
+                      TemplateKeywordOptions options = null) : base(options)
+    {
+      if(evaluatorRegistry == null)
+      {
+        throw new ArgumentNullException("evaluatorRegistry");
+      }
+
+      _registry = evaluatorRegistry;
+    }
 
     /// <summary>
     /// Initializes a new instance of the <see cref="CSF.Zpt.Tales.TalesModel"/> class.

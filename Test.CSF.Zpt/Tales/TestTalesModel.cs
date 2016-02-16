@@ -32,7 +32,7 @@ namespace Test.CSF.Zpt.Tales
     public void TestCreateChildModel()
     {
       // Arrange
-      var sut = new TalesModel(null, null, SimpleEvaluatorRegistry.Default);
+      var sut = new TalesModel(Mock.Of<IEvaluatorRegistry>());
 
       // Act
       var child = sut.CreateChildModel();
@@ -49,7 +49,7 @@ namespace Test.CSF.Zpt.Tales
       var registry = new Mock<IEvaluatorRegistry>();
       var evaluator = new Mock<IExpressionEvaluator>();
 
-      var sut = new TalesModel(null, null, registry.Object);
+      var sut = new TalesModel(registry.Object);
 
       var expressionResult = _autofixture.Create<ExpressionResult>();
 
@@ -74,7 +74,7 @@ namespace Test.CSF.Zpt.Tales
       var registry = new Mock<IEvaluatorRegistry>();
       var evaluator = new Mock<IExpressionEvaluator>();
 
-      var sut = new TalesModel(null, null, registry.Object);
+      var sut = new TalesModel(registry.Object);
 
       var expressionResult = _autofixture.Create<ExpressionResult>();
       string expressionSource = _autofixture.Create<string>();
@@ -98,11 +98,13 @@ namespace Test.CSF.Zpt.Tales
     {
       // Arrange
       var registry = new Mock<IEvaluatorRegistry>();
-      var sut = new TalesModel(null, null, registry.Object);
+      var sut = new TalesModel(registry.Object);
 
       // Act
       object output;
-      var result = sut.TryGetRootObject("nothing", Mock.Of<ZptElement>(), out output);
+      var result = sut.TryGetRootObject("nothing",
+                                        Mock.Of<ZptElement>(x => x.GetOriginalAttributes() == new OriginalAttributeValuesCollection()),
+                                        out output);
 
       // Assert
       Assert.IsTrue(result, "Overall success");
@@ -114,11 +116,13 @@ namespace Test.CSF.Zpt.Tales
     {
       // Arrange
       var registry = new Mock<IEvaluatorRegistry>();
-      var sut = new TalesModel(null, null, registry.Object);
+      var sut = new TalesModel(registry.Object);
 
       // Act
       object output;
-      var result = sut.TryGetRootObject("default", Mock.Of<ZptElement>(), out output);
+      var result = sut.TryGetRootObject("default",
+                                        Mock.Of<ZptElement>(x => x.GetOriginalAttributes() == new OriginalAttributeValuesCollection()),
+                                        out output);
 
       // Assert
       Assert.IsTrue(result, "Overall success");
@@ -131,11 +135,13 @@ namespace Test.CSF.Zpt.Tales
     {
       // Arrange
       var registry = new Mock<IEvaluatorRegistry>();
-      var sut = new TalesModel(null, null, registry.Object);
+      var sut = new TalesModel(registry.Object);
 
       // Act
       object output;
-      var result = sut.TryGetRootObject("options", Mock.Of<ZptElement>(), out output);
+      var result = sut.TryGetRootObject("options",
+                                        Mock.Of<ZptElement>(x => x.GetOriginalAttributes() == new OriginalAttributeValuesCollection()),
+                                        out output);
 
       // Assert
       Assert.IsTrue(result, "Overall success");
@@ -148,16 +154,18 @@ namespace Test.CSF.Zpt.Tales
     {
       // Arrange
       var registry = new Mock<IEvaluatorRegistry>();
-      var sut = new TalesModel(null, null, registry.Object);
+      var sut = new TalesModel(registry.Object);
 
       // Act
       object output;
-      var result = sut.TryGetRootObject("repeat", Mock.Of<ZptElement>(), out output);
+      var result = sut.TryGetRootObject("repeat",
+                                        Mock.Of<ZptElement>(x => x.GetOriginalAttributes() == new OriginalAttributeValuesCollection()),
+                                        out output);
 
       // Assert
       Assert.IsTrue(result, "Overall success");
       Assert.NotNull(output, "Output nullability");
-      Assert.IsInstanceOf<RepeatVariableCollection>(output, "Expected output type");
+      Assert.IsInstanceOf<ContextualisedRepetitionSummaryWrapper>(output, "Expected output type");
     }
 
     [Test]
@@ -165,11 +173,13 @@ namespace Test.CSF.Zpt.Tales
     {
       // Arrange
       var registry = new Mock<IEvaluatorRegistry>();
-      var sut = new TalesModel(null, null, registry.Object);
+      var sut = new TalesModel(registry.Object);
 
       // Act
       object output;
-      var result = sut.TryGetRootObject("attrs", Mock.Of<ZptElement>(), out output);
+      var result = sut.TryGetRootObject("attrs",
+                                        Mock.Of<ZptElement>(x => x.GetOriginalAttributes() == new OriginalAttributeValuesCollection()),
+                                        out output);
 
       // Assert
       Assert.IsTrue(result, "Overall success");
@@ -182,11 +192,13 @@ namespace Test.CSF.Zpt.Tales
     {
       // Arrange
       var registry = new Mock<IEvaluatorRegistry>();
-      var sut = new TalesModel(null, null, registry.Object);
+      var sut = new TalesModel(registry.Object);
 
       // Act
       object output;
-      var result = sut.TryGetRootObject("CONTEXTS", Mock.Of<ZptElement>(), out output);
+      var result = sut.TryGetRootObject("CONTEXTS",
+                                        Mock.Of<ZptElement>(x => x.GetOriginalAttributes() == new OriginalAttributeValuesCollection()),
+                                        out output);
 
       // Assert
       Assert.IsTrue(result, "Overall success");

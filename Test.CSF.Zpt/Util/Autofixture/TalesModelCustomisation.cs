@@ -8,7 +8,7 @@ namespace Test.CSF.Zpt.Util.Autofixture
   {
     public void Customize(IFixture fixture)
     {
-      fixture.Customize<TalesModel>(x => x.FromFactory((IEvaluatorRegistry reg) => new TalesModel(null, null, reg)));
+      fixture.Customize<TalesModel>(x => x.FromFactory((IEvaluatorRegistry reg) => new TalesModel(reg, null)));
     }
   }
 }

@@ -16,8 +16,10 @@ namespace CSF.Zpt.Rendering
 
     private Model _parent, _root;
     private Dictionary<string,object> _localDefinitions, _globalDefinitions;
-    private Dictionary<ZptElement,RepetitionInfo> _repetitionInfo;
+    private RepetitionInfoCollection _repetitionInfo;
+    private Dictionary<ZptElement,ContextualisedRepetitionSummaryWrapper> _cachedRepetitionSummaries;
     private object _error;
+    private TemplateKeywordOptions _options;
 
     #endregion
 
@@ -42,6 +44,25 @@ namespace CSF.Zpt.Rendering
     {
       get {
         return _localDefinitions;
+      }
+    }
+
+    /// <summary>
+    /// Gets or sets the repetition info.
+    /// </summary>
+    /// <value>The repetition info.</value>
+    protected virtual RepetitionInfoCollection RepetitionInfo
+    {
+      get {
+        return _repetitionInfo;
+      }
+      set {
+        if(value == null)
+        {
+          throw new ArgumentNullException("value");
+        }
+
+        _repetitionInfo = value;
       }
     }
 
@@ -123,8 +144,7 @@ namespace CSF.Zpt.Rendering
         throw new ArgumentNullException("info");
       }
 
-      _repetitionInfo = info
-        .ToDictionary(k => k.AssociatedElement, v => v);
+      this.RepetitionInfo = new RepetitionInfoCollection(this.RepetitionInfo, info);
     }
 
     /// <summary>
@@ -167,19 +187,10 @@ namespace CSF.Zpt.Rendering
     /// <param name="result">Exposes the item which was found.</param>
     protected virtual bool TryGetItem(string name, ZptElement element, out object result)
     {
-      bool output = false;
+      bool output;
       result = null;
 
-      if(_repetitionInfo != null
-         && _repetitionInfo.ContainsKey(element))
-      {
-        var candidate = _repetitionInfo[element];
-        if(candidate.Name == name)
-        {
-          output = true;
-          result = candidate.Value;
-        }
-      }
+      output = this.RepetitionInfo.TryResolveValue(name, element.GetElementChain(), out result);
 
       if(!output)
       {
@@ -226,22 +237,70 @@ namespace CSF.Zpt.Rendering
       return output;
     }
 
+    /// <summary>
+    /// Gets the contextualised repetition summaries for the given <see cref="ZptElement"/>.
+    /// </summary>
+    /// <returns>The repetition summaries.</returns>
+    /// <param name="element">Element.</param>
+    protected virtual ContextualisedRepetitionSummaryWrapper GetRepetitionSummaries(ZptElement element)
+    {
+      if(!_cachedRepetitionSummaries.ContainsKey(element))
+      {
+        var elementChain = element.GetElementChain();
+        var summaries = this.RepetitionInfo.GetContextualisedSummaries(elementChain);
+        _cachedRepetitionSummaries.Add(element, summaries);
+      }
+
+      return _cachedRepetitionSummaries[element];
+    }
+
+    /// <summary>
+    /// Gets the keyword options specified upon the current instance.
+    /// </summary>
+    protected virtual TemplateKeywordOptions GetKeywordOptions()
+    {
+      return _root._options;
+    }
+
     #endregion
 
-    #region constructor
+    #region constructors
 
     /// <summary>
     /// Initializes a new instance of the <see cref="CSF.Zpt.Rendering.Model"/> class.
     /// </summary>
     /// <param name="parent">A reference to the parent model instance, if applicable.</param>
-    /// <param name="root">A reference to the root of the model hierarchy, if applicable.</param>
+    /// <param name="root">A reference to the root of the model hierarchy.</param>
     public Model(Model parent, Model root)
     {
+      if(root == null)
+      {
+        throw new ArgumentNullException("root");
+      }
+
       _parent = parent;
-      _root = root?? this;
+      _root = root;
 
       _localDefinitions = new Dictionary<string, object>();
       _globalDefinitions = (_root == this)? new Dictionary<string,object>() : null;
+      _repetitionInfo = new RepetitionInfoCollection(new RepetitionInfo[0]);
+      _cachedRepetitionSummaries = new Dictionary<ZptElement, ContextualisedRepetitionSummaryWrapper>();
+    }
+
+    /// <summary>
+    /// Initializes a new root of the <see cref="CSF.Zpt.Rendering.Model"/> class.
+    /// </summary>
+    /// <param name="options">Keyword options.</param>
+    public Model(TemplateKeywordOptions options)
+    {
+      _options = options?? new TemplateKeywordOptions();
+      _parent = null;
+      _root = this;
+
+      _localDefinitions = new Dictionary<string, object>();
+      _globalDefinitions = (_root == this)? new Dictionary<string,object>() : null;
+      _repetitionInfo = new RepetitionInfoCollection(new RepetitionInfo[0]);
+      _cachedRepetitionSummaries = new Dictionary<ZptElement, ContextualisedRepetitionSummaryWrapper>();
     }
 
     #endregion

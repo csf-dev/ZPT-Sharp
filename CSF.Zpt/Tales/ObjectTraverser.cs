@@ -92,8 +92,7 @@ namespace CSF.Zpt.Tales
       else if(source is ITalesPathHandler)
       {
         var pathHandler = (ITalesPathHandler) source;
-        result = pathHandler.HandleTalesPath(name);
-        output = true;
+        output = pathHandler.HandleTalesPath(name, out result);
       }
       else
       {

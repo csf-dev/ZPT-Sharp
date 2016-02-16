@@ -54,9 +54,9 @@ namespace Test.CSF.Zpt.Util
     #region constructors
 
     /// <summary>
-    /// Initializes a new instance of the <see cref="Test.CSF.Zpt.Rendering.DummyModel"/> class.
+    /// Initializes a new instance of the <see cref="Test.CSF.Zpt.Util.DummyModel"/> class.
     /// </summary>
-    protected DummyModel() : this(null, null) {}
+    protected DummyModel() : this((TemplateKeywordOptions) null) {}
 
     /// <summary>
     /// Initializes a new instance of the <see cref="Test.CSF.Zpt.Rendering.DummyModel"/> class.
@@ -64,6 +64,12 @@ namespace Test.CSF.Zpt.Util
     /// <param name="parent">Parent.</param>
     /// <param name="root">Root.</param>
     public DummyModel(Model parent, Model root) : base(parent, root) {}
+
+    /// <summary>
+    /// Initializes a new instance of the <see cref="Test.CSF.Zpt.Rendering.DummyModel"/> class.
+    /// </summary>
+    /// <param name="options">Keyword options.</param>
+    public DummyModel(TemplateKeywordOptions options) : base(options) {}
 
     #endregion
   }

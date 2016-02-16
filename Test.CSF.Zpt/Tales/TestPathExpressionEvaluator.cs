@@ -25,7 +25,7 @@ namespace Test.CSF.Zpt.Tales
     public void Setup()
     {
       _autofixture = new Fixture();
-      _model = new Mock<TalesModel>(null, null, SimpleEvaluatorRegistry.Default);
+      _model = new Mock<TalesModel>(SimpleEvaluatorRegistry.Default, null);
       _element = Mock.Of<ZptElement>();
       _sut = new PathExpressionEvaluator(SimpleEvaluatorRegistry.Default);
     }

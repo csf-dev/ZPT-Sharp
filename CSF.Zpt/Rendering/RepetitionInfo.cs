@@ -61,6 +61,19 @@ namespace CSF.Zpt.Rendering
 
     #endregion
 
+    #region methods
+
+    /// <summary>
+    /// Creates and returns a <see cref="RepetitionSummary"/> from the current instance.
+    /// </summary>
+    /// <returns>The summary.</returns>
+    public RepetitionSummary ToSummary()
+    {
+      return new RepetitionSummary(this.Index, this.Count);
+    }
+
+    #endregion
+
     #region constructor
 
     /// <summary>

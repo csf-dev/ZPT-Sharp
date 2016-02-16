@@ -54,7 +54,6 @@ namespace Test.CSF.Zpt.Metal
       new DummyModelCustomisation().Customize(_fixture);
 
       _model = _fixture.Create<DummyModel>();
-      Mock.Get(_model).Setup(x => x.CreateChildModel()).Returns(_model);
     }
 
     #endregion
