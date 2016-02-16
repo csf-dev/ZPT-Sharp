@@ -93,6 +93,107 @@ namespace Test.CSF.Zpt.Tales
       Assert.AreSame(expressionResult, result);
     }
 
+    [Test]
+    public void TestTryGetRootObject_Nothing()
+    {
+      // Arrange
+      var registry = new Mock<IEvaluatorRegistry>();
+      var sut = new TalesModel(null, null, registry.Object);
+
+      // Act
+      object output;
+      var result = sut.TryGetRootObject("nothing", Mock.Of<ZptElement>(), out output);
+
+      // Assert
+      Assert.IsTrue(result, "Overall success");
+      Assert.IsNull(output, "Output nullability");
+    }
+
+    [Test]
+    public void TestTryGetRootObject_Default()
+    {
+      // Arrange
+      var registry = new Mock<IEvaluatorRegistry>();
+      var sut = new TalesModel(null, null, registry.Object);
+
+      // Act
+      object output;
+      var result = sut.TryGetRootObject("default", Mock.Of<ZptElement>(), out output);
+
+      // Assert
+      Assert.IsTrue(result, "Overall success");
+      Assert.NotNull(output, "Output nullability");
+      Assert.AreSame(Model.CancelAction, output, "Expected output");
+    }
+
+    [Test]
+    public void TestTryGetRootObject_Options()
+    {
+      // Arrange
+      var registry = new Mock<IEvaluatorRegistry>();
+      var sut = new TalesModel(null, null, registry.Object);
+
+      // Act
+      object output;
+      var result = sut.TryGetRootObject("options", Mock.Of<ZptElement>(), out output);
+
+      // Assert
+      Assert.IsTrue(result, "Overall success");
+      Assert.NotNull(output, "Output nullability");
+      Assert.IsInstanceOf<TemplateKeywordOptions>(output, "Expected output type");
+    }
+
+    [Test]
+    public void TestTryGetRootObject_Repeat()
+    {
+      // Arrange
+      var registry = new Mock<IEvaluatorRegistry>();
+      var sut = new TalesModel(null, null, registry.Object);
+
+      // Act
+      object output;
+      var result = sut.TryGetRootObject("repeat", Mock.Of<ZptElement>(), out output);
+
+      // Assert
+      Assert.IsTrue(result, "Overall success");
+      Assert.NotNull(output, "Output nullability");
+      Assert.IsInstanceOf<RepeatVariableCollection>(output, "Expected output type");
+    }
+
+    [Test]
+    public void TestTryGetRootObject_Attrs()
+    {
+      // Arrange
+      var registry = new Mock<IEvaluatorRegistry>();
+      var sut = new TalesModel(null, null, registry.Object);
+
+      // Act
+      object output;
+      var result = sut.TryGetRootObject("attrs", Mock.Of<ZptElement>(), out output);
+
+      // Assert
+      Assert.IsTrue(result, "Overall success");
+      Assert.NotNull(output, "Output nullability");
+      Assert.IsInstanceOf<OriginalAttributeValuesCollection>(output, "Expected output type");
+    }
+
+    [Test]
+    public void TestTryGetRootObject_Contexts()
+    {
+      // Arrange
+      var registry = new Mock<IEvaluatorRegistry>();
+      var sut = new TalesModel(null, null, registry.Object);
+
+      // Act
+      object output;
+      var result = sut.TryGetRootObject("CONTEXTS", Mock.Of<ZptElement>(), out output);
+
+      // Assert
+      Assert.IsTrue(result, "Overall success");
+      Assert.NotNull(output, "Output nullability");
+      Assert.IsInstanceOf<BuiltinContextsContainer>(output, "Expected output type");
+    }
+
     #endregion
   }
 }

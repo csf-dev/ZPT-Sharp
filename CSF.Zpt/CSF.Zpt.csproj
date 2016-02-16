@@ -105,6 +105,11 @@
     <Compile Include="Tales\TraversalWrapper`1.cs" />
     <Compile Include="Tales\TraversalWrapper.cs" />
     <Compile Include="Tales\FuncByRef.cs" />
+    <Compile Include="Tales\TemplateKeywordOptions.cs" />
+    <Compile Include="Tales\RepeatVariableCollection.cs" />
+    <Compile Include="Tales\OriginalAttributeValuesCollection.cs" />
+    <Compile Include="Tales\BuiltinContextsContainer.cs" />
+    <Compile Include="Tales\RepeatVariable.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
