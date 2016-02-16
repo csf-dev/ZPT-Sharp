@@ -1,4 +1,5 @@
 ﻿using System;
+using CSF.Zpt.Tales;
 
 namespace CSF.Zpt.Rendering
 {
@@ -25,6 +26,36 @@ namespace CSF.Zpt.Rendering
       private set;
     }
 
+    /// <summary>
+    /// Gets the TALES evaluator registry implementation.
+    /// </summary>
+    /// <value>The TALES evaluator registry.</value>
+    public IEvaluatorRegistry TalesEvaluatorRegistry
+    {
+      get;
+      private set;
+    }
+
+    /// <summary>
+    /// Gets the element visitors to be used when processing ZPT documents.
+    /// </summary>
+    /// <value>The element visitors.</value>
+    public ElementVisitor[] ElementVisitors
+    {
+      get;
+      private set;
+    }
+
+    /// <summary>
+    /// Gets the keyword options passed to the template mechanism, typically via the command-line.
+    /// </summary>
+    /// <value>The keyword options.</value>
+    public TemplateKeywordOptions KeywordOptions
+    {
+      get;
+      private set;
+    }
+
     #endregion
 
     #region constructor
@@ -33,9 +64,19 @@ namespace CSF.Zpt.Rendering
     /// Initializes a new instance of the <see cref="CSF.Zpt.Rendering.RenderingOptions"/> class.
     /// </summary>
     /// <param name="addSourceFileAnnotation">Indicates whether or not source file annotation is to be added.</param>
-    public RenderingOptions(bool addSourceFileAnnotation)
+    public RenderingOptions(bool addSourceFileAnnotation = false,
+                            IEvaluatorRegistry talesEvaluatorRegistry = null,
+                            ElementVisitor[] elementVisitors = null,
+                            TemplateKeywordOptions keywordOptions = null)
     {
       this.AddSourceFileAnnotation = addSourceFileAnnotation;
+      this.TalesEvaluatorRegistry = talesEvaluatorRegistry?? SimpleEvaluatorRegistry.Default;
+      this.ElementVisitors = elementVisitors?? new ElementVisitor[] {
+        new CSF.Zpt.Metal.MetalVisitor(),
+        new CSF.Zpt.Metal.SourceAnnotationVisitor(),
+        new CSF.Zpt.Tal.TalVisitor(),
+      };
+      this.KeywordOptions = keywordOptions?? new TemplateKeywordOptions();
     }
 
     /// <summary>
@@ -43,7 +84,7 @@ namespace CSF.Zpt.Rendering
     /// </summary>
     static RenderingOptions()
     {
-      _defaultOptions = new RenderingOptions(addSourceFileAnnotation: false);
+      _defaultOptions = new RenderingOptions();
     }
 
     #endregion
