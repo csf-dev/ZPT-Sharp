@@ -50,38 +50,16 @@ namespace CSF.Zpt
     /// Renders the document to an <c>System.Xml.XmlDocument</c> instance.
     /// </summary>
     /// <returns>The rendered XML document.</returns>
-    /// <param name="context">The rendering context, containing the object model of data available to the document.</param>
     /// <param name="options">The rendering options to use.  If <c>null</c> then default options are used.</param>
-    public XmlDocument RenderXml(RenderingContext context,
-                                 RenderingOptions options = null)
+    public XmlDocument RenderXml(RenderingOptions options = null)
     {
-      if(context == null)
-      {
-        throw new ArgumentNullException("context");
-      }
-
       var opts = this.GetOptions(options);
-      var element = this.RenderElement(context, options: opts);
+      var element = this.RenderElement(opts);
 
       var output = new XmlDocument();
       output.LoadXml(element.ToString());
 
       return output;
-    }
-
-    /// <summary>
-    /// Renders the document to the given <c>System.IO.TextWriter</c>.
-    /// </summary>
-    /// <param name="writer">The text writer to render to.</param>
-    /// <param name="context">The rendering context, containing the object model of data available to the document.</param>
-    /// <param name="options">The rendering options to use.  If <c>null</c> then default options are used.</param>
-    public override void Render(TextWriter writer,
-                                RenderingContext context,
-                                RenderingOptions options = null)
-    {
-      var opts = this.GetOptions(options);
-      var doc = this.RenderXml(context, opts);
-      doc.Save(writer);
     }
 
     /// <summary>
@@ -135,10 +113,8 @@ namespace CSF.Zpt
     /// </summary>
     /// <param name="document">An XML document from which to create the current instance.</param>
     /// <param name="sourceFile">Information about the document's source file.</param>
-    /// <param name="visitors">A collection of the visitor types to use.</param>
     public ZptXmlDocument(XmlDocument document,
-                          SourceFileInfo sourceFile,
-                          ElementVisitor[] visitors = null) : base(visitors)
+                          SourceFileInfo sourceFile)
     {
       if(document == null)
       {

@@ -27,16 +27,6 @@ namespace CSF.Zpt.Rendering
     }
 
     /// <summary>
-    /// Gets the TALES evaluator registry implementation.
-    /// </summary>
-    /// <value>The TALES evaluator registry.</value>
-    public IEvaluatorRegistry TalesEvaluatorRegistry
-    {
-      get;
-      private set;
-    }
-
-    /// <summary>
     /// Gets the element visitors to be used when processing ZPT documents.
     /// </summary>
     /// <value>The element visitors.</value>
@@ -47,13 +37,26 @@ namespace CSF.Zpt.Rendering
     }
 
     /// <summary>
-    /// Gets the keyword options passed to the template mechanism, typically via the command-line.
+    /// Gets the factory implementation with which to create <see cref="RenderingContext"/> instances.
     /// </summary>
-    /// <value>The keyword options.</value>
-    public TemplateKeywordOptions KeywordOptions
+    /// <value>The rendering context factory.</value>
+    public IRenderingContextFactory ContextFactory
     {
       get;
       private set;
+    }
+
+    #endregion
+
+    #region methods
+
+    /// <summary>
+    /// Creates a new root <see cref="RenderingContext"/> instance.
+    /// </summary>
+    /// <returns>The root rendering context.</returns>
+    public RenderingContext CreateRootContext()
+    {
+      return this.ContextFactory.Create();
     }
 
     #endregion
@@ -64,19 +67,19 @@ namespace CSF.Zpt.Rendering
     /// Initializes a new instance of the <see cref="CSF.Zpt.Rendering.RenderingOptions"/> class.
     /// </summary>
     /// <param name="addSourceFileAnnotation">Indicates whether or not source file annotation is to be added.</param>
+    /// <param name="elementVisitors">The element visitors to use.</param>
+    /// <param name="contextFactory">The rendering context factory.</param>
     public RenderingOptions(bool addSourceFileAnnotation = false,
-                            IEvaluatorRegistry talesEvaluatorRegistry = null,
                             ElementVisitor[] elementVisitors = null,
-                            TemplateKeywordOptions keywordOptions = null)
+                            IRenderingContextFactory contextFactory = null)
     {
       this.AddSourceFileAnnotation = addSourceFileAnnotation;
-      this.TalesEvaluatorRegistry = talesEvaluatorRegistry?? SimpleEvaluatorRegistry.Default;
       this.ElementVisitors = elementVisitors?? new ElementVisitor[] {
         new CSF.Zpt.Metal.MetalVisitor(),
         new CSF.Zpt.Metal.SourceAnnotationVisitor(),
         new CSF.Zpt.Tal.TalVisitor(),
       };
-      this.KeywordOptions = keywordOptions?? new TemplateKeywordOptions();
+      this.ContextFactory = contextFactory?? new TalesRenderingContextFactory();
     }
 
     /// <summary>

@@ -22,6 +22,7 @@ namespace Test.CSF.Zpt.Rendering
       // Arrange
       var fixture = new Fixture();
       new RenderingContextCustomisation().Customize(fixture);
+      new RenderingOptionsCustomisation().Customize(fixture);
 
       var sut = new Mock<ElementVisitor>() { CallBase = true };
       sut

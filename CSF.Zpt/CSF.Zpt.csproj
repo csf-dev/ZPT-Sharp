@@ -111,6 +111,8 @@
     <Compile Include="Rendering\ContextualisedRepetitionSummaryWrapper.cs" />
     <Compile Include="Rendering\TemplateKeywordOptions.cs" />
     <Compile Include="Rendering\OriginalAttributeValuesCollection.cs" />
+    <Compile Include="Rendering\IRenderingContextFactory.cs" />
+    <Compile Include="Tales\TalesRenderingContextFactory.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

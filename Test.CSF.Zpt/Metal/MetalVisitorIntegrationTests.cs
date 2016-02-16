@@ -52,6 +52,7 @@ namespace Test.CSF.Zpt.Metal
     {
       _fixture = new Fixture();
       new DummyModelCustomisation().Customize(_fixture);
+      new RenderingOptionsCustomisation().Customize(_fixture);
 
       _model = _fixture.Create<DummyModel>();
     }

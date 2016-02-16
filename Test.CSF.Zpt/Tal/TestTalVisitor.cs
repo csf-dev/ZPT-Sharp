@@ -23,6 +23,7 @@ namespace Test.CSF.Zpt.Tal
       // Arrange
       var fixture = new Fixture();
       new RenderingContextCustomisation().Customize(fixture);
+      new RenderingOptionsCustomisation().Customize(fixture);
 
       var elements = Enumerable.Range(0,7).Select(x => new Mock<ZptElement>()).ToArray();
       var topElement = elements[0].Object;
@@ -65,6 +66,7 @@ namespace Test.CSF.Zpt.Tal
       // Arrange
       var fixture = new Fixture();
       new RenderingContextCustomisation().Customize(fixture);
+      new RenderingOptionsCustomisation().Customize(fixture);
 
       var elements = Enumerable.Range(0,3).Select(x => new Mock<ZptElement>()).ToArray();
       ZptElement
@@ -105,6 +107,7 @@ namespace Test.CSF.Zpt.Tal
       // Arrange
       var fixture = new Fixture();
       new RenderingContextCustomisation().Customize(fixture);
+      new RenderingOptionsCustomisation().Customize(fixture);
 
       var elements = Enumerable
         .Range(0, nestingLevel + 1)

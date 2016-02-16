@@ -50,39 +50,16 @@ namespace CSF.Zpt
     /// Renders the document to an <c>HtmlAgilityPack.HtmlDocument</c> instance.
     /// </summary>
     /// <returns>The rendered HTML document.</returns>
-    /// <param name="context">The rendering context, containing the object model of data available to the document.</param>
     /// <param name="options">The rendering options to use.  If <c>null</c> then default options are used.</param>
-    public HtmlDocument RenderHtml(RenderingContext context,
-                                   RenderingOptions options = null)
+    public HtmlDocument RenderHtml(RenderingOptions options = null)
     {
-      if(context == null)
-      {
-        throw new ArgumentNullException("context");
-      }
-
       var opts = this.GetOptions(options);
-      var element = this.RenderElement(context, opts);
+      var element = this.RenderElement(opts);
 
       var output = new HtmlDocument();
       output.LoadHtml(element.ToString());
 
       return output;
-    }
-
-    /// <summary>
-    /// Renders the document to the given <c>System.IO.TextWriter</c>.
-    /// </summary>
-    /// <param name="writer">The text writer to render to.</param>
-    /// <param name="context">The rendering context, containing the object model of data available to the document.</param>
-    /// <param name="options">The rendering options to use.  If <c>null</c> then default options are used.</param>
-    public override void Render(TextWriter writer,
-                                RenderingContext context,
-                                RenderingOptions options = null)
-    {
-      var opts = this.GetOptions(options);
-
-      var doc = this.RenderHtml(context, opts);
-      doc.Save(writer);
     }
 
     /// <summary>
@@ -133,10 +110,8 @@ namespace CSF.Zpt
     /// </summary>
     /// <param name="document">An HTML document from which to create the current instance.</param>
     /// <param name="sourceFile">Information about the document's source file.</param>
-    /// <param name="visitors">A collection of the visitor types to use.</param>
     public ZptHtmlDocument(HtmlDocument document,
-                           SourceFileInfo sourceFile,
-                           ElementVisitor[] visitors = null) : base(visitors)
+                           SourceFileInfo sourceFile)
     {
       if(document == null)
       {
