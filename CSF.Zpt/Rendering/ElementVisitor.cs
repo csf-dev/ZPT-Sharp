@@ -6,7 +6,7 @@ namespace CSF.Zpt.Rendering
   /// <summary>
   /// Base class for visitor types which visit and potentially modify an <see cref="ZptElement"/> instance.
   /// </summary>
-  public abstract class ElementVisitor
+  public abstract class ElementVisitor : IElementVisitor
   {
     #region methods
 
@@ -51,7 +51,7 @@ namespace CSF.Zpt.Rendering
     /// <param name="rootElement">Root element.</param>
     /// <param name="context">Context.</param>
     /// <param name="options">Options.</param>
-    public virtual RenderingContext[] VisitRoot(RenderingContext context)
+    public virtual RenderingContext[] VisitContext(RenderingContext context)
     {
       return this.VisitRecursively(context);
     }

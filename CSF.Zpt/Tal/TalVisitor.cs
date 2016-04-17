@@ -93,9 +93,9 @@ namespace CSF.Zpt.Tal
     /// <param name="rootElement">Root element.</param>
     /// <param name="context">Context.</param>
     /// <param name="options">Options.</param>
-    public override RenderingContext[] VisitRoot(RenderingContext context)
+    public override RenderingContext[] VisitContext(RenderingContext context)
     {
-      var output = base.VisitRoot(context);
+      var output = base.VisitContext(context);
 
       foreach(var item in output)
       {

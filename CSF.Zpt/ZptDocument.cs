@@ -63,7 +63,7 @@ namespace CSF.Zpt
 
       foreach(var visitor in options.ElementVisitors)
       {
-        visitor.VisitRecursively(context);
+        visitor.VisitContext(context);
       }
 
       return output;

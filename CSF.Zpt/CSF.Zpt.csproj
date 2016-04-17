@@ -113,6 +113,7 @@
     <Compile Include="Rendering\OriginalAttributeValuesCollection.cs" />
     <Compile Include="Rendering\IRenderingContextFactory.cs" />
     <Compile Include="Tales\TalesRenderingContextFactory.cs" />
+    <Compile Include="Rendering\IElementVisitor.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
