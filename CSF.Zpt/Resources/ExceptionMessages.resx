@@ -35,7 +35,7 @@ Source expression: {2}</value>
     <value>When getting the parent node, the current node must not be the root of the DOM.</value>
   </data>
   <data name="IncorrectWrappedNodeType" xml:space="preserve">
-    <value>The wrapped node must be an {0} '{1}' node.</value>
+    <value>The wrapped node must be an {0} '{1}' node.  Received a '{2}' node instead.</value>
   </data>
   <data name="ZptAttributeParsingError" xml:space="preserve">
     <value>Parser error whilst handling a '{0}:{1}' ZPT attribute, the attribute value is invalid.

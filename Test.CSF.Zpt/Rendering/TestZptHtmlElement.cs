@@ -59,8 +59,8 @@ namespace Test.CSF.Zpt.Rendering
     public void TestGetChildElements()
     {
       // Arrange
-      var sut = new ZptHtmlElement(_document.DocumentNode,
-                                _sourceFile);
+      var sut = new ZptHtmlElement(_document.DocumentNode.FirstChild,
+                                   _sourceFile);
 
       // Act
       var result = sut.GetChildElements();
@@ -608,7 +608,7 @@ namespace Test.CSF.Zpt.Rendering
       // Arrange
       var docElement = new ZptHtmlElement(_document.DocumentNode,
                                        _sourceFile);
-      var sut = docElement.GetChildElements()[1].GetChildElements()[0].GetChildElements().First();
+      var sut = docElement.GetChildElements()[0].GetChildElements()[1].GetChildElements()[0].GetChildElements().First();
       string expectedResult = @"<html>
 <head>
 <title>Document title</title>

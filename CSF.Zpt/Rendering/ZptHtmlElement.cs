@@ -552,23 +552,7 @@ namespace CSF.Zpt.Rendering
         throw new ArgumentNullException(nameof(node));
       }
 
-      HtmlNode actualNode;
-
-      if(node.NodeType == HtmlNodeType.Document)
-      {
-        actualNode = node.FirstChild;
-      }
-      else if(node.NodeType != HtmlNodeType.Element)
-      {
-        string message = String.Format(ExceptionMessages.IncorrectWrappedNodeType, "HTML", "element");
-        throw new ArgumentException(message, "node");
-      }
-      else
-      {
-        actualNode = node;
-      }
-
-      _node = actualNode;
+      _node = node;
     }
 
     #endregion

@@ -639,7 +639,7 @@ namespace CSF.Zpt.Rendering
       }
       else if(node.NodeType != XmlNodeType.Element)
       {
-        string message = String.Format(ExceptionMessages.IncorrectWrappedNodeType, "XML", "element");
+        string message = String.Format(ExceptionMessages.IncorrectWrappedNodeType, "XML", "element", node.NodeType);
         throw new ArgumentException(message, "node");
       }
       else
