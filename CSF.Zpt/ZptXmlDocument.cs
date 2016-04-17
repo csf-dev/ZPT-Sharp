@@ -63,6 +63,16 @@ namespace CSF.Zpt
     }
 
     /// <summary>
+    /// Gets a collection of elements in the document which are defined as METAL macros.
+    /// </summary>
+    /// <returns>Elements representing the METAL macros.</returns>
+    internal override CSF.Zpt.Metal.MetalMacro[] GetMacros()
+    {
+      // TODO: Write this implementation
+      throw new NotImplementedException();
+    }
+
+    /// <summary>
     /// Renders an element to the given <c>System.IO.TextWriter</c>.
     /// </summary>
     /// <param name="writer">The text writer to render to.</param>

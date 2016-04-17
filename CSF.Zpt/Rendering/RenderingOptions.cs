@@ -47,10 +47,20 @@ namespace CSF.Zpt.Rendering
     }
 
     /// <summary>
-    /// Gets the element visitors to be used when processing ZPT documents.
+    /// Gets the context visitors to be used when processing ZPT documents.
     /// </summary>
-    /// <value>The element visitors.</value>
-    public IContextVisitor[] ElementVisitors
+    /// <value>The context visitors.</value>
+    public IContextVisitor[] ContextVisitors
+    {
+      get;
+      private set;
+    }
+
+    /// <summary>
+    /// Gets the initial state of the model.
+    /// </summary>
+    /// <value>The initial state of the model.</value>
+    public InitialModelState InitialModelState
     {
       get;
       private set;
@@ -84,13 +94,16 @@ namespace CSF.Zpt.Rendering
     /// <param name="addSourceFileAnnotation">Indicates whether or not source file annotation is to be added.</param>
     /// <param name="elementVisitors">The element visitors to use.</param>
     /// <param name="contextFactory">The rendering context factory.</param>
+    /// <param name="initialState">The initial state of the ZPT models.</param>
     public RenderingOptions(bool addSourceFileAnnotation = false,
                             IContextVisitor[] elementVisitors = null,
-                            IRenderingContextFactory contextFactory = null)
+                            IRenderingContextFactory contextFactory = null,
+                            InitialModelState initialState = null)
     {
       this.AddSourceFileAnnotation = addSourceFileAnnotation;
-      this.ElementVisitors = elementVisitors?? DefaultVisitors;
+      this.ContextVisitors = elementVisitors?? DefaultVisitors;
       this.ContextFactory = contextFactory?? new TalesRenderingContextFactory();
+      this.InitialModelState = initialState?? new InitialModelState();
     }
 
     /// <summary>

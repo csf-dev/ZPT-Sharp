@@ -5,6 +5,7 @@ using System.IO;
 using CSF.Configuration;
 using System.Linq;
 using System.Collections.Generic;
+using CSF.Zpt.Tales;
 
 namespace Test.CSF.Zpt
 {
@@ -97,7 +98,10 @@ namespace Test.CSF.Zpt
 
       try
       {
-        actualRendering = document.Render();
+        var options = new global::CSF.Zpt.Rendering.RenderingOptions();
+        options.InitialModelState.MetalLocalDefinitions.Add("documents", new FilesystemDirectory(_sourcePath));
+
+        actualRendering = document.Render(options);
         output = (actualRendering == expectedRendering);
       }
       catch(Exception ex)

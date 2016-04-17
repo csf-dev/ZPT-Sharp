@@ -47,6 +47,12 @@ namespace CSF.Zpt
     }
 
     /// <summary>
+    /// Gets a collection of elements in the document which are defined as METAL macros.
+    /// </summary>
+    /// <returns>Elements representing the METAL macros.</returns>
+    internal abstract CSF.Zpt.Metal.MetalMacro[] GetMacros();
+
+    /// <summary>
     /// Renders the current document, returning an <see cref="ZptElement"/> representing the rendered result.
     /// </summary>
     /// <returns>The result of the rendering process.</returns>
@@ -61,7 +67,7 @@ namespace CSF.Zpt
       var output = this.GetRootElement().Clone();
       var context = options.CreateRootContext(output);
 
-      foreach(var visitor in options.ElementVisitors)
+      foreach(var visitor in options.ContextVisitors)
       {
         visitor.VisitContext(context);
       }

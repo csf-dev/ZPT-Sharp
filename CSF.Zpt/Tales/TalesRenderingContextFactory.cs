@@ -20,16 +20,6 @@ namespace CSF.Zpt.Tales
       private set;
     }
 
-    /// <summary>
-    /// Gets the template keyword options, such as might be passed in via the command-line.
-    /// </summary>
-    /// <value>The keyword options.</value>
-    public TemplateKeywordOptions KeywordOptions
-    {
-      get;
-      private set;
-    }
-
     #endregion
 
     #region methods
@@ -48,9 +38,16 @@ namespace CSF.Zpt.Tales
         throw new ArgumentNullException(nameof(options));
       }
 
+      TemplateKeywordOptions
+        metalKeywordOptions = new TemplateKeywordOptions(options.InitialModelState.MetalKeywordOptions),
+        talKeywordOptions = new TemplateKeywordOptions(options.InitialModelState.TalKeywordOptions);
+
       Model
-        talModel = new TalesModel(this.EvaluatorRegistry, this.KeywordOptions),
-        metalModel = new TalesModel(this.EvaluatorRegistry, this.KeywordOptions);
+        metalModel = new TalesModel(this.EvaluatorRegistry, metalKeywordOptions),
+        talModel = new TalesModel(this.EvaluatorRegistry, talKeywordOptions);
+
+      options.InitialModelState.PopulateMetalModel(metalModel);
+      options.InitialModelState.PopulateTalModel(talModel);
 
       return new RenderingContext(metalModel, talModel, element, options);
     }
@@ -63,12 +60,9 @@ namespace CSF.Zpt.Tales
     /// Initializes a new instance of the <see cref="CSF.Zpt.Tales.TalesRenderingContextFactory"/> class.
     /// </summary>
     /// <param name="evaluatorRegistry">Evaluator registry.</param>
-    /// <param name="keywordOptions">Keyword options.</param>
-    public TalesRenderingContextFactory(IEvaluatorRegistry evaluatorRegistry = null,
-                                        TemplateKeywordOptions keywordOptions = null)
+    public TalesRenderingContextFactory(IEvaluatorRegistry evaluatorRegistry = null)
     {
       this.EvaluatorRegistry = evaluatorRegistry?? SimpleEvaluatorRegistry.Default;
-      this.KeywordOptions = keywordOptions?? new TemplateKeywordOptions();
     }
 
     #endregion
