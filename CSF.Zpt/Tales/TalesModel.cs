@@ -51,7 +51,7 @@ namespace CSF.Zpt.Tales
     {
       if(expression == null)
       {
-        throw new ArgumentNullException("expression");
+        throw new ArgumentNullException(nameof(expression));
       }
 
       var talesExpression = new Expression(expression);
@@ -67,11 +67,11 @@ namespace CSF.Zpt.Tales
     {
       if(talesExpression == null)
       {
-        throw new ArgumentNullException("talesExpression");
+        throw new ArgumentNullException(nameof(talesExpression));
       }
       if(element == null)
       {
-        throw new ArgumentNullException("element");
+        throw new ArgumentNullException(nameof(element));
       }
 
       var evaluator = _registry.GetEvaluator(talesExpression);
@@ -94,7 +94,7 @@ namespace CSF.Zpt.Tales
     {
       if(element == null)
       {
-        throw new ArgumentNullException("element");
+        throw new ArgumentNullException(nameof(element));
       }
 
       bool output;
@@ -136,7 +136,7 @@ namespace CSF.Zpt.Tales
     {
       if(evaluatorRegistry == null)
       {
-        throw new ArgumentNullException("evaluatorRegistry");
+        throw new ArgumentNullException(nameof(evaluatorRegistry));
       }
 
       _registry = evaluatorRegistry;
@@ -154,7 +154,7 @@ namespace CSF.Zpt.Tales
     {
       if(evaluatorRegistry == null)
       {
-        throw new ArgumentNullException("evaluatorRegistry");
+        throw new ArgumentNullException(nameof(evaluatorRegistry));
       }
 
       _registry = evaluatorRegistry;

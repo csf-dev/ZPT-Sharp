@@ -28,7 +28,7 @@ namespace CSF.Zpt.Metal
     {
       if(context == null)
       {
-        throw new ArgumentNullException("context");
+        throw new ArgumentNullException(nameof(context));
       }
 
       var macro = _macroFinder.GetUsedMacro(context.Element, context.MetalModel);
@@ -45,11 +45,11 @@ namespace CSF.Zpt.Metal
     {
       if(context == null)
       {
-        throw new ArgumentNullException("context");
+        throw new ArgumentNullException(nameof(context));
       }
       if(macro == null)
       {
-        throw new ArgumentNullException("macro");
+        throw new ArgumentNullException(nameof(macro));
       }
       if(macro.GetMetalAttribute(ZptConstants.Metal.DefineMacroAttribute) == null)
       {
@@ -77,11 +77,11 @@ namespace CSF.Zpt.Metal
     {
       if(sourceElement == null)
       {
-        throw new ArgumentNullException("sourceElement");
+        throw new ArgumentNullException(nameof(sourceElement));
       }
       if(macro == null)
       {
-        throw new ArgumentNullException("macro");
+        throw new ArgumentNullException(nameof(macro));
       }
 
       var slotsToHandle = (from defineSlot in this.GetElementsByValue(macro, ZptConstants.Metal.DefineSlotAttribute)
@@ -123,7 +123,7 @@ namespace CSF.Zpt.Metal
     {
       if(context == null)
       {
-        throw new ArgumentNullException("context");
+        throw new ArgumentNullException(nameof(context));
       }
 
       var extended = _macroFinder.GetExtendedMacro(context.Element, context.MetalModel);

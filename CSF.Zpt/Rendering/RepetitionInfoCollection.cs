@@ -52,7 +52,7 @@ namespace CSF.Zpt.Rendering
     {
       if(elementChain == null)
       {
-        throw new ArgumentNullException("elementChain");
+        throw new ArgumentNullException(nameof(elementChain));
       }
 
       var infos = (from ele in elementChain
@@ -85,11 +85,11 @@ namespace CSF.Zpt.Rendering
     {
       if(sourceCollection == null)
       {
-        throw new ArgumentNullException("sourceCollection");
+        throw new ArgumentNullException(nameof(sourceCollection));
       }
       if(repetitions == null)
       {
-        throw new ArgumentNullException("repetitions");
+        throw new ArgumentNullException(nameof(repetitions));
       }
 
       foreach(var rep in repetitions)
@@ -112,7 +112,7 @@ namespace CSF.Zpt.Rendering
     {
       if(repetitions == null)
       {
-        throw new ArgumentNullException("repetitions");
+        throw new ArgumentNullException(nameof(repetitions));
       }
 
       _repetitions = this.CreateRepetitionsDictionary(repetitions);
@@ -128,7 +128,7 @@ namespace CSF.Zpt.Rendering
     {
       if(parentCollection == null)
       {
-        throw new ArgumentNullException("parentCollection");
+        throw new ArgumentNullException(nameof(parentCollection));
       }
 
       var source = new Dictionary<NameAndElement,RepetitionInfo>(parentCollection._repetitions);
@@ -169,11 +169,11 @@ namespace CSF.Zpt.Rendering
       {
         if(name == null)
         {
-          throw new ArgumentNullException("name");
+          throw new ArgumentNullException(nameof(name));
         }
         if(element == null)
         {
-          throw new ArgumentNullException("element");
+          throw new ArgumentNullException(nameof(element));
         }
 
         _tuple = new Tuple<string, ZptElement>(name, element);

@@ -36,7 +36,7 @@ namespace CSF.Zpt.Tales
     {
       if(expression == null)
       {
-        throw new ArgumentNullException("expression");
+        throw new ArgumentNullException(nameof(expression));
       }
 
       IExpressionEvaluator output;
@@ -86,7 +86,7 @@ namespace CSF.Zpt.Tales
     {
       if(evaluatorType == null)
       {
-        throw new ArgumentNullException("evaluatorType");
+        throw new ArgumentNullException(nameof(evaluatorType));
       }
       else if(!_evaluatorsByType.ContainsKey(evaluatorType))
       {
@@ -126,7 +126,7 @@ namespace CSF.Zpt.Tales
     {
       if(evaluators == null)
       {
-        throw new ArgumentNullException("evaluators");
+        throw new ArgumentNullException(nameof(evaluators));
       }
 
       _defaultEvaluator = evaluators
@@ -155,11 +155,11 @@ namespace CSF.Zpt.Tales
     {
       if(evaluatorTypes == null)
       {
-        throw new ArgumentNullException("evaluatorTypes");
+        throw new ArgumentNullException(nameof(evaluatorTypes));
       }
       if(defaultEvaluatorType == null)
       {
-        throw new ArgumentNullException("defaultEvaluatorType");
+        throw new ArgumentNullException(nameof(defaultEvaluatorType));
       }
 
       var evaluators = this.InstantiateEvaluators(evaluatorTypes);

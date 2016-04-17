@@ -38,7 +38,7 @@ namespace CSF.Zpt
     {
       if(writer == null)
       {
-        throw new ArgumentNullException("writer");
+        throw new ArgumentNullException(nameof(writer));
       }
 
       var opts = this.GetOptions(options);
@@ -55,7 +55,7 @@ namespace CSF.Zpt
     {
       if(options == null)
       {
-        throw new ArgumentNullException("options");
+        throw new ArgumentNullException(nameof(options));
       }
 
       var output = this.GetRootElement().Clone();

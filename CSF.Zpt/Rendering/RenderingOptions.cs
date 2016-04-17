@@ -68,7 +68,7 @@ namespace CSF.Zpt.Rendering
     {
       if(element == null)
       {
-        throw new ArgumentNullException("element");
+        throw new ArgumentNullException(nameof(element));
       }
 
       return this.ContextFactory.Create(element, this);

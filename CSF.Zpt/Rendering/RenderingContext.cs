@@ -91,7 +91,7 @@ namespace CSF.Zpt.Rendering
     {
       if(element == null)
       {
-        throw new ArgumentNullException("element");
+        throw new ArgumentNullException(nameof(element));
       }
 
       return new RenderingContext(this.MetalModel.CreateSiblingModel(),
@@ -123,19 +123,19 @@ namespace CSF.Zpt.Rendering
     {
       if(metalContext == null)
       {
-        throw new ArgumentNullException("metalContext");
+        throw new ArgumentNullException(nameof(metalContext));
       }
       if(talContext == null)
       {
-        throw new ArgumentNullException("talContext");
+        throw new ArgumentNullException(nameof(talContext));
       }
       if(element == null)
       {
-        throw new ArgumentNullException("element");
+        throw new ArgumentNullException(nameof(element));
       }
       if(options == null)
       {
-        throw new ArgumentNullException("options");
+        throw new ArgumentNullException(nameof(options));
       }
 
       _metalContext = metalContext;

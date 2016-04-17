@@ -58,7 +58,7 @@ namespace CSF.Zpt.Rendering
       set {
         if(value == null)
         {
-          throw new ArgumentNullException("value");
+          throw new ArgumentNullException(nameof(value));
         }
 
         _repetitionInfo = value;
@@ -111,7 +111,7 @@ namespace CSF.Zpt.Rendering
     {
       if(name == null)
       {
-        throw new ArgumentNullException("name");
+        throw new ArgumentNullException(nameof(name));
       }
 
       this.LocalDefinitions[name] = value;
@@ -126,7 +126,7 @@ namespace CSF.Zpt.Rendering
     {
       if(name == null)
       {
-        throw new ArgumentNullException("name");
+        throw new ArgumentNullException(nameof(name));
       }
 
       this.Root.GlobalDefinitions[name] = value;
@@ -140,7 +140,7 @@ namespace CSF.Zpt.Rendering
     {
       if(info == null)
       {
-        throw new ArgumentNullException("info");
+        throw new ArgumentNullException(nameof(info));
       }
 
       this.RepetitionInfo = new RepetitionInfoCollection(this.RepetitionInfo, info);
@@ -154,7 +154,7 @@ namespace CSF.Zpt.Rendering
     {
       if(error == null)
       {
-        throw new ArgumentNullException("error");
+        throw new ArgumentNullException(nameof(error));
       }
       else if(_error != null)
       {
@@ -290,7 +290,7 @@ namespace CSF.Zpt.Rendering
     {
       if(root == null)
       {
-        throw new ArgumentNullException("root");
+        throw new ArgumentNullException(nameof(root));
       }
 
       _parent = parent;

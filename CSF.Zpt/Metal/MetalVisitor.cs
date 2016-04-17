@@ -29,7 +29,7 @@ namespace CSF.Zpt.Metal
     {
       if(context == null)
       {
-        throw new ArgumentNullException("context");
+        throw new ArgumentNullException(nameof(context));
       }
 
       return new [] { _macroExpander.Expand(context) };

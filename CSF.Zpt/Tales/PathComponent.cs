@@ -40,7 +40,7 @@ namespace CSF.Zpt.Tales
     {
       if(parts == null)
       {
-        throw new ArgumentNullException("parts");
+        throw new ArgumentNullException(nameof(parts));
       }
 
       _parts = new ReadOnlyCollection<PathPart>(parts);

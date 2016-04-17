@@ -46,11 +46,11 @@ namespace CSF.Zpt.Metal
     {
       if(element == null)
       {
-        throw new ArgumentNullException("element");
+        throw new ArgumentNullException(nameof(element));
       }
       if(model == null)
       {
-        throw new ArgumentNullException("model");
+        throw new ArgumentNullException(nameof(model));
       }
 
       ZptElement output;

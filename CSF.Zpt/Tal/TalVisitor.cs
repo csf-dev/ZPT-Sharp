@@ -30,7 +30,7 @@ namespace CSF.Zpt.Tal
     {
       if(context == null)
       {
-        throw new ArgumentNullException("context");
+        throw new ArgumentNullException(nameof(context));
       }
 
       IEnumerable<RenderingContext>

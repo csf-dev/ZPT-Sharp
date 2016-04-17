@@ -55,7 +55,7 @@ namespace CSF.Zpt.Tales
     {
       if(value == null)
       {
-        throw new ArgumentNullException("value");
+        throw new ArgumentNullException(nameof(value));
       }
       else if(value.Length == 0)
       {

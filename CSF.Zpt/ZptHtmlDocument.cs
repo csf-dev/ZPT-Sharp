@@ -74,11 +74,11 @@ namespace CSF.Zpt
     {
       if(writer == null)
       {
-        throw new ArgumentNullException("writer");
+        throw new ArgumentNullException(nameof(writer));
       }
       if(element == null)
       {
-        throw new ArgumentNullException("element");
+        throw new ArgumentNullException(nameof(element));
       }
 
       var htmlElement = element as ZptHtmlElement;
@@ -115,11 +115,11 @@ namespace CSF.Zpt
     {
       if(document == null)
       {
-        throw new ArgumentNullException("document");
+        throw new ArgumentNullException(nameof(document));
       }
       if(sourceFile == null)
       {
-        throw new ArgumentNullException("sourceFile");
+        throw new ArgumentNullException(nameof(sourceFile));
       }
 
       _document = document;

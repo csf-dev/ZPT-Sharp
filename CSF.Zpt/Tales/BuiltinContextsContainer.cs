@@ -151,15 +151,15 @@ namespace CSF.Zpt.Tales
     {
       if(options == null)
       {
-        throw new ArgumentNullException("options");
+        throw new ArgumentNullException(nameof(options));
       }
       if(repeat == null)
       {
-        throw new ArgumentNullException("repeat");
+        throw new ArgumentNullException(nameof(repeat));
       }
       if(attrs == null)
       {
-        throw new ArgumentNullException("attrs");
+        throw new ArgumentNullException(nameof(attrs));
       }
 
       _nothing = null;

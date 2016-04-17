@@ -59,7 +59,7 @@ namespace CSF.Zpt.Rendering
     {
       if(repetitions == null)
       {
-        throw new ArgumentNullException("repetitions");
+        throw new ArgumentNullException(nameof(repetitions));
       }
 
       _repetitions = repetitions.ToDictionary(k => k.Name, v => v.ToSummary());

@@ -53,15 +53,15 @@ namespace CSF.Zpt.Tales
     {
       if(expression == null)
       {
-        throw new ArgumentNullException("expression");
+        throw new ArgumentNullException(nameof(expression));
       }
       if(element == null)
       {
-        throw new ArgumentNullException("element");
+        throw new ArgumentNullException(nameof(element));
       }
       if(model == null)
       {
-        throw new ArgumentNullException("model");
+        throw new ArgumentNullException(nameof(model));
       }
 
       string source = expression.GetContent(), output;

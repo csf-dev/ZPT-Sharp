@@ -115,7 +115,7 @@ namespace CSF.Zpt.Tales
     {
       if(path == null)
       {
-        throw new ArgumentNullException("path");
+        throw new ArgumentNullException(nameof(path));
       }
 
       _path = path;

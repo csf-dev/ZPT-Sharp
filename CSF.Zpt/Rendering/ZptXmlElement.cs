@@ -242,7 +242,7 @@ namespace CSF.Zpt.Rendering
     {
       if(name == null)
       {
-        throw new ArgumentNullException("name");
+        throw new ArgumentNullException(nameof(name));
       }
       else if(name.Length == 0)
       {
@@ -250,7 +250,7 @@ namespace CSF.Zpt.Rendering
       }
       if(attributeNamespace == null)
       {
-        throw new ArgumentNullException("attributeNamespace");
+        throw new ArgumentNullException(nameof(attributeNamespace));
       }
 
       string query;
@@ -283,11 +283,11 @@ namespace CSF.Zpt.Rendering
     {
       if(attributeNamespace == null)
       {
-        throw new ArgumentNullException("attributeNamespace");
+        throw new ArgumentNullException(nameof(attributeNamespace));
       }
       if(name == null)
       {
-        throw new ArgumentNullException("name");
+        throw new ArgumentNullException(nameof(name));
       }
 
       var attribs = this.Node.Attributes.Cast<XmlAttribute>()
@@ -317,11 +317,11 @@ namespace CSF.Zpt.Rendering
     {
       if(attributeNamespace == null)
       {
-        throw new ArgumentNullException("attributeNamespace");
+        throw new ArgumentNullException(nameof(attributeNamespace));
       }
       if(name == null)
       {
-        throw new ArgumentNullException("name");
+        throw new ArgumentNullException(nameof(name));
       }
 
       var attribs = this.Node.Attributes
@@ -347,7 +347,7 @@ namespace CSF.Zpt.Rendering
     {
       if(name == null)
       {
-        throw new ArgumentNullException("name");
+        throw new ArgumentNullException(nameof(name));
       }
       else if(name.Length == 0)
       {
@@ -382,7 +382,7 @@ namespace CSF.Zpt.Rendering
     {
       if(attributeNamespace == null)
       {
-        throw new ArgumentNullException("attributeNamespace");
+        throw new ArgumentNullException(nameof(attributeNamespace));
       }
 
       var elements = this.Node
@@ -414,7 +414,7 @@ namespace CSF.Zpt.Rendering
     {
       if(comment == null)
       {
-        throw new ArgumentNullException("comment");
+        throw new ArgumentNullException(nameof(comment));
       }
 
       var parent = this.GetParent();
@@ -447,7 +447,7 @@ namespace CSF.Zpt.Rendering
     {
       if(name == null)
       {
-        throw new ArgumentNullException("name");
+        throw new ArgumentNullException(nameof(name));
       }
       else if(name.Length == 0)
       {
@@ -541,7 +541,7 @@ namespace CSF.Zpt.Rendering
     {
       if(nSpace == null)
       {
-        throw new ArgumentNullException("nSpace");
+        throw new ArgumentNullException(nameof(nSpace));
       }
 
       bool output;
@@ -628,7 +628,7 @@ namespace CSF.Zpt.Rendering
     {
       if(node == null)
       {
-        throw new ArgumentNullException("node");
+        throw new ArgumentNullException(nameof(node));
       }
 
       XmlNode actualNode;

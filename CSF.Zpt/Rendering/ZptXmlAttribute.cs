@@ -50,7 +50,7 @@ namespace CSF.Zpt.Rendering
     {
       if(original == null)
       {
-        throw new ArgumentNullException("original");
+        throw new ArgumentNullException(nameof(original));
       }
 
       _original = original;

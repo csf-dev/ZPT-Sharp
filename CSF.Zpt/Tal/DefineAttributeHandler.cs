@@ -38,7 +38,7 @@ namespace CSF.Zpt.Tal
     {
       if(context == null)
       {
-        throw new ArgumentNullException("context");
+        throw new ArgumentNullException(nameof(context));
       }
 
       var attrib = context.Element.GetTalAttribute(ZptConstants.Tal.DefineAttribute);
@@ -115,7 +115,7 @@ namespace CSF.Zpt.Tal
     {
       if(expression == null)
       {
-        throw new ArgumentNullException("expression");
+        throw new ArgumentNullException(nameof(expression));
       }
 
       return expression.Replace(ESCAPED_SEMICOLON, SEMICOLON);

@@ -125,7 +125,7 @@ namespace CSF.Zpt.Rendering
     {
       if(fileInfo == null)
       {
-        throw new ArgumentNullException("fileInfo");
+        throw new ArgumentNullException(nameof(fileInfo));
       }
 
       _osFile = fileInfo;
@@ -139,7 +139,7 @@ namespace CSF.Zpt.Rendering
     {
       if(abstractPath == null)
       {
-        throw new ArgumentNullException("abstractPath");
+        throw new ArgumentNullException(nameof(abstractPath));
       }
 
       _abstractPath = abstractPath;

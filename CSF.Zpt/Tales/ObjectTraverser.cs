@@ -79,7 +79,7 @@ namespace CSF.Zpt.Tales
     {
       if(name == null)
       {
-        throw new ArgumentNullException("name");
+        throw new ArgumentNullException(nameof(name));
       }
 
       bool output;

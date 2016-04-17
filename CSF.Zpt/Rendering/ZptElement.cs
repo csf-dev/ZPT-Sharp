@@ -299,7 +299,7 @@ namespace CSF.Zpt.Rendering
     {
       if(sourceFile == null)
       {
-        throw new ArgumentNullException("sourceFile");
+        throw new ArgumentNullException(nameof(sourceFile));
       }
 
       _sourceFile = sourceFile;

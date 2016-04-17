@@ -21,7 +21,7 @@ namespace CSF.Zpt.Metal
     {
       if(context == null)
       {
-        throw new ArgumentNullException("context");
+        throw new ArgumentNullException(nameof(context));
       }
 
       if(context.RenderingOptions.AddSourceFileAnnotation)

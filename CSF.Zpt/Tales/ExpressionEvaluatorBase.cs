@@ -57,7 +57,7 @@ namespace CSF.Zpt.Tales
     {
       if(evaluatorRegistry == null)
       {
-        throw new ArgumentNullException("evaluatorRegistry");
+        throw new ArgumentNullException(nameof(evaluatorRegistry));
       }
 
       _evaluatorRegistry = evaluatorRegistry;

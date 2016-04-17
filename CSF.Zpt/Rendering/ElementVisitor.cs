@@ -30,7 +30,7 @@ namespace CSF.Zpt.Rendering
     {
       if(context == null)
       {
-        throw new ArgumentNullException("context");
+        throw new ArgumentNullException(nameof(context));
       }
 
       var output = this.Visit(context);

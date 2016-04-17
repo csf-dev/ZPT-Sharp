@@ -78,7 +78,7 @@ namespace CSF.Zpt.Tales
     {
       if(dele == null)
       {
-        throw new ArgumentNullException("dele");
+        throw new ArgumentNullException(nameof(dele));
       }
 
       _method = dele;
@@ -92,7 +92,7 @@ namespace CSF.Zpt.Tales
     {
       if(dele == null)
       {
-        throw new ArgumentNullException("dele");
+        throw new ArgumentNullException(nameof(dele));
       }
 
       _stringIndex = dele;
@@ -106,7 +106,7 @@ namespace CSF.Zpt.Tales
     {
       if(dele == null)
       {
-        throw new ArgumentNullException("dele");
+        throw new ArgumentNullException(nameof(dele));
       }
 
       _integerIndex = dele;

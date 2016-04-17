@@ -20,7 +20,7 @@ namespace CSF.Zpt.Rendering
     {
       if(element == null)
       {
-        throw new ArgumentNullException("element");
+        throw new ArgumentNullException(nameof(element));
       }
 
       return element.GetAttribute(ZptConstants.Metal.Namespace,
@@ -38,7 +38,7 @@ namespace CSF.Zpt.Rendering
     {
       if(element == null)
       {
-        throw new ArgumentNullException("element");
+        throw new ArgumentNullException(nameof(element));
       }
 
       return element.SearchAncestorsByAttribute(ZptConstants.Metal.Namespace,
@@ -56,7 +56,7 @@ namespace CSF.Zpt.Rendering
     {
       if(element == null)
       {
-        throw new ArgumentNullException("element");
+        throw new ArgumentNullException(nameof(element));
       }
 
       return element.SearchChildrenByAttribute(ZptConstants.Metal.Namespace,
@@ -71,7 +71,7 @@ namespace CSF.Zpt.Rendering
     {
       if(element == null)
       {
-        throw new ArgumentNullException("element");
+        throw new ArgumentNullException(nameof(element));
       }
 
       element.PurgeAttributes(ZptConstants.Metal.Namespace);
@@ -92,7 +92,7 @@ namespace CSF.Zpt.Rendering
     {
       if(element == null)
       {
-        throw new ArgumentNullException("element");
+        throw new ArgumentNullException(nameof(element));
       }
 
       return element.GetAttribute(ZptConstants.Tal.Namespace,
@@ -110,7 +110,7 @@ namespace CSF.Zpt.Rendering
     {
       if(element == null)
       {
-        throw new ArgumentNullException("element");
+        throw new ArgumentNullException(nameof(element));
       }
 
       return element.SearchAncestorsByAttribute(ZptConstants.Tal.Namespace,
@@ -128,7 +128,7 @@ namespace CSF.Zpt.Rendering
     {
       if(element == null)
       {
-        throw new ArgumentNullException("element");
+        throw new ArgumentNullException(nameof(element));
       }
 
       return element.SearchChildrenByAttribute(ZptConstants.Tal.Namespace,
@@ -143,7 +143,7 @@ namespace CSF.Zpt.Rendering
     {
       if(element == null)
       {
-        throw new ArgumentNullException("element");
+        throw new ArgumentNullException(nameof(element));
       }
 
       element.PurgeAttributes(ZptConstants.Tal.Namespace);

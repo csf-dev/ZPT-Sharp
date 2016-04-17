@@ -107,7 +107,7 @@ namespace CSF.Zpt.Tales
     {
       if(source == null)
       {
-        throw new ArgumentNullException("source");
+        throw new ArgumentNullException(nameof(source));
       }
 
       _source = source;
@@ -126,7 +126,7 @@ namespace CSF.Zpt.Tales
     {
       if(content == null)
       {
-        throw new ArgumentNullException("content");
+        throw new ArgumentNullException(nameof(content));
       }
       if(prefix != null
          && !PrefixValidator.IsMatch(prefix))

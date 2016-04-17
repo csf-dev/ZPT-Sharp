@@ -50,7 +50,7 @@ namespace CSF.Zpt.Tales
     {
       if(components == null)
       {
-        throw new ArgumentNullException("components");
+        throw new ArgumentNullException(nameof(components));
       }
 
       _components = new ReadOnlyCollection<PathComponent>(components);
@@ -69,7 +69,7 @@ namespace CSF.Zpt.Tales
     {
       if(pathExpression == null)
       {
-        throw new ArgumentNullException("pathExpression");
+        throw new ArgumentNullException(nameof(pathExpression));
       }
 
       var componentStrings = pathExpression
