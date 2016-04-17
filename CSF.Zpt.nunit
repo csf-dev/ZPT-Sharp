@@ -1,6 +1,6 @@
 ﻿<NUnitProject>
   <Settings activeconfig="Debug" />
-  <Config name="Debug" appbase="bin/Debug" binpathtype="Auto" configfile="Test.CSF.Zpt.dll.config">
+  <Config name="Debug" appbase="Test.CSF.Zpt/bin/Debug" binpathtype="Auto" configfile="Test.CSF.Zpt.dll.config">
     <assembly path="Test.CSF.Zpt.dll" />
   </Config>
 </NUnitProject>
