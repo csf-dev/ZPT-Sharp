@@ -6,9 +6,9 @@ using CSF.Zpt.Rendering;
 namespace CSF.Zpt.Metal
 {
   /// <summary>
-  /// Visitor type which is used to work upon an <see cref="ZptElement"/> and perform METAL-related functionality.
+  /// Implementation of <see cref="IContextVisitor"/> which performs METAL-related functionality.
   /// </summary>
-  public class MetalVisitor : ElementVisitor
+  public class MetalVisitor : ContextVisitorBase
   {
     #region fields
 
@@ -19,12 +19,10 @@ namespace CSF.Zpt.Metal
     #region methods
 
     /// <summary>
-    /// Visit the given element and perform modifications as required.
+    /// Visit the given context and return a collection of the resultant contexts.
     /// </summary>
-    /// <returns>A reference to the element which has been visited.  This might be the input <paramref name="element"/> or a replacement.</returns>
-    /// <param name="element">The element to visit.</param>
-    /// <param name="context">The rendering context provided to the visitor.</param>
-    /// <param name="options">The rendering options to use.</param>
+    /// <returns>Zero or more <see cref="RenderingContext"/> instances, determined by the outcome of this visit.</returns>
+    /// <param name="context">The rendering context to visit.</param>
     public override RenderingContext[] Visit(RenderingContext context)
     {
       if(context == null)
@@ -36,12 +34,16 @@ namespace CSF.Zpt.Metal
     }
 
     /// <summary>
-    /// Visits a root element and all of its child element.
+    /// Visits a rendering context and returns a collection of contexts which represent the result of that visit.
     /// </summary>
-    /// <returns>The root element(s), after the visiting process is complete.</returns>
-    /// <param name="rootElement">Root element.</param>
-    /// <param name="context">Context.</param>
-    /// <param name="options">Options.</param>
+    /// <remarks>
+    /// <para>
+    /// After the base class functionality has finished executing, this visit purges the elements (exposed by their
+    /// contexts) of all METAL attributes.
+    /// </para>
+    /// </remarks>
+    /// <returns>The rendering contexts instances which are exposed after the visiting process is complete.</returns>
+    /// <param name="context">The rendering context to visit.</param>
     public override RenderingContext[] VisitContext(RenderingContext context)
     {
       var output = base.VisitContext(context);

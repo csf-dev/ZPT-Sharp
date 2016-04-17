@@ -23,11 +23,10 @@ namespace CSF.Zpt.Tal
     #region methods
 
     /// <summary>
-    /// Handle the related attribute types which exist upon the element, if any.
+    /// Handle the related attribute types which exist upon the element exposed by the given context, if any.
     /// </summary>
     /// <returns>A response type providing information about the result of this operation.</returns>
-    /// <param name="element">Element.</param>
-    /// <param name="model">Model.</param>
+    /// <param name="context">The rendering context, which exposes a ZPT element.</param>
     public AttributeHandlingResult Handle(RenderingContext context)
     {
       if(context == null)
@@ -169,10 +168,9 @@ namespace CSF.Zpt.Tal
     /// <summary>
     /// Handles the collection of repetitions, adding the data to the model and inserting new elements, as appropriate.
     /// </summary>
-    /// <returns>The collection of ZPT elements which were added to the DOM.</returns>
+    /// <returns>The collection of new rendering contexts which represent new elements added to the DOM.</returns>
     /// <param name="repetitions">The repetitions.</param>
-    /// <param name="model">The model.</param>
-    /// <param name="element">The source ZPT element.</param>
+    /// <param name="context">The source rendering context.</param>
     private RenderingContext[] HandleRepetitions(RepetitionInfo[] repetitions, RenderingContext context)
     {
       if(repetitions.Any())

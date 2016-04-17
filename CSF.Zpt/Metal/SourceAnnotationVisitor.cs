@@ -5,18 +5,17 @@ using CSF.Zpt.Rendering;
 namespace CSF.Zpt.Metal
 {
   /// <summary>
-  /// Element visitor which adds source file annotation.
+  /// Implementation of <see cref="IContextVisitor"/> which add source-file annotation (such as for debugging purposes).
   /// </summary>
-  public class SourceAnnotationVisitor : ElementVisitor
+  public class SourceAnnotationVisitor : ContextVisitorBase
   {
     #region ElementVisitor implementation
 
     /// <summary>
-    /// Visit the given element and perform modifications as required.
+    /// Visit the given context and return a collection of the resultant contexts.
     /// </summary>
-    /// <param name="element">The element to visit.</param>
-    /// <param name="context">The rendering context provided to the visitor.</param>
-    /// <param name="options">The rendering options to use.</param>
+    /// <returns>Zero or more <see cref="RenderingContext"/> instances, determined by the outcome of this visit.</returns>
+    /// <param name="context">The rendering context to visit.</param>
     public override RenderingContext[] Visit(RenderingContext context)
     {
       if(context == null)
@@ -46,17 +45,10 @@ namespace CSF.Zpt.Metal
     }
 
     /// <summary>
-    /// Visits the given element, and then recursively visits all of its child elements.
+    /// Visits a rendering context and returns a collection of contexts which represent the result of that visit.
     /// </summary>
-    /// <remarks>
-    /// <para>
-    /// If the rendering options do not indicate that source annotation is to be added, then this method becomes a no-op.
-    /// </para>
-    /// </remarks>
-    /// <returns>A reference to the element which has been visited.  This might be the input <paramref name="element"/> or a replacement.</returns>
-    /// <param name="element">The element to visit.</param>
-    /// <param name="context">The rendering context provided to the visitor.</param>
-    /// <param name="options">The rendering options to use.</param>
+    /// <returns>The rendering contexts instances which are exposed after the visiting process is complete.</returns>
+    /// <param name="context">The rendering context to visit.</param>
     public override RenderingContext[] VisitRecursively(RenderingContext context)
     {
       return context.RenderingOptions.AddSourceFileAnnotation? base.VisitRecursively(context) : new [] { context };

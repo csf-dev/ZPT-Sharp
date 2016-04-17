@@ -24,7 +24,7 @@ namespace Test.CSF.Zpt.Rendering
       new RenderingContextCustomisation().Customize(fixture);
       new RenderingOptionsCustomisation().Customize(fixture);
 
-      var sut = new Mock<ElementVisitor>() { CallBase = true };
+      var sut = new Mock<ContextVisitorBase>() { CallBase = true };
       sut
         .Setup(x => x.Visit(It.IsAny<RenderingContext>()))
         .Returns((RenderingContext ctx) => new [] { ctx });

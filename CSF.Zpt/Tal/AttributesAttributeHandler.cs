@@ -28,11 +28,10 @@ namespace CSF.Zpt.Tal
     #region methods
 
     /// <summary>
-    /// Handle the related attribute types which exist upon the element, if any.
+    /// Handle the related attribute types which exist upon the element exposed by the given context, if any.
     /// </summary>
     /// <returns>A response type providing information about the result of this operation.</returns>
-    /// <param name="element">Element.</param>
-    /// <param name="model">Model.</param>
+    /// <param name="context">The rendering context, which exposes a ZPT element.</param>
     public AttributeHandlingResult Handle(RenderingContext context)
     {
       if(context == null)

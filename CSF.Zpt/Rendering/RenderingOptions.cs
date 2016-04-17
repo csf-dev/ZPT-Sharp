@@ -10,7 +10,7 @@ namespace CSF.Zpt.Rendering
   {
     #region constants
 
-    private static readonly IElementVisitor[] DefaultVisitors = new IElementVisitor[] {
+    private static readonly IContextVisitor[] DefaultVisitors = new IContextVisitor[] {
       new CSF.Zpt.Metal.MetalVisitor(),
       new CSF.Zpt.Metal.SourceAnnotationVisitor(),
       new CSF.Zpt.Tal.TalVisitor(),
@@ -50,7 +50,7 @@ namespace CSF.Zpt.Rendering
     /// Gets the element visitors to be used when processing ZPT documents.
     /// </summary>
     /// <value>The element visitors.</value>
-    public IElementVisitor[] ElementVisitors
+    public IContextVisitor[] ElementVisitors
     {
       get;
       private set;
@@ -85,7 +85,7 @@ namespace CSF.Zpt.Rendering
     /// <param name="elementVisitors">The element visitors to use.</param>
     /// <param name="contextFactory">The rendering context factory.</param>
     public RenderingOptions(bool addSourceFileAnnotation = false,
-                            IElementVisitor[] elementVisitors = null,
+                            IContextVisitor[] elementVisitors = null,
                             IRenderingContextFactory contextFactory = null)
     {
       this.AddSourceFileAnnotation = addSourceFileAnnotation;

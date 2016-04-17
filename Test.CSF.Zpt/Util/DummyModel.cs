@@ -20,7 +20,7 @@ namespace Test.CSF.Zpt.Util
     }
 
     /// <summary>
-    /// Creates and returns a sibling <see cref="TalesModel"/> instance.
+    /// Creates an instance of <see cref="DummyModel"/>.
     /// </summary>
     /// <returns>The sibling model.</returns>
     protected override Model CreateTypedSiblingModel()

@@ -37,6 +37,10 @@ namespace CSF.Zpt.Tales
       return output;
     }
 
+    /// <summary>
+    /// Creates an instance of <see cref="TalesModel"/>.
+    /// </summary>
+    /// <returns>The sibling model.</returns>
     protected override Model CreateTypedSiblingModel()
     {
       return new TalesModel(this.Parent, this.Root, _registry);

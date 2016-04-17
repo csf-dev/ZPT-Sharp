@@ -20,10 +20,9 @@ namespace CSF.Zpt.Metal
     #region methods
 
     /// <summary>
-    /// Expands the given element, replacing it with a macro if it is required.
+    /// Expands the given context, replacing it with a new context - representing a macro - if it is required.
     /// </summary>
-    /// <param name="original">The original element.</param>
-    /// <param name="model">The METAL object model.</param>
+    /// <param name="context">The context to expand.</param>
     public RenderingContext Expand(RenderingContext context)
     {
       if(context == null)
@@ -36,11 +35,10 @@ namespace CSF.Zpt.Metal
     }
 
     /// <summary>
-    /// Expands the given macro and uses it to replace the original element.
+    /// Expands the given macro and uses it to replace the element exposed by the given context.
     /// </summary>
-    /// <param name="original">The original element.</param>
+    /// <param name="context">The context to expand.</param>
     /// <param name="macro">The macro element to replace the original.</param>
-    /// <param name="model">The METAL object model.</param>
     public RenderingContext ExpandAndReplace(RenderingContext context, ZptElement macro)
     {
       if(context == null)
@@ -116,9 +114,8 @@ namespace CSF.Zpt.Metal
     /// <summary>
     /// Applies METAL macro extension, recursively extending the given macro where applicable.
     /// </summary>
-    /// <returns>The METAL macro element, after all required extension has been applied.</returns>
-    /// <param name="macro">The macro element.</param>
-    /// <param name="model">The METAL object model.</param>
+    /// <returns>A rendering context, exposing the METAL macro element, after all required extension has been applied.</returns>
+    /// <param name="context">The context exposing the macro element to expand.</param>
     private RenderingContext ApplyMacroExtension(RenderingContext context)
     {
       if(context == null)

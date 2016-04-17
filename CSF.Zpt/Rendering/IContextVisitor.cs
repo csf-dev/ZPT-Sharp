@@ -5,7 +5,7 @@ namespace CSF.Zpt.Rendering
   /// <summary>
   /// Interface for a type which can visit a <see cref="RenderingContext"/> instance.
   /// </summary>
-  public interface IElementVisitor
+  public interface IContextVisitor
   {
     /// <summary>
     /// Visits a rendering context and returns a collection of contexts which represent the result of that visit.

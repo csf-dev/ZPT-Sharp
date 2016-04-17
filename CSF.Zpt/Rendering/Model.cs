@@ -184,6 +184,11 @@ namespace CSF.Zpt.Rendering
       return output;
     }
 
+    /// <summary>
+    /// Override in implementor classes to create a strongly-typed instance of <see cref="Model"/>, using the same
+    /// model-type as the implementor class.
+    /// </summary>
+    /// <returns>The sibling model.</returns>
     protected abstract Model CreateTypedSiblingModel();
 
     /// <summary>

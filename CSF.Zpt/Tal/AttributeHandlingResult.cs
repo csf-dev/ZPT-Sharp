@@ -4,16 +4,16 @@ using CSF.Zpt.Rendering;
 namespace CSF.Zpt.Tal
 {
   /// <summary>
-  /// Represents the response from <see cref="IAttributeHandler.Handle(ZptElement,Model)"/>.
+  /// Represents the response from <see cref="IAttributeHandler.Handle(RenderingContext)"/>.
   /// </summary>
   public class AttributeHandlingResult
   {
     #region properties
 
     /// <summary>
-    /// Gets a collection of the elements which are exposed after a handling operation has completed.
+    /// Gets a collection of the rendering contexts which are exposed after a handling operation has completed.
     /// </summary>
-    /// <value>The elements.</value>
+    /// <value>The contexts.</value>
     public RenderingContext[] Contexts
     {
       get;
@@ -21,8 +21,8 @@ namespace CSF.Zpt.Tal
     }
 
     /// <summary>
-    /// Gets a value indicating whether the <see cref="Elements"/> should be handled by further TAL attribute-handlers,
-    /// as if they were the same as the source element.
+    /// Gets a value indicating whether the <see cref="Contexts"/> should be handled by further TAL attribute-handlers,
+    /// as if they were the same as the source context.
     /// </summary>
     /// <value><c>true</c> if handling should continue; otherwise, <c>false</c>.</value>
     public bool ContinueHandling
