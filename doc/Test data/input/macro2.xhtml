@@ -1,0 +1,19 @@
+<?xml version="1.0" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"[]>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:metal="http://xml.zope.org/namespaces/metal">
+<head>
+</head>
+<body>
+<h1>This is a sample header</h1>
+<div metal:define-macro="testExtension"
+     metal:extend-macro="documents/macro1/macros/testMacro">
+  <span metal:fill-slot="slot1">
+    <span metal:define-slot="slot1">
+      Slot 1 content from the inner macro.
+    </span>
+    Additional slot 1 content from the inner macro.
+  </span>
+</div>
+</body>
+</html>

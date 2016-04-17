@@ -1,0 +1,17 @@
+<!-- This is ACME's generic look and feel, which is based on
+PNOME's look and feel. -->
+<html metal:extend-macro="documents/pnome_template/macros/page"
+      metal:define-macro="page"
+      xmlns:metal="http://xml.zope.org/namespaces/metal">
+<head>
+<title metal:fill-slot="title">ACME Look and Feel</title>
+</head>
+<body>
+<div metal:fill-slot="page-footer">
+Copyright 2004 Acme Inc.
+<div metal:define-slot="disclaimer">
+Standard disclaimers apply.
+</div>
+</div>
+</body>
+</html>

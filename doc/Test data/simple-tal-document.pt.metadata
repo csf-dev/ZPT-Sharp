@@ -1,0 +1,4 @@
+<zptMetadata xmlns="http://xml.craigfowler.me.uk/namespaces/ZptMetadata">
+  <documentType>Tal</documentType>
+  <className>CraigFowler.Web.ZPT.ZptDocument</className>
+</zptMetadata>

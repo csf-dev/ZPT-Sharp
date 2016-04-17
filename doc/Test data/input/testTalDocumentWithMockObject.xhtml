@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+          "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      tal:define="obj mock/inner">
+  <head>
+    <title>This is a test TALES document</title>
+  </head>
+  <body>
+    <h1 tal:condition="mock/BooleanValue">This heading will not be displayed</h1>
+    <h1 tal:condition="mock/inner/BooleanValue" class="sample" id="mainHeading">This heading will be displayed</h1>
+    <div id="testNode">
+      <span tal:replace="mock/unambiguous/baz">Sample output</span>
+      Test TAL document with a
+      <span tal:replace="mock/unambiguous/baz">Sample output</span>
+      title
+      <span tal:replace="mock/unambiguous/baz">Sample output</span>
+    </div>
+  </body>
+</html>
