@@ -174,27 +174,13 @@ namespace CSF.Zpt.Tales
     {
       TraversalWrapper output;
 
-      if(this.TryCreateFromStringIndexer<TSource>(out output))
-      {
-        // Intentional no-op, we have the output variable we want
-      }
-      else if(this.TryCreateFromMethod<TSource>(name, out output))
-      {
-        // Intentional no-op, we have the output variable we want
-      }
-      else if(this.TryCreateFromProperty<TSource>(name, out output))
-      {
-        // Intentional no-op, we have the output variable we want
-      }
-      else if(this.TryCreateFromField<TSource>(name, out output))
-      {
-        // Intentional no-op, we have the output variable we want
-      }
-      else if(this.TryCreateFromIntegerIndexer<TSource>(out output))
-      {
-        // Intentional no-op, we have the output variable we want
-      }
-      else
+      bool success = (this.TryCreateFromStringIndexer<TSource>(out output)
+                      || this.TryCreateFromMethod<TSource>(name, out output)
+                      || this.TryCreateFromProperty<TSource>(name, out output)
+                      || this.TryCreateFromField<TSource>(name, out output)
+                      || this.TryCreateFromIntegerIndexer<TSource>(out output));
+
+      if(!success)
       {
         output = null;
       }
