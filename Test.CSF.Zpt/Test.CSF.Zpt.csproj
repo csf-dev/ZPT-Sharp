@@ -46,6 +46,7 @@
     <Reference Include="log4net">
       <HintPath>..\packages\log4net.2.0.3\lib\net40-full\log4net.dll</HintPath>
     </Reference>
+    <Reference Include="System.Configuration" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
@@ -97,6 +98,10 @@
     <Compile Include="Tales\TestSimpleEvaluatorRegistry.cs" />
     <Compile Include="Util\Autofixture\ZptElementCustomisation.cs" />
     <Compile Include="Util\Autofixture\RenderingOptionsCustomisation.cs" />
+    <Compile Include="ZptIntegrationTests.cs" />
+    <Compile Include="IntegrationTestConfiguration.cs" />
+    <Compile Include="IIntegrationTestConfiguration.cs" />
+    <Compile Include="FallbackIntegrationTestConfiguration.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Metal\MetalVisitorIntegrationTests.1.xml" />

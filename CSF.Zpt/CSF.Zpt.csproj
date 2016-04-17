@@ -114,6 +114,8 @@
     <Compile Include="Tales\TalesRenderingContextFactory.cs" />
     <Compile Include="Rendering\IContextVisitor.cs" />
     <Compile Include="Rendering\ContextVisitorBase.cs" />
+    <Compile Include="ZptDocumentFactory.cs" />
+    <Compile Include="IZptDocumentFactory.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
