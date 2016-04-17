@@ -72,4 +72,8 @@ Expression:{1}</value>
     <value>An element must not have both a 'tal:content' and a 'tal:replace' attribute; they are mutually exclusive.
 Element name:{0}</value>
   </data>
+  <data name="UnsupportedDocumentFilenameExtension" xml:space="preserve">
+    <value>The filename of the ZPT document must have a supported extension.
+Filename:{0}</value>
+  </data>
 </root>

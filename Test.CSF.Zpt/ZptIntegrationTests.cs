@@ -86,7 +86,8 @@ namespace Test.CSF.Zpt
       bool output;
 
       ZptDocument document = _documentFactory.Create(sourceDocument);
-      string expectedRendering, actualRendering;
+      string expectedRendering, actualRendering = null;
+      bool exceptionCaught = false;
 
       using(var stream = expectedResultDocument.OpenRead())
       using(var reader = new StreamReader(stream))
@@ -94,13 +95,24 @@ namespace Test.CSF.Zpt
         expectedRendering = reader.ReadToEnd();
       }
 
-      actualRendering = document.Render();
-
-      output = (actualRendering == expectedRendering);
-
-      if(!output)
+      try
       {
-        _logger.ErrorFormat("Unexpected rendering whilst processing expected output: {0}{1}{2}",
+        actualRendering = document.Render();
+        output = (actualRendering == expectedRendering);
+      }
+      catch(Exception ex)
+      {
+        _logger.ErrorFormat("Exception caught whilst processing output file:{0}{1}{2}",
+                            expectedResultDocument.Name,
+                            Environment.NewLine,
+                            ex);
+        output = false;
+        exceptionCaught = true;
+      }
+
+      if(!output && !exceptionCaught)
+      {
+        _logger.ErrorFormat("Unexpected rendering whilst processing expected output:{0}{1}{2}",
                             expectedResultDocument.Name,
                             Environment.NewLine,
                             actualRendering);

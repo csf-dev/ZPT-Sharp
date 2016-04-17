@@ -15,12 +15,12 @@ namespace CSF.Zpt
 
     private static readonly string[]
       HtmlSuffixes = new string[] {
-        "pt",
-        "html",
+        ".pt",
+        ".html",
       },
       XmlSuffixes = new string[] {
-        "xml",
-        "xhtml",
+        ".xml",
+        ".xhtml",
       };
 
     #endregion
@@ -52,8 +52,9 @@ namespace CSF.Zpt
       }
       else
       {
-        // TODO: Write this implementation
-        throw new NotImplementedException();
+        var message = String.Format(Resources.ExceptionMessages.UnsupportedDocumentFilenameExtension,
+                                    sourceFile.FullName);
+        throw new ArgumentException(message, nameof(sourceFile));
       }
 
       return output;

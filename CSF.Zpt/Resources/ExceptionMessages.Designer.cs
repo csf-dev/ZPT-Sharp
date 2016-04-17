@@ -153,5 +153,11 @@ namespace CSF.Zpt.Resources {
                 return ResourceManager.GetString("ContentAndReplaceAttributesCannotCoexist", resourceCulture);
             }
         }
+        
+        internal static string UnsupportedDocumentFilenameExtension {
+            get {
+                return ResourceManager.GetString("UnsupportedDocumentFilenameExtension", resourceCulture);
+            }
+        }
     }
 }
