@@ -138,8 +138,16 @@ namespace CSF.Zpt
         throw new ArgumentNullException(nameof(sourceInfo));
       }
 
+      var settings = new System.Xml.XmlReaderSettings() {
+        XmlResolver = null,
+        DtdProcessing = System.Xml.DtdProcessing.Parse,
+      };
+
       var doc = new System.Xml.XmlDocument();
-      doc.Load(sourceStream);
+      using(var reader = System.Xml.XmlReader.Create(sourceStream, settings))
+      {
+        doc.Load(reader);
+      }
 
       return new ZptXmlDocument(doc, sourceInfo);
     }
