@@ -32,7 +32,7 @@ namespace CSF.Zpt.Metal
         throw new ArgumentNullException("context");
       }
 
-      return new [] { context.CreateSiblingContext(_macroExpander.Expand(context.Element, context.MetalModel)) };
+      return new [] { _macroExpander.Expand(context) };
     }
 
     /// <summary>

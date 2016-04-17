@@ -37,15 +37,9 @@ namespace CSF.Zpt.Tales
       return output;
     }
 
-    /// <summary>
-    /// Creates and returns a sibling <see cref="TalesModel"/> instance.
-    /// </summary>
-    /// <returns>The sibling model.</returns>
-    public override Model CreateSiblingModel()
+    protected override Model CreateTypedSiblingModel()
     {
-      TalesModel output = new TalesModel(this.Parent, this.Root, _registry);
-      output.RepetitionInfo = this.RepetitionInfo;
-      return output;
+      return new TalesModel(this.Parent, this.Root, _registry);
     }
 
     /// <summary>

@@ -15,7 +15,7 @@ namespace CSF.Zpt.Rendering
     private static object _cancelAction = new Object();
 
     private Model _parent, _root;
-    private Dictionary<string,object> _localDefinitions, _globalDefinitions;
+    private Dictionary<string,object> _globalDefinitions;
     private RepetitionInfoCollection _repetitionInfo;
     private Dictionary<ZptElement,ContextualisedRepetitionSummaryWrapper> _cachedRepetitionSummaries;
     private object _error;
@@ -42,9 +42,8 @@ namespace CSF.Zpt.Rendering
     /// <value>The local definitions.</value>
     protected virtual Dictionary<string,object> LocalDefinitions
     {
-      get {
-        return _localDefinitions;
-      }
+      get;
+      private set;
     }
 
     /// <summary>
@@ -175,7 +174,17 @@ namespace CSF.Zpt.Rendering
     /// Creates and returns a sibling <see cref="Model"/> instance.
     /// </summary>
     /// <returns>The sibling model.</returns>
-    public abstract Model CreateSiblingModel();
+    public virtual Model CreateSiblingModel()
+    {
+      var output = this.CreateTypedSiblingModel();
+
+      output.LocalDefinitions = new Dictionary<string, object>(this.LocalDefinitions);
+      output.RepetitionInfo = this.RepetitionInfo;
+
+      return output;
+    }
+
+    protected abstract Model CreateTypedSiblingModel();
 
     /// <summary>
     /// Evaluate the specified expression and return the result.
@@ -287,7 +296,7 @@ namespace CSF.Zpt.Rendering
       _parent = parent;
       _root = root;
 
-      _localDefinitions = new Dictionary<string, object>();
+      this.LocalDefinitions = new Dictionary<string, object>();
       _globalDefinitions = (_root == this)? new Dictionary<string,object>() : null;
       _repetitionInfo = new RepetitionInfoCollection(new RepetitionInfo[0]);
       _cachedRepetitionSummaries = new Dictionary<ZptElement, ContextualisedRepetitionSummaryWrapper>();
@@ -303,7 +312,7 @@ namespace CSF.Zpt.Rendering
       _parent = null;
       _root = this;
 
-      _localDefinitions = new Dictionary<string, object>();
+      this.LocalDefinitions = new Dictionary<string, object>();
       _globalDefinitions = (_root == this)? new Dictionary<string,object>() : null;
       _repetitionInfo = new RepetitionInfoCollection(new RepetitionInfo[0]);
       _cachedRepetitionSummaries = new Dictionary<ZptElement, ContextualisedRepetitionSummaryWrapper>();

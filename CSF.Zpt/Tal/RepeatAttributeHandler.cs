@@ -35,7 +35,7 @@ namespace CSF.Zpt.Tal
         throw new ArgumentNullException("context");
       }
 
-      ZptElement[] output = null;
+      RenderingContext[] output = null;
       var attribute = context.Element.GetTalAttribute(ZptConstants.Tal.RepeatAttribute);
 
       if(attribute != null)
@@ -50,16 +50,16 @@ namespace CSF.Zpt.Tal
         {
           var repetitionInfos = this.GetRepetitions(sequence, context.Element, repeatVariableName);
 
-          output = this.HandleRepetitions(repetitionInfos, context.TalModel, context.Element);
+          output = this.HandleRepetitions(repetitionInfos, context);
         }
       }
 
       if(output == null)
       {
-        output = new [] { context.Element };
+        output = new [] { context };
       }
 
-      return new AttributeHandlingResult(output.Select(x => context.CreateSiblingContext(x)).ToArray(), true);
+      return new AttributeHandlingResult(output, true);
     }
 
     /// <summary>
@@ -173,23 +173,23 @@ namespace CSF.Zpt.Tal
     /// <param name="repetitions">The repetitions.</param>
     /// <param name="model">The model.</param>
     /// <param name="element">The source ZPT element.</param>
-    private ZptElement[] HandleRepetitions(RepetitionInfo[] repetitions, Model model, ZptElement element)
+    private RenderingContext[] HandleRepetitions(RepetitionInfo[] repetitions, RenderingContext context)
     {
       if(repetitions.Any())
       {
-        model.AddRepetitionInfo(repetitions);
-        var parent = element.GetParentElement();
+        context.TalModel.AddRepetitionInfo(repetitions);
+        var parent = context.Element.GetParentElement();
 
         foreach(var item in repetitions)
         {
-          parent.InsertBefore(element, item.AssociatedElement);
+          parent.InsertBefore(context.Element, item.AssociatedElement);
         }
       }
 
-      element.Remove();
+      context.Element.Remove();
 
       return repetitions
-        .Select(x => x.AssociatedElement)
+        .Select(x => context.CreateSiblingContext(x.AssociatedElement))
         .ToArray();
     }
 

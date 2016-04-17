@@ -29,6 +29,7 @@ namespace Test.CSF.Zpt.Metal
     {
       _fixture = new Fixture();
       new DummyModelCustomisation().Customize(_fixture);
+      new RenderingOptionsCustomisation().Customize(_fixture);
 
       _finder = new Mock<MacroFinder>();
       _sut = new MacroExpander(_finder.Object);
@@ -43,46 +44,50 @@ namespace Test.CSF.Zpt.Metal
     public void TestExpand()
     {
       // Arrange
-      var model = _fixture.Create<DummyModel>();
+      var context = new RenderingContext(_fixture.Create<DummyModel>(),
+                                         _fixture.Create<DummyModel>(),
+                                         new Mock<ZptElement>().Object,
+                                         _fixture.Create<RenderingOptions>());
       var attribute = Mock.Of<global::CSF.Zpt.Rendering.ZptAttribute>();
-      var original = new Mock<ZptElement>();
       ZptElement
       macro = Mock.Of<ZptElement>(x => x.GetAttribute(ZptConstants.Metal.Namespace,
                                                       ZptConstants.Metal.DefineMacroAttribute) == attribute
                                        && x.SearchChildrenByAttribute(It.IsAny<ZptNamespace>(),
                                                                       It.IsAny<string>()) == new ZptElement[0]);
-      _finder.Setup(x => x.GetUsedMacro(original.Object, model)).Returns(macro);
-      original
+      _finder.Setup(x => x.GetUsedMacro(context.Element, context.MetalModel)).Returns(macro);
+      Mock.Get(context.Element)
         .Setup(x => x.SearchChildrenByAttribute(It.IsAny<ZptNamespace>(), It.IsAny<string>()))
         .Returns(new ZptElement[0]);
-      original
+      Mock.Get(context.Element)
         .Setup(x => x.ReplaceWith(macro))
         .Returns(macro);
 
       // Act
-      var result = _sut.Expand(original.Object, model);
+      var result = _sut.Expand(context);
 
       // Assert
       Assert.NotNull(result, "Result nullability");
-      Assert.AreSame(macro, result, "Correct result");
-      original.Verify(x => x.ReplaceWith(macro), Times.Once());
+      Assert.AreSame(macro, result.Element, "Correct result");
+      Mock.Get(context.Element).Verify(x => x.ReplaceWith(macro), Times.Once());
     }
 
     [Test]
     public void TestExpandNoUsage()
     {
       // Arrange
-      var model = _fixture.Create<DummyModel>();
-      var original = new Mock<ZptElement>();
-      _finder.Setup(x => x.GetUsedMacro(original.Object, model)).Returns((ZptElement) null);
+      var context = new RenderingContext(_fixture.Create<DummyModel>(),
+                                         _fixture.Create<DummyModel>(),
+                                         new Mock<ZptElement>().Object,
+                                         _fixture.Create<RenderingOptions>());
+      _finder.Setup(x => x.GetUsedMacro(context.Element, context.MetalModel)).Returns((ZptElement) null);
 
       // Act
-      var result = _sut.Expand(original.Object, model);
+      var result = _sut.Expand(context);
 
       // Assert
       Assert.NotNull(result, "Result nullability");
-      Assert.AreSame(original.Object, result, "Correct result");
-      original.Verify(x => x.ReplaceWith(It.IsAny<ZptElement>()), Times.Never());
+      Assert.AreSame(context, result, "Correct result");
+      Mock.Get(context.Element).Verify(x => x.ReplaceWith(It.IsAny<ZptElement>()), Times.Never());
     }
 
     [Test]
@@ -90,28 +95,30 @@ namespace Test.CSF.Zpt.Metal
     public void TestExpandAndReplace()
     {
       // Arrange
-      var model = _fixture.Create<DummyModel>();
+      var context = new RenderingContext(_fixture.Create<DummyModel>(),
+                                         _fixture.Create<DummyModel>(),
+                                         new Mock<ZptElement>().Object,
+                                         _fixture.Create<RenderingOptions>());
       var attribute = Mock.Of<global::CSF.Zpt.Rendering.ZptAttribute>();
-      var original = new Mock<ZptElement>();
       ZptElement
         macro = Mock.Of<ZptElement>(x => x.GetAttribute(ZptConstants.Metal.Namespace,
                                                         ZptConstants.Metal.DefineMacroAttribute) == attribute
                                          && x.SearchChildrenByAttribute(It.IsAny<ZptNamespace>(),
                                                                         It.IsAny<string>()) == new ZptElement[0]);
-      original
+      Mock.Get(context.Element)
         .Setup(x => x.SearchChildrenByAttribute(It.IsAny<ZptNamespace>(), It.IsAny<string>()))
         .Returns(new ZptElement[0]);
-      original
+      Mock.Get(context.Element)
         .Setup(x => x.ReplaceWith(macro))
         .Returns(macro);
 
       // Act
-      var result = _sut.ExpandAndReplace(original.Object, macro, model);
+      var result = _sut.ExpandAndReplace(context, macro);
 
       // Assert
       Assert.NotNull(result, "Result nullability");
-      Assert.AreSame(macro, result, "Correct result");
-      original.Verify(x => x.ReplaceWith(macro), Times.Once());
+      Assert.AreSame(macro, result.Element, "Correct result");
+      Mock.Get(context.Element).Verify(x => x.ReplaceWith(macro), Times.Once());
     }
 
     #endregion

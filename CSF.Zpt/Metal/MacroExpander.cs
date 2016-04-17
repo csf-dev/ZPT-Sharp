@@ -24,19 +24,15 @@ namespace CSF.Zpt.Metal
     /// </summary>
     /// <param name="original">The original element.</param>
     /// <param name="model">The METAL object model.</param>
-    public ZptElement Expand(ZptElement original, Model model)
+    public RenderingContext Expand(RenderingContext context)
     {
-      if(original == null)
+      if(context == null)
       {
-        throw new ArgumentNullException("original");
-      }
-      if(model == null)
-      {
-        throw new ArgumentNullException("model");
+        throw new ArgumentNullException("context");
       }
 
-      var macro = _macroFinder.GetUsedMacro(original, model);
-      return (macro != null)? this.ExpandAndReplace(original, macro, model) : original;
+      var macro = _macroFinder.GetUsedMacro(context.Element, context.MetalModel);
+      return (macro != null)? this.ExpandAndReplace(context, macro) : context;
     }
 
     /// <summary>
@@ -45,15 +41,11 @@ namespace CSF.Zpt.Metal
     /// <param name="original">The original element.</param>
     /// <param name="macro">The macro element to replace the original.</param>
     /// <param name="model">The METAL object model.</param>
-    public ZptElement ExpandAndReplace(ZptElement original, ZptElement macro, Model model)
+    public RenderingContext ExpandAndReplace(RenderingContext context, ZptElement macro)
     {
-      if(model == null)
+      if(context == null)
       {
-        throw new ArgumentNullException("model");
-      }
-      if(original == null)
-      {
-        throw new ArgumentNullException("original");
+        throw new ArgumentNullException("context");
       }
       if(macro == null)
       {
@@ -67,11 +59,13 @@ namespace CSF.Zpt.Metal
         throw new ArgumentException(message, "macro");
       }
 
-      macro = this.ApplyMacroExtension(macro, model);
-      macro = original.ReplaceWith(macro);
-      this.FillSlots(original, macro);
+      var macroContext = context.CreateSiblingContext(macro);
 
-      return macro;
+      macroContext = this.ApplyMacroExtension(macroContext);
+      var extendedMacro = context.Element.ReplaceWith(macroContext.Element);
+      this.FillSlots(context.Element, extendedMacro);
+
+      return context.CreateSiblingContext(extendedMacro);
     }
 
     /// <summary>
@@ -125,19 +119,15 @@ namespace CSF.Zpt.Metal
     /// <returns>The METAL macro element, after all required extension has been applied.</returns>
     /// <param name="macro">The macro element.</param>
     /// <param name="model">The METAL object model.</param>
-    private ZptElement ApplyMacroExtension(ZptElement macro, Model model)
+    private RenderingContext ApplyMacroExtension(RenderingContext context)
     {
-      if(macro == null)
+      if(context == null)
       {
-        throw new ArgumentNullException("macro");
-      }
-      if(model == null)
-      {
-        throw new ArgumentNullException("model");
+        throw new ArgumentNullException("context");
       }
 
-      var extended = _macroFinder.GetExtendedMacro(macro, model);
-      return (extended != null)? this.ExpandAndReplace(macro, extended, model) : macro;
+      var extended = _macroFinder.GetExtendedMacro(context.Element, context.MetalModel);
+      return (extended != null)? this.ExpandAndReplace(context, extended) : context;
     }
 
     #endregion
