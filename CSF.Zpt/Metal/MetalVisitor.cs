@@ -25,20 +25,14 @@ namespace CSF.Zpt.Metal
     /// <param name="element">The element to visit.</param>
     /// <param name="context">The rendering context provided to the visitor.</param>
     /// <param name="options">The rendering options to use.</param>
-    public override ZptElement[] Visit(ZptElement element,
-                                       RenderingContext context,
-                                       RenderingOptions options)
+    public override RenderingContext[] Visit(RenderingContext context)
     {
-      if(element == null)
-      {
-        throw new ArgumentNullException("element");
-      }
       if(context == null)
       {
         throw new ArgumentNullException("context");
       }
 
-      return new [] { _macroExpander.Expand(element, context.MetalModel) };
+      return new [] { context.CreateSiblingContext(_macroExpander.Expand(context.Element, context.MetalModel)) };
     }
 
     /// <summary>
@@ -48,15 +42,13 @@ namespace CSF.Zpt.Metal
     /// <param name="rootElement">Root element.</param>
     /// <param name="context">Context.</param>
     /// <param name="options">Options.</param>
-    public override ZptElement[] VisitRoot(ZptElement rootElement,
-                                           RenderingContext context,
-                                           RenderingOptions options)
+    public override RenderingContext[] VisitRoot(RenderingContext context)
     {
-      var output = base.VisitRoot(rootElement, context, options);
+      var output = base.VisitRoot(context);
 
       foreach(var item in output)
       {
-        item.PurgeMetalAttributes();
+        item.Element.PurgeMetalAttributes();
       }
 
       return output;

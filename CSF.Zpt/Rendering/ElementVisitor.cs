@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 
 namespace CSF.Zpt.Rendering
 {
@@ -16,9 +17,7 @@ namespace CSF.Zpt.Rendering
     /// <param name="element">The element to visit.</param>
     /// <param name="context">The rendering context provided to the visitor.</param>
     /// <param name="options">The rendering options to use.</param>
-    public abstract ZptElement[] Visit(ZptElement element,
-                                       RenderingContext context,
-                                       RenderingOptions options);
+    public abstract RenderingContext[] Visit(RenderingContext context);
 
     /// <summary>
     /// Visits the given element, and then recursively visits all of its child elements.
@@ -27,28 +26,19 @@ namespace CSF.Zpt.Rendering
     /// <param name="element">The element to visit.</param>
     /// <param name="context">The rendering context provided to the visitor.</param>
     /// <param name="options">The rendering options to use.</param>
-    public virtual ZptElement[] VisitRecursively(ZptElement element,
-                                                 RenderingContext context,
-                                                 RenderingOptions options)
+    public virtual RenderingContext[] VisitRecursively(RenderingContext context)
     {
-      if(element == null)
-      {
-        throw new ArgumentNullException("element");
-      }
       if(context == null)
       {
         throw new ArgumentNullException("context");
       }
 
-      var output = this.Visit(element, context, options);
+      var output = this.Visit(context);
 
-      foreach(var item in output)
+      var children = output.SelectMany(x => x.GetChildContexts());
+      foreach(var child in children)
       {
-        var children = item.GetChildElements();
-        foreach(var child in children)
-        {
-          this.VisitRecursively(child, context.CreateChildContext(), options);
-        }
+        this.VisitRecursively(child);
       }
 
       return output;
@@ -61,11 +51,9 @@ namespace CSF.Zpt.Rendering
     /// <param name="rootElement">Root element.</param>
     /// <param name="context">Context.</param>
     /// <param name="options">Options.</param>
-    public virtual ZptElement[] VisitRoot(ZptElement rootElement,
-                                          RenderingContext context,
-                                          RenderingOptions options)
+    public virtual RenderingContext[] VisitRoot(RenderingContext context)
     {
-      return this.VisitRecursively(rootElement, context, options);
+      return this.VisitRecursively(context);
     }
 
     #endregion

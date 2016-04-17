@@ -37,13 +37,22 @@ namespace CSF.Zpt.Tales
     /// <summary>
     /// Create a context instance.
     /// </summary>
-    public RenderingContext Create()
+    public RenderingContext Create(ZptElement element, RenderingOptions options)
     {
+      if(element == null)
+      {
+        throw new ArgumentNullException(nameof(element));
+      }
+      if(options == null)
+      {
+        throw new ArgumentNullException(nameof(options));
+      }
+
       Model
         talModel = new TalesModel(this.EvaluatorRegistry, this.KeywordOptions),
         metalModel = new TalesModel(this.EvaluatorRegistry, this.KeywordOptions);
 
-      return new RenderingContext(metalModel, talModel);
+      return new RenderingContext(metalModel, talModel, element, options);
     }
 
     #endregion

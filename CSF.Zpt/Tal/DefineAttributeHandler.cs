@@ -34,18 +34,14 @@ namespace CSF.Zpt.Tal
     /// <returns>A response type providing information about the result of this operation.</returns>
     /// <param name="element">Element.</param>
     /// <param name="model">Model.</param>
-    public AttributeHandlingResult Handle(ZptElement element, Model model)
+    public AttributeHandlingResult Handle(RenderingContext context)
     {
-      if(element == null)
+      if(context == null)
       {
-        throw new ArgumentNullException("element");
-      }
-      if(model == null)
-      {
-        throw new ArgumentNullException("model");
+        throw new ArgumentNullException("context");
       }
 
-      var attrib = element.GetTalAttribute(ZptConstants.Tal.DefineAttribute);
+      var attrib = context.Element.GetTalAttribute(ZptConstants.Tal.DefineAttribute);
 
       if(attrib != null)
       {
@@ -61,7 +57,7 @@ namespace CSF.Zpt.Tal
                                          ZptConstants.Tal.DefineAttribute,
                                          attrib.Value);
           throw new ParserException(message) {
-            SourceElementName = element.Name,
+            SourceElementName = context.Element.Name,
             SourceAttributeName = attrib.Name,
             SourceAttributeValue = attrib.Value
           };
@@ -80,7 +76,7 @@ namespace CSF.Zpt.Tal
 
           try
           {
-            result = model.Evaluate(unescapedExpression, element);
+            result = context.TalModel.Evaluate(unescapedExpression, context.Element);
           }
           catch(Exception ex)
           {
@@ -97,17 +93,17 @@ namespace CSF.Zpt.Tal
           {
             if(item.Scope == GLOBAL_SCOPE)
             {
-              model.AddGlobal(item.Name, result.Value);
+              context.TalModel.AddGlobal(item.Name, result.Value);
             }
             else
             {
-              model.AddLocal(item.Name, result.Value);
+              context.TalModel.AddLocal(item.Name, result.Value);
             }
           }
         }
       }
 
-      return new AttributeHandlingResult(new [] { element }, true);
+      return new AttributeHandlingResult(new [] { context }, true);
     }
 
     /// <summary>

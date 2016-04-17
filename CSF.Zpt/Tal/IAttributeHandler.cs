@@ -14,7 +14,7 @@ namespace CSF.Zpt.Tal
     /// <returns>A response type providing information about the result of this operation.</returns>
     /// <param name="element">Element.</param>
     /// <param name="model">Model.</param>
-    AttributeHandlingResult Handle(ZptElement element, Model model);
+    AttributeHandlingResult Handle(RenderingContext context);
   }
 }
 

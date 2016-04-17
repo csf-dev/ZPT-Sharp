@@ -7,6 +7,7 @@ using System.Linq;
 using CSF.Zpt.Metal;
 using Ploeh.AutoFixture;
 using Test.CSF.Zpt.Util.Autofixture;
+using Test.CSF.Zpt.Util;
 
 namespace Test.CSF.Zpt.Metal
 {
@@ -61,9 +62,13 @@ namespace Test.CSF.Zpt.Metal
 
       var options = new RenderingOptions(addSourceFileAnnotation: true);
       var sut = new SourceAnnotationVisitor();
+      var ctx = new RenderingContext(fixture.Create<DummyModel>(),
+                                     fixture.Create<DummyModel>(),
+                                     elements[0].Object,
+                                     options);
 
       // Act
-      sut.VisitRecursively(elements[0].Object, fixture.Create<RenderingContext>(), options);
+      sut.VisitRecursively(ctx);
 
       // Assert
       elements[0].Verify(x => x.AddCommentBefore("One, Element 1"), Times.Once());

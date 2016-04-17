@@ -26,35 +26,29 @@ namespace CSF.Zpt.Tal
     /// <param name="element">The element to visit.</param>
     /// <param name="context">The rendering context provided to the visitor.</param>
     /// <param name="options">The rendering options to use.</param>
-    public override ZptElement[] Visit(ZptElement element,
-                                       RenderingContext context,
-                                       RenderingOptions options)
+    public override RenderingContext[] Visit(RenderingContext context)
     {
-      if(element == null)
-      {
-        throw new ArgumentNullException("element");
-      }
       if(context == null)
       {
         throw new ArgumentNullException("context");
       }
 
-      IEnumerable<ZptElement>
-        output = new [] { element },
-        newlyExposedElements = new ZptElement[0];
+      IEnumerable<RenderingContext>
+        output = new [] { context },
+        newlyExposedElements = new RenderingContext[0];
 
       foreach(var handler in _handlers)
       {
         var handlingResult = (from ele in output
-                              let processedBatch = handler.Handle(ele, context.TalModel)
+                              let processedBatch = handler.Handle(ele)
                               where processedBatch.ContinueHandling
                               select processedBatch);
 
-        newlyExposedElements = newlyExposedElements.Union(handlingResult.SelectMany(x => x.NewlyExposedElements));
-        output = handlingResult.Where(x => x.ContinueHandling).SelectMany(x => x.Elements);
+        newlyExposedElements = newlyExposedElements.Union(handlingResult.SelectMany(x => x.NewlyExposedContexts));
+        output = handlingResult.Where(x => x.ContinueHandling).SelectMany(x => x.Contexts);
       }
 
-      output = output.Union(newlyExposedElements.SelectMany(x => this.Visit(x, context, options)));
+      output = output.Union(newlyExposedElements.SelectMany(x => this.Visit(x)));
 
       return output.ToArray();
     }
@@ -66,24 +60,22 @@ namespace CSF.Zpt.Tal
     /// <param name="element">The element to visit.</param>
     /// <param name="context">The rendering context provided to the visitor.</param>
     /// <param name="options">The rendering options to use.</param>
-    public override ZptElement[] VisitRecursively(ZptElement element,
-                                                  RenderingContext context,
-                                                  RenderingOptions options)
+    public override RenderingContext[] VisitRecursively(RenderingContext context)
     {
-      ZptElement[] output;
+      RenderingContext[] output;
 
       try
       {
-        output = base.VisitRecursively(element, context, options);
+        output = base.VisitRecursively(context);
       }
       catch(RenderingException ex)
       {
-        output = new [] { element };
+        output = new [] { context };
 
-        if(element.GetTalAttribute(ZptConstants.Tal.OnErrorAttribute) != null)
+        if(context.Element.GetTalAttribute(ZptConstants.Tal.OnErrorAttribute) != null)
         {
           context.TalModel.AddError(ex);
-          _errorHandler.Handle(element, context.TalModel);
+          _errorHandler.Handle(context);
         }
         else
         {
@@ -101,15 +93,13 @@ namespace CSF.Zpt.Tal
     /// <param name="rootElement">Root element.</param>
     /// <param name="context">Context.</param>
     /// <param name="options">Options.</param>
-    public override ZptElement[] VisitRoot(ZptElement rootElement,
-                                           RenderingContext context,
-                                           RenderingOptions options)
+    public override RenderingContext[] VisitRoot(RenderingContext context)
     {
-      var output = base.VisitRoot(rootElement, context, options);
+      var output = base.VisitRoot(context);
 
       foreach(var item in output)
       {
-        item.PurgeTalAttributes();
+        item.Element.PurgeTalAttributes();
       }
 
       return output;

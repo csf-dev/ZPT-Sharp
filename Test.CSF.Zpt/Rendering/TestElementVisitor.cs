@@ -26,42 +26,23 @@ namespace Test.CSF.Zpt.Rendering
 
       var sut = new Mock<ElementVisitor>() { CallBase = true };
       sut
-        .Setup(x => x.Visit(It.IsAny<ZptElement>(), It.IsAny<RenderingContext>(), It.IsAny<RenderingOptions>()))
-        .Returns((ZptElement ele, RenderingContext con, RenderingOptions opts) => new [] { ele });
+        .Setup(x => x.Visit(It.IsAny<RenderingContext>()))
+        .Returns((RenderingContext ctx) => new [] { ctx });
 
-      var contexts = Enumerable.Range(0,2)
+      var contexts = Enumerable.Range(0,3)
         .Select(x => fixture.Create<RenderingContext>())
         .ToArray();
       var topContext = contexts[0];
-      var secondLevelContext = contexts[1];
-      Mock.Get(topContext).Setup(x => x.CreateChildContext()).Returns(secondLevelContext);
-
-      var elements = Enumerable.Range(0,3)
-        .Select(x => new Mock<ZptElement>())
-        .ToArray();
-      var topElement = elements.First();
-      var secondLevelElements = elements
-        .Skip(1)
-        .Take(2)
-        .ToArray();
-      topElement
-        .Setup(x => x.GetChildElements())
-        .Returns(secondLevelElements.Select(x => x.Object).ToArray());
-      foreach(var item in secondLevelElements)
-      {
-        item.Setup(x => x.GetChildElements()).Returns(new ZptElement[0]);
-      }
+      var secondLevelContexts = contexts.Skip(1).ToArray();
+      Mock.Get(topContext).Setup(x => x.GetChildContexts()).Returns(secondLevelContexts);
 
       // Act
-      sut.Object.VisitRecursively(topElement.Object, topContext, fixture.Create<RenderingOptions>());
+      sut.Object.VisitRecursively(topContext);
 
       // Assert
-      sut.Verify(x => x.Visit(topElement.Object, topContext, It.IsAny<RenderingOptions>()),
-                 Times.Once());
-      sut.Verify(x => x.Visit(secondLevelElements[0].Object, secondLevelContext, It.IsAny<RenderingOptions>()),
-                 Times.Once());
-      sut.Verify(x => x.Visit(secondLevelElements[1].Object, secondLevelContext, It.IsAny<RenderingOptions>()),
-                 Times.Once());
+      sut.Verify(x => x.Visit(topContext), Times.Once());
+      sut.Verify(x => x.Visit(contexts[1]), Times.Once());
+      sut.Verify(x => x.Visit(contexts[2]), Times.Once());
     }
 
     #endregion

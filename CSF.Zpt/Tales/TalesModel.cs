@@ -38,6 +38,17 @@ namespace CSF.Zpt.Tales
     }
 
     /// <summary>
+    /// Creates and returns a sibling <see cref="TalesModel"/> instance.
+    /// </summary>
+    /// <returns>The sibling model.</returns>
+    public override Model CreateSiblingModel()
+    {
+      TalesModel output = new TalesModel(this.Parent, this.Root, _registry);
+      output.RepetitionInfo = this.RepetitionInfo;
+      return output;
+    }
+
+    /// <summary>
     /// Evaluate the specified expression and return the result.
     /// </summary>
     /// <param name="expression">The expression to evaluate.</param>

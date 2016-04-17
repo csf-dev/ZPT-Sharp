@@ -28,43 +28,39 @@ namespace CSF.Zpt.Tal
     /// <returns>A response type providing information about the result of this operation.</returns>
     /// <param name="element">Element.</param>
     /// <param name="model">Model.</param>
-    public AttributeHandlingResult Handle(ZptElement element, Model model)
+    public AttributeHandlingResult Handle(RenderingContext context)
     {
-      if(element == null)
+      if(context == null)
       {
-        throw new ArgumentNullException("element");
-      }
-      if(model == null)
-      {
-        throw new ArgumentNullException("model");
+        throw new ArgumentNullException("context");
       }
 
       AttributeHandlingResult output;
-      var attrib = element.GetTalAttribute(ZptConstants.Tal.OnErrorAttribute);
+      var attrib = context.Element.GetTalAttribute(ZptConstants.Tal.OnErrorAttribute);
 
       if(attrib != null)
       {
         string mode;
-        var expressionResult = this.GetAttributeResult(attrib, element, model, out mode);
+        var expressionResult = this.GetAttributeResult(attrib, context.Element, context.TalModel, out mode);
         if(expressionResult.CancelsAction)
         {
-          output = new AttributeHandlingResult(new [] { element }, true);
+          output = new AttributeHandlingResult(new [] { context }, true);
         }
         else if(expressionResult.Value == null)
         {
-          element.RemoveAllChildren();
-          output = new AttributeHandlingResult(new [] { element }, true);
+          context.Element.RemoveAllChildren();
+          output = new AttributeHandlingResult(new [] { context }, true);
         }
         else
         {
-          element.ReplaceChildrenWith(expressionResult.GetValue<string>(),
-                                      mode == STRUCTURE_INDICATOR);
-          output = new AttributeHandlingResult(new [] { element }, true);
+          context.Element.ReplaceChildrenWith(expressionResult.GetValue<string>(),
+                                              mode == STRUCTURE_INDICATOR);
+          output = new AttributeHandlingResult(new [] { context }, true);
         }
       }
       else
       {
-        output = new AttributeHandlingResult(new [] { element }, true);
+        output = new AttributeHandlingResult(new [] { context }, true);
       }
 
       return output;

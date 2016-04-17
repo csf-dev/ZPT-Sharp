@@ -17,27 +17,23 @@ namespace CSF.Zpt.Tal
     /// <returns>A response type providing information about the result of this operation.</returns>
     /// <param name="element">Element.</param>
     /// <param name="model">Model.</param>
-    public AttributeHandlingResult Handle(ZptElement element, Model model)
+    public AttributeHandlingResult Handle(RenderingContext context)
     {
-      if(element == null)
+      if(context == null)
       {
-        throw new ArgumentNullException("element");
-      }
-      if(model == null)
-      {
-        throw new ArgumentNullException("model");
+        throw new ArgumentNullException("context");
       }
 
-      AttributeHandlingResult output = new AttributeHandlingResult(new [] { element }, true);
+      AttributeHandlingResult output = new AttributeHandlingResult(new [] { context }, true);
 
-      var attribute = element.GetTalAttribute(ZptConstants.Tal.ConditionAttribute);
+      var attribute = context.Element.GetTalAttribute(ZptConstants.Tal.ConditionAttribute);
       if(attribute != null)
       {
         ExpressionResult result;
 
         try
         {
-          result = model.Evaluate(attribute.Value, element);
+          result = context.TalModel.Evaluate(attribute.Value, context.Element);
         }
         catch(Exception ex)
         {
@@ -53,8 +49,8 @@ namespace CSF.Zpt.Tal
         var removeElement = result.CancelsAction? false : !result.GetValueAsBoolean();
         if(removeElement)
         {
-          element.Remove();
-          output = new AttributeHandlingResult(new ZptElement[0], false);
+          context.Element.Remove();
+          output = new AttributeHandlingResult(new RenderingContext[0], false);
         }
       }
 

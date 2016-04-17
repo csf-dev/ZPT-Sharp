@@ -14,7 +14,7 @@ namespace CSF.Zpt.Tal
     /// Gets a collection of the elements which are exposed after a handling operation has completed.
     /// </summary>
     /// <value>The elements.</value>
-    public ZptElement[] Elements
+    public RenderingContext[] Contexts
     {
       get;
       private set;
@@ -36,7 +36,7 @@ namespace CSF.Zpt.Tal
     /// elements must be processed from scratch and not included in further processing.
     /// </summary>
     /// <value>The newly-exposed elements.</value>
-    public ZptElement[] NewlyExposedElements
+    public RenderingContext[] NewlyExposedContexts
     {
       get;
       private set;
@@ -52,18 +52,18 @@ namespace CSF.Zpt.Tal
     /// <param name="elements">The elements which remain after processing.</param>
     /// <param name="continueHandling">If set to <c>true</c> continue handling.</param>
     /// <param name="newlyExposedElements">An optional collection of elements which are newly-exposed but must be processed from scratch.</param>
-    public AttributeHandlingResult(ZptElement[] elements,
+    public AttributeHandlingResult(RenderingContext[] elements,
                                    bool continueHandling,
-                                   ZptElement[] newlyExposedElements = null)
+                                   RenderingContext[] newlyExposedElements = null)
     {
       if(elements == null)
       {
         throw new ArgumentNullException("elements");
       }
 
-      this.Elements = elements;
+      this.Contexts = elements;
       this.ContinueHandling = continueHandling;
-      this.NewlyExposedElements = newlyExposedElements?? new ZptElement[0];
+      this.NewlyExposedContexts = newlyExposedElements?? new RenderingContext[0];
     }
 
     #endregion

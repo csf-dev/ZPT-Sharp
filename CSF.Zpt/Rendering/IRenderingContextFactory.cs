@@ -10,7 +10,7 @@ namespace CSF.Zpt.Rendering
     /// <summary>
     /// Create a context instance.
     /// </summary>
-    RenderingContext Create();
+    RenderingContext Create(ZptElement element, RenderingOptions options);
   }
 }
 

@@ -1,5 +1,6 @@
 ﻿using System;
 using CSF.Zpt.Rendering;
+using System.Linq;
 
 namespace CSF.Zpt.Tal
 {
@@ -16,44 +17,44 @@ namespace CSF.Zpt.Tal
     /// <returns>A response type providing information about the result of this operation.</returns>
     /// <param name="element">Element.</param>
     /// <param name="model">Model.</param>
-    public AttributeHandlingResult Handle(ZptElement element, Model model)
+    public AttributeHandlingResult Handle(RenderingContext context)
     {
-      if(element == null)
+      if(context == null)
       {
-        throw new ArgumentNullException("element");
-      }
-      if(model == null)
-      {
-        throw new ArgumentNullException("model");
+        throw new ArgumentNullException("context");
       }
 
       AttributeHandlingResult output;
-      var attrib = element.GetTalAttribute(ZptConstants.Tal.OmitTagAttribute);
+      var attrib = context.Element.GetTalAttribute(ZptConstants.Tal.OmitTagAttribute);
 
-      if(element.IsInNamespace(ZptConstants.Metal.Namespace)
-         || element.IsInNamespace(ZptConstants.Tal.Namespace))
+      if(context.Element.IsInNamespace(ZptConstants.Metal.Namespace)
+         || context.Element.IsInNamespace(ZptConstants.Tal.Namespace))
       {
         // Special case, for all elements in the "special" namespaces, we treat them with the omit-tag functionality
-        var children = element.Omit();
-        output = new AttributeHandlingResult(new ZptElement[0], false, children);
+        var children = context.Element.Omit();
+        output = new AttributeHandlingResult(new RenderingContext[0],
+                                             false,
+                                             children.Select(x => context.CreateSiblingContext(x)).ToArray());
       }
       else if(attrib != null)
       {
         // Normal handling by detecting an attribute and using its value
-        var result = model.Evaluate(attrib.Value, element);
+        var result = context.TalModel.Evaluate(attrib.Value, context.Element);
         if(!result.CancelsAction && result.GetValueAsBoolean())
         {
-          var children = element.Omit();
-          output = new AttributeHandlingResult(new ZptElement[0], false, children);
+          var children = context.Element.Omit();
+          output = new AttributeHandlingResult(new RenderingContext[0],
+                                               false,
+                                               children.Select(x => context.CreateSiblingContext(x)).ToArray());
         }
         else
         {
-          output = new AttributeHandlingResult(new [] { element }, true);
+          output = new AttributeHandlingResult(new [] { context }, true);
         }
       }
       else
       {
-        output = new AttributeHandlingResult(new [] { element }, true);
+        output = new AttributeHandlingResult(new [] { context }, true);
       }
 
       return output;

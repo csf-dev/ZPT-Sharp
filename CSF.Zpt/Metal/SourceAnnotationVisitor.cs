@@ -17,27 +17,21 @@ namespace CSF.Zpt.Metal
     /// <param name="element">The element to visit.</param>
     /// <param name="context">The rendering context provided to the visitor.</param>
     /// <param name="options">The rendering options to use.</param>
-    public override ZptElement[] Visit(ZptElement element,
-                                       RenderingContext context,
-                                       RenderingOptions options)
+    public override RenderingContext[] Visit(RenderingContext context)
     {
-      if(element == null)
-      {
-        throw new ArgumentNullException("element");
-      }
       if(context == null)
       {
         throw new ArgumentNullException("context");
       }
 
-      if(options.AddSourceFileAnnotation)
+      if(context.RenderingOptions.AddSourceFileAnnotation)
       {
-        if(element.IsRoot)
+        if(context.Element.IsRoot)
         {
-          this.AddAnnotationComment(element);
+          this.AddAnnotationComment(context.Element);
         }
 
-        var childrenInDifferentFiles = element
+        var childrenInDifferentFiles = context.Element
           .GetChildElements()
           .Where(x => x.IsImported)
           .ToArray();
@@ -48,7 +42,7 @@ namespace CSF.Zpt.Metal
         }
       }
 
-      return new[] { element };
+      return new[] { context };
     }
 
     /// <summary>
@@ -63,11 +57,9 @@ namespace CSF.Zpt.Metal
     /// <param name="element">The element to visit.</param>
     /// <param name="context">The rendering context provided to the visitor.</param>
     /// <param name="options">The rendering options to use.</param>
-    public override ZptElement[] VisitRecursively(ZptElement element,
-                                                  RenderingContext context,
-                                                  RenderingOptions options)
+    public override RenderingContext[] VisitRecursively(RenderingContext context)
     {
-      return options.AddSourceFileAnnotation? base.VisitRecursively(element, context, options) : new [] { element };
+      return context.RenderingOptions.AddSourceFileAnnotation? base.VisitRecursively(context) : new [] { context };
     }
 
     #endregion

@@ -28,42 +28,38 @@ namespace CSF.Zpt.Tal
     /// <returns>A response type providing information about the result of this operation.</returns>
     /// <param name="element">Element.</param>
     /// <param name="model">Model.</param>
-    public AttributeHandlingResult Handle(ZptElement element, Model model)
+    public AttributeHandlingResult Handle(RenderingContext context)
     {
-      if(element == null)
+      if(context == null)
       {
-        throw new ArgumentNullException("element");
-      }
-      if(model == null)
-      {
-        throw new ArgumentNullException("model");
+        throw new ArgumentNullException("context");
       }
 
       ZptElement[] output = null;
-      var attribute = element.GetTalAttribute(ZptConstants.Tal.RepeatAttribute);
+      var attribute = context.Element.GetTalAttribute(ZptConstants.Tal.RepeatAttribute);
 
       if(attribute != null)
       {
         string repeatVariableName, expression;
 
-        this.ParseAttributeValue(attribute, out repeatVariableName, out expression, element);
+        this.ParseAttributeValue(attribute, out repeatVariableName, out expression, context.Element);
 
-        var sequence = this.GetSequence(expression, model, element);
+        var sequence = this.GetSequence(expression, context.TalModel, context.Element);
 
         if(sequence != null)
         {
-          var repetitionInfos = this.GetRepetitions(sequence, element, repeatVariableName);
+          var repetitionInfos = this.GetRepetitions(sequence, context.Element, repeatVariableName);
 
-          output = this.HandleRepetitions(repetitionInfos, model, element);
+          output = this.HandleRepetitions(repetitionInfos, context.TalModel, context.Element);
         }
       }
 
       if(output == null)
       {
-        output = new [] { element };
+        output = new [] { context.Element };
       }
 
-      return new AttributeHandlingResult(output, true);
+      return new AttributeHandlingResult(output.Select(x => context.CreateSiblingContext(x)).ToArray(), true);
     }
 
     /// <summary>

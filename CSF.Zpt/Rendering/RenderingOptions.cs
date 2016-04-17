@@ -17,6 +17,16 @@ namespace CSF.Zpt.Rendering
     #region properties
 
     /// <summary>
+    /// Gets the factory implementation with which to create <see cref="RenderingContext"/> instances.
+    /// </summary>
+    /// <value>The rendering context factory.</value>
+    protected IRenderingContextFactory ContextFactory
+    {
+      get;
+      private set;
+    }
+
+    /// <summary>
     /// Gets or sets a value indicating whether source file annotations should be added to the rendered output.
     /// </summary>
     /// <value><c>true</c> if source file annotations are to be added; otherwise, <c>false</c>.</value>
@@ -36,16 +46,6 @@ namespace CSF.Zpt.Rendering
       private set;
     }
 
-    /// <summary>
-    /// Gets the factory implementation with which to create <see cref="RenderingContext"/> instances.
-    /// </summary>
-    /// <value>The rendering context factory.</value>
-    public IRenderingContextFactory ContextFactory
-    {
-      get;
-      private set;
-    }
-
     #endregion
 
     #region methods
@@ -54,9 +54,14 @@ namespace CSF.Zpt.Rendering
     /// Creates a new root <see cref="RenderingContext"/> instance.
     /// </summary>
     /// <returns>The root rendering context.</returns>
-    public RenderingContext CreateRootContext()
+    public RenderingContext CreateRootContext(ZptElement element)
     {
-      return this.ContextFactory.Create();
+      if(element == null)
+      {
+        throw new ArgumentNullException("element");
+      }
+
+      return this.ContextFactory.Create(element, this);
     }
 
     #endregion

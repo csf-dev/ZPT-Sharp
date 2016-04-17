@@ -17,6 +17,7 @@ namespace Test.CSF.Zpt.Tal
 
     private IFixture _autofixture;
     private Mock<ZptElement> _element;
+    private RenderingContext _context;
     private DummyModel _model;
 
     private DefineAttributeHandler _sut;
@@ -33,6 +34,7 @@ namespace Test.CSF.Zpt.Tal
 
       _model = _autofixture.Create<DummyModel>();
       _element = new Mock<ZptElement>() { CallBase = true };
+      _context = Mock.Of<RenderingContext>(x => x.Element == _element.Object && x.TalModel == _model);
 
       _sut = new DefineAttributeHandler();
     }
@@ -51,12 +53,12 @@ namespace Test.CSF.Zpt.Tal
         .Returns((ZptAttribute) null);
 
       // Act
-      var result = _sut.Handle(_element.Object, _model);
+      var result = _sut.Handle(_context);
 
       // Assert
       Assert.NotNull(result, "Result nullability");
-      Assert.AreEqual(1, result.Elements.Length, "Count of results");
-      Assert.AreSame(_element.Object, result.Elements[0], "Correct element returned");
+      Assert.AreEqual(1, result.Contexts.Length, "Count of results");
+      Assert.AreSame(_context, result.Contexts[0], "Correct element returned");
       Mock.Get(_model).Verify(x => x.AddLocal(It.IsAny<string>(), It.IsAny<object>()), Times.Never());
       Mock.Get(_model).Verify(x => x.AddGlobal(It.IsAny<string>(), It.IsAny<object>()), Times.Never());
     }
@@ -86,12 +88,12 @@ namespace Test.CSF.Zpt.Tal
         .Returns(new ExpressionResult(obj));
 
       // Act
-      var result = _sut.Handle(_element.Object, _model);
+      var result = _sut.Handle(_context);
 
       // Assert
       Assert.NotNull(result, "Result nullability");
-      Assert.AreEqual(1, result.Elements.Length, "Count of results");
-      Assert.AreSame(_element.Object, result.Elements[0], "Correct element returned");
+      Assert.AreEqual(1, result.Contexts.Length, "Count of results");
+      Assert.AreSame(_context, result.Contexts[0], "Correct element returned");
       Mock.Get(_model).Verify(x => x.Evaluate(expression, _element.Object), Times.Once());
       Mock.Get(_model).Verify(x => x.AddLocal(variableName, obj),
                               expectGlobal? Times.Never() : Times.Once());
@@ -124,12 +126,12 @@ namespace Test.CSF.Zpt.Tal
       }
 
       // Act
-      var result = _sut.Handle(_element.Object, _model);
+      var result = _sut.Handle(_context);
 
       // Assert
       Assert.NotNull(result, "Result nullability");
-      Assert.AreEqual(1, result.Elements.Length, "Count of results");
-      Assert.AreSame(_element.Object, result.Elements[0], "Correct element returned");
+      Assert.AreEqual(1, result.Contexts.Length, "Count of results");
+      Assert.AreSame(_context, result.Contexts[0], "Correct element returned");
       foreach(var item in expressionsAndResults)
       {
         Mock.Get(_model).Verify(x => x.Evaluate(item.Expression, _element.Object), Times.Once());
@@ -165,12 +167,12 @@ namespace Test.CSF.Zpt.Tal
       }
 
       // Act
-      var result = _sut.Handle(_element.Object, _model);
+      var result = _sut.Handle(_context);
 
       // Assert
       Assert.NotNull(result, "Result nullability");
-      Assert.AreEqual(1, result.Elements.Length, "Count of results");
-      Assert.AreSame(_element.Object, result.Elements[0], "Correct element returned");
+      Assert.AreEqual(1, result.Contexts.Length, "Count of results");
+      Assert.AreSame(_context, result.Contexts[0], "Correct element returned");
       foreach(var item in expressionsAndResults)
       {
         Mock.Get(_model).Verify(x => x.Evaluate(item.Expression, _element.Object), Times.Once());
@@ -207,7 +209,7 @@ namespace Test.CSF.Zpt.Tal
         .Returns(new ExpressionResult(_autofixture.Create<object>()));
 
       // Act
-      _sut.Handle(_element.Object, _model);
+      _sut.Handle(_context);
 
       // Assert (by observing an exception)
     }

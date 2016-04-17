@@ -1,5 +1,6 @@
 ﻿using System;
 using CSF.Zpt.Rendering;
+using System.Linq;
 
 namespace CSF.Zpt.Rendering
 {
@@ -11,6 +12,8 @@ namespace CSF.Zpt.Rendering
     #region fields
 
     private Model _metalContext, _talContext;
+    private ZptElement _element;
+    private RenderingOptions _renderingOptions;
 
     #endregion
 
@@ -38,17 +41,63 @@ namespace CSF.Zpt.Rendering
       }
     }
 
+    /// <summary>
+    /// Gets the ZPT element.
+    /// </summary>
+    /// <value>The element.</value>
+    public virtual ZptElement Element
+    {
+      get {
+        return _element;
+      }
+    }
+
+    /// <summary>
+    /// Gets the rendering options.
+    /// </summary>
+    /// <value>The rendering options.</value>
+    public virtual RenderingOptions RenderingOptions
+    {
+      get {
+        return _renderingOptions;
+      }
+    }
+
     #endregion
 
     #region methods
 
     /// <summary>
-    /// Creates and returns a new child rendering context.
+    /// Creates and returns a collection of child contexts, from the current instance.
     /// </summary>
-    /// <returns>The child context.</returns>
-    public virtual RenderingContext CreateChildContext()
+    /// <returns>The child contexts.</returns>
+    public virtual RenderingContext[] GetChildContexts()
     {
-      return new RenderingContext(this.MetalModel.CreateChildModel(), this.TalModel.CreateChildModel());
+      return this.Element
+        .GetChildElements()
+        .Select(x => new RenderingContext(this.MetalModel.CreateChildModel(),
+                                          this.TalModel.CreateChildModel(),
+                                          x,
+                                          this.RenderingOptions))
+        .ToArray();
+    }
+
+    /// <summary>
+    /// Creates and returns a new sibling rendering context.
+    /// </summary>
+    /// <param name="element">The ZPT element for which the new context is to be created.</param>
+    /// <returns>The sibling context.</returns>
+    public virtual RenderingContext CreateSiblingContext(ZptElement element)
+    {
+      if(element == null)
+      {
+        throw new ArgumentNullException("element");
+      }
+
+      return new RenderingContext(this.MetalModel.CreateSiblingModel(),
+                                  this.TalModel.CreateSiblingModel(),
+                                  element,
+                                  this.RenderingOptions);
     }
 
     #endregion
@@ -56,11 +105,21 @@ namespace CSF.Zpt.Rendering
     #region constructors
 
     /// <summary>
+    /// Parameterless constructor for testing use only.
+    /// </summary>
+    protected RenderingContext() {}
+
+    /// <summary>
     /// Initializes a new instance of the <see cref="CSF.Zpt.Rendering.RenderingContext"/> class.
     /// </summary>
     /// <param name="metalContext">The METAL context.</param>
     /// <param name="talContext">The TAL context.</param>
-    public RenderingContext(Model metalContext, Model talContext)
+    /// <param name="element">The ZPT element for which this context is created.</param>
+    /// <param name="options">The rendering options.</param>
+    public RenderingContext(Model metalContext,
+                            Model talContext,
+                            ZptElement element,
+                            RenderingOptions options)
     {
       if(metalContext == null)
       {
@@ -70,9 +129,19 @@ namespace CSF.Zpt.Rendering
       {
         throw new ArgumentNullException("talContext");
       }
+      if(element == null)
+      {
+        throw new ArgumentNullException("element");
+      }
+      if(options == null)
+      {
+        throw new ArgumentNullException("options");
+      }
 
       _metalContext = metalContext;
       _talContext = talContext;
+      _element = element;
+      _renderingOptions = options;
     }
 
     #endregion

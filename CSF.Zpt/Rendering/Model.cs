@@ -172,6 +172,12 @@ namespace CSF.Zpt.Rendering
     public abstract Model CreateChildModel();
 
     /// <summary>
+    /// Creates and returns a sibling <see cref="Model"/> instance.
+    /// </summary>
+    /// <returns>The sibling model.</returns>
+    public abstract Model CreateSiblingModel();
+
+    /// <summary>
     /// Evaluate the specified expression and return the result.
     /// </summary>
     /// <param name="expression">The expression to evaluate.</param>

@@ -59,11 +59,11 @@ namespace CSF.Zpt
       }
 
       var output = this.GetRootElement().Clone();
-      var context = options.CreateRootContext();
+      var context = options.CreateRootContext(output);
 
       foreach(var visitor in options.ElementVisitors)
       {
-        visitor.VisitRecursively(output, context, options);
+        visitor.VisitRecursively(context);
       }
 
       return output;

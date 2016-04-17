@@ -2,6 +2,7 @@
 using System.Text.RegularExpressions;
 using CSF.Zpt.Rendering;
 using CSF.Zpt.Resources;
+using System.Linq;
 
 namespace CSF.Zpt.Tal
 {
@@ -29,63 +30,59 @@ namespace CSF.Zpt.Tal
     /// <returns>A response type providing information about the result of this operation.</returns>
     /// <param name="element">Element.</param>
     /// <param name="model">Model.</param>
-    public AttributeHandlingResult Handle(ZptElement element, Model model)
+    public AttributeHandlingResult Handle(RenderingContext context)
     {
-      if(element == null)
+      if(context == null)
       {
-        throw new ArgumentNullException("element");
-      }
-      if(model == null)
-      {
-        throw new ArgumentNullException("model");
+        throw new ArgumentNullException("context");
       }
 
       AttributeHandlingResult output;
       string attribName;
 
-      var attrib = this.GetAttribute(element, out attribName);
+      var attrib = this.GetAttribute(context.Element, out attribName);
 
       if(attrib != null)
       {
         string mode;
-        var expressionResult = this.GetAttributeResult(attrib, element, model, out mode);
+        var expressionResult = this.GetAttributeResult(attrib, context.Element, context.TalModel, out mode);
 
         if(expressionResult.CancelsAction)
         {
-          output = new AttributeHandlingResult(new [] { element }, true);
+          output = new AttributeHandlingResult(new [] { context }, true);
         }
         else if(expressionResult.Value == null)
         {
           if(attribName == ZptConstants.Tal.ContentAttribute)
           {
-            element.RemoveAllChildren();
-            output = new AttributeHandlingResult(new [] { element }, true);
+            context.Element.RemoveAllChildren();
+            output = new AttributeHandlingResult(new [] { context }, true);
           }
           else
           {
-            element.Remove();
-            output = new AttributeHandlingResult(new ZptElement[0], false);
+            context.Element.Remove();
+            output = new AttributeHandlingResult(new RenderingContext[0], false);
           }
         }
         else
         {
           if(attribName == ZptConstants.Tal.ContentAttribute)
           {
-            element.ReplaceChildrenWith(expressionResult.GetValue<string>(),
+            context.Element.ReplaceChildrenWith(expressionResult.GetValue<string>(),
                                         mode == STRUCTURE_INDICATOR);
-            output = new AttributeHandlingResult(new [] { element }, true);
+            output = new AttributeHandlingResult(new [] { context }, true);
           }
           else
           {
-            var elements = element.ReplaceWith(expressionResult.GetValue<string>(),
+            var elements = context.Element.ReplaceWith(expressionResult.GetValue<string>(),
                                                mode == STRUCTURE_INDICATOR);
-            output = new AttributeHandlingResult(elements, false);
+            output = new AttributeHandlingResult(elements.Select(x => context.CreateSiblingContext(x)).ToArray(), false);
           }
         }
       }
       else
       {
-        output = new AttributeHandlingResult(new [] { element }, true);
+        output = new AttributeHandlingResult(new [] { context }, true);
       }
 
       return output;

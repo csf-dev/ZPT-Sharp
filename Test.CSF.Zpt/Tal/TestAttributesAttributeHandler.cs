@@ -17,6 +17,7 @@ namespace Test.CSF.Zpt.Tal
 
     private IFixture _autofixture;
     private Mock<ZptElement> _element;
+    private RenderingContext _context;
     private DummyModel _model;
 
     private AttributesAttributeHandler _sut;
@@ -33,6 +34,7 @@ namespace Test.CSF.Zpt.Tal
 
       _model = _autofixture.Create<DummyModel>();
       _element = new Mock<ZptElement>() { CallBase = true };
+      _context = Mock.Of<RenderingContext>(x => x.Element == _element.Object && x.TalModel == _model);
 
       _sut = new AttributesAttributeHandler();
     }
@@ -51,12 +53,12 @@ namespace Test.CSF.Zpt.Tal
         .Returns((ZptAttribute) null);
 
       // Act
-      var result = _sut.Handle(_element.Object, _model);
+      var result = _sut.Handle(_context);
 
       // Assert
       Assert.NotNull(result, "Result nullability");
-      Assert.AreEqual(1, result.Elements.Length, "Count of results");
-      Assert.AreSame(_element.Object, result.Elements[0], "Correct element returned");
+      Assert.AreEqual(1, result.Contexts.Length, "Count of results");
+      Assert.AreSame(_context, result.Contexts[0], "Correct element returned");
       _element.Verify(x => x.SetAttribute(It.IsAny<ZptNamespace>(), It.IsAny<string>() ,It.IsAny<string>()),
                       Times.Never());
       _element.Verify(x => x.SetAttribute(It.IsAny<string>(), It.IsAny<string>()),
@@ -89,12 +91,12 @@ namespace Test.CSF.Zpt.Tal
         .Returns(new ExpressionResult(expressionResult));
 
       // Act
-      var result = _sut.Handle(_element.Object, _model);
+      var result = _sut.Handle(_context);
 
       // Assert
       Assert.NotNull(result, "Result nullability");
-      Assert.AreEqual(1, result.Elements.Length, "Count of results");
-      Assert.AreSame(_element.Object, result.Elements[0], "Correct element returned");
+      Assert.AreEqual(1, result.Contexts.Length, "Count of results");
+      Assert.AreSame(_context, result.Contexts[0], "Correct element returned");
       Mock.Get(_model).Verify(x => x.Evaluate(expectedExpression, _element.Object), Times.Once());
       _element.Verify(x => x.SetAttribute(It.Is<ZptNamespace>(ns => ns.Prefix == expectedPrefix), expectedName, expressionResult), Times.Once());
       _element.Verify(x => x.RemoveAttribute(It.IsAny<ZptNamespace>(), It.IsAny<string>()),
@@ -119,12 +121,12 @@ namespace Test.CSF.Zpt.Tal
         .Returns(new ExpressionResult(null));
 
       // Act
-      var result = _sut.Handle(_element.Object, _model);
+      var result = _sut.Handle(_context);
 
       // Assert
       Assert.NotNull(result, "Result nullability");
-      Assert.AreEqual(1, result.Elements.Length, "Count of results");
-      Assert.AreSame(_element.Object, result.Elements[0], "Correct element returned");
+      Assert.AreEqual(1, result.Contexts.Length, "Count of results");
+      Assert.AreSame(_context, result.Contexts[0], "Correct element returned");
       Mock.Get(_model).Verify(x => x.Evaluate(expression, _element.Object), Times.Once());
       _element.Verify(x => x.RemoveAttribute(It.Is<ZptNamespace>(ns => ns.Prefix == prefix), name), Times.Once());
       _element.Verify(x => x.SetAttribute(It.IsAny<ZptNamespace>(), It.IsAny<string>(), It.IsAny<string>()),
@@ -149,12 +151,12 @@ namespace Test.CSF.Zpt.Tal
         .Returns(new ExpressionResult(Model.CancelAction));
 
       // Act
-      var result = _sut.Handle(_element.Object, _model);
+      var result = _sut.Handle(_context);
 
       // Assert
       Assert.NotNull(result, "Result nullability");
-      Assert.AreEqual(1, result.Elements.Length, "Count of results");
-      Assert.AreSame(_element.Object, result.Elements[0], "Correct element returned");
+      Assert.AreEqual(1, result.Contexts.Length, "Count of results");
+      Assert.AreSame(_context, result.Contexts[0], "Correct element returned");
       Mock.Get(_model).Verify(x => x.Evaluate(expression, _element.Object), Times.Once());
       _element.Verify(x => x.SetAttribute(It.IsAny<ZptNamespace>(), It.IsAny<string>(), It.IsAny<string>()),
                       Times.Never());
@@ -200,12 +202,12 @@ namespace Test.CSF.Zpt.Tal
         .Returns(new ExpressionResult(expressionFourResult));
 
       // Act
-      var result = _sut.Handle(_element.Object, _model);
+      var result = _sut.Handle(_context);
 
       // Assert
       Assert.NotNull(result, "Result nullability");
-      Assert.AreEqual(1, result.Elements.Length, "Count of results");
-      Assert.AreSame(_element.Object, result.Elements[0], "Correct element returned");
+      Assert.AreEqual(1, result.Contexts.Length, "Count of results");
+      Assert.AreSame(_context, result.Contexts[0], "Correct element returned");
       _element.Verify(x => x.SetAttribute(It.Is<ZptNamespace>(ns => ns.Prefix == null), "one", (string) expressionOneResult), Times.Once());
       _element.Verify(x => x.RemoveAttribute(It.Is<ZptNamespace>(ns => ns.Prefix == null), "two"), Times.Once());
       _element.Verify(x => x.SetAttribute(It.Is<ZptNamespace>(ns => ns.Prefix == null), "three", It.IsAny<string>()), Times.Never());

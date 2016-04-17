@@ -76,11 +76,13 @@ namespace Test.CSF.Zpt.Metal
       _model.AddLocal("macro-base", macroBase);
 
       var sut = new MetalVisitor();
+      var ctx = new RenderingContext(_model,
+                                     _fixture.Create<DummyModel>(),
+                                     document,
+                                     _fixture.Create<RenderingOptions>());
 
       // Act
-      sut.VisitRoot(document,
-                    new RenderingContext(_model, _fixture.Create<DummyModel>()),
-                    _fixture.Create<RenderingOptions>());
+      sut.VisitRoot(ctx);
       var result = document.ToString();
 
       // Assert

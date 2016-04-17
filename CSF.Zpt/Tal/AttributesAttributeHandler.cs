@@ -33,18 +33,14 @@ namespace CSF.Zpt.Tal
     /// <returns>A response type providing information about the result of this operation.</returns>
     /// <param name="element">Element.</param>
     /// <param name="model">Model.</param>
-    public AttributeHandlingResult Handle(ZptElement element, Model model)
+    public AttributeHandlingResult Handle(RenderingContext context)
     {
-      if(element == null)
+      if(context == null)
       {
-        throw new ArgumentNullException("element");
-      }
-      if(model == null)
-      {
-        throw new ArgumentNullException("model");
+        throw new ArgumentNullException("context");
       }
 
-      var attrib = element.GetTalAttribute(ZptConstants.Tal.AttributesAttribute);
+      var attrib = context.Element.GetTalAttribute(ZptConstants.Tal.AttributesAttribute);
 
       if(attrib != null)
       {
@@ -60,7 +56,7 @@ namespace CSF.Zpt.Tal
                                          ZptConstants.Tal.AttributesAttribute,
                                          attrib.Value);
           throw new ParserException(message) {
-            SourceElementName = element.Name,
+            SourceElementName = context.Element.Name,
             SourceAttributeName = attrib.Name,
             SourceAttributeValue = attrib.Value
           };
@@ -79,7 +75,7 @@ namespace CSF.Zpt.Tal
 
           try
           {
-            result = model.Evaluate(unescapedExpression, element);
+            result = context.TalModel.Evaluate(unescapedExpression, context.Element);
           }
           catch(Exception ex)
           {
@@ -99,29 +95,29 @@ namespace CSF.Zpt.Tal
             {
               if(String.IsNullOrEmpty(item.Prefix))
               {
-                element.RemoveAttribute(item.AttributeName);
+                context.Element.RemoveAttribute(item.AttributeName);
               }
               else
               {
-                element.RemoveAttribute(nspace, item.AttributeName);
+                context.Element.RemoveAttribute(nspace, item.AttributeName);
               }
             }
             else
             {
               if(String.IsNullOrEmpty(item.Prefix))
               {
-                element.SetAttribute(item.AttributeName, result.Value.ToString());
+                context.Element.SetAttribute(item.AttributeName, result.Value.ToString());
               }
               else
               {
-                element.SetAttribute(nspace, item.AttributeName, result.Value.ToString());
+                context.Element.SetAttribute(nspace, item.AttributeName, result.Value.ToString());
               }
             }
           }
         }
       }
 
-      return new AttributeHandlingResult(new [] { element }, true);
+      return new AttributeHandlingResult(new [] { context }, true);
     }
 
     /// <summary>
