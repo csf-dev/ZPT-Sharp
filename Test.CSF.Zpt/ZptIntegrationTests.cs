@@ -86,7 +86,7 @@ namespace Test.CSF.Zpt
     {
       bool output;
 
-      ZptDocument document = _documentFactory.Create(sourceDocument);
+      ZptDocument document = _documentFactory.CreateHtml(sourceDocument);
       string expectedRendering, actualRendering = null;
       bool exceptionCaught = false;
 

@@ -106,9 +106,10 @@ namespace CSF.Zpt.Tales
       if(name == CONTEXTS)
       {
         output = true;
+        var originalAttrs = new Lazy<OriginalAttributeValuesCollection>(() => element.GetOriginalAttributes());
         result = new BuiltinContextsContainer(this.GetKeywordOptions(),
                                               this.GetRepetitionSummaries(element),
-                                              element.GetOriginalAttributes());
+                                              originalAttrs);
       }
       else
       {
@@ -117,9 +118,10 @@ namespace CSF.Zpt.Tales
 
       if(!output)
       {
+        var originalAttrs = new Lazy<OriginalAttributeValuesCollection>(() => element.GetOriginalAttributes());
         var contexts = new BuiltinContextsContainer(this.GetKeywordOptions(),
                                                     this.GetRepetitionSummaries(element),
-                                                    element.GetOriginalAttributes());
+                                                    originalAttrs);
         output = contexts.HandleTalesPath(name, out result);
       }
 

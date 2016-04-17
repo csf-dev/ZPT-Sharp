@@ -24,7 +24,7 @@ namespace CSF.Zpt.Tales
     private object _nothing, _default;
     private TemplateKeywordOptions _options;
     private ContextualisedRepetitionSummaryWrapper _repeat;
-    private OriginalAttributeValuesCollection _attrs;
+    private Lazy<OriginalAttributeValuesCollection> _attrs;
 
     #endregion
 
@@ -81,7 +81,7 @@ namespace CSF.Zpt.Tales
     public OriginalAttributeValuesCollection Attrs
     {
       get {
-        return _attrs;
+        return _attrs.Value;
       }
     }
 
@@ -147,7 +147,7 @@ namespace CSF.Zpt.Tales
     /// <param name="attrs">Attrs.</param>
     public BuiltinContextsContainer(TemplateKeywordOptions options,
                                     ContextualisedRepetitionSummaryWrapper repeat,
-                                    OriginalAttributeValuesCollection attrs)
+                                    Lazy<OriginalAttributeValuesCollection> attrs)
     {
       if(options == null)
       {
