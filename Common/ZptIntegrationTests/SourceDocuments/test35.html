@@ -1,10 +1,7 @@
-<body xmlns:tal="http://xml.zope.org/namespaces/tal"
-      xmlns:metal="http://xml.zope.org/namespaces/metal">
 <span metal:define-macro="page" tal:omit-tag="">
   <h1 metal:define-slot="name" tal:omit-tag="" />
 </span>
 
-<span metal:use-macro="template/macros/page">
+<span metal:use-macro="page">
   <h1 metal:fill-slot="name" tal:content="macroname">name</h1>
 </span>
-</body>

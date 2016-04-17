@@ -1,6 +1,5 @@
 <!-- ACME's document_list uses the ACME look and feel -->
-<html metal:use-macro="documents/acme_template/macros/page"
-      xmlns:metal="http://xml.zope.org/namespaces/metal">
+<html metal:use-macro="acme_macros_page">
 <head>
 <title metal:fill-slot="title">Acme Document List</title>
 <style metal:fill-slot="local-styles" type="text/css">

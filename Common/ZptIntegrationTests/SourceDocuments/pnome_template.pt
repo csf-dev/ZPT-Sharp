@@ -1,6 +1,6 @@
 <!-- fakeplone is a fictional user interface created by a large,
 well-focused team of graphics designers -->
-<html metal:define-macro="page" xmlns:metal="http://xml.zope.org/namespaces/metal">
+<html metal:define-macro="page">
 <head>
 <title metal:define-slot="title">Title here</title>
 <metal:block define-slot="local-styles">

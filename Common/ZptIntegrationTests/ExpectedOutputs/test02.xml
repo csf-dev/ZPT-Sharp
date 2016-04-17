@@ -1,4 +1,4 @@
-<?xml version="1.0"?>
+<?xml version="1.0" ?>
 <biztalk_1 xmlns="urn:schemas-biztalk-org:biztalk:biztalk_1">
 
 <foo:header xmlns:foo="whomping-willow" plain="guido" quote="&quot;" apostrophe="'" both="&quot;'" lt="&lt;" gt="&gt;" amp="&amp;" foo="">
@@ -37,12 +37,12 @@
 		<Country>CANADA</Country>
 	</InvoiceTo>
 	<ShipTo>
-		<Name />
+		<Name/>
 		<AddressLine>ATTN: PAULINE DEGRASSI</AddressLine>		
-		<City />
-		<PostCode />
-		<State />
-		<Country />
+		<City/>
+		<PostCode/>
+		<State/>
+		<Country/>
 	</ShipTo>
 	<DetailLines>
 		<DetailLine>
