@@ -67,6 +67,8 @@ namespace Test.CSF.Zpt
         }
       }
 
+      _logger.InfoFormat("{0} integration test cases processed", filePairsToTest.Count());
+
       // Assert
       Assert.IsEmpty(failedTests,
                      "Out of {0} integration tests, {1} failed. See the log file for more info.",
