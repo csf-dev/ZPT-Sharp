@@ -6,6 +6,7 @@ using CSF.Configuration;
 using System.Linq;
 using System.Collections.Generic;
 using CSF.Zpt.Tales;
+using CSF.Zpt.Rendering;
 
 namespace Test.CSF.Zpt
 {
@@ -98,8 +99,7 @@ namespace Test.CSF.Zpt
 
       try
       {
-        var options = new global::CSF.Zpt.Rendering.RenderingOptions();
-        options.InitialModelState.MetalLocalDefinitions.Add("documents", new FilesystemDirectory(_sourcePath));
+        var options = new RenderingOptions(initialState: this.CreateTestEnvironment());
 
         actualRendering = document.Render(options);
         output = (actualRendering == expectedRendering);
@@ -121,6 +121,44 @@ namespace Test.CSF.Zpt
                             Environment.NewLine,
                             actualRendering);
       }
+
+      return output;
+    }
+
+    private InitialModelState CreateTestEnvironment()
+    {
+      var output = new InitialModelState();
+
+      // The location of the other ZPT documents
+      output.MetalLocalDefinitions.Add("documents", new FilesystemDirectory(_sourcePath));
+
+      // The 'content' keyword option
+      var content = new NamedObjectWrapper();
+      content["args"] = "yes";
+      output.TalKeywordOptions.Add("content", content);
+
+      // The 'batch' keyword option
+      var batch = new NamedObjectWrapper();
+      batch["previous_sequence"] = false;
+      batch["previous_sequence_start_item"] = "yes";
+      output.TalKeywordOptions.Add("batch", batch);
+
+      // The 'laf' keyword option
+      var laf = new TemplateFile(new ZptDocumentFactory().CreateHtml(_sourcePath.GetFiles("teeshop1.html").Single()));
+      output.MetalKeywordOptions.Add("laf", laf);
+
+      // The 'getProducts' option
+      var getProducts = new [] {
+        new NamedObjectWrapper(),
+        new NamedObjectWrapper(),
+      };
+      getProducts[0]["description"] = "This is the tee for those who LOVE Zope. Show your heart on your tee.";
+      getProducts[0]["image"] = "smlatee.jpg";
+      getProducts[0]["price"] = 12.99m;
+      getProducts[1]["description"] = "This is the tee for Jim Fulton. He's the Zope Pope!";
+      getProducts[1]["image"] = "smpztee.jpg";
+      getProducts[1]["price"] = 11.99m;
+      output.TalKeywordOptions.Add("getProducts", getProducts);
 
       return output;
     }
