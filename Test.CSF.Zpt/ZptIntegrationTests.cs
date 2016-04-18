@@ -160,7 +160,7 @@ namespace Test.CSF.Zpt
       batch["next_sequence_start_item"] = "six";
       batch["next_sequence_end_item"] = "ten";
       var items = Enumerable
-        .Range(0, 5)
+        .Range(1, 5)
         .Select(x => {
           var item = new NamedObjectWrapper();
           item["arg"] = x.ToString();
