@@ -126,6 +126,7 @@
     <Compile Include="Metal\MetalMacroCollection.cs" />
     <Compile Include="Rendering\InitialModelState.cs" />
     <Compile Include="Tales\NamedObjectWrapper.cs" />
+    <Compile Include="Tales\EnumerableObjectWrapperWithNamedItems.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

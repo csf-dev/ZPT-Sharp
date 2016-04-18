@@ -11,6 +11,8 @@ namespace CSF.Zpt.Tales
     #region fields
 
     private Dictionary<string,object> _objects;
+    private string _stringRepresentation;
+    private bool _hasStringRepresentation;
     private object _syncRoot;
 
     #endregion
@@ -94,7 +96,7 @@ namespace CSF.Zpt.Tales
     /// <returns><c>true</c> if the path traversal was a success; <c>false</c> otherwise.</returns>
     /// <param name="pathFragment">The path fragment.</param>
     /// <param name="result">Exposes the result if the traversal was a success</param>
-    public bool HandleTalesPath(string pathFragment, out object result)
+    public virtual bool HandleTalesPath(string pathFragment, out object result)
     {
       if(pathFragment == null)
       {
@@ -110,6 +112,25 @@ namespace CSF.Zpt.Tales
       }
 
       return output;
+    }
+
+    /// <summary>
+    /// Sets the string representation.
+    /// </summary>
+    /// <param name="name">Name.</param>
+    public virtual void SetStringRepresentation(string name)
+    {
+      _stringRepresentation = name;
+      _hasStringRepresentation = true;
+    }
+
+    /// <summary>
+    /// Returns a <see cref="System.String"/> that represents the current <see cref="CSF.Zpt.Tales.NamedObjectWrapper"/>.
+    /// </summary>
+    /// <returns>A <see cref="System.String"/> that represents the current <see cref="CSF.Zpt.Tales.NamedObjectWrapper"/>.</returns>
+    public override string ToString()
+    {
+      return _hasStringRepresentation? _stringRepresentation : base.ToString();
     }
 
     #endregion
