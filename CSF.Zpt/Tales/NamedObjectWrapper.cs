@@ -17,6 +17,10 @@ namespace CSF.Zpt.Tales
 
     #region properties
 
+    /// <summary>
+    /// Gets or sets the item with the specified key.
+    /// </summary>
+    /// <param name="key">Key.</param>
     public object this [string key]
     {
       get {
