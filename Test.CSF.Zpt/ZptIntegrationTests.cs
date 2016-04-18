@@ -52,20 +52,15 @@ namespace Test.CSF.Zpt
     public void RunIntegrationTests()
     {
       // Arrange
-      var filePairsToTest = (from expectedFile in _expectedPath.GetFiles()
-                             let filename = expectedFile.Name
-                             join sourceFile in _sourcePath.GetFiles() on
-                              filename equals sourceFile.Name
-                             select new { Source = sourceFile, Expected = expectedFile });
-
+      var filePairsToTest = this.GetFilePairsToTest();
       var failedTests = new List<FileInfo>();
 
       // Act
       foreach(var pair in filePairsToTest)
       {
-        if(!PerformTestRun(pair.Source, pair.Expected))
+        if(!PerformTestRun(pair.Item1, pair.Item2))
         {
-          failedTests.Add(pair.Expected);
+          failedTests.Add(pair.Item2);
         }
       }
 
@@ -76,6 +71,26 @@ namespace Test.CSF.Zpt
                   "Out of {0} integration tests, {1} failed. See the log file for more info.",
                   filePairsToTest.Count(),
                   failedTests.Count());
+    }
+
+    [TestCase("dtml3.html")]
+    [Explicit("This test is covered by RunIntegrationTests - this method is for running them one at a time though.")]
+    public void TestSingleIntegrationTest(string inputFileName)
+    {
+      // Arrange
+      var allFilePairs = this.GetFilePairsToTest();
+      var filePairToTest = allFilePairs.SingleOrDefault(x => x.Item2.Name == inputFileName);
+
+      if(filePairToTest == null)
+      {
+        Assert.Fail("The input parameter must identify a valid expected output document by filename.");
+      }
+
+      // Act
+      var result = this.PerformTestRun(filePairToTest.Item1, filePairToTest.Item2);
+
+      // Assert
+      Assert.IsTrue(result, "Test must result in a successful rendering");
     }
 
     #endregion
@@ -141,6 +156,9 @@ namespace Test.CSF.Zpt
       var batch = new NamedObjectWrapper();
       batch["previous_sequence"] = false;
       batch["previous_sequence_start_item"] = "yes";
+      batch["next_sequence"] = true;
+      batch["next_sequence_start_item"] = "six";
+      batch["next_sequence_end_item"] = "ten";
       output.TalKeywordOptions.Add("batch", batch);
 
       // The 'laf' keyword option
@@ -161,6 +179,15 @@ namespace Test.CSF.Zpt
       output.TalKeywordOptions.Add("getProducts", getProducts);
 
       return output;
+    }
+
+    private IEnumerable<Tuple<FileInfo,FileInfo>> GetFilePairsToTest()
+    {
+      return (from expectedFile in _expectedPath.GetFiles()
+              let filename = expectedFile.Name
+              join sourceFile in _sourcePath.GetFiles() on
+                filename equals sourceFile.Name
+              select new Tuple<FileInfo,FileInfo>(sourceFile, expectedFile));
     }
 
     #endregion
