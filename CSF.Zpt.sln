@@ -8,9 +8,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{B99672
 		Common\CommonAssemblyInfo.cs = Common\CommonAssemblyInfo.cs
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSF", "CSF\CSF\CSF.csproj", "{E563D7BC-1AB1-4AFB-8533-51315437C6E6}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test.CSF.Zpt", "Test.CSF.Zpt\Test.CSF.Zpt.csproj", "{7228188F-FD67-4C28-9BAC-E36E11D6ADBB}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CSF", "CSF", "{4B340A7A-DC93-4D8D-85DE-AF5123BE9F53}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSF", "CSF\CSF\CSF.csproj", "{E563D7BC-1AB1-4AFB-8533-51315437C6E6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -32,6 +34,7 @@ Global
 		{E563D7BC-1AB1-4AFB-8533-51315437C6E6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
+		{E563D7BC-1AB1-4AFB-8533-51315437C6E6} = {4B340A7A-DC93-4D8D-85DE-AF5123BE9F53}
 	EndGlobalSection
 	GlobalSection(MonoDevelopProperties) = preSolution
 		Policies = $0
