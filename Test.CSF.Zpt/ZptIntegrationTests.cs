@@ -153,12 +153,29 @@ namespace Test.CSF.Zpt
       output.TalKeywordOptions.Add("content", content);
 
       // The 'batch' keyword option
-      var batch = new NamedObjectWrapper();
+      var batch = new EnumerableObjectWrapperWithNamedItems();
       batch["previous_sequence"] = false;
       batch["previous_sequence_start_item"] = "yes";
       batch["next_sequence"] = true;
       batch["next_sequence_start_item"] = "six";
       batch["next_sequence_end_item"] = "ten";
+      var items = Enumerable
+        .Range(0, 5)
+        .Select(x => {
+          var item = new NamedObjectWrapper();
+          item["arg"] = x.ToString();
+          return item;
+        })
+        .ToArray();
+      items[0].SetStringRepresentation("one");
+      items[1].SetStringRepresentation("two");
+      items[2].SetStringRepresentation("three");
+      items[3].SetStringRepresentation("four");
+      items[4].SetStringRepresentation("five");
+      foreach(var item in items)
+      {
+        batch.Items.Add(item);
+      }
       output.TalKeywordOptions.Add("batch", batch);
 
       // The 'laf' keyword option
