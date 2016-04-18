@@ -155,10 +155,11 @@ namespace CSF.Zpt.Tal
       var sequenceArray = sequence
         .Cast<object>()
         .ToArray();
-      
+
+      int i = 0;
       return sequenceArray
         .Select(x => new RepetitionInfo(repeatVariableName,
-                                        Array.IndexOf<object>(sequenceArray, x),
+                                        i++,
                                         sequenceArray.Length,
                                         x,
                                         element.Clone()))
@@ -180,6 +181,8 @@ namespace CSF.Zpt.Tal
 
         foreach(var item in repetitions)
         {
+          item.AssociatedElement.RemoveAttribute(ZptConstants.Tal.Namespace,
+                                                 ZptConstants.Tal.RepeatAttribute);
           parent.InsertBefore(context.Element, item.AssociatedElement);
         }
       }

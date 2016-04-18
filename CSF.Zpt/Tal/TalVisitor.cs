@@ -37,13 +37,19 @@ namespace CSF.Zpt.Tal
 
       foreach(var handler in _handlers)
       {
-        var handlingResult = (from ele in output
-                              let processedBatch = handler.Handle(ele)
-                              where processedBatch.ContinueHandling
-                              select processedBatch);
+        var handlingResult = new HashSet<AttributeHandlingResult>();
+
+        foreach(var ctx in output)
+        {
+          var processedBatch = handler.Handle(ctx);
+          if(processedBatch.ContinueHandling)
+          {
+            handlingResult.Add(processedBatch);
+          }
+        }
 
         newlyExposedElements = newlyExposedElements.Union(handlingResult.SelectMany(x => x.NewlyExposedContexts));
-        output = handlingResult.Where(x => x.ContinueHandling).SelectMany(x => x.Contexts);
+        output = handlingResult.Where(x => x.ContinueHandling).SelectMany(x => x.Contexts).ToArray();
       }
 
       output = output.Union(newlyExposedElements.SelectMany(x => this.Visit(x)));
