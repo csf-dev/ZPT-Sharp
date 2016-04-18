@@ -415,7 +415,7 @@ namespace CSF.Zpt.Rendering
     /// </summary>
     public override void Remove()
     {
-      this.GetParent().RemoveChild(this.Node);
+      this.Node.Remove();
     }
 
     /// <summary>
