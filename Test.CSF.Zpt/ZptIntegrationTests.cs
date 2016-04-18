@@ -100,33 +100,48 @@ namespace Test.CSF.Zpt
     private bool PerformTestRun(FileInfo sourceDocument,
                                 FileInfo expectedResultDocument)
     {
-      bool output;
-
-      ZptDocument document = _documentFactory.CreateHtml(sourceDocument);
+      bool output = false;
+      ZptDocument document = null;
       string expectedRendering, actualRendering = null;
       bool exceptionCaught = false;
 
-      using(var stream = expectedResultDocument.OpenRead())
-      using(var reader = new StreamReader(stream))
-      {
-        expectedRendering = reader.ReadToEnd();
-      }
-
       try
       {
-        var options = new RenderingOptions(initialState: this.CreateTestEnvironment());
-
-        actualRendering = document.Render(options);
-        output = (actualRendering == expectedRendering);
+        document = _documentFactory.Create(sourceDocument);
       }
       catch(Exception ex)
       {
-        _logger.ErrorFormat("Exception caught whilst processing output file:{0}{1}{2}",
+        _logger.ErrorFormat("Exception caught whilst loading the source document:{0}{1}{2}",
                             expectedResultDocument.Name,
                             Environment.NewLine,
                             ex);
-        output = false;
         exceptionCaught = true;
+      }
+
+      if(!exceptionCaught)
+      {
+        using(var stream = expectedResultDocument.OpenRead())
+        using(var reader = new StreamReader(stream))
+        {
+          expectedRendering = reader.ReadToEnd();
+        }
+
+        try
+        {
+          var options = new RenderingOptions(initialState: this.CreateTestEnvironment());
+
+          actualRendering = document.Render(options);
+          output = (actualRendering == expectedRendering);
+        }
+        catch(Exception ex)
+        {
+          _logger.ErrorFormat("Exception caught whilst processing output file:{0}{1}{2}",
+                              expectedResultDocument.Name,
+                              Environment.NewLine,
+                              ex);
+          output = false;
+          exceptionCaught = true;
+        }
       }
 
       if(!output && !exceptionCaught)
