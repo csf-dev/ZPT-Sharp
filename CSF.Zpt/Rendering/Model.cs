@@ -143,6 +143,10 @@ namespace CSF.Zpt.Rendering
         throw new ArgumentNullException(nameof(info));
       }
 
+      /* TODO: Rework this - repetition info is now already contextualised to the current element, so there is no
+       * need to keep the whole collection.
+       */
+
       this.RepetitionInfo = new RepetitionInfoCollection(this.RepetitionInfo, info);
     }
 
