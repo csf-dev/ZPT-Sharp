@@ -127,6 +127,7 @@
     <Compile Include="Rendering\InitialModelState.cs" />
     <Compile Include="Tales\NamedObjectWrapper.cs" />
     <Compile Include="Tales\EnumerableObjectWrapperWithNamedItems.cs" />
+    <Compile Include="LocalXhtmlXmlResolver.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
@@ -149,6 +150,27 @@
     <EmbeddedResource Include="Resources\ExceptionMessages.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>ExceptionMessages.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\xhtml1-frameset.dtd">
+      <LogicalName>xhtml1-frameset.dtd</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\xhtml1-strict.dtd">
+      <LogicalName>xhtml1-strict.dtd</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\xhtml1-transitional.dtd">
+      <LogicalName>xhtml1-transitional.dtd</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\xhtml11.dtd">
+      <LogicalName>xhtml11.dtd</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\xhtml-lat1.ent">
+      <LogicalName>xhtml-lat1.ent</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\xhtml-special.ent">
+      <LogicalName>xhtml-special.ent</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\xhtml-symbol.ent">
+      <LogicalName>xhtml-symbol.ent</LogicalName>
     </EmbeddedResource>
   </ItemGroup>
 </Project>

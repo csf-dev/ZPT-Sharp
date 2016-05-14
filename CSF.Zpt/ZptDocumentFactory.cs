@@ -209,11 +209,8 @@ namespace CSF.Zpt
         throw new ArgumentNullException(nameof(encoding));
       }
 
-      // TODO: Go get and cache the XHTML DTDs and embed them into this assembly as resources
-      // See: http://stackoverflow.com/questions/1645767/how-do-i-resolve-entities-when-loading-into-an-xdocument#comment1517391_1646763
-
       var settings = new System.Xml.XmlReaderSettings() {
-        XmlResolver = null,
+        XmlResolver = new LocalXhtmlXmlResolver(),
         DtdProcessing = System.Xml.DtdProcessing.Parse,
       };
 
