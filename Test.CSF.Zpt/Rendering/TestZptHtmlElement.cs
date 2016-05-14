@@ -514,7 +514,8 @@ namespace Test.CSF.Zpt.Rendering
   <div custom:parent_attrib=""Attribute value one"" class=""class_one class_two"">
     <ul>
       <li custom:child_attrib=""foo"">Foo content</li>
-      <li>New element</li><li custom:child_attrib=""bar"">Bar content</li>
+      <li>New element</li>
+      <li custom:child_attrib=""bar"">Bar content</li>
       <li custom:child_attrib=""baz"">Baz content</li>
     </ul>
   </div>

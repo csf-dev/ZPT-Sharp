@@ -201,10 +201,17 @@ namespace CSF.Zpt.Rendering
 
       HtmlNode existingNode = existingElement.Node;
 
-      if(onNewLine)
+      var prevNode = existingNode.PreviousSibling;
+      if(prevNode.NodeType == HtmlNodeType.Text)
       {
-        var newLine = this.Node.OwnerDocument.CreateTextNode(System.Environment.NewLine);
-        existingNode = this.Node.InsertBefore(newLine, existingNode);
+        var lastLine = prevNode.InnerText
+          .Split(new[] { System.Environment.NewLine }, StringSplitOptions.None)
+          .Last();
+        if(String.IsNullOrWhiteSpace(lastLine))
+        {
+          var newLine = this.Node.OwnerDocument.CreateTextNode(String.Concat(System.Environment.NewLine, lastLine));
+          existingNode = this.Node.InsertBefore(newLine, existingNode);
+        }
       }
 
       var output = this.Node.InsertBefore(newChildElement.Node, existingNode);
