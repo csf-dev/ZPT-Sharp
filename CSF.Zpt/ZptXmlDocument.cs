@@ -113,7 +113,11 @@ namespace CSF.Zpt
         throw new ArgumentException(message, "element");
       }
 
-      using(var xmlWriter = new XmlTextWriter(writer))
+      var settings = new XmlWriterSettings();
+      settings.Indent = true;
+      settings.IndentChars = "  ";
+
+      using(var xmlWriter = XmlTextWriter.Create(writer, settings))
       {
         xmlElement.Node.WriteTo(xmlWriter);  
       }
