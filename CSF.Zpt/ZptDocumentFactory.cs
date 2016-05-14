@@ -33,9 +33,22 @@ namespace CSF.Zpt
     /// <param name="sourceFile">The source file containing the document to create.</param>
     public ZptDocument Create(FileInfo sourceFile)
     {
+      return this.Create(sourceFile, System.Text.Encoding.UTF8);
+    }
+
+    /// <summary>
+    /// Creates a document from the given source file.
+    /// </summary>
+    /// <param name="sourceFile">The source file containing the document to create.</param>
+    public ZptDocument Create(FileInfo sourceFile, System.Text.Encoding encoding)
+    {
       if(sourceFile == null)
       {
         throw new ArgumentNullException(nameof(sourceFile));
+      }
+      if(encoding == null)
+      {
+        throw new ArgumentNullException(nameof(encoding));
       }
 
       ZptDocument output;
@@ -44,11 +57,11 @@ namespace CSF.Zpt
 
       if(XmlSuffixes.Contains(extension))
       {
-        output = this.CreateXml(sourceFile);
+        output = this.CreateXml(sourceFile, encoding);
       }
       else if(HtmlSuffixes.Contains(extension))
       {
-        output = this.CreateHtml(sourceFile);
+        output = this.CreateHtml(sourceFile, encoding);
       }
       else
       {
@@ -64,11 +77,15 @@ namespace CSF.Zpt
     /// Creates an HTML document from the given source file.
     /// </summary>
     /// <param name="sourceFile">The source file containing the document to create.</param>
-    public ZptDocument CreateHtml(FileInfo sourceFile)
+    public ZptDocument CreateHtml(FileInfo sourceFile, System.Text.Encoding encoding)
     {
       if(sourceFile == null)
       {
         throw new ArgumentNullException(nameof(sourceFile));
+      }
+      if(encoding == null)
+      {
+        throw new ArgumentNullException(nameof(encoding));
       }
 
       ZptDocument output;
@@ -76,7 +93,7 @@ namespace CSF.Zpt
 
       using(var stream = sourceFile.OpenRead())
       {
-        output = this.CreateHtml(stream, sourceInfo);
+        output = this.CreateHtml(stream, sourceInfo, encoding);
       }
 
       return output;
@@ -86,18 +103,44 @@ namespace CSF.Zpt
     /// Creates an XML document from the given source file.
     /// </summary>
     /// <param name="sourceFile">The source file containing the document to create.</param>
-    public ZptDocument CreateXml(FileInfo sourceFile)
+    public ZptDocument CreateXml(FileInfo sourceFile, System.Text.Encoding encoding)
     {
+      if(sourceFile == null)
+      {
+        throw new ArgumentNullException(nameof(sourceFile));
+      }
+      if(encoding == null)
+      {
+        throw new ArgumentNullException(nameof(encoding));
+      }
 
       ZptDocument output;
       var sourceInfo = new SourceFileInfo(sourceFile);
 
       using(var stream = sourceFile.OpenRead())
       {
-        output = this.CreateXml(stream, sourceInfo);
+        output = this.CreateXml(stream, sourceInfo, encoding);
       }
 
       return output;
+    }
+
+    /// <summary>
+    /// Creates an HTML document from the given source file.
+    /// </summary>
+    /// <param name="sourceFile">The source file containing the document to create.</param>
+    public ZptDocument CreateHtml(FileInfo sourceFile)
+    {
+      return this.CreateHtml(sourceFile, System.Text.Encoding.UTF8);
+    }
+
+    /// <summary>
+    /// Creates an XML document from the given source file.
+    /// </summary>
+    /// <param name="sourceFile">The source file containing the document to create.</param>
+    public ZptDocument CreateXml(FileInfo sourceFile)
+    {
+      return this.CreateXml(sourceFile, System.Text.Encoding.UTF8);
     }
 
     /// <summary>
@@ -107,19 +150,7 @@ namespace CSF.Zpt
     /// <param name="sourceInfo">Optional information about the source document.</param>
     public ZptDocument CreateHtml(Stream sourceStream, SourceFileInfo sourceInfo)
     {
-      if(sourceStream == null)
-      {
-        throw new ArgumentNullException(nameof(sourceStream));
-      }
-      if(sourceInfo == null)
-      {
-        throw new ArgumentNullException(nameof(sourceInfo));
-      }
-
-      var doc = new HtmlAgilityPack.HtmlDocument();
-      doc.Load(sourceStream);
-
-      return new ZptHtmlDocument(doc, sourceInfo);
+      return this.CreateHtml(sourceStream, sourceInfo, System.Text.Encoding.UTF8);
     }
 
     /// <summary>
@@ -129,6 +160,16 @@ namespace CSF.Zpt
     /// <param name="sourceInfo">Optional information about the source document.</param>
     public ZptDocument CreateXml(Stream sourceStream, SourceFileInfo sourceInfo)
     {
+      return this.CreateXml(sourceStream, sourceInfo, System.Text.Encoding.UTF8);
+    }
+
+    /// <summary>
+    /// Creates an HTML document from a stream exposing the source document, and optional information about the source.
+    /// </summary>
+    /// <param name="sourceStream">A stream exposing the document content.</param>
+    /// <param name="sourceInfo">Optional information about the source document.</param>
+    public ZptDocument CreateHtml(Stream sourceStream, SourceFileInfo sourceInfo, System.Text.Encoding encoding)
+    {
       if(sourceStream == null)
       {
         throw new ArgumentNullException(nameof(sourceStream));
@@ -136,6 +177,36 @@ namespace CSF.Zpt
       if(sourceInfo == null)
       {
         throw new ArgumentNullException(nameof(sourceInfo));
+      }
+      if(encoding == null)
+      {
+        throw new ArgumentNullException(nameof(encoding));
+      }
+
+      var doc = new HtmlAgilityPack.HtmlDocument();
+      doc.Load(sourceStream, encoding);
+
+      return new ZptHtmlDocument(doc, sourceInfo);
+    }
+
+    /// <summary>
+    /// Creates an XML document from a stream exposing the source document, and optional information about the source.
+    /// </summary>
+    /// <param name="sourceStream">A stream exposing the document content.</param>
+    /// <param name="sourceInfo">Optional information about the source document.</param>
+    public ZptDocument CreateXml(Stream sourceStream, SourceFileInfo sourceInfo, System.Text.Encoding encoding)
+    {
+      if(sourceStream == null)
+      {
+        throw new ArgumentNullException(nameof(sourceStream));
+      }
+      if(sourceInfo == null)
+      {
+        throw new ArgumentNullException(nameof(sourceInfo));
+      }
+      if(encoding == null)
+      {
+        throw new ArgumentNullException(nameof(encoding));
       }
 
       // TODO: Go get and cache the XHTML DTDs and embed them into this assembly as resources
@@ -147,7 +218,9 @@ namespace CSF.Zpt
       };
 
       var doc = new System.Xml.XmlDocument();
-      using(var reader = System.Xml.XmlReader.Create(sourceStream, settings))
+
+      using(var streamReader = new StreamReader(sourceStream, encoding))
+      using(var reader = System.Xml.XmlReader.Create(streamReader, settings))
       {
         doc.Load(reader);
       }
