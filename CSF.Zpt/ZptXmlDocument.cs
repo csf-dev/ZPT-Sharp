@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Xml;
 using System.IO;
+using System.Linq;
 using CSF.Zpt.Rendering;
 using CSF.Zpt.Resources;
 
@@ -68,8 +69,21 @@ namespace CSF.Zpt
     /// <returns>Elements representing the METAL macros.</returns>
     internal override CSF.Zpt.Metal.MetalMacro[] GetMacros()
     {
-      // TODO: Write this implementation
-      throw new NotImplementedException();
+      var xpath = String.Format("//*[@{0}:{1}]",
+                                ZptConstants.Metal.Namespace.Prefix,
+                                ZptConstants.Metal.DefineMacroAttribute);
+
+      var nsManager = new XmlNamespaceManager(this.Document.CreateNavigator().NameTable);
+      nsManager.AddNamespace(ZptConstants.Metal.Namespace.Prefix, ZptConstants.Metal.Namespace.Uri);
+
+      return this.Document.DocumentElement
+        .SelectNodes(xpath, nsManager)
+        .Cast<XmlNode>()
+        .Select(x => {
+          var element = new ZptXmlElement(x, this.SourceFile);
+          return new Metal.MetalMacro(element.GetMetalAttribute(ZptConstants.Metal.DefineMacroAttribute).Value, element);
+        })
+        .ToArray();
     }
 
     /// <summary>

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Linq;
 using HtmlAgilityPack;
 using CSF.Zpt.Rendering;
 using CSF.Zpt.Resources;
@@ -68,8 +69,17 @@ namespace CSF.Zpt
     /// <returns>Elements representing the METAL macros.</returns>
     internal override CSF.Zpt.Metal.MetalMacro[] GetMacros()
     {
-      // TODO: Write this implementation
-      throw new NotImplementedException();
+      return this.Document
+          .DocumentNode
+          .DescendantsAndSelf()
+          .Where(ele => ele.Attributes.Any(attr => attr.Name == String.Format("{0}:{1}",
+                                                                              ZptConstants.Metal.Namespace.Prefix,
+                                                                              ZptConstants.Metal.DefineMacroAttribute)))
+          .Select(x => {
+          var element = new ZptHtmlElement(x, this.SourceFile);
+          return new Metal.MetalMacro(element.GetMetalAttribute(ZptConstants.Metal.DefineMacroAttribute).Value, element);
+        })
+        .ToArray();
     }
 
     /// <summary>
