@@ -194,7 +194,7 @@ namespace Test.CSF.Zpt
       output.TalKeywordOptions.Add("batch", batch);
 
       // The 'laf' keyword option
-      var laf = new TemplateFile(new ZptDocumentFactory().CreateHtml(_sourcePath.GetFiles("teeshop1.html").Single()));
+      var laf = new TemplateFile(new ZptDocumentFactory().CreateHtml(_sourcePath.GetFiles("teeshoplaf.html").Single()));
       output.MetalKeywordOptions.Add("laf", laf);
 
       // The 'getProducts' option
