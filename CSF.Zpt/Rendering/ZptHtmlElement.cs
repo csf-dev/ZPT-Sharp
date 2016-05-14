@@ -199,7 +199,15 @@ namespace CSF.Zpt.Rendering
         throw new ArgumentException(message, "newChild");
       }
 
-      var output = this.Node.InsertBefore(newChildElement.Node, existingElement.Node);
+      HtmlNode existingNode = existingElement.Node;
+
+      if(onNewLine)
+      {
+        var newLine = this.Node.OwnerDocument.CreateTextNode(System.Environment.NewLine);
+        existingNode = this.Node.InsertBefore(newLine, existingNode);
+      }
+
+      var output = this.Node.InsertBefore(newChildElement.Node, existingNode);
       return new ZptHtmlElement(output, newChild.SourceFile, isImported: true);
     }
 
