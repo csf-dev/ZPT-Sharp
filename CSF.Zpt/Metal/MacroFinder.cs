@@ -8,6 +8,12 @@ namespace CSF.Zpt.Metal
   /// </summary>
   public class MacroFinder
   {
+    #region fields
+
+    private static log4net.ILog _logger;
+
+    #endregion
+
     #region methods
 
     /// <summary>
@@ -65,8 +71,9 @@ namespace CSF.Zpt.Metal
           result = model.Evaluate(attrib.Value, element);
           output = result.GetValue<ZptElement>();
         }
-        catch(Exception)
+        catch(Exception ex)
         {
+          _logger.Warn(ex);
           output = null;
         }
       }
@@ -76,6 +83,15 @@ namespace CSF.Zpt.Metal
       }
 
       return output;
+    }
+
+    #endregion
+
+    #region constructor
+
+    static MacroFinder()
+    {
+      _logger = log4net.LogManager.GetLogger(typeof(MacroFinder));
     }
 
     #endregion
