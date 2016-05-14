@@ -152,7 +152,8 @@ namespace CSF.Zpt.Rendering
       public bool Equals(NameAndElement other)
       {
         return (!Object.ReferenceEquals(null, other)
-                && _tuple.Equals(other._tuple));
+                && this.Name.Equals(other.Name)
+                && this.Element.Equals(other.Element));
       }
 
       public override bool Equals(object obj)
@@ -162,7 +163,7 @@ namespace CSF.Zpt.Rendering
 
       public override int GetHashCode()
       {
-        return _tuple.GetHashCode();
+        return this.Name.GetHashCode() ^ this.Element.GetHashCode();
       }
 
       internal NameAndElement(string name, ZptElement element)

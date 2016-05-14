@@ -178,7 +178,7 @@ namespace Test.CSF.Zpt
         .Range(1, 5)
         .Select(x => {
           var item = new NamedObjectWrapper();
-          item["arg"] = x.ToString();
+          item["num"] = x.ToString();
           return item;
         })
         .ToArray();

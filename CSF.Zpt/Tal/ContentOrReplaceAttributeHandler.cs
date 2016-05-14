@@ -67,14 +67,16 @@ namespace CSF.Zpt.Tal
         {
           if(attribName == ZptConstants.Tal.ContentAttribute)
           {
-            context.Element.ReplaceChildrenWith(expressionResult.GetValue<string>(),
-                                        mode == STRUCTURE_INDICATOR);
+            var resultValue = expressionResult.GetValue<object>();
+            context.Element.ReplaceChildrenWith((resultValue?? String.Empty).ToString(),
+                                                mode == STRUCTURE_INDICATOR);
             output = new AttributeHandlingResult(new [] { context }, true);
           }
           else
           {
-            var elements = context.Element.ReplaceWith(expressionResult.GetValue<string>(),
-                                               mode == STRUCTURE_INDICATOR);
+            var resultValue = expressionResult.GetValue<object>();
+            var elements = context.Element.ReplaceWith((resultValue?? String.Empty).ToString(),
+                                                       mode == STRUCTURE_INDICATOR);
             output = new AttributeHandlingResult(elements.Select(x => context.CreateSiblingContext(x)).ToArray(), false);
           }
         }
