@@ -103,7 +103,9 @@ namespace Test.CSF.Zpt.Tales
       // Act
       object output;
       var result = sut.TryGetRootObject("nothing",
-                                        Mock.Of<ZptElement>(x => x.GetOriginalAttributes() == new OriginalAttributeValuesCollection()),
+                                        Mock.Of<ZptElement>(x => x.GetOriginalAttributes() == new OriginalAttributeValuesCollection()
+                                                                 && x.Equals(x) == true
+                                                                 && x.GetHashCode() == 5),
                                         out output);
 
       // Assert
@@ -121,7 +123,9 @@ namespace Test.CSF.Zpt.Tales
       // Act
       object output;
       var result = sut.TryGetRootObject("default",
-                                        Mock.Of<ZptElement>(x => x.GetOriginalAttributes() == new OriginalAttributeValuesCollection()),
+                                        Mock.Of<ZptElement>(x => x.GetOriginalAttributes() == new OriginalAttributeValuesCollection()
+                                                                 && x.Equals(x) == true
+                                                                 && x.GetHashCode() == 5),
                                         out output);
 
       // Assert
@@ -140,7 +144,9 @@ namespace Test.CSF.Zpt.Tales
       // Act
       object output;
       var result = sut.TryGetRootObject("options",
-                                        Mock.Of<ZptElement>(x => x.GetOriginalAttributes() == new OriginalAttributeValuesCollection()),
+                                        Mock.Of<ZptElement>(x => x.GetOriginalAttributes() == new OriginalAttributeValuesCollection()
+                                                                 && x.Equals(x) == true
+                                                                 && x.GetHashCode() == 5),
                                         out output);
 
       // Assert
@@ -159,7 +165,9 @@ namespace Test.CSF.Zpt.Tales
       // Act
       object output;
       var result = sut.TryGetRootObject("repeat",
-                                        Mock.Of<ZptElement>(x => x.GetOriginalAttributes() == new OriginalAttributeValuesCollection()),
+                                        Mock.Of<ZptElement>(x => x.GetOriginalAttributes() == new OriginalAttributeValuesCollection()
+                                                                 && x.Equals(x) == true
+                                                                 && x.GetHashCode() == 5),
                                         out output);
 
       // Assert
@@ -178,7 +186,9 @@ namespace Test.CSF.Zpt.Tales
       // Act
       object output;
       var result = sut.TryGetRootObject("attrs",
-                                        Mock.Of<ZptElement>(x => x.GetOriginalAttributes() == new OriginalAttributeValuesCollection()),
+                                        Mock.Of<ZptElement>(x => x.GetOriginalAttributes() == new OriginalAttributeValuesCollection()
+                                                                 && x.Equals(x) == true
+                                                                 && x.GetHashCode() == 5),
                                         out output);
 
       // Assert
@@ -197,7 +207,9 @@ namespace Test.CSF.Zpt.Tales
       // Act
       object output;
       var result = sut.TryGetRootObject("CONTEXTS",
-                                        Mock.Of<ZptElement>(x => x.GetOriginalAttributes() == new OriginalAttributeValuesCollection()),
+                                        Mock.Of<ZptElement>(x => x.GetOriginalAttributes() == new OriginalAttributeValuesCollection()
+                                                                 && x.Equals(x) == true
+                                                                 && x.GetHashCode() == 5),
                                         out output);
 
       // Assert

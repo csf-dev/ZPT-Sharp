@@ -6,7 +6,7 @@ namespace CSF.Zpt.Rendering
   /// <summary>
   /// Represents an element node in a ZPT document.
   /// </summary>
-  public abstract class ZptElement
+  public abstract class ZptElement : IEquatable<ZptElement>
   {
     #region fields
 
@@ -67,6 +67,57 @@ namespace CSF.Zpt.Rendering
     /// A <see cref="System.String"/> that represents the current <see cref="ZptElement"/>.
     /// </returns>
     public abstract new string ToString();
+
+    /// <summary>
+    /// Determines whether the specified <see cref="System.Object"/> is equal to the current
+    /// <see cref="CSF.Zpt.Rendering.ZptElement"/>.
+    /// </summary>
+    /// <param name="obj">
+    /// The <see cref="System.Object"/> to compare with the current <see cref="CSF.Zpt.Rendering.ZptElement"/>.
+    /// </param>
+    /// <returns>
+    /// <c>true</c> if the specified <see cref="System.Object"/> is equal to the current
+    /// <see cref="CSF.Zpt.Rendering.ZptElement"/>; otherwise, <c>false</c>.
+    /// </returns>
+    public override bool Equals(object obj)
+    {
+      bool output;
+
+      if(Object.ReferenceEquals(this, obj))
+      {
+        output = true;
+      }
+      else
+      {
+        var other = obj as ZptElement;
+        output = (other != null && this.Equals(other));
+      }
+
+      return output;
+    }
+
+    /// <summary>
+    /// Determines whether the specified <see cref="CSF.Zpt.Rendering.ZptElement"/> is equal to the current
+    /// <see cref="CSF.Zpt.Rendering.ZptElement"/>.
+    /// </summary>
+    /// <param name="other">
+    /// The <see cref="CSF.Zpt.Rendering.ZptElement"/> to compare with the current
+    /// <see cref="CSF.Zpt.Rendering.ZptElement"/>.
+    /// </param>
+    /// <returns>
+    /// <c>true</c> if the specified <see cref="CSF.Zpt.Rendering.ZptElement"/> is equal to the current
+    /// <see cref="CSF.Zpt.Rendering.ZptElement"/>; otherwise, <c>false</c>.
+    /// </returns>
+    public abstract bool Equals(ZptElement other);
+
+    /// <summary>
+    /// Serves as a hash function for a <see cref="CSF.Zpt.Rendering.ZptElement"/> object.
+    /// </summary>
+    /// <returns>
+    /// A hash code for this instance that is suitable for use in hashing algorithms and data structures such as a
+    /// hash table.
+    /// </returns>
+    public abstract int GetHashCode();
 
     /// <summary>
     /// Replaces the current element in its respective DOM with the given replacement.

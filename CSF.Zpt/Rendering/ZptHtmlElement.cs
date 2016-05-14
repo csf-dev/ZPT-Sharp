@@ -27,6 +27,7 @@ namespace CSF.Zpt.Rendering
     #region fields
 
     private HtmlNode _node;
+    private int? _cachedHashCode;
 
     #endregion
 
@@ -65,6 +66,52 @@ namespace CSF.Zpt.Rendering
     public override string ToString()
     {
       return this.Node.OuterHtml;
+    }
+
+    /// <summary>
+    /// Determines whether the specified <see cref="CSF.Zpt.Rendering.ZptElement"/> is equal to the current
+    /// <see cref="CSF.Zpt.Rendering.ZptHtmlElement"/>.
+    /// </summary>
+    /// <param name="other">
+    /// The <see cref="CSF.Zpt.Rendering.ZptElement"/> to compare with the current
+    /// <see cref="CSF.Zpt.Rendering.ZptHtmlElement"/>.
+    /// </param>
+    /// <returns>
+    /// <c>true</c> if the specified <see cref="CSF.Zpt.Rendering.ZptElement"/> is equal to the current
+    /// <see cref="CSF.Zpt.Rendering.ZptHtmlElement"/>; otherwise, <c>false</c>.
+    /// </returns>
+    public override bool Equals(ZptElement other)
+    {
+      bool output;
+
+      if(Object.ReferenceEquals(this, other))
+      {
+        output = true;
+      }
+      else
+      {
+        var ele = other as ZptHtmlElement;
+        output = (ele != null && ele.Node == this.Node);
+      }
+
+      return output;
+    }
+
+    /// <summary>
+    /// Serves as a hash function for a <see cref="CSF.Zpt.Rendering.ZptHtmlElement"/> object.
+    /// </summary>
+    /// <returns>
+    /// A hash code for this instance that is suitable for use in hashing algorithms and data structures such as a
+    /// hash table.
+    /// </returns>
+    public override int GetHashCode()
+    {
+      if(!_cachedHashCode.HasValue)
+      {
+        _cachedHashCode = this.Node.GetHashCode();
+      }
+
+      return _cachedHashCode.Value;
     }
 
     /// <summary>
