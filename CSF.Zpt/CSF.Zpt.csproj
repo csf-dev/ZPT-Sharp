@@ -128,6 +128,7 @@
     <Compile Include="Tales\NamedObjectWrapper.cs" />
     <Compile Include="Tales\EnumerableObjectWrapperWithNamedItems.cs" />
     <Compile Include="LocalXhtmlXmlResolver.cs" />
+    <Compile Include="Tales\LocalVariablePathExpressionEvaluator.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

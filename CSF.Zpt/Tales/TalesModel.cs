@@ -128,6 +128,25 @@ namespace CSF.Zpt.Tales
       return output;
     }
 
+    public virtual bool TryGetLocalRootObject(string name, ZptElement element, out object result)
+    {
+
+      bool output;
+
+      if(base.LocalDefinitions.ContainsKey(name))
+      {
+        output = true;
+        result = base.LocalDefinitions[name];
+      }
+      else
+      {
+        output = false;
+        result = null;
+      }
+
+      return output;
+    }
+
     #endregion
 
     #region constructor

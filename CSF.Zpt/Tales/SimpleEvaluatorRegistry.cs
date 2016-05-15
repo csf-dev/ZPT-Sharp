@@ -175,6 +175,7 @@ namespace CSF.Zpt.Tales
         typeof(PathExpressionEvaluator),
         typeof(StringExpressionEvaluator),
         typeof(NotExpressionEvaluator),
+        typeof(LocalVariablePathExpressionEvaluator),
       };
 
       _default = new SimpleEvaluatorRegistry(evaluatorTypes, typeof(PathExpressionEvaluator));

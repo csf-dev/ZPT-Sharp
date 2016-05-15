@@ -153,10 +153,10 @@ namespace CSF.Zpt.Tales
     /// <param name="element">A ZPT element.</param>
     /// <param name="model">The TALES model.</param>
     /// <param name="result">Exposes the result of this operation.</param>
-    private bool TryGetTraversalRoot(PathWalker walker,
-                                     ZptElement element,
-                                     TalesModel model,
-                                     out object result)
+    protected virtual bool TryGetTraversalRoot(PathWalker walker,
+                                               ZptElement element,
+                                               TalesModel model,
+                                               out object result)
     {
       bool output;
 
