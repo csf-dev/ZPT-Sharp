@@ -1,9 +1,9 @@
 <html><body>
-<table xmlns:m="http://xml.zope.org/namespaces/metal" m:use-macro="tests/input/test07.html/myTable">
+<table metal:use-macro="tests/input/test07.html/macros/myTable">
 <!-- macro use with slots -->
   <tr>
     <td>
-      <span m:fill-slot="bottomRight">
+      <span metal:fill-slot="bottomRight">
       <h1>Some headline</h1>
       <p>This is the real contents of the bottom right slot.</p>
       <hr>
