@@ -66,7 +66,7 @@ namespace Test.CSF.Zpt.Metal
       var model = _fixture.Create<DummyModel>();
       Mock.Get(model)
         .Setup(x => x.Evaluate(It.IsAny<string>(), originalElement))
-        .Throws<InvalidOperationException>();
+        .Throws<Util.IntendedTestingException>();
 
       var sut = new MacroFinder();
 
@@ -129,7 +129,7 @@ namespace Test.CSF.Zpt.Metal
       var model = _fixture.Create<DummyModel>();
       Mock.Get(model)
         .Setup(x => x.Evaluate(It.IsAny<string>(), originalElement))
-        .Throws<InvalidOperationException>();
+        .Throws<Util.IntendedTestingException>();
 
       var sut = new MacroFinder();
 

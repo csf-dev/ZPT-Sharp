@@ -102,6 +102,7 @@
     <Compile Include="IntegrationTestConfiguration.cs" />
     <Compile Include="IIntegrationTestConfiguration.cs" />
     <Compile Include="FallbackIntegrationTestConfiguration.cs" />
+    <Compile Include="Util\IntendedTestingException.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Metal\MetalVisitorIntegrationTests.1.xml" />
