@@ -66,6 +66,38 @@ namespace CSF.Zpt.Rendering
       private set;
     }
 
+    /// <summary>
+    /// Gets the encoding (eg: Unicode) for the rendered output.
+    /// </summary>
+    /// <value>The output encoding.</value>
+    public System.Text.Encoding OutputEncoding
+    {
+      get;
+      private set;
+    }
+
+    /// <summary>
+    /// Gets a value indicating whether the XML declaration should be omitted (where applicable).
+    /// </summary>
+    /// <value><c>true</c> if the XML declaration is to be omitted; otherwise, <c>false</c>.</value>
+    public bool OmitXmlDeclaration
+    {
+      get;
+      private set;
+    }
+
+    public string XmlIndentationCharacters
+    {
+      get;
+      private set;
+    }
+
+    public bool OutputIndentedXml
+    {
+      get;
+      private set;
+    }
+
     #endregion
 
     #region methods
@@ -95,15 +127,25 @@ namespace CSF.Zpt.Rendering
     /// <param name="elementVisitors">The element visitors to use.</param>
     /// <param name="contextFactory">The rendering context factory.</param>
     /// <param name="initialState">The initial state of the ZPT models.</param>
+    /// <param name="outputEncoding">The desired output encoding.</param>
+    /// <param name="omitXmlDeclaration">Whether or not to omit the XML declaration.</param>
     public RenderingOptions(bool addSourceFileAnnotation = false,
                             IContextVisitor[] elementVisitors = null,
                             IRenderingContextFactory contextFactory = null,
-                            InitialModelState initialState = null)
+                            InitialModelState initialState = null,
+                            System.Text.Encoding outputEncoding = null,
+                            bool omitXmlDeclaration = false,
+                            string xmlIndentCharacters = "  ",
+                            bool outputIndentedXml = true)
     {
       this.AddSourceFileAnnotation = addSourceFileAnnotation;
       this.ContextVisitors = elementVisitors?? DefaultVisitors;
       this.ContextFactory = contextFactory?? new TalesRenderingContextFactory();
       this.InitialModelState = initialState?? new InitialModelState();
+      this.OutputEncoding = outputEncoding?? System.Text.Encoding.UTF8;
+      this.OmitXmlDeclaration = omitXmlDeclaration;
+      this.XmlIndentationCharacters = xmlIndentCharacters;
+      this.OutputIndentedXml = outputIndentedXml;
     }
 
     /// <summary>

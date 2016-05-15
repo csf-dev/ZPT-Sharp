@@ -114,8 +114,10 @@ namespace CSF.Zpt
       }
 
       var settings = new XmlWriterSettings();
-      settings.Indent = true;
-      settings.IndentChars = "  ";
+      settings.Indent = options.OutputIndentedXml;
+      settings.IndentChars = options.XmlIndentationCharacters;
+      settings.Encoding = options.OutputEncoding;
+      settings.OmitXmlDeclaration = options.OmitXmlDeclaration;
 
       using(var xmlWriter = XmlTextWriter.Create(writer, settings))
       {

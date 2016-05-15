@@ -18,11 +18,31 @@ namespace CSF.Zpt
     /// <param name="options">The rendering options to use.  If <c>null</c> then default options are used.</param>
     public virtual string Render(RenderingOptions options = null)
     {
-      var output = new StringBuilder();
+      string output;
+      var opts = this.GetOptions(options);
 
-      using(var writer = new StringWriter(output))
+      Stream stream = null;
+      StreamWriter writer = null;
+      StreamReader reader = null;
+
+      try
       {
+        stream = new MemoryStream();
+
+        writer = new StreamWriter(stream, opts.OutputEncoding);
         this.Render(writer, options);
+        writer.Flush();
+
+        stream.Position = 0;
+        reader = new StreamReader(stream);
+        output = reader.ReadToEnd();
+      }
+      finally
+      {
+        if(stream != null)
+        {
+          stream.Dispose();
+        }
       }
 
       return output.ToString();
