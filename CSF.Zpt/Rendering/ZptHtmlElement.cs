@@ -547,12 +547,12 @@ namespace CSF.Zpt.Rendering
       if(treatAsHtml)
       {
         var doc = new HtmlDocument();
-        doc.LoadHtml(toImport);
+        doc.LoadHtml(HtmlEntity.DeEntitize(toImport));
         output = doc.DocumentNode.ChildNodes.ToArray();
       }
       else
       {
-        var sanitised = HttpUtility.HtmlEncode(toImport);
+        var sanitised = HtmlEntity.Entitize(toImport, true, true);
         output = new HtmlNode[] { this.Node.OwnerDocument.CreateTextNode(sanitised) };
       }
 
