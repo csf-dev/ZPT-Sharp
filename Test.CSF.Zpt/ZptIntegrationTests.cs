@@ -73,7 +73,7 @@ namespace Test.CSF.Zpt
                   failedTests.Count());
     }
 
-    [TestCase("dtml3.html")]
+    [TestCase("test06.html")]
     [Explicit("This test is covered by RunIntegrationTests - this method is for running them one at a time though.")]
     public void TestSingleIntegrationTest(string inputFileName)
     {
@@ -163,6 +163,9 @@ namespace Test.CSF.Zpt
 
       // The location of the other ZPT documents
       output.MetalLocalDefinitions.Add("documents", new FilesystemDirectory(_sourcePath));
+      var tests = new NamedObjectWrapper();
+      tests["input"] = new FilesystemDirectory(_sourcePath, true);
+      output.MetalLocalDefinitions.Add("tests", tests);
 
       // The 'content' keyword option
       var content = new NamedObjectWrapper();
