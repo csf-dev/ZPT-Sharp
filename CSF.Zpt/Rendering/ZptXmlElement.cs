@@ -144,9 +144,19 @@ namespace CSF.Zpt.Rendering
         throw new ArgumentException(message, "replacement");
       }
 
-      var importedNode = this.Node.OwnerDocument.ImportNode(repl.Node, true);
+      XmlNode importedNode;
 
-      this.GetParent().ReplaceChild(importedNode, this.Node);
+      if(this.Node.ParentNode != null)
+      {
+        importedNode = this.Node.OwnerDocument.ImportNode(repl.Node, true);
+        this.GetParent().ReplaceChild(importedNode, this.Node);
+      }
+      else
+      {
+        var newDocument = new XmlDocument();
+        importedNode = newDocument.ImportNode(repl.Node, true);
+        newDocument.AppendChild(importedNode);
+      }
 
       return new ZptXmlElement(importedNode,
                             repl.SourceFile,

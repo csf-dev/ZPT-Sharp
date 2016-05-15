@@ -165,5 +165,11 @@ namespace CSF.Zpt.Resources {
                 return ResourceManager.GetString("SourceFileMustBeSuitable", resourceCulture);
             }
         }
+        
+        internal static string WrongCountOfReturnedContexts {
+            get {
+                return ResourceManager.GetString("WrongCountOfReturnedContexts", resourceCulture);
+            }
+        }
     }
 }

@@ -2,6 +2,7 @@
 using System.Text;
 using System.IO;
 using CSF.Zpt.Rendering;
+using System.Linq;
 
 namespace CSF.Zpt
 {
@@ -89,10 +90,20 @@ namespace CSF.Zpt
 
       foreach(var visitor in options.ContextVisitors)
       {
-        visitor.VisitContext(context);
+        var contexts = visitor.VisitContext(context);
+
+        if(contexts.Count() != 1)
+        {
+          string message = String.Format(Resources.ExceptionMessages.WrongCountOfReturnedContexts,
+                                         typeof(IContextVisitor).Name,
+                                         typeof(RenderingContext).Name);
+          throw new RenderingException(message);
+        }
+
+        context = contexts.Single();
       }
 
-      return output;
+      return context.Element;
     }
 
     /// <summary>

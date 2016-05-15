@@ -79,4 +79,7 @@ Filename:{0}</value>
   <data name="SourceFileMustBeSuitable" xml:space="preserve">
     <value>The source file must be suitable for reading as a `{0}'.</value>
   </data>
+  <data name="WrongCountOfReturnedContexts" xml:space="preserve">
+    <value>Each implementation of `{0}' must return precisely one instance of `{1}'.  This suggests that the source document might not be valid?</value>
+  </data>
 </root>
