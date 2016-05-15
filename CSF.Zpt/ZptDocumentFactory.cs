@@ -25,6 +25,21 @@ namespace CSF.Zpt
 
     #endregion
 
+    #region properties
+
+    /// <summary>
+    /// Gets the supported file extensions.
+    /// </summary>
+    /// <value>The supported file extensions.</value>
+    public ISet<string> SupportedFileExtensions
+    {
+      get {
+        return new HashSet<string>(HtmlSuffixes.Union(XmlSuffixes));
+      }
+    }
+
+    #endregion
+
     #region methods
 
     /// <summary>

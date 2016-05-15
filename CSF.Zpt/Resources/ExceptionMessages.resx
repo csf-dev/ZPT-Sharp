@@ -76,4 +76,7 @@ Element name:{0}</value>
     <value>The filename of the ZPT document must have a supported extension.
 Filename:{0}</value>
   </data>
+  <data name="SourceFileMustBeSuitable" xml:space="preserve">
+    <value>The source file must be suitable for reading as a `{0}'.</value>
+  </data>
 </root>

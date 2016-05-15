@@ -1,5 +1,6 @@
 ﻿using System;
 using CSF.Zpt.Metal;
+using System.IO;
 
 namespace CSF.Zpt.Tales
 {
@@ -17,6 +18,7 @@ namespace CSF.Zpt.Tales
 
     #region fields
 
+    private static IZptDocumentFactory _documentFactory;
     private ZptDocument _document;
 
     #endregion
@@ -94,7 +96,7 @@ namespace CSF.Zpt.Tales
 
     #endregion
 
-    #region constructor
+    #region constructors
 
     /// <summary>
     /// Initializes a new instance of the <see cref="CSF.Zpt.Tales.TemplateFile"/> class.
@@ -108,6 +110,44 @@ namespace CSF.Zpt.Tales
       }
 
       _document = document;
+    }
+
+    /// <summary>
+    /// Initializes the <see cref="CSF.Zpt.Tales.TemplateFile"/> class.
+    /// </summary>
+    static TemplateFile()
+    {
+      _documentFactory = new ZptDocumentFactory();
+    }
+
+    #endregion
+
+    #region static methods
+
+    public static TemplateFile Create(FileInfo sourceFile)
+    {
+      if(sourceFile == null)
+      {
+        throw new ArgumentNullException(nameof(sourceFile));
+      }
+      else if(!IsSuitable(sourceFile))
+      {
+        string message = String.Format(Resources.ExceptionMessages.SourceFileMustBeSuitable,
+                                       typeof(ZptDocument).Name);
+        throw new ArgumentException(message, nameof(sourceFile));
+      }
+
+      return new TemplateFile(_documentFactory.Create(sourceFile));
+    }
+
+    public static bool IsSuitable(FileInfo sourceFile)
+    {
+      if(sourceFile == null)
+      {
+        throw new ArgumentNullException(nameof(sourceFile));
+      }
+
+      return _documentFactory.SupportedFileExtensions.Contains(sourceFile.Extension);
     }
 
     #endregion

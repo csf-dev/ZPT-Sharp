@@ -159,5 +159,11 @@ namespace CSF.Zpt.Resources {
                 return ResourceManager.GetString("UnsupportedDocumentFilenameExtension", resourceCulture);
             }
         }
+        
+        internal static string SourceFileMustBeSuitable {
+            get {
+                return ResourceManager.GetString("SourceFileMustBeSuitable", resourceCulture);
+            }
+        }
     }
 }

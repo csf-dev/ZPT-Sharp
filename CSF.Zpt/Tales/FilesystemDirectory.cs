@@ -103,10 +103,18 @@ namespace CSF.Zpt.Tales
         output = this.GetDirectoryOrFileWithoutExtension(pathFragment, allInfos);
       }
 
-      var exposedDirectory = output as DirectoryInfo;
-      if(exposedDirectory != null)
+      if(output is DirectoryInfo)
       {
+        var exposedDirectory = (DirectoryInfo) output;
         output = this.CreateChild(exposedDirectory);
+      }
+      else if(output is FileInfo)
+      {
+        var exposedTemplateFile = (FileInfo) output;
+        if(TemplateFile.IsSuitable(exposedTemplateFile))
+        {
+          output = TemplateFile.Create(exposedTemplateFile);
+        }
       }
 
       result = output;

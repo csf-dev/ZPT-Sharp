@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using CSF.Zpt.Rendering;
+using System.Collections.Generic;
 
 namespace CSF.Zpt
 {
@@ -9,6 +10,12 @@ namespace CSF.Zpt
   /// </summary>
   public interface IZptDocumentFactory
   {
+    /// <summary>
+    /// Gets the supported file extensions.
+    /// </summary>
+    /// <value>The supported file extensions.</value>
+    ISet<string> SupportedFileExtensions { get; }
+
     /// <summary>
     /// Creates a document from the given source file.
     /// </summary>
