@@ -1,9 +1,9 @@
-<p xmlns:z="http://xml.zope.org/namespaces/tal">
-  <span z:define="local x str:hello brave new world">
-    <span z:content="text local:x">outer variable x, first appearance</span>
-    <span z:define="local x str:goodbye cruel world">
-      <span z:content="text local:x">inner variable x</span>
+<p>
+  <span tal:define="local x string:hello brave new world">
+    <span tal:content="text local:x">outer variable x, first appearance</span>
+    <span tal:define="local x string:goodbye cruel world">
+      <span tal:content="text local:x">inner variable x</span>
     </span>
-    <span z:content="text local:x">outer variable x, second appearance</span>
+    <span tal:content="text local:x">outer variable x, second appearance</span>
   </span>
 </p>
