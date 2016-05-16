@@ -463,6 +463,21 @@ namespace CSF.Zpt.Rendering
       }
     }
 
+    public override void PurgeElements(ZptNamespace elementNamespace)
+    {
+      var toRemove = this.Node
+        .SelectNodes(".//*")
+        .Cast<System.Xml.XmlElement>()
+        .Union(new [] { this.Node })
+        .Where(x => IsInNamespace(elementNamespace, x))
+        .ToArray();
+
+      foreach(var item in toRemove)
+      {
+        item.ParentNode.RemoveChild(item);
+      }
+    }
+
     /// <summary>
     /// Adds a new comment to the DOM immediately before the current element.
     /// </summary>
@@ -596,6 +611,11 @@ namespace CSF.Zpt.Rendering
     /// <param name="nSpace">The namespace for which to test.</param>
     public override bool IsInNamespace(ZptNamespace nSpace)
     {
+      return this.IsInNamespace(nSpace, this.Node);
+    }
+
+    private bool IsInNamespace(ZptNamespace nSpace, XmlNode node)
+    {
       if(nSpace == null)
       {
         throw new ArgumentNullException(nameof(nSpace));
@@ -605,11 +625,11 @@ namespace CSF.Zpt.Rendering
 
       if(nSpace.Uri != null)
       {
-        output = this.Node.NamespaceURI == nSpace.Uri;
+        output = node.NamespaceURI == nSpace.Uri;
       }
       else
       {
-        output = String.IsNullOrEmpty(this.Node.NamespaceURI);
+        output = String.IsNullOrEmpty(node.NamespaceURI);
       }
 
       return output;

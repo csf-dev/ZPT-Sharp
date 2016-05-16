@@ -397,6 +397,20 @@ namespace CSF.Zpt.Rendering
       }
     }
 
+    public override void PurgeElements(ZptNamespace elementNamespace)
+    {
+      var toRemove = this.Node
+        .Descendants()
+        .Union(new [] { this.Node })
+        .Where(x => IsInNamespace(elementNamespace, x))
+        .ToArray();
+
+      foreach(var item in toRemove)
+      {
+        item.Remove();
+      }
+    }
+
     /// <summary>
     /// Adds a new comment to the DOM immediately before the current element.
     /// </summary>
@@ -496,6 +510,11 @@ namespace CSF.Zpt.Rendering
     /// <param name="nSpace">The namespace for which to test.</param>
     public override bool IsInNamespace(ZptNamespace nSpace)
     {
+      return this.IsInNamespace(nSpace, this.Node);
+    }
+
+    private bool IsInNamespace(ZptNamespace nSpace, HtmlNode node)
+    {
       if(nSpace == null)
       {
         throw new ArgumentNullException(nameof(nSpace));
@@ -505,11 +524,11 @@ namespace CSF.Zpt.Rendering
 
       if(nSpace.Prefix != null)
       {
-        output = this.Node.Name.StartsWith(String.Concat(nSpace.Prefix, PREFIX_SEPARATOR));
+        output = node.Name.StartsWith(String.Concat(nSpace.Prefix, PREFIX_SEPARATOR));
       }
       else
       {
-        output = !this.Node.Name.Contains(PREFIX_SEPARATOR);
+        output = !node.Name.Contains(PREFIX_SEPARATOR);
       }
 
       return output;

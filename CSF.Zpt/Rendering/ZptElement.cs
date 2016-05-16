@@ -279,6 +279,8 @@ namespace CSF.Zpt.Rendering
     /// <param name="attributeNamespace">The attribute namespace.</param>
     public abstract void PurgeAttributes(ZptNamespace attributeNamespace);
 
+    public abstract void PurgeElements(ZptNamespace elementNamespace);
+
     /// <summary>
     /// Adds a new comment to the DOM immediately before the current element.
     /// </summary>
