@@ -40,22 +40,22 @@ namespace CSF.Zpt.Tales
     /// <param name="expression">The expression to evaluate.</param>
     /// <param name="element">The <see cref="ZptElement"/> for which the expression is being evaluated.</param>
     /// <param name="model">The ZPT model, providing the context for evaluation.</param>
-    public override ExpressionResult Evaluate(Expression expression, ZptElement element, TalesModel model)
+    public override ExpressionResult Evaluate(Expression expression, RenderingContext context, TalesModel model)
     {
       if(expression == null)
       {
         throw new ArgumentNullException(nameof(expression));
       }
-      if(element == null)
+      if(context == null)
       {
-        throw new ArgumentNullException(nameof(element));
+        throw new ArgumentNullException(nameof(context));
       }
       if(model == null)
       {
         throw new ArgumentNullException(nameof(model));
       }
 
-      var result = model.Evaluate(expression.GetContentAsExpression(), element);
+      var result = model.Evaluate(expression.GetContentAsExpression(), context);
       bool booleanResult = this.CoerceToBoolean(result);
 
       return new ExpressionResult(!booleanResult);

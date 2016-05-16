@@ -47,7 +47,7 @@ namespace Test.CSF.Zpt.Tal
     public void TestHandleNoAttribute()
     {
       // Arrange
-      _element
+      Mock.Get(_context)
         .Setup(x => x.GetAttribute(ZptConstants.Tal.Namespace,
                                    ZptConstants.Tal.OmitTagAttribute))
         .Returns((ZptAttribute) null);
@@ -68,7 +68,7 @@ namespace Test.CSF.Zpt.Tal
     public void TestHandleElementInTalNamespace()
     {
       // Arrange
-      _element
+      Mock.Get(_context)
         .Setup(x => x.GetAttribute(ZptConstants.Tal.Namespace,
                                    ZptConstants.Tal.OmitTagAttribute))
         .Returns((ZptAttribute) null);
@@ -93,7 +93,7 @@ namespace Test.CSF.Zpt.Tal
     public void TestHandleElementInMetalNamespace()
     {
       // Arrange
-      _element
+      Mock.Get(_context)
         .Setup(x => x.GetAttribute(ZptConstants.Tal.Namespace,
                                    ZptConstants.Tal.OmitTagAttribute))
         .Returns((ZptAttribute) null);
@@ -124,7 +124,7 @@ namespace Test.CSF.Zpt.Tal
                                            bool expectElement)
     {
       // Arrange
-      _element
+      Mock.Get(_context)
         .Setup(x => x.GetAttribute(ZptConstants.Tal.Namespace,
                                    ZptConstants.Tal.OmitTagAttribute))
         .Returns(Mock.Of<ZptAttribute>(x => x.Value == _autofixture.Create<string>()));
@@ -133,7 +133,7 @@ namespace Test.CSF.Zpt.Tal
         .Returns(new[] { Mock.Of<ZptElement>(), Mock.Of<ZptElement>(), Mock.Of<ZptElement>() });
 
       Mock.Get(_model)
-        .Setup(x => x.Evaluate(It.IsAny<string>(), _element.Object))
+        .Setup(x => x.Evaluate(It.IsAny<string>(), _context))
         .Returns(new ExpressionResult(cancelsAction? Model.CancelAction : conditionValue));
 
       // Act
@@ -153,7 +153,7 @@ namespace Test.CSF.Zpt.Tal
         Assert.AreEqual(3, result.NewlyExposedContexts.Length, "Count of new elements exposed");
         _element.Verify(x => x.Omit(), Times.Once());
       }
-      Mock.Get(_model).Verify(x => x.Evaluate(It.IsAny<string>(), _element.Object), Times.Once());
+      Mock.Get(_model).Verify(x => x.Evaluate(It.IsAny<string>(), _context), Times.Once());
     }
 
     #endregion

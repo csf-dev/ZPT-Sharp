@@ -81,7 +81,8 @@ namespace CSF.Zpt
         .Cast<XmlNode>()
         .Select(x => {
           var element = new ZptXmlElement(x, this.SourceFile);
-          return new Metal.MetalMacro(element.GetMetalAttribute(ZptConstants.Metal.DefineMacroAttribute).Value, element);
+          var context = new RenderingContext(Model.Empty, Model.Empty, element, RenderingOptions.Default);
+          return new Metal.MetalMacro(context.GetMetalAttribute(ZptConstants.Metal.DefineMacroAttribute).Value, element);
         })
         .ToArray();
     }

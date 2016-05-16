@@ -10,8 +10,19 @@ namespace Test.CSF.Zpt.Util.Autofixture
     public void Customize(IFixture fixture)
     {
       fixture.Customize<ZptElement>(x => x.FromFactory(() => {
-        return new Mock<ZptElement>() { CallBase = true }
-          .Object;
+        var output = new Mock<ZptElement>() { CallBase = true };
+
+        output
+          .Setup(e => e.Equals(It.IsAny<object>()))
+          .Returns((object obj) => Object.ReferenceEquals(output.Object, obj));
+        output
+          .Setup(e => e.Equals(It.IsAny<ZptElement>()))
+          .Returns((ZptElement obj) => Object.ReferenceEquals(output.Object, obj));
+        output
+          .Setup(e => e.GetHashCode())
+          .Returns(5);
+
+        return output.Object;
       }));
     }
   }

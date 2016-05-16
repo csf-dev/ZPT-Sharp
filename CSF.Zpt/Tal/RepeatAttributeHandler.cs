@@ -35,7 +35,7 @@ namespace CSF.Zpt.Tal
       }
 
       RenderingContext[] output = null;
-      var attribute = context.Element.GetTalAttribute(ZptConstants.Tal.RepeatAttribute);
+      var attribute = context.GetTalAttribute(ZptConstants.Tal.RepeatAttribute);
 
       if(attribute != null)
       {
@@ -43,7 +43,7 @@ namespace CSF.Zpt.Tal
 
         this.ParseAttributeValue(attribute, out repeatVariableName, out expression, context.Element);
 
-        var sequence = this.GetSequence(expression, context.TalModel, context.Element);
+        var sequence = this.GetSequence(expression, context.TalModel, context);
 
         if(sequence != null)
         {
@@ -99,14 +99,14 @@ namespace CSF.Zpt.Tal
     /// <param name="expression">Expression.</param>
     /// <param name="model">Model.</param>
     /// <param name="element">Element.</param>
-    private IEnumerable GetSequence(string expression, Model model, ZptElement element)
+    private IEnumerable GetSequence(string expression, Model model, RenderingContext context)
     {
       ExpressionResult result;
       IEnumerable output;
 
       try
       {
-        result = model.Evaluate(expression, element);
+        result = model.Evaluate(expression, context);
       }
       catch(Exception ex)
       {

@@ -135,33 +135,29 @@ namespace Test.CSF.Zpt.Tal
 
       var contexts = Enumerable
         .Range(0, nestingLevel + 1)
-        .Select(x => new Mock<RenderingContext>())
+        .Select(x => fixture.Create<RenderingContext>())
         .ToArray();
       for(int i = 0; i < nestingLevel; i++)
       {
-        contexts[i].SetupGet(x => x.Element).Returns(Mock.Of<ZptElement>());
-        contexts[i].Setup(x => x.GetChildContexts()).Returns(new [] { contexts[i + 1].Object });
+        Mock.Get(contexts[i]).Setup(x => x.GetChildContexts()).Returns(new [] { contexts[i + 1] });
       }
-      var errorElement = new Mock<ZptElement>();
-      errorElement
+      Mock.Get(contexts[nestingLevel])
         .Setup(x => x.GetAttribute(ZptConstants.Tal.Namespace, ZptConstants.Tal.OnErrorAttribute))
         .Returns(Mock.Of<ZptAttribute>());
-      contexts[nestingLevel].SetupGet(x => x.Element).Returns(errorElement.Object);
-      contexts[nestingLevel].SetupGet(x => x.TalModel).Returns(fixture.Create<DummyModel>());
 
       var generalHandler = new Mock<IAttributeHandler>();
       generalHandler
         .Setup(x => x.Handle(It.IsAny<RenderingContext>()))
         .Returns((RenderingContext ctx) => new AttributeHandlingResult(new[] { ctx }, true));
       generalHandler
-        .Setup(x => x.Handle(contexts[nestingLevel].Object))
+        .Setup(x => x.Handle(contexts[nestingLevel]))
         .Throws<RenderingException>();
 
       object errorObject = null;
 
       var errorHandler = new Mock<IAttributeHandler>();
       errorHandler
-        .Setup(x => x.Handle(contexts[nestingLevel].Object))
+        .Setup(x => x.Handle(contexts[nestingLevel]))
         .Callback((RenderingContext ele) => {
           errorObject = ele.TalModel.Error;
         });
@@ -170,10 +166,10 @@ namespace Test.CSF.Zpt.Tal
                                errorHandler: errorHandler.Object);
 
       // Act
-      sut.VisitRecursively(contexts[0].Object);
+      sut.VisitRecursively(contexts[0]);
 
       // Assert
-      errorHandler.Verify(x => x.Handle(contexts[nestingLevel].Object), Times.Once());
+      errorHandler.Verify(x => x.Handle(contexts[nestingLevel]), Times.Once());
       Assert.NotNull(errorObject, "Error object nullability");
       Assert.IsInstanceOf<RenderingException>(errorObject, "Error object type");
     }

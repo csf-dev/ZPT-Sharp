@@ -200,7 +200,7 @@ namespace CSF.Zpt.Rendering
     /// </summary>
     /// <param name="expression">The expression to evaluate.</param>
     /// <param name="element">The element for which we are evaluating a result.</param>
-    public abstract ExpressionResult Evaluate(string expression, ZptElement element);
+    public abstract ExpressionResult Evaluate(string expression, RenderingContext context);
 
     /// <summary>
     /// Tries to get a named item from the current instance.
@@ -209,12 +209,12 @@ namespace CSF.Zpt.Rendering
     /// <param name="name">The item name.</param>
     /// <param name="element">The element for which we are evaluating a result.</param>
     /// <param name="result">Exposes the item which was found.</param>
-    protected virtual bool TryGetItem(string name, ZptElement element, out object result)
+    protected virtual bool TryGetItem(string name, RenderingContext context, out object result)
     {
       bool output;
       result = null;
 
-      output = this.RepetitionInfo.TryResolveValue(name, element.GetElementChain(), out result);
+      output = this.RepetitionInfo.TryResolveValue(name, context.Element.GetElementChain(), out result);
 
       if(!output)
       {
@@ -340,6 +340,57 @@ namespace CSF.Zpt.Rendering
       get {
         return _cancelAction;
       }
+    }
+
+    /// <summary>
+    /// Gets an empty model/null object.
+    /// </summary>
+    /// <value>The empty model.</value>
+    public static Model Empty
+    {
+      get {
+        return new EmptyModel(null);
+      }
+    }
+
+    #endregion
+
+    #region contained type
+
+    private class EmptyModel : Model
+    {
+      public override Model CreateChildModel()
+      {
+        return new EmptyModel(this, this.Root);
+      }
+
+      protected override Model CreateTypedSiblingModel()
+      {
+        return new EmptyModel(this.Parent, this.Root);
+      }
+
+      public override ExpressionResult Evaluate(string expression, RenderingContext context)
+      {
+        object result;
+        ExpressionResult output;
+
+        if(this.TryGetItem(expression, context, out result))
+        {
+          output = new ExpressionResult(result);
+        }
+        else
+        {
+          string message = String.Format("The item '{0}' was not found in the model.",
+                                       expression);
+          throw new InvalidOperationException(message);
+        }
+
+        return output;
+      }
+
+      internal EmptyModel(TemplateKeywordOptions opts) : base(opts) {}
+
+      internal EmptyModel(Model parent, Model root) : base(parent, root) {}
     }
 
     #endregion

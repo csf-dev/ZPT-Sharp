@@ -40,6 +40,23 @@ namespace CSF.Zpt.Rendering
 
     #endregion
 
+    #region methods
+
+    public override bool IsMatch(ZptNamespace nspace, string name)
+    {
+      if(nspace == null)
+      {
+        throw new ArgumentNullException(nameof(nspace));
+      }
+
+      return (((_original.NamespaceURI == null
+                && nspace.Uri == null)
+               || (_original.NamespaceURI == nspace.Uri))
+              && _original.LocalName == name);
+    }
+
+    #endregion
+
     #region constructor
 
     /// <summary>

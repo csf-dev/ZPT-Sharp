@@ -23,8 +23,7 @@ namespace CSF.Zpt.Rendering
         throw new ArgumentNullException(nameof(element));
       }
 
-      return element.GetAttribute(ZptConstants.Metal.Namespace,
-                                  attributeName);
+      return element.GetAttribute(ZptConstants.Metal.Namespace, attributeName);
     }
 
     /// <summary>
@@ -41,8 +40,7 @@ namespace CSF.Zpt.Rendering
         throw new ArgumentNullException(nameof(element));
       }
 
-      return element.SearchAncestorsByAttribute(ZptConstants.Metal.Namespace,
-                                                attributeName);
+      return element.SearchAncestorsByAttribute(ZptConstants.Metal.Namespace, attributeName);
     }
 
     /// <summary>
@@ -59,8 +57,7 @@ namespace CSF.Zpt.Rendering
         throw new ArgumentNullException(nameof(element));
       }
 
-      return element.SearchChildrenByAttribute(ZptConstants.Metal.Namespace,
-                                               attributeName);
+      return element.SearchChildrenByAttribute(ZptConstants.Metal.Namespace, attributeName);
     }
 
     /// <summary>
@@ -95,8 +92,7 @@ namespace CSF.Zpt.Rendering
         throw new ArgumentNullException(nameof(element));
       }
 
-      return element.GetAttribute(ZptConstants.Tal.Namespace,
-                                  attributeName);
+      return element.GetAttribute(ZptConstants.Tal.Namespace, attributeName);
     }
 
     /// <summary>
@@ -113,8 +109,7 @@ namespace CSF.Zpt.Rendering
         throw new ArgumentNullException(nameof(element));
       }
 
-      return element.SearchAncestorsByAttribute(ZptConstants.Tal.Namespace,
-                                                attributeName);
+      return element.SearchAncestorsByAttribute(ZptConstants.Tal.Namespace, attributeName);
     }
 
     /// <summary>
@@ -131,8 +126,7 @@ namespace CSF.Zpt.Rendering
         throw new ArgumentNullException(nameof(element));
       }
 
-      return element.SearchChildrenByAttribute(ZptConstants.Tal.Namespace,
-                                               attributeName);
+      return element.SearchChildrenByAttribute(ZptConstants.Tal.Namespace, attributeName);
     }
 
     /// <summary>

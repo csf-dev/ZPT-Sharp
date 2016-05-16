@@ -32,7 +32,7 @@ namespace Test.CSF.Zpt.Tales
       var registry = Mock.Of<IEvaluatorRegistry>(x => x.GetEvaluator(It.IsAny<Expression>()) == evaluator.Object);
       evaluator
         .Setup(x => x.Evaluate(It.Is<Expression>(e => e.Source == expressionContent),
-                               It.IsAny<ZptElement>(),
+                               It.IsAny<RenderingContext>(),
                                It.IsAny<TalesModel>()))
         .Returns(new ExpressionResult(expressionResult));
 
@@ -41,7 +41,7 @@ namespace Test.CSF.Zpt.Tales
       var sut = new NotExpressionEvaluator(registry);
 
       // Act
-      var result = sut.Evaluate(expression, Mock.Of<ZptElement>(), model);
+      var result = sut.Evaluate(expression, Mock.Of<RenderingContext>(), model);
 
       // Assert
       Assert.NotNull(result, "Result nullability");
@@ -61,7 +61,7 @@ namespace Test.CSF.Zpt.Tales
       var registry = Mock.Of<IEvaluatorRegistry>(x => x.GetEvaluator(It.IsAny<Expression>()) == evaluator.Object);
       evaluator
         .Setup(x => x.Evaluate(It.Is<Expression>(e => e.Source == expressionContent),
-                               It.IsAny<ZptElement>(),
+                               It.IsAny<RenderingContext>(),
                                It.IsAny<TalesModel>()))
         .Returns(new ExpressionResult(Model.CancelAction));
 
@@ -70,7 +70,7 @@ namespace Test.CSF.Zpt.Tales
       var sut = new NotExpressionEvaluator(registry);
 
       // Act
-      var result = sut.Evaluate(expression, Mock.Of<ZptElement>(), model);
+      var result = sut.Evaluate(expression, Mock.Of<RenderingContext>(), model);
 
       // Assert
       Assert.NotNull(result, "Result nullability");
@@ -92,7 +92,7 @@ namespace Test.CSF.Zpt.Tales
       var convertible = Mock.Of<ITalesConvertible>(x => x.AsBoolean() == conversionValue);
       evaluator
         .Setup(x => x.Evaluate(It.Is<Expression>(e => e.Source == expressionContent),
-                               It.IsAny<ZptElement>(),
+                               It.IsAny<RenderingContext>(),
                                It.IsAny<TalesModel>()))
         .Returns(new ExpressionResult(convertible));
 
@@ -101,7 +101,7 @@ namespace Test.CSF.Zpt.Tales
       var sut = new NotExpressionEvaluator(registry);
 
       // Act
-      var result = sut.Evaluate(expression, Mock.Of<ZptElement>(), model);
+      var result = sut.Evaluate(expression, Mock.Of<RenderingContext>(), model);
 
       // Assert
       Assert.NotNull(result, "Result nullability");

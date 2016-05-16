@@ -28,8 +28,7 @@ namespace Test.CSF.Zpt.Metal
     public void Setup()
     {
       _fixture = new Fixture();
-      new DummyModelCustomisation().Customize(_fixture);
-      new RenderingOptionsCustomisation().Customize(_fixture);
+      new RenderingContextCustomisation().Customize(_fixture);
 
       _finder = new Mock<MacroFinder>();
       _sut = new MacroExpander(_finder.Object);
@@ -44,17 +43,14 @@ namespace Test.CSF.Zpt.Metal
     public void TestExpand()
     {
       // Arrange
-      var context = new RenderingContext(_fixture.Create<DummyModel>(),
-                                         _fixture.Create<DummyModel>(),
-                                         new Mock<ZptElement>().Object,
-                                         _fixture.Create<RenderingOptions>());
+      var context = _fixture.Create<RenderingContext>();
       var attribute = Mock.Of<global::CSF.Zpt.Rendering.ZptAttribute>();
       ZptElement
-      macro = Mock.Of<ZptElement>(x => x.GetAttribute(ZptConstants.Metal.Namespace,
-                                                      ZptConstants.Metal.DefineMacroAttribute) == attribute
-                                       && x.SearchChildrenByAttribute(It.IsAny<ZptNamespace>(),
-                                                                      It.IsAny<string>()) == new ZptElement[0]);
-      _finder.Setup(x => x.GetUsedMacro(context.Element, context.MetalModel)).Returns(macro);
+        macro = Mock.Of<ZptElement>(x => x.GetAttribute(ZptConstants.Metal.Namespace,
+                                                        ZptConstants.Metal.DefineMacroAttribute) == attribute
+                                         && x.SearchChildrenByAttribute(It.IsAny<ZptNamespace>(),
+                                                                        It.IsAny<string>()) == new ZptElement[0]);
+      _finder.Setup(x => x.GetUsedMacro(context)).Returns(macro);
       Mock.Get(context.Element)
         .Setup(x => x.SearchChildrenByAttribute(It.IsAny<ZptNamespace>(), It.IsAny<string>()))
         .Returns(new ZptElement[0]);
@@ -75,11 +71,8 @@ namespace Test.CSF.Zpt.Metal
     public void TestExpandNoUsage()
     {
       // Arrange
-      var context = new RenderingContext(_fixture.Create<DummyModel>(),
-                                         _fixture.Create<DummyModel>(),
-                                         new Mock<ZptElement>().Object,
-                                         _fixture.Create<RenderingOptions>());
-      _finder.Setup(x => x.GetUsedMacro(context.Element, context.MetalModel)).Returns((ZptElement) null);
+      var context = _fixture.Create<RenderingContext>();
+      _finder.Setup(x => x.GetUsedMacro(context)).Returns((ZptElement) null);
 
       // Act
       var result = _sut.Expand(context);
@@ -95,10 +88,7 @@ namespace Test.CSF.Zpt.Metal
     public void TestExpandAndReplace()
     {
       // Arrange
-      var context = new RenderingContext(_fixture.Create<DummyModel>(),
-                                         _fixture.Create<DummyModel>(),
-                                         new Mock<ZptElement>().Object,
-                                         _fixture.Create<RenderingOptions>());
+      var context = _fixture.Create<RenderingContext>();
       var attribute = Mock.Of<global::CSF.Zpt.Rendering.ZptAttribute>();
       ZptElement
         macro = Mock.Of<ZptElement>(x => x.GetAttribute(ZptConstants.Metal.Namespace,

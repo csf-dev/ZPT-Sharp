@@ -55,7 +55,7 @@ namespace Test.CSF.Zpt.Tales
       var expression = Expression.Create("string", supplied);
 
       // Act
-      var result = _sut.Evaluate(expression, Mock.Of<ZptElement>(), _model);
+      var result = _sut.Evaluate(expression, Mock.Of<RenderingContext>(), _model);
 
       // Assert
       Assert.AreEqual(expected, result.Value);
@@ -70,17 +70,17 @@ namespace Test.CSF.Zpt.Tales
 
       _pathEvaluator
         .Setup(x => x.Evaluate(It.Is<Expression>(exp => exp.Source == "name"),
-                               It.IsAny<ZptElement>(),
+                               It.IsAny<RenderingContext>(),
                                It.IsAny<TalesModel>()))
         .Returns(new ExpressionResult("Fred Bloggs"));
       _pathEvaluator
         .Setup(x => x.Evaluate(It.Is<Expression>(exp => exp.Source == "current_state/time_of_day"),
-                               It.IsAny<ZptElement>(),
+                               It.IsAny<RenderingContext>(),
                                It.IsAny<TalesModel>()))
         .Returns(new ExpressionResult("evening"));
 
       // Act
-      var result = _sut.Evaluate(expression, Mock.Of<ZptElement>(), _model);
+      var result = _sut.Evaluate(expression, Mock.Of<RenderingContext>(), _model);
 
       // Assert
       Assert.AreEqual("Hello Fred Bloggs, how are you this fine evening?", result.Value);
@@ -95,17 +95,17 @@ namespace Test.CSF.Zpt.Tales
 
       _pathEvaluator
         .Setup(x => x.Evaluate(It.Is<Expression>(exp => exp.Source == "name"),
-                               It.IsAny<ZptElement>(),
+                               It.IsAny<RenderingContext>(),
                                It.IsAny<TalesModel>()))
         .Returns(new ExpressionResult("Fred Bloggs"));
       _pathEvaluator
         .Setup(x => x.Evaluate(It.Is<Expression>(exp => exp.Source == "current_state/time_of_day"),
-                               It.IsAny<ZptElement>(),
+                               It.IsAny<RenderingContext>(),
                                It.IsAny<TalesModel>()))
         .Returns(new ExpressionResult("evening"));
 
       // Act
-      var result = _sut.Evaluate(expression, Mock.Of<ZptElement>(), _model);
+      var result = _sut.Evaluate(expression, Mock.Of<RenderingContext>(), _model);
 
       // Assert
       Assert.AreEqual("Hello $Fred Bloggs, how are $$ you this fine $evening?", result.Value);

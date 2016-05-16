@@ -43,6 +43,7 @@ namespace Test.CSF.Zpt.Metal
         ele
           .Setup(x => x.GetFileLocation())
           .Returns(() => String.Format("Element {0}", Array.IndexOf(elements, ele) + 1));
+        ele.Setup(x => x.GetAttributes()).Returns(new ZptAttribute[0]);
       }
       elements[0].SetupGet(x => x.IsRoot).Returns(true);
 

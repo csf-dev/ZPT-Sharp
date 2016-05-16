@@ -55,7 +55,7 @@ namespace Test.CSF.Zpt.Tal
     public void TestHandleNoAttribute()
     {
       // Arrange
-      _element
+      Mock.Get(_context)
         .Setup(x => x.GetAttribute(ZptConstants.Tal.Namespace,
                                    ZptConstants.Tal.RepeatAttribute))
         .Returns((ZptAttribute) null);
@@ -76,13 +76,13 @@ namespace Test.CSF.Zpt.Tal
     public void TestHandleCancelsAction()
     {
       // Arrange
-      _element
+      Mock.Get(_context)
         .Setup(x => x.GetAttribute(ZptConstants.Tal.Namespace,
                                    ZptConstants.Tal.RepeatAttribute))
         .Returns((ZptAttribute) Mock.Of<ZptAttribute>(x => x.Value == "foo bar"));
 
       Mock.Get(_model)
-        .Setup(x => x.Evaluate(It.IsAny<string>(), _element.Object))
+        .Setup(x => x.Evaluate(It.IsAny<string>(), _context))
         .Returns(new ExpressionResult(Model.CancelAction));
 
       // Act
@@ -102,13 +102,13 @@ namespace Test.CSF.Zpt.Tal
     public void TestHandleNullSequences()
     {
       // Arrange
-      _element
+      Mock.Get(_context)
         .Setup(x => x.GetAttribute(ZptConstants.Tal.Namespace,
                                    ZptConstants.Tal.RepeatAttribute))
         .Returns((ZptAttribute) Mock.Of<ZptAttribute>(x => x.Value == "foo bar"));
 
       Mock.Get(_model)
-        .Setup(x => x.Evaluate(It.IsAny<string>(), _element.Object))
+        .Setup(x => x.Evaluate(It.IsAny<string>(), _context))
         .Returns(new ExpressionResult(null));
 
       // Act
@@ -128,13 +128,13 @@ namespace Test.CSF.Zpt.Tal
     public void TestHandleEmptySequence()
     {
       // Arrange
-      _element
+      Mock.Get(_context)
         .Setup(x => x.GetAttribute(ZptConstants.Tal.Namespace,
                                    ZptConstants.Tal.RepeatAttribute))
         .Returns((ZptAttribute) Mock.Of<ZptAttribute>(x => x.Value == "foo bar"));
 
       Mock.Get(_model)
-        .Setup(x => x.Evaluate(It.IsAny<string>(), _element.Object))
+        .Setup(x => x.Evaluate(It.IsAny<string>(), _context))
         .Returns(new ExpressionResult(new string[0]));
 
       // Act
@@ -153,13 +153,13 @@ namespace Test.CSF.Zpt.Tal
     public void TestHandleSequence()
     {
       // Arrange
-      _element
+      Mock.Get(_context)
         .Setup(x => x.GetAttribute(ZptConstants.Tal.Namespace,
                                    ZptConstants.Tal.RepeatAttribute))
         .Returns((ZptAttribute) Mock.Of<ZptAttribute>(x => x.Value == "foo bar"));
 
       Mock.Get(_model)
-        .Setup(x => x.Evaluate("bar", _element.Object))
+        .Setup(x => x.Evaluate("bar", _context))
         .Returns(new ExpressionResult(new [] { "One", "Two", "Three", "Four" }));
       Mock.Get(_model).Setup(x => x.AddRepetitionInfo(It.IsAny<RepetitionInfo[]>()));
 

@@ -49,7 +49,7 @@ namespace Test.CSF.Zpt.Tal
     public void TestHandleNoAttribute()
     {
       // Arrange
-      _element
+      Mock.Get(_context)
         .Setup(x => x.GetAttribute(ZptConstants.Tal.Namespace,
                                    ZptConstants.Tal.ConditionAttribute))
         .Returns((ZptAttribute) null);
@@ -76,13 +76,13 @@ namespace Test.CSF.Zpt.Tal
                                            bool expectElement)
     {
       // Arrange
-      _element
+      Mock.Get(_context)
         .Setup(x => x.GetAttribute(ZptConstants.Tal.Namespace,
                                    ZptConstants.Tal.ConditionAttribute))
         .Returns(Mock.Of<ZptAttribute>(x => x.Value == _autofixture.Create<string>()));
 
       Mock.Get(_model)
-        .Setup(x => x.Evaluate(It.IsAny<string>(), _element.Object))
+        .Setup(x => x.Evaluate(It.IsAny<string>(), _context))
         .Returns(new ExpressionResult(cancelsAction? Model.CancelAction : conditionValue));
 
       // Act
@@ -101,7 +101,7 @@ namespace Test.CSF.Zpt.Tal
         Assert.AreEqual(0, result.Contexts.Length, "Count of results");
         _element.Verify(x => x.Remove(), Times.Once());
       }
-      Mock.Get(_model).Verify(x => x.Evaluate(It.IsAny<string>(), _element.Object), Times.Once());
+      Mock.Get(_model).Verify(x => x.Evaluate(It.IsAny<string>(), _context), Times.Once());
     }
 
     #endregion

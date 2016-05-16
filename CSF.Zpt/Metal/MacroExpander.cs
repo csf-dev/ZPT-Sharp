@@ -30,7 +30,7 @@ namespace CSF.Zpt.Metal
         throw new ArgumentNullException(nameof(context));
       }
 
-      var macro = _macroFinder.GetUsedMacro(context.Element, context.MetalModel);
+      var macro = _macroFinder.GetUsedMacro(context);
       return (macro != null)? this.ExpandAndReplace(context, macro) : context;
     }
 
@@ -123,7 +123,7 @@ namespace CSF.Zpt.Metal
         throw new ArgumentNullException(nameof(context));
       }
 
-      var extended = _macroFinder.GetExtendedMacro(context.Element, context.MetalModel);
+      var extended = _macroFinder.GetExtendedMacro(context);
       return (extended != null)? this.ExpandAndReplace(context, extended) : context;
     }
 

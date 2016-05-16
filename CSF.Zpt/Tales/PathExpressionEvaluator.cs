@@ -39,15 +39,15 @@ namespace CSF.Zpt.Tales
     /// <param name="expression">The expression to evaluate.</param>
     /// <param name="element">The <see cref="ZptElement"/> for which the expression is being evaluated.</param>
     /// <param name="model">The ZPT model, providing the context for evaluation.</param>
-    public override ExpressionResult Evaluate(Expression expression, ZptElement element, TalesModel model)
+    public override ExpressionResult Evaluate(Expression expression, RenderingContext context, TalesModel model)
     {
       if(expression == null)
       {
         throw new ArgumentNullException(nameof(expression));
       }
-      if(element == null)
+      if(context == null)
       {
-        throw new ArgumentNullException(nameof(element));
+        throw new ArgumentNullException(nameof(context));
       }
       if(model == null)
       {
@@ -61,7 +61,7 @@ namespace CSF.Zpt.Tales
 
       try
       {
-        output = this.WalkPath(walker, element, model);
+        output = this.WalkPath(walker, context, model);
       }
       catch(TraversalException ex)
       {
@@ -82,14 +82,14 @@ namespace CSF.Zpt.Tales
     /// <param name="walker">A TALES path walker, containing a path.</param>
     /// <param name="element">The <see cref="ZptElement"/> for which the path is being evaluated.</param>
     /// <param name="model">The ZPT model, providing the context for evaluation.</param>
-    private object WalkPath(PathWalker walker, ZptElement element, TalesModel model)
+    private object WalkPath(PathWalker walker, RenderingContext context, TalesModel model)
     {
       object output = null;
       bool success = false;
 
       while(walker.NextComponent() && !success)
       {
-        success = this.WalkComponent(walker, element, model, out output);
+        success = this.WalkComponent(walker, context, model, out output);
       }
 
       if(!success)
@@ -110,11 +110,11 @@ namespace CSF.Zpt.Tales
     /// <param name="element">The <see cref="ZptElement"/> for which the path is being evaluated.</param>
     /// <param name="model">The ZPT model, providing the context for evaluation.</param>
     /// <param name="result">Exposes the result of the evaluation.</param>
-    private bool WalkComponent(PathWalker walker, ZptElement element, TalesModel model, out object result)
+    private bool WalkComponent(PathWalker walker, RenderingContext context, TalesModel model, out object result)
     {
       bool output;
 
-      if(this.TryGetTraversalRoot(walker, element, model, out result))
+      if(this.TryGetTraversalRoot(walker, context, model, out result))
       {
         object traversalChild;
         output = true;
@@ -123,7 +123,7 @@ namespace CSF.Zpt.Tales
         {
           string partName;
 
-          if(this.TryGetPartName(walker.CurrentPart, element, model, out partName)
+          if(this.TryGetPartName(walker.CurrentPart, context, model, out partName)
              && ObjectTraverser.Default.Traverse(result, partName, out traversalChild))
           {
             result = traversalChild;
@@ -154,14 +154,14 @@ namespace CSF.Zpt.Tales
     /// <param name="model">The TALES model.</param>
     /// <param name="result">Exposes the result of this operation.</param>
     protected virtual bool TryGetTraversalRoot(PathWalker walker,
-                                               ZptElement element,
+                                               RenderingContext context,
                                                TalesModel model,
                                                out object result)
     {
       bool output;
 
       if(walker.NextPart()
-         && model.TryGetRootObject(walker.CurrentPart.Value, element, out result))
+         && model.TryGetRootObject(walker.CurrentPart.Value, context, out result))
       {
         output = true;
       }
@@ -182,7 +182,7 @@ namespace CSF.Zpt.Tales
     /// <param name="element">A ZPT element.</param>
     /// <param name="model">The TALES model.</param>
     /// <param name="result">Exposes the result of this operation.</param>
-    private bool TryGetPartName(PathPart part, ZptElement element, TalesModel model, out string result)
+    private bool TryGetPartName(PathPart part, RenderingContext context, TalesModel model, out string result)
     {
       result = part.Value;
       bool output = true;
@@ -191,7 +191,7 @@ namespace CSF.Zpt.Tales
       {
         object interpolatedValue;
 
-        if(model.TryGetRootObject(result, element, out interpolatedValue)
+        if(model.TryGetRootObject(result, context, out interpolatedValue)
            && interpolatedValue != null)
         {
           output = true;

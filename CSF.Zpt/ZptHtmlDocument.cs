@@ -70,14 +70,15 @@ namespace CSF.Zpt
     internal override CSF.Zpt.Metal.MetalMacro[] GetMacros()
     {
       return this.Document
-          .DocumentNode
-          .DescendantsAndSelf()
-          .Where(ele => ele.Attributes.Any(attr => attr.Name == String.Format("{0}:{1}",
-                                                                              ZptConstants.Metal.Namespace.Prefix,
-                                                                              ZptConstants.Metal.DefineMacroAttribute)))
-          .Select(x => {
+        .DocumentNode
+        .DescendantsAndSelf()
+        .Where(ele => ele.Attributes.Any(attr => attr.Name == String.Format("{0}:{1}",
+                                                                            ZptConstants.Metal.Namespace.Prefix,
+                                                                            ZptConstants.Metal.DefineMacroAttribute)))
+        .Select(x => {
           var element = new ZptHtmlElement(x, this.SourceFile);
-          return new Metal.MetalMacro(element.GetMetalAttribute(ZptConstants.Metal.DefineMacroAttribute).Value, element);
+          var context = new RenderingContext(Model.Empty, Model.Empty, element, RenderingOptions.Default);
+          return new Metal.MetalMacro(context.GetMetalAttribute(ZptConstants.Metal.DefineMacroAttribute).Value, element);
         })
         .ToArray();
     }

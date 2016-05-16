@@ -10,7 +10,7 @@ namespace Test.CSF.Zpt.Util.Autofixture
   {
     #region fields
 
-    private int _nameIterator;
+    private static int _nameIterator;
 
     #endregion
 
@@ -19,12 +19,14 @@ namespace Test.CSF.Zpt.Util.Autofixture
     public void Customize(IFixture fixture)
     {
       new DummyModelCustomisation().Customize(fixture);
+      new ZptElementCustomisation().Customize(fixture);
+      new RenderingOptionsCustomisation().Customize(fixture);
+
       fixture.Customize<RenderingContext>(x => x.FromFactory((DummyModel metal,
-                                                              DummyModel tal) => {
-        return new Mock<RenderingContext>(metal,
-                                          tal,
-                                          Mock.Of<ZptElement>(),
-                                          RenderingOptions.Default) {
+                                                              DummyModel tal,
+                                                              ZptElement element,
+                                                              RenderingOptions opts) => {
+        return new Mock<RenderingContext>(metal, tal, element, opts) {
           CallBase = true,
           Name = String.Format("Context {0}", _nameIterator++)
         }.Object;
@@ -35,7 +37,7 @@ namespace Test.CSF.Zpt.Util.Autofixture
 
     #region constructor
 
-    public RenderingContextCustomisation ()
+    static RenderingContextCustomisation ()
     {
       _nameIterator = 1;
     }

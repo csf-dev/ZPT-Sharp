@@ -87,7 +87,7 @@ namespace CSF.Zpt.Tal
       {
         output = new [] { context };
 
-        if(context.Element.GetTalAttribute(ZptConstants.Tal.OnErrorAttribute) != null)
+        if(context.GetTalAttribute(ZptConstants.Tal.OnErrorAttribute) != null)
         {
           context.TalModel.AddError(ex);
           _errorHandler.Handle(context);

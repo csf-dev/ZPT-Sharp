@@ -323,12 +323,6 @@ namespace CSF.Zpt.Rendering
     /// <param name="nSpace">The namespace for which to test.</param>
     public abstract bool IsInNamespace(ZptNamespace nSpace);
 
-    /// <summary>
-    /// Gets a collection of the original attribute values for the current element.
-    /// </summary>
-    /// <returns>The original attributes.</returns>
-    public abstract OriginalAttributeValuesCollection GetOriginalAttributes();
-
     #endregion
 
     #region constructor

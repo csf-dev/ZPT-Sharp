@@ -23,9 +23,9 @@ namespace CSF.Zpt.Metal
     /// <returns>Either an <see cref="ZptElement"/> instance representing the macro used, or a <c>null</c> reference.</returns>
     /// <param name="element">The element to examine for macro usage.</param>
     /// <param name="model">The METAL model.</param>
-    public virtual ZptElement GetUsedMacro(ZptElement element, Model model)
+    public virtual ZptElement GetUsedMacro(RenderingContext context)
     {
-      return this.GetReferencedMacro(element, model, ZptConstants.Metal.UseMacroAttribute);
+      return this.GetReferencedMacro(context, ZptConstants.Metal.UseMacroAttribute);
     }
 
     /// <summary>
@@ -35,9 +35,9 @@ namespace CSF.Zpt.Metal
     /// <returns>Either an <see cref="ZptElement"/> instance representing the macro extended, or a <c>null</c> reference.</returns>
     /// <param name="macro">The macro element to examine for extension.</param>
     /// <param name="model">The METAL model.</param>
-    public virtual ZptElement GetExtendedMacro(ZptElement macro, Model model)
+    public virtual ZptElement GetExtendedMacro(RenderingContext context)
     {
-      return this.GetReferencedMacro(macro, model, ZptConstants.Metal.ExtendMacroAttribute);
+      return this.GetReferencedMacro(context, ZptConstants.Metal.ExtendMacroAttribute);
     }
 
     /// <summary>
@@ -48,19 +48,15 @@ namespace CSF.Zpt.Metal
     /// <param name="element">The element to examine for the reference.</param>
     /// <param name="model">The METAL model.</param>
     /// <param name="attributeName">The name of the desired attribute, which references a macro if present.</param>
-    private ZptElement GetReferencedMacro(ZptElement element, Model model, string attributeName)
+    private ZptElement GetReferencedMacro(RenderingContext context, string attributeName)
     {
-      if(element == null)
+      if(context == null)
       {
-        throw new ArgumentNullException(nameof(element));
-      }
-      if(model == null)
-      {
-        throw new ArgumentNullException(nameof(model));
+        throw new ArgumentNullException(nameof(context));
       }
 
       ZptElement output;
-      var attrib = element.GetMetalAttribute(attributeName);
+      var attrib = context.GetMetalAttribute(attributeName);
 
       if(attrib != null)
       {
@@ -68,7 +64,7 @@ namespace CSF.Zpt.Metal
 
         try
         {
-          result = model.Evaluate(attrib.Value, element);
+          result = context.MetalModel.Evaluate(attrib.Value, context);
           output = result.GetValue<ZptElement>();
         }
         catch(Exception ex)

@@ -39,7 +39,7 @@ namespace CSF.Zpt.Tal
         throw new ArgumentNullException(nameof(context));
       }
 
-      var attrib = context.Element.GetTalAttribute(ZptConstants.Tal.AttributesAttribute);
+      var attrib = context.GetTalAttribute(ZptConstants.Tal.AttributesAttribute);
 
       if(attrib != null)
       {
@@ -74,7 +74,7 @@ namespace CSF.Zpt.Tal
 
           try
           {
-            result = context.TalModel.Evaluate(unescapedExpression, context.Element);
+            result = context.TalModel.Evaluate(unescapedExpression, context);
           }
           catch(Exception ex)
           {

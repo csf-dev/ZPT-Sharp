@@ -14,7 +14,7 @@ namespace Test.CSF.Zpt.Tales
 
     private IFixture _autofixture;
     private Mock<TalesModel> _model;
-    private ZptElement _element;
+    private RenderingContext _element;
     private PathExpressionEvaluator _sut;
 
     #endregion
@@ -26,7 +26,7 @@ namespace Test.CSF.Zpt.Tales
     {
       _autofixture = new Fixture();
       _model = new Mock<TalesModel>(SimpleEvaluatorRegistry.Default, null);
-      _element = Mock.Of<ZptElement>();
+      _element = Mock.Of<RenderingContext>();
       _sut = new PathExpressionEvaluator(SimpleEvaluatorRegistry.Default);
     }
 

@@ -1,6 +1,8 @@
 ﻿using System;
 using CSF.Zpt.Rendering;
 using CSF.Zpt.Tales;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace CSF.Zpt.Rendering
 {
@@ -9,6 +11,12 @@ namespace CSF.Zpt.Rendering
   /// </summary>
   public class OriginalAttributeValuesCollection : ITalesPathHandler
   {
+    #region properties
+
+    private IDictionary<string,ZptAttribute> _attributes;
+
+    #endregion
+
     #region methods
 
     /// <summary>
@@ -19,8 +27,39 @@ namespace CSF.Zpt.Rendering
     /// <param name="result">Exposes the result if the traversal was a success</param>
     public bool HandleTalesPath(string pathFragment, out object result)
     {
-      // TODO: Write this implementation
-      throw new NotImplementedException();
+      bool output;
+
+      if(_attributes.ContainsKey(pathFragment))
+      {
+        result = _attributes[pathFragment].Value;
+        output = true;
+      }
+      else
+      {
+        result = null;
+        output = false;
+      }
+
+      return output;
+    }
+
+    #endregion
+
+    #region constructor
+
+    public OriginalAttributeValuesCollection()
+    {
+      _attributes = new Dictionary<string,ZptAttribute>();
+    }
+
+    public OriginalAttributeValuesCollection(IEnumerable<ZptAttribute> attributes)
+    {
+      if(attributes == null)
+      {
+        throw new ArgumentNullException(nameof(attributes));
+      }
+
+      _attributes = attributes.ToDictionary(k => k.Name, v => v);
     }
 
     #endregion

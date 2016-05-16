@@ -22,6 +22,12 @@ namespace CSF.Zpt.Rendering
     public abstract string Name { get; }
 
     #endregion
+
+    #region methods
+
+    public abstract bool IsMatch(ZptNamespace nspace, string name);
+
+    #endregion
   }
 }
 

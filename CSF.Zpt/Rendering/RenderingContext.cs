@@ -1,6 +1,7 @@
 ﻿using System;
 using CSF.Zpt.Rendering;
 using System.Linq;
+using System.Collections.Generic;
 
 namespace CSF.Zpt.Rendering
 {
@@ -14,6 +15,7 @@ namespace CSF.Zpt.Rendering
     private Model _metalContext, _talContext;
     private ZptElement _element;
     private RenderingOptions _renderingOptions;
+    private IEnumerable<ZptAttribute> _originalAttributes;
 
     #endregion
 
@@ -63,6 +65,25 @@ namespace CSF.Zpt.Rendering
       }
     }
 
+    /// <summary>
+    /// Gets the original attributes for the <see cref="Element"/> contained within the current instance.
+    /// </summary>
+    /// <value>The original attributes.</value>
+    protected virtual IEnumerable<ZptAttribute> OriginalAttributes
+    {
+      get {
+        return _originalAttributes;
+      }
+      private set {
+        if(value == null)
+        {
+          throw new ArgumentNullException(nameof(value));
+        }
+
+        _originalAttributes = value;
+      }
+    }
+
     #endregion
 
     #region methods
@@ -97,7 +118,19 @@ namespace CSF.Zpt.Rendering
       return new RenderingContext(this.MetalModel.CreateSiblingModel(),
                                   this.TalModel.CreateSiblingModel(),
                                   element,
-                                  this.RenderingOptions);
+                                  this.RenderingOptions) {
+        OriginalAttributes = element.GetAttributes()
+      };
+    }
+
+    public virtual ZptAttribute GetAttribute(ZptNamespace nspace, string attributeName)
+    {
+      return this.OriginalAttributes.Where(x => x.IsMatch(nspace, attributeName)).FirstOrDefault();
+    }
+
+    public virtual OriginalAttributeValuesCollection GetOriginalAttributes()
+    {
+      return new OriginalAttributeValuesCollection(this.OriginalAttributes);
     }
 
     #endregion
@@ -142,6 +175,8 @@ namespace CSF.Zpt.Rendering
       _talContext = talContext;
       _element = element;
       _renderingOptions = options;
+
+      _originalAttributes = _element.GetAttributes();
     }
 
     #endregion

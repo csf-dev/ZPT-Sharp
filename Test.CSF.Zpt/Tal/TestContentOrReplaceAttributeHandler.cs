@@ -52,11 +52,11 @@ namespace Test.CSF.Zpt.Tal
     public void TestHandleNoAttribute()
     {
       // Arrange
-      _element
+      Mock.Get(_context)
         .Setup(x => x.GetAttribute(ZptConstants.Tal.Namespace,
                                    ZptConstants.Tal.ContentAttribute))
         .Returns((ZptAttribute) null);
-      _element
+      Mock.Get(_context)
         .Setup(x => x.GetAttribute(ZptConstants.Tal.Namespace,
                                    ZptConstants.Tal.ReplaceAttribute))
         .Returns((ZptAttribute) null);
@@ -87,17 +87,17 @@ namespace Test.CSF.Zpt.Tal
     public void TestHandleContentCancelsAction()
     {
       // Arrange
-      _element
+      Mock.Get(_context)
         .Setup(x => x.GetAttribute(ZptConstants.Tal.Namespace,
                                    ZptConstants.Tal.ContentAttribute))
         .Returns((ZptAttribute) Mock.Of<ZptAttribute>(x => x.Value == "bar"));
-      _element
+      Mock.Get(_context)
         .Setup(x => x.GetAttribute(ZptConstants.Tal.Namespace,
                                    ZptConstants.Tal.ReplaceAttribute))
         .Returns((ZptAttribute) null);
 
       Mock.Get(_model)
-        .Setup(x => x.Evaluate(It.IsAny<string>(), _element.Object))
+        .Setup(x => x.Evaluate(It.IsAny<string>(), _context))
         .Returns(new ExpressionResult(Model.CancelAction));
 
       // Act
@@ -122,17 +122,17 @@ namespace Test.CSF.Zpt.Tal
     public void TestHandleContentTextCancelsAction()
     {
       // Arrange
-      _element
+      Mock.Get(_context)
         .Setup(x => x.GetAttribute(ZptConstants.Tal.Namespace,
                                    ZptConstants.Tal.ContentAttribute))
         .Returns((ZptAttribute) Mock.Of<ZptAttribute>(x => x.Value == "text bar"));
-      _element
+      Mock.Get(_context)
         .Setup(x => x.GetAttribute(ZptConstants.Tal.Namespace,
                                    ZptConstants.Tal.ReplaceAttribute))
         .Returns((ZptAttribute) null);
 
       Mock.Get(_model)
-        .Setup(x => x.Evaluate(It.IsAny<string>(), _element.Object))
+        .Setup(x => x.Evaluate(It.IsAny<string>(), _context))
         .Returns(new ExpressionResult(Model.CancelAction));
 
       // Act
@@ -157,17 +157,17 @@ namespace Test.CSF.Zpt.Tal
     public void TestHandleContentStructureCancelsAction()
     {
       // Arrange
-      _element
+      Mock.Get(_context)
         .Setup(x => x.GetAttribute(ZptConstants.Tal.Namespace,
                                    ZptConstants.Tal.ContentAttribute))
         .Returns((ZptAttribute) Mock.Of<ZptAttribute>(x => x.Value == "structure bar"));
-      _element
+      Mock.Get(_context)
         .Setup(x => x.GetAttribute(ZptConstants.Tal.Namespace,
                                    ZptConstants.Tal.ReplaceAttribute))
         .Returns((ZptAttribute) null);
 
       Mock.Get(_model)
-        .Setup(x => x.Evaluate(It.IsAny<string>(), _element.Object))
+        .Setup(x => x.Evaluate(It.IsAny<string>(), _context))
         .Returns(new ExpressionResult(Model.CancelAction));
 
       // Act
@@ -192,17 +192,17 @@ namespace Test.CSF.Zpt.Tal
     public void TestHandleReplaceCancelsAction()
     {
       // Arrange
-      _element
+      Mock.Get(_context)
         .Setup(x => x.GetAttribute(ZptConstants.Tal.Namespace,
                                    ZptConstants.Tal.ContentAttribute))
         .Returns((ZptAttribute) null);
-      _element
+      Mock.Get(_context)
         .Setup(x => x.GetAttribute(ZptConstants.Tal.Namespace,
                                    ZptConstants.Tal.ReplaceAttribute))
         .Returns((ZptAttribute) Mock.Of<ZptAttribute>(x => x.Value == "bar"));
 
       Mock.Get(_model)
-        .Setup(x => x.Evaluate(It.IsAny<string>(), _element.Object))
+        .Setup(x => x.Evaluate(It.IsAny<string>(), _context))
         .Returns(new ExpressionResult(Model.CancelAction));
 
       // Act
@@ -227,17 +227,17 @@ namespace Test.CSF.Zpt.Tal
     public void TestHandleReplaceTextCancelsAction()
     {
       // Arrange
-      _element
+      Mock.Get(_context)
         .Setup(x => x.GetAttribute(ZptConstants.Tal.Namespace,
                                    ZptConstants.Tal.ContentAttribute))
         .Returns((ZptAttribute) null);
-      _element
+      Mock.Get(_context)
         .Setup(x => x.GetAttribute(ZptConstants.Tal.Namespace,
                                    ZptConstants.Tal.ReplaceAttribute))
         .Returns((ZptAttribute) Mock.Of<ZptAttribute>(x => x.Value == "text bar"));
 
       Mock.Get(_model)
-        .Setup(x => x.Evaluate(It.IsAny<string>(), _element.Object))
+        .Setup(x => x.Evaluate(It.IsAny<string>(), _context))
         .Returns(new ExpressionResult(Model.CancelAction));
 
       // Act
@@ -262,17 +262,17 @@ namespace Test.CSF.Zpt.Tal
     public void TestHandleReplaceStructureCancelsAction()
     {
       // Arrange
-      _element
+      Mock.Get(_context)
         .Setup(x => x.GetAttribute(ZptConstants.Tal.Namespace,
                                    ZptConstants.Tal.ContentAttribute))
         .Returns((ZptAttribute) null);
-      _element
+      Mock.Get(_context)
         .Setup(x => x.GetAttribute(ZptConstants.Tal.Namespace,
                                    ZptConstants.Tal.ReplaceAttribute))
         .Returns((ZptAttribute) Mock.Of<ZptAttribute>(x => x.Value == "structure bar"));
 
       Mock.Get(_model)
-        .Setup(x => x.Evaluate(It.IsAny<string>(), _element.Object))
+        .Setup(x => x.Evaluate(It.IsAny<string>(), _context))
         .Returns(new ExpressionResult(Model.CancelAction));
 
       // Act
@@ -301,17 +301,17 @@ namespace Test.CSF.Zpt.Tal
     public void TestHandleContentNull()
     {
       // Arrange
-      _element
+      Mock.Get(_context)
         .Setup(x => x.GetAttribute(ZptConstants.Tal.Namespace,
                                    ZptConstants.Tal.ContentAttribute))
         .Returns((ZptAttribute) Mock.Of<ZptAttribute>(x => x.Value == "bar"));
-      _element
+      Mock.Get(_context)
         .Setup(x => x.GetAttribute(ZptConstants.Tal.Namespace,
                                    ZptConstants.Tal.ReplaceAttribute))
         .Returns((ZptAttribute) null);
 
       Mock.Get(_model)
-        .Setup(x => x.Evaluate(It.IsAny<string>(), _element.Object))
+        .Setup(x => x.Evaluate(It.IsAny<string>(), _context))
         .Returns(new ExpressionResult(null));
 
       // Act
@@ -336,17 +336,17 @@ namespace Test.CSF.Zpt.Tal
     public void TestHandleContentTextNull()
     {
       // Arrange
-      _element
+      Mock.Get(_context)
         .Setup(x => x.GetAttribute(ZptConstants.Tal.Namespace,
                                    ZptConstants.Tal.ContentAttribute))
         .Returns((ZptAttribute) Mock.Of<ZptAttribute>(x => x.Value == "text bar"));
-      _element
+      Mock.Get(_context)
         .Setup(x => x.GetAttribute(ZptConstants.Tal.Namespace,
                                    ZptConstants.Tal.ReplaceAttribute))
         .Returns((ZptAttribute) null);
 
       Mock.Get(_model)
-        .Setup(x => x.Evaluate(It.IsAny<string>(), _element.Object))
+        .Setup(x => x.Evaluate(It.IsAny<string>(), _context))
         .Returns(new ExpressionResult(null));
 
       // Act
@@ -371,17 +371,17 @@ namespace Test.CSF.Zpt.Tal
     public void TestHandleContentStructureNull()
     {
       // Arrange
-      _element
+      Mock.Get(_context)
         .Setup(x => x.GetAttribute(ZptConstants.Tal.Namespace,
                                    ZptConstants.Tal.ContentAttribute))
         .Returns((ZptAttribute) Mock.Of<ZptAttribute>(x => x.Value == "structure bar"));
-      _element
+      Mock.Get(_context)
         .Setup(x => x.GetAttribute(ZptConstants.Tal.Namespace,
                                    ZptConstants.Tal.ReplaceAttribute))
         .Returns((ZptAttribute) null);
 
       Mock.Get(_model)
-        .Setup(x => x.Evaluate(It.IsAny<string>(), _element.Object))
+        .Setup(x => x.Evaluate(It.IsAny<string>(), _context))
         .Returns(new ExpressionResult(null));
 
       // Act
@@ -406,17 +406,17 @@ namespace Test.CSF.Zpt.Tal
     public void TestHandleReplaceNull()
     {
       // Arrange
-      _element
+      Mock.Get(_context)
         .Setup(x => x.GetAttribute(ZptConstants.Tal.Namespace,
                                    ZptConstants.Tal.ContentAttribute))
         .Returns((ZptAttribute) null);
-      _element
+      Mock.Get(_context)
         .Setup(x => x.GetAttribute(ZptConstants.Tal.Namespace,
                                    ZptConstants.Tal.ReplaceAttribute))
         .Returns((ZptAttribute) Mock.Of<ZptAttribute>(x => x.Value == "bar"));
 
       Mock.Get(_model)
-        .Setup(x => x.Evaluate(It.IsAny<string>(), _element.Object))
+        .Setup(x => x.Evaluate(It.IsAny<string>(), _context))
         .Returns(new ExpressionResult(null));
 
       // Act
@@ -440,17 +440,17 @@ namespace Test.CSF.Zpt.Tal
     public void TestHandleReplaceTextNull()
     {
       // Arrange
-      _element
+      Mock.Get(_context)
         .Setup(x => x.GetAttribute(ZptConstants.Tal.Namespace,
                                    ZptConstants.Tal.ContentAttribute))
         .Returns((ZptAttribute) null);
-      _element
+      Mock.Get(_context)
         .Setup(x => x.GetAttribute(ZptConstants.Tal.Namespace,
                                    ZptConstants.Tal.ReplaceAttribute))
         .Returns((ZptAttribute) Mock.Of<ZptAttribute>(x => x.Value == "text bar"));
 
       Mock.Get(_model)
-        .Setup(x => x.Evaluate(It.IsAny<string>(), _element.Object))
+        .Setup(x => x.Evaluate(It.IsAny<string>(), _context))
         .Returns(new ExpressionResult(null));
 
       // Act
@@ -474,17 +474,17 @@ namespace Test.CSF.Zpt.Tal
     public void TestHandleReplaceStructureNull()
     {
       // Arrange
-      _element
+      Mock.Get(_context)
         .Setup(x => x.GetAttribute(ZptConstants.Tal.Namespace,
                                    ZptConstants.Tal.ContentAttribute))
         .Returns((ZptAttribute) null);
-      _element
+      Mock.Get(_context)
         .Setup(x => x.GetAttribute(ZptConstants.Tal.Namespace,
                                    ZptConstants.Tal.ReplaceAttribute))
         .Returns((ZptAttribute) Mock.Of<ZptAttribute>(x => x.Value == "structure bar"));
 
       Mock.Get(_model)
-        .Setup(x => x.Evaluate(It.IsAny<string>(), _element.Object))
+        .Setup(x => x.Evaluate(It.IsAny<string>(), _context))
         .Returns(new ExpressionResult(null));
 
       // Act
@@ -512,11 +512,11 @@ namespace Test.CSF.Zpt.Tal
     public void TestHandleContent()
     {
       // Arrange
-      _element
+      Mock.Get(_context)
         .Setup(x => x.GetAttribute(ZptConstants.Tal.Namespace,
                                    ZptConstants.Tal.ContentAttribute))
         .Returns((ZptAttribute) Mock.Of<ZptAttribute>(x => x.Value == "bar"));
-      _element
+      Mock.Get(_context)
         .Setup(x => x.GetAttribute(ZptConstants.Tal.Namespace,
                                    ZptConstants.Tal.ReplaceAttribute))
         .Returns((ZptAttribute) null);
@@ -524,7 +524,7 @@ namespace Test.CSF.Zpt.Tal
       string value = _autofixture.Create<string>();
 
       Mock.Get(_model)
-        .Setup(x => x.Evaluate(It.IsAny<string>(), _element.Object))
+        .Setup(x => x.Evaluate(It.IsAny<string>(), _context))
         .Returns(new ExpressionResult(value));
 
       // Act
@@ -549,11 +549,11 @@ namespace Test.CSF.Zpt.Tal
     public void TestHandleContentText()
     {
       // Arrange
-      _element
+      Mock.Get(_context)
         .Setup(x => x.GetAttribute(ZptConstants.Tal.Namespace,
                                    ZptConstants.Tal.ContentAttribute))
         .Returns((ZptAttribute) Mock.Of<ZptAttribute>(x => x.Value == "text bar"));
-      _element
+      Mock.Get(_context)
         .Setup(x => x.GetAttribute(ZptConstants.Tal.Namespace,
                                    ZptConstants.Tal.ReplaceAttribute))
         .Returns((ZptAttribute) null);
@@ -561,7 +561,7 @@ namespace Test.CSF.Zpt.Tal
       string value = _autofixture.Create<string>();
 
       Mock.Get(_model)
-        .Setup(x => x.Evaluate(It.IsAny<string>(), _element.Object))
+        .Setup(x => x.Evaluate(It.IsAny<string>(), _context))
         .Returns(new ExpressionResult(value));
 
       // Act
@@ -586,11 +586,11 @@ namespace Test.CSF.Zpt.Tal
     public void TestHandleContentStructure()
     {
       // Arrange
-      _element
+      Mock.Get(_context)
         .Setup(x => x.GetAttribute(ZptConstants.Tal.Namespace,
                                    ZptConstants.Tal.ContentAttribute))
         .Returns((ZptAttribute) Mock.Of<ZptAttribute>(x => x.Value == "structure bar"));
-      _element
+      Mock.Get(_context)
         .Setup(x => x.GetAttribute(ZptConstants.Tal.Namespace,
                                    ZptConstants.Tal.ReplaceAttribute))
         .Returns((ZptAttribute) null);
@@ -598,7 +598,7 @@ namespace Test.CSF.Zpt.Tal
       string value = _autofixture.Create<string>();
 
       Mock.Get(_model)
-        .Setup(x => x.Evaluate(It.IsAny<string>(), _element.Object))
+        .Setup(x => x.Evaluate(It.IsAny<string>(), _context))
         .Returns(new ExpressionResult(value));
 
       // Act
@@ -623,11 +623,11 @@ namespace Test.CSF.Zpt.Tal
     public void TestHandleReplace()
     {
       // Arrange
-      _element
+      Mock.Get(_context)
         .Setup(x => x.GetAttribute(ZptConstants.Tal.Namespace,
                                    ZptConstants.Tal.ContentAttribute))
         .Returns((ZptAttribute) null);
-      _element
+      Mock.Get(_context)
         .Setup(x => x.GetAttribute(ZptConstants.Tal.Namespace,
                                    ZptConstants.Tal.ReplaceAttribute))
         .Returns((ZptAttribute) Mock.Of<ZptAttribute>(x => x.Value == "bar"));
@@ -635,7 +635,7 @@ namespace Test.CSF.Zpt.Tal
       string value = _autofixture.Create<string>();
 
       Mock.Get(_model)
-        .Setup(x => x.Evaluate(It.IsAny<string>(), _element.Object))
+        .Setup(x => x.Evaluate(It.IsAny<string>(), _context))
         .Returns(new ExpressionResult(value));
 
       // Act
@@ -658,11 +658,11 @@ namespace Test.CSF.Zpt.Tal
     public void TestHandleReplaceText()
     {
       // Arrange
-      _element
+      Mock.Get(_context)
         .Setup(x => x.GetAttribute(ZptConstants.Tal.Namespace,
                                    ZptConstants.Tal.ContentAttribute))
         .Returns((ZptAttribute) null);
-      _element
+      Mock.Get(_context)
         .Setup(x => x.GetAttribute(ZptConstants.Tal.Namespace,
                                    ZptConstants.Tal.ReplaceAttribute))
         .Returns((ZptAttribute) Mock.Of<ZptAttribute>(x => x.Value == "text bar"));
@@ -670,7 +670,7 @@ namespace Test.CSF.Zpt.Tal
       string value = _autofixture.Create<string>();
 
       Mock.Get(_model)
-        .Setup(x => x.Evaluate(It.IsAny<string>(), _element.Object))
+        .Setup(x => x.Evaluate(It.IsAny<string>(), _context))
         .Returns(new ExpressionResult(value));
 
       // Act
@@ -693,11 +693,11 @@ namespace Test.CSF.Zpt.Tal
     public void TestHandleReplaceStructure()
     {
       // Arrange
-      _element
+      Mock.Get(_context)
         .Setup(x => x.GetAttribute(ZptConstants.Tal.Namespace,
                                    ZptConstants.Tal.ContentAttribute))
         .Returns((ZptAttribute) null);
-      _element
+      Mock.Get(_context)
         .Setup(x => x.GetAttribute(ZptConstants.Tal.Namespace,
                                    ZptConstants.Tal.ReplaceAttribute))
         .Returns((ZptAttribute) Mock.Of<ZptAttribute>(x => x.Value == "structure bar"));
@@ -705,7 +705,7 @@ namespace Test.CSF.Zpt.Tal
       string value = _autofixture.Create<string>();
 
       Mock.Get(_model)
-        .Setup(x => x.Evaluate(It.IsAny<string>(), _element.Object))
+        .Setup(x => x.Evaluate(It.IsAny<string>(), _context))
         .Returns(new ExpressionResult(value));
 
       // Act
@@ -733,11 +733,11 @@ namespace Test.CSF.Zpt.Tal
     public void TestHandleBothAttributes()
     {
       // Arrange
-      _element
+      Mock.Get(_context)
         .Setup(x => x.GetAttribute(ZptConstants.Tal.Namespace,
                                    ZptConstants.Tal.ContentAttribute))
         .Returns((ZptAttribute) Mock.Of<ZptAttribute>());
-      _element
+      Mock.Get(_context)
         .Setup(x => x.GetAttribute(ZptConstants.Tal.Namespace,
                                    ZptConstants.Tal.ReplaceAttribute))
         .Returns((ZptAttribute) Mock.Of<ZptAttribute>());

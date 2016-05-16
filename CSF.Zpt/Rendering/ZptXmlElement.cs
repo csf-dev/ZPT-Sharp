@@ -657,16 +657,6 @@ namespace CSF.Zpt.Rendering
       return output;
     }
 
-    /// <summary>
-    /// Gets a collection of the original attribute values for the current element.
-    /// </summary>
-    /// <returns>The original attributes.</returns>
-    public override OriginalAttributeValuesCollection GetOriginalAttributes()
-    {
-      // TODO: Write this implementation
-      throw new NotImplementedException();
-    }
-
     #endregion
 
     #region constructor

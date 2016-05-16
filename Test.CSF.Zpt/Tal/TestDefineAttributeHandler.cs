@@ -16,7 +16,6 @@ namespace Test.CSF.Zpt.Tal
     #region fields
 
     private IFixture _autofixture;
-    private Mock<ZptElement> _element;
     private RenderingContext _context;
     private DummyModel _model;
 
@@ -30,11 +29,10 @@ namespace Test.CSF.Zpt.Tal
     public void Setup()
     {
       _autofixture = new Fixture();
-      new DummyModelCustomisation().Customize(_autofixture);
+      new RenderingContextCustomisation().Customize(_autofixture);
 
-      _model = _autofixture.Create<DummyModel>();
-      _element = new Mock<ZptElement>() { CallBase = true };
-      _context = Mock.Of<RenderingContext>(x => x.Element == _element.Object && x.TalModel == _model);
+      _context = _autofixture.Create<RenderingContext>();
+      _model = (DummyModel) _context.TalModel;
 
       _sut = new DefineAttributeHandler();
     }
@@ -47,7 +45,7 @@ namespace Test.CSF.Zpt.Tal
     public void TestHandleNoAttribute()
     {
       // Arrange
-      _element
+      Mock.Get(_context)
         .Setup(x => x.GetAttribute(ZptConstants.Tal.Namespace,
                                    ZptConstants.Tal.DefineAttribute))
         .Returns((ZptAttribute) null);
@@ -77,14 +75,14 @@ namespace Test.CSF.Zpt.Tal
                                            string expression)
     {
       // Arrange
-      _element
+      Mock.Get(_context)
         .Setup(x => x.GetAttribute(ZptConstants.Tal.Namespace,
                                    ZptConstants.Tal.DefineAttribute))
         .Returns(Mock.Of<ZptAttribute>(x => x.Value == attributeVal));
       
       var obj = _autofixture.Create<object>();
       Mock.Get(_model)
-        .Setup(x => x.Evaluate(expression, _element.Object))
+        .Setup(x => x.Evaluate(expression, _context))
         .Returns(new ExpressionResult(obj));
 
       // Act
@@ -94,7 +92,7 @@ namespace Test.CSF.Zpt.Tal
       Assert.NotNull(result, "Result nullability");
       Assert.AreEqual(1, result.Contexts.Length, "Count of results");
       Assert.AreSame(_context, result.Contexts[0], "Correct element returned");
-      Mock.Get(_model).Verify(x => x.Evaluate(expression, _element.Object), Times.Once());
+      Mock.Get(_model).Verify(x => x.Evaluate(expression, _context), Times.Once());
       Mock.Get(_model).Verify(x => x.AddLocal(variableName, obj),
                               expectGlobal? Times.Never() : Times.Once());
       Mock.Get(_model).Verify(x => x.AddGlobal(variableName, obj),
@@ -109,7 +107,7 @@ namespace Test.CSF.Zpt.Tal
                               local wibble wobble/spong;
                               global someVal very/long/expression/string;
                               key string:This is a test;; it contains a semicolon!";
-      _element
+      Mock.Get(_context)
         .Setup(x => x.GetAttribute(ZptConstants.Tal.Namespace,
                                    ZptConstants.Tal.DefineAttribute))
         .Returns(Mock.Of<ZptAttribute>(x => x.Value == attributeVal));
@@ -122,7 +120,7 @@ namespace Test.CSF.Zpt.Tal
       };
       foreach(var item in expressionsAndResults)
       {
-        Mock.Get(_model).Setup(x => x.Evaluate(item.Expression, _element.Object)).Returns(new ExpressionResult(item.Result));
+        Mock.Get(_model).Setup(x => x.Evaluate(item.Expression, _context)).Returns(new ExpressionResult(item.Result));
       }
 
       // Act
@@ -134,7 +132,7 @@ namespace Test.CSF.Zpt.Tal
       Assert.AreSame(_context, result.Contexts[0], "Correct element returned");
       foreach(var item in expressionsAndResults)
       {
-        Mock.Get(_model).Verify(x => x.Evaluate(item.Expression, _element.Object), Times.Once());
+        Mock.Get(_model).Verify(x => x.Evaluate(item.Expression, _context), Times.Once());
         Mock.Get(_model).Verify(x => x.AddLocal(item.Key, item.Result),
                                 item.Global? Times.Never() : Times.Once());
         Mock.Get(_model).Verify(x => x.AddGlobal(item.Key, item.Result),
@@ -150,7 +148,7 @@ namespace Test.CSF.Zpt.Tal
                               local wibble wobble/cancellation;
                               global someVal very/long/expression/string;
                               key string:This is a test;; it contains a semicolon!";
-      _element
+      Mock.Get(_context)
         .Setup(x => x.GetAttribute(ZptConstants.Tal.Namespace,
                                    ZptConstants.Tal.DefineAttribute))
         .Returns(Mock.Of<ZptAttribute>(x => x.Value == attributeVal));
@@ -163,7 +161,7 @@ namespace Test.CSF.Zpt.Tal
       };
       foreach(var item in expressionsAndResults)
       {
-        Mock.Get(_model).Setup(x => x.Evaluate(item.Expression, _element.Object)).Returns(new ExpressionResult(item.Result));
+        Mock.Get(_model).Setup(x => x.Evaluate(item.Expression, _context)).Returns(new ExpressionResult(item.Result));
       }
 
       // Act
@@ -175,7 +173,7 @@ namespace Test.CSF.Zpt.Tal
       Assert.AreSame(_context, result.Contexts[0], "Correct element returned");
       foreach(var item in expressionsAndResults)
       {
-        Mock.Get(_model).Verify(x => x.Evaluate(item.Expression, _element.Object), Times.Once());
+        Mock.Get(_model).Verify(x => x.Evaluate(item.Expression, _context), Times.Once());
 
         if(item.Result != Model.CancelAction)
         {
@@ -199,13 +197,13 @@ namespace Test.CSF.Zpt.Tal
     public void TestHandleBadDefinition(string attributeVal)
     {
       // Arrange
-      _element
+      Mock.Get(_context)
         .Setup(x => x.GetAttribute(ZptConstants.Tal.Namespace,
                                    ZptConstants.Tal.DefineAttribute))
         .Returns(Mock.Of<ZptAttribute>(x => x.Value == attributeVal));
       
       Mock.Get(_model)
-        .Setup(x => x.Evaluate(It.IsAny<string>(), _element.Object))
+        .Setup(x => x.Evaluate(It.IsAny<string>(), _context))
         .Returns(new ExpressionResult(_autofixture.Create<object>()));
 
       // Act

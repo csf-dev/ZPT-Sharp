@@ -25,14 +25,14 @@ namespace CSF.Zpt.Tal
 
       AttributeHandlingResult output = new AttributeHandlingResult(new [] { context }, true);
 
-      var attribute = context.Element.GetTalAttribute(ZptConstants.Tal.ConditionAttribute);
+      var attribute = context.GetTalAttribute(ZptConstants.Tal.ConditionAttribute);
       if(attribute != null)
       {
         ExpressionResult result;
 
         try
         {
-          result = context.TalModel.Evaluate(attribute.Value, context.Element);
+          result = context.TalModel.Evaluate(attribute.Value, context);
         }
         catch(Exception ex)
         {

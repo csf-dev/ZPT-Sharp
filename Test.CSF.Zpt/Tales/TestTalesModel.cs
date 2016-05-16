@@ -4,6 +4,7 @@ using CSF.Zpt.Tales;
 using Moq;
 using Ploeh.AutoFixture;
 using CSF.Zpt.Rendering;
+using Test.CSF.Zpt.Util.Autofixture;
 
 namespace Test.CSF.Zpt.Tales
 {
@@ -13,6 +14,7 @@ namespace Test.CSF.Zpt.Tales
     #region fields
 
     private IFixture _autofixture;
+    private RenderingContext _context;
 
     #endregion
 
@@ -22,6 +24,9 @@ namespace Test.CSF.Zpt.Tales
     public void Setup()
     {
       _autofixture = new Fixture();
+      new RenderingContextCustomisation().Customize(_autofixture);
+
+      _context = _autofixture.Create<RenderingContext>();
     }
 
     #endregion
@@ -57,11 +62,11 @@ namespace Test.CSF.Zpt.Tales
         .Setup(x => x.GetEvaluator(It.IsAny<Expression>()))
         .Returns(evaluator.Object);
       evaluator
-        .Setup(x => x.Evaluate(It.IsAny<Expression>(), It.IsAny<ZptElement>(), sut))
+        .Setup(x => x.Evaluate(It.IsAny<Expression>(), It.IsAny<RenderingContext>(), sut))
         .Returns(expressionResult);
 
       // Act
-      var result = sut.Evaluate(_autofixture.Create<Expression>(), Mock.Of<ZptElement>());
+      var result = sut.Evaluate(_autofixture.Create<Expression>(), Mock.Of<RenderingContext>());
 
       // Assert
       Assert.AreSame(expressionResult, result);
@@ -83,11 +88,11 @@ namespace Test.CSF.Zpt.Tales
         .Setup(x => x.GetEvaluator(It.Is<Expression>(e => e.Source == expressionSource)))
         .Returns(evaluator.Object);
       evaluator
-        .Setup(x => x.Evaluate(It.Is<Expression>(e => e.Source == expressionSource), It.IsAny<ZptElement>(), sut))
+        .Setup(x => x.Evaluate(It.Is<Expression>(e => e.Source == expressionSource), It.IsAny<RenderingContext>(), sut))
         .Returns(expressionResult);
 
       // Act
-      var result = sut.Evaluate(expressionSource, Mock.Of<ZptElement>());
+      var result = sut.Evaluate(expressionSource, Mock.Of<RenderingContext>());
 
       // Assert
       Assert.AreSame(expressionResult, result);
@@ -103,9 +108,7 @@ namespace Test.CSF.Zpt.Tales
       // Act
       object output;
       var result = sut.TryGetRootObject("nothing",
-                                        Mock.Of<ZptElement>(x => x.GetOriginalAttributes() == new OriginalAttributeValuesCollection()
-                                                                 && x.Equals(x) == true
-                                                                 && x.GetHashCode() == 5),
+                                        _context,
                                         out output);
 
       // Assert
@@ -123,9 +126,7 @@ namespace Test.CSF.Zpt.Tales
       // Act
       object output;
       var result = sut.TryGetRootObject("default",
-                                        Mock.Of<ZptElement>(x => x.GetOriginalAttributes() == new OriginalAttributeValuesCollection()
-                                                                 && x.Equals(x) == true
-                                                                 && x.GetHashCode() == 5),
+                                        _context,
                                         out output);
 
       // Assert
@@ -144,9 +145,7 @@ namespace Test.CSF.Zpt.Tales
       // Act
       object output;
       var result = sut.TryGetRootObject("options",
-                                        Mock.Of<ZptElement>(x => x.GetOriginalAttributes() == new OriginalAttributeValuesCollection()
-                                                                 && x.Equals(x) == true
-                                                                 && x.GetHashCode() == 5),
+                                        _context,
                                         out output);
 
       // Assert
@@ -165,9 +164,7 @@ namespace Test.CSF.Zpt.Tales
       // Act
       object output;
       var result = sut.TryGetRootObject("repeat",
-                                        Mock.Of<ZptElement>(x => x.GetOriginalAttributes() == new OriginalAttributeValuesCollection()
-                                                                 && x.Equals(x) == true
-                                                                 && x.GetHashCode() == 5),
+                                        _context,
                                         out output);
 
       // Assert
@@ -186,9 +183,7 @@ namespace Test.CSF.Zpt.Tales
       // Act
       object output;
       var result = sut.TryGetRootObject("attrs",
-                                        Mock.Of<ZptElement>(x => x.GetOriginalAttributes() == new OriginalAttributeValuesCollection()
-                                                                 && x.Equals(x) == true
-                                                                 && x.GetHashCode() == 5),
+                                        _context,
                                         out output);
 
       // Assert
@@ -207,9 +202,7 @@ namespace Test.CSF.Zpt.Tales
       // Act
       object output;
       var result = sut.TryGetRootObject("CONTEXTS",
-                                        Mock.Of<ZptElement>(x => x.GetOriginalAttributes() == new OriginalAttributeValuesCollection()
-                                                                 && x.Equals(x) == true
-                                                                 && x.GetHashCode() == 5),
+                                        _context,
                                         out output);
 
       // Assert

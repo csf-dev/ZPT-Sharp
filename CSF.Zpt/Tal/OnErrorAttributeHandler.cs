@@ -35,12 +35,12 @@ namespace CSF.Zpt.Tal
       }
 
       AttributeHandlingResult output;
-      var attrib = context.Element.GetTalAttribute(ZptConstants.Tal.OnErrorAttribute);
+      var attrib = context.GetTalAttribute(ZptConstants.Tal.OnErrorAttribute);
 
       if(attrib != null)
       {
         string mode;
-        var expressionResult = this.GetAttributeResult(attrib, context.Element, context.TalModel, out mode);
+        var expressionResult = this.GetAttributeResult(attrib, context, out mode);
         if(expressionResult.CancelsAction)
         {
           output = new AttributeHandlingResult(new [] { context }, true);
@@ -74,8 +74,7 @@ namespace CSF.Zpt.Tal
     /// <param name="model">The model.</param>
     /// <param name="mode">Exposes the mode (either <c>text</c>, <c>structure</c> or a <c>null</c> reference).</param>
     private ExpressionResult GetAttributeResult(ZptAttribute attribute,
-                                                ZptElement element,
-                                                Model model,
+                                                RenderingContext context,
                                                 out string mode)
     {
       var match = ValueMatcher.Match(attribute.Value);
@@ -89,12 +88,12 @@ namespace CSF.Zpt.Tal
         throw new ParserException(message) {
           SourceAttributeName = attribute.Name,
           SourceAttributeValue = attribute.Value,
-          SourceElementName = element.Name
+          SourceElementName = context.Element.Name
         };
       }
 
       mode = match.Groups[1].Value;
-      return model.Evaluate(match.Groups[2].Value, element);
+      return context.TalModel.Evaluate(match.Groups[2].Value, context);
     }
 
     #endregion

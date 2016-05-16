@@ -298,7 +298,7 @@ namespace CSF.Zpt.Rendering
         throw new ArgumentNullException(nameof(name));
       }
 
-      var attribName = this.GetNameWithPrefix(attributeNamespace, name);
+      var attribName = GetNameWithPrefix(attributeNamespace, name);
 
       var htmlAttribute = this.Node.Attributes
         .FirstOrDefault(x => x.Name == attribName);
@@ -323,7 +323,7 @@ namespace CSF.Zpt.Rendering
         throw new ArgumentNullException(nameof(name));
       }
 
-      var formattedName = this.GetNameWithPrefix(attributeNamespace, name);
+      var formattedName = GetNameWithPrefix(attributeNamespace, name);
       this.Node.SetAttributeValue(formattedName, value);
     }
 
@@ -343,7 +343,7 @@ namespace CSF.Zpt.Rendering
         throw new ArgumentNullException(nameof(name));
       }
 
-      var formattedName = this.GetNameWithPrefix(attributeNamespace, name);
+      var formattedName = GetNameWithPrefix(attributeNamespace, name);
       var attribs = this.Node.Attributes.Where(x => x.Name == formattedName).ToArray();
       foreach(var attrib in attribs)
       {
@@ -360,7 +360,7 @@ namespace CSF.Zpt.Rendering
     /// <param name="name">The attribute name.</param>
     public override ZptElement[] SearchChildrenByAttribute(ZptNamespace attributeNamespace, string name)
     {
-      string attribName = this.GetNameWithPrefix(attributeNamespace, name);
+      string attribName = GetNameWithPrefix(attributeNamespace, name);
 
       return (from node in this.Node.Descendants()
               from attrib in node.Attributes
@@ -565,7 +565,7 @@ namespace CSF.Zpt.Rendering
     /// <returns>The formatted name.</returns>
     /// <param name="nSpace">A namespace.</param>
     /// <param name="name">An element or attribute name.</param>
-    private string GetNameWithPrefix(ZptNamespace nSpace, string name)
+    internal static string GetNameWithPrefix(ZptNamespace nSpace, string name)
     {
       if(name == null)
       {
@@ -581,16 +581,6 @@ namespace CSF.Zpt.Rendering
       }
 
       return (nSpace.Prefix != null)? String.Concat(nSpace.Prefix, PREFIX_SEPARATOR, name) : name;
-    }
-
-    /// <summary>
-    /// Gets a collection of the original attribute values for the current element.
-    /// </summary>
-    /// <returns>The original attributes.</returns>
-    public override OriginalAttributeValuesCollection GetOriginalAttributes()
-    {
-      // TODO: Write this implementation
-      throw new NotImplementedException();
     }
 
     #endregion

@@ -51,7 +51,7 @@ namespace CSF.Zpt.Tales
     /// </summary>
     /// <param name="expression">The expression to evaluate.</param>
     /// <param name="element">The element for which we are evaluating a result.</param>
-    public override ExpressionResult Evaluate(string expression, ZptElement element)
+    public override ExpressionResult Evaluate(string expression, RenderingContext context)
     {
       if(expression == null)
       {
@@ -59,7 +59,7 @@ namespace CSF.Zpt.Tales
       }
 
       var talesExpression = new Expression(expression);
-      return this.Evaluate(talesExpression, element);
+      return this.Evaluate(talesExpression, context);
     }
 
     /// <summary>
@@ -67,19 +67,19 @@ namespace CSF.Zpt.Tales
     /// </summary>
     /// <param name="talesExpression">The TALES expression to evaluate.</param>
     /// <param name="element">The element for which we are evaluating a result.</param>
-    public virtual ExpressionResult Evaluate(Expression talesExpression, ZptElement element)
+    public virtual ExpressionResult Evaluate(Expression talesExpression, RenderingContext context)
     {
       if(talesExpression == null)
       {
         throw new ArgumentNullException(nameof(talesExpression));
       }
-      if(element == null)
+      if(context == null)
       {
-        throw new ArgumentNullException(nameof(element));
+        throw new ArgumentNullException(nameof(context));
       }
 
       var evaluator = _registry.GetEvaluator(talesExpression);
-      return evaluator.Evaluate(talesExpression, element, this);
+      return evaluator.Evaluate(talesExpression, context, this);
     }
 
     /// <summary>
@@ -94,11 +94,11 @@ namespace CSF.Zpt.Tales
     /// Exposes the found object if this method returns <c>true</c>.  The value is undefined if this method returns
     /// <c>false</c>.
     /// </param>
-    public virtual bool TryGetRootObject(string name, ZptElement element, out object result)
+    public virtual bool TryGetRootObject(string name, RenderingContext context, out object result)
     {
-      if(element == null)
+      if(context == null)
       {
-        throw new ArgumentNullException(nameof(element));
+        throw new ArgumentNullException(nameof(context));
       }
 
       bool output;
@@ -106,21 +106,21 @@ namespace CSF.Zpt.Tales
       if(name == CONTEXTS)
       {
         output = true;
-        var originalAttrs = new Lazy<OriginalAttributeValuesCollection>(() => element.GetOriginalAttributes());
+        var originalAttrs = new Lazy<OriginalAttributeValuesCollection>(() => context.GetOriginalAttributes());
         result = new BuiltinContextsContainer(this.GetKeywordOptions(),
-                                              this.GetRepetitionSummaries(element),
+                                              this.GetRepetitionSummaries(context.Element),
                                               originalAttrs);
       }
       else
       {
-        output = base.TryGetItem(name, element, out result);
+        output = base.TryGetItem(name, context, out result);
       }
 
       if(!output)
       {
-        var originalAttrs = new Lazy<OriginalAttributeValuesCollection>(() => element.GetOriginalAttributes());
+        var originalAttrs = new Lazy<OriginalAttributeValuesCollection>(() => context.GetOriginalAttributes());
         var contexts = new BuiltinContextsContainer(this.GetKeywordOptions(),
-                                                    this.GetRepetitionSummaries(element),
+                                                    this.GetRepetitionSummaries(context.Element),
                                                     originalAttrs);
         output = contexts.HandleTalesPath(name, out result);
       }

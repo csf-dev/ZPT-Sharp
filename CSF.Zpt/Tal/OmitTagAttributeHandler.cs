@@ -24,7 +24,7 @@ namespace CSF.Zpt.Tal
       }
 
       AttributeHandlingResult output;
-      var attrib = context.Element.GetTalAttribute(ZptConstants.Tal.OmitTagAttribute);
+      var attrib = context.GetTalAttribute(ZptConstants.Tal.OmitTagAttribute);
 
       if(context.Element.IsInNamespace(ZptConstants.Metal.Namespace)
          || context.Element.IsInNamespace(ZptConstants.Tal.Namespace))
@@ -38,7 +38,7 @@ namespace CSF.Zpt.Tal
       else if(attrib != null)
       {
         // Normal handling by detecting an attribute and using its value
-        var result = context.TalModel.Evaluate(attrib.Value, context.Element);
+        var result = context.TalModel.Evaluate(attrib.Value, context);
         if(!result.CancelsAction && result.GetValueAsBoolean())
         {
           var children = context.Element.Omit();

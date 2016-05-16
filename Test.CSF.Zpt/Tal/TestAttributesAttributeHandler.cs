@@ -47,7 +47,7 @@ namespace Test.CSF.Zpt.Tal
     public void TestHandleNoAttribute()
     {
       // Arrange
-      _element
+      Mock.Get(_context)
         .Setup(x => x.GetAttribute(ZptConstants.Tal.Namespace,
                                    ZptConstants.Tal.AttributesAttribute))
         .Returns((ZptAttribute) null);
@@ -80,14 +80,14 @@ namespace Test.CSF.Zpt.Tal
                                           string expectedExpression)
     {
       // Arrange
-      _element
+      Mock.Get(_context)
         .Setup(x => x.GetAttribute(ZptConstants.Tal.Namespace,
                                    ZptConstants.Tal.AttributesAttribute))
         .Returns(Mock.Of<ZptAttribute>(a => a.Value == value));
       
       var expressionResult = _autofixture.Create<string>();
       Mock.Get(_model)
-        .Setup(x => x.Evaluate(expectedExpression, _element.Object))
+        .Setup(x => x.Evaluate(expectedExpression, _context))
         .Returns(new ExpressionResult(expressionResult));
 
       // Act
@@ -97,7 +97,7 @@ namespace Test.CSF.Zpt.Tal
       Assert.NotNull(result, "Result nullability");
       Assert.AreEqual(1, result.Contexts.Length, "Count of results");
       Assert.AreSame(_context, result.Contexts[0], "Correct element returned");
-      Mock.Get(_model).Verify(x => x.Evaluate(expectedExpression, _element.Object), Times.Once());
+      Mock.Get(_model).Verify(x => x.Evaluate(expectedExpression, _context), Times.Once());
       _element.Verify(x => x.SetAttribute(It.Is<ZptNamespace>(ns => ns.Prefix == expectedPrefix), expectedName, expressionResult), Times.Once());
       _element.Verify(x => x.RemoveAttribute(It.IsAny<ZptNamespace>(), It.IsAny<string>()),
                       Times.Never());
@@ -111,13 +111,13 @@ namespace Test.CSF.Zpt.Tal
     {
       // Arrange
       string attributeValue = (prefix != null)? String.Format("{0}:{1} {2}", prefix, name, expression) : String.Format("{0} {1}", name, expression);
-      _element
+      Mock.Get(_context)
         .Setup(x => x.GetAttribute(ZptConstants.Tal.Namespace,
                                    ZptConstants.Tal.AttributesAttribute))
         .Returns(Mock.Of<ZptAttribute>(a => a.Value == attributeValue));
 
       Mock.Get(_model)
-        .Setup(x => x.Evaluate(expression, _element.Object))
+        .Setup(x => x.Evaluate(expression, _context))
         .Returns(new ExpressionResult(null));
 
       // Act
@@ -127,7 +127,7 @@ namespace Test.CSF.Zpt.Tal
       Assert.NotNull(result, "Result nullability");
       Assert.AreEqual(1, result.Contexts.Length, "Count of results");
       Assert.AreSame(_context, result.Contexts[0], "Correct element returned");
-      Mock.Get(_model).Verify(x => x.Evaluate(expression, _element.Object), Times.Once());
+      Mock.Get(_model).Verify(x => x.Evaluate(expression, _context), Times.Once());
       _element.Verify(x => x.RemoveAttribute(It.Is<ZptNamespace>(ns => ns.Prefix == prefix), name), Times.Once());
       _element.Verify(x => x.SetAttribute(It.IsAny<ZptNamespace>(), It.IsAny<string>(), It.IsAny<string>()),
                       Times.Never());
@@ -141,13 +141,13 @@ namespace Test.CSF.Zpt.Tal
     {
       // Arrange
       string attributeValue = (prefix != null)? String.Format("{0}:{1} {2}", prefix, name, expression) : String.Format("{0} {1}", name, expression);
-      _element
+      Mock.Get(_context)
         .Setup(x => x.GetAttribute(ZptConstants.Tal.Namespace,
                                    ZptConstants.Tal.AttributesAttribute))
         .Returns(Mock.Of<ZptAttribute>(a => a.Value == attributeValue));
 
       Mock.Get(_model)
-        .Setup(x => x.Evaluate(expression, _element.Object))
+        .Setup(x => x.Evaluate(expression, _context))
         .Returns(new ExpressionResult(Model.CancelAction));
 
       // Act
@@ -157,7 +157,7 @@ namespace Test.CSF.Zpt.Tal
       Assert.NotNull(result, "Result nullability");
       Assert.AreEqual(1, result.Contexts.Length, "Count of results");
       Assert.AreSame(_context, result.Contexts[0], "Correct element returned");
-      Mock.Get(_model).Verify(x => x.Evaluate(expression, _element.Object), Times.Once());
+      Mock.Get(_model).Verify(x => x.Evaluate(expression, _context), Times.Once());
       _element.Verify(x => x.SetAttribute(It.IsAny<ZptNamespace>(), It.IsAny<string>(), It.IsAny<string>()),
                       Times.Never());
       _element.Verify(x => x.SetAttribute(It.IsAny<string>(), It.IsAny<string>()),
@@ -177,7 +177,7 @@ namespace Test.CSF.Zpt.Tal
                              two expressionTwo;
                              three expression;;WithSemicolon;
                              prefix:four expressionFour;";
-      _element
+      Mock.Get(_context)
         .Setup(x => x.GetAttribute(ZptConstants.Tal.Namespace,
                                    ZptConstants.Tal.AttributesAttribute))
         .Returns(Mock.Of<ZptAttribute>(a => a.Value == attributeValue));
@@ -189,16 +189,16 @@ namespace Test.CSF.Zpt.Tal
         expressionFourResult = _autofixture.Create<string>();
 
       Mock.Get(_model)
-        .Setup(x => x.Evaluate("expressionOne", _element.Object))
+        .Setup(x => x.Evaluate("expressionOne", _context))
         .Returns(new ExpressionResult(expressionOneResult));
       Mock.Get(_model)
-        .Setup(x => x.Evaluate("expressionTwo", _element.Object))
+        .Setup(x => x.Evaluate("expressionTwo", _context))
         .Returns(new ExpressionResult(expressionTwoResult));
       Mock.Get(_model)
-        .Setup(x => x.Evaluate("expression;WithSemicolon", _element.Object))
+        .Setup(x => x.Evaluate("expression;WithSemicolon", _context))
         .Returns(new ExpressionResult(expressionThreeResult));
       Mock.Get(_model)
-        .Setup(x => x.Evaluate("expressionFour", _element.Object))
+        .Setup(x => x.Evaluate("expressionFour", _context))
         .Returns(new ExpressionResult(expressionFourResult));
 
       // Act

@@ -39,6 +39,20 @@ namespace CSF.Zpt.Rendering
 
     #endregion
 
+    #region methods
+
+    public override bool IsMatch(ZptNamespace nspace, string name)
+    {
+      if(nspace == null)
+      {
+        throw new ArgumentNullException(nameof(nspace));
+      }
+
+      return ZptHtmlElement.GetNameWithPrefix(nspace, name) == this.Name;
+    }
+
+    #endregion
+
     #region constructor
 
     /// <summary>
