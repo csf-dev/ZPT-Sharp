@@ -8,17 +8,11 @@ namespace CSF.Zpt.Rendering
   public interface IContextVisitor
   {
     /// <summary>
-    /// Visit the given context, as well as its child contexts, and return a collection of the resultant contexts.
+    /// Visits a rendering context and returns a collection of contexts which represent the result of that visit.
     /// </summary>
-    /// <remarks>
-    /// <para>
-    /// This operation performs the same work as <see cref="Visit"/>, but it then visits all of the resultant contexts,
-    /// recursively moving down the exposed document tree, visiting each context in turn.
-    /// </para>
-    /// </remarks>
-    /// <returns>Zero or more <see cref="RenderingContext"/> instances, determined by the outcome of this visit.</returns>
+    /// <returns>The rendering contexts instances which are exposed after the visiting process is complete.</returns>
     /// <param name="context">The rendering context to visit.</param>
-    RenderingContext[] VisitRecursively(RenderingContext context);
+    RenderingContext[] VisitContext(RenderingContext context);
   }
 }
 

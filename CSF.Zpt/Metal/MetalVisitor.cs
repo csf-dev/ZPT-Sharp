@@ -40,27 +40,23 @@ namespace CSF.Zpt.Metal
     }
 
     /// <summary>
-    /// Visit the given context, as well as its child contexts, and return a collection of the resultant contexts.
+    /// Visits a rendering context and returns a collection of contexts which represent the result of that visit.
     /// </summary>
     /// <remarks>
     /// <para>
-    /// This operation performs the same work as <see cref="Visit"/>, but it then visits all of the resultant contexts,
-    /// recursively moving down the exposed document tree, visiting each context in turn.
+    /// After the base class functionality has finished executing, this visit purges the elements (exposed by their
+    /// contexts) of all METAL attributes.
     /// </para>
     /// </remarks>
-    /// <returns>Zero or more <see cref="RenderingContext"/> instances, determined by the outcome of this visit.</returns>
+    /// <returns>The rendering contexts instances which are exposed after the visiting process is complete.</returns>
     /// <param name="context">The rendering context to visit.</param>
-    public override RenderingContext[] VisitRecursively(RenderingContext context)
+    public override RenderingContext[] VisitContext(RenderingContext context)
     {
-      var output = base.VisitRecursively(context);
+      var output = base.VisitContext(context);
 
       foreach(var item in output)
       {
         item.Element.PurgeMetalAttributes();
-        if(item.Element.IsInNamespace(ZptConstants.Metal.Namespace))
-        {
-          item.Element.Omit();
-        }
       }
 
       return output;
