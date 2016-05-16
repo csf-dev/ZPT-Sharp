@@ -67,7 +67,7 @@ namespace CSF.Zpt
     /// Gets a collection of elements in the document which are defined as METAL macros.
     /// </summary>
     /// <returns>Elements representing the METAL macros.</returns>
-    internal override CSF.Zpt.Metal.MetalMacro[] GetMacros()
+    internal override CSF.Zpt.Metal.MetalMacroCollection GetMacros()
     {
       var xpath = String.Format("//*[@{0}:{1}]",
                                 ZptConstants.Metal.Namespace.Prefix,
@@ -76,15 +76,16 @@ namespace CSF.Zpt
       var nsManager = new XmlNamespaceManager(this.Document.CreateNavigator().NameTable);
       nsManager.AddNamespace(ZptConstants.Metal.Namespace.Prefix, ZptConstants.Metal.Namespace.Uri);
 
-      return this.Document.DocumentElement
+      var output = this.Document.DocumentElement
         .SelectNodes(xpath, nsManager)
         .Cast<XmlNode>()
         .Select(x => {
           var element = new ZptXmlElement(x, this.SourceFile);
           var context = new RenderingContext(Model.Empty, Model.Empty, element, RenderingOptions.Default);
           return new Metal.MetalMacro(context.GetMetalAttribute(ZptConstants.Metal.DefineMacroAttribute).Value, element);
-        })
-        .ToArray();
+        });
+
+      return new CSF.Zpt.Metal.MetalMacroCollection(output);
     }
 
     /// <summary>

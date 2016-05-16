@@ -67,9 +67,9 @@ namespace CSF.Zpt
     /// Gets a collection of elements in the document which are defined as METAL macros.
     /// </summary>
     /// <returns>Elements representing the METAL macros.</returns>
-    internal override CSF.Zpt.Metal.MetalMacro[] GetMacros()
+    internal override CSF.Zpt.Metal.MetalMacroCollection GetMacros()
     {
-      return this.Document
+      var output = this.Document
         .DocumentNode
         .DescendantsAndSelf()
         .Where(ele => ele.Attributes.Any(attr => attr.Name == String.Format("{0}:{1}",
@@ -79,8 +79,9 @@ namespace CSF.Zpt
           var element = new ZptHtmlElement(x, this.SourceFile);
           var context = new RenderingContext(Model.Empty, Model.Empty, element, RenderingOptions.Default);
           return new Metal.MetalMacro(context.GetMetalAttribute(ZptConstants.Metal.DefineMacroAttribute).Value, element);
-        })
-        .ToArray();
+        });
+
+      return new CSF.Zpt.Metal.MetalMacroCollection(output);
     }
 
     /// <summary>

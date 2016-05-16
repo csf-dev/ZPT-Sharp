@@ -81,7 +81,7 @@ namespace CSF.Zpt.Tales
       switch(pathFragment)
       {
       case MACROS_NAME:
-        result = new MetalMacroCollection(_document.GetMacros());
+        result = _document.GetMacros();
         output = true;
         break;
 

@@ -71,7 +71,7 @@ namespace CSF.Zpt
     /// Gets a collection of elements in the document which are defined as METAL macros.
     /// </summary>
     /// <returns>Elements representing the METAL macros.</returns>
-    internal abstract CSF.Zpt.Metal.MetalMacro[] GetMacros();
+    internal abstract CSF.Zpt.Metal.MetalMacroCollection GetMacros();
 
     /// <summary>
     /// Renders the current document, returning an <see cref="ZptElement"/> representing the rendered result.

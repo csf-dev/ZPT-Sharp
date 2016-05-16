@@ -30,6 +30,12 @@ namespace CSF.Zpt.Metal
         throw new ArgumentNullException(nameof(context));
       }
 
+      ZptAttribute attrib;
+      if((attrib = context.GetMetalAttribute(ZptConstants.Metal.DefineMacroAttribute)) != null)
+      {
+        context.MetalModel.AddGlobal(attrib.Value, context.Element);
+      }
+
       return new [] { _macroExpander.Expand(context) };
     }
 
