@@ -1,5 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
 <html>
-  <a href="http://www.python.org">bar</a>
-  <p>bad boy!</p>
-  <p>x undefined</p>
+	<a href="http://www.python.org">bar</a>
+	<p>bad boy!</p>
+	<p>x undefined</p>
 </html>
