@@ -547,7 +547,7 @@ namespace CSF.Zpt.Rendering
       if(treatAsHtml)
       {
         var doc = new HtmlDocument();
-        doc.LoadHtml(HtmlEntity.DeEntitize(toImport));
+        doc.LoadHtml(toImport);
         output = doc.DocumentNode.ChildNodes.ToArray();
       }
       else

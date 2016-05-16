@@ -22,7 +22,7 @@ namespace CSF.Zpt.Rendering
     public override string Value
     {
       get {
-        return _original.Value;
+        return HtmlAgilityPack.HtmlEntity.DeEntitize(_original.Value);
       }
     }
 
