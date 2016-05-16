@@ -298,8 +298,7 @@ namespace CSF.Zpt.Rendering
         throw new ArgumentNullException(nameof(name));
       }
 
-      var attribName = GetNameWithPrefix(attributeNamespace, name);
-
+      var attribName = this.IsInNamespace(attributeNamespace)? name : GetNameWithPrefix(attributeNamespace, name);
       var htmlAttribute = this.Node.Attributes
         .FirstOrDefault(x => x.Name == attribName);
 

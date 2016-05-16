@@ -313,7 +313,7 @@ namespace CSF.Zpt.Rendering
       string query;
       var nsManager = new XmlNamespaceManager(new NameTable());
 
-      if(String.IsNullOrEmpty(attributeNamespace.Uri))
+      if(String.IsNullOrEmpty(attributeNamespace.Uri) || this.IsInNamespace(attributeNamespace))
       {
         query = String.Concat("@", name);
       }

@@ -63,56 +63,6 @@ namespace Test.CSF.Zpt.Tal
       _element.Verify(x => x.Omit(), Times.Never());
     }
 
-    [Test]
-    [Description("Tests the special case where the element itself is in the 'tal' namespace")]
-    public void TestHandleElementInTalNamespace()
-    {
-      // Arrange
-      Mock.Get(_context)
-        .Setup(x => x.GetAttribute(ZptConstants.Tal.Namespace,
-                                   ZptConstants.Tal.OmitTagAttribute))
-        .Returns((ZptAttribute) null);
-      _element
-        .Setup(x => x.IsInNamespace(ZptConstants.Tal.Namespace))
-        .Returns(true);
-      _element
-        .Setup(x => x.Omit())
-        .Returns(new[] { Mock.Of<ZptElement>(), Mock.Of<ZptElement>(), Mock.Of<ZptElement>() });
-
-      // Act
-      var result = _sut.Handle(_context);
-
-      // Assert
-      Assert.AreEqual(0, result.Contexts.Length, "Count of results");
-      Assert.AreEqual(3, result.NewlyExposedContexts.Length, "Count of new elements exposed");
-      _element.Verify(x => x.Omit(), Times.Once());
-    }
-
-    [Test]
-    [Description("Tests the special case where the element itself is in the 'metal' namespace")]
-    public void TestHandleElementInMetalNamespace()
-    {
-      // Arrange
-      Mock.Get(_context)
-        .Setup(x => x.GetAttribute(ZptConstants.Tal.Namespace,
-                                   ZptConstants.Tal.OmitTagAttribute))
-        .Returns((ZptAttribute) null);
-      _element
-        .Setup(x => x.IsInNamespace(ZptConstants.Metal.Namespace))
-        .Returns(true);
-      _element
-        .Setup(x => x.Omit())
-        .Returns(new[] { Mock.Of<ZptElement>(), Mock.Of<ZptElement>(), Mock.Of<ZptElement>() });
-
-      // Act
-      var result = _sut.Handle(_context);
-
-      // Assert
-      Assert.AreEqual(0, result.Contexts.Length, "Count of results");
-      Assert.AreEqual(3, result.NewlyExposedContexts.Length, "Count of new elements exposed");
-      _element.Verify(x => x.Omit(), Times.Once());
-    }
-
     //          Condition   Cancel    Expect element
     //          ---------   ------    --------------
     [TestCase(  true,       false,    false)]
