@@ -474,7 +474,7 @@ namespace CSF.Zpt.Rendering
 
       foreach(var item in toRemove)
       {
-        item.ParentNode.RemoveChild(item);
+        new ZptXmlElement(item, this.SourceFile).Omit();
       }
     }
 

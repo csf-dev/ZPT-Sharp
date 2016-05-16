@@ -407,7 +407,7 @@ namespace CSF.Zpt.Rendering
 
       foreach(var item in toRemove)
       {
-        item.Remove();
+        new ZptHtmlElement(item, this.SourceFile).Omit();
       }
     }
 

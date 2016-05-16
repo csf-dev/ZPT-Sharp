@@ -74,6 +74,20 @@ namespace CSF.Zpt.Rendering
       element.PurgeAttributes(ZptConstants.Metal.Namespace);
     }
 
+    /// <summary>
+    /// Recursively searches for elements in the METAL namespace and removes them from their parent element.
+    /// </summary>
+    /// <param name="element">The element from which to perform the purge.</param>
+    public static void PurgeMetalElements(this ZptElement element)
+    {
+      if(element == null)
+      {
+        throw new ArgumentNullException(nameof(element));
+      }
+
+      element.PurgeElements(ZptConstants.Metal.Namespace);
+    }
+
     #endregion
 
     #region TAL extension methods
@@ -124,6 +138,20 @@ namespace CSF.Zpt.Rendering
       }
 
       element.PurgeAttributes(ZptConstants.Tal.Namespace);
+    }
+
+    /// <summary>
+    /// Recursively searches for elements in the TAL namespace and removes them from their parent element.
+    /// </summary>
+    /// <param name="element">The element from which to perform the purge.</param>
+    public static void PurgeTalElements(this ZptElement element)
+    {
+      if(element == null)
+      {
+        throw new ArgumentNullException(nameof(element));
+      }
+
+      element.PurgeElements(ZptConstants.Tal.Namespace);
     }
 
     #endregion

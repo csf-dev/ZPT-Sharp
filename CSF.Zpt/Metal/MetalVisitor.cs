@@ -57,6 +57,7 @@ namespace CSF.Zpt.Metal
       foreach(var item in output)
       {
         item.Element.PurgeMetalAttributes();
+        item.Element.PurgeMetalElements();
       }
 
       return output;

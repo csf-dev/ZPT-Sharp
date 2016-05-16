@@ -119,6 +119,7 @@ namespace CSF.Zpt.Tal
       foreach(var item in output)
       {
         item.Element.PurgeTalAttributes();
+        item.Element.PurgeTalElements();
       }
 
       return output;
