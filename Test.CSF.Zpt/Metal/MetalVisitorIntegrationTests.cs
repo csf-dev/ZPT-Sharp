@@ -82,7 +82,7 @@ namespace Test.CSF.Zpt.Metal
                                      _fixture.Create<RenderingOptions>());
 
       // Act
-      sut.VisitContext(ctx);
+      sut.VisitRecursively(ctx);
       var result = document.ToString();
 
       // Assert

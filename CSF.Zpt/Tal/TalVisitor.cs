@@ -98,27 +98,13 @@ namespace CSF.Zpt.Tal
         }
       }
 
-      return output;
-    }
-
-    /// <summary>
-    /// Visits a rendering context and returns a collection of contexts which represent the result of that visit.
-    /// </summary>
-    /// <remarks>
-    /// <para>
-    /// After the base class functionality has finished executing, this visit purges the elements (exposed by their
-    /// contexts) of all TAL attributes.
-    /// </para>
-    /// </remarks>
-    /// <returns>The rendering contexts instances which are exposed after the visiting process is complete.</returns>
-    /// <param name="context">The rendering context to visit.</param>
-    public override RenderingContext[] VisitContext(RenderingContext context)
-    {
-      var output = base.VisitContext(context);
-
       foreach(var item in output)
       {
         item.Element.PurgeTalAttributes();
+        if(item.Element.IsInNamespace(ZptConstants.Tal.Namespace))
+        {
+          item.Element.Omit();
+        }
       }
 
       return output;

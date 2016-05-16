@@ -90,7 +90,7 @@ namespace CSF.Zpt
 
       foreach(var visitor in options.ContextVisitors)
       {
-        var contexts = visitor.VisitContext(context);
+        var contexts = visitor.VisitRecursively(context);
 
         if(contexts.Count() != 1)
         {

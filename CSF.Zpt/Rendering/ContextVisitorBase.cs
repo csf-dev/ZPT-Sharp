@@ -46,16 +46,6 @@ namespace CSF.Zpt.Rendering
       return output;
     }
 
-    /// <summary>
-    /// Visits a rendering context and returns a collection of contexts which represent the result of that visit.
-    /// </summary>
-    /// <returns>The rendering contexts instances which are exposed after the visiting process is complete.</returns>
-    /// <param name="context">The rendering context to visit.</param>
-    public virtual RenderingContext[] VisitContext(RenderingContext context)
-    {
-      return this.VisitRecursively(context);
-    }
-
     #endregion
   }
 }
