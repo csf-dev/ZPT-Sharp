@@ -510,6 +510,36 @@ namespace CSF.Zpt.Rendering
     }
 
     /// <summary>
+    /// Adds a new comment to the DOM immediately after the current element.
+    /// </summary>
+    /// <param name="comment">The comment text.</param>
+    public override void AddCommentAfter(string comment)
+    {
+      if(comment == null)
+      {
+        throw new ArgumentNullException(nameof(comment));
+      }
+
+      string indent = String.Empty;
+
+      var firstChild = this.Node.FirstChild;
+      if(firstChild != null
+         && firstChild.NodeType == XmlNodeType.Text)
+      {
+        XmlText innerText = (XmlText) firstChild;
+        var indentMatch = Indent.Match(innerText.Value);
+        if(indentMatch.Success)
+        {
+          indent = indentMatch.Value;
+        }
+      }
+
+      var commentNode = this.Node.OwnerDocument.CreateComment(comment);
+
+      this.Node.InsertBefore(commentNode, this.Node.FirstChild);
+    }
+
+    /// <summary>
     /// Gets an element or attribute name based upon its prefix and name.
     /// </summary>
     /// <returns>The assembled name.</returns>
@@ -547,7 +577,7 @@ namespace CSF.Zpt.Rendering
     {
       var clone = _node.Clone();
 
-      return new ZptXmlElement(clone, this.SourceFile);
+      return new ZptXmlElement(clone, this.SourceFile, this.IsRoot, this.IsImported);
     }
 
     /// <summary>

@@ -288,6 +288,12 @@ namespace CSF.Zpt.Rendering
     public abstract void AddCommentBefore(string comment);
 
     /// <summary>
+    /// Adds a new comment to the DOM immediately after the current element.
+    /// </summary>
+    /// <param name="comment">The comment text.</param>
+    public abstract void AddCommentAfter(string comment);
+
+    /// <summary>
     /// Clone this instance into a new Element instance, which may be manipulated without affecting the original.
     /// </summary>
     public abstract ZptElement Clone();

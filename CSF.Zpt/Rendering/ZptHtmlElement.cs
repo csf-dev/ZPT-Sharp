@@ -444,13 +444,44 @@ namespace CSF.Zpt.Rendering
     }
 
     /// <summary>
+    /// Adds a new comment to the DOM immediately after the current element.
+    /// </summary>
+    /// <param name="comment">The comment text.</param>
+    public override void AddCommentAfter(string comment)
+    {
+      if(comment == null)
+      {
+        throw new ArgumentNullException(nameof(comment));
+      }
+
+      string indent = String.Empty;
+
+      var firstChild = this.Node.FirstChild;
+      if(firstChild != null
+         && firstChild.NodeType == HtmlNodeType.Text)
+      {
+        HtmlTextNode innerText = (HtmlTextNode) firstChild;
+        var indentMatch = Indent.Match(innerText.Text);
+        if(indentMatch.Success)
+        {
+          indent = indentMatch.Value;
+        }
+      }
+
+      string commentText = String.Concat(HTML_COMMENT_START, comment, HTML_COMMENT_END, indent);
+      var commentNode = this.Node.OwnerDocument.CreateComment(commentText);
+
+      this.Node.InsertBefore(commentNode, this.Node.FirstChild);
+    }
+
+    /// <summary>
     /// Clone this instance into a new Element instance, which may be manipulated without affecting the original.
     /// </summary>
     public override ZptElement Clone()
     {
       var clone = _node.Clone();
 
-      return new ZptHtmlElement(clone, this.SourceFile);
+      return new ZptHtmlElement(clone, this.SourceFile, this.IsRoot, this.IsImported);
     }
 
     /// <summary>

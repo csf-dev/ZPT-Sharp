@@ -78,7 +78,14 @@ namespace CSF.Zpt.Metal
         commentText = filename;
       }
 
-      element.AddCommentBefore(commentText);
+      if(element.IsRoot)
+      {
+        element.AddCommentAfter(commentText);
+      }
+      else
+      {
+        element.AddCommentBefore(commentText);
+      }
     }
 
     #endregion

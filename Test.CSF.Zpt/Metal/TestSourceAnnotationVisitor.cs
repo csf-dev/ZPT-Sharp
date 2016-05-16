@@ -60,6 +60,7 @@ namespace Test.CSF.Zpt.Metal
       {
         ele.Setup(x => x.AddCommentBefore(It.IsAny<string>()));
       }
+      elements[0].Setup(x => x.AddCommentAfter(It.IsAny<string>()));
 
       var options = new RenderingOptions(addSourceFileAnnotation: true);
       var sut = new SourceAnnotationVisitor();
@@ -72,7 +73,7 @@ namespace Test.CSF.Zpt.Metal
       sut.VisitRecursively(ctx);
 
       // Assert
-      elements[0].Verify(x => x.AddCommentBefore("One, Element 1"), Times.Once());
+      elements[0].Verify(x => x.AddCommentAfter("One, Element 1"), Times.Once());
       elements[1].Verify(x => x.AddCommentBefore("Two, Element 2"), Times.Once());
       elements[2].Verify(x => x.AddCommentBefore(It.IsAny<string>()), Times.Never());
       elements[3].Verify(x => x.AddCommentBefore("Two, Element 4"), Times.Once());
