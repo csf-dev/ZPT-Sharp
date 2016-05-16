@@ -77,7 +77,7 @@ namespace CSF.Zpt.Tal
             var resultValue = expressionResult.GetValue<object>();
             var elements = context.Element.ReplaceWith((resultValue?? String.Empty).ToString(),
                                                        mode == STRUCTURE_INDICATOR);
-            output = new AttributeHandlingResult(elements.Select(x => context.CreateSiblingContext(x)).ToArray(), false);
+            output = new AttributeHandlingResult(elements.Select(x => context.CreateSiblingContext(x, true)).ToArray(), false);
           }
         }
       }

@@ -108,19 +108,24 @@ namespace CSF.Zpt.Rendering
     /// </summary>
     /// <param name="element">The ZPT element for which the new context is to be created.</param>
     /// <returns>The sibling context.</returns>
-    public virtual RenderingContext CreateSiblingContext(ZptElement element)
+    public virtual RenderingContext CreateSiblingContext(ZptElement element, bool cloneAttributes = false)
     {
       if(element == null)
       {
         throw new ArgumentNullException(nameof(element));
       }
 
-      return new RenderingContext(this.MetalModel.CreateSiblingModel(),
-                                  this.TalModel.CreateSiblingModel(),
-                                  element,
-                                  this.RenderingOptions) {
-        OriginalAttributes = element.GetAttributes()
-      };
+      var output = new RenderingContext(this.MetalModel.CreateSiblingModel(),
+                                        this.TalModel.CreateSiblingModel(),
+                                        element,
+                                        this.RenderingOptions);
+
+      if(cloneAttributes)
+      {
+        output.OriginalAttributes = this.OriginalAttributes;
+      }
+
+      return output;
     }
 
     public virtual ZptAttribute GetAttribute(ZptNamespace nspace, string attributeName)
