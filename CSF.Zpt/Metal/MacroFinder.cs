@@ -65,7 +65,7 @@ namespace CSF.Zpt.Metal
         try
         {
           result = context.MetalModel.Evaluate(attrib.Value, context);
-          output = result.GetValue<ZptElement>();
+          output = result.GetValue<ZptElement>().Clone();
         }
         catch(Exception ex)
         {

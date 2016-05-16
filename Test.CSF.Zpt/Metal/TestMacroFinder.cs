@@ -37,7 +37,7 @@ namespace Test.CSF.Zpt.Metal
     {
       // Arrange
       var attribute = Mock.Of<global::CSF.Zpt.Rendering.ZptAttribute>();
-      var referencedElement = Mock.Of<ZptElement>();
+      var referencedElement = Mock.Of<ZptElement>(x => x.Clone() == x);
 
       var model = _fixture.Create<DummyModel>();
       _fixture.Inject(model);
@@ -111,7 +111,7 @@ namespace Test.CSF.Zpt.Metal
     {
       // Arrange
       var attribute = Mock.Of<global::CSF.Zpt.Rendering.ZptAttribute>();
-      var referencedElement = Mock.Of<ZptElement>();
+      var referencedElement = Mock.Of<ZptElement>(x => x.Clone() == x);
 
       var model = _fixture.Create<DummyModel>();
       _fixture.Inject(model);
