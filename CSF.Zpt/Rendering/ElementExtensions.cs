@@ -79,23 +79,6 @@ namespace CSF.Zpt.Rendering
     #region TAL extension methods
 
     /// <summary>
-    /// Gets a TAL attribute which matches the given criteria, or a <c>null</c> reference is no matching attribute is
-    /// found.
-    /// </summary>
-    /// <returns>The attribute, or a <c>null</c> reference.</returns>
-    /// <param name="element">The element from which to get attributes.</param>
-    /// <param name="attributeName">The attribute name.</param>
-    public static ZptAttribute GetTalAttribute(this ZptElement element, string attributeName)
-    {
-      if(element == null)
-      {
-        throw new ArgumentNullException(nameof(element));
-      }
-
-      return element.GetAttribute(ZptConstants.Tal.Namespace, attributeName);
-    }
-
-    /// <summary>
     /// Recursively searches upwards in the DOM tree, returning the first (closest) ancestor element which has a TAL
     /// attribute matching the given name.
     /// </summary>
