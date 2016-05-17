@@ -28,9 +28,7 @@ namespace CSF.Zpt.Tal
 
       if(attrib != null)
       {
-        // Normal handling by detecting an attribute and using its value
-        var result = context.TalModel.Evaluate(attrib.Value, context);
-        if(!result.CancelsAction && result.GetValueAsBoolean())
+        if(attrib.Value.Length == 0)
         {
           var children = context.Element.Omit();
           output = new AttributeHandlingResult(new RenderingContext[0],
@@ -39,7 +37,19 @@ namespace CSF.Zpt.Tal
         }
         else
         {
-          output = new AttributeHandlingResult(new [] { context }, true);
+          // Normal handling by detecting an attribute and using its value
+          var result = context.TalModel.Evaluate(attrib.Value, context);
+          if(!result.CancelsAction && result.GetValueAsBoolean())
+          {
+            var children = context.Element.Omit();
+            output = new AttributeHandlingResult(new RenderingContext[0],
+                                               false,
+                                               children.Select(x => context.CreateSiblingContext(x)).ToArray());
+          }
+          else
+          {
+            output = new AttributeHandlingResult(new [] { context }, true);
+          }
         }
       }
       else
