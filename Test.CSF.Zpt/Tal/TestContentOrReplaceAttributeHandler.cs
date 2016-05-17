@@ -210,9 +210,10 @@ namespace Test.CSF.Zpt.Tal
 
       // Assert
       Assert.NotNull(result, "Result nullability");
-      Assert.AreEqual(1, result.Contexts.Length, "Count of results");
-      Assert.AreSame(_context, result.Contexts[0], "Correct element returned");
+      Assert.AreEqual(0, result.Contexts.Length, "Count of results");
 
+      _element.Verify(x => x.Omit(),
+                      Times.Once());
       _element.Verify(x => x.Remove(),
                       Times.Never());
       _element.Verify(x => x.RemoveAllChildren(),
@@ -245,9 +246,10 @@ namespace Test.CSF.Zpt.Tal
 
       // Assert
       Assert.NotNull(result, "Result nullability");
-      Assert.AreEqual(1, result.Contexts.Length, "Count of results");
-      Assert.AreSame(_context, result.Contexts[0], "Correct element returned");
+      Assert.AreEqual(0, result.Contexts.Length, "Count of results");
 
+      _element.Verify(x => x.Omit(),
+                      Times.Once());
       _element.Verify(x => x.Remove(),
                       Times.Never());
       _element.Verify(x => x.RemoveAllChildren(),
@@ -280,9 +282,10 @@ namespace Test.CSF.Zpt.Tal
 
       // Assert
       Assert.NotNull(result, "Result nullability");
-      Assert.AreEqual(1, result.Contexts.Length, "Count of results");
-      Assert.AreSame(_context, result.Contexts[0], "Correct element returned");
+      Assert.AreEqual(0, result.Contexts.Length, "Count of results");
 
+      _element.Verify(x => x.Omit(),
+                      Times.Once());
       _element.Verify(x => x.Remove(),
                       Times.Never());
       _element.Verify(x => x.RemoveAllChildren(),

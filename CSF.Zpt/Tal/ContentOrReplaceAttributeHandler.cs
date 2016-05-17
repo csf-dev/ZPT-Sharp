@@ -46,9 +46,16 @@ namespace CSF.Zpt.Tal
         string mode;
         var expressionResult = this.GetAttributeResult(attrib, context, out mode);
 
-        if(expressionResult.CancelsAction)
+        if(expressionResult.CancelsAction && attribName == ZptConstants.Tal.ContentAttribute)
         {
           output = new AttributeHandlingResult(new [] { context }, true);
+        }
+        else if(expressionResult.CancelsAction && attribName == ZptConstants.Tal.ReplaceAttribute)
+        {
+          var children = context.Element.Omit();
+          output = new AttributeHandlingResult(new RenderingContext[0],
+                                               false,
+                                               children.Select(x => context.CreateSiblingContext(x)).ToArray());
         }
         else if(expressionResult.Value == null)
         {
