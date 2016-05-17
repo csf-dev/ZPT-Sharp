@@ -130,9 +130,10 @@ namespace CSF.Zpt.Rendering
 
     public virtual ZptAttribute GetAttribute(ZptNamespace nspace, string attributeName)
     {
-      var attrNamespace = this.Element.IsInNamespace(nspace)? ZptNamespace.Default : nspace;
-
-      return this.OriginalAttributes.Where(x => x.IsMatch(attrNamespace, attributeName)).FirstOrDefault();
+      return this.OriginalAttributes
+        .Where(x => x.IsMatch(nspace, attributeName)
+               || (this.Element.IsInNamespace(nspace) && x.IsMatch(ZptNamespace.Default, attributeName)))
+        .FirstOrDefault();
     }
 
     public virtual OriginalAttributeValuesCollection GetOriginalAttributes()
