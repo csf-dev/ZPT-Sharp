@@ -51,7 +51,8 @@ namespace CSF.Zpt.Rendering
 
       return (((_original.NamespaceURI == null
                 && nspace.Uri == null)
-               || (_original.NamespaceURI == nspace.Uri))
+               || (_original.NamespaceURI == nspace.Uri
+                   || (String.IsNullOrEmpty(nspace.Uri) && String.IsNullOrEmpty(_original.NamespaceURI))))
               && _original.LocalName == name);
     }
 
