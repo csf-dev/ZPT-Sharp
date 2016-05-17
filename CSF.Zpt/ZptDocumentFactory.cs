@@ -103,15 +103,12 @@ namespace CSF.Zpt
         throw new ArgumentNullException(nameof(encoding));
       }
 
-      ZptDocument output;
       var sourceInfo = new SourceFileInfo(sourceFile);
 
-      using(var stream = sourceFile.OpenRead())
-      {
-        output = this.CreateHtml(stream, sourceInfo, encoding);
-      }
+      var doc = new HtmlAgilityPack.HtmlDocument();
+      doc.Load(sourceFile.FullName, encoding);
 
-      return output;
+      return new ZptHtmlDocument(doc, sourceInfo);
     }
 
     /// <summary>

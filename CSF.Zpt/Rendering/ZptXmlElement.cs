@@ -17,8 +17,8 @@ namespace CSF.Zpt.Rendering
 
     private const string
       INDENT_PATTERN        = @"([ \t]+)$",
-      XML_COMMENT_START    = "<!-- ",
-      XML_COMMENT_END      = " -->\n";
+      XML_COMMENT_START    = " ",
+      XML_COMMENT_END      = XML_COMMENT_START;
 
     private static readonly Regex Indent = new Regex(INDENT_PATTERN, RegexOptions.Compiled);
 
@@ -52,6 +52,13 @@ namespace CSF.Zpt.Rendering
     {
       get {
         return this.Node.Name;
+      }
+    }
+
+    public override bool HasParent
+    {
+      get {
+        return this.Node.ParentNode != null;
       }
     }
 
@@ -504,7 +511,7 @@ namespace CSF.Zpt.Rendering
         }
       }
 
-      var commentNode = this.Node.OwnerDocument.CreateComment(comment);
+      var commentNode = this.Node.OwnerDocument.CreateComment(String.Concat(XML_COMMENT_START, comment, XML_COMMENT_END));
 
       parent.InsertBefore(commentNode, this.Node);
     }
@@ -534,7 +541,7 @@ namespace CSF.Zpt.Rendering
         }
       }
 
-      var commentNode = this.Node.OwnerDocument.CreateComment(comment);
+      var commentNode = this.Node.OwnerDocument.CreateComment(String.Concat(XML_COMMENT_START, comment, XML_COMMENT_END));
 
       this.Node.InsertBefore(commentNode, this.Node.FirstChild);
     }
@@ -577,7 +584,7 @@ namespace CSF.Zpt.Rendering
     {
       var clone = _node.Clone();
 
-      return new ZptXmlElement(clone, this.SourceFile, this.IsRoot, this.IsImported);
+      return new ZptXmlElement(clone, this.SourceFile, this.IsRoot, true);
     }
 
     /// <summary>

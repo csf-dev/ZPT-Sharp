@@ -45,6 +45,8 @@ namespace CSF.Zpt.Rendering
       }
     }
 
+    public abstract bool HasParent { get; }
+
     /// <summary>
     /// Gets a value indicating whether this instance represents an element imported from another document tree.
     /// </summary>

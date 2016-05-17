@@ -55,6 +55,13 @@ namespace CSF.Zpt.Rendering
       }
     }
 
+    public override bool HasParent
+    {
+      get {
+        return this.Node.ParentNode != null;
+      }
+    }
+
     #endregion
 
     #region methods
@@ -491,7 +498,7 @@ namespace CSF.Zpt.Rendering
     {
       var clone = _node.Clone();
 
-      return new ZptHtmlElement(clone, this.SourceFile, this.IsRoot, this.IsImported);
+      return new ZptHtmlElement(clone, this.SourceFile, this.IsRoot, true);
     }
 
     /// <summary>

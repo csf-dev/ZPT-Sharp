@@ -30,8 +30,23 @@ namespace CSF.Zpt.Metal
         throw new ArgumentNullException(nameof(context));
       }
 
+      RenderingContext output;
+
       var macro = _macroFinder.GetUsedMacro(context);
-      return (macro != null)? this.ExpandAndReplace(context, macro) : context;
+      if(macro != null)
+      {
+        output = this.ExpandAndReplace(context, macro);
+      }
+      else
+      {
+        output = context;
+        if(context.Element.IsRoot && context.RenderingOptions.AddSourceFileAnnotation)
+        {
+          this.AddAnnotationComment(context.Element);
+        }
+      }
+
+      return output;
     }
 
     /// <summary>
@@ -61,7 +76,11 @@ namespace CSF.Zpt.Metal
 
       macroContext = this.ApplyMacroExtension(macroContext);
       var extendedMacro = context.Element.ReplaceWith(macroContext.Element);
-      this.FillSlots(context.Element, extendedMacro);
+      if(context.RenderingOptions.AddSourceFileAnnotation)
+      {
+        this.AddAnnotationComment(macroContext.Element);
+      }
+      this.FillSlots(context.Element, extendedMacro, context.RenderingOptions.AddSourceFileAnnotation);
 
       return context.CreateSiblingContext(extendedMacro);
     }
@@ -71,7 +90,7 @@ namespace CSF.Zpt.Metal
     /// </summary>
     /// <param name="sourceElement">Source element.</param>
     /// <param name="macro">Macro.</param>
-    private void FillSlots(ZptElement sourceElement, ZptElement macro)
+    private void FillSlots(ZptElement sourceElement, ZptElement macro, bool addAnnotation)
     {
       if(sourceElement == null)
       {
@@ -90,6 +109,10 @@ namespace CSF.Zpt.Metal
       foreach(var replacement in slotsToHandle)
       {
         replacement.Slot.ReplaceWith(replacement.Filler);
+        if(addAnnotation)
+        {
+          this.AddAnnotationComment(replacement.Filler);
+        }
       }
     }
 
@@ -125,6 +148,36 @@ namespace CSF.Zpt.Metal
 
       var extended = _macroFinder.GetExtendedMacro(context);
       return (extended != null)? this.ExpandAndReplace(context, extended) : context;
+    }
+
+    /// <summary>
+    /// Adds the source annotation comment to an element.
+    /// </summary>
+    /// <param name="element">The element to annotate.</param>
+    private void AddAnnotationComment(ZptElement element)
+    {
+      string
+        filename = element.SourceFile.GetFullName(),
+        filePosition = element.GetFileLocation(),
+      commentText;
+
+      if(filePosition != null)
+      {
+        commentText = String.Format("{0}", filename);
+      }
+      else
+      {
+        commentText = filename;
+      }
+
+      if(!element.HasParent)
+      {
+        element.AddCommentAfter(commentText);
+      }
+      else
+      {
+        element.AddCommentBefore(commentText);
+      }
     }
 
     #endregion

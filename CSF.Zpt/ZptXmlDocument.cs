@@ -80,7 +80,7 @@ namespace CSF.Zpt
         .SelectNodes(xpath, nsManager)
         .Cast<XmlNode>()
         .Select(x => {
-          var element = new ZptXmlElement(x, this.SourceFile);
+          var element = new ZptXmlElement(x, this.SourceFile, isImported: true);
           var context = new RenderingContext(Model.Empty, Model.Empty, element, RenderingOptions.Default);
           return new Metal.MetalMacro(context.GetMetalAttribute(ZptConstants.Metal.DefineMacroAttribute).Value, element);
         });

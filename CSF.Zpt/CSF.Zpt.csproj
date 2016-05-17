@@ -68,7 +68,6 @@
     <Compile Include="Metal\MacroFinder.cs" />
     <Compile Include="ZptConstants.cs" />
     <Compile Include="Metal\MetalVisitor.cs" />
-    <Compile Include="Metal\SourceAnnotationVisitor.cs" />
     <Compile Include="Tal\TalVisitor.cs" />
     <Compile Include="Rendering\RenderingContext.cs" />
     <Compile Include="Resources\ExceptionMessages.Designer.cs">

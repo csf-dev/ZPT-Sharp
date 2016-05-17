@@ -70,7 +70,6 @@
     <Compile Include="Metal\MetalVisitorIntegrationTests.cs" />
     <Compile Include="Metal\TestMacroExpander.cs" />
     <Compile Include="Metal\TestMacroFinder.cs" />
-    <Compile Include="Metal\TestSourceAnnotationVisitor.cs" />
     <Compile Include="Tal\TestTalVisitor.cs" />
     <Compile Include="Util\Autofixture\RenderingContextCustomisation.cs" />
     <Compile Include="Util\DummyModel.cs" />
