@@ -83,6 +83,8 @@ namespace Test.CSF.Zpt.Metal
 
       // Act
       sut.VisitContext(ctx);
+      new MetalTidyUpVisitor().VisitContext(ctx);
+
       var result = document.ToString();
 
       // Assert

@@ -14,6 +14,8 @@ namespace CSF.Zpt.Rendering
       new CSF.Zpt.Metal.MetalVisitor(),
       new CSF.Zpt.Metal.SourceAnnotationVisitor(),
       new CSF.Zpt.Tal.TalVisitor(),
+      new CSF.Zpt.Metal.MetalTidyUpVisitor(),
+      new CSF.Zpt.Tal.TalTidyUpVisitor(),
     };
 
     #endregion
