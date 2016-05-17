@@ -46,10 +46,7 @@ namespace CSF.Zpt.Tal
         foreach(var ctx in output)
         {
           var processedBatch = handler.Handle(ctx);
-          if(processedBatch.ContinueHandling)
-          {
-            handlingResult.Add(processedBatch);
-          }
+          handlingResult.Add(processedBatch);
         }
 
         newlyExposedElements = newlyExposedElements.Union(handlingResult.SelectMany(x => x.NewlyExposedContexts));
