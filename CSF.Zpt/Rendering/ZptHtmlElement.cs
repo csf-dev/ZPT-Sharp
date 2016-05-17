@@ -129,10 +129,20 @@ namespace CSF.Zpt.Rendering
         throw new ArgumentException(message, "replacement");
       }
 
-      var parent = this.GetParent();
-      return new ZptHtmlElement(parent.ReplaceChild(repl.Node, this.Node),
+      try
+      {
+        var parent = this.GetParent();
+        return new ZptHtmlElement(parent.ReplaceChild(repl.Node, this.Node),
                                 repl.SourceFile,
                                 isImported: true);
+      }
+      catch(InvalidOperationException)
+      {
+        this.Node.Remove();
+        return new ZptHtmlElement(repl.Node,
+                                  repl.SourceFile,
+                                  isImported: true);
+      }
     }
 
     /// <summary>
