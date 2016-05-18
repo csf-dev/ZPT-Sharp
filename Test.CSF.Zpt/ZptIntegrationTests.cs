@@ -131,7 +131,7 @@ namespace Test.CSF.Zpt
 
         try
         {
-          var options = new RenderingOptions(initialState: this.CreateTestEnvironment(),
+          var options = new DefaultRenderingOptions(contextFactory: this.CreateTestEnvironment(),
                                              outputIndentedXml: true,
                                              xmlIndentCharacters: "\t");
 
@@ -160,9 +160,9 @@ namespace Test.CSF.Zpt
       return output;
     }
 
-    private InitialModelState CreateTestEnvironment()
+    private IRenderingContextFactory CreateTestEnvironment()
     {
-      var output = new InitialModelState();
+      var output = new TalesRenderingContextFactory();
 
       // The location of the other ZPT documents
       output.MetalLocalDefinitions.Add("documents", new FilesystemDirectory(_sourcePath));

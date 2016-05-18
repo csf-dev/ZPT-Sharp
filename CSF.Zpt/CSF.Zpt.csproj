@@ -48,32 +48,17 @@
     <Compile Include="..\Common\CommonAssemblyInfo.cs">
       <Link>CommonAssemblyInfo.cs</Link>
     </Compile>
-    <Compile Include="ZptDocument.cs" />
     <Compile Include="ZptHtmlDocument.cs" />
     <Compile Include="ZptXmlDocument.cs" />
     <Compile Include="Rendering\ElementExtensions.cs" />
-    <Compile Include="Rendering\SourceFileInfo.cs" />
-    <Compile Include="Rendering\RenderingOptions.cs" />
-    <Compile Include="Rendering\ExpressionResult.cs" />
-    <Compile Include="Rendering\Model.cs" />
-    <Compile Include="Rendering\ModelEvaluationException.cs" />
-    <Compile Include="Rendering\RenderingException.cs" />
-    <Compile Include="Rendering\ZptAttribute.cs" />
-    <Compile Include="Rendering\ZptElement.cs" />
     <Compile Include="Rendering\ZptHtmlAttribute.cs" />
     <Compile Include="Rendering\ZptHtmlElement.cs" />
     <Compile Include="Rendering\ZptXmlElement.cs" />
     <Compile Include="Rendering\ZptXmlAttribute.cs" />
     <Compile Include="Metal\MacroExpander.cs" />
     <Compile Include="Metal\MacroFinder.cs" />
-    <Compile Include="ZptConstants.cs" />
     <Compile Include="Metal\MetalVisitor.cs" />
     <Compile Include="Tal\TalVisitor.cs" />
-    <Compile Include="Rendering\RenderingContext.cs" />
-    <Compile Include="Resources\ExceptionMessages.Designer.cs">
-      <DependentUpon>ExceptionMessages.resx</DependentUpon>
-    </Compile>
-    <Compile Include="Tal\ParserException.cs" />
     <Compile Include="Tal\IAttributeHandler.cs" />
     <Compile Include="Tal\AttributesAttributeHandler.cs" />
     <Compile Include="Tal\RepeatAttributeHandler.cs" />
@@ -82,48 +67,31 @@
     <Compile Include="Tal\DefineAttributeHandler.cs" />
     <Compile Include="Tal\ContentOrReplaceAttributeHandler.cs" />
     <Compile Include="Tal\ConditionAttributeHandler.cs" />
-    <Compile Include="Rendering\RepetitionInfo.cs" />
     <Compile Include="Tal\AttributeHandlingResult.cs" />
-    <Compile Include="Rendering\ZptNamespace.cs" />
     <Compile Include="Tales\TalesModel.cs" />
     <Compile Include="Tales\PathExpressionEvaluator.cs" />
     <Compile Include="Tales\StringExpressionEvaluator.cs" />
     <Compile Include="Tales\NotExpressionEvaluator.cs" />
-    <Compile Include="Tales\Expression.cs" />
-    <Compile Include="Tales\InvalidExpressionException.cs" />
-    <Compile Include="Tales\ITalesConvertible.cs" />
-    <Compile Include="Tales\IExpressionEvaluator.cs" />
     <Compile Include="Tales\ExpressionEvaluatorBase.cs" />
     <Compile Include="Tales\IEvaluatorRegistry.cs" />
     <Compile Include="Tales\SimpleEvaluatorRegistry.cs" />
-    <Compile Include="Tales\ITalesPathHandler.cs" />
     <Compile Include="Tales\PathComponent.cs" />
     <Compile Include="Tales\Path.cs" />
     <Compile Include="Tales\PathPart.cs" />
     <Compile Include="Tales\PathWalker.cs" />
-    <Compile Include="Tales\TraversalException.cs" />
     <Compile Include="Tales\ObjectTraverser.cs" />
     <Compile Include="Tales\TraversalWrapper`1.cs" />
     <Compile Include="Tales\TraversalWrapper.cs" />
     <Compile Include="Tales\FuncByRef.cs" />
     <Compile Include="Tales\BuiltinContextsContainer.cs" />
-    <Compile Include="Rendering\RepetitionSummary.cs" />
     <Compile Include="Rendering\RepetitionInfoCollection.cs" />
     <Compile Include="Rendering\ContextualisedRepetitionSummaryWrapper.cs" />
     <Compile Include="Rendering\TemplateKeywordOptions.cs" />
-    <Compile Include="Rendering\OriginalAttributeValuesCollection.cs" />
-    <Compile Include="Rendering\IRenderingContextFactory.cs" />
     <Compile Include="Tales\TalesRenderingContextFactory.cs" />
-    <Compile Include="Rendering\IContextVisitor.cs" />
     <Compile Include="Rendering\ContextVisitorBase.cs" />
     <Compile Include="ZptDocumentFactory.cs" />
-    <Compile Include="IZptDocumentFactory.cs" />
     <Compile Include="Tales\FilesystemDirectory.cs" />
     <Compile Include="Tales\TemplateDirectory.cs" />
-    <Compile Include="Tales\TemplateFile.cs" />
-    <Compile Include="Metal\MetalMacro.cs" />
-    <Compile Include="Metal\MetalMacroCollection.cs" />
-    <Compile Include="Rendering\InitialModelState.cs" />
     <Compile Include="Tales\NamedObjectWrapper.cs" />
     <Compile Include="Tales\EnumerableObjectWrapperWithNamedItems.cs" />
     <Compile Include="LocalXhtmlXmlResolver.cs" />
@@ -133,13 +101,22 @@
     <Compile Include="Metal\MetalTidyUpVisitor.cs" />
     <Compile Include="Rendering\NoOpVisitor.cs" />
     <Compile Include="Rendering\UnknownSourceFileInfo.cs" />
-    <Compile Include="Tales\ITemplateFileFactory.cs" />
+    <Compile Include="Rendering\Model.cs" />
+    <Compile Include="Rendering\DefaultRenderingOptions.cs" />
+    <Compile Include="Rendering\RepetitionInfo.cs" />
+    <Compile Include="Resources\ExceptionMessages.Designer.cs">
+      <DependentUpon>..\..\CSF.Zpt.Api\Resources\ExceptionMessages.resx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
     <ProjectReference Include="..\CSF\CSF\CSF.csproj">
       <Project>{E563D7BC-1AB1-4AFB-8533-51315437C6E6}</Project>
       <Name>CSF</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CSF.Zpt.Api\CSF.Zpt.Api.csproj">
+      <Project>{8207CD9B-F1C1-4D75-B250-ACDFFBDCB071}</Project>
+      <Name>CSF.Zpt.Api</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
@@ -153,10 +130,6 @@
     <Folder Include="Resources\" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Resources\ExceptionMessages.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>ExceptionMessages.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
     <EmbeddedResource Include="Resources\xhtml1-frameset.dtd">
       <LogicalName>xhtml1-frameset.dtd</LogicalName>
     </EmbeddedResource>
@@ -177,6 +150,10 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\xhtml-symbol.ent">
       <LogicalName>xhtml-symbol.ent</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\ExceptionMessages.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>ExceptionMessages.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
 </Project>

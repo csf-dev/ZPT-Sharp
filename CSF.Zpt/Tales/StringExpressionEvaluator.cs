@@ -49,7 +49,7 @@ namespace CSF.Zpt.Tales
     /// <param name="expression">The expression to evaluate.</param>
     /// <param name="context">The rendering context for the expression being evaluated.</param>
     /// <param name="model">The ZPT model, providing the context for evaluation.</param>
-    public override ExpressionResult Evaluate(Expression expression, RenderingContext context, TalesModel model)
+    public override ExpressionResult Evaluate(Expression expression, RenderingContext context, ITalesModel model)
     {
       if(expression == null)
       {
@@ -108,7 +108,7 @@ namespace CSF.Zpt.Tales
     private string ApplyPlaceholderReplacements(string input,
                                                 ISet<int> escapedPlaceholderIndices,
                                                 RenderingContext context,
-                                                TalesModel model)
+                                                ITalesModel model)
     {
       var pathEvaluator = EvaluatorRegistry.GetEvaluator<PathExpressionEvaluator>();
 

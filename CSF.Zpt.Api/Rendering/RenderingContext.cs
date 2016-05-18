@@ -12,7 +12,7 @@ namespace CSF.Zpt.Rendering
   {
     #region fields
 
-    private Model _metalContext, _talContext;
+    private IModel _metalContext, _talContext;
     private ZptElement _element;
     private RenderingOptions _renderingOptions;
     private IEnumerable<ZptAttribute> _originalAttributes;
@@ -25,7 +25,7 @@ namespace CSF.Zpt.Rendering
     /// Gets the object model available to the METAL environment.
     /// </summary>
     /// <value>The METAL model.</value>
-    public virtual Model MetalModel
+    public virtual IModel MetalModel
     {
       get {
         return _metalContext;
@@ -36,7 +36,7 @@ namespace CSF.Zpt.Rendering
     /// Gets the object model available to the TAL environment.
     /// </summary>
     /// <value>The TAL model.</value>
-    public virtual Model TalModel
+    public virtual IModel TalModel
     {
       get {
         return _talContext;
@@ -168,8 +168,8 @@ namespace CSF.Zpt.Rendering
     /// <param name="talContext">The TAL context.</param>
     /// <param name="element">The ZPT element for which this context is created.</param>
     /// <param name="options">The rendering options.</param>
-    public RenderingContext(Model metalContext,
-                            Model talContext,
+    public RenderingContext(IModel metalContext,
+                            IModel talContext,
                             ZptElement element,
                             RenderingOptions options)
     {

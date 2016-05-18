@@ -13,7 +13,7 @@ namespace CSF.Zpt.Rendering
   {
     #region fields
 
-    private Dictionary<string,RepetitionSummary> _repetitions;
+    private Dictionary<string,ITalesPathHandler> _repetitions;
 
     #endregion
 
@@ -23,7 +23,7 @@ namespace CSF.Zpt.Rendering
     /// Gets the <see cref="CSF.Zpt.Rendering.ContextualisedRepetitionSummaryWrapper"/> with the specified key.
     /// </summary>
     /// <param name="key">Key.</param>
-    public RepetitionSummary this [string key]
+    public ITalesPathHandler this [string key]
     {
       get {
         return _repetitions.ContainsKey(key)? _repetitions[key] : null;
@@ -55,14 +55,14 @@ namespace CSF.Zpt.Rendering
     /// Initializes a new instance of the <see cref="CSF.Zpt.Rendering.ContextualisedRepetitionSummaryWrapper"/> class.
     /// </summary>
     /// <param name="repetitions">Repetitions.</param>
-    public ContextualisedRepetitionSummaryWrapper(IEnumerable<RepetitionInfo> repetitions)
+    public ContextualisedRepetitionSummaryWrapper(IEnumerable<IRepetitionInfo> repetitions)
     {
       if(repetitions == null)
       {
         throw new ArgumentNullException(nameof(repetitions));
       }
 
-      _repetitions = repetitions.ToDictionary(k => k.Name, v => v.ToSummary());
+      _repetitions = repetitions.ToDictionary(k => k.Name, v => (ITalesPathHandler) v);
     }
 
     #endregion

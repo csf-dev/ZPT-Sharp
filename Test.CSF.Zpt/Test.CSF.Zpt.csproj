@@ -118,5 +118,9 @@
       <Project>{16E957BB-347C-4EE1-815F-19AC296FB9E0}</Project>
       <Name>CSF.Zpt</Name>
     </ProjectReference>
+    <ProjectReference Include="..\CSF.Zpt.Api\CSF.Zpt.Api.csproj">
+      <Project>{8207CD9B-F1C1-4D75-B250-ACDFFBDCB071}</Project>
+      <Name>CSF.Zpt.Api</Name>
+    </ProjectReference>
   </ItemGroup>
 </Project>

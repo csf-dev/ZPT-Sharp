@@ -10,7 +10,7 @@ namespace CSF.Zpt.Tales
   /// An implementation of <see cref="Model"/> which makes use of the TALES: Template Attribute Language Expression
   /// Syntax for evaluating expressions.
   /// </summary>
-  public class TalesModel : Model
+  public class TalesModel : Model, ITalesModel
   {
     #region constants
 
@@ -30,7 +30,7 @@ namespace CSF.Zpt.Tales
     /// Creates and returns a child <see cref="TalesModel"/> instance.
     /// </summary>
     /// <returns>The child model.</returns>
-    public override Model CreateChildModel()
+    public override IModel CreateChildModel()
     {
       TalesModel output = new TalesModel(this, this.Root, _registry);
       output.RepetitionInfo = new RepetitionInfoCollection(this.RepetitionInfo);
@@ -186,8 +186,8 @@ namespace CSF.Zpt.Tales
     /// <param name="parent">The parent model.</param>
     /// <param name="root">The root model.</param>
     /// <param name="evaluatorRegistry">The expression evaluator registry.</param>
-    public TalesModel(Model parent,
-                      Model root,
+    public TalesModel(IModel parent,
+                      IModel root,
                       IEvaluatorRegistry evaluatorRegistry) : base(parent, root)
     {
       if(evaluatorRegistry == null)

@@ -33,7 +33,7 @@ namespace CSF.Zpt.Rendering
     public virtual bool CancelsAction
     {
       get {
-        return this.Value == Model.CancelAction;
+        return this.Value == ZptConstants.CancellationToken;
       }
     }
 

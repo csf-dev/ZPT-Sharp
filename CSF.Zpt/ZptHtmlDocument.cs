@@ -67,7 +67,7 @@ namespace CSF.Zpt
     /// Gets a collection of elements in the document which are defined as METAL macros.
     /// </summary>
     /// <returns>Elements representing the METAL macros.</returns>
-    internal override CSF.Zpt.Metal.MetalMacroCollection GetMacros()
+    public override CSF.Zpt.Metal.MetalMacroCollection GetMacros()
     {
       var output = this.Document
         .DocumentNode
@@ -77,7 +77,7 @@ namespace CSF.Zpt
                                                                             ZptConstants.Metal.DefineMacroAttribute)))
         .Select(x => {
           var element = new ZptHtmlElement(x, this.SourceFile, isImported: true);
-          var context = new RenderingContext(Model.Empty, Model.Empty, element, RenderingOptions.Default);
+        var context = new RenderingContext(Model.Empty, Model.Empty, element, GetDefaultOptions());
           return new Metal.MetalMacro(context.GetMetalAttribute(ZptConstants.Metal.DefineMacroAttribute).Value, element);
         });
 
@@ -121,6 +121,11 @@ namespace CSF.Zpt
     protected override ZptElement GetRootElement()
     {
       return new ZptHtmlElement(this.Document.DocumentNode, this.SourceFile, isRoot: true);
+    }
+
+    protected override RenderingOptions GetDefaultOptions()
+    {
+      return new DefaultRenderingOptions();
     }
 
     #endregion

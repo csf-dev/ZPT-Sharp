@@ -11,7 +11,7 @@ namespace CSF.Zpt.Rendering
   {
     #region fields
 
-    private Dictionary<NameAndElement,RepetitionInfo> _repetitions;
+    private Dictionary<NameAndElement,IRepetitionInfo> _repetitions;
 
     #endregion
 
@@ -69,9 +69,9 @@ namespace CSF.Zpt.Rendering
     /// </summary>
     /// <returns>The repetitions dictionary.</returns>
     /// <param name="repetitions">A collection of <see cref="RepetitionInfo"/> for the current instance.</param>
-    private Dictionary<NameAndElement,RepetitionInfo> CreateRepetitionsDictionary(IEnumerable<RepetitionInfo> repetitions)
+    private Dictionary<NameAndElement,IRepetitionInfo> CreateRepetitionsDictionary(IEnumerable<IRepetitionInfo> repetitions)
     {
-      return this.CreateRepetitionsDictionary(repetitions, new Dictionary<NameAndElement, RepetitionInfo>());
+      return this.CreateRepetitionsDictionary(repetitions, new Dictionary<NameAndElement,IRepetitionInfo>());
     }
 
     /// <summary>
@@ -80,8 +80,8 @@ namespace CSF.Zpt.Rendering
     /// <returns>The repetitions dictionary.</returns>
     /// <param name="repetitions">A collection of <see cref="RepetitionInfo"/> for the current instance.</param>
     /// <param name="sourceCollection">A source collection to use, as the basis for the repetition info.</param>
-    private Dictionary<NameAndElement,RepetitionInfo> CreateRepetitionsDictionary(IEnumerable<RepetitionInfo> repetitions,
-                                                                                  Dictionary<NameAndElement,RepetitionInfo> sourceCollection)
+    private Dictionary<NameAndElement,IRepetitionInfo> CreateRepetitionsDictionary(IEnumerable<IRepetitionInfo> repetitions,
+                                                                                  Dictionary<NameAndElement,IRepetitionInfo> sourceCollection)
     {
       if(sourceCollection == null)
       {
@@ -124,14 +124,14 @@ namespace CSF.Zpt.Rendering
     /// <param name="parentCollection">Parent collection.</param>
     /// <param name="repetitions">Repetitions.</param>
     public RepetitionInfoCollection(RepetitionInfoCollection parentCollection,
-                                    IEnumerable<RepetitionInfo> repetitions = null)
+                                    IEnumerable<IRepetitionInfo> repetitions = null)
     {
       if(parentCollection == null)
       {
         throw new ArgumentNullException(nameof(parentCollection));
       }
 
-      var source = new Dictionary<NameAndElement,RepetitionInfo>(parentCollection._repetitions);
+      var source = new Dictionary<NameAndElement,IRepetitionInfo>(parentCollection._repetitions);
       var newElements = repetitions?? new RepetitionInfo[0];
 
       _repetitions = this.CreateRepetitionsDictionary(newElements, source);

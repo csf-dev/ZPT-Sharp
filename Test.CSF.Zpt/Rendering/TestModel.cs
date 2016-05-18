@@ -22,7 +22,7 @@ namespace Test.CSF.Zpt.Rendering
       var fixture = new Fixture();
       new RenderingContextCustomisation().Customize(fixture);
 
-      var models = new Model[levelsOfNesting + 1];
+      var models = new IModel[levelsOfNesting + 1];
       for(int i = 0; i < models.Length; i++)
       {
         models[i] = (i == 0)? fixture.Create<DummyModel>() : models[i - 1].CreateChildModel();
@@ -49,7 +49,7 @@ namespace Test.CSF.Zpt.Rendering
       var fixture = new Fixture();
       new RenderingContextCustomisation().Customize(fixture);
 
-      var models = new Model[levelsOfNesting + 1];
+      var models = new IModel[levelsOfNesting + 1];
       for(int i = 0; i < models.Length; i++)
       {
         models[i] = (i == 0)? fixture.Create<DummyModel>() : models[i - 1].CreateChildModel();
@@ -77,7 +77,7 @@ namespace Test.CSF.Zpt.Rendering
       var fixture = new Fixture();
       new RenderingContextCustomisation().Customize(fixture);
 
-      var models = new Model[levelsOfNesting + 1];
+      var models = new IModel[levelsOfNesting + 1];
       for(int i = 0; i < models.Length; i++)
       {
         models[i] = (i == 0)? fixture.Create<DummyModel>() : models[i - 1].CreateChildModel();

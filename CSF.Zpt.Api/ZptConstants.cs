@@ -165,6 +165,11 @@ namespace CSF.Zpt
         #pragma warning restore 618
       }
     }
+
+    /// <summary>
+    /// Gets a special singleton value that indicates the "cancel the current action" token.
+    /// </summary>
+    public static readonly object CancellationToken = new object();
   }
 }
 

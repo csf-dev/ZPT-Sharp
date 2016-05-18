@@ -14,7 +14,7 @@ namespace Test.CSF.Zpt.Util
     /// Creates and returns a child <see cref="Model"/> instance.
     /// </summary>
     /// <returns>The child model.</returns>
-    public override Model CreateChildModel()
+    public override IModel CreateChildModel()
     {
       return new DummyModel(this, this.Root);
     }
@@ -72,7 +72,7 @@ namespace Test.CSF.Zpt.Util
     /// </summary>
     /// <param name="parent">Parent.</param>
     /// <param name="root">Root.</param>
-    public DummyModel(Model parent, Model root) : base(parent, root) {}
+    public DummyModel(IModel parent, IModel root) : base(parent, root) {}
 
     /// <summary>
     /// Initializes a new instance of the <see cref="Test.CSF.Zpt.Rendering.DummyModel"/> class.

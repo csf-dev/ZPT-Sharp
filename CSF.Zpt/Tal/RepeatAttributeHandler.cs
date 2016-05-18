@@ -99,7 +99,7 @@ namespace CSF.Zpt.Tal
     /// <param name="expression">Expression.</param>
     /// <param name="model">Model.</param>
     /// <param name="context">The rendering context.</param>
-    private IEnumerable GetSequence(string expression, Model model, RenderingContext context)
+    private IEnumerable GetSequence(string expression, IModel model, RenderingContext context)
     {
       ExpressionResult result;
       IEnumerable output;
@@ -150,7 +150,7 @@ namespace CSF.Zpt.Tal
     /// <param name="sequence">The source sequence.</param>
     /// <param name="element">The source element.</param>
     /// <param name="repeatVariableName">Repeat variable name.</param>
-    private RepetitionInfo[] GetRepetitions(IEnumerable sequence, ZptElement element, string repeatVariableName)
+    private IRepetitionInfo[] GetRepetitions(IEnumerable sequence, ZptElement element, string repeatVariableName)
     {
       var sequenceArray = sequence
         .Cast<object>()
@@ -163,6 +163,7 @@ namespace CSF.Zpt.Tal
                                         sequenceArray.Length,
                                         x,
                                         element.Clone()))
+        .Cast<IRepetitionInfo>()
         .ToArray();
     }
 
@@ -172,7 +173,7 @@ namespace CSF.Zpt.Tal
     /// <returns>The collection of new rendering contexts which represent new elements added to the DOM.</returns>
     /// <param name="repetitions">The repetitions.</param>
     /// <param name="context">The source rendering context.</param>
-    private RenderingContext[] HandleRepetitions(RepetitionInfo[] repetitions, RenderingContext context)
+    private RenderingContext[] HandleRepetitions(IRepetitionInfo[] repetitions, RenderingContext context)
     {
       if(repetitions.Any())
       {

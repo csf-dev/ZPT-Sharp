@@ -39,7 +39,7 @@ namespace CSF.Zpt.Tales
     /// <param name="expression">The expression to evaluate.</param>
     /// <param name="context">The rendering context for the expression being evaluated.</param>
     /// <param name="model">The ZPT model, providing the context for evaluation.</param>
-    public override ExpressionResult Evaluate(Expression expression, RenderingContext context, TalesModel model)
+    public override ExpressionResult Evaluate(Expression expression, RenderingContext context, ITalesModel model)
     {
       if(expression == null)
       {
@@ -82,7 +82,7 @@ namespace CSF.Zpt.Tales
     /// <param name="walker">A TALES path walker, containing a path.</param>
     /// <param name="context">The rendering context for the expression being evaluated.</param>
     /// <param name="model">The ZPT model, providing the context for evaluation.</param>
-    private object WalkPath(PathWalker walker, RenderingContext context, TalesModel model)
+    private object WalkPath(PathWalker walker, RenderingContext context, ITalesModel model)
     {
       object output = null;
       bool success = false;
@@ -110,7 +110,7 @@ namespace CSF.Zpt.Tales
     /// <param name="context">The rendering context for the expression being evaluated.</param>
     /// <param name="model">The ZPT model, providing the context for evaluation.</param>
     /// <param name="result">Exposes the result of the evaluation.</param>
-    private bool WalkComponent(PathWalker walker, RenderingContext context, TalesModel model, out object result)
+    private bool WalkComponent(PathWalker walker, RenderingContext context, ITalesModel model, out object result)
     {
       bool output;
 
@@ -155,7 +155,7 @@ namespace CSF.Zpt.Tales
     /// <param name="result">Exposes the result of this operation.</param>
     protected virtual bool TryGetTraversalRoot(PathWalker walker,
                                                RenderingContext context,
-                                               TalesModel model,
+                                               ITalesModel model,
                                                out object result)
     {
       bool output;
@@ -182,7 +182,7 @@ namespace CSF.Zpt.Tales
     /// <param name="context">The rendering context.</param>
     /// <param name="model">The TALES model.</param>
     /// <param name="result">Exposes the result of this operation.</param>
-    private bool TryGetPartName(PathPart part, RenderingContext context, TalesModel model, out string result)
+    private bool TryGetPartName(PathPart part, RenderingContext context, ITalesModel model, out string result)
     {
       result = part.Value;
       bool output = true;

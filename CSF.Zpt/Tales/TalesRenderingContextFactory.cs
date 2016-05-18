@@ -1,5 +1,6 @@
 ﻿using System;
 using CSF.Zpt.Rendering;
+using System.Collections.Generic;
 
 namespace CSF.Zpt.Tales
 {
@@ -15,6 +16,66 @@ namespace CSF.Zpt.Tales
     /// </summary>
     /// <value>The evaluator registry.</value>
     public IEvaluatorRegistry EvaluatorRegistry
+    {
+      get;
+      private set;
+    }
+
+    /// <summary>
+    /// Gets the local definitions to be pre-loaded into the TAL model.
+    /// </summary>
+    /// <value>The TAL local definitions.</value>
+    public IDictionary<string,object> TalLocalDefinitions
+    {
+      get;
+      private set;
+    }
+
+    /// <summary>
+    /// Gets the global definitions to be pre-loaded into the TAL model.
+    /// </summary>
+    /// <value>The TAL global definitions.</value>
+    public IDictionary<string,object> TalGlobalDefinitions
+    {
+      get;
+      private set;
+    }
+
+    /// <summary>
+    /// Gets the keyword options to be pre-loaded into the TAL model.
+    /// </summary>
+    /// <value>The TAL keyword options.</value>
+    public IDictionary<string,object> TalKeywordOptions
+    {
+      get;
+      private set;
+    }
+
+    /// <summary>
+    /// Gets the local definitions to be pre-loaded into the METAL model.
+    /// </summary>
+    /// <value>The METAL local definitions.</value>
+    public IDictionary<string,object> MetalLocalDefinitions
+    {
+      get;
+      private set;
+    }
+
+    /// <summary>
+    /// Gets the global definitions to be pre-loaded into the METAL model.
+    /// </summary>
+    /// <value>The METAL global definitions.</value>
+    public IDictionary<string,object> MetalGlobalDefinitions
+    {
+      get;
+      private set;
+    }
+
+    /// <summary>
+    /// Gets the keyword options to be pre-loaded into the METAL model.
+    /// </summary>
+    /// <value>The METAL keyword options.</value>
+    public IDictionary<string,object> MetalKeywordOptions
     {
       get;
       private set;
@@ -39,17 +100,59 @@ namespace CSF.Zpt.Tales
       }
 
       TemplateKeywordOptions
-        metalKeywordOptions = new TemplateKeywordOptions(options.InitialModelState.MetalKeywordOptions),
-        talKeywordOptions = new TemplateKeywordOptions(options.InitialModelState.TalKeywordOptions);
+        metalKeywordOptions = new TemplateKeywordOptions(MetalKeywordOptions),
+        talKeywordOptions = new TemplateKeywordOptions(TalKeywordOptions);
 
       Model
         metalModel = new TalesModel(this.EvaluatorRegistry, metalKeywordOptions),
         talModel = new TalesModel(this.EvaluatorRegistry, talKeywordOptions);
 
-      options.InitialModelState.PopulateMetalModel(metalModel);
-      options.InitialModelState.PopulateTalModel(talModel);
+      PopulateMetalModel(metalModel);
+      PopulateTalModel(talModel);
 
       return new RenderingContext(metalModel, talModel, element, options);
+    }
+
+    /// <summary>
+    /// Populates a METAL model from the state of the current instance.
+    /// </summary>
+    /// <param name="model">Model.</param>
+    private void PopulateMetalModel(IModel model)
+    {
+      if(model == null)
+      {
+        throw new ArgumentNullException(nameof(model));
+      }
+
+      foreach(string key in this.MetalLocalDefinitions.Keys)
+      {
+        model.AddLocal(key, this.MetalLocalDefinitions[key]);
+      }
+      foreach(string key in this.MetalGlobalDefinitions.Keys)
+      {
+        model.AddGlobal(key, this.MetalGlobalDefinitions[key]);
+      }
+    }
+
+    /// <summary>
+    /// Populates a TAL model from the state of the current instance.
+    /// </summary>
+    /// <param name="model">Model.</param>
+    private void PopulateTalModel(IModel model)
+    {
+      if(model == null)
+      {
+        throw new ArgumentNullException(nameof(model));
+      }
+
+      foreach(string key in this.TalLocalDefinitions.Keys)
+      {
+        model.AddLocal(key, this.TalLocalDefinitions[key]);
+      }
+      foreach(string key in this.TalGlobalDefinitions.Keys)
+      {
+        model.AddGlobal(key, this.TalGlobalDefinitions[key]);
+      }
     }
 
     #endregion
@@ -63,6 +166,13 @@ namespace CSF.Zpt.Tales
     public TalesRenderingContextFactory(IEvaluatorRegistry evaluatorRegistry = null)
     {
       this.EvaluatorRegistry = evaluatorRegistry?? SimpleEvaluatorRegistry.Default;
+
+      this.TalLocalDefinitions = new Dictionary<string, object>();
+      this.TalGlobalDefinitions = new Dictionary<string, object>();
+      this.TalKeywordOptions = new Dictionary<string, object>();
+      this.MetalLocalDefinitions = new Dictionary<string, object>();
+      this.MetalGlobalDefinitions = new Dictionary<string, object>();
+      this.MetalKeywordOptions = new Dictionary<string, object>();
     }
 
     #endregion

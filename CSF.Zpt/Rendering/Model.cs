@@ -8,11 +8,9 @@ namespace CSF.Zpt.Rendering
   /// <summary>
   /// Represents the root of an object model.
   /// </summary>
-  public abstract class Model
+  public abstract class Model : IModel
   {
     #region fields
-
-    private static object _cancelAction = new Object();
 
     private Model _parent, _root;
     private Dictionary<string,object> _globalDefinitions;
@@ -80,7 +78,7 @@ namespace CSF.Zpt.Rendering
     /// Gets a reference to the parent model (if applicable).
     /// </summary>
     /// <value>The parent.</value>
-    public virtual Model Parent
+    public virtual IModel Parent
     {
       get {
         return _parent;
@@ -91,7 +89,7 @@ namespace CSF.Zpt.Rendering
     /// Gets a reference to the root model instance in the current hierarchy.
     /// </summary>
     /// <value>The root.</value>
-    protected virtual Model Root
+    protected virtual IModel Root
     {
       get {
         return _root;
@@ -129,14 +127,14 @@ namespace CSF.Zpt.Rendering
         throw new ArgumentNullException(nameof(name));
       }
 
-      this.Root.GlobalDefinitions[name] = value;
+      _root.GlobalDefinitions[name] = value;
     }
 
     /// <summary>
     /// Adds a collection of repetition information to the current instance.
     /// </summary>
     /// <param name="info">The repetition information.</param>
-    public virtual void AddRepetitionInfo(RepetitionInfo[] info)
+    public virtual void AddRepetitionInfo(IRepetitionInfo[] info)
     {
       if(info == null)
       {
@@ -172,15 +170,15 @@ namespace CSF.Zpt.Rendering
     /// Creates and returns a child <see cref="Model"/> instance.
     /// </summary>
     /// <returns>The child model.</returns>
-    public abstract Model CreateChildModel();
+    public abstract IModel CreateChildModel();
 
     /// <summary>
     /// Creates and returns a sibling <see cref="Model"/> instance.
     /// </summary>
     /// <returns>The sibling model.</returns>
-    public virtual Model CreateSiblingModel()
+    public virtual IModel CreateSiblingModel()
     {
-      var output = this.CreateTypedSiblingModel();
+      var output = (Model) this.CreateTypedSiblingModel();
 
       output.LocalDefinitions = new Dictionary<string, object>(this.LocalDefinitions);
       output.RepetitionInfo = this.RepetitionInfo;
@@ -223,10 +221,10 @@ namespace CSF.Zpt.Rendering
 
       if(!output)
       {
-        if(this.Root.GlobalDefinitions.ContainsKey(name))
+        if(_root.GlobalDefinitions.ContainsKey(name))
         {
           output = true;
-          result = this.Root.GlobalDefinitions[name];
+          result = _root.GlobalDefinitions[name];
         }
       }
 
@@ -250,7 +248,7 @@ namespace CSF.Zpt.Rendering
       }
       else if(this.Parent != null)
       {
-        output = this.Parent.TryRecursivelyGetLocalItem(name, out result);
+        output = _parent.TryRecursivelyGetLocalItem(name, out result);
       }
       else
       {
@@ -295,15 +293,15 @@ namespace CSF.Zpt.Rendering
     /// </summary>
     /// <param name="parent">A reference to the parent model instance, if applicable.</param>
     /// <param name="root">A reference to the root of the model hierarchy.</param>
-    public Model(Model parent, Model root)
+    public Model(IModel parent, IModel root)
     {
       if(root == null)
       {
         throw new ArgumentNullException(nameof(root));
       }
 
-      _parent = parent;
-      _root = root;
+      _parent = (Model) parent;
+      _root = (Model) root;
 
       this.LocalDefinitions = new Dictionary<string, object>();
       _globalDefinitions = (_root == this)? new Dictionary<string,object>() : null;
@@ -338,7 +336,7 @@ namespace CSF.Zpt.Rendering
     public static object CancelAction
     {
       get {
-        return _cancelAction;
+        return ZptConstants.CancellationToken;
       }
     }
 
@@ -359,7 +357,7 @@ namespace CSF.Zpt.Rendering
 
     private class EmptyModel : Model
     {
-      public override Model CreateChildModel()
+      public override IModel CreateChildModel()
       {
         return new EmptyModel(this, this.Root);
       }
@@ -390,7 +388,7 @@ namespace CSF.Zpt.Rendering
 
       internal EmptyModel(TemplateKeywordOptions opts) : base(opts) {}
 
-      internal EmptyModel(Model parent, Model root) : base(parent, root) {}
+      internal EmptyModel(IModel parent, IModel root) : base(parent, root) {}
     }
 
     #endregion

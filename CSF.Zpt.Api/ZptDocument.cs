@@ -71,7 +71,7 @@ namespace CSF.Zpt
     /// Gets a collection of elements in the document which are defined as METAL macros.
     /// </summary>
     /// <returns>Elements representing the METAL macros.</returns>
-    internal abstract CSF.Zpt.Metal.MetalMacroCollection GetMacros();
+    public abstract CSF.Zpt.Metal.MetalMacroCollection GetMacros();
 
     /// <summary>
     /// Renders the current document, returning an <see cref="ZptElement"/> representing the rendered result.
@@ -113,7 +113,7 @@ namespace CSF.Zpt
     /// <param name="options">Options.</param>
     protected virtual RenderingOptions GetOptions(RenderingOptions options)
     {
-      return options?? RenderingOptions.Default;
+      return options?? GetDefaultOptions();
     }
 
     /// <summary>
@@ -131,6 +131,12 @@ namespace CSF.Zpt
     /// </summary>
     /// <returns>The rendering model.</returns>
     protected abstract ZptElement GetRootElement();
+
+    /// <summary>
+    /// Gets an instance of <see cref="RenderingOptions"/> which represents the default options.
+    /// </summary>
+    /// <returns>The default options.</returns>
+    protected abstract RenderingOptions GetDefaultOptions();
 
     #endregion
   }
