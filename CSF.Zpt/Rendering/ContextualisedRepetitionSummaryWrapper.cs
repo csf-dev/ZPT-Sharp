@@ -7,7 +7,7 @@ namespace CSF.Zpt.Rendering
 {
   /// <summary>
   /// Wrapper type for a contextualised (in the context of a chain of <see cref="ZptElement"/>) set of available
-  /// <see cref="RepetitionSummary"/>.
+  /// <see cref="IRepetitionInfo"/>.
   /// </summary>
   public class ContextualisedRepetitionSummaryWrapper : ITalesPathHandler
   {
@@ -35,7 +35,7 @@ namespace CSF.Zpt.Rendering
     #region methods
 
     /// <summary>
-    /// Gets a <see cref="RepetitionSummary"/> based upon a TALES path fragment.
+    /// Gets a <see cref="IRepetitionInfo"/> based upon a TALES path fragment.
     /// </summary>
     /// <returns><c>true</c> if the path traversal was a success; <c>false</c> otherwise.</returns>
     /// <param name="pathFragment">The path fragment.</param>

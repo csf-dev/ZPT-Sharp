@@ -136,6 +136,10 @@ namespace CSF.Zpt
       return new Rendering.ZptXmlElement(this.Document.DocumentElement, this.SourceFile, isRoot: true);
     }
 
+    /// <summary>
+    /// Gets an instance of <see cref="RenderingOptions"/> which represents the default options.
+    /// </summary>
+    /// <returns>The default options.</returns>
     protected override RenderingOptions GetDefaultOptions()
     {
       return new DefaultRenderingOptions();

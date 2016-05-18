@@ -44,7 +44,7 @@ namespace CSF.Zpt.Rendering
     }
 
     /// <summary>
-    /// Gets a wrapper containing the contextualised <see cref="RepetitionSummary"/> instances for the current instance.
+    /// Gets a wrapper containing the contextualised <see cref="IRepetitionInfo"/> instances for the current instance.
     /// </summary>
     /// <returns>The contextualised summaries.</returns>
     /// <param name="elementChain">Element chain.</param>

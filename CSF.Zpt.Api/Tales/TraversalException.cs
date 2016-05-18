@@ -3,7 +3,7 @@
 namespace CSF.Zpt.Tales
 {
   /// <summary>
-  /// Represents an exception whilst traversing a TALES <see cref="Path"/>.
+  /// Represents an exception whilst traversing a TALES path.
   /// </summary>
   [Serializable]
   public class TraversalException : System.Exception

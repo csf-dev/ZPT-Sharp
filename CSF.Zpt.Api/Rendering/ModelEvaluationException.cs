@@ -3,7 +3,7 @@
 namespace CSF.Zpt.Rendering
 {
   /// <summary>
-  /// Represents an exception which is raised whilst evaluating an expression within a <see cref="Model"/>.
+  /// Represents an exception which is raised whilst evaluating an expression within a <see cref="IModel"/>.
   /// </summary>
   [Serializable]
   public class ModelEvaluationException : RenderingException

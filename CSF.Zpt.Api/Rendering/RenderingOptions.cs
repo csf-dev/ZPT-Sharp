@@ -108,7 +108,6 @@ namespace CSF.Zpt.Rendering
     /// <param name="addSourceFileAnnotation">Indicates whether or not source file annotation is to be added.</param>
     /// <param name="elementVisitors">The element visitors to use.</param>
     /// <param name="contextFactory">The rendering context factory.</param>
-    /// <param name="initialState">The initial state of the ZPT models.</param>
     /// <param name="outputEncoding">The desired output encoding.</param>
     /// <param name="omitXmlDeclaration">Whether or not to omit the XML declaration.</param>
     /// <param name="xmlIndentCharacters">The character(s) to use when indending XML.</param>
