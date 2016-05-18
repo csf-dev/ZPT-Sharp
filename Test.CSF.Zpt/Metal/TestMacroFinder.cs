@@ -94,7 +94,6 @@ namespace Test.CSF.Zpt.Metal
                                                                   ZptConstants.Metal.UseMacroAttribute) == (global::CSF.Zpt.Rendering.ZptAttribute) null);
       _fixture.Inject(originalElement);
 
-      var model = _fixture.Create<DummyModel>();
       var context = _fixture.Create<RenderingContext>();
 
       var sut = new MacroFinder();

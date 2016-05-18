@@ -52,18 +52,21 @@ namespace CSF.Zpt
     /// Creates a document from the given source file.
     /// </summary>
     /// <param name="sourceFile">The source file containing the document to create.</param>
+    /// <param name="encoding">The text encoding to use in reading the source file.</param>
     ZptDocument Create(FileInfo sourceFile, System.Text.Encoding encoding);
 
     /// <summary>
     /// Creates an HTML document from the given source file.
     /// </summary>
     /// <param name="sourceFile">The source file containing the document to create.</param>
+    /// <param name="encoding">The text encoding to use in reading the source file.</param>
     ZptDocument CreateHtml(FileInfo sourceFile, System.Text.Encoding encoding);
 
     /// <summary>
     /// Creates an XML document from the given source file.
     /// </summary>
     /// <param name="sourceFile">The source file containing the document to create.</param>
+    /// <param name="encoding">The text encoding to use in reading the source file.</param>
     ZptDocument CreateXml(FileInfo sourceFile, System.Text.Encoding encoding);
 
     /// <summary>
@@ -71,6 +74,7 @@ namespace CSF.Zpt
     /// </summary>
     /// <param name="sourceStream">A stream exposing the document content.</param>
     /// <param name="sourceInfo">Optional information about the source document.</param>
+    /// <param name="encoding">The text encoding to use in reading the source file.</param>
     ZptDocument CreateHtml(Stream sourceStream, SourceFileInfo sourceInfo, System.Text.Encoding encoding);
 
     /// <summary>
@@ -78,6 +82,7 @@ namespace CSF.Zpt
     /// </summary>
     /// <param name="sourceStream">A stream exposing the document content.</param>
     /// <param name="sourceInfo">Optional information about the source document.</param>
+    /// <param name="encoding">The text encoding to use in reading the source file.</param>
     ZptDocument CreateXml(Stream sourceStream, SourceFileInfo sourceInfo, System.Text.Encoding encoding);
   }
 }

@@ -45,6 +45,10 @@ namespace CSF.Zpt.Rendering
       }
     }
 
+    /// <summary>
+    /// Gets a value indicating whether this instance has a parent element or not.
+    /// </summary>
+    /// <value><c>true</c> if this instance has a parent element; otherwise, <c>false</c>.</value>
     public abstract bool HasParent { get; }
 
     /// <summary>
@@ -119,7 +123,7 @@ namespace CSF.Zpt.Rendering
     /// A hash code for this instance that is suitable for use in hashing algorithms and data structures such as a
     /// hash table.
     /// </returns>
-    public abstract int GetHashCode();
+    public abstract override int GetHashCode();
 
     /// <summary>
     /// Replaces the current element in its respective DOM with the given replacement.
@@ -281,6 +285,11 @@ namespace CSF.Zpt.Rendering
     /// <param name="attributeNamespace">The attribute namespace.</param>
     public abstract void PurgeAttributes(ZptNamespace attributeNamespace);
 
+    /// <summary>
+    /// Recursively searches for elements with a given namespace or prefix and removes them using the
+    /// <see cref="Omit"/> behaviour.
+    /// </summary>
+    /// <param name="elementNamespace">The element namespace.</param>
     public abstract void PurgeElements(ZptNamespace elementNamespace);
 
     /// <summary>

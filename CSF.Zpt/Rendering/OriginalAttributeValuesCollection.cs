@@ -47,11 +47,18 @@ namespace CSF.Zpt.Rendering
 
     #region constructor
 
+    /// <summary>
+    /// Initializes a new instance of the <see cref="CSF.Zpt.Rendering.OriginalAttributeValuesCollection"/> class.
+    /// </summary>
     public OriginalAttributeValuesCollection()
     {
       _attributes = new Dictionary<string,ZptAttribute>();
     }
 
+    /// <summary>
+    /// Initializes a new instance of the <see cref="CSF.Zpt.Rendering.OriginalAttributeValuesCollection"/> class.
+    /// </summary>
+    /// <param name="attributes">A collection of sttributes.</param>
     public OriginalAttributeValuesCollection(IEnumerable<ZptAttribute> attributes)
     {
       if(attributes == null)

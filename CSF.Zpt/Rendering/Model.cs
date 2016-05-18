@@ -199,7 +199,7 @@ namespace CSF.Zpt.Rendering
     /// Evaluate the specified expression and return the result.
     /// </summary>
     /// <param name="expression">The expression to evaluate.</param>
-    /// <param name="element">The element for which we are evaluating a result.</param>
+    /// <param name="context">The rendering context for which we are evaluating a result.</param>
     public abstract ExpressionResult Evaluate(string expression, RenderingContext context);
 
     /// <summary>
@@ -207,7 +207,7 @@ namespace CSF.Zpt.Rendering
     /// </summary>
     /// <returns><c>true</c>, if an item was found, <c>false</c> otherwise.</returns>
     /// <param name="name">The item name.</param>
-    /// <param name="element">The element for which we are evaluating a result.</param>
+    /// <param name="context">The rendering context for which we are evaluating a result.</param>
     /// <param name="result">Exposes the item which was found.</param>
     protected virtual bool TryGetItem(string name, RenderingContext context, out object result)
     {

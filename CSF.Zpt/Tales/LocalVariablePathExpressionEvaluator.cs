@@ -3,6 +3,9 @@ using CSF.Zpt.Rendering;
 
 namespace CSF.Zpt.Tales
 {
+  /// <summary>
+  /// Specialisation of <see cref="PathExpressionEvaluator"/> which only looks in local variable definitions.
+  /// </summary>
   public class LocalVariablePathExpressionEvaluator : PathExpressionEvaluator
   {
     #region constants

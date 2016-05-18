@@ -87,12 +87,20 @@ namespace CSF.Zpt.Rendering
       private set;
     }
 
+    /// <summary>
+    /// Gets a string used to indicate a single level of indentation to use when rendering an XML document.
+    /// </summary>
+    /// <value>The XML indentation characters.</value>
     public string XmlIndentationCharacters
     {
       get;
       private set;
     }
 
+    /// <summary>
+    /// Gets a value indicating whether XML documents should be rendered with indentated formatting or not.
+    /// </summary>
+    /// <value><c>true</c> if the rendering process is to output indented XML; otherwise, <c>false</c>.</value>
     public bool OutputIndentedXml
     {
       get;
@@ -130,6 +138,8 @@ namespace CSF.Zpt.Rendering
     /// <param name="initialState">The initial state of the ZPT models.</param>
     /// <param name="outputEncoding">The desired output encoding.</param>
     /// <param name="omitXmlDeclaration">Whether or not to omit the XML declaration.</param>
+    /// <param name="xmlIndentCharacters">The character(s) to use when indending XML.</param>
+    /// <param name="outputIndentedXml">Whether or not to output indent-formatted XML.</param>
     public RenderingOptions(bool addSourceFileAnnotation = false,
                             IContextVisitor[] elementVisitors = null,
                             IRenderingContextFactory contextFactory = null,

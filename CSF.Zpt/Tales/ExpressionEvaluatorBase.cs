@@ -41,7 +41,7 @@ namespace CSF.Zpt.Tales
     /// Evaluate the specified expression, for the given element and model.
     /// </summary>
     /// <param name="expression">The expression to evaluate.</param>
-    /// <param name="element">The <see cref="ZptElement"/> for which the expression is being evaluated.</param>
+    /// <param name="context">The rendering context for the expression being evaluated.</param>
     /// <param name="model">The ZPT model, providing the context for evaluation.</param>
     public abstract ExpressionResult Evaluate(Expression expression, RenderingContext context, TalesModel model);
 

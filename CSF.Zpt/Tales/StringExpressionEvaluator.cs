@@ -47,7 +47,7 @@ namespace CSF.Zpt.Tales
     /// Evaluate the specified expression, for the given element and model.
     /// </summary>
     /// <param name="expression">The expression to evaluate.</param>
-    /// <param name="element">The <see cref="ZptElement"/> for which the expression is being evaluated.</param>
+    /// <param name="context">The rendering context for the expression being evaluated.</param>
     /// <param name="model">The ZPT model, providing the context for evaluation.</param>
     public override ExpressionResult Evaluate(Expression expression, RenderingContext context, TalesModel model)
     {
@@ -103,7 +103,7 @@ namespace CSF.Zpt.Tales
     /// <returns>The result of the application of placeholders.</returns>
     /// <param name="input">The input string.</param>
     /// <param name="escapedPlaceholderIndices">A collection containing the indices of escaped placeholder sequences.</param>
-    /// <param name="element">The ZPT element.</param>
+    /// <param name="context">The rendering context.</param>
     /// <param name="model">The TALES model.</param>
     private string ApplyPlaceholderReplacements(string input,
                                                 ISet<int> escapedPlaceholderIndices,

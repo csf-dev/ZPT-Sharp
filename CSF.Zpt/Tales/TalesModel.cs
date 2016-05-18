@@ -50,7 +50,7 @@ namespace CSF.Zpt.Tales
     /// Evaluate the specified expression and return the result.
     /// </summary>
     /// <param name="expression">The expression to evaluate.</param>
-    /// <param name="element">The element for which we are evaluating a result.</param>
+    /// <param name="context">The rendering context for which we are evaluating a result.</param>
     public override ExpressionResult Evaluate(string expression, RenderingContext context)
     {
       if(expression == null)
@@ -66,7 +66,7 @@ namespace CSF.Zpt.Tales
     /// Evaluate the specified TALES expression and return the result.
     /// </summary>
     /// <param name="talesExpression">The TALES expression to evaluate.</param>
-    /// <param name="element">The element for which we are evaluating a result.</param>
+    /// <param name="context">The rendering context for which we are evaluating a result.</param>
     public virtual ExpressionResult Evaluate(Expression talesExpression, RenderingContext context)
     {
       if(talesExpression == null)
@@ -89,7 +89,7 @@ namespace CSF.Zpt.Tales
     /// <c>true</c>, if a root item was found matching the given <paramref name="name"/>, <c>false</c> otherwise.
     /// </returns>
     /// <param name="name">The name of the desired item.</param>
-    /// <param name="element">The ZPT element for which the item search is being performed.</param>
+    /// <param name="context">The rendering context for which the item search is being performed.</param>
     /// <param name="result">
     /// Exposes the found object if this method returns <c>true</c>.  The value is undefined if this method returns
     /// <c>false</c>.
@@ -128,6 +128,19 @@ namespace CSF.Zpt.Tales
       return output;
     }
 
+    /// <summary>
+    /// Attempts to get a object instance from the root of the current model, but only searches local variable
+    /// definitions.
+    /// </summary>
+    /// <returns>
+    /// <c>true</c>, if a root item was found matching the given <paramref name="name"/>, <c>false</c> otherwise.
+    /// </returns>
+    /// <param name="name">The name of the desired item.</param>
+    /// <param name="element">The ZPT element.</param>
+    /// <param name="result">
+    /// Exposes the found object if this method returns <c>true</c>.  The value is undefined if this method returns
+    /// <c>false</c>.
+    /// </param>
     public virtual bool TryGetLocalRootObject(string name, ZptElement element, out object result)
     {
 

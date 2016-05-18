@@ -37,7 +37,7 @@ namespace CSF.Zpt.Tales
     /// Evaluate the specified expression, for the given element and model.
     /// </summary>
     /// <param name="expression">The expression to evaluate.</param>
-    /// <param name="element">The <see cref="ZptElement"/> for which the expression is being evaluated.</param>
+    /// <param name="context">The rendering context for the expression being evaluated.</param>
     /// <param name="model">The ZPT model, providing the context for evaluation.</param>
     public override ExpressionResult Evaluate(Expression expression, RenderingContext context, TalesModel model)
     {
@@ -80,7 +80,7 @@ namespace CSF.Zpt.Tales
     /// </summary>
     /// <returns>The evaluated value of the path.</returns>
     /// <param name="walker">A TALES path walker, containing a path.</param>
-    /// <param name="element">The <see cref="ZptElement"/> for which the path is being evaluated.</param>
+    /// <param name="context">The rendering context for the expression being evaluated.</param>
     /// <param name="model">The ZPT model, providing the context for evaluation.</param>
     private object WalkPath(PathWalker walker, RenderingContext context, TalesModel model)
     {
@@ -107,7 +107,7 @@ namespace CSF.Zpt.Tales
     /// <c>true</c>, if the path component was successfully evaluated, <c>false</c> otherwise.
     /// </returns>
     /// <param name="walker">A TALES path walker, containing a path.</param>
-    /// <param name="element">The <see cref="ZptElement"/> for which the path is being evaluated.</param>
+    /// <param name="context">The rendering context for the expression being evaluated.</param>
     /// <param name="model">The ZPT model, providing the context for evaluation.</param>
     /// <param name="result">Exposes the result of the evaluation.</param>
     private bool WalkComponent(PathWalker walker, RenderingContext context, TalesModel model, out object result)
@@ -150,7 +150,7 @@ namespace CSF.Zpt.Tales
     /// </summary>
     /// <returns><c>true</c>, if the root object was retrieved, <c>false</c> otherwise.</returns>
     /// <param name="walker">A TALES path walker.</param>
-    /// <param name="element">A ZPT element.</param>
+    /// <param name="context">The rendering context.</param>
     /// <param name="model">The TALES model.</param>
     /// <param name="result">Exposes the result of this operation.</param>
     protected virtual bool TryGetTraversalRoot(PathWalker walker,
@@ -179,7 +179,7 @@ namespace CSF.Zpt.Tales
     /// </summary>
     /// <returns><c>true</c>, if a part name was resolved, <c>false</c> otherwise.</returns>
     /// <param name="part">A TALES path part.</param>
-    /// <param name="element">A ZPT element.</param>
+    /// <param name="context">The rendering context.</param>
     /// <param name="model">The TALES model.</param>
     /// <param name="result">Exposes the result of this operation.</param>
     private bool TryGetPartName(PathPart part, RenderingContext context, TalesModel model, out string result)

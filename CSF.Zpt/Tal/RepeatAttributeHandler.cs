@@ -98,7 +98,7 @@ namespace CSF.Zpt.Tal
     /// <returns>The sequence.</returns>
     /// <param name="expression">Expression.</param>
     /// <param name="model">Model.</param>
-    /// <param name="element">Element.</param>
+    /// <param name="context">The rendering context.</param>
     private IEnumerable GetSequence(string expression, Model model, RenderingContext context)
     {
       ExpressionResult result;

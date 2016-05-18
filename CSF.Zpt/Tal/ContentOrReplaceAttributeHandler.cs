@@ -100,7 +100,7 @@ namespace CSF.Zpt.Tal
     /// Gets either the TAL 'content' or 'replace' attribute from the given element.
     /// </summary>
     /// <returns>The attribute, or a <c>null</c> reference.</returns>
-    /// <param name="element">The element from which to get an attribute.</param>
+    /// <param name="context">The rendering context.</param>
     /// <param name="attribName">Exposes the name of the attribute.</param>
     private ZptAttribute GetAttribute(RenderingContext context, out string attribName)
     {
@@ -137,8 +137,7 @@ namespace CSF.Zpt.Tal
     /// </summary>
     /// <returns>The attribute result.</returns>
     /// <param name="attribute">The content or replace attribute.</param>
-    /// <param name="element">The current element.</param>
-    /// <param name="model">The model.</param>
+    /// <param name="context">The rendering context.</param>
     /// <param name="mode">Exposes the mode (either <c>text</c>, <c>structure</c> or a <c>null</c> reference).</param>
     private ExpressionResult GetAttributeResult(ZptAttribute attribute,
                                                 RenderingContext context,

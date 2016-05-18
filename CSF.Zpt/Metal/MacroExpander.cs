@@ -90,6 +90,7 @@ namespace CSF.Zpt.Metal
     /// </summary>
     /// <param name="sourceElement">Source element.</param>
     /// <param name="macro">Macro.</param>
+    /// <param name="addAnnotation">A value indicating whether or not source annotation is to be added to the result.</param>
     private void FillSlots(ZptElement sourceElement, ZptElement macro, bool addAnnotation)
     {
       if(sourceElement == null)

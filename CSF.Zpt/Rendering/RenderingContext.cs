@@ -106,8 +106,9 @@ namespace CSF.Zpt.Rendering
     /// <summary>
     /// Creates and returns a new sibling rendering context.
     /// </summary>
-    /// <param name="element">The ZPT element for which the new context is to be created.</param>
     /// <returns>The sibling context.</returns>
+    /// <param name="element">The ZPT element for which the new context is to be created.</param>
+    /// <param name="cloneAttributes">A value indicating whether or not the element's attributes should be cloned or not.</param>
     public virtual RenderingContext CreateSiblingContext(ZptElement element, bool cloneAttributes = false)
     {
       if(element == null)
@@ -128,6 +129,12 @@ namespace CSF.Zpt.Rendering
       return output;
     }
 
+    /// <summary>
+    /// Gets an attribute matching the given namespace and attribute name.
+    /// </summary>
+    /// <returns>The attribute, or a <c>null</c> reference if no attribute is found.</returns>
+    /// <param name="nspace">The attribute namespace.</param>
+    /// <param name="attributeName">The attribute name.</param>
     public virtual ZptAttribute GetAttribute(ZptNamespace nspace, string attributeName)
     {
       return this.OriginalAttributes
@@ -136,6 +143,10 @@ namespace CSF.Zpt.Rendering
         .FirstOrDefault();
     }
 
+    /// <summary>
+    /// Gets the original attributes present upon the element wrapped by the current instance.
+    /// </summary>
+    /// <returns>The original attributes.</returns>
     public virtual OriginalAttributeValuesCollection GetOriginalAttributes()
     {
       return new OriginalAttributeValuesCollection(this.OriginalAttributes);

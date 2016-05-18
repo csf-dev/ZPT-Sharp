@@ -132,6 +132,7 @@
     <Compile Include="Tal\TalTidyUpVisitor.cs" />
     <Compile Include="Metal\MetalTidyUpVisitor.cs" />
     <Compile Include="Rendering\NoOpVisitor.cs" />
+    <Compile Include="Tales\TemplateFileCreator.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

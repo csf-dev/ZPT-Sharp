@@ -55,6 +55,10 @@ namespace CSF.Zpt.Rendering
       }
     }
 
+    /// <summary>
+    /// Gets a value indicating whether this instance has a parent element or not.
+    /// </summary>
+    /// <value><c>true</c> if this instance has a parent element; otherwise, <c>false</c>.</value>
     public override bool HasParent
     {
       get {
@@ -470,6 +474,11 @@ namespace CSF.Zpt.Rendering
       }
     }
 
+    /// <summary>
+    /// Recursively searches for elements with a given namespace or prefix and removes them using the
+    /// <see cref="Omit"/> behaviour.
+    /// </summary>
+    /// <param name="elementNamespace">The element namespace.</param>
     public override void PurgeElements(ZptNamespace elementNamespace)
     {
       var toRemove = this.Node

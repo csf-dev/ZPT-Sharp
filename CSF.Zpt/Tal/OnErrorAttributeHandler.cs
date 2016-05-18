@@ -70,8 +70,7 @@ namespace CSF.Zpt.Tal
     /// </summary>
     /// <returns>The attribute result.</returns>
     /// <param name="attribute">The content or replace attribute.</param>
-    /// <param name="element">The current element.</param>
-    /// <param name="model">The model.</param>
+    /// <param name="context">The rendering context.</param>
     /// <param name="mode">Exposes the mode (either <c>text</c>, <c>structure</c> or a <c>null</c> reference).</param>
     private ExpressionResult GetAttributeResult(ZptAttribute attribute,
                                                 RenderingContext context,
