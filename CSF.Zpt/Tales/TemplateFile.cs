@@ -18,8 +18,6 @@ namespace CSF.Zpt.Tales
 
     #region fields
 
-    private static IZptDocumentFactory _documentFactory;
-    private static TemplateFileCreator _defaultCreator;
     private ZptDocument _document;
 
     #endregion
@@ -111,66 +109,6 @@ namespace CSF.Zpt.Tales
       }
 
       _document = document;
-    }
-
-    /// <summary>
-    /// Initializes the <see cref="CSF.Zpt.Tales.TemplateFile"/> class.
-    /// </summary>
-    static TemplateFile()
-    {
-      _documentFactory = new ZptDocumentFactory();
-      _defaultCreator = DefaultCreator;
-    }
-
-    #endregion
-
-    #region static properties
-
-    /// <summary>
-    /// Gets a default implementation of <see cref="TemplateFileCreator"/>; a delegate used to create a template
-    /// file from a <c>System.IO.FileInfo</c>.
-    /// </summary>
-    /// <param name="sourceFile">The source file.</param>
-    public static TemplateFileCreator Create { get { return _defaultCreator; } }
-
-    #endregion
-
-    #region static methods
-
-    /// <summary>
-    /// Default method to create template file instances.
-    /// </summary>
-    /// <returns>The creator.</returns>
-    /// <param name="sourceFile">Source file.</param>
-    private static TemplateFile DefaultCreator(FileInfo sourceFile)
-    {
-      if(sourceFile == null)
-      {
-        throw new ArgumentNullException(nameof(sourceFile));
-      }
-      else if(!IsSuitable(sourceFile))
-      {
-        string message = String.Format(Resources.ExceptionMessages.SourceFileMustBeSuitable,
-                                       typeof(ZptDocument).Name);
-        throw new ArgumentException(message, nameof(sourceFile));
-      }
-
-      return new TemplateFile(_documentFactory.Create(sourceFile));
-    }
-
-    /// <summary>
-    /// Determines if a given source file is suitable for creating a template file or not.
-    /// </summary>
-    /// <returns><c>true</c> if is suitable the specified sourceFile; otherwise, <c>false</c>.</returns>
-    /// <param name="sourceFile">Source file.</param>
-    public static bool IsSuitable(FileInfo sourceFile)
-    {
-      if(sourceFile == null)
-      {
-        throw new ArgumentNullException(nameof(sourceFile));
-      }
-
-      return _documentFactory.SupportedFileExtensions.Contains(sourceFile.Extension);
     }
 
     #endregion

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.IO;
 using CSF.Zpt.Rendering;
-using System.Collections.Generic;
+using System.Text;
 
 namespace CSF.Zpt
 {
@@ -10,80 +10,54 @@ namespace CSF.Zpt
   /// </summary>
   public interface IZptDocumentFactory
   {
-    /// <summary>
-    /// Gets the supported file extensions.
-    /// </summary>
-    /// <value>The supported file extensions.</value>
-    ISet<string> SupportedFileExtensions { get; }
+    #region methods
 
     /// <summary>
-    /// Creates a document from the given source file.
+    /// Gets a value indicating whether or not the current instance can create a <see cref="ZptDocument"/> from a given
+    /// source file.
     /// </summary>
-    /// <param name="sourceFile">The source file containing the document to create.</param>
-    ZptDocument Create(FileInfo sourceFile);
-
-    /// <summary>
-    /// Creates an HTML document from the given source file.
-    /// </summary>
-    /// <param name="sourceFile">The source file containing the document to create.</param>
-    ZptDocument CreateHtml(FileInfo sourceFile);
-
-    /// <summary>
-    /// Creates an XML document from the given source file.
-    /// </summary>
-    /// <param name="sourceFile">The source file containing the document to create.</param>
-    ZptDocument CreateXml(FileInfo sourceFile);
-
-    /// <summary>
-    /// Creates an HTML document from a stream exposing the source document, and optional information about the source.
-    /// </summary>
-    /// <param name="sourceStream">A stream exposing the document content.</param>
-    /// <param name="sourceInfo">Optional information about the source document.</param>
-    ZptDocument CreateHtml(Stream sourceStream, SourceFileInfo sourceInfo);
-
-    /// <summary>
-    /// Creates an XML document from a stream exposing the source document, and optional information about the source.
-    /// </summary>
-    /// <param name="sourceStream">A stream exposing the document content.</param>
-    /// <param name="sourceInfo">Optional information about the source document.</param>
-    ZptDocument CreateXml(Stream sourceStream, SourceFileInfo sourceInfo);
+    /// <returns><c>true</c> if this instance can create a document from the given file; otherwise, <c>false</c>.</returns>
+    /// <param name="sourceFile">The source file.</param>
+    bool CanCreateFromFile(FileInfo sourceFile);
 
     /// <summary>
     /// Creates a document from the given source file.
     /// </summary>
     /// <param name="sourceFile">The source file containing the document to create.</param>
     /// <param name="encoding">The text encoding to use in reading the source file.</param>
-    ZptDocument Create(FileInfo sourceFile, System.Text.Encoding encoding);
+    ZptDocument CreateDocument(FileInfo sourceFile, Encoding encoding = null);
 
     /// <summary>
     /// Creates an HTML document from the given source file.
     /// </summary>
     /// <param name="sourceFile">The source file containing the document to create.</param>
     /// <param name="encoding">The text encoding to use in reading the source file.</param>
-    ZptDocument CreateHtml(FileInfo sourceFile, System.Text.Encoding encoding);
+    ZptDocument CreateHtmlDocument(FileInfo sourceFile, Encoding encoding = null);
 
     /// <summary>
     /// Creates an XML document from the given source file.
     /// </summary>
     /// <param name="sourceFile">The source file containing the document to create.</param>
     /// <param name="encoding">The text encoding to use in reading the source file.</param>
-    ZptDocument CreateXml(FileInfo sourceFile, System.Text.Encoding encoding);
+    ZptDocument CreateXmlDocument(FileInfo sourceFile, Encoding encoding = null);
 
     /// <summary>
     /// Creates an HTML document from a stream exposing the source document, and optional information about the source.
     /// </summary>
     /// <param name="sourceStream">A stream exposing the document content.</param>
-    /// <param name="sourceInfo">Optional information about the source document.</param>
+    /// <param name="sourceInfo">Information about the source document.</param>
     /// <param name="encoding">The text encoding to use in reading the source file.</param>
-    ZptDocument CreateHtml(Stream sourceStream, SourceFileInfo sourceInfo, System.Text.Encoding encoding);
+    ZptDocument CreateHtmlDocument(Stream sourceStream, SourceFileInfo sourceInfo = null, Encoding encoding = null);
 
     /// <summary>
     /// Creates an XML document from a stream exposing the source document, and optional information about the source.
     /// </summary>
     /// <param name="sourceStream">A stream exposing the document content.</param>
-    /// <param name="sourceInfo">Optional information about the source document.</param>
+    /// <param name="sourceInfo">Information about the source document.</param>
     /// <param name="encoding">The text encoding to use in reading the source file.</param>
-    ZptDocument CreateXml(Stream sourceStream, SourceFileInfo sourceInfo, System.Text.Encoding encoding);
+    ZptDocument CreateXmlDocument(Stream sourceStream, SourceFileInfo sourceInfo = null, Encoding encoding = null);
+
+    #endregion
   }
 }
 

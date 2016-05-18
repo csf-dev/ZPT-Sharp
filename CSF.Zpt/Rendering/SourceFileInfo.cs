@@ -21,7 +21,7 @@ namespace CSF.Zpt.Rendering
     /// Gets a reference to the operating system file represented by the current instance.
     /// </summary>
     /// <value>The file info.</value>
-    public FileInfo FileInfo
+    protected FileInfo FileInfo
     {
       get {
         return _osFile;

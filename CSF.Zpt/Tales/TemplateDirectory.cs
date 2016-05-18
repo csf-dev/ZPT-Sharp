@@ -75,7 +75,7 @@ namespace CSF.Zpt.Tales
       var templateFileInfo = exposedResult as FileInfo;
       if(templateFileInfo != null)
       {
-        var doc = _documentFactory.Create(templateFileInfo);
+        var doc = _documentFactory.CreateDocument(templateFileInfo);
         var wrapper = new TemplateFile(doc);
         exposedResult = wrapper;
       }

@@ -17,6 +17,7 @@ namespace Test.CSF.Zpt
     #region fields
 
     private IZptDocumentFactory _documentFactory;
+    private ITemplateFileFactory _templateFactory;
     private IIntegrationTestConfiguration _config;
     private DirectoryInfo _sourcePath, _expectedPath;
     private log4net.ILog _logger;
@@ -41,7 +42,9 @@ namespace Test.CSF.Zpt
     [SetUp]
     public void Setup()
     {
-      _documentFactory = new ZptDocumentFactory();
+      var fac = new ZptDocumentFactory();
+      _documentFactory = fac;
+      _templateFactory = fac;
     }
 
     #endregion
@@ -107,7 +110,7 @@ namespace Test.CSF.Zpt
 
       try
       {
-        document = _documentFactory.Create(sourceDocument);
+        document = _documentFactory.CreateDocument(sourceDocument);
       }
       catch(Exception ex)
       {
@@ -199,7 +202,7 @@ namespace Test.CSF.Zpt
       output.TalKeywordOptions.Add("batch", batch);
 
       // The 'laf' keyword option
-      var laf = new TemplateFile(new ZptDocumentFactory().Create(_sourcePath.GetFiles("teeshoplaf.html").Single()));
+      var laf = _templateFactory.CreateTemplateFile(_sourcePath.GetFiles("teeshoplaf.html").Single());
       output.MetalKeywordOptions.Add("laf", laf);
 
       // The 'getProducts' option

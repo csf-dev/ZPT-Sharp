@@ -15,6 +15,7 @@ namespace CSF.Zpt.Tales
 
     private DirectoryInfo _directory;
     private bool _mandatoryExtensions;
+    private ITemplateFileFactory _templateCreator;
 
     #endregion
 
@@ -111,9 +112,9 @@ namespace CSF.Zpt.Tales
       else if(output is FileInfo)
       {
         var exposedTemplateFile = (FileInfo) output;
-        if(TemplateFile.IsSuitable(exposedTemplateFile))
+        if(_templateCreator.CanCreateFromFile(exposedTemplateFile))
         {
-          output = TemplateFile.Create(exposedTemplateFile);
+          output = _templateCreator.CreateTemplateFile(exposedTemplateFile);
         }
       }
 
@@ -161,7 +162,10 @@ namespace CSF.Zpt.Tales
     /// </summary>
     /// <param name="directory">The root directory for the current instance.</param>
     /// <param name="mandatoryExtensions">A value indicating whether filename extensions are mandatory or not.</param>
-    public FilesystemDirectory(DirectoryInfo directory, bool mandatoryExtensions = false)
+    /// <param name="templateCreator">An implementation of <see cref="ITemplateFileFactory"/>.</param>
+    public FilesystemDirectory(DirectoryInfo directory,
+                               bool mandatoryExtensions = false,
+                               ITemplateFileFactory templateCreator = null)
     {
       if(directory == null)
       {
@@ -170,6 +174,7 @@ namespace CSF.Zpt.Tales
 
       _directory = directory;
       _mandatoryExtensions = mandatoryExtensions;
+      _templateCreator = templateCreator?? new ZptDocumentFactory();
     }
 
     #endregion
