@@ -55,11 +55,9 @@
     <Compile Include="Tales\ITalesConvertible.cs" />
     <Compile Include="Tales\ITemplateFileFactory.cs" />
     <Compile Include="Rendering\SourceFileInfo.cs" />
-    <Compile Include="Metal\MetalMacroCollection.cs" />
     <Compile Include="Tales\Expression.cs" />
     <Compile Include="Tales\ITalesModel.cs" />
     <Compile Include="Tales\TemplateFile.cs" />
-    <Compile Include="Metal\MetalMacro.cs" />
     <Compile Include="Rendering\ModelEvaluationException.cs" />
     <Compile Include="Rendering\RenderingException.cs" />
     <Compile Include="Tal\ParserException.cs" />
@@ -73,7 +71,6 @@
   <ItemGroup>
     <Folder Include="Rendering\" />
     <Folder Include="Tales\" />
-    <Folder Include="Metal\" />
     <Folder Include="Tal\" />
   </ItemGroup>
 </Project>

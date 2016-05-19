@@ -1,5 +1,4 @@
 ﻿using System;
-using CSF.Zpt.Metal;
 using System.IO;
 
 namespace CSF.Zpt.Tales

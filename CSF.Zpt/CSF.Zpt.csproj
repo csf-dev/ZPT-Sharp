@@ -109,6 +109,8 @@
     </Compile>
     <Compile Include="Tales\ExpressionFactory.cs" />
     <Compile Include="ZptDocument.cs" />
+    <Compile Include="Metal\MetalMacro.cs" />
+    <Compile Include="Metal\MetalMacroCollection.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
