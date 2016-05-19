@@ -61,9 +61,6 @@
     <Compile Include="Tales\ITalesModel.cs" />
     <Compile Include="Tales\TemplateFile.cs" />
     <Compile Include="Metal\MetalMacro.cs" />
-    <Compile Include="Resources\ExceptionMessages.Designer.cs">
-      <DependentUpon>ExceptionMessages.resx</DependentUpon>
-    </Compile>
     <Compile Include="Rendering\ModelEvaluationException.cs" />
     <Compile Include="Rendering\RenderingException.cs" />
     <Compile Include="Tal\ParserException.cs" />
@@ -76,13 +73,6 @@
     <Folder Include="Rendering\" />
     <Folder Include="Tales\" />
     <Folder Include="Metal\" />
-    <Folder Include="Resources\" />
     <Folder Include="Tal\" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\ExceptionMessages.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>ExceptionMessages.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
   </ItemGroup>
 </Project>
