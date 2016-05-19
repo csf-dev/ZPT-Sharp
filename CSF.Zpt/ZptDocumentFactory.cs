@@ -62,14 +62,14 @@ namespace CSF.Zpt
     /// </summary>
     /// <param name="sourceFile">The source file containing the document to create.</param>
     /// <param name="encoding">The text encoding to use in reading the source file.</param>
-    public ZptDocument CreateDocument(FileInfo sourceFile, Encoding encoding)
+    public IZptDocument CreateDocument(FileInfo sourceFile, Encoding encoding)
     {
       if(sourceFile == null)
       {
         throw new ArgumentNullException(nameof(sourceFile));
       }
 
-      ZptDocument output;
+      IZptDocument output;
 
       encoding = encoding?? DefaultEncoding;
       var extension = sourceFile.Extension;
@@ -109,7 +109,7 @@ namespace CSF.Zpt
     /// </summary>
     /// <param name="sourceFile">The source file containing the document to create.</param>
     /// <param name="encoding">The text encoding to use in reading the source file.</param>
-    public ZptDocument CreateHtmlDocument(FileInfo sourceFile, Encoding encoding)
+    public IZptDocument CreateHtmlDocument(FileInfo sourceFile, Encoding encoding)
     {
       if(sourceFile == null)
       {
@@ -130,14 +130,14 @@ namespace CSF.Zpt
     /// </summary>
     /// <param name="sourceFile">The source file containing the document to create.</param>
     /// <param name="encoding">The text encoding to use in reading the source file.</param>
-    public ZptDocument CreateXmlDocument(FileInfo sourceFile, Encoding encoding)
+    public IZptDocument CreateXmlDocument(FileInfo sourceFile, Encoding encoding)
     {
       if(sourceFile == null)
       {
         throw new ArgumentNullException(nameof(sourceFile));
       }
 
-      ZptDocument output;
+      IZptDocument output;
       var sourceInfo = new SourceFileInfo(sourceFile);
       encoding = encoding?? DefaultEncoding;
 
@@ -156,7 +156,7 @@ namespace CSF.Zpt
     /// <param name="sourceStream">A stream exposing the document content.</param>
     /// <param name="sourceInfo">Information about the source document.</param>
     /// <param name="encoding">The text encoding to use in reading the source file.</param>
-    public ZptDocument CreateHtmlDocument(Stream sourceStream, SourceFileInfo sourceInfo, Encoding encoding)
+    public IZptDocument CreateHtmlDocument(Stream sourceStream, SourceFileInfo sourceInfo, Encoding encoding)
     {
       if(sourceStream == null)
       {
@@ -178,7 +178,7 @@ namespace CSF.Zpt
     /// <param name="sourceStream">A stream exposing the document content.</param>
     /// <param name="sourceInfo">Information about the source document.</param>
     /// <param name="encoding">The text encoding to use in reading the source file.</param>
-    public ZptDocument CreateXmlDocument(Stream sourceStream, SourceFileInfo sourceInfo, Encoding encoding)
+    public IZptDocument CreateXmlDocument(Stream sourceStream, SourceFileInfo sourceInfo, Encoding encoding)
     {
       if(sourceStream == null)
       {

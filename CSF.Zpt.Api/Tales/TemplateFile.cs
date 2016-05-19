@@ -1,11 +1,10 @@
 ﻿using System;
-using CSF.Zpt.Metal;
 using System.IO;
 
 namespace CSF.Zpt.Tales
 {
   /// <summary>
-  /// Wrapper type for a <see cref="ZptDocument"/>, expressing its state which is visible to TALES.
+  /// Wrapper type for a <see cref="IZptDocument"/>, expressing its state which is visible to TALES.
   /// </summary>
   public class TemplateFile : ITalesPathHandler
   {
@@ -18,7 +17,7 @@ namespace CSF.Zpt.Tales
 
     #region fields
 
-    private ZptDocument _document;
+    private IZptDocument _document;
 
     #endregion
 
@@ -101,7 +100,7 @@ namespace CSF.Zpt.Tales
     /// Initializes a new instance of the <see cref="CSF.Zpt.Tales.TemplateFile"/> class.
     /// </summary>
     /// <param name="document">Document.</param>
-    public TemplateFile(ZptDocument document)
+    public TemplateFile(IZptDocument document)
     {
       if(document == null)
       {

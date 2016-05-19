@@ -84,7 +84,6 @@
     <Compile Include="Rendering\TestZptHtmlElement.cs" />
     <Compile Include="Rendering\TestZptXmlElement.cs" />
     <Compile Include="Tal\TestOnErrorAttributeHandler.cs" />
-    <Compile Include="Tales\TestExpression.cs" />
     <Compile Include="Tales\TestTalesModel.cs" />
     <Compile Include="Tales\TestNotExpressionEvaluator.cs" />
     <Compile Include="Tales\TestStringExpressionEvaluator.cs" />
@@ -102,6 +101,7 @@
     <Compile Include="IIntegrationTestConfiguration.cs" />
     <Compile Include="FallbackIntegrationTestConfiguration.cs" />
     <Compile Include="Util\IntendedTestingException.cs" />
+    <Compile Include="Tales\TestExpressionFactory.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Metal\MetalVisitorIntegrationTests.1.xml" />

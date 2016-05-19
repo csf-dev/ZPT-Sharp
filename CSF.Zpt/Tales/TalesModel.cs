@@ -21,6 +21,7 @@ namespace CSF.Zpt.Tales
     #region fields
 
     private IEvaluatorRegistry _registry;
+    private IExpressionFactory _expressionCreator;
 
     #endregion
 
@@ -58,7 +59,7 @@ namespace CSF.Zpt.Tales
         throw new ArgumentNullException(nameof(expression));
       }
 
-      var talesExpression = new Expression(expression);
+      var talesExpression = _expressionCreator.Create(expression);
       return this.Evaluate(talesExpression, context);
     }
 
@@ -169,8 +170,10 @@ namespace CSF.Zpt.Tales
     /// </summary>
     /// <param name="evaluatorRegistry">Evaluator registry.</param>
     /// <param name="options">Options.</param>
+    /// <param name="expressionCreator">The expression factory to use.</param>
     public TalesModel(IEvaluatorRegistry evaluatorRegistry,
-                      TemplateKeywordOptions options = null) : base(options)
+                      TemplateKeywordOptions options = null,
+                      IExpressionFactory expressionCreator = null) : base(options)
     {
       if(evaluatorRegistry == null)
       {
@@ -178,6 +181,7 @@ namespace CSF.Zpt.Tales
       }
 
       _registry = evaluatorRegistry;
+      _expressionCreator = expressionCreator?? new ExpressionFactory();
     }
 
     /// <summary>
@@ -186,9 +190,11 @@ namespace CSF.Zpt.Tales
     /// <param name="parent">The parent model.</param>
     /// <param name="root">The root model.</param>
     /// <param name="evaluatorRegistry">The expression evaluator registry.</param>
+    /// <param name="expressionCreator">The expression factory to use.</param>
     public TalesModel(IModel parent,
                       IModel root,
-                      IEvaluatorRegistry evaluatorRegistry) : base(parent, root)
+                      IEvaluatorRegistry evaluatorRegistry,
+                      IExpressionFactory expressionCreator = null) : base(parent, root)
     {
       if(evaluatorRegistry == null)
       {
@@ -196,6 +202,7 @@ namespace CSF.Zpt.Tales
       }
 
       _registry = evaluatorRegistry;
+      _expressionCreator = expressionCreator?? new ExpressionFactory();
     }
 
     #endregion

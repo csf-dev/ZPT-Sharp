@@ -11,6 +11,7 @@ namespace CSF.Zpt.Tales
     #region fields
 
     private IEvaluatorRegistry _evaluatorRegistry;
+    private IExpressionFactory _expressionCreator;
 
     #endregion
 
@@ -30,6 +31,17 @@ namespace CSF.Zpt.Tales
     {
       get {
         return _evaluatorRegistry;
+      }
+    }
+
+    /// <summary>
+    /// Gets an expression creator.
+    /// </summary>
+    /// <value>The expression creator.</value>
+    protected virtual IExpressionFactory ExpressionCreator
+    {
+      get {
+        return _expressionCreator;
       }
     }
 
@@ -53,7 +65,9 @@ namespace CSF.Zpt.Tales
     /// Initializes a new instance of the <see cref="CSF.Zpt.Tales.ExpressionEvaluatorBase"/> class.
     /// </summary>
     /// <param name="evaluatorRegistry">Evaluator registry.</param>
-    public ExpressionEvaluatorBase(IEvaluatorRegistry evaluatorRegistry)
+    /// <param name="expressionCreator">The expression factory to use.</param>
+    public ExpressionEvaluatorBase(IEvaluatorRegistry evaluatorRegistry,
+                                   IExpressionFactory expressionCreator = null)
     {
       if(evaluatorRegistry == null)
       {
@@ -61,6 +75,7 @@ namespace CSF.Zpt.Tales
       }
 
       _evaluatorRegistry = evaluatorRegistry;
+      _expressionCreator = expressionCreator?? new ExpressionFactory();
     }
 
     #endregion

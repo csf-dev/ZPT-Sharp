@@ -4,6 +4,7 @@ using System.Linq;
 using HtmlAgilityPack;
 using CSF.Zpt.Rendering;
 using CSF.Zpt.Resources;
+using CSF.Zpt.Tales;
 
 namespace CSF.Zpt
 {
@@ -67,7 +68,7 @@ namespace CSF.Zpt
     /// Gets a collection of elements in the document which are defined as METAL macros.
     /// </summary>
     /// <returns>Elements representing the METAL macros.</returns>
-    public override CSF.Zpt.Metal.MetalMacroCollection GetMacros()
+    public override ITalesPathHandler GetMacros()
     {
       var output = this.Document
         .DocumentNode

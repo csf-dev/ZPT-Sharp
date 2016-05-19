@@ -55,7 +55,7 @@ namespace CSF.Zpt.Tales
         throw new ArgumentNullException(nameof(model));
       }
 
-      var result = model.Evaluate(expression.GetContentAsExpression(), context);
+      var result = model.Evaluate(ExpressionCreator.Create(expression), context);
       bool booleanResult = this.CoerceToBoolean(result);
 
       return new ExpressionResult(!booleanResult);

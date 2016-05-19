@@ -54,7 +54,7 @@ namespace CSF.Zpt.Tales
         throw new ArgumentNullException(nameof(model));
       }
 
-      var expressionText = expression.GetContent();
+      var expressionText = expression.Content;
       var path = Path.Create(expressionText);
       var walker = new PathWalker(path);
       object output;

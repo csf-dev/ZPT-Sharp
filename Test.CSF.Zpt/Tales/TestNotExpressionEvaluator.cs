@@ -26,12 +26,12 @@ namespace Test.CSF.Zpt.Tales
       var aFixture = new Fixture();
 
       var expressionContent = aFixture.Create<string>();
-      var expression = Expression.Create("not", expressionContent);
+      var expression = new Expression("not", expressionContent);
 
       var evaluator = new Mock<IExpressionEvaluator>();
       var registry = Mock.Of<IEvaluatorRegistry>(x => x.GetEvaluator(It.IsAny<Expression>()) == evaluator.Object);
       evaluator
-        .Setup(x => x.Evaluate(It.Is<Expression>(e => e.Source == expressionContent),
+        .Setup(x => x.Evaluate(It.Is<Expression>(e => e.ToString() == expressionContent),
                                It.IsAny<RenderingContext>(),
                                It.IsAny<TalesModel>()))
         .Returns(new ExpressionResult(expressionResult));
@@ -55,12 +55,12 @@ namespace Test.CSF.Zpt.Tales
       var aFixture = new Fixture();
 
       var expressionContent = aFixture.Create<string>();
-      var expression = Expression.Create("not", expressionContent);
+      var expression = new Expression("not", expressionContent);
 
       var evaluator = new Mock<IExpressionEvaluator>();
       var registry = Mock.Of<IEvaluatorRegistry>(x => x.GetEvaluator(It.IsAny<Expression>()) == evaluator.Object);
       evaluator
-        .Setup(x => x.Evaluate(It.Is<Expression>(e => e.Source == expressionContent),
+        .Setup(x => x.Evaluate(It.Is<Expression>(e => e.ToString() == expressionContent),
                                It.IsAny<RenderingContext>(),
                                It.IsAny<TalesModel>()))
         .Returns(new ExpressionResult(Model.CancelAction));
@@ -85,13 +85,13 @@ namespace Test.CSF.Zpt.Tales
       var aFixture = new Fixture();
 
       var expressionContent = aFixture.Create<string>();
-      var expression = Expression.Create("not", expressionContent);
+      var expression = new Expression("not", expressionContent);
 
       var evaluator = new Mock<IExpressionEvaluator>();
       var registry = Mock.Of<IEvaluatorRegistry>(x => x.GetEvaluator(It.IsAny<Expression>()) == evaluator.Object);
       var convertible = Mock.Of<ITalesConvertible>(x => x.AsBoolean() == conversionValue);
       evaluator
-        .Setup(x => x.Evaluate(It.Is<Expression>(e => e.Source == expressionContent),
+        .Setup(x => x.Evaluate(It.Is<Expression>(e => e.ToString() == expressionContent),
                                It.IsAny<RenderingContext>(),
                                It.IsAny<TalesModel>()))
         .Returns(new ExpressionResult(convertible));

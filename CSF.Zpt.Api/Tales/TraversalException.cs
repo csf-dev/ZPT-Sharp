@@ -6,7 +6,7 @@ namespace CSF.Zpt.Tales
   /// Represents an exception whilst traversing a TALES path.
   /// </summary>
   [Serializable]
-  public class TraversalException : System.Exception
+  public class TraversalException : ZptException
   {
     /// <summary>
     /// Initializes a new instance of the <see cref="T:TraversalException"/> class

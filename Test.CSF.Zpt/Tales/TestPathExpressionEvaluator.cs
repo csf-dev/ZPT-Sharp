@@ -13,7 +13,7 @@ namespace Test.CSF.Zpt.Tales
     #region fields
 
     private IFixture _autofixture;
-    private Mock<TalesModel> _model;
+    private Mock<ITalesModel> _model;
     private RenderingContext _element;
     private PathExpressionEvaluator _sut;
 
@@ -25,7 +25,7 @@ namespace Test.CSF.Zpt.Tales
     public void Setup()
     {
       _autofixture = new Fixture();
-      _model = new Mock<TalesModel>(SimpleEvaluatorRegistry.Default, null);
+      _model = new Mock<ITalesModel>();
       _element = Mock.Of<RenderingContext>();
       _sut = new PathExpressionEvaluator(SimpleEvaluatorRegistry.Default);
     }
@@ -38,7 +38,7 @@ namespace Test.CSF.Zpt.Tales
     public void TestEvaluate_One()
     {
       // Arrange
-      var expression = new Expression("foo/ToString");
+      var expression = new Expression(null, "foo/ToString");
       object expectedResult = _autofixture.Create<int>();
       _model.Setup(x => x.TryGetRootObject("foo", _element, out expectedResult)).Returns(true);
 
@@ -54,7 +54,7 @@ namespace Test.CSF.Zpt.Tales
     public void TestEvaluate_Two()
     {
       // Arrange
-      var expression = new Expression("foo/Day");
+      var expression = new Expression(null, "foo/Day");
       object expectedResult = _autofixture.Create<DateTime>();
       _model.Setup(x => x.TryGetRootObject("foo", _element, out expectedResult)).Returns(true);
 
@@ -70,7 +70,7 @@ namespace Test.CSF.Zpt.Tales
     public void TestEvaluate_Three()
     {
       // Arrange
-      var expression = new Expression("foo/Day/ToString");
+      var expression = new Expression(null, "foo/Day/ToString");
       object expectedResult = _autofixture.Create<DateTime>();
       _model.Setup(x => x.TryGetRootObject("foo", _element, out expectedResult)).Returns(true);
 
@@ -86,7 +86,7 @@ namespace Test.CSF.Zpt.Tales
     public void TestEvaluate_Four()
     {
       // Arrange
-      var expression = new Expression("foo/?prop/ToString");
+      var expression = new Expression(null, "foo/?prop/ToString");
       object expectedResult = _autofixture.Create<DateTime>(), propName = "Day";
       _model.Setup(x => x.TryGetRootObject("foo", _element, out expectedResult)).Returns(true);
       _model.Setup(x => x.TryGetRootObject("prop", _element, out propName)).Returns(true);
@@ -104,7 +104,7 @@ namespace Test.CSF.Zpt.Tales
     public void TestEvaluate_Five()
     {
       // Arrange
-      var expression = new Expression("bar/?prop/ToString");
+      var expression = new Expression(null, "bar/?prop/ToString");
       object expectedResult = _autofixture.Create<DateTime>(), propName = "Day";
       _model.Setup(x => x.TryGetRootObject("foo", _element, out expectedResult)).Returns(true);
       _model.Setup(x => x.TryGetRootObject("prop", _element, out propName)).Returns(true);
@@ -119,7 +119,7 @@ namespace Test.CSF.Zpt.Tales
     public void TestEvaluate_Six()
     {
       // Arrange
-      var expression = new Expression("bar/?prop/ToString | foo/?prop/ToString");
+      var expression = new Expression(null, "bar/?prop/ToString | foo/?prop/ToString");
       object expectedResult = _autofixture.Create<DateTime>(), propName = "Day";
       _model.Setup(x => x.TryGetRootObject("foo", _element, out expectedResult)).Returns(true);
       _model.Setup(x => x.TryGetRootObject("prop", _element, out propName)).Returns(true);
@@ -137,7 +137,7 @@ namespace Test.CSF.Zpt.Tales
     public void TestEvaluate_Seven()
     {
       // Arrange
-      var expression = new Expression("bar/?prop/ToString | foo/?flob/ToString");
+      var expression = new Expression(null, "bar/?prop/ToString | foo/?flob/ToString");
       object expectedResult = _autofixture.Create<DateTime>(), propName = "Day";
       _model.Setup(x => x.TryGetRootObject("foo", _element, out expectedResult)).Returns(true);
       _model.Setup(x => x.TryGetRootObject("prop", _element, out propName)).Returns(true);
@@ -154,7 +154,7 @@ namespace Test.CSF.Zpt.Tales
     public void TestEvaluate_Eight()
     {
       // Arrange
-      var expression = new Expression("foo/?flob/ToString | foo/?prop/ToString");
+      var expression = new Expression(null, "foo/?flob/ToString | foo/?prop/ToString");
       object expectedResult = _autofixture.Create<DateTime>(), propName = "Day";
       _model.Setup(x => x.TryGetRootObject("foo", _element, out expectedResult)).Returns(true);
       _model.Setup(x => x.TryGetRootObject("prop", _element, out propName)).Returns(true);
