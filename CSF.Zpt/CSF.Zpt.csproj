@@ -107,6 +107,7 @@
     <Compile Include="Resources\ExceptionMessages.Designer.cs">
       <DependentUpon>..\..\CSF.Zpt.Api\Resources\ExceptionMessages.resx</DependentUpon>
     </Compile>
+    <Compile Include="Tales\ExpressionFactory.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
