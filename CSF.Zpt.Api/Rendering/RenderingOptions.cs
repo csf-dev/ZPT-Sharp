@@ -4,7 +4,7 @@ using System.Text;
 namespace CSF.Zpt.Rendering
 {
   /// <summary>
-  /// Encapsulates the available options for rendering a <see cref="ZptDocument"/>.
+  /// Encapsulates the available options for rendering a <see cref="IZptDocument"/>.
   /// </summary>
   public abstract class RenderingOptions
   {

@@ -52,7 +52,7 @@ namespace Test.CSF.Zpt.Tales
     public void TestSimpleString(string supplied, string expected)
     {
       // Arrange
-      var expression = Expression.Create("string", supplied);
+      var expression = new Expression("string", supplied);
 
       // Act
       var result = _sut.Evaluate(expression, Mock.Of<RenderingContext>(), _model);
@@ -66,15 +66,15 @@ namespace Test.CSF.Zpt.Tales
     {
       // Arrange
       string content = "Hello $name, how are you this fine ${current_state/time_of_day}?";
-      var expression = Expression.Create("string", content);
+      var expression = new Expression("string", content);
 
       _pathEvaluator
-        .Setup(x => x.Evaluate(It.Is<Expression>(exp => exp.Source == "name"),
+        .Setup(x => x.Evaluate(It.Is<Expression>(exp => exp.ToString() == "name"),
                                It.IsAny<RenderingContext>(),
                                It.IsAny<TalesModel>()))
         .Returns(new ExpressionResult("Fred Bloggs"));
       _pathEvaluator
-        .Setup(x => x.Evaluate(It.Is<Expression>(exp => exp.Source == "current_state/time_of_day"),
+        .Setup(x => x.Evaluate(It.Is<Expression>(exp => exp.ToString() == "current_state/time_of_day"),
                                It.IsAny<RenderingContext>(),
                                It.IsAny<TalesModel>()))
         .Returns(new ExpressionResult("evening"));
@@ -91,15 +91,15 @@ namespace Test.CSF.Zpt.Tales
     {
       // Arrange
       string content = "Hello $$$name, how are $$$$ you this fine $$${current_state/time_of_day}?";
-      var expression = Expression.Create("string", content);
+      var expression = new Expression("string", content);
 
       _pathEvaluator
-        .Setup(x => x.Evaluate(It.Is<Expression>(exp => exp.Source == "name"),
+        .Setup(x => x.Evaluate(It.Is<Expression>(exp => exp.ToString() == "name"),
                                It.IsAny<RenderingContext>(),
                                It.IsAny<TalesModel>()))
         .Returns(new ExpressionResult("Fred Bloggs"));
       _pathEvaluator
-        .Setup(x => x.Evaluate(It.Is<Expression>(exp => exp.Source == "current_state/time_of_day"),
+        .Setup(x => x.Evaluate(It.Is<Expression>(exp => exp.ToString() == "current_state/time_of_day"),
                                It.IsAny<RenderingContext>(),
                                It.IsAny<TalesModel>()))
         .Returns(new ExpressionResult("evening"));

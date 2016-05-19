@@ -40,7 +40,6 @@
     <Compile Include="AssemblyInfo.cs" />
     <Compile Include="IZptDocumentFactory.cs" />
     <Compile Include="ZptConstants.cs" />
-    <Compile Include="ZptDocument.cs" />
     <Compile Include="Rendering\IContextVisitor.cs" />
     <Compile Include="Rendering\RenderingContext.cs" />
     <Compile Include="Rendering\ZptAttribute.cs" />
@@ -68,6 +67,7 @@
     <Compile Include="Tales\TraversalException.cs" />
     <Compile Include="Rendering\IRepetitionInfo.cs" />
     <Compile Include="Tales\IExpressionFactory.cs" />
+    <Compile Include="IZptDocument.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

@@ -104,7 +104,7 @@ namespace Test.CSF.Zpt
                                 FileInfo expectedResultDocument)
     {
       bool output = false;
-      ZptDocument document = null;
+      IZptDocument document = null;
       string expectedRendering, actualRendering = null;
       bool exceptionCaught = false;
 

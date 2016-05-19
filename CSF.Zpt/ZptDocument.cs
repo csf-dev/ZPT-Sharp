@@ -3,13 +3,14 @@ using System.Text;
 using System.IO;
 using CSF.Zpt.Rendering;
 using System.Linq;
+using CSF.Zpt.Tales;
 
 namespace CSF.Zpt
 {
   /// <summary>
   /// Represents a ZPT document.
   /// </summary>
-  public abstract class ZptDocument
+  public abstract class ZptDocument : IZptDocument
   {
     #region methods
 
@@ -71,7 +72,7 @@ namespace CSF.Zpt
     /// Gets a collection of elements in the document which are defined as METAL macros.
     /// </summary>
     /// <returns>Elements representing the METAL macros.</returns>
-    public abstract CSF.Zpt.Metal.MetalMacroCollection GetMacros();
+    public abstract ITalesPathHandler GetMacros();
 
     /// <summary>
     /// Renders the current document, returning an <see cref="ZptElement"/> representing the rendered result.

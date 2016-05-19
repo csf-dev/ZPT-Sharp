@@ -40,7 +40,7 @@ namespace CSF.Zpt.Tales
       }
 
       IExpressionEvaluator output;
-      var prefix = expression.GetPrefix();
+      var prefix = expression.Prefix;
 
       if(prefix != null)
       {
@@ -55,7 +55,7 @@ namespace CSF.Zpt.Tales
                                          prefix,
                                          expression);
           throw new InvalidExpressionException(message) {
-            ExpressionText = expression.Source
+            ExpressionText = expression.ToString()
           };
         }
       }

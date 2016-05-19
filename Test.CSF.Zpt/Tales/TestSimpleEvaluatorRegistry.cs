@@ -46,7 +46,7 @@ namespace Test.CSF.Zpt.Tales
     {
       // Arrange
       var sut = SimpleEvaluatorRegistry.Default;
-      var expression = Expression.Create(prefix, _autofixture.Create<string>());
+      var expression = new Expression(prefix, _autofixture.Create<string>());
 
       // Act
       var result = sut.GetEvaluator(expression);
@@ -62,7 +62,7 @@ namespace Test.CSF.Zpt.Tales
     {
       // Arrange
       var sut = SimpleEvaluatorRegistry.Default;
-      var expression = Expression.Create("zzinvalid", _autofixture.Create<string>());
+      var expression = new Expression("zzinvalid", _autofixture.Create<string>());
 
       // Act
       sut.GetEvaluator(expression);
@@ -75,7 +75,7 @@ namespace Test.CSF.Zpt.Tales
     {
       // Arrange
       var sut = SimpleEvaluatorRegistry.Default;
-      var expression = Expression.Create(null, _autofixture.Create<string>());
+      var expression = new Expression(null, _autofixture.Create<string>());
 
       // Act
       var result = sut.GetEvaluator(expression);

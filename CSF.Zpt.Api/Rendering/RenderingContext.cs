@@ -6,7 +6,7 @@ using System.Collections.Generic;
 namespace CSF.Zpt.Rendering
 {
   /// <summary>
-  /// Represents the object model, presented to a <see cref="ZptDocument"/> when it is rendered.
+  /// Represents the object model, presented to a <see cref="IZptDocument"/> when it is rendered.
   /// </summary>
   public class RenderingContext
   {

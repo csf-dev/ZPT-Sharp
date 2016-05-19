@@ -64,7 +64,7 @@ namespace CSF.Zpt.Tales
         throw new ArgumentNullException(nameof(model));
       }
 
-      string source = expression.GetContent(), output;
+      string source = expression.Content, output;
       var escapeSequenceIndices = this.FindAndUnescapePlaceholders(source, out output);
       output = this.ApplyPlaceholderReplacements(output, escapeSequenceIndices, context, model);
 
@@ -122,7 +122,7 @@ namespace CSF.Zpt.Tales
         else
         {
           string val = match.Groups[1].Success? match.Groups[1].Value : match.Groups[2].Value;
-          var pathResult = pathEvaluator.Evaluate(new Expression(val),
+          var pathResult = pathEvaluator.Evaluate(ExpressionCreator.Create(val),
                                                   context,
                                                   model);
           if(pathResult.Value == null)

@@ -85,10 +85,10 @@ namespace Test.CSF.Zpt.Tales
       string expressionSource = _autofixture.Create<string>();
 
       registry
-        .Setup(x => x.GetEvaluator(It.Is<Expression>(e => e.Source == expressionSource)))
+        .Setup(x => x.GetEvaluator(It.Is<Expression>(e => e.ToString() == expressionSource)))
         .Returns(evaluator.Object);
       evaluator
-        .Setup(x => x.Evaluate(It.Is<Expression>(e => e.Source == expressionSource), It.IsAny<RenderingContext>(), sut))
+        .Setup(x => x.Evaluate(It.Is<Expression>(e => e.ToString() == expressionSource), It.IsAny<RenderingContext>(), sut))
         .Returns(expressionResult);
 
       // Act

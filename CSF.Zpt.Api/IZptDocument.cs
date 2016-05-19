@@ -1,0 +1,33 @@
+﻿using System;
+using CSF.Zpt.Rendering;
+using System.IO;
+using CSF.Zpt.Tales;
+
+namespace CSF.Zpt
+{
+  /// <summary>
+  /// Represents a ZPT document.
+  /// </summary>
+  public interface IZptDocument
+  {
+    /// <summary>
+    /// Renders the document to a <c>System.String</c>.
+    /// </summary>
+    /// <param name="options">The rendering options to use.  If <c>null</c> then default options are used.</param>
+    string Render(RenderingOptions options = null);
+
+    /// <summary>
+    /// Renders the document to the given <c>System.IO.TextWriter</c>.
+    /// </summary>
+    /// <param name="writer">The text writer to render to.</param>
+    /// <param name="options">The rendering options to use.  If <c>null</c> then default options are used.</param>
+    void Render(TextWriter writer, RenderingOptions options = null);
+
+    /// <summary>
+    /// Gets a collection of elements in the document which are defined as METAL macros.
+    /// </summary>
+    /// <returns>Elements representing the METAL macros.</returns>
+    ITalesPathHandler GetMacros();
+  }
+}
+
