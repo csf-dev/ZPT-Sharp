@@ -13,7 +13,7 @@ namespace Test.CSF.Zpt.Tales
     #region fields
 
     private IFixture _autofixture;
-    private Mock<TalesModel> _model;
+    private Mock<ITalesModel> _model;
     private RenderingContext _element;
     private PathExpressionEvaluator _sut;
 
@@ -25,7 +25,7 @@ namespace Test.CSF.Zpt.Tales
     public void Setup()
     {
       _autofixture = new Fixture();
-      _model = new Mock<TalesModel>(SimpleEvaluatorRegistry.Default, null);
+      _model = new Mock<ITalesModel>();
       _element = Mock.Of<RenderingContext>();
       _sut = new PathExpressionEvaluator(SimpleEvaluatorRegistry.Default);
     }
