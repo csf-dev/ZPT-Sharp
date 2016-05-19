@@ -11,7 +11,7 @@ namespace CSF.Zpt.Tales
     #region constants
 
     private const string
-      PREFIX_PATTERN        = @"^([a-zA-Z0-9]+):",
+      PREFIX_PATTERN        = @"^([^:]+):",
       VALID_PREFIX_PATTERN  = @"^[a-zA-Z0-9]+$",
       CONTENT_PATTERN       = @"^(?:[a-zA-Z0-9]+:)?(.*)";
     private static readonly Regex

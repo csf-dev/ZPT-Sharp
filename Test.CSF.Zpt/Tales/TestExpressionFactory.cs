@@ -46,7 +46,7 @@ namespace Test.CSF.Zpt.Tales
     [TestCase("in_valid:invalid")]
     [TestCase("invalid_:invalid")]
     [TestCase(null)]
-    [ExpectedException(typeof(FormatException))]
+    [ExpectedException]
     public void Create_FromInvalidSource(string source)
     {
       // Arrange (nothing to do)
@@ -77,7 +77,7 @@ namespace Test.CSF.Zpt.Tales
     [TestCase("x_",  "")]
     [TestCase("x",   null)]
     [TestCase(null,  null)]
-    [ExpectedException(typeof(FormatException))]
+    [ExpectedException]
     public void Create_FromInvalidPrefixAndContent(string prefix, string content)
     {
       // Arrange (nothing to do)
