@@ -66,6 +66,7 @@
     <Compile Include="Rendering\IRepetitionInfo.cs" />
     <Compile Include="Tales\IExpressionFactory.cs" />
     <Compile Include="IZptDocument.cs" />
+    <Compile Include="ZptException.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

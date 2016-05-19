@@ -6,7 +6,7 @@ namespace CSF.Zpt.Rendering
   /// Represents an exception raised whilst rendering a ZPT document.
   /// </summary>
   [Serializable]
-  public class RenderingException : System.Exception
+  public class RenderingException : ZptException
   {
     /// <summary>
     /// Initializes a new instance of the <see cref="T:RenderingException"/> class
