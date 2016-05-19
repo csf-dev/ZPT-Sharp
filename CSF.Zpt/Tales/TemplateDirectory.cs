@@ -10,7 +10,7 @@ namespace CSF.Zpt.Tales
   {
     #region fields
 
-    private IZptDocumentFactory _documentFactory;
+    private ITemplateFileFactory _documentFactory;
 
     #endregion
 
@@ -75,9 +75,8 @@ namespace CSF.Zpt.Tales
       var templateFileInfo = exposedResult as FileInfo;
       if(templateFileInfo != null)
       {
-        var doc = _documentFactory.CreateDocument(templateFileInfo);
-        var wrapper = new TemplateFile(doc);
-        exposedResult = wrapper;
+        var doc = _documentFactory.CreateTemplateFile(templateFileInfo);
+        exposedResult = doc;
       }
 
       result = exposedResult;
@@ -106,7 +105,7 @@ namespace CSF.Zpt.Tales
     /// <param name="documentFactory">Document factory.</param>
     public TemplateDirectory(DirectoryInfo directory,
                              bool mandatoryExtensions = false,
-                             IZptDocumentFactory documentFactory = null) : base(directory, mandatoryExtensions)
+                             ITemplateFileFactory documentFactory = null) : base(directory, mandatoryExtensions)
     {
       _documentFactory = documentFactory?? new ZptDocumentFactory();
     }

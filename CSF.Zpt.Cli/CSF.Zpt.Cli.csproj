@@ -38,6 +38,7 @@
     </Compile>
     <Compile Include="AssemblyInfo.cs" />
     <Compile Include="EntryPoint.cs" />
+    <Compile Include="CommandLineOptions.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

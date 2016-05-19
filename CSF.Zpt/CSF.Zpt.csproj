@@ -111,6 +111,8 @@
     <Compile Include="ZptDocument.cs" />
     <Compile Include="Metal\MetalMacro.cs" />
     <Compile Include="Metal\MetalMacroCollection.cs" />
+    <Compile Include="Rendering\RenderingContextFactoryFactory.cs" />
+    <Compile Include="Rendering\ContextVisitorFactory.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
