@@ -65,7 +65,7 @@ namespace CSF.Zpt.Cli
       UseStandardOutput = (outputPath == null);
       InputPaths = inputPaths?? new FileSystemInfo[0];
       OutputPath = outputPath;
-      InputSearchPattern = inputSearchPattern;
+      InputSearchPattern = inputSearchPattern?? "*";
       OutputExtensionOverride = outputExtensionOverride;
       IgnoredPaths = ignoredPaths?? new DirectoryInfo[0];
     }
