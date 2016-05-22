@@ -1,0 +1,139 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      metal:use-macro="documents/macros/base-template/macros/document-structure">
+<head>
+<title metal:fill-slot="title">ZPT-Sharp View Classes</title>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<base href="." />
+<style>
+@import url(static/css/default-styles.css);
+</style>
+</head>
+<body>
+<div class="page">
+  <div class="region_header dummy">
+    Header content is imported here
+  </div>
+  <div class="region_main">
+    <div class="main_navigation">
+      <div class="dummy">
+        Main navigation is imported here
+      </div>
+      <div metal:fill-slot="document_navigation" class="document_navigation">
+        <h5>Document navigation</h5>
+        <ol>
+          <li><a href="view-classes.html#introduction">Introduction</a></li>
+          <li><a href="view-classes.html#requirements">Requirements</a></li>
+          <li><a href="view-classes.html#adding_definitions">Adding TALES definitions</a></li>
+          <li><a href="view-classes.html#attaching_view_classes">Attaching View Classes</a></li>
+          <li><a href="view-classes.html#example_metadata">Example metadata file</a></li>
+          <li><a href="view-classes.html#registering_view_classes">Registering View Classes</a></li>
+        </ol>
+      </div>
+    </div>
+    <div class="region_content view_classes" metal:fill-slot="region_content">
+      <h1 id="introduction">View Classes</h1>
+      <p>
+        ZPT documents have to get their <acronym title="Template Attribute Language Expression Syntax">TALES</acronym>
+        variable definitions from somewhere.  In an
+        <a href="quickstart-mvc.html" title="Using ZPT-Sharp with ASP.NET Model View Controller">MVC</a> environment
+        some of these definitions can come from the controller that invokes this view.  This is appropriate for
+        definitions that relate to the outcome of actions that the controller class took.
+      </p>
+      <p>
+        For many other variable definitions however, the controller need not involve itself with providing the TALES
+        variable definitions for the view.  In an ideal and purist MVC scenario, the controller needs to know as little
+        about the view as possible.  The answer to this then is to back the ZPT document up with a <em>View Class</em>.
+      </p>
+      <h2 id="requirements">Requirements</h2>
+      <p>
+        View classes are normal .NET classes although there are two requirements upon them:
+      </p>
+      <ul>
+        <li>
+          View classes must implement
+          <a href="api-doxygen/interface_craig_fowler_1_1_web_1_1_z_p_t_1_1_i_zpt_document.html"
+             class="code" title="Documentation for the IZptDocument interface">CraigFowler.Web.ZPT.IZptDocument</a>
+        </li>
+        <li>
+          They must provide a constructor that takes a
+          <a href="api-doxygen/class_craig_fowler_1_1_web_1_1_z_p_t_1_1_zpt_metadata.html"
+             class="code" title="Documentation for the ZptMetadata class">CraigFowler.Web.ZPT.ZptMetadata</a> instance.
+        </li>
+      </ul>
+      <p>
+        There is no requirement to inherit from a base class, although if your view class does not need to inherit any
+        other base class then you may choose to inherit from
+        <a href="api-doxygen/class_craig_fowler_1_1_web_1_1_z_p_t_1_1_zpt_document.html"
+           class="code" title="Documentation for the ZptDocument class">CraigFowler.Web.ZPT.ZptDocument</a>.
+      </p>
+      <h2 id="adding_definitions">Adding TALES definitions from your View Class</h2>
+      <p>
+        Once you have created your view class, if you have inherited from <code>ZptDocument</code> then you should
+        override the protected method <code>AssignModelData</code>.  This method takes a
+        <a href="api-doxygen/class_craig_fowler_1_1_web_1_1_z_p_t_1_1_tales_1_1_tales_context.html"
+           class="code" title="Documentation for the TalesContext class">CraigFowler.Web.ZPT.Tales.TalesContext</a>
+        instance, which you should populate with your variable definitions.
+      </p>
+      <p>
+        If instead you are simply implementing <code>IZptDocument</code> then in the method
+        <code>GetTemplateDocument</code>, before you return the output, you should get its <code>TalesContext</code>
+        and add the variable definitions into that.
+      </p>
+      <h2 id="attaching_view_classes">Attaching a View Class to a document</h2>
+      <p>
+        In order to 'attach' a View Class to a ZPT document you must create a <strong>metadata</strong> file for that
+        document and place it alongside the ZPT document file.
+      </p>
+      <p>
+        ZPT metadata files are small XML files that provide additional information about a ZPT document.  The metadata
+        file for a document template file must reside in the same directory as the document it describes and is named
+        using the same filename as that document, except with <code>.metadata</code> appended to that filename.  For
+        example if your document is named <code>my-template.pt</code> then a metadata file for that document would be
+        placed in the same directory, named <code>my-template.pt.metadata</code>.
+      </p>
+      <p>
+        Metadata files are optional for all ZPT template documents; if they are not present then defaults are assumed
+        (for example, the template will use <code>ZptDocument</code> directly as its View Class).
+      </p>
+      <h3 id="example_metadata">Example metadata file</h3>
+      <p>
+        This is a sample ZPT metadata file.  It indicates that the template document it describes should use
+        <code>MyNamespace.ViewClasses.MyViewClass</code> as its view class.
+      </p>
+      <code class="block">&lt;zptMetadata xmlns=&quot;http://xml.craigfowler.me.uk/namespaces/ZptMetadata&quot;&gt;
+  &lt;className&gt;MyNamespace.ViewClasses.MyViewClass&lt;/className&gt;
+&lt;/zptMetadata&gt;</code>
+      <h2 id="registering_view_classes">Registering your View Class with ZPT-Sharp</h2>
+      <p>
+        The final step in making use of View Classes is to let ZPT-Sharp know about the view classes that you have
+        available.  This is required because the ZPT-Sharp assembly cannot possibly know about all of the types you will
+        create that implement <code>IZptDocument</code> until run-time.  There are static helper methods available to
+        assist with this:
+        <a href="api-doxygen/class_craig_fowler_1_1_web_1_1_z_p_t_1_1_zpt_metadata.html#pub-static-methods"
+           title="Documentation for static methods on the ZptMetamata class"
+           class="code">CraigFowler.Web.ZPT.ZptMetadata.RegisterDocumentClass</a>
+        and <code>CraigFowler.Web.ZPT.ZptMetadata.RegisterDocumentClasses</code>.
+        These two methods may be used to register types with ZPT-Sharp so that it can find them when metadata indicates
+        a View Class.  The method that takes an <code>Assembly</code> scans that entire assembly for types that
+        implement <code>IZptDocument</code> and registers them all.
+      </p>
+      <p>
+        It is worth noting that issue
+        <a href="https://github.com/CSF-Software-Development/ZPT-Sharp/issues/5"
+           title="Refine the way that 'foreign' document types are detected">#5 - Refine the way that 'foreign' document
+          types are detected</a>
+        intends to improve this situation such that registering of types is no longer required except in the most
+        extreme of circumstances.  Once that issue is resolved then the registration of View Classes may become a thing
+        of the past.
+      </p>
+    </div>
+  </div>
+  <div class="region_footer dummy">
+    Footer content is imported here
+  </div>
+</div>
+</body>
+</html>
