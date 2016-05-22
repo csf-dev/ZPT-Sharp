@@ -88,7 +88,7 @@ namespace CSF.Zpt.Tales
     /// <summary>
     /// Create a context instance.
     /// </summary>
-    public RenderingContext Create(ZptElement element, RenderingOptions options)
+    public virtual RenderingContext Create(ZptElement element, RenderingOptions options)
     {
       if(element == null)
       {
@@ -118,7 +118,7 @@ namespace CSF.Zpt.Tales
     /// </summary>
     /// <param name="key">Key.</param>
     /// <param name="value">Value.</param>
-    public void AddKeywordOption(string key, string value)
+    public virtual void AddKeywordOption(string key, string value)
     {
       // TODO: Write this implementation
       throw new NotImplementedException();

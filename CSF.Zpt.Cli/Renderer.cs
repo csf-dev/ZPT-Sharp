@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using CSF.IO;
 using CSF.Zpt.Rendering;
+using CSF.Zpt.Tales;
 
 namespace CSF.Zpt.Cli
 {
@@ -25,7 +26,16 @@ namespace CSF.Zpt.Cli
 
       foreach(var job in jobs)
       {
-        Render(job, options, inputOutputInfo);
+
+        Action<RenderingContext> contextConfigurator = ctx => {
+          if(job.SourceDirectory != null)
+          {
+            var docRoot = new TemplateDirectory(job.SourceDirectory);
+            ctx.MetalModel.AddGlobal("documents", docRoot);
+          }
+        };
+
+        Render(job, options, inputOutputInfo, contextConfigurator);
       }
     }
 
@@ -118,12 +128,15 @@ namespace CSF.Zpt.Cli
 
     private void Render(RenderingJob job,
                         RenderingOptions options,
-                        InputOutputInfo inputOutputInfo)
+                        InputOutputInfo inputOutputInfo,
+                        Action<RenderingContext> contextConfigurator)
     {
       using(var outputStream = GetOutputStream(job, inputOutputInfo))
       using(var writer = new StreamWriter(outputStream, options.OutputEncoding))
       {
-        job.Document.Render(writer, options);
+        job.Document.Render(writer,
+                            options: options,
+                            contextConfigurator: contextConfigurator);
       }
     }
 
@@ -143,7 +156,7 @@ namespace CSF.Zpt.Cli
       {
         var relativePath = job.SourceFile.GetRelative(job.SourceDirectory);
         var outputPath = inputOutputInfo.OutputPath.FullName;
-        var outputFile = new FileInfo(Path.Combine(outputPath, relativePath));
+        var outputFile = new FileInfo(System.IO.Path.Combine(outputPath, relativePath));
         output = outputFile.Open(FileMode.Create);
       }
 
