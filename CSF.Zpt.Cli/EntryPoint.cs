@@ -1,7 +1,7 @@
 ﻿using System;
-using CSF.Cli;
 using System.Linq;
 using System.Text;
+using CSF.Cli;
 using CSF.Zpt.Rendering;
 
 namespace CSF.Zpt.Cli
@@ -11,12 +11,22 @@ namespace CSF.Zpt.Cli
   /// </summary>
   public class EntryPoint
   {
+    #region constants
+
+    private const char
+      KEYWORD_OPTION_SEPARATOR  = ';',
+      KEY_VALUE_SEPARATOR       = '=';
+
+    #endregion
+
     #region fields
 
     private IParameterParser<CommandLineOptions> _parameterParser;
     private CommandLineOptions _commandLineOptions;
     private IContextVisitorFactory _contextVisitorFactory;
     private IRenderingContextFactoryFactory _contextFactoryFactory;
+    private InputOutputInfoCreator _ioInfoCreator;
+    private Renderer _renderer;
 
     #endregion
 
@@ -28,15 +38,18 @@ namespace CSF.Zpt.Cli
     public void Begin()
     {
       var options = this.CreateRenderingOptions(_commandLineOptions);
+      var inputOutputInfo = _ioInfoCreator.GetInfo(_commandLineOptions);
+      var renderingMode = _commandLineOptions.GetRenderingMode();
 
-      // TODO: Write this implementation
-      throw new NotImplementedException();
+      _renderer.Render(options, inputOutputInfo, renderingMode, !_commandLineOptions.DoNotAddDocumentsMetalRootObject);
     }
 
     private RenderingOptions CreateRenderingOptions(CommandLineOptions options)
     {
       var contextVisitors = _contextVisitorFactory.CreateMany(options.ContextVisitorClassNames);
       var contextFactory = _contextFactoryFactory.Create(options.RenderingContextFactoryClassName);
+
+      AddKeywordOptions(options, contextFactory);
 
       return new DefaultRenderingOptions(contextVisitors,
                                          contextFactory,
@@ -45,6 +58,25 @@ namespace CSF.Zpt.Cli
                                          omitXmlDeclaration: options.OmitXmlDeclarations,
                                          xmlIndentCharacters: options.XmlIndentationCharacters,
                                          outputIndentedXml: !options.DoNotOutputIndentedXml);
+    }
+
+    private void AddKeywordOptions(CommandLineOptions options, IRenderingContextFactory contextFactory)
+    {
+      if(!String.IsNullOrEmpty(options.KeywordOptions))
+      {
+        var keywordOptions = options.KeywordOptions
+          .Split(KEYWORD_OPTION_SEPARATOR)
+          .Select(x => {
+            var keyAndValue = x.Split(KEY_VALUE_SEPARATOR);
+            return (keyAndValue.Length == 2)? new { Key = keyAndValue[0], Value = keyAndValue[1] } : null;
+          })
+          .Where(x => x != null);
+
+        foreach(var option in keywordOptions)
+        {
+          contextFactory.AddKeywordOption(option.Key, option.Value);
+        }
+      }
     }
 
     /// <summary>
@@ -59,16 +91,16 @@ namespace CSF.Zpt.Cli
         .AddFlag(   x => x.EnableSourceAnnotation,            longName: "annotate")
         .AddFlag(   x => x.OmitXmlDeclarations,               longName: "no-xml-declaration")
         .AddFlag(   x => x.DoNotOutputIndentedXml,            longName: "no-indent-xml")
+        .AddValue(  x => x.XmlIndentationCharacters,          longName: "xml-indent-chars",                           optional: false)
         .AddFlag(   x => x.ShowUsageStatement,                longName: "help",                       shortName: "?")
-        .AddFlag(   x => x.DoNotAddDocumentsMetalRootObject,  longName: "no-documents-root")
-        .AddValue(  x => x.TemplateFilenamePattern,           longName: "template-filename-pattern",  shortName: "t", optional: false)
-        .AddValue(  x => x.OutputPath,                        longName: "out",                        shortName: "o", optional: false)
+        .AddFlag(   x => x.DoNotAddDocumentsMetalRootObject,  longName: "no-documents-global")
+        .AddValue(  x => x.InputFilenamePattern,              longName: "input-filename-pattern",     shortName: "p", optional: false)
+        .AddValue(  x => x.OutputPath,                        longName: "output",                     shortName: "o", optional: false)
         .AddValue(  x => x.OutputFilenameExtension,           longName: "output-filename-extension",  shortName: "e", optional: false)
         .AddValue(  x => x.IgnoredPaths,                      longName: "ignore",                     shortName: "i", optional: false)
         .AddValue(  x => x.KeywordOptions,                    longName: "keyword-options",                            optional: false)
         .AddValue(  x => x.RenderingContextFactoryClassName,  longName: "rendering-context-factory",                  optional: false)
-        .AddValue(  x => x.OutputEncoding,                    longName: "out-encoding",               shortName: "n", optional: false)
-        .AddValue(  x => x.XmlIndentationCharacters,          longName: "xml-indent-chars",                           optional: false)
+        .AddValue(  x => x.OutputEncoding,                    longName: "output-encoding",            shortName: "n", optional: false)
         .AddValue(  x => x.ContextVisitorClassNames,          longName: "context-visitors",                           optional: false)
         .RemainingArguments(x => x.InputPaths)
         .Build();
@@ -99,6 +131,7 @@ namespace CSF.Zpt.Cli
       _commandLineOptions = _parameterParser.Parse(args);
       _contextVisitorFactory = contextVisitorFactory?? new ContextVisitorFactory();
       _contextFactoryFactory = contextFactoryFactory?? new RenderingContextFactoryFactory();
+      _ioInfoCreator = new InputOutputInfoCreator();
     }
 
     #endregion

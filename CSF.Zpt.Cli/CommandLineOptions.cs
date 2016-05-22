@@ -26,7 +26,7 @@ namespace CSF.Zpt.Cli
       set;
     }
 
-    public string TemplateFilenamePattern
+    public string InputFilenamePattern
     {
       get;
       set;
@@ -112,11 +112,35 @@ namespace CSF.Zpt.Cli
 
     #endregion
 
+    #region methods
+
+    public RenderingMode GetRenderingMode()
+    {
+      RenderingMode output;
+
+      if(ForceXmlMode)
+      {
+        output = RenderingMode.Xml;
+      }
+      if(ForceHtmlMode)
+      {
+        output = RenderingMode.Html;
+      }
+      else
+      {
+        output = RenderingMode.AutoDetect;
+      }
+
+      return output;
+    }
+
+    #endregion
+
     #region constructor
 
     public CommandLineOptions()
     {
-      TemplateFilenamePattern = "*.pt";
+      InputFilenamePattern = "*.pt";
       OutputEncoding = Encoding.UTF8.WebName;
       XmlIndentationCharacters = "  ";
     }

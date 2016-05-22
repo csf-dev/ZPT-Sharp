@@ -31,6 +31,9 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="log4net">
+      <HintPath>..\packages\log4net.2.0.3\lib\net40-full\log4net.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="..\Common\CommonAssemblyInfo.cs">
@@ -39,6 +42,10 @@
     <Compile Include="AssemblyInfo.cs" />
     <Compile Include="EntryPoint.cs" />
     <Compile Include="CommandLineOptions.cs" />
+    <Compile Include="Renderer.cs" />
+    <Compile Include="RenderingMode.cs" />
+    <Compile Include="InputOutputInfo.cs" />
+    <Compile Include="InputOutputInfoCreator.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
@@ -54,5 +61,8 @@
       <Project>{E563D7BC-1AB1-4AFB-8533-51315437C6E6}</Project>
       <Name>CSF</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
 </Project>

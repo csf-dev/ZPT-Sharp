@@ -114,6 +114,17 @@ namespace CSF.Zpt.Tales
     }
 
     /// <summary>
+    /// Adds a keyword option to contexts created by the current instance.
+    /// </summary>
+    /// <param name="key">Key.</param>
+    /// <param name="value">Value.</param>
+    public void AddKeywordOption(string key, string value)
+    {
+      // TODO: Write this implementation
+      throw new NotImplementedException();
+    }
+
+    /// <summary>
     /// Populates a METAL model from the state of the current instance.
     /// </summary>
     /// <param name="model">Model.</param>

@@ -11,6 +11,13 @@ namespace CSF.Zpt.Rendering
     /// Create a context instance.
     /// </summary>
     RenderingContext Create(ZptElement element, RenderingOptions options);
+
+    /// <summary>
+    /// Adds a keyword option to contexts created by the current instance.
+    /// </summary>
+    /// <param name="key">Key.</param>
+    /// <param name="value">Value.</param>
+    void AddKeywordOption(string key, string value);
   }
 }
 
