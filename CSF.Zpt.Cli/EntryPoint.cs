@@ -41,7 +41,7 @@ namespace CSF.Zpt.Cli
       var inputOutputInfo = _ioInfoCreator.GetInfo(_commandLineOptions);
       var renderingMode = _commandLineOptions.GetRenderingMode();
 
-      _renderer.Render(options, inputOutputInfo, renderingMode, !_commandLineOptions.DoNotAddDocumentsMetalRootObject);
+      _renderer.Render(options, inputOutputInfo, renderingMode);
     }
 
     private RenderingOptions CreateRenderingOptions(CommandLineOptions options)
@@ -93,7 +93,6 @@ namespace CSF.Zpt.Cli
         .AddFlag(   x => x.DoNotOutputIndentedXml,            longName: "no-indent-xml")
         .AddValue(  x => x.XmlIndentationCharacters,          longName: "xml-indent-chars",                           optional: false)
         .AddFlag(   x => x.ShowUsageStatement,                longName: "help",                       shortName: "?")
-        .AddFlag(   x => x.DoNotAddDocumentsMetalRootObject,  longName: "no-documents-global")
         .AddValue(  x => x.InputFilenamePattern,              longName: "input-filename-pattern",     shortName: "p", optional: false)
         .AddValue(  x => x.OutputPath,                        longName: "output",                     shortName: "o", optional: false)
         .AddValue(  x => x.OutputFilenameExtension,           longName: "output-filename-extension",  shortName: "e", optional: false)
@@ -120,7 +119,9 @@ namespace CSF.Zpt.Cli
     public EntryPoint(string[] args,
                       IParameterParser<CommandLineOptions> parameterParser = null,
                       IContextVisitorFactory contextVisitorFactory = null,
-                      IRenderingContextFactoryFactory contextFactoryFactory = null)
+                      IRenderingContextFactoryFactory contextFactoryFactory = null,
+                      InputOutputInfoCreator inputOutputCreator = null,
+                      Renderer renderer = null)
     {
       if(args == null)
       {
@@ -131,7 +132,8 @@ namespace CSF.Zpt.Cli
       _commandLineOptions = _parameterParser.Parse(args);
       _contextVisitorFactory = contextVisitorFactory?? new ContextVisitorFactory();
       _contextFactoryFactory = contextFactoryFactory?? new RenderingContextFactoryFactory();
-      _ioInfoCreator = new InputOutputInfoCreator();
+      _ioInfoCreator = inputOutputCreator?? new InputOutputInfoCreator();
+      _renderer = renderer?? new Renderer();
     }
 
     #endregion

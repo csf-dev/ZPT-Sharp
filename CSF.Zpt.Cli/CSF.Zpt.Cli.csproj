@@ -46,6 +46,7 @@
     <Compile Include="RenderingMode.cs" />
     <Compile Include="InputOutputInfo.cs" />
     <Compile Include="InputOutputInfoCreator.cs" />
+    <Compile Include="RenderingJob.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

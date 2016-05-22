@@ -104,12 +104,6 @@ namespace CSF.Zpt.Cli
       set;
     }
 
-    public bool DoNotAddDocumentsMetalRootObject
-    {
-      get;
-      set;
-    }
-
     #endregion
 
     #region methods

@@ -67,20 +67,23 @@ namespace CSF.Zpt.Cli
     private FileSystemInfo GetOutputPath(CommandLineOptions options)
     {
       FileSystemInfo output;
-      var absolutePath = MakeAbsolutePath(options.OutputPath);
 
       if(options.OutputPath == null)
       {
         output = null;
       }
-      else if(Directory.Exists(absolutePath))
-      {
-        output = new DirectoryInfo(absolutePath);
-      }
       else
       {
-        var file = new FileInfo(absolutePath);
-        output = file.Directory.Exists? file : null;
+        var absolutePath = MakeAbsolutePath(options.OutputPath);
+        if(Directory.Exists(absolutePath))
+        {
+          output = new DirectoryInfo(absolutePath);
+        }
+        else
+        {
+          var file = new FileInfo(absolutePath);
+          output = file.Directory.Exists? file : null;
+        }
       }
 
       return output;

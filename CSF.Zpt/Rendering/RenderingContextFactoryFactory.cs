@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Reflection;
+using CSF.Zpt.Tales;
 
 namespace CSF.Zpt.Rendering
 {
@@ -13,8 +15,24 @@ namespace CSF.Zpt.Rendering
     /// <param name="className">The class name for the desired factory instance.</param>
     public IRenderingContextFactory Create(string className)
     {
-      // TODO: Write this implementation
-      throw new NotImplementedException();
+      IRenderingContextFactory output;
+      Type outputType;
+
+      if(String.IsNullOrEmpty(className))
+      {
+        output = new TalesRenderingContextFactory();
+      }
+      else if((outputType = Type.GetType(className)) != null
+              && typeof(IRenderingContextFactory).IsAssignableFrom(outputType))
+      {
+        output = (IRenderingContextFactory) Activator.CreateInstance(outputType);
+      }
+      else
+      {
+        output = new TalesRenderingContextFactory();
+      }
+
+      return output;
     }
   }
 }

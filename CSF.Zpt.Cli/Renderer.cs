@@ -19,17 +19,19 @@ namespace CSF.Zpt.Cli
 
     public void Render(RenderingOptions options,
                        InputOutputInfo inputOutputInfo,
-                       RenderingMode mode,
-                       bool addDocumentsMetalGlobal)
+                       RenderingMode mode)
     {
-      // TODO: Write this implementation
-      throw new NotImplementedException();
+      var jobs = GetRenderingJobs(inputOutputInfo, mode);
+
+      foreach(var job in jobs)
+      {
+        Render(job, options, inputOutputInfo);
+      }
     }
 
-    private IEnumerable<Tuple<FileInfo,IZptDocument>> GetInputDocuments(InputOutputInfo inputOutputInfo,
-                                                                        RenderingMode mode)
+    private IEnumerable<RenderingJob> GetRenderingJobs(InputOutputInfo inputOutputInfo, RenderingMode mode)
     {
-      IEnumerable<Tuple<FileInfo,IZptDocument>> output;
+      IEnumerable<RenderingJob> output;
 
       if(inputOutputInfo.UseStandardInput)
       {
@@ -43,7 +45,7 @@ namespace CSF.Zpt.Cli
       return output;
     }
 
-    private IEnumerable<Tuple<FileInfo,IZptDocument>> ReadFromStandardInput(RenderingMode mode)
+    private IEnumerable<RenderingJob> ReadFromStandardInput(RenderingMode mode)
     {
       IZptDocument output;
 
@@ -59,24 +61,24 @@ namespace CSF.Zpt.Cli
         }
       }
 
-      return new [] { new Tuple<FileInfo, IZptDocument>(null, output) };
+      return new [] { new RenderingJob(output) };
     }
 
-    private IEnumerable<Tuple<FileInfo,IZptDocument>> ReadFromInputPaths(InputOutputInfo inputOutputInfo,
-                                                                         RenderingMode mode)
+    private IEnumerable<RenderingJob> ReadFromInputPaths(InputOutputInfo inputOutputInfo,
+                                                         RenderingMode mode)
     {
       return inputOutputInfo.InputPaths.SelectMany(x => GetDocuments(x, inputOutputInfo, mode));
     }
 
-    private IEnumerable<Tuple<FileInfo,IZptDocument>> GetDocuments(FileSystemInfo inputPath,
-                                                                   InputOutputInfo inputOutputInfo,
-                                                                   RenderingMode mode)
+    private IEnumerable<RenderingJob> GetDocuments(FileSystemInfo inputPath,
+                                                   InputOutputInfo inputOutputInfo,
+                                                   RenderingMode mode)
     {
-      IEnumerable<Tuple<FileInfo,IZptDocument>> output;
+      IEnumerable<RenderingJob> output;
 
       if(inputPath != null && (inputPath is FileInfo))
       {
-        output = new [] { GetDocument((FileInfo) inputPath, mode) };
+        output = new [] { CreateRenderingJob((FileInfo) inputPath, mode, null) };
       }
       else if(inputPath != null && (inputPath is DirectoryInfo))
       {
@@ -84,17 +86,17 @@ namespace CSF.Zpt.Cli
         output = (from file in dir.GetFiles(inputOutputInfo.InputSearchPattern, SearchOption.AllDirectories)
                   from ignoredDirectory in inputOutputInfo.IgnoredPaths
                   where !file.IsChildOf(ignoredDirectory)
-                  select GetDocument(file, mode));
+                  select CreateRenderingJob(file, mode, dir));
       }
       else
       {
-        output = new Tuple<FileInfo,IZptDocument>[0];
+        output = new RenderingJob[0];
       }
 
       return output;
     }
 
-    private Tuple<FileInfo,IZptDocument> GetDocument(FileInfo file, RenderingMode mode)
+    private RenderingJob CreateRenderingJob(FileInfo file, RenderingMode mode, DirectoryInfo sourceDirectory)
     {
       IZptDocument output;
 
@@ -111,7 +113,50 @@ namespace CSF.Zpt.Cli
         output = _documentFactory.CreateDocument(file);
       }
 
-      return new Tuple<FileInfo, IZptDocument>(file, output);
+      return new RenderingJob(output, file, sourceDirectory);
+    }
+
+    private void Render(RenderingJob job,
+                        RenderingOptions options,
+                        InputOutputInfo inputOutputInfo)
+    {
+      using(var outputStream = GetOutputStream(job, inputOutputInfo))
+      using(var writer = new StreamWriter(outputStream, options.OutputEncoding))
+      {
+        job.Document.Render(writer, options);
+      }
+    }
+
+    private Stream GetOutputStream(RenderingJob job, InputOutputInfo inputOutputInfo)
+    {
+      Stream output;
+
+      if(inputOutputInfo.UseStandardOutput)
+      {
+        output = Console.OpenStandardOutput();
+      }
+      else if(inputOutputInfo.OutputPath is FileInfo)
+      {
+        output = ((FileInfo) inputOutputInfo.OutputPath).Open(FileMode.Create);
+      }
+      else
+      {
+        var relativePath = job.SourceFile.GetRelative(job.SourceDirectory);
+        var outputPath = inputOutputInfo.OutputPath.FullName;
+        var outputFile = new FileInfo(Path.Combine(outputPath, relativePath));
+        output = outputFile.Open(FileMode.Create);
+      }
+
+      return output;
+    }
+
+    #endregion
+
+    #region constructors
+
+    public Renderer(IZptDocumentFactory documentFactory = null)
+    {
+      _documentFactory = documentFactory?? new ZptDocumentFactory();
     }
 
     #endregion
