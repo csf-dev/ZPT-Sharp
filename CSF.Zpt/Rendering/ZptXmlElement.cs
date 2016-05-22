@@ -324,9 +324,14 @@ namespace CSF.Zpt.Rendering
       string query;
       var nsManager = new XmlNamespaceManager(new NameTable());
 
-      if(String.IsNullOrEmpty(attributeNamespace.Uri) || this.IsInNamespace(attributeNamespace))
+      if(String.IsNullOrEmpty(attributeNamespace.Uri))
       {
         query = String.Concat("@", name);
+      }
+      else if(this.IsInNamespace(attributeNamespace))
+      {
+        nsManager.AddNamespace("search", attributeNamespace.Uri);
+        query = String.Concat("@search:", name, "|", name);
       }
       else
       {

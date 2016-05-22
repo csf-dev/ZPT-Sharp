@@ -146,6 +146,8 @@ namespace CSF.Zpt.Cli
     /// <param name="args">The command-line arguments.</param>
     public static void Main(string[] args)
     {
+      log4net.Config.XmlConfigurator.Configure();
+
       var app = new EntryPoint(args);
 
       app.Begin();

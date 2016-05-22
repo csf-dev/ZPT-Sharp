@@ -116,7 +116,7 @@ namespace CSF.Zpt.Cli
       {
         output = RenderingMode.Xml;
       }
-      if(ForceHtmlMode)
+      else if(ForceHtmlMode)
       {
         output = RenderingMode.Html;
       }

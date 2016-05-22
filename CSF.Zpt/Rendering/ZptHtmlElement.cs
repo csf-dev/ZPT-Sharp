@@ -321,7 +321,21 @@ namespace CSF.Zpt.Rendering
 
       var attribName = this.IsInNamespace(attributeNamespace)? name : GetNameWithPrefix(attributeNamespace, name);
       var htmlAttribute = this.Node.Attributes
-        .FirstOrDefault(x => x.Name == attribName);
+        .FirstOrDefault(x => {
+          bool output;
+          string nameWithPrefix = GetNameWithPrefix(attributeNamespace, name);
+
+          if(this.IsInNamespace(attributeNamespace))
+          {
+            output = (x.Name == attribName || x.Name == nameWithPrefix);
+          }
+          else
+          {
+            output = x.Name == nameWithPrefix;
+          }
+
+          return output;
+        });
 
       return (htmlAttribute != null)? new ZptHtmlAttribute(htmlAttribute) : null;
     }

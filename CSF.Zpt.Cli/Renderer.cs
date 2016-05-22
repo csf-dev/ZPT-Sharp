@@ -13,6 +13,7 @@ namespace CSF.Zpt.Cli
     #region fields
 
     private IZptDocumentFactory _documentFactory;
+    private log4net.ILog _logger;
 
     #endregion
 
@@ -26,6 +27,7 @@ namespace CSF.Zpt.Cli
 
       foreach(var job in jobs)
       {
+        _logger.DebugFormat("Rendering output for: {0}", job.SourceFile.FullName);
 
         Action<RenderingContext> contextConfigurator = ctx => {
           if(job.SourceDirectory != null)
@@ -93,10 +95,18 @@ namespace CSF.Zpt.Cli
       else if(inputPath != null && (inputPath is DirectoryInfo))
       {
         var dir = (DirectoryInfo) inputPath;
+
+        _logger.DebugFormat("Searching directory {0} for files", dir.FullName);
+
         output = (from file in dir.GetFiles(inputOutputInfo.InputSearchPattern, SearchOption.AllDirectories)
-                  from ignoredDirectory in inputOutputInfo.IgnoredPaths
-                  where !file.IsChildOf(ignoredDirectory)
+                  from ignoredDirectory in inputOutputInfo.IgnoredPaths.DefaultIfEmpty()
+                  where 
+                    ignoredDirectory == null
+                    || !file.IsChildOf(ignoredDirectory)
                   select CreateRenderingJob(file, mode, dir));
+
+        _logger.DebugFormat("{0} rendering jobs found", output.Count());
+
       }
       else
       {
@@ -157,6 +167,13 @@ namespace CSF.Zpt.Cli
         var relativePath = job.SourceFile.GetRelative(job.SourceDirectory);
         var outputPath = inputOutputInfo.OutputPath.FullName;
         var outputFile = new FileInfo(System.IO.Path.Combine(outputPath, relativePath));
+
+        var parentDir = outputFile.GetParent();
+        if(!parentDir.Exists)
+        {
+          parentDir.CreateRecursive();
+        }
+
         output = outputFile.Open(FileMode.Create);
       }
 
@@ -169,6 +186,7 @@ namespace CSF.Zpt.Cli
 
     public Renderer(IZptDocumentFactory documentFactory = null)
     {
+      _logger = log4net.LogManager.GetLogger(this.GetType());
       _documentFactory = documentFactory?? new ZptDocumentFactory();
     }
 
