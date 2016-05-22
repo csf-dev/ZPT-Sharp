@@ -88,7 +88,7 @@ namespace CSF.Zpt.Cli
 
       if(inputPath != null && (inputPath is FileInfo))
       {
-        output = new [] { CreateRenderingJob((FileInfo) inputPath, mode, null) };
+        output = new [] { CreateRenderingJob((FileInfo) inputPath, mode, inputPath.GetParent()) };
       }
       else if(inputPath != null && (inputPath is DirectoryInfo))
       {
