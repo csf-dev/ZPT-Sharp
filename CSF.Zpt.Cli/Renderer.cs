@@ -186,7 +186,13 @@ namespace CSF.Zpt.Cli
 
       if(inputOutputInfo.OutputExtensionOverride != null)
       {
-        newFilename = String.Concat(filenameWithoutExtension, inputOutputInfo.OutputExtensionOverride);
+        string newExtension = inputOutputInfo.OutputExtensionOverride;
+        if(!newExtension.StartsWith("."))
+        {
+          newExtension = String.Concat(".", newExtension);
+        }
+
+        newFilename = String.Concat(filenameWithoutExtension, newExtension);
       }
       else if(job.Document is ZptXmlDocument)
       {
@@ -200,6 +206,10 @@ namespace CSF.Zpt.Cli
       var tempOutputPath = new FileInfo(System.IO.Path.Combine(job.SourceFile.GetParent().FullName, newFilename));
 
       var relativePath = tempOutputPath.GetRelative(job.SourceDirectory);
+      if(relativePath.StartsWith(System.IO.Path.DirectorySeparatorChar.ToString()))
+      {
+        relativePath = relativePath.Substring(1);
+      }
       var outputPath = inputOutputInfo.OutputPath.FullName;
       return new FileInfo(System.IO.Path.Combine(outputPath, relativePath));
     }

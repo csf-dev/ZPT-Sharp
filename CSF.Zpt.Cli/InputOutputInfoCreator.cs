@@ -23,7 +23,7 @@ namespace CSF.Zpt.Cli
 
     public InputOutputInfo GetInfo(CommandLineOptions options)
     {
-      var inputFiles = options.InputPaths.Select(GetInputFile);
+      var inputFiles = options.InputPaths.Select(GetInputFile).ToArray();
       var useStdin = ReadFromStandardInput(inputFiles);
       var ignoredPaths = GetIgnoredPaths(options);
 
