@@ -164,10 +164,8 @@ namespace CSF.Zpt.Cli
       }
       else
       {
-        var relativePath = job.SourceFile.GetRelative(job.SourceDirectory);
-        var outputPath = inputOutputInfo.OutputPath.FullName;
-        var outputFile = new FileInfo(System.IO.Path.Combine(outputPath, relativePath));
-
+        var outputFile = GetOutputFile(job, inputOutputInfo);
+          
         var parentDir = outputFile.GetParent();
         if(!parentDir.Exists)
         {
@@ -178,6 +176,32 @@ namespace CSF.Zpt.Cli
       }
 
       return output;
+    }
+
+    private FileInfo GetOutputFile(RenderingJob job, InputOutputInfo inputOutputInfo)
+    {
+      var extension = job.SourceFile.Extension;
+      var filenameWithoutExtension = job.SourceFile.Name.Substring(0, job.SourceFile.Name.Length - extension.Length);
+      string newFilename;
+
+      if(inputOutputInfo.OutputExtensionOverride != null)
+      {
+        newFilename = String.Concat(filenameWithoutExtension, inputOutputInfo.OutputExtensionOverride);
+      }
+      else if(job.Document is ZptXmlDocument)
+      {
+        newFilename = String.Concat(filenameWithoutExtension, ".xml");
+      }
+      else
+      {
+        newFilename = String.Concat(filenameWithoutExtension, ".html");
+      }
+
+      var tempOutputPath = new FileInfo(System.IO.Path.Combine(job.SourceFile.GetParent().FullName, newFilename));
+
+      var relativePath = tempOutputPath.GetRelative(job.SourceDirectory);
+      var outputPath = inputOutputInfo.OutputPath.FullName;
+      return new FileInfo(System.IO.Path.Combine(outputPath, relativePath));
     }
 
     #endregion
