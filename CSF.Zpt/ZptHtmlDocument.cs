@@ -160,6 +160,13 @@ namespace CSF.Zpt
       _sourceFile = sourceFile;
     }
 
+    static ZptHtmlDocument()
+    {
+      HtmlNode.ElementsFlags["script"] = 0;
+      HtmlNode.ElementsFlags["style"] = 0;
+      HtmlNode.ElementsFlags["noxhtml"] = 0;
+    }
+
     #endregion
   }
 }
