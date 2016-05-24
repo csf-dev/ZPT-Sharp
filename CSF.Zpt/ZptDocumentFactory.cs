@@ -45,7 +45,7 @@ namespace CSF.Zpt
     /// Gets the supported file extensions.
     /// </summary>
     /// <value>The supported file extensions.</value>
-    public IEnumerable<string> SupportedFileExtensions
+    public virtual IEnumerable<string> SupportedFileExtensions
     {
       get {
         return _supportedExtensions;
@@ -64,7 +64,7 @@ namespace CSF.Zpt
     /// <param name="sourceFile">The source file.</param>
     public bool CanCreateFromFile(FileInfo sourceFile)
     {
-      return _supportedExtensions.Contains(sourceFile.Extension);
+      return (_forceDocumentType != null || _supportedExtensions.Contains(sourceFile.Extension));
     }
 
     /// <summary>

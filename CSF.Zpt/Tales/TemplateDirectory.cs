@@ -72,13 +72,18 @@ namespace CSF.Zpt.Tales
       output = base.HandleTalesPath(pathFragment, out exposedResult, currentContext);
 
       var templateFileInfo = exposedResult as FileInfo;
-      if(templateFileInfo != null)
+      if(output && templateFileInfo != null)
       {
-        // TODO: Write this implementation
-        throw new NotImplementedException();
-
-//        var doc = _documentFactory.CreateTemplateFile(templateFileInfo);
-//        exposedResult = doc;
+        var templateFactory = GetTemplateFactory(currentContext);
+        if(templateFactory.CanCreateFromFile(templateFileInfo))
+        {
+          var doc = templateFactory.CreateTemplateFile(templateFileInfo);
+          exposedResult = doc;
+        }
+        else
+        {
+          output = false;
+        }
       }
 
       result = exposedResult;
@@ -93,6 +98,12 @@ namespace CSF.Zpt.Tales
     protected override FilesystemDirectory CreateChild(DirectoryInfo directory)
     {
       return new TemplateDirectory(directory, this.MandatoryExtensions);
+    }
+
+    private ITemplateFileFactory GetTemplateFactory(Rendering.RenderingContext currentContext)
+    {
+      var currentDocType = currentContext.Element.ZptDocumentType;
+      return new ZptDocumentFactory(currentDocType);
     }
 
     #endregion
