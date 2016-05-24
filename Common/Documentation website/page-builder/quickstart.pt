@@ -1,0 +1,80 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      metal:use-macro="documents/macros/base-template/macros/document-structure">
+<head>
+<title metal:fill-slot="title">ZPT-Sharp Page Builder Quick-start</title>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<base href="../" />
+<style>
+@import url(static/css/default-styles.css);
+</style>
+</head>
+<body>
+<div class="page">
+  <div class="region_header dummy">
+    Header content is imported here
+  </div>
+  <div class="region_main">
+    <div class="main_navigation">
+      <div class="dummy">
+        Main navigation is imported here
+      </div>
+    </div>
+    <div class="region_content index" metal:fill-slot="region_content">
+      <h1>ZPT-Sharp Page Builder Quick-start</h1>
+      <p>
+        Zope Page Templates can also help you build <strong>static HTML</strong> websites that require
+        absolutely no server-side technologies to run.  Write your pages using the
+        <acronym title="Macro Expanded Template Attribute Language">METAL</acronym> and
+        <acronym title="Template Attribute Language">TAL</acronym> technologies and then make use of
+        ZPT-Sharp's page builder to assemble those components as an HTML website.
+      </p>
+      <h2>What the ZPT-Sharp Page Builder does</h2>
+      <p>
+        The ZPT-Sharp Page Builder is a commandline utility that takes a directory structure containing ZPT
+        documents, parses each document using the core ZPT functionality and then outputs the rendered
+        results of those documents into an output directory as static HTML documents.
+      </p>
+      <p>
+        The main motivation to use the ZPT Page Builder is gaining access to the flexibility that METAL
+        grants you in writing consistent pages, with reusable content regions, when the web hosting
+        environment will not support any server-side technologies such as
+        <a href="https://secure.wikimedia.org/wikipedia/en/wiki/Server_Side_Includes"
+           title="Server Side Includes">SSI</a>.
+        As an example, this documentation website was written 'offline' using ZPT and then assembled as a
+        static HTML website using the Page Builder.
+        <a href="https://github.com/CSF-Software-Development/ZPT-Sharp/tree/master/doc/documentation-website">The
+        source for this documentation website</a> is a good place to start if you would like to see an
+        example of how a ZPT-Sharp Page Builder is structured.
+      </p>
+      <h2>Using the ZPT-Sharp Page Builder</h2>
+      <p>
+        Firstly, you will want a grounding in
+        <a href="quickstart-syntax.html" title="ZPT syntax quickstart">the syntax of ZPT pages</a>,
+        paying particular attention to METAL, which is the technology that allows use and reuse of content
+        <strong>macros</strong>.  TAL may also be useful, especially in combination with the
+        <a href="page-builder/manual.html#options">options commandline parameter</a> but METAL
+        will be the bigger draw for Page Builder projects.
+      </p>
+      <p>
+        To assemble your directory structure of documents as a static HTML website, execute the page builder:
+        <code class="block">CraigFowler.Web.ZPT.Builder.exe -o "output/path" -e ".html" "input/path"</code>
+        This will read all of the files within the <code>input/path</code> (with a filename matching the
+        pattern <code>*.pt</code>) as ZPT documents.  The page builder will render each of those
+        documents, saving the output within <code>output/path</code> at the same location relative to the
+        the input path, with the filename extension <code>.html</code> instead of <code>.pt</code>.
+      </p>
+      <p>
+        For further information, take a look at the
+        <a href="page-builder/manual.html" title="ZPT-Sharp Page Builder manual">full manual</a>.
+      </p>
+    </div>
+  </div>
+  <div class="region_footer dummy">
+    Footer content is imported here
+  </div>
+</div>
+</body>
+</html>

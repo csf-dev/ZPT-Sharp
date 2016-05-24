@@ -15,7 +15,6 @@ namespace CSF.Zpt.Tales
 
     private DirectoryInfo _directory;
     private bool _mandatoryExtensions;
-    private ITemplateFileFactory _templateCreator;
 
     #endregion
 
@@ -60,18 +59,22 @@ namespace CSF.Zpt.Tales
     /// {
     ///   private Person _person;
     ///   
-    ///   public object HandleTalesPath(string pathFragment)
+    ///   public bool HandleTalesPath(string pathFragment, out object result, RenderingContext currentContext)
     ///   {
     ///     switch(pathFragment)
     ///     {
     ///     case: "name";
-    ///       return _person.Name;
+    ///       result = _person.Name;
+    ///       return true;
     ///     case: "address";
-    ///       return _person.Address.FullAddress;
+    ///       result = _person.Address.FullAddress;
+    ///       return true;
     ///     case: "gender":
-    ///       return _person.Gender.ToString();
+    ///       result = _person.Gender.ToString();
+    ///       return true;
     ///     default:
-    ///       return null;
+    ///       result = null;
+    ///       return false;
     ///     }
     ///   }
     /// }
@@ -85,7 +88,8 @@ namespace CSF.Zpt.Tales
     /// <returns><c>true</c> if the path traversal was a success; <c>false</c> otherwise.</returns>
     /// <param name="pathFragment">The path fragment.</param>
     /// <param name="result">Exposes the result if the traversal was a success</param>
-    public virtual bool HandleTalesPath(string pathFragment, out object result)
+    /// <param name="currentContext">Gets the current rendering context.</param>
+    public virtual bool HandleTalesPath(string pathFragment, out object result, Rendering.RenderingContext currentContext)
     {
       if(pathFragment == null)
       {
@@ -108,14 +112,6 @@ namespace CSF.Zpt.Tales
       {
         var exposedDirectory = (DirectoryInfo) output;
         output = this.CreateChild(exposedDirectory);
-      }
-      else if(output is FileInfo)
-      {
-        var exposedTemplateFile = (FileInfo) output;
-        if(_templateCreator.CanCreateFromFile(exposedTemplateFile))
-        {
-          output = _templateCreator.CreateTemplateFile(exposedTemplateFile);
-        }
       }
 
       result = output;
@@ -162,10 +158,8 @@ namespace CSF.Zpt.Tales
     /// </summary>
     /// <param name="directory">The root directory for the current instance.</param>
     /// <param name="mandatoryExtensions">A value indicating whether filename extensions are mandatory or not.</param>
-    /// <param name="templateCreator">An implementation of <see cref="ITemplateFileFactory"/>.</param>
     public FilesystemDirectory(DirectoryInfo directory,
-                               bool mandatoryExtensions = false,
-                               ITemplateFileFactory templateCreator = null)
+                               bool mandatoryExtensions = false)
     {
       if(directory == null)
       {
@@ -174,7 +168,6 @@ namespace CSF.Zpt.Tales
 
       _directory = directory;
       _mandatoryExtensions = mandatoryExtensions;
-      _templateCreator = templateCreator?? new ZptDocumentFactory();
     }
 
     #endregion

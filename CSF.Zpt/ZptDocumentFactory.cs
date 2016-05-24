@@ -27,6 +27,16 @@ namespace CSF.Zpt
 
     private static readonly Encoding DefaultEncoding = Encoding.UTF8;
 
+    private static readonly Type
+      HtmlDocumentType = typeof(ZptHtmlDocument),
+      XmlDocumentType = typeof(ZptXmlDocument);
+
+    #endregion
+
+    #region fields
+
+    private Type _forceDocumentType;
+
     #endregion
 
     #region properties
@@ -35,7 +45,7 @@ namespace CSF.Zpt
     /// Gets the supported file extensions.
     /// </summary>
     /// <value>The supported file extensions.</value>
-    public IEnumerable<string> SupportedFileExtensions
+    public virtual IEnumerable<string> SupportedFileExtensions
     {
       get {
         return _supportedExtensions;
@@ -54,7 +64,7 @@ namespace CSF.Zpt
     /// <param name="sourceFile">The source file.</param>
     public bool CanCreateFromFile(FileInfo sourceFile)
     {
-      return _supportedExtensions.Contains(sourceFile.Extension);
+      return (_forceDocumentType != null || _supportedExtensions.Contains(sourceFile.Extension));
     }
 
     /// <summary>
@@ -74,11 +84,15 @@ namespace CSF.Zpt
       encoding = encoding?? DefaultEncoding;
       var extension = sourceFile.Extension;
 
-      if(HtmlSuffixes.Contains(extension))
+      if(_forceDocumentType == HtmlDocumentType
+         || (_forceDocumentType == null
+             && HtmlSuffixes.Contains(extension)))
       {
         output = this.CreateHtmlDocument(sourceFile, encoding);
       }
-      else if(XmlSuffixes.Contains(extension))
+      else if(_forceDocumentType == XmlDocumentType
+              || (_forceDocumentType == null
+                  && XmlSuffixes.Contains(extension)))
       {
         output = this.CreateXmlDocument(sourceFile, encoding);
       }
@@ -202,6 +216,22 @@ namespace CSF.Zpt
       }
 
       return new ZptXmlDocument(doc, sourceInfo);
+    }
+
+    #endregion
+
+    #region constructor
+
+    /// <summary>
+    /// Initializes a new instance of the <see cref="CSF.Zpt.ZptDocumentFactory"/> class.
+    /// </summary>
+    /// <param name="forceDocumentType">
+    /// An optional <c>System.Type</c> indicating the type to create when using <see cref="CreateDocument"/> or
+    /// <see cref="CreateTemplateFile"/>.
+    /// </param>
+    public ZptDocumentFactory(Type forceDocumentType = null)
+    {
+      _forceDocumentType = forceDocumentType;
     }
 
     #endregion

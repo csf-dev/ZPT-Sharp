@@ -1,0 +1,181 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      metal:use-macro="documents/macros/base-template/macros/document-structure">
+<head>
+<title metal:fill-slot="title">ZPT example and explanation</title>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<base href="." />
+<style>
+@import url(static/css/default-styles.css);
+</style>
+</head>
+<body>
+<div class="page">
+  <div class="region_header dummy">
+    Header content is imported here
+  </div>
+  <div class="region_main">
+    <div class="main_navigation">
+      <div class="dummy">
+        Main navigation is imported here
+      </div>
+      <div metal:fill-slot="document_navigation" class="document_navigation">
+        <h5>Document navigation</h5>
+        <ol>
+          <li><a href="example.html#markup_file">The markup file</a></li>
+          <li><a href="example.html#object_graph">Passing objects</a></li>
+          <li><a href="example.html#rendered_output">The rendered output</a></li>
+          <li><a href="example.html#explanation">Explanation</a></li>
+        </ol>
+      </div>
+    </div>
+    <div class="region_content example" metal:fill-slot="region_content">
+      <h1>ZPT example</h1>
+      <p>
+        This page provides an example of a ZPT source markup file and shows how it would be turned into an output XHTML
+        document by the ZPT rendering engine for some dynamic data supplied to that template.  At the
+        bottom of the page is an explanation of how the source file describes how it should be processed.
+      </p>
+      <h2 id="markup_file">The ZPT source markup file</h2>
+      <code class="block">&lt;html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"&gt;
+&lt;head&gt;
+&lt;title&gt;My first ZPT document&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;h1&gt;My favourite dwarves&lt;/h1&gt;
+&lt;ul&gt;
+  &lt;li tal:repeat="dwarf preferences/Dwarves"&gt;
+    &lt;span tal:replace="dwarf/Name"&gt;Grumpy&lt;/span&gt;
+    &lt;span class="reason" tal:content="dwarf/Reason"&gt;
+      He's so cynical, just like me!
+    &lt;/span&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code>
+      <p>
+        Notice how the underlying structure of the document is XHTML.  In fact, everything that makes this a ZPT
+        document is happening in <strong>attributes</strong> in the 'tal' namespace.  This example document also
+        declares the 'metal' namespace for completeness but it doesn't actually make use of any directives from it.
+      </p>
+      <p>
+        The great thing is that <em>every valid ZPT document is also a valid XHTML document</em>.  You could actually
+        copy-paste that code above into a text file, give it an .xhtml or .html extension and any browser will render
+        it as a nice-looking web page (IE 8 and below can only handle the .html extension because it's not really
+        XHTML-aware).
+      </p>
+      <h2 id="object_graph">Passing an object graph to the ZPT engine</h2>
+      <p>
+        The template above needs some data to fill out those placeholders.  What we will be doing is supplying an object
+        graph/tree into the ZPT engine.  For this example we will construct a very simple object graph in C# for
+        filling out the template:
+      </p>
+      <code class="block">public class DwarfPreferenceCollection
+{
+  public Dwarf[] Dwarves = new Dwarf[] {
+    new Dwarf("Happy", "He always puts a smile on my face."),
+    new Dwarf("Dopey", "He reminds me of myself before my morning coffee.")
+  };
+  
+  public class Dwarf
+  {
+    public string Name;
+    public string Reason;
+    
+    public Dwarf(string name, string reason)
+    {
+      this.Name = name;
+      this.Reason = reason;
+    }
+  }
+}
+
+// This code would go in a method that prepares the document for output:
+document.TalesContext.AddDefinition("preferences",
+                                    new DwarfPreferenceCollection());
+</code>
+      <p>
+        For now, don't worry what a <acronym title="Template Attribute Language Expression Syntax">TALES</acronym>
+        context is - just accept that we have made an object available to the document, and that object is aliased
+        'preferences'.
+      </p>
+      <h2 id="rendered_output">The rendered output</h2>
+      <p>
+        The rendered XHTML output (once the source file has been through the ZPT engine) would look like this:
+      </p>
+      <code class="block">&lt;html xmlns="http://www.w3.org/1999/xhtml"&gt;
+&lt;head&gt;
+&lt;title&gt;My first ZPT document&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;h1&gt;My favourite dwarves&lt;/h1&gt;
+&lt;ul&gt;
+  &lt;li&gt;
+    Happy
+    &lt;span class="reason"&gt;
+     He always puts a smile on my face.
+    &lt;/span&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    Dopey
+    &lt;span class="reason"&gt;
+     He reminds me of myself before my morning coffee.
+    &lt;/span&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code>
+      <h2 id="explanation">Explanation of rendering</h2>
+      <p>
+        So what happened here?  How did we go from the source markup file plus the object graph to the rendered
+        output?  Here is an explanation, focussing on each of the parts of the source file that differ from a plain
+        XHTML document.
+      </p>
+      <ol>
+        <li>
+          Firstly, two additional namespaces are declared at the top of the document; these are the
+          <acronym title="Template Attribute Language">TAL</acronym> namespace and the
+          <acronym title="Macro Extended Template Attribute Language">METAL</acronym> namespaces.  The namespaces are
+          part of the ZPT specification and these declaration make up the boilerplate that declares the file as a ZPT
+          document.
+        </li>
+        <li>
+          See the directive <code>tal:repeat="dwarf preferences/Dwarves"</code>?  This is how ZPT handles repetition of
+          an XML element.  The <code>&lt;li&gt;</code> element that the <strong>repeat</strong> directive is defined on
+          and everything within that element will be repeated for every object found within the reference
+          <code>preferences/Dwarves</code>.  It doesn't take much to guess that this is a reference into the variable
+          we passed the ZPT engine, equivalent to the C# <code>preferences.Dwarves</code>.  In fact, repeat works
+          a lot like a C# <strong>foreach</strong> loop: for every repetition, the current object found within
+          preferences/Dwarves is assigned to a variable definition named <code>dwarf</code>.
+        </li>
+        <li>
+          The next ZPT directive is the <code>tal:replace="dwarf/Name"</code> on a <code>&lt;span&gt;</code> element.
+          The <strong>replace</strong> directive tells the ZPT engine to replace the whole element that the replace
+          directive appears on (and any children) with the data found within the given reference.  The reference in this
+          case is <code>dwarf/Name</code>.  This is making use of the variable that was created by our repeat directive
+          above, it is referencing the Name field of the current dwarf object.  Notice how when the document is rendered
+          by a ZPT engine, the text "Grumpy" is completely removed from the output?  This is how ZPT source documents
+          can contain sample/dummy data for editing and development purposes.
+        </li>
+        <li>
+          Another new directive and the result should be expected by now.  <code>tal:content="dwarf/Reason"</code> tells
+          the ZPT parser to insert some content from a reference like the tal:replace directive above.  A
+          <strong>content</strong> directive, unlike replace, preserves the XML element that the directive was defined
+          upon though.  Otherwise it is identical in function to the replace directive.  Again, the sample/dummy content
+          that appeared in the source file is removed and replaced in the rendered output.
+        </li>
+      </ol>
+    </div>
+  </div>
+  <div class="region_footer dummy">
+    Footer content is imported here
+  </div>
+</div>
+</body>
+</html>

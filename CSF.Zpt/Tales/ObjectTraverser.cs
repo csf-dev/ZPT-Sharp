@@ -75,7 +75,8 @@ namespace CSF.Zpt.Tales
     /// <param name="source">The source object from which to perform traversal.</param>
     /// <param name="name">The named path of traversal.</param>
     /// <param name="result">Exposes the result of traversal.</param>
-    public bool Traverse(object source, string name, out object result)
+    /// <param name="currentContext">Gets the current rendering context.</param>
+    public bool Traverse(object source, string name, out object result, Rendering.RenderingContext currentContext)
     {
       if(name == null)
       {
@@ -92,7 +93,7 @@ namespace CSF.Zpt.Tales
       else if(source is ITalesPathHandler)
       {
         var pathHandler = (ITalesPathHandler) source;
-        output = pathHandler.HandleTalesPath(name, out result);
+        output = pathHandler.HandleTalesPath(name, out result, currentContext);
       }
       else
       {

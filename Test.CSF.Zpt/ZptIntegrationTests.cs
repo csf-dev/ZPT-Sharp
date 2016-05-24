@@ -165,9 +165,9 @@ namespace Test.CSF.Zpt
       var output = new TalesRenderingContextFactory();
 
       // The location of the other ZPT documents
-      output.MetalLocalDefinitions.Add("documents", new FilesystemDirectory(_sourcePath));
+      output.MetalLocalDefinitions.Add("documents", new TemplateDirectory(_sourcePath));
       var tests = new NamedObjectWrapper();
-      tests["input"] = new FilesystemDirectory(_sourcePath, true);
+      tests["input"] = new TemplateDirectory(_sourcePath, true);
       output.MetalLocalDefinitions.Add("tests", tests);
 
       // The 'content' keyword option

@@ -88,7 +88,7 @@ namespace CSF.Zpt.Tales
     /// <summary>
     /// Create a context instance.
     /// </summary>
-    public RenderingContext Create(ZptElement element, RenderingOptions options)
+    public virtual RenderingContext Create(ZptElement element, RenderingOptions options)
     {
       if(element == null)
       {
@@ -111,6 +111,17 @@ namespace CSF.Zpt.Tales
       PopulateTalModel(talModel);
 
       return new RenderingContext(metalModel, talModel, element, options);
+    }
+
+    /// <summary>
+    /// Adds a keyword option to contexts created by the current instance.
+    /// </summary>
+    /// <param name="key">Key.</param>
+    /// <param name="value">Value.</param>
+    public virtual void AddKeywordOption(string key, string value)
+    {
+      // TODO: Write this implementation
+      throw new NotImplementedException();
     }
 
     /// <summary>

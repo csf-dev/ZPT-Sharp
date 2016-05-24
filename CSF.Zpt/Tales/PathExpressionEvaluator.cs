@@ -124,7 +124,7 @@ namespace CSF.Zpt.Tales
           string partName;
 
           if(this.TryGetPartName(walker.CurrentPart, context, model, out partName)
-             && ObjectTraverser.Default.Traverse(result, partName, out traversalChild))
+             && ObjectTraverser.Default.Traverse(result, partName, out traversalChild, context))
           {
             result = traversalChild;
           }

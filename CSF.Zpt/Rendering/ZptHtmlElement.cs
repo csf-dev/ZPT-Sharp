@@ -66,6 +66,18 @@ namespace CSF.Zpt.Rendering
       }
     }
 
+    /// <summary>
+    /// Gets a <c>System.Type</c> indicating the type of <see cref="IZptDocument"/> to which the current instance
+    /// belongs.
+    /// </summary>
+    /// <value>The type of ZPT document implementation.</value>
+    public override Type ZptDocumentType
+    {
+      get {
+        return typeof(ZptHtmlDocument);
+      }
+    }
+
     #endregion
 
     #region methods
@@ -321,7 +333,21 @@ namespace CSF.Zpt.Rendering
 
       var attribName = this.IsInNamespace(attributeNamespace)? name : GetNameWithPrefix(attributeNamespace, name);
       var htmlAttribute = this.Node.Attributes
-        .FirstOrDefault(x => x.Name == attribName);
+        .FirstOrDefault(x => {
+          bool output;
+          string nameWithPrefix = GetNameWithPrefix(attributeNamespace, name);
+
+          if(this.IsInNamespace(attributeNamespace))
+          {
+            output = (x.Name == attribName || x.Name == nameWithPrefix);
+          }
+          else
+          {
+            output = x.Name == nameWithPrefix;
+          }
+
+          return output;
+        });
 
       return (htmlAttribute != null)? new ZptHtmlAttribute(htmlAttribute) : null;
     }

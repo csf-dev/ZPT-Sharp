@@ -14,6 +14,7 @@ namespace CSF.Zpt.Metal
     #region fields
 
     private MacroFinder _macroFinder;
+    private log4net.ILog _logger;
 
     #endregion
 
@@ -75,6 +76,9 @@ namespace CSF.Zpt.Metal
       var macroContext = context.CreateSiblingContext(macro);
 
       macroContext = this.ApplyMacroExtension(macroContext);
+
+      _logger.DebugFormat("Element to extend: {0}", macroContext.Element.Name);
+
       var extendedMacro = context.Element.ReplaceWith(macroContext.Element);
       if(context.RenderingOptions.AddSourceFileAnnotation)
       {
@@ -127,11 +131,18 @@ namespace CSF.Zpt.Metal
     private IDictionary<string,ZptElement> GetElementsByValue(ZptElement rootElement,
                                                            string desiredAttribute)
     {
-      return rootElement.SearchChildrenByMetalAttribute(desiredAttribute)
+      var output = rootElement.SearchChildrenByMetalAttribute(desiredAttribute)
         .Select(x => new {
           Element = x,
           Attribute = x.GetMetalAttribute(desiredAttribute)
-        })
+        });
+
+      foreach(var eleAttrPair in output)
+      {
+        _logger.DebugFormat("Element {0}, attribute: {1}", eleAttrPair.Element.Name, eleAttrPair.Attribute);
+      }
+
+      return output
         .ToDictionary(k => k.Attribute.Value, v => v.Element);
     }
 
@@ -191,6 +202,7 @@ namespace CSF.Zpt.Metal
     /// <param name="finder">A macro finder instance, or a null reference (in which case one will be constructed).</param>
     public MacroExpander(MacroFinder finder = null)
     {
+      _logger = log4net.LogManager.GetLogger(this.GetType());
       _macroFinder = finder?? new MacroFinder();
     }
 

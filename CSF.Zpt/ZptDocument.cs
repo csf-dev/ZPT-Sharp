@@ -18,7 +18,9 @@ namespace CSF.Zpt
     /// Renders the document to a <c>System.String</c>.
     /// </summary>
     /// <param name="options">The rendering options to use.  If <c>null</c> then default options are used.</param>
-    public virtual string Render(RenderingOptions options = null)
+    /// <param name="contextConfigurator">An optional action to perform upon the root <see cref="RenderingContext"/>, to configure it.</param>
+    public virtual string Render(RenderingOptions options = null,
+                                 Action<RenderingContext> contextConfigurator = null)
     {
       string output;
       var opts = this.GetOptions(options);
@@ -32,7 +34,7 @@ namespace CSF.Zpt
         stream = new MemoryStream();
 
         writer = new StreamWriter(stream, opts.OutputEncoding);
-        this.Render(writer, options);
+        this.Render(writer, options, contextConfigurator);
         writer.Flush();
 
         stream.Position = 0;
@@ -55,8 +57,10 @@ namespace CSF.Zpt
     /// </summary>
     /// <param name="writer">The text writer to render to.</param>
     /// <param name="options">The rendering options to use.  If <c>null</c> then default options are used.</param>
+    /// <param name="contextConfigurator">An optional action to perform upon the root <see cref="RenderingContext"/>, to configure it.</param>
     public virtual void Render(TextWriter writer,
-                               RenderingOptions options = null)
+                               RenderingOptions options = null,
+                               Action<RenderingContext> contextConfigurator = null)
     {
       if(writer == null)
       {
@@ -65,7 +69,7 @@ namespace CSF.Zpt
 
       var opts = this.GetOptions(options);
 
-      this.Render(writer, this.RenderElement(opts), opts);
+      this.Render(writer, this.RenderElement(opts, contextConfigurator), opts);
     }
 
     /// <summary>
@@ -79,7 +83,9 @@ namespace CSF.Zpt
     /// </summary>
     /// <returns>The result of the rendering process.</returns>
     /// <param name="options">The rendering options to use.  If <c>null</c> then default options are used.</param>
-    protected virtual ZptElement RenderElement(RenderingOptions options)
+    /// <param name="contextConfigurator">An optional action to perform upon the root <see cref="RenderingContext"/>, to configure it.</param>
+    protected virtual ZptElement RenderElement(RenderingOptions options,
+                                               Action<RenderingContext> contextConfigurator)
     {
       if(options == null)
       {
@@ -88,6 +94,11 @@ namespace CSF.Zpt
 
       var output = this.GetRootElement().Clone();
       var context = options.CreateRootContext(output);
+
+      if(contextConfigurator != null)
+      {
+        contextConfigurator(context);
+      }
 
       foreach(var visitor in options.ContextVisitors)
       {

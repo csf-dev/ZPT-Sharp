@@ -53,10 +53,12 @@ namespace CSF.Zpt
     /// </summary>
     /// <returns>The rendered HTML document.</returns>
     /// <param name="options">The rendering options to use.  If <c>null</c> then default options are used.</param>
-    public HtmlDocument RenderHtml(RenderingOptions options = null)
+    /// <param name="contextConfigurator">An optional action to perform upon the root <see cref="RenderingContext"/>, to configure it.</param>
+    public HtmlDocument RenderHtml(RenderingOptions options = null,
+                                   Action<RenderingContext> contextConfigurator = null)
     {
       var opts = this.GetOptions(options);
-      var element = this.RenderElement(opts);
+      var element = this.RenderElement(opts, contextConfigurator);
 
       var output = new HtmlDocument();
       output.LoadHtml(element.ToString());
@@ -156,6 +158,13 @@ namespace CSF.Zpt
 
       _document = document;
       _sourceFile = sourceFile;
+    }
+
+    static ZptHtmlDocument()
+    {
+      HtmlNode.ElementsFlags["script"] = 0;
+      HtmlNode.ElementsFlags["style"] = 0;
+      HtmlNode.ElementsFlags["noxhtml"] = 0;
     }
 
     #endregion

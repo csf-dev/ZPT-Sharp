@@ -52,7 +52,8 @@ namespace CSF.Zpt.Rendering
     /// <returns><c>true</c> if the path traversal was a success; <c>false</c> otherwise.</returns>
     /// <param name="pathFragment">The path fragment.</param>
     /// <param name="result">Exposes the result if the traversal was a success</param>
-    public bool HandleTalesPath(string pathFragment, out object result)
+    /// <param name="currentContext">Gets the current rendering context.</param>
+    public bool HandleTalesPath(string pathFragment, out object result, RenderingContext currentContext)
     {
       bool output = _options.ContainsKey(pathFragment);
       result = output? _options[pathFragment] : null;

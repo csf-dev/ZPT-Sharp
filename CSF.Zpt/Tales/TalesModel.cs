@@ -123,7 +123,7 @@ namespace CSF.Zpt.Tales
         var contexts = new BuiltinContextsContainer(this.GetKeywordOptions(),
                                                     this.GetRepetitionSummaries(context.Element),
                                                     originalAttrs);
-        output = contexts.HandleTalesPath(name, out result);
+        output = contexts.HandleTalesPath(name, out result, context);
       }
 
       return output;

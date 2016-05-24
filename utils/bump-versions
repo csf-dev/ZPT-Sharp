@@ -1,9 +1,0 @@
-#!/bin/bash
-
-SCRIPT_LOCATION=`dirname $0`
-SOLUTION_ROOT="$SCRIPT_LOCATION/.."
-
-find "$SOLUTION_ROOT" -type f -name "*.sln" -exec sed -Ei "s/version = [0-9.]+/version = $1/" '{}' \;
-find "$SOLUTION_ROOT" -type f -name "*.csproj" -exec sed -Ei "s/<ReleaseVersion>[^<]+/<ReleaseVersion>$1/" '{}' \;
-sed -Ei "s/AssemblyVersion\\(\"[0-9.]+\"\\)/AssemblyVersion\(\"$1\"\)/" \
-    "$SOLUTION_ROOT"/Common/CommonAssemblyInfo.cs
