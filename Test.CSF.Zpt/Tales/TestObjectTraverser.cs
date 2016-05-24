@@ -5,6 +5,8 @@ using Moq;
 using Ploeh.AutoFixture;
 using System.Collections.Generic;
 using Test.CSF.Zpt.Util;
+using CSF.Zpt.Rendering;
+using Test.CSF.Zpt.Util.Autofixture;
 
 namespace Test.CSF.Zpt.Tales
 {
@@ -23,6 +25,7 @@ namespace Test.CSF.Zpt.Tales
     public void Setup()
     {
       _autofixture = new Fixture();
+      new RenderingContextCustomisation().Customize(_autofixture);
     }
 
     #endregion
@@ -37,11 +40,11 @@ namespace Test.CSF.Zpt.Tales
 
       var source = new Mock<ITalesPathHandler>();
       var output = _autofixture.Create<object>();
-      source.Setup(x => x.HandleTalesPath(path, out output)).Returns(true);
+      source.Setup(x => x.HandleTalesPath(path, out output, It.IsAny<RenderingContext>())).Returns(true);
 
       // Act
       object exposedOuput;
-      bool result = ObjectTraverser.Default.Traverse(source.Object, path, out exposedOuput);
+      bool result = ObjectTraverser.Default.Traverse(source.Object, path, out exposedOuput, _autofixture.Create<RenderingContext>());
 
       // Assert
       Assert.IsTrue(result, "Result");
@@ -60,7 +63,7 @@ namespace Test.CSF.Zpt.Tales
 
       // Act
       object exposedOuput;
-      bool result = ObjectTraverser.Default.Traverse(source, path, out exposedOuput);
+      bool result = ObjectTraverser.Default.Traverse(source, path, out exposedOuput, _autofixture.Create<RenderingContext>());
 
       // Assert
       Assert.IsTrue(result, "Result");
@@ -79,7 +82,7 @@ namespace Test.CSF.Zpt.Tales
 
       // Act
       object exposedOuput;
-      bool result = ObjectTraverser.Default.Traverse(source, path, out exposedOuput);
+      bool result = ObjectTraverser.Default.Traverse(source, path, out exposedOuput, _autofixture.Create<RenderingContext>());
 
       // Assert
       Assert.IsTrue(result, "Result");
@@ -97,7 +100,7 @@ namespace Test.CSF.Zpt.Tales
 
       // Act
       object exposedOuput;
-      bool result = ObjectTraverser.Default.Traverse(source, path, out exposedOuput);
+      bool result = ObjectTraverser.Default.Traverse(source, path, out exposedOuput, _autofixture.Create<RenderingContext>());
 
       // Assert
       Assert.IsTrue(result, "Result");
@@ -115,7 +118,7 @@ namespace Test.CSF.Zpt.Tales
 
       // Act
       object exposedOuput;
-      bool result = ObjectTraverser.Default.Traverse(source, path, out exposedOuput);
+      bool result = ObjectTraverser.Default.Traverse(source, path, out exposedOuput, _autofixture.Create<RenderingContext>());
 
       // Assert
       Assert.IsTrue(result, "Result");
@@ -133,7 +136,7 @@ namespace Test.CSF.Zpt.Tales
 
       // Act
       object exposedOuput;
-      bool result = ObjectTraverser.Default.Traverse(source, path, out exposedOuput);
+      bool result = ObjectTraverser.Default.Traverse(source, path, out exposedOuput, _autofixture.Create<RenderingContext>());
 
       // Assert
       Assert.IsTrue(result, "Result");
@@ -151,7 +154,7 @@ namespace Test.CSF.Zpt.Tales
 
       // Act
       object exposedOuput;
-      bool result = ObjectTraverser.Default.Traverse(source, path, out exposedOuput);
+      bool result = ObjectTraverser.Default.Traverse(source, path, out exposedOuput, _autofixture.Create<RenderingContext>());
 
       // Assert
       Assert.IsTrue(result, "Result");
@@ -170,7 +173,7 @@ namespace Test.CSF.Zpt.Tales
 
       // Act
       object exposedOuput;
-      bool result = ObjectTraverser.Default.Traverse(source, path, out exposedOuput);
+      bool result = ObjectTraverser.Default.Traverse(source, path, out exposedOuput, _autofixture.Create<RenderingContext>());
 
       // Assert
       Assert.IsTrue(result, "Result");

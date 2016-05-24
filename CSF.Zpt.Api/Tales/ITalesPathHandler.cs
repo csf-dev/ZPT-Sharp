@@ -1,4 +1,5 @@
 ﻿using System;
+using CSF.Zpt.Rendering;
 
 namespace CSF.Zpt.Tales
 {
@@ -31,18 +32,22 @@ namespace CSF.Zpt.Tales
     /// {
     ///   private Person _person;
     ///   
-    ///   public object HandleTalesPath(string pathFragment)
+    ///   public bool HandleTalesPath(string pathFragment, out object result, RenderingContext currentContext)
     ///   {
     ///     switch(pathFragment)
     ///     {
     ///     case: "name";
-    ///       return _person.Name;
+    ///       result = _person.Name;
+    ///       return true;
     ///     case: "address";
-    ///       return _person.Address.FullAddress;
+    ///       result = _person.Address.FullAddress;
+    ///       return true;
     ///     case: "gender":
-    ///       return _person.Gender.ToString();
+    ///       result = _person.Gender.ToString();
+    ///       return true;
     ///     default:
-    ///       return null;
+    ///       result = null;
+    ///       return false;
     ///     }
     ///   }
     /// }
@@ -56,7 +61,8 @@ namespace CSF.Zpt.Tales
     /// <returns><c>true</c> if the path traversal was a success; <c>false</c> otherwise.</returns>
     /// <param name="pathFragment">The path fragment.</param>
     /// <param name="result">Exposes the result if the traversal was a success</param>
-    bool HandleTalesPath(string pathFragment, out object result);
+    /// <param name="currentContext">Gets the current rendering context.</param>
+    bool HandleTalesPath(string pathFragment, out object result, RenderingContext currentContext);
   }
 }
 

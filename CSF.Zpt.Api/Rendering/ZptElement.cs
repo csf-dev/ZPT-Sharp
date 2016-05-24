@@ -62,6 +62,13 @@ namespace CSF.Zpt.Rendering
       }
     }
 
+    /// <summary>
+    /// Gets a <c>System.Type</c> indicating the type of <see cref="IZptDocument"/> to which the current instance
+    /// belongs.
+    /// </summary>
+    /// <value>The type of ZPT document implementation.</value>
+    public abstract Type ZptDocumentType { get; }
+
     #endregion
 
     #region methods
