@@ -99,7 +99,7 @@ namespace CSF.Zpt.Cli
         _logger.DebugFormat("Searching directory {0} for files", dir.FullName);
 
         output = (from file in dir.GetFiles(inputOutputInfo.InputSearchPattern, SearchOption.AllDirectories)
-                  where  !inputOutputInfo.IgnoredPaths.DefaultIfEmpty().Any(x => file.IsChildOf(x))
+                  where  !inputOutputInfo.IgnoredPaths.Any(x => file.IsChildOf(x))
                   select CreateRenderingJob(file, mode, dir));
 
         _logger.DebugFormat("{0} rendering jobs found", output.Count());
