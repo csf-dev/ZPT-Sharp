@@ -105,6 +105,11 @@ namespace CSF.Zpt.Tal
     /// <summary>
     /// Initializes a new instance of the <see cref="CSF.Zpt.Tal.TalVisitor"/> class.
     /// </summary>
+    public TalVisitor() : this(null, null) {}
+
+    /// <summary>
+    /// Initializes a new instance of the <see cref="CSF.Zpt.Tal.TalVisitor"/> class.
+    /// </summary>
     /// <param name="handlers">A collection of <see cref="IAttributeHandler"/> to process.</param>
     /// <param name="errorHandler">An <see cref="IAttributeHandler"/> which should be used to handle any errors.</param>
     public TalVisitor(IAttributeHandler[] handlers = null,

@@ -46,6 +46,11 @@ namespace CSF.Zpt.Metal
     /// <summary>
     /// Initializes a new instance of the <see cref="CSF.Zpt.Metal.MetalVisitor"/> class.
     /// </summary>
+    public MetalVisitor() : this(null) {}
+
+    /// <summary>
+    /// Initializes a new instance of the <see cref="CSF.Zpt.Metal.MetalVisitor"/> class.
+    /// </summary>
     /// <param name="expander">The macro expander to use.</param>
     public MetalVisitor(MacroExpander expander = null)
     {
