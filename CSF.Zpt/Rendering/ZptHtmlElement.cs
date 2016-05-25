@@ -19,7 +19,8 @@ namespace CSF.Zpt.Rendering
       INDENT_PATTERN        = @"([ \t]+)$",
       HTML_COMMENT_START    = "<!-- ",
       HTML_COMMENT_END      = " -->\n",
-      PREFIX_SEPARATOR      = ":";
+      PREFIX_SEPARATOR      = ":",
+      XMLNS_ATTRIBUTE       = "xmlns";
     private static readonly Regex Indent = new Regex(INDENT_PATTERN, RegexOptions.Compiled);
 
     #endregion
@@ -434,7 +435,9 @@ namespace CSF.Zpt.Rendering
 
       var toRemove = (from node in nodes
                       from attrib in node.Attributes
-                      where attrib.Name.StartsWith(String.Concat(attributeNamespace.Prefix, PREFIX_SEPARATOR))
+                      where
+                        attrib.Name.StartsWith(String.Concat(attributeNamespace.Prefix, PREFIX_SEPARATOR))
+                        || attrib.Name == String.Concat(XMLNS_ATTRIBUTE, PREFIX_SEPARATOR, attributeNamespace.Prefix)
                       select attrib)
         .ToArray();
 
