@@ -120,8 +120,8 @@ namespace CSF.Zpt.Tales
     /// <param name="value">Value.</param>
     public virtual void AddKeywordOption(string key, string value)
     {
-      // TODO: Write this implementation
-      throw new NotImplementedException();
+      TalKeywordOptions[key] = value;
+      MetalKeywordOptions[key] = value;
     }
 
     /// <summary>
