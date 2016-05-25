@@ -27,8 +27,6 @@ namespace CSF.Zpt.Cli
 
       foreach(var job in jobs)
       {
-        _logger.DebugFormat("Rendering output for: {0}", job.SourceFile.FullName);
-
         Action<RenderingContext> contextConfigurator = ctx => {
           if(job.SourceDirectory != null)
           {
