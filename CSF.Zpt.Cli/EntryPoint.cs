@@ -37,11 +37,18 @@ namespace CSF.Zpt.Cli
     /// </summary>
     public void Begin()
     {
-      var options = this.CreateRenderingOptions(_commandLineOptions);
-      var inputOutputInfo = _ioInfoCreator.GetInfo(_commandLineOptions);
-      var renderingMode = _commandLineOptions.GetRenderingMode();
+      if(_commandLineOptions.ShowUsageStatement)
+      {
+        Console.Write(Resources.Messages.UsageStatement);
+      }
+      else
+      {
+        var options = this.CreateRenderingOptions(_commandLineOptions);
+        var inputOutputInfo = _ioInfoCreator.GetInfo(_commandLineOptions);
+        var renderingMode = _commandLineOptions.GetRenderingMode();
 
-      _renderer.Render(options, inputOutputInfo, renderingMode);
+        _renderer.Render(options, inputOutputInfo, renderingMode);
+      }
     }
 
     private RenderingOptions CreateRenderingOptions(CommandLineOptions options)
@@ -86,13 +93,13 @@ namespace CSF.Zpt.Cli
     private IParameterParser<CommandLineOptions> CreateParameterParser()
     {
       return new ParameterParserBuilder<CommandLineOptions>()
-        .AddFlag(   x => x.ForceHtmlMode,                     longName: "html",                       shortName: "h")
+        .AddFlag(   x => x.ForceHtmlMode,                     longName: "html",                       shortName: "t")
         .AddFlag(   x => x.ForceXmlMode,                      longName: "xml",                        shortName: "x")
         .AddFlag(   x => x.EnableSourceAnnotation,            longName: "annotate")
         .AddFlag(   x => x.OmitXmlDeclarations,               longName: "no-xml-declaration")
         .AddFlag(   x => x.DoNotOutputIndentedXml,            longName: "no-indent-xml")
         .AddValue(  x => x.XmlIndentationCharacters,          longName: "xml-indent-chars",                           optional: false)
-        .AddFlag(   x => x.ShowUsageStatement,                longName: "help",                       shortName: "?")
+        .AddFlag(   x => x.ShowUsageStatement,                longName: "help",                       shortName: "h")
         .AddValue(  x => x.InputFilenamePattern,              longName: "input-filename-pattern",     shortName: "p", optional: false)
         .AddValue(  x => x.OutputPath,                        longName: "output",                     shortName: "o", optional: false)
         .AddValue(  x => x.OutputFilenameExtension,           longName: "output-filename-extension",  shortName: "e", optional: false)
