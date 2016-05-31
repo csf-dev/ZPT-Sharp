@@ -14,8 +14,8 @@
 @import url(static/css/global-screen.css);
 @import url(static/css/page-specific.css);
 @import url(http://fonts.googleapis.com/css?family=Ubuntu:400,400italic,700,700italic);
-<metal:block metal:define-slot="additional-styles"></metal:block>
 </style>
+<style type="text/css" metal:define-slot="additional-styles"></style>
 <style type="text/css" tal:condition="nothing">
 @import url(static/css/dummy.css);
 </style>
