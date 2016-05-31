@@ -6,6 +6,8 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
 using CSF.Zpt.MVC;
+using CSF.Zpt.Rendering;
+using CSF.Zpt.MVC.Rendering;
 
 namespace CSF.Zpt.MVCSample
 {
