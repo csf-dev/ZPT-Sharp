@@ -151,7 +151,7 @@ namespace Test.CSF.Zpt.Tales
       // Assert
       Assert.IsTrue(result, "Overall success");
       Assert.NotNull(output, "Output nullability");
-      Assert.IsInstanceOf<TemplateKeywordOptions>(output, "Expected output type");
+      Assert.IsInstanceOf<NamedObjectWrapper>(output, "Expected output type");
     }
 
     [Test]

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections;
+using CSF.Zpt.Rendering;
 
 namespace CSF.Zpt.Tales
 {

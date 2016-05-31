@@ -17,7 +17,7 @@ namespace CSF.Zpt.Rendering
     private RepetitionInfoCollection _repetitionInfo;
     private Dictionary<ZptElement,ContextualisedRepetitionSummaryWrapper> _cachedRepetitionSummaries;
     private object _error;
-    private TemplateKeywordOptions _options;
+    private NamedObjectWrapper _options;
 
     #endregion
 
@@ -279,7 +279,7 @@ namespace CSF.Zpt.Rendering
     /// <summary>
     /// Gets the keyword options specified upon the current instance.
     /// </summary>
-    protected virtual TemplateKeywordOptions GetKeywordOptions()
+    protected virtual NamedObjectWrapper GetKeywordOptions()
     {
       return _root._options;
     }
@@ -313,9 +313,9 @@ namespace CSF.Zpt.Rendering
     /// Initializes a new root of the <see cref="CSF.Zpt.Rendering.Model"/> class.
     /// </summary>
     /// <param name="options">Keyword options.</param>
-    public Model(TemplateKeywordOptions options)
+    public Model(NamedObjectWrapper options)
     {
-      _options = options?? new TemplateKeywordOptions();
+      _options = options?? new NamedObjectWrapper();
       _parent = null;
       _root = this;
 
@@ -386,7 +386,7 @@ namespace CSF.Zpt.Rendering
         return output;
       }
 
-      internal EmptyModel(TemplateKeywordOptions opts) : base(opts) {}
+      internal EmptyModel(NamedObjectWrapper opts) : base(opts) {}
 
       internal EmptyModel(IModel parent, IModel root) : base(parent, root) {}
     }

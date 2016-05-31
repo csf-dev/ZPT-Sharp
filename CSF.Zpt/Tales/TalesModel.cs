@@ -25,6 +25,21 @@ namespace CSF.Zpt.Tales
 
     #endregion
 
+    #region properties
+
+    /// <summary>
+    /// Gets the evaluator registry.
+    /// </summary>
+    /// <value>The evaluator registry.</value>
+    protected virtual IEvaluatorRegistry EvaluatorRegistry
+    {
+      get {
+        return _registry;
+      }
+    }
+
+    #endregion
+
     #region methods
 
     /// <summary>
@@ -33,7 +48,7 @@ namespace CSF.Zpt.Tales
     /// <returns>The child model.</returns>
     public override IModel CreateChildModel()
     {
-      TalesModel output = new TalesModel(this, this.Root, _registry);
+      var output = new TalesModel(this, this.Root, EvaluatorRegistry);
       output.RepetitionInfo = new RepetitionInfoCollection(this.RepetitionInfo);
       return output;
     }
@@ -44,7 +59,7 @@ namespace CSF.Zpt.Tales
     /// <returns>The sibling model.</returns>
     protected override Model CreateTypedSiblingModel()
     {
-      return new TalesModel(this.Parent, this.Root, _registry);
+      return new TalesModel(this.Parent, this.Root, EvaluatorRegistry);
     }
 
     /// <summary>
@@ -79,7 +94,7 @@ namespace CSF.Zpt.Tales
         throw new ArgumentNullException(nameof(context));
       }
 
-      var evaluator = _registry.GetEvaluator(talesExpression);
+      var evaluator = EvaluatorRegistry.GetEvaluator(talesExpression);
       return evaluator.Evaluate(talesExpression, context, this);
     }
 
@@ -106,11 +121,8 @@ namespace CSF.Zpt.Tales
 
       if(name == CONTEXTS)
       {
+        result = GetBuiltinContexts(context);
         output = true;
-        var originalAttrs = new Lazy<OriginalAttributeValuesCollection>(() => context.GetOriginalAttributes());
-        result = new BuiltinContextsContainer(this.GetKeywordOptions(),
-                                              this.GetRepetitionSummaries(context.Element),
-                                              originalAttrs);
       }
       else
       {
@@ -119,10 +131,7 @@ namespace CSF.Zpt.Tales
 
       if(!output)
       {
-        var originalAttrs = new Lazy<OriginalAttributeValuesCollection>(() => context.GetOriginalAttributes());
-        var contexts = new BuiltinContextsContainer(this.GetKeywordOptions(),
-                                                    this.GetRepetitionSummaries(context.Element),
-                                                    originalAttrs);
+        var contexts = GetBuiltinContexts(context);
         output = contexts.HandleTalesPath(name, out result, context);
       }
 
@@ -161,6 +170,24 @@ namespace CSF.Zpt.Tales
       return output;
     }
 
+    /// <summary>
+    /// Gets the builtin contexts, associated with the <c>CONTEXTS</c> root path keyword.
+    /// </summary>
+    /// <returns>The builtin contexts.</returns>
+    /// <param name="context">The current rendering context.</param>
+    protected virtual BuiltinContextsContainer GetBuiltinContexts(RenderingContext context)
+    {
+      if(context == null)
+      {
+        throw new ArgumentNullException(nameof(context));
+      }
+
+      var originalAttrs = new Lazy<OriginalAttributeValuesCollection>(() => context.GetOriginalAttributes());
+      return new BuiltinContextsContainer(this.GetKeywordOptions(),
+                                          this.GetRepetitionSummaries(context.Element),
+                                          originalAttrs);
+    }
+
     #endregion
 
     #region constructor
@@ -172,7 +199,7 @@ namespace CSF.Zpt.Tales
     /// <param name="options">Options.</param>
     /// <param name="expressionCreator">The expression factory to use.</param>
     public TalesModel(IEvaluatorRegistry evaluatorRegistry,
-                      TemplateKeywordOptions options = null,
+                      NamedObjectWrapper options = null,
                       IExpressionFactory expressionCreator = null) : base(options)
     {
       if(evaluatorRegistry == null)

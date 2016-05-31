@@ -99,11 +99,11 @@ namespace CSF.Zpt.Tales
         throw new ArgumentNullException(nameof(options));
       }
 
-      TemplateKeywordOptions
-        metalKeywordOptions = new TemplateKeywordOptions(MetalKeywordOptions),
-        talKeywordOptions = new TemplateKeywordOptions(TalKeywordOptions);
+      NamedObjectWrapper
+        metalKeywordOptions = new NamedObjectWrapper(MetalKeywordOptions),
+        talKeywordOptions = new NamedObjectWrapper(TalKeywordOptions);
 
-      Model
+      IModel
         metalModel = new TalesModel(this.EvaluatorRegistry, metalKeywordOptions),
         talModel = new TalesModel(this.EvaluatorRegistry, talKeywordOptions);
 
@@ -128,7 +128,7 @@ namespace CSF.Zpt.Tales
     /// Populates a METAL model from the state of the current instance.
     /// </summary>
     /// <param name="model">Model.</param>
-    private void PopulateMetalModel(IModel model)
+    protected virtual void PopulateMetalModel(IModel model)
     {
       if(model == null)
       {
@@ -149,7 +149,7 @@ namespace CSF.Zpt.Tales
     /// Populates a TAL model from the state of the current instance.
     /// </summary>
     /// <param name="model">Model.</param>
-    private void PopulateTalModel(IModel model)
+    protected virtual void PopulateTalModel(IModel model)
     {
       if(model == null)
       {
