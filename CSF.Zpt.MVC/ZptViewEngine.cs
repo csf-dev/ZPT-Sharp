@@ -83,7 +83,8 @@ namespace CSF.Zpt.MVC
     {
       this.ViewLocationFormats = ViewLocations;
       this.PartialViewLocationFormats = ViewLocations;
-      this.RenderingOptions = new DefaultRenderingOptions(contextFactory: new MvcRenderingContextFactory());
+      this.RenderingOptions = new DefaultRenderingOptions(contextFactory: new MvcRenderingContextFactory(),
+                                                          omitXmlDeclaration: true);
     }
 
     #endregion
