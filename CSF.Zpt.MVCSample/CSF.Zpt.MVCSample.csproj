@@ -104,5 +104,13 @@
       <Project>{9B4DF12E-6E04-4C25-AD16-58434C18DE8A}</Project>
       <Name>CSF.Zpt.MVC</Name>
     </ProjectReference>
+    <ProjectReference Include="..\CSF.Zpt.Api\CSF.Zpt.Api.csproj">
+      <Project>{8207CD9B-F1C1-4D75-B250-ACDFFBDCB071}</Project>
+      <Name>CSF.Zpt.Api</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CSF.Zpt\CSF.Zpt.csproj">
+      <Project>{16E957BB-347C-4EE1-815F-19AC296FB9E0}</Project>
+      <Name>CSF.Zpt</Name>
+    </ProjectReference>
   </ItemGroup>
 </Project>

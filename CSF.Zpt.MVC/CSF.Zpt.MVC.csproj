@@ -76,8 +76,26 @@
     <Compile Include="AssemblyInfo.cs" />
     <Compile Include="ZptViewEngine.cs" />
     <Compile Include="ZptView.cs" />
+    <Compile Include="Resources\ExceptionMessages.Designer.cs">
+      <DependentUpon>ExceptionMessages.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Tales\MvcTalesModel.cs" />
+    <Compile Include="Tales\MvcContextsContainer.cs" />
+    <Compile Include="Rendering\MvcRenderingContextFactory.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Resources\" />
+    <Folder Include="Tales\" />
+    <Folder Include="Rendering\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\ExceptionMessages.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LogicalName>ExceptionMessages.resx</LogicalName>
+      <LastGenOutput>ExceptionMessages.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
 </Project>

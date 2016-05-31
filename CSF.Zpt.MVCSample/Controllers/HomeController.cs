@@ -17,7 +17,9 @@ namespace CSF.Zpt.MVCSample.Controllers
       ViewData["Version"] = mvcName.Version.Major + "." + mvcName.Version.Minor;
       ViewData["Runtime"] = isMono ? "Mono" : ".NET";
 
-      return View();
+      var model = DateTime.Now;
+
+      return View(model);
     }
   }
 }

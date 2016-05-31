@@ -69,6 +69,7 @@
     <Compile Include="ZptException.cs" />
     <Compile Include="Rendering\IRenderingContextFactoryFactory.cs" />
     <Compile Include="Rendering\IContextVisitorFactory.cs" />
+    <Compile Include="RenderingMode.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

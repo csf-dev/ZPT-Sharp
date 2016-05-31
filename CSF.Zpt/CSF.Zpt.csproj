@@ -86,13 +86,11 @@
     <Compile Include="Tales\BuiltinContextsContainer.cs" />
     <Compile Include="Rendering\RepetitionInfoCollection.cs" />
     <Compile Include="Rendering\ContextualisedRepetitionSummaryWrapper.cs" />
-    <Compile Include="Rendering\TemplateKeywordOptions.cs" />
     <Compile Include="Tales\TalesRenderingContextFactory.cs" />
     <Compile Include="Rendering\ContextVisitorBase.cs" />
     <Compile Include="ZptDocumentFactory.cs" />
     <Compile Include="Tales\FilesystemDirectory.cs" />
     <Compile Include="Tales\TemplateDirectory.cs" />
-    <Compile Include="Tales\NamedObjectWrapper.cs" />
     <Compile Include="Tales\EnumerableObjectWrapperWithNamedItems.cs" />
     <Compile Include="LocalXhtmlXmlResolver.cs" />
     <Compile Include="Tales\LocalVariablePathExpressionEvaluator.cs" />
@@ -113,6 +111,7 @@
     <Compile Include="Metal\MetalMacroCollection.cs" />
     <Compile Include="Rendering\RenderingContextFactoryFactory.cs" />
     <Compile Include="Rendering\ContextVisitorFactory.cs" />
+    <Compile Include="Rendering\NamedObjectWrapper.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

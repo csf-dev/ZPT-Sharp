@@ -22,7 +22,7 @@ namespace CSF.Zpt.Tales
     #region fields
 
     private object _nothing, _default;
-    private TemplateKeywordOptions _options;
+    private NamedObjectWrapper _options;
     private ContextualisedRepetitionSummaryWrapper _repeat;
     private Lazy<OriginalAttributeValuesCollection> _attrs;
 
@@ -56,7 +56,7 @@ namespace CSF.Zpt.Tales
     /// Gets the template keyword options.
     /// </summary>
     /// <value>The options.</value>
-    public TemplateKeywordOptions Options
+    public NamedObjectWrapper Options
     {
       get {
         return _options;
@@ -96,7 +96,7 @@ namespace CSF.Zpt.Tales
     /// <param name="pathFragment">The path fragment.</param>
     /// <param name="result">Exposes the result if the traversal was a success</param>
     /// <param name="currentContext">Gets the current rendering context.</param>
-    public bool HandleTalesPath(string pathFragment, out object result, RenderingContext currentContext)
+    public virtual bool HandleTalesPath(string pathFragment, out object result, RenderingContext currentContext)
     {
       bool output;
 
@@ -146,7 +146,7 @@ namespace CSF.Zpt.Tales
     /// <param name="options">Options.</param>
     /// <param name="repeat">Repeat.</param>
     /// <param name="attrs">Attrs.</param>
-    public BuiltinContextsContainer(TemplateKeywordOptions options,
+    public BuiltinContextsContainer(NamedObjectWrapper options,
                                     ContextualisedRepetitionSummaryWrapper repeat,
                                     Lazy<OriginalAttributeValuesCollection> attrs)
     {

@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using CSF.Zpt.Tales;
 
-namespace CSF.Zpt.Tales
+namespace CSF.Zpt.Rendering
 {
   /// <summary>
   /// Simple wrapper type which provides access to objects by <c>System.String</c> names.
@@ -10,7 +11,7 @@ namespace CSF.Zpt.Tales
   {
     #region fields
 
-    private Dictionary<string,object> _objects;
+    private IDictionary<string,object> _objects;
     private string _stringRepresentation;
     private bool _hasStringRepresentation;
     private object _syncRoot;
@@ -130,9 +131,9 @@ namespace CSF.Zpt.Tales
     }
 
     /// <summary>
-    /// Returns a <see cref="System.String"/> that represents the current <see cref="CSF.Zpt.Tales.NamedObjectWrapper"/>.
+    /// Returns a <see cref="System.String"/> that represents the current <see cref="CSF.Zpt.Rendering.NamedObjectWrapper"/>.
     /// </summary>
-    /// <returns>A <see cref="System.String"/> that represents the current <see cref="CSF.Zpt.Tales.NamedObjectWrapper"/>.</returns>
+    /// <returns>A <see cref="System.String"/> that represents the current <see cref="CSF.Zpt.Rendering.NamedObjectWrapper"/>.</returns>
     public override string ToString()
     {
       return _hasStringRepresentation? _stringRepresentation : base.ToString();
@@ -143,11 +144,12 @@ namespace CSF.Zpt.Tales
     #region constructor
 
     /// <summary>
-    /// Initializes a new instance of the <see cref="CSF.Zpt.Tales.NamedObjectWrapper"/> class.
+    /// Initializes a new instance of the <see cref="CSF.Zpt.Rendering.NamedObjectWrapper"/> class.
     /// </summary>
-    public NamedObjectWrapper()
+    /// <param name="objects">An optional collection of the initial objects to load into the current instance.</param>
+    public NamedObjectWrapper(IDictionary<string,object> objects = null)
     {
-      _objects = new Dictionary<string, object>();
+      _objects = objects?? new Dictionary<string, object>();
       _syncRoot = new Object();
     }
 

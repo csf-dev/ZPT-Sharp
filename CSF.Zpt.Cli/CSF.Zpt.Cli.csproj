@@ -43,7 +43,6 @@
     <Compile Include="EntryPoint.cs" />
     <Compile Include="CommandLineOptions.cs" />
     <Compile Include="Renderer.cs" />
-    <Compile Include="RenderingMode.cs" />
     <Compile Include="InputOutputInfo.cs" />
     <Compile Include="InputOutputInfoCreator.cs" />
     <Compile Include="RenderingJob.cs" />
