@@ -2,6 +2,7 @@
 using CSF.Zpt.Tales;
 using CSF.Zpt.Rendering;
 using System.Collections.Generic;
+using System.Web.Mvc;
 
 namespace CSF.Zpt.MVC.Tales
 {
@@ -9,64 +10,25 @@ namespace CSF.Zpt.MVC.Tales
   {
     #region fields
 
-    private bool _viewDataSet, _tempDataSet;
-
-    #endregion
-
-    #region properties
-
-    protected virtual IDictionary<string,object> ViewData
-    {
-      get;
-      set;
-    }
-
-    protected virtual IDictionary<string,object> TempData
-    {
-      get;
-      set;
-    }
+    private ViewContext _viewContext;
 
     #endregion
 
     #region methods
 
-    public virtual void SetViewData(IDictionary<string,object> data)
+    public virtual ViewContext ViewContext
     {
-      if(_viewDataSet)
-      {
-        throw new InvalidOperationException();
+      get {
+        return _viewContext;
       }
-
-      if(data != null)
-      {
-        foreach(var key in data.Keys)
+      set {
+        if(value == null)
         {
-          AddGlobal(key, data[key]);
+          throw new ArgumentNullException(nameof(value));
         }
+
+        _viewContext = value;
       }
-      ViewData = data;
-
-      _viewDataSet = true;
-    }
-
-    public virtual void SetTempData(IDictionary<string,object> data)
-    {
-      if(_tempDataSet)
-      {
-        throw new InvalidOperationException();
-      }
-
-      if(data != null)
-      {
-        foreach(var key in data.Keys)
-        {
-          AddGlobal(key, data[key]);
-        }
-      }
-      TempData = data;
-
-      _tempDataSet = true;
     }
 
     protected override BuiltinContextsContainer GetBuiltinContexts(RenderingContext context)
@@ -80,8 +42,7 @@ namespace CSF.Zpt.MVC.Tales
       return new MvcContextsContainer(this.GetKeywordOptions(),
                                       this.GetRepetitionSummaries(context.Element),
                                       originalAttrs,
-                                      ViewData,
-                                      TempData);
+                                      ViewContext);
     }
 
     public override IModel CreateChildModel()

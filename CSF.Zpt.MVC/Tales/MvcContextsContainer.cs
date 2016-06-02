@@ -2,6 +2,9 @@
 using CSF.Zpt.Tales;
 using CSF.Zpt.Rendering;
 using System.Collections.Generic;
+using System.Web.Mvc;
+using System.IO;
+using System.Linq;
 
 namespace CSF.Zpt.MVC.Tales
 {
@@ -10,30 +13,34 @@ namespace CSF.Zpt.MVC.Tales
     #region constants
 
     private const string
-      VIEW_DATA = "ViewData",
-      TEMP_DATA = "TempData";
+      VIEW_DATA_DICTIONARY    = "ViewData",
+      TEMP_DATA_DICTIONARY    = "TempData",
+      APPLICATION_DICTIONARY  = "Application",
+      CACHE_DICTIONARY        = "Cache",
+      REQUEST                 = "Request",
+      RESPONSE                = "Response",
+      ROUTE_DATA              = "RouteData",
+      SERVER                  = "Server",
+      SESSION_DICTIONARY      = "Session",
+      TYPED_MODEL             = "Model",
+      VIEWS_DIRECTORY         = "Views",
+      VIEWS_VIRTUAL_PATH      = "~/Views/";
 
     #endregion
 
     #region fields
 
-    private IDictionary<string,object> _viewData, _tempData;
+    private ViewContext _viewContext;
+    private Lazy<IDictionary<string,object>> _applicationDictionary;
 
     #endregion
 
     #region properties
 
-    public IDictionary<string,object> ViewData
+    public ViewContext ViewContext
     {
       get {
-        return _viewData;
-      }
-    }
-
-    public IDictionary<string,object> TempData
-    {
-      get {
-        return _tempData;
+        return _viewContext;
       }
     }
 
@@ -56,14 +63,60 @@ namespace CSF.Zpt.MVC.Tales
       {
         switch(pathFragment)
         {
-        case VIEW_DATA:
-          output = true;
-          result = new NamedObjectWrapper(this.ViewData);
+        case VIEW_DATA_DICTIONARY:
+          output = ViewContext.ViewData != null;
+          result = output? new NamedObjectWrapper(ViewContext.ViewData) : null;
           break;
 
-        case TEMP_DATA:
+        case TEMP_DATA_DICTIONARY:
+          output = ViewContext.TempData != null;
+          result = output? new NamedObjectWrapper(ViewContext.TempData) : null;
+          break;
+
+        case APPLICATION_DICTIONARY:
+          result = new NamedObjectWrapper(_applicationDictionary.Value);
           output = true;
-          result = new NamedObjectWrapper(this.TempData);
+          break;
+
+        case CACHE_DICTIONARY:
+          result = ViewContext.HttpContext?.Cache;
+          output = result != null;
+          break;
+
+        case REQUEST:
+          result = ViewContext.HttpContext?.Request;
+          output = result != null;
+          break;
+
+        case RESPONSE:
+          result = ViewContext.HttpContext?.Response;
+          output = result != null;
+          break;
+
+        case ROUTE_DATA:
+          result = ViewContext.RouteData;
+          output = result != null;
+          break;
+
+        case SERVER:
+          result = ViewContext.HttpContext?.Server;
+          output = result != null;
+          break;
+
+        case SESSION_DICTIONARY:
+          result = ViewContext.HttpContext?.Session;
+          output = result != null;
+          break;
+
+        case TYPED_MODEL:
+          result = ViewContext.ViewData?.Model;
+          output = (result != null);
+          break;
+
+        case VIEWS_DIRECTORY:
+          var viewsDirectoryPath = ViewContext.HttpContext.Server.MapPath(VIEWS_VIRTUAL_PATH);
+          result = new TemplateDirectory(new DirectoryInfo(viewsDirectoryPath));
+          output = true;
           break;
 
         default:
@@ -76,6 +129,14 @@ namespace CSF.Zpt.MVC.Tales
       return output;
     }
 
+    private Lazy<IDictionary<string,object>> GetApplicationDictionary(ViewContext context)
+    {
+      return new Lazy<IDictionary<string, object>>(() => {
+        var app = ViewContext.HttpContext?.Application;
+        return (app != null)? app.AllKeys.ToDictionary(k => k, v => app[v]) : new Dictionary<string,object>();
+      });
+    }
+
     #endregion
 
     #region constructor
@@ -83,11 +144,10 @@ namespace CSF.Zpt.MVC.Tales
     public MvcContextsContainer(NamedObjectWrapper options,
                                 ContextualisedRepetitionSummaryWrapper repeat,
                                 Lazy<OriginalAttributeValuesCollection> attrs,
-                                IDictionary<string,object> viewData = null,
-                                IDictionary<string,object> tempData = null) : base(options, repeat, attrs)
+                                ViewContext viewContext) : base(options, repeat, attrs)
     {
-      _viewData = viewData?? new Dictionary<string, object>();
-      _tempData = tempData?? new Dictionary<string, object>();
+      _viewContext = viewContext?? new ViewContext();
+      _applicationDictionary = GetApplicationDictionary(viewContext);
     }
 
     #endregion
