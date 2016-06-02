@@ -82,4 +82,7 @@ Filename:{0}</value>
   <data name="WrongCountOfReturnedContexts" xml:space="preserve">
     <value>Each implementation of `{0}' must return precisely one instance of `{1}'.  This suggests that the source document might not be valid?</value>
   </data>
+  <data name="InvalidRenderingMode" xml:space="preserve">
+    <value>The rendering mode must be a valid value.</value>
+  </data>
 </root>

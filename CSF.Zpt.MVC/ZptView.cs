@@ -79,29 +79,8 @@ namespace CSF.Zpt.MVC
 
     private IZptDocument CreateDocument()
     {
-      IZptDocument output;
-
       var inputFile = new FileInfo(_physicalPath);
-
-      switch(RenderingMode)
-      {
-      case RenderingMode.AutoDetect:
-        output = _documentFactory.CreateDocument(inputFile, InputEncoding);
-        break;
-
-      case RenderingMode.Html:
-        output = _documentFactory.CreateHtmlDocument(inputFile, InputEncoding);
-        break;
-
-      case RenderingMode.Xml:
-        output = _documentFactory.CreateXmlDocument(inputFile, InputEncoding);
-        break;
-
-      default:
-        throw new InvalidOperationException();
-      }
-
-      return output;
+      return _documentFactory.CreateDocument(inputFile, InputEncoding, RenderingMode);
     }
 
     #endregion

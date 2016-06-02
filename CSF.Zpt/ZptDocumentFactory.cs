@@ -57,12 +57,12 @@ namespace CSF.Zpt
     #region methods
 
     /// <summary>
-    /// Gets a value indicating whether or not the current instance can create a <see cref="ZptDocument"/> from a given
-    /// source file.
+    /// Gets a value indicating whether or not the current instance can create an <see cref="IZptDocument"/> from a given
+    /// source file using <see cref="RenderingMode.AutoDetect"/>.
     /// </summary>
-    /// <returns><c>true</c> if this instance can create a document from the given file; otherwise, <c>false</c>.</returns>
+    /// <returns><c>true</c> if this instance can auto-detect the rendering mode for the given file; otherwise, <c>false</c>.</returns>
     /// <param name="sourceFile">The source file.</param>
-    public bool CanCreateFromFile(FileInfo sourceFile)
+    public bool CanAutoDetectMode(FileInfo sourceFile)
     {
       return (_forceDocumentType != null || _supportedExtensions.Contains(sourceFile.Extension));
     }
@@ -72,11 +72,18 @@ namespace CSF.Zpt
     /// </summary>
     /// <param name="sourceFile">The source file containing the document to create.</param>
     /// <param name="encoding">The text encoding to use in reading the source file.</param>
-    public IZptDocument CreateDocument(FileInfo sourceFile, Encoding encoding)
+    /// <param name="renderingMode">The rendering mode to use in creating the output document.</param>
+    public IZptDocument CreateDocument(FileInfo sourceFile,
+                                       Encoding encoding,
+                                       RenderingMode renderingMode)
     {
       if(sourceFile == null)
       {
         throw new ArgumentNullException(nameof(sourceFile));
+      }
+      if(!renderingMode.IsDefinedValue())
+      {
+        throw new ArgumentException(Resources.ExceptionMessages.InvalidRenderingMode, nameof(renderingMode));
       }
 
       IZptDocument output;
@@ -85,13 +92,17 @@ namespace CSF.Zpt
       var extension = sourceFile.Extension;
 
       if(_forceDocumentType == HtmlDocumentType
+         || renderingMode == RenderingMode.Html
          || (_forceDocumentType == null
+             && renderingMode == RenderingMode.AutoDetect
              && HtmlSuffixes.Contains(extension)))
       {
         output = this.CreateHtmlDocument(sourceFile, encoding);
       }
       else if(_forceDocumentType == XmlDocumentType
+              || renderingMode == RenderingMode.Xml
               || (_forceDocumentType == null
+                  && renderingMode == RenderingMode.AutoDetect
                   && XmlSuffixes.Contains(extension)))
       {
         output = this.CreateXmlDocument(sourceFile, encoding);
@@ -111,9 +122,12 @@ namespace CSF.Zpt
     /// </summary>
     /// <param name="sourceFile">The source file containing the document to create.</param>
     /// <param name="encoding">The text encoding to use in reading the source file.</param>
-    public Tales.TemplateFile CreateTemplateFile(FileInfo sourceFile, Encoding encoding)
+    /// <param name="renderingMode">The rendering mode to use in creating the output document.</param>
+    public Tales.TemplateFile CreateTemplateFile(FileInfo sourceFile,
+                                                 Encoding encoding,
+                                                 RenderingMode renderingMode)
     {
-      var document = this.CreateDocument(sourceFile, encoding);
+      var document = this.CreateDocument(sourceFile, encoding, renderingMode);
       return new Tales.TemplateFile(document);
     }
 

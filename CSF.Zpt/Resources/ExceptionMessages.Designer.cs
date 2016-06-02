@@ -171,5 +171,11 @@ namespace CSF.Zpt.Resources {
                 return ResourceManager.GetString("WrongCountOfReturnedContexts", resourceCulture);
             }
         }
+        
+        internal static string InvalidRenderingMode {
+            get {
+                return ResourceManager.GetString("InvalidRenderingMode", resourceCulture);
+            }
+        }
     }
 }

@@ -75,7 +75,7 @@ namespace CSF.Zpt.Tales
       if(output && templateFileInfo != null)
       {
         var templateFactory = GetTemplateFactory(currentContext);
-        if(templateFactory.CanCreateFromFile(templateFileInfo))
+        if(templateFactory.CanAutoDetectMode(templateFileInfo))
         {
           var doc = templateFactory.CreateTemplateFile(templateFileInfo);
           exposedResult = doc;

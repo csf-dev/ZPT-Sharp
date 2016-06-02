@@ -113,22 +113,7 @@ namespace CSF.Zpt.Cli
 
     private RenderingJob CreateRenderingJob(FileInfo file, RenderingMode mode, DirectoryInfo sourceDirectory)
     {
-      IZptDocument output;
-
-      if(mode == RenderingMode.Xml)
-      {
-        output = _documentFactory.CreateXmlDocument(file);
-      }
-      else if(mode == RenderingMode.Html)
-      {
-        output = _documentFactory.CreateHtmlDocument(file);
-      }
-      else
-      {
-        output = _documentFactory.CreateDocument(file);
-      }
-
-      return new RenderingJob(output, file, sourceDirectory);
+      return new RenderingJob(_documentFactory.CreateDocument(file, renderingMode: mode), file, sourceDirectory);
     }
 
     private void Render(RenderingJob job,
