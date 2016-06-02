@@ -10,6 +10,12 @@ namespace CSF.Zpt.Tal
   /// </summary>
   public class TalVisitor : ContextVisitorBase
   {
+    #region constants
+
+    private const string MACRONAME = "macroname";
+
+    #endregion
+
     #region fields
 
     #pragma warning disable 414
@@ -38,6 +44,12 @@ namespace CSF.Zpt.Tal
       IEnumerable<RenderingContext>
         output = new [] { context },
         newlyExposedElements = new RenderingContext[0];
+
+      var macroAttribute = context.Element.GetMetalAttribute(ZptConstants.Metal.DefineMacroAttribute);
+      if(macroAttribute != null)
+      {
+        context.TalModel.AddLocal(MACRONAME, macroAttribute.Value);
+      }
 
       foreach(var handler in _handlers)
       {
