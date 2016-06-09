@@ -7,14 +7,36 @@ namespace Test.CSF.Zpt
   {
     #region methods
 
-    public DirectoryInfo GetSourceDocumentPath()
+    public DirectoryInfo GetSourceDocumentPath(IntegrationTestType type)
     {
-      return new DirectoryInfo(IntegrationTestConfiguration.DefaultSourceDocumentPath);
+      if(type == IntegrationTestType.Default)
+      {
+        return new DirectoryInfo(IntegrationTestConfiguration.DefaultSourceDocumentPath);
+      }
+      else if(type == IntegrationTestType.SourceAnnotation)
+      {
+        return new DirectoryInfo(IntegrationTestConfiguration.DefaultSourceAnnotationSourceDocumentPath);
+      }
+      else
+      {
+        throw new ArgumentException("Test type must be a supported value", nameof(type));
+      }
     }
 
-    public DirectoryInfo GetExpectedOutputPath()
+    public DirectoryInfo GetExpectedOutputPath(IntegrationTestType type)
     {
-      return new DirectoryInfo(IntegrationTestConfiguration.DefaultExpectedOutputPath);
+      if(type == IntegrationTestType.Default)
+      {
+        return new DirectoryInfo(IntegrationTestConfiguration.DefaultExpectedOutputPath);
+      }
+      else if(type == IntegrationTestType.SourceAnnotation)
+      {
+        return new DirectoryInfo(IntegrationTestConfiguration.DefaultSourceAnnotationExpectedOutputPath);
+      }
+      else
+      {
+        throw new ArgumentException("Test type must be a supported value", nameof(type));
+      }
     }
 
     #endregion
