@@ -17,8 +17,8 @@ namespace CSF.Zpt.Rendering
 
     private const string
       INDENT_PATTERN        = @"([ \t]+)$",
-      HTML_COMMENT_START    = "<!-- ",
-      HTML_COMMENT_END      = " -->\n",
+      HTML_COMMENT_START    = "<!--",
+      HTML_COMMENT_END      = "-->",
       PREFIX_SEPARATOR      = ":",
       XMLNS_ATTRIBUTE       = "xmlns";
     private static readonly Regex Indent = new Regex(INDENT_PATTERN, RegexOptions.Compiled);
@@ -545,7 +545,7 @@ namespace CSF.Zpt.Rendering
     /// <returns>The file location.</returns>
     public override string GetFileLocation()
     {
-      return String.Format("Line {0}", _node.Line);
+      return (_node.Line >= 1)? _node.Line.ToString() : null;
     }
 
     /// <summary>

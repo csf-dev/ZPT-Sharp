@@ -112,6 +112,7 @@
     <Compile Include="Rendering\RenderingContextFactoryFactory.cs" />
     <Compile Include="Rendering\ContextVisitorFactory.cs" />
     <Compile Include="Rendering\NamedObjectWrapper.cs" />
+    <Compile Include="Metal\SourceAnnotator.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

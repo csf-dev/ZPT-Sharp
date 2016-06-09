@@ -17,7 +17,7 @@ namespace CSF.Zpt.Rendering
 
     private const string
       INDENT_PATTERN        = @"([ \t]+)$",
-      XML_COMMENT_START    = " ",
+      XML_COMMENT_START    = "",
       XML_COMMENT_END      = XML_COMMENT_START;
 
     private static readonly Regex Indent = new Regex(INDENT_PATTERN, RegexOptions.Compiled);

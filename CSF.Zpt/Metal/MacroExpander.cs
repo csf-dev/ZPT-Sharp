@@ -14,6 +14,7 @@ namespace CSF.Zpt.Metal
     #region fields
 
     private MacroFinder _macroFinder;
+    private SourceAnnotator _annotator;
     private log4net.ILog _logger;
 
     #endregion
@@ -43,7 +44,7 @@ namespace CSF.Zpt.Metal
         output = context;
         if(context.Element.IsRoot && context.RenderingOptions.AddSourceFileAnnotation)
         {
-          this.AddAnnotationComment(context.Element);
+          this.AddAnnotationComment(context);
         }
       }
 
@@ -82,9 +83,10 @@ namespace CSF.Zpt.Metal
       var extendedMacro = context.Element.ReplaceWith(macroContext.Element);
       if(context.RenderingOptions.AddSourceFileAnnotation)
       {
-        this.AddAnnotationComment(macroContext.Element);
+        this.AddAnnotationComment(macroContext);
       }
-      this.FillSlots(context.Element, extendedMacro, context.RenderingOptions.AddSourceFileAnnotation);
+
+      this.FillSlots(context, extendedMacro, context.RenderingOptions.AddSourceFileAnnotation);
 
       return context.CreateSiblingContext(extendedMacro);
     }
@@ -95,11 +97,11 @@ namespace CSF.Zpt.Metal
     /// <param name="sourceElement">Source element.</param>
     /// <param name="macro">Macro.</param>
     /// <param name="addAnnotation">A value indicating whether or not source annotation is to be added to the result.</param>
-    private void FillSlots(ZptElement sourceElement, ZptElement macro, bool addAnnotation)
+    private void FillSlots(RenderingContext sourceContext, ZptElement macro, bool addAnnotation)
     {
-      if(sourceElement == null)
+      if(sourceContext == null)
       {
-        throw new ArgumentNullException(nameof(sourceElement));
+        throw new ArgumentNullException(nameof(sourceContext));
       }
       if(macro == null)
       {
@@ -107,13 +109,14 @@ namespace CSF.Zpt.Metal
       }
 
       var slotsToHandle = (from defineSlot in this.GetElementsByValue(macro, ZptConstants.Metal.DefineSlotAttribute)
-                           join fillSlot in this.GetElementsByValue(sourceElement, ZptConstants.Metal.FillSlotAttribute)
+                           join fillSlot in this.GetElementsByValue(sourceContext.Element, ZptConstants.Metal.FillSlotAttribute)
                            on defineSlot.Key equals fillSlot.Key
-                           select new { Slot = defineSlot.Value, Filler = fillSlot.Value });
+                           select new { Slot = defineSlot.Value,
+                                        Filler = sourceContext.CreateSiblingContext(fillSlot.Value) });
 
       foreach(var replacement in slotsToHandle)
       {
-        replacement.Slot.ReplaceWith(replacement.Filler);
+        replacement.Slot.ReplaceWith(replacement.Filler.Element);
         if(addAnnotation)
         {
           this.AddAnnotationComment(replacement.Filler);
@@ -166,29 +169,17 @@ namespace CSF.Zpt.Metal
     /// Adds the source annotation comment to an element.
     /// </summary>
     /// <param name="element">The element to annotate.</param>
-    private void AddAnnotationComment(ZptElement element)
+    private void AddAnnotationComment(RenderingContext context)
     {
-      string
-        filename = element.SourceFile.GetFullName(),
-        filePosition = element.GetFileLocation(),
-      commentText;
+      var comment = _annotator.CreateComment(context);
 
-      if(filePosition != null)
+      if(!context.Element.HasParent)
       {
-        commentText = String.Format("{0}", filename);
+        context.Element.AddCommentAfter(comment);
       }
       else
       {
-        commentText = filename;
-      }
-
-      if(!element.HasParent)
-      {
-        element.AddCommentAfter(commentText);
-      }
-      else
-      {
-        element.AddCommentBefore(commentText);
+        context.Element.AddCommentBefore(comment);
       }
     }
 
@@ -200,10 +191,13 @@ namespace CSF.Zpt.Metal
     /// Initializes a new instance of the <see cref="CSF.Zpt.Metal.MacroExpander"/> class.
     /// </summary>
     /// <param name="finder">A macro finder instance, or a null reference (in which case one will be constructed).</param>
-    public MacroExpander(MacroFinder finder = null)
+    public MacroExpander(MacroFinder finder = null,
+                         SourceAnnotator annotator = null)
     {
       _logger = log4net.LogManager.GetLogger(this.GetType());
+
       _macroFinder = finder?? new MacroFinder();
+      _annotator = annotator?? new SourceAnnotator();
     }
 
     #endregion
