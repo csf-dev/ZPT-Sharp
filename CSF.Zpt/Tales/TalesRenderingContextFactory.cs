@@ -81,6 +81,12 @@ namespace CSF.Zpt.Tales
       private set;
     }
 
+    public string RootDocumentPath
+    {
+      get;
+      set;
+    }
+
     #endregion
 
     #region methods
@@ -110,7 +116,7 @@ namespace CSF.Zpt.Tales
       PopulateMetalModel(metalModel);
       PopulateTalModel(talModel);
 
-      return new RenderingContext(metalModel, talModel, element, options);
+      return new RenderingContext(metalModel, talModel, element, options, this.RootDocumentPath);
     }
 
     /// <summary>

@@ -69,6 +69,8 @@ namespace CSF.Zpt.Rendering
     /// <value>The type of ZPT document implementation.</value>
     public abstract Type ZptDocumentType { get; }
 
+    public abstract bool CanWriteCommentWithoutParent { get; }
+
     #endregion
 
     #region methods

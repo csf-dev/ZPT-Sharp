@@ -79,6 +79,8 @@ namespace CSF.Zpt.Rendering
       }
     }
 
+    public override bool CanWriteCommentWithoutParent { get { return true; } }
+
     #endregion
 
     #region methods

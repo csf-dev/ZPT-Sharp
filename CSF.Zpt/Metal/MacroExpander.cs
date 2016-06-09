@@ -44,7 +44,7 @@ namespace CSF.Zpt.Metal
         output = context;
         if(context.Element.IsRoot && context.RenderingOptions.AddSourceFileAnnotation)
         {
-          this.AddAnnotationComment(context);
+          this.AddAnnotationComment(context, true);
         }
       }
 
@@ -169,18 +169,9 @@ namespace CSF.Zpt.Metal
     /// Adds the source annotation comment to an element.
     /// </summary>
     /// <param name="element">The element to annotate.</param>
-    private void AddAnnotationComment(RenderingContext context)
+    private void AddAnnotationComment(RenderingContext context, bool skipLineNumber = false)
     {
-      var comment = _annotator.CreateComment(context);
-
-      if(!context.Element.HasParent)
-      {
-        context.Element.AddCommentAfter(comment);
-      }
-      else
-      {
-        context.Element.AddCommentBefore(comment);
-      }
+      _annotator.AddComment(context, skipLineNumber);
     }
 
     #endregion

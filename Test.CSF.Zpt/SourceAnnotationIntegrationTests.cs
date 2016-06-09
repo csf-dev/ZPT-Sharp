@@ -7,6 +7,7 @@ using CSF.Configuration;
 using CSF.Zpt.Rendering;
 using System.Collections.Generic;
 using System.Linq;
+using CSF.IO;
 
 namespace Test.CSF.Zpt
 {
@@ -131,7 +132,8 @@ namespace Test.CSF.Zpt
 
         try
         {
-          var options = new DefaultRenderingOptions(contextFactory: this.CreateTestEnvironment(),
+          var root = sourceDocument.GetParent().GetParent();
+          var options = new DefaultRenderingOptions(contextFactory: this.CreateTestEnvironment(root),
                                                     outputIndentedXml: true,
                                                     xmlIndentCharacters: "\t",
                                                     addSourceFileAnnotation: true);
@@ -161,9 +163,10 @@ namespace Test.CSF.Zpt
       return output;
     }
 
-    private IRenderingContextFactory CreateTestEnvironment()
+    private IRenderingContextFactory CreateTestEnvironment(DirectoryInfo rootPath)
     {
       var output = new TalesRenderingContextFactory();
+      output.RootDocumentPath = rootPath.FullName;
 
       // The location of the other ZPT documents
       output.MetalLocalDefinitions.Add("documents", new TemplateDirectory(_sourcePath));
