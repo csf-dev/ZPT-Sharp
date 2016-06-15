@@ -38,14 +38,12 @@ namespace CSF.Zpt.Metal
       if(macro != null)
       {
         output = this.ExpandAndReplace(context, macro);
+        _annotator.ProcessAnnotation(output, context);
       }
       else
       {
         output = context;
-        if(context.Element.IsRoot && context.RenderingOptions.AddSourceFileAnnotation)
-        {
-          this.AddAnnotationComment(context, true);
-        }
+        _annotator.ProcessAnnotation(context);
       }
 
       return output;
@@ -81,12 +79,8 @@ namespace CSF.Zpt.Metal
       _logger.DebugFormat("Element to extend: {0}", macroContext.Element.Name);
 
       var extendedMacro = context.Element.ReplaceWith(macroContext.Element);
-      if(context.RenderingOptions.AddSourceFileAnnotation)
-      {
-        this.AddAnnotationComment(macroContext);
-      }
 
-      this.FillSlots(context, extendedMacro, context.RenderingOptions.AddSourceFileAnnotation);
+      this.FillSlots(context, extendedMacro);
 
       return context.CreateSiblingContext(extendedMacro);
     }
@@ -97,7 +91,7 @@ namespace CSF.Zpt.Metal
     /// <param name="sourceElement">Source element.</param>
     /// <param name="macro">Macro.</param>
     /// <param name="addAnnotation">A value indicating whether or not source annotation is to be added to the result.</param>
-    private void FillSlots(RenderingContext sourceContext, ZptElement macro, bool addAnnotation)
+    private void FillSlots(RenderingContext sourceContext, ZptElement macro)
     {
       if(sourceContext == null)
       {
@@ -111,16 +105,14 @@ namespace CSF.Zpt.Metal
       var slotsToHandle = (from defineSlot in this.GetElementsByValue(macro, ZptConstants.Metal.DefineSlotAttribute)
                            join fillSlot in this.GetElementsByValue(sourceContext.Element, ZptConstants.Metal.FillSlotAttribute)
                            on defineSlot.Key equals fillSlot.Key
-                           select new { Slot = defineSlot.Value,
-                                        Filler = sourceContext.CreateSiblingContext(fillSlot.Value) });
+                           select new { Slot = sourceContext.CreateSiblingContext(defineSlot.Value),
+                                        Filler = sourceContext.CreateSiblingContext(fillSlot.Value.Clone()) });
 
       foreach(var replacement in slotsToHandle)
       {
-        replacement.Slot.ReplaceWith(replacement.Filler.Element);
-        if(addAnnotation)
-        {
-          this.AddAnnotationComment(replacement.Filler);
-        }
+        var replacementElement = replacement.Slot.Element.ReplaceWith(replacement.Filler.Element);
+        var replacementContext = replacement.Filler.CreateSiblingContext(replacementElement);
+        _annotator.ProcessAnnotation(replacementContext, replacement.Filler);
       }
     }
 
@@ -163,15 +155,6 @@ namespace CSF.Zpt.Metal
 
       var extended = _macroFinder.GetExtendedMacro(context);
       return (extended != null)? this.ExpandAndReplace(context, extended) : context;
-    }
-
-    /// <summary>
-    /// Adds the source annotation comment to an element.
-    /// </summary>
-    /// <param name="element">The element to annotate.</param>
-    private void AddAnnotationComment(RenderingContext context, bool skipLineNumber = false)
-    {
-      _annotator.AddComment(context, skipLineNumber);
     }
 
     #endregion

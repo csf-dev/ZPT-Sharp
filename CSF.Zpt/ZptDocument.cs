@@ -92,7 +92,7 @@ namespace CSF.Zpt
         throw new ArgumentNullException(nameof(options));
       }
 
-      var output = this.GetRootElement().Clone();
+      var output = this.GetRootElement();
       var context = options.CreateRootContext(output);
 
       if(contextConfigurator != null)

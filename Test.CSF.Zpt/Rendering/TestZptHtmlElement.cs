@@ -616,7 +616,7 @@ namespace Test.CSF.Zpt.Rendering
 </head>
 <body>
 <header>
-  <!--Foo bar baz-->  <div custom:parent_attrib=""Attribute value one"" class=""class_one class_two"">
+  <!--Foo bar baz--><div custom:parent_attrib=""Attribute value one"" class=""class_one class_two"">
     <ul>
       <li custom:child_attrib=""foo"">Foo content</li>
       <li custom:child_attrib=""bar"">Bar content</li>

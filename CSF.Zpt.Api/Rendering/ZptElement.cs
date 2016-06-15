@@ -307,6 +307,9 @@ namespace CSF.Zpt.Rendering
     /// <param name="comment">The comment text.</param>
     public abstract void AddCommentBefore(string comment);
 
+
+    public abstract void AddCommentInside(string comment);
+
     /// <summary>
     /// Adds a new comment to the DOM immediately after the current element.
     /// </summary>

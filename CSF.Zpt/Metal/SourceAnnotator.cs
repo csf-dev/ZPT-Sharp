@@ -23,29 +23,101 @@ namespace CSF.Zpt.Metal
 
     #endregion
 
+    #region fields
+
+    private log4net.ILog _logger;
+
+    #endregion
+
     /* Comments come:
      * 
      * * Before a define macro (with the location of the macro)
      * * Before a use macro (with the location of the macro)
      * 
      * * Before a fill slot (with the location of the slot filler)
+     * 
      * * After a define slot (with the location of the original slot)
+     * * Before a root element (skipping the line number)
      */
 
     #region methods
 
-    public void AddComment(RenderingContext context, bool skipLineNumber)
+    public void ProcessAnnotation(RenderingContext context,
+                                  RenderingContext replacedContext = null)
     {
-      var body = CreateCommentBody(context, skipLineNumber);
+      if(context == null)
+      {
+        throw new ArgumentNullException(nameof(context));
+      }
+
+      if(!context.RenderingOptions.AddSourceFileAnnotation)
+      {
+        return;
+      }
+
+      if(context.Element.IsRoot)
+      {
+        _logger.DebugFormat("Adding {1} annotation for element '{0}'", context.Element.Name, "root");
+        AddAnnotation(context, skipLineNumber: true);
+      }
+
+      if((replacedContext == null
+          && context.Element.GetMetalAttribute(ZptConstants.Metal.DefineMacroAttribute) != null)
+         || (replacedContext != null
+             && context.Element.GetMetalAttribute(ZptConstants.Metal.DefineMacroAttribute) != null
+             && replacedContext.Element.GetMetalAttribute(ZptConstants.Metal.UseMacroAttribute) != null))
+      {
+        _logger.DebugFormat("Adding {1} annotation for element '{0}'", context.Element.Name, "define-macro");
+        AddAnnotation(context);
+      }
+
+      if(replacedContext != null
+         && replacedContext.Element.GetMetalAttribute(ZptConstants.Metal.UseMacroAttribute) != null)
+      {
+        _logger.DebugFormat("Adding {1} annotation for element '{0}'", context.Element.Name, "use-macro");
+        AddAnnotation(context, beforeElement: false, replacedContext: replacedContext);
+      }
+
+      if((replacedContext != null
+          && replacedContext.Element.GetMetalAttribute(ZptConstants.Metal.DefineSlotAttribute) != null)
+         || (replacedContext == null
+             && context.Element.GetMetalAttribute(ZptConstants.Metal.DefineSlotAttribute) != null))
+      {
+        _logger.DebugFormat("Adding {1} annotation for element '{0}'", context.Element.Name, "define-slot");
+        AddAnnotation(context, beforeElement: false);
+      }
+
+      if(replacedContext != null
+         && context.Element.GetMetalAttribute(ZptConstants.Metal.FillSlotAttribute) != null)
+      {
+        _logger.DebugFormat("Adding {1} annotation for element '{0}'", context.Element.Name, "fill-slot");
+        AddAnnotation(context, replacedContext: replacedContext);
+      }
+    }
+
+    private void AddAnnotation(RenderingContext context,
+                               bool skipLineNumber = false,
+                               bool beforeElement = true,
+                               RenderingContext replacedContext = null)
+    {
+      var bodyContext = replacedContext?? context;
+      var body = CreateCommentBody(bodyContext, skipLineNumber);
+
       var comment = FormatComment(body);
 
-      if(!context.Element.HasParent)
+      if(beforeElement
+         && (context.Element.HasParent
+             || context.Element.CanWriteCommentWithoutParent))
       {
-        context.Element.AddCommentAfter(comment);
+        context.Element.AddCommentBefore(comment);
+      }
+      else if(beforeElement)
+      {
+        context.Element.AddCommentInside(comment);
       }
       else
       {
-        context.Element.AddCommentBefore(comment);
+        context.Element.AddCommentAfter(comment);
       }
     }
 
@@ -88,6 +160,15 @@ namespace CSF.Zpt.Metal
 
       var body = (skipLineNumber || String.IsNullOrEmpty(filePosition))? filename : String.Format(POSITION_FORMAT, filename, filePosition);
       return String.Concat(previousElement, body);
+    }
+
+    #endregion
+
+    #region constructor
+
+    public SourceAnnotator()
+    {
+      _logger = log4net.LogManager.GetLogger(this.GetType());
     }
 
     #endregion

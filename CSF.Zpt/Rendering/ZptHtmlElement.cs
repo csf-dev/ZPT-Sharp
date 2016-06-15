@@ -28,7 +28,7 @@ namespace CSF.Zpt.Rendering
     #region fields
 
     private HtmlNode _node;
-    private int? _cachedHashCode;
+    private int? _cachedHashCode, _filePosition;
 
     #endregion
 
@@ -479,25 +479,30 @@ namespace CSF.Zpt.Rendering
         throw new ArgumentNullException(nameof(comment));
       }
 
-      var parent = this.GetParent();
-      string indent = String.Empty;
-
-      var previousNode = this.Node.PreviousSibling;
-      if(previousNode != null
-         && previousNode.NodeType == HtmlNodeType.Text)
-      {
-        HtmlTextNode previousText = (HtmlTextNode) previousNode;
-        var indentMatch = Indent.Match(previousText.Text);
-        if(indentMatch.Success)
-        {
-          indent = indentMatch.Value;
-        }
-      }
-
-      string commentText = String.Concat(HTML_COMMENT_START, comment, HTML_COMMENT_END, indent);
+      string commentText = String.Concat(HTML_COMMENT_START, comment, HTML_COMMENT_END, String.Empty);
       var commentNode = this.Node.OwnerDocument.CreateComment(commentText);
 
-      parent.InsertBefore(commentNode, this.Node);
+      if(this.HasParent)
+      {
+        this.GetParent().InsertBefore(commentNode, this.Node);
+      }
+      else
+      {
+        this.Node.PrependChild(commentNode);
+      }
+    }
+
+    public override void AddCommentInside(string comment)
+    {
+      if(comment == null)
+      {
+        throw new ArgumentNullException(nameof(comment));
+      }
+
+      string commentText = String.Concat(HTML_COMMENT_START, comment, HTML_COMMENT_END, String.Empty);
+      var commentNode = this.Node.OwnerDocument.CreateComment(commentText);
+
+      this.Node.InsertBefore(commentNode, this.Node.FirstChild);
     }
 
     /// <summary>
@@ -506,29 +511,17 @@ namespace CSF.Zpt.Rendering
     /// <param name="comment">The comment text.</param>
     public override void AddCommentAfter(string comment)
     {
-      if(comment == null)
-      {
-        throw new ArgumentNullException(nameof(comment));
-      }
-
-      string indent = String.Empty;
-
-      var firstChild = this.Node.FirstChild;
-      if(firstChild != null
-         && firstChild.NodeType == HtmlNodeType.Text)
-      {
-        HtmlTextNode innerText = (HtmlTextNode) firstChild;
-        var indentMatch = Indent.Match(innerText.Text);
-        if(indentMatch.Success)
-        {
-          indent = indentMatch.Value;
-        }
-      }
-
-      string commentText = String.Concat(HTML_COMMENT_START, comment, HTML_COMMENT_END, indent);
+      string commentText = String.Concat(HTML_COMMENT_START, comment, HTML_COMMENT_END, String.Empty);
       var commentNode = this.Node.OwnerDocument.CreateComment(commentText);
 
-      this.Node.InsertBefore(commentNode, this.Node.FirstChild);
+      if(this.HasParent)
+      {
+        this.GetParent().InsertAfter(commentNode, this.Node);
+      }
+      else
+      {
+        this.Node.AppendChild(commentNode);
+      }
     }
 
     /// <summary>
@@ -536,9 +529,11 @@ namespace CSF.Zpt.Rendering
     /// </summary>
     public override ZptElement Clone()
     {
-      var clone = _node.Clone();
+      var clone = this.Node.Clone();
 
-      return new ZptHtmlElement(clone, this.SourceFile, this.IsRoot, true);
+      return new ZptHtmlElement(clone, this.SourceFile, this.IsRoot, true) {
+        _filePosition = _filePosition.HasValue? _filePosition : this.Node.Line,
+      };
     }
 
     /// <summary>
@@ -547,7 +542,8 @@ namespace CSF.Zpt.Rendering
     /// <returns>The file location.</returns>
     public override string GetFileLocation()
     {
-      return (_node.Line >= 1)? _node.Line.ToString() : null;
+      int line = _filePosition.HasValue? _filePosition.Value : this.Node.Line;
+      return (line >= 1)? line.ToString() : null;
     }
 
     /// <summary>

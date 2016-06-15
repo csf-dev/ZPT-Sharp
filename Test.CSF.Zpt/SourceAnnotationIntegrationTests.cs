@@ -77,7 +77,7 @@ namespace Test.CSF.Zpt
                   failedTests.Count());
     }
 
-    [TestCase("")]
+    [TestCase("test_sa3.html")]
     [Explicit("This test is covered by RunIntegrationTests - this method is for running them one at a time though.")]
     public void TestSingleIntegrationTest(string inputFileName)
     {

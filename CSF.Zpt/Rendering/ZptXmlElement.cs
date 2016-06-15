@@ -544,11 +544,7 @@ namespace CSF.Zpt.Rendering
       parent.InsertBefore(commentNode, this.Node);
     }
 
-    /// <summary>
-    /// Adds a new comment to the DOM immediately after the current element.
-    /// </summary>
-    /// <param name="comment">The comment text.</param>
-    public override void AddCommentAfter(string comment)
+    public override void AddCommentInside(string comment)
     {
       if(comment == null)
       {
@@ -572,6 +568,17 @@ namespace CSF.Zpt.Rendering
       var commentNode = this.Node.OwnerDocument.CreateComment(String.Concat(XML_COMMENT_START, comment, XML_COMMENT_END));
 
       this.Node.InsertBefore(commentNode, this.Node.FirstChild);
+    }
+
+    /// <summary>
+    /// Adds a new comment to the DOM immediately after the current element.
+    /// </summary>
+    /// <param name="comment">The comment text.</param>
+    public override void AddCommentAfter(string comment)
+    {
+      var commentNode = this.Node.OwnerDocument.CreateComment(String.Concat(XML_COMMENT_START, comment, XML_COMMENT_END));
+
+      this.GetParent().InsertAfter(commentNode, this.Node);
     }
 
     /// <summary>
