@@ -94,6 +94,14 @@ namespace CSF.Zpt.Metal
         AddAnnotation(targetContext,
                       replacementContext: replacementContext,
                       extraText: String.Format(FILLED_SLOT_FORMAT, attr.Value));
+
+        if(!originalContext.Element.IsFromSameDocumentAs(replacementContext.Element))
+        {
+          AddAnnotation(targetContext,
+                        beforeElement: false,
+                        extraText: String.Format(SLOT_DEFINITION_FORMAT, attr.Value),
+                        originalContext: originalContext);
+        }
       }
     }
 
