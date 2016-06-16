@@ -88,11 +88,10 @@ namespace CSF.Zpt.Metal
     }
 
     /// <summary>
-    /// Fills slots defined in the <paramref name="macro"/> with content defined in the <paramref name="sourceElement"/>.
+    /// Fills slots defined in the <paramref name="macro"/> with content defined in the <paramref name="sourceContext"/>.
     /// </summary>
-    /// <param name="sourceElement">Source element.</param>
-    /// <param name="macro">Macro.</param>
-    /// <param name="addAnnotation">A value indicating whether or not source annotation is to be added to the result.</param>
+    /// <param name="sourceContext">Source rendering context.</param>
+    /// <param name="macro">The macro providing the slots to fill.</param>
     private void FillSlots(RenderingContext sourceContext, ZptElement macro)
     {
       if(sourceContext == null)
@@ -169,6 +168,7 @@ namespace CSF.Zpt.Metal
     /// Initializes a new instance of the <see cref="CSF.Zpt.Metal.MacroExpander"/> class.
     /// </summary>
     /// <param name="finder">A macro finder instance, or a null reference (in which case one will be constructed).</param>
+    /// <param name="annotator">A source annotator instance, or a null reference (in which case one will be constructed).</param>
     public MacroExpander(MacroFinder finder = null,
                          SourceAnnotator annotator = null)
     {

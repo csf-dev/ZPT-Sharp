@@ -18,7 +18,6 @@ namespace Test.CSF.Zpt
     #region fields
 
     private IZptDocumentFactory _documentFactory;
-    private ITemplateFileFactory _templateFactory;
     private IIntegrationTestConfiguration _config;
     private DirectoryInfo _sourcePath, _expectedPath;
     private log4net.ILog _logger;
@@ -45,7 +44,6 @@ namespace Test.CSF.Zpt
     {
       var fac = new ZptDocumentFactory();
       _documentFactory = fac;
-      _templateFactory = fac;
     }
 
     #endregion

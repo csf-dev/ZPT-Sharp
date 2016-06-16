@@ -81,6 +81,10 @@ namespace CSF.Zpt.Tales
       private set;
     }
 
+    /// <summary>
+    /// Gets or sets the root file path for METAL documents.
+    /// </summary>
+    /// <value>The root document path.</value>
     public string RootDocumentPath
     {
       get;

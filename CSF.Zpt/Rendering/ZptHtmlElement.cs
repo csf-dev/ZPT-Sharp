@@ -21,7 +21,6 @@ namespace CSF.Zpt.Rendering
       HTML_COMMENT_END      = "-->",
       PREFIX_SEPARATOR      = ":",
       XMLNS_ATTRIBUTE       = "xmlns";
-    private static readonly Regex Indent = new Regex(INDENT_PATTERN, RegexOptions.Compiled);
     private const char NEWLINE = '\n';
 
     #endregion
@@ -80,6 +79,11 @@ namespace CSF.Zpt.Rendering
       }
     }
 
+    /// <summary>
+    /// Gets a value indicating whether or not this instance can write a comment node to a node that does not have
+    /// a parent.
+    /// </summary>
+    /// <value><c>true</c> if this instance can write a comment node if it does not have a parent; otherwise, <c>false</c>.</value>
     public override bool CanWriteCommentWithoutParent { get { return true; } }
 
     #endregion
@@ -493,6 +497,10 @@ namespace CSF.Zpt.Rendering
       }
     }
 
+    /// <summary>
+    /// Adds a new comment to the DOM inside the current element as its first child.
+    /// </summary>
+    /// <param name="comment">The comment text.</param>
     public override void AddCommentInside(string comment)
     {
       if(comment == null)
@@ -547,6 +555,10 @@ namespace CSF.Zpt.Rendering
       return loc.HasValue? loc.Value.ToString() : null;
     }
 
+    /// <summary>
+    /// Gets the file location (typically a line number) for the end tag matched with the current instance.
+    /// </summary>
+    /// <returns>The end tag file location.</returns>
     public override string GetEndTagFileLocation()
     {
       string output = null;
@@ -611,6 +623,11 @@ namespace CSF.Zpt.Rendering
       return this.IsInNamespace(nSpace, this.Node);
     }
 
+    /// <summary>
+    /// Determines whether this instance is from same document as the specified element.
+    /// </summary>
+    /// <returns><c>true</c> if this instance is from same document as the specified element; otherwise, <c>false</c>.</returns>
+    /// <param name="other">The element to test.</param>
     public override bool IsFromSameDocumentAs(ZptElement other)
     {
       if(other == null)

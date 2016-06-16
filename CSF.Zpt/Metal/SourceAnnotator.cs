@@ -5,13 +5,15 @@ using CSF.IO;
 
 namespace CSF.Zpt.Metal
 {
+  /// <summary>
+  /// Performs source annotation tasks upon METAL elements.
+  /// </summary>
   public class SourceAnnotator
   {
     #region constants
 
     private const int BORDER_CHARACTER_WIDTH = 78;
     private const char BORDER_CHARACTER = '=';
-    private const bool RENDER_EXTRA_TEXT = false;
 
     private const string
       COMMENT_FORMAT = @"
@@ -30,12 +32,18 @@ namespace CSF.Zpt.Metal
 
     #region fields
 
-    private log4net.ILog _logger;
+    private bool _renderExtraText;
 
     #endregion
 
     #region methods
 
+    /// <summary>
+    /// Processes source annotation and adds comments before/after the <paramref name="targetContext"/> if appropriate.
+    /// </summary>
+    /// <param name="targetContext">Target context.</param>
+    /// <param name="originalContext">Original context.</param>
+    /// <param name="replacementContext">Replacement context.</param>
     public void ProcessAnnotation(RenderingContext targetContext,
                                   RenderingContext originalContext = null,
                                   RenderingContext replacementContext = null)
@@ -179,7 +187,7 @@ namespace CSF.Zpt.Metal
       }
 
       var body = (skipLineNumber || String.IsNullOrEmpty(filePosition))? filename : String.Format(POSITION_FORMAT, filename, filePosition);
-      var extra = RENDER_EXTRA_TEXT? extraText?? String.Empty : String.Empty;
+      var extra = _renderExtraText? extraText?? String.Empty : String.Empty;
       return String.Concat(previousElement, extra, body);
     }
 
@@ -187,9 +195,15 @@ namespace CSF.Zpt.Metal
 
     #region constructor
 
-    public SourceAnnotator()
+    /// <summary>
+    /// Initializes a new instance of the <see cref="CSF.Zpt.Metal.SourceAnnotator"/> class.
+    /// </summary>
+    /// <param name="renderExtraText">
+    /// If set to <c>true</c> then extra text indicating the nature of a context-switch is rendered in the comments.
+    /// </param>
+    public SourceAnnotator(bool renderExtraText = false)
     {
-      _logger = log4net.LogManager.GetLogger(this.GetType());
+      _renderExtraText = renderExtraText;
     }
 
     #endregion

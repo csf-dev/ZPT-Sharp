@@ -66,6 +66,10 @@ namespace CSF.Zpt.Rendering
       }
     }
 
+    /// <summary>
+    /// Gets the 'virtual' root path for the purpose of source annotation comments.
+    /// </summary>
+    /// <value>The source annotation root path.</value>
     public virtual string SourceAnnotationRootPath
     {
       get {
@@ -178,6 +182,7 @@ namespace CSF.Zpt.Rendering
     /// <param name="talContext">The TAL context.</param>
     /// <param name="element">The ZPT element for which this context is created.</param>
     /// <param name="options">The rendering options.</param>
+    /// <param name="sourceAnnotationRoot">The source annotation root path.</param>
     public RenderingContext(IModel metalContext,
                             IModel talContext,
                             ZptElement element,

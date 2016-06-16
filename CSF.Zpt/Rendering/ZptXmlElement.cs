@@ -78,6 +78,11 @@ namespace CSF.Zpt.Rendering
       }
     }
 
+    /// <summary>
+    /// Gets a value indicating whether or not this instance can write a comment node to a node that does not have
+    /// a parent.
+    /// </summary>
+    /// <value><c>true</c> if this instance can write a comment node if it does not have a parent; otherwise, <c>false</c>.</value>
     public override bool CanWriteCommentWithoutParent { get { return false; } }
 
     #endregion
@@ -544,6 +549,10 @@ namespace CSF.Zpt.Rendering
       parent.InsertBefore(commentNode, this.Node);
     }
 
+    /// <summary>
+    /// Adds a new comment to the DOM inside the current element as its first child.
+    /// </summary>
+    /// <param name="comment">The comment text.</param>
     public override void AddCommentInside(string comment)
     {
       if(comment == null)
@@ -631,6 +640,10 @@ namespace CSF.Zpt.Rendering
       return null;
     }
 
+    /// <summary>
+    /// Gets the file location (typically a line number) for the end tag matched with the current instance.
+    /// </summary>
+    /// <returns>The end tag file location.</returns>
     public override string GetEndTagFileLocation()
     {
       return null;
@@ -691,6 +704,11 @@ namespace CSF.Zpt.Rendering
       return this.IsInNamespace(nSpace, this.Node);
     }
 
+    /// <summary>
+    /// Determines whether this instance is from same document as the specified element.
+    /// </summary>
+    /// <returns><c>true</c> if this instance is from same document as the specified element; otherwise, <c>false</c>.</returns>
+    /// <param name="other">The element to test.</param>
     public override bool IsFromSameDocumentAs(ZptElement other)
     {
       if(other == null)
