@@ -611,6 +611,22 @@ namespace CSF.Zpt.Rendering
       return this.IsInNamespace(nSpace, this.Node);
     }
 
+    public override bool IsFromSameDocumentAs(ZptElement other)
+    {
+      if(other == null)
+      {
+        throw new ArgumentNullException(nameof(other));
+      }
+      else if(!(other is ZptHtmlElement))
+      {
+        string message = String.Format(Resources.ExceptionMessages.ElementMustBeCorrectType,
+                                       typeof(ZptHtmlElement).Name);
+        throw new ArgumentException(message, nameof(other));
+      }
+
+      return this.Node.OwnerDocument == ((ZptHtmlElement) other).Node.OwnerDocument;
+    }
+
     private bool IsInNamespace(ZptNamespace nSpace, HtmlNode node)
     {
       if(nSpace == null)

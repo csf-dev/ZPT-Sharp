@@ -356,6 +356,8 @@ namespace CSF.Zpt.Rendering
     /// <param name="nSpace">The namespace for which to test.</param>
     public abstract bool IsInNamespace(ZptNamespace nSpace);
 
+    public abstract bool IsFromSameDocumentAs(ZptElement other);
+
     #endregion
 
     #region constructor
