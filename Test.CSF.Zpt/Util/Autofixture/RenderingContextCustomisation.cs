@@ -26,7 +26,7 @@ namespace Test.CSF.Zpt.Util.Autofixture
                                                               DummyModel tal,
                                                               ZptElement element,
                                                               DefaultRenderingOptions opts) => {
-        return new Mock<RenderingContext>(metal, tal, element, opts) {
+        return new Mock<RenderingContext>(metal, tal, element, opts, (string) null) {
           CallBase = true,
           Name = String.Format("Context {0}", _nameIterator++)
         }.Object;

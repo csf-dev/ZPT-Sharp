@@ -1,30 +1,42 @@
 <!--
 ==============================================================================
-tests/input/test_sa4.html
+SourceDocuments/test_sa3.html
 ==============================================================================
 --><html>
 <body>
-  <p>Some text on sa4 line 3.</p>
   <!--
 ==============================================================================
-tests/input/test_sa3.html (line 3)
+SourceDocuments/test_sa3.html (line 3)
+==============================================================================
+--><div>This is macro1 on sa3 line 3.
+    <span>This is slot1 on sa3 line 4.</span><!--
+==============================================================================
+SourceDocuments/test_sa3.html (line 4)
+==============================================================================
+-->
+    This is the end of macro1 on sa3 line 5.
+  </div>
+  <p>Some text on sa3 line 7.</p>
+  <!--
+==============================================================================
+SourceDocuments/test_sa3.html (line 3)
 ==============================================================================
 --><div>This is macro1 on sa3 line 3.
     <!--
 ==============================================================================
-tests/input/test_sa4.html (line 6)
+SourceDocuments/test_sa3.html (line 10)
 ==============================================================================
---><b>Text from sa4 line 6 is filled into slot1.</b><!--
+--><b>Text from sa3 line 10 is filled into slot1.</b><!--
 ==============================================================================
-tests/input/test_sa3.html (line 4)
+SourceDocuments/test_sa3.html (line 4)
 ==============================================================================
 -->
     This is the end of macro1 on sa3 line 5.
   </div><!--
 ==============================================================================
-tests/input/test_sa4.html (line 8)
+SourceDocuments/test_sa3.html (line 12)
 ==============================================================================
 -->
-  <p>This is some text on sa4 line 9.</p>
+  <p>This is some text on sa3 line 13.</p>
 </body>
 </html>

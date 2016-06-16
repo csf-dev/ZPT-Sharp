@@ -5,9 +5,9 @@ namespace Test.CSF.Zpt
 {
   public interface IIntegrationTestConfiguration
   {
-    DirectoryInfo GetSourceDocumentPath();
+    DirectoryInfo GetSourceDocumentPath(IntegrationTestType type = IntegrationTestType.Default);
 
-    DirectoryInfo GetExpectedOutputPath();
+    DirectoryInfo GetExpectedOutputPath(IntegrationTestType type = IntegrationTestType.Default);
   }
 }
 

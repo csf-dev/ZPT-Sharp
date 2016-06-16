@@ -17,7 +17,7 @@ namespace CSF.Zpt.Rendering
 
     private const string
       INDENT_PATTERN        = @"([ \t]+)$",
-      XML_COMMENT_START    = " ",
+      XML_COMMENT_START    = "",
       XML_COMMENT_END      = XML_COMMENT_START;
 
     private static readonly Regex Indent = new Regex(INDENT_PATTERN, RegexOptions.Compiled);
@@ -77,6 +77,13 @@ namespace CSF.Zpt.Rendering
         return typeof(ZptXmlDocument);
       }
     }
+
+    /// <summary>
+    /// Gets a value indicating whether or not this instance can write a comment node to a node that does not have
+    /// a parent.
+    /// </summary>
+    /// <value><c>true</c> if this instance can write a comment node if it does not have a parent; otherwise, <c>false</c>.</value>
+    public override bool CanWriteCommentWithoutParent { get { return false; } }
 
     #endregion
 
@@ -543,10 +550,10 @@ namespace CSF.Zpt.Rendering
     }
 
     /// <summary>
-    /// Adds a new comment to the DOM immediately after the current element.
+    /// Adds a new comment to the DOM inside the current element as its first child.
     /// </summary>
     /// <param name="comment">The comment text.</param>
-    public override void AddCommentAfter(string comment)
+    public override void AddCommentInside(string comment)
     {
       if(comment == null)
       {
@@ -570,6 +577,17 @@ namespace CSF.Zpt.Rendering
       var commentNode = this.Node.OwnerDocument.CreateComment(String.Concat(XML_COMMENT_START, comment, XML_COMMENT_END));
 
       this.Node.InsertBefore(commentNode, this.Node.FirstChild);
+    }
+
+    /// <summary>
+    /// Adds a new comment to the DOM immediately after the current element.
+    /// </summary>
+    /// <param name="comment">The comment text.</param>
+    public override void AddCommentAfter(string comment)
+    {
+      var commentNode = this.Node.OwnerDocument.CreateComment(String.Concat(XML_COMMENT_START, comment, XML_COMMENT_END));
+
+      this.GetParent().InsertAfter(commentNode, this.Node);
     }
 
     /// <summary>
@@ -618,6 +636,15 @@ namespace CSF.Zpt.Rendering
     /// </summary>
     /// <returns>The file location.</returns>
     public override string GetFileLocation()
+    {
+      return null;
+    }
+
+    /// <summary>
+    /// Gets the file location (typically a line number) for the end tag matched with the current instance.
+    /// </summary>
+    /// <returns>The end tag file location.</returns>
+    public override string GetEndTagFileLocation()
     {
       return null;
     }
@@ -675,6 +702,27 @@ namespace CSF.Zpt.Rendering
     public override bool IsInNamespace(ZptNamespace nSpace)
     {
       return this.IsInNamespace(nSpace, this.Node);
+    }
+
+    /// <summary>
+    /// Determines whether this instance is from same document as the specified element.
+    /// </summary>
+    /// <returns><c>true</c> if this instance is from same document as the specified element; otherwise, <c>false</c>.</returns>
+    /// <param name="other">The element to test.</param>
+    public override bool IsFromSameDocumentAs(ZptElement other)
+    {
+      if(other == null)
+      {
+        throw new ArgumentNullException(nameof(other));
+      }
+      else if(!(other is ZptXmlElement))
+      {
+        string message = String.Format(Resources.ExceptionMessages.ElementMustBeCorrectType,
+                                       typeof(ZptXmlElement).Name);
+        throw new ArgumentException(message, nameof(other));
+      }
+
+      return this.Node.OwnerDocument == ((ZptXmlElement) other).Node.OwnerDocument;
     }
 
     private bool IsInNamespace(ZptNamespace nSpace, XmlNode node)

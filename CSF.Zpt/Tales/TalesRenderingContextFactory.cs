@@ -81,6 +81,16 @@ namespace CSF.Zpt.Tales
       private set;
     }
 
+    /// <summary>
+    /// Gets or sets the root file path for METAL documents.
+    /// </summary>
+    /// <value>The root document path.</value>
+    public string RootDocumentPath
+    {
+      get;
+      set;
+    }
+
     #endregion
 
     #region methods
@@ -110,7 +120,7 @@ namespace CSF.Zpt.Tales
       PopulateMetalModel(metalModel);
       PopulateTalModel(talModel);
 
-      return new RenderingContext(metalModel, talModel, element, options);
+      return new RenderingContext(metalModel, talModel, element, options, this.RootDocumentPath);
     }
 
     /// <summary>

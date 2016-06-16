@@ -17,18 +17,18 @@ namespace CSF.Zpt.Rendering
 
     private const string
       INDENT_PATTERN        = @"([ \t]+)$",
-      HTML_COMMENT_START    = "<!-- ",
-      HTML_COMMENT_END      = " -->\n",
+      HTML_COMMENT_START    = "<!--",
+      HTML_COMMENT_END      = "-->",
       PREFIX_SEPARATOR      = ":",
       XMLNS_ATTRIBUTE       = "xmlns";
-    private static readonly Regex Indent = new Regex(INDENT_PATTERN, RegexOptions.Compiled);
+    private const char NEWLINE = '\n';
 
     #endregion
 
     #region fields
 
     private HtmlNode _node;
-    private int? _cachedHashCode;
+    private int? _cachedHashCode, _filePosition;
 
     #endregion
 
@@ -78,6 +78,13 @@ namespace CSF.Zpt.Rendering
         return typeof(ZptHtmlDocument);
       }
     }
+
+    /// <summary>
+    /// Gets a value indicating whether or not this instance can write a comment node to a node that does not have
+    /// a parent.
+    /// </summary>
+    /// <value><c>true</c> if this instance can write a comment node if it does not have a parent; otherwise, <c>false</c>.</value>
+    public override bool CanWriteCommentWithoutParent { get { return true; } }
 
     #endregion
 
@@ -477,25 +484,34 @@ namespace CSF.Zpt.Rendering
         throw new ArgumentNullException(nameof(comment));
       }
 
-      var parent = this.GetParent();
-      string indent = String.Empty;
-
-      var previousNode = this.Node.PreviousSibling;
-      if(previousNode != null
-         && previousNode.NodeType == HtmlNodeType.Text)
-      {
-        HtmlTextNode previousText = (HtmlTextNode) previousNode;
-        var indentMatch = Indent.Match(previousText.Text);
-        if(indentMatch.Success)
-        {
-          indent = indentMatch.Value;
-        }
-      }
-
-      string commentText = String.Concat(HTML_COMMENT_START, comment, HTML_COMMENT_END, indent);
+      string commentText = String.Concat(HTML_COMMENT_START, comment, HTML_COMMENT_END, String.Empty);
       var commentNode = this.Node.OwnerDocument.CreateComment(commentText);
 
-      parent.InsertBefore(commentNode, this.Node);
+      if(this.HasParent)
+      {
+        this.GetParent().InsertBefore(commentNode, this.Node);
+      }
+      else
+      {
+        this.Node.PrependChild(commentNode);
+      }
+    }
+
+    /// <summary>
+    /// Adds a new comment to the DOM inside the current element as its first child.
+    /// </summary>
+    /// <param name="comment">The comment text.</param>
+    public override void AddCommentInside(string comment)
+    {
+      if(comment == null)
+      {
+        throw new ArgumentNullException(nameof(comment));
+      }
+
+      string commentText = String.Concat(HTML_COMMENT_START, comment, HTML_COMMENT_END, String.Empty);
+      var commentNode = this.Node.OwnerDocument.CreateComment(commentText);
+
+      this.Node.InsertBefore(commentNode, this.Node.FirstChild);
     }
 
     /// <summary>
@@ -504,29 +520,17 @@ namespace CSF.Zpt.Rendering
     /// <param name="comment">The comment text.</param>
     public override void AddCommentAfter(string comment)
     {
-      if(comment == null)
-      {
-        throw new ArgumentNullException(nameof(comment));
-      }
-
-      string indent = String.Empty;
-
-      var firstChild = this.Node.FirstChild;
-      if(firstChild != null
-         && firstChild.NodeType == HtmlNodeType.Text)
-      {
-        HtmlTextNode innerText = (HtmlTextNode) firstChild;
-        var indentMatch = Indent.Match(innerText.Text);
-        if(indentMatch.Success)
-        {
-          indent = indentMatch.Value;
-        }
-      }
-
-      string commentText = String.Concat(HTML_COMMENT_START, comment, HTML_COMMENT_END, indent);
+      string commentText = String.Concat(HTML_COMMENT_START, comment, HTML_COMMENT_END, String.Empty);
       var commentNode = this.Node.OwnerDocument.CreateComment(commentText);
 
-      this.Node.InsertBefore(commentNode, this.Node.FirstChild);
+      if(this.HasParent)
+      {
+        this.GetParent().InsertAfter(commentNode, this.Node);
+      }
+      else
+      {
+        this.Node.AppendChild(commentNode);
+      }
     }
 
     /// <summary>
@@ -534,9 +538,11 @@ namespace CSF.Zpt.Rendering
     /// </summary>
     public override ZptElement Clone()
     {
-      var clone = _node.Clone();
+      var clone = this.Node.Clone();
 
-      return new ZptHtmlElement(clone, this.SourceFile, this.IsRoot, true);
+      return new ZptHtmlElement(clone, this.SourceFile, this.IsRoot, true) {
+        _filePosition = _filePosition.HasValue? _filePosition : this.Node.Line,
+      };
     }
 
     /// <summary>
@@ -545,7 +551,25 @@ namespace CSF.Zpt.Rendering
     /// <returns>The file location.</returns>
     public override string GetFileLocation()
     {
-      return String.Format("Line {0}", _node.Line);
+      var loc = GetStartTagFileLocation();
+      return loc.HasValue? loc.Value.ToString() : null;
+    }
+
+    /// <summary>
+    /// Gets the file location (typically a line number) for the end tag matched with the current instance.
+    /// </summary>
+    /// <returns>The end tag file location.</returns>
+    public override string GetEndTagFileLocation()
+    {
+      string output = null;
+      var loc = GetStartTagFileLocation();
+      if(loc.HasValue)
+      {
+        var outerHtml = this.Node.OuterHtml;
+        output = (loc.Value + outerHtml.Count(x => x == NEWLINE)).ToString();
+      }
+
+      return output;
     }
 
     /// <summary>
@@ -597,6 +621,27 @@ namespace CSF.Zpt.Rendering
     public override bool IsInNamespace(ZptNamespace nSpace)
     {
       return this.IsInNamespace(nSpace, this.Node);
+    }
+
+    /// <summary>
+    /// Determines whether this instance is from same document as the specified element.
+    /// </summary>
+    /// <returns><c>true</c> if this instance is from same document as the specified element; otherwise, <c>false</c>.</returns>
+    /// <param name="other">The element to test.</param>
+    public override bool IsFromSameDocumentAs(ZptElement other)
+    {
+      if(other == null)
+      {
+        throw new ArgumentNullException(nameof(other));
+      }
+      else if(!(other is ZptHtmlElement))
+      {
+        string message = String.Format(Resources.ExceptionMessages.ElementMustBeCorrectType,
+                                       typeof(ZptHtmlElement).Name);
+        throw new ArgumentException(message, nameof(other));
+      }
+
+      return this.Node.OwnerDocument == ((ZptHtmlElement) other).Node.OwnerDocument;
     }
 
     private bool IsInNamespace(ZptNamespace nSpace, HtmlNode node)
@@ -685,6 +730,12 @@ namespace CSF.Zpt.Rendering
       }
 
       return (nSpace.Prefix != null)? String.Concat(nSpace.Prefix, PREFIX_SEPARATOR, name) : name;
+    }
+
+    private int? GetStartTagFileLocation()
+    {
+      int line = _filePosition.HasValue? _filePosition.Value : this.Node.Line;
+      return (line >= 1)? line : (int?) null;
     }
 
     #endregion

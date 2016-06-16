@@ -69,6 +69,13 @@ namespace CSF.Zpt.Rendering
     /// <value>The type of ZPT document implementation.</value>
     public abstract Type ZptDocumentType { get; }
 
+    /// <summary>
+    /// Gets a value indicating whether or not this instance can write a comment node to a node that does not have
+    /// a parent.
+    /// </summary>
+    /// <value><c>true</c> if this instance can write a comment node if it does not have a parent; otherwise, <c>false</c>.</value>
+    public abstract bool CanWriteCommentWithoutParent { get; }
+
     #endregion
 
     #region methods
@@ -306,6 +313,12 @@ namespace CSF.Zpt.Rendering
     public abstract void AddCommentBefore(string comment);
 
     /// <summary>
+    /// Adds a new comment to the DOM inside the current element as its first child.
+    /// </summary>
+    /// <param name="comment">The comment text.</param>
+    public abstract void AddCommentInside(string comment);
+
+    /// <summary>
     /// Adds a new comment to the DOM immediately after the current element.
     /// </summary>
     /// <param name="comment">The comment text.</param>
@@ -321,6 +334,12 @@ namespace CSF.Zpt.Rendering
     /// </summary>
     /// <returns>The file location.</returns>
     public abstract string GetFileLocation();
+
+    /// <summary>
+    /// Gets the file location (typically a line number) for the end tag matched with the current instance.
+    /// </summary>
+    /// <returns>The end tag file location.</returns>
+    public abstract string GetEndTagFileLocation();
 
     /// <summary>
     /// Omits the current element, replacing it with its children.
@@ -348,6 +367,13 @@ namespace CSF.Zpt.Rendering
     /// </returns>
     /// <param name="nSpace">The namespace for which to test.</param>
     public abstract bool IsInNamespace(ZptNamespace nSpace);
+
+    /// <summary>
+    /// Determines whether this instance is from same document as the specified element.
+    /// </summary>
+    /// <returns><c>true</c> if this instance is from same document as the specified element; otherwise, <c>false</c>.</returns>
+    /// <param name="other">The element to test.</param>
+    public abstract bool IsFromSameDocumentAs(ZptElement other);
 
     #endregion
 

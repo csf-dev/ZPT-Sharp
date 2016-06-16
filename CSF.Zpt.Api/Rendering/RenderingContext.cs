@@ -15,6 +15,7 @@ namespace CSF.Zpt.Rendering
     private IModel _metalContext, _talContext;
     private ZptElement _element;
     private RenderingOptions _renderingOptions;
+    private string _sourceAnnotationRoot;
     private IEnumerable<ZptAttribute> _originalAttributes;
 
     #endregion
@@ -66,6 +67,17 @@ namespace CSF.Zpt.Rendering
     }
 
     /// <summary>
+    /// Gets the 'virtual' root path for the purpose of source annotation comments.
+    /// </summary>
+    /// <value>The source annotation root path.</value>
+    public virtual string SourceAnnotationRootPath
+    {
+      get {
+        return _sourceAnnotationRoot;
+      }
+    }
+
+    /// <summary>
     /// Gets the original attributes for the <see cref="Element"/> contained within the current instance.
     /// </summary>
     /// <value>The original attributes.</value>
@@ -99,7 +111,8 @@ namespace CSF.Zpt.Rendering
         .Select(x => new RenderingContext(this.MetalModel.CreateChildModel(),
                                           this.TalModel.CreateChildModel(),
                                           x,
-                                          this.RenderingOptions))
+                                          this.RenderingOptions,
+                                          this.SourceAnnotationRootPath))
         .ToArray();
     }
 
@@ -119,7 +132,8 @@ namespace CSF.Zpt.Rendering
       var output = new RenderingContext(this.MetalModel.CreateSiblingModel(),
                                         this.TalModel.CreateSiblingModel(),
                                         element,
-                                        this.RenderingOptions);
+                                        this.RenderingOptions,
+                                        this.SourceAnnotationRootPath);
 
       if(cloneAttributes)
       {
@@ -168,10 +182,12 @@ namespace CSF.Zpt.Rendering
     /// <param name="talContext">The TAL context.</param>
     /// <param name="element">The ZPT element for which this context is created.</param>
     /// <param name="options">The rendering options.</param>
+    /// <param name="sourceAnnotationRoot">The source annotation root path.</param>
     public RenderingContext(IModel metalContext,
                             IModel talContext,
                             ZptElement element,
-                            RenderingOptions options)
+                            RenderingOptions options,
+                            string sourceAnnotationRoot = null)
     {
       if(metalContext == null)
       {
@@ -194,6 +210,7 @@ namespace CSF.Zpt.Rendering
       _talContext = talContext;
       _element = element;
       _renderingOptions = options;
+      _sourceAnnotationRoot = sourceAnnotationRoot;
 
       _originalAttributes = _element.GetAttributes();
     }

@@ -1,43 +1,49 @@
-<?xml version=1.0?><!--
+<?xml version="1.0" encoding="utf-8"?>
+<html>
+	<!--
 ==============================================================================
-tests/input/test_sa3.xml
+(previous element)
+SourceDocuments/test_sa3.xml
 ==============================================================================
 -->
-<html>
-<body>
-  <!--
+	<body>
+		<!--
 ==============================================================================
-tests/input/test_sa3.xml (line 4)
+SourceDocuments/test_sa3.xml
 ==============================================================================
---><div>This is macro1 on sa3 line 4.
+-->
+		<div>This is macro1 on sa3 line 4.
     <span>This is slot1 on sa3 line 5.</span><!--
 ==============================================================================
-tests/input/test_sa3.xml (line 5)
+SourceDocuments/test_sa3.xml
 ==============================================================================
 -->
     This is the end of macro1 on sa3 line 6.
   </div>
-  <p>Some text on sa3 line 8.</p>
-  <!--
+		<p>Some text on sa3 line 8.</p>
+		<!--
 ==============================================================================
-tests/input/test_sa3.xml (line 4)
+SourceDocuments/test_sa3.xml
 ==============================================================================
---><div>This is macro1 on sa3 line 4.
+-->
+		<div>This is macro1 on sa3 line 4.
     <!--
 ==============================================================================
-tests/input/test_sa3.xml (line 11)
+SourceDocuments/test_sa3.xml
 ==============================================================================
 --><b>Text from sa3 line 11 is filled into slot1.</b><!--
 ==============================================================================
-tests/input/test_sa3.xml (line 5)
+SourceDocuments/test_sa3.xml
 ==============================================================================
 -->
     This is the end of macro1 on sa3 line 6.
-  </div><!--
+  </div>
+		<!--
 ==============================================================================
-tests/input/test_sa3.xml (line 13)
+(previous element)
+SourceDocuments/test_sa3.xml
 ==============================================================================
 -->
-  <p>This is some text on sa3 line 14.</p>
-</body>
+		<p>This is some text on sa3 line 14.</p>
+	</body>
 </html>
