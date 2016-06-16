@@ -38,7 +38,7 @@ namespace CSF.Zpt.Metal
       if(macro != null)
       {
         output = this.ExpandAndReplace(context, macro);
-        _annotator.ProcessAnnotation(output, context);
+        _annotator.ProcessAnnotation(output.CreateSiblingContext(macro), context);
       }
       else
       {

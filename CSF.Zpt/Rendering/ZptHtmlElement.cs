@@ -22,6 +22,7 @@ namespace CSF.Zpt.Rendering
       PREFIX_SEPARATOR      = ":",
       XMLNS_ATTRIBUTE       = "xmlns";
     private static readonly Regex Indent = new Regex(INDENT_PATTERN, RegexOptions.Compiled);
+    private const char NEWLINE = '\n';
 
     #endregion
 
@@ -542,8 +543,21 @@ namespace CSF.Zpt.Rendering
     /// <returns>The file location.</returns>
     public override string GetFileLocation()
     {
-      int line = _filePosition.HasValue? _filePosition.Value : this.Node.Line;
-      return (line >= 1)? line.ToString() : null;
+      var loc = GetStartTagFileLocation();
+      return loc.HasValue? loc.Value.ToString() : null;
+    }
+
+    public override string GetEndTagFileLocation()
+    {
+      string output = null;
+      var loc = GetStartTagFileLocation();
+      if(loc.HasValue)
+      {
+        var outerHtml = this.Node.OuterHtml;
+        output = (loc.Value + outerHtml.Count(x => x == NEWLINE)).ToString();
+      }
+
+      return output;
     }
 
     /// <summary>
@@ -683,6 +697,12 @@ namespace CSF.Zpt.Rendering
       }
 
       return (nSpace.Prefix != null)? String.Concat(nSpace.Prefix, PREFIX_SEPARATOR, name) : name;
+    }
+
+    private int? GetStartTagFileLocation()
+    {
+      int line = _filePosition.HasValue? _filePosition.Value : this.Node.Line;
+      return (line >= 1)? line : (int?) null;
     }
 
     #endregion

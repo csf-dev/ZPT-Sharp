@@ -327,6 +327,8 @@ namespace CSF.Zpt.Rendering
     /// <returns>The file location.</returns>
     public abstract string GetFileLocation();
 
+    public abstract string GetEndTagFileLocation();
+
     /// <summary>
     /// Omits the current element, replacing it with its children.
     /// </summary>

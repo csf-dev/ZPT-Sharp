@@ -19,7 +19,11 @@ namespace CSF.Zpt.Metal
 {0}
 ",
       POSITION_FORMAT = "{0} (line {1})",
-      PREVIOUS_ELEMENT = "(previous element)\n";
+      PREVIOUS_ELEMENT = "(previous element)\n",
+      MACRO_DEFINITION_FORMAT = "Macro definition '{0}' from:\n",
+      SLOT_DEFINITION_FORMAT = "Slot definition '{0}' from:\n",
+      USED_MACRO_FORMAT = "Completed using macro '{0}'; resuming at:\n",
+      FILLED_SLOT_FORMAT = "Slot '{0}' filled from:\n";
 
     #endregion
 
@@ -28,17 +32,6 @@ namespace CSF.Zpt.Metal
     private log4net.ILog _logger;
 
     #endregion
-
-    /* Comments come:
-     * 
-     * * Before a define macro (with the location of the macro)
-     * * Before a use macro (with the location of the macro)
-     * 
-     * * Before a fill slot (with the location of the slot filler)
-     * 
-     * * After a define slot (with the location of the original slot)
-     * * Before a root element (skipping the line number)
-     */
 
     #region methods
 
@@ -57,51 +50,58 @@ namespace CSF.Zpt.Metal
 
       if(context.Element.IsRoot)
       {
-        _logger.DebugFormat("Adding {1} annotation for element '{0}'", context.Element.Name, "root");
         AddAnnotation(context, skipLineNumber: true);
       }
 
+      ZptAttribute name;
+
       if((replacedContext == null
-          && context.Element.GetMetalAttribute(ZptConstants.Metal.DefineMacroAttribute) != null)
+          && (name = context.Element.GetMetalAttribute(ZptConstants.Metal.DefineMacroAttribute)) != null)
          || (replacedContext != null
-             && context.Element.GetMetalAttribute(ZptConstants.Metal.DefineMacroAttribute) != null
+             && (name = context.Element.GetMetalAttribute(ZptConstants.Metal.DefineMacroAttribute)) != null
              && replacedContext.Element.GetMetalAttribute(ZptConstants.Metal.UseMacroAttribute) != null))
       {
-        _logger.DebugFormat("Adding {1} annotation for element '{0}'", context.Element.Name, "define-macro");
-        AddAnnotation(context);
+        AddAnnotation(context, extraText: String.Format(MACRO_DEFINITION_FORMAT, name.Value));
       }
 
       if(replacedContext != null
-         && replacedContext.Element.GetMetalAttribute(ZptConstants.Metal.UseMacroAttribute) != null)
+         && (name = replacedContext.Element.GetMetalAttribute(ZptConstants.Metal.UseMacroAttribute)) != null)
       {
-        _logger.DebugFormat("Adding {1} annotation for element '{0}'", context.Element.Name, "use-macro");
-        AddAnnotation(context, beforeElement: false, replacedContext: replacedContext);
+        AddAnnotation(context,
+                      beforeElement: false,
+                      replacedContext: replacedContext,
+                      extraText: String.Format(USED_MACRO_FORMAT, name.Value),
+                      useEndTagLocation: true);
       }
 
       if((replacedContext != null
-          && replacedContext.Element.GetMetalAttribute(ZptConstants.Metal.DefineSlotAttribute) != null)
+          && (name = replacedContext.Element.GetMetalAttribute(ZptConstants.Metal.DefineSlotAttribute)) != null)
          || (replacedContext == null
-             && context.Element.GetMetalAttribute(ZptConstants.Metal.DefineSlotAttribute) != null))
+             && (name = context.Element.GetMetalAttribute(ZptConstants.Metal.DefineSlotAttribute)) != null))
       {
-        _logger.DebugFormat("Adding {1} annotation for element '{0}'", context.Element.Name, "define-slot");
-        AddAnnotation(context, beforeElement: false);
+        AddAnnotation(context,
+                      beforeElement: false,
+                      extraText: String.Format(SLOT_DEFINITION_FORMAT, name.Value));
       }
 
       if(replacedContext != null
-         && context.Element.GetMetalAttribute(ZptConstants.Metal.FillSlotAttribute) != null)
+         && (name = context.Element.GetMetalAttribute(ZptConstants.Metal.FillSlotAttribute)) != null)
       {
-        _logger.DebugFormat("Adding {1} annotation for element '{0}'", context.Element.Name, "fill-slot");
-        AddAnnotation(context, replacedContext: replacedContext);
+        AddAnnotation(context,
+                      replacedContext: replacedContext,
+                      extraText: String.Format(FILLED_SLOT_FORMAT, name.Value));
       }
     }
 
     private void AddAnnotation(RenderingContext context,
                                bool skipLineNumber = false,
                                bool beforeElement = true,
-                               RenderingContext replacedContext = null)
+                               RenderingContext replacedContext = null,
+                               string extraText = null,
+                               bool useEndTagLocation = false)
     {
       var bodyContext = replacedContext?? context;
-      var body = CreateCommentBody(bodyContext, skipLineNumber);
+      var body = CreateCommentBody(bodyContext, skipLineNumber, extraText, useEndTagLocation);
 
       var comment = FormatComment(body);
 
@@ -128,12 +128,16 @@ namespace CSF.Zpt.Metal
                            commentBody);
     }
 
-    private string CreateCommentBody(RenderingContext context, bool skipLineNumber)
+    private string CreateCommentBody(RenderingContext context,
+                                     bool skipLineNumber,
+                                     string extraText,
+                                     bool useEndTagPosition)
     {
+      var element = context.Element;
       string
         fullFilename = context.Element.SourceFile.GetFullName(),
         filename,
-        filePosition = context.Element.GetFileLocation(),
+        filePosition = useEndTagPosition? element.GetEndTagFileLocation() : element.GetFileLocation(),
         previousElement;
 
       if(!String.IsNullOrEmpty(context.SourceAnnotationRootPath)
@@ -149,7 +153,7 @@ namespace CSF.Zpt.Metal
         filename = fullFilename;
       }
 
-      if(context.Element.HasParent || context.Element.CanWriteCommentWithoutParent)
+      if(element.HasParent || element.CanWriteCommentWithoutParent)
       {
         previousElement = String.Empty;
       }

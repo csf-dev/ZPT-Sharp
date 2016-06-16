@@ -631,6 +631,11 @@ namespace CSF.Zpt.Rendering
       return null;
     }
 
+    public override string GetEndTagFileLocation()
+    {
+      return null;
+    }
+
     /// <summary>
     /// Omits the current element, replacing it with its children.
     /// </summary>
