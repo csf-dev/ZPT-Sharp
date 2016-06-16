@@ -55,45 +55,45 @@ namespace CSF.Zpt.Metal
         AddAnnotation(targetContext, skipLineNumber: true);
       }
 
-      ZptAttribute name;
+      ZptAttribute attr;
 
       if((replacementContext == null
-          && (name = targetContext.Element.GetMetalAttribute(ZptConstants.Metal.DefineMacroAttribute)) != null)
+          && (attr = targetContext.Element.GetMetalAttribute(ZptConstants.Metal.DefineMacroAttribute)) != null)
          || (replacementContext != null
-             && (name = targetContext.Element.GetMetalAttribute(ZptConstants.Metal.DefineMacroAttribute)) != null
+             && (attr = targetContext.Element.GetMetalAttribute(ZptConstants.Metal.DefineMacroAttribute)) != null
              && originalContext.Element.GetMetalAttribute(ZptConstants.Metal.UseMacroAttribute) != null))
       {
         AddAnnotation(targetContext,
-                      extraText: String.Format(MACRO_DEFINITION_FORMAT, name.Value),
+                      extraText: String.Format(MACRO_DEFINITION_FORMAT, attr.Value),
                       replacementContext: replacementContext);
       }
 
       if(originalContext != null
-         && (name = originalContext.Element.GetMetalAttribute(ZptConstants.Metal.UseMacroAttribute)) != null)
+         && (attr = originalContext.Element.GetMetalAttribute(ZptConstants.Metal.UseMacroAttribute)) != null)
       {
         AddAnnotation(targetContext,
                       beforeElement: false,
                       originalContext: originalContext,
-                      extraText: String.Format(USED_MACRO_FORMAT, name.Value),
+                      extraText: String.Format(USED_MACRO_FORMAT, attr.Value),
                       useEndTagLocation: true);
       }
 
       if((replacementContext != null
-          && (name = replacementContext.Element.GetMetalAttribute(ZptConstants.Metal.DefineSlotAttribute)) != null)
+          && (attr = replacementContext.Element.GetMetalAttribute(ZptConstants.Metal.DefineSlotAttribute)) != null)
          || (replacementContext == null
-             && (name = targetContext.Element.GetMetalAttribute(ZptConstants.Metal.DefineSlotAttribute)) != null))
+             && (attr = targetContext.Element.GetMetalAttribute(ZptConstants.Metal.DefineSlotAttribute)) != null))
       {
         AddAnnotation(targetContext,
                       beforeElement: false,
-                      extraText: String.Format(SLOT_DEFINITION_FORMAT, name.Value));
+                      extraText: String.Format(SLOT_DEFINITION_FORMAT, attr.Value));
       }
 
       if(replacementContext != null
-         && (name = targetContext.Element.GetMetalAttribute(ZptConstants.Metal.FillSlotAttribute)) != null)
+         && (attr = targetContext.Element.GetMetalAttribute(ZptConstants.Metal.FillSlotAttribute)) != null)
       {
         AddAnnotation(targetContext,
                       replacementContext: replacementContext,
-                      extraText: String.Format(FILLED_SLOT_FORMAT, name.Value));
+                      extraText: String.Format(FILLED_SLOT_FORMAT, attr.Value));
       }
     }
 
