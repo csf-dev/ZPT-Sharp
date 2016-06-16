@@ -38,7 +38,9 @@ namespace CSF.Zpt.Metal
       if(macro != null)
       {
         output = this.ExpandAndReplace(context, macro);
-        _annotator.ProcessAnnotation(output.CreateSiblingContext(macro), context);
+        _annotator.ProcessAnnotation(output,
+                                     originalContext: context,
+                                     replacementContext: output.CreateSiblingContext(macro));
       }
       else
       {
@@ -106,13 +108,15 @@ namespace CSF.Zpt.Metal
                            join fillSlot in this.GetElementsByValue(sourceContext.Element, ZptConstants.Metal.FillSlotAttribute)
                            on defineSlot.Key equals fillSlot.Key
                            select new { Slot = sourceContext.CreateSiblingContext(defineSlot.Value),
-                                        Filler = sourceContext.CreateSiblingContext(fillSlot.Value.Clone()) });
+                                        Filler = sourceContext.CreateSiblingContext(fillSlot.Value) });
 
       foreach(var replacement in slotsToHandle)
       {
         var replacementElement = replacement.Slot.Element.ReplaceWith(replacement.Filler.Element);
         var replacementContext = replacement.Filler.CreateSiblingContext(replacementElement);
-        _annotator.ProcessAnnotation(replacementContext, replacement.Filler);
+        _annotator.ProcessAnnotation(replacementContext,
+                                     originalContext: replacement.Slot,
+                                     replacementContext: replacement.Filler);
       }
     }
 

@@ -11,6 +11,7 @@ namespace CSF.Zpt.Metal
 
     private const int BORDER_CHARACTER_WIDTH = 78;
     private const char BORDER_CHARACTER = '=';
+    private const bool RENDER_EXTRA_TEXT = false;
 
     private const string
       COMMENT_FORMAT = @"
@@ -35,89 +36,93 @@ namespace CSF.Zpt.Metal
 
     #region methods
 
-    public void ProcessAnnotation(RenderingContext context,
-                                  RenderingContext replacedContext = null)
+    public void ProcessAnnotation(RenderingContext targetContext,
+                                  RenderingContext originalContext = null,
+                                  RenderingContext replacementContext = null)
     {
-      if(context == null)
+      if(targetContext == null)
       {
-        throw new ArgumentNullException(nameof(context));
+        throw new ArgumentNullException(nameof(targetContext));
       }
 
-      if(!context.RenderingOptions.AddSourceFileAnnotation)
+      if(!targetContext.RenderingOptions.AddSourceFileAnnotation)
       {
         return;
       }
 
-      if(context.Element.IsRoot)
+      if(targetContext.Element.IsRoot)
       {
-        AddAnnotation(context, skipLineNumber: true);
+        AddAnnotation(targetContext, skipLineNumber: true);
       }
 
       ZptAttribute name;
 
-      if((replacedContext == null
-          && (name = context.Element.GetMetalAttribute(ZptConstants.Metal.DefineMacroAttribute)) != null)
-         || (replacedContext != null
-             && (name = context.Element.GetMetalAttribute(ZptConstants.Metal.DefineMacroAttribute)) != null
-             && replacedContext.Element.GetMetalAttribute(ZptConstants.Metal.UseMacroAttribute) != null))
+      if((replacementContext == null
+          && (name = targetContext.Element.GetMetalAttribute(ZptConstants.Metal.DefineMacroAttribute)) != null)
+         || (replacementContext != null
+             && (name = targetContext.Element.GetMetalAttribute(ZptConstants.Metal.DefineMacroAttribute)) != null
+             && originalContext.Element.GetMetalAttribute(ZptConstants.Metal.UseMacroAttribute) != null))
       {
-        AddAnnotation(context, extraText: String.Format(MACRO_DEFINITION_FORMAT, name.Value));
+        AddAnnotation(targetContext,
+                      extraText: String.Format(MACRO_DEFINITION_FORMAT, name.Value),
+                      replacementContext: replacementContext);
       }
 
-      if(replacedContext != null
-         && (name = replacedContext.Element.GetMetalAttribute(ZptConstants.Metal.UseMacroAttribute)) != null)
+      if(originalContext != null
+         && (name = originalContext.Element.GetMetalAttribute(ZptConstants.Metal.UseMacroAttribute)) != null)
       {
-        AddAnnotation(context,
+        AddAnnotation(targetContext,
                       beforeElement: false,
-                      replacedContext: replacedContext,
+                      originalContext: originalContext,
                       extraText: String.Format(USED_MACRO_FORMAT, name.Value),
                       useEndTagLocation: true);
       }
 
-      if((replacedContext != null
-          && (name = replacedContext.Element.GetMetalAttribute(ZptConstants.Metal.DefineSlotAttribute)) != null)
-         || (replacedContext == null
-             && (name = context.Element.GetMetalAttribute(ZptConstants.Metal.DefineSlotAttribute)) != null))
+      if((replacementContext != null
+          && (name = replacementContext.Element.GetMetalAttribute(ZptConstants.Metal.DefineSlotAttribute)) != null)
+         || (replacementContext == null
+             && (name = targetContext.Element.GetMetalAttribute(ZptConstants.Metal.DefineSlotAttribute)) != null))
       {
-        AddAnnotation(context,
+        AddAnnotation(targetContext,
                       beforeElement: false,
                       extraText: String.Format(SLOT_DEFINITION_FORMAT, name.Value));
       }
 
-      if(replacedContext != null
-         && (name = context.Element.GetMetalAttribute(ZptConstants.Metal.FillSlotAttribute)) != null)
+      if(replacementContext != null
+         && (name = targetContext.Element.GetMetalAttribute(ZptConstants.Metal.FillSlotAttribute)) != null)
       {
-        AddAnnotation(context,
-                      replacedContext: replacedContext,
+        AddAnnotation(targetContext,
+                      replacementContext: replacementContext,
                       extraText: String.Format(FILLED_SLOT_FORMAT, name.Value));
       }
     }
 
-    private void AddAnnotation(RenderingContext context,
+    private void AddAnnotation(RenderingContext targetContext,
                                bool skipLineNumber = false,
                                bool beforeElement = true,
-                               RenderingContext replacedContext = null,
+                               RenderingContext originalContext = null,
+                               RenderingContext replacementContext = null,
                                string extraText = null,
                                bool useEndTagLocation = false)
     {
-      var bodyContext = replacedContext?? context;
-      var body = CreateCommentBody(bodyContext, skipLineNumber, extraText, useEndTagLocation);
+      var bodyContext = originalContext?? targetContext;
+      var body = CreateCommentBody(bodyContext, skipLineNumber, extraText, useEndTagLocation, replacementContext);
 
       var comment = FormatComment(body);
 
       if(beforeElement
-         && (context.Element.HasParent
-             || context.Element.CanWriteCommentWithoutParent))
+         && ((!targetContext.Element.IsRoot && targetContext.Element.HasParent)
+             || targetContext.Element.CanWriteCommentWithoutParent))
       {
-        context.Element.AddCommentBefore(comment);
+        targetContext.Element.AddCommentBefore(comment);
       }
       else if(beforeElement)
       {
-        context.Element.AddCommentInside(comment);
+        targetContext.Element.AddCommentInside(comment);
       }
       else
       {
-        context.Element.AddCommentAfter(comment);
+        targetContext.Element.AddCommentAfter(comment);
       }
     }
 
@@ -128,23 +133,26 @@ namespace CSF.Zpt.Metal
                            commentBody);
     }
 
-    private string CreateCommentBody(RenderingContext context,
+    private string CreateCommentBody(RenderingContext targetContext,
                                      bool skipLineNumber,
                                      string extraText,
-                                     bool useEndTagPosition)
+                                     bool useEndTagPosition,
+                                     RenderingContext replacementContext)
     {
-      var element = context.Element;
+      ZptElement
+        targetElement = targetContext.Element,
+        sourceElement = replacementContext?.Element ?? targetContext.Element;
       string
-        fullFilename = context.Element.SourceFile.GetFullName(),
+        fullFilename = targetContext.Element.SourceFile.GetFullName(),
         filename,
-        filePosition = useEndTagPosition? element.GetEndTagFileLocation() : element.GetFileLocation(),
+        filePosition = useEndTagPosition? sourceElement.GetEndTagFileLocation() : sourceElement.GetFileLocation(),
         previousElement;
 
-      if(!String.IsNullOrEmpty(context.SourceAnnotationRootPath)
-         && Directory.Exists(context.SourceAnnotationRootPath)
+      if(!String.IsNullOrEmpty(targetContext.SourceAnnotationRootPath)
+         && Directory.Exists(targetContext.SourceAnnotationRootPath)
          && File.Exists(fullFilename))
       {
-        var root = new DirectoryInfo(context.SourceAnnotationRootPath);
+        var root = new DirectoryInfo(targetContext.SourceAnnotationRootPath);
         var file = new FileInfo(fullFilename);
         filename = file.IsChildOf(root)? file.GetRelative(root).Substring(1) : fullFilename;
       }
@@ -153,7 +161,7 @@ namespace CSF.Zpt.Metal
         filename = fullFilename;
       }
 
-      if(element.HasParent || element.CanWriteCommentWithoutParent)
+      if((!targetElement.IsRoot && targetElement.HasParent) || targetElement.CanWriteCommentWithoutParent)
       {
         previousElement = String.Empty;
       }
@@ -163,7 +171,8 @@ namespace CSF.Zpt.Metal
       }
 
       var body = (skipLineNumber || String.IsNullOrEmpty(filePosition))? filename : String.Format(POSITION_FORMAT, filename, filePosition);
-      return String.Concat(previousElement, body);
+      var extra = RENDER_EXTRA_TEXT? extraText?? String.Empty : String.Empty;
+      return String.Concat(previousElement, extra, body);
     }
 
     #endregion
