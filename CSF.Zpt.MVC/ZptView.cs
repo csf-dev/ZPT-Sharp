@@ -41,7 +41,7 @@ namespace CSF.Zpt.MVC
       }
     }
 
-    public System.Text.Encoding InputEncoding
+    public System.Text.Encoding ForceInputEncoding
     {
       get;
       set;
@@ -80,7 +80,7 @@ namespace CSF.Zpt.MVC
     private IZptDocument CreateDocument()
     {
       var inputFile = new FileInfo(_physicalPath);
-      return _documentFactory.CreateDocument(inputFile, InputEncoding, RenderingMode);
+      return _documentFactory.CreateDocument(inputFile, ForceInputEncoding, RenderingMode);
     }
 
     #endregion
