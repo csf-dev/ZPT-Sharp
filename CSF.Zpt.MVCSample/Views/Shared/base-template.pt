@@ -23,11 +23,11 @@
 </head>
 <body metal:define-slot="body" tal:attributes="class bodyClass|nothing">
 <div class="page">
-  <div class="region_header dummy" metal:use-macro="views/Shared/common-elements/macros/region_header">
+  <div class="region_header dummy" metal:use-macro="Views/Shared/common-elements/macros/region_header">
     Header content is imported here
   </div>
   <div class="region_main" metal:define-slot="region_main">
-    <div class="main_navigation dummy" metal:use-macro="views/Shared/common-elements/macros/main_navigation">
+    <div class="main_navigation dummy" metal:use-macro="Views/Shared/common-elements/macros/main_navigation">
       <div class="document_navigation"
            metal:define-slot="document_navigation"
            tal:omit-tag=""></div>
@@ -47,11 +47,11 @@
       </p>
     </div>
   </div>
-  <div class="region_footer dummy" metal:use-macro="views/Shared/common-elements/macros/region_footer">
+  <div class="region_footer dummy" metal:use-macro="Views/Shared/common-elements/macros/region_footer">
     Footer content is imported here
   </div>
 </div>
-<span metal:use-macro="views/Shared/common-elements/macros/github_banner" />
+<span metal:use-macro="Views/Shared/common-elements/macros/github_banner" />
 <metal:block metal:define-slot="scripts">
 <metal:block metal:define-slot="additional-scripts"></metal:block>
 </metal:block>

@@ -2,6 +2,7 @@
 using CSF.Zpt.Tales;
 using CSF.Zpt.Rendering;
 using CSF.Zpt.MVC.Tales;
+using System.IO;
 
 namespace CSF.Zpt.MVC.Rendering
 {
@@ -27,6 +28,11 @@ namespace CSF.Zpt.MVC.Rendering
       IModel
         metalModel = new MvcTalesModel(this.EvaluatorRegistry, metalKeywordOptions),
         talModel = new MvcTalesModel(this.EvaluatorRegistry, talKeywordOptions);
+
+      var viewsPath = System.Web.HttpContext.Current.Server.MapPath("~/Views/");
+      var viewsDirectory = new DirectoryInfo(viewsPath);
+
+      metalModel.AddGlobal("Views", new TemplateDirectory(viewsDirectory));
 
       PopulateMetalModel(metalModel);
       PopulateTalModel(talModel);
