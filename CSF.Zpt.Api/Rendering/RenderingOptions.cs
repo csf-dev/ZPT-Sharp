@@ -14,7 +14,7 @@ namespace CSF.Zpt.Rendering
     /// Gets the factory implementation with which to create <see cref="RenderingContext"/> instances.
     /// </summary>
     /// <value>The rendering context factory.</value>
-    protected IRenderingContextFactory ContextFactory
+    public virtual IRenderingContextFactory ContextFactory
     {
       get;
       private set;

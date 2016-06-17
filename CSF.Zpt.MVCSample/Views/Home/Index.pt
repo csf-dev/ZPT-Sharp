@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:tal="http://xml.zope.org/namespaces/tal"
       xmlns:metal="http://xml.zope.org/namespaces/metal"
-      metal:use-macro="views/Shared/base-template/macros/document-structure">
+      metal:use-macro="Views/Shared/base-template/macros/document-structure">
 <head>
 <title metal:fill-slot="title">Zope Page Templates for .NET</title>
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
