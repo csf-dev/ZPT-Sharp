@@ -2,6 +2,8 @@
 using System.Web.Mvc;
 using CSF.Zpt.Rendering;
 using CSF.Zpt.MVC.Rendering;
+using System.Text;
+using CSF.Configuration;
 
 namespace CSF.Zpt.MVC
 {
@@ -164,15 +166,86 @@ namespace CSF.Zpt.MVC
       ForceInputEncoding = null;
     }
 
+    private void InitialiseFromConfig(IZptViewEngineConfiguration config,
+                                      IRenderingContextFactoryFactory contextFactoryFactory,
+                                      IContextVisitorFactory contextVisitorFactory)
+    {
+      var defaultOptions = new DefaultRenderingOptions();
+
+      if(config.ContextFactoryTypeName != null)
+      {
+        ContextFactory = contextFactoryFactory.Create(config.ContextFactoryTypeName);
+      }
+      else
+      {
+        ContextFactory = new MvcRenderingContextFactory();
+      }
+
+      if(config.ContextVisitorTypeNames != null)
+      {
+        ContextVisitors = contextVisitorFactory.CreateMany(config.ContextVisitorTypeNames);
+      }
+      else
+      {
+        ContextVisitors = defaultOptions.ContextVisitors;
+      }
+
+      if(!String.IsNullOrEmpty(config.ForceInputEncoding))
+      {
+        ForceInputEncoding = Encoding.GetEncoding(config.ForceInputEncoding);
+      }
+      else
+      {
+        ForceInputEncoding = null;
+      }
+
+      AddSourceFileAnnotation = config.AddSourceFileAnnotation;
+      OutputEncoding = Encoding.GetEncoding(config.OutputEncoding);
+      OmitXmlDeclaration = config.OmitXmlDeclaration;
+      XmlIndentationCharacters = config.XmlIndentationCharacters;
+      OutputIndentedXml = config.OutputIndentedXml;
+      RenderingMode = (RenderingMode) Enum.Parse(typeof(RenderingMode), config.RenderingMode);
+    }
+
+    private IZptViewEngineConfiguration GetConfiguration()
+    {
+      return ConfigurationHelper.GetSection<ZptViewEngineConfigurationSection>();
+    }
+
+    private RenderingOptions CreateRenderingOptions()
+    {
+      return new DefaultRenderingOptions(ContextVisitors,
+                                         ContextFactory,
+                                         AddSourceFileAnnotation,
+                                         OutputEncoding,
+                                         OmitXmlDeclaration,
+                                         XmlIndentationCharacters,
+                                         OutputIndentedXml);
+    }
+
     #endregion
 
     #region constructor
 
-    public ZptViewEngine()
+    public ZptViewEngine(IZptViewEngineConfiguration config = null,
+                         string[] viewLocations = null,
+                         IRenderingContextFactoryFactory contextFactoryFactory = null,
+                         IContextVisitorFactory contextVisitorFactory = null)
     {
-      this.ViewLocationFormats = ViewLocations;
-      this.PartialViewLocationFormats = ViewLocations;
+      InitialiseDefaultViewLocations(viewLocations);
+
+      config = config?? GetConfiguration();
+
+      if(config != null)
+      {
+        InitialiseFromConfig(config,
+                             contextFactoryFactory?? new RenderingContextFactoryFactory(),
+                             contextVisitorFactory?? new ContextVisitorFactory());
+      }
+      else
+      {
         InitialiseDefaultOptions();
+      }
     }
 
     #endregion
