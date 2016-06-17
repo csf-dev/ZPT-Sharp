@@ -110,7 +110,7 @@ namespace Test.CSF.Zpt.Metal
 
       try
       {
-        Assert.AreEqual(expected, result);
+        Assert.AreEqual(expected, result.Replace(System.Environment.NewLine, "\n"));
       }
       catch(AssertionException)
       {
