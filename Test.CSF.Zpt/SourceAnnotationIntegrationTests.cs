@@ -136,7 +136,7 @@ namespace Test.CSF.Zpt
                                                     xmlIndentCharacters: "\t",
                                                     addSourceFileAnnotation: true);
 
-          actualRendering = document.Render(options);
+          actualRendering = document.Render(options).Replace(Environment.NewLine, "\n");
           output = (actualRendering == expectedRendering);
         }
         catch(Exception ex)
