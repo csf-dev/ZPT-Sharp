@@ -13,7 +13,6 @@ namespace CSF.Zpt.Cli
     #region fields
 
     private IZptDocumentFactory _documentFactory;
-    private log4net.ILog _logger;
 
     #endregion
 
@@ -94,14 +93,9 @@ namespace CSF.Zpt.Cli
       {
         var dir = (DirectoryInfo) inputPath;
 
-        _logger.DebugFormat("Searching directory {0} for files", dir.FullName);
-
         output = (from file in dir.GetFiles(inputOutputInfo.InputSearchPattern, SearchOption.AllDirectories)
                   where  !inputOutputInfo.IgnoredPaths.Any(x => file.IsChildOf(x))
                   select CreateRenderingJob(file, mode, dir));
-
-        _logger.DebugFormat("{0} rendering jobs found", output.Count());
-
       }
       else
       {
@@ -200,7 +194,6 @@ namespace CSF.Zpt.Cli
 
     public Renderer(IZptDocumentFactory documentFactory = null)
     {
-      _logger = log4net.LogManager.GetLogger(this.GetType());
       _documentFactory = documentFactory?? new ZptDocumentFactory();
     }
 
