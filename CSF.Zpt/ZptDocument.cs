@@ -12,6 +12,12 @@ namespace CSF.Zpt
   /// </summary>
   public abstract class ZptDocument : IZptDocument
   {
+    #region fields
+
+    private static log4net.ILog _logger;
+
+    #endregion
+
     #region methods
 
     /// <summary>
@@ -95,24 +101,36 @@ namespace CSF.Zpt
       var output = this.GetRootElement();
       var context = options.CreateRootContext(output);
 
+      _logger.InfoFormat(Resources.LogMessageFormats.RenderingDocument,
+                         (output.SourceFile != null)? output.SourceFile.GetFullName() : "<unknown>");
+
       if(contextConfigurator != null)
       {
         contextConfigurator(context);
       }
 
-      foreach(var visitor in options.ContextVisitors)
+      try
       {
-        var contexts = visitor.VisitContext(context);
-
-        if(contexts.Count() != 1)
+        foreach(var visitor in options.ContextVisitors)
         {
-          string message = String.Format(Resources.ExceptionMessages.WrongCountOfReturnedContexts,
+          var contexts = visitor.VisitContext(context);
+
+          if(contexts.Count() != 1)
+          {
+            string message = String.Format(Resources.ExceptionMessages.WrongCountOfReturnedContexts,
                                          typeof(IContextVisitor).Name,
                                          typeof(RenderingContext).Name);
-          throw new RenderingException(message);
-        }
+            throw new RenderingException(message);
+          }
 
-        context = contexts.Single();
+          context = contexts.Single();
+        }
+      }
+      catch(Exception ex)
+      {
+        _logger.Error(Resources.LogMessageFormats.UnexpectedRenderingException);
+        _logger.Error(ex);
+        throw;
       }
 
       return context.Element;
@@ -149,6 +167,18 @@ namespace CSF.Zpt
     /// </summary>
     /// <returns>The default options.</returns>
     protected abstract RenderingOptions GetDefaultOptions();
+
+    #endregion
+
+    #region constructor
+
+    /// <summary>
+    /// Initializes the <see cref="CSF.Zpt.ZptDocument"/> class.
+    /// </summary>
+    static ZptDocument()
+    {
+      _logger = log4net.LogManager.GetLogger(typeof(ZptDocument));
+    }
 
     #endregion
   }

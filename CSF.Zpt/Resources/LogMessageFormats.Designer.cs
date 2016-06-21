@@ -69,5 +69,23 @@ namespace CSF.Zpt.Resources {
                 return ResourceManager.GetString("ExpressionEvaluated", resourceCulture);
             }
         }
+        
+        internal static string RenderingDocument {
+            get {
+                return ResourceManager.GetString("RenderingDocument", resourceCulture);
+            }
+        }
+        
+        internal static string TalErrorHandled {
+            get {
+                return ResourceManager.GetString("TalErrorHandled", resourceCulture);
+            }
+        }
+        
+        internal static string UnexpectedRenderingException {
+            get {
+                return ResourceManager.GetString("UnexpectedRenderingException", resourceCulture);
+            }
+        }
     }
 }
