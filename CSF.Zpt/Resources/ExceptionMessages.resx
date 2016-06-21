@@ -85,4 +85,10 @@ Filename:{0}</value>
   <data name="InvalidRenderingMode" xml:space="preserve">
     <value>The rendering mode must be a valid value.</value>
   </data>
+  <data name="CannotFindMacro" xml:space="preserve">
+    <value>The macro referenced by metal:{0}="{1}" at {2} could not be found.</value>
+  </data>
+  <data name="UnexpectedExceptionGettingMacro" xml:space="preserve">
+    <value>An unexpected exception occurred whilst resolving metal:{0}="{1}" at {2}.</value>
+  </data>
 </root>

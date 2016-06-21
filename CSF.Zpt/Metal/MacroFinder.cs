@@ -66,8 +66,20 @@ namespace CSF.Zpt.Metal
         }
         catch(Exception ex)
         {
-          _logger.Warn(ex);
-          output = null;
+          string message = String.Format(Resources.ExceptionMessages.UnexpectedExceptionGettingMacro,
+                                         attributeName,
+                                         attrib.Value,
+                                         context.Element.GetFullFilePathAndLocation());
+          throw new RenderingException(message, ex);
+        }
+
+        if(output == null)
+        {
+          string message = String.Format(Resources.ExceptionMessages.CannotFindMacro,
+                                         attributeName,
+                                         attrib.Value,
+                                         context.Element.GetFullFilePathAndLocation());
+          throw new MacroNotFoundException(message);
         }
       }
       else

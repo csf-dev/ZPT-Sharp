@@ -177,5 +177,17 @@ namespace CSF.Zpt.Resources {
                 return ResourceManager.GetString("InvalidRenderingMode", resourceCulture);
             }
         }
+        
+        internal static string CannotFindMacro {
+            get {
+                return ResourceManager.GetString("CannotFindMacro", resourceCulture);
+            }
+        }
+        
+        internal static string UnexpectedExceptionGettingMacro {
+            get {
+                return ResourceManager.GetString("UnexpectedExceptionGettingMacro", resourceCulture);
+            }
+        }
     }
 }

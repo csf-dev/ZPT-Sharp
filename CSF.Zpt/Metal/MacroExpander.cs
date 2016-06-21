@@ -15,7 +15,7 @@ namespace CSF.Zpt.Metal
 
     private MacroFinder _macroFinder;
     private SourceAnnotator _annotator;
-    private log4net.ILog _logger;
+    private static log4net.ILog _logger;
 
     #endregion
 
@@ -41,6 +41,7 @@ namespace CSF.Zpt.Metal
         _annotator.ProcessAnnotation(output,
                                      originalContext: context,
                                      replacementContext: output.CreateSiblingContext(macro));
+        LogMacroUsage(macro, context.Element);
       }
       else
       {
@@ -77,9 +78,6 @@ namespace CSF.Zpt.Metal
       var macroContext = context.CreateSiblingContext(macro);
 
       macroContext = this.ApplyMacroExtension(macroContext);
-
-      _logger.DebugFormat("Element to extend: {0}", macroContext.Element.Name);
-
       var extendedMacro = context.Element.ReplaceWith(macroContext.Element);
 
       this.FillSlots(context, extendedMacro);
@@ -116,6 +114,7 @@ namespace CSF.Zpt.Metal
         _annotator.ProcessAnnotation(replacementContext,
                                      originalContext: replacement.Slot,
                                      replacementContext: replacement.Filler);
+        LogSlotFilling(replacement.Slot.Element, replacement.Filler.Element);
       }
     }
 
@@ -135,11 +134,6 @@ namespace CSF.Zpt.Metal
           Attribute = x.GetMetalAttribute(desiredAttribute)
         });
 
-      foreach(var eleAttrPair in output)
-      {
-        _logger.DebugFormat("Element {0}, attribute: {1}", eleAttrPair.Element.Name, eleAttrPair.Attribute);
-      }
-
       return output
         .ToDictionary(k => k.Attribute.Value, v => v.Element);
     }
@@ -157,7 +151,43 @@ namespace CSF.Zpt.Metal
       }
 
       var extended = _macroFinder.GetExtendedMacro(context);
-      return (extended != null)? this.ExpandAndReplace(context, extended) : context;
+      RenderingContext output;
+
+      if(extended != null)
+      {
+        LogMacroExtension(context.Element, extended);
+        output = ExpandAndReplace(context, extended);
+      }
+      else
+      {
+        output = context;
+      }
+
+      return output;
+    }
+
+    private void LogMacroUsage(ZptElement defineMacro, ZptElement useMacro)
+    {
+      _logger.DebugFormat(Resources.LogMessageFormats.MacroUsage,
+                          defineMacro.GetMetalAttribute(ZptConstants.Metal.DefineMacroAttribute).Value,
+                          useMacro.GetFullFilePathAndLocation(),
+                          defineMacro.GetFullFilePathAndLocation());
+    }
+
+    private void LogMacroExtension(ZptElement defineMacro, ZptElement extendedMacro)
+    {
+      _logger.DebugFormat(Resources.LogMessageFormats.MacroExtension,
+                          defineMacro.GetMetalAttribute(ZptConstants.Metal.ExtendMacroAttribute).Value,
+                          extendedMacro.GetFullFilePathAndLocation(),
+                          defineMacro.GetFullFilePathAndLocation());
+    }
+
+    private void LogSlotFilling(ZptElement defineSlot, ZptElement fillSlot)
+    {
+      _logger.DebugFormat(Resources.LogMessageFormats.SlotFilling,
+                          fillSlot.GetMetalAttribute(ZptConstants.Metal.FillSlotAttribute).Value,
+                          defineSlot.GetFullFilePathAndLocation(),
+                          fillSlot.GetFullFilePathAndLocation());
     }
 
     #endregion
@@ -172,10 +202,16 @@ namespace CSF.Zpt.Metal
     public MacroExpander(MacroFinder finder = null,
                          SourceAnnotator annotator = null)
     {
-      _logger = log4net.LogManager.GetLogger(this.GetType());
-
       _macroFinder = finder?? new MacroFinder();
       _annotator = annotator?? new SourceAnnotator();
+    }
+
+    /// <summary>
+    /// Initializes the <see cref="CSF.Zpt.Metal.MacroExpander"/> class.
+    /// </summary>
+    static MacroExpander()
+    {
+      _logger = log4net.LogManager.GetLogger(typeof(MacroExpander));
     }
 
     #endregion
