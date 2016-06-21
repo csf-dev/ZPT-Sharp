@@ -63,5 +63,11 @@ namespace CSF.Zpt.Resources {
                 return ResourceManager.GetString("SlotFilling", resourceCulture);
             }
         }
+        
+        internal static string ExpressionEvaluated {
+            get {
+                return ResourceManager.GetString("ExpressionEvaluated", resourceCulture);
+            }
+        }
     }
 }

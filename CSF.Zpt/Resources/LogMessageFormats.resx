@@ -21,4 +21,7 @@
   <data name="SlotFilling" xml:space="preserve">
     <value>Filling slot "{0}" - originally in {1} - from {2}.</value>
   </data>
+  <data name="ExpressionEvaluated" xml:space="preserve">
+    <value>Evaluated expression '{0}' to {1}.</value>
+  </data>
 </root>
