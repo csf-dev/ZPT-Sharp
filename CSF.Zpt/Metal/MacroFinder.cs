@@ -8,12 +8,6 @@ namespace CSF.Zpt.Metal
   /// </summary>
   public class MacroFinder
   {
-    #region fields
-
-    private static log4net.ILog _logger;
-
-    #endregion
-
     #region methods
 
     /// <summary>
@@ -66,8 +60,20 @@ namespace CSF.Zpt.Metal
         }
         catch(Exception ex)
         {
-          _logger.Warn(ex);
-          output = null;
+          string message = String.Format(Resources.ExceptionMessages.UnexpectedExceptionGettingMacro,
+                                         attributeName,
+                                         attrib.Value,
+                                         context.Element.GetFullFilePathAndLocation());
+          throw new RenderingException(message, ex);
+        }
+
+        if(output == null)
+        {
+          string message = String.Format(Resources.ExceptionMessages.CannotFindMacro,
+                                         attributeName,
+                                         attrib.Value,
+                                         context.Element.GetFullFilePathAndLocation());
+          throw new MacroNotFoundException(message);
         }
       }
       else
@@ -76,15 +82,6 @@ namespace CSF.Zpt.Metal
       }
 
       return output;
-    }
-
-    #endregion
-
-    #region constructor
-
-    static MacroFinder()
-    {
-      _logger = log4net.LogManager.GetLogger(typeof(MacroFinder));
     }
 
     #endregion

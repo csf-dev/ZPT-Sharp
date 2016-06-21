@@ -70,11 +70,13 @@
     <Compile Include="Rendering\IRenderingContextFactoryFactory.cs" />
     <Compile Include="Rendering\IContextVisitorFactory.cs" />
     <Compile Include="RenderingMode.cs" />
+    <Compile Include="Metal\MacroNotFoundException.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
     <Folder Include="Rendering\" />
     <Folder Include="Tales\" />
     <Folder Include="Tal\" />
+    <Folder Include="Metal\" />
   </ItemGroup>
 </Project>

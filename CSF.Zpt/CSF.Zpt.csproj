@@ -113,6 +113,9 @@
     <Compile Include="Rendering\ContextVisitorFactory.cs" />
     <Compile Include="Rendering\NamedObjectWrapper.cs" />
     <Compile Include="Metal\SourceAnnotator.cs" />
+    <Compile Include="Resources\LogMessageFormats.Designer.cs">
+      <DependentUpon>LogMessageFormats.resx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
@@ -160,6 +163,10 @@
     <EmbeddedResource Include="Resources\ExceptionMessages.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>ExceptionMessages.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\LogMessageFormats.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>LogMessageFormats.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
 </Project>

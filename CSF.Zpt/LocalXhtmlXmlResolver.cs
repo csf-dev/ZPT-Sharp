@@ -27,10 +27,6 @@ namespace CSF.Zpt
       { "http://www.w3.org/TR/xhtml1/DTD/-//W3C//ENTITIES Symbols for XHTML//EN", "xhtml-symbol.ent" }
     };
 
-    #pragma warning disable 414
-    private static log4net.ILog _logger;
-    #pragma warning restore 414
-
     #endregion
 
     #region overrides
@@ -60,15 +56,6 @@ namespace CSF.Zpt
       }
 
       return output;
-    }
-
-    #endregion
-
-    #region constructor
-
-    static LocalXhtmlXmlResolver()
-    {
-      _logger = log4net.LogManager.GetLogger(typeof(LocalXhtmlXmlResolver));
     }
 
     #endregion

@@ -375,6 +375,30 @@ namespace CSF.Zpt.Rendering
     /// <param name="other">The element to test.</param>
     public abstract bool IsFromSameDocumentAs(ZptElement other);
 
+    /// <summary>
+    /// Gets the full file path and location for the current element.
+    /// </summary>
+    /// <returns>The full file path and location.</returns>
+    public virtual string GetFullFilePathAndLocation()
+    {
+      if(SourceFile == null)
+      {
+        return "<unknown>";
+      }
+      else
+      {
+        string location = GetFileLocation();
+        if(location != null)
+        {
+          return String.Format("{0} (line {1})", SourceFile.GetFullName(), location);
+        }
+        else
+        {
+          return SourceFile.GetFullName();
+        }
+      }
+    }
+
     #endregion
 
     #region constructor

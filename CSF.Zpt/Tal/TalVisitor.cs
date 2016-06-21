@@ -18,10 +18,6 @@ namespace CSF.Zpt.Tal
 
     #region fields
 
-    #pragma warning disable 414
-    private static readonly log4net.ILog _logger;
-    #pragma warning restore 414
-
     private IAttributeHandler[] _handlers;
     private IAttributeHandler _errorHandler;
 
@@ -137,14 +133,6 @@ namespace CSF.Zpt.Tal
       };
 
       _errorHandler = errorHandler?? new OnErrorAttributeHandler();
-    }
-
-    /// <summary>
-    /// Initializes the <see cref="CSF.Zpt.Tal.TalVisitor"/> class.
-    /// </summary>
-    static TalVisitor()
-    {
-      _logger = log4net.LogManager.GetLogger(typeof(TalVisitor));
     }
 
     #endregion
