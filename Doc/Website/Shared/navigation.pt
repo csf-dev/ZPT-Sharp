@@ -1,0 +1,32 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Common navigation menu</title>
+<base href="../" />
+<style type="text/css">
+@import url(css/styles.css);
+@import url(css/dummy.css);
+</style>
+<script type="text/javascript" src="js/modernizr.min.js"></script>
+</head>
+<body>
+<div class="content_wrapper">
+  <header class="page_header dummy">
+    Dummy content
+  </header>
+  <div class="main_page_area">
+    <nav metal:define-macro="common_navigation">
+      <h2>Navigation menu</h2>
+      <ul class="active_introduction" tal:attributes="class string:active_$activePage">
+        <li class="introduction"><a href=".">Introduction</a></li>
+        <li class="other_page"><a href="other.html">Other page</a></li>
+      </ul>
+    </nav>
+  </div>
+</div>
+<footer class="page_footer dummy">
+  Dummy content
+</footer>
+</body>
+</html>
