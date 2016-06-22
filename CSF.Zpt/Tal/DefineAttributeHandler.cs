@@ -54,7 +54,8 @@ namespace CSF.Zpt.Tal
           string message = String.Format(Resources.ExceptionMessages.ZptAttributeParsingError,
                                          ZptConstants.Tal.Namespace,
                                          ZptConstants.Tal.DefineAttribute,
-                                         attrib.Value);
+                                         attrib.Value,
+                                         context.Element.Name);
           throw new ParserException(message) {
             SourceElementName = context.Element.Name,
             SourceAttributeName = attrib.Name,
@@ -82,9 +83,11 @@ namespace CSF.Zpt.Tal
             string message = String.Format(ExceptionMessages.ExpressionEvaluationException,
                                            ZptConstants.Tal.Namespace,
                                            ZptConstants.Tal.DefineAttribute,
-                                           item.Expression);
+                                           item.Expression,
+                                           context.Element.Name);
             throw new ModelEvaluationException(message, ex) {
-              ExpressionText = item.Expression
+              ExpressionText = item.Expression,
+              ElementName = context.Element.Name,
             };
           }
 

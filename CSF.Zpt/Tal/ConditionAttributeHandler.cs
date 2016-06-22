@@ -39,9 +39,11 @@ namespace CSF.Zpt.Tal
           string message = String.Format(ExceptionMessages.ExpressionEvaluationException,
                                          ZptConstants.Tal.Namespace,
                                          ZptConstants.Tal.ConditionAttribute,
-                                         attribute.Value);
+                                         attribute.Value,
+                                         context.Element.Name);
           throw new ModelEvaluationException(message, ex) {
-            ExpressionText = attribute.Value
+            ExpressionText = attribute.Value,
+            ElementName = context.Element.Name,
           };
         }
 

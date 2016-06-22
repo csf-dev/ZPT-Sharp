@@ -378,9 +378,11 @@ namespace CSF.Zpt.Rendering
         }
         else
         {
-          string message = String.Format("The item '{0}' was not found in the model.",
-                                       expression);
-          throw new InvalidOperationException(message);
+          string message = String.Format(Resources.ExceptionMessages.ModelDoesNotContainItem, expression);
+          throw new ModelEvaluationException(message) {
+            ElementName = context.Element.Name,
+            ExpressionText = expression.ToString(),
+          };
         }
 
         return output;

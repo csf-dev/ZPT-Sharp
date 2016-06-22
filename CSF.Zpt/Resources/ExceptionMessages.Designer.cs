@@ -189,5 +189,11 @@ namespace CSF.Zpt.Resources {
                 return ResourceManager.GetString("UnexpectedExceptionGettingMacro", resourceCulture);
             }
         }
+        
+        internal static string ModelDoesNotContainItem {
+            get {
+                return ResourceManager.GetString("ModelDoesNotContainItem", resourceCulture);
+            }
+        }
     }
 }

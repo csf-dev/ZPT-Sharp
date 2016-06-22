@@ -66,9 +66,11 @@ namespace CSF.Zpt.Tales
       catch(TraversalException ex)
       {
         string message = String.Format(Resources.ExceptionMessages.CouldNotWalkAnyPathsWithExpression,
-                                       expressionText);
+                                       expressionText,
+                                       context?.Element?.Name);
         throw new ModelEvaluationException(message, ex) {
-          ExpressionText = expressionText
+          ExpressionText = expressionText,
+          ElementName = context?.Element?.Name
         };
       }
 

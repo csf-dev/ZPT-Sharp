@@ -24,6 +24,20 @@ namespace CSF.Zpt.Rendering
       }
     }
 
+    /// <summary>
+    /// Gets or sets the name of the element for which the expression was being evaluated.
+    /// </summary>
+    /// <value>The name of the element.</value>
+    public string ElementName
+    {
+      get {
+        return this.Data.Contains("ElementName") ? (string) this.Data["ElementName"] : default(string);
+      }
+      set {
+        this.Data["ElementName"] = value;
+      }
+    }
+
     #endregion
 
     #region constructors

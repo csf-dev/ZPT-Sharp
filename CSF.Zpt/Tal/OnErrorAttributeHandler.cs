@@ -92,7 +92,8 @@ namespace CSF.Zpt.Tal
         string message = String.Format(ExceptionMessages.ZptAttributeParsingError,
                                        ZptConstants.Tal.Namespace,
                                        attribute.Name,
-                                       attribute.Value);
+                                       attribute.Value,
+                                       context.Element.Name);
         throw new ParserException(message) {
           SourceAttributeName = attribute.Name,
           SourceAttributeValue = attribute.Value,

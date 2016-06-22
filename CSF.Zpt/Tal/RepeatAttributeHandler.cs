@@ -80,7 +80,8 @@ namespace CSF.Zpt.Tal
         string message = String.Format(ExceptionMessages.ZptAttributeParsingError,
                                        ZptConstants.Tal.Namespace,
                                        ZptConstants.Tal.RepeatAttribute,
-                                       attribute.Value);
+                                       attribute.Value,
+                                       element.Name);
         throw new ParserException(message) {
           SourceAttributeName = ZptConstants.Tal.RepeatAttribute,
           SourceElementName = element.Name,
@@ -113,9 +114,11 @@ namespace CSF.Zpt.Tal
         string message = String.Format(ExceptionMessages.ExpressionEvaluationException,
                                        ZptConstants.Tal.Namespace,
                                        ZptConstants.Tal.DefineAttribute,
-                                       expression);
+                                       expression,
+                                       context.Element.Name);
         throw new ModelEvaluationException(message, ex) {
-          ExpressionText = expression
+          ExpressionText = expression,
+          ElementName = context.Element.Name,
         };
       }
 
@@ -133,9 +136,11 @@ namespace CSF.Zpt.Tal
         {
           string message = String.Format(ExceptionMessages.TalRepeatExpressionMustEvaluateToIEnumerable,
                                          typeof(IEnumerable).FullName,
-                                         expression);
+                                         expression,
+                                         context.Element.Name);
           throw new ModelEvaluationException(message, ex) {
-            ExpressionText = expression
+            ExpressionText = expression,
+            ElementName = context.Element.Name,
           };
         }
       }

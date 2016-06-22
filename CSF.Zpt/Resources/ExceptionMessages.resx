@@ -13,7 +13,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="ExpressionEvaluationException" xml:space="preserve">
-    <value>An error was encountered evaluating an expression whilst processing a '{0}:{1}' attribute, see the inner exception for more details.
+    <value>An error was encountered evaluating an expression whilst processing a '{0}:{1}' attribute on element '{3}', see the inner exception for more details.
 Source expression:{2}</value>
   </data>
   <data name="RenderedElementIncorrectType" xml:space="preserve">
@@ -38,7 +38,7 @@ Source expression:{2}</value>
     <value>The wrapped node must be an {0} '{1}' node.  Received a '{2}' node instead.</value>
   </data>
   <data name="ZptAttributeParsingError" xml:space="preserve">
-    <value>Parser error whilst handling a '{0}:{1}' ZPT attribute, the attribute value is invalid.
+    <value>Parser error whilst handling a '{0}:{1}' ZPT attribute on element '{3}', the attribute value is invalid.
 Attribute value:{2}</value>
   </data>
   <data name="TalesExpressionEvaluatorNotFoundForPrefix" xml:space="preserve">
@@ -55,7 +55,7 @@ Expression:{2}</value>
     <value>None of the TALES paths provided could be traversed successfully.</value>
   </data>
   <data name="CouldNotWalkAnyPathsWithExpression" xml:space="preserve">
-    <value>None of the TALES paths provided could be traversed successfully.
+    <value>None of the TALES paths provided could be traversed successfully in element '{1}'.
 Source expression:{0}</value>
   </data>
   <data name="NoCurrentComponentToWalk" xml:space="preserve">
@@ -91,4 +91,8 @@ Filename:{0}</value>
   <data name="UnexpectedExceptionGettingMacro" xml:space="preserve">
     <value>An unexpected exception occurred whilst resolving metal:{0}="{1}" at {2}.</value>
   </data>
+  <data name="ModelDoesNotContainItem" xml:space="preserve">
+    <value>The item '{0}' was not found in the model.</value>
+  </data>
+
 </root>
