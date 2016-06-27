@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using NUnit.Framework;
 using CSF.Zpt.Tales;
 using Ploeh.AutoFixture;

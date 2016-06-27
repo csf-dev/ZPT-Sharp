@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using Ploeh.AutoFixture;
 using CSF.Zpt.Rendering;
 using Moq;

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using CSF.Zpt.Rendering;
 using NUnit.Framework;
 

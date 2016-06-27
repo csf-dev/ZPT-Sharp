@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Reflection;
 using CSF.Reflection;
 using CSF.Zpt.Rendering;

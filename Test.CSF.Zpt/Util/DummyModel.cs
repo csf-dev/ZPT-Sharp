@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using CSF.Zpt.Rendering;
 
 namespace Test.CSF.Zpt.Util
