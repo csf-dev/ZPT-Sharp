@@ -177,6 +177,8 @@ namespace CSF.Zpt.Metal
         filename = fullFilename;
       }
 
+      filename = filename.Replace(Path.DirectorySeparatorChar.ToString(), "/");
+
       if((!targetElement.IsRoot && targetElement.HasParent) || targetElement.CanWriteCommentWithoutParent)
       {
         previousElement = String.Empty;
