@@ -1,0 +1,43 @@
+.main_page_content code {
+  font-family: 'Droid Sans Mono', monospace;
+}
+.main_page_content pre > code {
+  font-size: 80%;
+  line-height: 140%;
+  margin-bottom: 1.25em;
+  border: 1px solid #FCBD9C;
+}
+.main_page_content p,
+.main_page_content li {
+  margin-bottom: 1em;
+}
+.main_page_content ul {
+  padding-left: 1.5em;
+  list-style: outside disc;
+}
+.main_page_content h2 {
+  font-size: 160%;
+  line-height: 100%;
+  font-family: 'Baloo', cursive;
+  color: #666;
+  margin-top: 1.6em;
+  margin-bottom: 0.2em;
+}
+.main_page_content h3 {
+  font-size: 135%;
+  line-height: 100%;
+  color: #666;
+  margin-top: 1.6em;
+  margin-bottom: 0.2em;
+  font-weight: bold;
+}
+.main_page_content a {
+  text-decoration: none;
+  color: #2A3B6F;
+  padding-bottom: 1px;
+  border-bottom: 1px solid #9FA9C6;
+}
+.main_page_content a:hover {
+  color: #133086;
+  border-color: #7594F0;
+}

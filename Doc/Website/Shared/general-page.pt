@@ -1,5 +1,8 @@
 <!doctype html>
-<html metal:define-macro="page" tal:define="global activePage introduction">
+<html class="page_general"
+      metal:define-macro="page"
+      tal:define="global activePage introduction"
+      tal:attributes="class string:page_$activePage">
 <head metal:define-slot="document_head">
 <meta charset="utf-8">
 <title metal:define-slot="document_title">General document template</title>
@@ -7,19 +10,19 @@
       tal:define="defaultBase string:."
       tal:attributes="href options/baseUrl|defaultBase" />
 <style type="text/css" metal:define-slot="document_styles">
+@import url(css/styles.css);
 </style>
 <style type="text/css" tal:condition="nothing">
-@import url(css/styles.css);
 @import url(css/dummy.css);
 </style>
-<meta tal:omit-tag="string:true" metal:define-slot="document_head_additional"></meta>
 <script type="text/javascript" src="js/modernizr.min.js"></script>
-</head>
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.4.0/styles/default.min.css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.4.0/highlight.min.js"></script></head>
 <body>
 <div class="content_wrapper">
   <header class="page_header" metal:define-slot="page_header">
     <h2>
-      <a href=".">Zpt Sharp</a>
+      <a href=".">ZPT Sharp</a>
       <em>Zen HTML views</em>
     </h2>
   </header>
