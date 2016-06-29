@@ -1,46 +1,49 @@
-html.page_introduction body {
+body.page_introduction {
   background: #333 none;
 }
-html.page_introduction .page_header {
+body.page_introduction .page_header {
   display: none;
 }
-html.page_introduction .main_page_area {
+body.page_introduction .main_page_area {
   margin: 0;
 }
-html.page_introduction .main_page_area > nav {
+body.page_introduction .main_page_area > nav {
   display: none;
 }
-html.page_introduction .main_page_content {
+body.page_introduction .main_page_content {
   max-width: 100%;
   margin-left: 0;
   margin-right: 0;
 }
-html.page_introduction .main_page_content > section {
+body.page_introduction .main_page_content > section {
   max-width: 680px;
   margin: 0 auto;
 }
-html.page_introduction .main_page_content > header {
+body.page_introduction .main_page_content > header {
   padding: 160px 0 120px;
-  font-family: 'Baloo', cursive;
-  font-size: 460%;
-  line-height: 100%;
   background: #333 none;
   background: linear-gradient(to bottom,#000000 0%,#333333 100%);
-  color: #EEE;
   margin-bottom: -60px;
 }
-html.page_introduction .main_page_content > header h1 {
+body.page_introduction .main_page_content > header h1 {
   max-width: 880px;
-  margin: 0 auto;
   padding-left: 1em;
+  font-size: 460%;
+  line-height: 100%;
+  font-family: 'Baloo', cursive;
+  color: #EEE;
+  margin: 0 auto;
 }
-html.page_introduction .main_page_content > header em {
-  font-family: 'Lato', sans-serif;
-  font-size: 85%;
+body.page_introduction .main_page_content > header em {
   font-style: italic;
   display: block;
+  font-size: 65%;
+  line-height: 100%;
+  font-family: 'Lato', sans-serif;
+  color: #EEE;
+  margin: 0 auto;
 }
-html.page_introduction .main_page_content > section {
+body.page_introduction .main_page_content > section {
   background: #FBE2D5 none;
   padding: 40px;
   border-radius: 20px;
@@ -48,6 +51,6 @@ html.page_introduction .main_page_content > section {
   box-shadow: inset 5px 5px 10px 0px rgba(0,0,0,0.8);
   border: 1px solid #222;
 }
-html.page_introduction .main_page_content > section h2 {
+body.page_introduction .main_page_content > section h2 {
   margin-top: 0.625em;
 }

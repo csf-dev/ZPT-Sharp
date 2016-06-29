@@ -1,9 +1,6 @@
 <!doctype html>
-<html class="page_general"
-      metal:define-macro="page"
-      tal:define="global activePage introduction"
-      tal:attributes="class string:page_$activePage">
-<head metal:define-slot="document_head">
+<html>
+<head metal:define-macro="common_document_head">
 <meta charset="utf-8">
 <title metal:define-slot="document_title">General document template</title>
 <base href="../"
@@ -17,8 +14,9 @@
 </style>
 <script type="text/javascript" src="js/modernizr.min.js"></script>
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.4.0/styles/default.min.css">
-<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.4.0/highlight.min.js"></script></head>
-<body>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.4.0/highlight.min.js"></script>
+</head>
+<body metal:define-macro="common_document_body" tal:attributes="class string:page_$activePage">
 <div class="content_wrapper">
   <header class="page_header" metal:define-slot="page_header">
     <h2>

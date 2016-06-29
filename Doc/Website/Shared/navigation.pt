@@ -20,7 +20,9 @@
       <h2>Navigation menu</h2>
       <ul class="active_introduction" tal:attributes="class string:active_$activePage">
         <li class="introduction"><a href=".">Introduction</a></li>
-        <li class="other_page"><a href="other.html">Other page</a></li>
+        <li class="asp_net_view_engine"><a href="asp-net-view-engine.html">ZPT-Sharp for ASP.NET MVC</a></li>
+        <li class="page_rendering_api"><a href="page-rendering-api.html">The page-rendering API</a></li>
+        <li class="command_line_renderer"><a href="command-line-renderer.html">The command-line renderer</a></li>
       </ul>
     </nav>
     <section class="main_page_content dummy">

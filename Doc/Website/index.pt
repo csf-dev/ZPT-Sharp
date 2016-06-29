@@ -1,7 +1,6 @@
 <!doctype html>
-<html class="page_introduction"
-      metal:use-macro="pages/Shared/general-page.pt/macros/page">
-<head>
+<html tal:define="activePage string:introduction">
+<head metal:use-macro="pages/Shared/general-page.pt/macros/common_document_head">
 <meta charset="utf-8">
 <title metal:fill-slot="document_title">Zen views for .NET: ZPT-Sharp</title>
 <base href="." />
@@ -19,8 +18,7 @@
 hljs.initHighlightingOnLoad();
 </script>
 </head>
-</head>
-<body>
+<body metal:use-macro="pages/Shared/general-page.pt/macros/common_document_body" class="page_introduction">
 <div class="content_wrapper">
   <header class="page_header" metal:fill-slot="page_header"></header>
   <div class="main_page_area">
@@ -35,7 +33,7 @@ hljs.initHighlightingOnLoad();
       <header>
         <h1>
           Zen views for .NET
-          <em>with ZPT Sharp</em>
+          <em>with ZPT-Sharp</em>
         </h1>
       </header>
       <section class="what_it_is">
@@ -100,8 +98,8 @@ public interface IProduct
   string GetFormattedPrice();
 }</code></pre>
         <p>
-          Now a simple MVC controller; the <strong>GetMyShop</strong> method returns
-          an instance of <strong>IShop</strong>.
+          Now a simple MVC controller; assume that the <code>GetMyShop</code> method returns
+          an instance of <code>IShop</code>.
         </p>
         <pre><code class="csharp">public ActionResult Index()
 {

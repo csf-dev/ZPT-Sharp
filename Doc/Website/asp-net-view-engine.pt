@@ -1,0 +1,60 @@
+<!doctype html>
+<html tal:define="activePage asp_net_view_engine">
+<head metal:use-macro="pages/Shared/general-page.pt/macros/common_document_head">
+<meta charset="utf-8">
+<title metal:fill-slot="document_title">Using ZPT-Sharp as an ASP.NET MVC ViewEngine</title>
+<base href="." />
+<style type="text/css">
+@import url(css/styles.css);
+@import url(css/dummy.css);
+</style>
+<script type="text/javascript" src="js/modernizr.min.js"></script>
+<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.4.0/styles/default.min.css">
+<script src="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.4.0/highlight.min.js"></script>
+<script>
+hljs.initHighlightingOnLoad();
+</script>
+</head>
+<body metal:use-macro="pages/Shared/general-page.pt/macros/common_document_body" class="page_asp_net_view_engine">
+<div class="content_wrapper">
+  <header class="page_header dummy">
+    Dummy content
+  </header>
+  <div class="main_page_area">
+    <nav>
+      <h2>Navigation menu</h2>
+      <ul class="active_introduction dummy">
+        <li class="introduction"><a href=".">Introduction</a></li>
+        <li class="other_page"><a href="dummy.html">Dummy page</a></li>
+      </ul>
+    </nav>
+    <section class="main_page_content" metal:fill-slot="main_page_content">
+      <header>
+        <h1>ASP.NET MVC ViewEngine</h1>
+      </header>
+      <p>
+        The first purpose of ZPT-Sharp is to serve as an ASP.NET MVC <code>ViewEngine</code>.
+      </p>
+      <h2>The minimum to get started</h2>
+      <p>
+        To get started using ZPT-Sharp, all you need do is to register the view engine, and you are away!
+      </p>
+      <pre><code class="csharp">// Typically in your Global.asax.cs:
+protected void Application_Start()
+{
+  ViewEngines.Engines.Clear();
+  ViewEngines.Engines.Add(new ZptViewEngine());
+}</code></pre>
+      <p>
+        Now, place ZPT views (in an acceptable format, either <code title="HTML page template file extension">.pt</code>
+        or <code title="XML page template file extension">.xml</code>) into your <code>Views</code> directory and
+        they will be used to render your views.  There is no special requirement upon your controllers or your models.
+      </p>
+    </section>
+  </div>
+</div>
+<footer class="page_footer dummy">
+  Dummy content
+</footer>
+</body>
+</html>
