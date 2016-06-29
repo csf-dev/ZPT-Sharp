@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="UTF-8" ?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <root xmlns="http://ns.csf-dev.com/sample" xmlns:metal="http://xml.zope.org/namespaces/metal">
   <blah metal:define-macro="macro-one" metal:extend-macro="macro-base">
     <bar>Extender content</bar>

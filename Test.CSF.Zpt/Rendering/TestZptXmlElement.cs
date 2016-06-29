@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Reflection;
 using CSF.Reflection;
 using CSF.Zpt.Rendering;
@@ -49,7 +49,7 @@ namespace Test.CSF.Zpt.Rendering
                                _sourceFile);
 
       // Act
-      var result = sut.ToString();
+      var result = sut.ToString().Replace(Environment.NewLine, "\n");
 
       // Assert
       Assert.AreEqual(_xmlSource, result);
@@ -160,7 +160,7 @@ namespace Test.CSF.Zpt.Rendering
   </body>
 </html>";
       Assert.AreEqual(expectedDom,
-                      new ZptXmlElement(_document.DocumentElement, _sourceFile).ToString(),
+                      new ZptXmlElement(_document.DocumentElement, _sourceFile).ToString().Replace(Environment.NewLine, "\n"),
                       "Correct modified XML");
     }
 
@@ -200,7 +200,7 @@ namespace Test.CSF.Zpt.Rendering
   </body>
 </html>";
       Assert.AreEqual(expectedDom,
-                      new ZptXmlElement(_document.DocumentElement, _sourceFile).ToString(),
+                      new ZptXmlElement(_document.DocumentElement, _sourceFile).ToString().Replace(Environment.NewLine, "\n"),
                       "Correct modified XML");
     }
 
@@ -240,7 +240,7 @@ namespace Test.CSF.Zpt.Rendering
   </body>
 </html>";
       Assert.AreEqual(expectedDom,
-                      new ZptXmlElement(_document.DocumentElement, _sourceFile).ToString(),
+                      new ZptXmlElement(_document.DocumentElement, _sourceFile).ToString().Replace(Environment.NewLine, "\n"),
                       "Correct modified XML");
     }
 
@@ -280,7 +280,7 @@ namespace Test.CSF.Zpt.Rendering
   </body>
 </html>";
       Assert.AreEqual(expectedDom,
-                      new ZptXmlElement(_document.DocumentElement, _sourceFile).ToString(),
+                      new ZptXmlElement(_document.DocumentElement, _sourceFile).ToString().Replace(Environment.NewLine, "\n"),
                       "Correct modified XML");
     }
 
@@ -320,7 +320,7 @@ namespace Test.CSF.Zpt.Rendering
   </body>
 </html>";
       Assert.AreEqual(expectedDom,
-                      new ZptXmlElement(_document.DocumentElement, _sourceFile).ToString(),
+                      new ZptXmlElement(_document.DocumentElement, _sourceFile).ToString().Replace(Environment.NewLine, "\n"),
                       "Correct modified XML");
     }
 
@@ -361,7 +361,7 @@ namespace Test.CSF.Zpt.Rendering
   </body>
 </html>";
       Assert.AreEqual(expectedDom,
-                      new ZptXmlElement(_document.DocumentElement, _sourceFile).ToString(),
+                      new ZptXmlElement(_document.DocumentElement, _sourceFile).ToString().Replace(Environment.NewLine, "\n"),
                       "Correct modified XML");
     }
 
@@ -396,7 +396,7 @@ namespace Test.CSF.Zpt.Rendering
   </body>
 </html>";
       Assert.AreEqual(expectedDom,
-                      new ZptXmlElement(_document.DocumentElement, _sourceFile).ToString(),
+                      new ZptXmlElement(_document.DocumentElement, _sourceFile).ToString().Replace(Environment.NewLine, "\n"),
                       "Correct modified XML");
     }
 
@@ -432,7 +432,7 @@ namespace Test.CSF.Zpt.Rendering
   </body>
 </html>";
       Assert.AreEqual(expectedDom,
-                      new ZptXmlElement(_document.DocumentElement, _sourceFile).ToString(),
+                      new ZptXmlElement(_document.DocumentElement, _sourceFile).ToString().Replace(Environment.NewLine, "\n"),
                       "Correct modified XML");
     }
 
@@ -466,7 +466,7 @@ namespace Test.CSF.Zpt.Rendering
   </body>
 </html>";
       Assert.AreEqual(expectedDom,
-                      new ZptXmlElement(_document.DocumentElement, _sourceFile).ToString(),
+                      new ZptXmlElement(_document.DocumentElement, _sourceFile).ToString().Replace(Environment.NewLine, "\n"),
                       "Correct modified XML");
     }
 
@@ -502,7 +502,7 @@ namespace Test.CSF.Zpt.Rendering
   </body>
 </html>";
       Assert.AreEqual(expectedDom,
-                      new ZptXmlElement(_document.DocumentElement, _sourceFile).ToString(),
+                      new ZptXmlElement(_document.DocumentElement, _sourceFile).ToString().Replace(Environment.NewLine, "\n"),
                       "Correct modified XML");
     }
 
@@ -553,7 +553,7 @@ namespace Test.CSF.Zpt.Rendering
   </body>
 </html>";
       Assert.AreEqual(expectedDom,
-                      new ZptXmlElement(_document.DocumentElement, _sourceFile).ToString(),
+                      new ZptXmlElement(_document.DocumentElement, _sourceFile).ToString().Replace(Environment.NewLine, "\n"),
                       "Correct modified XML");
     }
 
@@ -604,7 +604,7 @@ namespace Test.CSF.Zpt.Rendering
   </body>
 </html>";
       Assert.AreEqual(expectedDom,
-                      new ZptXmlElement(_document.DocumentElement, _sourceFile).ToString(),
+                      new ZptXmlElement(_document.DocumentElement, _sourceFile).ToString().Replace(Environment.NewLine, "\n"),
                       "Correct modified XML");
     }
 
@@ -667,7 +667,7 @@ namespace Test.CSF.Zpt.Rendering
       sut.AddCommentBefore("Foo bar baz");
 
       // Assert
-      Assert.AreEqual(expectedResult, docElement.ToString());
+      Assert.AreEqual(expectedResult, docElement.ToString().Replace(Environment.NewLine, "\n"));
     }
 
     [Test]
@@ -738,7 +738,7 @@ namespace Test.CSF.Zpt.Rendering
   </body>
 </html>";
       Assert.AreEqual(expectedDom,
-                      new ZptXmlElement(_document.DocumentElement, _sourceFile).ToString(),
+                      new ZptXmlElement(_document.DocumentElement, _sourceFile).ToString().Replace(Environment.NewLine, "\n"),
                       "Correct modified XML");
     }
 

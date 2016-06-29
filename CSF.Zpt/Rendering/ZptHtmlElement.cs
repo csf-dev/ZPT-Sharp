@@ -246,7 +246,7 @@ namespace CSF.Zpt.Rendering
       if(prevNode.NodeType == HtmlNodeType.Text)
       {
         var lastLine = prevNode.InnerText
-          .Split(new[] { System.Environment.NewLine }, StringSplitOptions.None)
+          .Split(new[] { "\r\n", "\n" }, StringSplitOptions.None)
           .Last();
         if(String.IsNullOrWhiteSpace(lastLine))
         {

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using CSF.Zpt.Rendering;
 using Moq;
 using NUnit.Framework;
@@ -89,10 +89,12 @@ namespace Test.CSF.Zpt.Metal
     public void TestGetUsedMacroNoAttribute()
     {
       // Arrange
-      ZptElement
-        originalElement = Mock.Of<ZptElement>(x => x.GetAttribute(ZptConstants.Metal.Namespace,
-                                                                  ZptConstants.Metal.UseMacroAttribute) == (global::CSF.Zpt.Rendering.ZptAttribute) null);
-      _fixture.Inject(originalElement);
+      var mockOriginalElement = new Mock<ZptElement>();
+      mockOriginalElement
+        .Setup(x => x.GetAttribute(ZptConstants.Metal.Namespace, ZptConstants.Metal.UseMacroAttribute))
+        .Returns((global::CSF.Zpt.Rendering.ZptAttribute)null);
+      
+      ZptElement originalElement = mockOriginalElement.Object;
 
       var context = _fixture.Create<RenderingContext>();
 
@@ -163,9 +165,12 @@ namespace Test.CSF.Zpt.Metal
     public void TestGetExtendedMacroNoAttribute()
     {
       // Arrange
-      ZptElement
-        originalElement = Mock.Of<ZptElement>(x => x.GetAttribute(ZptConstants.Metal.Namespace,
-                                                                  ZptConstants.Metal.ExtendMacroAttribute) == (global::CSF.Zpt.Rendering.ZptAttribute) null);
+      var mockOriginalElement = new Mock<ZptElement>();
+      mockOriginalElement
+        .Setup(x => x.GetAttribute(ZptConstants.Metal.Namespace, ZptConstants.Metal.ExtendMacroAttribute))
+        .Returns((global::CSF.Zpt.Rendering.ZptAttribute) null);
+      
+      ZptElement originalElement = mockOriginalElement.Object;
       _fixture.Inject(originalElement);
 
       var context = _fixture.Create<RenderingContext>();

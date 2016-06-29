@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using NUnit.Framework;
 using CSF.Zpt.Rendering;
 using Test.CSF.Zpt.Rendering;
@@ -110,7 +110,7 @@ namespace Test.CSF.Zpt.Metal
 
       try
       {
-        Assert.AreEqual(expected, result);
+        Assert.AreEqual(expected, result.Replace(System.Environment.NewLine, "\n"));
       }
       catch(AssertionException)
       {

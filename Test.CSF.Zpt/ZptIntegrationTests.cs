@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using NUnit.Framework;
 using CSF.Zpt;
 using System.IO;
@@ -135,7 +135,7 @@ namespace Test.CSF.Zpt
                                              outputIndentedXml: true,
                                              xmlIndentCharacters: "\t");
 
-          actualRendering = document.Render(options);
+          actualRendering = document.Render(options).Replace(Environment.NewLine, "\n");
           output = (actualRendering == expectedRendering);
         }
         catch(Exception ex)

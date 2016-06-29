@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using NUnit.Framework;
 using Moq;
 using Ploeh.AutoFixture;
