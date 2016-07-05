@@ -1,4 +1,4 @@
-<!doctype html>
+﻿<!doctype html>
 <html tal:define="activePage asp_net_view_engine">
 <head metal:use-macro="pages/Shared/general-page.pt/macros/common_document_head">
 <meta charset="utf-8">
@@ -50,6 +50,108 @@ protected void Application_Start()
         or <code title="XML page template file extension">.xml</code>) into your <code>Views</code> directory and
         they will be used to render your views.  There is no special requirement upon your controllers or your models.
       </p>
+      <h2>Built-in TALES variables</h2>
+      <p>
+        When writing your ZPT views, there are a number of built-in
+        <a href="tales-reference.html"><abbr title="Template Attribute Language Expression Syntax">TALES</abbr></a>
+        variables which are provided by the ZPT-Sharp MVC ViewEngine.  These are populated automatically based upon the
+        <code>ViewContext</code> provided by MVC.
+      </p>
+      <table>
+        <colgroup>
+          <col class="variable_name" />
+          <col class="variable_description" />
+          <col class="mvc_equivalent" />
+        </colgroup>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th>MVC equivalent</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="variable_name">ViewData</td>
+            <td class="variable_description">The view-data dictionary</td>
+            <td class="mvc_equivalent">
+              <a href="https://msdn.microsoft.com/en-us/library/system.web.mvc.viewcontext.viewdata(v=vs.118).aspx">ViewContext.ViewData</a>
+            </td>
+          </tr>
+          <tr>
+            <td class="variable_name">TempData</td>
+            <td class="variable_description">The temp-data dictionary</td>
+            <td class="mvc_equivalent">
+              <a href="https://msdn.microsoft.com/en-us/library/system.web.mvc.viewcontext.tempdata(v=vs.118).aspx">ViewContext.TempData</a>
+            </td>
+          </tr>
+          <tr>
+            <td class="variable_name">Application</td>
+            <td class="variable_description">The application state dictionary</td>
+            <td class="mvc_equivalent">
+              <a href="https://msdn.microsoft.com/en-us/library/system.web.httpcontextbase.application(v=vs.110).aspx">ViewContext.HttpContext.Application</a>
+            </td>
+          </tr>
+          <tr>
+            <td class="variable_name">Cache</td>
+            <td class="variable_description">The cache dictionary</td>
+            <td class="mvc_equivalent">
+              <a href="https://msdn.microsoft.com/en-us/library/system.web.httpcontextbase.cache(v=vs.110).aspx">ViewContext.HttpContext.Cache</a>
+            </td>
+          </tr>
+          <tr>
+            <td class="variable_name">Request</td>
+            <td class="variable_description">The request helper</td>
+            <td class="mvc_equivalent">
+              <a href="https://msdn.microsoft.com/en-us/library/system.web.httpcontextbase.request(v=vs.118).aspx">ViewContext.HttpContext.Request</a>
+            </td>
+          </tr>
+          <tr>
+            <td class="variable_name">Response</td>
+            <td class="variable_description">The response helper</td>
+            <td class="mvc_equivalent">
+              <a href="https://msdn.microsoft.com/en-us/library/system.web.httpcontextbase.response(v=vs.118).aspx">ViewContext.HttpContext.Response</a>
+            </td>
+          </tr>
+          <tr>
+            <td class="variable_name">RouteData</td>
+            <td class="variable_description">The route-data</td>
+            <td class="mvc_equivalent">
+              <a href="https://msdn.microsoft.com/en-us/library/system.web.mvc.controllercontext.routedata(v=vs.118).aspx">ViewContext.RouteData</a>
+            </td>
+          </tr>
+          <tr>
+            <td class="variable_name">Server</td>
+            <td class="variable_description">The ASP.NET server helper</td>
+            <td class="mvc_equivalent">
+              <a href="https://msdn.microsoft.com/en-us/library/system.web.httpcontextbase.server(v=vs.118).aspx">ViewContext.HttpContext.Server</a>
+            </td>
+          </tr>
+          <tr>
+            <td class="variable_name">Session</td>
+            <td class="variable_description">The ASP.NET session helper</td>
+            <td class="mvc_equivalent">
+              <a href="https://msdn.microsoft.com/en-us/library/system.web.httpcontextbase.session(v=vs.118).aspx">ViewContext.HttpContext.Session</a>
+            </td>
+          </tr>
+          <tr>
+            <td class="variable_name">Model</td>
+            <td class="variable_description">The typed view model</td>
+            <td class="mvc_equivalent">
+              <a href="https://msdn.microsoft.com/en-us/library/system.web.mvc.viewdatadictionary.model(v=vs.118).aspx">ViewContext.ViewData.Model</a>
+            </td>
+          </tr>
+          <tr>
+            <td class="variable_name">Views</td>
+            <td class="variable_description">
+              Filesystem directory object pointing at the virtual path <code>~/Views/</code>
+            </td>
+            <td class="mvc_equivalent">
+              <em>None</em>
+            </td>
+          </tr>
+        </tbody>
+      </table>
     </section>
   </div>
 </div>

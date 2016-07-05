@@ -1,4 +1,4 @@
-.main_page_content code,
+﻿.main_page_content code,
 .main_page_content pre {
   font-family: 'Droid Sans Mono', monospace;
 }
@@ -69,4 +69,19 @@
 }
 .main_page_content em {
   font-style: italic;
+}
+.main_page_content table {
+    background: #F0F0F0 none;
+    border-collapse: collapse;
+    border: 2px solid #666;
+    width: 100%;
+}
+.main_page_content th,
+.main_page_content td {
+    border: 1px solid #CCC;
+    padding: 0.2em;
+}
+.main_page_content th {
+    font-weight: bold;
+    border-bottom: 2px solid #666;
 }
