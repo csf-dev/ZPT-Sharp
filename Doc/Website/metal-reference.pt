@@ -1,0 +1,69 @@
+<!doctype html>
+<html tal:define="activePage metal_reference">
+<head metal:use-macro="pages/Shared/general-page.pt/macros/common_document_head">
+<meta charset="utf-8">
+<title metal:fill-slot="document_title">ZPT-Sharp - METAL reference</title>
+<base href="." />
+<style type="text/css">
+@import url(css/styles.css);
+@import url(css/dummy.css);
+</style>
+<script type="text/javascript" src="js/modernizr.min.js"></script>
+<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.4.0/styles/default.min.css">
+<script src="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.4.0/highlight.min.js"></script>
+<script>
+hljs.initHighlightingOnLoad();
+</script>
+</head>
+<body metal:use-macro="pages/Shared/general-page.pt/macros/common_document_body" class="metal_reference">
+<div class="content_wrapper">
+  <header class="page_header dummy">
+    Dummy content
+  </header>
+  <div class="main_page_area">
+    <nav>
+      <h2>Navigation menu</h2>
+      <ul class="active_introduction dummy">
+        <li class="introduction"><a href=".">Introduction</a></li>
+        <li class="other_page"><a href="dummy.html">Dummy page</a></li>
+      </ul>
+    </nav>
+    <section class="main_page_content" metal:fill-slot="main_page_content">
+      <header>
+        <h1>METAL reference</h1>
+      </header>
+      <p>
+        METAL stands for <strong>Macro Expansion for Template Attribute Language</strong>.  It is the mechanism by which
+        page templates may define and make use of macros, where macros are reusable areas of markup.  If you are coming from
+        an ASP.NET background, think of macros as a combination of master pages, and user controls.
+      </p>
+      <h2 id="define_macro">define-macro</h2>
+      <p>
+        The first step in using METAL is to attach a <code>metal:define-macro</code> attribute to the root element which
+        comprises the markup for the macro.  Here is an example.
+      </p>
+      <pre><code class="xml">&lt;table&gt;
+  &lt;tbody&gt;
+    &lt;tr metal:define-macro=&quot;product_row&quot;&gt;
+      &lt;td tal:content=&quot;product/Name&quot;&gt;Name here&lt;/td&gt;
+      &lt;td tal:content=&quot;product/Description&quot;&gt;Description here&lt;/td&gt;
+      &lt;td&gt;
+        &lt;span tal:replace=&quot;product/Price/Value&quot;&gt;9.99&lt;/span&gt;
+        &lt;span tal:replace=&quot;product/Price/Currency&quot;&gt;GBP&lt;/span&gt;
+      &lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;</code></pre>
+      <p>
+        In this example, the <code>&lt;tr&gt;</code> element is the root of the METAL macro.  Wherever this macro is used,
+        with a <a href="metal-reference.html#use_macro">metal:use-macro</a> attribute, that table row (and its children) will
+        be spliced into the output document.
+      </p>
+    </section>
+  </div>
+</div>
+<footer class="page_footer dummy">
+  Dummy content
+</footer>
+</body>
+</html>
