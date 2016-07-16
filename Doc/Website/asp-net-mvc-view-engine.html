@@ -46,14 +46,16 @@ protected void Application_Start()
   ViewEngines.Engines.Add(new ZptViewEngine());
 }</code></pre>
       <p>
-        Now, place ZPT views (in an acceptable format, either <code title="HTML page template file extension">.pt</code>
-        or <code title="XML page template file extension">.xml</code>) into your <code>Views</code> directory and
-        they will be used to render your views.  There is no special requirement upon your controllers or your models.
+        You may now <a href="writing-pages-using-zpt.html">create and use ZPT views</a>
+        in your application by including the files (in an acceptable format, either
+        <code title="HTML page template file extension">.pt</code> or
+        <code title="XML page template file extension">.xml</code>) in the <code>Views</code> directory.  There is no
+        special requirement upon your controllers or your models.
       </p>
       <h2>Built-in TALES variables</h2>
       <p>
         When writing your ZPT views, there are a number of built-in
-        <a href="tales-reference.html"><abbr title="Template Attribute Language Expression Syntax">TALES</abbr></a>
+        <a href="introduction-to-tales.html"><abbr title="Template Attribute Language Expression Syntax">TALES</abbr></a>
         variables which are provided by the ZPT-Sharp MVC ViewEngine.  These are populated automatically based upon the
         <code>ViewContext</code> provided by MVC.
       </p>

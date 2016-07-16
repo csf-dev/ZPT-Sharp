@@ -1,0 +1,90 @@
+<!doctype html>
+<html tal:define="activePage define_use_macro">
+<head metal:use-macro="pages/Shared/general-page.pt/macros/common_document_head">
+<meta charset="utf-8">
+<title metal:fill-slot="document_title">Defining and using METAL macros</title>
+<base href="../" />
+<style type="text/css">
+@import url(css/styles.css);
+@import url(css/dummy.css);
+</style>
+<script type="text/javascript" src="js/modernizr.min.js"></script>
+<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.4.0/styles/default.min.css">
+<script src="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.4.0/highlight.min.js"></script>
+<script>
+hljs.initHighlightingOnLoad();
+</script>
+</head>
+<body metal:use-macro="pages/Shared/general-page.pt/macros/common_document_body" class="page_define_use_macro">
+<div class="content_wrapper">
+  <header class="page_header dummy">
+    Dummy content
+  </header>
+  <div class="main_page_area">
+    <nav>
+      <h2>Navigation menu</h2>
+      <ul class="active_introduction dummy">
+        <li class="introduction"><a href=".">Introduction</a></li>
+        <li class="other_page"><a href="dummy.html">Dummy page</a></li>
+      </ul>
+    </nav>
+    <section class="main_page_content" metal:fill-slot="main_page_content">
+      <header>
+        <h1>Defining and using METAL macros</h1>
+      </header>
+      <h2 id="define_macro">metal:define-macro</h2>
+      <h3>Attribute syntax</h3>
+      <pre><code class="html">metal:define-macro="MACRONAME"</code></pre>
+      <h3>Remarks</h3>
+      <p>
+        Indicates that the current element and all of its child elements form a macro with the given name
+        (<kbd>MACRONAME</kbd>).
+      </p>
+      <h2 id="use_macro">metal:use-macro</h2>
+      <h3>Attribute syntax</h3>
+      <pre><code class="html">metal:use-macro="EXPRESSION"</code></pre>
+      <h3>Remarks</h3>
+      <p>
+        Creates a copy of the markup tree represented by the macro <kbd>EXPRESSION</kbd> ("the macro"). The macro is
+        <a href="metal/extend-macro.html">extended</a> and <a href="metal/define-fill-slot.html">slots are filled</a>
+        if appropriate.  Then the current element (the element decorated <code>use-macro</code>) and its
+        children/content is replaced with the macro.
+      </p>
+      <h2>Macro definition and usage example</h2>
+      <p>
+        The following simple example shows a common page header macro:
+      </p>
+      <pre><code class="html">&lt;!-- Macro definition --&gt;
+&lt;body&gt;
+  &lt;header metal:define-macro=&quot;page_header&quot;&gt;
+    &lt;a href=&quot;homepage_url&quot;&gt;Boyd&#39;s toast&lt;/a&gt;
+    &lt;p class=&quot;strapline&quot;&gt;Our toast really &lt;em&gt;pops!&lt;/em&gt;&lt;/p&gt;
+  &lt;/header&gt;
+&lt;/body&gt;
+
+&lt;!-- Macro usage --&gt;
+&lt;body&gt;
+  &lt;header metal:use-macro=&quot;page_header&quot;&gt;Uses the common header&lt;/header&gt;
+  &lt;section class=&quot;main_content&quot;&gt;
+    &lt;p&gt;Here&#39;s the main page content&lt;/p&gt;
+  &lt;/section&gt;
+&lt;/body&gt;
+
+&lt;!-- How this renders --&gt;
+&lt;body&gt;
+  &lt;header&gt;
+    &lt;a href=&quot;homepage_url&quot;&gt;Boyd&#39;s toast&lt;/a&gt;
+    &lt;p class=&quot;strapline&quot;&gt;Our toast really &lt;em&gt;pops!&lt;/em&gt;&lt;/p&gt;
+  &lt;/header&gt;
+  &lt;section class=&quot;main_content&quot;&gt;
+    &lt;p&gt;Here&#39;s the main page content&lt;/p&gt;
+  &lt;/section&gt;
+&lt;/body&gt;</code></pre>
+    </section>
+  </div>
+</div>
+<footer class="page_footer dummy">
+  Dummy content
+</footer>
+</body>
+</html>
