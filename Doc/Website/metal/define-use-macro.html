@@ -38,7 +38,8 @@ hljs.initHighlightingOnLoad();
       <h3>Remarks</h3>
       <p>
         Indicates that the current element and all of its child elements form a macro with the given name
-        (<kbd>MACRONAME</kbd>).
+        (<kbd>MACRONAME</kbd>).  Alone this attribute does nothing, but the macro may now be referenced by either
+        <code>use-macro</code> or <a href="metal/extend-macro.html"><code>metal:extend-macro</code></a> attributes.
       </p>
       <h2 id="use_macro">metal:use-macro</h2>
       <h3>Attribute syntax</h3>
@@ -48,7 +49,8 @@ hljs.initHighlightingOnLoad();
         Creates a copy of the markup tree represented by the macro <kbd>EXPRESSION</kbd> ("the macro"). The macro is
         <a href="metal/extend-macro.html">extended</a> and <a href="metal/define-fill-slot.html">slots are filled</a>
         if appropriate.  Then the current element (the element decorated <code>use-macro</code>) and its
-        children/content is replaced with the macro.
+        children/content is replaced with the referenced macro (the corresponding element decorated with
+        <code>define-macro</code>).
       </p>
       <h2>Macro definition and usage example</h2>
       <p>

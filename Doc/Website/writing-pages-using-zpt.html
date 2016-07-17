@@ -31,8 +31,27 @@ hljs.initHighlightingOnLoad();
     <section class="main_page_content" metal:fill-slot="main_page_content">
       <header><h1>Writing pages using ZPT</h1></header>
       <p>
-        <abbr title="Zope Page Templates">ZPT</abbr> performs two primary operations when it renders a page, in the
-        following order:
+        <abbr title="Zope Page Templates">ZPT</abbr> is an <em>attribute language</em>; this means that their syntax
+        resides entirely within HTML/XML attributes.  The distinct technical advantage of attribute languages is that
+        they do not interfere with the validity of the underlying HTML or XML structure of the source file.
+        This means that:
+      </p>
+      <ul>
+        <li>
+          MVC views written in ZPT-Sharp may be viewed offline from their application; the source files will render as
+          valid HTML/XHTML pages.
+        </li>
+        <li>
+          For XML-based documents, the source file is also well-formed XML.
+        </li>
+        <li>
+          ZPT-Sharp exposes only a small (but powerful) number of functions in order to perform their function, these
+          present a shallow learning curve for non-developers to comprehend.
+        </li>
+      </ul>
+      <h2>Introducing METAL and TAL</h2>
+      <p>
+        ZPT performs two primary operations when it renders a page, in the following order:
       </p>
       <ol>
         <li>
@@ -53,25 +72,6 @@ hljs.initHighlightingOnLoad();
         the document</a>) <em>master pages</em>, rolled into a single mechanism. TAL on the other hand provides the
         content to the page.
       </p>
-      <h2>View logic using attributes</h2>
-      <p>
-        Both of METAL and TAL are attribute languages.  This means that their syntax resides entirely within HTML/XML
-        attributes.  The distinct technical advantage is that this does not interfere with the underlying HTML
-        or XML structure of the page/view to be rendered.  This means:
-      </p>
-      <ul>
-        <li>
-          MVC views written in ZPT-Sharp are designer-friendly, even when viewed/edited offline from their underlying
-          application.
-        </li>
-        <li>
-          For XML/XHTML documents, the view source is just as much well-formed XML as the rendered output.
-        </li>
-        <li>
-          ZPT-Sharp exposes only a small (but powerful) number of functions in order to perform their function, these
-          present a shallow learning curve for non-developers to comprehend.
-        </li>
-      </ul>
       <h2>Providing dummy content</h2>
       <p>
         Because many of the METAL and TAL directives result in the <em>replacement of content</em>, it is possible to

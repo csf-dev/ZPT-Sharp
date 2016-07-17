@@ -90,6 +90,14 @@
 .main_page_content em {
   font-style: italic;
 }
+.main_page_content abbr {
+  color: #405511;
+  border-bottom: 1px solid #91BE27;
+  cursor: help;
+}
+.main_page_content a abbr {
+  border-bottom-width: 0;
+}
 .main_page_content table {
     background: #F0F0F0 none;
     border-collapse: collapse;
