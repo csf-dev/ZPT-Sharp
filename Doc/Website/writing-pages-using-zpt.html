@@ -61,7 +61,7 @@ hljs.initHighlightingOnLoad();
         </li>
         <li>
           It finds and
-          <a href="introduction-to-tal.html">processes <abbr title="Template Attribute Language">TAL</abbr> attributes</a>.
+          <a href="tal/introduction.html">processes <abbr title="Template Attribute Language">TAL</abbr> attributes</a>.
           In doing so, ZPT renders the appropriate content into the page, filling/replacing elements, showing/hiding
           content, setting attributes and the like.
         </li>
@@ -69,8 +69,8 @@ hljs.initHighlightingOnLoad();
       <p>
         Comparing ZPT to ASP.NET views/pages, METAL could be thought of as similar to <em>user controls</em> and
         (<a href="metal/introduction.html#macros_for_the_html_element">by defining a macro with slots at the root of
-        the document</a>) <em>master pages</em>, rolled into a single mechanism. TAL on the other hand provides the
-        content to the page.
+        the document</a>) <em>master pages</em>, rolled into a single mechanism. TAL on the other hand connects the
+        page object model (potentially a ViewModel) with the markup.
       </p>
       <h2>Providing dummy content</h2>
       <p>
@@ -94,6 +94,38 @@ hljs.initHighlightingOnLoad();
       </p>
       <p>
         Dummy content may be simple strings, or could be blocks of markup.
+      </p>
+      <h2>Elements prefixed <code>tal:</code> or <code>metal:</code></h2>
+      <p>
+        ZPT understands elements which are prefixed to indicate that they are TAL or METAL elements.
+        For HTML documents these elements must be prefixed with the literal strings <code>tal:</code> or
+        <code>metal:</code>, for XML documents then they must simply be resolved to
+        <a href="writing-pages-using-zpt.html#xml_namespaces">the correct namespace</a> (the actual prefix itself is
+        irrelevant).
+      </p>
+      <p>
+        Such elements are useful when you wish to perform structural presentation logic, but that logic is not to
+        be represented by an HTML/XML element. TAL/METAL elements have the following behaviour; this is the same
+        whether the TAL or METAL prefix is used.
+      </p>
+      <h3>Prefixes are implied for attributes</h3>
+      <p>
+        TAL or METAL attributes present upon the element do not need to use the prefix which matches their element
+        prefix. The following would be understood as a valid TAL <code>define</code> usage:
+      </p>
+      <pre><code class="html">&lt;tal:block define=&quot;name string:Inigo Montoya&quot;&gt;
+  Hello, my name is &lt;span tal:replace=&quot;name&quot;&gt;Joseph Bloggs&lt;/span&gt;;
+  you killed my father, prepare to die!
+&lt;/tal:block&gt;</code></pre>
+      <h3>The omit-tag behaviour is implied</h3>
+      <p>
+        TAL or METAL elements always behave as if they had <a href="tal/omit-tag.html"><code>tal:omit-tag="1"</code></a>
+        defined upon them.  The element will never be rendered, but its children will be.
+      </p>
+      <h3>The element name itself does not matter</h3>
+      <p>
+        The example above uses <code>tal:block</code> as the element name.  The actual name does not matter, just
+        the prefix.  Feel free to use a short and appropriate name which describes the element's purpose.
       </p>
       <h2 id="xml_namespaces">XML namespaces</h2>
       <p>
