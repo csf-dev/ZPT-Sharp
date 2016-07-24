@@ -25,6 +25,7 @@ body > .content_wrapper:after {
   border-bottom: 1px solid #333;
   text-shadow: -2px -2px 6px rgba(238, 238, 238, 0.4);
   font-size: 180%;
+  box-shadow: 0 2px 8px 0px rgba(0,0,0,0.8);
 }
 .page_header a {
   color: #EEE;

@@ -74,13 +74,13 @@ hljs.initHighlightingOnLoad();
               Repeat the element (and all of its children) for each item within a collection
             </td>
           <tr>
-            <td><a href="tal/content.html"><code>content</code></a></td>
+            <td><a href="tal/content-replace.html"><code>content</code></a></td>
             <td>
               Replace all child nodes of the current element with the results of a TALES expression
               <em>(mutually exclusive with <code>replace</code>)</em>
             </td>
           <tr>
-            <td><a href="tal/replace.html"><code>replace</code></a></td>
+            <td><a href="tal/content-replace.html"><code>replace</code></a></td>
             <td>
               Replace the current element, along with all of its child nodes with the results of a TALES expression
               <em>(mutually exclusive with <code>content</code>)</em>
@@ -105,6 +105,17 @@ hljs.initHighlightingOnLoad();
           </tr>
         </tbody>
       </table>
+      <h3>Order of processing</h3>
+      <p>
+        TAL attributes are processed in the order in which they are listed in the above table.  If an attribute
+        indicates that it ceases TAL processing (for example, a <code>tal:condition</code> attribute means that an
+        element is not to be rendered), then subsequent TAL attributes will not be processed.
+      </p>
+      <p>
+        The exception to this is <code>tal:on-error</code> attributes.  On-error attributes are processed immediately
+        when an error is raised; that error will then interrupt the processing of other TAL attributes.  Thus, on-error
+        attributes lie outside the normal order of attribute processing.
+      </p>
     </section>
   </div>
 </div>

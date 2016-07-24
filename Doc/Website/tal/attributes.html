@@ -1,0 +1,98 @@
+<!doctype html>
+<html tal:define="activePage tal_attributes">
+<head metal:use-macro="pages/Shared/general-page.pt/macros/common_document_head">
+<meta charset="utf-8">
+<title metal:fill-slot="document_title">Setting element attributes</title>
+<base href="../" />
+<style type="text/css">
+@import url(css/styles.css);
+@import url(css/dummy.css);
+</style>
+<script type="text/javascript" src="js/modernizr.min.js"></script>
+<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.4.0/styles/default.min.css">
+<script src="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.4.0/highlight.min.js"></script>
+<script>
+hljs.initHighlightingOnLoad();
+</script>
+</head>
+<body metal:use-macro="pages/Shared/general-page.pt/macros/common_document_body" class="page_tal_attributes">
+<div class="content_wrapper">
+  <header class="page_header dummy">
+    Dummy content
+  </header>
+  <div class="main_page_area">
+    <nav>
+      <h2>Navigation menu</h2>
+      <ul class="active_introduction dummy">
+        <li class="introduction"><a href=".">Introduction</a></li>
+        <li class="other_page"><a href="dummy.html">Dummy page</a></li>
+      </ul>
+    </nav>
+    <section class="main_page_content" metal:fill-slot="main_page_content">
+      <header>
+        <h1>Setting element attributes</h1>
+      </header>
+      <p>
+        The TAL <strong>attributes</strong> attribute controls the adding, removal or setting of attributes upon the
+        rendered element.
+      </p>
+      <h2>Syntax</h2>
+      <pre><code class="nohighlight">tal:attributes="ATTRIBUTE_NAME EXPRESSION"</code></pre>
+      <h3>The attribute name</h3>
+      <p>
+        The attribute name (<code>ATTRIBUTE_NAME</code>) is mandatory and specifies the name of the attribute to modify.
+        It may optionally contain a namespace prefix in the <code>PREFIX:NAME</code> syntax.  This is useful for XML
+        documents which include attributes from multiple namespaces.
+      </p>
+      <h3>The expression</h3>
+      <p>
+        The expression (<code>EXPRESSION</code>) is
+        <a href="tales/expression-evaluation.html">evaluated as a TALES expression</a>; and the result depends upon the
+        value of that expression, using the following logic:
+      </p>
+      <ol>
+        <li>
+          If the expression evaluates to <code>null</code> then the named attribute is not added to the element; if it
+          is already present then it is removed.
+        </li>
+        <li>
+          If the expression <a href="tales/cancellation.html">cancels the action</a> then the attribute is not added to
+          the element.  If it is already present then it is left unchanged.
+        </li>
+        <li>
+          If the expression evaluates to any other value then the named attribute is either added to the element or,
+          if it is already present its value is modified.  The attribute's new value is the result of expression.
+        </li>
+      </ol>
+      <p>
+        In the last case, where an attribute value is added or modified, the expression result is interpreted as a
+        <code>System.String</code>, if it is not already a string then it is converted using the object's
+        <code>ToString()</code> method.  The expression result is escaped (HTML encoded) before it is rendered as an
+        attribute value.
+      </p>
+      <h2 id="multiple_attributes">Setting multiple attributes at once</h2>
+      <p>
+        It is permitted to include multiple attributes statements in the same <code>tal:attributes</code> attribute.
+        Each statement is separated by a semicolon (and optional whitespace for readability):
+      </p>
+      <pre><code class="html">&lt;input tal:attributes=&quot;class string:my_class my_other_class;
+                       type Model/My/Value;
+                       readonly string:readonly&quot; /&gt;</code></pre>
+      <p>
+        If you wish to use a semicolon character in an attribute name or expression (for example as part of
+        <a href="tales/string.html">a <code>string:</code> TALES expression</a>) then you must escape it by doubling-it
+        up: <kbd>;;</kbd>.
+      </p>
+      <p>
+        If multiple attribute statements are present upon the same attribute in this manner, they are evaluated
+        independently with regard to handling of null values and cancellation of the action.  Thus attributes may be
+        added and removed via the same <code>tal:attributes</code> attribute.
+      </p>
+    </section>
+  </div>
+</div>
+<footer class="page_footer dummy">
+  Dummy content
+</footer>
+</body>
+</html>

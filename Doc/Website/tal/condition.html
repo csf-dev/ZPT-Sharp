@@ -1,0 +1,66 @@
+<!doctype html>
+<html tal:define="activePage tal_condition">
+<head metal:use-macro="pages/Shared/general-page.pt/macros/common_document_head">
+<meta charset="utf-8">
+<title metal:fill-slot="document_title">Conditionally rendering elements</title>
+<base href="../" />
+<style type="text/css">
+@import url(css/styles.css);
+@import url(css/dummy.css);
+</style>
+<script type="text/javascript" src="js/modernizr.min.js"></script>
+<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.4.0/styles/default.min.css">
+<script src="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.4.0/highlight.min.js"></script>
+<script>
+hljs.initHighlightingOnLoad();
+</script>
+</head>
+<body metal:use-macro="pages/Shared/general-page.pt/macros/common_document_body" class="page_tal_condition">
+<div class="content_wrapper">
+  <header class="page_header dummy">
+    Dummy content
+  </header>
+  <div class="main_page_area">
+    <nav>
+      <h2>Navigation menu</h2>
+      <ul class="active_introduction dummy">
+        <li class="introduction"><a href=".">Introduction</a></li>
+        <li class="other_page"><a href="dummy.html">Dummy page</a></li>
+      </ul>
+    </nav>
+    <section class="main_page_content" metal:fill-slot="main_page_content">
+      <header>
+        <h1>Conditionally rendering elements</h1>
+      </header>
+      <p>
+        The TAL <strong>condition</strong> attribute determines whether an element should be rendered or not.  In
+        essence it is like an 'if' statement in most programming/scripting languages.
+      </p>
+      <h2>Syntax</h2>
+      <pre><code class="nohighlight">tal:condition="EXPRESSION"</code></pre>
+      <h3>The expression</h3>
+      <p>
+        The expression (<code>EXPRESSION</code>) is
+        <a href="tales/expression-evaluation.html">evaluated as a TALES expression</a>; unless the result indicates
+        that <a href="tales/cancellation.html">the action is to be cancelled</a>, that result is then
+        <a href="tales/expression-evaluation.html#boolean_coercion">coerced to a boolean value</a>.
+      </p>
+      <p>
+        If the expression result is <strong>true</strong>, or the result cancels the action, then the element is unaffected
+        and TAL processing continues as if the <code>condition</code> attribute were not present.
+      </p>
+      <p>
+        If the expression result is <strong>false</strong> then the current element and all of its children are removed
+        from the DOM and not rendered to the output.  Additionally, all further TAL processing on that element and its
+        children is aborted.  This usually has no undesired effects (since none of the children will be rendered),
+        but beware that <a href="tal/define.html#scope">global variable definitions</a> present upon child elements
+        will not be performed.
+      </p>
+    </section>
+  </div>
+</div>
+<footer class="page_footer dummy">
+  Dummy content
+</footer>
+</body>
+</html>

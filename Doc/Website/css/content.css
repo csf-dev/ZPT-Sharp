@@ -34,6 +34,12 @@
   padding: 0;
   margin: 0;
 }
+.main_page_content p.note {
+  padding: 1em;
+  background: #DDE none;
+  border: 1px solid #CCE;
+  font-style: italic;
+}
 .main_page_content p,
 .main_page_content li {
   margin-bottom: 1em;
@@ -91,12 +97,8 @@
   font-style: italic;
 }
 .main_page_content abbr {
-  color: #405511;
-  border-bottom: 1px solid #91BE27;
+  background: #F8C9AF;
   cursor: help;
-}
-.main_page_content a abbr {
-  border-bottom-width: 0;
 }
 .main_page_content table {
     background: #F0F0F0 none;
@@ -113,6 +115,7 @@
 .main_page_content th {
     font-weight: bold;
     border-bottom: 2px solid #666;
+    vertical-align: middle;
 }
 
 table.zpt_attributes col.attribute {

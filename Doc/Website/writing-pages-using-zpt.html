@@ -95,7 +95,7 @@ hljs.initHighlightingOnLoad();
       <p>
         Dummy content may be simple strings, or could be blocks of markup.
       </p>
-      <h2>Elements prefixed <code>tal:</code> or <code>metal:</code></h2>
+      <h2 id="elements_in_tal_metal_namespace">Elements prefixed <code>tal:</code> or <code>metal:</code></h2>
       <p>
         ZPT understands elements which are prefixed to indicate that they are TAL or METAL elements.
         For HTML documents these elements must be prefixed with the literal strings <code>tal:</code> or
@@ -119,8 +119,8 @@ hljs.initHighlightingOnLoad();
 &lt;/tal:block&gt;</code></pre>
       <h3>The omit-tag behaviour is implied</h3>
       <p>
-        TAL or METAL elements always behave as if they had <a href="tal/omit-tag.html"><code>tal:omit-tag="1"</code></a>
-        defined upon them.  The element will never be rendered, but its children will be.
+        TAL or METAL elements always follow the <a href="tal/omit-tag.html">the <code>tal:omit-tag</code> behaviour</a>.
+        The element's start and end tags will be omitted from the rendered DOM, but its children will be preserved.
       </p>
       <h3>The element name itself does not matter</h3>
       <p>

@@ -1,0 +1,65 @@
+<!doctype html>
+<html tal:define="activePage tal_omit_tag">
+<head metal:use-macro="pages/Shared/general-page.pt/macros/common_document_head">
+<meta charset="utf-8">
+<title metal:fill-slot="document_title">Omitting an element &amp; preserving children</title>
+<base href="../" />
+<style type="text/css">
+@import url(css/styles.css);
+@import url(css/dummy.css);
+</style>
+<script type="text/javascript" src="js/modernizr.min.js"></script>
+<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.4.0/styles/default.min.css">
+<script src="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.4.0/highlight.min.js"></script>
+<script>
+hljs.initHighlightingOnLoad();
+</script>
+</head>
+<body metal:use-macro="pages/Shared/general-page.pt/macros/common_document_body" class="page_tal_omit_tag">
+<div class="content_wrapper">
+  <header class="page_header dummy">
+    Dummy content
+  </header>
+  <div class="main_page_area">
+    <nav>
+      <h2>Navigation menu</h2>
+      <ul class="active_introduction dummy">
+        <li class="introduction"><a href=".">Introduction</a></li>
+        <li class="other_page"><a href="dummy.html">Dummy page</a></li>
+      </ul>
+    </nav>
+    <section class="main_page_content" metal:fill-slot="main_page_content">
+      <header>
+        <h1>Omitting an element &amp; preserving children</h1>
+      </header>
+      <p>
+        The TAL <strong>omit-tag</strong> attribute allows an element's start and end tags to be removed from the
+        rendered DOM, but for its children (text and elements) to be preserved.
+      </p>
+      <h2>Syntax</h2>
+      <pre><code class="nohighlight">tal:omit-tag="EXPRESSION"</code></pre>
+      <h3>The expression</h3>
+      <p>
+        The expression (<code>EXPRESSION</code>) is
+        <a href="tales/expression-evaluation.html">evaluated as a TALES expression</a>.  If the result either
+        indicates that <a href="tales/cancellation.html">the action is to be cancelled</a>, or it evaluates to
+        <code>null</code>, then the attribute is treated as if the expression had evaluated to <strong>false</strong>.
+      </p>
+      <p>
+        Upon any other expression result, that result is then
+        <a href="tales/expression-evaluation.html#boolean_coercion">coerced to a boolean value</a>. If this yields
+        <strong>true</strong> then the element's start and end tags are omitted from the DOM in the rendering. If it
+        yields <strong>false</strong> then the element's start and end tags are not altered.
+      </p>
+      <p class="note">
+        Any HTML/XML elements <a href="writing-pages-using-zpt.html#elements_in_tal_metal_namespace">prefixed with
+        <code>tal:</code> or <code>metal:</code></a> will exhibit the omit-tag behaviour.
+      </p>
+    </section>
+  </div>
+</div>
+<footer class="page_footer dummy">
+  Dummy content
+</footer>
+</body>
+</html>

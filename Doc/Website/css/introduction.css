@@ -1,5 +1,5 @@
 body.page_introduction {
-  background: #333 none;
+  background: #FAD9C7 none;
 }
 body.page_introduction .page_header {
   display: none;
@@ -15,14 +15,11 @@ body.page_introduction .main_page_content {
   margin-left: 0;
   margin-right: 0;
 }
-body.page_introduction .main_page_content > section {
-  max-width: 680px;
-  margin: 0 auto;
-}
 body.page_introduction .main_page_content > header {
   padding: 160px 0 120px;
   background: #333 none;
-  background: linear-gradient(to bottom,#000000 0%,#333333 100%);
+  background: linear-gradient(to bottom,#666 0%,#555 20%,#333 80%,#222 100%);
+  box-shadow: 0 4px 10px 0px rgba(0,0,0,0.8);
   margin-bottom: -60px;
 }
 body.page_introduction .main_page_content > header h1 {
@@ -44,12 +41,14 @@ body.page_introduction .main_page_content > header em {
   margin: 0 auto;
 }
 body.page_introduction .main_page_content > section {
+  max-width: 680px;
+  margin: 0 auto;
   background: #FBE2D5 none;
   padding: 40px;
   border-radius: 20px;
   margin-bottom: 60px;
-  box-shadow: inset 5px 5px 10px 0px rgba(0,0,0,0.8);
-  border: 1px solid #222;
+  box-shadow: 3px 3px 10px 0px rgba(0,0,0,0.4);
+  border: 1px solid #F8C9AF;
 }
 body.page_introduction .main_page_content > section h2 {
   margin-top: 0.625em;
