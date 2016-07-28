@@ -1,4 +1,4 @@
-<!doctype html>
+﻿<!doctype html>
 <html tal:define="activePage tal_omit_tag">
 <head metal:use-macro="pages/Shared/general-page.pt/macros/common_document_head">
 <meta charset="utf-8">
@@ -47,7 +47,7 @@ hljs.initHighlightingOnLoad();
       </p>
       <p>
         Upon any other expression result, that result is then
-        <a href="tales/expression-evaluation.html#boolean_coercion">coerced to a boolean value</a>. If this yields
+        <a href="tales/boolean-coercion.html">coerced to a boolean value</a>. If this yields
         <strong>true</strong> then the element's start and end tags are omitted from the DOM in the rendering. If it
         yields <strong>false</strong> then the element's start and end tags are not altered.
       </p>
