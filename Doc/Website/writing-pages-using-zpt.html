@@ -1,4 +1,4 @@
-<!doctype html>
+﻿<!doctype html>
 <html tal:define="activePage writing_pages_using_zpt">
 <head metal:use-macro="pages/Shared/general-page.pt/macros/common_document_head">
 <meta charset="utf-8">
@@ -71,6 +71,15 @@ hljs.initHighlightingOnLoad();
         (<a href="metal/introduction.html#macros_for_the_html_element">by defining a macro with slots at the root of
         the document</a>) <em>master pages</em>, rolled into a single mechanism. TAL on the other hand connects the
         page object model (potentially a ViewModel) with the markup.
+      </p>
+      <h2>Introducing TALES</h2>
+      <p>
+        <abbr title="Template Attribute Language Expression Syntax">TALES</abbr> is the mechanism by which
+        <a href="tales/introduction.html">expressions are written and evaluated</a> within TAL &amp; METAL directives.
+        It provides a relatively simple path-oriented syntax which aims to be easy to learn for non-developers; a
+        designer should be able to read and understand a TALES path expression even if they could not write one.
+        For example: <code>here/LoggedInUser/Name</code> might get the logged-in user's name (depending upon the object
+        model passed to the view).
       </p>
       <h2>Providing dummy content</h2>
       <p>
