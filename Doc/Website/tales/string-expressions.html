@@ -1,0 +1,61 @@
+<!doctype html>
+<html tal:define="activePage tales_string_expressions">
+<head metal:use-macro="pages/Shared/general-page.pt/macros/common_document_head">
+<meta charset="utf-8">
+<title metal:fill-slot="document_title">TALES 'string' expressions</title>
+<base href="../" />
+<style type="text/css">
+@import url(css/styles.css);
+@import url(css/dummy.css);
+</style>
+<script type="text/javascript" src="js/modernizr.min.js"></script>
+<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.4.0/styles/default.min.css">
+<script src="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.4.0/highlight.min.js"></script>
+<script>
+hljs.initHighlightingOnLoad();
+</script>
+</head>
+<body metal:use-macro="pages/Shared/general-page.pt/macros/common_document_body" class="page_tales_string_expressions">
+<div class="content_wrapper">
+  <header class="page_header dummy">
+    Dummy content
+  </header>
+  <div class="main_page_area">
+    <nav>
+      <h2>Navigation menu</h2>
+      <ul class="active_introduction dummy">
+        <li class="introduction"><a href=".">Introduction</a></li>
+        <li class="other_page"><a href="dummy.html">Dummy page</a></li>
+      </ul>
+    </nav>
+    <section class="main_page_content" metal:fill-slot="main_page_content">
+      <header>
+        <h1>TALES 'string' expressions</h1>
+      </header>
+      <p>
+        A <code>string:</code> expression builds a literal string value, using optional placeholder replacement.
+        Placeholder are indicated using either the syntax <kbd>$PATH_EXPRESSION</kbd> or <kbd>${PATH_EXPRESSION}</kbd>,
+        where <code>PATH_EXPRESSION</code> is evaluated as if it were a
+        <a href="tales/path-expressions.html">TALES <code>path:</code> expression</a>.  If the path expression body
+        contains only alphanumeric characters, underscores and forward-slashes then the first syntax is sufficient.
+        For expressions which require more complex characters, or spaces, then the second syntax, using braces, is
+        required.
+      </p>
+      <p>
+        Literal dollar symbols may be included in the string, escaping them by doubling-them up: <kbd>$$</kbd>.
+      </p>
+      <p>
+        Otherwise, the returned value of the expression is a <code>System.String</code> literal created from the
+        expression body, with replacements from the TALES context made using the placeholder expressions.  Where
+        placeholder expressions return <code>null</code> references, they are converted to empty strings.  Where
+        placeholder expressions return non-null values which are not <code>System.String</code>, they are converted
+        using their default <code>Object.ToString()</code> method.
+      </p>
+    </section>
+  </div>
+</div>
+<footer class="page_footer dummy">
+  Dummy content
+</footer>
+</body>
+</html>

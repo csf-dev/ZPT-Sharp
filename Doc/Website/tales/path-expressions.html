@@ -1,0 +1,130 @@
+<!doctype html>
+<html tal:define="activePage tales_path_expressions">
+<head metal:use-macro="pages/Shared/general-page.pt/macros/common_document_head">
+<meta charset="utf-8">
+<title metal:fill-slot="document_title">TALES 'path' expressions</title>
+<base href="../" />
+<style type="text/css">
+@import url(css/styles.css);
+@import url(css/dummy.css);
+</style>
+<script type="text/javascript" src="js/modernizr.min.js"></script>
+<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.4.0/styles/default.min.css">
+<script src="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.4.0/highlight.min.js"></script>
+<script>
+hljs.initHighlightingOnLoad();
+</script>
+</head>
+<body metal:use-macro="pages/Shared/general-page.pt/macros/common_document_body" class="page_tales_path_expressions">
+<div class="content_wrapper">
+  <header class="page_header dummy">
+    Dummy content
+  </header>
+  <div class="main_page_area">
+    <nav>
+      <h2>Navigation menu</h2>
+      <ul class="active_introduction dummy">
+        <li class="introduction"><a href=".">Introduction</a></li>
+        <li class="other_page"><a href="dummy.html">Dummy page</a></li>
+      </ul>
+    </nav>
+    <section class="main_page_content" metal:fill-slot="main_page_content">
+      <header>
+        <h1>TALES 'path' expressions</h1>
+      </header>
+      <p>
+        TALES <code>path:</code> expressions are the lifeblood of TALES, and are the default expression type where
+        no <a href="tales/introduction.html#expression_prefixes">expression prefix</a> has been provided.
+      </p>
+      <p>
+        Path expressions indicate a traversal through an object model - the current <em>TALES context</em>.  This
+        context includes a set of <a href="tales/built-in-variables.html">built in variables</a> as well as any other
+        variables added by either the environment or by
+        <a href="tal/define.html">TAL <code>define</code></a>/<a href="tal/repeat.html">TAL <code>repeat</code></a>
+        attributes.
+      </p>
+      <h2>Structure of a path expression</h2>
+      <p>
+        Each expression must begin with a variable name, and may traverse the members which that variable exposes via
+        forward-slashes: <kbd>/</kbd>.  
+      </p>
+      <h2>Object traversal</h2>
+      <p>
+        The precise meaning of traversal through an object is as follows.  Each path in the expression is separated
+        into fragments - individual pieces of the path, separated by slashes.
+      </p>
+      <ol>
+        <li>
+          First, the starting point of the traversal is retrieved from the current TALES context, using the first path
+          fragment.  This value becomes "the current object to be traversed".
+        </li>
+        <li>
+          The next path fragment (if there is one) is used for traversal using the rules below.
+          <ul>
+            <li>
+              If the traversal is a failure (either an exception is raised, or a traversal rule indicates failure)
+              then the evaluation of the current path stops.  If there are more paths in the expression then traversal
+              begins again with the next path.  If there are no more paths, then the evaluation of the path expression
+              is a failure and a TALES Exception is raised.
+            </li>
+            <li>
+              If the traversal is not a failure then it is considered a success.  The result of the traversal is stored
+              as "the current object to be traversed" and the traversal continues.
+            </li>
+          </ul>
+        </li>
+        <li>
+          If there are no more path fragments in the current path, then "the current object to be traversed" is returned
+          as the result of the path expression.
+        </li>
+        <li>
+          If there are more path fragments in the current path then the process returns to step 2, using the
+          new "current object to be traversed".
+        </li>
+      </ol>
+      <h3>Traversing a path fragment</h3>
+      <p>
+        The rules for traversing each path fragment are as follows:
+      </p>
+      <ol>
+        <li>
+          If the current object to be traversed implements <code>CSF.Zpt.Tales.ITalesPathHandler</code> then its
+          <code>HandleTalesPath(string, out object, RenderingContext)</code> method is called, using the path
+          fragment as the first parameter.  The <code>System.Boolean</code> return of the method is used to determine
+          whether traversal was a success or not.  In the case of a success, the <code>System.Object</code> exposed
+          via the second parameter is used as the result of the traversal.
+        </li>
+        <li>
+          If the current object to be traversed has an indexer of type <code>System.String</code> then that indexer
+          is used.  The path fragment (as a string literal) is used as a parameter for that indexer.  The return value
+          from the indexer is used as the result of the traversal.
+        </li>
+        <li>
+          If the current object to be traversed has a method, taking no parameters, matching the name of the path
+          fragment, than that method is executed.  Its return value is used as the result of the traversal.
+        </li>
+        <li>
+          If the current object to be traversed has a gettable property, matching the name of the path
+          fragment, than that property getter is invoked.  Its value is used as the result of the traversal.
+        </li>
+        <li>
+          If the current object to be traversed has a field, matching the name of the path
+          fragment, than the value is retrieved from that field.  This is used as the result of the traversal.
+        </li>
+        <li>
+          If the current object to be traversed has an indexer of type <code>System.Int32</code> then that indexer
+          is used.  The path fragment is parsed as an integer and used as a parameter for that indexer.  The return
+          value from the indexer is used as the result of the traversal.
+        </li>
+        <li>
+          If none of the above are true, then the traversal is unsuccessful.
+        </li>
+      </ol>
+    </section>
+  </div>
+</div>
+<footer class="page_footer dummy">
+  Dummy content
+</footer>
+</body>
+</html>
