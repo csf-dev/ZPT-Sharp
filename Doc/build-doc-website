@@ -4,7 +4,8 @@ SCRIPT_ROOT="$(dirname $0)"
 INPUT_DIR="$SCRIPT_ROOT/Website"
 IGNORED_DIR="$INPUT_DIR/Shared/"
 OUTPUT_DIR="$SCRIPT_ROOT/Website-output"
-BASE_URL="file://$(readlink -f "$OUTPUT_DIR")/"
+DEFAULT_BASE_URL="file://$(readlink -f "$OUTPUT_DIR")/"
+BASE_URL="${1:-DEFAULT_BASE_URL}"
 
 BUILDER_PATH="$SCRIPT_ROOT/../CSF.Zpt.Cli/bin/Debug/ZptBuilder.exe"
 
