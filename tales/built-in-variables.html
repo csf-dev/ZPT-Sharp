@@ -1,0 +1,175 @@
+﻿<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>TALES root variables</title>
+<base href="http://csf-dev.github.io/ZPT-Sharp/">
+<style type="text/css">
+@import url(css/styles.css);
+</style>
+
+<script type="text/javascript" src="js/modernizr.min.js"></script>
+<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.4.0/styles/default.min.css">
+<script src="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.4.0/highlight.min.js"></script>
+<script>
+hljs.initHighlightingOnLoad();
+</script>
+</head>
+<body class="page_tales_builtin_variables">
+<div class="content_wrapper">
+  <header class="page_header">
+    <h2>
+      <a href="index.html">ZPT Sharp</a>
+      <em>Zen HTML views</em>
+    </h2>
+  </header>
+  <div class="main_page_area">
+    <nav>
+      <h2>Navigation menu</h2>
+      <ul class="active_tales_builtin_variables">
+        <li class="introduction nav_item">
+          <a href="index.html">Introduction</a>
+        </li>
+        <li class="asp_net_view_engine nav_item">
+          <a href="asp-net-mvc-view-engine.html">ZPT-Sharp for ASP.NET MVC</a>
+        </li>
+        <li class="page_rendering_api nav_item">
+          <a href="page-rendering-api.html">The page-rendering API</a>
+        </li>
+        <li class="command_line_renderer nav_item">
+          <a href="command-line-renderer.html">The command-line renderer</a>
+        </li>
+        <li class="writing_pages_using_zpt nav_item">
+          <a href="writing-pages-using-zpt.html">Writing pages</a>
+        </li>
+        <li class="metal_reference nav_section">
+          <h3>METAL reference</h3>
+          <ul>
+            <li>
+              <a href="metal/introduction.html">Introduction to METAL</a>
+            </li>
+            <li>
+              <a href="metal/define-use-macro.html">Define &amp; use macros</a>
+            </li>
+            <li>
+              <a href="metal/define-fill-slot.html">Define &amp; fill slots</a>
+            </li>
+            <li>
+              <a href="metal/extend-macro.html">Extend macros</a>
+            </li>
+          </ul>
+        </li>
+        <li class="tal_reference nav_section">
+          <h3>TAL reference</h3>
+          <ul>
+            <li>
+              <a href="tal/introduction.html">Introduction to TAL</a>
+            </li>
+            <li>
+              <a href="tal/define.html">Define variables</a>
+            </li>
+            <li>
+              <a href="tal/condition.html">Conditional rendering</a>
+            </li>
+            <li>
+              <a href="tal/repeat.html">Repeat sections of markup</a>
+            </li>
+            <li>
+              <a href="tal/content-replace.html">Insert model data</a>
+            </li>
+            <li>
+              <a href="tal/attributes.html">Set attributes</a>
+            </li>
+            <li>
+              <a href="tal/omit-tag.html">Omit start/end tag</a>
+            </li>
+            <li>
+              <a href="tal/on-error.html">Error handling</a>
+            </li>
+          </ul>
+        </li>
+        <li class="tales_reference nav_section">
+          <h3>TALES reference</h3>
+          <ul>
+            <li>
+              <a href="tales/introduction.html">Introduction to TALES</a>
+            </li>
+            <li>
+              <a href="tales/path-expressions.html">Path expressions</a>
+            </li>
+            <li>
+              <a href="tales/string-expressions.html">String expressions</a>
+            </li>
+            <li>
+              <a href="tales/not-expressions.html">Not expressions</a>
+            </li>
+            <li>
+              <a href="tales/built-in-variables.html">Root variables</a>
+            </li>
+            <li>
+              <a href="tales/repeat-variables.html">Repeat variables</a>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </nav>
+    <section class="main_page_content">
+      <header><h1>TALES root variables</h1></header>
+      <p>
+        As described, every <a href="tales/path-expressions.html">TALES <code>path:</code> expression</a> must begin
+        with a variable from the current TALES context.  Variables may be added to the context one of a number of
+        mechanisms, such as by using <a href="tal/define.html"><code>tal:define</code></a> and/or
+        <a href="tal/repeat.html"><code>tal:repeat</code></a> attributes.  TALES itself though provides a number of
+        variables of its own - these are the root variables, available to all views:
+      </p>
+      <p class="note">
+        When using ZPT-Sharp as an ASP.NET MVC ViewEngine, a few
+        <a href="asp-net-mvc-view-engine.html#extra_variables">additional root variables</a> are provided by the
+        ViewEngine itself.
+      </p>
+      <h2>nothing</h2>
+      <p>
+        The root variable <code>nothing</code> provides a <code>null</code> value.  It is a convenient way of getting a
+        null reference.
+      </p>
+      <h2>default</h2>
+      <p>
+        The <code>default</code> root variable provides a special value which indicates that the expression result
+        should indicate the action is to be cancelled.
+      </p>
+      <h2>options</h2>
+      <p>
+        <code>options</code> provides access to the <strong>keyword options</strong> provided to the ZPT rendering
+        process.  Keyword options are an <code>IDictionary&lt;string,string&gt;</code> of key/value pairs. For MVC
+        views, this is generally an empty collection as they have no meaning in that environment.
+      </p>
+      <p>
+        In other rendering scenarios though, it allows the calling process to set a number of variables externally,
+        in order to provide values to the renderer.  For example, the
+        <a href="command-line-renderer.html">command-line page renderer</a> allows setting of keyword options via an
+        optional parameter.
+      </p>
+      <h2>repeat</h2>
+      <p>
+        The <code>repeat</code> root variable provides access to the special
+        <a href="tales/repeat-variables.html">repeat variables</a> which expose information about the current iteration.
+        Each repeat variable is available as a child of the repeat root-variable.  They are named identically to the
+        local variable created by the <a href="tal/repeat.html"><code>tal:repeat</code> attribute</a>.
+      </p>
+      <h2>attrs</h2>
+      <p>
+        The root variable <code>attrs</code> provides access to the original HTML/XML attributes of the element upon
+        which the TALES expression appears.  These original attributes are exposed with their values before any
+        manipulation has been performed by TAL.
+      </p>
+    </section>
+  </div>
+</div>
+<footer class="page_footer">
+  <section class="copyright">
+    Copyright © 2016
+    <a href="http://csf-dev.com/">CSF Software Limited</a> et al
+  </section>
+</footer>
+</body>
+</html>

@@ -1,0 +1,216 @@
+﻿<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Extending METAL macros</title>
+<base href="http://csf-dev.github.io/ZPT-Sharp/">
+<style type="text/css">
+@import url(css/styles.css);
+</style>
+
+<script type="text/javascript" src="js/modernizr.min.js"></script>
+<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.4.0/styles/default.min.css">
+<script src="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.4.0/highlight.min.js"></script>
+<script>
+hljs.initHighlightingOnLoad();
+</script>
+</head>
+<body class="page_extend_macro">
+<div class="content_wrapper">
+  <header class="page_header">
+    <h2>
+      <a href="index.html">ZPT Sharp</a>
+      <em>Zen HTML views</em>
+    </h2>
+  </header>
+  <div class="main_page_area">
+    <nav>
+      <h2>Navigation menu</h2>
+      <ul class="active_extend_macro">
+        <li class="introduction nav_item">
+          <a href="index.html">Introduction</a>
+        </li>
+        <li class="asp_net_view_engine nav_item">
+          <a href="asp-net-mvc-view-engine.html">ZPT-Sharp for ASP.NET MVC</a>
+        </li>
+        <li class="page_rendering_api nav_item">
+          <a href="page-rendering-api.html">The page-rendering API</a>
+        </li>
+        <li class="command_line_renderer nav_item">
+          <a href="command-line-renderer.html">The command-line renderer</a>
+        </li>
+        <li class="writing_pages_using_zpt nav_item">
+          <a href="writing-pages-using-zpt.html">Writing pages</a>
+        </li>
+        <li class="metal_reference nav_section">
+          <h3>METAL reference</h3>
+          <ul>
+            <li>
+              <a href="metal/introduction.html">Introduction to METAL</a>
+            </li>
+            <li>
+              <a href="metal/define-use-macro.html">Define &amp; use macros</a>
+            </li>
+            <li>
+              <a href="metal/define-fill-slot.html">Define &amp; fill slots</a>
+            </li>
+            <li>
+              <a href="metal/extend-macro.html">Extend macros</a>
+            </li>
+          </ul>
+        </li>
+        <li class="tal_reference nav_section">
+          <h3>TAL reference</h3>
+          <ul>
+            <li>
+              <a href="tal/introduction.html">Introduction to TAL</a>
+            </li>
+            <li>
+              <a href="tal/define.html">Define variables</a>
+            </li>
+            <li>
+              <a href="tal/condition.html">Conditional rendering</a>
+            </li>
+            <li>
+              <a href="tal/repeat.html">Repeat sections of markup</a>
+            </li>
+            <li>
+              <a href="tal/content-replace.html">Insert model data</a>
+            </li>
+            <li>
+              <a href="tal/attributes.html">Set attributes</a>
+            </li>
+            <li>
+              <a href="tal/omit-tag.html">Omit start/end tag</a>
+            </li>
+            <li>
+              <a href="tal/on-error.html">Error handling</a>
+            </li>
+          </ul>
+        </li>
+        <li class="tales_reference nav_section">
+          <h3>TALES reference</h3>
+          <ul>
+            <li>
+              <a href="tales/introduction.html">Introduction to TALES</a>
+            </li>
+            <li>
+              <a href="tales/path-expressions.html">Path expressions</a>
+            </li>
+            <li>
+              <a href="tales/string-expressions.html">String expressions</a>
+            </li>
+            <li>
+              <a href="tales/not-expressions.html">Not expressions</a>
+            </li>
+            <li>
+              <a href="tales/built-in-variables.html">Root variables</a>
+            </li>
+            <li>
+              <a href="tales/repeat-variables.html">Repeat variables</a>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </nav>
+    <section class="main_page_content">
+      <header>
+        <h1>Extending METAL macros</h1>
+      </header>
+      <h2>metal:extend-macro</h2>
+      <h3>Attribute syntax</h3>
+      <pre><code class="html">metal:extend-macro="EXPRESSION"</code></pre>
+      <h3>Remarks</h3>
+      <p>
+        Only valid when defined on the same element as a
+        <a href="metal/define-use-macro.html#define_macro"><code>metal:define-macro</code></a> attribute is present.
+        This attribute indicates that the current macro definition ("the extension") extends the macro referenced by the
+        <kbd>EXPRESSION</kbd> ("the extended macro").
+      </p>
+      <p>
+        The meaning of extension is as follows:
+      </p>
+      <ul>
+        <li>
+          The extension may optionally provide any number of elements decorated with
+          <a href="metal/define-fill-slot.html#fill_slot"><code>metal:fill-slot</code></a> attributes.  These fill slots
+          in the extended macro, as if the extension was decorated with
+          <a href="metal/define-use-macro.html#use_macro"><code>metal:use-macro</code></a>.
+        </li>
+        <li>
+          Any slots defined upon the extended macro which are not filled by the extension will remain available for
+          filling when the extended macro is used.
+        </li>
+        <li>
+          Within <code>fill-slot</code> attributes, the extension may optionally provide new slots of its own via
+          <a href="metal/define-fill-slot.html#define_slot"><code>metal:define-slot</code></a> attributes - just as if
+          the <code>fill-slot</code> attribute upon the extension were a <code>define-macro</code> attribute.  If the
+          extension defines a slot of the same name as the slot it has filled, then when the macro is used, both the
+          extension's markup and the slot-filling markup from the macro usage will be combined.
+        </li>
+      </ul>
+      <p>
+        Software developers may think of this process as being akin to 'subclassing' the extended macro.
+        The net effect is that the extension functions as the extended macro, except that it may provide content for
+        the extended macro's slots, and may additionally define new slots of its own, or modify/override the manner in
+        which some of the extended macro's slots are filled.
+      </p>
+      <h2>Macro-extension example</h2>
+      <p>
+        The following example shows a macro for an 'image box' widget.  It may be used as-is, or using the extended
+        version, which adds copyright information to that widget.
+      </p>
+      <pre><code class="html">&lt;!-- Base macro --&gt;
+&lt;div class=&quot;imagebox&quot; metal:define-macro=&quot;image_box&quot;&gt;
+  &lt;img metal:define-slot=&quot;image_element&quot; src=&quot;&quot; /&gt;
+  &lt;div metal:define-slot=&quot;description&quot;&gt;Description goes here&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;!-- Extender --&gt;
+&lt;div metal:define-macro=&quot;image_box_with_copyright&quot; metal:extend-macro=&quot;image_box&quot;&gt;
+  &lt;div metal:fill-slot=&quot;description&quot; class=&quot;info_wrapper&quot;&gt;
+    &lt;div metal:define-slot=&quot;description&quot;&gt;Description goes here&lt;/div&gt;
+    &lt;div class=&quot;copyright_statement&quot;&gt;
+      &lt;p&gt;
+        Image copyright:
+        &lt;span metal:define-slot=&quot;copyright_holder&quot;&gt;Copyright holder&lt;/span&gt;
+      &lt;/p&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;!-- Usage --&gt;
+&lt;div metal:use-macro=&quot;image_box_with_copyright&quot;&gt;
+  &lt;img metal:fill-slot=&quot;image_element&quot; src=&quot;http://example.com/my_image_url.png&quot; /&gt;
+  &lt;div metal:fill-slot=&quot;description&quot;&gt;
+    &lt;p&gt;This is the real image description&lt;/p&gt;
+  &lt;/div&gt;
+  &lt;span metal:fill-slot=&quot;copyright_holder&quot;&gt;Joseph Bloggs&lt;/span&gt;
+&lt;/div&gt;
+
+&lt;!-- How this renders --&gt;
+&lt;div class=&quot;imagebox&quot;&gt;
+  &lt;img src=&quot;http://example.com/my_image_url.png&quot; /&gt;
+  &lt;div class=&quot;info_wrapper&quot;&gt;
+    &lt;div&gt;
+      &lt;p&gt;This is the real image description&lt;/p&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;copyright_statement&quot;&gt;
+      &lt;p&gt;
+        Image copyright:
+        &lt;span&gt;Joseph Bloggs&lt;/span&gt;
+      &lt;/p&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+    </section>
+  </div>
+</div>
+<footer class="page_footer">
+  <section class="copyright">
+    Copyright © 2016
+    <a href="http://csf-dev.com/">CSF Software Limited</a> et al
+  </section>
+</footer>
+</body>
+</html>

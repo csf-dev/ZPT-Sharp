@@ -1,0 +1,199 @@
+﻿<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Defining and filling METAL slots</title>
+<base href="http://csf-dev.github.io/ZPT-Sharp/">
+<style type="text/css">
+@import url(css/styles.css);
+</style>
+
+<script type="text/javascript" src="js/modernizr.min.js"></script>
+<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.4.0/styles/default.min.css">
+<script src="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.4.0/highlight.min.js"></script>
+<script>
+hljs.initHighlightingOnLoad();
+</script>
+</head>
+<body class="page_define_fill_slot">
+<div class="content_wrapper">
+  <header class="page_header">
+    <h2>
+      <a href="index.html">ZPT Sharp</a>
+      <em>Zen HTML views</em>
+    </h2>
+  </header>
+  <div class="main_page_area">
+    <nav>
+      <h2>Navigation menu</h2>
+      <ul class="active_define_fill_slot">
+        <li class="introduction nav_item">
+          <a href="index.html">Introduction</a>
+        </li>
+        <li class="asp_net_view_engine nav_item">
+          <a href="asp-net-mvc-view-engine.html">ZPT-Sharp for ASP.NET MVC</a>
+        </li>
+        <li class="page_rendering_api nav_item">
+          <a href="page-rendering-api.html">The page-rendering API</a>
+        </li>
+        <li class="command_line_renderer nav_item">
+          <a href="command-line-renderer.html">The command-line renderer</a>
+        </li>
+        <li class="writing_pages_using_zpt nav_item">
+          <a href="writing-pages-using-zpt.html">Writing pages</a>
+        </li>
+        <li class="metal_reference nav_section">
+          <h3>METAL reference</h3>
+          <ul>
+            <li>
+              <a href="metal/introduction.html">Introduction to METAL</a>
+            </li>
+            <li>
+              <a href="metal/define-use-macro.html">Define &amp; use macros</a>
+            </li>
+            <li>
+              <a href="metal/define-fill-slot.html">Define &amp; fill slots</a>
+            </li>
+            <li>
+              <a href="metal/extend-macro.html">Extend macros</a>
+            </li>
+          </ul>
+        </li>
+        <li class="tal_reference nav_section">
+          <h3>TAL reference</h3>
+          <ul>
+            <li>
+              <a href="tal/introduction.html">Introduction to TAL</a>
+            </li>
+            <li>
+              <a href="tal/define.html">Define variables</a>
+            </li>
+            <li>
+              <a href="tal/condition.html">Conditional rendering</a>
+            </li>
+            <li>
+              <a href="tal/repeat.html">Repeat sections of markup</a>
+            </li>
+            <li>
+              <a href="tal/content-replace.html">Insert model data</a>
+            </li>
+            <li>
+              <a href="tal/attributes.html">Set attributes</a>
+            </li>
+            <li>
+              <a href="tal/omit-tag.html">Omit start/end tag</a>
+            </li>
+            <li>
+              <a href="tal/on-error.html">Error handling</a>
+            </li>
+          </ul>
+        </li>
+        <li class="tales_reference nav_section">
+          <h3>TALES reference</h3>
+          <ul>
+            <li>
+              <a href="tales/introduction.html">Introduction to TALES</a>
+            </li>
+            <li>
+              <a href="tales/path-expressions.html">Path expressions</a>
+            </li>
+            <li>
+              <a href="tales/string-expressions.html">String expressions</a>
+            </li>
+            <li>
+              <a href="tales/not-expressions.html">Not expressions</a>
+            </li>
+            <li>
+              <a href="tales/built-in-variables.html">Root variables</a>
+            </li>
+            <li>
+              <a href="tales/repeat-variables.html">Repeat variables</a>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </nav>
+    <section class="main_page_content">
+      <header>
+        <h1>Defining and filling METAL slots</h1>
+      </header>
+      <h2 id="define_slot">metal:define-slot</h2>
+      <h3>Attribute syntax</h3>
+      <pre><code class="html">metal:define-slot="SLOTNAME"</code></pre>
+      <h3>Remarks</h3>
+      <p>
+        Only valid when defined on a child element of an element decorated with
+        <a href="metal/define-use-macro.html#define_macro"><code>metal:define-macro</code></a> or when decorating a
+        child element of an element decorated <code>fill-slot</code>, within an element decorated
+        <a href="metal/extend-macro.html"><code>metal:extend-macro</code></a>.  Indicates that the
+        element and its children constitute a named extension point for the current macro.  The slot uses the given name
+        (<kbd>SLOTNAME</kbd>).
+      </p>
+      <h2 id="fill_slot">metal:fill-slot</h2>
+      <h3>Attribute syntax</h3>
+      <pre><code class="html">metal:fill-slot="SLOTNAME"</code></pre>
+      <h3>Remarks</h3>
+      <p>
+        Only valid when defined on a child element of an element decorated with
+        <a href="metal/define-use-macro.html#use_macro"><code>metal:use-macro</code></a> or
+        <a href="metal/extend-macro.html"><code>metal:extend-macro</code></a>.  When the use-macro element is
+        replaced with the macro, the referenced macro is searched for a slot (indicated by <code>define-slot</code>)
+        with a name matching <kbd>SLOTNAME</kbd>.  If a matching slot is found then the define-slot element (and its
+        children) is replaced with the fill-slot element and its children.
+      </p>
+      <h2>Slot-filling example</h2>
+      <p>
+        The following example shows a macro which represents an <code>&lt;article&gt;</code> element. It provides a
+        standard markup structure, including an actions menu.  The markup for the heading and content are supplied from
+        the location at which the macro is used, using slots.
+      </p>
+      <pre><code class="html">&lt;!-- Macro definition --&gt;
+&lt;article metal:define-macro=&quot;article_template&quot;&gt;
+  &lt;header&gt;
+    &lt;h2 metal:define-slot=&quot;article_title&quot;&gt;Title goes here&lt;/h2&gt;
+  &lt;/header&gt;
+  &lt;p metal:define-slot=&quot;article_content&quot;&gt;Article content goes here&lt;/p&gt;
+  &lt;ul class=&quot;article_actions&quot;&gt;
+    &lt;li&gt;&lt;a href=&quot;upvote_url&quot;&gt;Upvote&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href=&quot;downvote_url&quot;&gt;Downvote&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href=&quot;share_url&quot;&gt;Share&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href=&quot;report_url&quot;&gt;Report&lt;/a&gt;&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/article&gt;
+
+&lt;!-- Macro usage --&gt;
+&lt;article metal:use-macro=&quot;article_template&quot;&gt;
+  &lt;h2 metal:fill-slot=&quot;article_title&quot;&gt;Filling slots&lt;/h2&gt;
+  &lt;p metal:fill-slot=&quot;article_content&quot;&gt;
+    The slot filler content can include &lt;strong&gt;markup&lt;/strong&gt; and
+    TAL statements.
+  &lt;/p&gt;
+&lt;/article&gt;
+
+&lt;!-- How this renders --&gt;
+&lt;article&gt;
+  &lt;header&gt;
+    &lt;h2&gt;Filling slots&lt;/h2&gt;
+  &lt;/header&gt;
+  &lt;p&gt;
+    The slot filler content can include &lt;strong&gt;markup&lt;/strong&gt; and
+    TAL statements.
+  &lt;/p&gt;
+  &lt;ul class=&quot;article_actions&quot;&gt;
+    &lt;li&gt;&lt;a href=&quot;upvote_url&quot;&gt;Upvote&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href=&quot;downvote_url&quot;&gt;Downvote&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href=&quot;share_url&quot;&gt;Share&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href=&quot;report_url&quot;&gt;Report&lt;/a&gt;&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/article&gt;</code></pre>
+    </section>
+  </div>
+</div>
+<footer class="page_footer">
+  <section class="copyright">
+    Copyright © 2016
+    <a href="http://csf-dev.com/">CSF Software Limited</a> et al
+  </section>
+</footer>
+</body>
+</html>

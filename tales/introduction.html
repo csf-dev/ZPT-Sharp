@@ -1,0 +1,192 @@
+﻿<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Introduction to TALES</title>
+<base href="http://csf-dev.github.io/ZPT-Sharp/">
+<style type="text/css">
+@import url(css/styles.css);
+</style>
+
+<script type="text/javascript" src="js/modernizr.min.js"></script>
+<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.4.0/styles/default.min.css">
+<script src="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.4.0/highlight.min.js"></script>
+<script>
+hljs.initHighlightingOnLoad();
+</script>
+</head>
+<body class="page_introduction_to_tales">
+<div class="content_wrapper">
+  <header class="page_header">
+    <h2>
+      <a href="index.html">ZPT Sharp</a>
+      <em>Zen HTML views</em>
+    </h2>
+  </header>
+  <div class="main_page_area">
+    <nav>
+      <h2>Navigation menu</h2>
+      <ul class="active_introduction_to_tales">
+        <li class="introduction nav_item">
+          <a href="index.html">Introduction</a>
+        </li>
+        <li class="asp_net_view_engine nav_item">
+          <a href="asp-net-mvc-view-engine.html">ZPT-Sharp for ASP.NET MVC</a>
+        </li>
+        <li class="page_rendering_api nav_item">
+          <a href="page-rendering-api.html">The page-rendering API</a>
+        </li>
+        <li class="command_line_renderer nav_item">
+          <a href="command-line-renderer.html">The command-line renderer</a>
+        </li>
+        <li class="writing_pages_using_zpt nav_item">
+          <a href="writing-pages-using-zpt.html">Writing pages</a>
+        </li>
+        <li class="metal_reference nav_section">
+          <h3>METAL reference</h3>
+          <ul>
+            <li>
+              <a href="metal/introduction.html">Introduction to METAL</a>
+            </li>
+            <li>
+              <a href="metal/define-use-macro.html">Define &amp; use macros</a>
+            </li>
+            <li>
+              <a href="metal/define-fill-slot.html">Define &amp; fill slots</a>
+            </li>
+            <li>
+              <a href="metal/extend-macro.html">Extend macros</a>
+            </li>
+          </ul>
+        </li>
+        <li class="tal_reference nav_section">
+          <h3>TAL reference</h3>
+          <ul>
+            <li>
+              <a href="tal/introduction.html">Introduction to TAL</a>
+            </li>
+            <li>
+              <a href="tal/define.html">Define variables</a>
+            </li>
+            <li>
+              <a href="tal/condition.html">Conditional rendering</a>
+            </li>
+            <li>
+              <a href="tal/repeat.html">Repeat sections of markup</a>
+            </li>
+            <li>
+              <a href="tal/content-replace.html">Insert model data</a>
+            </li>
+            <li>
+              <a href="tal/attributes.html">Set attributes</a>
+            </li>
+            <li>
+              <a href="tal/omit-tag.html">Omit start/end tag</a>
+            </li>
+            <li>
+              <a href="tal/on-error.html">Error handling</a>
+            </li>
+          </ul>
+        </li>
+        <li class="tales_reference nav_section">
+          <h3>TALES reference</h3>
+          <ul>
+            <li>
+              <a href="tales/introduction.html">Introduction to TALES</a>
+            </li>
+            <li>
+              <a href="tales/path-expressions.html">Path expressions</a>
+            </li>
+            <li>
+              <a href="tales/string-expressions.html">String expressions</a>
+            </li>
+            <li>
+              <a href="tales/not-expressions.html">Not expressions</a>
+            </li>
+            <li>
+              <a href="tales/built-in-variables.html">Root variables</a>
+            </li>
+            <li>
+              <a href="tales/repeat-variables.html">Repeat variables</a>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </nav>
+    <section class="main_page_content">
+      <header><h1>Introduction to TALES</h1></header>
+      <p>
+        <abbr title="Template Attribute Language Expression Syntax">TALES</abbr> describes and evaluates
+        expressions which describe the data model passed to your ZPT views; this could be a traditional data-model
+        or an <abbr title="Model View ViewModel">MVVM</abbr>-style ViewModel.
+      </p>
+      <p>
+        Expressions are strings, which are included within the
+        <a href="tal/introduction.html"><abbr title="Template Attribute Language">TAL</abbr></a> or
+        <a href="metal/introduction.html"><abbr title="Macro Extension Template Attribute Language">METAL</abbr></a>
+        attribute values at applicable points.
+      </p>
+      <h2 id="expression_prefixes">Expression prefixes</h2>
+      <p>
+        Each expression optionally begins with a prefix - a short identifier followed by a colon - indicating how
+        it should be interpreted.  Expressions which omit the prefix are treated as
+        <strong>path</strong> expressions, which is the default expression-type.  The available prefixes are as
+        follows:
+      </p>
+      <table>
+        <colgroup>
+          <col class="prefix">
+          <col class="description">
+        </colgroup>
+        <thead>
+          <tr>
+            <th>Prefix</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <a href="tales/path-expressions.html"><code>path:</code></a>
+            </td>
+            <td>
+              Evaluates a value from the current TALES context.
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <a href="tales/string-expressions.html"><code>string:</code></a>
+            </td>
+            <td>
+              Builds a string value.
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <a href="tales/not-expressions.html"><code>not:</code></a>
+            </td>
+            <td>
+              Evaluates a value from an expression following the prefix, gets the boolean
+              equivalent of that value and negates it.
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <h2>Boolean coercion</h2>
+      <p>
+        Some <a href="tal/introduction.html">TAL attributes</a> interpret the value of an expression as a boolean.
+        TALES defines <a href="tales/boolean-coercion.html">a set of rules for coercing non-boolean values</a> into
+        a boolean equivalent.  <em>Note that these rules differ from the manner in which a
+        <a href="tales/not-expressions.html"><code>not:</code> expression</a> interprets values as boolean.</em>
+      </p>
+    </section>
+  </div>
+</div>
+<footer class="page_footer">
+  <section class="copyright">
+    Copyright © 2016
+    <a href="http://csf-dev.com/">CSF Software Limited</a> et al
+  </section>
+</footer>
+</body>
+</html>

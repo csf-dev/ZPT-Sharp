@@ -1,0 +1,126 @@
+.main_page_content code,
+.main_page_content pre,
+.main_page_content kbd {
+  font-family: 'Droid Sans Mono', monospace;
+}
+.main_page_content code,
+.main_page_content kbd {
+  padding: 0 0.2em;
+  margin: 0 0.2em;
+  font-size: 90%;
+  border-radius: 4px;
+}
+.main_page_content code {
+  background: #F0F0F0;
+  border: 1px solid #FCBD9C;
+}
+.main_page_content kbd {
+  background: #CAE686;
+  border: 1px solid #91BE27;
+}
+.main_page_content pre {
+  border: 1px solid #FCBD9C;
+  background: #F0F0F0;
+  padding: 0.5em;
+  font-size: 80%;
+  overflow: auto;
+  margin-bottom: 1.25em;
+  border-radius: 4px;
+}
+.main_page_content pre > code {
+  border-width: 0;
+  font-size: 100%;
+  line-height: 140%;
+  padding: 0;
+  margin: 0;
+}
+.main_page_content p.note {
+  padding: 1em;
+  background: #DDE none;
+  border: 1px solid #CCE;
+  font-style: italic;
+}
+.main_page_content p,
+.main_page_content li {
+  margin-bottom: 1em;
+}
+.main_page_content ul {
+  padding-left: 1.5em;
+  list-style: outside disc;
+}
+.main_page_content ol {
+  padding-left: 1em;
+  list-style: outside decimal;
+}
+.main_page_content ol > li {
+  padding-left: 0.5em;
+}
+.main_page_content h1 {
+  font-size: 220%;
+  line-height: 100%;
+  font-family: 'Baloo', cursive;
+  color: #666;
+  margin-top: 0;
+  margin-bottom: 0.2em;
+}
+.main_page_content h2 {
+  font-size: 160%;
+  line-height: 100%;
+  font-family: 'Baloo', cursive;
+  color: #666;
+  margin-top: 1.6em;
+  margin-bottom: 0.2em;
+}
+.main_page_content h3 {
+  font-size: 125%;
+  font-style: italic;
+  line-height: 100%;
+  color: #666;
+  margin-top: 1.6em;
+  margin-bottom: 0.2em;
+  font-weight: bold;
+}
+.main_page_content a {
+  text-decoration: none;
+  color: #2A3B6F;
+  padding-bottom: 1px;
+  border-bottom: 1px solid #9FA9C6;
+}
+.main_page_content a:hover {
+  color: #133086;
+  border-color: #7594F0;
+}
+.main_page_content strong {
+  font-weight: bold;
+}
+.main_page_content em {
+  font-style: italic;
+}
+.main_page_content abbr {
+  background: #F8C9AF;
+  cursor: help;
+}
+.main_page_content table {
+    background: #F0F0F0 none;
+    border-collapse: collapse;
+    border: 2px solid #666;
+    width: 100%;
+    margin-bottom: 1em;
+}
+.main_page_content th,
+.main_page_content td {
+    border: 1px solid #CCC;
+    padding: 0.2em;
+}
+.main_page_content th {
+    font-weight: bold;
+    border-bottom: 2px solid #666;
+    vertical-align: middle;
+}
+
+table.zpt_attributes col.attribute {
+  width: 20%;
+}
+table.zpt_attributes col.summary {
+  width: 80%;
+}

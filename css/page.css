@@ -1,0 +1,107 @@
+html, body {
+  height: 100%;
+}
+body {
+  background: #FBE2D5 none;
+  font-family: 'Lato', sans-serif;
+}
+body > .content_wrapper {
+  min-height: 100%;
+  margin-bottom: -41px;
+}
+body > .content_wrapper:after {
+  content: "";
+  display: block;
+  height: 41px;
+}
+.page_header {
+  margin: 0;
+  padding: 1em 40px;
+  background: #45484D;
+  background: linear-gradient(to bottom,#45484D 0%,#000000 100%);
+  font-family: 'Baloo', cursive;
+  color: #EEE;
+  border-top: 1px solid #999;
+  border-bottom: 1px solid #333;
+  text-shadow: -2px -2px 6px rgba(238, 238, 238, 0.4);
+  font-size: 180%;
+  box-shadow: 0 2px 8px 0px rgba(0,0,0,0.8);
+}
+.page_header a {
+  color: #EEE;
+  text-decoration: none;
+  padding-right: 0.5em;
+}
+.page_header em {
+  font-family: 'Lato', sans-serif;
+  font-style: italic;
+  color: #DDD;
+  font-size: 60%;
+  text-shadow: none;
+}
+.main_page_area {
+  margin: 5em 40px 4em;
+}
+.main_page_area > nav {
+  width: 200px;
+  background: #FAD9C7;
+  padding: 20px;
+  line-height: 180%;
+  font-size: 90%;
+  border-radius: 15px;
+  border: 1px solid #F8C9AF;
+  float: left;
+  margin-bottom: 4em;
+}
+.main_page_area > nav h2 {
+  display: none;
+}
+.main_page_area > nav a {
+  color: #333;
+  padding-bottom: 1px;
+  text-decoration: none;
+  border-bottom: 1px solid #999;
+}
+.main_page_area > nav a:hover {
+  color: #000;
+  border-color: #000;
+}
+.main_page_area > nav h3 {
+  margin: 1em 0 0.2em;
+  font-style: italic;
+  font-size: 120%;
+  color: #666;
+}
+.main_page_content {
+  margin-left: 300px;
+  max-width: 680px;
+  line-height: 140%;
+  color: #333;
+}
+.page_footer {
+  padding: 10px 40px;
+  height: 20px;
+  background: #FAD9C7;
+  border-top: 1px solid #F8C9AF;
+  color: #666;
+  font-size: 80%;
+  clear: both;
+}
+.page_footer a {
+  color: #333;
+  text-decoration: none;
+  padding-bottom: 2px;
+}
+.page_footer a:hover {
+  color: #000;
+  padding-bottom: 1px;
+  border-bottom: 1px solid #000;
+}
+
+/*
+Fonts provided by Google Font API:
+ 
+font-family: 'Lato', sans-serif;
+font-family: 'Baloo', cursive;
+font-family: 'Droid Sans Mono', monospace;
+*/

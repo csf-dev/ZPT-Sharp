@@ -1,0 +1,202 @@
+﻿<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Inserting dynamic content</title>
+<base href="http://csf-dev.github.io/ZPT-Sharp/">
+<style type="text/css">
+@import url(css/styles.css);
+</style>
+
+<script type="text/javascript" src="js/modernizr.min.js"></script>
+<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.4.0/styles/default.min.css">
+<script src="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.4.0/highlight.min.js"></script>
+<script>
+hljs.initHighlightingOnLoad();
+</script>
+</head>
+<body class="page_tal_content_or_replace">
+<div class="content_wrapper">
+  <header class="page_header">
+    <h2>
+      <a href="index.html">ZPT Sharp</a>
+      <em>Zen HTML views</em>
+    </h2>
+  </header>
+  <div class="main_page_area">
+    <nav>
+      <h2>Navigation menu</h2>
+      <ul class="active_tal_content_or_replace">
+        <li class="introduction nav_item">
+          <a href="index.html">Introduction</a>
+        </li>
+        <li class="asp_net_view_engine nav_item">
+          <a href="asp-net-mvc-view-engine.html">ZPT-Sharp for ASP.NET MVC</a>
+        </li>
+        <li class="page_rendering_api nav_item">
+          <a href="page-rendering-api.html">The page-rendering API</a>
+        </li>
+        <li class="command_line_renderer nav_item">
+          <a href="command-line-renderer.html">The command-line renderer</a>
+        </li>
+        <li class="writing_pages_using_zpt nav_item">
+          <a href="writing-pages-using-zpt.html">Writing pages</a>
+        </li>
+        <li class="metal_reference nav_section">
+          <h3>METAL reference</h3>
+          <ul>
+            <li>
+              <a href="metal/introduction.html">Introduction to METAL</a>
+            </li>
+            <li>
+              <a href="metal/define-use-macro.html">Define &amp; use macros</a>
+            </li>
+            <li>
+              <a href="metal/define-fill-slot.html">Define &amp; fill slots</a>
+            </li>
+            <li>
+              <a href="metal/extend-macro.html">Extend macros</a>
+            </li>
+          </ul>
+        </li>
+        <li class="tal_reference nav_section">
+          <h3>TAL reference</h3>
+          <ul>
+            <li>
+              <a href="tal/introduction.html">Introduction to TAL</a>
+            </li>
+            <li>
+              <a href="tal/define.html">Define variables</a>
+            </li>
+            <li>
+              <a href="tal/condition.html">Conditional rendering</a>
+            </li>
+            <li>
+              <a href="tal/repeat.html">Repeat sections of markup</a>
+            </li>
+            <li>
+              <a href="tal/content-replace.html">Insert model data</a>
+            </li>
+            <li>
+              <a href="tal/attributes.html">Set attributes</a>
+            </li>
+            <li>
+              <a href="tal/omit-tag.html">Omit start/end tag</a>
+            </li>
+            <li>
+              <a href="tal/on-error.html">Error handling</a>
+            </li>
+          </ul>
+        </li>
+        <li class="tales_reference nav_section">
+          <h3>TALES reference</h3>
+          <ul>
+            <li>
+              <a href="tales/introduction.html">Introduction to TALES</a>
+            </li>
+            <li>
+              <a href="tales/path-expressions.html">Path expressions</a>
+            </li>
+            <li>
+              <a href="tales/string-expressions.html">String expressions</a>
+            </li>
+            <li>
+              <a href="tales/not-expressions.html">Not expressions</a>
+            </li>
+            <li>
+              <a href="tales/built-in-variables.html">Root variables</a>
+            </li>
+            <li>
+              <a href="tales/repeat-variables.html">Repeat variables</a>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </nav>
+    <section class="main_page_content">
+      <header><h1>Inserting dynamic content</h1></header>
+      <p>
+        The TAL <strong>content</strong> &amp; <strong>replace</strong> attributes behave similarly – the difference
+        being whether the current element is preserved or not.  They insert dynamic content from the TALES context
+        into the current document.
+      </p>
+      <p class="note">
+        The content and replace attributes are mutually exclusive; it is invalid to use both together.
+      </p>
+      <h2>Syntax</h2>
+      <pre><code class="nohighlight">tal:content="MODE EXPRESSION"
+tal:replace="MODE EXPRESSION"</code></pre>
+      <h3>The rendering mode</h3>
+      <p>
+        The rendering mode (<code>MODE</code>) is optional and defaults to text if omitted.  It controls how the
+        content of the expression is rendered into the output document.  It may have one of two values:
+      </p>
+      <ul>
+        <li>
+          <strong>text</strong> indicates that the expression result is to be rendered as just that - text content.
+          This means that the content is passed through an HTML/XML encoder (as applicable) before rendering.  HTML/XML
+          reserved characters (such as those denoting markup) will be encoded in order to render the result properly.
+        </li>
+        <li>
+          <strong>structure</strong> indicates that the expression result is expected to contain markup structures, and
+          that these should be rendered as-is without encoding.
+        </li>
+      </ul>
+      <p class="note">
+        Beware of inserting content from untrusted sources using the 'structure' rendering mode.  This could lead to
+        cross-site scripting security vulnerabilities.
+      </p>
+      <h3>The expression</h3>
+      <p>
+        The expression (<code>EXPRESSION</code>) is
+        <a href="tales/introduction.html">evaluated as a TALES expression</a>.  The effect upon the document
+        is determined by the following logic:
+      </p>
+      <table class="replacement_logic">
+        <thead>
+          <tr>
+            <th rowspan="2">Condition</th>
+            <th colspan="2" class="attribute_used">Attribute used</th>
+          </tr>
+          <tr>
+            <th>tal:content</th>
+            <th>tal:replace</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Expression result is <code>null</code></td>
+            <td>All child elements are removed</td>
+            <td>Element is removed from the DOM entirely</td>
+          </tr>
+          <tr>
+            <td>Expression result <a href="tales/cancellation.html">cancels the action</a></td>
+            <td>Element and its children are left unchanged</td>
+            <td>Element and its children are left unchanged</td>
+          </tr>
+          <tr>
+            <td>Expression result is any other value</td>
+            <td>All child elements are removed from the DOM and replaced with the expression result</td>
+            <td>The element and all child elements are removed from the DOM and replaced with the expression result</td>
+          </tr>
+        </tbody>
+      </table>
+      <p>
+        Where content is inserted, if the expression result is not a <code>System.String</code> then it is converted
+        to one using the object's default <code>ToString()</code> method.
+      </p>
+      <p>
+        Elements which are removed from the DOM as a result of this operation will not have any subsequent TAL
+        processing performed upon them.
+      </p>
+    </section>
+  </div>
+</div>
+<footer class="page_footer">
+  <section class="copyright">
+    Copyright © 2016
+    <a href="http://csf-dev.com/">CSF Software Limited</a> et al
+  </section>
+</footer>
+</body>
+</html>

@@ -1,0 +1,196 @@
+﻿<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Introduction to METAL and macros</title>
+<base href="http://csf-dev.github.io/ZPT-Sharp/">
+<style type="text/css">
+@import url(css/styles.css);
+</style>
+
+<script type="text/javascript" src="js/modernizr.min.js"></script>
+<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.4.0/styles/default.min.css">
+<script src="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.4.0/highlight.min.js"></script>
+<script>
+hljs.initHighlightingOnLoad();
+</script>
+</head>
+<body class="page_introduction_to_metal">
+<div class="content_wrapper">
+  <header class="page_header">
+    <h2>
+      <a href="index.html">ZPT Sharp</a>
+      <em>Zen HTML views</em>
+    </h2>
+  </header>
+  <div class="main_page_area">
+    <nav>
+      <h2>Navigation menu</h2>
+      <ul class="active_introduction_to_metal">
+        <li class="introduction nav_item">
+          <a href="index.html">Introduction</a>
+        </li>
+        <li class="asp_net_view_engine nav_item">
+          <a href="asp-net-mvc-view-engine.html">ZPT-Sharp for ASP.NET MVC</a>
+        </li>
+        <li class="page_rendering_api nav_item">
+          <a href="page-rendering-api.html">The page-rendering API</a>
+        </li>
+        <li class="command_line_renderer nav_item">
+          <a href="command-line-renderer.html">The command-line renderer</a>
+        </li>
+        <li class="writing_pages_using_zpt nav_item">
+          <a href="writing-pages-using-zpt.html">Writing pages</a>
+        </li>
+        <li class="metal_reference nav_section">
+          <h3>METAL reference</h3>
+          <ul>
+            <li>
+              <a href="metal/introduction.html">Introduction to METAL</a>
+            </li>
+            <li>
+              <a href="metal/define-use-macro.html">Define &amp; use macros</a>
+            </li>
+            <li>
+              <a href="metal/define-fill-slot.html">Define &amp; fill slots</a>
+            </li>
+            <li>
+              <a href="metal/extend-macro.html">Extend macros</a>
+            </li>
+          </ul>
+        </li>
+        <li class="tal_reference nav_section">
+          <h3>TAL reference</h3>
+          <ul>
+            <li>
+              <a href="tal/introduction.html">Introduction to TAL</a>
+            </li>
+            <li>
+              <a href="tal/define.html">Define variables</a>
+            </li>
+            <li>
+              <a href="tal/condition.html">Conditional rendering</a>
+            </li>
+            <li>
+              <a href="tal/repeat.html">Repeat sections of markup</a>
+            </li>
+            <li>
+              <a href="tal/content-replace.html">Insert model data</a>
+            </li>
+            <li>
+              <a href="tal/attributes.html">Set attributes</a>
+            </li>
+            <li>
+              <a href="tal/omit-tag.html">Omit start/end tag</a>
+            </li>
+            <li>
+              <a href="tal/on-error.html">Error handling</a>
+            </li>
+          </ul>
+        </li>
+        <li class="tales_reference nav_section">
+          <h3>TALES reference</h3>
+          <ul>
+            <li>
+              <a href="tales/introduction.html">Introduction to TALES</a>
+            </li>
+            <li>
+              <a href="tales/path-expressions.html">Path expressions</a>
+            </li>
+            <li>
+              <a href="tales/string-expressions.html">String expressions</a>
+            </li>
+            <li>
+              <a href="tales/not-expressions.html">Not expressions</a>
+            </li>
+            <li>
+              <a href="tales/built-in-variables.html">Root variables</a>
+            </li>
+            <li>
+              <a href="tales/repeat-variables.html">Repeat variables</a>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </nav>
+    <section class="main_page_content">
+      <header><h1>Introduction to METAL and macros</h1></header>
+      <p>
+        <abbr title="Macro Expansion Template Attribute Language">METAL</abbr> exposes the functionality of ZPT macros.
+        Macros are reusable pieces of markup, which may be defined in the same or a different source file to the page
+        template being rendered.
+      </p>
+      <p>
+        Macros are useful for defining and referencing common markup structures in order to maintain consistency. By
+        referencing the macro rather than copying the markup directly, all usages may be updated by editing
+        the source macro. This could be used for purposes such as:
+      </p>
+      <ul>
+        <li>A common page header/footer/navigation menu</li>
+        <li>An info-box about an item - such as a product</li>
+        <li>The boilerplate markup for the pages in a site/application</li>
+      </ul>
+      <h2>METAL attributes</h2>
+      <p>
+        The following attributes exist in the <a href="writing-pages-using-zpt.html#xml_namespaces">METAL namespace</a>,
+        activated using the <code>metal:</code> attribute prefix.
+      </p>
+      <table class="zpt_attributes">
+        <colgroup>
+          <col class="attribute">
+          <col class="summary">
+        </colgroup>
+        <thead>
+          <tr>
+            <th>Attribute</th>
+            <th>Summary</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><a href="metal/define-use-macro.html#define_macro"><code>define-macro</code></a></td>
+            <td>Define a METAL macro consisting of the current element and all of its children, providing a macro name</td>
+          </tr>
+          <tr>
+            <td><a href="metal/define-use-macro.html#use_macro"><code>use-macro</code></a></td>
+            <td>Replace the current element and all of its children/content with the specified macro</td>
+          </tr>
+          <tr>
+            <td><a href="metal/define-fill-slot.html#define_slot"><code>define-slot</code></a></td>
+            <td>Define a slot within a macro, which acts as an optional extension point when the macro is used</td>
+          </tr>
+          <tr>
+            <td><a href="metal/define-fill-slot.html#fill_slot"><code>fill-slot</code></a></td>
+            <td>When using a macro, replace the named slot with the specified markup</td>
+          </tr>
+          <tr>
+            <td><a href="metal/extend-macro.html"><code>extend-macro</code></a></td>
+            <td>Used alongside <code>define-macro</code> to create a new macro based upon an existing one, extending and/or redefining its slots</td>
+          </tr>
+        </tbody>
+      </table>
+      <h2 id="macros_for_the_html_element">Macros for the &lt;html&gt; element</h2>
+      <p>
+        It is easy to see from the examples above how macros may be used to provide individual elements of a page,
+        much like ASP.NET user controls.  What is less immediately obvious is the power of creating a macro using
+        <code>metal:define-macro</code> attribute on the document root (such as the <code>&lt;html&gt;</code> element).
+      </p>
+      <p>
+        This manner of usage enables you to specify boilerplate markup in a "page boilerplate" macro.  This could
+        include common elements within the <code>&lt;head&gt;</code> element, for example, as well as a shared page
+        header, footer &amp; navigation as applicable.  The "page boilerplate" macro then exposes slots for the actual
+        page content.  Pages within the site/application then may use this macro and provide their actual content via
+        slot-fillers.
+      </p>
+      
+    </section>
+  </div>
+</div>
+<footer class="page_footer">
+  <section class="copyright">
+    Copyright © 2016
+    <a href="http://csf-dev.com/">CSF Software Limited</a> et al
+  </section>
+</footer>
+</body>
+</html>

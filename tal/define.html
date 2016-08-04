@@ -1,0 +1,228 @@
+﻿<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Defining TALES variables</title>
+<base href="http://csf-dev.github.io/ZPT-Sharp/">
+<style type="text/css">
+@import url(css/styles.css);
+</style>
+
+<script type="text/javascript" src="js/modernizr.min.js"></script>
+<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.4.0/styles/default.min.css">
+<script src="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.4.0/highlight.min.js"></script>
+<script>
+hljs.initHighlightingOnLoad();
+</script>
+</head>
+<body class="page_tal_define">
+<div class="content_wrapper">
+  <header class="page_header">
+    <h2>
+      <a href="index.html">ZPT Sharp</a>
+      <em>Zen HTML views</em>
+    </h2>
+  </header>
+  <div class="main_page_area">
+    <nav>
+      <h2>Navigation menu</h2>
+      <ul class="active_tal_define">
+        <li class="introduction nav_item">
+          <a href="index.html">Introduction</a>
+        </li>
+        <li class="asp_net_view_engine nav_item">
+          <a href="asp-net-mvc-view-engine.html">ZPT-Sharp for ASP.NET MVC</a>
+        </li>
+        <li class="page_rendering_api nav_item">
+          <a href="page-rendering-api.html">The page-rendering API</a>
+        </li>
+        <li class="command_line_renderer nav_item">
+          <a href="command-line-renderer.html">The command-line renderer</a>
+        </li>
+        <li class="writing_pages_using_zpt nav_item">
+          <a href="writing-pages-using-zpt.html">Writing pages</a>
+        </li>
+        <li class="metal_reference nav_section">
+          <h3>METAL reference</h3>
+          <ul>
+            <li>
+              <a href="metal/introduction.html">Introduction to METAL</a>
+            </li>
+            <li>
+              <a href="metal/define-use-macro.html">Define &amp; use macros</a>
+            </li>
+            <li>
+              <a href="metal/define-fill-slot.html">Define &amp; fill slots</a>
+            </li>
+            <li>
+              <a href="metal/extend-macro.html">Extend macros</a>
+            </li>
+          </ul>
+        </li>
+        <li class="tal_reference nav_section">
+          <h3>TAL reference</h3>
+          <ul>
+            <li>
+              <a href="tal/introduction.html">Introduction to TAL</a>
+            </li>
+            <li>
+              <a href="tal/define.html">Define variables</a>
+            </li>
+            <li>
+              <a href="tal/condition.html">Conditional rendering</a>
+            </li>
+            <li>
+              <a href="tal/repeat.html">Repeat sections of markup</a>
+            </li>
+            <li>
+              <a href="tal/content-replace.html">Insert model data</a>
+            </li>
+            <li>
+              <a href="tal/attributes.html">Set attributes</a>
+            </li>
+            <li>
+              <a href="tal/omit-tag.html">Omit start/end tag</a>
+            </li>
+            <li>
+              <a href="tal/on-error.html">Error handling</a>
+            </li>
+          </ul>
+        </li>
+        <li class="tales_reference nav_section">
+          <h3>TALES reference</h3>
+          <ul>
+            <li>
+              <a href="tales/introduction.html">Introduction to TALES</a>
+            </li>
+            <li>
+              <a href="tales/path-expressions.html">Path expressions</a>
+            </li>
+            <li>
+              <a href="tales/string-expressions.html">String expressions</a>
+            </li>
+            <li>
+              <a href="tales/not-expressions.html">Not expressions</a>
+            </li>
+            <li>
+              <a href="tales/built-in-variables.html">Root variables</a>
+            </li>
+            <li>
+              <a href="tales/repeat-variables.html">Repeat variables</a>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </nav>
+    <section class="main_page_content">
+      <header>
+        <h1>Defining TALES variables</h1>
+      </header>
+      <p>
+        The TAL <strong>define</strong> attribute adds a new variable definition to the current
+        <a href="tales/introduction.html"><abbr title="Template Attribute Language Expression Syntax">TALES</abbr></a>
+        context.  It is in many ways like a variable definition in any programming language.
+      </p>
+      <h2>Syntax</h2>
+      <pre><code class="nohighlight">tal:define="SCOPE NAME EXPRESSION"</code></pre>
+      <h3 id="scope">Variable scope</h3>
+      <p>
+        The variable scope (<code>SCOPE</code>) is optional, and defaults to local if omitted.  It may
+        have one of two possible values, controlling how the variable is stored within the TALES context:
+      </p>
+      <ul>
+        <li>
+          <strong>local</strong> indicates that the variable will be available to this element, and all of its
+          child elements.  However, sibling elements or parent elements will not have access to this variable.
+        </li>
+        <li>
+          <strong>global</strong> indicates that the variable will be available document-wide; once the ZPT renderer
+          has rendered the current element, any subsequent element may make use of this variable definition, regardless
+          of whether it is a child of the current element or not.
+        </li>
+      </ul>
+      <p>
+        Global definitions are generally only very rarely required, as it is possible to define local variables at
+        the root level of the document if required.  The ZPT parser always operates upon a document in the order it is
+        written, from the beginning to the end.
+      </p>
+      <h3>The variable name</h3>
+      <p>
+        Permitted variable names (<code>NAME</code>) are one or more non-whitespace characters.  They are case
+        sensitive and mandatory.
+      </p>
+      <h3>The value expression</h3>
+      <p>
+        The expression (<code>EXPRESSION</code>) is mandatory; it is
+        <a href="tales/introduction.html">interpreted as a TALES expression</a>.
+        The expression is evaluated and the result stored as the value of the variable. <code>null</code> values are
+        handled normally – if the expression evaluates to null, then null is stored in the TALES context.
+      </p>
+      <p>
+        If the TALES expression result indicates that <a href="tales/cancellation.html">the action should be
+        cancelled</a> then no variable is created/changed. If <a href="tal/define.html#multiple_variables">multiple
+        variables are defined within the same attribute</a> and a single definition is cancelled in this way, other
+        definitions in that attribute are unaffected and are processed normally.
+      </p>
+      <h2>Variable naming conflicts</h2>
+      <p>
+        It is permitted to define multiple variables of the same name; here is how this works:
+      </p>
+      <h3>Scopes searched</h3>
+      <p>
+        TALES scopes are consulted in the following priority order, the first to yield a matching variable is used:
+      </p>
+      <ol>
+        <li><a href="tales/repeat-variables.html">TALES repeat variables</a></li>
+        <li>local variables</li>
+        <li>global variables</li>
+      </ol>
+      <h3>Identically-named local variables mask their parents</h3>
+      <p>
+        If multiple local variables are defined of the same name then TAL will use the variable which is defined upon
+        either the current element, or the closest parent element.  The same is true for <code>tal:repeat</code>
+        variables.  For example:
+      </p>
+      <pre><code class="html">&lt;div tal:define=&quot;foo string:One&quot;&gt;
+  &lt;div tal:define=&quot;foo string:Two&quot;&gt;
+    &lt;div tal:define=&quot;foo string:Three&quot;&gt;
+      The following renders as &quot;Three&quot;&lt;br&gt;
+      &lt;span tal:replace=&quot;foo&quot;&gt;Foo&lt;/span&gt;
+    &lt;/div&gt;
+    The following renders as &quot;Two&quot;&lt;br&gt;
+    &lt;span tal:replace=&quot;foo&quot;&gt;Foo&lt;/span&gt;
+  &lt;/div&gt;
+  The following renders as &quot;One&quot;&lt;br&gt;
+  &lt;span tal:replace=&quot;foo&quot;&gt;Foo&lt;/span&gt;
+&lt;/div&gt;</code></pre>
+      <h3>Global variables are overwritten</h3>
+      <p>
+        If a global variable definition would create a variable of the same name as an existing global variable,
+        then the existing variable is overwritten with the new value.  Once this has happened, there is no way
+        to get the previous value.
+      </p>
+      <h2 id="multiple_variables">Defining multiple variables at once</h2>
+      <p>
+        It is permitted to define multiple variables in the same <code>tal:define</code> attribute.  Each definition
+        is separated by a semicolon (and optional whitespace for readability):
+      </p>
+      <pre><code class="html">&lt;div tal:define=&quot;foo string:One;
+                 bar Model/My/Value;
+                 baz string:Three&quot;&gt;
+  Three variables all defined.
+&lt;/div&gt;</code></pre>
+      <p>
+        If you wish to use a semicolon character in a definition expression (for example as part of
+        <a href="tales/string-expressions.html">a <code>string:</code> TALES expression</a>) then you must escape it
+        by doubling-it up: <kbd>;;</kbd>.
+      </p>
+    </section>
+  </div>
+</div>
+<footer class="page_footer">
+  <section class="copyright">
+    Copyright © 2016
+    <a href="http://csf-dev.com/">CSF Software Limited</a> et al
+  </section>
+</footer>
+</body>
+</html>
