@@ -52,12 +52,12 @@ protected void Application_Start()
         <code title="XML page template file extension">.xml</code>) in the <code>Views</code> directory.  There is no
         special requirement upon your controllers or your models.
       </p>
-      <h2>Built-in TALES variables</h2>
+      <h2 id="extra_variables">Supplemental TALES variables</h2>
       <p>
-        When writing your ZPT views, there are a number of built-in
-        <a href="introduction-to-tales.html"><abbr title="Template Attribute Language Expression Syntax">TALES</abbr></a>
-        variables which are provided by the ZPT-Sharp MVC ViewEngine.  These are populated automatically based upon the
-        <code>ViewContext</code> provided by MVC.
+        When writing MVC views using ZPT, a number of additional
+        <a href="tales/built-in-variables.html"><abbr title="Template Attribute Language Expression Syntax">TALES</abbr>
+        root variables</a> are available, provided by the ZPT-Sharp MVC ViewEngine. Their values are populated
+        automatically based upon the <code>ViewContext</code> provided by MVC.
       </p>
       <table>
         <colgroup>
@@ -138,7 +138,18 @@ protected void Application_Start()
           </tr>
           <tr>
             <td class="variable_name">Model</td>
-            <td class="variable_description">The typed view model</td>
+            <td class="variable_description">
+              The typed view model
+            </td>
+            <td class="mvc_equivalent">
+              <a href="https://msdn.microsoft.com/en-us/library/system.web.mvc.viewdatadictionary.model(v=vs.118).aspx">ViewContext.ViewData.Model</a>
+            </td>
+          </tr>
+          <tr>
+            <td class="variable_name">here</td>
+            <td class="variable_description">
+              An alias for <code>Model</code>
+            </td>
             <td class="mvc_equivalent">
               <a href="https://msdn.microsoft.com/en-us/library/system.web.mvc.viewdatadictionary.model(v=vs.118).aspx">ViewContext.ViewData.Model</a>
             </td>

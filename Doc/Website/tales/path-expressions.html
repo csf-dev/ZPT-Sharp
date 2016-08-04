@@ -45,10 +45,37 @@ hljs.initHighlightingOnLoad();
       </p>
       <h2>Structure of a path expression</h2>
       <p>
-        Each expression must begin with a variable name, and may traverse the members which that variable exposes via
-        forward-slashes: <kbd>/</kbd>.  
+        Each expression must begin with a variable name, which relates to a reference within the current TALES content.
+        The object exposed by the variable name may be traversed, exposing its members, via forward-slashes:
+        <kbd>/</kbd>.
       </p>
-      <h2>Providing multiple paths</h2>
+      <h3>The TALES context</h3>
+      <p>
+        The TALES context indicates the variables which are available at a given HTML/XML element.  This consists of:
+      </p>
+      <ul>
+        <li>
+          All of the local variables added via <a href="tal/define.html"><code>tal:define</code> attributes</a>.  This
+          is variables defined within the current element, as well as variables defined upon parent elements in the
+          DOM.
+        </li>
+        <li>
+          All of the global variables added via <a href="tal/define.html"><code>tal:define</code> attributes</a>.  This
+          is variables defined within the current element, as well as variables defined upon elements which preceed the
+          current element in document order.
+        </li>
+        <li>
+          All of the <a href="tales/built-in-variables.html">built-in root variables</a> provided by TALES.
+        </li>
+        <li>
+          The special root variable (which is a reserved word and may not be defined as a local or global variable):
+          <code>CONTEXTS</code>.  This variable provides access to the built-in root variables (include any
+          supplemental root variables).  The CONTEXTS variable exists in case any of the root variables have been
+          hidden by being overwritten.  For example <code>CONTEXTS/nothing</code> will always provide access to a
+          null reference, even if a local/global variable named <code>nothing</code> has been defined.
+        </li>
+      </ul>
+      <h2 id="multiple_paths">Providing multiple paths</h2>
       <p>
         It is possible to provide multiple TALES paths within a single expression, separated by the pipe/vertical bar
         character: <kbd>|</kbd> and optionally whitespace.  For example the following is a legal path expression:

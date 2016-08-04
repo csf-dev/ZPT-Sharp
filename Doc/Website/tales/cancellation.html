@@ -1,0 +1,67 @@
+<!doctype html>
+<html tal:define="activePage tales_cancellation">
+<head metal:use-macro="pages/Shared/general-page.pt/macros/common_document_head">
+<meta charset="utf-8">
+<title metal:fill-slot="document_title">TALES cancellation</title>
+<base href="../" />
+<style type="text/css">
+@import url(css/styles.css);
+@import url(css/dummy.css);
+</style>
+<script type="text/javascript" src="js/modernizr.min.js"></script>
+<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.4.0/styles/default.min.css">
+<script src="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.4.0/highlight.min.js"></script>
+<script>
+hljs.initHighlightingOnLoad();
+</script>
+</head>
+<body metal:use-macro="pages/Shared/general-page.pt/macros/common_document_body" class="page_tales_cancellation">
+<div class="content_wrapper">
+  <header class="page_header dummy">
+    Dummy content
+  </header>
+  <div class="main_page_area">
+    <nav>
+      <h2>Navigation menu</h2>
+      <ul class="active_introduction dummy">
+        <li class="introduction"><a href=".">Introduction</a></li>
+        <li class="other_page"><a href="dummy.html">Dummy page</a></li>
+      </ul>
+    </nav>
+    <section class="main_page_content" metal:fill-slot="main_page_content">
+      <header><h1>TALES cancellation</h1></header>
+      <p>
+        Sometimes it is desirable within a TAL attribute to 'break out of' the current action and abort whatever
+        was happening.  For example, if a <a href="tal/content-replace.html"><code>tal:content</code> attribute</a>
+        were filling in the current user's username but no user were logged in - the current user object might be null.
+      </p>
+      <p>
+        One way of handling this and avoiding an error would be to abort the content attribute altogether.  This may be
+        performed in
+        <a href="tales/path-expressions.html">a TALES <code>path:</code> expression</a> by providing multiple paths
+        within the expression.
+      </p>
+      <p class="note">
+        Different <a href="tal/introduction.html">TAL attributes</a> react differently to action cancellation.
+      </p>
+      <h2>Example</h2>
+      <p>Consider the following:</p>
+      <pre><code class="html">&lt;p tal:define=&quot;currentUser Model/CurrentUser&quot;&gt;
+  You are logged in as
+  &lt;span tal:content=&quot;currentUser/Name | default&quot;&gt;an unknown user&lt;/span&gt;.
+&lt;/p&gt;</code></pre>
+      <p>
+        This is very similar to the example provided for
+        <a href="tales/path-expressions.html#multiple_paths">providing multiple paths to an expression</a>, except
+        that the fall-back value is the <a href="tales/built-in-variables.html">built-in root variable
+        <code>default</code></a>. This would cause the content attribute to be aborted, and for the existing content of
+        the <code>span</code> element not to be replaced.  In this case, that provides us with our fall-back content.
+      </p>
+    </section>
+  </div>
+</div>
+<footer class="page_footer dummy">
+  Dummy content
+</footer>
+</body>
+</html>
