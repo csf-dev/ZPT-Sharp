@@ -50,12 +50,40 @@ hljs.initHighlightingOnLoad();
       </p>
       <h2>Providing multiple paths</h2>
       <p>
-        TODO: Multiple paths separated with pipe symbols
+        It is possible to provide multiple TALES paths within a single expression, separated by the pipe/vertical bar
+        character: <kbd>|</kbd> and optionally whitespace.  For example the following is a legal path expression:
+        <code>Model/Foo/Bar | Model/Alternative/Path | backupValue</code>.
       </p>
-      <h2 id="object_traversal">Object traversal</h2>
       <p>
-        The precise meaning of traversal through an object is as follows.  Each path in the expression is separated
-        into fragments - individual pieces of the path, separated by slashes.
+        When evaluating such a path expression, an attempt is made to
+        <a href="tales/path-expressions.html#object_traversal">traverse each path</a> starting with the first.
+        If a path is traversed successfully then the result from that path is returned as the result of the path
+        expression and no further paths are traversed.
+      </p>
+      <p>
+        If a path cannot be traversed - for example, an exception such as a <code>NullReferenceException</code>
+        is raised during traversal - then traversal of that path ceases and an attempt is made to traverse the next
+        path in the expression.
+      </p>
+      <p>
+        Once a path within the expression yields a result then further paths are not used.  If, alternatively, none
+        of the paths in an expression yield a result then an evaluation error is raised.  Thus, providing multiple paths
+        within a single expression is a useful as a manner of guarding against errors, or providing fall-back values.
+      </p>
+      <h3>Example</h3>
+      <p>
+        Consider the following example. If the current user were <code>null</code> then, instead of raising an error
+        when displaying the user's name, some fallback text would be displayed.
+      </p>
+      <pre><code class="html">&lt;p tal:define=&quot;unknownUser string:an unknown user;
+               currentUser Model/CurrentUser&quot;&gt;
+  You are logged in as
+  &lt;span tal:content=&quot;currentUser/Name | unknownUser&quot;&gt;Joseph Bloggs&lt;/span&gt;.
+&lt;/p&gt;</code></pre>
+      <h2 id="object_traversal">Path traversal</h2>
+      <p>
+        The precise meaning of traversal through a path is as follows.  The path to traverse is separated
+        into fragments - individual pieces of the path, as separated by slashes.
       </p>
       <ol>
         <li>
