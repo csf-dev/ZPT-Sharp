@@ -51,6 +51,7 @@ body > .content_wrapper:after {
   border-radius: 15px;
   border: 1px solid #F8C9AF;
   float: left;
+  margin-bottom: 4em;
 }
 .main_page_area > nav h2 {
   display: none;
@@ -84,6 +85,7 @@ body > .content_wrapper:after {
   border-top: 1px solid #F8C9AF;
   color: #666;
   font-size: 80%;
+  clear: both;
 }
 .page_footer a {
   color: #333;
