@@ -1,4 +1,4 @@
-<!doctype html>
+﻿<!doctype html>
 <html tal:define="activePage tales_path_expressions">
 <head metal:use-macro="pages/Shared/general-page.pt/macros/common_document_head">
 <meta charset="utf-8">
@@ -48,7 +48,11 @@ hljs.initHighlightingOnLoad();
         Each expression must begin with a variable name, and may traverse the members which that variable exposes via
         forward-slashes: <kbd>/</kbd>.  
       </p>
-      <h2>Object traversal</h2>
+      <h2>Providing multiple paths</h2>
+      <p>
+        TODO: Multiple paths separated with pipe symbols
+      </p>
+      <h2 id="object_traversal">Object traversal</h2>
       <p>
         The precise meaning of traversal through an object is as follows.  Each path in the expression is separated
         into fragments - individual pieces of the path, separated by slashes.
@@ -120,6 +124,33 @@ hljs.initHighlightingOnLoad();
           If none of the above are true, then the traversal is unsuccessful.
         </li>
       </ol>
+      <h2>Interpolated path fragments</h2>
+      <p>
+        <a href="tales/path-expressions.html#object_traversal">When traversing a path</a>, a path fragment may optionally
+        be prefixed with a question mark symbol: <kbd>?</kbd>.  This signifies that the path fragment is
+        <strong>interpolated</strong> by evaluating the name of that fragment as a single variable reference from the TALES
+        context.  The result of that evaluation is converted to a <code>System.String</code> and used as the text of
+        the fragment for continuing traversal.
+      </p>
+      <p>
+        Only single variables may be evaluated in this manner, so interpolated path fragments do not trigger traversal
+        themselves.
+      </p>
+      <h3>Example</h3>
+      <p>
+        The example below shows a sample list of filenames uploaded by the current user.  However, in this case, the
+        list of uploaded files is not available as a property of the 'CurrentUser' object, rather as a property of a
+        'SharedUploads' object, using the user-name as a key.
+      </p>
+      <p>
+        The user-name is stored within the variable <code>userName</code> via the
+        <a href="tal/define.html"><code>tal:define</code> attribute</a>, and then referenced as an interpolated path
+        fragment within the expression used in the <a href="tal/repeat.html"><code>tal:repeat</code> attribute</a>.
+      </p>
+      <pre><code class="html">&lt;ul tal:define=&quot;userName Model/CurrentUser/Name&quot;&gt;
+  &lt;li tal:repeat=&quot;file Model/SharedUploads/?userName/Files&quot;
+      tal:content=&quot;file/Name&quot;&gt;Sample filename&lt;/li&gt;
+&lt;/ul&gt;</code></pre>
     </section>
   </div>
 </div>
