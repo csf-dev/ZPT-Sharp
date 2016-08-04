@@ -13,10 +13,16 @@
 @import url(css/dummy.css);
 </style>
 <script type="text/javascript" src="js/modernizr.min.js"></script>
-<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.4.0/styles/default.min.css">
-<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.4.0/highlight.min.js"></script>
+<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.4.0/styles/default.min.css">
+<script src="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.4.0/highlight.min.js"></script>
+<script>
+hljs.initHighlightingOnLoad();
+</script>
 </head>
-<body metal:define-macro="common_document_body" tal:attributes="class string:page_$activePage">
+<body metal:define-macro="common_document_body"
+      tal:define="unknownPage string:unknown;
+                  activePageName activePage | unknownPage"
+      tal:attributes="class string:page_$activePageName">
 <div class="content_wrapper">
   <header class="page_header" metal:define-slot="page_header">
     <h2>
@@ -25,7 +31,7 @@
     </h2>
   </header>
   <div class="main_page_area" metal:define-slot="main_page_area">
-    <nav metal:use-macro="documents/Shared/navigation.pt/macros/common_navigation">
+    <nav metal:use-macro="documents/Shared/navigation.html/macros/common_navigation">
       <h2>Navigation menu</h2>
       <ul class="active_introduction dummy">
         <li class="introduction"><a href=".">Introduction</a></li>
@@ -46,7 +52,7 @@
 </div>
 <footer class="page_footer" metal:define-slot="page_footer">
   <section class="copyright">
-    Copyright © <span tal:replace="copyrightYear">2016</span>
+    Copyright © <span tal:replace="copyrightYear | default">2016</span>
     <a href="http://csf-dev.com/">CSF Software Limited</a> et al
   </section>
 </footer>
