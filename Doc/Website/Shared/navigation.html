@@ -22,10 +22,90 @@
           tal:define="unknownPage string:unknown;
                       activePageName activePage | unknownPage"
           tal:attributes="class string:active_$activePageName">
-        <li class="introduction"><a href=".">Introduction</a></li>
-        <li class="asp_net_view_engine"><a href="asp-net-mvc-view-engine.html">ZPT-Sharp for ASP.NET MVC</a></li>
-        <li class="page_rendering_api"><a href="page-rendering-api.html">The page-rendering API</a></li>
-        <li class="command_line_renderer"><a href="command-line-renderer.html">The command-line renderer</a></li>
+        <li class="introduction nav_item">
+          <a href="index.html">Introduction</a>
+        </li>
+        <li class="asp_net_view_engine nav_item">
+          <a href="asp-net-mvc-view-engine.html">ZPT-Sharp for ASP.NET MVC</a>
+        </li>
+        <li class="page_rendering_api nav_item">
+          <a href="page-rendering-api.html">The page-rendering API</a>
+        </li>
+        <li class="command_line_renderer nav_item">
+          <a href="command-line-renderer.html">The command-line renderer</a>
+        </li>
+        <li class="writing_pages_using_zpt nav_item">
+          <a href="writing-pages-using-zpt.html">Writing pages</a>
+        </li>
+        <li class="metal_reference nav_section">
+          <h3>METAL reference</h3>
+          <ul>
+            <li>
+              <a href="metal/introduction.html">Introduction to METAL</a>
+            </li>
+            <li>
+              <a href="metal/define-use-macro.html">Define &amp; use macros</a>
+            </li>
+            <li>
+              <a href="metal/define-fill-slot.html">Define &amp; fill slots</a>
+            </li>
+            <li>
+              <a href="metal/extend-macro.html">Extend macros</a>
+            </li>
+          </ul>
+        </li>
+        <li class="tal_reference nav_section">
+          <h3>TAL reference</h3>
+          <ul>
+            <li>
+              <a href="tal/introduction.html">Introduction to TAL</a>
+            </li>
+            <li>
+              <a href="tal/define.html">Define variables</a>
+            </li>
+            <li>
+              <a href="tal/condition.html">Conditional rendering</a>
+            </li>
+            <li>
+              <a href="tal/repeat.html">Repeat sections of markup</a>
+            </li>
+            <li>
+              <a href="tal/content-replace.html">Insert model data</a>
+            </li>
+            <li>
+              <a href="tal/attributes.html">Set attributes</a>
+            </li>
+            <li>
+              <a href="tal/omit-tag.html">Omit start/end tag</a>
+            </li>
+            <li>
+              <a href="tal/on-error.html">Error handling</a>
+            </li>
+          </ul>
+        </li>
+        <li class="tales_reference nav_section">
+          <h3>TALES reference</h3>
+          <ul>
+            <li>
+              <a href="tales/introduction.html">Introduction to TALES</a>
+            </li>
+            <li>
+              <a href="tales/path-expressions.html">Path expressions</a>
+            </li>
+            <li>
+              <a href="tales/string-expressions.html">String expressions</a>
+            </li>
+            <li>
+              <a href="tales/not-expressions.html">Not expressions</a>
+            </li>
+            <li>
+              <a href="tales/built-in-variables.html">Root variables</a>
+            </li>
+            <li>
+              <a href="tales/repeat-variables.html">Repeat variables</a>
+            </li>
+          </ul>
+        </li>
       </ul>
     </nav>
     <section class="main_page_content dummy">
