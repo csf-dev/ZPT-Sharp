@@ -55,6 +55,15 @@ hljs.initHighlightingOnLoad();
     Copyright © <span tal:replace="copyrightYear | default">2016</span>
     <a href="http://csf-dev.com/">CSF Software Limited</a> et al
   </section>
+  <section class="version">
+    <p>
+      Documentation built on <strong tal:content="options/buildDate | default">2016-01-01</strong>, for
+      <span tal:define="versionNumber options/version"
+            tal:on-error="string:an unknown version">
+        version <strong><span tal:replace="versionNumber">1.2.3</span></strong>
+      </span>
+    </p>
+  </section>
 </footer>
 </body>
 </html>
