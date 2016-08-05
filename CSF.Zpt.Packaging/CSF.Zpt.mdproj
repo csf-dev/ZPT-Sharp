@@ -16,6 +16,17 @@
             <RootEntry path="..\CSF.Zpt.sln" id=":root:" />
           </Builder>
         </Package>
+        <Package name="Linux Binaries">
+          <Builder targetFile="..\CSF.Zpt.tar.gz" platform="Linux" configuration="Release" ctype="BinariesZipPackageBuilder">
+            <ChildEntries>
+              <SolutionItemReference path="..\CSF.Zpt\CSF.Zpt.csproj" />
+              <SolutionItemReference path="..\CSF.Zpt.Api\CSF.Zpt.Api.csproj" />
+              <SolutionItemReference path="..\CSF.Zpt.MVC\CSF.Zpt.MVC.csproj" />
+              <SolutionItemReference path="..\CSF.Zpt.Cli\CSF.Zpt.Cli.csproj" />
+            </ChildEntries>
+            <RootEntry path="..\CSF.Zpt.sln" id=":root:" />
+          </Builder>
+        </Package>
       </Packages>
     </Packages>
   </PropertyGroup>
