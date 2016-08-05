@@ -12,7 +12,7 @@ body > .content_wrapper {
 body > .content_wrapper:after {
   content: "";
   display: block;
-  height: 41px;
+  height: 61px;
 }
 .page_header {
   margin: 0;
@@ -80,15 +80,19 @@ body > .content_wrapper:after {
 }
 .page_footer {
   padding: 10px 40px;
-  height: 20px;
+  height: 40px;
   background: #FAD9C7;
   border-top: 1px solid #F8C9AF;
   color: #666;
   font-size: 80%;
   clear: both;
+  line-height: 145%;
+}
+.page_footer a,
+.page_footer strong {
+  color: #333;
 }
 .page_footer a {
-  color: #333;
   text-decoration: none;
   padding-bottom: 2px;
 }
@@ -97,11 +101,3 @@ body > .content_wrapper:after {
   padding-bottom: 1px;
   border-bottom: 1px solid #000;
 }
-
-/*
-Fonts provided by Google Font API:
- 
-font-family: 'Lato', sans-serif;
-font-family: 'Baloo', cursive;
-font-family: 'Droid Sans Mono', monospace;
-*/
