@@ -164,7 +164,7 @@ namespace CSF.Zpt.Tales
       }
 
       _nothing = null;
-      _default = TalesModel.CancelAction;
+      _default = ZptConstants.CancellationToken;
       _options = options;
       _repeat = repeat;
       _attrs = attrs;

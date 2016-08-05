@@ -330,17 +330,6 @@ namespace CSF.Zpt.Rendering
     #region static properties
 
     /// <summary>
-    /// Gets a value indicating that the action is to be cancelled.
-    /// </summary>
-    /// <value><c>true</c> if the action is to be cancelleds; otherwise, <c>false</c>.</value>
-    public static object CancelAction
-    {
-      get {
-        return ZptConstants.CancellationToken;
-      }
-    }
-
-    /// <summary>
     /// Gets an empty model/null object.
     /// </summary>
     /// <value>The empty model.</value>

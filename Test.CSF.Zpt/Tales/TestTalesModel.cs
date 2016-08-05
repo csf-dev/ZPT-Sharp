@@ -5,6 +5,7 @@ using Moq;
 using Ploeh.AutoFixture;
 using CSF.Zpt.Rendering;
 using Test.CSF.Zpt.Util.Autofixture;
+using CSF.Zpt;
 
 namespace Test.CSF.Zpt.Tales
 {
@@ -132,7 +133,7 @@ namespace Test.CSF.Zpt.Tales
       // Assert
       Assert.IsTrue(result, "Overall success");
       Assert.NotNull(output, "Output nullability");
-      Assert.AreSame(Model.CancelAction, output, "Expected output");
+      Assert.AreSame(ZptConstants.CancellationToken, output, "Expected output");
     }
 
     [Test]

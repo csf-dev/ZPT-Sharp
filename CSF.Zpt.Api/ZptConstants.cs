@@ -169,7 +169,7 @@ namespace CSF.Zpt
     /// <summary>
     /// Gets a special singleton value that indicates the "cancel the current action" token.
     /// </summary>
-    public static readonly object CancellationToken = new object();
+    public static readonly object CancellationToken = new CancellationToken();
   }
 }
 

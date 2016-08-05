@@ -155,7 +155,7 @@ namespace Test.CSF.Zpt.Tal
 
       var expressionsAndResults = new [] {
         new { Key = "foo",      Expression = "bar",                                             Result = _autofixture.Create<object>(), Global = false },
-        new { Key = "wibble",   Expression = "wobble/cancellation",                             Result = Model.CancelAction,            Global = false },
+        new { Key = "wibble",   Expression = "wobble/cancellation",                             Result = ZptConstants.CancellationToken,            Global = false },
         new { Key = "someVal",  Expression = "very/long/expression/string",                     Result = _autofixture.Create<object>(), Global = true },
         new { Key = "key",      Expression = "string:This is a test; it contains a semicolon!", Result = _autofixture.Create<object>(), Global = false },
       };
@@ -175,7 +175,7 @@ namespace Test.CSF.Zpt.Tal
       {
         Mock.Get(_model).Verify(x => x.Evaluate(item.Expression, _context), Times.Once());
 
-        if(item.Result != Model.CancelAction)
+        if(item.Result != ZptConstants.CancellationToken)
         {
           Mock.Get(_model).Verify(x => x.AddLocal(item.Key, item.Result),
                                   item.Global? Times.Never() : Times.Once());
