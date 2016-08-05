@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <ItemType>PackagingProject</ItemType>
+    <ProjectGuid>{454F2087-0EFE-492C-AE21-3AC340189010}</ProjectGuid>
+    <Packages>
+      <Packages>
+        <Package name="Microsoft Windows Binaries">
+          <Builder targetFile="..\CSF.Zpt.zip" platform="Windows" configuration="Release" ctype="BinariesZipPackageBuilder">
+            <ChildEntries>
+              <SolutionItemReference path="..\CSF.Zpt.Cli\CSF.Zpt.Cli.csproj" />
+              <SolutionItemReference path="..\CSF.Zpt.MVC\CSF.Zpt.MVC.csproj" />
+              <SolutionItemReference path="..\CSF.Zpt.Api\CSF.Zpt.Api.csproj" />
+              <SolutionItemReference path="..\CSF.Zpt\CSF.Zpt.csproj" />
+            </ChildEntries>
+            <RootEntry path="..\CSF.Zpt.sln" id=":root:" />
+          </Builder>
+        </Package>
+      </Packages>
+    </Packages>
+  </PropertyGroup>
+</Project>
