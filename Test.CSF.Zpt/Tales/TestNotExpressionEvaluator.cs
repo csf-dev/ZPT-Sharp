@@ -4,6 +4,7 @@ using Moq;
 using CSF.Zpt.Tales;
 using Ploeh.AutoFixture;
 using CSF.Zpt.Rendering;
+using CSF.Zpt;
 
 namespace Test.CSF.Zpt.Tales
 {
@@ -63,7 +64,7 @@ namespace Test.CSF.Zpt.Tales
         .Setup(x => x.Evaluate(It.Is<Expression>(e => e.ToString() == expressionContent),
                                It.IsAny<RenderingContext>(),
                                It.IsAny<TalesModel>()))
-        .Returns(new ExpressionResult(Model.CancelAction));
+        .Returns(new ExpressionResult(ZptConstants.CancellationToken));
 
       var model = new TalesModel(registry);
 

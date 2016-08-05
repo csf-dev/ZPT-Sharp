@@ -27,18 +27,6 @@ namespace CSF.Zpt
       }
 
       /// <summary>
-      /// Gets the namespace URI for METAL: Macro Expansion Template Attribute Language.
-      /// </summary>
-      [Obsolete("Prefer the Namespace static property instead.")]
-      public static readonly string NamespaceUri;
-
-      /// <summary>
-      /// Gets the default attribute/element namespace prefix.
-      /// </summary>
-      [Obsolete("Prefer the Namespace static property instead.")]
-      public static readonly string DefaultPrefix;
-
-      /// <summary>
       /// Gets the name of the define-macro attribute.
       /// </summary>
       public static readonly string DefineMacroAttribute = "define-macro";
@@ -73,12 +61,7 @@ namespace CSF.Zpt
       /// </summary>
       static Metal()
       {
-        #pragma warning disable 618
-        NamespaceUri = "http://xml.zope.org/namespaces/metal";
-        DefaultPrefix = "metal";
-
-        _namespace = new ZptNamespace(DefaultPrefix, NamespaceUri);
-        #pragma warning restore 618
+        _namespace = new ZptNamespace("metal", "http://xml.zope.org/namespaces/metal");
       }
     }
 
@@ -99,18 +82,6 @@ namespace CSF.Zpt
           return _namespace;
         }
       }
-
-      /// <summary>
-      /// Gets the XML namespace URI for TAL: Template Attribute Language.
-      /// </summary>
-      [Obsolete("Prefer the Namespace static property instead.")]
-      public static readonly string NamespaceUri = "http://xml.zope.org/namespaces/tal";
-
-      /// <summary>
-      /// Gets the default attribute/element namespace prefix.
-      /// </summary>
-      [Obsolete("Prefer the Namespace static property instead.")]
-      public static readonly string DefaultPrefix = "tal";
 
       /// <summary>
       /// Gets the name of the define attribute.
@@ -157,19 +128,14 @@ namespace CSF.Zpt
       /// </summary>
       static Tal()
       {
-        #pragma warning disable 618
-        NamespaceUri = "http://xml.zope.org/namespaces/tal";
-        DefaultPrefix = "tal";
-
-        _namespace = new ZptNamespace(DefaultPrefix, NamespaceUri);
-        #pragma warning restore 618
+        _namespace = new ZptNamespace("tal", "http://xml.zope.org/namespaces/tal");
       }
     }
 
     /// <summary>
     /// Gets a special singleton value that indicates the "cancel the current action" token.
     /// </summary>
-    public static readonly object CancellationToken = new object();
+    public static readonly object CancellationToken = new CancellationToken();
   }
 }
 

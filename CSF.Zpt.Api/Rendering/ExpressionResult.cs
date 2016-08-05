@@ -33,7 +33,9 @@ namespace CSF.Zpt.Rendering
     public virtual bool CancelsAction
     {
       get {
-        return this.Value == ZptConstants.CancellationToken;
+        var canceller = this.Value as IActionCanceller;
+
+        return canceller != null && canceller.ShouldCancelAction();
       }
     }
 

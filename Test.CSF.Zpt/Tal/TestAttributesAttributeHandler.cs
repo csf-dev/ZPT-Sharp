@@ -148,7 +148,7 @@ namespace Test.CSF.Zpt.Tal
 
       Mock.Get(_model)
         .Setup(x => x.Evaluate(expression, _context))
-        .Returns(new ExpressionResult(Model.CancelAction));
+        .Returns(new ExpressionResult(ZptConstants.CancellationToken));
 
       // Act
       var result = _sut.Handle(_context);
@@ -185,7 +185,7 @@ namespace Test.CSF.Zpt.Tal
       object
         expressionOneResult = _autofixture.Create<string>(),
         expressionTwoResult = null,
-        expressionThreeResult = Model.CancelAction,
+        expressionThreeResult = ZptConstants.CancellationToken,
         expressionFourResult = _autofixture.Create<string>();
 
       Mock.Get(_model)

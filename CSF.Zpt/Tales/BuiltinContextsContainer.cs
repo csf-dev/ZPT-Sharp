@@ -42,7 +42,7 @@ namespace CSF.Zpt.Tales
     }
 
     /// <summary>
-    /// Gets the 'default' object instance (equal to <see cref="Model.CancelAction"/>).
+    /// Gets the 'default' object instance (equal to <see cref="ZptConstants.CancellationToken"/>).
     /// </summary>
     /// <value>The default object.</value>
     public object Default
@@ -164,7 +164,7 @@ namespace CSF.Zpt.Tales
       }
 
       _nothing = null;
-      _default = TalesModel.CancelAction;
+      _default = ZptConstants.CancellationToken;
       _options = options;
       _repeat = repeat;
       _attrs = attrs;

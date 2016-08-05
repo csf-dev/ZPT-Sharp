@@ -71,6 +71,8 @@
     <Compile Include="Rendering\IContextVisitorFactory.cs" />
     <Compile Include="RenderingMode.cs" />
     <Compile Include="Metal\MacroNotFoundException.cs" />
+    <Compile Include="Rendering\IActionCanceller.cs" />
+    <Compile Include="Rendering\CancellationToken.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

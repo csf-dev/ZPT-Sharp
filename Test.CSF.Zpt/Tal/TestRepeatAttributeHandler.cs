@@ -83,7 +83,7 @@ namespace Test.CSF.Zpt.Tal
 
       Mock.Get(_model)
         .Setup(x => x.Evaluate(It.IsAny<string>(), _context))
-        .Returns(new ExpressionResult(Model.CancelAction));
+        .Returns(new ExpressionResult(ZptConstants.CancellationToken));
 
       // Act
       var result = _sut.Handle(_context);
