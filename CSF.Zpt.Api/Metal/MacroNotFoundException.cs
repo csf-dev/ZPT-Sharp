@@ -2,7 +2,9 @@
 
 namespace CSF.Zpt.Metal
 {
-  
+  /// <summary>
+  /// Exception raised when a requested METAL macro is not found.
+  /// </summary>
   [Serializable]
   public class MacroNotFoundException : Rendering.RenderingException
   {
