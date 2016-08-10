@@ -47,10 +47,15 @@ hljs.initHighlightingOnLoad();
         The root variable <code>nothing</code> provides a <code>null</code> value.  It is a convenient way of getting a
         null reference.
       </p>
-      <h2>default</h2>
+      <h2 id="default">default</h2>
       <p>
         The <code>default</code> root variable provides a special value which indicates that the expression result
-        should indicate the action is to be cancelled.
+        should indicate <a href="tales/cancellation.html">the action is to be cancelled</a>.
+      </p>
+      <p>
+        It is a minimal object implementing
+        <code>CSF.Zpt.Rendering.IActionCanceller</code> which always returns <code>true</code> for the method
+        <code>ShouldCancelAction()</code>.
       </p>
       <h2>options</h2>
       <p>
