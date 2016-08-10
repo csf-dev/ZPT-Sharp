@@ -10,6 +10,7 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Default|AnyCPU' ">
     <OutputPath>.</OutputPath>
   </PropertyGroup>
+  <Target Name="Build" />
   <ItemGroup>
     <None Include="asp-net-mvc-view-engine.html" />
     <None Include="command-line-renderer.html" />
