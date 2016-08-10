@@ -84,13 +84,9 @@ hljs.initHighlightingOnLoad();
       </p>
       <h3>Scopes searched</h3>
       <p>
-        TALES scopes are consulted in the following priority order, the first to yield a matching variable is used:
-      </p>
-      <ol>
-        <li><a href="tales/repeat-variables.html">TALES repeat variables</a></li>
-        <li>local variables</li>
-        <li>global variables</li>
-      </ol>
+        When a TALES context is used to resolve a root variable, local variables (which includes
+        <a href="tales/repeat-variables.html">repeat variables</a>) are searched before global variables.  Thus,
+        local variables will always hide global variables of the same name.
       <h3>Identically-named local variables mask their parents</h3>
       <p>
         If multiple local variables are defined of the same name then TAL will use the variable which is defined upon
@@ -109,6 +105,10 @@ hljs.initHighlightingOnLoad();
   The following renders as &quot;One&quot;&lt;br&gt;
   &lt;span tal:replace=&quot;foo&quot;&gt;Foo&lt;/span&gt;
 &lt;/div&gt;</code></pre>
+      <p>
+        Once a local variable 'goes out of scope' (outside its defining element), the next closest in-scope definition
+        of the same name will become visible once again.
+      </p>
       <h3>Global variables are overwritten</h3>
       <p>
         If a global variable definition would create a variable of the same name as an existing global variable,
