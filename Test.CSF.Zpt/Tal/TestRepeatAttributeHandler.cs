@@ -157,11 +157,14 @@ namespace Test.CSF.Zpt.Tal
         .Setup(x => x.GetAttribute(ZptConstants.Tal.Namespace,
                                    ZptConstants.Tal.RepeatAttribute))
         .Returns((ZptAttribute) Mock.Of<ZptAttribute>(x => x.Value == "foo bar"));
+      Mock.Get(_context)
+        .Setup(x => x.CreateSiblingContext(It.IsAny<ZptElement>(), false))
+        .Returns(_context);
 
       Mock.Get(_model)
         .Setup(x => x.Evaluate("bar", _context))
         .Returns(new ExpressionResult(new [] { "One", "Two", "Three", "Four" }));
-      Mock.Get(_model).Setup(x => x.AddRepetitionInfo(It.IsAny<IRepetitionInfo[]>()));
+      Mock.Get(_model).Setup(x => x.AddRepetitionInfo(It.IsAny<IRepetitionInfo>()));
 
       // Act
       var result = _sut.Handle(_context);
@@ -172,8 +175,8 @@ namespace Test.CSF.Zpt.Tal
       _element.Verify(x => x.Remove(), Times.Once());
       _parent.Verify(x => x.InsertBefore(_element.Object, _clone.Object), Times.Exactly(4));
       Mock.Get(_model)
-        .Verify(x => x.AddRepetitionInfo(It.Is<IRepetitionInfo[]>(r => r.Length == 4 && r.All(i => i.Name == "foo"))),
-                Times.Once());
+        .Verify(x => x.AddRepetitionInfo(It.Is<IRepetitionInfo>(r => r.Name == "foo")),
+                Times.Exactly(4));
       
       Assert.AreEqual(4, result.Contexts.Length, "Count of results");
     }

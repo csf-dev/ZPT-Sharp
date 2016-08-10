@@ -40,10 +40,10 @@ namespace CSF.Zpt.Rendering
     void AddGlobal(string name, object value);
 
     /// <summary>
-    /// Adds a collection of repetition information to the current instance.
+    /// Adds information about a repetition to the current instance.
     /// </summary>
     /// <param name="info">The repetition information.</param>
-    void AddRepetitionInfo(IRepetitionInfo[] info);
+    void AddRepetitionInfo(IRepetitionInfo info);
 
     /// <summary>
     /// Adds information about an encountered error to the current model instance.

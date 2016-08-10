@@ -131,22 +131,20 @@ namespace CSF.Zpt.Rendering
     }
 
     /// <summary>
-    /// Adds a collection of repetition information to the current instance.
+    /// Adds information about a repetition to the current instance.
     /// </summary>
     /// <param name="info">The repetition information.</param>
-    public virtual void AddRepetitionInfo(IRepetitionInfo[] info)
+    public virtual void AddRepetitionInfo(IRepetitionInfo info)
     {
       if(info == null)
       {
         throw new ArgumentNullException(nameof(info));
       }
 
-      /* TODO: Rework this - repetition info is now already contextualised to the current element, so there is no
-       * need to keep the whole collection.
-       */
-
-      this.RepetitionInfo = new RepetitionInfoCollection(this.RepetitionInfo, info);
+      this.RepetitionInfo = new RepetitionInfoCollection(this.RepetitionInfo, new [] { info });
+      this.AddLocal(info.Name, info.Value);
     }
+
 
     /// <summary>
     /// Adds information about an encountered error to the current model instance.
@@ -212,12 +210,7 @@ namespace CSF.Zpt.Rendering
       bool output;
       result = null;
 
-      output = this.RepetitionInfo.TryResolveValue(name, context.Element.GetElementChain(), out result);
-
-      if(!output)
-      {
-        output = this.TryRecursivelyGetLocalItem(name, out result);
-      }
+      output = this.TryRecursivelyGetLocalItem(name, out result);
 
       if(!output)
       {

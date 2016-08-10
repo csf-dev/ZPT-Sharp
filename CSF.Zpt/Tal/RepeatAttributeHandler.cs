@@ -180,23 +180,25 @@ namespace CSF.Zpt.Tal
     /// <param name="context">The source rendering context.</param>
     private RenderingContext[] HandleRepetitions(IRepetitionInfo[] repetitions, RenderingContext context)
     {
-      if(repetitions.Any())
-      {
-        context.TalModel.AddRepetitionInfo(repetitions);
-        var parent = context.Element.GetParentElement();
+      var output = repetitions
+        .Select(x => new { Context = context.CreateSiblingContext(x.AssociatedElement), Repetition = x })
+        .ToList();
 
-        foreach(var item in repetitions)
-        {
-          item.AssociatedElement.RemoveAttribute(ZptConstants.Tal.Namespace,
-                                                 ZptConstants.Tal.RepeatAttribute);
-          parent.InsertBefore(context.Element, item.AssociatedElement);
-        }
+      var parent = context.Element.GetParentElement();
+
+      foreach(var item in output)
+      {
+        item.Context.TalModel.AddRepetitionInfo(item.Repetition);
+
+        item.Repetition.AssociatedElement.RemoveAttribute(ZptConstants.Tal.Namespace,
+                                                          ZptConstants.Tal.RepeatAttribute);
+        parent.InsertBefore(context.Element, item.Repetition.AssociatedElement);
       }
 
       context.Element.Remove();
 
-      return repetitions
-        .Select(x => context.CreateSiblingContext(x.AssociatedElement))
+      return output
+        .Select(x => x.Context)
         .ToArray();
     }
 
