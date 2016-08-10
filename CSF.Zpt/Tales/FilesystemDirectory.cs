@@ -11,6 +11,12 @@ namespace CSF.Zpt.Tales
   /// </summary>
   public class FilesystemDirectory : ITalesPathHandler
   {
+    #region constants
+
+    private const string PARENT_DIRECTORY = "..";
+
+    #endregion
+
     #region fields
 
     private DirectoryInfo _directory;
@@ -28,6 +34,17 @@ namespace CSF.Zpt.Tales
     {
       get {
         return _mandatoryExtensions;
+      }
+    }
+
+    /// <summary>
+    /// Gets the DirectoryInfo associated with the current instance.
+    /// </summary>
+    /// <value>The directory info.</value>
+    public DirectoryInfo DirectoryInfo
+    {
+      get {
+        return _directory;
       }
     }
 
@@ -97,15 +114,23 @@ namespace CSF.Zpt.Tales
       }
 
       object output;
-      var allInfos = _directory.GetFileSystemInfos().ToDictionary(k => k.Name, v => v);
 
-      if(_mandatoryExtensions)
+      if(pathFragment == PARENT_DIRECTORY)
       {
-        output = allInfos.ContainsKey(pathFragment)? allInfos[pathFragment] : null;
+        output = _directory.Parent;
       }
       else
       {
-        output = this.GetDirectoryOrFileWithoutExtension(pathFragment, allInfos);
+        var allInfos = _directory.GetFileSystemInfos().ToDictionary(k => k.Name, v => v);
+
+        if(_mandatoryExtensions)
+        {
+          output = allInfos.ContainsKey(pathFragment)? allInfos[pathFragment] : null;
+        }
+        else
+        {
+          output = this.GetDirectoryOrFileWithoutExtension(pathFragment, allInfos);
+        }
       }
 
       if(output is DirectoryInfo)

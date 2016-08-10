@@ -104,6 +104,7 @@
     <Compile Include="Tales\TestExpressionFactory.cs" />
     <Compile Include="SourceAnnotationIntegrationTests.cs" />
     <Compile Include="IntegrationTestType.cs" />
+    <Compile Include="Tales\TestFilesystemDirectory.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Metal\MetalVisitorIntegrationTests.1.xml" />
