@@ -7,6 +7,7 @@ using Ploeh.AutoFixture;
 using Moq;
 using System.Linq;
 using System.Xml;
+using CSF.Zpt;
 
 namespace Test.CSF.Zpt.Rendering
 {
@@ -46,7 +47,7 @@ namespace Test.CSF.Zpt.Rendering
     {
       // Arrange
       var sut = new ZptXmlElement(_document.DocumentElement,
-                               _sourceFile);
+                               _sourceFile, Mock.Of<IZptDocument>());
 
       // Act
       var result = sut.ToString().Replace(Environment.NewLine, "\n");
@@ -60,7 +61,7 @@ namespace Test.CSF.Zpt.Rendering
     {
       // Arrange
       var sut = new ZptXmlElement(_document.DocumentElement,
-                                _sourceFile);
+                                _sourceFile, Mock.Of<IZptDocument>());
 
       // Act
       var result = sut.GetChildElements();
@@ -76,7 +77,7 @@ namespace Test.CSF.Zpt.Rendering
     {
       // Arrange
       var sut = new ZptXmlElement(_document.DocumentElement,
-                                  _sourceFile);
+                                  _sourceFile, Mock.Of<IZptDocument>());
 
       // Act
       var results = sut.SearchChildrenByAttribute(new ZptNamespace(uri: "http://ns.csf-dev.com/custom"),
@@ -93,7 +94,7 @@ namespace Test.CSF.Zpt.Rendering
     {
       // Arrange
       var sut = new ZptXmlElement(_document.DocumentElement.ChildNodes[1].FirstChild.FirstChild,
-                                  _sourceFile);
+                                  _sourceFile, Mock.Of<IZptDocument>());
 
       // Act
       var results = sut.GetAttributes();
@@ -113,7 +114,7 @@ namespace Test.CSF.Zpt.Rendering
     {
       // Arrange
       var sut = new ZptXmlElement(_document.DocumentElement.ChildNodes[1].FirstChild.FirstChild,
-                                  _sourceFile);
+                                  _sourceFile, Mock.Of<IZptDocument>());
 
       // Act
       var result = sut.GetAttribute(new ZptNamespace(uri: ns), name);
@@ -129,7 +130,7 @@ namespace Test.CSF.Zpt.Rendering
     {
       // Arrange
       var sut = new ZptXmlElement(_document.DocumentElement.ChildNodes[1].FirstChild.FirstChild,
-                                  _sourceFile);
+                                  _sourceFile, Mock.Of<IZptDocument>());
 
       // Act
       sut.SetAttribute("foo", "bar");
@@ -160,7 +161,7 @@ namespace Test.CSF.Zpt.Rendering
   </body>
 </html>";
       Assert.AreEqual(expectedDom,
-                      new ZptXmlElement(_document.DocumentElement, _sourceFile).ToString().Replace(Environment.NewLine, "\n"),
+                      new ZptXmlElement(_document.DocumentElement, _sourceFile, Mock.Of<IZptDocument>()).ToString().Replace(Environment.NewLine, "\n"),
                       "Correct modified XML");
     }
 
@@ -169,7 +170,7 @@ namespace Test.CSF.Zpt.Rendering
     {
       // Arrange
       var sut = new ZptXmlElement(_document.DocumentElement.ChildNodes[1].FirstChild.FirstChild,
-                                  _sourceFile);
+                                  _sourceFile, Mock.Of<IZptDocument>());
 
       // Act
       sut.SetAttribute(new ZptNamespace(prefix: "ns", uri: "http://ns.csf-dev.com/custom2"), "foo", "bar");
@@ -200,7 +201,7 @@ namespace Test.CSF.Zpt.Rendering
   </body>
 </html>";
       Assert.AreEqual(expectedDom,
-                      new ZptXmlElement(_document.DocumentElement, _sourceFile).ToString().Replace(Environment.NewLine, "\n"),
+                      new ZptXmlElement(_document.DocumentElement, _sourceFile, Mock.Of<IZptDocument>()).ToString().Replace(Environment.NewLine, "\n"),
                       "Correct modified XML");
     }
 
@@ -209,7 +210,7 @@ namespace Test.CSF.Zpt.Rendering
     {
       // Arrange
       var sut = new ZptXmlElement(_document.DocumentElement.ChildNodes[1].FirstChild.FirstChild,
-                                  _sourceFile);
+                                  _sourceFile, Mock.Of<IZptDocument>());
 
       // Act
       sut.RemoveAttribute("class");
@@ -240,7 +241,7 @@ namespace Test.CSF.Zpt.Rendering
   </body>
 </html>";
       Assert.AreEqual(expectedDom,
-                      new ZptXmlElement(_document.DocumentElement, _sourceFile).ToString().Replace(Environment.NewLine, "\n"),
+                      new ZptXmlElement(_document.DocumentElement, _sourceFile, Mock.Of<IZptDocument>()).ToString().Replace(Environment.NewLine, "\n"),
                       "Correct modified XML");
     }
 
@@ -249,7 +250,7 @@ namespace Test.CSF.Zpt.Rendering
     {
       // Arrange
       var sut = new ZptXmlElement(_document.DocumentElement.ChildNodes[1].FirstChild.FirstChild,
-                                  _sourceFile);
+                                  _sourceFile, Mock.Of<IZptDocument>());
 
       // Act
       sut.RemoveAttribute(new ZptNamespace(prefix: "custom", uri: "http://ns.csf-dev.com/custom"), "parent_attrib");
@@ -280,7 +281,7 @@ namespace Test.CSF.Zpt.Rendering
   </body>
 </html>";
       Assert.AreEqual(expectedDom,
-                      new ZptXmlElement(_document.DocumentElement, _sourceFile).ToString().Replace(Environment.NewLine, "\n"),
+                      new ZptXmlElement(_document.DocumentElement, _sourceFile, Mock.Of<IZptDocument>()).ToString().Replace(Environment.NewLine, "\n"),
                       "Correct modified XML");
     }
 
@@ -289,7 +290,7 @@ namespace Test.CSF.Zpt.Rendering
     {
       // Arrange
       var sut = new ZptXmlElement(_document.DocumentElement.ChildNodes[1].FirstChild.FirstChild,
-                                  _sourceFile);
+                                  _sourceFile, Mock.Of<IZptDocument>());
 
       // Act
       sut.PurgeAttributes(new ZptNamespace(prefix: "custom", uri: "http://ns.csf-dev.com/custom"));
@@ -320,7 +321,7 @@ namespace Test.CSF.Zpt.Rendering
   </body>
 </html>";
       Assert.AreEqual(expectedDom,
-                      new ZptXmlElement(_document.DocumentElement, _sourceFile).ToString().Replace(Environment.NewLine, "\n"),
+                      new ZptXmlElement(_document.DocumentElement, _sourceFile, Mock.Of<IZptDocument>()).ToString().Replace(Environment.NewLine, "\n"),
                       "Correct modified XML");
     }
 
@@ -329,12 +330,12 @@ namespace Test.CSF.Zpt.Rendering
     {
       // Arrange
       var sut = new ZptXmlElement(_document.DocumentElement.ChildNodes[1].FirstChild.FirstChild,
-                                _sourceFile);
+                                _sourceFile, Mock.Of<IZptDocument>());
       var replacementHtml = "<p>Replacement element</p>";
       var secondDocument = new XmlDocument();
       secondDocument.LoadXml(replacementHtml);
       var secondElement = new ZptXmlElement(secondDocument.DocumentElement,
-                                          _sourceFile);
+                                          _sourceFile, Mock.Of<IZptDocument>());
 
       // Act
       var result = sut.ReplaceWith(secondElement);
@@ -361,7 +362,7 @@ namespace Test.CSF.Zpt.Rendering
   </body>
 </html>";
       Assert.AreEqual(expectedDom,
-                      new ZptXmlElement(_document.DocumentElement, _sourceFile).ToString().Replace(Environment.NewLine, "\n"),
+                      new ZptXmlElement(_document.DocumentElement, _sourceFile, Mock.Of<IZptDocument>()).ToString().Replace(Environment.NewLine, "\n"),
                       "Correct modified XML");
     }
 
@@ -370,7 +371,7 @@ namespace Test.CSF.Zpt.Rendering
     {
       // Arrange
       var sut = new ZptXmlElement(_document.DocumentElement.ChildNodes[1].FirstChild.FirstChild,
-                                  _sourceFile);
+                                  _sourceFile, Mock.Of<IZptDocument>());
 
       // Act
       var result = sut.ReplaceWith("<p>Replacement element</p>", false);
@@ -396,7 +397,7 @@ namespace Test.CSF.Zpt.Rendering
   </body>
 </html>";
       Assert.AreEqual(expectedDom,
-                      new ZptXmlElement(_document.DocumentElement, _sourceFile).ToString().Replace(Environment.NewLine, "\n"),
+                      new ZptXmlElement(_document.DocumentElement, _sourceFile, Mock.Of<IZptDocument>()).ToString().Replace(Environment.NewLine, "\n"),
                       "Correct modified XML");
     }
 
@@ -405,7 +406,7 @@ namespace Test.CSF.Zpt.Rendering
     {
       // Arrange
       var sut = new ZptXmlElement(_document.DocumentElement.ChildNodes[1].FirstChild.FirstChild,
-                                  _sourceFile);
+                                  _sourceFile, Mock.Of<IZptDocument>());
 
       // Act
       var result = sut.ReplaceWith("<p>Replacement <strong>element</strong></p>", true);
@@ -432,7 +433,7 @@ namespace Test.CSF.Zpt.Rendering
   </body>
 </html>";
       Assert.AreEqual(expectedDom,
-                      new ZptXmlElement(_document.DocumentElement, _sourceFile).ToString().Replace(Environment.NewLine, "\n"),
+                      new ZptXmlElement(_document.DocumentElement, _sourceFile, Mock.Of<IZptDocument>()).ToString().Replace(Environment.NewLine, "\n"),
                       "Correct modified XML");
     }
 
@@ -441,7 +442,7 @@ namespace Test.CSF.Zpt.Rendering
     {
       // Arrange
       var sut = new ZptXmlElement(_document.DocumentElement.ChildNodes[1].FirstChild.FirstChild,
-                                  _sourceFile);
+                                  _sourceFile, Mock.Of<IZptDocument>());
 
       // Act
       sut.ReplaceChildrenWith("<p>Replacement element</p>", false);
@@ -466,7 +467,7 @@ namespace Test.CSF.Zpt.Rendering
   </body>
 </html>";
       Assert.AreEqual(expectedDom,
-                      new ZptXmlElement(_document.DocumentElement, _sourceFile).ToString().Replace(Environment.NewLine, "\n"),
+                      new ZptXmlElement(_document.DocumentElement, _sourceFile, Mock.Of<IZptDocument>()).ToString().Replace(Environment.NewLine, "\n"),
                       "Correct modified XML");
     }
 
@@ -475,7 +476,7 @@ namespace Test.CSF.Zpt.Rendering
     {
       // Arrange
       var sut = new ZptXmlElement(_document.DocumentElement.ChildNodes[1].FirstChild.FirstChild,
-                                  _sourceFile);
+                                  _sourceFile, Mock.Of<IZptDocument>());
 
       // Act
       sut.ReplaceChildrenWith("<p>Replacement <strong>element</strong></p>", true);
@@ -502,7 +503,7 @@ namespace Test.CSF.Zpt.Rendering
   </body>
 </html>";
       Assert.AreEqual(expectedDom,
-                      new ZptXmlElement(_document.DocumentElement, _sourceFile).ToString().Replace(Environment.NewLine, "\n"),
+                      new ZptXmlElement(_document.DocumentElement, _sourceFile, Mock.Of<IZptDocument>()).ToString().Replace(Environment.NewLine, "\n"),
                       "Correct modified XML");
     }
 
@@ -511,15 +512,15 @@ namespace Test.CSF.Zpt.Rendering
     {
       // Arrange
       var sut = new ZptXmlElement(_document.DocumentElement.ChildNodes[1].FirstChild.FirstChild.FirstChild,
-                                  _sourceFile);
+                                  _sourceFile, Mock.Of<IZptDocument>());
       var replacementXml = "<li>New element</li>";
       var secondDocument = new XmlDocument();
       secondDocument.LoadXml(replacementXml);
       var secondElement = new ZptXmlElement(secondDocument.DocumentElement,
-                                             _sourceFile);
+                                             _sourceFile, Mock.Of<IZptDocument>());
 
       var referenceElement = new ZptXmlElement(_document.DocumentElement.ChildNodes[1].FirstChild.FirstChild.FirstChild.ChildNodes[1],
-                                                _sourceFile);
+                                                _sourceFile, Mock.Of<IZptDocument>());
 
       // Act
       var result = sut.InsertBefore(referenceElement, secondElement);
@@ -553,7 +554,7 @@ namespace Test.CSF.Zpt.Rendering
   </body>
 </html>";
       Assert.AreEqual(expectedDom,
-                      new ZptXmlElement(_document.DocumentElement, _sourceFile).ToString().Replace(Environment.NewLine, "\n"),
+                      new ZptXmlElement(_document.DocumentElement, _sourceFile, Mock.Of<IZptDocument>()).ToString().Replace(Environment.NewLine, "\n"),
                       "Correct modified XML");
     }
 
@@ -562,15 +563,15 @@ namespace Test.CSF.Zpt.Rendering
     {
       // Arrange
       var sut = new ZptXmlElement(_document.DocumentElement.ChildNodes[1].FirstChild.FirstChild.FirstChild,
-                                  _sourceFile);
+                                  _sourceFile, Mock.Of<IZptDocument>());
       var replacementXml = "<li>New element</li>";
       var secondDocument = new XmlDocument();
       secondDocument.LoadXml(replacementXml);
       var secondElement = new ZptXmlElement(secondDocument.DocumentElement,
-                                             _sourceFile);
+                                             _sourceFile, Mock.Of<IZptDocument>());
 
       var referenceElement = new ZptXmlElement(_document.DocumentElement.ChildNodes[1].FirstChild.FirstChild.FirstChild.ChildNodes[1],
-                                                _sourceFile);
+                                                _sourceFile, Mock.Of<IZptDocument>());
 
       // Act
       var result = sut.InsertAfter(referenceElement, secondElement);
@@ -604,7 +605,7 @@ namespace Test.CSF.Zpt.Rendering
   </body>
 </html>";
       Assert.AreEqual(expectedDom,
-                      new ZptXmlElement(_document.DocumentElement, _sourceFile).ToString().Replace(Environment.NewLine, "\n"),
+                      new ZptXmlElement(_document.DocumentElement, _sourceFile, Mock.Of<IZptDocument>()).ToString().Replace(Environment.NewLine, "\n"),
                       "Correct modified XML");
     }
 
@@ -613,7 +614,7 @@ namespace Test.CSF.Zpt.Rendering
     {
       // Act
       new ZptXmlElement(_document.DocumentElement.FirstChild,
-                      _sourceFile);
+                      _sourceFile, Mock.Of<IZptDocument>());
 
       // Assert
       Assert.Pass("Test passes because no exception encountered");
@@ -624,7 +625,7 @@ namespace Test.CSF.Zpt.Rendering
     {
       // Act
       new ZptXmlElement(_document.DocumentElement,
-                      _sourceFile);
+                      _sourceFile, Mock.Of<IZptDocument>());
 
       // Assert
       Assert.Pass("Test passes because no exception encountered");
@@ -635,7 +636,7 @@ namespace Test.CSF.Zpt.Rendering
     {
       // Arrange
       var docElement = new ZptXmlElement(_document.DocumentElement,
-                                       _sourceFile);
+                                       _sourceFile, Mock.Of<IZptDocument>());
       var sut = docElement.GetChildElements()[1].GetChildElements()[0].GetChildElements().First();
       string expectedResult = @"<html xmlns:custom=""http://ns.csf-dev.com/custom"">
   <head>
@@ -677,7 +678,7 @@ namespace Test.CSF.Zpt.Rendering
       var doc = new XmlDocument();
       doc.LoadXml(@"<foo xmlns:ns=""http://ns.csf-dev.com/sample""><ns:bar /></foo>");
 
-      var sut = new ZptXmlElement(doc.DocumentElement.FirstChild, _sourceFile, isRoot: true);
+      var sut = new ZptXmlElement(doc.DocumentElement.FirstChild, _sourceFile, Mock.Of<IZptDocument>(), isRoot: true);
 
       // Act
       var result = sut.IsInNamespace(new ZptNamespace(prefix: "ns", uri: "http://ns.csf-dev.com/sample"));
@@ -693,7 +694,7 @@ namespace Test.CSF.Zpt.Rendering
       var doc = new XmlDocument();
       doc.LoadXml("<foo><bar /></foo>");
 
-      var sut = new ZptXmlElement(doc.DocumentElement.FirstChild, _sourceFile, isRoot: true);
+      var sut = new ZptXmlElement(doc.DocumentElement.FirstChild, _sourceFile, Mock.Of<IZptDocument>(), isRoot: true);
 
       // Act
       var result = sut.IsInNamespace(ZptNamespace.Default);
@@ -707,7 +708,7 @@ namespace Test.CSF.Zpt.Rendering
     {
       // Arrange
       var sut = new ZptXmlElement(_document.DocumentElement.ChildNodes[1].FirstChild.FirstChild,
-                                   _sourceFile);
+                                   _sourceFile, Mock.Of<IZptDocument>());
 
       // Act
       var result = sut.Omit();
@@ -738,7 +739,7 @@ namespace Test.CSF.Zpt.Rendering
   </body>
 </html>";
       Assert.AreEqual(expectedDom,
-                      new ZptXmlElement(_document.DocumentElement, _sourceFile).ToString().Replace(Environment.NewLine, "\n"),
+                      new ZptXmlElement(_document.DocumentElement, _sourceFile, Mock.Of<IZptDocument>()).ToString().Replace(Environment.NewLine, "\n"),
                       "Correct modified XML");
     }
 

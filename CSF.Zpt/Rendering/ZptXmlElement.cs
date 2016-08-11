@@ -189,7 +189,7 @@ namespace CSF.Zpt.Rendering
       }
 
       return new ZptXmlElement(importedNode,
-                            repl.SourceFile,
+                            repl.SourceFile, this.OwnerDocument,
                             isImported: true);
     }
 
@@ -206,7 +206,7 @@ namespace CSF.Zpt.Rendering
       var output = this.GetParent().InsertBefore(newNode, this.Node);
       this.Remove();
 
-      return interpretContentAsStructure? new[] { new ZptXmlElement(output, this.SourceFile) } : new ZptElement[0];
+      return interpretContentAsStructure? new[] { new ZptXmlElement(output, this.SourceFile, this.OwnerDocument) } : new ZptElement[0];
     }
 
     /// <summary>
@@ -249,7 +249,7 @@ namespace CSF.Zpt.Rendering
       var importedNode = this.Node.OwnerDocument.ImportNode(newChildElement.Node, true);
 
       var output = this.Node.InsertBefore(importedNode, existingElement.Node);
-      return new ZptXmlElement(output, newChild.SourceFile, isImported: true);
+      return new ZptXmlElement(output, newChild.SourceFile, this.OwnerDocument, isImported: true);
     }
 
     /// <summary>
@@ -280,7 +280,7 @@ namespace CSF.Zpt.Rendering
       var importedNode = this.Node.OwnerDocument.ImportNode(newChildElement.Node, true);
 
       var output = this.Node.InsertAfter(importedNode, existingElement.Node);
-      return new ZptXmlElement(output, newChild.SourceFile, isImported: true);
+      return new ZptXmlElement(output, newChild.SourceFile, this.OwnerDocument, isImported: true);
     }
 
     /// <summary>
@@ -290,7 +290,7 @@ namespace CSF.Zpt.Rendering
     public override ZptElement GetParentElement()
     {
       var parent = this.Node.ParentNode;
-      return (parent != null && parent.NodeType == XmlNodeType.Element)? new ZptXmlElement(parent, this.SourceFile) : null;
+      return (parent != null && parent.NodeType == XmlNodeType.Element)? new ZptXmlElement(parent, this.SourceFile, this.OwnerDocument) : null;
     }
 
     /// <summary>
@@ -302,7 +302,7 @@ namespace CSF.Zpt.Rendering
       return this.Node.ChildNodes
         .Cast<XmlNode>()
         .Where(x => x.NodeType == XmlNodeType.Element)
-        .Select(x => new ZptXmlElement(x, this.SourceFile))
+        .Select(x => new ZptXmlElement(x, this.SourceFile, this.OwnerDocument))
         .ToArray();
     }
 
@@ -461,7 +461,7 @@ namespace CSF.Zpt.Rendering
 
       return this.Node.SelectNodes(query, nsManager)
         .Cast<XmlNode>()
-        .Select(x => new ZptXmlElement(x, this.SourceFile))
+        .Select(x => new ZptXmlElement(x, this.SourceFile, this.OwnerDocument))
         .ToArray();
     }
 
@@ -514,7 +514,7 @@ namespace CSF.Zpt.Rendering
 
       foreach(var item in toRemove)
       {
-        new ZptXmlElement(item, this.SourceFile).Omit();
+        new ZptXmlElement(item, this.SourceFile, this.OwnerDocument).Omit();
       }
     }
 
@@ -628,7 +628,7 @@ namespace CSF.Zpt.Rendering
     {
       var clone = _node.Clone();
 
-      return new ZptXmlElement(clone, this.SourceFile, this.IsRoot, true);
+      return new ZptXmlElement(clone, this.SourceFile, this.OwnerDocument, this.IsRoot, true);
     }
 
     /// <summary>
@@ -668,7 +668,7 @@ namespace CSF.Zpt.Rendering
 
       return children
         .Where(x => x.NodeType == XmlNodeType.Element)
-        .Select(x => new ZptXmlElement(x, this.SourceFile))
+        .Select(x => new ZptXmlElement(x, this.SourceFile, this.OwnerDocument))
         .ToArray();
     }
 
@@ -799,10 +799,12 @@ namespace CSF.Zpt.Rendering
     /// <param name="sourceFile">Information about the element's source file.</param>
     /// <param name="isRoot">Whether or not this is the root element.</param>
     /// <param name="isImported">Whether or not this element is imported.</param>
+    /// <param name="ownerDocument">The ZPT document which owns the element.</param>
     public ZptXmlElement(XmlNode node,
                          SourceFileInfo sourceFile,
+                         IZptDocument ownerDocument,
                          bool isRoot = false,
-                         bool isImported = false) : base(sourceFile, isRoot, isImported)
+                         bool isImported = false) : base(sourceFile, isRoot, isImported, ownerDocument)
     {
       if(node == null)
       {

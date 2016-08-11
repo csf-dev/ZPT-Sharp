@@ -165,6 +165,7 @@ namespace CSF.Zpt.Rendering
         var parent = this.GetParent();
         return new ZptHtmlElement(parent.ReplaceChild(repl.Node, this.Node),
                                 repl.SourceFile,
+                                OwnerDocument,
                                 isImported: true);
       }
       catch(InvalidOperationException)
@@ -172,6 +173,7 @@ namespace CSF.Zpt.Rendering
         this.Node.Remove();
         return new ZptHtmlElement(repl.Node,
                                   repl.SourceFile,
+                                OwnerDocument,
                                   isImported: true);
       }
     }
@@ -195,7 +197,7 @@ namespace CSF.Zpt.Rendering
 
       return newNodes
         .Where(x => x.NodeType == HtmlNodeType.Element)
-        .Select(x => new ZptHtmlElement(x, this.SourceFile))
+        .Select(x => new ZptHtmlElement(x, this.SourceFile, this.OwnerDocument))
         .ToArray();
     }
 
@@ -256,7 +258,7 @@ namespace CSF.Zpt.Rendering
       }
 
       var output = this.Node.InsertBefore(newChildElement.Node, existingNode);
-      return new ZptHtmlElement(output, newChild.SourceFile, isImported: true);
+      return new ZptHtmlElement(output, newChild.SourceFile, this.OwnerDocument, isImported: true);
     }
 
     /// <summary>
@@ -285,7 +287,7 @@ namespace CSF.Zpt.Rendering
       }
 
       var output = this.Node.InsertAfter(newChildElement.Node, existingElement.Node);
-      return new ZptHtmlElement(output, newChild.SourceFile, isImported: true);
+      return new ZptHtmlElement(output, newChild.SourceFile, this.OwnerDocument, isImported: true);
     }
 
     /// <summary>
@@ -295,7 +297,7 @@ namespace CSF.Zpt.Rendering
     public override ZptElement GetParentElement()
     {
       var parent = this.Node.ParentNode;
-      return (parent != null && parent.NodeType == HtmlNodeType.Element)? new ZptHtmlElement(parent, this.SourceFile) : null;
+      return (parent != null && parent.NodeType == HtmlNodeType.Element)? new ZptHtmlElement(parent, this.SourceFile, this.OwnerDocument) : null;
     }
 
     /// <summary>
@@ -306,7 +308,7 @@ namespace CSF.Zpt.Rendering
     {
       return this.Node.ChildNodes
         .Where(x => x.NodeType == HtmlNodeType.Element)
-        .Select(x => new ZptHtmlElement(x, this.SourceFile))
+        .Select(x => new ZptHtmlElement(x, this.SourceFile, this.OwnerDocument))
         .ToArray();
     }
 
@@ -419,7 +421,7 @@ namespace CSF.Zpt.Rendering
       return (from node in this.Node.Descendants()
               from attrib in node.Attributes
               where attrib.Name == attribName
-              select new ZptHtmlElement(node, this.SourceFile))
+              select new ZptHtmlElement(node, this.SourceFile, this.OwnerDocument))
         .ToArray();
     }
 
@@ -469,7 +471,7 @@ namespace CSF.Zpt.Rendering
 
       foreach(var item in toRemove)
       {
-        new ZptHtmlElement(item, this.SourceFile).Omit();
+        new ZptHtmlElement(item, this.SourceFile, this.OwnerDocument).Omit();
       }
     }
 
@@ -540,7 +542,7 @@ namespace CSF.Zpt.Rendering
     {
       var clone = this.Node.Clone();
 
-      return new ZptHtmlElement(clone, this.SourceFile, this.IsRoot, true) {
+      return new ZptHtmlElement(clone, this.SourceFile, this.OwnerDocument, this.IsRoot, true) {
         _filePosition = _filePosition.HasValue? _filePosition : this.Node.Line,
       };
     }
@@ -591,7 +593,7 @@ namespace CSF.Zpt.Rendering
 
       return children
         .Where(x => x.NodeType == HtmlNodeType.Element)
-        .Select(x => new ZptHtmlElement(x, this.SourceFile))
+        .Select(x => new ZptHtmlElement(x, this.SourceFile, this.OwnerDocument))
         .ToArray();
     }
 
@@ -749,10 +751,12 @@ namespace CSF.Zpt.Rendering
     /// <param name="sourceFile">Information about the element's source file.</param>
     /// <param name="isRoot">Whether or not this is the root element.</param>
     /// <param name="isImported">Whether or not this element is imported.</param>
+    /// <param name="ownerDocument">The ZPT document which owns the element.</param>
     public ZptHtmlElement(HtmlNode node,
-                       SourceFileInfo sourceFile,
-                       bool isRoot = false,
-                       bool isImported = false) : base(sourceFile, isRoot, isImported)
+                          SourceFileInfo sourceFile,
+                          IZptDocument ownerDocument,
+                          bool isRoot = false,
+                          bool isImported = false) : base(sourceFile, isRoot, isImported, ownerDocument)
     {
       if(node == null)
       {

@@ -5,6 +5,7 @@ using Test.CSF.Zpt.Rendering;
 using Moq;
 using System.Reflection;
 using CSF.Reflection;
+using CSF.Zpt;
 using Test.CSF.Zpt.Util;
 using CSF.Zpt.Metal;
 using Ploeh.AutoFixture;
@@ -66,10 +67,10 @@ namespace Test.CSF.Zpt.Metal
     {
       // Arrange
       var sourceFile = Mock.Of<SourceFileInfo>();
-      var document = new ZptXmlElement(_documentOne.DocumentElement, sourceFile);
-      var macroOne = new ZptXmlElement(_documentTwo.DocumentElement.ChildNodes[0], sourceFile);
-      var macroTwo = new ZptXmlElement(_documentTwo.DocumentElement.ChildNodes[1], sourceFile);
-      var macroBase = new ZptXmlElement(_documentTwo.DocumentElement.ChildNodes[2], sourceFile);
+      var document = new ZptXmlElement(_documentOne.DocumentElement, sourceFile, Mock.Of<IZptDocument>());
+      var macroOne = new ZptXmlElement(_documentTwo.DocumentElement.ChildNodes[0], sourceFile, Mock.Of<IZptDocument>());
+      var macroTwo = new ZptXmlElement(_documentTwo.DocumentElement.ChildNodes[1], sourceFile, Mock.Of<IZptDocument>());
+      var macroBase = new ZptXmlElement(_documentTwo.DocumentElement.ChildNodes[2], sourceFile, Mock.Of<IZptDocument>());
 
       _model.AddLocal("macro-one", macroOne);
       _model.AddLocal("macro-two", macroTwo);

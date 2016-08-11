@@ -12,6 +12,7 @@ namespace CSF.Zpt.Rendering
 
     private SourceFileInfo _sourceFile;
     private bool _isRoot, _isImported;
+    private IZptDocument _ownerDocument;
 
     #endregion
 
@@ -75,6 +76,14 @@ namespace CSF.Zpt.Rendering
     /// </summary>
     /// <value><c>true</c> if this instance can write a comment node if it does not have a parent; otherwise, <c>false</c>.</value>
     public abstract bool CanWriteCommentWithoutParent { get; }
+
+    /// <summary>
+    /// Gets the <see cref="IZptDocument"/> instance to which the current instance belongs.
+    /// </summary>
+    public virtual IZptDocument OwnerDocument
+    {
+        get { return _ownerDocument; }
+    }
 
     #endregion
 
@@ -414,18 +423,25 @@ namespace CSF.Zpt.Rendering
     /// <param name="sourceFile">Information about the element's source file.</param>
     /// <param name="isRoot">Whether or not this is the root element.</param>
     /// <param name="isImported">Whether or not this element is imported.</param>
+    /// <param name="ownerDocument">The ZPT document which owns the element.</param>
     public ZptElement(SourceFileInfo sourceFile,
                       bool isRoot,
-                      bool isImported)
+                      bool isImported,
+                      IZptDocument ownerDocument)
     {
       if(sourceFile == null)
       {
         throw new ArgumentNullException(nameof(sourceFile));
       }
+        if(ownerDocument == null)
+        {
+            throw new ArgumentNullException(nameof(ownerDocument));
+        }
 
       _sourceFile = sourceFile;
       _isRoot = isRoot;
       _isImported = isImported;
+      _ownerDocument = ownerDocument;
     }
 
     #endregion
