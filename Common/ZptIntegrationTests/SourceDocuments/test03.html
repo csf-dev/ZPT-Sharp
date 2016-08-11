@@ -1,0 +1,9 @@
+<p>
+  <span tal:define="local x string:hello brave new world">
+    <span tal:content="text local:x">outer variable x, first appearance</span>
+    <span tal:define="local x string:goodbye cruel world">
+      <span tal:content="text local:x">inner variable x</span>
+    </span>
+    <span tal:content="text local:x">outer variable x, second appearance</span>
+  </span>
+</p>

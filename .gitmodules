@@ -1,0 +1,3 @@
+[submodule "CSF"]
+	path = CSF
+	url = https://github.com/csf-dev/CSF.Core.git

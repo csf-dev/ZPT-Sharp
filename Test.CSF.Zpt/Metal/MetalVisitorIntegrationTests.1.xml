@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<root xmlns="http://ns.csf-dev.com/sample" xmlns:metal="http://xml.zope.org/namespaces/metal">
+  <ele metal:use-macro="macro-one">
+    <foo />
+    <bar metal:fill-slot="slot-one">Macro one, slot one content</bar>
+    <foo />
+    <bar metal:fill-slot="slot-two">Macro one, slot two content</bar>
+    <foo />
+  </ele>
+  <foo />
+  <ele metal:use-macro="macro-two">
+    <foo />
+    <bar metal:fill-slot="slot-one">Macro two, slot one content</bar>
+    <foo />
+    <bar metal:fill-slot="slot-two">Macro two, slot two content</bar>
+    <foo />
+  </ele>
+</root>

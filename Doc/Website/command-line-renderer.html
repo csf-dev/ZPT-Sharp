@@ -1,0 +1,147 @@
+<!doctype html>
+<html tal:define="activePage string:command_line_renderer">
+<head metal:use-macro="documents/Shared/general-page.html/macros/common_document_head">
+<meta charset="utf-8">
+<title metal:fill-slot="document_title">The ZPT-Sharp command-line renderer</title>
+<base href="." />
+<style type="text/css">
+@import url(css/styles.css);
+@import url(css/dummy.css);
+</style>
+<script type="text/javascript" src="js/modernizr.min.js"></script>
+<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.4.0/styles/default.min.css">
+<script src="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.4.0/highlight.min.js"></script>
+<script>
+hljs.initHighlightingOnLoad();
+</script>
+</head>
+<body metal:use-macro="documents/Shared/general-page.html/macros/common_document_body" class="page_command_line_renderer">
+<div class="content_wrapper">
+  <header class="page_header dummy">
+    Dummy content
+  </header>
+  <div class="main_page_area">
+    <nav>
+      <h2>Navigation menu</h2>
+      <ul class="active_introduction dummy">
+        <li class="introduction"><a href=".">Introduction</a></li>
+        <li class="other_page"><a href="dummy.html">Dummy page</a></li>
+      </ul>
+    </nav>
+    <section class="main_page_content" metal:fill-slot="main_page_content">
+      <header>
+        <h1>The command-line renderer</h1>
+      </header>
+      <p>
+        ZPT-Sharp bundles a command-line utility to build simple pages (or directories containing page files)
+        with simple models.
+      </p>
+      <h2>Usage statement</h2>
+      <p>
+        For now, here is a copy of the output which is displayed when executing the renderer with just the
+        <code>--help</code> parameter.
+      </p>
+      <pre>----------------------
+ZPT-Sharp Page Builder
+----------------------
+
+Usage:  ZptBuilder.exe [options] [inputs]
+
+If inputs are omitted or are "-" then the application reads from standard input.  Where
+inputs are provided in the commandline, they may be one or more of file and/or directory
+paths.  File paths cause the single file to be rendered, wheras directory paths trigger
+a search for input files.
+
+In the case where the input contains one or more directories, where the --output option is
+also used and set to a directory, each rendered file is written to a path within the output
+directory relative to its path within the input directory.  For example:
+
+  ZptBuilder.exe --output "output/" "dir/input/"
+
+The output might be as such (assuming the following files contained in the input
+directory):
+
+  Input files                 Output paths
+  -----------                 ------------
+  dir/input/foo.pt            output/foo.html
+  dir/input/bar.pt            output/bar.html
+  dir/input/sub/sub-foo.pt    output/sub/sub-foo.html
+
+Supported options
+-----------------
+
+  --help, -h                            Print this usage statement and exit.
+
+  --html, -t                            Operate in HTML mode, input and output are
+                                        treated as HTML, regardless of file extension.
+  
+  --xml, -x                             Operate in XML mode, input and output are treated
+                                        as XML, regardless of file extension.
+  
+  --annotate                            Enable source annotation in output; comments will
+                                        be added indicating points at which elements are
+                                        imported from other files.
+                      
+  --no-xml-declaration                  Omit the &lt;?xml?&gt; declaration in output
+                                        files.  Only applicable when the input/output is
+                                        treated as XML.
+                              
+  --no-indent-xml                       Do not pretty-format XML output (by default output
+                                        is indented for human readability).  Only
+                                        applicable when the input/output is treated as
+                                        XML.
+                              
+  --xml-indent-chars=CHARS              Sets the character string with which to indent XML
+                                        output. By default this is two spaces: "  ".
+                                        Only applicable when the input/output is treated
+                                        as XML, and only if --no-indent-xml is not used.
+                              
+  --input-filename-pattern=PATTERN,     Sets the filename matching pattern for recognising
+  -p PATTERN                            input files.  Only applicable for inputs which are
+                                        directories and not files (or standard input).
+                                        Files matching this shell pattern are selected for
+                                        rendering, those which do not match are not.
+  
+  --output=LOCATION, -o LOCATION        Defines the output location.  If omitted then
+                                        output is rendered to standard output.  If given
+                                        as a filename then output is sent to the given
+                                        file.  If given as a directory, a file will be
+                                        created in this directory for each input file
+                                        processed.
+  
+  --output-filename-extension=EXT,      Overrides the file extension for which to write
+  -e EXT                                output files.  By default this is determined
+                                        automatically based upon the processing mode (HTML
+                                        or XML).
+  
+  --ignore=PATH, -i PATH                When any inputs are directories, the given paths
+                                        are ignored when searching for files to process.
+                                        Multiple paths may be separated by semicolon: ";"
+                                        characters.
+  
+  --keyword-options=KEY_VALUE_PAIRS     Sets ZPT keyword options.  This is performed in
+                                        the format "keyone=valueone;keytwo=valuetwo" etc.
+  
+  --rendering-context-factory=CLASS     Overrides the default implementation of
+                                        CSF.Zpt.Rendering.IRenderingContextFactory
+                                        to use when creating rendering contexts, by
+                                        providing an assembly-qualified name of the class
+                                        to use.
+  
+  --output-encoding=ENCODING,           Sets the output character encoding to use.  By
+  -n ENCODING                           default the UTF-8 encoding is used.  Any encoding
+                                        'web name' may be specified here.
+  
+  --context-visitors=CLASSES            Overrides the default implementations of
+                                        CSF.Zpt.Rendering.IContextVisitor
+                                        to use when rendering documents.  This is an
+                                        ordered list of assembly-qualified names,
+                                        separated by semicolons: ";".</pre>
+    </section>
+  </div>
+</div>
+<footer class="page_footer dummy">
+  Dummy content
+</footer>
+</body>
+</html>

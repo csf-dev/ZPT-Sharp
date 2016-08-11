@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{16E957BB-347C-4EE1-815F-19AC296FB9E0}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>CSF.Zpt</RootNamespace>
+    <AssemblyName>CSF.Zpt</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <ReleaseVersion>0.3.0</ReleaseVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug</OutputPath>
+    <DefineConstants>DEBUG;</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+    <CheckForOverflowUnderflow>true</CheckForOverflowUnderflow>
+    <DocumentationFile>bin\Debug\CSF.Zpt.xml</DocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>none</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+    <DocumentationFile>..\bin\Release\CSF.Zpt.xml</DocumentationFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="HtmlAgilityPack">
+      <HintPath>..\packages\HtmlAgilityPack.1.4.9\lib\Net45\HtmlAgilityPack.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Web" />
+    <Reference Include="log4net">
+      <HintPath>..\packages\log4net.2.0.3\lib\net40-full\log4net.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AssemblyInfo.cs" />
+    <Compile Include="..\Common\CommonAssemblyInfo.cs">
+      <Link>CommonAssemblyInfo.cs</Link>
+    </Compile>
+    <Compile Include="ZptHtmlDocument.cs" />
+    <Compile Include="ZptXmlDocument.cs" />
+    <Compile Include="Rendering\ElementExtensions.cs" />
+    <Compile Include="Rendering\ZptHtmlAttribute.cs" />
+    <Compile Include="Rendering\ZptHtmlElement.cs" />
+    <Compile Include="Rendering\ZptXmlElement.cs" />
+    <Compile Include="Rendering\ZptXmlAttribute.cs" />
+    <Compile Include="Metal\MacroExpander.cs" />
+    <Compile Include="Metal\MacroFinder.cs" />
+    <Compile Include="Metal\MetalVisitor.cs" />
+    <Compile Include="Tal\TalVisitor.cs" />
+    <Compile Include="Tal\IAttributeHandler.cs" />
+    <Compile Include="Tal\AttributesAttributeHandler.cs" />
+    <Compile Include="Tal\RepeatAttributeHandler.cs" />
+    <Compile Include="Tal\OnErrorAttributeHandler.cs" />
+    <Compile Include="Tal\OmitTagAttributeHandler.cs" />
+    <Compile Include="Tal\DefineAttributeHandler.cs" />
+    <Compile Include="Tal\ContentOrReplaceAttributeHandler.cs" />
+    <Compile Include="Tal\ConditionAttributeHandler.cs" />
+    <Compile Include="Tal\AttributeHandlingResult.cs" />
+    <Compile Include="Tales\TalesModel.cs" />
+    <Compile Include="Tales\PathExpressionEvaluator.cs" />
+    <Compile Include="Tales\StringExpressionEvaluator.cs" />
+    <Compile Include="Tales\NotExpressionEvaluator.cs" />
+    <Compile Include="Tales\ExpressionEvaluatorBase.cs" />
+    <Compile Include="Tales\IEvaluatorRegistry.cs" />
+    <Compile Include="Tales\SimpleEvaluatorRegistry.cs" />
+    <Compile Include="Tales\PathComponent.cs" />
+    <Compile Include="Tales\Path.cs" />
+    <Compile Include="Tales\PathPart.cs" />
+    <Compile Include="Tales\PathWalker.cs" />
+    <Compile Include="Tales\ObjectTraverser.cs" />
+    <Compile Include="Tales\TraversalWrapper`1.cs" />
+    <Compile Include="Tales\TraversalWrapper.cs" />
+    <Compile Include="Tales\FuncByRef.cs" />
+    <Compile Include="Tales\BuiltinContextsContainer.cs" />
+    <Compile Include="Rendering\RepetitionInfoCollection.cs" />
+    <Compile Include="Rendering\ContextualisedRepetitionSummaryWrapper.cs" />
+    <Compile Include="Tales\TalesRenderingContextFactory.cs" />
+    <Compile Include="Rendering\ContextVisitorBase.cs" />
+    <Compile Include="ZptDocumentFactory.cs" />
+    <Compile Include="Tales\FilesystemDirectory.cs" />
+    <Compile Include="Tales\TemplateDirectory.cs" />
+    <Compile Include="Tales\EnumerableObjectWrapperWithNamedItems.cs" />
+    <Compile Include="LocalXhtmlXmlResolver.cs" />
+    <Compile Include="Tales\LocalVariablePathExpressionEvaluator.cs" />
+    <Compile Include="Rendering\RenderingContextExtensions.cs" />
+    <Compile Include="Tal\TalTidyUpVisitor.cs" />
+    <Compile Include="Metal\MetalTidyUpVisitor.cs" />
+    <Compile Include="Rendering\NoOpVisitor.cs" />
+    <Compile Include="Rendering\UnknownSourceFileInfo.cs" />
+    <Compile Include="Rendering\Model.cs" />
+    <Compile Include="Rendering\DefaultRenderingOptions.cs" />
+    <Compile Include="Rendering\RepetitionInfo.cs" />
+    <Compile Include="Resources\ExceptionMessages.Designer.cs">
+      <DependentUpon>ExceptionMessages.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Tales\ExpressionFactory.cs" />
+    <Compile Include="ZptDocument.cs" />
+    <Compile Include="Metal\MetalMacro.cs" />
+    <Compile Include="Metal\MetalMacroCollection.cs" />
+    <Compile Include="Rendering\RenderingContextFactoryFactory.cs" />
+    <Compile Include="Rendering\ContextVisitorFactory.cs" />
+    <Compile Include="Rendering\NamedObjectWrapper.cs" />
+    <Compile Include="Metal\SourceAnnotator.cs" />
+    <Compile Include="Resources\LogMessageFormats.Designer.cs">
+      <DependentUpon>LogMessageFormats.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Rendering\SourceFileInfo.cs" />
+    <Compile Include="Rendering\AbstractSourceInfo.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <ItemGroup>
+    <ProjectReference Include="..\CSF\CSF\CSF.csproj">
+      <Project>{E563D7BC-1AB1-4AFB-8533-51315437C6E6}</Project>
+      <Name>CSF</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CSF.Zpt.Api\CSF.Zpt.Api.csproj">
+      <Project>{8207CD9B-F1C1-4D75-B250-ACDFFBDCB071}</Project>
+      <Name>CSF.Zpt.Api</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Tales\" />
+    <Folder Include="Tal\" />
+    <Folder Include="Rendering\" />
+    <Folder Include="Metal\" />
+    <Folder Include="Resources\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\xhtml1-frameset.dtd">
+      <LogicalName>xhtml1-frameset.dtd</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\xhtml1-strict.dtd">
+      <LogicalName>xhtml1-strict.dtd</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\xhtml1-transitional.dtd">
+      <LogicalName>xhtml1-transitional.dtd</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\xhtml11.dtd">
+      <LogicalName>xhtml11.dtd</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\xhtml-lat1.ent">
+      <LogicalName>xhtml-lat1.ent</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\xhtml-special.ent">
+      <LogicalName>xhtml-special.ent</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\xhtml-symbol.ent">
+      <LogicalName>xhtml-symbol.ent</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\ExceptionMessages.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>ExceptionMessages.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\LogMessageFormats.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>LogMessageFormats.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+</Project>

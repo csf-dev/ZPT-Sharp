@@ -1,0 +1,12 @@
+bin/
+obj/
+logs/
+TestResult.xml
+TestResult.formatted.xml
+packages/*/
+*.VisualState.xml
+*.userprefs
+*.orig
+*.directory
+CSF.Zpt.zip
+CSF.Zpt.tar.gz

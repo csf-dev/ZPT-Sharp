@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Default</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ItemType>GenericProject</ItemType>
+    <ProjectGuid>{8C70BC60-86DD-4326-93F1-22B609EF3376}</ProjectGuid>
+    <ReleaseVersion>0.3.0</ReleaseVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Default|AnyCPU' ">
+    <OutputPath>.</OutputPath>
+  </PropertyGroup>
+  <Target Name="Build" />
+  <ItemGroup>
+    <None Include="asp-net-mvc-view-engine.html" />
+    <None Include="command-line-renderer.html" />
+    <None Include="index.html" />
+    <None Include="page-rendering-api.html" />
+    <None Include="Website.mdproj" />
+    <None Include="writing-pages-using-zpt.html" />
+    <None Include="css\content.css" />
+    <None Include="css\dummy.css" />
+    <None Include="css\introduction.css" />
+    <None Include="css\page.css" />
+    <None Include="css\reset.css" />
+    <None Include="css\styles.css" />
+    <None Include="css\tal_content_or_replace.css" />
+    <None Include="js\modernizr.min.js" />
+    <None Include="metal\define-fill-slot.html" />
+    <None Include="metal\define-use-macro.html" />
+    <None Include="metal\extend-macro.html" />
+    <None Include="metal\introduction.html" />
+    <None Include="Shared\empty-page.html" />
+    <None Include="Shared\general-page.html" />
+    <None Include="Shared\navigation.html" />
+    <None Include="tal\attributes.html" />
+    <None Include="tal\condition.html" />
+    <None Include="tal\content-replace.html" />
+    <None Include="tal\define.html" />
+    <None Include="tal\introduction.html" />
+    <None Include="tal\omit-tag.html" />
+    <None Include="tal\on-error.html" />
+    <None Include="tal\repeat.html" />
+    <None Include="tales\boolean-coercion.html" />
+    <None Include="tales\built-in-variables.html" />
+    <None Include="tales\cancellation.html" />
+    <None Include="tales\introduction.html" />
+    <None Include="tales\not-expressions.html" />
+    <None Include="tales\path-expressions.html" />
+    <None Include="tales\repeat-variables.html" />
+    <None Include="tales\string-expressions.html" />
+    <None Include="..\build-doc-website">
+      <Link>build-doc-website</Link>
+    </None>
+  </ItemGroup>
+</Project>

@@ -1,0 +1,110 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      metal:use-macro="Views/Shared/base-template/macros/document-structure">
+<head>
+<title metal:fill-slot="title">Zope Page Templates for .NET</title>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<base href="." />
+<style>
+@import url(static/css/default-styles.css);
+</style>
+</head>
+<body>
+<div class="page">
+  <div class="region_header dummy">
+    Header content is imported here
+  </div>
+  <div class="region_main">
+    <div class="main_navigation">
+      <div class="dummy">
+        Main navigation is imported here
+      </div>
+    </div>
+    <div class="region_content index" metal:fill-slot="region_content">
+      <h1>Zope Page Templates for .NET</h1>
+      <p>
+        Zope Page Templates (ZPT) is a neat attribute-based template language for creating XHTML and HTML5 documents
+        from dynamic data.  From an
+        <a href="http://www.asp.net/mvc" title="ASP.NET MVC website">ASP.NET MVC</a>
+        perspective, ZPT-Sharp is a customised <code>ViewEngine</code> that would be used instead of the default 'aspx'
+        ViewEngine.
+      </p>
+      <h2>What makes ZPT so great?</h2>
+      <p>
+        The best way to describe why ZPT is such a zen templating language is to suggest you take a look at the
+        <a href="example.html" title="Example ZPT document">ZPT example</a> and see for yourself.
+        Some of the more exciting advantages it offers over the classic ASP.NET templating engine though are:
+      </p>
+      <ul>
+        <li>
+          Raw ZPT source files are themselves valid XHTML (or HTML5) documents; all of the logic of the ZPT language
+          is handled by well-formed XML attributes.  This means that the source files can be rendered by web browsers
+          and editing tools 'offline' from the web application.
+        </li>
+        <li>
+          There is no code and no obscure/ugly placeholder content visible when the source files are viewed 'offline'
+          in a web browser or editing tool (unlike aspx's <code>&lt;% %&gt;</code> and <code>&lt;# #&gt;</code>).  If 
+          you wish to provide placeholder content for dynamic data, this placeholder content can be anything you choose
+          (the placeholder content is replaced when the page is rendered by the ZPT engine).
+        </li>
+        <li>
+          ZPT is very MVC-oriented and does not try to provide functionality beyond that which is needed for the role
+          of a view.  It encourages best practice and does not allow you to mix business logic directly into your
+          markup.
+        </li>
+        <li>
+          The syntax is easy to learn and should be intuitively legible to almost everybody.
+        </li>
+      </ul>
+      <h2>So what's a Zope anyway?</h2>
+      <p>
+        <a href="http://www.zope.org/" title="Zope project website">Zope</a> is an open source web application framework
+        written in <a href="http://www.python.org/" title="The python programming language">Python</a>.
+        A crude parallel would be to think of Zope as equivalent to the .NET framework plus
+        <acronym title="Internet Information Services">IIS</acronym> together, along with a built-in
+        <a href="https://secure.wikimedia.org/wikipedia/en/wiki/Zope_Object_Database"
+           title="The Zope Object Database">object database</a>
+        and a web-management front-end.  The ZPT language was originally developed as a feature of Zope but it does
+        not depend on Zope to function.
+      </p>
+      <h2>Sweet, how do I get started?</h2>
+      <p>
+        Here are some suggesting starting points for getting to know and love ZPT, depending on what you want to do
+        with it.
+      </p>
+      <ul class="what_next">
+        <li class="mvc">
+          <h3><a href="quickstart-mvc.html">Using ZPT with ASP.NET MVC</a></h3>
+          <p>
+            ZPT Sharp provides a ViewEngine compatible with ASP.NET MVCv2 and up.
+          </p>
+        </li>
+        <li class="pagebuilder">
+          <h3><a href="page-builder/quickstart.html">Using ZPT to build static HTML pages</a></h3>
+          <p>
+            Not running a web framework?  ZPT can still help you assemble websites of content dynamically.
+          </p>
+        </li>
+        <li class="syntax">
+          <h3><a href="quickstart-syntax.html">ZPT syntax tutorial</a></h3>
+          <p>
+            A tutorial for the ZPT syntax; how to write and manipulate ZPT documents.
+          </p>
+        </li>
+        <li class="api">
+          <h3><a href="quickstart-api.html">Learning the ZPT-Sharp API</a></h3>
+          <p>
+            Developing applications that use ZPT.
+          </p>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="region_footer dummy">
+    Footer content is imported here
+  </div>
+</div>
+</body>
+</html>
