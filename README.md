@@ -6,8 +6,12 @@ intended for eventual use as an ASP.NET MVC ViewEngine
 
 ---
 
-The current state of this project is that it is undergoing a rewrite from scratch.  Whilst
-parts worked in the original version, there were some serious deficiencies which must be
-addressed.  I do not suggest trying to use that previous version, as it contains
-some serious showstopper bugs which are all-but unfixable within the architecture in which
-it was designed.
+Documentation available at http://csf-dev.github.io/ZPT-Sharp/
+
+This project is in-development and as-yet the API is not fully stabilised,
+feel free to explore, but please don't use in production just-yet.
+
+---
+
+All code is released under the permissive MIT license.
+Copyright © 2016 CSF Software Limited et al.
