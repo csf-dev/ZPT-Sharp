@@ -101,3 +101,27 @@ body > .content_wrapper:after {
   padding-bottom: 1px;
   border-bottom: 1px solid #000;
 }
+
+@media (max-width: 1059px) {
+  .page_header {
+    padding: 0.2em 0.4em;
+  }
+  .main_page_area {
+    margin: 1em 0;
+  }
+  .main_page_area > nav {
+    display: none;
+  }
+  .main_page_content {
+    margin: 0 10px;
+    max-width: none;
+    width: auto;
+    font-size: 80%;
+  }
+  body > .content_wrapper:after {
+    height: 51px
+  }
+  .page_footer {
+    padding: 5px 0.4em;
+  }
+}
