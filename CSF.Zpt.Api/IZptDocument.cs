@@ -38,7 +38,7 @@ namespace CSF.Zpt
     /// Gets information about the source file for the current instance.
     /// </summary>
     /// <returns>The file info.</returns>
-    SourceFileInfo GetSourceFileInfo();
+    ISourceInfo GetSourceFileInfo();
   }
 }
 

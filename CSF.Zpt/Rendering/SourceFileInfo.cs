@@ -6,22 +6,32 @@ namespace CSF.Zpt.Rendering
   /// <summary>
   /// Provides information about the source file from which an <see cref="ZptElement"/> is derived.
   /// </summary>
-  public class SourceFileInfo : IEquatable<SourceFileInfo>
+  public class SourceFileInfo : ISourceInfo
   {
     #region fields
 
     private FileInfo _osFile;
-    private string _abstractPath;
 
     #endregion
 
     #region properties
 
     /// <summary>
+    /// Gets the filename of the current source file.
+    /// </summary>
+    /// <returns>The filename.</returns>
+    public virtual string FullName
+    {
+      get {
+        return this.FileInfo.FullName;
+      }
+    }
+
+    /// <summary>
     /// Gets a reference to the operating system file represented by the current instance.
     /// </summary>
     /// <value>The file info.</value>
-    protected FileInfo FileInfo
+    public virtual FileInfo FileInfo
     {
       get {
         return _osFile;
@@ -31,24 +41,6 @@ namespace CSF.Zpt.Rendering
     #endregion
 
     #region methods
-
-    /// <summary>
-    /// Gets the filename of the current source file.
-    /// </summary>
-    /// <returns>The filename.</returns>
-    public virtual string GetFullName()
-    {
-      return (this.FileInfo != null)? this.FileInfo.FullName : _abstractPath;
-    }
-
-    /// <summary>
-    /// Gets a <c>System.IO.FileInfo</c> from the current instance.
-    /// </summary>
-    /// <returns>The file info.</returns>
-    public virtual FileInfo GetFileInfo()
-    {
-      return this.FileInfo;
-    }
 
     /// <summary>
     /// Determines whether the specified <see cref="System.Object"/> is equal to the current
@@ -62,6 +54,17 @@ namespace CSF.Zpt.Rendering
     /// The <see cref="System.Object"/> to compare with the current <see cref="CSF.Zpt.Rendering.SourceFileInfo"/>.
     /// </param>
     public override bool Equals(object obj)
+    {
+      return this.Equals(obj as SourceFileInfo);
+    }
+
+    /// <summary>
+    /// Determines whether the specified <see cref="CSF.Zpt.Rendering.ISourceInfo"/> is equal to the current <see cref="CSF.Zpt.Rendering.SourceFileInfo"/>.
+    /// </summary>
+    /// <param name="obj">The <see cref="CSF.Zpt.Rendering.ISourceInfo"/> to compare with the current <see cref="CSF.Zpt.Rendering.SourceFileInfo"/>.</param>
+    /// <returns><c>true</c> if the specified <see cref="CSF.Zpt.Rendering.ISourceInfo"/> is equal to the current
+    /// <see cref="CSF.Zpt.Rendering.SourceFileInfo"/>; otherwise, <c>false</c>.</returns>
+    public virtual bool Equals(ISourceInfo obj)
     {
       return this.Equals(obj as SourceFileInfo);
     }
@@ -92,14 +95,7 @@ namespace CSF.Zpt.Rendering
       }
       else
       {
-        if(this.FileInfo != null)
-        {
-          output = obj.FileInfo == this.FileInfo;
-        }
-        else
-        {
-          output = obj._abstractPath == _abstractPath;
-        }
+        output = obj.FileInfo == this.FileInfo;
       }
 
       return output;
@@ -114,17 +110,12 @@ namespace CSF.Zpt.Rendering
     /// </returns>
     public override int GetHashCode()
     {
-      return (this.FileInfo != null)? this.FileInfo.GetHashCode() : _abstractPath.GetHashCode();
+      return this.FileInfo.GetHashCode();
     }
 
     #endregion
 
     #region constructors
-
-    /// <summary>
-    /// Initializes a new instance of the <see cref="CSF.Zpt.Rendering.SourceFileInfo"/> class.
-    /// </summary>
-    protected SourceFileInfo() {}
 
     /// <summary>
     /// Initializes a new instance of the <see cref="CSF.Zpt.Rendering.SourceFileInfo"/> class.
@@ -138,20 +129,6 @@ namespace CSF.Zpt.Rendering
       }
 
       _osFile = fileInfo;
-    }
-
-    /// <summary>
-    /// Initializes a new instance of the <see cref="CSF.Zpt.Rendering.SourceFileInfo"/> class.
-    /// </summary>
-    /// <param name="abstractPath">Abstract path.</param>
-    public SourceFileInfo(string abstractPath)
-    {
-      if(abstractPath == null)
-      {
-        throw new ArgumentNullException(nameof(abstractPath));
-      }
-
-      _abstractPath = abstractPath;
     }
 
     #endregion

@@ -159,7 +159,7 @@ namespace CSF.Zpt.Metal
         targetElement = targetContext.Element,
         sourceElement = replacementContext?.Element ?? targetContext.Element;
       string
-        fullFilename = targetContext.Element.SourceFile.GetFullName(),
+        fullFilename = targetContext.Element.SourceFile.FullName,
         filename,
         filePosition = useEndTagPosition? sourceElement.GetEndTagFileLocation() : sourceElement.GetFileLocation(),
         previousElement;

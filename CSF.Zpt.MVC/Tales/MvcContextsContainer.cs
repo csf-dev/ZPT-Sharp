@@ -134,9 +134,10 @@ namespace CSF.Zpt.MVC.Tales
           break;
 
         case CONTAINER:
-          var dir = currentContext.Element.OwnerDocument?.GetSourceFileInfo()?.GetFileInfo()?.Directory;
-          if(dir != null)
+          var fileInfo = currentContext.Element.OwnerDocument?.GetSourceFileInfo() as SourceFileInfo;
+          if(fileInfo != null)
           {
+            var dir = fileInfo.FileInfo.Directory;
             result = new TemplateDirectory(dir);
             output = true;
           }

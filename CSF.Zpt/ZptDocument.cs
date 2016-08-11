@@ -88,7 +88,7 @@ namespace CSF.Zpt
     /// Gets information about the source file for the current instance.
     /// </summary>
     /// <returns>The file info.</returns>
-    public abstract SourceFileInfo GetSourceFileInfo();
+    public abstract ISourceInfo GetSourceFileInfo();
 
     /// <summary>
     /// Renders the current document, returning an <see cref="ZptElement"/> representing the rendered result.
@@ -108,7 +108,7 @@ namespace CSF.Zpt
       var context = options.CreateRootContext(output);
 
       _logger.InfoFormat(Resources.LogMessageFormats.RenderingDocument,
-                         (output.SourceFile != null)? output.SourceFile.GetFullName() : "<unknown>");
+                         (output.SourceFile != null)? output.SourceFile.FullName : "<unknown>");
 
       if(contextConfigurator != null)
       {

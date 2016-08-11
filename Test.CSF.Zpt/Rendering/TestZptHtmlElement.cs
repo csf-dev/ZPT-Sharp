@@ -18,7 +18,7 @@ namespace Test.CSF.Zpt.Rendering
 
     private string _htmlSource;
     private HtmlDocument _document;
-    private SourceFileInfo _sourceFile;
+    private ISourceInfo _sourceFile;
 
     #endregion
 
@@ -28,7 +28,7 @@ namespace Test.CSF.Zpt.Rendering
     public void FixtureSetup()
     {
       _htmlSource = Assembly.GetExecutingAssembly().GetManifestResourceText(this.GetType(), "TestZptHtmlElement.html");
-      _sourceFile = Mock.Of<SourceFileInfo>();
+      _sourceFile = Mock.Of<ISourceInfo>();
     }
 
     [SetUp]

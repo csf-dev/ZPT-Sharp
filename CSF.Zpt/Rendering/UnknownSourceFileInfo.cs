@@ -5,7 +5,7 @@ namespace CSF.Zpt.Rendering
   /// <summary>
   /// Null-object implementation of <see cref="SourceFileInfo"/>, representing an unknown source file.
   /// </summary>
-  public class UnknownSourceFileInfo : SourceFileInfo
+  public class UnknownSourceFileInfo : ISourceInfo
   {
     #region constants
 
@@ -25,9 +25,11 @@ namespace CSF.Zpt.Rendering
     /// Gets the filename of the current source file.
     /// </summary>
     /// <returns>The filename.</returns>
-    public override string GetFullName()
+    public string FullName
     {
-      return NAME;
+      get {
+        return NAME;
+      }
     }
 
     /// <summary>
@@ -37,9 +39,26 @@ namespace CSF.Zpt.Rendering
     /// A hash code for this instance that is suitable for use in hashing algorithms and data structures such as a
     /// hash table.
     /// </returns>
-    public override int GetHashCode()
+    public int GetHashCode()
     {
       return 0;
+    }
+
+    /// <summary>
+    /// Determines whether the specified <see cref="System.Object"/> is equal to the current
+    /// <see cref="CSF.Zpt.Rendering.UnknownSourceFileInfo"/>.
+    /// </summary>
+    /// <param name="obj">
+    /// The <see cref="System.Object"/> to compare with the current
+    /// <see cref="CSF.Zpt.Rendering.UnknownSourceFileInfo"/>.
+    /// </param>
+    /// <returns>
+    /// <c>true</c> if the specified <see cref="System.Object"/> is equal to the current
+    /// <see cref="CSF.Zpt.Rendering.UnknownSourceFileInfo"/>; otherwise, <c>false</c>.
+    /// </returns>
+    public bool Equals(object obj)
+    {
+      return Object.ReferenceEquals(this, obj);
     }
 
     /// <summary>
@@ -54,7 +73,7 @@ namespace CSF.Zpt.Rendering
     /// <c>true</c> if the specified <see cref="CSF.Zpt.Rendering.SourceFileInfo"/> is equal to the current
     /// <see cref="CSF.Zpt.Rendering.UnknownSourceFileInfo"/>; otherwise, <c>false</c>.
     /// </returns>
-    public override bool Equals(SourceFileInfo obj)
+    public bool Equals(ISourceInfo obj)
     {
       return Object.ReferenceEquals(this, obj);
     }
@@ -84,7 +103,7 @@ namespace CSF.Zpt.Rendering
     /// Gets the default/singleton instance.
     /// </summary>
     /// <value>The instance.</value>
-    public static SourceFileInfo Instance { get { return _default; } }
+    public static ISourceInfo Instance { get { return _default; } }
 
     #endregion
   }

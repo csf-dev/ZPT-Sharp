@@ -116,6 +116,8 @@
     <Compile Include="Resources\LogMessageFormats.Designer.cs">
       <DependentUpon>LogMessageFormats.resx</DependentUpon>
     </Compile>
+    <Compile Include="Rendering\SourceFileInfo.cs" />
+    <Compile Include="Rendering\AbstractSourceInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

@@ -18,7 +18,7 @@ namespace Test.CSF.Zpt.Rendering
 
     private string _xmlSource;
     private XmlDocument _document;
-    private SourceFileInfo _sourceFile;
+    private ISourceInfo _sourceFile;
 
     #endregion
 
@@ -28,7 +28,7 @@ namespace Test.CSF.Zpt.Rendering
     public void FixtureSetup()
     {
       _xmlSource = Assembly.GetExecutingAssembly().GetManifestResourceText(this.GetType(), "TestZptXmlElement.xml");
-      _sourceFile = Mock.Of<SourceFileInfo>();
+      _sourceFile = Mock.Of<ISourceInfo>();
     }
 
     [SetUp]

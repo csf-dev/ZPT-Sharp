@@ -54,7 +54,6 @@
     <Compile Include="Tales\IExpressionEvaluator.cs" />
     <Compile Include="Tales\ITalesConvertible.cs" />
     <Compile Include="Tales\ITemplateFileFactory.cs" />
-    <Compile Include="Rendering\SourceFileInfo.cs" />
     <Compile Include="Tales\Expression.cs" />
     <Compile Include="Tales\ITalesModel.cs" />
     <Compile Include="Tales\TemplateFile.cs" />
@@ -73,6 +72,7 @@
     <Compile Include="Metal\MacroNotFoundException.cs" />
     <Compile Include="Rendering\IActionCanceller.cs" />
     <Compile Include="Rendering\CancellationToken.cs" />
+    <Compile Include="Rendering\ISourceInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

@@ -66,7 +66,7 @@ namespace Test.CSF.Zpt.Metal
     public void TestVisitRoot()
     {
       // Arrange
-      var sourceFile = Mock.Of<SourceFileInfo>();
+      var sourceFile = Mock.Of<ISourceInfo>();
       var document = new ZptXmlElement(_documentOne.DocumentElement, sourceFile, Mock.Of<IZptDocument>());
       var macroOne = new ZptXmlElement(_documentTwo.DocumentElement.ChildNodes[0], sourceFile, Mock.Of<IZptDocument>());
       var macroTwo = new ZptXmlElement(_documentTwo.DocumentElement.ChildNodes[1], sourceFile, Mock.Of<IZptDocument>());

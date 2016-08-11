@@ -16,7 +16,7 @@ namespace CSF.Zpt
     #region fields
 
     private XmlDocument _document;
-    private SourceFileInfo _sourceFile;
+    private ISourceInfo _sourceFile;
 
     #endregion
 
@@ -37,7 +37,7 @@ namespace CSF.Zpt
     /// Gets information about the document's source file.
     /// </summary>
     /// <value>The source file.</value>
-    public virtual SourceFileInfo SourceFile
+    public virtual ISourceInfo SourceFile
     {
       get {
         return _sourceFile;
@@ -96,7 +96,7 @@ namespace CSF.Zpt
     /// Gets information about the source file for the current instance.
     /// </summary>
     /// <returns>The file info.</returns>
-    public override SourceFileInfo GetSourceFileInfo()
+    public override ISourceInfo GetSourceFileInfo()
     {
       return this.SourceFile;
     }
@@ -168,7 +168,7 @@ namespace CSF.Zpt
     /// <param name="document">An XML document from which to create the current instance.</param>
     /// <param name="sourceFile">Information about the document's source file.</param>
     public ZptXmlDocument(XmlDocument document,
-                          SourceFileInfo sourceFile)
+                          ISourceInfo sourceFile)
     {
       if(document == null)
       {

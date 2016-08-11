@@ -10,7 +10,7 @@ namespace CSF.Zpt.Rendering
   {
     #region fields
 
-    private SourceFileInfo _sourceFile;
+    private ISourceInfo _sourceFile;
     private bool _isRoot, _isImported;
     private IZptDocument _ownerDocument;
 
@@ -28,7 +28,7 @@ namespace CSF.Zpt.Rendering
     /// Gets information about the source file for the current element.
     /// </summary>
     /// <value>The source file.</value>
-    public virtual SourceFileInfo SourceFile
+    public virtual ISourceInfo SourceFile
     {
       get {
         return _sourceFile;
@@ -399,11 +399,11 @@ namespace CSF.Zpt.Rendering
         string location = GetFileLocation();
         if(location != null)
         {
-          return String.Format("{0} (line {1})", SourceFile.GetFullName(), location);
+          return String.Format("{0} (line {1})", SourceFile.FullName, location);
         }
         else
         {
-          return SourceFile.GetFullName();
+          return SourceFile.FullName;
         }
       }
     }
@@ -424,7 +424,7 @@ namespace CSF.Zpt.Rendering
     /// <param name="isRoot">Whether or not this is the root element.</param>
     /// <param name="isImported">Whether or not this element is imported.</param>
     /// <param name="ownerDocument">The ZPT document which owns the element.</param>
-    public ZptElement(SourceFileInfo sourceFile,
+    public ZptElement(ISourceInfo sourceFile,
                       bool isRoot,
                       bool isImported,
                       IZptDocument ownerDocument)

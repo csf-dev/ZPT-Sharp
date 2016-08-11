@@ -753,7 +753,7 @@ namespace CSF.Zpt.Rendering
     /// <param name="isImported">Whether or not this element is imported.</param>
     /// <param name="ownerDocument">The ZPT document which owns the element.</param>
     public ZptHtmlElement(HtmlNode node,
-                          SourceFileInfo sourceFile,
+                          ISourceInfo sourceFile,
                           IZptDocument ownerDocument,
                           bool isRoot = false,
                           bool isImported = false) : base(sourceFile, isRoot, isImported, ownerDocument)
