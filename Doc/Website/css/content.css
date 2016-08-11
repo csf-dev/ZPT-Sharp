@@ -12,14 +12,14 @@
 }
 .main_page_content code {
   background: #F0F0F0;
-  border: 1px solid #FCBD9C;
+  border: 1px solid #CDC998;
 }
 .main_page_content kbd {
-  background: #CAE686;
-  border: 1px solid #91BE27;
+  background: #F2EDC0;
+  border: 1px solid #DBD057;
 }
 .main_page_content pre {
-  border: 1px solid #FCBD9C;
+  border: 1px solid #CDC998;
   background: #F0F0F0;
   padding: 0.5em;
   font-size: 80%;

@@ -2,7 +2,7 @@ html, body {
   height: 100%;
 }
 body {
-  background: #FBE2D5 none;
+  background: #EEEDDD none;
   font-family: 'Lato', sans-serif;
 }
 body > .content_wrapper {
@@ -44,12 +44,12 @@ body > .content_wrapper:after {
 }
 .main_page_area > nav {
   width: 200px;
-  background: #FAD9C7;
+  background: #E6E4CB;
   padding: 20px;
   line-height: 180%;
   font-size: 90%;
   border-radius: 15px;
-  border: 1px solid #F8C9AF;
+  border: 1px solid #CDC998;
   float: left;
   margin-bottom: 4em;
 }
@@ -81,8 +81,8 @@ body > .content_wrapper:after {
 .page_footer {
   padding: 10px 40px;
   height: 40px;
-  background: #FAD9C7;
-  border-top: 1px solid #F8C9AF;
+  background: #E6E4CB;
+  border-top: 1px solid #CDC998;
   color: #666;
   font-size: 80%;
   clear: both;
