@@ -124,9 +124,3 @@ table.zpt_attributes col.attribute {
 table.zpt_attributes col.summary {
   width: 80%;
 }
-
-@media (max-width: 1059px) {
-  .main_page_content pre {
-    font-size: 220%;
-  }
-}
