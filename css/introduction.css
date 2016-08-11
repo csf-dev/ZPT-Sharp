@@ -1,5 +1,5 @@
 body.page_introduction {
-  background: #FAD9C7 none;
+  background: #E6E4CB none;
 }
 body.page_introduction .page_header {
   display: none;
@@ -43,12 +43,12 @@ body.page_introduction .main_page_content > header em {
 body.page_introduction .main_page_content > section {
   max-width: 680px;
   margin: 0 auto;
-  background: #FBE2D5 none;
+  background: #EEEDDD none;
   padding: 40px;
   border-radius: 20px;
   margin-bottom: 60px;
   box-shadow: 3px 3px 10px 0px rgba(0,0,0,0.4);
-  border: 1px solid #F8C9AF;
+  border: 1px solid #CDC998;
 }
 body.page_introduction .main_page_content > section h2 {
   margin-top: 0.625em;
