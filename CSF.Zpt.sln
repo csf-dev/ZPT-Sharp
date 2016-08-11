@@ -26,7 +26,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Doc", "Doc", "{6328AA61-451
 EndProject
 Project("{9344BDBB-3E7F-41FC-A0DD-8665D75EE146}") = "Website", "Doc\Website\Website.mdproj", "{8C70BC60-86DD-4326-93F1-22B609EF3376}"
 EndProject
-Project("{9344BDBB-3E7F-41FC-A0DD-8665D75EE146}") = "CSF.Zpt", "CSF.Zpt.Packaging\CSF.Zpt.mdproj", "{454F2087-0EFE-492C-AE21-3AC340189010}"
+Project("{9344BDBB-3E7F-41FC-A0DD-8665D75EE146}") = "CSF.Zpt.Packaging", "CSF.Zpt.Packaging\CSF.Zpt.Packaging.mdproj", "{454F2087-0EFE-492C-AE21-3AC340189010}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
