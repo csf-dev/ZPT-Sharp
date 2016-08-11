@@ -23,6 +23,9 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSF.Zpt.MVCSample", "CSF.Zpt.MVCSample\CSF.Zpt.MVCSample.csproj", "{CBFB4AFE-D199-4F02-97E6-51EDBA911918}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Doc", "Doc", "{6328AA61-4510-42C4-B6FE-37E71FFAC3B7}"
+	ProjectSection(SolutionItems) = preProject
+		Doc\Website style guide.txt = Doc\Website style guide.txt
+	EndProjectSection
 EndProject
 Project("{9344BDBB-3E7F-41FC-A0DD-8665D75EE146}") = "Website", "Doc\Website\Website.mdproj", "{8C70BC60-86DD-4326-93F1-22B609EF3376}"
 EndProject
