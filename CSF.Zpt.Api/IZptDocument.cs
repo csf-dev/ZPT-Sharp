@@ -33,6 +33,12 @@ namespace CSF.Zpt
     /// </summary>
     /// <returns>Elements representing the METAL macros.</returns>
     ITalesPathHandler GetMacros();
+
+    /// <summary>
+    /// Gets information about the source file for the current instance.
+    /// </summary>
+    /// <returns>The file info.</returns>
+    SourceFileInfo GetSourceFileInfo();
   }
 }
 

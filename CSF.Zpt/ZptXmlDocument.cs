@@ -93,6 +93,15 @@ namespace CSF.Zpt
     }
 
     /// <summary>
+    /// Gets information about the source file for the current instance.
+    /// </summary>
+    /// <returns>The file info.</returns>
+    public override SourceFileInfo GetSourceFileInfo()
+    {
+      return this.SourceFile;
+    }
+
+    /// <summary>
     /// Renders an element to the given <c>System.IO.TextWriter</c>.
     /// </summary>
     /// <param name="writer">The text writer to render to.</param>

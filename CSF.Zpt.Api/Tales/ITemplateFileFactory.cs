@@ -30,6 +30,13 @@ namespace CSF.Zpt.Tales
                                     Encoding encoding = null,
                                     RenderingMode renderingMode = RenderingMode.AutoDetect);
 
+    /// <summary>
+    /// Creates a template file from the given ZPT document.
+    /// </summary>
+    /// <returns>The template file.</returns>
+    /// <param name="document">Document.</param>
+    TemplateFile CreateTemplateFile(IZptDocument document);
+
     #endregion
   }
 }
