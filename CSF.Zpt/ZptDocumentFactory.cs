@@ -128,6 +128,16 @@ namespace CSF.Zpt
                                                  RenderingMode renderingMode)
     {
       var document = this.CreateDocument(sourceFile, encoding, renderingMode);
+      return CreateTemplateFile(document);
+    }
+
+    /// <summary>
+    /// Creates a template file from the given ZPT document.
+    /// </summary>
+    /// <returns>The template file.</returns>
+    /// <param name="document">Document.</param>
+    public Tales.TemplateFile CreateTemplateFile(IZptDocument document)
+    {
       return new Tales.TemplateFile(document);
     }
 
@@ -241,7 +251,7 @@ namespace CSF.Zpt
     /// </summary>
     /// <param name="forceDocumentType">
     /// An optional <c>System.Type</c> indicating the type to create when using <see cref="CreateDocument"/> or
-    /// <see cref="CreateTemplateFile"/>.
+    /// <see cref="M:CreateTemplateFile(FileInfo, Encoding, RenderingMode)"/>.
     /// </param>
     public ZptDocumentFactory(Type forceDocumentType = null)
     {

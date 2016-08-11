@@ -85,6 +85,12 @@ namespace CSF.Zpt
     public abstract ITalesPathHandler GetMacros();
 
     /// <summary>
+    /// Gets information about the source file for the current instance.
+    /// </summary>
+    /// <returns>The file info.</returns>
+    public abstract SourceFileInfo GetSourceFileInfo();
+
+    /// <summary>
     /// Renders the current document, returning an <see cref="ZptElement"/> representing the rendered result.
     /// </summary>
     /// <returns>The result of the rendering process.</returns>

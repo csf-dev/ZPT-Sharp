@@ -23,6 +23,10 @@ namespace CSF.Zpt.MVC.Tales
       SERVER                  = "Server",
       SESSION_DICTIONARY      = "Session",
       TYPED_MODEL             = "Model",
+      HERE                    = "here",
+      REQUEST_LOWER           = "request",
+      TEMPLATE                = "template",
+      CONTAINER               = "container",
       VIEWS_DIRECTORY         = "Views",
       VIEWS_VIRTUAL_PATH      = "~/Views/";
 
@@ -31,6 +35,7 @@ namespace CSF.Zpt.MVC.Tales
     #region fields
 
     private ViewContext _viewContext;
+    private ITemplateFileFactory _templateFileFactory;
     private Lazy<IDictionary<string,object>> _applicationDictionary;
 
     #endregion
@@ -88,6 +93,11 @@ namespace CSF.Zpt.MVC.Tales
           output = result != null;
           break;
 
+        case REQUEST_LOWER:
+          result = ViewContext.HttpContext?.Request;
+          output = result != null;
+          break;
+
         case RESPONSE:
           result = ViewContext.HttpContext?.Response;
           output = result != null;
@@ -111,6 +121,30 @@ namespace CSF.Zpt.MVC.Tales
         case TYPED_MODEL:
           result = ViewContext.ViewData?.Model;
           output = (result != null);
+          break;
+
+        case HERE:
+          result = ViewContext.ViewData?.Model;
+          output = (result != null);
+          break;
+
+        case TEMPLATE:
+          result = _templateFileFactory.CreateTemplateFile(currentContext.Element.OwnerDocument);
+          output = (result != null);
+          break;
+
+        case CONTAINER:
+          var dir = currentContext.Element.OwnerDocument?.GetSourceFileInfo()?.GetFileInfo()?.Directory;
+          if(dir != null)
+          {
+            result = new TemplateDirectory(dir);
+            output = true;
+          }
+          else
+          {
+            result = null;
+            output = false;
+          }
           break;
 
         case VIEWS_DIRECTORY:
@@ -144,9 +178,11 @@ namespace CSF.Zpt.MVC.Tales
     public MvcContextsContainer(NamedObjectWrapper options,
                                 ContextualisedRepetitionSummaryWrapper repeat,
                                 Lazy<OriginalAttributeValuesCollection> attrs,
-                                ViewContext viewContext) : base(options, repeat, attrs)
+                                ViewContext viewContext,
+                                ITemplateFileFactory templateFileFactory = null) : base(options, repeat, attrs)
     {
       _viewContext = viewContext?? new ViewContext();
+      _templateFileFactory = templateFileFactory?? new ZptDocumentFactory();
       _applicationDictionary = GetApplicationDictionary(viewContext);
     }
 

@@ -42,6 +42,15 @@ namespace CSF.Zpt.Rendering
     }
 
     /// <summary>
+    /// Gets a <c>System.IO.FileInfo</c> from the current instance.
+    /// </summary>
+    /// <returns>The file info.</returns>
+    public virtual FileInfo GetFileInfo()
+    {
+      return this.FileInfo;
+    }
+
+    /// <summary>
     /// Determines whether the specified <see cref="System.Object"/> is equal to the current
     /// <see cref="CSF.Zpt.Rendering.SourceFileInfo"/>.
     /// </summary>

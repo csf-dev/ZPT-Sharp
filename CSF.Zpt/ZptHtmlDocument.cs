@@ -79,13 +79,22 @@ namespace CSF.Zpt
                                                                             ZptConstants.Metal.Namespace.Prefix,
                                                                             ZptConstants.Metal.DefineMacroAttribute)))
         .Select(x => {
-          var element = new ZptHtmlElement(x, this.SourceFile, isImported: true);
+          var element = new ZptHtmlElement(x, this.SourceFile, this, isImported: true);
           var context = new RenderingContext(Model.Empty, Model.Empty, element, GetDefaultOptions());
           return new Metal.MetalMacro(context.GetMetalAttribute(ZptConstants.Metal.DefineMacroAttribute).Value, element);
         })
         .ToArray();
 
       return new CSF.Zpt.Metal.MetalMacroCollection(output);
+    }
+
+    /// <summary>
+    /// Gets information about the source file for the current instance.
+    /// </summary>
+    /// <returns>The file info.</returns>
+    public override SourceFileInfo GetSourceFileInfo()
+    {
+      return this.SourceFile;
     }
 
     /// <summary>
@@ -124,7 +133,7 @@ namespace CSF.Zpt
     /// <returns>The rendering model.</returns>
     protected override ZptElement GetRootElement()
     {
-      return new ZptHtmlElement(this.Document.DocumentNode, this.SourceFile, isRoot: true);
+      return new ZptHtmlElement(this.Document.DocumentNode, this.SourceFile, this, isRoot: true);
     }
 
     /// <summary>

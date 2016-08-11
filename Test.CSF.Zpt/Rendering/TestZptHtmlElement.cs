@@ -7,6 +7,7 @@ using NUnit.Framework;
 using Ploeh.AutoFixture;
 using Moq;
 using System.Linq;
+using CSF.Zpt;
 
 namespace Test.CSF.Zpt.Rendering
 {
@@ -46,7 +47,7 @@ namespace Test.CSF.Zpt.Rendering
     {
       // Arrange
       var sut = new ZptHtmlElement(_document.DocumentNode,
-                                _sourceFile);
+                                _sourceFile, Mock.Of<IZptDocument>());
 
       // Act
       var result = sut.ToString();
@@ -60,7 +61,7 @@ namespace Test.CSF.Zpt.Rendering
     {
       // Arrange
       var sut = new ZptHtmlElement(_document.DocumentNode.FirstChild,
-                                   _sourceFile);
+                                   _sourceFile, Mock.Of<IZptDocument>());
 
       // Act
       var result = sut.GetChildElements();
@@ -76,7 +77,7 @@ namespace Test.CSF.Zpt.Rendering
     {
       // Arrange
       var sut = new ZptHtmlElement(_document.DocumentNode,
-                                _sourceFile);
+                                _sourceFile, Mock.Of<IZptDocument>());
 
       // Act
       var results = sut.SearchChildrenByAttribute(new ZptNamespace(prefix: "custom"), "parent_attrib");
@@ -92,7 +93,7 @@ namespace Test.CSF.Zpt.Rendering
     {
       // Arrange
       var sut = new ZptHtmlElement(_document.DocumentNode.FirstChild.ChildNodes[3].ChildNodes[1].ChildNodes[1],
-                                _sourceFile);
+                                _sourceFile, Mock.Of<IZptDocument>());
 
       // Act
       var results = sut.GetAttributes();
@@ -112,7 +113,7 @@ namespace Test.CSF.Zpt.Rendering
     {
       // Arrange
       var sut = new ZptHtmlElement(_document.DocumentNode.FirstChild.ChildNodes[3].ChildNodes[1].ChildNodes[1],
-                                _sourceFile);
+                                _sourceFile, Mock.Of<IZptDocument>());
 
       // Act
       var result = sut.GetAttribute(new ZptNamespace(prefix: prefix), name);
@@ -128,7 +129,7 @@ namespace Test.CSF.Zpt.Rendering
     {
       // Arrange
       var sut = new ZptHtmlElement(_document.DocumentNode.FirstChild.ChildNodes[3].ChildNodes[1].ChildNodes[1],
-                                   _sourceFile);
+                                   _sourceFile, Mock.Of<IZptDocument>());
 
       // Act
       sut.SetAttribute("foo", "bar");
@@ -166,7 +167,7 @@ namespace Test.CSF.Zpt.Rendering
     {
       // Arrange
       var sut = new ZptHtmlElement(_document.DocumentNode.FirstChild.ChildNodes[3].ChildNodes[1].ChildNodes[1],
-                                   _sourceFile);
+                                   _sourceFile, Mock.Of<IZptDocument>());
 
       // Act
       sut.SetAttribute(new ZptNamespace(prefix: "ns"), "foo", "bar");
@@ -204,7 +205,7 @@ namespace Test.CSF.Zpt.Rendering
     {
       // Arrange
       var sut = new ZptHtmlElement(_document.DocumentNode.FirstChild.ChildNodes[3].ChildNodes[1].ChildNodes[1],
-                                   _sourceFile);
+                                   _sourceFile, Mock.Of<IZptDocument>());
 
       // Act
       sut.RemoveAttribute("class");
@@ -242,7 +243,7 @@ namespace Test.CSF.Zpt.Rendering
     {
       // Arrange
       var sut = new ZptHtmlElement(_document.DocumentNode.FirstChild.ChildNodes[3].ChildNodes[1].ChildNodes[1],
-                                   _sourceFile);
+                                   _sourceFile, Mock.Of<IZptDocument>());
 
       // Act
       sut.RemoveAttribute(new ZptNamespace(prefix: "custom"), "parent_attrib");
@@ -280,7 +281,7 @@ namespace Test.CSF.Zpt.Rendering
     {
       // Arrange
       var sut = new ZptHtmlElement(_document.DocumentNode.FirstChild.ChildNodes[3].ChildNodes[1].ChildNodes[1],
-                                   _sourceFile);
+                                   _sourceFile, Mock.Of<IZptDocument>());
 
       // Act
       sut.PurgeAttributes(new ZptNamespace(prefix: "custom"));
@@ -318,12 +319,12 @@ namespace Test.CSF.Zpt.Rendering
     {
       // Arrange
       var sut = new ZptHtmlElement(_document.DocumentNode.FirstChild.ChildNodes[3].ChildNodes[1].ChildNodes[1],
-                                _sourceFile);
+                                _sourceFile, Mock.Of<IZptDocument>());
       var replacementHtml = "<p>Replacement element</p>";
       var secondDocument = new HtmlDocument();
       secondDocument.LoadHtml(replacementHtml);
       var secondElement = new ZptHtmlElement(secondDocument.DocumentNode.FirstChild,
-                                          _sourceFile);
+                                          _sourceFile, Mock.Of<IZptDocument>());
 
       // Act
       var result = sut.ReplaceWith(secondElement);
@@ -357,7 +358,7 @@ namespace Test.CSF.Zpt.Rendering
     {
       // Arrange
       var sut = new ZptHtmlElement(_document.DocumentNode.FirstChild.ChildNodes[3].ChildNodes[1].ChildNodes[1],
-                                   _sourceFile);
+                                   _sourceFile, Mock.Of<IZptDocument>());
 
       // Act
       var result = sut.ReplaceWith("<p>Replacement element</p>", false);
@@ -391,7 +392,7 @@ namespace Test.CSF.Zpt.Rendering
     {
       // Arrange
       var sut = new ZptHtmlElement(_document.DocumentNode.FirstChild.ChildNodes[3].ChildNodes[1].ChildNodes[1],
-                                   _sourceFile);
+                                   _sourceFile, Mock.Of<IZptDocument>());
 
       // Act
       var result = sut.ReplaceWith("<p>Replacement <strong>element</strong></p>", true);
@@ -425,7 +426,7 @@ namespace Test.CSF.Zpt.Rendering
     {
       // Arrange
       var sut = new ZptHtmlElement(_document.DocumentNode.FirstChild.ChildNodes[3].ChildNodes[1].ChildNodes[1],
-                                   _sourceFile);
+                                   _sourceFile, Mock.Of<IZptDocument>());
 
       // Act
       sut.ReplaceChildrenWith("<p>Replacement element</p>", false);
@@ -457,7 +458,7 @@ namespace Test.CSF.Zpt.Rendering
     {
       // Arrange
       var sut = new ZptHtmlElement(_document.DocumentNode.FirstChild.ChildNodes[3].ChildNodes[1].ChildNodes[1],
-                                   _sourceFile);
+                                   _sourceFile, Mock.Of<IZptDocument>());
 
       // Act
       sut.ReplaceChildrenWith("<p>Replacement <strong>element</strong></p>", true);
@@ -489,15 +490,15 @@ namespace Test.CSF.Zpt.Rendering
     {
       // Arrange
       var sut = new ZptHtmlElement(_document.DocumentNode.FirstChild.ChildNodes[3].ChildNodes[1].ChildNodes[1].ChildNodes[1],
-                                   _sourceFile);
+                                   _sourceFile, Mock.Of<IZptDocument>());
       var replacementHtml = "<li>New element</li>";
       var secondDocument = new HtmlDocument();
       secondDocument.LoadHtml(replacementHtml);
       var secondElement = new ZptHtmlElement(secondDocument.DocumentNode.FirstChild,
-                                             _sourceFile);
+                                             _sourceFile, Mock.Of<IZptDocument>());
 
       var referenceElement = new ZptHtmlElement(_document.DocumentNode.FirstChild.ChildNodes[3].ChildNodes[1].ChildNodes[1].ChildNodes[1].ChildNodes[3],
-                                                _sourceFile);
+                                                _sourceFile, Mock.Of<IZptDocument>());
 
       // Act
       var result = sut.InsertBefore(referenceElement, secondElement);
@@ -538,15 +539,15 @@ namespace Test.CSF.Zpt.Rendering
     {
       // Arrange
       var sut = new ZptHtmlElement(_document.DocumentNode.FirstChild.ChildNodes[3].ChildNodes[1].ChildNodes[1].ChildNodes[1],
-                                   _sourceFile);
+                                   _sourceFile, Mock.Of<IZptDocument>());
       var replacementHtml = "<li>New element</li>";
       var secondDocument = new HtmlDocument();
       secondDocument.LoadHtml(replacementHtml);
       var secondElement = new ZptHtmlElement(secondDocument.DocumentNode.FirstChild,
-                                             _sourceFile);
+                                             _sourceFile, Mock.Of<IZptDocument>());
 
       var referenceElement = new ZptHtmlElement(_document.DocumentNode.FirstChild.ChildNodes[3].ChildNodes[1].ChildNodes[1].ChildNodes[1].ChildNodes[3],
-                                                _sourceFile);
+                                                _sourceFile, Mock.Of<IZptDocument>());
 
       // Act
       var result = sut.InsertAfter(referenceElement, secondElement);
@@ -586,7 +587,7 @@ namespace Test.CSF.Zpt.Rendering
     {
       // Act
       new ZptHtmlElement(_document.DocumentNode.FirstChild,
-                      _sourceFile);
+                      _sourceFile, Mock.Of<IZptDocument>());
 
       // Assert
       Assert.Pass("Test passes because no exception encountered");
@@ -597,7 +598,7 @@ namespace Test.CSF.Zpt.Rendering
     {
       // Act
       new ZptHtmlElement(_document.DocumentNode,
-                      _sourceFile);
+                      _sourceFile, Mock.Of<IZptDocument>());
 
       // Assert
       Assert.Pass("Test passes because no exception encountered");
@@ -608,7 +609,7 @@ namespace Test.CSF.Zpt.Rendering
     {
       // Arrange
       var docElement = new ZptHtmlElement(_document.DocumentNode,
-                                       _sourceFile);
+                                       _sourceFile, Mock.Of<IZptDocument>());
       var sut = docElement.GetChildElements()[0].GetChildElements()[1].GetChildElements()[0].GetChildElements().First();
       string expectedResult = @"<html>
 <head>
@@ -649,7 +650,7 @@ namespace Test.CSF.Zpt.Rendering
       var doc = new HtmlDocument();
       doc.LoadHtml("<foo><ns:bar /></foo>");
 
-      var sut = new ZptHtmlElement(doc.DocumentNode.FirstChild.ChildNodes[0], _sourceFile, isRoot: true);
+      var sut = new ZptHtmlElement(doc.DocumentNode.FirstChild.ChildNodes[0], _sourceFile, Mock.Of<IZptDocument>(), isRoot: true);
 
       // Act
       var result = sut.IsInNamespace(new ZptNamespace(prefix: "ns"));
@@ -665,7 +666,7 @@ namespace Test.CSF.Zpt.Rendering
       var doc = new HtmlDocument();
       doc.LoadHtml("<foo><bar /></foo>");
 
-      var sut = new ZptHtmlElement(doc.DocumentNode.FirstChild.ChildNodes[0], _sourceFile, isRoot: true);
+      var sut = new ZptHtmlElement(doc.DocumentNode.FirstChild.ChildNodes[0], _sourceFile, Mock.Of<IZptDocument>(), isRoot: true);
 
       // Act
       var result = sut.IsInNamespace(ZptNamespace.Default);
@@ -679,7 +680,7 @@ namespace Test.CSF.Zpt.Rendering
     {
       // Arrange
       var sut = new ZptHtmlElement(_document.DocumentNode.FirstChild.ChildNodes[3].ChildNodes[1].ChildNodes[1],
-                                   _sourceFile);
+                                   _sourceFile, Mock.Of<IZptDocument>());
 
       // Act
       var result = sut.Omit();
