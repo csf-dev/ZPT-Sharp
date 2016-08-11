@@ -52,5 +52,6 @@
     <None Include="..\build-doc-website">
       <Link>build-doc-website</Link>
     </None>
+    <None Include="js\nav.js" />
   </ItemGroup>
 </Project>

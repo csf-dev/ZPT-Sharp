@@ -9,11 +9,18 @@
 @import url(css/dummy.css);
 </style>
 <script type="text/javascript" src="js/modernizr.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s=" crossorigin="anonymous"></script>
+<script src="js/nav.js"></script>
 </head>
 <body>
 <div class="content_wrapper">
   <header class="page_header dummy">
-    Dummy content
+    <div class="hamburger_menu" title="Show navigation">
+      <span class="hamburger_line"></span>
+      <span class="hamburger_line"></span>
+      <span class="hamburger_line"></span>
+    </div>
+    <h2>Dummy content</h2>
   </header>
   <div class="main_page_area">
     <nav metal:define-macro="common_navigation">
