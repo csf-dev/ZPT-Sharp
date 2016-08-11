@@ -23,6 +23,8 @@ namespace CSF.Zpt.MVC.Tales
       SERVER                  = "Server",
       SESSION_DICTIONARY      = "Session",
       TYPED_MODEL             = "Model",
+      HERE                    = "here",
+      REQUEST_LOWER           = "request",
       VIEWS_DIRECTORY         = "Views",
       VIEWS_VIRTUAL_PATH      = "~/Views/";
 
@@ -88,6 +90,11 @@ namespace CSF.Zpt.MVC.Tales
           output = result != null;
           break;
 
+        case REQUEST_LOWER:
+          result = ViewContext.HttpContext?.Request;
+          output = result != null;
+          break;
+
         case RESPONSE:
           result = ViewContext.HttpContext?.Response;
           output = result != null;
@@ -109,6 +116,11 @@ namespace CSF.Zpt.MVC.Tales
           break;
 
         case TYPED_MODEL:
+          result = ViewContext.ViewData?.Model;
+          output = (result != null);
+          break;
+
+        case HERE:
           result = ViewContext.ViewData?.Model;
           output = (result != null);
           break;
