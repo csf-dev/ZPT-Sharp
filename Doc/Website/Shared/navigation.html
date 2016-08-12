@@ -10,7 +10,21 @@
 </style>
 <script type="text/javascript" src="js/modernizr.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s=" crossorigin="anonymous"></script>
-<script src="js/nav.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/slideout/0.1.12/slideout.min.js"></script>
+<script>
+$(window).ready(function() {
+  var slideout = new Slideout({
+    'panel': $('.main_page_content').get(0),
+    'menu': $('.main_page_area > nav').get(0),
+    'padding': 256,
+    'tolerance': 70
+  });
+  
+  $(".page_header .hamburger_menu").click(function(ev) {
+    slideout.toggle();
+  });
+});
+</script>
 </head>
 <body>
 <div class="content_wrapper">
