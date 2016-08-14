@@ -9,19 +9,18 @@
 @import url(css/dummy.css);
 </style>
 <script type="text/javascript" src="js/modernizr.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.4.0/styles/default.min.css">
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s=" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/slideout/0.1.12/slideout.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.4.0/highlight.min.js"></script>
 <script>
 $(window).ready(function() {
-  var slideout = new Slideout({
-    'panel': $('.main_page_content').get(0),
-    'menu': $('.main_page_area > nav').get(0),
-    'padding': 256,
-    'tolerance': 70
-  });
+  hljs.initHighlightingOnLoad();
   
-  $(".page_header .hamburger_menu").click(function(ev) {
-    slideout.toggle();
+  var
+    navHamburger = $(".page_header .hamburger_menu"),
+    navMenu = $(".main_page_area > nav");
+  navHamburger.click(function(ev) {
+    navMenu.toggleClass("visible");
   });
 });
 </script>
@@ -29,7 +28,7 @@ $(window).ready(function() {
 <body>
 <div class="content_wrapper">
   <header class="page_header dummy">
-    <div class="hamburger_menu" title="Show navigation">
+    <div class="hamburger_menu" title="Show/hide navigation">
       <span class="hamburger_line"></span>
       <span class="hamburger_line"></span>
       <span class="hamburger_line"></span>

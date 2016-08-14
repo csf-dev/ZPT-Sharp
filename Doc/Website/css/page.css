@@ -141,8 +141,6 @@ body {
     width: 216px;
     border-radius: 0;
     float: none;
-  }
-  .slideout-menu {
     position: fixed;
     left: 0;
     top: 0;
@@ -156,17 +154,7 @@ body {
     margin-top: 58px;
     margin-bottom: 40px;
   }
-  .slideout-panel {
-    position: relative;
-    z-index: 1;
-    background: #EEEDDD none;
-  }
-  .slideout-open,
-  .slideout-open body,
-  .slideout-open .slideout-panel {
-    overflow: hidden;
-  }
-  .slideout-open .slideout-menu {
+  .main_page_area > nav.visible {
     display: block;
   }
   .main_page_content {
