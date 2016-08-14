@@ -22,10 +22,10 @@
   border: 1px solid #CDC998;
   background: #F0F0F0;
   padding: 0.5em;
-  font-size: 80%;
   overflow: auto;
   margin-bottom: 1.25em;
   border-radius: 4px;
+  font-size: 80%;
 }
 .main_page_content pre > code {
   border-width: 0;
