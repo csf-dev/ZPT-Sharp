@@ -105,9 +105,16 @@ body > .content_wrapper:after {
   border-bottom: 1px solid #000;
 }
 
+body {
+  width: 100%;
+  height: 100%;
+}
+
 @media (max-width: 1059px) {
   .page_header {
-    padding: 0.2em 0.4em;
+    padding: 4px 0.4em;
+    height: 32px;
+    line-height: 32px;
   }
   .page_header .hamburger_menu {
     width: 21px;
@@ -128,19 +135,24 @@ body > .content_wrapper:after {
     display: inline-block;
   }
   .main_page_area {
-    margin: 1em 0;
-    position: relative;
+    margin: 16px 0;
   }
   .main_page_area > nav {
-    display: none;
-    float: none;
+    width: 216px;
     border-radius: 0;
-    padding: 5px 10px;
+    float: none;
+    position: fixed;
     left: 0;
+    top: 0;
+    bottom: 0;
     right: 0;
-    position: absolute;
-    z-index: 100;
-    width: auto;
+    z-index: 0;
+    width: 256px;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    display: none;
+    margin-top: 58px;
+    margin-bottom: 40px;
   }
   .main_page_area > nav.visible {
     display: block;
