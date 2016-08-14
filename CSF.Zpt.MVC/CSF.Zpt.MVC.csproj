@@ -56,6 +56,9 @@
     <Reference Include="System.Configuration" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Target Name="AfterBuild" Condition=" '$(Configuration)' == 'Release'">
+    <Exec Command="nuget pack CSF.Zpt.MVC.nuspec -Prop Configuration=Release"></Exec>
+  </Target>
   <ItemGroup>
     <ProjectReference Include="..\CSF.Zpt.Api\CSF.Zpt.Api.csproj">
       <Project>{8207CD9B-F1C1-4D75-B250-ACDFFBDCB071}</Project>
