@@ -121,6 +121,9 @@
     <Compile Include="Rendering\AbstractSourceInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Target Name="AfterBuild" Condition=" '$(Configuration)' == 'Release'">
+    <Exec Command="nuget pack CSF.Zpt.nuspec -Prop Configuration=Release"></Exec>
+  </Target>
   <ItemGroup>
     <ProjectReference Include="..\CSF\CSF\CSF.csproj">
       <Project>{E563D7BC-1AB1-4AFB-8533-51315437C6E6}</Project>
