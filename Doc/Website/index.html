@@ -1,4 +1,4 @@
-<!doctype html>
+﻿<!doctype html>
 <html tal:define="activePage string:introduction">
 <head metal:use-macro="documents/Shared/general-page.html/macros/common_document_head">
 <meta charset="utf-8">
@@ -12,6 +12,7 @@
 @import url(css/dummy.css);
 </style>
 <script type="text/javascript" src="js/modernizr.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s=" crossorigin="anonymous"></script>
 <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.4.0/styles/default.min.css">
 <script src="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.4.0/highlight.min.js"></script>
 <script>
@@ -36,146 +37,100 @@ hljs.initHighlightingOnLoad();
           <em>with ZPT-Sharp</em>
         </h1>
       </header>
-      <section class="what_it_is">
-        <header>
-          <h2>HTML &amp; XML rendering engine</h2>
-        </header>
-        <ul>
-          <li>
-            An <a href="asp-net-mvc-view-engine.html">ASP.NET MVC ViewEngine</a>
-          </li>
-          <li>
-            A
-            <a href="page-rendering-api.html">
-              page rendering <abbr title="Application Programming Interface">API</abbr>
-            </a>
-            for your own applications
-          </li>
-          <li>
-            A <a href="command-line-renderer.html">command-line page-rendering application</a>
-          </li>
-        </ul>
-      </section>
-      <section class="advantages">
-        <header>
-          <h2>Advantages of <abbr title="Zope Page Templates">ZPT</abbr> views</h2>
-        </header>
-        <ul>
-          <li>
-            Simple yet powerful template syntax, easily understandable by designers with
-            no programming (only HTML) knowledge
-          </li>
-          <li>
-            Fits well with the <abbr title="Model, View, ViewModel">MVVM</abbr> paradigm
-          </li>
-          <li>
-            View source files are valid
-            <abbr title="Hypertext Markup Language">HTML</abbr> or
-            <abbr title="Extensible Markup Language">XML</abbr> (your choice)
-          </li>
-          <li>
-            View source files render offline in web browsers - thus may be worked upon by
-            'pure' front-end designers without depending upon a functional back-end
-          </li>
-        </ul>
-      </section>
-      <section class="example">
-        <header>
-          <h2>A simple example</h2>
-        </header>
-        <h3>C♯ model</h3>
-        <p>Here are two simple interfaces which will be used to create a model:</p>
-        <pre><code class="csharp">public interface IShop
-{
-  string Name { get; }
-  IEnumerable&lt;IProduct&gt; Products { get; }
-}
-
-public interface IProduct
-{
-  string Name { get; }
-  string RichHtmlDescription { get; }
-  string GetFormattedPrice();
-}</code></pre>
-        <p>
-          Now a simple MVC controller; assume that the <code>GetMyShop</code> method returns
-          an instance of <code>IShop</code>.
-        </p>
-        <pre><code class="csharp">public ActionResult Index()
-{
-  IShop shop = GetMyShop();
-  return View(shop);
-}</code></pre>
-        <h3>A ZPT Sharp view</h3>
-        <p>
-          Here is a simple source view, which could render the above model.  The presentation logic
-          is contained within the attributes which use the <code>tal:</code> prefix.  All ZPT views
-          use only attributes to represent their presentation logic.  Thus, they are a superset
-          of an otherwise-valid HTML page.
-        </p>
-        <p>
-          Notice that the model contains 'dummy' data which would display if the view were opened
-          in a web browser without rendering through the ZPT backend.
-        </p>
-        <pre><code>&lt;html xmlns:tal="http://xml.zope.org/namespaces/tal"&gt;
+      <div class="content_wrapper">
+        <section class="overview">
+          <header>
+              <h2>Overview</h2>
+          </header>
+          <p>
+            ZPT-Sharp is a .NET implementation of the
+            <a href="https://docs.zope.org/zope2/zope2book/ZPT.html">Zope Page Templates</a>
+            specification. ZPT is an easy-to-understand syntax for writing HTML &amp; XML pages with
+            dynamic data.  It may be used either with ASP.NET MVC, as a stand-alone offline application
+            or as shared library.
+          </p>
+          <p>
+            ZPT is an attribute language, with some similarities to
+            <a href="https://github.com/SparkViewEngine/spark">the Spark ViewEngine</a>. All
+            of the statements and directives which control the rendering of a document are performed
+            using attributes. This offers some distinct
+            <a href="advantages-of-zpt-views.html">advantages over traditional page-rendering
+            languages</a>.
+          </p>
+        </section>
+        <section class="learn_more">
+          <header><h2>Learn more</h2></header>
+          <ul>
+            <li>
+              <h3><a href="writing-pages-using-zpt.html">Writing ZPT pages</a></h3>
+              <p>Reference for writing views (or standalone documents) using Zope Page Templates.</p>
+            </li>
+            <li>
+              <h3><a href="asp-net-mvc-view-engine.html">MVC ViewEngine</a></h3>
+              <p>How to integrate ZPT-Sharp with ASP.NET MVC and use it to write your views.</p>
+            </li>
+            <li>
+              <h3><a href="command-line-renderer.html">The page renderer</a></h3>
+              <p>An app to render ZPT pages from the command-line.</p>
+            </li>
+            <li>
+              <h3><a href="page-rendering-api.html">The rendering API</a></h3>
+              <p>Integrate ZPT-Sharp into your own applications.</p>
+            </li>
+            <li>
+              <h3><a href="download.html">Downloads</a></h3>
+              <p>Downloads for the core API, the page rendering app and the MVC ViewEngine.</p>
+            </li>
+            <li>
+              <h3><a href="https://github.com/csf-dev/ZPT-Sharp">Get the source code</a></h3>
+              <p>Hosted on Github; contributions welcome!</p>
+            </li>
+          </ul>
+        </section>
+        <section class="example">
+          <header>
+            <h2>A sample ZPT document</h2>
+          </header>
+          <p>
+            Here is a small HTML document, which makes use of some of the
+            ZPT <abbr title="Template Attribute Language">TAL</abbr> functionality, to bind model data to
+            the HTML.
+          </p>
+          <pre><code>&lt;html xmlns:tal="http://xml.zope.org/namespaces/tal"&gt;
 &lt;head&gt;
-&lt;title tal:content=&quot;string:Welcome to ${Model/Name}!&quot;&gt;Welcome to Dummy Shop!&lt;/title&gt;
+&lt;title tal:content=&quot;string:Welcome to ${here/Name}!&quot;&gt;Welcome to Placeholder Shop Name!&lt;/title&gt;
 &lt;/head&gt;
 &lt;body&gt;
-&lt;h1&gt;You are visiting &lt;span tal:replace=&quot;Model/Name&quot;&gt;Dummy Shop&lt;/span&gt;&lt;/h1&gt;
+&lt;h1&gt;You are visiting &lt;span tal:replace=&quot;here/Name&quot;&gt;Placeholder Shop Name&lt;/span&gt;&lt;/h1&gt;
 &lt;p&gt;Here are our products:&lt;/p&gt;
 &lt;ul&gt;
-  &lt;li class=&quot;product_listing&quot; tal:repeat=&quot;product Model/Products&quot;&gt;
-    &lt;h2 tal:content=&quot;product/Name&quot;&gt;Dummy product name&lt;/h2&gt;
+  &lt;li class=&quot;product_listing&quot; tal:repeat=&quot;product here/Products&quot;&gt;
+    &lt;h2 tal:content=&quot;product/Name&quot;&gt;Placeholder product name&lt;/h2&gt;
     &lt;div class=&quot;description&quot; tal:content=&quot;structure product/RichHtmlDescription&quot;&gt;
-      &lt;em&gt;Fake product description&lt;/em&gt; here, including &lt;strong&gt;HTML elements&lt;/strong&gt;.
+      &lt;em&gt;Placeholder product description&lt;/em&gt; here, which might include &lt;strong&gt;HTML elements&lt;/strong&gt;.
     &lt;/div&gt;
     &lt;strong class=&quot;price&quot; tal:content=&quot;product/GetFormattedPrice&quot;&gt;&#165;50.45&lt;/strong&gt;
   &lt;/li&gt;
 &lt;/ul&gt;
 &lt;/body&gt;
 &lt;/html&gt;</code></pre>
-        <h3>Sample rendering</h3>
-        <p>
-          This is how the view above might render if it were put through the ZPT rendering engine
-          backend.  The dummy values have been replaced with real data and the extra attributes
-          have been removed, leaving only plain HTML.
-        </p>
-        <pre><code>&lt;html&gt;
-&lt;head&gt;
-&lt;title&gt;Welcome to Veronica&#39;s Views!&lt;/title&gt;
-&lt;/head&gt;
-&lt;body&gt;
-&lt;h1&gt;You are visiting Veronica&#39;s Views&lt;/h1&gt;
-&lt;p&gt;Here are our products:&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li class=&quot;product_listing&quot;&gt;
-    &lt;h2&gt;ASPX view&lt;/h2&gt;
-    &lt;div class=&quot;description&quot;&gt;
-      &lt;p&gt;&lt;em&gt;ASPX&lt;/em&gt; views are terrible to work with as an HTML/CSS designer,
-      they include all sorts of troublesome markup, such as
-      &lt;strong&gt;&amp;lt;% %&amp;gt;&lt;/strong&gt; notation.&lt;/p&gt;
-      &lt;p&gt;&lt;em&gt;Razor&lt;/em&gt; is better but it&#39;s still not perfect.&lt;/p&gt;
-    &lt;/div&gt;
-    &lt;strong class=&quot;price&quot;&gt;$20.99&lt;/strong&gt;
-  &lt;/li&gt;
-  &lt;li class=&quot;product_listing&quot;&gt;
-    &lt;h2&gt;ZPT view&lt;/h2&gt;
-    &lt;div class=&quot;description&quot;&gt;
-      &lt;p&gt;ZPT views are a pleasure to work with as a front-end designer, the source
-      file renders in a plain web browser exactly as if it were a static page.&lt;/p&gt;
-    &lt;/div&gt;
-    &lt;strong class=&quot;price&quot;&gt;$2.50&lt;/strong&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-&lt;/body&gt;
-&lt;/html&gt;</code></pre>
-      </section>
+        </section>
+      </div>
     </section>
   </div>
 </div>
 <footer class="page_footer dummy">
   Dummy content
 </footer>
+<div metal:fill-slot="end_of_page_scripts" tal:omit-tag="string:True">
+<script>
+$(window).ready(function() {
+  $(".learn_more li").click(function(ev) {
+    var $this = $(this);
+    window.location = $("a", $this).attr("href");
+  });
+});
+</script>
+</div>
 </body>
 </html>

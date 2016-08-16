@@ -1,0 +1,45 @@
+<!doctype html>
+<html tal:define="activePage string:download">
+<head metal:use-macro="documents/Shared/general-page.html/macros/common_document_head">
+<meta charset="utf-8">
+<title metal:fill-slot="document_title">Download ZPT-Sharp</title>
+<base href="." />
+<style type="text/css">
+@import url(css/styles.css);
+@import url(css/dummy.css);
+</style>
+<script type="text/javascript" src="js/modernizr.min.js"></script>
+<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.4.0/styles/default.min.css">
+<script src="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.4.0/highlight.min.js"></script>
+<script>
+hljs.initHighlightingOnLoad();
+</script>
+</head>
+<body metal:use-macro="documents/Shared/general-page.html/macros/common_document_body" class="page_download">
+<div class="content_wrapper">
+  <header class="page_header dummy">
+    Dummy content
+  </header>
+  <div class="main_page_area">
+    <nav>
+      <h2>Navigation menu</h2>
+      <ul class="active_introduction dummy">
+        <li class="introduction"><a href=".">Introduction</a></li>
+        <li class="other_page"><a href="dummy.html">Dummy page</a></li>
+      </ul>
+    </nav>
+    <section class="main_page_content" metal:fill-slot="main_page_content">
+      <header>
+        <h1>Download ZPT-Sharp</h1>
+      </header>
+      <p>
+        TODO: Write this content.
+      </p>
+    </section>
+  </div>
+</div>
+<footer class="page_footer dummy">
+  Dummy content
+</footer>
+</body>
+</html>
