@@ -53,5 +53,7 @@
       <Link>build-doc-website</Link>
     </None>
     <None Include="js\nav.js" />
+    <None Include="advantages-of-zpt-views.html" />
+    <None Include="download.html" />
   </ItemGroup>
 </Project>
