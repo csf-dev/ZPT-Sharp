@@ -1,4 +1,4 @@
-<?xml version="1.0"?>
+﻿<?xml version="1.0"?>
 <package>
   <metadata>
     <id>CSF.Zpt.Cli</id>
@@ -15,7 +15,7 @@
     </dependencies> 
   </metadata>
   <files>
-    <file src="bin/Release/ZptBuilder.exe" target="lib" />
-    <file src="bin/Release/ZptBuilder.exe.config" target="lib" />
+    <file src="bin/Release/ZptBuilder.exe" target="lib/net45" />
+    <file src="bin/Release/ZptBuilder.exe.config" target="lib/net45" />
   </files>
 </package>

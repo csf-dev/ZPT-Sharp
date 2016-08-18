@@ -1,4 +1,4 @@
-<?xml version="1.0"?>
+﻿<?xml version="1.0"?>
 <package>
   <metadata>
     <id>CSF.Zpt.MVC</id>
@@ -24,6 +24,6 @@
     </frameworkAssemblies>
   </metadata>
   <files>
-    <file src="bin/Release/CSF.Zpt.MVC.dll" target="lib" />
+    <file src="bin/Release/CSF.Zpt.MVC.dll" target="lib/net45" />
   </files>
 </package>
