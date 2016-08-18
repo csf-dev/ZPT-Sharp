@@ -8,7 +8,7 @@ namespace Test.CSF.Zpt.Util.Autofixture
   {
     public void Customize(IFixture fixture)
     {
-      fixture.Customize<DefaultRenderingOptions>(x => x.FromFactory(() => new DefaultRenderingOptions()));
+      fixture.Customize<IRenderingOptions>(x => x.FromFactory(() => new RenderingOptions()));
     }
   }
 }

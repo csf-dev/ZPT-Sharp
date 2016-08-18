@@ -51,14 +51,14 @@ namespace CSF.Zpt.Cli
       }
     }
 
-    private RenderingOptions CreateRenderingOptions(CommandLineOptions options)
+    private IRenderingOptions CreateRenderingOptions(CommandLineOptions options)
     {
       var contextVisitors = _contextVisitorFactory.CreateMany(options.ContextVisitorClassNames);
       var contextFactory = _contextFactoryFactory.Create(options.RenderingContextFactoryClassName);
 
       AddKeywordOptions(options, contextFactory);
 
-      return new DefaultRenderingOptions(contextVisitors,
+      return new RenderingOptions(contextVisitors,
                                          contextFactory,
                                          addSourceFileAnnotation: options.EnableSourceAnnotation,
                                          outputEncoding: Encoding.GetEncoding(options.OutputEncoding),

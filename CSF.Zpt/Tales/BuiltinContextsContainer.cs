@@ -160,6 +160,7 @@ namespace CSF.Zpt.Tales
     /// <param name="options">Options.</param>
     /// <param name="repeat">Repeat.</param>
     /// <param name="attrs">Attrs.</param>
+    /// <param name="templateFileFactory">A template-file factory.</param>
     public BuiltinContextsContainer(NamedObjectWrapper options,
                                     ContextualisedRepetitionSummaryWrapper repeat,
                                     Lazy<OriginalAttributeValuesCollection> attrs,

@@ -1,13 +1,25 @@
 ﻿using System;
 using System.Text;
+using CSF.Zpt.Tales;
 
 namespace CSF.Zpt.Rendering
 {
   /// <summary>
-  /// Encapsulates the available options for rendering a <see cref="IZptDocument"/>.
+  /// Encapsulates the available options for rendering a <see cref="ZptDocument"/>.
   /// </summary>
-  public abstract class RenderingOptions
+  public class RenderingOptions : IRenderingOptions
   {
+    #region constants
+
+    private static readonly IContextVisitor[] DefaultVisitors = new IContextVisitor[] {
+      new CSF.Zpt.Metal.MetalVisitor(),
+      new CSF.Zpt.Tal.TalVisitor(),
+      new CSF.Zpt.Metal.MetalTidyUpVisitor(),
+      new CSF.Zpt.Tal.TalTidyUpVisitor(),
+    };
+
+    #endregion
+
     #region properties
 
     /// <summary>
@@ -103,7 +115,7 @@ namespace CSF.Zpt.Rendering
     #region constructor
 
     /// <summary>
-    /// Initializes a new instance of the <see cref="CSF.Zpt.Rendering.RenderingOptions"/> class.
+    /// Initializes a new instance of the <see cref="CSF.Zpt.Rendering.IRenderingOptions"/> class.
     /// </summary>
     /// <param name="addSourceFileAnnotation">Indicates whether or not source file annotation is to be added.</param>
     /// <param name="elementVisitors">The element visitors to use.</param>
@@ -112,29 +124,20 @@ namespace CSF.Zpt.Rendering
     /// <param name="omitXmlDeclaration">Whether or not to omit the XML declaration.</param>
     /// <param name="xmlIndentCharacters">The character(s) to use when indending XML.</param>
     /// <param name="outputIndentedXml">Whether or not to output indent-formatted XML.</param>
-    public RenderingOptions(IContextVisitor[] elementVisitors,
-                            IRenderingContextFactory contextFactory,
-                            bool addSourceFileAnnotation = false,
-                            System.Text.Encoding outputEncoding = null,
-                            bool omitXmlDeclaration = false,
-                            string xmlIndentCharacters = "  ",
-                            bool outputIndentedXml = true)
+    public RenderingOptions(IContextVisitor[] elementVisitors = null,
+                                   IRenderingContextFactory contextFactory = null,
+                                   bool addSourceFileAnnotation = false,
+                                   System.Text.Encoding outputEncoding = null,
+                                   bool omitXmlDeclaration = false,
+                                   string xmlIndentCharacters = "  ",
+                                   bool outputIndentedXml = true)
     {
-      if(elementVisitors == null)
-      {
-        throw new ArgumentNullException(nameof(elementVisitors));
-      }
-      if(contextFactory == null)
-      {
-        throw new ArgumentNullException(nameof(contextFactory));
-      }
-
       this.AddSourceFileAnnotation = addSourceFileAnnotation;
-      this.ContextVisitors = elementVisitors;
-      this.ContextFactory = contextFactory;
+      this.ContextVisitors = elementVisitors?? DefaultVisitors;
+      this.ContextFactory = contextFactory?? new TalesRenderingContextFactory();
       this.OutputEncoding = outputEncoding?? System.Text.Encoding.UTF8;
       this.OmitXmlDeclaration = omitXmlDeclaration;
-      this.XmlIndentationCharacters = xmlIndentCharacters;
+      this.XmlIndentationCharacters = xmlIndentCharacters?? "  ";
       this.OutputIndentedXml = outputIndentedXml;
     }
 

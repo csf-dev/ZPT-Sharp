@@ -131,7 +131,7 @@ namespace Test.CSF.Zpt
 
         try
         {
-          var options = new DefaultRenderingOptions(contextFactory: this.CreateTestEnvironment(),
+          var options = new RenderingOptions(contextFactory: this.CreateTestEnvironment(),
                                              outputIndentedXml: true,
                                              xmlIndentCharacters: "\t");
 

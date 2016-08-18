@@ -153,7 +153,7 @@ namespace CSF.Zpt.MVC
 
     private void InitialiseDefaultOptions()
     {
-      var defaultOptions = new DefaultRenderingOptions();
+      var defaultOptions = new RenderingOptions();
       ContextFactory = new MvcRenderingContextFactory();
       AddSourceFileAnnotation = defaultOptions.AddSourceFileAnnotation;
       ContextVisitors = defaultOptions.ContextVisitors;
@@ -170,7 +170,7 @@ namespace CSF.Zpt.MVC
                                       IRenderingContextFactoryFactory contextFactoryFactory,
                                       IContextVisitorFactory contextVisitorFactory)
     {
-      var defaultOptions = new DefaultRenderingOptions();
+      var defaultOptions = new RenderingOptions();
 
       if(config.ContextFactoryTypeName != null)
       {
@@ -212,9 +212,9 @@ namespace CSF.Zpt.MVC
       return ConfigurationHelper.GetSection<ZptViewEngineConfigurationSection>();
     }
 
-    private RenderingOptions CreateRenderingOptions()
+    private IRenderingOptions CreateRenderingOptions()
     {
-      return new DefaultRenderingOptions(ContextVisitors,
+      return new RenderingOptions(ContextVisitors,
                                          ContextFactory,
                                          AddSourceFileAnnotation,
                                          OutputEncoding,

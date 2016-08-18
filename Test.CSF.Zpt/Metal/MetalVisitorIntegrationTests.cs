@@ -80,7 +80,7 @@ namespace Test.CSF.Zpt.Metal
       var ctx = new RenderingContext(_model,
                                      _fixture.Create<DummyModel>(),
                                      document,
-                                     _fixture.Create<DefaultRenderingOptions>());
+                                     _fixture.Create<IRenderingOptions>());
 
       // Act
       sut.VisitContext(ctx);

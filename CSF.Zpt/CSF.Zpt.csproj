@@ -101,7 +101,6 @@
     <Compile Include="Rendering\NoOpVisitor.cs" />
     <Compile Include="Rendering\UnknownSourceFileInfo.cs" />
     <Compile Include="Rendering\Model.cs" />
-    <Compile Include="Rendering\DefaultRenderingOptions.cs" />
     <Compile Include="Rendering\RepetitionInfo.cs" />
     <Compile Include="Resources\ExceptionMessages.Designer.cs">
       <DependentUpon>ExceptionMessages.resx</DependentUpon>
@@ -119,6 +118,7 @@
     </Compile>
     <Compile Include="Rendering\SourceFileInfo.cs" />
     <Compile Include="Rendering\AbstractSourceInfo.cs" />
+    <Compile Include="Rendering\RenderingOptions.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Target Name="AfterBuild" Condition="'$(Configuration)' == 'Release'">

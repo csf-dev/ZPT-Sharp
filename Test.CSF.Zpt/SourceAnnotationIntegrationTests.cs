@@ -131,7 +131,7 @@ namespace Test.CSF.Zpt
         try
         {
           var root = sourceDocument.GetParent().GetParent();
-          var options = new DefaultRenderingOptions(contextFactory: this.CreateTestEnvironment(root),
+          var options = new RenderingOptions(contextFactory: this.CreateTestEnvironment(root),
                                                     outputIndentedXml: true,
                                                     xmlIndentCharacters: "\t",
                                                     addSourceFileAnnotation: true);

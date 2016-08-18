@@ -3,14 +3,15 @@
 namespace CSF.Zpt.Rendering
 {
   /// <summary>
-  /// Interface for a type which creates an instance of <see cref="RenderingContext"/> from the <see cref="RenderingOptions"/>.
+  /// Interface for a type which creates an instance of <see cref="RenderingContext"/> from the
+  /// <see cref="IRenderingOptions"/>.
   /// </summary>
   public interface IRenderingContextFactory
   {
     /// <summary>
     /// Create a context instance.
     /// </summary>
-    RenderingContext Create(ZptElement element, RenderingOptions options);
+    RenderingContext Create(ZptElement element, IRenderingOptions options);
 
     /// <summary>
     /// Adds a keyword option to contexts created by the current instance.

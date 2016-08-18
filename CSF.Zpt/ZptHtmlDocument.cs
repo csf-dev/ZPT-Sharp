@@ -54,7 +54,7 @@ namespace CSF.Zpt
     /// <returns>The rendered HTML document.</returns>
     /// <param name="options">The rendering options to use.  If <c>null</c> then default options are used.</param>
     /// <param name="contextConfigurator">An optional action to perform upon the root <see cref="RenderingContext"/>, to configure it.</param>
-    public HtmlDocument RenderHtml(RenderingOptions options = null,
+    public HtmlDocument RenderHtml(IRenderingOptions options = null,
                                    Action<RenderingContext> contextConfigurator = null)
     {
       var opts = this.GetOptions(options);
@@ -105,7 +105,7 @@ namespace CSF.Zpt
     /// <param name="options">The rendering options to use.  If <c>null</c> then default options are used.</param>
     protected override void Render(TextWriter writer,
                                    ZptElement element,
-                                   RenderingOptions options)
+                                   IRenderingOptions options)
     {
       if(writer == null)
       {
@@ -137,12 +137,12 @@ namespace CSF.Zpt
     }
 
     /// <summary>
-    /// Gets an instance of <see cref="RenderingOptions"/> which represents the default options.
+    /// Gets an instance of <see cref="IRenderingOptions"/> which represents the default options.
     /// </summary>
     /// <returns>The default options.</returns>
-    protected override RenderingOptions GetDefaultOptions()
+    protected override IRenderingOptions GetDefaultOptions()
     {
-      return new DefaultRenderingOptions();
+      return new RenderingOptions();
     }
 
     #endregion

@@ -25,7 +25,7 @@ namespace CSF.Zpt
     /// </summary>
     /// <param name="options">The rendering options to use.  If <c>null</c> then default options are used.</param>
     /// <param name="contextConfigurator">An optional action to perform upon the root <see cref="RenderingContext"/>, to configure it.</param>
-    public virtual string Render(RenderingOptions options = null,
+    public virtual string Render(IRenderingOptions options = null,
                                  Action<RenderingContext> contextConfigurator = null)
     {
       string output;
@@ -65,7 +65,7 @@ namespace CSF.Zpt
     /// <param name="options">The rendering options to use.  If <c>null</c> then default options are used.</param>
     /// <param name="contextConfigurator">An optional action to perform upon the root <see cref="RenderingContext"/>, to configure it.</param>
     public virtual void Render(TextWriter writer,
-                               RenderingOptions options = null,
+                               IRenderingOptions options = null,
                                Action<RenderingContext> contextConfigurator = null)
     {
       if(writer == null)
@@ -96,7 +96,7 @@ namespace CSF.Zpt
     /// <returns>The result of the rendering process.</returns>
     /// <param name="options">The rendering options to use.  If <c>null</c> then default options are used.</param>
     /// <param name="contextConfigurator">An optional action to perform upon the root <see cref="RenderingContext"/>, to configure it.</param>
-    protected virtual ZptElement RenderElement(RenderingOptions options,
+    protected virtual ZptElement RenderElement(IRenderingOptions options,
                                                Action<RenderingContext> contextConfigurator)
     {
       if(options == null)
@@ -147,7 +147,7 @@ namespace CSF.Zpt
     /// </summary>
     /// <returns>The final non-null options.</returns>
     /// <param name="options">Options.</param>
-    protected virtual RenderingOptions GetOptions(RenderingOptions options)
+    protected virtual IRenderingOptions GetOptions(IRenderingOptions options)
     {
       return options?? GetDefaultOptions();
     }
@@ -160,7 +160,7 @@ namespace CSF.Zpt
     /// <param name="options">The rendering options to use.  If <c>null</c> then default options are used.</param>
     protected abstract void Render(TextWriter writer,
                                    ZptElement element,
-                                   RenderingOptions options);
+                                   IRenderingOptions options);
 
     /// <summary>
     /// Creates a rendering model from the current instance.
@@ -169,10 +169,10 @@ namespace CSF.Zpt
     protected abstract ZptElement GetRootElement();
 
     /// <summary>
-    /// Gets an instance of <see cref="RenderingOptions"/> which represents the default options.
+    /// Gets an instance of <see cref="IRenderingOptions"/> which represents the default options.
     /// </summary>
     /// <returns>The default options.</returns>
-    protected abstract RenderingOptions GetDefaultOptions();
+    protected abstract IRenderingOptions GetDefaultOptions();
 
     #endregion
 

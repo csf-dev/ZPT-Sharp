@@ -15,7 +15,7 @@ namespace CSF.Zpt
     /// </summary>
     /// <param name="options">The rendering options to use.  If <c>null</c> then default options are used.</param>
     /// <param name="contextConfigurator">An optional action to perform upon the root <see cref="RenderingContext"/>, to configure it.</param>
-    string Render(RenderingOptions options = null,
+    string Render(IRenderingOptions options = null,
                   Action<RenderingContext> contextConfigurator = null);
 
     /// <summary>
@@ -25,7 +25,7 @@ namespace CSF.Zpt
     /// <param name="options">The rendering options to use.  If <c>null</c> then default options are used.</param>
     /// <param name="contextConfigurator">An optional action to perform upon the root <see cref="RenderingContext"/>, to configure it.</param>
     void Render(TextWriter writer,
-                RenderingOptions options = null,
+                IRenderingOptions options = null,
                 Action<RenderingContext> contextConfigurator = null);
 
     /// <summary>
