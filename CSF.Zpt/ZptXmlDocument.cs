@@ -93,10 +93,10 @@ namespace CSF.Zpt
     }
 
     /// <summary>
-    /// Gets information about the source file for the current instance.
+    /// Gets information about the source medium for the current instance
     /// </summary>
-    /// <returns>The file info.</returns>
-    public override ISourceInfo GetSourceFileInfo()
+    /// <returns>The source info.</returns>
+    public override ISourceInfo GetSourceInfo()
     {
       return this.SourceFile;
     }

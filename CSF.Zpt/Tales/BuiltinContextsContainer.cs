@@ -11,11 +11,13 @@ namespace CSF.Zpt.Tales
     #region constants
 
     private const string
-      NOTHING = "nothing",
-      DEFAULT = "default",
-      OPTIONS = "options",
-      REPEAT  = "repeat",
-      ATTRS   = "attrs";
+      NOTHING   = "nothing",
+      DEFAULT   = "default",
+      OPTIONS   = "options",
+      REPEAT    = "repeat",
+      ATTRS     = "attrs",
+      TEMPLATE  = "template",
+      CONTAINER = "container";
 
     #endregion
 
@@ -25,6 +27,7 @@ namespace CSF.Zpt.Tales
     private NamedObjectWrapper _options;
     private ContextualisedRepetitionSummaryWrapper _repeat;
     private Lazy<OriginalAttributeValuesCollection> _attrs;
+    private ITemplateFileFactory _templateFileFactory;
 
     #endregion
 
@@ -127,6 +130,17 @@ namespace CSF.Zpt.Tales
         result = this.Attrs;
         break;
 
+      case TEMPLATE:
+        result = _templateFileFactory.CreateTemplateFile(currentContext.Element.OwnerDocument);
+        output = (result != null);
+        break;
+
+      case CONTAINER:
+        var sourceInfo = currentContext.Element.OwnerDocument.GetSourceInfo();
+        result = (sourceInfo != null)? sourceInfo.GetContainer() : null;
+        output = result != null;
+        break;
+
       default:
         output = false;
         result = null;
@@ -148,7 +162,8 @@ namespace CSF.Zpt.Tales
     /// <param name="attrs">Attrs.</param>
     public BuiltinContextsContainer(NamedObjectWrapper options,
                                     ContextualisedRepetitionSummaryWrapper repeat,
-                                    Lazy<OriginalAttributeValuesCollection> attrs)
+                                    Lazy<OriginalAttributeValuesCollection> attrs,
+                                    ITemplateFileFactory templateFileFactory = null)
     {
       if(options == null)
       {
@@ -168,6 +183,9 @@ namespace CSF.Zpt.Tales
       _options = options;
       _repeat = repeat;
       _attrs = attrs;
+
+      _templateFileFactory = templateFileFactory?? new ZptDocumentFactory();
+
     }
 
     #endregion

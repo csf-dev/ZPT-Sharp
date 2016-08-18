@@ -25,8 +25,6 @@ namespace CSF.Zpt.MVC.Tales
       TYPED_MODEL             = "Model",
       HERE                    = "here",
       REQUEST_LOWER           = "request",
-      TEMPLATE                = "template",
-      CONTAINER               = "container",
       VIEWS_DIRECTORY         = "Views",
       VIEWS_VIRTUAL_PATH      = "~/Views/";
 
@@ -35,7 +33,6 @@ namespace CSF.Zpt.MVC.Tales
     #region fields
 
     private ViewContext _viewContext;
-    private ITemplateFileFactory _templateFileFactory;
     private Lazy<IDictionary<string,object>> _applicationDictionary;
 
     #endregion
@@ -128,26 +125,6 @@ namespace CSF.Zpt.MVC.Tales
           output = (result != null);
           break;
 
-        case TEMPLATE:
-          result = _templateFileFactory.CreateTemplateFile(currentContext.Element.OwnerDocument);
-          output = (result != null);
-          break;
-
-        case CONTAINER:
-          var fileInfo = currentContext.Element.OwnerDocument?.GetSourceFileInfo() as SourceFileInfo;
-          if(fileInfo != null)
-          {
-            var dir = fileInfo.FileInfo.Directory;
-            result = new TemplateDirectory(dir);
-            output = true;
-          }
-          else
-          {
-            result = null;
-            output = false;
-          }
-          break;
-
         case VIEWS_DIRECTORY:
           var viewsDirectoryPath = ViewContext.HttpContext.Server.MapPath(VIEWS_VIRTUAL_PATH);
           result = new TemplateDirectory(new DirectoryInfo(viewsDirectoryPath));
@@ -180,10 +157,10 @@ namespace CSF.Zpt.MVC.Tales
                                 ContextualisedRepetitionSummaryWrapper repeat,
                                 Lazy<OriginalAttributeValuesCollection> attrs,
                                 ViewContext viewContext,
-                                ITemplateFileFactory templateFileFactory = null) : base(options, repeat, attrs)
+                                ITemplateFileFactory templateFileFactory = null)
+      : base(options, repeat, attrs, templateFileFactory)
     {
       _viewContext = viewContext?? new ViewContext();
-      _templateFileFactory = templateFileFactory?? new ZptDocumentFactory();
       _applicationDictionary = GetApplicationDictionary(viewContext);
     }
 

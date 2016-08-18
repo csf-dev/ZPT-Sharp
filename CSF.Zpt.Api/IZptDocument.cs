@@ -35,10 +35,10 @@ namespace CSF.Zpt
     ITalesPathHandler GetMacros();
 
     /// <summary>
-    /// Gets information about the source file for the current instance.
+    /// Gets information about the source medium for the current instance
     /// </summary>
-    /// <returns>The file info.</returns>
-    ISourceInfo GetSourceFileInfo();
+    /// <returns>The source info.</returns>
+    ISourceInfo GetSourceInfo();
   }
 }
 

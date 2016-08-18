@@ -101,6 +101,15 @@ namespace CSF.Zpt.Rendering
       return this.FullName.GetHashCode();
     }
 
+    /// <summary>
+    /// Gets a representation of the current instance which is suitable for use with TALES.
+    /// </summary>
+    /// <returns>The TALES representation of the current instance.</returns>
+    public object GetContainer()
+    {
+      return null;
+    }
+
     #endregion
 
     #region constructors
