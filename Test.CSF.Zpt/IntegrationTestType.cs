@@ -6,7 +6,9 @@ namespace Test.CSF.Zpt
   {
     Default,
 
-    SourceAnnotation
+    SourceAnnotation,
+
+    Model
   }
 }
 

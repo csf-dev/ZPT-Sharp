@@ -13,41 +13,8 @@ namespace Test.CSF.Zpt
 {
   [TestFixture]
   [Category("Integration")]
-  public class SourceAnnotationIntegrationTests
+  public class SourceAnnotationIntegrationTests : IntegrationTestBase
   {
-    #region fields
-
-    private IZptDocumentFactory _documentFactory;
-    private IIntegrationTestConfiguration _config;
-    private DirectoryInfo _sourcePath, _expectedPath;
-    private log4net.ILog _logger;
-
-    #endregion
-
-    #region setup & teardown
-
-    [TestFixtureSetUp]
-    public void FixtureSetup()
-    {
-      _logger = log4net.LogManager.GetLogger(this.GetType());
-
-      IIntegrationTestConfiguration configuredConfig = ConfigurationHelper.GetSection<IntegrationTestConfiguration>();
-
-      _config = configuredConfig?? new FallbackIntegrationTestConfiguration();
-
-      _sourcePath = _config.GetSourceDocumentPath(IntegrationTestType.SourceAnnotation);
-      _expectedPath = _config.GetExpectedOutputPath(IntegrationTestType.SourceAnnotation);
-    }
-
-    [SetUp]
-    public void Setup()
-    {
-      var fac = new ZptDocumentFactory();
-      _documentFactory = fac;
-    }
-
-    #endregion
-
     #region tests
 
     [Test]
@@ -66,7 +33,7 @@ namespace Test.CSF.Zpt
         }
       }
 
-      _logger.InfoFormat("{0} integration test cases processed", filePairsToTest.Count());
+      this.Logger.InfoFormat("{0} integration test cases processed", filePairsToTest.Count());
 
       // Assert
       Assert.That(!failedTests.Any(),
@@ -99,77 +66,24 @@ namespace Test.CSF.Zpt
 
     #region methods
 
-    private bool PerformTestRun(FileInfo sourceDocument,
-                                FileInfo expectedResultDocument)
+    protected override DirectoryInfo GetSourcePath(IIntegrationTestConfiguration config)
     {
-      bool output = false;
-      IZptDocument document = null;
-      string expectedRendering, actualRendering = null;
-      bool exceptionCaught = false;
-
-      try
-      {
-        document = _documentFactory.CreateDocument(sourceDocument);
-      }
-      catch(Exception ex)
-      {
-        _logger.ErrorFormat("Exception caught whilst loading the source document:{0}{1}{2}",
-                            expectedResultDocument.Name,
-                            Environment.NewLine,
-                            ex);
-        exceptionCaught = true;
-      }
-
-      if(!exceptionCaught)
-      {
-        using(var stream = expectedResultDocument.OpenRead())
-        using(var reader = new StreamReader(stream))
-        {
-          expectedRendering = reader.ReadToEnd();
-        }
-
-        try
-        {
-          var root = sourceDocument.GetParent().GetParent();
-          var options = new RenderingOptions(contextFactory: this.CreateTestEnvironment(root),
-                                                    outputIndentedXml: true,
-                                                    xmlIndentCharacters: "\t",
-                                                    addSourceFileAnnotation: true);
-
-          actualRendering = document.Render(options).Replace(Environment.NewLine, "\n");
-          output = (actualRendering == expectedRendering);
-        }
-        catch(Exception ex)
-        {
-          _logger.ErrorFormat("Exception caught whilst processing output file:{0}{1}{2}",
-                              expectedResultDocument.Name,
-                              Environment.NewLine,
-                              ex);
-          output = false;
-          exceptionCaught = true;
-        }
-      }
-
-      if(!output && !exceptionCaught)
-      {
-        _logger.ErrorFormat("Unexpected rendering whilst processing expected output:{0}{1}{2}",
-                            expectedResultDocument.Name,
-                            Environment.NewLine,
-                            actualRendering);
-      }
-
-      return output;
+      return config.GetSourceDocumentPath(IntegrationTestType.SourceAnnotation);
     }
 
-    private IRenderingContextFactory CreateTestEnvironment(DirectoryInfo rootPath)
+    protected override DirectoryInfo GetExpectedPath(IIntegrationTestConfiguration config)
     {
-      var output = new TalesRenderingContextFactory();
-      output.RootDocumentPath = rootPath.FullName;
+      return config.GetExpectedOutputPath(IntegrationTestType.SourceAnnotation);
+    }
+
+    protected override IRenderingContextFactory CreateTestEnvironment(DirectoryInfo rootPath)
+    {
+      var output = (TalesRenderingContextFactory) base.CreateTestEnvironment(rootPath);
 
       // The location of the other ZPT documents
-      output.MetalLocalDefinitions.Add("documents", new TemplateDirectory(_sourcePath));
+      output.MetalLocalDefinitions.Add("documents", new TemplateDirectory(this.SourcePath));
       var tests = new NamedObjectWrapper();
-      tests["input"] = new TemplateDirectory(_sourcePath, true);
+      tests["input"] = new TemplateDirectory(this.SourcePath, true);
       output.MetalLocalDefinitions.Add("tests", tests);
 
       // The 'content' keyword option
@@ -221,13 +135,12 @@ namespace Test.CSF.Zpt
       return output;
     }
 
-    private IEnumerable<Tuple<FileInfo,FileInfo>> GetFilePairsToTest()
+    protected override IRenderingOptions GetRenderingOptions(IRenderingContextFactory contextFactory)
     {
-      return (from expectedFile in _expectedPath.GetFiles()
-              let filename = expectedFile.Name
-              join sourceFile in _sourcePath.GetFiles() on
-              filename equals sourceFile.Name
-              select new Tuple<FileInfo,FileInfo>(sourceFile, expectedFile));
+      return new RenderingOptions(contextFactory: contextFactory,
+                                  outputIndentedXml: true,
+                                  xmlIndentCharacters: "\t",
+                                  addSourceFileAnnotation: true);
     }
 
     #endregion
