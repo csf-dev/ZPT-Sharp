@@ -102,12 +102,23 @@ namespace CSF.Zpt.Rendering
     /// <returns>The root rendering context.</returns>
     public virtual RenderingContext CreateRootContext(ZptElement element)
     {
+      return this.CreateRootContext(element, null);
+    }
+
+    /// <summary>
+    /// Creates a new root <see cref="RenderingContext"/> instance.
+    /// </summary>
+    /// <param name="element">The root ZPT element</param>
+    /// <param name="model">The model to render</param>
+    /// <returns>The root rendering context.</returns>
+    public virtual RenderingContext CreateRootContext(ZptElement element, object model)
+    {
       if(element == null)
       {
         throw new ArgumentNullException(nameof(element));
       }
 
-      return this.ContextFactory.Create(element, this);
+      return this.ContextFactory.Create(element, this, model);
     }
 
     #endregion

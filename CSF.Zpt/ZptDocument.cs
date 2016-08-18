@@ -28,6 +28,32 @@ namespace CSF.Zpt
     public virtual string Render(IRenderingOptions options = null,
                                  Action<RenderingContext> contextConfigurator = null)
     {
+      return Render((object) null, options, contextConfigurator);
+    }
+
+    /// <summary>
+    /// Renders the document to the given <c>System.IO.TextWriter</c>.
+    /// </summary>
+    /// <param name="writer">The text writer to render to.</param>
+    /// <param name="options">The rendering options to use.  If <c>null</c> then default options are used.</param>
+    /// <param name="contextConfigurator">An optional action to perform upon the root <see cref="RenderingContext"/>, to configure it.</param>
+    public virtual void Render(TextWriter writer,
+                               IRenderingOptions options = null,
+                               Action<RenderingContext> contextConfigurator = null)
+    {
+      Render(null, writer, options, contextConfigurator);
+    }
+
+    /// <summary>
+    /// Renders the document to a <c>System.String</c>.
+    /// </summary>
+    /// <param name="model">An object for which the ZPT document is to be applied.</param>
+    /// <param name="options">The rendering options to use.  If <c>null</c> then default options are used.</param>
+    /// <param name="contextConfigurator">An optional action to perform upon the root <see cref="RenderingContext"/>, to configure it.</param>
+    public virtual string Render(object model,
+                                 IRenderingOptions options = null,
+                                 Action<RenderingContext> contextConfigurator = null)
+    {
       string output;
       var opts = this.GetOptions(options);
 
@@ -40,7 +66,7 @@ namespace CSF.Zpt
         stream = new MemoryStream();
 
         writer = new StreamWriter(stream, opts.OutputEncoding);
-        this.Render(writer, options, contextConfigurator);
+        this.Render(model, writer, options, contextConfigurator);
         writer.Flush();
 
         stream.Position = 0;
@@ -61,10 +87,12 @@ namespace CSF.Zpt
     /// <summary>
     /// Renders the document to the given <c>System.IO.TextWriter</c>.
     /// </summary>
+    /// <param name="model">An object for which the ZPT document is to be applied.</param>
     /// <param name="writer">The text writer to render to.</param>
     /// <param name="options">The rendering options to use.  If <c>null</c> then default options are used.</param>
     /// <param name="contextConfigurator">An optional action to perform upon the root <see cref="RenderingContext"/>, to configure it.</param>
-    public virtual void Render(TextWriter writer,
+    public virtual void Render(object model,
+                               TextWriter writer,
                                IRenderingOptions options = null,
                                Action<RenderingContext> contextConfigurator = null)
     {
@@ -75,7 +103,7 @@ namespace CSF.Zpt
 
       var opts = this.GetOptions(options);
 
-      this.Render(writer, this.RenderElement(opts, contextConfigurator), opts);
+      this.Render(writer, this.RenderElement(model, opts, contextConfigurator), opts);
     }
 
     /// <summary>
@@ -94,9 +122,11 @@ namespace CSF.Zpt
     /// Renders the current document, returning an <see cref="ZptElement"/> representing the rendered result.
     /// </summary>
     /// <returns>The result of the rendering process.</returns>
+    /// <param name="model">An object to which the ZPT document is to be applied.</param>
     /// <param name="options">The rendering options to use.  If <c>null</c> then default options are used.</param>
     /// <param name="contextConfigurator">An optional action to perform upon the root <see cref="RenderingContext"/>, to configure it.</param>
-    protected virtual ZptElement RenderElement(IRenderingOptions options,
+    protected virtual ZptElement RenderElement(object model,
+                                               IRenderingOptions options,
                                                Action<RenderingContext> contextConfigurator)
     {
       if(options == null)
@@ -105,7 +135,7 @@ namespace CSF.Zpt
       }
 
       var output = this.GetRootElement();
-      var context = options.CreateRootContext(output);
+      var context = options.CreateRootContext(output, model);
 
       _logger.InfoFormat(Resources.LogMessageFormats.RenderingDocument,
                          (output.SourceFile != null)? output.SourceFile.FullName : "<unknown>");

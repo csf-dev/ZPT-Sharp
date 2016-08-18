@@ -10,7 +10,7 @@ namespace CSF.Zpt.MVC.Rendering
   {
     #region methods
 
-    public override RenderingContext Create(ZptElement element, IRenderingOptions options)
+    public override RenderingContext Create(ZptElement element, IRenderingOptions options, object model)
     {
       if(element == null)
       {
@@ -26,8 +26,8 @@ namespace CSF.Zpt.MVC.Rendering
         talKeywordOptions = new NamedObjectWrapper(TalKeywordOptions);
 
       IModel
-        metalModel = new MvcTalesModel(this.EvaluatorRegistry, metalKeywordOptions),
-        talModel = new MvcTalesModel(this.EvaluatorRegistry, talKeywordOptions);
+        metalModel = new MvcTalesModel(this.EvaluatorRegistry, metalKeywordOptions, model: model),
+        talModel = new MvcTalesModel(this.EvaluatorRegistry, talKeywordOptions, model: model);
 
       var viewsPath = System.Web.HttpContext.Current.Server.MapPath("~/Views/");
       var viewsDirectory = new DirectoryInfo(viewsPath);
@@ -37,7 +37,7 @@ namespace CSF.Zpt.MVC.Rendering
       PopulateMetalModel(metalModel);
       PopulateTalModel(talModel);
 
-      return new RenderingContext(metalModel, talModel, element, options);
+      return new RenderingContext(metalModel, talModel, element, options, this.RootDocumentPath);
     }
 
     #endregion

@@ -47,14 +47,14 @@ namespace CSF.Zpt.MVC.Tales
 
     public override IModel CreateChildModel()
     {
-      var output = new MvcTalesModel(this, this.Root, EvaluatorRegistry);
+      var output = new MvcTalesModel(this, this.Root, EvaluatorRegistry, model: this.ModelObject);
       output.RepetitionInfo = new RepetitionInfoCollection(this.RepetitionInfo);
       return output;
     }
 
     protected override Model CreateTypedSiblingModel()
     {
-      return new MvcTalesModel(this.Parent, this.Root, EvaluatorRegistry);
+      return new MvcTalesModel(this.Parent, this.Root, EvaluatorRegistry, model: this.ModelObject);
     }
 
     #endregion
@@ -63,17 +63,21 @@ namespace CSF.Zpt.MVC.Tales
 
     public MvcTalesModel(IEvaluatorRegistry evaluatorRegistry,
                          NamedObjectWrapper options = null,
-                         IExpressionFactory expressionCreator = null) : base(evaluatorRegistry,
-                                                                             options,
-                                                                             expressionCreator) {}
+                         IExpressionFactory expressionCreator = null,
+                         object model = null) : base(evaluatorRegistry,
+                                                     options,
+                                                     expressionCreator,
+                                                     model) {}
 
     public MvcTalesModel(IModel parent,
                          IModel root,
                          IEvaluatorRegistry evaluatorRegistry,
-                         IExpressionFactory expressionCreator = null) : base(parent,
-                                                                             root,
-                                                                             evaluatorRegistry,
-                                                                             expressionCreator) {}
+                         IExpressionFactory expressionCreator = null,
+                         object model = null) : base(parent,
+                                                     root,
+                                                     evaluatorRegistry,
+                                                     expressionCreator,
+                                                     model) {}
 
     #endregion
   }

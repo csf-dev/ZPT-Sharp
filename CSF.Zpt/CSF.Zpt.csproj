@@ -119,6 +119,7 @@
     <Compile Include="Rendering\SourceFileInfo.cs" />
     <Compile Include="Rendering\AbstractSourceInfo.cs" />
     <Compile Include="Rendering\RenderingOptions.cs" />
+    <Compile Include="Rendering\EmptyModel.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Target Name="AfterBuild" Condition="'$(Configuration)' == 'Release'">

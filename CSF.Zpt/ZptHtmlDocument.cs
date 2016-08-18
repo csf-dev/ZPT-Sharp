@@ -57,8 +57,22 @@ namespace CSF.Zpt
     public HtmlDocument RenderHtml(IRenderingOptions options = null,
                                    Action<RenderingContext> contextConfigurator = null)
     {
+      return RenderHtml(null, options, contextConfigurator);
+    }
+
+    /// <summary>
+    /// Renders the document to an <c>HtmlAgilityPack.HtmlDocument</c> instance.
+    /// </summary>
+    /// <returns>The rendered HTML document.</returns>
+    /// <param name="model">An object for which the ZPT document is to be applied.</param>
+    /// <param name="options">The rendering options to use.  If <c>null</c> then default options are used.</param>
+    /// <param name="contextConfigurator">An optional action to perform upon the root <see cref="RenderingContext"/>, to configure it.</param>
+    public HtmlDocument RenderHtml(object model,
+                                   IRenderingOptions options = null,
+                                   Action<RenderingContext> contextConfigurator = null)
+    {
       var opts = this.GetOptions(options);
-      var element = this.RenderElement(opts, contextConfigurator);
+      var element = this.RenderElement(model, opts, contextConfigurator);
 
       var output = new HtmlDocument();
       output.LoadHtml(element.ToString());

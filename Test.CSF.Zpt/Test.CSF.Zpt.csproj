@@ -108,6 +108,7 @@
     <Compile Include="SourceAnnotationIntegrationTests.cs" />
     <Compile Include="IntegrationTestType.cs" />
     <Compile Include="Tales\TestFilesystemDirectory.cs" />
+    <Compile Include="ModelIntegrationTests.cs" />
     <Compile Include="IntegrationTestBase.cs" />
   </ItemGroup>
   <ItemGroup>

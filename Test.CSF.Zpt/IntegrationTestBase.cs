@@ -135,6 +135,11 @@ namespace Test.CSF.Zpt
       return output;
     }
 
+    protected virtual string Render(IZptDocument document, IRenderingOptions options)
+    {
+      return document.Render(options);
+    }
+
     protected bool PerformTestRun(FileInfo sourceDocument,
                                   FileInfo expectedResultDocument)
     {
@@ -169,7 +174,7 @@ namespace Test.CSF.Zpt
           var rootDir = sourceDocument.GetParent().GetParent();
           var options = GetRenderingOptions(this.CreateTestEnvironment(rootDir));
 
-          actualRendering = document.Render(options).Replace(Environment.NewLine, "\n");
+          actualRendering = this.Render(document, options).Replace(Environment.NewLine, "\n");
           output = (actualRendering == expectedRendering);
         }
         catch(Exception ex)

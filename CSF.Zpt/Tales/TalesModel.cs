@@ -49,7 +49,7 @@ namespace CSF.Zpt.Tales
     /// <returns>The child model.</returns>
     public override IModel CreateChildModel()
     {
-      var output = new TalesModel(this, this.Root, EvaluatorRegistry);
+      var output = new TalesModel(this, this.Root, EvaluatorRegistry, modelObject: this.ModelObject);
       output.RepetitionInfo = new RepetitionInfoCollection(this.RepetitionInfo);
       return output;
     }
@@ -60,7 +60,7 @@ namespace CSF.Zpt.Tales
     /// <returns>The sibling model.</returns>
     protected override Model CreateTypedSiblingModel()
     {
-      return new TalesModel(this.Parent, this.Root, EvaluatorRegistry);
+      return new TalesModel(this.Parent, this.Root, EvaluatorRegistry, modelObject: this.ModelObject);
     }
 
     /// <summary>
@@ -192,7 +192,8 @@ namespace CSF.Zpt.Tales
       var originalAttrs = new Lazy<OriginalAttributeValuesCollection>(() => context.GetOriginalAttributes());
       return new BuiltinContextsContainer(this.GetKeywordOptions(),
                                           this.GetRepetitionSummaries(context.Element),
-                                          originalAttrs);
+                                          originalAttrs,
+                                          model: this.ModelObject);
     }
 
     #endregion
@@ -205,9 +206,11 @@ namespace CSF.Zpt.Tales
     /// <param name="evaluatorRegistry">Evaluator registry.</param>
     /// <param name="options">Options.</param>
     /// <param name="expressionCreator">The expression factory to use.</param>
+    /// <param name="modelObject">An object to which the ZPT document is to be applied.</param>
     public TalesModel(IEvaluatorRegistry evaluatorRegistry,
                       NamedObjectWrapper options = null,
-                      IExpressionFactory expressionCreator = null) : base(options)
+                      IExpressionFactory expressionCreator = null,
+                      object modelObject = null) : base(options, modelObject)
     {
       if(evaluatorRegistry == null)
       {
@@ -225,10 +228,12 @@ namespace CSF.Zpt.Tales
     /// <param name="root">The root model.</param>
     /// <param name="evaluatorRegistry">The expression evaluator registry.</param>
     /// <param name="expressionCreator">The expression factory to use.</param>
+    /// <param name="modelObject">An object to which the ZPT document is to be applied.</param>
     public TalesModel(IModel parent,
                       IModel root,
                       IEvaluatorRegistry evaluatorRegistry,
-                      IExpressionFactory expressionCreator = null) : base(parent, root)
+                      IExpressionFactory expressionCreator = null,
+                      object modelObject = null) : base(parent, root, modelObject)
     {
       if(evaluatorRegistry == null)
       {

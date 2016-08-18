@@ -1,0 +1,9 @@
+<html>
+<body>
+<ul>
+<li tal:repeat="item here/Sequence">
+  <span tal:replace="item/Name">Item name</span> is <strong tal:content="item/Description">item description</strong>.
+</li>
+</ul>
+</body>
+</html>

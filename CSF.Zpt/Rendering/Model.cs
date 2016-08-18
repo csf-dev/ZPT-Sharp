@@ -96,6 +96,16 @@ namespace CSF.Zpt.Rendering
       }
     }
 
+    /// <summary>
+    /// Gets the model object being rendered.
+    /// </summary>
+    /// <value>The model object.</value>
+    public object ModelObject
+    {
+      get;
+      protected set;
+    }
+
     #endregion
 
     #region methods
@@ -180,6 +190,7 @@ namespace CSF.Zpt.Rendering
 
       output.LocalDefinitions = new Dictionary<string, object>(this.LocalDefinitions);
       output.RepetitionInfo = this.RepetitionInfo;
+      output.ModelObject = this.ModelObject;
 
       return output;
     }
@@ -286,7 +297,8 @@ namespace CSF.Zpt.Rendering
     /// </summary>
     /// <param name="parent">A reference to the parent model instance, if applicable.</param>
     /// <param name="root">A reference to the root of the model hierarchy.</param>
-    public Model(IModel parent, IModel root)
+    /// <param name="modelObject">The model to be rendered.</param>
+    public Model(IModel parent, IModel root, object modelObject = null)
     {
       if(root == null)
       {
@@ -300,13 +312,16 @@ namespace CSF.Zpt.Rendering
       _globalDefinitions = (_root == this)? new Dictionary<string,object>() : null;
       _repetitionInfo = new RepetitionInfoCollection(new RepetitionInfo[0]);
       _cachedRepetitionSummaries = new Dictionary<ZptElement, ContextualisedRepetitionSummaryWrapper>();
+
+      this.ModelObject = modelObject;
     }
 
     /// <summary>
     /// Initializes a new root of the <see cref="CSF.Zpt.Rendering.Model"/> class.
     /// </summary>
     /// <param name="options">Keyword options.</param>
-    public Model(NamedObjectWrapper options)
+    /// <param name="modelObject">The model to be rendered.</param>
+    public Model(NamedObjectWrapper options, object modelObject = null)
     {
       _options = options?? new NamedObjectWrapper();
       _parent = null;
@@ -316,6 +331,8 @@ namespace CSF.Zpt.Rendering
       _globalDefinitions = (_root == this)? new Dictionary<string,object>() : null;
       _repetitionInfo = new RepetitionInfoCollection(new RepetitionInfo[0]);
       _cachedRepetitionSummaries = new Dictionary<ZptElement, ContextualisedRepetitionSummaryWrapper>();
+
+      this.ModelObject = modelObject;
     }
 
     #endregion
@@ -331,48 +348,6 @@ namespace CSF.Zpt.Rendering
       get {
         return new EmptyModel(null);
       }
-    }
-
-    #endregion
-
-    #region contained type
-
-    private class EmptyModel : Model
-    {
-      public override IModel CreateChildModel()
-      {
-        return new EmptyModel(this, this.Root);
-      }
-
-      protected override Model CreateTypedSiblingModel()
-      {
-        return new EmptyModel(this.Parent, this.Root);
-      }
-
-      public override ExpressionResult Evaluate(string expression, RenderingContext context)
-      {
-        object result;
-        ExpressionResult output;
-
-        if(this.TryGetItem(expression, context, out result))
-        {
-          output = new ExpressionResult(result);
-        }
-        else
-        {
-          string message = String.Format(Resources.ExceptionMessages.ModelDoesNotContainItem, expression);
-          throw new ModelEvaluationException(message) {
-            ElementName = context.Element.Name,
-            ExpressionText = expression.ToString(),
-          };
-        }
-
-        return output;
-      }
-
-      internal EmptyModel(NamedObjectWrapper opts) : base(opts) {}
-
-      internal EmptyModel(IModel parent, IModel root) : base(parent, root) {}
     }
 
     #endregion
