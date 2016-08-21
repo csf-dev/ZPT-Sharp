@@ -41,7 +41,6 @@
     <Reference Include="System.Web" />
     <Reference Include="log4net">
       <HintPath>..\packages\log4net.2.0.3\lib\net40-full\log4net.dll</HintPath>
-      <Package>log4net-1.2.11</Package>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -123,8 +122,10 @@
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Target Name="AfterBuild" Condition="'$(Configuration)' == 'Release'">
-    <Exec Command="nuget pack CSF.Zpt.nuspec -Prop Configuration=Release" Condition="'$(OS)' == 'Linux'"></Exec>
-    <Exec Command="&quot;$(MSBuildProgramFiles32)\NuGet\nuget.exe&quot; pack CSF.Zpt.nuspec -Prop Configuration=Release" Condition="'$(OS)' != 'Linux'"></Exec>
+    <Exec Command="nuget pack CSF.Zpt.nuspec -Prop Configuration=Release" Condition="'$(OS)' == 'Linux'">
+    </Exec>
+    <Exec Command="&quot;$(MSBuildProgramFiles32)\NuGet\nuget.exe&quot; pack CSF.Zpt.nuspec -Prop Configuration=Release" Condition="'$(OS)' != 'Linux'">
+    </Exec>
   </Target>
   <ItemGroup>
     <ProjectReference Include="..\CSF\CSF\CSF.csproj">
