@@ -20,7 +20,12 @@ namespace CSF.Zpt
     /// <summary>
     /// Forces the rendering to be treated as XML.
     /// </summary>
-    Xml
+    Xml,
+
+    /// <summary>
+    /// Forces the rendering to be treated as XML, using <c>System.Xml.Linq</c>.
+    /// </summary>
+    XmlLinq
   }
 }
 
