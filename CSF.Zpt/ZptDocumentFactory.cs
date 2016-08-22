@@ -29,7 +29,8 @@ namespace CSF.Zpt
 
     private static readonly Type
       HtmlDocumentType = typeof(ZptHtmlDocument),
-      XmlDocumentType = typeof(ZptXmlLinqDocument);
+      XmlDocumentType = typeof(ZptXmlDocument),
+      XmlLinqDocumentType = typeof(ZptXmlLinqDocument);
 
     #endregion
 
@@ -99,11 +100,16 @@ namespace CSF.Zpt
       {
         output = this.CreateHtmlDocument(sourceFile, encoding);
       }
-      else if(_forceDocumentType == XmlDocumentType
-              || renderingMode == RenderingMode.Xml
+      else if(_forceDocumentType == XmlLinqDocumentType
+              || renderingMode == RenderingMode.XmlLinq
               || (_forceDocumentType == null
                   && renderingMode == RenderingMode.AutoDetect
                   && XmlSuffixes.Contains(extension)))
+      {
+        output = this.CreateXmlLinqDocument(sourceFile, encoding);
+      }
+      else if(_forceDocumentType == XmlDocumentType
+              || renderingMode == RenderingMode.Xml)
       {
         output = this.CreateXmlDocument(sourceFile, encoding);
       }
@@ -217,6 +223,62 @@ namespace CSF.Zpt
     /// <param name="sourceInfo">Information about the source document.</param>
     /// <param name="encoding">The text encoding to use in reading the source file.</param>
     public IZptDocument CreateXmlDocument(Stream sourceStream, ISourceInfo sourceInfo, Encoding encoding)
+    {
+      if(sourceStream == null)
+      {
+        throw new ArgumentNullException(nameof(sourceStream));
+      }
+
+      sourceInfo = sourceInfo?? UnknownSourceFileInfo.Instance;
+      encoding = encoding?? DefaultEncoding;
+
+      var settings = new System.Xml.XmlReaderSettings() {
+        XmlResolver = new LocalXhtmlXmlResolver(),
+        DtdProcessing = System.Xml.DtdProcessing.Parse,
+      };
+
+      var doc = new System.Xml.XmlDocument();
+
+      using(var streamReader = new StreamReader(sourceStream, encoding))
+      using(var reader = System.Xml.XmlReader.Create(streamReader, settings))
+      {
+        doc.Load(reader);
+      }
+
+      return new ZptXmlDocument(doc, sourceInfo);
+    }
+
+    /// <summary>
+    /// Creates an XML/Linq document from the given source file.
+    /// </summary>
+    /// <param name="sourceFile">The source file containing the document to create.</param>
+    /// <param name="encoding">The text encoding to use in reading the source file.</param>
+    public IZptDocument CreateXmlLinqDocument(FileInfo sourceFile, Encoding encoding)
+    {
+      if(sourceFile == null)
+      {
+        throw new ArgumentNullException(nameof(sourceFile));
+      }
+
+      IZptDocument output;
+      var sourceInfo = new SourceFileInfo(sourceFile);
+      encoding = encoding?? DefaultEncoding;
+
+      using(var stream = sourceFile.OpenRead())
+      {
+        output = this.CreateXmlLinqDocument(stream, sourceInfo, encoding);
+      }
+
+      return output;
+    }
+
+    /// <summary>
+    /// Creates an XML/Linq document from a stream exposing the source document, and optional information about the source.
+    /// </summary>
+    /// <param name="sourceStream">A stream exposing the document content.</param>
+    /// <param name="sourceInfo">Information about the source document.</param>
+    /// <param name="encoding">The text encoding to use in reading the source file.</param>
+    public IZptDocument CreateXmlLinqDocument(Stream sourceStream, ISourceInfo sourceInfo, Encoding encoding)
     {
       if(sourceStream == null)
       {
