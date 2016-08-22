@@ -24,7 +24,7 @@ namespace CSF.Zpt.Rendering
     #region fields
 
     private XElement _node;
-    private int? _cachedHashCode;
+    private int? _cachedHashCode, _filePosition;
 
     #endregion
 
@@ -171,16 +171,18 @@ namespace CSF.Zpt.Rendering
         throw new ArgumentException(message, "replacement");
       }
 
+      var cloned = ((ZptXmlLinqElement) repl.Clone()).Node;
+
       if(this.Node.Parent != null)
       {
-        this.Node.ReplaceWith(repl.Node);
+        this.Node.ReplaceWith(cloned);
       }
       else
       {
-        this.Node.Document.Root.ReplaceWith(repl.Node);
+        this.Node.Document.Root.ReplaceWith(cloned);
       }
 
-      return new ZptXmlLinqElement(repl.Node,
+      return new ZptXmlLinqElement(cloned,
                                    repl.SourceFile,
                                    this.OwnerDocument,
                                    isImported: true);
@@ -565,7 +567,9 @@ namespace CSF.Zpt.Rendering
     {
       var clone = new XElement(this.Node);
 
-      return new ZptXmlLinqElement(clone, this.SourceFile, this.OwnerDocument, this.IsRoot, true);
+      return new ZptXmlLinqElement(clone, this.SourceFile, this.OwnerDocument, this.IsRoot, true) {
+        _filePosition = this.GetLineNumber()
+      };
     }
 
     /// <summary>
@@ -574,8 +578,25 @@ namespace CSF.Zpt.Rendering
     /// <returns>The file location.</returns>
     public override string GetFileLocation()
     {
-      var lineInfo = ((IXmlLineInfo) this.Node);
-      return lineInfo.HasLineInfo()? lineInfo.LineNumber.ToString() : null;
+      var lineNumber = this.GetLineNumber();
+      return lineNumber.HasValue? lineNumber.Value.ToString() : null;
+    }
+
+    /// <summary>
+    /// Gets the current instance's line number.
+    /// </summary>
+    /// <returns>The line number.</returns>
+    protected virtual int? GetLineNumber()
+    {
+      if(_filePosition.HasValue)
+      {
+        return _filePosition;
+      }
+      else
+      {
+        var lineInfo = ((IXmlLineInfo) this.Node);
+        return lineInfo.HasLineInfo()? lineInfo.LineNumber : (int?) null;
+      }
     }
 
     /// <summary>
@@ -586,8 +607,7 @@ namespace CSF.Zpt.Rendering
     {
       string output = null;
 
-      var lineInfo = ((IXmlLineInfo) this.Node);
-      int? startTagLineNumber = lineInfo.HasLineInfo()? lineInfo.LineNumber : (int?) null;
+      int? startTagLineNumber = GetLineNumber();
 
       if(startTagLineNumber.HasValue)
       {

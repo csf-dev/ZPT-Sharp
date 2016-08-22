@@ -154,7 +154,7 @@ namespace CSF.Zpt
 
       using(var xmlWriter = XmlTextWriter.Create(writer, settings))
       {
-        xmlElement.Node.Save(xmlWriter);
+        xmlElement.Node.Document.Save(xmlWriter);
       }
     }
 
