@@ -9,6 +9,9 @@ using System.Xml.XPath;
 
 namespace CSF.Zpt.Rendering
 {
+  /// <summary>
+  /// Implementation of <see cref="ZptElement"/> based on documents parsed using <c>System.Xml.Linq</c>.
+  /// </summary>
   public class ZptXmlLinqElement : ZptElement
   {
     #region fields
@@ -161,8 +164,6 @@ namespace CSF.Zpt.Rendering
         throw new ArgumentException(message, "replacement");
       }
 
-      XNode importedNode;
-
       if(this.Node.Parent != null)
       {
         this.Node.ReplaceWith(repl.Node);
@@ -173,8 +174,9 @@ namespace CSF.Zpt.Rendering
       }
 
       return new ZptXmlLinqElement(repl.Node,
-                               repl.SourceFile, this.OwnerDocument,
-                               isImported: true);
+                                   repl.SourceFile,
+                                   this.OwnerDocument,
+                                   isImported: true);
     }
 
     /// <summary>
@@ -278,8 +280,8 @@ namespace CSF.Zpt.Rendering
     /// <returns>The children.</returns>
     public override ZptElement[] GetChildElements()
     {
-      return this.Node.Elements
-        .Cast<XNode>()
+      return this.Node.Elements()
+        .Cast<XElement>()
         .Where(x => x.NodeType == XmlNodeType.Element)
         .Select(x => new ZptXmlLinqElement(x, this.SourceFile, this.OwnerDocument))
         .ToArray();
@@ -291,7 +293,7 @@ namespace CSF.Zpt.Rendering
     /// <returns>The attributes.</returns>
     public override ZptAttribute[] GetAttributes()
     {
-      return this.Node.Attributes
+      return this.Node.Attributes()
         .Cast<XAttribute>()
         .Select(x => new ZptXmlLinqAttribute(x))
         .ToArray();
@@ -380,7 +382,7 @@ namespace CSF.Zpt.Rendering
         throw new ArgumentNullException(nameof(name));
       }
 
-      var attribs = this.Node.Attributes
+      var attribs = this.Node.Attributes()
         .Cast<XAttribute>()
         .Where(x => x.Name.LocalName == name
                && (attributeNamespace.Uri == null
@@ -425,7 +427,7 @@ namespace CSF.Zpt.Rendering
       }
 
       return this.Node.XPathSelectElements(query, nsManager)
-        .Cast<XNode>()
+        .Cast<XElement>()
         .Select(x => new ZptXmlLinqElement(x, this.SourceFile, this.OwnerDocument))
         .ToArray();
     }
@@ -449,7 +451,7 @@ namespace CSF.Zpt.Rendering
         .ToArray();
 
       var toRemove = (from ele in elements
-                      from attrib in ele.Attributes.Cast<XAttribute>()
+                      from attrib in ele.Attributes().Cast<XAttribute>()
                       where
                         attrib.Name.Namespace.NamespaceName == attributeNamespace.Uri
                         || (attrib.Name.Namespace.NamespaceName == "http://www.w3.org/2000/xmlns/"
@@ -494,26 +496,7 @@ namespace CSF.Zpt.Rendering
         throw new ArgumentNullException(nameof(comment));
       }
 
-      var parent = this.GetParent();
-      string indent = String.Empty;
-
-      // This is where I am up to so far
-
-      var previousNode = this.Node.pre;
-      if(previousNode != null
-         && previousNode.NodeType == XmlNodeType.Text)
-      {
-        XmlText previousText = (XmlText) previousNode;
-        var indentMatch = Indent.Match(previousText.Value);
-        if(indentMatch.Success)
-        {
-          indent = indentMatch.Value;
-        }
-      }
-
-      var commentNode = this.Node.OwnerDocument.CreateComment(String.Concat(XML_COMMENT_START, comment, XML_COMMENT_END));
-
-      parent.InsertBefore(commentNode, this.Node);
+      this.Node.AddBeforeSelf(new XComment(comment));
     }
 
     /// <summary>
@@ -527,23 +510,7 @@ namespace CSF.Zpt.Rendering
         throw new ArgumentNullException(nameof(comment));
       }
 
-      string indent = String.Empty;
-
-      var firstChild = this.Node.FirstChild;
-      if(firstChild != null
-         && firstChild.NodeType == XmlNodeType.Text)
-      {
-        XmlText innerText = (XmlText) firstChild;
-        var indentMatch = Indent.Match(innerText.Value);
-        if(indentMatch.Success)
-        {
-          indent = indentMatch.Value;
-        }
-      }
-
-      var commentNode = this.Node.OwnerDocument.CreateComment(String.Concat(XML_COMMENT_START, comment, XML_COMMENT_END));
-
-      this.Node.InsertBefore(commentNode, this.Node.FirstChild);
+      this.Node.AddFirst(new XComment(comment));
     }
 
     /// <summary>
@@ -552,9 +519,7 @@ namespace CSF.Zpt.Rendering
     /// <param name="comment">The comment text.</param>
     public override void AddCommentAfter(string comment)
     {
-      var commentNode = this.Node.OwnerDocument.CreateComment(String.Concat(XML_COMMENT_START, comment, XML_COMMENT_END));
-
-      this.GetParent().InsertAfter(commentNode, this.Node);
+      this.Node.AddAfterSelf(new XComment(comment));
     }
 
     /// <summary>
@@ -593,7 +558,7 @@ namespace CSF.Zpt.Rendering
     /// </summary>
     public override ZptElement Clone()
     {
-      var clone = _node.Clone();
+      var clone = new XElement(this.Node);
 
       return new ZptXmlLinqElement(clone, this.SourceFile, this.OwnerDocument, this.IsRoot, true);
     }
@@ -624,14 +589,13 @@ namespace CSF.Zpt.Rendering
     /// </returns>
     public override ZptElement[] Omit()
     {
-      var children = this.Node.ChildNodes.Cast<XNode>().ToArray();
-      var parent = this.GetParent();
+      var children = this.Node.Nodes().Cast<XElement>().ToArray();
 
       foreach(var child in children)
       {
-        parent.InsertBefore(child, this.Node);
+        this.Node.AddBeforeSelf(child);
       }
-      parent.RemoveChild(this.Node);
+      this.Node.Remove();
 
       return children
         .Where(x => x.NodeType == XmlNodeType.Element)
@@ -644,7 +608,7 @@ namespace CSF.Zpt.Rendering
     /// </summary>
     public override void Remove()
     {
-      this.GetParent().RemoveChild(this.Node);
+      this.Node.Remove();
     }
 
     /// <summary>
@@ -652,11 +616,7 @@ namespace CSF.Zpt.Rendering
     /// </summary>
     public override void RemoveAllChildren()
     {
-      var children = this.Node.ChildNodes.Cast<XNode>().ToArray();
-      foreach(var child in children)
-      {
-        this.Node.RemoveChild(child);
-      }
+      this.Node.RemoveNodes();
     }
 
     /// <summary>
@@ -689,10 +649,10 @@ namespace CSF.Zpt.Rendering
         throw new ArgumentException(message, nameof(other));
       }
 
-      return this.Node.OwnerDocument == ((ZptXmlLinqElement) other).Node.OwnerDocument;
+      return this.Node.Document == ((ZptXmlLinqElement) other).Node.Document;
     }
 
-    private bool IsInNamespace(ZptNamespace nSpace, XNode node)
+    private bool IsInNamespace(ZptNamespace nSpace, XElement node)
     {
       if(nSpace == null)
       {
@@ -703,11 +663,11 @@ namespace CSF.Zpt.Rendering
 
       if(nSpace.Uri != null)
       {
-        output = node.NamespaceURI == nSpace.Uri;
+        output = node.Name.Namespace.NamespaceName == nSpace.Uri;
       }
       else
       {
-        output = String.IsNullOrEmpty(node.NamespaceURI);
+        output = String.IsNullOrEmpty(node.Name.Namespace.NamespaceName);
       }
 
       return output;
@@ -717,9 +677,9 @@ namespace CSF.Zpt.Rendering
     /// Gets the parent of the current <see cref="Node"/>.
     /// </summary>
     /// <returns>The parent node.</returns>
-    private XNode GetParent()
+    private XElement GetParent()
     {
-      var output = this.Node.ParentNode;
+      var output = this.Node.Parent;
 
       if(output == null)
       {
@@ -730,7 +690,7 @@ namespace CSF.Zpt.Rendering
     }
 
     /// <summary>
-    /// Imports the given text as a new <c>XNode</c>.
+    /// Imports the given text as a new <c>XElement</c>.
     /// </summary>
     /// <returns>A collection of the imported nodes.</returns>
     /// <param name="text">The text to import.</param>
@@ -752,6 +712,48 @@ namespace CSF.Zpt.Rendering
       }
 
       return output;
+    }
+
+    #endregion
+
+    #region constructor
+
+    /// <summary>
+    /// Initializes a new instance of the <see cref="CSF.Zpt.Rendering.ZptXmlLinqElement"/> class.
+    /// </summary>
+    /// <param name="node">The source XML Node.</param>
+    /// <param name="sourceFile">Information about the element's source file.</param>
+    /// <param name="isRoot">Whether or not this is the root element.</param>
+    /// <param name="isImported">Whether or not this element is imported.</param>
+    /// <param name="ownerDocument">The ZPT document which owns the element.</param>
+    public ZptXmlLinqElement(XNode node,
+                             ISourceInfo sourceFile,
+                             IZptDocument ownerDocument,
+                             bool isRoot = false,
+                             bool isImported = false) : base(sourceFile, isRoot, isImported, ownerDocument)
+    {
+      if(node == null)
+      {
+        throw new ArgumentNullException(nameof(node));
+      }
+
+      XElement actualNode;
+
+      if(node.NodeType == XmlNodeType.Document)
+      {
+        actualNode = node.Document.Root;
+      }
+      else if(node.NodeType != XmlNodeType.Element)
+      {
+        string message = String.Format(ExceptionMessages.IncorrectWrappedNodeType, "XML", "element", node.NodeType);
+        throw new ArgumentException(message, "node");
+      }
+      else
+      {
+        actualNode = (XElement) node;
+      }
+
+      _node = actualNode;
     }
 
     #endregion
