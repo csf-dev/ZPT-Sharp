@@ -46,6 +46,14 @@ namespace CSF.Zpt
     /// <param name="encoding">The text encoding to use in reading the source file.</param>
     IZptDocument CreateXmlDocument(Stream sourceStream, ISourceInfo sourceInfo = null, Encoding encoding = null);
 
+    /// <summary>
+    /// Creates an XML Linq document from a stream exposing the source document, and optional information about the source.
+    /// </summary>
+    /// <param name="sourceStream">A stream exposing the document content.</param>
+    /// <param name="sourceInfo">Information about the source document.</param>
+    /// <param name="encoding">The text encoding to use in reading the source file.</param>
+    IZptDocument CreateXmlLinqDocument(Stream sourceStream, ISourceInfo sourceInfo = null, Encoding encoding = null);
+
     #endregion
   }
 }

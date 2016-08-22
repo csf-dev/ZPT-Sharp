@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <body>
-	<ImG href="foo" Alt="bar" Href="about:foo" alT="baz" />
+
+<ImG href="foo" Alt="bar" Href="about:foo" alT="baz" />
+
 </body>

@@ -1,21 +1,23 @@
 ﻿using System;
-using System.Xml;
 using System.IO;
 using System.Linq;
+using System.Xml.Linq;
 using CSF.Zpt.Rendering;
 using CSF.Zpt.Resources;
 using CSF.Zpt.Tales;
+using System.Xml;
+using System.Xml.XPath;
 
 namespace CSF.Zpt
 {
   /// <summary>
-  /// Implementation of <see cref="ZptDocument"/> based on a <c>System.Xml.XmlDocument</c>.
+  /// Implementation of <see cref="ZptDocument"/> based on a <c>System.Xml.Linq.XDocument</c>.
   /// </summary>
-  public class ZptXmlDocument : ZptDocument
+  public class ZptXmlLinqDocument : ZptDocument
   {
     #region fields
 
-    private XmlDocument _document;
+    private XDocument _document;
     private ISourceInfo _sourceFile;
 
     #endregion
@@ -26,7 +28,7 @@ namespace CSF.Zpt
     /// Gets the original XML document.
     /// </summary>
     /// <value>The original XML document.</value>
-    public virtual XmlDocument Document
+    public virtual XDocument Document
     {
       get {
         return _document;
@@ -54,7 +56,7 @@ namespace CSF.Zpt
     /// <returns>The rendered XML document.</returns>
     /// <param name="options">The rendering options to use.  If <c>null</c> then default options are used.</param>
     /// <param name="contextConfigurator">An optional action to perform upon the root <see cref="RenderingContext"/>, to configure it.</param>
-    public XmlDocument RenderXml(IRenderingOptions options = null,
+    public XDocument RenderXml(IRenderingOptions options = null,
                                  Action<RenderingContext> contextConfigurator = null)
     {
       return RenderXml(null, options, contextConfigurator);
@@ -67,15 +69,14 @@ namespace CSF.Zpt
     /// <param name="model">An object for which the ZPT document is to be applied.</param>
     /// <param name="options">The rendering options to use.  If <c>null</c> then default options are used.</param>
     /// <param name="contextConfigurator">An optional action to perform upon the root <see cref="RenderingContext"/>, to configure it.</param>
-    public XmlDocument RenderXml(object model,
+    public XDocument RenderXml(object model,
                                  IRenderingOptions options = null,
                                  Action<RenderingContext> contextConfigurator = null)
     {
       var opts = this.GetOptions(options);
       var element = this.RenderElement(model, opts, contextConfigurator);
 
-      var output = new XmlDocument();
-      output.LoadXml(element.ToString());
+      var output = XDocument.Parse(element.ToString());
 
       return output;
     }
@@ -90,14 +91,17 @@ namespace CSF.Zpt
                                 ZptConstants.Metal.Namespace.Prefix,
                                 ZptConstants.Metal.DefineMacroAttribute);
 
-      var nsManager = new XmlNamespaceManager(this.Document.CreateNavigator().NameTable);
+      var reader = this.Document.CreateReader();
+      var root = this.Document.Root;
+
+      var nsManager = new XmlNamespaceManager(reader.NameTable);
       nsManager.AddNamespace(ZptConstants.Metal.Namespace.Prefix, ZptConstants.Metal.Namespace.Uri);
 
-      var output = this.Document.DocumentElement
-        .SelectNodes(xpath, nsManager)
-        .Cast<XmlNode>()
+      var output = root
+        .XPathSelectElements(xpath, nsManager)
+        .Cast<XNode>()
         .Select(x => {
-          var element = new ZptXmlElement(x, this.SourceFile, this, isImported: true);
+          var element = new ZptXmlLinqElement(x, this.SourceFile, this, isImported: true);
           var context = new RenderingContext(Model.Empty, Model.Empty, element, GetDefaultOptions());
           return new Metal.MetalMacro(context.GetMetalAttribute(ZptConstants.Metal.DefineMacroAttribute).Value, element);
         })
@@ -134,7 +138,7 @@ namespace CSF.Zpt
         throw new ArgumentNullException(nameof(element));
       }
 
-      var xmlElement = element as ZptXmlElement;
+      var xmlElement = element as ZptXmlLinqElement;
       if(xmlElement == null)
       {
         string message = String.Format(ExceptionMessages.RenderedElementIncorrectType,
@@ -150,7 +154,7 @@ namespace CSF.Zpt
 
       using(var xmlWriter = XmlTextWriter.Create(writer, settings))
       {
-        xmlElement.Node.OwnerDocument.WriteTo(xmlWriter);  
+        xmlElement.Node.Document.Save(xmlWriter);
       }
     }
 
@@ -160,7 +164,7 @@ namespace CSF.Zpt
     /// <returns>The rendering model.</returns>
     protected override ZptElement GetRootElement()
     {
-      return new Rendering.ZptXmlElement(this.Document.DocumentElement, this.SourceFile, this, isRoot: true);
+      return new Rendering.ZptXmlLinqElement(this.Document.Root, this.SourceFile, this, isRoot: true);
     }
 
     /// <summary>
@@ -181,8 +185,8 @@ namespace CSF.Zpt
     /// </summary>
     /// <param name="document">An XML document from which to create the current instance.</param>
     /// <param name="sourceFile">Information about the document's source file.</param>
-    public ZptXmlDocument(XmlDocument document,
-                          ISourceInfo sourceFile)
+    public ZptXmlLinqDocument(XDocument document,
+                              ISourceInfo sourceFile)
     {
       if(document == null)
       {

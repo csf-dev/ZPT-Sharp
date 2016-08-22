@@ -41,8 +41,8 @@
     <Reference Include="System.Web" />
     <Reference Include="log4net">
       <HintPath>..\packages\log4net.2.0.3\lib\net40-full\log4net.dll</HintPath>
-      <Package>log4net-1.2.11</Package>
     </Reference>
+    <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AssemblyInfo.cs" />
@@ -120,11 +120,16 @@
     <Compile Include="Rendering\AbstractSourceInfo.cs" />
     <Compile Include="Rendering\RenderingOptions.cs" />
     <Compile Include="Rendering\EmptyModel.cs" />
+    <Compile Include="ZptXmlLinqDocument.cs" />
+    <Compile Include="Rendering\ZptXmlLinqElement.cs" />
+    <Compile Include="Rendering\ZptXmlLinqAttribute.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Target Name="AfterBuild" Condition="'$(Configuration)' == 'Release'">
-    <Exec Command="nuget pack CSF.Zpt.nuspec -Prop Configuration=Release" Condition="'$(OS)' == 'Linux'"></Exec>
-    <Exec Command="&quot;$(MSBuildProgramFiles32)\NuGet\nuget.exe&quot; pack CSF.Zpt.nuspec -Prop Configuration=Release" Condition="'$(OS)' != 'Linux'"></Exec>
+    <Exec Command="nuget pack CSF.Zpt.nuspec -Prop Configuration=Release" Condition="'$(OS)' == 'Linux'">
+    </Exec>
+    <Exec Command="&quot;$(MSBuildProgramFiles32)\NuGet\nuget.exe&quot; pack CSF.Zpt.nuspec -Prop Configuration=Release" Condition="'$(OS)' != 'Linux'">
+    </Exec>
   </Target>
   <ItemGroup>
     <ProjectReference Include="..\CSF\CSF\CSF.csproj">

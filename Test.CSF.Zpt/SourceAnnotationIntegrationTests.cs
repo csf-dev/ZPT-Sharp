@@ -42,7 +42,7 @@ namespace Test.CSF.Zpt
                   failedTests.Count());
     }
 
-    [TestCase("test_sa1.xml")]
+    [TestCase("test_sa3.xml")]
     [Explicit("This test is covered by RunIntegrationTests - this method is for running them one at a time though.")]
     public void TestSingleIntegrationTest(string inputFileName)
     {
