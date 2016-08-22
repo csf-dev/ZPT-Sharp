@@ -6,6 +6,7 @@ using System.Text;
 using System.Xml;
 using CSF.Zpt.Resources;
 using System.Xml.XPath;
+using System.Collections;
 
 namespace CSF.Zpt.Rendering
 {
@@ -14,6 +15,12 @@ namespace CSF.Zpt.Rendering
   /// </summary>
   public class ZptXmlLinqElement : ZptElement
   {
+    #region constants
+
+    private const char NEWLINE = '\n';
+
+    #endregion
+
     #region fields
 
     private XElement _node;
@@ -339,7 +346,7 @@ namespace CSF.Zpt.Rendering
         query = String.Concat("@search:", name);
       }
 
-      var xmlAttribute = this.Node.XPathSelectElements(query, nsManager)
+      var xmlAttribute = ((IEnumerable) this.Node.XPathEvaluate(query, nsManager))
         .Cast<XAttribute>()
         .FirstOrDefault();
 
@@ -363,7 +370,7 @@ namespace CSF.Zpt.Rendering
         throw new ArgumentNullException(nameof(name));
       }
 
-      this.Node.SetAttributeValue(XName.Get(name, attributeNamespace.Uri), value);
+      this.Node.SetAttributeValue(XName.Get(name, attributeNamespace.Uri?? XNamespace.None.NamespaceName), value);
     }
 
     /// <summary>
@@ -426,7 +433,7 @@ namespace CSF.Zpt.Rendering
         query = String.Concat(".//*[@search:", name, "]");
       }
 
-      return this.Node.XPathSelectElements(query, nsManager)
+      return ((IEnumerable) this.Node.XPathEvaluate(query, nsManager))
         .Cast<XElement>()
         .Select(x => new ZptXmlLinqElement(x, this.SourceFile, this.OwnerDocument))
         .ToArray();
@@ -444,8 +451,7 @@ namespace CSF.Zpt.Rendering
         throw new ArgumentNullException(nameof(attributeNamespace));
       }
 
-      var elements = this.Node
-        .XPathSelectElements(".//*")
+      var elements = ((IEnumerable) this.Node.XPathEvaluate(".//*"))
         .Cast<XElement>()
         .Union(new [] { (XElement) this.Node })
         .ToArray();
@@ -472,8 +478,7 @@ namespace CSF.Zpt.Rendering
     /// <param name="elementNamespace">The element namespace.</param>
     public override void PurgeElements(ZptNamespace elementNamespace)
     {
-      var toRemove = this.Node
-        .XPathSelectElements(".//*")
+      var toRemove = ((IEnumerable) this.Node.XPathEvaluate(".//*"))
         .Cast<XElement>()
         .Union(new [] { this.Node })
         .Where(x => IsInNamespace(elementNamespace, x))
@@ -569,7 +574,8 @@ namespace CSF.Zpt.Rendering
     /// <returns>The file location.</returns>
     public override string GetFileLocation()
     {
-      return null;
+      var lineInfo = ((IXmlLineInfo) this.Node);
+      return lineInfo.HasLineInfo()? lineInfo.LineNumber.ToString() : null;
     }
 
     /// <summary>
@@ -578,7 +584,18 @@ namespace CSF.Zpt.Rendering
     /// <returns>The end tag file location.</returns>
     public override string GetEndTagFileLocation()
     {
-      return null;
+      string output = null;
+
+      var lineInfo = ((IXmlLineInfo) this.Node);
+      int? startTagLineNumber = lineInfo.HasLineInfo()? lineInfo.LineNumber : (int?) null;
+
+      if(startTagLineNumber.HasValue)
+      {
+        var outerXml = this.Node.ToString();
+        output = (startTagLineNumber.Value + outerXml.Count(x => x == NEWLINE)).ToString();
+      }
+
+      return output;
     }
 
     /// <summary>
@@ -589,7 +606,7 @@ namespace CSF.Zpt.Rendering
     /// </returns>
     public override ZptElement[] Omit()
     {
-      var children = this.Node.Nodes().Cast<XElement>().ToArray();
+      var children = this.Node.Nodes().ToArray();
 
       foreach(var child in children)
       {
@@ -703,8 +720,7 @@ namespace CSF.Zpt.Rendering
 
       if(treatAsXml)
       {
-        var doc = XDocument.Parse(toImport);
-        output = doc.Root;
+        output = XElement.Parse(toImport);
       }
       else
       {

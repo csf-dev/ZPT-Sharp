@@ -29,7 +29,7 @@ namespace CSF.Zpt
 
     private static readonly Type
       HtmlDocumentType = typeof(ZptHtmlDocument),
-      XmlDocumentType = typeof(ZptXmlDocument);
+      XmlDocumentType = typeof(ZptXmlLinqDocument);
 
     #endregion
 
@@ -231,15 +231,16 @@ namespace CSF.Zpt
         DtdProcessing = System.Xml.DtdProcessing.Parse,
       };
 
-      var doc = new System.Xml.XmlDocument();
+      System.Xml.Linq.XDocument doc;
 
       using(var streamReader = new StreamReader(sourceStream, encoding))
       using(var reader = System.Xml.XmlReader.Create(streamReader, settings))
       {
-        doc.Load(reader);
+        var options = System.Xml.Linq.LoadOptions.PreserveWhitespace | System.Xml.Linq.LoadOptions.SetLineInfo;
+        doc = System.Xml.Linq.XDocument.Load(reader, options);
       }
 
-      return new ZptXmlDocument(doc, sourceInfo);
+      return new ZptXmlLinqDocument(doc, sourceInfo);
     }
 
     #endregion
