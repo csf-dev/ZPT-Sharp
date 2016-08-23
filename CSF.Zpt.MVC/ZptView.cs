@@ -20,7 +20,7 @@ namespace CSF.Zpt.MVC
 
     #region properties
 
-    public RenderingOptions RenderingOptions
+    public IRenderingOptions RenderingOptions
     {
       get;
       set;

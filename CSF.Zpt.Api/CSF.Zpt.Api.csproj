@@ -44,7 +44,6 @@
     <Compile Include="Rendering\RenderingContext.cs" />
     <Compile Include="Rendering\ZptAttribute.cs" />
     <Compile Include="Rendering\ZptElement.cs" />
-    <Compile Include="Rendering\RenderingOptions.cs" />
     <Compile Include="Rendering\ZptNamespace.cs" />
     <Compile Include="Rendering\OriginalAttributeValuesCollection.cs" />
     <Compile Include="Rendering\IRenderingContextFactory.cs" />
@@ -73,6 +72,7 @@
     <Compile Include="Rendering\IActionCanceller.cs" />
     <Compile Include="Rendering\CancellationToken.cs" />
     <Compile Include="Rendering\ISourceInfo.cs" />
+    <Compile Include="Rendering\IRenderingOptions.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

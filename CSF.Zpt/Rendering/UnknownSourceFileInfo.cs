@@ -5,7 +5,7 @@ namespace CSF.Zpt.Rendering
   /// <summary>
   /// Null-object implementation of <see cref="SourceFileInfo"/>, representing an unknown source file.
   /// </summary>
-  public class UnknownSourceFileInfo : ISourceInfo
+  public sealed class UnknownSourceFileInfo : ISourceInfo
   {
     #region constants
 
@@ -39,7 +39,7 @@ namespace CSF.Zpt.Rendering
     /// A hash code for this instance that is suitable for use in hashing algorithms and data structures such as a
     /// hash table.
     /// </returns>
-    public int GetHashCode()
+    public override int GetHashCode()
     {
       return 0;
     }
@@ -56,7 +56,7 @@ namespace CSF.Zpt.Rendering
     /// <c>true</c> if the specified <see cref="System.Object"/> is equal to the current
     /// <see cref="CSF.Zpt.Rendering.UnknownSourceFileInfo"/>; otherwise, <c>false</c>.
     /// </returns>
-    public bool Equals(object obj)
+    public override bool Equals(object obj)
     {
       return Object.ReferenceEquals(this, obj);
     }
@@ -76,6 +76,15 @@ namespace CSF.Zpt.Rendering
     public bool Equals(ISourceInfo obj)
     {
       return Object.ReferenceEquals(this, obj);
+    }
+
+    /// <summary>
+    /// Gets a representation of the current instance which is suitable for use with TALES.
+    /// </summary>
+    /// <returns>The TALES representation of the current instance.</returns>
+    public object GetContainer()
+    {
+      return null;
     }
 
     #endregion

@@ -18,7 +18,7 @@ namespace CSF.Zpt.Cli
 
     #region public API
 
-    public void Render(RenderingOptions options,
+    public void Render(IRenderingOptions options,
                        InputOutputInfo inputOutputInfo,
                        RenderingMode mode)
     {
@@ -111,7 +111,7 @@ namespace CSF.Zpt.Cli
     }
 
     private void Render(RenderingJob job,
-                        RenderingOptions options,
+                        IRenderingOptions options,
                         InputOutputInfo inputOutputInfo,
                         Action<RenderingContext> contextConfigurator)
     {

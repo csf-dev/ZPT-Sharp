@@ -2,6 +2,7 @@
 <html>
 <head metal:define-macro="common_document_head">
 <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title metal:define-slot="document_title">General document template</title>
 <base href="../"
       tal:define="defaultBase string:."
@@ -13,10 +14,20 @@
 @import url(css/dummy.css);
 </style>
 <script type="text/javascript" src="js/modernizr.min.js"></script>
-<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.4.0/styles/default.min.css">
-<script src="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.4.0/highlight.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.4.0/styles/default.min.css">
+<script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.4.0/highlight.min.js"></script>
 <script>
-hljs.initHighlightingOnLoad();
+$(window).ready(function() {
+  hljs.initHighlightingOnLoad();
+  
+  var
+    navHamburger = $(".page_header .hamburger_menu"),
+    navMenu = $(".main_page_area > nav");
+  navHamburger.click(function(ev) {
+    navMenu.toggleClass("visible");
+  });
+});
 </script>
 </head>
 <body metal:define-macro="common_document_body"
@@ -25,6 +36,11 @@ hljs.initHighlightingOnLoad();
       tal:attributes="class string:page_$activePageName">
 <div class="content_wrapper">
   <header class="page_header" metal:define-slot="page_header">
+    <div class="hamburger_menu" title="Show/hide navigation">
+      <span class="hamburger_line"></span>
+      <span class="hamburger_line"></span>
+      <span class="hamburger_line"></span>
+    </div>
     <h2>
       <a href="index.html">ZPT Sharp</a>
       <em>Zen HTML views</em>
@@ -65,5 +81,6 @@ hljs.initHighlightingOnLoad();
     </p>
   </section>
 </footer>
+<div metal:define-slot="end_of_page_scripts" tal:omit-tag="string:True"></div>
 </body>
 </html>

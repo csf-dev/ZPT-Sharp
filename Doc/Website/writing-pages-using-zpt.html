@@ -1,6 +1,7 @@
 ﻿<!doctype html>
 <html tal:define="activePage string:writing_pages_using_zpt">
 <head metal:use-macro="documents/Shared/general-page.html/macros/common_document_head">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta charset="utf-8">
 <title metal:fill-slot="document_title">Writing views using ZPT</title>
 <base href="." />
@@ -70,7 +71,7 @@ hljs.initHighlightingOnLoad();
         Comparing ZPT to ASP.NET views/pages, METAL could be thought of as similar to <em>user controls</em> and
         (<a href="metal/introduction.html#macros_for_the_html_element">by defining a macro with slots at the root of
         the document</a>) <em>master pages</em>, rolled into a single mechanism. TAL on the other hand connects the
-        page object model (potentially a ViewModel) with the markup.
+        page object model (your MVC model, where applicable) with the markup.
       </p>
       <h2>Introducing TALES</h2>
       <p>

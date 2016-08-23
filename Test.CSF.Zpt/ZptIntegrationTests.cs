@@ -12,43 +12,8 @@ namespace Test.CSF.Zpt
 {
   [TestFixture]
   [Category("Integration")]
-  public class ZptIntegrationTests
+  public class ZptIntegrationTests : IntegrationTestBase
   {
-    #region fields
-
-    private IZptDocumentFactory _documentFactory;
-    private ITemplateFileFactory _templateFactory;
-    private IIntegrationTestConfiguration _config;
-    private DirectoryInfo _sourcePath, _expectedPath;
-    private log4net.ILog _logger;
-
-    #endregion
-
-    #region setup & teardown
-
-    [TestFixtureSetUp]
-    public void FixtureSetup()
-    {
-      _logger = log4net.LogManager.GetLogger(this.GetType());
-
-      IIntegrationTestConfiguration configuredConfig = ConfigurationHelper.GetSection<IntegrationTestConfiguration>();
-
-      _config = configuredConfig?? new FallbackIntegrationTestConfiguration();
-
-      _sourcePath = _config.GetSourceDocumentPath();
-      _expectedPath = _config.GetExpectedOutputPath();
-    }
-
-    [SetUp]
-    public void Setup()
-    {
-      var fac = new ZptDocumentFactory();
-      _documentFactory = fac;
-      _templateFactory = fac;
-    }
-
-    #endregion
-
     #region tests
 
     [Test]
@@ -67,7 +32,7 @@ namespace Test.CSF.Zpt
         }
       }
 
-      _logger.InfoFormat("{0} integration test cases processed", filePairsToTest.Count());
+      this.Logger.InfoFormat("{0} integration test cases processed", filePairsToTest.Count());
 
       // Assert
       Assert.That(!failedTests.Any(),
@@ -100,74 +65,14 @@ namespace Test.CSF.Zpt
 
     #region methods
 
-    private bool PerformTestRun(FileInfo sourceDocument,
-                                FileInfo expectedResultDocument)
+    protected override IRenderingContextFactory CreateTestEnvironment(DirectoryInfo rootPath)
     {
-      bool output = false;
-      IZptDocument document = null;
-      string expectedRendering, actualRendering = null;
-      bool exceptionCaught = false;
-
-      try
-      {
-        document = _documentFactory.CreateDocument(sourceDocument);
-      }
-      catch(Exception ex)
-      {
-        _logger.ErrorFormat("Exception caught whilst loading the source document:{0}{1}{2}",
-                            expectedResultDocument.Name,
-                            Environment.NewLine,
-                            ex);
-        exceptionCaught = true;
-      }
-
-      if(!exceptionCaught)
-      {
-        using(var stream = expectedResultDocument.OpenRead())
-        using(var reader = new StreamReader(stream))
-        {
-          expectedRendering = reader.ReadToEnd();
-        }
-
-        try
-        {
-          var options = new DefaultRenderingOptions(contextFactory: this.CreateTestEnvironment(),
-                                             outputIndentedXml: true,
-                                             xmlIndentCharacters: "\t");
-
-          actualRendering = document.Render(options).Replace(Environment.NewLine, "\n");
-          output = (actualRendering == expectedRendering);
-        }
-        catch(Exception ex)
-        {
-          _logger.ErrorFormat("Exception caught whilst processing output file:{0}{1}{2}",
-                              expectedResultDocument.Name,
-                              Environment.NewLine,
-                              ex);
-          output = false;
-          exceptionCaught = true;
-        }
-      }
-
-      if(!output && !exceptionCaught)
-      {
-        _logger.ErrorFormat("Unexpected rendering whilst processing expected output:{0}{1}{2}",
-                            expectedResultDocument.Name,
-                            Environment.NewLine,
-                            actualRendering);
-      }
-
-      return output;
-    }
-
-    private IRenderingContextFactory CreateTestEnvironment()
-    {
-      var output = new TalesRenderingContextFactory();
+      var output = (TalesRenderingContextFactory) base.CreateTestEnvironment(rootPath);
 
       // The location of the other ZPT documents
-      output.MetalLocalDefinitions.Add("documents", new TemplateDirectory(_sourcePath));
+      output.MetalLocalDefinitions.Add("documents", new TemplateDirectory(this.SourcePath));
       var tests = new NamedObjectWrapper();
-      tests["input"] = new TemplateDirectory(_sourcePath, true);
+      tests["input"] = new TemplateDirectory(this.SourcePath, true);
       output.MetalLocalDefinitions.Add("tests", tests);
 
       // The 'content' keyword option
@@ -185,10 +90,10 @@ namespace Test.CSF.Zpt
       var items = Enumerable
         .Range(1, 5)
         .Select(x => {
-          var item = new NamedObjectWrapper();
-          item["num"] = x.ToString();
-          return item;
-        })
+        var item = new NamedObjectWrapper();
+        item["num"] = x.ToString();
+        return item;
+      })
         .ToArray();
       items[0].SetStringRepresentation("one");
       items[1].SetStringRepresentation("two");
@@ -202,7 +107,7 @@ namespace Test.CSF.Zpt
       output.TalKeywordOptions.Add("batch", batch);
 
       // The 'laf' keyword option
-      var laf = _templateFactory.CreateTemplateFile(_sourcePath.GetFiles("teeshoplaf.html").Single());
+      var laf = this.TemplateFactory.CreateTemplateFile(this.SourcePath.GetFiles("teeshoplaf.html").Single());
       output.MetalKeywordOptions.Add("laf", laf);
 
       // The 'getProducts' option
@@ -219,15 +124,6 @@ namespace Test.CSF.Zpt
       output.TalKeywordOptions.Add("getProducts", getProducts);
 
       return output;
-    }
-
-    private IEnumerable<Tuple<FileInfo,FileInfo>> GetFilePairsToTest()
-    {
-      return (from expectedFile in _expectedPath.GetFiles()
-              let filename = expectedFile.Name
-              join sourceFile in _sourcePath.GetFiles() on
-                filename equals sourceFile.Name
-              select new Tuple<FileInfo,FileInfo>(sourceFile, expectedFile));
     }
 
     #endregion

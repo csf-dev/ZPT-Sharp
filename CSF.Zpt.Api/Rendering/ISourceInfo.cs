@@ -36,6 +36,12 @@ namespace CSF.Zpt.Rendering
     /// <see cref="CSF.Zpt.Rendering.ISourceInfo"/>; otherwise, <c>false</c>.</returns>
     bool Equals(object other);
 
+    /// <summary>
+    /// Gets a representation of the current instance which is suitable for use with TALES.
+    /// </summary>
+    /// <returns>The TALES representation of the current instance.</returns>
+    object GetContainer();
+
     #endregion
   }
 }

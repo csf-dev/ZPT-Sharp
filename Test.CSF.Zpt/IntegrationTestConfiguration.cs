@@ -12,6 +12,8 @@ namespace Test.CSF.Zpt
     internal const string
       DefaultSourceDocumentPath = "../../../Common/ZptIntegrationTests/SourceDocuments",
       DefaultExpectedOutputPath = "../../../Common/ZptIntegrationTests/ExpectedOutputs",
+      DefaultModelSourceDocumentPath = "../../../Common/ZptModelIntegrationTests/SourceDocuments",
+      DefaultModelExpectedOutputPath = "../../../Common/ZptModelIntegrationTests/ExpectedOutputs",
       DefaultSourceAnnotationSourceDocumentPath = "../../../Common/SourceAnnotationIntegrationTests/SourceDocuments",
       DefaultSourceAnnotationExpectedOutputPath = "../../../Common/SourceAnnotationIntegrationTests/ExpectedOutputs";
 
@@ -38,6 +40,28 @@ namespace Test.CSF.Zpt
       }
       set {
         this["ExpectedOutputPath"] = value;
+      }
+    }
+
+    [ConfigurationProperty(@"ModelSourceDocumentPath", IsRequired = false, DefaultValue = "")]
+    public virtual string ModelSourceDocumentPath
+    {
+      get {
+        return (string) this["ModelSourceDocumentPath"];
+      }
+      set {
+        this["ModelSourceDocumentPath"] = value;
+      }
+    }
+
+    [ConfigurationProperty(@"ModelExpectedOutputPath", IsRequired = false, DefaultValue = "")]
+    public virtual string ModelExpectedOutputPath
+    {
+      get {
+        return (string) this["ModelExpectedOutputPath"];
+      }
+      set {
+        this["ModelExpectedOutputPath"] = value;
       }
     }
 
@@ -77,30 +101,44 @@ namespace Test.CSF.Zpt
       return GetPath(type, true);
     }
 
-    private DirectoryInfo GetPath(IntegrationTestType type, bool getExpectedPath)
+    private DirectoryInfo GetPath(IntegrationTestType type, bool useExpectedOutputPath)
+    {
+      return GetPath(GetDefaultPathString(type, useExpectedOutputPath),
+                     GetConfiguredPathString(type, useExpectedOutputPath));
+    }
+
+    private string GetConfiguredPathString(IntegrationTestType type, bool useExpectedOutputPath)
     {
       if(!type.IsDefinedValue())
       {
         throw new ArgumentException("Test type must be a defined enumeration constant", nameof(type));
       }
 
-      DirectoryInfo output;
+      string output;
 
-      if(type == IntegrationTestType.Default && getExpectedPath)
+      if(type == IntegrationTestType.Default && useExpectedOutputPath)
       {
-        output = GetPath(this.ExpectedOutputPath, DefaultExpectedOutputPath);
+        output = this.ExpectedOutputPath;
       }
       else if(type == IntegrationTestType.Default)
       {
-        output = GetPath(this.SourceDocumentPath, DefaultSourceDocumentPath);
+        output = this.SourceDocumentPath;
       }
-      else if(type == IntegrationTestType.SourceAnnotation && getExpectedPath)
+      else if(type == IntegrationTestType.SourceAnnotation && useExpectedOutputPath)
       {
-        output = GetPath(this.SourceAnnotationExpectedOutputPath, DefaultSourceAnnotationExpectedOutputPath);
+        output = this.SourceAnnotationExpectedOutputPath;
       }
       else if(type == IntegrationTestType.SourceAnnotation)
       {
-        output = GetPath(this.SourceAnnotationSourceDocumentPath, DefaultSourceAnnotationSourceDocumentPath);
+        output = this.SourceAnnotationSourceDocumentPath;
+      }
+      else if(type == IntegrationTestType.Model && useExpectedOutputPath)
+      {
+        output = this.ModelExpectedOutputPath;
+      }
+      else if(type == IntegrationTestType.Model)
+      {
+        output = this.ModelSourceDocumentPath;
       }
       else
       {
@@ -110,7 +148,53 @@ namespace Test.CSF.Zpt
       return output;
     }
 
-    private DirectoryInfo GetPath(string configuredPath, string defaultPath)
+    internal static DirectoryInfo GetDefaultPath(IntegrationTestType type, bool useExpectedOutputPath)
+    {
+      return GetPath(GetDefaultPathString(type, useExpectedOutputPath));
+    }
+
+    private static string GetDefaultPathString(IntegrationTestType type, bool useExpectedOutputPath)
+    {
+      if(!type.IsDefinedValue())
+      {
+        throw new ArgumentException("Test type must be a defined enumeration constant", nameof(type));
+      }
+
+      string output;
+
+      if(type == IntegrationTestType.Default && useExpectedOutputPath)
+      {
+        output = DefaultExpectedOutputPath;
+      }
+      else if(type == IntegrationTestType.Default)
+      {
+        output = DefaultSourceDocumentPath;
+      }
+      else if(type == IntegrationTestType.SourceAnnotation && useExpectedOutputPath)
+      {
+        output = DefaultSourceAnnotationExpectedOutputPath;
+      }
+      else if(type == IntegrationTestType.SourceAnnotation)
+      {
+        output = DefaultSourceAnnotationSourceDocumentPath;
+      }
+      else if(type == IntegrationTestType.Model && useExpectedOutputPath)
+      {
+        output = DefaultModelExpectedOutputPath;
+      }
+      else if(type == IntegrationTestType.Model)
+      {
+        output = DefaultModelSourceDocumentPath;
+      }
+      else
+      {
+        throw new InvalidOperationException("Theoretically impossible scenario, broken test config implementation");
+      }
+
+      return output;
+    }
+
+    private static DirectoryInfo GetPath(string defaultPath, string configuredPath = null)
     {
       var output = configuredPath?? defaultPath;
       return new DirectoryInfo(output);

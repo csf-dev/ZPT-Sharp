@@ -113,6 +113,15 @@ namespace CSF.Zpt.Rendering
       return this.FileInfo.GetHashCode();
     }
 
+    /// <summary>
+    /// Gets a representation of the current instance which is suitable for use with TALES.
+    /// </summary>
+    /// <returns>The TALES representation of the current instance.</returns>
+    public object GetContainer()
+    {
+      return new CSF.Zpt.Tales.TemplateDirectory(this.FileInfo.Directory);
+    }
+
     #endregion
 
     #region constructors

@@ -1,0 +1,21 @@
+﻿<?xml version="1.0"?>
+<package>
+  <metadata>
+    <id>CSF.Zpt.Cli</id>
+    <version>0.3.0</version>
+    <title>ZPT-Sharp commandline processor</title>
+    <authors>CSF Software Ltd</authors>
+    <licenseUrl>https://opensource.org/licenses/MIT</licenseUrl>
+    <projectUrl>http://csf-dev.github.io/ZPT-Sharp/</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Zope Page Templates for C♯ and .NET: commandline page rendering application.</description>
+    <copyright>Copyright 2016</copyright>
+    <dependencies>
+      <dependency id="CSF.Zpt" version="0.3.0" />
+    </dependencies> 
+  </metadata>
+  <files>
+    <file src="bin/Release/ZptBuilder.exe" target="lib/net45" />
+    <file src="bin/Release/ZptBuilder.exe.config" target="lib/net45" />
+  </files>
+</package>

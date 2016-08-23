@@ -54,11 +54,25 @@ namespace CSF.Zpt
     /// <returns>The rendered XML document.</returns>
     /// <param name="options">The rendering options to use.  If <c>null</c> then default options are used.</param>
     /// <param name="contextConfigurator">An optional action to perform upon the root <see cref="RenderingContext"/>, to configure it.</param>
-    public XmlDocument RenderXml(RenderingOptions options = null,
+    public XmlDocument RenderXml(IRenderingOptions options = null,
+                                 Action<RenderingContext> contextConfigurator = null)
+    {
+      return RenderXml(null, options, contextConfigurator);
+    }
+
+    /// <summary>
+    /// Renders the document to an <c>System.Xml.XmlDocument</c> instance.
+    /// </summary>
+    /// <returns>The rendered XML document.</returns>
+    /// <param name="model">An object for which the ZPT document is to be applied.</param>
+    /// <param name="options">The rendering options to use.  If <c>null</c> then default options are used.</param>
+    /// <param name="contextConfigurator">An optional action to perform upon the root <see cref="RenderingContext"/>, to configure it.</param>
+    public XmlDocument RenderXml(object model,
+                                 IRenderingOptions options = null,
                                  Action<RenderingContext> contextConfigurator = null)
     {
       var opts = this.GetOptions(options);
-      var element = this.RenderElement(opts, contextConfigurator);
+      var element = this.RenderElement(model, opts, contextConfigurator);
 
       var output = new XmlDocument();
       output.LoadXml(element.ToString());
@@ -93,10 +107,10 @@ namespace CSF.Zpt
     }
 
     /// <summary>
-    /// Gets information about the source file for the current instance.
+    /// Gets information about the source medium for the current instance
     /// </summary>
-    /// <returns>The file info.</returns>
-    public override ISourceInfo GetSourceFileInfo()
+    /// <returns>The source info.</returns>
+    public override ISourceInfo GetSourceInfo()
     {
       return this.SourceFile;
     }
@@ -109,7 +123,7 @@ namespace CSF.Zpt
     /// <param name="options">The rendering options to use.  If <c>null</c> then default options are used.</param>
     protected override void Render(TextWriter writer,
                                    ZptElement element,
-                                   RenderingOptions options)
+                                   IRenderingOptions options)
     {
       if(writer == null)
       {
@@ -136,7 +150,7 @@ namespace CSF.Zpt
 
       using(var xmlWriter = XmlTextWriter.Create(writer, settings))
       {
-        xmlElement.Node.WriteTo(xmlWriter);  
+        xmlElement.Node.OwnerDocument.WriteTo(xmlWriter);  
       }
     }
 
@@ -150,12 +164,12 @@ namespace CSF.Zpt
     }
 
     /// <summary>
-    /// Gets an instance of <see cref="RenderingOptions"/> which represents the default options.
+    /// Gets an instance of <see cref="IRenderingOptions"/> which represents the default options.
     /// </summary>
     /// <returns>The default options.</returns>
-    protected override RenderingOptions GetDefaultOptions()
+    protected override IRenderingOptions GetDefaultOptions()
     {
-      return new DefaultRenderingOptions();
+      return new RenderingOptions();
     }
 
     #endregion

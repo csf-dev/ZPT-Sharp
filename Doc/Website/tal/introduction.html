@@ -1,6 +1,7 @@
 <!doctype html>
 <html tal:define="activePage string:introduction_to_tal">
 <head metal:use-macro="documents/Shared/general-page.html/macros/common_document_head">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta charset="utf-8">
 <title metal:fill-slot="document_title">Introduction to TAL</title>
 <base href="../" />
@@ -35,7 +36,7 @@ hljs.initHighlightingOnLoad();
         performs rendering logic upon a page.  Where
         <a href="metal/introduction.html"><abbr title="Macro Expansion Template Attribute Language">METAL</abbr></a>
         brings together the components of that page through reusable pieces of markup defined in macros, TAL is used to
-        connect the model/ViewModel with the page.  It can inject data from the application, repeat sections of markup,
+        bind the model to the page.  It can inject data from the application, repeat sections of markup,
         control attributes, conditionally render sections of markup and more.
       </p>
       <h2>TAL attributes</h2>

@@ -98,7 +98,15 @@ namespace CSF.Zpt.Tales
     /// <summary>
     /// Create a context instance.
     /// </summary>
-    public virtual RenderingContext Create(ZptElement element, RenderingOptions options)
+    public virtual RenderingContext Create(ZptElement element, IRenderingOptions options)
+    {
+      return Create(element, options, null);
+    }
+
+    /// <summary>
+    /// Create a context instance.
+    /// </summary>
+    public virtual RenderingContext Create(ZptElement element, IRenderingOptions options, object model)
     {
       if(element == null)
       {
@@ -114,8 +122,8 @@ namespace CSF.Zpt.Tales
         talKeywordOptions = new NamedObjectWrapper(TalKeywordOptions);
 
       IModel
-        metalModel = new TalesModel(this.EvaluatorRegistry, metalKeywordOptions),
-        talModel = new TalesModel(this.EvaluatorRegistry, talKeywordOptions);
+        metalModel = new TalesModel(this.EvaluatorRegistry, metalKeywordOptions, modelObject: model),
+        talModel = new TalesModel(this.EvaluatorRegistry, talKeywordOptions, modelObject: model);
 
       PopulateMetalModel(metalModel);
       PopulateTalModel(talModel);

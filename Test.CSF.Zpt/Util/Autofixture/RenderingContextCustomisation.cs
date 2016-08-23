@@ -25,7 +25,7 @@ namespace Test.CSF.Zpt.Util.Autofixture
       fixture.Customize<RenderingContext>(x => x.FromFactory((DummyModel metal,
                                                               DummyModel tal,
                                                               ZptElement element,
-                                                              DefaultRenderingOptions opts) => {
+                                                              IRenderingOptions opts) => {
         return new Mock<RenderingContext>(metal, tal, element, opts, (string) null) {
           CallBase = true,
           Name = String.Format("Context {0}", _nameIterator++)

@@ -23,10 +23,7 @@ namespace CSF.Zpt.MVC.Tales
       SERVER                  = "Server",
       SESSION_DICTIONARY      = "Session",
       TYPED_MODEL             = "Model",
-      HERE                    = "here",
       REQUEST_LOWER           = "request",
-      TEMPLATE                = "template",
-      CONTAINER               = "container",
       VIEWS_DIRECTORY         = "Views",
       VIEWS_VIRTUAL_PATH      = "~/Views/";
 
@@ -35,7 +32,6 @@ namespace CSF.Zpt.MVC.Tales
     #region fields
 
     private ViewContext _viewContext;
-    private ITemplateFileFactory _templateFileFactory;
     private Lazy<IDictionary<string,object>> _applicationDictionary;
 
     #endregion
@@ -62,104 +58,82 @@ namespace CSF.Zpt.MVC.Tales
     /// <param name="currentContext">Gets the current rendering context.</param>
     public override bool HandleTalesPath(string pathFragment, out object result, RenderingContext currentContext)
     {
-      bool output = base.HandleTalesPath(pathFragment, out result, currentContext);
+      bool output;
+
+      switch(pathFragment)
+      {
+      case VIEW_DATA_DICTIONARY:
+        output = ViewContext.ViewData != null;
+        result = output? new NamedObjectWrapper(ViewContext.ViewData) : null;
+        break;
+
+      case TEMP_DATA_DICTIONARY:
+        output = ViewContext.TempData != null;
+        result = output? new NamedObjectWrapper(ViewContext.TempData) : null;
+        break;
+
+      case APPLICATION_DICTIONARY:
+        result = new NamedObjectWrapper(_applicationDictionary.Value);
+        output = true;
+        break;
+
+      case CACHE_DICTIONARY:
+        result = ViewContext.HttpContext?.Cache;
+        output = result != null;
+        break;
+
+      case REQUEST:
+        result = ViewContext.HttpContext?.Request;
+        output = result != null;
+        break;
+
+      case REQUEST_LOWER:
+        result = ViewContext.HttpContext?.Request;
+        output = result != null;
+        break;
+
+      case RESPONSE:
+        result = ViewContext.HttpContext?.Response;
+        output = result != null;
+        break;
+
+      case ROUTE_DATA:
+        result = ViewContext.RouteData;
+        output = result != null;
+        break;
+
+      case SERVER:
+        result = ViewContext.HttpContext?.Server;
+        output = result != null;
+        break;
+
+      case SESSION_DICTIONARY:
+        result = ViewContext.HttpContext?.Session;
+        output = result != null;
+        break;
+
+      case TYPED_MODEL:
+        result = ViewContext.ViewData?.Model;
+        output = (result != null);
+        break;
+
+      case VIEWS_DIRECTORY:
+        var viewsDirectoryPath = ViewContext.HttpContext.Server.MapPath(VIEWS_VIRTUAL_PATH);
+        result = new TemplateDirectory(new DirectoryInfo(viewsDirectoryPath));
+        output = true;
+        break;
+
+      default:
+        output = false;
+        result = null;
+        break;
+      }
 
       if(!output)
       {
-        switch(pathFragment)
-        {
-        case VIEW_DATA_DICTIONARY:
-          output = ViewContext.ViewData != null;
-          result = output? new NamedObjectWrapper(ViewContext.ViewData) : null;
-          break;
-
-        case TEMP_DATA_DICTIONARY:
-          output = ViewContext.TempData != null;
-          result = output? new NamedObjectWrapper(ViewContext.TempData) : null;
-          break;
-
-        case APPLICATION_DICTIONARY:
-          result = new NamedObjectWrapper(_applicationDictionary.Value);
-          output = true;
-          break;
-
-        case CACHE_DICTIONARY:
-          result = ViewContext.HttpContext?.Cache;
-          output = result != null;
-          break;
-
-        case REQUEST:
-          result = ViewContext.HttpContext?.Request;
-          output = result != null;
-          break;
-
-        case REQUEST_LOWER:
-          result = ViewContext.HttpContext?.Request;
-          output = result != null;
-          break;
-
-        case RESPONSE:
-          result = ViewContext.HttpContext?.Response;
-          output = result != null;
-          break;
-
-        case ROUTE_DATA:
-          result = ViewContext.RouteData;
-          output = result != null;
-          break;
-
-        case SERVER:
-          result = ViewContext.HttpContext?.Server;
-          output = result != null;
-          break;
-
-        case SESSION_DICTIONARY:
-          result = ViewContext.HttpContext?.Session;
-          output = result != null;
-          break;
-
-        case TYPED_MODEL:
-          result = ViewContext.ViewData?.Model;
-          output = (result != null);
-          break;
-
-        case HERE:
-          result = ViewContext.ViewData?.Model;
-          output = (result != null);
-          break;
-
-        case TEMPLATE:
-          result = _templateFileFactory.CreateTemplateFile(currentContext.Element.OwnerDocument);
-          output = (result != null);
-          break;
-
-        case CONTAINER:
-          var fileInfo = currentContext.Element.OwnerDocument?.GetSourceFileInfo() as SourceFileInfo;
-          if(fileInfo != null)
-          {
-            var dir = fileInfo.FileInfo.Directory;
-            result = new TemplateDirectory(dir);
-            output = true;
-          }
-          else
-          {
-            result = null;
-            output = false;
-          }
-          break;
-
-        case VIEWS_DIRECTORY:
-          var viewsDirectoryPath = ViewContext.HttpContext.Server.MapPath(VIEWS_VIRTUAL_PATH);
-          result = new TemplateDirectory(new DirectoryInfo(viewsDirectoryPath));
-          output = true;
-          break;
-
-        default:
-          output = false;
-          result = null;
-          break;
-        }
+        output = base.HandleTalesPath(pathFragment, out result, currentContext);
       }
+
 
       return output;
     }
@@ -180,10 +154,10 @@ namespace CSF.Zpt.MVC.Tales
                                 ContextualisedRepetitionSummaryWrapper repeat,
                                 Lazy<OriginalAttributeValuesCollection> attrs,
                                 ViewContext viewContext,
-                                ITemplateFileFactory templateFileFactory = null) : base(options, repeat, attrs)
+                                ITemplateFileFactory templateFileFactory = null)
+      : base(options, repeat, attrs, templateFileFactory, viewContext?.ViewData?.Model)
     {
       _viewContext = viewContext?? new ViewContext();
-      _templateFileFactory = templateFileFactory?? new ZptDocumentFactory();
       _applicationDictionary = GetApplicationDictionary(viewContext);
     }
 

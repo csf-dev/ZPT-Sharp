@@ -10,3 +10,5 @@ packages/*/
 *.directory
 CSF.Zpt.zip
 CSF.Zpt.tar.gz
+*.nupkg
+.vs/

@@ -13,9 +13,31 @@ namespace CSF.Zpt
     /// <summary>
     /// Renders the document to a <c>System.String</c>.
     /// </summary>
+    /// <param name="model">An object for which the ZPT document is to be applied.</param>
     /// <param name="options">The rendering options to use.  If <c>null</c> then default options are used.</param>
     /// <param name="contextConfigurator">An optional action to perform upon the root <see cref="RenderingContext"/>, to configure it.</param>
-    string Render(RenderingOptions options = null,
+    string Render(object model,
+                  IRenderingOptions options = null,
+                  Action<RenderingContext> contextConfigurator = null);
+
+    /// <summary>
+    /// Renders the document to the given <c>System.IO.TextWriter</c>.
+    /// </summary>
+    /// <param name="model">An object for which the ZPT document is to be applied.</param>
+    /// <param name="writer">The text writer to render to.</param>
+    /// <param name="options">The rendering options to use.  If <c>null</c> then default options are used.</param>
+    /// <param name="contextConfigurator">An optional action to perform upon the root <see cref="RenderingContext"/>, to configure it.</param>
+    void Render(object model,
+                TextWriter writer,
+                IRenderingOptions options = null,
+                Action<RenderingContext> contextConfigurator = null);
+
+    /// <summary>
+    /// Renders the document to a <c>System.String</c>.
+    /// </summary>
+    /// <param name="options">The rendering options to use.  If <c>null</c> then default options are used.</param>
+    /// <param name="contextConfigurator">An optional action to perform upon the root <see cref="RenderingContext"/>, to configure it.</param>
+    string Render(IRenderingOptions options = null,
                   Action<RenderingContext> contextConfigurator = null);
 
     /// <summary>
@@ -25,7 +47,7 @@ namespace CSF.Zpt
     /// <param name="options">The rendering options to use.  If <c>null</c> then default options are used.</param>
     /// <param name="contextConfigurator">An optional action to perform upon the root <see cref="RenderingContext"/>, to configure it.</param>
     void Render(TextWriter writer,
-                RenderingOptions options = null,
+                IRenderingOptions options = null,
                 Action<RenderingContext> contextConfigurator = null);
 
     /// <summary>
@@ -35,10 +57,10 @@ namespace CSF.Zpt
     ITalesPathHandler GetMacros();
 
     /// <summary>
-    /// Gets information about the source file for the current instance.
+    /// Gets information about the source medium for the current instance
     /// </summary>
-    /// <returns>The file info.</returns>
-    ISourceInfo GetSourceFileInfo();
+    /// <returns>The source info.</returns>
+    ISourceInfo GetSourceInfo();
   }
 }
 

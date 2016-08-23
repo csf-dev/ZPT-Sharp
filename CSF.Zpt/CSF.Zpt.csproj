@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -42,6 +42,7 @@
     <Reference Include="log4net">
       <HintPath>..\packages\log4net.2.0.3\lib\net40-full\log4net.dll</HintPath>
     </Reference>
+    <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AssemblyInfo.cs" />
@@ -100,7 +101,6 @@
     <Compile Include="Rendering\NoOpVisitor.cs" />
     <Compile Include="Rendering\UnknownSourceFileInfo.cs" />
     <Compile Include="Rendering\Model.cs" />
-    <Compile Include="Rendering\DefaultRenderingOptions.cs" />
     <Compile Include="Rendering\RepetitionInfo.cs" />
     <Compile Include="Resources\ExceptionMessages.Designer.cs">
       <DependentUpon>ExceptionMessages.resx</DependentUpon>
@@ -118,8 +118,19 @@
     </Compile>
     <Compile Include="Rendering\SourceFileInfo.cs" />
     <Compile Include="Rendering\AbstractSourceInfo.cs" />
+    <Compile Include="Rendering\RenderingOptions.cs" />
+    <Compile Include="Rendering\EmptyModel.cs" />
+    <Compile Include="ZptXmlLinqDocument.cs" />
+    <Compile Include="Rendering\ZptXmlLinqElement.cs" />
+    <Compile Include="Rendering\ZptXmlLinqAttribute.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Target Name="AfterBuild" Condition="'$(Configuration)' == 'Release'">
+    <Exec Command="nuget pack CSF.Zpt.nuspec -Prop Configuration=Release" Condition="'$(OS)' == 'Linux'">
+    </Exec>
+    <Exec Command="&quot;$(MSBuildProgramFiles32)\NuGet\nuget.exe&quot; pack CSF.Zpt.nuspec -Prop Configuration=Release" Condition="'$(OS)' != 'Linux'">
+    </Exec>
+  </Target>
   <ItemGroup>
     <ProjectReference Include="..\CSF\CSF\CSF.csproj">
       <Project>{E563D7BC-1AB1-4AFB-8533-51315437C6E6}</Project>
