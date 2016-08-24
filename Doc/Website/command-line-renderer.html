@@ -5,8 +5,11 @@
 <meta charset="utf-8">
 <title metal:fill-slot="document_title">The ZPT-Sharp command-line renderer</title>
 <base href="." />
-<style type="text/css">
+<style type="text/css" metal:fill-slot="document_styles">
 @import url(css/styles.css);
+@import url(css/command_line_renderer.css);
+</style>
+<style type="text/css">
 @import url(css/dummy.css);
 </style>
 <script type="text/javascript" src="js/modernizr.min.js"></script>
@@ -31,113 +34,153 @@ hljs.initHighlightingOnLoad();
     </nav>
     <section class="main_page_content" metal:fill-slot="main_page_content">
       <header>
-        <h1>The command-line renderer</h1>
+        <h1>ZptBuilder.exe manual</h1>
+        <p>
+          The following is exported from the <strong>manpage</strong> for the ZPT-Sharp
+          command-line-renderer application.
+        </p>
       </header>
-      <p>
-        ZPT-Sharp bundles a command-line utility to build simple pages (or directories containing page files)
-        with simple models.
-      </p>
-      <h2>Usage statement</h2>
-      <p>
-        For now, here is a copy of the output which is displayed when executing the renderer with just the
-        <code>--help</code> parameter.
-      </p>
-      <pre>----------------------
-ZPT-Sharp Page Builder
-----------------------
+  <a name="lbAB" id="lbAB">&nbsp;</a>
 
-Usage:  ZptBuilder.exe [options] [inputs]
+  <h2>NAME</h2>
 
-If inputs are omitted or are "-" then the application reads from standard input.  Where
-inputs are provided in the commandline, they may be one or more of file and/or directory
-paths.  File paths cause the single file to be rendered, wheras directory paths trigger
-a search for input files.
+  <p>ZptBuilder.exe - parse and render Zope Page Templates documents <a name="lbAC" id=
+  "lbAC">&nbsp;</a></p>
 
-In the case where the input contains one or more directories, where the --output option is
-also used and set to a directory, each rendered file is written to a path within the output
-directory relative to its path within the input directory.  For example:
+  <h2>SYNOPSIS</h2>
 
-  ZptBuilder.exe --output "output/" "dir/input/"
+  <p><b>ZptBuilder.exe</b> [<i>options</i>] [<i>inputs</i>] <a name="lbAD" id="lbAD">&nbsp;</a></p>
 
-The output might be as such (assuming the following files contained in the input
-directory):
+  <h2>DESCRIPTION</h2>
 
-  Input files                 Output paths
-  -----------                 ------------
-  dir/input/foo.pt            output/foo.html
-  dir/input/bar.pt            output/bar.html
-  dir/input/sub/sub-foo.pt    output/sub/sub-foo.html
+  <p>The <b>ZptBuilder</b> application is used to parse and render documents formatted as Zope Page
+  Templates source files, into either HTML or XML output documents. The <b>inputs</b> may be one or
+  more file or directory paths, indicating the files and/or directories to be parsed and
+  rendered.</p>
 
-Supported options
------------------
+  <p>Alternatively, if the only input is <b>-</b> (a single minus-dash) then the application will
+  expect a single ZPT document to be passed via <i>STDIN</i>. Input passed via standard input is
+  treated and rendered as HTML, unless the <b>--xml</b> option is used.</p>
 
-  --help, -h                            Print this usage statement and exit.
+  <p>Where directory paths are specified amongst the input, then that directory (and all child
+  directories) will be searched for matching documents to be rendered. This search is controlled by
+  the mode (HTML or XML) and the options <b>--input-filename-pattern</b> and <b>--ignore</b>.</p>
 
-  --html, -t                            Operate in HTML mode, input and output are
-                                        treated as HTML, regardless of file extension.
-  
-  --xml, -x                             Operate in XML mode, input and output are treated
-                                        as XML, regardless of file extension.
-  
-  --annotate                            Enable source annotation in output; comments will
-                                        be added indicating points at which elements are
-                                        imported from other files.
-                      
-  --no-xml-declaration                  Omit the &lt;?xml?&gt; declaration in output
-                                        files.  Only applicable when the input/output is
-                                        treated as XML.
-                              
-  --no-indent-xml                       Do not pretty-format XML output (by default output
-                                        is indented for human readability).  Only
-                                        applicable when the input/output is treated as
-                                        XML.
-                              
-  --xml-indent-chars=CHARS              Sets the character string with which to indent XML
-                                        output. By default this is two spaces: "  ".
-                                        Only applicable when the input/output is treated
-                                        as XML, and only if --no-indent-xml is not used.
-                              
-  --input-filename-pattern=PATTERN,     Sets the filename matching pattern for recognising
-  -p PATTERN                            input files.  Only applicable for inputs which are
-                                        directories and not files (or standard input).
-                                        Files matching this shell pattern are selected for
-                                        rendering, those which do not match are not.
-  
-  --output=LOCATION, -o LOCATION        Defines the output location.  If omitted then
-                                        output is rendered to standard output.  If given
-                                        as a filename then output is sent to the given
-                                        file.  If given as a directory, a file will be
-                                        created in this directory for each input file
-                                        processed.
-  
-  --output-filename-extension=EXT,      Overrides the file extension for which to write
-  -e EXT                                output files.  By default this is determined
-                                        automatically based upon the processing mode (HTML
-                                        or XML).
-  
-  --ignore=PATH, -i PATH                When any inputs are directories, the given paths
-                                        are ignored when searching for files to process.
-                                        Multiple paths may be separated by semicolon: ";"
-                                        characters.
-  
-  --keyword-options=KEY_VALUE_PAIRS     Sets ZPT keyword options.  This is performed in
-                                        the format "keyone=valueone;keytwo=valuetwo" etc.
-  
-  --rendering-context-factory=CLASS     Overrides the default implementation of
-                                        CSF.Zpt.Rendering.IRenderingContextFactory
-                                        to use when creating rendering contexts, by
-                                        providing an assembly-qualified name of the class
-                                        to use.
-  
-  --output-encoding=ENCODING,           Sets the output character encoding to use.  By
-  -n ENCODING                           default the UTF-8 encoding is used.  Any encoding
-                                        'web name' may be specified here.
-  
-  --context-visitors=CLASSES            Overrides the default implementations of
-                                        CSF.Zpt.Rendering.IContextVisitor
-                                        to use when rendering documents.  This is an
-                                        ordered list of assembly-qualified names,
-                                        separated by semicolons: ";".</pre>
+  <p>By default, rendered output is emitted to standard output; this behaviour may be overridden,
+  writing the output to file(s) using the <b>--output</b> option. When directory paths are
+  specified as inputs and the <b>--output</b> option is used, each output file is saved to a path
+  relative to the output path, based on its relative path from the input directory. <a name="lbAE"
+  id="lbAE">&nbsp;</a></p>
+
+  <h2>OPTIONS</h2>
+
+  <dl compact>
+    <dt><b>--help</b>,<b>-h</b></dt>
+
+    <dd>Prints a usage statement and exits.</dd>
+
+    <dt><b>--html</b>,<b>-t</b></dt>
+
+    <dd>Sets the application to work in HTML mode; all inputs will be treated and rendered as HTML
+    files. The default behaviour is to use the input file's extension to determine the file type:
+    <b>.pt</b> for HTML files or <b>.xml</b> for XML files.</dd>
+
+    <dt><b>--xml</b>,<b>-x</b></dt>
+
+    <dd>Sets the application to work in XML mode; all inputs will be treated and rendered as XML
+    files. The default behaviour is to use the input file's extension to determine the file type:
+    <b>.pt</b> for HTML files or <b>.xml</b> for XML files.</dd>
+
+    <dt><b>--annotate</b></dt>
+
+    <dd>Enables source annotation; causes comments to be generated and added to the rendered output
+    annotating information about the source files used. A comment is generated each time the
+    rendered output switches context to use a different piece of the source file, such as when
+    METAL macros or slots are used.</dd>
+
+    <dt><b>--no-xml-declaration</b></dt>
+
+    <dd>Omits the <b>&lt;?xml?&gt;</b> declaration from the output when rendering XML inputs. Has
+    no effect for inputs treated as HTML.</dd>
+
+    <dt><b>--no-indent-xml</b></dt>
+
+    <dd>By default when rendering XML inputs, the output is formatted and indented for
+    human-readability. If this option is present then the formatting and indentation is skipped.
+    Has no effect for inputs treated as HTML.</dd>
+
+    <dt><b>--xml-indent-chars</b>=<i>CHARS</i></dt>
+
+    <dd>When rendering XML inputs and performing formatting and indenting, by default the
+    indentation is set to two spaces: " ". Use of this option may override that with a different
+    set of characters. Has no effect for inputs treated as HTML, or where the
+    <b>--no-indent-xml</b> option has been used.</dd>
+
+    <dt><b>--input-filename-pattern</b>=<i>PATTERN</i>,<b>-p</b></dt>
+
+    <dd>Sets a glob pattern for matching input files when directory path(s) are provided amongst
+    the input, by default this is set to "*<b>.pt</b>". Note that this default value will mean that
+    the only input files matched will be treated as HTML files.</dd>
+
+    <dt><b>--output</b>=<i>PATH</i>,<b>-o</b></dt>
+
+    <dd>Sets the application to emit output to the filesystem, instead of using standard output. If
+    a file path is specified then all output is redirected to that file. If a directory path is
+    specified then each rendered input will be rendered in a separate output file.</dd>
+
+    <dd>Where a directory path is used, the names of the created files are based upon the name of
+    the input files; the option <b>--output-filename-extension</b> controls their extension.
+    Additionally, if a directory path is used for the input, then the output files are created
+    using a directory structure mimicking the relative path from the input directory. Consider the
+    following:</dd>
+
+    <dd>
+      <pre>
+ZptBuilder.exe --output=my-out-dir/ my-input-dir
+</pre>
+    </dd>
+
+    <dd>A file at the path <i>my-input-dir/foo/bar/baz.pt</i> would be rendered and output to the
+    path <i>my-out-dir/foo/bar/baz.html</i>. Thus, the relative directory structure within an input
+    directory of files to render is preserved in the output.</dd>
+
+    <dt><b>--output-filename-extension</b>=<i>EXT</i>,<b>-e</b></dt>
+
+    <dd>Controls the file extension of the file outputs, when the <b>--output</b> option is used
+    with a directory path. By default this is either <b>.html</b> or <b>.xml</b> based upon how the
+    input file is treated. Has no effect when the output is sent to a single file or if the output
+    is rendered to standard output.</dd>
+
+    <dt><b>--ignore</b>=<i>PATH</i>,<b>-i</b></dt>
+
+    <dd>When a directory path is amongst the inputs, causes the named path (or paths, separated by
+    semicolons) to be ignored from the search. Ignored paths (which may be file or directory paths)
+    will not be rendered. Has no effect when the input does not contain any directory paths.</dd>
+
+    <dt><b>--keyword-options</b>=<i>KEY_VALUE_PAIRS</i></dt>
+
+    <dd>Provides keyword options for the rendering application. This is a semicolon-separated list
+    of key/value pairs to be provided to the root TALES context as keyword options. This should be
+    provided in the format "<i>keyone=valueone;keytwo=valuetwo</i>" and so on.</dd>
+
+    <dt><b>--rendering-context-factory</b>=<i>CLASS</i></dt>
+
+    <dd>Where provided, overrides the default implementation of
+    <i>CSF.Zpt.Rendering.IRenderingContextFactory</i> to use when rendering pages. This must be a
+    full, assembly-qualified type name where provided.</dd>
+
+    <dt><b>--output-encoding</b>=<i>ENCODING</i>,<b>-n</b></dt>
+
+    <dd>Sets the text encoding to use for the output(s). By default the UTF-8 encoding is used. Any
+    encoding 'web name' may be specified here.</dd>
+
+    <dt><b>--context-visitors</b>=<i>CLASSES</i></dt>
+
+    <dd>Where provided, overrides the default implementations of
+    <i>CSF.Zpt.Rendering.IContextVisitor</i> to use when rendering pages. This is an ordered list
+    of type names, separated by semicolons. These names must be full, assembly-qualified type names
+    where provided.</dd>
+  </dl>
     </section>
   </div>
 </div>
