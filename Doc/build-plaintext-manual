@@ -1,8 +1,10 @@
 #!/bin/bash
 SCRIPT_ROOT="$(dirname $0)"
 INPUT_FILENAME="ZptBuilder.1"
-OUTPUT_FILENAME="ZptBuilder.MANUAL.txt"
+OUTPUT_FILENAME="../CSF.Zpt.Cli/bin/Release/ZptBuilder.MANUAL.txt"
 DOCUMENT_CHARACTER_WIDTH="80"
+
+mkdir -p "$(dirname "${SCRIPT_ROOT}/${OUTPUT_FILENAME}")"
 
 COLUMNS="$DOCUMENT_CHARACTER_WIDTH" man --nh \
   -l "${SCRIPT_ROOT}/${INPUT_FILENAME}" \
