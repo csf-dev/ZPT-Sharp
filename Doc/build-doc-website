@@ -16,7 +16,13 @@ BASE_URL="${BASE_URL:-$DEFAULT_BASE_URL}"
 CURRENT_DATE="$(date +%F)"
 VERSION="${VERSION:-unknown}"
 
-BUILDER_PATH="$SCRIPT_ROOT/../CSF.Zpt.Cli/bin/Debug/ZptBuilder.exe"
+BUILDER_PATH="$SCRIPT_ROOT/../CSF.Zpt.Cli/bin/Release/ZptBuilder.exe"
+
+if [ ! -e "$BUILDER_PATH" ]
+then
+  echo "The ZptBuilder.exe application must exist - have you forgotten to perform a release-mode build?" >&2
+  exit 1
+fi
 
 mkdir -p "$OUTPUT_DIR"
 rm -rf "$OUTPUT_DIR/*"
