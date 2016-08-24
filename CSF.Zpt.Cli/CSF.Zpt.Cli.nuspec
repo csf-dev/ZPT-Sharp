@@ -17,5 +17,6 @@
   <files>
     <file src="bin/Release/ZptBuilder.exe" target="lib/net45" />
     <file src="bin/Release/ZptBuilder.exe.config" target="lib/net45" />
+    <file src="bin/Release/ZptBuilder.MANUAL.txt" target="content/net45" />
   </files>
 </package>
