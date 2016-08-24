@@ -1,11 +1,14 @@
 .TH ZptBuilder 1
 .SH NAME
+.PP
 ZptBuilder.exe \- parse and render Zope Page Templates documents
 .SH SYNOPSIS
+.PP
 .B ZptBuilder.exe
 [\fIoptions\fR]
 [\fIinputs\fR]
 .SH DESCRIPTION
+.PP
 The \fBZptBuilder\fR application is used to parse and render documents formatted as Zope Page Templates source files, into either HTML or XML output documents.
 The \fBinputs\fR may be one or more file or directory paths, indicating the files and/or directories to be parsed and rendered.
 .PP
@@ -59,21 +62,17 @@ Note that this default value will mean that the only input files matched will be
 Sets the application to emit output to the filesystem, instead of using standard output.
 If a file path is specified then all output is redirected to that file.
 If a directory path is specified then each rendered input will be rendered in a separate output file.
-.RS
-.PP
+.IP
 Where a directory path is used, the names of the created files are based upon the name of the input files; the option \fB\-\-output\-filename\-extension\fR controls their extension.
 Additionally, if a directory path is used for the input, then the output files are created using a directory structure mimicking the relative path from the input directory.
 Consider the following:
-.PP
+.IP
 .nf
-.RS
-ZptBuilder.exe \-\-output=my\-output\-directory/ my\-input\-directory
-.RE
+ZptBuilder.exe \-\-output=my\-out\-dir/ my\-input\-dir
 .fi
-.PP
-A file at the path \fImy\-input\-directory/foo/bar/baz.pt\fR would be rendered and output to the path \fImy\-output\-directory/foo/bar/baz.html\fR.
+.IP
+A file at the path \fImy\-input\-dir/foo/bar/baz.pt\fR would be rendered and output to the path \fImy\-out\-dir/foo/bar/baz.html\fR.
 Thus, the relative directory structure within an input directory of files to render is preserved in the output.
-.RE
 .TP
 .BR \-\-output\-filename\-extension\fR=\fIEXT\fR,\fB-e\fR
 Controls the file extension of the file outputs, when the \fB\-\-output\fR option is used with a directory path.
