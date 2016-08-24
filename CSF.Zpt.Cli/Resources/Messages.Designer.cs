@@ -78,5 +78,14 @@ namespace CSF.Zpt.Cli.Resources {
                 return ResourceManager.GetString("UsageStatement", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ZptBuilder.exe version {0}.
+        /// </summary>
+        internal static string VersionFormat {
+            get {
+                return ResourceManager.GetString("VersionFormat", resourceCulture);
+            }
+        }
     }
 }

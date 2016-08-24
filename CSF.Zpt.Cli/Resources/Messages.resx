@@ -20,6 +20,9 @@ Selected options:
 --help, -h
     Display this usage statement and exit
 
+--version, -v
+    Display version information and exit
+
 --html,-t
     Force HTML mode
 
@@ -54,5 +57,8 @@ Up-to-date documentation and information is
 available at:
     http://csf-dev.github.io/ZPT-Sharp/
     </value>
+  </data>
+  <data name="VersionFormat" xml:space="preserve">
+    <value>ZptBuilder.exe v{0}</value>
   </data>
 </root>
