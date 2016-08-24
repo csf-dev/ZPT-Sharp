@@ -17,10 +17,10 @@
 
 Selected options:
 
---help, -h
+--help,-h
     Display this usage statement and exit
 
---version, -v
+--version,-v
     Display version information and exit
 
 --html,-t
