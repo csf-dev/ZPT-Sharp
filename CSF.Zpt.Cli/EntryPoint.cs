@@ -41,6 +41,12 @@ namespace CSF.Zpt.Cli
       {
         Console.Write(Resources.Messages.UsageStatement);
       }
+      else if (_commandLineOptions.ShowVersionInfo)
+      {
+        var versionService = new VersionNumberInspector();
+        Console.WriteLine(Resources.Messages.VersionFormat,
+                          versionService.GetZptBuilderVersion());
+      }
       else
       {
         var options = this.CreateRenderingOptions(_commandLineOptions);
@@ -100,6 +106,7 @@ namespace CSF.Zpt.Cli
         .AddFlag(   x => x.DoNotOutputIndentedXml,            longName: "no-indent-xml")
         .AddValue(  x => x.XmlIndentationCharacters,          longName: "xml-indent-chars",                           optional: false)
         .AddFlag(   x => x.ShowUsageStatement,                longName: "help",                       shortName: "h")
+        .AddFlag(   x => x.ShowVersionInfo,                   longName: "version",                    shortName: "v")
         .AddValue(  x => x.InputFilenamePattern,              longName: "input-filename-pattern",     shortName: "p", optional: false)
         .AddValue(  x => x.OutputPath,                        longName: "output",                     shortName: "o", optional: false)
         .AddValue(  x => x.OutputFilenameExtension,           longName: "output-filename-extension",  shortName: "e", optional: false)

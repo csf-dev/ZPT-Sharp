@@ -104,6 +104,8 @@ namespace CSF.Zpt.Cli
       set;
     }
 
+    public bool ShowVersionInfo { get; set; }
+
     #endregion
 
     #region methods
