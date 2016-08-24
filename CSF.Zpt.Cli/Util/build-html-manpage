@@ -1,0 +1,19 @@
+#!/bin/bash
+
+SCRIPT_ROOT="$(dirname $0)"
+INPUT_FILENAME="../ZptBuilder.1"
+OUTPUT_FILENAME="../bin/Release/Doc/ZptBuilder.html"
+DOCUMENT_CHARACTER_WIDTH="100"
+
+mkdir -p "$(dirname "${SCRIPT_ROOT}/${OUTPUT_FILENAME}")"
+
+man2html "${SCRIPT_ROOT}/${INPUT_FILENAME}" \
+  | tidy -i -w "$DOCUMENT_CHARACTER_WIDTH" \
+  > "${SCRIPT_ROOT}/${OUTPUT_FILENAME}"
+
+if [ "$?" = "1" ]
+then
+  exit 0
+fi
+
+exit "$?"
