@@ -53,9 +53,9 @@
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Target Name="AfterBuild" Condition="'$(Configuration)' == 'Release'">
-    <Exec Command="nuget pack CSF.Zpt.Cli.nuspec -Prop Configuration=Release" Condition="'$(OS)' == 'Linux'">
+    <Exec Command="nuget pack CSF.Zpt.Cli.nuspec -Prop Configuration=Release" Condition="'$(OS)' == 'Unix'">
     </Exec>
-    <Exec Command="&quot;$(MSBuildProgramFiles32)\NuGet\nuget.exe&quot; pack CSF.Zpt.Cli.nuspec -Prop Configuration=Release" Condition="'$(OS)' != 'Linux'">
+    <Exec Command="&quot;$(MSBuildProgramFiles32)\NuGet\nuget.exe&quot; pack CSF.Zpt.Cli.nuspec -Prop Configuration=Release" Condition="'$(OS)' != 'Unix'">
     </Exec>
   </Target>
   <ItemGroup>
