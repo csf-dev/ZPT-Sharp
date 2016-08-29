@@ -63,7 +63,7 @@ namespace CSF.Zpt.Impl
     #region constructor
 
     /// <summary>
-    /// Initializes a new instance of the <see cref="CSF.Zpt.Rendering.ZptHtmlAttribute"/> class.
+    /// Initializes a new instance of the <see cref="CSF.Zpt.Impl.ZptHtmlAttribute"/> class.
     /// </summary>
     /// <param name="original">The original (wrapped) attribute.</param>
     public ZptHtmlAttribute(HtmlAgilityPack.HtmlAttribute original)

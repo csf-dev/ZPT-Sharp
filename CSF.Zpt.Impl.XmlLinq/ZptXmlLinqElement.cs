@@ -7,8 +7,9 @@ using System.Xml;
 using CSF.Zpt.Resources;
 using System.Xml.XPath;
 using System.Collections;
+using CSF.Zpt.Rendering;
 
-namespace CSF.Zpt.Rendering
+namespace CSF.Zpt.Impl
 {
   /// <summary>
   /// Implementation of <see cref="ZptElement"/> based on documents parsed using <c>System.Xml.Linq</c>.
@@ -112,15 +113,15 @@ namespace CSF.Zpt.Rendering
 
     /// <summary>
     /// Determines whether the specified <see cref="CSF.Zpt.Rendering.ZptElement"/> is equal to the current
-    /// <see cref="CSF.Zpt.Rendering.ZptXmlLinqElement"/>.
+    /// <see cref="CSF.Zpt.Impl.ZptXmlLinqElement"/>.
     /// </summary>
     /// <param name="other">
     /// The <see cref="CSF.Zpt.Rendering.ZptElement"/> to compare with the current
-    /// <see cref="CSF.Zpt.Rendering.ZptXmlLinqElement"/>.
+    /// <see cref="CSF.Zpt.Impl.ZptXmlLinqElement"/>.
     /// </param>
     /// <returns>
     /// <c>true</c> if the specified <see cref="CSF.Zpt.Rendering.ZptElement"/> is equal to the current
-    /// <see cref="CSF.Zpt.Rendering.ZptXmlLinqElement"/>; otherwise, <c>false</c>.
+    /// <see cref="CSF.Zpt.Impl.ZptXmlLinqElement"/>; otherwise, <c>false</c>.
     /// </returns>
     public override bool Equals(ZptElement other)
     {
@@ -140,7 +141,7 @@ namespace CSF.Zpt.Rendering
     }
 
     /// <summary>
-    /// Serves as a hash function for a <see cref="CSF.Zpt.Rendering.ZptXmlLinqElement"/> object.
+    /// Serves as a hash function for a <see cref="CSF.Zpt.Impl.ZptXmlLinqElement"/> object.
     /// </summary>
     /// <returns>
     /// A hash code for this instance that is suitable for use in hashing algorithms and data structures such as a
@@ -700,7 +701,7 @@ namespace CSF.Zpt.Rendering
     #region constructor
 
     /// <summary>
-    /// Initializes a new instance of the <see cref="CSF.Zpt.Rendering.ZptXmlLinqElement"/> class.
+    /// Initializes a new instance of the <see cref="CSF.Zpt.Impl.ZptXmlLinqElement"/> class.
     /// </summary>
     /// <param name="node">The source XML Node.</param>
     /// <param name="sourceFile">Information about the element's source file.</param>

@@ -5,6 +5,10 @@ using CSF.Zpt.Rendering;
 
 namespace CSF.Zpt.Impl
 {
+  /// <summary>
+  /// Implementation of <see cref="IZptDocumentProvider"/> which creates XML documents based on
+  /// <c>System.Xml.Linq.XDocument</c>.
+  /// </summary>
   public class XmlLinqZptDocumentProvider : IZptDocumentProvider
   {
     #region fields
@@ -14,6 +18,30 @@ namespace CSF.Zpt.Impl
     #endregion
 
     #region methods
+
+    /// <summary>
+    /// Creates a document from an <c>XDocument</c> object and information about the source of the document.
+    /// </summary>
+    /// <returns>The ZPT document implementation.</returns>
+    /// <param name="xmlDocument">An XML document.</param>
+    /// <param name="sourceInfo">The source info.</param>
+    public IZptDocument CreateDocument(System.Xml.Linq.XDocument xmlDocument, ISourceInfo sourceInfo)
+    {
+      if(xmlDocument == null)
+      {
+        throw new ArgumentNullException(nameof(xmlDocument));
+      }
+      if(sourceInfo == null)
+      {
+        throw new ArgumentNullException(nameof(sourceInfo));
+      }
+
+      return new ZptXmlLinqDocument(xmlDocument, sourceInfo);
+    }
+
+    #endregion
+
+    #region IZptDocumentProvider implementation
 
     /// <summary>
     /// Gets the rendering mode for documents created by this provider.
@@ -84,13 +112,16 @@ namespace CSF.Zpt.Impl
         doc = System.Xml.Linq.XDocument.Load(reader, options);
       }
 
-      return new ZptXmlLinqDocument(doc, sourceInfo);
+      return CreateDocument(doc, sourceInfo);
     }
 
     #endregion
 
     #region constructor
 
+    /// <summary>
+    /// Initializes a new instance of the <see cref="CSF.Zpt.Impl.XmlLinqZptDocumentProvider"/> class.
+    /// </summary>
     public XmlLinqZptDocumentProvider()
     {
       _resolverFactory = new XmlUrlResolverFactory();

@@ -5,9 +5,37 @@ using CSF.Zpt.Rendering;
 
 namespace CSF.Zpt.Impl
 {
+  /// <summary>
+  /// Implementation of <see cref="IZptDocumentProvider"/> which creates documents based on the HTML Agility pack.
+  /// See https://htmlagilitypack.codeplex.com/
+  /// </summary>
   public class HtmlZptDocumentProvider : IZptDocumentProvider
   {
     #region methods
+
+    /// <summary>
+    /// Creates a document from a HAP document object and information about the source of the document.
+    /// </summary>
+    /// <returns>The ZPT document implementation.</returns>
+    /// <param name="hapDocument">A HTML Agility pack document.</param>
+    /// <param name="sourceInfo">The source info.</param>
+    public IZptDocument CreateDocument(HtmlAgilityPack.HtmlDocument hapDocument, ISourceInfo sourceInfo)
+    {
+      if(hapDocument == null)
+      {
+        throw new ArgumentNullException(nameof(hapDocument));
+      }
+      if(sourceInfo == null)
+      {
+        throw new ArgumentNullException(nameof(sourceInfo));
+      }
+
+      return new ZptHtmlDocument(hapDocument, sourceInfo);
+    }
+
+    #endregion
+
+    #region IZptDocumentProvider implementation
 
     /// <summary>
     /// Gets the rendering mode for documents created by this provider.
@@ -36,10 +64,11 @@ namespace CSF.Zpt.Impl
       }
 
       var sourceInfo = new SourceFileInfo(sourceFile);
+
       var doc = new HtmlAgilityPack.HtmlDocument();
       doc.Load(sourceFile.FullName, encoding);
 
-      return new ZptHtmlDocument(doc, sourceInfo);
+      return CreateDocument(doc, sourceInfo);
     }
 
     /// <summary>
@@ -55,10 +84,6 @@ namespace CSF.Zpt.Impl
       {
         throw new ArgumentNullException(nameof(sourceStream));
       }
-      if(sourceInfo == null)
-      {
-        throw new ArgumentNullException(nameof(sourceInfo));
-      }
       if(encoding == null)
       {
         throw new ArgumentNullException(nameof(encoding));
@@ -66,7 +91,8 @@ namespace CSF.Zpt.Impl
 
       var doc = new HtmlAgilityPack.HtmlDocument();
       doc.Load(sourceStream, encoding);
-      return new ZptHtmlDocument(doc, sourceInfo);
+
+      return CreateDocument(doc, sourceInfo);
     }
 
     #endregion

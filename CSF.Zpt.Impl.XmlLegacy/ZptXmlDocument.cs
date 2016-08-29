@@ -6,7 +6,7 @@ using CSF.Zpt.Rendering;
 using CSF.Zpt.Resources;
 using CSF.Zpt.Tales;
 
-namespace CSF.Zpt
+namespace CSF.Zpt.Impl
 {
   /// <summary>
   /// Implementation of <see cref="ZptDocument"/> based on a <c>System.Xml.XmlDocument</c>.
@@ -44,6 +44,10 @@ namespace CSF.Zpt
       }
     }
 
+    /// <summary>
+    /// Gets the <see cref="RenderingMode"/> for which the current document type caters.
+    /// </summary>
+    /// <value>The rendering mode.</value>
     public override RenderingMode Mode
     {
       get {
@@ -161,7 +165,7 @@ namespace CSF.Zpt
     /// <returns>The rendering model.</returns>
     protected override IZptElement GetRootElement()
     {
-      return new Rendering.ZptXmlElement(this.Document.DocumentElement, this.SourceFile, this, isRoot: true);
+      return new ZptXmlElement(this.Document.DocumentElement, this.SourceFile, this, isRoot: true);
     }
 
     /// <summary>
@@ -178,7 +182,7 @@ namespace CSF.Zpt
     #region constructor
 
     /// <summary>
-    /// Initializes a new instance of the <see cref="CSF.Zpt.ZptXmlDocument"/> class.
+    /// Initializes a new instance of the <see cref="CSF.Zpt.Impl.ZptXmlDocument"/> class.
     /// </summary>
     /// <param name="document">An XML document from which to create the current instance.</param>
     /// <param name="sourceFile">Information about the document's source file.</param>

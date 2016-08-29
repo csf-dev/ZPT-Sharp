@@ -5,6 +5,20 @@ using CSF.Zpt.Rendering;
 
 namespace CSF.Zpt.Impl
 {
+  /// <summary>
+  /// Implementation of <see cref="IZptDocumentProvider"/> which creates XML documents based on
+  /// <c>System.Xml.XmlDocument</c>.
+  /// </summary>
+  /// <remarks>
+  /// <para>
+  /// Generally, you don't want to be using this type if <c>System.Xml.Linq</c> is available (which it usually is if
+  /// you're using .NET framework 4.5 or up).
+  /// </para>
+  /// <para>
+  /// The XML-Linq implementation is superior to this one in several ways and produces more standards-compliant output
+  /// also.
+  /// </para>
+  /// </remarks>
   public class LegacyXmlZptDocumentProvider : IZptDocumentProvider
   {
     #region fields
@@ -14,6 +28,30 @@ namespace CSF.Zpt.Impl
     #endregion
 
     #region methods
+
+    /// <summary>
+    /// Creates a document from an <c>XmlDocument</c> object and information about the source of the document.
+    /// </summary>
+    /// <returns>The ZPT document implementation.</returns>
+    /// <param name="xmlDocument">An XML document.</param>
+    /// <param name="sourceInfo">The source info.</param>
+    public IZptDocument CreateDocument(System.Xml.XmlDocument xmlDocument, ISourceInfo sourceInfo)
+    {
+      if(xmlDocument == null)
+      {
+        throw new ArgumentNullException(nameof(xmlDocument));
+      }
+      if(sourceInfo == null)
+      {
+        throw new ArgumentNullException(nameof(sourceInfo));
+      }
+
+      return new ZptXmlDocument(xmlDocument, sourceInfo);
+    }
+
+    #endregion
+
+    #region IZptDocumentProvider implementation
 
     /// <summary>
     /// Gets the rendering mode for documents created by this provider.
@@ -83,13 +121,16 @@ namespace CSF.Zpt.Impl
         doc.Load(reader);
       }
 
-      return new ZptXmlDocument(doc, sourceInfo);
+      return CreateDocument(doc, sourceInfo);
     }
 
     #endregion
 
     #region constructor
 
+    /// <summary>
+    /// Initializes a new instance of the <see cref="CSF.Zpt.Impl.LegacyXmlZptDocumentProvider"/> class.
+    /// </summary>
     public LegacyXmlZptDocumentProvider()
     {
       _resolverFactory = new XmlUrlResolverFactory();
