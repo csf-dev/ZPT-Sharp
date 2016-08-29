@@ -123,6 +123,7 @@
     <Compile Include="ZptXmlLinqDocument.cs" />
     <Compile Include="Rendering\ZptXmlLinqElement.cs" />
     <Compile Include="Rendering\ZptXmlLinqAttribute.cs" />
+    <Compile Include="XmlUrlResolverFactory.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Target Name="AfterBuild" Condition="'$(Configuration)' == 'Release'">

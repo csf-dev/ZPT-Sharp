@@ -32,6 +32,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="..\Common\CommonAssemblyInfo.cs">
@@ -73,6 +74,7 @@
     <Compile Include="Rendering\CancellationToken.cs" />
     <Compile Include="Rendering\ISourceInfo.cs" />
     <Compile Include="Rendering\IRenderingOptions.cs" />
+    <Compile Include="IXmlUrlResolverFactory.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
