@@ -1,0 +1,18 @@
+#!/bin/bash
+
+SCRIPT_ROOT="$(dirname $0)"
+OUTPUT_PATH="${SCRIPT_ROOT}/Doxygen-output"
+CONFIG_PATH="${SCRIPT_ROOT}/Doxygen.cfg"
+LATEX_PATH="${OUTPUT_PATH}/latex"
+
+rm -rf "$OUTPUT_PATH"
+
+doxygen "$CONFIG_PATH"
+
+original_path="$(pwd)"
+
+cd "${LATEX_PATH}/"
+pdflatex refman.tex
+cd "$original_path"
+
+mv "${LATEX_PATH}/refman.pdf" "${OUTPUT_PATH}/ZPT-Sharp API documentation.pdf"
