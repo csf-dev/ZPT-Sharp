@@ -10,6 +10,7 @@ using Test.CSF.Zpt.Util;
 using CSF.Zpt.Metal;
 using Ploeh.AutoFixture;
 using Test.CSF.Zpt.Util.Autofixture;
+using CSF.Zpt.Impl;
 
 namespace Test.CSF.Zpt.Metal
 {

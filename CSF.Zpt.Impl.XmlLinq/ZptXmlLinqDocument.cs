@@ -8,7 +8,7 @@ using CSF.Zpt.Tales;
 using System.Xml;
 using System.Xml.XPath;
 
-namespace CSF.Zpt
+namespace CSF.Zpt.Impl
 {
   /// <summary>
   /// Implementation of <see cref="ZptDocument"/> based on a <c>System.Xml.Linq.XDocument</c>.
@@ -169,7 +169,7 @@ namespace CSF.Zpt
     /// <returns>The rendering model.</returns>
     protected override IZptElement GetRootElement()
     {
-      return new Rendering.ZptXmlLinqElement(this.Document.Root, this.SourceFile, this, isRoot: true);
+      return new ZptXmlLinqElement(this.Document.Root, this.SourceFile, this, isRoot: true);
     }
 
     /// <summary>
@@ -186,7 +186,7 @@ namespace CSF.Zpt
     #region constructor
 
     /// <summary>
-    /// Initializes a new instance of the <see cref="CSF.Zpt.ZptXmlLinqDocument"/> class.
+    /// Initializes a new instance of the <see cref="CSF.Zpt.Impl.ZptXmlLinqDocument"/> class.
     /// </summary>
     /// <param name="document">An XML document from which to create the current instance.</param>
     /// <param name="sourceFile">Information about the document's source file.</param>
