@@ -3,6 +3,7 @@ using System.Linq;
 using System.Text;
 using CSF.Cli;
 using CSF.Zpt.Rendering;
+using CSF.Zpt.BatchRendering;
 
 namespace CSF.Zpt.Cli
 {
@@ -25,8 +26,8 @@ namespace CSF.Zpt.Cli
     private CommandLineOptions _commandLineOptions;
     private IContextVisitorFactory _contextVisitorFactory;
     private IRenderingContextFactoryFactory _contextFactoryFactory;
-    private InputOutputInfoCreator _ioInfoCreator;
-    private Renderer _renderer;
+    private IBatchRenderingOptionsCreator _batchOptionsCreator;
+    private IBatchRenderer _renderer;
 
     #endregion
 
@@ -50,7 +51,7 @@ namespace CSF.Zpt.Cli
       else
       {
         var options = this.CreateRenderingOptions(_commandLineOptions);
-        var inputOutputInfo = _ioInfoCreator.GetInfo(_commandLineOptions);
+        var inputOutputInfo = _batchOptionsCreator.GetBatchOptions(_commandLineOptions);
         var renderingMode = _commandLineOptions.GetRenderingMode();
 
         _renderer.Render(options, inputOutputInfo, renderingMode);
@@ -130,8 +131,8 @@ namespace CSF.Zpt.Cli
                       IParameterParser<CommandLineOptions> parameterParser = null,
                       IContextVisitorFactory contextVisitorFactory = null,
                       IRenderingContextFactoryFactory contextFactoryFactory = null,
-                      InputOutputInfoCreator inputOutputCreator = null,
-                      Renderer renderer = null)
+                      IBatchRenderingOptionsCreator inputOutputCreator = null,
+                      IBatchRenderer renderer = null)
     {
       if(args == null)
       {
@@ -142,8 +143,8 @@ namespace CSF.Zpt.Cli
       _commandLineOptions = _parameterParser.Parse(args);
       _contextVisitorFactory = contextVisitorFactory?? new ContextVisitorFactory();
       _contextFactoryFactory = contextFactoryFactory?? new RenderingContextFactoryFactory();
-      _ioInfoCreator = inputOutputCreator?? new InputOutputInfoCreator();
-      _renderer = renderer?? new Renderer();
+      _batchOptionsCreator = inputOutputCreator?? new BatchRenderingOptionsCreator();
+      _renderer = renderer?? new BatchRenderer();
     }
 
     #endregion

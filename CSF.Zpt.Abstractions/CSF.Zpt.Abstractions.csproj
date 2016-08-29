@@ -78,6 +78,8 @@
     <Compile Include="ZptDocumentProviderMetadata.cs" />
     <Compile Include="Rendering\IZptElement.cs" />
     <Compile Include="Rendering\IZptAttribute.cs" />
+    <Compile Include="BatchRendering\IBatchRenderer.cs" />
+    <Compile Include="BatchRendering\IBatchRenderingOptions.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
@@ -85,5 +87,6 @@
     <Folder Include="Tales\" />
     <Folder Include="Tal\" />
     <Folder Include="Metal\" />
+    <Folder Include="BatchRendering\" />
   </ItemGroup>
 </Project>

@@ -116,6 +116,10 @@
     <Compile Include="DocumentImplementationConfiguration.cs" />
     <Compile Include="Rendering\ZptAttribute.cs" />
     <Compile Include="Rendering\ZptElement.cs" />
+    <Compile Include="BatchRendering\BatchRenderingOptions.cs" />
+    <Compile Include="BatchRendering\RenderingJob.cs" />
+    <Compile Include="BatchRendering\BatchRenderer.cs" />
+    <Compile Include="BatchRendering\RenderingJobFactory.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Target Name="AfterBuild" Condition="'$(Configuration)' == 'Release'">
@@ -143,6 +147,7 @@
     <Folder Include="Rendering\" />
     <Folder Include="Metal\" />
     <Folder Include="Resources\" />
+    <Folder Include="BatchRendering\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\xhtml1-frameset.dtd">

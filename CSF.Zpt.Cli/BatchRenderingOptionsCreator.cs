@@ -1,11 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Collections.Generic;
+using CSF.Zpt.BatchRendering;
 
 namespace CSF.Zpt.Cli
 {
-  public class InputOutputInfoCreator
+  public class BatchRenderingOptionsCreator : IBatchRenderingOptionsCreator
   {
     #region constants
 
@@ -21,7 +22,7 @@ namespace CSF.Zpt.Cli
 
     #region methods
 
-    public InputOutputInfo GetInfo(CommandLineOptions options)
+    public IBatchRenderingOptions GetBatchOptions(CommandLineOptions options)
     {
       var inputFiles = options.InputPaths.Select(GetInputFile).ToArray();
       var useStdin = ReadFromStandardInput(inputFiles);
@@ -29,13 +30,13 @@ namespace CSF.Zpt.Cli
 
       var outputPath = GetOutputPath(options);
 
-
-      return new InputOutputInfo(useStdin,
-                                 useStdin? null : inputFiles,
-                                 outputPath,
-                                 options.InputFilenamePattern,
-                                 options.OutputFilenameExtension,
-                                 ignoredPaths);
+      return new BatchRenderingOptions(inputStream: useStdin? Console.OpenStandardInput() : null,
+                                       outputStream: useStdin? Console.OpenStandardOutput() : null,
+                                       inputPaths: inputFiles,
+                                       outputPath: outputPath,
+                                       inputSearchPattern: options.InputFilenamePattern,
+                                       outputExtensionOverride: options.OutputFilenameExtension,
+                                       ignoredPaths: ignoredPaths);
     }
 
     private FileSystemInfo GetInputFile(string path)
@@ -102,9 +103,9 @@ namespace CSF.Zpt.Cli
         output = options.IgnoredPaths
           .Split(IGNORED_PATH_SEPARATOR)
           .Select(x => {
-            var absolutePath = MakeAbsolutePath(x);
-            return Directory.Exists(absolutePath)? new DirectoryInfo(absolutePath) : null;
-          });
+          var absolutePath = MakeAbsolutePath(x);
+          return Directory.Exists(absolutePath)? new DirectoryInfo(absolutePath) : null;
+        });
       }
 
       return output;
@@ -119,7 +120,7 @@ namespace CSF.Zpt.Cli
 
     #region constructor
 
-    public InputOutputInfoCreator()
+    public BatchRenderingOptionsCreator()
     {
       _relativeBase = new DirectoryInfo(System.Environment.CurrentDirectory);
     }
