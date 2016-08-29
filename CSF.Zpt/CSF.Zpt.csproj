@@ -136,9 +136,9 @@
       <Project>{E563D7BC-1AB1-4AFB-8533-51315437C6E6}</Project>
       <Name>CSF</Name>
     </ProjectReference>
-    <ProjectReference Include="..\CSF.Zpt.Api\CSF.Zpt.Api.csproj">
+    <ProjectReference Include="..\CSF.Zpt.Abstractions\CSF.Zpt.Abstractions.csproj">
       <Project>{8207CD9B-F1C1-4D75-B250-ACDFFBDCB071}</Project>
-      <Name>CSF.Zpt.Api</Name>
+      <Name>CSF.Zpt.Abstractions</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

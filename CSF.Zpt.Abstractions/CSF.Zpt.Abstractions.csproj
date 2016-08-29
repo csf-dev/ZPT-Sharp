@@ -6,7 +6,7 @@
     <ProjectGuid>{8207CD9B-F1C1-4D75-B250-ACDFFBDCB071}</ProjectGuid>
     <OutputType>Library</OutputType>
     <RootNamespace>CSF.Zpt</RootNamespace>
-    <AssemblyName>CSF.Zpt.Api</AssemblyName>
+    <AssemblyName>CSF.Zpt.Abstractions</AssemblyName>
     <ReleaseVersion>0.3.0</ReleaseVersion>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
   </PropertyGroup>
@@ -19,7 +19,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <ConsolePause>false</ConsolePause>
-    <DocumentationFile>bin\Debug\CSF.Zpt.Api.xml</DocumentationFile>
+    <DocumentationFile>bin\Debug\CSF.Zpt.Abstractions.xml</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>full</DebugType>
