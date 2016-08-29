@@ -102,15 +102,15 @@ namespace CSF.Zpt.Impl
 
     /// <summary>
     /// Determines whether the specified <see cref="CSF.Zpt.Rendering.ZptElement"/> is equal to the current
-    /// <see cref="CSF.Zpt.Rendering.ZptHtmlElement"/>.
+    /// <see cref="CSF.Zpt.Impl.ZptHtmlElement"/>.
     /// </summary>
     /// <param name="other">
     /// The <see cref="CSF.Zpt.Rendering.ZptElement"/> to compare with the current
-    /// <see cref="CSF.Zpt.Rendering.ZptHtmlElement"/>.
+    /// <see cref="CSF.Zpt.Impl.ZptHtmlElement"/>.
     /// </param>
     /// <returns>
     /// <c>true</c> if the specified <see cref="CSF.Zpt.Rendering.ZptElement"/> is equal to the current
-    /// <see cref="CSF.Zpt.Rendering.ZptHtmlElement"/>; otherwise, <c>false</c>.
+    /// <see cref="CSF.Zpt.Impl.ZptHtmlElement"/>; otherwise, <c>false</c>.
     /// </returns>
     public override bool Equals(ZptElement other)
     {
@@ -130,7 +130,7 @@ namespace CSF.Zpt.Impl
     }
 
     /// <summary>
-    /// Serves as a hash function for a <see cref="CSF.Zpt.Rendering.ZptHtmlElement"/> object.
+    /// Serves as a hash function for a <see cref="CSF.Zpt.Impl.ZptHtmlElement"/> object.
     /// </summary>
     /// <returns>
     /// A hash code for this instance that is suitable for use in hashing algorithms and data structures such as a
@@ -703,7 +703,7 @@ namespace CSF.Zpt.Impl
     #region constructor
 
     /// <summary>
-    /// Initializes a new instance of the <see cref="CSF.Zpt.Rendering.ZptHtmlElement"/> class.
+    /// Initializes a new instance of the <see cref="CSF.Zpt.Impl.ZptHtmlElement"/> class.
     /// </summary>
     /// <param name="node">The source HTML node.</param>
     /// <param name="sourceFile">Information about the element's source file.</param>

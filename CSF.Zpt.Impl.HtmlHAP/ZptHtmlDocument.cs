@@ -45,6 +45,10 @@ namespace CSF.Zpt.Impl
       }
     }
 
+    /// <summary>
+    /// Gets the <see cref="RenderingMode"/> for which the current document type caters.
+    /// </summary>
+    /// <value>The rendering mode.</value>
     public override RenderingMode Mode
     {
       get {
@@ -165,7 +169,7 @@ namespace CSF.Zpt.Impl
     #region constructor
 
     /// <summary>
-    /// Initializes a new instance of the <see cref="CSF.Zpt.ZptHtmlDocument"/> class.
+    /// Initializes a new instance of the <see cref="CSF.Zpt.Impl.ZptHtmlDocument"/> class.
     /// </summary>
     /// <param name="document">An HTML document from which to create the current instance.</param>
     /// <param name="sourceFile">Information about the document's source file.</param>
