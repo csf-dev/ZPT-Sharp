@@ -19,8 +19,6 @@ namespace CSF.Zpt.Rendering
     /// <param name="contextFactory">The rendering context factory.</param>
     /// <param name="outputEncoding">The desired output encoding.</param>
     /// <param name="omitXmlDeclaration">Whether or not to omit the XML declaration.</param>
-    /// <param name="xmlIndentCharacters">The character(s) to use when indending XML.</param>
-    /// <param name="outputIndentedXml">Whether or not to output indent-formatted XML.</param>
     /// <param name="documentFactory">An optional non-default implementation of <see cref="ITemplateFileFactory"/> to use.</param>
     public RenderingOptions(IContextVisitor[] elementVisitors = null,
                             IRenderingContextFactory contextFactory = null,
