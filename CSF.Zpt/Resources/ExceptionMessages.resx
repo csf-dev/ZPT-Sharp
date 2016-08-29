@@ -94,5 +94,16 @@ Filename:{0}</value>
   <data name="ModelDoesNotContainItem" xml:space="preserve">
     <value>The item '{0}' was not found in the model.</value>
   </data>
-
+  <data name="BatchOptionsMustHaveInputStreamOrPaths" xml:space="preserve">
+    <value>The batch rendering options must have EITHER an input stream OR one or more input file/directory paths.</value>
+  </data>
+  <data name="BatchOptionsMustNotHaveBothInputStreamAndPaths" xml:space="preserve">
+    <value>The batch rendering options must not have BOTH an input stream AND input file/directory paths.</value>
+  </data>
+  <data name="BatchOptionsMustHaveOutputStreamOrPath" xml:space="preserve">
+    <value>The batch rendering options must have EITHER an output stream OR an output file/directory path.</value>
+  </data>
+  <data name="BatchOptionsMustNotHaveBothOutputStreamAndPath" xml:space="preserve">
+    <value>The batch rendering options must not have BOTH an output stream AND an output file/directory path.</value>
+  </data>
 </root>

@@ -68,28 +68,31 @@ namespace CSF.Zpt.BatchRendering
 
     #region methods
 
+    /// <summary>
+    /// Validates the state of the current instance, raising an exception if it is not valid.
+    /// </summary>
     private void Validate()
     {
       if(this.InputStream == null && !this.InputPaths.Any())
       {
-        // TODO: Better exception
-        throw new InvalidOperationException();
+        string message = Resources.ExceptionMessages.BatchOptionsMustHaveInputStreamOrPaths;
+        throw new InvalidBatchRenderingOptionsException(message);
       }
       else if(this.InputStream != null && this.InputPaths.Any())
       {
-        // TODO: Better exception
-        throw new InvalidOperationException();
+        string message = Resources.ExceptionMessages.BatchOptionsMustNotHaveBothInputStreamAndPaths;
+        throw new InvalidBatchRenderingOptionsException(message);
       }
 
       if(this.OutputStream == null && this.OutputPath == null)
       {
-        // TODO: Better exception
-        throw new InvalidOperationException();
+        string message = Resources.ExceptionMessages.BatchOptionsMustHaveOutputStreamOrPath;
+        throw new InvalidBatchRenderingOptionsException(message);
       }
       else if(this.OutputStream != null && this.OutputPath != null)
       {
-        // TODO: Better exception
-        throw new InvalidOperationException();
+        string message = Resources.ExceptionMessages.BatchOptionsMustNotHaveBothOutputStreamAndPath;
+        throw new InvalidBatchRenderingOptionsException(message);
       }
     }
 

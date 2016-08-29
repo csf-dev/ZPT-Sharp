@@ -195,5 +195,29 @@ namespace CSF.Zpt.Resources {
                 return ResourceManager.GetString("ModelDoesNotContainItem", resourceCulture);
             }
         }
+        
+        internal static string BatchOptionsMustHaveInputStreamOrPaths {
+            get {
+                return ResourceManager.GetString("BatchOptionsMustHaveInputStreamOrPaths", resourceCulture);
+            }
+        }
+        
+        internal static string BatchOptionsMustNotHaveBothInputStreamAndPaths {
+            get {
+                return ResourceManager.GetString("BatchOptionsMustNotHaveBothInputStreamAndPaths", resourceCulture);
+            }
+        }
+        
+        internal static string BatchOptionsMustHaveOutputStreamOrPath {
+            get {
+                return ResourceManager.GetString("BatchOptionsMustHaveOutputStreamOrPath", resourceCulture);
+            }
+        }
+        
+        internal static string BatchOptionsMustNotHaveBothOutputStreamAndPath {
+            get {
+                return ResourceManager.GetString("BatchOptionsMustNotHaveBothOutputStreamAndPath", resourceCulture);
+            }
+        }
     }
 }

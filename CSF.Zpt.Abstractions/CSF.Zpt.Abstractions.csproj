@@ -80,6 +80,7 @@
     <Compile Include="Rendering\IZptAttribute.cs" />
     <Compile Include="BatchRendering\IBatchRenderer.cs" />
     <Compile Include="BatchRendering\IBatchRenderingOptions.cs" />
+    <Compile Include="BatchRendering\InvalidBatchRenderingOptionsException.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
