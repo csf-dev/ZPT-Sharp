@@ -121,6 +121,7 @@
     <Compile Include="Rendering\AbstractSourceInfo.cs" />
     <Compile Include="Rendering\RenderingOptions.cs" />
     <Compile Include="Rendering\EmptyModel.cs" />
+    <Compile Include="Rendering\DefaultRenderingOptions.cs" />
     <Compile Include="ZptXmlLinqDocument.cs" />
     <Compile Include="Rendering\ZptXmlLinqElement.cs" />
     <Compile Include="Rendering\ZptXmlLinqAttribute.cs" />

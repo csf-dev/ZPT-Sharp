@@ -27,16 +27,15 @@ namespace CSF.Zpt
 
     private static readonly Encoding DefaultEncoding = Encoding.UTF8;
 
-    private static readonly Type
-      HtmlDocumentType = typeof(ZptHtmlDocument),
-      XmlDocumentType = typeof(ZptXmlDocument),
-      XmlLinqDocumentType = typeof(ZptXmlLinqDocument);
-
     #endregion
 
     #region fields
 
-    private Type _forceDocumentType;
+    private static readonly ZptDocumentFactory _default;
+
+    private IDocumentImplementationProvider _implementationProvider;
+    private IDictionary<Type,IZptDocumentProvider> _providerTypes;
+    private IZptDocumentProvider _defaultHtmlProvider, _defaultXmlProvider;
 
     #endregion
 
@@ -309,24 +308,46 @@ namespace CSF.Zpt
 
     #region constructor
 
-    /// <summary>
-    /// Initializes a new instance of the <see cref="CSF.Zpt.ZptDocumentFactory"/> class.
-    /// </summary>
-    /// <param name="forceDocumentType">
-    /// An optional <c>System.Type</c> indicating the type to create when using <see cref="CreateDocument"/> or
-    /// <see cref="M:CreateTemplateFile(FileInfo, Encoding, RenderingMode)"/>.
-    /// </param>
-    public ZptDocumentFactory(Type forceDocumentType = null)
+    public ZptDocumentFactory()
     {
-      _forceDocumentType = forceDocumentType;
+      _implementationProvider = new ConfigurationDocumentImplementationProvider();
+
+      var providers = (from md in _implementationProvider.GetAllProviderMetadata()
+                       select new { Metadata = md,
+                                    Provider = (IZptDocumentProvider) Activator.CreateInstance(md.ProviderType) })
+        .ToArray();
+
+      _defaultHtmlProvider = providers.Single(x => x.Metadata.IsDefaultHtmlProvider).Provider;
+      _defaultXmlProvider = providers.Single(x => x.Metadata.IsDefaultXmlProvider).Provider;
+
+      _providerTypes = providers.ToDictionary(k => k.Metadata.ProviderType, v => v.Provider);
+    }
+
+    static ZptDocumentFactory()
+    {
+      _default = new ZptDocumentFactory();
     }
 
     #endregion
 
-    #region static methods
+    #region static members
+
+    internal static IZptDocumentFactory DefaultDocumentFactory
+    {
+      get {
+        return _default;
+      }
+    }
+
+    internal static Tales.ITemplateFileFactory DefaultTemplateFactory
+    {
+      get {
+        return _default;
+      }
+    }
 
     /// <summary>
-    /// Gets the file extensions which indicate that an <see cref="ZptHtmlDocument"/> should be used.
+    /// Gets the file extensions which indicate that an <see cref="RenderingMode.Html"/> should be used.
     /// </summary>
     /// <returns>The HTML extensions.</returns>
     public static IEnumerable<string> GetHtmlExtensions()
@@ -335,7 +356,7 @@ namespace CSF.Zpt
     }
 
     /// <summary>
-    /// Gets the file extensions which indicate that an <see cref="ZptXmlDocument"/> should be used.
+    /// Gets the file extensions which indicate that an <see cref="RenderingMode.Xml"/> should be used.
     /// </summary>
     /// <returns>The XML extensions.</returns>
     public static IEnumerable<string> GetXmlExtensions()
