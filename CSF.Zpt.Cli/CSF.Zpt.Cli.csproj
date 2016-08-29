@@ -42,14 +42,12 @@
     <Compile Include="AssemblyInfo.cs" />
     <Compile Include="EntryPoint.cs" />
     <Compile Include="CommandLineOptions.cs" />
-    <Compile Include="Renderer.cs" />
-    <Compile Include="InputOutputInfo.cs" />
-    <Compile Include="InputOutputInfoCreator.cs" />
-    <Compile Include="RenderingJob.cs" />
     <Compile Include="Resources\Messages.Designer.cs">
       <DependentUpon>Messages.resx</DependentUpon>
     </Compile>
     <Compile Include="VersionNumberInspector.cs" />
+    <Compile Include="BatchRenderingOptionsCreator.cs" />
+    <Compile Include="IBatchRenderingOptionsCreator.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Target Name="AfterBuild" Condition="'$(Configuration)' == 'Release'">
