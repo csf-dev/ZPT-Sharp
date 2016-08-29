@@ -127,5 +127,17 @@
       <Project>{8207CD9B-F1C1-4D75-B250-ACDFFBDCB071}</Project>
       <Name>CSF.Zpt.Abstractions</Name>
     </ProjectReference>
+    <ProjectReference Include="..\CSF.Zpt.Impl.HtmlHAP\CSF.Zpt.Impl.HtmlHAP.csproj">
+      <Project>{BFD834D4-5724-4425-BCB3-6DEE6B03F743}</Project>
+      <Name>CSF.Zpt.Impl.HtmlHAP</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CSF.Zpt.Impl.XmlLegacy\CSF.Zpt.Impl.XmlLegacy.csproj">
+      <Project>{71834399-0B92-4754-9721-178872E77CFD}</Project>
+      <Name>CSF.Zpt.Impl.XmlLegacy</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CSF.Zpt.Impl.XmlLinq\CSF.Zpt.Impl.XmlLinq.csproj">
+      <Project>{842160E4-BDE5-4FA0-ADE5-07554090AA27}</Project>
+      <Name>CSF.Zpt.Impl.XmlLinq</Name>
+    </ProjectReference>
   </ItemGroup>
 </Project>
