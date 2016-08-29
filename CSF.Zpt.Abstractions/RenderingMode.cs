@@ -20,19 +20,14 @@ namespace CSF.Zpt
     AutoDetect = 0,
 
     /// <summary>
-    /// Forces the rendering to be treated as HTML.
+    /// Indicates an HTML rendering mode.
     /// </summary>
     Html,
 
     /// <summary>
-    /// Forces the rendering to be treated as XML.
+    /// Indicates an XML rendering mode.
     /// </summary>
-    Xml,
-
-    /// <summary>
-    /// Forces the rendering to be treated as XML, using <c>System.Xml.Linq</c>.
-    /// </summary>
-    XmlLinq
+    Xml
   }
 }
 

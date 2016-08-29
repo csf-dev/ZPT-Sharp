@@ -10,6 +10,14 @@ namespace CSF.Zpt
   /// </summary>
   public interface IZptDocument
   {
+    #region properties
+
+    RenderingMode Mode { get; }
+
+    #endregion
+
+    #region methods
+
     /// <summary>
     /// Renders the document to a <c>System.String</c>.
     /// </summary>
@@ -61,6 +69,8 @@ namespace CSF.Zpt
     /// </summary>
     /// <returns>The source info.</returns>
     ISourceInfo GetSourceInfo();
+
+    #endregion
   }
 }
 

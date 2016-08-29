@@ -4,6 +4,7 @@ using System.IO;
 using CSF.Zpt.Rendering;
 using System.Linq;
 using CSF.Zpt.Tales;
+using CSF.Zpt.Resources;
 
 namespace CSF.Zpt
 {
@@ -15,6 +16,12 @@ namespace CSF.Zpt
     #region fields
 
     private static log4net.ILog _logger;
+
+    #endregion
+
+    #region properties
+
+    public abstract RenderingMode Mode { get; }
 
     #endregion
 

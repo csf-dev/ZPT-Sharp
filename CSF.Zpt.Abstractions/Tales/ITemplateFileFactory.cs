@@ -13,12 +13,13 @@ namespace CSF.Zpt.Tales
     #region methods
 
     /// <summary>
-    /// Gets a value indicating whether or not the current instance can create an <see cref="IZptDocument"/> from a given
-    /// source file using <see cref="RenderingMode.AutoDetect"/>.
+    /// Gets a value indicating the <see cref="RenderingMode"/> detected for a given source file, assuming it were
+    /// parsed using <see cref="RenderingMode.AutoDetect"/>.
     /// </summary>
-    /// <returns><c>true</c> if this instance can auto-detect the rendering mode for the given file; otherwise, <c>false</c>.</returns>
+    /// <returns><c>true</c> if the <see cref="RenderingMode"/> could be auto-detected; <c>false</c> if not.</returns>
     /// <param name="sourceFile">The source file.</param>
-    bool CanAutoDetectMode(FileInfo sourceFile);
+    /// <param name="detectedMode">Exposes the detected rendering mode.</param>
+    bool TryDetectMode(FileInfo sourceFile, out RenderingMode detectedMode);
 
     /// <summary>
     /// Creates a template file from the given source file.
@@ -29,6 +30,16 @@ namespace CSF.Zpt.Tales
     TemplateFile CreateTemplateFile(FileInfo sourceFile,
                                     Encoding encoding = null,
                                     RenderingMode renderingMode = RenderingMode.AutoDetect);
+
+    /// <summary>
+    /// Creates a template file from the given source file.
+    /// </summary>
+    /// <param name="sourceFile">The source file containing the document to create.</param>
+    /// <param name="providerType">The <see cref="IZptDocumentProvider"/> type to use for creating the document.</param>
+    /// <param name="encoding">The text encoding to use in reading the source file.</param>
+    TemplateFile CreateTemplateFile(FileInfo sourceFile,
+                                    Type providerType,
+                                    Encoding encoding = null);
 
     /// <summary>
     /// Creates a template file from the given ZPT document.

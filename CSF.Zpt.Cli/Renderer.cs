@@ -62,11 +62,11 @@ namespace CSF.Zpt.Cli
       {
         if(mode == RenderingMode.Xml)
         {
-          output = _documentFactory.CreateXmlDocument(stream);
+          output = _documentFactory.CreateDocument(stream, RenderingMode.Xml);
         }
         else
         {
-          output = _documentFactory.CreateHtmlDocument(stream);
+          output = _documentFactory.CreateDocument(stream, RenderingMode.Html);
         }
       }
 
@@ -168,7 +168,7 @@ namespace CSF.Zpt.Cli
 
         newFilename = String.Concat(filenameWithoutExtension, newExtension);
       }
-      else if(job.Document is ZptXmlDocument)
+      else if(job.Document.Mode == RenderingMode.Xml)
       {
         newFilename = String.Concat(filenameWithoutExtension, ".xml");
       }

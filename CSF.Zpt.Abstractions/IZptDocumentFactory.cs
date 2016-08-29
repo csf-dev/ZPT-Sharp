@@ -13,12 +13,13 @@ namespace CSF.Zpt
     #region methods
 
     /// <summary>
-    /// Gets a value indicating whether or not the current instance can create an <see cref="IZptDocument"/> from a given
-    /// source file using <see cref="RenderingMode.AutoDetect"/>.
+    /// Gets a value indicating the <see cref="RenderingMode"/> detected for a given source file, assuming it were
+    /// parsed using <see cref="RenderingMode.AutoDetect"/>.
     /// </summary>
-    /// <returns><c>true</c> if this instance can auto-detect the rendering mode for the given file; otherwise, <c>false</c>.</returns>
+    /// <returns><c>true</c> if the <see cref="RenderingMode"/> could be auto-detected; <c>false</c> if not.</returns>
     /// <param name="sourceFile">The source file.</param>
-    bool CanAutoDetectMode(FileInfo sourceFile);
+    /// <param name="detectedMode">Exposes the detected rendering mode.</param>
+    bool TryDetectMode(FileInfo sourceFile, out RenderingMode detectedMode);
 
     /// <summary>
     /// Creates a document from the given source file.
@@ -31,28 +32,36 @@ namespace CSF.Zpt
                                 RenderingMode renderingMode = RenderingMode.AutoDetect);
 
     /// <summary>
-    /// Creates an HTML document from a stream exposing the source document, and optional information about the source.
+    /// Creates a document from the given source file.
     /// </summary>
-    /// <param name="sourceStream">A stream exposing the document content.</param>
-    /// <param name="sourceInfo">Information about the source document.</param>
+    /// <param name="sourceFile">The source file containing the document to create.</param>
+    /// <param name="providerType">The <see cref="IZptDocumentProvider"/> type to use for creating the document.</param>
     /// <param name="encoding">The text encoding to use in reading the source file.</param>
-    IZptDocument CreateHtmlDocument(Stream sourceStream, ISourceInfo sourceInfo = null, Encoding encoding = null);
+    IZptDocument CreateDocument(FileInfo sourceFile,
+                                Type providerType,
+                                Encoding encoding = null);
 
     /// <summary>
-    /// Creates an XML document from a stream exposing the source document, and optional information about the source.
+    /// Creates a document from the given source stream.
     /// </summary>
-    /// <param name="sourceStream">A stream exposing the document content.</param>
-    /// <param name="sourceInfo">Information about the source document.</param>
+    /// <param name="source">The stream containing the document to create.</param>
+    /// <param name="renderingMode">The rendering mode to use in creating the output document.</param>
     /// <param name="encoding">The text encoding to use in reading the source file.</param>
-    IZptDocument CreateXmlDocument(Stream sourceStream, ISourceInfo sourceInfo = null, Encoding encoding = null);
+    IZptDocument CreateDocument(Stream source,
+                                RenderingMode renderingMode,
+                                ISourceInfo sourceInfo = null,
+                                Encoding encoding = null);
 
     /// <summary>
-    /// Creates an XML Linq document from a stream exposing the source document, and optional information about the source.
+    /// Creates a document from the given source file.
     /// </summary>
-    /// <param name="sourceStream">A stream exposing the document content.</param>
-    /// <param name="sourceInfo">Information about the source document.</param>
+    /// <param name="source">The stream containing the document to create.</param>
+    /// <param name="providerType">The <see cref="IZptDocumentProvider"/> type to use for creating the document.</param>
     /// <param name="encoding">The text encoding to use in reading the source file.</param>
-    IZptDocument CreateXmlLinqDocument(Stream sourceStream, ISourceInfo sourceInfo = null, Encoding encoding = null);
+    IZptDocument CreateDocument(Stream source,
+                                Type providerType,
+                                ISourceInfo sourceInfo = null,
+                                Encoding encoding = null);
 
     #endregion
   }
