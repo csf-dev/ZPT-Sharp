@@ -44,6 +44,10 @@ namespace CSF.Zpt
       }
     }
 
+    /// <summary>
+    /// Gets the <see cref="RenderingMode"/> for which the current document type caters.
+    /// </summary>
+    /// <value>The rendering mode.</value>
     public override RenderingMode Mode
     {
       get {
