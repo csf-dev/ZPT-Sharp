@@ -13,10 +13,18 @@ namespace CSF.Zpt.Impl
   /// </summary>
   public class ZptXmlDocument : ZptDocument
   {
+    #region constants
+
+    public static readonly bool DefaultIndentMode = true;
+    public static readonly string DefaultIndentationCharacters = "  ";
+
+    #endregion
+
     #region fields
 
     private XmlDocument _document;
     private ISourceInfo _sourceFile;
+    private string _indentationCharacters;
 
     #endregion
 
@@ -52,6 +60,35 @@ namespace CSF.Zpt.Impl
     {
       get {
         return RenderingMode.Xml;
+      }
+    }
+
+    /// <summary>
+    /// Gets or sets a value indicating whether to output indented XML or not.
+    /// </summary>
+    /// <value><c>true</c> if the rendered output should be indented; otherwise, <c>false</c>.</value>
+    public bool IndentOutput
+    {
+      get;
+      set;
+    }
+
+    /// <summary>
+    /// Gets or sets a character string representing the indentation.
+    /// </summary>
+    /// <value>The indentation characters.</value>
+    public string IndentationCharacters
+    {
+      get {
+        return _indentationCharacters;
+      }
+      set {
+        if(value == null)
+        {
+          throw new ArgumentNullException(nameof(value));
+        }
+
+        _indentationCharacters = value;
       }
     }
 
@@ -148,8 +185,8 @@ namespace CSF.Zpt.Impl
       var xmlElement = ConvertElement<ZptXmlElement>(element);
 
       var settings = new XmlWriterSettings();
-      settings.Indent = options.OutputIndentedXml;
-      settings.IndentChars = options.XmlIndentationCharacters;
+      settings.Indent = this.IndentOutput;
+      settings.IndentChars = this.IndentationCharacters;
       settings.Encoding = options.OutputEncoding;
       settings.OmitXmlDeclaration = options.OmitXmlDeclaration;
 
@@ -200,6 +237,9 @@ namespace CSF.Zpt.Impl
 
       _document = document;
       _sourceFile = sourceFile;
+
+      this.IndentOutput = DefaultIndentMode;
+      this.IndentationCharacters = DefaultIndentationCharacters;
     }
 
     #endregion

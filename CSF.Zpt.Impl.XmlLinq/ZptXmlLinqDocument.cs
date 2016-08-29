@@ -152,8 +152,7 @@ namespace CSF.Zpt.Impl
       var xmlElement = ConvertElement<ZptXmlLinqElement>(element);
 
       var settings = new XmlWriterSettings();
-      settings.Indent = options.OutputIndentedXml;
-      settings.IndentChars = options.XmlIndentationCharacters;
+      settings.Indent = true;
       settings.Encoding = options.OutputEncoding;
       settings.OmitXmlDeclaration = options.OmitXmlDeclaration;
 

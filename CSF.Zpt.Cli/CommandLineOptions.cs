@@ -80,18 +80,6 @@ namespace CSF.Zpt.Cli
       set;
     }
 
-    public bool DoNotOutputIndentedXml
-    {
-      get;
-      set;
-    }
-
-    public string XmlIndentationCharacters
-    {
-      get;
-      set;
-    }
-
     public string ContextVisitorClassNames
     {
       get;
@@ -138,7 +126,6 @@ namespace CSF.Zpt.Cli
     {
       InputFilenamePattern = "*.pt";
       OutputEncoding = Encoding.UTF8.WebName;
-      XmlIndentationCharacters = "  ";
     }
 
     #endregion

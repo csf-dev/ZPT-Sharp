@@ -44,16 +44,6 @@ A comment is generated each time the rendered output switches context to use a d
 Omits the \fB<?xml?>\fR declaration from the output when rendering XML inputs.
 Has no effect for inputs treated as HTML.
 .TP
-.BR \-\-no\-indent\-xml
-By default when rendering XML inputs, the output is formatted and indented for human-readability.
-If this option is present then the formatting and indentation is skipped.
-Has no effect for inputs treated as HTML.
-.TP
-.BR \-\-xml\-indent\-chars\fR=\fI"CHARS"
-When rendering XML inputs and performing formatting and indenting, by default the indentation is set to two spaces: "  ".
-Use of this option may override that with a different set of characters.
-Has no effect for inputs treated as HTML, or where the \fB\-\-no\-indent\-xml\fR option has been used.
-.TP
 .BR \-\-input\-filename\-pattern\fR=\fIPATTERN\fR,\fB\-p
 Sets a glob pattern for matching input files when directory path(s) are provided amongst the input, by default this is set to "*\fB.pt\fR".
 Note that this default value will mean that the only input files matched will be treated as HTML files.
