@@ -15,8 +15,8 @@ namespace CSF.Zpt.Impl
   {
     #region constants
 
-    public static readonly bool DefaultIndentMode = true;
-    public static readonly string DefaultIndentationCharacters = "  ";
+    private const bool DefaultIndentMode = true;
+    private const string DefaultIndentationCharacters = "  ";
 
     #endregion
 
