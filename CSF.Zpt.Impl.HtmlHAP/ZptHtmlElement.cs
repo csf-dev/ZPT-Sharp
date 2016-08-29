@@ -151,9 +151,9 @@ namespace CSF.Zpt.Impl
     /// </summary>
     /// <returns>A reference to the replacement element, in its new DOM.</returns>
     /// <param name="replacement">Replacement.</param>
-    public override ZptElement ReplaceWith(ZptElement replacement)
+    public override IZptElement ReplaceWith(IZptElement replacement)
     {
-      var repl = replacement.As<ZptHtmlElement>();
+      var repl = ConvertTo<ZptHtmlElement>(replacement);
 
       try
       {
@@ -176,10 +176,10 @@ namespace CSF.Zpt.Impl
     /// <summary>
     /// Replaces the current element instance with the given content.
     /// </summary>
-    /// <returns>A collection of <see cref="ZptElement"/>, indicating the element(s) which replaced the current instance.</returns>
+    /// <returns>A collection of <see cref="IZptElement"/>, indicating the element(s) which replaced the current instance.</returns>
     /// <param name="content">The content with which to replace the current element.</param>
     /// <param name="interpretContentAsStructure">If set to <c>true</c> then the content is interpreted as structure.</param>
-    public override ZptElement[] ReplaceWith(string content, bool interpretContentAsStructure)
+    public override IZptElement[] ReplaceWith(string content, bool interpretContentAsStructure)
     {
       var newNodes = this.Import(content, interpretContentAsStructure);
 
@@ -219,11 +219,12 @@ namespace CSF.Zpt.Impl
     /// <returns>The newly-added element.</returns>
     /// <param name="existing">An existing child element, before which the child will be inserted.</param>
     /// <param name="newChild">The new child element to insert.</param>
-    public override ZptElement InsertBefore(ZptElement existing, ZptElement newChild)
+    public override IZptElement InsertBefore(IZptElement existing, IZptElement newChild)
     {
+      
       ZptHtmlElement
-        existingElement = existing.As<ZptHtmlElement>(),
-        newChildElement = newChild.As<ZptHtmlElement>();
+        existingElement = ConvertTo<ZptHtmlElement>(existing),
+        newChildElement = ConvertTo<ZptHtmlElement>(newChild);
 
       HtmlNode existingNode = existingElement.Node;
 
@@ -251,11 +252,11 @@ namespace CSF.Zpt.Impl
     /// <returns>The newly-added element.</returns>
     /// <param name="existing">An existing child element, after which the child will be inserted.</param>
     /// <param name="newChild">The new child element to insert.</param>
-    public override ZptElement InsertAfter(ZptElement existing, ZptElement newChild)
+    public override IZptElement InsertAfter(IZptElement existing, IZptElement newChild)
     {
       ZptHtmlElement
-        existingElement = existing.As<ZptHtmlElement>(),
-        newChildElement = newChild.As<ZptHtmlElement>();
+        existingElement = ConvertTo<ZptHtmlElement>(existing),
+        newChildElement = ConvertTo<ZptHtmlElement>(newChild);
 
       var output = this.Node.InsertAfter(newChildElement.Node, existingElement.Node);
       return new ZptHtmlElement(output, newChild.SourceFile, this.OwnerDocument, isImported: true);
@@ -265,7 +266,7 @@ namespace CSF.Zpt.Impl
     /// Gets the element which is the parent of the current instance.
     /// </summary>
     /// <returns>The parent element.</returns>
-    public override ZptElement GetParentElement()
+    public override IZptElement GetParentElement()
     {
       var parent = this.Node.ParentNode;
       return (parent != null && parent.NodeType == HtmlNodeType.Element)? new ZptHtmlElement(parent, this.SourceFile, this.OwnerDocument) : null;
@@ -275,7 +276,7 @@ namespace CSF.Zpt.Impl
     /// Gets a collection of the child elements from the current source element.
     /// </summary>
     /// <returns>The children.</returns>
-    public override ZptElement[] GetChildElements()
+    public override IZptElement[] GetChildElements()
     {
       return this.Node.ChildNodes
         .Where(x => x.NodeType == HtmlNodeType.Element)
@@ -287,7 +288,7 @@ namespace CSF.Zpt.Impl
     /// Gets a collection of the attributes present upon the current element.
     /// </summary>
     /// <returns>The attributes.</returns>
-    public override ZptAttribute[] GetAttributes()
+    public override IZptAttribute[] GetAttributes()
     {
       return this.Node.Attributes
         .Select(x => new ZptHtmlAttribute(x))
@@ -301,7 +302,7 @@ namespace CSF.Zpt.Impl
     /// <returns>The attribute, or a <c>null</c> reference.</returns>
     /// <param name="attributeNamespace">The attribute namespace.</param>
     /// <param name="name">The attribute name.</param>
-    public override ZptAttribute GetAttribute(ZptNamespace attributeNamespace, string name)
+    public override IZptAttribute GetAttribute(ZptNamespace attributeNamespace, string name)
     {
       if(attributeNamespace == null)
       {
@@ -385,7 +386,7 @@ namespace CSF.Zpt.Impl
     /// <returns>The matching child elements.</returns>
     /// <param name="attributeNamespace">The attribute namespace.</param>
     /// <param name="name">The attribute name.</param>
-    public override ZptElement[] SearchChildrenByAttribute(ZptNamespace attributeNamespace, string name)
+    public override IZptElement[] SearchChildrenByAttribute(ZptNamespace attributeNamespace, string name)
     {
       string attribName = GetNameWithPrefix(attributeNamespace, name);
 
@@ -509,7 +510,7 @@ namespace CSF.Zpt.Impl
     /// <summary>
     /// Clone this instance into a new Element instance, which may be manipulated without affecting the original.
     /// </summary>
-    public override ZptElement Clone()
+    public override IZptElement Clone()
     {
       var clone = this.Node.Clone();
 
@@ -549,9 +550,9 @@ namespace CSF.Zpt.Impl
     /// Omits the current element, replacing it with its children.
     /// </summary>
     /// <returns>
-    /// A collection of the <see cref="ZptElement"/> instances which were children of the element traversed
+    /// A collection of the <see cref="IZptElement"/> instances which were children of the element traversed
     /// </returns>
-    public override ZptElement[] Omit()
+    public override IZptElement[] Omit()
     {
       var children = this.Node.ChildNodes.ToArray();
       var parent = this.GetParent();
@@ -601,14 +602,14 @@ namespace CSF.Zpt.Impl
     /// </summary>
     /// <returns><c>true</c> if this instance is from same document as the specified element; otherwise, <c>false</c>.</returns>
     /// <param name="other">The element to test.</param>
-    public override bool IsFromSameDocumentAs(ZptElement other)
+    public override bool IsFromSameDocumentAs(IZptElement other)
     {
       if(other == null)
       {
         throw new ArgumentNullException(nameof(other));
       }
 
-      var typedOther = other.As<ZptHtmlElement>();
+      var typedOther = ConvertTo<ZptHtmlElement>(other);
 
       return this.Node.OwnerDocument == typedOther.Node.OwnerDocument;
     }
@@ -642,7 +643,7 @@ namespace CSF.Zpt.Impl
     {
       var output = this.Node.ParentNode;
 
-      ElementUtil.CheckRootNodeNotNull(output);
+      EnforceParentNodeNotNull(output);
 
       return output;
     }
@@ -682,15 +683,11 @@ namespace CSF.Zpt.Impl
     /// <param name="name">An element or attribute name.</param>
     internal static string GetNameWithPrefix(ZptNamespace nSpace, string name)
     {
-      if(name == null)
-      {
-        throw new ArgumentNullException(nameof(name));
-      }
       if(nSpace == null)
       {
         throw new ArgumentNullException(nameof(nSpace));
       }
-      ElementUtil.CheckElementNameNotEmpty(name);
+      EnforceNameNotEmpty(name);
 
       return (nSpace.Prefix != null)? String.Concat(nSpace.Prefix, PREFIX_SEPARATOR, name) : name;
     }

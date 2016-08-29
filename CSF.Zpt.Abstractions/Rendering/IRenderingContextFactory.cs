@@ -11,12 +11,12 @@ namespace CSF.Zpt.Rendering
     /// <summary>
     /// Create a context instance.
     /// </summary>
-    RenderingContext Create(ZptElement element, IRenderingOptions options);
+    RenderingContext Create(IZptElement element, IRenderingOptions options);
 
     /// <summary>
     /// Create a context instance.
     /// </summary>
-    RenderingContext Create(ZptElement element, IRenderingOptions options, object model);
+    RenderingContext Create(IZptElement element, IRenderingOptions options, object model);
 
     /// <summary>
     /// Adds a keyword option to contexts created by the current instance.

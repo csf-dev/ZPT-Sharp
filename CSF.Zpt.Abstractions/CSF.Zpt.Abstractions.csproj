@@ -43,8 +43,6 @@
     <Compile Include="ZptConstants.cs" />
     <Compile Include="Rendering\IContextVisitor.cs" />
     <Compile Include="Rendering\RenderingContext.cs" />
-    <Compile Include="Rendering\ZptAttribute.cs" />
-    <Compile Include="Rendering\ZptElement.cs" />
     <Compile Include="Rendering\ZptNamespace.cs" />
     <Compile Include="Rendering\OriginalAttributeValuesCollection.cs" />
     <Compile Include="Rendering\IRenderingContextFactory.cs" />
@@ -78,6 +76,8 @@
     <Compile Include="IZptDocumentProvider.cs" />
     <Compile Include="IDocumentImplementationProvider.cs" />
     <Compile Include="ZptDocumentProviderMetadata.cs" />
+    <Compile Include="Rendering\IZptElement.cs" />
+    <Compile Include="Rendering\IZptAttribute.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

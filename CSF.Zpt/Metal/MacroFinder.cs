@@ -11,42 +11,42 @@ namespace CSF.Zpt.Metal
     #region methods
 
     /// <summary>
-    /// Examines the given <see cref="ZptElement"/> and - if it uses a METAL macro - gets that macro from the given
+    /// Examines the given <see cref="IZptElement"/> and - if it uses a METAL macro - gets that macro from the given
     /// <see cref="Model"/>.
     /// </summary>
-    /// <returns>Either an <see cref="ZptElement"/> instance representing the macro used, or a <c>null</c> reference.</returns>
+    /// <returns>Either an <see cref="IZptElement"/> instance representing the macro used, or a <c>null</c> reference.</returns>
     /// <param name="context">The rendering context.</param>
-    public virtual ZptElement GetUsedMacro(RenderingContext context)
+    public virtual IZptElement GetUsedMacro(RenderingContext context)
     {
       return this.GetReferencedMacro(context, ZptConstants.Metal.UseMacroAttribute);
     }
 
     /// <summary>
-    /// Examines the given <see cref="ZptElement"/> and - if it extends a METAL macro - gets that macro from the given
+    /// Examines the given <see cref="IZptElement"/> and - if it extends a METAL macro - gets that macro from the given
     /// <see cref="Model"/>.
     /// </summary>
-    /// <returns>Either an <see cref="ZptElement"/> instance representing the macro extended, or a <c>null</c> reference.</returns>
+    /// <returns>Either an <see cref="IZptElement"/> instance representing the macro extended, or a <c>null</c> reference.</returns>
     /// <param name="context">The rendering context.</param>
-    public virtual ZptElement GetExtendedMacro(RenderingContext context)
+    public virtual IZptElement GetExtendedMacro(RenderingContext context)
     {
       return this.GetReferencedMacro(context, ZptConstants.Metal.ExtendMacroAttribute);
     }
 
     /// <summary>
-    /// Examines the given <see cref="ZptElement"/> and - if it has an attribute referencing another macro - gets that
+    /// Examines the given <see cref="IZptElement"/> and - if it has an attribute referencing another macro - gets that
     /// macro from the given <see cref="Model"/>.
     /// </summary>
-    /// <returns>Either an <see cref="ZptElement"/> instance representing the referenced macro, or a <c>null</c> reference.</returns>
+    /// <returns>Either an <see cref="IZptElement"/> instance representing the referenced macro, or a <c>null</c> reference.</returns>
     /// <param name="context">The rendering context.</param>
     /// <param name="attributeName">The name of the desired attribute, which references a macro if present.</param>
-    private ZptElement GetReferencedMacro(RenderingContext context, string attributeName)
+    private IZptElement GetReferencedMacro(RenderingContext context, string attributeName)
     {
       if(context == null)
       {
         throw new ArgumentNullException(nameof(context));
       }
 
-      ZptElement output;
+      IZptElement output;
       var attrib = context.GetMetalAttribute(attributeName);
 
       if(attrib != null)
@@ -56,7 +56,7 @@ namespace CSF.Zpt.Metal
         try
         {
           result = context.MetalModel.Evaluate(attrib.Value, context);
-          output = result.GetValue<ZptElement>().Clone();
+          output = result.GetValue<IZptElement>().Clone();
         }
         catch(Exception ex)
         {

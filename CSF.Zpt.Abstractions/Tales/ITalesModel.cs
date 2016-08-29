@@ -42,7 +42,7 @@ namespace CSF.Zpt.Tales
     /// Exposes the found object if this method returns <c>true</c>.  The value is undefined if this method returns
     /// <c>false</c>.
     /// </param>
-    bool TryGetLocalRootObject(string name, ZptElement element, out object result);
+    bool TryGetLocalRootObject(string name, IZptElement element, out object result);
   }
 }
 

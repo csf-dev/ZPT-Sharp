@@ -13,7 +13,7 @@ namespace CSF.Zpt.Rendering
   {
     #region properties
 
-    private IDictionary<string,ZptAttribute> _attributes;
+    private IDictionary<string,IZptAttribute> _attributes;
 
     #endregion
 
@@ -53,14 +53,14 @@ namespace CSF.Zpt.Rendering
     /// </summary>
     public OriginalAttributeValuesCollection()
     {
-      _attributes = new Dictionary<string,ZptAttribute>();
+      _attributes = new Dictionary<string,IZptAttribute>();
     }
 
     /// <summary>
     /// Initializes a new instance of the <see cref="CSF.Zpt.Rendering.OriginalAttributeValuesCollection"/> class.
     /// </summary>
     /// <param name="attributes">A collection of sttributes.</param>
-    public OriginalAttributeValuesCollection(IEnumerable<ZptAttribute> attributes)
+    public OriginalAttributeValuesCollection(IEnumerable<IZptAttribute> attributes)
     {
       if(attributes == null)
       {

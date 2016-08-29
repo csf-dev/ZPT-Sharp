@@ -6,7 +6,7 @@ namespace CSF.Zpt.Rendering
   /// <summary>
   /// Represents an element node in a ZPT document.
   /// </summary>
-  public abstract class ZptElement : IEquatable<ZptElement>
+  public abstract class ZptElement : IZptElement, IEquatable<ZptElement>
   {
     #region fields
 
@@ -126,6 +126,35 @@ namespace CSF.Zpt.Rendering
     }
 
     /// <summary>
+    /// Determines whether the specified <see cref="CSF.Zpt.Rendering.IZptElement"/> is equal to the current
+    /// <see cref="CSF.Zpt.Rendering.ZptElement"/>.
+    /// </summary>
+    /// <param name="other">
+    /// The <see cref="CSF.Zpt.Rendering.IZptElement"/> to compare with the current
+    /// <see cref="CSF.Zpt.Rendering.ZptElement"/>.
+    /// </param>
+    /// <returns>
+    /// <c>true</c> if the specified <see cref="CSF.Zpt.Rendering.IZptElement"/> is equal to the current
+    /// <see cref="CSF.Zpt.Rendering.ZptElement"/>; otherwise, <c>false</c>.
+    /// </returns>
+    public virtual bool Equals(IZptElement obj)
+    {
+      bool output;
+
+      if(Object.ReferenceEquals(this, obj))
+      {
+        output = true;
+      }
+      else
+      {
+        var other = obj as ZptElement;
+        output = (other != null && this.Equals(other));
+      }
+
+      return output;
+    }
+
+    /// <summary>
     /// Determines whether the specified <see cref="CSF.Zpt.Rendering.ZptElement"/> is equal to the current
     /// <see cref="CSF.Zpt.Rendering.ZptElement"/>.
     /// </summary>
@@ -153,15 +182,15 @@ namespace CSF.Zpt.Rendering
     /// </summary>
     /// <returns>A reference to the replacement element, in its new DOM.</returns>
     /// <param name="replacement">Replacement.</param>
-    public abstract ZptElement ReplaceWith(ZptElement replacement);
+    public abstract IZptElement ReplaceWith(IZptElement replacement);
 
     /// <summary>
     /// Replaces the current element instance with the given content.
     /// </summary>
-    /// <returns>A collection of <see cref="ZptElement"/>, indicating the element(s) which replaced the current instance.</returns>
+    /// <returns>A collection of <see cref="IZptElement"/>, indicating the element(s) which replaced the current instance.</returns>
     /// <param name="content">The content with which to replace the current element.</param>
     /// <param name="interpretContentAsStructure">If set to <c>true</c> then the content is interpreted as structure.</param>
-    public abstract ZptElement[] ReplaceWith(string content, bool interpretContentAsStructure);
+    public abstract IZptElement[] ReplaceWith(string content, bool interpretContentAsStructure);
 
     /// <summary>
     /// Removes all children of the current element instance and replaces them with the given content.
@@ -177,7 +206,7 @@ namespace CSF.Zpt.Rendering
     /// <returns>The newly-added element.</returns>
     /// <param name="existing">An existing child element, before which the child will be inserted.</param>
     /// <param name="newChild">The new child element to insert.</param>
-    public abstract ZptElement InsertBefore(ZptElement existing, ZptElement newChild);
+    public abstract IZptElement InsertBefore(IZptElement existing, IZptElement newChild);
 
     /// <summary>
     /// Inserts a new child element into the current element's child elements.  The new child will be the next
@@ -186,23 +215,23 @@ namespace CSF.Zpt.Rendering
     /// <returns>The newly-added element.</returns>
     /// <param name="existing">An existing child element, after which the child will be inserted.</param>
     /// <param name="newChild">The new child element to insert.</param>
-    public abstract ZptElement InsertAfter(ZptElement existing, ZptElement newChild);
+    public abstract IZptElement InsertAfter(IZptElement existing, IZptElement newChild);
 
     /// <summary>
     /// Gets the element which is the parent of the current instance.
     /// </summary>
     /// <returns>The parent element.</returns>
-    public abstract ZptElement GetParentElement();
+    public abstract IZptElement GetParentElement();
 
     /// <summary>
     /// Gets an ordered element chain, starting with the current element and including all of its parent elements from
     /// closest to furthest ancestors.
     /// </summary>
     /// <returns>The element chain.</returns>
-    public virtual ZptElement[] GetElementChain()
+    public virtual IZptElement[] GetElementChain()
     {
-      List<ZptElement> output = new List<ZptElement>();
-      ZptElement current = this;
+      List<IZptElement> output = new List<IZptElement>();
+      IZptElement current = this;
 
       while(current != null)
       {
@@ -217,13 +246,13 @@ namespace CSF.Zpt.Rendering
     /// Gets a collection of the child elements from the current source element.
     /// </summary>
     /// <returns>The children.</returns>
-    public abstract ZptElement[] GetChildElements();
+    public abstract IZptElement[] GetChildElements();
 
     /// <summary>
     /// Gets a collection of the attributes present upon the current element.
     /// </summary>
     /// <returns>The attributes.</returns>
-    public abstract ZptAttribute[] GetAttributes();
+    public abstract IZptAttribute[] GetAttributes();
 
     /// <summary>
     /// Gets an attribute which matches the given criteria, or a <c>null</c> reference is no matching attribute is
@@ -232,7 +261,7 @@ namespace CSF.Zpt.Rendering
     /// <returns>The attribute, or a <c>null</c> reference.</returns>
     /// <param name="attributeNamespace">The attribute namespace.</param>
     /// <param name="name">The attribute name.</param>
-    public abstract ZptAttribute GetAttribute(ZptNamespace attributeNamespace, string name);
+    public abstract IZptAttribute GetAttribute(ZptNamespace attributeNamespace, string name);
 
     /// <summary>
     /// Sets the value of an attribute.
@@ -275,7 +304,7 @@ namespace CSF.Zpt.Rendering
     /// <returns>The matching child elements.</returns>
     /// <param name="attributeNamespace">The attribute namespace.</param>
     /// <param name="name">The attribute name.</param>
-    public abstract ZptElement[] SearchChildrenByAttribute(ZptNamespace attributeNamespace, string name);
+    public abstract IZptElement[] SearchChildrenByAttribute(ZptNamespace attributeNamespace, string name);
 
     /// <summary>
     /// Recursively searches upwards in the DOM tree, returning the first (closest) ancestor element which has an
@@ -284,11 +313,10 @@ namespace CSF.Zpt.Rendering
     /// <returns>The closest ancestor element, or a <c>null</c> reference if no ancestor was found.</returns>
     /// <param name="attributeNamespace">The attribute namespace.</param>
     /// <param name="name">The attribute name.</param>
-    public virtual ZptElement SearchAncestorsByAttribute(ZptNamespace attributeNamespace, string name)
+    public virtual IZptElement SearchAncestorsByAttribute(ZptNamespace attributeNamespace, string name)
     {
-      ZptElement output = null;
+      IZptElement output = null, currentElement = this;
 
-      var currentElement = this;
       while(output == null && currentElement != null)
       {
         if(currentElement.GetAttribute(attributeNamespace, name) != null)
@@ -336,7 +364,7 @@ namespace CSF.Zpt.Rendering
     /// <summary>
     /// Clone this instance into a new Element instance, which may be manipulated without affecting the original.
     /// </summary>
-    public abstract ZptElement Clone();
+    public abstract IZptElement Clone();
 
     /// <summary>
     /// Gets the file location (typically a line number) for the current instance.
@@ -354,9 +382,9 @@ namespace CSF.Zpt.Rendering
     /// Omits the current element, replacing it with its children.
     /// </summary>
     /// <returns>
-    /// A collection of the <see cref="ZptElement"/> instances which were children of the element traversed
+    /// A collection of the <see cref="IZptElement"/> instances which were children of the element traversed
     /// </returns>
-    public abstract ZptElement[] Omit();
+    public abstract IZptElement[] Omit();
 
     /// <summary>
     /// Removes the current element from the DOM.
@@ -382,7 +410,7 @@ namespace CSF.Zpt.Rendering
     /// </summary>
     /// <returns><c>true</c> if this instance is from same document as the specified element; otherwise, <c>false</c>.</returns>
     /// <param name="other">The element to test.</param>
-    public abstract bool IsFromSameDocumentAs(ZptElement other);
+    public abstract bool IsFromSameDocumentAs(IZptElement other);
 
     /// <summary>
     /// Gets the full file path and location for the current element.
@@ -407,6 +435,53 @@ namespace CSF.Zpt.Rendering
         }
       }
     }
+
+    /// <summary>
+    /// Converts the given <see cref="IZptElement"/> to an implementation-specific subclass, or raises an exception
+    /// if the conversion is not valid.
+    /// </summary>
+    /// <returns>The converted element instance.</returns>
+    /// <param name="element">The element for conversion.</param>
+    /// <typeparam name="TElement">The desired element type.</typeparam>
+    protected virtual TElement ConvertTo<TElement>(IZptElement element) where TElement : class,IZptElement
+    {
+      return ConvertElement<TElement>(element);
+    }
+
+    protected virtual void EnforceParentNodeNotNull(object rootNode)
+    {
+      if(rootNode == null)
+      {
+        throw new InvalidOperationException(Resources.ExceptionMessages.CannotGetParentFromRootNode);
+      }
+    }
+
+    protected static void EnforceNameNotEmpty(string name)
+    {
+      if(name == null)
+      {
+        throw new ArgumentNullException(nameof(name));
+      }
+      else if(name.Length == 0)
+      {
+        throw new ArgumentException(Resources.ExceptionMessages.NameMustNotBeEmptyString, nameof(name));
+      }
+    }
+
+    protected virtual void EnforceNodeType<TNodeType>(string expectedNodeLanguage,
+                                                    TNodeType expectedNodeType,
+                                                    TNodeType actualNodeType)
+    {
+      if(!Object.Equals(actualNodeType, expectedNodeType))
+      {
+        string message = String.Format(Resources.ExceptionMessages.IncorrectWrappedNodeType,
+                                       expectedNodeLanguage,
+                                       expectedNodeType,
+                                       actualNodeType);
+        throw new ArgumentException(message);
+      }
+    }
+
 
     #endregion
 
@@ -442,6 +517,31 @@ namespace CSF.Zpt.Rendering
       _isRoot = isRoot;
       _isImported = isImported;
       _ownerDocument = ownerDocument;
+    }
+
+    #endregion
+
+    #region static methods
+
+    /// <summary>
+    /// Converts the given <see cref="IZptElement"/> to an implementation-specific subclass, or raises an exception
+    /// if the conversion is not valid.
+    /// </summary>
+    /// <returns>The converted element instance.</returns>
+    /// <param name="element">The element for conversion.</param>
+    /// <typeparam name="TElement">The desired element type.</typeparam>
+    internal static TElement ConvertElement<TElement>(IZptElement element) where TElement : class,IZptElement
+    {
+      var output = element as TElement;
+
+      if(output == null)
+      {
+        string message = String.Format(Resources.ExceptionMessages.RenderedElementIncorrectType,
+                                       typeof(TElement).Name);
+        throw new ArgumentException(message, "element");
+      }
+
+      return output;
     }
 
     #endregion

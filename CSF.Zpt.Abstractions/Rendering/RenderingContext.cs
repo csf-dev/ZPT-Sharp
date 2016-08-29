@@ -13,10 +13,10 @@ namespace CSF.Zpt.Rendering
     #region fields
 
     private IModel _metalContext, _talContext;
-    private ZptElement _element;
+    private IZptElement _element;
     private IRenderingOptions _renderingOptions;
     private string _sourceAnnotationRoot;
-    private IEnumerable<ZptAttribute> _originalAttributes;
+    private IEnumerable<IZptAttribute> _originalAttributes;
 
     #endregion
 
@@ -48,7 +48,7 @@ namespace CSF.Zpt.Rendering
     /// Gets the ZPT element.
     /// </summary>
     /// <value>The element.</value>
-    public virtual ZptElement Element
+    public virtual IZptElement Element
     {
       get {
         return _element;
@@ -81,7 +81,7 @@ namespace CSF.Zpt.Rendering
     /// Gets the original attributes for the <see cref="Element"/> contained within the current instance.
     /// </summary>
     /// <value>The original attributes.</value>
-    protected virtual IEnumerable<ZptAttribute> OriginalAttributes
+    protected virtual IEnumerable<IZptAttribute> OriginalAttributes
     {
       get {
         return _originalAttributes;
@@ -122,7 +122,7 @@ namespace CSF.Zpt.Rendering
     /// <returns>The sibling context.</returns>
     /// <param name="element">The ZPT element for which the new context is to be created.</param>
     /// <param name="cloneAttributes">A value indicating whether or not the element's attributes should be cloned or not.</param>
-    public virtual RenderingContext CreateSiblingContext(ZptElement element, bool cloneAttributes = false)
+    public virtual RenderingContext CreateSiblingContext(IZptElement element, bool cloneAttributes = false)
     {
       if(element == null)
       {
@@ -149,7 +149,7 @@ namespace CSF.Zpt.Rendering
     /// <returns>The attribute, or a <c>null</c> reference if no attribute is found.</returns>
     /// <param name="nspace">The attribute namespace.</param>
     /// <param name="attributeName">The attribute name.</param>
-    public virtual ZptAttribute GetAttribute(ZptNamespace nspace, string attributeName)
+    public virtual IZptAttribute GetAttribute(ZptNamespace nspace, string attributeName)
     {
       return this.OriginalAttributes
         .Where(x => x.IsMatch(nspace, attributeName)
@@ -185,7 +185,7 @@ namespace CSF.Zpt.Rendering
     /// <param name="sourceAnnotationRoot">The source annotation root path.</param>
     public RenderingContext(IModel metalContext,
                             IModel talContext,
-                            ZptElement element,
+                            IZptElement element,
                             IRenderingOptions options,
                             string sourceAnnotationRoot = null)
     {

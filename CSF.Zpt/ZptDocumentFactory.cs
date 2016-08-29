@@ -107,7 +107,10 @@ namespace CSF.Zpt
       {
         throw new ArgumentNullException(nameof(sourceFile));
       }
-      renderingMode.CheckIsValid();
+      if(!renderingMode.IsDefinedValue())
+      {
+        throw new ArgumentException(Resources.ExceptionMessages.InvalidRenderingMode, nameof(renderingMode));
+      }
 
       if(renderingMode == RenderingMode.AutoDetect)
       {
@@ -166,7 +169,10 @@ namespace CSF.Zpt
       {
         throw new ArgumentNullException(nameof(source));
       }
-      renderingMode.CheckIsValid();
+      if(!renderingMode.IsDefinedValue())
+      {
+        throw new ArgumentException(Resources.ExceptionMessages.InvalidRenderingMode, nameof(renderingMode));
+      }
 
       if(renderingMode == RenderingMode.AutoDetect)
       {

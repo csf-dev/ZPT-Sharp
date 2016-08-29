@@ -57,7 +57,7 @@ namespace CSF.Zpt.Metal
     /// </summary>
     /// <param name="context">The context to expand.</param>
     /// <param name="macro">The macro element to replace the original.</param>
-    public RenderingContext ExpandAndReplace(RenderingContext context, ZptElement macro)
+    public RenderingContext ExpandAndReplace(RenderingContext context, IZptElement macro)
     {
       if(context == null)
       {
@@ -90,7 +90,7 @@ namespace CSF.Zpt.Metal
     /// </summary>
     /// <param name="sourceContext">Source rendering context.</param>
     /// <param name="macro">The macro providing the slots to fill.</param>
-    private void FillSlots(RenderingContext sourceContext, ZptElement macro)
+    private void FillSlots(RenderingContext sourceContext, IZptElement macro)
     {
       if(sourceContext == null)
       {
@@ -125,7 +125,7 @@ namespace CSF.Zpt.Metal
     /// <returns>A collection of elements, and their attribute values.</returns>
     /// <param name="rootElement">The root element from which to search.</param>
     /// <param name="desiredAttribute">The name of the desired attribute.</param>
-    private IDictionary<string,ZptElement> GetElementsByValue(ZptElement rootElement,
+    private IDictionary<string,IZptElement> GetElementsByValue(IZptElement rootElement,
                                                            string desiredAttribute)
     {
       var output = rootElement.SearchChildrenByMetalAttribute(desiredAttribute)
@@ -166,7 +166,7 @@ namespace CSF.Zpt.Metal
       return output;
     }
 
-    private void LogMacroUsage(ZptElement defineMacro, ZptElement useMacro)
+    private void LogMacroUsage(IZptElement defineMacro, IZptElement useMacro)
     {
       _logger.DebugFormat(Resources.LogMessageFormats.MacroUsage,
                           defineMacro.GetMetalAttribute(ZptConstants.Metal.DefineMacroAttribute).Value,
@@ -174,7 +174,7 @@ namespace CSF.Zpt.Metal
                           defineMacro.GetFullFilePathAndLocation());
     }
 
-    private void LogMacroExtension(ZptElement defineMacro, ZptElement extendedMacro)
+    private void LogMacroExtension(IZptElement defineMacro, IZptElement extendedMacro)
     {
       _logger.DebugFormat(Resources.LogMessageFormats.MacroExtension,
                           defineMacro.GetMetalAttribute(ZptConstants.Metal.ExtendMacroAttribute).Value,
@@ -182,7 +182,7 @@ namespace CSF.Zpt.Metal
                           defineMacro.GetFullFilePathAndLocation());
     }
 
-    private void LogSlotFilling(ZptElement defineSlot, ZptElement fillSlot)
+    private void LogSlotFilling(IZptElement defineSlot, IZptElement fillSlot)
     {
       _logger.DebugFormat(Resources.LogMessageFormats.SlotFilling,
                           fillSlot.GetMetalAttribute(ZptConstants.Metal.FillSlotAttribute).Value,

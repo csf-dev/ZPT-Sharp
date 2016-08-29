@@ -63,7 +63,7 @@ namespace CSF.Zpt.Metal
         AddAnnotation(targetContext, skipLineNumber: true);
       }
 
-      ZptAttribute attr;
+      IZptAttribute attr;
 
       if((replacementContext == null
           && (attr = targetContext.Element.GetMetalAttribute(ZptConstants.Metal.DefineMacroAttribute)) != null)
@@ -155,7 +155,7 @@ namespace CSF.Zpt.Metal
                                      bool useEndTagPosition,
                                      RenderingContext replacementContext)
     {
-      ZptElement
+      IZptElement
         targetElement = targetContext.Element,
         sourceElement = replacementContext?.Element ?? targetContext.Element;
       string

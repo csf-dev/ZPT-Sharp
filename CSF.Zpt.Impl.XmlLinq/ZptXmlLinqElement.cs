@@ -161,9 +161,9 @@ namespace CSF.Zpt.Rendering
     /// </summary>
     /// <returns>A reference to the replacement element, in its new DOM.</returns>
     /// <param name="replacement">Replacement.</param>
-    public override ZptElement ReplaceWith(ZptElement replacement)
+    public override IZptElement ReplaceWith(IZptElement replacement)
     {
-      var repl = replacement.As<ZptXmlLinqElement>();
+      var repl = ConvertTo<ZptXmlLinqElement>(replacement);
 
       var cloned = ((ZptXmlLinqElement) repl.Clone()).Node;
 
@@ -185,16 +185,16 @@ namespace CSF.Zpt.Rendering
     /// <summary>
     /// Replaces the current element instance with the given content.
     /// </summary>
-    /// <returns>A collection of <see cref="ZptElement"/>, indicating the element(s) which replaced the current instance.</returns>
+    /// <returns>A collection of <see cref="IZptElement"/>, indicating the element(s) which replaced the current instance.</returns>
     /// <param name="content">The content with which to replace the current element.</param>
     /// <param name="interpretContentAsStructure">If set to <c>true</c> then the content is interpreted as structure.</param>
-    public override ZptElement[] ReplaceWith(string content, bool interpretContentAsStructure)
+    public override IZptElement[] ReplaceWith(string content, bool interpretContentAsStructure)
     {
       var newNode = this.Import(content, interpretContentAsStructure);
 
       this.Node.ReplaceWith(newNode);
 
-      return interpretContentAsStructure? new[] { new ZptXmlLinqElement(newNode, this.SourceFile, this.OwnerDocument) } : new ZptElement[0];
+      return interpretContentAsStructure? new[] { new ZptXmlLinqElement(newNode, this.SourceFile, this.OwnerDocument) } : new IZptElement[0];
     }
 
     /// <summary>
@@ -216,11 +216,11 @@ namespace CSF.Zpt.Rendering
     /// <returns>The newly-added element.</returns>
     /// <param name="existing">An existing child element, before which the child will be inserted.</param>
     /// <param name="newChild">The new child element to insert.</param>
-    public override ZptElement InsertBefore(ZptElement existing, ZptElement newChild)
+    public override IZptElement InsertBefore(IZptElement existing, IZptElement newChild)
     {
       ZptXmlLinqElement
-        existingElement = existing.As<ZptXmlLinqElement>(),
-        newChildElement = newChild.As<ZptXmlLinqElement>();
+        existingElement = ConvertTo<ZptXmlLinqElement>(existing),
+        newChildElement = ConvertTo<ZptXmlLinqElement>(newChild);
 
       existingElement.Node.AddBeforeSelf(newChildElement.Node);
       return new ZptXmlLinqElement(newChildElement.Node, newChild.SourceFile, this.OwnerDocument, isImported: true);
@@ -233,11 +233,11 @@ namespace CSF.Zpt.Rendering
     /// <returns>The newly-added element.</returns>
     /// <param name="existing">An existing child element, after which the child will be inserted.</param>
     /// <param name="newChild">The new child element to insert.</param>
-    public override ZptElement InsertAfter(ZptElement existing, ZptElement newChild)
+    public override IZptElement InsertAfter(IZptElement existing, IZptElement newChild)
     {
       ZptXmlLinqElement
-        existingElement = existing.As<ZptXmlLinqElement>(),
-        newChildElement = newChild.As<ZptXmlLinqElement>();
+        existingElement = ConvertTo<ZptXmlLinqElement>(existing),
+        newChildElement = ConvertTo<ZptXmlLinqElement>(newChild);
 
       existingElement.Node.AddAfterSelf(newChildElement.Node);
       return new ZptXmlLinqElement(newChildElement.Node, newChild.SourceFile, this.OwnerDocument, isImported: true);
@@ -247,7 +247,7 @@ namespace CSF.Zpt.Rendering
     /// Gets the element which is the parent of the current instance.
     /// </summary>
     /// <returns>The parent element.</returns>
-    public override ZptElement GetParentElement()
+    public override IZptElement GetParentElement()
     {
       var parent = this.Node.Parent;
       return (parent != null && parent.NodeType == XmlNodeType.Element)? new ZptXmlLinqElement(parent, this.SourceFile, this.OwnerDocument) : null;
@@ -257,7 +257,7 @@ namespace CSF.Zpt.Rendering
     /// Gets a collection of the child elements from the current source element.
     /// </summary>
     /// <returns>The children.</returns>
-    public override ZptElement[] GetChildElements()
+    public override IZptElement[] GetChildElements()
     {
       return this.Node.Elements()
         .Cast<XElement>()
@@ -270,7 +270,7 @@ namespace CSF.Zpt.Rendering
     /// Gets a collection of the attributes present upon the current element.
     /// </summary>
     /// <returns>The attributes.</returns>
-    public override ZptAttribute[] GetAttributes()
+    public override IZptAttribute[] GetAttributes()
     {
       return this.Node.Attributes()
         .Cast<XAttribute>()
@@ -285,17 +285,13 @@ namespace CSF.Zpt.Rendering
     /// <returns>The attribute, or a <c>null</c> reference.</returns>
     /// <param name="attributeNamespace">The attribute namespace.</param>
     /// <param name="name">The attribute name.</param>
-    public override ZptAttribute GetAttribute(ZptNamespace attributeNamespace, string name)
+    public override IZptAttribute GetAttribute(ZptNamespace attributeNamespace, string name)
     {
-      if(name == null)
-      {
-        throw new ArgumentNullException(nameof(name));
-      }
       if(attributeNamespace == null)
       {
         throw new ArgumentNullException(nameof(attributeNamespace));
       }
-      ElementUtil.CheckElementNameNotEmpty(name);
+      EnforceNameNotEmpty(name);
 
       string query;
       var nsManager = new XmlNamespaceManager(new NameTable());
@@ -378,13 +374,13 @@ namespace CSF.Zpt.Rendering
     /// <returns>The matching child elements.</returns>
     /// <param name="attributeNamespace">The attribute namespace.</param>
     /// <param name="name">The attribute name.</param>
-    public override ZptElement[] SearchChildrenByAttribute(ZptNamespace attributeNamespace, string name)
+    public override IZptElement[] SearchChildrenByAttribute(ZptNamespace attributeNamespace, string name)
     {
-      if(name == null)
+      if(attributeNamespace == null)
       {
-        throw new ArgumentNullException(nameof(name));
+        throw new ArgumentNullException(nameof(attributeNamespace));
       }
-      ElementUtil.CheckElementNameNotEmpty(name);
+      EnforceNameNotEmpty(name);
 
       string query;
       var nsManager = new XmlNamespaceManager(new NameTable());
@@ -501,11 +497,7 @@ namespace CSF.Zpt.Rendering
     /// <param name="name">The name.</param>
     private string GetName(string prefix, string name)
     {
-      if(name == null)
-      {
-        throw new ArgumentNullException(nameof(name));
-      }
-      ElementUtil.CheckElementNameNotEmpty(name);
+      EnforceNameNotEmpty(name);
 
       string output;
 
@@ -524,7 +516,7 @@ namespace CSF.Zpt.Rendering
     /// <summary>
     /// Clone this instance into a new Element instance, which may be manipulated without affecting the original.
     /// </summary>
-    public override ZptElement Clone()
+    public override IZptElement Clone()
     {
       var clone = new XElement(this.Node);
 
@@ -583,9 +575,9 @@ namespace CSF.Zpt.Rendering
     /// Omits the current element, replacing it with its children.
     /// </summary>
     /// <returns>
-    /// A collection of the <see cref="ZptElement"/> instances which were children of the element traversed
+    /// A collection of the <see cref="IZptElement"/> instances which were children of the element traversed
     /// </returns>
-    public override ZptElement[] Omit()
+    public override IZptElement[] Omit()
     {
       var children = this.Node.Nodes().ToArray();
 
@@ -634,14 +626,14 @@ namespace CSF.Zpt.Rendering
     /// </summary>
     /// <returns><c>true</c> if this instance is from same document as the specified element; otherwise, <c>false</c>.</returns>
     /// <param name="other">The element to test.</param>
-    public override bool IsFromSameDocumentAs(ZptElement other)
+    public override bool IsFromSameDocumentAs(IZptElement other)
     {
       if(other == null)
       {
         throw new ArgumentNullException(nameof(other));
       }
 
-      var typedOther = other.As<ZptXmlLinqElement>();
+      var typedOther = ConvertTo<ZptXmlLinqElement>(other);
       return this.Node.Document == typedOther.Node.Document;
     }
 
@@ -674,7 +666,7 @@ namespace CSF.Zpt.Rendering
     {
       var output = this.Node.Parent;
 
-      ElementUtil.CheckRootNodeNotNull(output);
+      EnforceParentNodeNotNull(output);
 
       return output;
     }
@@ -733,7 +725,7 @@ namespace CSF.Zpt.Rendering
         _node = node.Document.Root;
       }
 
-      ElementUtil.CheckNodeType("XML", XmlNodeType.Element, _node.NodeType);
+      EnforceNodeType("XML", XmlNodeType.Element, _node.NodeType);
     }
 
     #endregion

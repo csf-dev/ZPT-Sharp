@@ -126,7 +126,7 @@ namespace CSF.Zpt.Impl
     /// <param name="element">The element to render.</param>
     /// <param name="options">The rendering options to use.  If <c>null</c> then default options are used.</param>
     protected override void Render(TextWriter writer,
-                                   ZptElement element,
+                                   IZptElement element,
                                    IRenderingOptions options)
     {
       if(writer == null)
@@ -138,7 +138,7 @@ namespace CSF.Zpt.Impl
         throw new ArgumentNullException(nameof(element));
       }
 
-      var htmlElement = element.As<ZptHtmlElement>();
+      var htmlElement = ConvertElement<ZptHtmlElement>(element);
       htmlElement.Node.WriteTo(writer);
     }
 
@@ -146,7 +146,7 @@ namespace CSF.Zpt.Impl
     /// Creates a rendering model from the current instance.
     /// </summary>
     /// <returns>The rendering model.</returns>
-    protected override ZptElement GetRootElement()
+    protected override IZptElement GetRootElement()
     {
       return new ZptHtmlElement(this.Document.DocumentNode, this.SourceFile, this, isRoot: true);
     }

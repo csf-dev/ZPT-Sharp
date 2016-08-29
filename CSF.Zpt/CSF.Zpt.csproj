@@ -114,6 +114,8 @@
     <Compile Include="XmlUrlResolverFactory.cs" />
     <Compile Include="ConfigurationDocumentImplementationProvider.cs" />
     <Compile Include="DocumentImplementationConfiguration.cs" />
+    <Compile Include="Rendering\ZptAttribute.cs" />
+    <Compile Include="Rendering\ZptElement.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Target Name="AfterBuild" Condition="'$(Configuration)' == 'Release'">

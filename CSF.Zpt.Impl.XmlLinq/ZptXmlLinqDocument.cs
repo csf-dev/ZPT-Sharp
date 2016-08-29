@@ -133,7 +133,7 @@ namespace CSF.Zpt
     /// <param name="element">The element to render.</param>
     /// <param name="options">The rendering options to use.  If <c>null</c> then default options are used.</param>
     protected override void Render(TextWriter writer,
-                                   ZptElement element,
+                                   IZptElement element,
                                    IRenderingOptions options)
     {
       if(writer == null)
@@ -145,7 +145,7 @@ namespace CSF.Zpt
         throw new ArgumentNullException(nameof(element));
       }
 
-      var xmlElement = element.As<ZptXmlLinqElement>();
+      var xmlElement = ConvertElement<ZptXmlLinqElement>(element);
 
       var settings = new XmlWriterSettings();
       settings.Indent = options.OutputIndentedXml;
@@ -163,7 +163,7 @@ namespace CSF.Zpt
     /// Creates a rendering model from the current instance.
     /// </summary>
     /// <returns>The rendering model.</returns>
-    protected override ZptElement GetRootElement()
+    protected override IZptElement GetRootElement()
     {
       return new Rendering.ZptXmlLinqElement(this.Document.Root, this.SourceFile, this, isRoot: true);
     }

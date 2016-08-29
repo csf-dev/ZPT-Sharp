@@ -9,10 +9,10 @@ namespace CSF.Zpt.Rendering
   public interface IRepetitionInfo : ITalesPathHandler
   {
     /// <summary>
-    /// Gets a reference to the associated <see cref="ZptElement"/>, if applicable.
+    /// Gets a reference to the associated <see cref="IZptElement"/>, if applicable.
     /// </summary>
     /// <value>The associated element.</value>
-    ZptElement AssociatedElement { get; }
+    IZptElement AssociatedElement { get; }
 
     /// <summary>
     /// Gets the value associated with the current iteration.
