@@ -42,6 +42,7 @@
     <Reference Include="log4net">
       <HintPath>..\packages\log4net.2.0.3\lib\net40-full\log4net.dll</HintPath>
     </Reference>
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
@@ -124,6 +125,8 @@
     <Compile Include="Rendering\ZptXmlLinqElement.cs" />
     <Compile Include="Rendering\ZptXmlLinqAttribute.cs" />
     <Compile Include="XmlUrlResolverFactory.cs" />
+    <Compile Include="ConfigurationDocumentImplementationProvider.cs" />
+    <Compile Include="DocumentImplementationConfiguration.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Target Name="AfterBuild" Condition="'$(Configuration)' == 'Release'">

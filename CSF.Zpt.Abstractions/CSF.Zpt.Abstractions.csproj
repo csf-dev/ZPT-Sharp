@@ -75,6 +75,9 @@
     <Compile Include="Rendering\ISourceInfo.cs" />
     <Compile Include="Rendering\IRenderingOptions.cs" />
     <Compile Include="IXmlUrlResolverFactory.cs" />
+    <Compile Include="IZptDocumentProvider.cs" />
+    <Compile Include="IDocumentImplementationProvider.cs" />
+    <Compile Include="ZptDocumentProviderMetadata.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
