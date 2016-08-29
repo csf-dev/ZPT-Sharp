@@ -65,8 +65,7 @@ namespace CSF.Zpt.BatchRendering
       }
       else
       {
-        // TODO: Better exception here
-        throw new InvalidOperationException();
+        throw new BatchRenderingException(Resources.ExceptionMessages.InvalidBatchRenderingOutputPath);
       }
 
       return output;
@@ -77,8 +76,7 @@ namespace CSF.Zpt.BatchRendering
     {
       if(_inputFile == null)
       {
-        // TODO: Better exception here
-        throw new InvalidOperationException();
+        throw new BatchRenderingException(Resources.ExceptionMessages.InputMustBeFileIfOutputIsDirectory);
       }
 
       var extension = _inputFile.Extension;

@@ -219,5 +219,17 @@ namespace CSF.Zpt.Resources {
                 return ResourceManager.GetString("BatchOptionsMustNotHaveBothOutputStreamAndPath", resourceCulture);
             }
         }
+        
+        internal static string InvalidBatchRenderingOutputPath {
+            get {
+                return ResourceManager.GetString("InvalidBatchRenderingOutputPath", resourceCulture);
+            }
+        }
+        
+        internal static string InputMustBeFileIfOutputIsDirectory {
+            get {
+                return ResourceManager.GetString("InputMustBeFileIfOutputIsDirectory", resourceCulture);
+            }
+        }
     }
 }
