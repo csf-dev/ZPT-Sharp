@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Text;
+using CSF.Zpt.Tales;
 
 namespace CSF.Zpt.Rendering
 {
@@ -70,6 +71,12 @@ namespace CSF.Zpt.Rendering
     /// <param name="model">The model to render</param>
     /// <returns>The root rendering context.</returns>
     RenderingContext CreateRootContext(IZptElement element, object model);
+
+    /// <summary>
+    /// Gets an instance of <see cref="ITemplateFileFactory"/> from the current instance.
+    /// </summary>
+    /// <returns>The template file factory</returns>
+    ITemplateFileFactory GetTemplateFileFactory();
 
     #endregion
   }

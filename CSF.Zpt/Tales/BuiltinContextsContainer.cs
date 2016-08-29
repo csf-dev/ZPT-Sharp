@@ -182,7 +182,7 @@ namespace CSF.Zpt.Tales
     public BuiltinContextsContainer(NamedObjectWrapper options,
                                     ContextualisedRepetitionSummaryWrapper repeat,
                                     Lazy<OriginalAttributeValuesCollection> attrs,
-                                    ITemplateFileFactory templateFileFactory = null,
+                                    ITemplateFileFactory templateFileFactory,
                                     object model = null)
     {
       if(options == null)
@@ -205,7 +205,7 @@ namespace CSF.Zpt.Tales
       _attrs = attrs;
       _model = model;
 
-      _templateFileFactory = templateFileFactory?? new ZptDocumentFactory();
+        _templateFileFactory = templateFileFactory;
 
     }
 
