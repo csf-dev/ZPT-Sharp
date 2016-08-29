@@ -27,17 +27,13 @@ namespace CSF.Zpt.Rendering
                             bool addSourceFileAnnotation = false,
                             System.Text.Encoding outputEncoding = null,
                             bool omitXmlDeclaration = false,
-                            string xmlIndentCharacters = "  ",
-                            bool outputIndentedXml = true,
                             ITemplateFileFactory documentFactory = null)
       : base(documentFactory,
              elementVisitors,
              contextFactory,
              addSourceFileAnnotation,
              outputEncoding,
-             omitXmlDeclaration,
-             xmlIndentCharacters,
-             outputIndentedXml) {}
+             omitXmlDeclaration) {}
 
     #endregion
   }

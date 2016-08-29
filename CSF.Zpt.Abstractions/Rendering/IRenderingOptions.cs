@@ -41,18 +41,6 @@ namespace CSF.Zpt.Rendering
     /// <value><c>true</c> if the XML declaration is to be omitted; otherwise, <c>false</c>.</value>
     bool OmitXmlDeclaration { get; }
 
-    /// <summary>
-    /// Gets a string used to indicate a single level of indentation to use when rendering an XML document.
-    /// </summary>
-    /// <value>The XML indentation characters.</value>
-    string XmlIndentationCharacters { get; }
-
-    /// <summary>
-    /// Gets a value indicating whether XML documents should be rendered with indentated formatting or not.
-    /// </summary>
-    /// <value><c>true</c> if the rendering process is to output indented XML; otherwise, <c>false</c>.</value>
-    bool OutputIndentedXml { get; }
-
     #endregion
 
     #region methods

@@ -159,8 +159,6 @@ namespace CSF.Zpt.MVC
       ContextVisitors = defaultOptions.ContextVisitors;
       OutputEncoding = defaultOptions.OutputEncoding;
       OmitXmlDeclaration = true;
-      XmlIndentationCharacters = defaultOptions.XmlIndentationCharacters;
-      OutputIndentedXml = defaultOptions.OutputIndentedXml;
 
       RenderingMode = null;
       ForceInputEncoding = null;
@@ -218,9 +216,7 @@ namespace CSF.Zpt.MVC
                                          ContextFactory,
                                          AddSourceFileAnnotation,
                                          OutputEncoding,
-                                         OmitXmlDeclaration,
-                                         XmlIndentationCharacters,
-                                         OutputIndentedXml);
+                                         OmitXmlDeclaration);
     }
 
     #endregion

@@ -51,16 +51,6 @@ namespace CSF.Zpt.Rendering
     /// </summary>
     protected internal const bool DefaultOmitXmlDeclaration = false;
 
-    /// <summary>
-    /// Gets the default value for <see cref="OutputIndentedXml"/>.
-    /// </summary>
-    protected internal const bool DefaultOutputIndentedXml = true;
-
-    /// <summary>
-    /// Gets the default value for <see cref="XmlIndentationCharacters"/>.
-    /// </summary>
-    protected internal const string DefaultIndentCharacters = "  ";
-
     #endregion
 
     #region fields
@@ -116,26 +106,6 @@ namespace CSF.Zpt.Rendering
     /// </summary>
     /// <value><c>true</c> if the XML declaration is to be omitted; otherwise, <c>false</c>.</value>
     public bool OmitXmlDeclaration
-    {
-      get;
-      protected set;
-    }
-
-    /// <summary>
-    /// Gets a string used to indicate a single level of indentation to use when rendering an XML document.
-    /// </summary>
-    /// <value>The XML indentation characters.</value>
-    public string XmlIndentationCharacters
-    {
-      get;
-      protected set;
-    }
-
-    /// <summary>
-    /// Gets a value indicating whether XML documents should be rendered with indentated formatting or not.
-    /// </summary>
-    /// <value><c>true</c> if the rendering process is to output indented XML; otherwise, <c>false</c>.</value>
-    public bool OutputIndentedXml
     {
       get;
       protected set;
@@ -211,25 +181,19 @@ namespace CSF.Zpt.Rendering
     /// <param name="addSourceFileAnnotation">If set to <c>true</c> add source file annotation.</param>
     /// <param name="outputEncoding">Output encoding.</param>
     /// <param name="omitXmlDeclaration">If set to <c>true</c> omit XML declaration.</param>
-    /// <param name="xmlIndentCharacters">XML indent characters.</param>
-    /// <param name="outputIndentedXml">If set to <c>true</c> output indented xml.</param>
     protected DefaultRenderingOptions(ITemplateFileFactory documentFactory = null,
                                       IContextVisitor[] elementVisitors = null,
                                       IRenderingContextFactory contextFactory = null,
                                       bool addSourceFileAnnotation = DefaultAddAnnotation,
                                       Encoding outputEncoding = null,
-                                      bool omitXmlDeclaration = DefaultOmitXmlDeclaration,
-                                      string xmlIndentCharacters = null,
-                                      bool outputIndentedXml = DefaultOutputIndentedXml)
+                                      bool omitXmlDeclaration = DefaultOmitXmlDeclaration)
     {
       this.TemplateFileFactory = documentFactory?? ZptDocumentFactory.DefaultTemplateFactory;
       this.AddSourceFileAnnotation = addSourceFileAnnotation;
       this.OmitXmlDeclaration = omitXmlDeclaration;
-      this.OutputIndentedXml = outputIndentedXml;
       this.ContextVisitors = elementVisitors?? DefaultVisitors;
       this.ContextFactory = contextFactory?? DefaultContextFactory;
       this.OutputEncoding = outputEncoding?? DefaultEncoding;
-      this.XmlIndentationCharacters = xmlIndentCharacters?? DefaultIndentCharacters;
     }
 
     /// <summary>
@@ -240,9 +204,7 @@ namespace CSF.Zpt.Rendering
                                             null,
                                             DefaultAddAnnotation,
                                             null,
-                                            DefaultOmitXmlDeclaration,
-                                            null,
-                                            DefaultOutputIndentedXml) {}
+                                            DefaultOmitXmlDeclaration) {}
 
     #endregion
   }

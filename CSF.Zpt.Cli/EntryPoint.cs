@@ -68,9 +68,7 @@ namespace CSF.Zpt.Cli
                                          contextFactory,
                                          addSourceFileAnnotation: options.EnableSourceAnnotation,
                                          outputEncoding: Encoding.GetEncoding(options.OutputEncoding),
-                                         omitXmlDeclaration: options.OmitXmlDeclarations,
-                                         xmlIndentCharacters: options.XmlIndentationCharacters,
-                                         outputIndentedXml: !options.DoNotOutputIndentedXml);
+                                         omitXmlDeclaration: options.OmitXmlDeclarations);
     }
 
     private void AddKeywordOptions(CommandLineOptions options, IRenderingContextFactory contextFactory)
@@ -103,8 +101,6 @@ namespace CSF.Zpt.Cli
         .AddFlag(   x => x.ForceXmlMode,                      longName: "xml",                        shortName: "x")
         .AddFlag(   x => x.EnableSourceAnnotation,            longName: "annotate")
         .AddFlag(   x => x.OmitXmlDeclarations,               longName: "no-xml-declaration")
-        .AddFlag(   x => x.DoNotOutputIndentedXml,            longName: "no-indent-xml")
-        .AddValue(  x => x.XmlIndentationCharacters,          longName: "xml-indent-chars",                           optional: false)
         .AddFlag(   x => x.ShowUsageStatement,                longName: "help",                       shortName: "h")
         .AddFlag(   x => x.ShowVersionInfo,                   longName: "version",                    shortName: "v")
         .AddValue(  x => x.InputFilenamePattern,              longName: "input-filename-pattern",     shortName: "p", optional: false)

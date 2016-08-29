@@ -123,9 +123,7 @@ namespace Test.CSF.Zpt
 
     protected virtual IRenderingOptions GetRenderingOptions(IRenderingContextFactory contextFactory)
     {
-      return new RenderingOptions(contextFactory: contextFactory,
-                                  outputIndentedXml: true,
-                                  xmlIndentCharacters: "\t");
+      return new RenderingOptions(contextFactory: contextFactory);
     }
 
     protected virtual IRenderingContextFactory CreateTestEnvironment(DirectoryInfo rootPath)
