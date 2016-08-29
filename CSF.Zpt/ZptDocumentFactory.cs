@@ -58,8 +58,7 @@ namespace CSF.Zpt
     #region IZptDocumentFactory implementation
 
     /// <summary>
-    /// Gets a value indicating the <see cref="RenderingMode"/> detected for a given source file, assuming it were
-    /// parsed using <see cref="RenderingMode.AutoDetect"/>.
+    /// Gets a value indicating the <see cref="RenderingMode"/> detected for a given source file.
     /// </summary>
     /// <returns><c>true</c> if the <see cref="RenderingMode"/> could be auto-detected; <c>false</c> if not.</returns>
     /// <param name="sourceFile">The source file.</param>
@@ -101,30 +100,36 @@ namespace CSF.Zpt
     /// <param name="renderingMode">The rendering mode to use in creating the output document.</param>
     public IZptDocument CreateDocument(FileInfo sourceFile,
                                        Encoding encoding,
-                                       RenderingMode renderingMode)
+                                       RenderingMode? renderingMode)
     {
       if(sourceFile == null)
       {
         throw new ArgumentNullException(nameof(sourceFile));
       }
-      if(!renderingMode.IsDefinedValue())
+      if(renderingMode.HasValue && !renderingMode.Value.IsDefinedValue())
       {
         throw new ArgumentException(Resources.ExceptionMessages.InvalidRenderingMode, nameof(renderingMode));
       }
 
-      if(renderingMode == RenderingMode.AutoDetect)
+      RenderingMode actualMode;
+
+      if(!renderingMode.HasValue)
       {
-        TryDetectMode(sourceFile, out renderingMode);
+        bool detectionSuccess = TryDetectMode(sourceFile, out actualMode);
+        if(!detectionSuccess)
+        {
+          var message = String.Format(Resources.ExceptionMessages.UnsupportedDocumentFilenameExtension,
+                                      sourceFile.FullName);
+          throw new ArgumentException(message, nameof(sourceFile));
+        }
       }
       else
       {
-        var message = String.Format(Resources.ExceptionMessages.UnsupportedDocumentFilenameExtension,
-                                    sourceFile.FullName);
-        throw new ArgumentException(message, nameof(sourceFile));
+        actualMode = renderingMode.Value;
       }
 
       encoding = encoding?? DefaultEncoding;
-      var provider = SelectProvider(renderingMode);
+      var provider = SelectProvider(actualMode);
 
       return CreateDocument(provider, sourceFile, encoding);
     }
@@ -159,6 +164,7 @@ namespace CSF.Zpt
     /// </summary>
     /// <param name="source">The stream containing the document to create.</param>
     /// <param name="renderingMode">The rendering mode to use in creating the output document.</param>
+    /// <param name="sourceInfo">Optional information about the source of the document.</param>
     /// <param name="encoding">The text encoding to use in reading the source file.</param>
     public IZptDocument CreateDocument(Stream source,
                                        RenderingMode renderingMode,
@@ -174,14 +180,6 @@ namespace CSF.Zpt
         throw new ArgumentException(Resources.ExceptionMessages.InvalidRenderingMode, nameof(renderingMode));
       }
 
-      if(renderingMode == RenderingMode.AutoDetect)
-      {
-        // TODO: Wrond exception message
-        var message = String.Format(Resources.ExceptionMessages.UnsupportedDocumentFilenameExtension,
-                                    "REPLACE ME");
-        throw new ArgumentException(message, nameof(renderingMode));
-      }
-
       encoding = encoding?? DefaultEncoding;
       sourceInfo = sourceInfo?? UnknownSourceFileInfo.Instance;
       var provider = SelectProvider(renderingMode);
@@ -194,6 +192,7 @@ namespace CSF.Zpt
     /// </summary>
     /// <param name="source">The stream containing the document to create.</param>
     /// <param name="providerType">The <see cref="IZptDocumentProvider"/> type to use for creating the document.</param>
+    /// <param name="sourceInfo">Optional information about the source of the document.</param>
     /// <param name="encoding">The text encoding to use in reading the source file.</param>
     public IZptDocument CreateDocument(Stream source,
                                        Type providerType,
@@ -304,7 +303,7 @@ namespace CSF.Zpt
     /// <param name="renderingMode">The rendering mode to use in creating the output document.</param>
     public Tales.TemplateFile CreateTemplateFile(FileInfo sourceFile,
                                                  Encoding encoding,
-                                                 RenderingMode renderingMode)
+                                                 RenderingMode? renderingMode)
     {
       var document = this.CreateDocument(sourceFile, encoding, renderingMode);
       return CreateTemplateFile(document);
@@ -338,6 +337,9 @@ namespace CSF.Zpt
 
     #region constructor
 
+    /// <summary>
+    /// Initializes a new instance of the <see cref="CSF.Zpt.ZptDocumentFactory"/> class.
+    /// </summary>
     public ZptDocumentFactory()
     {
       _implementationProvider = new ConfigurationDocumentImplementationProvider();

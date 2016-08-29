@@ -20,7 +20,7 @@ namespace CSF.Zpt.Cli
 
     public void Render(IRenderingOptions options,
                        InputOutputInfo inputOutputInfo,
-                       RenderingMode mode)
+                       RenderingMode? mode)
     {
       var jobs = GetRenderingJobs(inputOutputInfo, mode);
 
@@ -38,7 +38,7 @@ namespace CSF.Zpt.Cli
       }
     }
 
-    private IEnumerable<RenderingJob> GetRenderingJobs(InputOutputInfo inputOutputInfo, RenderingMode mode)
+    private IEnumerable<RenderingJob> GetRenderingJobs(InputOutputInfo inputOutputInfo, RenderingMode? mode)
     {
       IEnumerable<RenderingJob> output;
 
@@ -54,7 +54,7 @@ namespace CSF.Zpt.Cli
       return output;
     }
 
-    private IEnumerable<RenderingJob> ReadFromStandardInput(RenderingMode mode)
+    private IEnumerable<RenderingJob> ReadFromStandardInput(RenderingMode? mode)
     {
       IZptDocument output;
 
@@ -74,14 +74,14 @@ namespace CSF.Zpt.Cli
     }
 
     private IEnumerable<RenderingJob> ReadFromInputPaths(InputOutputInfo inputOutputInfo,
-                                                         RenderingMode mode)
+                                                         RenderingMode? mode)
     {
-      return inputOutputInfo.InputPaths.SelectMany(x => GetDocuments(x, inputOutputInfo, mode));
+      return inputOutputInfo.InputPaths.SelectMany(x => CreateRenderingJobs(x, inputOutputInfo, mode));
     }
 
-    private IEnumerable<RenderingJob> GetDocuments(FileSystemInfo inputPath,
-                                                   InputOutputInfo inputOutputInfo,
-                                                   RenderingMode mode)
+    private IEnumerable<RenderingJob> CreateRenderingJobs(FileSystemInfo inputPath,
+                                                          InputOutputInfo inputOutputInfo,
+                                                          RenderingMode? mode)
     {
       IEnumerable<RenderingJob> output;
 
@@ -105,7 +105,7 @@ namespace CSF.Zpt.Cli
       return output;
     }
 
-    private RenderingJob CreateRenderingJob(FileInfo file, RenderingMode mode, DirectoryInfo sourceDirectory)
+    private RenderingJob CreateRenderingJob(FileInfo file, RenderingMode? mode, DirectoryInfo sourceDirectory)
     {
       return new RenderingJob(_documentFactory.CreateDocument(file, renderingMode: mode), file, sourceDirectory);
     }

@@ -13,8 +13,7 @@ namespace CSF.Zpt.Tales
     #region methods
 
     /// <summary>
-    /// Gets a value indicating the <see cref="RenderingMode"/> detected for a given source file, assuming it were
-    /// parsed using <see cref="RenderingMode.AutoDetect"/>.
+    /// Gets a value indicating the <see cref="RenderingMode"/> detected for a given source file.
     /// </summary>
     /// <returns><c>true</c> if the <see cref="RenderingMode"/> could be auto-detected; <c>false</c> if not.</returns>
     /// <param name="sourceFile">The source file.</param>
@@ -29,7 +28,7 @@ namespace CSF.Zpt.Tales
     /// <param name="renderingMode">The rendering mode to use in creating the output document.</param>
     TemplateFile CreateTemplateFile(FileInfo sourceFile,
                                     Encoding encoding = null,
-                                    RenderingMode renderingMode = RenderingMode.AutoDetect);
+                                    RenderingMode? renderingMode = null);
 
     /// <summary>
     /// Creates a template file from the given source file.

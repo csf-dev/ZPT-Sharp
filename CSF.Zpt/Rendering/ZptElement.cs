@@ -129,7 +129,7 @@ namespace CSF.Zpt.Rendering
     /// Determines whether the specified <see cref="CSF.Zpt.Rendering.IZptElement"/> is equal to the current
     /// <see cref="CSF.Zpt.Rendering.ZptElement"/>.
     /// </summary>
-    /// <param name="other">
+    /// <param name="obj">
     /// The <see cref="CSF.Zpt.Rendering.IZptElement"/> to compare with the current
     /// <see cref="CSF.Zpt.Rendering.ZptElement"/>.
     /// </param>
@@ -448,14 +448,23 @@ namespace CSF.Zpt.Rendering
       return ConvertElement<TElement>(element);
     }
 
-    protected virtual void EnforceParentNodeNotNull(object rootNode)
+    /// <summary>
+    /// Enforces that an <c>System.Object</c> (representing a parent node) is not null, raising an exception if it
+    /// is not.
+    /// </summary>
+    /// <param name="parentNode">The parent node.</param>
+    protected virtual void EnforceParentNodeNotNull(object parentNode)
     {
-      if(rootNode == null)
+      if(parentNode == null)
       {
         throw new InvalidOperationException(Resources.ExceptionMessages.CannotGetParentFromRootNode);
       }
     }
 
+    /// <summary>
+    /// Enforces that a name must not be <c>null</c> or empty, raising an exception if it is.
+    /// </summary>
+    /// <param name="name">Name.</param>
     protected static void EnforceNameNotEmpty(string name)
     {
       if(name == null)
@@ -468,6 +477,14 @@ namespace CSF.Zpt.Rendering
       }
     }
 
+    /// <summary>
+    /// Enforces that two objects (expected and actual), representing node types, are equal.  Raises an exception if
+    /// they are not.
+    /// </summary>
+    /// <param name="expectedNodeLanguage">Expected node language (EG: "XML").</param>
+    /// <param name="expectedNodeType">Expected node type.</param>
+    /// <param name="actualNodeType">Actual node type.</param>
+    /// <typeparam name="TNodeType">The type of objects being compared.</typeparam>
     protected virtual void EnforceNodeType<TNodeType>(string expectedNodeLanguage,
                                                     TNodeType expectedNodeType,
                                                     TNodeType actualNodeType)

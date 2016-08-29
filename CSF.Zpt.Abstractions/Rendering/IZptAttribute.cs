@@ -2,6 +2,9 @@
 
 namespace CSF.Zpt.Rendering
 {
+  /// <summary>
+  /// Interface for a type which wraps a DOM attribute.
+  /// </summary>
   public interface IZptAttribute
   {
     #region properties

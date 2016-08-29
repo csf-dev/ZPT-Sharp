@@ -4,6 +4,9 @@ using System.Text;
 
 namespace CSF.Zpt.Rendering
 {
+  /// <summary>
+  /// Represents the default <see cref="IRenderingOptions"/>.
+  /// </summary>
   public class DefaultRenderingOptions : IRenderingOptions
   {
     #region constants
@@ -28,17 +31,41 @@ namespace CSF.Zpt.Rendering
       }
     }
 
+    /// <summary>
+    /// Gets the refault <see cref="IRenderingContextFactory"/> implementation.
+    /// </summary>
     protected static readonly IRenderingContextFactory DefaultContextFactory = new TalesRenderingContextFactory();
 
+    /// <summary>
+    /// Gets the default character encoding.
+    /// </summary>
     protected static readonly Encoding DefaultEncoding = Encoding.UTF8;
 
-    protected internal const bool
-      DefaultAddAnnotation = false,
-      DefaultOmitXmlDeclaration = false,
-      DefaultOutputIndentedXml = true;
+    /// <summary>
+    /// Gets the default value for <see cref="AddSourceFileAnnotation"/>.
+    /// </summary>
+    protected internal const bool DefaultAddAnnotation = false;
 
-    protected internal const string
-      DefaultIndentCharacters = "  ";
+    /// <summary>
+    /// Gets the default value for <see cref="OmitXmlDeclaration"/>.
+    /// </summary>
+    protected internal const bool DefaultOmitXmlDeclaration = false;
+
+    /// <summary>
+    /// Gets the default value for <see cref="OutputIndentedXml"/>.
+    /// </summary>
+    protected internal const bool DefaultOutputIndentedXml = true;
+
+    /// <summary>
+    /// Gets the default value for <see cref="XmlIndentationCharacters"/>.
+    /// </summary>
+    protected internal const string DefaultIndentCharacters = "  ";
+
+    #endregion
+
+    #region fields
+
+    private ITemplateFileFactory _templateFactory;
 
     #endregion
 
@@ -114,10 +141,23 @@ namespace CSF.Zpt.Rendering
       protected set;
     }
 
+    /// <summary>
+    /// Gets or sets the implementation of <see cref="ITemplateFileFactory"/> to use.
+    /// </summary>
+    /// <value>The template file factory.</value>
     protected ITemplateFileFactory TemplateFileFactory
     {
-      get;
-      set;
+      get {
+        return _templateFactory;
+      }
+      set {
+        if(value == null)
+        {
+          throw new ArgumentNullException(nameof(value));
+        }
+
+        _templateFactory = value;
+      }
     }
 
     #endregion
@@ -162,6 +202,17 @@ namespace CSF.Zpt.Rendering
 
     #region constructor
 
+    /// <summary>
+    /// Initializes a new instance of the <see cref="CSF.Zpt.Rendering.DefaultRenderingOptions"/> class.
+    /// </summary>
+    /// <param name="documentFactory">Document factory.</param>
+    /// <param name="elementVisitors">Element visitors.</param>
+    /// <param name="contextFactory">Context factory.</param>
+    /// <param name="addSourceFileAnnotation">If set to <c>true</c> add source file annotation.</param>
+    /// <param name="outputEncoding">Output encoding.</param>
+    /// <param name="omitXmlDeclaration">If set to <c>true</c> omit XML declaration.</param>
+    /// <param name="xmlIndentCharacters">XML indent characters.</param>
+    /// <param name="outputIndentedXml">If set to <c>true</c> output indented xml.</param>
     protected DefaultRenderingOptions(ITemplateFileFactory documentFactory = null,
                                       IContextVisitor[] elementVisitors = null,
                                       IRenderingContextFactory contextFactory = null,
@@ -181,6 +232,9 @@ namespace CSF.Zpt.Rendering
       this.XmlIndentationCharacters = xmlIndentCharacters?? DefaultIndentCharacters;
     }
 
+    /// <summary>
+    /// Initializes a new instance of the <see cref="CSF.Zpt.Rendering.DefaultRenderingOptions"/> class.
+    /// </summary>
     public DefaultRenderingOptions() : this(null,
                                             null,
                                             null,

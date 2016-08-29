@@ -5,6 +5,10 @@ using System.Linq;
 
 namespace CSF.Zpt
 {
+  /// <summary>
+  /// Implementation of <see cref="IDocumentImplementationProvider"/> which makes use of the configuration file to
+  /// discover the available document implementations.
+  /// </summary>
   public class ConfigurationDocumentImplementationProvider : IDocumentImplementationProvider
   {
     #region fields
@@ -15,6 +19,10 @@ namespace CSF.Zpt
 
     #region methods
 
+    /// <summary>
+    /// Gets the metadata about all of the available providers.
+    /// </summary>
+    /// <returns>A collection of provider metadata instances.</returns>
     public IEnumerable<ZptDocumentProviderMetadata> GetAllProviderMetadata()
     {
       return _config.Implementations

@@ -13,8 +13,7 @@ namespace CSF.Zpt
     #region methods
 
     /// <summary>
-    /// Gets a value indicating the <see cref="RenderingMode"/> detected for a given source file, assuming it were
-    /// parsed using <see cref="RenderingMode.AutoDetect"/>.
+    /// Gets a value indicating the <see cref="RenderingMode"/> detected for a given source file.
     /// </summary>
     /// <returns><c>true</c> if the <see cref="RenderingMode"/> could be auto-detected; <c>false</c> if not.</returns>
     /// <param name="sourceFile">The source file.</param>
@@ -29,7 +28,7 @@ namespace CSF.Zpt
     /// <param name="renderingMode">The rendering mode to use in creating the output document.</param>
     IZptDocument CreateDocument(FileInfo sourceFile,
                                 Encoding encoding = null,
-                                RenderingMode renderingMode = RenderingMode.AutoDetect);
+                                RenderingMode? renderingMode = null);
 
     /// <summary>
     /// Creates a document from the given source file.
@@ -46,6 +45,7 @@ namespace CSF.Zpt
     /// </summary>
     /// <param name="source">The stream containing the document to create.</param>
     /// <param name="renderingMode">The rendering mode to use in creating the output document.</param>
+    /// <param name="sourceInfo">Optional information about the source of the document.</param>
     /// <param name="encoding">The text encoding to use in reading the source file.</param>
     IZptDocument CreateDocument(Stream source,
                                 RenderingMode renderingMode,
@@ -57,6 +57,7 @@ namespace CSF.Zpt
     /// </summary>
     /// <param name="source">The stream containing the document to create.</param>
     /// <param name="providerType">The <see cref="IZptDocumentProvider"/> type to use for creating the document.</param>
+    /// <param name="sourceInfo">Optional information about the source of the document.</param>
     /// <param name="encoding">The text encoding to use in reading the source file.</param>
     IZptDocument CreateDocument(Stream source,
                                 Type providerType,

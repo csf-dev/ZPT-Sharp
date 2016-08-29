@@ -12,7 +12,7 @@ namespace CSF.Zpt.Tal
     #region properties
 
     /// <summary>
-    /// Gets or sets the name of the <see cref="ZptElement"/> which is the source of the current error.
+    /// Gets or sets the name of the <see cref="IZptElement"/> which is the source of the current error.
     /// </summary>
     /// <value>The name of the source element.</value>
     public string SourceElementName
@@ -26,7 +26,7 @@ namespace CSF.Zpt.Tal
     }
 
     /// <summary>
-    /// Gets or sets the name of the <see cref="ZptAttribute"/> which is the source of the current error.
+    /// Gets or sets the name of the <see cref="IZptAttribute"/> which is the source of the current error.
     /// </summary>
     /// <value>The name of the source attribute.</value>
     public string SourceAttributeName
@@ -40,7 +40,7 @@ namespace CSF.Zpt.Tal
     }
 
     /// <summary>
-    /// Gets or sets the value of the <see cref="ZptAttribute"/> which is the source of the current error.
+    /// Gets or sets the value of the <see cref="IZptAttribute"/> which is the source of the current error.
     /// </summary>
     /// <value>The value of the source attribute.</value>
     public string SourceAttributeValue

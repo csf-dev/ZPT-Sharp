@@ -22,7 +22,7 @@ namespace CSF.Zpt.MVC
 
     #region fields
 
-    private RenderingMode _renderingMode;
+    private RenderingMode? _renderingMode;
 
     #endregion
 
@@ -98,13 +98,13 @@ namespace CSF.Zpt.MVC
       set;
     }
 
-    public RenderingMode RenderingMode
+    public RenderingMode? RenderingMode
     {
       get {
         return _renderingMode;
       }
       set {
-        if(!value.IsDefinedValue())
+        if(value.HasValue && !value.IsDefinedValue())
         {
           throw new ArgumentException(Resources.ExceptionMessages.InvalidRenderingMode, nameof(value));
         }
@@ -162,7 +162,7 @@ namespace CSF.Zpt.MVC
       XmlIndentationCharacters = defaultOptions.XmlIndentationCharacters;
       OutputIndentedXml = defaultOptions.OutputIndentedXml;
 
-      RenderingMode = RenderingMode.AutoDetect;
+      RenderingMode = null;
       ForceInputEncoding = null;
     }
 

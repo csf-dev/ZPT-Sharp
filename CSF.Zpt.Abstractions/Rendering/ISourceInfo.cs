@@ -3,7 +3,7 @@
 namespace CSF.Zpt.Rendering
 {
   /// <summary>
-  /// Information about the source of an <see cref="IZptDocument"/> or <see cref="ZptElement"/>.
+  /// Information about the source of an <see cref="IZptDocument"/> or <see cref="IZptElement"/>.
   /// </summary>
   public interface ISourceInfo : IEquatable<ISourceInfo>
   {

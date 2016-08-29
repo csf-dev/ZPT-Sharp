@@ -12,6 +12,10 @@ namespace CSF.Zpt
   {
     #region properties
 
+    /// <summary>
+    /// Gets the <see cref="RenderingMode"/> for which the current document type caters.
+    /// </summary>
+    /// <value>The rendering mode.</value>
     RenderingMode Mode { get; }
 
     #endregion

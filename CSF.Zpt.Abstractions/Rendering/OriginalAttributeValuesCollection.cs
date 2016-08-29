@@ -7,7 +7,7 @@ using System.Linq;
 namespace CSF.Zpt.Rendering
 {
   /// <summary>
-  /// Represents a collection of <see cref="ZptAttribute"/>, exposing the original attributes present upon an element.
+  /// Represents a collection of <see cref="IZptAttribute"/>, exposing the original attributes present upon an element.
   /// </summary>
   public class OriginalAttributeValuesCollection : ITalesPathHandler
   {
