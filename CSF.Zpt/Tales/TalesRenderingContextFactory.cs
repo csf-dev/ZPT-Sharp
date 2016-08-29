@@ -98,7 +98,7 @@ namespace CSF.Zpt.Tales
     /// <summary>
     /// Create a context instance.
     /// </summary>
-    public virtual RenderingContext Create(ZptElement element, IRenderingOptions options)
+    public virtual RenderingContext Create(IZptElement element, IRenderingOptions options)
     {
       return Create(element, options, null);
     }
@@ -106,7 +106,7 @@ namespace CSF.Zpt.Tales
     /// <summary>
     /// Create a context instance.
     /// </summary>
-    public virtual RenderingContext Create(ZptElement element, IRenderingOptions options, object model)
+    public virtual RenderingContext Create(IZptElement element, IRenderingOptions options, object model)
     {
       if(element == null)
       {

@@ -4,6 +4,7 @@ using System.IO;
 using CSF.Zpt.Rendering;
 using System.Linq;
 using CSF.Zpt.Tales;
+using CSF.Zpt.Resources;
 
 namespace CSF.Zpt
 {
@@ -15,6 +16,16 @@ namespace CSF.Zpt
     #region fields
 
     private static log4net.ILog _logger;
+
+    #endregion
+
+    #region properties
+
+    /// <summary>
+    /// Gets the <see cref="RenderingMode"/> for which the current document type caters.
+    /// </summary>
+    /// <value>The rendering mode.</value>
+    public abstract RenderingMode Mode { get; }
 
     #endregion
 
@@ -119,13 +130,13 @@ namespace CSF.Zpt
     public abstract ISourceInfo GetSourceInfo();
 
     /// <summary>
-    /// Renders the current document, returning an <see cref="ZptElement"/> representing the rendered result.
+    /// Renders the current document, returning an <see cref="IZptElement"/> representing the rendered result.
     /// </summary>
     /// <returns>The result of the rendering process.</returns>
     /// <param name="model">An object to which the ZPT document is to be applied.</param>
     /// <param name="options">The rendering options to use.  If <c>null</c> then default options are used.</param>
     /// <param name="contextConfigurator">An optional action to perform upon the root <see cref="RenderingContext"/>, to configure it.</param>
-    protected virtual ZptElement RenderElement(object model,
+    protected virtual IZptElement RenderElement(object model,
                                                IRenderingOptions options,
                                                Action<RenderingContext> contextConfigurator)
     {
@@ -189,20 +200,32 @@ namespace CSF.Zpt
     /// <param name="element">The element to render.</param>
     /// <param name="options">The rendering options to use.  If <c>null</c> then default options are used.</param>
     protected abstract void Render(TextWriter writer,
-                                   ZptElement element,
+                                   IZptElement element,
                                    IRenderingOptions options);
 
     /// <summary>
     /// Creates a rendering model from the current instance.
     /// </summary>
     /// <returns>The rendering model.</returns>
-    protected abstract ZptElement GetRootElement();
+    protected abstract IZptElement GetRootElement();
 
     /// <summary>
     /// Gets an instance of <see cref="IRenderingOptions"/> which represents the default options.
     /// </summary>
     /// <returns>The default options.</returns>
     protected abstract IRenderingOptions GetDefaultOptions();
+
+    /// <summary>
+    /// Converts the given <see cref="IZptElement"/> to an implementation-specific subclass, or raises an exception
+    /// if the conversion is not valid.
+    /// </summary>
+    /// <returns>The converted element instance.</returns>
+    /// <param name="element">The element for conversion.</param>
+    /// <typeparam name="TElement">The desired element type.</typeparam>
+    protected virtual TElement ConvertElement<TElement>(IZptElement element) where TElement : class,IZptElement
+    {
+      return ZptElement.ConvertElement<TElement>(element);
+    }
 
     #endregion
 

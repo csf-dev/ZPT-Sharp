@@ -25,10 +25,10 @@ namespace CSF.Zpt.Rendering
     #region properties
 
     /// <summary>
-    /// Gets a reference to the associated <see cref="ZptElement"/>, if applicable.
+    /// Gets a reference to the associated <see cref="IZptElement"/>, if applicable.
     /// </summary>
     /// <value>The associated element.</value>
-    public ZptElement AssociatedElement
+    public IZptElement AssociatedElement
     {
       get;
       private set;
@@ -245,7 +245,7 @@ namespace CSF.Zpt.Rendering
     /// <param name="count">Count.</param>
     /// <param name="value">Value.</param>
     /// <param name="element">Element.</param>
-    public RepetitionInfo(string name, int index, int count, object value, ZptElement element)
+    public RepetitionInfo(string name, int index, int count, object value, IZptElement element)
     {
       if(name == null)
       {

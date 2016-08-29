@@ -22,9 +22,9 @@ namespace CSF.Zpt.Rendering
     /// </summary>
     /// <returns><c>true</c>, if a value was resolved, <c>false</c> otherwise.</returns>
     /// <param name="name">The repeat variable name.</param>
-    /// <param name="elementChain">A chain of <see cref="ZptElement"/>, ordered from the innermost to the othermost.</param>
+    /// <param name="elementChain">A chain of <see cref="IZptElement"/>, ordered from the innermost to the othermost.</param>
     /// <param name="result">Exposes the result.</param>
-    public bool TryResolveValue(string name, ZptElement[] elementChain, out object result)
+    public bool TryResolveValue(string name, IZptElement[] elementChain, out object result)
     {
       bool output = false;
       result = null;
@@ -48,7 +48,7 @@ namespace CSF.Zpt.Rendering
     /// </summary>
     /// <returns>The contextualised summaries.</returns>
     /// <param name="elementChain">Element chain.</param>
-    public ContextualisedRepetitionSummaryWrapper GetContextualisedSummaries(IEnumerable<ZptElement> elementChain)
+    public ContextualisedRepetitionSummaryWrapper GetContextualisedSummaries(IEnumerable<IZptElement> elementChain)
     {
       if(elementChain == null)
       {
@@ -143,11 +143,11 @@ namespace CSF.Zpt.Rendering
 
     class NameAndElement : IEquatable<NameAndElement>
     {
-      private Tuple<string,ZptElement> _tuple;
+      private Tuple<string,IZptElement> _tuple;
 
       string Name { get { return _tuple.Item1; } }
 
-      ZptElement Element { get { return _tuple.Item2; } }
+      IZptElement Element { get { return _tuple.Item2; } }
 
       public bool Equals(NameAndElement other)
       {
@@ -166,7 +166,7 @@ namespace CSF.Zpt.Rendering
         return this.Name.GetHashCode() ^ this.Element.GetHashCode();
       }
 
-      internal NameAndElement(string name, ZptElement element)
+      internal NameAndElement(string name, IZptElement element)
       {
         if(name == null)
         {
@@ -177,7 +177,7 @@ namespace CSF.Zpt.Rendering
           throw new ArgumentNullException(nameof(element));
         }
 
-        _tuple = new Tuple<string, ZptElement>(name, element);
+        _tuple = new Tuple<string, IZptElement>(name, element);
       }
     }
 

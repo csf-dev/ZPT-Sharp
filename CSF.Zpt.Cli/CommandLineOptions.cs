@@ -110,9 +110,9 @@ namespace CSF.Zpt.Cli
 
     #region methods
 
-    public RenderingMode GetRenderingMode()
+    public RenderingMode? GetRenderingMode()
     {
-      RenderingMode output;
+      RenderingMode? output;
 
       if(ForceXmlMode)
       {
@@ -124,7 +124,7 @@ namespace CSF.Zpt.Cli
       }
       else
       {
-        output = RenderingMode.AutoDetect;
+        output = null;
       }
 
       return output;

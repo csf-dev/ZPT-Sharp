@@ -10,7 +10,7 @@ namespace CSF.Zpt.MVC.Rendering
   {
     #region methods
 
-    public override RenderingContext Create(ZptElement element, IRenderingOptions options, object model)
+    public override RenderingContext Create(IZptElement element, IRenderingOptions options, object model)
     {
       if(element == null)
       {

@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using CSF.Zpt.Rendering;
+using CSF.Configuration;
 
 namespace CSF.Zpt
 {
@@ -27,16 +28,15 @@ namespace CSF.Zpt
 
     private static readonly Encoding DefaultEncoding = Encoding.UTF8;
 
-    private static readonly Type
-      HtmlDocumentType = typeof(ZptHtmlDocument),
-      XmlDocumentType = typeof(ZptXmlDocument),
-      XmlLinqDocumentType = typeof(ZptXmlLinqDocument);
-
     #endregion
 
     #region fields
 
-    private Type _forceDocumentType;
+    private static readonly ZptDocumentFactory _default;
+
+    private IDocumentImplementationProvider _implementationProvider;
+    private IDictionary<Type,IZptDocumentProvider> _providerTypes;
+    private IZptDocumentProvider _defaultHtmlProvider, _defaultXmlProvider;
 
     #endregion
 
@@ -55,17 +55,41 @@ namespace CSF.Zpt
 
     #endregion
 
-    #region methods
+    #region IZptDocumentFactory implementation
 
     /// <summary>
-    /// Gets a value indicating whether or not the current instance can create an <see cref="IZptDocument"/> from a given
-    /// source file using <see cref="RenderingMode.AutoDetect"/>.
+    /// Gets a value indicating the <see cref="RenderingMode"/> detected for a given source file.
     /// </summary>
-    /// <returns><c>true</c> if this instance can auto-detect the rendering mode for the given file; otherwise, <c>false</c>.</returns>
+    /// <returns><c>true</c> if the <see cref="RenderingMode"/> could be auto-detected; <c>false</c> if not.</returns>
     /// <param name="sourceFile">The source file.</param>
-    public bool CanAutoDetectMode(FileInfo sourceFile)
+    /// <param name="detectedMode">Exposes the detected rendering mode.</param>
+    public bool TryDetectMode(FileInfo sourceFile, out RenderingMode detectedMode)
     {
-      return (_forceDocumentType != null || _supportedExtensions.Contains(sourceFile.Extension));
+      if(sourceFile == null)
+      {
+        throw new ArgumentNullException(nameof(sourceFile));
+      }
+
+      bool output;
+      string extension = sourceFile.Extension;
+
+      if(HtmlSuffixes.Contains(extension))
+      {
+        output = true;
+        detectedMode = RenderingMode.Html;
+      }
+      else if(XmlSuffixes.Contains(sourceFile.Extension))
+      {
+        output = true;
+        detectedMode = RenderingMode.Xml;
+      }
+      else
+      {
+        output = false;
+        detectedMode = (RenderingMode) (-1);
+      }
+
+      return output;
     }
 
     /// <summary>
@@ -76,52 +100,200 @@ namespace CSF.Zpt
     /// <param name="renderingMode">The rendering mode to use in creating the output document.</param>
     public IZptDocument CreateDocument(FileInfo sourceFile,
                                        Encoding encoding,
-                                       RenderingMode renderingMode)
+                                       RenderingMode? renderingMode)
     {
       if(sourceFile == null)
       {
         throw new ArgumentNullException(nameof(sourceFile));
+      }
+      if(renderingMode.HasValue && !renderingMode.Value.IsDefinedValue())
+      {
+        throw new ArgumentException(Resources.ExceptionMessages.InvalidRenderingMode, nameof(renderingMode));
+      }
+
+      RenderingMode actualMode;
+
+      if(!renderingMode.HasValue)
+      {
+        bool detectionSuccess = TryDetectMode(sourceFile, out actualMode);
+        if(!detectionSuccess)
+        {
+          var message = String.Format(Resources.ExceptionMessages.UnsupportedDocumentFilenameExtension,
+                                      sourceFile.FullName);
+          throw new ArgumentException(message, nameof(sourceFile));
+        }
+      }
+      else
+      {
+        actualMode = renderingMode.Value;
+      }
+
+      encoding = encoding?? DefaultEncoding;
+      var provider = SelectProvider(actualMode);
+
+      return CreateDocument(provider, sourceFile, encoding);
+    }
+
+    /// <summary>
+    /// Creates a document from the given source file.
+    /// </summary>
+    /// <param name="sourceFile">The source file containing the document to create.</param>
+    /// <param name="providerType">The <see cref="IZptDocumentProvider"/> type to use for creating the document.</param>
+    /// <param name="encoding">The text encoding to use in reading the source file.</param>
+    public IZptDocument CreateDocument(FileInfo sourceFile,
+                                       Type providerType,
+                                       Encoding encoding = null)
+    {
+      if(sourceFile == null)
+      {
+        throw new ArgumentNullException(nameof(sourceFile));
+      }
+      if(providerType == null)
+      {
+        throw new ArgumentNullException(nameof(providerType));
+      }
+
+      encoding = encoding?? DefaultEncoding;
+      var provider = SelectProvider(providerType);
+
+      return CreateDocument(provider, sourceFile, encoding);
+    }
+
+    /// <summary>
+    /// Creates a document from the given source stream.
+    /// </summary>
+    /// <param name="source">The stream containing the document to create.</param>
+    /// <param name="renderingMode">The rendering mode to use in creating the output document.</param>
+    /// <param name="sourceInfo">Optional information about the source of the document.</param>
+    /// <param name="encoding">The text encoding to use in reading the source file.</param>
+    public IZptDocument CreateDocument(Stream source,
+                                       RenderingMode renderingMode,
+                                       ISourceInfo sourceInfo = null,
+                                       Encoding encoding = null)
+    {
+      if(source == null)
+      {
+        throw new ArgumentNullException(nameof(source));
       }
       if(!renderingMode.IsDefinedValue())
       {
         throw new ArgumentException(Resources.ExceptionMessages.InvalidRenderingMode, nameof(renderingMode));
       }
 
-      IZptDocument output;
+      encoding = encoding?? DefaultEncoding;
+      sourceInfo = sourceInfo?? UnknownSourceFileInfo.Instance;
+      var provider = SelectProvider(renderingMode);
+
+      return CreateDocument(provider, source, sourceInfo, encoding);
+    }
+
+    /// <summary>
+    /// Creates a document from the given source file.
+    /// </summary>
+    /// <param name="source">The stream containing the document to create.</param>
+    /// <param name="providerType">The <see cref="IZptDocumentProvider"/> type to use for creating the document.</param>
+    /// <param name="sourceInfo">Optional information about the source of the document.</param>
+    /// <param name="encoding">The text encoding to use in reading the source file.</param>
+    public IZptDocument CreateDocument(Stream source,
+                                       Type providerType,
+                                       ISourceInfo sourceInfo = null,
+                                       Encoding encoding = null)
+    {
+      if(source == null)
+      {
+        throw new ArgumentNullException(nameof(source));
+      }
+      if(providerType == null)
+      {
+        throw new ArgumentNullException(nameof(providerType));
+      }
 
       encoding = encoding?? DefaultEncoding;
-      var extension = sourceFile.Extension;
+      sourceInfo = sourceInfo?? UnknownSourceFileInfo.Instance;
+      var provider = SelectProvider(providerType);
 
-      if(_forceDocumentType == HtmlDocumentType
-         || renderingMode == RenderingMode.Html
-         || (_forceDocumentType == null
-             && renderingMode == RenderingMode.AutoDetect
-             && HtmlSuffixes.Contains(extension)))
+      return CreateDocument(provider, source, sourceInfo, encoding);
+    }
+
+    private IZptDocument CreateDocument(IZptDocumentProvider provider,
+                                        Stream source,
+                                        ISourceInfo sourceInfo,
+                                        Encoding encoding)
+    {
+      if(provider == null)
       {
-        output = this.CreateHtmlDocument(sourceFile, encoding);
+        throw new ArgumentNullException(nameof(provider));
       }
-      else if(_forceDocumentType == XmlLinqDocumentType
-              || renderingMode == RenderingMode.XmlLinq
-              || (_forceDocumentType == null
-                  && renderingMode == RenderingMode.AutoDetect
-                  && XmlSuffixes.Contains(extension)))
+      if(source == null)
       {
-        output = this.CreateXmlLinqDocument(sourceFile, encoding);
+        throw new ArgumentNullException(nameof(source));
       }
-      else if(_forceDocumentType == XmlDocumentType
-              || renderingMode == RenderingMode.Xml)
+      if(sourceInfo == null)
       {
-        output = this.CreateXmlDocument(sourceFile, encoding);
+        throw new ArgumentNullException(nameof(sourceInfo));
       }
-      else
+      if(encoding == null)
       {
-        var message = String.Format(Resources.ExceptionMessages.UnsupportedDocumentFilenameExtension,
-                                    sourceFile.FullName);
-        throw new ArgumentException(message, nameof(sourceFile));
+        throw new ArgumentNullException(nameof(encoding));
+      }
+
+      return provider.CreateDocument(source, sourceInfo, encoding);
+    }
+
+    private IZptDocument CreateDocument(IZptDocumentProvider provider,
+                                        FileInfo source,
+                                        Encoding encoding)
+    {
+      if(provider == null)
+      {
+        throw new ArgumentNullException(nameof(provider));
+      }
+      if(source == null)
+      {
+        throw new ArgumentNullException(nameof(source));
+      }
+      if(encoding == null)
+      {
+        throw new ArgumentNullException(nameof(encoding));
+      }
+
+      return provider.CreateDocument(source, encoding);
+    }
+
+    private IZptDocumentProvider SelectProvider(RenderingMode mode)
+    {
+      IZptDocumentProvider output;
+
+      switch(mode)
+      {
+      case RenderingMode.Html:
+        output = _defaultHtmlProvider;
+        break;
+
+      case RenderingMode.Xml:
+        output = _defaultXmlProvider;
+        break;
+
+      default:
+        throw new ArgumentException("Rendering mode must be a concrete implementation", nameof(mode));
       }
 
       return output;
     }
+
+    private IZptDocumentProvider SelectProvider(Type type)
+    {
+      if(type == null)
+      {
+        throw new ArgumentNullException(nameof(type));
+      }
+
+      return _providerTypes[type];
+    }
+
+    #endregion
+
+    #region ITemplateFileFactory implementation
 
     /// <summary>
     /// Creates a template file from the given source file.
@@ -131,9 +303,23 @@ namespace CSF.Zpt
     /// <param name="renderingMode">The rendering mode to use in creating the output document.</param>
     public Tales.TemplateFile CreateTemplateFile(FileInfo sourceFile,
                                                  Encoding encoding,
-                                                 RenderingMode renderingMode)
+                                                 RenderingMode? renderingMode)
     {
       var document = this.CreateDocument(sourceFile, encoding, renderingMode);
+      return CreateTemplateFile(document);
+    }
+
+    /// <summary>
+    /// Creates a template file from the given source file.
+    /// </summary>
+    /// <param name="sourceFile">The source file containing the document to create.</param>
+    /// <param name="providerType">The <see cref="IZptDocumentProvider"/> type to use for creating the document.</param>
+    /// <param name="encoding">The text encoding to use in reading the source file.</param>
+    public Tales.TemplateFile CreateTemplateFile(FileInfo sourceFile,
+                                                 Type providerType,
+                                                 Encoding encoding = null)
+    {
+      var document = this.CreateDocument(sourceFile, providerType, encoding);
       return CreateTemplateFile(document);
     }
 
@@ -147,164 +333,6 @@ namespace CSF.Zpt
       return new Tales.TemplateFile(document);
     }
 
-
-    /// <summary>
-    /// Creates an HTML document from the given source file.
-    /// </summary>
-    /// <param name="sourceFile">The source file containing the document to create.</param>
-    /// <param name="encoding">The text encoding to use in reading the source file.</param>
-    public IZptDocument CreateHtmlDocument(FileInfo sourceFile, Encoding encoding)
-    {
-      if(sourceFile == null)
-      {
-        throw new ArgumentNullException(nameof(sourceFile));
-      }
-
-      var sourceInfo = new SourceFileInfo(sourceFile);
-      encoding = encoding?? DefaultEncoding;
-
-      var doc = new HtmlAgilityPack.HtmlDocument();
-      doc.Load(sourceFile.FullName, encoding);
-
-      return new ZptHtmlDocument(doc, sourceInfo);
-    }
-
-    /// <summary>
-    /// Creates an XML document from the given source file.
-    /// </summary>
-    /// <param name="sourceFile">The source file containing the document to create.</param>
-    /// <param name="encoding">The text encoding to use in reading the source file.</param>
-    public IZptDocument CreateXmlDocument(FileInfo sourceFile, Encoding encoding)
-    {
-      if(sourceFile == null)
-      {
-        throw new ArgumentNullException(nameof(sourceFile));
-      }
-
-      IZptDocument output;
-      var sourceInfo = new SourceFileInfo(sourceFile);
-      encoding = encoding?? DefaultEncoding;
-
-      using(var stream = sourceFile.OpenRead())
-      {
-        output = this.CreateXmlDocument(stream, sourceInfo, encoding);
-      }
-
-      return output;
-    }
-
-
-    /// <summary>
-    /// Creates an HTML document from a stream exposing the source document, and optional information about the source.
-    /// </summary>
-    /// <param name="sourceStream">A stream exposing the document content.</param>
-    /// <param name="sourceInfo">Information about the source document.</param>
-    /// <param name="encoding">The text encoding to use in reading the source file.</param>
-    public IZptDocument CreateHtmlDocument(Stream sourceStream, ISourceInfo sourceInfo, Encoding encoding)
-    {
-      if(sourceStream == null)
-      {
-        throw new ArgumentNullException(nameof(sourceStream));
-      }
-
-      sourceInfo = sourceInfo?? UnknownSourceFileInfo.Instance;
-      encoding = encoding?? DefaultEncoding;
-
-      var doc = new HtmlAgilityPack.HtmlDocument();
-      doc.Load(sourceStream, encoding);
-
-      return new ZptHtmlDocument(doc, sourceInfo);
-    }
-
-    /// <summary>
-    /// Creates an XML document from a stream exposing the source document, and optional information about the source.
-    /// </summary>
-    /// <param name="sourceStream">A stream exposing the document content.</param>
-    /// <param name="sourceInfo">Information about the source document.</param>
-    /// <param name="encoding">The text encoding to use in reading the source file.</param>
-    public IZptDocument CreateXmlDocument(Stream sourceStream, ISourceInfo sourceInfo, Encoding encoding)
-    {
-      if(sourceStream == null)
-      {
-        throw new ArgumentNullException(nameof(sourceStream));
-      }
-
-      sourceInfo = sourceInfo?? UnknownSourceFileInfo.Instance;
-      encoding = encoding?? DefaultEncoding;
-
-      var settings = new System.Xml.XmlReaderSettings() {
-        XmlResolver = new LocalXhtmlXmlResolver(),
-        DtdProcessing = System.Xml.DtdProcessing.Parse,
-      };
-
-      var doc = new System.Xml.XmlDocument();
-
-      using(var streamReader = new StreamReader(sourceStream, encoding))
-      using(var reader = System.Xml.XmlReader.Create(streamReader, settings))
-      {
-        doc.Load(reader);
-      }
-
-      return new ZptXmlDocument(doc, sourceInfo);
-    }
-
-    /// <summary>
-    /// Creates an XML/Linq document from the given source file.
-    /// </summary>
-    /// <param name="sourceFile">The source file containing the document to create.</param>
-    /// <param name="encoding">The text encoding to use in reading the source file.</param>
-    public IZptDocument CreateXmlLinqDocument(FileInfo sourceFile, Encoding encoding)
-    {
-      if(sourceFile == null)
-      {
-        throw new ArgumentNullException(nameof(sourceFile));
-      }
-
-      IZptDocument output;
-      var sourceInfo = new SourceFileInfo(sourceFile);
-      encoding = encoding?? DefaultEncoding;
-
-      using(var stream = sourceFile.OpenRead())
-      {
-        output = this.CreateXmlLinqDocument(stream, sourceInfo, encoding);
-      }
-
-      return output;
-    }
-
-    /// <summary>
-    /// Creates an XML/Linq document from a stream exposing the source document, and optional information about the source.
-    /// </summary>
-    /// <param name="sourceStream">A stream exposing the document content.</param>
-    /// <param name="sourceInfo">Information about the source document.</param>
-    /// <param name="encoding">The text encoding to use in reading the source file.</param>
-    public IZptDocument CreateXmlLinqDocument(Stream sourceStream, ISourceInfo sourceInfo, Encoding encoding)
-    {
-      if(sourceStream == null)
-      {
-        throw new ArgumentNullException(nameof(sourceStream));
-      }
-
-      sourceInfo = sourceInfo?? UnknownSourceFileInfo.Instance;
-      encoding = encoding?? DefaultEncoding;
-
-      var settings = new System.Xml.XmlReaderSettings() {
-        XmlResolver = new LocalXhtmlXmlResolver(),
-        DtdProcessing = System.Xml.DtdProcessing.Parse,
-      };
-
-      System.Xml.Linq.XDocument doc;
-
-      using(var streamReader = new StreamReader(sourceStream, encoding))
-      using(var reader = System.Xml.XmlReader.Create(streamReader, settings))
-      {
-        var options = System.Xml.Linq.LoadOptions.PreserveWhitespace | System.Xml.Linq.LoadOptions.SetLineInfo;
-        doc = System.Xml.Linq.XDocument.Load(reader, options);
-      }
-
-      return new ZptXmlLinqDocument(doc, sourceInfo);
-    }
-
     #endregion
 
     #region constructor
@@ -312,21 +340,46 @@ namespace CSF.Zpt
     /// <summary>
     /// Initializes a new instance of the <see cref="CSF.Zpt.ZptDocumentFactory"/> class.
     /// </summary>
-    /// <param name="forceDocumentType">
-    /// An optional <c>System.Type</c> indicating the type to create when using <see cref="CreateDocument"/> or
-    /// <see cref="M:CreateTemplateFile(FileInfo, Encoding, RenderingMode)"/>.
-    /// </param>
-    public ZptDocumentFactory(Type forceDocumentType = null)
+    public ZptDocumentFactory()
     {
-      _forceDocumentType = forceDocumentType;
+      _implementationProvider = new ConfigurationDocumentImplementationProvider();
+
+      var providers = (from md in _implementationProvider.GetAllProviderMetadata()
+                       select new { Metadata = md,
+                                    Provider = (IZptDocumentProvider) Activator.CreateInstance(md.ProviderType) })
+        .ToArray();
+
+      _defaultHtmlProvider = providers.Single(x => x.Metadata.IsDefaultHtmlProvider).Provider;
+      _defaultXmlProvider = providers.Single(x => x.Metadata.IsDefaultXmlProvider).Provider;
+
+      _providerTypes = providers.ToDictionary(k => k.Metadata.ProviderType, v => v.Provider);
+    }
+
+    static ZptDocumentFactory()
+    {
+      _default = new ZptDocumentFactory();
     }
 
     #endregion
 
-    #region static methods
+    #region static members
+
+    internal static IZptDocumentFactory DefaultDocumentFactory
+    {
+      get {
+        return _default;
+      }
+    }
+
+    internal static Tales.ITemplateFileFactory DefaultTemplateFactory
+    {
+      get {
+        return _default;
+      }
+    }
 
     /// <summary>
-    /// Gets the file extensions which indicate that an <see cref="ZptHtmlDocument"/> should be used.
+    /// Gets the file extensions which indicate that an <see cref="RenderingMode.Html"/> should be used.
     /// </summary>
     /// <returns>The HTML extensions.</returns>
     public static IEnumerable<string> GetHtmlExtensions()
@@ -335,7 +388,7 @@ namespace CSF.Zpt
     }
 
     /// <summary>
-    /// Gets the file extensions which indicate that an <see cref="ZptXmlDocument"/> should be used.
+    /// Gets the file extensions which indicate that an <see cref="RenderingMode.Xml"/> should be used.
     /// </summary>
     /// <returns>The XML extensions.</returns>
     public static IEnumerable<string> GetXmlExtensions()

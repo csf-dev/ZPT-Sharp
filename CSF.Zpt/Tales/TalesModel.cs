@@ -158,7 +158,7 @@ namespace CSF.Zpt.Tales
     /// Exposes the found object if this method returns <c>true</c>.  The value is undefined if this method returns
     /// <c>false</c>.
     /// </param>
-    public virtual bool TryGetLocalRootObject(string name, ZptElement element, out object result)
+    public virtual bool TryGetLocalRootObject(string name, IZptElement element, out object result)
     {
 
       bool output;
@@ -193,6 +193,7 @@ namespace CSF.Zpt.Tales
       return new BuiltinContextsContainer(this.GetKeywordOptions(),
                                           this.GetRepetitionSummaries(context.Element),
                                           originalAttrs,
+                                          templateFileFactory: context.RenderingOptions.GetTemplateFileFactory(),
                                           model: this.ModelObject);
     }
 
