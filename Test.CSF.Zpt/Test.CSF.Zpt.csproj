@@ -137,5 +137,9 @@
       <Project>{842160E4-BDE5-4FA0-ADE5-07554090AA27}</Project>
       <Name>CSF.Zpt.Impl.XmlLinq</Name>
     </ProjectReference>
+    <ProjectReference Include="..\CSF.Zpt.Log4net\CSF.Zpt.Log4net.csproj">
+      <Project>{81044439-06CF-44E2-BBF2-3800F1DEB5B1}</Project>
+      <Name>CSF.Zpt.Log4net</Name>
+    </ProjectReference>
   </ItemGroup>
 </Project>

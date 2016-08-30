@@ -13,12 +13,6 @@ namespace CSF.Zpt
   /// </summary>
   public abstract class ZptDocument : IZptDocument
   {
-    #region fields
-
-    private static log4net.ILog _logger;
-
-    #endregion
-
     #region properties
 
     /// <summary>
@@ -148,8 +142,10 @@ namespace CSF.Zpt
       var output = this.GetRootElement();
       var context = options.CreateRootContext(output, model);
 
-      _logger.InfoFormat(Resources.LogMessageFormats.RenderingDocument,
-                         (output.SourceFile != null)? output.SourceFile.FullName : "<unknown>");
+      System.Diagnostics.Trace.TraceInformation(Resources.LogMessageFormats.RenderingDocument,
+                                                (output.SourceFile != null)? output.SourceFile.FullName : "<unknown>",
+                                                nameof(ZptDocument),
+                                                nameof(RenderElement));
 
       if(contextConfigurator != null)
       {
@@ -175,8 +171,10 @@ namespace CSF.Zpt
       }
       catch(Exception ex)
       {
-        _logger.Error(Resources.LogMessageFormats.UnexpectedRenderingException);
-        _logger.Error(ex);
+        System.Diagnostics.Trace.TraceError(Resources.LogMessageFormats.UnexpectedRenderingException,
+                                            nameof(ZptDocument),
+                                            nameof(RenderElement));
+        System.Diagnostics.Trace.TraceError(ex.ToString());
         throw;
       }
 
@@ -225,18 +223,6 @@ namespace CSF.Zpt
     protected virtual TElement ConvertElement<TElement>(IZptElement element) where TElement : class,IZptElement
     {
       return ZptElement.ConvertElement<TElement>(element);
-    }
-
-    #endregion
-
-    #region constructor
-
-    /// <summary>
-    /// Initializes the <see cref="CSF.Zpt.ZptDocument"/> class.
-    /// </summary>
-    static ZptDocument()
-    {
-      _logger = log4net.LogManager.GetLogger(typeof(ZptDocument));
     }
 
     #endregion
