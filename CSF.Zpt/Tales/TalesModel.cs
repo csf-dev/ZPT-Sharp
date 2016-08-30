@@ -22,7 +22,6 @@ namespace CSF.Zpt.Tales
 
     private IEvaluatorRegistry _registry;
     private IExpressionFactory _expressionCreator;
-    private static log4net.ILog _logger;
 
     #endregion
 
@@ -98,9 +97,9 @@ namespace CSF.Zpt.Tales
       var evaluator = EvaluatorRegistry.GetEvaluator(talesExpression);
       var output = evaluator.Evaluate(talesExpression, context, this);
 
-      _logger.DebugFormat(Resources.LogMessageFormats.ExpressionEvaluated,
-                          talesExpression.ToString(),
-                          output.Value?? "<null>");
+      System.Diagnostics.Debug.WriteLine(Resources.LogMessageFormats.ExpressionEvaluated,
+                                         talesExpression.ToString(),
+                                         output.Value?? "<null>");
 
       return output;
     }
@@ -243,14 +242,6 @@ namespace CSF.Zpt.Tales
 
       _registry = evaluatorRegistry;
       _expressionCreator = expressionCreator?? new ExpressionFactory();
-    }
-
-    /// <summary>
-    /// Initializes the <see cref="CSF.Zpt.Tales.TalesModel"/> class.
-    /// </summary>
-    static TalesModel()
-    {
-      _logger = log4net.LogManager.GetLogger(typeof(TalesModel));
     }
 
     #endregion

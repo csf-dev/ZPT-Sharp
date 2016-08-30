@@ -15,7 +15,6 @@ namespace CSF.Zpt.Metal
 
     private MacroFinder _macroFinder;
     private SourceAnnotator _annotator;
-    private static log4net.ILog _logger;
 
     #endregion
 
@@ -168,26 +167,26 @@ namespace CSF.Zpt.Metal
 
     private void LogMacroUsage(IZptElement defineMacro, IZptElement useMacro)
     {
-      _logger.DebugFormat(Resources.LogMessageFormats.MacroUsage,
-                          defineMacro.GetMetalAttribute(ZptConstants.Metal.DefineMacroAttribute).Value,
-                          useMacro.GetFullFilePathAndLocation(),
-                          defineMacro.GetFullFilePathAndLocation());
+      System.Diagnostics.Debug.WriteLine(Resources.LogMessageFormats.MacroUsage,
+                                         defineMacro.GetMetalAttribute(ZptConstants.Metal.DefineMacroAttribute).Value,
+                                         useMacro.GetFullFilePathAndLocation(),
+                                         defineMacro.GetFullFilePathAndLocation());
     }
 
     private void LogMacroExtension(IZptElement defineMacro, IZptElement extendedMacro)
     {
-      _logger.DebugFormat(Resources.LogMessageFormats.MacroExtension,
-                          defineMacro.GetMetalAttribute(ZptConstants.Metal.ExtendMacroAttribute).Value,
-                          extendedMacro.GetFullFilePathAndLocation(),
-                          defineMacro.GetFullFilePathAndLocation());
+      System.Diagnostics.Debug.WriteLine(Resources.LogMessageFormats.MacroExtension,
+                                         defineMacro.GetMetalAttribute(ZptConstants.Metal.ExtendMacroAttribute).Value,
+                                         extendedMacro.GetFullFilePathAndLocation(),
+                                         defineMacro.GetFullFilePathAndLocation());
     }
 
     private void LogSlotFilling(IZptElement defineSlot, IZptElement fillSlot)
     {
-      _logger.DebugFormat(Resources.LogMessageFormats.SlotFilling,
-                          fillSlot.GetMetalAttribute(ZptConstants.Metal.FillSlotAttribute).Value,
-                          defineSlot.GetFullFilePathAndLocation(),
-                          fillSlot.GetFullFilePathAndLocation());
+      System.Diagnostics.Debug.WriteLine(Resources.LogMessageFormats.SlotFilling,
+                                         fillSlot.GetMetalAttribute(ZptConstants.Metal.FillSlotAttribute).Value,
+                                         defineSlot.GetFullFilePathAndLocation(),
+                                         fillSlot.GetFullFilePathAndLocation());
     }
 
     #endregion
@@ -204,14 +203,6 @@ namespace CSF.Zpt.Metal
     {
       _macroFinder = finder?? new MacroFinder();
       _annotator = annotator?? new SourceAnnotator();
-    }
-
-    /// <summary>
-    /// Initializes the <see cref="CSF.Zpt.Metal.MacroExpander"/> class.
-    /// </summary>
-    static MacroExpander()
-    {
-      _logger = log4net.LogManager.GetLogger(typeof(MacroExpander));
     }
 
     #endregion
