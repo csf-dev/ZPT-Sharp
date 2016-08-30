@@ -99,7 +99,9 @@ namespace CSF.Zpt.Tales
 
       System.Diagnostics.Debug.WriteLine(Resources.LogMessageFormats.ExpressionEvaluated,
                                          talesExpression.ToString(),
-                                         output.Value?? "<null>");
+                                         output.Value?? "<null>",
+                                         nameof(TalesModel),
+                                         nameof(Evaluate));
 
       return output;
     }

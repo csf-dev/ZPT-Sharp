@@ -170,7 +170,9 @@ namespace CSF.Zpt.Metal
       System.Diagnostics.Debug.WriteLine(Resources.LogMessageFormats.MacroUsage,
                                          defineMacro.GetMetalAttribute(ZptConstants.Metal.DefineMacroAttribute).Value,
                                          useMacro.GetFullFilePathAndLocation(),
-                                         defineMacro.GetFullFilePathAndLocation());
+                                         defineMacro.GetFullFilePathAndLocation(),
+                                         nameof(MacroExpander),
+                                         nameof(LogMacroUsage));
     }
 
     private void LogMacroExtension(IZptElement defineMacro, IZptElement extendedMacro)
@@ -178,7 +180,9 @@ namespace CSF.Zpt.Metal
       System.Diagnostics.Debug.WriteLine(Resources.LogMessageFormats.MacroExtension,
                                          defineMacro.GetMetalAttribute(ZptConstants.Metal.ExtendMacroAttribute).Value,
                                          extendedMacro.GetFullFilePathAndLocation(),
-                                         defineMacro.GetFullFilePathAndLocation());
+                                         defineMacro.GetFullFilePathAndLocation(),
+                                         nameof(MacroExpander),
+                                         nameof(LogMacroExtension));
     }
 
     private void LogSlotFilling(IZptElement defineSlot, IZptElement fillSlot)
@@ -186,7 +190,9 @@ namespace CSF.Zpt.Metal
       System.Diagnostics.Debug.WriteLine(Resources.LogMessageFormats.SlotFilling,
                                          fillSlot.GetMetalAttribute(ZptConstants.Metal.FillSlotAttribute).Value,
                                          defineSlot.GetFullFilePathAndLocation(),
-                                         fillSlot.GetFullFilePathAndLocation());
+                                         fillSlot.GetFullFilePathAndLocation(),
+                                         nameof(MacroExpander),
+                                         nameof(LogSlotFilling));
     }
 
     #endregion

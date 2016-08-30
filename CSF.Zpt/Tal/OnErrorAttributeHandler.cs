@@ -58,7 +58,9 @@ namespace CSF.Zpt.Tal
         }
 
         System.Diagnostics.Trace.TraceInformation(Resources.LogMessageFormats.TalErrorHandled,
-                                                  context.Element.GetFullFilePathAndLocation());
+                                                  context.Element.GetFullFilePathAndLocation(),
+                                                  nameof(OnErrorAttributeHandler),
+                                                  nameof(Handle));
       }
       else
       {
