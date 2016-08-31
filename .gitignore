@@ -10,5 +10,7 @@ packages/*/
 *.directory
 CSF.Zpt.zip
 CSF.Zpt.tar.gz
+CSF.tar.gz
+DEBIAN/
 *.nupkg
 .vs/

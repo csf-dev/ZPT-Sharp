@@ -1,0 +1,28 @@
+#!/bin/bash
+
+SCRIPT_DIR="$(dirname "$0")"
+ROOT_DIR="${SCRIPT_DIR}/.."
+BUILD_DIR="DEBIAN"
+
+PACKAGE_NAME="zptsharp-zptbuilder"
+
+cd "${ROOT_DIR}/CSF"
+git archive HEAD -o ../CSF.tar.gz
+cd ..
+
+git archive HEAD -o CSF.Zpt.tar.gz
+
+rm -rf "$BUILD_DIR"
+mkdir -p "$BUILD_DIR"
+cd "$BUILD_DIR"
+
+tar -xvf ../CSF.Zpt.tar.gz
+cd CSF
+tar -xvf ../../CSF.tar.gz
+cd ..
+
+PACKAGE_VERSION="$(egrep "AssemblyVersion" Common/CommonAssemblyInfo.cs | egrep -o "[0-9.]+")"
+
+nuget restore
+xbuild
+
