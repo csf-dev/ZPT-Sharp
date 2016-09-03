@@ -32,6 +32,8 @@
     </Exec>
     <Exec Command=".\build-doxygen-output" Condition="'$(OS)' == 'Unix' And  '$(Configuration)' == 'Release'">
     </Exec>
+    <Exec Command=".\assemble-documentation" Condition="'$(OS)' == 'Unix' And  '$(Configuration)' == 'Release'">
+    </Exec>
   </Target>
   <ItemGroup>
     <None Include="Website\advantages-of-zpt-views.html" />
@@ -77,6 +79,7 @@
     <None Include="build-doxygen-output" />
     <None Include="Doxygen.cfg" />
     <None Include="Website style guide.txt" />
+    <None Include="assemble-documentation" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CSF.Zpt.Cli\CSF.Zpt.Cli.csproj">
