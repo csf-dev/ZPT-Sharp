@@ -81,6 +81,7 @@
     <None Include="Doxygen.cfg" />
     <None Include="Website style guide.txt" />
     <None Include="assemble-documentation" />
+    <None Include="Website\Shared\cli-docs.html" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CSF.Zpt.Cli\CSF.Zpt.Cli.csproj">

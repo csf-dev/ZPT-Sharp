@@ -9,14 +9,17 @@ VERSION="$2"
 # Script begins here
 SCRIPT_ROOT="$(dirname $0)"
 INPUT_DIR="$SCRIPT_ROOT/Website"
-IGNORED_DIR="$INPUT_DIR/Shared/"
+BUILD_DIR="$SCRIPT_ROOT/obj/Release/Website-build"
+IGNORED_DIR="$BUILD_DIR/Shared/"
 OUTPUT_DIR="$SCRIPT_ROOT/obj/Release/Doc-website"
 DEFAULT_BASE_URL="file://$(readlink -f "$OUTPUT_DIR")/"
 BASE_URL="${BASE_URL:-$DEFAULT_BASE_URL}"
 CURRENT_DATE="$(date +%F)"
 VERSION="${VERSION:-unknown}"
 
-BUILDER_PATH="$SCRIPT_ROOT/../CSF.Zpt.Cli/bin/Release/ZptBuilder.exe"
+BUILDER_OUTPUT_PATH="$SCRIPT_ROOT/../CSF.Zpt.Cli/bin/Release"
+BUILDER_PATH="${BUILDER_OUTPUT_PATH}/ZptBuilder.exe"
+BUILDER_DOCS_PATH="${BUILDER_OUTPUT_PATH}/Doc/ZptBuilder.html"
 
 if [ ! -e "$BUILDER_PATH" ]
 then
@@ -24,15 +27,29 @@ then
   exit 1
 fi
 
+rm -rf "$BUILD_DIR"
+rm -rf "$OUTPUT_DIR"
+
 mkdir -p "$OUTPUT_DIR"
-rm -rf "$OUTPUT_DIR/*"
+mkdir -p "$BUILD_DIR"
+
+cp -r "$INPUT_DIR"/* "$BUILD_DIR/"
+
+cp "$BUILDER_DOCS_PATH" "${BUILD_DIR}/Shared/cli-docs.html"
+
+cat "${BUILD_DIR}/Shared/cli-docs.html" | \
+  perl -pe 's{<hr>}{++$n == 1 ? "<div metal:define-macro=\"content\" tal:omit-tag=\"string:True\">" : $&}ge' | \
+  perl -pe 's{<hr>}{++$n == 1 ? "</div>" : $&}ge' > \
+  "${BUILD_DIR}/Shared/cli-docs.html.tmp"
+
+mv "${BUILD_DIR}/Shared/cli-docs.html.tmp" "${BUILD_DIR}/Shared/cli-docs.html"
 
 "$BUILDER_PATH" \
-  "$INPUT_DIR/" \
+  "${BUILD_DIR}" \
   -p "*.html" \
-  -o "$OUTPUT_DIR/" \
+  -o "$OUTPUT_DIR" \
   --keyword-options "baseUrl=$BASE_URL;buildDate=$CURRENT_DATE;version=$VERSION" \
   -i "$IGNORED_DIR"
 
-cp -r "$INPUT_DIR/css/" "$OUTPUT_DIR/"
-cp -r "$INPUT_DIR/js/" "$OUTPUT_DIR/"
+cp -r "$BUILD_DIR/css/" "$OUTPUT_DIR/"
+cp -r "$BUILD_DIR/js/" "$OUTPUT_DIR/"
