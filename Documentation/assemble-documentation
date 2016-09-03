@@ -1,0 +1,15 @@
+#!/bin/bash
+
+SCRIPT_ROOT="$(dirname $0)"
+OUTPUT_ROOT="${SCRIPT_ROOT}/bin/Release"
+WEBSITE_OUTPUT="${OUTPUT_ROOT}/Website"
+WEBSITE_PATH="${SCRIPT_ROOT}/obj/Release/Doc-website"
+DOXYGEN_HTML_PATH="${SCRIPT_ROOT}/obj/Release/Doxygen-output/html"
+DOXYGEN_PDF_PATH="${SCRIPT_ROOT}/obj/Release/Doxygen-output/ZPT-Sharp API documentation.pdf"
+
+rm -rf "$OUTPUT_ROOT"
+mkdir -p "$OUTPUT_ROOT"
+
+cp -r "$WEBSITE_PATH" "$WEBSITE_OUTPUT"
+cp -r "$DOXYGEN_HTML_PATH" "${WEBSITE_OUTPUT}/api"
+cp "$DOXYGEN_PDF_PATH" "$OUTPUT_ROOT"

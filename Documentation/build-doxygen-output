@@ -1,11 +1,16 @@
 #!/bin/bash
 
 SCRIPT_ROOT="$(dirname $0)"
-OUTPUT_PATH="${SCRIPT_ROOT}/Doxygen-output"
-CONFIG_PATH="${SCRIPT_ROOT}/Doxygen.cfg"
+
+# The following paths are all relative to the solution root
+OUTPUT_PATH="obj/Release/Doxygen-output"
+CONFIG_PATH="Doxygen.cfg"
 LATEX_PATH="${OUTPUT_PATH}/latex"
 
+cd "$SCRIPT_ROOT"
+
 rm -rf "$OUTPUT_PATH"
+mkdir -p "$OUTPUT_PATH"
 
 doxygen "$CONFIG_PATH"
 

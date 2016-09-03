@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{28D30A8C-0693-4FEA-BCC7-020AA41ECBB1}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <AssemblyName>Documentation</AssemblyName>
+    <ReleaseVersion>0.4.0</ReleaseVersion>
+    <WebsiteUrlRoot>http://csf-dev.github.io/ZPT-Sharp/</WebsiteUrlRoot>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug</OutputPath>
+    <DefineConstants>DEBUG;</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>full</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+  </PropertyGroup>
+  <Target Name="Build">
+    <Exec Command=".\build-doc-website '$(WebsiteUrlRoot)' '$(ReleaseVersion)'" Condition="'$(OS)' == 'Unix' And  '$(Configuration)' == 'Release'">
+    </Exec>
+    <Exec Command=".\build-doxygen-output" Condition="'$(OS)' == 'Unix' And  '$(Configuration)' == 'Release'">
+    </Exec>
+    <Exec Command=".\assemble-documentation" Condition="'$(OS)' == 'Unix' And  '$(Configuration)' == 'Release'">
+    </Exec>
+  </Target>
+  <ItemGroup>
+    <None Include="Website\advantages-of-zpt-views.html" />
+    <None Include="Website\asp-net-mvc-view-engine.html" />
+    <None Include="Website\command-line-renderer.html" />
+    <None Include="Website\download.html" />
+    <None Include="Website\index.html" />
+    <None Include="Website\page-rendering-api.html" />
+    <None Include="Website\writing-pages-using-zpt.html" />
+    <None Include="Website\Shared\empty-page.html" />
+    <None Include="Website\Shared\general-page.html" />
+    <None Include="Website\Shared\navigation.html" />
+    <None Include="Website\css\command_line_renderer.css" />
+    <None Include="Website\css\content.css" />
+    <None Include="Website\css\dummy.css" />
+    <None Include="Website\css\introduction.css" />
+    <None Include="Website\css\page.css" />
+    <None Include="Website\css\reset.css" />
+    <None Include="Website\css\styles.css" />
+    <None Include="Website\css\tal_content_or_replace.css" />
+    <None Include="Website\js\modernizr.min.js" />
+    <None Include="Website\metal\define-fill-slot.html" />
+    <None Include="Website\metal\define-use-macro.html" />
+    <None Include="Website\metal\extend-macro.html" />
+    <None Include="Website\metal\introduction.html" />
+    <None Include="Website\tal\attributes.html" />
+    <None Include="Website\tal\condition.html" />
+    <None Include="Website\tal\content-replace.html" />
+    <None Include="Website\tal\define.html" />
+    <None Include="Website\tal\introduction.html" />
+    <None Include="Website\tal\omit-tag.html" />
+    <None Include="Website\tal\on-error.html" />
+    <None Include="Website\tal\repeat.html" />
+    <None Include="Website\tales\boolean-coercion.html" />
+    <None Include="Website\tales\built-in-variables.html" />
+    <None Include="Website\tales\cancellation.html" />
+    <None Include="Website\tales\introduction.html" />
+    <None Include="Website\tales\not-expressions.html" />
+    <None Include="Website\tales\path-expressions.html" />
+    <None Include="Website\tales\repeat-variables.html" />
+    <None Include="Website\tales\string-expressions.html" />
+    <None Include="build-doc-website" />
+    <None Include="build-doxygen-output" />
+    <None Include="Doxygen.cfg" />
+    <None Include="Website style guide.txt" />
+    <None Include="assemble-documentation" />
+    <None Include="Website\Shared\cli-docs.html" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CSF.Zpt.Cli\CSF.Zpt.Cli.csproj">
+      <Project>{4DD64666-DBEF-4AD5-BDB0-3EB3C70A6E83}</Project>
+      <Name>CSF.Zpt.Cli</Name>
+    </ProjectReference>
+  </ItemGroup>
+</Project>
