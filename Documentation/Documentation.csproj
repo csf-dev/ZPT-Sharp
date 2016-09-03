@@ -7,6 +7,7 @@
     <OutputType>Exe</OutputType>
     <AssemblyName>Documentation</AssemblyName>
     <ReleaseVersion>0.4.0</ReleaseVersion>
+    <WebsiteUrlRoot>http://csf-dev.github.io/ZPT-Sharp/</WebsiteUrlRoot>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -28,7 +29,7 @@
     <ConsolePause>false</ConsolePause>
   </PropertyGroup>
   <Target Name="Build">
-    <Exec Command=".\build-doc-website" Condition="'$(OS)' == 'Unix' And  '$(Configuration)' == 'Release'">
+    <Exec Command=".\build-doc-website '$(WebsiteUrlRoot)' '$(ReleaseVersion)'" Condition="'$(OS)' == 'Unix' And  '$(Configuration)' == 'Release'">
     </Exec>
     <Exec Command=".\build-doxygen-output" Condition="'$(OS)' == 'Unix' And  '$(Configuration)' == 'Release'">
     </Exec>
