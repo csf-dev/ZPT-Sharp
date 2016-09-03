@@ -31,25 +31,6 @@ hljs.initHighlightingOnLoad();
     </nav>
     <section class="main_page_content" metal:fill-slot="main_page_content">
       <header><h1>Writing pages using ZPT</h1></header>
-      <p>
-        <abbr title="Zope Page Templates">ZPT</abbr> is an <em>attribute language</em>; this means that their syntax
-        resides entirely within HTML/XML attributes.  The distinct technical advantage of attribute languages is that
-        they do not interfere with the validity of the underlying HTML or XML structure of the source file.
-        This means that:
-      </p>
-      <ul>
-        <li>
-          MVC views written in ZPT-Sharp may be viewed offline from their application; the source files will render as
-          valid HTML/XHTML pages.
-        </li>
-        <li>
-          For XML-based documents, the source file is also well-formed XML.
-        </li>
-        <li>
-          ZPT-Sharp exposes only a small (but powerful) number of functions in order to perform their function, these
-          present a shallow learning curve for non-developers to comprehend.
-        </li>
-      </ul>
       <h2>Introducing METAL and TAL</h2>
       <p>
         ZPT performs two primary operations when it renders a page, in the following order:
@@ -82,29 +63,41 @@ hljs.initHighlightingOnLoad();
         For example: <code>here/LoggedInUser/Name</code> might get the logged-in user's name (depending upon the object
         model passed to the view).
       </p>
-      <h2>Providing dummy content</h2>
+      <h2>Providing sample content</h2>
       <p>
-        Because many of the METAL and TAL directives result in the <em>replacement of content</em>, it is possible to
-        provide dummy content (including markup) which is replaced at rendering time, but provides a frame of reference
-        to somebody reading/viewing the source file.  Consider the following:
+        One of ZPT's advantages is <a href="advantages-of-zpt-views.html">the ability to provide sample content</a>.
+        This is possible in any scenario where ZPT writes content to a page, since within the target in which content
+        is written, existing values will be removed.  Essentially, the rules for sample content are <em>"what would a
+        web browser show if the ZPT syntax is ignored"</em>.
       </p>
-      <pre><code class="html">&lt;div class=&quot;log_out&quot;&gt;
-  You are logged in as
-  &lt;a class=&quot;current_user&quot;
-     href=&quot;profile_url&quot;
-     tal:content=&quot;site/CurrentUser/Username&quot;&gt;Joseph Bloggs&lt;/a&gt;.&lt;br&gt;
-  &lt;a href=&quot;logout_url&quot;&gt;Log out&lt;/a&gt;.
-&lt;/div&gt;</code></pre>
-      <p>
-        If the source page were viewed in a web browser (without the underlying application), then the "Jospeh Bloggs"
-        dummy content would be visible.  This is useful for CSS designers in that they can see what the control might
-        look like when rendered using the application proper (with some representative data).  When the same source
-        file is used with the application, the dummy data is discarded and replaced with the value of the
-        <a href="introduction-to-tales.html">TALES</a> expression <code>site/CurrentUser/Username</code>.
-      </p>
-      <p>
-        Dummy content may be simple strings, or could be blocks of markup.
-      </p>
+      <ul>
+        <li>
+          When using <a href="metal/define-use-macro.html"><code>metal:use-macro</code></a>, you may freely include
+          any sample markup you wish within the element which carries the use-macro attribute.  When rendering, METAL
+          will replace all of this sample content with the selected macro.
+        </li>
+        <li>
+          When using <a href="tal/attributes.html"><code>tal:attributes</code></a>, you may provide sample values
+          for the affected attributes.  These attribute definitions will generally not be used when rendering, instead
+          being populated from the model.  The only exception is if the attribute expression
+          <a href="tales/cancellation.html">cancels the action</a>, in which case that sample/existing value
+          will remain in the rendered output.
+        </li>
+        <li>
+          When using <a href="tal/condition.html"><code>tal:condition</code></a>, the markup marked as conditional
+          will of course be visible.  In some scenarios, it might be appropriate to use condition with a hard-coded
+          expression which evaluates to <code>false</code> (such as <code>string:</code> - an empty string).  This
+          will mean that content contained within is visible <em>only</em> when the source is viewed offline, and
+          never when rendered by ZPT.
+        </li>
+        <li>
+          When using <a href="tal/content-replace.html"><code>tal:content</code> or <code>tal:replace</code></a>, you
+          may provide sample markup within the element which carries the content/replace attribute.
+          The sample content will be removed when ZPT renders the page, and will only remain if the content/replace
+          expression <a href="tales/cancellation.html">cancels the action</a>, in which case that sample/default
+          markup will remain in the rendered output.
+        </li>
+      </ul>
       <h2 id="elements_in_tal_metal_namespace">Elements prefixed <code>tal:</code> or <code>metal:</code></h2>
       <p>
         ZPT understands elements which are prefixed to indicate that they are TAL or METAL elements.

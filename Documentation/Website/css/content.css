@@ -100,6 +100,13 @@
   background: #F8C9AF;
   cursor: help;
 }
+.main_page_content dt {
+  font-weight: bold;
+  margin: 1.6em 0 0.2em;
+}
+.main_page_content dd {
+  margin: 0 0 1em 2em;
+}
 .main_page_content table {
     background: #F0F0F0 none;
     border-collapse: collapse;
