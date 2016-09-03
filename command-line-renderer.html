@@ -138,6 +138,7 @@ $(window).ready(function() {
           command-line-renderer application.
         </p>
       </header>
+      
   <a name="lbAB" id="lbAB">&nbsp;</a>
 
   <h2>NAME</h2>
@@ -202,19 +203,6 @@ $(window).ready(function() {
 
     <dd>Omits the <b>&lt;?xml?&gt;</b> declaration from the output when rendering XML inputs. Has
     no effect for inputs treated as HTML.</dd>
-
-    <dt><b>--no-indent-xml</b></dt>
-
-    <dd>By default when rendering XML inputs, the output is formatted and indented for
-    human-readability. If this option is present then the formatting and indentation is skipped.
-    Has no effect for inputs treated as HTML.</dd>
-
-    <dt><b>--xml-indent-chars</b>=<i>CHARS</i></dt>
-
-    <dd>When rendering XML inputs and performing formatting and indenting, by default the
-    indentation is set to two spaces: " ". Use of this option may override that with a different
-    set of characters. Has no effect for inputs treated as HTML, or where the
-    <b>--no-indent-xml</b> option has been used.</dd>
 
     <dt><b>--input-filename-pattern</b>=<i>PATTERN</i>,<b>-p</b></dt>
 
@@ -281,6 +269,7 @@ ZptBuilder.exe --output=my-out-dir/ my-input-dir
     of type names, separated by semicolons. These names must be full, assembly-qualified type names
     where provided.</dd>
   </dl>
+  
     </section>
   </div>
 </div>
@@ -291,9 +280,9 @@ ZptBuilder.exe --output=my-out-dir/ my-input-dir
   </section>
   <section class="version">
     <p>
-      Documentation built on <strong>2016-08-24</strong>, for
+      Documentation built on <strong>2016-09-03</strong>, for
       <span>
-        version <strong>v0.4.0</strong>
+        version <strong>0.4.0</strong>
       </span>
     </p>
   </section>

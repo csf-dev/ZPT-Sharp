@@ -1,0 +1,4 @@
+<map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
+<area shape="rect" id="node1" href="$interfaceCSF_1_1Zpt_1_1Tales_1_1IEvaluatorRegistry.html" title="Interface for a service which provides access to instances of IExpressionEvaluator. " alt="" coords="5,5,176,47"/>
+<area shape="rect" id="node2" href="$classCSF_1_1Zpt_1_1Tales_1_1SimpleEvaluatorRegistry.html" title="Simple implementation of IExpressionEvaluator which keeps a collection of the available evaluators in..." alt="" coords="224,5,431,47"/>
+</map>

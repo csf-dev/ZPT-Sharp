@@ -10,16 +10,8 @@
 }
 .page_command_line_renderer .main_page_content b {
   font-weight: bold;
-}
-.page_command_line_renderer .main_page_content b {
   font-style: italic;
-}
-.page_command_line_renderer .main_page_content dt {
-  margin: 1.6em 0 0.2em;
 }
 .page_command_line_renderer .main_page_content dt:first-child {
   margin-top: 0;
-}
-.page_command_line_renderer .main_page_content dd {
-  margin: 0 0 1em 4em;
 }

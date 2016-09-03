@@ -1,0 +1,9 @@
+<map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
+<area shape="rect" id="node1" href="$interfaceCSF_1_1Zpt_1_1Rendering_1_1IContextVisitor.html" title="Interface for a type which can visit a RenderingContext instance. " alt="" coords="5,49,195,90"/>
+<area shape="rect" id="node2" href="$classCSF_1_1Zpt_1_1Rendering_1_1ContextVisitorBase.html" title="Abstract base logic for implementations of IContextVisitor. " alt="" coords="243,49,428,90"/>
+<area shape="rect" id="node3" href="$classCSF_1_1Zpt_1_1Metal_1_1MetalVisitor.html" title="Implementation of IContextVisitor which performs METAL&#45;related functionality. " alt="" coords="491,5,672,32"/>
+<area shape="rect" id="node4" href="$classCSF_1_1Zpt_1_1Rendering_1_1NoOpVisitor.html" title="Implementation of ContextVisitorBase that performs no operation. " alt="" coords="476,56,687,83"/>
+<area shape="rect" id="node7" href="$classCSF_1_1Zpt_1_1Tal_1_1TalVisitor.html" title="Implementation of IContextVisitor which performs TAL&#45;related functionality. " alt="" coords="505,107,658,133"/>
+<area shape="rect" id="node5" href="$classCSF_1_1Zpt_1_1Metal_1_1MetalTidyUpVisitor.html" title="Context visitor that tidies up METAL elements, removing any elements or attributes that should not be..." alt="" coords="739,19,925,61"/>
+<area shape="rect" id="node6" href="$classCSF_1_1Zpt_1_1Tal_1_1TalTidyUpVisitor.html" title="Context visitor that tidies up TAL elements, removing any elements or attributes that should not be r..." alt="" coords="735,85,929,112"/>
+</map>

@@ -134,7 +134,103 @@ $(window).ready(function() {
         <h1>Advantages of Zope Page Templates</h1>
       </header>
       <p>
-        TODO: Write this content.
+        ​Amongst the goals of the ZPT syntax is to make view pages useful to both developers and
+        non-developers alike. A front-end designer (who perhaps knows only HTML, CSS and JavaScript)
+        should be able to work with a ZPT source file without need for extra tools, and with
+        minimal training.
+      </p>
+      <h2>Simple syntax</h2>
+      <p>
+        ​​ZPT intentionally defines a very limited syntax. This is organised into three core categories
+        and is designed to be intuitive to designers:
+      </p>
+      <dl>
+        <dt>METAL</dt>
+        <dd>
+          <abbr title="Macro Expansion Template Attribute Language">METAL</abbr>
+          brings together the source files which make up a page. Regions of reusable markup
+          ('macros' in ZPT terminology) from various files are assembled into a single view, ready
+          to be processed by TAL.
+        </dd>
+        <dt>TAL</dt>
+        <dd>
+          <abbr title="Template Attribute Language">TAL</abbr>
+          modifies the assembled view, inserting data values, conditionally rendering/omitting
+          areas of markup and repeating sections of markup for items in a collection. In essence
+          TAL binds data from the model to the view.
+        </dd>
+        <dt>TALES</dt>
+        <dd>
+          <abbr title="Template Attribute Language Expression Syntax">TALES</abbr>
+          is an expression syntax used by METAL and TAL to reference values from the model.
+          The recommended/default `path` expression type uses a syntax which looks much like a
+          relative URL for traversing object graphs to values, which should be familiar to designers
+          and developers alike.
+        </dd>
+      </dl>
+      <h2>Source files are valid (X)HTML</h2>
+      <p>
+        Because ZPT is an attribute language, it does not require you to 'break' the structure of
+        your HTML (or XML/XHTML, as applicable) to insert processing directives.
+      </p>
+      <p>
+        Consider ASP.NET pages (with or without the use of Razor). These template languages frequently
+        require you to insert directives which are not valid within the structure of an HTML page.
+        Once this has happened, the page may only be rendered usefully using your server-side application.
+      </p>
+      <p>
+        Using the ZPT syntax, the source files remain valid HTML; such a file may be viewed offline
+        (without the the web application or a ZPT renderer).
+        Of course when viewing the page offline in a browser, the ZPT directives will not be processed
+        but the structure of the page and the static content will remain valid.
+      </p>
+      <p>
+        The payoff is the ability to share ZPT source files with HTML/CSS front-end designers.
+        They may use these offline from the web application in order to perform their work without the need
+        to be able to build/run the .NET application which provides the model.
+        They may edit these source files using whatever tools they wish and see the results of their work
+        immediately.
+        What they see in their offline browsers/editing tools is structurally the same as what the
+        real application will display.
+      </p>
+      <h3>Sample content in source files</h3>
+      <p>
+        Linked with the above, another benefit is that is possible to bake sample content into a source
+        page.
+        This is again useful to designers; when editing/viewing a page offline from the application, the
+        sample content provides an example of what the application/ZPT renderer might create.
+        When the ZPT renderer actually renders the source, then this sample (aka "default") content is
+        excluded/replaced by the METAL/TAL directives.
+      </p>
+      <p>
+        This is possible because many of ZPT's directives replace sections of markup or text with data
+        from the application.
+        Consider the following example:
+      </p>
+      <pre><code class="html">&lt;div class=&quot;user_info&quot;&gt;
+  &lt;p&gt;
+    You are logged in as
+    &lt;strong tal:content=&quot;here/CurrentUser/Name&quot;&gt;Joseph Bloggs&lt;/strong&gt;
+  &lt;/p&gt;
+&lt;/div&gt;</code></pre>
+      <p>
+        Viewing this source code offline in a web browser will show the sample name
+        <strong>Joseph Bloggs</strong>; the browser will ignore the
+        <a href="tal/content-replace.html"><code>tal:content</code></a> attribute which it does not
+        understand.  When put through a ZPT renderer though, the content directive will cause the applicable
+        value from the model to be placed in this position instead.  The sample content will not be included
+        in the rendered output.
+      </p>
+      <h2>ZPT enforces best-practice</h2>
+      <p>
+        A <em>bad code smell</em> in ASP.NET views, is to see sections of .NET application code inside the
+        view source files. These are more than just expressions to access values from the model; they are
+        control-flow logic.
+      </p>
+      <p>
+        ZPT's intentionally-limited syntax puts up quite a lot of resistance to this. It offers no way to
+        readily break-out of the mark-up syntax and into .NET application logic. Thus, functionality which might
+        creep into the views is pushed toward the MVC controllers or models - where it should be.
       </p>
     </section>
   </div>
@@ -146,9 +242,9 @@ $(window).ready(function() {
   </section>
   <section class="version">
     <p>
-      Documentation built on <strong>2016-08-24</strong>, for
+      Documentation built on <strong>2016-09-03</strong>, for
       <span>
-        version <strong>v0.4.0</strong>
+        version <strong>0.4.0</strong>
       </span>
     </p>
   </section>

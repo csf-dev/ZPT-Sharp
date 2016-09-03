@@ -1,0 +1,4 @@
+<map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
+<area shape="rect" id="node1" href="$interfaceCSF_1_1Zpt_1_1BatchRendering_1_1IBatchRenderingOptions.html" title="Represents batch rendering options, indicating the inputs and outputs for a IBatchRenderer. " alt="" coords="5,5,216,47"/>
+<area shape="rect" id="node2" href="$classCSF_1_1Zpt_1_1BatchRendering_1_1BatchRenderingOptions.html" title="Concrete implementation of IBatchRenderingOptions. " alt="" coords="264,5,471,47"/>
+</map>
