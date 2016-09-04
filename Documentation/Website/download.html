@@ -94,6 +94,22 @@ hljs.initHighlightingOnLoad();
           Download CSF.Zpt-api-only.zip
         </a>
       </div>
+      
+      <h2>Get the source code</h2>
+      <p>
+        The recommended way to get the source code is to
+        <a href="https://github.com/csf-dev/ZPT-Sharp">fork the repository on Github</a>.
+        For your convenience though, the following link will download an archive of the source code for the latest
+        stable version (provided by Github's archive feature).
+      </p>
+      <div class="download_action"
+           tal:define="zipFilename string:${versionString}.zip">
+        <a tal:attributes="href string:https://github.com/csf-dev/ZPT-Sharp/archive/${zipFilename}"
+           href="https://github.com/csf-dev/ZPT-Sharp/archive/v0.0.0.zip"
+           class="download_link">
+          Download <span tal:replace="zipFilename">v0.0.0.zip</span>
+        </a>
+      </div>
       </tal:block>
     </section>
   </div>
