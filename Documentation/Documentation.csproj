@@ -82,6 +82,7 @@
     <None Include="Website style guide.txt" />
     <None Include="assemble-documentation" />
     <None Include="Website\Shared\cli-docs.html" />
+    <None Include="Website\css\download.css" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CSF.Zpt.Cli\CSF.Zpt.Cli.csproj">
