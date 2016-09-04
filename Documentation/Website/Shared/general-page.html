@@ -73,11 +73,15 @@ $(window).ready(function() {
   </section>
   <section class="version">
     <p>
-      Documentation built on <strong tal:content="options/buildDate | default">2016-01-01</strong>, for
-      <span tal:define="versionNumber options/version"
-            tal:on-error="string:an unknown version">
-        version <strong><span tal:replace="versionNumber">1.2.3</span></strong>
-      </span>
+      Website built <strong tal:content="options/buildDate | default">2016-01-01</strong>;
+      for version
+      <strong tal:define="version options/version;
+                          versionExtra string:;
+                          versionString string:v${version}${versionExtra}"
+              tal:on-error="string:an unknown version"
+              tal:content="versionString">
+        v1.2.3-alpha
+      </strong>
     </p>
   </section>
 </footer>
