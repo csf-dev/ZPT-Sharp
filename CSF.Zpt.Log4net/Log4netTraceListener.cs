@@ -16,7 +16,7 @@ namespace CSF.Zpt
     #region fields
 
     private const string
-      LOGGER_NAME = "System.Diagnostics.Redirection",
+      LOGGER_NAME = "CSF.Zpt",
       MESSAGE_FORMAT = "{0}: {1}";
     private readonly log4net.ILog _log;
 
