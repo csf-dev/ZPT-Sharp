@@ -40,9 +40,11 @@
     </Compile>
     <Compile Include="AssemblyInfo.cs" />
     <Compile Include="Log4netTraceListener.cs" />
+    <Compile Include="SelfConfiguringLog4netTraceListener.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
     <None Include="packages.config" />
+    <None Include="App.config" />
   </ItemGroup>
 </Project>
