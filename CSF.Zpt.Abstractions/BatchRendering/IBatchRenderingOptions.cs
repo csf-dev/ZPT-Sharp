@@ -58,6 +58,16 @@ namespace CSF.Zpt.BatchRendering
     string OutputExtensionOverride { get; }
 
     #endregion
+
+    #region other options
+
+    /// <summary>
+    /// Gets the error handling strategy for the batch renderer.
+    /// </summary>
+    /// <value>The error handling strategy.</value>
+    BatchErrorHandlingStrategy ErrorHandlingStrategy { get; }
+
+    #endregion
   }
 }
 

@@ -25,9 +25,9 @@ namespace CSF.Zpt.BatchRendering
     /// <param name="options">Rendering options.</param>
     /// <param name="batchOptions">Batch rendering options, indicating the source and destination files.</param>
     /// <param name="mode">An optional override for the rendering mode.</param>
-    public void Render(IRenderingOptions options,
-                       IBatchRenderingOptions batchOptions,
-                       RenderingMode? mode)
+    public IBatchRenderingResponse Render(IRenderingOptions options,
+                                          IBatchRenderingOptions batchOptions,
+                                          RenderingMode? mode)
     {
       var jobs = _renderingJobFactory.GetRenderingJobs(batchOptions, mode);
 
@@ -43,6 +43,9 @@ namespace CSF.Zpt.BatchRendering
 
         Render(job, options, batchOptions, contextConfigurator);
       }
+
+      // TODO: Write this implementation
+      throw new NotImplementedException();
     }
 
     private void Render(RenderingJob job,
