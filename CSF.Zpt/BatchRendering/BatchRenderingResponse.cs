@@ -21,18 +21,7 @@ namespace CSF.Zpt.BatchRendering
     /// Gets a collection of response items relating to the individual documents rendered.
     /// </summary>
     /// <value>The documents.</value>
-    public IEnumerable<BatchRenderingDocumentResponse> Documents { get; private set; }
-
-    #endregion
-
-    #region IBatchRenderingResponse implementation
-
-    IEnumerable<IBatchRenderingDocumentResponse> IBatchRenderingResponse.Documents
-    {
-      get {
-        return this.Documents.Cast<IBatchRenderingDocumentResponse>().ToArray();
-      }
-    }
+    public IEnumerable<IBatchRenderingDocumentResponse> Documents { get; private set; }
 
     #endregion
 
@@ -44,14 +33,15 @@ namespace CSF.Zpt.BatchRendering
     /// <param name="fatalError">Fatal error.</param>
     /// <param name="documents">Documents.</param>
     private BatchRenderingResponse(BatchRenderingFatalErrorType? fatalError,
-                                   IEnumerable<BatchRenderingDocumentResponse> documents)
+                                   IEnumerable<IBatchRenderingDocumentResponse> documents)
     {
       if(fatalError.HasValue && !fatalError.Value.IsDefinedValue())
       {
-        throw new ArgumentException("TODO", nameof(fatalError));
+        // TODO: Move this message to a resource file
+        throw new ArgumentException("Fatal error type must be a defined enumeration constant", nameof(fatalError));
       }
 
-      this.Documents = documents?? new BatchRenderingDocumentResponse[0];
+      this.Documents = documents?? new IBatchRenderingDocumentResponse[0];
       this.FatalError = fatalError;
     }
 
@@ -65,7 +55,7 @@ namespace CSF.Zpt.BatchRendering
     /// Initializes a new instance of the <see cref="CSF.Zpt.BatchRendering.BatchRenderingResponse"/> class.
     /// </summary>
     /// <param name="documents">A collection of the documents rendered.</param>
-    public BatchRenderingResponse(IEnumerable<BatchRenderingDocumentResponse> documents) : this(null, documents) {}
+    public BatchRenderingResponse(IEnumerable<IBatchRenderingDocumentResponse> documents) : this(null, documents) {}
 
     #endregion
   }

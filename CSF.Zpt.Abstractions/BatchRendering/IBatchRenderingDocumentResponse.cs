@@ -9,7 +9,7 @@ namespace CSF.Zpt.BatchRendering
   public interface IBatchRenderingDocumentResponse
   {
     /// <summary>
-    /// Gets a value indicating whether this <see cref="CSF.Zpt.BatchRendering.BatchRenderingDocumentResponse"/>
+    /// Gets a value indicating whether this <see cref="CSF.Zpt.BatchRendering.IBatchRenderingDocumentResponse"/>
     /// indicates a success.
     /// </summary>
     /// <value><c>true</c> if a success; otherwise, <c>false</c>.</value>

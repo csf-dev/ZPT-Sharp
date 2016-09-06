@@ -3,6 +3,7 @@ using System.IO;
 using CSF.IO;
 using CSF.Zpt.Rendering;
 using CSF.Zpt.Tales;
+using System.Collections.Generic;
 
 namespace CSF.Zpt.BatchRendering
 {
@@ -25,41 +26,107 @@ namespace CSF.Zpt.BatchRendering
     /// <param name="options">Rendering options.</param>
     /// <param name="batchOptions">Batch rendering options, indicating the source and destination files.</param>
     /// <param name="mode">An optional override for the rendering mode.</param>
+    /// <returns>
+    /// An object instance indicating the outcome of the rendering.
+    /// </returns>
     public IBatchRenderingResponse Render(IRenderingOptions options,
                                           IBatchRenderingOptions batchOptions,
                                           RenderingMode? mode)
     {
-      var jobs = _renderingJobFactory.GetRenderingJobs(batchOptions, mode);
+      IBatchRenderingResponse output;
+
+      try
+      {
+        var jobs = _renderingJobFactory.GetRenderingJobs(batchOptions, mode);
+        output = RenderJobs(jobs, options, batchOptions);
+      }
+      catch(BatchRenderingException)
+      {
+        if(batchOptions.ErrorHandlingStrategy == BatchErrorHandlingStrategy.RaiseExceptionForAnyError
+           || batchOptions.ErrorHandlingStrategy == BatchErrorHandlingStrategy.RaiseExceptionForFatalContinueOnDocumentError
+           || batchOptions.ErrorHandlingStrategy == BatchErrorHandlingStrategy.RaiseExceptionForFatalStopOnFirstDocumentError)
+        {
+          throw;
+        }
+        else
+        {
+          output = new BatchRenderingResponse(BatchRenderingFatalErrorType.Default);
+        }
+      }
+
+      return output;
+    }
+
+    private IBatchRenderingResponse RenderJobs(IEnumerable<RenderingJob> jobs,
+                                               IRenderingOptions options,
+                                               IBatchRenderingOptions batchOptions)
+    {
+      List<IBatchRenderingDocumentResponse> docs = new List<IBatchRenderingDocumentResponse>();
 
       foreach(var job in jobs)
       {
-        Action<RenderingContext> contextConfigurator = ctx => {
-          if(job.InputRootDirectory != null)
-          {
-            var docRoot = new TemplateDirectory(job.InputRootDirectory);
-            ctx.MetalModel.AddGlobal("documents", docRoot);
-          }
-        };
+        var contextConfigurator = GetContextConfigurator(job);
+        var docResponse = Render(job, options, batchOptions, contextConfigurator);
 
-        Render(job, options, batchOptions, contextConfigurator);
+        docs.Add(docResponse);
+
+        if(!docResponse.Success &&
+           (batchOptions.ErrorHandlingStrategy == BatchErrorHandlingStrategy.NoExpectedExceptionsStopOnFirstDocumentError
+            || batchOptions.ErrorHandlingStrategy == BatchErrorHandlingStrategy.RaiseExceptionForFatalStopOnFirstDocumentError))
+        {
+          break;
+        }
       }
 
-      // TODO: Write this implementation
-      throw new NotImplementedException();
+      return new BatchRenderingResponse(docs);
     }
 
-    private void Render(RenderingJob job,
-                        IRenderingOptions options,
-                        IBatchRenderingOptions batchOptions,
-                        Action<RenderingContext> contextConfigurator)
+    private IBatchRenderingDocumentResponse Render(RenderingJob job,
+                                                   IRenderingOptions options,
+                                                   IBatchRenderingOptions batchOptions,
+                                                   Action<RenderingContext> contextConfigurator)
     {
-      using(var outputStream = job.GetOutputStream(batchOptions))
-      using(var writer = new StreamWriter(outputStream, options.OutputEncoding))
+      IBatchRenderingDocumentResponse output;
+      string inputName = job.Document.GetSourceInfo().FullName;
+
+      try
       {
-        job.Document.Render(writer,
+        using(var outputStream = job.GetOutputStream(batchOptions))
+        using(var writer = new StreamWriter(outputStream, options.OutputEncoding))
+        {
+          job.Document.Render(writer,
                             options: options,
                             contextConfigurator: contextConfigurator);
+        }
+
+        // TODO: Add output location information
+        output = new BatchRenderingDocumentResponse(inputName, "output location");
       }
+      catch(RenderingException)
+      {
+        if(batchOptions.ErrorHandlingStrategy == BatchErrorHandlingStrategy.RaiseExceptionForAnyError)
+        {
+          throw;
+        }
+        else
+        {
+          output = new BatchRenderingDocumentResponse(inputName,
+                                                      errorType: BatchRenderingDocumentErrorType.Default);
+        }
+      }
+
+      return output;
+    }
+
+    private Action<RenderingContext> GetContextConfigurator(RenderingJob job)
+    {
+      return ctx => {
+        if(job.InputRootDirectory != null)
+        {
+          var docRoot = new TemplateDirectory(job.InputRootDirectory);
+          ctx.MetalModel.AddGlobal("documents", docRoot);
+        }
+      };
     }
 
     #endregion

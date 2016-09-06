@@ -5,6 +5,9 @@
   /// </summary>
   public enum BatchRenderingDocumentErrorType
   {
-        
+    /// <summary>
+    /// TODO: Create more useful error types.
+    /// </summary>
+    Default = 0,
   }
 }

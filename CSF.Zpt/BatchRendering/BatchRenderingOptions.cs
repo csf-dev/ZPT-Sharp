@@ -107,7 +107,8 @@ namespace CSF.Zpt.BatchRendering
 
       if(!this.ErrorHandlingStrategy.IsDefinedValue())
       {
-        string message = "TODO";
+        // TODO: Add this message to a resource file.
+        string message = "Error handling strategy must be a defined enumeration constant";
         throw new InvalidBatchRenderingOptionsException(message);
       }
     }

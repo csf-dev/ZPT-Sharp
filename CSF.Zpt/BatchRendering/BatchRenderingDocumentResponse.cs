@@ -61,6 +61,11 @@ namespace CSF.Zpt.BatchRendering
       {
         throw new ArgumentNullException(nameof(input));
       }
+      if(errorType.HasValue && !errorType.Value.IsDefinedValue())
+      {
+        // TODO: Move this message to a resource file
+        throw new ArgumentException("Error type must be a defined enumeration constant", nameof(errorType));
+      }
 
       this.InputLocation = input;
       this.OutputLocation = output;
