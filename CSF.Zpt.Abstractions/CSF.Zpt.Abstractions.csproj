@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -39,6 +39,7 @@
       <Link>CommonAssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="AssemblyInfo.cs" />
+    <Compile Include="BatchRendering\BatchErrorHandlingStrategy.cs" />
     <Compile Include="IZptDocumentFactory.cs" />
     <Compile Include="ZptConstants.cs" />
     <Compile Include="Rendering\IContextVisitor.cs" />
@@ -84,11 +85,5 @@
     <Compile Include="BatchRendering\BatchRenderingException.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
-  <ItemGroup>
-    <Folder Include="Rendering\" />
-    <Folder Include="Tales\" />
-    <Folder Include="Tal\" />
-    <Folder Include="Metal\" />
-    <Folder Include="BatchRendering\" />
-  </ItemGroup>
+  <ItemGroup />
 </Project>
