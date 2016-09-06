@@ -40,6 +40,10 @@
     </Compile>
     <Compile Include="AssemblyInfo.cs" />
     <Compile Include="BatchRendering\BatchErrorHandlingStrategy.cs" />
+    <Compile Include="BatchRendering\BatchRenderingJobResponse.cs" />
+    <Compile Include="BatchRendering\BatchRenderingResponse.cs" />
+    <Compile Include="BatchRendering\FatalBatchRenderingErrorType.cs" />
+    <Compile Include="BatchRendering\NonFatalBatchRenderingErrorType.cs" />
     <Compile Include="IZptDocumentFactory.cs" />
     <Compile Include="ZptConstants.cs" />
     <Compile Include="Rendering\IContextVisitor.cs" />
