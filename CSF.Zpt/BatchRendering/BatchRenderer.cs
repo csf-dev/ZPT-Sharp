@@ -33,14 +33,25 @@ namespace CSF.Zpt.BatchRendering
                                           IBatchRenderingOptions batchOptions,
                                           RenderingMode? mode)
     {
+      if(options == null)
+      {
+        throw new ArgumentNullException(nameof(options));
+      }
+      if(batchOptions == null)
+      {
+        throw new ArgumentNullException(nameof(batchOptions));
+      }
+
       IBatchRenderingResponse output;
 
       try
       {
+        batchOptions.Validate();
+
         var jobs = _renderingJobFactory.GetRenderingJobs(batchOptions, mode);
         output = RenderJobs(jobs, options, batchOptions);
       }
-      catch(BatchRenderingException)
+      catch(BatchRenderingException ex)
       {
         if(batchOptions.ErrorHandlingStrategy == BatchErrorHandlingStrategy.RaiseExceptionForAnyError
            || batchOptions.ErrorHandlingStrategy == BatchErrorHandlingStrategy.RaiseExceptionForFatalContinueOnDocumentError
@@ -48,14 +59,22 @@ namespace CSF.Zpt.BatchRendering
         {
           throw;
         }
+        else if(ex.FatalError.HasValue)
+        {
+          output = new BatchRenderingResponse(ex.FatalError.Value);
+        }
         else
         {
-          output = new BatchRenderingResponse(BatchRenderingFatalErrorType.Default);
+          throw;
         }
       }
 
       return output;
     }
+
+    #endregion
+
+    #region methods
 
     private IBatchRenderingResponse RenderJobs(IEnumerable<RenderingJob> jobs,
                                                IRenderingOptions options,
@@ -95,8 +114,8 @@ namespace CSF.Zpt.BatchRendering
         using(var writer = new StreamWriter(outputStream, options.OutputEncoding))
         {
           job.Document.Render(writer,
-                            options: options,
-                            contextConfigurator: contextConfigurator);
+                              options: options,
+                              contextConfigurator: contextConfigurator);
         }
 
         // TODO: Add output location information

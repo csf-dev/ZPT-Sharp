@@ -5,9 +5,12 @@
   /// </summary>
   public enum BatchRenderingFatalErrorType
   {
-    /// <summary>
-    /// TODO: Create more useful error types.
-    /// </summary>
-    Default = 0,
+    NoInputsSpecified = 1,
+
+    InputCannotBeBothStreamAndPaths,
+
+    NoOutputsSpecified,
+
+    OutputCannotBeBothStreamAndPaths,
   }
 }

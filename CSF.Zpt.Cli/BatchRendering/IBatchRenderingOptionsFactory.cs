@@ -1,9 +1,9 @@
 ﻿using System;
 using CSF.Zpt.BatchRendering;
 
-namespace CSF.Zpt.Cli
+namespace CSF.Zpt.Cli.BatchRendering
 {
-  public interface IBatchRenderingOptionsCreator
+  public interface IBatchRenderingOptionsFactory
   {
     IBatchRenderingOptions GetBatchOptions(CommandLineOptions options);
   }

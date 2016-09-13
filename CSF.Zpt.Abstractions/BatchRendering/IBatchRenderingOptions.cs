@@ -68,6 +68,15 @@ namespace CSF.Zpt.BatchRendering
     BatchErrorHandlingStrategy ErrorHandlingStrategy { get; }
 
     #endregion
+
+    #region methods
+
+    /// <summary>
+    /// Validates the state of the current instance, raising an exception if it is not valid.
+    /// </summary>
+    void Validate();
+
+    #endregion
   }
 }
 

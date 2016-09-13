@@ -4,9 +4,9 @@ using System.Linq;
 using System.Collections.Generic;
 using CSF.Zpt.BatchRendering;
 
-namespace CSF.Zpt.Cli
+namespace CSF.Zpt.Cli.BatchRendering
 {
-  public class BatchRenderingOptionsCreator : IBatchRenderingOptionsCreator
+  public class BatchRenderingOptionsFactory : IBatchRenderingOptionsFactory
   {
     #region constants
 
@@ -24,19 +24,26 @@ namespace CSF.Zpt.Cli
 
     public IBatchRenderingOptions GetBatchOptions(CommandLineOptions options)
     {
-      var inputFiles = options.InputPaths.Select(GetInputFile).ToArray();
-      var useStdin = ReadFromStandardInput(inputFiles);
-      var ignoredPaths = GetIgnoredPaths(options);
+      try
+      {
+        var inputFiles = options.InputPaths.Select(GetInputFile).ToArray();
+        var useStdin = ReadFromStandardInput(inputFiles);
+        var ignoredPaths = GetIgnoredPaths(options);
 
-      var outputPath = GetOutputPath(options);
+        var outputPath = GetOutputPath(options);
 
-      return new BatchRenderingOptions(inputStream: useStdin? Console.OpenStandardInput() : null,
-                                       outputStream: useStdin? Console.OpenStandardOutput() : null,
-                                       inputPaths: inputFiles,
-                                       outputPath: outputPath,
-                                       inputSearchPattern: options.InputFilenamePattern,
-                                       outputExtensionOverride: options.OutputFilenameExtension,
-                                       ignoredPaths: ignoredPaths);
+        return new BatchRenderingOptions(inputStream: useStdin? Console.OpenStandardInput() : null,
+                                         outputStream: useStdin? Console.OpenStandardOutput() : null,
+                                         inputPaths: inputFiles,
+                                         outputPath: outputPath,
+                                         inputSearchPattern: options.InputFilenamePattern,
+                                         outputExtensionOverride: options.OutputFilenameExtension,
+                                         ignoredPaths: ignoredPaths);
+      }
+      catch(Exception ex)
+      {
+        throw new OptionsParsingException(Resources.Messages.BatchOptionsCreationExceptionMessage, ex);
+      }
     }
 
     private FileSystemInfo GetInputFile(string path)
@@ -120,7 +127,7 @@ namespace CSF.Zpt.Cli
 
     #region constructor
 
-    public BatchRenderingOptionsCreator()
+    public BatchRenderingOptionsFactory()
     {
       _relativeBase = new DirectoryInfo(System.Environment.CurrentDirectory);
     }

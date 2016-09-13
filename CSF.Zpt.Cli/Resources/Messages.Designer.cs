@@ -46,45 +46,45 @@ namespace CSF.Zpt.Cli.Resources {
             }
         }
         
-        /// <summary>
-        ///   Looks up a localized string similar to Usage: ZptBuilder.exe [options] [inputs]
-        ///
-        ///Selected options:
-        ///
-        ///--help, -h
-        ///    Display this usage statement and exit
-        ///
-        ///--html,-t
-        ///    Force HTML mode
-        ///
-        ///--xml,-x
-        ///    Force XML mode
-        ///
-        ///--no-xml-declaration
-        ///    Omit XML declaration when rendering XML
-        ///
-        ///--input-filename-pattern=PATTERN,-p
-        ///    Search pattern for files to render when
-        ///    the input is a directory path
-        ///
-        ///--output=LOCATION,-o
-        ///    Saves output to the specified path
-        ///
-        ///--output-filename-extension=EXT,-E
-        ///    The extension for output file na [rest of string was truncated]&quot;;.
-        /// </summary>
         internal static string UsageStatement {
             get {
                 return ResourceManager.GetString("UsageStatement", resourceCulture);
             }
         }
         
-        /// <summary>
-        ///   Looks up a localized string similar to ZptBuilder.exe version {0}.
-        /// </summary>
         internal static string VersionFormat {
             get {
                 return ResourceManager.GetString("VersionFormat", resourceCulture);
+            }
+        }
+        
+        internal static string CannotParseOptionsError {
+            get {
+                return ResourceManager.GetString("CannotParseOptionsError", resourceCulture);
+            }
+        }
+        
+        internal static string UnexpectedError {
+            get {
+                return ResourceManager.GetString("UnexpectedError", resourceCulture);
+            }
+        }
+        
+        internal static string OptionsParsingExceptionMessage {
+            get {
+                return ResourceManager.GetString("OptionsParsingExceptionMessage", resourceCulture);
+            }
+        }
+        
+        internal static string BatchOptionsCreationExceptionMessage {
+            get {
+                return ResourceManager.GetString("BatchOptionsCreationExceptionMessage", resourceCulture);
+            }
+        }
+        
+        internal static string RenderingOptionsCreationExceptionMessage {
+            get {
+                return ResourceManager.GetString("RenderingOptionsCreationExceptionMessage", resourceCulture);
             }
         }
     }
