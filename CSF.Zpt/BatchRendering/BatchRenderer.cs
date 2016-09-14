@@ -57,16 +57,29 @@ namespace CSF.Zpt.BatchRendering
                                                              IBatchRenderingOptions batchOptions,
                                                              Action<RenderingContext> contextConfigurator)
     {
-      using(var outputStream = job.GetOutputStream(batchOptions))
+      var doc = GetDocument(job);
+      var outputInfo = GetOutputInfo(job, batchOptions);
+
+      using(var outputStream = GetOutputStream(job, batchOptions))
+      {
+        return Render(doc, outputStream, options, contextConfigurator, outputInfo);
+      }
+    }
+
+    protected virtual IBatchRenderingDocumentResponse Render(IZptDocument doc,
+                                                             Stream outputStream,
+                                                             IRenderingOptions options,
+                                                             Action<RenderingContext> contextConfigurator,
+                                                             string outputInfo)
+    {
       using(var writer = new StreamWriter(outputStream, options.OutputEncoding))
       {
-        job.Document.Render(writer,
-                            options: options,
-                            contextConfigurator: contextConfigurator);
+        doc.Render(writer,
+                   options: options,
+                   contextConfigurator: contextConfigurator);
       }
 
-      return new BatchRenderingDocumentResponse(job.Document.GetSourceInfo(),
-                                                job.GetOutputInfo(batchOptions));
+      return new BatchRenderingDocumentResponse(doc.GetSourceInfo(), outputInfo);
     }
 
     protected virtual IEnumerable<IRenderingJob> GetRenderingJobs(IBatchRenderingOptions options, RenderingMode? mode)
@@ -108,6 +121,21 @@ namespace CSF.Zpt.BatchRendering
         string message = Resources.ExceptionMessages.BatchOptionsMustNotHaveBothOutputStreamAndPath;
         throw new InvalidBatchRenderingOptionsException(message, BatchRenderingFatalErrorType.OutputCannotBeBothStreamAndPaths);
       }
+    }
+
+    protected virtual IZptDocument GetDocument(IRenderingJob job)
+    {
+      return job.GetDocument();
+    }
+
+    protected virtual string GetOutputInfo(IRenderingJob job, IBatchRenderingOptions batchOptions)
+    {
+      return job.GetOutputInfo(batchOptions);
+    }
+
+    protected virtual Stream GetOutputStream(IRenderingJob job, IBatchRenderingOptions batchOptions)
+    {
+      return job.GetOutputStream(batchOptions);
     }
 
     #endregion

@@ -8,6 +8,7 @@ namespace CSF.Zpt.BatchRendering
   {
     #region fields
 
+    private readonly Func<IZptDocument> _documentCreator;
     private IZptDocument _document;
     private FileInfo _inputFile;
     private DirectoryInfo _inputRootDirectory;
@@ -15,13 +16,6 @@ namespace CSF.Zpt.BatchRendering
     #endregion
 
     #region properties
-
-    public IZptDocument Document
-    {
-      get {
-        return _document;
-      }
-    }
 
     public DirectoryInfo InputRootDirectory
     {
@@ -33,6 +27,16 @@ namespace CSF.Zpt.BatchRendering
     #endregion
 
     #region methods
+
+    public IZptDocument GetDocument()
+    {
+      if(_document == null)
+      {
+        _document = _documentCreator();
+      }
+
+      return _document;
+    }
 
     public string GetOutputInfo(IBatchRenderingOptions batchOptions)
     {
@@ -154,16 +158,16 @@ namespace CSF.Zpt.BatchRendering
 
     #region constructor
 
-    public RenderingJob(IZptDocument document,
+    public RenderingJob(Func<IZptDocument> documentCreator,
                         FileInfo inputFile = null,
                         DirectoryInfo inputRootDirectory = null)
     {
-      if(document == null)
+      if(documentCreator == null)
       {
-        throw new ArgumentNullException(nameof(document));
+        throw new ArgumentNullException(nameof(documentCreator));
       }
 
-      _document = document;
+      _documentCreator = documentCreator;
       _inputFile = inputFile;
       _inputRootDirectory = inputRootDirectory;
     }

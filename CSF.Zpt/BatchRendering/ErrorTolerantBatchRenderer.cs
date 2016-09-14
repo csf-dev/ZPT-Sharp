@@ -1,22 +1,24 @@
 ﻿using System;
 using CSF.Zpt.Rendering;
+using System.IO;
 
 namespace CSF.Zpt.BatchRendering
 {
   public class ErrorTolerantBatchRenderer : BatchRenderer
   {
-    protected override IBatchRenderingDocumentResponse Render(IRenderingJob job,
+    protected override IBatchRenderingDocumentResponse Render(IZptDocument doc,
+                                                              Stream outputStream,
                                                               IRenderingOptions options,
-                                                              IBatchRenderingOptions batchOptions,
-                                                              Action<RenderingContext> contextConfigurator)
+                                                              Action<RenderingContext> contextConfigurator,
+                                                              string outputInfo)
     {
       try
       {
-        return base.Render(job, options, batchOptions, contextConfigurator);
+        return base.Render(doc, outputStream, options, contextConfigurator, outputInfo);
       }
       catch(RenderingException ex)
       {
-        return new BatchRenderingDocumentResponse(job.Document.GetSourceInfo(), ex);
+        return new BatchRenderingDocumentResponse(doc.GetSourceInfo(), ex);
       }
     }
 

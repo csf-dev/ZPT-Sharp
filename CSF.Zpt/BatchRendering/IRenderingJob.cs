@@ -5,9 +5,9 @@ namespace CSF.Zpt.BatchRendering
 {
   public interface IRenderingJob
   {
-    IZptDocument Document { get; }
-
     DirectoryInfo InputRootDirectory { get; }
+
+    IZptDocument GetDocument();
 
     string GetOutputInfo(IBatchRenderingOptions batchOptions);
 

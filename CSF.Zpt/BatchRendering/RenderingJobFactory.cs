@@ -35,21 +35,21 @@ namespace CSF.Zpt.BatchRendering
 
     private IEnumerable<IRenderingJob> ReadFromStandardInput(RenderingMode? mode)
     {
-      IZptDocument output;
+      Func<IZptDocument> documentCreator;
 
       using(var stream = Console.OpenStandardInput())
       {
         if(mode == RenderingMode.Xml)
         {
-          output = _documentFactory.CreateDocument(stream, RenderingMode.Xml);
+          documentCreator = () => _documentFactory.CreateDocument(stream, RenderingMode.Xml);
         }
         else
         {
-          output = _documentFactory.CreateDocument(stream, RenderingMode.Html);
+          documentCreator = () => _documentFactory.CreateDocument(stream, RenderingMode.Html);
         }
       }
 
-      return new [] { new RenderingJob(output) };
+      return new [] { new RenderingJob(documentCreator) };
     }
 
     private IEnumerable<IRenderingJob> ReadFromInputPaths(IBatchRenderingOptions inputOutputInfo,
@@ -86,7 +86,9 @@ namespace CSF.Zpt.BatchRendering
 
     private IRenderingJob CreateRenderingJob(FileInfo file, RenderingMode? mode, DirectoryInfo sourceDirectory)
     {
-      return new RenderingJob(_documentFactory.CreateDocument(file, renderingMode: mode), file, sourceDirectory);
+      Func<IZptDocument> documentCreator = () => _documentFactory.CreateDocument(file, renderingMode: mode);
+
+      return new RenderingJob(documentCreator, file, sourceDirectory);
     }
 
     #endregion
