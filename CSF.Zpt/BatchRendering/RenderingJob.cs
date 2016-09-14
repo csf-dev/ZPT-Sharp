@@ -4,7 +4,7 @@ using CSF.IO;
 
 namespace CSF.Zpt.BatchRendering
 {
-  public class RenderingJob
+  internal class RenderingJob : IRenderingJob
   {
     #region fields
 
@@ -34,6 +34,28 @@ namespace CSF.Zpt.BatchRendering
 
     #region methods
 
+    public string GetOutputInfo(IBatchRenderingOptions batchOptions)
+    {
+      if(batchOptions == null)
+      {
+        throw new ArgumentNullException(nameof(batchOptions));
+      }
+
+      string output;
+
+      if(batchOptions.OutputStream != null)
+      {
+        output = "STDOUT";
+      }
+      else
+      {
+        var outputFile = GetOutputFile(batchOptions);
+        output = outputFile.FullName;
+      }
+
+      return output;
+    }
+
     public Stream GetOutputStream(IBatchRenderingOptions batchOptions)
     {
       if(batchOptions == null)
@@ -47,21 +69,37 @@ namespace CSF.Zpt.BatchRendering
       {
         output = batchOptions.OutputStream;
       }
-      else if(batchOptions.OutputPath is FileInfo)
+      else
       {
-        output = ((FileInfo) batchOptions.OutputPath).Open(FileMode.Create);
+        var outputFile = GetOutputFile(batchOptions);
+        output = GetOutputStream(outputFile);
+      }
+
+      return output;
+    }
+
+    private Stream GetOutputStream(FileInfo outputFile)
+    {
+      var parentDir = outputFile.GetParent();
+      if(!parentDir.Exists)
+      {
+        parentDir.CreateRecursive();
+      }
+
+      return outputFile.Open(FileMode.Create);
+    }
+
+    private FileInfo GetOutputFile(IBatchRenderingOptions batchOptions)
+    {
+      FileInfo output;
+
+      if(batchOptions.OutputPath is FileInfo)
+      {
+        output = (FileInfo) batchOptions.OutputPath;
       }
       else if(batchOptions.OutputPath is DirectoryInfo)
       {
-        var outputFile = GetOutputFile((DirectoryInfo) batchOptions.OutputPath, batchOptions.OutputExtensionOverride);
-
-        var parentDir = outputFile.GetParent();
-        if(!parentDir.Exists)
-        {
-          parentDir.CreateRecursive();
-        }
-
-        output = outputFile.Open(FileMode.Create);
+        output = GetOutputFile((DirectoryInfo) batchOptions.OutputPath, batchOptions.OutputExtensionOverride);
       }
       else
       {
@@ -69,7 +107,6 @@ namespace CSF.Zpt.BatchRendering
       }
 
       return output;
-
     }
 
     private FileInfo GetOutputFile(DirectoryInfo outputRoot, string extensionOverride)

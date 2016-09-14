@@ -120,6 +120,9 @@
     <Compile Include="BatchRendering\RenderingJobFactory.cs" />
     <Compile Include="BatchRendering\BatchRenderingResponse.cs" />
     <Compile Include="BatchRendering\BatchRenderingDocumentResponse.cs" />
+    <Compile Include="BatchRendering\IRenderingJob.cs" />
+    <Compile Include="BatchRendering\IRenderingJobFactory.cs" />
+    <Compile Include="BatchRendering\ErrorTolerantBatchRenderer.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Target Name="AfterBuild" Condition="'$(Configuration)' == 'Release'">

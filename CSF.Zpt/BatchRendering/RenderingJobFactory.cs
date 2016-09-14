@@ -6,7 +6,7 @@ using CSF.IO;
 
 namespace CSF.Zpt.BatchRendering
 {
-  public class RenderingJobFactory
+  internal class RenderingJobFactory : IRenderingJobFactory
   {
     #region fields
 
@@ -16,10 +16,10 @@ namespace CSF.Zpt.BatchRendering
 
     #region methods
 
-    public IEnumerable<RenderingJob> GetRenderingJobs(IBatchRenderingOptions inputOutputInfo,
-                                                      RenderingMode? mode)
+    public IEnumerable<IRenderingJob> GetRenderingJobs(IBatchRenderingOptions inputOutputInfo,
+                                                       RenderingMode? mode)
     {
-      IEnumerable<RenderingJob> output;
+      IEnumerable<IRenderingJob> output;
 
       if(inputOutputInfo.InputStream != null)
       {
@@ -33,7 +33,7 @@ namespace CSF.Zpt.BatchRendering
       return output;
     }
 
-    private IEnumerable<RenderingJob> ReadFromStandardInput(RenderingMode? mode)
+    private IEnumerable<IRenderingJob> ReadFromStandardInput(RenderingMode? mode)
     {
       IZptDocument output;
 
@@ -52,17 +52,17 @@ namespace CSF.Zpt.BatchRendering
       return new [] { new RenderingJob(output) };
     }
 
-    private IEnumerable<RenderingJob> ReadFromInputPaths(IBatchRenderingOptions inputOutputInfo,
-                                                         RenderingMode? mode)
+    private IEnumerable<IRenderingJob> ReadFromInputPaths(IBatchRenderingOptions inputOutputInfo,
+                                                          RenderingMode? mode)
     {
       return inputOutputInfo.InputPaths.SelectMany(x => CreateRenderingJobs(x, inputOutputInfo, mode));
     }
 
-    private IEnumerable<RenderingJob> CreateRenderingJobs(FileSystemInfo inputPath,
-                                                          IBatchRenderingOptions inputOutputInfo,
-                                                          RenderingMode? mode)
+    private IEnumerable<IRenderingJob> CreateRenderingJobs(FileSystemInfo inputPath,
+                                                           IBatchRenderingOptions inputOutputInfo,
+                                                           RenderingMode? mode)
     {
-      IEnumerable<RenderingJob> output;
+      IEnumerable<IRenderingJob> output;
 
       if(inputPath != null && (inputPath is FileInfo))
       {
@@ -78,13 +78,13 @@ namespace CSF.Zpt.BatchRendering
       }
       else
       {
-        output = new RenderingJob[0];
+        output = new IRenderingJob[0];
       }
 
       return output;
     }
 
-    private RenderingJob CreateRenderingJob(FileInfo file, RenderingMode? mode, DirectoryInfo sourceDirectory)
+    private IRenderingJob CreateRenderingJob(FileInfo file, RenderingMode? mode, DirectoryInfo sourceDirectory)
     {
       return new RenderingJob(_documentFactory.CreateDocument(file, renderingMode: mode), file, sourceDirectory);
     }

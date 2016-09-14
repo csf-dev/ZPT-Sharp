@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using CSF.Zpt.Rendering;
 
 namespace CSF.Zpt.BatchRendering
 {
@@ -19,25 +20,19 @@ namespace CSF.Zpt.BatchRendering
     /// Gets the nature of an error relating to the current document, if applicable.
     /// </summary>
     /// <value>The type of the error.</value>
-    BatchRenderingDocumentErrorType? ErrorType { get; }
-
-    /// <summary>
-    /// Gets an object which exposes detail about the current error, if applicable.
-    /// </summary>
-    /// <value>The error detail.</value>
-    object ErrorDetail { get; }
+    RenderingException Exception { get; }
 
     /// <summary>
     /// Gets the input location used for the current document.
     /// </summary>
     /// <value>The input location.</value>
-    string InputLocation { get; }
+    ISourceInfo SourceInfo { get; }
 
     /// <summary>
     /// Gets the output location for the current document.
     /// </summary>
     /// <value>The output location.</value>
-    string OutputLocation { get; }
+    string OutputInfo { get; }
   }
 }
 
