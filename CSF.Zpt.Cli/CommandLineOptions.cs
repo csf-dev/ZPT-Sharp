@@ -102,6 +102,11 @@ namespace CSF.Zpt.Cli
     {
       RenderingMode? output;
 
+      if(ForceHtmlMode && ForceXmlMode)
+      {
+        throw new OptionsParsingException(Resources.Messages.OptionsParsingExceptionMessage);
+      }
+
       if(ForceXmlMode)
       {
         output = RenderingMode.Xml;

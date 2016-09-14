@@ -40,8 +40,6 @@
     </Compile>
     <Compile Include="AssemblyInfo.cs" />
     <Compile Include="BatchRendering\BatchRenderingDocumentResponse.cs" />
-    <Compile Include="BatchRendering\BatchRenderingResponse.cs" />
-    <Compile Include="BatchRendering\FatalBatchRenderingErrorType.cs" />
     <Compile Include="IZptDocumentFactory.cs" />
     <Compile Include="ZptConstants.cs" />
     <Compile Include="Rendering\IContextVisitor.cs" />
@@ -85,6 +83,10 @@
     <Compile Include="BatchRendering\IBatchRenderingOptions.cs" />
     <Compile Include="BatchRendering\InvalidBatchRenderingOptionsException.cs" />
     <Compile Include="BatchRendering\BatchRenderingException.cs" />
+    <Compile Include="BatchRendering\BatchRenderingDocumentErrorType.cs" />
+    <Compile Include="BatchRendering\BatchRenderingFatalErrorType.cs" />
+    <Compile Include="BatchRendering\IBatchRenderingResponse.cs" />
+    <Compile Include="BatchRendering\IBatchRenderingDocumentResponse.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup />

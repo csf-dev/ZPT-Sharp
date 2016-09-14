@@ -66,33 +66,43 @@ namespace CSF.Zpt.BatchRendering
 
     #endregion
 
+    #region other options
+
+    /// <summary>
+    /// Gets the error handling strategy for the batch renderer.
+    /// </summary>
+    /// <value>The error handling strategy.</value>
+    public BatchErrorHandlingStrategy ErrorHandlingStrategy { get; private set; }
+
+    #endregion
+
     #region methods
 
     /// <summary>
     /// Validates the state of the current instance, raising an exception if it is not valid.
     /// </summary>
-    private void Validate()
+    public void Validate()
     {
       if(this.InputStream == null && !this.InputPaths.Any())
       {
         string message = Resources.ExceptionMessages.BatchOptionsMustHaveInputStreamOrPaths;
-        throw new InvalidBatchRenderingOptionsException(message);
+        throw new InvalidBatchRenderingOptionsException(message, BatchRenderingFatalErrorType.NoInputsSpecified);
       }
       else if(this.InputStream != null && this.InputPaths.Any())
       {
         string message = Resources.ExceptionMessages.BatchOptionsMustNotHaveBothInputStreamAndPaths;
-        throw new InvalidBatchRenderingOptionsException(message);
+        throw new InvalidBatchRenderingOptionsException(message, BatchRenderingFatalErrorType.InputCannotBeBothStreamAndPaths);
       }
 
       if(this.OutputStream == null && this.OutputPath == null)
       {
         string message = Resources.ExceptionMessages.BatchOptionsMustHaveOutputStreamOrPath;
-        throw new InvalidBatchRenderingOptionsException(message);
+        throw new InvalidBatchRenderingOptionsException(message, BatchRenderingFatalErrorType.NoOutputsSpecified);
       }
       else if(this.OutputStream != null && this.OutputPath != null)
       {
         string message = Resources.ExceptionMessages.BatchOptionsMustNotHaveBothOutputStreamAndPath;
-        throw new InvalidBatchRenderingOptionsException(message);
+        throw new InvalidBatchRenderingOptionsException(message, BatchRenderingFatalErrorType.OutputCannotBeBothStreamAndPaths);
       }
     }
 
@@ -103,6 +113,13 @@ namespace CSF.Zpt.BatchRendering
     /// <summary>
     /// Initializes a new instance of the <see cref="CSF.Zpt.BatchRendering.BatchRenderingOptions"/> class.
     /// </summary>
+    /// <remarks>
+    /// <para>
+    /// The <paramref name="errorHandling"/> parameter is special.  If its value is invalid or not-recognised, then it
+    /// will be set to <see cref="BatchErrorHandlingStrategy.RaiseExceptionForAnyError"/>.  This is because our error-
+    /// handling depends upon this value, and so we can't raise an error whilst validating it.
+    /// </para>
+    /// </remarks>
     /// <param name="inputStream">Input stream.</param>
     /// <param name="outputStream">Output stream.</param>
     /// <param name="inputPaths">Input paths.</param>
@@ -110,14 +127,25 @@ namespace CSF.Zpt.BatchRendering
     /// <param name="inputSearchPattern">Input search pattern.</param>
     /// <param name="outputExtensionOverride">Output extension override.</param>
     /// <param name="ignoredPaths">Ignored paths.</param>
+    /// <param name="errorHandling">The error handling strategy.</param>
     public BatchRenderingOptions (Stream inputStream = null,
                                   Stream outputStream = null,
                                   IEnumerable<FileSystemInfo> inputPaths = null,
                                   FileSystemInfo outputPath = null,
                                   string inputSearchPattern = null,
                                   string outputExtensionOverride = null,
-                                  IEnumerable<DirectoryInfo> ignoredPaths = null)
+                                  IEnumerable<DirectoryInfo> ignoredPaths = null,
+                                  BatchErrorHandlingStrategy errorHandling = default(BatchErrorHandlingStrategy))
     {
+      if(this.ErrorHandlingStrategy.IsDefinedValue())
+      {
+        this.ErrorHandlingStrategy = errorHandling;
+      }
+      else
+      {
+        this.ErrorHandlingStrategy = BatchErrorHandlingStrategy.RaiseExceptionForAnyError;
+      }
+
       this.InputStream = inputStream;
       this.InputPaths = inputPaths?? new FileSystemInfo[0];
       this.IgnoredPaths = ignoredPaths;
@@ -126,6 +154,8 @@ namespace CSF.Zpt.BatchRendering
       this.OutputStream = outputStream;
       this.OutputPath = outputPath;
       this.OutputExtensionOverride = outputExtensionOverride;
+
+      this.ErrorHandlingStrategy = errorHandling;
 
       Validate();
     }

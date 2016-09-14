@@ -43,8 +43,17 @@
       <DependentUpon>Messages.resx</DependentUpon>
     </Compile>
     <Compile Include="VersionNumberInspector.cs" />
-    <Compile Include="BatchRenderingOptionsCreator.cs" />
-    <Compile Include="IBatchRenderingOptionsCreator.cs" />
+    <Compile Include="OptionsParsingException.cs" />
+    <Compile Include="Application.cs" />
+    <Compile Include="BatchRendering\IBatchRenderingOptionsFactory.cs" />
+    <Compile Include="BatchRendering\BatchRenderingOptionsFactory.cs" />
+    <Compile Include="Rendering\IRenderingOptionsFactory.cs" />
+    <Compile Include="Rendering\RenderingOptionsFactory.cs" />
+    <Compile Include="IParameterParserFactory.cs" />
+    <Compile Include="ParameterParserFactory.cs" />
+    <Compile Include="ICommandLineOptionsFactory.cs" />
+    <Compile Include="CommandLineOptionsFactory.cs" />
+    <Compile Include="IVersionNumberInspector.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Target Name="AfterBuild" Condition="'$(Configuration)' == 'Release'">
@@ -94,6 +103,8 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\" />
+    <Folder Include="BatchRendering\" />
+    <Folder Include="Rendering\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\Messages.resx">
