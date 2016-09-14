@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using CSF.IO;
 using CSF.Zpt.Rendering;
@@ -11,12 +12,6 @@ namespace CSF.Zpt.BatchRendering
   /// </summary>
   public class BatchRenderer : IBatchRenderer
   {
-    #region fields
-
-    private RenderingJobFactory _renderingJobFactory;
-
-    #endregion
-
     #region public API
 
     /// <summary>
@@ -25,27 +20,27 @@ namespace CSF.Zpt.BatchRendering
     /// <param name="options">Rendering options.</param>
     /// <param name="batchOptions">Batch rendering options, indicating the source and destination files.</param>
     /// <param name="mode">An optional override for the rendering mode.</param>
-    public void Render(IRenderingOptions options,
+    public virtual BatchRenderingResponse Render(IRenderingOptions options,
                        IBatchRenderingOptions batchOptions,
                        RenderingMode? mode)
     {
-      var jobs = _renderingJobFactory.GetRenderingJobs(batchOptions, mode);
+        var jobs = GetRenderingJobs(batchOptions, mode);
 
       foreach(var job in jobs)
       {
-        Action<RenderingContext> contextConfigurator = ctx => {
-          if(job.InputRootDirectory != null)
-          {
-            var docRoot = new TemplateDirectory(job.InputRootDirectory);
-            ctx.MetalModel.AddGlobal("documents", docRoot);
-          }
-        };
+          var contextConfigurator = GetContextConfigurator(job);
 
         Render(job, options, batchOptions, contextConfigurator);
       }
+
+      return new BatchRenderingResponse();
     }
 
-    private void Render(RenderingJob job,
+        #endregion
+
+        #region protected methods
+
+        protected virtual void Render(RenderingJob job,
                         IRenderingOptions options,
                         IBatchRenderingOptions batchOptions,
                         Action<RenderingContext> contextConfigurator)
@@ -59,17 +54,27 @@ namespace CSF.Zpt.BatchRendering
       }
     }
 
-    #endregion
+      protected virtual RenderingJobFactory GetRenderingJobFactory()
+      {
+            return new RenderingJobFactory();
+        }
 
-    #region constructors
+      protected virtual IEnumerable<RenderingJob> GetRenderingJobs(IBatchRenderingOptions options, RenderingMode? mode)
+      {
+          var factory = GetRenderingJobFactory();
+          return factory.GetRenderingJobs(options, mode);
+      }
 
-    /// <summary>
-    /// Initializes a new instance of the <see cref="CSF.Zpt.BatchRendering.BatchRenderer"/> class.
-    /// </summary>
-    public BatchRenderer()
-    {
-      _renderingJobFactory = new RenderingJobFactory();
-    }
+      protected virtual Action<RenderingContext> GetContextConfigurator(RenderingJob job)
+      {
+          return ctx => {
+              if(job.InputRootDirectory != null)
+              {
+                  var docRoot = new TemplateDirectory(job.InputRootDirectory);
+                  ctx.MetalModel.AddGlobal("documents", docRoot);
+              }
+          };
+        }
 
     #endregion
   }

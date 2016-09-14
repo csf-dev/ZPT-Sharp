@@ -9,6 +9,6 @@ namespace CSF.Zpt.BatchRendering
     {
         public FatalBatchRenderingErrorType FatalError { get; private set; }
 
-        public IEnumerable<BatchRenderingJobResponse> Jobs { get; private set; }
+        public IEnumerable<BatchRenderingDocumentResponse> Documents { get; private set; }
     }
 }

@@ -6,7 +6,7 @@ using CSF.IO;
 
 namespace CSF.Zpt.BatchRendering
 {
-  internal class RenderingJobFactory
+  public class RenderingJobFactory
   {
     #region fields
 
