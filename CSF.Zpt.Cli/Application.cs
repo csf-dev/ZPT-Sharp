@@ -11,6 +11,12 @@ namespace CSF.Zpt.Cli
 {
   public class Application
   {
+    #region constants
+
+    internal static readonly TraceSource TraceSource = new TraceSource(typeof(Application).Namespace);
+
+    #endregion
+
     #region fields
 
     private readonly ICommandLineOptionsFactory _commandlineOptionsFactory;
@@ -214,7 +220,7 @@ namespace CSF.Zpt.Cli
 
     private void WriteErrorAndTerminate(Exception exception, string message)
     {
-      ZptConstants.TraceSource.TraceEvent(TraceEventType.Critical, 1, exception.ToString());
+      TraceSource.TraceEvent(TraceEventType.Critical, 1, exception.ToString());
       Console.Error.WriteLine(message);
       _terminator.Terminate(ApplicationTerminator.ExpectedErrorExitCode);
 
@@ -222,7 +228,7 @@ namespace CSF.Zpt.Cli
 
     private void WriteUnexpectedErrorAndTerminate(Exception exception, string message)
     {
-      ZptConstants.TraceSource.TraceEvent(TraceEventType.Critical, 2, exception.ToString());
+      TraceSource.TraceEvent(TraceEventType.Critical, 2, exception.ToString());
       Console.Error.WriteLine(message);
       _terminator.Terminate(ApplicationTerminator.UnexpectedErrorExitCode);
     }

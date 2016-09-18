@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
+using System.Collections.Generic;
+using log4net;
 
 namespace CSF.Zpt
 {
@@ -15,8 +17,9 @@ namespace CSF.Zpt
   {
     #region fields
 
-    private static readonly string LOGGER_NAME = ZptConstants.TraceSourceName;
-    private readonly log4net.ILog _log;
+    private ILog _defaultLogger;
+    private IDictionary<string, ILog> _loggers;
+    private readonly object _syncRoot;
 
     #endregion
 
@@ -28,9 +31,11 @@ namespace CSF.Zpt
     /// <param name="message">Message.</param>
     public override void Write(string message)
     {
-      if (_log != null)
+      var log = GetLogger();
+
+      if (log != null)
       {
-        _log.Debug(message);
+        log.Debug(message);
       }
     }
 
@@ -40,9 +45,11 @@ namespace CSF.Zpt
     /// <param name="message">Message.</param>
     public override void WriteLine(string message)
     {
-      if (_log != null)
+      var log = GetLogger();
+
+      if (log != null)
       {
-        _log.Debug(message);
+        log.Debug(message);
       }
     }
 
@@ -62,45 +69,79 @@ namespace CSF.Zpt
                                     string format,
                                     params object[] args)
     {
-      if(_log != null)
-      {
-        var logFunction = GetLogFunction(eventType);
-        logFunction(format, args);
-      }
+      var logFunction = GetLogFunction(eventType);
+      var logger = GetLogger(source);
+
+      logFunction(logger, format, args);
     }
 
-    private Action<string,object[]> GetLogFunction(TraceEventType eventType)
+    /// <summary>
+    /// Writes a log message corresponding to an event.
+    /// </summary>
+    /// <param name="eventCache">Event cache.</param>
+    /// <param name="source">Source.</param>
+    /// <param name="eventType">Event type.</param>
+    /// <param name="id">Identifier.</param>
+    /// <param name="message">Message.</param>
+    public override void TraceEvent(TraceEventCache eventCache,
+                                    string source,
+                                    TraceEventType eventType,
+                                    int id,
+                                    string message)
     {
-      Action<string,object[]> output;
+      this.TraceEvent(eventCache, source, eventType, id, message, new object[0]);
+    }
+
+    private Action<ILog,string,object[]> GetLogFunction(TraceEventType eventType)
+    {
+      Action<ILog, string,object[]> output;
 
       switch(eventType)
       {
       case TraceEventType.Error:
-        output = _log.ErrorFormat;
+        output = (ILog logger, string format, object[] args) => logger.ErrorFormat(format, args);
         break;
 
       case TraceEventType.Information:
-        output = _log.InfoFormat;
+        output = (ILog logger, string format, object[] args) => logger.InfoFormat(format, args);
         break;
 
       case TraceEventType.Warning:
-        output = _log.WarnFormat;
+        output = (ILog logger, string format, object[] args) => logger.WarnFormat(format, args);
         break;
 
       case TraceEventType.Critical:
-        output = _log.FatalFormat;
+        output = (ILog logger, string format, object[] args) => logger.FatalFormat(format, args);
         break;
 
       case TraceEventType.Verbose:
-        output = _log.DebugFormat;
+        output = (ILog logger, string format, object[] args) => logger.DebugFormat(format, args);
         break;
 
       default:
-        output = _log.DebugFormat;
+        output = (ILog logger, string format, object[] args) => logger.DebugFormat(format, args);
         break;
       }
 
       return output;
+    }
+
+    private ILog GetLogger(string sourceName)
+    {
+      lock(_syncRoot)
+      {
+        if(!_loggers.ContainsKey(sourceName))
+        {
+          _loggers.Add(sourceName, LogManager.GetLogger(sourceName));
+        }
+      }
+
+      return _loggers[sourceName];
+    }
+
+    private ILog GetLogger()
+    {
+      return _defaultLogger;
     }
 
     #endregion
@@ -111,7 +152,9 @@ namespace CSF.Zpt
 
     public Log4netTraceListener(log4net.ILog log)
     {
-      _log = log?? log4net.LogManager.GetLogger(LOGGER_NAME);
+      _syncRoot = new object();
+      _loggers = new Dictionary<string, ILog>();
+      _defaultLogger = log?? LogManager.GetLogger(ZptConstants.TraceSourceName);
     }
 
     #endregion
