@@ -15,8 +15,8 @@ namespace CSF.Zpt
   {
     #region fields
 
-    private const string
-      LOGGER_NAME = "CSF.Zpt",
+    private static readonly string
+      LOGGER_NAME = ZptConstants.TraceSourceName,
       MESSAGE_FORMAT = "{0}: {1}";
     private readonly log4net.ILog _log;
 

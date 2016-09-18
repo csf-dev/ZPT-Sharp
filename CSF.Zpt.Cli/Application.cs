@@ -214,7 +214,7 @@ namespace CSF.Zpt.Cli
 
     private void WriteErrorAndTerminate(Exception exception, string message)
     {
-      Trace.TraceError(exception.ToString());
+      ZptConstants.TraceSource.TraceEvent(TraceEventType.Critical, 1, exception.ToString());
       Console.Error.WriteLine(message);
       _terminator.Terminate(ApplicationTerminator.ExpectedErrorExitCode);
 
@@ -222,7 +222,7 @@ namespace CSF.Zpt.Cli
 
     private void WriteUnexpectedErrorAndTerminate(Exception exception, string message)
     {
-      Trace.TraceError(exception.ToString());
+      ZptConstants.TraceSource.TraceEvent(TraceEventType.Critical, 2, exception.ToString());
       Console.Error.WriteLine(message);
       _terminator.Terminate(ApplicationTerminator.UnexpectedErrorExitCode);
     }

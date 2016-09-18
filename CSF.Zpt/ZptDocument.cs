@@ -142,7 +142,7 @@ namespace CSF.Zpt
       var output = this.GetRootElement();
       var context = options.CreateRootContext(output, model);
 
-      System.Diagnostics.Trace.TraceInformation(Resources.LogMessageFormats.RenderingDocument,
+      ZptConstants.TraceSource.TraceInformation(Resources.LogMessageFormats.RenderingDocument,
                                                 (output.SourceFile != null)? output.SourceFile.FullName : "<unknown>",
                                                 nameof(ZptDocument),
                                                 nameof(RenderElement));
@@ -171,10 +171,12 @@ namespace CSF.Zpt
       }
       catch(Exception ex)
       {
-        System.Diagnostics.Trace.TraceError(Resources.LogMessageFormats.UnexpectedRenderingException,
+        ZptConstants.TraceSource.TraceEvent(System.Diagnostics.TraceEventType.Error,
+                                            3,
+                                            Resources.LogMessageFormats.UnexpectedRenderingException,
                                             nameof(ZptDocument),
-                                            nameof(RenderElement));
-        System.Diagnostics.Trace.TraceError(ex.ToString());
+                                            nameof(RenderElement),
+                                            ex.ToString());
         throw;
       }
 

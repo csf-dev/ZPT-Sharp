@@ -167,32 +167,38 @@ namespace CSF.Zpt.Metal
 
     private void LogMacroUsage(IZptElement defineMacro, IZptElement useMacro)
     {
-      System.Diagnostics.Debug.WriteLine(Resources.LogMessageFormats.MacroUsage,
-                                         defineMacro.GetMetalAttribute(ZptConstants.Metal.DefineMacroAttribute).Value,
-                                         useMacro.GetFullFilePathAndLocation(),
-                                         defineMacro.GetFullFilePathAndLocation(),
-                                         nameof(MacroExpander),
-                                         nameof(LogMacroUsage));
+      ZptConstants.TraceSource.TraceEvent(System.Diagnostics.TraceEventType.Verbose,
+                                          4,
+                                          Resources.LogMessageFormats.MacroUsage,
+                                          defineMacro.GetMetalAttribute(ZptConstants.Metal.DefineMacroAttribute).Value,
+                                          useMacro.GetFullFilePathAndLocation(),
+                                          defineMacro.GetFullFilePathAndLocation(),
+                                          nameof(MacroExpander),
+                                          nameof(LogMacroUsage));
     }
 
     private void LogMacroExtension(IZptElement defineMacro, IZptElement extendedMacro)
     {
-      System.Diagnostics.Debug.WriteLine(Resources.LogMessageFormats.MacroExtension,
-                                         defineMacro.GetMetalAttribute(ZptConstants.Metal.ExtendMacroAttribute).Value,
-                                         extendedMacro.GetFullFilePathAndLocation(),
-                                         defineMacro.GetFullFilePathAndLocation(),
-                                         nameof(MacroExpander),
-                                         nameof(LogMacroExtension));
+      ZptConstants.TraceSource.TraceEvent(System.Diagnostics.TraceEventType.Verbose,
+                                          4,
+                                          Resources.LogMessageFormats.MacroExtension,
+                                          defineMacro.GetMetalAttribute(ZptConstants.Metal.ExtendMacroAttribute).Value,
+                                          extendedMacro.GetFullFilePathAndLocation(),
+                                          defineMacro.GetFullFilePathAndLocation(),
+                                          nameof(MacroExpander),
+                                          nameof(LogMacroExtension));
     }
 
     private void LogSlotFilling(IZptElement defineSlot, IZptElement fillSlot)
     {
-      System.Diagnostics.Debug.WriteLine(Resources.LogMessageFormats.SlotFilling,
-                                         fillSlot.GetMetalAttribute(ZptConstants.Metal.FillSlotAttribute).Value,
-                                         defineSlot.GetFullFilePathAndLocation(),
-                                         fillSlot.GetFullFilePathAndLocation(),
-                                         nameof(MacroExpander),
-                                         nameof(LogSlotFilling));
+      ZptConstants.TraceSource.TraceEvent(System.Diagnostics.TraceEventType.Verbose,
+                                          4,
+                                          Resources.LogMessageFormats.SlotFilling,
+                                          fillSlot.GetMetalAttribute(ZptConstants.Metal.FillSlotAttribute).Value,
+                                          defineSlot.GetFullFilePathAndLocation(),
+                                          fillSlot.GetFullFilePathAndLocation(),
+                                          nameof(MacroExpander),
+                                          nameof(LogSlotFilling));
     }
 
     #endregion
