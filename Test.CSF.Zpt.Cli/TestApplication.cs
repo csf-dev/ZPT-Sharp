@@ -19,10 +19,17 @@ namespace Test.CSF.Zpt.Cli
     private IFixture _autofixture;
     private Mock<IApplicationTerminator> _terminator;
     private Mock<IBatchRenderer> _renderer;
+    private log4net.ILog _logger;
 
     #endregion
 
     #region setup/teardown
+
+    [TestFixtureSetUp]
+    public void FixtureSetup()
+    {
+      _logger = log4net.LogManager.GetLogger(this.GetType());
+    }
 
     [SetUp]
     public void Setup()
@@ -161,6 +168,63 @@ The invalid type is:FOO BAR
     }
 
     [Test]
+    public void WritesErrorToStdErrAndTerminates_WhenInvalidKeywordOptionSpecified()
+    {
+      // Arrange
+      var optionname = "FOO BAR";
+      var optionsFactory = new Mock<IRenderingOptionsFactory>();
+      optionsFactory
+        .Setup(x => x.GetOptions(It.IsAny<CommandLineOptions>()))
+        .Throws(new InvalidKeywordOptionsException() { InvalidOption = optionname });
+
+      var sut = new Application(renderer: _renderer.Object,
+                                renderingOptionsFactory: optionsFactory.Object,
+                                terminator: _terminator.Object);
+      var options = new CommandLineOptions();
+
+      // Act
+      var errorOutput = ExerciseSutWithStdErrRedirection(sut, options);
+
+      // Assert
+      string expected = @"ERROR: An option specified using the --keyword-options argument is in an invalid format.
+Where specified, options must be in the format 'OPTION1=VALUE1;OPTION2=VALUE2' and so on.
+The invalid option is:FOO BAR
+";
+      Assert.AreEqual(expected, errorOutput, "Correct message written");
+      _terminator.Verify(x => x.Terminate(ApplicationTerminator.ExpectedErrorExitCode),
+                         Times.Once(),
+                         "Application should be terminated after writing message");
+    }
+
+    [Test]
+    public void WritesErrorToStdErrAndTerminates_WhenInvalidEncodingSpecified()
+    {
+      // Arrange
+      var optionname = "FOO BAR";
+      var optionsFactory = new Mock<IRenderingOptionsFactory>();
+      optionsFactory
+        .Setup(x => x.GetOptions(It.IsAny<CommandLineOptions>()))
+        .Throws<InvalidOutputEncodingException>();
+
+      var sut = new Application(renderer: _renderer.Object,
+                                renderingOptionsFactory: optionsFactory.Object,
+                                terminator: _terminator.Object);
+      var options = new CommandLineOptions();
+
+      // Act
+      var errorOutput = ExerciseSutWithStdErrRedirection(sut, options);
+
+      // Assert
+      string expected = @"ERROR: The encoding specified by the --output-encoding argument is invalid.
+The encoding (where specified) must be valid encoding 'WebName'.  Consult the manual for more information.
+";
+      Assert.AreEqual(expected, errorOutput, "Correct message written");
+      _terminator.Verify(x => x.Terminate(ApplicationTerminator.ExpectedErrorExitCode),
+                         Times.Once(),
+                         "Application should be terminated after writing message");
+    }
+
+    [Test]
     public void WritesErrorToStdErrAndTerminates_WhenInvalidRenderingContextFactorySpecified()
     {
       // Arrange
@@ -183,6 +247,99 @@ Where specified, this type must exist and have a parameterless constructor.
 ";
       Assert.AreEqual(expected, errorOutput, "Correct message written");
       _terminator.Verify(x => x.Terminate(ApplicationTerminator.ExpectedErrorExitCode),
+                         Times.Once(),
+                         "Application should be terminated after writing message");
+    }
+
+    [Test]
+    public void WritesErrorToStdErrAndTerminates_WhenInvalidOutputPathSpecified()
+    {
+      // Arrange
+      var batchFactory = new Mock<IBatchRenderingOptionsFactory>();
+      batchFactory
+        .Setup(x => x.GetBatchOptions(It.IsAny<CommandLineOptions>()))
+        .Throws(new InvalidOutputPathException());
+
+      var sut = new Application(renderer: _renderer.Object,
+                                batchOptionsFactory: batchFactory.Object,
+                                terminator: _terminator.Object);
+      var options = new CommandLineOptions();
+
+      // Act
+      var errorOutput = ExerciseSutWithStdErrRedirection(sut, options);
+
+      // Assert
+      string expected = @"ERROR: The specified output path is invalid. Where a directory path is specified, the directory must exist.
+Where a file path is specified, the file's parent directory must exist.  Please consult the manual for further guidance.
+";
+      Assert.AreEqual(expected, errorOutput, "Correct message written");
+      _terminator.Verify(x => x.Terminate(ApplicationTerminator.ExpectedErrorExitCode),
+                         Times.Once(),
+                         "Application should be terminated after writing message");
+    }
+
+    [Test]
+    public void WritesErrorToStdErrAndTerminates_WhenUnexpectedErrorOccursParsingOptions()
+    {
+      // Arrange
+      var batchFactory = new Mock<IBatchRenderingOptionsFactory>();
+      batchFactory
+        .Setup(x => x.GetBatchOptions(It.IsAny<CommandLineOptions>()))
+        .Throws<InvalidOperationException>();
+
+      var sut = new Application(renderer: _renderer.Object,
+                                batchOptionsFactory: batchFactory.Object,
+                                terminator: _terminator.Object);
+      var options = new CommandLineOptions();
+
+      // Act
+      var errorOutput = ExerciseSutWithStdErrRedirection(sut, options);
+
+      // Assert
+      string expected = @"ERROR: The application has encountered a fatal unexpected error; please report this as a bug at
+https://github.com/csf-dev/ZPT-Sharp
+
+Please include the information below with your bug report
+---
+";
+      _logger.Debug("Actual message written to the STDERR:");
+      _logger.Debug(errorOutput);
+
+      Assert.That(errorOutput.StartsWith(expected), "Correct message written (only the start of the message)");
+      _terminator.Verify(x => x.Terminate(ApplicationTerminator.UnexpectedErrorExitCode),
+                         Times.Once(),
+                         "Application should be terminated after writing message");
+    }
+
+    [Test]
+    public void WritesErrorToStdErrAndTerminates_WhenUnexpectedErrorOccursDuringRendering()
+    {
+      // Arrange
+      var sut = new Application(renderer: _renderer.Object,
+                                terminator: _terminator.Object);
+      var options = new CommandLineOptions();
+
+      _renderer
+        .Setup(x => x.Render(It.IsAny<IRenderingOptions>(),
+                             It.IsAny<IBatchRenderingOptions>(),
+                             It.IsAny<RenderingMode?>()))
+        .Throws<InvalidOperationException>();
+
+      // Act
+      var errorOutput = ExerciseSutWithStdErrRedirection(sut, options);
+
+      // Assert
+      string expected = @"ERROR: The application has encountered a fatal unexpected error; please report this as a bug at
+https://github.com/csf-dev/ZPT-Sharp
+
+Please include the information below with your bug report
+---
+";
+      _logger.Debug("Actual message written to the STDERR:");
+      _logger.Debug(errorOutput);
+
+      Assert.That(errorOutput.StartsWith(expected), "Correct message written (only the start of the message)");
+      _terminator.Verify(x => x.Terminate(ApplicationTerminator.UnexpectedErrorExitCode),
                          Times.Once(),
                          "Application should be terminated after writing message");
     }

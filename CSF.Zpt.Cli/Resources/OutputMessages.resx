@@ -82,10 +82,25 @@ The invalid type is:{0}</value>
     <value>ERROR: The type named using the --rendering-context-factory argument could not be instantiated.
 Where specified, this type must exist and have a parameterless constructor.</value>
   </data>
+  <data name="InvalidOutputPath" xml:space="preserve">
+    <value>ERROR: The specified output path is invalid. Where a directory path is specified, the directory must exist.
+Where a file path is specified, the file's parent directory must exist.  Please consult the manual for further guidance.</value>
+  </data>
+  <data name="InvalidKeywordOptionFormat" xml:space="preserve">
+    <value>ERROR: An option specified using the --keyword-options argument is in an invalid format.
+Where specified, options must be in the format 'OPTION1=VALUE1;OPTION2=VALUE2' and so on.
+The invalid option is:{0}</value>
+  </data>
+  <data name="InvalidEncoding" xml:space="preserve">
+    <value>ERROR: The encoding specified by the --output-encoding argument is invalid.
+The encoding (where specified) must be valid encoding 'WebName'.  Consult the manual for more information.</value>
+  </data>
+  <data name="UnexpectedErrorFormat" xml:space="preserve">
+    <value>ERROR: The application has encountered a fatal unexpected error; please report this as a bug at
+https://github.com/csf-dev/ZPT-Sharp
 
-
-  <data name="UnexpectedError" xml:space="preserve">
-    <value>*** There has been an unexpected fatal application error.  Please report this as a bug!
-*** Visit https://github.com/csf-dev/ZPT-Sharp for information</value>
+Please include the information below with your bug report
+---
+{0}</value>
   </data>
 </root>

@@ -64,6 +64,24 @@ namespace CSF.Zpt.Cli.Resources {
             }
         }
         
+        internal static string InvalidOutputFile {
+            get {
+                return ResourceManager.GetString("InvalidOutputFile", resourceCulture);
+            }
+        }
+        
+        internal static string InvalidKeywordOption {
+            get {
+                return ResourceManager.GetString("InvalidKeywordOption", resourceCulture);
+            }
+        }
+        
+        internal static string InvalidEncoding {
+            get {
+                return ResourceManager.GetString("InvalidEncoding", resourceCulture);
+            }
+        }
+        
         internal static string BatchOptionsCreationExceptionMessage {
             get {
                 return ResourceManager.GetString("BatchOptionsCreationExceptionMessage", resourceCulture);

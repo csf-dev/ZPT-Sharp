@@ -79,7 +79,7 @@ namespace CSF.Zpt.Cli
     {
       FileSystemInfo output;
 
-      if(options.OutputPath == null)
+      if(String.IsNullOrEmpty(options.OutputPath))
       {
         output = null;
       }
@@ -92,8 +92,24 @@ namespace CSF.Zpt.Cli
         }
         else
         {
-          var file = new FileInfo(absolutePath);
-          output = file.Directory.Exists? file : null;
+          FileInfo file;
+          try
+          {
+            file = new FileInfo(absolutePath);
+          }
+          catch(Exception ex)
+          {
+            throw new InvalidOutputPathException(ExceptionMessages.InvalidOutputFile, ex);
+          }
+
+          if(file.Directory.Exists)
+          {
+            output = file;
+          }
+          else
+          {
+            throw new InvalidOutputPathException(ExceptionMessages.InvalidOutputFile);
+          }
         }
       }
 

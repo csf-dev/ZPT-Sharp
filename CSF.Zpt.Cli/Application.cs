@@ -65,8 +65,41 @@ namespace CSF.Zpt.Cli
         return;
       }
 
-      var response = _renderer.Render(renderingOptions, batchOptions, renderingMode);
-      // TODO: Do something with the response
+      var response = Render(renderingOptions, batchOptions, renderingMode);
+      WriteResponseInfo(response, options);
+    }
+
+    private IBatchRenderingResponse Render(IRenderingOptions options,
+                                           IBatchRenderingOptions batchOptions,
+                                           RenderingMode? renderingMode)
+    {
+      IBatchRenderingResponse output = null;
+
+      try
+      {
+        output = _renderer.Render(options, batchOptions, renderingMode);
+      }
+      catch(Exception ex)
+      {
+        string message = String.Format(OutputMessages.UnexpectedErrorFormat, ex.ToString());
+        WriteUnexpectedErrorAndTerminate(ex, message);
+      }
+
+      return output;
+    }
+
+    private void WriteResponseInfo(IBatchRenderingResponse response,
+                                   CommandLineOptions options)
+    {
+      if(options == null)
+      {
+        throw new ArgumentNullException(nameof(options));
+      }
+
+      if(response != null)
+      {
+        // TODO: Do something with the response
+      }
     }
 
     private CommandLineOptions GetCommandlineOptions(string[] args)
@@ -106,14 +139,26 @@ namespace CSF.Zpt.Cli
         string message = String.Format(OutputMessages.InvalidInputPathFormat, ex.Path);
         WriteErrorAndTerminate(ex, message);
       }
+      catch(InvalidOutputPathException ex)
+      {
+        WriteErrorAndTerminate(ex, OutputMessages.InvalidOutputPath);
+      }
+      catch(InvalidKeywordOptionsException ex)
+      {
+        string message = String.Format(OutputMessages.InvalidKeywordOptionFormat, ex.InvalidOption);
+        WriteErrorAndTerminate(ex, message);
+      }
+      catch(InvalidOutputEncodingException ex)
+      {
+        WriteErrorAndTerminate(ex, OutputMessages.InvalidEncoding);
+      }
       catch(OptionsParsingException ex)
       {
         WriteErrorAndTerminate(ex, OutputMessages.CannotParseOptionsError);
       }
       catch(CouldNotCreateContextVisitorException ex)
       {
-        string message = String.Format(OutputMessages.CouldNotCreateContextVisitorFormat,
-                                       ex.InvalidClassname);
+        string message = String.Format(OutputMessages.CouldNotCreateContextVisitorFormat, ex.InvalidClassname);
         WriteErrorAndTerminate(ex, message);
       }
       catch(CouldNotCreateRenderingContextFactoryException ex)
@@ -122,7 +167,8 @@ namespace CSF.Zpt.Cli
       }
       catch(Exception ex)
       {
-        WriteUnexpectedErrorAndTerminate(ex, OutputMessages.UnexpectedError);
+        string message = String.Format(OutputMessages.UnexpectedErrorFormat, ex.ToString());
+        WriteUnexpectedErrorAndTerminate(ex, message);
       }
 
       return output;

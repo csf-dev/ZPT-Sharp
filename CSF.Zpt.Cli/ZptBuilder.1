@@ -50,9 +50,11 @@ Note that this default value will mean that the only input files matched will be
 .TP
 .BR \-\-output\fR=\fIPATH\fR,\fB\-o
 Sets the application to emit output to the filesystem, instead of using standard output.
-If a file path is specified then all output is redirected to that file.
-If a directory path is specified then each rendered input will be rendered in a separate output file.
+If the path indicates a single file then all output is redirected to that file.
+In this case, the file will be created if it does not already exist, as long as its parent directory exists.
 .IP
+If the path to a directory is specified then each rendered document will be rendered to a separate file within the output directory.
+In this case, the output directory path must exist or else an error will be raised.
 Where a directory path is used, the names of the created files are based upon the name of the input files; the option \fB\-\-output\-filename\-extension\fR controls their extension.
 Additionally, if a directory path is used for the input, then the output files are created using a directory structure mimicking the relative path from the input directory.
 Consider the following:

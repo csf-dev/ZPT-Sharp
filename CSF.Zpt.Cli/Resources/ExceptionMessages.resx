@@ -21,6 +21,15 @@
   <data name="InvalidInputFile" xml:space="preserve">
     <value>The input files must all be valid.</value>
   </data>
+  <data name="InvalidOutputFile" xml:space="preserve">
+    <value>The output file (where specified) must be valid.</value>
+  </data>
+  <data name="InvalidKeywordOption" xml:space="preserve">
+    <value>The keyword options (where specified) must be in a valid format.</value>
+  </data>
+  <data name="InvalidEncoding" xml:space="preserve">
+    <value>The output encoding (where specified) must be in a correct format.</value>
+  </data>
   <data name="BatchOptionsCreationExceptionMessage" xml:space="preserve">
     <value>There was an unexpected error creating the batch processing options.</value>
   </data>

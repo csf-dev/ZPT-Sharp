@@ -30,13 +30,14 @@ namespace CSF.Zpt.Cli
     {
       var contextVisitors = _contextVisitorFactory.CreateMany(options.ContextVisitorClassNames);
       var contextFactory = _contextFactoryFactory.Create(options.RenderingContextFactoryClassName);
+      var encoding = GetEncoding(options.OutputEncoding);
 
       AddKeywordOptions(options, contextFactory);
 
       return new RenderingOptions(contextVisitors,
                                   contextFactory,
                                   addSourceFileAnnotation: options.EnableSourceAnnotation,
-                                  outputEncoding: Encoding.GetEncoding(options.OutputEncoding),
+                                  outputEncoding: encoding,
                                   omitXmlDeclaration: options.OmitXmlDeclarations);
     }
 
@@ -46,16 +47,40 @@ namespace CSF.Zpt.Cli
       {
         var keywordOptions = options.KeywordOptions
           .Split(KEYWORD_OPTION_SEPARATOR)
-          .Select(x => {
-          var keyAndValue = x.Split(KEY_VALUE_SEPARATOR);
-          return (keyAndValue.Length == 2)? new { Key = keyAndValue[0], Value = keyAndValue[1] } : null;
-        })
-          .Where(x => x != null);
+          .Select(GetKeywordOption);
 
         foreach(var option in keywordOptions)
         {
-          contextFactory.AddKeywordOption(option.Key, option.Value);
+          contextFactory.AddKeywordOption(option.Item1, option.Item2);
         }
+      }
+    }
+
+    private Tuple<string,string> GetKeywordOption(string input)
+    {
+      var keyAndValue = input.Split(new [] { KEY_VALUE_SEPARATOR }, 2);
+
+      if(keyAndValue.Length == 2)
+      {
+        return new Tuple<string,string>(keyAndValue[0], keyAndValue[1]);
+      }
+      else
+      {
+        throw new InvalidKeywordOptionsException() {
+          InvalidOption = input
+        };
+      }
+    }
+
+    private Encoding GetEncoding(string name)
+    {
+      try
+      {
+        return Encoding.GetEncoding(name);
+      }
+      catch(Exception ex)
+      {
+        throw new InvalidOutputEncodingException(ExceptionMessages.InvalidEncoding, ex);
       }
     }
 

@@ -88,9 +88,27 @@ namespace CSF.Zpt.Cli.Resources {
             }
         }
         
-        internal static string UnexpectedError {
+        internal static string InvalidOutputPath {
             get {
-                return ResourceManager.GetString("UnexpectedError", resourceCulture);
+                return ResourceManager.GetString("InvalidOutputPath", resourceCulture);
+            }
+        }
+        
+        internal static string InvalidKeywordOptionFormat {
+            get {
+                return ResourceManager.GetString("InvalidKeywordOptionFormat", resourceCulture);
+            }
+        }
+        
+        internal static string InvalidEncoding {
+            get {
+                return ResourceManager.GetString("InvalidEncoding", resourceCulture);
+            }
+        }
+        
+        internal static string UnexpectedErrorFormat {
+            get {
+                return ResourceManager.GetString("UnexpectedErrorFormat", resourceCulture);
             }
         }
     }

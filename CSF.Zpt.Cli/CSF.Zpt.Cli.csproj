@@ -58,6 +58,9 @@
       <DependentUpon>OutputMessages.resx</DependentUpon>
     </Compile>
     <Compile Include="Exceptions\InvalidInputPathException.cs" />
+    <Compile Include="Exceptions\InvalidOutputPathException.cs" />
+    <Compile Include="Exceptions\InvalidKeywordOptionsException.cs" />
+    <Compile Include="Exceptions\InvalidOutputEncodingException.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Target Name="AfterBuild" Condition="'$(Configuration)' == 'Release'">
