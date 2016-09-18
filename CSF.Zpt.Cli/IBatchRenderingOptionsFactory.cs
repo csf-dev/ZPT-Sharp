@@ -3,7 +3,7 @@ using CSF.Zpt.BatchRendering;
 
 namespace CSF.Zpt.Cli
 {
-  public interface IBatchRenderingOptionsCreator
+  public interface IBatchRenderingOptionsFactory
   {
     IBatchRenderingOptions GetBatchOptions(CommandLineOptions options);
   }

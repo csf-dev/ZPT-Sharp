@@ -15,9 +15,12 @@ namespace CSF.Zpt.BatchRendering
     /// <param name="options">Rendering options.</param>
     /// <param name="batchOptions">Batch rendering options, indicating the source and destination files.</param>
     /// <param name="mode">An optional override for the rendering mode.</param>
-    void Render(IRenderingOptions options,
-                IBatchRenderingOptions batchOptions,
-                RenderingMode? mode = null);
+    /// <returns>
+    /// An object instance indicating the outcome of the rendering.
+    /// </returns>
+    IBatchRenderingResponse Render(IRenderingOptions options,
+                                   IBatchRenderingOptions batchOptions,
+                                   RenderingMode? mode = null);
   }
 }
 

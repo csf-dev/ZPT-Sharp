@@ -66,38 +66,6 @@ namespace CSF.Zpt.BatchRendering
 
     #endregion
 
-    #region methods
-
-    /// <summary>
-    /// Validates the state of the current instance, raising an exception if it is not valid.
-    /// </summary>
-    private void Validate()
-    {
-      if(this.InputStream == null && !this.InputPaths.Any())
-      {
-        string message = Resources.ExceptionMessages.BatchOptionsMustHaveInputStreamOrPaths;
-        throw new InvalidBatchRenderingOptionsException(message);
-      }
-      else if(this.InputStream != null && this.InputPaths.Any())
-      {
-        string message = Resources.ExceptionMessages.BatchOptionsMustNotHaveBothInputStreamAndPaths;
-        throw new InvalidBatchRenderingOptionsException(message);
-      }
-
-      if(this.OutputStream == null && this.OutputPath == null)
-      {
-        string message = Resources.ExceptionMessages.BatchOptionsMustHaveOutputStreamOrPath;
-        throw new InvalidBatchRenderingOptionsException(message);
-      }
-      else if(this.OutputStream != null && this.OutputPath != null)
-      {
-        string message = Resources.ExceptionMessages.BatchOptionsMustNotHaveBothOutputStreamAndPath;
-        throw new InvalidBatchRenderingOptionsException(message);
-      }
-    }
-
-    #endregion
-
     #region constructor
 
     /// <summary>
@@ -126,8 +94,6 @@ namespace CSF.Zpt.BatchRendering
       this.OutputStream = outputStream;
       this.OutputPath = outputPath;
       this.OutputExtensionOverride = outputExtensionOverride;
-
-      Validate();
     }
 
     #endregion

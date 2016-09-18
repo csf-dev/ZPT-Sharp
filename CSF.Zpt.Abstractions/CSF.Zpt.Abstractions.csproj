@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -82,13 +82,13 @@
     <Compile Include="BatchRendering\IBatchRenderingOptions.cs" />
     <Compile Include="BatchRendering\InvalidBatchRenderingOptionsException.cs" />
     <Compile Include="BatchRendering\BatchRenderingException.cs" />
+    <Compile Include="BatchRendering\BatchRenderingDocumentErrorType.cs" />
+    <Compile Include="BatchRendering\BatchRenderingFatalErrorType.cs" />
+    <Compile Include="BatchRendering\IBatchRenderingResponse.cs" />
+    <Compile Include="BatchRendering\IBatchRenderingDocumentResponse.cs" />
+    <Compile Include="Rendering\CouldNotCreateContextVisitorException.cs" />
+    <Compile Include="Rendering\CouldNotCreateRenderingContextFactoryException.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
-  <ItemGroup>
-    <Folder Include="Rendering\" />
-    <Folder Include="Tales\" />
-    <Folder Include="Tal\" />
-    <Folder Include="Metal\" />
-    <Folder Include="BatchRendering\" />
-  </ItemGroup>
+  <ItemGroup />
 </Project>

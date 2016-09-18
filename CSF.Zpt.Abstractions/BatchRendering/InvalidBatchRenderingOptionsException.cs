@@ -6,13 +6,24 @@ namespace CSF.Zpt.BatchRendering
   /// Exception raised when a constructed instance of <see cref="IBatchRenderingOptions"/> is invalid.
   /// </summary>
   [Serializable]
-  public class InvalidBatchRenderingOptionsException : Exception
+  public class InvalidBatchRenderingOptionsException : BatchRenderingException
   {
     /// <summary>
     /// Initializes a new instance of the <see cref="T:InvalidBatchRenderingOptionsException"/> class
     /// </summary>
     public InvalidBatchRenderingOptionsException()
     {
+    }
+
+    /// <summary>
+    /// Initializes a new instance of the <see cref="CSF.Zpt.BatchRendering.InvalidBatchRenderingOptionsException"/> class.
+    /// </summary>
+    /// <param name="message">A <see cref="T:System.String"/> that describes the exception.</param>
+    /// <param name="fatalError">A value indicating the nature of a fatal error.</param>
+    public InvalidBatchRenderingOptionsException(string message,
+                                                 BatchRenderingFatalErrorType fatalError) : base(message, fatalError)
+    {
+      
     }
 
     /// <summary>

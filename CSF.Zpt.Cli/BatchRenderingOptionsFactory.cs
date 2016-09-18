@@ -3,14 +3,17 @@ using System.IO;
 using System.Linq;
 using System.Collections.Generic;
 using CSF.Zpt.BatchRendering;
+using CSF.Zpt.Cli.Exceptions;
+using CSF.Zpt.Cli.Resources;
 
 namespace CSF.Zpt.Cli
 {
-  public class BatchRenderingOptionsCreator : IBatchRenderingOptionsCreator
+  public class BatchRenderingOptionsFactory : IBatchRenderingOptionsFactory
   {
     #region constants
 
     private const char IGNORED_PATH_SEPARATOR = ';';
+    private const string STD_INPUT_SIGNIFIER = "-";
 
     #endregion
 
@@ -42,8 +45,13 @@ namespace CSF.Zpt.Cli
     private FileSystemInfo GetInputFile(string path)
     {
       FileSystemInfo output;
-      var absolutePath = MakeAbsolutePath(path);
 
+      if(path == STD_INPUT_SIGNIFIER)
+      {
+        return null;
+      }
+
+      var absolutePath = MakeAbsolutePath(path);
       if(File.Exists(absolutePath))
       {
         output = new FileInfo(absolutePath);
@@ -54,7 +62,9 @@ namespace CSF.Zpt.Cli
       }
       else
       {
-        output = null;
+        throw new InvalidInputPathException(ExceptionMessages.InvalidInputFile) {
+          Path = path
+        };
       }
 
       return output;
@@ -62,14 +72,14 @@ namespace CSF.Zpt.Cli
 
     private bool ReadFromStandardInput(IEnumerable<FileSystemInfo> inputFiles)
     {
-      return !inputFiles.Any() || inputFiles.All(x => x.Name == "-");
+      return inputFiles.Count() == 1 && inputFiles.All(x => x == null);
     }
 
     private FileSystemInfo GetOutputPath(CommandLineOptions options)
     {
       FileSystemInfo output;
 
-      if(options.OutputPath == null)
+      if(String.IsNullOrEmpty(options.OutputPath))
       {
         output = null;
       }
@@ -82,8 +92,24 @@ namespace CSF.Zpt.Cli
         }
         else
         {
-          var file = new FileInfo(absolutePath);
-          output = file.Directory.Exists? file : null;
+          FileInfo file;
+          try
+          {
+            file = new FileInfo(absolutePath);
+          }
+          catch(Exception ex)
+          {
+            throw new InvalidOutputPathException(ExceptionMessages.InvalidOutputFile, ex);
+          }
+
+          if(file.Directory.Exists)
+          {
+            output = file;
+          }
+          else
+          {
+            throw new InvalidOutputPathException(ExceptionMessages.InvalidOutputFile);
+          }
         }
       }
 
@@ -103,9 +129,9 @@ namespace CSF.Zpt.Cli
         output = options.IgnoredPaths
           .Split(IGNORED_PATH_SEPARATOR)
           .Select(x => {
-          var absolutePath = MakeAbsolutePath(x);
-          return Directory.Exists(absolutePath)? new DirectoryInfo(absolutePath) : null;
-        });
+            var absolutePath = MakeAbsolutePath(x);
+            return Directory.Exists(absolutePath)? new DirectoryInfo(absolutePath) : null;
+          });
       }
 
       return output;
@@ -120,7 +146,7 @@ namespace CSF.Zpt.Cli
 
     #region constructor
 
-    public BatchRenderingOptionsCreator()
+    public BatchRenderingOptionsFactory()
     {
       _relativeBase = new DirectoryInfo(System.Environment.CurrentDirectory);
     }

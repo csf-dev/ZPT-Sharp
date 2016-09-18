@@ -1,7 +1,7 @@
 using System;
 using NUnit.Framework;
 
-namespace Test.CSF.Zpt
+namespace Test.CSF.Zpt.Cli
 {
   [SetUpFixture]
   public class GlobalSetupFixture

@@ -15,18 +15,18 @@
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>bin\Debug</OutputPath>
-    <DefineConstants>DEBUG;</DefineConstants>
+    <DefineConstants>DEBUG;TRACE;</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <Externalconsole>true</Externalconsole>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>full</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release</OutputPath>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <Externalconsole>true</Externalconsole>
+    <DefineConstants>TRACE;</DefineConstants>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -37,14 +37,30 @@
       <Link>CommonAssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="AssemblyInfo.cs" />
-    <Compile Include="EntryPoint.cs" />
     <Compile Include="CommandLineOptions.cs" />
-    <Compile Include="Resources\Messages.Designer.cs">
-      <DependentUpon>Messages.resx</DependentUpon>
-    </Compile>
     <Compile Include="VersionNumberInspector.cs" />
-    <Compile Include="BatchRenderingOptionsCreator.cs" />
-    <Compile Include="IBatchRenderingOptionsCreator.cs" />
+    <Compile Include="Application.cs" />
+    <Compile Include="ICommandLineOptionsFactory.cs" />
+    <Compile Include="CommandLineOptionsFactory.cs" />
+    <Compile Include="IVersionNumberInspector.cs" />
+    <Compile Include="IApplicationTerminator.cs" />
+    <Compile Include="ApplicationTerminator.cs" />
+    <Compile Include="Exceptions\OptionsParsingException.cs" />
+    <Compile Include="BatchRenderingOptionsFactory.cs" />
+    <Compile Include="IBatchRenderingOptionsFactory.cs" />
+    <Compile Include="IRenderingOptionsFactory.cs" />
+    <Compile Include="RenderingOptionsFactory.cs" />
+    <Compile Include="Exceptions\RenderingModeDeterminationException.cs" />
+    <Compile Include="Resources\ExceptionMessages.Designer.cs">
+      <DependentUpon>ExceptionMessages.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\OutputMessages.Designer.cs">
+      <DependentUpon>OutputMessages.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Exceptions\InvalidInputPathException.cs" />
+    <Compile Include="Exceptions\InvalidOutputPathException.cs" />
+    <Compile Include="Exceptions\InvalidKeywordOptionsException.cs" />
+    <Compile Include="Exceptions\InvalidOutputEncodingException.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Target Name="AfterBuild" Condition="'$(Configuration)' == 'Release'">
@@ -94,11 +110,16 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\" />
+    <Folder Include="Exceptions\" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Resources\Messages.resx">
+    <EmbeddedResource Include="Resources\ExceptionMessages.resx">
       <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Messages.Designer.cs</LastGenOutput>
+      <LastGenOutput>ExceptionMessages.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\OutputMessages.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>OutputMessages.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
