@@ -28,12 +28,20 @@
     <WarningLevel>4</WarningLevel>
     <ConsolePause>false</ConsolePause>
   </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Deploy|AnyCPU' ">
+    <DebugType>full</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+  </PropertyGroup>
   <Target Name="Build">
-    <Exec Command=".\build-doc-website '$(WebsiteUrlRoot)' '$(ReleaseVersion)'" Condition="'$(OS)' == 'Unix' And  '$(Configuration)' == 'Release'">
+    <Exec Command=".\build-doc-website '$(WebsiteUrlRoot)' '$(ReleaseVersion)'" Condition="'$(OS)' == 'Unix' And  '$(Configuration)' == 'Deploy'">
     </Exec>
-    <Exec Command=".\build-doxygen-output" Condition="'$(OS)' == 'Unix' And  '$(Configuration)' == 'Release'">
+    <Exec Command=".\build-doxygen-output" Condition="'$(OS)' == 'Unix' And  '$(Configuration)' == 'Deploy'">
     </Exec>
-    <Exec Command=".\assemble-documentation" Condition="'$(OS)' == 'Unix' And  '$(Configuration)' == 'Release'">
+    <Exec Command=".\assemble-documentation" Condition="'$(OS)' == 'Unix' And  '$(Configuration)' == 'Deploy'">
     </Exec>
   </Target>
   <ItemGroup>

@@ -6,7 +6,7 @@
     <Packages>
       <Packages>
         <Package name="API Only (Windows zip)">
-          <Builder targetFile="..\CSF.Zpt-api-only.zip" platform="Windows" configuration="Release" ctype="BinariesZipPackageBuilder">
+          <Builder targetFile="..\CSF.Zpt-api-only.zip" platform="Windows" configuration="Deploy" ctype="BinariesZipPackageBuilder">
             <ChildEntries>
               <SolutionItemReference path="..\CSF.Zpt\CSF.Zpt.csproj" />
               <SolutionItemReference path="..\CSF.Zpt.Impl.HtmlHAP\CSF.Zpt.Impl.HtmlHAP.csproj" />
@@ -17,7 +17,7 @@
           </Builder>
         </Package>
         <Package name="MVC ViewEngine (Windows zip)">
-          <Builder targetFile="..\CSF.Zpt.MVC.zip" platform="Windows" configuration="Release" ctype="BinariesZipPackageBuilder">
+          <Builder targetFile="..\CSF.Zpt.MVC.zip" platform="Windows" configuration="Deploy" ctype="BinariesZipPackageBuilder">
             <ChildEntries>
               <SolutionItemReference path="..\CSF.Zpt.Impl.XmlLegacy\CSF.Zpt.Impl.XmlLegacy.csproj" />
               <SolutionItemReference path="..\CSF.Zpt.Impl.XmlLinq\CSF.Zpt.Impl.XmlLinq.csproj" />
@@ -28,7 +28,7 @@
           </Builder>
         </Package>
         <Package name="ZptBuilder (Windows zip)">
-          <Builder targetFile="..\ZptBuilder.zip" platform="Windows" configuration="Release" ctype="BinariesZipPackageBuilder">
+          <Builder targetFile="..\ZptBuilder.zip" platform="Windows" configuration="Deploy" ctype="BinariesZipPackageBuilder">
             <ChildEntries>
               <SolutionItemReference path="..\CSF.Zpt.Impl.XmlLegacy\CSF.Zpt.Impl.XmlLegacy.csproj" />
               <SolutionItemReference path="..\CSF.Zpt.Impl.XmlLinq\CSF.Zpt.Impl.XmlLinq.csproj" />
@@ -42,7 +42,7 @@
           </Builder>
         </Package>
         <Package name="Everything (Windows zip)">
-          <Builder targetFile="..\CSF.Zpt-complete.zip" platform="Windows" configuration="Release" ctype="BinariesZipPackageBuilder">
+          <Builder targetFile="..\CSF.Zpt-complete.zip" platform="Windows" configuration="Deploy" ctype="BinariesZipPackageBuilder">
             <ChildEntries>
               <SolutionItemReference path="..\CSF.Zpt.Impl.XmlLegacy\CSF.Zpt.Impl.XmlLegacy.csproj" />
               <SolutionItemReference path="..\CSF.Zpt.Impl.XmlLinq\CSF.Zpt.Impl.XmlLinq.csproj" />
