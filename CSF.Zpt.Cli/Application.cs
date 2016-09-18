@@ -13,7 +13,6 @@ namespace CSF.Zpt.Cli
   {
     #region fields
 
-    private readonly string[] _args;
     private readonly ICommandLineOptionsFactory _commandlineOptionsFactory;
     private readonly IBatchRenderingOptionsFactory _batchOptionsFactory;
     private readonly IRenderingOptionsFactory _renderingOptionsFactory;
@@ -27,22 +26,33 @@ namespace CSF.Zpt.Cli
     /// <summary>
     /// Perform the work of the application.
     /// </summary>
-    public void Begin()
+    public void Begin(string[] args)
     {
-      var commandlineOptions = GetCommandlineOptions();
+      if(args == null)
+      {
+        throw new ArgumentNullException(nameof(args));
+      }
 
-      HandleInformationalActions(commandlineOptions);
-
-      var batchOptions = GetBatchOptions(commandlineOptions);
-      var renderingOptions = GetRenderingOptions(commandlineOptions);
-      var renderingMode = GetRenderingMode(commandlineOptions);
-
-      _renderer.Render(renderingOptions, batchOptions, renderingMode);
+      var commandlineOptions = GetCommandlineOptions(args);
+      Begin(commandlineOptions);
     }
 
-    private CommandLineOptions GetCommandlineOptions()
+    public void Begin(CommandLineOptions options)
     {
-      return SafeGetValue<CommandLineOptions>(() => _commandlineOptionsFactory.GetOptions(_args));
+      HandleInformationalActions(options);
+
+      var batchOptions = GetBatchOptions(options);
+      var renderingOptions = GetRenderingOptions(options);
+      var renderingMode = GetRenderingMode(options);
+
+      var response = _renderer.Render(renderingOptions, batchOptions, renderingMode);
+
+      // TODO: Do something with the response
+    }
+
+    private CommandLineOptions GetCommandlineOptions(string[] args)
+    {
+      return SafeGetValue<CommandLineOptions>(() => _commandlineOptionsFactory.GetOptions(args));
     }
 
     private IBatchRenderingOptions GetBatchOptions(CommandLineOptions options)
@@ -109,25 +119,31 @@ namespace CSF.Zpt.Cli
     /// <param name="parameterParser">A parameter parser.</param>
     /// <param name="contextVisitorFactory">A context visitor factory.</param>
     /// <param name="contextFactoryFactory">A rendering context factory factory.</param>
-    public Application(string[] args,
-                       ICommandLineOptionsFactory commandlineOptionsFactory = null,
+    public Application(ICommandLineOptionsFactory commandlineOptionsFactory = null,
                        IBatchRenderingOptionsFactory batchOptionsFactory = null,
                        IRenderingOptionsFactory renderingOptionsFactory = null,
                        IBatchRenderer renderer = null,
                        IVersionNumberInspector versionInspector = null)
     {
-      if(args == null)
-      {
-        throw new ArgumentNullException(nameof(args));
-      }
-
-      _args = args;
-
       _commandlineOptionsFactory = commandlineOptionsFactory?? new CommandLineOptionsFactory();
       _batchOptionsFactory = batchOptionsFactory?? new BatchRenderingOptionsFactory();
       _renderingOptionsFactory = renderingOptionsFactory?? new RenderingOptionsFactory();
       _renderer = renderer?? new BatchRenderer();
       _versionInspector = versionInspector?? new VersionNumberInspector();
+    }
+
+    #endregion
+
+    #region static methods
+
+    /// <summary>
+    /// The entry point of the program, where the program control starts and ends.
+    /// </summary>
+    /// <param name="args">The command-line arguments.</param>
+    public static void Main(string[] args)
+    {
+      var app = new Application();
+      app.Begin(args);
     }
 
     #endregion

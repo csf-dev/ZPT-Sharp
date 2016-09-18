@@ -37,7 +37,6 @@
       <Link>CommonAssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="AssemblyInfo.cs" />
-    <Compile Include="EntryPoint.cs" />
     <Compile Include="CommandLineOptions.cs" />
     <Compile Include="Resources\Messages.Designer.cs">
       <DependentUpon>Messages.resx</DependentUpon>
@@ -49,8 +48,6 @@
     <Compile Include="BatchRendering\BatchRenderingOptionsFactory.cs" />
     <Compile Include="Rendering\IRenderingOptionsFactory.cs" />
     <Compile Include="Rendering\RenderingOptionsFactory.cs" />
-    <Compile Include="IParameterParserFactory.cs" />
-    <Compile Include="ParameterParserFactory.cs" />
     <Compile Include="ICommandLineOptionsFactory.cs" />
     <Compile Include="CommandLineOptionsFactory.cs" />
     <Compile Include="IVersionNumberInspector.cs" />

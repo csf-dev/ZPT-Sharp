@@ -60,6 +60,7 @@
     <Folder Include="Util\" />
     <Folder Include="Util\Autofixture\" />
     <Folder Include="Tales\" />
+    <Folder Include="Cli\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="GlobalSetupFixture.cs" />
@@ -105,6 +106,7 @@
     <Compile Include="Tales\TestFilesystemDirectory.cs" />
     <Compile Include="ModelIntegrationTests.cs" />
     <Compile Include="IntegrationTestBase.cs" />
+    <Compile Include="Cli\TestApplication.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Metal\MetalVisitorIntegrationTests.1.xml" />
@@ -140,6 +142,10 @@
     <ProjectReference Include="..\CSF.Zpt.Log4net\CSF.Zpt.Log4net.csproj">
       <Project>{81044439-06CF-44E2-BBF2-3800F1DEB5B1}</Project>
       <Name>CSF.Zpt.Log4net</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CSF.Zpt.Cli\CSF.Zpt.Cli.csproj">
+      <Project>{4DD64666-DBEF-4AD5-BDB0-3EB3C70A6E83}</Project>
+      <Name>CSF.Zpt.Cli</Name>
     </ProjectReference>
   </ItemGroup>
 </Project>
