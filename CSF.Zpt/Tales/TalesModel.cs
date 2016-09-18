@@ -97,11 +97,13 @@ namespace CSF.Zpt.Tales
       var evaluator = EvaluatorRegistry.GetEvaluator(talesExpression);
       var output = evaluator.Evaluate(talesExpression, context, this);
 
-      System.Diagnostics.Debug.WriteLine(Resources.LogMessageFormats.ExpressionEvaluated,
-                                         talesExpression.ToString(),
-                                         output.Value?? "<null>",
-                                         nameof(TalesModel),
-                                         nameof(Evaluate));
+      ZptConstants.TraceSource.TraceEvent(System.Diagnostics.TraceEventType.Verbose,
+                                          4,
+                                          Resources.LogMessageFormats.ExpressionEvaluated,
+                                          talesExpression.ToString(),
+                                          output.Value?? "<null>",
+                                          nameof(TalesModel),
+                                          nameof(Evaluate));
 
       return output;
     }

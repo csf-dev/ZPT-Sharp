@@ -1,5 +1,6 @@
 ﻿using System;
 using CSF.Zpt.Rendering;
+using System.Diagnostics;
 
 namespace CSF.Zpt
 {
@@ -136,6 +137,16 @@ namespace CSF.Zpt
     /// Gets a special singleton value that indicates the "cancel the current action" token.
     /// </summary>
     public static readonly object CancellationToken = new CancellationToken();
+
+    /// <summary>
+    /// Gets the name of the <see cref="TraceSource"/> which is used for all ZPT-related messages.
+    /// </summary>
+    public static readonly string TraceSourceName = typeof(ZptConstants).Namespace;
+
+    /// <summary>
+    /// Gets a <c>System.Diagnostics.TraceSource</c> instance which is used for all ZPT-related messages.
+    /// </summary>
+    public static readonly TraceSource TraceSource = new TraceSource(TraceSourceName);
   }
 }
 

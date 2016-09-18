@@ -31,6 +31,7 @@
     <value>[{1}.{2}]: Error handled by 'tal:on-error' directive at {0}.</value>
   </data>
   <data name="UnexpectedRenderingException" xml:space="preserve">
-    <value>[{0}.{1}]: An unexpected, uhandled exception was encountered rendering the document:</value>
+    <value>[{0}.{1}]: An unexpected, uhandled exception was encountered rendering the document:
+{2}</value>
   </data>
 </root>

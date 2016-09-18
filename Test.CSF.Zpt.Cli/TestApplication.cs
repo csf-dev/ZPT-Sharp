@@ -19,7 +19,10 @@ namespace Test.CSF.Zpt.Cli
     private IFixture _autofixture;
     private Mock<IApplicationTerminator> _terminator;
     private Mock<IBatchRenderer> _renderer;
+
+    #pragma warning disable 414
     private log4net.ILog _logger;
+    #pragma warning restore 414
 
     #endregion
 
@@ -301,8 +304,6 @@ https://github.com/csf-dev/ZPT-Sharp
 Please include the information below with your bug report
 ---
 ";
-      _logger.Debug("Actual message written to the STDERR:");
-      _logger.Debug(errorOutput);
 
       Assert.That(errorOutput.StartsWith(expected), "Correct message written (only the start of the message)");
       _terminator.Verify(x => x.Terminate(ApplicationTerminator.UnexpectedErrorExitCode),
@@ -334,8 +335,6 @@ https://github.com/csf-dev/ZPT-Sharp
 Please include the information below with your bug report
 ---
 ";
-      _logger.Debug("Actual message written to the STDERR:");
-      _logger.Debug(errorOutput);
 
       Assert.That(errorOutput.StartsWith(expected), "Correct message written (only the start of the message)");
       _terminator.Verify(x => x.Terminate(ApplicationTerminator.UnexpectedErrorExitCode),
@@ -365,8 +364,6 @@ Please include the information below with your bug report
       string expected = @"ERROR: You must specify at least one input path (or use '-' to signify reading from
 standard input).  Use 'ZptBuilder.exe --help', or consult the manual.
 ";
-      _logger.Debug("Actual message written to the STDERR:");
-      _logger.Debug(errorOutput);
 
       Assert.That(errorOutput.StartsWith(expected), "Correct message written (only the start of the message)");
       _terminator.Verify(x => x.Terminate(ApplicationTerminator.ExpectedErrorExitCode),
@@ -396,8 +393,6 @@ standard input).  Use 'ZptBuilder.exe --help', or consult the manual.
       string expected = @"ERROR: The inputs must either be a list of paths OR '-' (indicating the use of standard
 input),  not both.  Use 'ZptBuilder.exe --help', or consult the manual.
 ";
-      _logger.Debug("Actual message written to the STDERR:");
-      _logger.Debug(errorOutput);
 
       Assert.That(errorOutput.StartsWith(expected), "Correct message written (only the start of the message)");
       _terminator.Verify(x => x.Terminate(ApplicationTerminator.ExpectedErrorExitCode),

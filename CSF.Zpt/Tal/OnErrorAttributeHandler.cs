@@ -57,7 +57,7 @@ namespace CSF.Zpt.Tal
           output = new AttributeHandlingResult(new [] { context }, true);
         }
 
-        System.Diagnostics.Trace.TraceInformation(Resources.LogMessageFormats.TalErrorHandled,
+        ZptConstants.TraceSource.TraceInformation(Resources.LogMessageFormats.TalErrorHandled,
                                                   context.Element.GetFullFilePathAndLocation(),
                                                   nameof(OnErrorAttributeHandler),
                                                   nameof(Handle));
