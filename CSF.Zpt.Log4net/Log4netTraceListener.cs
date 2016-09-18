@@ -15,9 +15,7 @@ namespace CSF.Zpt
   {
     #region fields
 
-    private static readonly string
-      LOGGER_NAME = ZptConstants.TraceSourceName,
-      MESSAGE_FORMAT = "{0}: {1}";
+    private static readonly string LOGGER_NAME = ZptConstants.TraceSourceName;
     private readonly log4net.ILog _log;
 
     #endregion
@@ -67,7 +65,7 @@ namespace CSF.Zpt
       if(_log != null)
       {
         var logFunction = GetLogFunction(eventType);
-        logFunction(String.Format(MESSAGE_FORMAT, source, format), args);
+        logFunction(format, args);
       }
     }
 
