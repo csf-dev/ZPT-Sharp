@@ -2,10 +2,16 @@
 
 namespace CSF.Zpt.Rendering
 {
-  
+  /// <summary>
+  /// Exception raised when the construction of an <see cref="IContextVisitor"/> fails.
+  /// </summary>
   [Serializable]
   public class CouldNotCreateContextVisitorException : Exception
   {
+    /// <summary>
+    /// Gets or sets the name of the type which was used unsuccessfully to try and crveate the context visitor.
+    /// </summary>
+    /// <value>The invalid classname.</value>
     public string InvalidClassname
     {
       get {

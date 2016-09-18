@@ -71,13 +71,6 @@ namespace CSF.Zpt.BatchRendering
     /// <summary>
     /// Initializes a new instance of the <see cref="CSF.Zpt.BatchRendering.BatchRenderingOptions"/> class.
     /// </summary>
-    /// <remarks>
-    /// <para>
-    /// The <paramref name="errorHandling"/> parameter is special.  If its value is invalid or not-recognised, then it
-    /// will be set to <see cref="BatchErrorHandlingStrategy.RaiseExceptionForAnyError"/>.  This is because our error-
-    /// handling depends upon this value, and so we can't raise an error whilst validating it.
-    /// </para>
-    /// </remarks>
     /// <param name="inputStream">Input stream.</param>
     /// <param name="outputStream">Output stream.</param>
     /// <param name="inputPaths">Input paths.</param>
@@ -85,7 +78,6 @@ namespace CSF.Zpt.BatchRendering
     /// <param name="inputSearchPattern">Input search pattern.</param>
     /// <param name="outputExtensionOverride">Output extension override.</param>
     /// <param name="ignoredPaths">Ignored paths.</param>
-    /// <param name="errorHandling">The error handling strategy.</param>
     public BatchRenderingOptions (Stream inputStream = null,
                                   Stream outputStream = null,
                                   IEnumerable<FileSystemInfo> inputPaths = null,

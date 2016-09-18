@@ -2,10 +2,16 @@
 
 namespace CSF.Zpt.Rendering
 {
-  
+  /// <summary>
+  /// Exception raised when the construction of an <see cref="IRenderingContextFactory"/> fails.
+  /// </summary>
   [Serializable]
   public class CouldNotCreateRenderingContextFactoryException : Exception
   {
+    /// <summary>
+    /// Gets or sets the name of the type which was used unsuccessfully to try and crveate the rendering context factory.
+    /// </summary>
+    /// <value>The invalid classname.</value>
     public string InvalidClassname
     {
       get {

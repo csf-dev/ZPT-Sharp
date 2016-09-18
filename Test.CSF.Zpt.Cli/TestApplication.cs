@@ -200,7 +200,6 @@ The invalid option is:FOO BAR
     public void WritesErrorToStdErrAndTerminates_WhenInvalidEncodingSpecified()
     {
       // Arrange
-      var optionname = "FOO BAR";
       var optionsFactory = new Mock<IRenderingOptionsFactory>();
       optionsFactory
         .Setup(x => x.GetOptions(It.IsAny<CommandLineOptions>()))

@@ -52,6 +52,13 @@ namespace CSF.Zpt.BatchRendering
 
     #region protected methods
 
+    /// <summary>
+    /// Renders a single rendering job and returns a response.
+    /// </summary>
+    /// <param name="job">The job to render.</param>
+    /// <param name="options">Rendering options.</param>
+    /// <param name="batchOptions">Batch rendering options.</param>
+    /// <param name="contextConfigurator">Context configurator.</param>
     protected virtual IBatchRenderingDocumentResponse Render(IRenderingJob job,
                                                              IRenderingOptions options,
                                                              IBatchRenderingOptions batchOptions,
@@ -66,6 +73,14 @@ namespace CSF.Zpt.BatchRendering
       }
     }
 
+    /// <summary>
+    /// Renders a single ZPT document and returns a response.
+    /// </summary>
+    /// <param name="doc">The document to render.</param>
+    /// <param name="outputStream">The output stream.</param>
+    /// <param name="options">Rendering options.</param>
+    /// <param name="contextConfigurator">Context configurator.</param>
+    /// <param name="outputInfo">Output info.</param>
     protected virtual IBatchRenderingDocumentResponse Render(IZptDocument doc,
                                                              Stream outputStream,
                                                              IRenderingOptions options,
@@ -82,11 +97,22 @@ namespace CSF.Zpt.BatchRendering
       return new BatchRenderingDocumentResponse(doc.GetSourceInfo(), outputInfo);
     }
 
+    /// <summary>
+    /// Gets the rendering jobs from the rendering job factory.
+    /// </summary>
+    /// <returns>The rendering jobs.</returns>
+    /// <param name="options">Batch rendering options.</param>
+    /// <param name="mode">An optional rendering mode override.</param>
     protected virtual IEnumerable<IRenderingJob> GetRenderingJobs(IBatchRenderingOptions options, RenderingMode? mode)
     {
       return _jobFactory.GetRenderingJobs(options, mode);
     }
 
+    /// <summary>
+    /// Gets the rendering context configurator for a given job.
+    /// </summary>
+    /// <returns>The context configurator.</returns>
+    /// <param name="job">Job.</param>
     protected virtual Action<RenderingContext> GetContextConfigurator(IRenderingJob job)
     {
       return ctx => {
@@ -98,6 +124,10 @@ namespace CSF.Zpt.BatchRendering
       };
     }
 
+    /// <summary>
+    /// Validates the batch rendering options.
+    /// </summary>
+    /// <param name="options">Options.</param>
     protected virtual void ValidateBatchOptions(IBatchRenderingOptions options)
     {
       if(options.InputStream == null && !options.InputPaths.Any())
@@ -123,16 +153,33 @@ namespace CSF.Zpt.BatchRendering
       }
     }
 
+    /// <summary>
+    /// Gets the document for a given rendering job.
+    /// </summary>
+    /// <returns>The document.</returns>
+    /// <param name="job">Job.</param>
     protected virtual IZptDocument GetDocument(IRenderingJob job)
     {
       return job.GetDocument();
     }
 
+    /// <summary>
+    /// Gets the output info for a given rendering job.
+    /// </summary>
+    /// <returns>The output info.</returns>
+    /// <param name="job">Job.</param>
+    /// <param name="batchOptions">Batch options.</param>
     protected virtual string GetOutputInfo(IRenderingJob job, IBatchRenderingOptions batchOptions)
     {
       return job.GetOutputInfo(batchOptions);
     }
 
+    /// <summary>
+    /// Gets the output stream for a given rendering job.
+    /// </summary>
+    /// <returns>The output stream.</returns>
+    /// <param name="job">Job.</param>
+    /// <param name="batchOptions">Batch options.</param>
     protected virtual Stream GetOutputStream(IRenderingJob job, IBatchRenderingOptions batchOptions)
     {
       return job.GetOutputStream(batchOptions);
@@ -142,6 +189,10 @@ namespace CSF.Zpt.BatchRendering
 
     #region constructor
 
+    /// <summary>
+    /// Initializes a new instance of the <see cref="CSF.Zpt.BatchRendering.BatchRenderer"/> class.
+    /// </summary>
+    /// <param name="renderingJobFactory">Rendering job factory.</param>
     public BatchRenderer(IRenderingJobFactory renderingJobFactory = null)
     {
       _jobFactory = renderingJobFactory?? new RenderingJobFactory();
