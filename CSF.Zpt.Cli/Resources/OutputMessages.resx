@@ -20,7 +20,7 @@ Selected options:
 --help,-h
     Display this usage statement and exit
 
---version,-v
+--version
     Display version information and exit
 
 --html,-t
@@ -62,13 +62,28 @@ available at:
     <value>ZptBuilder.exe v{0}</value>
   </data>
   <data name="CannotParseOptionsError" xml:space="preserve">
-    <value>ERROR: The command-line parameters provided were not be understood.
-Use 'ZptBuilder.exe --help' for help on providing correct parameters, or consult the manual.</value>
+    <value>ERROR: The command-line arguments provided were not be understood.
+Use 'ZptBuilder.exe --help' for help on providing correct arguments, or consult the manual.</value>
   </data>
   <data name="HtmlAndXmlModesMutuallyExclusiveError" xml:space="preserve">
-    <value>ERROR: The '--html' and '--xml' options are mutually exclusive and may not be used together.
-Use 'ZptBuilder.exe --help' for help on providing correct parameters, or consult the manual.</value>
+    <value>ERROR: The '--html' and '--xml' arguments are mutually exclusive and may not be used together.
+Use 'ZptBuilder.exe --help' for help on providing correct arguments, or consult the manual.</value>
   </data>
+  <data name="InvalidInputPathFormat" xml:space="preserve">
+    <value>ERROR: A specified input path is invalid, perhaps it does not exist or you have insufficient permissions to access it?
+The problematic path is:{0}</value>
+  </data>
+  <data name="CouldNotCreateContextVisitorFormat" xml:space="preserve">
+    <value>ERROR: A type named using the --context-visitors argument could not be instantiated.
+Where specified, these types must exist and have parameterless constructors.
+The invalid type is:{0}</value>
+  </data>
+  <data name="CouldNotCreateRenderingContextFactory" xml:space="preserve">
+    <value>ERROR: The type named using the --rendering-context-factory argument could not be instantiated.
+Where specified, this type must exist and have a parameterless constructor.</value>
+  </data>
+
+
   <data name="UnexpectedError" xml:space="preserve">
     <value>*** There has been an unexpected fatal application error.  Please report this as a bug!
 *** Visit https://github.com/csf-dev/ZPT-Sharp for information</value>

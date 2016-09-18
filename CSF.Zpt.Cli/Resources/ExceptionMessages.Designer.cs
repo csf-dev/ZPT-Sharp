@@ -58,6 +58,12 @@ namespace CSF.Zpt.Cli.Resources {
             }
         }
         
+        internal static string InvalidInputFile {
+            get {
+                return ResourceManager.GetString("InvalidInputFile", resourceCulture);
+            }
+        }
+        
         internal static string BatchOptionsCreationExceptionMessage {
             get {
                 return ResourceManager.GetString("BatchOptionsCreationExceptionMessage", resourceCulture);

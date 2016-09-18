@@ -31,7 +31,7 @@ namespace CSF.Zpt.Cli
         .AddFlag(   x => x.EnableSourceAnnotation,            longName: "annotate")
         .AddFlag(   x => x.OmitXmlDeclarations,               longName: "no-xml-declaration")
         .AddFlag(   x => x.ShowUsageStatement,                longName: "help",                       shortName: "h")
-        .AddFlag(   x => x.ShowVersionInfo,                   longName: "version",                    shortName: "v")
+        .AddFlag(   x => x.ShowVersionInfo,                   longName: "version")
         .AddValue(  x => x.InputFilenamePattern,              longName: "input-filename-pattern",     shortName: "p", optional: false)
         .AddValue(  x => x.OutputPath,                        longName: "output",                     shortName: "o", optional: false)
         .AddValue(  x => x.OutputFilenameExtension,           longName: "output-filename-extension",  shortName: "e", optional: false)

@@ -13,6 +13,7 @@ namespace CSF.Zpt.Cli
     #region constants
 
     private const char IGNORED_PATH_SEPARATOR = ';';
+    private const string STD_INPUT_SIGNIFIER = "-";
 
     #endregion
 
@@ -44,8 +45,13 @@ namespace CSF.Zpt.Cli
     private FileSystemInfo GetInputFile(string path)
     {
       FileSystemInfo output;
-      var absolutePath = MakeAbsolutePath(path);
 
+      if(path == STD_INPUT_SIGNIFIER)
+      {
+        return null;
+      }
+
+      var absolutePath = MakeAbsolutePath(path);
       if(File.Exists(absolutePath))
       {
         output = new FileInfo(absolutePath);
@@ -56,7 +62,9 @@ namespace CSF.Zpt.Cli
       }
       else
       {
-        output = null;
+        throw new InvalidInputPathException(ExceptionMessages.InvalidInputFile) {
+          Path = path
+        };
       }
 
       return output;
@@ -64,7 +72,7 @@ namespace CSF.Zpt.Cli
 
     private bool ReadFromStandardInput(IEnumerable<FileSystemInfo> inputFiles)
     {
-      return !inputFiles.Any() || inputFiles.All(x => x.Name == "-");
+      return !inputFiles.Any() || inputFiles.All(x => x == null);
     }
 
     private FileSystemInfo GetOutputPath(CommandLineOptions options)
@@ -105,9 +113,9 @@ namespace CSF.Zpt.Cli
         output = options.IgnoredPaths
           .Split(IGNORED_PATH_SEPARATOR)
           .Select(x => {
-          var absolutePath = MakeAbsolutePath(x);
-          return Directory.Exists(absolutePath)? new DirectoryInfo(absolutePath) : null;
-        });
+            var absolutePath = MakeAbsolutePath(x);
+            return Directory.Exists(absolutePath)? new DirectoryInfo(absolutePath) : null;
+          });
       }
 
       return output;

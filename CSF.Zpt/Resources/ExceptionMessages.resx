@@ -112,4 +112,8 @@ Filename:{0}</value>
   <data name="InputMustBeFileIfOutputIsDirectory" xml:space="preserve">
     <value>If the batch rendering output is set to a directory path, the input must be from a file and not a stream.</value>
   </data>
+  <data name="CouldNotInstantiateTypeFormat" xml:space="preserve">
+    <value>A requested implementation of `{0}' could not be created.
+Type name:{1}</value>
+  </data>
 </root>

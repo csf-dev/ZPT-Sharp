@@ -70,6 +70,24 @@ namespace CSF.Zpt.Cli.Resources {
             }
         }
         
+        internal static string InvalidInputPathFormat {
+            get {
+                return ResourceManager.GetString("InvalidInputPathFormat", resourceCulture);
+            }
+        }
+        
+        internal static string CouldNotCreateContextVisitorFormat {
+            get {
+                return ResourceManager.GetString("CouldNotCreateContextVisitorFormat", resourceCulture);
+            }
+        }
+        
+        internal static string CouldNotCreateRenderingContextFactory {
+            get {
+                return ResourceManager.GetString("CouldNotCreateRenderingContextFactory", resourceCulture);
+            }
+        }
+        
         internal static string UnexpectedError {
             get {
                 return ResourceManager.GetString("UnexpectedError", resourceCulture);

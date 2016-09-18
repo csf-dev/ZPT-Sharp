@@ -18,6 +18,9 @@
   <data name="HtmlAndXmlModesMutuallyExclusive" xml:space="preserve">
     <value>The 'ForceHtmlMode' and 'ForceMmlMode' properties on a created `CSF.Zpt.Cli.CommandLineOptions' must not both be set to 'true'.</value>
   </data>
+  <data name="InvalidInputFile" xml:space="preserve">
+    <value>The input files must all be valid.</value>
+  </data>
   <data name="BatchOptionsCreationExceptionMessage" xml:space="preserve">
     <value>There was an unexpected error creating the batch processing options.</value>
   </data>

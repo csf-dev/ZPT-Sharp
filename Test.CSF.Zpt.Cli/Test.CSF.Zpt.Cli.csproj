@@ -77,5 +77,8 @@
   <ItemGroup>
     <Compile Include="TestApplication.cs" />
     <Compile Include="GlobalSetupFixture.cs" />
+    <Compile Include="..\Common\CommonAssemblyInfo.cs">
+      <Link>CommonAssemblyInfo.cs</Link>
+    </Compile>
   </ItemGroup>
 </Project>

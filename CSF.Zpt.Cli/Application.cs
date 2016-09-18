@@ -99,18 +99,30 @@ namespace CSF.Zpt.Cli
       }
       catch(RenderingModeDeterminationException ex)
       {
-        Trace.TraceError(ex.ToString());
-        WriteErrorAndTerminate(OutputMessages.HtmlAndXmlModesMutuallyExclusiveError);
+        WriteErrorAndTerminate(ex, OutputMessages.HtmlAndXmlModesMutuallyExclusiveError);
+      }
+      catch(InvalidInputPathException ex)
+      {
+        string message = String.Format(OutputMessages.InvalidInputPathFormat, ex.Path);
+        WriteErrorAndTerminate(ex, message);
       }
       catch(OptionsParsingException ex)
       {
-        Trace.TraceError(ex.ToString());
-        WriteErrorAndTerminate(OutputMessages.CannotParseOptionsError);
+        WriteErrorAndTerminate(ex, OutputMessages.CannotParseOptionsError);
+      }
+      catch(CouldNotCreateContextVisitorException ex)
+      {
+        string message = String.Format(OutputMessages.CouldNotCreateContextVisitorFormat,
+                                       ex.InvalidClassname);
+        WriteErrorAndTerminate(ex, message);
+      }
+      catch(CouldNotCreateRenderingContextFactoryException ex)
+      {
+        WriteErrorAndTerminate(ex, OutputMessages.CouldNotCreateRenderingContextFactory);
       }
       catch(Exception ex)
       {
-        Trace.TraceError(ex.ToString());
-        WriteUnexpectedErrorAndTerminate(OutputMessages.UnexpectedError);
+        WriteUnexpectedErrorAndTerminate(ex, OutputMessages.UnexpectedError);
       }
 
       return output;
@@ -136,15 +148,17 @@ namespace CSF.Zpt.Cli
       return informationalActionPerformed;
     }
 
-    private void WriteErrorAndTerminate(string message)
+    private void WriteErrorAndTerminate(Exception exception, string message)
     {
+      Trace.TraceError(exception.ToString());
       Console.Error.WriteLine(message);
       _terminator.Terminate(ApplicationTerminator.ExpectedErrorExitCode);
 
     }
 
-    private void WriteUnexpectedErrorAndTerminate(string message)
+    private void WriteUnexpectedErrorAndTerminate(Exception exception, string message)
     {
+      Trace.TraceError(exception.ToString());
       Console.Error.WriteLine(message);
       _terminator.Terminate(ApplicationTerminator.UnexpectedErrorExitCode);
     }

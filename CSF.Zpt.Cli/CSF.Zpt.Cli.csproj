@@ -57,6 +57,7 @@
     <Compile Include="Resources\OutputMessages.Designer.cs">
       <DependentUpon>OutputMessages.resx</DependentUpon>
     </Compile>
+    <Compile Include="Exceptions\InvalidInputPathException.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Target Name="AfterBuild" Condition="'$(Configuration)' == 'Release'">

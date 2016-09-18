@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Reflection;
 using CSF.Zpt.Tales;
+using CSF.Zpt.Resources;
 
 namespace CSF.Zpt.Rendering
 {
@@ -29,7 +30,12 @@ namespace CSF.Zpt.Rendering
       }
       else
       {
-        output = new TalesRenderingContextFactory();
+        string message = String.Format(ExceptionMessages.CouldNotInstantiateTypeFormat,
+                                       typeof(IRenderingContextFactory).Name,
+                                       className);
+        throw new CouldNotCreateRenderingContextFactoryException(message) {
+          InvalidClassname = className
+        };
       }
 
       return output;

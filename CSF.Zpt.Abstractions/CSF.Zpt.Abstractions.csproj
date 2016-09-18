@@ -86,6 +86,8 @@
     <Compile Include="BatchRendering\BatchRenderingFatalErrorType.cs" />
     <Compile Include="BatchRendering\IBatchRenderingResponse.cs" />
     <Compile Include="BatchRendering\IBatchRenderingDocumentResponse.cs" />
+    <Compile Include="Rendering\CouldNotCreateContextVisitorException.cs" />
+    <Compile Include="Rendering\CouldNotCreateRenderingContextFactoryException.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup />
