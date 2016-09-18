@@ -20,7 +20,7 @@ namespace CSF.Zpt.BatchRendering
     /// Gets the nature of an error relating to the current document, if applicable.
     /// </summary>
     /// <value>The type of the error.</value>
-    RenderingException Exception { get; }
+    ZptException Exception { get; }
 
     /// <summary>
     /// Gets the input location used for the current document.

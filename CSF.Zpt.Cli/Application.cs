@@ -79,6 +79,24 @@ namespace CSF.Zpt.Cli
       {
         output = _renderer.Render(options, batchOptions, renderingMode);
       }
+      catch(InvalidBatchRenderingOptionsException ex)
+      {
+        switch(ex.FatalError.Value)
+        {
+        case BatchRenderingFatalErrorType.NoInputsSpecified:
+          WriteErrorAndTerminate(ex, OutputMessages.NoInputs);
+          break;
+
+        case BatchRenderingFatalErrorType.InputCannotBeBothStreamAndPaths:
+          WriteErrorAndTerminate(ex, OutputMessages.CannotInputFromStdInAndPaths);
+          break;
+
+        default:
+          string message = String.Format(OutputMessages.UnexpectedErrorFormat, ex.ToString());
+          WriteUnexpectedErrorAndTerminate(ex, message);
+          break;
+        }
+      }
       catch(Exception ex)
       {
         string message = String.Format(OutputMessages.UnexpectedErrorFormat, ex.ToString());

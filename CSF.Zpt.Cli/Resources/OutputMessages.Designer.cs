@@ -106,6 +106,18 @@ namespace CSF.Zpt.Cli.Resources {
             }
         }
         
+        internal static string NoInputs {
+            get {
+                return ResourceManager.GetString("NoInputs", resourceCulture);
+            }
+        }
+        
+        internal static string CannotInputFromStdInAndPaths {
+            get {
+                return ResourceManager.GetString("CannotInputFromStdInAndPaths", resourceCulture);
+            }
+        }
+        
         internal static string UnexpectedErrorFormat {
             get {
                 return ResourceManager.GetString("UnexpectedErrorFormat", resourceCulture);

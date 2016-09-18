@@ -344,6 +344,68 @@ Please include the information below with your bug report
                          "Application should be terminated after writing message");
     }
 
+    [Test]
+    public void WritesErrorToStdErrAndTerminates_WhenNoInputsSpecified()
+    {
+      // Arrange
+      var sut = new Application(renderer: _renderer.Object,
+                                terminator: _terminator.Object);
+      var options = new CommandLineOptions();
+
+      _renderer
+        .Setup(x => x.Render(It.IsAny<IRenderingOptions>(),
+                             It.IsAny<IBatchRenderingOptions>(),
+                             It.IsAny<RenderingMode?>()))
+        .Throws(new InvalidBatchRenderingOptionsException(_autofixture.Create<string>(),
+                                                          BatchRenderingFatalErrorType.NoInputsSpecified));
+
+      // Act
+      var errorOutput = ExerciseSutWithStdErrRedirection(sut, options);
+
+      // Assert
+      string expected = @"ERROR: You must specify at least one input path (or use '-' to signify reading from
+standard input).  Use 'ZptBuilder.exe --help', or consult the manual.
+";
+      _logger.Debug("Actual message written to the STDERR:");
+      _logger.Debug(errorOutput);
+
+      Assert.That(errorOutput.StartsWith(expected), "Correct message written (only the start of the message)");
+      _terminator.Verify(x => x.Terminate(ApplicationTerminator.ExpectedErrorExitCode),
+                         Times.Once(),
+                         "Application should be terminated after writing message");
+    }
+
+    [Test]
+    public void WritesErrorToStdErrAndTerminates_WhenTooManyInputsSpecified()
+    {
+      // Arrange
+      var sut = new Application(renderer: _renderer.Object,
+                                terminator: _terminator.Object);
+      var options = new CommandLineOptions();
+
+      _renderer
+        .Setup(x => x.Render(It.IsAny<IRenderingOptions>(),
+                             It.IsAny<IBatchRenderingOptions>(),
+                             It.IsAny<RenderingMode?>()))
+        .Throws(new InvalidBatchRenderingOptionsException(_autofixture.Create<string>(),
+                                                          BatchRenderingFatalErrorType.InputCannotBeBothStreamAndPaths));
+
+      // Act
+      var errorOutput = ExerciseSutWithStdErrRedirection(sut, options);
+
+      // Assert
+      string expected = @"ERROR: The inputs must either be a list of paths OR '-' (indicating the use of standard
+input),  not both.  Use 'ZptBuilder.exe --help', or consult the manual.
+";
+      _logger.Debug("Actual message written to the STDERR:");
+      _logger.Debug(errorOutput);
+
+      Assert.That(errorOutput.StartsWith(expected), "Correct message written (only the start of the message)");
+      _terminator.Verify(x => x.Terminate(ApplicationTerminator.ExpectedErrorExitCode),
+                         Times.Once(),
+                         "Application should be terminated after writing message");
+    }
+
     #endregion
 
     #region methods

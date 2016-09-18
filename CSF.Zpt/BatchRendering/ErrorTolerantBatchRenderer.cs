@@ -16,7 +16,7 @@ namespace CSF.Zpt.BatchRendering
       {
         return base.Render(doc, outputStream, options, contextConfigurator, outputInfo);
       }
-      catch(RenderingException ex)
+      catch(ZptException ex)
       {
         return new BatchRenderingDocumentResponse(doc.GetSourceInfo(), ex);
       }

@@ -72,7 +72,7 @@ namespace CSF.Zpt.Cli
 
     private bool ReadFromStandardInput(IEnumerable<FileSystemInfo> inputFiles)
     {
-      return !inputFiles.Any() || inputFiles.All(x => x == null);
+      return inputFiles.Count() == 1 && inputFiles.All(x => x == null);
     }
 
     private FileSystemInfo GetOutputPath(CommandLineOptions options)

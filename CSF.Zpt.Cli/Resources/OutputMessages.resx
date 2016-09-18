@@ -95,6 +95,14 @@ The invalid option is:{0}</value>
     <value>ERROR: The encoding specified by the --output-encoding argument is invalid.
 The encoding (where specified) must be valid encoding 'WebName'.  Consult the manual for more information.</value>
   </data>
+  <data name="NoInputs" xml:space="preserve">
+    <value>ERROR: You must specify at least one input path (or use '-' to signify reading from
+standard input).  Use 'ZptBuilder.exe --help', or consult the manual.</value>
+  </data>
+  <data name="CannotInputFromStdInAndPaths" xml:space="preserve">
+    <value>ERROR: The inputs must either be a list of paths OR '-' (indicating the use of standard
+input),  not both.  Use 'ZptBuilder.exe --help', or consult the manual.</value>
+  </data>
   <data name="UnexpectedErrorFormat" xml:space="preserve">
     <value>ERROR: The application has encountered a fatal unexpected error; please report this as a bug at
 https://github.com/csf-dev/ZPT-Sharp

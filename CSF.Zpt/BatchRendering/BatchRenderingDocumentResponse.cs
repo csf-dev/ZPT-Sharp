@@ -8,13 +8,13 @@ namespace CSF.Zpt.BatchRendering
   {
     public bool Success { get { return Exception == null; } }
 
-    public RenderingException Exception { get; private set; }
+    public ZptException Exception { get; private set; }
 
     public ISourceInfo SourceInfo { get; private set; }
 
     public string OutputInfo { get; private set; }
 
-    public BatchRenderingDocumentResponse(ISourceInfo sourceInfo, RenderingException exception)
+    public BatchRenderingDocumentResponse(ISourceInfo sourceInfo, ZptException exception)
     {
       if(sourceInfo == null)
       {
