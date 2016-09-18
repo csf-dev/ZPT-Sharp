@@ -30,9 +30,6 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
-    <Reference Include="nunit.framework">
-      <HintPath>..\packages\NUnit.2.6.3\lib\nunit.framework.dll</HintPath>
-    </Reference>
     <Reference Include="Ploeh.AutoFixture">
       <HintPath>..\packages\AutoFixture.3.34.2\lib\net40\Ploeh.AutoFixture.dll</HintPath>
     </Reference>
@@ -47,6 +44,9 @@
       <HintPath>..\packages\log4net.2.0.3\lib\net40-full\log4net.dll</HintPath>
     </Reference>
     <Reference Include="System.Configuration" />
+    <Reference Include="nunit.framework">
+      <HintPath>..\packages\NUnit.2.6.4\lib\nunit.framework.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
@@ -106,7 +106,6 @@
     <Compile Include="Tales\TestFilesystemDirectory.cs" />
     <Compile Include="ModelIntegrationTests.cs" />
     <Compile Include="IntegrationTestBase.cs" />
-    <Compile Include="Cli\TestApplication.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Metal\MetalVisitorIntegrationTests.1.xml" />
@@ -142,10 +141,6 @@
     <ProjectReference Include="..\CSF.Zpt.Log4net\CSF.Zpt.Log4net.csproj">
       <Project>{81044439-06CF-44E2-BBF2-3800F1DEB5B1}</Project>
       <Name>CSF.Zpt.Log4net</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\CSF.Zpt.Cli\CSF.Zpt.Cli.csproj">
-      <Project>{4DD64666-DBEF-4AD5-BDB0-3EB3C70A6E83}</Project>
-      <Name>CSF.Zpt.Cli</Name>
     </ProjectReference>
   </ItemGroup>
 </Project>

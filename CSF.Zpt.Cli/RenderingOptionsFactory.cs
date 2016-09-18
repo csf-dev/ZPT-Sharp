@@ -2,8 +2,10 @@
 using CSF.Zpt.Rendering;
 using System.Linq;
 using System.Text;
+using CSF.Zpt.Cli.Resources;
+using CSF.Zpt.Cli.Exceptions;
 
-namespace CSF.Zpt.Cli.Rendering
+namespace CSF.Zpt.Cli
 {
   public class RenderingOptionsFactory : IRenderingOptionsFactory
   {
@@ -26,23 +28,16 @@ namespace CSF.Zpt.Cli.Rendering
 
     public IRenderingOptions GetOptions(CommandLineOptions options)
     {
-      try
-      {
-        var contextVisitors = _contextVisitorFactory.CreateMany(options.ContextVisitorClassNames);
-        var contextFactory = _contextFactoryFactory.Create(options.RenderingContextFactoryClassName);
+      var contextVisitors = _contextVisitorFactory.CreateMany(options.ContextVisitorClassNames);
+      var contextFactory = _contextFactoryFactory.Create(options.RenderingContextFactoryClassName);
 
-        AddKeywordOptions(options, contextFactory);
+      AddKeywordOptions(options, contextFactory);
 
-        return new RenderingOptions(contextVisitors,
-                                    contextFactory,
-                                    addSourceFileAnnotation: options.EnableSourceAnnotation,
-                                    outputEncoding: Encoding.GetEncoding(options.OutputEncoding),
-                                    omitXmlDeclaration: options.OmitXmlDeclarations);
-      }
-      catch(Exception ex)
-      {
-        throw new OptionsParsingException(Resources.Messages.RenderingOptionsCreationExceptionMessage, ex);
-      }
+      return new RenderingOptions(contextVisitors,
+                                  contextFactory,
+                                  addSourceFileAnnotation: options.EnableSourceAnnotation,
+                                  outputEncoding: Encoding.GetEncoding(options.OutputEncoding),
+                                  omitXmlDeclaration: options.OmitXmlDeclarations);
     }
 
     private void AddKeywordOptions(CommandLineOptions options, IRenderingContextFactory contextFactory)

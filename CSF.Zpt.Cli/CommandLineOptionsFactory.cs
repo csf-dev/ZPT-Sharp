@@ -1,5 +1,7 @@
 ﻿using System;
 using CSF.Cli;
+using CSF.Zpt.Cli.Exceptions;
+using CSF.Zpt.Cli.Resources;
 
 namespace CSF.Zpt.Cli
 {
@@ -17,7 +19,7 @@ namespace CSF.Zpt.Cli
       }
       catch(Exception ex)
       {
-        throw new OptionsParsingException(Resources.Messages.OptionsParsingExceptionMessage, ex);
+        throw new OptionsParsingException(ExceptionMessages.OptionsParsingError, ex);
       }
     }
 

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace CSF.Zpt.Cli
+namespace CSF.Zpt.Cli.Exceptions
 {
   /// <summary>
   /// An exception type arising to a failure to parse the command-line options.

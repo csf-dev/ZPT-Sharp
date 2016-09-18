@@ -3,9 +3,9 @@ using CSF.Cli;
 using CSF.Zpt.Rendering;
 using CSF.Zpt.BatchRendering;
 using System.Text;
-using CSF.Zpt.Cli.BatchRendering;
-using CSF.Zpt.Cli.Rendering;
 using System.Diagnostics;
+using CSF.Zpt.Cli.Exceptions;
+using CSF.Zpt.Cli.Resources;
 
 namespace CSF.Zpt.Cli
 {
@@ -18,6 +18,7 @@ namespace CSF.Zpt.Cli
     private readonly IRenderingOptionsFactory _renderingOptionsFactory;
     private readonly IBatchRenderer _renderer;
     private readonly IVersionNumberInspector _versionInspector;
+    private readonly IApplicationTerminator _terminator;
 
     #endregion
 
@@ -34,19 +35,37 @@ namespace CSF.Zpt.Cli
       }
 
       var commandlineOptions = GetCommandlineOptions(args);
+      if(commandlineOptions == null)
+      {
+        return;
+      }
+
       Begin(commandlineOptions);
     }
 
     public void Begin(CommandLineOptions options)
     {
-      HandleInformationalActions(options);
+      if(options == null)
+      {
+        throw new ArgumentNullException(nameof(options));
+      }
+
+      if(HandleInformationalActions(options))
+      {
+        return;
+      }
 
       var batchOptions = GetBatchOptions(options);
       var renderingOptions = GetRenderingOptions(options);
       var renderingMode = GetRenderingMode(options);
 
-      var response = _renderer.Render(renderingOptions, batchOptions, renderingMode);
+      if(batchOptions == null
+         || renderingOptions == null)
+      {
+        return;
+      }
 
+      var response = _renderer.Render(renderingOptions, batchOptions, renderingMode);
       // TODO: Do something with the response
     }
 
@@ -78,34 +97,56 @@ namespace CSF.Zpt.Cli
       {
         output = getter();
       }
+      catch(RenderingModeDeterminationException ex)
+      {
+        Trace.TraceError(ex.ToString());
+        WriteErrorAndTerminate(OutputMessages.HtmlAndXmlModesMutuallyExclusiveError);
+      }
       catch(OptionsParsingException ex)
       {
         Trace.TraceError(ex.ToString());
-        Console.Error.WriteLine(Resources.Messages.CannotParseOptionsError);
-        Environment.Exit(1);
+        WriteErrorAndTerminate(OutputMessages.CannotParseOptionsError);
       }
       catch(Exception ex)
       {
         Trace.TraceError(ex.ToString());
-        Console.Error.WriteLine(Resources.Messages.UnexpectedError);
-        Environment.Exit(2);
+        WriteUnexpectedErrorAndTerminate(OutputMessages.UnexpectedError);
       }
 
       return output;
     }
 
-    private void HandleInformationalActions(CommandLineOptions options)
+    private bool HandleInformationalActions(CommandLineOptions options)
     {
+      bool informationalActionPerformed = false;
+
       if(options.ShowUsageStatement)
       {
-        Console.Write(Resources.Messages.UsageStatement);
-        Environment.Exit(0);
+        Console.Write(OutputMessages.UsageStatement);
+        _terminator.Terminate();
+        informationalActionPerformed = true;
       }
       else if (options.ShowVersionInfo)
       {
-        Console.WriteLine(Resources.Messages.VersionFormat, _versionInspector.GetZptBuilderVersion());
-        Environment.Exit(0);
+        Console.WriteLine(OutputMessages.VersionFormat, _versionInspector.GetZptBuilderVersion());
+        _terminator.Terminate();
+        informationalActionPerformed = true;
       }
+
+      return informationalActionPerformed;
+    }
+
+    private void WriteErrorAndTerminate(string message)
+    {
+      Console.Error.WriteLine(message);
+      _terminator.Terminate(ApplicationTerminator.ExpectedErrorExitCode);
+
+    }
+
+    private void WriteUnexpectedErrorAndTerminate(string message)
+    {
+      Console.Error.WriteLine(message);
+      _terminator.Terminate(ApplicationTerminator.UnexpectedErrorExitCode);
     }
 
     #endregion
@@ -123,13 +164,15 @@ namespace CSF.Zpt.Cli
                        IBatchRenderingOptionsFactory batchOptionsFactory = null,
                        IRenderingOptionsFactory renderingOptionsFactory = null,
                        IBatchRenderer renderer = null,
-                       IVersionNumberInspector versionInspector = null)
+                       IVersionNumberInspector versionInspector = null,
+                       IApplicationTerminator terminator = null)
     {
       _commandlineOptionsFactory = commandlineOptionsFactory?? new CommandLineOptionsFactory();
       _batchOptionsFactory = batchOptionsFactory?? new BatchRenderingOptionsFactory();
       _renderingOptionsFactory = renderingOptionsFactory?? new RenderingOptionsFactory();
       _renderer = renderer?? new BatchRenderer();
       _versionInspector = versionInspector?? new VersionNumberInspector();
+      _terminator = terminator?? new ApplicationTerminator();
     }
 
     #endregion

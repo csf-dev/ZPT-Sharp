@@ -1,7 +1,7 @@
 ﻿using System;
 using CSF.Zpt.Rendering;
 
-namespace CSF.Zpt.Cli.Rendering
+namespace CSF.Zpt.Cli
 {
   public interface IRenderingOptionsFactory
   {

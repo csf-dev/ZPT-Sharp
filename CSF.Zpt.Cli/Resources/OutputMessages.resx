@@ -62,21 +62,15 @@ available at:
     <value>ZptBuilder.exe v{0}</value>
   </data>
   <data name="CannotParseOptionsError" xml:space="preserve">
-    <value>The command-line parameters could not be understood.  Use:
-  ZptBuilder.exe --help
-for more information, or consult the manual.</value>
+    <value>ERROR: The command-line parameters provided were not be understood.
+Use 'ZptBuilder.exe --help' for help on providing correct parameters, or consult the manual.</value>
+  </data>
+  <data name="HtmlAndXmlModesMutuallyExclusiveError" xml:space="preserve">
+    <value>ERROR: The '--html' and '--xml' options are mutually exclusive and may not be used together.
+Use 'ZptBuilder.exe --help' for help on providing correct parameters, or consult the manual.</value>
   </data>
   <data name="UnexpectedError" xml:space="preserve">
     <value>*** There has been an unexpected fatal application error.  Please report this as a bug!
 *** Visit https://github.com/csf-dev/ZPT-Sharp for information</value>
-  </data>
-  <data name="OptionsParsingExceptionMessage" xml:space="preserve">
-    <value>The command-line arguments must be in a valid format.</value>
-  </data>
-  <data name="BatchOptionsCreationExceptionMessage" xml:space="preserve">
-    <value>There was an unexpected error creating the batch processing options.</value>
-  </data>
-  <data name="RenderingOptionsCreationExceptionMessage" xml:space="preserve">
-    <value>There was an unexpected error creating the rendering options.</value>
   </data>
 </root>
