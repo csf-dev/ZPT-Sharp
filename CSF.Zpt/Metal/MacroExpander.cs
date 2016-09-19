@@ -13,8 +13,8 @@ namespace CSF.Zpt.Metal
   {
     #region fields
 
-    private MacroFinder _macroFinder;
-    private SourceAnnotator _annotator;
+    private readonly MacroFinder _macroFinder;
+    private readonly SourceAnnotator _annotator;
 
     #endregion
 
