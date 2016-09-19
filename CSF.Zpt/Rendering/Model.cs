@@ -14,7 +14,7 @@ namespace CSF.Zpt.Rendering
 
     private Model _parent, _root;
     private Dictionary<string,object> _globalDefinitions;
-    private ContextualisedRepetitionSummaryWrapper _cachedRepetitionSummaries;
+    private RepetitionMetadataCollectionWrapper _cachedRepetitionSummaries;
     private object _error;
     private NamedObjectWrapper _options;
 
@@ -282,12 +282,12 @@ namespace CSF.Zpt.Rendering
     /// Gets the contextualised repetition summaries.
     /// </summary>
     /// <returns>The repetition summaries.</returns>
-    protected virtual ContextualisedRepetitionSummaryWrapper GetRepetitionSummaries()
+    protected virtual RepetitionMetadataCollectionWrapper GetRepetitionSummaries()
     {
       if(_cachedRepetitionSummaries == null)
       {
         var allRepetitions = RecursivelyGetAllRepetitions();
-        _cachedRepetitionSummaries = new ContextualisedRepetitionSummaryWrapper(allRepetitions);
+        _cachedRepetitionSummaries = new RepetitionMetadataCollectionWrapper(allRepetitions);
       }
 
       return _cachedRepetitionSummaries;

@@ -79,7 +79,6 @@
     <Compile Include="Tales\TraversalWrapper.cs" />
     <Compile Include="Tales\FuncByRef.cs" />
     <Compile Include="Tales\BuiltinContextsContainer.cs" />
-    <Compile Include="Rendering\ContextualisedRepetitionSummaryWrapper.cs" />
     <Compile Include="Tales\TalesRenderingContextFactory.cs" />
     <Compile Include="Rendering\ContextVisitorBase.cs" />
     <Compile Include="ZptDocumentFactory.cs" />
@@ -128,6 +127,7 @@
     <Compile Include="BatchRendering\IRenderingJob.cs" />
     <Compile Include="BatchRendering\IRenderingJobFactory.cs" />
     <Compile Include="BatchRendering\ErrorTolerantBatchRenderer.cs" />
+    <Compile Include="Rendering\RepetitionMetadataCollectionWrapper.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Target Name="AfterBuild" Condition="'$(Configuration)' == 'Release'">
