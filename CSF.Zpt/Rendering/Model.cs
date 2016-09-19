@@ -253,6 +253,11 @@ namespace CSF.Zpt.Rendering
       return output;
     }
 
+    /// <summary>
+    /// Recursively gets all of the <see cref="IRepetitionInfo"/> instances from the current model and all of its
+    /// parents.
+    /// </summary>
+    /// <returns>The repetition information instances.</returns>
     protected virtual IEnumerable<IRepetitionInfo> RecursivelyGetAllRepetitions()
     {
       var repetitions = new List<IRepetitionInfo>();
@@ -260,6 +265,11 @@ namespace CSF.Zpt.Rendering
       return repetitions;
     }
 
+    /// <summary>
+    /// Recursively gets all of the <see cref="IRepetitionInfo"/> instances from the current model and all of its
+    /// parents.
+    /// </summary>
+    /// <param name="repetitions">The repetitions retrieved so far.</param>
     protected virtual void RecursivelyGetAllRepetitions(ref List<IRepetitionInfo> repetitions)
     {
       if(repetitions == null)

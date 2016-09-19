@@ -19,9 +19,9 @@ namespace CSF.Zpt.Rendering
     #region properties
 
     /// <summary>
-    /// Gets the <see cref="CSF.Zpt.Rendering.ContextualisedRepetitionSummaryWrapper"/> with the specified key.
+    /// Gets the <see cref="CSF.Zpt.Tales.ITalesPathHandler"/> (representing a repetition) with the specified name.
     /// </summary>
-    /// <param name="key">Key.</param>
+    /// <param name="key">The repetition name.</param>
     public ITalesPathHandler this [string key]
     {
       get {
