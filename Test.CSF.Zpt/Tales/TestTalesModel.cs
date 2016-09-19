@@ -171,7 +171,7 @@ namespace Test.CSF.Zpt.Tales
       // Assert
       Assert.IsTrue(result, "Overall success");
       Assert.NotNull(output, "Output nullability");
-      Assert.IsInstanceOf<ContextualisedRepetitionSummaryWrapper>(output, "Expected output type");
+      Assert.IsInstanceOf<RepetitionMetadataCollectionWrapper>(output, "Expected output type");
     }
 
     [Test]

@@ -40,7 +40,7 @@ namespace CSF.Zpt.MVC.Tales
 
       var originalAttrs = new Lazy<OriginalAttributeValuesCollection>(() => context.GetOriginalAttributes());
       return new MvcContextsContainer(this.GetKeywordOptions(),
-                                      this.GetRepetitionSummaries(context.Element),
+                                      this.GetRepetitionSummaries(),
                                       originalAttrs,
                                       ViewContext);
     }
@@ -48,7 +48,6 @@ namespace CSF.Zpt.MVC.Tales
     public override IModel CreateChildModel()
     {
       var output = new MvcTalesModel(this, this.Root, EvaluatorRegistry, model: this.ModelObject);
-      output.RepetitionInfo = new RepetitionInfoCollection(this.RepetitionInfo);
       return output;
     }
 

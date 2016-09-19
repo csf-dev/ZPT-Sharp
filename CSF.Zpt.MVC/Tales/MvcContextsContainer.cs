@@ -151,7 +151,7 @@ namespace CSF.Zpt.MVC.Tales
     #region constructor
 
     public MvcContextsContainer(NamedObjectWrapper options,
-                                ContextualisedRepetitionSummaryWrapper repeat,
+                                RepetitionMetadataCollectionWrapper repeat,
                                 Lazy<OriginalAttributeValuesCollection> attrs,
                                 ViewContext viewContext,
                                 ITemplateFileFactory templateFileFactory = null)

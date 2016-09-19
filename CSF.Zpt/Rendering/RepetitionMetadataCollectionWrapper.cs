@@ -6,10 +6,9 @@ using System.Linq;
 namespace CSF.Zpt.Rendering
 {
   /// <summary>
-  /// Wrapper type for a contextualised (in the context of a chain of <see cref="ZptElement"/>) set of available
-  /// <see cref="IRepetitionInfo"/>.
+  /// Wrapper type for a collection of named <see cref="IRepetitionInfo"/> instances.
   /// </summary>
-  public class ContextualisedRepetitionSummaryWrapper : ITalesPathHandler
+  public class RepetitionMetadataCollectionWrapper : ITalesPathHandler
   {
     #region fields
 
@@ -53,10 +52,10 @@ namespace CSF.Zpt.Rendering
     #region constructor
 
     /// <summary>
-    /// Initializes a new instance of the <see cref="CSF.Zpt.Rendering.ContextualisedRepetitionSummaryWrapper"/> class.
+    /// Initializes a new instance of the <see cref="CSF.Zpt.Rendering.RepetitionMetadataCollectionWrapper"/> class.
     /// </summary>
     /// <param name="repetitions">Repetitions.</param>
-    public ContextualisedRepetitionSummaryWrapper(IEnumerable<IRepetitionInfo> repetitions)
+    public RepetitionMetadataCollectionWrapper(IEnumerable<IRepetitionInfo> repetitions)
     {
       if(repetitions == null)
       {

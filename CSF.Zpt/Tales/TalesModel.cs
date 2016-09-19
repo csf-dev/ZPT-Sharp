@@ -49,7 +49,6 @@ namespace CSF.Zpt.Tales
     public override IModel CreateChildModel()
     {
       var output = new TalesModel(this, this.Root, EvaluatorRegistry, modelObject: this.ModelObject);
-      output.RepetitionInfo = new RepetitionInfoCollection(this.RepetitionInfo);
       return output;
     }
 
@@ -194,7 +193,7 @@ namespace CSF.Zpt.Tales
 
       var originalAttrs = new Lazy<OriginalAttributeValuesCollection>(() => context.GetOriginalAttributes());
       return new BuiltinContextsContainer(this.GetKeywordOptions(),
-                                          this.GetRepetitionSummaries(context.Element),
+                                          this.GetRepetitionSummaries(),
                                           originalAttrs,
                                           templateFileFactory: context.RenderingOptions.GetTemplateFileFactory(),
                                           model: this.ModelObject);
