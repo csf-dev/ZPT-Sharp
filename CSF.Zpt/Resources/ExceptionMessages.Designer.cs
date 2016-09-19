@@ -237,5 +237,11 @@ namespace CSF.Zpt.Resources {
                 return ResourceManager.GetString("CouldNotInstantiateTypeFormat", resourceCulture);
             }
         }
+        
+        internal static string FatalErrorTypeMustBeDefined {
+            get {
+                return ResourceManager.GetString("FatalErrorTypeMustBeDefined", resourceCulture);
+            }
+        }
     }
 }

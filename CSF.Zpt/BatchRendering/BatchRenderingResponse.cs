@@ -37,8 +37,7 @@ namespace CSF.Zpt.BatchRendering
     {
       if(fatalError.HasValue && !fatalError.Value.IsDefinedValue())
       {
-        // TODO: Move this message to a resource file
-        throw new ArgumentException("Fatal error type must be a defined enumeration constant", nameof(fatalError));
+        throw new ArgumentException(Resources.ExceptionMessages.FatalErrorTypeMustBeDefined, nameof(fatalError));
       }
 
       this.Documents = documents?? new IBatchRenderingDocumentResponse[0];

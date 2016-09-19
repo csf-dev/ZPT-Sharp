@@ -116,4 +116,7 @@ Filename:{0}</value>
     <value>A requested implementation of `{0}' could not be created.
 Type name:{1}</value>
   </data>
+  <data name="FatalErrorTypeMustBeDefined" xml:space="preserve">
+    <value>The fatal-error-type must be a defined enumeration constant.</value>
+  </data>
 </root>
