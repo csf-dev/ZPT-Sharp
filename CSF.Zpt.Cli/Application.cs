@@ -122,7 +122,7 @@ namespace CSF.Zpt.Cli
 
       if(response != null)
       {
-        // TODO: Do something with the response
+        // TODO: Do something with the response. See issue #104
       }
     }
 
