@@ -1,0 +1,188 @@
+<!doctype html>
+<html tal:define="activePage string:diagnostics_and_logging">
+<head metal:use-macro="documents/Shared/general-page.html/macros/common_document_head">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="utf-8">
+<title metal:fill-slot="document_title">Diagnostics &amp; Logging</title>
+<base href="." />
+<style type="text/css">
+@import url(css/styles.css);
+@import url(css/dummy.css);
+</style>
+<script type="text/javascript" src="js/modernizr.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s=" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.4.0/styles/default.min.css">
+<script src="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.4.0/highlight.min.js"></script>
+<script>
+hljs.initHighlightingOnLoad();
+</script>
+</head>
+<body metal:use-macro="documents/Shared/general-page.html/macros/common_document_body" class="page_diagnostics_and_logging">
+<div class="content_wrapper">
+  <header class="page_header dummy">
+    Dummy content
+  </header>
+  <div class="main_page_area">
+    <nav>
+      <h2>Navigation menu</h2>
+      <ul class="active_introduction dummy">
+        <li class="introduction"><a href=".">Introduction</a></li>
+        <li class="other_page"><a href="dummy.html">Dummy page</a></li>
+      </ul>
+    </nav>
+    <section class="main_page_content" metal:fill-slot="main_page_content">
+      <header>
+        <h1>Diagnostics &amp; Logging</h1>
+      </header>
+      <p>
+        Internally, ZPT-Sharp makes use of the 
+        <a href="https://msdn.microsoft.com/en-us/library/system.diagnostics(v=vs.110).aspx"
+           title="Documentation for the System.Diagnostics namespace">.NET framework's built-in diagnostics</a>
+        functionality.
+        This allows it to expose diagnostic, debug and error information about the rendering process, without
+        specifying what should done with that information.
+      </p>
+      <p>
+        By default, no action is performed with the Trace and Debug information; the messages are exposed to the
+        framework and then immediately discarded.
+        If you wish to record or capture this information then this is controlled via the application configuration
+        file.
+      </p>
+      <p>
+        The .NET framework's Trace functionality is very powerful and flexible; we will not be examining it in
+        depth here.
+        Briefly, instances of
+        <a href="https://msdn.microsoft.com/en-us/library/system.diagnostics.tracelistener(v=vs.110).aspx"
+           title="Documentation for System.Diagnostics.TraceListener"><code>TraceListener</code></a>
+        are attached to
+        <a href="https://msdn.microsoft.com/en-us/library/system.diagnostics.tracesource(v=vs.110).aspx"
+           title="Documentation for System.Diagnostics.TraceSource"><code>TraceSource</code></a>
+        objects, via the
+        application configuration file.
+        These listeners do not need neccesarily to be compiled with references to the main project, not does the
+        main project need to reference them.
+        At run-time, the .NET framework, acting on information from the configuration file, loads the relevant
+        trace listener types and subscribes them to the trace sources in order to receive the messages.
+      </p>
+      <h2>Integrating with Log4net</h2>
+      <p>
+        What follows is an example of how to integrate with the <strong>log4net</strong> library in order to capture
+        Trace and Debug information.
+        <a href="https://logging.apache.org/log4net/">Log4net is a third party logging library, maintained by
+        the Apache project.</a>
+        If you wish to know more about it, including how to use its powerful configuration syntax, then
+        you may read more at
+        <a href="https://logging.apache.org/log4net/release/manual/introduction.html">the log4net manual page</a>.
+      </p>
+      <p>
+        ZPT-Sharp ships with two optional assemblies designed for logging diagnostics information;
+        <code>CSF.Zpt.Log4Net.dll</code> and <code>log4net.dll</code>.
+        The latter is the core log4net code and the former contains a customised <code>TraceListener</code>
+        which redirects received messages to log4net.
+        These two assemblies are not required for normal operation.
+      </p>
+      <p>
+        If you wish to capture log information using log4net then you should ensure that they are placed
+        in the same directory as the ZPT-Sharp assemblies, and that your application configuration attaches the
+        trace listener to the appropriate trace source(s).
+      </p>
+      <p>
+        Here is an example of the changes to make in your application configuration file in order to log messages to
+        a file, using the log4net listener.
+      </p>
+      <pre><code class="xml">&lt;!-- Declare the log4 net config section --&gt;
+&lt;configSections&gt;
+  &lt;section name=&quot;log4net&quot; type=&quot;log4net.Config.Log4NetConfigurationSectionHandler, log4net&quot; /&gt;
+&lt;/configSections&gt;
+
+&lt;!-- This section configures log4net itself --&gt;
+&lt;log4net&gt;
+  &lt;root&gt;
+    &lt;!--
+        Set the default level (for anything not configured to
+        warnings and above).
+    --&gt;
+    &lt;level value=&quot;WARN&quot; /&gt;
+    &lt;appender-ref ref=&quot;FileAppender&quot; /&gt;
+  &lt;/root&gt;
+  &lt;appender name=&quot;FileAppender&quot; type=&quot;log4net.Appender.FileAppender&quot;&gt;
+    &lt;!-- Set the path to the log file --&gt;
+    &lt;file value=&quot;MyApplication.log&quot; /&gt;
+    &lt;appendToFile value=&quot;false&quot; /&gt;
+    &lt;layout type=&quot;log4net.Layout.PatternLayout&quot;&gt;
+      &lt;conversionPattern value=&quot;[%-5level] [%logger] %message%n&quot; /&gt;
+    &lt;/layout&gt;
+  &lt;/appender&gt;
+  &lt;!--
+      Log messages of level DEBUG and up originating from ZPT-Sharp
+      If you wish to use log4net in your own application, you would
+      add further loggers here to determine the log-level for your
+      own app.
+  --&gt;
+  &lt;logger name=&quot;CSF.Zpt&quot;&gt;
+    &lt;level value=&quot;DEBUG&quot; /&gt;
+  &lt;/logger&gt;
+&lt;/log4net&gt;
+
+&lt;!--
+    This section attaches the ZPT-Sharp log4net trace listener to
+    the appropriate TraceSource.
+--&gt;
+&lt;system.diagnostics&gt;    
+  &lt;sources&gt;
+    &lt;!-- Add the listener to other sources too if you wish --&gt;
+    &lt;source name=&quot;CSF.Zpt&quot; switchName=&quot;defaultSwitch&quot; switchType=&quot;System.Diagnostics.SourceSwitch&quot;&gt;
+      &lt;listeners&gt;
+        &lt;add name=&quot;log4netListener&quot; /&gt;
+        &lt;remove name=&quot;Default&quot; /&gt;
+      &lt;/listeners&gt;
+    &lt;/source&gt;
+  &lt;/sources&gt;
+  &lt;switches&gt;
+    &lt;add name=&quot;defaultSwitch&quot; value=&quot;Verbose&quot;/&gt;
+  &lt;/switches&gt;
+  &lt;sharedListeners&gt;
+    &lt;add name=&quot;log4netListener&quot;
+          type=&quot;CSF.Zpt.SelfConfiguringLog4netTraceListener, CSF.Zpt.Log4net&quot;&gt;
+      &lt;filter type=&quot;System.Diagnostics.EventTypeFilter&quot; initializeData=&quot;Verbose&quot;/&gt;
+    &lt;/add&gt;
+  &lt;/sharedListeners&gt;
+&lt;/system.diagnostics&gt;</code></pre>
+      <p>
+        This is only a limited example which will get logging through log4net working.
+        Please read the relevant documentation (MSDN and log4net) if you would like to customise your logging solution.
+      </p>
+      <h2>Consuming ZPT-Sharp as an API</h2>
+      <p>
+        If you are building an application which consumes ZPT-Sharp as an API then you may wish to make use of
+        Trace and Debug logging yourself.
+        Additionally you might be integrating with other APIs which also make use of this functionality.
+        The <code>TraceSource</code> names used by ZPT-Sharp are:
+      </p>
+      <ul>
+        <li><strong>CSF.Zpt</strong> - used by the core API for rendering operations.</li>
+        <li><strong>CSF.Zpt.Cli</strong> - used by the ZptBuilder front-end application.</li>
+        <li><strong>CSF.Zpt.Mvc</strong> - used by the MVC view engine.</li>
+      </ul>
+      <h2>Note about 'debug' builds</h2>
+      <p>
+        If you have built the solution by hand and used the <code>Debug</code> configuration, then
+        additional information will be made available via trace listeners.
+        This provides information useful to developers working on ZPT-Sharp itself, but which is not very
+        useful otherwise.
+      </p>
+      <p>
+        These messages are recorded at the <code>Verbose</code> level (from a <code>TraceEventType</code> standpoint),
+        or a <code>DEBUG</code> level in log4net terminology.
+        You may wish to filter them out unless you are trying to debug ZPT-Sharp's rendering.
+        You would do this using either a source switch or log4net logger level of <code>INFO</code> or above, otherwise
+        you could see a very noisy log file.
+      </p>
+    </section>
+  </div>
+</div>
+<footer class="page_footer dummy">
+  Dummy content
+</footer>
+</body>
+</html>
