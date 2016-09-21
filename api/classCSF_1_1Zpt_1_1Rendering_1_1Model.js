@@ -11,7 +11,9 @@ var classCSF_1_1Zpt_1_1Rendering_1_1Model =
     [ "CreateTypedSiblingModel", "classCSF_1_1Zpt_1_1Rendering_1_1Model.html#a471a8568523560b8b46b00272f9163b6", null ],
     [ "Evaluate", "classCSF_1_1Zpt_1_1Rendering_1_1Model.html#a5c080afdf4a4572972629cbd9a7935bb", null ],
     [ "GetKeywordOptions", "classCSF_1_1Zpt_1_1Rendering_1_1Model.html#a6eddf9d64c614d784f6ae8e022f1a8fd", null ],
-    [ "GetRepetitionSummaries", "classCSF_1_1Zpt_1_1Rendering_1_1Model.html#a46f8df17495e42d9fcc22f2c3f2abb69", null ],
+    [ "GetRepetitionSummaries", "classCSF_1_1Zpt_1_1Rendering_1_1Model.html#a8289c13d21b6cf31b4989e09e891b018", null ],
+    [ "RecursivelyGetAllRepetitions", "classCSF_1_1Zpt_1_1Rendering_1_1Model.html#ab0d1dfa5aec60ad631656368587b17da", null ],
+    [ "RecursivelyGetAllRepetitions", "classCSF_1_1Zpt_1_1Rendering_1_1Model.html#aefcdc2bbd0363503771af67a0be3043e", null ],
     [ "TryGetItem", "classCSF_1_1Zpt_1_1Rendering_1_1Model.html#a54adad7fbb648d477aebef17960b4748", null ],
     [ "TryRecursivelyGetLocalItem", "classCSF_1_1Zpt_1_1Rendering_1_1Model.html#a6918fb49072b32664f1c68559713112f", null ],
     [ "Empty", "classCSF_1_1Zpt_1_1Rendering_1_1Model.html#a2795c746e9a4597aa9d26cb4f10e4fd3", null ],
@@ -20,6 +22,6 @@ var classCSF_1_1Zpt_1_1Rendering_1_1Model =
     [ "LocalDefinitions", "classCSF_1_1Zpt_1_1Rendering_1_1Model.html#a2d32cef4e4dca44c3b5a0aa0883cdc4b", null ],
     [ "ModelObject", "classCSF_1_1Zpt_1_1Rendering_1_1Model.html#a4c4db0ec22dfe82cae153feb388d510e", null ],
     [ "Parent", "classCSF_1_1Zpt_1_1Rendering_1_1Model.html#aa76fa01f8097eeb25d2a4069da1bf1c2", null ],
-    [ "RepetitionInfo", "classCSF_1_1Zpt_1_1Rendering_1_1Model.html#a130f46f06a64459a26c6ff6e9b54a4d4", null ],
+    [ "RepetitionInfo", "classCSF_1_1Zpt_1_1Rendering_1_1Model.html#a867d12dd6619ebd28a12fb55a9f87af0", null ],
     [ "Root", "classCSF_1_1Zpt_1_1Rendering_1_1Model.html#aba43575e247b9e92a13a101e343cf95c", null ]
 ];

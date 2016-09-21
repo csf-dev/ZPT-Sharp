@@ -1,3 +1,5 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="node1" href="$classCSF_1_1Zpt_1_1Rendering_1_1RenderingContextExtensions.html" title="Extension methods for RenderingContext instances. " alt="" coords="5,5,204,47"/>
+<area shape="rect" id="node1" href="$interfaceCSF_1_1Zpt_1_1Rendering_1_1IRenderingOptions.html" title="Encapsulates the available options for rendering a IZptDocument. " alt="" coords="5,5,208,47"/>
+<area shape="rect" id="node2" href="$classCSF_1_1Zpt_1_1Rendering_1_1DefaultRenderingOptions.html" title="Represents the default IRenderingOptions. " alt="" coords="256,5,437,47"/>
+<area shape="rect" id="node3" href="$classCSF_1_1Zpt_1_1Rendering_1_1RenderingOptions.html" title="Encapsulates the available options for rendering a ZptDocument. " alt="" coords="485,5,684,47"/>
 </map>

@@ -16,6 +16,7 @@ var namespaceCSF_1_1Zpt =
     [ "IZptDocumentFactory", "interfaceCSF_1_1Zpt_1_1IZptDocumentFactory.html", "interfaceCSF_1_1Zpt_1_1IZptDocumentFactory" ],
     [ "IZptDocumentProvider", "interfaceCSF_1_1Zpt_1_1IZptDocumentProvider.html", "interfaceCSF_1_1Zpt_1_1IZptDocumentProvider" ],
     [ "Log4netTraceListener", "classCSF_1_1Zpt_1_1Log4netTraceListener.html", "classCSF_1_1Zpt_1_1Log4netTraceListener" ],
+    [ "SelfConfiguringLog4netTraceListener", "classCSF_1_1Zpt_1_1SelfConfiguringLog4netTraceListener.html", "classCSF_1_1Zpt_1_1SelfConfiguringLog4netTraceListener" ],
     [ "XmlUrlResolverFactory", "classCSF_1_1Zpt_1_1XmlUrlResolverFactory.html", "classCSF_1_1Zpt_1_1XmlUrlResolverFactory" ],
     [ "ZptConstants", "classCSF_1_1Zpt_1_1ZptConstants.html", "classCSF_1_1Zpt_1_1ZptConstants" ],
     [ "ZptDocument", "classCSF_1_1Zpt_1_1ZptDocument.html", "classCSF_1_1Zpt_1_1ZptDocument" ],

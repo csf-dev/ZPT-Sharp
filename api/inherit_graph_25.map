@@ -1,12 +1,6 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="node2" href="$interfaceCSF_1_1Zpt_1_1Rendering_1_1ISourceInfo.html" title="Information about the source of an IZptDocument or IZptElement. " alt="" coords="148,90,355,117"/>
-<area shape="rect" id="node6" href="$interfaceCSF_1_1Zpt_1_1Rendering_1_1IZptElement.html" title="Interface for a type which wraps a DOM element. " alt="" coords="146,151,357,178"/>
-<area shape="rect" id="node7" href="$classCSF_1_1Zpt_1_1Rendering_1_1ZptElement.html" title="Represents an element node in a ZPT document. " alt="" coords="413,202,620,229"/>
-<area shape="rect" id="node11" href="$classCSF_1_1Zpt_1_1Rendering_1_1ZptNamespace.html" title="Represents a ZPT namespace, by either or both of its prefix and namespace URI. " alt="" coords="137,253,365,279"/>
-<area shape="rect" id="node3" href="$classCSF_1_1Zpt_1_1Rendering_1_1AbstractSourceInfo.html" title="Implementation of ISourceInfo representing an abstract string path. " alt="" coords="423,5,611,47"/>
-<area shape="rect" id="node4" href="$classCSF_1_1Zpt_1_1Rendering_1_1SourceFileInfo.html" title="Provides information about the source file from which an ZptElement is derived. " alt="" coords="427,71,607,112"/>
-<area shape="rect" id="node5" href="$classCSF_1_1Zpt_1_1Rendering_1_1UnknownSourceFileInfo.html" title="Null&#45;object implementation of SourceFileInfo, representing an unknown source file. " alt="" coords="419,136,614,177"/>
-<area shape="rect" id="node8" href="$classCSF_1_1Zpt_1_1Impl_1_1ZptHtmlElement.html" title="Implementation of ZptElement based on documents parsed using the HTML Agility Pack. " alt="" coords="677,151,877,178"/>
-<area shape="rect" id="node9" href="$classCSF_1_1Zpt_1_1Impl_1_1ZptXmlElement.html" title="Implementation of ZptElement based on documents parsed using System.Xml. " alt="" coords="680,202,875,229"/>
-<area shape="rect" id="node10" href="$classCSF_1_1Zpt_1_1Impl_1_1ZptXmlLinqElement.html" title="Implementation of ZptElement based on documents parsed using System.Xml.Linq. " alt="" coords="668,253,887,279"/>
+<area shape="rect" id="node1" href="$interfaceCSF_1_1Zpt_1_1Rendering_1_1IModel.html" title="A model which represents and carries the state of a ZPT operation. " alt="" coords="5,31,184,57"/>
+<area shape="rect" id="node2" href="$classCSF_1_1Zpt_1_1Rendering_1_1Model.html" title="Represents the root of an object model. " alt="" coords="236,5,411,32"/>
+<area shape="rect" id="node4" href="$interfaceCSF_1_1Zpt_1_1Tales_1_1ITalesModel.html" title="Represents an IModel which contains TALES&#45;specific functionality. " alt="" coords="232,56,415,83"/>
+<area shape="rect" id="node3" href="$classCSF_1_1Zpt_1_1Tales_1_1TalesModel.html" title="An implementation of Model which makes use of the TALES: Template Attribute Language Expression Synta..." alt="" coords="463,31,641,57"/>
 </map>

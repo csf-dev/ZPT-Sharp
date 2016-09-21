@@ -1,3 +1,4 @@
 <map id="CSF.Zpt.BatchRendering.BatchRenderer" name="CSF.Zpt.BatchRendering.BatchRenderer">
+<area shape="rect" id="node3" href="$classCSF_1_1Zpt_1_1BatchRendering_1_1ErrorTolerantBatchRenderer.html" title="Implementation of BatchRenderer which catches exceptions raised when rendering documents and rolls th..." alt="" coords="8,169,209,211"/>
 <area shape="rect" id="node2" href="$interfaceCSF_1_1Zpt_1_1BatchRendering_1_1IBatchRenderer.html" title="Interface for a type which provides batch&#45;rendering services, parsing and rendering potentially multi..." alt="" coords="52,5,165,32"/>
 </map>

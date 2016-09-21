@@ -51,13 +51,19 @@ $(window).ready(function() {
           <a href="asp-net-mvc-view-engine.html">ZPT-Sharp for ASP.NET MVC</a>
         </li>
         <li class="page_rendering_api nav_item">
-          <a href="page-rendering-api.html">The page-rendering API</a>
+          <a href="page-rendering-api.html">API introduction</a>
+        </li>
+        <li class="api_reference nav_item">
+          <a href="api/index.html">API reference</a>
         </li>
         <li class="command_line_renderer nav_item">
           <a href="command-line-renderer.html">The command-line renderer</a>
         </li>
         <li class="writing_pages_using_zpt nav_item">
           <a href="writing-pages-using-zpt.html">Writing pages</a>
+        </li>
+        <li class="diagnostics_and_logging nav_item">
+          <a href="logging.html">Diagnostics &amp; logging</a>
         </li>
         <li class="metal_reference nav_section">
           <h3>METAL reference</h3>
@@ -176,7 +182,7 @@ $(window).ready(function() {
 
     <dd>Prints a usage statement and exits.</dd>
 
-    <dt><b>--version</b>,<b>-v</b></dt>
+    <dt><b>--version</b></dt>
 
     <dd>Prints version information and exits.</dd>
 
@@ -213,14 +219,16 @@ $(window).ready(function() {
     <dt><b>--output</b>=<i>PATH</i>,<b>-o</b></dt>
 
     <dd>Sets the application to emit output to the filesystem, instead of using standard output. If
-    a file path is specified then all output is redirected to that file. If a directory path is
-    specified then each rendered input will be rendered in a separate output file.</dd>
+    the path indicates a single file then all output is redirected to that file. In this case, the
+    file will be created if it does not already exist, as long as its parent directory exists.</dd>
 
-    <dd>Where a directory path is used, the names of the created files are based upon the name of
-    the input files; the option <b>--output-filename-extension</b> controls their extension.
-    Additionally, if a directory path is used for the input, then the output files are created
-    using a directory structure mimicking the relative path from the input directory. Consider the
-    following:</dd>
+    <dd>If the path to a directory is specified then each rendered document will be rendered to a
+    separate file within the output directory. In this case, the output directory path must exist
+    or else an error will be raised. Where a directory path is used, the names of the created files
+    are based upon the name of the input files; the option <b>--output-filename-extension</b>
+    controls their extension. Additionally, if a directory path is used for the input, then the
+    output files are created using a directory structure mimicking the relative path from the input
+    directory. Consider the following:</dd>
 
     <dd>
       <pre>
@@ -268,7 +276,13 @@ ZptBuilder.exe --output=my-out-dir/ my-input-dir
     <i>CSF.Zpt.Rendering.IContextVisitor</i> to use when rendering pages. This is an ordered list
     of type names, separated by semicolons. These names must be full, assembly-qualified type names
     where provided.</dd>
-  </dl>
+  </dl><a name="lbAF" id="lbAF">&nbsp;</a>
+
+  <h2>SEE ALSO</h2>
+
+  <p>There are comments in the configuration file <i>ZptBuilder.exe.config</i> containing sample
+  configuration. This sample configuration demonstrates how to enable logging of rendering
+  operations.</p>
   
     </section>
   </div>
@@ -280,10 +294,9 @@ ZptBuilder.exe --output=my-out-dir/ my-input-dir
   </section>
   <section class="version">
     <p>
-      Documentation built on <strong>2016-09-04</strong>, for
-      <span>
-        version <strong>0.4.0</strong>
-      </span>
+      Website built <strong>2016-09-21</strong>;
+      for version
+      <strong>v0.5.0</strong>
     </p>
   </section>
 </footer>

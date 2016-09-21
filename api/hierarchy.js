@@ -12,8 +12,11 @@ var hierarchy =
     ] ],
     [ "CSF.Zpt.Rendering.ElementExtensions", "classCSF_1_1Zpt_1_1Rendering_1_1ElementExtensions.html", null ],
     [ "Exception", null, [
-      [ "CSF.Zpt.BatchRendering.BatchRenderingException", "classCSF_1_1Zpt_1_1BatchRendering_1_1BatchRenderingException.html", null ],
-      [ "CSF.Zpt.BatchRendering.InvalidBatchRenderingOptionsException", "classCSF_1_1Zpt_1_1BatchRendering_1_1InvalidBatchRenderingOptionsException.html", null ],
+      [ "CSF.Zpt.BatchRendering.BatchRenderingException", "classCSF_1_1Zpt_1_1BatchRendering_1_1BatchRenderingException.html", [
+        [ "CSF.Zpt.BatchRendering.InvalidBatchRenderingOptionsException", "classCSF_1_1Zpt_1_1BatchRendering_1_1InvalidBatchRenderingOptionsException.html", null ]
+      ] ],
+      [ "CSF.Zpt.Rendering.CouldNotCreateContextVisitorException", "classCSF_1_1Zpt_1_1Rendering_1_1CouldNotCreateContextVisitorException.html", null ],
+      [ "CSF.Zpt.Rendering.CouldNotCreateRenderingContextFactoryException", "classCSF_1_1Zpt_1_1Rendering_1_1CouldNotCreateRenderingContextFactoryException.html", null ],
       [ "CSF.Zpt.ZptException", "classCSF_1_1Zpt_1_1ZptException.html", [
         [ "CSF.Zpt.Rendering.RenderingException", "classCSF_1_1Zpt_1_1Rendering_1_1RenderingException.html", [
           [ "CSF.Zpt.Metal.MacroNotFoundException", "classCSF_1_1Zpt_1_1Metal_1_1MacroNotFoundException.html", null ],
@@ -27,6 +30,7 @@ var hierarchy =
     ] ],
     [ "CSF.Zpt.Tales.Expression", "classCSF_1_1Zpt_1_1Tales_1_1Expression.html", null ],
     [ "CSF.Zpt.Rendering.ExpressionResult", "classCSF_1_1Zpt_1_1Rendering_1_1ExpressionResult.html", null ],
+    [ "Test.CSF.Zpt.Cli.GlobalSetupFixture", "classTest_1_1CSF_1_1Zpt_1_1Cli_1_1GlobalSetupFixture.html", null ],
     [ "CSF.Zpt.Rendering.IActionCanceller", "interfaceCSF_1_1Zpt_1_1Rendering_1_1IActionCanceller.html", [
       [ "CSF.Zpt.Rendering.CancellationToken", "classCSF_1_1Zpt_1_1Rendering_1_1CancellationToken.html", null ]
     ] ],
@@ -40,10 +44,18 @@ var hierarchy =
       [ "CSF.Zpt.Tal.RepeatAttributeHandler", "classCSF_1_1Zpt_1_1Tal_1_1RepeatAttributeHandler.html", null ]
     ] ],
     [ "CSF.Zpt.BatchRendering.IBatchRenderer", "interfaceCSF_1_1Zpt_1_1BatchRendering_1_1IBatchRenderer.html", [
-      [ "CSF.Zpt.BatchRendering.BatchRenderer", "classCSF_1_1Zpt_1_1BatchRendering_1_1BatchRenderer.html", null ]
+      [ "CSF.Zpt.BatchRendering.BatchRenderer", "classCSF_1_1Zpt_1_1BatchRendering_1_1BatchRenderer.html", [
+        [ "CSF.Zpt.BatchRendering.ErrorTolerantBatchRenderer", "classCSF_1_1Zpt_1_1BatchRendering_1_1ErrorTolerantBatchRenderer.html", null ]
+      ] ]
+    ] ],
+    [ "CSF.Zpt.BatchRendering.IBatchRenderingDocumentResponse", "interfaceCSF_1_1Zpt_1_1BatchRendering_1_1IBatchRenderingDocumentResponse.html", [
+      [ "CSF.Zpt.BatchRendering.BatchRenderingDocumentResponse", "classCSF_1_1Zpt_1_1BatchRendering_1_1BatchRenderingDocumentResponse.html", null ]
     ] ],
     [ "CSF.Zpt.BatchRendering.IBatchRenderingOptions", "interfaceCSF_1_1Zpt_1_1BatchRendering_1_1IBatchRenderingOptions.html", [
       [ "CSF.Zpt.BatchRendering.BatchRenderingOptions", "classCSF_1_1Zpt_1_1BatchRendering_1_1BatchRenderingOptions.html", null ]
+    ] ],
+    [ "CSF.Zpt.BatchRendering.IBatchRenderingResponse", "interfaceCSF_1_1Zpt_1_1BatchRendering_1_1IBatchRenderingResponse.html", [
+      [ "CSF.Zpt.BatchRendering.BatchRenderingResponse", "classCSF_1_1Zpt_1_1BatchRendering_1_1BatchRenderingResponse.html", null ]
     ] ],
     [ "CSF.Zpt.Rendering.IContextVisitor", "interfaceCSF_1_1Zpt_1_1Rendering_1_1IContextVisitor.html", [
       [ "CSF.Zpt.Rendering.ContextVisitorBase", "classCSF_1_1Zpt_1_1Rendering_1_1ContextVisitorBase.html", [
@@ -109,6 +121,8 @@ var hierarchy =
     [ "CSF.Zpt.Rendering.IRenderingContextFactoryFactory", "interfaceCSF_1_1Zpt_1_1Rendering_1_1IRenderingContextFactoryFactory.html", [
       [ "CSF.Zpt.Rendering.RenderingContextFactoryFactory", "classCSF_1_1Zpt_1_1Rendering_1_1RenderingContextFactoryFactory.html", null ]
     ] ],
+    [ "CSF.Zpt.BatchRendering.IRenderingJob", "interfaceCSF_1_1Zpt_1_1BatchRendering_1_1IRenderingJob.html", null ],
+    [ "CSF.Zpt.BatchRendering.IRenderingJobFactory", "interfaceCSF_1_1Zpt_1_1BatchRendering_1_1IRenderingJobFactory.html", null ],
     [ "CSF.Zpt.Rendering.IRenderingOptions", "interfaceCSF_1_1Zpt_1_1Rendering_1_1IRenderingOptions.html", [
       [ "CSF.Zpt.Rendering.DefaultRenderingOptions", "classCSF_1_1Zpt_1_1Rendering_1_1DefaultRenderingOptions.html", [
         [ "CSF.Zpt.Rendering.RenderingOptions", "classCSF_1_1Zpt_1_1Rendering_1_1RenderingOptions.html", null ]
@@ -117,7 +131,6 @@ var hierarchy =
     [ "CSF.Zpt.Tales.ITalesConvertible", "interfaceCSF_1_1Zpt_1_1Tales_1_1ITalesConvertible.html", null ],
     [ "CSF.Zpt.Tales.ITalesPathHandler", "interfaceCSF_1_1Zpt_1_1Tales_1_1ITalesPathHandler.html", [
       [ "CSF.Zpt.Metal.MetalMacroCollection", "classCSF_1_1Zpt_1_1Metal_1_1MetalMacroCollection.html", null ],
-      [ "CSF.Zpt.Rendering.ContextualisedRepetitionSummaryWrapper", "classCSF_1_1Zpt_1_1Rendering_1_1ContextualisedRepetitionSummaryWrapper.html", null ],
       [ "CSF.Zpt.Rendering.IRepetitionInfo", "interfaceCSF_1_1Zpt_1_1Rendering_1_1IRepetitionInfo.html", [
         [ "CSF.Zpt.Rendering.RepetitionInfo", "classCSF_1_1Zpt_1_1Rendering_1_1RepetitionInfo.html", null ]
       ] ],
@@ -125,6 +138,7 @@ var hierarchy =
         [ "CSF.Zpt.Tales.EnumerableObjectWrapperWithNamedItems", "classCSF_1_1Zpt_1_1Tales_1_1EnumerableObjectWrapperWithNamedItems.html", null ]
       ] ],
       [ "CSF.Zpt.Rendering.OriginalAttributeValuesCollection", "classCSF_1_1Zpt_1_1Rendering_1_1OriginalAttributeValuesCollection.html", null ],
+      [ "CSF.Zpt.Rendering.RepetitionMetadataCollectionWrapper", "classCSF_1_1Zpt_1_1Rendering_1_1RepetitionMetadataCollectionWrapper.html", null ],
       [ "CSF.Zpt.Tales.BuiltinContextsContainer", "classCSF_1_1Zpt_1_1Tales_1_1BuiltinContextsContainer.html", null ],
       [ "CSF.Zpt.Tales.FilesystemDirectory", "classCSF_1_1Zpt_1_1Tales_1_1FilesystemDirectory.html", [
         [ "CSF.Zpt.Tales.TemplateDirectory", "classCSF_1_1Zpt_1_1Tales_1_1TemplateDirectory.html", null ]
@@ -170,11 +184,14 @@ var hierarchy =
     [ "CSF.Zpt.Tales.PathWalker", "classCSF_1_1Zpt_1_1Tales_1_1PathWalker.html", null ],
     [ "CSF.Zpt.Rendering.RenderingContext", "classCSF_1_1Zpt_1_1Rendering_1_1RenderingContext.html", null ],
     [ "CSF.Zpt.Rendering.RenderingContextExtensions", "classCSF_1_1Zpt_1_1Rendering_1_1RenderingContextExtensions.html", null ],
-    [ "CSF.Zpt.Rendering.RepetitionInfoCollection", "classCSF_1_1Zpt_1_1Rendering_1_1RepetitionInfoCollection.html", null ],
     [ "CSF.Zpt.Metal.SourceAnnotator", "classCSF_1_1Zpt_1_1Metal_1_1SourceAnnotator.html", null ],
     [ "CSF.Zpt.ZptConstants.Tal", "classCSF_1_1Zpt_1_1ZptConstants_1_1Tal.html", null ],
+    [ "Test.CSF.Zpt.Cli.Test", "classTest_1_1CSF_1_1Zpt_1_1Cli_1_1Test.html", null ],
+    [ "Test.CSF.Zpt.Cli.TestApplication", "classTest_1_1CSF_1_1Zpt_1_1Cli_1_1TestApplication.html", null ],
     [ "TraceListener", null, [
-      [ "CSF.Zpt.Log4netTraceListener", "classCSF_1_1Zpt_1_1Log4netTraceListener.html", null ]
+      [ "CSF.Zpt.Log4netTraceListener", "classCSF_1_1Zpt_1_1Log4netTraceListener.html", [
+        [ "CSF.Zpt.SelfConfiguringLog4netTraceListener", "classCSF_1_1Zpt_1_1SelfConfiguringLog4netTraceListener.html", null ]
+      ] ]
     ] ],
     [ "CSF.Zpt.Tales.TraversalWrapper", "classCSF_1_1Zpt_1_1Tales_1_1TraversalWrapper.html", [
       [ "CSF.Zpt.Tales.TraversalWrapper< TSource >", "classCSF_1_1Zpt_1_1Tales_1_1TraversalWrapper_3_01TSource_01_4.html", null ]

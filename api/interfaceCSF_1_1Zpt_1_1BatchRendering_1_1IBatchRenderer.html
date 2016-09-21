@@ -119,24 +119,24 @@ Inheritance diagram for CSF.Zpt.BatchRendering.IBatchRenderer:</div>
 <div class="dyncontent">
 <div class="center"><img src="interfaceCSF_1_1Zpt_1_1BatchRendering_1_1IBatchRenderer__inherit__graph.png" border="0" usemap="#CSF_8Zpt_8BatchRendering_8IBatchRenderer_inherit__map" alt="Inheritance graph"/></div>
 <map name="CSF_8Zpt_8BatchRendering_8IBatchRenderer_inherit__map" id="CSF_8Zpt_8BatchRendering_8IBatchRenderer_inherit__map">
-<area shape="rect" id="node2" href="classCSF_1_1Zpt_1_1BatchRendering_1_1BatchRenderer.html" title="Default implementation of IBatchRenderer. " alt="" coords="7,95,214,136"/></map>
+<area shape="rect" id="node2" href="classCSF_1_1Zpt_1_1BatchRendering_1_1BatchRenderer.html" title="Default implementation of IBatchRenderer. " alt="" coords="7,95,214,136"/><area shape="rect" id="node3" href="classCSF_1_1Zpt_1_1BatchRendering_1_1ErrorTolerantBatchRenderer.html" title="Implementation of BatchRenderer which catches exceptions raised when rendering documents and rolls th..." alt="" coords="10,184,211,225"/></map>
 <center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:abc12da86f24381317b6b4f23549a5cab"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interfaceCSF_1_1Zpt_1_1BatchRendering_1_1IBatchRenderer.html#abc12da86f24381317b6b4f23549a5cab">Render</a> (<a class="el" href="interfaceCSF_1_1Zpt_1_1Rendering_1_1IRenderingOptions.html">IRenderingOptions</a> options, <a class="el" href="interfaceCSF_1_1Zpt_1_1BatchRendering_1_1IBatchRenderingOptions.html">IBatchRenderingOptions</a> batchOptions, <a class="el" href="namespaceCSF_1_1Zpt.html#aa8787ac88993534540d9337bb4d51109">RenderingMode</a>?mode=null)</td></tr>
-<tr class="memdesc:abc12da86f24381317b6b4f23549a5cab"><td class="mdescLeft">&#160;</td><td class="mdescRight">Parse and render the documents found using the given batch rendering options.  <a href="#abc12da86f24381317b6b4f23549a5cab">More...</a><br /></td></tr>
-<tr class="separator:abc12da86f24381317b6b4f23549a5cab"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4a8912dccd5ab4fff94c4a29bc103106"><td class="memItemLeft" align="right" valign="top"><a class="el" href="interfaceCSF_1_1Zpt_1_1BatchRendering_1_1IBatchRenderingResponse.html">IBatchRenderingResponse</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interfaceCSF_1_1Zpt_1_1BatchRendering_1_1IBatchRenderer.html#a4a8912dccd5ab4fff94c4a29bc103106">Render</a> (<a class="el" href="interfaceCSF_1_1Zpt_1_1Rendering_1_1IRenderingOptions.html">IRenderingOptions</a> options, <a class="el" href="interfaceCSF_1_1Zpt_1_1BatchRendering_1_1IBatchRenderingOptions.html">IBatchRenderingOptions</a> batchOptions, <a class="el" href="namespaceCSF_1_1Zpt.html#aa8787ac88993534540d9337bb4d51109">RenderingMode</a>?mode=null)</td></tr>
+<tr class="memdesc:a4a8912dccd5ab4fff94c4a29bc103106"><td class="mdescLeft">&#160;</td><td class="mdescRight">Parse and render the documents found using the given batch rendering options.  <a href="#a4a8912dccd5ab4fff94c4a29bc103106">More...</a><br /></td></tr>
+<tr class="separator:a4a8912dccd5ab4fff94c4a29bc103106"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Interface for a type which provides batch-rendering services, parsing and rendering potentially multiple documents in a single job. </p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
-<a class="anchor" id="abc12da86f24381317b6b4f23549a5cab"></a>
+<a class="anchor" id="a4a8912dccd5ab4fff94c4a29bc103106"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void CSF.Zpt.BatchRendering.IBatchRenderer.Render </td>
+          <td class="memname"><a class="el" href="interfaceCSF_1_1Zpt_1_1BatchRendering_1_1IBatchRenderingResponse.html">IBatchRenderingResponse</a> CSF.Zpt.BatchRendering.IBatchRenderer.Render </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="interfaceCSF_1_1Zpt_1_1Rendering_1_1IRenderingOptions.html">IRenderingOptions</a>&#160;</td>
           <td class="paramname"><em>options</em>, </td>
@@ -170,8 +170,9 @@ Public Member Functions</h2></td></tr>
   </table>
   </dd>
 </dl>
+<dl class="section return"><dt>Returns</dt><dd>An object instance indicating the outcome of the rendering. </dd></dl>
 
-<p>Implemented in <a class="el" href="classCSF_1_1Zpt_1_1BatchRendering_1_1BatchRenderer.html#a38d7e30ff65788daa80a1ccc4944c7d7">CSF.Zpt.BatchRendering.BatchRenderer</a>.</p>
+<p>Implemented in <a class="el" href="classCSF_1_1Zpt_1_1BatchRendering_1_1BatchRenderer.html#a5a82e241e4a6977b0a4b3114bda9f373">CSF.Zpt.BatchRendering.BatchRenderer</a>.</p>
 
 </div>
 </div>
@@ -184,7 +185,7 @@ Public Member Functions</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="namespaceCSF.html">CSF</a></li><li class="navelem"><a class="el" href="namespaceCSF_1_1Zpt.html">Zpt</a></li><li class="navelem"><a class="el" href="namespaceCSF_1_1Zpt_1_1BatchRendering.html">BatchRendering</a></li><li class="navelem"><a class="el" href="interfaceCSF_1_1Zpt_1_1BatchRendering_1_1IBatchRenderer.html">IBatchRenderer</a></li>
-    <li class="footer">Generated on Sun Sep 4 2016 22:01:37 for Zpt-Sharp by
+    <li class="footer">Generated on Wed Sep 21 2016 20:19:59 for Zpt-Sharp by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.8 </li>
   </ul>

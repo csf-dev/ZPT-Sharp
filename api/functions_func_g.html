@@ -102,6 +102,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="functions_func_s.html#index_s"><span>s</span></a></li>
       <li><a href="functions_func_t.html#index_t"><span>t</span></a></li>
       <li><a href="functions_func_v.html#index_v"><span>v</span></a></li>
+      <li><a href="functions_func_w.html#index_w"><span>w</span></a></li>
       <li><a href="functions_func_x.html#index_x"><span>x</span></a></li>
       <li><a href="functions_func_z.html#index_z"><span>z</span></a></li>
     </ul>
@@ -177,14 +178,18 @@ $(document).ready(function(){initNavTree('functions_func_g.html','');});
 , <a class="el" href="classCSF_1_1Zpt_1_1Rendering_1_1SourceFileInfo.html#a2e5581b9af73f636ec1a1fe3a12d3f84">CSF.Zpt.Rendering.SourceFileInfo</a>
 , <a class="el" href="classCSF_1_1Zpt_1_1Rendering_1_1UnknownSourceFileInfo.html#a6850e365a2679c0c923e7813953ab4d8">CSF.Zpt.Rendering.UnknownSourceFileInfo</a>
 </li>
-<li>GetContextualisedSummaries()
-: <a class="el" href="classCSF_1_1Zpt_1_1Rendering_1_1RepetitionInfoCollection.html#a5d9195691db2a6a694bbb2a7d626a761">CSF.Zpt.Rendering.RepetitionInfoCollection</a>
+<li>GetContextConfigurator()
+: <a class="el" href="classCSF_1_1Zpt_1_1BatchRendering_1_1BatchRenderer.html#a9e5011282e807fa334079671e92ac752">CSF.Zpt.BatchRendering.BatchRenderer</a>
 </li>
 <li>GetDefaultOptions()
 : <a class="el" href="classCSF_1_1Zpt_1_1Impl_1_1ZptHtmlDocument.html#ac081270f0f0240a7257619e3e43252a8">CSF.Zpt.Impl.ZptHtmlDocument</a>
 , <a class="el" href="classCSF_1_1Zpt_1_1Impl_1_1ZptXmlDocument.html#ae7702b8ca2a04136417708d9793ec91c">CSF.Zpt.Impl.ZptXmlDocument</a>
 , <a class="el" href="classCSF_1_1Zpt_1_1Impl_1_1ZptXmlLinqDocument.html#af380e3d0b69a378802738cf52e7bfa0b">CSF.Zpt.Impl.ZptXmlLinqDocument</a>
 , <a class="el" href="classCSF_1_1Zpt_1_1ZptDocument.html#ae0a39651bb87ee1783ddf64d4036cc45">CSF.Zpt.ZptDocument</a>
+</li>
+<li>GetDocument()
+: <a class="el" href="classCSF_1_1Zpt_1_1BatchRendering_1_1BatchRenderer.html#a89362764eb570a49b14a42efd07dffef">CSF.Zpt.BatchRendering.BatchRenderer</a>
+, <a class="el" href="interfaceCSF_1_1Zpt_1_1BatchRendering_1_1IRenderingJob.html#a4fdd4a4c8721d739c8ef2f1fde433a95">CSF.Zpt.BatchRendering.IRenderingJob</a>
 </li>
 <li>GetElementChain()
 : <a class="el" href="interfaceCSF_1_1Zpt_1_1Rendering_1_1IZptElement.html#a3abdeedd0b432dccd82996c4e34e1839">CSF.Zpt.Rendering.IZptElement</a>
@@ -262,12 +267,24 @@ $(document).ready(function(){initNavTree('functions_func_g.html','');});
 <li>GetOriginalAttributes()
 : <a class="el" href="classCSF_1_1Zpt_1_1Rendering_1_1RenderingContext.html#ab924fa62b504d02ad74d71e298ed3a6e">CSF.Zpt.Rendering.RenderingContext</a>
 </li>
+<li>GetOutputInfo()
+: <a class="el" href="classCSF_1_1Zpt_1_1BatchRendering_1_1BatchRenderer.html#a602124c72cfb20644fe574c0caf08380">CSF.Zpt.BatchRendering.BatchRenderer</a>
+, <a class="el" href="interfaceCSF_1_1Zpt_1_1BatchRendering_1_1IRenderingJob.html#a68d7de50c06e55345a1dc9cec908e559">CSF.Zpt.BatchRendering.IRenderingJob</a>
+</li>
+<li>GetOutputStream()
+: <a class="el" href="classCSF_1_1Zpt_1_1BatchRendering_1_1BatchRenderer.html#a27d1e5c10d90d3beeb2b89512aa779e9">CSF.Zpt.BatchRendering.BatchRenderer</a>
+, <a class="el" href="interfaceCSF_1_1Zpt_1_1BatchRendering_1_1IRenderingJob.html#ada065f542900215dd71b72dddca3b759">CSF.Zpt.BatchRendering.IRenderingJob</a>
+</li>
 <li>GetParentElement()
 : <a class="el" href="classCSF_1_1Zpt_1_1Impl_1_1ZptHtmlElement.html#a617c5c6aeb8a0acfd77d12190c78f7ac">CSF.Zpt.Impl.ZptHtmlElement</a>
 , <a class="el" href="classCSF_1_1Zpt_1_1Impl_1_1ZptXmlElement.html#aa7ad952c1409240feae077fef2cabb38">CSF.Zpt.Impl.ZptXmlElement</a>
 , <a class="el" href="classCSF_1_1Zpt_1_1Impl_1_1ZptXmlLinqElement.html#adf6b127d568efbc696bfac84c0daa8a4">CSF.Zpt.Impl.ZptXmlLinqElement</a>
 , <a class="el" href="interfaceCSF_1_1Zpt_1_1Rendering_1_1IZptElement.html#a8130cbaeb7fc1db5fbf9dff55c4a0f28">CSF.Zpt.Rendering.IZptElement</a>
 , <a class="el" href="classCSF_1_1Zpt_1_1Rendering_1_1ZptElement.html#aaf07cb8409df0254a967b4dbc0f2970c">CSF.Zpt.Rendering.ZptElement</a>
+</li>
+<li>GetRenderingJobs()
+: <a class="el" href="classCSF_1_1Zpt_1_1BatchRendering_1_1BatchRenderer.html#aeaf76d80cf4af0b8839b90459877d557">CSF.Zpt.BatchRendering.BatchRenderer</a>
+, <a class="el" href="interfaceCSF_1_1Zpt_1_1BatchRendering_1_1IRenderingJobFactory.html#a9d0d0e9d7e643d0c3ae4be45cb8b99a8">CSF.Zpt.BatchRendering.IRenderingJobFactory</a>
 </li>
 <li>GetRenderingMode()
 : <a class="el" href="classCSF_1_1Zpt_1_1Impl_1_1HtmlZptDocumentProvider.html#ae2a2fcbfdb538087686449f724ffe51a">CSF.Zpt.Impl.HtmlZptDocumentProvider</a>
@@ -276,7 +293,7 @@ $(document).ready(function(){initNavTree('functions_func_g.html','');});
 , <a class="el" href="interfaceCSF_1_1Zpt_1_1IZptDocumentProvider.html#a31bf711ef6f38eac819cbf0112cfcb69">CSF.Zpt.IZptDocumentProvider</a>
 </li>
 <li>GetRepetitionSummaries()
-: <a class="el" href="classCSF_1_1Zpt_1_1Rendering_1_1Model.html#a46f8df17495e42d9fcc22f2c3f2abb69">CSF.Zpt.Rendering.Model</a>
+: <a class="el" href="classCSF_1_1Zpt_1_1Rendering_1_1Model.html#a8289c13d21b6cf31b4989e09e891b018">CSF.Zpt.Rendering.Model</a>
 </li>
 <li>GetResolver()
 : <a class="el" href="interfaceCSF_1_1Zpt_1_1IXmlUrlResolverFactory.html#aefb15a64e8d0b9fba81797e7d59e58f3">CSF.Zpt.IXmlUrlResolverFactory</a>
@@ -320,7 +337,7 @@ $(document).ready(function(){initNavTree('functions_func_g.html','');});
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Sun Sep 4 2016 22:01:38 for Zpt-Sharp by
+    <li class="footer">Generated on Wed Sep 21 2016 20:20:01 for Zpt-Sharp by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.8 </li>
   </ul>
