@@ -30,7 +30,7 @@ namespace CSF.Zpt.Metal
         throw new ArgumentNullException(nameof(context));
       }
 
-      ZptAttribute attrib;
+      IZptAttribute attrib;
       if((attrib = context.GetMetalAttribute(ZptConstants.Metal.DefineMacroAttribute)) != null)
       {
         context.MetalModel.AddGlobal(attrib.Value, context.Element);

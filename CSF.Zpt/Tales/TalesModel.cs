@@ -22,7 +22,6 @@ namespace CSF.Zpt.Tales
 
     private IEvaluatorRegistry _registry;
     private IExpressionFactory _expressionCreator;
-    private static log4net.ILog _logger;
 
     #endregion
 
@@ -50,7 +49,6 @@ namespace CSF.Zpt.Tales
     public override IModel CreateChildModel()
     {
       var output = new TalesModel(this, this.Root, EvaluatorRegistry, modelObject: this.ModelObject);
-      output.RepetitionInfo = new RepetitionInfoCollection(this.RepetitionInfo);
       return output;
     }
 
@@ -98,9 +96,13 @@ namespace CSF.Zpt.Tales
       var evaluator = EvaluatorRegistry.GetEvaluator(talesExpression);
       var output = evaluator.Evaluate(talesExpression, context, this);
 
-      _logger.DebugFormat(Resources.LogMessageFormats.ExpressionEvaluated,
-                          talesExpression.ToString(),
-                          output.Value?? "<null>");
+      ZptConstants.TraceSource.TraceEvent(System.Diagnostics.TraceEventType.Verbose,
+                                          4,
+                                          Resources.LogMessageFormats.ExpressionEvaluated,
+                                          talesExpression.ToString(),
+                                          output.Value?? "<null>",
+                                          nameof(TalesModel),
+                                          nameof(Evaluate));
 
       return output;
     }
@@ -158,7 +160,7 @@ namespace CSF.Zpt.Tales
     /// Exposes the found object if this method returns <c>true</c>.  The value is undefined if this method returns
     /// <c>false</c>.
     /// </param>
-    public virtual bool TryGetLocalRootObject(string name, ZptElement element, out object result)
+    public virtual bool TryGetLocalRootObject(string name, IZptElement element, out object result)
     {
 
       bool output;
@@ -191,8 +193,9 @@ namespace CSF.Zpt.Tales
 
       var originalAttrs = new Lazy<OriginalAttributeValuesCollection>(() => context.GetOriginalAttributes());
       return new BuiltinContextsContainer(this.GetKeywordOptions(),
-                                          this.GetRepetitionSummaries(context.Element),
+                                          this.GetRepetitionSummaries(),
                                           originalAttrs,
+                                          templateFileFactory: context.RenderingOptions.GetTemplateFileFactory(),
                                           model: this.ModelObject);
     }
 
@@ -242,14 +245,6 @@ namespace CSF.Zpt.Tales
 
       _registry = evaluatorRegistry;
       _expressionCreator = expressionCreator?? new ExpressionFactory();
-    }
-
-    /// <summary>
-    /// Initializes the <see cref="CSF.Zpt.Tales.TalesModel"/> class.
-    /// </summary>
-    static TalesModel()
-    {
-      _logger = log4net.LogManager.GetLogger(typeof(TalesModel));
     }
 
     #endregion

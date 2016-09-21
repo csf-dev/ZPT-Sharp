@@ -1,11 +1,19 @@
 ﻿using System;
 using System.Text;
 using System.Collections.Generic;
+using CSF.Zpt.Cli.Exceptions;
+using CSF.Zpt.Cli.Resources;
 
 namespace CSF.Zpt.Cli
 {
   public class CommandLineOptions
   {
+    #region fields
+
+    private IList<string> _inputPaths;
+
+    #endregion
+
     #region properties
 
     public bool ForceHtmlMode
@@ -22,8 +30,17 @@ namespace CSF.Zpt.Cli
 
     public IList<string> InputPaths
     {
-      get;
-      set;
+      get {
+        return _inputPaths;
+      }
+      set {
+        if(value == null)
+        {
+          throw new ArgumentNullException(nameof(value));
+        }
+
+        _inputPaths = value;
+      }
     }
 
     public string InputFilenamePattern
@@ -80,18 +97,6 @@ namespace CSF.Zpt.Cli
       set;
     }
 
-    public bool DoNotOutputIndentedXml
-    {
-      get;
-      set;
-    }
-
-    public string XmlIndentationCharacters
-    {
-      get;
-      set;
-    }
-
     public string ContextVisitorClassNames
     {
       get;
@@ -104,13 +109,20 @@ namespace CSF.Zpt.Cli
       set;
     }
 
+    public bool ShowVersionInfo { get; set; }
+
     #endregion
 
     #region methods
 
-    public RenderingMode GetRenderingMode()
+    public RenderingMode? GetRenderingMode()
     {
-      RenderingMode output;
+      RenderingMode? output;
+
+      if(ForceHtmlMode && ForceXmlMode)
+      {
+        throw new RenderingModeDeterminationException(ExceptionMessages.HtmlAndXmlModesMutuallyExclusive);
+      }
 
       if(ForceXmlMode)
       {
@@ -122,7 +134,7 @@ namespace CSF.Zpt.Cli
       }
       else
       {
-        output = RenderingMode.AutoDetect;
+        output = null;
       }
 
       return output;
@@ -136,7 +148,7 @@ namespace CSF.Zpt.Cli
     {
       InputFilenamePattern = "*.pt";
       OutputEncoding = Encoding.UTF8.WebName;
-      XmlIndentationCharacters = "  ";
+      _inputPaths = new List<string>();
     }
 
     #endregion

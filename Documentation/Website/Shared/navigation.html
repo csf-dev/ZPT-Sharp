@@ -1,0 +1,150 @@
+<!doctype html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="utf-8">
+<title>Common navigation menu</title>
+<base href="../" />
+<style type="text/css">
+@import url(css/styles.css);
+@import url(css/dummy.css);
+</style>
+<script type="text/javascript" src="js/modernizr.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.4.0/styles/default.min.css">
+<script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.4.0/highlight.min.js"></script>
+<script>
+$(window).ready(function() {
+  hljs.initHighlightingOnLoad();
+  
+  var
+    navHamburger = $(".page_header .hamburger_menu"),
+    navMenu = $(".main_page_area > nav");
+  navHamburger.click(function(ev) {
+    navMenu.toggleClass("visible");
+  });
+});
+</script>
+</head>
+<body>
+<div class="content_wrapper">
+  <header class="page_header dummy">
+    <div class="hamburger_menu" title="Show/hide navigation">
+      <span class="hamburger_line"></span>
+      <span class="hamburger_line"></span>
+      <span class="hamburger_line"></span>
+    </div>
+    <h2>Dummy content</h2>
+  </header>
+  <div class="main_page_area">
+    <nav metal:define-macro="common_navigation">
+      <h2>Navigation menu</h2>
+      <ul class="active_introduction"
+          tal:define="unknownPage string:unknown;
+                      activePageName activePage | unknownPage"
+          tal:attributes="class string:active_$activePageName">
+        <li class="introduction nav_item">
+          <a href="index.html">Introduction</a>
+        </li>
+        <li class="asp_net_view_engine nav_item">
+          <a href="asp-net-mvc-view-engine.html">ZPT-Sharp for ASP.NET MVC</a>
+        </li>
+        <li class="page_rendering_api nav_item">
+          <a href="page-rendering-api.html">API introduction</a>
+        </li>
+        <li class="api_reference nav_item">
+          <a href="api/index.html">API reference</a>
+        </li>
+        <li class="command_line_renderer nav_item">
+          <a href="command-line-renderer.html">The command-line renderer</a>
+        </li>
+        <li class="writing_pages_using_zpt nav_item">
+          <a href="writing-pages-using-zpt.html">Writing pages</a>
+        </li>
+        <li class="diagnostics_and_logging nav_item">
+          <a href="logging.html">Diagnostics &amp; logging</a>
+        </li>
+        <li class="metal_reference nav_section">
+          <h3>METAL reference</h3>
+          <ul>
+            <li>
+              <a href="metal/introduction.html">Introduction to METAL</a>
+            </li>
+            <li>
+              <a href="metal/define-use-macro.html">Define &amp; use macros</a>
+            </li>
+            <li>
+              <a href="metal/define-fill-slot.html">Define &amp; fill slots</a>
+            </li>
+            <li>
+              <a href="metal/extend-macro.html">Extend macros</a>
+            </li>
+          </ul>
+        </li>
+        <li class="tal_reference nav_section">
+          <h3>TAL reference</h3>
+          <ul>
+            <li>
+              <a href="tal/introduction.html">Introduction to TAL</a>
+            </li>
+            <li>
+              <a href="tal/define.html">Define variables</a>
+            </li>
+            <li>
+              <a href="tal/condition.html">Conditional rendering</a>
+            </li>
+            <li>
+              <a href="tal/repeat.html">Repeat sections of markup</a>
+            </li>
+            <li>
+              <a href="tal/content-replace.html">Insert model data</a>
+            </li>
+            <li>
+              <a href="tal/attributes.html">Set attributes</a>
+            </li>
+            <li>
+              <a href="tal/omit-tag.html">Omit start/end tag</a>
+            </li>
+            <li>
+              <a href="tal/on-error.html">Error handling</a>
+            </li>
+          </ul>
+        </li>
+        <li class="tales_reference nav_section">
+          <h3>TALES reference</h3>
+          <ul>
+            <li>
+              <a href="tales/introduction.html">Introduction to TALES</a>
+            </li>
+            <li>
+              <a href="tales/path-expressions.html">Path expressions</a>
+            </li>
+            <li>
+              <a href="tales/string-expressions.html">String expressions</a>
+            </li>
+            <li>
+              <a href="tales/not-expressions.html">Not expressions</a>
+            </li>
+            <li>
+              <a href="tales/built-in-variables.html">Root variables</a>
+            </li>
+            <li>
+              <a href="tales/repeat-variables.html">Repeat variables</a>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </nav>
+    <section class="main_page_content dummy">
+      <header>
+        <h1>Main page title</h1>
+      </header>
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas aliquet tellus at lectus tempor hendrerit. Cras faucibus semper lectus, a dapibus justo porttitor non. In hac habitasse platea dictumst. Etiam vel faucibus dolor. Donec tincidunt sapien id massa ultricies iaculis. Fusce vel efficitur enim. Etiam eget ex metus. Fusce non convallis purus. Praesent ultrices lacus diam, condimentum aliquet sem luctus nec. Donec tellus arcu, egestas vel congue et, volutpat a erat. Nam diam mi, aliquet at magna et, tristique pulvinar velit.</p>
+    </section>
+  </div>
+</div>
+<footer class="page_footer dummy">
+  Dummy content
+</footer>
+</body>
+</html>

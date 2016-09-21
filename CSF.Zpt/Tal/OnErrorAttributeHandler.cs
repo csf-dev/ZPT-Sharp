@@ -20,12 +20,6 @@ namespace CSF.Zpt.Tal
 
     #endregion
 
-    #region fields
-
-    private static log4net.ILog _logger;
-
-    #endregion
-
     #region methods
 
     /// <summary>
@@ -63,8 +57,10 @@ namespace CSF.Zpt.Tal
           output = new AttributeHandlingResult(new [] { context }, true);
         }
 
-        _logger.InfoFormat(Resources.LogMessageFormats.TalErrorHandled,
-                           context.Element.GetFullFilePathAndLocation());
+        ZptConstants.TraceSource.TraceInformation(Resources.LogMessageFormats.TalErrorHandled,
+                                                  context.Element.GetFullFilePathAndLocation(),
+                                                  nameof(OnErrorAttributeHandler),
+                                                  nameof(Handle));
       }
       else
       {
@@ -81,7 +77,7 @@ namespace CSF.Zpt.Tal
     /// <param name="attribute">The content or replace attribute.</param>
     /// <param name="context">The rendering context.</param>
     /// <param name="mode">Exposes the mode (either <c>text</c>, <c>structure</c> or a <c>null</c> reference).</param>
-    private ExpressionResult GetAttributeResult(ZptAttribute attribute,
+    private ExpressionResult GetAttributeResult(IZptAttribute attribute,
                                                 RenderingContext context,
                                                 out string mode)
     {
@@ -103,18 +99,6 @@ namespace CSF.Zpt.Tal
 
       mode = match.Groups[1].Value;
       return context.TalModel.Evaluate(match.Groups[2].Value, context);
-    }
-
-    #endregion
-
-    #region constructor
-
-    /// <summary>
-    /// Initializes the <see cref="CSF.Zpt.Tal.OnErrorAttributeHandler"/> class.
-    /// </summary>
-    static OnErrorAttributeHandler()
-    {
-      _logger = log4net.LogManager.GetLogger(typeof(OnErrorAttributeHandler));
     }
 
     #endregion

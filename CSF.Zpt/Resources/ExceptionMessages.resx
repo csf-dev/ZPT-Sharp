@@ -94,5 +94,29 @@ Filename:{0}</value>
   <data name="ModelDoesNotContainItem" xml:space="preserve">
     <value>The item '{0}' was not found in the model.</value>
   </data>
-
+  <data name="BatchOptionsMustHaveInputStreamOrPaths" xml:space="preserve">
+    <value>The batch rendering options must have EITHER an input stream OR one or more input file/directory paths.</value>
+  </data>
+  <data name="BatchOptionsMustNotHaveBothInputStreamAndPaths" xml:space="preserve">
+    <value>The batch rendering options must not have BOTH an input stream AND input file/directory paths.</value>
+  </data>
+  <data name="BatchOptionsMustHaveOutputStreamOrPath" xml:space="preserve">
+    <value>The batch rendering options must have EITHER an output stream OR an output file/directory path.</value>
+  </data>
+  <data name="BatchOptionsMustNotHaveBothOutputStreamAndPath" xml:space="preserve">
+    <value>The batch rendering options must not have BOTH an output stream AND an output file/directory path.</value>
+  </data>
+  <data name="InvalidBatchRenderingOutputPath" xml:space="preserve">
+    <value>The batch rendering output path must indicate a valid file or directory path.</value>
+  </data>
+  <data name="InputMustBeFileIfOutputIsDirectory" xml:space="preserve">
+    <value>If the batch rendering output is set to a directory path, the input must be from a file and not a stream.</value>
+  </data>
+  <data name="CouldNotInstantiateTypeFormat" xml:space="preserve">
+    <value>A requested implementation of `{0}' could not be created.
+Type name:{1}</value>
+  </data>
+  <data name="FatalErrorTypeMustBeDefined" xml:space="preserve">
+    <value>The fatal-error-type must be a defined enumeration constant.</value>
+  </data>
 </root>

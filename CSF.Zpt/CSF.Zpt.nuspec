@@ -17,7 +17,7 @@
   </metadata>
   <files>
     <file src="bin/Release/CSF.dll" target="lib/net45" />
-    <file src="bin/Release/CSF.Zpt.Api.dll" target="lib/net45" />
+    <file src="bin/Release/CSF.Zpt.Abstractions.dll" target="lib/net45" />
     <file src="bin/Release/CSF.Zpt.dll" target="lib/net45" />
   </files>
 </package>

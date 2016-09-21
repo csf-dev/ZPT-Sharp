@@ -1,0 +1,100 @@
+.TH ZptBuilder 1
+.SH NAME
+.PP
+ZptBuilder.exe \- parse and render Zope Page Templates documents
+.SH SYNOPSIS
+.PP
+.B ZptBuilder.exe
+[\fIoptions\fR]
+[\fIinputs\fR]
+.SH DESCRIPTION
+.PP
+The \fBZptBuilder\fR application is used to parse and render documents formatted as Zope Page Templates source files, into either HTML or XML output documents.
+The \fBinputs\fR may be one or more file or directory paths, indicating the files and/or directories to be parsed and rendered.
+.PP
+Alternatively, if the only input is \fB\-\fR (a single minus\-dash) then the application will expect a single ZPT document to be passed via \fISTDIN\fR.
+Input passed via standard input is treated and rendered as HTML, unless the \fB\-\-xml\fR option is used.
+.PP
+Where directory paths are specified amongst the input, then that directory (and all child directories) will be searched for matching documents to be rendered.
+This search is controlled by the mode (HTML or XML) and the options \fB\-\-input\-filename\-pattern\fR and \fB\-\-ignore\fR.
+.PP
+By default, rendered output is emitted to standard output; this behaviour may be overridden, writing the output to file(s) using the \fB\-\-output\fR option.
+When directory paths are specified as inputs and the \fB\-\-output\fR option is used, each output file is saved to a path relative to the output path, based on its relative path from the input directory.
+.SH OPTIONS
+.TP
+.BR \-\-help\fR,\fB\-h
+Prints a usage statement and exits.
+.TP
+.BR \-\-version
+Prints version information and exits.
+.TP
+.BR \-\-html\fR,\fB-t
+Sets the application to work in HTML mode; all inputs will be treated and rendered as HTML files.
+The default behaviour is to use the input file's extension to determine the file type: \fB.pt\fR for HTML files or \fB.xml\fR for XML files.
+.TP
+.BR \-\-xml\fR,\fB-x
+Sets the application to work in XML mode; all inputs will be treated and rendered as XML files.
+The default behaviour is to use the input file's extension to determine the file type: \fB.pt\fR for HTML files or \fB.xml\fR for XML files.
+.TP
+.BR \-\-annotate
+Enables source annotation; causes comments to be generated and added to the rendered output annotating information about the source files used.
+A comment is generated each time the rendered output switches context to use a different piece of the source file, such as when METAL macros or slots are used.
+.TP
+.BR \-\-no\-xml\-declaration
+Omits the \fB<?xml?>\fR declaration from the output when rendering XML inputs.
+Has no effect for inputs treated as HTML.
+.TP
+.BR \-\-input\-filename\-pattern\fR=\fIPATTERN\fR,\fB\-p
+Sets a glob pattern for matching input files when directory path(s) are provided amongst the input, by default this is set to "*\fB.pt\fR".
+Note that this default value will mean that the only input files matched will be treated as HTML files.
+.TP
+.BR \-\-output\fR=\fIPATH\fR,\fB\-o
+Sets the application to emit output to the filesystem, instead of using standard output.
+If the path indicates a single file then all output is redirected to that file.
+In this case, the file will be created if it does not already exist, as long as its parent directory exists.
+.IP
+If the path to a directory is specified then each rendered document will be rendered to a separate file within the output directory.
+In this case, the output directory path must exist or else an error will be raised.
+Where a directory path is used, the names of the created files are based upon the name of the input files; the option \fB\-\-output\-filename\-extension\fR controls their extension.
+Additionally, if a directory path is used for the input, then the output files are created using a directory structure mimicking the relative path from the input directory.
+Consider the following:
+.IP
+.nf
+ZptBuilder.exe \-\-output=my\-out\-dir/ my\-input\-dir
+.fi
+.IP
+A file at the path \fImy\-input\-dir/foo/bar/baz.pt\fR would be rendered and output to the path \fImy\-out\-dir/foo/bar/baz.html\fR.
+Thus, the relative directory structure within an input directory of files to render is preserved in the output.
+.TP
+.BR \-\-output\-filename\-extension\fR=\fIEXT\fR,\fB-e\fR
+Controls the file extension of the file outputs, when the \fB\-\-output\fR option is used with a directory path.
+By default this is either \fB.html\fR or \fB.xml\fR based upon how the input file is treated.
+Has no effect when the output is sent to a single file or if the output is rendered to standard output.
+.TP
+.BR \-\-ignore\fR=\fIPATH\fR,\fB-i\fR
+When a directory path is amongst the inputs, causes the named path (or paths, separated by semicolons) to be ignored from the search.
+Ignored paths (which may be file or directory paths) will not be rendered.
+Has no effect when the input does not contain any directory paths.
+.TP
+.BR \-\-keyword\-options\fR=\fIKEY_VALUE_PAIRS\fR
+Provides keyword options for the rendering application.
+This is a semicolon-separated list of key/value pairs to be provided to the root TALES context as keyword options.
+This should be provided in the format "\fIkeyone=valueone;keytwo=valuetwo\fR" and so on.
+.TP
+.BR \-\-rendering\-context\-factory\fR=\fI"CLASS"\fR
+Where provided, overrides the default implementation of \fICSF.Zpt.Rendering.IRenderingContextFactory\fR to use when rendering pages.
+This must be a full, assembly-qualified type name where provided.
+.TP
+.BR \-\-output\-encoding\fR=\fIENCODING\fR,\fB-n
+Sets the text encoding to use for the output(s).
+By default the UTF-8 encoding is used.
+Any encoding 'web name' may be specified here.
+.TP
+.BR \-\-context\-visitors\fR=\fI"CLASSES"\fR
+Where provided, overrides the default implementations of \fICSF.Zpt.Rendering.IContextVisitor\fR to use when rendering pages.
+This is an ordered list of type names, separated by semicolons.
+These names must be full, assembly-qualified type names where provided.
+.SH SEE ALSO
+.PP
+There are comments in the configuration file \fIZptBuilder.exe.config\fR containing sample configuration.
+This sample configuration demonstrates how to enable logging of rendering operations.

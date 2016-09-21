@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using CSF.Zpt.Resources;
 
 namespace CSF.Zpt.Rendering
 {
@@ -27,7 +28,12 @@ namespace CSF.Zpt.Rendering
 
       if(String.IsNullOrEmpty(className))
       {
-        output = null;
+        string message = String.Format(ExceptionMessages.CouldNotInstantiateTypeFormat,
+                                       typeof(IContextVisitor).Name,
+                                       className);
+        throw new CouldNotCreateContextVisitorException(message) {
+          InvalidClassname = className
+        };
       }
       else if((outputType = Type.GetType(className)) != null
               && typeof(IContextVisitor).IsAssignableFrom(outputType))
@@ -36,7 +42,12 @@ namespace CSF.Zpt.Rendering
       }
       else
       {
-        output = null;
+        string message = String.Format(ExceptionMessages.CouldNotInstantiateTypeFormat,
+                                       typeof(IContextVisitor).Name,
+                                       className);
+        throw new CouldNotCreateContextVisitorException(message) {
+          InvalidClassname = className
+        };
       }
 
       return output;

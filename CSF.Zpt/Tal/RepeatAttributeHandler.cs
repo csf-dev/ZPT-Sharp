@@ -68,10 +68,10 @@ namespace CSF.Zpt.Tal
     /// <param name="variableName">Variable name.</param>
     /// <param name="expression">Expression.</param>
     /// <param name="element">The element which contains the attribute.</param>
-    private void ParseAttributeValue(ZptAttribute attribute,
+    private void ParseAttributeValue(IZptAttribute attribute,
                                      out string variableName,
                                      out string expression,
-                                     ZptElement element)
+                                     IZptElement element)
     {
       var attribMatch = AttributeMatcher.Match(attribute.Value);
 
@@ -155,7 +155,7 @@ namespace CSF.Zpt.Tal
     /// <param name="sequence">The source sequence.</param>
     /// <param name="element">The source element.</param>
     /// <param name="repeatVariableName">Repeat variable name.</param>
-    private IRepetitionInfo[] GetRepetitions(IEnumerable sequence, ZptElement element, string repeatVariableName)
+    private IRepetitionInfo[] GetRepetitions(IEnumerable sequence, IZptElement element, string repeatVariableName)
     {
       var sequenceArray = sequence
         .Cast<object>()

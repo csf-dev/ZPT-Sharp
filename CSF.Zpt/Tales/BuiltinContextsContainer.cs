@@ -26,7 +26,7 @@ namespace CSF.Zpt.Tales
 
     private object _nothing, _default, _model;
     private NamedObjectWrapper _options;
-    private ContextualisedRepetitionSummaryWrapper _repeat;
+    private RepetitionMetadataCollectionWrapper _repeat;
     private Lazy<OriginalAttributeValuesCollection> _attrs;
     private ITemplateFileFactory _templateFileFactory;
 
@@ -82,7 +82,7 @@ namespace CSF.Zpt.Tales
     /// Gets the repeat variables.
     /// </summary>
     /// <value>The repeat.</value>
-    public ContextualisedRepetitionSummaryWrapper Repeat
+    public RepetitionMetadataCollectionWrapper Repeat
     {
       get {
         return _repeat;
@@ -180,9 +180,9 @@ namespace CSF.Zpt.Tales
     /// <param name="templateFileFactory">A template-file factory.</param>
     /// <param name="model">The model being rendered.</param>
     public BuiltinContextsContainer(NamedObjectWrapper options,
-                                    ContextualisedRepetitionSummaryWrapper repeat,
+                                    RepetitionMetadataCollectionWrapper repeat,
                                     Lazy<OriginalAttributeValuesCollection> attrs,
-                                    ITemplateFileFactory templateFileFactory = null,
+                                    ITemplateFileFactory templateFileFactory,
                                     object model = null)
     {
       if(options == null)
@@ -205,7 +205,7 @@ namespace CSF.Zpt.Tales
       _attrs = attrs;
       _model = model;
 
-      _templateFileFactory = templateFileFactory?? new ZptDocumentFactory();
+        _templateFileFactory = templateFileFactory;
 
     }
 

@@ -14,7 +14,7 @@ namespace CSF.Zpt.MVC
 
     private string _physicalPath;
     private static IZptDocumentFactory _documentFactory;
-    private RenderingMode _renderingMode;
+    private RenderingMode? _renderingMode;
 
     #endregion
 
@@ -26,13 +26,13 @@ namespace CSF.Zpt.MVC
       set;
     }
 
-    public RenderingMode RenderingMode
+    public RenderingMode? RenderingMode
     {
       get {
         return _renderingMode;
       }
       set {
-        if(!value.IsDefinedValue())
+        if(value.HasValue && !value.IsDefinedValue())
         {
           throw new ArgumentException(Resources.ExceptionMessages.InvalidRenderingMode, nameof(value));
         }

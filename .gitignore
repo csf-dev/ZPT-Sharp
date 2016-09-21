@@ -8,7 +8,12 @@ packages/*/
 *.userprefs
 *.orig
 *.directory
-CSF.Zpt.zip
-CSF.Zpt.tar.gz
+DEBIAN/
 *.nupkg
 .vs/
+
+# Archives of binaries
+CSF.Zpt-api-only.zip
+CSF.Zpt-complete.zip
+CSF.Zpt.MVC.zip
+ZptBuilder.zip

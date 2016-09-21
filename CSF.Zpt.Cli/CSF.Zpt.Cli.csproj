@@ -6,55 +6,82 @@
     <ProjectGuid>{4DD64666-DBEF-4AD5-BDB0-3EB3C70A6E83}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <RootNamespace>CSF.Zpt.Cli</RootNamespace>
-    <AssemblyName>ZptBuilder</AssemblyName>
+    <ReleaseVersion>0.5.0</ReleaseVersion>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
-    <ReleaseVersion>0.3.0</ReleaseVersion>
+    <AssemblyName>ZptBuilder</AssemblyName>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>bin\Debug</OutputPath>
-    <DefineConstants>DEBUG;</DefineConstants>
+    <DefineConstants>DEBUG;TRACE;</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <Externalconsole>true</Externalconsole>
+    <CheckForOverflowUnderflow>true</CheckForOverflowUnderflow>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>full</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release</OutputPath>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <Externalconsole>true</Externalconsole>
+    <DefineConstants>TRACE;</DefineConstants>
+    <CheckForOverflowUnderflow>true</CheckForOverflowUnderflow>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Deploy|AnyCPU' ">
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release</OutputPath>
+    <DefineConstants>TRACE;</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+    <CheckForOverflowUnderflow>true</CheckForOverflowUnderflow>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="log4net">
-      <HintPath>..\packages\log4net.2.0.3\lib\net40-full\log4net.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="..\Common\CommonAssemblyInfo.cs">
       <Link>CommonAssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="AssemblyInfo.cs" />
-    <Compile Include="EntryPoint.cs" />
     <Compile Include="CommandLineOptions.cs" />
-    <Compile Include="Renderer.cs" />
-    <Compile Include="InputOutputInfo.cs" />
-    <Compile Include="InputOutputInfoCreator.cs" />
-    <Compile Include="RenderingJob.cs" />
-    <Compile Include="Resources\Messages.Designer.cs">
-      <DependentUpon>Messages.resx</DependentUpon>
+    <Compile Include="VersionNumberInspector.cs" />
+    <Compile Include="Application.cs" />
+    <Compile Include="ICommandLineOptionsFactory.cs" />
+    <Compile Include="CommandLineOptionsFactory.cs" />
+    <Compile Include="IVersionNumberInspector.cs" />
+    <Compile Include="IApplicationTerminator.cs" />
+    <Compile Include="ApplicationTerminator.cs" />
+    <Compile Include="Exceptions\OptionsParsingException.cs" />
+    <Compile Include="BatchRenderingOptionsFactory.cs" />
+    <Compile Include="IBatchRenderingOptionsFactory.cs" />
+    <Compile Include="IRenderingOptionsFactory.cs" />
+    <Compile Include="RenderingOptionsFactory.cs" />
+    <Compile Include="Exceptions\RenderingModeDeterminationException.cs" />
+    <Compile Include="Resources\ExceptionMessages.Designer.cs">
+      <DependentUpon>ExceptionMessages.resx</DependentUpon>
     </Compile>
+    <Compile Include="Resources\OutputMessages.Designer.cs">
+      <DependentUpon>OutputMessages.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Exceptions\InvalidInputPathException.cs" />
+    <Compile Include="Exceptions\InvalidOutputPathException.cs" />
+    <Compile Include="Exceptions\InvalidKeywordOptionsException.cs" />
+    <Compile Include="Exceptions\InvalidOutputEncodingException.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
-  <Target Name="AfterBuild" Condition="'$(Configuration)' == 'Release'">
-    <Exec Command="nuget pack CSF.Zpt.Cli.nuspec -Prop Configuration=Release" Condition="'$(OS)' == 'Linux'">
+  <Target Name="AfterBuild" Condition="'$(Configuration)' == 'Deploy'">
+    <Exec Command="Util\build-plaintext-manual" Condition="'$(OS)' == 'Unix'">
     </Exec>
-    <Exec Command="&quot;$(MSBuildProgramFiles32)\NuGet\nuget.exe&quot; pack CSF.Zpt.Cli.nuspec -Prop Configuration=Release" Condition="'$(OS)' != 'Linux'">
+    <Exec Command="Util\build-html-manpage" Condition="'$(OS)' == 'Unix'">
+    </Exec>
+    <Exec Command="nuget pack CSF.Zpt.Cli.nuspec -Prop Configuration=Release" Condition="'$(OS)' == 'Unix'">
+    </Exec>
+    <Exec Command="&quot;$(MSBuildProgramFiles32)\NuGet\nuget.exe&quot; pack CSF.Zpt.Cli.nuspec -Prop Configuration=Release" Condition="'$(OS)' != 'Unix'">
     </Exec>
   </Target>
   <ItemGroup>
@@ -62,26 +89,53 @@
       <Project>{16E957BB-347C-4EE1-815F-19AC296FB9E0}</Project>
       <Name>CSF.Zpt</Name>
     </ProjectReference>
-    <ProjectReference Include="..\CSF.Zpt.Api\CSF.Zpt.Api.csproj">
-      <Project>{8207CD9B-F1C1-4D75-B250-ACDFFBDCB071}</Project>
-      <Name>CSF.Zpt.Api</Name>
-    </ProjectReference>
     <ProjectReference Include="..\CSF\CSF\CSF.csproj">
       <Project>{E563D7BC-1AB1-4AFB-8533-51315437C6E6}</Project>
       <Name>CSF</Name>
     </ProjectReference>
+    <ProjectReference Include="..\CSF.Zpt.Abstractions\CSF.Zpt.Abstractions.csproj">
+      <Project>{8207CD9B-F1C1-4D75-B250-ACDFFBDCB071}</Project>
+      <Name>CSF.Zpt.Abstractions</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CSF.Zpt.Impl.HtmlHAP\CSF.Zpt.Impl.HtmlHAP.csproj">
+      <Project>{BFD834D4-5724-4425-BCB3-6DEE6B03F743}</Project>
+      <Name>CSF.Zpt.Impl.HtmlHAP</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CSF.Zpt.Impl.XmlLegacy\CSF.Zpt.Impl.XmlLegacy.csproj">
+      <Project>{71834399-0B92-4754-9721-178872E77CFD}</Project>
+      <Name>CSF.Zpt.Impl.XmlLegacy</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CSF.Zpt.Impl.XmlLinq\CSF.Zpt.Impl.XmlLinq.csproj">
+      <Project>{842160E4-BDE5-4FA0-ADE5-07554090AA27}</Project>
+      <Name>CSF.Zpt.Impl.XmlLinq</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CSF.Zpt.Log4net\CSF.Zpt.Log4net.csproj">
+      <Project>{81044439-06CF-44E2-BBF2-3800F1DEB5B1}</Project>
+      <Name>CSF.Zpt.Log4net</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config" />
     <None Include="App.config" />
+    <None Include="Util\build-html-manpage" />
+    <None Include="Util\build-plaintext-manual" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\" />
+    <Folder Include="Exceptions\" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Resources\Messages.resx">
+    <EmbeddedResource Include="Resources\ExceptionMessages.resx">
       <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Messages.Designer.cs</LastGenOutput>
+      <LastGenOutput>ExceptionMessages.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Resources\OutputMessages.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>OutputMessages.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="ZptBuilder.1">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 </Project>

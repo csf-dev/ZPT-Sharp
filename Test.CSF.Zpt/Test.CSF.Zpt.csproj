@@ -7,32 +7,40 @@
     <OutputType>Library</OutputType>
     <RootNamespace>Test.CSF.Zpt</RootNamespace>
     <AssemblyName>Test.CSF.Zpt</AssemblyName>
+    <ReleaseVersion>0.5.0</ReleaseVersion>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
-    <ReleaseVersion>0.3.0</ReleaseVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>bin\Debug</OutputPath>
-    <DefineConstants>DEBUG;</DefineConstants>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <ConsolePause>false</ConsolePause>
+    <CheckForOverflowUnderflow>true</CheckForOverflowUnderflow>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>full</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release</OutputPath>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <ConsolePause>false</ConsolePause>
+    <DefineConstants>TRACE</DefineConstants>
+    <CheckForOverflowUnderflow>true</CheckForOverflowUnderflow>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Deploy|AnyCPU' ">
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+    <DefineConstants>TRACE</DefineConstants>
+    <CheckForOverflowUnderflow>true</CheckForOverflowUnderflow>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
-    <Reference Include="nunit.framework">
-      <HintPath>..\packages\NUnit.2.6.3\lib\nunit.framework.dll</HintPath>
-    </Reference>
     <Reference Include="Ploeh.AutoFixture">
       <HintPath>..\packages\AutoFixture.3.34.2\lib\net40\Ploeh.AutoFixture.dll</HintPath>
     </Reference>
@@ -47,13 +55,14 @@
       <HintPath>..\packages\log4net.2.0.3\lib\net40-full\log4net.dll</HintPath>
     </Reference>
     <Reference Include="System.Configuration" />
+    <Reference Include="nunit.framework">
+      <HintPath>..\packages\NUnit.2.6.4\lib\nunit.framework.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
     <None Include="packages.config" />
-    <None Include="Test.CSF.Zpt.dll.config">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
+    <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Rendering\" />
@@ -62,6 +71,7 @@
     <Folder Include="Util\" />
     <Folder Include="Util\Autofixture\" />
     <Folder Include="Tales\" />
+    <Folder Include="Cli\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="GlobalSetupFixture.cs" />
@@ -107,6 +117,9 @@
     <Compile Include="Tales\TestFilesystemDirectory.cs" />
     <Compile Include="ModelIntegrationTests.cs" />
     <Compile Include="IntegrationTestBase.cs" />
+    <Compile Include="..\Common\CommonAssemblyInfo.cs">
+      <Link>CommonAssemblyInfo.cs</Link>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Metal\MetalVisitorIntegrationTests.1.xml" />
@@ -123,9 +136,25 @@
       <Project>{16E957BB-347C-4EE1-815F-19AC296FB9E0}</Project>
       <Name>CSF.Zpt</Name>
     </ProjectReference>
-    <ProjectReference Include="..\CSF.Zpt.Api\CSF.Zpt.Api.csproj">
+    <ProjectReference Include="..\CSF.Zpt.Abstractions\CSF.Zpt.Abstractions.csproj">
       <Project>{8207CD9B-F1C1-4D75-B250-ACDFFBDCB071}</Project>
-      <Name>CSF.Zpt.Api</Name>
+      <Name>CSF.Zpt.Abstractions</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CSF.Zpt.Impl.HtmlHAP\CSF.Zpt.Impl.HtmlHAP.csproj">
+      <Project>{BFD834D4-5724-4425-BCB3-6DEE6B03F743}</Project>
+      <Name>CSF.Zpt.Impl.HtmlHAP</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CSF.Zpt.Impl.XmlLegacy\CSF.Zpt.Impl.XmlLegacy.csproj">
+      <Project>{71834399-0B92-4754-9721-178872E77CFD}</Project>
+      <Name>CSF.Zpt.Impl.XmlLegacy</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CSF.Zpt.Impl.XmlLinq\CSF.Zpt.Impl.XmlLinq.csproj">
+      <Project>{842160E4-BDE5-4FA0-ADE5-07554090AA27}</Project>
+      <Name>CSF.Zpt.Impl.XmlLinq</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CSF.Zpt.Log4net\CSF.Zpt.Log4net.csproj">
+      <Project>{81044439-06CF-44E2-BBF2-3800F1DEB5B1}</Project>
+      <Name>CSF.Zpt.Log4net</Name>
     </ProjectReference>
   </ItemGroup>
 </Project>

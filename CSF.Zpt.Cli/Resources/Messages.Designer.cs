@@ -51,5 +51,41 @@ namespace CSF.Zpt.Cli.Resources {
                 return ResourceManager.GetString("UsageStatement", resourceCulture);
             }
         }
+        
+        internal static string VersionFormat {
+            get {
+                return ResourceManager.GetString("VersionFormat", resourceCulture);
+            }
+        }
+        
+        internal static string CannotParseOptionsError {
+            get {
+                return ResourceManager.GetString("CannotParseOptionsError", resourceCulture);
+            }
+        }
+        
+        internal static string UnexpectedError {
+            get {
+                return ResourceManager.GetString("UnexpectedError", resourceCulture);
+            }
+        }
+        
+        internal static string OptionsParsingExceptionMessage {
+            get {
+                return ResourceManager.GetString("OptionsParsingExceptionMessage", resourceCulture);
+            }
+        }
+        
+        internal static string BatchOptionsCreationExceptionMessage {
+            get {
+                return ResourceManager.GetString("BatchOptionsCreationExceptionMessage", resourceCulture);
+            }
+        }
+        
+        internal static string RenderingOptionsCreationExceptionMessage {
+            get {
+                return ResourceManager.GetString("RenderingOptionsCreationExceptionMessage", resourceCulture);
+            }
+        }
     }
 }
