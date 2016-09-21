@@ -6,7 +6,7 @@
     <ProjectGuid>{28D30A8C-0693-4FEA-BCC7-020AA41ECBB1}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AssemblyName>Documentation</AssemblyName>
-    <ReleaseVersion>0.4.0</ReleaseVersion>
+    <ReleaseVersion>0.5.0</ReleaseVersion>
     <WebsiteUrlRoot>http://csf-dev.github.io/ZPT-Sharp/</WebsiteUrlRoot>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
   </PropertyGroup>

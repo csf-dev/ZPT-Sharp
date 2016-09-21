@@ -1,15 +1,15 @@
-ZPT-Sharp
-=========
+# ZPT-Sharp
+ZPT-Sharp is an implementation of Zope Page Templates (ZPT) in C♯ and .NET.
+Its main use case is as `ViewEngine` for ASP.NET MVC (currently only MVC5 supported).
+It also provides offline page-rendering via the **ZptBuilder** command-line utility.
 
-Implementation of Zope Page Templates (ZPT) in C#,
-intended for eventual use as an ASP.NET MVC ViewEngine
+## More information
+In-depth documentation is available [at the project website](http://csf-dev.github.io/ZPT-Sharp/).
 
----
-
-Documentation available at http://csf-dev.github.io/ZPT-Sharp/
-
-This project is in-development and as-yet the API is not fully stabilised,
-feel free to explore, but please don't use in production just-yet.
+## Current status
+The current status of the project - as of `v0.5.0` - is a tentative alpha.
+I cannot currently promise that the API will not change, and I would certainly not recommend it for production use.
+At this stage I would welcome exploration, testing and (most importantly) bug-reports from interested parties.
 
 ---
 

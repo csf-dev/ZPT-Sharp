@@ -13,7 +13,7 @@ DEBIAN/
 .vs/
 
 # Archives of binaries
-CSF.Zpt.zip
+CSF.Zpt-api-only.zip
 CSF.Zpt-complete.zip
 CSF.Zpt.MVC.zip
 ZptBuilder.zip
