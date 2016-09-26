@@ -104,7 +104,7 @@ namespace CSF.Zpt.MVC
         return _renderingMode;
       }
       set {
-        if(value.HasValue && !value.IsDefinedValue())
+        if(value.HasValue && !value.Value.IsDefinedValue())
         {
           throw new ArgumentException(Resources.ExceptionMessages.InvalidRenderingMode, nameof(value));
         }
