@@ -151,6 +151,14 @@
       <Project>{8207CD9B-F1C1-4D75-B250-ACDFFBDCB071}</Project>
       <Name>CSF.Zpt.Abstractions</Name>
     </ProjectReference>
+    <ProjectReference Include="..\CSF\CSF.Reflection\CSF.Reflection.csproj">
+      <Project>{275413F6-0651-4AD4-A426-07EDA165C07E}</Project>
+      <Name>CSF.Reflection</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CSF\CSF.Configuration\CSF.Configuration.csproj">
+      <Project>{8C570A26-CEEB-45D1-9436-745C8DBAE9D8}</Project>
+      <Name>CSF.Configuration</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Tales\" />
