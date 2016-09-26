@@ -28,17 +28,19 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSF.Zpt.Cli", "CSF.Zpt.Cli\
 EndProject
 Project("{9344BDBB-3E7F-41FC-A0DD-8665D75EE146}") = "CSF.Zpt.Packaging", "CSF.Zpt.Packaging\CSF.Zpt.Packaging.mdproj", "{454F2087-0EFE-492C-AE21-3AC340189010}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSF.Zpt.Impl.HtmlHAP", "CSF.Zpt.Impl.HtmlHAP\CSF.Zpt.Impl.HtmlHAP.csproj", "{BFD834D4-5724-4425-BCB3-6DEE6B03F743}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSF.Zpt.Impl.XmlLinq", "CSF.Zpt.Impl.XmlLinq\CSF.Zpt.Impl.XmlLinq.csproj", "{842160E4-BDE5-4FA0-ADE5-07554090AA27}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSF.Zpt.Impl.XmlLegacy", "CSF.Zpt.Impl.XmlLegacy\CSF.Zpt.Impl.XmlLegacy.csproj", "{71834399-0B92-4754-9721-178872E77CFD}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSF.Zpt.Log4net", "CSF.Zpt.Log4net\CSF.Zpt.Log4net.csproj", "{81044439-06CF-44E2-BBF2-3800F1DEB5B1}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Documentation", "Documentation\Documentation.csproj", "{28D30A8C-0693-4FEA-BCC7-020AA41ECBB1}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test.CSF.Zpt.Cli", "Test.CSF.Zpt.Cli\Test.CSF.Zpt.Cli.csproj", "{1BD7DB88-B672-4BEF-9B80-F13788A8D295}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "RenderingImplementations", "RenderingImplementations", "{F1251A40-9526-48DC-A665-F9AEB972AC33}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSF.Zpt.Impl.HtmlHAP", "RenderingImplementations\CSF.Zpt.Impl.HtmlHAP\CSF.Zpt.Impl.HtmlHAP.csproj", "{BFD834D4-5724-4425-BCB3-6DEE6B03F743}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSF.Zpt.Impl.XmlLegacy", "RenderingImplementations\CSF.Zpt.Impl.XmlLegacy\CSF.Zpt.Impl.XmlLegacy.csproj", "{71834399-0B92-4754-9721-178872E77CFD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSF.Zpt.Impl.XmlLinq", "RenderingImplementations\CSF.Zpt.Impl.XmlLinq\CSF.Zpt.Impl.XmlLinq.csproj", "{842160E4-BDE5-4FA0-ADE5-07554090AA27}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -146,6 +148,9 @@ Global
 		{295C293C-60FB-43F3-B728-C2BA5B7516BC} = {4B340A7A-DC93-4D8D-85DE-AF5123BE9F53}
 		{275413F6-0651-4AD4-A426-07EDA165C07E} = {4B340A7A-DC93-4D8D-85DE-AF5123BE9F53}
 		{8C570A26-CEEB-45D1-9436-745C8DBAE9D8} = {4B340A7A-DC93-4D8D-85DE-AF5123BE9F53}
+		{BFD834D4-5724-4425-BCB3-6DEE6B03F743} = {F1251A40-9526-48DC-A665-F9AEB972AC33}
+		{71834399-0B92-4754-9721-178872E77CFD} = {F1251A40-9526-48DC-A665-F9AEB972AC33}
+		{842160E4-BDE5-4FA0-ADE5-07554090AA27} = {F1251A40-9526-48DC-A665-F9AEB972AC33}
 	EndGlobalSection
 	GlobalSection(MonoDevelopProperties) = preSolution
 		Policies = $0
