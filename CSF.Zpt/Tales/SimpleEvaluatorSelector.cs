@@ -13,7 +13,7 @@ namespace CSF.Zpt.Tales
   {
     #region fields
 
-    private IExpressionEvaluatorRegistry _registry;
+    private readonly IExpressionEvaluatorRegistry _registry;
 
     #endregion
 

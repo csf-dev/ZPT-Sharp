@@ -13,7 +13,7 @@ namespace CSF.Zpt.Tales
   {
     #region fields
 
-    private static IExpressionEvaluatorRegistry _default;
+    private static readonly IExpressionEvaluatorRegistry _default;
 
     private Dictionary<string,IExpressionEvaluator> _evaluatorsByPrefix;
     private Dictionary<Type,IExpressionEvaluator> _evaluatorsByType;
