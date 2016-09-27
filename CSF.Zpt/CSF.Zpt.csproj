@@ -135,6 +135,9 @@
     <Compile Include="Rendering\RepetitionMetadataCollectionWrapper.cs" />
     <Compile Include="ZptDocumentProviderRegistry.cs" />
     <Compile Include="Tales\SimpleEvaluatorSelector.cs" />
+    <Compile Include="Tales\ExpressionEvaluatorRegistry.cs" />
+    <Compile Include="Tales\ExpressionEvaluatorConfiguration.cs" />
+    <Compile Include="Tales\ConfigurationExpressionEvaluatorProvider.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Target Name="AfterBuild" Condition="'$(Configuration)' == 'Deploy'">

@@ -105,6 +105,9 @@
     <Compile Include="Rendering\CouldNotCreateRenderingContextFactoryException.cs" />
     <Compile Include="IZptDocumentProviderRegistry.cs" />
     <Compile Include="Tales\IEvaluatorSelector.cs" />
+    <Compile Include="Tales\IExpressionEvaluatorRegistry.cs" />
+    <Compile Include="Tales\ExpressionEvaluatorMetadata.cs" />
+    <Compile Include="Tales\IExpressionEvaluatorProvider.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup />
