@@ -104,6 +104,7 @@
     <Compile Include="Rendering\CouldNotCreateContextVisitorException.cs" />
     <Compile Include="Rendering\CouldNotCreateRenderingContextFactoryException.cs" />
     <Compile Include="IZptDocumentProviderRegistry.cs" />
+    <Compile Include="Tales\IEvaluatorSelector.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup />

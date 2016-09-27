@@ -134,7 +134,6 @@
     <Compile Include="BatchRendering\ErrorTolerantBatchRenderer.cs" />
     <Compile Include="Rendering\RepetitionMetadataCollectionWrapper.cs" />
     <Compile Include="ZptDocumentProviderRegistry.cs" />
-    <Compile Include="Tales\IEvaluatorSelector.cs" />
     <Compile Include="Tales\SimpleEvaluatorSelector.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
