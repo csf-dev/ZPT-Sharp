@@ -84,6 +84,18 @@
       <Project>{81044439-06CF-44E2-BBF2-3800F1DEB5B1}</Project>
       <Name>CSF.Zpt.Log4net</Name>
     </ProjectReference>
+    <ProjectReference Include="..\TalesExpressionEvaluators\CSF.Zpt.Impl.NotExpressions\CSF.Zpt.Impl.NotExpressions.csproj">
+      <Project>{7B3748AD-DF11-4A80-9258-EA043CD99D7C}</Project>
+      <Name>CSF.Zpt.Impl.NotExpressions</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TalesExpressionEvaluators\CSF.Zpt.Impl.PathExpressions\CSF.Zpt.Impl.PathExpressions.csproj">
+      <Project>{B6A27567-61F7-43F7-B201-FFC7A449BDBB}</Project>
+      <Name>CSF.Zpt.Impl.PathExpressions</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TalesExpressionEvaluators\CSF.Zpt.Impl.StringExpressions\CSF.Zpt.Impl.StringExpressions.csproj">
+      <Project>{63F5FF1D-DA36-4BB4-AA99-24AA78844109}</Project>
+      <Name>CSF.Zpt.Impl.StringExpressions</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="TestApplication.cs" />
