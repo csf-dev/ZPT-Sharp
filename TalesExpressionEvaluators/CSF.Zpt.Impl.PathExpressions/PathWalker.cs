@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using CSF.Reflection;
 
-namespace CSF.Zpt.Tales
+namespace CSF.Zpt.Impl.PathExpressions
 {
   /// <summary>
   /// Provides a forwards-only reader for <see cref="Path"/> instances, behaving similarly to an <c>IEnumerator</c>.

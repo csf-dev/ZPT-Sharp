@@ -2,8 +2,9 @@
 using CSF.Zpt.Rendering;
 using System.Collections;
 using System.Linq;
+using CSF.Zpt.Tales;
 
-namespace CSF.Zpt.Tales
+namespace CSF.Zpt.Impl.NotExpressions
 {
   /// <summary>
   /// Implementation of <see cref="ExpressionEvaluatorBase"/> which evaluates a 'child' expression, converts the result to
@@ -116,8 +117,7 @@ namespace CSF.Zpt.Tales
     /// <summary>
     /// Initializes a new instance of the <see cref="CSF.Zpt.Tales.NotExpressionEvaluator"/> class.
     /// </summary>
-    /// <param name="registry">Registry.</param>
-    public NotExpressionEvaluator(IEvaluatorRegistry registry) : base(registry) {}
+    public NotExpressionEvaluator() : base() {}
 
     #endregion
   }

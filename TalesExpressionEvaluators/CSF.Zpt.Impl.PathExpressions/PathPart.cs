@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace CSF.Zpt.Tales
+namespace CSF.Zpt.Impl.PathExpressions
 {
   /// <summary>
   /// Represents a part of a TALES path, this type indicates a single traversal from a parent object to a child.

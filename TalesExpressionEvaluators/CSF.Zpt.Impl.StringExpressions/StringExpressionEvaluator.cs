@@ -3,8 +3,10 @@ using CSF.Zpt.Rendering;
 using System.Text.RegularExpressions;
 using System.Linq;
 using System.Collections.Generic;
+using CSF.Zpt.Tales;
+using CSF.Zpt.Impl.PathExpressions;
 
-namespace CSF.Zpt.Tales
+namespace CSF.Zpt.Impl.StringExpressions
 {
   /// <summary>
   /// Implementation of <see cref="ExpressionEvaluatorBase"/> which creates string values, with optional interpolation.
@@ -110,7 +112,7 @@ namespace CSF.Zpt.Tales
                                                 IRenderingContext context,
                                                 ITalesModel model)
     {
-      var pathEvaluator = EvaluatorRegistry.GetEvaluator<PathExpressionEvaluator>();
+      var pathEvaluator = EvaluatorSelector.GetEvaluator<PathExpressionEvaluator>();
 
       return ReplacementFinder.Replace(input, match => {
         string output;
@@ -146,8 +148,13 @@ namespace CSF.Zpt.Tales
     /// <summary>
     /// Initializes a new instance of the <see cref="CSF.Zpt.Tales.StringExpressionEvaluator"/> class.
     /// </summary>
-    /// <param name="registry">Registry.</param>
-    public StringExpressionEvaluator(IEvaluatorRegistry registry) : base(registry) {}
+    public StringExpressionEvaluator() : base() {}
+
+    /// <summary>
+    /// Initializes a new instance of the <see cref="CSF.Zpt.Tales.StringExpressionEvaluator"/> class.
+    /// </summary>
+    /// <param name="selector">Expression evaluator selector.</param>
+    public StringExpressionEvaluator(IEvaluatorSelector selector) : base(selector) {}
 
     #endregion
   }

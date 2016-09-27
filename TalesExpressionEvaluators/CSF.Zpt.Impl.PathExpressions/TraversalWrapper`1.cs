@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace CSF.Zpt.Tales
+namespace CSF.Zpt.Impl.PathExpressions
 {
   /// <summary>
   /// Wrapper for a traversal delegate.

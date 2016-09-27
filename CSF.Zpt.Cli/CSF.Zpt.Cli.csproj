@@ -101,10 +101,6 @@
       <Project>{BFD834D4-5724-4425-BCB3-6DEE6B03F743}</Project>
       <Name>CSF.Zpt.Impl.HtmlHAP</Name>
     </ProjectReference>
-    <ProjectReference Include="..\RenderingImplementations\CSF.Zpt.Impl.XmlLegacy\CSF.Zpt.Impl.XmlLegacy.csproj">
-      <Project>{71834399-0B92-4754-9721-178872E77CFD}</Project>
-      <Name>CSF.Zpt.Impl.XmlLegacy</Name>
-    </ProjectReference>
     <ProjectReference Include="..\RenderingImplementations\CSF.Zpt.Impl.XmlLinq\CSF.Zpt.Impl.XmlLinq.csproj">
       <Project>{842160E4-BDE5-4FA0-ADE5-07554090AA27}</Project>
       <Name>CSF.Zpt.Impl.XmlLinq</Name>
@@ -116,6 +112,18 @@
     <ProjectReference Include="..\CSF\CSF.Cli.Parameters\CSF.Cli.Parameters.csproj">
       <Project>{295C293C-60FB-43F3-B728-C2BA5B7516BC}</Project>
       <Name>CSF.Cli.Parameters</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TalesExpressionEvaluators\CSF.Zpt.Impl.StringExpressions\CSF.Zpt.Impl.StringExpressions.csproj">
+      <Project>{63F5FF1D-DA36-4BB4-AA99-24AA78844109}</Project>
+      <Name>CSF.Zpt.Impl.StringExpressions</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TalesExpressionEvaluators\CSF.Zpt.Impl.PathExpressions\CSF.Zpt.Impl.PathExpressions.csproj">
+      <Project>{B6A27567-61F7-43F7-B201-FFC7A449BDBB}</Project>
+      <Name>CSF.Zpt.Impl.PathExpressions</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TalesExpressionEvaluators\CSF.Zpt.Impl.NotExpressions\CSF.Zpt.Impl.NotExpressions.csproj">
+      <Project>{7B3748AD-DF11-4A80-9258-EA043CD99D7C}</Project>
+      <Name>CSF.Zpt.Impl.NotExpressions</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

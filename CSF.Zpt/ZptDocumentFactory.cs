@@ -32,11 +32,7 @@ namespace CSF.Zpt
 
     #region fields
 
-    private static readonly ZptDocumentFactory _default;
-
-    private IDocumentImplementationProvider _implementationProvider;
-    private IDictionary<Type,IZptDocumentProvider> _providerTypes;
-    private IZptDocumentProvider _defaultHtmlProvider, _defaultXmlProvider;
+    private IZptDocumentProviderRegistry _providerRegistry;
 
     #endregion
 
@@ -267,11 +263,11 @@ namespace CSF.Zpt
       switch(mode)
       {
       case RenderingMode.Html:
-        output = _defaultHtmlProvider;
+        output = _providerRegistry.DefaultHtmlProvider;
         break;
 
       case RenderingMode.Xml:
-        output = _defaultXmlProvider;
+        output = _providerRegistry.DefaultXmlProvider;
         break;
 
       default:
@@ -288,7 +284,7 @@ namespace CSF.Zpt
         throw new ArgumentNullException(nameof(type));
       }
 
-      return _providerTypes[type];
+      return _providerRegistry.GetProvider(type);
     }
 
     #endregion
@@ -340,43 +336,14 @@ namespace CSF.Zpt
     /// <summary>
     /// Initializes a new instance of the <see cref="CSF.Zpt.ZptDocumentFactory"/> class.
     /// </summary>
-    public ZptDocumentFactory()
+    public ZptDocumentFactory(IZptDocumentProviderRegistry registry = null)
     {
-      _implementationProvider = new ConfigurationDocumentImplementationProvider();
-
-      var providers = (from md in _implementationProvider.GetAllProviderMetadata()
-                       select new { Metadata = md,
-                                    Provider = (IZptDocumentProvider) Activator.CreateInstance(md.ProviderType) })
-        .ToArray();
-
-      _defaultHtmlProvider = providers.Single(x => x.Metadata.IsDefaultHtmlProvider).Provider;
-      _defaultXmlProvider = providers.Single(x => x.Metadata.IsDefaultXmlProvider).Provider;
-
-      _providerTypes = providers.ToDictionary(k => k.Metadata.ProviderType, v => v.Provider);
-    }
-
-    static ZptDocumentFactory()
-    {
-      _default = new ZptDocumentFactory();
+      _providerRegistry = registry?? ZptDocumentProviderRegistry.Default;
     }
 
     #endregion
 
     #region static members
-
-    internal static IZptDocumentFactory DefaultDocumentFactory
-    {
-      get {
-        return _default;
-      }
-    }
-
-    internal static Tales.ITemplateFileFactory DefaultTemplateFactory
-    {
-      get {
-        return _default;
-      }
-    }
 
     /// <summary>
     /// Gets the file extensions which indicate that an <see cref="RenderingMode.Html"/> should be used.

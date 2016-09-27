@@ -38,7 +38,7 @@ namespace Test.CSF.Zpt.Tales
     public void TestCreateChildModel()
     {
       // Arrange
-      var sut = new TalesModel(Mock.Of<IEvaluatorRegistry>());
+      var sut = new TalesModel(Mock.Of<IEvaluatorSelector>());
 
       // Act
       var child = sut.CreateChildModel();
@@ -52,7 +52,7 @@ namespace Test.CSF.Zpt.Tales
     public void TestEvaluate()
     {
       // Arrange
-      var registry = new Mock<IEvaluatorRegistry>();
+      var registry = new Mock<IEvaluatorSelector>();
       var evaluator = new Mock<IExpressionEvaluator>();
 
       var sut = new TalesModel(registry.Object);
@@ -77,7 +77,7 @@ namespace Test.CSF.Zpt.Tales
     public void TestEvaluateString()
     {
       // Arrange
-      var registry = new Mock<IEvaluatorRegistry>();
+      var registry = new Mock<IEvaluatorSelector>();
       var evaluator = new Mock<IExpressionEvaluator>();
 
       var sut = new TalesModel(registry.Object);
@@ -103,7 +103,7 @@ namespace Test.CSF.Zpt.Tales
     public void TestTryGetRootObject_Nothing()
     {
       // Arrange
-      var registry = new Mock<IEvaluatorRegistry>();
+      var registry = new Mock<IEvaluatorSelector>();
       var sut = new TalesModel(registry.Object);
 
       // Act
@@ -121,7 +121,7 @@ namespace Test.CSF.Zpt.Tales
     public void TestTryGetRootObject_Default()
     {
       // Arrange
-      var registry = new Mock<IEvaluatorRegistry>();
+      var registry = new Mock<IEvaluatorSelector>();
       var sut = new TalesModel(registry.Object);
 
       // Act
@@ -140,7 +140,7 @@ namespace Test.CSF.Zpt.Tales
     public void TestTryGetRootObject_Options()
     {
       // Arrange
-      var registry = new Mock<IEvaluatorRegistry>();
+      var registry = new Mock<IEvaluatorSelector>();
       var sut = new TalesModel(registry.Object);
 
       // Act
@@ -159,7 +159,7 @@ namespace Test.CSF.Zpt.Tales
     public void TestTryGetRootObject_Repeat()
     {
       // Arrange
-      var registry = new Mock<IEvaluatorRegistry>();
+      var registry = new Mock<IEvaluatorSelector>();
       var sut = new TalesModel(registry.Object);
 
       // Act
@@ -178,7 +178,7 @@ namespace Test.CSF.Zpt.Tales
     public void TestTryGetRootObject_Attrs()
     {
       // Arrange
-      var registry = new Mock<IEvaluatorRegistry>();
+      var registry = new Mock<IEvaluatorSelector>();
       var sut = new TalesModel(registry.Object);
 
       // Act
@@ -197,7 +197,7 @@ namespace Test.CSF.Zpt.Tales
     public void TestTryGetRootObject_Contexts()
     {
       // Arrange
-      var registry = new Mock<IEvaluatorRegistry>();
+      var registry = new Mock<IEvaluatorSelector>();
       var sut = new TalesModel(registry.Object);
 
       // Act

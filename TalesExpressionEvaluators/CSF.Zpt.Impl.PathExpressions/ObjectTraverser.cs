@@ -4,8 +4,9 @@ using System.Reflection;
 using System.Threading;
 using System.Collections;
 using CSF.Reflection;
+using CSF.Zpt.Tales;
 
-namespace CSF.Zpt.Tales
+namespace CSF.Zpt.Impl.PathExpressions
 {
   /// <summary>
   /// Encapsulates logic for traversing from one TALES object to another.

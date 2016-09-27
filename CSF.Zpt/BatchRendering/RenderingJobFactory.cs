@@ -95,9 +95,9 @@ namespace CSF.Zpt.BatchRendering
 
     #region constructor
 
-    public RenderingJobFactory()
+    public RenderingJobFactory(IZptDocumentFactory documentFactory = null)
     {
-      _documentFactory = ZptDocumentFactory.DefaultDocumentFactory;
+      _documentFactory = documentFactory?? new ZptDocumentFactory();
     }
 
     #endregion

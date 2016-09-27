@@ -71,20 +71,7 @@
     <Compile Include="Tal\ConditionAttributeHandler.cs" />
     <Compile Include="Tal\AttributeHandlingResult.cs" />
     <Compile Include="Tales\TalesModel.cs" />
-    <Compile Include="Tales\PathExpressionEvaluator.cs" />
-    <Compile Include="Tales\StringExpressionEvaluator.cs" />
-    <Compile Include="Tales\NotExpressionEvaluator.cs" />
     <Compile Include="Tales\ExpressionEvaluatorBase.cs" />
-    <Compile Include="Tales\IEvaluatorRegistry.cs" />
-    <Compile Include="Tales\SimpleEvaluatorRegistry.cs" />
-    <Compile Include="Tales\PathComponent.cs" />
-    <Compile Include="Tales\Path.cs" />
-    <Compile Include="Tales\PathPart.cs" />
-    <Compile Include="Tales\PathWalker.cs" />
-    <Compile Include="Tales\ObjectTraverser.cs" />
-    <Compile Include="Tales\TraversalWrapper`1.cs" />
-    <Compile Include="Tales\TraversalWrapper.cs" />
-    <Compile Include="Tales\FuncByRef.cs" />
     <Compile Include="Tales\BuiltinContextsContainer.cs" />
     <Compile Include="Tales\TalesRenderingContextFactory.cs" />
     <Compile Include="Rendering\ContextVisitorBase.cs" />
@@ -93,7 +80,6 @@
     <Compile Include="Tales\TemplateDirectory.cs" />
     <Compile Include="Tales\EnumerableObjectWrapperWithNamedItems.cs" />
     <Compile Include="LocalXhtmlXmlResolver.cs" />
-    <Compile Include="Tales\LocalVariablePathExpressionEvaluator.cs" />
     <Compile Include="Rendering\RenderingContextExtensions.cs" />
     <Compile Include="Tal\TalTidyUpVisitor.cs" />
     <Compile Include="Metal\MetalTidyUpVisitor.cs" />
@@ -135,6 +121,11 @@
     <Compile Include="BatchRendering\IRenderingJobFactory.cs" />
     <Compile Include="BatchRendering\ErrorTolerantBatchRenderer.cs" />
     <Compile Include="Rendering\RepetitionMetadataCollectionWrapper.cs" />
+    <Compile Include="ZptDocumentProviderRegistry.cs" />
+    <Compile Include="Tales\SimpleEvaluatorSelector.cs" />
+    <Compile Include="Tales\ExpressionEvaluatorRegistry.cs" />
+    <Compile Include="Tales\ExpressionEvaluatorConfiguration.cs" />
+    <Compile Include="Tales\ConfigurationExpressionEvaluatorProvider.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Target Name="AfterBuild" Condition="'$(Configuration)' == 'Deploy'">

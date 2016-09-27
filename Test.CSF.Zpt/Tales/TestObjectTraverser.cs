@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using Test.CSF.Zpt.Util;
 using CSF.Zpt.Rendering;
 using Test.CSF.Zpt.Util.Autofixture;
+using CSF.Zpt.Impl.PathExpressions;
 
 namespace Test.CSF.Zpt.Tales
 {

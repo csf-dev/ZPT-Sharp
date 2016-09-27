@@ -2,6 +2,9 @@ using System;
 using NUnit.Framework;
 using CSF.Zpt.Tales;
 using Ploeh.AutoFixture;
+using CSF.Zpt.Impl.PathExpressions;
+using CSF.Zpt.Impl.StringExpressions;
+using CSF.Zpt.Impl.NotExpressions;
 
 namespace Test.CSF.Zpt.Tales
 {
@@ -33,7 +36,7 @@ namespace Test.CSF.Zpt.Tales
       // Arrange (nothing to do)
 
       // Act
-      var defaultInstance = SimpleEvaluatorRegistry.Default;
+      var defaultInstance = new SimpleEvaluatorSelector();
 
       // Assert
       Assert.NotNull(defaultInstance);
@@ -45,7 +48,7 @@ namespace Test.CSF.Zpt.Tales
     public void TestGetEvaluator(string prefix, Type expectedType)
     {
       // Arrange
-      var sut = SimpleEvaluatorRegistry.Default;
+      var sut = new SimpleEvaluatorSelector();
       var expression = new Expression(prefix, _autofixture.Create<string>());
 
       // Act
@@ -61,7 +64,7 @@ namespace Test.CSF.Zpt.Tales
     public void TestGetEvaluatorNotRecognised()
     {
       // Arrange
-      var sut = SimpleEvaluatorRegistry.Default;
+      var sut = new SimpleEvaluatorSelector();
       var expression = new Expression("zzinvalid", _autofixture.Create<string>());
 
       // Act
@@ -74,7 +77,7 @@ namespace Test.CSF.Zpt.Tales
     public void TestGetEvaluatorDefault()
     {
       // Arrange
-      var sut = SimpleEvaluatorRegistry.Default;
+      var sut = new SimpleEvaluatorSelector();
       var expression = new Expression(null, _autofixture.Create<string>());
 
       // Act
