@@ -5,7 +5,7 @@ namespace CSF.Zpt.Rendering
   /// <summary>
   /// A model which represents and carries the state of a ZPT operation.
   /// </summary>
-  public interface IModel
+  public interface IModel : IModelValueStore
   {
     #region properties
 
@@ -24,20 +24,6 @@ namespace CSF.Zpt.Rendering
     #endregion
 
     #region methods
-
-    /// <summary>
-    /// Adds a new item to the current local model, identified by a given name and containing a given value.
-    /// </summary>
-    /// <param name="name">The new item name.</param>
-    /// <param name="value">The item value.</param>
-    void AddLocal(string name, object value);
-
-    /// <summary>
-    /// Adds a new item to the current local model, identified by a given name and containing a given value.
-    /// </summary>
-    /// <param name="name">The new item name.</param>
-    /// <param name="value">The item value.</param>
-    void AddGlobal(string name, object value);
 
     /// <summary>
     /// Adds information about a repetition to the current instance.
