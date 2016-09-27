@@ -8,7 +8,7 @@ namespace CSF.Zpt.Rendering
   /// <summary>
   /// Represents the object model, presented to a <see cref="IZptDocument"/> when it is rendered.
   /// </summary>
-  public class RenderingContext
+  public class RenderingContext : IRenderingContext, IModelValueContainer
   {
     #region fields
 
@@ -98,13 +98,21 @@ namespace CSF.Zpt.Rendering
 
     #endregion
 
+    #region IModelValueContainer implementation
+
+    IModelValueStore IModelValueContainer.MetalModel { get { return this.MetalModel; } }
+
+    IModelValueStore IModelValueContainer.TalModel { get { return this.TalModel; } }
+
+    #endregion
+
     #region methods
 
     /// <summary>
     /// Creates and returns a collection of child contexts, from the current instance.
     /// </summary>
     /// <returns>The child contexts.</returns>
-    public virtual RenderingContext[] GetChildContexts()
+    public virtual IRenderingContext[] GetChildContexts()
     {
       return this.Element
         .GetChildElements()
@@ -122,7 +130,7 @@ namespace CSF.Zpt.Rendering
     /// <returns>The sibling context.</returns>
     /// <param name="element">The ZPT element for which the new context is to be created.</param>
     /// <param name="cloneAttributes">A value indicating whether or not the element's attributes should be cloned or not.</param>
-    public virtual RenderingContext CreateSiblingContext(IZptElement element, bool cloneAttributes = false)
+    public virtual IRenderingContext CreateSiblingContext(IZptElement element, bool cloneAttributes = false)
     {
       if(element == null)
       {
