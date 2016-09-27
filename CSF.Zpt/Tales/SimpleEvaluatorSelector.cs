@@ -146,7 +146,7 @@ namespace CSF.Zpt.Tales
     #region constructor
 
     /// <summary>
-    /// Initializes a new instance of the <see cref="CSF.Zpt.Tales.SimpleEvaluatorRegistry"/> class.
+    /// Initializes a new instance of the <see cref="CSF.Zpt.Tales.SimpleEvaluatorSelector"/> class.
     /// </summary>
     /// <param name="evaluatorTypes">A collection of expression evaluator types.</param>
     /// <param name="defaultEvaluatorType">The default expression evaluator type.</param>
@@ -167,7 +167,7 @@ namespace CSF.Zpt.Tales
     }
 
     /// <summary>
-    /// Initializes the <see cref="CSF.Zpt.Tales.SimpleEvaluatorRegistry"/> class.
+    /// Initializes the <see cref="CSF.Zpt.Tales.SimpleEvaluatorSelector"/> class.
     /// </summary>
     static SimpleEvaluatorSelector()
     {
