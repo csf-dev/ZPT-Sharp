@@ -30,7 +30,7 @@ namespace Test.CSF.Zpt.Tales
       var expression = new Expression("not", expressionContent);
 
       var evaluator = new Mock<IExpressionEvaluator>();
-      var registry = Mock.Of<IEvaluatorRegistry>(x => x.GetEvaluator(It.IsAny<Expression>()) == evaluator.Object);
+      var registry = Mock.Of<IEvaluatorSelector>(x => x.GetEvaluator(It.IsAny<Expression>()) == evaluator.Object);
       evaluator
         .Setup(x => x.Evaluate(It.Is<Expression>(e => e.ToString() == expressionContent),
                                It.IsAny<RenderingContext>(),
@@ -59,7 +59,7 @@ namespace Test.CSF.Zpt.Tales
       var expression = new Expression("not", expressionContent);
 
       var evaluator = new Mock<IExpressionEvaluator>();
-      var registry = Mock.Of<IEvaluatorRegistry>(x => x.GetEvaluator(It.IsAny<Expression>()) == evaluator.Object);
+      var registry = Mock.Of<IEvaluatorSelector>(x => x.GetEvaluator(It.IsAny<Expression>()) == evaluator.Object);
       evaluator
         .Setup(x => x.Evaluate(It.Is<Expression>(e => e.ToString() == expressionContent),
                                It.IsAny<RenderingContext>(),
@@ -89,7 +89,7 @@ namespace Test.CSF.Zpt.Tales
       var expression = new Expression("not", expressionContent);
 
       var evaluator = new Mock<IExpressionEvaluator>();
-      var registry = Mock.Of<IEvaluatorRegistry>(x => x.GetEvaluator(It.IsAny<Expression>()) == evaluator.Object);
+      var registry = Mock.Of<IEvaluatorSelector>(x => x.GetEvaluator(It.IsAny<Expression>()) == evaluator.Object);
       var convertible = Mock.Of<ITalesConvertible>(x => x.AsBoolean() == conversionValue);
       evaluator
         .Setup(x => x.Evaluate(It.Is<Expression>(e => e.ToString() == expressionContent),

@@ -42,6 +42,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSF.Zpt.Impl.XmlLegacy", "R
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSF.Zpt.Impl.XmlLinq", "RenderingImplementations\CSF.Zpt.Impl.XmlLinq\CSF.Zpt.Impl.XmlLinq.csproj", "{842160E4-BDE5-4FA0-ADE5-07554090AA27}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "TalesExpressionEvaluators", "TalesExpressionEvaluators", "{F2830FC9-EFCE-4DE8-8B24-2196A4F820BC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

@@ -103,6 +103,7 @@
     <Compile Include="BatchRendering\IBatchRenderingDocumentResponse.cs" />
     <Compile Include="Rendering\CouldNotCreateContextVisitorException.cs" />
     <Compile Include="Rendering\CouldNotCreateRenderingContextFactoryException.cs" />
+    <Compile Include="IZptDocumentProviderRegistry.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup />

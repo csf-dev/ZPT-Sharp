@@ -68,7 +68,7 @@ namespace CSF.Zpt.Tales
     /// Initializes a new instance of the <see cref="CSF.Zpt.Tales.LocalVariablePathExpressionEvaluator"/> class.
     /// </summary>
     /// <param name="registry">Registry.</param>
-    public LocalVariablePathExpressionEvaluator(IEvaluatorRegistry registry) : base(registry) {}
+    public LocalVariablePathExpressionEvaluator(IEvaluatorSelector registry) : base(registry) {}
 
     #endregion
   }

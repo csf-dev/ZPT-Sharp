@@ -117,7 +117,7 @@ namespace CSF.Zpt.Tales
     /// Initializes a new instance of the <see cref="CSF.Zpt.Tales.NotExpressionEvaluator"/> class.
     /// </summary>
     /// <param name="registry">Registry.</param>
-    public NotExpressionEvaluator(IEvaluatorRegistry registry) : base(registry) {}
+    public NotExpressionEvaluator(IEvaluatorSelector registry) : base(registry) {}
 
     #endregion
   }

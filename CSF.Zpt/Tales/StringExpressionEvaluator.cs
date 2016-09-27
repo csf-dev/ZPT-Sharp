@@ -147,7 +147,7 @@ namespace CSF.Zpt.Tales
     /// Initializes a new instance of the <see cref="CSF.Zpt.Tales.StringExpressionEvaluator"/> class.
     /// </summary>
     /// <param name="registry">Registry.</param>
-    public StringExpressionEvaluator(IEvaluatorRegistry registry) : base(registry) {}
+    public StringExpressionEvaluator(IEvaluatorSelector registry) : base(registry) {}
 
     #endregion
   }

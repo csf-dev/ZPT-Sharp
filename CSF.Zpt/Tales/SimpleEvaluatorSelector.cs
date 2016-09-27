@@ -9,11 +9,11 @@ namespace CSF.Zpt.Tales
   /// Simple implementation of <see cref="IExpressionEvaluator"/> which keeps a collection of the available evaluators
   /// in an <c>IDictionary</c>, indexed by their applicable prefixes.
   /// </summary>
-  public class SimpleEvaluatorRegistry : IEvaluatorRegistry
+  public class SimpleEvaluatorSelector : IEvaluatorSelector
   {
     #region constants
 
-    private static SimpleEvaluatorRegistry _default;
+    private static SimpleEvaluatorSelector _default;
 
     #endregion
 
@@ -150,7 +150,7 @@ namespace CSF.Zpt.Tales
     /// </summary>
     /// <param name="evaluatorTypes">A collection of expression evaluator types.</param>
     /// <param name="defaultEvaluatorType">The default expression evaluator type.</param>
-    public SimpleEvaluatorRegistry(IEnumerable<Type> evaluatorTypes,
+    public SimpleEvaluatorSelector(IEnumerable<Type> evaluatorTypes,
                                    Type defaultEvaluatorType)
     {
       if(evaluatorTypes == null)
@@ -169,7 +169,7 @@ namespace CSF.Zpt.Tales
     /// <summary>
     /// Initializes the <see cref="CSF.Zpt.Tales.SimpleEvaluatorRegistry"/> class.
     /// </summary>
-    static SimpleEvaluatorRegistry()
+    static SimpleEvaluatorSelector()
     {
       var evaluatorTypes = new [] {
         typeof(PathExpressionEvaluator),
@@ -178,7 +178,7 @@ namespace CSF.Zpt.Tales
         typeof(LocalVariablePathExpressionEvaluator),
       };
 
-      _default = new SimpleEvaluatorRegistry(evaluatorTypes, typeof(PathExpressionEvaluator));
+      _default = new SimpleEvaluatorSelector(evaluatorTypes, typeof(PathExpressionEvaluator));
     }
 
     #endregion
@@ -189,7 +189,7 @@ namespace CSF.Zpt.Tales
     /// Gets the default evaluator registry.
     /// </summary>
     /// <value>The default registry.</value>
-    public static SimpleEvaluatorRegistry Default
+    public static SimpleEvaluatorSelector Default
     {
       get {
         return _default;

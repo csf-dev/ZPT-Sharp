@@ -75,8 +75,6 @@
     <Compile Include="Tales\StringExpressionEvaluator.cs" />
     <Compile Include="Tales\NotExpressionEvaluator.cs" />
     <Compile Include="Tales\ExpressionEvaluatorBase.cs" />
-    <Compile Include="Tales\IEvaluatorRegistry.cs" />
-    <Compile Include="Tales\SimpleEvaluatorRegistry.cs" />
     <Compile Include="Tales\PathComponent.cs" />
     <Compile Include="Tales\Path.cs" />
     <Compile Include="Tales\PathPart.cs" />
@@ -135,6 +133,9 @@
     <Compile Include="BatchRendering\IRenderingJobFactory.cs" />
     <Compile Include="BatchRendering\ErrorTolerantBatchRenderer.cs" />
     <Compile Include="Rendering\RepetitionMetadataCollectionWrapper.cs" />
+    <Compile Include="ZptDocumentProviderRegistry.cs" />
+    <Compile Include="Tales\IEvaluatorSelector.cs" />
+    <Compile Include="Tales\SimpleEvaluatorSelector.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Target Name="AfterBuild" Condition="'$(Configuration)' == 'Deploy'">

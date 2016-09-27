@@ -33,7 +33,7 @@ namespace Test.CSF.Zpt.Tales
       // Arrange (nothing to do)
 
       // Act
-      var defaultInstance = SimpleEvaluatorRegistry.Default;
+      var defaultInstance = SimpleEvaluatorSelector.Default;
 
       // Assert
       Assert.NotNull(defaultInstance);
@@ -45,7 +45,7 @@ namespace Test.CSF.Zpt.Tales
     public void TestGetEvaluator(string prefix, Type expectedType)
     {
       // Arrange
-      var sut = SimpleEvaluatorRegistry.Default;
+      var sut = SimpleEvaluatorSelector.Default;
       var expression = new Expression(prefix, _autofixture.Create<string>());
 
       // Act
@@ -61,7 +61,7 @@ namespace Test.CSF.Zpt.Tales
     public void TestGetEvaluatorNotRecognised()
     {
       // Arrange
-      var sut = SimpleEvaluatorRegistry.Default;
+      var sut = SimpleEvaluatorSelector.Default;
       var expression = new Expression("zzinvalid", _autofixture.Create<string>());
 
       // Act
@@ -74,7 +74,7 @@ namespace Test.CSF.Zpt.Tales
     public void TestGetEvaluatorDefault()
     {
       // Arrange
-      var sut = SimpleEvaluatorRegistry.Default;
+      var sut = SimpleEvaluatorSelector.Default;
       var expression = new Expression(null, _autofixture.Create<string>());
 
       // Act

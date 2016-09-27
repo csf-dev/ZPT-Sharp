@@ -29,7 +29,7 @@ namespace Test.CSF.Zpt.Tales
       new TalesModelCustomisation().Customize(_autofixture);
 
       _pathEvaluator = new Mock<IExpressionEvaluator>();
-      var registry = new Mock<IEvaluatorRegistry>();
+      var registry = new Mock<IEvaluatorSelector>();
       _autofixture.Inject(registry.Object);
       _model = _autofixture.Create<TalesModel>();
 
