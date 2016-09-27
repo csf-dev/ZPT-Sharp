@@ -135,7 +135,7 @@ namespace Test.CSF.Zpt.Tal
 
       var contexts = Enumerable
         .Range(0, nestingLevel + 1)
-        .Select(x => fixture.Create<RenderingContext>())
+        .Select(x => fixture.Create<IRenderingContext>())
         .ToArray();
       for(int i = 0; i < nestingLevel; i++)
       {
@@ -147,8 +147,8 @@ namespace Test.CSF.Zpt.Tal
 
       var generalHandler = new Mock<IAttributeHandler>();
       generalHandler
-        .Setup(x => x.Handle(It.IsAny<RenderingContext>()))
-        .Returns((RenderingContext ctx) => new AttributeHandlingResult(new[] { ctx }, true));
+        .Setup(x => x.Handle(It.IsAny<IRenderingContext>()))
+        .Returns((IRenderingContext ctx) => new AttributeHandlingResult(new[] { ctx }, true));
       generalHandler
         .Setup(x => x.Handle(contexts[nestingLevel]))
         .Throws<RenderingException>();
@@ -158,7 +158,7 @@ namespace Test.CSF.Zpt.Tal
       var errorHandler = new Mock<IAttributeHandler>();
       errorHandler
         .Setup(x => x.Handle(contexts[nestingLevel]))
-        .Callback((RenderingContext ele) => {
+        .Callback((IRenderingContext ele) => {
           errorObject = ele.TalModel.Error;
         });
 
