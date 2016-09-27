@@ -13,7 +13,7 @@ namespace CSF.Zpt.Rendering
     /// Visit the given context and return a collection of the resultant contexts.
     /// </summary>
     /// <param name="context">Context.</param>
-    public override RenderingContext[] Visit(RenderingContext context)
+    public override IRenderingContext[] Visit(IRenderingContext context)
     {
       // Intentional no-op
       return new [] { context };

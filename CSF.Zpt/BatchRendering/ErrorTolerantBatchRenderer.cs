@@ -21,7 +21,7 @@ namespace CSF.Zpt.BatchRendering
     protected override IBatchRenderingDocumentResponse Render(IZptDocument doc,
                                                               Stream outputStream,
                                                               IRenderingOptions options,
-                                                              Action<RenderingContext> contextConfigurator,
+                                                              Action<IModelValueContainer> contextConfigurator,
                                                               string outputInfo)
     {
       try

@@ -58,7 +58,6 @@
     <Compile Include="Rendering\IRenderingContext.cs" />
     <Compile Include="ZptConstants.cs" />
     <Compile Include="Rendering\IContextVisitor.cs" />
-    <Compile Include="Rendering\RenderingContext.cs" />
     <Compile Include="Rendering\ZptNamespace.cs" />
     <Compile Include="Rendering\OriginalAttributeValuesCollection.cs" />
     <Compile Include="Rendering\IRenderingContextFactory.cs" />

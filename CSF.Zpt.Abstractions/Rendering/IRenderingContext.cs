@@ -3,7 +3,7 @@
     /// <summary>
     /// Interface for a rendering context.
     /// </summary>
-    public interface IRenderingContext
+    public interface IRenderingContext : IModelValueContainer
     {
         #region properties
 

@@ -55,7 +55,7 @@ namespace CSF.Zpt.Tales
     /// <param name="expression">The expression to evaluate.</param>
     /// <param name="context">The rendering context for the expression being evaluated.</param>
     /// <param name="model">The ZPT model, providing the context for evaluation.</param>
-    public abstract ExpressionResult Evaluate(Expression expression, RenderingContext context, ITalesModel model);
+    public abstract ExpressionResult Evaluate(Expression expression, IRenderingContext context, ITalesModel model);
 
     #endregion
 

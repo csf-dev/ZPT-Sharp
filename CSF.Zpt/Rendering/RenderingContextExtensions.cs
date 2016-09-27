@@ -14,7 +14,7 @@ namespace CSF.Zpt.Rendering
     /// <returns>The attribute, or a <c>null</c> reference.</returns>
     /// <param name="context">The rendering context from which to get attributes.</param>
     /// <param name="attributeName">The attribute name.</param>
-    public static IZptAttribute GetMetalAttribute(this RenderingContext context, string attributeName)
+    public static IZptAttribute GetMetalAttribute(this IRenderingContext context, string attributeName)
     {
       if(context == null)
       {
@@ -31,7 +31,7 @@ namespace CSF.Zpt.Rendering
     /// <returns>The attribute, or a <c>null</c> reference.</returns>
     /// <param name="context">The rendering context from which to get attributes.</param>
     /// <param name="attributeName">The attribute name.</param>
-    public static IZptAttribute GetTalAttribute(this RenderingContext context, string attributeName)
+    public static IZptAttribute GetTalAttribute(this IRenderingContext context, string attributeName)
     {
       if(context == null)
       {

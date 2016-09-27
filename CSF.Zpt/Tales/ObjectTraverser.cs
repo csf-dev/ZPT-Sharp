@@ -76,7 +76,7 @@ namespace CSF.Zpt.Tales
     /// <param name="name">The named path of traversal.</param>
     /// <param name="result">Exposes the result of traversal.</param>
     /// <param name="currentContext">Gets the current rendering context.</param>
-    public bool Traverse(object source, string name, out object result, Rendering.RenderingContext currentContext)
+    public bool Traverse(object source, string name, out object result, Rendering.IRenderingContext currentContext)
     {
       if(name == null)
       {

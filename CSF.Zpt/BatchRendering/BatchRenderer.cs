@@ -62,7 +62,7 @@ namespace CSF.Zpt.BatchRendering
     protected virtual IBatchRenderingDocumentResponse Render(IRenderingJob job,
                                                              IRenderingOptions options,
                                                              IBatchRenderingOptions batchOptions,
-                                                             Action<RenderingContext> contextConfigurator)
+                                                             Action<IModelValueContainer> contextConfigurator)
     {
       var doc = GetDocument(job);
       var outputInfo = GetOutputInfo(job, batchOptions);
@@ -84,7 +84,7 @@ namespace CSF.Zpt.BatchRendering
     protected virtual IBatchRenderingDocumentResponse Render(IZptDocument doc,
                                                              Stream outputStream,
                                                              IRenderingOptions options,
-                                                             Action<RenderingContext> contextConfigurator,
+                                                             Action<IModelValueContainer> contextConfigurator,
                                                              string outputInfo)
     {
       using(var writer = new StreamWriter(outputStream, options.OutputEncoding))
@@ -113,7 +113,7 @@ namespace CSF.Zpt.BatchRendering
     /// </summary>
     /// <returns>The context configurator.</returns>
     /// <param name="job">Job.</param>
-    protected virtual Action<RenderingContext> GetContextConfigurator(IRenderingJob job)
+    protected virtual Action<IModelValueContainer> GetContextConfigurator(IRenderingJob job)
     {
       return ctx => {
         if(job.InputRootDirectory != null)

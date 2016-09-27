@@ -33,7 +33,7 @@ namespace CSF.Zpt.Tal
     /// </summary>
     /// <returns>A response type providing information about the result of this operation.</returns>
     /// <param name="context">The rendering context, which exposes a ZPT element.</param>
-    public AttributeHandlingResult Handle(RenderingContext context)
+    public AttributeHandlingResult Handle(IRenderingContext context)
     {
       if(context == null)
       {

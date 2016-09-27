@@ -27,14 +27,14 @@ namespace CSF.Zpt.Tal
     /// </summary>
     /// <returns>A response type providing information about the result of this operation.</returns>
     /// <param name="context">The rendering context, which exposes a ZPT element.</param>
-    public AttributeHandlingResult Handle(RenderingContext context)
+    public AttributeHandlingResult Handle(IRenderingContext context)
     {
       if(context == null)
       {
         throw new ArgumentNullException(nameof(context));
       }
 
-      RenderingContext[] output = null;
+      IRenderingContext[] output = null;
       var attribute = context.GetTalAttribute(ZptConstants.Tal.RepeatAttribute);
 
       if(attribute != null)
@@ -100,7 +100,7 @@ namespace CSF.Zpt.Tal
     /// <param name="expression">Expression.</param>
     /// <param name="model">Model.</param>
     /// <param name="context">The rendering context.</param>
-    private IEnumerable GetSequence(string expression, IModel model, RenderingContext context)
+    private IEnumerable GetSequence(string expression, IModel model, IRenderingContext context)
     {
       ExpressionResult result;
       IEnumerable output;
@@ -178,7 +178,7 @@ namespace CSF.Zpt.Tal
     /// <returns>The collection of new rendering contexts which represent new elements added to the DOM.</returns>
     /// <param name="repetitions">The repetitions.</param>
     /// <param name="context">The source rendering context.</param>
-    private RenderingContext[] HandleRepetitions(IRepetitionInfo[] repetitions, RenderingContext context)
+    private IRenderingContext[] HandleRepetitions(IRepetitionInfo[] repetitions, IRenderingContext context)
     {
       var output = repetitions
         .Select(x => new { Context = context.CreateSiblingContext(x.AssociatedElement), Repetition = x })

@@ -135,21 +135,21 @@ namespace CSF.Zpt.Rendering
     #region methods
 
     /// <summary>
-    /// Creates a new root <see cref="RenderingContext"/> instance.
+    /// Creates a new root <see cref="IRenderingContext"/> instance.
     /// </summary>
     /// <returns>The root rendering context.</returns>
-    public virtual RenderingContext CreateRootContext(IZptElement element)
+    public virtual IRenderingContext CreateRootContext(IZptElement element)
     {
       return this.CreateRootContext(element, null);
     }
 
     /// <summary>
-    /// Creates a new root <see cref="RenderingContext"/> instance.
+    /// Creates a new root <see cref="IRenderingContext"/> instance.
     /// </summary>
     /// <param name="element">The root ZPT element</param>
     /// <param name="model">The model to render</param>
     /// <returns>The root rendering context.</returns>
-    public virtual RenderingContext CreateRootContext(IZptElement element, object model)
+    public virtual IRenderingContext CreateRootContext(IZptElement element, object model)
     {
       if(element == null)
       {

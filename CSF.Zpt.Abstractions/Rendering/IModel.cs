@@ -54,7 +54,7 @@ namespace CSF.Zpt.Rendering
     /// </summary>
     /// <param name="expression">The expression to evaluate.</param>
     /// <param name="context">The rendering context for which we are evaluating a result.</param>
-    ExpressionResult Evaluate(string expression, RenderingContext context);
+    ExpressionResult Evaluate(string expression, IRenderingContext context);
 
     #endregion
   }

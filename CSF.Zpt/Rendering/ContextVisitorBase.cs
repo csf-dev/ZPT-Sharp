@@ -13,9 +13,9 @@ namespace CSF.Zpt.Rendering
     /// <summary>
     /// Visit the given context and return a collection of the resultant contexts.
     /// </summary>
-    /// <returns>Zero or more <see cref="RenderingContext"/> instances, determined by the outcome of this visit.</returns>
+    /// <returns>Zero or more <see cref="IRenderingContext"/> instances, determined by the outcome of this visit.</returns>
     /// <param name="context">The rendering context to visit.</param>
-    public abstract RenderingContext[] Visit(RenderingContext context);
+    public abstract IRenderingContext[] Visit(IRenderingContext context);
 
     /// <summary>
     /// Visit the given context, as well as its child contexts, and return a collection of the resultant contexts.
@@ -26,9 +26,9 @@ namespace CSF.Zpt.Rendering
     /// recursively moving down the exposed document tree, visiting each context in turn.
     /// </para>
     /// </remarks>
-    /// <returns>Zero or more <see cref="RenderingContext"/> instances, determined by the outcome of this visit.</returns>
+    /// <returns>Zero or more <see cref="IRenderingContext"/> instances, determined by the outcome of this visit.</returns>
     /// <param name="context">The rendering context to visit.</param>
-    public virtual RenderingContext[] VisitRecursively(RenderingContext context)
+    public virtual IRenderingContext[] VisitRecursively(IRenderingContext context)
     {
       if(context == null)
       {
@@ -51,7 +51,7 @@ namespace CSF.Zpt.Rendering
     /// </summary>
     /// <returns>The rendering contexts instances which are exposed after the visiting process is complete.</returns>
     /// <param name="context">The rendering context to visit.</param>
-    public virtual RenderingContext[] VisitContext(RenderingContext context)
+    public virtual IRenderingContext[] VisitContext(IRenderingContext context)
     {
       return this.VisitRecursively(context);
     }

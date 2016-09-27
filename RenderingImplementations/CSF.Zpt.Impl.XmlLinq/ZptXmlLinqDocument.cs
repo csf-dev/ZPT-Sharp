@@ -66,9 +66,9 @@ namespace CSF.Zpt.Impl
     /// </summary>
     /// <returns>The rendered XML document.</returns>
     /// <param name="options">The rendering options to use.  If <c>null</c> then default options are used.</param>
-    /// <param name="contextConfigurator">An optional action to perform upon the root <see cref="RenderingContext"/>, to configure it.</param>
+    /// <param name="contextConfigurator">An optional action to perform upon the root <see cref="IModelValueContainer"/>, to configure it.</param>
     public XDocument RenderXml(IRenderingOptions options = null,
-                                 Action<RenderingContext> contextConfigurator = null)
+                                 Action<IModelValueContainer> contextConfigurator = null)
     {
       return RenderXml(null, options, contextConfigurator);
     }
@@ -79,10 +79,10 @@ namespace CSF.Zpt.Impl
     /// <returns>The rendered XML document.</returns>
     /// <param name="model">An object for which the ZPT document is to be applied.</param>
     /// <param name="options">The rendering options to use.  If <c>null</c> then default options are used.</param>
-    /// <param name="contextConfigurator">An optional action to perform upon the root <see cref="RenderingContext"/>, to configure it.</param>
+    /// <param name="contextConfigurator">An optional action to perform upon the root <see cref="IModelValueContainer"/>, to configure it.</param>
     public XDocument RenderXml(object model,
                                  IRenderingOptions options = null,
-                                 Action<RenderingContext> contextConfigurator = null)
+                                 Action<IModelValueContainer> contextConfigurator = null)
     {
       var opts = this.GetOptions(options);
       var element = this.RenderElement(model, opts, contextConfigurator);

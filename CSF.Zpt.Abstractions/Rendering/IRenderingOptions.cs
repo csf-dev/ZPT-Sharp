@@ -46,19 +46,19 @@ namespace CSF.Zpt.Rendering
     #region methods
 
     /// <summary>
-    /// Creates a new root <see cref="RenderingContext"/> instance.
+    /// Creates a new root <see cref="IRenderingContext"/> instance.
     /// </summary>
     /// <param name="element">The root ZPT element</param>
     /// <returns>The root rendering context.</returns>
-    RenderingContext CreateRootContext(IZptElement element);
+    IRenderingContext CreateRootContext(IZptElement element);
 
     /// <summary>
-    /// Creates a new root <see cref="RenderingContext"/> instance.
+    /// Creates a new root <see cref="IRenderingContext"/> instance.
     /// </summary>
     /// <param name="element">The root ZPT element</param>
     /// <param name="model">The model to render</param>
     /// <returns>The root rendering context.</returns>
-    RenderingContext CreateRootContext(IZptElement element, object model);
+    IRenderingContext CreateRootContext(IZptElement element, object model);
 
     /// <summary>
     /// Gets an instance of <see cref="ITemplateFileFactory"/> from the current instance.
