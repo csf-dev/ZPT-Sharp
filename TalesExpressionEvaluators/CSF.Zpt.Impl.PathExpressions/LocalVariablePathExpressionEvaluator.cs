@@ -1,7 +1,8 @@
 ﻿using System;
 using CSF.Zpt.Rendering;
+using CSF.Zpt.Tales;
 
-namespace CSF.Zpt.Tales
+namespace CSF.Zpt.Impl.PathExpressions
 {
   /// <summary>
   /// Specialisation of <see cref="PathExpressionEvaluator"/> which only looks in local variable definitions.

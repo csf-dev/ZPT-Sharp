@@ -2,7 +2,7 @@
 using System.Collections.ObjectModel;
 using System.Collections.Generic;
 
-namespace CSF.Zpt.Tales
+namespace CSF.Zpt.Impl.PathExpressions
 {
   /// <summary>
   /// Represents a component of a composite TALES path.  This type is comprised of one or more <see cref="PathPart"/>.

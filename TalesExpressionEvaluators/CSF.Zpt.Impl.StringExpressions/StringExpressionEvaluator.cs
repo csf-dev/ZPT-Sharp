@@ -3,8 +3,10 @@ using CSF.Zpt.Rendering;
 using System.Text.RegularExpressions;
 using System.Linq;
 using System.Collections.Generic;
+using CSF.Zpt.Tales;
+using CSF.Zpt.Impl.PathExpressions;
 
-namespace CSF.Zpt.Tales
+namespace CSF.Zpt.Impl.StringExpressions
 {
   /// <summary>
   /// Implementation of <see cref="ExpressionEvaluatorBase"/> which creates string values, with optional interpolation.

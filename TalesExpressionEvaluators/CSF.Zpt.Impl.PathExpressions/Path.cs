@@ -3,7 +3,7 @@ using System.Collections.ObjectModel;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace CSF.Zpt.Tales
+namespace CSF.Zpt.Impl.PathExpressions
 {
   /// <summary>
   /// Represents a TALES path, which is composed of one or more <see cref="PathComponent"/>, each of which is

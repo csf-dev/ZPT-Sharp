@@ -5,6 +5,7 @@ using CSF.Zpt.Tales;
 using Ploeh.AutoFixture;
 using CSF.Zpt.Rendering;
 using CSF.Zpt;
+using CSF.Zpt.Impl.NotExpressions;
 
 namespace Test.CSF.Zpt.Tales
 {

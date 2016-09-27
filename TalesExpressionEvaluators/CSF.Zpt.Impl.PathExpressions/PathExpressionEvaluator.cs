@@ -2,8 +2,9 @@
 using CSF.Zpt.Rendering;
 using System.Collections.Generic;
 using System.Linq;
+using CSF.Zpt.Tales;
 
-namespace CSF.Zpt.Tales
+namespace CSF.Zpt.Impl.PathExpressions
 {
   /// <summary>
   /// Implementation of <see cref="ExpressionEvaluatorBase"/> which handles TALES path expressions.

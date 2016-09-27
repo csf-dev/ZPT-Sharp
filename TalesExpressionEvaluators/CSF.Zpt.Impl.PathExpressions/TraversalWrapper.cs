@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace CSF.Zpt.Tales
+namespace CSF.Zpt.Impl.PathExpressions
 {
   /// <summary>
   /// Non-generic abstract base class representing a wrapper by which a reflection-based reference may be traversed.
