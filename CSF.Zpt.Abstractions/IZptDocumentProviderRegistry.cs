@@ -12,19 +12,19 @@ namespace CSF.Zpt
     /// Gets the default HTML ZPT document provider.
     /// </summary>
     /// <value>The default HTML document provider.</value>
-    IZptDocumentProvider DefaultHtml { get; }
+    IZptDocumentProvider DefaultHtmlProvider { get; }
 
     /// <summary>
     /// Gets the default XML ZPT document provider.
     /// </summary>
     /// <value>The default XML document provider.</value>
-    IZptDocumentProvider DefaultXml { get; }
+    IZptDocumentProvider DefaultXmlProvider { get; }
 
     /// <summary>
     /// Gets an <see cref="IZptDocumentProvider"/> by its <c>System.Type</c>.
     /// </summary>
     /// <param name="type">The provider type.</param>
-    IZptDocumentProvider Get(Type type);
+    IZptDocumentProvider GetProvider(Type type);
   }
 }
 

@@ -27,7 +27,7 @@ namespace CSF.Zpt
     /// Gets or sets the default HTML ZPT document provider.
     /// </summary>
     /// <value>The default HTML document provider.</value>
-    public IZptDocumentProvider DefaultHtml
+    public IZptDocumentProvider DefaultHtmlProvider
     {
       get {
         try
@@ -68,7 +68,7 @@ namespace CSF.Zpt
     /// Gets or sets the default XML ZPT document provider.
     /// </summary>
     /// <value>The default XML document provider.</value>
-    public IZptDocumentProvider DefaultXml
+    public IZptDocumentProvider DefaultXmlProvider
     {
       get {
         try
@@ -113,7 +113,7 @@ namespace CSF.Zpt
     /// Gets an <see cref="IZptDocumentProvider"/> by its <c>System.Type</c>.
     /// </summary>
     /// <param name="type">The provider type.</param>
-    public IZptDocumentProvider Get(Type type)
+    public IZptDocumentProvider GetProvider(Type type)
     {
       IZptDocumentProvider output;
 
@@ -183,8 +183,8 @@ namespace CSF.Zpt
         })
         .ToArray();
 
-      output.DefaultHtml = providers.Single(x => x.Metadata.IsDefaultHtmlProvider).Provider;
-      output.DefaultXml = providers.Single(x => x.Metadata.IsDefaultXmlProvider).Provider;
+      output.DefaultHtmlProvider = providers.Single(x => x.Metadata.IsDefaultHtmlProvider).Provider;
+      output.DefaultXmlProvider = providers.Single(x => x.Metadata.IsDefaultXmlProvider).Provider;
 
       foreach(var provider in providers)
       {

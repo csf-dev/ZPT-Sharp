@@ -263,11 +263,11 @@ namespace CSF.Zpt
       switch(mode)
       {
       case RenderingMode.Html:
-        output = _providerRegistry.DefaultHtml;
+        output = _providerRegistry.DefaultHtmlProvider;
         break;
 
       case RenderingMode.Xml:
-        output = _providerRegistry.DefaultXml;
+        output = _providerRegistry.DefaultXmlProvider;
         break;
 
       default:
@@ -284,7 +284,7 @@ namespace CSF.Zpt
         throw new ArgumentNullException(nameof(type));
       }
 
-      return _providerRegistry.Get(type);
+      return _providerRegistry.GetProvider(type);
     }
 
     #endregion
