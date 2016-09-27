@@ -11,17 +11,9 @@ namespace CSF.Zpt.Tales
   /// </summary>
   public class SimpleEvaluatorSelector : IEvaluatorSelector
   {
-    #region constants
-
-    private static SimpleEvaluatorSelector _default;
-
-    #endregion
-
     #region fields
 
-    private IDictionary<string,IExpressionEvaluator> _evaluatorsByPrefix;
-    private IDictionary<Type,IExpressionEvaluator> _evaluatorsByType;
-    private IExpressionEvaluator _defaultEvaluator;
+    private IExpressionEvaluatorRegistry _registry;
 
     #endregion
 
@@ -44,11 +36,9 @@ namespace CSF.Zpt.Tales
 
       if(prefix != null)
       {
-        if(_evaluatorsByPrefix.ContainsKey(prefix))
-        {
-          output = _evaluatorsByPrefix[prefix];
-        }
-        else
+        output = _registry.GetEvaluator(prefix);
+
+        if(output == null)
         {
           string message = String.Format(Resources.ExceptionMessages.TalesExpressionEvaluatorNotFoundForPrefix,
                                          typeof(IExpressionEvaluator).FullName,
@@ -61,7 +51,7 @@ namespace CSF.Zpt.Tales
       }
       else
       {
-        output = _defaultEvaluator;
+        output = _registry.DefaultEvaluator;
       }
 
       return output;
@@ -88,7 +78,10 @@ namespace CSF.Zpt.Tales
       {
         throw new ArgumentNullException(nameof(evaluatorType));
       }
-      else if(!_evaluatorsByType.ContainsKey(evaluatorType))
+
+      var output = _registry.GetEvaluator(evaluatorType);
+
+      if(output == null)
       {
         string message = String.Format(Resources.ExceptionMessages.TalesExpressionEvaluatorNotFoundByType,
                                        typeof(IExpressionEvaluator).FullName,
@@ -96,49 +89,7 @@ namespace CSF.Zpt.Tales
         throw new Rendering.ModelEvaluationException(message);
       }
 
-      return _evaluatorsByType[evaluatorType];
-    }
-
-    #endregion
-
-    #region methods
-
-    /// <summary>
-    /// Instantiates a collection of expression evaluators, from a collection of evaluator types.
-    /// </summary>
-    /// <returns>The created evaluators.</returns>
-    /// <param name="types">The evaluator types.</param>
-    private IEnumerable<IExpressionEvaluator> InstantiateEvaluators(IEnumerable<Type> types)
-    {
-      return types
-        .Where(x => x != null
-                    && typeof(IExpressionEvaluator).IsAssignableFrom(x))
-        .Select(x => Activator.CreateInstance(x, new object[] { this }))
-        .Cast<IExpressionEvaluator>();
-    }
-
-    /// <summary>
-    /// Organises a collection of evaluators, initialising the state of the current instance.
-    /// </summary>
-    /// <param name="evaluators">A collection of expression evaluators.</param>
-    /// <param name="defaultEvaluatorType">The default expression evaluator type.</param>
-    private void OrganiseEvaluators(IEnumerable<IExpressionEvaluator> evaluators, Type defaultEvaluatorType)
-    {
-      if(evaluators == null)
-      {
-        throw new ArgumentNullException(nameof(evaluators));
-      }
-
-      _defaultEvaluator = evaluators
-        .Single(x => x.GetType() == defaultEvaluatorType);
-
-      _evaluatorsByPrefix = evaluators
-        .Where(x => x != null)
-        .ToDictionary(k => k.ExpressionPrefix, v => v);
-
-      _evaluatorsByType = evaluators
-        .Where(x => x != null)
-        .ToDictionary(k => k.GetType(), v => v);
+      return output;
     }
 
     #endregion
@@ -148,52 +99,10 @@ namespace CSF.Zpt.Tales
     /// <summary>
     /// Initializes a new instance of the <see cref="CSF.Zpt.Tales.SimpleEvaluatorSelector"/> class.
     /// </summary>
-    /// <param name="evaluatorTypes">A collection of expression evaluator types.</param>
-    /// <param name="defaultEvaluatorType">The default expression evaluator type.</param>
-    public SimpleEvaluatorSelector(IEnumerable<Type> evaluatorTypes,
-                                   Type defaultEvaluatorType)
+    /// <param name="registry">An expression evaluator registry.</param>
+    public SimpleEvaluatorSelector(IExpressionEvaluatorRegistry registry = null)
     {
-      if(evaluatorTypes == null)
-      {
-        throw new ArgumentNullException(nameof(evaluatorTypes));
-      }
-      if(defaultEvaluatorType == null)
-      {
-        throw new ArgumentNullException(nameof(defaultEvaluatorType));
-      }
-
-      var evaluators = this.InstantiateEvaluators(evaluatorTypes);
-      this.OrganiseEvaluators(evaluators, defaultEvaluatorType);
-    }
-
-    /// <summary>
-    /// Initializes the <see cref="CSF.Zpt.Tales.SimpleEvaluatorSelector"/> class.
-    /// </summary>
-    static SimpleEvaluatorSelector()
-    {
-      var evaluatorTypes = new [] {
-        typeof(PathExpressionEvaluator),
-        typeof(StringExpressionEvaluator),
-        typeof(NotExpressionEvaluator),
-        typeof(LocalVariablePathExpressionEvaluator),
-      };
-
-      _default = new SimpleEvaluatorSelector(evaluatorTypes, typeof(PathExpressionEvaluator));
-    }
-
-    #endregion
-
-    #region static properties
-
-    /// <summary>
-    /// Gets the default evaluator registry.
-    /// </summary>
-    /// <value>The default registry.</value>
-    public static SimpleEvaluatorSelector Default
-    {
-      get {
-        return _default;
-      }
+      _registry = registry?? ExpressionEvaluatorRegistry.Default;
     }
 
     #endregion

@@ -194,7 +194,7 @@ namespace CSF.Zpt.Tales
     /// <param name="evaluatorRegistry">Evaluator registry.</param>
     public TalesRenderingContextFactory(IEvaluatorSelector evaluatorRegistry = null)
     {
-      this.EvaluatorRegistry = evaluatorRegistry?? SimpleEvaluatorSelector.Default;
+      this.EvaluatorRegistry = evaluatorRegistry?? new SimpleEvaluatorSelector();
 
       this.TalLocalDefinitions = new Dictionary<string, object>();
       this.TalGlobalDefinitions = new Dictionary<string, object>();

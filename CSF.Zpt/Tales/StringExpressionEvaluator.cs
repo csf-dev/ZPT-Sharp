@@ -110,7 +110,7 @@ namespace CSF.Zpt.Tales
                                                 IRenderingContext context,
                                                 ITalesModel model)
     {
-      var pathEvaluator = EvaluatorRegistry.GetEvaluator<PathExpressionEvaluator>();
+      var pathEvaluator = EvaluatorSelector.GetEvaluator<PathExpressionEvaluator>();
 
       return ReplacementFinder.Replace(input, match => {
         string output;
@@ -146,8 +146,7 @@ namespace CSF.Zpt.Tales
     /// <summary>
     /// Initializes a new instance of the <see cref="CSF.Zpt.Tales.StringExpressionEvaluator"/> class.
     /// </summary>
-    /// <param name="registry">Registry.</param>
-    public StringExpressionEvaluator(IEvaluatorSelector registry) : base(registry) {}
+    public StringExpressionEvaluator() : base() {}
 
     #endregion
   }

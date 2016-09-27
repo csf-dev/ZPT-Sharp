@@ -27,7 +27,7 @@ namespace Test.CSF.Zpt.Tales
       _autofixture = new Fixture();
       _model = new Mock<ITalesModel>();
       _element = Mock.Of<RenderingContext>();
-      _sut = new PathExpressionEvaluator(SimpleEvaluatorSelector.Default);
+      _sut = new PathExpressionEvaluator();
     }
 
     #endregion

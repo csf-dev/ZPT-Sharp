@@ -39,7 +39,7 @@ namespace Test.CSF.Zpt.Tales
 
       var model = new TalesModel(registry);
 
-      var sut = new NotExpressionEvaluator(registry);
+      var sut = new NotExpressionEvaluator();
 
       // Act
       var result = sut.Evaluate(expression, Mock.Of<RenderingContext>(), model);
@@ -68,7 +68,7 @@ namespace Test.CSF.Zpt.Tales
 
       var model = new TalesModel(registry);
 
-      var sut = new NotExpressionEvaluator(registry);
+      var sut = new NotExpressionEvaluator();
 
       // Act
       var result = sut.Evaluate(expression, Mock.Of<RenderingContext>(), model);
@@ -99,7 +99,7 @@ namespace Test.CSF.Zpt.Tales
 
       var model = new TalesModel(registry);
 
-      var sut = new NotExpressionEvaluator(registry);
+      var sut = new NotExpressionEvaluator();
 
       // Act
       var result = sut.Evaluate(expression, Mock.Of<RenderingContext>(), model);

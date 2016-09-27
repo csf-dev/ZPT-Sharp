@@ -216,8 +216,7 @@ namespace CSF.Zpt.Tales
     /// <summary>
     /// Initializes a new instance of the <see cref="CSF.Zpt.Tales.PathExpressionEvaluator"/> class.
     /// </summary>
-    /// <param name="registry">Registry.</param>
-    public PathExpressionEvaluator(IEvaluatorSelector registry) : base(registry) {}
+    public PathExpressionEvaluator() : base() {}
 
     #endregion
   }
