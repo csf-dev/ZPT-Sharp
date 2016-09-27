@@ -16,7 +16,7 @@ namespace CSF.Zpt.Metal
     /// </summary>
     /// <returns>Either an <see cref="IZptElement"/> instance representing the macro used, or a <c>null</c> reference.</returns>
     /// <param name="context">The rendering context.</param>
-    public virtual IZptElement GetUsedMacro(RenderingContext context)
+    public virtual IZptElement GetUsedMacro(IRenderingContext context)
     {
       return this.GetReferencedMacro(context, ZptConstants.Metal.UseMacroAttribute);
     }
@@ -27,7 +27,7 @@ namespace CSF.Zpt.Metal
     /// </summary>
     /// <returns>Either an <see cref="IZptElement"/> instance representing the macro extended, or a <c>null</c> reference.</returns>
     /// <param name="context">The rendering context.</param>
-    public virtual IZptElement GetExtendedMacro(RenderingContext context)
+    public virtual IZptElement GetExtendedMacro(IRenderingContext context)
     {
       return this.GetReferencedMacro(context, ZptConstants.Metal.ExtendMacroAttribute);
     }
@@ -39,7 +39,7 @@ namespace CSF.Zpt.Metal
     /// <returns>Either an <see cref="IZptElement"/> instance representing the referenced macro, or a <c>null</c> reference.</returns>
     /// <param name="context">The rendering context.</param>
     /// <param name="attributeName">The name of the desired attribute, which references a macro if present.</param>
-    private IZptElement GetReferencedMacro(RenderingContext context, string attributeName)
+    private IZptElement GetReferencedMacro(IRenderingContext context, string attributeName)
     {
       if(context == null)
       {

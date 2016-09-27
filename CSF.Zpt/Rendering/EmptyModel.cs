@@ -17,7 +17,7 @@ namespace CSF.Zpt.Rendering
       return new EmptyModel(this.Parent, this.Root);
     }
 
-    public override ExpressionResult Evaluate(string expression, RenderingContext context)
+    public override ExpressionResult Evaluate(string expression, IRenderingContext context)
     {
       object result;
       ExpressionResult output;

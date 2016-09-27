@@ -31,7 +31,7 @@ namespace CSF.Zpt.MVC.Tales
       }
     }
 
-    protected override BuiltinContextsContainer GetBuiltinContexts(RenderingContext context)
+    protected override BuiltinContextsContainer GetBuiltinContexts(IRenderingContext context)
     {
       if(context == null)
       {

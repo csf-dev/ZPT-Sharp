@@ -59,6 +59,7 @@
     <Compile Include="Metal\MacroExpander.cs" />
     <Compile Include="Metal\MacroFinder.cs" />
     <Compile Include="Metal\MetalVisitor.cs" />
+    <Compile Include="Rendering\RenderingContext.cs" />
     <Compile Include="Tal\TalVisitor.cs" />
     <Compile Include="Tal\IAttributeHandler.cs" />
     <Compile Include="Tal\AttributesAttributeHandler.cs" />
@@ -160,14 +161,7 @@
       <Name>CSF.Configuration</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Tales\" />
-    <Folder Include="Tal\" />
-    <Folder Include="Rendering\" />
-    <Folder Include="Metal\" />
-    <Folder Include="Resources\" />
-    <Folder Include="BatchRendering\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <EmbeddedResource Include="Resources\xhtml1-frameset.dtd">
       <LogicalName>xhtml1-frameset.dtd</LogicalName>

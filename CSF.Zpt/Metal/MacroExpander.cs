@@ -24,14 +24,14 @@ namespace CSF.Zpt.Metal
     /// Expands the given context, replacing it with a new context - representing a macro - if it is required.
     /// </summary>
     /// <param name="context">The context to expand.</param>
-    public RenderingContext Expand(RenderingContext context)
+    public IRenderingContext Expand(IRenderingContext context)
     {
       if(context == null)
       {
         throw new ArgumentNullException(nameof(context));
       }
 
-      RenderingContext output;
+      IRenderingContext output;
 
       var macro = _macroFinder.GetUsedMacro(context);
       if(macro != null)
@@ -56,7 +56,7 @@ namespace CSF.Zpt.Metal
     /// </summary>
     /// <param name="context">The context to expand.</param>
     /// <param name="macro">The macro element to replace the original.</param>
-    public RenderingContext ExpandAndReplace(RenderingContext context, IZptElement macro)
+    public IRenderingContext ExpandAndReplace(IRenderingContext context, IZptElement macro)
     {
       if(context == null)
       {
@@ -89,7 +89,7 @@ namespace CSF.Zpt.Metal
     /// </summary>
     /// <param name="sourceContext">Source rendering context.</param>
     /// <param name="macro">The macro providing the slots to fill.</param>
-    private void FillSlots(RenderingContext sourceContext, IZptElement macro)
+    private void FillSlots(IRenderingContext sourceContext, IZptElement macro)
     {
       if(sourceContext == null)
       {
@@ -142,7 +142,7 @@ namespace CSF.Zpt.Metal
     /// </summary>
     /// <returns>A rendering context, exposing the METAL macro element, after all required extension has been applied.</returns>
     /// <param name="context">The context exposing the macro element to expand.</param>
-    private RenderingContext ApplyMacroExtension(RenderingContext context)
+    private IRenderingContext ApplyMacroExtension(IRenderingContext context)
     {
       if(context == null)
       {
@@ -150,7 +150,7 @@ namespace CSF.Zpt.Metal
       }
 
       var extended = _macroFinder.GetExtendedMacro(context);
-      RenderingContext output;
+      IRenderingContext output;
 
       if(extended != null)
       {

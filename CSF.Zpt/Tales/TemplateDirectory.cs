@@ -64,7 +64,7 @@ namespace CSF.Zpt.Tales
     /// <param name="pathFragment">The path fragment.</param>
     /// <param name="result">Exposes the result if the traversal was a success</param>
     /// <param name="currentContext">Gets the current rendering context.</param>
-    public override bool HandleTalesPath(string pathFragment, out object result, Rendering.RenderingContext currentContext)
+    public override bool HandleTalesPath(string pathFragment, out object result, Rendering.IRenderingContext currentContext)
     {
       bool output;
       object exposedResult;
@@ -101,7 +101,7 @@ namespace CSF.Zpt.Tales
       return new TemplateDirectory(directory, this.MandatoryExtensions);
     }
 
-    private ITemplateFileFactory GetTemplateFactory(Rendering.RenderingContext currentContext)
+    private ITemplateFileFactory GetTemplateFactory(Rendering.IRenderingContext currentContext)
     {
       var currentDocType = currentContext.Element.ZptDocumentType;
       return currentContext.RenderingOptions.GetTemplateFileFactory();

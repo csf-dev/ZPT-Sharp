@@ -29,9 +29,9 @@ namespace CSF.Zpt
     /// Renders the document to a <c>System.String</c>.
     /// </summary>
     /// <param name="options">The rendering options to use.  If <c>null</c> then default options are used.</param>
-    /// <param name="contextConfigurator">An optional action to perform upon the root <see cref="RenderingContext"/>, to configure it.</param>
+    /// <param name="contextConfigurator">An optional action to perform upon the root <see cref="IModelValueContainer"/>, to configure it.</param>
     public virtual string Render(IRenderingOptions options = null,
-                                 Action<RenderingContext> contextConfigurator = null)
+                                 Action<IModelValueContainer> contextConfigurator = null)
     {
       return Render((object) null, options, contextConfigurator);
     }
@@ -41,10 +41,10 @@ namespace CSF.Zpt
     /// </summary>
     /// <param name="writer">The text writer to render to.</param>
     /// <param name="options">The rendering options to use.  If <c>null</c> then default options are used.</param>
-    /// <param name="contextConfigurator">An optional action to perform upon the root <see cref="RenderingContext"/>, to configure it.</param>
+    /// <param name="contextConfigurator">An optional action to perform upon the root <see cref="IModelValueContainer"/>, to configure it.</param>
     public virtual void Render(TextWriter writer,
                                IRenderingOptions options = null,
-                               Action<RenderingContext> contextConfigurator = null)
+                               Action<IModelValueContainer> contextConfigurator = null)
     {
       Render(null, writer, options, contextConfigurator);
     }
@@ -54,10 +54,10 @@ namespace CSF.Zpt
     /// </summary>
     /// <param name="model">An object for which the ZPT document is to be applied.</param>
     /// <param name="options">The rendering options to use.  If <c>null</c> then default options are used.</param>
-    /// <param name="contextConfigurator">An optional action to perform upon the root <see cref="RenderingContext"/>, to configure it.</param>
+    /// <param name="contextConfigurator">An optional action to perform upon the root <see cref="IModelValueContainer"/>, to configure it.</param>
     public virtual string Render(object model,
                                  IRenderingOptions options = null,
-                                 Action<RenderingContext> contextConfigurator = null)
+                                 Action<IModelValueContainer> contextConfigurator = null)
     {
       string output;
       var opts = this.GetOptions(options);
@@ -95,11 +95,11 @@ namespace CSF.Zpt
     /// <param name="model">An object for which the ZPT document is to be applied.</param>
     /// <param name="writer">The text writer to render to.</param>
     /// <param name="options">The rendering options to use.  If <c>null</c> then default options are used.</param>
-    /// <param name="contextConfigurator">An optional action to perform upon the root <see cref="RenderingContext"/>, to configure it.</param>
+    /// <param name="contextConfigurator">An optional action to perform upon the root <see cref="IModelValueContainer"/>, to configure it.</param>
     public virtual void Render(object model,
                                TextWriter writer,
                                IRenderingOptions options = null,
-                               Action<RenderingContext> contextConfigurator = null)
+                               Action<IModelValueContainer> contextConfigurator = null)
     {
       if(writer == null)
       {
@@ -129,10 +129,10 @@ namespace CSF.Zpt
     /// <returns>The result of the rendering process.</returns>
     /// <param name="model">An object to which the ZPT document is to be applied.</param>
     /// <param name="options">The rendering options to use.  If <c>null</c> then default options are used.</param>
-    /// <param name="contextConfigurator">An optional action to perform upon the root <see cref="RenderingContext"/>, to configure it.</param>
+    /// <param name="contextConfigurator">An optional action to perform upon the root <see cref="IModelValueContainer"/>, to configure it.</param>
     protected virtual IZptElement RenderElement(object model,
                                                IRenderingOptions options,
-                                               Action<RenderingContext> contextConfigurator)
+                                               Action<IModelValueContainer> contextConfigurator)
     {
       if(options == null)
       {

@@ -4,7 +4,7 @@ using CSF.Zpt.Rendering;
 namespace CSF.Zpt.Tal
 {
   /// <summary>
-  /// Represents the response from <see cref="IAttributeHandler.Handle(RenderingContext)"/>.
+  /// Represents the response from <see cref="IAttributeHandler.Handle(IRenderingContext)"/>.
   /// </summary>
   public class AttributeHandlingResult
   {
@@ -14,7 +14,7 @@ namespace CSF.Zpt.Tal
     /// Gets a collection of the rendering contexts which are exposed after a handling operation has completed.
     /// </summary>
     /// <value>The contexts.</value>
-    public RenderingContext[] Contexts
+    public IRenderingContext[] Contexts
     {
       get;
       private set;
@@ -36,7 +36,7 @@ namespace CSF.Zpt.Tal
     /// elements must be processed from scratch and not included in further processing.
     /// </summary>
     /// <value>The newly-exposed elements.</value>
-    public RenderingContext[] NewlyExposedContexts
+    public IRenderingContext[] NewlyExposedContexts
     {
       get;
       private set;
@@ -52,9 +52,9 @@ namespace CSF.Zpt.Tal
     /// <param name="elements">The elements which remain after processing.</param>
     /// <param name="continueHandling">If set to <c>true</c> continue handling.</param>
     /// <param name="newlyExposedElements">An optional collection of elements which are newly-exposed but must be processed from scratch.</param>
-    public AttributeHandlingResult(RenderingContext[] elements,
+    public AttributeHandlingResult(IRenderingContext[] elements,
                                    bool continueHandling,
-                                   RenderingContext[] newlyExposedElements = null)
+                                   IRenderingContext[] newlyExposedElements = null)
     {
       if(elements == null)
       {
@@ -63,7 +63,7 @@ namespace CSF.Zpt.Tal
 
       this.Contexts = elements;
       this.ContinueHandling = continueHandling;
-      this.NewlyExposedContexts = newlyExposedElements?? new RenderingContext[0];
+      this.NewlyExposedContexts = newlyExposedElements?? new IRenderingContext[0];
     }
 
     #endregion

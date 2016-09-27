@@ -21,9 +21,9 @@ namespace CSF.Zpt.Metal
     /// <summary>
     /// Visit the given context and return a collection of the resultant contexts.
     /// </summary>
-    /// <returns>Zero or more <see cref="RenderingContext"/> instances, determined by the outcome of this visit.</returns>
+    /// <returns>Zero or more <see cref="IRenderingContext"/> instances, determined by the outcome of this visit.</returns>
     /// <param name="context">The rendering context to visit.</param>
-    public override RenderingContext[] Visit(RenderingContext context)
+    public override IRenderingContext[] Visit(IRenderingContext context)
     {
       if(context == null)
       {

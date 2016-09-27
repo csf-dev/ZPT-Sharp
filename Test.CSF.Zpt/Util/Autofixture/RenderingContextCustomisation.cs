@@ -22,15 +22,28 @@ namespace Test.CSF.Zpt.Util.Autofixture
       new ZptElementCustomisation().Customize(fixture);
       new RenderingOptionsCustomisation().Customize(fixture);
 
-      fixture.Customize<RenderingContext>(x => x.FromFactory((DummyModel metal,
-                                                              DummyModel tal,
-                                                              ZptElement element,
-                                                              IRenderingOptions opts) => {
-        return new Mock<RenderingContext>(metal, tal, element, opts, (string) null) {
-          CallBase = true,
-          Name = String.Format("Context {0}", _nameIterator++)
-        }.Object;
-      }));
+      fixture.Customize<RenderingContext>(x => x.FromFactory(GetContextFactory<RenderingContext>()));
+      fixture.Customize<IRenderingContext>(x => x.FromFactory(GetContextFactory<IRenderingContext>()));
+    }
+
+    private Func<DummyModel,DummyModel,ZptElement,IRenderingOptions,TContext> GetContextFactory<TContext>()
+      where TContext : IRenderingContext
+    {
+      return CreateContext<TContext>;
+    }
+
+    private TContext CreateContext<TContext>(DummyModel metal,
+                                             DummyModel tal,
+                                             ZptElement element,
+                                             IRenderingOptions opts)
+      where TContext : IRenderingContext
+    {
+      return (TContext) new Mock<RenderingContext>(metal, tal, element, opts, (string) null) {
+        CallBase = true,
+        Name = String.Format("Context {0}", _nameIterator++)
+      }
+        .As<IRenderingContext>()
+        .Object;
     }
 
     #endregion

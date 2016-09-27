@@ -59,7 +59,7 @@ namespace CSF.Zpt.MVC
                  options: RenderingOptions);
     }
 
-    private Action<RenderingContext> ConfigureContext(ViewContext viewContext)
+    private Action<IModelValueContainer> ConfigureContext(ViewContext viewContext)
     {
       return c => {
         ConfigureModel(viewContext, c.TalModel);
@@ -67,7 +67,7 @@ namespace CSF.Zpt.MVC
       };
     }
 
-    private void ConfigureModel(ViewContext viewContext, IModel model)
+    private void ConfigureModel(ViewContext viewContext, IModelValueStore model)
     {
       var typedModel = model as MvcTalesModel;
 
