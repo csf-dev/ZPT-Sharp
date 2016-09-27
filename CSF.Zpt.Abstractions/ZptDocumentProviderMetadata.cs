@@ -12,12 +12,6 @@ namespace CSF.Zpt
     /// <summary>
     /// Gets the <c>System.Type</c> of the provider implementation.
     /// </summary>
-    /// <remarks>
-    /// <para>
-    /// This is typically an assembly-qualified name, since the provider is likely to be in an assembly which has not
-    /// yet been loaded into the AppDomain.
-    /// </para>
-    /// </remarks>
     /// <value>The provider type.</value>
     public Type ProviderType
     {
