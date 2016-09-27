@@ -148,6 +148,12 @@ namespace CSF.Zpt.Tales
     /// </summary>
     public StringExpressionEvaluator() : base() {}
 
+    /// <summary>
+    /// Initializes a new instance of the <see cref="CSF.Zpt.Tales.StringExpressionEvaluator"/> class.
+    /// </summary>
+    /// <param name="selector">Expression evaluator selector.</param>
+    public StringExpressionEvaluator(IEvaluatorSelector selector) : base(selector) {}
+
     #endregion
   }
 }

@@ -35,7 +35,7 @@ namespace Test.CSF.Zpt.Tales
 
       registry.Setup(x => x.GetEvaluator<PathExpressionEvaluator>()).Returns(_pathEvaluator.Object);
 
-      _sut = new StringExpressionEvaluator();
+      _sut = new StringExpressionEvaluator(registry.Object);
     }
 
     #endregion
