@@ -12,7 +12,7 @@ namespace CSF.Zpt.Rendering
     #region properties
 
     /// <summary>
-    /// Gets the factory implementation with which to create <see cref="RenderingContext"/> instances.
+    /// Gets the factory implementation with which to create <see cref="IRenderingContext"/> instances.
     /// </summary>
     /// <value>The rendering context factory.</value>
     IRenderingContextFactory ContextFactory { get; }

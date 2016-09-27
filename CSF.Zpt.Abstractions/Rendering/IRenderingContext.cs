@@ -11,13 +11,13 @@
         /// Gets the object model available to the METAL environment.
         /// </summary>
         /// <value>The METAL model.</value>
-        IModel MetalModel { get; }
+        new IModel MetalModel { get; }
 
         /// <summary>
         /// Gets the object model available to the TAL environment.
         /// </summary>
         /// <value>The TAL model.</value>
-        IModel TalModel { get; }
+        new IModel TalModel { get; }
 
         /// <summary>
         /// Gets the ZPT element.
