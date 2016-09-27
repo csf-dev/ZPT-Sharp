@@ -188,7 +188,7 @@ namespace CSF.Zpt.Rendering
                                       Encoding outputEncoding = null,
                                       bool omitXmlDeclaration = DefaultOmitXmlDeclaration)
     {
-      this.TemplateFileFactory = documentFactory?? ZptDocumentFactory.DefaultTemplateFactory;
+      this.TemplateFileFactory = documentFactory?? new ZptDocumentFactory();
       this.AddSourceFileAnnotation = addSourceFileAnnotation;
       this.OmitXmlDeclaration = omitXmlDeclaration;
       this.ContextVisitors = elementVisitors?? DefaultVisitors;

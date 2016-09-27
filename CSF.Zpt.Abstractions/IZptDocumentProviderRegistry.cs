@@ -21,10 +21,10 @@ namespace CSF.Zpt
     IZptDocumentProvider DefaultXml { get; }
 
     /// <summary>
-    /// Gets an <see cref="IZptDocumentProvider"/> by its assembly-qualified type name.
+    /// Gets an <see cref="IZptDocumentProvider"/> by its <c>System.Type</c>.
     /// </summary>
-    /// <param name="typeName">The assembly-qualified name.</param>
-    IZptDocumentProvider Get(string typeName);
+    /// <param name="type">The provider type.</param>
+    IZptDocumentProvider Get(Type type);
   }
 }
 

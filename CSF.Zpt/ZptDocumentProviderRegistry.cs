@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading;
+using System.Linq;
 
 namespace CSF.Zpt
 {
@@ -15,7 +16,7 @@ namespace CSF.Zpt
     private static IZptDocumentProviderRegistry _default;
 
     private IZptDocumentProvider _defaultHtml, _defaultXml;
-    private Dictionary<string,IZptDocumentProvider> _allProviders;
+    private Dictionary<Type,IZptDocumentProvider> _allProviders;
     private ReaderWriterLockSlim _syncRoot;
 
     #endregion
@@ -109,10 +110,10 @@ namespace CSF.Zpt
     #region methods
 
     /// <summary>
-    /// Gets an <see cref="IZptDocumentProvider"/> by its assembly-qualified type name.
+    /// Gets an <see cref="IZptDocumentProvider"/> by its <c>System.Type</c>.
     /// </summary>
-    /// <param name="typeName">The assembly-qualified name.</param>
-    public IZptDocumentProvider Get(string typeName)
+    /// <param name="type">The provider type.</param>
+    public IZptDocumentProvider Get(Type type)
     {
       IZptDocumentProvider output;
 
@@ -121,7 +122,7 @@ namespace CSF.Zpt
         _syncRoot.EnterReadLock();
 
 
-        if(!_allProviders.TryGetValue(typeName, out output))
+        if(!_allProviders.TryGetValue(type, out output))
         {
           output = null;
         }
@@ -138,7 +139,7 @@ namespace CSF.Zpt
     }
 
     /// <summary>
-    /// Adds a provider to the current instance, based upon its assembly-qualified type name.
+    /// Adds a provider to the current instance, based upon its <c>System.Type</c>.
     /// </summary>
     /// <param name="provider">The provider instance to add.</param>
     public void AddProvider(IZptDocumentProvider provider)
@@ -148,13 +149,13 @@ namespace CSF.Zpt
         throw new ArgumentNullException(nameof(provider));
       }
 
-      var typeName = provider.GetType().AssemblyQualifiedName;
+      var type = provider.GetType();
 
       try
       {
         _syncRoot.EnterWriteLock();
 
-        _allProviders.Add(typeName, provider);
+        _allProviders.Add(type, provider);
       }
       finally
       {
@@ -163,6 +164,34 @@ namespace CSF.Zpt
           _syncRoot.ExitWriteLock();
         }
       }
+    }
+
+    /// <summary>
+    /// Creates the default/singleton provider registry instance.
+    /// </summary>
+    /// <returns>The default registry.</returns>
+    private static IZptDocumentProviderRegistry CreateDefaultRegistry()
+    {
+      var output = new ZptDocumentProviderRegistry();
+
+      var providerMetadataService = new ConfigurationDocumentImplementationProvider();
+
+      var providers = (from md in providerMetadataService.GetAllProviderMetadata()
+                       select new {
+          Metadata = md,
+          Provider = (IZptDocumentProvider) Activator.CreateInstance(md.ProviderType)
+        })
+        .ToArray();
+
+      output.DefaultHtml = providers.Single(x => x.Metadata.IsDefaultHtmlProvider).Provider;
+      output.DefaultXml = providers.Single(x => x.Metadata.IsDefaultXmlProvider).Provider;
+
+      foreach(var provider in providers)
+      {
+        output.AddProvider(provider.Provider);
+      }
+
+      return output;
     }
 
     #endregion
@@ -175,7 +204,7 @@ namespace CSF.Zpt
     public ZptDocumentProviderRegistry()
     {
       _syncRoot = new ReaderWriterLockSlim();
-      _allProviders = new Dictionary<string, IZptDocumentProvider>();
+      _allProviders = new Dictionary<Type, IZptDocumentProvider>();
     }
 
     /// <summary>
@@ -183,7 +212,7 @@ namespace CSF.Zpt
     /// </summary>
     static ZptDocumentProviderRegistry()
     {
-      _default = new ZptDocumentProviderRegistry();
+      _default = CreateDefaultRegistry();
     }
 
     #endregion
