@@ -76,7 +76,6 @@
     <EmbeddedResource Include="Resources\ExceptionMessages.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>ExceptionMessages.Designer.cs</LastGenOutput>
-      <LogicalName>CSF.Zpt.ExpressionEvaluators.Resources.ExceptionMessages.resources</LogicalName>
     </EmbeddedResource>
   </ItemGroup>
 </Project>

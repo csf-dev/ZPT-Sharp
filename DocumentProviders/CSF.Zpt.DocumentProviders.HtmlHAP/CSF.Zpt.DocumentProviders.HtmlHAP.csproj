@@ -11,6 +11,7 @@
     <FileAlignment>512</FileAlignment>
     <ReleaseVersion>0.5.0</ReleaseVersion>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <AssemblyName>CSF.Zpt.DocumentProviders.HtmlHAP</AssemblyName>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -21,7 +22,6 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <CheckForOverflowUnderflow>true</CheckForOverflowUnderflow>
-    <AssemblyName>CSF.Zpt.DocumentProviders.HtmlHAP</AssemblyName>
     <DocumentationFile>bin\Debug\CSF.Zpt.DocumentProviders.HtmlHAP.xml</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
@@ -31,7 +31,6 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <CheckForOverflowUnderflow>true</CheckForOverflowUnderflow>
-    <AssemblyName>CSF.Zpt.DocumentProviders.HtmlHAP</AssemblyName>
     <DocumentationFile>bin\Release\CSF.Zpt.DocumentProviders.HtmlHAP.xml</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Deploy|AnyCPU' ">
@@ -41,7 +40,6 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <CheckForOverflowUnderflow>true</CheckForOverflowUnderflow>
-    <AssemblyName>CSF.Zpt.DocumentProviders.HtmlHAP</AssemblyName>
     <DocumentationFile>bin\Release\CSF.Zpt.DocumentProviders.HtmlHAP.xml</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
