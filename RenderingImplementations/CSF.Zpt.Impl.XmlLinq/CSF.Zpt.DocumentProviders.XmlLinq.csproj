@@ -3,10 +3,9 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{71834399-0B92-4754-9721-178872E77CFD}</ProjectGuid>
+    <ProjectGuid>{842160E4-BDE5-4FA0-ADE5-07554090AA27}</ProjectGuid>
     <OutputType>Library</OutputType>
-    <RootNamespace>CSF.Zpt.Impl</RootNamespace>
-    <AssemblyName>CSF.Zpt.Impl.XmlLegacy</AssemblyName>
+    <RootNamespace>CSF.Zpt.DocumentProviders</RootNamespace>
     <ReleaseVersion>0.5.0</ReleaseVersion>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
   </PropertyGroup>
@@ -20,6 +19,8 @@
     <WarningLevel>4</WarningLevel>
     <ConsolePause>false</ConsolePause>
     <CheckForOverflowUnderflow>true</CheckForOverflowUnderflow>
+    <AssemblyName>CSF.Zpt.DocumentProviders.XmlLinq</AssemblyName>
+    <DocumentationFile>bin\Debug\CSF.Zpt.DocumentProviders.XmlLinq.xml</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <Optimize>true</Optimize>
@@ -29,6 +30,8 @@
     <ConsolePause>false</ConsolePause>
     <DefineConstants>TRACE</DefineConstants>
     <CheckForOverflowUnderflow>true</CheckForOverflowUnderflow>
+    <AssemblyName>CSF.Zpt.Impl.XmlLinq</AssemblyName>
+    <DocumentationFile>bin\Release\CSF.Zpt.DocumentProviders.XmlLinq.xml</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Deploy|AnyCPU' ">
     <Optimize>true</Optimize>
@@ -36,18 +39,20 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <DefineConstants>TRACE</DefineConstants>
     <CheckForOverflowUnderflow>true</CheckForOverflowUnderflow>
+    <AssemblyName>CSF.Zpt.Impl.XmlLinq</AssemblyName>
+    <DocumentationFile>bin\Release\CSF.Zpt.DocumentProviders.XmlLinq.xml</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ZptXmlAttribute.cs" />
-    <Compile Include="ZptXmlElement.cs" />
-    <Compile Include="ZptXmlDocument.cs" />
-    <Compile Include="LegacyXmlZptDocumentProvider.cs" />
+    <Compile Include="ZptXmlLinqAttribute.cs" />
+    <Compile Include="ZptXmlLinqElement.cs" />
+    <Compile Include="ZptXmlLinqDocument.cs" />
+    <Compile Include="XmlLinqZptDocumentProvider.cs" />
     <Compile Include="..\..\Common\CommonAssemblyInfo.cs">
       <Link>CommonAssemblyInfo.cs</Link>
     </Compile>
@@ -63,8 +68,5 @@
       <Project>{8207CD9B-F1C1-4D75-B250-ACDFFBDCB071}</Project>
       <Name>CSF.Zpt.Abstractions</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Properties\" />
   </ItemGroup>
 </Project>

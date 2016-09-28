@@ -6,7 +6,7 @@ using System.Collections;
 using CSF.Reflection;
 using CSF.Zpt.Tales;
 
-namespace CSF.Zpt.Impl.PathExpressions
+namespace CSF.Zpt.ExpressionEvaluators
 {
   /// <summary>
   /// Encapsulates logic for traversing from one TALES object to another.
@@ -390,7 +390,7 @@ namespace CSF.Zpt.Impl.PathExpressions
     #region constructor
 
     /// <summary>
-    /// Initializes a new instance of the <see cref="CSF.Zpt.Tales.ObjectTraverser"/> class.
+    /// Initializes a new instance of the <see cref="CSF.Zpt.ExpressionEvaluators.ObjectTraverser"/> class.
     /// </summary>
     public ObjectTraverser()
     {
@@ -399,7 +399,7 @@ namespace CSF.Zpt.Impl.PathExpressions
     }
 
     /// <summary>
-    /// Initializes the <see cref="CSF.Zpt.Tales.ObjectTraverser"/> class.
+    /// Initializes the <see cref="CSF.Zpt.ExpressionEvaluators.ObjectTraverser"/> class.
     /// </summary>
     static ObjectTraverser()
     {

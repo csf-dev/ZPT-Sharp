@@ -3,7 +3,7 @@ using System.Collections.ObjectModel;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace CSF.Zpt.Impl.PathExpressions
+namespace CSF.Zpt.ExpressionEvaluators
 {
   /// <summary>
   /// Represents a TALES path, which is composed of one or more <see cref="PathComponent"/>, each of which is
@@ -43,7 +43,7 @@ namespace CSF.Zpt.Impl.PathExpressions
     #region constructor
 
     /// <summary>
-    /// Initializes a new instance of the <see cref="CSF.Zpt.Tales.Path"/> class.
+    /// Initializes a new instance of the <see cref="CSF.Zpt.ExpressionEvaluators.Path"/> class.
     /// </summary>
     /// <param name="components">Components.</param>
     internal Path(PathComponent[] components)

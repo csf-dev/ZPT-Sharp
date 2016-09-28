@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace CSF.Zpt.Impl.PathExpressions
+namespace CSF.Zpt.ExpressionEvaluators
 {
   /// <summary>
   /// Non-generic abstract base class representing a wrapper by which a reflection-based reference may be traversed.

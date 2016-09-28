@@ -2,7 +2,7 @@
 using System.Xml;
 using CSF.Zpt.Rendering;
 
-namespace CSF.Zpt.Impl
+namespace CSF.Zpt.DocumentProviders
 {
   /// <summary>
   /// Implementation of <see cref="Attribute"/> for an XML attribute.
@@ -68,7 +68,7 @@ namespace CSF.Zpt.Impl
     #region constructor
 
     /// <summary>
-    /// Initializes a new instance of the <see cref="CSF.Zpt.Impl.ZptXmlAttribute"/> class.
+    /// Initializes a new instance of the <see cref="CSF.Zpt.DocumentProviders.ZptXmlAttribute"/> class.
     /// </summary>
     /// <param name="original">The original (wrapped) attribute.</param>
     public ZptXmlAttribute(XmlAttribute original)

@@ -3,7 +3,7 @@ using System.IO;
 using System.Text;
 using CSF.Zpt.Rendering;
 
-namespace CSF.Zpt.Impl
+namespace CSF.Zpt.DocumentProviders
 {
   /// <summary>
   /// Implementation of <see cref="IZptDocumentProvider"/> which creates XML documents based on
@@ -120,7 +120,7 @@ namespace CSF.Zpt.Impl
     #region constructor
 
     /// <summary>
-    /// Initializes a new instance of the <see cref="CSF.Zpt.Impl.XmlLinqZptDocumentProvider"/> class.
+    /// Initializes a new instance of the <see cref="CSF.Zpt.DocumentProviders.XmlLinqZptDocumentProvider"/> class.
     /// </summary>
     public XmlLinqZptDocumentProvider()
     {

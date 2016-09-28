@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace CSF.Zpt.Impl.PathExpressions
+namespace CSF.Zpt.ExpressionEvaluators
 {
   /// <summary>
   /// Represents a part of a TALES path, this type indicates a single traversal from a parent object to a child.
@@ -48,7 +48,7 @@ namespace CSF.Zpt.Impl.PathExpressions
     #region constructor
 
     /// <summary>
-    /// Initializes a new instance of the <see cref="CSF.Zpt.Tales.PathPart"/> class.
+    /// Initializes a new instance of the <see cref="CSF.Zpt.ExpressionEvaluators.PathPart"/> class.
     /// </summary>
     /// <param name="value">Value.</param>
     internal PathPart(string value)

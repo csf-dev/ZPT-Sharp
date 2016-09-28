@@ -2,7 +2,7 @@
 using CSF.Zpt.Rendering;
 using CSF.Zpt.Tales;
 
-namespace CSF.Zpt.Impl.PathExpressions
+namespace CSF.Zpt.ExpressionEvaluators
 {
   /// <summary>
   /// Specialisation of <see cref="PathExpressionEvaluator"/> which only looks in local variable definitions.
@@ -66,7 +66,7 @@ namespace CSF.Zpt.Impl.PathExpressions
     #region constructor
 
     /// <summary>
-    /// Initializes a new instance of the <see cref="CSF.Zpt.Tales.LocalVariablePathExpressionEvaluator"/> class.
+    /// Initializes a new instance of the <see cref="CSF.Zpt.ExpressionEvaluators.LocalVariablePathExpressionEvaluator"/> class.
     /// </summary>
     public LocalVariablePathExpressionEvaluator() : base() {}
 

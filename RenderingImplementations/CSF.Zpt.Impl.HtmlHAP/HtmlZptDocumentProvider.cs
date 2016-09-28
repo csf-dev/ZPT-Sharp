@@ -3,7 +3,7 @@ using System.IO;
 using System.Text;
 using CSF.Zpt.Rendering;
 
-namespace CSF.Zpt.Impl
+namespace CSF.Zpt.DocumentProviders
 {
   /// <summary>
   /// Implementation of <see cref="IZptDocumentProvider"/> which creates documents based on the HTML Agility pack.

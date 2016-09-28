@@ -7,8 +7,7 @@
     <ProjectGuid>{BFD834D4-5724-4425-BCB3-6DEE6B03F743}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>CSF.Zpt.Impl</RootNamespace>
-    <AssemblyName>CSF.Zpt.Impl.HtmlHAP</AssemblyName>
+    <RootNamespace>CSF.Zpt.DocumentProviders</RootNamespace>
     <FileAlignment>512</FileAlignment>
     <ReleaseVersion>0.5.0</ReleaseVersion>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
@@ -22,6 +21,8 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <CheckForOverflowUnderflow>true</CheckForOverflowUnderflow>
+    <AssemblyName>CSF.Zpt.DocumentProviders.HtmlHAP</AssemblyName>
+    <DocumentationFile>bin\Debug\CSF.Zpt.DocumentProviders.HtmlHAP.xml</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <Optimize>true</Optimize>
@@ -30,6 +31,8 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <CheckForOverflowUnderflow>true</CheckForOverflowUnderflow>
+    <AssemblyName>CSF.Zpt.Impl.HtmlHAP</AssemblyName>
+    <DocumentationFile>bin\Release\CSF.Zpt.DocumentProviders.HtmlHAP.xml</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Deploy|AnyCPU' ">
     <Optimize>true</Optimize>
@@ -38,6 +41,8 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <CheckForOverflowUnderflow>true</CheckForOverflowUnderflow>
+    <AssemblyName>CSF.Zpt.Impl.HtmlHAP</AssemblyName>
+    <DocumentationFile>bin\Release\CSF.Zpt.DocumentProviders.HtmlHAP.xml</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="ZptHtmlAttribute.cs" />

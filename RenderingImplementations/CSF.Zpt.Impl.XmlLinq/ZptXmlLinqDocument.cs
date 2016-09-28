@@ -8,7 +8,7 @@ using CSF.Zpt.Tales;
 using System.Xml;
 using System.Xml.XPath;
 
-namespace CSF.Zpt.Impl
+namespace CSF.Zpt.DocumentProviders
 {
   /// <summary>
   /// Implementation of <see cref="ZptDocument"/> based on a <c>System.Xml.Linq.XDocument</c>.
@@ -185,7 +185,7 @@ namespace CSF.Zpt.Impl
     #region constructor
 
     /// <summary>
-    /// Initializes a new instance of the <see cref="CSF.Zpt.Impl.ZptXmlLinqDocument"/> class.
+    /// Initializes a new instance of the <see cref="CSF.Zpt.DocumentProviders.ZptXmlLinqDocument"/> class.
     /// </summary>
     /// <param name="document">An XML document from which to create the current instance.</param>
     /// <param name="sourceFile">Information about the document's source file.</param>

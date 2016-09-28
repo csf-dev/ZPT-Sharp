@@ -7,7 +7,7 @@ using CSF.Zpt.Resources;
 using CSF.Zpt.Tales;
 using CSF.Zpt;
 
-namespace CSF.Zpt.Impl
+namespace CSF.Zpt.DocumentProviders
 {
   /// <summary>
   /// Implementation of <see cref="ZptDocument"/> based on an <c>HtmlAgilityPack.HtmlDocument</c>.
@@ -169,7 +169,7 @@ namespace CSF.Zpt.Impl
     #region constructor
 
     /// <summary>
-    /// Initializes a new instance of the <see cref="CSF.Zpt.Impl.ZptHtmlDocument"/> class.
+    /// Initializes a new instance of the <see cref="CSF.Zpt.DocumentProviders.ZptHtmlDocument"/> class.
     /// </summary>
     /// <param name="document">An HTML document from which to create the current instance.</param>
     /// <param name="sourceFile">Information about the document's source file.</param>

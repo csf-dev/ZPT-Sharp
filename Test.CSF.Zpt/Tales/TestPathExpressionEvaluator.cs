@@ -4,7 +4,7 @@ using CSF.Zpt.Tales;
 using Moq;
 using Ploeh.AutoFixture;
 using CSF.Zpt.Rendering;
-using CSF.Zpt.Impl.PathExpressions;
+using CSF.Zpt.ExpressionEvaluators;
 
 namespace Test.CSF.Zpt.Tales
 {

@@ -1,7 +1,7 @@
 using System;
 using NUnit.Framework;
 using CSF.Zpt.Tales;
-using CSF.Zpt.Impl.PathExpressions;
+using CSF.Zpt.ExpressionEvaluators;
 
 namespace Test.CSF.Zpt.Tales
 {

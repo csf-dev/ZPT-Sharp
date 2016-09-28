@@ -6,7 +6,7 @@ using CSF.Zpt.Rendering;
 using CSF.Zpt.Resources;
 using CSF.Zpt.Tales;
 
-namespace CSF.Zpt.Impl
+namespace CSF.Zpt.DocumentProviders
 {
   /// <summary>
   /// Implementation of <see cref="ZptDocument"/> based on a <c>System.Xml.XmlDocument</c>.
@@ -219,7 +219,7 @@ namespace CSF.Zpt.Impl
     #region constructor
 
     /// <summary>
-    /// Initializes a new instance of the <see cref="CSF.Zpt.Impl.ZptXmlDocument"/> class.
+    /// Initializes a new instance of the <see cref="CSF.Zpt.DocumentProviders.ZptXmlDocument"/> class.
     /// </summary>
     /// <param name="document">An XML document from which to create the current instance.</param>
     /// <param name="sourceFile">Information about the document's source file.</param>

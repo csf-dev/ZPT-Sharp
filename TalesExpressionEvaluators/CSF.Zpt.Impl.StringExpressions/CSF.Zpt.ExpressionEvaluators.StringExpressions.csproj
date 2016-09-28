@@ -3,35 +3,40 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{7B3748AD-DF11-4A80-9258-EA043CD99D7C}</ProjectGuid>
+    <ProjectGuid>{63F5FF1D-DA36-4BB4-AA99-24AA78844109}</ProjectGuid>
     <OutputType>Library</OutputType>
-    <RootNamespace>CSF.Zpt.Impl.NotExpressions</RootNamespace>
-    <AssemblyName>CSF.Zpt.Impl.NotExpressions</AssemblyName>
+    <RootNamespace>CSF.Zpt.ExpressionEvaluators</RootNamespace>
+    <AssemblyName>CSF.Zpt.ExpressionEvaluators.StringExpressions</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <ReleaseVersion>0.5.0</ReleaseVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>bin\Debug</OutputPath>
-    <DefineConstants>DEBUG;</DefineConstants>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <ConsolePause>false</ConsolePause>
+    <CheckForOverflowUnderflow>true</CheckForOverflowUnderflow>
+    <DocumentationFile>bin\Debug\CSF.Zpt.ExpressionEvaluators.StringExpressions.xml</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>full</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release</OutputPath>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <ConsolePause>false</ConsolePause>
+    <CheckForOverflowUnderflow>true</CheckForOverflowUnderflow>
+    <DefineConstants>TRACE</DefineConstants>
+    <DocumentationFile>bin\Release\CSF.Zpt.ExpressionEvaluators.StringExpressions.xml</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="NotExpressionEvaluator.cs" />
+    <Compile Include="StringExpressionEvaluator.cs" />
     <Compile Include="AssemblyInfo.cs" />
     <Compile Include="..\..\Common\CommonAssemblyInfo.cs">
       <Link>CommonAssemblyInfo.cs</Link>
@@ -46,6 +51,10 @@
     <ProjectReference Include="..\..\CSF.Zpt.Abstractions\CSF.Zpt.Abstractions.csproj">
       <Project>{8207CD9B-F1C1-4D75-B250-ACDFFBDCB071}</Project>
       <Name>CSF.Zpt.Abstractions</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CSF.Zpt.Impl.PathExpressions\CSF.Zpt.ExpressionEvaluators.PathExpressions.csproj">
+      <Project>{B6A27567-61F7-43F7-B201-FFC7A449BDBB}</Project>
+      <Name>CSF.Zpt.ExpressionEvaluators.PathExpressions</Name>
     </ProjectReference>
   </ItemGroup>
 </Project>

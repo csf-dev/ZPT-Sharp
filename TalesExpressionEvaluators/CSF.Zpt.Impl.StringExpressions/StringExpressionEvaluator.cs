@@ -4,9 +4,8 @@ using System.Text.RegularExpressions;
 using System.Linq;
 using System.Collections.Generic;
 using CSF.Zpt.Tales;
-using CSF.Zpt.Impl.PathExpressions;
 
-namespace CSF.Zpt.Impl.StringExpressions
+namespace CSF.Zpt.ExpressionEvaluators
 {
   /// <summary>
   /// Implementation of <see cref="ExpressionEvaluatorBase"/> which creates string values, with optional interpolation.
@@ -146,12 +145,12 @@ namespace CSF.Zpt.Impl.StringExpressions
     #region constructor
 
     /// <summary>
-    /// Initializes a new instance of the <see cref="CSF.Zpt.Tales.StringExpressionEvaluator"/> class.
+    /// Initializes a new instance of the <see cref="CSF.Zpt.ExpressionEvaluators.StringExpressionEvaluator"/> class.
     /// </summary>
     public StringExpressionEvaluator() : base() {}
 
     /// <summary>
-    /// Initializes a new instance of the <see cref="CSF.Zpt.Tales.StringExpressionEvaluator"/> class.
+    /// Initializes a new instance of the <see cref="CSF.Zpt.ExpressionEvaluators.StringExpressionEvaluator"/> class.
     /// </summary>
     /// <param name="selector">Expression evaluator selector.</param>
     public StringExpressionEvaluator(IEvaluatorSelector selector) : base(selector) {}

@@ -4,7 +4,7 @@ using System.Collections;
 using System.Linq;
 using CSF.Zpt.Tales;
 
-namespace CSF.Zpt.Impl.NotExpressions
+namespace CSF.Zpt.ExpressionEvaluators
 {
   /// <summary>
   /// Implementation of <see cref="ExpressionEvaluatorBase"/> which evaluates a 'child' expression, converts the result to
@@ -115,7 +115,7 @@ namespace CSF.Zpt.Impl.NotExpressions
     #region constructor
 
     /// <summary>
-    /// Initializes a new instance of the <see cref="CSF.Zpt.Tales.NotExpressionEvaluator"/> class.
+    /// Initializes a new instance of the <see cref="CSF.Zpt.ExpressionEvaluators.NotExpressionEvaluator"/> class.
     /// </summary>
     public NotExpressionEvaluator() : base() {}
 

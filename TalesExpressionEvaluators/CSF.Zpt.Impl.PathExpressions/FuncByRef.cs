@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace CSF.Zpt.Impl.PathExpressions
+namespace CSF.Zpt.ExpressionEvaluators
 {
   /// <summary>
   /// Delegate roughly equivalent to <c>Func&lt;T1,TResult&gt;</c>, but in which the parameter is passed by the 'ref'

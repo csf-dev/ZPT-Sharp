@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace CSF.Zpt.Impl.PathExpressions
+namespace CSF.Zpt.ExpressionEvaluators
 {
   /// <summary>
   /// Wrapper for a traversal delegate.
@@ -71,7 +71,7 @@ namespace CSF.Zpt.Impl.PathExpressions
     #region constructors
 
     /// <summary>
-    /// Initializes a new instance of the <see cref="CSF.Zpt.Tales.TraversalWrapper"/> class.
+    /// Initializes a new instance of the <see cref="CSF.Zpt.ExpressionEvaluators.TraversalWrapper"/> class.
     /// </summary>
     /// <param name="dele">A delegate instance.</param>
     public TraversalWrapper(Func<TSource,object> dele)
@@ -85,7 +85,7 @@ namespace CSF.Zpt.Impl.PathExpressions
     }
 
     /// <summary>
-    /// Initializes a new instance of the <see cref="CSF.Zpt.Tales.TraversalWrapper"/> class.
+    /// Initializes a new instance of the <see cref="CSF.Zpt.ExpressionEvaluators.TraversalWrapper"/> class.
     /// </summary>
     /// <param name="dele">A delegate instance.</param>
     public TraversalWrapper(Func<TSource,string,object> dele)
@@ -99,7 +99,7 @@ namespace CSF.Zpt.Impl.PathExpressions
     }
 
     /// <summary>
-    /// Initializes a new instance of the <see cref="CSF.Zpt.Tales.TraversalWrapper"/> class.
+    /// Initializes a new instance of the <see cref="CSF.Zpt.ExpressionEvaluators.TraversalWrapper"/> class.
     /// </summary>
     /// <param name="dele">A delegate instance.</param>
     public TraversalWrapper(Func<TSource,int,object> dele)

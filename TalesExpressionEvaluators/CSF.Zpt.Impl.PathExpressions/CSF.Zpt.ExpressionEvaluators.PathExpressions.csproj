@@ -3,12 +3,12 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{842160E4-BDE5-4FA0-ADE5-07554090AA27}</ProjectGuid>
+    <ProjectGuid>{B6A27567-61F7-43F7-B201-FFC7A449BDBB}</ProjectGuid>
     <OutputType>Library</OutputType>
-    <RootNamespace>CSF.Zpt.Impl</RootNamespace>
-    <AssemblyName>CSF.Zpt.Impl.XmlLinq</AssemblyName>
-    <ReleaseVersion>0.5.0</ReleaseVersion>
+    <RootNamespace>CSF.Zpt.ExpressionEvaluators</RootNamespace>
+    <AssemblyName>CSF.Zpt.ExpressionEvaluators.PathExpressions</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <ReleaseVersion>0.5.0</ReleaseVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -20,6 +20,7 @@
     <WarningLevel>4</WarningLevel>
     <ConsolePause>false</ConsolePause>
     <CheckForOverflowUnderflow>true</CheckForOverflowUnderflow>
+    <DocumentationFile>bin\Debug\CSF.Zpt.ExpressionEvaluators.PathExpressions.xml</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <Optimize>true</Optimize>
@@ -27,34 +28,38 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <ConsolePause>false</ConsolePause>
-    <DefineConstants>TRACE</DefineConstants>
     <CheckForOverflowUnderflow>true</CheckForOverflowUnderflow>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Deploy|AnyCPU' ">
-    <Optimize>true</Optimize>
-    <OutputPath>bin\Release</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <CheckForOverflowUnderflow>true</CheckForOverflowUnderflow>
+    <DocumentationFile>bin\Release\CSF.Zpt.ExpressionEvaluators.PathExpressions.xml</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ZptXmlLinqAttribute.cs" />
-    <Compile Include="ZptXmlLinqElement.cs" />
-    <Compile Include="ZptXmlLinqDocument.cs" />
-    <Compile Include="XmlLinqZptDocumentProvider.cs" />
+    <Compile Include="ObjectTraverser.cs" />
+    <Compile Include="Path.cs" />
+    <Compile Include="PathComponent.cs" />
+    <Compile Include="PathExpressionEvaluator.cs" />
+    <Compile Include="PathPart.cs" />
+    <Compile Include="PathWalker.cs" />
+    <Compile Include="LocalVariablePathExpressionEvaluator.cs" />
+    <Compile Include="TraversalWrapper.cs" />
+    <Compile Include="TraversalWrapper`1.cs" />
+    <Compile Include="FuncByRef.cs" />
+    <Compile Include="Resources\ExceptionMessages.Designer.cs">
+      <DependentUpon>ExceptionMessages.resx</DependentUpon>
+    </Compile>
+    <Compile Include="AssemblyInfo.cs" />
     <Compile Include="..\..\Common\CommonAssemblyInfo.cs">
       <Link>CommonAssemblyInfo.cs</Link>
     </Compile>
-    <Compile Include="AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
+    <ProjectReference Include="..\..\CSF\CSF.Reflection\CSF.Reflection.csproj">
+      <Project>{275413F6-0651-4AD4-A426-07EDA165C07E}</Project>
+      <Name>CSF.Reflection</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\CSF.Zpt\CSF.Zpt.csproj">
       <Project>{16E957BB-347C-4EE1-815F-19AC296FB9E0}</Project>
       <Name>CSF.Zpt</Name>
@@ -63,5 +68,15 @@
       <Project>{8207CD9B-F1C1-4D75-B250-ACDFFBDCB071}</Project>
       <Name>CSF.Zpt.Abstractions</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Resources\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\ExceptionMessages.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>ExceptionMessages.Designer.cs</LastGenOutput>
+      <LogicalName>CSF.Zpt.Impl.PathExpressions.Resources.ExceptionMessages.resources</LogicalName>
+    </EmbeddedResource>
   </ItemGroup>
 </Project>

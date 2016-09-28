@@ -2,7 +2,7 @@
 using System.Collections.ObjectModel;
 using System.Collections.Generic;
 
-namespace CSF.Zpt.Impl.PathExpressions
+namespace CSF.Zpt.ExpressionEvaluators
 {
   /// <summary>
   /// Represents a component of a composite TALES path.  This type is comprised of one or more <see cref="PathPart"/>.
@@ -33,7 +33,7 @@ namespace CSF.Zpt.Impl.PathExpressions
     #region constructor
 
     /// <summary>
-    /// Initializes a new instance of the <see cref="CSF.Zpt.Tales.PathComponent"/> class.
+    /// Initializes a new instance of the <see cref="CSF.Zpt.ExpressionEvaluators.PathComponent"/> class.
     /// </summary>
     /// <param name="parts">Parts.</param>
     internal PathComponent(PathPart[] parts)

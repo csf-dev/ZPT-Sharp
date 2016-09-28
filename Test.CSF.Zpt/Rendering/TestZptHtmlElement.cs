@@ -8,7 +8,7 @@ using Ploeh.AutoFixture;
 using Moq;
 using System.Linq;
 using CSF.Zpt;
-using CSF.Zpt.Impl;
+using CSF.Zpt.DocumentProviders;
 
 namespace Test.CSF.Zpt.Rendering
 {

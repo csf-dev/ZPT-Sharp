@@ -7,7 +7,7 @@ using System.Text;
 using CSF.Zpt.Resources;
 using CSF.Zpt.Rendering;
 
-namespace CSF.Zpt.Impl
+namespace CSF.Zpt.DocumentProviders
 {
   /// <summary>
   /// Implementation of <see cref="ZptElement"/> based on documents parsed using <c>System.Xml</c>.
@@ -116,15 +116,15 @@ namespace CSF.Zpt.Impl
 
     /// <summary>
     /// Determines whether the specified <see cref="CSF.Zpt.Rendering.ZptElement"/> is equal to the current
-    /// <see cref="CSF.Zpt.Impl.ZptXmlElement"/>.
+    /// <see cref="CSF.Zpt.DocumentProviders.ZptXmlElement"/>.
     /// </summary>
     /// <param name="other">
     /// The <see cref="CSF.Zpt.Rendering.ZptElement"/> to compare with the current
-    /// <see cref="CSF.Zpt.Impl.ZptXmlElement"/>.
+    /// <see cref="CSF.Zpt.DocumentProviders.ZptXmlElement"/>.
     /// </param>
     /// <returns>
     /// <c>true</c> if the specified <see cref="CSF.Zpt.Rendering.ZptElement"/> is equal to the current
-    /// <see cref="CSF.Zpt.Impl.ZptXmlElement"/>; otherwise, <c>false</c>.
+    /// <see cref="CSF.Zpt.DocumentProviders.ZptXmlElement"/>; otherwise, <c>false</c>.
     /// </returns>
     public override bool Equals(ZptElement other)
     {
@@ -144,7 +144,7 @@ namespace CSF.Zpt.Impl
     }
 
     /// <summary>
-    /// Serves as a hash function for a <see cref="CSF.Zpt.Impl.ZptXmlElement"/> object.
+    /// Serves as a hash function for a <see cref="CSF.Zpt.DocumentProviders.ZptXmlElement"/> object.
     /// </summary>
     /// <returns>
     /// A hash code for this instance that is suitable for use in hashing algorithms and data structures such as a
@@ -736,7 +736,7 @@ namespace CSF.Zpt.Impl
     #region constructor
 
     /// <summary>
-    /// Initializes a new instance of the <see cref="CSF.Zpt.Impl.ZptXmlElement"/> class.
+    /// Initializes a new instance of the <see cref="CSF.Zpt.DocumentProviders.ZptXmlElement"/> class.
     /// </summary>
     /// <param name="node">The source XML Node.</param>
     /// <param name="sourceFile">Information about the element's source file.</param>

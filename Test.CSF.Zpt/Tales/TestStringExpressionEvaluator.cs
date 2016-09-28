@@ -5,8 +5,7 @@ using Ploeh.AutoFixture;
 using CSF.Zpt.Rendering;
 using CSF.Zpt.Tales;
 using Test.CSF.Zpt.Util.Autofixture;
-using CSF.Zpt.Impl.StringExpressions;
-using CSF.Zpt.Impl.PathExpressions;
+using CSF.Zpt.ExpressionEvaluators;
 
 namespace Test.CSF.Zpt.Tales
 {

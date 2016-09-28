@@ -8,7 +8,7 @@ using Moq;
 using System.Linq;
 using System.Xml;
 using CSF.Zpt;
-using CSF.Zpt.Impl;
+using CSF.Zpt.DocumentProviders;
 
 namespace Test.CSF.Zpt.Rendering
 {
