@@ -79,6 +79,7 @@
     <Exec Command="Util\build-html-manpage" Condition="'$(OS)' == 'Unix'" />
     <Exec Command="nuget pack CSF.Zpt.Cli.nuspec -Prop Configuration=Release" Condition="'$(OS)' == 'Unix'" />
     <Exec Command="&quot;$(MSBuildProgramFiles32)\NuGet\nuget.exe&quot; pack CSF.Zpt.Cli.nuspec -Prop Configuration=Release" Condition="'$(OS)' != 'Unix'" />
+    <!--
     <ItemGroup>
       <ZipFiles Include="$(OutputPath)CSF.dll" />
       <ZipFiles Include="$(OutputPath)CSF.Cli.Parameters.dll" />
@@ -101,6 +102,7 @@
     </ItemGroup>
     <ZipTask OutputFilename="$(OutputPath)ZptBuilder.zip" Files="@(ZipFiles)" Condition="'$(OS)' == 'Windows_NT'" />
     <Exec Command="zip -j $(OutputPath)ZptBuilder.zip @(ZipFiles, ' ')" Condition="'$(OS)' == 'Unix'" />
+    -->
   </Target>
   <ItemGroup>
     <ProjectReference Include="..\CSF.Zpt\CSF.Zpt.csproj">

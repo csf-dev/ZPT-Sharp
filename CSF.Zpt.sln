@@ -71,6 +71,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSF.Zpt.TestUtils", "Tests\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test.CSF.Zpt.ExpressionEvaluators.PathExpressions", "Tests\Test.CSF.Zpt.ExpressionEvaluators.PathExpressions\Test.CSF.Zpt.ExpressionEvaluators.PathExpressions.csproj", "{67E8CE73-2202-4C21-A4D5-CFF764B6B72E}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Deployment", "Deployment", "{79045B21-94A0-4984-A91C-4D95EAA10C78}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSF.Zpt.Deployment", "Deployment\CSF.Zpt.Deployment\CSF.Zpt.Deployment.csproj", "{55308783-6072-42C1-B955-AA393157D7AD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -129,6 +133,12 @@ Global
 		{52558C37-31A4-4197-AF82-030E2443A71F}.Deploy|Any CPU.Build.0 = Release|Any CPU
 		{52558C37-31A4-4197-AF82-030E2443A71F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{52558C37-31A4-4197-AF82-030E2443A71F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{55308783-6072-42C1-B955-AA393157D7AD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{55308783-6072-42C1-B955-AA393157D7AD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{55308783-6072-42C1-B955-AA393157D7AD}.Deploy|Any CPU.ActiveCfg = Deploy|Any CPU
+		{55308783-6072-42C1-B955-AA393157D7AD}.Deploy|Any CPU.Build.0 = Deploy|Any CPU
+		{55308783-6072-42C1-B955-AA393157D7AD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{55308783-6072-42C1-B955-AA393157D7AD}.Release|Any CPU.Build.0 = Release|Any CPU
 		{63F5FF1D-DA36-4BB4-AA99-24AA78844109}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{63F5FF1D-DA36-4BB4-AA99-24AA78844109}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{63F5FF1D-DA36-4BB4-AA99-24AA78844109}.Deploy|Any CPU.ActiveCfg = Release|Any CPU
@@ -266,6 +276,7 @@ Global
 		{72C679CF-CC5F-421A-A3FE-8269229F68E5} = {39927A41-7964-48BF-9D90-DAFA48D54F09}
 		{96333809-3330-43A7-B0CB-2DBE68E1E6FE} = {39927A41-7964-48BF-9D90-DAFA48D54F09}
 		{67E8CE73-2202-4C21-A4D5-CFF764B6B72E} = {39927A41-7964-48BF-9D90-DAFA48D54F09}
+		{55308783-6072-42C1-B955-AA393157D7AD} = {79045B21-94A0-4984-A91C-4D95EAA10C78}
 	EndGlobalSection
 	GlobalSection(MonoDevelopProperties) = preSolution
 		Policies = $0

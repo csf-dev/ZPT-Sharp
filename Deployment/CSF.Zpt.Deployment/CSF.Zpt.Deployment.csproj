@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Deploy</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{55308783-6072-42C1-B955-AA393157D7AD}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>CSF.Zpt.Deployment</RootNamespace>
+    <AssemblyName>CSF.Zpt.Deployment</AssemblyName>
+    <SolutionRoot>..\..\</SolutionRoot>
+    <BinaryPath>bin/Release</BinaryPath>
+    <ApiMainPath>$(SolutionRoot)CSF.Zpt\$(BinaryPath)</ApiMainPath>
+    <ZptBuilderPath>$(SolutionRoot)CSF.Zpt.Cli\$(BinaryPath)</ZptBuilderPath>
+    <Log4NetPath>$(SolutionRoot)CSF.Zpt.Log4Net\$(BinaryPath)</Log4NetPath>
+    <Mvc5Path>$(SolutionRoot)CSF.Zpt.MVC\$(BinaryPath)</Mvc5Path>
+    <ApiMainPath>$(SolutionRoot)CSF.Zpt\$(BinaryPath)</ApiMainPath>
+    <ApiMainPath>$(SolutionRoot)CSF.Zpt\$(BinaryPath)</ApiMainPath>
+    <HtmlHapProviderPath>$(SolutionRoot)DocumentProviders\CSF.Zpt.DocumentProviders.HtmlHAP\$(BinaryPath)</HtmlHapProviderPath>
+    <XmlLegacyProviderPath>$(SolutionRoot)DocumentProviders\CSF.Zpt.DocumentProviders.XmlLegacy\$(BinaryPath)</XmlLegacyProviderPath>
+    <XmlLinqProviderPath>$(SolutionRoot)DocumentProviders\CSF.Zpt.DocumentProviders.XmlLinq\$(BinaryPath)</XmlLinqProviderPath>
+    <NotEvaluatorPath>$(SolutionRoot)ExpressionEvaluators\CSF.Zpt.ExpressionEvaluators.NotExpressions\$(BinaryPath)</NotEvaluatorPath>
+    <PathEvaluatorPath>$(SolutionRoot)ExpressionEvaluators\CSF.Zpt.ExpressionEvaluators.PathExpressions\$(BinaryPath)</PathEvaluatorPath>
+    <StringEvaluatorPath>$(SolutionRoot)ExpressionEvaluators\CSF.Zpt.ExpressionEvaluators.StringExpressions\$(BinaryPath)</StringEvaluatorPath>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <ReleaseVersion>0.5.0</ReleaseVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Deploy|AnyCPU' ">
+    <OutputPath>..\Output\</OutputPath>
+    <ConsolePause>false</ConsolePause>
+    <WarningLevel>4</WarningLevel>
+    <Optimize>false</Optimize>
+  </PropertyGroup>
+  <!-- Originally taken from https://peteris.rocks/blog/creating-release-zip-archive-with-msbuild/ -->
+  <UsingTask TaskName="Zip" TaskFactory="CodeTaskFactory" AssemblyFile="$(MSBuildToolsPath)\Microsoft.Build.Tasks.v4.0.dll">
+    <ParameterGroup>
+      <OutputFilename ParameterType="System.String" Required="true" />
+      <Files ParameterType="Microsoft.Build.Framework.ITaskItem[]" Required="true" />
+    </ParameterGroup>
+    <Task>
+      <Reference Include="System.IO.Compression" />
+      <Using Namespace="System.IO.Compression" />
+      <Code Type="Fragment" Language="cs"><![CDATA[
+        try
+        {
+          using (Stream zipStream = new FileStream(Path.GetFullPath(OutputFilename), FileMode.Create, FileAccess.Write))
+          using (ZipArchive archive = new ZipArchive(zipStream, ZipArchiveMode.Create))
+          {
+              foreach (ITaskItem fileItem in Files)
+              {
+                  string filename = fileItem.ItemSpec;
+                  using (Stream fileStream = new FileStream(filename, FileMode.Open, FileAccess.Read))
+                  using (Stream fileStreamInZip = archive.CreateEntry(new FileInfo(filename).Name).Open())
+                      fileStream.CopyTo(fileStreamInZip);
+              }
+          }
+          return true;
+        }
+        catch (Exception ex)
+        {
+          Log.LogErrorFromException(ex);
+          return false;
+        }
+      ]]></Code>
+    </Task>
+  </UsingTask>
+  <Target Name="Build" Condition=" '$(Configuration)|$(Platform)' == 'Deploy|AnyCPU' ">
+    <ItemGroup>
+      <CliZipFiles Include="$(ZptBuilderPath)CSF.dll" />
+      <CliZipFiles Include="$(ZptBuilderPath)CSF.Cli.Parameters.dll" />
+      <CliZipFiles Include="$(ZptBuilderPath)CSF.Configuration.dll" />
+      <CliZipFiles Include="$(ZptBuilderPath)CSF.Reflection.dll" />
+      <CliZipFiles Include="$(ZptBuilderPath)CSF.Zpt.Abstractions.dll" />
+      <CliZipFiles Include="$(ZptBuilderPath)CSF.Zpt.dll" />
+      <CliZipFiles Include="$(ZptBuilderPath)CSF.Zpt.DocumentProviders.HtmlHAP.dll" />
+      <CliZipFiles Include="$(ZptBuilderPath)CSF.Zpt.DocumentProviders.XmlLinq.dll" />
+      <CliZipFiles Include="$(ZptBuilderPath)CSF.Zpt.ExpressionEvaluators.NotExpressions.dll" />
+      <CliZipFiles Include="$(ZptBuilderPath)CSF.Zpt.ExpressionEvaluators.PathExpressions.dll" />
+      <CliZipFiles Include="$(ZptBuilderPath)CSF.Zpt.ExpressionEvaluators.StringExpressions.dll" />
+      <CliZipFiles Include="$(ZptBuilderPath)CSF.Zpt.Log4net.dll" />
+      <CliZipFiles Include="$(ZptBuilderPath)HtmlAgilityPack.dll" />
+      <CliZipFiles Include="$(ZptBuilderPath)log4net.dll" />
+      <CliZipFiles Include="$(ZptBuilderPath)ZptBuilder.1" />
+      <CliZipFiles Include="$(ZptBuilderPath)ZptBuilder.exe" />
+      <CliZipFiles Include="$(ZptBuilderPath)ZptBuilder.exe.config" />
+      <CliZipFiles Include="$(ZptBuilderPath)\Doc\ZptBuilder.MANUAL.txt" />
+    </ItemGroup>
+    <ZipTask OutputFilename="$(OutputPath)ZptBuilder.zip" Files="@(CliZipFiles)" Condition="'$(OS)' == 'Windows_NT'" />
+    <Exec Command="zip -j $(OutputPath)ZptBuilder.zip @(CliZipFiles, ' ')" Condition="'$(OS)' == 'Unix'" />
+  </Target>
+  <ItemGroup>
+    <ProjectReference Include="..\..\CSF.Zpt\CSF.Zpt.csproj">
+      <Project>{16E957BB-347C-4EE1-815F-19AC296FB9E0}</Project>
+      <Name>CSF.Zpt</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\CSF.Zpt.Cli\CSF.Zpt.Cli.csproj">
+      <Project>{4DD64666-DBEF-4AD5-BDB0-3EB3C70A6E83}</Project>
+      <Name>CSF.Zpt.Cli</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\DocumentProviders\CSF.Zpt.DocumentProviders.HtmlHAP\CSF.Zpt.DocumentProviders.HtmlHAP.csproj">
+      <Project>{BFD834D4-5724-4425-BCB3-6DEE6B03F743}</Project>
+      <Name>CSF.Zpt.DocumentProviders.HtmlHAP</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\DocumentProviders\CSF.Zpt.DocumentProviders.XmlLegacy\CSF.Zpt.DocumentProviders.XmlLegacy.csproj">
+      <Project>{71834399-0B92-4754-9721-178872E77CFD}</Project>
+      <Name>CSF.Zpt.DocumentProviders.XmlLegacy</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\DocumentProviders\CSF.Zpt.DocumentProviders.XmlLinq\CSF.Zpt.DocumentProviders.XmlLinq.csproj">
+      <Project>{842160E4-BDE5-4FA0-ADE5-07554090AA27}</Project>
+      <Name>CSF.Zpt.DocumentProviders.XmlLinq</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\ExpressionEvaluators\CSF.Zpt.ExpressionEvaluators.NotExpressions\CSF.Zpt.ExpressionEvaluators.NotExpressions.csproj">
+      <Project>{7B3748AD-DF11-4A80-9258-EA043CD99D7C}</Project>
+      <Name>CSF.Zpt.ExpressionEvaluators.NotExpressions</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\ExpressionEvaluators\CSF.Zpt.ExpressionEvaluators.PathExpressions\CSF.Zpt.ExpressionEvaluators.PathExpressions.csproj">
+      <Project>{B6A27567-61F7-43F7-B201-FFC7A449BDBB}</Project>
+      <Name>CSF.Zpt.ExpressionEvaluators.PathExpressions</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\ExpressionEvaluators\CSF.Zpt.ExpressionEvaluators.StringExpressions\CSF.Zpt.ExpressionEvaluators.StringExpressions.csproj">
+      <Project>{63F5FF1D-DA36-4BB4-AA99-24AA78844109}</Project>
+      <Name>CSF.Zpt.ExpressionEvaluators.StringExpressions</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\CSF.Zpt.Log4net\CSF.Zpt.Log4net.csproj">
+      <Project>{81044439-06CF-44E2-BBF2-3800F1DEB5B1}</Project>
+      <Name>CSF.Zpt.Log4net</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\CSF.Zpt.MVC\CSF.Zpt.MVC.csproj">
+      <Project>{9B4DF12E-6E04-4C25-AD16-58434C18DE8A}</Project>
+      <Name>CSF.Zpt.MVC</Name>
+    </ProjectReference>
+  </ItemGroup>
+</Project>
