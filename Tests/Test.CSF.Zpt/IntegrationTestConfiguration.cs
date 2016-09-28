@@ -10,12 +10,12 @@ namespace Test.CSF.Zpt
     #region constants
 
     internal const string
-      DefaultSourceDocumentPath = "../../../Common/ZptIntegrationTests/SourceDocuments",
-      DefaultExpectedOutputPath = "../../../Common/ZptIntegrationTests/ExpectedOutputs",
-      DefaultModelSourceDocumentPath = "../../../Common/ZptModelIntegrationTests/SourceDocuments",
-      DefaultModelExpectedOutputPath = "../../../Common/ZptModelIntegrationTests/ExpectedOutputs",
-      DefaultSourceAnnotationSourceDocumentPath = "../../../Common/SourceAnnotationIntegrationTests/SourceDocuments",
-      DefaultSourceAnnotationExpectedOutputPath = "../../../Common/SourceAnnotationIntegrationTests/ExpectedOutputs";
+      DefaultSourceDocumentPath                 = "../../../../Common/ZptIntegrationTests/SourceDocuments",
+      DefaultExpectedOutputPath                 = "../../../../Common/ZptIntegrationTests/ExpectedOutputs",
+      DefaultModelSourceDocumentPath            = "../../../../Common/ZptModelIntegrationTests/SourceDocuments",
+      DefaultModelExpectedOutputPath            = "../../../../Common/ZptModelIntegrationTests/ExpectedOutputs",
+      DefaultSourceAnnotationSourceDocumentPath = "../../../../Common/SourceAnnotationIntegrationTests/SourceDocuments",
+      DefaultSourceAnnotationExpectedOutputPath = "../../../../Common/SourceAnnotationIntegrationTests/ExpectedOutputs";
 
     #endregion
 
