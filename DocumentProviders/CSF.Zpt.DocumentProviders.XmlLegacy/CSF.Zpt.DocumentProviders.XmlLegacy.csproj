@@ -30,7 +30,7 @@
     <ConsolePause>false</ConsolePause>
     <DefineConstants>TRACE</DefineConstants>
     <CheckForOverflowUnderflow>true</CheckForOverflowUnderflow>
-    <AssemblyName>CSF.Zpt.Impl.XmlLegacy</AssemblyName>
+    <AssemblyName>CSF.Zpt.DocumentProviders.XmlLegacy</AssemblyName>
     <DocumentationFile>bin\Release\CSF.Zpt.DocumentProviders.XmlLegacy.xml</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Deploy|AnyCPU' ">
@@ -41,7 +41,7 @@
     <WarningLevel>4</WarningLevel>
     <DefineConstants>TRACE</DefineConstants>
     <CheckForOverflowUnderflow>true</CheckForOverflowUnderflow>
-    <AssemblyName>CSF.Zpt.Impl.XmlLegacy</AssemblyName>
+    <AssemblyName>CSF.Zpt.DocumentProviders.XmlLegacy</AssemblyName>
     <DocumentationFile>bin\Release\CSF.Zpt.DocumentProviders.XmlLegacy.xml</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>

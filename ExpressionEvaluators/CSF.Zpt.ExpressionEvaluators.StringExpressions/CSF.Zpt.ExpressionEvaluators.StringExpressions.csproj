@@ -52,7 +52,7 @@
       <Project>{8207CD9B-F1C1-4D75-B250-ACDFFBDCB071}</Project>
       <Name>CSF.Zpt.Abstractions</Name>
     </ProjectReference>
-    <ProjectReference Include="..\CSF.Zpt.Impl.PathExpressions\CSF.Zpt.ExpressionEvaluators.PathExpressions.csproj">
+    <ProjectReference Include="..\CSF.Zpt.ExpressionEvaluators.PathExpressions\CSF.Zpt.ExpressionEvaluators.PathExpressions.csproj">
       <Project>{B6A27567-61F7-43F7-B201-FFC7A449BDBB}</Project>
       <Name>CSF.Zpt.ExpressionEvaluators.PathExpressions</Name>
     </ProjectReference>
