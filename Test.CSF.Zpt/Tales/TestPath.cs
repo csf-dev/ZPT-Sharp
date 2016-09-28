@@ -2,7 +2,7 @@ using System;
 using NUnit.Framework;
 using CSF.Zpt.Tales;
 using System.Linq;
-using CSF.Zpt.Impl.PathExpressions;
+using CSF.Zpt.ExpressionEvaluators;
 
 namespace Test.CSF.Zpt.Tales
 {

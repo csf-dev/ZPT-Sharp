@@ -2,9 +2,7 @@ using System;
 using NUnit.Framework;
 using CSF.Zpt.Tales;
 using Ploeh.AutoFixture;
-using CSF.Zpt.Impl.PathExpressions;
-using CSF.Zpt.Impl.StringExpressions;
-using CSF.Zpt.Impl.NotExpressions;
+using CSF.Zpt.ExpressionEvaluators;
 
 namespace Test.CSF.Zpt.Tales
 {

@@ -34,21 +34,21 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Documentation", "Documentat
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test.CSF.Zpt.Cli", "Test.CSF.Zpt.Cli\Test.CSF.Zpt.Cli.csproj", "{1BD7DB88-B672-4BEF-9B80-F13788A8D295}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "RenderingImplementations", "RenderingImplementations", "{F1251A40-9526-48DC-A665-F9AEB972AC33}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DocumentProviders", "DocumentProviders", "{F1251A40-9526-48DC-A665-F9AEB972AC33}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSF.Zpt.Impl.HtmlHAP", "RenderingImplementations\CSF.Zpt.Impl.HtmlHAP\CSF.Zpt.Impl.HtmlHAP.csproj", "{BFD834D4-5724-4425-BCB3-6DEE6B03F743}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSF.Zpt.DocumentProviders.HtmlHAP", "DocumentProviders\CSF.Zpt.DocumentProviders.HtmlHAP\CSF.Zpt.DocumentProviders.HtmlHAP.csproj", "{BFD834D4-5724-4425-BCB3-6DEE6B03F743}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSF.Zpt.Impl.XmlLegacy", "RenderingImplementations\CSF.Zpt.Impl.XmlLegacy\CSF.Zpt.Impl.XmlLegacy.csproj", "{71834399-0B92-4754-9721-178872E77CFD}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSF.Zpt.DocumentProviders.XmlLegacy", "DocumentProviders\CSF.Zpt.DocumentProviders.XmlLegacy\CSF.Zpt.DocumentProviders.XmlLegacy.csproj", "{71834399-0B92-4754-9721-178872E77CFD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSF.Zpt.Impl.XmlLinq", "RenderingImplementations\CSF.Zpt.Impl.XmlLinq\CSF.Zpt.Impl.XmlLinq.csproj", "{842160E4-BDE5-4FA0-ADE5-07554090AA27}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSF.Zpt.DocumentProviders.XmlLinq", "DocumentProviders\CSF.Zpt.DocumentProviders.XmlLinq\CSF.Zpt.DocumentProviders.XmlLinq.csproj", "{842160E4-BDE5-4FA0-ADE5-07554090AA27}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "TalesExpressionEvaluators", "TalesExpressionEvaluators", "{F2830FC9-EFCE-4DE8-8B24-2196A4F820BC}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ExpressionEvaluators", "ExpressionEvaluators", "{F2830FC9-EFCE-4DE8-8B24-2196A4F820BC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSF.Zpt.Impl.PathExpressions", "TalesExpressionEvaluators\CSF.Zpt.Impl.PathExpressions\CSF.Zpt.Impl.PathExpressions.csproj", "{B6A27567-61F7-43F7-B201-FFC7A449BDBB}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSF.Zpt.ExpressionEvaluators.PathExpressions", "ExpressionEvaluators\CSF.Zpt.ExpressionEvaluators.PathExpressions\CSF.Zpt.ExpressionEvaluators.PathExpressions.csproj", "{B6A27567-61F7-43F7-B201-FFC7A449BDBB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSF.Zpt.Impl.StringExpressions", "TalesExpressionEvaluators\CSF.Zpt.Impl.StringExpressions\CSF.Zpt.Impl.StringExpressions.csproj", "{63F5FF1D-DA36-4BB4-AA99-24AA78844109}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSF.Zpt.ExpressionEvaluators.StringExpressions", "ExpressionEvaluators\CSF.Zpt.ExpressionEvaluators.StringExpressions\CSF.Zpt.ExpressionEvaluators.StringExpressions.csproj", "{63F5FF1D-DA36-4BB4-AA99-24AA78844109}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSF.Zpt.Impl.NotExpressions", "TalesExpressionEvaluators\CSF.Zpt.Impl.NotExpressions\CSF.Zpt.Impl.NotExpressions.csproj", "{7B3748AD-DF11-4A80-9258-EA043CD99D7C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSF.Zpt.ExpressionEvaluators.NotExpressions", "ExpressionEvaluators\CSF.Zpt.ExpressionEvaluators.NotExpressions\CSF.Zpt.ExpressionEvaluators.NotExpressions.csproj", "{7B3748AD-DF11-4A80-9258-EA043CD99D7C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
