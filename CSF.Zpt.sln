@@ -6,6 +6,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{B99672F8-AB58-4435-AAE7-18850F239A17}"
 	ProjectSection(SolutionItems) = preProject
 		Common\CommonAssemblyInfo.cs = Common\CommonAssemblyInfo.cs
+		Common\ZipPackaging.targets = Common\ZipPackaging.targets
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CSF", "CSF", "{4B340A7A-DC93-4D8D-85DE-AF5123BE9F53}"
