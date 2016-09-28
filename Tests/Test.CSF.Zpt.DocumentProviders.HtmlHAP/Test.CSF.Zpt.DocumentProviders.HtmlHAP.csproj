@@ -52,9 +52,7 @@
     <Compile Include="TestZptHtmlElement.cs" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="TestZptHtmlElement.html">
-      <LogicalName>Test.CSF.Zpt.DocumentProviders..HtmlHAP.TestZptHtmlElement.html</LogicalName>
-    </EmbeddedResource>
+    <EmbeddedResource Include="TestZptHtmlElement.html" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\CSF.Zpt.Abstractions\CSF.Zpt.Abstractions.csproj">
@@ -72,6 +70,10 @@
     <ProjectReference Include="..\..\CSF\CSF.Reflection\CSF.Reflection.csproj">
       <Project>{275413F6-0651-4AD4-A426-07EDA165C07E}</Project>
       <Name>CSF.Reflection</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\CSF.Zpt.Log4net\CSF.Zpt.Log4net.csproj">
+      <Project>{81044439-06CF-44E2-BBF2-3800F1DEB5B1}</Project>
+      <Name>CSF.Zpt.Log4net</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

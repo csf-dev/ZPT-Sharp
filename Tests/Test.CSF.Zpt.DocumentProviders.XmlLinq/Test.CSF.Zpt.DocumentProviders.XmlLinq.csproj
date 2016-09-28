@@ -50,6 +50,10 @@
       <Project>{16E957BB-347C-4EE1-815F-19AC296FB9E0}</Project>
       <Name>CSF.Zpt</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\CSF.Zpt.Log4net\CSF.Zpt.Log4net.csproj">
+      <Project>{81044439-06CF-44E2-BBF2-3800F1DEB5B1}</Project>
+      <Name>CSF.Zpt.Log4net</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

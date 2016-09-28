@@ -1,6 +1,8 @@
 using System;
 using Ploeh.AutoFixture;
 using CSF.Zpt.Rendering;
+using Moq;
+using CSF.Zpt.Tales;
 
 namespace CSF.Zpt.TestUtils.Autofixture
 {
@@ -8,7 +10,9 @@ namespace CSF.Zpt.TestUtils.Autofixture
   {
     public void Customize(IFixture fixture)
     {
-      fixture.Customize<IRenderingOptions>(x => x.FromFactory(() => new RenderingOptions()));
+      fixture.Customize<IRenderingOptions>(x => x.FromFactory(() => {
+        return new RenderingOptions(documentFactory: Mock.Of<ITemplateFileFactory>());
+      }));
     }
   }
 }

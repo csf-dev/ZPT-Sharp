@@ -68,6 +68,10 @@
       <Project>{96333809-3330-43A7-B0CB-2DBE68E1E6FE}</Project>
       <Name>CSF.Zpt.TestUtils</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\CSF.Zpt.Log4net\CSF.Zpt.Log4net.csproj">
+      <Project>{81044439-06CF-44E2-BBF2-3800F1DEB5B1}</Project>
+      <Name>CSF.Zpt.Log4net</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
