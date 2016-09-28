@@ -8,6 +8,7 @@
     <RootNamespace>Test.CSF.Zpt.ExpressionEvaluators.StringExpressions</RootNamespace>
     <AssemblyName>Test.CSF.Zpt.ExpressionEvaluators.StringExpressions</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <ReleaseVersion>0.5.0</ReleaseVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>

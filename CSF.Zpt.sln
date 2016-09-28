@@ -60,7 +60,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test.CSF.Zpt.DocumentProvid
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test.CSF.Zpt.DocumentProviders.XmlLinq", "Tests\Test.CSF.Zpt.DocumentProviders.XmlLinq\Test.CSF.Zpt.DocumentProviders.XmlLinq.csproj", "{E5324CC1-87F2-4BBA-9490-3D12EF5CEC6E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSF.Zpt.IntegrationTests", "Tests\CSF.Zpt.IntegrationTests\CSF.Zpt.IntegrationTests.csproj", "{3D67093D-E42C-45D8-8937-9956A225F13D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test.CSF.Zpt.Integration", "Tests\Test.CSF.Zpt.Integration\Test.CSF.Zpt.Integration.csproj", "{3D67093D-E42C-45D8-8937-9956A225F13D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test.CSF.Zpt.ExpressionEvaluators.NotExpressions", "Tests\Test.CSF.Zpt.ExpressionEvaluators.NotExpressions\Test.CSF.Zpt.ExpressionEvaluators.NotExpressions.csproj", "{B52183BE-C7FA-43C3-80E6-C6CF8553E403}"
 EndProject

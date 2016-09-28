@@ -1,19 +1,18 @@
 using System;
 using NUnit.Framework;
 using CSF.Zpt;
-using CSF.Zpt.Tales;
 using System.IO;
 using CSF.Configuration;
-using CSF.Zpt.Rendering;
-using System.Collections.Generic;
 using System.Linq;
-using CSF.IO;
+using System.Collections.Generic;
+using CSF.Zpt.Tales;
+using CSF.Zpt.Rendering;
 
-namespace CSF.Zpt.IntegrationTests
+namespace Test.CSF.Zpt.Integration
 {
   [TestFixture]
   [Category("Integration")]
-  public class SourceAnnotationIntegrationTests : IntegrationTestBase
+  public class ZptIntegrationTests : IntegrationTestBase
   {
     #region tests
 
@@ -42,7 +41,7 @@ namespace CSF.Zpt.IntegrationTests
                   failedTests.Count());
     }
 
-    [TestCase("test_sa3.xml")]
+    [TestCase("")]
     [Explicit("This test is covered by RunIntegrationTests - this method is for running them one at a time though.")]
     public void TestSingleIntegrationTest(string inputFileName)
     {
@@ -65,16 +64,6 @@ namespace CSF.Zpt.IntegrationTests
     #endregion
 
     #region methods
-
-    protected override DirectoryInfo GetSourcePath(IIntegrationTestConfiguration config)
-    {
-      return config.GetSourceDocumentPath(IntegrationTestType.SourceAnnotation);
-    }
-
-    protected override DirectoryInfo GetExpectedPath(IIntegrationTestConfiguration config)
-    {
-      return config.GetExpectedOutputPath(IntegrationTestType.SourceAnnotation);
-    }
 
     protected override IRenderingContextFactory CreateTestEnvironment(DirectoryInfo rootPath)
     {
@@ -118,6 +107,8 @@ namespace CSF.Zpt.IntegrationTests
       output.TalKeywordOptions.Add("batch", batch);
 
       // The 'laf' keyword option
+      var laf = this.TemplateFactory.CreateTemplateFile(this.SourcePath.GetFiles("teeshoplaf.html").Single());
+      output.MetalKeywordOptions.Add("laf", laf);
 
       // The 'getProducts' option
       var getProducts = new [] {
@@ -133,12 +124,6 @@ namespace CSF.Zpt.IntegrationTests
       output.TalKeywordOptions.Add("getProducts", getProducts);
 
       return output;
-    }
-
-    protected override IRenderingOptions GetRenderingOptions(IRenderingContextFactory contextFactory)
-    {
-      return new RenderingOptions(contextFactory: contextFactory,
-                                  addSourceFileAnnotation: true);
     }
 
     #endregion

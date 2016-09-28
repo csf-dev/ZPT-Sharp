@@ -7,7 +7,7 @@ using CSF.Zpt.Rendering;
 using CSF.Zpt.Tales;
 using CSF.Zpt;
 
-namespace CSF.Zpt.IntegrationTests
+namespace Test.CSF.Zpt.Integration
 {
   [TestFixture]
   public class ModelIntegrationTests : IntegrationTestBase

@@ -9,7 +9,7 @@ using System.Collections.Generic;
 using System.Linq;
 using CSF.IO;
 
-namespace CSF.Zpt.IntegrationTests
+namespace Test.CSF.Zpt.Integration
 {
   public abstract class IntegrationTestBase
   {

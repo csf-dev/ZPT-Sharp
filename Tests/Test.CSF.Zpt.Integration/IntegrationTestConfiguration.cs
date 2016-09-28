@@ -3,7 +3,7 @@ using System.Configuration;
 using System.IO;
 using CSF;
 
-namespace CSF.Zpt.IntegrationTests
+namespace Test.CSF.Zpt.Integration
 {
   public class IntegrationTestConfiguration : ConfigurationSection, IIntegrationTestConfiguration
   {

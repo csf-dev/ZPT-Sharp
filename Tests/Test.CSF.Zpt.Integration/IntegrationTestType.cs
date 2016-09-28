@@ -1,6 +1,6 @@
 using System;
 
-namespace CSF.Zpt.IntegrationTests
+namespace Test.CSF.Zpt.Integration
 {
   public enum IntegrationTestType
   {

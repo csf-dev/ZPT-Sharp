@@ -1,7 +1,7 @@
 using System;
 using System.IO;
 
-namespace CSF.Zpt.IntegrationTests
+namespace Test.CSF.Zpt.Integration
 {
   public class FallbackIntegrationTestConfiguration : IIntegrationTestConfiguration
   {
