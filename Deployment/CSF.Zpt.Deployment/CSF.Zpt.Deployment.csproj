@@ -64,7 +64,7 @@
     </Task>
   </UsingTask>
   <Target Name="Build" Condition=" '$(Configuration)|$(Platform)' == 'Deploy|AnyCPU' ">
-    <MakeDir Directories="$(OutputPath)"/>
+    <MakeDir Directories="$(OutputPath)" />
     <ItemGroup>
       <CliZipFiles Include="$(ZptBuilderPath)CSF.dll" />
       <CliZipFiles Include="$(ZptBuilderPath)CSF.Cli.Parameters.dll" />
