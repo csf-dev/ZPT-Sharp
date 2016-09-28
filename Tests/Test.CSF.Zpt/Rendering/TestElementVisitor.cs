@@ -3,9 +3,9 @@ using NUnit.Framework;
 using Moq;
 using CSF.Zpt.Rendering;
 using System.Linq;
-using Test.CSF.Zpt.Util;
+using CSF.Zpt.TestUtils;
 using Ploeh.AutoFixture;
-using Test.CSF.Zpt.Util.Autofixture;
+using CSF.Zpt.TestUtils.Autofixture;
 
 namespace Test.CSF.Zpt.Rendering
 {

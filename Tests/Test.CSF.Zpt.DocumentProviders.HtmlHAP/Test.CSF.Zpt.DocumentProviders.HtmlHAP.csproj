@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{52558C37-31A4-4197-AF82-030E2443A71F}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>Test.CSF.Zpt.DocumentProviders.HtmlHAP</RootNamespace>
+    <AssemblyName>Test.CSF.Zpt.DocumentProviders.HtmlHAP</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug</OutputPath>
+    <DefineConstants>DEBUG;</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>full</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="nunit.framework">
+      <HintPath>..\..\packages\NUnit.2.6.4\lib\nunit.framework.dll</HintPath>
+    </Reference>
+    <Reference Include="Ploeh.AutoFixture">
+      <HintPath>..\..\packages\AutoFixture.3.34.2\lib\net40\Ploeh.AutoFixture.dll</HintPath>
+    </Reference>
+    <Reference Include="HtmlAgilityPack">
+      <HintPath>..\..\packages\HtmlAgilityPack.1.4.9\lib\Net45\HtmlAgilityPack.dll</HintPath>
+    </Reference>
+    <Reference Include="Moq">
+      <HintPath>..\..\packages\Moq.4.2.1507.0118\lib\net40\Moq.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <ItemGroup>
+    <Compile Include="AssemblyInfo.cs" />
+    <Compile Include="..\..\Common\CommonAssemblyInfo.cs">
+      <Link>CommonAssemblyInfo.cs</Link>
+    </Compile>
+    <Compile Include="TestZptHtmlElement.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="TestZptHtmlElement.html">
+      <LogicalName>Test.CSF.Zpt.DocumentProviders..HtmlHAP.TestZptHtmlElement.html</LogicalName>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\CSF.Zpt.Abstractions\CSF.Zpt.Abstractions.csproj">
+      <Project>{8207CD9B-F1C1-4D75-B250-ACDFFBDCB071}</Project>
+      <Name>CSF.Zpt.Abstractions</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\DocumentProviders\CSF.Zpt.DocumentProviders.HtmlHAP\CSF.Zpt.DocumentProviders.HtmlHAP.csproj">
+      <Project>{BFD834D4-5724-4425-BCB3-6DEE6B03F743}</Project>
+      <Name>CSF.Zpt.DocumentProviders.HtmlHAP</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\CSF.Zpt\CSF.Zpt.csproj">
+      <Project>{16E957BB-347C-4EE1-815F-19AC296FB9E0}</Project>
+      <Name>CSF.Zpt</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\CSF\CSF.Reflection\CSF.Reflection.csproj">
+      <Project>{275413F6-0651-4AD4-A426-07EDA165C07E}</Project>
+      <Name>CSF.Reflection</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+    <None Include="App.config" />
+  </ItemGroup>
+</Project>

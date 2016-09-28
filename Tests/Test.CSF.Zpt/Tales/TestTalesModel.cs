@@ -4,7 +4,7 @@ using CSF.Zpt.Tales;
 using Moq;
 using Ploeh.AutoFixture;
 using CSF.Zpt.Rendering;
-using Test.CSF.Zpt.Util.Autofixture;
+using CSF.Zpt.TestUtils.Autofixture;
 using CSF.Zpt;
 
 namespace Test.CSF.Zpt.Tales

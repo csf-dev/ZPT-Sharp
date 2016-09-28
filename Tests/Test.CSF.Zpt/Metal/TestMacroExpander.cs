@@ -4,9 +4,9 @@ using Moq;
 using CSF.Zpt.Rendering;
 using CSF.Zpt.Metal;
 using Ploeh.AutoFixture;
-using Test.CSF.Zpt.Util.Autofixture;
+using CSF.Zpt.TestUtils.Autofixture;
 using CSF.Zpt;
-using Test.CSF.Zpt.Util;
+using CSF.Zpt.TestUtils;
 
 namespace Test.CSF.Zpt.Metal
 {

@@ -7,8 +7,8 @@ using System.Linq;
 using CSF.Zpt.Tal;
 using CSF.Zpt;
 using Ploeh.AutoFixture;
-using Test.CSF.Zpt.Util.Autofixture;
-using Test.CSF.Zpt.Util;
+using CSF.Zpt.TestUtils.Autofixture;
+using CSF.Zpt.TestUtils;
 
 namespace Test.CSF.Zpt.Tal
 {

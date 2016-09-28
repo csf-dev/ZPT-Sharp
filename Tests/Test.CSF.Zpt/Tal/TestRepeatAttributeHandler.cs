@@ -4,8 +4,8 @@ using Moq;
 using Ploeh.AutoFixture;
 using CSF.Zpt.Tal;
 using CSF.Zpt.Rendering;
-using Test.CSF.Zpt.Util;
-using Test.CSF.Zpt.Util.Autofixture;
+using CSF.Zpt.TestUtils;
+using CSF.Zpt.TestUtils.Autofixture;
 using CSF.Zpt;
 using System.Linq;
 

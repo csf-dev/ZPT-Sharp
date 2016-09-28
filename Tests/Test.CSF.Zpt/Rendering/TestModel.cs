@@ -3,8 +3,8 @@ using NUnit.Framework;
 using CSF.Zpt.Rendering;
 using System.Linq;
 using Ploeh.AutoFixture;
-using Test.CSF.Zpt.Util.Autofixture;
-using Test.CSF.Zpt.Util;
+using CSF.Zpt.TestUtils.Autofixture;
+using CSF.Zpt.TestUtils;
 
 namespace Test.CSF.Zpt.Rendering
 {

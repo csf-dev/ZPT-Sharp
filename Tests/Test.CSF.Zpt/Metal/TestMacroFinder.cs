@@ -5,8 +5,8 @@ using NUnit.Framework;
 using CSF.Zpt;
 using CSF.Zpt.Metal;
 using Ploeh.AutoFixture;
-using Test.CSF.Zpt.Util.Autofixture;
-using Test.CSF.Zpt.Util;
+using CSF.Zpt.TestUtils.Autofixture;
+using CSF.Zpt.TestUtils;
 
 namespace Test.CSF.Zpt.Metal
 {
@@ -74,7 +74,7 @@ namespace Test.CSF.Zpt.Metal
       var context = _fixture.Create<RenderingContext>();
       Mock.Get(model)
         .Setup(x => x.Evaluate(It.IsAny<string>(), context))
-        .Throws<Util.IntendedTestingException>();
+        .Throws<IntendedTestingException>();
 
       var sut = new MacroFinder();
 
@@ -150,7 +150,7 @@ namespace Test.CSF.Zpt.Metal
       var context = _fixture.Create<RenderingContext>();
       Mock.Get(model)
         .Setup(x => x.Evaluate(It.IsAny<string>(), context))
-        .Throws<Util.IntendedTestingException>();
+        .Throws<IntendedTestingException>();
 
       var sut = new MacroFinder();
 
