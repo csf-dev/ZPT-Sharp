@@ -14,6 +14,7 @@ namespace CSF.Zpt
     #region fields
 
     private static IZptDocumentProviderRegistry _default;
+    private static object _staticSyncRoot;
 
     private IZptDocumentProvider _defaultHtml, _defaultXml;
     private Dictionary<Type,IZptDocumentProvider> _allProviders;
@@ -212,6 +213,7 @@ namespace CSF.Zpt
     /// </summary>
     static ZptDocumentProviderRegistry()
     {
+      _staticSyncRoot = new object();
       _default = CreateDefaultRegistry();
     }
 
@@ -220,12 +222,28 @@ namespace CSF.Zpt
     #region static properties
 
     /// <summary>
-    /// Gets a default singleton instance of <see cref="IZptDocumentProviderRegistry"/>.
+    /// Gets or sets a default singleton instance of <see cref="IZptDocumentProviderRegistry"/>.
     /// </summary>
-    /// <value>The default.</value>
+    /// <value>The default registry.</value>
     public static IZptDocumentProviderRegistry Default
     {
-      get { return _default; }
+      get {
+        lock(_staticSyncRoot)
+        {
+          return _default;
+        }
+      }
+      set {
+        lock(_staticSyncRoot)
+        {
+          if(value == null)
+          {
+            throw new ArgumentNullException(nameof(value));
+          }
+
+          _default = value;
+        }
+      }
     }
 
     #endregion

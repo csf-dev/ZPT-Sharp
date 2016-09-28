@@ -13,7 +13,8 @@ namespace CSF.Zpt.Tales
   {
     #region fields
 
-    private static readonly IExpressionEvaluatorRegistry _default;
+    private static IExpressionEvaluatorRegistry _default;
+    private static object _staticSyncRoot;
 
     private Dictionary<string,IExpressionEvaluator> _evaluatorsByPrefix;
     private Dictionary<Type,IExpressionEvaluator> _evaluatorsByType;
@@ -211,6 +212,7 @@ namespace CSF.Zpt.Tales
     /// </summary>
     static ExpressionEvaluatorRegistry()
     {
+      _staticSyncRoot = new object();
       _default = CreateDefaultRegistry();
     }
 
@@ -219,12 +221,28 @@ namespace CSF.Zpt.Tales
     #region static properties
 
     /// <summary>
-    /// Gets a default singleton instance of <see cref="IExpressionEvaluatorRegistry"/>.
+    /// Gets or sets a default singleton instance of <see cref="IExpressionEvaluatorRegistry"/>.
     /// </summary>
-    /// <value>The default.</value>
+    /// <value>The default registry.</value>
     public static IExpressionEvaluatorRegistry Default
     {
-      get { return _default; }
+      get {
+        lock(_staticSyncRoot)
+        {
+          return _default;
+        }
+      }
+      set {
+        lock(_staticSyncRoot)
+        {
+          if(value == null)
+          {
+            throw new ArgumentNullException(nameof(value));
+          }
+
+          _default = value;
+        }
+      }
     }
 
     #endregion
