@@ -13,7 +13,30 @@ namespace CSF.Zpt.Tales
   {
     #region fields
 
-    private readonly IExpressionEvaluatorRegistry _registry;
+    private readonly Lazy<IExpressionEvaluatorRegistry> _registry;
+
+    #endregion
+
+    #region properties
+
+    /// <summary>
+    /// Gets the expression evaluator registry instance.
+    /// </summary>
+    /// <remarks>
+    /// <para>
+    /// This is lazily initialised, because instances of <see cref="SimpleEvaluatorSelector"/> might be initialised
+    /// by types which are registered with the individual evaluators.  Thus, in order to avoid a scenario in which
+    /// we are referencing the default registry before it has finished constructing, we ensure that we don't touch it
+    /// until we need it.
+    /// </para>
+    /// </remarks>
+    /// <value>The evaluator registry.</value>
+    protected virtual IExpressionEvaluatorRegistry EvaluatorRegistry
+    {
+      get {
+        return _registry.Value;
+      }
+    }
 
     #endregion
 
@@ -36,7 +59,7 @@ namespace CSF.Zpt.Tales
 
       if(prefix != null)
       {
-        output = _registry.GetEvaluator(prefix);
+        output = EvaluatorRegistry.GetEvaluator(prefix);
 
         if(output == null)
         {
@@ -51,7 +74,7 @@ namespace CSF.Zpt.Tales
       }
       else
       {
-        output = _registry.DefaultEvaluator;
+        output = EvaluatorRegistry.DefaultEvaluator;
       }
 
       return output;
@@ -79,7 +102,7 @@ namespace CSF.Zpt.Tales
         throw new ArgumentNullException(nameof(evaluatorType));
       }
 
-      var output = _registry.GetEvaluator(evaluatorType);
+      var output = EvaluatorRegistry.GetEvaluator(evaluatorType);
 
       if(output == null)
       {
@@ -102,7 +125,7 @@ namespace CSF.Zpt.Tales
     /// <param name="registry">An expression evaluator registry.</param>
     public SimpleEvaluatorSelector(IExpressionEvaluatorRegistry registry = null)
     {
-      _registry = registry?? ExpressionEvaluatorRegistry.Default;
+      _registry = new Lazy<IExpressionEvaluatorRegistry>(() => registry?? ExpressionEvaluatorRegistry.Default);
     }
 
     #endregion

@@ -10,7 +10,7 @@ namespace CSF.Zpt.Tales
   {
     #region fields
 
-    private Lazy<IEvaluatorSelector> _evaluatorSelector;
+    private IEvaluatorSelector _evaluatorSelector;
     private IExpressionFactory _expressionCreator;
 
     #endregion
@@ -30,7 +30,7 @@ namespace CSF.Zpt.Tales
     protected virtual IEvaluatorSelector EvaluatorSelector
     {
       get {
-        return _evaluatorSelector.Value;
+        return _evaluatorSelector;
       }
     }
 
@@ -70,15 +70,7 @@ namespace CSF.Zpt.Tales
                                    IExpressionFactory expressionCreator = null)
     {
       _expressionCreator = expressionCreator?? new ExpressionFactory();
-
-      if(evaluatorSelector != null)
-      {
-        _evaluatorSelector = new Lazy<IEvaluatorSelector>(() => evaluatorSelector);
-      }
-      else
-      {
-        _evaluatorSelector = new Lazy<IEvaluatorSelector>(() => new SimpleEvaluatorSelector());
-      }
+      _evaluatorSelector = evaluatorSelector?? new SimpleEvaluatorSelector();
     }
 
     #endregion
