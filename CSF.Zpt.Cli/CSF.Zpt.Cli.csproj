@@ -79,30 +79,6 @@
     <Exec Command="Util\build-html-manpage" Condition="'$(OS)' == 'Unix'" />
     <Exec Command="nuget pack CSF.Zpt.Cli.nuspec -Prop Configuration=Release" Condition="'$(OS)' == 'Unix'" />
     <Exec Command="&quot;$(MSBuildProgramFiles32)\NuGet\nuget.exe&quot; pack CSF.Zpt.Cli.nuspec -Prop Configuration=Release" Condition="'$(OS)' != 'Unix'" />
-    <!--
-    <ItemGroup>
-      <ZipFiles Include="$(OutputPath)CSF.dll" />
-      <ZipFiles Include="$(OutputPath)CSF.Cli.Parameters.dll" />
-      <ZipFiles Include="$(OutputPath)CSF.Configuration.dll" />
-      <ZipFiles Include="$(OutputPath)CSF.Reflection.dll" />
-      <ZipFiles Include="$(OutputPath)CSF.Zpt.Abstractions.dll" />
-      <ZipFiles Include="$(OutputPath)CSF.Zpt.dll" />
-      <ZipFiles Include="$(OutputPath)CSF.Zpt.DocumentProviders.HtmlHAP.dll" />
-      <ZipFiles Include="$(OutputPath)CSF.Zpt.DocumentProviders.XmlLinq.dll" />
-      <ZipFiles Include="$(OutputPath)CSF.Zpt.ExpressionEvaluators.NotExpressions.dll" />
-      <ZipFiles Include="$(OutputPath)CSF.Zpt.ExpressionEvaluators.PathExpressions.dll" />
-      <ZipFiles Include="$(OutputPath)CSF.Zpt.ExpressionEvaluators.StringExpressions.dll" />
-      <ZipFiles Include="$(OutputPath)CSF.Zpt.Log4net.dll" />
-      <ZipFiles Include="$(OutputPath)HtmlAgilityPack.dll" />
-      <ZipFiles Include="$(OutputPath)log4net.dll" />
-      <ZipFiles Include="$(OutputPath)ZptBuilder.1" />
-      <ZipFiles Include="$(OutputPath)ZptBuilder.exe" />
-      <ZipFiles Include="$(OutputPath)ZptBuilder.exe.config" />
-      <ZipFiles Include="$(OutputPath)\Doc\ZptBuilder.MANUAL.txt" />
-    </ItemGroup>
-    <ZipTask OutputFilename="$(OutputPath)ZptBuilder.zip" Files="@(ZipFiles)" Condition="'$(OS)' == 'Windows_NT'" />
-    <Exec Command="zip -j $(OutputPath)ZptBuilder.zip @(ZipFiles, ' ')" Condition="'$(OS)' == 'Unix'" />
-    -->
   </Target>
   <ItemGroup>
     <ProjectReference Include="..\CSF.Zpt\CSF.Zpt.csproj">

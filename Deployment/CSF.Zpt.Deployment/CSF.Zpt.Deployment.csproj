@@ -8,7 +8,7 @@
     <RootNamespace>CSF.Zpt.Deployment</RootNamespace>
     <AssemblyName>CSF.Zpt.Deployment</AssemblyName>
     <SolutionRoot>..\..\</SolutionRoot>
-    <BinaryPath>bin/Release</BinaryPath>
+    <BinaryPath>bin\Release\</BinaryPath>
     <ApiMainPath>$(SolutionRoot)CSF.Zpt\$(BinaryPath)</ApiMainPath>
     <ZptBuilderPath>$(SolutionRoot)CSF.Zpt.Cli\$(BinaryPath)</ZptBuilderPath>
     <Log4NetPath>$(SolutionRoot)CSF.Zpt.Log4Net\$(BinaryPath)</Log4NetPath>
@@ -82,8 +82,9 @@
       <CliZipFiles Include="$(ZptBuilderPath)ZptBuilder.1" />
       <CliZipFiles Include="$(ZptBuilderPath)ZptBuilder.exe" />
       <CliZipFiles Include="$(ZptBuilderPath)ZptBuilder.exe.config" />
-      <CliZipFiles Include="$(ZptBuilderPath)\Doc\ZptBuilder.MANUAL.txt" />
+      <CliZipFiles Include="$(ZptBuilderPath)Doc\ZptBuilder.MANUAL.txt" />
     </ItemGroup>
+    <MakeDir Directories="$(OutputPath)"/>
     <ZipTask OutputFilename="$(OutputPath)ZptBuilder.zip" Files="@(CliZipFiles)" Condition="'$(OS)' == 'Windows_NT'" />
     <Exec Command="zip -j $(OutputPath)ZptBuilder.zip @(CliZipFiles, ' ')" Condition="'$(OS)' == 'Unix'" />
   </Target>
