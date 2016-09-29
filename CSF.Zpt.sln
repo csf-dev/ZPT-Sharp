@@ -27,8 +27,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSF.Zpt.Cli", "CSF.Zpt.Cli\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSF.Zpt.Log4net", "CSF.Zpt.Log4net\CSF.Zpt.Log4net.csproj", "{81044439-06CF-44E2-BBF2-3800F1DEB5B1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Documentation", "Documentation\Documentation.csproj", "{28D30A8C-0693-4FEA-BCC7-020AA41ECBB1}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DocumentProviders", "DocumentProviders", "{F1251A40-9526-48DC-A665-F9AEB972AC33}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSF.Zpt.DocumentProviders.HtmlHAP", "DocumentProviders\CSF.Zpt.DocumentProviders.HtmlHAP\CSF.Zpt.DocumentProviders.HtmlHAP.csproj", "{BFD834D4-5724-4425-BCB3-6DEE6B03F743}"
@@ -72,6 +70,8 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Deployment", "Deployment", "{79045B21-94A0-4984-A91C-4D95EAA10C78}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSF.Zpt.Deployment", "Deployment\CSF.Zpt.Deployment\CSF.Zpt.Deployment.csproj", "{55308783-6072-42C1-B955-AA393157D7AD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSF.Zpt.Documentation", "Deployment\CSF.Zpt.Documentation\CSF.Zpt.Documentation.csproj", "{28D30A8C-0693-4FEA-BCC7-020AA41ECBB1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -272,6 +272,7 @@ Global
 		{96333809-3330-43A7-B0CB-2DBE68E1E6FE} = {39927A41-7964-48BF-9D90-DAFA48D54F09}
 		{67E8CE73-2202-4C21-A4D5-CFF764B6B72E} = {39927A41-7964-48BF-9D90-DAFA48D54F09}
 		{55308783-6072-42C1-B955-AA393157D7AD} = {79045B21-94A0-4984-A91C-4D95EAA10C78}
+		{28D30A8C-0693-4FEA-BCC7-020AA41ECBB1} = {79045B21-94A0-4984-A91C-4D95EAA10C78}
 	EndGlobalSection
 	GlobalSection(MonoDevelopProperties) = preSolution
 		Policies = $0

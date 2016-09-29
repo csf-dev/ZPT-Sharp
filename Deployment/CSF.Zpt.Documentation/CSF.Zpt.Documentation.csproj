@@ -88,7 +88,7 @@
     <None Include="Website\css\download.css" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\CSF.Zpt.Cli\CSF.Zpt.Cli.csproj">
+    <ProjectReference Include="..\..\CSF.Zpt.Cli\CSF.Zpt.Cli.csproj">
       <Project>{4DD64666-DBEF-4AD5-BDB0-3EB3C70A6E83}</Project>
       <Name>CSF.Zpt.Cli</Name>
     </ProjectReference>
