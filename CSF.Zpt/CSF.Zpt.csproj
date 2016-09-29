@@ -128,12 +128,6 @@
     <Compile Include="Tales\ConfigurationExpressionEvaluatorProvider.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
-  <Target Name="AfterBuild" Condition="'$(Configuration)' == 'Deploy'">
-    <Exec Command="nuget pack CSF.Zpt.nuspec -Prop Configuration=Release" Condition="'$(OS)' == 'Unix'">
-    </Exec>
-    <Exec Command="&quot;$(MSBuildProgramFiles32)\NuGet\nuget.exe&quot; pack CSF.Zpt.nuspec -Prop Configuration=Release" Condition="'$(OS)' != 'Unix'">
-    </Exec>
-  </Target>
   <ItemGroup>
     <ProjectReference Include="..\CSF\CSF\CSF.csproj">
       <Project>{E563D7BC-1AB1-4AFB-8533-51315437C6E6}</Project>
@@ -152,7 +146,6 @@
       <Name>CSF.Configuration</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
     <EmbeddedResource Include="Resources\xhtml1-frameset.dtd">
       <LogicalName>xhtml1-frameset.dtd</LogicalName>

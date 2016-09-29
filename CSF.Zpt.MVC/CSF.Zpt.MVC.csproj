@@ -67,12 +67,6 @@
     <Reference Include="System.Configuration" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
-  <Target Name="AfterBuild" Condition="'$(Configuration)' == 'Deploy'">
-    <Exec Command="nuget pack CSF.Zpt.MVC.nuspec -Prop Configuration=Release" Condition="'$(OS)' == 'Unix'">
-    </Exec>
-    <Exec Command="&quot;$(MSBuildProgramFiles32)\NuGet\nuget.exe&quot; pack CSF.Zpt.MVC.nuspec -Prop Configuration=Release" Condition="'$(OS)' != 'Unix'">
-    </Exec>
-  </Target>
   <ItemGroup>
     <ProjectReference Include="..\CSF.Zpt\CSF.Zpt.csproj">
       <Project>{16E957BB-347C-4EE1-815F-19AC296FB9E0}</Project>

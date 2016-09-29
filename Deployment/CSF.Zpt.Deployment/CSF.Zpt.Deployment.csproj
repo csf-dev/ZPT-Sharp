@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project DefaultTargets="CreateBinaryZips;CreateNugetPackages" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
@@ -68,7 +68,7 @@
       ]]></Code>
     </Task>
   </UsingTask>
-  <Target Name="Build" Condition=" '$(Configuration)|$(Platform)' == 'Deploy|AnyCPU' ">
+  <Target Name="CreateBinaryZips" Condition=" '$(Configuration)|$(Platform)' == 'Deploy|AnyCPU' ">
     <MakeDir Directories="$(OutputPath)" />
     <ItemGroup>
       <CliZipFiles Include="$(ZptBuilderPath)CSF.dll" />
@@ -151,6 +151,17 @@
     </ItemGroup>
     <ZipTask OutputFilename="$(OutputPath)CSF.Zpt-complete.zip" Files="@(ZptSharpCompleteZipFiles)" Condition="'$(OS)' == 'Windows_NT'" />
     <Exec Command="zip -j $(OutputPath)CSF.Zpt-complete.zip @(ZptSharpCompleteZipFiles, ' ')" Condition="'$(OS)' == 'Unix'" />
+  </Target>
+  <Target Name="CreateNugetPackages" Condition=" '$(Configuration)|$(Platform)' == 'Deploy|AnyCPU' ">
+    <!-- ZptBuilder -->
+    <Exec Command="nuget pack $(SolutionRoot)CSF.Zpt.Cli\CSF.Zpt.Cli.nuspec -Prop Configuration=Release -OutputDirectory $(OutputPath)" Condition="'$(OS)' == 'Unix'" />
+    <Exec Command="&quot;$(MSBuildProgramFiles32)\NuGet\nuget.exe&quot; pack $(SolutionRoot)CSF.Zpt.Cli\CSF.Zpt.Cli.nuspec -Prop Configuration=Release -OutputDirectory $(OutputPath)" Condition="'$(OS)' != 'Unix'" />
+    <!-- API -->
+    <Exec Command="nuget pack $(SolutionRoot)CSF.Zpt\CSF.Zpt.nuspec -Prop Configuration=Release -OutputDirectory $(OutputPath)" Condition="'$(OS)' == 'Unix'" />
+    <Exec Command="&quot;$(MSBuildProgramFiles32)\NuGet\nuget.exe&quot; pack $(SolutionRoot)CSF.Zpt\CSF.Zpt.nuspec -Prop Configuration=Release -OutputDirectory $(OutputPath)" Condition="'$(OS)' != 'Unix'" />
+    <!-- MVC -->
+    <Exec Command="nuget pack $(SolutionRoot)CSF.Zpt.MVC\CSF.Zpt.MVC.nuspec -Prop Configuration=Release -OutputDirectory $(OutputPath)" Condition="'$(OS)' == 'Unix'" />
+    <Exec Command="&quot;$(MSBuildProgramFiles32)\NuGet\nuget.exe&quot; pack $(SolutionRoot)CSF.Zpt.MVC\CSF.Zpt.MVC.nuspec -Prop Configuration=Release -OutputDirectory $(OutputPath)" Condition="'$(OS)' != 'Unix'" />
   </Target>
   <ItemGroup>
     <ProjectReference Include="..\..\CSF.Zpt\CSF.Zpt.csproj">

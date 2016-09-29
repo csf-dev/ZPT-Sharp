@@ -77,8 +77,6 @@
   <Target Name="AfterBuild" Condition="'$(Configuration)' == 'Deploy'">
     <Exec Command="Util\build-plaintext-manual" Condition="'$(OS)' == 'Unix'" />
     <Exec Command="Util\build-html-manpage" Condition="'$(OS)' == 'Unix'" />
-    <Exec Command="nuget pack CSF.Zpt.Cli.nuspec -Prop Configuration=Release" Condition="'$(OS)' == 'Unix'" />
-    <Exec Command="&quot;$(MSBuildProgramFiles32)\NuGet\nuget.exe&quot; pack CSF.Zpt.Cli.nuspec -Prop Configuration=Release" Condition="'$(OS)' != 'Unix'" />
   </Target>
   <ItemGroup>
     <ProjectReference Include="..\CSF.Zpt\CSF.Zpt.csproj">
