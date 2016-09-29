@@ -30,15 +30,6 @@
     <DefineConstants>TRACE;</DefineConstants>
     <CheckForOverflowUnderflow>true</CheckForOverflowUnderflow>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Deploy|AnyCPU' ">
-    <Optimize>true</Optimize>
-    <OutputPath>bin\Release</OutputPath>
-    <DefineConstants>TRACE;</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <ConsolePause>false</ConsolePause>
-    <CheckForOverflowUnderflow>true</CheckForOverflowUnderflow>
-  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -74,7 +65,7 @@
     <Compile Include="Exceptions\InvalidOutputEncodingException.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
-  <Target Name="AfterBuild" Condition="'$(Configuration)' == 'Deploy'">
+  <Target Name="AfterBuild" Condition="'$(Configuration)' == 'Release'">
     <Exec Command="Util\build-plaintext-manual" Condition="'$(OS)' == 'Unix'" />
     <Exec Command="Util\build-html-manpage" Condition="'$(OS)' == 'Unix'" />
   </Target>

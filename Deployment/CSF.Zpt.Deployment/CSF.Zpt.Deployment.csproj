@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="CreateBinaryZips;CreateNugetPackages" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Configuration Condition=" '$(Configuration)' == '' ">Release</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{55308783-6072-42C1-B955-AA393157D7AD}</ProjectGuid>
     <OutputType>Exe</OutputType>
@@ -24,14 +24,14 @@
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <ReleaseVersion>0.5.0</ReleaseVersion>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Deploy|AnyCPU' ">
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <OutputPath>..\Output\</OutputPath>
     <ConsolePause>false</ConsolePause>
     <WarningLevel>4</WarningLevel>
     <Optimize>false</Optimize>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <OutputPath>bin\Debug</OutputPath>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Nothing|AnyCPU' ">
+    <OutputPath>bin\Nothing</OutputPath>
     <WarningLevel>4</WarningLevel>
     <Optimize>false</Optimize>
   </PropertyGroup>
@@ -68,7 +68,7 @@
       ]]></Code>
     </Task>
   </UsingTask>
-  <Target Name="CreateBinaryZips" Condition=" '$(Configuration)|$(Platform)' == 'Deploy|AnyCPU' ">
+  <Target Name="CreateBinaryZips" Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <MakeDir Directories="$(OutputPath)" />
     <ItemGroup>
       <CliZipFiles Include="$(ZptBuilderPath)CSF.dll" />
@@ -152,7 +152,7 @@
     <ZipTask OutputFilename="$(OutputPath)CSF.Zpt-complete.zip" Files="@(ZptSharpCompleteZipFiles)" Condition="'$(OS)' == 'Windows_NT'" />
     <Exec Command="zip -j $(OutputPath)CSF.Zpt-complete.zip @(ZptSharpCompleteZipFiles, ' ')" Condition="'$(OS)' == 'Unix'" />
   </Target>
-  <Target Name="CreateNugetPackages" Condition=" '$(Configuration)|$(Platform)' == 'Deploy|AnyCPU' ">
+  <Target Name="CreateNugetPackages" Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <!-- ZptBuilder -->
     <Exec Command="nuget pack $(SolutionRoot)CSF.Zpt.Cli\CSF.Zpt.Cli.nuspec -Prop Configuration=Release -OutputDirectory $(OutputPath)" Condition="'$(OS)' == 'Unix'" />
     <Exec Command="&quot;$(MSBuildProgramFiles32)\NuGet\nuget.exe&quot; pack $(SolutionRoot)CSF.Zpt.Cli\CSF.Zpt.Cli.nuspec -Prop Configuration=Release -OutputDirectory $(OutputPath)" Condition="'$(OS)' != 'Unix'" />

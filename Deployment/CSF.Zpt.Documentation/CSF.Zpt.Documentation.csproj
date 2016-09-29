@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Configuration Condition=" '$(Configuration)' == '' ">Nothing</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{28D30A8C-0693-4FEA-BCC7-020AA41ECBB1}</ProjectGuid>
     <OutputType>Exe</OutputType>
@@ -10,12 +10,11 @@
     <WebsiteUrlRoot>http://csf-dev.github.io/ZPT-Sharp/</WebsiteUrlRoot>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <Optimize>false</Optimize>
-    <OutputPath>bin\Debug</OutputPath>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Nothing|AnyCPU' ">
     <ConsolePause>false</ConsolePause>
+    <OutputPath>bin\Nothing</OutputPath>
+    <WarningLevel>4</WarningLevel>
+    <Optimize>false</Optimize>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <Optimize>false</Optimize>
@@ -24,20 +23,10 @@
     <WarningLevel>4</WarningLevel>
     <ConsolePause>false</ConsolePause>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Deploy|AnyCPU' ">
-    <Optimize>false</Optimize>
-    <OutputPath>bin\Release</OutputPath>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <ConsolePause>false</ConsolePause>
-  </PropertyGroup>
   <Target Name="Build">
-    <Exec Command=".\build-doc-website '$(WebsiteUrlRoot)' '$(ReleaseVersion)'" Condition="'$(OS)' == 'Unix' And  '$(Configuration)' == 'Deploy'">
-    </Exec>
-    <Exec Command=".\build-doxygen-output" Condition="'$(OS)' == 'Unix' And  '$(Configuration)' == 'Deploy'">
-    </Exec>
-    <Exec Command=".\assemble-documentation" Condition="'$(OS)' == 'Unix' And  '$(Configuration)' == 'Deploy'">
-    </Exec>
+    <Exec Command=".\build-doc-website '$(WebsiteUrlRoot)' '$(ReleaseVersion)'" Condition="'$(OS)' == 'Unix' And  '$(Configuration)' == 'Release'" />
+    <Exec Command=".\build-doxygen-output" Condition="'$(OS)' == 'Unix' And  '$(Configuration)' == 'Release'" />
+    <Exec Command=".\assemble-documentation" Condition="'$(OS)' == 'Unix' And  '$(Configuration)' == 'Release'" />
   </Target>
   <ItemGroup>
     <None Include="Website\advantages-of-zpt-views.html" />
