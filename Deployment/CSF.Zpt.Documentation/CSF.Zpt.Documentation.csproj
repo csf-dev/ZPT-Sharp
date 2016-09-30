@@ -9,6 +9,12 @@
     <ReleaseVersion>0.5.0</ReleaseVersion>
     <WebsiteUrlRoot>http://csf-dev.github.io/ZPT-Sharp/</WebsiteUrlRoot>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <DoxygenConfig>Doxygen.cfg</DoxygenConfig>
+    <DoxygenOutput>obj\Release\Doxygen-output</DoxygenOutput>
+    <LatexPath>$(DoxygenOutput)\latex</LatexPath>
+    <LatexOutput>refman.tex</LatexOutput>
+    <PdfOutput>refman.pdf</PdfOutput>
+    <PdfFilename>ZPT-Sharp API documentation.pdf</PdfFilename>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Nothing|AnyCPU' ">
     <ConsolePause>false</ConsolePause>
@@ -23,10 +29,23 @@
     <WarningLevel>4</WarningLevel>
     <ConsolePause>false</ConsolePause>
   </PropertyGroup>
-  <Target Name="Build">
+  <Target Name="BuildApiDocumentation">
+    <RemoveDir Directories="$(DoxygenOutput)" />
+    <MakeDir Directories="$(DoxygenOutput)" />
+    <Exec Command="doxygen $(DoxygenConfig)" />
+    <Exec Command="pdflatex $(LatexOutput)" WorkingDirectory="$(LatexPath)" />
+    <Copy SourceFiles="$(LatexPath)\$(PdfOutput)" DestinationFiles="$(DoxygenOutput)\$(PdfFilename)" />
+  </Target>
+  <Target Name="BuildDocumentationWebsite">
     <Exec Command=".\build-doc-website '$(WebsiteUrlRoot)' '$(ReleaseVersion)'" Condition="'$(OS)' == 'Unix' And  '$(Configuration)' == 'Release'" />
-    <Exec Command=".\build-doxygen-output" Condition="'$(OS)' == 'Unix' And  '$(Configuration)' == 'Release'" />
+  </Target>
+  <Target Name="AssembleAllDocumentation">
     <Exec Command=".\assemble-documentation" Condition="'$(OS)' == 'Unix' And  '$(Configuration)' == 'Release'" />
+  </Target>
+  <Target Name="Build">
+    <CallTarget Targets="BuildApiDocumentation" />
+    <CallTarget Targets="BuildDocumentationWebsite" />
+    <CallTarget Targets="AssembleAllDocumentation" />
   </Target>
   <ItemGroup>
     <None Include="Website\advantages-of-zpt-views.html" />
