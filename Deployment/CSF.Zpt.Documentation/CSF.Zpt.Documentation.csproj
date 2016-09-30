@@ -4,12 +4,13 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Nothing</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{28D30A8C-0693-4FEA-BCC7-020AA41ECBB1}</ProjectGuid>
-    <OutputType>Exe</OutputType>
+    <OutputType>Library</OutputType>
     <AssemblyName>Documentation</AssemblyName>
     <ReleaseVersion>0.5.0</ReleaseVersion>
     <WebsiteUrlRoot>http://csf-dev.github.io/ZPT-Sharp/</WebsiteUrlRoot>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <DoxygenConfig>Doxygen.cfg</DoxygenConfig>
+    <WebsiteSource>Website</WebsiteSource>
     <BuildRoot>obj\Release</BuildRoot>
     <DoxygenOutput>$(BuildRoot)\Doxygen-output</DoxygenOutput>
     <LatexPath>$(DoxygenOutput)\latex</LatexPath>
@@ -19,8 +20,13 @@
     <AssembledApiDocsPath>$(DoxygenOutput)\html</AssembledApiDocsPath>
     <AssembledOutputPath>bin\Release</AssembledOutputPath>
     <BuiltWebsitePath>$(BuildRoot)\Doc-website</BuiltWebsitePath>
+    <PreBuiltWebsitePath>$(BuildRoot)\Website-build</PreBuiltWebsitePath>
+    <IgnoredDir>$(PreBuiltWebsitePath)\Shared</IgnoredDir>
     <AssembledWebsitePath>$(AssembledOutputPath)\Website</AssembledWebsitePath>
     <ApiDocsOutputPath>$(AssembledWebsitePath)\api</ApiDocsOutputPath>
+    <ZptBuilderHtmlDocs>..\..\CSF.Zpt.Cli\bin\Release\Doc\ZptBuilder.html</ZptBuilderHtmlDocs>
+    <ZptBuilderPath>..\..\CSF.Zpt.Cli\bin\Release\ZptBuilder.exe</ZptBuilderPath>
+    <BuildTimestamp>$([System.DateTime]::Now.ToString(yyyy-MM-dd))</BuildTimestamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Nothing|AnyCPU' ">
     <ConsolePause>false</ConsolePause>
@@ -35,6 +41,8 @@
     <WarningLevel>4</WarningLevel>
     <ConsolePause>false</ConsolePause>
   </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <UsingTask TaskName="FixDocTag" AssemblyFile="bin\Release\CSF.Zpt.DeploymentTasks.dll" />
   <Target Name="BuildApiDocumentation">
     <RemoveDir Directories="$(DoxygenOutput)" />
     <MakeDir Directories="$(DoxygenOutput)" />
@@ -43,7 +51,20 @@
     <Copy SourceFiles="$(LatexPath)\$(PdfOutput)" DestinationFiles="$(DoxygenOutput)\$(PdfFilename)" />
   </Target>
   <Target Name="BuildDocumentationWebsite">
-    <Exec Command=".\build-doc-website '$(WebsiteUrlRoot)' '$(ReleaseVersion)'" />
+    <RemoveDir Directories="$(PreBuiltWebsitePath);$(BuiltWebsitePath)" />
+    <MakeDir Directories="$(PreBuiltWebsitePath);$(BuiltWebsitePath)" />
+    <ItemGroup>
+      <WebsiteSourceFiles Include="$(WebsiteSource)\**\*.*" />
+    </ItemGroup>
+    <Copy SourceFiles="@(WebsiteSourceFiles)" DestinationFiles="@(WebsiteSourceFiles-&gt;'$(PreBuiltWebsitePath)\%(RecursiveDir)%(Filename)%(Extension)')" />
+    <Copy SourceFiles="$(ZptBuilderHtmlDocs)" DestinationFiles="$(PreBuiltWebsitePath)\Shared\cli-docs.html" />
+    <ItemGroup>
+      <WebsiteSupportFiles Include="$(PreBuiltWebsitePath)\**\*.css" />
+      <WebsiteSupportFiles Include="$(PreBuiltWebsitePath)\**\*.js" />
+    </ItemGroup>
+    <FixDocTag InputFile="$(PreBuiltWebsitePath)\Shared\cli-docs.html" MacroName="content" />
+    <Exec Command="$(ZptBuilderPath) &quot;$(PreBuiltWebsitePath)&quot; -p &quot;*.html&quot; -o &quot;$(BuiltWebsitePath)&quot; -i &quot;$(IgnoredDir)&quot; --keyword-options &quot;baseUrl=$(WebsiteUrlRoot);buildDate=$(BuildTimestamp);version=$(ReleaseVersion)&quot;" />
+    <Copy SourceFiles="@(WebsiteSupportFiles)" DestinationFiles="@(WebsiteSupportFiles-&gt;'$(BuiltWebsitePath)\%(RecursiveDir)%(Filename)%(Extension)')" />
   </Target>
   <Target Name="AssembleAllDocumentation">
     <RemoveDir Directories="$(AssembledOutputPath)" />
@@ -58,7 +79,7 @@
     <Copy SourceFiles="@(DoxygenOutputFiles)" DestinationFiles="@(DoxygenOutputFiles-&gt;'$(ApiDocsOutputPath)\%(RecursiveDir)%(Filename)%(Extension)')" />
     <Copy SourceFiles="$(DoxygenOutput)\$(PdfFilename)" DestinationFolder="$(AssembledOutputPath)" />
   </Target>
-  <Target Name="Build">
+  <Target Name="AfterBuild">
     <CallTarget Targets="BuildApiDocumentation" Condition="'$(Configuration)' == 'Release'" />
     <CallTarget Targets="BuildDocumentationWebsite" Condition="'$(Configuration)' == 'Release'" />
     <CallTarget Targets="AssembleAllDocumentation" Condition="'$(Configuration)' == 'Release'" />
@@ -103,7 +124,6 @@
     <None Include="Website\tales\path-expressions.html" />
     <None Include="Website\tales\repeat-variables.html" />
     <None Include="Website\tales\string-expressions.html" />
-    <None Include="build-doc-website" />
     <None Include="Doxygen.cfg" />
     <None Include="Website style guide.txt" />
     <None Include="Website\Shared\cli-docs.html" />
@@ -114,5 +134,12 @@
       <Project>{4DD64666-DBEF-4AD5-BDB0-3EB3C70A6E83}</Project>
       <Name>CSF.Zpt.Cli</Name>
     </ProjectReference>
+    <ProjectReference Include="..\CSF.Zpt.DeploymentTasks\CSF.Zpt.DeploymentTasks.csproj">
+      <Project>{3E1DAACE-519B-4C6C-80E3-3F06A1A33C66}</Project>
+      <Name>CSF.Zpt.DeploymentTasks</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Stub.cs" />
   </ItemGroup>
 </Project>

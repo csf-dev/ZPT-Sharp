@@ -40,5 +40,6 @@
     </Compile>
     <Compile Include="AssemblyInfo.cs" />
     <Compile Include="ExecWithIgnoredExitCodes.cs" />
+    <Compile Include="FixDocTag.cs" />
   </ItemGroup>
 </Project>
