@@ -9,6 +9,10 @@
     <ReleaseVersion>0.5.0</ReleaseVersion>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <AssemblyName>ZptBuilder</AssemblyName>
+    <ManPageSource>ZptBuilder.1</ManPageSource>
+    <ManPageOutputDir>bin\Release\Doc</ManPageOutputDir>
+    <ManPageOutput>$(ManPageOutputDir)\ZptBuilder.MANUAL.txt</ManPageOutput>
+    <ManPageColumns>80</ManPageColumns>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -66,7 +70,8 @@
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Target Name="AfterBuild" Condition="'$(Configuration)' == 'Release'">
-    <Exec Command="Util\build-plaintext-manual" Condition="'$(OS)' == 'Unix'" />
+    <MakeDir Directories="$(ManPageOutputDir)" />
+    <Exec Command="COLUMNS=&quot;$(ManPageColumns)&quot; man --nh -l $(ManPageSource) &gt; $(ManPageOutput)" />
     <Exec Command="Util\build-html-manpage" Condition="'$(OS)' == 'Unix'" />
   </Target>
   <ItemGroup>
@@ -114,7 +119,6 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="Util\build-html-manpage" />
-    <None Include="Util\build-plaintext-manual" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\" />
