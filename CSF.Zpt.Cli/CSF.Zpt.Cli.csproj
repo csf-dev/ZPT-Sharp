@@ -9,6 +9,13 @@
     <ReleaseVersion>0.5.0</ReleaseVersion>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <AssemblyName>ZptBuilder</AssemblyName>
+    <ManPageSource>ZptBuilder.1</ManPageSource>
+    <ManPageOutputDir>bin\Release\Doc</ManPageOutputDir>
+    <ManPageOutput>$(ManPageOutputDir)\ZptBuilder.MANUAL.txt</ManPageOutput>
+    <HtmlManPageOutput>$(ManPageOutputDir)\ZptBuilder.html</HtmlManPageOutput>
+    <ManPageColumns>80</ManPageColumns>
+    <HtmlManPageColumns>100</HtmlManPageColumns>
+    <ExecIgnoreExitCodeAssemblyPath>bin\Release\CSF.Zpt.DeploymentTasks.dll</ExecIgnoreExitCodeAssemblyPath>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -65,9 +72,17 @@
     <Compile Include="Exceptions\InvalidOutputEncodingException.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
-  <Target Name="AfterBuild" Condition="'$(Configuration)' == 'Release'">
-    <Exec Command="Util\build-plaintext-manual" Condition="'$(OS)' == 'Unix'" />
-    <Exec Command="Util\build-html-manpage" Condition="'$(OS)' == 'Unix'" />
+  <UsingTask TaskName="ExecWithIgnoredExitCodes" AssemblyFile="bin\Release\CSF.Zpt.DeploymentTasks.dll" />
+  <Target Name="BuildPlaintextManual">
+    <Exec Command="COLUMNS=&quot;$(ManPageColumns)&quot; man --nh -l $(ManPageSource) &gt; $(ManPageOutput)" />
+  </Target>
+  <Target Name="BuildHtmlManual">
+    <ExecWithIgnoredExitCodes Command="man2html $(ManPageSource) | tidy -i -w $(HtmlManPageColumns) &gt; $(HtmlManPageOutput)" IgnoredExitCodes="1" />
+  </Target>
+  <Target Name="AfterBuild">
+    <MakeDir Directories="$(ManPageOutputDir)" Condition="'$(Configuration)' == 'Release'" />
+    <CallTarget Targets="BuildPlaintextManual" Condition="'$(Configuration)' == 'Release'" />
+    <CallTarget Targets="BuildHtmlManual" Condition="'$(Configuration)' == 'Release'" />
   </Target>
   <ItemGroup>
     <ProjectReference Include="..\CSF.Zpt\CSF.Zpt.csproj">
@@ -110,11 +125,13 @@
       <Project>{842160E4-BDE5-4FA0-ADE5-07554090AA27}</Project>
       <Name>CSF.Zpt.DocumentProviders.XmlLinq</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Deployment\CSF.Zpt.DeploymentTasks\CSF.Zpt.DeploymentTasks.csproj">
+      <Project>{3E1DAACE-519B-4C6C-80E3-3F06A1A33C66}</Project>
+      <Name>CSF.Zpt.DeploymentTasks</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <None Include="Util\build-html-manpage" />
-    <None Include="Util\build-plaintext-manual" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\" />

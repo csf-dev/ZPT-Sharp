@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Project DefaultTargets="CreateBinaryZips;CreateNugetPackages" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Release</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
@@ -21,6 +21,8 @@
     <NotEvaluatorPath>$(SolutionRoot)ExpressionEvaluators\CSF.Zpt.ExpressionEvaluators.NotExpressions\$(BinaryPath)</NotEvaluatorPath>
     <PathEvaluatorPath>$(SolutionRoot)ExpressionEvaluators\CSF.Zpt.ExpressionEvaluators.PathExpressions\$(BinaryPath)</PathEvaluatorPath>
     <StringEvaluatorPath>$(SolutionRoot)ExpressionEvaluators\CSF.Zpt.ExpressionEvaluators.StringExpressions\$(BinaryPath)</StringEvaluatorPath>
+    <DocumentationPath>..\Output\Documentation website</DocumentationPath>
+    <DocWebsiteOutputPath>..\CSF.Zpt.Documentation\bin\Release</DocWebsiteOutputPath>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <ReleaseVersion>0.5.0</ReleaseVersion>
   </PropertyGroup>
@@ -68,6 +70,11 @@
       ]]></Code>
     </Task>
   </UsingTask>
+  <Target Name="Build">
+    <CallTarget Targets="CreateBinaryZips" Condition="'$(Configuration)' == 'Release'" />
+    <CallTarget Targets="CreateNugetPackages" Condition="'$(Configuration)' == 'Release'" />
+    <CallTarget Targets="CopyDocumentation" Condition="'$(Configuration)' == 'Release'" />
+  </Target>
   <Target Name="CreateBinaryZips" Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <MakeDir Directories="$(OutputPath)" />
     <ItemGroup>
@@ -163,6 +170,13 @@
     <Exec Command="nuget pack $(SolutionRoot)CSF.Zpt.MVC\CSF.Zpt.MVC.nuspec -Prop Configuration=Release -OutputDirectory $(OutputPath)" Condition="'$(OS)' == 'Unix'" />
     <Exec Command="&quot;$(MSBuildProgramFiles32)\NuGet\nuget.exe&quot; pack $(SolutionRoot)CSF.Zpt.MVC\CSF.Zpt.MVC.nuspec -Prop Configuration=Release -OutputDirectory $(OutputPath)" Condition="'$(OS)' != 'Unix'" />
   </Target>
+  <Target Name="CopyDocumentation" Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <Copy SourceFiles="$(DocWebsiteOutputPath)\ZPT-Sharp API documentation.pdf" DestinationFolder="$(OutputPath)" />
+    <ItemGroup>
+      <DocWebsiteFiles Include="$(DocWebsiteOutputPath)\Website\**\*.*" />
+    </ItemGroup>
+    <Copy SourceFiles="@(DocWebsiteFiles)" DestinationFiles="@(DocWebsiteFiles-&gt;'$(DocumentationPath)\%(RecursiveDir)%(Filename)%(Extension)')" />
+  </Target>
   <ItemGroup>
     <ProjectReference Include="..\..\CSF.Zpt\CSF.Zpt.csproj">
       <Project>{16E957BB-347C-4EE1-815F-19AC296FB9E0}</Project>
@@ -203,6 +217,10 @@
     <ProjectReference Include="..\..\CSF.Zpt.MVC\CSF.Zpt.MVC.csproj">
       <Project>{9B4DF12E-6E04-4C25-AD16-58434C18DE8A}</Project>
       <Name>CSF.Zpt.MVC</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CSF.Zpt.Documentation\CSF.Zpt.Documentation.csproj">
+      <Project>{28D30A8C-0693-4FEA-BCC7-020AA41ECBB1}</Project>
+      <Name>CSF.Zpt.Documentation</Name>
     </ProjectReference>
   </ItemGroup>
 </Project>
