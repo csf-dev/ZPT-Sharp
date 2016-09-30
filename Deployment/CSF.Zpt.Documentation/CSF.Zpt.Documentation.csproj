@@ -10,11 +10,17 @@
     <WebsiteUrlRoot>http://csf-dev.github.io/ZPT-Sharp/</WebsiteUrlRoot>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <DoxygenConfig>Doxygen.cfg</DoxygenConfig>
-    <DoxygenOutput>obj\Release\Doxygen-output</DoxygenOutput>
+    <BuildRoot>obj\Release</BuildRoot>
+    <DoxygenOutput>$(BuildRoot)\Doxygen-output</DoxygenOutput>
     <LatexPath>$(DoxygenOutput)\latex</LatexPath>
     <LatexOutput>refman.tex</LatexOutput>
     <PdfOutput>refman.pdf</PdfOutput>
     <PdfFilename>ZPT-Sharp API documentation.pdf</PdfFilename>
+    <AssembledApiDocsPath>$(DoxygenOutput)\html</AssembledApiDocsPath>
+    <AssembledOutputPath>bin\Release</AssembledOutputPath>
+    <BuiltWebsitePath>$(BuildRoot)\Doc-website</BuiltWebsitePath>
+    <AssembledWebsitePath>$(AssembledOutputPath)\Website</AssembledWebsitePath>
+    <ApiDocsOutputPath>$(AssembledWebsitePath)\api</ApiDocsOutputPath>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Nothing|AnyCPU' ">
     <ConsolePause>false</ConsolePause>
@@ -37,15 +43,25 @@
     <Copy SourceFiles="$(LatexPath)\$(PdfOutput)" DestinationFiles="$(DoxygenOutput)\$(PdfFilename)" />
   </Target>
   <Target Name="BuildDocumentationWebsite">
-    <Exec Command=".\build-doc-website '$(WebsiteUrlRoot)' '$(ReleaseVersion)'" Condition="'$(OS)' == 'Unix' And  '$(Configuration)' == 'Release'" />
+    <Exec Command=".\build-doc-website '$(WebsiteUrlRoot)' '$(ReleaseVersion)'" />
   </Target>
   <Target Name="AssembleAllDocumentation">
-    <Exec Command=".\assemble-documentation" Condition="'$(OS)' == 'Unix' And  '$(Configuration)' == 'Release'" />
+    <RemoveDir Directories="$(AssembledOutputPath)" />
+    <MakeDir Directories="$(AssembledWebsitePath)" />
+    <ItemGroup>
+      <WebsiteFiles Include="$(BuiltWebsitePath)\**\*.*" />
+    </ItemGroup>
+    <ItemGroup>
+      <DoxygenOutputFiles Include="$(AssembledApiDocsPath)\**\*.*" />
+    </ItemGroup>
+    <Copy SourceFiles="@(WebsiteFiles)" DestinationFiles="@(WebsiteFiles-&gt;'$(AssembledWebsitePath)\%(RecursiveDir)%(Filename)%(Extension)')" />
+    <Copy SourceFiles="@(DoxygenOutputFiles)" DestinationFiles="@(DoxygenOutputFiles-&gt;'$(ApiDocsOutputPath)\%(RecursiveDir)%(Filename)%(Extension)')" />
+    <Copy SourceFiles="$(DoxygenOutput)\$(PdfFilename)" DestinationFolder="$(AssembledOutputPath)" />
   </Target>
   <Target Name="Build">
-    <CallTarget Targets="BuildApiDocumentation" />
-    <CallTarget Targets="BuildDocumentationWebsite" />
-    <CallTarget Targets="AssembleAllDocumentation" />
+    <CallTarget Targets="BuildApiDocumentation" Condition="'$(Configuration)' == 'Release'" />
+    <CallTarget Targets="BuildDocumentationWebsite" Condition="'$(Configuration)' == 'Release'" />
+    <CallTarget Targets="AssembleAllDocumentation" Condition="'$(Configuration)' == 'Release'" />
   </Target>
   <ItemGroup>
     <None Include="Website\advantages-of-zpt-views.html" />
@@ -88,10 +104,8 @@
     <None Include="Website\tales\repeat-variables.html" />
     <None Include="Website\tales\string-expressions.html" />
     <None Include="build-doc-website" />
-    <None Include="build-doxygen-output" />
     <None Include="Doxygen.cfg" />
     <None Include="Website style guide.txt" />
-    <None Include="assemble-documentation" />
     <None Include="Website\Shared\cli-docs.html" />
     <None Include="Website\css\download.css" />
   </ItemGroup>
