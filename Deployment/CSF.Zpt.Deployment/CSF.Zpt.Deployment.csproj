@@ -68,6 +68,10 @@
       ]]></Code>
     </Task>
   </UsingTask>
+  <Target Name="Build">
+    <CallTarget Targets="CreateBinaryZips" Condition="'$(Configuration)' == 'Release'" />
+    <CallTarget Targets="CreateNugetPackages" Condition="'$(Configuration)' == 'Release'" />
+  </Target>
   <Target Name="CreateBinaryZips" Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <MakeDir Directories="$(OutputPath)" />
     <ItemGroup>
