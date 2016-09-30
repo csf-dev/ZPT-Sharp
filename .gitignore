@@ -1,6 +1,7 @@
 bin/
 obj/
 logs/
+Deployment/Output/
 TestResult.xml
 TestResult.formatted.xml
 packages/*/
