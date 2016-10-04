@@ -53,17 +53,6 @@ On Windows, you will mainly need to install these dependencies manually.  Some a
 ## Build configurations
 There are three available build configurations: `Debug`, `Release` and `Deploy`.
 
-A core design principle (and a reason for having three configurations) is that `Debug` and `Release` builds *must not have any dependencies beyond*:
-
-* Either the .NET or Mono framework
-* Either MSBuild or xbuild
-* Nuget
-* Dependency packages managed by Nuget, which would be retrieved and properly configured via `nuget restore`
-
-Only builds which use the `Deploy` configuration may have other dependencies outside of the above.
-
-The rationale for this is to facilitate building of the core assemblies using a 'vanilla' .NET development environment. Such an environment might only have the above software available. We should not be demanding the installation of extra software when we only need it for building non-essential output.
-
 ### Debug builds
 The debug build configuration builds only the core assemblies. It does not build documentation or any packages.
 
@@ -101,6 +90,18 @@ Builds using the deploy configuration also create the following packages:
  * A package for ZptBuilder
  * An extra 'complete' package, which includes everything
 * The various Nuget packages which make up ZPT-Sharp
+
+### Why three build configurations and not two
+A core design principle (and a reason for having an extra `Deploy` configuration) is so that `Debug` and `Release` builds *do not need any dependencies beyond the following*:
+
+* Either the .NET or Mono framework
+* Either MSBuild or xbuild
+* Nuget
+ * This includes dependency packages managed by Nuget, which would be retrieved and properly configured via `nuget restore`
+
+The rationale for this is to facilitate building of the core assemblies using a 'vanilla' .NET development environment. Such an environment might only have the above software available. We should not be demanding the installation of extra software when we only need it for building non-essential output.
+
+If the developer wishes to build the non-essential components of the solution, then they may specify a `Deploy` build configuration, and must install the extra dependencies accordingly.
 
 ## Summary of the build process
 Once you have verified that all of the required dependencies are present, and you have selected a build configuration appropriate to your intentions, you are ready to attempt a build.
