@@ -11,14 +11,15 @@ The build dependencies are a list of software applications/packages which you mu
 
 *All of these dependencies must be available in your `PATH` environment variable before attempting a build.*  On GNU/Linux systems using packages installed by a package manager this is typically not an issue.  On MS Windows systems, you may need to issue a series of `SET PATH` commands before attempting the build.  *A warning to those using a Cygwin Bash shell and MSBuild -* MSBuild will invoke `cmd.exe` directly and will not perform the build using your Cygwin Bash shell.  Applications available in the Cygwin PATH environment might not be available in cmd.exe's PATH environment.
 
+### Dependencies for Debug/Release builds
 Builds using either of the configurations `Debug` or `Release` have only a small number of dependencies, which are likely to be found on any .NET developer's build environment:
 
 * Either the .NET framework (version 4.5 or higher) or an equivalent Mono framework
+ * At this time, *build & deployment has not been tested* using [DotNet Core](https://www.microsoft.com/net/core).
 * Either MSBuild or Mono XBuild
 * The Nuget package manager
 
-At this time, *build & deployment has not been tested* using [DotNet Core](https://www.microsoft.com/net/core).
-
+### Dependencies for Deploy builds
 Builds using the `Deploy` configuration have the following additional dependencies.
 
 * [Man (link to Wikipedia page)](https://en.wikipedia.org/wiki/Man_page)
