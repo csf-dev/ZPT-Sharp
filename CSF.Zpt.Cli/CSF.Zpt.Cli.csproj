@@ -83,7 +83,7 @@
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <UsingTask TaskName="ExecWithIgnoredExitCodes" AssemblyFile="bin\Release\CSF.Zpt.DeploymentTasks.dll" />
   <Target Name="BuildPlaintextManual">
-    <Exec Command="COLUMNS=&quot;$(ManPageColumns)&quot; man --nh -l $(ManPageSource) &gt; $(ManPageOutput)" />
+    <Exec Command="MANWIDTH=&quot;$(ManPageColumns)&quot; man --nh -l $(ManPageSource) &gt; $(ManPageOutput)" />
   </Target>
   <Target Name="BuildHtmlManual">
     <ExecWithIgnoredExitCodes Command="man2html $(ManPageSource) | tidy -i -w $(HtmlManPageColumns) &gt; $(HtmlManPageOutput)" IgnoredExitCodes="1" />
