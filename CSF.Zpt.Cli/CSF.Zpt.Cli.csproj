@@ -37,6 +37,15 @@
     <DefineConstants>TRACE;</DefineConstants>
     <CheckForOverflowUnderflow>true</CheckForOverflowUnderflow>
   </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Deploy|AnyCPU' ">
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Externalconsole>true</Externalconsole>
+    <DefineConstants>TRACE;</DefineConstants>
+    <CheckForOverflowUnderflow>true</CheckForOverflowUnderflow>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -80,9 +89,9 @@
     <ExecWithIgnoredExitCodes Command="man2html $(ManPageSource) | tidy -i -w $(HtmlManPageColumns) &gt; $(HtmlManPageOutput)" IgnoredExitCodes="1" />
   </Target>
   <Target Name="AfterBuild">
-    <MakeDir Directories="$(ManPageOutputDir)" Condition="'$(Configuration)' == 'Release'" />
-    <CallTarget Targets="BuildPlaintextManual" Condition="'$(Configuration)' == 'Release'" />
-    <CallTarget Targets="BuildHtmlManual" Condition="'$(Configuration)' == 'Release'" />
+    <MakeDir Directories="$(ManPageOutputDir)" Condition="'$(Configuration)' == 'Deploy'" />
+    <CallTarget Targets="BuildPlaintextManual" Condition="'$(Configuration)' == 'Deploy'" />
+    <CallTarget Targets="BuildHtmlManual" Condition="'$(Configuration)' == 'Deploy'" />
   </Target>
   <ItemGroup>
     <ProjectReference Include="..\CSF.Zpt\CSF.Zpt.csproj">
