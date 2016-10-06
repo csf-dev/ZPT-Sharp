@@ -37,39 +37,7 @@
     <WarningLevel>4</WarningLevel>
     <Optimize>false</Optimize>
   </PropertyGroup>
-  <!-- Originally taken from https://peteris.rocks/blog/creating-release-zip-archive-with-msbuild/ -->
-  <UsingTask TaskName="Zip" TaskFactory="CodeTaskFactory" AssemblyFile="$(MSBuildToolsPath)\Microsoft.Build.Tasks.v4.0.dll">
-    <ParameterGroup>
-      <OutputFilename ParameterType="System.String" Required="true" />
-      <Files ParameterType="Microsoft.Build.Framework.ITaskItem[]" Required="true" />
-    </ParameterGroup>
-    <Task>
-      <Reference Include="System.IO.Compression" />
-      <Using Namespace="System.IO.Compression" />
-      <Code Type="Fragment" Language="cs"><![CDATA[
-        try
-        {
-          using (Stream zipStream = new FileStream(Path.GetFullPath(OutputFilename), FileMode.Create, FileAccess.Write))
-          using (ZipArchive archive = new ZipArchive(zipStream, ZipArchiveMode.Create))
-          {
-              foreach (ITaskItem fileItem in Files)
-              {
-                  string filename = fileItem.ItemSpec;
-                  using (Stream fileStream = new FileStream(filename, FileMode.Open, FileAccess.Read))
-                  using (Stream fileStreamInZip = archive.CreateEntry(new FileInfo(filename).Name).Open())
-                      fileStream.CopyTo(fileStreamInZip);
-              }
-          }
-          return true;
-        }
-        catch (Exception ex)
-        {
-          Log.LogErrorFromException(ex);
-          return false;
-        }
-      ]]></Code>
-    </Task>
-  </UsingTask>
+  <UsingTask TaskName="CreateZipArchive" AssemblyFile="..\CSF.Zpt.DeploymentTasks\bin\Release\CSF.Zpt.DeploymentTasks.dll" />
   <Target Name="Build">
     <CallTarget Targets="CreateBinaryZips" Condition="'$(Configuration)' == 'Release'" />
     <CallTarget Targets="CreateNugetPackages" Condition="'$(Configuration)' == 'Release'" />
@@ -97,8 +65,7 @@
       <CliZipFiles Include="$(ZptBuilderPath)ZptBuilder.exe.config" />
       <CliZipFiles Include="$(ZptBuilderPath)Doc\ZptBuilder.MANUAL.txt" />
     </ItemGroup>
-    <ZipTask OutputFilename="$(OutputPath)CSF.Zpt.zip" Files="@(CliZipFiles)" Condition="'$(OS)' == 'Windows_NT'" />
-    <Exec Command="zip -j $(OutputPath)ZptBuilder.zip @(CliZipFiles, ' ')" Condition="'$(OS)' == 'Unix'" />
+    <CreateZipArchive OutputFilename="$(OutputPath)CSF.Zpt.zip" Files="@(CliZipFiles)" />
     <ItemGroup>
       <ApiOnlyZipFiles Include="$(ApiMainPath)CSF.dll" />
       <ApiOnlyZipFiles Include="$(ApiMainPath)CSF.Configuration.dll" />
@@ -114,8 +81,7 @@
       <ApiOnlyZipFiles Include="$(HtmlHapProviderPath)HtmlAgilityPack.dll" />
       <ApiOnlyZipFiles Include="$(Log4NetPath)log4net.dll" />
     </ItemGroup>
-    <ZipTask OutputFilename="$(OutputPath)CSF.Zpt-api-only.zip" Files="@(ApiOnlyZipFiles)" Condition="'$(OS)' == 'Windows_NT'" />
-    <Exec Command="zip -j $(OutputPath)CSF.Zpt-api-only.zip @(ApiOnlyZipFiles, ' ')" Condition="'$(OS)' == 'Unix'" />
+    <CreateZipArchive OutputFilename="$(OutputPath)CSF.Zpt-api-only.zip" Files="@(ApiOnlyZipFiles)" />
     <ItemGroup>
       <Mvc5ZipFiles Include="$(Mvc5Path)CSF.dll" />
       <Mvc5ZipFiles Include="$(Mvc5Path)CSF.Configuration.dll" />
@@ -132,8 +98,7 @@
       <Mvc5ZipFiles Include="$(Mvc5Path)HtmlAgilityPack.dll" />
       <Mvc5ZipFiles Include="$(Mvc5Path)log4net.dll" />
     </ItemGroup>
-    <ZipTask OutputFilename="$(OutputPath)CSF.Zpt.MVC.zip" Files="@(Mvc5ZipFiles)" Condition="'$(OS)' == 'Windows_NT'" />
-    <Exec Command="zip -j $(OutputPath)CSF.Zpt.MVC.zip @(Mvc5ZipFiles, ' ')" Condition="'$(OS)' == 'Unix'" />
+    <CreateZipArchive OutputFilename="$(OutputPath)CSF.Zpt.MVC.zip" Files="@(Mvc5ZipFiles)" />
     <ItemGroup>
       <ZptSharpCompleteZipFiles Include="$(ApiMainPath)CSF.dll" />
       <ZptSharpCompleteZipFiles Include="$(ApiMainPath)CSF.Configuration.dll" />
@@ -156,8 +121,7 @@
       <ZptSharpCompleteZipFiles Include="$(ZptBuilderPath)Doc\ZptBuilder.MANUAL.txt" />
       <ZptSharpCompleteZipFiles Include="$(Mvc5Path)CSF.Zpt.MVC.dll" />
     </ItemGroup>
-    <ZipTask OutputFilename="$(OutputPath)CSF.Zpt-complete.zip" Files="@(ZptSharpCompleteZipFiles)" Condition="'$(OS)' == 'Windows_NT'" />
-    <Exec Command="zip -j $(OutputPath)CSF.Zpt-complete.zip @(ZptSharpCompleteZipFiles, ' ')" Condition="'$(OS)' == 'Unix'" />
+    <CreateZipArchive OutputFilename="$(OutputPath)CSF.Zpt-complete.zip" Files="@(ZptSharpCompleteZipFiles)" />
   </Target>
   <Target Name="CreateNugetPackages" Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <!-- ZptBuilder -->
@@ -221,6 +185,10 @@
     <ProjectReference Include="..\CSF.Zpt.Documentation\CSF.Zpt.Documentation.csproj">
       <Project>{28D30A8C-0693-4FEA-BCC7-020AA41ECBB1}</Project>
       <Name>CSF.Zpt.Documentation</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CSF.Zpt.DeploymentTasks\CSF.Zpt.DeploymentTasks.csproj">
+      <Project>{3E1DAACE-519B-4C6C-80E3-3F06A1A33C66}</Project>
+      <Name>CSF.Zpt.DeploymentTasks</Name>
     </ProjectReference>
   </ItemGroup>
 </Project>
