@@ -115,7 +115,7 @@ msbuild /p:Configuration=Release
 
 Substitute the `msbuild` application for `xbuild` if appropriate; the parameters taken by either application are passed in the same format/syntax.
 Substitute `Release` for `Debug` or `Deploy` if you wish to use one of those other build configurations.
-If the build configuration parameter is omitted (IE: you just execute MSBuild/XBuild with no parameters) then a `Release` build will be performed.
+If the build configuration parameter is omitted (IE: you just execute MSBuild/XBuild with no parameters) then a `Debug` build will be performed.
 
 ## Where to find the build output
 In a `Debug` or `Release` build, the build output will be available in each of the various project directories, in a directory named `bin`, and a subdirectory named after the build configuration used (the usual location for .NET software).
