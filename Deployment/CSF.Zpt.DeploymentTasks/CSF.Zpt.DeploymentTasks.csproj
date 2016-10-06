@@ -8,6 +8,7 @@
     <RootNamespace>CSF.Zpt.DeploymentTasks</RootNamespace>
     <AssemblyName>CSF.Zpt.DeploymentTasks</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <ReleaseVersion>0.5.0</ReleaseVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -41,5 +42,11 @@
     <Compile Include="AssemblyInfo.cs" />
     <Compile Include="ExecWithIgnoredExitCodes.cs" />
     <Compile Include="FixDocTag.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CSF.Zpt.PreBuild\CSF.Zpt.PreBuild.csproj">
+      <Project>{6C025057-9ACC-474E-9092-D6B9059B07EE}</Project>
+      <Name>CSF.Zpt.PreBuild</Name>
+    </ProjectReference>
   </ItemGroup>
 </Project>

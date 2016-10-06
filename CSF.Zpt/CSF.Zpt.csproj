@@ -134,6 +134,10 @@
       <Project>{8C570A26-CEEB-45D1-9436-745C8DBAE9D8}</Project>
       <Name>CSF.Configuration</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Deployment\CSF.Zpt.PreBuild\CSF.Zpt.PreBuild.csproj">
+      <Project>{6C025057-9ACC-474E-9092-D6B9059B07EE}</Project>
+      <Name>CSF.Zpt.PreBuild</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\xhtml1-frameset.dtd">

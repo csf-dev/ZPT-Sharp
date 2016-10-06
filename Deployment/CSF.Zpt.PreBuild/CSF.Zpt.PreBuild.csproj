@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{6C025057-9ACC-474E-9092-D6B9059B07EE}</ProjectGuid>
+    <ReleaseVersion>0.5.0</ReleaseVersion>
+    <OutputType>Exe</OutputType>
+    <AssemblyName>CSF.Zpt.PreBuild</AssemblyName>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <OutputPath>Output</OutputPath>
+    <ConsolePause>false</ConsolePause>
+    <WarningLevel>4</WarningLevel>
+    <Optimize>false</Optimize>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <OutputPath>Output</OutputPath>
+    <ConsolePause>false</ConsolePause>
+    <WarningLevel>4</WarningLevel>
+    <Optimize>false</Optimize>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Deploy|AnyCPU' ">
+    <OutputPath>Output</OutputPath>
+    <ConsolePause>false</ConsolePause>
+    <WarningLevel>4</WarningLevel>
+    <Optimize>false</Optimize>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.Common.targets" />
+  <Target Name="RestoreNuget">
+    <Exec Command="nuget restore" WorkingDirectory="..\..\" Condition="'$(OS)' == 'Unix'" />
+    <Exec Command="&quot;$(MSBuildProgramFiles32)\NuGet\nuget.exe&quot; restore" WorkingDirectory="..\..\" Condition="'$(OS)' != 'Unix'" />
+  </Target>
+  <Target Name="Build">
+    <CallTarget Targets="RestoreNuget" />
+  </Target>
+</Project>
