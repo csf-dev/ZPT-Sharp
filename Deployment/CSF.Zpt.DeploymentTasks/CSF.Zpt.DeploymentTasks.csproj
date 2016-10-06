@@ -44,11 +44,18 @@
     <Compile Include="ExecWithIgnoredExitCodes.cs" />
     <Compile Include="FixDocTag.cs" />
     <Compile Include="CreateZipArchive.cs" />
+    <Compile Include="Resources\ErrorMessages.Designer.cs">
+      <DependentUpon>ErrorMessages.resx</DependentUpon>
+    </Compile>
+    <Compile Include="RequireFilesOnPath.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\CSF.Zpt.PreBuild\CSF.Zpt.PreBuild.csproj">
-      <Project>{6C025057-9ACC-474E-9092-D6B9059B07EE}</Project>
-      <Name>CSF.Zpt.PreBuild</Name>
-    </ProjectReference>
+    <Folder Include="Resources\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\ErrorMessages.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>ErrorMessages.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
 </Project>

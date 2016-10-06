@@ -7,6 +7,7 @@
     <ReleaseVersion>0.5.0</ReleaseVersion>
     <OutputType>Exe</OutputType>
     <AssemblyName>CSF.Zpt.PreBuild</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <OutputPath>Output</OutputPath>
@@ -27,11 +28,43 @@
     <Optimize>false</Optimize>
   </PropertyGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.Common.targets" />
+  <UsingTask TaskName="RequireFilesOnPath" AssemblyFile="..\CSF.Zpt.DeploymentTasks\bin\Debug\CSF.Zpt.DeploymentTasks.dll" Condition=" '$(Configuration)' == 'Debug' " />
+  <UsingTask TaskName="RequireFilesOnPath" AssemblyFile="..\CSF.Zpt.DeploymentTasks\bin\Release\CSF.Zpt.DeploymentTasks.dll" Condition=" '$(Configuration)' == 'Release' Or '$(Configuration)' == 'Deploy' " />
+  <Target Name="DetectNuget">
+    <ItemGroup>
+      <DetectedFiles Include="nuget" />
+    </ItemGroup>
+    <RequireFilesOnPath Files="@(DetectedFiles)" Condition="'$(OS)' == 'Unix'" />
+    <Error Condition="!Exists('$(MSBuildProgramFiles32)\NuGet\nuget.exe') And '$(OS)' == 'Windows_NT' " Text="Nuget.exe must be installed and available to MSBuild" />
+  </Target>
+  <Target Name="DetectDeploymentDependencies">
+    <ItemGroup>
+      <DetectedFiles Include="man" Condition="'$(OS)' == 'Unix'" />
+      <DetectedFiles Include="man2html" Condition="'$(OS)' == 'Unix'" />
+      <DetectedFiles Include="tidy" Condition="'$(OS)' == 'Unix'" />
+      <DetectedFiles Include="doxygen" Condition="'$(OS)' == 'Unix'" />
+      <DetectedFiles Include="pdflatex" Condition="'$(OS)' == 'Unix'" />
+      <DetectedFiles Include="man.exe" Condition=" '$(OS)' == 'Windows_NT' " />
+      <DetectedFiles Include="man2html.exe" Condition=" '$(OS)' == 'Windows_NT' "/>
+      <DetectedFiles Include="tidy.exe" Condition=" '$(OS)' == 'Windows_NT' "/>
+      <DetectedFiles Include="doxygen.exe" Condition=" '$(OS)' == 'Windows_NT' "/>
+      <DetectedFiles Include="pdflatex.exe" Condition=" '$(OS)' == 'Windows_NT' "/>
+    </ItemGroup>
+    <RequireFilesOnPath Files="@(DetectedFiles)" />
+  </Target>
   <Target Name="RestoreNuget">
     <Exec Command="nuget restore" WorkingDirectory="..\..\" Condition="'$(OS)' == 'Unix'" />
     <Exec Command="&quot;$(MSBuildProgramFiles32)\NuGet\nuget.exe&quot; restore" WorkingDirectory="..\..\" Condition="'$(OS)' != 'Unix'" />
   </Target>
   <Target Name="Build">
+    <CallTarget Targets="DetectNuget" />
+    <CallTarget Targets="DetectDeploymentDependencies" Condition=" '$(Configuration)' == 'Deploy' " />
     <CallTarget Targets="RestoreNuget" />
   </Target>
+  <ItemGroup>
+    <ProjectReference Include="..\CSF.Zpt.DeploymentTasks\CSF.Zpt.DeploymentTasks.csproj">
+      <Project>{3E1DAACE-519B-4C6C-80E3-3F06A1A33C66}</Project>
+      <Name>CSF.Zpt.DeploymentTasks</Name>
+    </ProjectReference>
+  </ItemGroup>
 </Project>
