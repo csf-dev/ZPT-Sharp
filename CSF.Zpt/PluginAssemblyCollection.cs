@@ -1,32 +1,14 @@
 ﻿using System;
 using System.Configuration;
 
-namespace CSF.Zpt.Tales
+namespace CSF.Zpt
 {
   /// <summary>
-  /// Configuration type which lists the avalable expression evaluator implementation types.
+  /// Configuration type which represents the collection of plugin assemblies.
   /// </summary>
-  public class ExpressionEvaluatorConfiguration : ConfigurationSection
+  public class PluginAssemblyCollection : ConfigurationElementCollection
   {
-    /// <summary>
-    /// Gets a collection of the available implementations.
-    /// </summary>
-    /// <value>The implementations.</value>
-    [ConfigurationProperty(@"Implementations", IsRequired = true)]
-    public virtual ImplementationsCollection Implementations
-    {
-      get {
-        return (ImplementationsCollection) this["Implementations"];
-      }
-    }
-  }
-
-  /// <summary>
-  /// Configuration type which represents the collection of implementations.
-  /// </summary>
-  public class ImplementationsCollection : ConfigurationElementCollection
-  {
-    internal const string PropertyName = "Implementation";
+    internal const string PropertyName = "Assembly";
 
     /// <summary>
     /// Gets the configuration collection type.
@@ -77,7 +59,7 @@ namespace CSF.Zpt.Tales
     /// <returns>The new element.</returns>
     protected override ConfigurationElement CreateNewElement()
     {
-      return new Implementation();
+      return new Plugin();
     }
 
     /// <summary>
@@ -87,59 +69,39 @@ namespace CSF.Zpt.Tales
     /// <param name="element">Element.</param>
     protected override object GetElementKey(ConfigurationElement element)
     {
-      return ((Implementation)(element)).TypeName;
+      return ((Plugin)(element)).Path;
     }
 
     /// <summary>
     /// Gets the <see cref="CSF.Zpt.ImplementationsCollection"/> with the specified index.
     /// </summary>
     /// <param name="idx">Index.</param>
-    public Implementation this[int idx]
+    public Plugin this[int idx]
     {
       get
       {
-        return (Implementation)BaseGet(idx);
+        return (Plugin)BaseGet(idx);
       }
     }
   }
 
   /// <summary>
-  /// Configuration type representing a single expression evaluator implementation.
+  /// Configuration type representing a single plugin assembly.
   /// </summary>
-  public class Implementation : ConfigurationElement
+  public class Plugin : ConfigurationElement
   {
     /// <summary>
-    /// Gets or sets the <c>System.Type</c> of the expression evaluator implementation.
+    /// Gets or sets the relative path to the assembly
     /// </summary>
-    /// <remarks>
-    /// <para>
-    /// Typically this is an assembly-qualified name, as implementation types live in satelite assemblies.
-    /// </para>
-    /// </remarks>
-    /// <value>The name of the type.</value>
-    [ConfigurationProperty(@"TypeName", IsRequired = true)]
-    public virtual string TypeName
+    /// <value>The path to the plugin assembly.</value>
+    [ConfigurationProperty(@"Path", IsRequired = true)]
+    public virtual string Path
     {
       get {
-        return (string) this["TypeName"];
+        return (string) this["Path"];
       }
       set {
-        this["TypeName"] = value;
-      }
-    }
-
-    /// <summary>
-    /// Gets or sets a value indicating whether this instance is the default expression evaluator.
-    /// </summary>
-    /// <value><c>true</c> if this instance is the default evaluator; otherwise, <c>false</c>.</value>
-    [ConfigurationProperty(@"IsDefault", IsRequired = false, DefaultValue = "False")]
-    public virtual bool IsDefault
-    {
-      get {
-        return (bool) this["IsDefault"];
-      }
-      set {
-        this["IsDefault"] = value;
+        this["Path"] = value;
       }
     }
   }

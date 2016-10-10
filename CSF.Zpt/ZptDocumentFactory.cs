@@ -32,7 +32,7 @@ namespace CSF.Zpt
 
     #region fields
 
-    private IZptDocumentProviderRegistry _providerRegistry;
+    private IZptDocumentProviderService _providers;
 
     #endregion
 
@@ -263,11 +263,11 @@ namespace CSF.Zpt
       switch(mode)
       {
       case RenderingMode.Html:
-        output = _providerRegistry.DefaultHtmlProvider;
+        output = _providers.GetDefaultHtmlProvider();
         break;
 
       case RenderingMode.Xml:
-        output = _providerRegistry.DefaultXmlProvider;
+        output = _providers.GetDefaultXmlProvider();
         break;
 
       default:
@@ -284,7 +284,7 @@ namespace CSF.Zpt
         throw new ArgumentNullException(nameof(type));
       }
 
-      return _providerRegistry.GetProvider(type);
+      return _providers.GetProvider(type);
     }
 
     #endregion
@@ -336,9 +336,9 @@ namespace CSF.Zpt
     /// <summary>
     /// Initializes a new instance of the <see cref="CSF.Zpt.ZptDocumentFactory"/> class.
     /// </summary>
-    public ZptDocumentFactory(IZptDocumentProviderRegistry registry = null)
+    public ZptDocumentFactory(IZptDocumentProviderService providers = null)
     {
-      _providerRegistry = registry?? ZptDocumentProviderRegistry.Default;
+      _providers = providers?? new ZptDocumentProviderService();
     }
 
     #endregion

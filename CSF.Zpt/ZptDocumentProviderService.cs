@@ -1,0 +1,136 @@
+﻿using System;
+using System.Linq;
+using CSF.Configuration;
+
+namespace CSF.Zpt
+{
+  /// <summary>
+  /// Default implementation of <see cref="IZptDocumentProviderService"/>.
+  /// </summary>
+  public sealed class ZptDocumentProviderService : IZptDocumentProviderService
+  {
+    #region fields
+
+    private static readonly ZptDocumentProviderCache _cache;
+    private IPluginConfiguration _pluginConfig;
+
+    #endregion
+
+    #region methods
+
+    /// <summary>
+    /// Gets a provider based upon its <c>System.Type</c>.
+    /// </summary>
+    /// <returns>The provider.</returns>
+    /// <param name="providerType">Provider type.</param>
+    public IZptDocumentProvider GetProvider(Type providerType)
+    {
+      PopulateCacheIfRequired();
+
+      IZptDocumentProvider output;
+
+      var success = _cache.TryGet(providerType, out output);
+
+      return success? output : null;
+    }
+
+    /// <summary>
+    /// Gets a provider based upon its <c>System.Type</c> assembly-qualified name.
+    /// </summary>
+    /// <returns>The provider.</returns>
+    /// <param name="providerTypeName">Provider type name.</param>
+    public IZptDocumentProvider GetProvider(string providerTypeName)
+    {
+      var providerType = Type.GetType(providerTypeName);
+
+      return (providerType != null)? GetProvider(providerType) : null;
+    }
+
+    /// <summary>
+    /// Gets the default provider for HTML documents.
+    /// </summary>
+    /// <returns>The default HTML provider.</returns>
+    public IZptDocumentProvider GetDefaultHtmlProvider()
+    {
+      PopulateCacheIfRequired();
+      return _cache.DefaultHtmlProvider;
+    }
+
+    /// <summary>
+    /// Gets the default provider for XML documents.
+    /// </summary>
+    /// <returns>The default XML provider.</returns>
+    public IZptDocumentProvider GetDefaultXmlProvider()
+    {
+      PopulateCacheIfRequired();
+      return _cache.DefaultXmlProvider;
+    }
+
+    /// <summary>
+    /// Populates the cache if it has not been done already.
+    /// </summary>
+    private void PopulateCacheIfRequired()
+    {
+      _cache.PopulateIfRequired(PopulateCache);
+    }
+
+    /// <summary>
+    /// Populates the cache.
+    /// </summary>
+    /// <param name="cache">Cache.</param>
+    private void PopulateCache(ZptDocumentProviderCache cache)
+    {
+      if(cache == null)
+      {
+        throw new ArgumentNullException(nameof(cache));
+      }
+
+      var allProviders = (from type in _pluginConfig.GetAllDocumentProviderTypes()
+                          select new {  Type = type,
+                                        Provider = (IZptDocumentProvider) Activator.CreateInstance(type) })
+        .ToArray();
+
+      foreach(var kvp in allProviders)
+      {
+        cache.Add(kvp.Type, kvp.Provider);
+      }
+
+      var defaultHtml = _pluginConfig.GetDefaultHtmlDocumentProvider();
+      var defaultXml = _pluginConfig.GetDefaultXmlDocumentProvider();
+
+      if(defaultHtml != null)
+      {
+        cache.DefaultHtmlProvider = allProviders.Single(x => x.Type == defaultHtml).Provider;
+      }
+
+      if(defaultXml != null)
+      {
+        cache.DefaultXmlProvider = allProviders.Single(x => x.Type == defaultXml).Provider;
+      }
+    }
+
+    #endregion
+
+    #region constructors
+
+    /// <summary>
+    /// Initializes a new instance of the <see cref="CSF.Zpt.ZptDocumentProviderService"/> class.
+    /// </summary>
+    /// <param name="pluginConfig">Plugin config.</param>
+    public ZptDocumentProviderService(IPluginConfiguration pluginConfig = null)
+    {
+      _pluginConfig = pluginConfig?? ConfigurationHelper.GetSection<PluginConfigurationSection>();
+    }
+
+    /// <summary>
+    /// Initializes the <see cref="CSF.Zpt.ZptDocumentProviderService"/> class.
+    /// </summary>
+    static ZptDocumentProviderService()
+    {
+      _cache = new ZptDocumentProviderCache();
+    }
+
+    #endregion
+  }
+}
+
