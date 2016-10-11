@@ -13,7 +13,7 @@ namespace CSF.Zpt.Tales
   {
     #region fields
 
-    private readonly Lazy<IExpressionEvaluatorRegistry> _registry;
+    private readonly IExpressionEvaluatorService _registry;
 
     #endregion
 
@@ -31,10 +31,10 @@ namespace CSF.Zpt.Tales
     /// </para>
     /// </remarks>
     /// <value>The evaluator registry.</value>
-    protected virtual IExpressionEvaluatorRegistry EvaluatorRegistry
+    protected virtual IExpressionEvaluatorService EvaluatorRegistry
     {
       get {
-        return _registry.Value;
+        return _registry;
       }
     }
 
@@ -74,7 +74,7 @@ namespace CSF.Zpt.Tales
       }
       else
       {
-        output = EvaluatorRegistry.DefaultEvaluator;
+        output = this.EvaluatorRegistry.GetDefaultEvaluator();
       }
 
       return output;
@@ -123,9 +123,9 @@ namespace CSF.Zpt.Tales
     /// Initializes a new instance of the <see cref="CSF.Zpt.Tales.SimpleEvaluatorSelector"/> class.
     /// </summary>
     /// <param name="registry">An expression evaluator registry.</param>
-    public SimpleEvaluatorSelector(IExpressionEvaluatorRegistry registry = null)
+    public SimpleEvaluatorSelector(IExpressionEvaluatorService registry = null)
     {
-      _registry = new Lazy<IExpressionEvaluatorRegistry>(() => registry?? ExpressionEvaluatorRegistry.Default);
+      _registry = new ExpressionEvaluatorService();
     }
 
     #endregion

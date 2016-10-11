@@ -96,8 +96,6 @@
     <Compile Include="Rendering\EmptyModel.cs" />
     <Compile Include="Rendering\DefaultRenderingOptions.cs" />
     <Compile Include="XmlUrlResolverFactory.cs" />
-    <Compile Include="ConfigurationDocumentImplementationProvider.cs" />
-    <Compile Include="DocumentImplementationConfiguration.cs" />
     <Compile Include="Rendering\ZptAttribute.cs" />
     <Compile Include="Rendering\ZptElement.cs" />
     <Compile Include="BatchRendering\BatchRenderingOptions.cs" />
@@ -110,11 +108,15 @@
     <Compile Include="BatchRendering\IRenderingJobFactory.cs" />
     <Compile Include="BatchRendering\ErrorTolerantBatchRenderer.cs" />
     <Compile Include="Rendering\RepetitionMetadataCollectionWrapper.cs" />
-    <Compile Include="ZptDocumentProviderRegistry.cs" />
     <Compile Include="Tales\SimpleEvaluatorSelector.cs" />
-    <Compile Include="Tales\ExpressionEvaluatorRegistry.cs" />
-    <Compile Include="Tales\ExpressionEvaluatorConfiguration.cs" />
-    <Compile Include="Tales\ConfigurationExpressionEvaluatorProvider.cs" />
+    <Compile Include="ZptDocumentProviderService.cs" />
+    <Compile Include="ZptDocumentProviderCache.cs" />
+    <Compile Include="PluginConfigurationSection.cs" />
+    <Compile Include="PluginAssemblyCollection.cs" />
+    <Compile Include="PluginServiceBase.cs" />
+    <Compile Include="Tales\ExpressionEvaluatorCache.cs" />
+    <Compile Include="Tales\ExpressionEvaluatorService.cs" />
+    <Compile Include="EmptyPluginConfiguration.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
