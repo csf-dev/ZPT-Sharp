@@ -85,6 +85,11 @@ namespace CSF.Zpt
         throw new ArgumentNullException(nameof(cache));
       }
 
+      if(_pluginConfig == null)
+      {
+        throw new InvalidOperationException("Plugin config must not be null.");
+      }
+
       var allProviders = (from assembly in _pluginConfig.GetAllPluginAssemblies()
                           from type in base.GetConcreteTypes<IZptDocumentProvider>(assembly)
                           select new {  Type = type,
