@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using CSF.Configuration;
+using System.IO;
+using CSF.IO;
 
 namespace CSF.Zpt
 {
@@ -141,9 +143,12 @@ namespace CSF.Zpt
 
     private Assembly LoadAssembly(string path)
     {
+      var currentAssemblyDirectory = new FileInfo(Assembly.GetExecutingAssembly().Location).GetParent();
+      var pluginRelativePath = Path.Combine(currentAssemblyDirectory.FullName, path);
+
       try
       {
-        return Assembly.LoadFrom(path);
+        return Assembly.LoadFrom(pluginRelativePath);
       }
       catch(Exception ex)
       {
