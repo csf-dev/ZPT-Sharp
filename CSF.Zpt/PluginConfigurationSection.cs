@@ -3,6 +3,7 @@ using System.Configuration;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using CSF.Configuration;
 
 namespace CSF.Zpt
 {
@@ -13,6 +14,7 @@ namespace CSF.Zpt
   {
     #region fields
 
+    private static PluginConfigurationSection _singleton;
     private IEnumerable<Assembly> _cachedPluginAsseblies;
 
     #endregion
@@ -150,6 +152,29 @@ namespace CSF.Zpt
       }
     }
 
+    #endregion
+
+    #region singleton instance
+
+    /// <summary>
+    /// Gets the default instance of the plugin configuration.
+    /// </summary>
+    /// <returns>The default/singleton instance.</returns>
+    public static IPluginConfiguration GetDefault()
+    {
+      if(_singleton == null)
+      {
+        _singleton = ConfigurationHelper.GetSection<PluginConfigurationSection>();
+      }
+
+      if(_singleton == null)
+      {
+        // TODO: Move this exception message to a resource
+        throw new InvalidOperationException("The plugin configuration could not be loaded - did you forget to add the relevant configuration entries?");
+      }
+
+      return _singleton;
+    }
 
     #endregion
   }

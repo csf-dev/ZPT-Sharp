@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Linq;
-using CSF.Configuration;
 
 namespace CSF.Zpt.Tales
 {
+  /// <summary>
+  /// Default implementation of <see cref="IExpressionEvaluatorService"/>.
+  /// </summary>
   public class ExpressionEvaluatorService : PluginServiceBase, IExpressionEvaluatorService
   {
     #region fields
@@ -15,6 +17,11 @@ namespace CSF.Zpt.Tales
 
     #region methods
 
+    /// <summary>
+    /// Gets an evaluator by its <c>System.Type</c>.
+    /// </summary>
+    /// <returns>The evaluator.</returns>
+    /// <param name="type">Type.</param>
     public IExpressionEvaluator GetEvaluator(Type type)
     {
       var cache = GetCache();
@@ -22,6 +29,11 @@ namespace CSF.Zpt.Tales
       return cache.TryGetByType(type);
     }
 
+    /// <summary>
+    /// Gets an evaluator by its expression prefix.
+    /// </summary>
+    /// <returns>The evaluator.</returns>
+    /// <param name="prefix">Prefix.</param>
     public IExpressionEvaluator GetEvaluator(string prefix)
     {
       var cache = GetCache();
@@ -32,6 +44,10 @@ namespace CSF.Zpt.Tales
       return success? output : null;
     }
 
+    /// <summary>
+    /// Gets the default expression evaluator.
+    /// </summary>
+    /// <returns>The default evaluator.</returns>
     public IExpressionEvaluator GetDefaultEvaluator()
     {
       var cache = GetCache();
@@ -82,11 +98,18 @@ namespace CSF.Zpt.Tales
 
     #region constructors
 
+    /// <summary>
+    /// Initializes a new instance of the <see cref="CSF.Zpt.Tales.ExpressionEvaluatorService"/> class.
+    /// </summary>
+    /// <param name="pluginConfig">Plugin config.</param>
     public ExpressionEvaluatorService(IPluginConfiguration pluginConfig = null)
     {
-      _pluginConfig = pluginConfig?? ConfigurationHelper.GetSection<PluginConfigurationSection>();
+      _pluginConfig = pluginConfig?? PluginConfigurationSection.GetDefault();
     }
 
+    /// <summary>
+    /// Initializes the <see cref="CSF.Zpt.Tales.ExpressionEvaluatorService"/> class.
+    /// </summary>
     static ExpressionEvaluatorService()
     {
       _evaluatorCache = new Lazy<ExpressionEvaluatorCache>();

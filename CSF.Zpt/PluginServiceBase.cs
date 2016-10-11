@@ -5,6 +5,9 @@ using System.Linq;
 
 namespace CSF.Zpt
 {
+  /// <summary>
+  /// Abstract base type for a service which exposes plugin instances.
+  /// </summary>
   public abstract class PluginServiceBase
   {
     #region methods

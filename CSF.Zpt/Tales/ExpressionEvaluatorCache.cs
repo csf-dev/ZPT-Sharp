@@ -3,7 +3,10 @@ using System.Linq;
 
 namespace CSF.Zpt.Tales
 {
-  public class ExpressionEvaluatorCache : ThreadSafeCache<string,IExpressionEvaluator>
+  /// <summary>
+  /// Cache implementation for <see cref="IExpressionEvaluator"/> instances.
+  /// </summary>
+  internal class ExpressionEvaluatorCache : ThreadSafeCache<string,IExpressionEvaluator>
   {
     #region fields
 

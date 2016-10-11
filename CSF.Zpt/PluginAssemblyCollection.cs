@@ -73,7 +73,7 @@ namespace CSF.Zpt
     }
 
     /// <summary>
-    /// Gets the <see cref="CSF.Zpt.ImplementationsCollection"/> with the specified index.
+    /// Gets the <see cref="CSF.Zpt.Plugin"/> with the specified index.
     /// </summary>
     /// <param name="idx">Index.</param>
     public Plugin this[int idx]

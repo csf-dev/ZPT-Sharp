@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Linq;
-using CSF.Configuration;
 
 namespace CSF.Zpt
 {
@@ -126,7 +125,7 @@ namespace CSF.Zpt
     /// <param name="pluginConfig">Plugin config.</param>
     public ZptDocumentProviderService(IPluginConfiguration pluginConfig = null)
     {
-      _pluginConfig = pluginConfig?? ConfigurationHelper.GetSection<PluginConfigurationSection>();
+      _pluginConfig = pluginConfig?? PluginConfigurationSection.GetDefault();
     }
 
     /// <summary>
