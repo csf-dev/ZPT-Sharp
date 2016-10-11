@@ -116,6 +116,7 @@
     <Compile Include="PluginServiceBase.cs" />
     <Compile Include="Tales\ExpressionEvaluatorCache.cs" />
     <Compile Include="Tales\ExpressionEvaluatorService.cs" />
+    <Compile Include="EmptyPluginConfiguration.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

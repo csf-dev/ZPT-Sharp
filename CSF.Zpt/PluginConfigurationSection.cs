@@ -14,7 +14,7 @@ namespace CSF.Zpt
   {
     #region fields
 
-    private static PluginConfigurationSection _singleton;
+    private static IPluginConfiguration _singleton;
     private IEnumerable<Assembly> _cachedPluginAsseblies;
 
     #endregion
@@ -167,13 +167,7 @@ namespace CSF.Zpt
         _singleton = ConfigurationHelper.GetSection<PluginConfigurationSection>();
       }
 
-      if(_singleton == null)
-      {
-        // TODO: Move this exception message to a resource
-        throw new InvalidOperationException("The plugin configuration could not be loaded - did you forget to add the relevant configuration entries?");
-      }
-
-      return _singleton;
+      return _singleton?? new EmptyPluginConfiguration();
     }
 
     #endregion
