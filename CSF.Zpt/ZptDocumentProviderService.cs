@@ -7,7 +7,7 @@ namespace CSF.Zpt
   /// <summary>
   /// Default implementation of <see cref="IZptDocumentProviderService"/>.
   /// </summary>
-  public sealed class ZptDocumentProviderService : IZptDocumentProviderService
+  public sealed class ZptDocumentProviderService : PluginServiceBase, IZptDocumentProviderService
   {
     #region fields
 
@@ -85,7 +85,8 @@ namespace CSF.Zpt
         throw new ArgumentNullException(nameof(cache));
       }
 
-      var allProviders = (from type in _pluginConfig.GetAllDocumentProviderTypes()
+      var allProviders = (from assembly in _pluginConfig.GetAllPluginAssemblies()
+                          from type in base.GetConcreteTypes<IZptDocumentProvider>(assembly)
                           select new {  Type = type,
                                         Provider = (IZptDocumentProvider) Activator.CreateInstance(type) })
         .ToArray();
@@ -95,17 +96,18 @@ namespace CSF.Zpt
         cache.Add(kvp.Type, kvp.Provider);
       }
 
-      var defaultHtml = _pluginConfig.GetDefaultHtmlDocumentProvider();
-      var defaultXml = _pluginConfig.GetDefaultXmlDocumentProvider();
-
+      var defaultHtml = allProviders
+        .SingleOrDefault(x => x.Type.FullName == _pluginConfig.GetDefaultHtmlDocumentProviderTypeName());
       if(defaultHtml != null)
       {
-        cache.DefaultHtmlProvider = allProviders.Single(x => x.Type == defaultHtml).Provider;
+        cache.DefaultHtmlProvider = defaultHtml.Provider;
       }
 
+      var defaultXml = allProviders
+        .SingleOrDefault(x => x.Type.FullName == _pluginConfig.GetDefaultXmlDocumentProviderTypeName());
       if(defaultXml != null)
       {
-        cache.DefaultXmlProvider = allProviders.Single(x => x.Type == defaultXml).Provider;
+        cache.DefaultXmlProvider = defaultXml.Provider;
       }
     }
 

@@ -92,9 +92,9 @@
     <Compile Include="Rendering\CouldNotCreateContextVisitorException.cs" />
     <Compile Include="Rendering\CouldNotCreateRenderingContextFactoryException.cs" />
     <Compile Include="Tales\IEvaluatorSelector.cs" />
-    <Compile Include="Tales\IExpressionEvaluatorRegistry.cs" />
     <Compile Include="IPluginConfiguration.cs" />
     <Compile Include="IZptDocumentProviderService.cs" />
+    <Compile Include="Tales\IExpressionEvaluatorService.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup />

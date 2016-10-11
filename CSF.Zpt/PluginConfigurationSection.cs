@@ -13,24 +13,31 @@ namespace CSF.Zpt
   {
     #region fields
 
-    private IEnumerable<Type> _documentProviderTypes, _expressionEvaluatorTypes;
-    private Type _defaultHtmlType, _defaultXmlType, _defaultExpressionEvaluator;
+    private IEnumerable<Assembly> _cachedPluginAsseblies;
 
     #endregion
 
     #region properties
 
-    [ConfigurationProperty(@"Plugins", IsRequired = true)]
+    /// <summary>
+    /// Gets or sets a collection of all of the paths to plugin assemblies.
+    /// </summary>
+    /// <value>The plugins.</value>
+    [ConfigurationProperty(@"PluginAssemblies", IsRequired = true)]
     public virtual PluginAssemblyCollection Plugins
     {
       get {
-        return (PluginAssemblyCollection) this["Plugins"];
+        return (PluginAssemblyCollection) this["PluginAssemblies"];
       }
       set {
-        this["Plugins"] = value;
+        this["PluginAssemblies"] = value;
       }
     }
 
+    /// <summary>
+    /// Gets or sets the type name of the default HTML document provider.
+    /// </summary>
+    /// <value>The default html document provider.</value>
     [ConfigurationProperty(@"DefaultHtmlDocumentProvider", IsRequired = false)]
     public virtual string DefaultHtmlDocumentProvider
     {
@@ -42,6 +49,10 @@ namespace CSF.Zpt
       }
     }
 
+    /// <summary>
+    /// Gets or sets the type name of the default XML document provider.
+    /// </summary>
+    /// <value>The default xml document provider.</value>
     [ConfigurationProperty(@"DefaultXmlDocumentProvider", IsRequired = false)]
     public virtual string DefaultXmlDocumentProvider
     {
@@ -53,6 +64,10 @@ namespace CSF.Zpt
       }
     }
 
+    /// <summary>
+    /// Gets or sets the type name of the default TALES expression evaluator.
+    /// </summary>
+    /// <value>The default expression evaluator.</value>
     [ConfigurationProperty(@"DefaultExpressionEvaluator", IsRequired = true)]
     public virtual string DefaultExpressionEvaluator
     {
@@ -69,98 +84,57 @@ namespace CSF.Zpt
     #region methods
 
     /// <summary>
-    /// Gets all of the installed document provider types.
+    /// Gets a collection of all of the registered plugin assemblies.
     /// </summary>
-    /// <returns>The all document provider types.</returns>
-    public IEnumerable<Type> GetAllDocumentProviderTypes()
+    /// <returns>The plugin assemblies.</returns>
+    public IEnumerable<Assembly> GetAllPluginAssemblies()
     {
-      if(_documentProviderTypes == null)
+      if(_cachedPluginAsseblies == null)
       {
-        _documentProviderTypes = GetAllConcretePluginTypes(typeof(IZptDocumentProvider));
+        _cachedPluginAsseblies = LoadAllAssemblies();
       }
 
-      return _documentProviderTypes;
+      return _cachedPluginAsseblies;
     }
 
     /// <summary>
-    /// Gets all of the installed expression evaluator types.
+    /// Gets the name (including namespace) of the <c>System.Type</c> which is the default HTML document provider.
     /// </summary>
-    /// <returns>The all expression evaluator types.</returns>
-    public IEnumerable<Type> GetAllExpressionEvaluatorTypes()
+    /// <returns>The default HTML document provider type name.</returns>
+    public string GetDefaultHtmlDocumentProviderTypeName()
     {
-      if(_expressionEvaluatorTypes == null)
-      {
-        _expressionEvaluatorTypes = GetAllConcretePluginTypes(typeof(Tales.IExpressionEvaluator));
-      }
-
-      return _expressionEvaluatorTypes;
+      return this.DefaultHtmlDocumentProvider;
     }
 
     /// <summary>
-    /// Gets the default HTML document provider.
+    /// Gets the name (including namespace) of the <c>System.Type</c> which is the default XML document provider.
     /// </summary>
-    /// <returns>The default HTML document provider.</returns>
-    public Type GetDefaultHtmlDocumentProvider()
+    /// <returns>The default XML document provider type name.</returns>
+    public string GetDefaultXmlDocumentProviderTypeName()
     {
-      if(String.IsNullOrEmpty(this.DefaultHtmlDocumentProvider))
-      {
-        return null;
-      }
-
-      return GetAllDocumentProviderTypes().SingleOrDefault(x => x.FullName == this.DefaultHtmlDocumentProvider);
+      return this.DefaultXmlDocumentProvider;
     }
 
     /// <summary>
-    /// Gets the default XML document provider.
+    /// Gets the name (including namespace) of the <c>System.Type</c> which is the default TALES expression evaluator.
     /// </summary>
-    /// <returns>The default XML document provider.</returns>
-    public Type GetDefaultXmlDocumentProvider()
+    /// <returns>The default expression evaluator type name.</returns>
+    public string GetDefaultExpressionEvaluatorTypeName()
     {
-      if(String.IsNullOrEmpty(this.DefaultXmlDocumentProvider))
-      {
-        return null;
-      }
-
-      return GetAllDocumentProviderTypes().SingleOrDefault(x => x.FullName == this.DefaultXmlDocumentProvider);
+      return this.DefaultExpressionEvaluator;
     }
 
-    /// <summary>
-    /// Gets the default expression evaluator.
-    /// </summary>
-    /// <returns>The default expression evaluator.</returns>
-    public Type GetDefaultExpressionEvaluator()
+    private IEnumerable<Assembly> LoadAllAssemblies()
     {
-      if(String.IsNullOrEmpty(this.DefaultExpressionEvaluator))
+      if(this.Plugins == null)
       {
-        // TODO: Move this message to a resource file
-        throw new InvalidOperationException("The default TALES expression evaluator must be configured.");
+        return Enumerable.Empty<Assembly>();
       }
 
-      // TODO: Wrap this in a more suitable exception
-      return GetAllExpressionEvaluatorTypes().Single(x => x.FullName == this.DefaultExpressionEvaluator);
-    }
-
-    /// <summary>
-    /// Gets all of the types which are contained within installed plugins and which implement a base class.
-    /// </summary>
-    /// <returns>The concrete plugin types.</returns>
-    /// <param name="baseType">Base type.</param>
-    private IEnumerable<Type> GetAllConcretePluginTypes(Type baseType)
-    {
-      if(baseType == null)
-      {
-        throw new ArgumentNullException(nameof(baseType));
-      }
-
-      return (from plugin in Plugins.Cast<Plugin>()
-              let assembly = LoadAssembly(plugin.Path)
-              from type in assembly.GetExportedTypes()
-              where
-                type.IsClass
-                && !type.IsAbstract
-                && baseType.IsAssignableFrom(type)
-                && type.GetConstructor(Type.EmptyTypes) != null
-              select type);
+      return this.Plugins
+        .Cast<Plugin>()
+        .Select(x => LoadAssembly(x.Path))
+        .ToArray();
     }
 
     private Assembly LoadAssembly(string path)
@@ -175,6 +149,7 @@ namespace CSF.Zpt
         throw new InvalidOperationException("The plugin assembly could not be loaded.", ex);
       }
     }
+
 
     #endregion
   }

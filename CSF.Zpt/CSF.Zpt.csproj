@@ -109,11 +109,13 @@
     <Compile Include="BatchRendering\ErrorTolerantBatchRenderer.cs" />
     <Compile Include="Rendering\RepetitionMetadataCollectionWrapper.cs" />
     <Compile Include="Tales\SimpleEvaluatorSelector.cs" />
-    <Compile Include="Tales\ExpressionEvaluatorRegistry.cs" />
     <Compile Include="ZptDocumentProviderService.cs" />
     <Compile Include="ZptDocumentProviderCache.cs" />
     <Compile Include="PluginConfigurationSection.cs" />
     <Compile Include="PluginAssemblyCollection.cs" />
+    <Compile Include="PluginServiceBase.cs" />
+    <Compile Include="Tales\ExpressionEvaluatorCache.cs" />
+    <Compile Include="Tales\ExpressionEvaluatorService.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
