@@ -121,9 +121,9 @@ namespace Test.CSF.Zpt.Integration
       return config.GetExpectedOutputPath();
     }
 
-    protected virtual IRenderingOptions GetRenderingOptions(IRenderingContextFactory contextFactory)
+    protected virtual IRenderingSettings GetRenderingOptions(IRenderingContextFactory contextFactory)
     {
-      return new RenderingOptions(contextFactory: contextFactory);
+      return new RenderingSettings(contextFactory: contextFactory);
     }
 
     protected virtual IRenderingContextFactory CreateTestEnvironment(DirectoryInfo rootPath)
@@ -133,7 +133,7 @@ namespace Test.CSF.Zpt.Integration
       return output;
     }
 
-    protected virtual string Render(IZptDocument document, IRenderingOptions options)
+    protected virtual string Render(IZptDocument document, IRenderingSettings options)
     {
       return document.Render(options);
     }

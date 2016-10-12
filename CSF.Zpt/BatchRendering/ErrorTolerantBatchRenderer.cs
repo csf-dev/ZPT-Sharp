@@ -20,7 +20,7 @@ namespace CSF.Zpt.BatchRendering
     /// <param name="outputInfo">Output info.</param>
     protected override IBatchRenderingDocumentResponse Render(IZptDocument doc,
                                                               Stream outputStream,
-                                                              IRenderingOptions options,
+                                                              IRenderingSettings options,
                                                               Action<IModelValueContainer> contextConfigurator,
                                                               string outputInfo)
     {

@@ -14,7 +14,7 @@ namespace CSF.Zpt.Rendering
 
     private IModel _metalContext, _talContext;
     private IZptElement _element;
-    private IRenderingOptions _renderingOptions;
+    private IRenderingSettings _renderingOptions;
     private string _sourceAnnotationRoot;
     private IEnumerable<IZptAttribute> _originalAttributes;
 
@@ -59,7 +59,7 @@ namespace CSF.Zpt.Rendering
     /// Gets the rendering options.
     /// </summary>
     /// <value>The rendering options.</value>
-    public virtual IRenderingOptions RenderingOptions
+    public virtual IRenderingSettings RenderingOptions
     {
       get {
         return _renderingOptions;
@@ -194,7 +194,7 @@ namespace CSF.Zpt.Rendering
     public RenderingContext(IModel metalContext,
                             IModel talContext,
                             IZptElement element,
-                            IRenderingOptions options,
+                            IRenderingSettings options,
                             string sourceAnnotationRoot = null)
     {
       if(metalContext == null)

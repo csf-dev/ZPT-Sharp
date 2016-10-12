@@ -45,7 +45,7 @@ namespace Test.CSF.Zpt.Cli
 
       _renderer = new Mock<IBatchRenderer>();
       _renderer
-        .Setup(x => x.Render(It.IsAny<IRenderingOptions>(),
+        .Setup(x => x.Render(It.IsAny<IRenderingSettings>(),
                              It.IsAny<IBatchRenderingOptions>(),
                              It.IsAny<RenderingMode?>()))
         .Returns(Mock.Of<IBatchRenderingResponse>());
@@ -320,7 +320,7 @@ Please include the information below with your bug report
       var options = new CommandLineOptions();
 
       _renderer
-        .Setup(x => x.Render(It.IsAny<IRenderingOptions>(),
+        .Setup(x => x.Render(It.IsAny<IRenderingSettings>(),
                              It.IsAny<IBatchRenderingOptions>(),
                              It.IsAny<RenderingMode?>()))
         .Throws<InvalidOperationException>();
@@ -351,7 +351,7 @@ Please include the information below with your bug report
       var options = new CommandLineOptions();
 
       _renderer
-        .Setup(x => x.Render(It.IsAny<IRenderingOptions>(),
+        .Setup(x => x.Render(It.IsAny<IRenderingSettings>(),
                              It.IsAny<IBatchRenderingOptions>(),
                              It.IsAny<RenderingMode?>()))
         .Throws(new InvalidBatchRenderingOptionsException(_autofixture.Create<string>(),
@@ -380,7 +380,7 @@ standard input).  Use 'ZptBuilder.exe --help', or consult the manual.
       var options = new CommandLineOptions();
 
       _renderer
-        .Setup(x => x.Render(It.IsAny<IRenderingOptions>(),
+        .Setup(x => x.Render(It.IsAny<IRenderingSettings>(),
                              It.IsAny<IBatchRenderingOptions>(),
                              It.IsAny<RenderingMode?>()))
         .Throws(new InvalidBatchRenderingOptionsException(_autofixture.Create<string>(),

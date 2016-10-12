@@ -26,7 +26,7 @@ namespace CSF.Zpt.Cli
 
     #region methods
 
-    public IRenderingOptions GetOptions(CommandLineOptions options)
+    public IRenderingSettings GetOptions(CommandLineOptions options)
     {
       var contextVisitors = _contextVisitorFactory.CreateMany(options.ContextVisitorClassNames);
       var contextFactory = _contextFactoryFactory.Create(options.RenderingContextFactoryClassName);
@@ -34,7 +34,7 @@ namespace CSF.Zpt.Cli
 
       AddKeywordOptions(options, contextFactory);
 
-      return new RenderingOptions(contextVisitors,
+      return new RenderingSettings(contextVisitors,
                                   contextFactory,
                                   addSourceFileAnnotation: options.EnableSourceAnnotation,
                                   outputEncoding: encoding,

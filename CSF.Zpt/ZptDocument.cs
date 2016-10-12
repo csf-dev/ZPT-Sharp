@@ -30,7 +30,7 @@ namespace CSF.Zpt
     /// </summary>
     /// <param name="options">The rendering options to use.  If <c>null</c> then default options are used.</param>
     /// <param name="contextConfigurator">An optional action to perform upon the root <see cref="IModelValueContainer"/>, to configure it.</param>
-    public virtual string Render(IRenderingOptions options = null,
+    public virtual string Render(IRenderingSettings options = null,
                                  Action<IModelValueContainer> contextConfigurator = null)
     {
       return Render((object) null, options, contextConfigurator);
@@ -43,7 +43,7 @@ namespace CSF.Zpt
     /// <param name="options">The rendering options to use.  If <c>null</c> then default options are used.</param>
     /// <param name="contextConfigurator">An optional action to perform upon the root <see cref="IModelValueContainer"/>, to configure it.</param>
     public virtual void Render(TextWriter writer,
-                               IRenderingOptions options = null,
+                               IRenderingSettings options = null,
                                Action<IModelValueContainer> contextConfigurator = null)
     {
       Render(null, writer, options, contextConfigurator);
@@ -56,7 +56,7 @@ namespace CSF.Zpt
     /// <param name="options">The rendering options to use.  If <c>null</c> then default options are used.</param>
     /// <param name="contextConfigurator">An optional action to perform upon the root <see cref="IModelValueContainer"/>, to configure it.</param>
     public virtual string Render(object model,
-                                 IRenderingOptions options = null,
+                                 IRenderingSettings options = null,
                                  Action<IModelValueContainer> contextConfigurator = null)
     {
       string output;
@@ -98,7 +98,7 @@ namespace CSF.Zpt
     /// <param name="contextConfigurator">An optional action to perform upon the root <see cref="IModelValueContainer"/>, to configure it.</param>
     public virtual void Render(object model,
                                TextWriter writer,
-                               IRenderingOptions options = null,
+                               IRenderingSettings options = null,
                                Action<IModelValueContainer> contextConfigurator = null)
     {
       if(writer == null)
@@ -131,7 +131,7 @@ namespace CSF.Zpt
     /// <param name="options">The rendering options to use.  If <c>null</c> then default options are used.</param>
     /// <param name="contextConfigurator">An optional action to perform upon the root <see cref="IModelValueContainer"/>, to configure it.</param>
     protected virtual IZptElement RenderElement(object model,
-                                               IRenderingOptions options,
+                                               IRenderingSettings options,
                                                Action<IModelValueContainer> contextConfigurator)
     {
       if(options == null)
@@ -188,7 +188,7 @@ namespace CSF.Zpt
     /// </summary>
     /// <returns>The final non-null options.</returns>
     /// <param name="options">Options.</param>
-    protected virtual IRenderingOptions GetOptions(IRenderingOptions options)
+    protected virtual IRenderingSettings GetOptions(IRenderingSettings options)
     {
       return options?? GetDefaultOptions();
     }
@@ -201,7 +201,7 @@ namespace CSF.Zpt
     /// <param name="options">The rendering options to use.  If <c>null</c> then default options are used.</param>
     protected abstract void Render(TextWriter writer,
                                    IZptElement element,
-                                   IRenderingOptions options);
+                                   IRenderingSettings options);
 
     /// <summary>
     /// Creates a rendering model from the current instance.
@@ -210,10 +210,10 @@ namespace CSF.Zpt
     protected abstract IZptElement GetRootElement();
 
     /// <summary>
-    /// Gets an instance of <see cref="IRenderingOptions"/> which represents the default options.
+    /// Gets an instance of <see cref="IRenderingSettings"/> which represents the default options.
     /// </summary>
     /// <returns>The default options.</returns>
-    protected abstract IRenderingOptions GetDefaultOptions();
+    protected abstract IRenderingSettings GetDefaultOptions();
 
     /// <summary>
     /// Converts the given <see cref="IZptElement"/> to an implementation-specific subclass, or raises an exception

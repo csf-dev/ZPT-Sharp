@@ -18,7 +18,7 @@ namespace CSF.Zpt.BatchRendering
     /// <returns>
     /// An object instance indicating the outcome of the rendering.
     /// </returns>
-    IBatchRenderingResponse Render(IRenderingOptions options,
+    IBatchRenderingResponse Render(IRenderingSettings options,
                                    IBatchRenderingOptions batchOptions,
                                    RenderingMode? mode = null);
   }

@@ -90,7 +90,7 @@ namespace Test.CSF.Zpt.Integration
       base.PerformExtraSetup();
     }
 
-    protected override string Render(IZptDocument document, IRenderingOptions options)
+    protected override string Render(IZptDocument document, IRenderingSettings options)
     {
       return document.Render(_model, options);
     }

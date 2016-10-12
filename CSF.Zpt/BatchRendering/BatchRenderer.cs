@@ -27,7 +27,7 @@ namespace CSF.Zpt.BatchRendering
     /// <param name="options">Rendering options.</param>
     /// <param name="batchOptions">Batch rendering options, indicating the source and destination files.</param>
     /// <param name="mode">An optional override for the rendering mode.</param>
-    public virtual IBatchRenderingResponse Render(IRenderingOptions options,
+    public virtual IBatchRenderingResponse Render(IRenderingSettings options,
                                                   IBatchRenderingOptions batchOptions,
                                                   RenderingMode? mode)
     {
@@ -60,7 +60,7 @@ namespace CSF.Zpt.BatchRendering
     /// <param name="batchOptions">Batch rendering options.</param>
     /// <param name="contextConfigurator">Context configurator.</param>
     protected virtual IBatchRenderingDocumentResponse Render(IRenderingJob job,
-                                                             IRenderingOptions options,
+                                                             IRenderingSettings options,
                                                              IBatchRenderingOptions batchOptions,
                                                              Action<IModelValueContainer> contextConfigurator)
     {
@@ -83,7 +83,7 @@ namespace CSF.Zpt.BatchRendering
     /// <param name="outputInfo">Output info.</param>
     protected virtual IBatchRenderingDocumentResponse Render(IZptDocument doc,
                                                              Stream outputStream,
-                                                             IRenderingOptions options,
+                                                             IRenderingSettings options,
                                                              Action<IModelValueContainer> contextConfigurator,
                                                              string outputInfo)
     {

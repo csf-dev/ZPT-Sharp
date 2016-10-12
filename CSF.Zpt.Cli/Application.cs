@@ -75,7 +75,7 @@ namespace CSF.Zpt.Cli
       WriteResponseInfo(response, options);
     }
 
-    private IBatchRenderingResponse Render(IRenderingOptions options,
+    private IBatchRenderingResponse Render(IRenderingSettings options,
                                            IBatchRenderingOptions batchOptions,
                                            RenderingMode? renderingMode)
     {
@@ -136,9 +136,9 @@ namespace CSF.Zpt.Cli
       return SafeGetValue<IBatchRenderingOptions>(() => _batchOptionsFactory.GetBatchOptions(options));
     }
 
-    private IRenderingOptions GetRenderingOptions(CommandLineOptions options)
+    private IRenderingSettings GetRenderingOptions(CommandLineOptions options)
     {
-      return SafeGetValue<IRenderingOptions>(() => _renderingOptionsFactory.GetOptions(options));
+      return SafeGetValue<IRenderingSettings>(() => _renderingOptionsFactory.GetOptions(options));
     }
 
     private RenderingMode? GetRenderingMode(CommandLineOptions options)

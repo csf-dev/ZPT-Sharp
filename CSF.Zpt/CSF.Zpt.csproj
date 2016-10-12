@@ -92,9 +92,7 @@
     </Compile>
     <Compile Include="Rendering\SourceFileInfo.cs" />
     <Compile Include="Rendering\AbstractSourceInfo.cs" />
-    <Compile Include="Rendering\RenderingOptions.cs" />
     <Compile Include="Rendering\EmptyModel.cs" />
-    <Compile Include="Rendering\DefaultRenderingOptions.cs" />
     <Compile Include="XmlUrlResolverFactory.cs" />
     <Compile Include="Rendering\ZptAttribute.cs" />
     <Compile Include="Rendering\ZptElement.cs" />
@@ -117,6 +115,8 @@
     <Compile Include="Tales\ExpressionEvaluatorCache.cs" />
     <Compile Include="Tales\ExpressionEvaluatorService.cs" />
     <Compile Include="EmptyPluginConfiguration.cs" />
+    <Compile Include="Rendering\RenderingSettings.cs" />
+    <Compile Include="Rendering\DefaultRenderingSettings.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

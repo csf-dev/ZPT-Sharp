@@ -135,9 +135,9 @@ namespace Test.CSF.Zpt.Integration
       return output;
     }
 
-    protected override IRenderingOptions GetRenderingOptions(IRenderingContextFactory contextFactory)
+    protected override IRenderingSettings GetRenderingOptions(IRenderingContextFactory contextFactory)
     {
-      return new RenderingOptions(contextFactory: contextFactory,
+      return new RenderingSettings(contextFactory: contextFactory,
                                   addSourceFileAnnotation: true);
     }
 

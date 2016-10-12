@@ -26,7 +26,7 @@ namespace CSF.Zpt.TestUtils.Autofixture
       fixture.Customize<IRenderingContext>(x => x.FromFactory(GetContextFactory<IRenderingContext>()));
     }
 
-    private Func<DummyModel,DummyModel,ZptElement,IRenderingOptions,TContext> GetContextFactory<TContext>()
+    private Func<DummyModel,DummyModel,ZptElement,IRenderingSettings,TContext> GetContextFactory<TContext>()
       where TContext : IRenderingContext
     {
       return CreateContext<TContext>;
@@ -35,7 +35,7 @@ namespace CSF.Zpt.TestUtils.Autofixture
     private TContext CreateContext<TContext>(DummyModel metal,
                                              DummyModel tal,
                                              ZptElement element,
-                                             IRenderingOptions opts)
+                                             IRenderingSettings opts)
       where TContext : IRenderingContext
     {
       return (TContext) new Mock<RenderingContext>(metal, tal, element, opts, (string) null) {

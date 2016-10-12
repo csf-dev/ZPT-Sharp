@@ -5,7 +5,7 @@ namespace CSF.Zpt.Cli
 {
   public interface IRenderingOptionsFactory
   {
-    IRenderingOptions GetOptions(CommandLineOptions options);
+    IRenderingSettings GetOptions(CommandLineOptions options);
   }
 }
 

@@ -7,7 +7,7 @@ namespace CSF.Zpt.Rendering
   /// <summary>
   /// Encapsulates the available options for rendering a <see cref="IZptDocument"/>.
   /// </summary>
-  public interface IRenderingOptions
+  public interface IRenderingSettings
   {
     #region properties
 
