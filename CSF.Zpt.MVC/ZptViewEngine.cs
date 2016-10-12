@@ -4,6 +4,7 @@ using CSF.Zpt.Rendering;
 using CSF.Zpt.MVC.Rendering;
 using System.Text;
 using CSF.Configuration;
+using CSF.Zpt.Tales;
 
 namespace CSF.Zpt.MVC
 {
@@ -98,6 +99,12 @@ namespace CSF.Zpt.MVC
       set;
     }
 
+    public ITemplateFileFactory TemplateFactory
+    {
+      get;
+      set;
+    }
+
     public RenderingMode? RenderingMode
     {
       get {
@@ -153,7 +160,7 @@ namespace CSF.Zpt.MVC
 
     private void InitialiseDefaultOptions()
     {
-      var defaultOptions = new RenderingSettings();
+      var defaultOptions = RenderingSettings.Default;
       ContextFactory = new MvcRenderingContextFactory();
       AddSourceFileAnnotation = defaultOptions.AddSourceFileAnnotation;
       ContextVisitors = defaultOptions.ContextVisitors;
@@ -168,7 +175,7 @@ namespace CSF.Zpt.MVC
                                       IRenderingContextFactoryFactory contextFactoryFactory,
                                       IContextVisitorFactory contextVisitorFactory)
     {
-      var defaultOptions = new RenderingSettings();
+      var defaultOptions = RenderingSettings.Default;
 
       if(config.ContextFactoryTypeName != null)
       {
@@ -216,7 +223,8 @@ namespace CSF.Zpt.MVC
                                          ContextFactory,
                                          AddSourceFileAnnotation,
                                          OutputEncoding,
-                                         OmitXmlDeclaration);
+                                         OmitXmlDeclaration,
+                                   TemplateFactory);
     }
 
     #endregion
@@ -242,6 +250,8 @@ namespace CSF.Zpt.MVC
       {
         InitialiseDefaultOptions();
       }
+
+      TemplateFactory = new ZptDocumentFactory();
     }
 
     #endregion

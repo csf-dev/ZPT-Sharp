@@ -95,6 +95,8 @@
     <Compile Include="IZptDocumentProviderService.cs" />
     <Compile Include="Tales\IExpressionEvaluatorService.cs" />
     <Compile Include="Rendering\IRenderingSettings.cs" />
+    <Compile Include="Rendering\IRenderingOptions.cs" />
+    <Compile Include="Rendering\IRenderingSettingsFactory.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup />
