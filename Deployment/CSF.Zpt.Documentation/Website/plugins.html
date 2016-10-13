@@ -1,0 +1,109 @@
+﻿<!doctype html>
+<html tal:define="activePage string:plugins">
+<head metal:use-macro="documents/Shared/general-page.html/macros/common_document_head">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="utf-8">
+<title metal:fill-slot="document_title">Plugin architecture</title>
+<base href="." />
+<style type="text/css">
+@import url(css/styles.css);
+@import url(css/dummy.css);
+</style>
+<script type="text/javascript" src="js/modernizr.min.js"></script>
+<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.4.0/styles/default.min.css">
+<script src="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.4.0/highlight.min.js"></script>
+<script>
+hljs.initHighlightingOnLoad();
+</script>
+</head>
+<body metal:use-macro="documents/Shared/general-page.html/macros/common_document_body" class="page_plugins">
+<div class="content_wrapper">
+  <header class="page_header dummy">
+    Dummy content
+  </header>
+  <div class="main_page_area">
+    <nav>
+      <h2>Navigation menu</h2>
+      <ul class="active_introduction dummy">
+        <li class="introduction"><a href=".">Introduction</a></li>
+        <li class="other_page"><a href="dummy.html">Dummy page</a></li>
+      </ul>
+    </nav>
+    <section class="main_page_content" metal:fill-slot="main_page_content">
+        <header>
+            <h1>ZPT-Sharp plugin architecture</h1>
+        </header>
+        <h2>Overview</h2>
+        <p>
+            ZPT-Sharp has two extension points which are driven by a plugin architecture. These are:
+        </p>
+        <ul>
+            <li>
+                <strong>Document providers</strong> which facilitate the rendering of specific underlying document
+                implementations, such as XML, HTML or others.
+            </li>
+            <li>
+                <strong>TALES expression evaluators</strong> which provide logic for evaluating the differing types
+                of TALES expressions.
+            </li>
+        </ul>
+        <p>
+            These plugins are provided in separate libraries to the core ZPT logic. This facilitates the development
+            of extra plugins without requiring changes to the core logic. Additionally, when deploying a ZPT-Sharp
+            based application, you need only distribute the plugins which are required &amp; relevant.
+        </p>
+        <h2>Installing plugins</h2>
+        <p>
+            ZPT-Sharp is not very useful at all if no plugins are installed. It will be unable to render any documents
+            without at least one document provider, and it will be unable to understand any TALES expressions without
+            at least one expression evaluator.
+        </p>
+        <p>
+            To install and activate plugins you must:
+        </p>
+        <ul>
+            <li>
+                Copy the desired plugin libraries into an appropriate location.
+                <em>It is recommended that you use either the same directory or a subdirectory of the path in
+                which <code>CSF.Zpt.dll</code> is installed.</em>
+            </li>
+            <li>
+                Add content to the appropriate <a href="configuration.html">configuration file</a>:
+                <ul>
+                    <li>Indicate the paths to the plugin assemblies which are to be loaded</li>
+                    <li>Indicate the type names of the default HTML and XML document providers</li>
+                    <li>Indicate the type name of the default TALES expression evaluator</li>
+                </ul>
+            </li>
+        </ul>
+        <h2>The default document providers</h2>
+        <p>
+            Up to two document provider plugins may be nominated as the default providers for HTML and XML documents.
+            The need for default document providers is particularly important when using the
+            <a href="command-line-renderer.html">CLI page renderer application</a> or when using
+            <a href="asp-net-mvc-view-engine.html">the MVC view engine</a>.
+        </p>
+        <p>
+            
+            When <a href="page-rendering-api.html">using ZPT-Sharp as an API</a>,
+            whilst you may use the default providers, you may choose to bypass them by specifying a
+            <code>System.Type</code> of document provider explicitly in your code.
+        </p>
+        <h2>The default expression evaluator</h2>
+        <p>
+            One expression evaluator plugin should be nominated as the default evaluator. This evaluator is then used
+            for all TALES expressions which are not qualified with an expression prefix.  This is important in all
+            use-cases, unless you wish to prefix every expression in your ZPT documents.
+        </p>
+        <p>
+            In order to comply with the TALES specification, the evaluator
+            <code>CSF.Zpt.ExpressionEvaluators.PathExpressionEvaluator</code> should be set as the default.
+        </p>
+    </section>
+  </div>
+</div>
+<footer class="page_footer dummy">
+  Dummy content
+</footer>
+</body>
+</html>
