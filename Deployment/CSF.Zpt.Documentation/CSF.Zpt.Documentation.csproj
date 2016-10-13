@@ -103,7 +103,6 @@
     <None Include="Website\css\reset.css" />
     <None Include="Website\css\styles.css" />
     <None Include="Website\css\tal_content_or_replace.css" />
-    <None Include="Website\js\modernizr.min.js" />
     <None Include="Website\metal\define-fill-slot.html" />
     <None Include="Website\metal\define-use-macro.html" />
     <None Include="Website\metal\extend-macro.html" />
@@ -128,6 +127,14 @@
     <None Include="Website style guide.txt" />
     <None Include="Website\Shared\cli-docs.html" />
     <None Include="Website\css\download.css" />
+    <None Include="Website\js\lib\modernizr.min.js" />
+    <None Include="Website\js\lib\require.min.js" />
+    <None Include="Website\js\config\main.js" />
+    <None Include="Website\js\app.js" />
+    <None Include="Website\js\highlightCodeBlocks.js" />
+    <None Include="Website\js\navigationMenu.js" />
+    <None Include="Website\logging.html" />
+    <None Include="Website\plugins.html" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\CSF.Zpt.Cli\CSF.Zpt.Cli.csproj">
