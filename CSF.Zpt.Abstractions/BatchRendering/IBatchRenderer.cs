@@ -14,13 +14,22 @@ namespace CSF.Zpt.BatchRendering
     /// </summary>
     /// <param name="options">Rendering options.</param>
     /// <param name="batchOptions">Batch rendering options, indicating the source and destination files.</param>
-    /// <param name="mode">An optional override for the rendering mode.</param>
     /// <returns>
     /// An object instance indicating the outcome of the rendering.
     /// </returns>
     IBatchRenderingResponse Render(IRenderingSettings options,
-                                   IBatchRenderingOptions batchOptions,
-                                   RenderingMode? mode = null);
+                                   IBatchRenderingOptions batchOptions);
+    
+    /// <summary>
+    /// Parse and render the documents found using the given batch rendering options.
+    /// </summary>
+    /// <param name="options">Rendering options.</param>
+    /// <param name="batchOptions">Batch rendering options, indicating the source and destination files.</param>
+    /// <returns>
+    /// An object instance indicating the outcome of the rendering.
+    /// </returns>
+    IBatchRenderingResponse Render(IRenderingOptions options,
+                                   IBatchRenderingOptions batchOptions);
   }
 }
 

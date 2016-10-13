@@ -63,7 +63,6 @@ namespace CSF.Zpt.Cli
 
       var batchOptions = GetBatchOptions(options);
       var renderingOptions = GetRenderingOptions(options);
-      var renderingMode = GetRenderingMode(options);
 
       if(batchOptions == null
          || renderingOptions == null)
@@ -71,19 +70,18 @@ namespace CSF.Zpt.Cli
         return;
       }
 
-      var response = Render(renderingOptions, batchOptions, renderingMode);
+      var response = Render(renderingOptions, batchOptions);
       WriteResponseInfo(response, options);
     }
 
-    private IBatchRenderingResponse Render(IRenderingSettings options,
-                                           IBatchRenderingOptions batchOptions,
-                                           RenderingMode? renderingMode)
+    private IBatchRenderingResponse Render(IRenderingOptions options,
+                                           IBatchRenderingOptions batchOptions)
     {
       IBatchRenderingResponse output = null;
 
       try
       {
-        output = _renderer.Render(options, batchOptions, renderingMode);
+        output = _renderer.Render(options, batchOptions);
       }
       catch(InvalidBatchRenderingOptionsException ex)
       {
@@ -136,14 +134,9 @@ namespace CSF.Zpt.Cli
       return SafeGetValue<IBatchRenderingOptions>(() => _batchOptionsFactory.GetBatchOptions(options));
     }
 
-    private IRenderingSettings GetRenderingOptions(CommandLineOptions options)
+    private IRenderingOptions GetRenderingOptions(CommandLineOptions options)
     {
-      return SafeGetValue<IRenderingSettings>(() => _renderingOptionsFactory.GetOptions(options));
-    }
-
-    private RenderingMode? GetRenderingMode(CommandLineOptions options)
-    {
-      return SafeGetValue<RenderingMode?>(() => options.GetRenderingMode());
+      return SafeGetValue<IRenderingOptions>(() => _renderingOptionsFactory.GetOptions(options));
     }
 
     private TOutput SafeGetValue<TOutput>(Func<TOutput> getter)

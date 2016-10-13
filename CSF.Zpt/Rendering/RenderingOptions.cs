@@ -1,4 +1,6 @@
 ﻿using System;
+using CSF.Zpt.Tales;
+using System.Collections.Generic;
 
 namespace CSF.Zpt.Rendering
 {
@@ -7,6 +9,12 @@ namespace CSF.Zpt.Rendering
   /// </summary>
   public class RenderingOptions : IRenderingOptions
   {
+    #region fields
+
+    private Dictionary<string,string> _keywordOptions;
+
+    #endregion
+
     #region properties
 
     /// <summary>
@@ -45,6 +53,29 @@ namespace CSF.Zpt.Rendering
     /// </summary>
     /// <value>The type of the document factory.</value>
     public string DocumentFactoryType { get; set; }
+
+    /// <summary>
+    /// Gets the keyword options.
+    /// </summary>
+    /// <value>The keyword options.</value>
+    public IDictionary<string,string> KeywordOptions
+    { 
+      get {
+        return _keywordOptions;
+      }
+    }
+
+    #endregion
+
+    #region constructor
+
+    /// <summary>
+    /// Initializes a new instance of the <see cref="CSF.Zpt.Rendering.RenderingOptions"/> class.
+    /// </summary>
+    public RenderingOptions()
+    {
+      _keywordOptions = new Dictionary<string, string>();
+    }
 
     #endregion
   }

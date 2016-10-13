@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using CSF.Zpt.Tales;
 
 namespace CSF.Zpt.Rendering
 {
@@ -45,6 +47,12 @@ namespace CSF.Zpt.Rendering
     /// </summary>
     /// <value>The type of the document factory.</value>
     string DocumentFactoryType { get; }
+
+    /// <summary>
+    /// Gets the keyword options.
+    /// </summary>
+    /// <value>The keyword options.</value>
+    IDictionary<string,string> KeywordOptions { get; }
 
     #endregion
   }

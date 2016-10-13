@@ -35,6 +35,12 @@ namespace CSF.Zpt.BatchRendering
     /// <value>The input search pattern.</value>
     string InputSearchPattern { get; }
 
+    /// <summary>
+    /// Gets an optional value acting as an override for auto-detection of the rendering mode.
+    /// </summary>
+    /// <value>The rendering mode.</value>
+    RenderingMode? RenderingMode { get; }
+
     #endregion
 
     #region output options

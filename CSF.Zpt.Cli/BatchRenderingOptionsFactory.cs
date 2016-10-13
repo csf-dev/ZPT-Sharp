@@ -39,7 +39,8 @@ namespace CSF.Zpt.Cli
                                        outputPath: outputPath,
                                        inputSearchPattern: options.InputFilenamePattern,
                                        outputExtensionOverride: options.OutputFilenameExtension,
-                                       ignoredPaths: ignoredPaths);
+                                       ignoredPaths: ignoredPaths,
+                                       renderingMode: options.GetRenderingMode());
     }
 
     private FileSystemInfo GetInputFile(string path)

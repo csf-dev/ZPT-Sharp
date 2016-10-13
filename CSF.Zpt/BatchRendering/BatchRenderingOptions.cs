@@ -42,6 +42,12 @@ namespace CSF.Zpt.BatchRendering
     /// <value>The input search pattern.</value>
     public string InputSearchPattern { get; private set; }
 
+    /// <summary>
+    /// Gets an optional value acting as an override for auto-detection of the rendering mode.
+    /// </summary>
+    /// <value>The rendering mode.</value>
+    public RenderingMode? RenderingMode { get; private set; }
+
     #endregion
 
     #region output options
@@ -78,18 +84,26 @@ namespace CSF.Zpt.BatchRendering
     /// <param name="inputSearchPattern">Input search pattern.</param>
     /// <param name="outputExtensionOverride">Output extension override.</param>
     /// <param name="ignoredPaths">Ignored paths.</param>
+    /// <param name="renderingMode">The rendering mode override.</param>
     public BatchRenderingOptions (Stream inputStream = null,
                                   Stream outputStream = null,
                                   IEnumerable<FileSystemInfo> inputPaths = null,
                                   FileSystemInfo outputPath = null,
                                   string inputSearchPattern = null,
                                   string outputExtensionOverride = null,
-                                  IEnumerable<DirectoryInfo> ignoredPaths = null)
+                                  IEnumerable<DirectoryInfo> ignoredPaths = null,
+                                  RenderingMode? renderingMode = null)
     {
+      if(renderingMode.HasValue)
+      {
+        renderingMode.Value.RequireDefinedValue(nameof(renderingMode));
+      }
+
       this.InputStream = inputStream;
       this.InputPaths = inputPaths?? new FileSystemInfo[0];
       this.IgnoredPaths = ignoredPaths;
       this.InputSearchPattern = inputSearchPattern?? DEFAULT_SEARCH_PATTERN;
+      this.RenderingMode = renderingMode;
 
       this.OutputStream = outputStream;
       this.OutputPath = outputPath;

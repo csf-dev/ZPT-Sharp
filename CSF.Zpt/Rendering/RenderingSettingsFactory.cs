@@ -21,12 +21,12 @@ namespace CSF.Zpt.Rendering
     /// <summary>
     /// Gets the default value for <see cref="IRenderingSettings.AddSourceFileAnnotation"/>.
     /// </summary>
-    protected static readonly bool DefaultAddAnnotation = false;
+    private const bool DefaultAddAnnotation = false;
 
     /// <summary>
     /// Gets the default value for <see cref="IRenderingSettings.OmitXmlDeclaration"/>.
     /// </summary>
-    protected static readonly bool DefaultOmitXmlDeclaration = false;
+    private const bool DefaultOmitXmlDeclaration = false;
 
     private const char TYPE_NAMES_SEPARATOR = ';';
 
@@ -92,6 +92,31 @@ namespace CSF.Zpt.Rendering
                                    encoding,
                                    options.OmitXmlDeclaration,
                                    templateFactory);
+    }
+
+    /// <summary>
+    /// Creates rendering settings from specified values, using defaults where values are blank.
+    /// </summary>
+    /// <returns>The settings.</returns>
+    /// <param name="contextVisitors">Context visitors.</param>
+    /// <param name="contextFactory">Context factory.</param>
+    /// <param name="addSourceAnnotation">If set to <c>true</c> add source annotation.</param>
+    /// <param name="encoding">Encoding.</param>
+    /// <param name="omitXmlDeclaration">If set to <c>true</c> omit xml declaration.</param>
+    /// <param name="templateFactory">Template factory.</param>
+    public IRenderingSettings CreateSettings(IContextVisitor[] contextVisitors = null,
+                                             IRenderingContextFactory contextFactory = null,
+                                             bool addSourceAnnotation = DefaultAddAnnotation,
+                                             System.Text.Encoding encoding = null,
+                                             bool omitXmlDeclaration = DefaultOmitXmlDeclaration,
+                                             ITemplateFileFactory templateFactory = null)
+    {
+      return new RenderingSettings(contextVisitors?? GetContextVisitors(),
+                                   contextFactory?? GetContextFactory(),
+                                   addSourceAnnotation,
+                                   encoding?? GetEncoding(),
+                                   omitXmlDeclaration,
+                                   templateFactory?? GetTemplateFactory());
     }
 
     /// <summary>

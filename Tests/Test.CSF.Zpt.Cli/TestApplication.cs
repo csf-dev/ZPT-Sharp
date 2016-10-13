@@ -46,8 +46,7 @@ namespace Test.CSF.Zpt.Cli
       _renderer = new Mock<IBatchRenderer>();
       _renderer
         .Setup(x => x.Render(It.IsAny<IRenderingSettings>(),
-                             It.IsAny<IBatchRenderingOptions>(),
-                             It.IsAny<RenderingMode?>()))
+                             It.IsAny<IBatchRenderingOptions>()))
         .Returns(Mock.Of<IBatchRenderingResponse>());
     }
 
@@ -321,8 +320,7 @@ Please include the information below with your bug report
 
       _renderer
         .Setup(x => x.Render(It.IsAny<IRenderingSettings>(),
-                             It.IsAny<IBatchRenderingOptions>(),
-                             It.IsAny<RenderingMode?>()))
+                             It.IsAny<IBatchRenderingOptions>()))
         .Throws<InvalidOperationException>();
 
       // Act
@@ -352,8 +350,7 @@ Please include the information below with your bug report
 
       _renderer
         .Setup(x => x.Render(It.IsAny<IRenderingSettings>(),
-                             It.IsAny<IBatchRenderingOptions>(),
-                             It.IsAny<RenderingMode?>()))
+                             It.IsAny<IBatchRenderingOptions>()))
         .Throws(new InvalidBatchRenderingOptionsException(_autofixture.Create<string>(),
                                                           BatchRenderingFatalErrorType.NoInputsSpecified));
 
@@ -381,8 +378,7 @@ standard input).  Use 'ZptBuilder.exe --help', or consult the manual.
 
       _renderer
         .Setup(x => x.Render(It.IsAny<IRenderingSettings>(),
-                             It.IsAny<IBatchRenderingOptions>(),
-                             It.IsAny<RenderingMode?>()))
+                             It.IsAny<IBatchRenderingOptions>()))
         .Throws(new InvalidBatchRenderingOptionsException(_autofixture.Create<string>(),
                                                           BatchRenderingFatalErrorType.InputCannotBeBothStreamAndPaths));
 
