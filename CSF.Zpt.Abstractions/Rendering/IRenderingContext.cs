@@ -29,7 +29,7 @@
         /// Gets the rendering options.
         /// </summary>
         /// <value>The rendering options.</value>
-        IRenderingOptions RenderingOptions { get; }
+        IRenderingSettings RenderingOptions { get; }
 
         /// <summary>
         /// Gets the 'virtual' root path for the purpose of source annotation comments.

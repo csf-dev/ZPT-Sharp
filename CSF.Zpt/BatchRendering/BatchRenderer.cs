@@ -16,6 +16,7 @@ namespace CSF.Zpt.BatchRendering
     #region fields
 
     private readonly IRenderingJobFactory _jobFactory;
+    private readonly IRenderingSettingsFactory _settingsFactory;
 
     #endregion
 
@@ -26,14 +27,12 @@ namespace CSF.Zpt.BatchRendering
     /// </summary>
     /// <param name="options">Rendering options.</param>
     /// <param name="batchOptions">Batch rendering options, indicating the source and destination files.</param>
-    /// <param name="mode">An optional override for the rendering mode.</param>
-    public virtual IBatchRenderingResponse Render(IRenderingOptions options,
-                                                  IBatchRenderingOptions batchOptions,
-                                                  RenderingMode? mode)
+    public virtual IBatchRenderingResponse Render(IRenderingSettings options,
+                                                  IBatchRenderingOptions batchOptions)
     {
       ValidateBatchOptions(batchOptions);
 
-      var jobs = GetRenderingJobs(batchOptions, mode);
+      var jobs = GetRenderingJobs(batchOptions, batchOptions.RenderingMode);
 
       List<IBatchRenderingDocumentResponse> documents = new List<IBatchRenderingDocumentResponse>();
 
@@ -48,6 +47,20 @@ namespace CSF.Zpt.BatchRendering
       return new BatchRenderingResponse(documents);
     }
 
+    /// <summary>
+    /// Parse and render the documents found using the given batch rendering options.
+    /// </summary>
+    /// <param name="options">Rendering options.</param>
+    /// <param name="batchOptions">Batch rendering options, indicating the source and destination files.</param>
+    /// <returns>
+    /// An object instance indicating the outcome of the rendering.
+    /// </returns>
+    public virtual IBatchRenderingResponse Render(IRenderingOptions options,
+                                                  IBatchRenderingOptions batchOptions)
+    {
+      return this.Render(_settingsFactory.CreateSettings(options), batchOptions);
+    }
+
     #endregion
 
     #region protected methods
@@ -60,7 +73,7 @@ namespace CSF.Zpt.BatchRendering
     /// <param name="batchOptions">Batch rendering options.</param>
     /// <param name="contextConfigurator">Context configurator.</param>
     protected virtual IBatchRenderingDocumentResponse Render(IRenderingJob job,
-                                                             IRenderingOptions options,
+                                                             IRenderingSettings options,
                                                              IBatchRenderingOptions batchOptions,
                                                              Action<IModelValueContainer> contextConfigurator)
     {
@@ -83,7 +96,7 @@ namespace CSF.Zpt.BatchRendering
     /// <param name="outputInfo">Output info.</param>
     protected virtual IBatchRenderingDocumentResponse Render(IZptDocument doc,
                                                              Stream outputStream,
-                                                             IRenderingOptions options,
+                                                             IRenderingSettings options,
                                                              Action<IModelValueContainer> contextConfigurator,
                                                              string outputInfo)
     {
@@ -193,9 +206,12 @@ namespace CSF.Zpt.BatchRendering
     /// Initializes a new instance of the <see cref="CSF.Zpt.BatchRendering.BatchRenderer"/> class.
     /// </summary>
     /// <param name="renderingJobFactory">Rendering job factory.</param>
-    public BatchRenderer(IRenderingJobFactory renderingJobFactory = null)
+    /// <param name="settingsFactory">Rendering settings factory.</param>
+    public BatchRenderer(IRenderingJobFactory renderingJobFactory = null,
+                         IRenderingSettingsFactory settingsFactory = null)
     {
       _jobFactory = renderingJobFactory?? new RenderingJobFactory();
+      _settingsFactory = settingsFactory?? new RenderingSettingsFactory();
     }
 
     #endregion

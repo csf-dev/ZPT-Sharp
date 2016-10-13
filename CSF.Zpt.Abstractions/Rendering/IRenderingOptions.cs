@@ -1,39 +1,40 @@
 ﻿using System;
-using System.Text;
+using System.Collections.Generic;
 using CSF.Zpt.Tales;
 
 namespace CSF.Zpt.Rendering
 {
   /// <summary>
-  /// Encapsulates the available options for rendering a <see cref="IZptDocument"/>.
+  /// Represents options from which <see cref="IRenderingSettings"/> may be built.
   /// </summary>
   public interface IRenderingOptions
   {
     #region properties
 
     /// <summary>
-    /// Gets the factory implementation with which to create <see cref="IRenderingContext"/> instances.
+    /// Gets the assembly-qualified type name of the <see cref="IRenderingContextFactory"/> type to use.
     /// </summary>
-    /// <value>The rendering context factory.</value>
-    IRenderingContextFactory ContextFactory { get; }
+    /// <value>The type of the rendering context factory.</value>
+    string RenderingContextFactoryType { get; }
 
     /// <summary>
-    /// Gets or sets a value indicating whether source file annotations should be added to the rendered output.
+    /// Gets a value indicating whether source file annotations should be added to the rendered output.
     /// </summary>
     /// <value><c>true</c> if source file annotations are to be added; otherwise, <c>false</c>.</value>
     bool AddSourceFileAnnotation { get; }
 
     /// <summary>
-    /// Gets the context visitors to be used when processing ZPT documents.
+    /// Gets an ordered, semicolon-separated, list of assembly-qualified type names for
+    /// <see cref="IContextVisitor"/> types to use.
     /// </summary>
-    /// <value>The context visitors.</value>
-    IContextVisitor[] ContextVisitors { get; }
+    /// <value>The context visitor types.</value>
+    string ContextVisitorTypes { get; }
 
     /// <summary>
-    /// Gets the encoding (eg: Unicode) for the rendered output.
+    /// Gets the name of the encoding (eg: UTF-8) for the rendered output.
     /// </summary>
     /// <value>The output encoding.</value>
-    Encoding OutputEncoding { get; }
+    string OutputEncodingName { get; }
 
     /// <summary>
     /// Gets a value indicating whether the XML declaration should be omitted (where applicable).
@@ -41,30 +42,17 @@ namespace CSF.Zpt.Rendering
     /// <value><c>true</c> if the XML declaration is to be omitted; otherwise, <c>false</c>.</value>
     bool OmitXmlDeclaration { get; }
 
-    #endregion
-
-    #region methods
+    /// <summary>
+    /// Gets the assembly-qualified name of the <see cref="ITemplateFileFactory"/> to use when creating documents.
+    /// </summary>
+    /// <value>The type of the document factory.</value>
+    string DocumentFactoryType { get; }
 
     /// <summary>
-    /// Creates a new root <see cref="IRenderingContext"/> instance.
+    /// Gets the keyword options.
     /// </summary>
-    /// <param name="element">The root ZPT element</param>
-    /// <returns>The root rendering context.</returns>
-    IRenderingContext CreateRootContext(IZptElement element);
-
-    /// <summary>
-    /// Creates a new root <see cref="IRenderingContext"/> instance.
-    /// </summary>
-    /// <param name="element">The root ZPT element</param>
-    /// <param name="model">The model to render</param>
-    /// <returns>The root rendering context.</returns>
-    IRenderingContext CreateRootContext(IZptElement element, object model);
-
-    /// <summary>
-    /// Gets an instance of <see cref="ITemplateFileFactory"/> from the current instance.
-    /// </summary>
-    /// <returns>The template file factory</returns>
-    ITemplateFileFactory GetTemplateFileFactory();
+    /// <value>The keyword options.</value>
+    IDictionary<string,string> KeywordOptions { get; }
 
     #endregion
   }

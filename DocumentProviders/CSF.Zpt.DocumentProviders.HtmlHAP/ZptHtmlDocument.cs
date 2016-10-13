@@ -66,7 +66,7 @@ namespace CSF.Zpt.DocumentProviders
     /// <returns>The rendered HTML document.</returns>
     /// <param name="options">The rendering options to use.  If <c>null</c> then default options are used.</param>
     /// <param name="contextConfigurator">An optional action to perform upon the root <see cref="IModelValueContainer"/>, to configure it.</param>
-    public HtmlDocument RenderHtml(IRenderingOptions options = null,
+    public HtmlDocument RenderHtml(IRenderingSettings options = null,
                                    Action<IModelValueContainer> contextConfigurator = null)
     {
       return RenderHtml(null, options, contextConfigurator);
@@ -80,7 +80,7 @@ namespace CSF.Zpt.DocumentProviders
     /// <param name="options">The rendering options to use.  If <c>null</c> then default options are used.</param>
     /// <param name="contextConfigurator">An optional action to perform upon the root <see cref="IModelValueContainer"/>, to configure it.</param>
     public HtmlDocument RenderHtml(object model,
-                                   IRenderingOptions options = null,
+                                   IRenderingSettings options = null,
                                    Action<IModelValueContainer> contextConfigurator = null)
     {
       var opts = this.GetOptions(options);
@@ -131,7 +131,7 @@ namespace CSF.Zpt.DocumentProviders
     /// <param name="options">The rendering options to use.  If <c>null</c> then default options are used.</param>
     protected override void Render(TextWriter writer,
                                    IZptElement element,
-                                   IRenderingOptions options)
+                                   IRenderingSettings options)
     {
       if(writer == null)
       {
@@ -156,12 +156,12 @@ namespace CSF.Zpt.DocumentProviders
     }
 
     /// <summary>
-    /// Gets an instance of <see cref="IRenderingOptions"/> which represents the default options.
+    /// Gets an instance of <see cref="IRenderingSettings"/> which represents the default options.
     /// </summary>
     /// <returns>The default options.</returns>
-    protected override IRenderingOptions GetDefaultOptions()
+    protected override IRenderingSettings GetDefaultOptions()
     {
-      return new DefaultRenderingOptions();
+      return new DefaultRenderingSettings();
     }
 
     #endregion

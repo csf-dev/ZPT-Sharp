@@ -19,6 +19,7 @@ namespace Test.CSF.Zpt.Integration
     private ITemplateFileFactory _templateFactory;
     private IIntegrationTestConfiguration _config;
     private DirectoryInfo _sourcePath, _expectedPath;
+    private IRenderingSettingsFactory _settingsFactory;
     private log4net.ILog _logger;
 
     #endregion
@@ -57,6 +58,13 @@ namespace Test.CSF.Zpt.Integration
     {
       get {
         return _expectedPath;
+      }
+    }
+
+    protected IRenderingSettingsFactory SettingsFactory
+    {
+      get {
+        return _settingsFactory;
       }
     }
 
@@ -99,6 +107,8 @@ namespace Test.CSF.Zpt.Integration
       var fac = new ZptDocumentFactory();
       _documentFactory = fac;
       _templateFactory = fac;
+
+      _settingsFactory = new RenderingSettingsFactory();
     }
 
     protected virtual void PerformExtraFixtureSetup()
@@ -121,9 +131,9 @@ namespace Test.CSF.Zpt.Integration
       return config.GetExpectedOutputPath();
     }
 
-    protected virtual IRenderingOptions GetRenderingOptions(IRenderingContextFactory contextFactory)
+    protected virtual IRenderingSettings GetRenderingSettings(IRenderingContextFactory contextFactory)
     {
-      return new RenderingOptions(contextFactory: contextFactory);
+      return SettingsFactory.CreateSettings(contextFactory: contextFactory);
     }
 
     protected virtual IRenderingContextFactory CreateTestEnvironment(DirectoryInfo rootPath)
@@ -133,7 +143,7 @@ namespace Test.CSF.Zpt.Integration
       return output;
     }
 
-    protected virtual string Render(IZptDocument document, IRenderingOptions options)
+    protected virtual string Render(IZptDocument document, IRenderingSettings options)
     {
       return document.Render(options);
     }
@@ -170,7 +180,7 @@ namespace Test.CSF.Zpt.Integration
         try
         {
           var rootDir = sourceDocument.GetParent().GetParent();
-          var options = GetRenderingOptions(this.CreateTestEnvironment(rootDir));
+          var options = GetRenderingSettings(this.CreateTestEnvironment(rootDir));
 
           actualRendering = this.Render(document, options).Replace(Environment.NewLine, "\n");
           output = (actualRendering == expectedRendering);

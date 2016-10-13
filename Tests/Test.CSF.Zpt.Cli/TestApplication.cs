@@ -46,8 +46,7 @@ namespace Test.CSF.Zpt.Cli
       _renderer = new Mock<IBatchRenderer>();
       _renderer
         .Setup(x => x.Render(It.IsAny<IRenderingOptions>(),
-                             It.IsAny<IBatchRenderingOptions>(),
-                             It.IsAny<RenderingMode?>()))
+                             It.IsAny<IBatchRenderingOptions>()))
         .Returns(Mock.Of<IBatchRenderingResponse>());
     }
 
@@ -321,8 +320,7 @@ Please include the information below with your bug report
 
       _renderer
         .Setup(x => x.Render(It.IsAny<IRenderingOptions>(),
-                             It.IsAny<IBatchRenderingOptions>(),
-                             It.IsAny<RenderingMode?>()))
+                             It.IsAny<IBatchRenderingOptions>()))
         .Throws<InvalidOperationException>();
 
       // Act
@@ -336,7 +334,15 @@ Please include the information below with your bug report
 ---
 ";
 
-      Assert.That(errorOutput.StartsWith(expected), "Correct message written (only the start of the message)");
+      try
+      {
+        Assert.That(errorOutput.StartsWith(expected), "Correct message written (only the start of the message)");
+      }
+      catch(AssertionException)
+      {
+        _logger.Error(errorOutput);
+        throw;
+      }
       _terminator.Verify(x => x.Terminate(ApplicationTerminator.UnexpectedErrorExitCode),
                          Times.Once(),
                          "Application should be terminated after writing message");
@@ -352,8 +358,7 @@ Please include the information below with your bug report
 
       _renderer
         .Setup(x => x.Render(It.IsAny<IRenderingOptions>(),
-                             It.IsAny<IBatchRenderingOptions>(),
-                             It.IsAny<RenderingMode?>()))
+                             It.IsAny<IBatchRenderingOptions>()))
         .Throws(new InvalidBatchRenderingOptionsException(_autofixture.Create<string>(),
                                                           BatchRenderingFatalErrorType.NoInputsSpecified));
 
@@ -365,7 +370,15 @@ Please include the information below with your bug report
 standard input).  Use 'ZptBuilder.exe --help', or consult the manual.
 ";
 
-      Assert.That(errorOutput.StartsWith(expected), "Correct message written (only the start of the message)");
+      try
+      {
+        Assert.That(errorOutput.StartsWith(expected), "Correct message written (only the start of the message)");
+      }
+      catch(AssertionException)
+      {
+        _logger.Error(errorOutput);
+        throw;
+      }
       _terminator.Verify(x => x.Terminate(ApplicationTerminator.ExpectedErrorExitCode),
                          Times.Once(),
                          "Application should be terminated after writing message");
@@ -381,8 +394,7 @@ standard input).  Use 'ZptBuilder.exe --help', or consult the manual.
 
       _renderer
         .Setup(x => x.Render(It.IsAny<IRenderingOptions>(),
-                             It.IsAny<IBatchRenderingOptions>(),
-                             It.IsAny<RenderingMode?>()))
+                             It.IsAny<IBatchRenderingOptions>()))
         .Throws(new InvalidBatchRenderingOptionsException(_autofixture.Create<string>(),
                                                           BatchRenderingFatalErrorType.InputCannotBeBothStreamAndPaths));
 
@@ -394,7 +406,15 @@ standard input).  Use 'ZptBuilder.exe --help', or consult the manual.
 input),  not both.  Use 'ZptBuilder.exe --help', or consult the manual.
 ";
 
-      Assert.That(errorOutput.StartsWith(expected), "Correct message written (only the start of the message)");
+      try
+      {
+        Assert.That(errorOutput.StartsWith(expected), "Correct message written (only the start of the message)");
+      }
+      catch(AssertionException)
+      {
+        _logger.Error(errorOutput);
+        throw;
+      }
       _terminator.Verify(x => x.Terminate(ApplicationTerminator.ExpectedErrorExitCode),
                          Times.Once(),
                          "Application should be terminated after writing message");

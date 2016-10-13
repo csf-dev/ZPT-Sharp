@@ -135,10 +135,10 @@ namespace Test.CSF.Zpt.Integration
       return output;
     }
 
-    protected override IRenderingOptions GetRenderingOptions(IRenderingContextFactory contextFactory)
+    protected override IRenderingSettings GetRenderingSettings(IRenderingContextFactory contextFactory)
     {
-      return new RenderingOptions(contextFactory: contextFactory,
-                                  addSourceFileAnnotation: true);
+      return SettingsFactory.CreateSettings(contextFactory: contextFactory,
+                                            addSourceAnnotation: true);
     }
 
     #endregion

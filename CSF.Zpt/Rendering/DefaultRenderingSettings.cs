@@ -5,9 +5,9 @@ using System.Text;
 namespace CSF.Zpt.Rendering
 {
   /// <summary>
-  /// Represents the default <see cref="IRenderingOptions"/>.
+  /// Represents the default <see cref="IRenderingSettings"/>.
   /// </summary>
-  public class DefaultRenderingOptions : IRenderingOptions
+  public class DefaultRenderingSettings : IRenderingSettings
   {
     #region constants
 
@@ -173,7 +173,7 @@ namespace CSF.Zpt.Rendering
     #region constructor
 
     /// <summary>
-    /// Initializes a new instance of the <see cref="CSF.Zpt.Rendering.DefaultRenderingOptions"/> class.
+    /// Initializes a new instance of the <see cref="CSF.Zpt.Rendering.DefaultRenderingSettings"/> class.
     /// </summary>
     /// <param name="documentFactory">Document factory.</param>
     /// <param name="elementVisitors">Element visitors.</param>
@@ -181,12 +181,12 @@ namespace CSF.Zpt.Rendering
     /// <param name="addSourceFileAnnotation">If set to <c>true</c> add source file annotation.</param>
     /// <param name="outputEncoding">Output encoding.</param>
     /// <param name="omitXmlDeclaration">If set to <c>true</c> omit XML declaration.</param>
-    protected DefaultRenderingOptions(ITemplateFileFactory documentFactory = null,
-                                      IContextVisitor[] elementVisitors = null,
-                                      IRenderingContextFactory contextFactory = null,
-                                      bool addSourceFileAnnotation = DefaultAddAnnotation,
-                                      Encoding outputEncoding = null,
-                                      bool omitXmlDeclaration = DefaultOmitXmlDeclaration)
+    protected DefaultRenderingSettings(ITemplateFileFactory documentFactory = null,
+                                       IContextVisitor[] elementVisitors = null,
+                                       IRenderingContextFactory contextFactory = null,
+                                       bool addSourceFileAnnotation = DefaultAddAnnotation,
+                                       Encoding outputEncoding = null,
+                                       bool omitXmlDeclaration = DefaultOmitXmlDeclaration)
     {
       this.TemplateFileFactory = documentFactory?? new ZptDocumentFactory();
       this.AddSourceFileAnnotation = addSourceFileAnnotation;
@@ -197,14 +197,14 @@ namespace CSF.Zpt.Rendering
     }
 
     /// <summary>
-    /// Initializes a new instance of the <see cref="CSF.Zpt.Rendering.DefaultRenderingOptions"/> class.
+    /// Initializes a new instance of the <see cref="CSF.Zpt.Rendering.DefaultRenderingSettings"/> class.
     /// </summary>
-    public DefaultRenderingOptions() : this(null,
-                                            null,
-                                            null,
-                                            DefaultAddAnnotation,
-                                            null,
-                                            DefaultOmitXmlDeclaration) {}
+    public DefaultRenderingSettings() : this(null,
+                                             null,
+                                             null,
+                                             DefaultAddAnnotation,
+                                             null,
+                                             DefaultOmitXmlDeclaration) {}
 
     #endregion
   }

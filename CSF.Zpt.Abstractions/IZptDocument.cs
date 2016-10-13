@@ -29,7 +29,7 @@ namespace CSF.Zpt
     /// <param name="options">The rendering options to use.  If <c>null</c> then default options are used.</param>
     /// <param name="contextConfigurator">An optional action to perform upon the root <see cref="IModelValueContainer"/>, to configure it.</param>
     string Render(object model,
-                  IRenderingOptions options = null,
+                  IRenderingSettings options = null,
                   Action<IModelValueContainer> contextConfigurator = null);
 
     /// <summary>
@@ -41,7 +41,7 @@ namespace CSF.Zpt
     /// <param name="contextConfigurator">An optional action to perform upon the root <see cref="IModelValueContainer"/>, to configure it.</param>
     void Render(object model,
                 TextWriter writer,
-                IRenderingOptions options = null,
+                IRenderingSettings options = null,
                 Action<IModelValueContainer> contextConfigurator = null);
 
     /// <summary>
@@ -49,7 +49,7 @@ namespace CSF.Zpt
     /// </summary>
     /// <param name="options">The rendering options to use.  If <c>null</c> then default options are used.</param>
     /// <param name="contextConfigurator">An optional action to perform upon the root <see cref="IModelValueContainer"/>, to configure it.</param>
-    string Render(IRenderingOptions options = null,
+    string Render(IRenderingSettings options = null,
                   Action<IModelValueContainer> contextConfigurator = null);
 
     /// <summary>
@@ -59,7 +59,7 @@ namespace CSF.Zpt
     /// <param name="options">The rendering options to use.  If <c>null</c> then default options are used.</param>
     /// <param name="contextConfigurator">An optional action to perform upon the root <see cref="IModelValueContainer"/>, to configure it.</param>
     void Render(TextWriter writer,
-                IRenderingOptions options = null,
+                IRenderingSettings options = null,
                 Action<IModelValueContainer> contextConfigurator = null);
 
     /// <summary>

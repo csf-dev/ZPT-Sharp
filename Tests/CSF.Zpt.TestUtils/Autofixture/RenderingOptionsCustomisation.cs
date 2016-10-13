@@ -10,9 +10,7 @@ namespace CSF.Zpt.TestUtils.Autofixture
   {
     public void Customize(IFixture fixture)
     {
-      fixture.Customize<IRenderingOptions>(x => x.FromFactory(() => {
-        return new RenderingOptions(documentFactory: Mock.Of<ITemplateFileFactory>());
-      }));
+      fixture.Customize<IRenderingSettings>(x => x.FromFactory(() => RenderingSettings.Default));
     }
   }
 }

@@ -12,15 +12,8 @@ namespace CSF.Zpt.Cli
     #region constants
 
     private const char
-    KEYWORD_OPTION_SEPARATOR  = ';',
-    KEY_VALUE_SEPARATOR       = '=';
-
-    #endregion
-
-    #region fields
-
-    private readonly IContextVisitorFactory _contextVisitorFactory;
-    private readonly IRenderingContextFactoryFactory _contextFactoryFactory;
+      KEYWORD_OPTION_SEPARATOR  = ';',
+      KEY_VALUE_SEPARATOR       = '=';
 
     #endregion
 
@@ -28,20 +21,25 @@ namespace CSF.Zpt.Cli
 
     public IRenderingOptions GetOptions(CommandLineOptions options)
     {
-      var contextVisitors = _contextVisitorFactory.CreateMany(options.ContextVisitorClassNames);
-      var contextFactory = _contextFactoryFactory.Create(options.RenderingContextFactoryClassName);
-      var encoding = GetEncoding(options.OutputEncoding);
+      if(options == null)
+      {
+        throw new ArgumentNullException(nameof(options));
+      }
 
-      AddKeywordOptions(options, contextFactory);
+      IRenderingOptions output = new RenderingOptions() {
+        AddSourceFileAnnotation = options.EnableSourceAnnotation,
+        OmitXmlDeclaration = options.OmitXmlDeclarations,
+        ContextVisitorTypes = options.ContextVisitorClassNames,
+        RenderingContextFactoryType = options.RenderingContextFactoryClassName,
+        OutputEncodingName = options.OutputEncoding
+      };
 
-      return new RenderingOptions(contextVisitors,
-                                  contextFactory,
-                                  addSourceFileAnnotation: options.EnableSourceAnnotation,
-                                  outputEncoding: encoding,
-                                  omitXmlDeclaration: options.OmitXmlDeclarations);
+      AddKeywordOptions(options, ref output);
+
+      return output;
     }
 
-    private void AddKeywordOptions(CommandLineOptions options, IRenderingContextFactory contextFactory)
+    private void AddKeywordOptions(CommandLineOptions options, ref IRenderingOptions renderingOptions)
     {
       if(!String.IsNullOrEmpty(options.KeywordOptions))
       {
@@ -51,7 +49,7 @@ namespace CSF.Zpt.Cli
 
         foreach(var option in keywordOptions)
         {
-          contextFactory.AddKeywordOption(option.Item1, option.Item2);
+          renderingOptions.KeywordOptions.Add(option.Item1, option.Item2);
         }
       }
     }
@@ -70,29 +68,6 @@ namespace CSF.Zpt.Cli
           InvalidOption = input
         };
       }
-    }
-
-    private Encoding GetEncoding(string name)
-    {
-      try
-      {
-        return Encoding.GetEncoding(name);
-      }
-      catch(Exception ex)
-      {
-        throw new InvalidOutputEncodingException(ExceptionMessages.InvalidEncoding, ex);
-      }
-    }
-
-    #endregion
-
-    #region constructor
-
-    public RenderingOptionsFactory(IContextVisitorFactory contextVisitorFactory = null,
-                                   IRenderingContextFactoryFactory contextFactoryFactory = null)
-    {
-      _contextVisitorFactory = contextVisitorFactory?? new ContextVisitorFactory();
-      _contextFactoryFactory = contextFactoryFactory?? new RenderingContextFactoryFactory();
     }
 
     #endregion
