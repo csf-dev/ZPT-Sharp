@@ -15,20 +15,28 @@ The build dependencies are a list of software applications/packages which you mu
 Builds using either of the configurations `Debug` or `Release` have only a small number of dependencies, which are likely to be found on any .NET developer's build environment:
 
 * Either the .NET framework (version 4.5 or higher) or an equivalent Mono framework
- * At this time, *build & deployment has not been tested* using [DotNet Core](https://www.microsoft.com/net/core).
+ * At this time, *build & deployment has not been tested* using [DotNet Core].
 * Either MSBuild or Mono XBuild
 * The Nuget package manager
+
+[DotNet Core]: https://www.microsoft.com/net/core
 
 ### Dependencies for Deploy builds
 Builds using the `Deploy` configuration have the following additional dependencies.
 
-* [Man (link to Wikipedia page)](https://en.wikipedia.org/wiki/Man_page)
-* [Man2html](http://www.nongnu.org/man2html/)
-* [Tidy](http://www.html-tidy.org/)
-* [Doxygen](http://www.stack.nl/~dimitri/doxygen/)
-* Pdflatex - a part of [the Latex suite](https://www.latex-project.org/)
+* [Man (link to Wikipedia page)]
+* [Man2html]
+* [Tidy]
+* [Doxygen]
+* Pdflatex - a part of [the Latex suite]
 
 All of the above dependencies are Free, Open Source Software.
+
+[Man (link to Wikipedia page)]: https://en.wikipedia.org/wiki/Man_page
+[Man2html]: http://www.nongnu.org/man2html/
+[Tidy]: http://www.html-tidy.org/
+[Doxygen]: http://www.stack.nl/~dimitri/doxygen/
+[the Latex suite]: https://www.latex-project.org/
 
 ### Getting these dependencies on GNU/Linux
 Installing the above dependencies on a GNU/Linux system is very simple - they are either likely to already be installed or they will be available from your distribution's package manager.  For example, on Debian-based systems including all flavours of Ubuntu, you may use the following.  This command must be executed as root, using `sudo` or `su` as applicable.
@@ -38,17 +46,24 @@ apt-get install man man2html tidy doxygen texlive-latex-base
 ```
 
 ### Getting these dependencies on MS Windows
-On Windows, you will mainly need to install these dependencies manually.  Some are available via [the Cygwin application suite](https://www.cygwin.com), which comes with a GUI package manager for downloading/installing software. *Please remember that these only only required for builds using the `Deploy` configuration.*
+On Windows, you will mainly need to install these dependencies manually.  Some are available via [the Cygwin application suite], which comes with a GUI package manager for downloading/installing software. *Please remember that these only only required for builds using the `Deploy` configuration.*
+
+[the Cygwin application suite]: https://www.cygwin.com
 
 * The `man` application is available from The Cygwin application suite
-* The `man2html` application is available from the [MinGW application suite](http://www.mingw.org/)
+* The `man2html` application is available from the [MinGW application suite]
 * The `tidy` application is available from either:
- * [The official HTML Tidy website](http://www.html-tidy.org/)
+ * [The official HTML Tidy website]
  * The Cygwin application suite
 * The `doxygen` application is available from either:
- * [The official Doxygen website](http://www.stack.nl/~dimitri/doxygen/download.html)
+ * [The official Doxygen website]
  * The Cygwin application suite
-* The `pdflatex` application is available as a part of [the MiKTEX distribution of the Latex suite for MS Windows](http://miktex.org/)
+* The `pdflatex` application is available as a part of [the MiKTEX distribution of the Latex suite for MS Windows]
+
+[MinGW application suite]: http://www.mingw.org/
+[The official HTML Tidy website]: http://www.html-tidy.org/
+[The official Doxygen website]: http://www.stack.nl/~dimitri/doxygen/download.html
+[the MiKTEX distribution of the Latex suite for MS Windows]: http://miktex.org/
 
 ## Build configurations
 There are three available build configurations: `Debug`, `Release` and `Deploy`.
