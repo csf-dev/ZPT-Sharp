@@ -11,12 +11,12 @@ namespace CSF.Zpt
   internal sealed class EmptyPluginConfiguration : IPluginConfiguration
   {
     /// <summary>
-    /// Gets a collection of all of the registered plugin assemblies.
+    /// Gets a collection of all of the paths to the registered plugin assemblies.
     /// </summary>
-    /// <returns>The plugin assemblies.</returns>
-    public IEnumerable<Assembly> GetAllPluginAssemblies()
+    /// <returns>The plugin assembly paths.</returns>
+    public IEnumerable<string> GetAllPluginAssemblyPaths()
     {
-      return Enumerable.Empty<Assembly>();
+      return Enumerable.Empty<string>();
     }
 
     /// <summary>

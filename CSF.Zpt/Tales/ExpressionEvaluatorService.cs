@@ -11,7 +11,6 @@ namespace CSF.Zpt.Tales
     #region fields
 
     private static readonly Lazy<ExpressionEvaluatorCache> _evaluatorCache;
-    private IPluginConfiguration _pluginConfig;
 
     #endregion
 
@@ -76,7 +75,7 @@ namespace CSF.Zpt.Tales
         throw new ArgumentNullException(nameof(cache));
       }
 
-      var allEvaluators = (from assembly in _pluginConfig.GetAllPluginAssemblies()
+      var allEvaluators = (from assembly in GetAllPluginAssemblies()
                            from type in base.GetConcreteTypes<IExpressionEvaluator>(assembly)
                            let instance = (IExpressionEvaluator) Activator.CreateInstance(type)
                            select new {  Type = type,
@@ -90,7 +89,7 @@ namespace CSF.Zpt.Tales
       }
 
       cache.Default = allEvaluators
-        .Single(x => x.Type.FullName == _pluginConfig.GetDefaultExpressionEvaluatorTypeName())
+        .Single(x => x.Type.FullName == PluginConfig.GetDefaultExpressionEvaluatorTypeName())
         .Evaluator;
     }
 
@@ -102,10 +101,10 @@ namespace CSF.Zpt.Tales
     /// Initializes a new instance of the <see cref="CSF.Zpt.Tales.ExpressionEvaluatorService"/> class.
     /// </summary>
     /// <param name="pluginConfig">Plugin config.</param>
-    public ExpressionEvaluatorService(IPluginConfiguration pluginConfig = null)
-    {
-      _pluginConfig = pluginConfig?? PluginConfigurationSection.GetDefault();
-    }
+    /// <param name="assemblyLoader">Plugin assembly loader.</param>
+    public ExpressionEvaluatorService(IPluginConfiguration pluginConfig = null,
+                                      IPluginAssemblyLoader assemblyLoader = null) : base(pluginConfig, assemblyLoader)
+    { }
 
     /// <summary>
     /// Initializes the <see cref="CSF.Zpt.Tales.ExpressionEvaluatorService"/> class.

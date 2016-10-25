@@ -17,7 +17,6 @@ namespace CSF.Zpt
     #region fields
 
     private static IPluginConfiguration _singleton;
-    private IEnumerable<Assembly> _cachedPluginAsseblies;
 
     #endregion
 
@@ -88,17 +87,15 @@ namespace CSF.Zpt
     #region methods
 
     /// <summary>
-    /// Gets a collection of all of the registered plugin assemblies.
+    /// Gets a collection of all of the paths to the registered plugin assemblies.
     /// </summary>
-    /// <returns>The plugin assemblies.</returns>
-    public IEnumerable<Assembly> GetAllPluginAssemblies()
+    /// <returns>The plugin assembly paths.</returns>
+    public IEnumerable<string> GetAllPluginAssemblyPaths()
     {
-      if(_cachedPluginAsseblies == null)
-      {
-        _cachedPluginAsseblies = LoadAllAssemblies();
-      }
-
-      return _cachedPluginAsseblies;
+      return this.Plugins
+        .Cast<Plugin>()
+        .Select(x => x.Path)
+        .ToArray();
     }
 
     /// <summary>
@@ -126,35 +123,6 @@ namespace CSF.Zpt
     public string GetDefaultExpressionEvaluatorTypeName()
     {
       return this.DefaultExpressionEvaluator;
-    }
-
-    private IEnumerable<Assembly> LoadAllAssemblies()
-    {
-      if(this.Plugins == null)
-      {
-        return Enumerable.Empty<Assembly>();
-      }
-
-      return this.Plugins
-        .Cast<Plugin>()
-        .Select(x => LoadAssembly(x.Path))
-        .ToArray();
-    }
-
-    private Assembly LoadAssembly(string path)
-    {
-      var currentAssemblyDirectory = new FileInfo(Assembly.GetExecutingAssembly().Location).GetParent();
-      var pluginRelativePath = Path.Combine(currentAssemblyDirectory.FullName, path);
-
-      try
-      {
-        return Assembly.LoadFrom(pluginRelativePath);
-      }
-      catch(Exception ex)
-      {
-        // TODO: Wrap this in a better exception and move message to resource file
-        throw new InvalidOperationException("The plugin assembly could not be loaded.", ex);
-      }
     }
 
     #endregion

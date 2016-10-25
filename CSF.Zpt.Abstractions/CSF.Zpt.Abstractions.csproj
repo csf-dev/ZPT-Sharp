@@ -98,6 +98,7 @@
     <Compile Include="Rendering\IRenderingOptions.cs" />
     <Compile Include="Rendering\IRenderingSettingsFactory.cs" />
     <Compile Include="Rendering\IElementRenderer.cs" />
+    <Compile Include="IPluginAssemblyLoader.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup />

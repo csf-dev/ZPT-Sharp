@@ -10,10 +10,10 @@ namespace CSF.Zpt
   public interface IPluginConfiguration
   {
     /// <summary>
-    /// Gets a collection of all of the registered plugin assemblies.
+    /// Gets a collection of all of the paths to the registered plugin assemblies.
     /// </summary>
-    /// <returns>The plugin assemblies.</returns>
-    IEnumerable<Assembly> GetAllPluginAssemblies();
+    /// <returns>The plugin assembly paths.</returns>
+    IEnumerable<string> GetAllPluginAssemblyPaths();
 
     /// <summary>
     /// Gets the name (including namespace) of the <c>System.Type</c> which is the default HTML document provider.

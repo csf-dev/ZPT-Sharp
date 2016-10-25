@@ -11,7 +11,6 @@ namespace CSF.Zpt
     #region fields
 
     private static readonly ZptDocumentProviderCache _cache;
-    private IPluginConfiguration _pluginConfig;
 
     #endregion
 
@@ -84,12 +83,7 @@ namespace CSF.Zpt
         throw new ArgumentNullException(nameof(cache));
       }
 
-      if(_pluginConfig == null)
-      {
-        throw new InvalidOperationException("Plugin config must not be null.");
-      }
-
-      var allProviders = (from assembly in _pluginConfig.GetAllPluginAssemblies()
+      var allProviders = (from assembly in GetAllPluginAssemblies()
                           from type in base.GetConcreteTypes<IZptDocumentProvider>(assembly)
                           select new {  Type = type,
                                         Provider = (IZptDocumentProvider) Activator.CreateInstance(type) })
@@ -101,14 +95,14 @@ namespace CSF.Zpt
       }
 
       var defaultHtml = allProviders
-        .SingleOrDefault(x => x.Type.FullName == _pluginConfig.GetDefaultHtmlDocumentProviderTypeName());
+        .SingleOrDefault(x => x.Type.FullName == PluginConfig.GetDefaultHtmlDocumentProviderTypeName());
       if(defaultHtml != null)
       {
         cache.DefaultHtmlProvider = defaultHtml.Provider;
       }
 
       var defaultXml = allProviders
-        .SingleOrDefault(x => x.Type.FullName == _pluginConfig.GetDefaultXmlDocumentProviderTypeName());
+        .SingleOrDefault(x => x.Type.FullName == PluginConfig.GetDefaultXmlDocumentProviderTypeName());
       if(defaultXml != null)
       {
         cache.DefaultXmlProvider = defaultXml.Provider;
@@ -123,10 +117,10 @@ namespace CSF.Zpt
     /// Initializes a new instance of the <see cref="CSF.Zpt.ZptDocumentProviderService"/> class.
     /// </summary>
     /// <param name="pluginConfig">Plugin config.</param>
-    public ZptDocumentProviderService(IPluginConfiguration pluginConfig = null)
-    {
-      _pluginConfig = pluginConfig?? PluginConfigurationSection.GetDefault();
-    }
+    /// <param name="assemblyLoader">Plugin assembly loader.</param>
+    public ZptDocumentProviderService(IPluginConfiguration pluginConfig = null,
+                                      IPluginAssemblyLoader assemblyLoader = null) : base(pluginConfig, assemblyLoader)
+    { }
 
     /// <summary>
     /// Initializes the <see cref="CSF.Zpt.ZptDocumentProviderService"/> class.
