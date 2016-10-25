@@ -119,8 +119,7 @@ namespace CSF.Zpt.DocumentProviders
                                  IRenderingSettings options = null,
                                  Action<IModelValueContainer> contextConfigurator = null)
     {
-      var opts = this.GetOptions(options);
-      var element = this.RenderElement(model, opts, contextConfigurator);
+      var element = RenderElement(model, options, contextConfigurator);
 
       var output = new XmlDocument();
       output.LoadXml(element.ToString());
@@ -223,8 +222,10 @@ namespace CSF.Zpt.DocumentProviders
     /// </summary>
     /// <param name="document">An XML document from which to create the current instance.</param>
     /// <param name="sourceFile">Information about the document's source file.</param>
+    /// <param name="elementRenderer">The element renderer.</param>
     public ZptXmlDocument(XmlDocument document,
-                          ISourceInfo sourceFile)
+                          ISourceInfo sourceFile,
+                          IElementRenderer elementRenderer = null) : base(elementRenderer)
     {
       if(document == null)
       {

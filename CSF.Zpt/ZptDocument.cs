@@ -13,6 +13,12 @@ namespace CSF.Zpt
   /// </summary>
   public abstract class ZptDocument : IZptDocument
   {
+    #region fields
+
+    private IElementRenderer _elementRenderer;
+
+    #endregion
+
     #region properties
 
     /// <summary>
@@ -20,6 +26,12 @@ namespace CSF.Zpt
     /// </summary>
     /// <value>The rendering mode.</value>
     public abstract RenderingMode Mode { get; }
+
+    /// <summary>
+    /// Gets the element renderer for the current instance.
+    /// </summary>
+    /// <value>The element renderer.</value>
+    protected virtual IElementRenderer ElementRenderer { get { return _elementRenderer; } }
 
     #endregion
 
@@ -106,9 +118,10 @@ namespace CSF.Zpt
         throw new ArgumentNullException(nameof(writer));
       }
 
-      var opts = this.GetOptions(options);
+      var opts = GetOptions(options);
+      var root = GetRootElement();
 
-      this.Render(writer, this.RenderElement(model, opts, contextConfigurator), opts);
+      this.Render(writer, ElementRenderer.RenderElement(model, root, opts, contextConfigurator), opts);
     }
 
     /// <summary>
@@ -123,65 +136,6 @@ namespace CSF.Zpt
     /// <returns>The source info.</returns>
     public abstract ISourceInfo GetSourceInfo();
 
-    /// <summary>
-    /// Renders the current document, returning an <see cref="IZptElement"/> representing the rendered result.
-    /// </summary>
-    /// <returns>The result of the rendering process.</returns>
-    /// <param name="model">An object to which the ZPT document is to be applied.</param>
-    /// <param name="options">The rendering options to use.  If <c>null</c> then default options are used.</param>
-    /// <param name="contextConfigurator">An optional action to perform upon the root <see cref="IModelValueContainer"/>, to configure it.</param>
-    protected virtual IZptElement RenderElement(object model,
-                                               IRenderingSettings options,
-                                               Action<IModelValueContainer> contextConfigurator)
-    {
-      if(options == null)
-      {
-        throw new ArgumentNullException(nameof(options));
-      }
-
-      var output = this.GetRootElement();
-      var context = options.CreateRootContext(output, model);
-
-      ZptConstants.TraceSource.TraceInformation(Resources.LogMessageFormats.RenderingDocument,
-                                                (output.SourceFile != null)? output.SourceFile.FullName : "<unknown>",
-                                                nameof(ZptDocument),
-                                                nameof(RenderElement));
-
-      if(contextConfigurator != null)
-      {
-        contextConfigurator(context);
-      }
-
-      try
-      {
-        foreach(var visitor in options.ContextVisitors)
-        {
-          var contexts = visitor.VisitContext(context);
-
-          if(contexts.Count() != 1)
-          {
-            string message = String.Format(Resources.ExceptionMessages.WrongCountOfReturnedContexts,
-                                         typeof(IContextVisitor).Name,
-                                         typeof(RenderingContext).Name);
-            throw new RenderingException(message);
-          }
-
-          context = contexts.Single();
-        }
-      }
-      catch(Exception ex)
-      {
-        ZptConstants.TraceSource.TraceEvent(System.Diagnostics.TraceEventType.Error,
-                                            3,
-                                            Resources.LogMessageFormats.UnexpectedRenderingException,
-                                            nameof(ZptDocument),
-                                            nameof(RenderElement),
-                                            ex.ToString());
-        throw;
-      }
-
-      return context.Element;
-    }
 
     /// <summary>
     /// Gets a set of rendering options, or constructs a default set of options if a <c>null</c> reference is passed.
@@ -225,6 +179,36 @@ namespace CSF.Zpt
     protected virtual TElement ConvertElement<TElement>(IZptElement element) where TElement : class,IZptElement
     {
       return ZptElement.ConvertElement<TElement>(element);
+    }
+
+    /// <summary>
+    /// Coordinates logic to the <see cref="IElementRenderer"/>.
+    /// </summary>
+    /// <returns>The rendered element.</returns>
+    /// <param name="model">Model.</param>
+    /// <param name="options">Options.</param>
+    /// <param name="contextConfigurator">Context configurator.</param>
+    protected virtual IZptElement RenderElement(object model,
+                                                IRenderingSettings options,
+                                                Action<IModelValueContainer> contextConfigurator)
+    {
+      var opts = this.GetOptions(options);
+      var root = this.GetRootElement();
+
+      return ElementRenderer.RenderElement(model, root, opts, contextConfigurator);
+    }
+
+    #endregion
+
+    #region constructor
+
+    /// <summary>
+    /// Initializes a new instance of the <see cref="CSF.Zpt.ZptDocument"/> class.
+    /// </summary>
+    /// <param name="elementRenderer">The element renderer.</param>
+    public ZptDocument(IElementRenderer elementRenderer = null)
+    {
+      _elementRenderer = elementRenderer?? new ElementRenderer();
     }
 
     #endregion
