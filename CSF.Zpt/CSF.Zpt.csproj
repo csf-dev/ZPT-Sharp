@@ -119,6 +119,7 @@
     <Compile Include="Rendering\DefaultRenderingSettings.cs" />
     <Compile Include="Rendering\RenderingOptions.cs" />
     <Compile Include="Rendering\RenderingSettingsFactory.cs" />
+    <Compile Include="Rendering\ElementRenderer.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
