@@ -37,18 +37,38 @@ namespace CSF.Zpt
         throw new ArgumentNullException(nameof(path));
       }
 
-      var currentAssemblyDirectory = new FileInfo(Assembly.GetExecutingAssembly().Location).GetParent();
-      var pluginRelativePath = Path.Combine(currentAssemblyDirectory.FullName, path);
+      return Path.IsPathRooted(path)? LoadAbsolute(path) : LoadRelative(path);
+    }
 
+    /// <summary>
+    /// Loads an assembly from an absolute (rooted) path.
+    /// </summary>
+    /// <returns>The assembly.</returns>
+    /// <param name="path">Path.</param>
+    public virtual Assembly LoadAbsolute(string path)
+    {
       try
       {
-        return Assembly.LoadFrom(pluginRelativePath);
+        return Assembly.LoadFrom(path);
       }
       catch(Exception ex)
       {
         // TODO: Wrap this in a better exception and move message to resource file
         throw new InvalidOperationException("The plugin assembly could not be loaded.", ex);
       }
+    }
+
+    /// <summary>
+    /// Loads an assembly from a relative (non-rooted) path.
+    /// </summary>
+    /// <returns>The assembly.</returns>
+    /// <param name="path">Path.</param>
+    public virtual Assembly LoadRelative(string path)
+    {
+      var currentAssemblyDirectory = new FileInfo(Assembly.GetExecutingAssembly().Location).GetParent();
+      var absolutePath = Path.Combine(currentAssemblyDirectory.FullName, path);
+
+      return LoadAbsolute(absolutePath);
     }
   }
 }

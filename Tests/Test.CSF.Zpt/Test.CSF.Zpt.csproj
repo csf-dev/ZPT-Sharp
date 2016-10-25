@@ -84,6 +84,7 @@
     <Compile Include="AssemblyInfo.cs" />
     <Compile Include="TestZptDocument.cs" />
     <Compile Include="TestZptDocumentFactory.cs" />
+    <Compile Include="TestPluginAssemblyLoader.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\CSF\CSF\CSF.csproj">
