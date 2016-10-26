@@ -17,6 +17,7 @@ namespace CSF.Zpt.BatchRendering
 
     private readonly IRenderingJobFactory _jobFactory;
     private readonly IRenderingSettingsFactory _settingsFactory;
+    private readonly IBatchRenderingOptionsValidator _optionsValidator;
 
     #endregion
 
@@ -143,27 +144,7 @@ namespace CSF.Zpt.BatchRendering
     /// <param name="options">Options.</param>
     protected virtual void ValidateBatchOptions(IBatchRenderingOptions options)
     {
-      if(options.InputStream == null && !options.InputPaths.Any())
-      {
-        string message = Resources.ExceptionMessages.BatchOptionsMustHaveInputStreamOrPaths;
-        throw new InvalidBatchRenderingOptionsException(message, BatchRenderingFatalErrorType.NoInputsSpecified);
-      }
-      else if(options.InputStream != null && options.InputPaths.Any())
-      {
-        string message = Resources.ExceptionMessages.BatchOptionsMustNotHaveBothInputStreamAndPaths;
-        throw new InvalidBatchRenderingOptionsException(message, BatchRenderingFatalErrorType.InputCannotBeBothStreamAndPaths);
-      }
-
-      if(options.OutputStream == null && options.OutputPath == null)
-      {
-        string message = Resources.ExceptionMessages.BatchOptionsMustHaveOutputStreamOrPath;
-        throw new InvalidBatchRenderingOptionsException(message, BatchRenderingFatalErrorType.NoOutputsSpecified);
-      }
-      else if(options.OutputStream != null && options.OutputPath != null)
-      {
-        string message = Resources.ExceptionMessages.BatchOptionsMustNotHaveBothOutputStreamAndPath;
-        throw new InvalidBatchRenderingOptionsException(message, BatchRenderingFatalErrorType.OutputCannotBeBothStreamAndPaths);
-      }
+      _optionsValidator.Validate(options);
     }
 
     /// <summary>
@@ -207,11 +188,14 @@ namespace CSF.Zpt.BatchRendering
     /// </summary>
     /// <param name="renderingJobFactory">Rendering job factory.</param>
     /// <param name="settingsFactory">Rendering settings factory.</param>
+    /// <param name="optionsValidator">Options validator.</param>
     public BatchRenderer(IRenderingJobFactory renderingJobFactory = null,
-                         IRenderingSettingsFactory settingsFactory = null)
+                         IRenderingSettingsFactory settingsFactory = null,
+                         IBatchRenderingOptionsValidator optionsValidator = null)
     {
       _jobFactory = renderingJobFactory?? new RenderingJobFactory();
       _settingsFactory = settingsFactory?? new RenderingSettingsFactory();
+      _optionsValidator = optionsValidator?? new BatchRenderingOptionsValidator();
     }
 
     #endregion
