@@ -40,7 +40,7 @@ namespace Test.CSF.Zpt
       var relPath = "foo";
 
       // Act
-      var assembly = _sut.Object.Load(relPath);
+      _sut.Object.Load(relPath);
 
       // Assert
       _sut.Verify(x => x.LoadAbsolute(It.IsAny<string>()), Times.Never());
@@ -57,7 +57,7 @@ namespace Test.CSF.Zpt
       var absPath = Path.Combine(thisAssemblyDir.FullName, "Foo.dll");
 
       // Act
-      var assembly = _sut.Object.Load(absPath);
+      _sut.Object.Load(absPath);
 
       // Assert
       _sut.Verify(x => x.LoadAbsolute(It.IsAny<string>()), Times.Once());
