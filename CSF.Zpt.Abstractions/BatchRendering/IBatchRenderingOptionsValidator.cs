@@ -1,7 +1,14 @@
 ﻿namespace CSF.Zpt.BatchRendering
 {
-    public interface IBatchRenderingOptionsValidator
-    {
-        void Validate(IBatchRenderingOptions options);
-    }
+  /// <summary>
+  /// Interface for a service which renders <see cref="IBatchRenderingOptions"/> instances.
+  /// </summary>
+  public interface IBatchRenderingOptionsValidator
+  {
+    /// <summary>
+    /// Validate the given options.
+    /// </summary>
+    /// <param name="options">The options to validate.</param>
+    void Validate(IBatchRenderingOptions options);
+  }
 }
