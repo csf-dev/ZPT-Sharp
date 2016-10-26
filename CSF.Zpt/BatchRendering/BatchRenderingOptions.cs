@@ -111,6 +111,18 @@ namespace CSF.Zpt.BatchRendering
     }
 
     #endregion
+
+    #region static methods
+
+    /// <summary>
+    /// Create and return a 'builder' helper type which helps construct valid instance of the batch options.
+    /// </summary>
+    public static IBatchOptionsInputHelper Build()
+    {
+      return new BatchOptionsBuilder();
+    }
+
+    #endregion
   }
 }
 
