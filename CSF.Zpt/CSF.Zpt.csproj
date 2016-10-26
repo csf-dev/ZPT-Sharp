@@ -121,6 +121,8 @@
     <Compile Include="Rendering\RenderingSettingsFactory.cs" />
     <Compile Include="Rendering\ElementRenderer.cs" />
     <Compile Include="PluginAssemblyLoader.cs" />
+    <Compile Include="BatchRendering\BatchOptionsBuilder.cs" />
+    <Compile Include="BatchRendering\BatchRenderingOptionsValidator.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
