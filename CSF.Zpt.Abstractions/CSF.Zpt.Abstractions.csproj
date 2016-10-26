@@ -42,6 +42,10 @@
       <Link>CommonAssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="AssemblyInfo.cs" />
+    <Compile Include="BatchRendering\IBatchOptionsInputHelper.cs" />
+    <Compile Include="BatchRendering\IBatchOptionsMultipleInputOutputHelper.cs" />
+    <Compile Include="BatchRendering\IBatchOptionsSingleInputOutputHelper.cs" />
+    <Compile Include="BatchRendering\IBatchRenderingOptionsValidator.cs" />
     <Compile Include="IZptDocumentFactory.cs" />
     <Compile Include="Rendering\IModelValueContainer.cs" />
     <Compile Include="Rendering\IModelValueStore.cs" />
