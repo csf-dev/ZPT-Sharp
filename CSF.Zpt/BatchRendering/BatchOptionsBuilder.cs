@@ -12,12 +12,12 @@ namespace CSF.Zpt.BatchRendering
   {
     #region fields
 
-    private Stream _inputStream = null, _outputStream = null;
-    private IEnumerable<FileSystemInfo> _inputPaths = null;
-    private IEnumerable<DirectoryInfo> _ignoredPaths = null;
-    private FileSystemInfo _outputPath = null;
-    private string _inputSearchPattern = null, _outputExtensionOverride = null;
-    private RenderingMode? _renderingMode = null;
+    private Stream _inputStream, _outputStream;
+    private IEnumerable<FileSystemInfo> _inputPaths;
+    private IEnumerable<DirectoryInfo> _ignoredPaths;
+    private FileSystemInfo _outputPath;
+    private string _inputSearchPattern, _outputExtensionOverride;
+    private RenderingMode? _renderingMode;
 
     #endregion
 
@@ -289,6 +289,25 @@ namespace CSF.Zpt.BatchRendering
                                        outputExtensionOverride: _outputExtensionOverride,
                                        ignoredPaths: _ignoredPaths,
                                        renderingMode: _renderingMode);
+    }
+
+    #endregion
+
+    #region contructor
+
+    /// <summary>
+    /// Initializes a new instance of the <see cref="CSF.Zpt.BatchRendering.BatchOptionsBuilder"/> class.
+    /// </summary>
+    internal BatchOptionsBuilder()
+    {
+      _inputStream = null;
+      _outputStream = null;
+      _inputPaths = null;
+      _ignoredPaths = null;
+      _outputPath = null;
+      _inputSearchPattern = null;
+      _outputExtensionOverride = null;
+      _renderingMode = null;
     }
 
     #endregion
