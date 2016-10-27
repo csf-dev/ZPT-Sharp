@@ -62,7 +62,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="GlobalSetupFixture.cs" />
-    <Compile Include="Rendering\TestElementVisitor.cs" />
     <Compile Include="Rendering\TestModel.cs" />
     <Compile Include="Metal\TestMacroExpander.cs" />
     <Compile Include="Metal\TestMacroFinder.cs" />
@@ -85,6 +84,7 @@
     <Compile Include="TestZptDocument.cs" />
     <Compile Include="TestZptDocumentFactory.cs" />
     <Compile Include="TestPluginAssemblyLoader.cs" />
+    <Compile Include="Rendering\TestContextVisitorBase.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\CSF\CSF\CSF.csproj">
