@@ -87,6 +87,8 @@
     <Compile Include="Rendering\TestContextVisitorBase.cs" />
     <Compile Include="Rendering\TestRenderingContextFactoryFactory.cs" />
     <Compile Include="Rendering\StubRenderingContextFactory.cs" />
+    <Compile Include="Rendering\StubContextVisitor.cs" />
+    <Compile Include="Rendering\TestContextVisitorFactory.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\CSF\CSF\CSF.csproj">
