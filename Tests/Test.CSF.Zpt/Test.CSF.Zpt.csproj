@@ -85,6 +85,8 @@
     <Compile Include="TestZptDocumentFactory.cs" />
     <Compile Include="TestPluginAssemblyLoader.cs" />
     <Compile Include="Rendering\TestContextVisitorBase.cs" />
+    <Compile Include="Rendering\TestRenderingContextFactoryFactory.cs" />
+    <Compile Include="Rendering\StubRenderingContextFactory.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\CSF\CSF\CSF.csproj">
