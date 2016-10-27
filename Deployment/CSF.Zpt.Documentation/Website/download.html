@@ -1,4 +1,4 @@
-<!doctype html>
+﻿<!doctype html>
 <html tal:define="activePage string:download">
 <head metal:use-macro="documents/Shared/general-page.html/macros/common_document_head">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -42,8 +42,8 @@
                          versionString string:v${version}${versionExtra}"
                  on-error="structure string:&lt;p class=&quot;note&quot;&gt;There is presently no stable release, please visit the Github releases page to view unstable releases.&lt;/p&gt;">
       <p>
-        The most recent stable release is <strong tal:content="versionString">v0.0.0</strong>, the following downloads
-        are for that version.
+        The most recent release is <strong tal:content="versionString">v0.0.0</strong>, which is an <strong>alpha</strong> release.
+        The following downloads are for that version.
       </p>
       <h2>ZPT-Sharp complete package</h2>
       <p>The complete package includes everything, both mandatory and optional components.</p>
