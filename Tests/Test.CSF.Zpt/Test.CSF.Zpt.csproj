@@ -74,7 +74,6 @@
     <Compile Include="Tal\TestOmitTagAttributeHandler.cs" />
     <Compile Include="Tal\TestOnErrorAttributeHandler.cs" />
     <Compile Include="Tales\TestTalesModel.cs" />
-    <Compile Include="Tales\TestSimpleEvaluatorRegistry.cs" />
     <Compile Include="Tales\TestExpressionFactory.cs" />
     <Compile Include="Tales\TestFilesystemDirectory.cs" />
     <Compile Include="..\..\Common\CommonAssemblyInfo.cs">
@@ -89,6 +88,7 @@
     <Compile Include="Rendering\StubRenderingContextFactory.cs" />
     <Compile Include="Rendering\StubContextVisitor.cs" />
     <Compile Include="Rendering\TestContextVisitorFactory.cs" />
+    <Compile Include="Tales\TestSimpleEvaluatorSelector.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\CSF\CSF\CSF.csproj">
