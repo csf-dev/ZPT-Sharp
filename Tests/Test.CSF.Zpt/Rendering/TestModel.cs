@@ -16,7 +16,7 @@ namespace Test.CSF.Zpt.Rendering
     [TestCase(0)]
     [TestCase(1)]
     [TestCase(5)]
-    public void TestEvaluateLocal(int levelsOfNesting)
+    public void Evaluate_gets_local_item_through_nested_models(int levelsOfNesting)
     {
       // Arrange
       var fixture = new Fixture();
@@ -43,7 +43,7 @@ namespace Test.CSF.Zpt.Rendering
     [TestCase(0)]
     [TestCase(1)]
     [TestCase(5)]
-    public void TestEvaluateGlobal(int levelsOfNesting)
+    public void Evaluate_gets_global_item_through_nested_models(int levelsOfNesting)
     {
       // Arrange
       var fixture = new Fixture();
@@ -71,7 +71,7 @@ namespace Test.CSF.Zpt.Rendering
     [TestCase(1, 1)]
     [TestCase(5, 2)]
     [TestCase(5, 5)]
-    public void TestEvaluateLocalOverridden(int levelsOfNesting, int overrideLevel)
+    public void Evaluate_gets_overridden_local_item_through_nested_models(int levelsOfNesting, int overrideLevel)
     {
       // Arrange
       var fixture = new Fixture();
