@@ -10,19 +10,17 @@ using CSF.Zpt.TestUtils.Autofixture;
 namespace Test.CSF.Zpt.Rendering
 {
   [TestFixture]
-  public class TestElementVisitor
+  public class TestContextVisitorBase
   {
     #region tests
 
     [Test]
-    [Description("This test ensures that all elements in a tree are visited and that each time a recursive visit" +
-                 "occurs, a child model is created.")]
-    public void TestVisitRecursively()
+    [Description("This test ensures that all rendering contexts in a tree are visited.")]
+    public void VisitRecursively_visits_all_child_contexts()
     {
       // Arrange
       var fixture = new Fixture();
       new RenderingContextCustomisation().Customize(fixture);
-      new RenderingOptionsCustomisation().Customize(fixture);
 
       var sut = new Mock<ContextVisitorBase>() { CallBase = true };
       sut
