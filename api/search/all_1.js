@@ -1,7 +1,7 @@
 var searchData=
 [
   ['batchrenderer',['BatchRenderer',['../classCSF_1_1Zpt_1_1BatchRendering_1_1BatchRenderer.html',1,'CSF::Zpt::BatchRendering']]],
-  ['batchrenderer',['BatchRenderer',['../classCSF_1_1Zpt_1_1BatchRendering_1_1BatchRenderer.html#a56d7e7cd1e2414b3b51dda6b243d5253',1,'CSF::Zpt::BatchRendering::BatchRenderer']]],
+  ['batchrenderer',['BatchRenderer',['../classCSF_1_1Zpt_1_1BatchRendering_1_1BatchRenderer.html#a9deb6ecec1fcc8ca1bb72be808e09f68',1,'CSF::Zpt::BatchRendering::BatchRenderer']]],
   ['batchrenderingdocumenterrortype',['BatchRenderingDocumentErrorType',['../namespaceCSF_1_1Zpt_1_1BatchRendering.html#a033511badb16c0431d350479a98c1392',1,'CSF::Zpt::BatchRendering']]],
   ['batchrenderingdocumentresponse',['BatchRenderingDocumentResponse',['../classCSF_1_1Zpt_1_1BatchRendering_1_1BatchRenderingDocumentResponse.html',1,'CSF::Zpt::BatchRendering']]],
   ['batchrenderingdocumentresponse',['BatchRenderingDocumentResponse',['../classCSF_1_1Zpt_1_1BatchRendering_1_1BatchRenderingDocumentResponse.html#ac3607b5dc4302d673d062f0c290522f1',1,'CSF.Zpt.BatchRendering.BatchRenderingDocumentResponse.BatchRenderingDocumentResponse(ISourceInfo sourceInfo, ZptException exception)'],['../classCSF_1_1Zpt_1_1BatchRendering_1_1BatchRenderingDocumentResponse.html#ac406f60a39bd4cd3b8dd382a47a7d85e',1,'CSF.Zpt.BatchRendering.BatchRenderingDocumentResponse.BatchRenderingDocumentResponse(ISourceInfo sourceInfo, string outputInfo)']]],
@@ -9,9 +9,11 @@ var searchData=
   ['batchrenderingexception',['BatchRenderingException',['../classCSF_1_1Zpt_1_1BatchRendering_1_1BatchRenderingException.html',1,'CSF::Zpt::BatchRendering']]],
   ['batchrenderingfatalerrortype',['BatchRenderingFatalErrorType',['../namespaceCSF_1_1Zpt_1_1BatchRendering.html#abcf0245a84f126cf5ae85f1d25c30ee8',1,'CSF::Zpt::BatchRendering']]],
   ['batchrenderingoptions',['BatchRenderingOptions',['../classCSF_1_1Zpt_1_1BatchRendering_1_1BatchRenderingOptions.html',1,'CSF::Zpt::BatchRendering']]],
-  ['batchrenderingoptions',['BatchRenderingOptions',['../classCSF_1_1Zpt_1_1BatchRendering_1_1BatchRenderingOptions.html#af0baa69a9abe84cc215bf54ab5b07367',1,'CSF::Zpt::BatchRendering::BatchRenderingOptions']]],
-  ['batchrenderingresponse',['BatchRenderingResponse',['../classCSF_1_1Zpt_1_1BatchRendering_1_1BatchRenderingResponse.html',1,'CSF::Zpt::BatchRendering']]],
+  ['batchrenderingoptions',['BatchRenderingOptions',['../classCSF_1_1Zpt_1_1BatchRendering_1_1BatchRenderingOptions.html#a880b0500cb4861a948c6d7fb05f17034',1,'CSF::Zpt::BatchRendering::BatchRenderingOptions']]],
+  ['batchrenderingoptionsvalidator',['BatchRenderingOptionsValidator',['../classCSF_1_1Zpt_1_1BatchRendering_1_1BatchRenderingOptionsValidator.html',1,'CSF::Zpt::BatchRendering']]],
   ['batchrenderingresponse',['BatchRenderingResponse',['../classCSF_1_1Zpt_1_1BatchRendering_1_1BatchRenderingResponse.html#aa7c0f9c4179e42cb6b8dae258f656ba1',1,'CSF.Zpt.BatchRendering.BatchRenderingResponse.BatchRenderingResponse(BatchRenderingFatalErrorType fatalError)'],['../classCSF_1_1Zpt_1_1BatchRendering_1_1BatchRenderingResponse.html#a56b04c5813b9ccffe7809ce639588993',1,'CSF.Zpt.BatchRendering.BatchRenderingResponse.BatchRenderingResponse(IEnumerable&lt; IBatchRenderingDocumentResponse &gt; documents)']]],
-  ['builtincontextscontainer',['BuiltinContextsContainer',['../classCSF_1_1Zpt_1_1Tales_1_1BuiltinContextsContainer.html#a69690df97598b44d6fe080c110e24774',1,'CSF::Zpt::Tales::BuiltinContextsContainer']]],
-  ['builtincontextscontainer',['BuiltinContextsContainer',['../classCSF_1_1Zpt_1_1Tales_1_1BuiltinContextsContainer.html',1,'CSF::Zpt::Tales']]]
+  ['batchrenderingresponse',['BatchRenderingResponse',['../classCSF_1_1Zpt_1_1BatchRendering_1_1BatchRenderingResponse.html',1,'CSF::Zpt::BatchRendering']]],
+  ['build',['Build',['../classCSF_1_1Zpt_1_1BatchRendering_1_1BatchRenderingOptions.html#a1fde56b2949c99a45c6b8c88180f9f80',1,'CSF::Zpt::BatchRendering::BatchRenderingOptions']]],
+  ['builtincontextscontainer',['BuiltinContextsContainer',['../classCSF_1_1Zpt_1_1Tales_1_1BuiltinContextsContainer.html',1,'CSF::Zpt::Tales']]],
+  ['builtincontextscontainer',['BuiltinContextsContainer',['../classCSF_1_1Zpt_1_1Tales_1_1BuiltinContextsContainer.html#a69690df97598b44d6fe080c110e24774',1,'CSF::Zpt::Tales::BuiltinContextsContainer']]]
 ];

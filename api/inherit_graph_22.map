@@ -1,4 +1,6 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="node1" href="$interfaceCSF_1_1Zpt_1_1Rendering_1_1IActionCanceller.html" title="Interface for a type which may &#39;cancel an action&#39;. The meaning of this is dependant upon the operatio..." alt="" coords="5,5,185,47"/>
-<area shape="rect" id="node2" href="$classCSF_1_1Zpt_1_1Rendering_1_1CancellationToken.html" title="Simple type which indicates that the action should always be cancelled. " alt="" coords="233,5,444,47"/>
+<area shape="rect" id="node1" href="$interfaceCSF_1_1Zpt_1_1IZptDocumentProvider.html" title="Interface for a type which creates IZptDocument implementations. " alt="" coords="5,78,212,105"/>
+<area shape="rect" id="node2" href="$classCSF_1_1Zpt_1_1DocumentProviders_1_1HtmlZptDocumentProvider.html" title="Implementation of IZptDocumentProvider which creates documents based on the HTML Agility pack..." alt="" coords="270,5,465,47"/>
+<area shape="rect" id="node3" href="$classCSF_1_1Zpt_1_1DocumentProviders_1_1LegacyXmlZptDocumentProvider.html" title="Implementation of IZptDocumentProvider which creates XML documents based on System.Xml.XmlDocument. " alt="" coords="260,71,475,112"/>
+<area shape="rect" id="node4" href="$classCSF_1_1Zpt_1_1DocumentProviders_1_1XmlLinqZptDocumentProvider.html" title="Implementation of IZptDocumentProvider which creates XML documents based on System.Xml.Linq.XDocument. " alt="" coords="269,136,465,177"/>
 </map>

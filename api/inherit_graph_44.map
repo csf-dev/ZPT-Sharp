@@ -1,3 +1,12 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="node1" href="$classCSF_1_1Zpt_1_1Tales_1_1PathPart.html" title="Represents a part of a TALES path, this type indicates a single traversal from a parent object to a c..." alt="" coords="5,5,168,32"/>
+<area shape="rect" id="node2" href="$interfaceCSF_1_1Zpt_1_1Rendering_1_1ISourceInfo.html" title="Information about the source of an IZptDocument or IZptElement. " alt="" coords="148,90,355,117"/>
+<area shape="rect" id="node6" href="$interfaceCSF_1_1Zpt_1_1Rendering_1_1IZptElement.html" title="Interface for a type which wraps a DOM element. " alt="" coords="146,151,357,178"/>
+<area shape="rect" id="node7" href="$classCSF_1_1Zpt_1_1Rendering_1_1ZptElement.html" title="Represents an element node in a ZPT document. " alt="" coords="413,202,620,229"/>
+<area shape="rect" id="node11" href="$classCSF_1_1Zpt_1_1Rendering_1_1ZptNamespace.html" title="Represents a ZPT namespace, by either or both of its prefix and namespace URI. " alt="" coords="137,253,365,279"/>
+<area shape="rect" id="node3" href="$classCSF_1_1Zpt_1_1Rendering_1_1AbstractSourceInfo.html" title="Implementation of ISourceInfo representing an abstract string path. " alt="" coords="423,5,611,47"/>
+<area shape="rect" id="node4" href="$classCSF_1_1Zpt_1_1Rendering_1_1SourceFileInfo.html" title="Provides information about the source file from which an ZptElement is derived. " alt="" coords="427,71,607,112"/>
+<area shape="rect" id="node5" href="$classCSF_1_1Zpt_1_1Rendering_1_1UnknownSourceFileInfo.html" title="Null&#45;object implementation of SourceFileInfo, representing an unknown source file. " alt="" coords="419,136,614,177"/>
+<area shape="rect" id="node8" href="$classCSF_1_1Zpt_1_1DocumentProviders_1_1ZptHtmlElement.html" title="Implementation of ZptElement based on documents parsed using the HTML Agility Pack. " alt="" coords="668,129,863,171"/>
+<area shape="rect" id="node9" href="$classCSF_1_1Zpt_1_1DocumentProviders_1_1ZptXmlElement.html" title="Implementation of ZptElement based on documents parsed using System.Xml. " alt="" coords="668,195,863,236"/>
+<area shape="rect" id="node10" href="$classCSF_1_1Zpt_1_1DocumentProviders_1_1ZptXmlLinqElement.html" title="Implementation of ZptElement based on documents parsed using System.Xml.Linq. " alt="" coords="668,260,863,301"/>
 </map>

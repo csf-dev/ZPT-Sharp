@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['globalsetupfixture',['GlobalSetupFixture',['../classTest_1_1CSF_1_1Zpt_1_1Cli_1_1GlobalSetupFixture.html',1,'Test::CSF::Zpt::Cli']]]
+  ['htmlzptdocumentprovider',['HtmlZptDocumentProvider',['../classCSF_1_1Zpt_1_1DocumentProviders_1_1HtmlZptDocumentProvider.html',1,'CSF::Zpt::DocumentProviders']]]
 ];

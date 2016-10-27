@@ -1,7 +1,7 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="node1" href="$interfaceCSF_1_1Zpt_1_1Rendering_1_1IZptAttribute.html" title="Interface for a type which wraps a DOM attribute. " alt="" coords="5,56,216,83"/>
-<area shape="rect" id="node2" href="$classCSF_1_1Zpt_1_1Rendering_1_1ZptAttribute.html" title="Represents an ZptElement attribute. " alt="" coords="264,56,471,83"/>
-<area shape="rect" id="node3" href="$classCSF_1_1Zpt_1_1Impl_1_1ZptHtmlAttribute.html" title="Implementation of Attribute for an HTML attribute. " alt="" coords="528,5,729,32"/>
-<area shape="rect" id="node4" href="$classCSF_1_1Zpt_1_1Impl_1_1ZptXmlAttribute.html" title="Implementation of Attribute for an XML attribute. " alt="" coords="531,56,727,83"/>
-<area shape="rect" id="node5" href="$classCSF_1_1Zpt_1_1Impl_1_1ZptXmlLinqAttribute.html" title="Implementation of Attribute for an XML/Linq attribute. " alt="" coords="519,107,739,133"/>
+<area shape="rect" id="node1" href="$interfaceCSF_1_1Zpt_1_1Tales_1_1IExpressionEvaluatorService.html" title="Interface for a service which exposes IExpressionEvaluator instances. " alt="" coords="18,5,199,47"/>
+<area shape="rect" id="node2" href="$classCSF_1_1Zpt_1_1Tales_1_1ExpressionEvaluatorService.html" title="Default implementation of IExpressionEvaluatorService. " alt="" coords="273,19,450,60"/>
+<area shape="rect" id="node3" href="$interfaceCSF_1_1Zpt_1_1IZptDocumentProviderService.html" title="Interface for a service which provides access to the various registered IZptDocumentProvider instance..." alt="" coords="5,123,212,164"/>
+<area shape="rect" id="node4" href="$classCSF_1_1Zpt_1_1ZptDocumentProviderService.html" title="Default implementation of IZptDocumentProviderService. " alt="" coords="260,97,463,139"/>
+<area shape="rect" id="node5" href="$classCSF_1_1Zpt_1_1PluginServiceBase.html" title="Abstract base type for a service which exposes plugin instances. " alt="" coords="15,71,202,98"/>
 </map>

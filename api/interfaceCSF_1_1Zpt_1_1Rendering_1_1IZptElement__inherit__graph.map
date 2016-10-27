@@ -1,6 +1,6 @@
 <map id="CSF.Zpt.Rendering.IZptElement" name="CSF.Zpt.Rendering.IZptElement">
-<area shape="rect" id="node3" href="$classCSF_1_1Zpt_1_1Rendering_1_1ZptElement.html" title="Represents an element node in a ZPT document. " alt="" coords="491,56,697,83"/>
-<area shape="rect" id="node4" href="$classCSF_1_1Zpt_1_1Impl_1_1ZptHtmlElement.html" title="Implementation of ZptElement based on documents parsed using the HTML Agility Pack. " alt="" coords="755,5,955,32"/>
-<area shape="rect" id="node5" href="$classCSF_1_1Zpt_1_1Impl_1_1ZptXmlElement.html" title="Implementation of ZptElement based on documents parsed using System.Xml. " alt="" coords="757,56,952,83"/>
-<area shape="rect" id="node6" href="$classCSF_1_1Zpt_1_1Impl_1_1ZptXmlLinqElement.html" title="Implementation of ZptElement based on documents parsed using System.Xml.Linq. " alt="" coords="745,107,964,133"/>
+<area shape="rect" id="node3" href="$classCSF_1_1Zpt_1_1Rendering_1_1ZptElement.html" title="Represents an element node in a ZPT document. " alt="" coords="491,78,697,105"/>
+<area shape="rect" id="node4" href="$classCSF_1_1Zpt_1_1DocumentProviders_1_1ZptHtmlElement.html" title="Implementation of ZptElement based on documents parsed using the HTML Agility Pack. " alt="" coords="745,5,940,47"/>
+<area shape="rect" id="node5" href="$classCSF_1_1Zpt_1_1DocumentProviders_1_1ZptXmlElement.html" title="Implementation of ZptElement based on documents parsed using System.Xml. " alt="" coords="745,71,940,112"/>
+<area shape="rect" id="node6" href="$classCSF_1_1Zpt_1_1DocumentProviders_1_1ZptXmlLinqElement.html" title="Implementation of ZptElement based on documents parsed using System.Xml.Linq. " alt="" coords="745,136,940,177"/>
 </map>

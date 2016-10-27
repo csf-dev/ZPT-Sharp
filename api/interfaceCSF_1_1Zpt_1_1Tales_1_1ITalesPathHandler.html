@@ -124,14 +124,14 @@ Inheritance diagram for CSF.Zpt.Tales.ITalesPathHandler:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a00c0aabcd6a3304c3884f6baba4ba2ad"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interfaceCSF_1_1Zpt_1_1Tales_1_1ITalesPathHandler.html#a00c0aabcd6a3304c3884f6baba4ba2ad">HandleTalesPath</a> (string pathFragment, out object result, <a class="el" href="classCSF_1_1Zpt_1_1Rendering_1_1RenderingContext.html">RenderingContext</a> currentContext)</td></tr>
-<tr class="memdesc:a00c0aabcd6a3304c3884f6baba4ba2ad"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets an <code>System.Object</code> based upon a TALES path fragment.  <a href="#a00c0aabcd6a3304c3884f6baba4ba2ad">More...</a><br /></td></tr>
-<tr class="separator:a00c0aabcd6a3304c3884f6baba4ba2ad"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae7dea33c19adcc17953038a57c073ed4"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interfaceCSF_1_1Zpt_1_1Tales_1_1ITalesPathHandler.html#ae7dea33c19adcc17953038a57c073ed4">HandleTalesPath</a> (string pathFragment, out object result, <a class="el" href="interfaceCSF_1_1Zpt_1_1Rendering_1_1IRenderingContext.html">IRenderingContext</a> currentContext)</td></tr>
+<tr class="memdesc:ae7dea33c19adcc17953038a57c073ed4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets an <code>System.Object</code> based upon a TALES path fragment.  <a href="#ae7dea33c19adcc17953038a57c073ed4">More...</a><br /></td></tr>
+<tr class="separator:ae7dea33c19adcc17953038a57c073ed4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Interface for a type which provides custom handling of a TALES path fragment. </p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
-<a class="anchor" id="a00c0aabcd6a3304c3884f6baba4ba2ad"></a>
+<a class="anchor" id="ae7dea33c19adcc17953038a57c073ed4"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -150,7 +150,7 @@ Public Member Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="classCSF_1_1Zpt_1_1Rendering_1_1RenderingContext.html">RenderingContext</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="interfaceCSF_1_1Zpt_1_1Rendering_1_1IRenderingContext.html">IRenderingContext</a>&#160;</td>
           <td class="paramname"><em>currentContext</em>&#160;</td>
         </tr>
         <tr>
@@ -169,7 +169,7 @@ Public Member Functions</h2></td></tr>
 <div class="line">{</div>
 <div class="line">  <span class="keyword">private</span> Person _person;</div>
 <div class="line"></div>
-<div class="line">  <span class="keyword">public</span> <span class="keywordtype">bool</span> <a class="code" href="interfaceCSF_1_1Zpt_1_1Tales_1_1ITalesPathHandler.html#a00c0aabcd6a3304c3884f6baba4ba2ad">HandleTalesPath</a>(<span class="keywordtype">string</span> pathFragment, out <span class="keywordtype">object</span> result, RenderingContext currentContext)</div>
+<div class="line">  <span class="keyword">public</span> <span class="keywordtype">bool</span> <a class="code" href="interfaceCSF_1_1Zpt_1_1Tales_1_1ITalesPathHandler.html#ae7dea33c19adcc17953038a57c073ed4">HandleTalesPath</a>(<span class="keywordtype">string</span> pathFragment, out <span class="keywordtype">object</span> result, RenderingContext currentContext)</div>
 <div class="line">  {</div>
 <div class="line">    <span class="keywordflow">switch</span>(pathFragment)</div>
 <div class="line">    {</div>
@@ -199,7 +199,7 @@ Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p>Implemented in <a class="el" href="classCSF_1_1Zpt_1_1Rendering_1_1RepetitionInfo.html#a17fedb7ddb09b94fd3174bb7007675da">CSF.Zpt.Rendering.RepetitionInfo</a>, <a class="el" href="classCSF_1_1Zpt_1_1Tales_1_1BuiltinContextsContainer.html#a311b12fe5f8ccc2b470798fbe1e62ba9">CSF.Zpt.Tales.BuiltinContextsContainer</a>, <a class="el" href="classCSF_1_1Zpt_1_1Rendering_1_1RepetitionMetadataCollectionWrapper.html#aed7e2ed7693482095de328e0095298ae">CSF.Zpt.Rendering.RepetitionMetadataCollectionWrapper</a>, and <a class="el" href="classCSF_1_1Zpt_1_1Rendering_1_1OriginalAttributeValuesCollection.html#aaf28a6c4e56a8a15479b63f571ce4f41">CSF.Zpt.Rendering.OriginalAttributeValuesCollection</a>.</p>
+<p>Implemented in <a class="el" href="classCSF_1_1Zpt_1_1Rendering_1_1RepetitionInfo.html#ae8b4b8e2778fcad3eabd7dd02a6a6531">CSF.Zpt.Rendering.RepetitionInfo</a>, <a class="el" href="classCSF_1_1Zpt_1_1Tales_1_1BuiltinContextsContainer.html#a3c38d46ed4e77521c46579ac9d6d28df">CSF.Zpt.Tales.BuiltinContextsContainer</a>, <a class="el" href="classCSF_1_1Zpt_1_1Rendering_1_1RepetitionMetadataCollectionWrapper.html#adcb1004fd8def2c40fde8936b6a1629e">CSF.Zpt.Rendering.RepetitionMetadataCollectionWrapper</a>, and <a class="el" href="classCSF_1_1Zpt_1_1Rendering_1_1OriginalAttributeValuesCollection.html#a27314550bf3a86faf5f6650541efbc3a">CSF.Zpt.Rendering.OriginalAttributeValuesCollection</a>.</p>
 
 </div>
 </div>
@@ -212,7 +212,7 @@ Public Member Functions</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="namespaceCSF.html">CSF</a></li><li class="navelem"><a class="el" href="namespaceCSF_1_1Zpt.html">Zpt</a></li><li class="navelem"><a class="el" href="namespaceCSF_1_1Zpt_1_1Tales.html">Tales</a></li><li class="navelem"><a class="el" href="interfaceCSF_1_1Zpt_1_1Tales_1_1ITalesPathHandler.html">ITalesPathHandler</a></li>
-    <li class="footer">Generated on Wed Sep 21 2016 20:20:00 for Zpt-Sharp by
+    <li class="footer">Generated on Thu Oct 27 2016 19:39:50 for Zpt-Sharp by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.8 </li>
   </ul>

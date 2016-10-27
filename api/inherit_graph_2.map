@@ -1,4 +1,3 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="node1" href="$interfaceCSF_1_1Zpt_1_1BatchRendering_1_1IBatchRenderingDocumentResponse.html" title="Represents the response for a single document within an IBatchRenderingResponse. " alt="" coords="5,5,216,47"/>
-<area shape="rect" id="node2" href="$classCSF_1_1Zpt_1_1BatchRendering_1_1BatchRenderingDocumentResponse.html" title="Batch rendering document response. " alt="" coords="264,5,471,47"/>
+<area shape="rect" id="node1" href="$interfaceCSF_1_1Zpt_1_1BatchRendering_1_1IBatchOptionsMultipleInputOutputHelper.html" title="Interface for a type which enables selection of the output options for IBatchRenderingOptions, when the input options indicate the potential for multiple documents. " alt="" coords="5,5,224,47"/>
 </map>

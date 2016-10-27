@@ -1,4 +1,5 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="node1" href="$interfaceCSF_1_1Zpt_1_1BatchRendering_1_1IBatchRenderingResponse.html" title="Represents the response from a batch&#45;rendering task. " alt="" coords="5,5,216,47"/>
-<area shape="rect" id="node2" href="$classCSF_1_1Zpt_1_1BatchRendering_1_1BatchRenderingResponse.html" title="Represents the response from a batch&#45;rendering operation. " alt="" coords="264,5,471,47"/>
+<area shape="rect" id="node1" href="$interfaceCSF_1_1Zpt_1_1BatchRendering_1_1IBatchRenderer.html" title="Interface for a type which provides batch&#45;rendering services, parsing and rendering potentially multi..." alt="" coords="5,5,216,47"/>
+<area shape="rect" id="node2" href="$classCSF_1_1Zpt_1_1BatchRendering_1_1BatchRenderer.html" title="Default implementation of IBatchRenderer. " alt="" coords="264,5,471,47"/>
+<area shape="rect" id="node3" href="$classCSF_1_1Zpt_1_1BatchRendering_1_1ErrorTolerantBatchRenderer.html" title="Implementation of BatchRenderer which catches exceptions raised when rendering documents and rolls th..." alt="" coords="519,5,720,47"/>
 </map>

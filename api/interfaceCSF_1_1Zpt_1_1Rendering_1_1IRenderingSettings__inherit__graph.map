@@ -1,0 +1,4 @@
+<map id="CSF.Zpt.Rendering.IRenderingSettings" name="CSF.Zpt.Rendering.IRenderingSettings">
+<area shape="rect" id="node2" href="$classCSF_1_1Zpt_1_1Rendering_1_1DefaultRenderingSettings.html" title="Represents the default IRenderingSettings. " alt="" coords="5,95,187,136"/>
+<area shape="rect" id="node3" href="$classCSF_1_1Zpt_1_1Rendering_1_1RenderingSettings.html" title="Encapsulates the available options for rendering a ZptDocument. " alt="" coords="211,95,410,136"/>
+</map>

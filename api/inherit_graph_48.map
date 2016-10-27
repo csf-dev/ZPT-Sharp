@@ -1,3 +1,10 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="node1" href="$classCSF_1_1Zpt_1_1ZptConstants_1_1Metal.html" title="Static type for METAL constants. " alt="" coords="5,5,196,32"/>
+<area shape="rect" id="node1" href="$interfaceCSF_1_1Zpt_1_1Tal_1_1IAttributeHandler.html" title="Interface for a type which handles a single TAL attribute present upon a ZptElement, exposed by its IRenderingContext. " alt="" coords="5,209,201,235"/>
+<area shape="rect" id="node2" href="$classCSF_1_1Zpt_1_1Tal_1_1AttributesAttributeHandler.html" title="Implementation of IAttributeHandler which handles a tal:attributes attribute. " alt="" coords="251,5,454,47"/>
+<area shape="rect" id="node3" href="$classCSF_1_1Zpt_1_1Tal_1_1ConditionAttributeHandler.html" title="Implementation of IAttributeHandler which handles a tal:condition attribute. " alt="" coords="251,71,454,112"/>
+<area shape="rect" id="node4" href="$classCSF_1_1Zpt_1_1Tal_1_1ContentOrReplaceAttributeHandler.html" title="Implementation of IAttributeHandler which handles either a tal:content or tal:replace attribute..." alt="" coords="249,136,456,177"/>
+<area shape="rect" id="node5" href="$classCSF_1_1Zpt_1_1Tal_1_1DefineAttributeHandler.html" title="Implementation of IAttributeHandler which handles a tal:define attribute. " alt="" coords="260,201,445,243"/>
+<area shape="rect" id="node6" href="$classCSF_1_1Zpt_1_1Tal_1_1OmitTagAttributeHandler.html" title="Implementation of IAttributeHandler which handles a tal:omit&#45;tag attribute. " alt="" coords="254,267,451,308"/>
+<area shape="rect" id="node7" href="$classCSF_1_1Zpt_1_1Tal_1_1OnErrorAttributeHandler.html" title="Implementation of IAttributeHandler which handles a tal:on&#45;error attribute. " alt="" coords="257,332,449,373"/>
+<area shape="rect" id="node8" href="$classCSF_1_1Zpt_1_1Tal_1_1RepeatAttributeHandler.html" title="Implementation of IAttributeHandler which handles a tal:repeat attribute. " alt="" coords="258,397,447,439"/>
 </map>

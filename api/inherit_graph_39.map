@@ -1,3 +1,4 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="node1" href="$interfaceCSF_1_1Zpt_1_1Tales_1_1ITalesConvertible.html" title="Interface which may be used for types which implement custom code for conversions by the TALES system..." alt="" coords="5,5,220,32"/>
+<area shape="rect" id="node1" href="$interfaceCSF_1_1Zpt_1_1Rendering_1_1IRenderingContextFactory.html" title="Interface for a type which creates an instance of IRenderingContext from the IRenderingSettings. " alt="" coords="5,5,208,47"/>
+<area shape="rect" id="node2" href="$classCSF_1_1Zpt_1_1Tales_1_1TalesRenderingContextFactory.html" title="Implementation of IRenderingContextFactory which creates TalesModel instances. " alt="" coords="256,5,459,47"/>
 </map>

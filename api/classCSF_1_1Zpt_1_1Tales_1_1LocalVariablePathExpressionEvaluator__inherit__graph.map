@@ -1,5 +1,0 @@
-<map id="CSF.Zpt.Tales.LocalVariablePathExpressionEvaluator" name="CSF.Zpt.Tales.LocalVariablePathExpressionEvaluator">
-<area shape="rect" id="node2" href="$classCSF_1_1Zpt_1_1Tales_1_1PathExpressionEvaluator.html" title="Implementation of ExpressionEvaluatorBase which handles TALES path expressions. " alt="" coords="16,155,185,181"/>
-<area shape="rect" id="node3" href="$classCSF_1_1Zpt_1_1Tales_1_1ExpressionEvaluatorBase.html" title="Base class for a TALES expression evaluator implementation, implements IExpressionEvaluator. " alt="" coords="15,80,187,107"/>
-<area shape="rect" id="node4" href="$interfaceCSF_1_1Zpt_1_1Tales_1_1IExpressionEvaluator.html" title="Interface for a type which evaluates TALES expressions. " alt="" coords="27,5,174,32"/>
-</map>

@@ -1,3 +1,4 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="node1" href="$classTest_1_1CSF_1_1Zpt_1_1Cli_1_1Test.html" title="Test.CSF.Zpt.Cli.Test" alt="" coords="5,5,157,32"/>
+<area shape="rect" id="node1" href="$interfaceCSF_1_1Zpt_1_1Tales_1_1IExpressionFactory.html" title="Creator for Expression instances. " alt="" coords="5,5,187,47"/>
+<area shape="rect" id="node2" href="$classCSF_1_1Zpt_1_1Tales_1_1ExpressionFactory.html" title="Creator for Expression instances. " alt="" coords="235,5,412,47"/>
 </map>

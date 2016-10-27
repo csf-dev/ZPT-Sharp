@@ -1,5 +1,6 @@
 <map id="CSF.Zpt.Rendering.Model" name="CSF.Zpt.Rendering.Model">
-<area shape="rect" id="node3" title="Implementation of Model which always contains nothing. " alt="" coords="5,155,217,181"/>
-<area shape="rect" id="node4" href="$classCSF_1_1Zpt_1_1Tales_1_1TalesModel.html" title="An implementation of Model which makes use of the TALES: Template Attribute Language Expression Synta..." alt="" coords="242,155,421,181"/>
-<area shape="rect" id="node2" href="$interfaceCSF_1_1Zpt_1_1Rendering_1_1IModel.html" title="A model which represents and carries the state of a ZPT operation. " alt="" coords="190,5,251,32"/>
+<area shape="rect" id="node4" title="Implementation of Model which always contains nothing. " alt="" coords="5,229,217,256"/>
+<area shape="rect" id="node5" href="$classCSF_1_1Zpt_1_1Tales_1_1TalesModel.html" title="An implementation of Model which makes use of the TALES: Template Attribute Language Expression Synta..." alt="" coords="242,229,421,256"/>
+<area shape="rect" id="node2" href="$interfaceCSF_1_1Zpt_1_1Rendering_1_1IModel.html" title="A model which represents and carries the state of a ZPT operation. " alt="" coords="190,80,251,107"/>
+<area shape="rect" id="node3" href="$interfaceCSF_1_1Zpt_1_1Rendering_1_1IModelValueStore.html" title="Represents a mechanism of configuring an IModel, by adding local and/or global variable definitions..." alt="" coords="158,5,283,32"/>
 </map>

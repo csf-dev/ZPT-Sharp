@@ -1,6 +1,7 @@
 <map id="CSF.Zpt.Rendering.IModel" name="CSF.Zpt.Rendering.IModel">
-<area shape="rect" id="node2" href="$classCSF_1_1Zpt_1_1Rendering_1_1Model.html" title="Represents the root of an object model. " alt="" coords="41,80,216,107"/>
-<area shape="rect" id="node5" href="$interfaceCSF_1_1Zpt_1_1Tales_1_1ITalesModel.html" title="Represents an IModel which contains TALES&#45;specific functionality. " alt="" coords="240,80,423,107"/>
-<area shape="rect" id="node3" title="Implementation of Model which always contains nothing. " alt="" coords="5,155,217,181"/>
-<area shape="rect" id="node4" href="$classCSF_1_1Zpt_1_1Tales_1_1TalesModel.html" title="An implementation of Model which makes use of the TALES: Template Attribute Language Expression Synta..." alt="" coords="242,155,421,181"/>
+<area shape="rect" id="node3" href="$classCSF_1_1Zpt_1_1Rendering_1_1Model.html" title="Represents the root of an object model. " alt="" coords="41,155,216,181"/>
+<area shape="rect" id="node6" href="$interfaceCSF_1_1Zpt_1_1Tales_1_1ITalesModel.html" title="Represents an IModel which contains TALES&#45;specific functionality. " alt="" coords="240,155,423,181"/>
+<area shape="rect" id="node2" href="$interfaceCSF_1_1Zpt_1_1Rendering_1_1IModelValueStore.html" title="Represents a mechanism of configuring an IModel, by adding local and/or global variable definitions..." alt="" coords="167,5,293,32"/>
+<area shape="rect" id="node4" title="Implementation of Model which always contains nothing. " alt="" coords="5,229,217,256"/>
+<area shape="rect" id="node5" href="$classCSF_1_1Zpt_1_1Tales_1_1TalesModel.html" title="An implementation of Model which makes use of the TALES: Template Attribute Language Expression Synta..." alt="" coords="242,229,421,256"/>
 </map>

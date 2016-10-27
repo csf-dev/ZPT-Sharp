@@ -1,7 +1,7 @@
 <map id="CSF.Zpt.Tales.ExpressionEvaluatorBase" name="CSF.Zpt.Tales.ExpressionEvaluatorBase">
-<area shape="rect" id="node3" href="$classCSF_1_1Zpt_1_1Tales_1_1NotExpressionEvaluator.html" title="Implementation of ExpressionEvaluatorBase which evaluates a &#39;child&#39; expression, converts the result t..." alt="" coords="431,5,630,47"/>
-<area shape="rect" id="node4" href="$classCSF_1_1Zpt_1_1Tales_1_1PathExpressionEvaluator.html" title="Implementation of ExpressionEvaluatorBase which handles TALES path expressions. " alt="" coords="429,71,633,112"/>
-<area shape="rect" id="node6" href="$classCSF_1_1Zpt_1_1Tales_1_1StringExpressionEvaluator.html" title="Implementation of ExpressionEvaluatorBase which creates string values, with optional interpolation..." alt="" coords="425,136,636,177"/>
+<area shape="rect" id="node3" href="$classCSF_1_1Zpt_1_1ExpressionEvaluators_1_1NotExpressionEvaluator.html" title="Implementation of ExpressionEvaluatorBase which evaluates a &#39;child&#39; expression, converts the result t..." alt="" coords="425,5,632,47"/>
+<area shape="rect" id="node4" href="$classCSF_1_1Zpt_1_1ExpressionEvaluators_1_1PathExpressionEvaluator.html" title="Implementation of ExpressionEvaluatorBase which handles TALES path expressions. " alt="" coords="425,71,632,112"/>
+<area shape="rect" id="node6" href="$classCSF_1_1Zpt_1_1ExpressionEvaluators_1_1StringExpressionEvaluator.html" title="Implementation of ExpressionEvaluatorBase which creates string values, with optional interpolation..." alt="" coords="425,136,632,177"/>
 <area shape="rect" id="node2" href="$interfaceCSF_1_1Zpt_1_1Tales_1_1IExpressionEvaluator.html" title="Interface for a type which evaluates TALES expressions. " alt="" coords="5,78,152,105"/>
-<area shape="rect" id="node5" href="$classCSF_1_1Zpt_1_1Tales_1_1LocalVariablePathExpressionEvaluator.html" title="Specialisation of PathExpressionEvaluator which only looks in local variable definitions. " alt="" coords="684,71,875,112"/>
+<area shape="rect" id="node5" href="$classCSF_1_1Zpt_1_1ExpressionEvaluators_1_1LocalVariablePathExpressionEvaluator.html" title="Specialisation of PathExpressionEvaluator which only looks in local variable definitions. " alt="" coords="680,71,927,112"/>
 </map>

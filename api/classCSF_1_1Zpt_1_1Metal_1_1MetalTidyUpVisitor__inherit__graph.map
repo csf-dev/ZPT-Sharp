@@ -1,5 +1,5 @@
 <map id="CSF.Zpt.Metal.MetalTidyUpVisitor" name="CSF.Zpt.Metal.MetalTidyUpVisitor">
 <area shape="rect" id="node2" href="$classCSF_1_1Zpt_1_1Rendering_1_1NoOpVisitor.html" title="Implementation of ContextVisitorBase that performs no operation. " alt="" coords="52,155,145,181"/>
 <area shape="rect" id="node3" href="$classCSF_1_1Zpt_1_1Rendering_1_1ContextVisitorBase.html" title="Abstract base logic for implementations of IContextVisitor. " alt="" coords="31,80,166,107"/>
-<area shape="rect" id="node4" href="$interfaceCSF_1_1Zpt_1_1Rendering_1_1IContextVisitor.html" title="Interface for a type which can visit a RenderingContext instance. " alt="" coords="44,5,153,32"/>
+<area shape="rect" id="node4" href="$interfaceCSF_1_1Zpt_1_1Rendering_1_1IContextVisitor.html" title="Interface for a type which can visit a IRenderingContext instance. " alt="" coords="44,5,153,32"/>
 </map>

@@ -10,22 +10,8 @@
 @import url(css/download.css);
 </style>
 
-<script type="text/javascript" src="js/modernizr.min.js"></script>
+<script data-main="js/config/main" type="text/javascript" src="js/lib/require.min.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.4.0/styles/default.min.css">
-<script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s=" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.4.0/highlight.min.js"></script>
-<script>
-$(window).ready(function() {
-  hljs.initHighlightingOnLoad();
-  
-  var
-    navHamburger = $(".page_header .hamburger_menu"),
-    navMenu = $(".main_page_area > nav");
-  navHamburger.click(function(ev) {
-    navMenu.toggleClass("visible");
-  });
-});
-</script>
 </head>
 <body class="page_download">
 <div class="content_wrapper">
@@ -146,8 +132,8 @@ $(window).ready(function() {
       </p>
       
       <p>
-        The most recent stable release is <strong>v0.5.0</strong>, the following downloads
-        are for that version.
+        The most recent release is <strong>v0.5.0</strong>, which is an <strong>alpha</strong> release.
+        The following downloads are for that version.
       </p>
       <h2>ZPT-Sharp complete package</h2>
       <p>The complete package includes everything, both mandatory and optional components.</p>
@@ -210,7 +196,7 @@ $(window).ready(function() {
   </section>
   <section class="version">
     <p>
-      Website built <strong>2016-09-21</strong>;
+      Website built <strong>2016-10-27</strong>;
       for version
       <strong>v0.5.0</strong>
     </p>

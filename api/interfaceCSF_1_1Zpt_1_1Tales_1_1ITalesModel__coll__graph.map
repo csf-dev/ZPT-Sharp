@@ -1,3 +1,4 @@
 <map id="CSF.Zpt.Tales.ITalesModel" name="CSF.Zpt.Tales.ITalesModel">
-<area shape="rect" id="node2" href="$interfaceCSF_1_1Zpt_1_1Rendering_1_1IModel.html" title="A model which represents and carries the state of a ZPT operation. " alt="" coords="66,5,127,32"/>
+<area shape="rect" id="node2" href="$interfaceCSF_1_1Zpt_1_1Rendering_1_1IModel.html" title="A model which represents and carries the state of a ZPT operation. " alt="" coords="66,80,127,107"/>
+<area shape="rect" id="node3" href="$interfaceCSF_1_1Zpt_1_1Rendering_1_1IModelValueStore.html" title="Represents a mechanism of configuring an IModel, by adding local and/or global variable definitions..." alt="" coords="34,5,159,32"/>
 </map>

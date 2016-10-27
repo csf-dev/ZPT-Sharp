@@ -1,3 +1,4 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="node1" href="$classCSF_1_1Zpt_1_1Tales_1_1Expression.html" title="Represents a TALES expression. " alt="" coords="5,5,183,32"/>
+<area shape="rect" id="node1" href="$interfaceCSF_1_1Zpt_1_1Rendering_1_1IContextVisitorFactory.html" title="Type which creates instances of IContextVisitor via reflection. " alt="" coords="5,5,195,47"/>
+<area shape="rect" id="node2" href="$classCSF_1_1Zpt_1_1Rendering_1_1ContextVisitorFactory.html" title="Type which creates instances of IContextVisitor via reflection. " alt="" coords="243,5,428,47"/>
 </map>
