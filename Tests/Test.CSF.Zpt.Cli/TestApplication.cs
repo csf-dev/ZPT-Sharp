@@ -45,8 +45,8 @@ namespace Test.CSF.Zpt.Cli
 
       _renderer = new Mock<IBatchRenderer>();
       _renderer
-        .Setup(x => x.Render(It.IsAny<IRenderingOptions>(),
-                             It.IsAny<IBatchRenderingOptions>()))
+        .Setup(x => x.Render(It.IsAny<IBatchRenderingOptions>(),
+                             It.IsAny<IRenderingOptions>()))
         .Returns(Mock.Of<IBatchRenderingResponse>());
     }
 
@@ -319,8 +319,8 @@ Please include the information below with your bug report
       var options = new CommandLineOptions();
 
       _renderer
-        .Setup(x => x.Render(It.IsAny<IRenderingOptions>(),
-                             It.IsAny<IBatchRenderingOptions>()))
+        .Setup(x => x.Render(It.IsAny<IBatchRenderingOptions>(),
+                             It.IsAny<IRenderingOptions>()))
         .Throws<InvalidOperationException>();
 
       // Act
@@ -357,8 +357,8 @@ Please include the information below with your bug report
       var options = new CommandLineOptions();
 
       _renderer
-        .Setup(x => x.Render(It.IsAny<IRenderingOptions>(),
-                             It.IsAny<IBatchRenderingOptions>()))
+        .Setup(x => x.Render(It.IsAny<IBatchRenderingOptions>(),
+                             It.IsAny<IRenderingOptions>()))
         .Throws(new InvalidBatchRenderingOptionsException(_autofixture.Create<string>(),
                                                           BatchRenderingFatalErrorType.NoInputsSpecified));
 
@@ -393,8 +393,8 @@ standard input).  Use 'ZptBuilder.exe --help', or consult the manual.
       var options = new CommandLineOptions();
 
       _renderer
-        .Setup(x => x.Render(It.IsAny<IRenderingOptions>(),
-                             It.IsAny<IBatchRenderingOptions>()))
+        .Setup(x => x.Render(It.IsAny<IBatchRenderingOptions>(),
+                             It.IsAny<IRenderingOptions>()))
         .Throws(new InvalidBatchRenderingOptionsException(_autofixture.Create<string>(),
                                                           BatchRenderingFatalErrorType.InputCannotBeBothStreamAndPaths));
 

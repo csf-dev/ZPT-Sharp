@@ -81,7 +81,7 @@ namespace CSF.Zpt.Cli
 
       try
       {
-        output = _renderer.Render(options, batchOptions);
+        output = _renderer.Render(batchOptions, options);
       }
       catch(InvalidBatchRenderingOptionsException ex)
       {

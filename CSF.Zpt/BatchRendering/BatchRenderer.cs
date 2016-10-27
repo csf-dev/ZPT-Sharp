@@ -26,10 +26,10 @@ namespace CSF.Zpt.BatchRendering
     /// <summary>
     /// Parse and render the documents found using the given batch rendering options.
     /// </summary>
-    /// <param name="options">Rendering options.</param>
+    /// <param name="settings">Rendering settings.</param>
     /// <param name="batchOptions">Batch rendering options, indicating the source and destination files.</param>
-    public virtual IBatchRenderingResponse Render(IRenderingSettings options,
-                                                  IBatchRenderingOptions batchOptions)
+    public virtual IBatchRenderingResponse Render(IBatchRenderingOptions batchOptions,
+                                                  IRenderingSettings settings = null)
     {
       ValidateBatchOptions(batchOptions);
 
@@ -41,7 +41,7 @@ namespace CSF.Zpt.BatchRendering
       {
         var contextConfigurator = GetContextConfigurator(job);
 
-        var docResponse = Render(job, options, batchOptions, contextConfigurator);
+        var docResponse = Render(job, settings, batchOptions, contextConfigurator);
         documents.Add(docResponse);
       }
 
@@ -56,10 +56,10 @@ namespace CSF.Zpt.BatchRendering
     /// <returns>
     /// An object instance indicating the outcome of the rendering.
     /// </returns>
-    public virtual IBatchRenderingResponse Render(IRenderingOptions options,
-                                                  IBatchRenderingOptions batchOptions)
+    public virtual IBatchRenderingResponse Render(IBatchRenderingOptions batchOptions,
+                                                  IRenderingOptions options = null)
     {
-      return this.Render(_settingsFactory.CreateSettings(options), batchOptions);
+      return this.Render(batchOptions, _settingsFactory.CreateSettings(options));
     }
 
     #endregion

@@ -12,13 +12,13 @@ namespace CSF.Zpt.BatchRendering
     /// <summary>
     /// Parse and render the documents found using the given batch rendering options.
     /// </summary>
-    /// <param name="options">Rendering options.</param>
+    /// <param name="settings">Rendering settings.</param>
     /// <param name="batchOptions">Batch rendering options, indicating the source and destination files.</param>
     /// <returns>
     /// An object instance indicating the outcome of the rendering.
     /// </returns>
-    IBatchRenderingResponse Render(IRenderingSettings options,
-                                   IBatchRenderingOptions batchOptions);
+    IBatchRenderingResponse Render(IBatchRenderingOptions batchOptions,
+                                   IRenderingSettings settings = null);
     
     /// <summary>
     /// Parse and render the documents found using the given batch rendering options.
@@ -28,8 +28,8 @@ namespace CSF.Zpt.BatchRendering
     /// <returns>
     /// An object instance indicating the outcome of the rendering.
     /// </returns>
-    IBatchRenderingResponse Render(IRenderingOptions options,
-                                   IBatchRenderingOptions batchOptions);
+    IBatchRenderingResponse Render(IBatchRenderingOptions batchOptions,
+                                   IRenderingOptions options = null);
   }
 }
 
