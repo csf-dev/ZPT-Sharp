@@ -125,7 +125,7 @@ namespace CSF.Zpt.Tales
     /// <param name="registry">An expression evaluator registry.</param>
     public SimpleEvaluatorSelector(IExpressionEvaluatorService registry = null)
     {
-      _registry = new ExpressionEvaluatorService();
+      _registry = registry?? new ExpressionEvaluatorService();
     }
 
     #endregion
