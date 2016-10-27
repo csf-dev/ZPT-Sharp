@@ -56,6 +56,11 @@ namespace CSF.Zpt.Rendering
         contextFactory = GetContextFactory();
       }
 
+      foreach(var keywordOption in options.KeywordOptions)
+      {
+        contextFactory.AddKeywordOption(keywordOption.Key, keywordOption.Value);
+      }
+
       ITemplateFileFactory templateFactory;
       if(!String.IsNullOrEmpty(options.DocumentFactoryType))
       {
