@@ -147,9 +147,9 @@ namespace CSF.Zpt.Cli
 
     #region constructor
 
-    public BatchRenderingOptionsFactory()
+    public BatchRenderingOptionsFactory(DirectoryInfo baseDirectory = null)
     {
-      _relativeBase = new DirectoryInfo(System.Environment.CurrentDirectory);
+      _relativeBase = baseDirectory?? new DirectoryInfo(System.Environment.CurrentDirectory);
     }
 
     #endregion
