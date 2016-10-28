@@ -99,5 +99,6 @@
       <Link>CommonAssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="AssemblyInfo.cs" />
+    <Compile Include="TestRenderingOptionsFactory.cs" />
   </ItemGroup>
 </Project>
