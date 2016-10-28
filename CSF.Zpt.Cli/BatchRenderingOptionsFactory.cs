@@ -32,9 +32,10 @@ namespace CSF.Zpt.Cli
       var ignoredPaths = GetIgnoredPaths(options);
 
       var outputPath = GetOutputPath(options);
+      var useStdOut = OutputToStdOut(inputFiles, outputPath);
 
       return new BatchRenderingOptions(inputStream: useStdin? Console.OpenStandardInput() : null,
-                                       outputStream: useStdin? Console.OpenStandardOutput() : null,
+                                       outputStream: useStdOut? Console.OpenStandardOutput() : null,
                                        inputPaths: inputFiles.Where(x => x != null),
                                        outputPath: outputPath,
                                        inputSearchPattern: options.InputFilenamePattern,
@@ -68,6 +69,13 @@ namespace CSF.Zpt.Cli
     private bool ReadFromStandardInput(IEnumerable<FileSystemInfo> inputFiles)
     {
       return inputFiles.Count() == 1 && inputFiles.All(x => x == null);
+    }
+
+    private bool OutputToStdOut(IEnumerable<FileSystemInfo> inputFiles, FileSystemInfo outputPath)
+    {
+      return (inputFiles.Count() == 1
+              && !inputFiles.Any(x => x is DirectoryInfo)
+              && outputPath == null);
     }
 
     private FileSystemInfo GetOutputPath(CommandLineOptions options)
