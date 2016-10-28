@@ -16,6 +16,12 @@ namespace CSF.Zpt.BatchRendering
 
     #endregion
 
+    #region fields
+
+    private bool _disposed;
+
+    #endregion
+
     #region input options
 
     /// <summary>
@@ -69,6 +75,37 @@ namespace CSF.Zpt.BatchRendering
     /// </summary>
     /// <value>The output extension override.</value>
     public string OutputExtensionOverride { get; private set; }
+
+    #endregion
+
+    #region methods
+
+    /// <summary>
+    /// Releases all resource used by the <see cref="CSF.Zpt.BatchRendering.BatchRenderingOptions"/> object.
+    /// </summary>
+    /// <remarks>Call <see cref="Dispose"/> when you are finished using the
+    /// <see cref="CSF.Zpt.BatchRendering.BatchRenderingOptions"/>. The <see cref="Dispose"/> method leaves the
+    /// <see cref="CSF.Zpt.BatchRendering.BatchRenderingOptions"/> in an unusable state. After calling
+    /// <see cref="Dispose"/>, you must release all references to the
+    /// <see cref="CSF.Zpt.BatchRendering.BatchRenderingOptions"/> so the garbage collector can reclaim the memory that
+    /// the <see cref="CSF.Zpt.BatchRendering.BatchRenderingOptions"/> was occupying.</remarks>
+    public void Dispose()
+    {
+      if(!_disposed)
+      {
+        if(InputStream != null)
+        {
+          InputStream.Dispose();
+        }
+
+        if(OutputStream != null)
+        {
+          OutputStream.Dispose();
+        }
+
+        _disposed = true;
+      }
+    }
 
     #endregion
 
