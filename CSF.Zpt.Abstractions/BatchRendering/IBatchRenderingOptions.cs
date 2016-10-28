@@ -7,7 +7,7 @@ namespace CSF.Zpt.BatchRendering
   /// <summary>
   /// Represents batch rendering options, indicating the inputs and outputs for a <see cref="IBatchRenderer"/>.
   /// </summary>
-  public interface IBatchRenderingOptions
+  public interface IBatchRenderingOptions : IDisposable
   {
     #region input options
 
