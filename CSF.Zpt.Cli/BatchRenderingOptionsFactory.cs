@@ -35,7 +35,7 @@ namespace CSF.Zpt.Cli
 
       return new BatchRenderingOptions(inputStream: useStdin? Console.OpenStandardInput() : null,
                                        outputStream: useStdin? Console.OpenStandardOutput() : null,
-                                       inputPaths: inputFiles,
+                                       inputPaths: inputFiles.Where(x => x != null),
                                        outputPath: outputPath,
                                        inputSearchPattern: options.InputFilenamePattern,
                                        outputExtensionOverride: options.OutputFilenameExtension,
@@ -53,19 +53,13 @@ namespace CSF.Zpt.Cli
       }
 
       var absolutePath = MakeAbsolutePath(path);
-      if(File.Exists(absolutePath))
-      {
-        output = new FileInfo(absolutePath);
-      }
-      else if(Directory.Exists(absolutePath))
+      if(Directory.Exists(absolutePath))
       {
         output = new DirectoryInfo(absolutePath);
       }
       else
       {
-        throw new InvalidInputPathException(ExceptionMessages.InvalidInputFile) {
-          Path = path
-        };
+        output = new FileInfo(absolutePath);
       }
 
       return output;
