@@ -33,7 +33,7 @@ namespace Test.CSF.Zpt.Metal
     #region tests
 
     [Test]
-    public void TestGetUsedMacro()
+    public void GetUsedMacro_returns_correct_referenced_element()
     {
       // Arrange
       var attribute = Mock.Of<global::CSF.Zpt.Rendering.ZptAttribute>();
@@ -60,7 +60,7 @@ namespace Test.CSF.Zpt.Metal
     }
 
     [Test]
-    public void TestGetUsedMacroEvaluationFailure()
+    public void GetUsedMacro_returns_null_for_evaluation_failure()
     {
       // Arrange
       var attribute = Mock.Of<global::CSF.Zpt.Rendering.ZptAttribute>();
@@ -86,7 +86,7 @@ namespace Test.CSF.Zpt.Metal
     }
 
     [Test]
-    public void TestGetUsedMacroNoAttribute()
+    public void GetUsedMacro_returns_null_when_attribute_not_present()
     {
       // Arrange
       var mockOriginalElement = new Mock<ZptElement>();
@@ -108,7 +108,7 @@ namespace Test.CSF.Zpt.Metal
     }
 
     [Test]
-    public void TestGetExtendedMacro()
+    public void GetExtendedMacro_returns_correct_referenced_element()
     {
       // Arrange
       var attribute = Mock.Of<global::CSF.Zpt.Rendering.ZptAttribute>();
@@ -135,7 +135,7 @@ namespace Test.CSF.Zpt.Metal
     }
 
     [Test]
-    public void TestGetExtendedMacroEvaluationFailure()
+    public void GetExtendedMacro_returns_null_for_evaluation_failure()
     {
       // Arrange
       var attribute = Mock.Of<global::CSF.Zpt.Rendering.ZptAttribute>();
@@ -162,7 +162,7 @@ namespace Test.CSF.Zpt.Metal
     }
 
     [Test]
-    public void TestGetExtendedMacroNoAttribute()
+    public void GetExtendedMacro_returns_null_when_attribute_not_present()
     {
       // Arrange
       var mockOriginalElement = new Mock<ZptElement>();

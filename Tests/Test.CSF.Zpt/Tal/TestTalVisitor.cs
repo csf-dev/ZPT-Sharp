@@ -34,7 +34,7 @@ namespace Test.CSF.Zpt.Tal
     #region tests
 
     [Test]
-    public void Visit_visits_every_context_in_a_context_hierarchy()
+    public void Visit_applies_handlers_to_every_context_in_a_context_hierarchy()
     {
       // Arrange
       var fixture = new Fixture();
@@ -71,10 +71,7 @@ namespace Test.CSF.Zpt.Tal
       Assert.NotNull(result, "Result nullability");
       try
       {
-        Assert.IsTrue(expectedContexts.Intersect(result).Count() == expectedContexts.Count(),
-                    "All expected elements contained");
-        Assert.IsTrue(result.Intersect(expectedContexts).Count() == result.Count(),
-                    "No unwanted elements contained");
+        CollectionAssert.AreEquivalent(expectedContexts, result, "All expected contexts returned");
       }
       catch(AssertionException)
       {

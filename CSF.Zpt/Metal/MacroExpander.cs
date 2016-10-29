@@ -24,7 +24,7 @@ namespace CSF.Zpt.Metal
     /// Expands the given context, replacing it with a new context - representing a macro - if it is required.
     /// </summary>
     /// <param name="context">The context to expand.</param>
-    public IRenderingContext Expand(IRenderingContext context)
+    public virtual IRenderingContext Expand(IRenderingContext context)
     {
       if(context == null)
       {
@@ -56,7 +56,7 @@ namespace CSF.Zpt.Metal
     /// </summary>
     /// <param name="context">The context to expand.</param>
     /// <param name="macro">The macro element to replace the original.</param>
-    public IRenderingContext ExpandAndReplace(IRenderingContext context, IZptElement macro)
+    public virtual IRenderingContext ExpandAndReplace(IRenderingContext context, IZptElement macro)
     {
       if(context == null)
       {
@@ -204,6 +204,11 @@ namespace CSF.Zpt.Metal
     #endregion
 
     #region constructor
+
+    /// <summary>
+    /// Initializes a new instance of the <see cref="CSF.Zpt.Metal.MacroExpander"/> class.
+    /// </summary>
+    public MacroExpander() : this(null, null) {}
 
     /// <summary>
     /// Initializes a new instance of the <see cref="CSF.Zpt.Metal.MacroExpander"/> class.
