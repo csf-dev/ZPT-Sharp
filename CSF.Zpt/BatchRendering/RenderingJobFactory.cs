@@ -6,7 +6,10 @@ using CSF.IO;
 
 namespace CSF.Zpt.BatchRendering
 {
-  internal class RenderingJobFactory : IRenderingJobFactory
+  /// <summary>
+  /// Default implementation of <see cref="IRenderingJobFactory"/>.
+  /// </summary>
+  public class RenderingJobFactory : IRenderingJobFactory
   {
     #region fields
 
@@ -23,7 +26,7 @@ namespace CSF.Zpt.BatchRendering
 
       if(inputOutputInfo.InputStream != null)
       {
-        output = ReadFromStandardInput(mode);
+        output = ReadFromStream(inputOutputInfo.InputStream, mode);
       }
       else
       {
@@ -33,20 +36,17 @@ namespace CSF.Zpt.BatchRendering
       return output;
     }
 
-    private IEnumerable<IRenderingJob> ReadFromStandardInput(RenderingMode? mode)
+    private IEnumerable<IRenderingJob> ReadFromStream(Stream stream, RenderingMode? mode)
     {
       Func<IZptDocument> documentCreator;
 
-      using(var stream = Console.OpenStandardInput())
+      if(mode == RenderingMode.Xml)
       {
-        if(mode == RenderingMode.Xml)
-        {
-          documentCreator = () => _documentFactory.CreateDocument(stream, RenderingMode.Xml);
-        }
-        else
-        {
-          documentCreator = () => _documentFactory.CreateDocument(stream, RenderingMode.Html);
-        }
+        documentCreator = () => _documentFactory.CreateDocument(stream, RenderingMode.Xml);
+      }
+      else
+      {
+        documentCreator = () => _documentFactory.CreateDocument(stream, RenderingMode.Html);
       }
 
       return new [] { new RenderingJob(documentCreator) };
