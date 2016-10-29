@@ -45,10 +45,10 @@
       <DetectedFiles Include="doxygen" Condition="'$(OS)' == 'Unix'" />
       <DetectedFiles Include="pdflatex" Condition="'$(OS)' == 'Unix'" />
       <DetectedFiles Include="man.exe" Condition=" '$(OS)' == 'Windows_NT' " />
-      <DetectedFiles Include="man2html.exe" Condition=" '$(OS)' == 'Windows_NT' "/>
-      <DetectedFiles Include="tidy.exe" Condition=" '$(OS)' == 'Windows_NT' "/>
-      <DetectedFiles Include="doxygen.exe" Condition=" '$(OS)' == 'Windows_NT' "/>
-      <DetectedFiles Include="pdflatex.exe" Condition=" '$(OS)' == 'Windows_NT' "/>
+      <DetectedFiles Include="man2html.exe" Condition=" '$(OS)' == 'Windows_NT' " />
+      <DetectedFiles Include="tidy.exe" Condition=" '$(OS)' == 'Windows_NT' " />
+      <DetectedFiles Include="doxygen.exe" Condition=" '$(OS)' == 'Windows_NT' " />
+      <DetectedFiles Include="pdflatex.exe" Condition=" '$(OS)' == 'Windows_NT' " />
     </ItemGroup>
     <RequireFilesOnPath Files="@(DetectedFiles)" />
   </Target>
