@@ -29,7 +29,7 @@ namespace CSF.Zpt.BatchRendering
     /// <param name="settings">Rendering settings.</param>
     /// <param name="batchOptions">Batch rendering options, indicating the source and destination files.</param>
     public virtual IBatchRenderingResponse Render(IBatchRenderingOptions batchOptions,
-                                                  IRenderingSettings settings = null)
+                                                  IRenderingSettings settings)
     {
       ValidateBatchOptions(batchOptions);
 
