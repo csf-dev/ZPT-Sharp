@@ -90,6 +90,7 @@
     <Compile Include="Rendering\TestContextVisitorFactory.cs" />
     <Compile Include="Tales\TestSimpleEvaluatorSelector.cs" />
     <Compile Include="Tal\TestTalTidyUpVisitor.cs" />
+    <Compile Include="Metal\TestMetalTidyUpVisitor.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\CSF\CSF\CSF.csproj">
