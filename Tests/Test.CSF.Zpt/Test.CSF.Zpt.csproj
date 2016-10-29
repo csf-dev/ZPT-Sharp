@@ -94,6 +94,7 @@
     <Compile Include="Metal\TestMetalVisitor.cs" />
     <Compile Include="BatchRendering\TestRenderingJobFactory.cs" />
     <Compile Include="BatchRendering\TestBatchRenderer.cs" />
+    <Compile Include="BatchRendering\TestBatchRenderingOptionsValidator.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\CSF\CSF\CSF.csproj">
