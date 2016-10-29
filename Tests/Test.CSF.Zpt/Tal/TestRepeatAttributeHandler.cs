@@ -52,7 +52,7 @@ namespace Test.CSF.Zpt.Tal
     #region tests
 
     [Test]
-    public void TestHandleNoAttribute()
+    public void Handle_makes_no_change_when_attribute_not_present()
     {
       // Arrange
       Mock.Get(_context)
@@ -73,7 +73,7 @@ namespace Test.CSF.Zpt.Tal
     }
 
     [Test]
-    public void TestHandleCancelsAction()
+    public void Handle_makes_no_change_when_expression_cancels_action()
     {
       // Arrange
       Mock.Get(_context)
@@ -99,7 +99,7 @@ namespace Test.CSF.Zpt.Tal
     }
 
     [Test]
-    public void TestHandleNullSequences()
+    public void Handle_makes_no_change_when_expression_is_null_sequence()
     {
       // Arrange
       Mock.Get(_context)
@@ -125,7 +125,7 @@ namespace Test.CSF.Zpt.Tal
     }
 
     [Test]
-    public void TestHandleEmptySequence()
+    public void Handle_removes_all_occurrences_when_sequence_is_empty()
     {
       // Arrange
       Mock.Get(_context)
@@ -150,7 +150,7 @@ namespace Test.CSF.Zpt.Tal
     }
 
     [Test]
-    public void TestHandleSequence()
+    public void Handle_repeats_context_for_actual_sequence()
     {
       // Arrange
       Mock.Get(_context)

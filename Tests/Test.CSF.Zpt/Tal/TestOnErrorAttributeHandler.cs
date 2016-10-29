@@ -49,7 +49,7 @@ namespace Test.CSF.Zpt.Tal
     #region no attribute
 
     [Test]
-    public void TestHandleNoAttribute()
+    public void Handle_takes_no_action_when_attribute_not_present()
     {
       // Arrange
       _element
@@ -80,7 +80,7 @@ namespace Test.CSF.Zpt.Tal
     #region cancels action
 
     [Test]
-    public void TestHandleCancelsAction()
+    public void Handle_takes_no_action_when_expression_cancels_action()
     {
       // Arrange
       Mock.Get(_context)
@@ -111,7 +111,7 @@ namespace Test.CSF.Zpt.Tal
     }
 
     [Test]
-    public void TestHandleTextCancelsAction()
+    public void Handle_takes_no_action_when_text_based_expression_cancels_action()
     {
       // Arrange
       Mock.Get(_context)
@@ -142,7 +142,7 @@ namespace Test.CSF.Zpt.Tal
     }
 
     [Test]
-    public void TestHandleStructureCancelsAction()
+    public void Handle_takes_no_action_when_structure_based_expression_cancels_action()
     {
       // Arrange
       Mock.Get(_context)
@@ -177,7 +177,7 @@ namespace Test.CSF.Zpt.Tal
     #region attribute evaluates null
 
     [Test]
-    public void TestHandleNull()
+    public void Handle_removes_all_children_when_expression_is_null()
     {
       // Arrange
       Mock.Get(_context)
@@ -208,7 +208,7 @@ namespace Test.CSF.Zpt.Tal
     }
 
     [Test]
-    public void TestHandleTextNull()
+    public void Handle_removes_all_children_when_text_expression_is_null()
     {
       // Arrange
       Mock.Get(_context)
@@ -239,7 +239,7 @@ namespace Test.CSF.Zpt.Tal
     }
 
     [Test]
-    public void TestHandleStructureNull()
+    public void Handle_removes_all_children_when_structure_expression_is_null()
     {
       // Arrange
       Mock.Get(_context)
@@ -274,7 +274,7 @@ namespace Test.CSF.Zpt.Tal
     #region attribute evaluates to something
 
     [Test]
-    public void TestHandle()
+    public void Handle_replaces_children_with_text_when_expression_has_value()
     {
       // Arrange
       Mock.Get(_context)
@@ -307,7 +307,7 @@ namespace Test.CSF.Zpt.Tal
     }
 
     [Test]
-    public void TestHandleText()
+    public void Handle_replaces_children_with_text_when_text_based_expression_has_value()
     {
       // Arrange
       Mock.Get(_context)
@@ -340,7 +340,7 @@ namespace Test.CSF.Zpt.Tal
     }
 
     [Test]
-    public void TestHandleStructure()
+    public void Handle_replaces_children_with_markup_when_structure_based_expression_has_value()
     {
       // Arrange
       Mock.Get(_context)
