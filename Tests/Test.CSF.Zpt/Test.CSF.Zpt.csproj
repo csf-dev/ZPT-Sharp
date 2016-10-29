@@ -93,6 +93,7 @@
     <Compile Include="Metal\TestMetalTidyUpVisitor.cs" />
     <Compile Include="Metal\TestMetalVisitor.cs" />
     <Compile Include="BatchRendering\TestRenderingJobFactory.cs" />
+    <Compile Include="BatchRendering\TestBatchRenderer.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\CSF\CSF\CSF.csproj">
