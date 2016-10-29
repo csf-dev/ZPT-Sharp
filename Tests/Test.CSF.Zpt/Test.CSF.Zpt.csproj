@@ -58,7 +58,7 @@
     <Folder Include="Tal\" />
     <Folder Include="Util\" />
     <Folder Include="Tales\" />
-    <Folder Include="Cli\" />
+    <Folder Include="BatchRendering\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="GlobalSetupFixture.cs" />
@@ -92,6 +92,7 @@
     <Compile Include="Tal\TestTalTidyUpVisitor.cs" />
     <Compile Include="Metal\TestMetalTidyUpVisitor.cs" />
     <Compile Include="Metal\TestMetalVisitor.cs" />
+    <Compile Include="BatchRendering\TestRenderingJobFactory.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\CSF\CSF\CSF.csproj">
