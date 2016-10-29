@@ -49,7 +49,7 @@ namespace Test.CSF.Zpt.Tal
     #region no attribute
 
     [Test]
-    public void TestHandleNoAttribute()
+    public void Handle_makes_no_change_when_attribute_not_present()
     {
       // Arrange
       Mock.Get(_context)
@@ -84,7 +84,7 @@ namespace Test.CSF.Zpt.Tal
     #region cancels action
 
     [Test]
-    public void TestHandleContentCancelsAction()
+    public void Handle_makes_no_change_with_content_attribute_when_attribute_cancels_action()
     {
       // Arrange
       Mock.Get(_context)
@@ -119,7 +119,7 @@ namespace Test.CSF.Zpt.Tal
     }
 
     [Test]
-    public void TestHandleContentTextCancelsAction()
+    public void Handle_makes_no_change_with_content_text_attribute_when_attribute_cancels_action()
     {
       // Arrange
       Mock.Get(_context)
@@ -154,7 +154,7 @@ namespace Test.CSF.Zpt.Tal
     }
 
     [Test]
-    public void TestHandleContentStructureCancelsAction()
+    public void Handle_makes_no_change_with_content_structure_attribute_when_attribute_cancels_action()
     {
       // Arrange
       Mock.Get(_context)
@@ -189,7 +189,7 @@ namespace Test.CSF.Zpt.Tal
     }
 
     [Test]
-    public void TestHandleReplaceCancelsAction()
+    public void Handle_makes_no_change_with_replace_attribute_when_attribute_cancels_action()
     {
       // Arrange
       Mock.Get(_context)
@@ -225,7 +225,7 @@ namespace Test.CSF.Zpt.Tal
     }
 
     [Test]
-    public void TestHandleReplaceTextCancelsAction()
+    public void Handle_makes_no_change_with_replace_text_attribute_when_attribute_cancels_action()
     {
       // Arrange
       Mock.Get(_context)
@@ -261,7 +261,7 @@ namespace Test.CSF.Zpt.Tal
     }
 
     [Test]
-    public void TestHandleReplaceStructureCancelsAction()
+    public void Handle_makes_no_change_with_replace_structure_attribute_when_attribute_cancels_action()
     {
       // Arrange
       Mock.Get(_context)
@@ -301,7 +301,7 @@ namespace Test.CSF.Zpt.Tal
     #region attribute evaluates null
 
     [Test]
-    public void TestHandleContentNull()
+    public void Handle_with_content_attribute_removes_all_children_when_expression_is_null()
     {
       // Arrange
       Mock.Get(_context)
@@ -336,7 +336,7 @@ namespace Test.CSF.Zpt.Tal
     }
 
     [Test]
-    public void TestHandleContentTextNull()
+    public void Handle_with_text_content_attribute_removes_all_children_when_expression_is_null()
     {
       // Arrange
       Mock.Get(_context)
@@ -371,7 +371,7 @@ namespace Test.CSF.Zpt.Tal
     }
 
     [Test]
-    public void TestHandleContentStructureNull()
+    public void Handle_with_structure_content_attribute_removes_all_children_when_expression_is_null()
     {
       // Arrange
       Mock.Get(_context)
@@ -406,7 +406,7 @@ namespace Test.CSF.Zpt.Tal
     }
 
     [Test]
-    public void TestHandleReplaceNull()
+    public void Handle_with_replace_attribute_removes_element_when_expression_is_null()
     {
       // Arrange
       Mock.Get(_context)
@@ -440,7 +440,7 @@ namespace Test.CSF.Zpt.Tal
     }
 
     [Test]
-    public void TestHandleReplaceTextNull()
+    public void Handle_with_text_replace_attribute_removes_element_when_expression_is_null()
     {
       // Arrange
       Mock.Get(_context)
@@ -474,7 +474,7 @@ namespace Test.CSF.Zpt.Tal
     }
 
     [Test]
-    public void TestHandleReplaceStructureNull()
+    public void Handle_with_structure_replace_attribute_removes_element_when_expression_is_null()
     {
       // Arrange
       Mock.Get(_context)
@@ -512,7 +512,7 @@ namespace Test.CSF.Zpt.Tal
     #region attribute evaluates to something
 
     [Test]
-    public void TestHandleContent()
+    public void Handle_with_content_attribute_replaces_children_with_text_value()
     {
       // Arrange
       Mock.Get(_context)
@@ -549,7 +549,7 @@ namespace Test.CSF.Zpt.Tal
     }
 
     [Test]
-    public void TestHandleContentText()
+    public void Handle_with_text_content_attribute_replaces_children_with_text_value()
     {
       // Arrange
       Mock.Get(_context)
@@ -586,7 +586,7 @@ namespace Test.CSF.Zpt.Tal
     }
 
     [Test]
-    public void TestHandleContentStructure()
+    public void Handle_with_structure_content_attribute_replaces_children_with_markup_value()
     {
       // Arrange
       Mock.Get(_context)
@@ -623,7 +623,7 @@ namespace Test.CSF.Zpt.Tal
     }
 
     [Test]
-    public void TestHandleReplace()
+    public void Handle_with_replace_attribute_replaces_self_with_text_value()
     {
       // Arrange
       Mock.Get(_context)
@@ -658,7 +658,7 @@ namespace Test.CSF.Zpt.Tal
     }
 
     [Test]
-    public void TestHandleReplaceText()
+    public void Handle_with_text_replace_attribute_replaces_self_with_text_value()
     {
       // Arrange
       Mock.Get(_context)
@@ -693,7 +693,7 @@ namespace Test.CSF.Zpt.Tal
     }
 
     [Test]
-    public void TestHandleReplaceStructure()
+    public void Handle_with_structure_replace_attribute_replaces_self_with_markup_value()
     {
       // Arrange
       Mock.Get(_context)
@@ -733,7 +733,7 @@ namespace Test.CSF.Zpt.Tal
 
     [Test]
     [ExpectedException(typeof(ParserException))]
-    public void TestHandleBothAttributes()
+    public void Handle_raises_error_when_both_content_and_replace_attribute_present()
     {
       // Arrange
       Mock.Get(_context)

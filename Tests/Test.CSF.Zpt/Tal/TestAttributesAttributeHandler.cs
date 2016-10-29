@@ -44,7 +44,7 @@ namespace Test.CSF.Zpt.Tal
     #region tests
 
     [Test]
-    public void TestHandleNoAttribute()
+    public void Handle_makes_no_changes_when_attribute_not_present()
     {
       // Arrange
       Mock.Get(_context)
@@ -74,10 +74,10 @@ namespace Test.CSF.Zpt.Tal
     [TestCase("foo bar",          null,       "foo",    "bar")]
     [TestCase("pre:foo bar",      "pre",      "foo",    "bar")]
     [TestCase("pre:foo bar/baz",  "pre",      "foo",    "bar/baz")]
-    public void TestHandleSingleAttribute(string value,
-                                          string expectedPrefix,
-                                          string expectedName,
-                                          string expectedExpression)
+    public void Handle_sets_single_attribute(string value,
+                                             string expectedPrefix,
+                                             string expectedName,
+                                             string expectedExpression)
     {
       // Arrange
       Mock.Get(_context)
@@ -107,7 +107,7 @@ namespace Test.CSF.Zpt.Tal
 
     [TestCase(null, "foo", "bar")]
     [TestCase("pre", "foo", "bar")]
-    public void TestHandleNullAttribute(string prefix, string name, string expression)
+    public void Handle_removes_attribute_when_expression_is_null(string prefix, string name, string expression)
     {
       // Arrange
       string attributeValue = (prefix != null)? String.Format("{0}:{1} {2}", prefix, name, expression) : String.Format("{0} {1}", name, expression);
@@ -137,7 +137,7 @@ namespace Test.CSF.Zpt.Tal
 
     [TestCase(null, "foo", "bar")]
     [TestCase("pre", "foo", "bar")]
-    public void TestHandleCancelsAction(string prefix, string name, string expression)
+    public void Handle_makes_no_changes_when_expression_cancels_action(string prefix, string name, string expression)
     {
       // Arrange
       string attributeValue = (prefix != null)? String.Format("{0}:{1} {2}", prefix, name, expression) : String.Format("{0} {1}", name, expression);
@@ -170,7 +170,7 @@ namespace Test.CSF.Zpt.Tal
 
     [Test]
     [Description("This test verifies a multiple of different scenarios together")]
-    public void TestHandleMultipleAttributes()
+    public void Handle_behaves_correctly_for_multiple_attributes_and_scenarios()
     {
       // Arrange
       var attributeValue = @"one expressionOne;

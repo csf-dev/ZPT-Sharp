@@ -44,7 +44,7 @@ namespace Test.CSF.Zpt.Tal
     #region tests
 
     [Test]
-    public void TestHandleNoAttribute()
+    public void Handle_makes_no_change_when_attribute_is_not_present()
     {
       // Arrange
       Mock.Get(_context)
@@ -69,9 +69,9 @@ namespace Test.CSF.Zpt.Tal
     [TestCase(  false,      false,    true)]
     [TestCase(  true,       true,     true)]
     [TestCase(  false,      true,     true)]
-    public void TestHandleConditionPresent(bool conditionValue,
-                                           bool cancelsAction,
-                                           bool expectElement)
+    public void Handle_omits_element_if_expression_is_true_and_does_not_cancel_action(bool conditionValue,
+                                                                                      bool cancelsAction,
+                                                                                      bool expectElement)
     {
       // Arrange
       Mock.Get(_context)

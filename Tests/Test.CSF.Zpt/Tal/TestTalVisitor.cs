@@ -34,8 +34,7 @@ namespace Test.CSF.Zpt.Tal
     #region tests
 
     [Test]
-    [Description("This test ensures that all elements returned by handlers are processed")]
-    public void TestVisit()
+    public void Visit_visits_every_context_in_a_context_hierarchy()
     {
       // Arrange
       var fixture = new Fixture();
@@ -85,8 +84,8 @@ namespace Test.CSF.Zpt.Tal
     }
 
     [Test]
-    [Description("This test ensures that if new elements are created (to be visited), that they are processed also")]
-    public void TestVisit_NewlyExposedElements()
+    [Description("This test ensures that if new contexts are created (to be visited), that they are processed also")]
+    public void Visit_visits_newly_exposes_contexts()
     {
       // Arrange
       var fixture = new Fixture();
@@ -126,7 +125,7 @@ namespace Test.CSF.Zpt.Tal
     [TestCase(0)]
     [TestCase(2)]
     [TestCase(5)]
-    public void TestVisitRecursivelyWithError(int nestingLevel)
+    public void VisitRecursively_uses_error_handler_when_present_and_exposes_error_object(int nestingLevel)
     {
       // Arrange
       var fixture = new Fixture();

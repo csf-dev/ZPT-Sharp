@@ -42,7 +42,7 @@ namespace Test.CSF.Zpt.Tal
     #region tests
 
     [Test]
-    public void TestHandleNoAttribute()
+    public void Handle_makes_no_changes_to_model_if_no_attribute_present()
     {
       // Arrange
       Mock.Get(_context)
@@ -69,10 +69,11 @@ namespace Test.CSF.Zpt.Tal
     [TestCase(  "foo bar/baz",        false,    "foo",      "bar/baz")]
     [TestCase(  "local foo bar/baz",  false,    "foo",      "bar/baz")]
     [TestCase(  "global foo bar/baz", true,     "foo",      "bar/baz")]
-    public void TestHandleSingleDefinition(string attributeVal,
-                                           bool expectGlobal,
-                                           string variableName,
-                                           string expression)
+    [Description("This test handles multiple scenarios, in which the definition is either local or global")]
+    public void Handle_makes_appropriate_changes_to_model_for_single_attribute(string attributeVal,
+                                                                               bool expectGlobal,
+                                                                               string variableName,
+                                                                               string expression)
     {
       // Arrange
       Mock.Get(_context)
@@ -100,7 +101,7 @@ namespace Test.CSF.Zpt.Tal
     }
 
     [Test]
-    public void TestHandleMultipleDefinition()
+    public void Handle_adds_all_definitions_when_more_than_one_is_present_in_the_attribute()
     {
       // Arrange
       string attributeVal = @"foo bar;
@@ -141,7 +142,7 @@ namespace Test.CSF.Zpt.Tal
     }
 
     [Test]
-    public void TestHandleMultipleDefinitionWithCancellation()
+    public void Handle_skips_cancelled_definitions_but_adds_others()
     {
       // Arrange
       string attributeVal = @"foo bar;
@@ -194,7 +195,7 @@ namespace Test.CSF.Zpt.Tal
     [TestCase(" value")]
     [TestCase("key1 value1;key2 ;key3 value3")]
     [ExpectedException(typeof(ParserException))]
-    public void TestHandleBadDefinition(string attributeVal)
+    public void Handle_raises_exception_for_invalid_definitions(string attributeVal)
     {
       // Arrange
       Mock.Get(_context)
