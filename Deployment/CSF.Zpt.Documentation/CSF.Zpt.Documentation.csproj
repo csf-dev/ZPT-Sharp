@@ -135,6 +135,9 @@
     <None Include="Website\js\navigationMenu.js" />
     <None Include="Website\logging.html" />
     <None Include="Website\plugins.html" />
+    <None Include="Website\js\pageDetector.js" />
+    <None Include="Website\js\config\pageScriptRegistry.js" />
+    <None Include="Website\js\pages\introduction.js" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\CSF.Zpt.Cli\CSF.Zpt.Cli.csproj">

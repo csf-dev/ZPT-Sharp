@@ -1,12 +1,16 @@
 define(function(require) {
+  "use strict";
+  
   var $ = require("jquery"),
-      highligther = require("highlightCodeBlocks"),
-      navMenu = require("navigationMenu");
+      highlighter = require("highlightCodeBlocks"),
+      navMenu = require("navigationMenu"),
+      pageDetector = require("pageDetector");
   
   return {
     start: function() {
       $(function() {
-        highligther.initialise();
+        pageDetector.initialiseCurrentPage();
+        highlighter.initialise();
         navMenu.initialise();
       });
     },

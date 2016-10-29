@@ -1,4 +1,5 @@
-define("navigationMenu", ["jquery"], function($) {
+define(["jquery"], function($) {
+  "use strict";
   
   return {
     initialise: function() {

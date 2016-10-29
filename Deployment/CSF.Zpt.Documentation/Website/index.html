@@ -117,15 +117,5 @@
 <footer class="page_footer dummy">
   Dummy content
 </footer>
-<div metal:fill-slot="end_of_page_scripts" tal:omit-tag="string:True">
-<script>
-$(window).ready(function() {
-  $(".learn_more li").click(function(ev) {
-    var $this = $(this);
-    window.location = $("a", $this).attr("href");
-  });
-});
-</script>
-</div>
 </body>
 </html>
