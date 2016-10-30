@@ -27,6 +27,23 @@
     </nav>
     <section class="main_page_content" metal:fill-slot="main_page_content">
       <header>
+        <div class="expression plugin_note note"
+             metal:use-macro="documents/Shared/plugin_note.html/macros/expression_plugin_note">
+          <p>
+            Expression evaluator plugin notice.
+          </p>
+          Plugin assembly: <span metal:fill-slot="plugin_assembly"><code>CSF.Zpt.ExpressionEvaluators.PathExpressions.dll</code></span><br />
+          <span metal:fill-slot="plugin_class_header">Plugin classes</span>:
+          <span metal:fill-slot="plugin_class">
+            <code>CSF.Zpt.ExpressionEvaluators.PathExpressionEvaluator</code>
+            &amp;
+            <code>CSF.Zpt.ExpressionEvaluators.LocalVariablePathExpressionEvaluator</code>
+          </span><br />
+          <span metal:fill-slot="expression_prefix_header">Expression prefixes</span>:
+          <span metal:fill-slot="expression_prefix">
+            <code>path:</code> &amp; <code>local:</code>
+          </span>
+        </div>
         <h1>TALES 'path' expressions</h1>
       </header>
       <p>
