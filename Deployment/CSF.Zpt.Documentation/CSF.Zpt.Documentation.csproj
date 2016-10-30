@@ -139,6 +139,7 @@
     <None Include="Website\js\config\pageScriptRegistry.js" />
     <None Include="Website\js\pages\introduction.js" />
     <None Include="Website\configuration.html" />
+    <None Include="Website\Shared\plugin_note.html" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\CSF.Zpt.Cli\CSF.Zpt.Cli.csproj">
