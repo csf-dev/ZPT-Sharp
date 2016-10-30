@@ -19,6 +19,12 @@ namespace CSF.Zpt.BatchRendering
 
     #region methods
 
+    /// <summary>
+    /// Gets the rendering jobs from the batch rendering options.
+    /// </summary>
+    /// <returns>The rendering jobs.</returns>
+    /// <param name="inputOutputInfo">Input output info.</param>
+    /// <param name="mode">Mode.</param>
     public IEnumerable<IRenderingJob> GetRenderingJobs(IBatchRenderingOptions inputOutputInfo,
                                                        RenderingMode? mode)
     {
@@ -95,6 +101,10 @@ namespace CSF.Zpt.BatchRendering
 
     #region constructor
 
+    /// <summary>
+    /// Initializes a new instance of the <see cref="CSF.Zpt.BatchRendering.RenderingJobFactory"/> class.
+    /// </summary>
+    /// <param name="documentFactory">Document factory.</param>
     public RenderingJobFactory(IZptDocumentFactory documentFactory = null)
     {
       _documentFactory = documentFactory?? new ZptDocumentFactory();
