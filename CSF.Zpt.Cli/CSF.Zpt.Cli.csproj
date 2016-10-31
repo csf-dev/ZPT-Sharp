@@ -94,11 +94,6 @@
   <Target Name="BuildHtmlManual">
     <ExecWithIgnoredExitCodes Command="man2html $(ManPageSource) | tidy -i -w $(HtmlManPageColumns) &gt; $(HtmlManPageOutput)" IgnoredExitCodes="1" />
   </Target>
-  <Target Name="AfterBuild">
-    <MakeDir Directories="$(ManPageOutputDir)" Condition="'$(Configuration)' == 'Deploy'" />
-    <CallTarget Targets="BuildPlaintextManual" Condition="'$(Configuration)' == 'Deploy'" />
-    <CallTarget Targets="BuildHtmlManual" Condition="'$(Configuration)' == 'Deploy'" />
-  </Target>
   <ItemGroup>
     <ProjectReference Include="..\CSF.Zpt\CSF.Zpt.csproj">
       <Project>{16E957BB-347C-4EE1-815F-19AC296FB9E0}</Project>
@@ -197,6 +192,9 @@
       <DestinationAssemblyInfo Include="AssemblyInfo.cs" />
     </ItemGroup>
     <Copy SourceFiles="@(StubAssemblyInfo)" DestinationFiles="@(DestinationAssemblyInfo)" />
+    <MakeDir Directories="$(ManPageOutputDir)" Condition="'$(Configuration)' == 'Deploy'" />
+    <CallTarget Targets="BuildPlaintextManual" Condition="'$(Configuration)' == 'Deploy'" />
+    <CallTarget Targets="BuildHtmlManual" Condition="'$(Configuration)' == 'Deploy'" />
   </Target>
   <ItemGroup>
     <None Include="packages.config" />
