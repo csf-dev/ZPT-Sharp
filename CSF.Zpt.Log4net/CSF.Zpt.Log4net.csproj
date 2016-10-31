@@ -9,6 +9,12 @@
     <AssemblyName>CSF.Zpt.Log4net</AssemblyName>
     <ReleaseVersion>0.0.0</ReleaseVersion>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <SolutionCompany>CSF Software Limited</SolutionCompany>
+    <SolutionCopyright>CSF Software Limited et al</SolutionCopyright>
+    <SolutionName>ZPT-Sharp: Zope Page Templates for .NET</SolutionName>
+    <ProjectConfiguration>$(Configuration)</ProjectConfiguration>
+    <ProjectTitle>CSF.Zpt.Log4Net</ProjectTitle>
+    <ProjectDescription>Log4net Trace Listener</ProjectDescription>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -37,9 +43,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\Common\CommonAssemblyInfo.cs">
-      <Link>CommonAssemblyInfo.cs</Link>
-    </Compile>
     <Compile Include="AssemblyInfo.cs" />
     <Compile Include="Log4netTraceListener.cs" />
     <Compile Include="SelfConfiguringLog4netTraceListener.cs" />

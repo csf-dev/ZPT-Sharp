@@ -6,7 +6,6 @@
     <ProjectGuid>{4DD64666-DBEF-4AD5-BDB0-3EB3C70A6E83}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <RootNamespace>CSF.Zpt.Cli</RootNamespace>
-    <ReleaseVersion>0.0.0</ReleaseVersion>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <AssemblyName>ZptBuilder</AssemblyName>
     <ManPageSource>ZptBuilder.1</ManPageSource>
@@ -16,6 +15,12 @@
     <ManPageColumns>80</ManPageColumns>
     <HtmlManPageColumns>100</HtmlManPageColumns>
     <ExecIgnoreExitCodeAssemblyPath>bin\Release\CSF.Zpt.DeploymentTasks.dll</ExecIgnoreExitCodeAssemblyPath>
+    <SolutionCompany>CSF Software Limited</SolutionCompany>
+    <SolutionCopyright>CSF Software Limited et al</SolutionCopyright>
+    <SolutionName>ZPT-Sharp: Zope Page Templates for .NET</SolutionName>
+    <ProjectConfiguration>$(Configuration)</ProjectConfiguration>
+    <ProjectTitle>ZptBuilder</ProjectTitle>
+    <ProjectDescription>Command-line utility for rendering ZPT documents</ProjectDescription>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -51,9 +56,6 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\Common\CommonAssemblyInfo.cs">
-      <Link>CommonAssemblyInfo.cs</Link>
-    </Compile>
     <Compile Include="AssemblyInfo.cs" />
     <Compile Include="CommandLineOptions.cs" />
     <Compile Include="VersionNumberInspector.cs" />

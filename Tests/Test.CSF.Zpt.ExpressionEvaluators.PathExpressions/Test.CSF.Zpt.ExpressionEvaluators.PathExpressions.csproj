@@ -8,7 +8,6 @@
     <RootNamespace>Test.CSF.Zpt.ExpressionEvaluators.PathExpressions</RootNamespace>
     <AssemblyName>Test.CSF.Zpt.ExpressionEvaluators.PathExpressions</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
-    <ReleaseVersion>0.0.0</ReleaseVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -47,9 +46,6 @@
     <Compile Include="TestPathExpressionEvaluator.cs" />
     <Compile Include="TestPathWalker.cs" />
     <Compile Include="AssemblyInfo.cs" />
-    <Compile Include="..\..\Common\CommonAssemblyInfo.cs">
-      <Link>CommonAssemblyInfo.cs</Link>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\CSF.Zpt\CSF.Zpt.csproj">

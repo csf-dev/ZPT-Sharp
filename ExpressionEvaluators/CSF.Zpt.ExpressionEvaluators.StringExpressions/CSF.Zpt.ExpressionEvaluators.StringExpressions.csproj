@@ -8,7 +8,12 @@
     <RootNamespace>CSF.Zpt.ExpressionEvaluators</RootNamespace>
     <AssemblyName>CSF.Zpt.ExpressionEvaluators.StringExpressions</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
-    <ReleaseVersion>0.0.0</ReleaseVersion>
+    <SolutionCompany>CSF Software Limited</SolutionCompany>
+    <SolutionCopyright>CSF Software Limited et al</SolutionCopyright>
+    <SolutionName>ZPT-Sharp: Zope Page Templates for .NET</SolutionName>
+    <ProjectConfiguration>$(Configuration)</ProjectConfiguration>
+    <ProjectTitle>CSF.Zpt.ExpressionEvaluators.StringExpressions</ProjectTitle>
+    <ProjectDescription>Implementation of IExpressionEvaluator for 'string' expressions</ProjectDescription>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -38,9 +43,6 @@
   <ItemGroup>
     <Compile Include="StringExpressionEvaluator.cs" />
     <Compile Include="AssemblyInfo.cs" />
-    <Compile Include="..\..\Common\CommonAssemblyInfo.cs">
-      <Link>CommonAssemblyInfo.cs</Link>
-    </Compile>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
