@@ -1,5 +1,12 @@
-﻿using System.Reflection;
+using System.Reflection;
 using System.Runtime.CompilerServices;
 
-[assembly: AssemblyTitle("CSF.Zpt.Cli")]
-[assembly: AssemblyDescription("Command-line utility for working with CSF.Zpt")]
+// This is a stub file with empty values; the values will be replaced at build-time.
+[assembly: AssemblyTitle("STUB")]
+[assembly: AssemblyDescription("STUB")]
+[assembly: AssemblyCompany("STUB")]
+[assembly: AssemblyProduct("STUB")]
+[assembly: AssemblyCopyright("STUB")]
+[assembly: AssemblyConfiguration("STUB")]
+[assembly: AssemblyVersion("1.0.0.0")]
+[assembly: AssemblyFileVersion("1.0.0.0")]
