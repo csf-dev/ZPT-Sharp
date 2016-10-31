@@ -30,7 +30,7 @@ namespace CSF.Zpt.DeploymentTasks
 
         if(Int32.TryParse(buildNumber, out parsedBuild))
         {
-          doc[ReadVersionNumber.BUILD_NUMBER] = parsedBuild++.ToString();
+          doc[ReadVersionNumber.BUILD_NUMBER] = (++parsedBuild).ToString();
 
           doc.Write(VersionFile);
 

@@ -30,6 +30,10 @@
   <Import Project="$(MSBuildBinPath)\Microsoft.Common.targets" />
   <UsingTask TaskName="RequireFilesOnPath" AssemblyFile="..\CSF.Zpt.DeploymentTasks\bin\Debug\CSF.Zpt.DeploymentTasks.dll" Condition=" '$(Configuration)' == 'Debug' " />
   <UsingTask TaskName="RequireFilesOnPath" AssemblyFile="..\CSF.Zpt.DeploymentTasks\bin\Release\CSF.Zpt.DeploymentTasks.dll" Condition=" '$(Configuration)' == 'Release' Or '$(Configuration)' == 'Deploy' " />
+  <UsingTask TaskName="IncrementBuildVersion" AssemblyFile="..\CSF.Zpt.DeploymentTasks\bin\Release\CSF.Zpt.DeploymentTasks.dll" Condition=" '$(Configuration)' == 'Release' Or '$(Configuration)' == 'Deploy' " />
+  <Target Name="BumpVersionNumber">
+    <IncrementBuildVersion VersionFile="..\..\version.ini" Condition="'$(Configuration)' == 'Release' Or '$(Configuration)' == 'Deploy'" />
+  </Target>
   <Target Name="DetectNuget">
     <ItemGroup>
       <DetectedFiles Include="nuget" />
@@ -57,6 +61,7 @@
     <Exec Command="&quot;$(MSBuildProgramFiles32)\NuGet\nuget.exe&quot; restore" WorkingDirectory="..\..\" Condition="'$(OS)' != 'Unix'" />
   </Target>
   <Target Name="Build">
+    <CallTarget Targets="BumpVersionNumber" />
     <CallTarget Targets="DetectNuget" />
     <CallTarget Targets="DetectDeploymentDependencies" Condition=" '$(Configuration)' == 'Deploy' " />
     <CallTarget Targets="RestoreNuget" />
