@@ -45,9 +45,16 @@
   <UsingTask TaskName="FixDocTag" AssemblyFile="bin\Release\CSF.Zpt.DeploymentTasks.dll" />
   <UsingTask TaskName="ReadVersionNumber" AssemblyFile="..\CSF.Zpt.DeploymentTasks\bin\$(Configuration)\CSF.Zpt.DeploymentTasks.dll" />
   <Target Name="BuildApiDocumentation">
+    <ReadVersionNumber VersionFile="..\..\version.ini">
+      <Output TaskParameter="FullVersionNumber" ItemName="FullVersion" />
+      <Output TaskParameter="SemanticVersionNumber" ItemName="SemanticVersion" />
+      <Output TaskParameter="BuildNumber" ItemName="BuildNumber" />
+      <Output TaskParameter="InformationalVersion" ItemName="InformationalVersion" />
+    </ReadVersionNumber>
     <RemoveDir Directories="$(DoxygenOutput)" />
     <MakeDir Directories="$(DoxygenOutput)" />
-    <Exec Command="doxygen $(DoxygenConfig)" />
+    <Exec Command="( cat $(DoxygenConfig) ; echo 'PROJECT_NUMBER=v@(SemanticVersion)' ) | doxygen -" Condition="'$(OS)' == 'Unix'" />
+    <Exec Command="( type $(DoxygenConfig) &amp; echo PROJECT_NUMBER=v@(SemanticVersion) ) | doxygen.exe -" Condition="'$(OS)' != 'Unix'" />
     <Exec Command="pdflatex $(LatexOutput)" WorkingDirectory="$(LatexPath)" />
     <Copy SourceFiles="$(LatexPath)\$(PdfOutput)" DestinationFiles="$(DoxygenOutput)\$(PdfFilename)" />
   </Target>
