@@ -7,7 +7,6 @@
     <OutputType>Library</OutputType>
     <RootNamespace>CSF.Zpt</RootNamespace>
     <AssemblyName>CSF.Zpt.Abstractions</AssemblyName>
-    <ReleaseVersion>0.0.0</ReleaseVersion>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <SolutionCompany>CSF Software Limited</SolutionCompany>
     <SolutionCopyright>CSF Software Limited et al</SolutionCopyright>

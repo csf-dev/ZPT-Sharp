@@ -4,7 +4,6 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{6C025057-9ACC-474E-9092-D6B9059B07EE}</ProjectGuid>
-    <ReleaseVersion>0.0.0</ReleaseVersion>
     <OutputType>Exe</OutputType>
     <AssemblyName>CSF.Zpt.PreBuild</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
