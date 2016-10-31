@@ -24,7 +24,7 @@
     <DocumentationPath>..\Output\Documentation website</DocumentationPath>
     <DocWebsiteOutputPath>..\CSF.Zpt.Documentation\bin\Release</DocWebsiteOutputPath>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
-    <ReleaseVersion>0.5.0</ReleaseVersion>
+    <ReleaseVersion>0.0.0</ReleaseVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <OutputPath>..\Output\</OutputPath>
@@ -38,6 +38,7 @@
     <Optimize>false</Optimize>
   </PropertyGroup>
   <UsingTask TaskName="CreateZipArchive" AssemblyFile="..\CSF.Zpt.DeploymentTasks\bin\Release\CSF.Zpt.DeploymentTasks.dll" />
+  <UsingTask TaskName="ReadVersionNumber" AssemblyFile="..\CSF.Zpt.DeploymentTasks\bin\$(Configuration)\CSF.Zpt.DeploymentTasks.dll" />
   <Target Name="Build">
     <CallTarget Targets="CreateBinaryZips" Condition="'$(Configuration)' == 'Release'" />
     <CallTarget Targets="CreateNugetPackages" Condition="'$(Configuration)' == 'Release'" />
@@ -124,15 +125,21 @@
     <CreateZipArchive OutputFilename="$(OutputPath)CSF.Zpt-complete.zip" Files="@(ZptSharpCompleteZipFiles)" />
   </Target>
   <Target Name="CreateNugetPackages" Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <ReadVersionNumber VersionFile="..\..\version.ini">
+      <Output TaskParameter="FullVersionNumber" ItemName="FullVersion" />
+      <Output TaskParameter="SemanticVersionNumber" ItemName="SemanticVersion" />
+      <Output TaskParameter="BuildNumber" ItemName="BuildNumber" />
+      <Output TaskParameter="InformationalVersion" ItemName="InformationalVersion" />
+    </ReadVersionNumber>
     <!-- ZptBuilder -->
-    <Exec Command="nuget pack $(SolutionRoot)CSF.Zpt.Cli\CSF.Zpt.Cli.nuspec -Prop Configuration=Release -OutputDirectory $(OutputPath)" Condition="'$(OS)' == 'Unix'" />
-    <Exec Command="&quot;$(MSBuildProgramFiles32)\NuGet\nuget.exe&quot; pack $(SolutionRoot)CSF.Zpt.Cli\CSF.Zpt.Cli.nuspec -Prop Configuration=Release -OutputDirectory $(OutputPath)" Condition="'$(OS)' != 'Unix'" />
+    <Exec Command="nuget pack $(SolutionRoot)CSF.Zpt.Cli\CSF.Zpt.Cli.nuspec -Prop Configuration=Release -OutputDirectory $(OutputPath) -version @(SemanticVersion)" Condition="'$(OS)' == 'Unix'" />
+    <Exec Command="&quot;$(MSBuildProgramFiles32)\NuGet\nuget.exe&quot; pack $(SolutionRoot)CSF.Zpt.Cli\CSF.Zpt.Cli.nuspec -Prop Configuration=Release -OutputDirectory $(OutputPath) -version @(SemanticVersion)" Condition="'$(OS)' != 'Unix'" />
     <!-- API -->
-    <Exec Command="nuget pack $(SolutionRoot)CSF.Zpt\CSF.Zpt.nuspec -Prop Configuration=Release -OutputDirectory $(OutputPath)" Condition="'$(OS)' == 'Unix'" />
-    <Exec Command="&quot;$(MSBuildProgramFiles32)\NuGet\nuget.exe&quot; pack $(SolutionRoot)CSF.Zpt\CSF.Zpt.nuspec -Prop Configuration=Release -OutputDirectory $(OutputPath)" Condition="'$(OS)' != 'Unix'" />
+    <Exec Command="nuget pack $(SolutionRoot)CSF.Zpt\CSF.Zpt.nuspec -Prop Configuration=Release -OutputDirectory $(OutputPath) -version @(SemanticVersion)" Condition="'$(OS)' == 'Unix'" />
+    <Exec Command="&quot;$(MSBuildProgramFiles32)\NuGet\nuget.exe&quot; pack $(SolutionRoot)CSF.Zpt\CSF.Zpt.nuspec -Prop Configuration=Release -OutputDirectory $(OutputPath) -version @(SemanticVersion)" Condition="'$(OS)' != 'Unix'" />
     <!-- MVC -->
-    <Exec Command="nuget pack $(SolutionRoot)CSF.Zpt.MVC\CSF.Zpt.MVC.nuspec -Prop Configuration=Release -OutputDirectory $(OutputPath)" Condition="'$(OS)' == 'Unix'" />
-    <Exec Command="&quot;$(MSBuildProgramFiles32)\NuGet\nuget.exe&quot; pack $(SolutionRoot)CSF.Zpt.MVC\CSF.Zpt.MVC.nuspec -Prop Configuration=Release -OutputDirectory $(OutputPath)" Condition="'$(OS)' != 'Unix'" />
+    <Exec Command="nuget pack $(SolutionRoot)CSF.Zpt.MVC\CSF.Zpt.MVC.nuspec -Prop Configuration=Release -OutputDirectory $(OutputPath) -version @(SemanticVersion)" Condition="'$(OS)' == 'Unix'" />
+    <Exec Command="&quot;$(MSBuildProgramFiles32)\NuGet\nuget.exe&quot; pack $(SolutionRoot)CSF.Zpt.MVC\CSF.Zpt.MVC.nuspec -Prop Configuration=Release -OutputDirectory $(OutputPath) -version @(SemanticVersion)" Condition="'$(OS)' != 'Unix'" />
   </Target>
   <Target Name="CopyDocumentation" Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <Copy SourceFiles="$(DocWebsiteOutputPath)\ZPT-Sharp API documentation.pdf" DestinationFolder="$(OutputPath)" />

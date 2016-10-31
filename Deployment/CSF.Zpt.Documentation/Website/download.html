@@ -35,12 +35,12 @@
       <h2>Latest version</h2>
       <tal:block define="downloadBase string:https://github.com/csf-dev/ZPT-Sharp/releases/download;
                          version options/version;
-                         versionExtra string:;
-                         versionString string:v${version}${versionExtra}"
+                         versionExtra string:(${options/releaseType});
+                         versionString string:v${version}"
                  on-error="structure string:&lt;p class=&quot;note&quot;&gt;There is presently no stable release, please visit the Github releases page to view unstable releases.&lt;/p&gt;">
       <p>
         The following downloads are for the most recent release:
-        <strong><span tal:content="versionString">v0.0.0</span> (alpha)</strong>.
+        <strong><span tal:content="versionString">v0.0.0</span> <span tal:content="versionExtra | default">(release)</span></strong>.
       </p>
       <ul class="downloads">
         <li>

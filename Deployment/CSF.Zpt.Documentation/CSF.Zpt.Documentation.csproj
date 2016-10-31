@@ -6,7 +6,6 @@
     <ProjectGuid>{28D30A8C-0693-4FEA-BCC7-020AA41ECBB1}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AssemblyName>Documentation</AssemblyName>
-    <ReleaseVersion>0.5.0</ReleaseVersion>
     <WebsiteUrlRoot>http://csf-dev.github.io/ZPT-Sharp/</WebsiteUrlRoot>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <DoxygenConfig>Doxygen.cfg</DoxygenConfig>
@@ -27,6 +26,7 @@
     <ZptBuilderHtmlDocs>..\..\CSF.Zpt.Cli\bin\Release\Doc\ZptBuilder.html</ZptBuilderHtmlDocs>
     <ZptBuilderPath>..\..\CSF.Zpt.Cli\bin\Release\ZptBuilder.exe</ZptBuilderPath>
     <BuildTimestamp>$([System.DateTime]::Now.ToString(yyyy-MM-dd))</BuildTimestamp>
+    <CopyrightYear>$([System.DateTime]::Now.ToString(yyyy))</CopyrightYear>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Nothing|AnyCPU' ">
     <ConsolePause>false</ConsolePause>
@@ -43,14 +43,28 @@
   </PropertyGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <UsingTask TaskName="FixDocTag" AssemblyFile="bin\Release\CSF.Zpt.DeploymentTasks.dll" />
+  <UsingTask TaskName="ReadVersionNumber" AssemblyFile="..\CSF.Zpt.DeploymentTasks\bin\$(Configuration)\CSF.Zpt.DeploymentTasks.dll" />
   <Target Name="BuildApiDocumentation">
+    <ReadVersionNumber VersionFile="..\..\version.ini">
+      <Output TaskParameter="FullVersionNumber" ItemName="FullVersion" />
+      <Output TaskParameter="SemanticVersionNumber" ItemName="SemanticVersion" />
+      <Output TaskParameter="BuildNumber" ItemName="BuildNumber" />
+      <Output TaskParameter="InformationalVersion" ItemName="InformationalVersion" />
+    </ReadVersionNumber>
     <RemoveDir Directories="$(DoxygenOutput)" />
     <MakeDir Directories="$(DoxygenOutput)" />
-    <Exec Command="doxygen $(DoxygenConfig)" />
+    <Exec Command="( cat $(DoxygenConfig) ; echo 'PROJECT_NUMBER=v@(SemanticVersion)' ) | doxygen -" Condition="'$(OS)' == 'Unix'" />
+    <Exec Command="( type $(DoxygenConfig) &amp; echo PROJECT_NUMBER=v@(SemanticVersion) ) | doxygen.exe -" Condition="'$(OS)' != 'Unix'" />
     <Exec Command="pdflatex $(LatexOutput)" WorkingDirectory="$(LatexPath)" />
     <Copy SourceFiles="$(LatexPath)\$(PdfOutput)" DestinationFiles="$(DoxygenOutput)\$(PdfFilename)" />
   </Target>
   <Target Name="BuildDocumentationWebsite">
+    <ReadVersionNumber VersionFile="..\..\version.ini">
+      <Output TaskParameter="FullVersionNumber" ItemName="FullVersion" />
+      <Output TaskParameter="SemanticVersionNumber" ItemName="SemanticVersion" />
+      <Output TaskParameter="BuildNumber" ItemName="BuildNumber" />
+      <Output TaskParameter="InformationalVersion" ItemName="InformationalVersion" />
+    </ReadVersionNumber>
     <RemoveDir Directories="$(PreBuiltWebsitePath);$(BuiltWebsitePath)" />
     <MakeDir Directories="$(PreBuiltWebsitePath);$(BuiltWebsitePath)" />
     <ItemGroup>
@@ -63,7 +77,7 @@
       <WebsiteSupportFiles Include="$(PreBuiltWebsitePath)\**\*.js" />
     </ItemGroup>
     <FixDocTag InputFile="$(PreBuiltWebsitePath)\Shared\cli-docs.html" MacroName="content" />
-    <Exec Command="$(ZptBuilderPath) &quot;$(PreBuiltWebsitePath)&quot; -p &quot;*.html&quot; -o &quot;$(BuiltWebsitePath)&quot; -i &quot;$(IgnoredDir)&quot; --keyword-options &quot;baseUrl=$(WebsiteUrlRoot);buildDate=$(BuildTimestamp);version=$(ReleaseVersion)&quot;" />
+    <Exec Command="$(ZptBuilderPath) &quot;$(PreBuiltWebsitePath)&quot; -p &quot;*.html&quot; -o &quot;$(BuiltWebsitePath)&quot; -i &quot;$(IgnoredDir)&quot; --keyword-options &quot;baseUrl=$(WebsiteUrlRoot);buildDate=$(BuildTimestamp);version=@(SemanticVersion);releaseType=@(InformationalVersion);copyrightYear=$(CopyrightYear)&quot;" />
     <Copy SourceFiles="@(WebsiteSupportFiles)" DestinationFiles="@(WebsiteSupportFiles-&gt;'$(BuiltWebsitePath)\%(RecursiveDir)%(Filename)%(Extension)')" />
   </Target>
   <Target Name="AssembleAllDocumentation">
@@ -140,6 +154,7 @@
     <None Include="Website\js\pages\introduction.js" />
     <None Include="Website\configuration.html" />
     <None Include="Website\Shared\plugin_note.html" />
+    <None Include="WebsiteKeywordOptions.txt" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\CSF.Zpt.Cli\CSF.Zpt.Cli.csproj">

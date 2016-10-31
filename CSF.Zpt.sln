@@ -5,8 +5,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSF.Zpt", "CSF.Zpt\CSF.Zpt.
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{B99672F8-AB58-4435-AAE7-18850F239A17}"
 	ProjectSection(SolutionItems) = preProject
-		Common\CommonAssemblyInfo.cs = Common\CommonAssemblyInfo.cs
 		Common\ZipPackaging.targets = Common\ZipPackaging.targets
+		version.ini = version.ini
+		Common\AssemblyInfo.stub.cs = Common\AssemblyInfo.stub.cs
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CSF", "CSF", "{4B340A7A-DC93-4D8D-85DE-AF5123BE9F53}"
@@ -18,6 +19,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSF.Reflection", "CSF\CSF.Reflection\CSF.Reflection.csproj", "{275413F6-0651-4AD4-A426-07EDA165C07E}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSF.Configuration", "CSF\CSF.Configuration\CSF.Configuration.csproj", "{8C570A26-CEEB-45D1-9436-745C8DBAE9D8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSF.IniDocuments", "CSF\CSF.IniDocuments\CSF.IniDocuments.csproj", "{EF897908-7BAC-47F6-9495-6C827D532228}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSF.Zpt.Abstractions", "CSF.Zpt.Abstractions\CSF.Zpt.Abstractions.csproj", "{8207CD9B-F1C1-4D75-B250-ACDFFBDCB071}"
 EndProject
@@ -250,6 +253,12 @@ Global
 		{E563D7BC-1AB1-4AFB-8533-51315437C6E6}.Deploy|Any CPU.Build.0 = Release|Any CPU
 		{E563D7BC-1AB1-4AFB-8533-51315437C6E6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E563D7BC-1AB1-4AFB-8533-51315437C6E6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EF897908-7BAC-47F6-9495-6C827D532228}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EF897908-7BAC-47F6-9495-6C827D532228}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EF897908-7BAC-47F6-9495-6C827D532228}.Deploy|Any CPU.ActiveCfg = Release|Any CPU
+		{EF897908-7BAC-47F6-9495-6C827D532228}.Deploy|Any CPU.Build.0 = Release|Any CPU
+		{EF897908-7BAC-47F6-9495-6C827D532228}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EF897908-7BAC-47F6-9495-6C827D532228}.Release|Any CPU.Build.0 = Release|Any CPU
 		{F7EC4498-BF8A-4F57-99A7-E0C5DDCE9C32}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{F7EC4498-BF8A-4F57-99A7-E0C5DDCE9C32}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F7EC4498-BF8A-4F57-99A7-E0C5DDCE9C32}.Deploy|Any CPU.ActiveCfg = Release|Any CPU
@@ -262,6 +271,7 @@ Global
 		{295C293C-60FB-43F3-B728-C2BA5B7516BC} = {4B340A7A-DC93-4D8D-85DE-AF5123BE9F53}
 		{275413F6-0651-4AD4-A426-07EDA165C07E} = {4B340A7A-DC93-4D8D-85DE-AF5123BE9F53}
 		{8C570A26-CEEB-45D1-9436-745C8DBAE9D8} = {4B340A7A-DC93-4D8D-85DE-AF5123BE9F53}
+		{EF897908-7BAC-47F6-9495-6C827D532228} = {4B340A7A-DC93-4D8D-85DE-AF5123BE9F53}
 		{BFD834D4-5724-4425-BCB3-6DEE6B03F743} = {F1251A40-9526-48DC-A665-F9AEB972AC33}
 		{71834399-0B92-4754-9721-178872E77CFD} = {F1251A40-9526-48DC-A665-F9AEB972AC33}
 		{842160E4-BDE5-4FA0-ADE5-07554090AA27} = {F1251A40-9526-48DC-A665-F9AEB972AC33}
@@ -293,6 +303,5 @@ Global
 		$1.inheritsSet = VisualStudio
 		$1.inheritsScope = text/plain
 		$1.scope = text/plain
-		version = 0.5.0
 	EndGlobalSection
 EndGlobal

@@ -7,7 +7,6 @@
     <OutputType>Library</OutputType>
     <RootNamespace>Test.CSF.Zpt</RootNamespace>
     <AssemblyName>Test.CSF.Zpt</AssemblyName>
-    <ReleaseVersion>0.5.0</ReleaseVersion>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -76,9 +75,6 @@
     <Compile Include="Tales\TestTalesModel.cs" />
     <Compile Include="Tales\TestExpressionFactory.cs" />
     <Compile Include="Tales\TestFilesystemDirectory.cs" />
-    <Compile Include="..\..\Common\CommonAssemblyInfo.cs">
-      <Link>CommonAssemblyInfo.cs</Link>
-    </Compile>
     <Compile Include="AssemblyInfo.cs" />
     <Compile Include="TestZptDocument.cs" />
     <Compile Include="TestZptDocumentFactory.cs" />

@@ -2,7 +2,7 @@
 <package>
   <metadata>
     <id>CSF.Zpt.MVC</id>
-    <version>0.3.0</version>
+    <version>0.0.0</version>
     <title>ZPT-Sharp MVC5 ViewEngine</title>
     <authors>CSF Software Ltd</authors>
     <licenseUrl>https://opensource.org/licenses/MIT</licenseUrl>
@@ -11,7 +11,7 @@
     <description>Zope Page Templates for C♯ and .NET: MVC 5 ViewEngine.</description>
     <copyright>Copyright 2016</copyright>
     <dependencies>
-      <dependency id="CSF.Zpt" version="0.3.0" />
+      <dependency id="CSF.Zpt" version="[0.6.0,0.7.0)" />
     </dependencies>
     <frameworkAssemblies>
       <frameworkAssembly assemblyName="Microsoft.Web.Infrastructure.dll" />

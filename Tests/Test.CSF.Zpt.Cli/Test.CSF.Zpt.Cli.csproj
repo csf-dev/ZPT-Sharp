@@ -7,7 +7,6 @@
     <OutputType>Library</OutputType>
     <RootNamespace>Test.CSF.Zpt.Cli</RootNamespace>
     <AssemblyName>Test.CSF.Zpt.Cli</AssemblyName>
-    <ReleaseVersion>0.5.0</ReleaseVersion>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -95,9 +94,6 @@
   <ItemGroup>
     <Compile Include="TestApplication.cs" />
     <Compile Include="GlobalSetupFixture.cs" />
-    <Compile Include="..\..\Common\CommonAssemblyInfo.cs">
-      <Link>CommonAssemblyInfo.cs</Link>
-    </Compile>
     <Compile Include="AssemblyInfo.cs" />
     <Compile Include="TestRenderingOptionsFactory.cs" />
     <Compile Include="TestBatchRenderingOptionsFactory.cs" />

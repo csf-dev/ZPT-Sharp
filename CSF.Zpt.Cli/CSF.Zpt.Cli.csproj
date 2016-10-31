@@ -6,7 +6,6 @@
     <ProjectGuid>{4DD64666-DBEF-4AD5-BDB0-3EB3C70A6E83}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <RootNamespace>CSF.Zpt.Cli</RootNamespace>
-    <ReleaseVersion>0.5.0</ReleaseVersion>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <AssemblyName>ZptBuilder</AssemblyName>
     <ManPageSource>ZptBuilder.1</ManPageSource>
@@ -16,6 +15,12 @@
     <ManPageColumns>80</ManPageColumns>
     <HtmlManPageColumns>100</HtmlManPageColumns>
     <ExecIgnoreExitCodeAssemblyPath>bin\Release\CSF.Zpt.DeploymentTasks.dll</ExecIgnoreExitCodeAssemblyPath>
+    <SolutionCompany>CSF Software Limited</SolutionCompany>
+    <SolutionCopyright>CSF Software Limited et al</SolutionCopyright>
+    <SolutionName>ZPT-Sharp: Zope Page Templates for .NET</SolutionName>
+    <ProjectConfiguration>$(Configuration)</ProjectConfiguration>
+    <ProjectTitle>ZptBuilder</ProjectTitle>
+    <ProjectDescription>Command-line utility for rendering ZPT documents</ProjectDescription>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -27,6 +32,7 @@
     <WarningLevel>4</WarningLevel>
     <Externalconsole>true</Externalconsole>
     <CheckForOverflowUnderflow>true</CheckForOverflowUnderflow>
+    <BuildToolsDirectory>Debug</BuildToolsDirectory>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <Optimize>true</Optimize>
@@ -36,6 +42,7 @@
     <Externalconsole>true</Externalconsole>
     <DefineConstants>TRACE;</DefineConstants>
     <CheckForOverflowUnderflow>true</CheckForOverflowUnderflow>
+    <BuildToolsDirectory>Release</BuildToolsDirectory>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Deploy|AnyCPU' ">
     <Optimize>true</Optimize>
@@ -45,15 +52,13 @@
     <Externalconsole>true</Externalconsole>
     <DefineConstants>TRACE;</DefineConstants>
     <CheckForOverflowUnderflow>true</CheckForOverflowUnderflow>
+    <BuildToolsDirectory>Release</BuildToolsDirectory>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\Common\CommonAssemblyInfo.cs">
-      <Link>CommonAssemblyInfo.cs</Link>
-    </Compile>
     <Compile Include="AssemblyInfo.cs" />
     <Compile Include="CommandLineOptions.cs" />
     <Compile Include="VersionNumberInspector.cs" />
@@ -81,17 +86,13 @@
     <Compile Include="Exceptions\InvalidOutputEncodingException.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="..\packages\MSBuild.Extension.Pack.1.8.0\build\net40\MSBuild.Extension.Pack.targets" Condition="Exists('..\packages\MSBuild.Extension.Pack.1.8.0\build\net40\MSBuild.Extension.Pack.targets')" />
   <UsingTask TaskName="ExecWithIgnoredExitCodes" AssemblyFile="bin\Release\CSF.Zpt.DeploymentTasks.dll" />
   <Target Name="BuildPlaintextManual">
     <Exec Command="MANWIDTH=&quot;$(ManPageColumns)&quot; man --nh -l $(ManPageSource) &gt; $(ManPageOutput)" />
   </Target>
   <Target Name="BuildHtmlManual">
     <ExecWithIgnoredExitCodes Command="man2html $(ManPageSource) | tidy -i -w $(HtmlManPageColumns) &gt; $(HtmlManPageOutput)" IgnoredExitCodes="1" />
-  </Target>
-  <Target Name="AfterBuild">
-    <MakeDir Directories="$(ManPageOutputDir)" Condition="'$(Configuration)' == 'Deploy'" />
-    <CallTarget Targets="BuildPlaintextManual" Condition="'$(Configuration)' == 'Deploy'" />
-    <CallTarget Targets="BuildHtmlManual" Condition="'$(Configuration)' == 'Deploy'" />
   </Target>
   <ItemGroup>
     <ProjectReference Include="..\CSF.Zpt\CSF.Zpt.csproj">
@@ -134,14 +135,6 @@
       <Project>{842160E4-BDE5-4FA0-ADE5-07554090AA27}</Project>
       <Name>CSF.Zpt.DocumentProviders.XmlLinq</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Deployment\CSF.Zpt.DeploymentTasks\CSF.Zpt.DeploymentTasks.csproj">
-      <Project>{3E1DAACE-519B-4C6C-80E3-3F06A1A33C66}</Project>
-      <Name>CSF.Zpt.DeploymentTasks</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Deployment\CSF.Zpt.PreBuild\CSF.Zpt.PreBuild.csproj">
-      <Project>{6C025057-9ACC-474E-9092-D6B9059B07EE}</Project>
-      <Name>CSF.Zpt.PreBuild</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -164,5 +157,46 @@
     <Content Include="ZptBuilder.1">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Deployment\CSF.Zpt.PreBuild\CSF.Zpt.PreBuild.csproj">
+      <Project>{6C025057-9ACC-474E-9092-D6B9059B07EE}</Project>
+      <Name>CSF.Zpt.PreBuild</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Deployment\CSF.Zpt.DeploymentTasks\CSF.Zpt.DeploymentTasks.csproj">
+      <Project>{3E1DAACE-519B-4C6C-80E3-3F06A1A33C66}</Project>
+      <Name>CSF.Zpt.DeploymentTasks</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <UsingTask TaskName="ReadVersionNumber" AssemblyFile="..\Deployment\CSF.Zpt.DeploymentTasks\bin\$(BuildToolsDirectory)\CSF.Zpt.DeploymentTasks.dll" />
+  <Target Name="BeforeBuild">
+    <ItemGroup>
+      <StubAssemblyInfo Include="..\Common\AssemblyInfo.stub.cs" />
+      <DestinationAssemblyInfo Include="AssemblyInfo.cs" />
+    </ItemGroup>
+    <Copy SourceFiles="@(StubAssemblyInfo)" DestinationFiles="@(DestinationAssemblyInfo)" />
+    <ReadVersionNumber VersionFile="..\version.ini">
+      <Output TaskParameter="FullVersionNumber" ItemName="FullVersion" />
+      <Output TaskParameter="SemanticVersionNumber" ItemName="SemanticVersion" />
+      <Output TaskParameter="BuildNumber" ItemName="BuildNumber" />
+      <Output TaskParameter="InformationalVersion" ItemName="InformationalVersion" />
+    </ReadVersionNumber>
+    <ItemGroup>
+      <AssemblyInfoFiles Include="AssemblyInfo.cs" />
+    </ItemGroup>
+    <MSBuild.ExtensionPack.Framework.AssemblyInfo AssemblyInfoFiles="@(AssemblyInfoFiles)" AssemblyVersion="@(SemanticVersion).0" AssemblyFileVersion="@(FullVersion)" AssemblyCompany="$(SolutionCompany)" AssemblyCopyright="$(SolutionCopyright)" AssemblyProduct="$(SolutionName)" AssemblyConfiguration="$(ProjectConfiguration)" AssemblyTitle="$(ProjectTitle)" AssemblyDescription="$(ProjectDescription)" />
+  </Target>
+  <Target Name="AfterBuild">
+    <ItemGroup>
+      <StubAssemblyInfo Include="..\Common\AssemblyInfo.stub.cs" />
+      <DestinationAssemblyInfo Include="AssemblyInfo.cs" />
+    </ItemGroup>
+    <Copy SourceFiles="@(StubAssemblyInfo)" DestinationFiles="@(DestinationAssemblyInfo)" />
+    <MakeDir Directories="$(ManPageOutputDir)" Condition="'$(Configuration)' == 'Deploy'" />
+    <CallTarget Targets="BuildPlaintextManual" Condition="'$(Configuration)' == 'Deploy'" />
+    <CallTarget Targets="BuildHtmlManual" Condition="'$(Configuration)' == 'Deploy'" />
+  </Target>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
 </Project>
