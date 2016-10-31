@@ -44,9 +44,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\Common\CommonAssemblyInfo.cs">
-      <Link>CommonAssemblyInfo.cs</Link>
-    </Compile>
     <Compile Include="AssemblyInfo.cs" />
     <Compile Include="BatchRendering\IBatchOptionsInputHelper.cs" />
     <Compile Include="BatchRendering\IBatchOptionsMultipleInputOutputHelper.cs" />
@@ -122,8 +119,13 @@
       <Name>CSF.Zpt.DeploymentTasks</Name>
     </ProjectReference>
   </ItemGroup>
-  <UsingTask TaskName="ReadVersionNumber" AssemblyFile="$(OutputPath)CSF.Zpt.DeploymentTasks.dll" />
+  <UsingTask TaskName="ReadVersionNumber" AssemblyFile="..\Deployment\CSF.Zpt.DeploymentTasks\bin\$(Configuration)\CSF.Zpt.DeploymentTasks.dll" />
   <Target Name="BeforeBuild">
+    <ItemGroup>
+      <StubAssemblyInfo Include="..\Common\AssemblyInfo.stub.cs" />
+      <DestinationAssemblyInfo Include="AssemblyInfo.cs" />
+    </ItemGroup>
+    <Copy SourceFiles="@(StubAssemblyInfo)" DestinationFiles="@(DestinationAssemblyInfo)" />
     <ReadVersionNumber VersionFile="..\version.ini" Condition="$(Configuration) == 'Release'">
       <Output TaskParameter="FullVersionNumber" ItemName="FullVersion" />
       <Output TaskParameter="SemanticVersionNumber" ItemName="SemanticVersion" />
@@ -133,16 +135,7 @@
     <ItemGroup>
       <AssemblyInfoFiles Include="AssemblyInfo.cs" />
     </ItemGroup>
-    <MSBuild.ExtensionPack.Framework.AssemblyInfo AssemblyInfoFiles="@(AssemblyInfoFiles)"
-                                                  AssemblyVersion="@(FullVersion)"
-                                                  AssemblyFileVersion="@(FullVersion)"
-                                                  AssemblyInformationalVersion="@(SemanticVersion)"
-                                                  AssemblyCompany="$(SolutionCompany)"
-                                                  AssemblyCopyright="$(SolutionCopyright)"
-                                                  AssemblyProduct="$(SolutionName)"
-                                                  AssemblyConfiguration="$(ProjectConfiguration)"
-                                                  AssemblyTitle="$(ProjectTitle)"
-                                                  AssemblyDescription="$(ProjectDescription)" />
+    <MSBuild.ExtensionPack.Framework.AssemblyInfo AssemblyInfoFiles="@(AssemblyInfoFiles)" AssemblyVersion="@(FullVersion)" AssemblyFileVersion="@(FullVersion)" AssemblyInformationalVersion="@(SemanticVersion)" AssemblyCompany="$(SolutionCompany)" AssemblyCopyright="$(SolutionCopyright)" AssemblyProduct="$(SolutionName)" AssemblyConfiguration="$(ProjectConfiguration)" AssemblyTitle="$(ProjectTitle)" AssemblyDescription="$(ProjectDescription)" />
   </Target>
   <ItemGroup>
     <None Include="packages.config" />
