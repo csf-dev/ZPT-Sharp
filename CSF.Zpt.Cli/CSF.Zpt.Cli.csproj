@@ -32,6 +32,7 @@
     <WarningLevel>4</WarningLevel>
     <Externalconsole>true</Externalconsole>
     <CheckForOverflowUnderflow>true</CheckForOverflowUnderflow>
+    <BuildToolsDirectory>Debug</BuildToolsDirectory>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <Optimize>true</Optimize>
@@ -41,6 +42,7 @@
     <Externalconsole>true</Externalconsole>
     <DefineConstants>TRACE;</DefineConstants>
     <CheckForOverflowUnderflow>true</CheckForOverflowUnderflow>
+    <BuildToolsDirectory>Release</BuildToolsDirectory>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Deploy|AnyCPU' ">
     <Optimize>true</Optimize>
@@ -50,6 +52,7 @@
     <Externalconsole>true</Externalconsole>
     <DefineConstants>TRACE;</DefineConstants>
     <CheckForOverflowUnderflow>true</CheckForOverflowUnderflow>
+    <BuildToolsDirectory>Release</BuildToolsDirectory>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -170,7 +173,7 @@
       <Name>CSF.Zpt.DeploymentTasks</Name>
     </ProjectReference>
   </ItemGroup>
-  <UsingTask TaskName="ReadVersionNumber" AssemblyFile="..\Deployment\CSF.Zpt.DeploymentTasks\bin\$(Configuration)\CSF.Zpt.DeploymentTasks.dll" />
+  <UsingTask TaskName="ReadVersionNumber" AssemblyFile="..\Deployment\CSF.Zpt.DeploymentTasks\bin\$(BuildToolsDirectory)\CSF.Zpt.DeploymentTasks.dll" />
   <Target Name="BeforeBuild">
     <ItemGroup>
       <StubAssemblyInfo Include="..\Common\AssemblyInfo.stub.cs" />
