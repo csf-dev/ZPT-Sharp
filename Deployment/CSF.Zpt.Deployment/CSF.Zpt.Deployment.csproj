@@ -38,7 +38,7 @@
     <Optimize>false</Optimize>
   </PropertyGroup>
   <UsingTask TaskName="CreateZipArchive" AssemblyFile="..\CSF.Zpt.DeploymentTasks\bin\Release\CSF.Zpt.DeploymentTasks.dll" />
-  <UsingTask TaskName="ReadVersionNumber" AssemblyFile="..\Deployment\CSF.Zpt.DeploymentTasks\bin\$(Configuration)\CSF.Zpt.DeploymentTasks.dll" />
+  <UsingTask TaskName="ReadVersionNumber" AssemblyFile="..\CSF.Zpt.DeploymentTasks\bin\$(Configuration)\CSF.Zpt.DeploymentTasks.dll" />
   <Target Name="Build">
     <CallTarget Targets="CreateBinaryZips" Condition="'$(Configuration)' == 'Release'" />
     <CallTarget Targets="CreateNugetPackages" Condition="'$(Configuration)' == 'Release'" />
