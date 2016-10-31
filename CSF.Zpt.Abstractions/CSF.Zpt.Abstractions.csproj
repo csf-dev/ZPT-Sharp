@@ -135,7 +135,7 @@
     <ItemGroup>
       <AssemblyInfoFiles Include="AssemblyInfo.cs" />
     </ItemGroup>
-    <MSBuild.ExtensionPack.Framework.AssemblyInfo AssemblyInfoFiles="@(AssemblyInfoFiles)" AssemblyVersion="@(FullVersion)" AssemblyFileVersion="@(FullVersion)" AssemblyInformationalVersion="@(SemanticVersion)" AssemblyCompany="$(SolutionCompany)" AssemblyCopyright="$(SolutionCopyright)" AssemblyProduct="$(SolutionName)" AssemblyConfiguration="$(ProjectConfiguration)" AssemblyTitle="$(ProjectTitle)" AssemblyDescription="$(ProjectDescription)" />
+    <MSBuild.ExtensionPack.Framework.AssemblyInfo AssemblyInfoFiles="@(AssemblyInfoFiles)" AssemblyVersion="@(SemanticVersion).0" AssemblyFileVersion="@(FullVersion)" AssemblyCompany="$(SolutionCompany)" AssemblyCopyright="$(SolutionCopyright)" AssemblyProduct="$(SolutionName)" AssemblyConfiguration="$(ProjectConfiguration)" AssemblyTitle="$(ProjectTitle)" AssemblyDescription="$(ProjectDescription)" />
   </Target>
   <ItemGroup>
     <None Include="packages.config" />
