@@ -26,6 +26,7 @@
     <ZptBuilderHtmlDocs>..\..\CSF.Zpt.Cli\bin\Release\Doc\ZptBuilder.html</ZptBuilderHtmlDocs>
     <ZptBuilderPath>..\..\CSF.Zpt.Cli\bin\Release\ZptBuilder.exe</ZptBuilderPath>
     <BuildTimestamp>$([System.DateTime]::Now.ToString(yyyy-MM-dd))</BuildTimestamp>
+    <CopyrightYear>$([System.DateTime]::Now.ToString(yyyy))</CopyrightYear>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Nothing|AnyCPU' ">
     <ConsolePause>false</ConsolePause>
@@ -69,7 +70,7 @@
       <WebsiteSupportFiles Include="$(PreBuiltWebsitePath)\**\*.js" />
     </ItemGroup>
     <FixDocTag InputFile="$(PreBuiltWebsitePath)\Shared\cli-docs.html" MacroName="content" />
-    <Exec Command="$(ZptBuilderPath) &quot;$(PreBuiltWebsitePath)&quot; -p &quot;*.html&quot; -o &quot;$(BuiltWebsitePath)&quot; -i &quot;$(IgnoredDir)&quot; --keyword-options &quot;baseUrl=$(WebsiteUrlRoot);buildDate=$(BuildTimestamp);version=@(SemanticVersion);releaseType=@(InformationalVersion)&quot;" />
+    <Exec Command="$(ZptBuilderPath) &quot;$(PreBuiltWebsitePath)&quot; -p &quot;*.html&quot; -o &quot;$(BuiltWebsitePath)&quot; -i &quot;$(IgnoredDir)&quot; --keyword-options &quot;baseUrl=$(WebsiteUrlRoot);buildDate=$(BuildTimestamp);version=@(SemanticVersion);releaseType=@(InformationalVersion);copyrightYear=$(CopyrightYear)&quot;" />
     <Copy SourceFiles="@(WebsiteSupportFiles)" DestinationFiles="@(WebsiteSupportFiles-&gt;'$(BuiltWebsitePath)\%(RecursiveDir)%(Filename)%(Extension)')" />
   </Target>
   <Target Name="AssembleAllDocumentation">

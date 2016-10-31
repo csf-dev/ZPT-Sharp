@@ -54,19 +54,19 @@
 </div>
 <footer class="page_footer" metal:define-slot="page_footer">
   <section class="copyright">
-    Copyright © <span tal:replace="copyrightYear | default">2016</span>
+    Copyright © <span tal:replace="options/copyrightYear | default">2000</span>
     <a href="http://csf-dev.com/">CSF Software Limited</a> et al
   </section>
   <section class="version">
     <p>
-      Website built <strong tal:content="options/buildDate | default">2016-01-01</strong>;
+      Website built <strong tal:content="options/buildDate | default">2000-01-01</strong>;
       for version
       <strong tal:define="version options/version;
-                          versionExtra string:;
-                          versionString string:v${version}${versionExtra}"
-              tal:on-error="string:an unknown version"
-              tal:content="versionString">
-        v1.2.3-alpha
+                          releaseType options/releaseType;
+                          versionString string:v${version}"
+              tal:on-error="string:an unknown version">
+        <span tal:replace="versionString">v0.0.0</span><span tal:condition="releaseType"
+                                                             tal:replace="string:-$releaseType">-alpha</span>
       </strong>
     </p>
   </section>
