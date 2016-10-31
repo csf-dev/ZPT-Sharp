@@ -126,7 +126,7 @@
       <DestinationAssemblyInfo Include="AssemblyInfo.cs" />
     </ItemGroup>
     <Copy SourceFiles="@(StubAssemblyInfo)" DestinationFiles="@(DestinationAssemblyInfo)" />
-    <ReadVersionNumber VersionFile="..\version.ini" Condition="$(Configuration) == 'Release'">
+    <ReadVersionNumber VersionFile="..\version.ini">
       <Output TaskParameter="FullVersionNumber" ItemName="FullVersion" />
       <Output TaskParameter="SemanticVersionNumber" ItemName="SemanticVersion" />
       <Output TaskParameter="BuildNumber" ItemName="BuildNumber" />
