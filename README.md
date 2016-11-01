@@ -11,7 +11,7 @@ Information about building the source code is available in the file [BUILDING.md
 [BUILDING.md]: https://github.com/csf-dev/ZPT-Sharp/blob/master/BUILDING.md
 
 ## Current status
-The current status of the project - as of `v0.6.1` - that the software should be considered in an _alpha_ state.
+The current status of the project - as of `v0.6.1` - is that the software should be considered in an _alpha_ state.
 Whilst there are now no issues open with the **API Change** label, I still cannot promise that the API is completely stable.
 I would certainly not recommend it for production use.
 At this stage I would welcome exploration, testing and (most importantly) bug-reports from interested parties.
