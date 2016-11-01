@@ -105,6 +105,11 @@ body.page_introduction .main_page_content .learn_more li p {
     box-shadow: none;
     border: 0 none;
   }
+  body.page_introduction > .content_wrapper {
+    padding-top: 0;
+    margin-bottom: -41px;
+    min-height: 100%;;
+  }
   body.page_introduction .main_page_content .learn_more ul {
     width: 720px;
   }
