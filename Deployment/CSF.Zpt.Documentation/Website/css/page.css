@@ -111,10 +111,20 @@ body {
 }
 
 @media (max-width: 1059px) {
+  body > .content_wrapper {
+    padding-top: 56px;
+    margin-bottom: -51px;
+    min-height: calc(100% - 56px);
+  }
   .page_header {
     padding: 4px 0.4em;
     height: 32px;
     line-height: 32px;
+    position: fixed;
+    z-index: 10;
+    top: 0;
+    left: 0;
+    right: 0;
   }
   .page_header .hamburger_menu {
     width: 21px;
@@ -135,7 +145,7 @@ body {
     display: inline-block;
   }
   .main_page_area {
-    margin: 16px 0;
+    margin: 0 0 16px;
   }
   .main_page_area > nav {
     width: 216px;
