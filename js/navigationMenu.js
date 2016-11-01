@@ -54,6 +54,11 @@ define(["jquery"], function($) {
       }
       
       theWindow.resize(function(ev) {
+        if($("body").is(".page_introduction"))
+        {
+          return;
+        }
+        
         if(theWindow.width() > pageWidthThreshold)
         {
           resetNavMenuForLargeScreens();
