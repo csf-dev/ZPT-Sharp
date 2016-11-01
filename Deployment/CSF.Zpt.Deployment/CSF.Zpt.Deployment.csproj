@@ -66,7 +66,7 @@
       <CliZipFiles Include="$(ZptBuilderPath)ZptBuilder.exe.config" />
       <CliZipFiles Include="$(ZptBuilderPath)Doc\ZptBuilder.MANUAL.txt" />
     </ItemGroup>
-    <CreateZipArchive OutputFilename="$(OutputPath)CSF.Zpt.zip" Files="@(CliZipFiles)" />
+    <CreateZipArchive OutputFilename="$(OutputPath)ZptBuilder.zip" Files="@(CliZipFiles)" />
     <ItemGroup>
       <ApiOnlyZipFiles Include="$(ApiMainPath)CSF.dll" />
       <ApiOnlyZipFiles Include="$(ApiMainPath)CSF.Configuration.dll" />
