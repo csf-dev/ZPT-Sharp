@@ -111,10 +111,20 @@ body {
 }
 
 @media (max-width: 1059px) {
+  body > .content_wrapper {
+    padding-top: 56px;
+    margin-bottom: -51px;
+    min-height: calc(100% - 56px);
+  }
   .page_header {
     padding: 4px 0.4em;
     height: 32px;
     line-height: 32px;
+    position: fixed;
+    z-index: 10;
+    top: 0;
+    left: 0;
+    right: 0;
   }
   .page_header .hamburger_menu {
     width: 21px;
@@ -135,26 +145,28 @@ body {
     display: inline-block;
   }
   .main_page_area {
-    margin: 16px 0;
+    margin: 0 0 16px;
   }
   .main_page_area > nav {
-    width: 216px;
     border-radius: 0;
     float: none;
     position: fixed;
-    left: 0;
-    top: 0;
+    left: -298px;
+    top: 42px;
     bottom: 0;
-    right: 0;
-    z-index: 0;
+    overflow-y: scroll;
+    z-index: 20;
     width: 256px;
-    overflow-y: auto;
     -webkit-overflow-scrolling: touch;
     display: none;
-    margin-top: 58px;
-    margin-bottom: 40px;
+    margin-bottom: 0;
+    box-shadow: 0 2px 4px 0px rgba(0,0,0,0.8);
   }
-  .main_page_area > nav.visible {
+  .main_page_area > nav h2 {
+    margin: 0 0 0.2em;
+    font-size: 140%;
+    color: #666;
+    font-weight: bold;
     display: block;
   }
   .main_page_content {
