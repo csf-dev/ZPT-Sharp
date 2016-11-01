@@ -32,6 +32,8 @@ namespace CSF.Zpt.Cli
         .AddFlag(   x => x.OmitXmlDeclarations,               longName: "no-xml-declaration")
         .AddFlag(   x => x.ShowUsageStatement,                longName: "help",                       shortName: "h")
         .AddFlag(   x => x.ShowVersionInfo,                   longName: "version")
+        .AddFlag(   x => x.VerboseMode,                       longName: "verbose",                    shortName: "v")
+        .AddFlag(   x => x.QuietMode,                         longName: "quiet",                      shortName: "q")
         .AddValue(  x => x.InputFilenamePattern,              longName: "input-filename-pattern",     shortName: "p", optional: false)
         .AddValue(  x => x.OutputPath,                        longName: "output",                     shortName: "o", optional: false)
         .AddValue(  x => x.OutputFilenameExtension,           longName: "output-filename-extension",  shortName: "e", optional: false)
