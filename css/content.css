@@ -34,10 +34,12 @@
   padding: 0;
   margin: 0;
 }
-.main_page_content p.note {
+.main_page_content .note {
   padding: 1em;
   background: #DDE none;
   border: 1px solid #CCE;
+}
+.main_page_content p.note {
   font-style: italic;
 }
 .main_page_content p,
@@ -118,16 +120,36 @@
 .main_page_content td {
     border: 1px solid #CCC;
     padding: 0.2em;
+    text-align: left;
 }
-.main_page_content th {
+.main_page_content thead th {
     font-weight: bold;
     border-bottom: 2px solid #666;
     vertical-align: middle;
+    text-align: center;
 }
-
 table.zpt_attributes col.attribute {
   width: 20%;
 }
 table.zpt_attributes col.summary {
   width: 80%;
+}
+.plugin_note {
+  margin-bottom: 1em;
+}
+.plugin_note h2,
+.plugin_note .plugin_details thead {
+  position:absolute;
+  left:-10000px;
+  top:auto;
+  width:1px;
+  height:1px;
+  overflow:hidden;
+}
+.plugin_note .plugin_details {
+  border: 0 none;
+  margin-bottom: 0;
+}
+.plugin_note .plugin_details tbody {
+  border: 2px solid #666;
 }

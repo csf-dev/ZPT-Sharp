@@ -28,10 +28,16 @@
   </header>
   <div class="main_page_area">
     <nav>
-      <h2>Navigation menu</h2>
+      <h2>Site navigation</h2>
       <ul class="active_command_line_renderer">
         <li class="introduction nav_item">
           <a href="index.html">Introduction</a>
+        </li>
+        <li class="advantages nav_item">
+          <a href="advantages-of-zpt-views.html">ZPT Advantages</a>
+        </li>
+        <li class="download nav_item">
+          <a href="download.html">Download ZPT-Sharp</a>
         </li>
         <li class="asp_net_view_engine nav_item">
           <a href="asp-net-mvc-view-engine.html">ZPT-Sharp for ASP.NET MVC</a>
@@ -47,6 +53,12 @@
         </li>
         <li class="writing_pages_using_zpt nav_item">
           <a href="writing-pages-using-zpt.html">Writing pages</a>
+        </li>
+        <li class="plugins nav_item">
+          <a href="plugins.html">Plugins</a>
+        </li>
+        <li class="configuration nav_item">
+          <a href="configuration.html">Configuration</a>
         </li>
         <li class="diagnostics_and_logging nav_item">
           <a href="logging.html">Diagnostics &amp; logging</a>
@@ -262,13 +274,57 @@ ZptBuilder.exe --output=my-out-dir/ my-input-dir
     <i>CSF.Zpt.Rendering.IContextVisitor</i> to use when rendering pages. This is an ordered list
     of type names, separated by semicolons. These names must be full, assembly-qualified type names
     where provided.</dd>
+
+    <dt><b>--quiet</b>,<b>-q</b></dt>
+
+    <dd>Disables all application output (to standard error) except for fatal unexpected errors
+    (application crashes). Usually, the count of documents rendered by the application is sent to
+    the console, along with a list of documents which failed to render. This has no effect upon
+    documents rendered to standard output, when specified by <b>--output</b>. This flag takes
+    precedence should <b>--verbose</b> also be specified.</dd>
+
+    <dt><b>--verbose</b>,<b>-v</b></dt>
+
+    <dd>Sends a list of the documents which were successfully rendered to standard error, in
+    addition to the default application output. This flag is only useful when <b>--quiet</b> is not
+    specified.</dd>
   </dl><a name="lbAF" id="lbAF">&nbsp;</a>
+
+  <h2>FILES</h2>
+
+  <dl compact="">
+    <dt><i>ZptBuilder.exe.config</i></dt>
+
+    <dd>This is the configuration file used by the <b>ZptBuilder.exe</b> application. It is used
+    for configuring the plugin assemblies loaded, and also for configuring diagnostic
+    logging/tracing.</dd>
+
+    <dd>There are comments in the configuration file illustrating sample configuration. This sample
+    configuration demonstrates both how to enable the default plugins and also how to enable
+    logging of rendering operations.</dd>
+
+    <dt><i>Plugins</i>&nbsp;(various&nbsp;files)</dt>
+
+    <dd>ZPT-Sharp, and with it the <b>ZptBuilder.exe</b> application, makes use of a plugin
+    architecture. The plugin architecture is used for parsing and rendering of document types (such
+    as HTML or XML) and also for the evaluation of TALES expressions.</dd>
+
+    <dd>The <b>ZptBuilder.exe</b> application will not be very useful if no plugins are installed.
+    Consequently, a few plugins - which provide the standard ZPT functionality - are installed by
+    default. Plugins are distributed as separate DLL assembly files. To install them, place them
+    into a directory of your choosing and add relevant configuration to the configuration file.
+    This will include, at a minimum, the path to each plugin assembly. If you wish to set/change
+    the default document providers or to change the default TALES expression evaluator then this
+    may also be achieved in the configuration file.</dd>
+  </dl><a name="lbAG" id="lbAG">&nbsp;</a>
 
   <h2>SEE ALSO</h2>
 
-  <p>There are comments in the configuration file <i>ZptBuilder.exe.config</i> containing sample
-  configuration. This sample configuration demonstrates how to enable logging of rendering
-  operations.</p>
+  <dl compact="">
+    <dt><b>ZptBuilder.exe.config</b>&nbsp;(5)</dt>
+
+    <dd>Information about the configuration syntax</dd>
+  </dl>
   
     </section>
   </div>
@@ -280,9 +336,11 @@ ZptBuilder.exe --output=my-out-dir/ my-input-dir
   </section>
   <section class="version">
     <p>
-      Website built <strong>2016-10-27</strong>;
+      Website built <strong>2016-11-01</strong>;
       for version
-      <strong>v0.5.0</strong>
+      <strong>
+        v0.6.0-alpha
+      </strong>
     </p>
   </section>
 </footer>

@@ -27,10 +27,16 @@
   </header>
   <div class="main_page_area">
     <nav>
-      <h2>Navigation menu</h2>
+      <h2>Site navigation</h2>
       <ul class="active_tales_string_expressions">
         <li class="introduction nav_item">
           <a href="index.html">Introduction</a>
+        </li>
+        <li class="advantages nav_item">
+          <a href="advantages-of-zpt-views.html">ZPT Advantages</a>
+        </li>
+        <li class="download nav_item">
+          <a href="download.html">Download ZPT-Sharp</a>
         </li>
         <li class="asp_net_view_engine nav_item">
           <a href="asp-net-mvc-view-engine.html">ZPT-Sharp for ASP.NET MVC</a>
@@ -46,6 +52,12 @@
         </li>
         <li class="writing_pages_using_zpt nav_item">
           <a href="writing-pages-using-zpt.html">Writing pages</a>
+        </li>
+        <li class="plugins nav_item">
+          <a href="plugins.html">Plugins</a>
+        </li>
+        <li class="configuration nav_item">
+          <a href="configuration.html">Configuration</a>
         </li>
         <li class="diagnostics_and_logging nav_item">
           <a href="logging.html">Diagnostics &amp; logging</a>
@@ -123,6 +135,52 @@
     </nav>
     <section class="main_page_content">
       <header>
+        <div class="expression plugin_note note">
+        <h2>Plugin note</h2>
+        <p>
+          This functionality is contained within an
+          <em><a href="plugins.html">expression evaluator plugin</a></em>.
+          As such, it is available only when the corresponding plugin is installed.
+        </p>
+        
+          <table class="plugin_details">
+            <colgroup>
+              <col class="key">
+              <col class="value">
+            </colgroup>
+            <thead>
+              <tr>
+                <th>Item</th>
+                <th>Value</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th>Plugin assembly</th>
+                <td>
+                  <span><code>CSF.Zpt.ExpressionEvaluators.StringExpressions.dll</code></span>
+                </td>
+              </tr>
+              <tr>
+                <th>
+                  <span>Plugin class</span>
+                </th>
+                <td>
+                  <span><code>CSF.Zpt.ExpressionEvaluators.StringExpressionEvaluator</code></span>
+                </td>
+              </tr>
+              <tr>
+                <th>
+                  <span>Expression prefix</span>
+                </th>
+                <td>
+                  <span><code>string:</code></span>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        
+      </div>
         <h1>TALES 'string' expressions</h1>
       </header>
       <p>
@@ -154,9 +212,11 @@
   </section>
   <section class="version">
     <p>
-      Website built <strong>2016-10-27</strong>;
+      Website built <strong>2016-11-01</strong>;
       for version
-      <strong>v0.5.0</strong>
+      <strong>
+        v0.6.0-alpha
+      </strong>
     </p>
   </section>
 </footer>
