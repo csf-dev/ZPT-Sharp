@@ -3,15 +3,17 @@ define(["jquery", "config/pageScriptRegistry"], function($, registry) {
   
   function getPageName()
   {
-    var pageNameMatcher = /page_([a-zA-Z0-9_-]+)/;
-    
-    var bodyElement = $("body");
-    var classes = bodyElement.attr("class").split(" ");
+    var
+      pageNameMatcher = /page_([a-zA-Z0-9_-]+)/,
+      bodyElement = $("body"),
+      bodyClass = bodyElement.attr("class"),
+      classes = (bodyClass || "").split(" ");
     
     for(var i = 0, classLength = classes.length; i < classLength; i++)
     {
-      var currentClass = classes[i];
-      var currentMatch = currentClass.match(pageNameMatcher);
+      var
+        currentClass = classes[i],
+        currentMatch = currentClass.match(pageNameMatcher);
       if(currentMatch)
       {
         return currentMatch[1];
@@ -33,13 +35,16 @@ define(["jquery", "config/pageScriptRegistry"], function($, registry) {
   
   function loadPageModule(callback)
   {
-    var pageName = getPageName();
+    var
+      pageName = getPageName(),
+      pageModulePath = "pages/" + pageName;
+    
     if(registry.indexOf(pageName) < 0)
     {
       return;
     }
     
-    var pageModulePath = "pages/" + pageName;
+    
     require([pageModulePath], callback);
   }
   
