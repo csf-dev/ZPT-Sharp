@@ -20,7 +20,7 @@ namespace CSF.Zpt.Tales
 
     #region fields
 
-    private IEvaluatorRegistry _registry;
+    private IEvaluatorSelector _registry;
     private IExpressionFactory _expressionCreator;
 
     #endregion
@@ -31,7 +31,7 @@ namespace CSF.Zpt.Tales
     /// Gets the evaluator registry.
     /// </summary>
     /// <value>The evaluator registry.</value>
-    protected virtual IEvaluatorRegistry EvaluatorRegistry
+    protected virtual IEvaluatorSelector EvaluatorRegistry
     {
       get {
         return _registry;
@@ -66,7 +66,7 @@ namespace CSF.Zpt.Tales
     /// </summary>
     /// <param name="expression">The expression to evaluate.</param>
     /// <param name="context">The rendering context for which we are evaluating a result.</param>
-    public override ExpressionResult Evaluate(string expression, RenderingContext context)
+    public override ExpressionResult Evaluate(string expression, IRenderingContext context)
     {
       if(expression == null)
       {
@@ -82,7 +82,7 @@ namespace CSF.Zpt.Tales
     /// </summary>
     /// <param name="talesExpression">The TALES expression to evaluate.</param>
     /// <param name="context">The rendering context for which we are evaluating a result.</param>
-    public virtual ExpressionResult Evaluate(Expression talesExpression, RenderingContext context)
+    public virtual ExpressionResult Evaluate(Expression talesExpression, IRenderingContext context)
     {
       if(talesExpression == null)
       {
@@ -119,7 +119,7 @@ namespace CSF.Zpt.Tales
     /// Exposes the found object if this method returns <c>true</c>.  The value is undefined if this method returns
     /// <c>false</c>.
     /// </param>
-    public virtual bool TryGetRootObject(string name, RenderingContext context, out object result)
+    public virtual bool TryGetRootObject(string name, IRenderingContext context, out object result)
     {
       if(context == null)
       {
@@ -184,7 +184,7 @@ namespace CSF.Zpt.Tales
     /// </summary>
     /// <returns>The builtin contexts.</returns>
     /// <param name="context">The current rendering context.</param>
-    protected virtual BuiltinContextsContainer GetBuiltinContexts(RenderingContext context)
+    protected virtual BuiltinContextsContainer GetBuiltinContexts(IRenderingContext context)
     {
       if(context == null)
       {
@@ -210,7 +210,7 @@ namespace CSF.Zpt.Tales
     /// <param name="options">Options.</param>
     /// <param name="expressionCreator">The expression factory to use.</param>
     /// <param name="modelObject">An object to which the ZPT document is to be applied.</param>
-    public TalesModel(IEvaluatorRegistry evaluatorRegistry,
+    public TalesModel(IEvaluatorSelector evaluatorRegistry,
                       NamedObjectWrapper options = null,
                       IExpressionFactory expressionCreator = null,
                       object modelObject = null) : base(options, modelObject)
@@ -234,7 +234,7 @@ namespace CSF.Zpt.Tales
     /// <param name="modelObject">An object to which the ZPT document is to be applied.</param>
     public TalesModel(IModel parent,
                       IModel root,
-                      IEvaluatorRegistry evaluatorRegistry,
+                      IEvaluatorSelector evaluatorRegistry,
                       IExpressionFactory expressionCreator = null,
                       object modelObject = null) : base(parent, root, modelObject)
     {

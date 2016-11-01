@@ -6,6 +6,7 @@ using System.Text;
 using System.Diagnostics;
 using CSF.Zpt.Cli.Exceptions;
 using CSF.Zpt.Cli.Resources;
+using System.Linq;
 
 namespace CSF.Zpt.Cli
 {
@@ -63,7 +64,6 @@ namespace CSF.Zpt.Cli
 
       var batchOptions = GetBatchOptions(options);
       var renderingOptions = GetRenderingOptions(options);
-      var renderingMode = GetRenderingMode(options);
 
       if(batchOptions == null
          || renderingOptions == null)
@@ -71,19 +71,18 @@ namespace CSF.Zpt.Cli
         return;
       }
 
-      var response = Render(renderingOptions, batchOptions, renderingMode);
+      var response = Render(renderingOptions, batchOptions);
       WriteResponseInfo(response, options);
     }
 
     private IBatchRenderingResponse Render(IRenderingOptions options,
-                                           IBatchRenderingOptions batchOptions,
-                                           RenderingMode? renderingMode)
+                                           IBatchRenderingOptions batchOptions)
     {
       IBatchRenderingResponse output = null;
 
       try
       {
-        output = _renderer.Render(options, batchOptions, renderingMode);
+        output = _renderer.Render(batchOptions, options);
       }
       catch(InvalidBatchRenderingOptionsException ex)
       {
@@ -119,10 +118,46 @@ namespace CSF.Zpt.Cli
       {
         throw new ArgumentNullException(nameof(options));
       }
-
-      if(response != null)
+      if(response == null)
       {
-        // TODO: Do something with the response. See issue #104
+        return;
+      }
+
+      var successes = response.Documents.Where(x => x.Success);
+
+      if(options.ShowNormalOutput())
+      {
+        var successCount = successes.Count();
+        Console.Error.WriteLine(Resources.OutputMessages.SuccessfulDocumentCountFormat, successCount);
+
+        var failures = response.Documents
+          .Where(x => !x.Success)
+          .Select(x => new {
+            Source = x.SourceInfo.FullName,
+            Exception = x.Exception
+          })
+          .OrderBy(x => x.Source)
+          .ToArray();
+
+        if(failures.Any())
+        {
+          Console.Error.WriteLine(Resources.OutputMessages.FailedDocumentsHeader);
+        }
+        foreach(var failure in failures)
+        {
+          Console.Error.WriteLine(Resources.OutputMessages.FailedDocumentFormat,
+                                  failure.Source,
+                                  failure.Exception.Message);
+        }
+      }
+
+      if(options.ShowVerboseOutput())
+      {
+        Console.Error.WriteLine(Resources.OutputMessages.SuccessfulDocumentsHeader);
+        foreach(var doc in successes)
+        {
+          Console.Error.WriteLine(Resources.OutputMessages.SuccessfulDocumentFormat, doc.SourceInfo.FullName);
+        }
       }
     }
 
@@ -139,11 +174,6 @@ namespace CSF.Zpt.Cli
     private IRenderingOptions GetRenderingOptions(CommandLineOptions options)
     {
       return SafeGetValue<IRenderingOptions>(() => _renderingOptionsFactory.GetOptions(options));
-    }
-
-    private RenderingMode? GetRenderingMode(CommandLineOptions options)
-    {
-      return SafeGetValue<RenderingMode?>(() => options.GetRenderingMode());
     }
 
     private TOutput SafeGetValue<TOutput>(Func<TOutput> getter)
@@ -254,7 +284,7 @@ namespace CSF.Zpt.Cli
       _commandlineOptionsFactory = commandlineOptionsFactory?? new CommandLineOptionsFactory();
       _batchOptionsFactory = batchOptionsFactory?? new BatchRenderingOptionsFactory();
       _renderingOptionsFactory = renderingOptionsFactory?? new RenderingOptionsFactory();
-      _renderer = renderer?? new BatchRenderer();
+      _renderer = renderer?? new ErrorTolerantBatchRenderer();
       _versionInspector = versionInspector?? new VersionNumberInspector();
       _terminator = terminator?? new ApplicationTerminator();
     }

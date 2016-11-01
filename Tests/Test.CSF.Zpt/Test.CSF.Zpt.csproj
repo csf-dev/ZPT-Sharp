@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{7228188F-FD67-4C28-9BAC-E36E11D6ADBB}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>Test.CSF.Zpt</RootNamespace>
+    <AssemblyName>Test.CSF.Zpt</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+    <CheckForOverflowUnderflow>true</CheckForOverflowUnderflow>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+    <DefineConstants>TRACE</DefineConstants>
+    <CheckForOverflowUnderflow>true</CheckForOverflowUnderflow>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="Ploeh.AutoFixture">
+      <HintPath>..\..\packages\AutoFixture.3.34.2\lib\net40\Ploeh.AutoFixture.dll</HintPath>
+    </Reference>
+    <Reference Include="Moq">
+      <HintPath>..\..\packages\Moq.4.2.1507.0118\lib\net40\Moq.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml" />
+    <Reference Include="log4net">
+      <HintPath>..\..\packages\log4net.2.0.3\lib\net40-full\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Configuration" />
+    <Reference Include="nunit.framework">
+      <HintPath>..\..\packages\NUnit.2.6.4\lib\nunit.framework.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <ItemGroup>
+    <None Include="packages.config" />
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Rendering\" />
+    <Folder Include="Metal\" />
+    <Folder Include="Tal\" />
+    <Folder Include="Util\" />
+    <Folder Include="Tales\" />
+    <Folder Include="BatchRendering\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="GlobalSetupFixture.cs" />
+    <Compile Include="Rendering\TestModel.cs" />
+    <Compile Include="Metal\TestMacroExpander.cs" />
+    <Compile Include="Metal\TestMacroFinder.cs" />
+    <Compile Include="Tal\TestTalVisitor.cs" />
+    <Compile Include="Tal\TestDefineAttributeHandler.cs" />
+    <Compile Include="Tal\TestConditionAttributeHandler.cs" />
+    <Compile Include="Tal\TestRepeatAttributeHandler.cs" />
+    <Compile Include="Tal\TestContentOrReplaceAttributeHandler.cs" />
+    <Compile Include="Tal\TestAttributesAttributeHandler.cs" />
+    <Compile Include="Tal\TestOmitTagAttributeHandler.cs" />
+    <Compile Include="Tal\TestOnErrorAttributeHandler.cs" />
+    <Compile Include="Tales\TestTalesModel.cs" />
+    <Compile Include="Tales\TestExpressionFactory.cs" />
+    <Compile Include="Tales\TestFilesystemDirectory.cs" />
+    <Compile Include="AssemblyInfo.cs" />
+    <Compile Include="TestZptDocument.cs" />
+    <Compile Include="TestZptDocumentFactory.cs" />
+    <Compile Include="TestPluginAssemblyLoader.cs" />
+    <Compile Include="Rendering\TestContextVisitorBase.cs" />
+    <Compile Include="Rendering\TestRenderingContextFactoryFactory.cs" />
+    <Compile Include="Rendering\StubRenderingContextFactory.cs" />
+    <Compile Include="Rendering\StubContextVisitor.cs" />
+    <Compile Include="Rendering\TestContextVisitorFactory.cs" />
+    <Compile Include="Tales\TestSimpleEvaluatorSelector.cs" />
+    <Compile Include="Tal\TestTalTidyUpVisitor.cs" />
+    <Compile Include="Metal\TestMetalTidyUpVisitor.cs" />
+    <Compile Include="Metal\TestMetalVisitor.cs" />
+    <Compile Include="BatchRendering\TestRenderingJobFactory.cs" />
+    <Compile Include="BatchRendering\TestBatchRenderer.cs" />
+    <Compile Include="BatchRendering\TestBatchRenderingOptionsValidator.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\CSF\CSF\CSF.csproj">
+      <Project>{E563D7BC-1AB1-4AFB-8533-51315437C6E6}</Project>
+      <Name>CSF</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\CSF.Zpt\CSF.Zpt.csproj">
+      <Project>{16E957BB-347C-4EE1-815F-19AC296FB9E0}</Project>
+      <Name>CSF.Zpt</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\CSF.Zpt.Abstractions\CSF.Zpt.Abstractions.csproj">
+      <Project>{8207CD9B-F1C1-4D75-B250-ACDFFBDCB071}</Project>
+      <Name>CSF.Zpt.Abstractions</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\CSF.Zpt.Log4net\CSF.Zpt.Log4net.csproj">
+      <Project>{81044439-06CF-44E2-BBF2-3800F1DEB5B1}</Project>
+      <Name>CSF.Zpt.Log4net</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\CSF\CSF.Reflection\CSF.Reflection.csproj">
+      <Project>{275413F6-0651-4AD4-A426-07EDA165C07E}</Project>
+      <Name>CSF.Reflection</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\CSF\CSF.Configuration\CSF.Configuration.csproj">
+      <Project>{8C570A26-CEEB-45D1-9436-745C8DBAE9D8}</Project>
+      <Name>CSF.Configuration</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CSF.Zpt.TestUtils\CSF.Zpt.TestUtils.csproj">
+      <Project>{96333809-3330-43A7-B0CB-2DBE68E1E6FE}</Project>
+      <Name>CSF.Zpt.TestUtils</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Deployment\CSF.Zpt.PreBuild\CSF.Zpt.PreBuild.csproj">
+      <Project>{6C025057-9ACC-474E-9092-D6B9059B07EE}</Project>
+      <Name>CSF.Zpt.PreBuild</Name>
+    </ProjectReference>
+  </ItemGroup>
+</Project>

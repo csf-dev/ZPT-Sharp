@@ -1,0 +1,71 @@
+<!doctype html>
+<html tal:define="activePage string:tal_on_error">
+<head metal:use-macro="documents/Shared/general-page.html/macros/common_document_head">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="utf-8">
+<title metal:fill-slot="document_title">TAL error-handling</title>
+<base href="../" />
+<style type="text/css">
+@import url(css/styles.css);
+@import url(css/dummy.css);
+</style>
+<script data-main="js/config/main" type="text/javascript" src="js/lib/require.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.4.0/styles/default.min.css">
+</head>
+<body metal:use-macro="documents/Shared/general-page.html/macros/common_document_body" class="page_tal_on_error">
+<div class="content_wrapper">
+  <header class="page_header dummy">
+    Dummy content
+  </header>
+  <div class="main_page_area">
+    <nav>
+      <h2>Navigation menu</h2>
+      <ul class="active_introduction dummy">
+        <li class="introduction"><a href=".">Introduction</a></li>
+        <li class="other_page"><a href="dummy.html">Dummy page</a></li>
+      </ul>
+    </nav>
+    <section class="main_page_content" metal:fill-slot="main_page_content">
+      <header>
+        <h1>TAL error-handling</h1>
+      </header>
+      <p>
+        The TAL <strong>on-error</strong> attribute provides a mechanism to handle errors in rendering, avoiding a
+        complete failure to render a page.  A parallel in many programming languages is a try/catch construct.
+      </p>
+      <h2>Syntax</h2>
+      <pre><code class="nohighlight">tal:on-error="MODE EXPRESSION"</code></pre>
+      <p>
+        The <code>MODE</code> &amp; <code>EXPRESSION</code> parts of an on-error statement work identically to
+        <a href="tal/content-replace.html">a <code>tal:content</code> attribute</a>.  All that differs is the method of
+        invocation.
+      </p>
+      <h2>Invoking an error handler</h2>
+      <p>
+        If an unhandled error is encountered whilst rendering a page with TAL, an on-error attribute is searched in the
+        current element (where the error was raised).  If it is found then it is used, treated like a TAL content
+        attribute.  If no on-error attribute is found then the parent element is searched, and so on moving upwards
+        through the hierarchy through the element's ancestors.
+      </p>
+      <p>
+        In the example below, if an error was raised whilst evaluating the TALES expression
+        <code>Model/CurrentUser/Name</code> then the entire paragraph would be replaced with
+        <kbd>There was a problem determining your log-in status</kbd>.  If, on the other hand, that evaluated
+        successfully but there was en error whilst evaluating <code>Model/CurrentUser/GetProfileUrl</code> then the
+        hyperlink text would be replaced with <kbd>Error! Cannot get profile URL</kbd> but the paragraph itself would
+        still be rendered.
+      </p>
+      <pre><code class="html">&lt;p tal:on-error=&quot;string:There was a problem determining your log-in status&quot;&gt;
+  You are logged in as
+  &lt;span tal:content=&quot;Model/CurrentUser/Name&quot;&gt;Joseph Bloggs&lt;/span&gt;.&lt;br&gt;
+  &lt;a tal:on-error=&quot;string:Error! Cannot get profile URL&quot;
+     tal:attributes=&quot;href Model/CurrentUser/GetProfileUrl&quot;&gt;Your profile&lt;/a&gt;
+&lt;/p&gt;</code></pre>
+    </section>
+  </div>
+</div>
+<footer class="page_footer dummy">
+  Dummy content
+</footer>
+</body>
+</html>

@@ -31,7 +31,7 @@ namespace CSF.Zpt.MVC.Tales
       }
     }
 
-    protected override BuiltinContextsContainer GetBuiltinContexts(RenderingContext context)
+    protected override BuiltinContextsContainer GetBuiltinContexts(IRenderingContext context)
     {
       if(context == null)
       {
@@ -60,7 +60,7 @@ namespace CSF.Zpt.MVC.Tales
 
     #region constructor
 
-    public MvcTalesModel(IEvaluatorRegistry evaluatorRegistry,
+    public MvcTalesModel(IEvaluatorSelector evaluatorRegistry,
                          NamedObjectWrapper options = null,
                          IExpressionFactory expressionCreator = null,
                          object model = null) : base(evaluatorRegistry,
@@ -70,7 +70,7 @@ namespace CSF.Zpt.MVC.Tales
 
     public MvcTalesModel(IModel parent,
                          IModel root,
-                         IEvaluatorRegistry evaluatorRegistry,
+                         IEvaluatorSelector evaluatorRegistry,
                          IExpressionFactory expressionCreator = null,
                          object model = null) : base(parent,
                                                      root,

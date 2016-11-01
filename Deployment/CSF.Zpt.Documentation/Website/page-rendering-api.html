@@ -1,0 +1,141 @@
+<!doctype html>
+<html tal:define="activePage string:page_rendering_api">
+<head metal:use-macro="documents/Shared/general-page.html/macros/common_document_head">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="utf-8">
+<title metal:fill-slot="document_title">The ZPT-Sharp page-rendering API</title>
+<base href="." />
+<style type="text/css">
+@import url(css/styles.css);
+@import url(css/dummy.css);
+</style>
+<script data-main="js/config/main" type="text/javascript" src="js/lib/require.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.4.0/styles/default.min.css">
+</head>
+<body metal:use-macro="documents/Shared/general-page.html/macros/common_document_body" class="page_page_rendering_api">
+<div class="content_wrapper">
+  <header class="page_header dummy">
+    Dummy content
+  </header>
+  <div class="main_page_area">
+    <nav>
+      <h2>Navigation menu</h2>
+      <ul class="active_introduction dummy">
+        <li class="introduction"><a href=".">Introduction</a></li>
+        <li class="other_page"><a href="dummy.html">Dummy page</a></li>
+      </ul>
+    </nav>
+    <section class="main_page_content" metal:fill-slot="main_page_content">
+      <header>
+        <h1>ZPT-Sharp rendering API</h1>
+      </header>
+      <p class="note">
+        Note that this below is outdated and also
+        <a href="https://github.com/csf-dev/ZPT-Sharp/issues/94">needs rewriting for clarity and usefulness</a>.
+        In the mean-time, you can begin with the
+        <a href="api/index.html">API documentation generated from the source code</a>.
+      </p>
+      <p>
+        ZPT-Sharp provides an API to render XML/HTML pages using ZPT.
+      </p>
+      <h2>Assemblies</h2>
+      <p>
+        There are two assemblies relevant to rendering pages using ZPT-Sharp.
+      </p>
+      <p>
+        The <strong>CSF.Zpt.Api</strong> assembly contains the interfaces and public-visibility types which are used by the API.
+        It has no dependencies of its own except upon the .NET framework and is safe to reference from your project.
+      </p>
+      <p>
+        The <strong>CSF.Zpt</strong> assembly contains the implementation for rendering pages and (if you are using
+        dependency-injection), might only be referenced by your DI wirings assembly (if you use this pattern).
+      </p>
+      <h2>Abstract types &amp; interfaces</h2>
+      <p>
+        The following types are all found in the <strong>CSF.Zpt.Api</strong> assembly.
+      </p>
+      
+      <h3>IZptDocumentFactory</h3>
+      <p>
+        <code>IZptDocumentFactory</code> provides the public interface for creating instances of
+        <code>IZptDocument</code>.
+      </p>
+      <pre><code class="csharp">using System.IO;
+using CSF.Zpt;
+
+FileInfo sourceFile = GetSourceFile();
+IZptDocumentFactory factory = GetFactory();
+IZptDocument myDoc = factory.CreateDocument(sourceFile);</code></pre>
+      <h3>IZptDocument</h3>
+      <p>
+        <code>IZptDocument</code> provides the public interface for rendering documents.
+      </p>
+      <pre><code class="csharp">using System.IO;
+using CSF.Zpt;
+
+IZptDocument myDoc = GetDocument();
+string outputPath = GetOutputPath();
+
+using(var outputStream = File.Open(outputPath))
+using(var writer = new StreamWriter(outputStream))
+{
+    myDoc.Render(writer);
+}</code></pre>
+      <h3>RenderingOptions</h3>
+      <p>
+        <code>RenderingOptions</code> wraps the available options for rendering a <code>IZptDocument</code>.  If you
+        wish to use non-default options then you may provide them as an optional parameter to
+        <code>IZptDocument.Render</code>.
+      </p>
+      <pre><code class="csharp">using System.IO;
+using CSF.Zpt;
+using CSF.Zpt.Rendering;
+
+IZptDocument myDoc = GetDocument();
+string outputPath = GetOutputPath();
+RenderingOptions options = GetOptions();
+
+using(var outputStream = File.Open(outputPath))
+using(var writer = new StreamWriter(outputStream))
+{
+    myDoc.Render(writer, options);
+}</code></pre>
+      <h2>Implementation types</h2>
+      <p>
+        The following types are all found in the <strong>CSF.Zpt</strong> assembly.
+      </p>
+      <h3>ZptDocumentFactory</h3>
+      <p>
+        <code>ZptDocumentFactory</code> is the concrete implementation of <code>IZptDocumentFactory</code>.
+        It works upon either files in a filesystem or <code>Stream</code> instances.  In the case of files, it can
+        typically detect the file type (XML or HTML) from its extension.  It then returns an implementation of
+        <code>IZptDocument</code> suitable to that file.
+      </p>
+      <p>
+        The constructor to this type also permits forcing the factory into creating documents only of a specific type.
+      </p>
+      <h3>ZptHtmlDocument &amp; ZptXmlDocument</h3>
+      <p>
+        Generally, it is ill-advised to instantiate these types (the concrete implementations of
+        <code>IZptDocument</code>) directly.  Instead rely on an implementation of <code>IZptDocumentFactory</code> to
+        create them for you.
+      </p>
+      <p>
+        ZPT-Sharp supports both XML documents (via the .NET framework's built-in XML support) and HTML documents (via
+        the <a href="https://htmlagilitypack.codeplex.com/">HTML Agility Pack</a>).  These two implementation types
+        deal with these two document-types, and their respective rendering engines.
+      </p>
+      <h3>DefaultRenderingOptions</h3>
+      <p>
+        This is a concrete implementation of <code>RenderingOptions</code>.  It is an immutable type (once constructed
+        it may not be altered) - and so all of the available options are constructor parameters.  Every parameter is
+        optional, with a default value; a new instance (using a parameterless constructor) provides the default options.
+      </p>
+    </section>
+  </div>
+</div>
+<footer class="page_footer dummy">
+  Dummy content
+</footer>
+</body>
+</html>

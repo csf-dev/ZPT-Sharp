@@ -16,6 +16,12 @@ namespace CSF.Zpt.BatchRendering
 
     #endregion
 
+    #region fields
+
+    private bool _disposed;
+
+    #endregion
+
     #region input options
 
     /// <summary>
@@ -42,6 +48,12 @@ namespace CSF.Zpt.BatchRendering
     /// <value>The input search pattern.</value>
     public string InputSearchPattern { get; private set; }
 
+    /// <summary>
+    /// Gets an optional value acting as an override for auto-detection of the rendering mode.
+    /// </summary>
+    /// <value>The rendering mode.</value>
+    public RenderingMode? RenderingMode { get; private set; }
+
     #endregion
 
     #region output options
@@ -66,6 +78,37 @@ namespace CSF.Zpt.BatchRendering
 
     #endregion
 
+    #region methods
+
+    /// <summary>
+    /// Releases all resource used by the <see cref="CSF.Zpt.BatchRendering.BatchRenderingOptions"/> object.
+    /// </summary>
+    /// <remarks>Call <see cref="Dispose"/> when you are finished using the
+    /// <see cref="CSF.Zpt.BatchRendering.BatchRenderingOptions"/>. The <see cref="Dispose"/> method leaves the
+    /// <see cref="CSF.Zpt.BatchRendering.BatchRenderingOptions"/> in an unusable state. After calling
+    /// <see cref="Dispose"/>, you must release all references to the
+    /// <see cref="CSF.Zpt.BatchRendering.BatchRenderingOptions"/> so the garbage collector can reclaim the memory that
+    /// the <see cref="CSF.Zpt.BatchRendering.BatchRenderingOptions"/> was occupying.</remarks>
+    public void Dispose()
+    {
+      if(!_disposed)
+      {
+        if(InputStream != null)
+        {
+          InputStream.Dispose();
+        }
+
+        if(OutputStream != null)
+        {
+          OutputStream.Dispose();
+        }
+
+        _disposed = true;
+      }
+    }
+
+    #endregion
+
     #region constructor
 
     /// <summary>
@@ -78,22 +121,42 @@ namespace CSF.Zpt.BatchRendering
     /// <param name="inputSearchPattern">Input search pattern.</param>
     /// <param name="outputExtensionOverride">Output extension override.</param>
     /// <param name="ignoredPaths">Ignored paths.</param>
+    /// <param name="renderingMode">The rendering mode override.</param>
     public BatchRenderingOptions (Stream inputStream = null,
                                   Stream outputStream = null,
                                   IEnumerable<FileSystemInfo> inputPaths = null,
                                   FileSystemInfo outputPath = null,
                                   string inputSearchPattern = null,
                                   string outputExtensionOverride = null,
-                                  IEnumerable<DirectoryInfo> ignoredPaths = null)
+                                  IEnumerable<DirectoryInfo> ignoredPaths = null,
+                                  RenderingMode? renderingMode = null)
     {
+      if(renderingMode.HasValue)
+      {
+        renderingMode.Value.RequireDefinedValue(nameof(renderingMode));
+      }
+
       this.InputStream = inputStream;
       this.InputPaths = inputPaths?? new FileSystemInfo[0];
       this.IgnoredPaths = ignoredPaths;
       this.InputSearchPattern = inputSearchPattern?? DEFAULT_SEARCH_PATTERN;
+      this.RenderingMode = renderingMode;
 
       this.OutputStream = outputStream;
       this.OutputPath = outputPath;
       this.OutputExtensionOverride = outputExtensionOverride;
+    }
+
+    #endregion
+
+    #region static methods
+
+    /// <summary>
+    /// Create and return a 'builder' instance which helps construct valid instance of <see cref="IBatchRenderingOptions"/>.
+    /// </summary>
+    public static IBatchOptionsInputHelper Build()
+    {
+      return new BatchOptionsBuilder();
     }
 
     #endregion

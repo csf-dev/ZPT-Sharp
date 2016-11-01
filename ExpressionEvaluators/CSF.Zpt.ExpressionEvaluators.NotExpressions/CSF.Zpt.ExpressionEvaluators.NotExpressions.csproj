@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{7B3748AD-DF11-4A80-9258-EA043CD99D7C}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>CSF.Zpt.ExpressionEvaluators</RootNamespace>
+    <AssemblyName>CSF.Zpt.ExpressionEvaluators.NotExpressions</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <SolutionCompany>CSF Software Limited</SolutionCompany>
+    <SolutionCopyright>CSF Software Limited et al</SolutionCopyright>
+    <SolutionName>ZPT-Sharp: Zope Page Templates for .NET</SolutionName>
+    <ProjectConfiguration>$(Configuration)</ProjectConfiguration>
+    <ProjectTitle>CSF.Zpt.ExpressionEvaluators.NotExpressions</ProjectTitle>
+    <ProjectDescription>Implementation of IExpressionEvaluator for 'not' expressions</ProjectDescription>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+    <CheckForOverflowUnderflow>true</CheckForOverflowUnderflow>
+    <DocumentationFile>bin\Debug\CSF.Zpt.ExpressionEvaluators.NotExpressions.xml</DocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+    <CheckForOverflowUnderflow>true</CheckForOverflowUnderflow>
+    <DefineConstants>TRACE</DefineConstants>
+    <DocumentationFile>bin\Release\CSF.Zpt.ExpressionEvaluators.NotExpressions.xml</DocumentationFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="NotExpressionEvaluator.cs" />
+    <Compile Include="AssemblyInfo.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="..\..\packages\MSBuild.Extension.Pack.1.8.0\build\net40\MSBuild.Extension.Pack.targets" Condition="Exists('..\..\packages\MSBuild.Extension.Pack.1.8.0\build\net40\MSBuild.Extension.Pack.targets')" />
+  <ItemGroup>
+    <ProjectReference Include="..\..\CSF.Zpt\CSF.Zpt.csproj">
+      <Project>{16E957BB-347C-4EE1-815F-19AC296FB9E0}</Project>
+      <Name>CSF.Zpt</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\CSF.Zpt.Abstractions\CSF.Zpt.Abstractions.csproj">
+      <Project>{8207CD9B-F1C1-4D75-B250-ACDFFBDCB071}</Project>
+      <Name>CSF.Zpt.Abstractions</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Deployment\CSF.Zpt.PreBuild\CSF.Zpt.PreBuild.csproj">
+      <Project>{6C025057-9ACC-474E-9092-D6B9059B07EE}</Project>
+      <Name>CSF.Zpt.PreBuild</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Deployment\CSF.Zpt.DeploymentTasks\CSF.Zpt.DeploymentTasks.csproj">
+      <Project>{3E1DAACE-519B-4C6C-80E3-3F06A1A33C66}</Project>
+      <Name>CSF.Zpt.DeploymentTasks</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <UsingTask TaskName="ReadVersionNumber" AssemblyFile="..\..\Deployment\CSF.Zpt.DeploymentTasks\bin\$(Configuration)\CSF.Zpt.DeploymentTasks.dll" />
+  <Target Name="BeforeBuild">
+    <ItemGroup>
+      <StubAssemblyInfo Include="..\..\Common\AssemblyInfo.stub.cs" />
+      <DestinationAssemblyInfo Include="AssemblyInfo.cs" />
+    </ItemGroup>
+    <Copy SourceFiles="@(StubAssemblyInfo)" DestinationFiles="@(DestinationAssemblyInfo)" />
+    <ReadVersionNumber VersionFile="..\..\version.ini">
+      <Output TaskParameter="FullVersionNumber" ItemName="FullVersion" />
+      <Output TaskParameter="SemanticVersionNumber" ItemName="SemanticVersion" />
+      <Output TaskParameter="BuildNumber" ItemName="BuildNumber" />
+      <Output TaskParameter="InformationalVersion" ItemName="InformationalVersion" />
+    </ReadVersionNumber>
+    <ItemGroup>
+      <AssemblyInfoFiles Include="AssemblyInfo.cs" />
+    </ItemGroup>
+    <MSBuild.ExtensionPack.Framework.AssemblyInfo AssemblyInfoFiles="@(AssemblyInfoFiles)" AssemblyVersion="@(SemanticVersion).0" AssemblyFileVersion="@(FullVersion)" AssemblyCompany="$(SolutionCompany)" AssemblyCopyright="$(SolutionCopyright)" AssemblyProduct="$(SolutionName)" AssemblyConfiguration="$(ProjectConfiguration)" AssemblyTitle="$(ProjectTitle)" AssemblyDescription="$(ProjectDescription)" />
+  </Target>
+  <Target Name="AfterBuild">
+    <ItemGroup>
+      <StubAssemblyInfo Include="..\..\Common\AssemblyInfo.stub.cs" />
+      <DestinationAssemblyInfo Include="AssemblyInfo.cs" />
+    </ItemGroup>
+    <Copy SourceFiles="@(StubAssemblyInfo)" DestinationFiles="@(DestinationAssemblyInfo)" />
+  </Target>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+</Project>

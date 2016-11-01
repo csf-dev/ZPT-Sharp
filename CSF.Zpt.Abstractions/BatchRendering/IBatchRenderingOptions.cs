@@ -7,7 +7,7 @@ namespace CSF.Zpt.BatchRendering
   /// <summary>
   /// Represents batch rendering options, indicating the inputs and outputs for a <see cref="IBatchRenderer"/>.
   /// </summary>
-  public interface IBatchRenderingOptions
+  public interface IBatchRenderingOptions : IDisposable
   {
     #region input options
 
@@ -34,6 +34,12 @@ namespace CSF.Zpt.BatchRendering
     /// </summary>
     /// <value>The input search pattern.</value>
     string InputSearchPattern { get; }
+
+    /// <summary>
+    /// Gets an optional value acting as an override for auto-detection of the rendering mode.
+    /// </summary>
+    /// <value>The rendering mode.</value>
+    RenderingMode? RenderingMode { get; }
 
     #endregion
 

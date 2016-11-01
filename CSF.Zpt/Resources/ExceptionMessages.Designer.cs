@@ -112,30 +112,6 @@ namespace CSF.Zpt.Resources {
             }
         }
         
-        internal static string TalesPathPartMustNotBeEmpty {
-            get {
-                return ResourceManager.GetString("TalesPathPartMustNotBeEmpty", resourceCulture);
-            }
-        }
-        
-        internal static string CouldNotWalkAnyPaths {
-            get {
-                return ResourceManager.GetString("CouldNotWalkAnyPaths", resourceCulture);
-            }
-        }
-        
-        internal static string CouldNotWalkAnyPathsWithExpression {
-            get {
-                return ResourceManager.GetString("CouldNotWalkAnyPathsWithExpression", resourceCulture);
-            }
-        }
-        
-        internal static string NoCurrentComponentToWalk {
-            get {
-                return ResourceManager.GetString("NoCurrentComponentToWalk", resourceCulture);
-            }
-        }
-        
         internal static string InvalidTalesExpressionPrefix {
             get {
                 return ResourceManager.GetString("InvalidTalesExpressionPrefix", resourceCulture);

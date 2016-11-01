@@ -13,7 +13,7 @@ namespace CSF.Zpt.Tales
     /// </summary>
     /// <param name="talesExpression">The TALES expression to evaluate.</param>
     /// <param name="context">The rendering context for which we are evaluating a result.</param>
-    ExpressionResult Evaluate(Expression talesExpression, RenderingContext context);
+    ExpressionResult Evaluate(Expression talesExpression, IRenderingContext context);
 
     /// <summary>
     /// Attempts to get a object instance from the root of the current model.
@@ -27,7 +27,7 @@ namespace CSF.Zpt.Tales
     /// Exposes the found object if this method returns <c>true</c>.  The value is undefined if this method returns
     /// <c>false</c>.
     /// </param>
-    bool TryGetRootObject(string name, RenderingContext context, out object result);
+    bool TryGetRootObject(string name, IRenderingContext context, out object result);
 
     /// <summary>
     /// Attempts to get a object instance from the root of the current model, but only searches local variable

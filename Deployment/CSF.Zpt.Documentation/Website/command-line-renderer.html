@@ -1,0 +1,49 @@
+<!doctype html>
+<html tal:define="activePage string:command_line_renderer">
+<head metal:use-macro="documents/Shared/general-page.html/macros/common_document_head">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="utf-8">
+<title metal:fill-slot="document_title">The ZPT-Sharp command-line renderer</title>
+<base href="." />
+<style type="text/css" metal:fill-slot="document_styles">
+@import url(css/styles.css);
+@import url(css/command_line_renderer.css);
+</style>
+<style type="text/css">
+@import url(css/dummy.css);
+</style>
+<script data-main="js/config/main" type="text/javascript" src="js/lib/require.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.4.0/styles/default.min.css">
+</head>
+<body metal:use-macro="documents/Shared/general-page.html/macros/common_document_body" class="page_command_line_renderer">
+<div class="content_wrapper">
+  <header class="page_header dummy">
+    Dummy content
+  </header>
+  <div class="main_page_area">
+    <nav>
+      <h2>Navigation menu</h2>
+      <ul class="active_introduction dummy">
+        <li class="introduction"><a href=".">Introduction</a></li>
+        <li class="other_page"><a href="dummy.html">Dummy page</a></li>
+      </ul>
+    </nav>
+    <section class="main_page_content" metal:fill-slot="main_page_content">
+      <header>
+        <h1>ZptBuilder.exe manual</h1>
+        <p>
+          The following is exported from the <strong>manpage</strong> for the ZPT-Sharp
+          command-line-renderer application.
+        </p>
+      </header>
+      <div class="dummy" metal:use-macro="documents/Shared/cli-docs.html/macros/content">
+        Auto-generated documentation (using man2html) goes here
+      </div>
+    </section>
+  </div>
+</div>
+<footer class="page_footer dummy">
+  Dummy content
+</footer>
+</body>
+</html>

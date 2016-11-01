@@ -20,7 +20,7 @@ namespace CSF.Zpt.MVC
 
     #region properties
 
-    public IRenderingOptions RenderingOptions
+    public IRenderingSettings RenderingOptions
     {
       get;
       set;
@@ -32,7 +32,7 @@ namespace CSF.Zpt.MVC
         return _renderingMode;
       }
       set {
-        if(value.HasValue && !value.IsDefinedValue())
+        if(value.HasValue && !value.Value.IsDefinedValue())
         {
           throw new ArgumentException(Resources.ExceptionMessages.InvalidRenderingMode, nameof(value));
         }
@@ -59,7 +59,7 @@ namespace CSF.Zpt.MVC
                  options: RenderingOptions);
     }
 
-    private Action<RenderingContext> ConfigureContext(ViewContext viewContext)
+    private Action<IModelValueContainer> ConfigureContext(ViewContext viewContext)
     {
       return c => {
         ConfigureModel(viewContext, c.TalModel);
@@ -67,7 +67,7 @@ namespace CSF.Zpt.MVC
       };
     }
 
-    private void ConfigureModel(ViewContext viewContext, IModel model)
+    private void ConfigureModel(ViewContext viewContext, IModelValueStore model)
     {
       var typedModel = model as MvcTalesModel;
 

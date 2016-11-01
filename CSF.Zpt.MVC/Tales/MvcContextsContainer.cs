@@ -56,7 +56,7 @@ namespace CSF.Zpt.MVC.Tales
     /// <param name="pathFragment">The path fragment.</param>
     /// <param name="result">Exposes the result if the traversal was a success</param>
     /// <param name="currentContext">Gets the current rendering context.</param>
-    public override bool HandleTalesPath(string pathFragment, out object result, RenderingContext currentContext)
+    public override bool HandleTalesPath(string pathFragment, out object result, IRenderingContext currentContext)
     {
       bool output;
 

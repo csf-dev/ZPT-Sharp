@@ -28,16 +28,16 @@ namespace CSF.Zpt.Tal
     /// <summary>
     /// Visit the given context and return a collection of the resultant contexts.
     /// </summary>
-    /// <returns>Zero or more <see cref="RenderingContext"/> instances, determined by the outcome of this visit.</returns>
+    /// <returns>Zero or more <see cref="IRenderingContext"/> instances, determined by the outcome of this visit.</returns>
     /// <param name="context">The rendering context to visit.</param>
-    public override RenderingContext[] Visit(RenderingContext context)
+    public override IRenderingContext[] Visit(IRenderingContext context)
     {
       if(context == null)
       {
         throw new ArgumentNullException(nameof(context));
       }
 
-      IEnumerable<RenderingContext>
+      IEnumerable<IRenderingContext>
         output = new [] { context },
         newlyExposedElements = new RenderingContext[0];
 
@@ -80,9 +80,9 @@ namespace CSF.Zpt.Tal
     /// </remarks>
     /// <returns>Zero or more <see cref="RenderingContext"/> instances, determined by the outcome of this visit.</returns>
     /// <param name="context">The rendering context to visit.</param>
-    public override RenderingContext[] VisitRecursively(RenderingContext context)
+    public override IRenderingContext[] VisitRecursively(IRenderingContext context)
     {
-      RenderingContext[] output;
+      IRenderingContext[] output;
 
       try
       {

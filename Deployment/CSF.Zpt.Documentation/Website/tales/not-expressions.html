@@ -1,0 +1,93 @@
+<!doctype html>
+<html tal:define="activePage string:tales_not_expressions">
+<head metal:use-macro="documents/Shared/general-page.html/macros/common_document_head">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="utf-8">
+<title metal:fill-slot="document_title">TALES 'not' expressions</title>
+<base href="../" />
+<style type="text/css">
+@import url(css/styles.css);
+@import url(css/dummy.css);
+</style>
+<script data-main="js/config/main" type="text/javascript" src="js/lib/require.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.4.0/styles/default.min.css">
+</head>
+<body metal:use-macro="documents/Shared/general-page.html/macros/common_document_body" class="page_tales_not_expressions">
+<div class="content_wrapper">
+  <header class="page_header dummy">
+    Dummy content
+  </header>
+  <div class="main_page_area">
+    <nav>
+      <h2>Navigation menu</h2>
+      <ul class="active_introduction dummy">
+        <li class="introduction"><a href=".">Introduction</a></li>
+        <li class="other_page"><a href="dummy.html">Dummy page</a></li>
+      </ul>
+    </nav>
+    <section class="main_page_content" metal:fill-slot="main_page_content">
+      <header>
+        <div class="expression plugin_note note"
+             metal:use-macro="documents/Shared/plugin_note.html/macros/expression_plugin_note">
+          <p>
+            Expression evaluator plugin notice.
+          </p>
+          Assembly: <span metal:fill-slot="plugin_assembly"><code>CSF.Zpt.ExpressionEvaluators.NotExpressions.dll</code></span><br />
+          Class: <span metal:fill-slot="plugin_class"><code>CSF.Zpt.ExpressionEvaluators.NotExpressionEvaluator</code></span><br />
+          Prefix: <span metal:fill-slot="expression_prefix"><code>not:</code></span>
+        </div>
+        <h1>TALES 'not' expressions</h1>
+      </header>
+      <p>
+        A <code>not:</code> expression is immediately followed by another expression - indicating a value.
+        That following expression is evaluated as a completely independent expression in its own right, starting with
+        <a href="tales/introduction.html#expression_prefixes">an optional prefix</a>, or treated as a
+        <a href="tales/path_expressions.html"><code>path:</code> expression</a> if it has no prefix.
+      </p>
+      <p>
+        Once the value of the expression following the <code>not:</code> prefix has been determined, its value is
+        interpreted as a boolean using the method below.  Finally, that boolean value is inverted (a logical not).
+      </p>
+      <h2>Special rules for boolean interpretation</h2>
+      <p>
+        The <code>not:</code> expression has specific rules for interpreting values as
+        booleans; these rules differ from <a href="tales/boolean-coercion.html">the normal boolean coercion rules</a>.
+        The following rules are processed in the order listed:
+      </p>
+      <ol>
+        <li>
+          If the value <a href="tales/cancellation.html">cancels the action</a> then it is
+          interpreted as <strong>false</strong>.
+        </li>
+        <li>
+          If the value is a <code>null</code> reference, then it is interpreted as <strong>false</strong>.
+        </li>
+        <li>
+          If the value is a <code>System.Boolean</code> then it is interpreted as its boolean value.
+        </li>
+        <li>
+          If the value is of any numeric type and equals zero, then it is interpreted as <strong>false</strong>.
+        </li>
+        <li>
+          If the value is <code>System.Collections.IEnumerable</code> then it is interpreted as <strong>true</strong>
+          if it contains any items.  Otherwise (if it is an empty collection) then it is interpreted as
+          <strong>false</strong>.
+        </li>
+        <li>
+          If the value is of a type which implements <code>CSF.Zpt.Tales.ITalesConvertible</code> then the
+          <code>AsBoolean()</code> method is called from the value and the result of that method is used as the
+          boolean interpretation.
+        </li>
+        <li>
+          All other values (numeric values other than zero, all non-empty strings, all other value-type values,
+          and all other non-null reference-type instances) are interpreted as <strong>true</strong>.
+        </li>
+      </ol>
+    </section>
+  </div>
+</div>
+<footer class="page_footer dummy">
+  Dummy content
+</footer>
+</body>
+</html>

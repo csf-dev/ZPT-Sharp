@@ -10,7 +10,7 @@ namespace CSF.Zpt.Tales
   {
     #region fields
 
-    private IEvaluatorRegistry _evaluatorRegistry;
+    private IEvaluatorSelector _evaluatorSelector;
     private IExpressionFactory _expressionCreator;
 
     #endregion
@@ -24,13 +24,13 @@ namespace CSF.Zpt.Tales
     public abstract string ExpressionPrefix { get; }
 
     /// <summary>
-    /// Gets the expression evaluator registry.
+    /// Gets the expression evaluator selector, so that sub-expressions may be evaluated within the current expression.
     /// </summary>
-    /// <value>The evaluator registry.</value>
-    protected virtual IEvaluatorRegistry EvaluatorRegistry
+    /// <value>The evaluator selector.</value>
+    protected virtual IEvaluatorSelector EvaluatorSelector
     {
       get {
-        return _evaluatorRegistry;
+        return _evaluatorSelector;
       }
     }
 
@@ -55,7 +55,7 @@ namespace CSF.Zpt.Tales
     /// <param name="expression">The expression to evaluate.</param>
     /// <param name="context">The rendering context for the expression being evaluated.</param>
     /// <param name="model">The ZPT model, providing the context for evaluation.</param>
-    public abstract ExpressionResult Evaluate(Expression expression, RenderingContext context, ITalesModel model);
+    public abstract ExpressionResult Evaluate(Expression expression, IRenderingContext context, ITalesModel model);
 
     #endregion
 
@@ -64,18 +64,13 @@ namespace CSF.Zpt.Tales
     /// <summary>
     /// Initializes a new instance of the <see cref="CSF.Zpt.Tales.ExpressionEvaluatorBase"/> class.
     /// </summary>
-    /// <param name="evaluatorRegistry">Evaluator registry.</param>
+    /// <param name="evaluatorSelector">Evaluator selector.</param>
     /// <param name="expressionCreator">The expression factory to use.</param>
-    public ExpressionEvaluatorBase(IEvaluatorRegistry evaluatorRegistry,
+    public ExpressionEvaluatorBase(IEvaluatorSelector evaluatorSelector = null,
                                    IExpressionFactory expressionCreator = null)
     {
-      if(evaluatorRegistry == null)
-      {
-        throw new ArgumentNullException(nameof(evaluatorRegistry));
-      }
-
-      _evaluatorRegistry = evaluatorRegistry;
       _expressionCreator = expressionCreator?? new ExpressionFactory();
+      _evaluatorSelector = evaluatorSelector?? new SimpleEvaluatorSelector();
     }
 
     #endregion

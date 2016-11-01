@@ -4,6 +4,7 @@ using CSF.Zpt.Rendering;
 using CSF.Zpt.MVC.Rendering;
 using System.Text;
 using CSF.Configuration;
+using CSF.Zpt.Tales;
 
 namespace CSF.Zpt.MVC
 {
@@ -98,13 +99,19 @@ namespace CSF.Zpt.MVC
       set;
     }
 
+    public ITemplateFileFactory TemplateFactory
+    {
+      get;
+      set;
+    }
+
     public RenderingMode? RenderingMode
     {
       get {
         return _renderingMode;
       }
       set {
-        if(value.HasValue && !value.IsDefinedValue())
+        if(value.HasValue && !value.Value.IsDefinedValue())
         {
           throw new ArgumentException(Resources.ExceptionMessages.InvalidRenderingMode, nameof(value));
         }
@@ -153,7 +160,7 @@ namespace CSF.Zpt.MVC
 
     private void InitialiseDefaultOptions()
     {
-      var defaultOptions = new RenderingOptions();
+      var defaultOptions = RenderingSettings.Default;
       ContextFactory = new MvcRenderingContextFactory();
       AddSourceFileAnnotation = defaultOptions.AddSourceFileAnnotation;
       ContextVisitors = defaultOptions.ContextVisitors;
@@ -168,7 +175,7 @@ namespace CSF.Zpt.MVC
                                       IRenderingContextFactoryFactory contextFactoryFactory,
                                       IContextVisitorFactory contextVisitorFactory)
     {
-      var defaultOptions = new RenderingOptions();
+      var defaultOptions = RenderingSettings.Default;
 
       if(config.ContextFactoryTypeName != null)
       {
@@ -210,13 +217,14 @@ namespace CSF.Zpt.MVC
       return ConfigurationHelper.GetSection<ZptViewEngineConfigurationSection>();
     }
 
-    private IRenderingOptions CreateRenderingOptions()
+    private IRenderingSettings CreateRenderingOptions()
     {
-      return new RenderingOptions(ContextVisitors,
+      return new RenderingSettings(ContextVisitors,
                                          ContextFactory,
                                          AddSourceFileAnnotation,
                                          OutputEncoding,
-                                         OmitXmlDeclaration);
+                                         OmitXmlDeclaration,
+                                   TemplateFactory);
     }
 
     #endregion
@@ -242,6 +250,8 @@ namespace CSF.Zpt.MVC
       {
         InitialiseDefaultOptions();
       }
+
+      TemplateFactory = new ZptDocumentFactory();
     }
 
     #endregion

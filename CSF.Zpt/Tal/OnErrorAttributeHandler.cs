@@ -27,7 +27,7 @@ namespace CSF.Zpt.Tal
     /// </summary>
     /// <returns>A response type providing information about the result of this operation.</returns>
     /// <param name="context">The rendering context, which exposes a ZPT element.</param>
-    public AttributeHandlingResult Handle(RenderingContext context)
+    public AttributeHandlingResult Handle(IRenderingContext context)
     {
       if(context == null)
       {
@@ -78,7 +78,7 @@ namespace CSF.Zpt.Tal
     /// <param name="context">The rendering context.</param>
     /// <param name="mode">Exposes the mode (either <c>text</c>, <c>structure</c> or a <c>null</c> reference).</param>
     private ExpressionResult GetAttributeResult(IZptAttribute attribute,
-                                                RenderingContext context,
+                                                IRenderingContext context,
                                                 out string mode)
     {
       var match = ValueMatcher.Match(attribute.Value);

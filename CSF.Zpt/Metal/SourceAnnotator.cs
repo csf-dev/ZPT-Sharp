@@ -44,9 +44,9 @@ namespace CSF.Zpt.Metal
     /// <param name="targetContext">Target context.</param>
     /// <param name="originalContext">Original context.</param>
     /// <param name="replacementContext">Replacement context.</param>
-    public void ProcessAnnotation(RenderingContext targetContext,
-                                  RenderingContext originalContext = null,
-                                  RenderingContext replacementContext = null)
+    public void ProcessAnnotation(IRenderingContext targetContext,
+                                  IRenderingContext originalContext = null,
+                                  IRenderingContext replacementContext = null)
     {
       if(targetContext == null)
       {
@@ -113,11 +113,11 @@ namespace CSF.Zpt.Metal
       }
     }
 
-    private void AddAnnotation(RenderingContext targetContext,
+    private void AddAnnotation(IRenderingContext targetContext,
                                bool skipLineNumber = false,
                                bool beforeElement = true,
-                               RenderingContext originalContext = null,
-                               RenderingContext replacementContext = null,
+                               IRenderingContext originalContext = null,
+                               IRenderingContext replacementContext = null,
                                string extraText = null,
                                bool useEndTagLocation = false)
     {
@@ -149,11 +149,11 @@ namespace CSF.Zpt.Metal
                            commentBody);
     }
 
-    private string CreateCommentBody(RenderingContext targetContext,
+    private string CreateCommentBody(IRenderingContext targetContext,
                                      bool skipLineNumber,
                                      string extraText,
                                      bool useEndTagPosition,
-                                     RenderingContext replacementContext)
+                                     IRenderingContext replacementContext)
     {
       IZptElement
         targetElement = targetContext.Element,

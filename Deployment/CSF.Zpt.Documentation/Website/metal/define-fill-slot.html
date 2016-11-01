@@ -1,0 +1,108 @@
+<!doctype html>
+<html tal:define="activePage string:define_fill_slot">
+<head metal:use-macro="documents/Shared/general-page.html/macros/common_document_head">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="utf-8">
+<title metal:fill-slot="document_title">Defining and filling METAL slots</title>
+<base href="../" />
+<style type="text/css">
+@import url(css/styles.css);
+@import url(css/dummy.css);
+</style>
+<script data-main="js/config/main" type="text/javascript" src="js/lib/require.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.4.0/styles/default.min.css">
+</head>
+<body metal:use-macro="documents/Shared/general-page.html/macros/common_document_body" class="page_define_fill_slot">
+<div class="content_wrapper">
+  <header class="page_header dummy">
+    Dummy content
+  </header>
+  <div class="main_page_area">
+    <nav>
+      <h2>Navigation menu</h2>
+      <ul class="active_introduction dummy">
+        <li class="introduction"><a href=".">Introduction</a></li>
+        <li class="other_page"><a href="dummy.html">Dummy page</a></li>
+      </ul>
+    </nav>
+    <section class="main_page_content" metal:fill-slot="main_page_content">
+      <header>
+        <h1>Defining and filling METAL slots</h1>
+      </header>
+      <h2 id="define_slot">metal:define-slot</h2>
+      <h3>Attribute syntax</h3>
+      <pre><code class="html">metal:define-slot="SLOTNAME"</code></pre>
+      <h3>Remarks</h3>
+      <p>
+        Only valid when defined on a child element of an element decorated with
+        <a href="metal/define-use-macro.html#define_macro"><code>metal:define-macro</code></a> or when decorating a
+        child element of an element decorated <code>fill-slot</code>, within an element decorated
+        <a href="metal/extend-macro.html"><code>metal:extend-macro</code></a>.  Indicates that the
+        element and its children constitute a named extension point for the current macro.  The slot uses the given name
+        (<kbd>SLOTNAME</kbd>).
+      </p>
+      <h2 id="fill_slot">metal:fill-slot</h2>
+      <h3>Attribute syntax</h3>
+      <pre><code class="html">metal:fill-slot="SLOTNAME"</code></pre>
+      <h3>Remarks</h3>
+      <p>
+        Only valid when defined on a child element of an element decorated with
+        <a href="metal/define-use-macro.html#use_macro"><code>metal:use-macro</code></a> or
+        <a href="metal/extend-macro.html"><code>metal:extend-macro</code></a>.  When the use-macro element is
+        replaced with the macro, the referenced macro is searched for a slot (indicated by <code>define-slot</code>)
+        with a name matching <kbd>SLOTNAME</kbd>.  If a matching slot is found then the define-slot element (and its
+        children) is replaced with the fill-slot element and its children.
+      </p>
+      <h2>Slot-filling example</h2>
+      <p>
+        The following example shows a macro which represents an <code>&lt;article&gt;</code> element. It provides a
+        standard markup structure, including an actions menu.  The markup for the heading and content are supplied from
+        the location at which the macro is used, using slots.
+      </p>
+      <pre><code class="html">&lt;!-- Macro definition --&gt;
+&lt;article metal:define-macro=&quot;article_template&quot;&gt;
+  &lt;header&gt;
+    &lt;h2 metal:define-slot=&quot;article_title&quot;&gt;Title goes here&lt;/h2&gt;
+  &lt;/header&gt;
+  &lt;p metal:define-slot=&quot;article_content&quot;&gt;Article content goes here&lt;/p&gt;
+  &lt;ul class=&quot;article_actions&quot;&gt;
+    &lt;li&gt;&lt;a href=&quot;upvote_url&quot;&gt;Upvote&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href=&quot;downvote_url&quot;&gt;Downvote&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href=&quot;share_url&quot;&gt;Share&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href=&quot;report_url&quot;&gt;Report&lt;/a&gt;&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/article&gt;
+
+&lt;!-- Macro usage --&gt;
+&lt;article metal:use-macro=&quot;article_template&quot;&gt;
+  &lt;h2 metal:fill-slot=&quot;article_title&quot;&gt;Filling slots&lt;/h2&gt;
+  &lt;p metal:fill-slot=&quot;article_content&quot;&gt;
+    The slot filler content can include &lt;strong&gt;markup&lt;/strong&gt; and
+    TAL statements.
+  &lt;/p&gt;
+&lt;/article&gt;
+
+&lt;!-- How this renders --&gt;
+&lt;article&gt;
+  &lt;header&gt;
+    &lt;h2&gt;Filling slots&lt;/h2&gt;
+  &lt;/header&gt;
+  &lt;p&gt;
+    The slot filler content can include &lt;strong&gt;markup&lt;/strong&gt; and
+    TAL statements.
+  &lt;/p&gt;
+  &lt;ul class=&quot;article_actions&quot;&gt;
+    &lt;li&gt;&lt;a href=&quot;upvote_url&quot;&gt;Upvote&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href=&quot;downvote_url&quot;&gt;Downvote&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href=&quot;share_url&quot;&gt;Share&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href=&quot;report_url&quot;&gt;Report&lt;/a&gt;&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/article&gt;</code></pre>
+    </section>
+  </div>
+</div>
+<footer class="page_footer dummy">
+  Dummy content
+</footer>
+</body>
+</html>

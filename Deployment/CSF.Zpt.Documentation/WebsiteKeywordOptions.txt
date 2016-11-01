@@ -1,0 +1,11 @@
+﻿=======================
+Website keyword options
+=======================
+
+This is reference for the keyword options passed into the documentation website build process.
+
+* baseUrl       - The base URL for the website, such as "http://csf-dev.github.io/ZPT-Sharp/"
+* buildDate     - The ISO 8601 date on which the website was generated, such as "2016-10-31"
+* version       - The semantic version number, such as "1.2.3"
+* releaseType   - The name of the release type, such as "alpha", "beta" or "release"
+* copyrightYear - The current year (for the copyright statement), such as 2016

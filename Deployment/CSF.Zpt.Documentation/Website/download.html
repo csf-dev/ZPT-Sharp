@@ -1,0 +1,130 @@
+﻿<!doctype html>
+<html tal:define="activePage string:download">
+<head metal:use-macro="documents/Shared/general-page.html/macros/common_document_head">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="utf-8">
+<title metal:fill-slot="document_title">Download ZPT-Sharp</title>
+<base href="." />
+<style type="text/css" metal:fill-slot="document_styles">
+@import url(css/styles.css);
+@import url(css/download.css);
+</style>
+<style type="text/css">
+@import url(css/dummy.css);
+</style>
+<script data-main="js/config/main" type="text/javascript" src="js/lib/require.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.4.0/styles/default.min.css">
+</head>
+<body metal:use-macro="documents/Shared/general-page.html/macros/common_document_body" class="page_download">
+<div class="content_wrapper">
+  <header class="page_header dummy">
+    Dummy content
+  </header>
+  <div class="main_page_area">
+    <nav>
+      <h2>Navigation menu</h2>
+      <ul class="active_introduction dummy">
+        <li class="introduction"><a href=".">Introduction</a></li>
+        <li class="other_page"><a href="dummy.html">Dummy page</a></li>
+      </ul>
+    </nav>
+    <section class="main_page_content" metal:fill-slot="main_page_content">
+      <header>
+        <h1>Download ZPT-Sharp</h1>
+      </header>
+      <h2>Latest version</h2>
+      <tal:block define="downloadBase string:https://github.com/csf-dev/ZPT-Sharp/releases/download;
+                         version options/version;
+                         versionExtra string:(${options/releaseType});
+                         versionString string:v${version}"
+                 on-error="structure string:&lt;p class=&quot;note&quot;&gt;There is presently no stable release, please visit the Github releases page to view unstable releases.&lt;/p&gt;">
+      <p>
+        The following downloads are for the most recent release:
+        <strong><span tal:content="versionString">v0.0.0</span> <span tal:content="versionExtra | default">(release)</span></strong>.
+      </p>
+      <ul class="downloads">
+        <li>
+          <h3>Complete package</h3>
+          <p>The complete package includes everything, both mandatory and optional components.</p>
+          <div class="download_action">
+            <a tal:attributes="href string:${downloadBase}/${versionString}/CSF.Zpt-complete.zip"
+              href="https://github.com/csf-dev/ZPT-Sharp/releases/download/v0.0.0/CSF.Zpt-complete.zip"
+              class="download_link">
+              Download CSF.Zpt-complete.zip
+            </a>
+          </div>
+        </li>
+
+        <li>
+          <h3>MVC 5 ViewEngine</h3>
+          <p>
+            This zip file includes only the components required in order to use ZPT-Sharp as an ASP.NET MVC 5
+            ViewEngine.
+          </p>
+          <div class="download_action">
+            <a tal:attributes="href string:${downloadBase}/${versionString}/CSF.Zpt.MVC.zip"
+              href="https://github.com/csf-dev/ZPT-Sharp/releases/download/v0.0.0/CSF.Zpt.MVC.zip"
+              class="download_link">
+              Download CSF.Zpt.MVC.zip
+            </a>
+          </div>
+        </li>
+
+        <li>
+          <h3>ZptBuilder.exe</h3>
+          <p>Only the command-line ZptBuilder.exe application and dependencies required to make it work.</p>
+          <div class="download_action">
+            <a tal:attributes="href string:${downloadBase}/${versionString}/ZptBuilder.zip"
+              href="https://github.com/csf-dev/ZPT-Sharp/releases/download/v0.0.0/ZptBuilder.zip"
+              class="download_link">
+              Download ZptBuilder.zip
+            </a>
+          </div>
+        </li>
+      
+        <li>
+          <h3>API only</h3>
+          <p>
+            For writing your own applications using ZPT-Sharp, this package includes only the core API components
+            which you will need to reference from your own application logic.
+          </p>
+          <div class="download_action">
+            <a tal:attributes="href string:${downloadBase}/${versionString}/CSF.Zpt-api-only.zip"
+              href="https://github.com/csf-dev/ZPT-Sharp/releases/download/v0.0.0/CSF.Zpt-api-only.zip"
+              class="download_link">
+              Download CSF.Zpt-api-only.zip
+            </a>
+          </div>
+        </li>
+      </ul>
+      
+      <h3>Get the Source code</h3>
+      <p>
+        The recommended way to get the source code is to
+        <a href="https://github.com/csf-dev/ZPT-Sharp">fork the repository on Github</a>.
+        For your convenience though, the following link will download a zip of the source code
+        (provided by Github's archive feature).
+      </p>
+      <div class="download_action"
+          tal:define="zipFilename string:${versionString}.zip">
+        <a tal:attributes="href string:https://github.com/csf-dev/ZPT-Sharp/archive/${zipFilename}"
+          href="https://github.com/csf-dev/ZPT-Sharp/archive/v0.0.0.zip"
+          class="download_link">
+          Download <span tal:replace="zipFilename">v0.0.0.zip</span>
+        </a>
+      </div>
+      </tal:block>
+      <h2>Other versions</h2>
+      <p>
+        Links to previous releases and downloads are availalable on the
+        <a href="https://github.com/csf-dev/ZPT-Sharp/releases">project releases page</a> for ZPT-Sharp,
+        hosted on Github.
+      </p>
+    </section>
+  </div>
+</div>
+<footer class="page_footer dummy">
+  Dummy content
+</footer>
+</body>
+</html>

@@ -34,7 +34,7 @@ namespace CSF.Zpt.Metal
 
     #region methods
 
-    bool ITalesPathHandler.HandleTalesPath(string pathFragment, out object result, RenderingContext currentContext)
+    bool ITalesPathHandler.HandleTalesPath(string pathFragment, out object result, IRenderingContext currentContext)
     {
       result = this[pathFragment];
       return result != null;

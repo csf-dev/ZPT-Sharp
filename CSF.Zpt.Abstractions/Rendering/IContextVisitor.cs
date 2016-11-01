@@ -3,7 +3,7 @@
 namespace CSF.Zpt.Rendering
 {
   /// <summary>
-  /// Interface for a type which can visit a <see cref="RenderingContext"/> instance.
+  /// Interface for a type which can visit a <see cref="IRenderingContext"/> instance.
   /// </summary>
   public interface IContextVisitor
   {
@@ -12,7 +12,7 @@ namespace CSF.Zpt.Rendering
     /// </summary>
     /// <returns>The rendering contexts instances which are exposed after the visiting process is complete.</returns>
     /// <param name="context">The rendering context to visit.</param>
-    RenderingContext[] VisitContext(RenderingContext context);
+    IRenderingContext[] VisitContext(IRenderingContext context);
   }
 }
 

@@ -7,8 +7,14 @@
     <OutputType>Library</OutputType>
     <RootNamespace>CSF.Zpt.MVC</RootNamespace>
     <AssemblyName>CSF.Zpt.MVC</AssemblyName>
-    <ReleaseVersion>0.5.0</ReleaseVersion>
+    <ReleaseVersion>0.0.0</ReleaseVersion>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <SolutionCompany>CSF Software Limited</SolutionCompany>
+    <SolutionCopyright>CSF Software Limited et al</SolutionCopyright>
+    <SolutionName>ZPT-Sharp: Zope Page Templates for .NET</SolutionName>
+    <ProjectConfiguration>$(Configuration)</ProjectConfiguration>
+    <ProjectTitle>CSF.Zpt.MVC</ProjectTitle>
+    <ProjectDescription>ASP.NET MVC5 integration for ZPT-Sharp</ProjectDescription>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -22,15 +28,6 @@
     <CheckForOverflowUnderflow>true</CheckForOverflowUnderflow>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <Optimize>true</Optimize>
-    <OutputPath>bin\Release</OutputPath>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <ConsolePause>false</ConsolePause>
-    <DefineConstants>TRACE</DefineConstants>
-    <CheckForOverflowUnderflow>true</CheckForOverflowUnderflow>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Deploy|AnyCPU' ">
     <Optimize>true</Optimize>
     <OutputPath>bin\Release</OutputPath>
     <ErrorReport>prompt</ErrorReport>
@@ -67,12 +64,7 @@
     <Reference Include="System.Configuration" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
-  <Target Name="AfterBuild" Condition="'$(Configuration)' == 'Deploy'">
-    <Exec Command="nuget pack CSF.Zpt.MVC.nuspec -Prop Configuration=Release" Condition="'$(OS)' == 'Unix'">
-    </Exec>
-    <Exec Command="&quot;$(MSBuildProgramFiles32)\NuGet\nuget.exe&quot; pack CSF.Zpt.MVC.nuspec -Prop Configuration=Release" Condition="'$(OS)' != 'Unix'">
-    </Exec>
-  </Target>
+  <Import Project="..\packages\MSBuild.Extension.Pack.1.8.0\build\net40\MSBuild.Extension.Pack.targets" Condition="Exists('..\packages\MSBuild.Extension.Pack.1.8.0\build\net40\MSBuild.Extension.Pack.targets')" />
   <ItemGroup>
     <ProjectReference Include="..\CSF.Zpt\CSF.Zpt.csproj">
       <Project>{16E957BB-347C-4EE1-815F-19AC296FB9E0}</Project>
@@ -90,11 +82,32 @@
       <Project>{81044439-06CF-44E2-BBF2-3800F1DEB5B1}</Project>
       <Name>CSF.Zpt.Log4net</Name>
     </ProjectReference>
+    <ProjectReference Include="..\CSF\CSF.Configuration\CSF.Configuration.csproj">
+      <Project>{8C570A26-CEEB-45D1-9436-745C8DBAE9D8}</Project>
+      <Name>CSF.Configuration</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ExpressionEvaluators\CSF.Zpt.ExpressionEvaluators.NotExpressions\CSF.Zpt.ExpressionEvaluators.NotExpressions.csproj">
+      <Project>{7B3748AD-DF11-4A80-9258-EA043CD99D7C}</Project>
+      <Name>CSF.Zpt.ExpressionEvaluators.NotExpressions</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ExpressionEvaluators\CSF.Zpt.ExpressionEvaluators.PathExpressions\CSF.Zpt.ExpressionEvaluators.PathExpressions.csproj">
+      <Project>{B6A27567-61F7-43F7-B201-FFC7A449BDBB}</Project>
+      <Name>CSF.Zpt.ExpressionEvaluators.PathExpressions</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ExpressionEvaluators\CSF.Zpt.ExpressionEvaluators.StringExpressions\CSF.Zpt.ExpressionEvaluators.StringExpressions.csproj">
+      <Project>{63F5FF1D-DA36-4BB4-AA99-24AA78844109}</Project>
+      <Name>CSF.Zpt.ExpressionEvaluators.StringExpressions</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DocumentProviders\CSF.Zpt.DocumentProviders.HtmlHAP\CSF.Zpt.DocumentProviders.HtmlHAP.csproj">
+      <Project>{BFD834D4-5724-4425-BCB3-6DEE6B03F743}</Project>
+      <Name>CSF.Zpt.DocumentProviders.HtmlHAP</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DocumentProviders\CSF.Zpt.DocumentProviders.XmlLinq\CSF.Zpt.DocumentProviders.XmlLinq.csproj">
+      <Project>{842160E4-BDE5-4FA0-ADE5-07554090AA27}</Project>
+      <Name>CSF.Zpt.DocumentProviders.XmlLinq</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\Common\CommonAssemblyInfo.cs">
-      <Link>CommonAssemblyInfo.cs</Link>
-    </Compile>
     <Compile Include="AssemblyInfo.cs" />
     <Compile Include="ZptViewEngine.cs" />
     <Compile Include="ZptView.cs" />
@@ -122,4 +135,39 @@
       <LastGenOutput>ExceptionMessages.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Deployment\CSF.Zpt.PreBuild\CSF.Zpt.PreBuild.csproj">
+      <Project>{6C025057-9ACC-474E-9092-D6B9059B07EE}</Project>
+      <Name>CSF.Zpt.PreBuild</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Deployment\CSF.Zpt.DeploymentTasks\CSF.Zpt.DeploymentTasks.csproj">
+      <Project>{3E1DAACE-519B-4C6C-80E3-3F06A1A33C66}</Project>
+      <Name>CSF.Zpt.DeploymentTasks</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <UsingTask TaskName="ReadVersionNumber" AssemblyFile="..\Deployment\CSF.Zpt.DeploymentTasks\bin\$(Configuration)\CSF.Zpt.DeploymentTasks.dll" />
+  <Target Name="BeforeBuild">
+    <ItemGroup>
+      <StubAssemblyInfo Include="..\Common\AssemblyInfo.stub.cs" />
+      <DestinationAssemblyInfo Include="AssemblyInfo.cs" />
+    </ItemGroup>
+    <Copy SourceFiles="@(StubAssemblyInfo)" DestinationFiles="@(DestinationAssemblyInfo)" />
+    <ReadVersionNumber VersionFile="..\version.ini">
+      <Output TaskParameter="FullVersionNumber" ItemName="FullVersion" />
+      <Output TaskParameter="SemanticVersionNumber" ItemName="SemanticVersion" />
+      <Output TaskParameter="BuildNumber" ItemName="BuildNumber" />
+      <Output TaskParameter="InformationalVersion" ItemName="InformationalVersion" />
+    </ReadVersionNumber>
+    <ItemGroup>
+      <AssemblyInfoFiles Include="AssemblyInfo.cs" />
+    </ItemGroup>
+    <MSBuild.ExtensionPack.Framework.AssemblyInfo AssemblyInfoFiles="@(AssemblyInfoFiles)" AssemblyVersion="@(SemanticVersion).0" AssemblyFileVersion="@(FullVersion)" AssemblyCompany="$(SolutionCompany)" AssemblyCopyright="$(SolutionCopyright)" AssemblyProduct="$(SolutionName)" AssemblyConfiguration="$(ProjectConfiguration)" AssemblyTitle="$(ProjectTitle)" AssemblyDescription="$(ProjectDescription)" />
+  </Target>
+  <Target Name="AfterBuild">
+    <ItemGroup>
+      <StubAssemblyInfo Include="..\Common\AssemblyInfo.stub.cs" />
+      <DestinationAssemblyInfo Include="AssemblyInfo.cs" />
+    </ItemGroup>
+    <Copy SourceFiles="@(StubAssemblyInfo)" DestinationFiles="@(DestinationAssemblyInfo)" />
+  </Target>
 </Project>

@@ -173,7 +173,7 @@ namespace CSF.Zpt.Rendering
     /// <param name="pathFragment">The path fragment.</param>
     /// <param name="result">Exposes the result if the traversal was a success</param>
     /// <param name="currentContext">Gets the current rendering context.</param>
-    public bool HandleTalesPath(string pathFragment, out object result, RenderingContext currentContext)
+    public bool HandleTalesPath(string pathFragment, out object result, IRenderingContext currentContext)
     {
       bool output;
 

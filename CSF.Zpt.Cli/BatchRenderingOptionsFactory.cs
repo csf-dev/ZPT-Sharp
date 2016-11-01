@@ -32,14 +32,16 @@ namespace CSF.Zpt.Cli
       var ignoredPaths = GetIgnoredPaths(options);
 
       var outputPath = GetOutputPath(options);
+      var useStdOut = OutputToStdOut(inputFiles, outputPath);
 
       return new BatchRenderingOptions(inputStream: useStdin? Console.OpenStandardInput() : null,
-                                       outputStream: useStdin? Console.OpenStandardOutput() : null,
-                                       inputPaths: inputFiles,
+                                       outputStream: useStdOut? Console.OpenStandardOutput() : null,
+                                       inputPaths: inputFiles.Where(x => x != null),
                                        outputPath: outputPath,
                                        inputSearchPattern: options.InputFilenamePattern,
                                        outputExtensionOverride: options.OutputFilenameExtension,
-                                       ignoredPaths: ignoredPaths);
+                                       ignoredPaths: ignoredPaths,
+                                       renderingMode: options.GetRenderingMode());
     }
 
     private FileSystemInfo GetInputFile(string path)
@@ -52,19 +54,13 @@ namespace CSF.Zpt.Cli
       }
 
       var absolutePath = MakeAbsolutePath(path);
-      if(File.Exists(absolutePath))
-      {
-        output = new FileInfo(absolutePath);
-      }
-      else if(Directory.Exists(absolutePath))
+      if(Directory.Exists(absolutePath))
       {
         output = new DirectoryInfo(absolutePath);
       }
       else
       {
-        throw new InvalidInputPathException(ExceptionMessages.InvalidInputFile) {
-          Path = path
-        };
+        output = new FileInfo(absolutePath);
       }
 
       return output;
@@ -73,6 +69,13 @@ namespace CSF.Zpt.Cli
     private bool ReadFromStandardInput(IEnumerable<FileSystemInfo> inputFiles)
     {
       return inputFiles.Count() == 1 && inputFiles.All(x => x == null);
+    }
+
+    private bool OutputToStdOut(IEnumerable<FileSystemInfo> inputFiles, FileSystemInfo outputPath)
+    {
+      return (inputFiles.Count() == 1
+              && !inputFiles.Any(x => x is DirectoryInfo)
+              && outputPath == null);
     }
 
     private FileSystemInfo GetOutputPath(CommandLineOptions options)
@@ -146,9 +149,9 @@ namespace CSF.Zpt.Cli
 
     #region constructor
 
-    public BatchRenderingOptionsFactory()
+    public BatchRenderingOptionsFactory(DirectoryInfo baseDirectory = null)
     {
-      _relativeBase = new DirectoryInfo(System.Environment.CurrentDirectory);
+      _relativeBase = baseDirectory?? new DirectoryInfo(System.Environment.CurrentDirectory);
     }
 
     #endregion

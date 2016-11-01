@@ -94,7 +94,36 @@ Any encoding 'web name' may be specified here.
 Where provided, overrides the default implementations of \fICSF.Zpt.Rendering.IContextVisitor\fR to use when rendering pages.
 This is an ordered list of type names, separated by semicolons.
 These names must be full, assembly-qualified type names where provided.
+.TP
+.BR \-\-quiet\fR,\fB-q
+Disables all application output (to standard error) except for fatal unexpected errors (application crashes).
+Usually, the count of documents rendered by the application is sent to the console, along with a list of documents which failed to render.
+This has no effect upon documents rendered to standard output, when specified by \fB--output\fR.
+This flag takes precedence should \fB--verbose\fR also be specified.
+.TP
+.BR \-\-verbose\fR,\fB-v
+Sends a list of the documents which were successfully rendered to standard error, in addition to the default application output.
+This flag is only useful when \fB--quiet\fR is not specified.
+.SH FILES
+.TP
+.IR ZptBuilder.exe.config
+This is the configuration file used by the \fBZptBuilder.exe\fR application.
+It is used for configuring the plugin assemblies loaded, and also for configuring diagnostic logging/tracing.
+.IP
+There are comments in the configuration file illustrating sample configuration.
+This sample configuration demonstrates both how to enable the default plugins and also how to enable logging of rendering operations.
+.TP
+.IR Plugins\fR\ (various\ files)
+ZPT-Sharp, and with it the \fBZptBuilder.exe\fR application, makes use of a plugin architecture.
+The plugin architecture is used for parsing and rendering of document types (such as HTML or XML) and also for the evaluation of TALES expressions.
+.IP
+The \fBZptBuilder.exe\fR application will not be very useful if no plugins are installed.
+Consequently, a few plugins - which provide the standard ZPT functionality - are installed by default.
+Plugins are distributed as separate DLL assembly files.
+To install them, place them into a directory of your choosing and add relevant configuration to the configuration file.
+This will include, at a minimum, the path to each plugin assembly.
+If you wish to set/change the default document providers or to change the default TALES expression evaluator then this may also be achieved in the configuration file.
 .SH SEE ALSO
-.PP
-There are comments in the configuration file \fIZptBuilder.exe.config\fR containing sample configuration.
-This sample configuration demonstrates how to enable logging of rendering operations.
+.TP
+.BR ZptBuilder.exe.config \fR\ (5)
+Information about the configuration syntax

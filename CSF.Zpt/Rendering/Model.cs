@@ -197,7 +197,7 @@ namespace CSF.Zpt.Rendering
     /// </summary>
     /// <param name="expression">The expression to evaluate.</param>
     /// <param name="context">The rendering context for which we are evaluating a result.</param>
-    public abstract ExpressionResult Evaluate(string expression, RenderingContext context);
+    public abstract ExpressionResult Evaluate(string expression, IRenderingContext context);
 
     /// <summary>
     /// Tries to get a named item from the current instance.
@@ -206,7 +206,7 @@ namespace CSF.Zpt.Rendering
     /// <param name="name">The item name.</param>
     /// <param name="context">The rendering context for which we are evaluating a result.</param>
     /// <param name="result">Exposes the item which was found.</param>
-    protected virtual bool TryGetItem(string name, RenderingContext context, out object result)
+    protected virtual bool TryGetItem(string name, IRenderingContext context, out object result)
     {
       bool output;
       result = null;

@@ -16,6 +16,8 @@ namespace CSF.Zpt.BatchRendering
     #region fields
 
     private readonly IRenderingJobFactory _jobFactory;
+    private readonly IRenderingSettingsFactory _settingsFactory;
+    private readonly IBatchRenderingOptionsValidator _optionsValidator;
 
     #endregion
 
@@ -24,16 +26,14 @@ namespace CSF.Zpt.BatchRendering
     /// <summary>
     /// Parse and render the documents found using the given batch rendering options.
     /// </summary>
-    /// <param name="options">Rendering options.</param>
+    /// <param name="settings">Rendering settings.</param>
     /// <param name="batchOptions">Batch rendering options, indicating the source and destination files.</param>
-    /// <param name="mode">An optional override for the rendering mode.</param>
-    public virtual IBatchRenderingResponse Render(IRenderingOptions options,
-                                                  IBatchRenderingOptions batchOptions,
-                                                  RenderingMode? mode)
+    public virtual IBatchRenderingResponse Render(IBatchRenderingOptions batchOptions,
+                                                  IRenderingSettings settings)
     {
       ValidateBatchOptions(batchOptions);
 
-      var jobs = GetRenderingJobs(batchOptions, mode);
+      var jobs = GetRenderingJobs(batchOptions, batchOptions.RenderingMode);
 
       List<IBatchRenderingDocumentResponse> documents = new List<IBatchRenderingDocumentResponse>();
 
@@ -41,11 +41,25 @@ namespace CSF.Zpt.BatchRendering
       {
         var contextConfigurator = GetContextConfigurator(job);
 
-        var docResponse = Render(job, options, batchOptions, contextConfigurator);
+        var docResponse = Render(job, settings, batchOptions, contextConfigurator);
         documents.Add(docResponse);
       }
 
       return new BatchRenderingResponse(documents);
+    }
+
+    /// <summary>
+    /// Parse and render the documents found using the given batch rendering options.
+    /// </summary>
+    /// <param name="options">Rendering options.</param>
+    /// <param name="batchOptions">Batch rendering options, indicating the source and destination files.</param>
+    /// <returns>
+    /// An object instance indicating the outcome of the rendering.
+    /// </returns>
+    public virtual IBatchRenderingResponse Render(IBatchRenderingOptions batchOptions,
+                                                  IRenderingOptions options = null)
+    {
+      return this.Render(batchOptions, _settingsFactory.CreateSettings(options));
     }
 
     #endregion
@@ -60,9 +74,9 @@ namespace CSF.Zpt.BatchRendering
     /// <param name="batchOptions">Batch rendering options.</param>
     /// <param name="contextConfigurator">Context configurator.</param>
     protected virtual IBatchRenderingDocumentResponse Render(IRenderingJob job,
-                                                             IRenderingOptions options,
+                                                             IRenderingSettings options,
                                                              IBatchRenderingOptions batchOptions,
-                                                             Action<RenderingContext> contextConfigurator)
+                                                             Action<IModelValueContainer> contextConfigurator)
     {
       var doc = GetDocument(job);
       var outputInfo = GetOutputInfo(job, batchOptions);
@@ -83,8 +97,8 @@ namespace CSF.Zpt.BatchRendering
     /// <param name="outputInfo">Output info.</param>
     protected virtual IBatchRenderingDocumentResponse Render(IZptDocument doc,
                                                              Stream outputStream,
-                                                             IRenderingOptions options,
-                                                             Action<RenderingContext> contextConfigurator,
+                                                             IRenderingSettings options,
+                                                             Action<IModelValueContainer> contextConfigurator,
                                                              string outputInfo)
     {
       using(var writer = new StreamWriter(outputStream, options.OutputEncoding))
@@ -113,7 +127,7 @@ namespace CSF.Zpt.BatchRendering
     /// </summary>
     /// <returns>The context configurator.</returns>
     /// <param name="job">Job.</param>
-    protected virtual Action<RenderingContext> GetContextConfigurator(IRenderingJob job)
+    protected virtual Action<IModelValueContainer> GetContextConfigurator(IRenderingJob job)
     {
       return ctx => {
         if(job.InputRootDirectory != null)
@@ -130,27 +144,7 @@ namespace CSF.Zpt.BatchRendering
     /// <param name="options">Options.</param>
     protected virtual void ValidateBatchOptions(IBatchRenderingOptions options)
     {
-      if(options.InputStream == null && !options.InputPaths.Any())
-      {
-        string message = Resources.ExceptionMessages.BatchOptionsMustHaveInputStreamOrPaths;
-        throw new InvalidBatchRenderingOptionsException(message, BatchRenderingFatalErrorType.NoInputsSpecified);
-      }
-      else if(options.InputStream != null && options.InputPaths.Any())
-      {
-        string message = Resources.ExceptionMessages.BatchOptionsMustNotHaveBothInputStreamAndPaths;
-        throw new InvalidBatchRenderingOptionsException(message, BatchRenderingFatalErrorType.InputCannotBeBothStreamAndPaths);
-      }
-
-      if(options.OutputStream == null && options.OutputPath == null)
-      {
-        string message = Resources.ExceptionMessages.BatchOptionsMustHaveOutputStreamOrPath;
-        throw new InvalidBatchRenderingOptionsException(message, BatchRenderingFatalErrorType.NoOutputsSpecified);
-      }
-      else if(options.OutputStream != null && options.OutputPath != null)
-      {
-        string message = Resources.ExceptionMessages.BatchOptionsMustNotHaveBothOutputStreamAndPath;
-        throw new InvalidBatchRenderingOptionsException(message, BatchRenderingFatalErrorType.OutputCannotBeBothStreamAndPaths);
-      }
+      _optionsValidator.Validate(options);
     }
 
     /// <summary>
@@ -193,9 +187,15 @@ namespace CSF.Zpt.BatchRendering
     /// Initializes a new instance of the <see cref="CSF.Zpt.BatchRendering.BatchRenderer"/> class.
     /// </summary>
     /// <param name="renderingJobFactory">Rendering job factory.</param>
-    public BatchRenderer(IRenderingJobFactory renderingJobFactory = null)
+    /// <param name="settingsFactory">Rendering settings factory.</param>
+    /// <param name="optionsValidator">Options validator.</param>
+    public BatchRenderer(IRenderingJobFactory renderingJobFactory = null,
+                         IRenderingSettingsFactory settingsFactory = null,
+                         IBatchRenderingOptionsValidator optionsValidator = null)
     {
       _jobFactory = renderingJobFactory?? new RenderingJobFactory();
+      _settingsFactory = settingsFactory?? new RenderingSettingsFactory();
+      _optionsValidator = optionsValidator?? new BatchRenderingOptionsValidator();
     }
 
     #endregion

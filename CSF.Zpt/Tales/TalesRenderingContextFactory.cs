@@ -15,7 +15,7 @@ namespace CSF.Zpt.Tales
     /// Gets the TALES evaluator registry implementation to use.
     /// </summary>
     /// <value>The evaluator registry.</value>
-    public IEvaluatorRegistry EvaluatorRegistry
+    public IEvaluatorSelector EvaluatorRegistry
     {
       get;
       private set;
@@ -98,7 +98,7 @@ namespace CSF.Zpt.Tales
     /// <summary>
     /// Create a context instance.
     /// </summary>
-    public virtual RenderingContext Create(IZptElement element, IRenderingOptions options)
+    public virtual IRenderingContext Create(IZptElement element, IRenderingSettings options)
     {
       return Create(element, options, null);
     }
@@ -106,7 +106,7 @@ namespace CSF.Zpt.Tales
     /// <summary>
     /// Create a context instance.
     /// </summary>
-    public virtual RenderingContext Create(IZptElement element, IRenderingOptions options, object model)
+    public virtual IRenderingContext Create(IZptElement element, IRenderingSettings options, object model)
     {
       if(element == null)
       {
@@ -192,9 +192,9 @@ namespace CSF.Zpt.Tales
     /// Initializes a new instance of the <see cref="CSF.Zpt.Tales.TalesRenderingContextFactory"/> class.
     /// </summary>
     /// <param name="evaluatorRegistry">Evaluator registry.</param>
-    public TalesRenderingContextFactory(IEvaluatorRegistry evaluatorRegistry = null)
+    public TalesRenderingContextFactory(IEvaluatorSelector evaluatorRegistry = null)
     {
-      this.EvaluatorRegistry = evaluatorRegistry?? SimpleEvaluatorRegistry.Default;
+      this.EvaluatorRegistry = evaluatorRegistry?? new SimpleEvaluatorSelector();
 
       this.TalLocalDefinitions = new Dictionary<string, object>();
       this.TalGlobalDefinitions = new Dictionary<string, object>();
