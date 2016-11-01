@@ -28,10 +28,16 @@
   </header>
   <div class="main_page_area">
     <nav>
-      <h2>Navigation menu</h2>
+      <h2>Site navigation</h2>
       <ul class="active_download">
         <li class="introduction nav_item">
           <a href="index.html">Introduction</a>
+        </li>
+        <li class="advantages nav_item">
+          <a href="advantages-of-zpt-views.html">ZPT Advantages</a>
+        </li>
+        <li class="download nav_item">
+          <a href="download.html">Download ZPT-Sharp</a>
         </li>
         <li class="asp_net_view_engine nav_item">
           <a href="asp-net-mvc-view-engine.html">ZPT-Sharp for ASP.NET MVC</a>
@@ -47,6 +53,12 @@
         </li>
         <li class="writing_pages_using_zpt nav_item">
           <a href="writing-pages-using-zpt.html">Writing pages</a>
+        </li>
+        <li class="plugins nav_item">
+          <a href="plugins.html">Plugins</a>
+        </li>
+        <li class="configuration nav_item">
+          <a href="configuration.html">Configuration</a>
         </li>
         <li class="diagnostics_and_logging nav_item">
           <a href="logging.html">Diagnostics &amp; logging</a>
@@ -126,66 +138,79 @@
       <header>
         <h1>Download ZPT-Sharp</h1>
       </header>
-      <p>
-        For a complete list of releases and downloads, visit the
-        <a href="https://github.com/csf-dev/ZPT-Sharp/releases">releases page</a> for ZPT-Sharp on Github.
-      </p>
+      <h2>Latest version</h2>
       
       <p>
-        The most recent release is <strong>v0.5.0</strong>, which is an <strong>alpha</strong> release.
-        The following downloads are for that version.
+        The following downloads are for the most recent release:
+        <strong><span>v0.6.0</span> <span>(alpha)</span></strong>.
       </p>
-      <h2>ZPT-Sharp complete package</h2>
-      <p>The complete package includes everything, both mandatory and optional components.</p>
-      <div class="download_action">
-        <a href="https://github.com/csf-dev/ZPT-Sharp/releases/download/v0.5.0/CSF.Zpt-complete.zip" class="download_link">
-          Download CSF.Zpt-complete.zip
-        </a>
-      </div>
+      <ul class="downloads">
+        <li>
+          <h3>Complete package</h3>
+          <p>The complete package includes everything, both mandatory and optional components.</p>
+          <div class="download_action">
+            <a href="https://github.com/csf-dev/ZPT-Sharp/releases/download/v0.6.0/CSF.Zpt-complete.zip" class="download_link">
+              Download CSF.Zpt-complete.zip
+            </a>
+          </div>
+        </li>
 
-      <h2>ZPT-Sharp MVC 5 ViewEngine</h2>
-      <p>
-        This zip file includes only the components required in order to use ZPT-Sharp as an ASP.NET MVC 5
-        ViewEngine.
-      </p>
-      <div class="download_action">
-        <a href="https://github.com/csf-dev/ZPT-Sharp/releases/download/v0.5.0/CSF.Zpt.MVC.zip" class="download_link">
-          Download CSF.Zpt.MVC.zip
-        </a>
-      </div>
+        <li>
+          <h3>MVC 5 ViewEngine</h3>
+          <p>
+            This zip file includes only the components required in order to use ZPT-Sharp as an ASP.NET MVC 5
+            ViewEngine.
+          </p>
+          <div class="download_action">
+            <a href="https://github.com/csf-dev/ZPT-Sharp/releases/download/v0.6.0/CSF.Zpt.MVC.zip" class="download_link">
+              Download CSF.Zpt.MVC.zip
+            </a>
+          </div>
+        </li>
 
-      <h2>ZptBuilder command-line app</h2>
-      <p>Only the ZptBuilder.exe application and dependencies required to make it work.</p>
-      <div class="download_action">
-        <a href="https://github.com/csf-dev/ZPT-Sharp/releases/download/v0.5.0/ZptBuilder.zip" class="download_link">
-          Download ZptBuilder.zip
-        </a>
-      </div>
+        <li>
+          <h3>ZptBuilder.exe</h3>
+          <p>Only the command-line ZptBuilder.exe application and dependencies required to make it work.</p>
+          <div class="download_action">
+            <a href="https://github.com/csf-dev/ZPT-Sharp/releases/download/v0.6.0/ZptBuilder.zip" class="download_link">
+              Download ZptBuilder.zip
+            </a>
+          </div>
+        </li>
       
-      <h2>ZPT-Sharp API only</h2>
-      <p>
-        For writing your own applications using ZPT-Sharp, this package includes only the core API components
-        which you will need to reference from your own application logic.
-      </p>
-      <div class="download_action">
-        <a href="https://github.com/csf-dev/ZPT-Sharp/releases/download/v0.5.0/CSF.Zpt-api-only.zip" class="download_link">
-          Download CSF.Zpt-api-only.zip
-        </a>
-      </div>
+        <li>
+          <h3>API only</h3>
+          <p>
+            For writing your own applications using ZPT-Sharp, this package includes only the core API components
+            which you will need to reference from your own application logic.
+          </p>
+          <div class="download_action">
+            <a href="https://github.com/csf-dev/ZPT-Sharp/releases/download/v0.6.0/CSF.Zpt-api-only.zip" class="download_link">
+              Download CSF.Zpt-api-only.zip
+            </a>
+          </div>
+        </li>
+      </ul>
       
-      <h2>Get the source code</h2>
+      <h3>Get the Source code</h3>
       <p>
         The recommended way to get the source code is to
         <a href="https://github.com/csf-dev/ZPT-Sharp">fork the repository on Github</a>.
-        For your convenience though, the following link will download an archive of the source code for the latest
-        stable version (provided by Github's archive feature).
+        For your convenience though, the following link will download a zip of the source code
+        (provided by Github's archive feature).
       </p>
       <div class="download_action">
-        <a href="https://github.com/csf-dev/ZPT-Sharp/archive/v0.5.0.zip" class="download_link">
-          Download v0.5.0.zip
+        <a href="https://github.com/csf-dev/ZPT-Sharp/archive/v0.6.0.zip" class="download_link">
+          Download v0.6.0.zip
         </a>
       </div>
       
+      <h2>Other versions</h2>
+      <p>
+        Links to previous releases and downloads are availalable on the
+        <a href="https://github.com/csf-dev/ZPT-Sharp/releases">project releases page</a> for ZPT-Sharp,
+        hosted on Github.
+      </p>
     </section>
   </div>
 </div>
@@ -196,9 +221,11 @@
   </section>
   <section class="version">
     <p>
-      Website built <strong>2016-10-27</strong>;
+      Website built <strong>2016-11-01</strong>;
       for version
-      <strong>v0.5.0</strong>
+      <strong>
+        v0.6.0-alpha
+      </strong>
     </p>
   </section>
 </footer>
