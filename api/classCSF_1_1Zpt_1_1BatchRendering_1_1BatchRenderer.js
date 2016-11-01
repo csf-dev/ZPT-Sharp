@@ -6,7 +6,7 @@ var classCSF_1_1Zpt_1_1BatchRendering_1_1BatchRenderer =
     [ "GetOutputInfo", "classCSF_1_1Zpt_1_1BatchRendering_1_1BatchRenderer.html#a602124c72cfb20644fe574c0caf08380", null ],
     [ "GetOutputStream", "classCSF_1_1Zpt_1_1BatchRendering_1_1BatchRenderer.html#a27d1e5c10d90d3beeb2b89512aa779e9", null ],
     [ "GetRenderingJobs", "classCSF_1_1Zpt_1_1BatchRendering_1_1BatchRenderer.html#aeaf76d80cf4af0b8839b90459877d557", null ],
-    [ "Render", "classCSF_1_1Zpt_1_1BatchRendering_1_1BatchRenderer.html#a32b46ec6ccc5e3f8413a13f1460c892d", null ],
+    [ "Render", "classCSF_1_1Zpt_1_1BatchRendering_1_1BatchRenderer.html#a5a213ea266f6f3921def52793748d221", null ],
     [ "Render", "classCSF_1_1Zpt_1_1BatchRendering_1_1BatchRenderer.html#a1a08403dc3ea3d25d99aee89e70fb096", null ],
     [ "Render", "classCSF_1_1Zpt_1_1BatchRendering_1_1BatchRenderer.html#aa6759ec2268925e82d2086936ca59ba3", null ],
     [ "Render", "classCSF_1_1Zpt_1_1BatchRendering_1_1BatchRenderer.html#a44415d1df022ba66da37b814bc53a01f", null ],

@@ -53,9 +53,6 @@ var hierarchy =
     [ "CSF.Zpt.BatchRendering.IBatchRenderingDocumentResponse", "interfaceCSF_1_1Zpt_1_1BatchRendering_1_1IBatchRenderingDocumentResponse.html", [
       [ "CSF.Zpt.BatchRendering.BatchRenderingDocumentResponse", "classCSF_1_1Zpt_1_1BatchRendering_1_1BatchRenderingDocumentResponse.html", null ]
     ] ],
-    [ "CSF.Zpt.BatchRendering.IBatchRenderingOptions", "interfaceCSF_1_1Zpt_1_1BatchRendering_1_1IBatchRenderingOptions.html", [
-      [ "CSF.Zpt.BatchRendering.BatchRenderingOptions", "classCSF_1_1Zpt_1_1BatchRendering_1_1BatchRenderingOptions.html", null ]
-    ] ],
     [ "CSF.Zpt.BatchRendering.IBatchRenderingOptionsValidator", "interfaceCSF_1_1Zpt_1_1BatchRendering_1_1IBatchRenderingOptionsValidator.html", [
       [ "CSF.Zpt.BatchRendering.BatchRenderingOptionsValidator", "classCSF_1_1Zpt_1_1BatchRendering_1_1BatchRenderingOptionsValidator.html", null ]
     ] ],
@@ -74,6 +71,11 @@ var hierarchy =
     ] ],
     [ "CSF.Zpt.Rendering.IContextVisitorFactory", "interfaceCSF_1_1Zpt_1_1Rendering_1_1IContextVisitorFactory.html", [
       [ "CSF.Zpt.Rendering.ContextVisitorFactory", "classCSF_1_1Zpt_1_1Rendering_1_1ContextVisitorFactory.html", null ]
+    ] ],
+    [ "IDisposable", null, [
+      [ "CSF.Zpt.BatchRendering.IBatchRenderingOptions", "interfaceCSF_1_1Zpt_1_1BatchRendering_1_1IBatchRenderingOptions.html", [
+        [ "CSF.Zpt.BatchRendering.BatchRenderingOptions", "classCSF_1_1Zpt_1_1BatchRendering_1_1BatchRenderingOptions.html", null ]
+      ] ]
     ] ],
     [ "CSF.Zpt.Rendering.IElementRenderer", "interfaceCSF_1_1Zpt_1_1Rendering_1_1IElementRenderer.html", [
       [ "CSF.Zpt.Rendering.ElementRenderer", "classCSF_1_1Zpt_1_1Rendering_1_1ElementRenderer.html", null ]
@@ -144,7 +146,9 @@ var hierarchy =
       [ "CSF.Zpt.Rendering.RenderingContextFactoryFactory", "classCSF_1_1Zpt_1_1Rendering_1_1RenderingContextFactoryFactory.html", null ]
     ] ],
     [ "CSF.Zpt.BatchRendering.IRenderingJob", "interfaceCSF_1_1Zpt_1_1BatchRendering_1_1IRenderingJob.html", null ],
-    [ "CSF.Zpt.BatchRendering.IRenderingJobFactory", "interfaceCSF_1_1Zpt_1_1BatchRendering_1_1IRenderingJobFactory.html", null ],
+    [ "CSF.Zpt.BatchRendering.IRenderingJobFactory", "interfaceCSF_1_1Zpt_1_1BatchRendering_1_1IRenderingJobFactory.html", [
+      [ "CSF.Zpt.BatchRendering.RenderingJobFactory", "classCSF_1_1Zpt_1_1BatchRendering_1_1RenderingJobFactory.html", null ]
+    ] ],
     [ "CSF.Zpt.Rendering.IRenderingOptions", "interfaceCSF_1_1Zpt_1_1Rendering_1_1IRenderingOptions.html", [
       [ "CSF.Zpt.Rendering.RenderingOptions", "classCSF_1_1Zpt_1_1Rendering_1_1RenderingOptions.html", null ]
     ] ],

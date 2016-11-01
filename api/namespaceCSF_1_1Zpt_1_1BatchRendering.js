@@ -17,5 +17,6 @@ var namespaceCSF_1_1Zpt_1_1BatchRendering =
     [ "IBatchRenderingResponse", "interfaceCSF_1_1Zpt_1_1BatchRendering_1_1IBatchRenderingResponse.html", "interfaceCSF_1_1Zpt_1_1BatchRendering_1_1IBatchRenderingResponse" ],
     [ "InvalidBatchRenderingOptionsException", "classCSF_1_1Zpt_1_1BatchRendering_1_1InvalidBatchRenderingOptionsException.html", "classCSF_1_1Zpt_1_1BatchRendering_1_1InvalidBatchRenderingOptionsException" ],
     [ "IRenderingJob", "interfaceCSF_1_1Zpt_1_1BatchRendering_1_1IRenderingJob.html", "interfaceCSF_1_1Zpt_1_1BatchRendering_1_1IRenderingJob" ],
-    [ "IRenderingJobFactory", "interfaceCSF_1_1Zpt_1_1BatchRendering_1_1IRenderingJobFactory.html", "interfaceCSF_1_1Zpt_1_1BatchRendering_1_1IRenderingJobFactory" ]
+    [ "IRenderingJobFactory", "interfaceCSF_1_1Zpt_1_1BatchRendering_1_1IRenderingJobFactory.html", "interfaceCSF_1_1Zpt_1_1BatchRendering_1_1IRenderingJobFactory" ],
+    [ "RenderingJobFactory", "classCSF_1_1Zpt_1_1BatchRendering_1_1RenderingJobFactory.html", "classCSF_1_1Zpt_1_1BatchRendering_1_1RenderingJobFactory" ]
 ];

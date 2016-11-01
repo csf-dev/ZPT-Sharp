@@ -1,7 +1,7 @@
 var searchData=
 [
   ['macroexpander',['MacroExpander',['../classCSF_1_1Zpt_1_1Metal_1_1MacroExpander.html',1,'CSF::Zpt::Metal']]],
-  ['macroexpander',['MacroExpander',['../classCSF_1_1Zpt_1_1Metal_1_1MacroExpander.html#ac059b38bc9ded9f91c1229c1d171889a',1,'CSF::Zpt::Metal::MacroExpander']]],
+  ['macroexpander',['MacroExpander',['../classCSF_1_1Zpt_1_1Metal_1_1MacroExpander.html#a097c8204d67ac2bd18d20030a6c83c3b',1,'CSF.Zpt.Metal.MacroExpander.MacroExpander()'],['../classCSF_1_1Zpt_1_1Metal_1_1MacroExpander.html#ac059b38bc9ded9f91c1229c1d171889a',1,'CSF.Zpt.Metal.MacroExpander.MacroExpander(MacroFinder finder=null, SourceAnnotator annotator=null)']]],
   ['macrofinder',['MacroFinder',['../classCSF_1_1Zpt_1_1Metal_1_1MacroFinder.html',1,'CSF::Zpt::Metal']]],
   ['macronamemodelname',['MacroNameModelName',['../classCSF_1_1Zpt_1_1ZptConstants_1_1Metal.html#a5cbcb51af815166478995f446fe573b3',1,'CSF::Zpt::ZptConstants::Metal']]],
   ['macronotfoundexception',['MacroNotFoundException',['../classCSF_1_1Zpt_1_1Metal_1_1MacroNotFoundException.html',1,'CSF::Zpt::Metal']]],

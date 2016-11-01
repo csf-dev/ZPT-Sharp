@@ -1,6 +1,6 @@
 var NAVTREE =
 [
-  [ "Zpt-Sharp", "index.html", [
+  [ "ZPT-Sharp", "index.html", [
     [ "Namespaces", null, [
       [ "Namespace List", "namespaces.html", "namespaces" ],
       [ "Namespace Members", "namespacemembers.html", [
@@ -26,10 +26,10 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "annotated.html",
-"classCSF_1_1Zpt_1_1ExpressionEvaluators_1_1PathComponent.html",
-"classCSF_1_1Zpt_1_1Rendering_1_1RepetitionInfo.html#a0daf7770f33ad75e0071b7060d97410f",
-"classCSF_1_1Zpt_1_1ZptDocument.html#a126f1b6c49d71e89553d6839f5d4cf71",
-"interfaceCSF_1_1Zpt_1_1Rendering_1_1ISourceInfo.html"
+"classCSF_1_1Zpt_1_1ExpressionEvaluators_1_1ObjectTraverser.html#ad910298eea322f2188de1fffabe8e6f3",
+"classCSF_1_1Zpt_1_1Rendering_1_1RenderingSettings.html#ac9cff0d2ee25256185879730092b7f17",
+"classCSF_1_1Zpt_1_1ZptConstants_1_1Tal.html#a759d47c2b35f00fd9126b87b8d8895bc",
+"interfaceCSF_1_1Zpt_1_1Rendering_1_1IRenderingSettingsFactory.html#aafaf47236fc6e2e36a9281b98b35203c"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';
