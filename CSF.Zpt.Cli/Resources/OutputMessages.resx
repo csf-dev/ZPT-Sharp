@@ -111,4 +111,25 @@ Please include the information below with your bug report
 ---
 {0}</value>
   </data>
+  <data name="SuccessfulDocumentCountFormat" xml:space="preserve">
+    <value>{0} document(s) processed.</value>
+  </data>
+  <data name="FailedDocumentsHeader" xml:space="preserve">
+    <value>
+Errors &amp; failures
+---------------------</value>
+  </data>
+  <data name="FailedDocumentFormat" xml:space="preserve">
+    <value>* {0}
+  {1}
+</value>
+  </data>
+  <data name="SuccessfulDocumentsHeader" xml:space="preserve">
+    <value>
+Documents rendered
+------------------</value>
+  </data>
+  <data name="SuccessfulDocumentFormat" xml:space="preserve">
+    <value>* {0}</value>
+  </data>
 </root>

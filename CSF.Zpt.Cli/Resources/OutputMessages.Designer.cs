@@ -123,5 +123,35 @@ namespace CSF.Zpt.Cli.Resources {
                 return ResourceManager.GetString("UnexpectedErrorFormat", resourceCulture);
             }
         }
+        
+        internal static string SuccessfulDocumentCountFormat {
+            get {
+                return ResourceManager.GetString("SuccessfulDocumentCountFormat", resourceCulture);
+            }
+        }
+        
+        internal static string FailedDocumentsHeader {
+            get {
+                return ResourceManager.GetString("FailedDocumentsHeader", resourceCulture);
+            }
+        }
+        
+        internal static string FailedDocumentFormat {
+            get {
+                return ResourceManager.GetString("FailedDocumentFormat", resourceCulture);
+            }
+        }
+        
+        internal static string SuccessfulDocumentsHeader {
+            get {
+                return ResourceManager.GetString("SuccessfulDocumentsHeader", resourceCulture);
+            }
+        }
+        
+        internal static string SuccessfulDocumentFormat {
+            get {
+                return ResourceManager.GetString("SuccessfulDocumentFormat", resourceCulture);
+            }
+        }
     }
 }

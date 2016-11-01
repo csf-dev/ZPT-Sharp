@@ -16,17 +16,9 @@ namespace CSF.Zpt.Cli
 
     #region properties
 
-    public bool ForceHtmlMode
-    {
-      get;
-      set;
-    }
+    public bool ForceHtmlMode { get; set; }
 
-    public bool ForceXmlMode
-    {
-      get;
-      set;
-    }
+    public bool ForceXmlMode { get; set; }
 
     public IList<string> InputPaths
     {
@@ -43,73 +35,33 @@ namespace CSF.Zpt.Cli
       }
     }
 
-    public string InputFilenamePattern
-    {
-      get;
-      set;
-    }
+    public string InputFilenamePattern { get; set; }
 
-    public string OutputPath
-    {
-      get;
-      set;
-    }
+    public string OutputPath { get; set; }
 
-    public string OutputFilenameExtension
-    {
-      get;
-      set;
-    }
+    public string OutputFilenameExtension { get; set; }
 
-    public string IgnoredPaths
-    {
-      get;
-      set;
-    }
+    public string IgnoredPaths { get; set; }
 
-    public string KeywordOptions
-    {
-      get;
-      set;
-    }
+    public string KeywordOptions { get; set; }
 
-    public string RenderingContextFactoryClassName
-    {
-      get;
-      set;
-    }
+    public string RenderingContextFactoryClassName { get; set; }
 
-    public bool EnableSourceAnnotation
-    {
-      get;
-      set;
-    }
+    public bool EnableSourceAnnotation { get; set; }
 
-    public string OutputEncoding
-    {
-      get;
-      set;
-    }
+    public string OutputEncoding { get; set; }
 
-    public bool OmitXmlDeclarations
-    {
-      get;
-      set;
-    }
+    public bool OmitXmlDeclarations { get; set; }
 
-    public string ContextVisitorClassNames
-    {
-      get;
-      set;
-    }
+    public string ContextVisitorClassNames { get; set; }
 
-    public bool ShowUsageStatement
-    {
-      get;
-      set;
-    }
+    public bool ShowUsageStatement { get; set; }
 
     public bool ShowVersionInfo { get; set; }
+
+    public bool VerboseMode { get; set; }
+
+    public bool QuietMode { get; set; }
 
     #endregion
 
@@ -138,6 +90,16 @@ namespace CSF.Zpt.Cli
       }
 
       return output;
+    }
+
+    public bool ShowVerboseOutput()
+    {
+      return this.VerboseMode && !this.QuietMode;
+    }
+
+    public bool ShowNormalOutput()
+    {
+      return !this.QuietMode;
     }
 
     #endregion
