@@ -31,9 +31,14 @@ define(["jquery"], function($) {
       });
       
       $("body").on("click", function(ev) {
-        var evTarget = $(ev.target);
-        if(navVisible
-           && !evTarget.is(".main_page_area > nav, .main_page_area > nav *, .page_header .hamburger_menu *"))
+        var
+          evTarget = $(ev.target),
+          navSelectors = ".main_page_area > nav, " +
+                         ".main_page_area > nav *, " +
+                         ".page_header .hamburger_menu, " +
+                         ".page_header .hamburger_menu *";
+        
+        if(navVisible && !evTarget.is(navSelectors))
         {
           navHamburger.click();
         }
