@@ -182,7 +182,7 @@ namespace Test.CSF.Zpt.Integration
           var rootDir = sourceDocument.GetParent().GetParent();
           var options = GetRenderingSettings(this.CreateTestEnvironment(rootDir));
 
-          actualRendering = this.Render(document, options).Replace(Environment.NewLine, "\n");
+          actualRendering = this.Render(document, options);
           output = (actualRendering == expectedRendering);
         }
         catch(Exception ex)

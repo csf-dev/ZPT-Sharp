@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Reflection;
 using CSF.Reflection;
 using CSF.Zpt.Rendering;
@@ -51,7 +51,7 @@ namespace Test.CSF.Zpt.DocumentProviders.XmlLegacy
                                _sourceFile, Mock.Of<IZptDocument>());
 
       // Act
-      var result = sut.ToString().Replace(Environment.NewLine, "\n");
+      var result = sut.ToString();
 
       // Assert
       Assert.AreEqual(_xmlSource, result);
@@ -162,7 +162,7 @@ namespace Test.CSF.Zpt.DocumentProviders.XmlLegacy
   </body>
 </html>";
       Assert.AreEqual(expectedDom,
-                      new ZptXmlElement(_document.DocumentElement, _sourceFile, Mock.Of<IZptDocument>()).ToString().Replace(Environment.NewLine, "\n"),
+                      new ZptXmlElement(_document.DocumentElement, _sourceFile, Mock.Of<IZptDocument>()).ToString(),
                       "Correct modified XML");
     }
 
@@ -202,7 +202,7 @@ namespace Test.CSF.Zpt.DocumentProviders.XmlLegacy
   </body>
 </html>";
       Assert.AreEqual(expectedDom,
-                      new ZptXmlElement(_document.DocumentElement, _sourceFile, Mock.Of<IZptDocument>()).ToString().Replace(Environment.NewLine, "\n"),
+                      new ZptXmlElement(_document.DocumentElement, _sourceFile, Mock.Of<IZptDocument>()).ToString(),
                       "Correct modified XML");
     }
 
@@ -242,7 +242,7 @@ namespace Test.CSF.Zpt.DocumentProviders.XmlLegacy
   </body>
 </html>";
       Assert.AreEqual(expectedDom,
-                      new ZptXmlElement(_document.DocumentElement, _sourceFile, Mock.Of<IZptDocument>()).ToString().Replace(Environment.NewLine, "\n"),
+                      new ZptXmlElement(_document.DocumentElement, _sourceFile, Mock.Of<IZptDocument>()).ToString(),
                       "Correct modified XML");
     }
 
@@ -282,7 +282,7 @@ namespace Test.CSF.Zpt.DocumentProviders.XmlLegacy
   </body>
 </html>";
       Assert.AreEqual(expectedDom,
-                      new ZptXmlElement(_document.DocumentElement, _sourceFile, Mock.Of<IZptDocument>()).ToString().Replace(Environment.NewLine, "\n"),
+                      new ZptXmlElement(_document.DocumentElement, _sourceFile, Mock.Of<IZptDocument>()).ToString(),
                       "Correct modified XML");
     }
 
@@ -322,7 +322,7 @@ namespace Test.CSF.Zpt.DocumentProviders.XmlLegacy
   </body>
 </html>";
       Assert.AreEqual(expectedDom,
-                      new ZptXmlElement(_document.DocumentElement, _sourceFile, Mock.Of<IZptDocument>()).ToString().Replace(Environment.NewLine, "\n"),
+                      new ZptXmlElement(_document.DocumentElement, _sourceFile, Mock.Of<IZptDocument>()).ToString(),
                       "Correct modified XML");
     }
 
@@ -363,7 +363,7 @@ namespace Test.CSF.Zpt.DocumentProviders.XmlLegacy
   </body>
 </html>";
       Assert.AreEqual(expectedDom,
-                      new ZptXmlElement(_document.DocumentElement, _sourceFile, Mock.Of<IZptDocument>()).ToString().Replace(Environment.NewLine, "\n"),
+                      new ZptXmlElement(_document.DocumentElement, _sourceFile, Mock.Of<IZptDocument>()).ToString(),
                       "Correct modified XML");
     }
 
@@ -398,7 +398,7 @@ namespace Test.CSF.Zpt.DocumentProviders.XmlLegacy
   </body>
 </html>";
       Assert.AreEqual(expectedDom,
-                      new ZptXmlElement(_document.DocumentElement, _sourceFile, Mock.Of<IZptDocument>()).ToString().Replace(Environment.NewLine, "\n"),
+                      new ZptXmlElement(_document.DocumentElement, _sourceFile, Mock.Of<IZptDocument>()).ToString(),
                       "Correct modified XML");
     }
 
@@ -434,7 +434,7 @@ namespace Test.CSF.Zpt.DocumentProviders.XmlLegacy
   </body>
 </html>";
       Assert.AreEqual(expectedDom,
-                      new ZptXmlElement(_document.DocumentElement, _sourceFile, Mock.Of<IZptDocument>()).ToString().Replace(Environment.NewLine, "\n"),
+                      new ZptXmlElement(_document.DocumentElement, _sourceFile, Mock.Of<IZptDocument>()).ToString(),
                       "Correct modified XML");
     }
 
@@ -468,7 +468,7 @@ namespace Test.CSF.Zpt.DocumentProviders.XmlLegacy
   </body>
 </html>";
       Assert.AreEqual(expectedDom,
-                      new ZptXmlElement(_document.DocumentElement, _sourceFile, Mock.Of<IZptDocument>()).ToString().Replace(Environment.NewLine, "\n"),
+                      new ZptXmlElement(_document.DocumentElement, _sourceFile, Mock.Of<IZptDocument>()).ToString(),
                       "Correct modified XML");
     }
 
@@ -504,7 +504,7 @@ namespace Test.CSF.Zpt.DocumentProviders.XmlLegacy
   </body>
 </html>";
       Assert.AreEqual(expectedDom,
-                      new ZptXmlElement(_document.DocumentElement, _sourceFile, Mock.Of<IZptDocument>()).ToString().Replace(Environment.NewLine, "\n"),
+                      new ZptXmlElement(_document.DocumentElement, _sourceFile, Mock.Of<IZptDocument>()).ToString(),
                       "Correct modified XML");
     }
 
@@ -555,7 +555,7 @@ namespace Test.CSF.Zpt.DocumentProviders.XmlLegacy
   </body>
 </html>";
       Assert.AreEqual(expectedDom,
-                      new ZptXmlElement(_document.DocumentElement, _sourceFile, Mock.Of<IZptDocument>()).ToString().Replace(Environment.NewLine, "\n"),
+                      new ZptXmlElement(_document.DocumentElement, _sourceFile, Mock.Of<IZptDocument>()).ToString(),
                       "Correct modified XML");
     }
 
@@ -606,7 +606,7 @@ namespace Test.CSF.Zpt.DocumentProviders.XmlLegacy
   </body>
 </html>";
       Assert.AreEqual(expectedDom,
-                      new ZptXmlElement(_document.DocumentElement, _sourceFile, Mock.Of<IZptDocument>()).ToString().Replace(Environment.NewLine, "\n"),
+                      new ZptXmlElement(_document.DocumentElement, _sourceFile, Mock.Of<IZptDocument>()).ToString(),
                       "Correct modified XML");
     }
 
@@ -669,7 +669,7 @@ namespace Test.CSF.Zpt.DocumentProviders.XmlLegacy
       sut.AddCommentBefore("Foo bar baz");
 
       // Assert
-      Assert.AreEqual(expectedResult, docElement.ToString().Replace(Environment.NewLine, "\n"));
+      Assert.AreEqual(expectedResult, docElement.ToString());
     }
 
     [Test]
@@ -740,7 +740,7 @@ namespace Test.CSF.Zpt.DocumentProviders.XmlLegacy
   </body>
 </html>";
       Assert.AreEqual(expectedDom,
-                      new ZptXmlElement(_document.DocumentElement, _sourceFile, Mock.Of<IZptDocument>()).ToString().Replace(Environment.NewLine, "\n"),
+                      new ZptXmlElement(_document.DocumentElement, _sourceFile, Mock.Of<IZptDocument>()).ToString(),
                       "Correct modified XML");
     }
 
