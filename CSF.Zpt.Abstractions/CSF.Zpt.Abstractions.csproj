@@ -105,13 +105,6 @@
     <Compile Include="IPluginAssemblyLoader.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
-  <ItemGroup>
-    <ProjectReference Include="..\Deployment\CSF.Zpt.DeploymentTasks\CSF.Zpt.DeploymentTasks.csproj">
-      <Project>{3E1DAACE-519B-4C6C-80E3-3F06A1A33C66}</Project>
-      <Name>CSF.Zpt.DeploymentTasks</Name>
-      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
-    </ProjectReference>
-  </ItemGroup>
   <Target Name="BeforeBuild">
     <CallTarget Targets="BumpBuildVersion" Condition="'$(Configuration)' == 'Release'" />
     <CallTarget Targets="StampAssemblyInfo" />
