@@ -16,6 +16,26 @@
   <UsingTask TaskName="ReadVersionNumber" AssemblyFile="CSF.Zpt.DeploymentTasks.dll" />
   
   <!--  ************************************************************************
+        ** IncrementBuildVersion
+  
+        This task opens a version information ini file and bumps (increments) the
+        build number by one, then re-saves the file.
+        ************************************************************************
+  -->
+  <UsingTask TaskName="IncrementBuildVersion" AssemblyFile="CSF.Zpt.DeploymentTasks.dll" />
+  
+  <!--  ************************************************************************
+        ** RequireFilesOnPath
+  
+        This task receives a collection of files (executables).  For each of these
+        it ensures that the file exists in the current PATH (environment variable).
+        If any are not available then an error is raised.  If all are present then
+        the task allows execution to continue.
+        ************************************************************************
+  -->
+  <UsingTask TaskName="RequireFilesOnPath" AssemblyFile="CSF.Zpt.DeploymentTasks.dll" />
+  
+  <!--  ************************************************************************
         ** StampAssemblyInfo
   
         This target 'bakes in' data to an AssemblyInfo.cs file from a number
@@ -61,6 +81,41 @@
       <DestinationAssemblyInfo Include="$(AssemblyInfoFilename)" />
     </ItemGroup>
     <Copy SourceFiles="@(StubAssemblyInfo)" DestinationFiles="@(DestinationAssemblyInfo)" />
+  </Target>
+  
+  <!--  ************************************************************************
+        ** BumpBuildVersion
+  
+        This target executes the IncrementBuildVersion task to bump the build
+        version number in the version.ini file.
+        ************************************************************************
+  -->
+  <Target Name="BumpBuildVersion">
+    <IncrementBuildVersion VersionFile="$(VersionIniPath)" />
+  </Target>
+  
+  <!--  ************************************************************************
+        ** DetectDeploymentDependencies
+  
+        This target builds as a list of the dependencies for the deployment process,
+        and then uses the RequireFilesOnPath task to ensure that they are all
+        available.
+        ************************************************************************
+  -->
+  <Target Name="DetectDeploymentDependencies">
+    <ItemGroup>
+      <DetectedFiles Include="man" Condition="'$(OS)' == 'Unix'" />
+      <DetectedFiles Include="man2html" Condition="'$(OS)' == 'Unix'" />
+      <DetectedFiles Include="tidy" Condition="'$(OS)' == 'Unix'" />
+      <DetectedFiles Include="doxygen" Condition="'$(OS)' == 'Unix'" />
+      <DetectedFiles Include="pdflatex" Condition="'$(OS)' == 'Unix'" />
+      <DetectedFiles Include="man.exe" Condition=" '$(OS)' == 'Windows_NT' " />
+      <DetectedFiles Include="man2html.exe" Condition=" '$(OS)' == 'Windows_NT' " />
+      <DetectedFiles Include="tidy.exe" Condition=" '$(OS)' == 'Windows_NT' " />
+      <DetectedFiles Include="doxygen.exe" Condition=" '$(OS)' == 'Windows_NT' " />
+      <DetectedFiles Include="pdflatex.exe" Condition=" '$(OS)' == 'Windows_NT' " />
+    </ItemGroup>
+    <RequireFilesOnPath Files="@(DetectedFiles)" />
   </Target>
 
 </Project>

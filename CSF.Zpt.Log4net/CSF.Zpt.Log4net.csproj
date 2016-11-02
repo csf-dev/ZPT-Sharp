@@ -55,10 +55,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Deployment\CSF.Zpt.PreBuild\CSF.Zpt.PreBuild.csproj">
-      <Project>{6C025057-9ACC-474E-9092-D6B9059B07EE}</Project>
-      <Name>CSF.Zpt.PreBuild</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Deployment\CSF.Zpt.DeploymentTasks\CSF.Zpt.DeploymentTasks.csproj">
       <Project>{3E1DAACE-519B-4C6C-80E3-3F06A1A33C66}</Project>
       <Name>CSF.Zpt.DeploymentTasks</Name>

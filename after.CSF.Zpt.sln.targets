@@ -22,7 +22,7 @@
     <Exec Command="nuget restore" Condition="Exists('@(NugetUnixPath)')" />
   </Target>
   
-  <Target Name="RestoreNugetWindows" BeforeTargets="Build" Condition="'$(OS)' != 'Unix'">
+  <Target Name="RestoreNugetWindows" BeforeTargets="Build" Condition="'$(OS)'  == 'Windows_NT'">
     <!-- On Windows systems, Nuget is always installed at a well-known location -->
     <PropertyGroup>
       <NugetWindowsPath>$(MSBuildProgramFiles32)\NuGet\nuget.exe</NugetWindowsPath>
