@@ -7,7 +7,6 @@
     <OutputType>Library</OutputType>
     <AssemblyName>Documentation</AssemblyName>
     <WebsiteUrlRoot>http://csf-dev.github.io/ZPT-Sharp/</WebsiteUrlRoot>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <DoxygenConfig>Doxygen.cfg</DoxygenConfig>
     <WebsiteSource>Website</WebsiteSource>
     <BuildRoot>obj\Release</BuildRoot>
@@ -28,6 +27,7 @@
     <BuildTimestamp>$([System.DateTime]::Now.ToString(yyyy-MM-dd))</BuildTimestamp>
     <CopyrightYear>$([System.DateTime]::Now.ToString(yyyy))</CopyrightYear>
   </PropertyGroup>
+  <Import Project="..\..\Common\SolutionProperties.targets" />
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Nothing|AnyCPU' ">
     <ConsolePause>false</ConsolePause>
     <OutputPath>bin\Nothing</OutputPath>

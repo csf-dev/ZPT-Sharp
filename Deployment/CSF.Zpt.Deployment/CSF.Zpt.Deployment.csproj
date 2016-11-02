@@ -23,9 +23,8 @@
     <StringEvaluatorPath>$(SolutionRoot)ExpressionEvaluators\CSF.Zpt.ExpressionEvaluators.StringExpressions\$(BinaryPath)</StringEvaluatorPath>
     <DocumentationPath>..\Output\Documentation website</DocumentationPath>
     <DocWebsiteOutputPath>..\CSF.Zpt.Documentation\bin\Release</DocWebsiteOutputPath>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
-    <ReleaseVersion>0.0.0</ReleaseVersion>
   </PropertyGroup>
+  <Import Project="..\..\Common\SolutionProperties.targets" />
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <OutputPath>..\Output\</OutputPath>
     <ConsolePause>false</ConsolePause>

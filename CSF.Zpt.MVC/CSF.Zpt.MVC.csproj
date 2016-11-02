@@ -7,15 +7,10 @@
     <OutputType>Library</OutputType>
     <RootNamespace>CSF.Zpt.MVC</RootNamespace>
     <AssemblyName>CSF.Zpt.MVC</AssemblyName>
-    <ReleaseVersion>0.0.0</ReleaseVersion>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
-    <SolutionCompany>CSF Software Limited</SolutionCompany>
-    <SolutionCopyright>CSF Software Limited et al</SolutionCopyright>
-    <SolutionName>ZPT-Sharp: Zope Page Templates for .NET</SolutionName>
-    <ProjectConfiguration>$(Configuration)</ProjectConfiguration>
     <ProjectTitle>CSF.Zpt.MVC</ProjectTitle>
     <ProjectDescription>ASP.NET MVC5 integration for ZPT-Sharp</ProjectDescription>
   </PropertyGroup>
+  <Import Project="..\Common\SolutionProperties.targets" />
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>

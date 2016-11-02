@@ -7,14 +7,10 @@
     <OutputType>Library</OutputType>
     <RootNamespace>CSF.Zpt</RootNamespace>
     <AssemblyName>CSF.Zpt</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
-    <SolutionCompany>CSF Software Limited</SolutionCompany>
-    <SolutionCopyright>CSF Software Limited et al</SolutionCopyright>
-    <SolutionName>ZPT-Sharp: Zope Page Templates for .NET</SolutionName>
-    <ProjectConfiguration>$(Configuration)</ProjectConfiguration>
     <ProjectTitle>CSF.Zpt</ProjectTitle>
     <ProjectDescription>Core ZPT-Sharp logic</ProjectDescription>
   </PropertyGroup>
+  <Import Project="..\Common\SolutionProperties.targets" />
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>

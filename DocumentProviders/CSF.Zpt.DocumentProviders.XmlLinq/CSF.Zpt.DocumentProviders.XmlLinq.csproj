@@ -6,15 +6,11 @@
     <ProjectGuid>{842160E4-BDE5-4FA0-ADE5-07554090AA27}</ProjectGuid>
     <OutputType>Library</OutputType>
     <RootNamespace>CSF.Zpt.DocumentProviders</RootNamespace>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <AssemblyName>CSF.Zpt.DocumentProviders.XmlLinq</AssemblyName>
-    <SolutionCompany>CSF Software Limited</SolutionCompany>
-    <SolutionCopyright>CSF Software Limited et al</SolutionCopyright>
-    <SolutionName>ZPT-Sharp: Zope Page Templates for .NET</SolutionName>
-    <ProjectConfiguration>$(Configuration)</ProjectConfiguration>
     <ProjectTitle>CSF.Zpt.DocumentProviders.XmlLinq</ProjectTitle>
     <ProjectDescription>Implementation of IZptDocumentProvider for XML documents, using System.Xml.Linq.XDocument</ProjectDescription>
   </PropertyGroup>
+  <Import Project="..\..\Common\SolutionProperties.targets" />
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
