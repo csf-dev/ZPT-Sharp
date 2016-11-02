@@ -5,7 +5,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSF.Zpt", "CSF.Zpt\CSF.Zpt.
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{B99672F8-AB58-4435-AAE7-18850F239A17}"
 	ProjectSection(SolutionItems) = preProject
-		Common\ZipPackaging.targets = Common\ZipPackaging.targets
 		version.ini = version.ini
 		Common\AssemblyInfo.stub.cs = Common\AssemblyInfo.stub.cs
 	EndProjectSection
