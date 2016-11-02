@@ -174,7 +174,7 @@
       <LastGenOutput>LogMessageFormats.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
-  <Target Name="BeforeBuild">
+  <Target Name="GetAssemblyVersionInfo" BeforeTargets="CoreCompile">
     <CallTarget Targets="StampAssemblyInfo" />
   </Target>
   <Target Name="AfterBuild">

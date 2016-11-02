@@ -105,7 +105,7 @@
     <Compile Include="IPluginAssemblyLoader.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
-  <Target Name="BeforeBuild">
+  <Target Name="GetAssemblyVersionInfo" BeforeTargets="CoreCompile">
     <CallTarget Targets="BumpBuildVersion" Condition="'$(Configuration)' == 'Release'" />
     <CallTarget Targets="StampAssemblyInfo" />
   </Target>
