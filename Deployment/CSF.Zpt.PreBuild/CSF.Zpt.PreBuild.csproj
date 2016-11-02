@@ -33,13 +33,6 @@
   <Target Name="BumpVersionNumber">
     <IncrementBuildVersion VersionFile="..\..\version.ini" Condition="'$(Configuration)' == 'Release' Or '$(Configuration)' == 'Deploy'" />
   </Target>
-  <Target Name="DetectNuget">
-    <ItemGroup>
-      <DetectedFiles Include="nuget" />
-    </ItemGroup>
-    <RequireFilesOnPath Files="@(DetectedFiles)" Condition="'$(OS)' == 'Unix'" />
-    <Error Condition="!Exists('$(MSBuildProgramFiles32)\NuGet\nuget.exe') And '$(OS)' == 'Windows_NT' " Text="Nuget.exe must be installed and available to MSBuild" />
-  </Target>
   <Target Name="DetectDeploymentDependencies">
     <ItemGroup>
       <DetectedFiles Include="man" Condition="'$(OS)' == 'Unix'" />
@@ -55,15 +48,9 @@
     </ItemGroup>
     <RequireFilesOnPath Files="@(DetectedFiles)" />
   </Target>
-  <Target Name="RestoreNuget">
-    <Exec Command="nuget restore" WorkingDirectory="..\..\" Condition="'$(OS)' == 'Unix'" />
-    <Exec Command="&quot;$(MSBuildProgramFiles32)\NuGet\nuget.exe&quot; restore" WorkingDirectory="..\..\" Condition="'$(OS)' != 'Unix'" />
-  </Target>
   <Target Name="Build">
     <CallTarget Targets="BumpVersionNumber" />
-    <CallTarget Targets="DetectNuget" />
     <CallTarget Targets="DetectDeploymentDependencies" Condition=" '$(Configuration)' == 'Deploy' " />
-    <CallTarget Targets="RestoreNuget" />
   </Target>
   <ItemGroup>
     <ProjectReference Include="..\CSF.Zpt.DeploymentTasks\CSF.Zpt.DeploymentTasks.csproj">

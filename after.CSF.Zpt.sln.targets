@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  
+  <Target Name="RestoreNugetUnix" BeforeTargets="Build" Condition="'$(OS)' == 'Unix'">
+    <!--  Find out where nuget is installed using 'which'.
+          Unfortunately in order to get the output from Exec we must
+          write its output to a file, read that file then delete the file.
+          We can't just read the STDOUT. -->
+    <PropertyGroup>
+      <ThrowawayFile>nuget-install-path.temp.txt</ThrowawayFile>
+    </PropertyGroup>
+    <Exec Command="which nuget > '$(ThrowawayFile)'" />
+    <ReadLinesFromFile File="$(ThrowawayFile)">
+      <Output TaskParameter="Lines" ItemName="NugetUnixPath"/>
+    </ReadLinesFromFile>
+    <Delete Files="$(ThrowawayFile)" />
+    
+    <!-- Raise an error if nuget is not installed -->
+    <Error Condition="!Exists('@(NugetUnixPath)')" Text="nuget must be installed and available in your PATH" />
+    
+    <!-- Perform our nuget restore -->
+    <Exec Command="nuget restore" Condition="Exists('@(NugetUnixPath)')" />
+  </Target>
+  
+  <Target Name="RestoreNugetWindows" BeforeTargets="Build" Condition="'$(OS)' != 'Unix'">
+    <!-- On Windows systems, Nuget is always installed at a well-known location -->
+    <PropertyGroup>
+      <NugetWindowsPath>$(MSBuildProgramFiles32)\NuGet\nuget.exe</NugetWindowsPath>
+    </PropertyGroup>
+    
+    <!-- Raise an error if nuget is not installed -->
+    <Error Condition="!Exists('$(NugetWindowsPath)')" Text="Nuget.exe must be installed at $(NugetWindowsPath)" />
+    
+    <!-- Perform our nuget restore -->
+    <Exec Command="&quot;NugetWindowsPath&quot; restore" Condition="Exists('$(NugetWindowsPath)')" />
+  </Target>
+
+</Project>
