@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
-    <MSBuildExtenionPackPath>..\..\..\..\packages\MSBuild.Extension.Pack.1.8.0\build\net40\MSBuild.Extension.Pack.targets</MSBuildExtenionPackPath>
+    <MSBuildExtensionPackPath>..\..\..\..\packages\MSBuild.Extension.Pack.1.8.0\build\net40\MSBuild.Extension.Pack.targets</MSBuildExtensionPackPath>
   </PropertyGroup>
-  <Import Project="$(MSBuildExtenionPackPath)" Condition="Exists('$(MSBuildExtenionPackPath)')" />
+  <Import Project="$(MSBuildExtensionPackPath)" />
   
   <!--  ************************************************************************
         ** ReadVersionNumber
@@ -45,7 +45,7 @@
         ************************************************************************
   -->
   <Target Name="StampAssemblyInfo">
-    <CallTargets Targets="RestoreStubAssemblyInfo" />
+    <CallTarget Targets="RestoreStubAssemblyInfo" />
     <ReadVersionNumber VersionFile="$(VersionIniPath)">
       <Output TaskParameter="FullVersionNumber" ItemName="FullVersion" />
       <Output TaskParameter="SemanticVersionNumber" ItemName="SemanticVersion" />
