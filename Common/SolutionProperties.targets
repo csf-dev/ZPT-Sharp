@@ -6,5 +6,8 @@
     <SolutionCopyright>CSF Software Limited et al</SolutionCopyright>
     <SolutionName>ZPT-Sharp: Zope Page Templates for .NET</SolutionName>
     <ProjectConfiguration>$(Configuration)</ProjectConfiguration>
+    <StubAssemblyInfoPath>$(PathToSolutionRoot)\Common\AssemblyInfo.stub.cs</StubAssemblyInfoPath>
+    <AssemblyInfoFilename>AssemblyInfo.cs</AssemblyInfoFilename>
+    <VersionIniPath>$(PathToSolutionRoot)\version.ini</VersionIniPath>
   </PropertyGroup>
 </Project>
