@@ -16,9 +16,11 @@ Information specific to **running the unit/integration tests** is available in t
 
 ## Current status
 The current status of the project - as of `v0.6.1` - is that the software should be considered in an _alpha_ state.
-Whilst there are now no issues open with the **API Change** label, I still cannot promise that the API is completely stable.
+Whilst there are now no issues open with [the API Change label], I still cannot promise that the API is completely stable.
 I would certainly not recommend it for production use.
 At this stage I would welcome exploration, testing and (most importantly) bug-reports from interested parties.
+
+[the API Change label]: https://github.com/csf-dev/ZPT-Sharp/labels/API%20change
 
 ---
 
