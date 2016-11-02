@@ -62,4 +62,9 @@
       <Name>CSF.IniDocuments</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="CSF.Zpt.DeploymentTasks.targets">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
 </Project>

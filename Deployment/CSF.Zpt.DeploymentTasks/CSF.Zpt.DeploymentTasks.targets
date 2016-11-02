@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <MSBuildExtenionPackPath>..\..\..\..\packages\MSBuild.Extension.Pack.1.8.0\build\net40\MSBuild.Extension.Pack.targets</MSBuildExtenionPackPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildExtenionPackPath)" Condition="Exists('$(MSBuildExtenionPackPath)')" />
+  
+  <!--  ************************************************************************
+        ** ReadVersionNumber
+  
+        This task refers to a class within the DeploymentTasks library.
+        It reads a formatted ini file and exposes the version information within
+        that file.
+        ************************************************************************
+  -->
+  <UsingTask TaskName="ReadVersionNumber" AssemblyFile="CSF.Zpt.DeploymentTasks.dll" />
+  
+  <!--  ************************************************************************
+        ** StampAssemblyInfo
+  
+        This target 'bakes in' data to an AssemblyInfo.cs file from a number
+        of build properties.  The properties which refer to version are drawn from
+        the shared version.ini file.  This way, the version info is not duplicated
+        but managed in a single location.
+        ************************************************************************
+  -->
+  <Target Name="StampAssemblyInfo">
+    <CallTargets Targets="RestoreStubAssemblyInfo" />
+    <ReadVersionNumber VersionFile="$(VersionIniPath)">
+      <Output TaskParameter="FullVersionNumber" ItemName="FullVersion" />
+      <Output TaskParameter="SemanticVersionNumber" ItemName="SemanticVersion" />
+      <Output TaskParameter="BuildNumber" ItemName="BuildNumber" />
+      <Output TaskParameter="InformationalVersion" ItemName="InformationalVersion" />
+    </ReadVersionNumber>
+    <ItemGroup>
+      <AssemblyInfoFiles Include="$(AssemblyInfoFilename)" />
+    </ItemGroup>
+    <MSBuild.ExtensionPack.Framework.AssemblyInfo AssemblyInfoFiles="@(AssemblyInfoFiles)"
+                                                  AssemblyVersion="@(SemanticVersion).0"
+                                                  AssemblyFileVersion="@(FullVersion)"
+                                                  AssemblyCompany="$(SolutionCompany)"
+                                                  AssemblyCopyright="$(SolutionCopyright)"
+                                                  AssemblyProduct="$(SolutionName)"
+                                                  AssemblyConfiguration="$(ProjectConfiguration)"
+                                                  AssemblyTitle="$(ProjectTitle)"
+                                                  AssemblyDescription="$(ProjectDescription)" />
+  </Target>
+  
+  <!--  ************************************************************************
+        ** RestoreStubAssemblyInfo
+  
+        This target restores the AssemblyInfo.cs file back to the 'stub' which has
+        no meaningful data.  This way the modifications to the file (as builds are
+        performed) will not show up in source control.  The state of the file (from
+        a build) is always transient.
+        ************************************************************************
+  -->
+  <Target Name="RestoreStubAssemblyInfo">
+    <ItemGroup>
+      <StubAssemblyInfo Include="$(StubAssemblyInfoPath)" />
+      <DestinationAssemblyInfo Include="$(AssemblyInfoFilename)" />
+    </ItemGroup>
+    <Copy SourceFiles="@(StubAssemblyInfo)" DestinationFiles="@(DestinationAssemblyInfo)" />
+  </Target>
+
+</Project>
