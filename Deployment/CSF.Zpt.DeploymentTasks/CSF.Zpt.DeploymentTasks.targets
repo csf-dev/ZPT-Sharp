@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
-    <MSBuildExtensionPackPath>..\..\..\..\packages\MSBuild.Extension.Pack.1.8.0\build\net40\MSBuild.Extension.Pack.targets</MSBuildExtensionPackPath>
+    <MSBuildExtensionPackPath>..\..\packages\MSBuild.Extension.Pack.1.8.0\build\net40\MSBuild.Extension.Pack.targets</MSBuildExtensionPackPath>
+    <TasksPath>bin\$(Configuration)\CSF.Zpt.DeploymentTasks.dll</TasksPath>
   </PropertyGroup>
   <Import Project="$(MSBuildExtensionPackPath)" />
   
@@ -13,7 +14,7 @@
         that file.
         ************************************************************************
   -->
-  <UsingTask TaskName="ReadVersionNumber" AssemblyFile="CSF.Zpt.DeploymentTasks.dll" />
+  <UsingTask TaskName="ReadVersionNumber" AssemblyFile="$(TasksPath)" />
   
   <!--  ************************************************************************
         ** IncrementBuildVersion
@@ -22,7 +23,7 @@
         build number by one, then re-saves the file.
         ************************************************************************
   -->
-  <UsingTask TaskName="IncrementBuildVersion" AssemblyFile="CSF.Zpt.DeploymentTasks.dll" />
+  <UsingTask TaskName="IncrementBuildVersion" AssemblyFile="$(TasksPath)" />
   
   <!--  ************************************************************************
         ** RequireFilesOnPath
@@ -33,7 +34,7 @@
         the task allows execution to continue.
         ************************************************************************
   -->
-  <UsingTask TaskName="RequireFilesOnPath" AssemblyFile="CSF.Zpt.DeploymentTasks.dll" />
+  <UsingTask TaskName="RequireFilesOnPath" AssemblyFile="$(TasksPath)" />
   
   <!--  ************************************************************************
         ** StampAssemblyInfo
