@@ -84,7 +84,6 @@
     <Compile Include="Exceptions\InvalidOutputEncodingException.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
-  <Import Project="..\packages\MSBuild.Extension.Pack.1.8.0\build\net40\MSBuild.Extension.Pack.targets" Condition="Exists('..\packages\MSBuild.Extension.Pack.1.8.0\build\net40\MSBuild.Extension.Pack.targets')" />
   <UsingTask TaskName="ExecWithIgnoredExitCodes" AssemblyFile="bin\Release\CSF.Zpt.DeploymentTasks.dll" />
   <Target Name="BuildPlaintextManual">
     <Exec Command="MANWIDTH=&quot;$(ManPageColumns)&quot; man --nh -l $(ManPageSource) &gt; $(ManPageOutput)" />

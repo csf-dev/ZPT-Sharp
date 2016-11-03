@@ -45,7 +45,6 @@
     <Compile Include="SelfConfiguringLog4netTraceListener.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
-  <Import Project="..\packages\MSBuild.Extension.Pack.1.8.0\build\net40\MSBuild.Extension.Pack.targets" Condition="Exists('..\packages\MSBuild.Extension.Pack.1.8.0\build\net40\MSBuild.Extension.Pack.targets')" />
   <ItemGroup>
     <None Include="packages.config" />
     <None Include="App.config" />

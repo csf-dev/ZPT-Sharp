@@ -11,8 +11,8 @@
   
   <!-- PropertyGroup sets up the paths to the MSBuild extension pack and this project's own DLL file -->
   <PropertyGroup>
-    <MSBuildExtensionPackPath>..\..\packages\MSBuild.Extension.Pack.1.8.0\build\net40\MSBuild.Extension.Pack.targets</MSBuildExtensionPackPath>
-    <TasksPath>bin\$(Configuration)\CSF.Zpt.DeploymentTasks.dll</TasksPath>
+    <MSBuildExtensionPackPath>$(PathToSolutionRoot)\packages\MSBuild.Extension.Pack.1.8.0\build\net40\MSBuild.Extension.Pack.targets</MSBuildExtensionPackPath>
+    <TasksPath>$(PathToSolutionRoot)\Deployment\CSF.Zpt.DeploymentTasks\bin\$(Configuration)\CSF.Zpt.DeploymentTasks.dll</TasksPath>
   </PropertyGroup>
   <Import Project="$(MSBuildExtensionPackPath)" />
   
