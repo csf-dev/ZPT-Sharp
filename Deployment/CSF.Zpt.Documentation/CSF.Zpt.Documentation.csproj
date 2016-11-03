@@ -74,7 +74,7 @@
       <WebsiteSourceFiles Include="$(WebsiteSource)\**\*.*" />
     </ItemGroup>
     <Copy SourceFiles="@(WebsiteSourceFiles)" DestinationFiles="@(WebsiteSourceFiles-&gt;'$(PreBuiltWebsitePath)\%(RecursiveDir)%(Filename)%(Extension)')" />
-    <Copy SourceFiles="$(ZptBuilderHtmlDocs)" DestinationFiles="$(PreBuiltWebsitePath)\Shared\cli-docs.html" />
+    <!-- <Copy SourceFiles="$(ZptBuilderHtmlDocs)" DestinationFiles="$(PreBuiltWebsitePath)\Shared\cli-docs.html" /> -->
     <ItemGroup>
       <WebsiteSupportFiles Include="$(PreBuiltWebsitePath)\**\*.css" />
       <WebsiteSupportFiles Include="$(PreBuiltWebsitePath)\**\*.js" />
