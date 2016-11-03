@@ -26,7 +26,6 @@
     <CallTarget Targets="PrepareDeploymentOutputLocations" Condition="'$(Configuration)' == 'Release'" />
     <CallTarget Targets="BuildPlaintextManual" Condition="'$(Configuration)' == 'Release'" />
     <CallTarget Targets="BuildHtmlManual" Condition="'$(Configuration)' == 'Release'" />
-
     <CallTarget Targets="CreateBinaryZips" Condition="'$(Configuration)' == 'Release'" />
     <CallTarget Targets="CreateNugetPackages" Condition="'$(Configuration)' == 'Release'" />
     <CallTarget Targets="CopyDocumentation" Condition="'$(Configuration)' == 'Release'" />
