@@ -74,9 +74,5 @@
       <Project>{9B4DF12E-6E04-4C25-AD16-58434C18DE8A}</Project>
       <Name>CSF.Zpt.MVC</Name>
     </ProjectReference>
-    <ProjectReference Include="..\CSF.Zpt.Documentation\CSF.Zpt.Documentation.csproj">
-      <Project>{28D30A8C-0693-4FEA-BCC7-020AA41ECBB1}</Project>
-      <Name>CSF.Zpt.Documentation</Name>
-    </ProjectReference>
   </ItemGroup>
 </Project>
