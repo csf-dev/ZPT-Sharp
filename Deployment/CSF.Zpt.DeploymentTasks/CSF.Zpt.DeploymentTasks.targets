@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  
   <!-- PropertyGroup sets up a reference to the current project, so that the build is ordered correctly -->
   <ItemGroup>
     <ProjectReference Include="$(PathToSolutionRoot)\Deployment\CSF.Zpt.DeploymentTasks\CSF.Zpt.DeploymentTasks.csproj">
@@ -11,7 +10,10 @@
   
   <!-- Set up the paths to the MSBuild extension pack and this project's own DLL file -->
   <PropertyGroup>
-    <TasksPath>bin\$(Configuration)\CSF.Zpt.DeploymentTasks.dll</TasksPath>
+    <TasksConfig Condition="'$(Configuration)' == 'Debug'">Debug</TasksConfig>
+    <TasksConfig Condition="'$(Configuration)' == 'Release'">Release</TasksConfig>
+    <TasksConfig Condition="'$(Configuration)' == 'Deploy'">Release</TasksConfig>
+    <TasksPath>bin\$(TasksConfig)\CSF.Zpt.DeploymentTasks.dll</TasksPath>
   </PropertyGroup>
   <Import Project="..\..\packages\MSBuild.Extension.Pack.1.8.0\build\net40\MSBuild.Extension.Pack.targets" />
   
