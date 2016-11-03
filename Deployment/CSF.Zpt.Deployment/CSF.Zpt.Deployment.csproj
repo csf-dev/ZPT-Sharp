@@ -23,12 +23,15 @@
     <Optimize>false</Optimize>
   </PropertyGroup>
   <Target Name="Build">
+    <CallTarget Targets="DetectDeploymentDependencies" Condition="'$(Configuration)' == 'Release'" />
     <CallTarget Targets="PrepareDeploymentOutputLocations" Condition="'$(Configuration)' == 'Release'" />
     <CallTarget Targets="BuildPlaintextManual" Condition="'$(Configuration)' == 'Release'" />
     <CallTarget Targets="BuildHtmlManual" Condition="'$(Configuration)' == 'Release'" />
     <CallTarget Targets="CreateBinaryZips" Condition="'$(Configuration)' == 'Release'" />
     <CallTarget Targets="CreateNugetPackages" Condition="'$(Configuration)' == 'Release'" />
-    <CallTarget Targets="CopyDocumentation" Condition="'$(Configuration)' == 'Release'" />
+    <CallTarget Targets="BuildApiDocumentation" Condition="'$(Configuration)' == 'Release'" />
+    <CallTarget Targets="BuildDocumentationWebsite" Condition="'$(Configuration)' == 'Release'" />
+    <CallTarget Targets="AssembleAllDocumentation" Condition="'$(Configuration)' == 'Release'" />
   </Target>
   <ItemGroup>
     <ProjectReference Include="..\..\CSF.Zpt\CSF.Zpt.csproj">

@@ -45,62 +45,6 @@
     <ConsolePause>false</ConsolePause>
   </PropertyGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
-  <UsingTask TaskName="FixDocTag" AssemblyFile="bin\Release\CSF.Zpt.DeploymentTasks.dll" />
-  <UsingTask TaskName="ReadVersionNumber" AssemblyFile="..\CSF.Zpt.DeploymentTasks\bin\$(Configuration)\CSF.Zpt.DeploymentTasks.dll" />
-  <Target Name="BuildApiDocumentation">
-    <ReadVersionNumber VersionFile="..\..\version.ini">
-      <Output TaskParameter="FullVersionNumber" ItemName="FullVersion" />
-      <Output TaskParameter="SemanticVersionNumber" ItemName="SemanticVersion" />
-      <Output TaskParameter="BuildNumber" ItemName="BuildNumber" />
-      <Output TaskParameter="InformationalVersion" ItemName="InformationalVersion" />
-    </ReadVersionNumber>
-    <RemoveDir Directories="$(DoxygenOutput)" />
-    <MakeDir Directories="$(DoxygenOutput)" />
-    <Exec Command="( cat $(DoxygenConfig) ; echo 'PROJECT_NUMBER=v@(SemanticVersion)' ) | doxygen -" Condition="'$(OS)' == 'Unix'" />
-    <Exec Command="( type $(DoxygenConfig) &amp; echo PROJECT_NUMBER=v@(SemanticVersion) ) | doxygen.exe -" Condition="'$(OS)' != 'Unix'" />
-    <Exec Command="pdflatex $(LatexOutput)" WorkingDirectory="$(LatexPath)" />
-    <Copy SourceFiles="$(LatexPath)\$(PdfOutput)" DestinationFiles="$(DoxygenOutput)\$(PdfFilename)" />
-  </Target>
-  <Target Name="BuildDocumentationWebsite">
-    <ReadVersionNumber VersionFile="..\..\version.ini">
-      <Output TaskParameter="FullVersionNumber" ItemName="FullVersion" />
-      <Output TaskParameter="SemanticVersionNumber" ItemName="SemanticVersion" />
-      <Output TaskParameter="BuildNumber" ItemName="BuildNumber" />
-      <Output TaskParameter="InformationalVersion" ItemName="InformationalVersion" />
-    </ReadVersionNumber>
-    <RemoveDir Directories="$(PreBuiltWebsitePath);$(BuiltWebsitePath)" />
-    <MakeDir Directories="$(PreBuiltWebsitePath);$(BuiltWebsitePath)" />
-    <ItemGroup>
-      <WebsiteSourceFiles Include="$(WebsiteSource)\**\*.*" />
-    </ItemGroup>
-    <Copy SourceFiles="@(WebsiteSourceFiles)" DestinationFiles="@(WebsiteSourceFiles-&gt;'$(PreBuiltWebsitePath)\%(RecursiveDir)%(Filename)%(Extension)')" />
-    <!-- <Copy SourceFiles="$(ZptBuilderHtmlDocs)" DestinationFiles="$(PreBuiltWebsitePath)\Shared\cli-docs.html" /> -->
-    <ItemGroup>
-      <WebsiteSupportFiles Include="$(PreBuiltWebsitePath)\**\*.css" />
-      <WebsiteSupportFiles Include="$(PreBuiltWebsitePath)\**\*.js" />
-    </ItemGroup>
-    <FixDocTag InputFile="$(PreBuiltWebsitePath)\Shared\cli-docs.html" MacroName="content" />
-    <Exec Command="$(ZptBuilderPath) &quot;$(PreBuiltWebsitePath)&quot; -p &quot;*.html&quot; -o &quot;$(BuiltWebsitePath)&quot; -i &quot;$(IgnoredDir)&quot; --keyword-options &quot;baseUrl=$(WebsiteUrlRoot);buildDate=$(BuildTimestamp);version=@(SemanticVersion);releaseType=@(InformationalVersion);copyrightYear=$(CopyrightYear)&quot;" />
-    <Copy SourceFiles="@(WebsiteSupportFiles)" DestinationFiles="@(WebsiteSupportFiles-&gt;'$(BuiltWebsitePath)\%(RecursiveDir)%(Filename)%(Extension)')" />
-  </Target>
-  <Target Name="AssembleAllDocumentation">
-    <RemoveDir Directories="$(AssembledOutputPath)" />
-    <MakeDir Directories="$(AssembledWebsitePath)" />
-    <ItemGroup>
-      <WebsiteFiles Include="$(BuiltWebsitePath)\**\*.*" />
-    </ItemGroup>
-    <ItemGroup>
-      <DoxygenOutputFiles Include="$(AssembledApiDocsPath)\**\*.*" />
-    </ItemGroup>
-    <Copy SourceFiles="@(WebsiteFiles)" DestinationFiles="@(WebsiteFiles-&gt;'$(AssembledWebsitePath)\%(RecursiveDir)%(Filename)%(Extension)')" />
-    <Copy SourceFiles="@(DoxygenOutputFiles)" DestinationFiles="@(DoxygenOutputFiles-&gt;'$(ApiDocsOutputPath)\%(RecursiveDir)%(Filename)%(Extension)')" />
-    <Copy SourceFiles="$(DoxygenOutput)\$(PdfFilename)" DestinationFolder="$(AssembledOutputPath)" />
-  </Target>
-  <Target Name="AfterBuild">
-    <CallTarget Targets="BuildApiDocumentation" Condition="'$(Configuration)' == 'Release'" />
-    <CallTarget Targets="BuildDocumentationWebsite" Condition="'$(Configuration)' == 'Release'" />
-    <CallTarget Targets="AssembleAllDocumentation" Condition="'$(Configuration)' == 'Release'" />
-  </Target>
   <ItemGroup>
     <None Include="Website\advantages-of-zpt-views.html" />
     <None Include="Website\asp-net-mvc-view-engine.html" />
@@ -163,10 +107,6 @@
     <ProjectReference Include="..\..\CSF.Zpt.Cli\CSF.Zpt.Cli.csproj">
       <Project>{4DD64666-DBEF-4AD5-BDB0-3EB3C70A6E83}</Project>
       <Name>CSF.Zpt.Cli</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\CSF.Zpt.DeploymentTasks\CSF.Zpt.DeploymentTasks.csproj">
-      <Project>{3E1DAACE-519B-4C6C-80E3-3F06A1A33C66}</Project>
-      <Name>CSF.Zpt.DeploymentTasks</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

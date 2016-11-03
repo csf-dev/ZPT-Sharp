@@ -14,11 +14,8 @@
     <TasksConfig Condition="'$(Configuration)' == 'Release'">Release</TasksConfig>
     <TasksConfig Condition="'$(Configuration)' == 'Deploy'">Release</TasksConfig>
     <TasksPath>bin\$(TasksConfig)\CSF.Zpt.DeploymentTasks.dll</TasksPath>
-    
     <DeploymentOutputPath>$(PathToSolutionRoot)\Deployment\Output</DeploymentOutputPath>
-    <DocumentationProjectBuildPath>$(PathToSolutionRoot)\Deployment\CSF.Zpt.Documentation\bin\Release</DocumentationProjectBuildPath>
-    
-    <HtmlManPageOutput>$(ManPageOutputDir)\ZptBuilder.html</HtmlManPageOutput>
+    <TemporaryBuildPath>$(PathToSolutionRoot)\Deployment\obj</TemporaryBuildPath>
     <PlaintextManPageColumns>80</PlaintextManPageColumns>
     <HtmlManPageColumns>100</HtmlManPageColumns>
 
@@ -74,6 +71,16 @@
         ************************************************************************
   -->
   <UsingTask TaskName="CreateZipArchive" AssemblyFile="$(TasksPath)" />
+  
+  <!--  ************************************************************************
+        ** FixDocTag
+  
+        This task manipulates an HTML document, substituting some elements with
+        a METAL macro open and close element.
+        ************************************************************************
+  -->
+  <UsingTask TaskName="FixDocTag" AssemblyFile="$(TasksPath)" />
+
 
   <!--  ************************************************************************
         ** StampAssemblyInfo
@@ -165,8 +172,16 @@
         ************************************************************************
   -->
   <Target Name="PrepareDeploymentOutputLocations">
+    <RemoveDir Directories="$(DeploymentOutputPath)" />
     <MakeDir Directories="$(DeploymentOutputPath)" />
+    <MakeDir Directories="$(DeploymentOutputPath)\Documentation website" />
     <MakeDir Directories="$(PathToSolutionRoot)\CSF.Zpt.Cli\bin\Release\Doc" />
+    <RemoveDir Directories="$(TemporaryBuildPath)" />
+    <MakeDir Directories="$(TemporaryBuildPath)" />
+    <MakeDir Directories="$(TemporaryBuildPath)\Doxygen" />
+    <MakeDir Directories="$(TemporaryBuildPath)\Website" />
+    <MakeDir Directories="$(TemporaryBuildPath)\Website\Pass1" />
+    <MakeDir Directories="$(TemporaryBuildPath)\Website\Pass2" />
   </Target>
   
   <!--  ************************************************************************
@@ -282,22 +297,6 @@
     <CreateZipArchive OutputFilename="$(DeploymentOutputPath)\CSF.Zpt-complete.zip"
                       Files="@(ZptSharpCompleteZipFiles)" />
   </Target>
-
-  <!--  ************************************************************************
-        ** CopyDocumentation
-  
-        This target copies all of the documentation files to the output location.
-        ************************************************************************
-  -->
-  <Target Name="CopyDocumentation">
-    <Copy SourceFiles="$(DocumentationProjectBuildPath)\ZPT-Sharp API documentation.pdf"
-          DestinationFolder="$(DeploymentOutputPath)" />
-    <ItemGroup>
-      <DocWebsiteFiles Include="$(DocumentationProjectBuildPath)\Website\**\*.*" />
-    </ItemGroup>
-    <Copy SourceFiles="@(DocWebsiteFiles)"
-          DestinationFiles="@(DocWebsiteFiles-&gt;'$(DeploymentOutputPath)\Documentation website\%(RecursiveDir)%(Filename)%(Extension)')" />
-  </Target>
   
   <!--  ************************************************************************
         ** BuildPlaintextManual
@@ -321,4 +320,82 @@
     <ExecWithIgnoredExitCodes Command="man2html $(PathToSolutionRoot)\CSF.Zpt.Cli\ZptBuilder.1 | tidy -i -w $(HtmlManPageColumns) &gt; $(PathToSolutionRoot)\CSF.Zpt.Cli\bin\Release\Doc\ZptBuilder.html" IgnoredExitCodes="1" />
   </Target>
 
+  <!--  ************************************************************************
+        ** BuildApiDocumentation
+  
+        This target builds doxygen-generated API documentation and outputs to
+        appropriate files/directories.
+        ************************************************************************
+  -->
+  <Target Name="BuildApiDocumentation">
+    <ReadVersionNumber VersionFile="$(VersionIniPath)">
+      <Output TaskParameter="FullVersionNumber" ItemName="FullVersion" />
+      <Output TaskParameter="SemanticVersionNumber" ItemName="SemanticVersion" />
+      <Output TaskParameter="BuildNumber" ItemName="BuildNumber" />
+      <Output TaskParameter="InformationalVersion" ItemName="InformationalVersion" />
+    </ReadVersionNumber>
+    <MakeDir Directories="$(TemporaryBuildPath)\Doxygen" />
+    <Exec Command="( cat Doxygen.cfg ; echo 'PROJECT_NUMBER=v@(SemanticVersion)' ) | doxygen -"
+          Condition="'$(OS)' == 'Unix'"
+          WorkingDirectory="$(PathToSolutionRoot)\Deployment\CSF.Zpt.Documentation" />
+    <Exec Command="( type $(PathToSolutionRoot)\Deployment\CSF.Zpt.Documentation\Doxygen.cfg &amp; echo PROJECT_NUMBER=v@(SemanticVersion) ) | doxygen.exe -"
+          Condition="'$(OS)' != 'Unix'"
+          WorkingDirectory="$(PathToSolutionRoot)\Deployment\CSF.Zpt.Documentation" />
+    <Exec Command="pdflatex refman.tex"
+          WorkingDirectory="$(TemporaryBuildPath)\Doxygen\latex" />
+    <Copy SourceFiles="$(TemporaryBuildPath)\Doxygen\latex\refman.pdf"
+          DestinationFiles="$(TemporaryBuildPath)\Doxygen\ZPT-Sharp API documentation.pdf" />
+  </Target>
+
+  <!--  ************************************************************************
+        ** BuildDocumentationWebsite
+  
+        This target builds the documentation website from the source files.
+        ************************************************************************
+  -->
+  <Target Name="BuildDocumentationWebsite">
+    <ReadVersionNumber VersionFile="$(VersionIniPath)">
+      <Output TaskParameter="FullVersionNumber" ItemName="FullVersion" />
+      <Output TaskParameter="SemanticVersionNumber" ItemName="SemanticVersion" />
+      <Output TaskParameter="BuildNumber" ItemName="BuildNumber" />
+      <Output TaskParameter="InformationalVersion" ItemName="InformationalVersion" />
+    </ReadVersionNumber>
+    <ItemGroup>
+      <WebsiteSourceFiles Include="$(PathToSolutionRoot)\Deployment\CSF.Zpt.Documentation\Website\**\*.*" />
+    </ItemGroup>
+    <Copy SourceFiles="@(WebsiteSourceFiles)" DestinationFiles="@(WebsiteSourceFiles-&gt;'$(TemporaryBuildPath)\Website\Pass1\%(RecursiveDir)%(Filename)%(Extension)')" />
+    <Copy SourceFiles="$(PathToSolutionRoot)\CSF.Zpt.Cli\bin\Release\Doc\ZptBuilder.html" DestinationFiles="$(TemporaryBuildPath)\Website\Pass1\Shared\cli-docs.html" />
+    <ItemGroup>
+      <WebsiteSupportFiles Include="$(TemporaryBuildPath)\Website\Pass1\**\*.css" />
+      <WebsiteSupportFiles Include="$(TemporaryBuildPath)\Website\Pass1\**\*.js" />
+      <BuildTimestamp Include="$([System.DateTime]::Now.ToString(yyyy-MM-dd))" />
+      <CopyrightYear Include="$([System.DateTime]::Now.ToString(yyyy))" />
+    </ItemGroup>
+    <FixDocTag InputFile="$(TemporaryBuildPath)\Website\Pass1\Shared\cli-docs.html" MacroName="content" />
+    <Exec Command="$(PathToSolutionRoot)\CSF.Zpt.Cli\bin\Release\ZptBuilder.exe &quot;$(TemporaryBuildPath)\Website\Pass1&quot; -p &quot;*.html&quot; -o &quot;$(TemporaryBuildPath)\Website\Pass2&quot; -i &quot;$(TemporaryBuildPath)\Website\Pass1\Shared&quot; --keyword-options &quot;baseUrl=$(WebsiteUrlRoot);buildDate=@(BuildTimestamp);version=@(SemanticVersion);releaseType=@(InformationalVersion);copyrightYear=@(CopyrightYear)&quot;" />
+    <Copy SourceFiles="@(WebsiteSupportFiles)" DestinationFiles="@(WebsiteSupportFiles-&gt;'$(TemporaryBuildPath)\Website\Pass2\%(RecursiveDir)%(Filename)%(Extension)')" />
+  </Target>
+
+  <!--  ************************************************************************
+        ** AssembleAllDocumentation
+  
+        This target assembles all of the documentation content into the final
+        output location.
+        ************************************************************************
+  -->
+  <Target Name="AssembleAllDocumentation">
+    <ItemGroup>
+      <WebsiteFiles Include="$(TemporaryBuildPath)\Website\Pass2\**\*.*" />
+    </ItemGroup>
+    <ItemGroup>
+      <DoxygenOutputFiles Include="$(TemporaryBuildPath)\Doxygen\html\**\*.*" />
+    </ItemGroup>
+    <Copy SourceFiles="@(WebsiteFiles)"
+          DestinationFiles="@(WebsiteFiles-&gt;'$(DeploymentOutputPath)\Documentation website\%(RecursiveDir)%(Filename)%(Extension)')" />
+    <Copy SourceFiles="@(DoxygenOutputFiles)"
+          DestinationFiles="@(DoxygenOutputFiles-&gt;'$(DeploymentOutputPath)\Documentation website\api\%(RecursiveDir)%(Filename)%(Extension)')" />
+    <Copy SourceFiles="$(TemporaryBuildPath)\Doxygen\ZPT-Sharp API documentation.pdf"
+          DestinationFolder="$(DeploymentOutputPath)" />
+  </Target>
+  
 </Project>
