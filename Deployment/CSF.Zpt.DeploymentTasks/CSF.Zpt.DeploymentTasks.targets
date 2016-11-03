@@ -3,7 +3,7 @@
   
   <!-- PropertyGroup sets up a reference to the current project, so that the build is ordered correctly -->
   <ItemGroup>
-    <ProjectReference Include="CSF.Zpt.DeploymentTasks.csproj">
+    <ProjectReference Include="$(PathToSolutionRoot)\Deployment\CSF.Zpt.DeploymentTasks\CSF.Zpt.DeploymentTasks.csproj">
       <Project>{3E1DAACE-519B-4C6C-80E3-3F06A1A33C66}</Project>
       <Name>CSF.Zpt.DeploymentTasks</Name>
     </ProjectReference>
