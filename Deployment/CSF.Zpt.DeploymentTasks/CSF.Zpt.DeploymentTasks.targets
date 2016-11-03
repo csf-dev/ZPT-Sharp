@@ -156,9 +156,9 @@
         This target builds a single Nuget package from a Nuspec file.
         ************************************************************************
   -->
-  <Target Name="CreateNugetPackage" Outputs="%(NuspecFile)">
-    <Exec Command="nuget pack @(NuspecFile) -Prop Configuration=Release -OutputDirectory $(OutputPath) -version @(SemanticVersion)" Condition="'$(OS)' == 'Unix'" />
-    <Exec Command="&quot;$(MSBuildProgramFiles32)\NuGet\nuget.exe&quot; pack @(NuspecFile) -Prop Configuration=Release -OutputDirectory $(OutputPath) -version @(SemanticVersion)" Condition="'$(OS)' != 'Unix'" />
+  <Target Name="CreateNugetPackage" Outputs="%(NuspecFile.Identity)">
+    <Exec Command="nuget pack %(NuspecFile.Identity) -Prop Configuration=Release -OutputDirectory $(OutputPath) -version @(SemanticVersion)" Condition="'$(OS)' == 'Unix'" />
+    <Exec Command="&quot;$(MSBuildProgramFiles32)\NuGet\nuget.exe&quot; pack %(NuspecFile.Identity) -Prop Configuration=Release -OutputDirectory $(OutputPath) -version @(SemanticVersion)" Condition="'$(OS)' != 'Unix'" />
   </Target>
 
 </Project>
