@@ -149,12 +149,5 @@
     </ItemGroup>
     <RequireFilesOnPath Files="@(DetectedFiles)" />
   </Target>
-  
-  <!--  ************************************************************************
-        ** CreateNugetPackage
-  
-        This target builds a single Nuget package from a Nuspec file.
-        ************************************************************************
-  -->
 
 </Project>
