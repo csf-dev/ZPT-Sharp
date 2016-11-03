@@ -124,6 +124,7 @@ Once you have verified that all of the required dependencies are present, and yo
 Once any required configuration of your `PATH` environment variable (to make the dependencies available) is complete, the procedure is similar on either GNU/Linux or MS Windows:
 
 ```
+nuget restore
 msbuild /p:Configuration=Release
 ```
 
