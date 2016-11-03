@@ -6,6 +6,7 @@
     <ProjectGuid>{16E957BB-347C-4EE1-815F-19AC296FB9E0}</ProjectGuid>
     <OutputType>Library</OutputType>
     <RootNamespace>CSF.Zpt</RootNamespace>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <AssemblyName>CSF.Zpt</AssemblyName>
     <ProjectTitle>CSF.Zpt</ProjectTitle>
     <ProjectDescription>Core ZPT-Sharp logic</ProjectDescription>

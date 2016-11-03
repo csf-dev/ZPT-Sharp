@@ -6,6 +6,7 @@
     <ProjectGuid>{63F5FF1D-DA36-4BB4-AA99-24AA78844109}</ProjectGuid>
     <OutputType>Library</OutputType>
     <RootNamespace>CSF.Zpt.ExpressionEvaluators</RootNamespace>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <AssemblyName>CSF.Zpt.ExpressionEvaluators.StringExpressions</AssemblyName>
     <ProjectTitle>CSF.Zpt.ExpressionEvaluators.StringExpressions</ProjectTitle>
     <ProjectDescription>Implementation of IExpressionEvaluator for 'string' expressions</ProjectDescription>

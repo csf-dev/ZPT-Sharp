@@ -6,6 +6,7 @@
     <ProjectGuid>{9B4DF12E-6E04-4C25-AD16-58434C18DE8A}</ProjectGuid>
     <OutputType>Library</OutputType>
     <RootNamespace>CSF.Zpt.MVC</RootNamespace>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <AssemblyName>CSF.Zpt.MVC</AssemblyName>
     <ProjectTitle>CSF.Zpt.MVC</ProjectTitle>
     <ProjectDescription>ASP.NET MVC5 integration for ZPT-Sharp</ProjectDescription>

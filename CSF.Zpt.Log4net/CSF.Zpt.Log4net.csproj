@@ -6,6 +6,7 @@
     <ProjectGuid>{81044439-06CF-44E2-BBF2-3800F1DEB5B1}</ProjectGuid>
     <OutputType>Library</OutputType>
     <RootNamespace>CSF.Zpt</RootNamespace>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <AssemblyName>CSF.Zpt.Log4net</AssemblyName>
     <ProjectTitle>CSF.Zpt.Log4Net</ProjectTitle>
     <ProjectDescription>Log4net Trace Listener</ProjectDescription>

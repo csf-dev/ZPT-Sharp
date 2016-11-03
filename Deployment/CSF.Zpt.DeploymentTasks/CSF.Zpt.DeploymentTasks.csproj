@@ -6,6 +6,7 @@
     <ProjectGuid>{3E1DAACE-519B-4C6C-80E3-3F06A1A33C66}</ProjectGuid>
     <OutputType>Library</OutputType>
     <RootNamespace>CSF.Zpt.DeploymentTasks</RootNamespace>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <AssemblyName>CSF.Zpt.DeploymentTasks</AssemblyName>
   </PropertyGroup>
   <Import Project="..\..\Common\SolutionProperties.targets" />

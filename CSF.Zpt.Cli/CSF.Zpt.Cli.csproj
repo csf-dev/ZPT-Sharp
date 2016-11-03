@@ -6,6 +6,7 @@
     <ProjectGuid>{4DD64666-DBEF-4AD5-BDB0-3EB3C70A6E83}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <RootNamespace>CSF.Zpt.Cli</RootNamespace>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <AssemblyName>ZptBuilder</AssemblyName>
     <ManPageSource>ZptBuilder.1</ManPageSource>
     <ManPageOutputDir>bin\Release\Doc</ManPageOutputDir>

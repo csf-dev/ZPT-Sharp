@@ -6,6 +6,7 @@
     <ProjectGuid>{842160E4-BDE5-4FA0-ADE5-07554090AA27}</ProjectGuid>
     <OutputType>Library</OutputType>
     <RootNamespace>CSF.Zpt.DocumentProviders</RootNamespace>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <AssemblyName>CSF.Zpt.DocumentProviders.XmlLinq</AssemblyName>
     <ProjectTitle>CSF.Zpt.DocumentProviders.XmlLinq</ProjectTitle>
     <ProjectDescription>Implementation of IZptDocumentProvider for XML documents, using System.Xml.Linq.XDocument</ProjectDescription>

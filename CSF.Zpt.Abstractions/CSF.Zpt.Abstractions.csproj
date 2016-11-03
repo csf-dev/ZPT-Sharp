@@ -6,6 +6,7 @@
     <ProjectGuid>{8207CD9B-F1C1-4D75-B250-ACDFFBDCB071}</ProjectGuid>
     <OutputType>Library</OutputType>
     <RootNamespace>CSF.Zpt</RootNamespace>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <AssemblyName>CSF.Zpt.Abstractions</AssemblyName>
     <ProjectTitle>CSF.Zpt.Abstractions</ProjectTitle>
     <ProjectDescription>Abstract types &amp; interfaces for ZPT-Sharp.</ProjectDescription>

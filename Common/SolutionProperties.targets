@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <SolutionCompany>CSF Software Limited</SolutionCompany>
     <SolutionCopyright>CSF Software Limited et al</SolutionCopyright>
     <SolutionName>ZPT-Sharp: Zope Page Templates for .NET</SolutionName>

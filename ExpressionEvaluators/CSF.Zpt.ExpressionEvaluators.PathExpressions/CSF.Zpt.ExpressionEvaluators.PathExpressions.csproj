@@ -6,6 +6,7 @@
     <ProjectGuid>{B6A27567-61F7-43F7-B201-FFC7A449BDBB}</ProjectGuid>
     <OutputType>Library</OutputType>
     <RootNamespace>CSF.Zpt.ExpressionEvaluators</RootNamespace>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <AssemblyName>CSF.Zpt.ExpressionEvaluators.PathExpressions</AssemblyName>
     <ProjectTitle>CSF.Zpt.ExpressionEvaluators.PathExpressions</ProjectTitle>
     <ProjectDescription>Implementation of IExpressionEvaluator for 'path' and 'local' expressions</ProjectDescription>
