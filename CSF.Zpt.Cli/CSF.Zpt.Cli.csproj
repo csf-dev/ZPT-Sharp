@@ -8,12 +8,6 @@
     <RootNamespace>CSF.Zpt.Cli</RootNamespace>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <AssemblyName>ZptBuilder</AssemblyName>
-    <ManPageSource>ZptBuilder.1</ManPageSource>
-    <ManPageOutputDir>bin\Release\Doc</ManPageOutputDir>
-    <ManPageOutput>$(ManPageOutputDir)\ZptBuilder.MANUAL.txt</ManPageOutput>
-    <HtmlManPageOutput>$(ManPageOutputDir)\ZptBuilder.html</HtmlManPageOutput>
-    <ManPageColumns>80</ManPageColumns>
-    <HtmlManPageColumns>100</HtmlManPageColumns>
     <ProjectTitle>ZptBuilder</ProjectTitle>
     <ProjectDescription>Command-line utility for rendering ZPT documents</ProjectDescription>
     <PathToSolutionRoot>..</PathToSolutionRoot>
@@ -33,16 +27,6 @@
     <BuildToolsDirectory>Debug</BuildToolsDirectory>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <Optimize>true</Optimize>
-    <OutputPath>bin\Release</OutputPath>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <Externalconsole>true</Externalconsole>
-    <DefineConstants>TRACE;</DefineConstants>
-    <CheckForOverflowUnderflow>true</CheckForOverflowUnderflow>
-    <BuildToolsDirectory>Release</BuildToolsDirectory>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Deploy|AnyCPU' ">
     <Optimize>true</Optimize>
     <OutputPath>bin\Release</OutputPath>
     <ErrorReport>prompt</ErrorReport>
@@ -84,12 +68,6 @@
     <Compile Include="Exceptions\InvalidOutputEncodingException.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
-  <Target Name="BuildPlaintextManual">
-    <Exec Command="MANWIDTH=&quot;$(ManPageColumns)&quot; man --nh -l $(ManPageSource) &gt; $(ManPageOutput)" />
-  </Target>
-  <Target Name="BuildHtmlManual">
-    <ExecWithIgnoredExitCodes Command="man2html $(ManPageSource) | tidy -i -w $(HtmlManPageColumns) &gt; $(HtmlManPageOutput)" IgnoredExitCodes="1" />
-  </Target>
   <ItemGroup>
     <ProjectReference Include="..\CSF.Zpt\CSF.Zpt.csproj">
       <Project>{16E957BB-347C-4EE1-815F-19AC296FB9E0}</Project>
@@ -159,9 +137,6 @@
   </Target>
   <Target Name="AfterBuild">
     <CallTarget Targets="RestoreStubAssemblyInfo" />
-    <MakeDir Directories="$(ManPageOutputDir)" Condition="'$(Configuration)' == 'Deploy'" />
-    <CallTarget Targets="BuildPlaintextManual" Condition="'$(Configuration)' == 'Deploy'" />
-    <CallTarget Targets="BuildHtmlManual" Condition="'$(Configuration)' == 'Deploy'" />
   </Target>
   <ItemGroup>
     <None Include="packages.config" />

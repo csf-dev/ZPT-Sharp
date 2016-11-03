@@ -14,8 +14,14 @@
     <TasksConfig Condition="'$(Configuration)' == 'Release'">Release</TasksConfig>
     <TasksConfig Condition="'$(Configuration)' == 'Deploy'">Release</TasksConfig>
     <TasksPath>bin\$(TasksConfig)\CSF.Zpt.DeploymentTasks.dll</TasksPath>
+    
     <DeploymentOutputPath>$(PathToSolutionRoot)\Deployment\Output</DeploymentOutputPath>
     <DocumentationProjectBuildPath>$(PathToSolutionRoot)\Deployment\CSF.Zpt.Documentation\bin\Release</DocumentationProjectBuildPath>
+    
+    <HtmlManPageOutput>$(ManPageOutputDir)\ZptBuilder.html</HtmlManPageOutput>
+    <PlaintextManPageColumns>80</PlaintextManPageColumns>
+    <HtmlManPageColumns>100</HtmlManPageColumns>
+
   </PropertyGroup>
   <Import Project="..\..\packages\MSBuild.Extension.Pack.1.8.0\build\net40\MSBuild.Extension.Pack.targets" />
   
@@ -158,8 +164,9 @@
         This target creates/prepares the output directory for deployment.
         ************************************************************************
   -->
-  <Target Name="PrepareDeploymentOutputDirectory">
+  <Target Name="PrepareDeploymentOutputLocations">
     <MakeDir Directories="$(DeploymentOutputPath)" />
+    <MakeDir Directories="$(PathToSolutionRoot)\CSF.Zpt.Cli\bin\Release\Doc" />
   </Target>
   
   <!--  ************************************************************************
@@ -292,4 +299,26 @@
           DestinationFiles="@(DocWebsiteFiles-&gt;'$(DeploymentOutputPath)\Documentation website\%(RecursiveDir)%(Filename)%(Extension)')" />
   </Target>
   
+  <!--  ************************************************************************
+        ** BuildPlaintextManual
+  
+        This target builds the plain-text manual for the ZptBuilder.exe application
+        from the manpage source file.
+        ************************************************************************
+  -->
+  <Target Name="BuildPlaintextManual">
+    <Exec Command="MANWIDTH=&quot;$(PlaintextManPageColumns)&quot; man --nh -l $(PathToSolutionRoot)\CSF.Zpt.Cli\ZptBuilder.1 &gt; $(PathToSolutionRoot)\CSF.Zpt.Cli\bin\Release\Doc\ZptBuilder.MANUAL.txt" />
+  </Target>
+
+  <!--  ************************************************************************
+        ** BuildHtmlManual
+  
+        This target builds the HTML manual for the ZptBuilder.exe application
+        from the manpage source file.
+        ************************************************************************
+  -->
+  <Target Name="BuildHtmlManual">
+    <ExecWithIgnoredExitCodes Command="man2html $(PathToSolutionRoot)\CSF.Zpt.Cli\ZptBuilder.1 | tidy -i -w $(HtmlManPageColumns) &gt; $(PathToSolutionRoot)\CSF.Zpt.Cli\bin\Release\Doc\ZptBuilder.html" IgnoredExitCodes="1" />
+  </Target>
+
 </Project>
