@@ -137,6 +137,10 @@
     </ItemGroup>
     <CallTarget Targets="CreateNugetPackage" />
   </Target>
+  <Target Name="CreateNugetPackage" Outputs="%(NuspecFile.Identity)">
+    <Exec Command="nuget pack %(NuspecFile.Identity) -Prop Configuration=Release -OutputDirectory $(OutputPath) -version @(SemanticVersion)" Condition="'$(OS)' == 'Unix'" />
+    <Exec Command="&quot;$(MSBuildProgramFiles32)\NuGet\nuget.exe&quot; pack %(NuspecFile.Identity) -Prop Configuration=Release -OutputDirectory $(OutputPath) -version @(SemanticVersion)" Condition="'$(OS)' != 'Unix'" />
+  </Target>
   <Target Name="CopyDocumentation" Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <Copy SourceFiles="$(DocWebsiteOutputPath)\ZPT-Sharp API documentation.pdf" DestinationFolder="$(OutputPath)" />
     <ItemGroup>
