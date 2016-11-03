@@ -12,8 +12,10 @@
     <AssemblyName>CSF.Zpt.DocumentProviders.HtmlHAP</AssemblyName>
     <ProjectTitle>CSF.Zpt.DocumentProviders.HtmlHAP</ProjectTitle>
     <ProjectDescription>Implementation of IZptDocumentProvider for HTML documents, using the HtmlAgilityPack</ProjectDescription>
+    <PathToSolutionRoot>..\..</PathToSolutionRoot>
   </PropertyGroup>
-  <Import Project="..\..\Common\SolutionProperties.targets" />
+  <Import Project="$(PathToSolutionRoot)\Common\SolutionProperties.targets" />
+  <Import Project="$(PathToSolutionRoot)\Deployment\CSF.Zpt.DeploymentTasks\CSF.Zpt.DeploymentTasks.targets" />
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
@@ -60,36 +62,11 @@
     <Reference Include="System" />
     <Reference Include="System.Xml" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\Deployment\CSF.Zpt.DeploymentTasks\CSF.Zpt.DeploymentTasks.csproj">
-      <Project>{3E1DAACE-519B-4C6C-80E3-3F06A1A33C66}</Project>
-      <Name>CSF.Zpt.DeploymentTasks</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <UsingTask TaskName="ReadVersionNumber" AssemblyFile="..\..\Deployment\CSF.Zpt.DeploymentTasks\bin\$(Configuration)\CSF.Zpt.DeploymentTasks.dll" />
-  <Target Name="BeforeBuild">
-    <ItemGroup>
-      <StubAssemblyInfo Include="..\..\Common\AssemblyInfo.stub.cs" />
-      <DestinationAssemblyInfo Include="AssemblyInfo.cs" />
-    </ItemGroup>
-    <Copy SourceFiles="@(StubAssemblyInfo)" DestinationFiles="@(DestinationAssemblyInfo)" />
-    <ReadVersionNumber VersionFile="..\..\version.ini">
-      <Output TaskParameter="FullVersionNumber" ItemName="FullVersion" />
-      <Output TaskParameter="SemanticVersionNumber" ItemName="SemanticVersion" />
-      <Output TaskParameter="BuildNumber" ItemName="BuildNumber" />
-      <Output TaskParameter="InformationalVersion" ItemName="InformationalVersion" />
-    </ReadVersionNumber>
-    <ItemGroup>
-      <AssemblyInfoFiles Include="AssemblyInfo.cs" />
-    </ItemGroup>
-    <MSBuild.ExtensionPack.Framework.AssemblyInfo AssemblyInfoFiles="@(AssemblyInfoFiles)" AssemblyVersion="@(SemanticVersion).0" AssemblyFileVersion="@(FullVersion)" AssemblyCompany="$(SolutionCompany)" AssemblyCopyright="$(SolutionCopyright)" AssemblyProduct="$(SolutionName)" AssemblyConfiguration="$(ProjectConfiguration)" AssemblyTitle="$(ProjectTitle)" AssemblyDescription="$(ProjectDescription)" />
+  <Target Name="GetVersionInfo">
+    <CallTarget Targets="StampAssemblyInfo" />
   </Target>
   <Target Name="AfterBuild">
-    <ItemGroup>
-      <StubAssemblyInfo Include="..\..\Common\AssemblyInfo.stub.cs" />
-      <DestinationAssemblyInfo Include="AssemblyInfo.cs" />
-    </ItemGroup>
-    <Copy SourceFiles="@(StubAssemblyInfo)" DestinationFiles="@(DestinationAssemblyInfo)" />
+    <CallTarget Targets="RestoreStubAssemblyInfo" />
   </Target>
   <ItemGroup>
     <None Include="packages.config" />

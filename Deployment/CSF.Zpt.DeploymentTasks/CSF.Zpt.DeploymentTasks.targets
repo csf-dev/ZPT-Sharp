@@ -1,5 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  
+  <!-- PropertyGroup sets up a reference to the current project, so that the build is ordered correctly -->
+  <ItemGroup>
+    <ProjectReference Include="CSF.Zpt.DeploymentTasks.csproj">
+      <Project>{3E1DAACE-519B-4C6C-80E3-3F06A1A33C66}</Project>
+      <Name>CSF.Zpt.DeploymentTasks</Name>
+    </ProjectReference>
+  </ItemGroup>
+  
+  <!-- PropertyGroup sets up the paths to the MSBuild extension pack and this project's own DLL file -->
   <PropertyGroup>
     <MSBuildExtensionPackPath>..\..\packages\MSBuild.Extension.Pack.1.8.0\build\net40\MSBuild.Extension.Pack.targets</MSBuildExtensionPackPath>
     <TasksPath>bin\$(Configuration)\CSF.Zpt.DeploymentTasks.dll</TasksPath>

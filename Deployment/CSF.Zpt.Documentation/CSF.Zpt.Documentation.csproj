@@ -26,8 +26,10 @@
     <ZptBuilderPath>..\..\CSF.Zpt.Cli\bin\Release\ZptBuilder.exe</ZptBuilderPath>
     <BuildTimestamp>$([System.DateTime]::Now.ToString(yyyy-MM-dd))</BuildTimestamp>
     <CopyrightYear>$([System.DateTime]::Now.ToString(yyyy))</CopyrightYear>
+    <PathToSolutionRoot>..\..</PathToSolutionRoot>
   </PropertyGroup>
-  <Import Project="..\..\Common\SolutionProperties.targets" />
+  <Import Project="$(PathToSolutionRoot)\Common\SolutionProperties.targets" />
+  <Import Project="$(PathToSolutionRoot)\Deployment\CSF.Zpt.DeploymentTasks\CSF.Zpt.DeploymentTasks.targets" />
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Nothing|AnyCPU' ">
     <ConsolePause>false</ConsolePause>
     <OutputPath>bin\Nothing</OutputPath>
