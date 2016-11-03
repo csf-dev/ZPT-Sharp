@@ -95,9 +95,5 @@
       <Project>{63F5FF1D-DA36-4BB4-AA99-24AA78844109}</Project>
       <Name>CSF.Zpt.ExpressionEvaluators.StringExpressions</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Deployment\CSF.Zpt.PreBuild\CSF.Zpt.PreBuild.csproj">
-      <Project>{6C025057-9ACC-474E-9092-D6B9059B07EE}</Project>
-      <Name>CSF.Zpt.PreBuild</Name>
-    </ProjectReference>
   </ItemGroup>
 </Project>

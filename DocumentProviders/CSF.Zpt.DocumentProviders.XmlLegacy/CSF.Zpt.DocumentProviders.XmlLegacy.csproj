@@ -8,13 +8,12 @@
     <RootNamespace>CSF.Zpt.DocumentProviders</RootNamespace>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <AssemblyName>CSF.Zpt.DocumentProviders.XmlLegacy</AssemblyName>
-    <SolutionCompany>CSF Software Limited</SolutionCompany>
-    <SolutionCopyright>CSF Software Limited et al</SolutionCopyright>
-    <SolutionName>ZPT-Sharp: Zope Page Templates for .NET</SolutionName>
-    <ProjectConfiguration>$(Configuration)</ProjectConfiguration>
     <ProjectTitle>CSF.Zpt.DocumentProviders.XmlLegacy</ProjectTitle>
     <ProjectDescription>Implementation of IZptDocumentProvider for XML documents, using System.Xml.XmlDocument</ProjectDescription>
+    <PathToSolutionRoot>..\..</PathToSolutionRoot>
   </PropertyGroup>
+  <Import Project="$(PathToSolutionRoot)\Common\SolutionProperties.targets" />
+  <Import Project="$(PathToSolutionRoot)\Deployment\CSF.Zpt.DeploymentTasks\CSF.Zpt.DeploymentTasks.targets" />
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
@@ -49,7 +48,6 @@
     <Compile Include="AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
-  <Import Project="..\..\packages\MSBuild.Extension.Pack.1.8.0\build\net40\MSBuild.Extension.Pack.targets" Condition="Exists('..\..\packages\MSBuild.Extension.Pack.1.8.0\build\net40\MSBuild.Extension.Pack.targets')" />
   <ItemGroup>
     <ProjectReference Include="..\..\CSF.Zpt\CSF.Zpt.csproj">
       <Project>{16E957BB-347C-4EE1-815F-19AC296FB9E0}</Project>
@@ -60,40 +58,11 @@
       <Name>CSF.Zpt.Abstractions</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\Deployment\CSF.Zpt.PreBuild\CSF.Zpt.PreBuild.csproj">
-      <Project>{6C025057-9ACC-474E-9092-D6B9059B07EE}</Project>
-      <Name>CSF.Zpt.PreBuild</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Deployment\CSF.Zpt.DeploymentTasks\CSF.Zpt.DeploymentTasks.csproj">
-      <Project>{3E1DAACE-519B-4C6C-80E3-3F06A1A33C66}</Project>
-      <Name>CSF.Zpt.DeploymentTasks</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <UsingTask TaskName="ReadVersionNumber" AssemblyFile="..\..\Deployment\CSF.Zpt.DeploymentTasks\bin\$(Configuration)\CSF.Zpt.DeploymentTasks.dll" />
-  <Target Name="BeforeBuild">
-    <ItemGroup>
-      <StubAssemblyInfo Include="..\..\Common\AssemblyInfo.stub.cs" />
-      <DestinationAssemblyInfo Include="AssemblyInfo.cs" />
-    </ItemGroup>
-    <Copy SourceFiles="@(StubAssemblyInfo)" DestinationFiles="@(DestinationAssemblyInfo)" />
-    <ReadVersionNumber VersionFile="..\..\version.ini">
-      <Output TaskParameter="FullVersionNumber" ItemName="FullVersion" />
-      <Output TaskParameter="SemanticVersionNumber" ItemName="SemanticVersion" />
-      <Output TaskParameter="BuildNumber" ItemName="BuildNumber" />
-      <Output TaskParameter="InformationalVersion" ItemName="InformationalVersion" />
-    </ReadVersionNumber>
-    <ItemGroup>
-      <AssemblyInfoFiles Include="AssemblyInfo.cs" />
-    </ItemGroup>
-    <MSBuild.ExtensionPack.Framework.AssemblyInfo AssemblyInfoFiles="@(AssemblyInfoFiles)" AssemblyVersion="@(SemanticVersion).0" AssemblyFileVersion="@(FullVersion)" AssemblyCompany="$(SolutionCompany)" AssemblyCopyright="$(SolutionCopyright)" AssemblyProduct="$(SolutionName)" AssemblyConfiguration="$(ProjectConfiguration)" AssemblyTitle="$(ProjectTitle)" AssemblyDescription="$(ProjectDescription)" />
+  <Target Name="GetVersionInfo">
+    <CallTarget Targets="StampAssemblyInfo" />
   </Target>
   <Target Name="AfterBuild">
-    <ItemGroup>
-      <StubAssemblyInfo Include="..\..\Common\AssemblyInfo.stub.cs" />
-      <DestinationAssemblyInfo Include="AssemblyInfo.cs" />
-    </ItemGroup>
-    <Copy SourceFiles="@(StubAssemblyInfo)" DestinationFiles="@(DestinationAssemblyInfo)" />
+    <CallTarget Targets="RestoreStubAssemblyInfo" />
   </Target>
   <ItemGroup>
     <None Include="packages.config" />
