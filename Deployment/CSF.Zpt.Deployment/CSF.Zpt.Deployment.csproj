@@ -131,19 +131,8 @@
     </ReadVersionNumber>
     <!-- ZptBuilder -->
     <ItemGroup>
-      <NuspecFile Remove="*" />
       <NuspecFile Include="$(PathToSolutionRoot)\CSF.Zpt.Cli\CSF.Zpt.Cli.nuspec" />
-    </ItemGroup>
-    <CallTarget Targets="CreateNugetPackage" />
-    <!-- API -->
-    <ItemGroup>
-      <NuspecFile Remove="*" />
       <NuspecFile Include="$(PathToSolutionRoot)\CSF.Zpt.nuspec" />
-    </ItemGroup>
-    <CallTarget Targets="CreateNugetPackage" />
-    <!-- MVC -->
-    <ItemGroup>
-      <NuspecFile Remove="*" />
       <NuspecFile Include="$(PathToSolutionRoot)\CSF.Zpt.MVC\CSF.Zpt.MVC.nuspec" />
     </ItemGroup>
     <CallTarget Targets="CreateNugetPackage" />
