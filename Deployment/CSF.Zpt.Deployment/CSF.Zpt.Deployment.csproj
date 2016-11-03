@@ -129,15 +129,11 @@
       <Output TaskParameter="BuildNumber" ItemName="BuildNumber" />
       <Output TaskParameter="InformationalVersion" ItemName="InformationalVersion" />
     </ReadVersionNumber>
-    <!-- ZptBuilder -->
     <ItemGroup>
       <NuspecFile Include="$(PathToSolutionRoot)\CSF.Zpt.Cli\CSF.Zpt.Cli.nuspec" />
       <NuspecFile Include="$(PathToSolutionRoot)\CSF.Zpt.nuspec" />
       <NuspecFile Include="$(PathToSolutionRoot)\CSF.Zpt.MVC\CSF.Zpt.MVC.nuspec" />
     </ItemGroup>
-    <CallTarget Targets="CreateNugetPackage" />
-  </Target>
-  <Target Name="CreateNugetPackage" Outputs="%(NuspecFile.Identity)">
     <Exec Command="nuget pack %(NuspecFile.Identity) -Prop Configuration=Release -OutputDirectory $(OutputPath) -version @(SemanticVersion)" Condition="'$(OS)' == 'Unix'" />
     <Exec Command="&quot;$(MSBuildProgramFiles32)\NuGet\nuget.exe&quot; pack %(NuspecFile.Identity) -Prop Configuration=Release -OutputDirectory $(OutputPath) -version @(SemanticVersion)" Condition="'$(OS)' != 'Unix'" />
   </Target>
