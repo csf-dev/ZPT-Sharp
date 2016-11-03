@@ -13,7 +13,6 @@
     <HtmlManPageOutput>$(ManPageOutputDir)\ZptBuilder.html</HtmlManPageOutput>
     <ManPageColumns>80</ManPageColumns>
     <HtmlManPageColumns>100</HtmlManPageColumns>
-    <ExecIgnoreExitCodeAssemblyPath>bin\Release\CSF.Zpt.DeploymentTasks.dll</ExecIgnoreExitCodeAssemblyPath>
     <ProjectTitle>ZptBuilder</ProjectTitle>
     <ProjectDescription>Command-line utility for rendering ZPT documents</ProjectDescription>
     <PathToSolutionRoot>..</PathToSolutionRoot>
@@ -84,7 +83,6 @@
     <Compile Include="Exceptions\InvalidOutputEncodingException.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
-  <UsingTask TaskName="ExecWithIgnoredExitCodes" AssemblyFile="bin\Release\CSF.Zpt.DeploymentTasks.dll" />
   <Target Name="BuildPlaintextManual">
     <Exec Command="MANWIDTH=&quot;$(ManPageColumns)&quot; man --nh -l $(ManPageSource) &gt; $(ManPageOutput)" />
   </Target>
@@ -160,6 +158,9 @@
   </Target>
   <Target Name="AfterBuild">
     <CallTarget Targets="RestoreStubAssemblyInfo" />
+    <MakeDir Directories="$(ManPageOutputDir)" Condition="'$(Configuration)' == 'Deploy'" />
+    <CallTarget Targets="BuildPlaintextManual" Condition="'$(Configuration)' == 'Deploy'" />
+    <CallTarget Targets="BuildHtmlManual" Condition="'$(Configuration)' == 'Deploy'" />
   </Target>
   <ItemGroup>
     <None Include="packages.config" />

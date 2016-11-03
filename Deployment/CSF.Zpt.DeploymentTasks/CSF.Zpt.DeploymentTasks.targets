@@ -9,7 +9,7 @@
     </ProjectReference>
   </ItemGroup>
   
-  <!-- PropertyGroup sets up the paths to the MSBuild extension pack and this project's own DLL file -->
+  <!-- Set up the paths to the MSBuild extension pack and this project's own DLL file -->
   <PropertyGroup>
     <TasksPath>bin\$(Configuration)\CSF.Zpt.DeploymentTasks.dll</TasksPath>
   </PropertyGroup>
@@ -45,6 +45,26 @@
   -->
   <UsingTask TaskName="RequireFilesOnPath" AssemblyFile="$(TasksPath)" />
   
+  <!--  ************************************************************************
+        ** ExecWithIgnoredExitCodes
+  
+        This task is just like MSBuild's built-in Exec task, except that it is
+        capable of ignoring certain non-zero exit codes.  This is required in
+        this case because the 'tidy' application will issue warnings (nonzero
+        exit code) about the generated HTML.  But - there's nothing we can do
+        to fix those (it's bad HTML), so we have to ignore those codes.
+        ************************************************************************
+  -->
+  <UsingTask TaskName="ExecWithIgnoredExitCodes" AssemblyFile="$(TasksPath)" />
+
+  <!--  ************************************************************************
+        ** CreateZipArchive
+  
+        This task creates a ZIP archive from a collection of files.
+        ************************************************************************
+  -->
+  <UsingTask TaskName="CreateZipArchive" AssemblyFile="$(TasksPath)" />
+
   <!--  ************************************************************************
         ** StampAssemblyInfo
   
@@ -126,6 +146,17 @@
       <DetectedFiles Include="pdflatex.exe" Condition=" '$(OS)' == 'Windows_NT' " />
     </ItemGroup>
     <RequireFilesOnPath Files="@(DetectedFiles)" />
+  </Target>
+  
+  <!--  ************************************************************************
+        ** CreateNugetPackage
+  
+        This target builds a single Nuget package from a Nuspec file.
+        ************************************************************************
+  -->
+  <Target Name="CreateNugetPackage">
+    <Exec Command="nuget pack @(NuspecFile) -Prop Configuration=Release -OutputDirectory $(OutputPath) -version @(SemanticVersion)" Condition="'$(OS)' == 'Unix'" />
+    <Exec Command="&quot;$(MSBuildProgramFiles32)\NuGet\nuget.exe&quot; pack @(NuspecFile) -Prop Configuration=Release -OutputDirectory $(OutputPath) -version @(SemanticVersion)" Condition="'$(OS)' != 'Unix'" />
   </Target>
 
 </Project>
