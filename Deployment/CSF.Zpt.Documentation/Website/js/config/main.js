@@ -20,12 +20,13 @@ requirejs.config({
       "https://www.google-analytics.com/analytics",
       "data:application/javascript,"
     ],
+    jscookie: "lib/js.cookie-2.1.3.min",
   },
   shim: {
     "ga": {
       exports: "__ga__"
     }
-  }
+  },
 });
 
 requirejs(["app"], function(app) {

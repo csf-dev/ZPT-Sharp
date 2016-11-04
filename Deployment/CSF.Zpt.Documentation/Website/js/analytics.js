@@ -1,10 +1,34 @@
-define(["ga", "jquery"], function(ga, $) {
+define(["ga", "jquery", "jscookie"], function(ga, $, cookie) {
   "use strict";
   
   function initialiseAnalytics()
   {
+    showCookieMessage();
     recordInitialPageview();
     setupOutboundLinkTracking();
+  }
+  
+  function showCookieMessage()
+  {
+    var
+      lifetimeDays = 730,
+      acceptedVal = "cookiesAccepted",
+      accepted = cookie.get(acceptedVal);
+      
+    if(!accepted)
+    {
+      var
+        statement = $(".cookie_statement"),
+        acceptLink = $(".accept", statement);
+      
+      acceptLink.on("click", function(ev) {
+        var $this = $(this);
+        cookie.set(acceptedVal, true, { expires: lifetimeDays });
+        statement.hide();
+      });
+      
+      statement.show();
+    }
   }
   
   function recordInitialPageview()
