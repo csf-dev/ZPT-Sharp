@@ -22,6 +22,9 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSF.IniDocuments", "CSF\CSF.IniDocuments\CSF.IniDocuments.csproj", "{EF897908-7BAC-47F6-9495-6C827D532228}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSF.Zpt.Abstractions", "CSF.Zpt.Abstractions\CSF.Zpt.Abstractions.csproj", "{8207CD9B-F1C1-4D75-B250-ACDFFBDCB071}"
+	ProjectSection(ProjectDependencies) = postProject
+		{3E1DAACE-519B-4C6C-80E3-3F06A1A33C66} = {3E1DAACE-519B-4C6C-80E3-3F06A1A33C66}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSF.Zpt.MVC", "CSF.Zpt.MVC\CSF.Zpt.MVC.csproj", "{9B4DF12E-6E04-4C25-AD16-58434C18DE8A}"
 EndProject
