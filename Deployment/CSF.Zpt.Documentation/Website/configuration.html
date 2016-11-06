@@ -5,8 +5,11 @@
 <meta charset="utf-8">
 <title metal:fill-slot="document_title">The ZPT-Sharp configuration file</title>
 <base href="." />
-<style type="text/css">
+<style type="text/css" metal:fill-slot="document_styles">
 @import url(css/styles.css);
+@import url(css/manpage_exports.css);
+</style>
+<style type="text/css">
 @import url(css/dummy.css);
 </style>
 <script data-main="js/config/main" type="text/javascript" src="js/lib/require.min.js"></script>
