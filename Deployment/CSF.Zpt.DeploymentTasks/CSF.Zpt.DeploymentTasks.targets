@@ -18,7 +18,7 @@
     <TemporaryBuildPath>$(PathToSolutionRoot)\Deployment\obj</TemporaryBuildPath>
     <PlaintextManPageColumns>80</PlaintextManPageColumns>
     <HtmlManPageColumns>100</HtmlManPageColumns>
-    <WebsiteUrlRoot>http://csf-dev.github.io/ZPT-Sharp/</WebsiteUrlRoot>
+    <WebsiteUrlRoot Condition="'$(WebsiteUrlRoot)' == ''">http://csf-dev.github.io/ZPT-Sharp/</WebsiteUrlRoot>
   </PropertyGroup>
   <Import Project="..\..\packages\MSBuild.Extension.Pack.1.8.0\build\net40\MSBuild.Extension.Pack.targets" />
   
