@@ -5,8 +5,11 @@
 <meta charset="utf-8">
 <title metal:fill-slot="document_title">The ZPT-Sharp configuration file</title>
 <base href="." />
-<style type="text/css">
+<style type="text/css" metal:fill-slot="document_styles">
 @import url(css/styles.css);
+@import url(css/manpage_exports.css);
+</style>
+<style type="text/css">
 @import url(css/dummy.css);
 </style>
 <script data-main="js/config/main" type="text/javascript" src="js/lib/require.min.js"></script>
@@ -27,16 +30,15 @@
     </nav>
     <section class="main_page_content" metal:fill-slot="main_page_content">
       <header>
-        <h1>The configuration file</h1>
+        <h1>The ZPT-Sharp configuration file</h1>
+        <p>
+          The following is exported from the <strong>manpage</strong> for the ZPT-Sharp
+          configuration file. 
+        </p>
       </header>
-      <p class="note">
-        TODO: This content is yet to be written.
-        In the mean-time please refer to sample content within each configuration file.
-        Each file contains commented-out sections indicating some of what may be performed.
-        See ZPT-sharp
-        <a href="https://github.com/csf-dev/ZPT-Sharp/issues/124">issue #124 (write a config file manpage)</a>
-        &amp; <a href="https://github.com/csf-dev/ZPT-Sharp/issues/125">issue #125 (include manpage in docs website)</a>.
-      </p>
+      <div class="dummy" metal:use-macro="documents/Shared/config-docs.html/macros/content">
+        Auto-generated documentation (using man2html) goes here
+      </div>
     </section>
   </div>
 </div>
