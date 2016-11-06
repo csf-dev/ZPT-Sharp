@@ -308,6 +308,17 @@
   <Target Name="BuildPlaintextManual">
     <Exec Command="MANWIDTH=&quot;$(PlaintextManPageColumns)&quot; man --nh -l $(PathToSolutionRoot)\CSF.Zpt.Cli\ZptBuilder.1 &gt; $(PathToSolutionRoot)\CSF.Zpt.Cli\bin\Release\Doc\ZptBuilder.MANUAL.txt" />
   </Target>
+  
+  <!--  ************************************************************************
+        ** BuildPlaintextConfigDocs
+  
+        This target builds the plain-text config file documentation for the
+        ZptSharp.config file, from the manpage source file.
+        ************************************************************************
+  -->
+  <Target Name="BuildPlaintextConfigDocs">
+    <Exec Command="MANWIDTH=&quot;$(PlaintextManPageColumns)&quot; man --nh -l $(PathToSolutionRoot)\Deployment\CSF.Zpt.Documentation\ZptSharp.config.5 &gt; $(DeploymentOutputPath)\ZptSharp.config.MANUAL.txt" />
+  </Target>
 
   <!--  ************************************************************************
         ** BuildHtmlManual
@@ -318,6 +329,17 @@
   -->
   <Target Name="BuildHtmlManual">
     <ExecWithIgnoredExitCodes Command="man2html $(PathToSolutionRoot)\CSF.Zpt.Cli\ZptBuilder.1 | tidy -i -w $(HtmlManPageColumns) &gt; $(PathToSolutionRoot)\CSF.Zpt.Cli\bin\Release\Doc\ZptBuilder.html" IgnoredExitCodes="1" />
+  </Target>
+
+  <!--  ************************************************************************
+        ** BuildHtmlConfigdocs
+  
+        This target builds the HTML config file documentation for the
+        ZptSharp.config file, from the manpage source file.
+        ************************************************************************
+  -->
+  <Target Name="BuildHtmlConfigDocs">
+    <ExecWithIgnoredExitCodes Command="man2html $(PathToSolutionRoot)\Deployment\CSF.Zpt.Documentation\ZptSharp.config.5 | tidy -i -w $(HtmlManPageColumns) &gt; $(TemporaryBuildPath)\ZptSharp.config.html" IgnoredExitCodes="1" />
   </Target>
 
   <!--  ************************************************************************
@@ -365,6 +387,7 @@
     </ItemGroup>
     <Copy SourceFiles="@(WebsiteSourceFiles)" DestinationFiles="@(WebsiteSourceFiles-&gt;'$(TemporaryBuildPath)\Website\Pass1\%(RecursiveDir)%(Filename)%(Extension)')" />
     <Copy SourceFiles="$(PathToSolutionRoot)\CSF.Zpt.Cli\bin\Release\Doc\ZptBuilder.html" DestinationFiles="$(TemporaryBuildPath)\Website\Pass1\Shared\cli-docs.html" />
+    <Copy SourceFiles="$(TemporaryBuildPath)\ZptSharp.config.html" DestinationFiles="$(TemporaryBuildPath)\Website\Pass1\Shared\config-docs.html" />
     <ItemGroup>
       <WebsiteSupportFiles Include="$(TemporaryBuildPath)\Website\Pass1\**\*.css" />
       <WebsiteSupportFiles Include="$(TemporaryBuildPath)\Website\Pass1\**\*.js" />
@@ -372,6 +395,7 @@
       <CopyrightYear Include="$([System.DateTime]::Now.ToString(yyyy))" />
     </ItemGroup>
     <FixDocTag InputFile="$(TemporaryBuildPath)\Website\Pass1\Shared\cli-docs.html" MacroName="content" />
+    <FixDocTag InputFile="$(TemporaryBuildPath)\Website\Pass1\Shared\config-docs.html" MacroName="content" />
     <Exec Command="$(PathToSolutionRoot)\CSF.Zpt.Cli\bin\Release\ZptBuilder.exe &quot;$(TemporaryBuildPath)\Website\Pass1&quot; -p &quot;*.html&quot; -o &quot;$(TemporaryBuildPath)\Website\Pass2&quot; -i &quot;$(TemporaryBuildPath)\Website\Pass1\Shared&quot; --keyword-options &quot;baseUrl=$(WebsiteUrlRoot);buildDate=@(BuildTimestamp);version=@(SemanticVersion);releaseType=@(InformationalVersion);copyrightYear=@(CopyrightYear)&quot;" />
     <Copy SourceFiles="@(WebsiteSupportFiles)" DestinationFiles="@(WebsiteSupportFiles-&gt;'$(TemporaryBuildPath)\Website\Pass2\%(RecursiveDir)%(Filename)%(Extension)')" />
   </Target>

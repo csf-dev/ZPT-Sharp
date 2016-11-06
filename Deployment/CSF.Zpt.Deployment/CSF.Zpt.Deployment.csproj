@@ -30,6 +30,8 @@
     <CallTarget Targets="CreateBinaryZips" Condition="'$(Configuration)' == 'Release'" />
     <CallTarget Targets="CreateNugetPackages" Condition="'$(Configuration)' == 'Release'" />
     <CallTarget Targets="BuildApiDocumentation" Condition="'$(Configuration)' == 'Release'" />
+    <CallTarget Targets="BuildPlaintextConfigDocs" Condition="'$(Configuration)' == 'Release'" />
+    <CallTarget Targets="BuildHtmlConfigDocs" Condition="'$(Configuration)' == 'Release'" />
     <CallTarget Targets="BuildDocumentationWebsite" Condition="'$(Configuration)' == 'Release'" />
     <CallTarget Targets="AssembleAllDocumentation" Condition="'$(Configuration)' == 'Release'" />
   </Target>
