@@ -13,9 +13,10 @@ define(["ga", "jquery", "jscookie"], function(ga, $, cookie) {
     var
       lifetimeDays = 730,
       acceptedVal = "cookiesAccepted",
-      accepted = cookie.get(acceptedVal);
+      accepted = cookie.get(acceptedVal),
+      isFileUrl = window.location.protocol == "file:";
       
-    if(!accepted)
+    if(!accepted !isFileUrl)
     {
       var
         statement = $(".cookie_statement"),
