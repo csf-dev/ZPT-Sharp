@@ -16,7 +16,7 @@ define(["ga", "jquery", "jscookie"], function(ga, $, cookie) {
       accepted = cookie.get(acceptedVal),
       isFileUrl = window.location.protocol == "file:";
       
-    if(!accepted !isFileUrl)
+    if(!accepted && !isFileUrl)
     {
       var
         statement = $(".cookie_statement"),
