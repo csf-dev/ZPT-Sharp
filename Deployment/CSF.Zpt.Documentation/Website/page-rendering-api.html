@@ -198,8 +198,8 @@
         The difference between them is how they respond to errors/unhandled exceptions whilst rendering.
         The regular batch renderer will stop upon the first error in rendering and abort all further operations, raising an exception.
         The error-tolerant batch renderer will skip rendering documents which fail, continuing with the rest.
-        The error-tolerant version will only raise exceptions for completely fatal errors, which will prevent all rendering
-        (such as an input directory which does not exist).
+        The error-tolerant version will only raise exceptions for truly fatal errors which prevent all rendering,
+        such as an input directory which does not exist.
       </p>
       <p>
         Once you have a batch renderer, call an appropriate overload of its <code>Render</code> method.
