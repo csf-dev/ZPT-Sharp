@@ -48,11 +48,11 @@
     <Compile Include="IExpressionHost.cs" />
     <Compile Include="CSharpExpression.cs" />
     <Compile Include="CSharpExpressionFactory.cs" />
+    <Compile Include="ExpressionHostBuilderModel.cs" />
     <Compile Include="ExpressionHostBuilder.cs">
       <DependentUpon>ExpressionHostBuilder.tt</DependentUpon>
     </Compile>
     <Compile Include="ExpressionHostBuilder.partial.cs" />
-    <Compile Include="ExpressionHostBuilderModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ExpressionHostBuilder.tt">

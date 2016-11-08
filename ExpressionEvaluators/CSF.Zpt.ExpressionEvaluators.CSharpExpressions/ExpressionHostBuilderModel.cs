@@ -3,6 +3,7 @@ using System.Collections.Generic;
 
 namespace CSF.Zpt.ExpressionEvaluators.CSharpExpressions
 {
+  [Serializable]
   public class ExpressionHostBuilderModel
   {
     #region properties
@@ -19,7 +20,7 @@ namespace CSF.Zpt.ExpressionEvaluators.CSharpExpressions
       private set;
     }
 
-    public IEnumerable<string> PropertyNames
+    public string[] PropertyNames
     {
       get;
       private set;
@@ -29,7 +30,7 @@ namespace CSF.Zpt.ExpressionEvaluators.CSharpExpressions
 
     #region constructor
 
-    public ExpressionHostBuilderModel(int id, string text, IEnumerable<string> properties)
+    public ExpressionHostBuilderModel(int id, string text, string[] properties)
     {
       if(text == null)
       {
@@ -40,7 +41,7 @@ namespace CSF.Zpt.ExpressionEvaluators.CSharpExpressions
         throw new ArgumentNullException(nameof(properties));
       }
 
-      Id = id;
+      ExpressionId = id;
       ExpressionText = text;
       PropertyNames = properties;
     }
