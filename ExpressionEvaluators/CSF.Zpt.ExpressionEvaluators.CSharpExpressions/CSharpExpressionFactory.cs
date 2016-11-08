@@ -10,6 +10,13 @@ namespace CSF.Zpt.ExpressionEvaluators.CSharpExpressions
       // TODO: Write this implementation
       throw new NotImplementedException();
     }
+
+    private string BuildExpressionHostCode(int id, string expressionText, string[] variableNames)
+    {
+      var model = new ExpressionHostBuilderModel(id, expressionText, variableNames);
+      var builder = new ExpressionHostBuilder(model);
+      return builder.TransformText();
+    }
   }
 }
 
