@@ -2,6 +2,9 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSF.Zpt", "CSF.Zpt\CSF.Zpt.csproj", "{16E957BB-347C-4EE1-815F-19AC296FB9E0}"
+        ProjectSection(ProjectDependencies) = postProject
+                {3E1DAACE-519B-4C6C-80E3-3F06A1A33C66} = {3E1DAACE-519B-4C6C-80E3-3F06A1A33C66}
+        EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{B99672F8-AB58-4435-AAE7-18850F239A17}"
 	ProjectSection(SolutionItems) = preProject
@@ -27,8 +30,14 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSF.Zpt.Abstractions", "CSF
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSF.Zpt.MVC", "CSF.Zpt.MVC\CSF.Zpt.MVC.csproj", "{9B4DF12E-6E04-4C25-AD16-58434C18DE8A}"
+        ProjectSection(ProjectDependencies) = postProject
+                {3E1DAACE-519B-4C6C-80E3-3F06A1A33C66} = {3E1DAACE-519B-4C6C-80E3-3F06A1A33C66}
+        EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSF.Zpt.Cli", "CSF.Zpt.Cli\CSF.Zpt.Cli.csproj", "{4DD64666-DBEF-4AD5-BDB0-3EB3C70A6E83}"
+        ProjectSection(ProjectDependencies) = postProject
+                {3E1DAACE-519B-4C6C-80E3-3F06A1A33C66} = {3E1DAACE-519B-4C6C-80E3-3F06A1A33C66}
+        EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSF.Zpt.Log4net", "CSF.Zpt.Log4net\CSF.Zpt.Log4net.csproj", "{81044439-06CF-44E2-BBF2-3800F1DEB5B1}"
 EndProject
