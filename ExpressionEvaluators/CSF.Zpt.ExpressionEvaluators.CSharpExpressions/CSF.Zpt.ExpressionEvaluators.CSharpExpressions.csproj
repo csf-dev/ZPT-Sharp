@@ -48,7 +48,6 @@
     <Compile Include="IExpressionHost.cs" />
     <Compile Include="CSharpExpression.cs" />
     <Compile Include="CSharpExpressionFactory.cs" />
-    <Compile Include="ExpressionHost.cs" />
     <Compile Include="ExpressionHostBuilder.cs">
       <DependentUpon>ExpressionHostBuilder.tt</DependentUpon>
     </Compile>
