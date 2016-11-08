@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace CSF.Zpt.Rendering
 {
@@ -55,6 +56,12 @@ namespace CSF.Zpt.Rendering
     /// <param name="expression">The expression to evaluate.</param>
     /// <param name="context">The rendering context for which we are evaluating a result.</param>
     ExpressionResult Evaluate(string expression, IRenderingContext context);
+
+    /// <summary>
+    /// Gets all variable definitions for the current model instance.
+    /// </summary>
+    /// <returns>The variable definitions.</returns>
+    IDictionary<string,object> GetAllDefinitions();
 
     #endregion
   }

@@ -186,6 +186,17 @@ namespace CSF.Zpt.Rendering
     }
 
     /// <summary>
+    /// Gets all variable definitions for the current model instance.
+    /// </summary>
+    /// <returns>The variable definitions.</returns>
+    public virtual IDictionary<string,object> GetAllDefinitions()
+    {
+      var localDefinitions = GetAllLocalDefinitions();
+
+      return MergeDefinitionsDictionaries(localDefinitions, GlobalDefinitions);
+    }
+
+    /// <summary>
     /// Override in implementor classes to create a strongly-typed instance of <see cref="Model"/>, using the same
     /// model-type as the implementor class.
     /// </summary>
@@ -309,6 +320,58 @@ namespace CSF.Zpt.Rendering
     protected virtual NamedObjectWrapper GetKeywordOptions()
     {
       return _root._options;
+    }
+
+    /// <summary>
+    /// Merges two dictionaries which contain variable definitions together.
+    /// </summary>
+    /// <remarks>
+    /// <para>
+    /// The <paramref name="first"/> dictionary will always 'win' in any naming conflicts.  Thus if an
+    /// identically-named deifinition exists in both the first and <paramref name="second"/> dictionaries, then the
+    /// value from the first will be used.
+    /// </para>
+    /// </remarks>
+    /// <returns>
+    /// The result of the merge operation.
+    /// </returns>
+    /// <param name="first">The first dictionary.</param>
+    /// <param name="second">The second dictionary.</param>
+    protected virtual IDictionary<string,object> MergeDefinitionsDictionaries(IDictionary<string,object> first,
+                                                                              IDictionary<string,object> second)
+    {
+      if(first == null)
+      {
+        throw new ArgumentNullException(nameof(first));
+      }
+      if(second == null)
+      {
+        throw new ArgumentNullException(nameof(second));
+      }
+
+      return first
+        .Union(second.Where(x => !first.ContainsKey(x.Key)))
+        .ToDictionary(k => k.Key, v => v.Value);
+    }
+
+    /// <summary>
+    /// Gets a dictionary containing all of the local variable definitions.
+    /// </summary>
+    /// <returns>The all local definitions.</returns>
+    protected virtual IDictionary<string,object> GetAllLocalDefinitions()
+    {
+      IDictionary<string,object> output;
+
+      if(_parent != null)
+      {
+        output = MergeDefinitionsDictionaries(LocalDefinitions, _parent.GetAllLocalDefinitions());
+      }
+      else
+      {
+        output = new Dictionary<string, object>(LocalDefinitions);
+      }
+
+      return output;
     }
 
     #endregion
