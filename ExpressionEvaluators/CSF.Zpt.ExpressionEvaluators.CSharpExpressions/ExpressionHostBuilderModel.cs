@@ -7,7 +7,7 @@ namespace CSF.Zpt.ExpressionEvaluators.CSharpExpressions
   {
     #region properties
 
-    public int Id
+    public int ExpressionId
     {
       get;
       private set;
