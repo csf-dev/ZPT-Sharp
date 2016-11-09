@@ -13,7 +13,7 @@ namespace CSF.Zpt.Tal
     #region constants
 
     private const string
-      ATTRIBUTE_PATTERN   = @"^(?:(?:([^:]+):)?([^ ]+) )([^ ]+)$",
+      ATTRIBUTE_PATTERN   = @"^(?:(?:([^: ]+):)?([^ ]+) )(.+)$",
       ITEM_PATTERN        = @"((?:[^;]|;;)+)\s*(?:;(?!;))?\s*",
       ESCAPED_SEMICOLON   = ";;",
       SEMICOLON           = ";";
