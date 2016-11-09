@@ -65,6 +65,7 @@
     <Compile Include="CSharpExpressionService.cs" />
     <Compile Include="ICSharpExpressionCache.cs" />
     <Compile Include="CSharpExpressionCache.cs" />
+    <Compile Include="CSharpExpressionEvaluator.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ExpressionHostBuilder.tt">

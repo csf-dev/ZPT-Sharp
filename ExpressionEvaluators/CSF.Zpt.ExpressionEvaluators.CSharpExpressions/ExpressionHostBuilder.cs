@@ -19,7 +19,9 @@ namespace CSF.Zpt.ExpressionEvaluators.CSharpExpressions {
         
         public virtual string TransformText() {
             this.GenerationEnvironment = null;
-            this.Write("\nusing System;\n\nnamespace CSF.Zpt.DynamicCSharpExpressions\n{\n  public class ");
+            this.Write("\nusing System;\n\nnamespace ");
+            this.Write(this.ToStringHelper.ToStringWithCulture( Model.Namespace ));
+            this.Write("\n{\n  public class ");
             this.Write(this.ToStringHelper.ToStringWithCulture( Model.GetClassName() ));
             this.Write(" : CSF.Zpt.ExpressionEvaluators.CSharpFramework.IExpressionHost\n  {\n    #region fields\n    ");
 
@@ -32,9 +34,9 @@ foreach(var prop in Model.PropertyNames)
 
 }
 
-            this.Write("\n    #endregion\n\n    #region methods\n\n    object CSF.Zpt.ExpressionEvaluators.CSharpExpressions.IExpressionHost.Evaluate()\n    {\n      return ");
+            this.Write("\n    #endregion\n\n    #region methods\n\n    object CSF.Zpt.ExpressionEvaluators.CSharpFramework.IExpressionHost.Evaluate()\n    {\n      return ");
             this.Write(this.ToStringHelper.ToStringWithCulture( Model.ExpressionText ));
-            this.Write(";\n    }\n\n    void CSF.Zpt.ExpressionEvaluators.CSharpExpressions.IExpressionHost.SetPropertyValue(string propertyName,\n                                                                                         object value)\n    {\n      switch(propertyName)\n      {");
+            this.Write(";\n    }\n\n    void CSF.Zpt.ExpressionEvaluators.CSharpFramework.IExpressionHost.SetPropertyValue(string propertyName,\n                                                                                       object value)\n    {\n      switch(propertyName)\n      {");
 
 foreach(var prop in Model.PropertyNames)
 {

@@ -6,7 +6,7 @@
 
 using System;
 
-namespace CSF.Zpt.DynamicCSharpExpressions
+namespace <#= Model.Namespace #>
 {
   public class <#= Model.GetClassName() #> : CSF.Zpt.ExpressionEvaluators.CSharpFramework.IExpressionHost
   {
@@ -23,13 +23,13 @@ foreach(var prop in Model.PropertyNames)
 
     #region methods
 
-    object CSF.Zpt.ExpressionEvaluators.CSharpExpressions.IExpressionHost.Evaluate()
+    object CSF.Zpt.ExpressionEvaluators.CSharpFramework.IExpressionHost.Evaluate()
     {
       return <#= Model.ExpressionText #>;
     }
 
-    void CSF.Zpt.ExpressionEvaluators.CSharpExpressions.IExpressionHost.SetPropertyValue(string propertyName,
-                                                                                         object value)
+    void CSF.Zpt.ExpressionEvaluators.CSharpFramework.IExpressionHost.SetPropertyValue(string propertyName,
+                                                                                       object value)
     {
       switch(propertyName)
       {<#

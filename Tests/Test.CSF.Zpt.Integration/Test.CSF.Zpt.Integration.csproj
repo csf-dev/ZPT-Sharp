@@ -95,5 +95,9 @@
       <Project>{63F5FF1D-DA36-4BB4-AA99-24AA78844109}</Project>
       <Name>CSF.Zpt.ExpressionEvaluators.StringExpressions</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\ExpressionEvaluators\CSF.Zpt.ExpressionEvaluators.CSharpExpressions\CSF.Zpt.ExpressionEvaluators.CSharpExpressions.csproj">
+      <Project>{AA29F7A3-A259-408A-B2FC-E2EFD78BCDFC}</Project>
+      <Name>CSF.Zpt.ExpressionEvaluators.CSharpExpressions</Name>
+    </ProjectReference>
   </ItemGroup>
 </Project>

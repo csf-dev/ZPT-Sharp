@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace CSF.Zpt.ExpressionEvaluators.CSharpExpressions
 {
-  public class CSharpExpressionService
+  public class CSharpExpressionService : ICSharpExpressionService
   {
     #region fields
 

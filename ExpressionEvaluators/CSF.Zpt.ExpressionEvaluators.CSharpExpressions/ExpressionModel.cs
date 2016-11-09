@@ -5,6 +5,12 @@ namespace CSF.Zpt.ExpressionEvaluators.CSharpExpressions
 {
   public class ExpressionModel
   {
+    #region constants
+
+    private const string DynamicCodeNamespace = "CSF.Zpt.DynamicCSharpExpressions";
+
+    #endregion
+
     #region properties
 
     public int ExpressionId
@@ -23,6 +29,13 @@ namespace CSF.Zpt.ExpressionEvaluators.CSharpExpressions
     {
       get;
       private set;
+    }
+
+    public string Namespace
+    {
+      get {
+        return DynamicCodeNamespace;
+      }
     }
 
     #endregion

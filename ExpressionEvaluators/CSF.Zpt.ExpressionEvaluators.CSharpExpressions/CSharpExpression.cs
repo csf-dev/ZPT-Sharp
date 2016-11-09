@@ -55,11 +55,11 @@ namespace CSF.Zpt.ExpressionEvaluators.CSharpExpressions
         throw new ArgumentNullException(nameof(variableDefinitions));
       }
 
-      var variablesDefined = variableDefinitions.Keys.OrderBy(x => x).ToArray();
-      if(variablesDefined != _variableNames)
+      var variablesDefined = variableDefinitions.Keys.ToArray();
+      if(!AreVariablesEquivalent(variablesDefined, _variableNames))
       {
         // TODO: Create a better exception type and put a message in a res file.
-        throw new InvalidOperationException();
+        throw new InvalidOperationException("The list of variables provided must match the registered variables for this expression.");
       }
 
       var host = _hostCreator();
@@ -98,6 +98,12 @@ namespace CSF.Zpt.ExpressionEvaluators.CSharpExpressions
     public override int GetHashCode()
     {
       return Id.GetHashCode();
+    }
+
+    private bool AreVariablesEquivalent(string[] listOne, string[] listTwo)
+    {
+      int listOneCount = listOne.Count(), listTwoCount = listTwo.Count();
+      return (listOneCount == listTwoCount && listOne.Intersect(listTwo).Count() == listOneCount);
     }
 
     #endregion
