@@ -37,6 +37,10 @@
       <Project>{8207CD9B-F1C1-4D75-B250-ACDFFBDCB071}</Project>
       <Name>CSF.Zpt.Abstractions</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\CSF\CSF\CSF.csproj">
+      <Project>{E563D7BC-1AB1-4AFB-8533-51315437C6E6}</Project>
+      <Name>CSF</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -48,11 +52,16 @@
     <Compile Include="IExpressionHost.cs" />
     <Compile Include="CSharpExpression.cs" />
     <Compile Include="CSharpExpressionFactory.cs" />
-    <Compile Include="ExpressionHostBuilderModel.cs" />
     <Compile Include="ExpressionHostBuilder.cs">
       <DependentUpon>ExpressionHostBuilder.tt</DependentUpon>
     </Compile>
     <Compile Include="ExpressionHostBuilder.partial.cs" />
+    <Compile Include="ExpressionModel.cs" />
+    <Compile Include="ICSharpExpressionFactory.cs" />
+    <Compile Include="ICSharpExpressionService.cs" />
+    <Compile Include="CSharpExpressionService.cs" />
+    <Compile Include="ICSharpExpressionCache.cs" />
+    <Compile Include="CSharpExpressionCache.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ExpressionHostBuilder.tt">

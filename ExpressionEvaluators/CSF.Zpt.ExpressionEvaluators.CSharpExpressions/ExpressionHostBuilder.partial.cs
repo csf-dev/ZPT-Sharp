@@ -4,13 +4,13 @@ namespace CSF.Zpt.ExpressionEvaluators.CSharpExpressions
 {
   public partial class ExpressionHostBuilder
   {
-    protected ExpressionHostBuilderModel Model
+    protected ExpressionModel Model
     {
       get;
       private set;
     }
 
-    public ExpressionHostBuilder(ExpressionHostBuilderModel model)
+    public ExpressionHostBuilder(ExpressionModel model)
     {
       if(model == null)
       {

@@ -19,7 +19,7 @@ namespace CSF.Zpt.ExpressionEvaluators.CSharpExpressions {
         
         public virtual string TransformText() {
             this.GenerationEnvironment = null;
-            this.Write("\nusing System;\n\nnamespace CsExpr\n{\n  public class ExpressionHost_");
+            this.Write("\nusing System;\n\nnamespace CSF.Zpt.DynamicExpression\n{\n  public class ExpressionHost_");
             this.Write(this.ToStringHelper.ToStringWithCulture( Model.ExpressionId ));
             this.Write(" : CSF.Zpt.ExpressionEvaluators.CSharpExpressions.IExpressionHost\n  {\n    #region fields\n    ");
 

@@ -15,6 +15,12 @@ namespace CSF.Zpt.ExpressionEvaluators.CSharpExpressions
 
     #region properties
 
+    public virtual int Id
+    {
+      get;
+      private set;
+    }
+
     public virtual IEnumerable<string> VariableNames
     {
       get {
@@ -76,13 +82,12 @@ namespace CSF.Zpt.ExpressionEvaluators.CSharpExpressions
         return false;
       }
 
-      return (obj.Text.Equals(this.Text)
-              && obj.VariableNames.Equals(this.VariableNames));
+      return obj.Id.Equals(this.Id);
     }
 
     public override int GetHashCode()
     {
-      return _variableNames.GetHashCode() ^ Text.GetHashCode();
+      return Id.GetHashCode();
     }
 
     #endregion
@@ -90,6 +95,7 @@ namespace CSF.Zpt.ExpressionEvaluators.CSharpExpressions
     #region constructor
 
     public CSharpExpression(Func<IExpressionHost> hostCreator,
+                            int id,
                             string expressionText,
                             IEnumerable<string> variableNames)
     {
