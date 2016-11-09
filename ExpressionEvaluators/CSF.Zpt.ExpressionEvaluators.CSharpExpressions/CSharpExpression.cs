@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
+using CSF.Zpt.ExpressionEvaluators.CSharpFramework;
 
 namespace CSF.Zpt.ExpressionEvaluators.CSharpExpressions
 {
@@ -10,6 +12,7 @@ namespace CSF.Zpt.ExpressionEvaluators.CSharpExpressions
 
     private Func<IExpressionHost> _hostCreator;
     private string[] _variableNames;
+    private Assembly _hostAssembly;
 
     #endregion
 
@@ -32,6 +35,13 @@ namespace CSF.Zpt.ExpressionEvaluators.CSharpExpressions
     {
       get;
       private set;
+    }
+
+    public virtual Assembly HostAssembly
+    {
+      get {
+        return _hostAssembly;
+      }
     }
 
     #endregion
@@ -97,7 +107,8 @@ namespace CSF.Zpt.ExpressionEvaluators.CSharpExpressions
     public CSharpExpression(Func<IExpressionHost> hostCreator,
                             int id,
                             string expressionText,
-                            IEnumerable<string> variableNames)
+                            string[] variableNames,
+                            Assembly hostAssembly)
     {
       if(hostCreator == null)
       {
@@ -111,10 +122,15 @@ namespace CSF.Zpt.ExpressionEvaluators.CSharpExpressions
       {
         throw new ArgumentNullException(nameof(variableNames));
       }
+      if(hostAssembly == null)
+      {
+        throw new ArgumentNullException(nameof(hostAssembly));
+      }
 
       Text = expressionText;
-      _variableNames = variableNames.OrderBy(x => x).ToArray();
+      _variableNames = variableNames;
       _hostCreator = hostCreator;
+      _hostAssembly = hostAssembly;
     }
 
     #endregion

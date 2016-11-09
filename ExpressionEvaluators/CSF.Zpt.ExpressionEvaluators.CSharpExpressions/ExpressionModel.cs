@@ -27,6 +27,15 @@ namespace CSF.Zpt.ExpressionEvaluators.CSharpExpressions
 
     #endregion
 
+    #region methods
+
+    public string GetClassName()
+    {
+      return String.Format("ExpressionHost_{0}", ExpressionId);
+    }
+
+    #endregion
+
     #region constructor
 
     public ExpressionModel(int id, string text, string[] properties)

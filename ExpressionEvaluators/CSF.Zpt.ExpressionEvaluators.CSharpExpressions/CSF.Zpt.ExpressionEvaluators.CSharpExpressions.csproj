@@ -41,6 +41,10 @@
       <Project>{E563D7BC-1AB1-4AFB-8533-51315437C6E6}</Project>
       <Name>CSF</Name>
     </ProjectReference>
+    <ProjectReference Include="..\CSF.Zpt.ExpressionEvaluators.CSharpFramework\CSF.Zpt.ExpressionEvaluators.CSharpFramework.csproj">
+      <Project>{3D5A705B-A414-4ACA-AC01-C053047F424E}</Project>
+      <Name>CSF.Zpt.ExpressionEvaluators.CSharpFramework</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -49,7 +53,6 @@
     <Reference Include="Microsoft.CSharp" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="IExpressionHost.cs" />
     <Compile Include="CSharpExpression.cs" />
     <Compile Include="CSharpExpressionFactory.cs" />
     <Compile Include="ExpressionHostBuilder.cs">

@@ -6,9 +6,9 @@
 
 using System;
 
-namespace CSF.Zpt.DynamicExpression
+namespace CSF.Zpt.DynamicCSharpExpressions
 {
-  public class ExpressionHost_<#= Model.ExpressionId #> : CSF.Zpt.ExpressionEvaluators.CSharpExpressions.IExpressionHost
+  public class <#= Model.GetClassName() #> : CSF.Zpt.ExpressionEvaluators.CSharpFramework.IExpressionHost
   {
     #region fields
     <#

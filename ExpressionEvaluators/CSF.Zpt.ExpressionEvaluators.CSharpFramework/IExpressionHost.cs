@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace CSF.Zpt.ExpressionEvaluators.CSharpExpressions
+namespace CSF.Zpt.ExpressionEvaluators.CSharpFramework
 {
   public interface IExpressionHost
   {
