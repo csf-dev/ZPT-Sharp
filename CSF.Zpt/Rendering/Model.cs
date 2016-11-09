@@ -29,7 +29,7 @@ namespace CSF.Zpt.Rendering
     protected virtual Dictionary<string,object> GlobalDefinitions
     {
       get {
-        return _globalDefinitions;
+        return _root._globalDefinitions;
       }
     }
 
@@ -127,7 +127,7 @@ namespace CSF.Zpt.Rendering
         throw new ArgumentNullException(nameof(name));
       }
 
-      _root.GlobalDefinitions[name] = value;
+      GlobalDefinitions[name] = value;
     }
 
     /// <summary>
@@ -226,10 +226,10 @@ namespace CSF.Zpt.Rendering
 
       if(!output)
       {
-        if(_root.GlobalDefinitions.ContainsKey(name))
+        if(GlobalDefinitions.ContainsKey(name))
         {
           output = true;
-          result = _root.GlobalDefinitions[name];
+          result = GlobalDefinitions[name];
         }
       }
 
