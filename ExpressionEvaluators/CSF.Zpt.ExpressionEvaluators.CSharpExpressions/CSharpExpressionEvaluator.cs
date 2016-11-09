@@ -6,6 +6,12 @@ namespace CSF.Zpt.ExpressionEvaluators.CSharpExpressions
 {
   public class CSharpExpressionEvaluator : ExpressionEvaluatorBase
   {
+    #region constants
+
+    private static readonly string Prefix = "csharp";
+
+    #endregion
+
     #region fields
 
     private readonly ICSharpExpressionService _expressionService;
@@ -17,7 +23,7 @@ namespace CSF.Zpt.ExpressionEvaluators.CSharpExpressions
     public override string ExpressionPrefix
     {
       get {
-        return "csharp";
+        return Prefix;
       }
     }
 
