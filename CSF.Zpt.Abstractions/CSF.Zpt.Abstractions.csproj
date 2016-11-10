@@ -37,12 +37,6 @@
     <DocumentationFile>bin\Release\CSF.Zpt.Abstractions.xml</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Deployment\CSF.Zpt.DeploymentTasks\CSF.Zpt.DeploymentTasks.csproj">
-      <Project>{3E1DAACE-519B-4C6C-80E3-3F06A1A33C66}</Project>
-      <Name>CSF.Zpt.DeploymentTasks</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml" />
