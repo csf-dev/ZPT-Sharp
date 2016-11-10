@@ -50,7 +50,11 @@ namespace CSF.Zpt.ExpressionEvaluators.CSharpExpressions
       CompilerParameters parameters = new CompilerParameters();
 
       var frameworkAssemblyName = String.Format("{0}.dll", typeof(IExpressionHost).Namespace);
+      var csAssemblyName = String.Format("{0}.dll", typeof (Microsoft.CSharp.CSharpCodeProvider).Namespace);
+      var dynAssemblyName = String.Format("System.Core.dll");
       parameters.ReferencedAssemblies.Add(frameworkAssemblyName);
+      parameters.ReferencedAssemblies.Add(csAssemblyName);
+      parameters.ReferencedAssemblies.Add(dynAssemblyName);
 
       parameters.GenerateInMemory = true;
       parameters.GenerateExecutable = false;
