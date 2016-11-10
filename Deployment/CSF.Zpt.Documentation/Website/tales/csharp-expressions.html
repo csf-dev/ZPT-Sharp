@@ -1,0 +1,106 @@
+<!doctype html>
+<html tal:define="activePage string:csharp_expressions">
+<head metal:use-macro="documents/Shared/general-page.html/macros/common_document_head">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="utf-8">
+<title metal:fill-slot="document_title">TALES 'csharp' expressions</title>
+<base href="../" />
+<style type="text/css">
+@import url(css/styles.css);
+@import url(css/dummy.css);
+</style>
+<script data-main="js/config/main" type="text/javascript" src="js/lib/require.min.js"></script>
+<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.4.0/styles/default.min.css">
+</head>
+<body metal:use-macro="documents/Shared/general-page.html/macros/common_document_body" class="page_csharp_expressions">
+<div class="content_wrapper">
+  <header class="page_header dummy">
+    Dummy content
+  </header>
+  <div class="main_page_area">
+    <nav>
+      <h2>Navigation menu</h2>
+      <ul class="active_introduction dummy">
+        <li class="introduction"><a href=".">Introduction</a></li>
+        <li class="other_page"><a href="dummy.html">Dummy page</a></li>
+      </ul>
+    </nav>
+    <section class="main_page_content" metal:fill-slot="main_page_content">
+      <header>
+        <div class="expression plugin_note note"
+             metal:use-macro="documents/Shared/plugin_note.html/macros/expression_plugin_note">
+          <p>
+            Expression evaluator plugin notice.
+          </p>
+          Assembly: <span metal:fill-slot="plugin_assembly"><code>CSF.Zpt.ExpressionEvaluators.CSharpExpressions.dll</code></span><br />
+          Class: <span metal:fill-slot="plugin_class"><code>CSF.Zpt.ExpressionEvaluators.CSharpExpressionEvaluator</code></span><br />
+          Prefix: <span metal:fill-slot="expression_prefix"><code>csharp:</code></span>
+        </div>
+        <h1>TALES 'csharp' expressions</h1>
+      </header>
+      <p>
+        <code>csharp:</code> expressions permit the use of C♯ as a mechanism of evaluating TALES expressions.
+        The provided C♯ expression string is executed, its value determined and returned as the result of the
+        expression.
+      </p>
+      <h2>Permitted expressions</h2>
+      <p>
+        C♯ expressions supported by this plugin must be single statements.  Multiple statements (joined by semicolons)
+        are not permitted and will not compile.
+        Expressions have access to all of the variables which are available to TALES, including those created by
+        <code><a href="tal/define.html">tal:define</a></code> and <code><a href="tal/repeat.html">tal:repeat</a></code>
+        attributes.
+      <p>
+      <p>
+        In essence, to determine whether an expression is OK or not, consider whether it would be valid for
+        execution if preceded by a <code>return</code> keyword and followed by a semicolon, assuming that all of the
+        TALES variables are also available in the same scope:
+      </p>
+      <pre><code class="csharp">return YOUR_EXPRESSION_HERE;</code></pre>
+      <h2>Example</h2>
+      <pre><code class="html">&lt;div tal:define="myName string:sally"&gt;
+  Hello, my name is
+  &lt;span tal:replace="csharp:myName.ToUpperInvariant()"&gt;JOSEPH&lt;/span&gt;
+&lt;/div&gt;</code></pre>
+      <p>
+        The expression above would emit <kbd>Hello, my name is SALLY</kbd>, surrounded with HTML <code>&lt;div&gt;</code>
+        tags.
+      </p>
+      <h2>Note on variable names</h2>
+      <p>
+        If this plugin is installed <em>(by default, it is)</em> then all variable names created through
+        <code><a href="tal/define.html">tal:define</a></code> or <code><a href="tal/repeat.html">tal:repeat</a></code>
+        <em>must also be valid C♯ variable names</em>.
+      </p>
+      <p>
+        For example, on its own, the TALES specification would permit a variable named <kbd>12things</kbd>;
+        this is not a valid C♯ variable name though.
+        If such a variable is 'in scope' when a <code>csharp:</code> expression is evaluated, the expression will
+        not compile and an error will be raised.
+        <em>It does not matter whether the C♯ expression attempts to make use of such a 'bad' variable or not</em>.
+        The very presence of the variable in the TALES environment will prevent the C♯ expression from compiling.
+      </p>
+      <h2>Note on double-quotes</h2>
+      <p>
+        You will be well-aware that C♯ uses double-quotes: <kbd>"</kbd> to indicate strings.
+        However, as an attribute-based language, ZPT is already executing within an environment in which double-quotes
+        are being used.
+        When writing C♯ expressions which make use of string literals, you must escape your double-quote
+        characters as <kbd>&amp;quot;</kbd> in order to prevent a conflict.
+      </p>
+      <p>
+        This is illustrated by the following example, where <code>DateTime.ToString</code> is used with a
+        string parameter to get a custom date format.
+      </p>
+      <pre><code class="html">&lt;p tal:define="today csharp:DateTime.Today"&gt;
+  Today's date is
+  &lt;span tal:content="csharp:today.ToString(&amp;quot;yyyy-MM-dd&amp;quot;)"&gt;2012-01-01&lt;span&gt;
+&lt;/p&gt;</code></pre>
+    </section>
+  </div>
+</div>
+<footer class="page_footer dummy">
+  Dummy content
+</footer>
+</body>
+</html>
