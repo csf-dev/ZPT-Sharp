@@ -73,6 +73,7 @@
       <DependentUpon>ExceptionMessages.resx</DependentUpon>
     </Compile>
     <Compile Include="CSharpExpressionException.cs" />
+    <Compile Include="TemplateWriterBase.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ExpressionHostBuilder.tt">

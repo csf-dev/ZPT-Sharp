@@ -1,4 +1,4 @@
-﻿<#@ template language="C#" linePragmas="false" #>
+﻿<#@ template language="C#" linePragmas="false" visibility="internal" inherits="CSF.Zpt.ExpressionEvaluators.CSharpExpressions.TemplateWriterBase" #>
 <#@ assembly name="System.Core" #>
 <#@ import namespace="System.Linq" #>
 <#@ import namespace="System.Text" #>
@@ -28,10 +28,9 @@ foreach(var prop in Model.PropertyNames)
       return <#= Model.ExpressionText #>;
     }
 
-    void CSF.Zpt.ExpressionEvaluators.CSharpFramework.IExpressionHost.SetPropertyValue(string propertyName,
-                                                                                       object value)
+    void CSF.Zpt.ExpressionEvaluators.CSharpFramework.IExpressionHost.SetVariableValue(string name, object value)
     {
-      switch(propertyName)
+      switch(name)
       {<#
 foreach(var prop in Model.PropertyNames)
 {
@@ -43,8 +42,8 @@ foreach(var prop in Model.PropertyNames)
 }
 #>
       default:
-        // TODO: Improve this expression type and add a message to a res file
-        throw new InvalidOperationException();
+        var message = String.Format("The variable name '{0}' is not valid for this expression.", name);
+        throw new ArgumentException(message, nameof(name));
       }
     }
 
