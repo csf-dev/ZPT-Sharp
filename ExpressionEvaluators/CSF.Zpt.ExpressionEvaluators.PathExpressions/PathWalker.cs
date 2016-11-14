@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using CSF.Reflection;
 
-namespace CSF.Zpt.ExpressionEvaluators
+namespace CSF.Zpt.ExpressionEvaluators.PathExpressions
 {
   /// <summary>
   /// Provides a forwards-only reader for <see cref="Path"/> instances, behaving similarly to an <c>IEnumerator</c>.
@@ -108,7 +108,7 @@ namespace CSF.Zpt.ExpressionEvaluators
     #region constructor
 
     /// <summary>
-    /// Initializes a new instance of the <see cref="CSF.Zpt.ExpressionEvaluators.PathWalker"/> class.
+    /// Initializes a new instance of the <see cref="CSF.Zpt.ExpressionEvaluators.PathExpressions.PathWalker"/> class.
     /// </summary>
     /// <param name="path">Path.</param>
     public PathWalker(Path path)
