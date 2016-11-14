@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using CSF.Zpt.ExpressionEvaluators.CSharpFramework;
+using CSF.Zpt.Rendering;
 
 namespace CSF.Zpt.ExpressionEvaluators.CSharpExpressions
 {
@@ -58,8 +59,9 @@ namespace CSF.Zpt.ExpressionEvaluators.CSharpExpressions
       var variablesDefined = variableDefinitions.Keys.ToArray();
       if(!AreVariablesEquivalent(variablesDefined, _variableNames))
       {
-        // TODO: Create a better exception type and put a message in a res file.
-        throw new InvalidOperationException("The list of variables provided must match the registered variables for this expression.");
+        throw new CSharpExpressionExceptionException(Resources.ExceptionMessages.DefinedVariablesMustMatch) {
+          ExpressionText = this.Text
+        };
       }
 
       var host = _hostCreator();

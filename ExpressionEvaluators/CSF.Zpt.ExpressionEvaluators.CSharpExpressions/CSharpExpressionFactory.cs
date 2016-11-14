@@ -37,8 +37,9 @@ namespace CSF.Zpt.ExpressionEvaluators.CSharpExpressions
       var type = assembly.GetType(String.Concat(model.Namespace, ".", model.GetClassName()));
       if(type == null)
       {
-        // TODO: Improve this exception and put a message in a res file
-        throw new InvalidOperationException("There must be a matching type in the generated assembly");
+        throw new CSharpExpressionExceptionException(Resources.ExceptionMessages.ExpressionTypeMustExist) {
+          ExpressionText = model.ExpressionText
+        };
       }
 
       return () => (IExpressionHost) Activator.CreateInstance(type);
@@ -71,8 +72,9 @@ namespace CSF.Zpt.ExpressionEvaluators.CSharpExpressions
         
         Console.Error.Write(String.Join(System.Environment.NewLine, allErrorTexts));
 
-        // TODO: Improve this exception and put a message in a res file
-        throw new InvalidOperationException("There must not be compile errors creating assembly!");
+        throw new CSharpExpressionExceptionException(Resources.ExceptionMessages.MustNotBeCompileErrors) {
+          ExpressionText = model.ExpressionText
+        };
       }
 
       return result.CompiledAssembly;
