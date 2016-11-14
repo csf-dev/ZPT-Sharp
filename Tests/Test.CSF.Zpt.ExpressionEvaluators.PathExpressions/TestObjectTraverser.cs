@@ -8,6 +8,7 @@ using CSF.Zpt.TestUtils;
 using CSF.Zpt.Rendering;
 using CSF.Zpt.TestUtils.Autofixture;
 using CSF.Zpt.ExpressionEvaluators;
+using CSF.Zpt.ExpressionEvaluators.PathExpressions;
 
 namespace Test.CSF.Zpt.ExpressionEvaluators
 {

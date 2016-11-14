@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using CSF.Zpt.Tales;
 
-namespace CSF.Zpt.ExpressionEvaluators
+namespace CSF.Zpt.ExpressionEvaluators.PathExpressions
 {
   /// <summary>
   /// Implementation of <see cref="ExpressionEvaluatorBase"/> which handles TALES path expressions.
@@ -215,7 +215,7 @@ namespace CSF.Zpt.ExpressionEvaluators
     #region constructor
 
     /// <summary>
-    /// Initializes a new instance of the <see cref="CSF.Zpt.ExpressionEvaluators.PathExpressionEvaluator"/> class.
+    /// Initializes a new instance of the <see cref="CSF.Zpt.ExpressionEvaluators.PathExpressions.PathExpressionEvaluator"/> class.
     /// </summary>
     public PathExpressionEvaluator() : base() {}
 

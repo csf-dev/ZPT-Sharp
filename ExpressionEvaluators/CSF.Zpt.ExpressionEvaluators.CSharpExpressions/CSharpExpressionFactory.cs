@@ -8,8 +8,15 @@ using System.Linq;
 
 namespace CSF.Zpt.ExpressionEvaluators.CSharpExpressions
 {
+  /// <summary>
+  /// Default implementation of <see cref="ICSharpExpressionFactory"/>.
+  /// </summary>
   public class CSharpExpressionFactory : ICSharpExpressionFactory
   {
+    /// <summary>
+    /// Creates an expression from the given information
+    /// </summary>
+    /// <param name="model">Information representing the creation of a CSharp expression.</param>
     public CSharpExpression Create(ExpressionModel model)
     {
       if(model == null)
@@ -27,6 +34,12 @@ namespace CSF.Zpt.ExpressionEvaluators.CSharpExpressions
                                   assembly);
     }
 
+    /// <summary>
+    /// Gets a creation method which instantiates the <see cref="IExpressionHost"/> instance for a given model.
+    /// </summary>
+    /// <returns>The expression host creator.</returns>
+    /// <param name="assembly">Assembly.</param>
+    /// <param name="model">Model.</param>
     private Func<IExpressionHost> GetExpressionHostCreator(Assembly assembly, ExpressionModel model)
     {
       if(assembly == null)
@@ -37,13 +50,20 @@ namespace CSF.Zpt.ExpressionEvaluators.CSharpExpressions
       var type = assembly.GetType(String.Concat(model.Namespace, ".", model.GetClassName()));
       if(type == null)
       {
-        // TODO: Improve this exception and put a message in a res file
-        throw new InvalidOperationException("There must be a matching type in the generated assembly");
+        throw new CSharpExpressionExceptionException(Resources.ExceptionMessages.ExpressionTypeMustExist) {
+          ExpressionText = model.ExpressionText
+        };
       }
 
       return () => (IExpressionHost) Activator.CreateInstance(type);
     }
 
+    /// <summary>
+    /// Generates and compiles an <c>System.Reflection.Assembly</c> containing an implementation of
+    /// <see cref="IExpressionHost"/>, from the given expression information.
+    /// </summary>
+    /// <returns>The generated host assembly.</returns>
+    /// <param name="model">Model.</param>
     private Assembly CompileHostAssembly(ExpressionModel model)
     {
       CSharpCodeProvider provider = new CSharpCodeProvider();
@@ -71,13 +91,19 @@ namespace CSF.Zpt.ExpressionEvaluators.CSharpExpressions
         
         Console.Error.Write(String.Join(System.Environment.NewLine, allErrorTexts));
 
-        // TODO: Improve this exception and put a message in a res file
-        throw new InvalidOperationException("There must not be compile errors creating assembly!");
+        throw new CSharpExpressionExceptionException(Resources.ExceptionMessages.MustNotBeCompileErrors) {
+          ExpressionText = model.ExpressionText
+        };
       }
 
       return result.CompiledAssembly;
     }
 
+    /// <summary>
+    /// Gets the code to compile for the generated expression host type.
+    /// </summary>
+    /// <returns>The expression host code.</returns>
+    /// <param name="model">Model.</param>
     private string GetExpressionHostCode(ExpressionModel model)
     {
       var builder = new ExpressionHostBuilder(model);

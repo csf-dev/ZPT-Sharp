@@ -2,7 +2,7 @@
 
 namespace CSF.Zpt.ExpressionEvaluators.CSharpExpressions
 {
-  public partial class ExpressionHostBuilder
+  internal partial class ExpressionHostBuilder
   {
     protected ExpressionModel Model
     {

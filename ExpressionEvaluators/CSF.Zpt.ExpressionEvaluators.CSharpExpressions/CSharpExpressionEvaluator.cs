@@ -4,6 +4,9 @@ using CSF.Zpt.Rendering;
 
 namespace CSF.Zpt.ExpressionEvaluators.CSharpExpressions
 {
+  /// <summary>
+  /// Evaluator type for CSharp expressions.
+  /// </summary>
   public class CSharpExpressionEvaluator : ExpressionEvaluatorBase
   {
     #region constants
@@ -20,6 +23,10 @@ namespace CSF.Zpt.ExpressionEvaluators.CSharpExpressions
 
     #region properties
 
+    /// <summary>
+    /// Gets the expression prefix handled by the current evaluator instance.
+    /// </summary>
+    /// <value>The prefix.</value>
     public override string ExpressionPrefix
     {
       get {
@@ -31,6 +38,12 @@ namespace CSF.Zpt.ExpressionEvaluators.CSharpExpressions
 
     #region methods
 
+    /// <summary>
+    /// Evaluate the specified expression, for the given element and model.
+    /// </summary>
+    /// <param name="expression">The expression to evaluate.</param>
+    /// <param name="context">The rendering context for the expression being evaluated.</param>
+    /// <param name="model">The ZPT model, providing the context for evaluation.</param>
     public override ExpressionResult Evaluate(Expression expression, IRenderingContext context, ITalesModel model)
     {
       if(expression == null)
@@ -58,8 +71,17 @@ namespace CSF.Zpt.ExpressionEvaluators.CSharpExpressions
 
     #region constructors
 
+    /// <summary>
+    /// Initializes a new instance of the
+    /// <see cref="CSF.Zpt.ExpressionEvaluators.CSharpExpressions.CSharpExpressionEvaluator"/> class.
+    /// </summary>
     public CSharpExpressionEvaluator() : this(null) {}
 
+    /// <summary>
+    /// Initializes a new instance of the
+    /// <see cref="CSF.Zpt.ExpressionEvaluators.CSharpExpressions.CSharpExpressionEvaluator"/> class.
+    /// </summary>
+    /// <param name="service">Service.</param>
     public CSharpExpressionEvaluator(ICSharpExpressionService service)
     {
       _expressionService = service?? new CSharpExpressionService();

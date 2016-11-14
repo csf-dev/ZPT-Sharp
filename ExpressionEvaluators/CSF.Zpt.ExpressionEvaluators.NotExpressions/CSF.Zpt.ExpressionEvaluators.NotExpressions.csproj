@@ -5,7 +5,7 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{7B3748AD-DF11-4A80-9258-EA043CD99D7C}</ProjectGuid>
     <OutputType>Library</OutputType>
-    <RootNamespace>CSF.Zpt.ExpressionEvaluators</RootNamespace>
+    <RootNamespace>CSF.Zpt.ExpressionEvaluators.NotExpressions</RootNamespace>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <AssemblyName>CSF.Zpt.ExpressionEvaluators.NotExpressions</AssemblyName>
     <ProjectTitle>CSF.Zpt.ExpressionEvaluators.NotExpressions</ProjectTitle>
