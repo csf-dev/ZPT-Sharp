@@ -35,9 +35,9 @@
           Plugin assembly: <span metal:fill-slot="plugin_assembly"><code>CSF.Zpt.ExpressionEvaluators.PathExpressions.dll</code></span><br />
           <span metal:fill-slot="plugin_class_header">Plugin classes</span>:
           <span metal:fill-slot="plugin_class">
-            <code>CSF.Zpt.ExpressionEvaluators.PathExpressionEvaluator</code>
+            <code>CSF.Zpt.ExpressionEvaluators.PathExpressions.PathExpressionEvaluator</code>
             &amp;
-            <code>CSF.Zpt.ExpressionEvaluators.LocalVariablePathExpressionEvaluator</code>
+            <code>CSF.Zpt.ExpressionEvaluators.PathExpressions.LocalVariablePathExpressionEvaluator</code>
           </span><br />
           <span metal:fill-slot="expression_prefix_header">Expression prefixes</span>:
           <span metal:fill-slot="expression_prefix">
@@ -56,6 +56,11 @@
         variables added by either the environment or by
         <a href="tal/define.html">TAL <code>define</code></a>/<a href="tal/repeat.html">TAL <code>repeat</code></a>
         attributes.
+      </p>
+      <p>
+        A special variant of path expressions uses the prefix <code>local:</code>.
+        These local path expressions function identically to other path expressions (as described on this page),
+        except that they only consider <a href="tal/define.html#scope">variables defined with local scope</a>.
       </p>
       <h2>Structure of a path expression</h2>
       <p>
