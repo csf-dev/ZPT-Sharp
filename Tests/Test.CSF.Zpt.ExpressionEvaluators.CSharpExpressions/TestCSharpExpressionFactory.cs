@@ -4,6 +4,7 @@ using CSF.Zpt.ExpressionEvaluators.CSharpExpressions;
 using CSF.Zpt.ExpressionEvaluators.CSharpFramework;
 using System.Collections.Generic;
 using System.Linq;
+using Moq;
 
 namespace Test.CSF.Zpt.ExpressionEvaluators.CSharpExpressions
 {
@@ -13,6 +14,7 @@ namespace Test.CSF.Zpt.ExpressionEvaluators.CSharpExpressions
     #region fields
 
     private CSharpExpressionFactory _sut;
+    private Mock<INamespaceConfiguration> _namespaceConfig;
     private int _nextId;
 
     #endregion
@@ -22,14 +24,15 @@ namespace Test.CSF.Zpt.ExpressionEvaluators.CSharpExpressions
     [TestFixtureSetUp]
     public void FixtureSetup()
     {
-      _sut = new CSharpExpressionFactory();
       _nextId = 1;
     }
 
     [SetUp]
     public void Setup()
     {
-      
+      _namespaceConfig = new Mock<INamespaceConfiguration>();
+      _namespaceConfig.Setup(x => x.GetNamespaces()).Returns(new [] { "System" });
+      _sut = new CSharpExpressionFactory(_namespaceConfig.Object);
     }
 
     #endregion
@@ -54,6 +57,28 @@ namespace Test.CSF.Zpt.ExpressionEvaluators.CSharpExpressions
     {
       // Arrange
       var model = CreateModel("DateTime.Today.ToString()", Enumerable.Empty<string>());
+
+      // Act
+      var expression = _sut.Create(model);
+      var result = expression.Evaluate(new Dictionary<string, object>());
+
+      // Assert
+      Assert.AreEqual(DateTime.Today.ToString(), result);
+    }
+
+    [Test]
+    public void Create_returns_expression_which_may_be_executed_with_many_namespaces()
+    {
+      // Arrange
+      var model = CreateModel("DateTime.Today.ToString()", Enumerable.Empty<string>());
+      _namespaceConfig
+        .Setup(x => x.GetNamespaces())
+        .Returns(new [] {
+          "System",
+          "System.Collections",
+          "System.Collections.Generic",
+          "System.Linq",
+        });
 
       // Act
       var expression = _sut.Create(model);
