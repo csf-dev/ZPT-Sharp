@@ -14,7 +14,7 @@
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>bin\Debug</OutputPath>
-    <DefineConstants>DEBUG;</DefineConstants>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <ConsolePause>false</ConsolePause>
@@ -29,6 +29,7 @@
     <ConsolePause>false</ConsolePause>
     <DocumentationFile>bin\Release\CSF.Zpt.ExpressionEvaluators.CSharpExpressions.xml</DocumentationFile>
     <CheckForOverflowUnderflow>true</CheckForOverflowUnderflow>
+    <DefineConstants>TRACE</DefineConstants>
   </PropertyGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
@@ -48,12 +49,17 @@
       <Project>{3D5A705B-A414-4ACA-AC01-C053047F424E}</Project>
       <Name>CSF.Zpt.ExpressionEvaluators.CSharpFramework</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\CSF\CSF.Configuration\CSF.Configuration.csproj">
+      <Project>{8C570A26-CEEB-45D1-9436-745C8DBAE9D8}</Project>
+      <Name>CSF.Configuration</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Dynamic" />
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Configuration" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CSharpExpression.cs" />
@@ -74,6 +80,12 @@
     </Compile>
     <Compile Include="CSharpExpressionException.cs" />
     <Compile Include="TemplateWriterBase.cs" />
+    <Compile Include="INamespaceConfiguration.cs" />
+    <Compile Include="FallbackNamespaceConfiguration.cs" />
+    <Compile Include="NamespaceConfiguration.cs" />
+    <Compile Include="Resources\LogFormats.Designer.cs">
+      <DependentUpon>LogFormats.resx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="ExpressionHostBuilder.tt">
@@ -88,6 +100,10 @@
     <EmbeddedResource Include="Resources\ExceptionMessages.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>ExceptionMessages.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\LogFormats.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>LogFormats.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
 </Project>

@@ -5,6 +5,7 @@ using System.CodeDom.Compiler;
 using System.Reflection;
 using CSF.Zpt.ExpressionEvaluators.CSharpFramework;
 using System.Linq;
+using CSF.Configuration;
 
 namespace CSF.Zpt.ExpressionEvaluators.CSharpExpressions
 {
@@ -13,6 +14,14 @@ namespace CSF.Zpt.ExpressionEvaluators.CSharpExpressions
   /// </summary>
   public class CSharpExpressionFactory : ICSharpExpressionFactory
   {
+    #region fields
+
+    private INamespaceConfiguration _namespaceConfig;
+
+    #endregion
+
+    #region methods
+
     /// <summary>
     /// Creates an expression from the given information
     /// </summary>
@@ -86,10 +95,14 @@ namespace CSF.Zpt.ExpressionEvaluators.CSharpExpressions
 
       if(compilerErrors.Any(x => !x.IsWarning))
       {
-        var allErrorTexts = compilerErrors
-          .Select(x => String.Format("{0} - {2}:{1}", x.Line, x.ErrorText, x.ErrorNumber));
-        
-        Console.Error.Write(String.Join(System.Environment.NewLine, allErrorTexts));
+        foreach(var error in compilerErrors.Where(x => !x.IsWarning))
+        {
+          ZptConstants.TraceSource.TraceEvent(System.Diagnostics.TraceEventType.Warning,
+                                              5,
+                                              Resources.LogFormats.CompilerErrorFormat,
+                                              error,
+                                              model.ExpressionText);
+        }
 
         throw new CSharpExpressionExceptionException(Resources.ExceptionMessages.MustNotBeCompileErrors) {
           ExpressionText = model.ExpressionText
@@ -106,9 +119,35 @@ namespace CSF.Zpt.ExpressionEvaluators.CSharpExpressions
     /// <param name="model">Model.</param>
     private string GetExpressionHostCode(ExpressionModel model)
     {
-      var builder = new ExpressionHostBuilder(model);
+      var builder = new ExpressionHostBuilder(model, _namespaceConfig.GetNamespaces());
       return builder.TransformText();
     }
+
+    /// <summary>
+    /// Gets the alternative namespace configuration (used when no explicit configuration was provided).
+    /// </summary>
+    /// <returns>The alternative namespace configuration.</returns>
+    private INamespaceConfiguration GetAlternativeNamespaceConfiguration()
+    {
+      var config = ConfigurationHelper.GetSection<NamespaceConfiguration>();
+      return config?? FallbackNamespaceConfiguration.Default;
+    }
+
+    #endregion
+
+    #region constructor
+
+    /// <summary>
+    /// Initializes a new instance of the
+    /// <see cref="CSF.Zpt.ExpressionEvaluators.CSharpExpressions.CSharpExpressionFactory"/> class.
+    /// </summary>
+    /// <param name="namespaceConfig">Namespace config.</param>
+    public CSharpExpressionFactory(INamespaceConfiguration namespaceConfig = null)
+    {
+      _namespaceConfig = namespaceConfig?? GetAlternativeNamespaceConfiguration();
+    }
+
+    #endregion
   }
 }
 
