@@ -74,6 +74,7 @@
     </Compile>
     <Compile Include="CSharpExpressionException.cs" />
     <Compile Include="TemplateWriterBase.cs" />
+    <Compile Include="INamespaceConfiguration.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ExpressionHostBuilder.tt">

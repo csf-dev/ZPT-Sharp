@@ -19,7 +19,18 @@ namespace CSF.Zpt.ExpressionEvaluators.CSharpExpressions {
         
         public override string TransformText() {
             this.GenerationEnvironment = null;
-            this.Write("\nusing System;\n\nnamespace ");
+            this.Write("\n");
+
+foreach(var ns in Namespaces)
+{
+  
+            this.Write("using ");
+            this.Write(this.ToStringHelper.ToStringWithCulture( ns ));
+            this.Write(";");
+
+}
+
+            this.Write("\nnamespace ");
             this.Write(this.ToStringHelper.ToStringWithCulture( Model.Namespace ));
             this.Write("\n{\n  public class ");
             this.Write(this.ToStringHelper.ToStringWithCulture( Model.GetClassName() ));
