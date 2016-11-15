@@ -96,6 +96,16 @@
   Today's date is
   &lt;span tal:content="csharp:today.ToString(&amp;quot;yyyy-MM-dd&amp;quot;)"&gt;2012-01-01&lt;span&gt;
 &lt;/p&gt;</code></pre>
+      <h2>Namespaces available to C♯ expressions</h2>
+      <p>
+        By default (if no configuration is present), two namespaces are available to <code>csharp:</code> expressions.
+        These are <code>System</code> and <code>System.Linq</code>, as if the two namespaces were present in
+        <code>using</code> statements.
+      </p>
+      <p>
+        If you wish to customise this (affecting all CSharp expressions), you may do so using
+        <a href="configuration.html">the ZPT-Sharp configuration file</a>.
+      </p>
     </section>
   </div>
 </div>

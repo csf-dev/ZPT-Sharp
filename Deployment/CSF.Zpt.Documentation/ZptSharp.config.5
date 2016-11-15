@@ -17,7 +17,10 @@ The filename applicable to the configuration file depends upon your use-case:
 .PP
 The ZPT-Sharp configuration file is primarily used for indicating which ZPT-Sharp plugins are installed.
 The listed plugins are loaded at run-time by the core logic and used for rendering documents.
-Secondarily the configuration may be used in order to configure the capture and recording of diagnostic/logging information from ZPT-Sharp.
+.PP
+Other uses of the configuration file depend upon your installation scenario and requirements.
+If the \fICSharp\fR expressions plugin is installed then the configuration file may be used to indicate the desired namespaces which are available to CSharp expressions.
+Additionally, the configuration may be used in order to configure the capture and recording of diagnostic/logging information from ZPT-Sharp.
 .PP
 The filename for the configuration file depends upon the use-case.
 When using the \fIZptBuilder.exe\fR application, the configuration file must be named \fIZptBuilder.exe.config\fR.
@@ -71,6 +74,43 @@ The assembly paths are either absolute or relative paths.
 Where a relative path is given, it is evaluated based upon the path to the \fICSF.Zpt.dll\fR assembly.
 If the plugin assembly is in the same directory as that main ZPT-Sharp assembly then just the filename alone is sufficient (as shown above).
 The default expression evaluator, XML document provider and HTML document provider are indicated by listing their namespace-qualified type names in the appropriate configuration attributes.
+.SH CONFIGURING CSHARP NAMESPACES
+.PP
+If the plugin \fICSF.Zpt.ExpressionEvaluators.CSharpExpressions.dll\fR is installed, then CSharp expressions are available.
+When evaluating such expressions, by default two namespaces are made to the expressions via 'using NAMESPACE;' blocks.
+These two namespaces are \fISystem\fR and \fISystem.Linq\fR.
+If you wish to customise these namespaces (for all expressions) then you may integrate the following into your configuration.
+.PP
+.nf
+<configuration>
+  <configSections>
+    <sectionGroup name="CSF">
+      <sectionGroup name="Zpt">
+          <sectionGroup name="ExpressionEvaluators">
+            <sectionGroup name="CSharpExpressions">
+              <section name="NamespaceConfiguration"
+                       type="CSF.Zpt.ExpressionEvaluators.CSharpExpressions.NamespaceConfiguration, CSF.Zpt.ExpressionEvaluators.CSharpExpressions" />
+            </sectionGroup>
+          </sectionGroup>
+      </sectionGroup>
+    </sectionGroup>
+  </configSections>
+
+  <CSF>
+    <Zpt>
+      <ExpressionEvaluators>
+        <CSharpExpressions>
+          <NamespaceConfiguration>
+            <add Namespace="NAMESPACE" />
+          </NamespaceConfiguration>
+        </CSharpExpressions>
+      </ExpressionEvaluators>
+    </Zpt>
+  </CSF>
+</configuration>
+.fi
+.PP
+You may repeat the \fI<add Namespace="NAMESPACE" />\fR element as many times as desired, each time replacing NAMESPACE with a namespace to be imported.
 .SH CONFIGURING DIAGNOSTICS
 .PP
 ZPT-Sharp makes use of the .NET \fBSystem.Diagnostics\fR functionality to make diagnostic and logging information available, configured via the configuration file.
