@@ -43,7 +43,7 @@ foreach(var prop in Model.PropertyNames)
 #>
       default:
         var message = String.Format("The variable name '{0}' is not valid for this expression.", name);
-        throw new ArgumentException(message, nameof(name));
+        throw new ArgumentException(message, "name");
       }
     }
 

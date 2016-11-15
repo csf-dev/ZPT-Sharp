@@ -49,7 +49,7 @@ foreach(var prop in Model.PropertyNames)
 
 }
 
-            this.Write("      default:\n        var message = String.Format(\"The variable name '{0}' is not valid for this expression.\", name);\n        throw new ArgumentException(message, nameof(name));\n      }\n    }\n\n    #endregion\n  }\n}\n\n");
+            this.Write("      default:\n        var message = String.Format(\"The variable name '{0}' is not valid for this expression.\", name);\n        throw new ArgumentException(message, \"name\");\n      }\n    }\n\n    #endregion\n  }\n}\n\n");
             return this.GenerationEnvironment.ToString();
         }
         
