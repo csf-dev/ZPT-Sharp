@@ -91,7 +91,7 @@ class PythonExpression:
       }
       else if(variableNames.Count() == 1)
       {
-        variables = String.Format("{0} = vals[0]");
+        variables = String.Format("{0} = vals[0]", variableNames.Single());
       }
       else
       {
