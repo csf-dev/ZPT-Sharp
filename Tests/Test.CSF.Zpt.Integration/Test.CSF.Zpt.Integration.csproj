@@ -99,5 +99,9 @@
       <Project>{AA29F7A3-A259-408A-B2FC-E2EFD78BCDFC}</Project>
       <Name>CSF.Zpt.ExpressionEvaluators.CSharpExpressions</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\ExpressionEvaluators\CSF.Zpt.ExpressionEvaluators.PythonExpressions\CSF.Zpt.ExpressionEvaluators.PythonExpressions.csproj">
+      <Project>{9005A550-27E5-464A-BF6F-DD96F5539DAC}</Project>
+      <Name>CSF.Zpt.ExpressionEvaluators.PythonExpressions</Name>
+    </ProjectReference>
   </ItemGroup>
 </Project>
