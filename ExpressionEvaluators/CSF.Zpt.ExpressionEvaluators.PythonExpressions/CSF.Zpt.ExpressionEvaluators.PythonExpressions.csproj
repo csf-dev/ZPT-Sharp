@@ -71,5 +71,19 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="PythonExpressionHost.cs" />
+    <Compile Include="PythonExpressionEvaluator.cs" />
+    <Compile Include="Resources\ExceptionMessages.Designer.cs">
+      <DependentUpon>ExceptionMessages.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Resources\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\ExceptionMessages.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>ExceptionMessages.Designer.cs</LastGenOutput>
+      <LogicalName>CSF.Zpt.ExpressionEvaluators.PythonExpressions.ExceptionMessages.resources</LogicalName>
+    </EmbeddedResource>
   </ItemGroup>
 </Project>
