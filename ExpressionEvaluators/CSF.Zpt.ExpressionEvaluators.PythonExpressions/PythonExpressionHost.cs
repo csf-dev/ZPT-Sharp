@@ -10,7 +10,7 @@ using IronPython.Runtime;
 namespace CSF.Zpt.ExpressionEvaluators.PythonExpressions
 {
   /// <summary>
-  /// Proof of concept class for executing and evaluating Python expressions with an arbitrary set of variables.
+  /// Host type which builds and evaluates Python expressions using the IronPython API.
   /// </summary>
   public class PythonExpressionHost
   {
