@@ -6,7 +6,7 @@ using System.Collections.Generic;
 namespace Test.CSF.Zpt.ExpressionEvaluators.PythonExpressions
 {
   [TestFixture]
-  public class TestPythonPoC
+  public class TestPythonExpressionHost
   {
     #region tests
 
@@ -14,7 +14,7 @@ namespace Test.CSF.Zpt.ExpressionEvaluators.PythonExpressions
     public void Evaluate_returns_expected_result_with_no_variables()
     {
       // Arrange
-      var sut = new PythonPoC();
+      var sut = new PythonExpressionHost();
 
       // Act
       var result = sut.Evaluate("6", new Dictionary<string,object>());
@@ -27,7 +27,7 @@ namespace Test.CSF.Zpt.ExpressionEvaluators.PythonExpressions
     public void Evaluate_returns_expected_result_with_one_variable()
     {
       // Arrange
-      var sut = new PythonPoC();
+      var sut = new PythonExpressionHost();
 
       // Act
       var result = sut.Evaluate("one+5", new Dictionary<string,object>{
@@ -42,7 +42,7 @@ namespace Test.CSF.Zpt.ExpressionEvaluators.PythonExpressions
     public void Evaluate_returns_expected_result_with_three_variables()
     {
       // Arrange
-      var sut = new PythonPoC();
+      var sut = new PythonExpressionHost();
 
       // Act
       var result = sut.Evaluate("one+two+three", new Dictionary<string,object>{
@@ -59,7 +59,7 @@ namespace Test.CSF.Zpt.ExpressionEvaluators.PythonExpressions
     public void Evaluate_returns_expected_result_twice_with_three_variables()
     {
       // Arrange
-      var sut = new PythonPoC();
+      var sut = new PythonExpressionHost();
 
       // Act
       var variables = new Dictionary<string,object>{

@@ -12,7 +12,7 @@ namespace CSF.Zpt.ExpressionEvaluators.PythonExpressions
   /// <summary>
   /// Proof of concept class for executing and evaluating Python expressions with an arbitrary set of variables.
   /// </summary>
-  public class PythonPoC
+  public class PythonExpressionHost
   {
     #region constants
 
@@ -106,9 +106,9 @@ class PythonExpression:
     #region constructor
 
     /// <summary>
-    /// Initializes a new instance of the <see cref="CSF.Zpt.ExpressionEvaluators.PythonExpressions.PythonPoC"/> class.
+    /// Initializes a new instance of the <see cref="CSF.Zpt.ExpressionEvaluators.PythonExpressions.PythonExpressionHost"/> class.
     /// </summary>
-    public PythonPoC()
+    public PythonExpressionHost()
     {
       _engine = Python.CreateEngine();
       _operations = _engine.Operations;

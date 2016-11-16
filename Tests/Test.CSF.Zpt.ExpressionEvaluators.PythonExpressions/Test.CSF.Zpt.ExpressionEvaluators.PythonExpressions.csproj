@@ -55,6 +55,6 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="TestPythonPoC.cs" />
+    <Compile Include="TestPythonExpressionHost.cs" />
   </ItemGroup>
 </Project>

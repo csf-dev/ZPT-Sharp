@@ -70,6 +70,6 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="PythonPoC.cs" />
+    <Compile Include="PythonExpressionHost.cs" />
   </ItemGroup>
 </Project>
