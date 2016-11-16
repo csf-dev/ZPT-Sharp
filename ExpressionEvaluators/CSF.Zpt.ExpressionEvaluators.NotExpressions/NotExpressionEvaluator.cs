@@ -56,7 +56,8 @@ namespace CSF.Zpt.ExpressionEvaluators.NotExpressions
         throw new ArgumentNullException(nameof(model));
       }
 
-      var result = model.Evaluate(ExpressionCreator.Create(expression), context);
+      var trimmedContent = expression.Content.TrimStart();
+      var result = model.Evaluate(ExpressionCreator.Create(trimmedContent), context);
       bool booleanResult = this.CoerceToBoolean(result);
 
       return new ExpressionResult(!booleanResult);
