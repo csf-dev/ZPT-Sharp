@@ -2,6 +2,9 @@
 using IronPython.Hosting;
 using Microsoft.Scripting.Hosting;
 using Microsoft.CSharp;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
 
 namespace CSF.Zpt.ExpressionEvaluators.PythonExpressions
 {
@@ -11,10 +14,18 @@ namespace CSF.Zpt.ExpressionEvaluators.PythonExpressions
 
     private const string
       CLASS_NAME = "PythonExpression",
-      PYTHON_SCRIPT = @"
+      PYTHON_SCRIPT_TEMPLATE = @"
 class PythonExpression:
-  def evaluate(self,a,b,c):
-    return a+b+c";
+{0}
+  def setVariable(self, name, val):
+{1}
+  def evaluate(self):
+    return {2}",
+    VARIABLE_DEF_TEMPLATE = "  {0} = None{1}",
+    VARIABLE_SET_TEMPLATE = @"    if name == '{0}':
+      {0} = val
+      return
+  {1}";
 
     #endregion
 
@@ -26,17 +37,43 @@ class PythonExpression:
 
     #region methods
 
-    public object Evaluate()
+    public object Evaluate(string expression, IDictionary<string,object> variableValues)
     {
       var scope = _engine.CreateScope();
       var ops = _engine.Operations;
 
-      _engine.Execute(PYTHON_SCRIPT, scope);
+      var script = CreateScript(expression, variableValues.Keys.ToArray());
+
+      _engine.Execute(script, scope);
 
       var pythonClass = scope.GetVariable(CLASS_NAME);
       var instance = ops.CreateInstance(pythonClass);
 
-      return (object) instance.evaluate(1, 2, 3);
+      foreach(var pairing in variableValues)
+      {
+        instance.setVariable(pairing.Key, pairing.Value);
+      }
+
+      return (object) instance.evaluate();
+    }
+
+    private string CreateScript(string expression, IEnumerable<string> variableNames)
+    {
+      StringBuilder
+        variableDefs = new StringBuilder(),
+        variableSetters = new StringBuilder();
+
+      foreach(var name in variableNames)
+      {
+        variableDefs.AppendFormat(VARIABLE_DEF_TEMPLATE, name, Environment.NewLine);
+        variableSetters.AppendFormat(VARIABLE_SET_TEMPLATE, name, Environment.NewLine);
+      }
+
+      var output = String.Format(PYTHON_SCRIPT_TEMPLATE, variableDefs, variableSetters, expression);
+
+      Console.WriteLine(output);
+
+      return output;
     }
 
     #endregion

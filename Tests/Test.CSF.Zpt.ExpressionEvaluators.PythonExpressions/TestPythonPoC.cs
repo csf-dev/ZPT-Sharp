@@ -1,6 +1,7 @@
 ﻿using System;
 using NUnit.Framework;
 using CSF.Zpt.ExpressionEvaluators.PythonExpressions;
+using System.Collections.Generic;
 
 namespace Test.CSF.Zpt.ExpressionEvaluators.PythonExpressions
 {
@@ -16,7 +17,11 @@ namespace Test.CSF.Zpt.ExpressionEvaluators.PythonExpressions
       var sut = new PythonPoC();
 
       // Act
-      var result = sut.Evaluate();
+      var result = sut.Evaluate("one+two+three", new Dictionary<string,object>{
+        { "one",   1 },
+        { "two",   2 },
+        { "three", 3 },
+      });
 
       // Assert
       Assert.AreEqual(6, result);
