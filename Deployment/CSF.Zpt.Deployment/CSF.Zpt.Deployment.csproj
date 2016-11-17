@@ -77,4 +77,9 @@
       <Name>CSF.Zpt.MVC</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Zpt-Sharp-API.nuspec" />
+    <None Include="Zpt-Sharp-ZptBuilder.nuspec" />
+    <None Include="Zpt-Sharp-MVC5.nuspec" />
+  </ItemGroup>
 </Project>

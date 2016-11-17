@@ -198,9 +198,21 @@
       <Output TaskParameter="InformationalVersion" ItemName="InformationalVersion" />
     </ReadVersionNumber>
     <ItemGroup>
+      <NuspecFile Include="$(PathToSolutionRoot)\CSF.Zpt.Abstractions\CSF.Zpt.Abstractions.nuspec" />
       <NuspecFile Include="$(PathToSolutionRoot)\CSF.Zpt.Cli\CSF.Zpt.Cli.nuspec" />
       <NuspecFile Include="$(PathToSolutionRoot)\CSF.Zpt\CSF.Zpt.nuspec" />
       <NuspecFile Include="$(PathToSolutionRoot)\CSF.Zpt.MVC\CSF.Zpt.MVC.nuspec" />
+      <NuspecFile Include="$(PathToSolutionRoot)\Deployment\CSF.Zpt.Deployment\Zpt-Sharp-API.nuspec" />
+      <NuspecFile Include="$(PathToSolutionRoot)\Deployment\CSF.Zpt.Deployment\Zpt-Sharp-MVC5.nuspec" />
+      <NuspecFile Include="$(PathToSolutionRoot)\Deployment\CSF.Zpt.Deployment\Zpt-Sharp-ZptBuilder.nuspec" />
+      <NuspecFile Include="$(PathToSolutionRoot)\DocumentProviders\CSF.Zpt.DocumentProviders.HtmlHAP\CSF.Zpt.DocumentProviders.HtmlHAP.nuspec" />
+      <NuspecFile Include="$(PathToSolutionRoot)\DocumentProviders\CSF.Zpt.DocumentProviders.XmlLegacy\CSF.Zpt.DocumentProviders.XmlLegacy.nuspec" />
+      <NuspecFile Include="$(PathToSolutionRoot)\DocumentProviders\CSF.Zpt.DocumentProviders.XmlLinq\CSF.Zpt.DocumentProviders.XmlLinq.nuspec" />
+      <NuspecFile Include="$(PathToSolutionRoot)\ExpressionEvaluators\CSF.Zpt.ExpressionEvaluators.CSharpExpressions\CSF.Zpt.ExpressionEvaluators.CSharpExpressions.nuspec" />
+      <NuspecFile Include="$(PathToSolutionRoot)\ExpressionEvaluators\CSF.Zpt.ExpressionEvaluators.NotExpressions\CSF.Zpt.ExpressionEvaluators.NotExpressions.nuspec" />
+      <NuspecFile Include="$(PathToSolutionRoot)\ExpressionEvaluators\CSF.Zpt.ExpressionEvaluators.PathExpressions\CSF.Zpt.ExpressionEvaluators.PathExpressions.nuspec" />
+      <NuspecFile Include="$(PathToSolutionRoot)\ExpressionEvaluators\CSF.Zpt.ExpressionEvaluators.PythonExpressions\CSF.Zpt.ExpressionEvaluators.PythonExpressions.nuspec" />
+      <NuspecFile Include="$(PathToSolutionRoot)\ExpressionEvaluators\CSF.Zpt.ExpressionEvaluators.StringExpressions\CSF.Zpt.ExpressionEvaluators.StringExpressions.nuspec" />
     </ItemGroup>
     <Exec Command="nuget pack %(NuspecFile.Identity) -Prop Configuration=Release -OutputDirectory $(DeploymentOutputPath) -version @(SemanticVersion)"
           Condition="'$(OS)' == 'Unix'" />
