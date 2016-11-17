@@ -88,5 +88,6 @@
   <ItemGroup>
     <None Include="packages.config" />
     <None Include="CSF.Zpt.ExpressionEvaluators.PathExpressions.nuspec" />
+    <None Include="CSF.Zpt.ExpressionEvaluators.PathExpressions.nuspec.pt" />
   </ItemGroup>
 </Project>

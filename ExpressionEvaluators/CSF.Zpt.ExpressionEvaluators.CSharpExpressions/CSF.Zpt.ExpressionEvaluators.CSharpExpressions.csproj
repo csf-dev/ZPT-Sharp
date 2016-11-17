@@ -99,6 +99,7 @@
       <LastGenOutput>ExpressionHostBuilder.cs</LastGenOutput>
     </None>
     <None Include="CSF.Zpt.ExpressionEvaluators.CSharpExpressions.nuspec" />
+    <None Include="CSF.Zpt.ExpressionEvaluators.CSharpExpressions.nuspec.pt" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\" />
