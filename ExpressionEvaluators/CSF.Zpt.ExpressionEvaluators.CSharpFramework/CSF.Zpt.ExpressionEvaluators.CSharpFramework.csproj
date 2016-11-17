@@ -8,7 +8,12 @@
     <RootNamespace>CSF.Zpt.ExpressionEvaluators.CSharpFramework</RootNamespace>
     <AssemblyName>CSF.Zpt.ExpressionEvaluators.CSharpFramework</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <ProjectTitle>CSF.Zpt.ExpressionEvaluators.CSharpFramework</ProjectTitle>
+    <ProjectDescription>Assembly for types which must be referenced by the generated CSharp expression types.</ProjectDescription>
+    <PathToSolutionRoot>..\..</PathToSolutionRoot>
   </PropertyGroup>
+  <Import Project="$(PathToSolutionRoot)\Common\SolutionProperties.targets" />
+  <Import Project="$(PathToSolutionRoot)\Deployment\CSF.Zpt.DeploymentTasks\CSF.Zpt.DeploymentTasks.targets" />
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
@@ -32,8 +37,14 @@
     <DefineConstants>TRACE</DefineConstants>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="IExpressionHost.cs" />
+    <Compile Include="AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Target Name="GetVersionInfo">
+    <CallTarget Targets="StampAssemblyInfo" />
+  </Target>
+  <Target Name="AfterBuild">
+    <CallTarget Targets="RestoreStubAssemblyInfo" />
+  </Target>
 </Project>
