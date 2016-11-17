@@ -70,5 +70,6 @@
   </Target>
   <ItemGroup>
     <None Include="packages.config" />
+    <None Include="CSF.Zpt.DocumentProviders.HtmlHAP.nuspec" />
   </ItemGroup>
 </Project>

@@ -119,6 +119,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+    <None Include="CSF.Zpt.MVC.nuspec" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\" />

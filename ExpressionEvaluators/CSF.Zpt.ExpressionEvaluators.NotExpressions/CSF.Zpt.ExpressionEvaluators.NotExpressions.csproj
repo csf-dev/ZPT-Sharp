@@ -62,5 +62,6 @@
   </Target>
   <ItemGroup>
     <None Include="packages.config" />
+    <None Include="CSF.Zpt.ExpressionEvaluators.NotExpressions.nuspec" />
   </ItemGroup>
 </Project>
