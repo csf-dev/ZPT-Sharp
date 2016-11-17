@@ -74,6 +74,7 @@
   <ItemGroup>
     <None Include="packages.config" />
     <None Include="CSF.Zpt.ExpressionEvaluators.PythonExpressions.nuspec" />
+    <None Include="CSF.Zpt.ExpressionEvaluators.PythonExpressions.nuspec.pt" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="PythonExpressionHost.cs" />

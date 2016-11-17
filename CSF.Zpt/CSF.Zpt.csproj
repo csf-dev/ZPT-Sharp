@@ -184,5 +184,6 @@
   <ItemGroup>
     <None Include="packages.config" />
     <None Include="CSF.Zpt.nuspec" />
+    <None Include="CSF.Zpt.nuspec.pt" />
   </ItemGroup>
 </Project>

@@ -3,6 +3,7 @@ using Microsoft.Build.Utilities;
 using Microsoft.Build.Framework;
 using CSF.IniDocuments;
 using System.IO;
+using System.Text.RegularExpressions;
 
 namespace CSF.Zpt.DeploymentTasks
 {
@@ -14,6 +15,12 @@ namespace CSF.Zpt.DeploymentTasks
       SEMANTIC_VERSION        = "semantic_version",
       BUILD_NUMBER            = "build_number",
       INFORMATIONAL_VERSION   = "informational_version";
+
+    private const string
+      MAJOR_VERSION_PATTERN = @"^(\d+)\.\d+\.\d+$",
+      MAJOR_VERSION_FORMAT = "{0}.0.0";
+
+    private static readonly Regex MajorVersionParser = new Regex(MAJOR_VERSION_PATTERN, RegexOptions.Compiled);
 
     #endregion
 
@@ -27,6 +34,9 @@ namespace CSF.Zpt.DeploymentTasks
 
     [Output]
     public string SemanticVersionNumber { get; set; }
+
+    [Output]
+    public string NextBreakingVersionNumber { get; set; }
 
     [Output]
     public string BuildNumber { get; set; }
@@ -50,8 +60,15 @@ namespace CSF.Zpt.DeploymentTasks
       if(semanticSuccess && buildSuccess)
       {
         this.SemanticVersionNumber = semanticVersion;
-        this.BuildNumber = buildNumber;
-        this.FullVersionNumber = String.Concat(SemanticVersionNumber, ".", BuildNumber);
+
+        var majorVersion = Int32.Parse(MajorVersionParser.Match(semanticVersion).Groups[1].Value);
+        this.NextBreakingVersionNumber = String.Format(MAJOR_VERSION_FORMAT, majorVersion + 1);
+
+        if(buildSuccess)
+        {
+          this.BuildNumber = buildNumber;
+          this.FullVersionNumber = String.Concat(SemanticVersionNumber, ".", BuildNumber);
+        }
       }
 
       if(informationalSuccess)

@@ -1,8 +1,8 @@
-﻿<?xml version="1.0"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <package>
   <metadata>
     <id>Zpt-Sharp-MVC5</id>
-    <version>0.0.0</version>
+    <version>0.6.1</version>
     <title>ZPT-Sharp for ASP.NET MVC5</title>
     <authors>CSF Software Ltd</authors>
     <licenseUrl>https://opensource.org/licenses/MIT</licenseUrl>
@@ -11,8 +11,8 @@
     <description>The ZPT-Sharp ASP.NET MVC5 ViewEngine and the standard collection of plugins.  This bundle provides a functional MVC5 setup.</description>
     <copyright>Copyright 2016</copyright>
     <dependencies>
-      <dependency id="Zpt-Sharp-API" version="[0.7.0,0.8.0)" />
-      <dependency id="CSF.Zpt.MVC" version="[0.7.0,0.8.0)" />
+      <dependency id="Zpt-Sharp-API" version="[0.6.1,1.0.0)" />
+      <dependency id="CSF.Zpt.MVC" version="[0.6.1,1.0.0)" />
     </dependencies>
   </metadata>
 </package>

@@ -1,8 +1,8 @@
-﻿<?xml version="1.0"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <package>
   <metadata>
     <id>Zpt-Sharp-API</id>
-    <version>0.0.0</version>
+    <version>0.6.1</version>
     <title>ZPT-Sharp API bundle</title>
     <authors>CSF Software Ltd</authors>
     <licenseUrl>https://opensource.org/licenses/MIT</licenseUrl>
@@ -11,13 +11,13 @@
     <description>Includes ZPT-Sharp and the standard collection of plugins.  This bundle provides a functional ZPT-Sharp API.</description>
     <copyright>Copyright 2016</copyright>
     <dependencies>
-      <dependency id="CSF.Zpt" version="[0.7.0,0.8.0)" />
-      <dependency id="CSF.Zpt.DocumentProviders.HtmlHAP" version="[0.7.0,0.8.0)" />
-      <dependency id="CSF.Zpt.DocumentProviders.XmlLinq" version="[0.7.0,0.8.0)" />
-      <dependency id="CSF.Zpt.ExpressionEvaluators.NotExpressions" version="[0.7.0,0.8.0)" />
-      <dependency id="CSF.Zpt.ExpressionEvaluators.StringExpressions" version="[0.7.0,0.8.0)" />
-      <dependency id="CSF.Zpt.ExpressionEvaluators.PathExpressions" version="[0.7.0,0.8.0)" />
-      <dependency id="CSF.Zpt.ExpressionEvaluators.CSharpExpressions" version="[0.7.0,0.8.0)" />
+      <dependency id="CSF.Zpt" version="[0.6.1,1.0.0)" />
+      <dependency id="CSF.Zpt.DocumentProviders.HtmlHAP" version="[0.6.1,1.0.0)" />
+      <dependency id="CSF.Zpt.DocumentProviders.XmlLinq" version="[0.6.1,1.0.0)" />
+      <dependency id="CSF.Zpt.ExpressionEvaluators.NotExpressions" version="[0.6.1,1.0.0)" />
+      <dependency id="CSF.Zpt.ExpressionEvaluators.StringExpressions" version="[0.6.1,1.0.0)" />
+      <dependency id="CSF.Zpt.ExpressionEvaluators.PathExpressions" version="[0.6.1,1.0.0)" />
+      <dependency id="CSF.Zpt.ExpressionEvaluators.CSharpExpressions" version="[0.6.1,1.0.0)" />
     </dependencies>
   </metadata>
 </package>

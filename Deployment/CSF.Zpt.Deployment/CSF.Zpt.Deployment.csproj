@@ -81,5 +81,8 @@
     <None Include="Zpt-Sharp-API.nuspec" />
     <None Include="Zpt-Sharp-ZptBuilder.nuspec" />
     <None Include="Zpt-Sharp-MVC5.nuspec" />
+    <None Include="Zpt-Sharp-API.nuspec.pt" />
+    <None Include="Zpt-Sharp-MVC5.nuspec.pt" />
+    <None Include="Zpt-Sharp-ZptBuilder.nuspec.pt" />
   </ItemGroup>
 </Project>

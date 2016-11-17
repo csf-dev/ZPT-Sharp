@@ -180,6 +180,7 @@
     <MakeDir Directories="$(TemporaryBuildPath)" />
     <MakeDir Directories="$(TemporaryBuildPath)\Doxygen" />
     <MakeDir Directories="$(TemporaryBuildPath)\Website" />
+    <MakeDir Directories="$(TemporaryBuildPath)\Nuget" />
     <MakeDir Directories="$(TemporaryBuildPath)\Website\Pass1" />
     <MakeDir Directories="$(TemporaryBuildPath)\Website\Pass2" />
   </Target>
@@ -196,6 +197,7 @@
       <Output TaskParameter="SemanticVersionNumber" ItemName="SemanticVersion" />
       <Output TaskParameter="BuildNumber" ItemName="BuildNumber" />
       <Output TaskParameter="InformationalVersion" ItemName="InformationalVersion" />
+      <Output TaskParameter="NextBreakingVersionNumber" ItemName="NextBreakingVersion" />
     </ReadVersionNumber>
     <ItemGroup>
       <NuspecFile Include="$(PathToSolutionRoot)\CSF.Zpt.Abstractions\CSF.Zpt.Abstractions.nuspec" />
@@ -214,9 +216,13 @@
       <NuspecFile Include="$(PathToSolutionRoot)\ExpressionEvaluators\CSF.Zpt.ExpressionEvaluators.PythonExpressions\CSF.Zpt.ExpressionEvaluators.PythonExpressions.nuspec" />
       <NuspecFile Include="$(PathToSolutionRoot)\ExpressionEvaluators\CSF.Zpt.ExpressionEvaluators.StringExpressions\CSF.Zpt.ExpressionEvaluators.StringExpressions.nuspec" />
     </ItemGroup>
-    <Exec Command="nuget pack %(NuspecFile.Identity) -Prop Configuration=Release -OutputDirectory $(DeploymentOutputPath) -version @(SemanticVersion)"
+    <ItemGroup>
+      <CopyrightYear Include="$([System.DateTime]::Now.ToString(yyyy))" />
+    </ItemGroup>
+    <Exec Command="$(PathToSolutionRoot)\CSF.Zpt.Cli\bin\Release\ZptBuilder.exe &quot;%(NuspecFile.Identity).pt&quot; -x -o &quot;%(NuspecFile.Identity)&quot; --keyword-options &quot;version=@(SemanticVersion);nextBreakingVersion=@(NextBreakingVersion);copyrightYear=@(CopyrightYear)&quot;" />
+    <Exec Command="nuget pack %(NuspecFile.Identity) -Prop Configuration=Release -OutputDirectory $(DeploymentOutputPath)"
           Condition="'$(OS)' == 'Unix'" />
-    <Exec Command="&quot;$(MSBuildProgramFiles32)\NuGet\nuget.exe&quot; pack %(NuspecFile.Identity) -Prop Configuration=Release -OutputDirectory $(DeploymentOutputPath) -version @(SemanticVersion)"
+    <Exec Command="&quot;$(MSBuildProgramFiles32)\NuGet\nuget.exe&quot; pack %(NuspecFile.Identity) -Prop Configuration=Release -OutputDirectory $(DeploymentOutputPath)"
           Condition="'$(OS)' != 'Unix'" />
   </Target>
 

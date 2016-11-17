@@ -68,5 +68,6 @@
   <ItemGroup>
     <None Include="packages.config" />
     <None Include="CSF.Zpt.DocumentProviders.XmlLinq.nuspec" />
+    <None Include="CSF.Zpt.DocumentProviders.XmlLinq.nuspec.pt" />
   </ItemGroup>
 </Project>
