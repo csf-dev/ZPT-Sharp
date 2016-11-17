@@ -1,8 +1,8 @@
-﻿<?xml version="1.0"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <package>
   <metadata>
     <id>CSF.Zpt.MVC</id>
-    <version>0.0.0</version>
+    <version>0.6.1</version>
     <title>CSF.Zpt.MVC (ZPT-Sharp component)</title>
     <authors>CSF Software Ltd</authors>
     <licenseUrl>https://opensource.org/licenses/MIT</licenseUrl>
@@ -11,7 +11,7 @@
     <description>ZPT-Sharp ASP.NET MVC5 ViewEngine.  This is a minimal package with no plugins; consider the ZPT-Sharp-MVC5 package.  For more information see the project website.</description>
     <copyright>Copyright 2016</copyright>
     <dependencies>
-      <dependency id="CSF.Zpt" version="[0.7.0,0.8.0)" />
+      <dependency id="CSF.Zpt" version="[0.6.1,1.0.0)" />
     </dependencies>
     <frameworkAssemblies>
       <frameworkAssembly assemblyName="Microsoft.Web.Infrastructure.dll" />

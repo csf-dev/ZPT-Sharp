@@ -1,8 +1,8 @@
-﻿<?xml version="1.0"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <package>
   <metadata>
     <id>Zpt-Sharp-ZptBuilder</id>
-    <version>0.0.0</version>
+    <version>0.6.1</version>
     <title>ZPT-Sharp ZptBuilder application</title>
     <authors>CSF Software Ltd</authors>
     <licenseUrl>https://opensource.org/licenses/MIT</licenseUrl>
@@ -11,8 +11,8 @@
     <description>The ZPT-Sharp ZptBuilder.exe application and the standard collection of plugins.  This bundle provides a functional application installation.</description>
     <copyright>Copyright 2016</copyright>
     <dependencies>
-      <dependency id="Zpt-Sharp-API" version="[0.7.0,0.8.0)" />
-      <dependency id="CSF.Zpt.Cli" version="[0.7.0,0.8.0)" />
+      <dependency id="Zpt-Sharp-API" version="[0.6.1,1.0.0)" />
+      <dependency id="CSF.Zpt.Cli" version="[0.6.1,1.0.0)" />
     </dependencies>
   </metadata>
 </package>
