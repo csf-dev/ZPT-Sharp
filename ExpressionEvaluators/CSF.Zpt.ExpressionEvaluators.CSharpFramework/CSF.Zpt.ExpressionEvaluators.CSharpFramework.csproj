@@ -41,7 +41,7 @@
     <Compile Include="AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
-  <Target Name="GetVersionInfo">
+  <Target Name="BeforeBuild">
     <CallTarget Targets="StampAssemblyInfo" />
   </Target>
   <Target Name="AfterBuild">

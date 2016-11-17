@@ -132,7 +132,7 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
-  <Target Name="GetVersionInfo">
+  <Target Name="BeforeBuild">
     <CallTarget Targets="StampAssemblyInfo" />
   </Target>
   <Target Name="AfterBuild">

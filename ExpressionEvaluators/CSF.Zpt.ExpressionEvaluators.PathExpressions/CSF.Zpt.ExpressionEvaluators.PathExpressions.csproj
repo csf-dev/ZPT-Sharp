@@ -79,7 +79,7 @@
       <LastGenOutput>ExceptionMessages.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
-  <Target Name="GetVersionInfo">
+  <Target Name="BeforeBuild">
     <CallTarget Targets="StampAssemblyInfo" />
   </Target>
   <Target Name="AfterBuild">
