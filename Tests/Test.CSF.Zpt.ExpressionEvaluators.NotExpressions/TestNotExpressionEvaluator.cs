@@ -6,6 +6,7 @@ using Ploeh.AutoFixture;
 using CSF.Zpt.Rendering;
 using CSF.Zpt;
 using CSF.Zpt.ExpressionEvaluators;
+using CSF.Zpt.ExpressionEvaluators.NotExpressions;
 
 namespace Test.CSF.Zpt.ExpressionEvaluators
 {

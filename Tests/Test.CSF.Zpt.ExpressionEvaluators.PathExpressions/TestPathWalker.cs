@@ -2,6 +2,7 @@ using System;
 using NUnit.Framework;
 using CSF.Zpt.Tales;
 using CSF.Zpt.ExpressionEvaluators;
+using CSF.Zpt.ExpressionEvaluators.PathExpressions;
 
 namespace Test.CSF.Zpt.ExpressionEvaluators
 {

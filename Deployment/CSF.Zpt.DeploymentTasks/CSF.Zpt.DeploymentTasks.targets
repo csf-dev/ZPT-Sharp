@@ -1,0 +1,443 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <!-- PropertyGroup sets up a reference to the current project, so that the build is ordered correctly -->
+  <ItemGroup>
+    <ProjectReference Include="$(PathToSolutionRoot)\Deployment\CSF.Zpt.DeploymentTasks\CSF.Zpt.DeploymentTasks.csproj">
+      <Project>{3E1DAACE-519B-4C6C-80E3-3F06A1A33C66}</Project>
+      <Name>CSF.Zpt.DeploymentTasks</Name>
+    </ProjectReference>
+  </ItemGroup>
+  
+  <!-- Set up the paths to the MSBuild extension pack and this project's own DLL file -->
+  <PropertyGroup>
+    <TasksConfig Condition="'$(Configuration)' == 'Debug'">Debug</TasksConfig>
+    <TasksConfig Condition="'$(Configuration)' == 'Release'">Release</TasksConfig>
+    <TasksConfig Condition="'$(Configuration)' == 'Deploy'">Release</TasksConfig>
+    <TasksPath>bin\$(TasksConfig)\CSF.Zpt.DeploymentTasks.dll</TasksPath>
+    <DeploymentOutputPath>$(PathToSolutionRoot)\Deployment\Output</DeploymentOutputPath>
+    <TemporaryBuildPath>$(PathToSolutionRoot)\Deployment\obj</TemporaryBuildPath>
+    <PlaintextManPageColumns>80</PlaintextManPageColumns>
+    <HtmlManPageColumns>100</HtmlManPageColumns>
+    <WebsiteUrlRoot Condition="'$(WebsiteUrlRoot)' == ''">http://csf-dev.github.io/ZPT-Sharp/</WebsiteUrlRoot>
+  </PropertyGroup>
+  <Import Project="..\..\packages\MSBuild.Extension.Pack.1.8.0\build\net40\MSBuild.Extension.Pack.targets" />
+  
+  <!--  ************************************************************************
+        ** ReadVersionNumber
+  
+        This task refers to a class within the DeploymentTasks library.
+        It reads a formatted ini file and exposes the version information within
+        that file.
+        ************************************************************************
+  -->
+  <UsingTask TaskName="ReadVersionNumber" AssemblyFile="$(TasksPath)" />
+  
+  <!--  ************************************************************************
+        ** IncrementBuildVersion
+  
+        This task opens a version information ini file and bumps (increments) the
+        build number by one, then re-saves the file.
+        ************************************************************************
+  -->
+  <UsingTask TaskName="IncrementBuildVersion" AssemblyFile="$(TasksPath)" />
+  
+  <!--  ************************************************************************
+        ** RequireFilesOnPath
+  
+        This task receives a collection of files (executables).  For each of these
+        it ensures that the file exists in the current PATH (environment variable).
+        If any are not available then an error is raised.  If all are present then
+        the task allows execution to continue.
+        ************************************************************************
+  -->
+  <UsingTask TaskName="RequireFilesOnPath" AssemblyFile="$(TasksPath)" />
+  
+  <!--  ************************************************************************
+        ** ExecWithIgnoredExitCodes
+  
+        This task is just like MSBuild's built-in Exec task, except that it is
+        capable of ignoring certain non-zero exit codes.  This is required in
+        this case because the 'tidy' application will issue warnings (nonzero
+        exit code) about the generated HTML.  But - there's nothing we can do
+        to fix those (it's bad HTML), so we have to ignore those codes.
+        ************************************************************************
+  -->
+  <UsingTask TaskName="ExecWithIgnoredExitCodes" AssemblyFile="$(TasksPath)" />
+
+  <!--  ************************************************************************
+        ** CreateZipArchive
+  
+        This task creates a ZIP archive from a collection of files.
+        ************************************************************************
+  -->
+  <UsingTask TaskName="CreateZipArchive" AssemblyFile="$(TasksPath)" />
+  
+  <!--  ************************************************************************
+        ** FixDocTag
+  
+        This task manipulates an HTML document, substituting some elements with
+        a METAL macro open and close element.
+        ************************************************************************
+  -->
+  <UsingTask TaskName="FixDocTag" AssemblyFile="$(TasksPath)" />
+
+
+  <!--  ************************************************************************
+        ** StampAssemblyInfo
+  
+        This target 'bakes in' data to an AssemblyInfo.cs file from a number
+        of build properties.  The properties which refer to version are drawn from
+        the shared version.ini file.  This way, the version info is not duplicated
+        but managed in a single location.
+        ************************************************************************
+  -->
+  <Target Name="StampAssemblyInfo">
+    <CallTarget Targets="RestoreStubAssemblyInfo" />
+    <ReadVersionNumber VersionFile="$(VersionIniPath)">
+      <Output TaskParameter="FullVersionNumber" ItemName="FullVersion" />
+      <Output TaskParameter="SemanticVersionNumber" ItemName="SemanticVersion" />
+      <Output TaskParameter="BuildNumber" ItemName="BuildNumber" />
+      <Output TaskParameter="InformationalVersion" ItemName="InformationalVersion" />
+    </ReadVersionNumber>
+    <ItemGroup>
+      <AssemblyInfoFiles Include="$(AssemblyInfoFilename)" />
+    </ItemGroup>
+    <MSBuild.ExtensionPack.Framework.AssemblyInfo AssemblyInfoFiles="@(AssemblyInfoFiles)"
+                                                  AssemblyVersion="@(SemanticVersion).0"
+                                                  AssemblyFileVersion="@(FullVersion)"
+                                                  AssemblyCompany="$(SolutionCompany)"
+                                                  AssemblyCopyright="$(SolutionCopyright)"
+                                                  AssemblyProduct="$(SolutionName)"
+                                                  AssemblyConfiguration="$(ProjectConfiguration)"
+                                                  AssemblyTitle="$(ProjectTitle)"
+                                                  AssemblyDescription="$(ProjectDescription)" />
+  </Target>
+  
+  <!--  ************************************************************************
+        ** RestoreStubAssemblyInfo
+  
+        This target restores the AssemblyInfo.cs file back to the 'stub' which has
+        no meaningful data.  This way the modifications to the file (as builds are
+        performed) will not show up in source control.  The state of the file (from
+        a build) is always transient.
+        ************************************************************************
+  -->
+  <Target Name="RestoreStubAssemblyInfo">
+    <ItemGroup>
+      <StubAssemblyInfo Include="$(StubAssemblyInfoPath)" />
+      <DestinationAssemblyInfo Include="$(AssemblyInfoFilename)" />
+    </ItemGroup>
+    <Copy SourceFiles="@(StubAssemblyInfo)" DestinationFiles="@(DestinationAssemblyInfo)" />
+  </Target>
+  
+  <!--  ************************************************************************
+        ** BumpBuildVersion
+  
+        This target executes the IncrementBuildVersion task to bump the build
+        version number in the version.ini file.
+        ************************************************************************
+  -->
+  <Target Name="BumpBuildVersion">
+    <IncrementBuildVersion VersionFile="$(VersionIniPath)" />
+  </Target>
+  
+  <!--  ************************************************************************
+        ** DetectDeploymentDependencies
+  
+        This target builds as a list of the dependencies for the deployment process,
+        and then uses the RequireFilesOnPath task to ensure that they are all
+        available.
+        ************************************************************************
+  -->
+  <Target Name="DetectDeploymentDependencies">
+    <ItemGroup>
+      <DetectedFiles Include="man" Condition="'$(OS)' == 'Unix'" />
+      <DetectedFiles Include="man2html" Condition="'$(OS)' == 'Unix'" />
+      <DetectedFiles Include="tidy" Condition="'$(OS)' == 'Unix'" />
+      <DetectedFiles Include="doxygen" Condition="'$(OS)' == 'Unix'" />
+      <DetectedFiles Include="pdflatex" Condition="'$(OS)' == 'Unix'" />
+      <DetectedFiles Include="man.exe" Condition=" '$(OS)' == 'Windows_NT' " />
+      <DetectedFiles Include="man2html.exe" Condition=" '$(OS)' == 'Windows_NT' " />
+      <DetectedFiles Include="tidy.exe" Condition=" '$(OS)' == 'Windows_NT' " />
+      <DetectedFiles Include="doxygen.exe" Condition=" '$(OS)' == 'Windows_NT' " />
+      <DetectedFiles Include="pdflatex.exe" Condition=" '$(OS)' == 'Windows_NT' " />
+    </ItemGroup>
+    <RequireFilesOnPath Files="@(DetectedFiles)" />
+  </Target>
+  
+  <!--  ************************************************************************
+        ** PrepareDeploymentOutputDirectory
+  
+        This target creates/prepares the output directory for deployment.
+        ************************************************************************
+  -->
+  <Target Name="PrepareDeploymentOutputLocations">
+    <RemoveDir Directories="$(DeploymentOutputPath)" />
+    <MakeDir Directories="$(DeploymentOutputPath)" />
+    <MakeDir Directories="$(DeploymentOutputPath)\Documentation website" />
+    <MakeDir Directories="$(PathToSolutionRoot)\CSF.Zpt.Cli\bin\Release\Doc" />
+    <RemoveDir Directories="$(TemporaryBuildPath)" />
+    <MakeDir Directories="$(TemporaryBuildPath)" />
+    <MakeDir Directories="$(TemporaryBuildPath)\Doxygen" />
+    <MakeDir Directories="$(TemporaryBuildPath)\Website" />
+    <MakeDir Directories="$(TemporaryBuildPath)\Nuget" />
+    <MakeDir Directories="$(TemporaryBuildPath)\Website\Pass1" />
+    <MakeDir Directories="$(TemporaryBuildPath)\Website\Pass2" />
+  </Target>
+  
+  <!--  ************************************************************************
+        ** CreateNugetPackages
+  
+        This target builds all of the Nuget packages for ZPT-Sharp.
+        ************************************************************************
+  -->
+  <Target Name="CreateNugetPackages">
+    <ReadVersionNumber VersionFile="$(VersionIniPath)">
+      <Output TaskParameter="FullVersionNumber" ItemName="FullVersion" />
+      <Output TaskParameter="SemanticVersionNumber" ItemName="SemanticVersion" />
+      <Output TaskParameter="BuildNumber" ItemName="BuildNumber" />
+      <Output TaskParameter="InformationalVersion" ItemName="InformationalVersion" />
+      <Output TaskParameter="NextBreakingVersionNumber" ItemName="NextBreakingVersion" />
+    </ReadVersionNumber>
+    <ItemGroup>
+      <NuspecFile Include="$(PathToSolutionRoot)\CSF.Zpt.Abstractions\CSF.Zpt.Abstractions.nuspec" />
+      <NuspecFile Include="$(PathToSolutionRoot)\CSF.Zpt.Cli\CSF.Zpt.Cli.nuspec" />
+      <NuspecFile Include="$(PathToSolutionRoot)\CSF.Zpt\CSF.Zpt.nuspec" />
+      <NuspecFile Include="$(PathToSolutionRoot)\CSF.Zpt.MVC\CSF.Zpt.MVC.nuspec" />
+      <NuspecFile Include="$(PathToSolutionRoot)\Deployment\CSF.Zpt.Deployment\Zpt-Sharp-API.nuspec" />
+      <NuspecFile Include="$(PathToSolutionRoot)\Deployment\CSF.Zpt.Deployment\Zpt-Sharp-MVC5.nuspec" />
+      <NuspecFile Include="$(PathToSolutionRoot)\Deployment\CSF.Zpt.Deployment\Zpt-Sharp-ZptBuilder.nuspec" />
+      <NuspecFile Include="$(PathToSolutionRoot)\DocumentProviders\CSF.Zpt.DocumentProviders.HtmlHAP\CSF.Zpt.DocumentProviders.HtmlHAP.nuspec" />
+      <NuspecFile Include="$(PathToSolutionRoot)\DocumentProviders\CSF.Zpt.DocumentProviders.XmlLegacy\CSF.Zpt.DocumentProviders.XmlLegacy.nuspec" />
+      <NuspecFile Include="$(PathToSolutionRoot)\DocumentProviders\CSF.Zpt.DocumentProviders.XmlLinq\CSF.Zpt.DocumentProviders.XmlLinq.nuspec" />
+      <NuspecFile Include="$(PathToSolutionRoot)\ExpressionEvaluators\CSF.Zpt.ExpressionEvaluators.CSharpExpressions\CSF.Zpt.ExpressionEvaluators.CSharpExpressions.nuspec" />
+      <NuspecFile Include="$(PathToSolutionRoot)\ExpressionEvaluators\CSF.Zpt.ExpressionEvaluators.NotExpressions\CSF.Zpt.ExpressionEvaluators.NotExpressions.nuspec" />
+      <NuspecFile Include="$(PathToSolutionRoot)\ExpressionEvaluators\CSF.Zpt.ExpressionEvaluators.PathExpressions\CSF.Zpt.ExpressionEvaluators.PathExpressions.nuspec" />
+      <NuspecFile Include="$(PathToSolutionRoot)\ExpressionEvaluators\CSF.Zpt.ExpressionEvaluators.PythonExpressions\CSF.Zpt.ExpressionEvaluators.PythonExpressions.nuspec" />
+      <NuspecFile Include="$(PathToSolutionRoot)\ExpressionEvaluators\CSF.Zpt.ExpressionEvaluators.StringExpressions\CSF.Zpt.ExpressionEvaluators.StringExpressions.nuspec" />
+    </ItemGroup>
+    <ItemGroup>
+      <CopyrightYear Include="$([System.DateTime]::Now.ToString(yyyy))" />
+    </ItemGroup>
+    <Exec Command="$(PathToSolutionRoot)\CSF.Zpt.Cli\bin\Release\ZptBuilder.exe &quot;%(NuspecFile.Identity).pt&quot; -x -o &quot;%(NuspecFile.Identity)&quot; --keyword-options &quot;version=@(SemanticVersion);nextBreakingVersion=@(NextBreakingVersion);copyrightYear=@(CopyrightYear)&quot;" />
+    <Exec Command="nuget pack %(NuspecFile.Identity) -Prop Configuration=Release -OutputDirectory $(DeploymentOutputPath)"
+          Condition="'$(OS)' == 'Unix'" />
+    <Exec Command="&quot;$(MSBuildProgramFiles32)\NuGet\nuget.exe&quot; pack %(NuspecFile.Identity) -Prop Configuration=Release -OutputDirectory $(DeploymentOutputPath)"
+          Condition="'$(OS)' != 'Unix'" />
+  </Target>
+
+  <!--  ************************************************************************
+        ** CreateBinaryZips
+  
+        This target builds all of the Nuget packages for ZPT-Sharp.
+        ************************************************************************
+  -->
+  <Target Name="CreateBinaryZips">
+    <ItemGroup>
+      <CliZipFiles Include="$(PathToSolutionRoot)\CSF.Zpt.Cli\bin\Release\CSF.dll" />
+      <CliZipFiles Include="$(PathToSolutionRoot)\CSF.Zpt.Cli\bin\Release\CSF.Cli.Parameters.dll" />
+      <CliZipFiles Include="$(PathToSolutionRoot)\CSF.Zpt.Cli\bin\Release\CSF.Configuration.dll" />
+      <CliZipFiles Include="$(PathToSolutionRoot)\CSF.Zpt.Cli\bin\Release\CSF.Reflection.dll" />
+      <CliZipFiles Include="$(PathToSolutionRoot)\CSF.Zpt.Cli\bin\Release\CSF.Zpt.Abstractions.dll" />
+      <CliZipFiles Include="$(PathToSolutionRoot)\CSF.Zpt.Cli\bin\Release\CSF.Zpt.dll" />
+      <CliZipFiles Include="$(PathToSolutionRoot)\CSF.Zpt.Cli\bin\Release\CSF.Zpt.DocumentProviders.HtmlHAP.dll" />
+      <CliZipFiles Include="$(PathToSolutionRoot)\CSF.Zpt.Cli\bin\Release\CSF.Zpt.DocumentProviders.XmlLinq.dll" />
+      <CliZipFiles Include="$(PathToSolutionRoot)\CSF.Zpt.Cli\bin\Release\CSF.Zpt.ExpressionEvaluators.NotExpressions.dll" />
+      <CliZipFiles Include="$(PathToSolutionRoot)\CSF.Zpt.Cli\bin\Release\CSF.Zpt.ExpressionEvaluators.PathExpressions.dll" />
+      <CliZipFiles Include="$(PathToSolutionRoot)\CSF.Zpt.Cli\bin\Release\CSF.Zpt.ExpressionEvaluators.StringExpressions.dll" />
+      <CliZipFiles Include="$(PathToSolutionRoot)\CSF.Zpt.Cli\bin\Release\CSF.Zpt.Log4net.dll" />
+      <CliZipFiles Include="$(PathToSolutionRoot)\CSF.Zpt.Cli\bin\Release\HtmlAgilityPack.dll" />
+      <CliZipFiles Include="$(PathToSolutionRoot)\CSF.Zpt.Cli\bin\Release\log4net.dll" />
+      <CliZipFiles Include="$(PathToSolutionRoot)\CSF.Zpt.Cli\bin\Release\ZptBuilder.1" />
+      <CliZipFiles Include="$(PathToSolutionRoot)\CSF.Zpt.Cli\bin\Release\ZptBuilder.exe" />
+      <CliZipFiles Include="$(PathToSolutionRoot)\CSF.Zpt.Cli\bin\Release\ZptBuilder.exe.config" />
+      <CliZipFiles Include="$(PathToSolutionRoot)\CSF.Zpt.Cli\bin\Release\Doc\ZptBuilder.MANUAL.txt" />
+    </ItemGroup>
+    <CreateZipArchive OutputFilename="$(DeploymentOutputPath)\ZptBuilder.zip"
+                      Files="@(CliZipFiles)" />
+    <ItemGroup>
+      <ApiOnlyZipFiles Include="$(PathToSolutionRoot)\CSF.Zpt\bin\Release\CSF.dll" />
+      <ApiOnlyZipFiles Include="$(PathToSolutionRoot)\CSF.Zpt\bin\Release\CSF.Configuration.dll" />
+      <ApiOnlyZipFiles Include="$(PathToSolutionRoot)\CSF.Zpt\bin\Release\CSF.Reflection.dll" />
+      <ApiOnlyZipFiles Include="$(PathToSolutionRoot)\CSF.Zpt\bin\Release\CSF.Zpt.Abstractions.dll" />
+      <ApiOnlyZipFiles Include="$(PathToSolutionRoot)\CSF.Zpt\bin\Release\CSF.Zpt.dll" />
+      <ApiOnlyZipFiles Include="$(PathToSolutionRoot)\DocumentProviders\CSF.Zpt.DocumentProviders.HtmlHAP\bin\Release\CSF.Zpt.DocumentProviders.HtmlHAP.dll" />
+      <ApiOnlyZipFiles Include="$(PathToSolutionRoot)\DocumentProviders\CSF.Zpt.DocumentProviders.XmlLinq\bin\Release\CSF.Zpt.DocumentProviders.XmlLinq.dll" />
+      <ApiOnlyZipFiles Include="$(PathToSolutionRoot)\ExpressionEvaluators\CSF.Zpt.ExpressionEvaluators.NotExpressions\bin\Release\CSF.Zpt.ExpressionEvaluators.NotExpressions.dll" />
+      <ApiOnlyZipFiles Include="$(PathToSolutionRoot)\ExpressionEvaluators\CSF.Zpt.ExpressionEvaluators.PathExpressions\bin\Release\CSF.Zpt.ExpressionEvaluators.PathExpressions.dll" />
+      <ApiOnlyZipFiles Include="$(PathToSolutionRoot)\ExpressionEvaluators\CSF.Zpt.ExpressionEvaluators.StringExpressions\bin\Release\CSF.Zpt.ExpressionEvaluators.StringExpressions.dll" />
+      <ApiOnlyZipFiles Include="$(PathToSolutionRoot)\CSF.Zpt.Log4net\bin\Release\CSF.Zpt.Log4net.dll" />
+      <ApiOnlyZipFiles Include="$(PathToSolutionRoot)\DocumentProviders\CSF.Zpt.DocumentProviders.HtmlHAP\bin\Release\HtmlAgilityPack.dll" />
+      <ApiOnlyZipFiles Include="$(PathToSolutionRoot)\CSF.Zpt.Log4net\bin\Release\log4net.dll" />
+    </ItemGroup>
+    <CreateZipArchive OutputFilename="$(DeploymentOutputPath)\CSF.Zpt-api-only.zip"
+                      Files="@(ApiOnlyZipFiles)" />
+    <ItemGroup>
+      <Mvc5ZipFiles Include="$(PathToSolutionRoot)\CSF.Zpt.MVC\bin\Release\CSF.dll" />
+      <Mvc5ZipFiles Include="$(PathToSolutionRoot)\CSF.Zpt.MVC\bin\Release\CSF.Configuration.dll" />
+      <Mvc5ZipFiles Include="$(PathToSolutionRoot)\CSF.Zpt.MVC\bin\Release\CSF.Reflection.dll" />
+      <Mvc5ZipFiles Include="$(PathToSolutionRoot)\CSF.Zpt.MVC\bin\Release\CSF.Zpt.Abstractions.dll" />
+      <Mvc5ZipFiles Include="$(PathToSolutionRoot)\CSF.Zpt.MVC\bin\Release\CSF.Zpt.dll" />
+      <Mvc5ZipFiles Include="$(PathToSolutionRoot)\CSF.Zpt.MVC\bin\Release\CSF.Zpt.MVC.dll" />
+      <Mvc5ZipFiles Include="$(PathToSolutionRoot)\CSF.Zpt.MVC\bin\Release\CSF.Zpt.DocumentProviders.HtmlHAP.dll" />
+      <Mvc5ZipFiles Include="$(PathToSolutionRoot)\CSF.Zpt.MVC\bin\Release\CSF.Zpt.DocumentProviders.XmlLinq.dll" />
+      <Mvc5ZipFiles Include="$(PathToSolutionRoot)\CSF.Zpt.MVC\bin\Release\CSF.Zpt.ExpressionEvaluators.NotExpressions.dll" />
+      <Mvc5ZipFiles Include="$(PathToSolutionRoot)\CSF.Zpt.MVC\bin\Release\CSF.Zpt.ExpressionEvaluators.PathExpressions.dll" />
+      <Mvc5ZipFiles Include="$(PathToSolutionRoot)\CSF.Zpt.MVC\bin\Release\CSF.Zpt.ExpressionEvaluators.StringExpressions.dll" />
+      <Mvc5ZipFiles Include="$(PathToSolutionRoot)\CSF.Zpt.MVC\bin\Release\CSF.Zpt.Log4net.dll" />
+      <Mvc5ZipFiles Include="$(PathToSolutionRoot)\CSF.Zpt.MVC\bin\Release\HtmlAgilityPack.dll" />
+      <Mvc5ZipFiles Include="$(PathToSolutionRoot)\CSF.Zpt.MVC\bin\Release\log4net.dll" />
+    </ItemGroup>
+    <CreateZipArchive OutputFilename="$(DeploymentOutputPath)\CSF.Zpt.MVC.zip"
+                      Files="@(Mvc5ZipFiles)" />
+    <ItemGroup>
+      <ZptSharpCompleteZipFiles Include="$(PathToSolutionRoot)\CSF.Zpt\bin\Release\CSF.dll" />
+      <ZptSharpCompleteZipFiles Include="$(PathToSolutionRoot)\CSF.Zpt\bin\Release\CSF.Configuration.dll" />
+      <ZptSharpCompleteZipFiles Include="$(PathToSolutionRoot)\CSF.Zpt\bin\Release\CSF.Reflection.dll" />
+      <ZptSharpCompleteZipFiles Include="$(PathToSolutionRoot)\CSF.Zpt.Cli\bin\Release\CSF.Cli.Parameters.dll" />
+      <ZptSharpCompleteZipFiles Include="$(PathToSolutionRoot)\CSF.Zpt\bin\Release\CSF.Zpt.Abstractions.dll" />
+      <ZptSharpCompleteZipFiles Include="$(PathToSolutionRoot)\CSF.Zpt\bin\Release\CSF.Zpt.dll" />
+      <ZptSharpCompleteZipFiles Include="$(PathToSolutionRoot)\DocumentProviders\CSF.Zpt.DocumentProviders.HtmlHAP\bin\Release\CSF.Zpt.DocumentProviders.HtmlHAP.dll" />
+      <ZptSharpCompleteZipFiles Include="$(PathToSolutionRoot)\DocumentProviders\CSF.Zpt.DocumentProviders.XmlLegacy\bin\Release\CSF.Zpt.DocumentProviders.XmlLegacy.dll" />
+      <ZptSharpCompleteZipFiles Include="$(PathToSolutionRoot)\DocumentProviders\CSF.Zpt.DocumentProviders.XmlLinq\bin\Release\CSF.Zpt.DocumentProviders.XmlLinq.dll" />
+      <ZptSharpCompleteZipFiles Include="$(PathToSolutionRoot)\ExpressionEvaluators\CSF.Zpt.ExpressionEvaluators.NotExpressions\bin\Release\CSF.Zpt.ExpressionEvaluators.NotExpressions.dll" />
+      <ZptSharpCompleteZipFiles Include="$(PathToSolutionRoot)\ExpressionEvaluators\CSF.Zpt.ExpressionEvaluators.PathExpressions\bin\Release\CSF.Zpt.ExpressionEvaluators.PathExpressions.dll" />
+      <ZptSharpCompleteZipFiles Include="$(PathToSolutionRoot)\ExpressionEvaluators\CSF.Zpt.ExpressionEvaluators.StringExpressions\bin\Release\CSF.Zpt.ExpressionEvaluators.StringExpressions.dll" />
+      <ZptSharpCompleteZipFiles Include="$(PathToSolutionRoot)\CSF.Zpt.Log4net\bin\Release\CSF.Zpt.Log4net.dll" />
+      <ZptSharpCompleteZipFiles Include="$(PathToSolutionRoot)\DocumentProviders\CSF.Zpt.DocumentProviders.HtmlHAP\bin\Release\HtmlAgilityPack.dll" />
+      <ZptSharpCompleteZipFiles Include="$(PathToSolutionRoot)\CSF.Zpt.Log4net\bin\Release\log4net.dll" />
+      <ZptSharpCompleteZipFiles Include="$(PathToSolutionRoot)\CSF.Zpt.Cli\bin\Release\ZptBuilder.1" />
+      <ZptSharpCompleteZipFiles Include="$(PathToSolutionRoot)\CSF.Zpt.Cli\bin\Release\ZptBuilder.exe" />
+      <ZptSharpCompleteZipFiles Include="$(PathToSolutionRoot)\CSF.Zpt.Cli\bin\Release\ZptBuilder.exe.config" />
+      <ZptSharpCompleteZipFiles Include="$(PathToSolutionRoot)\CSF.Zpt.Cli\bin\Release\Doc\ZptBuilder.MANUAL.txt" />
+      <ZptSharpCompleteZipFiles Include="$(PathToSolutionRoot)\CSF.Zpt.MVC\bin\Release\CSF.Zpt.MVC.dll" />
+    </ItemGroup>
+    <CreateZipArchive OutputFilename="$(DeploymentOutputPath)\CSF.Zpt-complete.zip"
+                      Files="@(ZptSharpCompleteZipFiles)" />
+  </Target>
+  
+  <!--  ************************************************************************
+        ** BuildPlaintextManual
+  
+        This target builds the plain-text manual for the ZptBuilder.exe application
+        from the manpage source file.
+        ************************************************************************
+  -->
+  <Target Name="BuildPlaintextManual">
+    <Exec Command="MANWIDTH=&quot;$(PlaintextManPageColumns)&quot; man --nh -l $(PathToSolutionRoot)\CSF.Zpt.Cli\ZptBuilder.1 &gt; $(PathToSolutionRoot)\CSF.Zpt.Cli\bin\Release\Doc\ZptBuilder.MANUAL.txt" />
+  </Target>
+  
+  <!--  ************************************************************************
+        ** BuildPlaintextConfigDocs
+  
+        This target builds the plain-text config file documentation for the
+        ZptSharp.config file, from the manpage source file.
+        ************************************************************************
+  -->
+  <Target Name="BuildPlaintextConfigDocs">
+    <Exec Command="MANWIDTH=&quot;$(PlaintextManPageColumns)&quot; man --nh -l $(PathToSolutionRoot)\Deployment\CSF.Zpt.Documentation\ZptSharp.config.5 &gt; $(DeploymentOutputPath)\ZptSharp.config.MANUAL.txt" />
+  </Target>
+
+  <!--  ************************************************************************
+        ** BuildHtmlManual
+  
+        This target builds the HTML manual for the ZptBuilder.exe application
+        from the manpage source file.
+        ************************************************************************
+  -->
+  <Target Name="BuildHtmlManual">
+    <ExecWithIgnoredExitCodes Command="man2html $(PathToSolutionRoot)\CSF.Zpt.Cli\ZptBuilder.1 | tidy -i -w $(HtmlManPageColumns) &gt; $(PathToSolutionRoot)\CSF.Zpt.Cli\bin\Release\Doc\ZptBuilder.html" IgnoredExitCodes="1" />
+  </Target>
+
+  <!--  ************************************************************************
+        ** BuildHtmlConfigdocs
+  
+        This target builds the HTML config file documentation for the
+        ZptSharp.config file, from the manpage source file.
+        ************************************************************************
+  -->
+  <Target Name="BuildHtmlConfigDocs">
+    <ExecWithIgnoredExitCodes Command="man2html $(PathToSolutionRoot)\Deployment\CSF.Zpt.Documentation\ZptSharp.config.5 | tidy -i -w $(HtmlManPageColumns) &gt; $(TemporaryBuildPath)\ZptSharp.config.html" IgnoredExitCodes="1" />
+  </Target>
+
+  <!--  ************************************************************************
+        ** BuildApiDocumentation
+  
+        This target builds doxygen-generated API documentation and outputs to
+        appropriate files/directories.
+        ************************************************************************
+  -->
+  <Target Name="BuildApiDocumentation">
+    <ReadVersionNumber VersionFile="$(VersionIniPath)">
+      <Output TaskParameter="FullVersionNumber" ItemName="FullVersion" />
+      <Output TaskParameter="SemanticVersionNumber" ItemName="SemanticVersion" />
+      <Output TaskParameter="BuildNumber" ItemName="BuildNumber" />
+      <Output TaskParameter="InformationalVersion" ItemName="InformationalVersion" />
+    </ReadVersionNumber>
+    <MakeDir Directories="$(TemporaryBuildPath)\Doxygen" />
+    <Exec Command="( cat Doxygen.cfg ; echo 'PROJECT_NUMBER=v@(SemanticVersion)' ) | doxygen -"
+          Condition="'$(OS)' == 'Unix'"
+          WorkingDirectory="..\CSF.Zpt.Documentation" />
+    <Exec Command="( type Doxygen.cfg &amp; echo PROJECT_NUMBER=v@(SemanticVersion) ) | doxygen.exe -"
+          Condition="'$(OS)' != 'Unix'"
+          WorkingDirectory="..\CSF.Zpt.Documentation" />
+    <Exec Command="pdflatex refman.tex"
+          WorkingDirectory="..\obj\Doxygen\latex" />
+    <Copy SourceFiles="$(TemporaryBuildPath)\Doxygen\latex\refman.pdf"
+          DestinationFiles="$(TemporaryBuildPath)\Doxygen\ZPT-Sharp API documentation.pdf" />
+  </Target>
+
+  <!--  ************************************************************************
+        ** BuildDocumentationWebsite
+  
+        This target builds the documentation website from the source files.
+        ************************************************************************
+  -->
+  <Target Name="BuildDocumentationWebsite">
+    <ReadVersionNumber VersionFile="$(VersionIniPath)">
+      <Output TaskParameter="FullVersionNumber" ItemName="FullVersion" />
+      <Output TaskParameter="SemanticVersionNumber" ItemName="SemanticVersion" />
+      <Output TaskParameter="BuildNumber" ItemName="BuildNumber" />
+      <Output TaskParameter="InformationalVersion" ItemName="InformationalVersion" />
+    </ReadVersionNumber>
+    <ItemGroup>
+      <WebsiteSourceFiles Include="$(PathToSolutionRoot)\Deployment\CSF.Zpt.Documentation\Website\**\*.*" />
+    </ItemGroup>
+    <Copy SourceFiles="@(WebsiteSourceFiles)" DestinationFiles="@(WebsiteSourceFiles-&gt;'$(TemporaryBuildPath)\Website\Pass1\%(RecursiveDir)%(Filename)%(Extension)')" />
+    <Copy SourceFiles="$(PathToSolutionRoot)\CSF.Zpt.Cli\bin\Release\Doc\ZptBuilder.html" DestinationFiles="$(TemporaryBuildPath)\Website\Pass1\Shared\cli-docs.html" />
+    <Copy SourceFiles="$(TemporaryBuildPath)\ZptSharp.config.html" DestinationFiles="$(TemporaryBuildPath)\Website\Pass1\Shared\config-docs.html" />
+    <ItemGroup>
+      <WebsiteSupportFiles Include="$(TemporaryBuildPath)\Website\Pass1\**\*.css" />
+      <WebsiteSupportFiles Include="$(TemporaryBuildPath)\Website\Pass1\**\*.js" />
+      <BuildTimestamp Include="$([System.DateTime]::Now.ToString(yyyy-MM-dd))" />
+      <CopyrightYear Include="$([System.DateTime]::Now.ToString(yyyy))" />
+    </ItemGroup>
+    <FixDocTag InputFile="$(TemporaryBuildPath)\Website\Pass1\Shared\cli-docs.html" MacroName="content" />
+    <FixDocTag InputFile="$(TemporaryBuildPath)\Website\Pass1\Shared\config-docs.html" MacroName="content" />
+    <Exec Command="$(PathToSolutionRoot)\CSF.Zpt.Cli\bin\Release\ZptBuilder.exe &quot;$(TemporaryBuildPath)\Website\Pass1&quot; -p &quot;*.html&quot; -o &quot;$(TemporaryBuildPath)\Website\Pass2&quot; -i &quot;$(TemporaryBuildPath)\Website\Pass1\Shared&quot; --keyword-options &quot;baseUrl=$(WebsiteUrlRoot);buildDate=@(BuildTimestamp);version=@(SemanticVersion);releaseType=@(InformationalVersion);copyrightYear=@(CopyrightYear)&quot;" />
+    <Copy SourceFiles="@(WebsiteSupportFiles)" DestinationFiles="@(WebsiteSupportFiles-&gt;'$(TemporaryBuildPath)\Website\Pass2\%(RecursiveDir)%(Filename)%(Extension)')" />
+  </Target>
+
+  <!--  ************************************************************************
+        ** AssembleAllDocumentation
+  
+        This target assembles all of the documentation content into the final
+        output location.
+        ************************************************************************
+  -->
+  <Target Name="AssembleAllDocumentation">
+    <ItemGroup>
+      <WebsiteFiles Include="$(TemporaryBuildPath)\Website\Pass2\**\*.*" />
+    </ItemGroup>
+    <ItemGroup>
+      <DoxygenOutputFiles Include="$(TemporaryBuildPath)\Doxygen\html\**\*.*" />
+    </ItemGroup>
+    <Copy SourceFiles="@(WebsiteFiles)"
+          DestinationFiles="@(WebsiteFiles-&gt;'$(DeploymentOutputPath)\Documentation website\%(RecursiveDir)%(Filename)%(Extension)')" />
+    <Copy SourceFiles="@(DoxygenOutputFiles)"
+          DestinationFiles="@(DoxygenOutputFiles-&gt;'$(DeploymentOutputPath)\Documentation website\api\%(RecursiveDir)%(Filename)%(Extension)')" />
+    <Copy SourceFiles="$(TemporaryBuildPath)\Doxygen\ZPT-Sharp API documentation.pdf"
+          DestinationFolder="$(DeploymentOutputPath)" />
+  </Target>
+  
+</Project>

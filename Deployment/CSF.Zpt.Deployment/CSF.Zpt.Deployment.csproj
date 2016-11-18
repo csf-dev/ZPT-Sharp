@@ -7,25 +7,10 @@
     <OutputType>Exe</OutputType>
     <RootNamespace>CSF.Zpt.Deployment</RootNamespace>
     <AssemblyName>CSF.Zpt.Deployment</AssemblyName>
-    <SolutionRoot>..\..\</SolutionRoot>
-    <BinaryPath>bin\Release\</BinaryPath>
-    <ApiMainPath>$(SolutionRoot)CSF.Zpt\$(BinaryPath)</ApiMainPath>
-    <ZptBuilderPath>$(SolutionRoot)CSF.Zpt.Cli\$(BinaryPath)</ZptBuilderPath>
-    <Log4NetPath>$(SolutionRoot)CSF.Zpt.Log4net\$(BinaryPath)</Log4NetPath>
-    <Mvc5Path>$(SolutionRoot)CSF.Zpt.MVC\$(BinaryPath)</Mvc5Path>
-    <ApiMainPath>$(SolutionRoot)CSF.Zpt\$(BinaryPath)</ApiMainPath>
-    <ApiMainPath>$(SolutionRoot)CSF.Zpt\$(BinaryPath)</ApiMainPath>
-    <HtmlHapProviderPath>$(SolutionRoot)DocumentProviders\CSF.Zpt.DocumentProviders.HtmlHAP\$(BinaryPath)</HtmlHapProviderPath>
-    <XmlLegacyProviderPath>$(SolutionRoot)DocumentProviders\CSF.Zpt.DocumentProviders.XmlLegacy\$(BinaryPath)</XmlLegacyProviderPath>
-    <XmlLinqProviderPath>$(SolutionRoot)DocumentProviders\CSF.Zpt.DocumentProviders.XmlLinq\$(BinaryPath)</XmlLinqProviderPath>
-    <NotEvaluatorPath>$(SolutionRoot)ExpressionEvaluators\CSF.Zpt.ExpressionEvaluators.NotExpressions\$(BinaryPath)</NotEvaluatorPath>
-    <PathEvaluatorPath>$(SolutionRoot)ExpressionEvaluators\CSF.Zpt.ExpressionEvaluators.PathExpressions\$(BinaryPath)</PathEvaluatorPath>
-    <StringEvaluatorPath>$(SolutionRoot)ExpressionEvaluators\CSF.Zpt.ExpressionEvaluators.StringExpressions\$(BinaryPath)</StringEvaluatorPath>
-    <DocumentationPath>..\Output\Documentation website</DocumentationPath>
-    <DocWebsiteOutputPath>..\CSF.Zpt.Documentation\bin\Release</DocWebsiteOutputPath>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
-    <ReleaseVersion>0.0.0</ReleaseVersion>
+    <PathToSolutionRoot>..\..</PathToSolutionRoot>
   </PropertyGroup>
+  <Import Project="$(PathToSolutionRoot)\Common\SolutionProperties.targets" />
+  <Import Project="$(PathToSolutionRoot)\Deployment\CSF.Zpt.DeploymentTasks\CSF.Zpt.DeploymentTasks.targets" />
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <OutputPath>..\Output\</OutputPath>
     <ConsolePause>false</ConsolePause>
@@ -37,116 +22,18 @@
     <WarningLevel>4</WarningLevel>
     <Optimize>false</Optimize>
   </PropertyGroup>
-  <UsingTask TaskName="CreateZipArchive" AssemblyFile="..\CSF.Zpt.DeploymentTasks\bin\Release\CSF.Zpt.DeploymentTasks.dll" />
-  <UsingTask TaskName="ReadVersionNumber" AssemblyFile="..\CSF.Zpt.DeploymentTasks\bin\$(Configuration)\CSF.Zpt.DeploymentTasks.dll" />
   <Target Name="Build">
+    <CallTarget Targets="DetectDeploymentDependencies" Condition="'$(Configuration)' == 'Release'" />
+    <CallTarget Targets="PrepareDeploymentOutputLocations" Condition="'$(Configuration)' == 'Release'" />
+    <CallTarget Targets="BuildPlaintextManual" Condition="'$(Configuration)' == 'Release'" />
+    <CallTarget Targets="BuildHtmlManual" Condition="'$(Configuration)' == 'Release'" />
     <CallTarget Targets="CreateBinaryZips" Condition="'$(Configuration)' == 'Release'" />
     <CallTarget Targets="CreateNugetPackages" Condition="'$(Configuration)' == 'Release'" />
-    <CallTarget Targets="CopyDocumentation" Condition="'$(Configuration)' == 'Release'" />
-  </Target>
-  <Target Name="CreateBinaryZips" Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <MakeDir Directories="$(OutputPath)" />
-    <ItemGroup>
-      <CliZipFiles Include="$(ZptBuilderPath)CSF.dll" />
-      <CliZipFiles Include="$(ZptBuilderPath)CSF.Cli.Parameters.dll" />
-      <CliZipFiles Include="$(ZptBuilderPath)CSF.Configuration.dll" />
-      <CliZipFiles Include="$(ZptBuilderPath)CSF.Reflection.dll" />
-      <CliZipFiles Include="$(ZptBuilderPath)CSF.Zpt.Abstractions.dll" />
-      <CliZipFiles Include="$(ZptBuilderPath)CSF.Zpt.dll" />
-      <CliZipFiles Include="$(ZptBuilderPath)CSF.Zpt.DocumentProviders.HtmlHAP.dll" />
-      <CliZipFiles Include="$(ZptBuilderPath)CSF.Zpt.DocumentProviders.XmlLinq.dll" />
-      <CliZipFiles Include="$(ZptBuilderPath)CSF.Zpt.ExpressionEvaluators.NotExpressions.dll" />
-      <CliZipFiles Include="$(ZptBuilderPath)CSF.Zpt.ExpressionEvaluators.PathExpressions.dll" />
-      <CliZipFiles Include="$(ZptBuilderPath)CSF.Zpt.ExpressionEvaluators.StringExpressions.dll" />
-      <CliZipFiles Include="$(ZptBuilderPath)CSF.Zpt.Log4net.dll" />
-      <CliZipFiles Include="$(ZptBuilderPath)HtmlAgilityPack.dll" />
-      <CliZipFiles Include="$(ZptBuilderPath)log4net.dll" />
-      <CliZipFiles Include="$(ZptBuilderPath)ZptBuilder.1" />
-      <CliZipFiles Include="$(ZptBuilderPath)ZptBuilder.exe" />
-      <CliZipFiles Include="$(ZptBuilderPath)ZptBuilder.exe.config" />
-      <CliZipFiles Include="$(ZptBuilderPath)Doc\ZptBuilder.MANUAL.txt" />
-    </ItemGroup>
-    <CreateZipArchive OutputFilename="$(OutputPath)ZptBuilder.zip" Files="@(CliZipFiles)" />
-    <ItemGroup>
-      <ApiOnlyZipFiles Include="$(ApiMainPath)CSF.dll" />
-      <ApiOnlyZipFiles Include="$(ApiMainPath)CSF.Configuration.dll" />
-      <ApiOnlyZipFiles Include="$(ApiMainPath)CSF.Reflection.dll" />
-      <ApiOnlyZipFiles Include="$(ApiMainPath)CSF.Zpt.Abstractions.dll" />
-      <ApiOnlyZipFiles Include="$(ApiMainPath)CSF.Zpt.dll" />
-      <ApiOnlyZipFiles Include="$(HtmlHapProviderPath)CSF.Zpt.DocumentProviders.HtmlHAP.dll" />
-      <ApiOnlyZipFiles Include="$(XmlLinqProviderPath)CSF.Zpt.DocumentProviders.XmlLinq.dll" />
-      <ApiOnlyZipFiles Include="$(NotEvaluatorPath)CSF.Zpt.ExpressionEvaluators.NotExpressions.dll" />
-      <ApiOnlyZipFiles Include="$(PathEvaluatorPath)CSF.Zpt.ExpressionEvaluators.PathExpressions.dll" />
-      <ApiOnlyZipFiles Include="$(StringEvaluatorPath)CSF.Zpt.ExpressionEvaluators.StringExpressions.dll" />
-      <ApiOnlyZipFiles Include="$(Log4NetPath)CSF.Zpt.Log4net.dll" />
-      <ApiOnlyZipFiles Include="$(HtmlHapProviderPath)HtmlAgilityPack.dll" />
-      <ApiOnlyZipFiles Include="$(Log4NetPath)log4net.dll" />
-    </ItemGroup>
-    <CreateZipArchive OutputFilename="$(OutputPath)CSF.Zpt-api-only.zip" Files="@(ApiOnlyZipFiles)" />
-    <ItemGroup>
-      <Mvc5ZipFiles Include="$(Mvc5Path)CSF.dll" />
-      <Mvc5ZipFiles Include="$(Mvc5Path)CSF.Configuration.dll" />
-      <Mvc5ZipFiles Include="$(Mvc5Path)CSF.Reflection.dll" />
-      <Mvc5ZipFiles Include="$(Mvc5Path)CSF.Zpt.Abstractions.dll" />
-      <Mvc5ZipFiles Include="$(Mvc5Path)CSF.Zpt.dll" />
-      <Mvc5ZipFiles Include="$(Mvc5Path)CSF.Zpt.MVC.dll" />
-      <Mvc5ZipFiles Include="$(Mvc5Path)CSF.Zpt.DocumentProviders.HtmlHAP.dll" />
-      <Mvc5ZipFiles Include="$(Mvc5Path)CSF.Zpt.DocumentProviders.XmlLinq.dll" />
-      <Mvc5ZipFiles Include="$(Mvc5Path)CSF.Zpt.ExpressionEvaluators.NotExpressions.dll" />
-      <Mvc5ZipFiles Include="$(Mvc5Path)CSF.Zpt.ExpressionEvaluators.PathExpressions.dll" />
-      <Mvc5ZipFiles Include="$(Mvc5Path)CSF.Zpt.ExpressionEvaluators.StringExpressions.dll" />
-      <Mvc5ZipFiles Include="$(Mvc5Path)CSF.Zpt.Log4net.dll" />
-      <Mvc5ZipFiles Include="$(Mvc5Path)HtmlAgilityPack.dll" />
-      <Mvc5ZipFiles Include="$(Mvc5Path)log4net.dll" />
-    </ItemGroup>
-    <CreateZipArchive OutputFilename="$(OutputPath)CSF.Zpt.MVC.zip" Files="@(Mvc5ZipFiles)" />
-    <ItemGroup>
-      <ZptSharpCompleteZipFiles Include="$(ApiMainPath)CSF.dll" />
-      <ZptSharpCompleteZipFiles Include="$(ApiMainPath)CSF.Configuration.dll" />
-      <ZptSharpCompleteZipFiles Include="$(ApiMainPath)CSF.Reflection.dll" />
-      <ZptSharpCompleteZipFiles Include="$(ZptBuilderPath)CSF.Cli.Parameters.dll" />
-      <ZptSharpCompleteZipFiles Include="$(ApiMainPath)CSF.Zpt.Abstractions.dll" />
-      <ZptSharpCompleteZipFiles Include="$(ApiMainPath)CSF.Zpt.dll" />
-      <ZptSharpCompleteZipFiles Include="$(HtmlHapProviderPath)CSF.Zpt.DocumentProviders.HtmlHAP.dll" />
-      <ZptSharpCompleteZipFiles Include="$(XmlLegacyProviderPath)CSF.Zpt.DocumentProviders.XmlLegacy.dll" />
-      <ZptSharpCompleteZipFiles Include="$(XmlLinqProviderPath)CSF.Zpt.DocumentProviders.XmlLinq.dll" />
-      <ZptSharpCompleteZipFiles Include="$(NotEvaluatorPath)CSF.Zpt.ExpressionEvaluators.NotExpressions.dll" />
-      <ZptSharpCompleteZipFiles Include="$(PathEvaluatorPath)CSF.Zpt.ExpressionEvaluators.PathExpressions.dll" />
-      <ZptSharpCompleteZipFiles Include="$(StringEvaluatorPath)CSF.Zpt.ExpressionEvaluators.StringExpressions.dll" />
-      <ZptSharpCompleteZipFiles Include="$(Log4NetPath)CSF.Zpt.Log4net.dll" />
-      <ZptSharpCompleteZipFiles Include="$(HtmlHapProviderPath)HtmlAgilityPack.dll" />
-      <ZptSharpCompleteZipFiles Include="$(Log4NetPath)log4net.dll" />
-      <ZptSharpCompleteZipFiles Include="$(ZptBuilderPath)ZptBuilder.1" />
-      <ZptSharpCompleteZipFiles Include="$(ZptBuilderPath)ZptBuilder.exe" />
-      <ZptSharpCompleteZipFiles Include="$(ZptBuilderPath)ZptBuilder.exe.config" />
-      <ZptSharpCompleteZipFiles Include="$(ZptBuilderPath)Doc\ZptBuilder.MANUAL.txt" />
-      <ZptSharpCompleteZipFiles Include="$(Mvc5Path)CSF.Zpt.MVC.dll" />
-    </ItemGroup>
-    <CreateZipArchive OutputFilename="$(OutputPath)CSF.Zpt-complete.zip" Files="@(ZptSharpCompleteZipFiles)" />
-  </Target>
-  <Target Name="CreateNugetPackages" Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <ReadVersionNumber VersionFile="..\..\version.ini">
-      <Output TaskParameter="FullVersionNumber" ItemName="FullVersion" />
-      <Output TaskParameter="SemanticVersionNumber" ItemName="SemanticVersion" />
-      <Output TaskParameter="BuildNumber" ItemName="BuildNumber" />
-      <Output TaskParameter="InformationalVersion" ItemName="InformationalVersion" />
-    </ReadVersionNumber>
-    <!-- ZptBuilder -->
-    <Exec Command="nuget pack $(SolutionRoot)CSF.Zpt.Cli\CSF.Zpt.Cli.nuspec -Prop Configuration=Release -OutputDirectory $(OutputPath) -version @(SemanticVersion)" Condition="'$(OS)' == 'Unix'" />
-    <Exec Command="&quot;$(MSBuildProgramFiles32)\NuGet\nuget.exe&quot; pack $(SolutionRoot)CSF.Zpt.Cli\CSF.Zpt.Cli.nuspec -Prop Configuration=Release -OutputDirectory $(OutputPath) -version @(SemanticVersion)" Condition="'$(OS)' != 'Unix'" />
-    <!-- API -->
-    <Exec Command="nuget pack $(SolutionRoot)CSF.Zpt\CSF.Zpt.nuspec -Prop Configuration=Release -OutputDirectory $(OutputPath) -version @(SemanticVersion)" Condition="'$(OS)' == 'Unix'" />
-    <Exec Command="&quot;$(MSBuildProgramFiles32)\NuGet\nuget.exe&quot; pack $(SolutionRoot)CSF.Zpt\CSF.Zpt.nuspec -Prop Configuration=Release -OutputDirectory $(OutputPath) -version @(SemanticVersion)" Condition="'$(OS)' != 'Unix'" />
-    <!-- MVC -->
-    <Exec Command="nuget pack $(SolutionRoot)CSF.Zpt.MVC\CSF.Zpt.MVC.nuspec -Prop Configuration=Release -OutputDirectory $(OutputPath) -version @(SemanticVersion)" Condition="'$(OS)' == 'Unix'" />
-    <Exec Command="&quot;$(MSBuildProgramFiles32)\NuGet\nuget.exe&quot; pack $(SolutionRoot)CSF.Zpt.MVC\CSF.Zpt.MVC.nuspec -Prop Configuration=Release -OutputDirectory $(OutputPath) -version @(SemanticVersion)" Condition="'$(OS)' != 'Unix'" />
-  </Target>
-  <Target Name="CopyDocumentation" Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <Copy SourceFiles="$(DocWebsiteOutputPath)\ZPT-Sharp API documentation.pdf" DestinationFolder="$(OutputPath)" />
-    <ItemGroup>
-      <DocWebsiteFiles Include="$(DocWebsiteOutputPath)\Website\**\*.*" />
-    </ItemGroup>
-    <Copy SourceFiles="@(DocWebsiteFiles)" DestinationFiles="@(DocWebsiteFiles-&gt;'$(DocumentationPath)\%(RecursiveDir)%(Filename)%(Extension)')" />
+    <CallTarget Targets="BuildApiDocumentation" Condition="'$(Configuration)' == 'Release'" />
+    <CallTarget Targets="BuildPlaintextConfigDocs" Condition="'$(Configuration)' == 'Release'" />
+    <CallTarget Targets="BuildHtmlConfigDocs" Condition="'$(Configuration)' == 'Release'" />
+    <CallTarget Targets="BuildDocumentationWebsite" Condition="'$(Configuration)' == 'Release'" />
+    <CallTarget Targets="AssembleAllDocumentation" Condition="'$(Configuration)' == 'Release'" />
   </Target>
   <ItemGroup>
     <ProjectReference Include="..\..\CSF.Zpt\CSF.Zpt.csproj">
@@ -189,13 +76,13 @@
       <Project>{9B4DF12E-6E04-4C25-AD16-58434C18DE8A}</Project>
       <Name>CSF.Zpt.MVC</Name>
     </ProjectReference>
-    <ProjectReference Include="..\CSF.Zpt.Documentation\CSF.Zpt.Documentation.csproj">
-      <Project>{28D30A8C-0693-4FEA-BCC7-020AA41ECBB1}</Project>
-      <Name>CSF.Zpt.Documentation</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\CSF.Zpt.DeploymentTasks\CSF.Zpt.DeploymentTasks.csproj">
-      <Project>{3E1DAACE-519B-4C6C-80E3-3F06A1A33C66}</Project>
-      <Name>CSF.Zpt.DeploymentTasks</Name>
-    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Zpt-Sharp-API.nuspec" />
+    <None Include="Zpt-Sharp-ZptBuilder.nuspec" />
+    <None Include="Zpt-Sharp-MVC5.nuspec" />
+    <None Include="Zpt-Sharp-API.nuspec.pt" />
+    <None Include="Zpt-Sharp-MVC5.nuspec.pt" />
+    <None Include="Zpt-Sharp-ZptBuilder.nuspec.pt" />
   </ItemGroup>
 </Project>

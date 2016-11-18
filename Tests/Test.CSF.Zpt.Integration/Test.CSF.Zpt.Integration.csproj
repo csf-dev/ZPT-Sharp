@@ -95,9 +95,13 @@
       <Project>{63F5FF1D-DA36-4BB4-AA99-24AA78844109}</Project>
       <Name>CSF.Zpt.ExpressionEvaluators.StringExpressions</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Deployment\CSF.Zpt.PreBuild\CSF.Zpt.PreBuild.csproj">
-      <Project>{6C025057-9ACC-474E-9092-D6B9059B07EE}</Project>
-      <Name>CSF.Zpt.PreBuild</Name>
+    <ProjectReference Include="..\..\ExpressionEvaluators\CSF.Zpt.ExpressionEvaluators.CSharpExpressions\CSF.Zpt.ExpressionEvaluators.CSharpExpressions.csproj">
+      <Project>{AA29F7A3-A259-408A-B2FC-E2EFD78BCDFC}</Project>
+      <Name>CSF.Zpt.ExpressionEvaluators.CSharpExpressions</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\ExpressionEvaluators\CSF.Zpt.ExpressionEvaluators.PythonExpressions\CSF.Zpt.ExpressionEvaluators.PythonExpressions.csproj">
+      <Project>{9005A550-27E5-464A-BF6F-DD96F5539DAC}</Project>
+      <Name>CSF.Zpt.ExpressionEvaluators.PythonExpressions</Name>
     </ProjectReference>
   </ItemGroup>
 </Project>

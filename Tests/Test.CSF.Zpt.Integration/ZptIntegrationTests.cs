@@ -7,6 +7,7 @@ using System.Linq;
 using System.Collections.Generic;
 using CSF.Zpt.Tales;
 using CSF.Zpt.Rendering;
+using CSF.Zpt.Metal;
 
 namespace Test.CSF.Zpt.Integration
 {
@@ -74,6 +75,16 @@ namespace Test.CSF.Zpt.Integration
       var tests = new NamedObjectWrapper();
       tests["input"] = new TemplateDirectory(this.SourcePath, true);
       output.MetalLocalDefinitions.Add("tests", tests);
+
+      var pnomeFile = SourcePath.GetFiles("pnome_template.pt").Single();
+      var pnomeDoc = DocumentFactory.CreateDocument(pnomeFile);
+      var pnomeMacro = ((MetalMacroCollection) pnomeDoc.GetMacros())["page"];
+      output.MetalLocalDefinitions.Add("pnome_macros_page", pnomeMacro);
+
+      var acmeFile = SourcePath.GetFiles("acme_template.html").Single();
+      var acmeDoc = DocumentFactory.CreateDocument(acmeFile);
+      var acmeMacro = ((MetalMacroCollection) acmeDoc.GetMacros())["page"];
+      output.MetalLocalDefinitions.Add("acme_macros_page", acmeMacro);
 
       // The 'content' keyword option
       var content = new NamedObjectWrapper();

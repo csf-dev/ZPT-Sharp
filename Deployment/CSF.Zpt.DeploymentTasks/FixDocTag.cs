@@ -11,7 +11,7 @@ namespace CSF.Zpt.DeploymentTasks
     #region constants
 
     private const string
-      OPEN_FORMAT   = @"<div metal:define-macro=""{0}"" tal:omit-tag=""string:True"">",
+      OPEN_FORMAT   = @"<div metal:define-macro=""{0}"" class=""manpage_export"">",
       CLOSE_FORMAT  = @"</div>";
 
     #endregion

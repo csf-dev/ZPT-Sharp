@@ -1,0 +1,169 @@
+.TH ZptSharp.config 5
+.SH NAME
+ZptSharp.config \- configuration file for ZPT-Sharp
+.SH SYNOPSIS
+.PP
+The filename applicable to the configuration file depends upon your use-case:
+.RS
+\fIZptBuilder.exe.config\fR
+.RE
+.RS
+\fIWeb.config\fR
+.RE
+.RS
+\fI[YourApplication].config\fR
+.RE
+.SH DESCRIPTION
+.PP
+The ZPT-Sharp configuration file is primarily used for indicating which ZPT-Sharp plugins are installed.
+The listed plugins are loaded at run-time by the core logic and used for rendering documents.
+.PP
+Other uses of the configuration file depend upon your installation scenario and requirements.
+If the \fICSharp\fR expressions plugin is installed then the configuration file may be used to indicate the desired namespaces which are available to CSharp expressions.
+Additionally, the configuration may be used in order to configure the capture and recording of diagnostic/logging information from ZPT-Sharp.
+.PP
+The filename for the configuration file depends upon the use-case.
+When using the \fIZptBuilder.exe\fR application, the configuration file must be named \fIZptBuilder.exe.config\fR.
+When using the ASP.NET MVC ViewEngine, the content documented here must be integrated into your web application's \fIWeb.config\fR file.
+When using ZPT-Sharp as an API, the applicable content must be integrated into your own application's configuration file.
+.PP
+This file is written using the .NET XML configuration file format.
+Full coverage of this format is beyond the scope of this manual; refer to the appropriate .NET framework documentation where applicable.
+.SH INSTALLING PLUGINS
+.PP
+The mandatory part of the configuration file is the section which installs plugins - document providers and expression evaluators.
+At a minimum for any useful operation, at least one document provider and one expression evaluator plugin must be installed.
+One expression evaluator must be nominated as the default plugin.
+The default evaluator is used for TALES expressions which are not qualified with a prefix, such as 'path:'.
+You should also nominate the default HTML and XML document provider plugins.
+These default providers are used when a ZPT document is to be created, and all that is known is whether it is HTML or XML formatted.
+.PP
+The following example shows the relevant content to install three expression evaluator plugins, two document provider plugins, and nominate the defaults accordingly.
+.PP
+.nf
+<configuration>
+  <configSections>
+    <sectionGroup name="CSF">
+      <sectionGroup name="Zpt">
+          <section name="PluginConfigurationSection"
+                   type="CSF.Zpt.PluginConfigurationSection, CSF.Zpt" />
+      </sectionGroup>
+    </sectionGroup>
+  </configSections>
+
+  <CSF>
+    <Zpt>
+      <PluginConfigurationSection DefaultHtmlDocumentProvider="CSF.Zpt.DocumentProviders.HtmlZptDocumentProvider"
+                                  DefaultXmlDocumentProvider="CSF.Zpt.DocumentProviders.XmlLinqZptDocumentProvider"
+                                  DefaultExpressionEvaluator="CSF.Zpt.ExpressionEvaluators.PathExpressions.PathExpressionEvaluator">
+        <PluginAssemblies>
+          <Assembly Path="CSF.Zpt.DocumentProviders.HtmlHAP.dll" />
+          <Assembly Path="CSF.Zpt.DocumentProviders.XmlLinq.dll" />
+          <Assembly Path="CSF.Zpt.ExpressionEvaluators.PathExpressions.dll" />
+          <Assembly Path="CSF.Zpt.ExpressionEvaluators.StringExpressions.dll" />
+          <Assembly Path="CSF.Zpt.ExpressionEvaluators.NotExpressions.dll" />
+        </PluginAssemblies>
+      </PluginConfigurationSection>
+    </Zpt>
+  </CSF>
+</configuration>
+.fi
+.PP
+Each <Assembly> element, in its Path attribute, lists a single .NET assembly containing one or more plugins.
+The assembly paths are either absolute or relative paths.
+Where a relative path is given, it is evaluated based upon the path to the \fICSF.Zpt.dll\fR assembly.
+If the plugin assembly is in the same directory as that main ZPT-Sharp assembly then just the filename alone is sufficient (as shown above).
+The default expression evaluator, XML document provider and HTML document provider are indicated by listing their namespace-qualified type names in the appropriate configuration attributes.
+.SH CONFIGURING CSHARP NAMESPACES
+.PP
+If the plugin \fICSF.Zpt.ExpressionEvaluators.CSharpExpressions.dll\fR is installed, then CSharp expressions are available.
+When evaluating such expressions, by default two namespaces are made to the expressions via 'using NAMESPACE;' blocks.
+These two namespaces are \fISystem\fR and \fISystem.Linq\fR.
+If you wish to customise these namespaces (for all expressions) then you may integrate the following into your configuration.
+.PP
+.nf
+<configuration>
+  <configSections>
+    <sectionGroup name="CSF">
+      <sectionGroup name="Zpt">
+          <sectionGroup name="ExpressionEvaluators">
+            <sectionGroup name="CSharpExpressions">
+              <section name="NamespaceConfiguration"
+                       type="CSF.Zpt.ExpressionEvaluators.CSharpExpressions.NamespaceConfiguration, CSF.Zpt.ExpressionEvaluators.CSharpExpressions" />
+            </sectionGroup>
+          </sectionGroup>
+      </sectionGroup>
+    </sectionGroup>
+  </configSections>
+
+  <CSF>
+    <Zpt>
+      <ExpressionEvaluators>
+        <CSharpExpressions>
+          <NamespaceConfiguration>
+            <add Namespace="NAMESPACE" />
+          </NamespaceConfiguration>
+        </CSharpExpressions>
+      </ExpressionEvaluators>
+    </Zpt>
+  </CSF>
+</configuration>
+.fi
+.PP
+You may repeat the \fI<add Namespace="NAMESPACE" />\fR element as many times as desired, each time replacing NAMESPACE with a namespace to be imported.
+.SH CONFIGURING DIAGNOSTICS
+.PP
+ZPT-Sharp makes use of the .NET \fBSystem.Diagnostics\fR functionality to make diagnostic and logging information available, configured via the configuration file.
+This .NET functionality provides a highly rich and configurable API, an in-depth examination of which is well beyond the scope of this documentation.
+Refer to the appropriate .NET framework documentation for more information.
+.PP
+For reference, the \fBTraceSource\fR names used by ZPT-Sharp are as follows:
+.RS
+\fICSF.Zpt\fR
+.RE
+.RS
+\fICSF.Zpt.Cli\fR
+.RE
+.RS
+\fICSF.Zpt.Mvc\fR
+.RE
+.PP
+The following example configuration content illustrates a minimal logging set-up which will record messages to a file.
+.PP
+.nf
+<configuration>
+  <system.diagnostics>
+    <sources>
+      <source name="CSF.Zpt" switchName="defaultSwitch" switchType="System.Diagnostics.SourceSwitch">
+        <listeners>
+          <add name="myListener" 
+               type="System.Diagnostics.TextWriterTraceListener" 
+               initializeData="ZptSharp.log" />
+          <remove name="Default" />
+        </listeners>
+      </source>
+    </sources>
+    <switches>
+      <add name="defaultSwitch" value="Verbose"/>
+    </switches>
+  </system.diagnostics>
+</configuration>
+.fi
+.SH SEE ALSO
+.PP
+.I ZptBuilder.exe\fR "(1)"
+.RS
+Documentation for the ZptBuilder application, which makes use of this configuration
+.RE
+.PP
+Framework documentation for .NET XML configuration files
+.RS
+Describes the overall layout and syntax of this configuration file format.
+XML configuration files have a great deal of other functionality available, beyond that which is described here.
+.RE
+.PP
+Framework documentation for the .NET \fISystem.Diagnostics\fR namespace
+.RS
+Describes how to set-up and configure \fITraceListener\fR instances.
+Listeners subscribe to the \fITraceSource\fR instances exposed by the application code.
+.RE

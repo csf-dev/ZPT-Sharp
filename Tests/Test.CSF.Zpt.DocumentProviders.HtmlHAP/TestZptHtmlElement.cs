@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Reflection;
 using CSF.Reflection;
 using CSF.Zpt.Rendering;
@@ -160,7 +160,7 @@ namespace Test.CSF.Zpt.DocumentProviders.HtmlHAP
 <footer>Page footer</footer>
 </body>
 </html>";
-      Assert.AreEqual(expectedDom, _document.DocumentNode.OuterHtml.Replace(Environment.NewLine, "\n"), "Correct modified HTML");
+      Assert.AreEqual(expectedDom, _document.DocumentNode.OuterHtml, "Correct modified HTML");
     }
 
     [Test]
@@ -198,7 +198,7 @@ namespace Test.CSF.Zpt.DocumentProviders.HtmlHAP
 <footer>Page footer</footer>
 </body>
 </html>";
-      Assert.AreEqual(expectedDom, _document.DocumentNode.OuterHtml.Replace(Environment.NewLine, "\n"), "Correct modified HTML");
+      Assert.AreEqual(expectedDom, _document.DocumentNode.OuterHtml, "Correct modified HTML");
     }
 
     [Test]
@@ -236,7 +236,7 @@ namespace Test.CSF.Zpt.DocumentProviders.HtmlHAP
 <footer>Page footer</footer>
 </body>
 </html>";
-      Assert.AreEqual(expectedDom, _document.DocumentNode.OuterHtml.Replace(Environment.NewLine, "\n"), "Correct modified HTML");
+      Assert.AreEqual(expectedDom, _document.DocumentNode.OuterHtml, "Correct modified HTML");
     }
 
     [Test]
@@ -274,7 +274,7 @@ namespace Test.CSF.Zpt.DocumentProviders.HtmlHAP
 <footer>Page footer</footer>
 </body>
 </html>";
-      Assert.AreEqual(expectedDom, _document.DocumentNode.OuterHtml.Replace(Environment.NewLine, "\n"), "Correct modified HTML");
+      Assert.AreEqual(expectedDom, _document.DocumentNode.OuterHtml, "Correct modified HTML");
     }
 
     [Test]
@@ -312,7 +312,7 @@ namespace Test.CSF.Zpt.DocumentProviders.HtmlHAP
 <footer>Page footer</footer>
 </body>
 </html>";
-      Assert.AreEqual(expectedDom, _document.DocumentNode.OuterHtml.Replace(Environment.NewLine, "\n"), "Correct modified HTML");
+      Assert.AreEqual(expectedDom, _document.DocumentNode.OuterHtml, "Correct modified HTML");
     }
 
     [Test]
@@ -351,7 +351,7 @@ namespace Test.CSF.Zpt.DocumentProviders.HtmlHAP
 <footer>Page footer</footer>
 </body>
 </html>";
-      Assert.AreEqual(expectedDom, _document.DocumentNode.OuterHtml.Replace(Environment.NewLine, "\n"), "Correct modified HTML");
+      Assert.AreEqual(expectedDom, _document.DocumentNode.OuterHtml, "Correct modified HTML");
     }
 
     [Test]
@@ -385,7 +385,7 @@ namespace Test.CSF.Zpt.DocumentProviders.HtmlHAP
 <footer>Page footer</footer>
 </body>
 </html>";
-      Assert.AreEqual(expectedDom, _document.DocumentNode.OuterHtml.Replace(Environment.NewLine, "\n"), "Correct modified HTML");
+      Assert.AreEqual(expectedDom, _document.DocumentNode.OuterHtml, "Correct modified HTML");
     }
 
     [Test]
@@ -419,7 +419,7 @@ namespace Test.CSF.Zpt.DocumentProviders.HtmlHAP
 <footer>Page footer</footer>
 </body>
 </html>";
-      Assert.AreEqual(expectedDom, _document.DocumentNode.OuterHtml.Replace(Environment.NewLine, "\n"), "Correct modified HTML");
+      Assert.AreEqual(expectedDom, _document.DocumentNode.OuterHtml, "Correct modified HTML");
     }
 
     [Test]
@@ -451,7 +451,7 @@ namespace Test.CSF.Zpt.DocumentProviders.HtmlHAP
 <footer>Page footer</footer>
 </body>
 </html>";
-      Assert.AreEqual(expectedDom, _document.DocumentNode.OuterHtml.Replace(Environment.NewLine, "\n"), "Correct modified HTML");
+      Assert.AreEqual(expectedDom, _document.DocumentNode.OuterHtml, "Correct modified HTML");
     }
 
     [Test]
@@ -483,7 +483,7 @@ namespace Test.CSF.Zpt.DocumentProviders.HtmlHAP
 <footer>Page footer</footer>
 </body>
 </html>";
-      Assert.AreEqual(expectedDom, _document.DocumentNode.OuterHtml.Replace(Environment.NewLine, "\n"), "Correct modified HTML");
+      Assert.AreEqual(expectedDom, _document.DocumentNode.OuterHtml, "Correct modified HTML");
     }
 
     [Test]
@@ -532,7 +532,7 @@ namespace Test.CSF.Zpt.DocumentProviders.HtmlHAP
 <footer>Page footer</footer>
 </body>
 </html>";
-      Assert.AreEqual(expectedDom, _document.DocumentNode.OuterHtml.Replace(Environment.NewLine, "\n"), "Correct modified HTML");
+      Assert.AreEqual(expectedDom, _document.DocumentNode.OuterHtml, "Correct modified HTML");
           }
 
     [Test]

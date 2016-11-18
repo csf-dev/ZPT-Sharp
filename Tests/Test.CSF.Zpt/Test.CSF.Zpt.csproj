@@ -121,9 +121,5 @@
       <Project>{96333809-3330-43A7-B0CB-2DBE68E1E6FE}</Project>
       <Name>CSF.Zpt.TestUtils</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Deployment\CSF.Zpt.PreBuild\CSF.Zpt.PreBuild.csproj">
-      <Project>{6C025057-9ACC-474E-9092-D6B9059B07EE}</Project>
-      <Name>CSF.Zpt.PreBuild</Name>
-    </ProjectReference>
   </ItemGroup>
 </Project>

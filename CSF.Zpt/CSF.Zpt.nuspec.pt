@@ -1,0 +1,26 @@
+﻿<?xml version="1.0"?>
+<package xmlns:metal="http://xml.zope.org/namespaces/metal"
+         xmlns:tal="http://xml.zope.org/namespaces/tal">
+  <metadata>
+    <id>CSF.Zpt</id>
+    <version tal:content="options/version">0.0.0</version>
+    <title>CSF.Zpt (ZPT-Sharp component)</title>
+    <authors>CSF Software Ltd</authors>
+    <licenseUrl>https://opensource.org/licenses/MIT</licenseUrl>
+    <projectUrl>http://csf-dev.github.io/ZPT-Sharp/</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>The mandatory parts of the ZPT-Sharp API.  This is a component; alone it is not a complete/functional ZPT-Sharp package.  For more information see the project website.</description>
+    <copyright tal:content="string:Copyright ${options/copyrightYear}">Copyright 2016</copyright>
+    <dependencies>
+      <dependency id="CSF.Zpt.Abstractions"
+                  version="[0.0.0,1.0.0)"
+                  tal:attributes="version string:[${options/version},${options/nextBreakingVersion})" />
+    </dependencies>
+  </metadata>
+  <files>
+    <file src="bin/Release/CSF.dll" target="lib/net45" />
+    <file src="bin/Release/CSF.Configuration.dll" target="lib/net45" />
+    <file src="bin/Release/CSF.Reflection.dll" target="lib/net45" />
+    <file src="bin/Release/CSF.Zpt.dll" target="lib/net45" />
+  </files>
+</package>

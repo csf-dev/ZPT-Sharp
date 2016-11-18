@@ -125,12 +125,21 @@ Once any required configuration of your `PATH` environment variable (to make the
 
 ```
 nuget restore
-msbuild /p:Configuration=Release
+msbuild "/p:Configuration=Release"
 ```
 
 Substitute the `msbuild` application for `xbuild` if appropriate; the parameters taken by either application are passed in the same format/syntax.
 Substitute `Release` for `Debug` or `Deploy` if you wish to use one of those other build configurations.
 If the build configuration parameter is omitted (IE: you just execute MSBuild/XBuild with no parameters) then a `Debug` build will be performed.
+
+Optionally, for `Deploy` builds only, you may specify the build property `WebsiteUrlRoot` with a value.
+By default this property defaults to the URL of the ZPT documentation website.
+Sspecifying a local value will permit you to host and use the documentation website locally.
+This is performed as follows:
+
+```
+msbuild "/p:Configuration=Deploy;WebsiteUrlRoot=."
+```
 
 ## Where to find the build output
 In a `Debug` or `Release` build, the build output will be available in each of the various project directories, in a directory named `bin`, and a subdirectory named after the build configuration used (the usual location for .NET software).
