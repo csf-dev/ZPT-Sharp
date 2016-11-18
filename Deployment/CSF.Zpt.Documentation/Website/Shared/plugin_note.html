@@ -33,49 +33,19 @@
           <em><a href="plugins.html">expression evaluator plugin</a></em>.
           As such, it is available only when the corresponding plugin is installed.
         </p>
-        <div metal:define-slot="plugin_info" tal:omit-tag="string:true">
-          <table class="plugin_details">
-            <colgroup>
-              <col class="key" />
-              <col class="value" />
-            </colgroup>
-            <thead>
-              <tr>
-                <th>Item</th>
-                <th>Value</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <th>Plugin assembly</th>
-                <td>
-                  <span metal:define-slot="plugin_assembly">
-                    <code>CSF.Zpt.ExpressionEvaluators.SomeExpression.dll</code>
-                  </span>
-                </td>
-              </tr>
-              <tr>
-                <th>
-                  <span metal:define-slot="plugin_class_header">Plugin class</span>
-                </th>
-                <td>
-                  <span metal:define-slot="plugin_class">
-                    <code>CSF.Zpt.ExpressionEvaluators.SomeExpressionEvaluator</code>
-                  </span>
-                </td>
-              </tr>
-              <tr>
-                <th>
-                  <span metal:define-slot="expression_prefix_header">Expression prefix</span>
-                </th>
-                <td>
-                  <span metal:define-slot="expression_prefix">
-                    <code>not:</code>
-                  </span>
-                </td>
-              </tr>
-            </tbody>
-          </table>
+        <div metal:define-slot="plugin_info" class="plugin_details">
+          <h3>Plugin assembly</h3>
+          <div metal:define-slot="plugin_assembly">
+            <code>CSF.Zpt.ExpressionEvaluators.SomeExpression.dll</code>
+          </div>
+          <h3><span metal:define-slot="plugin_class_header">Plugin class</span></h3>
+          <div metal:define-slot="plugin_class">
+            <code>CSF.Zpt.ExpressionEvaluators.SomeExpressionEvaluator</code>
+          </div>
+          <h3><span metal:define-slot="expression_prefix_header">Expression prefix</span></h3>
+          <div metal:define-slot="expression_prefix">
+            <code>not:</code>
+          </div>
         </div>
       </div>
     </section>

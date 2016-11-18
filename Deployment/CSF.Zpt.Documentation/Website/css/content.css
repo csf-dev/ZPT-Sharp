@@ -137,8 +137,7 @@ table.zpt_attributes col.summary {
 .plugin_note {
   margin-bottom: 1em;
 }
-.plugin_note h2,
-.plugin_note .plugin_details thead {
+.plugin_note h2 {
   position:absolute;
   left:-10000px;
   top:auto;
@@ -146,10 +145,7 @@ table.zpt_attributes col.summary {
   height:1px;
   overflow:hidden;
 }
-.plugin_note .plugin_details {
-  border: 0 none;
-  margin-bottom: 0;
-}
-.plugin_note .plugin_details tbody {
-  border: 2px solid #666;
+.plugin_note h3 {
+  font-size: 110%;
+  margin-top: 0.6em;
 }
