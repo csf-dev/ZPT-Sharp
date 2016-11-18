@@ -2,7 +2,7 @@
 <package>
   <metadata>
     <id>CSF.Zpt.Cli</id>
-    <version>0.6.1</version>
+    <version>0.7.0</version>
     <title>CSF.Zpt.Cli (ZPT-Sharp component)</title>
     <authors>CSF Software Ltd</authors>
     <licenseUrl>https://opensource.org/licenses/MIT</licenseUrl>
@@ -11,7 +11,7 @@
     <description>Command-line page renderer for ZPT-Sharp.  This is a minimal package with no plugins; consider the ZPT-Sharp-ZptBuilder package.  For more information see the project website.</description>
     <copyright>Copyright 2016</copyright>
     <dependencies>
-      <dependency id="CSF.Zpt" version="[0.6.1,1.0.0)" />
+      <dependency id="CSF.Zpt" version="[0.7.0,1.0.0)" />
     </dependencies> 
   </metadata>
   <files>

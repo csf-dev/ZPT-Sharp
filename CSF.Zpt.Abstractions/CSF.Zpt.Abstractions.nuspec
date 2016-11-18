@@ -2,7 +2,7 @@
 <package>
   <metadata>
     <id>CSF.Zpt.Abstractions</id>
-    <version>0.6.1</version>
+    <version>0.7.0</version>
     <title>CSF.Zpt.Abstractions (ZPT-Sharp component)</title>
     <authors>CSF Software Ltd</authors>
     <licenseUrl>https://opensource.org/licenses/MIT</licenseUrl>
