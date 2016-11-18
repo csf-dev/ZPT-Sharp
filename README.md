@@ -15,12 +15,15 @@ Information specific to **running the unit/integration tests** is available in t
 [UNIT_TESTS.md]: https://github.com/csf-dev/ZPT-Sharp/blob/master/UNIT_TESTS.md
 
 ## Current status
-The current status of the project - as of `v0.6.1` - is that the software should be considered in an _alpha_ state.
-Whilst there are now no issues open with [the API Change label], I still cannot promise that the API is completely stable.
-I would certainly not recommend it for production use.
+The current status of the project - as of `v0.7.0` - is that the software should be considered in an _alpha_ state.
+There are presently no open issues with [the API Change label], although I am currently considering ([for csharp expressions] and [for python expressions]) how to permit importing of other code, referencing assemblies and making Linq available.  This could potentially impact upon the stability of the API.
+
+I would certainly not recommend the project for production use yet.
 At this stage I would welcome exploration, testing and (most importantly) bug-reports from interested parties.
 
 [the API Change label]: https://github.com/csf-dev/ZPT-Sharp/labels/API%20change
+[for csharp expressions]: https://github.com/csf-dev/ZPT-Sharp/issues/170
+[for python expressions]: https://github.com/csf-dev/ZPT-Sharp/issues/175
 
 ---
 
