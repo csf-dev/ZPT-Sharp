@@ -1,4 +1,0 @@
-<map id="CSF.Zpt.ExpressionEvaluators.NotExpressionEvaluator" name="CSF.Zpt.ExpressionEvaluators.NotExpressionEvaluator">
-<area shape="rect" id="node2" href="$classCSF_1_1Zpt_1_1Tales_1_1ExpressionEvaluatorBase.html" title="Base class for a TALES expression evaluator implementation, implements IExpressionEvaluator. " alt="" coords="23,80,195,107"/>
-<area shape="rect" id="node3" href="$interfaceCSF_1_1Zpt_1_1Tales_1_1IExpressionEvaluator.html" title="Interface for a type which evaluates TALES expressions. " alt="" coords="35,5,182,32"/>
-</map>

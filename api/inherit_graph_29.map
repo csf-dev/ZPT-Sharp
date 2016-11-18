@@ -1,3 +1,7 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="node2" href="$classCSF_1_1Zpt_1_1PluginAssemblyCollection.html" title="Configuration type which represents the collection of plugin assemblies. " alt="" coords="259,5,487,32"/>
+<area shape="rect" id="node2" href="$classCSF_1_1Zpt_1_1ExpressionEvaluators_1_1CSharpExpressions_1_1NamespaceConfiguration.html" title="Implementation of INamespaceConfiguration using a ConfigurationSection. " alt="" coords="347,85,636,126"/>
+<area shape="rect" id="node3" href="$classCSF_1_1Zpt_1_1PluginConfigurationSection.html" title="Implementation of IPluginConfiguration using a System.Configuration.ConfigurationSection. " alt="" coords="397,150,586,191"/>
+<area shape="rect" id="node4" href="$interfaceCSF_1_1Zpt_1_1ExpressionEvaluators_1_1CSharpExpressions_1_1INamespaceConfiguration.html" title="Interface for a configuration type which provides the namespaces which are imported for CSharp expres..." alt="" coords="5,23,299,65"/>
+<area shape="rect" id="node5" href="$classCSF_1_1Zpt_1_1ExpressionEvaluators_1_1CSharpExpressions_1_1FallbackNamespaceConfiguration.html" title="Fallback implementation of INamespaceConfiguration. " alt="" coords="361,5,622,61"/>
+<area shape="rect" id="node6" href="$interfaceCSF_1_1Zpt_1_1IPluginConfiguration.html" title="Interface for a type capable of providing information about installed plugins. " alt="" coords="55,157,249,184"/>
 </map>

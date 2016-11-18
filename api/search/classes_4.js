@@ -8,5 +8,7 @@ var searchData=
   ['expressionevaluatorbase',['ExpressionEvaluatorBase',['../classCSF_1_1Zpt_1_1Tales_1_1ExpressionEvaluatorBase.html',1,'CSF::Zpt::Tales']]],
   ['expressionevaluatorservice',['ExpressionEvaluatorService',['../classCSF_1_1Zpt_1_1Tales_1_1ExpressionEvaluatorService.html',1,'CSF::Zpt::Tales']]],
   ['expressionfactory',['ExpressionFactory',['../classCSF_1_1Zpt_1_1Tales_1_1ExpressionFactory.html',1,'CSF::Zpt::Tales']]],
+  ['expressionhostbuilderbase',['ExpressionHostBuilderBase',['../classCSF_1_1Zpt_1_1ExpressionEvaluators_1_1CSharpExpressions_1_1ExpressionHostBuilderBase.html',1,'CSF::Zpt::ExpressionEvaluators::CSharpExpressions']]],
+  ['expressionmodel',['ExpressionModel',['../classCSF_1_1Zpt_1_1ExpressionEvaluators_1_1CSharpExpressions_1_1ExpressionModel.html',1,'CSF::Zpt::ExpressionEvaluators::CSharpExpressions']]],
   ['expressionresult',['ExpressionResult',['../classCSF_1_1Zpt_1_1Rendering_1_1ExpressionResult.html',1,'CSF::Zpt::Rendering']]]
 ];

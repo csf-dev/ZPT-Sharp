@@ -1,8 +1,8 @@
 var searchData=
 [
   ['parserexception',['ParserException',['../classCSF_1_1Zpt_1_1Tal_1_1ParserException.html#a9a135052b726b8b203ff0e83128deb69',1,'CSF.Zpt.Tal.ParserException.ParserException()'],['../classCSF_1_1Zpt_1_1Tal_1_1ParserException.html#aba2366a00d1e4710b568a6f39706ae7f',1,'CSF.Zpt.Tal.ParserException.ParserException(string message)'],['../classCSF_1_1Zpt_1_1Tal_1_1ParserException.html#ad6f26be33bb1bd804489a37e3e84a569',1,'CSF.Zpt.Tal.ParserException.ParserException(string message, System.Exception inner)'],['../classCSF_1_1Zpt_1_1Tal_1_1ParserException.html#a4ac525955320fb97b3e8b95fba6ff1f2',1,'CSF.Zpt.Tal.ParserException.ParserException(System.Runtime.Serialization.SerializationInfo info, System.Runtime.Serialization.StreamingContext context)']]],
-  ['pathexpressionevaluator',['PathExpressionEvaluator',['../classCSF_1_1Zpt_1_1ExpressionEvaluators_1_1PathExpressionEvaluator.html#a5859eaf4149521c44173bebe1883ff29',1,'CSF::Zpt::ExpressionEvaluators::PathExpressionEvaluator']]],
-  ['pathwalker',['PathWalker',['../classCSF_1_1Zpt_1_1ExpressionEvaluators_1_1PathWalker.html#af8a40e8b66c521d0e7e570fbfa99d104',1,'CSF::Zpt::ExpressionEvaluators::PathWalker']]],
+  ['pathexpressionevaluator',['PathExpressionEvaluator',['../classCSF_1_1Zpt_1_1ExpressionEvaluators_1_1PathExpressions_1_1PathExpressionEvaluator.html#adf7f522ef648de2caef2d8b04bf50984',1,'CSF::Zpt::ExpressionEvaluators::PathExpressions::PathExpressionEvaluator']]],
+  ['pathwalker',['PathWalker',['../classCSF_1_1Zpt_1_1ExpressionEvaluators_1_1PathExpressions_1_1PathWalker.html#a1d07bd8519d5ec9f84f8aa6abedd6cbe',1,'CSF::Zpt::ExpressionEvaluators::PathExpressions::PathWalker']]],
   ['pluginservicebase',['PluginServiceBase',['../classCSF_1_1Zpt_1_1PluginServiceBase.html#ae70f51624baf805622344205ba1442bd',1,'CSF::Zpt::PluginServiceBase']]],
   ['populatemetalmodel',['PopulateMetalModel',['../classCSF_1_1Zpt_1_1Tales_1_1TalesRenderingContextFactory.html#a5179df064cc091449522897902da4f8e',1,'CSF::Zpt::Tales::TalesRenderingContextFactory']]],
   ['populatetalmodel',['PopulateTalModel',['../classCSF_1_1Zpt_1_1Tales_1_1TalesRenderingContextFactory.html#a8f883d91a954b558dc00f9bdb228ac75',1,'CSF::Zpt::Tales::TalesRenderingContextFactory']]],
@@ -12,5 +12,7 @@ var searchData=
   ['purgemetalattributes',['PurgeMetalAttributes',['../classCSF_1_1Zpt_1_1Rendering_1_1ElementExtensions.html#affc65d4b1ecc3ad24db2166412431b6e',1,'CSF::Zpt::Rendering::ElementExtensions']]],
   ['purgemetalelements',['PurgeMetalElements',['../classCSF_1_1Zpt_1_1Rendering_1_1ElementExtensions.html#ae34ab48a9edd15081aefe5f59f65f16d',1,'CSF::Zpt::Rendering::ElementExtensions']]],
   ['purgetalattributes',['PurgeTalAttributes',['../classCSF_1_1Zpt_1_1Rendering_1_1ElementExtensions.html#ab958541817121581ffc41aa18075c118',1,'CSF::Zpt::Rendering::ElementExtensions']]],
-  ['purgetalelements',['PurgeTalElements',['../classCSF_1_1Zpt_1_1Rendering_1_1ElementExtensions.html#a4c72eb4d33a4de2cefe53a9f38c97ed4',1,'CSF::Zpt::Rendering::ElementExtensions']]]
+  ['purgetalelements',['PurgeTalElements',['../classCSF_1_1Zpt_1_1Rendering_1_1ElementExtensions.html#a4c72eb4d33a4de2cefe53a9f38c97ed4',1,'CSF::Zpt::Rendering::ElementExtensions']]],
+  ['pythonexpressionevaluator',['PythonExpressionEvaluator',['../classCSF_1_1Zpt_1_1ExpressionEvaluators_1_1PythonExpressions_1_1PythonExpressionEvaluator.html#a7b23d3ac3bca43e18ffcea6cfd2fbdd9',1,'CSF::Zpt::ExpressionEvaluators::PythonExpressions::PythonExpressionEvaluator']]],
+  ['pythonexpressionhost',['PythonExpressionHost',['../classCSF_1_1Zpt_1_1ExpressionEvaluators_1_1PythonExpressions_1_1PythonExpressionHost.html#a831bbcfa7e24bf7a5d30fb2a25914768',1,'CSF::Zpt::ExpressionEvaluators::PythonExpressions::PythonExpressionHost']]]
 ];

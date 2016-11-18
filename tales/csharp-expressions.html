@@ -1,0 +1,264 @@
+﻿<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TALES 'csharp' expressions</title>
+<base href="http://csf-dev.github.io/ZPT-Sharp/">
+<style type="text/css">
+@import url(css/styles.css);
+</style>
+
+<script data-main="js/config/main" type="text/javascript" src="js/lib/require.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.4.0/styles/default.min.css">
+</head>
+<body class="page_csharp_expressions">
+<div class="content_wrapper">
+  <header class="page_header">
+    <div class="hamburger_menu" title="Show/hide navigation">
+      <span class="hamburger_line"></span>
+      <span class="hamburger_line"></span>
+      <span class="hamburger_line"></span>
+    </div>
+    <h2>
+      <a href="index.html">ZPT Sharp</a>
+      <em>Zen HTML views</em>
+    </h2>
+  </header>
+  <div class="main_page_area">
+    <nav>
+      <h2>Site navigation</h2>
+      <ul class="active_csharp_expressions">
+        <li class="introduction nav_item">
+          <a href="index.html">Introduction</a>
+        </li>
+        <li class="advantages nav_item">
+          <a href="advantages-of-zpt-views.html">ZPT Advantages</a>
+        </li>
+        <li class="download nav_item">
+          <a href="download.html">Download ZPT-Sharp</a>
+        </li>
+        <li class="asp_net_view_engine nav_item">
+          <a href="asp-net-mvc-view-engine.html">ZPT-Sharp for ASP.NET MVC</a>
+        </li>
+        <li class="command_line_renderer nav_item">
+          <a href="command-line-renderer.html">The command-line renderer</a>
+        </li>
+        <li class="writing_pages_using_zpt nav_item">
+          <a href="writing-pages-using-zpt.html">Writing pages</a>
+        </li>
+        <li class="metal_reference nav_section">
+          <h3>METAL reference</h3>
+          <ul>
+            <li>
+              <a href="metal/introduction.html">Introduction to METAL</a>
+            </li>
+            <li>
+              <a href="metal/define-use-macro.html">Define &amp; use macros</a>
+            </li>
+            <li>
+              <a href="metal/define-fill-slot.html">Define &amp; fill slots</a>
+            </li>
+            <li>
+              <a href="metal/extend-macro.html">Extend macros</a>
+            </li>
+          </ul>
+        </li>
+        <li class="tal_reference nav_section">
+          <h3>TAL reference</h3>
+          <ul>
+            <li>
+              <a href="tal/introduction.html">Introduction to TAL</a>
+            </li>
+            <li>
+              <a href="tal/define.html">Define variables</a>
+            </li>
+            <li>
+              <a href="tal/condition.html">Conditional rendering</a>
+            </li>
+            <li>
+              <a href="tal/repeat.html">Repeat sections of markup</a>
+            </li>
+            <li>
+              <a href="tal/content-replace.html">Insert model data</a>
+            </li>
+            <li>
+              <a href="tal/attributes.html">Set attributes</a>
+            </li>
+            <li>
+              <a href="tal/omit-tag.html">Omit start/end tag</a>
+            </li>
+            <li>
+              <a href="tal/on-error.html">Error handling</a>
+            </li>
+          </ul>
+        </li>
+        <li class="tales_reference nav_section">
+          <h3>TALES reference</h3>
+          <ul>
+            <li>
+              <a href="tales/introduction.html">Introduction to TALES</a>
+            </li>
+            <li>
+              <a href="tales/path-expressions.html">Path expressions</a>
+            </li>
+            <li>
+              <a href="tales/string-expressions.html">String expressions</a>
+            </li>
+            <li>
+              <a href="tales/not-expressions.html">Not expressions</a>
+            </li>
+            <li>
+              <a href="tales/csharp-expressions.html">CSharp expressions</a>
+            </li>
+            <li>
+              <a href="tales/built-in-variables.html">Root variables</a>
+            </li>
+            <li>
+              <a href="tales/repeat-variables.html">Repeat variables</a>
+            </li>
+          </ul>
+        </li>
+        <li class="advanced_topics nav_section">
+          <h3>Advanced topics</h3>
+          <ul>
+            <li class="page_rendering_api nav_item">
+              <a href="page-rendering-api.html">API introduction</a>
+            </li>
+            <li class="api_reference nav_item">
+              <a href="api/index.html">API reference</a>
+            </li>
+            <li class="configuration nav_item">
+              <a href="configuration.html">Configuration</a>
+            </li>
+            <li class="plugins nav_item">
+              <a href="plugins.html">Plugins</a>
+            </li>
+            <li class="writing_plugins nav_item">
+              <a href="writing-plugins.html">Writing plugins</a>
+            </li>
+            <li class="diagnostics_and_logging nav_item">
+              <a href="logging.html">Diagnostics &amp; logging</a>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </nav>
+    <section class="main_page_content">
+      <header>
+        <div class="expression plugin_note note">
+        <h2>Plugin note</h2>
+        <p>
+          This functionality is contained within an
+          <em><a href="plugins.html">expression evaluator plugin</a></em>.
+          As such, it is available only when the corresponding plugin is installed.
+        </p>
+        <div class="plugin_details">
+          <h3>Plugin assembly</h3>
+          <span><code>CSF.Zpt.ExpressionEvaluators.CSharpExpressions.dll</code></span>
+          <h3><span>Plugin class</span></h3>
+          <span><code>CSF.Zpt.ExpressionEvaluators.CSharpExpressions.CSharpExpressionEvaluator</code></span>
+          <h3><span>Expression prefix</span></h3>
+          <span><code>csharp:</code></span>
+        </div>
+      </div>
+        <h1>TALES 'csharp' expressions</h1>
+      </header>
+      <p>
+        <code>csharp:</code> expressions permit the use of C♯ as a mechanism of evaluating TALES expressions.
+        The provided C♯ expression string is executed, its value determined and returned as the result of the
+        expression.
+      </p>
+      <h2>Permitted expressions</h2>
+      <p>
+        C♯ expressions supported by this plugin must be single statements.  Multiple statements (joined by semicolons)
+        are not permitted and will not compile.
+        Expressions have access to all of the variables which are available to TALES, including those created by
+        <code><a href="tal/define.html">tal:define</a></code> and <code><a href="tal/repeat.html">tal:repeat</a></code>
+        attributes.
+      <p>
+      <p>
+        In essence, to determine whether an expression is OK or not, consider whether it would be valid for
+        execution if preceded by a <code>return</code> keyword and followed by a semicolon, assuming that all of the
+        TALES variables are also available in the same scope:
+      </p>
+      <pre><code class="csharp">return YOUR_EXPRESSION_HERE;</code></pre>
+      <h2>Example</h2>
+      <pre><code class="html">&lt;div tal:define="myName string:sally"&gt;
+  Hello, my name is
+  &lt;span tal:replace="csharp:myName.ToUpperInvariant()"&gt;JOSEPH&lt;/span&gt;
+&lt;/div&gt;</code></pre>
+      <p>
+        The expression above would emit <kbd>Hello, my name is SALLY</kbd>, surrounded with HTML <code>&lt;div&gt;</code>
+        tags.
+      </p>
+      <h2>Note on variable names</h2>
+      <p>
+        If this plugin is installed <em>(by default, it is)</em> then all variable names created through
+        <code><a href="tal/define.html">tal:define</a></code> or <code><a href="tal/repeat.html">tal:repeat</a></code>
+        <em>must also be valid C♯ variable names</em>.
+      </p>
+      <p>
+        For example, on its own, the TALES specification would permit a variable named <kbd>12things</kbd>;
+        this is not a valid C♯ variable name though.
+        If such a variable is 'in scope' when a <code>csharp:</code> expression is evaluated, the expression will
+        not compile and an error will be raised.
+        <em>It does not matter whether the C♯ expression attempts to make use of such a 'bad' variable or not</em>.
+        The very presence of the variable in the TALES environment will prevent the C♯ expression from compiling.
+      </p>
+      <h2>Note on double-quotes</h2>
+      <p>
+        You will be well-aware that C♯ uses double-quotes: <kbd>"</kbd> to indicate strings.
+        However, as an attribute-based language, ZPT is already executing within an environment in which double-quotes
+        are being used.
+        When writing C♯ expressions which make use of string literals, you must escape your double-quote
+        characters as <kbd>&amp;quot;</kbd> in order to prevent a conflict.
+      </p>
+      <p>
+        This is illustrated by the following example, where <code>DateTime.ToString</code> is used with a
+        string parameter to get a custom date format.
+      </p>
+      <pre><code class="html">&lt;p tal:define="today csharp:DateTime.Today"&gt;
+  Today's date is
+  &lt;span tal:content="csharp:today.ToString(&amp;quot;yyyy-MM-dd&amp;quot;)"&gt;2012-01-01&lt;span&gt;
+&lt;/p&gt;</code></pre>
+      <h2>Namespaces available to C♯ expressions</h2>
+      <p>
+        By default (if no configuration is present), two namespaces are available to <code>csharp:</code> expressions.
+        These are <code>System</code> and <code>System.Linq</code>, as if the two namespaces were present in
+        <code>using</code> statements.
+      </p>
+      <p>
+        If you wish to customise this (affecting all CSharp expressions), you may do so using
+        <a href="configuration.html">the ZPT-Sharp configuration file</a>.
+      </p>
+    </section>
+  </div>
+</div>
+<footer class="page_footer">
+  <section class="copyright">
+    Copyright © 2016
+    <a href="http://csf-dev.com/">CSF Software Limited</a> et al
+  </section>
+  <section class="version">
+    <p>
+      Website built <strong>2016-11-18</strong>;
+      for version
+      <strong>
+        v0.7.0-alpha
+      </strong>
+    </p>
+  </section>
+</footer>
+<div class="cookie_statement">
+  <p>
+    This website uses analytics cookies to understand how visitors are making use of its content.
+    This helps decide where improvements can be made in the future.
+    <a href="https://ico.org.uk/for-organisations/guide-to-pecr/cookies-and-similar-technologies/">European and UK law</a>
+    requires us to ask you for your consent to this.
+  </p>
+  <button class="accept">Accept cookies</button>
+</div>
+
+</body>
+</html>

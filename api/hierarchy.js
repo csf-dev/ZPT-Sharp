@@ -2,12 +2,15 @@ var hierarchy =
 [
     [ "CSF.Zpt.Tal.AttributeHandlingResult", "classCSF_1_1Zpt_1_1Tal_1_1AttributeHandlingResult.html", null ],
     [ "ConfigurationElement", null, [
+      [ "CSF.Zpt.ExpressionEvaluators.CSharpExpressions.NamespaceConfigurationElement", "classCSF_1_1Zpt_1_1ExpressionEvaluators_1_1CSharpExpressions_1_1NamespaceConfigurationElement.html", null ],
       [ "CSF.Zpt.Plugin", "classCSF_1_1Zpt_1_1Plugin.html", null ]
     ] ],
     [ "ConfigurationElementCollection", null, [
+      [ "CSF.Zpt.ExpressionEvaluators.CSharpExpressions.NamespaceConfigurationCollection", "classCSF_1_1Zpt_1_1ExpressionEvaluators_1_1CSharpExpressions_1_1NamespaceConfigurationCollection.html", null ],
       [ "CSF.Zpt.PluginAssemblyCollection", "classCSF_1_1Zpt_1_1PluginAssemblyCollection.html", null ]
     ] ],
     [ "ConfigurationSection", null, [
+      [ "CSF.Zpt.ExpressionEvaluators.CSharpExpressions.NamespaceConfiguration", "classCSF_1_1Zpt_1_1ExpressionEvaluators_1_1CSharpExpressions_1_1NamespaceConfiguration.html", null ],
       [ "CSF.Zpt.PluginConfigurationSection", "classCSF_1_1Zpt_1_1PluginConfigurationSection.html", null ]
     ] ],
     [ "CSF.Zpt.Rendering.ElementExtensions", "classCSF_1_1Zpt_1_1Rendering_1_1ElementExtensions.html", null ],
@@ -21,7 +24,9 @@ var hierarchy =
         [ "CSF.Zpt.Rendering.RenderingException", "classCSF_1_1Zpt_1_1Rendering_1_1RenderingException.html", [
           [ "CSF.Zpt.Metal.MacroNotFoundException", "classCSF_1_1Zpt_1_1Metal_1_1MacroNotFoundException.html", null ],
           [ "CSF.Zpt.Rendering.ModelEvaluationException", "classCSF_1_1Zpt_1_1Rendering_1_1ModelEvaluationException.html", [
-            [ "CSF.Zpt.Tales.InvalidExpressionException", "classCSF_1_1Zpt_1_1Tales_1_1InvalidExpressionException.html", null ]
+            [ "CSF.Zpt.Tales.InvalidExpressionException", "classCSF_1_1Zpt_1_1Tales_1_1InvalidExpressionException.html", [
+              [ "CSF.Zpt.ExpressionEvaluators.CSharpExpressions.CSharpExpressionExceptionException", "classCSF_1_1Zpt_1_1ExpressionEvaluators_1_1CSharpExpressions_1_1CSharpExpressionExceptionException.html", null ]
+            ] ]
           ] ],
           [ "CSF.Zpt.Tal.ParserException", "classCSF_1_1Zpt_1_1Tal_1_1ParserException.html", null ]
         ] ],
@@ -29,6 +34,8 @@ var hierarchy =
       ] ]
     ] ],
     [ "CSF.Zpt.Tales.Expression", "classCSF_1_1Zpt_1_1Tales_1_1Expression.html", null ],
+    [ "CSF.Zpt.ExpressionEvaluators.CSharpExpressions.ExpressionHostBuilderBase", "classCSF_1_1Zpt_1_1ExpressionEvaluators_1_1CSharpExpressions_1_1ExpressionHostBuilderBase.html", null ],
+    [ "CSF.Zpt.ExpressionEvaluators.CSharpExpressions.ExpressionModel", "classCSF_1_1Zpt_1_1ExpressionEvaluators_1_1CSharpExpressions_1_1ExpressionModel.html", null ],
     [ "CSF.Zpt.Rendering.ExpressionResult", "classCSF_1_1Zpt_1_1Rendering_1_1ExpressionResult.html", null ],
     [ "CSF.Zpt.Rendering.IActionCanceller", "interfaceCSF_1_1Zpt_1_1Rendering_1_1IActionCanceller.html", [
       [ "CSF.Zpt.Rendering.CancellationToken", "classCSF_1_1Zpt_1_1Rendering_1_1CancellationToken.html", null ]
@@ -72,6 +79,15 @@ var hierarchy =
     [ "CSF.Zpt.Rendering.IContextVisitorFactory", "interfaceCSF_1_1Zpt_1_1Rendering_1_1IContextVisitorFactory.html", [
       [ "CSF.Zpt.Rendering.ContextVisitorFactory", "classCSF_1_1Zpt_1_1Rendering_1_1ContextVisitorFactory.html", null ]
     ] ],
+    [ "CSF.Zpt.ExpressionEvaluators.CSharpExpressions.ICSharpExpressionCache", "interfaceCSF_1_1Zpt_1_1ExpressionEvaluators_1_1CSharpExpressions_1_1ICSharpExpressionCache.html", [
+      [ "CSF.Zpt.ExpressionEvaluators.CSharpExpressions.CSharpExpressionCache", "classCSF_1_1Zpt_1_1ExpressionEvaluators_1_1CSharpExpressions_1_1CSharpExpressionCache.html", null ]
+    ] ],
+    [ "CSF.Zpt.ExpressionEvaluators.CSharpExpressions.ICSharpExpressionFactory", "interfaceCSF_1_1Zpt_1_1ExpressionEvaluators_1_1CSharpExpressions_1_1ICSharpExpressionFactory.html", [
+      [ "CSF.Zpt.ExpressionEvaluators.CSharpExpressions.CSharpExpressionFactory", "classCSF_1_1Zpt_1_1ExpressionEvaluators_1_1CSharpExpressions_1_1CSharpExpressionFactory.html", null ]
+    ] ],
+    [ "CSF.Zpt.ExpressionEvaluators.CSharpExpressions.ICSharpExpressionService", "interfaceCSF_1_1Zpt_1_1ExpressionEvaluators_1_1CSharpExpressions_1_1ICSharpExpressionService.html", [
+      [ "CSF.Zpt.ExpressionEvaluators.CSharpExpressions.CSharpExpressionService", "classCSF_1_1Zpt_1_1ExpressionEvaluators_1_1CSharpExpressions_1_1CSharpExpressionService.html", null ]
+    ] ],
     [ "IDisposable", null, [
       [ "CSF.Zpt.BatchRendering.IBatchRenderingOptions", "interfaceCSF_1_1Zpt_1_1BatchRendering_1_1IBatchRenderingOptions.html", [
         [ "CSF.Zpt.BatchRendering.BatchRenderingOptions", "classCSF_1_1Zpt_1_1BatchRendering_1_1BatchRenderingOptions.html", null ]
@@ -84,6 +100,7 @@ var hierarchy =
       [ "CSF.Zpt.Tales.EnumerableObjectWrapperWithNamedItems", "classCSF_1_1Zpt_1_1Tales_1_1EnumerableObjectWrapperWithNamedItems.html", null ]
     ] ],
     [ "IEquatable", null, [
+      [ "CSF.Zpt.ExpressionEvaluators.CSharpExpressions.CSharpExpression", "classCSF_1_1Zpt_1_1ExpressionEvaluators_1_1CSharpExpressions_1_1CSharpExpression.html", null ],
       [ "CSF.Zpt.Rendering.ISourceInfo", "interfaceCSF_1_1Zpt_1_1Rendering_1_1ISourceInfo.html", [
         [ "CSF.Zpt.Rendering.AbstractSourceInfo", "classCSF_1_1Zpt_1_1Rendering_1_1AbstractSourceInfo.html", null ],
         [ "CSF.Zpt.Rendering.SourceFileInfo", "classCSF_1_1Zpt_1_1Rendering_1_1SourceFileInfo.html", null ],
@@ -104,11 +121,13 @@ var hierarchy =
     ] ],
     [ "CSF.Zpt.Tales.IExpressionEvaluator", "interfaceCSF_1_1Zpt_1_1Tales_1_1IExpressionEvaluator.html", [
       [ "CSF.Zpt.Tales.ExpressionEvaluatorBase", "classCSF_1_1Zpt_1_1Tales_1_1ExpressionEvaluatorBase.html", [
-        [ "CSF.Zpt.ExpressionEvaluators.NotExpressionEvaluator", "classCSF_1_1Zpt_1_1ExpressionEvaluators_1_1NotExpressionEvaluator.html", null ],
-        [ "CSF.Zpt.ExpressionEvaluators.PathExpressionEvaluator", "classCSF_1_1Zpt_1_1ExpressionEvaluators_1_1PathExpressionEvaluator.html", [
-          [ "CSF.Zpt.ExpressionEvaluators.LocalVariablePathExpressionEvaluator", "classCSF_1_1Zpt_1_1ExpressionEvaluators_1_1LocalVariablePathExpressionEvaluator.html", null ]
+        [ "CSF.Zpt.ExpressionEvaluators.CSharpExpressions.CSharpExpressionEvaluator", "classCSF_1_1Zpt_1_1ExpressionEvaluators_1_1CSharpExpressions_1_1CSharpExpressionEvaluator.html", null ],
+        [ "CSF.Zpt.ExpressionEvaluators.NotExpressions.NotExpressionEvaluator", "classCSF_1_1Zpt_1_1ExpressionEvaluators_1_1NotExpressions_1_1NotExpressionEvaluator.html", null ],
+        [ "CSF.Zpt.ExpressionEvaluators.PathExpressions.PathExpressionEvaluator", "classCSF_1_1Zpt_1_1ExpressionEvaluators_1_1PathExpressions_1_1PathExpressionEvaluator.html", [
+          [ "CSF.Zpt.ExpressionEvaluators.PathExpressions.LocalVariablePathExpressionEvaluator", "classCSF_1_1Zpt_1_1ExpressionEvaluators_1_1PathExpressions_1_1LocalVariablePathExpressionEvaluator.html", null ]
         ] ],
-        [ "CSF.Zpt.ExpressionEvaluators.StringExpressionEvaluator", "classCSF_1_1Zpt_1_1ExpressionEvaluators_1_1StringExpressionEvaluator.html", null ]
+        [ "CSF.Zpt.ExpressionEvaluators.PythonExpressions.PythonExpressionEvaluator", "classCSF_1_1Zpt_1_1ExpressionEvaluators_1_1PythonExpressions_1_1PythonExpressionEvaluator.html", null ],
+        [ "CSF.Zpt.ExpressionEvaluators.StringExpressions.StringExpressionEvaluator", "classCSF_1_1Zpt_1_1ExpressionEvaluators_1_1StringExpressions_1_1StringExpressionEvaluator.html", null ]
       ] ]
     ] ],
     [ "CSF.Zpt.Tales.IExpressionEvaluatorService", "interfaceCSF_1_1Zpt_1_1Tales_1_1IExpressionEvaluatorService.html", [
@@ -117,6 +136,7 @@ var hierarchy =
     [ "CSF.Zpt.Tales.IExpressionFactory", "interfaceCSF_1_1Zpt_1_1Tales_1_1IExpressionFactory.html", [
       [ "CSF.Zpt.Tales.ExpressionFactory", "classCSF_1_1Zpt_1_1Tales_1_1ExpressionFactory.html", null ]
     ] ],
+    [ "CSF.Zpt.ExpressionEvaluators.CSharpFramework.IExpressionHost", "interfaceCSF_1_1Zpt_1_1ExpressionEvaluators_1_1CSharpFramework_1_1IExpressionHost.html", null ],
     [ "CSF.Zpt.Rendering.IModelValueContainer", "interfaceCSF_1_1Zpt_1_1Rendering_1_1IModelValueContainer.html", [
       [ "CSF.Zpt.Rendering.IRenderingContext", "interfaceCSF_1_1Zpt_1_1Rendering_1_1IRenderingContext.html", [
         [ "CSF.Zpt.Rendering.RenderingContext", "classCSF_1_1Zpt_1_1Rendering_1_1RenderingContext.html", null ]
@@ -132,6 +152,10 @@ var hierarchy =
           [ "CSF.Zpt.Tales.TalesModel", "classCSF_1_1Zpt_1_1Tales_1_1TalesModel.html", null ]
         ] ]
       ] ]
+    ] ],
+    [ "CSF.Zpt.ExpressionEvaluators.CSharpExpressions.INamespaceConfiguration", "interfaceCSF_1_1Zpt_1_1ExpressionEvaluators_1_1CSharpExpressions_1_1INamespaceConfiguration.html", [
+      [ "CSF.Zpt.ExpressionEvaluators.CSharpExpressions.FallbackNamespaceConfiguration", "classCSF_1_1Zpt_1_1ExpressionEvaluators_1_1CSharpExpressions_1_1FallbackNamespaceConfiguration.html", null ],
+      [ "CSF.Zpt.ExpressionEvaluators.CSharpExpressions.NamespaceConfiguration", "classCSF_1_1Zpt_1_1ExpressionEvaluators_1_1CSharpExpressions_1_1NamespaceConfiguration.html", null ]
     ] ],
     [ "CSF.Zpt.IPluginAssemblyLoader", "interfaceCSF_1_1Zpt_1_1IPluginAssemblyLoader.html", [
       [ "CSF.Zpt.PluginAssemblyLoader", "classCSF_1_1Zpt_1_1PluginAssemblyLoader.html", null ]
@@ -211,25 +235,30 @@ var hierarchy =
     [ "CSF.Zpt.Metal.MacroFinder", "classCSF_1_1Zpt_1_1Metal_1_1MacroFinder.html", null ],
     [ "CSF.Zpt.ZptConstants.Metal", "classCSF_1_1Zpt_1_1ZptConstants_1_1Metal.html", null ],
     [ "CSF.Zpt.Metal.MetalMacro", "classCSF_1_1Zpt_1_1Metal_1_1MetalMacro.html", null ],
-    [ "CSF.Zpt.ExpressionEvaluators.ObjectTraverser", "classCSF_1_1Zpt_1_1ExpressionEvaluators_1_1ObjectTraverser.html", null ],
-    [ "CSF.Zpt.ExpressionEvaluators.Path", "classCSF_1_1Zpt_1_1ExpressionEvaluators_1_1Path.html", null ],
-    [ "CSF.Zpt.ExpressionEvaluators.PathComponent", "classCSF_1_1Zpt_1_1ExpressionEvaluators_1_1PathComponent.html", null ],
-    [ "CSF.Zpt.ExpressionEvaluators.PathPart", "classCSF_1_1Zpt_1_1ExpressionEvaluators_1_1PathPart.html", null ],
-    [ "CSF.Zpt.ExpressionEvaluators.PathWalker", "classCSF_1_1Zpt_1_1ExpressionEvaluators_1_1PathWalker.html", null ],
+    [ "CSF.Zpt.ExpressionEvaluators.PathExpressions.ObjectTraverser", "classCSF_1_1Zpt_1_1ExpressionEvaluators_1_1PathExpressions_1_1ObjectTraverser.html", null ],
+    [ "CSF.Zpt.ExpressionEvaluators.PathExpressions.Path", "classCSF_1_1Zpt_1_1ExpressionEvaluators_1_1PathExpressions_1_1Path.html", null ],
+    [ "CSF.Zpt.ExpressionEvaluators.PathExpressions.PathComponent", "classCSF_1_1Zpt_1_1ExpressionEvaluators_1_1PathExpressions_1_1PathComponent.html", null ],
+    [ "CSF.Zpt.ExpressionEvaluators.PathExpressions.PathPart", "classCSF_1_1Zpt_1_1ExpressionEvaluators_1_1PathExpressions_1_1PathPart.html", null ],
+    [ "CSF.Zpt.ExpressionEvaluators.PathExpressions.PathWalker", "classCSF_1_1Zpt_1_1ExpressionEvaluators_1_1PathExpressions_1_1PathWalker.html", null ],
     [ "CSF.Zpt.PluginServiceBase", "classCSF_1_1Zpt_1_1PluginServiceBase.html", [
       [ "CSF.Zpt.Tales.ExpressionEvaluatorService", "classCSF_1_1Zpt_1_1Tales_1_1ExpressionEvaluatorService.html", null ],
       [ "CSF.Zpt.ZptDocumentProviderService", "classCSF_1_1Zpt_1_1ZptDocumentProviderService.html", null ]
     ] ],
+    [ "CSF.Zpt.ExpressionEvaluators.PythonExpressions.PythonExpressionHost", "classCSF_1_1Zpt_1_1ExpressionEvaluators_1_1PythonExpressions_1_1PythonExpressionHost.html", null ],
     [ "CSF.Zpt.Rendering.RenderingContextExtensions", "classCSF_1_1Zpt_1_1Rendering_1_1RenderingContextExtensions.html", null ],
     [ "CSF.Zpt.Metal.SourceAnnotator", "classCSF_1_1Zpt_1_1Metal_1_1SourceAnnotator.html", null ],
     [ "CSF.Zpt.ZptConstants.Tal", "classCSF_1_1Zpt_1_1ZptConstants_1_1Tal.html", null ],
+    [ "ThreadSafeCache", null, [
+      [ "CSF.Zpt.ExpressionEvaluators.CSharpExpressions.CSharpExpressionCache", "classCSF_1_1Zpt_1_1ExpressionEvaluators_1_1CSharpExpressions_1_1CSharpExpressionCache.html", null ]
+    ] ],
+    [ "CSF.Zpt.ExpressionEvaluators.CSharpExpressions.ExpressionHostBuilderBase.ToStringInstanceHelper", "classCSF_1_1Zpt_1_1ExpressionEvaluators_1_1CSharpExpressions_1_1ExpressionHostBuilderBase_1_1ToStringInstanceHelper.html", null ],
     [ "TraceListener", null, [
       [ "CSF.Zpt.Log4netTraceListener", "classCSF_1_1Zpt_1_1Log4netTraceListener.html", [
         [ "CSF.Zpt.SelfConfiguringLog4netTraceListener", "classCSF_1_1Zpt_1_1SelfConfiguringLog4netTraceListener.html", null ]
       ] ]
     ] ],
-    [ "CSF.Zpt.ExpressionEvaluators.TraversalWrapper", "classCSF_1_1Zpt_1_1ExpressionEvaluators_1_1TraversalWrapper.html", [
-      [ "CSF.Zpt.ExpressionEvaluators.TraversalWrapper< TSource >", "classCSF_1_1Zpt_1_1ExpressionEvaluators_1_1TraversalWrapper_3_01TSource_01_4.html", null ]
+    [ "CSF.Zpt.ExpressionEvaluators.PathExpressions.TraversalWrapper", "classCSF_1_1Zpt_1_1ExpressionEvaluators_1_1PathExpressions_1_1TraversalWrapper.html", [
+      [ "CSF.Zpt.ExpressionEvaluators.PathExpressions.TraversalWrapper< TSource >", "classCSF_1_1Zpt_1_1ExpressionEvaluators_1_1PathExpressions_1_1TraversalWrapper_3_01TSource_01_4.html", null ]
     ] ],
     [ "CSF.Zpt.ZptConstants", "classCSF_1_1Zpt_1_1ZptConstants.html", null ]
 ];

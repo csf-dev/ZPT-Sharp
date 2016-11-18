@@ -30,7 +30,7 @@ define(["jquery"], function($) {
         navVisible = !navVisible;
       });
       
-      $("body").on("click", function(ev) {
+      body.on("click", function(ev) {
         var
           evTarget = $(ev.target),
           navSelectors = ".main_page_area > nav, " +
@@ -59,12 +59,13 @@ define(["jquery"], function($) {
       }
       
       theWindow.resize(function(ev) {
-        if($("body").is(".page_introduction"))
+        
+        if(body.is(".page_introduction"))
         {
           return;
         }
         
-        if(theWindow.width() > pageWidthThreshold)
+        if(theWindow.outerWidth() > pageWidthThreshold)
         {
           resetNavMenuForLargeScreens();
         }

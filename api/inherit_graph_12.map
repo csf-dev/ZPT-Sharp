@@ -1,3 +1,4 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="node1" href="$classCSF_1_1Zpt_1_1ExpressionEvaluators_1_1Path.html" title="Represents a TALES path, which is composed of one or more PathComponent, each of which is in turn com..." alt="" coords="5,5,240,32"/>
+<area shape="rect" id="node1" href="$interfaceCSF_1_1Zpt_1_1ExpressionEvaluators_1_1CSharpExpressions_1_1ICSharpExpressionCache.html" title="Cache type provides a mechanism to store compiled CSharpExpression instances for later re&#45;use..." alt="" coords="5,5,299,47"/>
+<area shape="rect" id="node2" href="$classCSF_1_1Zpt_1_1ExpressionEvaluators_1_1CSharpExpressions_1_1CSharpExpressionCache.html" title="Default implementation of ICSharpExpressionCache. " alt="" coords="347,35,636,76"/>
 </map>

@@ -1,0 +1,294 @@
+﻿<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ZPT-Sharp Nuget Packages</title>
+<base href="http://csf-dev.github.io/ZPT-Sharp/">
+<style type="text/css">
+@import url(css/styles.css);
+</style>
+
+<script data-main="js/config/main" type="text/javascript" src="js/lib/require.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.4.0/styles/default.min.css">
+</head>
+<body class="page_nuget_packages">
+<div class="content_wrapper">
+  <header class="page_header">
+    <div class="hamburger_menu" title="Show/hide navigation">
+      <span class="hamburger_line"></span>
+      <span class="hamburger_line"></span>
+      <span class="hamburger_line"></span>
+    </div>
+    <h2>
+      <a href="index.html">ZPT Sharp</a>
+      <em>Zen HTML views</em>
+    </h2>
+  </header>
+  <div class="main_page_area">
+    <nav>
+      <h2>Site navigation</h2>
+      <ul class="active_nuget_packages">
+        <li class="introduction nav_item">
+          <a href="index.html">Introduction</a>
+        </li>
+        <li class="advantages nav_item">
+          <a href="advantages-of-zpt-views.html">ZPT Advantages</a>
+        </li>
+        <li class="download nav_item">
+          <a href="download.html">Download ZPT-Sharp</a>
+        </li>
+        <li class="asp_net_view_engine nav_item">
+          <a href="asp-net-mvc-view-engine.html">ZPT-Sharp for ASP.NET MVC</a>
+        </li>
+        <li class="command_line_renderer nav_item">
+          <a href="command-line-renderer.html">The command-line renderer</a>
+        </li>
+        <li class="writing_pages_using_zpt nav_item">
+          <a href="writing-pages-using-zpt.html">Writing pages</a>
+        </li>
+        <li class="metal_reference nav_section">
+          <h3>METAL reference</h3>
+          <ul>
+            <li>
+              <a href="metal/introduction.html">Introduction to METAL</a>
+            </li>
+            <li>
+              <a href="metal/define-use-macro.html">Define &amp; use macros</a>
+            </li>
+            <li>
+              <a href="metal/define-fill-slot.html">Define &amp; fill slots</a>
+            </li>
+            <li>
+              <a href="metal/extend-macro.html">Extend macros</a>
+            </li>
+          </ul>
+        </li>
+        <li class="tal_reference nav_section">
+          <h3>TAL reference</h3>
+          <ul>
+            <li>
+              <a href="tal/introduction.html">Introduction to TAL</a>
+            </li>
+            <li>
+              <a href="tal/define.html">Define variables</a>
+            </li>
+            <li>
+              <a href="tal/condition.html">Conditional rendering</a>
+            </li>
+            <li>
+              <a href="tal/repeat.html">Repeat sections of markup</a>
+            </li>
+            <li>
+              <a href="tal/content-replace.html">Insert model data</a>
+            </li>
+            <li>
+              <a href="tal/attributes.html">Set attributes</a>
+            </li>
+            <li>
+              <a href="tal/omit-tag.html">Omit start/end tag</a>
+            </li>
+            <li>
+              <a href="tal/on-error.html">Error handling</a>
+            </li>
+          </ul>
+        </li>
+        <li class="tales_reference nav_section">
+          <h3>TALES reference</h3>
+          <ul>
+            <li>
+              <a href="tales/introduction.html">Introduction to TALES</a>
+            </li>
+            <li>
+              <a href="tales/path-expressions.html">Path expressions</a>
+            </li>
+            <li>
+              <a href="tales/string-expressions.html">String expressions</a>
+            </li>
+            <li>
+              <a href="tales/not-expressions.html">Not expressions</a>
+            </li>
+            <li>
+              <a href="tales/csharp-expressions.html">CSharp expressions</a>
+            </li>
+            <li>
+              <a href="tales/built-in-variables.html">Root variables</a>
+            </li>
+            <li>
+              <a href="tales/repeat-variables.html">Repeat variables</a>
+            </li>
+          </ul>
+        </li>
+        <li class="advanced_topics nav_section">
+          <h3>Advanced topics</h3>
+          <ul>
+            <li class="page_rendering_api nav_item">
+              <a href="page-rendering-api.html">API introduction</a>
+            </li>
+            <li class="api_reference nav_item">
+              <a href="api/index.html">API reference</a>
+            </li>
+            <li class="configuration nav_item">
+              <a href="configuration.html">Configuration</a>
+            </li>
+            <li class="plugins nav_item">
+              <a href="plugins.html">Plugins</a>
+            </li>
+            <li class="writing_plugins nav_item">
+              <a href="writing-plugins.html">Writing plugins</a>
+            </li>
+            <li class="diagnostics_and_logging nav_item">
+              <a href="logging.html">Diagnostics &amp; logging</a>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </nav>
+    <section class="main_page_content">
+      <header><h1>ZPT-Sharp Nuget Packages</h1></header>
+      <p class="note">
+        The following packages are yet to be released to the public Nuget repositories.
+        Please check back once the project has gone to beta release.
+      </p>
+      <p>
+        The recommended way to install ZPT-Sharp into your own software project is via
+        <a href="https://www.nuget.org">the Nuget package manager</a>.
+      </p>
+      <p>
+        Because ZPT-Sharp is a customisable, <a href="plugins.html">plugin-based</a> framework, there are two available strategies for installation.
+        As well as packages for the individual <strong>components &amp; plugins</strong>, fully-functional <strong>bundles</strong> are also available.
+      </p>
+      <h2>ZPT-Sharp Nuget bundles</h2>
+      <p>
+        For new users, those with simple application architectures, or those who want try ZPT-Sharp out, a bundle installation is recommended.
+        The bundle packages include the relevant components and a pre-selected collection of plugins which will <em>just get everything working</em>.
+      </p>
+      <p>
+        Using a bundle, you should only need install a single package in order to get ZPT-Sharp up and running with your application.
+        All bundles include a default selection of ZPT-Sharp plugins; two document providers and four expression evaluators:
+      </p>
+      <ul>
+        <li>HTML documents (HTML Agility Pack)</li>
+        <li>XML documents (XML Linq API)</li>
+        <li><a href="tales/string-expressions.html">String expression evaluator</a></li>
+        <li><a href="tales/not-expressions.html">Not expression evaluator</a></li>
+        <li><a href="tales/path-expressions.html">Path expression evaluator</a></li>
+        <li><a href="tales/csharp-expressions.html">CSharp expression evaluator</a></li>
+      </ul>
+      <h3>ZPT-Sharp for ASP.NET MVC5</h3>
+      <p>
+        This bundle includes the default plugins as well as the components required in order to use ZPT-Sharp as a
+        <a href="https://msdn.microsoft.com/en-us/library/system.web.mvc.viewengines(v=vs.118).aspx"><code>ViewEngine</code></a> for ASP.NET MVC5.
+      </p>
+      <p>
+        Install this bundle package into your web application project, make
+        <a href="asp-net-mvc-view-engine.html">the required change</a>
+        to your view-engine registrations and you are ready to write views using ZPT.
+      </p>
+      <h3>ZptBuilder application</h3>
+      <p>
+        This bundle includes the default plugins and the
+        <a href="command-line-renderer.html">ZptBuilder.exe</a> command-line application.
+        Choose this bundle to get a functional installation of the offline rendering application.
+      </p>
+      <h3>ZPT-Sharp API bundle</h3>
+      <p>
+        This bundle includes the default plugins and the ZPT-Sharp core logic components only.
+        This package is intended for application developers who wish to make use of
+        <a href="page-rendering-api.html">ZPT-Sharp as an API</a> from their own software.
+      </p>
+      <h2>Hand-picking components &amp; plugins</h2>
+      <p>
+        For advanced scenarios, particularly where you would like a non-default set of plugins installed, the components and plugins are available in separate packages.
+        This installation strategy makes it possible to finely tailor what is installed. The trade-off is that you must select multiple packages in order to achieve a useful ZPT-Sharp installation.
+      </p>
+      <h3>CSF.Zpt.Abstractions</h3>
+      <p>
+        This is a minimal package containing abstract types and interfaces for ZPT-Sharp.
+        It exposes no actual functionality and has no dependencies.
+      </p>
+      <h3>CSF.Zpt</h3>
+      <p>
+        This is the core logic of the ZPT-Sharp API, without any plugins or other content.
+        It depends only upon CSF.Zpt.Abstractions.
+      </p>
+      <h3>CSF.Zpt.Cli</h3>
+      <p>
+        This is the logic of the command-line ZptBuilder application, without any plugins or other content.
+        It depends only upon CSF.Zpt.
+      </p>
+      <h3>CSF.Zpt.MVC</h3>
+      <p>
+        This is the ASP.NET MVC5 ViewEngine, without any plugins or other content.
+        It depends upon CSF.Zpt and the ASP.NET MVC components.
+      </p>
+      <h3>CSF.Zpt.DocumentProviders.HtmlHAP</h3>
+      <p>
+        This is the document provider plugin for rendering HTML documents.
+        It depends upon CSF.Zpt and <a href="https://htmlagilitypack.codeplex.com/">the HTML Agility Pack</a>.
+      </p>
+      <h3>CSF.Zpt.DocumentProviders.XmlLinq</h3>
+      <p>
+        This is the document provider plugin for rendering XML documents using the newer XML/Linq API.
+        It depends only upon CSF.Zpt.
+      </p>
+      <h3>CSF.Zpt.DocumentProviders.XmlLegacy</h3>
+      <p>
+        This is the document provider plugin for rendering XML documents using the older XML API.
+        It depends only upon CSF.Zpt.
+      </p>
+      <h3>CSF.Zpt.ExpressionEvaluators.StringExpressions</h3>
+      <p>
+        This is the expression evaluator plugin for string expressions.
+        It depends only upon CSF.Zpt.
+      </p>
+      <h3>CSF.Zpt.ExpressionEvaluators.PathExpressions</h3>
+      <p>
+        This is the expression evaluator plugin for path &amp; local path expressions.
+        It depends only upon CSF.Zpt.
+      </p>
+      <h3>CSF.Zpt.ExpressionEvaluators.NotExpressions</h3>
+      <p>
+        This is the expression evaluator plugin for not expressions.
+        It depends only upon CSF.Zpt.
+      </p>
+      <h3>CSF.Zpt.ExpressionEvaluators.CSharpExpressions</h3>
+      <p>
+        This is the expression evaluator plugin for csharp expressions.
+        It depends only upon CSF.Zpt.
+      </p>
+      <h3>CSF.Zpt.ExpressionEvaluators.PythonExpressions</h3>
+      <p>
+        This is the expression evaluator plugin for python expressions.
+        It depends upon CSF.Zpt and <a href="http://ironpython.net/">IronPython</a>.
+      </p>
+    </section>
+  </div>
+</div>
+<footer class="page_footer">
+  <section class="copyright">
+    Copyright © 2016
+    <a href="http://csf-dev.com/">CSF Software Limited</a> et al
+  </section>
+  <section class="version">
+    <p>
+      Website built <strong>2016-11-18</strong>;
+      for version
+      <strong>
+        v0.7.0-alpha
+      </strong>
+    </p>
+  </section>
+</footer>
+<div class="cookie_statement">
+  <p>
+    This website uses analytics cookies to understand how visitors are making use of its content.
+    This helps decide where improvements can be made in the future.
+    <a href="https://ico.org.uk/for-organisations/guide-to-pecr/cookies-and-similar-technologies/">European and UK law</a>
+    requires us to ask you for your consent to this.
+  </p>
+  <button class="accept">Accept cookies</button>
+</div>
+
+</body>
+</html>
