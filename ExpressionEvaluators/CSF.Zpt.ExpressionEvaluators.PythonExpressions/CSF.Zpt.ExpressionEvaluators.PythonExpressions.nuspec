@@ -2,7 +2,7 @@
 <package>
   <metadata>
     <id>CSF.Zpt.ExpressionEvaluators.PythonExpressions</id>
-    <version>0.6.1</version>
+    <version>0.7.0</version>
     <title>ZPT-Sharp 'python' expression evaluator plugin</title>
     <authors>CSF Software Ltd</authors>
     <licenseUrl>https://opensource.org/licenses/MIT</licenseUrl>
@@ -11,7 +11,7 @@
     <description>This is a plugin for ZPT-Sharp which provides support for evaluating python expressions via IronPython.</description>
     <copyright>Copyright 2016</copyright>
     <dependencies>
-      <dependency id="CSF.Zpt" version="[0.6.1,1.0.0)" />
+      <dependency id="CSF.Zpt" version="[0.7.0,1.0.0)" />
       <dependency id="IronPython" version="2.7.5" />
     </dependencies>
   </metadata>
