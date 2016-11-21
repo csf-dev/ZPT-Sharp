@@ -2,6 +2,7 @@ using System;
 using System.Configuration;
 using System.IO;
 using CSF;
+using System.Collections.Generic;
 
 namespace Test.CSF.Zpt.Integration
 {
@@ -9,13 +10,20 @@ namespace Test.CSF.Zpt.Integration
   {
     #region constants
 
-    internal const string
-      DefaultSourceDocumentPath                 = "../../../../Common/ZptIntegrationTests/SourceDocuments",
-      DefaultExpectedOutputPath                 = "../../../../Common/ZptIntegrationTests/ExpectedOutputs",
-      DefaultModelSourceDocumentPath            = "../../../../Common/ZptModelIntegrationTests/SourceDocuments",
-      DefaultModelExpectedOutputPath            = "../../../../Common/ZptModelIntegrationTests/ExpectedOutputs",
-      DefaultSourceAnnotationSourceDocumentPath = "../../../../Common/SourceAnnotationIntegrationTests/SourceDocuments",
-      DefaultSourceAnnotationExpectedOutputPath = "../../../../Common/SourceAnnotationIntegrationTests/ExpectedOutputs";
+    private const string
+      TEST_DATA_ROOT_PATH           = "../../Test data/",
+      INTEGRATION_TESTS_PATH        = "ZptIntegrationTests",
+      MODEL_TESTS_PATH              = "ZptModelIntegrationTests",
+      SOURCE_ANNOTATION_TESTS_PATH  = "SourceAnnotationIntegrationTests",
+      SOURCE_DOCS_DIRECTORY         = "SourceDocuments",
+      EXPECTED_OUTPUTS_DIRECTORY    = "ExpectedOutputs";
+
+    private static readonly
+      Dictionary<IntegrationTestType,string> DefaultSubdirectores = new Dictionary<IntegrationTestType,string> {
+        { IntegrationTestType.Default,            INTEGRATION_TESTS_PATH },
+        { IntegrationTestType.Model,              MODEL_TESTS_PATH },
+        { IntegrationTestType.SourceAnnotation,   SOURCE_ANNOTATION_TESTS_PATH },
+      };
 
     #endregion
 
@@ -109,10 +117,7 @@ namespace Test.CSF.Zpt.Integration
 
     private string GetConfiguredPathString(IntegrationTestType type, bool useExpectedOutputPath)
     {
-      if(!type.IsDefinedValue())
-      {
-        throw new ArgumentException("Test type must be a defined enumeration constant", nameof(type));
-      }
+      type.RequireDefinedValue(nameof(type));
 
       string output;
 
@@ -155,43 +160,12 @@ namespace Test.CSF.Zpt.Integration
 
     private static string GetDefaultPathString(IntegrationTestType type, bool useExpectedOutputPath)
     {
-      if(!type.IsDefinedValue())
-      {
-        throw new ArgumentException("Test type must be a defined enumeration constant", nameof(type));
-      }
+      type.RequireDefinedValue(nameof(type));
 
-      string output;
+      var testTypeDirectory = DefaultSubdirectores[type];
+      var expectedSourceDirectory = useExpectedOutputPath? EXPECTED_OUTPUTS_DIRECTORY : SOURCE_DOCS_DIRECTORY;
 
-      if(type == IntegrationTestType.Default && useExpectedOutputPath)
-      {
-        output = DefaultExpectedOutputPath;
-      }
-      else if(type == IntegrationTestType.Default)
-      {
-        output = DefaultSourceDocumentPath;
-      }
-      else if(type == IntegrationTestType.SourceAnnotation && useExpectedOutputPath)
-      {
-        output = DefaultSourceAnnotationExpectedOutputPath;
-      }
-      else if(type == IntegrationTestType.SourceAnnotation)
-      {
-        output = DefaultSourceAnnotationSourceDocumentPath;
-      }
-      else if(type == IntegrationTestType.Model && useExpectedOutputPath)
-      {
-        output = DefaultModelExpectedOutputPath;
-      }
-      else if(type == IntegrationTestType.Model)
-      {
-        output = DefaultModelSourceDocumentPath;
-      }
-      else
-      {
-        throw new InvalidOperationException("Theoretically impossible scenario, broken test config implementation");
-      }
-
-      return output;
+      return Path.Combine(TEST_DATA_ROOT_PATH, testTypeDirectory, expectedSourceDirectory);
     }
 
     private static DirectoryInfo GetPath(string defaultPath, string configuredPath = null)
