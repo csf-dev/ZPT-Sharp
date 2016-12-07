@@ -64,10 +64,6 @@
       <Project>{16E957BB-347C-4EE1-815F-19AC296FB9E0}</Project>
       <Name>CSF.Zpt</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\CSF\CSF.Reflection\CSF.Reflection.csproj">
-      <Project>{275413F6-0651-4AD4-A426-07EDA165C07E}</Project>
-      <Name>CSF.Reflection</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\CSF.Zpt.Log4net\CSF.Zpt.Log4net.csproj">
       <Project>{81044439-06CF-44E2-BBF2-3800F1DEB5B1}</Project>
       <Name>CSF.Zpt.Log4net</Name>

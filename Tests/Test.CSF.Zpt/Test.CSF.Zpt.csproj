@@ -45,6 +45,15 @@
     <Reference Include="nunit.framework">
       <HintPath>..\..\packages\NUnit.2.6.4\lib\nunit.framework.dll</HintPath>
     </Reference>
+    <Reference Include="CSF.Utils">
+      <HintPath>..\..\packages\CSF.Utils.6.0.0\lib\net45\CSF.Utils.dll</HintPath>
+    </Reference>
+    <Reference Include="CSF.Configuration">
+      <HintPath>..\..\packages\CSF.Configuration.1.0.0\lib\net45\CSF.Configuration.dll</HintPath>
+    </Reference>
+    <Reference Include="CSF.Reflection">
+      <HintPath>..\..\packages\CSF.Reflection.1.0.0\lib\net45\CSF.Reflection.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
@@ -93,10 +102,6 @@
     <Compile Include="BatchRendering\TestBatchRenderingOptionsValidator.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\CSF\CSF\CSF.csproj">
-      <Project>{E563D7BC-1AB1-4AFB-8533-51315437C6E6}</Project>
-      <Name>CSF</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\CSF.Zpt\CSF.Zpt.csproj">
       <Project>{16E957BB-347C-4EE1-815F-19AC296FB9E0}</Project>
       <Name>CSF.Zpt</Name>
@@ -108,14 +113,6 @@
     <ProjectReference Include="..\..\CSF.Zpt.Log4net\CSF.Zpt.Log4net.csproj">
       <Project>{81044439-06CF-44E2-BBF2-3800F1DEB5B1}</Project>
       <Name>CSF.Zpt.Log4net</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\CSF\CSF.Reflection\CSF.Reflection.csproj">
-      <Project>{275413F6-0651-4AD4-A426-07EDA165C07E}</Project>
-      <Name>CSF.Reflection</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\CSF\CSF.Configuration\CSF.Configuration.csproj">
-      <Project>{8C570A26-CEEB-45D1-9436-745C8DBAE9D8}</Project>
-      <Name>CSF.Configuration</Name>
     </ProjectReference>
     <ProjectReference Include="..\CSF.Zpt.TestUtils\CSF.Zpt.TestUtils.csproj">
       <Project>{96333809-3330-43A7-B0CB-2DBE68E1E6FE}</Project>
