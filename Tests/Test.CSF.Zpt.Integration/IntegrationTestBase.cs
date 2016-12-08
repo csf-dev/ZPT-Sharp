@@ -179,7 +179,7 @@ namespace Test.CSF.Zpt.Integration
 
         try
         {
-          var rootDir = sourceDocument.GetParent().GetParent();
+          var rootDir = sourceDocument.GetParentDirectory().GetParentDirectory();
           var options = GetRenderingSettings(this.CreateTestEnvironment(rootDir));
 
           actualRendering = this.Render(document, options);

@@ -34,6 +34,9 @@
     <Reference Include="Microsoft.Build.Framework" />
     <Reference Include="Microsoft.Build.Utilities.v4.0" />
     <Reference Include="System.IO.Compression" />
+    <Reference Include="CSF.IniDocuments">
+      <HintPath>..\..\packages\CSF.IniDocuments.6.0.0\lib\net45\CSF.IniDocuments.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
@@ -58,14 +61,11 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\CSF\CSF.IniDocuments\CSF.IniDocuments.csproj">
-      <Project>{EF897908-7BAC-47F6-9495-6C827D532228}</Project>
-      <Name>CSF.IniDocuments</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="CSF.Zpt.DeploymentTasks.targets">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
 </Project>

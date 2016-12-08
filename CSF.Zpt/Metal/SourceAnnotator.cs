@@ -170,7 +170,7 @@ namespace CSF.Zpt.Metal
       {
         var root = new DirectoryInfo(targetContext.SourceAnnotationRootPath);
         var file = new FileInfo(fullFilename);
-        filename = file.IsChildOf(root)? file.GetRelative(root).Substring(1) : fullFilename;
+        filename = file.IsChildOf(root)? file.GetRelativePath(root).Substring(1) : fullFilename;
       }
       else
       {

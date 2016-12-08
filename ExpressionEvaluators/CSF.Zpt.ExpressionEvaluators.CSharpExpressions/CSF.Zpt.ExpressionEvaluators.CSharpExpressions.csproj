@@ -46,17 +46,9 @@
       <Project>{8207CD9B-F1C1-4D75-B250-ACDFFBDCB071}</Project>
       <Name>CSF.Zpt.Abstractions</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\CSF\CSF\CSF.csproj">
-      <Project>{E563D7BC-1AB1-4AFB-8533-51315437C6E6}</Project>
-      <Name>CSF</Name>
-    </ProjectReference>
     <ProjectReference Include="..\CSF.Zpt.ExpressionEvaluators.CSharpFramework\CSF.Zpt.ExpressionEvaluators.CSharpFramework.csproj">
       <Project>{3D5A705B-A414-4ACA-AC01-C053047F424E}</Project>
       <Name>CSF.Zpt.ExpressionEvaluators.CSharpFramework</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\CSF\CSF.Configuration\CSF.Configuration.csproj">
-      <Project>{8C570A26-CEEB-45D1-9436-745C8DBAE9D8}</Project>
-      <Name>CSF.Configuration</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
@@ -65,6 +57,15 @@
     <Reference Include="System.Dynamic" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Configuration" />
+    <Reference Include="CSF.Utils">
+      <HintPath>..\..\packages\CSF.Utils.6.0.0\lib\net45\CSF.Utils.dll</HintPath>
+    </Reference>
+    <Reference Include="CSF.Configuration">
+      <HintPath>..\..\packages\CSF.Configuration.1.0.0\lib\net45\CSF.Configuration.dll</HintPath>
+    </Reference>
+    <Reference Include="CSF.Caches">
+      <HintPath>..\..\packages\CSF.Caches.1.0.0\lib\net45\CSF.Caches.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CSharpExpression.cs" />
@@ -100,6 +101,7 @@
     </None>
     <None Include="CSF.Zpt.ExpressionEvaluators.CSharpExpressions.nuspec" />
     <None Include="CSF.Zpt.ExpressionEvaluators.CSharpExpressions.nuspec.pt" />
+    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\" />
