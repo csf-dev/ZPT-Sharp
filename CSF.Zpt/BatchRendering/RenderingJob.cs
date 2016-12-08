@@ -84,10 +84,10 @@ namespace CSF.Zpt.BatchRendering
 
     private Stream GetOutputStream(FileInfo outputFile)
     {
-      var parentDir = outputFile.GetParent();
+      var parentDir = outputFile.GetParentDirectory();
       if(!parentDir.Exists)
       {
-        parentDir.CreateRecursive();
+        parentDir.CreateRecursively();
       }
 
       return outputFile.Open(FileMode.Create);
@@ -143,9 +143,9 @@ namespace CSF.Zpt.BatchRendering
         newFilename = String.Concat(filenameWithoutExtension, ".html");
       }
 
-      var tempOutputPath = new FileInfo(System.IO.Path.Combine(_inputFile.GetParent().FullName, newFilename));
+      var tempOutputPath = new FileInfo(System.IO.Path.Combine(_inputFile.GetParentDirectory().FullName, newFilename));
 
-      var relativePath = tempOutputPath.GetRelative(_inputRootDirectory);
+      var relativePath = tempOutputPath.GetRelativePath(_inputRootDirectory);
       if(relativePath.StartsWith(System.IO.Path.DirectorySeparatorChar.ToString()))
       {
         relativePath = relativePath.Substring(1);

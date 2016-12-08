@@ -72,7 +72,7 @@ namespace CSF.Zpt.BatchRendering
 
       if(inputPath != null && (inputPath is FileInfo))
       {
-        output = new [] { CreateRenderingJob((FileInfo) inputPath, mode, inputPath.GetParent()) };
+        output = new [] { CreateRenderingJob((FileInfo) inputPath, mode, inputPath.GetParentDirectory()) };
       }
       else if(inputPath != null && (inputPath is DirectoryInfo))
       {

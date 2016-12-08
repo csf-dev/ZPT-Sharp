@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using CSF.Caches;
 
 namespace CSF.Zpt.Tales
 {
