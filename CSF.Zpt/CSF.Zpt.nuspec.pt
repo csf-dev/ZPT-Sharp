@@ -15,12 +15,13 @@
       <dependency id="CSF.Zpt.Abstractions"
                   version="[0.0.0,1.0.0)"
                   tal:attributes="version string:[${options/version},${options/nextBreakingVersion})" />
+      <dependency id="CSF.Utils" version="[6.0.0,7.0.0)" />
+      <dependency id="CSF.Reflection" version="[1.0.0,2.0.0)" />
+      <dependency id="CSF.Configuration" version="[1.0.0,2.0.0)" />
+      <dependency id="CSF.Caches" version="[1.0.0,2.0.0)" />
     </dependencies>
   </metadata>
   <files>
-    <file src="bin/Release/CSF.dll" target="lib/net45" />
-    <file src="bin/Release/CSF.Configuration.dll" target="lib/net45" />
-    <file src="bin/Release/CSF.Reflection.dll" target="lib/net45" />
     <file src="bin/Release/CSF.Zpt.dll" target="lib/net45" />
   </files>
 </package>
