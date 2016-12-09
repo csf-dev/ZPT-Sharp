@@ -14,5 +14,6 @@
   </metadata>
   <files>
     <file src="bin/Release/CSF.Zpt.Abstractions.dll" target="lib/net45" />
+    <file src="bin/Release/CSF.Zpt.Abstractions.xml" target="lib/net45" />
   </files>
 </package>

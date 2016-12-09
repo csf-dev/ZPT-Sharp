@@ -110,6 +110,14 @@
       <Project>{842160E4-BDE5-4FA0-ADE5-07554090AA27}</Project>
       <Name>CSF.Zpt.DocumentProviders.XmlLinq</Name>
     </ProjectReference>
+    <ProjectReference Include="..\ExpressionEvaluators\CSF.Zpt.ExpressionEvaluators.CSharpExpressions\CSF.Zpt.ExpressionEvaluators.CSharpExpressions.csproj">
+      <Project>{AA29F7A3-A259-408A-B2FC-E2EFD78BCDFC}</Project>
+      <Name>CSF.Zpt.ExpressionEvaluators.CSharpExpressions</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ExpressionEvaluators\CSF.Zpt.ExpressionEvaluators.CSharpFramework\CSF.Zpt.ExpressionEvaluators.CSharpFramework.csproj">
+      <Project>{3D5A705B-A414-4ACA-AC01-C053047F424E}</Project>
+      <Name>CSF.Zpt.ExpressionEvaluators.CSharpFramework</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

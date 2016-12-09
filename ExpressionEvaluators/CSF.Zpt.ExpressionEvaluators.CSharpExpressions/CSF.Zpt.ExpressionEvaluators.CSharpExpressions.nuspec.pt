@@ -25,6 +25,8 @@
   <files>
     <file src="bin/Release/CSF.Zpt.ExpressionEvaluators.CSharpFramework.dll" target="lib/net45" />
     <file src="bin/Release/CSF.Zpt.ExpressionEvaluators.CSharpExpressions.dll" target="lib/net45" />
+    <file src="bin/Release/CSF.Zpt.ExpressionEvaluators.CSharpFramework.xml" target="lib/net45" />
+    <file src="bin/Release/CSF.Zpt.ExpressionEvaluators.CSharpExpressions.xml" target="lib/net45" />
     <file src="app.config.install.xdt" target="content" />
     <file src="app.config.uninstall.xdt" target="content" />
   </files>
