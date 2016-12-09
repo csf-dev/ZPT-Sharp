@@ -35,4 +35,7 @@
                   tal:attributes="version string:[${options/version},${options/nextBreakingVersion})" />
     </dependencies>
   </metadata>
+  <files>
+    <file src="app.config.install.xdt" target="content" />
+  </files>
 </package>
