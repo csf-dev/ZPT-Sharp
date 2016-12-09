@@ -185,5 +185,7 @@
     <None Include="packages.config" />
     <None Include="CSF.Zpt.nuspec" />
     <None Include="CSF.Zpt.nuspec.pt" />
+    <None Include="app.config.install.xdt" />
+    <None Include="app.config.uninstall.xdt" />
   </ItemGroup>
 </Project>
