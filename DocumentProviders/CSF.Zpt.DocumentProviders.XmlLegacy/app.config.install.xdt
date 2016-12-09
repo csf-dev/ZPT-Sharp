@@ -4,7 +4,9 @@
     <Zpt>
       <PluginConfigurationSection>
         <PluginAssemblies>
-          <Assembly Path="CSF.Zpt.DocumentProviders.XmlLegacy.dll" xdt:Transform="Insert" />
+          <Assembly Path="CSF.Zpt.DocumentProviders.XmlLegacy.dll"
+                    xdt:Transform="InsertIfMissing"
+                    xdt:Locator="Match(Path)" />
         </PluginAssemblies>
       </PluginConfigurationSection>
     </Zpt>
