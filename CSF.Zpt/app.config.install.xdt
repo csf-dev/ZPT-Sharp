@@ -1,14 +1,14 @@
 <?xml version="1.0"?>
 <configuration xmlns:xdt="http://schemas.microsoft.com/XML-Document-Transform">
   <configSections>
-    <sectionGroup name="CSF" xdt:Transform="Insert">
-      <sectionGroup name="Zpt">
+    <sectionGroup name="CSF">
+      <sectionGroup name="Zpt" xdt:Transform="Replace">
           <section name="PluginConfigurationSection" type="CSF.Zpt.PluginConfigurationSection, CSF.Zpt" />
       </sectionGroup>
     </sectionGroup>
   </configSections>
-  <CSF xdt:Transform="Insert">
-    <Zpt>
+  <CSF>
+    <Zpt xdt:Transform="Replace">
       <PluginConfigurationSection DefaultHtmlDocumentProvider="REPLACEME"
                                   DefaultXmlDocumentProvider="REPLACEME"
                                   DefaultExpressionEvaluator="REPLACEME">

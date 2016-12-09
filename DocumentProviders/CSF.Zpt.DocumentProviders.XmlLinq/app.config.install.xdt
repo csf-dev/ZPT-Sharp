@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<configuration xmlns:xdt="http://schemas.microsoft.com/XML-Document-Transform">
+  <CSF>
+    <Zpt>
+      <PluginConfigurationSection>
+        <PluginAssemblies>
+          <Assembly Path="CSF.Zpt.DocumentProviders.XmlLinq.dll" xdt:Transform="Insert" />
+        </PluginAssemblies>
+      </PluginConfigurationSection>
+    </Zpt>
+  </CSF>
+</configuration>
