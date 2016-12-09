@@ -234,9 +234,10 @@
   -->
   <Target Name="CreateBinaryZips">
     <ItemGroup>
-      <CliZipFiles Include="$(PathToSolutionRoot)\CSF.Zpt.Cli\bin\Release\CSF.dll" />
+      <CliZipFiles Include="$(PathToSolutionRoot)\CSF.Zpt.Cli\bin\Release\CSF.Utils.dll" />
       <CliZipFiles Include="$(PathToSolutionRoot)\CSF.Zpt.Cli\bin\Release\CSF.Cli.Parameters.dll" />
       <CliZipFiles Include="$(PathToSolutionRoot)\CSF.Zpt.Cli\bin\Release\CSF.Configuration.dll" />
+      <CliZipFiles Include="$(PathToSolutionRoot)\CSF.Zpt.Cli\bin\Release\CSF.Caches.dll" />
       <CliZipFiles Include="$(PathToSolutionRoot)\CSF.Zpt.Cli\bin\Release\CSF.Reflection.dll" />
       <CliZipFiles Include="$(PathToSolutionRoot)\CSF.Zpt.Cli\bin\Release\CSF.Zpt.Abstractions.dll" />
       <CliZipFiles Include="$(PathToSolutionRoot)\CSF.Zpt.Cli\bin\Release\CSF.Zpt.dll" />
@@ -256,8 +257,9 @@
     <CreateZipArchive OutputFilename="$(DeploymentOutputPath)\ZptBuilder.zip"
                       Files="@(CliZipFiles)" />
     <ItemGroup>
-      <ApiOnlyZipFiles Include="$(PathToSolutionRoot)\CSF.Zpt\bin\Release\CSF.dll" />
+      <ApiOnlyZipFiles Include="$(PathToSolutionRoot)\CSF.Zpt\bin\Release\CSF.Utils.dll" />
       <ApiOnlyZipFiles Include="$(PathToSolutionRoot)\CSF.Zpt\bin\Release\CSF.Configuration.dll" />
+      <ApiOnlyZipFiles Include="$(PathToSolutionRoot)\CSF.Zpt\bin\Release\CSF.Caches.dll" />
       <ApiOnlyZipFiles Include="$(PathToSolutionRoot)\CSF.Zpt\bin\Release\CSF.Reflection.dll" />
       <ApiOnlyZipFiles Include="$(PathToSolutionRoot)\CSF.Zpt\bin\Release\CSF.Zpt.Abstractions.dll" />
       <ApiOnlyZipFiles Include="$(PathToSolutionRoot)\CSF.Zpt\bin\Release\CSF.Zpt.dll" />
@@ -273,7 +275,8 @@
     <CreateZipArchive OutputFilename="$(DeploymentOutputPath)\CSF.Zpt-api-only.zip"
                       Files="@(ApiOnlyZipFiles)" />
     <ItemGroup>
-      <Mvc5ZipFiles Include="$(PathToSolutionRoot)\CSF.Zpt.MVC\bin\Release\CSF.dll" />
+      <Mvc5ZipFiles Include="$(PathToSolutionRoot)\CSF.Zpt.MVC\bin\Release\CSF.Utils.dll" />
+      <Mvc5ZipFiles Include="$(PathToSolutionRoot)\CSF.Zpt.MVC\bin\Release\CSF.Caches.dll" />
       <Mvc5ZipFiles Include="$(PathToSolutionRoot)\CSF.Zpt.MVC\bin\Release\CSF.Configuration.dll" />
       <Mvc5ZipFiles Include="$(PathToSolutionRoot)\CSF.Zpt.MVC\bin\Release\CSF.Reflection.dll" />
       <Mvc5ZipFiles Include="$(PathToSolutionRoot)\CSF.Zpt.MVC\bin\Release\CSF.Zpt.Abstractions.dll" />
@@ -291,7 +294,8 @@
     <CreateZipArchive OutputFilename="$(DeploymentOutputPath)\CSF.Zpt.MVC.zip"
                       Files="@(Mvc5ZipFiles)" />
     <ItemGroup>
-      <ZptSharpCompleteZipFiles Include="$(PathToSolutionRoot)\CSF.Zpt\bin\Release\CSF.dll" />
+      <ZptSharpCompleteZipFiles Include="$(PathToSolutionRoot)\CSF.Zpt\bin\Release\CSF.Utils.dll" />
+      <ZptSharpCompleteZipFiles Include="$(PathToSolutionRoot)\CSF.Zpt\bin\Release\CSF.Caches.dll" />
       <ZptSharpCompleteZipFiles Include="$(PathToSolutionRoot)\CSF.Zpt\bin\Release\CSF.Configuration.dll" />
       <ZptSharpCompleteZipFiles Include="$(PathToSolutionRoot)\CSF.Zpt\bin\Release\CSF.Reflection.dll" />
       <ZptSharpCompleteZipFiles Include="$(PathToSolutionRoot)\CSF.Zpt.Cli\bin\Release\CSF.Cli.Parameters.dll" />
