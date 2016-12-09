@@ -12,10 +12,10 @@
     <copyright>Copyright 2016</copyright>
     <dependencies>
       <dependency id="CSF.Zpt" version="[0.7.0,1.0.0)" />
+      <dependency id="CSF.Cli.Parameters" version="[1.0.0,2.0.0)" />
     </dependencies> 
   </metadata>
   <files>
-    <file src="bin/Release/CSF.Cli.Parameters.dll" target="lib/net45" />
     <file src="bin/Release/ZptBuilder.exe" target="lib/net45" />
     <file src="bin/Release/ZptBuilder.exe.config" target="lib/net45" />
     <file src="bin/Release/Doc/ZptBuilder.MANUAL.txt" target="content/net45" />
