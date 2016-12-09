@@ -17,6 +17,7 @@
   </metadata>
   <files>
     <file src="bin/Release/CSF.Zpt.ExpressionEvaluators.PythonExpressions.dll" target="lib/net45" />
+    <file src="bin/Release/CSF.Zpt.ExpressionEvaluators.PythonExpressions.xml" target="lib/net45" />
     <file src="app.config.install.xdt" target="content" />
     <file src="app.config.uninstall.xdt" target="content" />
   </files>

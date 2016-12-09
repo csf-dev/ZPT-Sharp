@@ -20,6 +20,7 @@
   </metadata>
   <files>
     <file src="bin/Release/CSF.Zpt.DocumentProviders.HtmlHAP.dll" target="lib/net45" />
+    <file src="bin/Release/CSF.Zpt.DocumentProviders.HtmlHAP.xml" target="lib/net45" />
     <file src="app.config.install.xdt" target="content" />
     <file src="app.config.uninstall.xdt" target="content" />
   </files>
