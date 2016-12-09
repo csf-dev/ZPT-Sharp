@@ -8,6 +8,7 @@
     <RootNamespace>CSF.Zpt.Deployment</RootNamespace>
     <AssemblyName>CSF.Zpt.Deployment</AssemblyName>
     <PathToSolutionRoot>..\..</PathToSolutionRoot>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
   </PropertyGroup>
   <Import Project="$(PathToSolutionRoot)\Common\SolutionProperties.targets" />
   <Import Project="$(PathToSolutionRoot)\Deployment\CSF.Zpt.DeploymentTasks\CSF.Zpt.DeploymentTasks.targets" />
@@ -84,5 +85,6 @@
     <None Include="Zpt-Sharp-API.nuspec.pt" />
     <None Include="Zpt-Sharp-MVC5.nuspec.pt" />
     <None Include="Zpt-Sharp-ZptBuilder.nuspec.pt" />
+    <None Include="app.config.install.xdt" />
   </ItemGroup>
 </Project>

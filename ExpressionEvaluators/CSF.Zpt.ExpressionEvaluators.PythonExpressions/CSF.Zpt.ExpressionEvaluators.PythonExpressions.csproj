@@ -75,6 +75,8 @@
     <None Include="packages.config" />
     <None Include="CSF.Zpt.ExpressionEvaluators.PythonExpressions.nuspec" />
     <None Include="CSF.Zpt.ExpressionEvaluators.PythonExpressions.nuspec.pt" />
+    <None Include="app.config.install.xdt" />
+    <None Include="app.config.uninstall.xdt" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="PythonExpressionHost.cs" />

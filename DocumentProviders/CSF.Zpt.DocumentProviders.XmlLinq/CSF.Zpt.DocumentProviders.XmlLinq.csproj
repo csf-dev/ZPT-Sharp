@@ -69,5 +69,7 @@
     <None Include="packages.config" />
     <None Include="CSF.Zpt.DocumentProviders.XmlLinq.nuspec" />
     <None Include="CSF.Zpt.DocumentProviders.XmlLinq.nuspec.pt" />
+    <None Include="app.config.install.xdt" />
+    <None Include="app.config.uninstall.xdt" />
   </ItemGroup>
 </Project>

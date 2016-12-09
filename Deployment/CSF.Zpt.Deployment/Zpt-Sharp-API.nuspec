@@ -20,4 +20,7 @@
       <dependency id="CSF.Zpt.ExpressionEvaluators.CSharpExpressions" version="[0.7.0,1.0.0)" />
     </dependencies>
   </metadata>
+  <files>
+    <file src="app.config.install.xdt" target="content" />
+  </files>
 </package>
