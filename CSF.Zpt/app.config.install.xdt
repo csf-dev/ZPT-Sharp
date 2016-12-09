@@ -1,14 +1,25 @@
 <?xml version="1.0"?>
 <configuration xmlns:xdt="http://schemas.microsoft.com/XML-Document-Transform">
-  <configSections xdt:Transform="InsertIfMissing">
-    <sectionGroup name="CSF" xdt:Transform="InsertIfMissing">
-      <sectionGroup name="Zpt" xdt:Transform="Replace">
+  <configSections xdt:Transform="InsertIfMissing" />
+  
+  <configSections>
+    <sectionGroup name="CSF" xdt:Transform="InsertIfMissing" xdt:Locator="Match(name)" />
+  </configSections>
+  
+  <configSections>
+    <sectionGroup name="CSF">
+      <sectionGroup name="Zpt" xdt:Transform="Remove" xdt:Locator="Match(name)" />
+      <sectionGroup name="Zpt" xdt:Transform="Insert">
           <section name="PluginConfigurationSection" type="CSF.Zpt.PluginConfigurationSection, CSF.Zpt" />
       </sectionGroup>
     </sectionGroup>
   </configSections>
-  <CSF xdt:Transform="InsertIfMissing">
-    <Zpt xdt:Transform="Replace">
+  
+  <CSF xdt:Transform="InsertIfMissing" />
+  
+  <CSF>
+    <Zpt xdt:Transform="Remove" />
+    <Zpt xdt:Transform="Insert">
       <PluginConfigurationSection DefaultHtmlDocumentProvider="REPLACEME"
                                   DefaultXmlDocumentProvider="REPLACEME"
                                   DefaultExpressionEvaluator="REPLACEME">
@@ -17,4 +28,5 @@
       </PluginConfigurationSection>
     </Zpt>
   </CSF>
+  
 </configuration>
