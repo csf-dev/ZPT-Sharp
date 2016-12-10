@@ -119,26 +119,36 @@ namespace Test.CSF.Zpt.Metal
     }
 
     [Test]
-    public void ExtendMacro_returns_same_context_if_no_extended_macro()
+    public void GetFullyExtendedContext_returns_same_context_if_no_extended_macro()
     {
       // Arrange
-      var macro = Mock.Of<IRenderingContext>();
+      IRenderingContext macro = Mock.Of<IRenderingContext>(), sibling = Mock.Of<IRenderingContext>();
+      Mock.Get(macro)
+        .Setup(x => x.CreateSiblingContext(It.IsAny<ZptElement>(), It.IsAny<bool>()))
+        .Returns(sibling);
+
+      _finder.Setup(x => x.GetExtendedMacro(macro)).Returns((IZptElement) null);
 
       // Act
-      var result = _sut.ExtendMacro(macro, null);
+      var result = _sut.GetFullyExtendedContext(macro);
 
       // Assert
       Assert.AreSame(macro, result);
     }
 
     [Test]
-    public void ExtendMacro_does_not_use_extender_service_if_no_extended_macro()
+    public void GetFullyExtendedContext_does_not_use_extender_service_if_no_extended_macro()
     {
       // Arrange
-      var macro = Mock.Of<IRenderingContext>();
+      IRenderingContext macro = Mock.Of<IRenderingContext>(), sibling = Mock.Of<IRenderingContext>();
+      Mock.Get(macro)
+        .Setup(x => x.CreateSiblingContext(It.IsAny<ZptElement>(), It.IsAny<bool>()))
+        .Returns(sibling);
+
+      _finder.Setup(x => x.GetExtendedMacro(macro)).Returns((IZptElement) null);
 
       // Act
-      _sut.ExtendMacro(macro, null);
+      _sut.GetFullyExtendedContext(macro);
 
       // Assert
       _extender
@@ -147,17 +157,45 @@ namespace Test.CSF.Zpt.Metal
     }
 
     [Test]
-    public void ExtendMacro_uses_extender_service_when_extended_macro_is_present()
+    public void GetFullyExtendedContext_uses_extender_service_when_extended_macro_is_present()
     {
       // Arrange
-      var macro = Mock.Of<IRenderingContext>();
-      var extended = Mock.Of<IRenderingContext>();
+      IRenderingContext macro = Mock.Of<IRenderingContext>(), sibling = Mock.Of<IRenderingContext>();
+      Mock.Get(macro)
+        .Setup(x => x.CreateSiblingContext(It.IsAny<IZptElement>(), It.IsAny<bool>()))
+        .Returns(sibling);
+
+      _finder.Setup(x => x.GetExtendedMacro(macro)).Returns(Mock.Of<IZptElement>());
+
+      var extendedContext = Mock.Of<IRenderingContext>();
+      _extender.Setup(x => x.Extend(macro, sibling)).Returns(extendedContext);
 
       // Act
-      _sut.ExtendMacro(macro, extended);
+      _sut.GetFullyExtendedContext(macro);
 
       // Assert
-      _extender.Verify(x => x.Extend(macro, extended), Times.Once());
+      _extender.Verify(x => x.Extend(macro, sibling), Times.Once());
+    }
+
+    [Test]
+    public void GetFullyExtendedContext_returns_context_from_extender_service_when_extended_macro_is_present()
+    {
+      // Arrange
+      IRenderingContext macro = Mock.Of<IRenderingContext>(), sibling = Mock.Of<IRenderingContext>();
+      Mock.Get(macro)
+        .Setup(x => x.CreateSiblingContext(It.IsAny<IZptElement>(), It.IsAny<bool>()))
+        .Returns(sibling);
+
+      _finder.Setup(x => x.GetExtendedMacro(macro)).Returns(Mock.Of<IZptElement>());
+
+      var extendedContext = Mock.Of<IRenderingContext>();
+      _extender.Setup(x => x.Extend(macro, sibling)).Returns(extendedContext);
+
+      // Act
+      var result = _sut.GetFullyExtendedContext(macro);
+
+      // Assert
+      Assert.AreSame(extendedContext, result);
     }
 
 
