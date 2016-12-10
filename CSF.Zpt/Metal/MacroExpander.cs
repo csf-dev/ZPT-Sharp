@@ -13,8 +13,8 @@ namespace CSF.Zpt.Metal
   {
     #region fields
 
-    private readonly MacroFinder _macroFinder;
-    private readonly SourceAnnotator _annotator;
+    private readonly IMacroFinder _macroFinder;
+    private readonly ISourceAnnotator _annotator;
 
     #endregion
 
@@ -33,22 +33,53 @@ namespace CSF.Zpt.Metal
 
       IRenderingContext output;
 
-      var macro = _macroFinder.GetUsedMacro(context);
+      var macro = GetUsedMacro(context);
+
       if(macro != null)
       {
-        output = this.ExpandAndReplace(context, macro);
-        _annotator.ProcessAnnotation(output,
-                                     originalContext: context,
-                                     replacementContext: output.CreateSiblingContext(macro));
-        LogMacroUsage(macro, context.Element);
+        output = HandleUsedMacro(context, macro);
       }
       else
       {
-        output = context;
-        _annotator.ProcessAnnotation(context);
+        output = HandleNoUsedMacro(context);
       }
 
       return output;
+    }
+
+    /// <summary>
+    /// Takes appropriate actions when there is a use-macro directive present in a given context.
+    /// </summary>
+    /// <returns>The exposed context.</returns>
+    /// <param name="context">The rendering context.</param>
+    /// <param name="macro">The macro element found.</param>
+    public virtual IRenderingContext HandleUsedMacro(IRenderingContext context, IZptElement macro)
+    {
+      var output = this.ExpandAndReplace(context, macro);
+
+      _annotator.ProcessAnnotation(output,
+                                     originalContext: context,
+                                     replacementContext: output.CreateSiblingContext(macro));
+      
+      LogMacroUsage(macro, context.Element);
+
+      return output;
+    }
+
+    /// <summary>
+    /// Takes appropriate actions when there is no use-macro directive present in a given context.
+    /// </summary>
+    /// <returns>The exposed context (which will be the same as the input context).</returns>
+    /// <param name="context">The rendering context.</param>
+    public virtual IRenderingContext HandleNoUsedMacro(IRenderingContext context)
+    {
+      if(context == null)
+      {
+        throw new ArgumentNullException(nameof(context));
+      }
+
+      _annotator.ProcessAnnotation(context);
+      return context;
     }
 
     /// <summary>
@@ -82,6 +113,21 @@ namespace CSF.Zpt.Metal
       this.FillSlots(context, extendedMacro);
 
       return context.CreateSiblingContext(extendedMacro);
+    }
+
+    /// <summary>
+    /// Gets a reference to the macro used by a given rendering context, if any.
+    /// </summary>
+    /// <returns>The used macro element, or a <c>null</c> reference if there is no used macro.</returns>
+    /// <param name="context">The rendering context.</param>
+    public IZptElement GetUsedMacro(IRenderingContext context)
+    {
+      if(context == null)
+      {
+        throw new ArgumentNullException(nameof(context));
+      }
+
+      return _macroFinder.GetUsedMacro(context);
     }
 
     /// <summary>
@@ -215,8 +261,8 @@ namespace CSF.Zpt.Metal
     /// </summary>
     /// <param name="finder">A macro finder instance, or a null reference (in which case one will be constructed).</param>
     /// <param name="annotator">A source annotator instance, or a null reference (in which case one will be constructed).</param>
-    public MacroExpander(MacroFinder finder = null,
-                         SourceAnnotator annotator = null)
+    public MacroExpander(IMacroFinder finder = null,
+                         ISourceAnnotator annotator = null)
     {
       _macroFinder = finder?? new MacroFinder();
       _annotator = annotator?? new SourceAnnotator();

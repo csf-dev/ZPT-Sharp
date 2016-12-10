@@ -17,7 +17,9 @@ namespace Test.CSF.Zpt.Metal
 
     private IFixture _fixture;
 
-    private Mock<MacroFinder> _finder;
+    private Mock<IMacroFinder> _finder;
+    private Mock<ISourceAnnotator> _annotator;
+
     private MacroExpander _sut;
 
     #endregion
@@ -30,13 +32,58 @@ namespace Test.CSF.Zpt.Metal
       _fixture = new Fixture();
       new RenderingContextCustomisation().Customize(_fixture);
 
-      _finder = new Mock<MacroFinder>();
-      _sut = new MacroExpander(_finder.Object);
+      _finder = new Mock<IMacroFinder>();
+      _annotator = new Mock<ISourceAnnotator>();
+
+      _sut = new MacroExpander(_finder.Object, _annotator.Object);
     }
 
     #endregion
 
     #region tests
+
+    [Test]
+    public void GetUsedMacro_uses_macro_finder()
+    {
+      // Arrange
+      var context = _fixture.Create<IRenderingContext>();
+      var element = Mock.Of<IZptElement>();
+      _finder.Setup(x => x.GetUsedMacro(context)).Returns(element);
+
+      // Act
+      var result = _sut.GetUsedMacro(context);
+
+      // Assert
+      Assert.AreSame(element, result);
+      _finder.Verify(x => x.GetUsedMacro(context), Times.Once());
+    }
+
+    [Test]
+    public void HandleNoUsedMacro_processes_annotation()
+    {
+      // Arrange
+      var context = _fixture.Create<IRenderingContext>();
+      _annotator.Setup(x => x.ProcessAnnotation(context));
+
+      // Act
+      _sut.HandleNoUsedMacro(context);
+
+      // Assert
+      _annotator.Verify(x => x.ProcessAnnotation(context), Times.Once());
+    }
+
+    [Test]
+    public void HandleNoUsedMacro_does_not_change_context()
+    {
+      // Arrange
+      var context = _fixture.Create<IRenderingContext>();
+
+      // Act
+      var result = _sut.HandleNoUsedMacro(context);
+
+      // Assert
+      Assert.AreSame(context, result);
+    }
 
     [Test]
     public void Expand_returns_context_containing_replacement_element()
