@@ -58,7 +58,7 @@ namespace Test.CSF.Zpt.Metal
         .Returns(macro);
 
       // Act
-      var result = _sut.Expand(context);
+      var result = _sut.ExpandMacros(context);
 
       // Assert
       Assert.NotNull(result, "Result nullability");
@@ -85,7 +85,7 @@ namespace Test.CSF.Zpt.Metal
         .Returns(macro);
 
       // Act
-      _sut.Expand(context);
+      _sut.ExpandMacros(context);
 
       // Assert
       Mock.Get(context.Element).Verify(x => x.ReplaceWith(macro), Times.Once());
@@ -99,7 +99,7 @@ namespace Test.CSF.Zpt.Metal
       _finder.Setup(x => x.GetUsedMacro(context)).Returns((ZptElement) null);
 
       // Act
-      var result = _sut.Expand(context);
+      var result = _sut.ExpandMacros(context);
 
       // Assert
       Assert.NotNull(result, "Result nullability");

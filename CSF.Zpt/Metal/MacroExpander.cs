@@ -9,7 +9,7 @@ namespace CSF.Zpt.Metal
   /// <summary>
   /// Expands a METAL macro and splices it into its source document.
   /// </summary>
-  public class MacroExpander
+  public class MacroExpander : IMacroExpander
   {
     #region fields
 
@@ -24,7 +24,7 @@ namespace CSF.Zpt.Metal
     /// Expands the given context, replacing it with a new context - representing a macro - if it is required.
     /// </summary>
     /// <param name="context">The context to expand.</param>
-    public virtual IRenderingContext Expand(IRenderingContext context)
+    public virtual IRenderingContext ExpandMacros(IRenderingContext context)
     {
       if(context == null)
       {

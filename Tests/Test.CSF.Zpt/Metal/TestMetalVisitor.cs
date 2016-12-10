@@ -13,7 +13,7 @@ namespace Test.CSF.Zpt.Metal
     #region fields
 
     private MetalVisitor _sut;
-    private Mock<MacroExpander> _expander;
+    private Mock<IMacroExpander> _expander;
 
     #endregion
 
@@ -22,9 +22,7 @@ namespace Test.CSF.Zpt.Metal
     [SetUp]
     public void Setup()
     {
-      _expander = new Mock<MacroExpander>() {
-        CallBase = false
-      };
+      _expander = new Mock<IMacroExpander>();
       _sut = new MetalVisitor(_expander.Object);
     }
 
@@ -42,7 +40,7 @@ namespace Test.CSF.Zpt.Metal
       _sut.Visit(context);
 
       // Assert
-      _expander.Verify(x => x.Expand(context), Times.Once());
+      _expander.Verify(x => x.ExpandMacros(context), Times.Once());
     }
 
     [Test]
@@ -50,7 +48,7 @@ namespace Test.CSF.Zpt.Metal
     {
       // Arrange
       IRenderingContext contextOne = Mock.Of<IRenderingContext>(), contextTwo = Mock.Of<IRenderingContext>();
-      _expander.Setup(x => x.Expand(contextOne)).Returns(contextTwo);
+      _expander.Setup(x => x.ExpandMacros(contextOne)).Returns(contextTwo);
 
       // Act
       var result = _sut.Visit(contextOne);

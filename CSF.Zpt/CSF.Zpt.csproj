@@ -136,6 +136,7 @@
     <Compile Include="PluginAssemblyLoader.cs" />
     <Compile Include="BatchRendering\BatchOptionsBuilder.cs" />
     <Compile Include="BatchRendering\BatchRenderingOptionsValidator.cs" />
+    <Compile Include="Metal\IMacroExpander.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
