@@ -6,25 +6,24 @@ namespace CSF.Zpt.Metal
   /// <summary>
   /// Type which finds the usage of METAL macros.
   /// </summary>
-  public class MacroFinder
+  public class MacroFinder : IMacroFinder
   {
     #region methods
 
     /// <summary>
-    /// Examines the given <see cref="IZptElement"/> and - if it uses a METAL macro - gets that macro from the given
-    /// <see cref="Model"/>.
+    /// Examines the given <see cref="IRenderingContext"/> and - if it uses a METAL macro - gets that macro from the
+    /// model contained within that context.
     /// </summary>
     /// <returns>Either an <see cref="IZptElement"/> instance representing the macro used, or a <c>null</c> reference.</returns>
     /// <param name="context">The rendering context.</param>
     public virtual IZptElement GetUsedMacro(IRenderingContext context)
     {
-      var used = this.GetReferencedMacro(context, ZptConstants.Metal.UseMacroAttribute);
-      return used?? GetExtendedMacro(context);
+      return this.GetReferencedMacro(context, ZptConstants.Metal.UseMacroAttribute);
     }
 
     /// <summary>
-    /// Examines the given <see cref="IZptElement"/> and - if it extends a METAL macro - gets that macro from the given
-    /// <see cref="Model"/>.
+    /// Examines the given <see cref="IRenderingContext"/> and - if it extends a METAL macro - gets that macro from the
+    /// model contained within that context.
     /// </summary>
     /// <returns>Either an <see cref="IZptElement"/> instance representing the macro extended, or a <c>null</c> reference.</returns>
     /// <param name="context">The rendering context.</param>

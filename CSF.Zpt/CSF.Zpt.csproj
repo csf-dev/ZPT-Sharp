@@ -137,6 +137,8 @@
     <Compile Include="BatchRendering\BatchOptionsBuilder.cs" />
     <Compile Include="BatchRendering\BatchRenderingOptionsValidator.cs" />
     <Compile Include="Metal\IMacroExpander.cs" />
+    <Compile Include="Metal\IMacroFinder.cs" />
+    <Compile Include="Metal\ISourceAnnotator.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

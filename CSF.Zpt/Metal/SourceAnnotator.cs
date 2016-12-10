@@ -8,7 +8,7 @@ namespace CSF.Zpt.Metal
   /// <summary>
   /// Performs source annotation tasks upon METAL elements.
   /// </summary>
-  public class SourceAnnotator
+  public class SourceAnnotator : ISourceAnnotator
   {
     #region constants
 
@@ -42,11 +42,20 @@ namespace CSF.Zpt.Metal
     /// Processes source annotation and adds comments before/after the <paramref name="targetContext"/> if appropriate.
     /// </summary>
     /// <param name="targetContext">Target context.</param>
+    public void ProcessAnnotation(IRenderingContext targetContext)
+    {
+      ProcessAnnotation(targetContext, null, null);
+    }
+
+    /// <summary>
+    /// Processes source annotation and adds comments before/after the <paramref name="targetContext"/> if appropriate.
+    /// </summary>
+    /// <param name="targetContext">Target context.</param>
     /// <param name="originalContext">Original context.</param>
     /// <param name="replacementContext">Replacement context.</param>
     public void ProcessAnnotation(IRenderingContext targetContext,
-                                  IRenderingContext originalContext = null,
-                                  IRenderingContext replacementContext = null)
+                                  IRenderingContext originalContext,
+                                  IRenderingContext replacementContext)
     {
       if(targetContext == null)
       {
