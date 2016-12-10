@@ -139,6 +139,10 @@
     <Compile Include="Metal\IMacroExpander.cs" />
     <Compile Include="Metal\IMacroFinder.cs" />
     <Compile Include="Metal\ISourceAnnotator.cs" />
+    <Compile Include="Metal\IMacroExtender.cs" />
+    <Compile Include="Metal\MacroExtender.cs" />
+    <Compile Include="Metal\IMacroSubstituter.cs" />
+    <Compile Include="Metal\MacroSubstituter.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
