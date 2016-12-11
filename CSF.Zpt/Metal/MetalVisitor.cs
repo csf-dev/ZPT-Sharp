@@ -12,7 +12,7 @@ namespace CSF.Zpt.Metal
   {
     #region fields
 
-    private MacroExpander _macroExpander;
+    private IMacroExpander _macroExpander;
 
     #endregion
 
@@ -36,7 +36,7 @@ namespace CSF.Zpt.Metal
         context.MetalModel.AddGlobal(attrib.Value, context.Element);
       }
 
-      return new [] { _macroExpander.Expand(context) };
+      return new [] { _macroExpander.ExpandMacros(context) };
     }
 
     #endregion
@@ -52,7 +52,7 @@ namespace CSF.Zpt.Metal
     /// Initializes a new instance of the <see cref="CSF.Zpt.Metal.MetalVisitor"/> class.
     /// </summary>
     /// <param name="expander">The macro expander to use.</param>
-    public MetalVisitor(MacroExpander expander = null)
+    public MetalVisitor(IMacroExpander expander = null)
     {
       _macroExpander = expander?? new MacroExpander();
     }

@@ -388,11 +388,16 @@ namespace CSF.Zpt.DocumentProviders
     /// <param name="name">The attribute name.</param>
     public override IZptElement[] SearchChildrenByAttribute(ZptNamespace attributeNamespace, string name)
     {
-      string attribName = GetNameWithPrefix(attributeNamespace, name);
+      string
+        attribName = GetNameWithPrefix(attributeNamespace, name),
+        prefix = GetPrefix(attributeNamespace);
 
       return (from node in this.Node.Descendants()
               from attrib in node.Attributes
-              where attrib.Name == attribName
+              where
+                attrib.Name == attribName
+                || (node.Name.StartsWith(prefix)
+                    && attrib.Name == name)
               select new ZptHtmlElement(node, this.SourceFile, this.OwnerDocument))
         .ToArray();
     }
@@ -690,6 +695,21 @@ namespace CSF.Zpt.DocumentProviders
       EnforceNameNotEmpty(name);
 
       return (nSpace.Prefix != null)? String.Concat(nSpace.Prefix, PREFIX_SEPARATOR, name) : name;
+    }
+
+    /// <summary>
+    /// Gets the prefix from a given namespace.
+    /// </summary>
+    /// <returns>The prefix.</returns>
+    /// <param name="nSpace">An element or attribute namespace.</param>
+    internal static string GetPrefix(ZptNamespace nSpace)
+    {
+      if(nSpace == null)
+      {
+        throw new ArgumentNullException(nameof(nSpace));
+      }
+
+      return (nSpace.Prefix != null)? String.Concat(nSpace.Prefix, PREFIX_SEPARATOR) : String.Empty;
     }
 
     private int? GetStartTagFileLocation()

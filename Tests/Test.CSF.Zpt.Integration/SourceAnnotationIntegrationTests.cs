@@ -13,6 +13,7 @@ namespace Test.CSF.Zpt.Integration
 {
   [TestFixture]
   [Category("Integration")]
+  [Ignore("Source annotation tests are currently ignored - see #181")]
   public class SourceAnnotationIntegrationTests : IntegrationTestBase
   {
     #region tests
