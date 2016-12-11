@@ -100,6 +100,7 @@
     <Compile Include="BatchRendering\TestRenderingJobFactory.cs" />
     <Compile Include="BatchRendering\TestBatchRenderer.cs" />
     <Compile Include="BatchRendering\TestBatchRenderingOptionsValidator.cs" />
+    <Compile Include="Metal\TestMacroSubstituter.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\CSF.Zpt\CSF.Zpt.csproj">

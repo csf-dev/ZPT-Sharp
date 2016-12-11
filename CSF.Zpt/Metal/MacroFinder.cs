@@ -18,7 +18,15 @@ namespace CSF.Zpt.Metal
     /// <param name="context">The rendering context.</param>
     public virtual IZptElement GetUsedMacro(IRenderingContext context)
     {
-      return this.GetReferencedMacro(context, ZptConstants.Metal.UseMacroAttribute);
+      var output = this.GetReferencedMacro(context, ZptConstants.Metal.UseMacroAttribute);
+      output = output?? this.GetExtendedMacro(context);
+
+      if(output != null)
+      {
+        output = output.Clone();
+      }
+
+      return output;
     }
 
     /// <summary>
@@ -29,7 +37,14 @@ namespace CSF.Zpt.Metal
     /// <param name="context">The rendering context.</param>
     public virtual IZptElement GetExtendedMacro(IRenderingContext context)
     {
-      return this.GetReferencedMacro(context, ZptConstants.Metal.ExtendMacroAttribute);
+      var output = this.GetReferencedMacro(context, ZptConstants.Metal.ExtendMacroAttribute);
+
+      if(output != null)
+      {
+        output = output.Clone();
+      }
+
+      return output;
     }
 
     /// <summary>

@@ -7,6 +7,7 @@ using Ploeh.AutoFixture;
 using CSF.Zpt.TestUtils.Autofixture;
 using CSF.Zpt;
 using CSF.Zpt.TestUtils;
+using System.Collections.Generic;
 
 namespace Test.CSF.Zpt.Metal
 {
@@ -18,8 +19,6 @@ namespace Test.CSF.Zpt.Metal
     private IFixture _fixture;
 
     private Mock<IMacroFinder> _finder;
-    private Mock<ISourceAnnotator> _annotator;
-    private Mock<IMacroExtender> _extender;
     private Mock<IMacroSubstituter> _substituter;
 
     private MacroExpander _sut;
@@ -35,11 +34,9 @@ namespace Test.CSF.Zpt.Metal
       new RenderingContextCustomisation().Customize(_fixture);
 
       _finder = new Mock<IMacroFinder>();
-      _annotator = new Mock<ISourceAnnotator>();
-      _extender = new Mock<IMacroExtender>();
       _substituter = new Mock<IMacroSubstituter>();
 
-      _sut = new MacroExpander(_finder.Object, _annotator.Object, _extender.Object, _substituter.Object);
+      _sut = new MacroExpander(_finder.Object, _substituter.Object);
     }
 
     #endregion
@@ -60,20 +57,6 @@ namespace Test.CSF.Zpt.Metal
       // Assert
       Assert.AreSame(element, result);
       _finder.Verify(x => x.GetUsedMacro(context), Times.Once());
-    }
-
-    [Test]
-    public void HandleNoUsedMacro_processes_annotation()
-    {
-      // Arrange
-      var context = _fixture.Create<IRenderingContext>();
-      _annotator.Setup(x => x.ProcessAnnotation(context));
-
-      // Act
-      _sut.HandleNoUsedMacro(context);
-
-      // Assert
-      _annotator.Verify(x => x.ProcessAnnotation(context), Times.Once());
     }
 
     [Test]
@@ -129,152 +112,62 @@ namespace Test.CSF.Zpt.Metal
 
       _finder.Setup(x => x.GetExtendedMacro(macro)).Returns((IZptElement) null);
 
+      IList<IRenderingContext> stack = new List<IRenderingContext>();
+
       // Act
-      var result = _sut.GetFullyExtendedContext(macro);
+      var result = _sut.GetFullyExtendedContext(macro, ref stack);
 
       // Assert
       Assert.AreSame(macro, result);
     }
 
     [Test]
-    public void GetFullyExtendedContext_does_not_use_extender_service_if_no_extended_macro()
+    public void GetFullyExtendedContext_uses_substitutor_service_when_extended_macro_is_present()
     {
       // Arrange
-      IRenderingContext macro = Mock.Of<IRenderingContext>(), sibling = Mock.Of<IRenderingContext>();
-      Mock.Get(macro)
-        .Setup(x => x.CreateSiblingContext(It.IsAny<ZptElement>(), It.IsAny<bool>()))
-        .Returns(sibling);
-
-      _finder.Setup(x => x.GetExtendedMacro(macro)).Returns((IZptElement) null);
-
-      // Act
-      _sut.GetFullyExtendedContext(macro);
-
-      // Assert
-      _extender
-        .Verify(x => x.Extend(It.IsAny<IRenderingContext>(), It.IsAny<IRenderingContext>()),
-                Times.Never());
-    }
-
-    [Test]
-    public void GetFullyExtendedContext_uses_extender_service_when_extended_macro_is_present()
-    {
-      // Arrange
-      IRenderingContext macro = Mock.Of<IRenderingContext>(), sibling = Mock.Of<IRenderingContext>();
+      IRenderingContext
+        macro = Mock.Of<IRenderingContext>(),
+        sibling = Mock.Of<IRenderingContext>(),
+        substituted = Mock.Of<IRenderingContext>();
       Mock.Get(macro)
         .Setup(x => x.CreateSiblingContext(It.IsAny<IZptElement>(), It.IsAny<bool>()))
         .Returns(sibling);
 
-      _finder.Setup(x => x.GetExtendedMacro(macro)).Returns(Mock.Of<IZptElement>());
+      IList<IRenderingContext> stack = new List<IRenderingContext>();
 
-      var extendedContext = Mock.Of<IRenderingContext>();
-      _extender.Setup(x => x.Extend(macro, sibling)).Returns(extendedContext);
+      _finder.Setup(x => x.GetExtendedMacro(macro)).Returns(Mock.Of<IZptElement>());
+      _substituter.Setup(x => x.MakeSubstitutions(macro, sibling, stack, true)).Returns(substituted);
 
       // Act
-      _sut.GetFullyExtendedContext(macro);
+      _sut.GetFullyExtendedContext(macro, ref stack);
 
       // Assert
-      _extender.Verify(x => x.Extend(macro, sibling), Times.Once());
+      _substituter.Verify(x => x.MakeSubstitutions(macro, sibling, stack, true), Times.Once());
     }
 
     [Test]
     public void GetFullyExtendedContext_returns_context_from_extender_service_when_extended_macro_is_present()
     {
       // Arrange
-      IRenderingContext macro = Mock.Of<IRenderingContext>(), sibling = Mock.Of<IRenderingContext>();
+      IRenderingContext
+        macro = Mock.Of<IRenderingContext>(),
+        sibling = Mock.Of<IRenderingContext>(),
+        substituted = Mock.Of<IRenderingContext>();
       Mock.Get(macro)
         .Setup(x => x.CreateSiblingContext(It.IsAny<IZptElement>(), It.IsAny<bool>()))
         .Returns(sibling);
 
-      _finder.Setup(x => x.GetExtendedMacro(macro)).Returns(Mock.Of<IZptElement>());
+      IList<IRenderingContext> stack = new List<IRenderingContext>();
 
-      var extendedContext = Mock.Of<IRenderingContext>();
-      _extender.Setup(x => x.Extend(macro, sibling)).Returns(extendedContext);
+      _finder.Setup(x => x.GetExtendedMacro(macro)).Returns(Mock.Of<IZptElement>());
+      _substituter.Setup(x => x.MakeSubstitutions(macro, sibling, stack, true)).Returns(substituted);
 
       // Act
-      var result = _sut.GetFullyExtendedContext(macro);
+      var result = _sut.GetFullyExtendedContext(macro, ref stack);
 
       // Assert
-      Assert.AreSame(extendedContext, result);
+      Assert.AreSame(substituted, result);
     }
-
-
-
-
-
-
-
-
-
-
-//    [Test]
-//    public void Expand_returns_context_containing_replacement_element()
-//    {
-//      // Arrange
-//      var context = _fixture.Create<RenderingContext>();
-//      var attribute = Mock.Of<global::CSF.Zpt.Rendering.ZptAttribute>();
-//      ZptElement
-//        macro = Mock.Of<ZptElement>(x => x.GetAttribute(ZptConstants.Metal.Namespace,
-//                                                        ZptConstants.Metal.DefineMacroAttribute) == attribute
-//                                         && x.SearchChildrenByAttribute(It.IsAny<ZptNamespace>(),
-//                                                                        It.IsAny<string>()) == new ZptElement[0]);
-//      _finder.Setup(x => x.GetUsedMacro(context)).Returns(macro);
-//      Mock.Get(context.Element)
-//        .Setup(x => x.SearchChildrenByAttribute(It.IsAny<ZptNamespace>(), It.IsAny<string>()))
-//        .Returns(new ZptElement[0]);
-//      Mock.Get(context.Element)
-//        .Setup(x => x.ReplaceWith(macro))
-//        .Returns(macro);
-//
-//      // Act
-//      var result = _sut.ExpandMacros(context);
-//
-//      // Assert
-//      Assert.NotNull(result, "Result nullability");
-//      Assert.AreSame(macro, result.Element, "Correct result");
-//    }
-//
-//    [Test]
-//    public void Expand_replaces_original_element_with_replacement_in_DOM()
-//    {
-//      // Arrange
-//      var context = _fixture.Create<RenderingContext>();
-//      var attribute = Mock.Of<global::CSF.Zpt.Rendering.ZptAttribute>();
-//      ZptElement
-//      macro = Mock.Of<ZptElement>(x => x.GetAttribute(ZptConstants.Metal.Namespace,
-//                                                        ZptConstants.Metal.DefineMacroAttribute) == attribute
-//                                    && x.SearchChildrenByAttribute(It.IsAny<ZptNamespace>(),
-//                                                                        It.IsAny<string>()) == new ZptElement[0]);
-//      _finder.Setup(x => x.GetUsedMacro(context)).Returns(macro);
-//      Mock.Get(context.Element)
-//        .Setup(x => x.SearchChildrenByAttribute(It.IsAny<ZptNamespace>(), It.IsAny<string>()))
-//        .Returns(new ZptElement[0]);
-//      Mock.Get(context.Element)
-//        .Setup(x => x.ReplaceWith(macro))
-//        .Returns(macro);
-//
-//      // Act
-//      _sut.ExpandMacros(context);
-//
-//      // Assert
-//      Mock.Get(context.Element).Verify(x => x.ReplaceWith(macro), Times.Once());
-//    }
-//
-//    [Test]
-//    public void Expand_makes_no_changes_when_attribute_not_present()
-//    {
-//      // Arrange
-//      var context = _fixture.Create<RenderingContext>();
-//      _finder.Setup(x => x.GetUsedMacro(context)).Returns((ZptElement) null);
-//
-//      // Act
-//      var result = _sut.ExpandMacros(context);
-//
-//      // Assert
-//      Assert.NotNull(result, "Result nullability");
-//      Assert.AreSame(context, result, "Correct result");
-//      Mock.Get(context.Element).Verify(x => x.ReplaceWith(It.IsAny<ZptElement>()), Times.Never());
-//    }
 
     #endregion
   }

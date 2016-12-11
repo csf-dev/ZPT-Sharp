@@ -1,5 +1,6 @@
 ﻿using System;
 using CSF.Zpt.Rendering;
+using System.Collections.Generic;
 
 namespace CSF.Zpt.Metal
 {
@@ -20,7 +21,10 @@ namespace CSF.Zpt.Metal
     /// <returns>A rendering context representing the result of the substitutions.</returns>
     /// <param name="sourceContext">The source context, from the original document (to be replaced).</param>
     /// <param name="macroContext">The macro context from which to draw replacements.</param>
-    IRenderingContext MakeSubstitutions(IRenderingContext sourceContext, IRenderingContext macroContext);
+    IRenderingContext MakeSubstitutions(IRenderingContext sourceContext,
+                                        IRenderingContext macroContext,
+                                        IList<IRenderingContext> macroStack,
+                                        bool isMacroExtension);
   }
 }
 

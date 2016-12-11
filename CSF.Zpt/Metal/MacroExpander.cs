@@ -14,8 +14,6 @@ namespace CSF.Zpt.Metal
     #region fields
 
     private readonly IMacroFinder _macroFinder;
-    private readonly ISourceAnnotator _annotator;
-    private readonly IMacroExtender _extender;
     private readonly IMacroSubstituter _substituter;
 
     #endregion
@@ -39,7 +37,7 @@ namespace CSF.Zpt.Metal
 
       if(macro != null)
       {
-        output = HandleUsedMacro(context, macro);
+        output = ExtendAndSubstitute(context, macro);
       }
       else
       {
@@ -50,12 +48,28 @@ namespace CSF.Zpt.Metal
     }
 
     /// <summary>
-    /// Takes appropriate actions when there is a use-macro directive present in a given context.
+    /// Extends a given macro and then makes substitutions into the source context.
     /// </summary>
-    /// <returns>The exposed context.</returns>
+    /// <returns>The resultant rendering context after the substitutions are performed.</returns>
     /// <param name="context">The rendering context.</param>
-    /// <param name="macro">The macro element found.</param>
-    public virtual IRenderingContext HandleUsedMacro(IRenderingContext context, IZptElement macro)
+    /// <param name="macro">The macro element to extend and use for substitutions.</param>
+    public virtual IRenderingContext ExtendAndSubstitute(IRenderingContext context,
+                                                         IZptElement macro)
+    {
+      IList<IRenderingContext> discarded = new List<IRenderingContext>();
+      return ExtendAndSubstitute(context, macro, ref discarded, false);
+    }
+
+    /// <summary>
+    /// Extends a given macro and then makes substitutions into the source context.
+    /// </summary>
+    /// <returns>The resultant rendering context after the substitutions are performed.</returns>
+    /// <param name="context">The rendering context.</param>
+    /// <param name="macro">The macro element to extend and use for substitutions.</param>
+    public virtual IRenderingContext ExtendAndSubstitute(IRenderingContext context,
+                                                         IZptElement macro,
+                                                         ref IList<IRenderingContext> macroStack,
+                                                         bool isExtension)
     {
       if(context == null)
       {
@@ -65,22 +79,17 @@ namespace CSF.Zpt.Metal
       {
         throw new ArgumentNullException(nameof(macro));
       }
+      if(macroStack == null)
+      {
+        throw new ArgumentNullException(nameof(macroStack));
+      }
 
       var macroContext = context.CreateSiblingContext(macro);
-      var extendedContext = GetFullyExtendedContext(macroContext);
+      macroStack.Add(macroContext);
 
-      return _substituter.MakeSubstitutions(context, extendedContext);
+      var extendedContext = GetFullyExtendedContext(macroContext, ref macroStack);
 
-
-//      var output = this.ExpandAndReplace(context, macro);
-//
-//      _annotator.ProcessAnnotation(output,
-//                                     originalContext: context,
-//                                     replacementContext: output.CreateSiblingContext(macro));
-//      
-//      LogMacroUsage(macro, context.Element);
-//
-//      return output;
+      return _substituter.MakeSubstitutions(context, extendedContext, macroStack, isExtension);
     }
 
     /// <summary>
@@ -95,7 +104,6 @@ namespace CSF.Zpt.Metal
         throw new ArgumentNullException(nameof(context));
       }
 
-      _annotator.ProcessAnnotation(context);
       return context;
     }
 
@@ -141,7 +149,8 @@ namespace CSF.Zpt.Metal
     /// </remarks>
     /// <returns>The fully extended context.</returns>
     /// <param name="macroContext">A rendering context representing a macro which might extend other macros.</param>
-    public IRenderingContext GetFullyExtendedContext(IRenderingContext macroContext)
+    public IRenderingContext GetFullyExtendedContext(IRenderingContext macroContext,
+                                                     ref IList<IRenderingContext> macroStack)
     {
       if(macroContext == null)
       {
@@ -155,8 +164,7 @@ namespace CSF.Zpt.Metal
         return macroContext;
       }
 
-      var extendedMacroContext = macroContext.CreateSiblingContext(extendedMacro);
-      return _extender.Extend(macroContext, extendedMacroContext);
+      return ExtendAndSubstitute(macroContext, extendedMacro, ref macroStack, true);
     }
 
 
@@ -239,26 +247,6 @@ namespace CSF.Zpt.Metal
 //    }
 //
 //    /// <summary>
-//    /// Gets a collection of child elements which are decorated by METAL attributes.  These elements are indexed by the
-//    /// value of that attribute.
-//    /// </summary>
-//    /// <returns>A collection of elements, and their attribute values.</returns>
-//    /// <param name="rootElement">The root element from which to search.</param>
-//    /// <param name="desiredAttribute">The name of the desired attribute.</param>
-//    private IDictionary<string,IZptElement> GetElementsByValue(IZptElement rootElement,
-//                                                           string desiredAttribute)
-//    {
-//      var output = rootElement.SearchChildrenByMetalAttribute(desiredAttribute)
-//        .Select(x => new {
-//          Element = x,
-//          Attribute = x.GetMetalAttribute(desiredAttribute)
-//        });
-//
-//      return output
-//        .ToDictionary(k => k.Attribute.Value, v => v.Element);
-//    }
-//
-//    /// <summary>
 //    /// Applies METAL macro extension, recursively extending the given macro where applicable.
 //    /// </summary>
 //    /// <returns>A rendering context, exposing the METAL macro element, after all required extension has been applied.</returns>
@@ -329,23 +317,17 @@ namespace CSF.Zpt.Metal
     /// <summary>
     /// Initializes a new instance of the <see cref="CSF.Zpt.Metal.MacroExpander"/> class.
     /// </summary>
-    public MacroExpander() : this(null, null, null, null) {}
+    public MacroExpander() : this(null,  null) {}
 
     /// <summary>
     /// Initializes a new instance of the <see cref="CSF.Zpt.Metal.MacroExpander"/> class.
     /// </summary>
     /// <param name="finder">A macro finder instance, or a null reference (in which case one will be constructed).</param>
-    /// <param name="annotator">A source annotator instance, or a null reference (in which case one will be constructed).</param>
-    /// <param name="extender">A macro extender service, or a null reference (in which case one will be constructed).</param>
     /// <param name="substituter">A substituter service, or a null reference (in which case one will be constructed).</param>
     public MacroExpander(IMacroFinder finder = null,
-                         ISourceAnnotator annotator = null,
-                         IMacroExtender extender = null,
                          IMacroSubstituter substituter = null)
     {
       _macroFinder = finder?? new MacroFinder();
-      _annotator = annotator?? new SourceAnnotator();
-      _extender = extender?? new MacroExtender();
       _substituter = substituter?? new MacroSubstituter();
     }
 
