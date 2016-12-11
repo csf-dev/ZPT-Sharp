@@ -14,7 +14,7 @@ namespace CSF.Zpt.Metal
     #region fields
 
     private readonly IMacroFinder _macroFinder;
-    private readonly IMacroSubstituter _substituter;
+    private readonly IMacroSubstituter _normalSubstituter, _extensionSubstitutor;
 
     #endregion
 
@@ -57,7 +57,7 @@ namespace CSF.Zpt.Metal
                                                          IZptElement macro)
     {
       IList<IRenderingContext> discarded = new List<IRenderingContext>();
-      return ExtendAndSubstitute(context, macro, ref discarded, false);
+      return ExtendAndSubstitute(context, macro, ref discarded, _normalSubstituter);
     }
 
     /// <summary>
@@ -66,10 +66,12 @@ namespace CSF.Zpt.Metal
     /// <returns>The resultant rendering context after the substitutions are performed.</returns>
     /// <param name="context">The rendering context.</param>
     /// <param name="macro">The macro element to extend and use for substitutions.</param>
+    /// <param name="macroStack">The collection of macros passed through to get to this point.</param>
+    /// <param name="substitutionStrategy">The macro substitution strategy to use.</param>
     public virtual IRenderingContext ExtendAndSubstitute(IRenderingContext context,
                                                          IZptElement macro,
                                                          ref IList<IRenderingContext> macroStack,
-                                                         bool isExtension)
+                                                         IMacroSubstituter substitutionStrategy)
     {
       if(context == null)
       {
@@ -83,13 +85,17 @@ namespace CSF.Zpt.Metal
       {
         throw new ArgumentNullException(nameof(macroStack));
       }
+      if(substitutionStrategy == null)
+      {
+        throw new ArgumentNullException(nameof(substitutionStrategy));
+      }
 
       var macroContext = context.CreateSiblingContext(macro);
       macroStack.Add(macroContext);
 
       var extendedContext = GetFullyExtendedContext(macroContext, ref macroStack);
 
-      return _substituter.MakeSubstitutions(context, extendedContext, macroStack, isExtension);
+      return substitutionStrategy.MakeSubstitutions(context, extendedContext, macroStack);
     }
 
     /// <summary>
@@ -149,6 +155,7 @@ namespace CSF.Zpt.Metal
     /// </remarks>
     /// <returns>The fully extended context.</returns>
     /// <param name="macroContext">A rendering context representing a macro which might extend other macros.</param>
+    /// <param name="macroStack">The collection of macros passed through to get to this point.</param>
     public IRenderingContext GetFullyExtendedContext(IRenderingContext macroContext,
                                                      ref IList<IRenderingContext> macroStack)
     {
@@ -164,7 +171,7 @@ namespace CSF.Zpt.Metal
         return macroContext;
       }
 
-      return ExtendAndSubstitute(macroContext, extendedMacro, ref macroStack, true);
+      return ExtendAndSubstitute(macroContext, extendedMacro, ref macroStack, _extensionSubstitutor);
     }
 
 
@@ -317,18 +324,21 @@ namespace CSF.Zpt.Metal
     /// <summary>
     /// Initializes a new instance of the <see cref="CSF.Zpt.Metal.MacroExpander"/> class.
     /// </summary>
-    public MacroExpander() : this(null,  null) {}
+    public MacroExpander() : this(null,  null, null) {}
 
     /// <summary>
     /// Initializes a new instance of the <see cref="CSF.Zpt.Metal.MacroExpander"/> class.
     /// </summary>
     /// <param name="finder">A macro finder instance, or a null reference (in which case one will be constructed).</param>
-    /// <param name="substituter">A substituter service, or a null reference (in which case one will be constructed).</param>
+    /// <param name="substituter">A substituter service for regular macro substitution, or a null reference (in which case one will be constructed).</param>
+    /// <param name="extensionSubstitutor">A substituter service for macro extension, or a null reference (in which case one will be constructed).</param>
     public MacroExpander(IMacroFinder finder = null,
-                         IMacroSubstituter substituter = null)
+                         IMacroSubstituter substituter = null,
+                         IMacroSubstituter extensionSubstitutor = null)
     {
       _macroFinder = finder?? new MacroFinder();
-      _substituter = substituter?? new MacroSubstituter();
+      _normalSubstituter = substituter?? new MacroSubstituter();
+      _extensionSubstitutor = extensionSubstitutor?? new MacroExtensionSubstitutor();
     }
 
     #endregion

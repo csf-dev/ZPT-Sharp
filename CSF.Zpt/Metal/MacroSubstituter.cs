@@ -24,36 +24,48 @@ namespace CSF.Zpt.Metal
     /// <returns>A rendering context representing the result of the substitutions.</returns>
     /// <param name="sourceContext">The source context, from the original document (to be replaced).</param>
     /// <param name="macroContext">The macro context from which to draw replacements.</param>
-    public IRenderingContext MakeSubstitutions(IRenderingContext sourceContext,
-                                               IRenderingContext macroContext,
-                                               IList<IRenderingContext> macroStack,
-                                               bool isMacroExtension)
+    /// <param name="macroStack">A collection of macros which have been passed-through.</param>
+    public virtual IRenderingContext MakeSubstitutions(IRenderingContext sourceContext,
+                                                       IRenderingContext macroContext,
+                                                       IList<IRenderingContext> macroStack)
     {
       var slotsToFill = GetSlotsToFill(sourceContext, macroContext, macroStack);
-      return MakeSubstitutions(sourceContext, macroContext, slotsToFill, isMacroExtension);
+      return MakeSubstitutions(sourceContext, macroContext, slotsToFill);
     }
 
-    public IRenderingContext MakeSubstitutions(IRenderingContext sourceContext,
-                                               IRenderingContext macroContext,
-                                               IEnumerable<SlotToFill> slotsToFill,
-                                               bool isMacroExtension)
+    /// <summary>
+    /// Makes the substitutions from the macro into the given source.
+    /// </summary>
+    /// <returns>A rendering context representing the result of the substitutions.</returns>
+    /// <param name="sourceContext">The source context, from the original document (to be replaced).</param>
+    /// <param name="macroContext">The macro context from which to draw replacements.</param>
+    /// <param name="slotsToFill">A collection of the slots to be filled and their fillers.</param>
+    public virtual IRenderingContext MakeSubstitutions(IRenderingContext sourceContext,
+                                                       IRenderingContext macroContext,
+                                                       IEnumerable<SlotToFill> slotsToFill)
     {
       foreach(var slotAndFiller in slotsToFill)
       {
-        FillSlot(slotAndFiller, isMacroExtension);
+        FillSlot(slotAndFiller);
       }
 
       var replacedSourceElement = sourceContext.Element.ReplaceWith(macroContext.Element);
       return sourceContext.CreateSiblingContext(replacedSourceElement);
     }
 
-    public void FillSlot(SlotToFill slotAndFiller, bool isMacroExtension)
+    /// <summary>
+    /// Fills a single slot with its filler.
+    /// </summary>
+    /// <returns>The element created by the operation.</returns>
+    /// <param name="slotAndFiller">The slot and its filler.</param>
+    public virtual IZptElement FillSlot(SlotToFill slotAndFiller)
     {
       var slot = slotAndFiller.Slot.Element;
       var filler = slotAndFiller.Filler.Element;
 
       var fillSlotAttribute = slot.GetMetalAttribute(ZptConstants.Metal.FillSlotAttribute);
       var replacement = slot.ReplaceWith(filler);
+
       if(fillSlotAttribute != null)
       {
         replacement.SetAttribute(ZptConstants.Metal.Namespace,
@@ -61,23 +73,17 @@ namespace CSF.Zpt.Metal
                                    fillSlotAttribute.Value);
       }
 
-      if(isMacroExtension)
-      {
-        var slotIsRedefined = filler.SearchChildrenByMetalAttribute(ZptConstants.Metal.DefineSlotAttribute)
-          .Where(x => x.GetAttribute(ZptConstants.Metal.Namespace,
-                                       ZptConstants.Metal.DefineSlotAttribute).Value == slotAndFiller.Name)
-          .Any();
-
-        if(!slotIsRedefined)
-        {
-          replacement.SetAttribute(ZptConstants.Metal.Namespace,
-                                     ZptConstants.Metal.DefineSlotAttribute,
-                                     slotAndFiller.Name);
-        }
-      }
+      return replacement;
     }
 
-    public IEnumerable<SlotToFill> GetSlotsToFill(IRenderingContext sourceContext,
+    /// <summary>
+    /// Gets a collection of the slots which should be filled, and their corresponding fillers.
+    /// </summary>
+    /// <returns>A collection of <see cref="SlotToFill"/>.</returns>
+    /// <param name="sourceContext">The source context, from the original document (to be replaced).</param>
+    /// <param name="macroContext">The macro context from which to draw replacements.</param>
+    /// <param name="macroStack">A collection of macros which have been passed-through.</param>
+    public virtual IEnumerable<SlotToFill> GetSlotsToFill(IRenderingContext sourceContext,
                                                   IRenderingContext macroContext,
                                                   IList<IRenderingContext> macroStack)
     {
@@ -98,10 +104,24 @@ namespace CSF.Zpt.Metal
       return GetSlotsToFill(sourceContext, fillers, macroContext, definedSlots);
     }
 
-    public IEnumerable<SlotToFill> GetSlotsToFill(IRenderingContext sourceContext,
-                                                  IDictionary<string,IZptElement> availableFillers,
-                                                  IRenderingContext macroContext,
-                                                  IDictionary<string,IZptElement> availableSlotDefinitions)
+    /// <summary>
+    /// Gets a collection of <see cref="SlotToFill"/> from the given source information.
+    /// </summary>
+    /// <remarks>
+    /// <para>
+    /// This operation constructs and executes a query across the slots and fillers provided, which matches each filler
+    /// to a slot.
+    /// </para>
+    /// </remarks>
+    /// <returns>A collection of the slots matched with fillers.</returns>
+    /// <param name="sourceContext">The source rendering context.</param>
+    /// <param name="availableFillers">A collection of elements in the source context representing slot fillers.</param>
+    /// <param name="macroContext">The macro rendering context.</param>
+    /// <param name="availableSlotDefinitions">A collection of elements in the macro context representing slot definitions.</param>
+    public virtual IEnumerable<SlotToFill> GetSlotsToFill(IRenderingContext sourceContext,
+                                                          IDictionary<string,IZptElement> availableFillers,
+                                                          IRenderingContext macroContext,
+                                                          IDictionary<string,IZptElement> availableSlotDefinitions)
     {
       return (from slotElement in availableSlotDefinitions
               join fillerElement in availableFillers
@@ -112,18 +132,44 @@ namespace CSF.Zpt.Metal
         .ToArray();
     }
 
-    public IDictionary<string,IZptElement> GetSlotFillers(IRenderingContext context)
+    /// <summary>
+    /// Gets a collection of all of the elements which have the METAL <c>fill-slot</c> attribute defined.
+    /// </summary>
+    /// <remarks>
+    /// <para>
+    /// The returned dictionary is indexed by the value of the METAL <c>fill-slot</c> attribute.
+    /// </para>
+    /// </remarks>
+    /// <returns>The elements found.</returns>
+    /// <param name="context">The rendering context within which to search.</param>
+    public virtual IDictionary<string,IZptElement> GetSlotFillers(IRenderingContext context)
     {
       return GetChildElementsByMetalAttributeValue(context, ZptConstants.Metal.FillSlotAttribute);
     }
 
-    public IDictionary<string,IZptElement> GetDefinedSlots(IRenderingContext context)
+    /// <summary>
+    /// Gets a collection of all of the elements which have the METAL <c>define-slot</c> attribute defined.
+    /// </summary>
+    /// <remarks>
+    /// <para>
+    /// The returned dictionary is indexed by the value of the METAL <c>define-slot</c> attribute.
+    /// </para>
+    /// </remarks>
+    /// <returns>The elements found.</returns>
+    /// <param name="context">The rendering context within which to search.</param>
+    public virtual IDictionary<string,IZptElement> GetDefinedSlots(IRenderingContext context)
     {
       return GetChildElementsByMetalAttributeValue(context, ZptConstants.Metal.DefineSlotAttribute);
     }
 
-    public IDictionary<string,IZptElement> GetChildElementsByMetalAttributeValue(IRenderingContext context,
-                                                                                 string metalAttribute)
+    /// <summary>
+    /// Gets a collection of elements indexed by the value of a given METAL attribute.
+    /// </summary>
+    /// <returns>The elements found.</returns>
+    /// <param name="context">The rendering context within which to search.</param>
+    /// <param name="metalAttribute">The name of the METAL attribute for which to search.</param>
+    public virtual IDictionary<string,IZptElement> GetChildElementsByMetalAttributeValue(IRenderingContext context,
+                                                                                         string metalAttribute)
     {
       return context.Element
         .SearchChildrenByMetalAttribute(metalAttribute)

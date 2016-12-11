@@ -36,7 +36,7 @@ namespace Test.CSF.Zpt.Metal
       _finder = new Mock<IMacroFinder>();
       _substituter = new Mock<IMacroSubstituter>();
 
-      _sut = new MacroExpander(_finder.Object, _substituter.Object);
+      _sut = new MacroExpander(_finder.Object, _substituter.Object, _substituter.Object);
     }
 
     #endregion
@@ -136,13 +136,13 @@ namespace Test.CSF.Zpt.Metal
       IList<IRenderingContext> stack = new List<IRenderingContext>();
 
       _finder.Setup(x => x.GetExtendedMacro(macro)).Returns(Mock.Of<IZptElement>());
-      _substituter.Setup(x => x.MakeSubstitutions(macro, sibling, stack, true)).Returns(substituted);
+      _substituter.Setup(x => x.MakeSubstitutions(macro, sibling, stack)).Returns(substituted);
 
       // Act
       _sut.GetFullyExtendedContext(macro, ref stack);
 
       // Assert
-      _substituter.Verify(x => x.MakeSubstitutions(macro, sibling, stack, true), Times.Once());
+      _substituter.Verify(x => x.MakeSubstitutions(macro, sibling, stack), Times.Once());
     }
 
     [Test]
@@ -160,7 +160,7 @@ namespace Test.CSF.Zpt.Metal
       IList<IRenderingContext> stack = new List<IRenderingContext>();
 
       _finder.Setup(x => x.GetExtendedMacro(macro)).Returns(Mock.Of<IZptElement>());
-      _substituter.Setup(x => x.MakeSubstitutions(macro, sibling, stack, true)).Returns(substituted);
+      _substituter.Setup(x => x.MakeSubstitutions(macro, sibling, stack)).Returns(substituted);
 
       // Act
       var result = _sut.GetFullyExtendedContext(macro, ref stack);
