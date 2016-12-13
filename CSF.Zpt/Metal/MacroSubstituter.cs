@@ -30,27 +30,40 @@ namespace CSF.Zpt.Metal
                                                        IList<IRenderingContext> macroStack)
     {
       var slotsToFill = GetSlotsToFill(sourceContext, macroContext, macroStack);
-      return MakeSubstitutions(sourceContext, macroContext, slotsToFill);
+
+      FillSlots(slotsToFill);
+
+      return ReplaceMacroElement(sourceContext, macroContext);
     }
 
     /// <summary>
-    /// Makes the substitutions from the macro into the given source.
+    /// Replaces the defined macro on the source context with the macro context and returns the result. 
     /// </summary>
-    /// <returns>A rendering context representing the result of the substitutions.</returns>
-    /// <param name="sourceContext">The source context, from the original document (to be replaced).</param>
-    /// <param name="macroContext">The macro context from which to draw replacements.</param>
-    /// <param name="slotsToFill">A collection of the slots to be filled and their fillers.</param>
-    public virtual IRenderingContext MakeSubstitutions(IRenderingContext sourceContext,
-                                                       IRenderingContext macroContext,
-                                                       IEnumerable<SlotToFill> slotsToFill)
+    /// <returns>The rendering context for the replacement.</returns>
+    /// <param name="sourceContext">The source context (which uses a macro).</param>
+    /// <param name="macroContext">The macro context (which defines the macro).</param>
+    public virtual IRenderingContext ReplaceMacroElement(IRenderingContext sourceContext,
+                                                         IRenderingContext macroContext)
     {
+      var replacedSourceElement = sourceContext.Element.ReplaceWith(macroContext.Element);
+      return sourceContext.CreateSiblingContext(replacedSourceElement);
+    }
+
+    /// <summary>
+    /// Fills all of the given slots with their corresponding fillers.
+    /// </summary>
+    /// <param name="slotsToFill">The slots to fill.</param>
+    public virtual void FillSlots(IEnumerable<SlotToFill> slotsToFill)
+    {
+      if(slotsToFill == null)
+      {
+        throw new ArgumentNullException(nameof(slotsToFill));
+      }
+
       foreach(var slotAndFiller in slotsToFill)
       {
         FillSlot(slotAndFiller);
       }
-
-      var replacedSourceElement = sourceContext.Element.ReplaceWith(macroContext.Element);
-      return sourceContext.CreateSiblingContext(replacedSourceElement);
     }
 
     /// <summary>
@@ -90,15 +103,10 @@ namespace CSF.Zpt.Metal
       var fillers = GetSlotFillers(sourceContext);
       var definedSlots = GetDefinedSlots(macroContext);
 
-      for(int i = 0, len = macroStack.Count; i < len; i++)
+      var slotsDefinedInParentMacros = GetDefinedSlots(macroStack, definedSlots.Keys);
+      foreach(var slot in slotsDefinedInParentMacros)
       {
-        var extendedParent = macroStack[i];
-        var uniqueUnfilledSlots = GetDefinedSlots(extendedParent).Where(x => !definedSlots.ContainsKey(x.Key));
-        
-        foreach(var slot in uniqueUnfilledSlots)
-        {
-          definedSlots.Add(slot);
-        }
+        definedSlots.Add(slot);
       }
 
       return GetSlotsToFill(sourceContext, fillers, macroContext, definedSlots);
@@ -160,6 +168,42 @@ namespace CSF.Zpt.Metal
     public virtual IDictionary<string,IZptElement> GetDefinedSlots(IRenderingContext context)
     {
       return GetChildElementsByMetalAttributeValue(context, ZptConstants.Metal.DefineSlotAttribute);
+    }
+
+    /// <summary>
+    /// Gets a collection of all of the elements which have the METAL <c>define-slot</c> attribute defined.
+    /// </summary>
+    /// <remarks>
+    /// <para>
+    /// The returned dictionary is indexed by the value of the METAL <c>define-slot</c> attribute.
+    /// </para>
+    /// </remarks>
+    /// <returns>The elements found.</returns>
+    /// <param name="macroStack">A collection of macros which have been passed-through.</param>
+    /// <param name="slotsFoundSoFar">A collection of the names of the slots found so far.</param>
+    public virtual IDictionary<string,IZptElement> GetDefinedSlots(IList<IRenderingContext> macroStack,
+                                                                   IEnumerable<string> slotsFoundSoFar)
+    {
+      IDictionary<string,IZptElement> output = new Dictionary<string,IZptElement>();
+
+      for(int i = 0, len = macroStack.Count; i < len; i++)
+      {
+        var parentMacro = macroStack[i];
+
+        var newlyFoundSlots = (from slot in GetDefinedSlots(parentMacro)
+                               let slotName = slot.Key
+                               where
+                                  !slotsFoundSoFar.Contains(slotName)
+                                  && !output.ContainsKey(slotName)
+                               select slot);
+
+        foreach(var slot in newlyFoundSlots)
+        {
+          output.Add(slot);
+        }
+      }
+
+      return output;
     }
 
     /// <summary>

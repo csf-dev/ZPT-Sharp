@@ -139,6 +139,102 @@ namespace Test.CSF.Zpt.Metal
                 Times.Once());
     }
 
+    [Test]
+    [Ignore("This test needs to be written - see #182")]
+    public void GetDefinedSlots_from_parent_queries_every_item_in_stack()
+    {
+      // Arrange
+      
+
+      // Act
+
+      // Assert
+    }
+
+    [Test]
+    [Ignore("This test needs to be written - see #182")]
+    public void GetDefinedSlots_from_parent_does_not_find_slots_already_present_in_main_macro()
+    {
+      // Arrange
+
+
+      // Act
+
+      // Assert
+    }
+
+    [Test]
+    [Ignore("This test needs to be written - see #182")]
+    public void GetDefinedSlots_from_parent_uses_slots_from_bottom_of_stack_in_preference_to_top_of_stack()
+    {
+      // Arrange
+
+
+      // Act
+
+      // Assert
+    }
+
+    [Test]
+    [Ignore("This test needs to be written - see #182")]
+    public void GetSlotsToFill_query_does_not_find_unfilled_slots()
+    {
+      // Arrange
+
+
+      // Act
+
+      // Assert
+    }
+
+    [Test]
+    [Ignore("This test needs to be written - see #182")]
+    public void GetSlotsToFill_query_does_not_find_fillers_with_no_corresponding_definition()
+    {
+      // Arrange
+
+
+      // Act
+
+      // Assert
+    }
+
+    [Test]
+    [Ignore("This test needs to be written - see #182")]
+    public void GetSlotsToFill_query_matches_slots_with_fillers()
+    {
+      // Arrange
+
+
+      // Act
+
+      // Assert
+    }
+
+    [Test]
+    [Ignore("This test needs to be written - see #182")]
+    public void ReplaceMacroElement_replaces_the_source_context()
+    {
+      // Arrange
+
+
+      // Act
+
+      // Assert
+    }
+
+    [Test]
+    [Ignore("This test needs to be written - see #182")]
+    public void ReplaceMacroElement_returns_the_replacement_result()
+    {
+      // Arrange
+
+
+      // Act
+
+      // Assert
+    }
+
     #endregion
   }
 }
