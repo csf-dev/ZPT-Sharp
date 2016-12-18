@@ -157,6 +157,11 @@ namespace CSF.Zpt
       public static readonly string SourceInfoAttribute = "source-info";
 
       /// <summary>
+      /// The name of an attribute which marks the <c>System.Type</c> of the source information.
+      /// </summary>
+      public static readonly string SourceInfoTypeAQNAttribute = "source-info-type";
+
+      /// <summary>
       /// The name of an attribute which records the source line number for the start-tag of a given element.
       /// </summary>
       public static readonly string StartTagLineNumber = "start-tag-line";

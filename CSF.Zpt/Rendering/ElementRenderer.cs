@@ -34,7 +34,7 @@ namespace CSF.Zpt.Rendering
       var context = options.CreateRootContext(output, model);
 
       ZptConstants.TraceSource.TraceInformation(Resources.LogMessageFormats.RenderingDocument,
-                                                (output.SourceFile != null)? output.SourceFile.FullName : "<unknown>",
+                                                output.GetSourceInfo().FullName,
                                                 nameof(ZptDocument),
                                                 nameof(RenderElement));
 

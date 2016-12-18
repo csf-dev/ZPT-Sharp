@@ -168,7 +168,7 @@ namespace CSF.Zpt.SourceAnnotation
         targetElement = targetContext.Element,
         sourceElement = replacementContext?.Element ?? targetContext.Element;
       string
-        fullFilename = targetContext.Element.SourceFile.FullName,
+        fullFilename = targetContext.Element.GetSourceInfo().FullName,
         filename,
         filePosition = useEndTagPosition? sourceElement.GetEndTagFileLocation() : sourceElement.GetFileLocation(),
         previousElement;

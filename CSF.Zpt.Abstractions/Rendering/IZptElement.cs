@@ -15,12 +15,12 @@ namespace CSF.Zpt.Rendering
     /// <value>The name.</value>
     string Name { get; }
 
-    /// <summary>
-    /// Gets information about the source file for the current element.
-    /// </summary>
-    /// <value>The source file.</value>
-    [Obsolete("Deprecated in favour of the method GetSourceInfo")]
-    ISourceInfo SourceFile { get; }
+//    /// <summary>
+//    /// Gets information about the source file for the current element.
+//    /// </summary>
+//    /// <value>The source file.</value>
+//    [Obsolete("Deprecated in favour of the method GetSourceInfo")]
+//    ISourceInfo SourceFile { get; }
 
     /// <summary>
     /// Gets a value indicating whether this instance is the root of its parent document.

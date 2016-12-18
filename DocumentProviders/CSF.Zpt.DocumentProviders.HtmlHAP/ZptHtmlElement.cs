@@ -159,7 +159,7 @@ namespace CSF.Zpt.DocumentProviders
       {
         var parent = this.GetParent();
         return new ZptHtmlElement(parent.ReplaceChild(repl.Node, this.Node),
-                                repl.SourceFile,
+                                  repl.GetSourceInfo(),
                                 OwnerDocument,
                                 isImported: true);
       }
@@ -167,7 +167,7 @@ namespace CSF.Zpt.DocumentProviders
       {
         this.Node.Remove();
         return new ZptHtmlElement(repl.Node,
-                                  repl.SourceFile,
+                                  repl.GetSourceInfo(),
                                 OwnerDocument,
                                   isImported: true);
       }
@@ -192,7 +192,7 @@ namespace CSF.Zpt.DocumentProviders
 
       return newNodes
         .Where(x => x.NodeType == HtmlNodeType.Element)
-        .Select(x => new ZptHtmlElement(x, this.SourceFile, this.OwnerDocument))
+        .Select(x => new ZptHtmlElement(x, this.GetSourceInfo(), this.OwnerDocument))
         .ToArray();
     }
 
@@ -242,7 +242,7 @@ namespace CSF.Zpt.DocumentProviders
       }
 
       var output = this.Node.InsertBefore(newChildElement.Node, existingNode);
-      return new ZptHtmlElement(output, newChild.SourceFile, this.OwnerDocument, isImported: true);
+      return new ZptHtmlElement(output, newChild.GetSourceInfo(), this.OwnerDocument, isImported: true);
     }
 
     /// <summary>
@@ -259,7 +259,7 @@ namespace CSF.Zpt.DocumentProviders
         newChildElement = ConvertTo<ZptHtmlElement>(newChild);
 
       var output = this.Node.InsertAfter(newChildElement.Node, existingElement.Node);
-      return new ZptHtmlElement(output, newChild.SourceFile, this.OwnerDocument, isImported: true);
+      return new ZptHtmlElement(output, newChild.GetSourceInfo(), this.OwnerDocument, isImported: true);
     }
 
     /// <summary>
@@ -269,7 +269,7 @@ namespace CSF.Zpt.DocumentProviders
     public override IZptElement GetParentElement()
     {
       var parent = this.Node.ParentNode;
-      return (parent != null && parent.NodeType == HtmlNodeType.Element)? new ZptHtmlElement(parent, this.SourceFile, this.OwnerDocument) : null;
+      return (parent != null && parent.NodeType == HtmlNodeType.Element)? new ZptHtmlElement(parent, this.GetSourceInfo(), this.OwnerDocument) : null;
     }
 
     /// <summary>
@@ -280,7 +280,7 @@ namespace CSF.Zpt.DocumentProviders
     {
       return this.Node.ChildNodes
         .Where(x => x.NodeType == HtmlNodeType.Element)
-        .Select(x => new ZptHtmlElement(x, this.SourceFile, this.OwnerDocument))
+        .Select(x => new ZptHtmlElement(x, this.GetSourceInfo(), this.OwnerDocument))
         .ToArray();
     }
 
@@ -398,7 +398,7 @@ namespace CSF.Zpt.DocumentProviders
                 attrib.Name == attribName
                 || (node.Name.StartsWith(prefix)
                     && attrib.Name == name)
-              select new ZptHtmlElement(node, this.SourceFile, this.OwnerDocument))
+              select new ZptHtmlElement(node, this.GetSourceInfo(), this.OwnerDocument))
         .ToArray();
     }
 
@@ -448,7 +448,7 @@ namespace CSF.Zpt.DocumentProviders
 
       foreach(var item in toRemove)
       {
-        new ZptHtmlElement(item, this.SourceFile, this.OwnerDocument).Omit();
+        new ZptHtmlElement(item, this.GetSourceInfo(), this.OwnerDocument).Omit();
       }
     }
 
@@ -519,7 +519,7 @@ namespace CSF.Zpt.DocumentProviders
     {
       var clone = this.Node.Clone();
 
-      return new ZptHtmlElement(clone, this.SourceFile, this.OwnerDocument, this.IsRoot, true) {
+      return new ZptHtmlElement(clone, this.GetSourceInfo(), this.OwnerDocument, this.IsRoot, true) {
         _filePosition = _filePosition.HasValue? _filePosition : this.Node.Line,
       };
     }
@@ -570,7 +570,7 @@ namespace CSF.Zpt.DocumentProviders
 
       return children
         .Where(x => x.NodeType == HtmlNodeType.Element)
-        .Select(x => new ZptHtmlElement(x, this.SourceFile, this.OwnerDocument))
+        .Select(x => new ZptHtmlElement(x, this.GetSourceInfo(), this.OwnerDocument))
         .ToArray();
     }
 

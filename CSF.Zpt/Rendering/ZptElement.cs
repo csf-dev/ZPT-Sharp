@@ -10,8 +10,9 @@ namespace CSF.Zpt.Rendering
   {
     #region fields
 
-    private ISourceInfo _sourceFile;
+    private ISourceInfo _cachedSourceInfo;
     private bool _isRoot, _isImported;
+    private string _cachedStartTagLocation, _cachedEndTagLocation;
     private IZptDocument _ownerDocument;
     private ISourceInfoFactory _sourceInfoCreator;
 
@@ -24,17 +25,6 @@ namespace CSF.Zpt.Rendering
     /// </summary>
     /// <value>The name.</value>
     public abstract string Name { get; }
-
-    /// <summary>
-    /// Gets information about the source file for the current element.
-    /// </summary>
-    /// <value>The source file.</value>
-    public virtual ISourceInfo SourceFile
-    {
-      get {
-        return _sourceFile;
-      }
-    }
 
     /// <summary>
     /// Gets a value indicating whether this instance is the root of its parent document.
@@ -95,8 +85,24 @@ namespace CSF.Zpt.Rendering
     /// </summary>
     public ISourceInfo GetSourceInfo()
     {
-      // TODO: Write this implementation
-      throw new NotImplementedException();
+      if(_cachedSourceInfo == null)
+      {
+        var type = GetAttribute(ZptConstants.SourceAnnotation.Namespace,
+                                ZptConstants.SourceAnnotation.SourceInfoTypeAQNAttribute);
+        var value = GetAttribute(ZptConstants.SourceAnnotation.Namespace,
+                                 ZptConstants.SourceAnnotation.SourceInfoAttribute);
+
+        if(type == null || value == null)
+        {
+          _cachedSourceInfo = UnknownSourceFileInfo.Instance;
+        }
+        else
+        {
+          _cachedSourceInfo = _sourceInfoCreator.CreateSourceInfo(type.Value, value.Value);
+        }
+      }
+
+      return _cachedSourceInfo;
     }
 
 
@@ -429,21 +435,15 @@ namespace CSF.Zpt.Rendering
     /// <returns>The full file path and location.</returns>
     public virtual string GetFullFilePathAndLocation()
     {
-      if(SourceFile == null)
+      string location = GetFileLocation();
+
+      if(location != null)
       {
-        return "<unknown>";
+        return String.Format("{0} (line {1})", GetSourceInfo().FullName, location);
       }
       else
       {
-        string location = GetFileLocation();
-        if(location != null)
-        {
-          return String.Format("{0} (line {1})", SourceFile.FullName, location);
-        }
-        else
-        {
-          return SourceFile.FullName;
-        }
+        return GetSourceInfo().FullName;
       }
     }
 
@@ -509,8 +509,44 @@ namespace CSF.Zpt.Rendering
         throw new ArgumentException(message);
       }
     }
-//
-//    private void 
+
+    /// <summary>
+    /// Writes information to the underlying element's attributes recording its source information.
+    /// </summary>
+    public virtual void CacheSourceInformationInAttributes()
+    {
+      if(this.GetAttribute(ZptConstants.SourceAnnotation.Namespace,
+                           ZptConstants.SourceAnnotation.SourceInfoAttribute) == null)
+      {
+        this.SetAttribute(ZptConstants.SourceAnnotation.Namespace,
+                          ZptConstants.SourceAnnotation.SourceInfoTypeAQNAttribute,
+                          GetSourceInfo().GetType().AssemblyQualifiedName);
+      }
+
+      if(this.GetAttribute(ZptConstants.SourceAnnotation.Namespace,
+                           ZptConstants.SourceAnnotation.SourceInfoAttribute) == null)
+      {
+        this.SetAttribute(ZptConstants.SourceAnnotation.Namespace,
+                          ZptConstants.SourceAnnotation.SourceInfoAttribute,
+                          GetSourceInfo().ToString());
+      }
+
+      if(this.GetAttribute(ZptConstants.SourceAnnotation.Namespace,
+                           ZptConstants.SourceAnnotation.StartTagLineNumber) == null)
+      {
+        this.SetAttribute(ZptConstants.SourceAnnotation.Namespace,
+                          ZptConstants.SourceAnnotation.SourceInfoAttribute,
+                          this.GetFileLocation());
+      }
+
+      if(this.GetAttribute(ZptConstants.SourceAnnotation.Namespace,
+                           ZptConstants.SourceAnnotation.EndTagLineNumber) == null)
+      {
+        this.SetAttribute(ZptConstants.SourceAnnotation.Namespace,
+                          ZptConstants.SourceAnnotation.SourceInfoAttribute,
+                          this.GetEndTagFileLocation());
+      }
+    }
 
     #endregion
 
@@ -546,7 +582,7 @@ namespace CSF.Zpt.Rendering
 
       _sourceInfoCreator = sourceInfoCreator?? new SourceInfoFactory();
 
-      _sourceFile = sourceFile;
+      _cachedSourceInfo = sourceFile;
       _isRoot = isRoot;
       _isImported = isImported;
       _ownerDocument = ownerDocument;
