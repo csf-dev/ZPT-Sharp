@@ -143,6 +143,7 @@
     <Compile Include="Metal\MacroSubstituter.cs" />
     <Compile Include="Metal\SlotToFill.cs" />
     <Compile Include="Metal\MacroExtensionSubstitutor.cs" />
+    <Compile Include="Rendering\SourceInfoFactory.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

@@ -104,6 +104,7 @@
     <Compile Include="Rendering\IRenderingSettingsFactory.cs" />
     <Compile Include="Rendering\IElementRenderer.cs" />
     <Compile Include="IPluginAssemblyLoader.cs" />
+    <Compile Include="Rendering\ISourceInfoFactory.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Target Name="BeforeBuild">

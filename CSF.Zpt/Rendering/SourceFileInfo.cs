@@ -122,6 +122,15 @@ namespace CSF.Zpt.Rendering
       return new CSF.Zpt.Tales.TemplateDirectory(this.FileInfo.Directory);
     }
 
+    /// <summary>
+    /// Returns a <see cref="System.String"/> that represents the current <see cref="CSF.Zpt.Rendering.SourceFileInfo"/>.
+    /// </summary>
+    /// <returns>A <see cref="System.String"/> that represents the current <see cref="CSF.Zpt.Rendering.SourceFileInfo"/>.</returns>
+    public override string ToString()
+    {
+      return FileInfo.FullName;
+    }
+
     #endregion
 
     #region constructors
@@ -138,6 +147,20 @@ namespace CSF.Zpt.Rendering
       }
 
       _osFile = fileInfo;
+    }
+
+    /// <summary>
+    /// Initializes a new instance of the <see cref="CSF.Zpt.Rendering.SourceFileInfo"/> class.
+    /// </summary>
+    /// <param name="filePath">File path.</param>
+    public SourceFileInfo(string filePath)
+    {
+      if(filePath == null)
+      {
+        throw new ArgumentNullException(nameof(filePath));
+      }
+
+      _osFile = new FileInfo(filePath);
     }
 
     #endregion

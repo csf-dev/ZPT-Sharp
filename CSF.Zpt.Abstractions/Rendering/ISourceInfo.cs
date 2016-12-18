@@ -42,6 +42,12 @@ namespace CSF.Zpt.Rendering
     /// <returns>The TALES representation of the current instance.</returns>
     object GetContainer();
 
+    /// <summary>
+    /// Returns a <see cref="System.String"/> that represents the current <see cref="CSF.Zpt.Rendering.ISourceInfo"/>.
+    /// </summary>
+    /// <returns>A <see cref="System.String"/> that represents the current <see cref="CSF.Zpt.Rendering.ISourceInfo"/>.</returns>
+    string ToString();
+
     #endregion
   }
 }
