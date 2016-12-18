@@ -7,17 +7,17 @@ namespace Test.CSF.Zpt.Rendering
   {
     public IRenderingContext Create(IZptElement element, IRenderingSettings options)
     {
-      throw new NotImplementedException();
+      throw new NotSupportedException();
     }
 
     public IRenderingContext Create(IZptElement element, IRenderingSettings options, object model)
     {
-      throw new NotImplementedException();
+      throw new NotSupportedException();
     }
 
     public void AddKeywordOption(string key, string value)
     {
-      throw new NotImplementedException();
+      throw new NotSupportedException();
     }
   }
 }
