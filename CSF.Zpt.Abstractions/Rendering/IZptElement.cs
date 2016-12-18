@@ -19,6 +19,7 @@ namespace CSF.Zpt.Rendering
     /// Gets information about the source file for the current element.
     /// </summary>
     /// <value>The source file.</value>
+    [Obsolete("Deprecated in favour of the method GetSourceInfo")]
     ISourceInfo SourceFile { get; }
 
     /// <summary>
@@ -61,6 +62,11 @@ namespace CSF.Zpt.Rendering
     #endregion
 
     #region methods
+
+    /// <summary>
+    /// Gets information about the source of the current element.
+    /// </summary>
+    ISourceInfo GetSourceInfo();
 
     /// <summary>
     /// Returns a <see cref="System.String"/> that represents the current <see cref="IZptElement"/>.

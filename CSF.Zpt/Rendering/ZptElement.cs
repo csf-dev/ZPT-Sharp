@@ -90,6 +90,16 @@ namespace CSF.Zpt.Rendering
     #region methods
 
     /// <summary>
+    /// Gets information about the source of the current element.
+    /// </summary>
+    public ISourceInfo GetSourceInfo()
+    {
+      // TODO: Write this implementation
+      throw new NotImplementedException();
+    }
+
+
+    /// <summary>
     /// Returns a <see cref="System.String"/> that represents the current <see cref="ZptElement"/>.
     /// </summary>
     /// <returns>
