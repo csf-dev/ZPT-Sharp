@@ -13,6 +13,7 @@ namespace CSF.Zpt.Rendering
     private ISourceInfo _sourceFile;
     private bool _isRoot, _isImported;
     private IZptDocument _ownerDocument;
+    private ISourceInfoFactory _sourceInfoCreator;
 
     #endregion
 
@@ -508,7 +509,8 @@ namespace CSF.Zpt.Rendering
         throw new ArgumentException(message);
       }
     }
-
+//
+//    private void 
 
     #endregion
 
@@ -526,19 +528,23 @@ namespace CSF.Zpt.Rendering
     /// <param name="isRoot">Whether or not this is the root element.</param>
     /// <param name="isImported">Whether or not this element is imported.</param>
     /// <param name="ownerDocument">The ZPT document which owns the element.</param>
+    /// <param name="sourceInfoCreator">A source-info factory.</param>
     public ZptElement(ISourceInfo sourceFile,
                       bool isRoot,
                       bool isImported,
-                      IZptDocument ownerDocument)
+                      IZptDocument ownerDocument,
+                      ISourceInfoFactory sourceInfoCreator = null)
     {
       if(sourceFile == null)
       {
         throw new ArgumentNullException(nameof(sourceFile));
       }
-        if(ownerDocument == null)
-        {
-            throw new ArgumentNullException(nameof(ownerDocument));
-        }
+      if(ownerDocument == null)
+      {
+          throw new ArgumentNullException(nameof(ownerDocument));
+      }
+
+      _sourceInfoCreator = sourceInfoCreator?? new SourceInfoFactory();
 
       _sourceFile = sourceFile;
       _isRoot = isRoot;

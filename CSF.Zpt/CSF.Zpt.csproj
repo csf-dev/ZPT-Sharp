@@ -99,7 +99,6 @@
     <Compile Include="Rendering\RenderingContextFactoryFactory.cs" />
     <Compile Include="Rendering\ContextVisitorFactory.cs" />
     <Compile Include="Rendering\NamedObjectWrapper.cs" />
-    <Compile Include="Metal\SourceAnnotator.cs" />
     <Compile Include="Resources\LogMessageFormats.Designer.cs">
       <DependentUpon>LogMessageFormats.resx</DependentUpon>
     </Compile>
@@ -138,12 +137,14 @@
     <Compile Include="BatchRendering\BatchRenderingOptionsValidator.cs" />
     <Compile Include="Metal\IMacroExpander.cs" />
     <Compile Include="Metal\IMacroFinder.cs" />
-    <Compile Include="Metal\ISourceAnnotator.cs" />
     <Compile Include="Metal\IMacroSubstituter.cs" />
     <Compile Include="Metal\MacroSubstituter.cs" />
     <Compile Include="Metal\SlotToFill.cs" />
     <Compile Include="Metal\MacroExtensionSubstitutor.cs" />
     <Compile Include="Rendering\SourceInfoFactory.cs" />
+    <Compile Include="SourceAnnotation\SourceAnnotator.cs" />
+    <Compile Include="SourceAnnotation\ISourceAnnotator.cs" />
+    <Compile Include="SourceAnnotation\SourceAnnotationTidyUpVisitor.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
@@ -195,5 +196,8 @@
     <None Include="CSF.Zpt.nuspec.pt" />
     <None Include="app.config.install.xdt" />
     <None Include="app.config.uninstall.xdt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="SourceAnnotation\" />
   </ItemGroup>
 </Project>

@@ -172,7 +172,7 @@ namespace CSF.Zpt
       public static readonly string ElementIsImported = "is-imported";
 
       /// <summary>
-      /// Initializes the <see cref="CSF.Zpt.ZptConstants+SourceAnnotation"/> class.
+      /// Initializes the <see cref="T:CSF.Zpt.ZptConstants+SourceAnnotation"/> class.
       /// </summary>
       static SourceAnnotation()
       {

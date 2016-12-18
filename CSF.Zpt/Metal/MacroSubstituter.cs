@@ -45,8 +45,11 @@ namespace CSF.Zpt.Metal
     public virtual IRenderingContext ReplaceMacroElement(IRenderingContext sourceContext,
                                                          IRenderingContext macroContext)
     {
-      var replacedSourceElement = sourceContext.Element.ReplaceWith(macroContext.Element);
-      return sourceContext.CreateSiblingContext(replacedSourceElement);
+      var replacement = sourceContext.Element.ReplaceWith(macroContext.Element);
+
+      replacement.MarkAsImported();
+
+      return sourceContext.CreateSiblingContext(replacement);
     }
 
     /// <summary>
@@ -85,6 +88,8 @@ namespace CSF.Zpt.Metal
                                    ZptConstants.Metal.FillSlotAttribute,
                                    fillSlotAttribute.Value);
       }
+
+      replacement.MarkAsImported();
 
       return replacement;
     }

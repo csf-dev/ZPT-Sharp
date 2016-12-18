@@ -102,7 +102,8 @@ namespace Test.CSF.Zpt.Metal
     {
       // Arrange
       _elementOne
-        .Setup(x => x.GetAttribute(ZptConstants.Metal.Namespace, ZptConstants.Metal.FillSlotAttribute))
+        .Setup(x => x.GetAttribute(ZptConstants.Metal.Namespace,
+                                   ZptConstants.Metal.FillSlotAttribute))
         .Returns((IZptAttribute) null);
 
       // Act
@@ -110,8 +111,30 @@ namespace Test.CSF.Zpt.Metal
 
       // Assert
       _elementThree
-        .Verify(x => x.SetAttribute(It.IsAny<ZptNamespace>(), It.IsAny<string>(), It.IsAny<string>()),
+        .Verify(x => x.SetAttribute(ZptConstants.Metal.Namespace,
+                                    ZptConstants.Metal.FillSlotAttribute,
+                                    It.IsAny<string>()),
                 Times.Never());
+    }
+
+    [Test]
+    public void FillSlot_marks_element_as_imported()
+    {
+      // Arrange
+      _elementThree
+        .Setup(x => x.SetAttribute(ZptConstants.SourceAnnotation.Namespace,
+                                   ZptConstants.SourceAnnotation.ElementIsImported,
+                                   Boolean.TrueString));
+
+      // Act
+      _sut.FillSlot(_slotAndFiller);
+
+      // Assert
+      _elementThree
+        .Verify(x => x.SetAttribute(ZptConstants.SourceAnnotation.Namespace,
+                                    ZptConstants.SourceAnnotation.ElementIsImported,
+                                    Boolean.TrueString),
+                Times.Once());
     }
 
     [Test]
@@ -371,6 +394,32 @@ namespace Test.CSF.Zpt.Metal
 
       // Assert
       Assert.AreSame(replacementElement, result.Element);
+    }
+
+    [Test]
+    public void ReplaceMacroElement_marks_the_element_as_imported()
+    {
+      // Arrange
+      var source = _contextOne.Object;
+      var macro = _contextTwo.Object;
+      var sourceElement = _elementOne.Object;
+      var macroElement = _elementTwo.Object;
+      var replacementElement = _elementThree.Object;
+
+      _elementThree
+        .Setup(x => x.SetAttribute(ZptConstants.SourceAnnotation.Namespace,
+                                   ZptConstants.SourceAnnotation.ElementIsImported,
+                                   Boolean.TrueString));
+
+      // Act
+      _sut.ReplaceMacroElement(source, macro);
+
+      // Assert
+      _elementThree
+        .Verify(x => x.SetAttribute(ZptConstants.SourceAnnotation.Namespace,
+                                    ZptConstants.SourceAnnotation.ElementIsImported,
+                                    Boolean.TrueString),
+                Times.Once());
     }
 
     #endregion

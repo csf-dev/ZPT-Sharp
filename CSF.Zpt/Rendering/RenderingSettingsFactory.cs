@@ -16,6 +16,7 @@ namespace CSF.Zpt.Rendering
       typeof(CSF.Zpt.Tal.TalVisitor),
       typeof(CSF.Zpt.Metal.MetalTidyUpVisitor),
       typeof(CSF.Zpt.Tal.TalTidyUpVisitor),
+      typeof(CSF.Zpt.SourceAnnotation.SourceAnnotationTidyUpVisitor),
     };
 
     /// <summary>

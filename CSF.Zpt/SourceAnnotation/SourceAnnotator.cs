@@ -3,10 +3,10 @@ using CSF.Zpt.Rendering;
 using System.IO;
 using CSF.IO;
 
-namespace CSF.Zpt.Metal
+namespace CSF.Zpt.SourceAnnotation
 {
   /// <summary>
-  /// Performs source annotation tasks upon METAL elements.
+  /// Performs source annotation tasks upon ZPT elements.
   /// </summary>
   public class SourceAnnotator : ISourceAnnotator
   {
@@ -207,7 +207,7 @@ namespace CSF.Zpt.Metal
     #region constructor
 
     /// <summary>
-    /// Initializes a new instance of the <see cref="CSF.Zpt.Metal.SourceAnnotator"/> class.
+    /// Initializes a new instance of the <see cref="CSF.Zpt.SourceAnnotation.SourceAnnotator"/> class.
     /// </summary>
     /// <param name="renderExtraText">
     /// If set to <c>true</c> then extra text indicating the nature of a context-switch is rendered in the comments.

@@ -1,7 +1,7 @@
 ﻿using System;
 using CSF.Zpt.Rendering;
 
-namespace CSF.Zpt.Metal
+namespace CSF.Zpt.SourceAnnotation
 {
   /// <summary>
   /// Performs source annotation tasks upon METAL elements.
