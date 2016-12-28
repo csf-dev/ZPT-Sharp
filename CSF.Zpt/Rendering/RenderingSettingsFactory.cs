@@ -12,11 +12,12 @@ namespace CSF.Zpt.Rendering
     #region constants
 
     private static readonly Type[] DEFAULT_VISITOR_TYPES = new Type[] {
+      typeof(CSF.Zpt.SourceAnnotation.SourceInfoBurnInVisitor),
       typeof(CSF.Zpt.Metal.MetalVisitor),
       typeof(CSF.Zpt.Tal.TalVisitor),
       typeof(CSF.Zpt.Metal.MetalTidyUpVisitor),
       typeof(CSF.Zpt.Tal.TalTidyUpVisitor),
-      typeof(CSF.Zpt.SourceAnnotation.SourceAnnotationTidyUpVisitor),
+      typeof(CSF.Zpt.SourceAnnotation.SourceInfoTidyUpVisitor),
     };
 
     /// <summary>

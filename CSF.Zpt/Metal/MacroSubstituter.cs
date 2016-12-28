@@ -2,6 +2,7 @@
 using CSF.Zpt.Rendering;
 using System.Collections.Generic;
 using System.Linq;
+using CSF.Zpt.SourceAnnotation;
 
 namespace CSF.Zpt.Metal
 {
@@ -30,6 +31,8 @@ namespace CSF.Zpt.Metal
                                                        IList<IRenderingContext> macroStack)
     {
       var slotsToFill = GetSlotsToFill(sourceContext, macroContext, macroStack);
+
+      macroContext.Element.RecursivelyCacheSourceInformationInAttributes();
 
       FillSlots(slotsToFill);
 
@@ -78,6 +81,8 @@ namespace CSF.Zpt.Metal
     {
       var slot = slotAndFiller.Slot.Element;
       var filler = slotAndFiller.Filler.Element;
+
+      filler.RecursivelyCacheSourceInformationInAttributes();
 
       var fillSlotAttribute = slot.GetMetalAttribute(ZptConstants.Metal.FillSlotAttribute);
       var replacement = slot.ReplaceWith(filler);

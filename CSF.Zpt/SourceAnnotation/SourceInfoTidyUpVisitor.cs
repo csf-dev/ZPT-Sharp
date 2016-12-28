@@ -6,7 +6,7 @@ namespace CSF.Zpt.SourceAnnotation
   /// <summary>
   /// Context visitor that tidies up ZPT elements, removing any elements or attributes that should not be rendered.
   /// </summary>
-  public class SourceAnnotationTidyUpVisitor : NoOpVisitor
+  public class SourceInfoTidyUpVisitor : NoOpVisitor
   {
     #region overrides
 
@@ -17,6 +17,11 @@ namespace CSF.Zpt.SourceAnnotation
     /// <param name="context">The rendering context to visit.</param>
     public override IRenderingContext[] VisitContext(IRenderingContext context)
     {
+      if(context == null)
+      {
+        throw new ArgumentNullException(nameof(context));
+      }
+
       context.Element.PurgeSourceAnnotationAttributes();
 
       return new [] { context };

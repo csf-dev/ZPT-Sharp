@@ -144,7 +144,8 @@
     <Compile Include="Rendering\SourceInfoFactory.cs" />
     <Compile Include="SourceAnnotation\SourceAnnotator.cs" />
     <Compile Include="SourceAnnotation\ISourceAnnotator.cs" />
-    <Compile Include="SourceAnnotation\SourceAnnotationTidyUpVisitor.cs" />
+    <Compile Include="SourceAnnotation\SourceInfoBurnInVisitor.cs" />
+    <Compile Include="SourceAnnotation\SourceInfoTidyUpVisitor.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
