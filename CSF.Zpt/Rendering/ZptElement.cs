@@ -49,7 +49,19 @@ namespace CSF.Zpt.Rendering
     public virtual bool IsImported
     {
       get {
-        return _isImported;
+        if(_isImported)
+        {
+          return true;
+        }
+
+        var attrib = GetAttribute(ZptConstants.SourceAnnotation.Namespace,
+                                  ZptConstants.SourceAnnotation.ElementIsImported);
+        if(attrib != null && attrib.Value == Boolean.TrueString)
+        {
+          return true;
+        }
+
+        return false;
       }
     }
 
