@@ -58,11 +58,15 @@ namespace CSF.Zpt.SourceAnnotation
       }
       else if(element.IsImported)
       {
-//        AddAnnotation(targetContext);
+        AnnotateImportedElement(targetContext);
       }
       else if(element.GetMetalAttribute(ZptConstants.Metal.DefineMacroAttribute) != null)
       {
-//        AddAnnotation(targetContext);
+        AnnotateDefineMacro(targetContext);
+      }
+      else if(element.GetMetalAttribute(ZptConstants.Metal.DefineSlotAttribute) != null)
+      {
+        AnnotateDefineSlot(targetContext);
       }
 
     }
@@ -77,6 +81,45 @@ namespace CSF.Zpt.SourceAnnotation
       var fileLocation = context.Element.GetFileLocation();
 
       var comment = _formatter.GetRootElementComment(source, fileLocation);
+      context.Element.AddCommentBefore(comment);
+    }
+
+    /// <summary>
+    /// Adds source annotation for an element which contains a macro-definition attribute.
+    /// </summary>
+    /// <param name="context">The rendering context to be annotated.</param>
+    public void AnnotateDefineMacro(IRenderingContext context)
+    {
+      var source = GetSource(context);
+      var fileLocation = context.Element.GetFileLocation();
+
+      var comment = _formatter.GetDefineMacroComment(source, fileLocation);
+      context.Element.AddCommentBefore(comment);
+    }
+
+    /// <summary>
+    /// Adds source annotation for an element which contains a slot-definition attribute.
+    /// </summary>
+    /// <param name="context">The rendering context to be annotated.</param>
+    public void AnnotateDefineSlot(IRenderingContext context)
+    {
+      var source = GetSource(context);
+      var fileLocation = context.Element.GetFileLocation();
+
+      var comment = _formatter.GetDefineSlotComment(source, fileLocation);
+      context.Element.AddCommentAfter(comment);
+    }
+
+    /// <summary>
+    /// Adds source annotation for an element which contains a slot-definition attribute.
+    /// </summary>
+    /// <param name="context">The rendering context to be annotated.</param>
+    public void AnnotateImportedElement(IRenderingContext context)
+    {
+      var source = GetSource(context);
+      var fileLocation = context.Element.GetFileLocation();
+
+      var comment = _formatter.GetImportedElementComment(source, fileLocation);
       context.Element.AddCommentBefore(comment);
     }
 

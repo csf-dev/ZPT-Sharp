@@ -4,6 +4,7 @@ using Moq;
 using CSF.Zpt.Rendering;
 using CSF.Zpt.SourceAnnotation;
 using Ploeh.AutoFixture;
+using CSF.Zpt;
 
 namespace Test.CSF.Zpt.SourceAnnotation
 {
@@ -88,6 +89,84 @@ namespace Test.CSF.Zpt.SourceAnnotation
 
       // Assert
       _element.Verify(x => x.AddCommentBefore(commentString), Times.Once());
+      _element.Verify(x => x.AddCommentAfter(It.IsAny<string>()), Times.Never());
+      _element.Verify(x => x.AddCommentInside(It.IsAny<string>()), Times.Never());
+    }
+
+    [Test]
+    public void WriteAnnotationIfAppropriate_writes_annotation_before_macro_definition()
+    {
+      // Arrange
+      _element.SetupGet(x => x.IsRoot).Returns(false);
+      _element.SetupGet(x => x.IsImported).Returns(false);
+      var attrib = Mock.Of<IZptAttribute>();
+      _element
+        .Setup(x => x.GetAttribute(ZptConstants.Metal.Namespace,
+                                   ZptConstants.Metal.DefineMacroAttribute))
+        .Returns(attrib);
+
+      var commentString = _autofixture.Create<string>();
+
+      _formatter
+        .Setup(x => x.GetDefineMacroComment(_source, _startLine))
+        .Returns(commentString);
+
+      // Act
+      _sut.WriteAnnotationIfAppropriate(_context);
+
+      // Assert
+      _element.Verify(x => x.AddCommentBefore(commentString), Times.Once());
+      _element.Verify(x => x.AddCommentAfter(It.IsAny<string>()), Times.Never());
+      _element.Verify(x => x.AddCommentInside(It.IsAny<string>()), Times.Never());
+    }
+
+    [Test]
+    public void WriteAnnotationIfAppropriate_writes_annotation_after_slot_definition()
+    {
+      // Arrange
+      _element.SetupGet(x => x.IsRoot).Returns(false);
+      _element.SetupGet(x => x.IsImported).Returns(false);
+      var attrib = Mock.Of<IZptAttribute>();
+      _element
+        .Setup(x => x.GetAttribute(ZptConstants.Metal.Namespace,
+                                   ZptConstants.Metal.DefineSlotAttribute))
+        .Returns(attrib);
+
+      var commentString = _autofixture.Create<string>();
+
+      _formatter
+        .Setup(x => x.GetDefineSlotComment(_source, _startLine))
+        .Returns(commentString);
+
+      // Act
+      _sut.WriteAnnotationIfAppropriate(_context);
+
+      // Assert
+      _element.Verify(x => x.AddCommentAfter(commentString), Times.Once());
+      _element.Verify(x => x.AddCommentBefore(It.IsAny<string>()), Times.Never());
+      _element.Verify(x => x.AddCommentInside(It.IsAny<string>()), Times.Never());
+    }
+
+    [Test]
+    public void WriteAnnotationIfAppropriate_writes_annotation_before_imported_element()
+    {
+      // Arrange
+      _element.SetupGet(x => x.IsRoot).Returns(false);
+      _element.SetupGet(x => x.IsImported).Returns(true);
+
+      var commentString = _autofixture.Create<string>();
+
+      _formatter
+        .Setup(x => x.GetImportedElementComment(_source, _startLine))
+        .Returns(commentString);
+
+      // Act
+      _sut.WriteAnnotationIfAppropriate(_context);
+
+      // Assert
+      _element.Verify(x => x.AddCommentBefore(commentString), Times.Once());
+      _element.Verify(x => x.AddCommentAfter(It.IsAny<string>()), Times.Never());
+      _element.Verify(x => x.AddCommentInside(It.IsAny<string>()), Times.Never());
     }
 
     #endregion

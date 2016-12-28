@@ -15,6 +15,30 @@ namespace CSF.Zpt.SourceAnnotation
     /// <param name="source">The source information for the file.</param>
     /// <param name="lineNumber">The line number within the file.</param>
     string GetRootElementComment(string source, string lineNumber);
+
+    /// <summary>
+    /// Gets the formatted comment for a <c>define-macro</c> attribute.
+    /// </summary>
+    /// <returns>The formatted comment.</returns>
+    /// <param name="source">The source information for the file.</param>
+    /// <param name="lineNumber">The line number within the file.</param>
+    string GetDefineMacroComment(string source, string lineNumber);
+
+    /// <summary>
+    /// Gets the formatted comment for a <c>define-slot</c> attribute.
+    /// </summary>
+    /// <returns>The formatted comment.</returns>
+    /// <param name="source">The source information for the file.</param>
+    /// <param name="lineNumber">The line number within the file.</param>
+    string GetDefineSlotComment(string source, string lineNumber);
+
+    /// <summary>
+    /// Gets the formatted comment for an imported element.
+    /// </summary>
+    /// <returns>The formatted comment.</returns>
+    /// <param name="source">The source information for the file.</param>
+    /// <param name="lineNumber">The line number within the file.</param>
+    string GetImportedElementComment(string source, string lineNumber);
   }
 }
 

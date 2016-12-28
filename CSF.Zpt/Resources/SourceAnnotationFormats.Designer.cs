@@ -46,9 +46,15 @@ namespace CSF.Zpt.Resources {
             }
         }
         
-        internal static string RootElementComment {
+        internal static string BaseCommentFormat {
             get {
-                return ResourceManager.GetString("RootElementComment", resourceCulture);
+                return ResourceManager.GetString("BaseCommentFormat", resourceCulture);
+            }
+        }
+        
+        internal static string SourceWithLineNumberFormat {
+            get {
+                return ResourceManager.GetString("SourceWithLineNumberFormat", resourceCulture);
             }
         }
     }
