@@ -96,6 +96,17 @@ namespace CSF.Zpt.Rendering
       return String.Empty;
     }
 
+    /// <summary>
+    /// Gets a name for the current instance, relative to a given root name.  The meaning of relative is up to the
+    /// implementation.
+    /// </summary>
+    /// <returns>The relative name.</returns>
+    /// <param name="root">The root name.</param>
+    public string GetRelativeName(string root)
+    {
+      return FullName;
+    }
+
     #endregion
 
     #region constructors

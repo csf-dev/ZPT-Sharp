@@ -33,7 +33,7 @@ namespace CSF.Zpt.SourceAnnotation
 
     #region fields
 
-    private bool _renderExtraText;
+    private readonly ICommentFormatter _formatter;
 
     #endregion
 
@@ -54,18 +54,71 @@ namespace CSF.Zpt.SourceAnnotation
 
       if(element.IsRoot)
       {
-        AddAnnotation(targetContext, skipLineNumber: true);
+        AnnotateRootElement(targetContext);
       }
       else if(element.IsImported)
       {
-        AddAnnotation(targetContext);
+//        AddAnnotation(targetContext);
       }
       else if(element.GetMetalAttribute(ZptConstants.Metal.DefineMacroAttribute) != null)
       {
-        AddAnnotation(targetContext);
+//        AddAnnotation(targetContext);
       }
 
     }
+
+    /// <summary>
+    /// Adds source annotation for the root element in a document.
+    /// </summary>
+    /// <param name="context">The rendering context to be annotated.</param>
+    public void AnnotateRootElement(IRenderingContext context)
+    {
+      var source = GetSource(context);
+      var fileLocation = context.Element.GetFileLocation();
+
+      var comment = _formatter.GetRootElementComment(source, fileLocation);
+      context.Element.AddCommentBefore(comment);
+    }
+
+    private string GetSource(IRenderingContext context)
+    {
+      return context.Element.GetSourceInfo().GetRelativeName(context.SourceAnnotationRootPath);
+    }
+
+//    private string GetSource(IRenderingContext context)
+//    {
+//      var sourceInfo = context.Element.GetSourceInfo();
+//
+//      var sourceFile = sourceInfo as SourceFileInfo;
+//      if(sourceFile != null)
+//      {
+//        return GetSource(sourceFile, context);
+//      }
+//      else
+//      {
+//        return sourceInfo.FullName;
+//      }
+//    }
+//
+//    private string GetSource(SourceFileInfo sourceInfo, IRenderingContext context)
+//    {
+//      if(context.SourceAnnotationRootPath == null
+//         || !Directory.Exists(context.SourceAnnotationRootPath)
+//         || !sourceInfo.FileInfo.Exists)
+//      {
+//        return sourceInfo.FullName;
+//      }
+//
+//      var root = new DirectoryInfo(context.SourceAnnotationRootPath);
+//      if(!sourceInfo.FileInfo.IsChildOf(root))
+//      {
+//        return sourceInfo.FullName;
+//      }
+//
+//      var source = sourceInfo.FileInfo.GetRelativePath(root);
+//    }
+
+
 
 //    /// <summary>
 //    /// Processes source annotation and adds comments before/after the <paramref name="targetContext"/> if appropriate.
@@ -133,85 +186,88 @@ namespace CSF.Zpt.SourceAnnotation
 //      }
 //    }
 
-    private void AddAnnotation(IRenderingContext targetContext,
-                               bool skipLineNumber = false,
-                               bool beforeElement = true,
-                               IRenderingContext originalContext = null,
-                               IRenderingContext replacementContext = null,
-                               string extraText = null,
-                               bool useEndTagLocation = false)
-    {
-      var bodyContext = originalContext?? targetContext;
-      var body = CreateCommentBody(bodyContext, skipLineNumber, extraText, useEndTagLocation, replacementContext);
+//    private void AddAnnotation(IRenderingContext targetContext,
+//                               bool skipLineNumber = false,
+//                               bool beforeElement = true,
+//                               IRenderingContext originalContext = null,
+//                               IRenderingContext replacementContext = null,
+//                               string extraText = null,
+//                               bool useEndTagLocation = false)
+//    {
+//      
+//
+//
+////      var bodyContext = originalContext?? targetContext;
+////      var body = CreateCommentBody(bodyContext, skipLineNumber, extraText, useEndTagLocation, replacementContext);
+////
+////      var comment = FormatComment(body);
+////
+////      if(beforeElement
+////         && ((!targetContext.Element.IsRoot && targetContext.Element.HasParent)
+////             || targetContext.Element.CanWriteCommentWithoutParent))
+////      {
+////        targetContext.Element.AddCommentBefore(comment);
+////      }
+////      else if(beforeElement)
+////      {
+////        targetContext.Element.AddCommentInside(comment);
+////      }
+////      else
+////      {
+////        targetContext.Element.AddCommentAfter(comment);
+////      }
+//    }
 
-      var comment = FormatComment(body);
+//    private string FormatComment(string commentBody)
+//    {
+//      return String.Format(COMMENT_FORMAT,
+//                           new String(BORDER_CHARACTER, BORDER_CHARACTER_WIDTH),
+//                           commentBody);
+//    }
 
-      if(beforeElement
-         && ((!targetContext.Element.IsRoot && targetContext.Element.HasParent)
-             || targetContext.Element.CanWriteCommentWithoutParent))
-      {
-        targetContext.Element.AddCommentBefore(comment);
-      }
-      else if(beforeElement)
-      {
-        targetContext.Element.AddCommentInside(comment);
-      }
-      else
-      {
-        targetContext.Element.AddCommentAfter(comment);
-      }
-    }
-
-    private string FormatComment(string commentBody)
-    {
-      return String.Format(COMMENT_FORMAT,
-                           new String(BORDER_CHARACTER, BORDER_CHARACTER_WIDTH),
-                           commentBody);
-    }
-
-    private string CreateCommentBody(IRenderingContext targetContext,
-                                     bool skipLineNumber,
-                                     string extraText,
-                                     bool useEndTagPosition,
-                                     IRenderingContext replacementContext)
-    {
-      IZptElement
-        targetElement = targetContext.Element,
-        sourceElement = replacementContext?.Element ?? targetContext.Element;
-      string
-        fullFilename = targetContext.Element.GetSourceInfo().FullName,
-        filename,
-        filePosition = useEndTagPosition? sourceElement.GetEndTagFileLocation() : sourceElement.GetFileLocation(),
-        previousElement;
-
-      if(!String.IsNullOrEmpty(targetContext.SourceAnnotationRootPath)
-         && Directory.Exists(targetContext.SourceAnnotationRootPath)
-         && File.Exists(fullFilename))
-      {
-        var root = new DirectoryInfo(targetContext.SourceAnnotationRootPath);
-        var file = new FileInfo(fullFilename);
-        filename = file.IsChildOf(root)? file.GetRelativePath(root).Substring(1) : fullFilename;
-      }
-      else
-      {
-        filename = fullFilename;
-      }
-
-      filename = filename.Replace(Path.DirectorySeparatorChar.ToString(), "/");
-
-      if((!targetElement.IsRoot && targetElement.HasParent) || targetElement.CanWriteCommentWithoutParent)
-      {
-        previousElement = String.Empty;
-      }
-      else
-      {
-        previousElement = PREVIOUS_ELEMENT;
-      }
-
-      var body = (skipLineNumber || String.IsNullOrEmpty(filePosition))? filename : String.Format(POSITION_FORMAT, filename, filePosition);
-      var extra = _renderExtraText? extraText?? String.Empty : String.Empty;
-      return String.Concat(previousElement, extra, body);
-    }
+//    private string CreateCommentBody(IRenderingContext targetContext,
+//                                     bool skipLineNumber,
+//                                     string extraText,
+//                                     bool useEndTagPosition,
+//                                     IRenderingContext replacementContext)
+//    {
+//      IZptElement
+//        targetElement = targetContext.Element,
+//        sourceElement = replacementContext?.Element ?? targetContext.Element;
+//      string
+//        fullFilename = targetContext.Element.GetSourceInfo().FullName,
+//        filename,
+//        filePosition = useEndTagPosition? sourceElement.GetEndTagFileLocation() : sourceElement.GetFileLocation(),
+//        previousElement;
+//
+//      if(!String.IsNullOrEmpty(targetContext.SourceAnnotationRootPath)
+//         && Directory.Exists(targetContext.SourceAnnotationRootPath)
+//         && File.Exists(fullFilename))
+//      {
+//        var root = new DirectoryInfo(targetContext.SourceAnnotationRootPath);
+//        var file = new FileInfo(fullFilename);
+//        filename = file.IsChildOf(root)? file.GetRelativePath(root).Substring(1) : fullFilename;
+//      }
+//      else
+//      {
+//        filename = fullFilename;
+//      }
+//
+//      filename = filename.Replace(Path.DirectorySeparatorChar.ToString(), "/");
+//
+//      if((!targetElement.IsRoot && targetElement.HasParent) || targetElement.CanWriteCommentWithoutParent)
+//      {
+//        previousElement = String.Empty;
+//      }
+//      else
+//      {
+//        previousElement = PREVIOUS_ELEMENT;
+//      }
+//
+//      var body = (skipLineNumber || String.IsNullOrEmpty(filePosition))? filename : String.Format(POSITION_FORMAT, filename, filePosition);
+//      var extra = _renderExtraText? extraText?? String.Empty : String.Empty;
+//      return String.Concat(previousElement, extra, body);
+//    }
 
     #endregion
 
@@ -220,12 +276,10 @@ namespace CSF.Zpt.SourceAnnotation
     /// <summary>
     /// Initializes a new instance of the <see cref="CSF.Zpt.SourceAnnotation.SourceAnnotator"/> class.
     /// </summary>
-    /// <param name="renderExtraText">
-    /// If set to <c>true</c> then extra text indicating the nature of a context-switch is rendered in the comments.
-    /// </param>
-    public SourceAnnotator(bool renderExtraText = false)
+    /// <param name="formatter">The source annotation comment formatter.</param>
+    public SourceAnnotator(ICommentFormatter formatter = null)
     {
-      _renderExtraText = renderExtraText;
+      _formatter = formatter?? new CommentFormatter();
     }
 
     #endregion

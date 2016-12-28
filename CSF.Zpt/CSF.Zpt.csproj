@@ -146,6 +146,10 @@
     <Compile Include="SourceAnnotation\SourceInfoBurnInVisitor.cs" />
     <Compile Include="SourceAnnotation\SourceInfoTidyUpVisitor.cs" />
     <Compile Include="SourceAnnotation\SourceAnnotationVisitor.cs" />
+    <Compile Include="SourceAnnotation\CommentFormatter.cs" />
+    <Compile Include="Resources\SourceAnnotationFormats.Designer.cs">
+      <DependentUpon>SourceAnnotationFormats.resx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
@@ -183,6 +187,10 @@
     <EmbeddedResource Include="Resources\LogMessageFormats.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>LogMessageFormats.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\SourceAnnotationFormats.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>SourceAnnotationFormats.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
   <Target Name="BeforeBuild">

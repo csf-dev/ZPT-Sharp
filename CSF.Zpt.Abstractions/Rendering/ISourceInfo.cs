@@ -48,6 +48,14 @@ namespace CSF.Zpt.Rendering
     /// <returns>A <see cref="System.String"/> that represents the current <see cref="CSF.Zpt.Rendering.ISourceInfo"/>.</returns>
     string ToString();
 
+    /// <summary>
+    /// Gets a name for the current instance, relative to a given root name.  The meaning of relative is up to the
+    /// implementation.
+    /// </summary>
+    /// <returns>The relative name.</returns>
+    /// <param name="root">The root name.</param>
+    string GetRelativeName(string root);
+
     #endregion
   }
 }
