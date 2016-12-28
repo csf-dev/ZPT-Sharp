@@ -39,6 +39,14 @@ namespace CSF.Zpt.SourceAnnotation
     /// <param name="source">The source information for the file.</param>
     /// <param name="lineNumber">The line number within the file.</param>
     string GetImportedElementComment(string source, string lineNumber);
+
+    /// <summary>
+    /// Gets the formatted comment for displaying after an imported element.
+    /// </summary>
+    /// <returns>The formatted comment.</returns>
+    /// <param name="source">The source information for the file.</param>
+    /// <param name="lineNumber">The line number within the file.</param>
+    string GetAfterImportedElementComment(string source, string lineNumber);
   }
 }
 

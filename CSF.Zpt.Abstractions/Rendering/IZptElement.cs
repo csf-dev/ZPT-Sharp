@@ -246,6 +246,18 @@ namespace CSF.Zpt.Rendering
     string GetEndTagFileLocation();
 
     /// <summary>
+    /// Gets the file location (typically a line number) for the end tag of an 'original context'.
+    /// </summary>
+    /// <returns>The end tag file location.</returns>
+    string GetOriginalContextEndTagLocation();
+
+    /// <summary>
+    /// Gets information about the source of the current element.
+    /// </summary>
+    /// <returns>The end tag file location.</returns>
+    ISourceInfo GetOriginalContextSourceInfo();
+
+    /// <summary>
     /// Omits the current element, replacing it with its children.
     /// </summary>
     /// <returns>
@@ -284,6 +296,12 @@ namespace CSF.Zpt.Rendering
     /// </summary>
     /// <returns>The full file path and location.</returns>
     string GetFullFilePathAndLocation();
+
+    /// <summary>
+    /// Marks the current element as being imported into its parent document (IE: it represents a context switch).
+    /// </summary>
+    /// <param name="originalElement">The original element.</param>
+    void MarkAsImported(IZptElement originalElement);
 
     /// <summary>
     /// Writes information to the underlying element's attributes recording its source information.

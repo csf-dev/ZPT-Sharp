@@ -18,8 +18,8 @@ namespace Test.CSF.Zpt.SourceAnnotation
     private IRenderingContext _context;
     private Mock<ICommentFormatter> _formatter;
     private ISourceAnnotator _sut;
-    private ISourceInfo _sourceInfo;
-    private string _source, _startLine, _endLine;
+    private ISourceInfo _sourceInfo, _originalSourceInfo;
+    private string _source, _originalSource, _startLine, _endLine;
 
     #endregion
 
@@ -31,9 +31,11 @@ namespace Test.CSF.Zpt.SourceAnnotation
       _autofixture = new Fixture();
 
       _source = _autofixture.Create<string>();
+      _originalSource = _autofixture.Create<string>();
       _startLine = _autofixture.Create<string>();
       _endLine = _autofixture.Create<string>();
       _sourceInfo = Mock.Of<ISourceInfo>(x => x.GetRelativeName(It.IsAny<string>()) == _source);
+      _originalSourceInfo = Mock.Of<ISourceInfo>(x => x.GetRelativeName(It.IsAny<string>()) == _originalSource);
 
       _element = new Mock<IZptElement>();
       _element.Setup(x => x.AddCommentBefore(It.IsAny<string>()));
@@ -41,7 +43,8 @@ namespace Test.CSF.Zpt.SourceAnnotation
       _element.Setup(x => x.AddCommentInside(It.IsAny<string>()));
       _element.Setup(x => x.GetSourceInfo()).Returns(_sourceInfo);
       _element.Setup(x => x.GetFileLocation()).Returns(_startLine);
-      _element.Setup(x => x.GetEndTagFileLocation()).Returns(_endLine);
+      _element.Setup(x => x.GetOriginalContextEndTagLocation()).Returns(_endLine);
+      _element.Setup(x => x.GetOriginalContextSourceInfo()).Returns(_originalSourceInfo);
 
       _context = Mock.Of<IRenderingContext>(x => x.Element == _element.Object
                                                  && x.RenderingOptions.AddSourceFileAnnotation == true);
@@ -165,7 +168,27 @@ namespace Test.CSF.Zpt.SourceAnnotation
 
       // Assert
       _element.Verify(x => x.AddCommentBefore(commentString), Times.Once());
-      _element.Verify(x => x.AddCommentAfter(It.IsAny<string>()), Times.Never());
+      _element.Verify(x => x.AddCommentInside(It.IsAny<string>()), Times.Never());
+    }
+
+    [Test]
+    public void WriteAnnotationIfAppropriate_writes_annotation_after_imported_element()
+    {
+      // Arrange
+      _element.SetupGet(x => x.IsRoot).Returns(false);
+      _element.SetupGet(x => x.IsImported).Returns(true);
+
+      var commentString = _autofixture.Create<string>();
+
+      _formatter
+        .Setup(x => x.GetAfterImportedElementComment(_originalSource, _endLine))
+        .Returns(commentString);
+
+      // Act
+      _sut.WriteAnnotationIfAppropriate(_context);
+
+      // Assert
+      _element.Verify(x => x.AddCommentAfter(commentString), Times.Once());
       _element.Verify(x => x.AddCommentInside(It.IsAny<string>()), Times.Never());
     }
 

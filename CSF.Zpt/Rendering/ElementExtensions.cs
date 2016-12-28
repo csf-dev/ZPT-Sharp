@@ -159,22 +159,6 @@ namespace CSF.Zpt.Rendering
     #region source annotation extension methods
 
     /// <summary>
-    /// Marks the given element as being imported into its parent document (IE: it represents a context switch).
-    /// </summary>
-    /// <param name="element">The element to mark as imported.</param>
-    public static void MarkAsImported(this IZptElement element)
-    {
-      if(element == null)
-      {
-        throw new ArgumentNullException(nameof(element));
-      }
-
-      element.SetAttribute(ZptConstants.SourceAnnotation.Namespace,
-                           ZptConstants.SourceAnnotation.ElementIsImported,
-                           Boolean.TrueString);
-    }
-
-    /// <summary>
     /// Recursively calls <see cref="IZptElement.CacheSourceInformationInAttributes"/> on a given element and
     /// every one of its children.
     /// </summary>

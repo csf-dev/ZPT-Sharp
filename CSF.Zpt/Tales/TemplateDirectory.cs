@@ -103,7 +103,6 @@ namespace CSF.Zpt.Tales
 
     private ITemplateFileFactory GetTemplateFactory(Rendering.IRenderingContext currentContext)
     {
-      var currentDocType = currentContext.Element.ZptDocumentType;
       return currentContext.RenderingOptions.GetTemplateFileFactory();
     }
 

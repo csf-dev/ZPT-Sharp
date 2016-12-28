@@ -116,16 +116,29 @@ namespace CSF.Zpt.SourceAnnotation
     /// <param name="context">The rendering context to be annotated.</param>
     public void AnnotateImportedElement(IRenderingContext context)
     {
+      // Before
       var source = GetSource(context);
       var fileLocation = context.Element.GetFileLocation();
 
-      var comment = _formatter.GetImportedElementComment(source, fileLocation);
-      context.Element.AddCommentBefore(comment);
+      var beforeComment = _formatter.GetImportedElementComment(source, fileLocation);
+      context.Element.AddCommentBefore(beforeComment);
+
+      // After
+      var originalSource = GetOriginalSource(context);
+      var originalFileLocation = context.Element.GetOriginalContextEndTagLocation();
+
+      var afterComment = _formatter.GetAfterImportedElementComment(originalSource, originalFileLocation);
+      context.Element.AddCommentAfter(afterComment);
     }
 
     private string GetSource(IRenderingContext context)
     {
       return context.Element.GetSourceInfo().GetRelativeName(context.SourceAnnotationRootPath);
+    }
+
+    private string GetOriginalSource(IRenderingContext context)
+    {
+      return context.Element.GetOriginalContextSourceInfo().GetRelativeName(context.SourceAnnotationRootPath);
     }
 
 //    private string GetSource(IRenderingContext context)

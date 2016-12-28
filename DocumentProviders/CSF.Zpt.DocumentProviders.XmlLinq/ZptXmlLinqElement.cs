@@ -195,7 +195,7 @@ namespace CSF.Zpt.DocumentProviders
 
       this.Node.ReplaceWith(newNode);
 
-      return interpretContentAsStructure? new[] { new ZptXmlLinqElement(newNode, this.GetSourceInfo(), this.OwnerDocument) } : new IZptElement[0];
+      return interpretContentAsStructure? new[] { new ZptXmlLinqElement(newNode, UnknownSourceFileInfo.Instance, this.OwnerDocument) } : new IZptElement[0];
     }
 
     /// <summary>
@@ -530,10 +530,10 @@ namespace CSF.Zpt.DocumentProviders
     /// Gets the file location (typically a line number) for the current instance.
     /// </summary>
     /// <returns>The file location.</returns>
-    public override string GetFileLocation()
+    protected override string GetNativeFileLocation()
     {
       var lineNumber = this.GetLineNumber();
-      return lineNumber.HasValue? lineNumber.Value.ToString() : null;
+      return lineNumber.HasValue? lineNumber.Value.ToString() : String.Empty;
     }
 
     /// <summary>
@@ -557,9 +557,9 @@ namespace CSF.Zpt.DocumentProviders
     /// Gets the file location (typically a line number) for the end tag matched with the current instance.
     /// </summary>
     /// <returns>The end tag file location.</returns>
-    public override string GetEndTagFileLocation()
+    protected override string GetNativeEndTagFileLocation()
     {
-      string output = null;
+      string output = String.Empty;
 
       int? startTagLineNumber = GetLineNumber();
 

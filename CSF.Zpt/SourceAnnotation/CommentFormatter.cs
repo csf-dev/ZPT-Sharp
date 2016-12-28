@@ -59,6 +59,17 @@ namespace CSF.Zpt.SourceAnnotation
       return GetStandardComment(source, lineNumber);
     }
 
+    /// <summary>
+    /// Gets the formatted comment for displaying after an imported element.
+    /// </summary>
+    /// <returns>The formatted comment.</returns>
+    /// <param name="source">The source information for the file.</param>
+    /// <param name="lineNumber">The line number within the file.</param>
+    public string GetAfterImportedElementComment(string source, string lineNumber)
+    {
+      return GetStandardComment(source, lineNumber);
+    }
+
     private string GetStandardComment(string source, string lineNumber)
     {
       if(source == null)

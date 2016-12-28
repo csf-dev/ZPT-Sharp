@@ -184,8 +184,9 @@ namespace CSF.Zpt.DocumentProviders
       }
 
       return new ZptXmlElement(importedNode,
-                               repl.GetSourceInfo(), this.OwnerDocument,
-                            isImported: true);
+                               repl.GetSourceInfo(),
+                               this.OwnerDocument,
+                               isImported: true);
     }
 
     /// <summary>
@@ -201,7 +202,7 @@ namespace CSF.Zpt.DocumentProviders
       var output = this.GetParent().InsertBefore(newNode, this.Node);
       this.Remove();
 
-      return interpretContentAsStructure? new[] { new ZptXmlElement(output, this.GetSourceInfo(), this.OwnerDocument) } : new IZptElement[0];
+      return interpretContentAsStructure? new[] { new ZptXmlElement(output, UnknownSourceFileInfo.Instance, this.OwnerDocument) } : new IZptElement[0];
     }
 
     /// <summary>
@@ -585,18 +586,18 @@ namespace CSF.Zpt.DocumentProviders
     /// Gets the file location (typically a line number) for the current instance.
     /// </summary>
     /// <returns>The file location.</returns>
-    public override string GetFileLocation()
+    protected override string GetNativeFileLocation()
     {
-      return null;
+      return String.Empty;
     }
 
     /// <summary>
     /// Gets the file location (typically a line number) for the end tag matched with the current instance.
     /// </summary>
     /// <returns>The end tag file location.</returns>
-    public override string GetEndTagFileLocation()
+    protected override string GetNativeEndTagFileLocation()
     {
-      return null;
+      return String.Empty;
     }
 
     /// <summary>

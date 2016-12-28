@@ -172,6 +172,23 @@ namespace CSF.Zpt
       public static readonly string EndTagLineNumber = "end-tag-line";
 
       /// <summary>
+      /// The name of an attribute which marks the source info for the source context of a given element.
+      /// </summary>
+      public static readonly string OriginalContextSourceInfoAttribute = "original-source-info";
+
+      /// <summary>
+      /// The name of an attribute which marks the <c>System.Type</c> of the source information for the source context
+      /// of a given element.
+      /// </summary>
+      public static readonly string OriginalContextSourceInfoTypeAQNAttribute = "original-source-info-type";
+
+      /// <summary>
+      /// The name of an attribute which records the source line number for the end-tag of a given element for the
+      /// source context of a given element..
+      /// </summary>
+      public static readonly string OriginalContextEndTagLineNumber = "original-end-tag-line";
+
+      /// <summary>
       /// The name of an attribute which indicates that a given element is imported.
       /// </summary>
       public static readonly string ElementIsImported = "is-imported";

@@ -122,18 +122,14 @@ namespace Test.CSF.Zpt.Metal
     {
       // Arrange
       _elementThree
-        .Setup(x => x.SetAttribute(ZptConstants.SourceAnnotation.Namespace,
-                                   ZptConstants.SourceAnnotation.ElementIsImported,
-                                   Boolean.TrueString));
+        .Setup(x => x.MarkAsImported(_elementOne.Object));
 
       // Act
       _sut.FillSlot(_slotAndFiller);
 
       // Assert
       _elementThree
-        .Verify(x => x.SetAttribute(ZptConstants.SourceAnnotation.Namespace,
-                                    ZptConstants.SourceAnnotation.ElementIsImported,
-                                    Boolean.TrueString),
+        .Verify(x => x.MarkAsImported(_elementOne.Object),
                 Times.Once());
     }
 
@@ -407,18 +403,14 @@ namespace Test.CSF.Zpt.Metal
       var replacementElement = _elementThree.Object;
 
       _elementThree
-        .Setup(x => x.SetAttribute(ZptConstants.SourceAnnotation.Namespace,
-                                   ZptConstants.SourceAnnotation.ElementIsImported,
-                                   Boolean.TrueString));
+        .Setup(x => x.MarkAsImported(_elementOne.Object));
 
       // Act
       _sut.ReplaceMacroElement(source, macro);
 
       // Assert
       _elementThree
-        .Verify(x => x.SetAttribute(ZptConstants.SourceAnnotation.Namespace,
-                                    ZptConstants.SourceAnnotation.ElementIsImported,
-                                    Boolean.TrueString),
+        .Verify(x => x.MarkAsImported(_elementOne.Object),
                 Times.Once());
     }
 

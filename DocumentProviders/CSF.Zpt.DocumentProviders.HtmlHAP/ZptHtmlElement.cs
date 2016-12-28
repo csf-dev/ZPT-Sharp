@@ -192,7 +192,7 @@ namespace CSF.Zpt.DocumentProviders
 
       return newNodes
         .Where(x => x.NodeType == HtmlNodeType.Element)
-        .Select(x => new ZptHtmlElement(x, this.GetSourceInfo(), this.OwnerDocument))
+        .Select(x => new ZptHtmlElement(x, UnknownSourceFileInfo.Instance, this.OwnerDocument))
         .ToArray();
     }
 
@@ -528,19 +528,19 @@ namespace CSF.Zpt.DocumentProviders
     /// Gets the file location (typically a line number) for the current instance.
     /// </summary>
     /// <returns>The file location.</returns>
-    public override string GetFileLocation()
+    protected override string GetNativeFileLocation()
     {
       var loc = GetStartTagFileLocation();
-      return loc.HasValue? loc.Value.ToString() : null;
+      return loc.HasValue? loc.Value.ToString() : String.Empty;
     }
 
     /// <summary>
     /// Gets the file location (typically a line number) for the end tag matched with the current instance.
     /// </summary>
     /// <returns>The end tag file location.</returns>
-    public override string GetEndTagFileLocation()
+    protected override string GetNativeEndTagFileLocation()
     {
-      string output = null;
+      string output = String.Empty;
       var loc = GetStartTagFileLocation();
       if(loc.HasValue)
       {

@@ -50,7 +50,7 @@ namespace CSF.Zpt.Metal
     {
       var replacement = sourceContext.Element.ReplaceWith(macroContext.Element);
 
-      replacement.MarkAsImported();
+      replacement.MarkAsImported(sourceContext.Element);
 
       return sourceContext.CreateSiblingContext(replacement);
     }
@@ -94,7 +94,7 @@ namespace CSF.Zpt.Metal
                                    fillSlotAttribute.Value);
       }
 
-      replacement.MarkAsImported();
+      replacement.MarkAsImported(slot);
 
       return replacement;
     }
