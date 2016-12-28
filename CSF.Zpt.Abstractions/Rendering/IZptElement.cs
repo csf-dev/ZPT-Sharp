@@ -285,6 +285,11 @@ namespace CSF.Zpt.Rendering
     /// <returns>The full file path and location.</returns>
     string GetFullFilePathAndLocation();
 
+    /// <summary>
+    /// Writes information to the underlying element's attributes recording its source information.
+    /// </summary>
+    void CacheSourceInformationInAttributes();
+
     #endregion
   }
 }

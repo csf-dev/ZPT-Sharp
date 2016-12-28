@@ -12,7 +12,6 @@ namespace CSF.Zpt.Rendering
 
     private ISourceInfo _cachedSourceInfo;
     private bool _isRoot, _isImported;
-    private string _cachedStartTagLocation, _cachedEndTagLocation;
     private IZptDocument _ownerDocument;
     private ISourceInfoFactory _sourceInfoCreator;
 
@@ -516,7 +515,7 @@ namespace CSF.Zpt.Rendering
     public virtual void CacheSourceInformationInAttributes()
     {
       if(this.GetAttribute(ZptConstants.SourceAnnotation.Namespace,
-                           ZptConstants.SourceAnnotation.SourceInfoAttribute) == null)
+                           ZptConstants.SourceAnnotation.SourceInfoTypeAQNAttribute) == null)
       {
         this.SetAttribute(ZptConstants.SourceAnnotation.Namespace,
                           ZptConstants.SourceAnnotation.SourceInfoTypeAQNAttribute,
@@ -535,7 +534,7 @@ namespace CSF.Zpt.Rendering
                            ZptConstants.SourceAnnotation.StartTagLineNumber) == null)
       {
         this.SetAttribute(ZptConstants.SourceAnnotation.Namespace,
-                          ZptConstants.SourceAnnotation.SourceInfoAttribute,
+                          ZptConstants.SourceAnnotation.StartTagLineNumber,
                           this.GetFileLocation());
       }
 
@@ -543,8 +542,16 @@ namespace CSF.Zpt.Rendering
                            ZptConstants.SourceAnnotation.EndTagLineNumber) == null)
       {
         this.SetAttribute(ZptConstants.SourceAnnotation.Namespace,
-                          ZptConstants.SourceAnnotation.SourceInfoAttribute,
+                          ZptConstants.SourceAnnotation.EndTagLineNumber,
                           this.GetEndTagFileLocation());
+      }
+
+      if(this.GetAttribute(ZptConstants.SourceAnnotation.Namespace,
+                           ZptConstants.SourceAnnotation.ElementIsImported) == null)
+      {
+        this.SetAttribute(ZptConstants.SourceAnnotation.Namespace,
+                          ZptConstants.SourceAnnotation.ElementIsImported,
+                          _isImported.ToString());
       }
     }
 
