@@ -105,6 +105,7 @@
     <Compile Include="Rendering\IElementRenderer.cs" />
     <Compile Include="IPluginAssemblyLoader.cs" />
     <Compile Include="Rendering\ISourceInfoFactory.cs" />
+    <Compile Include="SourceAnnotation\ISourceAnnotator.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Target Name="BeforeBuild">
@@ -118,5 +119,8 @@
     <None Include="packages.config" />
     <None Include="CSF.Zpt.Abstractions.nuspec" />
     <None Include="CSF.Zpt.Abstractions.nuspec.pt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="SourceAnnotation\" />
   </ItemGroup>
 </Project>

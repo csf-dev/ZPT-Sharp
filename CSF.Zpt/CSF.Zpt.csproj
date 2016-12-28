@@ -143,9 +143,9 @@
     <Compile Include="Metal\MacroExtensionSubstitutor.cs" />
     <Compile Include="Rendering\SourceInfoFactory.cs" />
     <Compile Include="SourceAnnotation\SourceAnnotator.cs" />
-    <Compile Include="SourceAnnotation\ISourceAnnotator.cs" />
     <Compile Include="SourceAnnotation\SourceInfoBurnInVisitor.cs" />
     <Compile Include="SourceAnnotation\SourceInfoTidyUpVisitor.cs" />
+    <Compile Include="SourceAnnotation\SourceAnnotationVisitor.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

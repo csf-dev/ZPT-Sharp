@@ -15,6 +15,7 @@ namespace CSF.Zpt.Rendering
       typeof(CSF.Zpt.SourceAnnotation.SourceInfoBurnInVisitor),
       typeof(CSF.Zpt.Metal.MetalVisitor),
       typeof(CSF.Zpt.Tal.TalVisitor),
+      typeof(CSF.Zpt.SourceAnnotation.SourceAnnotationVisitor),
       typeof(CSF.Zpt.Metal.MetalTidyUpVisitor),
       typeof(CSF.Zpt.Tal.TalTidyUpVisitor),
       typeof(CSF.Zpt.SourceAnnotation.SourceInfoTidyUpVisitor),

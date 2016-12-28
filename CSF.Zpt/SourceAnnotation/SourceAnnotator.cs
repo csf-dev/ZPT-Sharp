@@ -15,6 +15,7 @@ namespace CSF.Zpt.SourceAnnotation
     private const int BORDER_CHARACTER_WIDTH = 78;
     private const char BORDER_CHARACTER = '=';
 
+    // TODO: Move all of these strings into a resources file
     private const string
       COMMENT_FORMAT = @"
 {0}
@@ -42,85 +43,95 @@ namespace CSF.Zpt.SourceAnnotation
     /// Processes source annotation and adds comments before/after the <paramref name="targetContext"/> if appropriate.
     /// </summary>
     /// <param name="targetContext">Target context.</param>
-    public void ProcessAnnotation(IRenderingContext targetContext)
+    public void WriteAnnotationIfAppropriate(IRenderingContext targetContext)
     {
-      ProcessAnnotation(targetContext, null, null);
-    }
-
-    /// <summary>
-    /// Processes source annotation and adds comments before/after the <paramref name="targetContext"/> if appropriate.
-    /// </summary>
-    /// <param name="targetContext">Target context.</param>
-    /// <param name="originalContext">Original context.</param>
-    /// <param name="replacementContext">Replacement context.</param>
-    public void ProcessAnnotation(IRenderingContext targetContext,
-                                  IRenderingContext originalContext,
-                                  IRenderingContext replacementContext)
-    {
-      if(targetContext == null)
-      {
-        throw new ArgumentNullException(nameof(targetContext));
-      }
-
       if(!targetContext.RenderingOptions.AddSourceFileAnnotation)
       {
         return;
       }
 
-      if(targetContext.Element.IsRoot)
+      var element = targetContext.Element;
+
+      if(element.IsRoot)
       {
         AddAnnotation(targetContext, skipLineNumber: true);
       }
-
-      IZptAttribute attr;
-
-      if((replacementContext == null
-          && (attr = targetContext.Element.GetMetalAttribute(ZptConstants.Metal.DefineMacroAttribute)) != null)
-         || (replacementContext != null
-             && (attr = targetContext.Element.GetMetalAttribute(ZptConstants.Metal.DefineMacroAttribute)) != null
-             && originalContext.Element.GetMetalAttribute(ZptConstants.Metal.UseMacroAttribute) != null))
+      else if(element.IsImported)
       {
-        AddAnnotation(targetContext,
-                      extraText: String.Format(MACRO_DEFINITION_FORMAT, attr.Value),
-                      replacementContext: replacementContext);
+        AddAnnotation(targetContext);
+      }
+      else if(element.GetMetalAttribute(ZptConstants.Metal.DefineMacroAttribute) != null)
+      {
+        AddAnnotation(targetContext);
       }
 
-      if(originalContext != null
-         && (attr = originalContext.Element.GetMetalAttribute(ZptConstants.Metal.UseMacroAttribute)) != null)
-      {
-        AddAnnotation(targetContext,
-                      beforeElement: false,
-                      originalContext: originalContext,
-                      extraText: String.Format(USED_MACRO_FORMAT, attr.Value),
-                      useEndTagLocation: true);
-      }
-
-      if((replacementContext != null
-          && (attr = replacementContext.Element.GetMetalAttribute(ZptConstants.Metal.DefineSlotAttribute)) != null)
-         || (replacementContext == null
-             && (attr = targetContext.Element.GetMetalAttribute(ZptConstants.Metal.DefineSlotAttribute)) != null))
-      {
-        AddAnnotation(targetContext,
-                      beforeElement: false,
-                      extraText: String.Format(SLOT_DEFINITION_FORMAT, attr.Value));
-      }
-
-      if(replacementContext != null
-         && (attr = targetContext.Element.GetMetalAttribute(ZptConstants.Metal.FillSlotAttribute)) != null)
-      {
-        AddAnnotation(targetContext,
-                      replacementContext: replacementContext,
-                      extraText: String.Format(FILLED_SLOT_FORMAT, attr.Value));
-
-        if(!originalContext.Element.IsFromSameDocumentAs(replacementContext.Element))
-        {
-          AddAnnotation(targetContext,
-                        beforeElement: false,
-                        extraText: String.Format(SLOT_DEFINITION_FORMAT, attr.Value),
-                        originalContext: originalContext);
-        }
-      }
     }
+
+//    /// <summary>
+//    /// Processes source annotation and adds comments before/after the <paramref name="targetContext"/> if appropriate.
+//    /// </summary>
+//    /// <param name="targetContext">Target context.</param>
+//    /// <param name="originalContext">Original context.</param>
+//    /// <param name="replacementContext">Replacement context.</param>
+//    public void ProcessAnnotation(IRenderingContext targetContext,
+//                                  IRenderingContext originalContext,
+//                                  IRenderingContext replacementContext)
+//    {
+//      if(targetContext == null)
+//      {
+//        throw new ArgumentNullException(nameof(targetContext));
+//      }
+//
+//
+//      IZptAttribute attr;
+//
+//      if((replacementContext == null
+//          && (attr = targetContext.Element.GetMetalAttribute(ZptConstants.Metal.DefineMacroAttribute)) != null)
+//         || (replacementContext != null
+//             && (attr = targetContext.Element.GetMetalAttribute(ZptConstants.Metal.DefineMacroAttribute)) != null
+//             && originalContext.Element.GetMetalAttribute(ZptConstants.Metal.UseMacroAttribute) != null))
+//      {
+//        AddAnnotation(targetContext,
+//                      extraText: String.Format(MACRO_DEFINITION_FORMAT, attr.Value),
+//                      replacementContext: replacementContext);
+//      }
+//
+//      if(originalContext != null
+//         && (attr = originalContext.Element.GetMetalAttribute(ZptConstants.Metal.UseMacroAttribute)) != null)
+//      {
+//        AddAnnotation(targetContext,
+//                      beforeElement: false,
+//                      originalContext: originalContext,
+//                      extraText: String.Format(USED_MACRO_FORMAT, attr.Value),
+//                      useEndTagLocation: true);
+//      }
+//
+//      if((replacementContext != null
+//          && (attr = replacementContext.Element.GetMetalAttribute(ZptConstants.Metal.DefineSlotAttribute)) != null)
+//         || (replacementContext == null
+//             && (attr = targetContext.Element.GetMetalAttribute(ZptConstants.Metal.DefineSlotAttribute)) != null))
+//      {
+//        AddAnnotation(targetContext,
+//                      beforeElement: false,
+//                      extraText: String.Format(SLOT_DEFINITION_FORMAT, attr.Value));
+//      }
+//
+//      if(replacementContext != null
+//         && (attr = targetContext.Element.GetMetalAttribute(ZptConstants.Metal.FillSlotAttribute)) != null)
+//      {
+//        AddAnnotation(targetContext,
+//                      replacementContext: replacementContext,
+//                      extraText: String.Format(FILLED_SLOT_FORMAT, attr.Value));
+//
+//        if(!originalContext.Element.IsFromSameDocumentAs(replacementContext.Element))
+//        {
+//          AddAnnotation(targetContext,
+//                        beforeElement: false,
+//                        extraText: String.Format(SLOT_DEFINITION_FORMAT, attr.Value),
+//                        originalContext: originalContext);
+//        }
+//      }
+//    }
 
     private void AddAnnotation(IRenderingContext targetContext,
                                bool skipLineNumber = false,
