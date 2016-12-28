@@ -16,7 +16,9 @@ Information specific to **running the unit/integration tests** is available in t
 
 ## Current status
 The current status of the project - as of `v0.7.0` - is that the software should be considered in an _alpha_ state.
-There are presently no open issues with [the API Change label], although I am currently considering ([for csharp expressions] and [for python expressions]) how to permit importing of other code, referencing assemblies and making Linq available.  This could potentially impact upon the stability of the API.
+There are presently no open issues with [the API Change label].
+That said, I am currently have two issues open - one [for csharp expressions] and one [for python expressions] - which may impact the stability of the API.
+These involve importing types from namespaces/modules, referencing assemblies and making Linq available.
 
 I would certainly not recommend the project for production use yet.
 At this stage I would welcome exploration, testing and (most importantly) bug-reports from interested parties.
