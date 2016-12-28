@@ -134,6 +134,75 @@ namespace CSF.Zpt
     }
 
     /// <summary>
+    /// Static type for source annotation constants.
+    /// </summary>
+    public static class SourceAnnotation
+    {
+      private static readonly ZptNamespace _namespace;
+
+      /// <summary>
+      /// Gets the namespace for source annotation: Template Attribute Language.
+      /// </summary>
+      /// <value>The namespace.</value>
+      public static ZptNamespace Namespace
+      {
+        get {
+          return _namespace;
+        }
+      }
+
+      /// <summary>
+      /// The name of an attribute which marks the source info for an element.
+      /// </summary>
+      public static readonly string SourceInfoAttribute = "source-info";
+
+      /// <summary>
+      /// The name of an attribute which marks the <c>System.Type</c> of the source information.
+      /// </summary>
+      public static readonly string SourceInfoTypeAQNAttribute = "source-info-type";
+
+      /// <summary>
+      /// The name of an attribute which records the source line number for the start-tag of a given element.
+      /// </summary>
+      public static readonly string StartTagLineNumber = "start-tag-line";
+
+      /// <summary>
+      /// The name of an attribute which records the source line number for the end-tag of a given element.
+      /// </summary>
+      public static readonly string EndTagLineNumber = "end-tag-line";
+
+      /// <summary>
+      /// The name of an attribute which marks the source info for the source context of a given element.
+      /// </summary>
+      public static readonly string OriginalContextSourceInfoAttribute = "original-source-info";
+
+      /// <summary>
+      /// The name of an attribute which marks the <c>System.Type</c> of the source information for the source context
+      /// of a given element.
+      /// </summary>
+      public static readonly string OriginalContextSourceInfoTypeAQNAttribute = "original-source-info-type";
+
+      /// <summary>
+      /// The name of an attribute which records the source line number for the end-tag of a given element for the
+      /// source context of a given element..
+      /// </summary>
+      public static readonly string OriginalContextEndTagLineNumber = "original-end-tag-line";
+
+      /// <summary>
+      /// The name of an attribute which indicates that a given element is imported.
+      /// </summary>
+      public static readonly string ElementIsImported = "is-imported";
+
+      /// <summary>
+      /// Initializes the <see cref="T:CSF.Zpt.ZptConstants+SourceAnnotation"/> class.
+      /// </summary>
+      static SourceAnnotation()
+      {
+        _namespace = new ZptNamespace("sa", "http://xml.zope.org/namespaces/source-annotation");
+      }
+    }
+
+    /// <summary>
     /// Gets a special singleton value that indicates the "cancel the current action" token.
     /// </summary>
     public static readonly object CancellationToken = new CancellationToken();

@@ -10,9 +10,11 @@ namespace CSF.Zpt.Rendering
   {
     #region fields
 
-    private ISourceInfo _sourceFile;
+    private ISourceInfo _inferredSourceInfo, _cachedSourceInfo, _cachedOriginalContextSourceInfo;
+    private string _cachedFileLocation, _cachedEndTagFileLocation;
     private bool _isRoot, _isImported;
     private IZptDocument _ownerDocument;
+    private ISourceInfoFactory _sourceInfoCreator;
 
     #endregion
 
@@ -23,17 +25,6 @@ namespace CSF.Zpt.Rendering
     /// </summary>
     /// <value>The name.</value>
     public abstract string Name { get; }
-
-    /// <summary>
-    /// Gets information about the source file for the current element.
-    /// </summary>
-    /// <value>The source file.</value>
-    public virtual ISourceInfo SourceFile
-    {
-      get {
-        return _sourceFile;
-      }
-    }
 
     /// <summary>
     /// Gets a value indicating whether this instance is the root of its parent document.
@@ -59,7 +50,19 @@ namespace CSF.Zpt.Rendering
     public virtual bool IsImported
     {
       get {
-        return _isImported;
+        if(_isImported)
+        {
+          return true;
+        }
+
+        var attrib = GetAttribute(ZptConstants.SourceAnnotation.Namespace,
+                                  ZptConstants.SourceAnnotation.ElementIsImported);
+        if(attrib != null && attrib.Value == Boolean.TrueString)
+        {
+          return true;
+        }
+
+        return false;
       }
     }
 
@@ -88,6 +91,32 @@ namespace CSF.Zpt.Rendering
     #endregion
 
     #region methods
+
+    /// <summary>
+    /// Gets information about the source of the current element.
+    /// </summary>
+    public ISourceInfo GetSourceInfo()
+    {
+      if(_cachedSourceInfo == null)
+      {
+        var type = GetAttribute(ZptConstants.SourceAnnotation.Namespace,
+                                ZptConstants.SourceAnnotation.SourceInfoTypeAQNAttribute);
+        var value = GetAttribute(ZptConstants.SourceAnnotation.Namespace,
+                                 ZptConstants.SourceAnnotation.SourceInfoAttribute);
+
+        if(type == null || value == null)
+        {
+          _cachedSourceInfo = _inferredSourceInfo?? UnknownSourceFileInfo.Instance;
+        }
+        else
+        {
+          _cachedSourceInfo = _sourceInfoCreator.CreateSourceInfo(type.Value, value.Value);
+        }
+      }
+
+      return _cachedSourceInfo;
+    }
+
 
     /// <summary>
     /// Returns a <see cref="System.String"/> that represents the current <see cref="ZptElement"/>.
@@ -370,13 +399,90 @@ namespace CSF.Zpt.Rendering
     /// Gets the file location (typically a line number) for the current instance.
     /// </summary>
     /// <returns>The file location.</returns>
-    public abstract string GetFileLocation();
+    public virtual string GetFileLocation()
+    {
+      if(_cachedFileLocation == null)
+      {
+        var attrib = GetAttribute(ZptConstants.SourceAnnotation.Namespace,
+                                  ZptConstants.SourceAnnotation.StartTagLineNumber);
+
+        _cachedFileLocation = (attrib != null)? attrib.Value : GetNativeFileLocation();
+      }
+
+      return _cachedFileLocation;
+    }
 
     /// <summary>
     /// Gets the file location (typically a line number) for the end tag matched with the current instance.
     /// </summary>
     /// <returns>The end tag file location.</returns>
-    public abstract string GetEndTagFileLocation();
+    public virtual string GetEndTagFileLocation()
+    {
+      if(_cachedEndTagFileLocation == null)
+      {
+        var attrib = GetAttribute(ZptConstants.SourceAnnotation.Namespace,
+                                  ZptConstants.SourceAnnotation.EndTagLineNumber);
+
+        _cachedEndTagFileLocation = (attrib != null)? attrib.Value : GetNativeEndTagFileLocation();
+      }
+
+      return _cachedEndTagFileLocation;
+    }
+
+    /// <summary>
+    /// Gets the file location (typically a line number) for the current instance.
+    /// </summary>
+    /// <returns>The file location.</returns>
+    protected abstract string GetNativeFileLocation();
+
+    /// <summary>
+    /// Gets the file location (typically a line number) for the end tag matched with the current instance.
+    /// </summary>
+    /// <returns>The end tag file location.</returns>
+    protected abstract string GetNativeEndTagFileLocation();
+
+    /// <summary>
+    /// Gets the file location (typically a line number) for the end tag of an 'original context'.
+    /// </summary>
+    /// <returns>The end tag file location.</returns>
+    public virtual string GetOriginalContextEndTagLocation()
+    {
+      var attr = this.GetAttribute(ZptConstants.SourceAnnotation.Namespace,
+                                   ZptConstants.SourceAnnotation.OriginalContextEndTagLineNumber);
+
+      if(attr == null)
+      {
+        return null;
+      }
+
+      return attr.Value;
+    }
+
+    /// <summary>
+    /// Gets information about the source of the current element.
+    /// </summary>
+    /// <returns>The end tag file location.</returns>
+    public virtual ISourceInfo GetOriginalContextSourceInfo()
+    {
+      if(_cachedOriginalContextSourceInfo == null)
+      {
+        var type = GetAttribute(ZptConstants.SourceAnnotation.Namespace,
+                                ZptConstants.SourceAnnotation.OriginalContextSourceInfoTypeAQNAttribute);
+        var value = GetAttribute(ZptConstants.SourceAnnotation.Namespace,
+                                 ZptConstants.SourceAnnotation.OriginalContextSourceInfoAttribute);
+
+        if(type == null || value == null)
+        {
+          _cachedOriginalContextSourceInfo = UnknownSourceFileInfo.Instance;
+        }
+        else
+        {
+          _cachedOriginalContextSourceInfo = _sourceInfoCreator.CreateSourceInfo(type.Value, value.Value);
+        }
+      }
+
+      return _cachedOriginalContextSourceInfo;
+    }
 
     /// <summary>
     /// Omits the current element, replacing it with its children.
@@ -418,21 +524,15 @@ namespace CSF.Zpt.Rendering
     /// <returns>The full file path and location.</returns>
     public virtual string GetFullFilePathAndLocation()
     {
-      if(SourceFile == null)
+      string location = GetFileLocation();
+
+      if(location != null)
       {
-        return "<unknown>";
+        return String.Format("{0} (line {1})", GetSourceInfo().FullName, location);
       }
       else
       {
-        string location = GetFileLocation();
-        if(location != null)
-        {
-          return String.Format("{0} (line {1})", SourceFile.FullName, location);
-        }
-        else
-        {
-          return SourceFile.FullName;
-        }
+        return GetSourceInfo().FullName;
       }
     }
 
@@ -499,6 +599,80 @@ namespace CSF.Zpt.Rendering
       }
     }
 
+    /// <summary>
+    /// Writes information to the underlying element's attributes recording its source information.
+    /// </summary>
+    public virtual void CacheSourceInformationInAttributes()
+    {
+      if(this.GetAttribute(ZptConstants.SourceAnnotation.Namespace,
+                           ZptConstants.SourceAnnotation.SourceInfoTypeAQNAttribute) == null)
+      {
+        this.SetAttribute(ZptConstants.SourceAnnotation.Namespace,
+                          ZptConstants.SourceAnnotation.SourceInfoTypeAQNAttribute,
+                          GetSourceInfo().GetType().AssemblyQualifiedName);
+      }
+
+      if(this.GetAttribute(ZptConstants.SourceAnnotation.Namespace,
+                           ZptConstants.SourceAnnotation.SourceInfoAttribute) == null)
+      {
+        this.SetAttribute(ZptConstants.SourceAnnotation.Namespace,
+                          ZptConstants.SourceAnnotation.SourceInfoAttribute,
+                          GetSourceInfo().ToString());
+      }
+
+      if(this.GetAttribute(ZptConstants.SourceAnnotation.Namespace,
+                           ZptConstants.SourceAnnotation.StartTagLineNumber) == null)
+      {
+        this.SetAttribute(ZptConstants.SourceAnnotation.Namespace,
+                          ZptConstants.SourceAnnotation.StartTagLineNumber,
+                          this.GetFileLocation());
+      }
+
+      if(this.GetAttribute(ZptConstants.SourceAnnotation.Namespace,
+                           ZptConstants.SourceAnnotation.EndTagLineNumber) == null)
+      {
+        this.SetAttribute(ZptConstants.SourceAnnotation.Namespace,
+                          ZptConstants.SourceAnnotation.EndTagLineNumber,
+                          this.GetEndTagFileLocation());
+      }
+
+      if(this.GetAttribute(ZptConstants.SourceAnnotation.Namespace,
+                           ZptConstants.SourceAnnotation.ElementIsImported) == null)
+      {
+        this.SetAttribute(ZptConstants.SourceAnnotation.Namespace,
+                          ZptConstants.SourceAnnotation.ElementIsImported,
+                          _isImported.ToString());
+      }
+    }
+
+    /// <summary>
+    /// Marks the current element as being imported into its parent document (IE: it represents a context switch).
+    /// </summary>
+    /// <param name="originalElement">The original element.</param>
+    public virtual void MarkAsImported(IZptElement originalElement)
+    {
+      if(originalElement == null)
+      {
+        throw new ArgumentNullException(nameof(originalElement));
+      }
+
+      var source = originalElement.GetSourceInfo();
+
+      this.SetAttribute(ZptConstants.SourceAnnotation.Namespace,
+                        ZptConstants.SourceAnnotation.ElementIsImported,
+                        Boolean.TrueString);
+      this.SetAttribute(ZptConstants.SourceAnnotation.Namespace,
+                        ZptConstants.SourceAnnotation.OriginalContextSourceInfoTypeAQNAttribute,
+                        source.GetType().AssemblyQualifiedName);
+      this.SetAttribute(ZptConstants.SourceAnnotation.Namespace,
+                        ZptConstants.SourceAnnotation.OriginalContextSourceInfoAttribute,
+                        source.ToString());
+      this.SetAttribute(ZptConstants.SourceAnnotation.Namespace,
+                        ZptConstants.SourceAnnotation.OriginalContextEndTagLineNumber,
+                        originalElement.GetEndTagFileLocation());
+
+      this.CacheSourceInformationInAttributes();
+    }
 
     #endregion
 
@@ -516,21 +690,25 @@ namespace CSF.Zpt.Rendering
     /// <param name="isRoot">Whether or not this is the root element.</param>
     /// <param name="isImported">Whether or not this element is imported.</param>
     /// <param name="ownerDocument">The ZPT document which owns the element.</param>
+    /// <param name="sourceInfoCreator">A source-info factory.</param>
     public ZptElement(ISourceInfo sourceFile,
                       bool isRoot,
                       bool isImported,
-                      IZptDocument ownerDocument)
+                      IZptDocument ownerDocument,
+                      ISourceInfoFactory sourceInfoCreator = null)
     {
       if(sourceFile == null)
       {
         throw new ArgumentNullException(nameof(sourceFile));
       }
-        if(ownerDocument == null)
-        {
-            throw new ArgumentNullException(nameof(ownerDocument));
-        }
+      if(ownerDocument == null)
+      {
+          throw new ArgumentNullException(nameof(ownerDocument));
+      }
 
-      _sourceFile = sourceFile;
+      _sourceInfoCreator = sourceInfoCreator?? new SourceInfoFactory();
+
+      _inferredSourceInfo = sourceFile;
       _isRoot = isRoot;
       _isImported = isImported;
       _ownerDocument = ownerDocument;

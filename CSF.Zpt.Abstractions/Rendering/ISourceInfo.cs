@@ -42,6 +42,20 @@ namespace CSF.Zpt.Rendering
     /// <returns>The TALES representation of the current instance.</returns>
     object GetContainer();
 
+    /// <summary>
+    /// Returns a <see cref="System.String"/> that represents the current <see cref="CSF.Zpt.Rendering.ISourceInfo"/>.
+    /// </summary>
+    /// <returns>A <see cref="System.String"/> that represents the current <see cref="CSF.Zpt.Rendering.ISourceInfo"/>.</returns>
+    string ToString();
+
+    /// <summary>
+    /// Gets a name for the current instance, relative to a given root name.  The meaning of relative is up to the
+    /// implementation.
+    /// </summary>
+    /// <returns>The relative name.</returns>
+    /// <param name="root">The root name.</param>
+    string GetRelativeName(string root);
+
     #endregion
   }
 }

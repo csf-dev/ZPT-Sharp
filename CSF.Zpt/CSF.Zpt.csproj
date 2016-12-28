@@ -99,7 +99,6 @@
     <Compile Include="Rendering\RenderingContextFactoryFactory.cs" />
     <Compile Include="Rendering\ContextVisitorFactory.cs" />
     <Compile Include="Rendering\NamedObjectWrapper.cs" />
-    <Compile Include="Metal\SourceAnnotator.cs" />
     <Compile Include="Resources\LogMessageFormats.Designer.cs">
       <DependentUpon>LogMessageFormats.resx</DependentUpon>
     </Compile>
@@ -138,11 +137,19 @@
     <Compile Include="BatchRendering\BatchRenderingOptionsValidator.cs" />
     <Compile Include="Metal\IMacroExpander.cs" />
     <Compile Include="Metal\IMacroFinder.cs" />
-    <Compile Include="Metal\ISourceAnnotator.cs" />
     <Compile Include="Metal\IMacroSubstituter.cs" />
     <Compile Include="Metal\MacroSubstituter.cs" />
     <Compile Include="Metal\SlotToFill.cs" />
     <Compile Include="Metal\MacroExtensionSubstitutor.cs" />
+    <Compile Include="Rendering\SourceInfoFactory.cs" />
+    <Compile Include="SourceAnnotation\SourceAnnotator.cs" />
+    <Compile Include="SourceAnnotation\SourceInfoBurnInVisitor.cs" />
+    <Compile Include="SourceAnnotation\SourceInfoTidyUpVisitor.cs" />
+    <Compile Include="SourceAnnotation\SourceAnnotationVisitor.cs" />
+    <Compile Include="SourceAnnotation\CommentFormatter.cs" />
+    <Compile Include="Resources\SourceAnnotationFormats.Designer.cs">
+      <DependentUpon>SourceAnnotationFormats.resx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
@@ -181,6 +188,10 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>LogMessageFormats.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Resources\SourceAnnotationFormats.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>SourceAnnotationFormats.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
   <Target Name="BeforeBuild">
     <CallTarget Targets="StampAssemblyInfo" />
@@ -194,5 +205,8 @@
     <None Include="CSF.Zpt.nuspec.pt" />
     <None Include="app.config.install.xdt" />
     <None Include="app.config.uninstall.xdt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="SourceAnnotation\" />
   </ItemGroup>
 </Project>

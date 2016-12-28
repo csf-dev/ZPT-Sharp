@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using CSF.IO;
 
 namespace CSF.Zpt.Rendering
 {
@@ -8,6 +9,12 @@ namespace CSF.Zpt.Rendering
   /// </summary>
   public class SourceFileInfo : ISourceInfo
   {
+    #region constants
+
+    private const char PATH_SEPARATOR = '/';
+
+    #endregion
+
     #region fields
 
     private FileInfo _osFile;
@@ -122,6 +129,44 @@ namespace CSF.Zpt.Rendering
       return new CSF.Zpt.Tales.TemplateDirectory(this.FileInfo.Directory);
     }
 
+    /// <summary>
+    /// Returns a <see cref="System.String"/> that represents the current <see cref="CSF.Zpt.Rendering.SourceFileInfo"/>.
+    /// </summary>
+    /// <returns>A <see cref="System.String"/> that represents the current <see cref="CSF.Zpt.Rendering.SourceFileInfo"/>.</returns>
+    public override string ToString()
+    {
+      return FileInfo.FullName;
+    }
+
+    /// <summary>
+    /// Gets a name for the current instance, relative to a given root name.  The meaning of relative is up to the
+    /// implementation.
+    /// </summary>
+    /// <remarks>
+    /// <para>
+    /// This method also normalises directory separators to the forward-slash character: <c>/</c>.
+    /// </para>
+    /// </remarks>
+    /// <returns>The relative name.</returns>
+    /// <param name="root">The root name.</param>
+    public string GetRelativeName(string root)
+    {
+      if(root == null || !Directory.Exists(root) || !FileInfo.Exists)
+      {
+        return FullName;
+      }
+
+      var rootDir = new DirectoryInfo(root);
+      if(!FileInfo.IsChildOf(rootDir))
+      {
+        return FullName;
+      }
+
+      return FileInfo.GetRelativePath(rootDir)
+        .Substring(1)
+        .Replace(Path.DirectorySeparatorChar, PATH_SEPARATOR);
+    }
+
     #endregion
 
     #region constructors
@@ -138,6 +183,20 @@ namespace CSF.Zpt.Rendering
       }
 
       _osFile = fileInfo;
+    }
+
+    /// <summary>
+    /// Initializes a new instance of the <see cref="CSF.Zpt.Rendering.SourceFileInfo"/> class.
+    /// </summary>
+    /// <param name="filePath">File path.</param>
+    public SourceFileInfo(string filePath)
+    {
+      if(filePath == null)
+      {
+        throw new ArgumentNullException(nameof(filePath));
+      }
+
+      _osFile = new FileInfo(filePath);
     }
 
     #endregion

@@ -155,6 +155,43 @@ namespace CSF.Zpt.Rendering
     }
 
     #endregion
+
+    #region source annotation extension methods
+
+    /// <summary>
+    /// Recursively calls <see cref="IZptElement.CacheSourceInformationInAttributes"/> on a given element and
+    /// every one of its children.
+    /// </summary>
+    /// <param name="element">The root element upon which to invoke this functionality.</param>
+    public static void RecursivelyCacheSourceInformationInAttributes(this IZptElement element)
+    {
+      if(element == null)
+      {
+        throw new ArgumentNullException(nameof(element));
+      }
+
+      element.CacheSourceInformationInAttributes();
+      foreach(var child in element.GetChildElements())
+      {
+        RecursivelyCacheSourceInformationInAttributes(child);
+      }
+    }
+
+    /// <summary>
+    /// Recursively searches for source annotation attributes and removes them from their parent element.
+    /// </summary>
+    /// <param name="element">The element from which to perform the purge.</param>
+    public static void PurgeSourceAnnotationAttributes(this IZptElement element)
+    {
+      if(element == null)
+      {
+        throw new ArgumentNullException(nameof(element));
+      }
+
+      element.PurgeAttributes(ZptConstants.SourceAnnotation.Namespace);
+    }
+
+    #endregion
   }
 }
 
