@@ -1,6 +1,7 @@
 ﻿using System;
 using CSF.Zpt.Tales;
 using System.Text;
+using System.Linq;
 
 namespace CSF.Zpt.Rendering
 {
@@ -11,14 +12,6 @@ namespace CSF.Zpt.Rendering
   {
     #region constants
 
-    private static readonly IContextVisitor[] DEFAULT_VISITORS = new IContextVisitor[] {
-      new CSF.Zpt.Metal.MetalVisitor(),
-      new CSF.Zpt.Tal.TalVisitor(),
-      new CSF.Zpt.Metal.MetalTidyUpVisitor(),
-      new CSF.Zpt.Tal.TalTidyUpVisitor(),
-      new CSF.Zpt.SourceAnnotation.SourceAnnotationTidyUpVisitor(),
-    };
-
     /// <summary>
     /// Gets the default context visitors.
     /// </summary>
@@ -26,9 +19,10 @@ namespace CSF.Zpt.Rendering
     protected static IContextVisitor[] DefaultVisitors
     {
       get {
-        var output = new IContextVisitor[DEFAULT_VISITORS.Length];
-        Array.Copy(DEFAULT_VISITORS, output, DEFAULT_VISITORS.Length);
-        return output;
+        return RenderingSettingsFactory
+          .GetDefaultContextVisitorTypes()
+          .Select(x => (IContextVisitor) Activator.CreateInstance(x))
+          .ToArray();
       }
     }
 

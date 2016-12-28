@@ -161,7 +161,7 @@ namespace CSF.Zpt.Rendering
 
     private static IContextVisitor[] GetContextVisitors()
     {
-      return DEFAULT_VISITOR_TYPES
+      return GetDefaultContextVisitorTypes()
         .Select(x => Activator.CreateInstance(x))
         .Cast<IContextVisitor>()
         .ToArray();
@@ -208,6 +208,22 @@ namespace CSF.Zpt.Rendering
       }
 
       return (TImplementation) Activator.CreateInstance(type);
+    }
+
+    #endregion
+
+    #region methods
+
+    /// <summary>
+    /// Gets a collection of <c>System.Type</c> representing the default <see cref="IContextVisitor"/> implementations
+    /// which visit rendering contexts.
+    /// </summary>
+    /// <returns>The default context visitor types.</returns>
+    public static Type[] GetDefaultContextVisitorTypes()
+    {
+      var output = new Type[DEFAULT_VISITOR_TYPES.Length];
+      Array.Copy(DEFAULT_VISITOR_TYPES, output, DEFAULT_VISITOR_TYPES.Length);
+      return output;
     }
 
     #endregion
