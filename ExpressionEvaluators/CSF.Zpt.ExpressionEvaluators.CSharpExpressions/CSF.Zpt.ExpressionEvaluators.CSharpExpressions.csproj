@@ -93,6 +93,11 @@
       <DependentUpon>LogFormats.resx</DependentUpon>
     </Compile>
     <Compile Include="AssemblyInfo.cs" />
+    <Compile Include="IAssemblyReferenceService.cs" />
+    <Compile Include="Spec\ExpressionSpecification.cs" />
+    <Compile Include="Spec\ReferencedAssemblySpecification.cs" />
+    <Compile Include="Spec\UsingNamespaceSpecification.cs" />
+    <Compile Include="Spec\VariableSpecification.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ExpressionHostBuilder.tt">
@@ -107,6 +112,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\" />
+    <Folder Include="Spec\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\ExceptionMessages.resx">
