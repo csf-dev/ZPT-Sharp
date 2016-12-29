@@ -15,4 +15,9 @@
   <data name="CompilerErrorFormat" xml:space="preserve">
     <value>Compiler error for expression '{1}':{0}</value>
   </data>
+  <data name="CodeToBeCompiledFormat" xml:space="preserve">
+    <value>The code which raised the preceding warning is as follows:
+---
+{0}</value>
+  </data>
 </root>

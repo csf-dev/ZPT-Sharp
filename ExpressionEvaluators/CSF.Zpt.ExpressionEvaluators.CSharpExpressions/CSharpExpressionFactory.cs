@@ -6,6 +6,7 @@ using System.Reflection;
 using CSF.Zpt.ExpressionEvaluators.CSharpFramework;
 using System.Linq;
 using CSF.Configuration;
+using CSF.Zpt.ExpressionEvaluators.CSharpExpressions.Host;
 
 namespace CSF.Zpt.ExpressionEvaluators.CSharpExpressions
 {
@@ -16,7 +17,7 @@ namespace CSF.Zpt.ExpressionEvaluators.CSharpExpressions
   {
     #region fields
 
-    private IExpressionConfiguration _config;
+    private IExpressionHostCompiler _hostCreatorFactory;
 
     #endregion
 
@@ -33,104 +34,11 @@ namespace CSF.Zpt.ExpressionEvaluators.CSharpExpressions
         throw new ArgumentNullException(nameof(model));
       }
 
-      var assembly = CompileHostAssembly(model);
-      var hostCreator = GetExpressionHostCreator(assembly, model);
+      var hostCreator = _hostCreatorFactory.GetHostCreator(model);
 
-      return new CSharpExpression(hostCreator,
-                                  model.ExpressionId,
-                                  model.ExpressionText,
-                                  model.PropertyNames,
-                                  assembly);
-    }
-
-    /// <summary>
-    /// Gets a creation method which instantiates the <see cref="IExpressionHost"/> instance for a given model.
-    /// </summary>
-    /// <returns>The expression host creator.</returns>
-    /// <param name="assembly">Assembly.</param>
-    /// <param name="model">Model.</param>
-    private Func<IExpressionHost> GetExpressionHostCreator(Assembly assembly, ExpressionModel model)
-    {
-      if(assembly == null)
-      {
-        throw new ArgumentNullException(nameof(assembly));
-      }
-
-      var type = assembly.GetType(String.Concat(model.Namespace, ".", model.GetClassName()));
-      if(type == null)
-      {
-        throw new CSharpExpressionExceptionException(Resources.ExceptionMessages.ExpressionTypeMustExist) {
-          ExpressionText = model.ExpressionText
-        };
-      }
-
-      return () => (IExpressionHost) Activator.CreateInstance(type);
-    }
-
-    /// <summary>
-    /// Generates and compiles an <c>System.Reflection.Assembly</c> containing an implementation of
-    /// <see cref="IExpressionHost"/>, from the given expression information.
-    /// </summary>
-    /// <returns>The generated host assembly.</returns>
-    /// <param name="model">Model.</param>
-    private Assembly CompileHostAssembly(ExpressionModel model)
-    {
-      CSharpCodeProvider provider = new CSharpCodeProvider();
-      CompilerParameters parameters = new CompilerParameters();
-
-      var frameworkAssemblyName = String.Format("{0}.dll", typeof(IExpressionHost).Namespace);
-      var csAssemblyName = String.Format("{0}.dll", typeof (Microsoft.CSharp.CSharpCodeProvider).Namespace);
-      var dynAssemblyName = String.Format("System.Core.dll");
-      parameters.ReferencedAssemblies.Add(frameworkAssemblyName);
-      parameters.ReferencedAssemblies.Add(csAssemblyName);
-      parameters.ReferencedAssemblies.Add(dynAssemblyName);
-
-      parameters.GenerateInMemory = true;
-      parameters.GenerateExecutable = false;
-
-      var code = GetExpressionHostCode(model);
-
-      var result = provider.CompileAssemblyFromSource(parameters, code);
-      var compilerErrors = result.Errors.Cast<CompilerError>();
-
-      if(compilerErrors.Any(x => !x.IsWarning))
-      {
-        foreach(var error in compilerErrors.Where(x => !x.IsWarning))
-        {
-          ZptConstants.TraceSource.TraceEvent(System.Diagnostics.TraceEventType.Warning,
-                                              5,
-                                              Resources.LogFormats.CompilerErrorFormat,
-                                              error,
-                                              model.ExpressionText);
-        }
-
-        throw new CSharpExpressionExceptionException(Resources.ExceptionMessages.MustNotBeCompileErrors) {
-          ExpressionText = model.ExpressionText
-        };
-      }
-
-      return result.CompiledAssembly;
-    }
-
-    /// <summary>
-    /// Gets the code to compile for the generated expression host type.
-    /// </summary>
-    /// <returns>The expression host code.</returns>
-    /// <param name="model">Model.</param>
-    private string GetExpressionHostCode(ExpressionModel model)
-    {
-      var builder = new ExpressionHostBuilder(model, _config.GetImportedNamespaces().Select(x => x.Namespace).ToArray());
-      return builder.TransformText();
-    }
-
-    /// <summary>
-    /// Gets the alternative namespace configuration (used when no explicit configuration was provided).
-    /// </summary>
-    /// <returns>The alternative namespace configuration.</returns>
-    private IExpressionConfiguration GetExpressionConfiguration()
-    {
-      var config = ConfigurationHelper.GetSection<ExpressionConfigurationSection>();
-      return config?? FallbackExpressionConfiguration.Instance;
+      return new CSharpExpression(model.ExpressionId,
+                                  model.Specification,
+                                  hostCreator);
     }
 
     #endregion
@@ -141,10 +49,10 @@ namespace CSF.Zpt.ExpressionEvaluators.CSharpExpressions
     /// Initializes a new instance of the
     /// <see cref="CSF.Zpt.ExpressionEvaluators.CSharpExpressions.CSharpExpressionFactory"/> class.
     /// </summary>
-    /// <param name="config">Expression config.</param>
-    public CSharpExpressionFactory(IExpressionConfiguration config = null)
+    /// <param name="hostCreatorFactory">Host creator factory.</param>
+    public CSharpExpressionFactory(IExpressionHostCompiler hostCreatorFactory = null)
     {
-      _config = config?? GetExpressionConfiguration();
+      _hostCreatorFactory = hostCreatorFactory?? new ExpressionHostCompiler();
     }
 
     #endregion

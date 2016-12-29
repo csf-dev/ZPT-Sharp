@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using CSF.Zpt.Tales;
+using CSF.Zpt.ExpressionEvaluators.CSharpExpressions.Spec;
 
 namespace CSF.Zpt.ExpressionEvaluators.CSharpExpressions
 {
@@ -16,7 +17,8 @@ namespace CSF.Zpt.ExpressionEvaluators.CSharpExpressions
     private static int _nextId;
     private static object _syncRoot;
 
-    private readonly ICSharpExpressionFactory _factory;
+    private readonly IExpressionSpecificationFactory _specFactory;
+    private readonly ICSharpExpressionFactory _expressionFactory;
 
     #endregion
 
@@ -39,35 +41,32 @@ namespace CSF.Zpt.ExpressionEvaluators.CSharpExpressions
         throw new ArgumentNullException(nameof(model));
       }
 
-      var allDefinitions = model.GetAllDefinitions();
+      var spec = _specFactory.CreateExpressionSpecification(text, model);
 
-      var sortedVariableNames = allDefinitions.Keys.OrderBy(x => x).ToArray();
-      return _cache.GetOrAddExpression(text, sortedVariableNames, CreateExpression);
+      return _cache.GetOrAddExpression(spec, CreateExpression);
     }
 
     /// <summary>
     /// Creates a <see cref="CSharpExpression"/> from the text and variable names.
     /// </summary>
     /// <returns>The expression.</returns>
-    /// <param name="text">Text.</param>
-    /// <param name="variableNames">Variable names.</param>
-    private CSharpExpression CreateExpression(string text, string[] variableNames)
+    /// <param name="spec">Expression specification.</param>
+    private CSharpExpression CreateExpression(ExpressionSpecification spec)
     {
-      var model = CreateExpressionModel(text, variableNames);
-      return _factory.Create(model);
+      var model = CreateExpressionModel(spec);
+      return _expressionFactory.Create(model);
     }
 
     /// <summary>
     /// Creates an expression model matching the given text and variable names.
     /// </summary>
     /// <returns>The expression model.</returns>
-    /// <param name="text">Text.</param>
-    /// <param name="variableNames">Variable names.</param>
-    private ExpressionModel CreateExpressionModel(string text, string[] variableNames)
+    /// <param name="spec">Expression specification.</param>
+    private ExpressionModel CreateExpressionModel(ExpressionSpecification spec)
     {
       lock(_syncRoot)
       {
-        return new ExpressionModel(_nextId++, text, variableNames);
+        return new ExpressionModel(_nextId++, spec);
       }
     }
 
@@ -79,10 +78,13 @@ namespace CSF.Zpt.ExpressionEvaluators.CSharpExpressions
     /// Initializes a new instance of the
     /// <see cref="CSF.Zpt.ExpressionEvaluators.CSharpExpressions.CSharpExpressionService"/> class.
     /// </summary>
-    /// <param name="factory">Factory.</param>
-    public CSharpExpressionService(ICSharpExpressionFactory factory = null)
+    /// <param name="expressionFactory">Expression factory.</param>
+    /// <param name="specFactory">Expression specification factory.</param>
+    public CSharpExpressionService(ICSharpExpressionFactory expressionFactory = null,
+                                   IExpressionSpecificationFactory specFactory = null)
     {
-      _factory = factory?? new CSharpExpressionFactory();
+      _expressionFactory = expressionFactory?? new CSharpExpressionFactory();
+      _specFactory = specFactory?? new ExpressionSpecificationFactory();
     }
 
     /// <summary>

@@ -1,4 +1,5 @@
 ﻿using System;
+using CSF.Zpt.ExpressionEvaluators.CSharpExpressions.Spec;
 
 namespace CSF.Zpt.ExpressionEvaluators.CSharpExpressions
 {
@@ -11,12 +12,10 @@ namespace CSF.Zpt.ExpressionEvaluators.CSharpExpressions
     /// Either gets an expression from the cache, or creates &amp; adds it if it is not found.
     /// </summary>
     /// <returns>The expression.</returns>
-    /// <param name="text">Text.</param>
-    /// <param name="variableNames">Variable names.</param>
+    /// <param name="spec">Expression specification.</param>
     /// <param name="expressionCreator">Expression creator.</param>
-    CSharpExpression GetOrAddExpression(string text,
-                                        string[] variableNames,
-                                        Func<string,string[],CSharpExpression> expressionCreator);
+    CSharpExpression GetOrAddExpression(ExpressionSpecification spec,
+                                        Func<ExpressionSpecification,CSharpExpression> expressionCreator);
   }
 }
 

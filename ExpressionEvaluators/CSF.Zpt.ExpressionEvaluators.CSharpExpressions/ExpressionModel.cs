@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using CSF.Zpt.ExpressionEvaluators.CSharpExpressions.Spec;
 
 namespace CSF.Zpt.ExpressionEvaluators.CSharpExpressions
 {
@@ -27,20 +28,10 @@ namespace CSF.Zpt.ExpressionEvaluators.CSharpExpressions
     }
 
     /// <summary>
-    /// Gets the expression text.
+    /// Gets the specification from which the current instance was created.
     /// </summary>
-    /// <value>The expression text.</value>
-    public string ExpressionText
-    {
-      get;
-      private set;
-    }
-
-    /// <summary>
-    /// Gets the property (variable) names associated with the expression.
-    /// </summary>
-    /// <value>The property names.</value>
-    public string[] PropertyNames
+    /// <value>The expression specification.</value>
+    public ExpressionSpecification Specification
     {
       get;
       private set;
@@ -70,6 +61,15 @@ namespace CSF.Zpt.ExpressionEvaluators.CSharpExpressions
       return String.Format("ExpressionHost_{0}", ExpressionId);
     }
 
+    /// <summary>
+    /// Gets the full (namespace-qualified) name for the generated type.
+    /// </summary>
+    /// <returns>The class full name.</returns>
+    public string GetClassFullName()
+    {
+      return String.Concat(Namespace, ".", GetClassName());
+    }
+
     #endregion
 
     #region constructor
@@ -78,22 +78,16 @@ namespace CSF.Zpt.ExpressionEvaluators.CSharpExpressions
     /// Initializes a new instance of the <see cref="CSF.Zpt.ExpressionEvaluators.CSharpExpressions.ExpressionModel"/> class.
     /// </summary>
     /// <param name="id">Identifier.</param>
-    /// <param name="text">Text.</param>
-    /// <param name="properties">Properties.</param>
-    public ExpressionModel(int id, string text, string[] properties)
+    /// <param name="spec">Expression specification.</param>
+    public ExpressionModel(int id, ExpressionSpecification spec)
     {
-      if(text == null)
+      if(spec == null)
       {
-        throw new ArgumentNullException(nameof(text));
-      }
-      if(properties == null)
-      {
-        throw new ArgumentNullException(nameof(properties));
+        throw new ArgumentNullException(nameof(spec));
       }
 
       ExpressionId = id;
-      ExpressionText = text;
-      PropertyNames = properties;
+      Specification = spec;
     }
 
     #endregion
