@@ -8,14 +8,17 @@
 foreach(var ns in GetUsingNamespaces())
 {
   #>
-using <#= ns #>;<#
+using <#= ns #>;
+<#
 }
 foreach(var aliasedNs in GetAliasedUsingNamespaces())
 {
   #>
-using <#= aliasedNs.Item2 #> = <#= aliasedNs.Item1 #>;<#
+using <#= aliasedNs.Item2 #> = <#= aliasedNs.Item1 #>;
+<#
 }
 #>
+
 
 namespace <#= GetClassNamespace() #>
 {
@@ -79,4 +82,3 @@ foreach(var prop in GetTypedProperties())
     #endregion
   }
 }
-

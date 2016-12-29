@@ -15,9 +15,16 @@
   <data name="CompilerErrorFormat" xml:space="preserve">
     <value>Compiler error for expression '{1}':{0}</value>
   </data>
-  <data name="CodeToBeCompiledFormat" xml:space="preserve">
+  <data name="CodeWhichCausedCompileErrorFormat" xml:space="preserve">
     <value>The code which raised the preceding warning is as follows:
----
-{0}</value>
+// Begin generated code
+{0}
+// End generated code</value>
+  </data>
+  <data name="CodeToBeCompiledFormat" xml:space="preserve">
+    <value>Successfully compiled the following expression host class:
+// Begin generated code
+{0}
+// End generated code</value>
   </data>
 </root>

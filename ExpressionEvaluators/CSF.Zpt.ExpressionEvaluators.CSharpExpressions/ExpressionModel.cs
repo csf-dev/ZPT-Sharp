@@ -11,7 +11,7 @@ namespace CSF.Zpt.ExpressionEvaluators.CSharpExpressions
   {
     #region constants
 
-    private const string DynamicCodeNamespace = "CSF.Zpt.DynamicCSharpExpressions";
+    private const string DynamicCodeNamespace = "GeneratedCSharpExpressionHosts";
 
     #endregion
 

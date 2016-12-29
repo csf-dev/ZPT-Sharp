@@ -157,14 +157,21 @@ namespace CSF.Zpt.ExpressionEvaluators.CSharpExpressions.Host
                                               model.Specification.Text);
         }
 
-        ZptConstants.TraceSource.TraceEvent(System.Diagnostics.TraceEventType.Verbose,
+        ZptConstants.TraceSource.TraceEvent(System.Diagnostics.TraceEventType.Information,
                                             5,
-                                            Resources.LogFormats.CodeToBeCompiledFormat,
+                                            Resources.LogFormats.CodeWhichCausedCompileErrorFormat,
                                             code);
 
         throw new CSharpExpressionExceptionException(Resources.ExceptionMessages.MustNotBeCompileErrors) {
           ExpressionText = model.Specification.Text
         };
+      }
+      else
+      {
+        ZptConstants.TraceSource.TraceEvent(System.Diagnostics.TraceEventType.Verbose,
+                                            5,
+                                            Resources.LogFormats.CodeToBeCompiledFormat,
+                                            code);
       }
     }
 

@@ -40,7 +40,7 @@ namespace Test.CSF.Zpt.ExpressionEvaluators.CSharpExpressions.Host
     #region tests
 
     [Test]
-    public void Create_returns_non_null_with_no_parameters()
+    public void GetHostCreator_returns_non_null_instance()
     {
       // Arrange
       var model = CreateModel("System.DateTime.Today.ToString()");
@@ -53,7 +53,7 @@ namespace Test.CSF.Zpt.ExpressionEvaluators.CSharpExpressions.Host
     }
 
     [Test]
-    public void Create_returns_expression_which_may_be_executed_with_no_parameters()
+    public void GetHostCreator_returns_expression_which_may_be_executed_with_no_parameters()
     {
       // Arrange
       var model = CreateModel("System.DateTime.Today.ToString()");
@@ -66,11 +66,25 @@ namespace Test.CSF.Zpt.ExpressionEvaluators.CSharpExpressions.Host
     }
 
     [Test]
-    public void Create_returns_expression_which_may_be_executed_with_many_namespaces()
+    public void GetHostCreator_returns_expression_which_may_be_executed_with_aliased_namespace()
+    {
+      // Arrange
+      var model = CreateModel("sys.DateTime.Today.ToString()",
+                              aliasedNamespaces: new [] { new Tuple<string,string>("System", "sys") });
+
+      // Act
+      var result = ExerciseSut(model);
+
+      // Assert
+      Assert.AreEqual(DateTime.Today.ToString(), result);
+    }
+
+    [Test]
+    public void GetHostCreator_returns_expression_which_may_be_executed_with_many_namespaces()
     {
       // Arrange
       var model = CreateModel("DateTime.Today.ToString()",
-                              namespaces: new [] {
+                              nonAliasedNamespaces: new [] {
                                 "System",
                                 "System.Collections",
                                 "System.Collections.Generic",
@@ -85,7 +99,7 @@ namespace Test.CSF.Zpt.ExpressionEvaluators.CSharpExpressions.Host
     }
 
     [Test]
-    public void Create_returns_expression_which_may_be_executed_with_some_parameters()
+    public void GetHostCreator_returns_expression_which_may_be_executed_with_some_parameters()
     {
       // Arrange
       var variables = new Dictionary<string,object>();
@@ -93,7 +107,7 @@ namespace Test.CSF.Zpt.ExpressionEvaluators.CSharpExpressions.Host
       variables.Add("number", 30);
 
       var model = CreateModel("System.String.Format(\"{0} is {1}\", text, number + 12)",
-                              parameters: variables.Keys);
+                              dynamicParameterNames: variables.Keys);
 
       // Act
       var result = ExerciseSut(model, variables);
@@ -103,7 +117,7 @@ namespace Test.CSF.Zpt.ExpressionEvaluators.CSharpExpressions.Host
     }
 
     [Test]
-    public void Create_returns_expression_which_may_be_executed_with_complex_parameters()
+    public void GetHostCreator_returns_expression_which_may_be_executed_with_complex_parameters()
     {
       // Arrange
       var person = new Person() {
@@ -117,7 +131,7 @@ namespace Test.CSF.Zpt.ExpressionEvaluators.CSharpExpressions.Host
       variables.Add("referenceDate", referenceDate);
 
       var model = CreateModel("(referenceDate - person.DateOfBirth).TotalDays",
-                              parameters: variables.Keys);
+                              dynamicParameterNames: variables.Keys);
 
       // Act
       var result = ExerciseSut(model, variables);
@@ -126,21 +140,70 @@ namespace Test.CSF.Zpt.ExpressionEvaluators.CSharpExpressions.Host
       Assert.AreEqual(expectedResult, result);
     }
 
+    [Test]
+    public void GetHostCreator_returns_expression_which_may_be_executed_with_typed_parameters()
+    {
+      // Arrange
+      var variables = new Dictionary<string,object>();
+      variables.Add("amounts", new int[] { 10, 20, 30 });
+
+      var model = CreateModel("amounts.Sum()",
+                              typedParameters: new [] { new Tuple<string,string>("amounts", "IEnumerable<int>") },
+                              nonAliasedNamespaces: new [] { "System", "System.Collections.Generic", "System.Linq" });
+
+      // Act
+      var result = ExerciseSut(model, variables);
+
+      // Assert
+      Assert.AreEqual(60, result);
+    }
+
+    [Test]
+    public void GetHostCreator_returns_expression_which_may_be_executed_with_typed_parameters_and_lambda()
+    {
+      // Arrange
+      var variables = new Dictionary<string,object>();
+      variables.Add("amounts", new int[] { 10, 20, 30 });
+
+      var model = CreateModel("String.Join(\"-\", amounts.Select(x => x + 5))",
+                              typedParameters: new [] { new Tuple<string,string>("amounts", "IEnumerable<int>") },
+                              nonAliasedNamespaces: new [] { "System", "System.Collections.Generic", "System.Linq" });
+
+      // Act
+      var result = ExerciseSut(model, variables);
+
+      // Assert
+      Assert.AreEqual("15-25-35", result);
+    }
+
     #endregion
 
     #region methods
 
     private ExpressionModel CreateModel(string text,
-                                        IEnumerable<string> parameters = null,
-                                        IEnumerable<string> namespaces = null)
+                                        IEnumerable<string> dynamicParameterNames = null,
+                                        IEnumerable<string> nonAliasedNamespaces = null,
+                                        IEnumerable<Tuple<string,string>> typedParameters = null,
+                                        IEnumerable<Tuple<string,string>> aliasedNamespaces = null)
     {
-      var expressionParams = parameters?? Enumerable.Empty<string>();
-      var expressionNamespaces = namespaces?? Enumerable.Empty<string>();
+      var dynamicParamNames = dynamicParameterNames?? Enumerable.Empty<string>();
+      var typedParams = typedParameters?? Enumerable.Empty<Tuple<string,string>>();
+      var paramSpecs = dynamicParamNames
+        .Select(x => new VariableSpecification(x))
+        .Union(typedParams.Select(x => new VariableSpecification(x.Item1, x.Item2)))
+        .ToArray();
+
+      var usingNamespaces = nonAliasedNamespaces?? Enumerable.Empty<string>();
+      var usingAliasedNamespaces = aliasedNamespaces?? Enumerable.Empty<Tuple<string,string>>();
+      var namespaceSpecs = usingNamespaces
+        .Select(x => new UsingNamespaceSpecification(x))
+        .Union(usingAliasedNamespaces.Select(x => new UsingNamespaceSpecification(x.Item1, x.Item2)))
+        .ToArray();
 
       var spec = new ExpressionSpecification(text,
-                                             expressionParams.Select(x => new VariableSpecification(x)),
+                                             paramSpecs,
                                              Enumerable.Empty<ReferencedAssemblySpecification>(),
-                                             expressionNamespaces.Select(x => new UsingNamespaceSpecification(x)));
+                                             namespaceSpecs);
 
       return new ExpressionModel(_nextId ++, spec);
     }

@@ -26,7 +26,7 @@ foreach(var ns in GetUsingNamespaces())
   
             this.Write("using ");
             this.Write(this.ToStringHelper.ToStringWithCulture( ns ));
-            this.Write(";");
+            this.Write(";\n");
 
 }
 foreach(var aliasedNs in GetAliasedUsingNamespaces())
@@ -36,11 +36,11 @@ foreach(var aliasedNs in GetAliasedUsingNamespaces())
             this.Write(this.ToStringHelper.ToStringWithCulture( aliasedNs.Item2 ));
             this.Write(" = ");
             this.Write(this.ToStringHelper.ToStringWithCulture( aliasedNs.Item1 ));
-            this.Write(";");
+            this.Write(";\n");
 
 }
 
-            this.Write("\nnamespace ");
+            this.Write("\n\nnamespace ");
             this.Write(this.ToStringHelper.ToStringWithCulture( GetClassNamespace() ));
             this.Write("\n{\n  public class ");
             this.Write(this.ToStringHelper.ToStringWithCulture( GetClassName() ));
@@ -92,7 +92,7 @@ foreach(var prop in GetTypedProperties())
 
 }
 
-            this.Write("      default:\n        var message = System.String.Format(\"The variable name '{0}' is not valid for this expression.\", name);\n        throw new System.ArgumentException(message, \"name\");\n      }\n    }\n\n    #endregion\n  }\n}\n\n");
+            this.Write("      default:\n        var message = System.String.Format(\"The variable name '{0}' is not valid for this expression.\", name);\n        throw new System.ArgumentException(message, \"name\");\n      }\n    }\n\n    #endregion\n  }\n}\n");
             return this.GenerationEnvironment.ToString();
         }
         
