@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Reflection;
 
 namespace CSF.Zpt.ExpressionEvaluators.CSharpExpressions.Spec
 {
@@ -65,9 +66,9 @@ namespace CSF.Zpt.ExpressionEvaluators.CSharpExpressions.Spec
 
     /// <summary>
     /// Initializes a new instance of the
-    /// <see cref="CSF.Zpt.ExpressionEvaluators.CSharpExpressions.ReferencedAssemblySpecification"/> class.
+    /// <see cref="CSF.Zpt.ExpressionEvaluators.CSharpExpressions.Spec.ReferencedAssemblySpecification"/> class.
     /// </summary>
-    /// <param name="name">Name.</param>
+    /// <param name="name">The assembly name.</param>
     public ReferencedAssemblySpecification(string name)
     {
       if(name == null)

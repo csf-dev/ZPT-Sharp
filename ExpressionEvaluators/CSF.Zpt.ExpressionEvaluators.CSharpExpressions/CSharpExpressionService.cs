@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using CSF.Zpt.Tales;
 
 namespace CSF.Zpt.ExpressionEvaluators.CSharpExpressions
 {
@@ -25,20 +26,22 @@ namespace CSF.Zpt.ExpressionEvaluators.CSharpExpressions
     /// Gets a <see cref="CSharpExpression"/> matching the given expression text and variable names.
     /// </summary>
     /// <returns>The expression.</returns>
-    /// <param name="text">Text.</param>
-    /// <param name="variableNames">Variable names.</param>
-    public CSharpExpression GetExpression(string text, IEnumerable<string> variableNames)
+    /// <param name="text">The expression text.</param>
+    /// <param name="model">The current TALES model.</param>
+    public CSharpExpression GetExpression(string text, ITalesModel model)
     {
       if(text == null)
       {
         throw new ArgumentNullException(nameof(text));
       }
-      if(variableNames == null)
+      if(model == null)
       {
-        throw new ArgumentNullException(nameof(variableNames));
+        throw new ArgumentNullException(nameof(model));
       }
 
-      var sortedVariableNames = variableNames.OrderBy(x => x).ToArray();
+      var allDefinitions = model.GetAllDefinitions();
+
+      var sortedVariableNames = allDefinitions.Keys.OrderBy(x => x).ToArray();
       return _cache.GetOrAddExpression(text, sortedVariableNames, CreateExpression);
     }
 

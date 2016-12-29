@@ -16,7 +16,7 @@ namespace CSF.Zpt.ExpressionEvaluators.CSharpExpressions
   {
     #region fields
 
-    private INamespaceConfiguration _namespaceConfig;
+    private IExpressionConfiguration _config;
 
     #endregion
 
@@ -119,7 +119,7 @@ namespace CSF.Zpt.ExpressionEvaluators.CSharpExpressions
     /// <param name="model">Model.</param>
     private string GetExpressionHostCode(ExpressionModel model)
     {
-      var builder = new ExpressionHostBuilder(model, _namespaceConfig.GetNamespaces());
+      var builder = new ExpressionHostBuilder(model, _config.GetImportedNamespaces().Select(x => x.Namespace).ToArray());
       return builder.TransformText();
     }
 
@@ -127,10 +127,10 @@ namespace CSF.Zpt.ExpressionEvaluators.CSharpExpressions
     /// Gets the alternative namespace configuration (used when no explicit configuration was provided).
     /// </summary>
     /// <returns>The alternative namespace configuration.</returns>
-    private INamespaceConfiguration GetAlternativeNamespaceConfiguration()
+    private IExpressionConfiguration GetExpressionConfiguration()
     {
-      var config = ConfigurationHelper.GetSection<NamespaceConfiguration>();
-      return config?? FallbackNamespaceConfiguration.Default;
+      var config = ConfigurationHelper.GetSection<ExpressionConfigurationSection>();
+      return config?? FallbackExpressionConfiguration.Instance;
     }
 
     #endregion
@@ -141,10 +141,10 @@ namespace CSF.Zpt.ExpressionEvaluators.CSharpExpressions
     /// Initializes a new instance of the
     /// <see cref="CSF.Zpt.ExpressionEvaluators.CSharpExpressions.CSharpExpressionFactory"/> class.
     /// </summary>
-    /// <param name="namespaceConfig">Namespace config.</param>
-    public CSharpExpressionFactory(INamespaceConfiguration namespaceConfig = null)
+    /// <param name="config">Expression config.</param>
+    public CSharpExpressionFactory(IExpressionConfiguration config = null)
     {
-      _namespaceConfig = namespaceConfig?? GetAlternativeNamespaceConfiguration();
+      _config = config?? GetExpressionConfiguration();
     }
 
     #endregion

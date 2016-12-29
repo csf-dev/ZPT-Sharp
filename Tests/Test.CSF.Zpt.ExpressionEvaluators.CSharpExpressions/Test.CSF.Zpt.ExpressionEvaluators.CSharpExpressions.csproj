@@ -57,5 +57,9 @@
       <Project>{3D5A705B-A414-4ACA-AC01-C053047F424E}</Project>
       <Name>CSF.Zpt.ExpressionEvaluators.CSharpFramework</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\CSF.Zpt.Abstractions\CSF.Zpt.Abstractions.csproj">
+      <Project>{8207CD9B-F1C1-4D75-B250-ACDFFBDCB071}</Project>
+      <Name>CSF.Zpt.Abstractions</Name>
+    </ProjectReference>
   </ItemGroup>
 </Project>

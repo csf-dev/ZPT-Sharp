@@ -5,6 +5,8 @@ using CSF.Zpt.ExpressionEvaluators.CSharpFramework;
 using System.Collections.Generic;
 using System.Linq;
 using Moq;
+using CSF.Zpt.ExpressionEvaluators.CSharpExpressions.Spec;
+using CSF.Zpt.Tales;
 
 namespace Test.CSF.Zpt.ExpressionEvaluators.CSharpExpressions
 {
@@ -14,7 +16,7 @@ namespace Test.CSF.Zpt.ExpressionEvaluators.CSharpExpressions
     #region fields
 
     private CSharpExpressionFactory _sut;
-    private Mock<INamespaceConfiguration> _namespaceConfig;
+    private Mock<IExpressionConfiguration> _namespaceConfig;
     private int _nextId;
 
     #endregion
@@ -30,8 +32,8 @@ namespace Test.CSF.Zpt.ExpressionEvaluators.CSharpExpressions
     [SetUp]
     public void Setup()
     {
-      _namespaceConfig = new Mock<INamespaceConfiguration>();
-      _namespaceConfig.Setup(x => x.GetNamespaces()).Returns(new [] { "System" });
+      _namespaceConfig = new Mock<IExpressionConfiguration>();
+      _namespaceConfig.Setup(x => x.GetImportedNamespaces()).Returns(new [] { new UsingNamespaceSpecification("System") });
       _sut = new CSharpExpressionFactory(_namespaceConfig.Object);
     }
 
@@ -60,7 +62,8 @@ namespace Test.CSF.Zpt.ExpressionEvaluators.CSharpExpressions
 
       // Act
       var expression = _sut.Create(model);
-      var result = expression.Evaluate(new Dictionary<string, object>());
+      var allDefinitions = new Dictionary<string,object>();
+      var result = expression.Evaluate(Mock.Of<ITalesModel>(x => x.GetAllDefinitions() == allDefinitions));
 
       // Assert
       Assert.AreEqual(DateTime.Today.ToString(), result);
@@ -72,17 +75,20 @@ namespace Test.CSF.Zpt.ExpressionEvaluators.CSharpExpressions
       // Arrange
       var model = CreateModel("DateTime.Today.ToString()", Enumerable.Empty<string>());
       _namespaceConfig
-        .Setup(x => x.GetNamespaces())
+        .Setup(x => x.GetImportedNamespaces())
         .Returns(new [] {
           "System",
           "System.Collections",
           "System.Collections.Generic",
           "System.Linq",
-        });
+        }
+          .Select(x => new UsingNamespaceSpecification(x))
+          .ToArray());
 
       // Act
       var expression = _sut.Create(model);
-      var result = expression.Evaluate(new Dictionary<string, object>());
+      var allDefinitions = new Dictionary<string,object>();
+      var result = expression.Evaluate(Mock.Of<ITalesModel>(x => x.GetAllDefinitions() == allDefinitions));
 
       // Assert
       Assert.AreEqual(DateTime.Today.ToString(), result);
@@ -100,7 +106,7 @@ namespace Test.CSF.Zpt.ExpressionEvaluators.CSharpExpressions
 
       // Act
       var expression = _sut.Create(model);
-      var result = expression.Evaluate(variables);
+      var result = expression.Evaluate(Mock.Of<ITalesModel>(x => x.GetAllDefinitions() == variables));
 
       // Assert
       Assert.AreEqual("The answer is 42", result);
@@ -124,7 +130,7 @@ namespace Test.CSF.Zpt.ExpressionEvaluators.CSharpExpressions
 
       // Act
       var expression = _sut.Create(model);
-      var result = expression.Evaluate(variables);
+      var result = expression.Evaluate(Mock.Of<ITalesModel>(x => x.GetAllDefinitions() == variables));
 
       // Assert
       Assert.AreEqual(expectedResult, result);

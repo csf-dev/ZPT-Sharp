@@ -23,7 +23,7 @@ namespace CSF.Zpt.ExpressionEvaluators.CSharpExpressions.Spec
     /// Gets the variable type.
     /// </summary>
     /// <value>The type.</value>
-    public Type Type
+    public string TypeName
     {
       get;
       private set;
@@ -36,7 +36,7 @@ namespace CSF.Zpt.ExpressionEvaluators.CSharpExpressions.Spec
     public bool IsDynamicType
     {
       get {
-        return Type == null;
+        return TypeName == null;
       }
     }
 
@@ -51,7 +51,7 @@ namespace CSF.Zpt.ExpressionEvaluators.CSharpExpressions.Spec
     /// <returns>A hash code for this instance that is suitable for use in hashing algorithms and data structures such as a hash table.</returns>
     public override int GetHashCode()
     {
-      return Name.GetHashCode() ^ (IsDynamicType? 0 : Type.GetHashCode());
+      return Name.GetHashCode() ^ (IsDynamicType? 0 : TypeName.GetHashCode());
     }
 
     /// <summary>
@@ -78,7 +78,7 @@ namespace CSF.Zpt.ExpressionEvaluators.CSharpExpressions.Spec
     {
       return (other != null
               && this.Name == other.Name
-              && this.Type == other.Type);
+              && this.TypeName == other.TypeName);
     }
 
     #endregion
@@ -87,18 +87,18 @@ namespace CSF.Zpt.ExpressionEvaluators.CSharpExpressions.Spec
 
     /// <summary>
     /// Initializes a new instance of the
-    /// <see cref="CSF.Zpt.ExpressionEvaluators.CSharpExpressions.VariableSpecification"/> class.
+    /// <see cref="CSF.Zpt.ExpressionEvaluators.CSharpExpressions.Spec.VariableSpecification"/> class.
     /// </summary>
     /// <param name="name">Name.</param>
     public VariableSpecification(string name) : this(name, null) {}
 
     /// <summary>
     /// Initializes a new instance of the
-    /// <see cref="CSF.Zpt.ExpressionEvaluators.CSharpExpressions.VariableSpecification"/> class.
+    /// <see cref="CSF.Zpt.ExpressionEvaluators.CSharpExpressions.Spec.VariableSpecification"/> class.
     /// </summary>
     /// <param name="name">Name.</param>
-    /// <param name="type">Type.</param>
-    public VariableSpecification(string name, Type type)
+    /// <param name="typeName">Type name.</param>
+    public VariableSpecification(string name, string typeName)
     {
       if(name == null)
       {
@@ -106,7 +106,7 @@ namespace CSF.Zpt.ExpressionEvaluators.CSharpExpressions.Spec
       }
 
       Name = name;
-      Type = type;
+      TypeName = typeName;
     }
 
     #endregion

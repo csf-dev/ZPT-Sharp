@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using CSF.Zpt.Tales;
 
 namespace CSF.Zpt.ExpressionEvaluators.CSharpExpressions
 {
@@ -12,9 +13,9 @@ namespace CSF.Zpt.ExpressionEvaluators.CSharpExpressions
     /// Gets a <see cref="CSharpExpression"/> matching the given expression text and variable names.
     /// </summary>
     /// <returns>The expression.</returns>
-    /// <param name="text">Text.</param>
-    /// <param name="variableNames">Variable names.</param>
-    CSharpExpression GetExpression(string text, IEnumerable<string> variableNames);
+    /// <param name="text">The expression text.</param>
+    /// <param name="model">The current TALES model.</param>
+    CSharpExpression GetExpression(string text, ITalesModel model);
   }
 }
 

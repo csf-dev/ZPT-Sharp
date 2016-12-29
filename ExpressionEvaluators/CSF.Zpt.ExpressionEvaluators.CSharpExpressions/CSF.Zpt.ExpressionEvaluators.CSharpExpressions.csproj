@@ -86,18 +86,20 @@
     </Compile>
     <Compile Include="CSharpExpressionException.cs" />
     <Compile Include="TemplateWriterBase.cs" />
-    <Compile Include="INamespaceConfiguration.cs" />
-    <Compile Include="FallbackNamespaceConfiguration.cs" />
-    <Compile Include="NamespaceConfiguration.cs" />
     <Compile Include="Resources\LogFormats.Designer.cs">
       <DependentUpon>LogFormats.resx</DependentUpon>
     </Compile>
     <Compile Include="AssemblyInfo.cs" />
-    <Compile Include="IAssemblyReferenceService.cs" />
     <Compile Include="Spec\ExpressionSpecification.cs" />
     <Compile Include="Spec\ReferencedAssemblySpecification.cs" />
     <Compile Include="Spec\UsingNamespaceSpecification.cs" />
     <Compile Include="Spec\VariableSpecification.cs" />
+    <Compile Include="Spec\IExpressionSpecificationFactory.cs" />
+    <Compile Include="IExpressionConfiguration.cs" />
+    <Compile Include="FallbackExpressionConfiguration.cs" />
+    <Compile Include="Spec\ExpressionSpecificationFactory.cs" />
+    <Compile Include="ExpressionConfigurationSection.cs" />
+    <Compile Include="Spec\VariableTypeDefinition.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ExpressionHostBuilder.tt">

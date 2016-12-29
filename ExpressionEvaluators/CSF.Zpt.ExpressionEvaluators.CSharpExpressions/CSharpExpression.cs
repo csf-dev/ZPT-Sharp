@@ -4,6 +4,7 @@ using System.Linq;
 using System.Reflection;
 using CSF.Zpt.ExpressionEvaluators.CSharpFramework;
 using CSF.Zpt.Rendering;
+using CSF.Zpt.Tales;
 
 namespace CSF.Zpt.ExpressionEvaluators.CSharpExpressions
 {
@@ -71,13 +72,15 @@ namespace CSF.Zpt.ExpressionEvaluators.CSharpExpressions
     /// <summary>
     /// Evaluate the expression for the given variables.
     /// </summary>
-    /// <param name="variableDefinitions">Variable definitions.</param>
-    public virtual object Evaluate(IDictionary<string,object> variableDefinitions)
+    /// <param name="model">The TALES model.</param>
+    public virtual object Evaluate(ITalesModel model)
     {
-      if(variableDefinitions == null)
+      if(model == null)
       {
-        throw new ArgumentNullException(nameof(variableDefinitions));
+        throw new ArgumentNullException(nameof(model));
       }
+
+      var variableDefinitions = model.GetAllDefinitions();
 
       var variablesDefined = variableDefinitions.Keys.ToArray();
       if(!AreVariablesEquivalent(variablesDefined, _variableNames))
