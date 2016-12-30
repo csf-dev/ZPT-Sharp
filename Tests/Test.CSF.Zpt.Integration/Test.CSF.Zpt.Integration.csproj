@@ -246,6 +246,8 @@
     <None Include="Test data\ZptIntegrationTests\SourceDocuments\csharpTest3.html" />
     <None Include="Test data\ZptIntegrationTests\ExpectedOutputs\csharpTest3.html" />
     <None Include="Test data\ZptIntegrationTests\ExpectedOutputs\document_list.html" />
+    <None Include="Test data\ZptIntegrationTests\ExpectedOutputs\csharpTest4.html" />
+    <None Include="Test data\ZptIntegrationTests\SourceDocuments\csharpTest4.html" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\CSF.Zpt\CSF.Zpt.csproj">
