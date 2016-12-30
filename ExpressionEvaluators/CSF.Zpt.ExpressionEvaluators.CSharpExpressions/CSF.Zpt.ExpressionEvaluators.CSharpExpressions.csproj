@@ -70,43 +70,57 @@
   <ItemGroup>
     <Compile Include="CSharpExpression.cs" />
     <Compile Include="CSharpExpressionFactory.cs" />
-    <Compile Include="ExpressionHostBuilder.cs">
-      <DependentUpon>ExpressionHostBuilder.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ExpressionHostBuilder.partial.cs" />
     <Compile Include="ExpressionModel.cs" />
     <Compile Include="ICSharpExpressionFactory.cs" />
     <Compile Include="ICSharpExpressionService.cs" />
     <Compile Include="CSharpExpressionService.cs" />
-    <Compile Include="ICSharpExpressionCache.cs" />
-    <Compile Include="CSharpExpressionCache.cs" />
     <Compile Include="CSharpExpressionEvaluator.cs" />
     <Compile Include="Resources\ExceptionMessages.Designer.cs">
       <DependentUpon>ExceptionMessages.resx</DependentUpon>
     </Compile>
     <Compile Include="CSharpExpressionException.cs" />
-    <Compile Include="TemplateWriterBase.cs" />
-    <Compile Include="INamespaceConfiguration.cs" />
-    <Compile Include="FallbackNamespaceConfiguration.cs" />
-    <Compile Include="NamespaceConfiguration.cs" />
     <Compile Include="Resources\LogFormats.Designer.cs">
       <DependentUpon>LogFormats.resx</DependentUpon>
     </Compile>
     <Compile Include="AssemblyInfo.cs" />
+    <Compile Include="Spec\ExpressionSpecification.cs" />
+    <Compile Include="Spec\ReferencedAssemblySpecification.cs" />
+    <Compile Include="Spec\UsingNamespaceSpecification.cs" />
+    <Compile Include="Spec\VariableSpecification.cs" />
+    <Compile Include="Spec\IExpressionSpecificationFactory.cs" />
+    <Compile Include="IExpressionConfiguration.cs" />
+    <Compile Include="FallbackExpressionConfiguration.cs" />
+    <Compile Include="Spec\ExpressionSpecificationFactory.cs" />
+    <Compile Include="ExpressionConfigurationSection.cs" />
+    <Compile Include="Spec\VariableTypeDefinition.cs" />
+    <Compile Include="Host\ExpressionHostCreator.cs" />
+    <Compile Include="Host\ExpressionHostTemplate.partial.cs" />
+    <Compile Include="Host\ExpressionHostTemplate.cs">
+      <DependentUpon>ExpressionHostTemplate.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Host\IExpressionHostCompiler.cs" />
+    <Compile Include="Host\ExpressionHostCompiler.cs" />
+    <Compile Include="Host\IExpressionHostCreator.cs" />
+    <Compile Include="Host\TemplateWriterBase.cs" />
+    <Compile Include="CSharpAssemblyExpressionEvaluator.cs" />
+    <Compile Include="CSharpTypeExpressionEvaluator.cs" />
+    <Compile Include="CSharpNamespaceExpressionEvaluator.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="ExpressionHostBuilder.tt">
-      <Generator>TextTemplatingFilePreprocessor</Generator>
-      <LastGenOutput>ExpressionHostBuilder.cs</LastGenOutput>
-    </None>
     <None Include="CSF.Zpt.ExpressionEvaluators.CSharpExpressions.nuspec" />
     <None Include="CSF.Zpt.ExpressionEvaluators.CSharpExpressions.nuspec.pt" />
     <None Include="packages.config" />
     <None Include="app.config.install.xdt" />
     <None Include="app.config.uninstall.xdt" />
+    <None Include="Host\ExpressionHostTemplate.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>ExpressionHostTemplate.cs</LastGenOutput>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\" />
+    <Folder Include="Spec\" />
+    <Folder Include="Host\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\ExceptionMessages.resx">

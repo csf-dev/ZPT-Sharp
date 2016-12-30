@@ -80,7 +80,6 @@
     <None Include="Test data\ZptIntegrationTests\ExpectedOutputs\checkwithxmlheader.html" />
     <None Include="Test data\ZptIntegrationTests\ExpectedOutputs\csharpTest.html" />
     <None Include="Test data\ZptIntegrationTests\ExpectedOutputs\csharpTest2.html" />
-    <None Include="Test data\ZptIntegrationTests\ExpectedOutputs\document_list.ignored.html" />
     <None Include="Test data\ZptIntegrationTests\ExpectedOutputs\dtml3.html" />
     <None Include="Test data\ZptIntegrationTests\ExpectedOutputs\stringexpression.html" />
     <None Include="Test data\ZptIntegrationTests\ExpectedOutputs\teeshop1.html" />
@@ -244,6 +243,9 @@
     <None Include="Test data\ZptIntegrationTests\Yet to be included\SourceDocuments\translation.html" />
     <None Include="Test data\ZptModelIntegrationTests\ExpectedOutputs\test1.html" />
     <None Include="Test data\ZptModelIntegrationTests\SourceDocuments\test1.html" />
+    <None Include="Test data\ZptIntegrationTests\SourceDocuments\csharpTest3.html" />
+    <None Include="Test data\ZptIntegrationTests\ExpectedOutputs\csharpTest3.html" />
+    <None Include="Test data\ZptIntegrationTests\ExpectedOutputs\document_list.html" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\CSF.Zpt\CSF.Zpt.csproj">

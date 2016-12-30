@@ -116,6 +116,7 @@ namespace Test.CSF.Zpt.Integration
         batch.Items.Add(item);
       }
       output.TalKeywordOptions.Add("batch", batch);
+      output.TalKeywordOptions.Add("enumerableItems", new List<object>(items));
 
       // The 'laf' keyword option
       var laf = this.TemplateFactory.CreateTemplateFile(this.SourcePath.GetFiles("teeshoplaf.html").Single());

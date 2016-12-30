@@ -41,12 +41,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TestCSharpExpressionFactory.cs" />
     <Compile Include="Person.cs" />
+    <Compile Include="Host\TestExpressionHostCompiler.cs" />
+    <Compile Include="Spec\TestExpressionSpecificationFactory.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
     <None Include="packages.config" />
+    <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\ExpressionEvaluators\CSF.Zpt.ExpressionEvaluators.CSharpExpressions\CSF.Zpt.ExpressionEvaluators.CSharpExpressions.csproj">
@@ -57,5 +59,17 @@
       <Project>{3D5A705B-A414-4ACA-AC01-C053047F424E}</Project>
       <Name>CSF.Zpt.ExpressionEvaluators.CSharpFramework</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\CSF.Zpt.Abstractions\CSF.Zpt.Abstractions.csproj">
+      <Project>{8207CD9B-F1C1-4D75-B250-ACDFFBDCB071}</Project>
+      <Name>CSF.Zpt.Abstractions</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\CSF.Zpt.Log4net\CSF.Zpt.Log4net.csproj">
+      <Project>{81044439-06CF-44E2-BBF2-3800F1DEB5B1}</Project>
+      <Name>CSF.Zpt.Log4net</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Host\" />
+    <Folder Include="Spec\" />
   </ItemGroup>
 </Project>

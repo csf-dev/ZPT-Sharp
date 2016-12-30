@@ -51,5 +51,17 @@ namespace CSF.Zpt.ExpressionEvaluators.CSharpExpressions.Resources {
                 return ResourceManager.GetString("CompilerErrorFormat", resourceCulture);
             }
         }
+        
+        internal static string CodeWhichCausedCompileErrorFormat {
+            get {
+                return ResourceManager.GetString("CodeWhichCausedCompileErrorFormat", resourceCulture);
+            }
+        }
+        
+        internal static string CodeToBeCompiledFormat {
+            get {
+                return ResourceManager.GetString("CodeToBeCompiledFormat", resourceCulture);
+            }
+        }
     }
 }
