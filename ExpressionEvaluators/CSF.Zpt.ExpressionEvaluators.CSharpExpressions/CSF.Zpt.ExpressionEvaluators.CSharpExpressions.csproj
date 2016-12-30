@@ -74,14 +74,11 @@
     <Compile Include="ICSharpExpressionFactory.cs" />
     <Compile Include="ICSharpExpressionService.cs" />
     <Compile Include="CSharpExpressionService.cs" />
-    <Compile Include="ICSharpExpressionCache.cs" />
-    <Compile Include="CSharpExpressionCache.cs" />
     <Compile Include="CSharpExpressionEvaluator.cs" />
     <Compile Include="Resources\ExceptionMessages.Designer.cs">
       <DependentUpon>ExceptionMessages.resx</DependentUpon>
     </Compile>
     <Compile Include="CSharpExpressionException.cs" />
-    <Compile Include="TemplateWriterBase.cs" />
     <Compile Include="Resources\LogFormats.Designer.cs">
       <DependentUpon>LogFormats.resx</DependentUpon>
     </Compile>
@@ -104,6 +101,7 @@
     <Compile Include="Host\IExpressionHostCompiler.cs" />
     <Compile Include="Host\ExpressionHostCompiler.cs" />
     <Compile Include="Host\IExpressionHostCreator.cs" />
+    <Compile Include="Host\TemplateWriterBase.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="CSF.Zpt.ExpressionEvaluators.CSharpExpressions.nuspec" />

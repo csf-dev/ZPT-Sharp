@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using CSF.Zpt.Tales;
 using CSF.Zpt.ExpressionEvaluators.CSharpExpressions.Spec;
+using CSF.Caches;
 
 namespace CSF.Zpt.ExpressionEvaluators.CSharpExpressions
 {
@@ -13,7 +14,7 @@ namespace CSF.Zpt.ExpressionEvaluators.CSharpExpressions
   {
     #region fields
 
-    private static readonly ICSharpExpressionCache _cache;
+    private static readonly ICache<ExpressionSpecification,CSharpExpression> _cache;
     private static int _nextId;
     private static object _syncRoot;
 
@@ -43,18 +44,20 @@ namespace CSF.Zpt.ExpressionEvaluators.CSharpExpressions
 
       var spec = _specFactory.CreateExpressionSpecification(text, model);
 
-      return _cache.GetOrAddExpression(spec, CreateExpression);
+      return _cache.GetOrAdd(spec, GetExpressionCreator(spec));
     }
 
     /// <summary>
-    /// Creates a <see cref="CSharpExpression"/> from the text and variable names.
+    /// Returns a delegate which may be used to create an instance of <see cref="CSharpExpression"/> from the specification.
     /// </summary>
-    /// <returns>The expression.</returns>
+    /// <returns>The expression creator delegate.</returns>
     /// <param name="spec">Expression specification.</param>
-    private CSharpExpression CreateExpression(ExpressionSpecification spec)
+    private Func<CSharpExpression> GetExpressionCreator(ExpressionSpecification spec)
     {
-      var model = CreateExpressionModel(spec);
-      return _expressionFactory.Create(model);
+      return () => {
+        var model = CreateExpressionModel(spec);
+        return _expressionFactory.Create(model);
+      };
     }
 
     /// <summary>
@@ -92,7 +95,7 @@ namespace CSF.Zpt.ExpressionEvaluators.CSharpExpressions
     /// </summary>
     static CSharpExpressionService()
     {
-      _cache = new CSharpExpressionCache();
+      _cache = new ThreadSafeCache<ExpressionSpecification, CSharpExpression>();
       _nextId = 1;
       _syncRoot = new Object();
     }

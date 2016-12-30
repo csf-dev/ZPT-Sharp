@@ -15,7 +15,7 @@ namespace CSF.Zpt.ExpressionEvaluators.CSharpExpressions.Host {
     using System;
     
     
-    internal partial class ExpressionHostTemplate : CSF.Zpt.ExpressionEvaluators.CSharpExpressions.TemplateWriterBase {
+    internal partial class ExpressionHostTemplate : CSF.Zpt.ExpressionEvaluators.CSharpExpressions.Host.TemplateWriterBase {
         
         public override string TransformText() {
             this.GenerationEnvironment = null;
