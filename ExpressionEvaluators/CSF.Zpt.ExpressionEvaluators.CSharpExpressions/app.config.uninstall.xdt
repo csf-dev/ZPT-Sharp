@@ -1,7 +1,19 @@
 <?xml version="1.0"?>
 <configuration xmlns:xdt="http://schemas.microsoft.com/XML-Document-Transform">
+  <configSections>
+    <sectionGroup name="CSF">
+      <sectionGroup name="Zpt">
+        <sectionGroup name="ExpressionEvaluators">
+          <sectionGroup name="CSharpExpressions" xdt:Transform="Remove" xdt:Locator="Match(name)" />
+        </sectionGroup>
+      </sectionGroup>
+    </sectionGroup>
+  </configSections>
   <CSF>
     <Zpt>
+      <ExpressionEvaluators>
+        <CSharpExpressions xdt:Transform="Remove" />
+      </ExpressionEvaluators>
       <PluginConfigurationSection>
         <PluginAssemblies>
           <Assembly Path="CSF.Zpt.ExpressionEvaluators.CSharpExpressions.dll" xdt:Transform="Remove" />

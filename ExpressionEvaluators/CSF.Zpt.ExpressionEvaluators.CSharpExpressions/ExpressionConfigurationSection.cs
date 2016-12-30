@@ -60,7 +60,7 @@ namespace CSF.Zpt.ExpressionEvaluators.CSharpExpressions
 
       return Namespaces
         .Cast<NamespaceConfigurationElement>()
-        .Select(x => new UsingNamespaceSpecification(x.Namespace, x.Alias))
+        .Select(x => new UsingNamespaceSpecification(x.Name, x.Alias))
         .ToArray();
     }
 
@@ -91,6 +91,51 @@ namespace CSF.Zpt.ExpressionEvaluators.CSharpExpressions
   /// </summary>
   public class NamespaceConfigurationCollection : ConfigurationElementCollection
   {
+    internal const string PropertyName = "Namespace";
+
+    /// <summary>
+    /// Gets the configuration collection type.
+    /// </summary>
+    /// <value>The type of the collection.</value>
+    public override ConfigurationElementCollectionType CollectionType
+    {
+      get
+      {
+        return ConfigurationElementCollectionType.BasicMapAlternate;
+      }
+    }
+
+    /// <summary>
+    /// Gets the name of the element.
+    /// </summary>
+    /// <value>The name of the element.</value>
+    protected override string ElementName
+    {
+      get
+      {
+        return PropertyName;
+      }
+    }
+
+    /// <summary>
+    /// Determines whether the given string matches the <see cref="ElementName"/>.
+    /// </summary>
+    /// <returns><c>true</c> if the string matches the element name; otherwise, <c>false</c>.</returns>
+    /// <param name="elementName">Element name.</param>
+    protected override bool IsElementName(string elementName)
+    {
+      return elementName.Equals(PropertyName, StringComparison.InvariantCultureIgnoreCase);
+    }
+
+    /// <summary>
+    /// Determines whether this instance is read only.
+    /// </summary>
+    /// <returns><c>true</c> if this instance is read only; otherwise, <c>false</c>.</returns>
+    public override bool IsReadOnly()
+    {
+      return false;
+    }
+
     /// <summary>
     /// Creates the new element.
     /// </summary>
@@ -107,7 +152,19 @@ namespace CSF.Zpt.ExpressionEvaluators.CSharpExpressions
     /// <param name="element">Element.</param>
     protected override object GetElementKey(ConfigurationElement element)
     {
-      return ((NamespaceConfigurationElement) element).Namespace;
+      return ((NamespaceConfigurationElement) element).Name;
+    }
+
+    /// <summary>
+    /// Gets the <see cref="CSF.Zpt.ExpressionEvaluators.CSharpExpressions.NamespaceConfigurationElement"/> with the specified index.
+    /// </summary>
+    /// <param name="idx">Index.</param>
+    public NamespaceConfigurationElement this[int idx]
+    {
+      get
+      {
+        return (NamespaceConfigurationElement)BaseGet(idx);
+      }
     }
   }
 
@@ -120,14 +177,14 @@ namespace CSF.Zpt.ExpressionEvaluators.CSharpExpressions
     /// Gets or sets the namespace.
     /// </summary>
     /// <value>The namespace.</value>
-    [ConfigurationProperty(@"Namespace", IsRequired = true)]
-    public virtual string Namespace
+    [ConfigurationProperty(@"Name", IsRequired = true)]
+    public virtual string Name
     {
       get {
-        return (string) this["Namespace"];
+        return (string) this["Name"];
       }
       set {
-        this["Namespace"] = value;
+        this["Name"] = value;
       }
     }
 
@@ -152,6 +209,51 @@ namespace CSF.Zpt.ExpressionEvaluators.CSharpExpressions
   /// </summary>
   public class AssemblyReferenceConfigurationCollection : ConfigurationElementCollection
   {
+    internal const string PropertyName = "Assembly";
+
+    /// <summary>
+    /// Gets the configuration collection type.
+    /// </summary>
+    /// <value>The type of the collection.</value>
+    public override ConfigurationElementCollectionType CollectionType
+    {
+      get
+      {
+        return ConfigurationElementCollectionType.BasicMapAlternate;
+      }
+    }
+
+    /// <summary>
+    /// Gets the name of the element.
+    /// </summary>
+    /// <value>The name of the element.</value>
+    protected override string ElementName
+    {
+      get
+      {
+        return PropertyName;
+      }
+    }
+
+    /// <summary>
+    /// Determines whether the given string matches the <see cref="ElementName"/>.
+    /// </summary>
+    /// <returns><c>true</c> if the string matches the element name; otherwise, <c>false</c>.</returns>
+    /// <param name="elementName">Element name.</param>
+    protected override bool IsElementName(string elementName)
+    {
+      return elementName.Equals(PropertyName, StringComparison.InvariantCultureIgnoreCase);
+    }
+
+    /// <summary>
+    /// Determines whether this instance is read only.
+    /// </summary>
+    /// <returns><c>true</c> if this instance is read only; otherwise, <c>false</c>.</returns>
+    public override bool IsReadOnly()
+    {
+      return false;
+    }
+
     /// <summary>
     /// Creates the new element.
     /// </summary>
@@ -169,6 +271,18 @@ namespace CSF.Zpt.ExpressionEvaluators.CSharpExpressions
     protected override object GetElementKey(ConfigurationElement element)
     {
       return ((AssemblyReferenceConfigurationElement) element).Name;
+    }
+
+    /// <summary>
+    /// Gets the <see cref="CSF.Zpt.ExpressionEvaluators.CSharpExpressions.AssemblyReferenceConfigurationElement"/> with the specified index.
+    /// </summary>
+    /// <param name="idx">Index.</param>
+    public AssemblyReferenceConfigurationElement this[int idx]
+    {
+      get
+      {
+        return (AssemblyReferenceConfigurationElement)BaseGet(idx);
+      }
     }
   }
 
