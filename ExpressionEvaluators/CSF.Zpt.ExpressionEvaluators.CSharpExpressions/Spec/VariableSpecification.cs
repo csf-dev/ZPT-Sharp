@@ -1,11 +1,13 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace CSF.Zpt.ExpressionEvaluators.CSharpExpressions.Spec
 {
   /// <summary>
   /// Represents the specification for a variable to be included in an expression.
   /// </summary>
-  public class VariableSpecification : IEquatable<VariableSpecification>
+  public class VariableSpecification : IEquatable<VariableSpecification>, IComparable<VariableSpecification>, IComparable
   {
     #region properties
 
@@ -81,6 +83,44 @@ namespace CSF.Zpt.ExpressionEvaluators.CSharpExpressions.Spec
               && this.TypeName == other.TypeName);
     }
 
+    /// <summary>
+    /// Compares the current instance to a given <c>System.Object</c>.
+    /// </summary>
+    /// <returns>
+    /// A number indicating whether the current instance should be considered greater, less or equal to the
+    /// given instance.
+    /// </returns>
+    /// <param name="other">The object with which to compare.</param>
+    public int CompareTo(object other)
+    {
+      var spec = other as VariableSpecification;
+
+      if(spec == null)
+      {
+        return -1;
+      }
+
+      return CompareTo(spec);
+    }
+
+    /// <summary>
+    /// Compares the current instance to a given <see cref="VariableSpecification"/>.
+    /// </summary>
+    /// <returns>
+    /// A number indicating whether the current instance should be considered greater, less or equal to the
+    /// given instance.
+    /// </returns>
+    /// <param name="other">The object with which to compare.</param>
+    public int CompareTo(VariableSpecification other)
+    {
+      if(other == null)
+      {
+        return 1;
+      }
+
+      return Name.CompareTo(other.Name);
+    }
+
     #endregion
 
     #region constructor
@@ -107,6 +147,37 @@ namespace CSF.Zpt.ExpressionEvaluators.CSharpExpressions.Spec
 
       Name = name;
       TypeName = typeName;
+    }
+
+    #endregion
+
+    #region static methods
+
+    /// <summary>
+    /// Reads a series of variable values and gets the resultant definitions which matter for CSharp expressions.
+    /// </summary>
+    /// <returns>The variable specifications.</returns>
+    /// <param name="variableValues">Variable values.</param>
+    public static IEnumerable<VariableSpecification> GetVariableSpecifications(IDictionary<string,object> variableValues)
+    {
+      var variableTypes = variableValues.Values
+        .Where(x => x is VariableTypeDefinition)
+        .Cast<VariableTypeDefinition>()
+        .ToArray();
+
+      var allVariableNames = variableValues
+        .Where(x => !(x.Value is ReferencedAssemblySpecification)
+               && !(x.Value is UsingNamespaceSpecification)
+               && !(x.Value is VariableTypeDefinition))
+        .Select(x => x.Key)
+        .ToArray();
+
+      return (from name in allVariableNames
+              join definition in variableTypes
+              on name equals definition.VariableName
+              into variablesAndDefinitions
+              select new VariableSpecification(name, variablesAndDefinitions.FirstOrDefault()?.TypeName))
+        .ToArray();
     }
 
     #endregion

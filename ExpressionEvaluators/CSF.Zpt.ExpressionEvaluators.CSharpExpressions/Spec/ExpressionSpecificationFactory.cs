@@ -67,24 +67,7 @@ namespace CSF.Zpt.ExpressionEvaluators.CSharpExpressions.Spec
 
     private IEnumerable<VariableSpecification> GetVariables(IDictionary<string,object> allDefinitions)
     {
-      var variableTypes = allDefinitions.Values
-        .Where(x => x is VariableTypeDefinition)
-        .Cast<VariableTypeDefinition>()
-        .ToArray();
-
-      var allVariableNames = allDefinitions
-        .Where(x => !(x.Value is ReferencedAssemblySpecification)
-                    && !(x.Value is UsingNamespaceSpecification)
-                    && !(x.Value is VariableTypeDefinition))
-        .Select(x => x.Key)
-        .ToArray();
-
-      return (from name in allVariableNames
-              join definition in variableTypes
-              on name equals definition.VariableName
-              into variablesAndDefinitions
-              select new VariableSpecification(name, variablesAndDefinitions.FirstOrDefault()?.TypeName))
-        .ToArray();
+      return VariableSpecification.GetVariableSpecifications(allDefinitions);
     }
 
     private IExpressionConfiguration GetConfiguration()

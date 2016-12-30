@@ -63,5 +63,11 @@ namespace CSF.Zpt.ExpressionEvaluators.CSharpExpressions.Resources {
                 return ResourceManager.GetString("ExpressionTypeMustExist", resourceCulture);
             }
         }
+        
+        internal static string TypeExpressionMustBeInCorrectFormat {
+            get {
+                return ResourceManager.GetString("TypeExpressionMustBeInCorrectFormat", resourceCulture);
+            }
+        }
     }
 }

@@ -65,7 +65,7 @@ namespace CSF.Zpt.ExpressionEvaluators.CSharpExpressions.Host
       var type = assembly.GetType(model.GetClassFullName());
       if(type == null)
       {
-        throw new CSharpExpressionExceptionException(Resources.ExceptionMessages.ExpressionTypeMustExist) {
+        throw new CSharpExpressionException(Resources.ExceptionMessages.ExpressionTypeMustExist) {
           ExpressionText = model.Specification.Text
         };
       }
@@ -162,7 +162,7 @@ namespace CSF.Zpt.ExpressionEvaluators.CSharpExpressions.Host
                                             Resources.LogFormats.CodeWhichCausedCompileErrorFormat,
                                             code);
 
-        throw new CSharpExpressionExceptionException(Resources.ExceptionMessages.MustNotBeCompileErrors) {
+        throw new CSharpExpressionException(Resources.ExceptionMessages.MustNotBeCompileErrors) {
           ExpressionText = model.Specification.Text
         };
       }

@@ -102,6 +102,9 @@
     <Compile Include="Host\ExpressionHostCompiler.cs" />
     <Compile Include="Host\IExpressionHostCreator.cs" />
     <Compile Include="Host\TemplateWriterBase.cs" />
+    <Compile Include="CSharpAssemblyExpressionEvaluator.cs" />
+    <Compile Include="CSharpTypeExpressionEvaluator.cs" />
+    <Compile Include="CSharpNamespaceExpressionEvaluator.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="CSF.Zpt.ExpressionEvaluators.CSharpExpressions.nuspec" />

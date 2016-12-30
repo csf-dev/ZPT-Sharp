@@ -5,19 +5,13 @@ using CSF.Zpt.Rendering;
 namespace CSF.Zpt.ExpressionEvaluators.CSharpExpressions
 {
   /// <summary>
-  /// Evaluator type for CSharp expressions.
+  /// Evaluator implementation for <c>csassembly</c> expressions.
   /// </summary>
-  public class CSharpExpressionEvaluator : ExpressionEvaluatorBase
+  public class CSharpAssemblyExpressionEvaluator : ExpressionEvaluatorBase
   {
     #region constants
 
-    private const string Prefix = "csharp";
-
-    #endregion
-
-    #region fields
-
-    private readonly ICSharpExpressionService _expressionService;
+    private const string Prefix = "csassembly";
 
     #endregion
 
@@ -44,7 +38,9 @@ namespace CSF.Zpt.ExpressionEvaluators.CSharpExpressions
     /// <param name="expression">The expression to evaluate.</param>
     /// <param name="context">The rendering context for the expression being evaluated.</param>
     /// <param name="model">The ZPT model, providing the context for evaluation.</param>
-    public override ExpressionResult Evaluate(Expression expression, IRenderingContext context, ITalesModel model)
+    public override ExpressionResult Evaluate(Expression expression,
+                                              IRenderingContext context,
+                                              ITalesModel model)
     {
       if(expression == null)
       {
@@ -59,29 +55,7 @@ namespace CSF.Zpt.ExpressionEvaluators.CSharpExpressions
         throw new ArgumentNullException(nameof(model));
       }
 
-      var csharpExpression = _expressionService.GetExpression(expression.Content, model);
-
-      return new ExpressionResult(csharpExpression.Evaluate(model));
-    }
-
-    #endregion
-
-    #region constructors
-
-    /// <summary>
-    /// Initializes a new instance of the
-    /// <see cref="CSF.Zpt.ExpressionEvaluators.CSharpExpressions.CSharpExpressionEvaluator"/> class.
-    /// </summary>
-    public CSharpExpressionEvaluator() : this(null) {}
-
-    /// <summary>
-    /// Initializes a new instance of the
-    /// <see cref="CSF.Zpt.ExpressionEvaluators.CSharpExpressions.CSharpExpressionEvaluator"/> class.
-    /// </summary>
-    /// <param name="service">Service.</param>
-    public CSharpExpressionEvaluator(ICSharpExpressionService service)
-    {
-      _expressionService = service?? new CSharpExpressionService();
+      return new ExpressionResult(new Spec.ReferencedAssemblySpecification(expression.Content));
     }
 
     #endregion

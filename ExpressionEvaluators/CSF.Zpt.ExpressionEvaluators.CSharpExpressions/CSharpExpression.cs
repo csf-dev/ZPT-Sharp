@@ -65,18 +65,24 @@ namespace CSF.Zpt.ExpressionEvaluators.CSharpExpressions
 
       var variableDefinitions = model.GetAllDefinitions();
 
-      var variablesProvided = variableDefinitions.Keys;
-      var variablesExpected = Specification.Variables.Select(x => x.Name);
+      var variablesProvided = VariableSpecification.GetVariableSpecifications(variableDefinitions);
+      var variablesExpected = Specification.Variables;
 
       if(!variablesProvided.AreContentsSameAs(variablesExpected))
       {
-        throw new CSharpExpressionExceptionException(Resources.ExceptionMessages.DefinedVariablesMustMatch) {
+        throw new CSharpExpressionException(Resources.ExceptionMessages.DefinedVariablesMustMatch) {
           ExpressionText = this.Specification.Text
         };
       }
 
+      var variablesToSet = (from availableVariable in variableDefinitions
+                            from usefulVariable in variablesProvided
+                            where availableVariable.Key == usefulVariable.Name
+                            select availableVariable)
+        .ToArray();
+
       var host = HostCreator.CreateHostInstance();
-      foreach(var kvp in variableDefinitions)
+      foreach(var kvp in variablesToSet)
       {
         host.SetVariableValue(kvp.Key, kvp.Value);
       }
