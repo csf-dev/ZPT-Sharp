@@ -27,6 +27,16 @@ At this stage I would welcome exploration, testing and (most importantly) bug-re
 [for csharp expressions]: https://github.com/csf-dev/ZPT-Sharp/issues/170
 [for python expressions]: https://github.com/csf-dev/ZPT-Sharp/issues/175
 
+## Packaging
+It is planned, once ZPT-Sharp is in a **beta** state, to package it for Nuget and release it as pre-release software.
+Once I have created a project of my own which makes use of ZPT-Sharp (and ironed out any kinks found), I will declare it stable and perform a full v1.0.0 release via Nuget.
+
+It is planned (in the more distant future) to release ZPT-Sharp as a package for Debian GNU/Linux.
+One of the restrictions of the DFSG however, is that all dependencies must themselves be open source and packaged.
+I have begun some work to gather [the packaging dependencies] and list them, so that it may be performed at a later date.
+
+[the packaging dependencies]: https://github.com/csf-dev/ZPT-Sharp/blob/master/DEPENDENCIES.md
+
 ---
 
 All code is released under the permissive [MIT license].
