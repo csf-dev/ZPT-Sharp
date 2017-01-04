@@ -1,0 +1,88 @@
+<!doctype html>
+<html tal:define="activePage string:python_expressions">
+<head metal:use-macro="documents/Shared/general-page.html/macros/common_document_head">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="utf-8">
+<title metal:fill-slot="document_title">TALES 'python' expressions</title>
+<base href="../" />
+<style type="text/css">
+@import url(css/styles.css);
+@import url(css/dummy.css);
+</style>
+<script data-main="js/config/main" type="text/javascript" src="js/lib/require.min.js"></script>
+<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.4.0/styles/default.min.css">
+</head>
+<body metal:use-macro="documents/Shared/general-page.html/macros/common_document_body" class="page_python_expressions">
+<div class="content_wrapper">
+  <header class="page_header dummy">
+    Dummy content
+  </header>
+  <div class="main_page_area">
+    <nav>
+      <h2>Navigation menu</h2>
+      <ul class="active_introduction dummy">
+        <li class="introduction"><a href=".">Introduction</a></li>
+        <li class="other_page"><a href="dummy.html">Dummy page</a></li>
+      </ul>
+    </nav>
+    <section class="main_page_content" metal:fill-slot="main_page_content">
+      <header>
+        <div class="expression plugin_note note"
+             metal:use-macro="documents/Shared/plugin_note.html/macros/expression_plugin_note">
+          <p>
+            Expression evaluator plugin notice.
+          </p>
+          Assembly: <span metal:fill-slot="plugin_assembly"><code>CSF.Zpt.ExpressionEvaluators.PythonExpressions.dll</code></span><br />
+          Class: <span metal:fill-slot="plugin_class"><code>CSF.Zpt.ExpressionEvaluators.PythonExpressions.PythonExpressionEvaluator</code></span><br />
+          Prefix: <span metal:fill-slot="expression_prefix"><code>python:</code></span>
+        </div>
+        <h1>TALES 'python' expressions</h1>
+      </header>
+      <p>
+        <code>python:</code> expressions make it possible to include and evaluate TALES expressions written in
+        <a href="https://www.python.org/">the Python programming language</a> in your ZPT-Sharp documents.
+      </p>
+      <p>
+        The text following the <code>python:</code> prefix must be a valid python expression,
+        such that it may be evaluated if it appeared after a Python <code>return</code> keyword -
+        assuming that all of the relevant variables are in-scope.
+      </p>
+      <h2>Python internals</h2>
+      <p>
+        Python expressions internally make use of <a href="http://ironpython.net/">the IronPython framework</a>
+        to parse and evaluate python expressions.
+      </p>
+      <p>
+        The Python language version supported is dependant upon IronPython's own support.
+        At present, <strong>Python version 2.7</strong> is the maximum language version available.
+      </p>
+      <h2>Modules and imports</h2>
+      <p>
+        At present, no modules are imported for python expressions.
+        There is also no mechanism to specify modules to be imported either.
+      </p>
+      <p class="note">
+        There are planned changes which will permit the importing of modules.
+        These changes are lined up for
+        <a href="https://github.com/csf-dev/ZPT-Sharp/issues/175">a future version of this expression evaluator plugin</a>.
+      </p>
+      <h2>Important note on variable names</h2>
+      <p>
+        In the same way as with <a href="tales/csharp-expressions.html">C♯ expressions</a>, if the python
+        expressions plugin is installed then all TALES variable names must be valid python variable names.
+        Note that the Python expression evaluator is not one of the plugins installed by default for new installations.
+      </p>
+      <p>
+        Where the python expression evaluator plugin is installed, it does not matter whether the variables
+        are used within a Python expression or not.
+        If an improperly-named variable is in-scope when a python expression is evaluated then the presence of
+        that variable will corrupt the expression.
+      </p>
+    </section>
+  </div>
+</div>
+<footer class="page_footer dummy">
+  Dummy content
+</footer>
+</body>
+</html>
