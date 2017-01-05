@@ -19,6 +19,7 @@ Others are welcome to package it for other distros as they please.
 
 ## Required for core compilation
 These software packages are required for the basic compilation of the software.
+
 * Either the .NET framework (version 4.6 or higher) or an equivalent Mono framework
 * Either MSBuild 2015+ or Mono XBuild
 * The Nuget package manager
