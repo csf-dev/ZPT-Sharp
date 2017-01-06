@@ -74,12 +74,26 @@ The assembly paths are either absolute or relative paths.
 Where a relative path is given, it is evaluated based upon the path to the \fICSF.Zpt.dll\fR assembly.
 If the plugin assembly is in the same directory as that main ZPT-Sharp assembly then just the filename alone is sufficient (as shown above).
 The default expression evaluator, XML document provider and HTML document provider are indicated by listing their namespace-qualified type names in the appropriate configuration attributes.
-.SH CONFIGURING CSHARP NAMESPACES
+.SH CONFIGURING CSHARP EXPRESSIONS
 .PP
 If the plugin \fICSF.Zpt.ExpressionEvaluators.CSharpExpressions.dll\fR is installed, then CSharp expressions are available.
-When evaluating such expressions, by default two namespaces are made to the expressions via 'using NAMESPACE;' blocks.
-These two namespaces are \fISystem\fR and \fISystem.Linq\fR.
-If you wish to customise these namespaces (for all expressions) then you may integrate the following into your configuration.
+There are two settings affecting CSharp expressions which may be specified in the configuration file.
+These are the default assemblies which will be referenced by compiled expressions and also the namespaces which will be imported into those expressions.
+The settings made in the configuration file will affect all CSharp expressions evaluated by the application.
+Effectively, the configuration specifies the baseline assembly references and namespace imports.
+Further assemblies/namespaces may be chosen via expressions in ZPT documents.
+.PP
+The default configuration (which is also used if the configuration section below is not present) is as follows:
+.RS
+The assembly \fISystem.dll\fR will be referenced
+.RE
+.RS
+The namespaces \fISystem\fR and \fISystem.Linq\fR will be imported (without aliases)
+.RE
+.PP
+For more information please consult the documentation for writing CSharp expressions.
+These two configuration options are roughly equivalent to the expression types \fIcsassembly\fR and \fIcsnamespace\fR.
+Each permits as many or as few entries as desired; repeat the \fIAssembly\fR or \fINamespace\fR XML element for each item you wish to specify.
 .PP
 .nf
 <configuration>
@@ -88,8 +102,8 @@ If you wish to customise these namespaces (for all expressions) then you may int
       <sectionGroup name="Zpt">
           <sectionGroup name="ExpressionEvaluators">
             <sectionGroup name="CSharpExpressions">
-              <section name="NamespaceConfiguration"
-                       type="CSF.Zpt.ExpressionEvaluators.CSharpExpressions.NamespaceConfiguration, CSF.Zpt.ExpressionEvaluators.CSharpExpressions" />
+              <section name="ExpressionConfigurationSection"
+                       type="CSF.Zpt.ExpressionEvaluators.CSharpExpressions.ExpressionConfigurationSection, CSF.Zpt.ExpressionEvaluators.CSharpExpressions" />
             </sectionGroup>
           </sectionGroup>
       </sectionGroup>
@@ -100,9 +114,14 @@ If you wish to customise these namespaces (for all expressions) then you may int
     <Zpt>
       <ExpressionEvaluators>
         <CSharpExpressions>
-          <NamespaceConfiguration>
-            <add Namespace="NAMESPACE" />
-          </NamespaceConfiguration>
+          <ExpressionConfigurationSection>
+            <Assemblies>
+              <Assembly Name="NAME" />
+            </Assemblies>
+            <Namespaces>
+              <Namespace Name="NAMESPACE" Alias="ALIAS" />
+            </Namespaces>
+          </ExpressionConfigurationSection>
         </CSharpExpressions>
       </ExpressionEvaluators>
     </Zpt>
@@ -110,7 +129,21 @@ If you wish to customise these namespaces (for all expressions) then you may int
 </configuration>
 .fi
 .PP
-You may repeat the \fI<add Namespace="NAMESPACE" />\fR element as many times as desired, each time replacing NAMESPACE with a namespace to be imported.
+Within the assembly references, the \fINAME\fR placeholder refers to the filename of a referenced assembly.
+That assembly must be deployed into the same directory as the application's assemblies.
+The name is the full assembly filename including the \fI.dll\fR extension.
+.PP
+For namespace imports, the \fINAMESPACE\fR placeholder is the name of the namespace (for example \fISystem.Linq\fR).
+The \fIAlias\fR attribute is optional; wheen it is provided, the imported namespace will be assigned to the named alias.
+The code generated looks something as follows:
+.PP
+.nf
+// Without an alias: <Namespace Name="My.Namespace" />
+using My.Namespace;
+
+// With an alias: <Namespace Name="My.Other.Namespace" Alias="other" />
+using other = My.Other.Namespace;
+.fi
 .SH CONFIGURING DIAGNOSTICS
 .PP
 ZPT-Sharp makes use of the .NET \fBSystem.Diagnostics\fR functionality to make diagnostic and logging information available, configured via the configuration file.
