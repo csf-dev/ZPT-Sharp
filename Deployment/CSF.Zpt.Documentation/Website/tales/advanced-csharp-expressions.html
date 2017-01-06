@@ -1,0 +1,58 @@
+<!doctype html>
+<html tal:define="activePage string:advanced_csharp_expressions">
+<head metal:use-macro="documents/Shared/general-page.html/macros/common_document_head">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="utf-8">
+<title metal:fill-slot="document_title">Advanced 'csharp' expressions</title>
+<base href="../" />
+<style type="text/css">
+@import url(css/styles.css);
+@import url(css/dummy.css);
+</style>
+<script data-main="js/config/main" type="text/javascript" src="js/lib/require.min.js"></script>
+<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.4.0/styles/default.min.css">
+</head>
+<body metal:use-macro="documents/Shared/general-page.html/macros/common_document_body" class="page_advanced_csharp_expressions">
+<div class="content_wrapper">
+  <header class="page_header dummy">
+    Dummy content
+  </header>
+  <div class="main_page_area">
+    <nav>
+      <h2>Navigation menu</h2>
+      <ul class="active_introduction dummy">
+        <li class="introduction"><a href=".">Introduction</a></li>
+        <li class="other_page"><a href="dummy.html">Dummy page</a></li>
+      </ul>
+    </nav>
+    <section class="main_page_content" metal:fill-slot="main_page_content">
+      <header>
+        <div class="expression plugin_note note"
+             metal:use-macro="documents/Shared/plugin_note.html/macros/expression_plugin_note">
+          <p>
+            Expression evaluator plugin notice.
+          </p>
+          Assembly: <span metal:fill-slot="plugin_assembly"><code>CSF.Zpt.ExpressionEvaluators.CSharpExpressions.dll</code></span><br />
+          <span metal:fill-slot="plugin_class_header">Plugin classes</span>:
+          <span metal:fill-slot="plugin_class">
+            <code>CSF.Zpt.ExpressionEvaluators.CSharpExpressions.CSharpNamespaceExpressionEvaluator</code>,
+            <code>CSF.Zpt.ExpressionEvaluators.CSharpExpressions.CSharpAssemblyExpressionEvaluator</code> &amp;
+            <code>CSF.Zpt.ExpressionEvaluators.CSharpExpressions.CSharpTypeExpressionEvaluator</code>
+          </span><br />
+          <span metal:fill-slot="expression_prefix_header">Expression prefixes</span>:
+          <span metal:fill-slot="expression_prefix">
+            <code>csnamespace:</code>,
+            <code>csassembly:</code> &amp;
+            <code>cstype:</code>
+          </span>
+        </div>
+        <h1>Advanced 'csharp' expressions</h1>
+      </header>
+    </section>
+  </div>
+</div>
+<footer class="page_footer dummy">
+  Dummy content
+</footer>
+</body>
+</html>

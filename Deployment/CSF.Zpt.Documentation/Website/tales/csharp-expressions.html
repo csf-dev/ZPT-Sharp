@@ -80,31 +80,59 @@
         <em>It does not matter whether the C♯ expression attempts to make use of such a 'bad' variable or not</em>.
         The very presence of the variable in the TALES environment will prevent the C♯ expression from compiling.
       </p>
-      <h2>Note on double-quotes</h2>
+      <h2>Reminder: HTML encoding</h2>
       <p>
-        You will be well-aware that C♯ uses double-quotes: <kbd>"</kbd> to indicate strings.
-        However, as an attribute-based language, ZPT is already executing within an environment in which double-quotes
-        are being used.
-        When writing C♯ expressions which make use of string literals, you must escape your double-quote
-        characters as <kbd>&amp;quot;</kbd> in order to prevent a conflict.
+        Because TALES expressions (including C♯ expressions) are specified within the source document, in the source
+        document's own syntax, you must adhere to that document's escaping/encoding rules.  In particular this applies
+        to double-quote characters, which must be specified as <kbd>&amp;quot;</kbd>, greater-than
+        (<kbd>&amp;gt;</kbd>), less-than (<kbd>&amp;lt;</kbd>) and ampersands (<kbd>&amp;amp;</kbd>).
       </p>
       <p>
-        This is illustrated by the following example, where <code>DateTime.ToString</code> is used with a
+        This is illustrated in the following example, where <code>DateTime.ToString</code> is used with a
         string parameter to get a custom date format.
       </p>
       <pre><code class="html">&lt;p tal:define="today csharp:DateTime.Today"&gt;
   Today's date is
   &lt;span tal:content="csharp:today.ToString(&amp;quot;yyyy-MM-dd&amp;quot;)"&gt;2012-01-01&lt;span&gt;
 &lt;/p&gt;</code></pre>
-      <h2>Namespaces available to C♯ expressions</h2>
+      <h2>Expression internals</h2>
       <p>
-        By default (if no configuration is present), two namespaces are available to <code>csharp:</code> expressions.
-        These are <code>System</code> and <code>System.Linq</code>, as if the two namespaces were present in
-        <code>using</code> statements.
+        Internally, to provide C♯ expressions,
+        <a href="https://msdn.microsoft.com/en-us/library/y2k85ax6(v=vs.110).aspx">the CodeDOM API</a>
+        is used.
+        Each expression is compiled into a generated class, in an in-memory .NET assembly.
       </p>
       <p>
-        If you wish to customise this (affecting all CSharp expressions), you may do so using
-        <a href="configuration.html">the ZPT-Sharp configuration file</a>.
+        Each TALES variable which is in-scope for the expression is provided as a private member field
+        of that class.  To simplify variable access these private fields are typed using the <code>dynamic</code>
+        keyword.  This means that for general usage their type does not need to known.
+      </p>
+      <p>
+        A limitation of this approach though is for using <strong>extension methods</strong>, including Linq methods
+        such as <code>.Sum()</code> or <code>.Count()</code>; these are incompatible with dynamically-typed variables.
+        To use these we must
+        <a href="tales/advanced-csharp-expressions.html">exert more control over the code which is compiled for the
+        C♯ expression</a>.
+      </p>
+      <h3>Consider moving complex expressions into your model</h3>
+      <p>
+        Please note that whilst the functionality exists to import .NET namespaces, specify referenced assemlies and
+        to indicate the type of variables, it may be far simpler to push such functionality downwards into your MVC
+        model.  If for example you wish to write something along the lines of the following:
+      </p>
+      <pre><code class="html">&lt;p tal:define="itemCount csharp:here.Items.Count(x => x.Colour == &amp;quot;Red&amp;quot;)"&gt;
+  There are &lt;span tal:replace="itemCount"&gt;3&lt;/span&gt; red items
+&lt;p&gt;</code></pre>
+      <p>
+        <em>This expression will not compile</em> without specifying the type (such as
+        <code>IEnumerable&lt;MyItemType&gt;</code>) of the <code>Items</code> model property.
+        This will likely require some namespace imports and an assembly reference.
+      </p>
+      <p>
+        Instead consider removing the need for any of this by providing a <code>GetItemCount(string colour)</code> method
+        on your MVC model.  This would work around the need to include the extra markup in your view, and makes the
+        whole solution far more clean.  In short - whilst the functionality exists to enable extension methods &amp;
+        Linq in ZPT views, it tends to be best to avoid it if you don't have to use it.
       </p>
     </section>
   </div>
