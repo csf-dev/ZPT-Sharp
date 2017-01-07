@@ -2,9 +2,9 @@
 <package xmlns:metal="http://xml.zope.org/namespaces/metal"
          xmlns:tal="http://xml.zope.org/namespaces/tal">
   <metadata>
-    <id>CSF.Zpt.MVC</id>
+    <id>CSF.Zpt.MVC5</id>
     <version tal:content="options/version">0.0.0</version>
-    <title>CSF.Zpt.MVC (ZPT-Sharp component)</title>
+    <title>CSF.Zpt.MVC5 (ZPT-Sharp component)</title>
     <authors>CSF Software Ltd</authors>
     <licenseUrl>https://opensource.org/licenses/MIT</licenseUrl>
     <projectUrl>http://csf-dev.github.io/ZPT-Sharp/</projectUrl>
@@ -27,6 +27,6 @@
     </frameworkAssemblies>
   </metadata>
   <files>
-    <file src="bin/Release/CSF.Zpt.MVC.dll" target="lib/net45" />
+    <file src="bin/Release/CSF.Zpt.MVC5.dll" target="lib/net45" />
   </files>
 </package>

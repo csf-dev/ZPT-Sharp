@@ -7,8 +7,8 @@
     <OutputType>Library</OutputType>
     <RootNamespace>CSF.Zpt.MVC</RootNamespace>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
-    <AssemblyName>CSF.Zpt.MVC</AssemblyName>
-    <ProjectTitle>CSF.Zpt.MVC</ProjectTitle>
+    <AssemblyName>CSF.Zpt.MVC5</AssemblyName>
+    <ProjectTitle>CSF.Zpt.MVC5</ProjectTitle>
     <ProjectDescription>ASP.NET MVC5 integration for ZPT-Sharp</ProjectDescription>
     <PathToSolutionRoot>..</PathToSolutionRoot>
   </PropertyGroup>
@@ -125,8 +125,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
-    <None Include="CSF.Zpt.MVC.nuspec" />
-    <None Include="CSF.Zpt.MVC.nuspec.pt" />
+    <None Include="CSF.Zpt.MVC5.nuspec.pt" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\" />

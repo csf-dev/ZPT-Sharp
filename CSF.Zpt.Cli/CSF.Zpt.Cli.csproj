@@ -121,7 +121,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <None Include="CSF.Zpt.Cli.nuspec" />
     <None Include="CSF.Zpt.Cli.nuspec.pt" />
   </ItemGroup>
   <ItemGroup>

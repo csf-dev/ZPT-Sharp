@@ -118,7 +118,6 @@
   </Target>
   <ItemGroup>
     <None Include="packages.config" />
-    <None Include="CSF.Zpt.Abstractions.nuspec" />
     <None Include="CSF.Zpt.Abstractions.nuspec.pt" />
   </ItemGroup>
   <ItemGroup>
