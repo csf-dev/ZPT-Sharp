@@ -6,6 +6,7 @@ using CSF.Zpt.Rendering;
 using Moq;
 using System.Linq;
 using System.IO;
+using CSF.Zpt.Tales;
 
 namespace Test.CSF.Zpt.BatchRendering
 {
@@ -14,7 +15,7 @@ namespace Test.CSF.Zpt.BatchRendering
   {
     #region fields
 
-    private IBatchRenderer _sut;
+    private BatchRenderer _sut;
 
     private Mock<IRenderingJobFactory> _jobFactory;
     private Mock<IRenderingSettingsFactory> _settingsFactory;
@@ -83,6 +84,51 @@ namespace Test.CSF.Zpt.BatchRendering
       _jobFactory
         .Verify(x => x.GetRenderingJobs(It.IsAny<IBatchRenderingOptions>(), It.IsAny<RenderingMode?>()),
                 Times.Once());
+    }
+
+    [Test]
+    public void GetContextConfigurator_adds_documents_directory_when_path_is_provided()
+    {
+      // Arrange
+      var path = new DirectoryInfo(Environment.CurrentDirectory);
+      var job = Mock.Of<IRenderingJob>(x => x.InputRootDirectory == path);
+
+      var model = new Mock<IModelValueStore>();
+      model.Setup(x => x.AddGlobal(It.IsAny<string>(), It.IsAny<object>()));
+
+      var ctx = new Mock<IModelValueContainer>();
+      ctx.SetupGet(x => x.MetalModel).Returns(model.Object);
+
+      // Act
+      var result = _sut.GetContextConfigurator(job);
+      result(ctx.Object);
+
+      // Assert
+      model
+        .Verify(x => x.AddGlobal("documents", It.Is<TemplateDirectory>(t => t.DirectoryInfo == path)),
+                Times.Once());
+    }
+
+    [Test]
+    public void GetContextConfigurator_does_not_add_documents_directory_when_path_is_null()
+    {
+      // Arrange
+      var job = Mock.Of<IRenderingJob>(x => x.InputRootDirectory == (DirectoryInfo) null);
+
+      var model = new Mock<IModelValueStore>();
+      model.Setup(x => x.AddGlobal(It.IsAny<string>(), It.IsAny<object>()));
+
+      var ctx = new Mock<IModelValueContainer>();
+      ctx.SetupGet(x => x.MetalModel).Returns(model.Object);
+
+      // Act
+      var result = _sut.GetContextConfigurator(job);
+      result(ctx.Object);
+
+      // Assert
+      model
+        .Verify(x => x.AddGlobal("documents", It.IsAny<object>()),
+                Times.Never());
     }
 
     #endregion

@@ -58,9 +58,8 @@ namespace Test.CSF.Zpt.BatchRendering
 
     [TestCase(RenderingMode.Xml,    RenderingMode.Xml)]
     [TestCase(RenderingMode.Html,   RenderingMode.Html)]
-    [TestCase(null,                 RenderingMode.Html)]
-    public void GetRenderingJobs_uses_correct_rendering_mode_for_streams(RenderingMode? inputMode,
-                                                                         RenderingMode expectedMode)
+    public void GetRenderingJobs_uses_specified_rendering_mode_for_streams(RenderingMode? inputMode,
+                                                                           RenderingMode expectedMode)
     {
       // Arrange
       _docFactory
@@ -75,6 +74,24 @@ namespace Test.CSF.Zpt.BatchRendering
 
       // Assert
       _docFactory.Verify(x => x.CreateDocument(It.IsAny<Stream>(), expectedMode, null, null), Times.Once());
+    }
+
+    [Test]
+    public void GetRenderingJobs_uses_HTML_rendering_mode_when_input_mode_not_specified()
+    {
+      // Arrange
+      _docFactory
+        .Setup(x => x.CreateDocument(It.IsAny<Stream>(), RenderingMode.Html, null, null))
+        .Returns(Mock.Of<IZptDocument>());
+      var options = Mock.Of<IBatchRenderingOptions>(x => x.InputStream == Mock.Of<Stream>());
+
+      // Act
+      var result = _sut.GetRenderingJobs(options, null);
+      var job = result.Single();
+      job.GetDocument();
+
+      // Assert
+      _docFactory.Verify(x => x.CreateDocument(It.IsAny<Stream>(), RenderingMode.Html, null, null), Times.Once());
     }
 
     #endregion

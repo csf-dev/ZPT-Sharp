@@ -127,7 +127,7 @@ namespace CSF.Zpt.BatchRendering
     /// </summary>
     /// <returns>The context configurator.</returns>
     /// <param name="job">Job.</param>
-    protected virtual Action<IModelValueContainer> GetContextConfigurator(IRenderingJob job)
+    public virtual Action<IModelValueContainer> GetContextConfigurator(IRenderingJob job)
     {
       return ctx => {
         if(job.InputRootDirectory != null)
