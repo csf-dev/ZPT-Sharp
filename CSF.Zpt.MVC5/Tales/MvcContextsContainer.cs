@@ -25,6 +25,8 @@ namespace CSF.Zpt.MVC.Tales
       TYPED_MODEL             = "Model",
       REQUEST_LOWER           = "request",
       VIEWS_DIRECTORY         = "Views",
+      FORM_CONTEXT            = "FormContext",
+      VIEW_BAG                = "ViewBag",
       VIEWS_VIRTUAL_PATH      = "~/Views/";
 
     #endregion
@@ -80,6 +82,16 @@ namespace CSF.Zpt.MVC.Tales
       case CACHE_DICTIONARY:
         result = ViewContext.HttpContext?.Cache;
         output = result != null;
+        break;
+
+      case FORM_CONTEXT:
+        result = ViewContext.FormContext;
+        output = result != null;
+        break;
+
+      case VIEW_BAG:
+        result = ViewContext.ViewBag;
+        output = !Object.ReferenceEquals(result, null);
         break;
 
       case REQUEST:
