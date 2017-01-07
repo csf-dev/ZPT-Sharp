@@ -107,7 +107,6 @@
     <Compile Include="CSharpNamespaceExpressionEvaluator.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="CSF.Zpt.ExpressionEvaluators.CSharpExpressions.nuspec" />
     <None Include="CSF.Zpt.ExpressionEvaluators.CSharpExpressions.nuspec.pt" />
     <None Include="packages.config" />
     <None Include="app.config.install.xdt" />

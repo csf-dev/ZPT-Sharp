@@ -86,7 +86,6 @@
   </Target>
   <ItemGroup>
     <None Include="packages.config" />
-    <None Include="CSF.Zpt.ExpressionEvaluators.PathExpressions.nuspec" />
     <None Include="CSF.Zpt.ExpressionEvaluators.PathExpressions.nuspec.pt" />
     <None Include="app.config.install.xdt" />
     <None Include="app.config.uninstall.xdt" />
