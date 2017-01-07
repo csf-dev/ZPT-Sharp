@@ -132,13 +132,14 @@ Substitute the `msbuild` application for `xbuild` if appropriate; the parameters
 Substitute `Release` for `Debug` or `Deploy` if you wish to use one of those other build configurations.
 If the build configuration parameter is omitted (IE: you just execute MSBuild/XBuild with no parameters) then a `Debug` build will be performed.
 
+### Parameters for Deploy builds
 Optionally, for `Deploy` builds only, you may specify the build property `WebsiteUrlRoot` with a value.
 By default this property defaults to the URL of the ZPT documentation website.
 Sspecifying a local value will permit you to host and use the documentation website locally.
 This is performed as follows:
 
 ```
-msbuild "/p:Configuration=Deploy;WebsiteUrlRoot=."
+msbuild "/p:Configuration=Deploy;WebsiteUrlRoot=/my/local/path/"
 ```
 
 ## Where to find the build output
