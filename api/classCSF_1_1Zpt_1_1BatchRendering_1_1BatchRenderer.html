@@ -39,7 +39,7 @@ ga('send', 'pageview');
  <tr style="height: 56px;">
   <td style="padding-left: 0.5em;">
    <div id="projectname"><a href="../index.html">ZPT-Sharp</a>
-   &#160;<span id="projectnumber">v0.7.0</span>
+   &#160;<span id="projectnumber">v0.8.0</span>
    </div>
    <div id="projectbrief">Zope Page Templates for .NET</div>
   </td>
@@ -147,6 +147,10 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a1a08403dc3ea3d25d99aee89e70fb096"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="interfaceCSF_1_1Zpt_1_1BatchRendering_1_1IBatchRenderingResponse.html">IBatchRenderingResponse</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCSF_1_1Zpt_1_1BatchRendering_1_1BatchRenderer.html#a1a08403dc3ea3d25d99aee89e70fb096">Render</a> (<a class="el" href="interfaceCSF_1_1Zpt_1_1BatchRendering_1_1IBatchRenderingOptions.html">IBatchRenderingOptions</a> batchOptions, <a class="el" href="interfaceCSF_1_1Zpt_1_1Rendering_1_1IRenderingOptions.html">IRenderingOptions</a> options=null)</td></tr>
 <tr class="memdesc:a1a08403dc3ea3d25d99aee89e70fb096"><td class="mdescLeft">&#160;</td><td class="mdescRight">Parse and render the documents found using the given batch rendering options.  <a href="#a1a08403dc3ea3d25d99aee89e70fb096">More...</a><br /></td></tr>
 <tr class="separator:a1a08403dc3ea3d25d99aee89e70fb096"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2672e04d6a212766ea8ae44e9f567a6c"><td class="memItemLeft" align="right" valign="top">virtual Action<br class="typebreak" />
+&lt; <a class="el" href="interfaceCSF_1_1Zpt_1_1Rendering_1_1IModelValueContainer.html">IModelValueContainer</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCSF_1_1Zpt_1_1BatchRendering_1_1BatchRenderer.html#a2672e04d6a212766ea8ae44e9f567a6c">GetContextConfigurator</a> (<a class="el" href="interfaceCSF_1_1Zpt_1_1BatchRendering_1_1IRenderingJob.html">IRenderingJob</a> job)</td></tr>
+<tr class="memdesc:a2672e04d6a212766ea8ae44e9f567a6c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the rendering context configurator for a given job.  <a href="#a2672e04d6a212766ea8ae44e9f567a6c">More...</a><br /></td></tr>
+<tr class="separator:a2672e04d6a212766ea8ae44e9f567a6c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9deb6ecec1fcc8ca1bb72be808e09f68"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCSF_1_1Zpt_1_1BatchRendering_1_1BatchRenderer.html#a9deb6ecec1fcc8ca1bb72be808e09f68">BatchRenderer</a> (<a class="el" href="interfaceCSF_1_1Zpt_1_1BatchRendering_1_1IRenderingJobFactory.html">IRenderingJobFactory</a> renderingJobFactory=null, <a class="el" href="interfaceCSF_1_1Zpt_1_1Rendering_1_1IRenderingSettingsFactory.html">IRenderingSettingsFactory</a> settingsFactory=null, <a class="el" href="interfaceCSF_1_1Zpt_1_1BatchRendering_1_1IBatchRenderingOptionsValidator.html">IBatchRenderingOptionsValidator</a> optionsValidator=null)</td></tr>
 <tr class="memdesc:a9deb6ecec1fcc8ca1bb72be808e09f68"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializes a new instance of the <a class="el" href="classCSF_1_1Zpt_1_1BatchRendering_1_1BatchRenderer.html" title="Default implementation of IBatchRenderer. ">CSF.Zpt.BatchRendering.BatchRenderer</a> class.  <a href="#a9deb6ecec1fcc8ca1bb72be808e09f68">More...</a><br /></td></tr>
 <tr class="separator:a9deb6ecec1fcc8ca1bb72be808e09f68"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -165,10 +169,6 @@ Protected Member Functions</h2></td></tr>
 &lt; <a class="el" href="interfaceCSF_1_1Zpt_1_1BatchRendering_1_1IRenderingJob.html">IRenderingJob</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCSF_1_1Zpt_1_1BatchRendering_1_1BatchRenderer.html#aeaf76d80cf4af0b8839b90459877d557">GetRenderingJobs</a> (<a class="el" href="interfaceCSF_1_1Zpt_1_1BatchRendering_1_1IBatchRenderingOptions.html">IBatchRenderingOptions</a> options, <a class="el" href="namespaceCSF_1_1Zpt.html#aa8787ac88993534540d9337bb4d51109">RenderingMode</a>?mode)</td></tr>
 <tr class="memdesc:aeaf76d80cf4af0b8839b90459877d557"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the rendering jobs from the rendering job factory.  <a href="#aeaf76d80cf4af0b8839b90459877d557">More...</a><br /></td></tr>
 <tr class="separator:aeaf76d80cf4af0b8839b90459877d557"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2672e04d6a212766ea8ae44e9f567a6c"><td class="memItemLeft" align="right" valign="top">virtual Action<br class="typebreak" />
-&lt; <a class="el" href="interfaceCSF_1_1Zpt_1_1Rendering_1_1IModelValueContainer.html">IModelValueContainer</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCSF_1_1Zpt_1_1BatchRendering_1_1BatchRenderer.html#a2672e04d6a212766ea8ae44e9f567a6c">GetContextConfigurator</a> (<a class="el" href="interfaceCSF_1_1Zpt_1_1BatchRendering_1_1IRenderingJob.html">IRenderingJob</a> job)</td></tr>
-<tr class="memdesc:a2672e04d6a212766ea8ae44e9f567a6c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the rendering context configurator for a given job.  <a href="#a2672e04d6a212766ea8ae44e9f567a6c">More...</a><br /></td></tr>
-<tr class="separator:a2672e04d6a212766ea8ae44e9f567a6c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a07bc18dab6b1c97654fc4b55f4ad370c"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCSF_1_1Zpt_1_1BatchRendering_1_1BatchRenderer.html#a07bc18dab6b1c97654fc4b55f4ad370c">ValidateBatchOptions</a> (<a class="el" href="interfaceCSF_1_1Zpt_1_1BatchRendering_1_1IBatchRenderingOptions.html">IBatchRenderingOptions</a> options)</td></tr>
 <tr class="memdesc:a07bc18dab6b1c97654fc4b55f4ad370c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Validates the batch rendering options.  <a href="#a07bc18dab6b1c97654fc4b55f4ad370c">More...</a><br /></td></tr>
 <tr class="separator:a07bc18dab6b1c97654fc4b55f4ad370c"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -253,7 +253,7 @@ Protected Member Functions</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span><span class="mlabel">virtual</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -689,7 +689,7 @@ Protected Member Functions</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="namespaceCSF.html">CSF</a></li><li class="navelem"><a class="el" href="namespaceCSF_1_1Zpt.html">Zpt</a></li><li class="navelem"><a class="el" href="namespaceCSF_1_1Zpt_1_1BatchRendering.html">BatchRendering</a></li><li class="navelem"><a class="el" href="classCSF_1_1Zpt_1_1BatchRendering_1_1BatchRenderer.html">BatchRenderer</a></li>
-    <li class="footer">Generated on Fri Nov 18 2016 21:00:53 for ZPT-Sharp by
+    <li class="footer">Generated on Sat Jan 7 2017 19:33:26 for ZPT-Sharp by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.8 </li>
   </ul>

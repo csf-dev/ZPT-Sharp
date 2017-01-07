@@ -39,7 +39,7 @@ ga('send', 'pageview');
  <tr style="height: 56px;">
   <td style="padding-left: 0.5em;">
    <div id="projectname"><a href="../index.html">ZPT-Sharp</a>
-   &#160;<span id="projectnumber">v0.7.0</span>
+   &#160;<span id="projectnumber">v0.8.0</span>
    </div>
    <div id="projectbrief">Zope Page Templates for .NET</div>
   </td>
@@ -153,6 +153,12 @@ Static Public Member Functions</h2></td></tr>
 <tr class="memitem:a4c72eb4d33a4de2cefe53a9f38c97ed4"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCSF_1_1Zpt_1_1Rendering_1_1ElementExtensions.html#a4c72eb4d33a4de2cefe53a9f38c97ed4">PurgeTalElements</a> (this <a class="el" href="interfaceCSF_1_1Zpt_1_1Rendering_1_1IZptElement.html">IZptElement</a> element)</td></tr>
 <tr class="memdesc:a4c72eb4d33a4de2cefe53a9f38c97ed4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Recursively searches for elements in the TAL namespace and removes them from their parent element.  <a href="#a4c72eb4d33a4de2cefe53a9f38c97ed4">More...</a><br /></td></tr>
 <tr class="separator:a4c72eb4d33a4de2cefe53a9f38c97ed4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a473fdb4e2f3c18ded47b50023c37bea3"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCSF_1_1Zpt_1_1Rendering_1_1ElementExtensions.html#a473fdb4e2f3c18ded47b50023c37bea3">RecursivelyCacheSourceInformationInAttributes</a> (this <a class="el" href="interfaceCSF_1_1Zpt_1_1Rendering_1_1IZptElement.html">IZptElement</a> element)</td></tr>
+<tr class="memdesc:a473fdb4e2f3c18ded47b50023c37bea3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Recursively calls <a class="el" href="interfaceCSF_1_1Zpt_1_1Rendering_1_1IZptElement.html#a742d2ffe1b52d74ddec129e37516f81f" title="Writes information to the underlying element&#39;s attributes recording its source information. ">IZptElement.CacheSourceInformationInAttributes</a> on a given element and every one of its children.  <a href="#a473fdb4e2f3c18ded47b50023c37bea3">More...</a><br /></td></tr>
+<tr class="separator:a473fdb4e2f3c18ded47b50023c37bea3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a77a3e9befb08295d8ab6871cc84ff267"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCSF_1_1Zpt_1_1Rendering_1_1ElementExtensions.html#a77a3e9befb08295d8ab6871cc84ff267">PurgeSourceAnnotationAttributes</a> (this <a class="el" href="interfaceCSF_1_1Zpt_1_1Rendering_1_1IZptElement.html">IZptElement</a> element)</td></tr>
+<tr class="memdesc:a77a3e9befb08295d8ab6871cc84ff267"><td class="mdescLeft">&#160;</td><td class="mdescRight">Recursively searches for source annotation attributes and removes them from their parent element.  <a href="#a77a3e9befb08295d8ab6871cc84ff267">More...</a><br /></td></tr>
+<tr class="separator:a77a3e9befb08295d8ab6871cc84ff267"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Extension methods for the <a class="el" href="interfaceCSF_1_1Zpt_1_1Rendering_1_1IZptElement.html" title="Interface for a type which wraps a DOM element. ">IZptElement</a> type and its subtypes. </p>
@@ -265,6 +271,38 @@ Static Public Member Functions</h2></td></tr>
 
 </div>
 </div>
+<a class="anchor" id="a77a3e9befb08295d8ab6871cc84ff267"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static void CSF.Zpt.Rendering.ElementExtensions.PurgeSourceAnnotationAttributes </td>
+          <td>(</td>
+          <td class="paramtype">this <a class="el" href="interfaceCSF_1_1Zpt_1_1Rendering_1_1IZptElement.html">IZptElement</a>&#160;</td>
+          <td class="paramname"><em>element</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Recursively searches for source annotation attributes and removes them from their parent element. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">element</td><td>The element from which to perform the purge.</td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <a class="anchor" id="ab958541817121581ffc41aa18075c118"></a>
 <div class="memitem">
 <div class="memproto">
@@ -323,6 +361,38 @@ Static Public Member Functions</h2></td></tr>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">element</td><td>The element from which to perform the purge.</td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="a473fdb4e2f3c18ded47b50023c37bea3"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static void CSF.Zpt.Rendering.ElementExtensions.RecursivelyCacheSourceInformationInAttributes </td>
+          <td>(</td>
+          <td class="paramtype">this <a class="el" href="interfaceCSF_1_1Zpt_1_1Rendering_1_1IZptElement.html">IZptElement</a>&#160;</td>
+          <td class="paramname"><em>element</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Recursively calls <a class="el" href="interfaceCSF_1_1Zpt_1_1Rendering_1_1IZptElement.html#a742d2ffe1b52d74ddec129e37516f81f" title="Writes information to the underlying element&#39;s attributes recording its source information. ">IZptElement.CacheSourceInformationInAttributes</a> on a given element and every one of its children. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">element</td><td>The root element upon which to invoke this functionality.</td></tr>
   </table>
   </dd>
 </dl>
@@ -514,7 +584,7 @@ Static Public Member Functions</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="namespaceCSF.html">CSF</a></li><li class="navelem"><a class="el" href="namespaceCSF_1_1Zpt.html">Zpt</a></li><li class="navelem"><a class="el" href="namespaceCSF_1_1Zpt_1_1Rendering.html">Rendering</a></li><li class="navelem"><a class="el" href="classCSF_1_1Zpt_1_1Rendering_1_1ElementExtensions.html">ElementExtensions</a></li>
-    <li class="footer">Generated on Fri Nov 18 2016 21:00:54 for ZPT-Sharp by
+    <li class="footer">Generated on Sat Jan 7 2017 19:33:27 for ZPT-Sharp by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.8 </li>
   </ul>

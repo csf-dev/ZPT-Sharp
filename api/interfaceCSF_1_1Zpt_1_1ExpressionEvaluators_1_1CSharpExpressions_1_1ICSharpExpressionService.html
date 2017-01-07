@@ -39,7 +39,7 @@ ga('send', 'pageview');
  <tr style="height: 56px;">
   <td style="padding-left: 0.5em;">
    <div id="projectname"><a href="../index.html">ZPT-Sharp</a>
-   &#160;<span id="projectnumber">v0.7.0</span>
+   &#160;<span id="projectnumber">v0.8.0</span>
    </div>
    <div id="projectbrief">Zope Page Templates for .NET</div>
   </td>
@@ -133,14 +133,14 @@ Inheritance diagram for CSF.Zpt.ExpressionEvaluators.CSharpExpressions.ICSharpEx
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a30d59d6238f7882c1ce2c48faadc2198"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classCSF_1_1Zpt_1_1ExpressionEvaluators_1_1CSharpExpressions_1_1CSharpExpression.html">CSharpExpression</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interfaceCSF_1_1Zpt_1_1ExpressionEvaluators_1_1CSharpExpressions_1_1ICSharpExpressionService.html#a30d59d6238f7882c1ce2c48faadc2198">GetExpression</a> (string text, IEnumerable&lt; string &gt; variableNames)</td></tr>
-<tr class="memdesc:a30d59d6238f7882c1ce2c48faadc2198"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets a <a class="el" href="classCSF_1_1Zpt_1_1ExpressionEvaluators_1_1CSharpExpressions_1_1CSharpExpression.html" title="Represents a compiled CSharp expression, providing a gateway API/wrapper to the generated type...">CSharpExpression</a> matching the given expression text and variable names.  <a href="#a30d59d6238f7882c1ce2c48faadc2198">More...</a><br /></td></tr>
-<tr class="separator:a30d59d6238f7882c1ce2c48faadc2198"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaca69b48ae28a702d458c40f60f5a3e4"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classCSF_1_1Zpt_1_1ExpressionEvaluators_1_1CSharpExpressions_1_1CSharpExpression.html">CSharpExpression</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interfaceCSF_1_1Zpt_1_1ExpressionEvaluators_1_1CSharpExpressions_1_1ICSharpExpressionService.html#aaca69b48ae28a702d458c40f60f5a3e4">GetExpression</a> (string text, <a class="el" href="interfaceCSF_1_1Zpt_1_1Tales_1_1ITalesModel.html">ITalesModel</a> model)</td></tr>
+<tr class="memdesc:aaca69b48ae28a702d458c40f60f5a3e4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets a <a class="el" href="classCSF_1_1Zpt_1_1ExpressionEvaluators_1_1CSharpExpressions_1_1CSharpExpression.html" title="Represents a compiled CSharp expression, providing a gateway API/wrapper to the generated type...">CSharpExpression</a> matching the given expression text and variable names.  <a href="#aaca69b48ae28a702d458c40f60f5a3e4">More...</a><br /></td></tr>
+<tr class="separator:aaca69b48ae28a702d458c40f60f5a3e4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Interface for a service which manages instances of <a class="el" href="classCSF_1_1Zpt_1_1ExpressionEvaluators_1_1CSharpExpressions_1_1CSharpExpression.html" title="Represents a compiled CSharp expression, providing a gateway API/wrapper to the generated type...">CSharpExpression</a>. </p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
-<a class="anchor" id="a30d59d6238f7882c1ce2c48faadc2198"></a>
+<a class="anchor" id="aaca69b48ae28a702d458c40f60f5a3e4"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -153,8 +153,8 @@ Public Member Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">IEnumerable&lt; string &gt;&#160;</td>
-          <td class="paramname"><em>variableNames</em>&#160;</td>
+          <td class="paramtype"><a class="el" href="interfaceCSF_1_1Zpt_1_1Tales_1_1ITalesModel.html">ITalesModel</a>&#160;</td>
+          <td class="paramname"><em>model</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -168,13 +168,13 @@ Public Member Functions</h2></td></tr>
 <dl class="section return"><dt>Returns</dt><dd>The expression.</dd></dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">text</td><td>Text.</td></tr>
-    <tr><td class="paramname">variableNames</td><td>Variable names.</td></tr>
+    <tr><td class="paramname">text</td><td>The expression text.</td></tr>
+    <tr><td class="paramname">model</td><td>The current TALES model.</td></tr>
   </table>
   </dd>
 </dl>
 
-<p>Implemented in <a class="el" href="classCSF_1_1Zpt_1_1ExpressionEvaluators_1_1CSharpExpressions_1_1CSharpExpressionService.html#a982890607c93adf3b91a31a6bd60ca24">CSF.Zpt.ExpressionEvaluators.CSharpExpressions.CSharpExpressionService</a>.</p>
+<p>Implemented in <a class="el" href="classCSF_1_1Zpt_1_1ExpressionEvaluators_1_1CSharpExpressions_1_1CSharpExpressionService.html#a5f0e7c2bfc47b5d5e55b6026ae818767">CSF.Zpt.ExpressionEvaluators.CSharpExpressions.CSharpExpressionService</a>.</p>
 
 </div>
 </div>
@@ -187,7 +187,7 @@ Public Member Functions</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="namespaceCSF.html">CSF</a></li><li class="navelem"><a class="el" href="namespaceCSF_1_1Zpt.html">Zpt</a></li><li class="navelem"><a class="el" href="namespaceCSF_1_1Zpt_1_1ExpressionEvaluators.html">ExpressionEvaluators</a></li><li class="navelem"><a class="el" href="namespaceCSF_1_1Zpt_1_1ExpressionEvaluators_1_1CSharpExpressions.html">CSharpExpressions</a></li><li class="navelem"><a class="el" href="interfaceCSF_1_1Zpt_1_1ExpressionEvaluators_1_1CSharpExpressions_1_1ICSharpExpressionService.html">ICSharpExpressionService</a></li>
-    <li class="footer">Generated on Fri Nov 18 2016 21:00:53 for ZPT-Sharp by
+    <li class="footer">Generated on Sat Jan 7 2017 19:33:27 for ZPT-Sharp by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.8 </li>
   </ul>

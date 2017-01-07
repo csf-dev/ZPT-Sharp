@@ -1,20 +1,5 @@
 var searchData=
 [
-  ['zptattribute',['ZptAttribute',['../classCSF_1_1Zpt_1_1Rendering_1_1ZptAttribute.html',1,'CSF::Zpt::Rendering']]],
-  ['zptconstants',['ZptConstants',['../classCSF_1_1Zpt_1_1ZptConstants.html',1,'CSF::Zpt']]],
-  ['zptdocument',['ZptDocument',['../classCSF_1_1Zpt_1_1ZptDocument.html',1,'CSF::Zpt']]],
-  ['zptdocumentfactory',['ZptDocumentFactory',['../classCSF_1_1Zpt_1_1ZptDocumentFactory.html',1,'CSF::Zpt']]],
-  ['zptdocumentproviderservice',['ZptDocumentProviderService',['../classCSF_1_1Zpt_1_1ZptDocumentProviderService.html',1,'CSF::Zpt']]],
-  ['zptelement',['ZptElement',['../classCSF_1_1Zpt_1_1Rendering_1_1ZptElement.html',1,'CSF::Zpt::Rendering']]],
-  ['zptexception',['ZptException',['../classCSF_1_1Zpt_1_1ZptException.html',1,'CSF::Zpt']]],
-  ['zpthtmlattribute',['ZptHtmlAttribute',['../classCSF_1_1Zpt_1_1DocumentProviders_1_1ZptHtmlAttribute.html',1,'CSF::Zpt::DocumentProviders']]],
-  ['zpthtmldocument',['ZptHtmlDocument',['../classCSF_1_1Zpt_1_1DocumentProviders_1_1ZptHtmlDocument.html',1,'CSF::Zpt::DocumentProviders']]],
-  ['zpthtmlelement',['ZptHtmlElement',['../classCSF_1_1Zpt_1_1DocumentProviders_1_1ZptHtmlElement.html',1,'CSF::Zpt::DocumentProviders']]],
-  ['zptnamespace',['ZptNamespace',['../classCSF_1_1Zpt_1_1Rendering_1_1ZptNamespace.html',1,'CSF::Zpt::Rendering']]],
-  ['zptxmlattribute',['ZptXmlAttribute',['../classCSF_1_1Zpt_1_1DocumentProviders_1_1ZptXmlAttribute.html',1,'CSF::Zpt::DocumentProviders']]],
-  ['zptxmldocument',['ZptXmlDocument',['../classCSF_1_1Zpt_1_1DocumentProviders_1_1ZptXmlDocument.html',1,'CSF::Zpt::DocumentProviders']]],
-  ['zptxmlelement',['ZptXmlElement',['../classCSF_1_1Zpt_1_1DocumentProviders_1_1ZptXmlElement.html',1,'CSF::Zpt::DocumentProviders']]],
-  ['zptxmllinqattribute',['ZptXmlLinqAttribute',['../classCSF_1_1Zpt_1_1DocumentProviders_1_1ZptXmlLinqAttribute.html',1,'CSF::Zpt::DocumentProviders']]],
-  ['zptxmllinqdocument',['ZptXmlLinqDocument',['../classCSF_1_1Zpt_1_1DocumentProviders_1_1ZptXmlLinqDocument.html',1,'CSF::Zpt::DocumentProviders']]],
-  ['zptxmllinqelement',['ZptXmlLinqElement',['../classCSF_1_1Zpt_1_1DocumentProviders_1_1ZptXmlLinqElement.html',1,'CSF::Zpt::DocumentProviders']]]
+  ['xmllinqzptdocumentprovider',['XmlLinqZptDocumentProvider',['../classCSF_1_1Zpt_1_1DocumentProviders_1_1XmlLinqZptDocumentProvider.html',1,'CSF::Zpt::DocumentProviders']]],
+  ['xmlurlresolverfactory',['XmlUrlResolverFactory',['../classCSF_1_1Zpt_1_1XmlUrlResolverFactory.html',1,'CSF::Zpt']]]
 ];

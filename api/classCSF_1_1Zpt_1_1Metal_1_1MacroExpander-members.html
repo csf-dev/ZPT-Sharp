@@ -39,7 +39,7 @@ ga('send', 'pageview');
  <tr style="height: 56px;">
   <td style="padding-left: 0.5em;">
    <div id="projectname"><a href="../index.html">ZPT-Sharp</a>
-   &#160;<span id="projectnumber">v0.7.0</span>
+   &#160;<span id="projectnumber">v0.8.0</span>
    </div>
    <div id="projectbrief">Zope Page Templates for .NET</div>
   </td>
@@ -120,16 +120,21 @@ $(document).ready(function(){initNavTree('classCSF_1_1Zpt_1_1Metal_1_1MacroExpan
 
 <p>This is the complete list of members for <a class="el" href="classCSF_1_1Zpt_1_1Metal_1_1MacroExpander.html">CSF.Zpt.Metal.MacroExpander</a>, including all inherited members.</p>
 <table class="directory">
-  <tr class="even"><td class="entry"><a class="el" href="classCSF_1_1Zpt_1_1Metal_1_1MacroExpander.html#a6290ccdab973a104bf18b78b88fd42b5">Expand</a>(IRenderingContext context)</td><td class="entry"><a class="el" href="classCSF_1_1Zpt_1_1Metal_1_1MacroExpander.html">CSF.Zpt.Metal.MacroExpander</a></td><td class="entry"><span class="mlabel">inline</span><span class="mlabel">virtual</span></td></tr>
-  <tr><td class="entry"><a class="el" href="classCSF_1_1Zpt_1_1Metal_1_1MacroExpander.html#a8d94cdf4fbedfb3259c0531c49b63005">ExpandAndReplace</a>(IRenderingContext context, IZptElement macro)</td><td class="entry"><a class="el" href="classCSF_1_1Zpt_1_1Metal_1_1MacroExpander.html">CSF.Zpt.Metal.MacroExpander</a></td><td class="entry"><span class="mlabel">inline</span><span class="mlabel">virtual</span></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="classCSF_1_1Zpt_1_1Metal_1_1MacroExpander.html#a097c8204d67ac2bd18d20030a6c83c3b">MacroExpander</a>()</td><td class="entry"><a class="el" href="classCSF_1_1Zpt_1_1Metal_1_1MacroExpander.html">CSF.Zpt.Metal.MacroExpander</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
-  <tr><td class="entry"><a class="el" href="classCSF_1_1Zpt_1_1Metal_1_1MacroExpander.html#ac059b38bc9ded9f91c1229c1d171889a">MacroExpander</a>(MacroFinder finder=null, SourceAnnotator annotator=null)</td><td class="entry"><a class="el" href="classCSF_1_1Zpt_1_1Metal_1_1MacroExpander.html">CSF.Zpt.Metal.MacroExpander</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="classCSF_1_1Zpt_1_1Metal_1_1MacroExpander.html#aadba857a7a130e121b6f6d4972c959dd">ExpandMacros</a>(IRenderingContext context)</td><td class="entry"><a class="el" href="classCSF_1_1Zpt_1_1Metal_1_1MacroExpander.html">CSF.Zpt.Metal.MacroExpander</a></td><td class="entry"><span class="mlabel">inline</span><span class="mlabel">virtual</span></td></tr>
+  <tr><td class="entry"><a class="el" href="classCSF_1_1Zpt_1_1Metal_1_1MacroExpander.html#af63f581b42dec1b2334062adca943ed1">ExtendAndSubstitute</a>(IRenderingContext context, IZptElement macro)</td><td class="entry"><a class="el" href="classCSF_1_1Zpt_1_1Metal_1_1MacroExpander.html">CSF.Zpt.Metal.MacroExpander</a></td><td class="entry"><span class="mlabel">inline</span><span class="mlabel">virtual</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="classCSF_1_1Zpt_1_1Metal_1_1MacroExpander.html#aafa3d02d11155ce6efafe5c379dcf214">ExtendAndSubstitute</a>(IRenderingContext context, IZptElement macro, ref IList&lt; IRenderingContext &gt; macroStack, IMacroSubstituter substitutionStrategy)</td><td class="entry"><a class="el" href="classCSF_1_1Zpt_1_1Metal_1_1MacroExpander.html">CSF.Zpt.Metal.MacroExpander</a></td><td class="entry"><span class="mlabel">inline</span><span class="mlabel">virtual</span></td></tr>
+  <tr><td class="entry"><a class="el" href="classCSF_1_1Zpt_1_1Metal_1_1MacroExpander.html#a2da0627e7b8bb182f96d32717c430fd2">GetExtendedMacro</a>(IRenderingContext context)</td><td class="entry"><a class="el" href="classCSF_1_1Zpt_1_1Metal_1_1MacroExpander.html">CSF.Zpt.Metal.MacroExpander</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="classCSF_1_1Zpt_1_1Metal_1_1MacroExpander.html#a720729b28f07bf65edfc1f215287256b">GetFullyExtendedContext</a>(IRenderingContext macroContext, ref IList&lt; IRenderingContext &gt; macroStack)</td><td class="entry"><a class="el" href="classCSF_1_1Zpt_1_1Metal_1_1MacroExpander.html">CSF.Zpt.Metal.MacroExpander</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
+  <tr><td class="entry"><a class="el" href="classCSF_1_1Zpt_1_1Metal_1_1MacroExpander.html#a784ce1f60329a46c216f2484fdbabe1e">GetUsedMacro</a>(IRenderingContext context)</td><td class="entry"><a class="el" href="classCSF_1_1Zpt_1_1Metal_1_1MacroExpander.html">CSF.Zpt.Metal.MacroExpander</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="classCSF_1_1Zpt_1_1Metal_1_1MacroExpander.html#ab4adbf7b67a626d213b2ec5eec69c120">HandleNoUsedMacro</a>(IRenderingContext context)</td><td class="entry"><a class="el" href="classCSF_1_1Zpt_1_1Metal_1_1MacroExpander.html">CSF.Zpt.Metal.MacroExpander</a></td><td class="entry"><span class="mlabel">inline</span><span class="mlabel">virtual</span></td></tr>
+  <tr><td class="entry"><a class="el" href="classCSF_1_1Zpt_1_1Metal_1_1MacroExpander.html#a097c8204d67ac2bd18d20030a6c83c3b">MacroExpander</a>()</td><td class="entry"><a class="el" href="classCSF_1_1Zpt_1_1Metal_1_1MacroExpander.html">CSF.Zpt.Metal.MacroExpander</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="classCSF_1_1Zpt_1_1Metal_1_1MacroExpander.html#a8068d5dfc5ae24ad9ff9756a20cf297f">MacroExpander</a>(IMacroFinder finder=null, IMacroSubstituter substituter=null, IMacroSubstituter extensionSubstitutor=null)</td><td class="entry"><a class="el" href="classCSF_1_1Zpt_1_1Metal_1_1MacroExpander.html">CSF.Zpt.Metal.MacroExpander</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
 </table></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Fri Nov 18 2016 21:00:53 for ZPT-Sharp by
+    <li class="footer">Generated on Sat Jan 7 2017 19:33:27 for ZPT-Sharp by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.8 </li>
   </ul>

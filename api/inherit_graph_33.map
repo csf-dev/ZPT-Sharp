@@ -1,6 +1,7 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="node1" href="$interfaceCSF_1_1Zpt_1_1IZptDocumentProvider.html" title="Interface for a type which creates IZptDocument implementations. " alt="" coords="5,78,212,105"/>
-<area shape="rect" id="node2" href="$classCSF_1_1Zpt_1_1DocumentProviders_1_1HtmlZptDocumentProvider.html" title="Implementation of IZptDocumentProvider which creates documents based on the HTML Agility pack..." alt="" coords="270,5,465,47"/>
-<area shape="rect" id="node3" href="$classCSF_1_1Zpt_1_1DocumentProviders_1_1LegacyXmlZptDocumentProvider.html" title="Implementation of IZptDocumentProvider which creates XML documents based on System.Xml.XmlDocument. " alt="" coords="260,71,475,112"/>
-<area shape="rect" id="node4" href="$classCSF_1_1Zpt_1_1DocumentProviders_1_1XmlLinqZptDocumentProvider.html" title="Implementation of IZptDocumentProvider which creates XML documents based on System.Xml.Linq.XDocument. " alt="" coords="269,136,465,177"/>
+<area shape="rect" id="node1" href="$interfaceCSF_1_1Zpt_1_1IZptDocument.html" title="Represents a ZPT document. " alt="" coords="5,78,164,105"/>
+<area shape="rect" id="node2" href="$classCSF_1_1Zpt_1_1ZptDocument.html" title="Represents a ZPT document. " alt="" coords="212,78,367,105"/>
+<area shape="rect" id="node3" href="$classCSF_1_1Zpt_1_1DocumentProviders_1_1ZptHtmlDocument.html" title="Implementation of ZptDocument based on an HtmlAgilityPack.HtmlDocument. " alt="" coords="415,5,609,47"/>
+<area shape="rect" id="node4" href="$classCSF_1_1Zpt_1_1DocumentProviders_1_1ZptXmlDocument.html" title="Implementation of ZptDocument based on a System.Xml.XmlDocument. " alt="" coords="415,71,609,112"/>
+<area shape="rect" id="node5" href="$classCSF_1_1Zpt_1_1DocumentProviders_1_1ZptXmlLinqDocument.html" title="Implementation of ZptDocument based on a System.Xml.Linq.XDocument. " alt="" coords="415,136,609,177"/>
 </map>

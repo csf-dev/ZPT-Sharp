@@ -39,7 +39,7 @@ ga('send', 'pageview');
  <tr style="height: 56px;">
   <td style="padding-left: 0.5em;">
    <div id="projectname"><a href="../index.html">ZPT-Sharp</a>
-   &#160;<span id="projectnumber">v0.7.0</span>
+   &#160;<span id="projectnumber">v0.8.0</span>
    </div>
    <div id="projectbrief">Zope Page Templates for .NET</div>
   </td>
@@ -115,6 +115,7 @@ $(document).ready(function(){initNavTree('classCSF_1_1Zpt_1_1Rendering_1_1Render
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pub-static-methods">Static Public Member Functions</a> &#124;
 <a href="classCSF_1_1Zpt_1_1Rendering_1_1RenderingSettingsFactory-members.html">List of all members</a>  </div>
   <div class="headertitle">
 <div class="title">CSF.Zpt.Rendering.RenderingSettingsFactory Class Reference</div>  </div>
@@ -146,6 +147,12 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:aa28e4d2f73967d5170ad85d6dce82ee3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="interfaceCSF_1_1Zpt_1_1Rendering_1_1IRenderingSettings.html">IRenderingSettings</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCSF_1_1Zpt_1_1Rendering_1_1RenderingSettingsFactory.html#aa28e4d2f73967d5170ad85d6dce82ee3">CreateSettings</a> (<a class="el" href="interfaceCSF_1_1Zpt_1_1Rendering_1_1IContextVisitor.html">IContextVisitor</a>[] contextVisitors=null, <a class="el" href="interfaceCSF_1_1Zpt_1_1Rendering_1_1IRenderingContextFactory.html">IRenderingContextFactory</a> contextFactory=null, bool addSourceAnnotation=DefaultAddAnnotation, System.Text.Encoding encoding=null, bool omitXmlDeclaration=DefaultOmitXmlDeclaration, <a class="el" href="interfaceCSF_1_1Zpt_1_1Tales_1_1ITemplateFileFactory.html">ITemplateFileFactory</a> templateFactory=null)</td></tr>
 <tr class="memdesc:aa28e4d2f73967d5170ad85d6dce82ee3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates rendering settings from specified values, using defaults where values are blank.  <a href="#aa28e4d2f73967d5170ad85d6dce82ee3">More...</a><br /></td></tr>
 <tr class="separator:aa28e4d2f73967d5170ad85d6dce82ee3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
+Static Public Member Functions</h2></td></tr>
+<tr class="memitem:a0ce2d84b01b7ab5d1699eaf20649567c"><td class="memItemLeft" align="right" valign="top">static Type[]&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCSF_1_1Zpt_1_1Rendering_1_1RenderingSettingsFactory.html#a0ce2d84b01b7ab5d1699eaf20649567c">GetDefaultContextVisitorTypes</a> ()</td></tr>
+<tr class="memdesc:a0ce2d84b01b7ab5d1699eaf20649567c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets a collection of <code>System.Type</code> representing the default <a class="el" href="interfaceCSF_1_1Zpt_1_1Rendering_1_1IContextVisitor.html" title="Interface for a type which can visit a IRenderingContext instance. ">IContextVisitor</a> implementations which visit rendering contexts.  <a href="#a0ce2d84b01b7ab5d1699eaf20649567c">More...</a><br /></td></tr>
+<tr class="separator:a0ce2d84b01b7ab5d1699eaf20649567c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Default implementation of <a class="el" href="interfaceCSF_1_1Zpt_1_1Rendering_1_1IRenderingSettingsFactory.html" title="Factory type for creating instances of IRenderingSettings. ">IRenderingSettingsFactory</a>. </p>
@@ -259,6 +266,32 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
+<a class="anchor" id="a0ce2d84b01b7ab5d1699eaf20649567c"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static Type [] CSF.Zpt.Rendering.RenderingSettingsFactory.GetDefaultContextVisitorTypes </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Gets a collection of <code>System.Type</code> representing the default <a class="el" href="interfaceCSF_1_1Zpt_1_1Rendering_1_1IContextVisitor.html" title="Interface for a type which can visit a IRenderingContext instance. ">IContextVisitor</a> implementations which visit rendering contexts. </p>
+<dl class="section return"><dt>Returns</dt><dd>The default context visitor types.</dd></dl>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following file:<ul>
 <li>/home/craig/Projects/CSF/CSF.Zpt/CSF.Zpt/Rendering/RenderingSettingsFactory.cs</li>
 </ul>
@@ -268,7 +301,7 @@ Public Member Functions</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="namespaceCSF.html">CSF</a></li><li class="navelem"><a class="el" href="namespaceCSF_1_1Zpt.html">Zpt</a></li><li class="navelem"><a class="el" href="namespaceCSF_1_1Zpt_1_1Rendering.html">Rendering</a></li><li class="navelem"><a class="el" href="classCSF_1_1Zpt_1_1Rendering_1_1RenderingSettingsFactory.html">RenderingSettingsFactory</a></li>
-    <li class="footer">Generated on Fri Nov 18 2016 21:00:54 for ZPT-Sharp by
+    <li class="footer">Generated on Sat Jan 7 2017 19:33:27 for ZPT-Sharp by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.8 </li>
   </ul>

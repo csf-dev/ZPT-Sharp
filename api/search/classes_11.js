@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['xmllinqzptdocumentprovider',['XmlLinqZptDocumentProvider',['../classCSF_1_1Zpt_1_1DocumentProviders_1_1XmlLinqZptDocumentProvider.html',1,'CSF::Zpt::DocumentProviders']]],
-  ['xmlurlresolverfactory',['XmlUrlResolverFactory',['../classCSF_1_1Zpt_1_1XmlUrlResolverFactory.html',1,'CSF::Zpt']]]
+  ['variablespecification',['VariableSpecification',['../classCSF_1_1Zpt_1_1ExpressionEvaluators_1_1CSharpExpressions_1_1Spec_1_1VariableSpecification.html',1,'CSF::Zpt::ExpressionEvaluators::CSharpExpressions::Spec']]],
+  ['variabletypedefinition',['VariableTypeDefinition',['../classCSF_1_1Zpt_1_1ExpressionEvaluators_1_1CSharpExpressions_1_1Spec_1_1VariableTypeDefinition.html',1,'CSF::Zpt::ExpressionEvaluators::CSharpExpressions::Spec']]]
 ];

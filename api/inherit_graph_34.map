@@ -1,4 +1,5 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="node2" href="$classCSF_1_1Zpt_1_1Log4netTraceListener.html" title="Log4net trace listener " alt="" coords="155,13,356,39"/>
-<area shape="rect" id="node3" href="$classCSF_1_1Zpt_1_1SelfConfiguringLog4netTraceListener.html" title="Implementation of Log4netTraceListener which self&#45;configures from the XML config. ..." alt="" coords="404,5,615,47"/>
+<area shape="rect" id="node1" href="$interfaceCSF_1_1Zpt_1_1Tales_1_1ITemplateFileFactory.html" title="Interface for a type which creates instances of TemplateFile. " alt="" coords="11,5,202,47"/>
+<area shape="rect" id="node2" href="$classCSF_1_1Zpt_1_1ZptDocumentFactory.html" title="Default implementation of IZptDocumentFactory. " alt="" coords="256,42,455,69"/>
+<area shape="rect" id="node3" href="$interfaceCSF_1_1Zpt_1_1IZptDocumentFactory.html" title="Interface for a type which creates instances of IZptDocument. " alt="" coords="5,71,208,98"/>
 </map>

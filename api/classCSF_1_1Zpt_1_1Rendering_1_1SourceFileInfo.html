@@ -39,7 +39,7 @@ ga('send', 'pageview');
  <tr style="height: 56px;">
   <td style="padding-left: 0.5em;">
    <div id="projectname"><a href="../index.html">ZPT-Sharp</a>
-   &#160;<span id="projectnumber">v0.7.0</span>
+   &#160;<span id="projectnumber">v0.8.0</span>
    </div>
    <div id="projectbrief">Zope Page Templates for .NET</div>
   </td>
@@ -156,9 +156,18 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a2e5581b9af73f636ec1a1fe3a12d3f84"><td class="memItemLeft" align="right" valign="top">object&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCSF_1_1Zpt_1_1Rendering_1_1SourceFileInfo.html#a2e5581b9af73f636ec1a1fe3a12d3f84">GetContainer</a> ()</td></tr>
 <tr class="memdesc:a2e5581b9af73f636ec1a1fe3a12d3f84"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets a representation of the current instance which is suitable for use with TALES.  <a href="#a2e5581b9af73f636ec1a1fe3a12d3f84">More...</a><br /></td></tr>
 <tr class="separator:a2e5581b9af73f636ec1a1fe3a12d3f84"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac589b3c32fac021df491e8d2b3aab0d7"><td class="memItemLeft" align="right" valign="top">override string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCSF_1_1Zpt_1_1Rendering_1_1SourceFileInfo.html#ac589b3c32fac021df491e8d2b3aab0d7">ToString</a> ()</td></tr>
+<tr class="memdesc:ac589b3c32fac021df491e8d2b3aab0d7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns a System.String that represents the current <a class="el" href="classCSF_1_1Zpt_1_1Rendering_1_1SourceFileInfo.html" title="Provides information about the source file from which an ZptElement is derived. ">CSF.Zpt.Rendering.SourceFileInfo</a>.  <a href="#ac589b3c32fac021df491e8d2b3aab0d7">More...</a><br /></td></tr>
+<tr class="separator:ac589b3c32fac021df491e8d2b3aab0d7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa1ac4df01f56436b08150f1546e1fc51"><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCSF_1_1Zpt_1_1Rendering_1_1SourceFileInfo.html#aa1ac4df01f56436b08150f1546e1fc51">GetRelativeName</a> (string root)</td></tr>
+<tr class="memdesc:aa1ac4df01f56436b08150f1546e1fc51"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets a name for the current instance, relative to a given root name. The meaning of relative is up to the implementation.  <a href="#aa1ac4df01f56436b08150f1546e1fc51">More...</a><br /></td></tr>
+<tr class="separator:aa1ac4df01f56436b08150f1546e1fc51"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4981fffb3f625bbe66a04ed4d4ea5f7c"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCSF_1_1Zpt_1_1Rendering_1_1SourceFileInfo.html#a4981fffb3f625bbe66a04ed4d4ea5f7c">SourceFileInfo</a> (<a class="el" href="classCSF_1_1Zpt_1_1Rendering_1_1SourceFileInfo.html#a086be3cca2197ab57c704c2951f8f38f">FileInfo</a> fileInfo)</td></tr>
 <tr class="memdesc:a4981fffb3f625bbe66a04ed4d4ea5f7c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializes a new instance of the <a class="el" href="classCSF_1_1Zpt_1_1Rendering_1_1SourceFileInfo.html" title="Provides information about the source file from which an ZptElement is derived. ">CSF.Zpt.Rendering.SourceFileInfo</a> class.  <a href="#a4981fffb3f625bbe66a04ed4d4ea5f7c">More...</a><br /></td></tr>
 <tr class="separator:a4981fffb3f625bbe66a04ed4d4ea5f7c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aeb646594b8506acf9375865faae3ca01"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCSF_1_1Zpt_1_1Rendering_1_1SourceFileInfo.html#aeb646594b8506acf9375865faae3ca01">SourceFileInfo</a> (string filePath)</td></tr>
+<tr class="memdesc:aeb646594b8506acf9375865faae3ca01"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializes a new instance of the <a class="el" href="classCSF_1_1Zpt_1_1Rendering_1_1SourceFileInfo.html" title="Provides information about the source file from which an ZptElement is derived. ">CSF.Zpt.Rendering.SourceFileInfo</a> class.  <a href="#aeb646594b8506acf9375865faae3ca01">More...</a><br /></td></tr>
+<tr class="separator:aeb646594b8506acf9375865faae3ca01"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="properties"></a>
 Properties</h2></td></tr>
@@ -202,6 +211,38 @@ Properties</h2></td></tr>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">fileInfo</td><td>File info.</td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="aeb646594b8506acf9375865faae3ca01"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">CSF.Zpt.Rendering.SourceFileInfo.SourceFileInfo </td>
+          <td>(</td>
+          <td class="paramtype">string&#160;</td>
+          <td class="paramname"><em>filePath</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Initializes a new instance of the <a class="el" href="classCSF_1_1Zpt_1_1Rendering_1_1SourceFileInfo.html" title="Provides information about the source file from which an ZptElement is derived. ">CSF.Zpt.Rendering.SourceFileInfo</a> class. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">filePath</td><td>File path.</td></tr>
   </table>
   </dd>
 </dl>
@@ -366,6 +407,70 @@ Properties</h2></td></tr>
 
 </div>
 </div>
+<a class="anchor" id="aa1ac4df01f56436b08150f1546e1fc51"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">string CSF.Zpt.Rendering.SourceFileInfo.GetRelativeName </td>
+          <td>(</td>
+          <td class="paramtype">string&#160;</td>
+          <td class="paramname"><em>root</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Gets a name for the current instance, relative to a given root name. The meaning of relative is up to the implementation. </p>
+<p>This method also normalises directory separators to the forward-slash character: <code>/</code>. </p>
+<dl class="section return"><dt>Returns</dt><dd>The relative name.</dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">root</td><td>The root name.</td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Implements <a class="el" href="interfaceCSF_1_1Zpt_1_1Rendering_1_1ISourceInfo.html#a1ef4a11ca5143495eac7a943a4b16b0c">CSF.Zpt.Rendering.ISourceInfo</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="ac589b3c32fac021df491e8d2b3aab0d7"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">override string CSF.Zpt.Rendering.SourceFileInfo.ToString </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Returns a System.String that represents the current <a class="el" href="classCSF_1_1Zpt_1_1Rendering_1_1SourceFileInfo.html" title="Provides information about the source file from which an ZptElement is derived. ">CSF.Zpt.Rendering.SourceFileInfo</a>. </p>
+<dl class="section return"><dt>Returns</dt><dd>A System.String that represents the current <a class="el" href="classCSF_1_1Zpt_1_1Rendering_1_1SourceFileInfo.html" title="Provides information about the source file from which an ZptElement is derived. ">CSF.Zpt.Rendering.SourceFileInfo</a>.</dd></dl>
+
+<p>Implements <a class="el" href="interfaceCSF_1_1Zpt_1_1Rendering_1_1ISourceInfo.html#a489c240f320876ace019a43cd7e92f43">CSF.Zpt.Rendering.ISourceInfo</a>.</p>
+
+</div>
+</div>
 <h2 class="groupheader">Property Documentation</h2>
 <a class="anchor" id="a086be3cca2197ab57c704c2951f8f38f"></a>
 <div class="memitem">
@@ -422,7 +527,7 @@ Properties</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="namespaceCSF.html">CSF</a></li><li class="navelem"><a class="el" href="namespaceCSF_1_1Zpt.html">Zpt</a></li><li class="navelem"><a class="el" href="namespaceCSF_1_1Zpt_1_1Rendering.html">Rendering</a></li><li class="navelem"><a class="el" href="classCSF_1_1Zpt_1_1Rendering_1_1SourceFileInfo.html">SourceFileInfo</a></li>
-    <li class="footer">Generated on Fri Nov 18 2016 21:00:54 for ZPT-Sharp by
+    <li class="footer">Generated on Sat Jan 7 2017 19:33:27 for ZPT-Sharp by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.8 </li>
   </ul>

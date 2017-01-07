@@ -1,4 +1,12 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="node1" href="$interfaceCSF_1_1Zpt_1_1Rendering_1_1IRenderingContextFactoryFactory.html" title="Type which creates instances of IRenderingContextFactory via reflection. " alt="" coords="5,5,208,47"/>
-<area shape="rect" id="node2" href="$classCSF_1_1Zpt_1_1Rendering_1_1RenderingContextFactoryFactory.html" title="Type which creates instances of IRenderingContextFactory via reflection. " alt="" coords="256,5,455,47"/>
+<area shape="rect" id="node1" href="$interfaceCSF_1_1Zpt_1_1Rendering_1_1IContextVisitor.html" title="Interface for a type which can visit a IRenderingContext instance. " alt="" coords="5,136,195,177"/>
+<area shape="rect" id="node2" href="$classCSF_1_1Zpt_1_1Rendering_1_1ContextVisitorBase.html" title="Abstract base logic for implementations of IContextVisitor. " alt="" coords="243,136,428,177"/>
+<area shape="rect" id="node3" href="$classCSF_1_1Zpt_1_1Metal_1_1MetalVisitor.html" title="Implementation of IContextVisitor which performs METAL&#45;related functionality. " alt="" coords="491,93,672,119"/>
+<area shape="rect" id="node4" href="$classCSF_1_1Zpt_1_1Rendering_1_1NoOpVisitor.html" title="Implementation of ContextVisitorBase that performs no operation. " alt="" coords="476,143,687,170"/>
+<area shape="rect" id="node10" href="$classCSF_1_1Zpt_1_1Tal_1_1TalVisitor.html" title="Implementation of IContextVisitor which performs TAL&#45;related functionality. " alt="" coords="505,194,658,221"/>
+<area shape="rect" id="node5" href="$classCSF_1_1Zpt_1_1Metal_1_1MetalTidyUpVisitor.html" title="Context visitor that tidies up METAL elements, removing any elements or attributes that should not be..." alt="" coords="739,5,925,47"/>
+<area shape="rect" id="node6" href="$classCSF_1_1Zpt_1_1SourceAnnotation_1_1SourceAnnotationVisitor.html" title="Implementation of IContextVisitor which adds source annotation comments to a document. " alt="" coords="741,71,923,112"/>
+<area shape="rect" id="node7" href="$classCSF_1_1Zpt_1_1SourceAnnotation_1_1SourceInfoBurnInVisitor.html" title="Implementation of IContextVisitor which tells the IZptElement to burn its source information into the..." alt="" coords="741,136,923,177"/>
+<area shape="rect" id="node8" href="$classCSF_1_1Zpt_1_1SourceAnnotation_1_1SourceInfoTidyUpVisitor.html" title="Context visitor that tidies up ZPT elements, removing any elements or attributes that should not be r..." alt="" coords="741,201,923,243"/>
+<area shape="rect" id="node9" href="$classCSF_1_1Zpt_1_1Tal_1_1TalTidyUpVisitor.html" title="Context visitor that tidies up TAL elements, removing any elements or attributes that should not be r..." alt="" coords="735,267,929,294"/>
 </map>

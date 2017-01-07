@@ -39,7 +39,7 @@ ga('send', 'pageview');
  <tr style="height: 56px;">
   <td style="padding-left: 0.5em;">
    <div id="projectname"><a href="../index.html">ZPT-Sharp</a>
-   &#160;<span id="projectnumber">v0.7.0</span>
+   &#160;<span id="projectnumber">v0.8.0</span>
    </div>
    <div id="projectbrief">Zope Page Templates for .NET</div>
   </td>
@@ -112,6 +112,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="functions_prop_t.html#index_t"><span>t</span></a></li>
       <li><a href="functions_prop_u.html#index_u"><span>u</span></a></li>
       <li><a href="functions_prop_v.html#index_v"><span>v</span></a></li>
+      <li><a href="functions_prop_x.html#index_x"><span>x</span></a></li>
       <li><a href="functions_prop_z.html#index_z"><span>z</span></a></li>
     </ul>
   </div>
@@ -154,7 +155,9 @@ $(document).ready(function(){initNavTree('functions_prop_e.html','');});
 , <a class="el" href="classCSF_1_1Zpt_1_1Rendering_1_1RenderingContext.html#aa7ce83f5fa444af2efb66eb49b979642">CSF.Zpt.Rendering.RenderingContext</a>
 </li>
 <li>ElementName
-: <a class="el" href="classCSF_1_1Zpt_1_1PluginAssemblyCollection.html#a172cb094a579bf0770bd2aeb34727d25">CSF.Zpt.PluginAssemblyCollection</a>
+: <a class="el" href="classCSF_1_1Zpt_1_1ExpressionEvaluators_1_1CSharpExpressions_1_1AssemblyReferenceConfigurationCollection.html#ab750b3f84cfefaefecce50091986ec44">CSF.Zpt.ExpressionEvaluators.CSharpExpressions.AssemblyReferenceConfigurationCollection</a>
+, <a class="el" href="classCSF_1_1Zpt_1_1ExpressionEvaluators_1_1CSharpExpressions_1_1NamespaceConfigurationCollection.html#af73399086afb3810472fc63c30749b22">CSF.Zpt.ExpressionEvaluators.CSharpExpressions.NamespaceConfigurationCollection</a>
+, <a class="el" href="classCSF_1_1Zpt_1_1PluginAssemblyCollection.html#a172cb094a579bf0770bd2aeb34727d25">CSF.Zpt.PluginAssemblyCollection</a>
 , <a class="el" href="classCSF_1_1Zpt_1_1Rendering_1_1ModelEvaluationException.html#a42c9ef8dfba2b107cb4a7c0e949dc482">CSF.Zpt.Rendering.ModelEvaluationException</a>
 </li>
 <li>ElementRenderer
@@ -192,7 +195,10 @@ $(document).ready(function(){initNavTree('functions_prop_e.html','');});
 : <a class="el" href="classCSF_1_1Zpt_1_1ExpressionEvaluators_1_1CSharpExpressions_1_1ExpressionModel.html#adcd5cf92d0a87d40e9d98c34773bb0d9">CSF.Zpt.ExpressionEvaluators.CSharpExpressions.ExpressionModel</a>
 </li>
 <li>ExpressionPrefix
-: <a class="el" href="classCSF_1_1Zpt_1_1ExpressionEvaluators_1_1CSharpExpressions_1_1CSharpExpressionEvaluator.html#adf21fc0e1d4e2bbcb11ea50058f67683">CSF.Zpt.ExpressionEvaluators.CSharpExpressions.CSharpExpressionEvaluator</a>
+: <a class="el" href="classCSF_1_1Zpt_1_1ExpressionEvaluators_1_1CSharpExpressions_1_1CSharpAssemblyExpressionEvaluator.html#a80a99d832a65b473c7c8e3dfb4257bb4">CSF.Zpt.ExpressionEvaluators.CSharpExpressions.CSharpAssemblyExpressionEvaluator</a>
+, <a class="el" href="classCSF_1_1Zpt_1_1ExpressionEvaluators_1_1CSharpExpressions_1_1CSharpExpressionEvaluator.html#adf21fc0e1d4e2bbcb11ea50058f67683">CSF.Zpt.ExpressionEvaluators.CSharpExpressions.CSharpExpressionEvaluator</a>
+, <a class="el" href="classCSF_1_1Zpt_1_1ExpressionEvaluators_1_1CSharpExpressions_1_1CSharpNamespaceExpressionEvaluator.html#a063d53cad0f41900cf5199844fede47a">CSF.Zpt.ExpressionEvaluators.CSharpExpressions.CSharpNamespaceExpressionEvaluator</a>
+, <a class="el" href="classCSF_1_1Zpt_1_1ExpressionEvaluators_1_1CSharpExpressions_1_1CSharpTypeExpressionEvaluator.html#a562605277b137c2adaa22e59e032915b">CSF.Zpt.ExpressionEvaluators.CSharpExpressions.CSharpTypeExpressionEvaluator</a>
 , <a class="el" href="classCSF_1_1Zpt_1_1ExpressionEvaluators_1_1NotExpressions_1_1NotExpressionEvaluator.html#a3a3956f90e0dfa385519b2140f06cbc9">CSF.Zpt.ExpressionEvaluators.NotExpressions.NotExpressionEvaluator</a>
 , <a class="el" href="classCSF_1_1Zpt_1_1ExpressionEvaluators_1_1PathExpressions_1_1LocalVariablePathExpressionEvaluator.html#a3f061cfe44d86e1cacc0ae6bd02b46a8">CSF.Zpt.ExpressionEvaluators.PathExpressions.LocalVariablePathExpressionEvaluator</a>
 , <a class="el" href="classCSF_1_1Zpt_1_1ExpressionEvaluators_1_1PathExpressions_1_1PathExpressionEvaluator.html#adbaaaed56c01a3d1262ef32ff149749a">CSF.Zpt.ExpressionEvaluators.PathExpressions.PathExpressionEvaluator</a>
@@ -202,8 +208,7 @@ $(document).ready(function(){initNavTree('functions_prop_e.html','');});
 , <a class="el" href="interfaceCSF_1_1Zpt_1_1Tales_1_1IExpressionEvaluator.html#a44ac61a0e4567a329a18d886ac2ce13f">CSF.Zpt.Tales.IExpressionEvaluator</a>
 </li>
 <li>ExpressionText
-: <a class="el" href="classCSF_1_1Zpt_1_1ExpressionEvaluators_1_1CSharpExpressions_1_1ExpressionModel.html#a69295a9dfcd17393f9c82938422ccb63">CSF.Zpt.ExpressionEvaluators.CSharpExpressions.ExpressionModel</a>
-, <a class="el" href="classCSF_1_1Zpt_1_1Rendering_1_1ModelEvaluationException.html#a69711980065a45e49b5ff837174e2a13">CSF.Zpt.Rendering.ModelEvaluationException</a>
+: <a class="el" href="classCSF_1_1Zpt_1_1Rendering_1_1ModelEvaluationException.html#a69711980065a45e49b5ff837174e2a13">CSF.Zpt.Rendering.ModelEvaluationException</a>
 </li>
 </ul>
 </div><!-- contents -->
@@ -211,7 +216,7 @@ $(document).ready(function(){initNavTree('functions_prop_e.html','');});
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Fri Nov 18 2016 21:00:54 for ZPT-Sharp by
+    <li class="footer">Generated on Sat Jan 7 2017 19:33:27 for ZPT-Sharp by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.8 </li>
   </ul>

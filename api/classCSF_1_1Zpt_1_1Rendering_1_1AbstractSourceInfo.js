@@ -6,5 +6,6 @@ var classCSF_1_1Zpt_1_1Rendering_1_1AbstractSourceInfo =
     [ "Equals", "classCSF_1_1Zpt_1_1Rendering_1_1AbstractSourceInfo.html#a152bcc9be8f02878723da8fee70b5929", null ],
     [ "GetContainer", "classCSF_1_1Zpt_1_1Rendering_1_1AbstractSourceInfo.html#a3780e2ccf09775935f29705c22aeb8db", null ],
     [ "GetHashCode", "classCSF_1_1Zpt_1_1Rendering_1_1AbstractSourceInfo.html#a3ef086b6befd842e26682820eae0955b", null ],
+    [ "GetRelativeName", "classCSF_1_1Zpt_1_1Rendering_1_1AbstractSourceInfo.html#ac248f652c6db712ee1a852bec31c2806", null ],
     [ "FullName", "classCSF_1_1Zpt_1_1Rendering_1_1AbstractSourceInfo.html#a021c3ec288f3cd6ddd3761986beccb06", null ]
 ];

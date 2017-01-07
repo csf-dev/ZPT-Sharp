@@ -39,7 +39,7 @@ ga('send', 'pageview');
  <tr style="height: 56px;">
   <td style="padding-left: 0.5em;">
    <div id="projectname"><a href="../index.html">ZPT-Sharp</a>
-   &#160;<span id="projectnumber">v0.7.0</span>
+   &#160;<span id="projectnumber">v0.8.0</span>
    </div>
    <div id="projectbrief">Zope Page Templates for .NET</div>
   </td>
@@ -153,6 +153,12 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a6850e365a2679c0c923e7813953ab4d8"><td class="memItemLeft" align="right" valign="top">object&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCSF_1_1Zpt_1_1Rendering_1_1UnknownSourceFileInfo.html#a6850e365a2679c0c923e7813953ab4d8">GetContainer</a> ()</td></tr>
 <tr class="memdesc:a6850e365a2679c0c923e7813953ab4d8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets a representation of the current instance which is suitable for use with TALES.  <a href="#a6850e365a2679c0c923e7813953ab4d8">More...</a><br /></td></tr>
 <tr class="separator:a6850e365a2679c0c923e7813953ab4d8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a92e6c21d35713805b67e907333e18aef"><td class="memItemLeft" align="right" valign="top">override string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCSF_1_1Zpt_1_1Rendering_1_1UnknownSourceFileInfo.html#a92e6c21d35713805b67e907333e18aef">ToString</a> ()</td></tr>
+<tr class="memdesc:a92e6c21d35713805b67e907333e18aef"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns a System.String that represents the current <a class="el" href="classCSF_1_1Zpt_1_1Rendering_1_1UnknownSourceFileInfo.html" title="Null-object implementation of SourceFileInfo, representing an unknown source file. ">CSF.Zpt.Rendering.UnknownSourceFileInfo</a>.  <a href="#a92e6c21d35713805b67e907333e18aef">More...</a><br /></td></tr>
+<tr class="separator:a92e6c21d35713805b67e907333e18aef"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a05d42c4d60e6aee82a26683ebaef0eb2"><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCSF_1_1Zpt_1_1Rendering_1_1UnknownSourceFileInfo.html#a05d42c4d60e6aee82a26683ebaef0eb2">GetRelativeName</a> (string root)</td></tr>
+<tr class="memdesc:a05d42c4d60e6aee82a26683ebaef0eb2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets a name for the current instance, relative to a given root name. The meaning of relative is up to the implementation.  <a href="#a05d42c4d60e6aee82a26683ebaef0eb2">More...</a><br /></td></tr>
+<tr class="separator:a05d42c4d60e6aee82a26683ebaef0eb2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="properties"></a>
 Properties</h2></td></tr>
@@ -294,6 +300,69 @@ Properties</h2></td></tr>
 
 </div>
 </div>
+<a class="anchor" id="a05d42c4d60e6aee82a26683ebaef0eb2"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">string CSF.Zpt.Rendering.UnknownSourceFileInfo.GetRelativeName </td>
+          <td>(</td>
+          <td class="paramtype">string&#160;</td>
+          <td class="paramname"><em>root</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Gets a name for the current instance, relative to a given root name. The meaning of relative is up to the implementation. </p>
+<dl class="section return"><dt>Returns</dt><dd>The relative name.</dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">root</td><td>The root name.</td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Implements <a class="el" href="interfaceCSF_1_1Zpt_1_1Rendering_1_1ISourceInfo.html#a1ef4a11ca5143495eac7a943a4b16b0c">CSF.Zpt.Rendering.ISourceInfo</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a92e6c21d35713805b67e907333e18aef"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">override string CSF.Zpt.Rendering.UnknownSourceFileInfo.ToString </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Returns a System.String that represents the current <a class="el" href="classCSF_1_1Zpt_1_1Rendering_1_1UnknownSourceFileInfo.html" title="Null-object implementation of SourceFileInfo, representing an unknown source file. ">CSF.Zpt.Rendering.UnknownSourceFileInfo</a>. </p>
+<dl class="section return"><dt>Returns</dt><dd>A System.String that represents the current <a class="el" href="classCSF_1_1Zpt_1_1Rendering_1_1UnknownSourceFileInfo.html" title="Null-object implementation of SourceFileInfo, representing an unknown source file. ">CSF.Zpt.Rendering.UnknownSourceFileInfo</a>.</dd></dl>
+
+<p>Implements <a class="el" href="interfaceCSF_1_1Zpt_1_1Rendering_1_1ISourceInfo.html#a489c240f320876ace019a43cd7e92f43">CSF.Zpt.Rendering.ISourceInfo</a>.</p>
+
+</div>
+</div>
 <h2 class="groupheader">Property Documentation</h2>
 <a class="anchor" id="a68081073092067107c314a2a3ef29063"></a>
 <div class="memitem">
@@ -350,7 +419,7 @@ Properties</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="namespaceCSF.html">CSF</a></li><li class="navelem"><a class="el" href="namespaceCSF_1_1Zpt.html">Zpt</a></li><li class="navelem"><a class="el" href="namespaceCSF_1_1Zpt_1_1Rendering.html">Rendering</a></li><li class="navelem"><a class="el" href="classCSF_1_1Zpt_1_1Rendering_1_1UnknownSourceFileInfo.html">UnknownSourceFileInfo</a></li>
-    <li class="footer">Generated on Fri Nov 18 2016 21:00:54 for ZPT-Sharp by
+    <li class="footer">Generated on Sat Jan 7 2017 19:33:27 for ZPT-Sharp by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.8 </li>
   </ul>

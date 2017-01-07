@@ -5,9 +5,10 @@
 <area shape="rect" id="node7" href="$classCSF_1_1Zpt_1_1Rendering_1_1OriginalAttributeValuesCollection.html" title="Represents a collection of IZptAttribute, exposing the original attributes present upon an element..." alt="" coords="249,188,431,229"/>
 <area shape="rect" id="node8" href="$classCSF_1_1Zpt_1_1Rendering_1_1RepetitionMetadataCollectionWrapper.html" title="Wrapper type for a collection of named IRepetitionInfo instances. " alt="" coords="241,253,439,295"/>
 <area shape="rect" id="node9" href="$classCSF_1_1Zpt_1_1Tales_1_1BuiltinContextsContainer.html" title="Encapsulates the TALEs built&#45;in variable names. " alt="" coords="239,319,441,360"/>
-<area shape="rect" id="node10" href="$classCSF_1_1Zpt_1_1Tales_1_1FilesystemDirectory.html" title="Object which represents a System.IO.DirectoryInfo &#45; and implements ITalesPathHandler to wrap that dir..." alt="" coords="252,384,428,425"/>
-<area shape="rect" id="node12" href="$classCSF_1_1Zpt_1_1Tales_1_1TemplateFile.html" title="Wrapper type for a IZptDocument, expressing its state which is visible to TALES. " alt="" coords="247,450,433,477"/>
-<area shape="rect" id="node4" href="$classCSF_1_1Zpt_1_1Rendering_1_1RepetitionInfo.html" title="Gets information about a repetition/iteration. " alt="" coords="500,71,720,98"/>
-<area shape="rect" id="node6" href="$classCSF_1_1Zpt_1_1Tales_1_1EnumerableObjectWrapperWithNamedItems.html" title="Implementation of NamedObjectWrapper which also implements IEnumerable&lt;object&gt;. " alt="" coords="505,123,715,164"/>
-<area shape="rect" id="node11" href="$classCSF_1_1Zpt_1_1Tales_1_1TemplateDirectory.html" title="Implementation of FilesystemDirectory which contains template objects. " alt="" coords="501,391,719,418"/>
+<area shape="rect" id="node11" href="$classCSF_1_1Zpt_1_1Tales_1_1FilesystemDirectory.html" title="Object which represents a System.IO.DirectoryInfo &#45; and implements ITalesPathHandler to wrap that dir..." alt="" coords="252,384,428,425"/>
+<area shape="rect" id="node13" href="$classCSF_1_1Zpt_1_1Tales_1_1TemplateFile.html" title="Wrapper type for a IZptDocument, expressing its state which is visible to TALES. " alt="" coords="247,450,433,477"/>
+<area shape="rect" id="node4" href="$classCSF_1_1Zpt_1_1Rendering_1_1RepetitionInfo.html" title="Gets information about a repetition/iteration. " alt="" coords="502,71,722,98"/>
+<area shape="rect" id="node6" href="$classCSF_1_1Zpt_1_1Tales_1_1EnumerableObjectWrapperWithNamedItems.html" title="Implementation of NamedObjectWrapper which also implements IEnumerable&lt;object&gt;. " alt="" coords="507,123,717,164"/>
+<area shape="rect" id="node10" href="$classCSF_1_1Zpt_1_1MVC_1_1Tales_1_1MvcContextsContainer.html" title="CSF.Zpt.MVC.Tales.MvcContexts\lContainer" alt="" coords="500,319,724,360"/>
+<area shape="rect" id="node12" href="$classCSF_1_1Zpt_1_1Tales_1_1TemplateDirectory.html" title="Implementation of FilesystemDirectory which contains template objects. " alt="" coords="503,391,721,418"/>
 </map>

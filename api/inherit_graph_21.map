@@ -1,3 +1,4 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="node1" href="$classCSF_1_1Zpt_1_1ExpressionEvaluators_1_1PathExpressions_1_1ObjectTraverser.html" title="Encapsulates logic for traversing from one TALES object to another. " alt="" coords="5,5,224,47"/>
+<area shape="rect" id="node1" href="$interfaceCSF_1_1Zpt_1_1ExpressionEvaluators_1_1CSharpExpressions_1_1Spec_1_1IExpressionSpecificationFactory.html" title="A service which creates ExpressionSpecification instances. " alt="" coords="5,5,251,61"/>
+<area shape="rect" id="node2" href="$classCSF_1_1Zpt_1_1ExpressionEvaluators_1_1CSharpExpressions_1_1Spec_1_1ExpressionSpecificationFactory.html" title="Default implementation of IExpressionSpecificationFactory. " alt="" coords="299,5,540,61"/>
 </map>

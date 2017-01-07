@@ -1,6 +1,6 @@
 <map id="CSF.Zpt.Rendering.ModelEvaluationException" name="CSF.Zpt.Rendering.ModelEvaluationException">
-<area shape="rect" id="node5" href="$classCSF_1_1Zpt_1_1Tales_1_1InvalidExpressionException.html" title="Exception raised when a TALES expression is invalid. " alt="" coords="749,13,964,54"/>
-<area shape="rect" id="node2" href="$classCSF_1_1Zpt_1_1Rendering_1_1RenderingException.html" title="Represents an exception raised whilst rendering a ZPT document. " alt="" coords="280,20,419,47"/>
-<area shape="rect" id="node3" href="$classCSF_1_1Zpt_1_1ZptException.html" title="Base exception type for all non&#45;assertion type exceptions which could be raised by Zpt&#45;Sharp..." alt="" coords="133,20,232,47"/>
-<area shape="rect" id="node6" href="$classCSF_1_1Zpt_1_1ExpressionEvaluators_1_1CSharpExpressions_1_1CSharpExpressionExceptionException.html" title="Exception raised when there is an issue evaluating a CSharp expression. " alt="" coords="1012,5,1263,61"/>
+<area shape="rect" id="node5" href="$classCSF_1_1Zpt_1_1Tales_1_1InvalidExpressionException.html" title="Exception raised when a TALES expression is invalid. " alt="" coords="23,319,238,360"/>
+<area shape="rect" id="node2" href="$classCSF_1_1Zpt_1_1Rendering_1_1RenderingException.html" title="Represents an exception raised whilst rendering a ZPT document. " alt="" coords="61,155,200,181"/>
+<area shape="rect" id="node3" href="$classCSF_1_1Zpt_1_1ZptException.html" title="Base exception type for all non&#45;assertion type exceptions which could be raised by Zpt&#45;Sharp..." alt="" coords="81,80,180,107"/>
+<area shape="rect" id="node6" href="$classCSF_1_1Zpt_1_1ExpressionEvaluators_1_1CSharpExpressions_1_1CSharpExpressionException.html" title="Exception raised when there is an issue evaluating a CSharp expression. " alt="" coords="5,408,256,464"/>
 </map>

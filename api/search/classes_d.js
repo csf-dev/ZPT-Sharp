@@ -1,5 +1,6 @@
 var searchData=
 [
+  ['referencedassemblyspecification',['ReferencedAssemblySpecification',['../classCSF_1_1Zpt_1_1ExpressionEvaluators_1_1CSharpExpressions_1_1Spec_1_1ReferencedAssemblySpecification.html',1,'CSF::Zpt::ExpressionEvaluators::CSharpExpressions::Spec']]],
   ['renderingcontext',['RenderingContext',['../classCSF_1_1Zpt_1_1Rendering_1_1RenderingContext.html',1,'CSF::Zpt::Rendering']]],
   ['renderingcontextextensions',['RenderingContextExtensions',['../classCSF_1_1Zpt_1_1Rendering_1_1RenderingContextExtensions.html',1,'CSF::Zpt::Rendering']]],
   ['renderingcontextfactoryfactory',['RenderingContextFactoryFactory',['../classCSF_1_1Zpt_1_1Rendering_1_1RenderingContextFactoryFactory.html',1,'CSF::Zpt::Rendering']]],

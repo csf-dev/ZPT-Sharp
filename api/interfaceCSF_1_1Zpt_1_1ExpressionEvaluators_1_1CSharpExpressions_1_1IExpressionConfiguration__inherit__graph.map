@@ -1,0 +1,4 @@
+<map id="CSF.Zpt.ExpressionEvaluators.CSharpExpressions.IExpressionConfiguration" name="CSF.Zpt.ExpressionEvaluators.CSharpExpressions.IExpressionConfiguration">
+<area shape="rect" id="node2" href="$classCSF_1_1Zpt_1_1ExpressionEvaluators_1_1CSharpExpressions_1_1ExpressionConfigurationSection.html" title="Configuration section for CSharp expressions. " alt="" coords="341,5,625,61"/>
+<area shape="rect" id="node3" href="$classCSF_1_1Zpt_1_1ExpressionEvaluators_1_1CSharpExpressions_1_1FallbackExpressionConfiguration.html" title="Rrepresents a set of fallback/default configuration for IExpressionConfiguration, should no other imp..." alt="" coords="355,85,611,141"/>
+</map>

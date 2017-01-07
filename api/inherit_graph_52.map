@@ -1,4 +1,5 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="node1" href="$interfaceCSF_1_1Zpt_1_1Rendering_1_1IRenderingSettingsFactory.html" title="Factory type for creating instances of IRenderingSettings. " alt="" coords="5,5,208,47"/>
-<area shape="rect" id="node2" href="$classCSF_1_1Zpt_1_1Rendering_1_1RenderingSettingsFactory.html" title="Default implementation of IRenderingSettingsFactory. " alt="" coords="256,5,455,47"/>
+<area shape="rect" id="node1" href="$interfaceCSF_1_1Zpt_1_1Rendering_1_1IModelValueContainer.html" title="Helper type which permits configuration of the TAL and/or METAL models with data. ..." alt="" coords="5,35,184,76"/>
+<area shape="rect" id="node2" href="$interfaceCSF_1_1Zpt_1_1Rendering_1_1IRenderingContext.html" title="Interface for a rendering context. " alt="" coords="232,5,435,47"/>
+<area shape="rect" id="node3" href="$classCSF_1_1Zpt_1_1Rendering_1_1RenderingContext.html" title="Represents the object model, presented to a IZptDocument when it is rendered. " alt="" coords="483,35,681,76"/>
 </map>

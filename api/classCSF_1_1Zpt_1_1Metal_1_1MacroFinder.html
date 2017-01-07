@@ -39,7 +39,7 @@ ga('send', 'pageview');
  <tr style="height: 56px;">
   <td style="padding-left: 0.5em;">
    <div id="projectname"><a href="../index.html">ZPT-Sharp</a>
-   &#160;<span id="projectnumber">v0.7.0</span>
+   &#160;<span id="projectnumber">v0.8.0</span>
    </div>
    <div id="projectbrief">Zope Page Templates for .NET</div>
   </td>
@@ -123,14 +123,28 @@ $(document).ready(function(){initNavTree('classCSF_1_1Zpt_1_1Metal_1_1MacroFinde
 
 <p>Type which finds the usage of METAL macros.  
  <a href="classCSF_1_1Zpt_1_1Metal_1_1MacroFinder.html#details">More...</a></p>
+<div class="dynheader">
+Inheritance diagram for CSF.Zpt.Metal.MacroFinder:</div>
+<div class="dyncontent">
+<div class="center"><img src="classCSF_1_1Zpt_1_1Metal_1_1MacroFinder__inherit__graph.png" border="0" usemap="#CSF_8Zpt_8Metal_8MacroFinder_inherit__map" alt="Inheritance graph"/></div>
+<map name="CSF_8Zpt_8Metal_8MacroFinder_inherit__map" id="CSF_8Zpt_8Metal_8MacroFinder_inherit__map">
+<area shape="rect" id="node2" href="interfaceCSF_1_1Zpt_1_1Metal_1_1IMacroFinder.html" title="A type which finds METAL macros where they are referenced by a rendering context. ..." alt="" coords="48,5,147,32"/></map>
+<center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
+<div class="dynheader">
+Collaboration diagram for CSF.Zpt.Metal.MacroFinder:</div>
+<div class="dyncontent">
+<div class="center"><img src="classCSF_1_1Zpt_1_1Metal_1_1MacroFinder__coll__graph.png" border="0" usemap="#CSF_8Zpt_8Metal_8MacroFinder_coll__map" alt="Collaboration graph"/></div>
+<map name="CSF_8Zpt_8Metal_8MacroFinder_coll__map" id="CSF_8Zpt_8Metal_8MacroFinder_coll__map">
+<area shape="rect" id="node2" href="interfaceCSF_1_1Zpt_1_1Metal_1_1IMacroFinder.html" title="A type which finds METAL macros where they are referenced by a rendering context. ..." alt="" coords="48,5,147,32"/></map>
+<center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:ad4e54114f9a5780e2ae62fd4c553d85e"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="interfaceCSF_1_1Zpt_1_1Rendering_1_1IZptElement.html">IZptElement</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCSF_1_1Zpt_1_1Metal_1_1MacroFinder.html#ad4e54114f9a5780e2ae62fd4c553d85e">GetUsedMacro</a> (<a class="el" href="interfaceCSF_1_1Zpt_1_1Rendering_1_1IRenderingContext.html">IRenderingContext</a> context)</td></tr>
-<tr class="memdesc:ad4e54114f9a5780e2ae62fd4c553d85e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Examines the given IZptElement and - if it uses a METAL macro - gets that macro from the given Model.  <a href="#ad4e54114f9a5780e2ae62fd4c553d85e">More...</a><br /></td></tr>
+<tr class="memdesc:ad4e54114f9a5780e2ae62fd4c553d85e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Examines the given IRenderingContext and - if it uses a METAL macro - gets that macro from the model contained within that context.  <a href="#ad4e54114f9a5780e2ae62fd4c553d85e">More...</a><br /></td></tr>
 <tr class="separator:ad4e54114f9a5780e2ae62fd4c553d85e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a839c0e569677555fc09a92400e5324b2"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="interfaceCSF_1_1Zpt_1_1Rendering_1_1IZptElement.html">IZptElement</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCSF_1_1Zpt_1_1Metal_1_1MacroFinder.html#a839c0e569677555fc09a92400e5324b2">GetExtendedMacro</a> (<a class="el" href="interfaceCSF_1_1Zpt_1_1Rendering_1_1IRenderingContext.html">IRenderingContext</a> context)</td></tr>
-<tr class="memdesc:a839c0e569677555fc09a92400e5324b2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Examines the given IZptElement and - if it extends a METAL macro - gets that macro from the given Model.  <a href="#a839c0e569677555fc09a92400e5324b2">More...</a><br /></td></tr>
+<tr class="memdesc:a839c0e569677555fc09a92400e5324b2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Examines the given IRenderingContext and - if it extends a METAL macro - gets that macro from the model contained within that context.  <a href="#a839c0e569677555fc09a92400e5324b2">More...</a><br /></td></tr>
 <tr class="separator:a839c0e569677555fc09a92400e5324b2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
@@ -158,7 +172,7 @@ Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Examines the given IZptElement and - if it extends a METAL macro - gets that macro from the given Model. </p>
+<p>Examines the given IRenderingContext and - if it extends a METAL macro - gets that macro from the model contained within that context. </p>
 <dl class="section return"><dt>Returns</dt><dd>Either an IZptElement instance representing the macro extended, or a <code>null</code> reference.</dd></dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
@@ -166,6 +180,8 @@ Public Member Functions</h2></td></tr>
   </table>
   </dd>
 </dl>
+
+<p>Implements <a class="el" href="interfaceCSF_1_1Zpt_1_1Metal_1_1IMacroFinder.html#ad59a99092bb814a38a85950383d8401c">CSF.Zpt.Metal.IMacroFinder</a>.</p>
 
 </div>
 </div>
@@ -191,7 +207,7 @@ Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Examines the given IZptElement and - if it uses a METAL macro - gets that macro from the given Model. </p>
+<p>Examines the given IRenderingContext and - if it uses a METAL macro - gets that macro from the model contained within that context. </p>
 <dl class="section return"><dt>Returns</dt><dd>Either an IZptElement instance representing the macro used, or a <code>null</code> reference.</dd></dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
@@ -199,6 +215,8 @@ Public Member Functions</h2></td></tr>
   </table>
   </dd>
 </dl>
+
+<p>Implements <a class="el" href="interfaceCSF_1_1Zpt_1_1Metal_1_1IMacroFinder.html#a8617104ab222ad1bdcbb293be236be5e">CSF.Zpt.Metal.IMacroFinder</a>.</p>
 
 </div>
 </div>
@@ -211,7 +229,7 @@ Public Member Functions</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="namespaceCSF.html">CSF</a></li><li class="navelem"><a class="el" href="namespaceCSF_1_1Zpt.html">Zpt</a></li><li class="navelem"><a class="el" href="namespaceCSF_1_1Zpt_1_1Metal.html">Metal</a></li><li class="navelem"><a class="el" href="classCSF_1_1Zpt_1_1Metal_1_1MacroFinder.html">MacroFinder</a></li>
-    <li class="footer">Generated on Fri Nov 18 2016 21:00:53 for ZPT-Sharp by
+    <li class="footer">Generated on Sat Jan 7 2017 19:33:27 for ZPT-Sharp by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.8 </li>
   </ul>

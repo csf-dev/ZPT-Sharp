@@ -39,7 +39,7 @@ ga('send', 'pageview');
  <tr style="height: 56px;">
   <td style="padding-left: 0.5em;">
    <div id="projectname"><a href="../index.html">ZPT-Sharp</a>
-   &#160;<span id="projectnumber">v0.7.0</span>
+   &#160;<span id="projectnumber">v0.8.0</span>
    </div>
    <div id="projectbrief">Zope Page Templates for .NET</div>
   </td>
@@ -156,9 +156,16 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a3780e2ccf09775935f29705c22aeb8db"><td class="memItemLeft" align="right" valign="top">object&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCSF_1_1Zpt_1_1Rendering_1_1AbstractSourceInfo.html#a3780e2ccf09775935f29705c22aeb8db">GetContainer</a> ()</td></tr>
 <tr class="memdesc:a3780e2ccf09775935f29705c22aeb8db"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets a representation of the current instance which is suitable for use with TALES.  <a href="#a3780e2ccf09775935f29705c22aeb8db">More...</a><br /></td></tr>
 <tr class="separator:a3780e2ccf09775935f29705c22aeb8db"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac248f652c6db712ee1a852bec31c2806"><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCSF_1_1Zpt_1_1Rendering_1_1AbstractSourceInfo.html#ac248f652c6db712ee1a852bec31c2806">GetRelativeName</a> (string root)</td></tr>
+<tr class="memdesc:ac248f652c6db712ee1a852bec31c2806"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets a name for the current instance, relative to a given root name. The meaning of relative is up to the implementation.  <a href="#ac248f652c6db712ee1a852bec31c2806">More...</a><br /></td></tr>
+<tr class="separator:ac248f652c6db712ee1a852bec31c2806"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a91536c9ac26ad0955d63806106ac9c89"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCSF_1_1Zpt_1_1Rendering_1_1AbstractSourceInfo.html#a91536c9ac26ad0955d63806106ac9c89">AbstractSourceInfo</a> (string abstractPath)</td></tr>
 <tr class="memdesc:a91536c9ac26ad0955d63806106ac9c89"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializes a new instance of the <a class="el" href="classCSF_1_1Zpt_1_1Rendering_1_1AbstractSourceInfo.html" title="Implementation of ISourceInfo representing an abstract string path. ">CSF.Zpt.Rendering.AbstractSourceInfo</a> class.  <a href="#a91536c9ac26ad0955d63806106ac9c89">More...</a><br /></td></tr>
 <tr class="separator:a91536c9ac26ad0955d63806106ac9c89"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_methods_interfaceCSF_1_1Zpt_1_1Rendering_1_1ISourceInfo"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_interfaceCSF_1_1Zpt_1_1Rendering_1_1ISourceInfo')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="interfaceCSF_1_1Zpt_1_1Rendering_1_1ISourceInfo.html">CSF.Zpt.Rendering.ISourceInfo</a></td></tr>
+<tr class="memitem:a489c240f320876ace019a43cd7e92f43 inherit pub_methods_interfaceCSF_1_1Zpt_1_1Rendering_1_1ISourceInfo"><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interfaceCSF_1_1Zpt_1_1Rendering_1_1ISourceInfo.html#a489c240f320876ace019a43cd7e92f43">ToString</a> ()</td></tr>
+<tr class="memdesc:a489c240f320876ace019a43cd7e92f43 inherit pub_methods_interfaceCSF_1_1Zpt_1_1Rendering_1_1ISourceInfo"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns a System.String that represents the current <a class="el" href="interfaceCSF_1_1Zpt_1_1Rendering_1_1ISourceInfo.html" title="Information about the source of an IZptDocument or IZptElement. ">CSF.Zpt.Rendering.ISourceInfo</a>.  <a href="#a489c240f320876ace019a43cd7e92f43">More...</a><br /></td></tr>
+<tr class="separator:a489c240f320876ace019a43cd7e92f43 inherit pub_methods_interfaceCSF_1_1Zpt_1_1Rendering_1_1ISourceInfo"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="properties"></a>
 Properties</h2></td></tr>
@@ -363,6 +370,41 @@ Properties</h2></td></tr>
 
 </div>
 </div>
+<a class="anchor" id="ac248f652c6db712ee1a852bec31c2806"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">string CSF.Zpt.Rendering.AbstractSourceInfo.GetRelativeName </td>
+          <td>(</td>
+          <td class="paramtype">string&#160;</td>
+          <td class="paramname"><em>root</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Gets a name for the current instance, relative to a given root name. The meaning of relative is up to the implementation. </p>
+<dl class="section return"><dt>Returns</dt><dd>The relative name.</dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">root</td><td>The root name.</td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Implements <a class="el" href="interfaceCSF_1_1Zpt_1_1Rendering_1_1ISourceInfo.html#a1ef4a11ca5143495eac7a943a4b16b0c">CSF.Zpt.Rendering.ISourceInfo</a>.</p>
+
+</div>
+</div>
 <h2 class="groupheader">Property Documentation</h2>
 <a class="anchor" id="a021c3ec288f3cd6ddd3761986beccb06"></a>
 <div class="memitem">
@@ -396,7 +438,7 @@ Properties</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="namespaceCSF.html">CSF</a></li><li class="navelem"><a class="el" href="namespaceCSF_1_1Zpt.html">Zpt</a></li><li class="navelem"><a class="el" href="namespaceCSF_1_1Zpt_1_1Rendering.html">Rendering</a></li><li class="navelem"><a class="el" href="classCSF_1_1Zpt_1_1Rendering_1_1AbstractSourceInfo.html">AbstractSourceInfo</a></li>
-    <li class="footer">Generated on Fri Nov 18 2016 21:00:53 for ZPT-Sharp by
+    <li class="footer">Generated on Sat Jan 7 2017 19:33:27 for ZPT-Sharp by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.8 </li>
   </ul>
