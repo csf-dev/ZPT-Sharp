@@ -5,7 +5,7 @@
     <id>CSF.Zpt.DocumentProviders.XmlLegacy</id>
     <version tal:define="semVer options/version;
                          extraVer options/versionExtra;
-                         versionSuffix csharp:String.IsNullOrEmpty(extraVer)? String.Concat(&quot;-&quot;, extraVer) : String.Empty;
+                         versionSuffix csharp:!String.IsNullOrEmpty(extraVer)? String.Concat(&quot;-&quot;, extraVer) : String.Empty;
                          fullVersion string:$semVer$versionSuffix;"
              tal:content="fullVersion">0.0.0</version>
     <title>ZPT-Sharp leacy XML document provider plugin</title>
