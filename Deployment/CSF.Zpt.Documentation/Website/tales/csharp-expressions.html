@@ -95,7 +95,7 @@
   Today's date is
   &lt;span tal:content="csharp:today.ToString(&amp;quot;yyyy-MM-dd&amp;quot;)"&gt;2012-01-01&lt;span&gt;
 &lt;/p&gt;</code></pre>
-      <h2>Expression internals</h2>
+      <h2>Expression internals &amp; limitations</h2>
       <p>
         Internally, to provide C♯ expressions,
         <a href="https://msdn.microsoft.com/en-us/library/y2k85ax6(v=vs.110).aspx">the CodeDOM API</a>
@@ -108,31 +108,41 @@
         keyword.  This means that for general usage their type does not need to known.
       </p>
       <p>
-        A limitation of this approach though is for using <strong>extension methods</strong>, including Linq methods
-        such as <code>.Sum()</code> or <code>.Count()</code>; these are incompatible with dynamically-typed variables.
-        To use these we must
-        <a href="tales/advanced-csharp-expressions.html">exert more control over the code which is compiled for the
-        C♯ expression</a>.
-      </p>
-      <h3>Consider moving complex expressions into your model</h3>
-      <p>
-        Please note that whilst the functionality exists to import .NET namespaces, specify referenced assemlies and
-        to indicate the type of variables, it may be far simpler to push such functionality downwards into your MVC
-        model.  If for example you wish to write something along the lines of the following:
+        A limitation of this approach is exposed when you wish to use <strong>extension methods</strong>, including
+        Linq, such as <code>.Sum()</code> or <code>.Count()</code>. These are incompatible with dynamically-typed
+        variables.  For example, if you wrote some markup such as the following example:
       </p>
       <pre><code class="html">&lt;p tal:define="itemCount csharp:here.Items.Count(x => x.Colour == &amp;quot;Red&amp;quot;)"&gt;
   There are &lt;span tal:replace="itemCount"&gt;3&lt;/span&gt; red items
 &lt;p&gt;</code></pre>
       <p>
-        <em>This expression will not compile</em> without specifying the type (such as
-        <code>IEnumerable&lt;MyItemType&gt;</code>) of the <code>Items</code> model property.
-        This will likely require some namespace imports and an assembly reference.
+        <em>This expression will not compile</em> because the <code>.Count()</code> method from Linq is an extension
+        method which requires a strongly-typed (and not dynamically-typed) reference.
+        There are two available ways to work around/deal with this limitation:
+      </p>
+      <h3>Consider moving expressions into your model</h3>
+      <p>
+        The recommended and simplest way to deal with this limitation is to move that expression into your MVC model
+        class as either a property or plain method call.  This functionality in the model may then make use of
+        extension methods/linq/etc and expose the result to the view. No special code or technique need be used here,
+        simply a method on the model such as <code>public int GetItemCount(string colour)</code>.
       </p>
       <p>
-        Instead consider removing the need for any of this by providing a <code>GetItemCount(string colour)</code> method
-        on your MVC model.  This would work around the need to include the extra markup in your view, and makes the
-        whole solution far more clean.  In short - whilst the functionality exists to enable extension methods &amp;
-        Linq in ZPT views, it tends to be best to avoid it if you don't have to use it.
+        This also guides you towards pushing any 'logic' of your model into the model itself, which is good practice.
+      </p>
+      <h3>Specify types, namespace imports and assembly references</h3>
+      <p>
+        For scenarios where moving the code into your model is not possible (for example, if you do not control the
+        model type), ZPT-Sharp provides an advanced mechanism for solving 'the extension method' problem.
+        This solution is a set of three special expression types (and related configuration) which allow you to
+        specify the .NET type of your TALES variables, as well as import namespaces and provide references to other
+        assemblies.
+      </p>
+      <p>
+        These advanced topics are covered in
+        <a href="tales/advanced-csharp-expressions.html">documentation for the additional expression types</a>
+        as well as
+        <a href="configuration.html">documentation for the configuration options which affect them</a>.
       </p>
     </section>
   </div>
