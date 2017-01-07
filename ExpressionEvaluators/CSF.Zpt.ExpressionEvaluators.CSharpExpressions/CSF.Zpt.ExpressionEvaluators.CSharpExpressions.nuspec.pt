@@ -20,9 +20,9 @@
                   tal:attributes="version string:[$fullVersion,${options/nextBreakingVersion})" />
     </dependencies>
     <frameworkAssemblies>
-      <frameworkAssembly assemblyName="Microsoft.CSharp.dll" />
-      <frameworkAssembly assemblyName="System.Core.dll" />
-      <frameworkAssembly assemblyName="System.Dynamic.dll" />
+      <frameworkAssembly assemblyName="Microsoft.CSharp" />
+      <frameworkAssembly assemblyName="System.Core" />
+      <frameworkAssembly assemblyName="System.Dynamic" />
     </frameworkAssemblies>
   </metadata>
   <files>

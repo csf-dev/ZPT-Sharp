@@ -20,7 +20,7 @@
                   tal:attributes="version string:[$fullVersion,${options/nextBreakingVersion})" />
     </dependencies>
     <frameworkAssemblies>
-      <frameworkAssembly assemblyName="System.Xml.dll" />
+      <frameworkAssembly assemblyName="System.Xml" />
     </frameworkAssemblies>
   </metadata>
   <files>

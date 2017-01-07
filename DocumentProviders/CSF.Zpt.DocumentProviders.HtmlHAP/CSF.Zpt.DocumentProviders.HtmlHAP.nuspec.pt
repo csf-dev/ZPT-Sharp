@@ -21,7 +21,7 @@
       <dependency id="HtmlAgilityPack" version="1.4.9" />
     </dependencies>
     <frameworkAssemblies>
-      <frameworkAssembly assemblyName="System.Xml.dll" />
+      <frameworkAssembly assemblyName="System.Xml" />
     </frameworkAssemblies>
   </metadata>
   <files>
