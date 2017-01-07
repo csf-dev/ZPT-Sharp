@@ -113,6 +113,9 @@
               <a href="tales/csharp-expressions.html">CSharp expressions</a>
             </li>
             <li>
+              <a href="tales/python-expressions.html">Python expressions</a>
+            </li>
+            <li>
               <a href="tales/built-in-variables.html">Root variables</a>
             </li>
             <li>
@@ -181,10 +184,10 @@
   documents.</p>
 
   <p>Other uses of the configuration file depend upon your installation scenario and requirements.
-  If the <i>CSharp</i> expressions plugin is installed then the configuration file may be used to
-  indicate the desired namespaces which are available to CSharp expressions. Additionally, the
-  configuration may be used in order to configure the capture and recording of diagnostic/logging
-  information from ZPT-Sharp.</p>
+  If the <b>CSharp</b> <b>expressions</b> <b>plugin</b> is installed then the configuration file
+  controls application-wide settings related to assembly references and namespace imports.
+  Additionally, the configuration may be used in order to configure the capture and recording of
+  diagnostic/logging information from ZPT-Sharp.</p>
 
   <p>The filename for the configuration file depends upon the use-case. When using the
   <i>ZptBuilder.exe</i> application, the configuration file must be named
@@ -202,10 +205,13 @@
   <p>The mandatory part of the configuration file is the section which installs plugins - document
   providers and expression evaluators. At a minimum for any useful operation, at least one document
   provider and one expression evaluator plugin must be installed. One expression evaluator must be
-  nominated as the default plugin. The default evaluator is used for TALES expressions which are
-  not qualified with a prefix, such as 'path:'. You should also nominate the default HTML and XML
-  document provider plugins. These default providers are used when a ZPT document is to be created,
-  and all that is known is whether it is HTML or XML formatted.</p>
+  nominated as the default plugin; this default evaluator is used for expressions which are not
+  qualified with an expression prefix. In order to comply with the TALES specification, you should
+  choose <i>CSF.Zpt.ExpressionEvaluators.PathExpressions.PathExpressionEvaluator</i> as the default
+  expression evaluator. This will make <b>path:</b> the default expression type, where no prefix is
+  given. You should also nominate the default HTML and XML document provider plugins. These default
+  providers are used when a ZPT document is to be created, a provider type has not been explicitly
+  specified, but it is known whether it is either HTML or XML formatted.</p>
 
   <p>The following example shows the relevant content to install three expression evaluator
   plugins, two document provider plugins, and nominate the defaults accordingly.</p>
@@ -238,21 +244,40 @@
 &lt;/configuration&gt;
 </pre>
 
-  <p>Each &lt;Assembly&gt; element, in its Path attribute, lists a single .NET assembly containing
-  one or more plugins. The assembly paths are either absolute or relative paths. Where a relative
-  path is given, it is evaluated based upon the path to the <i>CSF.Zpt.dll</i> assembly. If the
-  plugin assembly is in the same directory as that main ZPT-Sharp assembly then just the filename
-  alone is sufficient (as shown above). The default expression evaluator, XML document provider and
-  HTML document provider are indicated by listing their namespace-qualified type names in the
-  appropriate configuration attributes. <a name="lbAF" id="lbAF">&nbsp;</a></p>
+  <p>Each <i>&lt;Assembly&gt;</i> element, in its <i>Path</i> attribute, lists a single .NET
+  assembly containing one or more plugins. The assembly paths are either absolute or relative
+  paths. Where a relative path is given, it is evaluated based upon the path to the
+  <i>CSF.Zpt.dll</i> assembly. If the plugin assembly is in the same directory as that main
+  ZPT-Sharp assembly then just the filename alone is sufficient (as shown above). The default
+  expression evaluator, XML document provider and HTML document provider are indicated by listing
+  their namespace-qualified type names in the appropriate configuration attributes. <a name="lbAF" id="lbAF">&nbsp;</a></p>
 
-  <h2>CONFIGURING CSHARP NAMESPACES</h2>
+  <h2>CONFIGURING CSHARP EXPRESSIONS</h2>
 
   <p>If the plugin <i>CSF.Zpt.ExpressionEvaluators.CSharpExpressions.dll</i> is installed, then
-  CSharp expressions are available. When evaluating such expressions, by default two namespaces are
-  made to the expressions via 'using NAMESPACE;' blocks. These two namespaces are <i>System</i> and
-  <i>System.Linq</i>. If you wish to customise these namespaces (for all expressions) then you may
-  integrate the following into your configuration.</p>
+  CSharp expressions are available. There are two settings affecting CSharp expressions which may
+  be specified in the configuration file. These are the default assemblies which will be referenced
+  by compiled expressions and also the namespaces which will be imported into those expressions.
+  The settings made in the configuration file will affect all CSharp expressions evaluated by the
+  application. Effectively, the configuration specifies the baseline assembly references and
+  namespace imports. Further assemblies/namespaces may be chosen via expressions in ZPT
+  documents.</p>
+
+  <p>The default configuration (which is also used if the configuration section below is not
+  present) is as follows:</p>
+
+  <dl compact="">
+    <dd>The assembly <i>System.dll</i> will be referenced</dd>
+  </dl>
+
+  <dl compact="">
+    <dd>The namespaces <i>System</i> and <i>System.Linq</i> will be imported (without aliases)</dd>
+  </dl>
+
+  <p>For more information please consult the documentation for writing CSharp expressions. These
+  two configuration options are roughly equivalent to the expression types <b>csassembly</b> and
+  <b>csnamespace</b>. Each permits as many or as few entries as desired; repeat the <i>Assembly</i>
+  or <i>Namespace</i> XML element for each item you wish to specify.</p>
   <pre>
 &lt;configuration&gt;
   &lt;configSections&gt;
@@ -260,8 +285,8 @@
       &lt;sectionGroup name="Zpt"&gt;
           &lt;sectionGroup name="ExpressionEvaluators"&gt;
             &lt;sectionGroup name="CSharpExpressions"&gt;
-              &lt;section name="NamespaceConfiguration"
-                       type="CSF.Zpt.ExpressionEvaluators.CSharpExpressions.NamespaceConfiguration, CSF.Zpt.ExpressionEvaluators.CSharpExpressions" /&gt;
+              &lt;section name="ExpressionConfigurationSection"
+                       type="CSF.Zpt.ExpressionEvaluators.CSharpExpressions.ExpressionConfigurationSection, CSF.Zpt.ExpressionEvaluators.CSharpExpressions" /&gt;
             &lt;/sectionGroup&gt;
           &lt;/sectionGroup&gt;
       &lt;/sectionGroup&gt;
@@ -272,9 +297,14 @@
     &lt;Zpt&gt;
       &lt;ExpressionEvaluators&gt;
         &lt;CSharpExpressions&gt;
-          &lt;NamespaceConfiguration&gt;
-            &lt;add Namespace="NAMESPACE" /&gt;
-          &lt;/NamespaceConfiguration&gt;
+          &lt;ExpressionConfigurationSection&gt;
+            &lt;Assemblies&gt;
+              &lt;Assembly Name="NAME" /&gt;
+            &lt;/Assemblies&gt;
+            &lt;Namespaces&gt;
+              &lt;Namespace Name="NAMESPACE" Alias="ALIAS" /&gt;
+            &lt;/Namespaces&gt;
+          &lt;/ExpressionConfigurationSection&gt;
         &lt;/CSharpExpressions&gt;
       &lt;/ExpressionEvaluators&gt;
     &lt;/Zpt&gt;
@@ -282,8 +312,21 @@
 &lt;/configuration&gt;
 </pre>
 
-  <p>You may repeat the <i>&lt;add Namespace="NAMESPACE" /&gt;</i> element as many times as
-  desired, each time replacing NAMESPACE with a namespace to be imported. <a name="lbAG" id="lbAG">&nbsp;</a></p>
+  <p>Within the assembly references, the <b>NAME</b> placeholder refers to the filename of a
+  referenced assembly. That assembly must be deployed into the same directory as the application's
+  assemblies. The name is the full assembly filename including the <i>.dll</i> extension.</p>
+
+  <p>For namespace imports, the <b>NAMESPACE</b> placeholder is the name of the namespace (for
+  example <i>System.Linq</i>). The <i>Alias</i> attribute is optional; when it is provided, the
+  imported namespace will be assigned to the named alias. The code generated looks something like
+  the following examples:</p>
+  <pre>
+// Without an alias: &lt;Namespace Name="My.Namespace" /&gt;
+using My.Namespace;
+
+// With an alias: &lt;Namespace Name="My.Other.Namespace" Alias="other" /&gt;
+using other = My.Other.Namespace;
+</pre><a name="lbAG" id="lbAG">&nbsp;</a>
 
   <h2>CONFIGURING DIAGNOSTICS</h2>
 
@@ -357,15 +400,15 @@
 </div>
 <footer class="page_footer">
   <section class="copyright">
-    Copyright © 2016
+    Copyright © 2017
     <a href="http://csf-dev.com/">CSF Software Limited</a> et al
   </section>
   <section class="version">
     <p>
-      Website built <strong>2016-11-18</strong>;
+      Website built <strong>2017-01-07</strong>;
       for version
       <strong>
-        v0.7.0-alpha
+        v0.8.0-beta
       </strong>
     </p>
   </section>

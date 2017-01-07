@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Introduction to METAL and macros</title>
+<title>TALES 'python' expressions</title>
 <base href="http://csf-dev.github.io/ZPT-Sharp/">
 <style type="text/css">
 @import url(css/styles.css);
@@ -12,7 +12,7 @@
 <script data-main="js/config/main" type="text/javascript" src="js/lib/require.min.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.4.0/styles/default.min.css">
 </head>
-<body class="page_introduction_to_metal">
+<body class="page_python_expressions">
 <div class="content_wrapper">
   <header class="page_header">
     <div class="hamburger_menu" title="Show/hide navigation">
@@ -28,7 +28,7 @@
   <div class="main_page_area">
     <nav>
       <h2>Site navigation</h2>
-      <ul class="active_introduction_to_metal">
+      <ul class="active_python_expressions">
         <li class="introduction nav_item">
           <a href="index.html">Introduction</a>
         </li>
@@ -148,75 +148,65 @@
       </ul>
     </nav>
     <section class="main_page_content">
-      <header><h1>Introduction to METAL and macros</h1></header>
+      <header>
+        <div class="expression plugin_note note">
+        <h2>Plugin note</h2>
+        <p>
+          This functionality is contained within an
+          <em><a href="plugins.html">expression evaluator plugin</a></em>.
+          As such, it is available only when the corresponding plugin is installed.
+        </p>
+        <div class="plugin_details">
+          <h3>Plugin assembly</h3>
+          <span><code>CSF.Zpt.ExpressionEvaluators.PythonExpressions.dll</code></span>
+          <h3><span>Plugin class</span></h3>
+          <span><code>CSF.Zpt.ExpressionEvaluators.PythonExpressions.PythonExpressionEvaluator</code></span>
+          <h3><span>Expression prefix</span></h3>
+          <span><code>python:</code></span>
+        </div>
+      </div>
+        <h1>TALES 'python' expressions</h1>
+      </header>
       <p>
-        <abbr title="Macro Expansion Template Attribute Language">METAL</abbr> exposes the functionality of ZPT macros.
-        Macros are reusable pieces of markup, which may be defined in the same or a different source file to the page
-        template being rendered.
+        <code>python:</code> expressions make it possible to include and evaluate TALES expressions written in
+        <a href="https://www.python.org/">the Python programming language</a> in your ZPT-Sharp documents.
       </p>
       <p>
-        Macros are useful for defining and referencing common markup structures in order to maintain consistency. By
-        referencing the macro rather than copying the markup directly, all usages may be updated by editing
-        the source macro. This could be used for purposes such as:
+        The text following the <code>python:</code> prefix must be a valid python expression,
+        such that it may be evaluated if it appeared after a Python <code>return</code> keyword -
+        assuming that all of the relevant variables are in-scope.
       </p>
-      <ul>
-        <li>A common page header/footer/navigation menu</li>
-        <li>An info-box about an item - such as a product</li>
-        <li>The boilerplate markup for the pages in a site/application</li>
-      </ul>
-      <h2>METAL attributes</h2>
+      <h2>Python internals</h2>
       <p>
-        The following attributes exist in the <a href="writing-pages-using-zpt.html#xml_namespaces">METAL namespace</a>,
-        activated using the <code>metal:</code> attribute prefix.
-      </p>
-      <table class="zpt_attributes">
-        <colgroup>
-          <col class="attribute">
-          <col class="summary">
-        </colgroup>
-        <thead>
-          <tr>
-            <th>Attribute</th>
-            <th>Summary</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td><a href="metal/define-use-macro.html#define_macro"><code>define-macro</code></a></td>
-            <td>Define a METAL macro consisting of the current element and all of its children, providing a macro name</td>
-          </tr>
-          <tr>
-            <td><a href="metal/define-use-macro.html#use_macro"><code>use-macro</code></a></td>
-            <td>Replace the current element and all of its children/content with the specified macro</td>
-          </tr>
-          <tr>
-            <td><a href="metal/define-fill-slot.html#define_slot"><code>define-slot</code></a></td>
-            <td>Define a slot within a macro, which acts as an optional extension point when the macro is used</td>
-          </tr>
-          <tr>
-            <td><a href="metal/define-fill-slot.html#fill_slot"><code>fill-slot</code></a></td>
-            <td>When using a macro, replace the named slot with the specified markup</td>
-          </tr>
-          <tr>
-            <td><a href="metal/extend-macro.html"><code>extend-macro</code></a></td>
-            <td>Used alongside <code>define-macro</code> to create a new macro based upon an existing one, extending and/or redefining its slots</td>
-          </tr>
-        </tbody>
-      </table>
-      <h2 id="macros_for_the_html_element">Macros for the &lt;html&gt; element</h2>
-      <p>
-        It is easy to see from the examples above how macros may be used to provide individual elements of a page,
-        much like ASP.NET user controls.  What is less immediately obvious is the power of creating a macro using
-        <code>metal:define-macro</code> attribute on the document root (such as the <code>&lt;html&gt;</code> element).
+        Python expressions internally make use of <a href="http://ironpython.net/">the IronPython framework</a>
+        to parse and evaluate python expressions.
       </p>
       <p>
-        This manner of usage enables you to specify boilerplate markup in a "page boilerplate" macro.  This could
-        include common elements within the <code>&lt;head&gt;</code> element, for example, as well as a shared page
-        header, footer &amp; navigation as applicable.  The "page boilerplate" macro then exposes slots for the actual
-        page content.  Pages within the site/application then may use this macro and provide their actual content via
-        slot-fillers.
+        The Python language version supported is dependant upon IronPython's own support.
+        At present, <strong>Python version 2.7</strong> is the maximum language version available.
       </p>
-      
+      <h2>Modules and imports</h2>
+      <p>
+        At present, no modules are imported for python expressions.
+        There is also no mechanism to specify modules to be imported either.
+      </p>
+      <p class="note">
+        There are planned changes which will permit the importing of modules.
+        These changes are lined up for
+        <a href="https://github.com/csf-dev/ZPT-Sharp/issues/175">a future version of this expression evaluator plugin</a>.
+      </p>
+      <h2>Important note on variable names</h2>
+      <p>
+        In the same way as with <a href="tales/csharp-expressions.html">C♯ expressions</a>, if the python
+        expressions plugin is installed then all TALES variable names must be valid python variable names.
+        Note that the Python expression evaluator is not one of the plugins installed by default for new installations.
+      </p>
+      <p>
+        Where the python expression evaluator plugin is installed, it does not matter whether the variables
+        are used within a Python expression or not.
+        If an improperly-named variable is in-scope when a python expression is evaluated then the presence of
+        that variable will corrupt the expression.
+      </p>
     </section>
   </div>
 </div>

@@ -1,0 +1,345 @@
+﻿<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Advanced 'csharp' expressions</title>
+<base href="http://csf-dev.github.io/ZPT-Sharp/">
+<style type="text/css">
+@import url(css/styles.css);
+</style>
+
+<script data-main="js/config/main" type="text/javascript" src="js/lib/require.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.4.0/styles/default.min.css">
+</head>
+<body class="page_advanced_csharp_expressions">
+<div class="content_wrapper">
+  <header class="page_header">
+    <div class="hamburger_menu" title="Show/hide navigation">
+      <span class="hamburger_line"></span>
+      <span class="hamburger_line"></span>
+      <span class="hamburger_line"></span>
+    </div>
+    <h2>
+      <a href="index.html">ZPT Sharp</a>
+      <em>Zen HTML views</em>
+    </h2>
+  </header>
+  <div class="main_page_area">
+    <nav>
+      <h2>Site navigation</h2>
+      <ul class="active_advanced_csharp_expressions">
+        <li class="introduction nav_item">
+          <a href="index.html">Introduction</a>
+        </li>
+        <li class="advantages nav_item">
+          <a href="advantages-of-zpt-views.html">ZPT Advantages</a>
+        </li>
+        <li class="download nav_item">
+          <a href="download.html">Download ZPT-Sharp</a>
+        </li>
+        <li class="asp_net_view_engine nav_item">
+          <a href="asp-net-mvc-view-engine.html">ZPT-Sharp for ASP.NET MVC</a>
+        </li>
+        <li class="command_line_renderer nav_item">
+          <a href="command-line-renderer.html">The command-line renderer</a>
+        </li>
+        <li class="writing_pages_using_zpt nav_item">
+          <a href="writing-pages-using-zpt.html">Writing pages</a>
+        </li>
+        <li class="metal_reference nav_section">
+          <h3>METAL reference</h3>
+          <ul>
+            <li>
+              <a href="metal/introduction.html">Introduction to METAL</a>
+            </li>
+            <li>
+              <a href="metal/define-use-macro.html">Define &amp; use macros</a>
+            </li>
+            <li>
+              <a href="metal/define-fill-slot.html">Define &amp; fill slots</a>
+            </li>
+            <li>
+              <a href="metal/extend-macro.html">Extend macros</a>
+            </li>
+          </ul>
+        </li>
+        <li class="tal_reference nav_section">
+          <h3>TAL reference</h3>
+          <ul>
+            <li>
+              <a href="tal/introduction.html">Introduction to TAL</a>
+            </li>
+            <li>
+              <a href="tal/define.html">Define variables</a>
+            </li>
+            <li>
+              <a href="tal/condition.html">Conditional rendering</a>
+            </li>
+            <li>
+              <a href="tal/repeat.html">Repeat sections of markup</a>
+            </li>
+            <li>
+              <a href="tal/content-replace.html">Insert model data</a>
+            </li>
+            <li>
+              <a href="tal/attributes.html">Set attributes</a>
+            </li>
+            <li>
+              <a href="tal/omit-tag.html">Omit start/end tag</a>
+            </li>
+            <li>
+              <a href="tal/on-error.html">Error handling</a>
+            </li>
+          </ul>
+        </li>
+        <li class="tales_reference nav_section">
+          <h3>TALES reference</h3>
+          <ul>
+            <li>
+              <a href="tales/introduction.html">Introduction to TALES</a>
+            </li>
+            <li>
+              <a href="tales/path-expressions.html">Path expressions</a>
+            </li>
+            <li>
+              <a href="tales/string-expressions.html">String expressions</a>
+            </li>
+            <li>
+              <a href="tales/not-expressions.html">Not expressions</a>
+            </li>
+            <li>
+              <a href="tales/csharp-expressions.html">CSharp expressions</a>
+            </li>
+            <li>
+              <a href="tales/python-expressions.html">Python expressions</a>
+            </li>
+            <li>
+              <a href="tales/built-in-variables.html">Root variables</a>
+            </li>
+            <li>
+              <a href="tales/repeat-variables.html">Repeat variables</a>
+            </li>
+          </ul>
+        </li>
+        <li class="advanced_topics nav_section">
+          <h3>Advanced topics</h3>
+          <ul>
+            <li class="page_rendering_api nav_item">
+              <a href="page-rendering-api.html">API introduction</a>
+            </li>
+            <li class="api_reference nav_item">
+              <a href="api/index.html">API reference</a>
+            </li>
+            <li class="configuration nav_item">
+              <a href="configuration.html">Configuration</a>
+            </li>
+            <li class="plugins nav_item">
+              <a href="plugins.html">Plugins</a>
+            </li>
+            <li class="writing_plugins nav_item">
+              <a href="writing-plugins.html">Writing plugins</a>
+            </li>
+            <li class="diagnostics_and_logging nav_item">
+              <a href="logging.html">Diagnostics &amp; logging</a>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </nav>
+    <section class="main_page_content">
+      <header>
+        <div class="expression plugin_note note">
+        <h2>Plugin note</h2>
+        <p>
+          This functionality is contained within an
+          <em><a href="plugins.html">expression evaluator plugin</a></em>.
+          As such, it is available only when the corresponding plugin is installed.
+        </p>
+        <div class="plugin_details">
+          <h3>Plugin assembly</h3>
+          <span><code>CSF.Zpt.ExpressionEvaluators.CSharpExpressions.dll</code></span>
+          <h3><span>Plugin classes</span></h3>
+          <span>
+            <code>CSF.Zpt.ExpressionEvaluators.CSharpExpressions.CSharpNamespaceExpressionEvaluator</code>,
+            <code>CSF.Zpt.ExpressionEvaluators.CSharpExpressions.CSharpAssemblyExpressionEvaluator</code> &amp;
+            <code>CSF.Zpt.ExpressionEvaluators.CSharpExpressions.CSharpTypeExpressionEvaluator</code>
+          </span>
+          <h3><span>Expression prefixes</span></h3>
+          <span>
+            <code>csnamespace:</code>,
+            <code>csassembly:</code> &amp;
+            <code>cstype:</code>
+          </span>
+        </div>
+      </div>
+        <h1>Advanced 'csharp' expressions</h1>
+        <p>
+          In order to deal with the difficulties of using <strong>extension methods</strong> in CSharp expressions,
+          there are three additional expression types supported by the CSharp expression plugin.
+          Between them, they allow the author of a ZPT document to specify the precise type of a TALES variable, thus
+          permitting the expression evaluator to apply extension methods to that variable's members.
+          These extra expressions are:
+        </p>
+        <ul>
+          <li>
+            <code>csassembly:</code> - which specifies an assembly name which should be referenced by CSharp
+            expressions which have this variable in-scope.
+          </li>
+          <li>
+            <code>csnamespace:</code> - which acts like a <code>using</code> directive for importing .NET
+            namespaces into CSharp expressions.
+          </li>
+          <li>
+            <code>cstype:</code> - which specifies the type definition for another named variable.
+          </li>
+        </ul>
+        <p>
+        
+        </p>
+        <h2>Assembly references</h2>
+        <p>
+          The <code>csassembly:</code> expression is put to best use in <code>tal:define</code> attributes in order to
+          define a special assembly-reference TALES variable.  The content of the assembly-reference expression is the
+          name of a .NET assembly file (including its <kbd>.dll</kbd> suffix).
+          This named assembly must be either in the same directory as the application's main executable, in the
+          <code>bin</code> directory for a MVC web application or available in the computer's Global Assembly Cache.
+        </p>
+        <p>
+          Whilst this variable has no particular direct use in any expressions (it is a throwaway definition),
+          <code>csharp:</code> expressions which are evaluated where this assembly-reference variable is in-scope will
+          reference that assembly.
+        </p>
+        <h3>Example</h3>
+        <pre><code class="html">&lt;div tal:define="myTypes csassembly:My.Types.dll"&gt;
+  &lt;p&gt;
+    This expression will be compiled with a reference to &lt;code&gt;My.Types.dll&lt;/code&gt;:
+    &lt;span tal:replace="csharp:DateTime.Now.ToString(&amp;quot;yyyy-MM-dd&amp;quot;)"&gt;2015-01-01&lt;/span&gt;.
+  &lt;/p&gt;
+  &lt;p&gt;
+    The following expression will be as well:
+    &lt;span tal:replace="csharp:DateTime.Now.ToString(&amp;quot;yyyy-MM-dd&amp;quot;)"&gt;2015-01-01&lt;/span&gt;.
+  &lt;/p&gt;
+&lt;/div&gt;
+&lt;p&gt;
+  But the following expression will not, because it is outside the scope of the &lt;code&gt;myTypes&lt;/code&gt; variable
+  definition:
+  &lt;span tal:replace="csharp:DateTime.Now.ToString(&amp;quot;yyyy-MM-dd&amp;quot;)"&gt;2015-01-01&lt;/span&gt;.
+&lt;/p&gt;</code></pre>
+        <h2>Namespace imports</h2>
+        <p>
+          The <code>csnamespace:</code> expression is used to import .NET namespaces into compiled expressions via
+          <code>using</code> directives.  Much like the assembly-reference above, it should be used in
+          <code>tal:define</code> attributes to define the imported namespace.  Then - that namespace will be imported
+          for any expressions which are evaluated where that defined variable is in-scope.
+          You never actually make direct use of the defined variable in any expressions.
+        </p>
+        <p>
+          The expression body itself is simply the namespace you wish to import.
+          <kbd>tal:define="scg csnamespace:System.Collections.Generic"</kbd> would mean that all CSharp expressions
+          which are declared in the same scope as the <strong>scg</strong> variable would include
+          <code>using System.Collections.Generic;</code>.
+        </p>
+        <p>
+          Optionally, you may specify a namespace alias for a
+          <a href="https://msdn.microsoft.com/en-us/library/sf0df423.aspx"><em>using with alias</em> directive</a>
+          (the third form listed on that linked page).
+          Where desired, the alias is specified in the expression as a name followed by a single space character,
+          preceding the namespace name.
+          In the expression this would look like <code>using alias = Name.Space.Name;</code>.
+        </p>
+        <h3>Example</h3>
+        <pre><code class="html">&lt;div tal:define="ns1 csnamespace:System.Collections.Generic;
+                 ns2 csnamespace:glob System.Globalization"&gt;
+  &lt;p&gt;
+    The following expression defines a variable containing a
+    &lt;code&gt;System.Collections.Generic.List&amp;lt;System.Globalization.CultureInfo&amp;lt;&lt;/code&gt;, making use of the
+    namespace imports declared on the container:
+    &lt;span tal:define="cultureList csharp:new List&amp;lt;glob.CultureInfo&amp;gt;()"
+          tal:content="csharp:cultureList.Count"&gt;2&lt;/span&gt;
+  &lt;/p&gt;
+&lt;/div&gt;</code></pre>
+        <h2>Specifying variable types</h2>
+        <p>
+          The last advanced expression, <code>cstype:</code> is used to tell the CSharp expression compiler the .NET
+          type for a given TALES variable.  This changes the way the compiler works such that it uses the specified
+          type for that variable instead of treating it as <code>dynamic</code>.
+        </p>
+        <p>
+          As with the above expressions, a type-declaration expression is only useful in <code>tal:define</code>
+          attributes and the variable it creates is not used directly in any expressions.  Instead, whilst in-scope,
+          this variable tells the compiler to treat the named variable as the named type.
+        </p>
+        <p>
+          The syntax for such an expression is to specify a variable name (the TALES variable for which we are
+          declaring the type), followed by a single space character, followed by the type name.
+          The definition <kbd>tal:define="typ1 cstype:myCollection IEnumerable&lt;MyItem&gt;"</kbd> would declare that
+          the variable <strong>myCollection</strong> is an <code>IEnumerable&lt;MyItem&gt;</code>.
+          Of course, for this to work, you will require sppropriate assembly references and assembly imports such that
+          both <code>IEnumerable&lt;T&gt;</code> and <code>MyItem</code> types are available.
+        </p>
+        <h2>Putting it all together</h2>
+        <p>
+          Putting these three expression types together, it becomes possible to use extension methods (such as Linq)
+          within CSharp expressions in a ZPT document.
+        </p>
+        <p>
+          For this example, let us assume that the model has a property named <strong>Items</strong>;
+          this property is an <code>IEnumerable&lt;MyItem&gt;</code>.
+          The <code>MyItem</code> type is defined in the assembly <code>MyTypes.dll</code>, in the namespace
+          <code>MyTypes.SomeNamespace</code> and has a boolean property named <code>IsActive</code>.
+        </p>
+        <pre><code class="html">&lt;div tal:define="items here/Items;
+                 itemAssembly csassembly:MyTypes.dll;
+                 ns1 csnamespace:System.Collections.Generic;
+                 ns2 csnamespace:MyTypes.SomeNamespace;
+                 itemType cstype:items IEnumerable&amp;lt;MyItem&amp;gt;"&gt;
+  &lt;p tal:define="activeCount csharp:items.Count(x =&amp;gt; x.IsActive)"&gt;
+    There are &lt;span tal:replace="activeCount"&gt;2&lt;/span&gt; active items.
+  &lt;/p&gt;
+&lt;/div&gt;</code></pre>
+        <p>
+          As you can see, this is an awful lot of markup-level code when all you wanted was the count of active items.
+          As stated on the CSharp expressions page, it is not advised to use this mechanism unless you really need to.
+          In most scenarios it is better to create a property or method on your MVC model class which exposes
+          what you need.
+        </p>
+        <h2>Configuration settings which affect this</h2>
+        <p>
+          As well as using the <code>csassembly:</code> and <code>csnamespace:</code> expressions, it is possible to
+          globally add assembly references and/or namespace imports for every ZPT document,
+          <a href="configuration.html">into your application configuration file</a>.
+          Using the configuration file to specify your baseline assemblies &amp; namespaces can take some of the pain
+          out of otherwise large blocks of boilerplate definitions (such as shown above).
+        </p>
+      </header>
+    </section>
+  </div>
+</div>
+<footer class="page_footer">
+  <section class="copyright">
+    Copyright © 2017
+    <a href="http://csf-dev.com/">CSF Software Limited</a> et al
+  </section>
+  <section class="version">
+    <p>
+      Website built <strong>2017-01-07</strong>;
+      for version
+      <strong>
+        v0.8.0-beta
+      </strong>
+    </p>
+  </section>
+</footer>
+<div class="cookie_statement">
+  <p>
+    This website uses analytics cookies to understand how visitors are making use of its content.
+    This helps decide where improvements can be made in the future.
+    <a href="https://ico.org.uk/for-organisations/guide-to-pecr/cookies-and-similar-technologies/">European and UK law</a>
+    requires us to ask you for your consent to this.
+  </p>
+  <button class="accept">Accept cookies</button>
+</div>
+
+</body>
+</html>

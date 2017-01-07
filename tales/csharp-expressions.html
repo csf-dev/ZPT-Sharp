@@ -112,6 +112,9 @@
               <a href="tales/csharp-expressions.html">CSharp expressions</a>
             </li>
             <li>
+              <a href="tales/python-expressions.html">Python expressions</a>
+            </li>
+            <li>
               <a href="tales/built-in-variables.html">Root variables</a>
             </li>
             <li>
@@ -206,46 +209,84 @@
         <em>It does not matter whether the C♯ expression attempts to make use of such a 'bad' variable or not</em>.
         The very presence of the variable in the TALES environment will prevent the C♯ expression from compiling.
       </p>
-      <h2>Note on double-quotes</h2>
+      <h2>Reminder: HTML encoding</h2>
       <p>
-        You will be well-aware that C♯ uses double-quotes: <kbd>"</kbd> to indicate strings.
-        However, as an attribute-based language, ZPT is already executing within an environment in which double-quotes
-        are being used.
-        When writing C♯ expressions which make use of string literals, you must escape your double-quote
-        characters as <kbd>&amp;quot;</kbd> in order to prevent a conflict.
+        Because TALES expressions (including C♯ expressions) are specified within the source document, in the source
+        document's own syntax, you must adhere to that document's escaping/encoding rules.  In particular this applies
+        to double-quote characters, which must be specified as <kbd>&amp;quot;</kbd>, greater-than
+        (<kbd>&amp;gt;</kbd>), less-than (<kbd>&amp;lt;</kbd>) and ampersands (<kbd>&amp;amp;</kbd>).
       </p>
       <p>
-        This is illustrated by the following example, where <code>DateTime.ToString</code> is used with a
+        This is illustrated in the following example, where <code>DateTime.ToString</code> is used with a
         string parameter to get a custom date format.
       </p>
       <pre><code class="html">&lt;p tal:define="today csharp:DateTime.Today"&gt;
   Today's date is
   &lt;span tal:content="csharp:today.ToString(&amp;quot;yyyy-MM-dd&amp;quot;)"&gt;2012-01-01&lt;span&gt;
 &lt;/p&gt;</code></pre>
-      <h2>Namespaces available to C♯ expressions</h2>
+      <h2>Expression internals &amp; limitations</h2>
       <p>
-        By default (if no configuration is present), two namespaces are available to <code>csharp:</code> expressions.
-        These are <code>System</code> and <code>System.Linq</code>, as if the two namespaces were present in
-        <code>using</code> statements.
+        Internally, to provide C♯ expressions,
+        <a href="https://msdn.microsoft.com/en-us/library/y2k85ax6(v=vs.110).aspx">the CodeDOM API</a>
+        is used.
+        Each expression is compiled into a generated class, in an in-memory .NET assembly.
       </p>
       <p>
-        If you wish to customise this (affecting all CSharp expressions), you may do so using
-        <a href="configuration.html">the ZPT-Sharp configuration file</a>.
+        Each TALES variable which is in-scope for the expression is provided as a private member field
+        of that class.  To simplify variable access these private fields are typed using the <code>dynamic</code>
+        keyword.  This means that for general usage their type does not need to known.
+      </p>
+      <p>
+        A limitation of this approach is exposed when you wish to use <strong>extension methods</strong>, including
+        Linq, such as <code>.Sum()</code> or <code>.Count()</code>. These are incompatible with dynamically-typed
+        variables.  For example, if you wrote some markup such as the following example:
+      </p>
+      <pre><code class="html">&lt;p tal:define="itemCount csharp:here.Items.Count(x => x.Colour == &amp;quot;Red&amp;quot;)"&gt;
+  There are &lt;span tal:replace="itemCount"&gt;3&lt;/span&gt; red items
+&lt;p&gt;</code></pre>
+      <p>
+        <em>This expression will not compile</em> because the <code>.Count()</code> method from Linq is an extension
+        method which requires a strongly-typed (and not dynamically-typed) reference.
+        There are two available ways to work around/deal with this limitation:
+      </p>
+      <h3>Consider moving expressions into your model</h3>
+      <p>
+        The recommended and simplest way to deal with this limitation is to move that expression into your MVC model
+        class as either a property or plain method call.  This functionality in the model may then make use of
+        extension methods/linq/etc and expose the result to the view. No special code or technique need be used here,
+        simply a method on the model such as <code>public int GetItemCount(string colour)</code>.
+      </p>
+      <p>
+        This also guides you towards pushing any 'logic' of your model into the model itself, which is good practice.
+      </p>
+      <h3>Specify types, namespace imports and assembly references</h3>
+      <p>
+        For scenarios where moving the code into your model is not possible (for example, if you do not control the
+        model type), ZPT-Sharp provides an advanced mechanism for solving 'the extension method' problem.
+        This solution is a set of three special expression types (and related configuration) which allow you to
+        specify the .NET type of your TALES variables, as well as import namespaces and provide references to other
+        assemblies.
+      </p>
+      <p>
+        These advanced topics are covered in
+        <a href="tales/advanced-csharp-expressions.html">documentation for the additional expression types</a>
+        as well as
+        <a href="configuration.html">documentation for the configuration options which affect them</a>.
       </p>
     </section>
   </div>
 </div>
 <footer class="page_footer">
   <section class="copyright">
-    Copyright © 2016
+    Copyright © 2017
     <a href="http://csf-dev.com/">CSF Software Limited</a> et al
   </section>
   <section class="version">
     <p>
-      Website built <strong>2016-11-18</strong>;
+      Website built <strong>2017-01-07</strong>;
       for version
       <strong>
-        v0.7.0-alpha
+        v0.8.0-beta
       </strong>
     </p>
   </section>
