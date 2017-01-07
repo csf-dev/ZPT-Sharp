@@ -36,6 +36,12 @@
     <Reference Include="log4net">
       <HintPath>..\..\packages\log4net.2.0.3\lib\net40-full\log4net.dll</HintPath>
     </Reference>
+    <Reference Include="CSF.Configuration">
+      <HintPath>..\..\packages\CSF.Configuration.1.0.0\lib\net45\CSF.Configuration.dll</HintPath>
+    </Reference>
+    <Reference Include="CSF.Utils">
+      <HintPath>..\..\packages\CSF.Utils.6.0.0\lib\net45\CSF.Utils.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AssemblyInfo.cs" />
@@ -53,6 +59,195 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+    <None Include="Test data\SourceAnnotationIntegrationTests\ExpectedOutputs\test_sa1.html" />
+    <None Include="Test data\SourceAnnotationIntegrationTests\ExpectedOutputs\test_sa1.xml" />
+    <None Include="Test data\SourceAnnotationIntegrationTests\ExpectedOutputs\test_sa2.html" />
+    <None Include="Test data\SourceAnnotationIntegrationTests\ExpectedOutputs\test_sa2.xml" />
+    <None Include="Test data\SourceAnnotationIntegrationTests\ExpectedOutputs\test_sa3.html" />
+    <None Include="Test data\SourceAnnotationIntegrationTests\ExpectedOutputs\test_sa3.xml" />
+    <None Include="Test data\SourceAnnotationIntegrationTests\ExpectedOutputs\test_sa4.html" />
+    <None Include="Test data\SourceAnnotationIntegrationTests\SourceDocuments\test_sa1.html" />
+    <None Include="Test data\SourceAnnotationIntegrationTests\SourceDocuments\test_sa1.xml" />
+    <None Include="Test data\SourceAnnotationIntegrationTests\SourceDocuments\test_sa2.html" />
+    <None Include="Test data\SourceAnnotationIntegrationTests\SourceDocuments\test_sa2.xml" />
+    <None Include="Test data\SourceAnnotationIntegrationTests\SourceDocuments\test_sa3.html" />
+    <None Include="Test data\SourceAnnotationIntegrationTests\SourceDocuments\test_sa3.xml" />
+    <None Include="Test data\SourceAnnotationIntegrationTests\SourceDocuments\test_sa4.html" />
+    <None Include="Test data\ZptIntegrationTests\ExpectedOutputs\acme_template.html" />
+    <None Include="Test data\ZptIntegrationTests\ExpectedOutputs\checknotexpression.html" />
+    <None Include="Test data\ZptIntegrationTests\ExpectedOutputs\checknothing.html" />
+    <None Include="Test data\ZptIntegrationTests\ExpectedOutputs\checkpathnothing.html" />
+    <None Include="Test data\ZptIntegrationTests\ExpectedOutputs\checkwithxmlheader.html" />
+    <None Include="Test data\ZptIntegrationTests\ExpectedOutputs\csharpTest.html" />
+    <None Include="Test data\ZptIntegrationTests\ExpectedOutputs\csharpTest2.html" />
+    <None Include="Test data\ZptIntegrationTests\ExpectedOutputs\dtml3.html" />
+    <None Include="Test data\ZptIntegrationTests\ExpectedOutputs\stringexpression.html" />
+    <None Include="Test data\ZptIntegrationTests\ExpectedOutputs\teeshop1.html" />
+    <None Include="Test data\ZptIntegrationTests\ExpectedOutputs\teeshop2.html" />
+    <None Include="Test data\ZptIntegrationTests\ExpectedOutputs\teeshoplaf.html" />
+    <None Include="Test data\ZptIntegrationTests\ExpectedOutputs\test02.html" />
+    <None Include="Test data\ZptIntegrationTests\ExpectedOutputs\test02.xml" />
+    <None Include="Test data\ZptIntegrationTests\ExpectedOutputs\test03.html" />
+    <None Include="Test data\ZptIntegrationTests\ExpectedOutputs\test03.xml" />
+    <None Include="Test data\ZptIntegrationTests\ExpectedOutputs\test05.html" />
+    <None Include="Test data\ZptIntegrationTests\ExpectedOutputs\test05.xml" />
+    <None Include="Test data\ZptIntegrationTests\ExpectedOutputs\test06.html" />
+    <None Include="Test data\ZptIntegrationTests\ExpectedOutputs\test06.xml" />
+    <None Include="Test data\ZptIntegrationTests\ExpectedOutputs\test07.html" />
+    <None Include="Test data\ZptIntegrationTests\ExpectedOutputs\test07.xml" />
+    <None Include="Test data\ZptIntegrationTests\ExpectedOutputs\test08.html" />
+    <None Include="Test data\ZptIntegrationTests\ExpectedOutputs\test08.xml" />
+    <None Include="Test data\ZptIntegrationTests\ExpectedOutputs\test09.xml" />
+    <None Include="Test data\ZptIntegrationTests\ExpectedOutputs\test10.html" />
+    <None Include="Test data\ZptIntegrationTests\ExpectedOutputs\test11.html" />
+    <None Include="Test data\ZptIntegrationTests\ExpectedOutputs\test11.xml" />
+    <None Include="Test data\ZptIntegrationTests\ExpectedOutputs\test13.html" />
+    <None Include="Test data\ZptIntegrationTests\ExpectedOutputs\test15.html" />
+    <None Include="Test data\ZptIntegrationTests\ExpectedOutputs\test16.html" />
+    <None Include="Test data\ZptIntegrationTests\ExpectedOutputs\test16.xml" />
+    <None Include="Test data\ZptIntegrationTests\ExpectedOutputs\test17.html" />
+    <None Include="Test data\ZptIntegrationTests\ExpectedOutputs\test17.xml" />
+    <None Include="Test data\ZptIntegrationTests\ExpectedOutputs\test18.html" />
+    <None Include="Test data\ZptIntegrationTests\ExpectedOutputs\test18.xml" />
+    <None Include="Test data\ZptIntegrationTests\ExpectedOutputs\test22.xml" />
+    <None Include="Test data\ZptIntegrationTests\ExpectedOutputs\test35.html" />
+    <None Include="Test data\ZptIntegrationTests\ExpectedOutputs\test_metal1.html" />
+    <None Include="Test data\ZptIntegrationTests\ExpectedOutputs\test_metal2.html" />
+    <None Include="Test data\ZptIntegrationTests\ExpectedOutputs\test_metal3.html" />
+    <None Include="Test data\ZptIntegrationTests\ExpectedOutputs\test_metal4.html" />
+    <None Include="Test data\ZptIntegrationTests\ExpectedOutputs\test_metal5.html" />
+    <None Include="Test data\ZptIntegrationTests\ExpectedOutputs\test_metal6.html" />
+    <None Include="Test data\ZptIntegrationTests\ExpectedOutputs\test_metal7.html" />
+    <None Include="Test data\ZptIntegrationTests\ExpectedOutputs\test_metal8.html" />
+    <None Include="Test data\ZptIntegrationTests\ExpectedOutputs\test_metal9.html" />
+    <None Include="Test data\ZptIntegrationTests\SourceDocuments\acme_template.html" />
+    <None Include="Test data\ZptIntegrationTests\SourceDocuments\checknotexpression.html" />
+    <None Include="Test data\ZptIntegrationTests\SourceDocuments\checknothing.html" />
+    <None Include="Test data\ZptIntegrationTests\SourceDocuments\checkpathnothing.html" />
+    <None Include="Test data\ZptIntegrationTests\SourceDocuments\checkwithxmlheader.html" />
+    <None Include="Test data\ZptIntegrationTests\SourceDocuments\csharpTest.html" />
+    <None Include="Test data\ZptIntegrationTests\SourceDocuments\csharpTest2.html" />
+    <None Include="Test data\ZptIntegrationTests\SourceDocuments\document_list.html" />
+    <None Include="Test data\ZptIntegrationTests\SourceDocuments\dtml3.html" />
+    <None Include="Test data\ZptIntegrationTests\SourceDocuments\pnome_template.pt" />
+    <None Include="Test data\ZptIntegrationTests\SourceDocuments\stringexpression.html" />
+    <None Include="Test data\ZptIntegrationTests\SourceDocuments\teeshop1.html" />
+    <None Include="Test data\ZptIntegrationTests\SourceDocuments\teeshop2.html" />
+    <None Include="Test data\ZptIntegrationTests\SourceDocuments\teeshoplaf.html" />
+    <None Include="Test data\ZptIntegrationTests\SourceDocuments\test02.html" />
+    <None Include="Test data\ZptIntegrationTests\SourceDocuments\test02.xml" />
+    <None Include="Test data\ZptIntegrationTests\SourceDocuments\test03.html" />
+    <None Include="Test data\ZptIntegrationTests\SourceDocuments\test03.xml" />
+    <None Include="Test data\ZptIntegrationTests\SourceDocuments\test05.html" />
+    <None Include="Test data\ZptIntegrationTests\SourceDocuments\test05.xml" />
+    <None Include="Test data\ZptIntegrationTests\SourceDocuments\test06.html" />
+    <None Include="Test data\ZptIntegrationTests\SourceDocuments\test06.xml" />
+    <None Include="Test data\ZptIntegrationTests\SourceDocuments\test07.html" />
+    <None Include="Test data\ZptIntegrationTests\SourceDocuments\test07.xml" />
+    <None Include="Test data\ZptIntegrationTests\SourceDocuments\test08.html" />
+    <None Include="Test data\ZptIntegrationTests\SourceDocuments\test08.xml" />
+    <None Include="Test data\ZptIntegrationTests\SourceDocuments\test09.xml" />
+    <None Include="Test data\ZptIntegrationTests\SourceDocuments\test10.html" />
+    <None Include="Test data\ZptIntegrationTests\SourceDocuments\test11.html" />
+    <None Include="Test data\ZptIntegrationTests\SourceDocuments\test11.xml" />
+    <None Include="Test data\ZptIntegrationTests\SourceDocuments\test13.html" />
+    <None Include="Test data\ZptIntegrationTests\SourceDocuments\test15.html" />
+    <None Include="Test data\ZptIntegrationTests\SourceDocuments\test16.html" />
+    <None Include="Test data\ZptIntegrationTests\SourceDocuments\test16.xml" />
+    <None Include="Test data\ZptIntegrationTests\SourceDocuments\test17.html" />
+    <None Include="Test data\ZptIntegrationTests\SourceDocuments\test17.xml" />
+    <None Include="Test data\ZptIntegrationTests\SourceDocuments\test18.html" />
+    <None Include="Test data\ZptIntegrationTests\SourceDocuments\test18.xml" />
+    <None Include="Test data\ZptIntegrationTests\SourceDocuments\test22.xml" />
+    <None Include="Test data\ZptIntegrationTests\SourceDocuments\test35.html" />
+    <None Include="Test data\ZptIntegrationTests\SourceDocuments\test_metal1.html" />
+    <None Include="Test data\ZptIntegrationTests\SourceDocuments\test_metal2.html" />
+    <None Include="Test data\ZptIntegrationTests\SourceDocuments\test_metal3.html" />
+    <None Include="Test data\ZptIntegrationTests\SourceDocuments\test_metal4.html" />
+    <None Include="Test data\ZptIntegrationTests\SourceDocuments\test_metal5.html" />
+    <None Include="Test data\ZptIntegrationTests\SourceDocuments\test_metal6.html" />
+    <None Include="Test data\ZptIntegrationTests\SourceDocuments\test_metal7.html" />
+    <None Include="Test data\ZptIntegrationTests\SourceDocuments\test_metal8.html" />
+    <None Include="Test data\ZptIntegrationTests\SourceDocuments\test_metal9.html" />
+    <None Include="Test data\ZptIntegrationTests\Yet to be included\ExpectedOutputs\checknotexpression.html" />
+    <None Include="Test data\ZptIntegrationTests\Yet to be included\ExpectedOutputs\checkpathalt.html" />
+    <None Include="Test data\ZptIntegrationTests\Yet to be included\ExpectedOutputs\globalsshadowlocals.html" />
+    <None Include="Test data\ZptIntegrationTests\Yet to be included\ExpectedOutputs\loop1.html" />
+    <None Include="Test data\ZptIntegrationTests\Yet to be included\ExpectedOutputs\test01.html" />
+    <None Include="Test data\ZptIntegrationTests\Yet to be included\ExpectedOutputs\test01.xml" />
+    <None Include="Test data\ZptIntegrationTests\Yet to be included\ExpectedOutputs\test04.html" />
+    <None Include="Test data\ZptIntegrationTests\Yet to be included\ExpectedOutputs\test04.xml" />
+    <None Include="Test data\ZptIntegrationTests\Yet to be included\ExpectedOutputs\test09.html" />
+    <None Include="Test data\ZptIntegrationTests\Yet to be included\ExpectedOutputs\test12.html" />
+    <None Include="Test data\ZptIntegrationTests\Yet to be included\ExpectedOutputs\test14.html" />
+    <None Include="Test data\ZptIntegrationTests\Yet to be included\ExpectedOutputs\test14.xml" />
+    <None Include="Test data\ZptIntegrationTests\Yet to be included\ExpectedOutputs\test19.html" />
+    <None Include="Test data\ZptIntegrationTests\Yet to be included\ExpectedOutputs\test19.xml" />
+    <None Include="Test data\ZptIntegrationTests\Yet to be included\ExpectedOutputs\test20.html" />
+    <None Include="Test data\ZptIntegrationTests\Yet to be included\ExpectedOutputs\test20.xml" />
+    <None Include="Test data\ZptIntegrationTests\Yet to be included\ExpectedOutputs\test21.html" />
+    <None Include="Test data\ZptIntegrationTests\Yet to be included\ExpectedOutputs\test21.xml" />
+    <None Include="Test data\ZptIntegrationTests\Yet to be included\ExpectedOutputs\test22.html" />
+    <None Include="Test data\ZptIntegrationTests\Yet to be included\ExpectedOutputs\test23.html" />
+    <None Include="Test data\ZptIntegrationTests\Yet to be included\ExpectedOutputs\test24.html" />
+    <None Include="Test data\ZptIntegrationTests\Yet to be included\ExpectedOutputs\test25.html" />
+    <None Include="Test data\ZptIntegrationTests\Yet to be included\ExpectedOutputs\test26.html" />
+    <None Include="Test data\ZptIntegrationTests\Yet to be included\ExpectedOutputs\test27.html" />
+    <None Include="Test data\ZptIntegrationTests\Yet to be included\ExpectedOutputs\test28.html" />
+    <None Include="Test data\ZptIntegrationTests\Yet to be included\ExpectedOutputs\test29.html" />
+    <None Include="Test data\ZptIntegrationTests\Yet to be included\ExpectedOutputs\test30.html" />
+    <None Include="Test data\ZptIntegrationTests\Yet to be included\ExpectedOutputs\test31.html" />
+    <None Include="Test data\ZptIntegrationTests\Yet to be included\ExpectedOutputs\test32.html" />
+    <None Include="Test data\ZptIntegrationTests\Yet to be included\ExpectedOutputs\test33.html" />
+    <None Include="Test data\ZptIntegrationTests\Yet to be included\ExpectedOutputs\test34.html" />
+    <None Include="Test data\ZptIntegrationTests\Yet to be included\ExpectedOutputs\test36.html" />
+    <None Include="Test data\ZptIntegrationTests\Yet to be included\ExpectedOutputs\test37.html" />
+    <None Include="Test data\ZptIntegrationTests\Yet to be included\ExpectedOutputs\test_domain.html" />
+    <None Include="Test data\ZptIntegrationTests\Yet to be included\ExpectedOutputs\test_failed_attr_translation.html" />
+    <None Include="Test data\ZptIntegrationTests\Yet to be included\ExpectedOutputs\translation.html" />
+    <None Include="Test data\ZptIntegrationTests\Yet to be included\SourceDocuments\checknotexpression.html" />
+    <None Include="Test data\ZptIntegrationTests\Yet to be included\SourceDocuments\checkpathalt.html" />
+    <None Include="Test data\ZptIntegrationTests\Yet to be included\SourceDocuments\globalsshadowlocals.html" />
+    <None Include="Test data\ZptIntegrationTests\Yet to be included\SourceDocuments\loop1.html" />
+    <None Include="Test data\ZptIntegrationTests\Yet to be included\SourceDocuments\test01.html" />
+    <None Include="Test data\ZptIntegrationTests\Yet to be included\SourceDocuments\test01.xml" />
+    <None Include="Test data\ZptIntegrationTests\Yet to be included\SourceDocuments\test04.html" />
+    <None Include="Test data\ZptIntegrationTests\Yet to be included\SourceDocuments\test04.xml" />
+    <None Include="Test data\ZptIntegrationTests\Yet to be included\SourceDocuments\test09.html" />
+    <None Include="Test data\ZptIntegrationTests\Yet to be included\SourceDocuments\test12.html" />
+    <None Include="Test data\ZptIntegrationTests\Yet to be included\SourceDocuments\test14.html" />
+    <None Include="Test data\ZptIntegrationTests\Yet to be included\SourceDocuments\test14.xml" />
+    <None Include="Test data\ZptIntegrationTests\Yet to be included\SourceDocuments\test19.html" />
+    <None Include="Test data\ZptIntegrationTests\Yet to be included\SourceDocuments\test19.xml" />
+    <None Include="Test data\ZptIntegrationTests\Yet to be included\SourceDocuments\test20.html" />
+    <None Include="Test data\ZptIntegrationTests\Yet to be included\SourceDocuments\test20.xml" />
+    <None Include="Test data\ZptIntegrationTests\Yet to be included\SourceDocuments\test21.html" />
+    <None Include="Test data\ZptIntegrationTests\Yet to be included\SourceDocuments\test21.xml" />
+    <None Include="Test data\ZptIntegrationTests\Yet to be included\SourceDocuments\test22.html" />
+    <None Include="Test data\ZptIntegrationTests\Yet to be included\SourceDocuments\test23.html" />
+    <None Include="Test data\ZptIntegrationTests\Yet to be included\SourceDocuments\test24.html" />
+    <None Include="Test data\ZptIntegrationTests\Yet to be included\SourceDocuments\test25.html" />
+    <None Include="Test data\ZptIntegrationTests\Yet to be included\SourceDocuments\test26.html" />
+    <None Include="Test data\ZptIntegrationTests\Yet to be included\SourceDocuments\test27.html" />
+    <None Include="Test data\ZptIntegrationTests\Yet to be included\SourceDocuments\test28.html" />
+    <None Include="Test data\ZptIntegrationTests\Yet to be included\SourceDocuments\test29.html" />
+    <None Include="Test data\ZptIntegrationTests\Yet to be included\SourceDocuments\test30.html" />
+    <None Include="Test data\ZptIntegrationTests\Yet to be included\SourceDocuments\test31.html" />
+    <None Include="Test data\ZptIntegrationTests\Yet to be included\SourceDocuments\test32.html" />
+    <None Include="Test data\ZptIntegrationTests\Yet to be included\SourceDocuments\test33.html" />
+    <None Include="Test data\ZptIntegrationTests\Yet to be included\SourceDocuments\test34.html" />
+    <None Include="Test data\ZptIntegrationTests\Yet to be included\SourceDocuments\test36.html" />
+    <None Include="Test data\ZptIntegrationTests\Yet to be included\SourceDocuments\test37.html" />
+    <None Include="Test data\ZptIntegrationTests\Yet to be included\SourceDocuments\test_domain.html" />
+    <None Include="Test data\ZptIntegrationTests\Yet to be included\SourceDocuments\test_failed_attr_translation.html" />
+    <None Include="Test data\ZptIntegrationTests\Yet to be included\SourceDocuments\translation.html" />
+    <None Include="Test data\ZptModelIntegrationTests\ExpectedOutputs\test1.html" />
+    <None Include="Test data\ZptModelIntegrationTests\SourceDocuments\test1.html" />
+    <None Include="Test data\ZptIntegrationTests\SourceDocuments\csharpTest3.html" />
+    <None Include="Test data\ZptIntegrationTests\ExpectedOutputs\csharpTest3.html" />
+    <None Include="Test data\ZptIntegrationTests\ExpectedOutputs\document_list.html" />
+    <None Include="Test data\ZptIntegrationTests\ExpectedOutputs\csharpTest4.html" />
+    <None Include="Test data\ZptIntegrationTests\SourceDocuments\csharpTest4.html" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\CSF.Zpt\CSF.Zpt.csproj">
@@ -62,14 +257,6 @@
     <ProjectReference Include="..\..\CSF.Zpt.Abstractions\CSF.Zpt.Abstractions.csproj">
       <Project>{8207CD9B-F1C1-4D75-B250-ACDFFBDCB071}</Project>
       <Name>CSF.Zpt.Abstractions</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\CSF\CSF.Configuration\CSF.Configuration.csproj">
-      <Project>{8C570A26-CEEB-45D1-9436-745C8DBAE9D8}</Project>
-      <Name>CSF.Configuration</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\CSF\CSF\CSF.csproj">
-      <Project>{E563D7BC-1AB1-4AFB-8533-51315437C6E6}</Project>
-      <Name>CSF</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\CSF.Zpt.Log4net\CSF.Zpt.Log4net.csproj">
       <Project>{81044439-06CF-44E2-BBF2-3800F1DEB5B1}</Project>

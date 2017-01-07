@@ -87,6 +87,26 @@ namespace CSF.Zpt.Rendering
       return null;
     }
 
+    /// <summary>
+    /// Returns a <see cref="System.String"/> that represents the current <see cref="CSF.Zpt.Rendering.UnknownSourceFileInfo"/>.
+    /// </summary>
+    /// <returns>A <see cref="System.String"/> that represents the current <see cref="CSF.Zpt.Rendering.UnknownSourceFileInfo"/>.</returns>
+    public override string ToString()
+    {
+      return String.Empty;
+    }
+
+    /// <summary>
+    /// Gets a name for the current instance, relative to a given root name.  The meaning of relative is up to the
+    /// implementation.
+    /// </summary>
+    /// <returns>The relative name.</returns>
+    /// <param name="root">The root name.</param>
+    public string GetRelativeName(string root)
+    {
+      return FullName;
+    }
+
     #endregion
 
     #region constructors
@@ -95,6 +115,12 @@ namespace CSF.Zpt.Rendering
     /// Initializes a new instance of the <see cref="CSF.Zpt.Rendering.UnknownSourceFileInfo"/> class.
     /// </summary>
     private UnknownSourceFileInfo() {}
+
+    /// <summary>
+    /// Initializes a new instance of the <see cref="CSF.Zpt.Rendering.UnknownSourceFileInfo"/> class.
+    /// </summary>
+    /// <param name="discardedString">A discarded string.</param>
+    internal UnknownSourceFileInfo(string discardedString) : this() {}
 
     /// <summary>
     /// Initializes the <see cref="CSF.Zpt.Rendering.UnknownSourceFileInfo"/> class.

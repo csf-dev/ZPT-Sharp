@@ -3,7 +3,11 @@
          xmlns:tal="http://xml.zope.org/namespaces/tal">
   <metadata>
     <id>CSF.Zpt</id>
-    <version tal:content="options/version">0.0.0</version>
+    <version tal:define="semVer options/version;
+                         extraVer options/versionExtra;
+                         versionSuffix csharp:!String.IsNullOrEmpty(extraVer)? String.Concat(&quot;-&quot;, extraVer) : String.Empty;
+                         fullVersion string:$semVer$versionSuffix;"
+             tal:content="fullVersion">0.0.0</version>
     <title>CSF.Zpt (ZPT-Sharp component)</title>
     <authors>CSF Software Ltd</authors>
     <licenseUrl>https://opensource.org/licenses/MIT</licenseUrl>
@@ -15,12 +19,16 @@
       <dependency id="CSF.Zpt.Abstractions"
                   version="[0.0.0,1.0.0)"
                   tal:attributes="version string:[${options/version},${options/nextBreakingVersion})" />
+      <dependency id="CSF.Utils" version="[6.0.0,7.0.0)" />
+      <dependency id="CSF.Reflection" version="[1.0.0,2.0.0)" />
+      <dependency id="CSF.Configuration" version="[1.0.0,2.0.0)" />
+      <dependency id="CSF.Caches" version="[1.0.0,2.0.0)" />
     </dependencies>
   </metadata>
   <files>
-    <file src="bin/Release/CSF.dll" target="lib/net45" />
-    <file src="bin/Release/CSF.Configuration.dll" target="lib/net45" />
-    <file src="bin/Release/CSF.Reflection.dll" target="lib/net45" />
     <file src="bin/Release/CSF.Zpt.dll" target="lib/net45" />
+    <file src="bin/Release/CSF.Zpt.xml" target="lib/net45" />
+    <file src="app.config.install.xdt" target="content" />
+    <file src="app.config.uninstall.xdt" target="content" />
   </files>
 </package>

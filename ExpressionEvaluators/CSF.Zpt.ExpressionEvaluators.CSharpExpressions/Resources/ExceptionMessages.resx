@@ -21,4 +21,9 @@
   <data name="ExpressionTypeMustExist" xml:space="preserve">
     <value>The expression type must exist in the generated assembly.  This likely indicates an internal plugin fault.</value>
   </data>
+  <data name="TypeExpressionMustBeInCorrectFormat" xml:space="preserve">
+    <value>A '{0}' expression must be in the correct format: 'VARIABLE TYPE'.
+Improperly formatted expression:{1}</value>
+  </data>
+
 </root>

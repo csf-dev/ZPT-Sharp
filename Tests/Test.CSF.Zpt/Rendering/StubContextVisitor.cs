@@ -7,7 +7,7 @@ namespace Test.CSF.Zpt.Rendering
   {
     public IRenderingContext[] VisitContext(IRenderingContext context)
     {
-      throw new NotImplementedException();
+      throw new NotSupportedException();
     }
   }
 
@@ -15,7 +15,7 @@ namespace Test.CSF.Zpt.Rendering
   {
     public IRenderingContext[] VisitContext(IRenderingContext context)
     {
-      throw new NotImplementedException();
+      throw new NotSupportedException();
     }
   }
 }

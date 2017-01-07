@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<configuration xmlns:xdt="http://schemas.microsoft.com/XML-Document-Transform">
+  <CSF>
+    <Zpt>
+      <PluginConfigurationSection DefaultHtmlDocumentProvider="CSF.Zpt.DocumentProviders.HtmlZptDocumentProvider"
+                                  DefaultXmlDocumentProvider="CSF.Zpt.DocumentProviders.XmlLinqZptDocumentProvider"
+                                  DefaultExpressionEvaluator="CSF.Zpt.ExpressionEvaluators.PathExpressions.PathExpressionEvaluator"
+                                  xdt:Transform="SetAttributes(DefaultHtmlDocumentProvider,DefaultXmlDocumentProvider,DefaultExpressionEvaluator)" />
+    </Zpt>
+  </CSF>
+</configuration>

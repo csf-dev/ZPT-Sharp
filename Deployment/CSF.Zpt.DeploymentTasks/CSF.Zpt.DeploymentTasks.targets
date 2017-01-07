@@ -203,7 +203,7 @@
       <NuspecFile Include="$(PathToSolutionRoot)\CSF.Zpt.Abstractions\CSF.Zpt.Abstractions.nuspec" />
       <NuspecFile Include="$(PathToSolutionRoot)\CSF.Zpt.Cli\CSF.Zpt.Cli.nuspec" />
       <NuspecFile Include="$(PathToSolutionRoot)\CSF.Zpt\CSF.Zpt.nuspec" />
-      <NuspecFile Include="$(PathToSolutionRoot)\CSF.Zpt.MVC\CSF.Zpt.MVC.nuspec" />
+      <NuspecFile Include="$(PathToSolutionRoot)\CSF.Zpt.MVC5\CSF.Zpt.MVC5.nuspec" />
       <NuspecFile Include="$(PathToSolutionRoot)\Deployment\CSF.Zpt.Deployment\Zpt-Sharp-API.nuspec" />
       <NuspecFile Include="$(PathToSolutionRoot)\Deployment\CSF.Zpt.Deployment\Zpt-Sharp-MVC5.nuspec" />
       <NuspecFile Include="$(PathToSolutionRoot)\Deployment\CSF.Zpt.Deployment\Zpt-Sharp-ZptBuilder.nuspec" />
@@ -219,7 +219,7 @@
     <ItemGroup>
       <CopyrightYear Include="$([System.DateTime]::Now.ToString(yyyy))" />
     </ItemGroup>
-    <Exec Command="$(PathToSolutionRoot)\CSF.Zpt.Cli\bin\Release\ZptBuilder.exe &quot;%(NuspecFile.Identity).pt&quot; -x -o &quot;%(NuspecFile.Identity)&quot; --keyword-options &quot;version=@(SemanticVersion);nextBreakingVersion=@(NextBreakingVersion);copyrightYear=@(CopyrightYear)&quot;" />
+    <Exec Command="$(PathToSolutionRoot)\CSF.Zpt.Cli\bin\Release\ZptBuilder.exe &quot;%(NuspecFile.Identity).pt&quot; -x -o &quot;%(NuspecFile.Identity)&quot; --keyword-options &quot;version=@(SemanticVersion);versionExtra=@(InformationalVersion);nextBreakingVersion=@(NextBreakingVersion);copyrightYear=@(CopyrightYear)&quot;" />
     <Exec Command="nuget pack %(NuspecFile.Identity) -Prop Configuration=Release -OutputDirectory $(DeploymentOutputPath)"
           Condition="'$(OS)' == 'Unix'" />
     <Exec Command="&quot;$(MSBuildProgramFiles32)\NuGet\nuget.exe&quot; pack %(NuspecFile.Identity) -Prop Configuration=Release -OutputDirectory $(DeploymentOutputPath)"
@@ -234,9 +234,10 @@
   -->
   <Target Name="CreateBinaryZips">
     <ItemGroup>
-      <CliZipFiles Include="$(PathToSolutionRoot)\CSF.Zpt.Cli\bin\Release\CSF.dll" />
+      <CliZipFiles Include="$(PathToSolutionRoot)\CSF.Zpt.Cli\bin\Release\CSF.Utils.dll" />
       <CliZipFiles Include="$(PathToSolutionRoot)\CSF.Zpt.Cli\bin\Release\CSF.Cli.Parameters.dll" />
       <CliZipFiles Include="$(PathToSolutionRoot)\CSF.Zpt.Cli\bin\Release\CSF.Configuration.dll" />
+      <CliZipFiles Include="$(PathToSolutionRoot)\CSF.Zpt.Cli\bin\Release\CSF.Caches.dll" />
       <CliZipFiles Include="$(PathToSolutionRoot)\CSF.Zpt.Cli\bin\Release\CSF.Reflection.dll" />
       <CliZipFiles Include="$(PathToSolutionRoot)\CSF.Zpt.Cli\bin\Release\CSF.Zpt.Abstractions.dll" />
       <CliZipFiles Include="$(PathToSolutionRoot)\CSF.Zpt.Cli\bin\Release\CSF.Zpt.dll" />
@@ -245,6 +246,17 @@
       <CliZipFiles Include="$(PathToSolutionRoot)\CSF.Zpt.Cli\bin\Release\CSF.Zpt.ExpressionEvaluators.NotExpressions.dll" />
       <CliZipFiles Include="$(PathToSolutionRoot)\CSF.Zpt.Cli\bin\Release\CSF.Zpt.ExpressionEvaluators.PathExpressions.dll" />
       <CliZipFiles Include="$(PathToSolutionRoot)\CSF.Zpt.Cli\bin\Release\CSF.Zpt.ExpressionEvaluators.StringExpressions.dll" />
+      <CliZipFiles Include="$(PathToSolutionRoot)\CSF.Zpt.Cli\bin\Release\CSF.Zpt.ExpressionEvaluators.CSharpExpressions.dll" />
+      <CliZipFiles Include="$(PathToSolutionRoot)\CSF.Zpt.Cli\bin\Release\CSF.Zpt.ExpressionEvaluators.CSharpFramework.dll" />
+      <CliZipFiles Include="$(PathToSolutionRoot)\CSF.Zpt.Cli\bin\Release\CSF.Zpt.Abstractions.xml" />
+      <CliZipFiles Include="$(PathToSolutionRoot)\CSF.Zpt.Cli\bin\Release\CSF.Zpt.xml" />
+      <CliZipFiles Include="$(PathToSolutionRoot)\CSF.Zpt.Cli\bin\Release\CSF.Zpt.DocumentProviders.HtmlHAP.xml" />
+      <CliZipFiles Include="$(PathToSolutionRoot)\CSF.Zpt.Cli\bin\Release\CSF.Zpt.DocumentProviders.XmlLinq.xml" />
+      <CliZipFiles Include="$(PathToSolutionRoot)\CSF.Zpt.Cli\bin\Release\CSF.Zpt.ExpressionEvaluators.NotExpressions.xml" />
+      <CliZipFiles Include="$(PathToSolutionRoot)\CSF.Zpt.Cli\bin\Release\CSF.Zpt.ExpressionEvaluators.PathExpressions.xml" />
+      <CliZipFiles Include="$(PathToSolutionRoot)\CSF.Zpt.Cli\bin\Release\CSF.Zpt.ExpressionEvaluators.StringExpressions.xml" />
+      <CliZipFiles Include="$(PathToSolutionRoot)\CSF.Zpt.Cli\bin\Release\CSF.Zpt.ExpressionEvaluators.CSharpExpressions.xml" />
+      <CliZipFiles Include="$(PathToSolutionRoot)\CSF.Zpt.Cli\bin\Release\CSF.Zpt.ExpressionEvaluators.CSharpFramework.xml" />
       <CliZipFiles Include="$(PathToSolutionRoot)\CSF.Zpt.Cli\bin\Release\CSF.Zpt.Log4net.dll" />
       <CliZipFiles Include="$(PathToSolutionRoot)\CSF.Zpt.Cli\bin\Release\HtmlAgilityPack.dll" />
       <CliZipFiles Include="$(PathToSolutionRoot)\CSF.Zpt.Cli\bin\Release\log4net.dll" />
@@ -256,8 +268,9 @@
     <CreateZipArchive OutputFilename="$(DeploymentOutputPath)\ZptBuilder.zip"
                       Files="@(CliZipFiles)" />
     <ItemGroup>
-      <ApiOnlyZipFiles Include="$(PathToSolutionRoot)\CSF.Zpt\bin\Release\CSF.dll" />
+      <ApiOnlyZipFiles Include="$(PathToSolutionRoot)\CSF.Zpt\bin\Release\CSF.Utils.dll" />
       <ApiOnlyZipFiles Include="$(PathToSolutionRoot)\CSF.Zpt\bin\Release\CSF.Configuration.dll" />
+      <ApiOnlyZipFiles Include="$(PathToSolutionRoot)\CSF.Zpt\bin\Release\CSF.Caches.dll" />
       <ApiOnlyZipFiles Include="$(PathToSolutionRoot)\CSF.Zpt\bin\Release\CSF.Reflection.dll" />
       <ApiOnlyZipFiles Include="$(PathToSolutionRoot)\CSF.Zpt\bin\Release\CSF.Zpt.Abstractions.dll" />
       <ApiOnlyZipFiles Include="$(PathToSolutionRoot)\CSF.Zpt\bin\Release\CSF.Zpt.dll" />
@@ -266,6 +279,17 @@
       <ApiOnlyZipFiles Include="$(PathToSolutionRoot)\ExpressionEvaluators\CSF.Zpt.ExpressionEvaluators.NotExpressions\bin\Release\CSF.Zpt.ExpressionEvaluators.NotExpressions.dll" />
       <ApiOnlyZipFiles Include="$(PathToSolutionRoot)\ExpressionEvaluators\CSF.Zpt.ExpressionEvaluators.PathExpressions\bin\Release\CSF.Zpt.ExpressionEvaluators.PathExpressions.dll" />
       <ApiOnlyZipFiles Include="$(PathToSolutionRoot)\ExpressionEvaluators\CSF.Zpt.ExpressionEvaluators.StringExpressions\bin\Release\CSF.Zpt.ExpressionEvaluators.StringExpressions.dll" />
+      <ApiOnlyZipFiles Include="$(PathToSolutionRoot)\ExpressionEvaluators\CSF.Zpt.ExpressionEvaluators.CSharpExpressions\bin\Release\CSF.Zpt.ExpressionEvaluators.CSharpExpressions.dll" />
+      <ApiOnlyZipFiles Include="$(PathToSolutionRoot)\ExpressionEvaluators\CSF.Zpt.ExpressionEvaluators.CSharpExpressions\bin\Release\CSF.Zpt.ExpressionEvaluators.CSharpFramework.dll" />
+      <ApiOnlyZipFiles Include="$(PathToSolutionRoot)\CSF.Zpt\bin\Release\CSF.Zpt.Abstractions.xml" />
+      <ApiOnlyZipFiles Include="$(PathToSolutionRoot)\CSF.Zpt\bin\Release\CSF.Zpt.xml" />
+      <ApiOnlyZipFiles Include="$(PathToSolutionRoot)\DocumentProviders\CSF.Zpt.DocumentProviders.HtmlHAP\bin\Release\CSF.Zpt.DocumentProviders.HtmlHAP.xml" />
+      <ApiOnlyZipFiles Include="$(PathToSolutionRoot)\DocumentProviders\CSF.Zpt.DocumentProviders.XmlLinq\bin\Release\CSF.Zpt.DocumentProviders.XmlLinq.xml" />
+      <ApiOnlyZipFiles Include="$(PathToSolutionRoot)\ExpressionEvaluators\CSF.Zpt.ExpressionEvaluators.NotExpressions\bin\Release\CSF.Zpt.ExpressionEvaluators.NotExpressions.xml" />
+      <ApiOnlyZipFiles Include="$(PathToSolutionRoot)\ExpressionEvaluators\CSF.Zpt.ExpressionEvaluators.PathExpressions\bin\Release\CSF.Zpt.ExpressionEvaluators.PathExpressions.xml" />
+      <ApiOnlyZipFiles Include="$(PathToSolutionRoot)\ExpressionEvaluators\CSF.Zpt.ExpressionEvaluators.StringExpressions\bin\Release\CSF.Zpt.ExpressionEvaluators.StringExpressions.xml" />
+      <ApiOnlyZipFiles Include="$(PathToSolutionRoot)\ExpressionEvaluators\CSF.Zpt.ExpressionEvaluators.CSharpExpressions\bin\Release\CSF.Zpt.ExpressionEvaluators.CSharpExpressions.xml" />
+      <ApiOnlyZipFiles Include="$(PathToSolutionRoot)\ExpressionEvaluators\CSF.Zpt.ExpressionEvaluators.CSharpExpressions\bin\Release\CSF.Zpt.ExpressionEvaluators.CSharpFramework.xml" />
       <ApiOnlyZipFiles Include="$(PathToSolutionRoot)\CSF.Zpt.Log4net\bin\Release\CSF.Zpt.Log4net.dll" />
       <ApiOnlyZipFiles Include="$(PathToSolutionRoot)\DocumentProviders\CSF.Zpt.DocumentProviders.HtmlHAP\bin\Release\HtmlAgilityPack.dll" />
       <ApiOnlyZipFiles Include="$(PathToSolutionRoot)\CSF.Zpt.Log4net\bin\Release\log4net.dll" />
@@ -273,25 +297,38 @@
     <CreateZipArchive OutputFilename="$(DeploymentOutputPath)\CSF.Zpt-api-only.zip"
                       Files="@(ApiOnlyZipFiles)" />
     <ItemGroup>
-      <Mvc5ZipFiles Include="$(PathToSolutionRoot)\CSF.Zpt.MVC\bin\Release\CSF.dll" />
-      <Mvc5ZipFiles Include="$(PathToSolutionRoot)\CSF.Zpt.MVC\bin\Release\CSF.Configuration.dll" />
-      <Mvc5ZipFiles Include="$(PathToSolutionRoot)\CSF.Zpt.MVC\bin\Release\CSF.Reflection.dll" />
-      <Mvc5ZipFiles Include="$(PathToSolutionRoot)\CSF.Zpt.MVC\bin\Release\CSF.Zpt.Abstractions.dll" />
-      <Mvc5ZipFiles Include="$(PathToSolutionRoot)\CSF.Zpt.MVC\bin\Release\CSF.Zpt.dll" />
-      <Mvc5ZipFiles Include="$(PathToSolutionRoot)\CSF.Zpt.MVC\bin\Release\CSF.Zpt.MVC.dll" />
-      <Mvc5ZipFiles Include="$(PathToSolutionRoot)\CSF.Zpt.MVC\bin\Release\CSF.Zpt.DocumentProviders.HtmlHAP.dll" />
-      <Mvc5ZipFiles Include="$(PathToSolutionRoot)\CSF.Zpt.MVC\bin\Release\CSF.Zpt.DocumentProviders.XmlLinq.dll" />
-      <Mvc5ZipFiles Include="$(PathToSolutionRoot)\CSF.Zpt.MVC\bin\Release\CSF.Zpt.ExpressionEvaluators.NotExpressions.dll" />
-      <Mvc5ZipFiles Include="$(PathToSolutionRoot)\CSF.Zpt.MVC\bin\Release\CSF.Zpt.ExpressionEvaluators.PathExpressions.dll" />
-      <Mvc5ZipFiles Include="$(PathToSolutionRoot)\CSF.Zpt.MVC\bin\Release\CSF.Zpt.ExpressionEvaluators.StringExpressions.dll" />
-      <Mvc5ZipFiles Include="$(PathToSolutionRoot)\CSF.Zpt.MVC\bin\Release\CSF.Zpt.Log4net.dll" />
-      <Mvc5ZipFiles Include="$(PathToSolutionRoot)\CSF.Zpt.MVC\bin\Release\HtmlAgilityPack.dll" />
-      <Mvc5ZipFiles Include="$(PathToSolutionRoot)\CSF.Zpt.MVC\bin\Release\log4net.dll" />
+      <Mvc5ZipFiles Include="$(PathToSolutionRoot)\CSF.Zpt.MVC5\bin\Release\CSF.Utils.dll" />
+      <Mvc5ZipFiles Include="$(PathToSolutionRoot)\CSF.Zpt.MVC5\bin\Release\CSF.Caches.dll" />
+      <Mvc5ZipFiles Include="$(PathToSolutionRoot)\CSF.Zpt.MVC5\bin\Release\CSF.Configuration.dll" />
+      <Mvc5ZipFiles Include="$(PathToSolutionRoot)\CSF.Zpt.MVC5\bin\Release\CSF.Reflection.dll" />
+      <Mvc5ZipFiles Include="$(PathToSolutionRoot)\CSF.Zpt.MVC5\bin\Release\CSF.Zpt.Abstractions.dll" />
+      <Mvc5ZipFiles Include="$(PathToSolutionRoot)\CSF.Zpt.MVC5\bin\Release\CSF.Zpt.dll" />
+      <Mvc5ZipFiles Include="$(PathToSolutionRoot)\CSF.Zpt.MVC5\bin\Release\CSF.Zpt.MVC5.dll" />
+      <Mvc5ZipFiles Include="$(PathToSolutionRoot)\CSF.Zpt.MVC5\bin\Release\CSF.Zpt.DocumentProviders.HtmlHAP.dll" />
+      <Mvc5ZipFiles Include="$(PathToSolutionRoot)\CSF.Zpt.MVC5\bin\Release\CSF.Zpt.DocumentProviders.XmlLinq.dll" />
+      <Mvc5ZipFiles Include="$(PathToSolutionRoot)\CSF.Zpt.MVC5\bin\Release\CSF.Zpt.ExpressionEvaluators.NotExpressions.dll" />
+      <Mvc5ZipFiles Include="$(PathToSolutionRoot)\CSF.Zpt.MVC5\bin\Release\CSF.Zpt.ExpressionEvaluators.PathExpressions.dll" />
+      <Mvc5ZipFiles Include="$(PathToSolutionRoot)\CSF.Zpt.MVC5\bin\Release\CSF.Zpt.ExpressionEvaluators.StringExpressions.dll" />
+      <Mvc5ZipFiles Include="$(PathToSolutionRoot)\CSF.Zpt.MVC5\bin\Release\CSF.Zpt.ExpressionEvaluators.CSharpExpressions.dll" />
+      <Mvc5ZipFiles Include="$(PathToSolutionRoot)\CSF.Zpt.MVC5\bin\Release\CSF.Zpt.ExpressionEvaluators.CSharpFramework.dll" />
+      <Mvc5ZipFiles Include="$(PathToSolutionRoot)\CSF.Zpt.MVC5\bin\Release\CSF.Zpt.Abstractions.xml" />
+      <Mvc5ZipFiles Include="$(PathToSolutionRoot)\CSF.Zpt.MVC5\bin\Release\CSF.Zpt.xml" />
+      <Mvc5ZipFiles Include="$(PathToSolutionRoot)\CSF.Zpt.MVC5\bin\Release\CSF.Zpt.DocumentProviders.HtmlHAP.xml" />
+      <Mvc5ZipFiles Include="$(PathToSolutionRoot)\CSF.Zpt.MVC5\bin\Release\CSF.Zpt.DocumentProviders.XmlLinq.xml" />
+      <Mvc5ZipFiles Include="$(PathToSolutionRoot)\CSF.Zpt.MVC5\bin\Release\CSF.Zpt.ExpressionEvaluators.NotExpressions.xml" />
+      <Mvc5ZipFiles Include="$(PathToSolutionRoot)\CSF.Zpt.MVC5\bin\Release\CSF.Zpt.ExpressionEvaluators.PathExpressions.xml" />
+      <Mvc5ZipFiles Include="$(PathToSolutionRoot)\CSF.Zpt.MVC5\bin\Release\CSF.Zpt.ExpressionEvaluators.StringExpressions.xml" />
+      <Mvc5ZipFiles Include="$(PathToSolutionRoot)\CSF.Zpt.MVC5\bin\Release\CSF.Zpt.ExpressionEvaluators.CSharpExpressions.xml" />
+      <Mvc5ZipFiles Include="$(PathToSolutionRoot)\CSF.Zpt.MVC5\bin\Release\CSF.Zpt.ExpressionEvaluators.CSharpFramework.xml" />
+      <Mvc5ZipFiles Include="$(PathToSolutionRoot)\CSF.Zpt.MVC5\bin\Release\CSF.Zpt.Log4net.dll" />
+      <Mvc5ZipFiles Include="$(PathToSolutionRoot)\CSF.Zpt.MVC5\bin\Release\HtmlAgilityPack.dll" />
+      <Mvc5ZipFiles Include="$(PathToSolutionRoot)\CSF.Zpt.MVC5\bin\Release\log4net.dll" />
     </ItemGroup>
-    <CreateZipArchive OutputFilename="$(DeploymentOutputPath)\CSF.Zpt.MVC.zip"
+    <CreateZipArchive OutputFilename="$(DeploymentOutputPath)\CSF.Zpt.MVC5.zip"
                       Files="@(Mvc5ZipFiles)" />
     <ItemGroup>
-      <ZptSharpCompleteZipFiles Include="$(PathToSolutionRoot)\CSF.Zpt\bin\Release\CSF.dll" />
+      <ZptSharpCompleteZipFiles Include="$(PathToSolutionRoot)\CSF.Zpt\bin\Release\CSF.Utils.dll" />
+      <ZptSharpCompleteZipFiles Include="$(PathToSolutionRoot)\CSF.Zpt\bin\Release\CSF.Caches.dll" />
       <ZptSharpCompleteZipFiles Include="$(PathToSolutionRoot)\CSF.Zpt\bin\Release\CSF.Configuration.dll" />
       <ZptSharpCompleteZipFiles Include="$(PathToSolutionRoot)\CSF.Zpt\bin\Release\CSF.Reflection.dll" />
       <ZptSharpCompleteZipFiles Include="$(PathToSolutionRoot)\CSF.Zpt.Cli\bin\Release\CSF.Cli.Parameters.dll" />
@@ -303,6 +340,18 @@
       <ZptSharpCompleteZipFiles Include="$(PathToSolutionRoot)\ExpressionEvaluators\CSF.Zpt.ExpressionEvaluators.NotExpressions\bin\Release\CSF.Zpt.ExpressionEvaluators.NotExpressions.dll" />
       <ZptSharpCompleteZipFiles Include="$(PathToSolutionRoot)\ExpressionEvaluators\CSF.Zpt.ExpressionEvaluators.PathExpressions\bin\Release\CSF.Zpt.ExpressionEvaluators.PathExpressions.dll" />
       <ZptSharpCompleteZipFiles Include="$(PathToSolutionRoot)\ExpressionEvaluators\CSF.Zpt.ExpressionEvaluators.StringExpressions\bin\Release\CSF.Zpt.ExpressionEvaluators.StringExpressions.dll" />
+      <ZptSharpCompleteZipFiles Include="$(PathToSolutionRoot)\ExpressionEvaluators\CSF.Zpt.ExpressionEvaluators.CSharpExpressions\bin\Release\CSF.Zpt.ExpressionEvaluators.CSharpExpressions.dll" />
+      <ZptSharpCompleteZipFiles Include="$(PathToSolutionRoot)\ExpressionEvaluators\CSF.Zpt.ExpressionEvaluators.CSharpExpressions\bin\Release\CSF.Zpt.ExpressionEvaluators.CSharpFramework.dll" />
+      <ZptSharpCompleteZipFiles Include="$(PathToSolutionRoot)\CSF.Zpt\bin\Release\CSF.Zpt.Abstractions.xml" />
+      <ZptSharpCompleteZipFiles Include="$(PathToSolutionRoot)\CSF.Zpt\bin\Release\CSF.Zpt.xml" />
+      <ZptSharpCompleteZipFiles Include="$(PathToSolutionRoot)\DocumentProviders\CSF.Zpt.DocumentProviders.HtmlHAP\bin\Release\CSF.Zpt.DocumentProviders.HtmlHAP.xml" />
+      <ZptSharpCompleteZipFiles Include="$(PathToSolutionRoot)\DocumentProviders\CSF.Zpt.DocumentProviders.XmlLegacy\bin\Release\CSF.Zpt.DocumentProviders.XmlLegacy.xml" />
+      <ZptSharpCompleteZipFiles Include="$(PathToSolutionRoot)\DocumentProviders\CSF.Zpt.DocumentProviders.XmlLinq\bin\Release\CSF.Zpt.DocumentProviders.XmlLinq.xml" />
+      <ZptSharpCompleteZipFiles Include="$(PathToSolutionRoot)\ExpressionEvaluators\CSF.Zpt.ExpressionEvaluators.NotExpressions\bin\Release\CSF.Zpt.ExpressionEvaluators.NotExpressions.xml" />
+      <ZptSharpCompleteZipFiles Include="$(PathToSolutionRoot)\ExpressionEvaluators\CSF.Zpt.ExpressionEvaluators.PathExpressions\bin\Release\CSF.Zpt.ExpressionEvaluators.PathExpressions.xml" />
+      <ZptSharpCompleteZipFiles Include="$(PathToSolutionRoot)\ExpressionEvaluators\CSF.Zpt.ExpressionEvaluators.StringExpressions\bin\Release\CSF.Zpt.ExpressionEvaluators.StringExpressions.xml" />
+      <ZptSharpCompleteZipFiles Include="$(PathToSolutionRoot)\ExpressionEvaluators\CSF.Zpt.ExpressionEvaluators.CSharpExpressions\bin\Release\CSF.Zpt.ExpressionEvaluators.CSharpExpressions.xml" />
+      <ZptSharpCompleteZipFiles Include="$(PathToSolutionRoot)\ExpressionEvaluators\CSF.Zpt.ExpressionEvaluators.CSharpExpressions\bin\Release\CSF.Zpt.ExpressionEvaluators.CSharpFramework.xml" />
       <ZptSharpCompleteZipFiles Include="$(PathToSolutionRoot)\CSF.Zpt.Log4net\bin\Release\CSF.Zpt.Log4net.dll" />
       <ZptSharpCompleteZipFiles Include="$(PathToSolutionRoot)\DocumentProviders\CSF.Zpt.DocumentProviders.HtmlHAP\bin\Release\HtmlAgilityPack.dll" />
       <ZptSharpCompleteZipFiles Include="$(PathToSolutionRoot)\CSF.Zpt.Log4net\bin\Release\log4net.dll" />
@@ -310,7 +359,7 @@
       <ZptSharpCompleteZipFiles Include="$(PathToSolutionRoot)\CSF.Zpt.Cli\bin\Release\ZptBuilder.exe" />
       <ZptSharpCompleteZipFiles Include="$(PathToSolutionRoot)\CSF.Zpt.Cli\bin\Release\ZptBuilder.exe.config" />
       <ZptSharpCompleteZipFiles Include="$(PathToSolutionRoot)\CSF.Zpt.Cli\bin\Release\Doc\ZptBuilder.MANUAL.txt" />
-      <ZptSharpCompleteZipFiles Include="$(PathToSolutionRoot)\CSF.Zpt.MVC\bin\Release\CSF.Zpt.MVC.dll" />
+      <ZptSharpCompleteZipFiles Include="$(PathToSolutionRoot)\CSF.Zpt.MVC5\bin\Release\CSF.Zpt.MVC5.dll" />
     </ItemGroup>
     <CreateZipArchive OutputFilename="$(DeploymentOutputPath)\CSF.Zpt-complete.zip"
                       Files="@(ZptSharpCompleteZipFiles)" />

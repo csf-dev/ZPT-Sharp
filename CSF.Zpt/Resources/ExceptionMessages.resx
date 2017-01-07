@@ -106,4 +106,8 @@ Type name:{1}</value>
   <data name="FatalErrorTypeMustBeDefined" xml:space="preserve">
     <value>The fatal-error-type must be a defined enumeration constant.</value>
   </data>
+  <data name="SourceInfoTypeMustExistFormat" xml:space="preserve">
+    <value>The `{1}' type must exist.
+Type name:{0}</value>
+  </data>
 </root>

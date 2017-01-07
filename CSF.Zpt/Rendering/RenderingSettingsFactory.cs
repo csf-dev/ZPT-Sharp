@@ -12,10 +12,13 @@ namespace CSF.Zpt.Rendering
     #region constants
 
     private static readonly Type[] DEFAULT_VISITOR_TYPES = new Type[] {
+      typeof(CSF.Zpt.SourceAnnotation.SourceInfoBurnInVisitor),
       typeof(CSF.Zpt.Metal.MetalVisitor),
       typeof(CSF.Zpt.Tal.TalVisitor),
+      typeof(CSF.Zpt.SourceAnnotation.SourceAnnotationVisitor),
       typeof(CSF.Zpt.Metal.MetalTidyUpVisitor),
       typeof(CSF.Zpt.Tal.TalTidyUpVisitor),
+      typeof(CSF.Zpt.SourceAnnotation.SourceInfoTidyUpVisitor),
     };
 
     /// <summary>
@@ -160,7 +163,7 @@ namespace CSF.Zpt.Rendering
 
     private static IContextVisitor[] GetContextVisitors()
     {
-      return DEFAULT_VISITOR_TYPES
+      return GetDefaultContextVisitorTypes()
         .Select(x => Activator.CreateInstance(x))
         .Cast<IContextVisitor>()
         .ToArray();
@@ -207,6 +210,22 @@ namespace CSF.Zpt.Rendering
       }
 
       return (TImplementation) Activator.CreateInstance(type);
+    }
+
+    #endregion
+
+    #region methods
+
+    /// <summary>
+    /// Gets a collection of <c>System.Type</c> representing the default <see cref="IContextVisitor"/> implementations
+    /// which visit rendering contexts.
+    /// </summary>
+    /// <returns>The default context visitor types.</returns>
+    public static Type[] GetDefaultContextVisitorTypes()
+    {
+      var output = new Type[DEFAULT_VISITOR_TYPES.Length];
+      Array.Copy(DEFAULT_VISITOR_TYPES, output, DEFAULT_VISITOR_TYPES.Length);
+      return output;
     }
 
     #endregion

@@ -178,7 +178,7 @@ namespace CSF.Zpt.DocumentProviders
       }
 
       return new ZptXmlLinqElement(cloned,
-                                   repl.SourceFile,
+                                   repl.GetSourceInfo(),
                                    this.OwnerDocument,
                                    isImported: true);
     }
@@ -195,7 +195,7 @@ namespace CSF.Zpt.DocumentProviders
 
       this.Node.ReplaceWith(newNode);
 
-      return interpretContentAsStructure? new[] { new ZptXmlLinqElement(newNode, this.SourceFile, this.OwnerDocument) } : new IZptElement[0];
+      return interpretContentAsStructure? new[] { new ZptXmlLinqElement(newNode, UnknownSourceFileInfo.Instance, this.OwnerDocument) } : new IZptElement[0];
     }
 
     /// <summary>
@@ -224,7 +224,7 @@ namespace CSF.Zpt.DocumentProviders
         newChildElement = ConvertTo<ZptXmlLinqElement>(newChild);
 
       existingElement.Node.AddBeforeSelf(newChildElement.Node);
-      return new ZptXmlLinqElement(newChildElement.Node, newChild.SourceFile, this.OwnerDocument, isImported: true);
+      return new ZptXmlLinqElement(newChildElement.Node, newChild.GetSourceInfo(), this.OwnerDocument, isImported: true);
     }
 
     /// <summary>
@@ -241,7 +241,7 @@ namespace CSF.Zpt.DocumentProviders
         newChildElement = ConvertTo<ZptXmlLinqElement>(newChild);
 
       existingElement.Node.AddAfterSelf(newChildElement.Node);
-      return new ZptXmlLinqElement(newChildElement.Node, newChild.SourceFile, this.OwnerDocument, isImported: true);
+      return new ZptXmlLinqElement(newChildElement.Node, newChild.GetSourceInfo(), this.OwnerDocument, isImported: true);
     }
 
     /// <summary>
@@ -251,7 +251,7 @@ namespace CSF.Zpt.DocumentProviders
     public override IZptElement GetParentElement()
     {
       var parent = this.Node.Parent;
-      return (parent != null && parent.NodeType == XmlNodeType.Element)? new ZptXmlLinqElement(parent, this.SourceFile, this.OwnerDocument) : null;
+      return (parent != null && parent.NodeType == XmlNodeType.Element)? new ZptXmlLinqElement(parent, this.GetSourceInfo(), this.OwnerDocument) : null;
     }
 
     /// <summary>
@@ -263,7 +263,7 @@ namespace CSF.Zpt.DocumentProviders
       return this.Node.Elements()
         .Cast<XElement>()
         .Where(x => x.NodeType == XmlNodeType.Element)
-        .Select(x => new ZptXmlLinqElement(x, this.SourceFile, this.OwnerDocument))
+        .Select(x => new ZptXmlLinqElement(x, this.GetSourceInfo(), this.OwnerDocument))
         .ToArray();
     }
 
@@ -398,7 +398,7 @@ namespace CSF.Zpt.DocumentProviders
 
       return ((IEnumerable) this.Node.XPathEvaluate(query, nsManager))
         .Cast<XElement>()
-        .Select(x => new ZptXmlLinqElement(x, this.SourceFile, this.OwnerDocument))
+        .Select(x => new ZptXmlLinqElement(x, this.GetSourceInfo(), this.OwnerDocument))
         .ToArray();
     }
 
@@ -449,7 +449,7 @@ namespace CSF.Zpt.DocumentProviders
 
       foreach(var item in toRemove)
       {
-        new ZptXmlLinqElement(item, this.SourceFile, this.OwnerDocument).Omit();
+        new ZptXmlLinqElement(item, this.GetSourceInfo(), this.OwnerDocument).Omit();
       }
     }
 
@@ -521,7 +521,7 @@ namespace CSF.Zpt.DocumentProviders
     {
       var clone = new XElement(this.Node);
 
-      return new ZptXmlLinqElement(clone, this.SourceFile, this.OwnerDocument, this.IsRoot, true) {
+      return new ZptXmlLinqElement(clone, this.GetSourceInfo(), this.OwnerDocument, this.IsRoot, true) {
         _filePosition = this.GetLineNumber()
       };
     }
@@ -530,10 +530,10 @@ namespace CSF.Zpt.DocumentProviders
     /// Gets the file location (typically a line number) for the current instance.
     /// </summary>
     /// <returns>The file location.</returns>
-    public override string GetFileLocation()
+    protected override string GetNativeFileLocation()
     {
       var lineNumber = this.GetLineNumber();
-      return lineNumber.HasValue? lineNumber.Value.ToString() : null;
+      return lineNumber.HasValue? lineNumber.Value.ToString() : String.Empty;
     }
 
     /// <summary>
@@ -557,9 +557,9 @@ namespace CSF.Zpt.DocumentProviders
     /// Gets the file location (typically a line number) for the end tag matched with the current instance.
     /// </summary>
     /// <returns>The end tag file location.</returns>
-    public override string GetEndTagFileLocation()
+    protected override string GetNativeEndTagFileLocation()
     {
-      string output = null;
+      string output = String.Empty;
 
       int? startTagLineNumber = GetLineNumber();
 
@@ -590,7 +590,7 @@ namespace CSF.Zpt.DocumentProviders
 
       return children
         .Where(x => x.NodeType == XmlNodeType.Element)
-        .Select(x => new ZptXmlLinqElement(x, this.SourceFile, this.OwnerDocument))
+        .Select(x => new ZptXmlLinqElement(x, this.GetSourceInfo(), this.OwnerDocument))
         .ToArray();
     }
 

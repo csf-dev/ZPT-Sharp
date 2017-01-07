@@ -1,9 +1,0 @@
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-<title>Sample document</title>
-</head>
-<body>
-  <h1>What this file is</h1>
-  <p>This is just a sample ZPT-compatible document template file. It actually contains no ZPT directives.</p>
-</body>
-</html>

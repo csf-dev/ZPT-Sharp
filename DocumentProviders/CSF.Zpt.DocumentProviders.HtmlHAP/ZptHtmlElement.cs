@@ -159,7 +159,7 @@ namespace CSF.Zpt.DocumentProviders
       {
         var parent = this.GetParent();
         return new ZptHtmlElement(parent.ReplaceChild(repl.Node, this.Node),
-                                repl.SourceFile,
+                                  repl.GetSourceInfo(),
                                 OwnerDocument,
                                 isImported: true);
       }
@@ -167,7 +167,7 @@ namespace CSF.Zpt.DocumentProviders
       {
         this.Node.Remove();
         return new ZptHtmlElement(repl.Node,
-                                  repl.SourceFile,
+                                  repl.GetSourceInfo(),
                                 OwnerDocument,
                                   isImported: true);
       }
@@ -192,7 +192,7 @@ namespace CSF.Zpt.DocumentProviders
 
       return newNodes
         .Where(x => x.NodeType == HtmlNodeType.Element)
-        .Select(x => new ZptHtmlElement(x, this.SourceFile, this.OwnerDocument))
+        .Select(x => new ZptHtmlElement(x, UnknownSourceFileInfo.Instance, this.OwnerDocument))
         .ToArray();
     }
 
@@ -242,7 +242,7 @@ namespace CSF.Zpt.DocumentProviders
       }
 
       var output = this.Node.InsertBefore(newChildElement.Node, existingNode);
-      return new ZptHtmlElement(output, newChild.SourceFile, this.OwnerDocument, isImported: true);
+      return new ZptHtmlElement(output, newChild.GetSourceInfo(), this.OwnerDocument, isImported: true);
     }
 
     /// <summary>
@@ -259,7 +259,7 @@ namespace CSF.Zpt.DocumentProviders
         newChildElement = ConvertTo<ZptHtmlElement>(newChild);
 
       var output = this.Node.InsertAfter(newChildElement.Node, existingElement.Node);
-      return new ZptHtmlElement(output, newChild.SourceFile, this.OwnerDocument, isImported: true);
+      return new ZptHtmlElement(output, newChild.GetSourceInfo(), this.OwnerDocument, isImported: true);
     }
 
     /// <summary>
@@ -269,7 +269,7 @@ namespace CSF.Zpt.DocumentProviders
     public override IZptElement GetParentElement()
     {
       var parent = this.Node.ParentNode;
-      return (parent != null && parent.NodeType == HtmlNodeType.Element)? new ZptHtmlElement(parent, this.SourceFile, this.OwnerDocument) : null;
+      return (parent != null && parent.NodeType == HtmlNodeType.Element)? new ZptHtmlElement(parent, this.GetSourceInfo(), this.OwnerDocument) : null;
     }
 
     /// <summary>
@@ -280,7 +280,7 @@ namespace CSF.Zpt.DocumentProviders
     {
       return this.Node.ChildNodes
         .Where(x => x.NodeType == HtmlNodeType.Element)
-        .Select(x => new ZptHtmlElement(x, this.SourceFile, this.OwnerDocument))
+        .Select(x => new ZptHtmlElement(x, this.GetSourceInfo(), this.OwnerDocument))
         .ToArray();
     }
 
@@ -388,12 +388,17 @@ namespace CSF.Zpt.DocumentProviders
     /// <param name="name">The attribute name.</param>
     public override IZptElement[] SearchChildrenByAttribute(ZptNamespace attributeNamespace, string name)
     {
-      string attribName = GetNameWithPrefix(attributeNamespace, name);
+      string
+        attribName = GetNameWithPrefix(attributeNamespace, name),
+        prefix = GetPrefix(attributeNamespace);
 
       return (from node in this.Node.Descendants()
               from attrib in node.Attributes
-              where attrib.Name == attribName
-              select new ZptHtmlElement(node, this.SourceFile, this.OwnerDocument))
+              where
+                attrib.Name == attribName
+                || (node.Name.StartsWith(prefix)
+                    && attrib.Name == name)
+              select new ZptHtmlElement(node, this.GetSourceInfo(), this.OwnerDocument))
         .ToArray();
     }
 
@@ -443,7 +448,7 @@ namespace CSF.Zpt.DocumentProviders
 
       foreach(var item in toRemove)
       {
-        new ZptHtmlElement(item, this.SourceFile, this.OwnerDocument).Omit();
+        new ZptHtmlElement(item, this.GetSourceInfo(), this.OwnerDocument).Omit();
       }
     }
 
@@ -514,7 +519,7 @@ namespace CSF.Zpt.DocumentProviders
     {
       var clone = this.Node.Clone();
 
-      return new ZptHtmlElement(clone, this.SourceFile, this.OwnerDocument, this.IsRoot, true) {
+      return new ZptHtmlElement(clone, this.GetSourceInfo(), this.OwnerDocument, this.IsRoot, true) {
         _filePosition = _filePosition.HasValue? _filePosition : this.Node.Line,
       };
     }
@@ -523,19 +528,19 @@ namespace CSF.Zpt.DocumentProviders
     /// Gets the file location (typically a line number) for the current instance.
     /// </summary>
     /// <returns>The file location.</returns>
-    public override string GetFileLocation()
+    protected override string GetNativeFileLocation()
     {
       var loc = GetStartTagFileLocation();
-      return loc.HasValue? loc.Value.ToString() : null;
+      return loc.HasValue? loc.Value.ToString() : String.Empty;
     }
 
     /// <summary>
     /// Gets the file location (typically a line number) for the end tag matched with the current instance.
     /// </summary>
     /// <returns>The end tag file location.</returns>
-    public override string GetEndTagFileLocation()
+    protected override string GetNativeEndTagFileLocation()
     {
-      string output = null;
+      string output = String.Empty;
       var loc = GetStartTagFileLocation();
       if(loc.HasValue)
       {
@@ -565,7 +570,7 @@ namespace CSF.Zpt.DocumentProviders
 
       return children
         .Where(x => x.NodeType == HtmlNodeType.Element)
-        .Select(x => new ZptHtmlElement(x, this.SourceFile, this.OwnerDocument))
+        .Select(x => new ZptHtmlElement(x, this.GetSourceInfo(), this.OwnerDocument))
         .ToArray();
     }
 
@@ -690,6 +695,21 @@ namespace CSF.Zpt.DocumentProviders
       EnforceNameNotEmpty(name);
 
       return (nSpace.Prefix != null)? String.Concat(nSpace.Prefix, PREFIX_SEPARATOR, name) : name;
+    }
+
+    /// <summary>
+    /// Gets the prefix from a given namespace.
+    /// </summary>
+    /// <returns>The prefix.</returns>
+    /// <param name="nSpace">An element or attribute namespace.</param>
+    internal static string GetPrefix(ZptNamespace nSpace)
+    {
+      if(nSpace == null)
+      {
+        throw new ArgumentNullException(nameof(nSpace));
+      }
+
+      return (nSpace.Prefix != null)? String.Concat(nSpace.Prefix, PREFIX_SEPARATOR) : String.Empty;
     }
 
     private int? GetStartTagFileLocation()

@@ -11,6 +11,7 @@ packages/*/
 *.directory
 DEBIAN/
 *.nupkg
+*.nuspec
 .vs/
 
 # Archives of binaries

@@ -65,7 +65,7 @@ namespace CSF.Zpt
     /// <param name="path">Path.</param>
     public virtual Assembly LoadRelative(string path)
     {
-      var currentAssemblyDirectory = new FileInfo(Assembly.GetExecutingAssembly().Location).GetParent();
+      var currentAssemblyDirectory = new FileInfo(Assembly.GetExecutingAssembly().Location).GetParentDirectory();
       var absolutePath = Path.Combine(currentAssemblyDirectory.FullName, path);
 
       return LoadAbsolute(absolutePath);

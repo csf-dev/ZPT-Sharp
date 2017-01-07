@@ -62,7 +62,8 @@
   </Target>
   <ItemGroup>
     <None Include="packages.config" />
-    <None Include="CSF.Zpt.ExpressionEvaluators.NotExpressions.nuspec" />
     <None Include="CSF.Zpt.ExpressionEvaluators.NotExpressions.nuspec.pt" />
+    <None Include="app.config.install.xdt" />
+    <None Include="app.config.uninstall.xdt" />
   </ItemGroup>
 </Project>

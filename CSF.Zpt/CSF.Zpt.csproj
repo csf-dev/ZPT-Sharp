@@ -42,6 +42,18 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Configuration" />
+    <Reference Include="CSF.Configuration">
+      <HintPath>..\packages\CSF.Configuration.1.0.0\lib\net45\CSF.Configuration.dll</HintPath>
+    </Reference>
+    <Reference Include="CSF.Utils">
+      <HintPath>..\packages\CSF.Utils.6.0.0\lib\net45\CSF.Utils.dll</HintPath>
+    </Reference>
+    <Reference Include="CSF.Reflection">
+      <HintPath>..\packages\CSF.Reflection.1.0.0\lib\net45\CSF.Reflection.dll</HintPath>
+    </Reference>
+    <Reference Include="CSF.Caches">
+      <HintPath>..\packages\CSF.Caches.1.0.0\lib\net45\CSF.Caches.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AssemblyInfo.cs" />
@@ -87,7 +99,6 @@
     <Compile Include="Rendering\RenderingContextFactoryFactory.cs" />
     <Compile Include="Rendering\ContextVisitorFactory.cs" />
     <Compile Include="Rendering\NamedObjectWrapper.cs" />
-    <Compile Include="Metal\SourceAnnotator.cs" />
     <Compile Include="Resources\LogMessageFormats.Designer.cs">
       <DependentUpon>LogMessageFormats.resx</DependentUpon>
     </Compile>
@@ -124,24 +135,27 @@
     <Compile Include="PluginAssemblyLoader.cs" />
     <Compile Include="BatchRendering\BatchOptionsBuilder.cs" />
     <Compile Include="BatchRendering\BatchRenderingOptionsValidator.cs" />
+    <Compile Include="Metal\IMacroExpander.cs" />
+    <Compile Include="Metal\IMacroFinder.cs" />
+    <Compile Include="Metal\IMacroSubstituter.cs" />
+    <Compile Include="Metal\MacroSubstituter.cs" />
+    <Compile Include="Metal\SlotToFill.cs" />
+    <Compile Include="Metal\MacroExtensionSubstitutor.cs" />
+    <Compile Include="Rendering\SourceInfoFactory.cs" />
+    <Compile Include="SourceAnnotation\SourceAnnotator.cs" />
+    <Compile Include="SourceAnnotation\SourceInfoBurnInVisitor.cs" />
+    <Compile Include="SourceAnnotation\SourceInfoTidyUpVisitor.cs" />
+    <Compile Include="SourceAnnotation\SourceAnnotationVisitor.cs" />
+    <Compile Include="SourceAnnotation\CommentFormatter.cs" />
+    <Compile Include="Resources\SourceAnnotationFormats.Designer.cs">
+      <DependentUpon>SourceAnnotationFormats.resx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
-    <ProjectReference Include="..\CSF\CSF\CSF.csproj">
-      <Project>{E563D7BC-1AB1-4AFB-8533-51315437C6E6}</Project>
-      <Name>CSF</Name>
-    </ProjectReference>
     <ProjectReference Include="..\CSF.Zpt.Abstractions\CSF.Zpt.Abstractions.csproj">
       <Project>{8207CD9B-F1C1-4D75-B250-ACDFFBDCB071}</Project>
       <Name>CSF.Zpt.Abstractions</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\CSF\CSF.Reflection\CSF.Reflection.csproj">
-      <Project>{275413F6-0651-4AD4-A426-07EDA165C07E}</Project>
-      <Name>CSF.Reflection</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\CSF\CSF.Configuration\CSF.Configuration.csproj">
-      <Project>{8C570A26-CEEB-45D1-9436-745C8DBAE9D8}</Project>
-      <Name>CSF.Configuration</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
@@ -174,6 +188,10 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>LogMessageFormats.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Resources\SourceAnnotationFormats.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>SourceAnnotationFormats.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
   <Target Name="BeforeBuild">
     <CallTarget Targets="StampAssemblyInfo" />
@@ -183,7 +201,11 @@
   </Target>
   <ItemGroup>
     <None Include="packages.config" />
-    <None Include="CSF.Zpt.nuspec" />
     <None Include="CSF.Zpt.nuspec.pt" />
+    <None Include="app.config.install.xdt" />
+    <None Include="app.config.uninstall.xdt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="SourceAnnotation\" />
   </ItemGroup>
 </Project>

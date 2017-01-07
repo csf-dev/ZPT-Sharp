@@ -7,12 +7,12 @@ namespace CSF.Zpt.ExpressionEvaluators.CSharpExpressions
   /// Exception raised when there is an issue evaluating a CSharp expression.
   /// </summary>
   [Serializable]
-  public class CSharpExpressionExceptionException : InvalidExpressionException
+  public class CSharpExpressionException : InvalidExpressionException
   {
     /// <summary>
     /// Initializes a new instance of the <see cref="T:CSharpExpressionExceptionException"/> class
     /// </summary>
-    public CSharpExpressionExceptionException()
+    public CSharpExpressionException()
     {
     }
 
@@ -20,7 +20,7 @@ namespace CSF.Zpt.ExpressionEvaluators.CSharpExpressions
     /// Initializes a new instance of the <see cref="T:CSharpExpressionExceptionException"/> class
     /// </summary>
     /// <param name="message">A <see cref="T:System.String"/> that describes the exception. </param>
-    public CSharpExpressionExceptionException(string message) : base(message)
+    public CSharpExpressionException(string message) : base(message)
     {
     }
 
@@ -29,7 +29,7 @@ namespace CSF.Zpt.ExpressionEvaluators.CSharpExpressions
     /// </summary>
     /// <param name="message">A <see cref="T:System.String"/> that describes the exception. </param>
     /// <param name="inner">The exception that is the cause of the current exception. </param>
-    public CSharpExpressionExceptionException(string message, Exception inner) : base(message, inner)
+    public CSharpExpressionException(string message, Exception inner) : base(message, inner)
     {
     }
 
@@ -38,7 +38,7 @@ namespace CSF.Zpt.ExpressionEvaluators.CSharpExpressions
     /// </summary>
     /// <param name="context">The contextual information about the source or destination.</param>
     /// <param name="info">The object that holds the serialized object data.</param>
-    protected CSharpExpressionExceptionException(System.Runtime.Serialization.SerializationInfo info, System.Runtime.Serialization.StreamingContext context) : base(info, context)
+    protected CSharpExpressionException(System.Runtime.Serialization.SerializationInfo info, System.Runtime.Serialization.StreamingContext context) : base(info, context)
     {
     }
   }

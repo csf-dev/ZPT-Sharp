@@ -53,7 +53,7 @@ namespace Test.CSF.Zpt
       // Arrange
       var thisAssemblyPath = Assembly.GetExecutingAssembly().Location;
       var thisAssemblyFile = new FileInfo(thisAssemblyPath);
-      var thisAssemblyDir = thisAssemblyFile.GetParent();
+      var thisAssemblyDir = thisAssemblyFile.GetParentDirectory();
       var absPath = Path.Combine(thisAssemblyDir.FullName, "Foo.dll");
 
       // Act

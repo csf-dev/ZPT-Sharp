@@ -3,7 +3,11 @@
          xmlns:tal="http://xml.zope.org/namespaces/tal">
   <metadata>
     <id>CSF.Zpt.ExpressionEvaluators.PythonExpressions</id>
-    <version tal:content="options/version">0.0.0</version>
+    <version tal:define="semVer options/version;
+                         extraVer options/versionExtra;
+                         versionSuffix csharp:!String.IsNullOrEmpty(extraVer)? String.Concat(&quot;-&quot;, extraVer) : String.Empty;
+                         fullVersion string:$semVer$versionSuffix;"
+             tal:content="fullVersion">0.0.0</version>
     <title>ZPT-Sharp 'python' expression evaluator plugin</title>
     <authors>CSF Software Ltd</authors>
     <licenseUrl>https://opensource.org/licenses/MIT</licenseUrl>
@@ -20,5 +24,8 @@
   </metadata>
   <files>
     <file src="bin/Release/CSF.Zpt.ExpressionEvaluators.PythonExpressions.dll" target="lib/net45" />
+    <file src="bin/Release/CSF.Zpt.ExpressionEvaluators.PythonExpressions.xml" target="lib/net45" />
+    <file src="app.config.install.xdt" target="content" />
+    <file src="app.config.uninstall.xdt" target="content" />
   </files>
 </package>

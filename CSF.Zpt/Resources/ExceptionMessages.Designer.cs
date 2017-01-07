@@ -219,5 +219,11 @@ namespace CSF.Zpt.Resources {
                 return ResourceManager.GetString("FatalErrorTypeMustBeDefined", resourceCulture);
             }
         }
+        
+        internal static string SourceInfoTypeMustExistFormat {
+            get {
+                return ResourceManager.GetString("SourceInfoTypeMustExistFormat", resourceCulture);
+            }
+        }
     }
 }

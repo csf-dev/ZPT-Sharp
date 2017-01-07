@@ -1,0 +1,73 @@
+<?xml version="1.0"?>
+<configuration xmlns:xdt="http://schemas.microsoft.com/XML-Document-Transform">
+  <configSections xdt:Transform="InsertIfMissing" />
+  
+  <configSections>
+    <sectionGroup name="CSF" xdt:Transform="InsertIfMissing" xdt:Locator="Match(name)" />
+  </configSections>
+  
+  <configSections>
+    <sectionGroup name="CSF">
+      <sectionGroup name="Zpt" xdt:Transform="InsertIfMissing" xdt:Locator="Match(name)" />
+    </sectionGroup>
+  </configSections>
+
+  <configSections>
+    <sectionGroup name="CSF">
+      <sectionGroup name="Zpt">
+        <sectionGroup name="ExpressionEvaluators" xdt:Transform="InsertIfMissing" xdt:Locator="Match(name)" />
+      </sectionGroup>
+    </sectionGroup>
+  </configSections>
+
+  <configSections>
+    <sectionGroup name="CSF">
+      <sectionGroup name="Zpt">
+        <sectionGroup name="ExpressionEvaluators">
+          <sectionGroup name="CSharpExpressions" xdt:Transform="Remove" xdt:Locator="Match(name)" />
+          <sectionGroup name="CSharpExpressions" xdt:Transform="Insert">
+            <section name="ExpressionConfigurationSection" type="CSF.Zpt.ExpressionEvaluators.CSharpExpressions.ExpressionConfigurationSection, CSF.Zpt.ExpressionEvaluators.CSharpExpressions" />
+          </sectionGroup>
+        </sectionGroup>
+      </sectionGroup>
+    </sectionGroup>
+  </configSections>
+
+  <CSF xdt:Transform="InsertIfMissing" />
+
+  <CSF>
+    <Zpt xdt:Transform="InsertIfMissing" />
+  </CSF>
+
+  <CSF>
+    <Zpt>
+      <ExpressionEvaluators xdt:Transform="InsertIfMissing" />
+    </Zpt>
+  </CSF>
+
+  <CSF>
+    <Zpt>
+      <ExpressionEvaluators>
+        <CSharpExpressions xdt:Transform="Remove" />
+        <CSharpExpressions xdt:Transform="Insert">
+          <ExpressionConfigurationSection>
+            <Assemblies>
+              <Assembly Name="System.dll" />
+            </Assemblies>
+            <Namespaces>
+              <Namespace Name="System" />
+              <Namespace Name="System.Linq" />
+            </Namespaces>
+          </ExpressionConfigurationSection>
+        </CSharpExpressions>
+      </ExpressionEvaluators>
+      <PluginConfigurationSection>
+        <PluginAssemblies>
+          <Assembly Path="CSF.Zpt.ExpressionEvaluators.CSharpExpressions.dll"
+                    xdt:Transform="InsertIfMissing"
+                    xdt:Locator="Match(Path)" />
+        </PluginAssemblies>
+      </PluginConfigurationSection>
+    </Zpt>
+  </CSF>
+</configuration>

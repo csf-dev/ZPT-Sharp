@@ -4,6 +4,10 @@ using System.Linq;
 using System.Reflection;
 using CSF.Zpt.ExpressionEvaluators.CSharpFramework;
 using CSF.Zpt.Rendering;
+using CSF.Zpt.Tales;
+using CSF.Zpt.ExpressionEvaluators.CSharpExpressions.Spec;
+using CSF.Collections;
+using CSF.Zpt.ExpressionEvaluators.CSharpExpressions.Host;
 
 namespace CSF.Zpt.ExpressionEvaluators.CSharpExpressions
 {
@@ -12,14 +16,6 @@ namespace CSF.Zpt.ExpressionEvaluators.CSharpExpressions
   /// </summary>
   public class CSharpExpression : IEquatable<CSharpExpression>
   {
-    #region fields
-
-    private Func<IExpressionHost> _hostCreator;
-    private string[] _variableNames;
-    private Assembly _hostAssembly;
-
-    #endregion
-
     #region properties
 
     /// <summary>
@@ -33,35 +29,23 @@ namespace CSF.Zpt.ExpressionEvaluators.CSharpExpressions
     }
 
     /// <summary>
-    /// Gets a collection of the variable names registered for the current instance.
+    /// Gets the expression specification from which the current instance was created.
     /// </summary>
-    /// <value>The variable names.</value>
-    public virtual IEnumerable<string> VariableNames
-    {
-      get {
-        return _variableNames;
-      }
-    }
-
-    /// <summary>
-    /// Gets the text of the expression code.
-    /// </summary>
-    /// <value>The text.</value>
-    public virtual string Text
+    /// <value>The specification.</value>
+    public ExpressionSpecification Specification
     {
       get;
       private set;
     }
 
     /// <summary>
-    /// Gets a reference to the <c>System.Reflection.Assembly</c> containing the generated code.
+    /// Gets the object which is responsible for creating instances of <see cref="IExpressionHost"/>.
     /// </summary>
-    /// <value>The host assembly.</value>
-    public virtual Assembly HostAssembly
+    /// <value>The host creator.</value>
+    protected IExpressionHostCreator HostCreator
     {
-      get {
-        return _hostAssembly;
-      }
+      get;
+      private set;
     }
 
     #endregion
@@ -71,24 +55,34 @@ namespace CSF.Zpt.ExpressionEvaluators.CSharpExpressions
     /// <summary>
     /// Evaluate the expression for the given variables.
     /// </summary>
-    /// <param name="variableDefinitions">Variable definitions.</param>
-    public virtual object Evaluate(IDictionary<string,object> variableDefinitions)
+    /// <param name="model">The TALES model.</param>
+    public virtual object Evaluate(ITalesModel model)
     {
-      if(variableDefinitions == null)
+      if(model == null)
       {
-        throw new ArgumentNullException(nameof(variableDefinitions));
+        throw new ArgumentNullException(nameof(model));
       }
 
-      var variablesDefined = variableDefinitions.Keys.ToArray();
-      if(!AreVariablesEquivalent(variablesDefined, _variableNames))
+      var variableDefinitions = model.GetAllDefinitions();
+
+      var variablesProvided = VariableSpecification.GetVariableSpecifications(variableDefinitions);
+      var variablesExpected = Specification.Variables;
+
+      if(!variablesProvided.AreContentsSameAs(variablesExpected))
       {
-        throw new CSharpExpressionExceptionException(Resources.ExceptionMessages.DefinedVariablesMustMatch) {
-          ExpressionText = this.Text
+        throw new CSharpExpressionException(Resources.ExceptionMessages.DefinedVariablesMustMatch) {
+          ExpressionText = this.Specification.Text
         };
       }
 
-      var host = _hostCreator();
-      foreach(var kvp in variableDefinitions)
+      var variablesToSet = (from availableVariable in variableDefinitions
+                            from usefulVariable in variablesProvided
+                            where availableVariable.Key == usefulVariable.Name
+                            select availableVariable)
+        .ToArray();
+
+      var host = HostCreator.CreateHostInstance();
+      foreach(var kvp in variablesToSet)
       {
         host.SetVariableValue(kvp.Key, kvp.Value);
       }
@@ -142,18 +136,6 @@ namespace CSF.Zpt.ExpressionEvaluators.CSharpExpressions
       return Id.GetHashCode();
     }
 
-    /// <summary>
-    /// Determines whether two collections of variables are equivalent (order-neutral collection equality).
-    /// </summary>
-    /// <returns><c>true</c>, if the variable collections are equivalent, <c>false</c> otherwise.</returns>
-    /// <param name="listOne">List one.</param>
-    /// <param name="listTwo">List two.</param>
-    private bool AreVariablesEquivalent(string[] listOne, string[] listTwo)
-    {
-      int listOneCount = listOne.Count(), listTwoCount = listTwo.Count();
-      return (listOneCount == listTwoCount && listOne.Intersect(listTwo).Count() == listOneCount);
-    }
-
     #endregion
 
     #region constructor
@@ -161,38 +143,24 @@ namespace CSF.Zpt.ExpressionEvaluators.CSharpExpressions
     /// <summary>
     /// Initializes a new instance of the <see cref="CSF.Zpt.ExpressionEvaluators.CSharpExpressions.CSharpExpression"/> class.
     /// </summary>
-    /// <param name="hostCreator">Host creator.</param>
+    /// <param name="hostCreator">The expression host creator for the current expression.</param>
     /// <param name="id">Identifier.</param>
-    /// <param name="expressionText">Expression text.</param>
-    /// <param name="variableNames">Variable names.</param>
-    /// <param name="hostAssembly">Host assembly.</param>
-    public CSharpExpression(Func<IExpressionHost> hostCreator,
-                            int id,
-                            string expressionText,
-                            string[] variableNames,
-                            Assembly hostAssembly)
+    /// <param name="spec">Expression specification.</param>
+    public CSharpExpression(int id,
+                            ExpressionSpecification spec,
+                            IExpressionHostCreator hostCreator)
     {
       if(hostCreator == null)
       {
         throw new ArgumentNullException(nameof(hostCreator));
       }
-      if(expressionText == null)
+      if(spec == null)
       {
-        throw new ArgumentNullException(nameof(expressionText));
-      }
-      if(variableNames == null)
-      {
-        throw new ArgumentNullException(nameof(variableNames));
-      }
-      if(hostAssembly == null)
-      {
-        throw new ArgumentNullException(nameof(hostAssembly));
+        throw new ArgumentNullException(nameof(spec));
       }
 
-      Text = expressionText;
-      _variableNames = variableNames;
-      _hostCreator = hostCreator;
-      _hostAssembly = hostAssembly;
+      Specification = spec;
+      HostCreator = hostCreator;
     }
 
     #endregion

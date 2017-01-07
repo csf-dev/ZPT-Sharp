@@ -11,7 +11,7 @@ namespace CSF.Zpt.ExpressionEvaluators.CSharpExpressions
   {
     #region constants
 
-    private static readonly string Prefix = "csharp";
+    private const string Prefix = "csharp";
 
     #endregion
 
@@ -59,12 +59,9 @@ namespace CSF.Zpt.ExpressionEvaluators.CSharpExpressions
         throw new ArgumentNullException(nameof(model));
       }
 
-      var expressionText = expression.Content;
-      var allDefinitions = model.GetAllDefinitions();
+      var csharpExpression = _expressionService.GetExpression(expression.Content, model);
 
-      var csharpExpression = _expressionService.GetExpression(expressionText, allDefinitions.Keys);
-
-      return new ExpressionResult(csharpExpression.Evaluate(allDefinitions));
+      return new ExpressionResult(csharpExpression.Evaluate(model));
     }
 
     #endregion

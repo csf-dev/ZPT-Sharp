@@ -39,6 +39,15 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="CSF.Utils">
+      <HintPath>..\packages\CSF.Utils.6.0.0\lib\net45\CSF.Utils.dll</HintPath>
+    </Reference>
+    <Reference Include="CSF.Reflection">
+      <HintPath>..\packages\CSF.Reflection.1.0.0\lib\net45\CSF.Reflection.dll</HintPath>
+    </Reference>
+    <Reference Include="CSF.Cli.Parameters">
+      <HintPath>..\packages\CSF.Cli.Parameters.1.0.0\lib\net45\CSF.Cli.Parameters.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AssemblyInfo.cs" />
@@ -73,10 +82,6 @@
       <Project>{16E957BB-347C-4EE1-815F-19AC296FB9E0}</Project>
       <Name>CSF.Zpt</Name>
     </ProjectReference>
-    <ProjectReference Include="..\CSF\CSF\CSF.csproj">
-      <Project>{E563D7BC-1AB1-4AFB-8533-51315437C6E6}</Project>
-      <Name>CSF</Name>
-    </ProjectReference>
     <ProjectReference Include="..\CSF.Zpt.Abstractions\CSF.Zpt.Abstractions.csproj">
       <Project>{8207CD9B-F1C1-4D75-B250-ACDFFBDCB071}</Project>
       <Name>CSF.Zpt.Abstractions</Name>
@@ -84,10 +89,6 @@
     <ProjectReference Include="..\CSF.Zpt.Log4net\CSF.Zpt.Log4net.csproj">
       <Project>{81044439-06CF-44E2-BBF2-3800F1DEB5B1}</Project>
       <Name>CSF.Zpt.Log4net</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\CSF\CSF.Cli.Parameters\CSF.Cli.Parameters.csproj">
-      <Project>{295C293C-60FB-43F3-B728-C2BA5B7516BC}</Project>
-      <Name>CSF.Cli.Parameters</Name>
     </ProjectReference>
     <ProjectReference Include="..\ExpressionEvaluators\CSF.Zpt.ExpressionEvaluators.NotExpressions\CSF.Zpt.ExpressionEvaluators.NotExpressions.csproj">
       <Project>{7B3748AD-DF11-4A80-9258-EA043CD99D7C}</Project>
@@ -109,10 +110,17 @@
       <Project>{842160E4-BDE5-4FA0-ADE5-07554090AA27}</Project>
       <Name>CSF.Zpt.DocumentProviders.XmlLinq</Name>
     </ProjectReference>
+    <ProjectReference Include="..\ExpressionEvaluators\CSF.Zpt.ExpressionEvaluators.CSharpExpressions\CSF.Zpt.ExpressionEvaluators.CSharpExpressions.csproj">
+      <Project>{AA29F7A3-A259-408A-B2FC-E2EFD78BCDFC}</Project>
+      <Name>CSF.Zpt.ExpressionEvaluators.CSharpExpressions</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ExpressionEvaluators\CSF.Zpt.ExpressionEvaluators.CSharpFramework\CSF.Zpt.ExpressionEvaluators.CSharpFramework.csproj">
+      <Project>{3D5A705B-A414-4ACA-AC01-C053047F424E}</Project>
+      <Name>CSF.Zpt.ExpressionEvaluators.CSharpFramework</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <None Include="CSF.Zpt.Cli.nuspec" />
     <None Include="CSF.Zpt.Cli.nuspec.pt" />
   </ItemGroup>
   <ItemGroup>
