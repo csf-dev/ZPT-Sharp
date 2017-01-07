@@ -26,7 +26,7 @@ namespace CSF.Zpt.ExpressionEvaluators.CSharpExpressions.Host
     /// </summary>
     private static readonly string[] MandatoryAssemblyReferences = new [] {
       String.Concat(SYSTEM_CORE_ASSEMBLY_NAME,                    DLL_SUFFIX),
-      String.Concat(CSHARP_EXPRESSION_FRAMEWORK_ASSEMBLY_NAME,    DLL_SUFFIX),
+      String.Concat(AppDomain.CurrentDomain.BaseDirectory, CSHARP_EXPRESSION_FRAMEWORK_ASSEMBLY_NAME, DLL_SUFFIX),
       String.Concat(CODEDOM_ASSEMBLY_NAME,                        DLL_SUFFIX),
     };
 

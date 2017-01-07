@@ -57,7 +57,7 @@ namespace CSF.Zpt.DeploymentTasks
       var buildSuccess = doc.TryGetValue(BUILD_NUMBER, out buildNumber);
       var informationalSuccess = doc.TryGetValue(INFORMATIONAL_VERSION, out informationalVersion);
 
-      if(semanticSuccess && buildSuccess)
+      if(semanticSuccess)
       {
         this.SemanticVersionNumber = semanticVersion;
 
@@ -75,8 +75,12 @@ namespace CSF.Zpt.DeploymentTasks
       {
         this.InformationalVersion = informationalVersion;
       }
+      else
+      {
+        this.InformationalVersion = String.Empty;
+      }
 
-      return semanticSuccess && buildSuccess && informationalSuccess;
+      return semanticSuccess && buildSuccess;
     }
 
     #endregion
