@@ -26,26 +26,11 @@ namespace Test.CSF.Zpt
       _sut = new Mock<PluginAssemblyLoader>() { CallBase = true };
 
       _sut.Setup(x => x.LoadAbsolute(It.IsAny<string>())).Returns(Assembly.GetExecutingAssembly());
-      _sut.Setup(x => x.LoadRelative(It.IsAny<string>())).Returns(Assembly.GetExecutingAssembly());
     }
 
     #endregion
 
     #region tests
-
-    [Test]
-    public void Load_with_relative_path_uses_correct_method()
-    {
-      // Arrange
-      var relPath = "foo";
-
-      // Act
-      _sut.Object.Load(relPath);
-
-      // Assert
-      _sut.Verify(x => x.LoadAbsolute(It.IsAny<string>()), Times.Never());
-      _sut.Verify(x => x.LoadRelative(It.IsAny<string>()), Times.Once());
-    }
 
     [Test]
     public void Load_with_absolute_path_uses_correct_method()
@@ -61,7 +46,6 @@ namespace Test.CSF.Zpt
 
       // Assert
       _sut.Verify(x => x.LoadAbsolute(It.IsAny<string>()), Times.Once());
-      _sut.Verify(x => x.LoadRelative(It.IsAny<string>()), Times.Never());
     }
 
     #endregion
