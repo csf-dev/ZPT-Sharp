@@ -4,7 +4,9 @@
     <Zpt>
       <PluginConfigurationSection>
         <PluginAssemblies>
-          <Assembly Path="CSF.Zpt.DocumentProviders.HtmlHAP.dll" xdt:Transform="Remove" />
+          <Assembly Path="CSF.Zpt.DocumentProviders.HtmlHAP"
+                    xdt:Transform="Remove"
+                    xdt:Locator="Match(Path)" />
         </PluginAssemblies>
       </PluginConfigurationSection>
     </Zpt>

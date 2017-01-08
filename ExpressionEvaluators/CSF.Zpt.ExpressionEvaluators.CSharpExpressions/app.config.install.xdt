@@ -52,7 +52,7 @@
         <CSharpExpressions xdt:Transform="Insert">
           <ExpressionConfigurationSection>
             <Assemblies>
-              <Assembly Name="System.dll" />
+              <Assembly Name="System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
             </Assemblies>
             <Namespaces>
               <Namespace Name="System" />
@@ -63,7 +63,7 @@
       </ExpressionEvaluators>
       <PluginConfigurationSection>
         <PluginAssemblies>
-          <Assembly Path="CSF.Zpt.ExpressionEvaluators.CSharpExpressions.dll"
+          <Assembly Path="CSF.Zpt.ExpressionEvaluators.CSharpExpressions"
                     xdt:Transform="InsertIfMissing"
                     xdt:Locator="Match(Path)" />
         </PluginAssemblies>
