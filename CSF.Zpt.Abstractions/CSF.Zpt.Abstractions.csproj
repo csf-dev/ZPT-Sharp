@@ -107,6 +107,7 @@
     <Compile Include="Rendering\ISourceInfoFactory.cs" />
     <Compile Include="SourceAnnotation\ISourceAnnotator.cs" />
     <Compile Include="SourceAnnotation\ICommentFormatter.cs" />
+    <Compile Include="IAddOnAssemblyFinder.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Target Name="BeforeBuild">

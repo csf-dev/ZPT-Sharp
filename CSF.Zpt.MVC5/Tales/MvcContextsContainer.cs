@@ -13,6 +13,7 @@ namespace CSF.Zpt.MVC.Tales
     #region constants
 
     private const string
+      VIEW_CONTEXT            = "ViewContext",
       VIEW_DATA_DICTIONARY    = "ViewData",
       TEMP_DATA_DICTIONARY    = "TempData",
       APPLICATION_DICTIONARY  = "Application",
@@ -126,6 +127,11 @@ namespace CSF.Zpt.MVC.Tales
 
       case TYPED_MODEL:
         result = ViewContext.ViewData?.Model;
+        output = (result != null);
+        break;
+
+      case VIEW_CONTEXT:
+        result = ViewContext;
         output = (result != null);
         break;
 

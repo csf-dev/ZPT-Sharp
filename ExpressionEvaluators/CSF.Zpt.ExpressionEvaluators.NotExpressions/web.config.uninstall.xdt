@@ -4,8 +4,8 @@
     <Zpt>
       <PluginConfigurationSection>
         <PluginAssemblies>
-          <Assembly Path="CSF.Zpt.DocumentProviders.XmlLinq"
-                    xdt:Transform="InsertIfMissing"
+          <Assembly Path="CSF.Zpt.ExpressionEvaluators.NotExpressions"
+                    xdt:Transform="Remove"
                     xdt:Locator="Match(Path)" />
         </PluginAssemblies>
       </PluginConfigurationSection>

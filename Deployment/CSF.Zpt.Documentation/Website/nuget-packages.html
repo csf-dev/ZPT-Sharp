@@ -27,10 +27,6 @@
     </nav>
     <section class="main_page_content" metal:fill-slot="main_page_content">
       <header><h1>ZPT-Sharp Nuget Packages</h1></header>
-      <p class="note">
-        The following packages are yet to be released to the public Nuget repositories.
-        Please check back once the project has gone to beta release.
-      </p>
       <p>
         The recommended way to install ZPT-Sharp into your own software project is via
         <a href="https://www.nuget.org">the Nuget package manager</a>.
@@ -46,17 +42,12 @@
       </p>
       <p>
         Using a bundle, you should only need install a single package in order to get ZPT-Sharp up and running with your application.
-        All bundles include a default selection of ZPT-Sharp plugins; two document providers and four expression evaluators:
+        All bundles include a default selection of ZPT-Sharp plugins; two document providers and four expression evaluators.
       </p>
-      <ul>
-        <li>HTML documents (HTML Agility Pack)</li>
-        <li>XML documents (XML Linq API)</li>
-        <li><a href="tales/string-expressions.html">String expression evaluator</a></li>
-        <li><a href="tales/not-expressions.html">Not expression evaluator</a></li>
-        <li><a href="tales/path-expressions.html">Path expression evaluator</a></li>
-        <li><a href="tales/csharp-expressions.html">CSharp expression evaluator</a></li>
-      </ul>
-      <h3>ZPT-Sharp for ASP.NET MVC5</h3>
+      <p>
+        These are the available bundle packages:
+      </p>
+      <h3><a href="https://www.nuget.org/packages/Zpt-Sharp-MVC5">ZPT-Sharp for ASP.NET MVC5</a></h3>
       <p>
         This bundle includes the default plugins as well as the components required in order to use ZPT-Sharp as a
         <a href="https://msdn.microsoft.com/en-us/library/system.web.mvc.viewengines(v=vs.118).aspx"><code>ViewEngine</code></a> for ASP.NET MVC5.
@@ -66,13 +57,13 @@
         <a href="asp-net-mvc-view-engine.html">the required change</a>
         to your view-engine registrations and you are ready to write views using ZPT.
       </p>
-      <h3>ZptBuilder application</h3>
+      <h3><a href="https://www.nuget.org/packages/Zpt-Sharp-ZptBuilder">ZPT-Sharp ZptBuilder application</a></h3>
       <p>
         This bundle includes the default plugins and the
         <a href="command-line-renderer.html">ZptBuilder.exe</a> command-line application.
         Choose this bundle to get a functional installation of the offline rendering application.
       </p>
-      <h3>ZPT-Sharp API bundle</h3>
+      <h3><a href="https://www.nuget.org/packages/Zpt-Sharp-API">ZPT-Sharp API bundle</a></h3>
       <p>
         This bundle includes the default plugins and the ZPT-Sharp core logic components only.
         This package is intended for application developers who wish to make use of
@@ -83,62 +74,65 @@
         For advanced scenarios, particularly where you would like a non-default set of plugins installed, the components and plugins are available in separate packages.
         This installation strategy makes it possible to finely tailor what is installed. The trade-off is that you must select multiple packages in order to achieve a useful ZPT-Sharp installation.
       </p>
-      <h3>CSF.Zpt.Abstractions</h3>
+      <p>
+        These are the available component and plugin packages:
+      </p>
+      <h3><a href="https://www.nuget.org/packages/CSF.Zpt.Abstractions">CSF.Zpt.Abstractions (ZPT-Sharp component)</a></h3>
       <p>
         This is a minimal package containing abstract types and interfaces for ZPT-Sharp.
         It exposes no actual functionality and has no dependencies.
       </p>
-      <h3>CSF.Zpt</h3>
+      <h3><a href="https://www.nuget.org/packages/CSF.Zpt">CSF.Zpt (ZPT-Sharp component)</a></h3>
       <p>
         This is the core logic of the ZPT-Sharp API, without any plugins or other content.
         It depends only upon CSF.Zpt.Abstractions.
       </p>
-      <h3>CSF.Zpt.Cli</h3>
+      <h3><a href="https://www.nuget.org/packages/CSF.Zpt.Cli">CSF.Zpt.Cli (ZPT-Sharp component)</a></h3>
       <p>
         This is the logic of the command-line ZptBuilder application, without any plugins or other content.
         It depends only upon CSF.Zpt.
       </p>
-      <h3>CSF.Zpt.MVC</h3>
+      <h3><a href="https://www.nuget.org/packages/CSF.Zpt.MVC5">CSF.Zpt.MVC5 (ZPT-Sharp component)</a></h3>
       <p>
         This is the ASP.NET MVC5 ViewEngine, without any plugins or other content.
-        It depends upon CSF.Zpt and the ASP.NET MVC components.
+        It depends upon CSF.Zpt and the ASP.NET MVC5 components.
       </p>
-      <h3>CSF.Zpt.DocumentProviders.HtmlHAP</h3>
+      <h3><a href="https://www.nuget.org/packages/CSF.Zpt.DocumentProviders.HtmlHAP">ZPT-Sharp HTML document provider plugin</a></h3>
       <p>
         This is the document provider plugin for rendering HTML documents.
         It depends upon CSF.Zpt and <a href="https://htmlagilitypack.codeplex.com/">the HTML Agility Pack</a>.
       </p>
-      <h3>CSF.Zpt.DocumentProviders.XmlLinq</h3>
+      <h3><a href="https://www.nuget.org/packages/CSF.Zpt.DocumentProviders.XmlLinq">ZPT-Sharp XML document provider plugin</a></h3>
       <p>
-        This is the document provider plugin for rendering XML documents using the newer XML/Linq API.
+        This is the document provider plugin for rendering XML documents using the newer XML/Linq API (eg: <code>XDocument</code>).
         It depends only upon CSF.Zpt.
       </p>
-      <h3>CSF.Zpt.DocumentProviders.XmlLegacy</h3>
+      <h3><a href="https://www.nuget.org/packages/CSF.Zpt.DocumentProviders.XmlLegacy">ZPT-Sharp legacy XML document provider plugin</a></h3>
       <p>
-        This is the document provider plugin for rendering XML documents using the older XML API.
+        This is the document provider plugin for rendering XML documents using the older XML API (eg: <code>XmlDocument</code>).
         It depends only upon CSF.Zpt.
       </p>
-      <h3>CSF.Zpt.ExpressionEvaluators.StringExpressions</h3>
+      <h3><a href="https://www.nuget.org/packages/CSF.Zpt.ExpressionEvaluators.StringExpressions">ZPT-Sharp 'string' expression evaluator plugin</a></h3>
       <p>
         This is the expression evaluator plugin for string expressions.
         It depends only upon CSF.Zpt.
       </p>
-      <h3>CSF.Zpt.ExpressionEvaluators.PathExpressions</h3>
+      <h3><a href="https://www.nuget.org/packages/CSF.Zpt.ExpressionEvaluators.PathExpressions">ZPT-Sharp 'path' expression evaluator plugin</a></h3>
       <p>
         This is the expression evaluator plugin for path &amp; local path expressions.
         It depends only upon CSF.Zpt.
       </p>
-      <h3>CSF.Zpt.ExpressionEvaluators.NotExpressions</h3>
+      <h3><a href="https://www.nuget.org/packages/CSF.Zpt.ExpressionEvaluators.NotExpressions">ZPT-Sharp 'not' expression evaluator plugin</a></h3>
       <p>
         This is the expression evaluator plugin for not expressions.
         It depends only upon CSF.Zpt.
       </p>
-      <h3>CSF.Zpt.ExpressionEvaluators.CSharpExpressions</h3>
+      <h3><a href="https://www.nuget.org/packages/CSF.Zpt.ExpressionEvaluators.CSharpExpressions">ZPT-Sharp 'csharp' expression evaluator plugin</a></h3>
       <p>
         This is the expression evaluator plugin for csharp expressions.
         It depends only upon CSF.Zpt.
       </p>
-      <h3>CSF.Zpt.ExpressionEvaluators.PythonExpressions</h3>
+      <h3><a href="https://www.nuget.org/packages/CSF.Zpt.ExpressionEvaluators.PythonExpressions">ZPT-Sharp 'python' expression evaluator plugin</a></h3>
       <p>
         This is the expression evaluator plugin for python expressions.
         It depends upon CSF.Zpt and <a href="http://ironpython.net/">IronPython</a>.

@@ -115,6 +115,8 @@
       <Generator>TextTemplatingFilePreprocessor</Generator>
       <LastGenOutput>ExpressionHostTemplate.cs</LastGenOutput>
     </None>
+    <None Include="web.config.install.xdt" />
+    <None Include="web.config.uninstall.xdt" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\" />

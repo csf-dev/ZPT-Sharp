@@ -16,19 +16,24 @@ namespace CSF.Zpt.ExpressionEvaluators.CSharpExpressions.Host
     #region constants
 
     private static readonly string
-      SYSTEM_CORE_ASSEMBLY_NAME                   = "System.Core",
-      CSHARP_EXPRESSION_FRAMEWORK_ASSEMBLY_NAME   = typeof(IExpressionHost).Namespace,
-      CODEDOM_ASSEMBLY_NAME                       = typeof(CSharpCodeProvider).Namespace,
-      DLL_SUFFIX                                  = ".dll";
+      SYSTEM_CORE_ASSEMBLY_NAME                   = typeof(Enumerable).Assembly.FullName,
+      CSHARP_EXPRESSION_FRAMEWORK_ASSEMBLY_NAME   = typeof(IExpressionHost).Assembly.FullName,
+      CODEDOM_ASSEMBLY_NAME                       = typeof(CSharpCodeProvider).Assembly.FullName;
 
     /// <summary>
     /// A collection of mandatory assemblies which must always be referenced.
     /// </summary>
     private static readonly string[] MandatoryAssemblyReferences = new [] {
-      String.Concat(SYSTEM_CORE_ASSEMBLY_NAME,                    DLL_SUFFIX),
-      String.Concat(AppDomain.CurrentDomain.BaseDirectory, CSHARP_EXPRESSION_FRAMEWORK_ASSEMBLY_NAME, DLL_SUFFIX),
-      String.Concat(CODEDOM_ASSEMBLY_NAME,                        DLL_SUFFIX),
+      SYSTEM_CORE_ASSEMBLY_NAME,
+      CSHARP_EXPRESSION_FRAMEWORK_ASSEMBLY_NAME,
+      CODEDOM_ASSEMBLY_NAME,
     };
+
+    #endregion
+
+    #region fields
+
+    private readonly IAddOnAssemblyFinder _assemblyFinder;
 
     #endregion
 
@@ -109,6 +114,7 @@ namespace CSF.Zpt.ExpressionEvaluators.CSharpExpressions.Host
         .Select(x => x.Name)
         .Union(MandatoryAssemblyReferences)
         .Distinct()
+        .Select(x => _assemblyFinder.GetAssemblyPath(x))
         .ToArray();
     }
 
@@ -173,6 +179,20 @@ namespace CSF.Zpt.ExpressionEvaluators.CSharpExpressions.Host
                                             Resources.LogFormats.CodeToBeCompiledFormat,
                                             code);
       }
+    }
+
+    #endregion
+
+    #region constructor
+
+    /// <summary>
+    /// Initializes a new instance of the
+    /// <see cref="CSF.Zpt.ExpressionEvaluators.CSharpExpressions.Host.ExpressionHostCompiler"/> class.
+    /// </summary>
+    /// <param name="assemblyFinder">Assembly finder.</param>
+    public ExpressionHostCompiler(IAddOnAssemblyFinder assemblyFinder = null)
+    {
+      _assemblyFinder = assemblyFinder?? new DefaultAddOnAssemblyFinder();
     }
 
     #endregion

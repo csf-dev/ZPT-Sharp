@@ -12,6 +12,14 @@ namespace CSF.Zpt
   /// </summary>
   public class PluginAssemblyLoader : IPluginAssemblyLoader
   {
+    #region fields
+
+    private readonly IAddOnAssemblyFinder _assemblyFinder;
+
+    #endregion
+
+    #region methods
+
     /// <summary>
     /// Load the plugin assemblies at the given paths.
     /// </summary>
@@ -37,7 +45,8 @@ namespace CSF.Zpt
         throw new ArgumentNullException(nameof(path));
       }
 
-      return Path.IsPathRooted(path)? LoadAbsolute(path) : LoadRelative(path);
+      var fullPath = _assemblyFinder.GetAssemblyPath(path);
+      return LoadAbsolute(fullPath);
     }
 
     /// <summary>
@@ -58,18 +67,25 @@ namespace CSF.Zpt
       }
     }
 
-    /// <summary>
-    /// Loads an assembly from a relative (non-rooted) path.
-    /// </summary>
-    /// <returns>The assembly.</returns>
-    /// <param name="path">Path.</param>
-    public virtual Assembly LoadRelative(string path)
-    {
-      var currentAssemblyDirectory = new FileInfo(Assembly.GetExecutingAssembly().Location).GetParentDirectory();
-      var absolutePath = Path.Combine(currentAssemblyDirectory.FullName, path);
+    #endregion
 
-      return LoadAbsolute(absolutePath);
+    #region constructor
+
+    /// <summary>
+    /// Framework constructor for internal purposes only - do not use.
+    /// </summary>
+    protected PluginAssemblyLoader() : this(null) {}
+
+    /// <summary>
+    /// Initializes a new instance of the <see cref="CSF.Zpt.PluginAssemblyLoader"/> class.
+    /// </summary>
+    /// <param name="assemblyFinder">Assembly finder.</param>
+    public PluginAssemblyLoader(IAddOnAssemblyFinder assemblyFinder = null)
+    {
+      _assemblyFinder = assemblyFinder?? new DefaultAddOnAssemblyFinder();
     }
+
+    #endregion
   }
 }
 

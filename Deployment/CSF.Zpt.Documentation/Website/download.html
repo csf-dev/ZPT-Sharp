@@ -32,13 +32,21 @@
       <header>
         <h1>Download ZPT-Sharp</h1>
       </header>
-      <h2>Latest version</h2>
+      <h2>Install via NuGet</h2>
+      <p>
+        The recommended way to use ZPT-Sharp in your own projects is to install it via
+        <a href="https://www.nuget.org">the NuGet package manager</a>.
+        Please refer to the <a href="nuget-packages.html">NuGet packages page</a>
+        for a list of the available packages.
+      </p>
+      <h2>Zip downloads</h2>
       <tal:block define="downloadBase string:https://github.com/csf-dev/ZPT-Sharp/releases/download;
                          version options/version;
                          versionExtra string:(${options/releaseType});
                          versionString string:v${version}"
                  on-error="structure string:&lt;p class=&quot;note&quot;&gt;There is presently no stable release, please visit the Github releases page to view unstable releases.&lt;/p&gt;">
       <p>
+        ZPT-Sharp is also available as a series of zip packages for those who do not wish to use NuGet.
         The following downloads are for the most recent release:
         <strong><span tal:content="versionString">v0.0.0</span> <span tal:content="versionExtra | default">(release)</span></strong>.
       </p>

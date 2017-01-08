@@ -1,13 +1,12 @@
 ﻿<?xml version="1.0"?>
 <package xmlns:metal="http://xml.zope.org/namespaces/metal"
          xmlns:tal="http://xml.zope.org/namespaces/tal">
-  <metadata>
+  <metadata tal:define="semVer options/version;
+                        extraVer options/versionExtra;
+                        versionSuffix csharp:!String.IsNullOrEmpty(extraVer)? String.Concat(&quot;-&quot;, extraVer) : String.Empty;
+                        fullVersion string:$semVer$versionSuffix;">
     <id>Zpt-Sharp-API</id>
-    <version tal:define="semVer options/version;
-                         extraVer options/versionExtra;
-                         versionSuffix csharp:!String.IsNullOrEmpty(extraVer)? String.Concat(&quot;-&quot;, extraVer) : String.Empty;
-                         fullVersion string:$semVer$versionSuffix;"
-             tal:content="fullVersion">0.0.0</version>
+    <version tal:content="fullVersion">0.0.0</version>
     <title>ZPT-Sharp API bundle</title>
     <authors>CSF Software Ltd</authors>
     <licenseUrl>https://opensource.org/licenses/MIT</licenseUrl>
@@ -18,28 +17,29 @@
     <dependencies>
       <dependency id="CSF.Zpt"
                   version="[0.0.0,1.0.0)"
-                  tal:attributes="version string:[${options/version},${options/nextBreakingVersion})" />
+                  tal:attributes="version string:[$fullVersion,${options/nextBreakingVersion})" />
       <dependency id="CSF.Zpt.DocumentProviders.HtmlHAP"
                   version="[0.0.0,1.0.0)"
-                  tal:attributes="version string:[${options/version},${options/nextBreakingVersion})" />
+                  tal:attributes="version string:[$fullVersion,${options/nextBreakingVersion})" />
       <dependency id="CSF.Zpt.DocumentProviders.XmlLinq"
                   version="[0.0.0,1.0.0)"
-                  tal:attributes="version string:[${options/version},${options/nextBreakingVersion})" />
+                  tal:attributes="version string:[$fullVersion,${options/nextBreakingVersion})" />
       <dependency id="CSF.Zpt.ExpressionEvaluators.NotExpressions"
                   version="[0.0.0,1.0.0)"
-                  tal:attributes="version string:[${options/version},${options/nextBreakingVersion})" />
+                  tal:attributes="version string:[$fullVersion,${options/nextBreakingVersion})" />
       <dependency id="CSF.Zpt.ExpressionEvaluators.StringExpressions"
                   version="[0.0.0,1.0.0)"
-                  tal:attributes="version string:[${options/version},${options/nextBreakingVersion})" />
+                  tal:attributes="version string:[$fullVersion,${options/nextBreakingVersion})" />
       <dependency id="CSF.Zpt.ExpressionEvaluators.PathExpressions"
                   version="[0.0.0,1.0.0)"
-                  tal:attributes="version string:[${options/version},${options/nextBreakingVersion})" />
+                  tal:attributes="version string:[$fullVersion,${options/nextBreakingVersion})" />
       <dependency id="CSF.Zpt.ExpressionEvaluators.CSharpExpressions"
                   version="[0.0.0,1.0.0)"
-                  tal:attributes="version string:[${options/version},${options/nextBreakingVersion})" />
+                  tal:attributes="version string:[$fullVersion,${options/nextBreakingVersion})" />
     </dependencies>
   </metadata>
   <files>
     <file src="app.config.install.xdt" target="content" />
+    <file src="web.config.install.xdt" target="content" />
   </files>
 </package>
