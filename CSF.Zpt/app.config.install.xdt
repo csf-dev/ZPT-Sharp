@@ -7,7 +7,7 @@
   </configSections>
   
   <configSections>
-    <sectionGroup name="CSF">
+    <sectionGroup name="CSF" xdt:Locator="Match(name)">
       <sectionGroup name="Zpt" xdt:Transform="Remove" xdt:Locator="Match(name)" />
       <sectionGroup name="Zpt" xdt:Transform="Insert">
           <section name="PluginConfigurationSection" type="CSF.Zpt.PluginConfigurationSection, CSF.Zpt" />
