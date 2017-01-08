@@ -1,3 +1,9 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="node2" href="$classCSF_1_1Zpt_1_1MVC_1_1ZptView.html" title="CSF.Zpt.MVC.ZptView" alt="" coords="108,5,267,32"/>
+<area shape="rect" id="node2" href="$classCSF_1_1Zpt_1_1ExpressionEvaluators_1_1CSharpExpressions_1_1ExpressionConfigurationSection.html" title="Configuration section for CSharp expressions. " alt="" coords="341,85,625,141"/>
+<area shape="rect" id="node3" href="$classCSF_1_1Zpt_1_1MVC_1_1ZptViewEngineConfigurationSection.html" title="CSF.Zpt.MVC.ZptViewEngine\lConfigurationSection" alt="" coords="384,165,583,206"/>
+<area shape="rect" id="node4" href="$classCSF_1_1Zpt_1_1PluginConfigurationSection.html" title="Implementation of IPluginConfiguration using a System.Configuration.ConfigurationSection. " alt="" coords="389,230,578,271"/>
+<area shape="rect" id="node5" href="$interfaceCSF_1_1Zpt_1_1ExpressionEvaluators_1_1CSharpExpressions_1_1IExpressionConfiguration.html" title="Represents the configuration for CSharp expressions. " alt="" coords="5,33,293,74"/>
+<area shape="rect" id="node6" href="$classCSF_1_1Zpt_1_1ExpressionEvaluators_1_1CSharpExpressions_1_1FallbackExpressionConfiguration.html" title="Rrepresents a set of fallback/default configuration for IExpressionConfiguration, should no other imp..." alt="" coords="355,5,611,61"/>
+<area shape="rect" id="node7" href="$interfaceCSF_1_1Zpt_1_1IPluginConfiguration.html" title="Interface for a type capable of providing information about installed plugins. " alt="" coords="53,237,246,264"/>
+<area shape="rect" id="node8" href="$interfaceCSF_1_1Zpt_1_1MVC_1_1IZptViewEngineConfiguration.html" title="CSF.Zpt.MVC.IZptViewEngine\lConfiguration" alt="" coords="48,169,251,210"/>
 </map>

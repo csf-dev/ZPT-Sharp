@@ -45,6 +45,9 @@ var hierarchy =
     [ "CSF.Zpt.Rendering.IActionCanceller", "interfaceCSF_1_1Zpt_1_1Rendering_1_1IActionCanceller.html", [
       [ "CSF.Zpt.Rendering.CancellationToken", "classCSF_1_1Zpt_1_1Rendering_1_1CancellationToken.html", null ]
     ] ],
+    [ "CSF.Zpt.IAddOnAssemblyFinder", "interfaceCSF_1_1Zpt_1_1IAddOnAssemblyFinder.html", [
+      [ "CSF.Zpt.DefaultAddOnAssemblyFinder", "classCSF_1_1Zpt_1_1DefaultAddOnAssemblyFinder.html", null ]
+    ] ],
     [ "CSF.Zpt.Tal.IAttributeHandler", "interfaceCSF_1_1Zpt_1_1Tal_1_1IAttributeHandler.html", [
       [ "CSF.Zpt.Tal.AttributesAttributeHandler", "classCSF_1_1Zpt_1_1Tal_1_1AttributesAttributeHandler.html", null ],
       [ "CSF.Zpt.Tal.ConditionAttributeHandler", "classCSF_1_1Zpt_1_1Tal_1_1ConditionAttributeHandler.html", null ],

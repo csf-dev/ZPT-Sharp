@@ -9,6 +9,8 @@ var namespaceCSF_1_1Zpt =
     [ "SourceAnnotation", "namespaceCSF_1_1Zpt_1_1SourceAnnotation.html", "namespaceCSF_1_1Zpt_1_1SourceAnnotation" ],
     [ "Tal", "namespaceCSF_1_1Zpt_1_1Tal.html", "namespaceCSF_1_1Zpt_1_1Tal" ],
     [ "Tales", "namespaceCSF_1_1Zpt_1_1Tales.html", "namespaceCSF_1_1Zpt_1_1Tales" ],
+    [ "DefaultAddOnAssemblyFinder", "classCSF_1_1Zpt_1_1DefaultAddOnAssemblyFinder.html", "classCSF_1_1Zpt_1_1DefaultAddOnAssemblyFinder" ],
+    [ "IAddOnAssemblyFinder", "interfaceCSF_1_1Zpt_1_1IAddOnAssemblyFinder.html", "interfaceCSF_1_1Zpt_1_1IAddOnAssemblyFinder" ],
     [ "IPluginAssemblyLoader", "interfaceCSF_1_1Zpt_1_1IPluginAssemblyLoader.html", "interfaceCSF_1_1Zpt_1_1IPluginAssemblyLoader" ],
     [ "IPluginConfiguration", "interfaceCSF_1_1Zpt_1_1IPluginConfiguration.html", "interfaceCSF_1_1Zpt_1_1IPluginConfiguration" ],
     [ "IXmlUrlResolverFactory", "interfaceCSF_1_1Zpt_1_1IXmlUrlResolverFactory.html", "interfaceCSF_1_1Zpt_1_1IXmlUrlResolverFactory" ],

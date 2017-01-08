@@ -63,6 +63,8 @@ var NAVTREEINDEX0 =
 "classCSF_1_1Zpt_1_1BatchRendering_1_1RenderingJobFactory.html":[1,0,0,0,0,18],
 "classCSF_1_1Zpt_1_1BatchRendering_1_1RenderingJobFactory.html#a78102226a6c54b10c8d055f58d5857b6":[1,0,0,0,0,18,0],
 "classCSF_1_1Zpt_1_1BatchRendering_1_1RenderingJobFactory.html#ac9a61dbba4634bd2f3946f2d791d37e1":[1,0,0,0,0,18,1],
+"classCSF_1_1Zpt_1_1DefaultAddOnAssemblyFinder.html":[1,0,0,0,9],
+"classCSF_1_1Zpt_1_1DefaultAddOnAssemblyFinder.html#a0bdcb036a27898d0fff9b6e079c61fc1":[1,0,0,0,9,0],
 "classCSF_1_1Zpt_1_1DocumentProviders_1_1HtmlZptDocumentProvider.html":[1,0,0,0,1,0],
 "classCSF_1_1Zpt_1_1DocumentProviders_1_1HtmlZptDocumentProvider.html#a0435bf34c706a9242d033d90cd7d192d":[1,0,0,0,1,0,1],
 "classCSF_1_1Zpt_1_1DocumentProviders_1_1HtmlZptDocumentProvider.html#a1d863c103fde3b4a913636d8b5b0d370":[1,0,0,0,1,0,3],
@@ -247,7 +249,5 @@ var NAVTREEINDEX0 =
 "classCSF_1_1Zpt_1_1ExpressionEvaluators_1_1CSharpExpressions_1_1AssemblyReferenceConfigurationCollection.html#ab6ed5ba7a184b31f6efb3c96fe37269f":[1,0,0,0,2,0,2,1],
 "classCSF_1_1Zpt_1_1ExpressionEvaluators_1_1CSharpExpressions_1_1AssemblyReferenceConfigurationCollection.html#ab750b3f84cfefaefecce50091986ec44":[1,0,0,0,2,0,2,5],
 "classCSF_1_1Zpt_1_1ExpressionEvaluators_1_1CSharpExpressions_1_1AssemblyReferenceConfigurationCollection.html#ac655658b48a0f7ff10adcef7c9fed5e9":[1,0,0,0,2,0,2,6],
-"classCSF_1_1Zpt_1_1ExpressionEvaluators_1_1CSharpExpressions_1_1AssemblyReferenceConfigurationElement.html":[1,0,0,0,2,0,3],
-"classCSF_1_1Zpt_1_1ExpressionEvaluators_1_1CSharpExpressions_1_1AssemblyReferenceConfigurationElement.html#a61cae094fd7892f39411899a60f4a6ae":[1,0,0,0,2,0,3,0],
-"classCSF_1_1Zpt_1_1ExpressionEvaluators_1_1CSharpExpressions_1_1CSharpAssemblyExpressionEvaluator.html":[1,0,0,0,2,0,4]
+"classCSF_1_1Zpt_1_1ExpressionEvaluators_1_1CSharpExpressions_1_1AssemblyReferenceConfigurationElement.html":[1,0,0,0,2,0,3]
 };

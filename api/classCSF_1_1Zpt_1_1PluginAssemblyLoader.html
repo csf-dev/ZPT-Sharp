@@ -39,7 +39,7 @@ ga('send', 'pageview');
  <tr style="height: 56px;">
   <td style="padding-left: 0.5em;">
    <div id="projectname"><a href="../index.html">ZPT-Sharp</a>
-   &#160;<span id="projectnumber">v0.8.0</span>
+   &#160;<span id="projectnumber">v0.8.1</span>
    </div>
    <div id="projectbrief">Zope Page Templates for .NET</div>
   </td>
@@ -115,6 +115,7 @@ $(document).ready(function(){initNavTree('classCSF_1_1Zpt_1_1PluginAssemblyLoade
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pro-methods">Protected Member Functions</a> &#124;
 <a href="classCSF_1_1Zpt_1_1PluginAssemblyLoader-members.html">List of all members</a>  </div>
   <div class="headertitle">
 <div class="title">CSF.Zpt.PluginAssemblyLoader Class Reference</div>  </div>
@@ -149,13 +150,77 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a549661934087a2f6c36fd24156c5aca8"><td class="memItemLeft" align="right" valign="top">virtual Assembly&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCSF_1_1Zpt_1_1PluginAssemblyLoader.html#a549661934087a2f6c36fd24156c5aca8">LoadAbsolute</a> (string path)</td></tr>
 <tr class="memdesc:a549661934087a2f6c36fd24156c5aca8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Loads an assembly from an absolute (rooted) path.  <a href="#a549661934087a2f6c36fd24156c5aca8">More...</a><br /></td></tr>
 <tr class="separator:a549661934087a2f6c36fd24156c5aca8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a22eab7930f312eeb97bc840e7ecde989"><td class="memItemLeft" align="right" valign="top">virtual Assembly&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCSF_1_1Zpt_1_1PluginAssemblyLoader.html#a22eab7930f312eeb97bc840e7ecde989">LoadRelative</a> (string path)</td></tr>
-<tr class="memdesc:a22eab7930f312eeb97bc840e7ecde989"><td class="mdescLeft">&#160;</td><td class="mdescRight">Loads an assembly from a relative (non-rooted) path.  <a href="#a22eab7930f312eeb97bc840e7ecde989">More...</a><br /></td></tr>
-<tr class="separator:a22eab7930f312eeb97bc840e7ecde989"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ada1d599e26032fa8fe62b5e69dd1b3e0"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCSF_1_1Zpt_1_1PluginAssemblyLoader.html#ada1d599e26032fa8fe62b5e69dd1b3e0">PluginAssemblyLoader</a> (<a class="el" href="interfaceCSF_1_1Zpt_1_1IAddOnAssemblyFinder.html">IAddOnAssemblyFinder</a> assemblyFinder=null)</td></tr>
+<tr class="memdesc:ada1d599e26032fa8fe62b5e69dd1b3e0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializes a new instance of the <a class="el" href="classCSF_1_1Zpt_1_1PluginAssemblyLoader.html" title="Default implementation of IPluginAssemblyLoader. ">CSF.Zpt.PluginAssemblyLoader</a> class.  <a href="#ada1d599e26032fa8fe62b5e69dd1b3e0">More...</a><br /></td></tr>
+<tr class="separator:ada1d599e26032fa8fe62b5e69dd1b3e0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-methods"></a>
+Protected Member Functions</h2></td></tr>
+<tr class="memitem:aec0cbb9c1057b87e7f3b2e57f86cfe0a"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCSF_1_1Zpt_1_1PluginAssemblyLoader.html#aec0cbb9c1057b87e7f3b2e57f86cfe0a">PluginAssemblyLoader</a> ()</td></tr>
+<tr class="memdesc:aec0cbb9c1057b87e7f3b2e57f86cfe0a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Framework constructor for internal purposes only - do not use.  <a href="#aec0cbb9c1057b87e7f3b2e57f86cfe0a">More...</a><br /></td></tr>
+<tr class="separator:aec0cbb9c1057b87e7f3b2e57f86cfe0a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Default implementation of <a class="el" href="interfaceCSF_1_1Zpt_1_1IPluginAssemblyLoader.html" title="Interface for a type which loads plugin assemblies. ">IPluginAssemblyLoader</a>. </p>
-</div><h2 class="groupheader">Member Function Documentation</h2>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a class="anchor" id="aec0cbb9c1057b87e7f3b2e57f86cfe0a"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">CSF.Zpt.PluginAssemblyLoader.PluginAssemblyLoader </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Framework constructor for internal purposes only - do not use. </p>
+
+</div>
+</div>
+<a class="anchor" id="ada1d599e26032fa8fe62b5e69dd1b3e0"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">CSF.Zpt.PluginAssemblyLoader.PluginAssemblyLoader </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="interfaceCSF_1_1Zpt_1_1IAddOnAssemblyFinder.html">IAddOnAssemblyFinder</a>&#160;</td>
+          <td class="paramname"><em>assemblyFinder</em> = <code>null</code></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Initializes a new instance of the <a class="el" href="classCSF_1_1Zpt_1_1PluginAssemblyLoader.html" title="Default implementation of IPluginAssemblyLoader. ">CSF.Zpt.PluginAssemblyLoader</a> class. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">assemblyFinder</td><td>Assembly finder.</td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
 <a class="anchor" id="a276ccb1e2c05060f74c0060413945e50"></a>
 <div class="memitem">
 <div class="memproto">
@@ -257,39 +322,6 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a22eab7930f312eeb97bc840e7ecde989"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">virtual Assembly CSF.Zpt.PluginAssemblyLoader.LoadRelative </td>
-          <td>(</td>
-          <td class="paramtype">string&#160;</td>
-          <td class="paramname"><em>path</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Loads an assembly from a relative (non-rooted) path. </p>
-<dl class="section return"><dt>Returns</dt><dd>The assembly.</dd></dl>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">path</td><td>Path.</td></tr>
-  </table>
-  </dd>
-</dl>
-
-</div>
-</div>
 <hr/>The documentation for this class was generated from the following file:<ul>
 <li>/home/craig/Projects/CSF/CSF.Zpt/CSF.Zpt/PluginAssemblyLoader.cs</li>
 </ul>
@@ -299,7 +331,7 @@ Public Member Functions</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="namespaceCSF.html">CSF</a></li><li class="navelem"><a class="el" href="namespaceCSF_1_1Zpt.html">Zpt</a></li><li class="navelem"><a class="el" href="classCSF_1_1Zpt_1_1PluginAssemblyLoader.html">PluginAssemblyLoader</a></li>
-    <li class="footer">Generated on Sat Jan 7 2017 19:33:26 for ZPT-Sharp by
+    <li class="footer">Generated on Sun Jan 8 2017 16:53:27 for ZPT-Sharp by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.8 </li>
   </ul>
