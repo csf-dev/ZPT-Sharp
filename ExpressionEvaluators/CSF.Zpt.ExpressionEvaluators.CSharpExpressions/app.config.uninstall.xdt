@@ -16,7 +16,9 @@
       </ExpressionEvaluators>
       <PluginConfigurationSection>
         <PluginAssemblies>
-          <Assembly Path="CSF.Zpt.ExpressionEvaluators.CSharpExpressions.dll" xdt:Transform="Remove" />
+          <Assembly Path="CSF.Zpt.ExpressionEvaluators.CSharpExpressions"
+                    xdt:Transform="Remove"
+                    xdt:Locator="Match(Path)" />
         </PluginAssemblies>
       </PluginConfigurationSection>
     </Zpt>

@@ -150,6 +150,7 @@
     <Compile Include="Resources\SourceAnnotationFormats.Designer.cs">
       <DependentUpon>SourceAnnotationFormats.resx</DependentUpon>
     </Compile>
+    <Compile Include="DefaultAddOnAssemblyFinder.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

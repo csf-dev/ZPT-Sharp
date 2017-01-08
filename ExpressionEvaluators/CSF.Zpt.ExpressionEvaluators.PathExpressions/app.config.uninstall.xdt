@@ -4,7 +4,9 @@
     <Zpt>
       <PluginConfigurationSection>
         <PluginAssemblies>
-          <Assembly Path="CSF.Zpt.ExpressionEvaluators.PathExpressions.dll" xdt:Transform="Remove" />
+          <Assembly Path="CSF.Zpt.ExpressionEvaluators.PathExpressions"
+                    xdt:Transform="InsertIfMissing"
+                    xdt:Locator="Match(Path)" />
         </PluginAssemblies>
       </PluginConfigurationSection>
     </Zpt>
