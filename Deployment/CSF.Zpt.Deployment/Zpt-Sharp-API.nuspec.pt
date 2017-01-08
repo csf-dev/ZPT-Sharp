@@ -40,5 +40,6 @@
   </metadata>
   <files>
     <file src="app.config.install.xdt" target="content" />
+    <file src="web.config.install.xdt" target="content" />
   </files>
 </package>
