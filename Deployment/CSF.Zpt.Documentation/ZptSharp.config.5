@@ -39,7 +39,7 @@ This will make \fBpath:\fR the default expression type, where no prefix is given
 You should also nominate the default HTML and XML document provider plugins.
 These default providers are used when a ZPT document is to be created, a provider type has not been explicitly specified, but it is known whether it is either HTML or XML formatted.
 .PP
-The following example shows the relevant content to install three expression evaluator plugins, two document provider plugins, and nominate the defaults accordingly.
+The following example shows the relevant content to install four expression evaluator plugins, two document provider plugins, and nominate the defaults accordingly.
 .PP
 .nf
 <configuration>
@@ -58,11 +58,12 @@ The following example shows the relevant content to install three expression eva
                                   DefaultXmlDocumentProvider="CSF.Zpt.DocumentProviders.XmlLinqZptDocumentProvider"
                                   DefaultExpressionEvaluator="CSF.Zpt.ExpressionEvaluators.PathExpressions.PathExpressionEvaluator">
         <PluginAssemblies>
-          <Assembly Path="CSF.Zpt.DocumentProviders.HtmlHAP.dll" />
-          <Assembly Path="CSF.Zpt.DocumentProviders.XmlLinq.dll" />
-          <Assembly Path="CSF.Zpt.ExpressionEvaluators.PathExpressions.dll" />
-          <Assembly Path="CSF.Zpt.ExpressionEvaluators.StringExpressions.dll" />
-          <Assembly Path="CSF.Zpt.ExpressionEvaluators.NotExpressions.dll" />
+          <Assembly Path="CSF.Zpt.DocumentProviders.HtmlHAP" />
+          <Assembly Path="CSF.Zpt.DocumentProviders.XmlLinq" />
+          <Assembly Path="CSF.Zpt.ExpressionEvaluators.CSharpExpressions" />
+          <Assembly Path="CSF.Zpt.ExpressionEvaluators.PathExpressions" />
+          <Assembly Path="CSF.Zpt.ExpressionEvaluators.StringExpressions" />
+          <Assembly Path="CSF.Zpt.ExpressionEvaluators.NotExpressions" />
         </PluginAssemblies>
       </PluginConfigurationSection>
     </Zpt>
@@ -70,10 +71,10 @@ The following example shows the relevant content to install three expression eva
 </configuration>
 .fi
 .PP
-Each \fI<Assembly>\fR element, in its \fIPath\fR attribute, lists a single .NET assembly containing one or more plugins.
-The assembly paths are either absolute or relative paths.
-Where a relative path is given, it is evaluated based upon the path to the \fICSF.Zpt.dll\fR assembly.
-If the plugin assembly is in the same directory as that main ZPT-Sharp assembly then just the filename alone is sufficient (as shown above).
+Each \fI<Assembly>\fR element indicates the name of a single .NET assembly which contains one or more plugins.
+The assembly must be located in the application's "private bin" directory, which is typically the same directory which contains the \fICSF.Zpt.dll\fR assembly.
+The assembly name is the result which would be obtained by interrogating \fIAssembly.FullName\fR for that assembly.
+Typically though, this will be the same as the assembly's filename, without the \fI.dll\fR extension.
 The default expression evaluator, XML document provider and HTML document provider are indicated by listing their namespace-qualified type names in the appropriate configuration attributes.
 .SH CONFIGURING CSHARP EXPRESSIONS
 .PP
@@ -86,7 +87,7 @@ Further assemblies/namespaces may be chosen via expressions in ZPT documents.
 .PP
 The default configuration (which is also used if the configuration section below is not present) is as follows:
 .RS
-The assembly \fISystem.dll\fR will be referenced
+The assembly \fISystem\fR will be referenced
 .RE
 .RS
 The namespaces \fISystem\fR and \fISystem.Linq\fR will be imported (without aliases)
@@ -130,9 +131,12 @@ Each permits as many or as few entries as desired; repeat the \fIAssembly\fR or 
 </configuration>
 .fi
 .PP
-Within the assembly references, the \fBNAME\fR placeholder refers to the filename of a referenced assembly.
-That assembly must be deployed into the same directory as the application's assemblies.
-The name is the full assembly filename including the \fI.dll\fR extension.
+Within the assembly references, the \fBNAME\fR placeholder refers to the full name of a referenced assembly.
+The assembly full-name is the result which would be obtained by interrogating \fIAssembly.FullName\fR for that assembly.
+For assemblies which are not installed in the Global Assembly Cache, the assembly must also be deployed into the application's "private bin" directory.
+The private bin directory is typically the same directory which contains the \fICSF.Zpt.dll\fR assembly.
+It is often possible to use short-names (without the Version, Culture and PublicKeyToken information) for assemblies which are in the private bin directory.
+On the other hand, full names must be used for assemblies which are installed elsewhere (such as the GAC).
 .PP
 For namespace imports, the \fBNAMESPACE\fR placeholder is the name of the namespace (for example \fISystem.Linq\fR).
 The \fIAlias\fR attribute is optional; when it is provided, the imported namespace will be assigned to the named alias.

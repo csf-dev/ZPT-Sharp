@@ -72,11 +72,12 @@
         </p>
         <h2>Assembly references</h2>
         <p>
-          The <code>csassembly:</code> expression is put to best use in <code>tal:define</code> attributes in order to
-          define a special assembly-reference TALES variable.  The content of the assembly-reference expression is the
-          name of a .NET assembly file (including its <kbd>.dll</kbd> suffix).
+          The <code>csassembly:</code> expression is put to best use in <code>tal:define</code> attributes in order to define a special assembly-reference TALES variable.
+          The content of the assembly-reference expression is the full name of a .NET assembly.
+          That full name is the result which would be obtained if <code>Assembly.FullName</code> were interrogated for that assembly.
           This named assembly must be either in the same directory as the application's main executable, in the
           <code>bin</code> directory for a MVC web application or available in the computer's Global Assembly Cache.
+          For assemblies which are in the application's directory, it might be possible to use just the shortened name instead, which is typically the same as the assembly filename, omitting the <kbd>.dll</kbd> suffix.
         </p>
         <p>
           Whilst this variable has no particular direct use in any expressions (it is a throwaway definition),
@@ -84,7 +85,7 @@
           reference that assembly.
         </p>
         <h3>Example</h3>
-        <pre><code class="html">&lt;div tal:define="myTypes csassembly:My.Types.dll"&gt;
+        <pre><code class="html">&lt;div tal:define="myTypes csassembly:My.Types"&gt;
   &lt;p&gt;
     This expression will be compiled with a reference to &lt;code&gt;My.Types.dll&lt;/code&gt;:
     &lt;span tal:replace="csharp:DateTime.Now.ToString(&amp;quot;yyyy-MM-dd&amp;quot;)"&gt;2015-01-01&lt;/span&gt;.
@@ -163,7 +164,7 @@
           <code>MyTypes.SomeNamespace</code> and has a boolean property named <code>IsActive</code>.
         </p>
         <pre><code class="html">&lt;div tal:define="items here/Items;
-                 itemAssembly csassembly:MyTypes.dll;
+                 itemAssembly csassembly:MyTypes;
                  ns1 csnamespace:System.Collections.Generic;
                  ns2 csnamespace:MyTypes.SomeNamespace;
                  itemType cstype:items IEnumerable&amp;lt;MyItem&amp;gt;"&gt;
