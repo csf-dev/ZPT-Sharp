@@ -15,7 +15,7 @@ Information specific to **running the unit/integration tests** is available in t
 [UNIT_TESTS.md]: https://github.com/csf-dev/ZPT-Sharp/blob/master/UNIT_TESTS.md
 
 ## Current status
-The current status of the project - as of `v0.8.0` - is that we have reached the first public **beta** release.
+The current status is that - as of `v0.8.1` - the project has reached a public **beta** release.
 All of the important features are implemented and tested, and there are no future-planned changes which are not backwards-compatible.
 
 I would not recommend using ZPT-Sharp quite yet for production use.
@@ -23,6 +23,14 @@ Whilst there is a good suite of integration tests for ZPT-Sharp, the second beta
 This sample application will approximate real world™ usage of ZPT-Sharp and may of course expose issues which need resolving before final release.
 I would certainly welcome evaluation and exploration of the project though.
 Please have a try of the view engine and/or the **ZptBuilder.exe** application and report any bugs to Github if you find them.
+
+## Getting ZPT-Sharp
+ZPT-Sharp is packaged and ready for download and installation.
+The recommended mechanism is to install one of the available [ZPT-Sharp NuGet packages].
+There are also a number of [downloadable Zip packages] linked from the documentation website.
+
+[ZPT-Sharp NuGet packages]: http://csf-dev.github.io/ZPT-Sharp/nuget-packages.html
+[downloadable Zip packages]: http://csf-dev.github.io/ZPT-Sharp/download.html
 
 ## Packaging
 It is planned (in the more distant future) to release ZPT-Sharp as a package for Debian GNU/Linux.
