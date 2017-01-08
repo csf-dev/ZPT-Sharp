@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<configuration xmlns:xdt="http://schemas.microsoft.com/XML-Document-Transform">
+  <CSF>
+    <Zpt>
+      <PluginConfigurationSection>
+        <PluginAssemblies>
+          <Assembly Path="CSF.Zpt.ExpressionEvaluators.PythonExpressions"
+                    xdt:Transform="Remove"
+                    xdt:Locator="Match(Path)" />
+        </PluginAssemblies>
+      </PluginConfigurationSection>
+    </Zpt>
+  </CSF>
+</configuration>

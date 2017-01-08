@@ -126,6 +126,8 @@
   <ItemGroup>
     <None Include="packages.config" />
     <None Include="CSF.Zpt.MVC5.nuspec.pt" />
+    <None Include="web.config.install.xdt" />
+    <None Include="web.config.uninstall.xdt" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\" />

@@ -69,5 +69,7 @@
     <None Include="CSF.Zpt.ExpressionEvaluators.StringExpressions.nuspec.pt" />
     <None Include="app.config.install.xdt" />
     <None Include="app.config.uninstall.xdt" />
+    <None Include="web.config.install.xdt" />
+    <None Include="web.config.uninstall.xdt" />
   </ItemGroup>
 </Project>
