@@ -47,13 +47,16 @@ namespace CSF.Zpt.MVC.Tales
 
     public override IModel CreateChildModel()
     {
-      var output = new MvcTalesModel(this, this.Root, EvaluatorRegistry, model: this.ModelObject);
-      return output;
+      return new MvcTalesModel(this, this.Root, EvaluatorRegistry, model: this.ModelObject) {
+        ViewContext = ViewContext
+      };
     }
 
     protected override Model CreateTypedSiblingModel()
     {
-      return new MvcTalesModel(this.Parent, this.Root, EvaluatorRegistry, model: this.ModelObject);
+      return new MvcTalesModel(this.Parent, this.Root, EvaluatorRegistry, model: this.ModelObject) {
+        ViewContext = ViewContext
+      };
     }
 
     #endregion

@@ -1,13 +1,12 @@
 ﻿<?xml version="1.0"?>
 <package xmlns:metal="http://xml.zope.org/namespaces/metal"
          xmlns:tal="http://xml.zope.org/namespaces/tal">
-  <metadata>
+  <metadata tal:define="semVer options/version;
+                        extraVer options/versionExtra;
+                        versionSuffix csharp:!String.IsNullOrEmpty(extraVer)? String.Concat(&quot;-&quot;, extraVer) : String.Empty;
+                        fullVersion string:$semVer$versionSuffix;">
     <id>CSF.Zpt.Abstractions</id>
-    <version tal:define="semVer options/version;
-                         extraVer options/versionExtra;
-                         versionSuffix csharp:!String.IsNullOrEmpty(extraVer)? String.Concat(&quot;-&quot;, extraVer) : String.Empty;
-                         fullVersion string:$semVer$versionSuffix;"
-             tal:content="fullVersion">0.0.0</version>
+    <version tal:content="fullVersion">0.0.0</version>
     <title>CSF.Zpt.Abstractions (ZPT-Sharp component)</title>
     <authors>CSF Software Ltd</authors>
     <licenseUrl>https://opensource.org/licenses/MIT</licenseUrl>

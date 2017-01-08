@@ -73,9 +73,9 @@
       <Project>{81044439-06CF-44E2-BBF2-3800F1DEB5B1}</Project>
       <Name>CSF.Zpt.Log4net</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\CSF.Zpt.MVC\CSF.Zpt.MVC.csproj">
+    <ProjectReference Include="..\..\CSF.Zpt.MVC5\CSF.Zpt.MVC5.csproj">
       <Project>{9B4DF12E-6E04-4C25-AD16-58434C18DE8A}</Project>
-      <Name>CSF.Zpt.MVC</Name>
+      <Name>CSF.Zpt.MVC5</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
@@ -86,5 +86,6 @@
     <None Include="Zpt-Sharp-MVC5.nuspec.pt" />
     <None Include="Zpt-Sharp-ZptBuilder.nuspec.pt" />
     <None Include="app.config.install.xdt" />
+    <None Include="web.config.install.xdt" />
   </ItemGroup>
 </Project>

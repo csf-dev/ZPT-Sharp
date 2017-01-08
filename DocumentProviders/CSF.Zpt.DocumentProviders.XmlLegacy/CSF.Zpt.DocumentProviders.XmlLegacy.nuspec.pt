@@ -1,13 +1,12 @@
 ﻿<?xml version="1.0"?>
 <package xmlns:metal="http://xml.zope.org/namespaces/metal"
          xmlns:tal="http://xml.zope.org/namespaces/tal">
-  <metadata>
+  <metadata tal:define="semVer options/version;
+                        extraVer options/versionExtra;
+                        versionSuffix csharp:!String.IsNullOrEmpty(extraVer)? String.Concat(&quot;-&quot;, extraVer) : String.Empty;
+                        fullVersion string:$semVer$versionSuffix;">
     <id>CSF.Zpt.DocumentProviders.XmlLegacy</id>
-    <version tal:define="semVer options/version;
-                         extraVer options/versionExtra;
-                         versionSuffix csharp:!String.IsNullOrEmpty(extraVer)? String.Concat(&quot;-&quot;, extraVer) : String.Empty;
-                         fullVersion string:$semVer$versionSuffix;"
-             tal:content="fullVersion">0.0.0</version>
+    <version tal:content="fullVersion">0.0.0</version>
     <title>ZPT-Sharp leacy XML document provider plugin</title>
     <authors>CSF Software Ltd</authors>
     <licenseUrl>https://opensource.org/licenses/MIT</licenseUrl>
@@ -18,10 +17,10 @@
     <dependencies>
       <dependency id="CSF.Zpt"
                   version="[0.0.0,1.0.0)"
-                  tal:attributes="version string:[${options/version},${options/nextBreakingVersion})" />
+                  tal:attributes="version string:[$fullVersion,${options/nextBreakingVersion})" />
     </dependencies>
     <frameworkAssemblies>
-      <frameworkAssembly assemblyName="System.Xml.dll" />
+      <frameworkAssembly assemblyName="System.Xml" />
     </frameworkAssemblies>
   </metadata>
   <files>
@@ -29,5 +28,7 @@
     <file src="bin/Release/CSF.Zpt.DocumentProviders.XmlLegacy.xml" target="lib/net45" />
     <file src="app.config.install.xdt" target="content" />
     <file src="app.config.uninstall.xdt" target="content" />
+    <file src="web.config.install.xdt" target="content" />
+    <file src="web.config.uninstall.xdt" target="content" />
   </files>
 </package>

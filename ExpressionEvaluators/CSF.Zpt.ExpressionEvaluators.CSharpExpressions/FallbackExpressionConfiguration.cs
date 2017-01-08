@@ -15,7 +15,7 @@ namespace CSF.Zpt.ExpressionEvaluators.CSharpExpressions
     #region constants
 
     private static readonly string[] DefaultAssemblies = new [] {
-      "System.dll",
+      typeof(String).Assembly.FullName,
     };
 
     private static readonly string[] DefaultNamespaces = new [] {

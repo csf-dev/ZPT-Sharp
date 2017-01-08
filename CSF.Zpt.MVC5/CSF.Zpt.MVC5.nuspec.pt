@@ -1,13 +1,12 @@
 ﻿<?xml version="1.0"?>
 <package xmlns:metal="http://xml.zope.org/namespaces/metal"
          xmlns:tal="http://xml.zope.org/namespaces/tal">
-  <metadata>
+  <metadata tal:define="semVer options/version;
+                        extraVer options/versionExtra;
+                        versionSuffix csharp:!String.IsNullOrEmpty(extraVer)? String.Concat(&quot;-&quot;, extraVer) : String.Empty;
+                        fullVersion string:$semVer$versionSuffix;">
     <id>CSF.Zpt.MVC5</id>
-    <version tal:define="semVer options/version;
-                         extraVer options/versionExtra;
-                         versionSuffix csharp:!String.IsNullOrEmpty(extraVer)? String.Concat(&quot;-&quot;, extraVer) : String.Empty;
-                         fullVersion string:$semVer$versionSuffix;"
-             tal:content="fullVersion">0.0.0</version>
+    <version tal:content="fullVersion">0.0.0</version>
     <title>CSF.Zpt.MVC5 (ZPT-Sharp component)</title>
     <authors>CSF Software Ltd</authors>
     <licenseUrl>https://opensource.org/licenses/MIT</licenseUrl>
@@ -18,17 +17,9 @@
     <dependencies>
       <dependency id="CSF.Zpt"
                   version="[0.0.0,1.0.0)"
-                  tal:attributes="version string:[${options/version},${options/nextBreakingVersion})" />
+                  tal:attributes="version string:[$fullVersion,${options/nextBreakingVersion})" />
+      <dependency id="Microsoft.AspNet.Mvc" version="[5.2.3,6.0.0)" />
     </dependencies>
-    <frameworkAssemblies>
-      <frameworkAssembly assemblyName="Microsoft.Web.Infrastructure.dll" />
-      <frameworkAssembly assemblyName="System.Web.Helpers.dll" />
-      <frameworkAssembly assemblyName="System.Web.Mvc.dll" />
-      <frameworkAssembly assemblyName="System.Web.Razor.dll" />
-      <frameworkAssembly assemblyName="System.Web.WebPages.Deployment.dll" />
-      <frameworkAssembly assemblyName="System.Web.WebPages.dll" />
-      <frameworkAssembly assemblyName="System.Web.WebPages.Razor.dll" />
-    </frameworkAssemblies>
   </metadata>
   <files>
     <file src="bin/Release/CSF.Zpt.MVC5.dll" target="lib/net45" />
