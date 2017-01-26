@@ -94,7 +94,7 @@ namespace CSF.Zpt
     {
       return this.Plugins
         .Cast<Plugin>()
-        .Select(x => x.Path)
+        .Select(x => x.Name)
         .ToArray();
     }
 
