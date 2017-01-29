@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using CSF.Collections;
+using System.Linq;
 
 namespace CSF.Zpt.ExpressionEvaluators.CSharpExpressions.Spec
 {
@@ -67,9 +68,13 @@ namespace CSF.Zpt.ExpressionEvaluators.CSharpExpressions.Spec
     /// current <see cref="CSF.Zpt.ExpressionEvaluators.CSharpExpressions.Spec.ExpressionSpecification"/>; otherwise, <c>false</c>.</returns>
     public bool Equals(ExpressionSpecification other)
     {
-      if(other == null)
+      if(ReferenceEquals(null, other))
       {
         return false;
+      }
+      else if(ReferenceEquals(this, other))
+      {
+        return true;
       }
 
       bool
@@ -79,6 +84,59 @@ namespace CSF.Zpt.ExpressionEvaluators.CSharpExpressions.Spec
         namespacesEqual = Namespaces.AreContentsSameAs(other.Namespaces);
 
       return (textEqual && variablesEqual && assembliesEqual && namespacesEqual);
+    }
+
+    /// <summary>
+    /// Determines whether the specified <see cref="System.Object"/> is equal to the current <see cref="CSF.Zpt.ExpressionEvaluators.CSharpExpressions.Spec.ExpressionSpecification"/>.
+    /// </summary>
+    /// <param name="obj">The <see cref="System.Object"/> to compare with the current <see cref="CSF.Zpt.ExpressionEvaluators.CSharpExpressions.Spec.ExpressionSpecification"/>.</param>
+    /// <returns><c>true</c> if the specified <see cref="System.Object"/> is equal to the current
+    /// <see cref="CSF.Zpt.ExpressionEvaluators.CSharpExpressions.Spec.ExpressionSpecification"/>; otherwise, <c>false</c>.</returns>
+    public override bool Equals(object obj)
+    {
+      var other = obj as ExpressionSpecification;
+
+      if(ReferenceEquals(null, other))
+      {
+        return false;
+      }
+
+      return Equals(other);
+    }
+
+    /// <summary>
+    /// Serves as a hash function for a
+    /// <see cref="CSF.Zpt.ExpressionEvaluators.CSharpExpressions.Spec.ExpressionSpecification"/> object.
+    /// </summary>
+    /// <returns>A hash code for this instance that is suitable for use in hashing algorithms and data structures such as a hash table.</returns>
+    public override int GetHashCode()
+    {
+      int
+        text = Text.GetHashCode(),
+        variables = GetSortedCollectionHashCode(Variables),
+        assemblies = GetSortedCollectionHashCode(Assemblies),
+        namespaces = GetSortedCollectionHashCode(Namespaces);
+
+      return text ^ variables ^ assemblies ^ namespaces;
+    }
+
+    /// <summary>
+    /// Gets a hash code for the collection.
+    /// </summary>
+    /// <returns>The hash code.</returns>
+    /// <param name="collection">Collection.</param>
+    /// <typeparam name="TCollection">The 1st type parameter.</typeparam>
+    private int GetSortedCollectionHashCode<TCollection>(IEnumerable<TCollection> collection)
+      where TCollection : IComparable
+    {
+      if(collection == null)
+      {
+        throw new ArgumentNullException(nameof(collection));
+      }
+
+      return collection
+        .OrderBy(x => x)
+        .Aggregate(0, (acc, next) => acc ^= next.GetHashCode());
     }
 
     #endregion
