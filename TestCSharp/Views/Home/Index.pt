@@ -1,0 +1,8 @@
+﻿<html>
+<head>
+<title>CSharp expression test</title>
+</head>
+<body>
+<p tal:content="csharp:DateTime.Now.ToString()"></p>
+</body>
+</html>
