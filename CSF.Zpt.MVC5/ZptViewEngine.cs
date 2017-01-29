@@ -214,7 +214,8 @@ namespace CSF.Zpt.MVC
 
     private IZptViewEngineConfiguration GetConfiguration()
     {
-      return ConfigurationHelper.GetSection<ZptViewEngineConfigurationSection>();
+      var reader = new ConfigurationReader();
+      return reader.ReadSection<ZptViewEngineConfigurationSection>();
     }
 
     private IRenderingSettings CreateRenderingOptions()
