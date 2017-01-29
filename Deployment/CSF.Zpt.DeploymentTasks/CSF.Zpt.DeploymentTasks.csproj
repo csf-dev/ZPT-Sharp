@@ -35,7 +35,7 @@
     <Reference Include="Microsoft.Build.Utilities.v4.0" />
     <Reference Include="System.IO.Compression" />
     <Reference Include="CSF.IniDocuments">
-      <HintPath>..\..\packages\CSF.IniDocuments.6.0.0\lib\net45\CSF.IniDocuments.dll</HintPath>
+      <HintPath>..\..\packages\CSF.IniDocuments.6.0.1\lib\net45\CSF.IniDocuments.dll</HintPath>
     </Reference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

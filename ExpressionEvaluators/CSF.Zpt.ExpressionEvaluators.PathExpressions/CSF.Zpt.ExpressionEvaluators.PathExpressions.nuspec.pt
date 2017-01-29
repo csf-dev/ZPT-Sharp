@@ -18,6 +18,7 @@
       <dependency id="CSF.Zpt"
                   version="[0.0.0,1.0.0)"
                   tal:attributes="version string:[$fullVersion,${options/nextBreakingVersion})" />
+      <dependency id="CSF.Reflection" version="[1.0.1,2.0.0)" />
     </dependencies>
   </metadata>
   <files>

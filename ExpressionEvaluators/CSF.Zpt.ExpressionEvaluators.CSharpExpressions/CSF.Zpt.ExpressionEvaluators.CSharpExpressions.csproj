@@ -61,7 +61,7 @@
       <HintPath>..\..\packages\CSF.Utils.6.0.0\lib\net45\CSF.Utils.dll</HintPath>
     </Reference>
     <Reference Include="CSF.Configuration">
-      <HintPath>..\..\packages\CSF.Configuration.1.0.0\lib\net45\CSF.Configuration.dll</HintPath>
+      <HintPath>..\..\packages\CSF.Configuration.1.1.0\lib\net45\CSF.Configuration.dll</HintPath>
     </Reference>
     <Reference Include="CSF.Caches">
       <HintPath>..\..\packages\CSF.Caches.1.0.0\lib\net45\CSF.Caches.dll</HintPath>
