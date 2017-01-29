@@ -44,6 +44,7 @@
     <Compile Include="Person.cs" />
     <Compile Include="Host\TestExpressionHostCompiler.cs" />
     <Compile Include="Spec\TestExpressionSpecificationFactory.cs" />
+    <Compile Include="Spec\TestExpressionSpecification.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
