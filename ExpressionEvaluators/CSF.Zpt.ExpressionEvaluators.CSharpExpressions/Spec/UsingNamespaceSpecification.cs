@@ -5,7 +5,7 @@ namespace CSF.Zpt.ExpressionEvaluators.CSharpExpressions.Spec
   /// <summary>
   /// Represents the specification for a namespace imported into an expression, via a <c>using</c> directive.
   /// </summary>
-  public class UsingNamespaceSpecification : IEquatable<UsingNamespaceSpecification>
+  public class UsingNamespaceSpecification : IEquatable<UsingNamespaceSpecification>, IComparable<UsingNamespaceSpecification>, IComparable
   {
     #region properties
 
@@ -79,6 +79,44 @@ namespace CSF.Zpt.ExpressionEvaluators.CSharpExpressions.Spec
       return (other != null
               && this.Namespace == other.Namespace
               && this.Alias == other.Alias);
+    }
+
+    /// <summary>
+    /// Compares the current instance to a given <c>System.Object</c>.
+    /// </summary>
+    /// <returns>
+    /// A number indicating whether the current instance should be considered greater, less or equal to the
+    /// given instance.
+    /// </returns>
+    /// <param name="other">The object with which to compare.</param>
+    public int CompareTo(object other)
+    {
+      var spec = other as UsingNamespaceSpecification;
+
+      if(spec == null)
+      {
+        return -1;
+      }
+
+      return CompareTo(spec);
+    }
+
+    /// <summary>
+    /// Compares the current instance to a given <see cref="UsingNamespaceSpecification"/>.
+    /// </summary>
+    /// <returns>
+    /// A number indicating whether the current instance should be considered greater, less or equal to the
+    /// given instance.
+    /// </returns>
+    /// <param name="other">The object with which to compare.</param>
+    public int CompareTo(UsingNamespaceSpecification other)
+    {
+      if(other == null)
+      {
+        return 1;
+      }
+
+      return Namespace.CompareTo(other.Namespace);
     }
 
     #endregion
