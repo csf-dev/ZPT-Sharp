@@ -5,6 +5,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
+using CSF.Zpt.MVC;
 
 namespace ZptSample
 {
@@ -32,6 +33,9 @@ namespace ZptSample
       AreaRegistration.RegisterAllAreas();
       RegisterGlobalFilters(GlobalFilters.Filters);
       RegisterRoutes(RouteTable.Routes);
+
+      ViewEngines.Engines.Clear();
+      ViewEngines.Engines.Add(new ZptViewEngine());
     }
   }
 }
