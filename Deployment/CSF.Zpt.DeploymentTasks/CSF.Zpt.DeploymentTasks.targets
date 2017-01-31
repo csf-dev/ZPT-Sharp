@@ -81,6 +81,15 @@
   -->
   <UsingTask TaskName="FixDocTag" AssemblyFile="$(TasksPath)" />
 
+  <!--  ************************************************************************
+        ** SpliceHelloWorldCode
+  
+        This task copies the contents of three code files into an output file.
+        Those three source files forming the contents of the "Hello world"
+        sample application.
+        ************************************************************************
+  -->
+  <UsingTask TaskName="SpliceHelloWorldCode" AssemblyFile="$(TasksPath)" />
 
   <!--  ************************************************************************
         ** StampAssemblyInfo
@@ -463,6 +472,16 @@
     </ItemGroup>
     <FixDocTag InputFile="$(TemporaryBuildPath)\Website\Pass1\Shared\cli-docs.html" MacroName="content" />
     <FixDocTag InputFile="$(TemporaryBuildPath)\Website\Pass1\Shared\config-docs.html" MacroName="content" />
+    <PropertyGroup>
+      <ModelFile>$(PathToSolutionRoot)\Deployment\CSF.Zpt.Documentation\HelloWorld\Models\HomeModel.cs</ModelFile>
+      <ControllerFile>$(PathToSolutionRoot)\Deployment\CSF.Zpt.Documentation\HelloWorld\Controllers\HomeController.cs</ControllerFile>
+      <ViewFile>$(PathToSolutionRoot)\Deployment\CSF.Zpt.Documentation\HelloWorld\Views\Home\Index.pt</ViewFile>
+      <OutputFile>$(TemporaryBuildPath)\Website\Pass1\Shared\HelloWorldCode.html</OutputFile>
+    </PropertyGroup>
+    <SpliceHelloWorldCode ModelFile="$(ModelFile)"
+                          ControllerFile="$(ControllerFile)"
+                          ViewFile="$(ViewFile)"
+                          OutputFile="$(OutputFile)" />
     <Exec Command="$(PathToSolutionRoot)\CSF.Zpt.Cli\bin\Release\ZptBuilder.exe &quot;$(TemporaryBuildPath)\Website\Pass1&quot; -p &quot;*.html&quot; -o &quot;$(TemporaryBuildPath)\Website\Pass2&quot; -i &quot;$(TemporaryBuildPath)\Website\Pass1\Shared&quot; --keyword-options &quot;baseUrl=$(WebsiteUrlRoot);buildDate=@(BuildTimestamp);version=@(SemanticVersion);releaseType=@(InformationalVersion);copyrightYear=@(CopyrightYear)&quot;" />
     <Copy SourceFiles="@(WebsiteSupportFiles)" DestinationFiles="@(WebsiteSupportFiles-&gt;'$(TemporaryBuildPath)\Website\Pass2\%(RecursiveDir)%(Filename)%(Extension)')" />
   </Target>
