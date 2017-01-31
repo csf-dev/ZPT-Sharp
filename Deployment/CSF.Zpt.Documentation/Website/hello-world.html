@@ -1,0 +1,101 @@
+<!doctype html>
+<html tal:define="activePage string:hello_world_sample">
+<head metal:use-macro="documents/Shared/general-page.html/macros/common_document_head">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="utf-8">
+<title metal:fill-slot="document_title">'Hello world' with ZPT-Sharp</title>
+<base href="." />
+<style type="text/css">
+@import url(css/styles.css);
+@import url(css/dummy.css);
+</style>
+<script data-main="js/config/main" type="text/javascript" src="js/lib/require.min.js"></script>
+<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.4.0/styles/default.min.css">
+</head>
+<body metal:use-macro="documents/Shared/general-page.html/macros/common_document_body" class="page_hello_world_sample">
+<div class="content_wrapper">
+  <header class="page_header dummy">
+    Dummy content
+  </header>
+  <div class="main_page_area">
+    <nav>
+      <h2>Navigation menu</h2>
+      <ul class="active_introduction dummy">
+        <li class="introduction"><a href=".">Introduction</a></li>
+        <li class="other_page"><a href="dummy.html">Dummy page</a></li>
+      </ul>
+    </nav>
+    <section class="main_page_content" metal:fill-slot="main_page_content">
+      <header>
+        <h1>'Hello world' with ZPT-Sharp</h1>
+      </header>
+      <p>
+        This brief tutorial will take you through the process of creating your very first web application
+        with ZPT-Sharp.  Here you will:
+      </p>
+      <ol>
+        <li>Install ZPT-Sharp to an empty ASP.NET MVC5 project, using the default configuration</li>
+        <li>Add a model class and an MVC controller</li>
+        <li>Write your first ZPT-Sharp view</li>
+      </ol>
+      <h2>Installing ZPT-Sharp</h2>
+      <p>
+        In your IDE of choice, begin by creating a new ASP.NET MVC project, using MVC version 5.
+        From NuGet, install the package
+        <a href="https://www.nuget.org/packages/Zpt-Sharp-MVC5/"><strong>ZPT-Sharp for ASP.NET MVC5</strong></a>.
+      </p>
+      <p>
+        In the <strong>Global.asax.cs</strong> file, add the following code within the <code>Application_Start</code> method.
+        You will also need a <code>using</code> directive for <code>CSF.Zpt.MVC</code>:
+      </p>
+      <pre><code class="csharp">ViewEngines.Engines.Clear();
+ViewEngines.Engines.Add(new ZptViewEngine());</code></pre>
+      <h2>Add a controller &amp; a model</h2>
+      <p>
+        <em>This step is no different to any other MVC application</em>;
+        the controller and model do not need any special design for ZPT-Sharp.
+        Add the following classes to your application's <strong>Models</strong>
+        and <strong>Controllers</strong> directories, respectively.
+      </p>
+      <h3>HomeModel.cs</h3>
+      <pre><code class="csharp" metal:use-macro="documents/Shared/HelloWorldCode.html/model">// Code for HomeModel.cs</code></pre>
+      <h3>HomeController.cs</h3>
+      <pre><code class="csharp" metal:use-macro="documents/Shared/HelloWorldCode.html/controller">// Code for HomeController.cs</code></pre>
+      <h2>Add your first ZPT-Sharp view</h2>
+      <p>
+        Create the directory <strong>Views/Home</strong> and place the following file inside.
+        Give it the filename <strong>Index.pt</strong>.
+      </p>
+      <pre><code class="html" metal:use-macro="documents/Shared/HelloWorldCode.html/view">&lt;!-- Code for Index.pt --&gt;</code></pre>
+      <h2>The application is complete</h2>
+      <p>
+        <em>The sample application is ready to run.</em>
+        If you start the website you should now see the content from the MVC controller rendered in the sample view.
+      </p>
+      <p>
+        This brief tutorial has demonstrated the following aspects of ZPT-Sharp:
+      </p>
+      <ul>
+        <li>
+          <abbr title="Template Attribute Language">TAL</abbr>
+          <a href="tal/content-replace.html">content and replace</a>
+          attributes
+        </li>
+        <li>
+          A
+          <abbr title="Template Attribute Language Expression Syntax">TALES</abbr>
+          <a href="tales/path-expressions.html">path expression</a>
+        </li>
+        <li>
+          A TALES
+          <a href="tales/csharp-expressions.html">csharp expression</a>
+        </li>
+      </ul>
+    </section>
+  </div>
+</div>
+<footer class="page_footer dummy">
+  Dummy content
+</footer>
+</body>
+</html>
