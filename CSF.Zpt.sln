@@ -90,6 +90,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CSF.Zpt.Documentation", "CS
 		Deployment\CSF.Zpt.Documentation\Website style guide.txt = Deployment\CSF.Zpt.Documentation\Website style guide.txt
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZptSample", "ZptSample\ZptSample.csproj", "{346CA409-C481-45A8-9504-34DE5FB15868}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -121,6 +123,12 @@ Global
 		{22159AD4-0444-4DF7-9F8D-A4DE8FCBB33D}.Deploy|Any CPU.Build.0 = Release|Any CPU
 		{22159AD4-0444-4DF7-9F8D-A4DE8FCBB33D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{22159AD4-0444-4DF7-9F8D-A4DE8FCBB33D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{346CA409-C481-45A8-9504-34DE5FB15868}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{346CA409-C481-45A8-9504-34DE5FB15868}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{346CA409-C481-45A8-9504-34DE5FB15868}.Deploy|Any CPU.ActiveCfg = Release|Any CPU
+		{346CA409-C481-45A8-9504-34DE5FB15868}.Deploy|Any CPU.Build.0 = Release|Any CPU
+		{346CA409-C481-45A8-9504-34DE5FB15868}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{346CA409-C481-45A8-9504-34DE5FB15868}.Release|Any CPU.Build.0 = Release|Any CPU
 		{3D5A705B-A414-4ACA-AC01-C053047F424E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{3D5A705B-A414-4ACA-AC01-C053047F424E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3D5A705B-A414-4ACA-AC01-C053047F424E}.Deploy|Any CPU.ActiveCfg = Release|Any CPU
