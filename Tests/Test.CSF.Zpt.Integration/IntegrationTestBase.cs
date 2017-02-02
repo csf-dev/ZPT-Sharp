@@ -68,6 +68,13 @@ namespace Test.CSF.Zpt.Integration
       }
     }
 
+    protected IIntegrationTestConfiguration Config
+    {
+      get {
+        return _config;
+      }
+    }
+
     #endregion
 
     #region setup & teardown

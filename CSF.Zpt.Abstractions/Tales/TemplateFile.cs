@@ -21,6 +21,21 @@ namespace CSF.Zpt.Tales
 
     #endregion
 
+    #region fields
+
+    /// <summary>
+    /// Gets the document which is represented by the current instance.
+    /// </summary>
+    /// <value>The document.</value>
+    public IZptDocument Document
+    {
+      get {
+        return _document;
+      }
+    }
+
+    #endregion
+
     #region methods
 
     /// <summary>

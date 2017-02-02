@@ -199,6 +199,21 @@ namespace CSF.Zpt.Tales
                                           model: this.ModelObject);
     }
 
+    /// <summary>
+    /// Gets a collection of the current model's built-in definitions.
+    /// </summary>
+    /// <returns>The built-in definitions.</returns>
+    protected override IDictionary<string, object> GetBuiltinDefinitions()
+    {
+      var output = new Dictionary<string,object>();
+
+      output.Add(BuiltinContextsContainer.OPTIONS, this.GetKeywordOptions());
+      output.Add(BuiltinContextsContainer.REPEAT, this.GetRepetitionSummaries());
+      output.Add(BuiltinContextsContainer.HERE, this.ModelObject);
+
+      return output;
+    }
+
     #endregion
 
     #region constructor

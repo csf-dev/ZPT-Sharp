@@ -619,6 +619,18 @@ namespace CSF.Zpt.DocumentProviders
       return this.Node.OwnerDocument == typedOther.Node.OwnerDocument;
     }
 
+    /// <summary>
+    /// Creates a new <see cref="IZptDocument"/> which contains only the current element and its children.
+    /// </summary>
+    /// <returns>A new document instance.</returns>
+    public override IZptDocument CreateDocumentFromThisElement()
+    {
+      var doc = new HtmlDocument();
+      doc.DocumentNode.AppendChild(Node);
+
+      return new ZptHtmlDocument(doc, GetSourceInfo());
+    }
+
     private bool IsInNamespace(ZptNamespace nSpace, HtmlNode node)
     {
       if(nSpace == null)

@@ -1,0 +1,18 @@
+<html>
+<head>
+<title>Load plugin test 4</title>
+</head>
+<body>
+<div>
+  <ul>
+    <li tal:repeat="item here/Items">
+      <div tal:define="docName item/DocumentName;
+                       doc load:here/Documents/?docName/macros/content"
+           tal:replace="structure doc">
+        This content should be replaced by the rendered document
+      </div>
+    </li>
+  </ul>
+</div>
+</body>
+</html>
