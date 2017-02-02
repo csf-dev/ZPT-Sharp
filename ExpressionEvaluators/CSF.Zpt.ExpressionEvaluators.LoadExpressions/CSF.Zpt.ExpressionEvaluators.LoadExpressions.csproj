@@ -8,7 +8,12 @@
     <RootNamespace>CSF.Zpt.ExpressionEvaluators.LoadExpressions</RootNamespace>
     <AssemblyName>CSF.Zpt.ExpressionEvaluators.LoadExpressions</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <ProjectTitle>CSF.Zpt.ExpressionEvaluators.LoadExpressions</ProjectTitle>
+    <ProjectDescription>Implementation of IExpressionEvaluator for 'load' expressions</ProjectDescription>
+    <PathToSolutionRoot>..\..</PathToSolutionRoot>
   </PropertyGroup>
+  <Import Project="$(PathToSolutionRoot)\Common\SolutionProperties.targets" />
+  <Import Project="$(PathToSolutionRoot)\Deployment\CSF.Zpt.DeploymentTasks\CSF.Zpt.DeploymentTasks.targets" />
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
@@ -18,14 +23,18 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <ConsolePause>false</ConsolePause>
+    <CheckForOverflowUnderflow>true</CheckForOverflowUnderflow>
+    <DocumentationFile>bin\Debug\CSF.Zpt.ExpressionEvaluators.LoadExpressions.xml</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>full</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release</OutputPath>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <ConsolePause>false</ConsolePause>
+    <CheckForOverflowUnderflow>true</CheckForOverflowUnderflow>
+    <DefineConstants>TRACE</DefineConstants>
+    <DocumentationFile>bin\Release\CSF.Zpt.ExpressionEvaluators.LoadExpressions.xml</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -57,5 +66,18 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>ExceptionMessages.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+  </ItemGroup>
+  <Target Name="BeforeBuild">
+    <CallTarget Targets="StampAssemblyInfo" />
+  </Target>
+  <Target Name="AfterBuild">
+    <CallTarget Targets="RestoreStubAssemblyInfo" />
+  </Target>
+  <ItemGroup>
+    <None Include="app.config.install.xdt" />
+    <None Include="app.config.uninstall.xdt" />
+    <None Include="web.config.install.xdt" />
+    <None Include="web.config.uninstall.xdt" />
+    <None Include="CSF.Zpt.ExpressionEvaluators.LoadExpressions.nuspec.pt" />
   </ItemGroup>
 </Project>
