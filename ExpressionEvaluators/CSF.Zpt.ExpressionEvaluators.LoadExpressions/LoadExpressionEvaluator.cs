@@ -20,6 +20,7 @@ namespace CSF.Zpt.ExpressionEvaluators.LoadExpressions
       typeof(IZptDocument),
       typeof(TemplateFile),
       typeof(MetalMacro),
+      typeof(IZptElement),
     };
 
     #endregion
@@ -130,6 +131,10 @@ namespace CSF.Zpt.ExpressionEvaluators.LoadExpressions
       {
         return Render((MetalMacro) document, context);
       }
+      else if(document is IZptElement)
+      {
+        return Render((IZptElement) document, context);
+      }
       else
       {
         var message = String.Format(Resources.ExceptionMessages.UnsupportedDocumentTypeFormat,
@@ -171,7 +176,17 @@ namespace CSF.Zpt.ExpressionEvaluators.LoadExpressions
         throw new ArgumentNullException(nameof(macro));
       }
 
-      return Render(macro.Element.CreateDocumentFromThisElement(), context);
+      return Render(macro.Element, context);
+    }
+
+    protected virtual string Render(IZptElement element, IRenderingContext context)
+    {
+      if(element == null)
+      {
+        throw new ArgumentNullException(nameof(element));
+      }
+
+      return Render(element.CreateDocumentFromThisElement(), context);
     }
 
     #endregion

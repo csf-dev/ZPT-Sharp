@@ -85,9 +85,9 @@ namespace Test.CSF.Zpt.Integration
       {
         Documents = new TemplateDirectory(sourceDir);
         Items = new List<SampleClass>() {
-          new SampleClass() { Name = "One" },
-          new SampleClass() { Name = "Two" },
-          new SampleClass() { Name = "Three" },
+          new SampleClass() { Name = "One",   DocumentName = "shared01" },
+          new SampleClass() { Name = "Two",   DocumentName = "shared02" },
+          new SampleClass() { Name = "Three", DocumentName = "shared03" },
         };
       }
     }
@@ -95,6 +95,7 @@ namespace Test.CSF.Zpt.Integration
     public class SampleClass
     {
       public string Name { get; set; }
+      public string DocumentName { get; set; }
     }
 
     #endregion
