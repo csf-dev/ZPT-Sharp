@@ -5,7 +5,7 @@
       <PluginConfigurationSection>
         <PluginAssemblies>
           <Assembly Name="CSF.Zpt.ExpressionEvaluators.PythonExpressions"
-                    xdt:Transform="InsertIfMissing"
+                    xdt:Transform="Remove"
                     xdt:Locator="Match(Path)" />
         </PluginAssemblies>
       </PluginConfigurationSection>
