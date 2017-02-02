@@ -1,0 +1,13 @@
+﻿<html>
+<head>
+<title>Load plugin test 1</title>
+</head>
+<body>
+<div tal:define="doc load:here/Documents/shared01.html"
+     tal:content="structure doc">
+  <p>
+    This content should all be replaced by the loaded template.
+  </p>
+</div>
+</body>
+</html>

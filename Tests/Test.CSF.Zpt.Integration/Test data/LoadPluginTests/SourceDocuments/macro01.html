@@ -1,0 +1,17 @@
+﻿<html>
+<head>
+<title>Shared macro document</title>
+</head>
+<body>
+  <div metal:define-macro="test1">
+    <p>Content from the macro, before the slot-filler</p>
+    <p metal:define-slot="first">Default slot content here</p>
+    <p>Content from the macro, after the slot-filler</p>
+  </div>
+  <div metal:define-macro="test2">
+    <p>This is content from a different macro</p>
+    <p metal:define-slot="first">Default slot content here</p>
+    <p>This is content from a different macro</p>
+  </div>
+</body>
+</html>

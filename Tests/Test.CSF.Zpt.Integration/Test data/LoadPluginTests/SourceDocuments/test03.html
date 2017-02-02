@@ -1,0 +1,18 @@
+﻿<html>
+<head>
+<title>Load plugin test 3</title>
+</head>
+<body>
+<div>
+  <ul>
+    <li tal:repeat="item here/Items"
+        tal:define="docName item/DocumentName;
+                    docFullName string:${docName}.html;
+                    doc load:here/Documents/?docFullName"
+        tal:content="doc">
+      This content should be replaced by the rendered document
+    </li>
+  </ul>
+</div>
+</body>
+</html>
