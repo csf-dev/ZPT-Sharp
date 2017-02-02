@@ -8,7 +8,7 @@
   <p>This content will be replaced</p>
   <p metal:fill-slot="first">
     Here's some slot-filling content
-    <span tal:condition="item" tal:omit-tag="string:1"><br />Your item name is '<span tal:replace="item/Name" />'.</span>
+    <span tal:condition="item | nothing" tal:omit-tag="string:1"><br />Your item name is '<span tal:replace="item/Name" />'.</span>
   </p>
   <p>This content will be replaced</p>
 </div>

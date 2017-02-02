@@ -61,7 +61,7 @@ namespace Test.CSF.Zpt.Integration
 
     protected override void PerformExtraSetup()
     {
-      _model = new ModelClass();
+      _model = new ModelClass(GetSourcePath(Config));
 
       base.PerformExtraSetup();
     }
@@ -79,15 +79,12 @@ namespace Test.CSF.Zpt.Integration
     {
       public TemplateDirectory Documents { get; private set; }
 
-      public string Name { get; private set; }
-
       public IEnumerable<SampleClass> Items { get; private set; }
 
-      public ModelClass(DirectoryInfo sourceDir, string name)
+      public ModelClass(DirectoryInfo sourceDir)
       {
         Documents = new TemplateDirectory(sourceDir);
-        Name = name;
-        Items = new LinkedList<SampleClass>() {
+        Items = new List<SampleClass>() {
           new SampleClass() { Name = "One" },
           new SampleClass() { Name = "Two" },
           new SampleClass() { Name = "Three" },

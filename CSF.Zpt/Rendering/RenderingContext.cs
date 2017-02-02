@@ -174,6 +174,31 @@ namespace CSF.Zpt.Rendering
       return new OriginalAttributeValuesCollection(this.OriginalAttributes);
     }
 
+    /// <summary>
+    /// Copies the state of the current instance to a model value container.
+    /// </summary>
+    /// <param name="container">The container.</param>
+    public virtual void CopyTo(IModelValueContainer container)
+    {
+      if(container == null)
+      {
+        throw new ArgumentNullException(nameof(container));
+      }
+
+      var talDefinitions = TalModel.GetAllDefinitions();
+      var metalDefinitions = MetalModel.GetAllDefinitions();
+
+      foreach(var key in talDefinitions.Keys)
+      {
+        container.TalModel.AddLocal(key, talDefinitions[key]);
+      }
+
+      foreach(var key in metalDefinitions.Keys)
+      {
+        container.MetalModel.AddLocal(key, talDefinitions[key]);
+      }
+    }
+
     #endregion
 
     #region constructors

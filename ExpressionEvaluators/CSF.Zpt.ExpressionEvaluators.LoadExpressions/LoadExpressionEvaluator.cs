@@ -1,6 +1,8 @@
 ﻿using System;
 using CSF.Zpt.Tales;
 using CSF.Zpt.Rendering;
+using CSF.Zpt.Metal;
+using System.Linq;
 
 namespace CSF.Zpt.ExpressionEvaluators.LoadExpressions
 {
@@ -13,6 +15,12 @@ namespace CSF.Zpt.ExpressionEvaluators.LoadExpressions
     #region constants
 
     private static readonly string Prefix = "load";
+
+    private Type[] SupportedTypes = new [] {
+      typeof(IZptDocument),
+      typeof(TemplateFile),
+      typeof(MetalMacro),
+    };
 
     #endregion
 
@@ -99,7 +107,7 @@ namespace CSF.Zpt.ExpressionEvaluators.LoadExpressions
     /// <returns>The document.</returns>
     /// <param name="document">Document.</param>
     /// <param name="context">Context.</param>
-    protected string RenderDocument(object document, IRenderingContext context)
+    protected virtual string RenderDocument(object document, IRenderingContext context)
     {
       if(document == null)
       {
@@ -110,8 +118,60 @@ namespace CSF.Zpt.ExpressionEvaluators.LoadExpressions
         throw new ArgumentNullException(nameof(context));
       }
 
-      // TODO: Write this implementation
-      throw new NotImplementedException();
+      if(document is IZptDocument)
+      {
+        return Render((IZptDocument) document, context);
+      }
+      else if(document is TemplateFile)
+      {
+        return Render((TemplateFile) document, context);
+      }
+      else if(document is MetalMacro)
+      {
+        return Render((MetalMacro) document, context);
+      }
+      else
+      {
+        var message = String.Format(Resources.ExceptionMessages.UnsupportedDocumentTypeFormat,
+                                    document.GetType().FullName,
+                                    String.Join(", ", SupportedTypes.Select(x => x.FullName)));
+        throw new UnsupportedDocumentTypeException(message);
+      }
+    }
+
+    protected virtual string Render(IZptDocument document, IRenderingContext context)
+    {
+      if(document == null)
+      {
+        throw new ArgumentNullException(nameof(document));
+      }
+      if(context == null)
+      {
+        throw new ArgumentNullException(nameof(context));
+      }
+
+      return document.Render(options: context.RenderingOptions,
+                             contextConfigurator: c => context.CopyTo(c));
+    }
+
+    protected virtual string Render(TemplateFile document, IRenderingContext context)
+    {
+      if(document == null)
+      {
+        throw new ArgumentNullException(nameof(document));
+      }
+
+      return Render(document.Document, context);
+    }
+
+    protected virtual string Render(MetalMacro macro, IRenderingContext context)
+    {
+      if(macro == null)
+      {
+        throw new ArgumentNullException(nameof(macro));
+      }
+
+      return Render(macro.Element.CreateDocumentFromThisElement(), context);
     }
 
     #endregion

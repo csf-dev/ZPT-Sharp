@@ -6,7 +6,7 @@
 <p metal:define-macro="content"
    tal:define="name string:Joseph Bloggs">
   Hello <span tal:replace="name">Sam Smith</span>!
-  <span tal:condition="item" tal:omit-tag="string:1"><br />Your item name is '<span tal:replace="item/Name" />'.</span>
+  <span tal:condition="item | nothing" tal:omit-tag="string:1"><br />Your item name is '<span tal:replace="item/Name" />'.</span>
 </p>
 </body>
 </html>
