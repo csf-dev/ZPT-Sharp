@@ -8,7 +8,7 @@
     <li tal:repeat="item here/Items">
       <div tal:define="docName item/DocumentName;
                        doc load:here/Documents/?docName/macros/content"
-           tal:repace="doc">
+           tal:replace="structure doc">
         This content should be replaced by the rendered document
       </div>
     </li>

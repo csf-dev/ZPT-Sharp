@@ -9,7 +9,7 @@
       <div tal:define="docName item/DocumentName;
                        docFullName string:${docName}.html;
                        doc load:here/Documents/?docFullName"
-           tal:repace="doc">
+           tal:replace="doc">
         This content should be replaced by the rendered document
       </div>
     </li>

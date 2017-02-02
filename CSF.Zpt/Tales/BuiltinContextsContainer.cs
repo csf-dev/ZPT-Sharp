@@ -10,7 +10,7 @@ namespace CSF.Zpt.Tales
   {
     #region constants
 
-    private const string
+    internal const string
       NOTHING   = "nothing",
       DEFAULT   = "default",
       OPTIONS   = "options",
