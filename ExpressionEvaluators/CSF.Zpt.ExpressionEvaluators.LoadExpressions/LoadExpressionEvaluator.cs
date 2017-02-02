@@ -144,6 +144,11 @@ namespace CSF.Zpt.ExpressionEvaluators.LoadExpressions
       }
     }
 
+    /// <summary>
+    /// Renders an <see cref="IZptDocument"/>.
+    /// </summary>
+    /// <param name="document">Document.</param>
+    /// <param name="context">Context.</param>
     protected virtual string Render(IZptDocument document, IRenderingContext context)
     {
       if(document == null)
@@ -159,6 +164,11 @@ namespace CSF.Zpt.ExpressionEvaluators.LoadExpressions
                              contextConfigurator: c => context.CopyTo(c));
     }
 
+    /// <summary>
+    /// Renders a <see cref="TemplateFile"/>.
+    /// </summary>
+    /// <param name="document">Document.</param>
+    /// <param name="context">Context.</param>
     protected virtual string Render(TemplateFile document, IRenderingContext context)
     {
       if(document == null)
@@ -169,6 +179,11 @@ namespace CSF.Zpt.ExpressionEvaluators.LoadExpressions
       return Render(document.Document, context);
     }
 
+    /// <summary>
+    /// Renders a <see cref="MetalMacro"/>.
+    /// </summary>
+    /// <param name="macro">Macro.</param>
+    /// <param name="context">Context.</param>
     protected virtual string Render(MetalMacro macro, IRenderingContext context)
     {
       if(macro == null)
@@ -179,6 +194,11 @@ namespace CSF.Zpt.ExpressionEvaluators.LoadExpressions
       return Render(macro.Element, context);
     }
 
+    /// <summary>
+    /// Renders an <see cref="IZptElement"/>.
+    /// </summary>
+    /// <param name="element">Element.</param>
+    /// <param name="context">Context.</param>
     protected virtual string Render(IZptElement element, IRenderingContext context)
     {
       if(element == null)
