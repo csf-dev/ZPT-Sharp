@@ -27,6 +27,33 @@
     </nav>
     <section class="main_page_content" metal:fill-slot="main_page_content">
       <header><h1>Writing expressions with TALES</h1></header>
+      <nav id="page_navigation" metal:use-macro="documents/Shared/on-this-page.html/macros/page_navigation">
+        <ol metal:fill-slot="contents">
+          <li>
+            <a href="tales/introduction.html#expression_types">TALES expression types</a>
+          </li>
+          <li>
+            <a href="tales/introduction.html#standard_types">The standard expression types</a>
+						<ol>
+              <li>
+							  <a href="tales/introduction.html#path_expressions">Easily access model values</a>
+							</li>
+              <li>
+                <a href="tales/introduction.html#not_expressions">Negate boolean values</a>
+              </li>
+              <li>
+                <a href="tales/introduction.html#string_expressions">Write and format strings</a>
+              </li>
+              <li>
+                <a href="tales/introduction.html#csharp_expressions">Evaluate C♯ expressions</a>
+              </li>
+						</ol>
+          </li>
+          <li>
+            <a href="tales/introduction.html#other_types">Other expression types</a>
+          </li>
+        </ol>
+      </nav>
       <p>
         Both
 				<a href="metal/introduction.html" title="Macro Extenion Template Attribute Language">METAL</a> &amp;
@@ -34,7 +61,7 @@
 				attributes make use of expressions to access values from the object model which was provided to the rendering process.
 				These expressions are written in the Template Attribute Language Expression Syntax: TALES.
 			</p>
-			<h2>TALES expression types</h2>
+			<h2 id="expression_types">TALES expression types</h2>
 			<p>
         TALES is in fact a collection of expression types, each with its own syntax.
 				In ZPT-Sharp, each expression type is provided by <a href="plugins.html">a plugin</a>.
@@ -53,13 +80,13 @@
 				Any expressions which are not qualified with a prefix are evaluated using the default expression plugin;
 				typically that is the <strong>path</strong> expression plugin.
 			</p>
-			<h2>The standard expression types</h2>
+			<h2 id="standard_types">The standard expression types</h2>
 			<p>
         The following lists a few examples of the 'standard' expression plugins which are installed by the
 				<a href="nuget-packages.html">ZPT-Sharp NuGet bundles</a>.
 				At the end of this page, a few other plugins are listed which are not shipped as standard.
 			</p>
-			<h3>Easily access models using path expressions</h3>
+			<h3 id="path_expressions">Easily access model values</h3>
       <p>
         TALES <strong>path</strong> expressions provide a simplified read-only perspective of a .NET object model.
 			</p>
@@ -79,7 +106,7 @@
         Path expressions are very powerful; there is more to read about their capabilities on
 				<a href="tales/path-expressions.html">their detailed documentation page</a>.
 			</p>
-			<h3>Negate values with not expressions</h3>
+			<h3 id="not_expressions">Negate boolean values</h3>
 			<p>
         The <strong>not</strong> expression plugin always prefixes another expression.
 			</p>
@@ -93,7 +120,7 @@
         The rules for coercing values to true/false are found in
 				<a href="tales/not-expressions.html">the not expression's documentation page</a>.
 			</p>
-			<h3>Write and format strings</h3>
+			<h3 id="string_expressions">Write and format strings</h3>
 			<p>
         The <strong>string</strong> plugin may be used to provide text values.
 				Its usefulnes comes to light when used with placeholders to inject the results of path expressions into the string.
@@ -109,7 +136,7 @@
 				<a href="tales/string-expressions.html">documentation page for string expressions</a>
 				goes into further depth about how they are written.
 			</p>
-			<h3>Evaluate C♯ expressions</h3>
+			<h3 id="csharp_expressions">Evaluate C♯ expressions</h3>
 			<p>
         It is also possible to evaluate native C♯ expressions, using the <strong>csharp</strong> expression plugin.
 			</p>
@@ -129,7 +156,7 @@
 				ZPT-Sharp.  This information is available on
 				<a href="tales/csharp-expressions.html">C♯ expressions documentation page</a>.
 			</p>
-			<h2>Other expression types</h2>
+			<h2 id="other_types">Other expression types</h2>
 			<p>
         The following expression types not distributed in the standard ZPT-Sharp bundles.
 			  They are available via freely installable plugins if desired.

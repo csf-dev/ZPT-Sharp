@@ -27,12 +27,40 @@
     </nav>
     <section class="main_page_content" metal:fill-slot="main_page_content">
       <header><h1>Binding model data with TAL attributes</h1></header>
+      <nav id="page_navigation" metal:use-macro="documents/Shared/on-this-page.html/macros/page_navigation">
+        <ol metal:fill-slot="contents">
+          <li>
+            <a href="tal/introduction.html#content_replace">Inserting content</a>
+          </li>
+          <li>
+            <a href="tal/introduction.html#define">Defining variables</a>
+          </li>
+          <li>
+            <a href="tal/introduction.html#condition">Conditional rendering</a>
+          </li>
+          <li>
+            <a href="tal/introduction.html#omit_tag">Omitting start/end tags</a>
+          </li>
+          <li>
+            <a href="tal/introduction.html#repeat">Repeating markup</a>
+          </li>
+          <li>
+            <a href="tal/introduction.html#attributes">Setting attributes</a>
+          </li>
+          <li>
+            <a href="tal/introduction.html#on_error">Handling errors</a>
+          </li>
+          <li>
+            <a href="tal/introduction.html#order_of_evaluation">Order of evaluation</a>
+          </li>
+        </ol>
+      </nav>
       <p>
         TAL is used to bind data from your application (a model) to your view.
 				The following introduction shows - in most cases - a very limited example of the available functionality of each attribute.
 				Each section carries links to more detailed documentation pages.
 			</p>
-      <h2>Inserting content</h2>
+      <h2 id="content_replace">Inserting content</h2>
 			<p>
         The two simplest TAL attributes to learn are <code>tal:content</code> &amp; <code>tal:replace</code>;
 				they behave in a very similar manner.
@@ -55,7 +83,7 @@
         More information about content &amp; repeat variables
 				is available on <a href="tal/content-replace.html">the detailed documentation page</a>.
 			</p>
-			<h2>Defining variables</h2>
+			<h2 id="define">Defining variables</h2>
 			<p>
         In the previous example we made use of two imaginary variables (via TALES expressions).
 				These were <strong>name</strong> and <strong>dayOfWeek</strong>.
@@ -76,7 +104,7 @@
 				<a href="tales/introduction.html">a TALES expression</a>
 				indicating the value for the new variable.
 			</p>
-      <h2>Conditional rendering</h2>
+      <h2 id="condition">Conditional rendering</h2>
 			<p>
         Another relatively simple TAL attribute is <code>tal:condition</code>.
 			</p>
@@ -96,7 +124,7 @@
         More information, <em>including what it means for a value to be "truth-like"</em>, is available on
 				<a href="tal/condition.html">the documentation page for condition attributes</a>.
 			</p>
-      <h2>Omitting start/end tags</h2>
+      <h2 id="omit_tag">Omitting start/end tags</h2>
 			<p>
         Similar to the condition attribute is <code>tal:omit-tag</code>.
 			</p>
@@ -115,49 +143,37 @@
         Further information, <em>including what it means for a value to be "truth-like"</em>, is available on
 				<a href="tal/omit-tag.html">the omit-tag documentation page</a>.
       </p>
-			<h2>Repeating markup</h2>
+			<h2 id="repeat">Repeating markup</h2>
 			<p>
         A common requirement in rendering documents is to repeat a section of markup for items in a collection.
 				This is where <code>tal:repeat</code> is used.
 			</p>
       <pre><code class="html">&lt;!-- Source code for a sample data table representing a shopping list --&gt;
 &lt;table tal:define="shoppingList here/ShoppingList"&gt;
-  &lt;thead&gt;
-    &lt;tr&gt;
-      &lt;th&gt;Item&lt;/th&gt;
-      &lt;th&gt;Quantity&lt;/th&gt;
-    &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
-    &lt;tr tal:repeat="item shoppingList"&gt;
-      &lt;td tal:content="item/Name"&gt;Bagels&lt;/td&gt;
-      &lt;td tal:content="item/Quantity"&gt;4&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
+  &lt;tr&gt;
+    &lt;th&gt;Item&lt;/th&gt;
+    &lt;th&gt;Quantity&lt;/th&gt;
+  &lt;/tr&gt;
+  &lt;tr tal:repeat="item shoppingList"&gt;
+    &lt;td tal:content="item/Name"&gt;Bagels&lt;/td&gt;
+    &lt;td tal:content="item/Quantity"&gt;4&lt;/td&gt;
+  &lt;/tr&gt;
 &lt;/table&gt;
 
-&lt;!-- Sample rendering of the above source code, for a model with 3 items --&gt;
+&lt;!-- Sample rendering of the above source code, for a model with 2 items --&gt;
 &lt;table&gt;
-  &lt;thead&gt;
-    &lt;tr&gt;
-      &lt;th&gt;Item&lt;/th&gt;
-      &lt;th&gt;Quantity&lt;/th&gt;
-    &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;td&gt;Bananas&lt;/td&gt;
-      &lt;td&gt;2&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;Baps&lt;/td&gt;
-      &lt;td&gt;8&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;Biscuits&lt;/td&gt;
-      &lt;td&gt;2&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
+  &lt;tr&gt;
+    &lt;th&gt;Item&lt;/th&gt;
+    &lt;th&gt;Quantity&lt;/th&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td&gt;Bananas&lt;/td&gt;
+    &lt;td&gt;2&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td&gt;Biscuits&lt;/td&gt;
+    &lt;td&gt;2&lt;/td&gt;
+  &lt;/tr&gt;
 &lt;/table&gt;</code></pre>
       <p>
         The structure of the repeat attribute is similar to a TAL define attribute.
@@ -173,7 +189,7 @@
 				There is much more to learn on
 				<a href="tal/repeat.html">its detailed documentation page</a>.
 			</p>
-      <h2>Setting attributes</h2>
+      <h2 id="attributes">Setting attributes</h2>
 			<p>
         TAL may also be used to add/set or remove attributes to/from an element, using the
 				<code>tal:attributes</code> attribute.
@@ -194,7 +210,7 @@
         There is more to learn about setting attributes
 				<a href="tal/attributes.html">in the detailed documentation</a>.
 			</p>
-			<h2>Handling errors</h2>
+			<h2 id="on_error">Handling errors</h2>
 			<p>
         The final TAL attribute handles errors encountered whilst rendering a document: <code>tal:on-error</code>.
 			</p>
@@ -219,6 +235,44 @@
       <p>
         The on-error attribute is explored in further detail
 				<a href="tal/on-error.html">on its documentation page</a>.
+			</p>
+			<h2 id="order_of_evaluation">Order of evaluation</h2>
+			<p>
+			  The TAL rendering process visits every element in the source file in document order, fully processing
+				all of the TAL attributes before moving onto the next.
+				Within each element, TAL attributes are evaluated and processed in the following order:
+			</p>
+			<ol>
+        <li><strong>define</strong></li>
+        <li><strong>condition</strong></li>
+        <li><strong>repeat</strong></li>
+        <li><strong>content</strong> or <strong>replace</strong></li>
+        <li><strong>attributes</strong></li>
+        <li><strong>omit-tag</strong></li>
+			</ol>
+			<p>
+        The <strong>on-error</strong> attribute lives outside of this order.
+				It is processed only if an error occurs and then immediately upon the occurrance of that error.
+			</p>
+      <p>
+        The order of evaluation is usually intuitive but be mindful of the opportunity for mistakes like this:
+      </p>
+      <pre><code class="html">&lt;!-- This won't work, define happens before repeat.
+     The "saying" variable won't exist when the define
+     attribute is evaluated --&gt;
+&lt;ul&gt;
+  &lt;li tal:repeat="saying here/Sayings"
+      tal:define="formattedSaying string:As the saying goes - $saying"&gt;
+    &lt;em tal:content="formattedSaying"&gt;As the saying goes - I told you so!&lt;/em&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;</code></pre>
+			<p>
+        Additionally, a few of the above attributes can terminate the rendering process upon an element where it is
+				pointless to continue.
+				For example, a <strong>condition</strong> attribute may determine that the element and its children are
+				not to be rendered.
+				In this case further TAL attributes on the element will be ignored, as they cannot have any meaningful
+				effect upon the result.
 			</p>
     </section>
   </div>

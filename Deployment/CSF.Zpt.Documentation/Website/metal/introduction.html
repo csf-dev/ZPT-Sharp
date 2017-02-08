@@ -32,13 +32,13 @@
       <nav id="page_navigation" metal:use-macro="documents/Shared/on-this-page.html/macros/page_navigation">
         <ol metal:fill-slot="contents">
           <li>
-            <a href="metal/introduction.html#macro_replacement">Macros replace their usage-points</a>
+            <a href="metal/introduction.html#macro_replacement">Macros replace their caller</a>
           </li>
           <li>
-            <a href="metal/introduction.html#slot_filling">Slots let you inject content into macros</a>
+            <a href="metal/introduction.html#slot_filling">Slots inject content into macros</a>
           </li>
           <li>
-            <a href="metal/introduction.html#macro_extension">Extension: Macros based on other macros</a>
+            <a href="metal/introduction.html#macro_extension">Macro extension</a>
           </li>
           <li>
             <a href="metal/introduction.html#list_of_attributes">List of METAL attributes</a>
@@ -55,7 +55,7 @@
         METAL macros are usually defined in separate source files to the documents which make use of them
         but they may be used within the same source file in which they are defined if you wish.
       </p>
-      <h2 id="macro_replacement">Macros replace their usage-points</h2>
+      <h2 id="macro_replacement">Macros replace their caller</h2>
       <p>
         METAL macros are defined/created using the <code>metal:define-macro</code> attribute.
         They are used with the <code>metal:use-macro</code> attribute.
@@ -113,7 +113,7 @@
         The element which carries the <code>metal:use-macro</code> attribute, along with its contents, are replaced
         by the incoming macro.
       </p>
-      <h2 id="slot_filling">Slots let you inject content into macros</h2>
+      <h2 id="slot_filling">Slots inject content into macros</h2>
       <p>
         Macros are more useful when you can customise them; one way of doing this is to use <strong>slots</strong>.
         Defining a slot inside a macro's markup - using the <code>metal:define-slot</code> attribute - creates
@@ -171,7 +171,7 @@
           which is outside of any slot fillers, will be discarded.
         </li>
       </ul>
-      <h2 id="macro_extension">Extension: Macros based on other macros</h2>
+      <h2 id="macro_extension">Macro extension</h2>
       <p>
         An advanced topic is that of <strong>METAL macro extension</strong> using the <code>metal:extend-macro</code> attribute.
         Developers might recognise this concept as akin to <em>subclassing a METAL macro</em>.
