@@ -96,8 +96,9 @@ body > .content_wrapper:after {
 }
 .main_page_content nav#page_navigation h2 {
   margin-top: 0;
+  margin-bottom: 0.31em;
   font-family: 'Lato', sans-serif;
-  color: #333;
+  color: #666;
   font-size: 130%;
 }
 .main_page_content nav#page_navigation a {
@@ -110,6 +111,23 @@ body > .content_wrapper:after {
 }
 .main_page_content nav#page_navigation li {
   margin-bottom: 0.4em;
+}
+.main_page_content nav#page_navigation button.toggle {
+  border: 0;
+  padding: 2px;
+  margin: 0;
+  background: transparent none;
+  float: right;
+  min-width: 3em;
+  text-align: right;
+  color: #666;
+}
+.main_page_content nav#page_navigation.collapsed ol {
+  display: none;
+}
+.main_page_content nav#page_navigation.collapsed {
+  float: none;
+  overflow: auto;
 }
 .page_footer {
   padding: 10px 40px;

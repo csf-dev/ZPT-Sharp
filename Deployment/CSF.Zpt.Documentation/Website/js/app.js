@@ -4,6 +4,7 @@ define(function(require) {
   var $ = require("jquery"),
       highlighter = require("highlightCodeBlocks"),
       navMenu = require("navigationMenu"),
+      pageContents = require("pageContents"),
       pageDetector = require("pageDetector"),
       analytics = require("analytics");
   
@@ -13,6 +14,7 @@ define(function(require) {
         analytics.initialise();
         pageDetector.initialiseCurrentPage();
         highlighter.initialise();
+        pageContents.initialise();
         navMenu.initialise();
       });
     },

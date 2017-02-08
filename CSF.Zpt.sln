@@ -132,6 +132,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "js", "js", "{C1BCE5A6-7E26-
 		Deployment\CSF.Zpt.Documentation\Website\js\highlightCodeBlocks.js = Deployment\CSF.Zpt.Documentation\Website\js\highlightCodeBlocks.js
 		Deployment\CSF.Zpt.Documentation\Website\js\navigationMenu.js = Deployment\CSF.Zpt.Documentation\Website\js\navigationMenu.js
 		Deployment\CSF.Zpt.Documentation\Website\js\pageDetector.js = Deployment\CSF.Zpt.Documentation\Website\js\pageDetector.js
+		Deployment\CSF.Zpt.Documentation\Website\js\pageContents.js = Deployment\CSF.Zpt.Documentation\Website\js\pageContents.js
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "metal", "metal", "{35DF5943-5E67-478A-B89B-681A90378903}"
