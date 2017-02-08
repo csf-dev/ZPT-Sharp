@@ -78,10 +78,11 @@ body > .content_wrapper:after {
   color: #666;
 }
 .main_page_content {
-  margin-left: 300px;
+  margin-left: 42px;
   max-width: 680px;
   line-height: 140%;
   color: #333;
+  float: left;
 }
 .main_page_content nav#page_navigation {
   float: left;
@@ -226,7 +227,8 @@ body>.cookie_statement button {
     margin: 0 10px;
     max-width: none;
     width: auto;
-    font-size: 90%;
+    font-size: 95%;
+    float: none;
   }
   body > .content_wrapper:after {
     height: 51px
