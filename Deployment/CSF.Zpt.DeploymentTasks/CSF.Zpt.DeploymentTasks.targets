@@ -15,6 +15,7 @@
     <TasksConfig Condition="'$(Configuration)' == 'Deploy'">Release</TasksConfig>
     <TasksPath>bin\$(TasksConfig)\CSF.Zpt.DeploymentTasks.dll</TasksPath>
     <DeploymentOutputPath>$(PathToSolutionRoot)\Deployment\Output</DeploymentOutputPath>
+    <NugetOutputPath>$(DeploymentOutputPath)\NuGet</NugetOutputPath>
     <TemporaryBuildPath>$(PathToSolutionRoot)\Deployment\obj</TemporaryBuildPath>
     <PlaintextManPageColumns>80</PlaintextManPageColumns>
     <HtmlManPageColumns>100</HtmlManPageColumns>
@@ -183,6 +184,7 @@
   <Target Name="PrepareDeploymentOutputLocations">
     <RemoveDir Directories="$(DeploymentOutputPath)" />
     <MakeDir Directories="$(DeploymentOutputPath)" />
+    <MakeDir Directories="$(NugetOutputPath)" />
     <MakeDir Directories="$(DeploymentOutputPath)\Documentation website" />
     <MakeDir Directories="$(PathToSolutionRoot)\CSF.Zpt.Cli\bin\Release\Doc" />
     <RemoveDir Directories="$(TemporaryBuildPath)" />
@@ -230,9 +232,9 @@
       <CopyrightYear Include="$([System.DateTime]::Now.ToString(yyyy))" />
     </ItemGroup>
     <Exec Command="$(PathToSolutionRoot)\CSF.Zpt.Cli\bin\Release\ZptBuilder.exe &quot;%(NuspecFile.Identity).pt&quot; -x -o &quot;%(NuspecFile.Identity)&quot; --keyword-options &quot;version=@(SemanticVersion);versionExtra=@(InformationalVersion);nextBreakingVersion=@(NextBreakingVersion);copyrightYear=@(CopyrightYear)&quot;" />
-    <Exec Command="nuget pack %(NuspecFile.Identity) -Prop Configuration=Release -OutputDirectory $(DeploymentOutputPath)"
+    <Exec Command="nuget pack %(NuspecFile.Identity) -Prop Configuration=Release -OutputDirectory $(NugetOutputPath)"
           Condition="'$(OS)' == 'Unix'" />
-    <Exec Command="&quot;$(MSBuildProgramFiles32)\NuGet\nuget.exe&quot; pack %(NuspecFile.Identity) -Prop Configuration=Release -OutputDirectory $(DeploymentOutputPath)"
+    <Exec Command="&quot;$(MSBuildProgramFiles32)\NuGet\nuget.exe&quot; pack %(NuspecFile.Identity) -Prop Configuration=Release -OutputDirectory $(NugetOutputPath)"
           Condition="'$(OS)' != 'Unix'" />
   </Target>
 
