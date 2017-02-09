@@ -99,6 +99,7 @@
     <None Include="tales\python-expressions.html" />
     <None Include="tales\repeat-variables.html" />
     <None Include="tales\string-expressions.html" />
+    <None Include="all-nuget-packages.html" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>
