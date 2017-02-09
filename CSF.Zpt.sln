@@ -94,111 +94,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CSF.Zpt.Documentation", "CS
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HelloWorld", "Deployment\CSF.Zpt.Documentation\HelloWorld\HelloWorld.csproj", "{346CA409-C481-45A8-9504-34DE5FB15868}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Website", "Website", "{BA13D655-43D1-4BAA-A27F-A730EF0AEF20}"
-	ProjectSection(SolutionItems) = preProject
-		Deployment\CSF.Zpt.Documentation\Website\advantages-of-zpt-views.html = Deployment\CSF.Zpt.Documentation\Website\advantages-of-zpt-views.html
-		Deployment\CSF.Zpt.Documentation\Website\asp-net-mvc-view-engine.html = Deployment\CSF.Zpt.Documentation\Website\asp-net-mvc-view-engine.html
-		Deployment\CSF.Zpt.Documentation\Website\command-line-renderer.html = Deployment\CSF.Zpt.Documentation\Website\command-line-renderer.html
-		Deployment\CSF.Zpt.Documentation\Website\configuration.html = Deployment\CSF.Zpt.Documentation\Website\configuration.html
-		Deployment\CSF.Zpt.Documentation\Website\download.html = Deployment\CSF.Zpt.Documentation\Website\download.html
-		Deployment\CSF.Zpt.Documentation\Website\googled08187801d097dd8.html = Deployment\CSF.Zpt.Documentation\Website\googled08187801d097dd8.html
-		Deployment\CSF.Zpt.Documentation\Website\hello-world.html = Deployment\CSF.Zpt.Documentation\Website\hello-world.html
-		Deployment\CSF.Zpt.Documentation\Website\index.html = Deployment\CSF.Zpt.Documentation\Website\index.html
-		Deployment\CSF.Zpt.Documentation\Website\logging.html = Deployment\CSF.Zpt.Documentation\Website\logging.html
-		Deployment\CSF.Zpt.Documentation\Website\nuget-packages.html = Deployment\CSF.Zpt.Documentation\Website\nuget-packages.html
-		Deployment\CSF.Zpt.Documentation\Website\page-rendering-api.html = Deployment\CSF.Zpt.Documentation\Website\page-rendering-api.html
-		Deployment\CSF.Zpt.Documentation\Website\plugins.html = Deployment\CSF.Zpt.Documentation\Website\plugins.html
-		Deployment\CSF.Zpt.Documentation\Website\writing-pages-using-zpt.html = Deployment\CSF.Zpt.Documentation\Website\writing-pages-using-zpt.html
-		Deployment\CSF.Zpt.Documentation\Website\writing-plugins.html = Deployment\CSF.Zpt.Documentation\Website\writing-plugins.html
-	EndProjectSection
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "css", "css", "{0790920D-A4CB-4607-ADA8-29996CE15B47}"
-	ProjectSection(SolutionItems) = preProject
-		Deployment\CSF.Zpt.Documentation\Website\css\content.css = Deployment\CSF.Zpt.Documentation\Website\css\content.css
-		Deployment\CSF.Zpt.Documentation\Website\css\download.css = Deployment\CSF.Zpt.Documentation\Website\css\download.css
-		Deployment\CSF.Zpt.Documentation\Website\css\dummy.css = Deployment\CSF.Zpt.Documentation\Website\css\dummy.css
-		Deployment\CSF.Zpt.Documentation\Website\css\introduction.css = Deployment\CSF.Zpt.Documentation\Website\css\introduction.css
-		Deployment\CSF.Zpt.Documentation\Website\css\manpage_exports.css = Deployment\CSF.Zpt.Documentation\Website\css\manpage_exports.css
-		Deployment\CSF.Zpt.Documentation\Website\css\page.css = Deployment\CSF.Zpt.Documentation\Website\css\page.css
-		Deployment\CSF.Zpt.Documentation\Website\css\reset.css = Deployment\CSF.Zpt.Documentation\Website\css\reset.css
-		Deployment\CSF.Zpt.Documentation\Website\css\styles.css = Deployment\CSF.Zpt.Documentation\Website\css\styles.css
-		Deployment\CSF.Zpt.Documentation\Website\css\tal_content_or_replace.css = Deployment\CSF.Zpt.Documentation\Website\css\tal_content_or_replace.css
-	EndProjectSection
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "js", "js", "{C1BCE5A6-7E26-47D1-A340-BF21D0E72074}"
-	ProjectSection(SolutionItems) = preProject
-		Deployment\CSF.Zpt.Documentation\Website\js\analytics.js = Deployment\CSF.Zpt.Documentation\Website\js\analytics.js
-		Deployment\CSF.Zpt.Documentation\Website\js\app.js = Deployment\CSF.Zpt.Documentation\Website\js\app.js
-		Deployment\CSF.Zpt.Documentation\Website\js\highlightCodeBlocks.js = Deployment\CSF.Zpt.Documentation\Website\js\highlightCodeBlocks.js
-		Deployment\CSF.Zpt.Documentation\Website\js\navigationMenu.js = Deployment\CSF.Zpt.Documentation\Website\js\navigationMenu.js
-		Deployment\CSF.Zpt.Documentation\Website\js\pageDetector.js = Deployment\CSF.Zpt.Documentation\Website\js\pageDetector.js
-		Deployment\CSF.Zpt.Documentation\Website\js\pageContents.js = Deployment\CSF.Zpt.Documentation\Website\js\pageContents.js
-	EndProjectSection
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "metal", "metal", "{35DF5943-5E67-478A-B89B-681A90378903}"
-	ProjectSection(SolutionItems) = preProject
-		Deployment\CSF.Zpt.Documentation\Website\metal\define-fill-slot.html = Deployment\CSF.Zpt.Documentation\Website\metal\define-fill-slot.html
-		Deployment\CSF.Zpt.Documentation\Website\metal\define-use-macro.html = Deployment\CSF.Zpt.Documentation\Website\metal\define-use-macro.html
-		Deployment\CSF.Zpt.Documentation\Website\metal\extend-macro.html = Deployment\CSF.Zpt.Documentation\Website\metal\extend-macro.html
-		Deployment\CSF.Zpt.Documentation\Website\metal\introduction.html = Deployment\CSF.Zpt.Documentation\Website\metal\introduction.html
-	EndProjectSection
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tal", "tal", "{483A2369-7A64-4C27-8A4D-C185B0A99F91}"
-	ProjectSection(SolutionItems) = preProject
-		Deployment\CSF.Zpt.Documentation\Website\tal\attributes.html = Deployment\CSF.Zpt.Documentation\Website\tal\attributes.html
-		Deployment\CSF.Zpt.Documentation\Website\tal\condition.html = Deployment\CSF.Zpt.Documentation\Website\tal\condition.html
-		Deployment\CSF.Zpt.Documentation\Website\tal\content-replace.html = Deployment\CSF.Zpt.Documentation\Website\tal\content-replace.html
-		Deployment\CSF.Zpt.Documentation\Website\tal\define.html = Deployment\CSF.Zpt.Documentation\Website\tal\define.html
-		Deployment\CSF.Zpt.Documentation\Website\tal\introduction.html = Deployment\CSF.Zpt.Documentation\Website\tal\introduction.html
-		Deployment\CSF.Zpt.Documentation\Website\tal\omit-tag.html = Deployment\CSF.Zpt.Documentation\Website\tal\omit-tag.html
-		Deployment\CSF.Zpt.Documentation\Website\tal\on-error.html = Deployment\CSF.Zpt.Documentation\Website\tal\on-error.html
-		Deployment\CSF.Zpt.Documentation\Website\tal\repeat.html = Deployment\CSF.Zpt.Documentation\Website\tal\repeat.html
-	EndProjectSection
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tales", "tales", "{4C54291E-5445-4420-9422-676A1C1CC89C}"
-	ProjectSection(SolutionItems) = preProject
-		Deployment\CSF.Zpt.Documentation\Website\tales\advanced-csharp-expressions.html = Deployment\CSF.Zpt.Documentation\Website\tales\advanced-csharp-expressions.html
-		Deployment\CSF.Zpt.Documentation\Website\tales\boolean-coercion.html = Deployment\CSF.Zpt.Documentation\Website\tales\boolean-coercion.html
-		Deployment\CSF.Zpt.Documentation\Website\tales\built-in-variables.html = Deployment\CSF.Zpt.Documentation\Website\tales\built-in-variables.html
-		Deployment\CSF.Zpt.Documentation\Website\tales\cancellation.html = Deployment\CSF.Zpt.Documentation\Website\tales\cancellation.html
-		Deployment\CSF.Zpt.Documentation\Website\tales\csharp-expressions.html = Deployment\CSF.Zpt.Documentation\Website\tales\csharp-expressions.html
-		Deployment\CSF.Zpt.Documentation\Website\tales\introduction.html = Deployment\CSF.Zpt.Documentation\Website\tales\introduction.html
-		Deployment\CSF.Zpt.Documentation\Website\tales\not-expressions.html = Deployment\CSF.Zpt.Documentation\Website\tales\not-expressions.html
-		Deployment\CSF.Zpt.Documentation\Website\tales\path-expressions.html = Deployment\CSF.Zpt.Documentation\Website\tales\path-expressions.html
-		Deployment\CSF.Zpt.Documentation\Website\tales\python-expressions.html = Deployment\CSF.Zpt.Documentation\Website\tales\python-expressions.html
-		Deployment\CSF.Zpt.Documentation\Website\tales\repeat-variables.html = Deployment\CSF.Zpt.Documentation\Website\tales\repeat-variables.html
-		Deployment\CSF.Zpt.Documentation\Website\tales\string-expressions.html = Deployment\CSF.Zpt.Documentation\Website\tales\string-expressions.html
-	EndProjectSection
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shared", "Shared", "{403C5C9D-DDEF-48B6-B5AB-F9B871392859}"
-	ProjectSection(SolutionItems) = preProject
-		Deployment\CSF.Zpt.Documentation\Website\Shared\cli-docs.html = Deployment\CSF.Zpt.Documentation\Website\Shared\cli-docs.html
-		Deployment\CSF.Zpt.Documentation\Website\Shared\config-docs.html = Deployment\CSF.Zpt.Documentation\Website\Shared\config-docs.html
-		Deployment\CSF.Zpt.Documentation\Website\Shared\empty-page.html = Deployment\CSF.Zpt.Documentation\Website\Shared\empty-page.html
-		Deployment\CSF.Zpt.Documentation\Website\Shared\general-page.html = Deployment\CSF.Zpt.Documentation\Website\Shared\general-page.html
-		Deployment\CSF.Zpt.Documentation\Website\Shared\HelloWorldCode.html = Deployment\CSF.Zpt.Documentation\Website\Shared\HelloWorldCode.html
-		Deployment\CSF.Zpt.Documentation\Website\Shared\navigation.html = Deployment\CSF.Zpt.Documentation\Website\Shared\navigation.html
-		Deployment\CSF.Zpt.Documentation\Website\Shared\on-this-page.html = Deployment\CSF.Zpt.Documentation\Website\Shared\on-this-page.html
-		Deployment\CSF.Zpt.Documentation\Website\Shared\plugin_note.html = Deployment\CSF.Zpt.Documentation\Website\Shared\plugin_note.html
-	EndProjectSection
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "lib", "lib", "{3892CB2A-4599-453E-A4A0-7DF9D9BDCA87}"
-	ProjectSection(SolutionItems) = preProject
-		Deployment\CSF.Zpt.Documentation\Website\js\lib\js.cookie-2.1.3.min.js = Deployment\CSF.Zpt.Documentation\Website\js\lib\js.cookie-2.1.3.min.js
-		Deployment\CSF.Zpt.Documentation\Website\js\lib\modernizr.min.js = Deployment\CSF.Zpt.Documentation\Website\js\lib\modernizr.min.js
-		Deployment\CSF.Zpt.Documentation\Website\js\lib\require.min.js = Deployment\CSF.Zpt.Documentation\Website\js\lib\require.min.js
-	EndProjectSection
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "config", "config", "{50DD0495-5528-4A93-99EB-F17BCA21DCA6}"
-	ProjectSection(SolutionItems) = preProject
-		Deployment\CSF.Zpt.Documentation\Website\js\config\main.js = Deployment\CSF.Zpt.Documentation\Website\js\config\main.js
-		Deployment\CSF.Zpt.Documentation\Website\js\config\pageScriptRegistry.js = Deployment\CSF.Zpt.Documentation\Website\js\config\pageScriptRegistry.js
-	EndProjectSection
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "pages", "pages", "{DC04D14B-C4A7-449F-AC8B-49A685071D72}"
-	ProjectSection(SolutionItems) = preProject
-		Deployment\CSF.Zpt.Documentation\Website\js\pages\introduction.js = Deployment\CSF.Zpt.Documentation\Website\js\pages\introduction.js
-	EndProjectSection
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Website", "Deployment\CSF.Zpt.Documentation\Website\Website.csproj", "{4FE5F338-3430-4EA2-A83E-78FBBD56C98A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -387,6 +283,12 @@ Global
 		{F7EC4498-BF8A-4F57-99A7-E0C5DDCE9C32}.Deploy|Any CPU.Build.0 = Release|Any CPU
 		{F7EC4498-BF8A-4F57-99A7-E0C5DDCE9C32}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F7EC4498-BF8A-4F57-99A7-E0C5DDCE9C32}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4FE5F338-3430-4EA2-A83E-78FBBD56C98A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4FE5F338-3430-4EA2-A83E-78FBBD56C98A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4FE5F338-3430-4EA2-A83E-78FBBD56C98A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4FE5F338-3430-4EA2-A83E-78FBBD56C98A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4FE5F338-3430-4EA2-A83E-78FBBD56C98A}.Deploy|Any CPU.ActiveCfg = Release|Any CPU
+		{4FE5F338-3430-4EA2-A83E-78FBBD56C98A}.Deploy|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{BFD834D4-5724-4425-BCB3-6DEE6B03F743} = {F1251A40-9526-48DC-A665-F9AEB972AC33}
@@ -415,16 +317,7 @@ Global
 		{3E1DAACE-519B-4C6C-80E3-3F06A1A33C66} = {79045B21-94A0-4984-A91C-4D95EAA10C78}
 		{52E0E72B-7509-4268-A118-E20422DDD295} = {79045B21-94A0-4984-A91C-4D95EAA10C78}
 		{346CA409-C481-45A8-9504-34DE5FB15868} = {52E0E72B-7509-4268-A118-E20422DDD295}
-		{BA13D655-43D1-4BAA-A27F-A730EF0AEF20} = {52E0E72B-7509-4268-A118-E20422DDD295}
-		{0790920D-A4CB-4607-ADA8-29996CE15B47} = {BA13D655-43D1-4BAA-A27F-A730EF0AEF20}
-		{C1BCE5A6-7E26-47D1-A340-BF21D0E72074} = {BA13D655-43D1-4BAA-A27F-A730EF0AEF20}
-		{35DF5943-5E67-478A-B89B-681A90378903} = {BA13D655-43D1-4BAA-A27F-A730EF0AEF20}
-		{483A2369-7A64-4C27-8A4D-C185B0A99F91} = {BA13D655-43D1-4BAA-A27F-A730EF0AEF20}
-		{4C54291E-5445-4420-9422-676A1C1CC89C} = {BA13D655-43D1-4BAA-A27F-A730EF0AEF20}
-		{403C5C9D-DDEF-48B6-B5AB-F9B871392859} = {BA13D655-43D1-4BAA-A27F-A730EF0AEF20}
-		{3892CB2A-4599-453E-A4A0-7DF9D9BDCA87} = {C1BCE5A6-7E26-47D1-A340-BF21D0E72074}
-		{50DD0495-5528-4A93-99EB-F17BCA21DCA6} = {C1BCE5A6-7E26-47D1-A340-BF21D0E72074}
-		{DC04D14B-C4A7-449F-AC8B-49A685071D72} = {C1BCE5A6-7E26-47D1-A340-BF21D0E72074}
+		{4FE5F338-3430-4EA2-A83E-78FBBD56C98A} = {52E0E72B-7509-4268-A118-E20422DDD295}
 	EndGlobalSection
 	GlobalSection(MonoDevelopProperties) = preSolution
 		Policies = $0
