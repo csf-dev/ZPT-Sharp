@@ -262,6 +262,14 @@
       <ZptSharpCompleteZipFiles Include="$(PathToSolutionRoot)\ExpressionEvaluators\CSF.Zpt.ExpressionEvaluators.CSharpExpressions\bin\Release\CSF.Zpt.ExpressionEvaluators.CSharpExpressions.dll" />
       <ZptSharpCompleteZipFiles Include="$(PathToSolutionRoot)\ExpressionEvaluators\CSF.Zpt.ExpressionEvaluators.CSharpExpressions\bin\Release\CSF.Zpt.ExpressionEvaluators.CSharpFramework.dll" />
       <ZptSharpCompleteZipFiles Include="$(PathToSolutionRoot)\ExpressionEvaluators\CSF.Zpt.ExpressionEvaluators.PythonExpressions\bin\Release\CSF.Zpt.ExpressionEvaluators.PythonExpressions.dll" />
+      <ZptSharpCompleteZipFiles Include="$(PathToSolutionRoot)\ExpressionEvaluators\CSF.Zpt.ExpressionEvaluators.PythonExpressions\bin\Release\IronPython.dll" />
+      <ZptSharpCompleteZipFiles Include="$(PathToSolutionRoot)\ExpressionEvaluators\CSF.Zpt.ExpressionEvaluators.PythonExpressions\bin\Release\IronPython.Modules.dll" />
+      <ZptSharpCompleteZipFiles Include="$(PathToSolutionRoot)\ExpressionEvaluators\CSF.Zpt.ExpressionEvaluators.PythonExpressions\bin\Release\IronPython.SQLite.dll" />
+      <ZptSharpCompleteZipFiles Include="$(PathToSolutionRoot)\ExpressionEvaluators\CSF.Zpt.ExpressionEvaluators.PythonExpressions\bin\Release\IronPython.Wpf.dll" />
+      <ZptSharpCompleteZipFiles Include="$(PathToSolutionRoot)\ExpressionEvaluators\CSF.Zpt.ExpressionEvaluators.PythonExpressions\bin\Release\Microsoft.Dynamic.dll" />
+      <ZptSharpCompleteZipFiles Include="$(PathToSolutionRoot)\ExpressionEvaluators\CSF.Zpt.ExpressionEvaluators.PythonExpressions\bin\Release\Microsoft.Scripting.AspNet.dll" />
+      <ZptSharpCompleteZipFiles Include="$(PathToSolutionRoot)\ExpressionEvaluators\CSF.Zpt.ExpressionEvaluators.PythonExpressions\bin\Release\Microsoft.Scripting.dll" />
+      <ZptSharpCompleteZipFiles Include="$(PathToSolutionRoot)\ExpressionEvaluators\CSF.Zpt.ExpressionEvaluators.PythonExpressions\bin\Release\Microsoft.Scripting.Metadata.dll" />
       <ZptSharpCompleteZipFiles Include="$(PathToSolutionRoot)\ExpressionEvaluators\CSF.Zpt.ExpressionEvaluators.LoadExpressions\bin\Release\CSF.Zpt.ExpressionEvaluators.LoadExpressions.dll" />
       <ZptSharpCompleteZipFiles Include="$(PathToSolutionRoot)\CSF.Zpt\bin\Release\CSF.Zpt.Abstractions.xml" />
       <ZptSharpCompleteZipFiles Include="$(PathToSolutionRoot)\CSF.Zpt\bin\Release\CSF.Zpt.xml" />
