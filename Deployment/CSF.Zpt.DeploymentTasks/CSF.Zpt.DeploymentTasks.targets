@@ -281,6 +281,8 @@
       <ZptSharpCompleteZipFiles Include="$(PathToSolutionRoot)\CSF.Zpt.Cli\bin\Release\ZptBuilder.exe.config" />
       <ZptSharpCompleteZipFiles Include="$(PathToSolutionRoot)\CSF.Zpt.Cli\bin\Release\Doc\ZptBuilder.MANUAL.txt" />
       <ZptSharpCompleteZipFiles Include="$(PathToSolutionRoot)\CSF.Zpt.MVC5\bin\Release\CSF.Zpt.MVC5.dll" />
+      <ZptSharpCompleteZipFiles Include="$(PathToSolutionRoot)\Deployment\CSF.Zpt.Deployment\README" />
+      <ZptSharpCompleteZipFiles Include="$(PathToSolutionRoot)\LICENSE" />
     </ItemGroup>
     <CreateZipArchive OutputFilename="$(DeploymentOutputPath)\CSF.Zpt-complete.zip"
                       Files="@(ZptSharpCompleteZipFiles)" />
