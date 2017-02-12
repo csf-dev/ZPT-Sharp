@@ -151,14 +151,19 @@ Deployment/Utils/linux-build [OPTIONS]
 
 The available options are:
 
+```
   -d    Indicates that the build should use the "Debug"
         configuration (this is the default)
+        
   -r    Indicates that the build should use the "Release"
         configuration
+        
   -D    Indicates that the build should use the "Deploy"
         configuration
+        
   -l    Indicates that the "WebsiteUrlRoot" property should
         be set to the filesystem path for the website output
+```
 
 ## Where to find the build output
 In a `Debug` or `Release` build, the build output will be available in each of the various project directories, in a directory named `bin`, and a subdirectory named after the build configuration used (the usual location for .NET software).
