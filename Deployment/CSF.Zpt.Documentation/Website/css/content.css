@@ -54,6 +54,12 @@
   padding-left: 1em;
   list-style: outside decimal;
 }
+.main_page_content ul ul,
+.main_page_content ul ol,
+.main_page_content ol ul,
+.main_page_content ol ol {
+  margin-top: 1em;
+}
 .main_page_content ol > li {
   padding-left: 0.5em;
 }

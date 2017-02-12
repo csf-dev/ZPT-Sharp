@@ -53,7 +53,7 @@ body > .content_wrapper:after {
   padding: 20px;
   line-height: 180%;
   font-size: 90%;
-  border-radius: 15px;
+  border-radius: 8px;
   border: 1px solid #CDC998;
   float: left;
   margin-bottom: 4em;
@@ -76,6 +76,9 @@ body > .content_wrapper:after {
   font-style: italic;
   font-size: 120%;
   color: #666;
+}
+.main_page_area > nav .nav_section:first-child {
+  margin-top: -1em;
 }
 .main_page_content {
   margin-left: 42px;
@@ -121,6 +124,7 @@ body > .content_wrapper:after {
   min-width: 3em;
   text-align: right;
   color: #666;
+  cursor: pointer;
 }
 .main_page_content nav#page_navigation.collapsed ol {
   display: none;
