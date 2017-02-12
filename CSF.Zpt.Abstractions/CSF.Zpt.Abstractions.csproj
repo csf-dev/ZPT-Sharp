@@ -108,6 +108,8 @@
     <Compile Include="SourceAnnotation\ISourceAnnotator.cs" />
     <Compile Include="SourceAnnotation\ICommentFormatter.cs" />
     <Compile Include="IAddOnAssemblyFinder.cs" />
+    <Compile Include="Metal\IMetalMacroContainer.cs" />
+    <Compile Include="Metal\IMetalMacro.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Target Name="BeforeBuild">

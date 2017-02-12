@@ -69,7 +69,7 @@ namespace CSF.Zpt
     /// <param name="element">Element.</param>
     protected override object GetElementKey(ConfigurationElement element)
     {
-      return ((Plugin)(element)).Path;
+      return ((Plugin)(element)).Name;
     }
 
     /// <summary>
@@ -94,14 +94,14 @@ namespace CSF.Zpt
     /// Gets or sets the relative path to the assembly
     /// </summary>
     /// <value>The path to the plugin assembly.</value>
-    [ConfigurationProperty(@"Path", IsRequired = true)]
-    public virtual string Path
+    [ConfigurationProperty(@"Name", IsRequired = true)]
+    public virtual string Name
     {
       get {
-        return (string) this["Path"];
+        return (string) this["Name"];
       }
       set {
-        this["Path"] = value;
+        this["Name"] = value;
       }
     }
   }

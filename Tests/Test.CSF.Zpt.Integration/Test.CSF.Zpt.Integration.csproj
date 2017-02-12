@@ -37,7 +37,7 @@
       <HintPath>..\..\packages\log4net.2.0.3\lib\net40-full\log4net.dll</HintPath>
     </Reference>
     <Reference Include="CSF.Configuration">
-      <HintPath>..\..\packages\CSF.Configuration.1.0.0\lib\net45\CSF.Configuration.dll</HintPath>
+      <HintPath>..\..\packages\CSF.Configuration.1.1.0\lib\net45\CSF.Configuration.dll</HintPath>
     </Reference>
     <Reference Include="CSF.Utils">
       <HintPath>..\..\packages\CSF.Utils.6.0.0\lib\net45\CSF.Utils.dll</HintPath>
@@ -54,6 +54,7 @@
     <Compile Include="IntegrationTestType.cs" />
     <Compile Include="ModelIntegrationTests.cs" />
     <Compile Include="GlobalSetupFixture.cs" />
+    <Compile Include="LoadPluginTests.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
@@ -248,6 +249,18 @@
     <None Include="Test data\ZptIntegrationTests\ExpectedOutputs\document_list.html" />
     <None Include="Test data\ZptIntegrationTests\ExpectedOutputs\csharpTest4.html" />
     <None Include="Test data\ZptIntegrationTests\SourceDocuments\csharpTest4.html" />
+    <None Include="Test data\LoadPluginTests\SourceDocuments\test01.html" />
+    <None Include="Test data\LoadPluginTests\SourceDocuments\test02.html" />
+    <None Include="Test data\LoadPluginTests\SourceDocuments\test03.html" />
+    <None Include="Test data\LoadPluginTests\SourceDocuments\test04.html" />
+    <None Include="Test data\LoadPluginTests\SourceDocuments\shared01.html" />
+    <None Include="Test data\LoadPluginTests\SourceDocuments\macro01.html" />
+    <None Include="Test data\LoadPluginTests\SourceDocuments\shared02.html" />
+    <None Include="Test data\LoadPluginTests\SourceDocuments\shared03.html" />
+    <None Include="Test data\LoadPluginTests\ExpectedOutputs\test01.html" />
+    <None Include="Test data\LoadPluginTests\ExpectedOutputs\test02.html" />
+    <None Include="Test data\LoadPluginTests\ExpectedOutputs\test03.html" />
+    <None Include="Test data\LoadPluginTests\ExpectedOutputs\test04.html" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\CSF.Zpt\CSF.Zpt.csproj">
@@ -290,5 +303,14 @@
       <Project>{9005A550-27E5-464A-BF6F-DD96F5539DAC}</Project>
       <Name>CSF.Zpt.ExpressionEvaluators.PythonExpressions</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\ExpressionEvaluators\CSF.Zpt.ExpressionEvaluators.LoadExpressions\CSF.Zpt.ExpressionEvaluators.LoadExpressions.csproj">
+      <Project>{4FEEB873-D66A-42F8-ADB9-4C2D133774F3}</Project>
+      <Name>CSF.Zpt.ExpressionEvaluators.LoadExpressions</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Test data\LoadPluginTests\" />
+    <Folder Include="Test data\LoadPluginTests\SourceDocuments\" />
+    <Folder Include="Test data\LoadPluginTests\ExpectedOutputs\" />
   </ItemGroup>
 </Project>

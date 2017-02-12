@@ -1,0 +1,17 @@
+﻿<html>
+<head>
+<title>ZPT-Sharp sample view</title>
+</head>
+<body tal:define="model here">
+  <h1>ZPT-Sharp sample view</h1>
+  <p>
+    Hello
+    <span tal:replace="here/Name">Joe Bloggs</span>.
+  </p>
+  <p>
+    I see you were born in
+    <strong tal:content="csharp:model.DateOfBirth.ToString(&quot;MMMM&quot;)">November</strong>,
+    what a wonderful month!
+  </p>
+</body>
+</html>

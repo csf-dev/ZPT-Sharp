@@ -192,8 +192,20 @@ namespace CSF.Zpt.Rendering
     public virtual IDictionary<string,object> GetAllDefinitions()
     {
       var localDefinitions = GetAllLocalDefinitions();
+      var globalDefinitions = GlobalDefinitions;
+      var rootDefinitions = GetBuiltinDefinitions();
 
-      return MergeDefinitionsDictionaries(localDefinitions, GlobalDefinitions);
+      var localAndGlobal = MergeDefinitionsDictionaries(localDefinitions, globalDefinitions);
+      return MergeDefinitionsDictionaries(localAndGlobal, rootDefinitions);
+    }
+
+    /// <summary>
+    /// Gets a collection of the current model's built-in definitions.
+    /// </summary>
+    /// <returns>The built-in definitions.</returns>
+    protected virtual IDictionary<string,object> GetBuiltinDefinitions()
+    {
+      return new Dictionary<string, object>();
     }
 
     /// <summary>

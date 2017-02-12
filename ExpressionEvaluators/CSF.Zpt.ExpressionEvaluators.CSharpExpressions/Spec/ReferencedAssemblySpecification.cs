@@ -6,7 +6,7 @@ namespace CSF.Zpt.ExpressionEvaluators.CSharpExpressions.Spec
   /// <summary>
   /// Represents the specification for an assembly to be referenced by the expression.
   /// </summary>
-  public class ReferencedAssemblySpecification : IEquatable<ReferencedAssemblySpecification>
+  public class ReferencedAssemblySpecification : IEquatable<ReferencedAssemblySpecification>, IComparable<ReferencedAssemblySpecification>, IComparable
   {
     #region properties
 
@@ -58,6 +58,44 @@ namespace CSF.Zpt.ExpressionEvaluators.CSharpExpressions.Spec
     {
       return (other != null
               && this.Name == other.Name);
+    }
+
+    /// <summary>
+    /// Compares the current instance to a given <c>System.Object</c>.
+    /// </summary>
+    /// <returns>
+    /// A number indicating whether the current instance should be considered greater, less or equal to the
+    /// given instance.
+    /// </returns>
+    /// <param name="other">The object with which to compare.</param>
+    public int CompareTo(object other)
+    {
+      var spec = other as ReferencedAssemblySpecification;
+
+      if(spec == null)
+      {
+        return -1;
+      }
+
+      return CompareTo(spec);
+    }
+
+    /// <summary>
+    /// Compares the current instance to a given <see cref="ReferencedAssemblySpecification"/>.
+    /// </summary>
+    /// <returns>
+    /// A number indicating whether the current instance should be considered greater, less or equal to the
+    /// given instance.
+    /// </returns>
+    /// <param name="other">The object with which to compare.</param>
+    public int CompareTo(ReferencedAssemblySpecification other)
+    {
+      if(other == null)
+      {
+        return 1;
+      }
+
+      return String.Compare (Name, other.Name, StringComparison.InvariantCulture);
     }
 
     #endregion

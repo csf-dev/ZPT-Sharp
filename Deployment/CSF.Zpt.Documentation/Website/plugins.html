@@ -26,36 +26,67 @@
       </ul>
     </nav>
     <section class="main_page_content" metal:fill-slot="main_page_content">
-        <header>
-            <h1>ZPT-Sharp plugin architecture</h1>
-        </header>
-        <h2>Overview</h2>
-        <p>
-            ZPT-Sharp has two extension points which are driven by a plugin architecture. These are:
-        </p>
-        <ul>
-            <li>
-                <strong>Document providers</strong> which facilitate the rendering of specific underlying document
-                implementations, such as XML, HTML or others.
-            </li>
-            <li>
-                <strong>TALES expression evaluators</strong> which provide logic for evaluating the differing types
-                of TALES expressions.
-            </li>
-        </ul>
-        <p>
-            These plugins are provided in separate libraries to the core ZPT logic. This facilitates the development
-            of extra plugins without requiring changes to the core logic. Additionally, when deploying a ZPT-Sharp
-            based application, you need only distribute the plugins which are required &amp; relevant.
-        </p>
-        <h2>Installing plugins</h2>
+      <header>
+        <h1>ZPT-Sharp plugin architecture</h1>
+      </header>
+      <nav id="page_navigation" metal:use-macro="documents/Shared/on-this-page.html/macros/page_navigation">
+        <ol metal:fill-slot="contents">
+          <li>
+            <a href="plugins.html#installing_plugins">Installing plugins</a>
+            <ol>
+              <li>
+                <a href="plugins.html#via_nuget">Installation via NuGet</a>
+              </li>
+              <li>
+                <a href="plugins.html#manual_installation">Manual installation</a>
+              </li>
+            </ol>
+          </li>
+          <li>
+            <a href="plugins.html#default_document_providers">The default document providers</a>
+          </li>
+          <li>
+            <a href="plugins.html#default_expression_evaluator">The default expression evaluator</a>
+          </li>
+        </ol>
+      </nav>
+      <p>
+        ZPT-Sharp has two extension points which are driven by a plugin architecture.
+      </p>
+      <p>
+        <strong>Document providers</strong> facilitate the rendering of specific underlying document
+        implementations, such as XML, HTML or others.
+      </p>
+      <p>
+        <strong>TALES expression evaluators</strong> provide logic for evaluating the differing types
+        of TALES expressions.
+      </p>
+      <p>
+        These plugins are provided in separate libraries to the core ZPT logic.
+				When deploying a ZPT-Sharp based application, you need only distribute the plugins which
+				are required &amp; relevant.
+      </p>
+				<h2 id="installing_plugins">Installing plugins</h2>
         <p>
             ZPT-Sharp is not very useful at all if no plugins are installed. It will be unable to render any documents
             without at least one document provider, and it will be unable to understand any TALES expressions without
             at least one expression evaluator.
         </p>
+				<h3 id="via_nuget">Installation via NuGet</h3>
+				<p>
+          When using <a href="nuget-packages.html">the ZPT-Sharp NuGet packages</a>, plugin installation is greatly
+					simplified.  To install a plugin, <em>just install the appropriate package</em>.
+          The copying of the plugin binaries to appropriate locations, as well as the changes to your application
+					configuration file are taken care of automatically.
+				</p>
+				<p>
+					Note that <em>to have configuration changes performed automatically by NuGet</em>, your application
+					configuration file must exist when the packages are installed and must be named either
+					<kbd>app.config</kbd> or <kbd>web.config</kbd>.
+				</p>
+        <h3 id="manual_installation">Manual installation</h3>
         <p>
-            To install and activate plugins you must:
+          The manual installation procedure for plugins is as follows:
         </p>
         <ul>
             <li>
@@ -76,7 +107,7 @@
           You might be able to use just the shortened name though, this is typically the same as the assembly filename,
           without the <kbd>.dll</kbd> suffix.
         </p>
-        <h2>The default document providers</h2>
+        <h2 id="default_document_providers">The default document providers</h2>
         <p>
             Up to two document provider plugins may be nominated as the default providers for HTML and XML documents.
             The need for default document providers is particularly important when using the
@@ -89,7 +120,7 @@
             whilst you may use the default providers, you may choose to bypass them by specifying a
             <code>System.Type</code> of document provider explicitly in your code.
         </p>
-        <h2>The default expression evaluator</h2>
+        <h2 id="default_expression_evaluator">The default expression evaluator</h2>
         <p>
             One expression evaluator plugin should be nominated as the default evaluator. This evaluator is then used
             for all TALES expressions which are not qualified with an expression prefix.  This is important in all

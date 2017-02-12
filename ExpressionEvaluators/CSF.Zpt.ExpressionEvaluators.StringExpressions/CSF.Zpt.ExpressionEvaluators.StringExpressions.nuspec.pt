@@ -18,6 +18,9 @@
       <dependency id="CSF.Zpt"
                   version="[0.0.0,1.0.0)"
                   tal:attributes="version string:[$fullVersion,${options/nextBreakingVersion})" />
+      <dependency id="CSF.Zpt.ExpressionEvaluators.PathExpressions"
+                  version="[0.0.0,1.0.0)"
+                  tal:attributes="version string:[$fullVersion,${options/nextBreakingVersion})" />
     </dependencies>
   </metadata>
   <files>

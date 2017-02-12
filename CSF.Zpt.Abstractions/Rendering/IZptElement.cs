@@ -15,13 +15,6 @@ namespace CSF.Zpt.Rendering
     /// <value>The name.</value>
     string Name { get; }
 
-//    /// <summary>
-//    /// Gets information about the source file for the current element.
-//    /// </summary>
-//    /// <value>The source file.</value>
-//    [Obsolete("Deprecated in favour of the method GetSourceInfo")]
-//    ISourceInfo SourceFile { get; }
-
     /// <summary>
     /// Gets a value indicating whether this instance is the root of its parent document.
     /// </summary>
@@ -307,6 +300,12 @@ namespace CSF.Zpt.Rendering
     /// Writes information to the underlying element's attributes recording its source information.
     /// </summary>
     void CacheSourceInformationInAttributes();
+
+    /// <summary>
+    /// Creates a new <see cref="IZptDocument"/> which contains only the current element and its children.
+    /// </summary>
+    /// <returns>A new document instance.</returns>
+    IZptDocument CreateDocumentFromThisElement();
 
     #endregion
   }

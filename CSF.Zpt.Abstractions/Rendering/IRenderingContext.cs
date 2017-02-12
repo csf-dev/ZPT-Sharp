@@ -69,6 +69,12 @@
         /// <returns>The original attributes.</returns>
         OriginalAttributeValuesCollection GetOriginalAttributes();
 
+        /// <summary>
+        /// Copies the state of the current instance to a model value container.
+        /// </summary>
+        /// <param name="container">The container.</param>
+        void CopyTo(IModelValueContainer container);
+
         #endregion
     }
 }

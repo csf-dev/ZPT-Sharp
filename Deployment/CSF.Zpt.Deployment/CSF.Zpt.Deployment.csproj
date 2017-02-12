@@ -36,6 +36,9 @@
     <CallTarget Targets="BuildDocumentationWebsite" Condition="'$(Configuration)' == 'Release'" />
     <CallTarget Targets="AssembleAllDocumentation" Condition="'$(Configuration)' == 'Release'" />
   </Target>
+  <Target Name="BeforeBuild" BeforeTargets="Build">
+    <Copy SourceFiles="README.zipfile.txt" DestinationFiles="README" Condition="'$(Configuration)' == 'Release'" />
+  </Target>
   <ItemGroup>
     <ProjectReference Include="..\..\CSF.Zpt\CSF.Zpt.csproj">
       <Project>{16E957BB-347C-4EE1-815F-19AC296FB9E0}</Project>
@@ -87,5 +90,6 @@
     <None Include="Zpt-Sharp-ZptBuilder.nuspec.pt" />
     <None Include="app.config.install.xdt" />
     <None Include="web.config.install.xdt" />
+    <None Include="README.zipfile.txt" />
   </ItemGroup>
 </Project>

@@ -72,7 +72,8 @@ namespace CSF.Zpt.ExpressionEvaluators.CSharpExpressions.Spec
 
     private IExpressionConfiguration GetConfiguration()
     {
-      var output = ConfigurationHelper.GetSection<ExpressionConfigurationSection>();
+      var reader = new ConfigurationReader();
+      var output = reader.ReadSection<ExpressionConfigurationSection>();
       return output?? FallbackExpressionConfiguration.Instance;
     }
 

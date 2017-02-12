@@ -6,7 +6,7 @@ namespace CSF.Zpt.Metal
   /// <summary>
   /// Represents a METAL macro and its name.
   /// </summary>
-  public class MetalMacro
+  public class MetalMacro : IMetalMacro
   {
     #region properties
 
@@ -24,7 +24,7 @@ namespace CSF.Zpt.Metal
     /// Gets the element.
     /// </summary>
     /// <value>The element.</value>
-    public ZptElement Element
+    public IZptElement Element
     {
       get;
       private set;
@@ -39,7 +39,7 @@ namespace CSF.Zpt.Metal
     /// </summary>
     /// <param name="name">Name.</param>
     /// <param name="element">Element.</param>
-    public MetalMacro(string name, ZptElement element)
+    public MetalMacro(string name, IZptElement element)
     {
       if(name == null)
       {

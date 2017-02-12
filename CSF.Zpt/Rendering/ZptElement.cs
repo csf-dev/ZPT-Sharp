@@ -674,6 +674,12 @@ namespace CSF.Zpt.Rendering
       this.CacheSourceInformationInAttributes();
     }
 
+    /// <summary>
+    /// Creates a new <see cref="IZptDocument"/> which contains only the current element and its children.
+    /// </summary>
+    /// <returns>A new document instance.</returns>
+    public abstract IZptDocument CreateDocumentFromThisElement();
+
     #endregion
 
     #region constructor

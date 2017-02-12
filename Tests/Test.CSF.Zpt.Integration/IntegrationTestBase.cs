@@ -68,6 +68,13 @@ namespace Test.CSF.Zpt.Integration
       }
     }
 
+    protected IIntegrationTestConfiguration Config
+    {
+      get {
+        return _config;
+      }
+    }
+
     #endregion
 
     #region setup & teardown
@@ -94,7 +101,8 @@ namespace Test.CSF.Zpt.Integration
     {
       _logger = log4net.LogManager.GetLogger(this.GetType());
 
-      IIntegrationTestConfiguration configuredConfig = ConfigurationHelper.GetSection<IntegrationTestConfiguration>();
+      var reader = new ConfigurationReader();
+      IIntegrationTestConfiguration configuredConfig = reader.ReadSection<IntegrationTestConfiguration>();
 
       _config = configuredConfig?? new FallbackIntegrationTestConfiguration();
 

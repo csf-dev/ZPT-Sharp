@@ -63,7 +63,7 @@
       </ExpressionEvaluators>
       <PluginConfigurationSection>
         <PluginAssemblies>
-          <Assembly Path="CSF.Zpt.ExpressionEvaluators.CSharpExpressions"
+          <Assembly Name="CSF.Zpt.ExpressionEvaluators.CSharpExpressions"
                     xdt:Transform="InsertIfMissing"
                     xdt:Locator="Match(Path)" />
         </PluginAssemblies>

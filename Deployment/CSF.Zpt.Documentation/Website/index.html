@@ -34,81 +34,89 @@
         </h1>
       </header>
       <div class="content_wrapper">
+        <section class="">
         <section class="overview">
           <header>
-              <h2>Overview</h2>
+            <h2>Overview</h2>
           </header>
           <p>
-            ZPT-Sharp is a .NET implementation of the
-            <a href="https://docs.zope.org/zope2/zope2book/ZPT.html">Zope Page Templates</a>
-            specification. ZPT is an easy-to-understand syntax for writing HTML &amp; XML pages with
-            dynamic data.  It may be used either with ASP.NET MVC, as a stand-alone offline application
-            or as shared library.
+            <strong>ZPT-Sharp</strong> is a page-template engine for creating dynamic
+            <abbr title="HyperText Markup Language">HTML</abbr> &amp;
+            <abbr title="Extensible Markup Language">XML</abbr> documents.
+            It uses an intuitive attribute-based syntax which is powerful yet easy to
+            learn for designers &amp; developers alike.
+            ZPT-Sharp works on both the .NET and Mono frameworks.
           </p>
-          <p>
-            ZPT is an <em>attribute language</em>, meaning that all
-            of the statements and directives which control the rendering of a document are performed
-            using attributes. This offers some distinct
-            <a href="advantages-of-zpt-views.html">advantages over traditional page-rendering
-            languages</a>.
-          </p>
+				</section>
+        <section class="sample">
+          <h2>Sample markup</h2>
+          <pre><code class="html">&lt;section class="product_list"&gt;
+  &lt;h2&gt;Our products&lt;h2&gt;
+  &lt;ul&gt;
+    &lt;li class="product_summary"
+        tal:repeat="product here/ProductList"&gt;
+      &lt;a href="products/dummy"
+         class="product_name"
+         tal:attributes="href product/ProductDetailUrl"
+         tal:content="product/Name"&gt;
+        A sample product
+      &lt;/a&gt;
+      &lt;img src="assets/product-thumbnails/dummy.png"
+           alt="Photo of A sample product"
+           tal:define="altText string:Photo of ${product/Name}"
+           tal:attributes="src product/ThumbnailImageUrl;
+                           alt altText" /&gt;
+      &lt;div class="product_description"
+           tal:content="structure product/HtmlDescription"&gt;
+        &lt;p&gt;
+          This product is rather good,
+          &lt;em&gt;you should definitely buy one&lt;/em&gt;.
+          In fact, we're not sure how you lived without it.
+        &lt;/p&gt;
+      &lt;/div&gt;
+    &lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/section&gt;</code></pre>
         </section>
         <section class="learn_more">
-          <header><h2>Learn more</h2></header>
+          <header>
+            <h2>Next steps</h2>
+          </header>
           <ul>
             <li>
-              <h3><a href="writing-pages-using-zpt.html">Writing ZPT pages</a></h3>
-              <p>Reference for writing views (or standalone documents) using Zope Page Templates.</p>
+              <h3>
+                <a href="hello-world.html">Hello World tutorial</a>
+              </h3>
+              <p>
+                Install ZPT-Sharp into an ASP.NET MVC project and write your first view in
+                <strong>five minutes</strong>.
+              </p>
             </li>
             <li>
-              <h3><a href="asp-net-mvc-view-engine.html">MVC ViewEngine</a></h3>
-              <p>How to integrate ZPT-Sharp with ASP.NET MVC and use it to write your views.</p>
+              <h3>
+                <a href="nuget-packages.html">NuGet packages</a>
+              </h3>
+              <p>
+                The recommended way to install ZPT-Sharp; choose a <strong>bundle</strong> that just works or
+                <strong>customise</strong> the installed components.
+              </p>
             </li>
             <li>
-              <h3><a href="command-line-renderer.html">The page renderer</a></h3>
-              <p>An app to render ZPT pages from the command-line.</p>
-            </li>
-            <li>
-              <h3><a href="page-rendering-api.html">The rendering API</a></h3>
-              <p>Integrate ZPT-Sharp into your own applications.</p>
-            </li>
-            <li>
-              <h3><a href="download.html">Downloads</a></h3>
-              <p>Downloads for the core API, the page rendering app and the MVC ViewEngine.</p>
-            </li>
-            <li>
-              <h3><a href="https://github.com/csf-dev/ZPT-Sharp">Get the source code</a></h3>
-              <p>Hosted on Github; contributions welcome!</p>
+              <h3>
+                <a href="writing-pages-using-zpt.html">Learn ZPT-Sharp</a>
+              </h3>
+              <p>
+                Learn to write great views, and take advantage of the full power of the ZPT syntax.
+              </p>
             </li>
           </ul>
-        </section>
-        <section class="example">
-          <header>
-            <h2>A sample ZPT document</h2>
-          </header>
           <p>
-            Here is a small HTML document, which makes use of some of the
-            ZPT <abbr title="Template Attribute Language">TAL</abbr> functionality, to bind model data to
-            the HTML.
+            ZPT-Sharp is available under
+            <a href="https://opensource.org/licenses/MIT">the permissive MIT license</a>.
+            It is developed in the open,
+            <a href="https://github.com/csf-dev/ZPT-Sharp">hosted on GitHub</a>.
+            Contributions, including feature suggestions, bug reports, development or code review are always welcome.
           </p>
-          <pre><code>&lt;html xmlns:tal="http://xml.zope.org/namespaces/tal"&gt;
-&lt;head&gt;
-&lt;title tal:content=&quot;string:Welcome to ${here/Name}!&quot;&gt;Welcome to Placeholder Shop Name!&lt;/title&gt;
-&lt;/head&gt;
-&lt;body&gt;
-&lt;h1&gt;You are visiting &lt;span tal:replace=&quot;here/Name&quot;&gt;Placeholder Shop Name&lt;/span&gt;&lt;/h1&gt;
-&lt;p&gt;Here are our products:&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li class=&quot;product_listing&quot; tal:repeat=&quot;product here/Products&quot;&gt;
-    &lt;h2 tal:content=&quot;product/Name&quot;&gt;Placeholder product name&lt;/h2&gt;
-    &lt;div class=&quot;description&quot; tal:content=&quot;structure product/RichHtmlDescription&quot;&gt;
-      &lt;em&gt;Placeholder product description&lt;/em&gt; here, which might include &lt;strong&gt;HTML elements&lt;/strong&gt;.
-    &lt;/div&gt;
-    &lt;strong class=&quot;price&quot; tal:content=&quot;product/GetFormattedPrice&quot;&gt;&#165;50.45&lt;/strong&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-&lt;/body&gt;
-&lt;/html&gt;</code></pre>
         </section>
       </div>
     </section>

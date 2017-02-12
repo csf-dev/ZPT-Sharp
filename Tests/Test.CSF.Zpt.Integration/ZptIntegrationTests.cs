@@ -78,12 +78,12 @@ namespace Test.CSF.Zpt.Integration
 
       var pnomeFile = SourcePath.GetFiles("pnome_template.pt").Single();
       var pnomeDoc = DocumentFactory.CreateDocument(pnomeFile);
-      var pnomeMacro = ((MetalMacroCollection) pnomeDoc.GetMacros())["page"];
+      var pnomeMacro = pnomeDoc.GetMacros().GetElement("page");
       output.MetalLocalDefinitions.Add("pnome_macros_page", pnomeMacro);
 
       var acmeFile = SourcePath.GetFiles("acme_template.html").Single();
       var acmeDoc = DocumentFactory.CreateDocument(acmeFile);
-      var acmeMacro = ((MetalMacroCollection) acmeDoc.GetMacros())["page"];
+      var acmeMacro = acmeDoc.GetMacros().GetElement("page");
       output.MetalLocalDefinitions.Add("acme_macros_page", acmeMacro);
 
       // The 'content' keyword option

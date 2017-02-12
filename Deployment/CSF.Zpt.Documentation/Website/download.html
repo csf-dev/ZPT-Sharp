@@ -32,80 +32,37 @@
       <header>
         <h1>Download ZPT-Sharp</h1>
       </header>
-      <h2>Install via NuGet</h2>
       <p>
-        The recommended way to use ZPT-Sharp in your own projects is to install it via
-        <a href="https://www.nuget.org">the NuGet package manager</a>.
-        Please refer to the <a href="nuget-packages.html">NuGet packages page</a>
-        for a list of the available packages.
+				The following downloads are available for those who cannot or do not wish to use
+				<a href="nuget-packages.html">the ZPT-Sharp NuGet packages</a>.
+				NuGet is the the recommended way to use ZPT-Sharp in your own projects.
       </p>
-      <h2>Zip downloads</h2>
+			<h2>The ZIP downloads</h2>
       <tal:block define="downloadBase string:https://github.com/csf-dev/ZPT-Sharp/releases/download;
                          version options/version;
                          versionExtra string:(${options/releaseType});
                          versionString string:v${version}"
                  on-error="structure string:&lt;p class=&quot;note&quot;&gt;There is presently no stable release, please visit the Github releases page to view unstable releases.&lt;/p&gt;">
       <p>
-        ZPT-Sharp is also available as a series of zip packages for those who do not wish to use NuGet.
-        The following downloads are for the most recent release:
+        The following ZIP downloads are for the most recent release:
         <strong><span tal:content="versionString">v0.0.0</span> <span tal:content="versionExtra | default">(release)</span></strong>.
       </p>
-      <ul class="downloads">
-        <li>
-          <h3>Complete package</h3>
-          <p>The complete package includes everything, both mandatory and optional components.</p>
-          <div class="download_action">
-            <a tal:attributes="href string:${downloadBase}/${versionString}/CSF.Zpt-complete.zip"
-              href="https://github.com/csf-dev/ZPT-Sharp/releases/download/v0.0.0/CSF.Zpt-complete.zip"
-              class="download_link">
-              Download CSF.Zpt-complete.zip
-            </a>
-          </div>
-        </li>
-
-        <li>
-          <h3>MVC 5 ViewEngine</h3>
-          <p>
-            This zip file includes only the components required in order to use ZPT-Sharp as an ASP.NET MVC 5
-            ViewEngine.
-          </p>
-          <div class="download_action">
-            <a tal:attributes="href string:${downloadBase}/${versionString}/CSF.Zpt.MVC.zip"
-              href="https://github.com/csf-dev/ZPT-Sharp/releases/download/v0.0.0/CSF.Zpt.MVC.zip"
-              class="download_link">
-              Download CSF.Zpt.MVC.zip
-            </a>
-          </div>
-        </li>
-
-        <li>
-          <h3>ZptBuilder.exe</h3>
-          <p>Only the command-line ZptBuilder.exe application and dependencies required to make it work.</p>
-          <div class="download_action">
-            <a tal:attributes="href string:${downloadBase}/${versionString}/ZptBuilder.zip"
-              href="https://github.com/csf-dev/ZPT-Sharp/releases/download/v0.0.0/ZptBuilder.zip"
-              class="download_link">
-              Download ZptBuilder.zip
-            </a>
-          </div>
-        </li>
-      
-        <li>
-          <h3>API only</h3>
-          <p>
-            For writing your own applications using ZPT-Sharp, this package includes only the core API components
-            which you will need to reference from your own application logic.
-          </p>
-          <div class="download_action">
-            <a tal:attributes="href string:${downloadBase}/${versionString}/CSF.Zpt-api-only.zip"
-              href="https://github.com/csf-dev/ZPT-Sharp/releases/download/v0.0.0/CSF.Zpt-api-only.zip"
-              class="download_link">
-              Download CSF.Zpt-api-only.zip
-            </a>
-          </div>
-        </li>
-      </ul>
-      
+      <h3>ZPT-Sharp complete package</h3>
+      <p>
+		    The complete ZPT-Sharp download includes everything available.
+				This is both the mandatory components (and their dependencies) as well as all of the supported plugins.
+			</p>
+			<p>
+        The ZIP file comes with its own <strong>README</strong>, which provides a summary of how to install the
+				correct files for your use-case.
+			</p>
+      <div class="download_action">
+        <a tal:attributes="href string:${downloadBase}/${versionString}/CSF.Zpt-complete.zip"
+          href="https://github.com/csf-dev/ZPT-Sharp/releases/download/v0.0.0/CSF.Zpt-complete.zip"
+          class="download_link">
+          Download CSF.Zpt-complete.zip
+        </a>
+      </div>
       <h3>Get the Source code</h3>
       <p>
         The recommended way to get the source code is to

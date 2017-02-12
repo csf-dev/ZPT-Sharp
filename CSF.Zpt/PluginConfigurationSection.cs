@@ -94,7 +94,7 @@ namespace CSF.Zpt
     {
       return this.Plugins
         .Cast<Plugin>()
-        .Select(x => x.Path)
+        .Select(x => x.Name)
         .ToArray();
     }
 
@@ -137,7 +137,8 @@ namespace CSF.Zpt
     {
       if(_singleton == null)
       {
-        _singleton = ConfigurationHelper.GetSection<PluginConfigurationSection>();
+        var reader = new ConfigurationReader();
+        _singleton = reader.ReadSection<PluginConfigurationSection>();
       }
 
       return _singleton?? new EmptyPluginConfiguration();

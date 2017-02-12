@@ -8,7 +8,9 @@ namespace Test.CSF.Zpt.Integration
 
     SourceAnnotation,
 
-    Model
+    Model,
+
+    LoadPlugin,
   }
 }
 

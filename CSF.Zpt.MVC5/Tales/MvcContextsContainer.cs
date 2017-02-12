@@ -12,7 +12,7 @@ namespace CSF.Zpt.MVC.Tales
   {
     #region constants
 
-    private const string
+    internal const string
       VIEW_CONTEXT            = "ViewContext",
       VIEW_DATA_DICTIONARY    = "ViewData",
       TEMP_DATA_DICTIONARY    = "TempData",
@@ -156,10 +156,10 @@ namespace CSF.Zpt.MVC.Tales
       return output;
     }
 
-    private Lazy<IDictionary<string,object>> GetApplicationDictionary(ViewContext context)
+    internal static Lazy<IDictionary<string,object>> GetApplicationDictionary(ViewContext context)
     {
       return new Lazy<IDictionary<string, object>>(() => {
-        var app = ViewContext.HttpContext?.Application;
+        var app = context.HttpContext?.Application;
         return (app != null)? app.AllKeys.ToDictionary(k => k, v => app[v]) : new Dictionary<string,object>();
       });
     }

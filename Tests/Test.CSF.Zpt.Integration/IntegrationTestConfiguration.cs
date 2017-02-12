@@ -15,6 +15,7 @@ namespace Test.CSF.Zpt.Integration
       INTEGRATION_TESTS_PATH        = "ZptIntegrationTests",
       MODEL_TESTS_PATH              = "ZptModelIntegrationTests",
       SOURCE_ANNOTATION_TESTS_PATH  = "SourceAnnotationIntegrationTests",
+      LOAD_PLUGIN_PATH              = "LoadPluginTests",
       SOURCE_DOCS_DIRECTORY         = "SourceDocuments",
       EXPECTED_OUTPUTS_DIRECTORY    = "ExpectedOutputs";
 
@@ -23,6 +24,7 @@ namespace Test.CSF.Zpt.Integration
         { IntegrationTestType.Default,            INTEGRATION_TESTS_PATH },
         { IntegrationTestType.Model,              MODEL_TESTS_PATH },
         { IntegrationTestType.SourceAnnotation,   SOURCE_ANNOTATION_TESTS_PATH },
+        { IntegrationTestType.LoadPlugin,         LOAD_PLUGIN_PATH },
       };
 
     #endregion
@@ -95,6 +97,28 @@ namespace Test.CSF.Zpt.Integration
       }
     }
 
+    [ConfigurationProperty(@"LoadPluginSourceDocumentPath", IsRequired = false)]
+    public virtual string LoadPluginSourceDocumentPath
+    {
+      get {
+        return (string) this["LoadPluginSourceDocumentPath"];
+      }
+      set {
+        this["LoadPluginSourceDocumentPath"] = value;
+      }
+    }
+
+    [ConfigurationProperty(@"LoadPluginExpectedOutputPath", IsRequired = false)]
+    public virtual string LoadPluginExpectedOutputPath
+    {
+      get {
+        return (string) this["LoadPluginExpectedOutputPath"];
+      }
+      set {
+        this["LoadPluginExpectedOutputPath"] = value;
+      }
+    }
+
     #endregion
 
     #region methods
@@ -144,6 +168,14 @@ namespace Test.CSF.Zpt.Integration
       else if(type == IntegrationTestType.Model)
       {
         output = this.ModelSourceDocumentPath;
+      }
+      else if(type == IntegrationTestType.LoadPlugin && useExpectedOutputPath)
+      {
+        output = this.LoadPluginExpectedOutputPath;
+      }
+      else if(type == IntegrationTestType.LoadPlugin)
+      {
+        output = this.LoadPluginSourceDocumentPath;
       }
       else
       {

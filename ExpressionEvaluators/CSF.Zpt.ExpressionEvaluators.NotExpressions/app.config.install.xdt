@@ -4,7 +4,7 @@
     <Zpt>
       <PluginConfigurationSection>
         <PluginAssemblies>
-          <Assembly Path="CSF.Zpt.ExpressionEvaluators.NotExpressions"
+          <Assembly Name="CSF.Zpt.ExpressionEvaluators.NotExpressions"
                     xdt:Transform="InsertIfMissing"
                     xdt:Locator="Match(Path)" />
         </PluginAssemblies>
