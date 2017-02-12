@@ -5,6 +5,7 @@ var classCSF_1_1Zpt_1_1DocumentProviders_1_1ZptXmlLinqElement =
     [ "AddCommentBefore", "classCSF_1_1Zpt_1_1DocumentProviders_1_1ZptXmlLinqElement.html#a1e8e4f60afd97a9591f926e2508b3050", null ],
     [ "AddCommentInside", "classCSF_1_1Zpt_1_1DocumentProviders_1_1ZptXmlLinqElement.html#ad23099d42627bd588a03e906671215de", null ],
     [ "Clone", "classCSF_1_1Zpt_1_1DocumentProviders_1_1ZptXmlLinqElement.html#a249a0b4a50208d8e0d1b1d460d8b4110", null ],
+    [ "CreateDocumentFromThisElement", "classCSF_1_1Zpt_1_1DocumentProviders_1_1ZptXmlLinqElement.html#a6f66f8bc53d00eddad34995020c4f111", null ],
     [ "Equals", "classCSF_1_1Zpt_1_1DocumentProviders_1_1ZptXmlLinqElement.html#aa6b2fd5d1b33db72975b6e86545601c9", null ],
     [ "GetAttribute", "classCSF_1_1Zpt_1_1DocumentProviders_1_1ZptXmlLinqElement.html#a00858be65adefa7e536dd194cd60641c", null ],
     [ "GetAttributes", "classCSF_1_1Zpt_1_1DocumentProviders_1_1ZptXmlLinqElement.html#a5bf78480b63b08940e0b5877fccc3d73", null ],

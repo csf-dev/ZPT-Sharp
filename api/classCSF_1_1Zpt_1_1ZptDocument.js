@@ -3,7 +3,7 @@ var classCSF_1_1Zpt_1_1ZptDocument =
     [ "ZptDocument", "classCSF_1_1Zpt_1_1ZptDocument.html#a6dc1d7fd62a4303ce44bf8ee17ecaa41", null ],
     [ "ConvertElement< TElement >", "classCSF_1_1Zpt_1_1ZptDocument.html#a807b774c1e42012b3295c258d10beea8", null ],
     [ "GetDefaultOptions", "classCSF_1_1Zpt_1_1ZptDocument.html#a2db75b0a880c9b544157faf8096c368d", null ],
-    [ "GetMacros", "classCSF_1_1Zpt_1_1ZptDocument.html#a16fe7d6e21d972cdd45d71425091e203", null ],
+    [ "GetMacros", "classCSF_1_1Zpt_1_1ZptDocument.html#a933e2f1c9fec41a7f84d21f4a410905e", null ],
     [ "GetOptions", "classCSF_1_1Zpt_1_1ZptDocument.html#ad1797bb52284c1f47ab1f0cd7dd43592", null ],
     [ "GetRootElement", "classCSF_1_1Zpt_1_1ZptDocument.html#aa366161fc3f6ada9174d0fd79545bbf4", null ],
     [ "GetSourceInfo", "classCSF_1_1Zpt_1_1ZptDocument.html#a3aa06487003cb820904fa504058ed2d6", null ],

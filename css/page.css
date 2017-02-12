@@ -53,7 +53,7 @@ body > .content_wrapper:after {
   padding: 20px;
   line-height: 180%;
   font-size: 90%;
-  border-radius: 15px;
+  border-radius: 8px;
   border: 1px solid #CDC998;
   float: left;
   margin-bottom: 4em;
@@ -77,11 +77,62 @@ body > .content_wrapper:after {
   font-size: 120%;
   color: #666;
 }
+.main_page_area > nav .nav_section:first-child {
+  margin-top: -1em;
+}
 .main_page_content {
-  margin-left: 300px;
+  margin-left: 42px;
+  margin-bottom: 4em;
   max-width: 680px;
   line-height: 140%;
   color: #333;
+  float: left;
+}
+.main_page_content nav#page_navigation {
+  float: left;
+  width: 16em;
+  background: #F0F0F0;
+  padding: 0.4em;
+  margin: 0 1em 1em 0;
+  border: 1px solid #E0E0E0;
+  font-size: 90%;
+  line-height: 120%;
+}
+.main_page_content nav#page_navigation h2 {
+  margin-top: 0;
+  margin-bottom: 0.31em;
+  font-family: 'Lato', sans-serif;
+  color: #666;
+  font-size: 130%;
+}
+.main_page_content nav#page_navigation a {
+  border: 0 none;
+}
+.main_page_content nav#page_navigation ol ol {
+  margin-top: 0.4em;
+  margin-left: -1em;
+  list-style: lower-roman;
+}
+.main_page_content nav#page_navigation li {
+  margin-bottom: 0.4em;
+}
+.main_page_content nav#page_navigation button.toggle {
+  border: 0;
+  padding: 2px;
+  margin: 0;
+  background: transparent none;
+  float: right;
+  min-width: 3em;
+  text-align: right;
+  color: #666;
+  cursor: pointer;
+}
+.main_page_content nav#page_navigation.collapsed ol {
+  display: none;
+}
+.main_page_content nav#page_navigation.collapsed {
+  float: none;
+  overflow: auto;
 }
 .page_footer {
   padding: 10px 40px;
@@ -199,7 +250,8 @@ body>.cookie_statement button {
     margin: 0 10px;
     max-width: none;
     width: auto;
-    font-size: 90%;
+    font-size: 95%;
+    float: none;
   }
   body > .content_wrapper:after {
     height: 51px

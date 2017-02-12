@@ -39,7 +39,7 @@ ga('send', 'pageview');
  <tr style="height: 56px;">
   <td style="padding-left: 0.5em;">
    <div id="projectname"><a href="../index.html">ZPT-Sharp</a>
-   &#160;<span id="projectnumber">v0.8.1</span>
+   &#160;<span id="projectnumber">v0.9.0</span>
    </div>
    <div id="projectbrief">Zope Page Templates for .NET</div>
   </td>
@@ -148,9 +148,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a965336bffac9970eba27ca637f7a42d4"><td class="memItemLeft" align="right" valign="top">XDocument&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCSF_1_1Zpt_1_1DocumentProviders_1_1ZptXmlLinqDocument.html#a965336bffac9970eba27ca637f7a42d4">RenderXml</a> (object model, <a class="el" href="interfaceCSF_1_1Zpt_1_1Rendering_1_1IRenderingSettings.html">IRenderingSettings</a> options=null, Action&lt; <a class="el" href="interfaceCSF_1_1Zpt_1_1Rendering_1_1IModelValueContainer.html">IModelValueContainer</a> &gt; contextConfigurator=null)</td></tr>
 <tr class="memdesc:a965336bffac9970eba27ca637f7a42d4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Renders the document to an <code>System.Xml.XmlDocument</code> instance.  <a href="#a965336bffac9970eba27ca637f7a42d4">More...</a><br /></td></tr>
 <tr class="separator:a965336bffac9970eba27ca637f7a42d4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9dd99c0f5b1da50763ef9ce722174df4"><td class="memItemLeft" align="right" valign="top">override <a class="el" href="interfaceCSF_1_1Zpt_1_1Tales_1_1ITalesPathHandler.html">ITalesPathHandler</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCSF_1_1Zpt_1_1DocumentProviders_1_1ZptXmlLinqDocument.html#a9dd99c0f5b1da50763ef9ce722174df4">GetMacros</a> ()</td></tr>
-<tr class="memdesc:a9dd99c0f5b1da50763ef9ce722174df4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets a collection of elements in the document which are defined as METAL macros.  <a href="#a9dd99c0f5b1da50763ef9ce722174df4">More...</a><br /></td></tr>
-<tr class="separator:a9dd99c0f5b1da50763ef9ce722174df4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6d9abfc4df2a5d02f9f9c760b0e51e7a"><td class="memItemLeft" align="right" valign="top">override <a class="el" href="interfaceCSF_1_1Zpt_1_1Metal_1_1IMetalMacroContainer.html">IMetalMacroContainer</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCSF_1_1Zpt_1_1DocumentProviders_1_1ZptXmlLinqDocument.html#a6d9abfc4df2a5d02f9f9c760b0e51e7a">GetMacros</a> ()</td></tr>
+<tr class="memdesc:a6d9abfc4df2a5d02f9f9c760b0e51e7a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets a collection of elements in the document which are defined as METAL macros.  <a href="#a6d9abfc4df2a5d02f9f9c760b0e51e7a">More...</a><br /></td></tr>
+<tr class="separator:a6d9abfc4df2a5d02f9f9c760b0e51e7a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0576494e5176c169af4f0705d3c547f9"><td class="memItemLeft" align="right" valign="top">override <a class="el" href="interfaceCSF_1_1Zpt_1_1Rendering_1_1ISourceInfo.html">ISourceInfo</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCSF_1_1Zpt_1_1DocumentProviders_1_1ZptXmlLinqDocument.html#a0576494e5176c169af4f0705d3c547f9">GetSourceInfo</a> ()</td></tr>
 <tr class="memdesc:a0576494e5176c169af4f0705d3c547f9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets information about the source medium for the current instance  <a href="#a0576494e5176c169af4f0705d3c547f9">More...</a><br /></td></tr>
 <tr class="separator:a0576494e5176c169af4f0705d3c547f9"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -301,7 +301,7 @@ Properties</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a9dd99c0f5b1da50763ef9ce722174df4"></a>
+<a class="anchor" id="a6d9abfc4df2a5d02f9f9c760b0e51e7a"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -309,7 +309,7 @@ Properties</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">override <a class="el" href="interfaceCSF_1_1Zpt_1_1Tales_1_1ITalesPathHandler.html">ITalesPathHandler</a> CSF.Zpt.DocumentProviders.ZptXmlLinqDocument.GetMacros </td>
+          <td class="memname">override <a class="el" href="interfaceCSF_1_1Zpt_1_1Metal_1_1IMetalMacroContainer.html">IMetalMacroContainer</a> CSF.Zpt.DocumentProviders.ZptXmlLinqDocument.GetMacros </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -325,7 +325,7 @@ Properties</h2></td></tr>
 <p>Gets a collection of elements in the document which are defined as METAL macros. </p>
 <dl class="section return"><dt>Returns</dt><dd>Elements representing the METAL macros.</dd></dl>
 
-<p>Implements <a class="el" href="classCSF_1_1Zpt_1_1ZptDocument.html#a16fe7d6e21d972cdd45d71425091e203">CSF.Zpt.ZptDocument</a>.</p>
+<p>Implements <a class="el" href="classCSF_1_1Zpt_1_1ZptDocument.html#a933e2f1c9fec41a7f84d21f4a410905e">CSF.Zpt.ZptDocument</a>.</p>
 
 </div>
 </div>
@@ -611,7 +611,7 @@ Properties</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="namespaceCSF.html">CSF</a></li><li class="navelem"><a class="el" href="namespaceCSF_1_1Zpt.html">Zpt</a></li><li class="navelem"><a class="el" href="namespaceCSF_1_1Zpt_1_1DocumentProviders.html">DocumentProviders</a></li><li class="navelem"><a class="el" href="classCSF_1_1Zpt_1_1DocumentProviders_1_1ZptXmlLinqDocument.html">ZptXmlLinqDocument</a></li>
-    <li class="footer">Generated on Sun Jan 8 2017 16:53:27 for ZPT-Sharp by
+    <li class="footer">Generated on Sun Feb 12 2017 18:41:43 for ZPT-Sharp by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.8 </li>
   </ul>

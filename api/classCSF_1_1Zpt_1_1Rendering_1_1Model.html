@@ -39,7 +39,7 @@ ga('send', 'pageview');
  <tr style="height: 56px;">
   <td style="padding-left: 0.5em;">
    <div id="projectname"><a href="../index.html">ZPT-Sharp</a>
-   &#160;<span id="projectnumber">v0.8.1</span>
+   &#160;<span id="projectnumber">v0.9.0</span>
    </div>
    <div id="projectbrief">Zope Page Templates for .NET</div>
   </td>
@@ -176,6 +176,10 @@ object &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" hre
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
+<tr class="memitem:aae16cc9b9385530cbe9cb1961977a2a6"><td class="memItemLeft" align="right" valign="top">virtual IDictionary&lt; string, <br class="typebreak" />
+object &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCSF_1_1Zpt_1_1Rendering_1_1Model.html#aae16cc9b9385530cbe9cb1961977a2a6">GetBuiltinDefinitions</a> ()</td></tr>
+<tr class="memdesc:aae16cc9b9385530cbe9cb1961977a2a6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets a collection of the current model's built-in definitions.  <a href="#aae16cc9b9385530cbe9cb1961977a2a6">More...</a><br /></td></tr>
+<tr class="separator:aae16cc9b9385530cbe9cb1961977a2a6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a471a8568523560b8b46b00272f9163b6"><td class="memItemLeft" align="right" valign="top">abstract <a class="el" href="classCSF_1_1Zpt_1_1Rendering_1_1Model.html">Model</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCSF_1_1Zpt_1_1Rendering_1_1Model.html#a471a8568523560b8b46b00272f9163b6">CreateTypedSiblingModel</a> ()</td></tr>
 <tr class="memdesc:a471a8568523560b8b46b00272f9163b6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Override in implementor classes to create a strongly-typed instance of <a class="el" href="classCSF_1_1Zpt_1_1Rendering_1_1Model.html" title="Represents the root of an object model. ">Model</a>, using the same model-type as the implementor class.  <a href="#a471a8568523560b8b46b00272f9163b6">More...</a><br /></td></tr>
 <tr class="separator:a471a8568523560b8b46b00272f9163b6"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -525,7 +529,7 @@ object &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" hre
 
 <p>Implements <a class="el" href="interfaceCSF_1_1Zpt_1_1Rendering_1_1IModel.html#a7ded420f4310634afba53f2b76f28645">CSF.Zpt.Rendering.IModel</a>.</p>
 
-<p>Implemented in <a class="el" href="classCSF_1_1Zpt_1_1Tales_1_1TalesModel.html#ab23fe881610c2193a4633ef369e13075">CSF.Zpt.Tales.TalesModel</a>, and <a class="el" href="classCSF_1_1Zpt_1_1MVC_1_1Tales_1_1MvcTalesModel.html#a811a54b58db04fa6b2ced16b630088c6">CSF.Zpt.MVC.Tales.MvcTalesModel</a>.</p>
+<p>Implemented in <a class="el" href="classCSF_1_1Zpt_1_1MVC_1_1Tales_1_1MvcTalesModel.html#a811a54b58db04fa6b2ced16b630088c6">CSF.Zpt.MVC.Tales.MvcTalesModel</a>, and <a class="el" href="classCSF_1_1Zpt_1_1Tales_1_1TalesModel.html#ab23fe881610c2193a4633ef369e13075">CSF.Zpt.Tales.TalesModel</a>.</p>
 
 </div>
 </div>
@@ -581,7 +585,7 @@ object &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" hre
 <p>Override in implementor classes to create a strongly-typed instance of <a class="el" href="classCSF_1_1Zpt_1_1Rendering_1_1Model.html" title="Represents the root of an object model. ">Model</a>, using the same model-type as the implementor class. </p>
 <dl class="section return"><dt>Returns</dt><dd>The sibling model.</dd></dl>
 
-<p>Implemented in <a class="el" href="classCSF_1_1Zpt_1_1Tales_1_1TalesModel.html#aa3b482c5f78acd2988426dc64145fbbb">CSF.Zpt.Tales.TalesModel</a>, and <a class="el" href="classCSF_1_1Zpt_1_1MVC_1_1Tales_1_1MvcTalesModel.html#a3b523f971879ae6aaf1d5273270eaf93">CSF.Zpt.MVC.Tales.MvcTalesModel</a>.</p>
+<p>Implemented in <a class="el" href="classCSF_1_1Zpt_1_1MVC_1_1Tales_1_1MvcTalesModel.html#a3b523f971879ae6aaf1d5273270eaf93">CSF.Zpt.MVC.Tales.MvcTalesModel</a>, and <a class="el" href="classCSF_1_1Zpt_1_1Tales_1_1TalesModel.html#aa3b482c5f78acd2988426dc64145fbbb">CSF.Zpt.Tales.TalesModel</a>.</p>
 
 </div>
 </div>
@@ -683,6 +687,34 @@ object &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" hre
 
 <p>Gets a dictionary containing all of the local variable definitions. </p>
 <dl class="section return"><dt>Returns</dt><dd>The all local definitions.</dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="aae16cc9b9385530cbe9cb1961977a2a6"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual IDictionary&lt;string,object&gt; CSF.Zpt.Rendering.Model.GetBuiltinDefinitions </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Gets a collection of the current model's built-in definitions. </p>
+<dl class="section return"><dt>Returns</dt><dd>The built-in definitions.</dd></dl>
+
+<p>Reimplemented in <a class="el" href="classCSF_1_1Zpt_1_1Tales_1_1TalesModel.html#a3e9637e3279d5fcb1639fc2a886cedb1">CSF.Zpt.Tales.TalesModel</a>, and <a class="el" href="classCSF_1_1Zpt_1_1MVC_1_1Tales_1_1MvcTalesModel.html#a72e61d7633f8cf9f43ab43a966c74793">CSF.Zpt.MVC.Tales.MvcTalesModel</a>.</p>
 
 </div>
 </div>
@@ -1129,7 +1161,7 @@ object &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" hre
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="namespaceCSF.html">CSF</a></li><li class="navelem"><a class="el" href="namespaceCSF_1_1Zpt.html">Zpt</a></li><li class="navelem"><a class="el" href="namespaceCSF_1_1Zpt_1_1Rendering.html">Rendering</a></li><li class="navelem"><a class="el" href="classCSF_1_1Zpt_1_1Rendering_1_1Model.html">Model</a></li>
-    <li class="footer">Generated on Sun Jan 8 2017 16:53:28 for ZPT-Sharp by
+    <li class="footer">Generated on Sun Feb 12 2017 18:41:44 for ZPT-Sharp by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.8 </li>
   </ul>

@@ -5,6 +5,7 @@ var interfaceCSF_1_1Zpt_1_1Rendering_1_1IZptElement =
     [ "AddCommentInside", "interfaceCSF_1_1Zpt_1_1Rendering_1_1IZptElement.html#a033430b0fdf0bd3cbf9110a8d42859db", null ],
     [ "CacheSourceInformationInAttributes", "interfaceCSF_1_1Zpt_1_1Rendering_1_1IZptElement.html#a742d2ffe1b52d74ddec129e37516f81f", null ],
     [ "Clone", "interfaceCSF_1_1Zpt_1_1Rendering_1_1IZptElement.html#af02929b1e9f2b1cd280f99109a7ad8d2", null ],
+    [ "CreateDocumentFromThisElement", "interfaceCSF_1_1Zpt_1_1Rendering_1_1IZptElement.html#a901536ad98045bf78e84619e91fca0a4", null ],
     [ "GetAttribute", "interfaceCSF_1_1Zpt_1_1Rendering_1_1IZptElement.html#a5f24e821bea50f10cbc47ec3ba8ccc81", null ],
     [ "GetAttributes", "interfaceCSF_1_1Zpt_1_1Rendering_1_1IZptElement.html#aac66250cba729e1d64fbf19466e4ec2e", null ],
     [ "GetChildElements", "interfaceCSF_1_1Zpt_1_1Rendering_1_1IZptElement.html#af5ec38a602a780998ea6c6c28723282b", null ],

@@ -12,6 +12,7 @@ var classCSF_1_1Zpt_1_1Rendering_1_1Model =
     [ "Evaluate", "classCSF_1_1Zpt_1_1Rendering_1_1Model.html#a74afe89058706b89628875ae2ae6d511", null ],
     [ "GetAllDefinitions", "classCSF_1_1Zpt_1_1Rendering_1_1Model.html#aeb95428c7a891df7bff81a0c6d9f7ed2", null ],
     [ "GetAllLocalDefinitions", "classCSF_1_1Zpt_1_1Rendering_1_1Model.html#a1c88ec02a7072ceaf19189df0de555b0", null ],
+    [ "GetBuiltinDefinitions", "classCSF_1_1Zpt_1_1Rendering_1_1Model.html#aae16cc9b9385530cbe9cb1961977a2a6", null ],
     [ "GetKeywordOptions", "classCSF_1_1Zpt_1_1Rendering_1_1Model.html#a6eddf9d64c614d784f6ae8e022f1a8fd", null ],
     [ "GetRepetitionSummaries", "classCSF_1_1Zpt_1_1Rendering_1_1Model.html#a8289c13d21b6cf31b4989e09e891b018", null ],
     [ "MergeDefinitionsDictionaries", "classCSF_1_1Zpt_1_1Rendering_1_1Model.html#ac2a52a26a86fdb717da6ab8de64fff5c", null ],

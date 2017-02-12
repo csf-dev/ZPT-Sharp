@@ -29,6 +29,8 @@ var searchData=
   ['imacroexpander',['IMacroExpander',['../interfaceCSF_1_1Zpt_1_1Metal_1_1IMacroExpander.html',1,'CSF::Zpt::Metal']]],
   ['imacrofinder',['IMacroFinder',['../interfaceCSF_1_1Zpt_1_1Metal_1_1IMacroFinder.html',1,'CSF::Zpt::Metal']]],
   ['imacrosubstituter',['IMacroSubstituter',['../interfaceCSF_1_1Zpt_1_1Metal_1_1IMacroSubstituter.html',1,'CSF::Zpt::Metal']]],
+  ['imetalmacro',['IMetalMacro',['../interfaceCSF_1_1Zpt_1_1Metal_1_1IMetalMacro.html',1,'CSF::Zpt::Metal']]],
+  ['imetalmacrocontainer',['IMetalMacroContainer',['../interfaceCSF_1_1Zpt_1_1Metal_1_1IMetalMacroContainer.html',1,'CSF::Zpt::Metal']]],
   ['imodel',['IModel',['../interfaceCSF_1_1Zpt_1_1Rendering_1_1IModel.html',1,'CSF::Zpt::Rendering']]],
   ['imodelvaluecontainer',['IModelValueContainer',['../interfaceCSF_1_1Zpt_1_1Rendering_1_1IModelValueContainer.html',1,'CSF::Zpt::Rendering']]],
   ['imodelvaluestore',['IModelValueStore',['../interfaceCSF_1_1Zpt_1_1Rendering_1_1IModelValueStore.html',1,'CSF::Zpt::Rendering']]],

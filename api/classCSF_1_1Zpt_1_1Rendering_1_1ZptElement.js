@@ -8,6 +8,7 @@ var classCSF_1_1Zpt_1_1Rendering_1_1ZptElement =
     [ "CacheSourceInformationInAttributes", "classCSF_1_1Zpt_1_1Rendering_1_1ZptElement.html#a6ffa759aa35759a51f9c9b2c056dd576", null ],
     [ "Clone", "classCSF_1_1Zpt_1_1Rendering_1_1ZptElement.html#af3eaf081ef0536eabb85a516a0134f9f", null ],
     [ "ConvertTo< TElement >", "classCSF_1_1Zpt_1_1Rendering_1_1ZptElement.html#a231f6b589cf0ab4fe8ce45517dfa020c", null ],
+    [ "CreateDocumentFromThisElement", "classCSF_1_1Zpt_1_1Rendering_1_1ZptElement.html#a638e94469def45a826dbf8abf2a95572", null ],
     [ "EnforceNameNotEmpty", "classCSF_1_1Zpt_1_1Rendering_1_1ZptElement.html#a9b97c153e2087ab7a17b1ec4b052dbeb", null ],
     [ "EnforceNodeType< TNodeType >", "classCSF_1_1Zpt_1_1Rendering_1_1ZptElement.html#a462db591e32a8518b4e8298722eadba1", null ],
     [ "EnforceParentNodeNotNull", "classCSF_1_1Zpt_1_1Rendering_1_1ZptElement.html#a5a3ab18494c97c22382b8d097d3b3d33", null ],

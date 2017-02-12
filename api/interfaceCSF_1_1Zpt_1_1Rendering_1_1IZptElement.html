@@ -39,7 +39,7 @@ ga('send', 'pageview');
  <tr style="height: 56px;">
   <td style="padding-left: 0.5em;">
    <div id="projectname"><a href="../index.html">ZPT-Sharp</a>
-   &#160;<span id="projectnumber">v0.8.1</span>
+   &#160;<span id="projectnumber">v0.9.0</span>
    </div>
    <div id="projectbrief">Zope Page Templates for .NET</div>
   </td>
@@ -249,6 +249,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a742d2ffe1b52d74ddec129e37516f81f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interfaceCSF_1_1Zpt_1_1Rendering_1_1IZptElement.html#a742d2ffe1b52d74ddec129e37516f81f">CacheSourceInformationInAttributes</a> ()</td></tr>
 <tr class="memdesc:a742d2ffe1b52d74ddec129e37516f81f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Writes information to the underlying element's attributes recording its source information.  <a href="#a742d2ffe1b52d74ddec129e37516f81f">More...</a><br /></td></tr>
 <tr class="separator:a742d2ffe1b52d74ddec129e37516f81f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a901536ad98045bf78e84619e91fca0a4"><td class="memItemLeft" align="right" valign="top"><a class="el" href="interfaceCSF_1_1Zpt_1_1IZptDocument.html">IZptDocument</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interfaceCSF_1_1Zpt_1_1Rendering_1_1IZptElement.html#a901536ad98045bf78e84619e91fca0a4">CreateDocumentFromThisElement</a> ()</td></tr>
+<tr class="memdesc:a901536ad98045bf78e84619e91fca0a4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a new <a class="el" href="interfaceCSF_1_1Zpt_1_1IZptDocument.html" title="Represents a ZPT document. ">IZptDocument</a> which contains only the current element and its children.  <a href="#a901536ad98045bf78e84619e91fca0a4">More...</a><br /></td></tr>
+<tr class="separator:a901536ad98045bf78e84619e91fca0a4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="properties"></a>
 Properties</h2></td></tr>
@@ -390,6 +393,26 @@ Properties</h2></td></tr>
 <p>Clone this instance into a new Element instance, which may be manipulated without affecting the original. </p>
 
 <p>Implemented in <a class="el" href="classCSF_1_1Zpt_1_1DocumentProviders_1_1ZptXmlElement.html#a81f75aa697a0a490b77979404d9d3540">CSF.Zpt.DocumentProviders.ZptXmlElement</a>, <a class="el" href="classCSF_1_1Zpt_1_1DocumentProviders_1_1ZptXmlLinqElement.html#a249a0b4a50208d8e0d1b1d460d8b4110">CSF.Zpt.DocumentProviders.ZptXmlLinqElement</a>, <a class="el" href="classCSF_1_1Zpt_1_1DocumentProviders_1_1ZptHtmlElement.html#ab9cb6dcec23cce4a6844060409b563cf">CSF.Zpt.DocumentProviders.ZptHtmlElement</a>, and <a class="el" href="classCSF_1_1Zpt_1_1Rendering_1_1ZptElement.html#af3eaf081ef0536eabb85a516a0134f9f">CSF.Zpt.Rendering.ZptElement</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a901536ad98045bf78e84619e91fca0a4"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="interfaceCSF_1_1Zpt_1_1IZptDocument.html">IZptDocument</a> CSF.Zpt.Rendering.IZptElement.CreateDocumentFromThisElement </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Creates a new <a class="el" href="interfaceCSF_1_1Zpt_1_1IZptDocument.html" title="Represents a ZPT document. ">IZptDocument</a> which contains only the current element and its children. </p>
+<dl class="section return"><dt>Returns</dt><dd>A new document instance.</dd></dl>
+
+<p>Implemented in <a class="el" href="classCSF_1_1Zpt_1_1Rendering_1_1ZptElement.html#a638e94469def45a826dbf8abf2a95572">CSF.Zpt.Rendering.ZptElement</a>, <a class="el" href="classCSF_1_1Zpt_1_1DocumentProviders_1_1ZptXmlElement.html#a2c412758a6036ab9ae20812bca87fce9">CSF.Zpt.DocumentProviders.ZptXmlElement</a>, <a class="el" href="classCSF_1_1Zpt_1_1DocumentProviders_1_1ZptXmlLinqElement.html#a6f66f8bc53d00eddad34995020c4f111">CSF.Zpt.DocumentProviders.ZptXmlLinqElement</a>, and <a class="el" href="classCSF_1_1Zpt_1_1DocumentProviders_1_1ZptHtmlElement.html#a049405da2ebb5bc3ee56409089e3923f">CSF.Zpt.DocumentProviders.ZptHtmlElement</a>.</p>
 
 </div>
 </div>
@@ -1408,7 +1431,7 @@ Properties</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="namespaceCSF.html">CSF</a></li><li class="navelem"><a class="el" href="namespaceCSF_1_1Zpt.html">Zpt</a></li><li class="navelem"><a class="el" href="namespaceCSF_1_1Zpt_1_1Rendering.html">Rendering</a></li><li class="navelem"><a class="el" href="interfaceCSF_1_1Zpt_1_1Rendering_1_1IZptElement.html">IZptElement</a></li>
-    <li class="footer">Generated on Sun Jan 8 2017 16:53:28 for ZPT-Sharp by
+    <li class="footer">Generated on Sun Feb 12 2017 18:41:44 for ZPT-Sharp by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.8 </li>
   </ul>

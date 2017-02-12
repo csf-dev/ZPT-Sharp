@@ -5,6 +5,7 @@ var classCSF_1_1Zpt_1_1DocumentProviders_1_1ZptHtmlElement =
     [ "AddCommentBefore", "classCSF_1_1Zpt_1_1DocumentProviders_1_1ZptHtmlElement.html#a4366946d61c275a65c40b8a93a3a662e", null ],
     [ "AddCommentInside", "classCSF_1_1Zpt_1_1DocumentProviders_1_1ZptHtmlElement.html#af1de20c42686e3ef83d2a1621ef4dbe0", null ],
     [ "Clone", "classCSF_1_1Zpt_1_1DocumentProviders_1_1ZptHtmlElement.html#ab9cb6dcec23cce4a6844060409b563cf", null ],
+    [ "CreateDocumentFromThisElement", "classCSF_1_1Zpt_1_1DocumentProviders_1_1ZptHtmlElement.html#a049405da2ebb5bc3ee56409089e3923f", null ],
     [ "Equals", "classCSF_1_1Zpt_1_1DocumentProviders_1_1ZptHtmlElement.html#a59a6cd87e5995c77694ce495beff4653", null ],
     [ "GetAttribute", "classCSF_1_1Zpt_1_1DocumentProviders_1_1ZptHtmlElement.html#a1024772df6eb40cc4d2b2707fe34ab77", null ],
     [ "GetAttributes", "classCSF_1_1Zpt_1_1DocumentProviders_1_1ZptHtmlElement.html#ad23020e95302f1a7e87d97d32e4b64d7", null ],

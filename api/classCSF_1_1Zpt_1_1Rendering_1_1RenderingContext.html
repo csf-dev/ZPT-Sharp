@@ -39,7 +39,7 @@ ga('send', 'pageview');
  <tr style="height: 56px;">
   <td style="padding-left: 0.5em;">
    <div id="projectname"><a href="../index.html">ZPT-Sharp</a>
-   &#160;<span id="projectnumber">v0.8.1</span>
+   &#160;<span id="projectnumber">v0.9.0</span>
    </div>
    <div id="projectbrief">Zope Page Templates for .NET</div>
   </td>
@@ -155,6 +155,9 @@ Public Member Functions</h2></td></tr>
 <a class="el" href="classCSF_1_1Zpt_1_1Rendering_1_1OriginalAttributeValuesCollection.html">OriginalAttributeValuesCollection</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCSF_1_1Zpt_1_1Rendering_1_1RenderingContext.html#ab924fa62b504d02ad74d71e298ed3a6e">GetOriginalAttributes</a> ()</td></tr>
 <tr class="memdesc:ab924fa62b504d02ad74d71e298ed3a6e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the original attributes present upon the element wrapped by the current instance.  <a href="#ab924fa62b504d02ad74d71e298ed3a6e">More...</a><br /></td></tr>
 <tr class="separator:ab924fa62b504d02ad74d71e298ed3a6e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7da063b14ec60535bdea2344ab5ce39d"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCSF_1_1Zpt_1_1Rendering_1_1RenderingContext.html#a7da063b14ec60535bdea2344ab5ce39d">CopyTo</a> (<a class="el" href="interfaceCSF_1_1Zpt_1_1Rendering_1_1IModelValueContainer.html">IModelValueContainer</a> container)</td></tr>
+<tr class="memdesc:a7da063b14ec60535bdea2344ab5ce39d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Copies the state of the current instance to a model value container.  <a href="#a7da063b14ec60535bdea2344ab5ce39d">More...</a><br /></td></tr>
+<tr class="separator:a7da063b14ec60535bdea2344ab5ce39d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aca00949e2c2dbbff8e44da1e04fef567"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCSF_1_1Zpt_1_1Rendering_1_1RenderingContext.html#aca00949e2c2dbbff8e44da1e04fef567">RenderingContext</a> (<a class="el" href="interfaceCSF_1_1Zpt_1_1Rendering_1_1IModel.html">IModel</a> metalContext, <a class="el" href="interfaceCSF_1_1Zpt_1_1Rendering_1_1IModel.html">IModel</a> talContext, <a class="el" href="interfaceCSF_1_1Zpt_1_1Rendering_1_1IZptElement.html">IZptElement</a> element, <a class="el" href="interfaceCSF_1_1Zpt_1_1Rendering_1_1IRenderingSettings.html">IRenderingSettings</a> options, string sourceAnnotationRoot=null)</td></tr>
 <tr class="memdesc:aca00949e2c2dbbff8e44da1e04fef567"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializes a new instance of the <a class="el" href="classCSF_1_1Zpt_1_1Rendering_1_1RenderingContext.html" title="Represents the object model, presented to a IZptDocument when it is rendered. ">CSF.Zpt.Rendering.RenderingContext</a> class.  <a href="#aca00949e2c2dbbff8e44da1e04fef567">More...</a><br /></td></tr>
 <tr class="separator:aca00949e2c2dbbff8e44da1e04fef567"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -303,6 +306,40 @@ Properties</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
+<a class="anchor" id="a7da063b14ec60535bdea2344ab5ce39d"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void CSF.Zpt.Rendering.RenderingContext.CopyTo </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="interfaceCSF_1_1Zpt_1_1Rendering_1_1IModelValueContainer.html">IModelValueContainer</a>&#160;</td>
+          <td class="paramname"><em>container</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Copies the state of the current instance to a model value container. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">container</td><td>The container.</td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Implements <a class="el" href="interfaceCSF_1_1Zpt_1_1Rendering_1_1IRenderingContext.html#ab172a1aa55dadabaad9d1f5d0c7278cc">CSF.Zpt.Rendering.IRenderingContext</a>.</p>
+
+</div>
+</div>
 <a class="anchor" id="a88b35d1acd7ceac7eb534ac42251d081"></a>
 <div class="memitem">
 <div class="memproto">
@@ -599,7 +636,7 @@ Properties</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="namespaceCSF.html">CSF</a></li><li class="navelem"><a class="el" href="namespaceCSF_1_1Zpt.html">Zpt</a></li><li class="navelem"><a class="el" href="namespaceCSF_1_1Zpt_1_1Rendering.html">Rendering</a></li><li class="navelem"><a class="el" href="classCSF_1_1Zpt_1_1Rendering_1_1RenderingContext.html">RenderingContext</a></li>
-    <li class="footer">Generated on Sun Jan 8 2017 16:53:28 for ZPT-Sharp by
+    <li class="footer">Generated on Sun Feb 12 2017 18:41:44 for ZPT-Sharp by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.8 </li>
   </ul>

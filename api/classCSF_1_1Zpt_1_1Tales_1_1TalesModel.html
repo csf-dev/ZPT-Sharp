@@ -39,7 +39,7 @@ ga('send', 'pageview');
  <tr style="height: 56px;">
   <td style="padding-left: 0.5em;">
    <div id="projectname"><a href="../index.html">ZPT-Sharp</a>
-   &#160;<span id="projectnumber">v0.8.1</span>
+   &#160;<span id="projectnumber">v0.9.0</span>
    </div>
    <div id="projectbrief">Zope Page Templates for .NET</div>
   </td>
@@ -198,6 +198,10 @@ Protected Member Functions</h2></td></tr>
 <tr class="memitem:aa17954cacc17f20232d1ca34bd4bfb59"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classCSF_1_1Zpt_1_1Tales_1_1BuiltinContextsContainer.html">BuiltinContextsContainer</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCSF_1_1Zpt_1_1Tales_1_1TalesModel.html#aa17954cacc17f20232d1ca34bd4bfb59">GetBuiltinContexts</a> (<a class="el" href="interfaceCSF_1_1Zpt_1_1Rendering_1_1IRenderingContext.html">IRenderingContext</a> context)</td></tr>
 <tr class="memdesc:aa17954cacc17f20232d1ca34bd4bfb59"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the builtin contexts, associated with the <code>CONTEXTS</code> root path keyword.  <a href="#aa17954cacc17f20232d1ca34bd4bfb59">More...</a><br /></td></tr>
 <tr class="separator:aa17954cacc17f20232d1ca34bd4bfb59"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3e9637e3279d5fcb1639fc2a886cedb1"><td class="memItemLeft" align="right" valign="top">override IDictionary&lt; string, <br class="typebreak" />
+object &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCSF_1_1Zpt_1_1Tales_1_1TalesModel.html#a3e9637e3279d5fcb1639fc2a886cedb1">GetBuiltinDefinitions</a> ()</td></tr>
+<tr class="memdesc:a3e9637e3279d5fcb1639fc2a886cedb1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets a collection of the current model's built-in definitions.  <a href="#a3e9637e3279d5fcb1639fc2a886cedb1">More...</a><br /></td></tr>
+<tr class="separator:a3e9637e3279d5fcb1639fc2a886cedb1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pro_methods_classCSF_1_1Zpt_1_1Rendering_1_1Model"><td colspan="2" onclick="javascript:toggleInherit('pro_methods_classCSF_1_1Zpt_1_1Rendering_1_1Model')"><img src="closed.png" alt="-"/>&#160;Protected Member Functions inherited from <a class="el" href="classCSF_1_1Zpt_1_1Rendering_1_1Model.html">CSF.Zpt.Rendering.Model</a></td></tr>
 <tr class="memitem:a3342d83632136a6ee2638c5ef1fa7135 inherit pro_methods_classCSF_1_1Zpt_1_1Rendering_1_1Model"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCSF_1_1Zpt_1_1Rendering_1_1Model.html#a3342d83632136a6ee2638c5ef1fa7135">TryGetItem</a> (string name, <a class="el" href="interfaceCSF_1_1Zpt_1_1Rendering_1_1IRenderingContext.html">IRenderingContext</a> context, out object result)</td></tr>
 <tr class="memdesc:a3342d83632136a6ee2638c5ef1fa7135 inherit pro_methods_classCSF_1_1Zpt_1_1Rendering_1_1Model"><td class="mdescLeft">&#160;</td><td class="mdescRight">Tries to get a named item from the current instance.  <a href="#a3342d83632136a6ee2638c5ef1fa7135">More...</a><br /></td></tr>
@@ -578,6 +582,36 @@ object &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" hre
 
 </div>
 </div>
+<a class="anchor" id="a3e9637e3279d5fcb1639fc2a886cedb1"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">override IDictionary&lt;string, object&gt; CSF.Zpt.Tales.TalesModel.GetBuiltinDefinitions </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Gets a collection of the current model's built-in definitions. </p>
+<dl class="section return"><dt>Returns</dt><dd>The built-in definitions.</dd></dl>
+
+<p>Reimplemented from <a class="el" href="classCSF_1_1Zpt_1_1Rendering_1_1Model.html#aae16cc9b9385530cbe9cb1961977a2a6">CSF.Zpt.Rendering.Model</a>.</p>
+
+<p>Reimplemented in <a class="el" href="classCSF_1_1Zpt_1_1MVC_1_1Tales_1_1MvcTalesModel.html#a72e61d7633f8cf9f43ab43a966c74793">CSF.Zpt.MVC.Tales.MvcTalesModel</a>.</p>
+
+</div>
+</div>
 <a class="anchor" id="a499fc229fae70cb084a9d585d3f14a04"></a>
 <div class="memitem">
 <div class="memproto">
@@ -717,7 +751,7 @@ object &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" hre
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="namespaceCSF.html">CSF</a></li><li class="navelem"><a class="el" href="namespaceCSF_1_1Zpt.html">Zpt</a></li><li class="navelem"><a class="el" href="namespaceCSF_1_1Zpt_1_1Tales.html">Tales</a></li><li class="navelem"><a class="el" href="classCSF_1_1Zpt_1_1Tales_1_1TalesModel.html">TalesModel</a></li>
-    <li class="footer">Generated on Sun Jan 8 2017 16:53:28 for ZPT-Sharp by
+    <li class="footer">Generated on Sun Feb 12 2017 18:41:44 for ZPT-Sharp by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.8 </li>
   </ul>

@@ -5,6 +5,7 @@ var classCSF_1_1Zpt_1_1DocumentProviders_1_1ZptXmlElement =
     [ "AddCommentBefore", "classCSF_1_1Zpt_1_1DocumentProviders_1_1ZptXmlElement.html#ae8a5317b5a67f1be1807784c265fa678", null ],
     [ "AddCommentInside", "classCSF_1_1Zpt_1_1DocumentProviders_1_1ZptXmlElement.html#a614d92ad3733bdd073cc330cfdad3e8d", null ],
     [ "Clone", "classCSF_1_1Zpt_1_1DocumentProviders_1_1ZptXmlElement.html#a81f75aa697a0a490b77979404d9d3540", null ],
+    [ "CreateDocumentFromThisElement", "classCSF_1_1Zpt_1_1DocumentProviders_1_1ZptXmlElement.html#a2c412758a6036ab9ae20812bca87fce9", null ],
     [ "Equals", "classCSF_1_1Zpt_1_1DocumentProviders_1_1ZptXmlElement.html#ab41d52eea65d20ae45319bb567be8278", null ],
     [ "GetAttribute", "classCSF_1_1Zpt_1_1DocumentProviders_1_1ZptXmlElement.html#af5ac980674e51ded5af894f305c7b135", null ],
     [ "GetAttributes", "classCSF_1_1Zpt_1_1DocumentProviders_1_1ZptXmlElement.html#a8d0eefe63495c11050b353c5ff115d80", null ],

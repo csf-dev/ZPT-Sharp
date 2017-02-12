@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Introduction to TAL</title>
+<title>Binding model data with TAL attributes</title>
 <base href="http://csf-dev.github.io/ZPT-Sharp/">
 <style type="text/css">
 @import url(css/styles.css);
@@ -26,218 +26,340 @@
     </h2>
   </header>
   <div class="main_page_area">
-    <nav>
+    <nav id="site_navigation">
       <h2>Site navigation</h2>
-      <ul class="active_introduction_to_tal">
-        <li class="introduction nav_item">
-          <a href="index.html">Introduction</a>
-        </li>
-        <li class="advantages nav_item">
-          <a href="advantages-of-zpt-views.html">ZPT Advantages</a>
-        </li>
-        <li class="nuget nav_item">
-          <a href="nuget-packages.html">Install ZPT-Sharp with NuGet</a>
-        </li>
-        <li class="download nav_item">
-          <a href="download.html">Download ZPT-Sharp</a>
-        </li>
-        <li class="asp_net_view_engine nav_item">
-          <a href="asp-net-mvc-view-engine.html">ZPT-Sharp for ASP.NET MVC</a>
-        </li>
-        <li class="command_line_renderer nav_item">
-          <a href="command-line-renderer.html">The command-line renderer</a>
-        </li>
-        <li class="writing_pages_using_zpt nav_item">
-          <a href="writing-pages-using-zpt.html">Writing pages</a>
-        </li>
-        <li class="metal_reference nav_section">
-          <h3>METAL reference</h3>
+      <ul>
+				<li class="nav_section">
+          <h3>First steps</h3>
+					<ul>
+            <li>
+              <a href="advantages-of-zpt-views.html">Why use ZPT-Sharp</a>
+						</li>
+            <li>
+              <a href="hello-world.html">Hello World example</a>
+            </li>
+            <li>
+              <a href="writing-pages-using-zpt.html">Learn ZPT syntax</a>
+            </li>
+					</ul>
+				</li>
+        <li class="nav_section">
+          <h3>Usage</h3>
           <ul>
             <li>
-              <a href="metal/introduction.html">Introduction to METAL</a>
+              <a href="asp-net-mvc-view-engine.html">ASP.NET MVC5</a>
             </li>
             <li>
-              <a href="metal/define-use-macro.html">Define &amp; use macros</a>
+              <a href="command-line-renderer.html">Command-line app</a>
             </li>
             <li>
-              <a href="metal/define-fill-slot.html">Define &amp; fill slots</a>
+              <a href="page-rendering-api.html">As an API</a>
             </li>
             <li>
-              <a href="metal/extend-macro.html">Extend macros</a>
+              <a href="logging.html">Diagnostics &amp; logging</a>
             </li>
           </ul>
         </li>
-        <li class="tal_reference nav_section">
-          <h3>TAL reference</h3>
+        <li class="nav_section">
+          <h3>Reference</h3>
           <ul>
             <li>
-              <a href="tal/introduction.html">Introduction to TAL</a>
+              <a href="metal/introduction.html">METAL syntax</a>
             </li>
             <li>
-              <a href="tal/define.html">Define variables</a>
+              <a href="tal/introduction.html">TAL syntax</a>
             </li>
             <li>
-              <a href="tal/condition.html">Conditional rendering</a>
+              <a href="tales/introduction.html">TALES syntax</a>
             </li>
             <li>
-              <a href="tal/repeat.html">Repeat sections of markup</a>
-            </li>
-            <li>
-              <a href="tal/content-replace.html">Insert model data</a>
-            </li>
-            <li>
-              <a href="tal/attributes.html">Set attributes</a>
-            </li>
-            <li>
-              <a href="tal/omit-tag.html">Omit start/end tag</a>
-            </li>
-            <li>
-              <a href="tal/on-error.html">Error handling</a>
+              <a href="api/index.html">API documentation</a>
             </li>
           </ul>
         </li>
-        <li class="tales_reference nav_section">
-          <h3>TALES reference</h3>
+        <li class="nav_section">
+          <h3>Installation</h3>
           <ul>
             <li>
-              <a href="tales/introduction.html">Introduction to TALES</a>
+              <a href="nuget-packages.html">NuGet packages</a>
             </li>
             <li>
-              <a href="tales/path-expressions.html">Path expressions</a>
+              <a href="download.html">ZIP download</a>
             </li>
             <li>
-              <a href="tales/string-expressions.html">String expressions</a>
-            </li>
-            <li>
-              <a href="tales/not-expressions.html">Not expressions</a>
-            </li>
-            <li>
-              <a href="tales/csharp-expressions.html">CSharp expressions</a>
-            </li>
-            <li>
-              <a href="tales/python-expressions.html">Python expressions</a>
-            </li>
-            <li>
-              <a href="tales/built-in-variables.html">Root variables</a>
-            </li>
-            <li>
-              <a href="tales/repeat-variables.html">Repeat variables</a>
-            </li>
-          </ul>
-        </li>
-        <li class="advanced_topics nav_section">
-          <h3>Advanced topics</h3>
-          <ul>
-            <li class="page_rendering_api nav_item">
-              <a href="page-rendering-api.html">API introduction</a>
-            </li>
-            <li class="api_reference nav_item">
-              <a href="api/index.html">API reference</a>
-            </li>
-            <li class="configuration nav_item">
-              <a href="configuration.html">Configuration</a>
-            </li>
-            <li class="plugins nav_item">
               <a href="plugins.html">Plugins</a>
             </li>
-            <li class="writing_plugins nav_item">
-              <a href="writing-plugins.html">Writing plugins</a>
+            <li>
+              <a href="configuration.html">Configuration</a>
             </li>
-            <li class="diagnostics_and_logging nav_item">
-              <a href="logging.html">Diagnostics &amp; logging</a>
+          </ul>
+        </li>
+        <li class="nav_section">
+          <h3>Contribute</h3>
+          <ul>
+            <li>
+              <a href="https://github.com/csf-dev/ZPT-Sharp">Github project</a>
+            </li>
+            <li>
+              <a href="https://github.com/csf-dev/ZPT-Sharp/issues">Issue tracker</a>
+            </li>
+            <li>
+              <a href="writing-plugins.html">Writing plugins</a>
             </li>
           </ul>
         </li>
       </ul>
     </nav>
     <section class="main_page_content">
-      <header><h1>Introduction to TAL</h1></header>
+      <header><h1>Binding model data with TAL attributes</h1></header>
+      <nav id="page_navigation">
+        <h2>Page contents</h2>
+        <ol>
+          <li>
+            <a href="tal/introduction.html#content_replace">Inserting content</a>
+          </li>
+          <li>
+            <a href="tal/introduction.html#define">Defining variables</a>
+          </li>
+          <li>
+            <a href="tal/introduction.html#condition">Conditional rendering</a>
+          </li>
+          <li>
+            <a href="tal/introduction.html#omit_tag">Omitting start/end tags</a>
+          </li>
+          <li>
+            <a href="tal/introduction.html#repeat">Repeating markup</a>
+          </li>
+          <li>
+            <a href="tal/introduction.html#attributes">Setting attributes</a>
+          </li>
+          <li>
+            <a href="tal/introduction.html#on_error">Handling errors</a>
+          </li>
+          <li>
+            <a href="tal/introduction.html#order_of_evaluation">Order of evaluation</a>
+          </li>
+        </ol>
+      </nav>
       <p>
-        <abbr title="Template Attribute Language">TAL</abbr> is how <abbr title="Zope Page Templates">ZPT</abbr>
-        performs rendering logic upon a page.  Where
-        <a href="metal/introduction.html"><abbr title="Macro Expansion Template Attribute Language">METAL</abbr></a>
-        brings together the components of that page through reusable pieces of markup defined in macros, TAL is used to
-        bind the model to the page.  It can inject data from the application, repeat sections of markup,
-        control attributes, conditionally render sections of markup and more.
-      </p>
-      <h2>TAL attributes</h2>
+        TAL is used to bind data from your application (a model) to your view.
+				The following introduction shows - in most cases - a very limited example of the available functionality of each attribute.
+				Each section carries links to more detailed documentation pages.
+			</p>
+      <h2 id="content_replace">Inserting content</h2>
+			<p>
+        The two simplest TAL attributes to learn are <code>tal:content</code> &amp; <code>tal:replace</code>;
+				they behave in a very similar manner.
+			</p>
+			<pre><code class="html">&lt;p&gt;
+  Hello &lt;strong tal:content="name"&gt;Joe Bloggs&lt;/strong&gt;.
+  How are you on this fine &lt;span tal:replace="dayOfWeek"&gt;Sunday&lt;/span&gt;?
+&lt;/p&gt;</code></pre>
       <p>
-        The following attributes exist in the <a href="writing-pages-using-zpt.html#xml_namespaces">TAL namespace</a>,
-        activated using the <code>tal:</code> attribute prefix.
-      </p>
-      <table class="zpt_attributes">
-        <colgroup>
-          <col class="attribute">
-          <col class="summary">
-        </colgroup>
-        <thead>
-          <tr>
-            <th>Attribute</th>
-            <th>Summary</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td><a href="tal/define.html"><code>define</code></a></td>
-            <td>
-              Define a
-              <a href="tales/introduction.html"><abbr title="Template Attribute Language Expression Syntax">TALES</abbr></a>
-              variable
-            </td>
-          <tr>
-            <td><a href="tal/condition.html"><code>condition</code></a></td>
-            <td>
-              Do not render the element (or any of its children) if a condition evaluates to <code>false</code>
-            </td>
-          </tr>
-          <tr>
-            <td><a href="tal/repeat.html"><code>repeat</code></a></td>
-            <td>
-              Repeat the element (and all of its children) for each item within a collection
-            </td>
-          <tr>
-            <td><a href="tal/content-replace.html"><code>content</code></a></td>
-            <td>
-              Replace all child nodes of the current element with the results of a TALES expression
-              <em>(mutually exclusive with <code>replace</code>)</em>
-            </td>
-          <tr>
-            <td><a href="tal/content-replace.html"><code>replace</code></a></td>
-            <td>
-              Replace the current element, along with all of its child nodes with the results of a TALES expression
-              <em>(mutually exclusive with <code>content</code>)</em>
-            </td>
-          <tr>
-            <td><a href="tal/attributes.html"><code>attributes</code></a></td>
-            <td>
-              Add, remove or set the value of HTML/XML attributes on the current element
-            </td>
-          <tr>
-            <td><a href="tal/omit-tag.html"><code>omit-tag</code></a></td>
-            <td>
-              Do not render the element (but preserve the element's children) if a condition evaluates to
-              <code>true</code>
-            </td>
-          <tr>
-            <td><a href="tal/on-error.html"><code>on-error</code></a></td>
-            <td>
-              Conditionally render some markup if an exception is caught whilst rendering the current element or
-              its children.
-            </td>
-          </tr>
-        </tr></tr></tr></tr></tr></tr></tbody>
-      </table>
-      <h3>Order of processing</h3>
+        In each case, the attribute value is
+				<a href="tales/introduction.html">a TALES expression</a>
+				indicating the model value to be inserted.
+				The above example might render as follows:
+			</p>
+      <pre><code class="html">&lt;p&gt;
+  Hello &lt;strong&gt;Sarah Smith&lt;/strong&gt;.
+  How are you on this fine Tuesday?
+&lt;/p&gt;</code></pre>
+			<p>
+        More information about content &amp; repeat variables
+				is available on <a href="tal/content-replace.html">the detailed documentation page</a>.
+			</p>
+			<h2 id="define">Defining variables</h2>
+			<p>
+        In the previous example we made use of two imaginary variables (via TALES expressions).
+				These were <strong>name</strong> and <strong>dayOfWeek</strong>.
+				The <code>tal:define</code> attribute is how we define/create those variables for real.
+			</p>
+			<p>
+        There are a small number of built-in variables provided by ZPT itself.
+				Of those, <strong>here</strong> is the most important; it represents the model passed into the rendering process.
+			</p>
+      <pre><code class="html">&lt;div tal:define="customerName here/Customer/Name"&gt;
+  &lt;p&gt;Customer name: &lt;span tal:content="customerName"&gt;Tony Fung&lt;/span&gt;.&lt;/p&gt;
+&lt;/div&gt;</code></pre>
+			<p>
+        The syntax of a define attribute is explored in depth in
+				<a href="tal/define.html">the detailed documentation</a>.
+				At its simplest the attribute value is the name of a variable you wish to define/create,
+				followed by a space and then
+				<a href="tales/introduction.html">a TALES expression</a>
+				indicating the value for the new variable.
+			</p>
+      <h2 id="condition">Conditional rendering</h2>
+			<p>
+        Another relatively simple TAL attribute is <code>tal:condition</code>.
+			</p>
+      <pre><code class="html">&lt;div tal:define="hasOverdueBooks here/BooksOnLoan/HasAnyOverdue"&gt;
+  &lt;p&gt;Welcome to the library&lt;/p&gt;
+  &lt;p tal:condition="hasOverdueBooks" class="warning"&gt;
+    You have overdue books!
+  &lt;/p&gt;
+&lt;/div&gt;</code></pre>
+			<p>
+        The attribute value is evaluated as
+        <a href="tales/introduction.html">a TALES expression</a>
+				The element with the condition attribute and its contents will be rendered if the expression value is "truth-like".
+				If not then the element and its contents will be omitted.
+			</p>
       <p>
-        TAL attributes are processed in the order in which they are listed in the above table.  If an attribute
-        indicates that it ceases TAL processing (for example, a <code>tal:condition</code> attribute means that an
-        element is not to be rendered), then subsequent TAL attributes will not be processed.
-      </p>
+        More information, <em>including what it means for a value to be "truth-like"</em>, is available on
+				<a href="tal/condition.html">the documentation page for condition attributes</a>.
+			</p>
+      <h2 id="omit_tag">Omitting start/end tags</h2>
+			<p>
+        Similar to the condition attribute is <code>tal:omit-tag</code>.
+			</p>
+      <pre><code class="html">&lt;div tal:define="noRush here/DeadlineIsWeeksAway"&gt;
+  &lt;em tal:omit-tag="noRush"&gt;
+    This content will be displayed with emphasis unless the deadline is weeks away,
+    as indicated by the &lt;strong&gt;noRush&lt;/strong&gt; variable.
+  &lt;/em&gt;  
+&lt;/div&gt;</code></pre>
       <p>
-        The exception to this is <code>tal:on-error</code> attributes.  On-error attributes are processed immediately
-        when an error is raised; that error will then interrupt the processing of other TAL attributes.  Thus, on-error
-        attributes lie outside the normal order of attribute processing.
+        When using omit-tag, the contents of the element are <em>always</em> preserved and rendered.
+			  If the TALES expression is "truth-like" then the tag itself (including its end tag where applicable)
+				is omitted from the rendering, but the contents are retained.
+			</p>
+      <p>
+        Further information, <em>including what it means for a value to be "truth-like"</em>, is available on
+				<a href="tal/omit-tag.html">the omit-tag documentation page</a>.
       </p>
+			<h2 id="repeat">Repeating markup</h2>
+			<p>
+        A common requirement in rendering documents is to repeat a section of markup for items in a collection.
+				This is where <code>tal:repeat</code> is used.
+			</p>
+      <pre><code class="html">&lt;!-- Source code for a sample data table representing a shopping list --&gt;
+&lt;table tal:define="shoppingList here/ShoppingList"&gt;
+  &lt;tr&gt;
+    &lt;th&gt;Item&lt;/th&gt;
+    &lt;th&gt;Quantity&lt;/th&gt;
+  &lt;/tr&gt;
+  &lt;tr tal:repeat="item shoppingList"&gt;
+    &lt;td tal:content="item/Name"&gt;Bagels&lt;/td&gt;
+    &lt;td tal:content="item/Quantity"&gt;4&lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/table&gt;
+
+&lt;!-- Sample rendering of the above source code, for a model with 2 items --&gt;
+&lt;table&gt;
+  &lt;tr&gt;
+    &lt;th&gt;Item&lt;/th&gt;
+    &lt;th&gt;Quantity&lt;/th&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td&gt;Bananas&lt;/td&gt;
+    &lt;td&gt;2&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td&gt;Biscuits&lt;/td&gt;
+    &lt;td&gt;2&lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/table&gt;</code></pre>
+      <p>
+        The structure of the repeat attribute is similar to a TAL define attribute.
+				It begins with the name of a variable to declare and continues with
+        <a href="tales/introduction.html">a TALES expression</a>.
+				That expression should indicate a collection object (implementing <code>IEnumerable</code>).
+			</p>
+			<p>
+			  For each iteration of the collection, the declared variable exposes the current collection item.
+			</p>
+			<p>
+        This example demonstrates only some of the capabilities of the repeat attribute.
+				There is much more to learn on
+				<a href="tal/repeat.html">its detailed documentation page</a>.
+			</p>
+      <h2 id="attributes">Setting attributes</h2>
+			<p>
+        TAL may also be used to add/set or remove attributes to/from an element, using the
+				<code>tal:attributes</code> attribute.
+			</p>
+      <pre><code class="html">&lt;div tal:define="reportUrl here/Article/ReportUrl"&gt;
+  If you have a concern, you may
+  &lt;a href="article/0/report"
+     tal:attributes="href reportUrl"&gt;report this article&lt;/a&gt;
+  to an administrator.
+&lt;/div&gt;</code></pre>
+      <p>
+        The syntax for the value for an attributes attribute is in two parts.
+				The first part is the name of an attribute to change and the second is
+        <a href="tales/introduction.html">a TALES expression</a>
+				for the new attribute value.
+			</p>
+      <p>
+        There is more to learn about setting attributes
+				<a href="tal/attributes.html">in the detailed documentation</a>.
+			</p>
+			<h2 id="on_error">Handling errors</h2>
+			<p>
+        The final TAL attribute handles errors encountered whilst rendering a document: <code>tal:on-error</code>.
+			</p>
+      <pre><code class="html">&lt;!-- Source code for a login statement --&gt;
+&lt;p tal:define="currentUser here/CurrentUser"
+   tal:on-error="string:You are not logged in."&gt;
+  You are logged in as
+  &lt;strong tal:content="currentUser/Username"&gt;jbloggs&lt;/strong&gt;.
+&lt;/p&gt;
+
+&lt;!-- If the currentUser variable is null then this would render as shown: --&gt;
+&lt;p&gt;
+  You are not logged in.
+&lt;/p&gt;</code></pre>
+		  <p>
+				If an error occurs when rendering an element (such as
+				<a href="tales/introduction.html">a TALES expression</a> which cannot be evaluated) then the element
+				and its parents are searched in order for an on-error attribute.
+				The first such attribute found is treated as if it were a TAL content attribute.
+				This avoids the entire rendering process terminating with an error.
+			</p>
+      <p>
+        The on-error attribute is explored in further detail
+				<a href="tal/on-error.html">on its documentation page</a>.
+			</p>
+			<h2 id="order_of_evaluation">Order of evaluation</h2>
+			<p>
+			  The TAL rendering process visits every element in the source file in document order, fully processing
+				all of the TAL attributes before moving onto the next.
+				Within each element, TAL attributes are evaluated and processed in the following order:
+			</p>
+			<ol>
+        <li><strong>define</strong></li>
+        <li><strong>condition</strong></li>
+        <li><strong>repeat</strong></li>
+        <li><strong>content</strong> or <strong>replace</strong></li>
+        <li><strong>attributes</strong></li>
+        <li><strong>omit-tag</strong></li>
+			</ol>
+			<p>
+        The <strong>on-error</strong> attribute lives outside of this order.
+				It is processed only if an error occurs and then immediately upon the occurrance of that error.
+			</p>
+      <p>
+        The order of evaluation is usually intuitive but be mindful of the opportunity for mistakes like this:
+      </p>
+      <pre><code class="html">&lt;!-- This won't work, define happens before repeat.
+     The "saying" variable won't exist when the define
+     attribute is evaluated --&gt;
+&lt;ul&gt;
+  &lt;li tal:repeat="saying here/Sayings"
+      tal:define="formattedSaying string:As the saying goes - $saying"&gt;
+    &lt;em tal:content="formattedSaying"&gt;As the saying goes - I told you so!&lt;/em&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;</code></pre>
+			<p>
+        Additionally, a few of the above attributes can terminate the rendering process upon an element where it is
+				pointless to continue.
+				For example, a <strong>condition</strong> attribute may determine that the element and its children are
+				not to be rendered.
+				In this case further TAL attributes on the element will be ignored, as they cannot have any meaningful
+				effect upon the result.
+			</p>
     </section>
   </div>
 </div>
@@ -248,10 +370,10 @@
   </section>
   <section class="version">
     <p>
-      Website built <strong>2017-01-08</strong>;
+      Website built <strong>2017-02-12</strong>;
       for version
       <strong>
-        v0.8.1-beta
+        v0.9.0-rc1
       </strong>
     </p>
   </section>
