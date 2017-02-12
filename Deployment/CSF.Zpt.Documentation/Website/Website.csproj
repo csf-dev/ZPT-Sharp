@@ -85,5 +85,6 @@
     <None Include="tales\repeat-variables.html" />
     <None Include="tales\string-expressions.html" />
     <None Include="all-nuget-packages.html" />
+    <None Include="tales\load-expressions.html" />
   </ItemGroup>
 </Project>
