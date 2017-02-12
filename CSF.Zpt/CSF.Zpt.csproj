@@ -95,7 +95,7 @@
     <Compile Include="Tales\ExpressionFactory.cs" />
     <Compile Include="ZptDocument.cs" />
     <Compile Include="Metal\MetalMacro.cs" />
-    <Compile Include="Metal\MetalMacroCollection.cs" />
+    <Compile Include="Metal\MetalMacroContainer.cs" />
     <Compile Include="Rendering\RenderingContextFactoryFactory.cs" />
     <Compile Include="Rendering\ContextVisitorFactory.cs" />
     <Compile Include="Rendering\NamedObjectWrapper.cs" />

@@ -5,6 +5,7 @@ using CSF.Zpt.Rendering;
 using System.Linq;
 using CSF.Zpt.Tales;
 using CSF.Zpt.Resources;
+using CSF.Zpt.Metal;
 
 namespace CSF.Zpt
 {
@@ -128,7 +129,7 @@ namespace CSF.Zpt
     /// Gets a collection of elements in the document which are defined as METAL macros.
     /// </summary>
     /// <returns>Elements representing the METAL macros.</returns>
-    public abstract ITalesPathHandler GetMacros();
+    public abstract IMetalMacroContainer GetMacros();
 
     /// <summary>
     /// Gets information about the source medium for the current instance

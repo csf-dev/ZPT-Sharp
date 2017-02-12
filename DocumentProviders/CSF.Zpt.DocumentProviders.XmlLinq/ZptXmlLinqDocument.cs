@@ -7,6 +7,7 @@ using CSF.Zpt.Resources;
 using CSF.Zpt.Tales;
 using System.Xml;
 using System.Xml.XPath;
+using CSF.Zpt.Metal;
 
 namespace CSF.Zpt.DocumentProviders
 {
@@ -95,7 +96,7 @@ namespace CSF.Zpt.DocumentProviders
     /// Gets a collection of elements in the document which are defined as METAL macros.
     /// </summary>
     /// <returns>Elements representing the METAL macros.</returns>
-    public override ITalesPathHandler GetMacros()
+    public override IMetalMacroContainer GetMacros()
     {
       var xpath = String.Format("//*[@{0}:{1}]",
                                 ZptConstants.Metal.Namespace.Prefix,
@@ -117,7 +118,7 @@ namespace CSF.Zpt.DocumentProviders
         })
         .ToArray();
 
-      return new CSF.Zpt.Metal.MetalMacroCollection(output);
+      return new CSF.Zpt.Metal.MetalMacroContainer(output);
     }
 
     /// <summary>
