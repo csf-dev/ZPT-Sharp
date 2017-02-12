@@ -82,6 +82,7 @@ body > .content_wrapper:after {
 }
 .main_page_content {
   margin-left: 42px;
+  margin-bottom: 4em;
   max-width: 680px;
   line-height: 140%;
   color: #333;
