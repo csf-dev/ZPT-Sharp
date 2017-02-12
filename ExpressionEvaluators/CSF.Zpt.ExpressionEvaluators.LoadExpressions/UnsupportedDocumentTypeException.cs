@@ -7,7 +7,7 @@ namespace CSF.Zpt.ExpressionEvaluators.LoadExpressions
   /// Exception raised when an unsupported document type is used with a 'load:' expression.
   /// </summary>
   [Serializable]
-  public class UnsupportedDocumentTypeException : Exception
+  public class UnsupportedDocumentTypeException : ZptException
   {
     /// <summary>
     /// Initializes a new instance of the <see cref="T:UnsupportedDocumentTypeException"/> class
