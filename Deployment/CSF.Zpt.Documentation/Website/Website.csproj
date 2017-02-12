@@ -6,6 +6,7 @@
     <ProjectGuid>{4FE5F338-3430-4EA2-A83E-78FBBD56C98A}</ProjectGuid>
     <RootNamespace>Website</RootNamespace>
     <AssemblyName>Website</AssemblyName>
+    <OutputType>Exe</OutputType>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <OutputPath>bin\Debug</OutputPath>
