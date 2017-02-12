@@ -95,7 +95,7 @@ namespace CSF.Zpt.ExpressionEvaluators.CSharpExpressions.Spec
         return 1;
       }
 
-      return Name.CompareTo(other.Name);
+      return String.Compare (Name, other.Name, StringComparison.InvariantCulture);
     }
 
     #endregion

@@ -118,7 +118,12 @@ namespace CSF.Zpt.ExpressionEvaluators.CSharpExpressions.Spec
         return 1;
       }
 
-      return Name.CompareTo(other.Name);
+      var combinedNameAndType = String.Concat(Name, TypeName?? String.Empty);
+      var otherCombinedNameAndType = String.Concat(other.Name, other.TypeName?? String.Empty);
+
+      return String.Compare (combinedNameAndType,
+                             otherCombinedNameAndType,
+                             StringComparison.InvariantCulture);
     }
 
     #endregion

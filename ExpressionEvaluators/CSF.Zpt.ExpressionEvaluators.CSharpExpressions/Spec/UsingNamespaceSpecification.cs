@@ -116,7 +116,12 @@ namespace CSF.Zpt.ExpressionEvaluators.CSharpExpressions.Spec
         return 1;
       }
 
-      return Namespace.CompareTo(other.Namespace);
+      var combinedNamespaceAndAlias = String.Concat(Namespace, Alias?? String.Empty);
+      var otherCombinedNamespaceAndAlias = String.Concat(other.Namespace, other.Alias?? String.Empty);
+
+      return String.Compare (combinedNamespaceAndAlias,
+                             otherCombinedNamespaceAndAlias,
+                             StringComparison.InvariantCulture);
     }
 
     #endregion
