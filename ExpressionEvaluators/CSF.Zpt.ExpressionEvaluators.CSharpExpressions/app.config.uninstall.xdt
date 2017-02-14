@@ -18,7 +18,7 @@
         <PluginAssemblies>
           <Assembly Name="CSF.Zpt.ExpressionEvaluators.CSharpExpressions"
                     xdt:Transform="Remove"
-                    xdt:Locator="Match(Path)" />
+                    xdt:Locator="Match(Name)" />
         </PluginAssemblies>
       </PluginConfigurationSection>
     </Zpt>

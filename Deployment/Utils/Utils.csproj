@@ -17,6 +17,7 @@
   </PropertyGroup>
   <ItemGroup>
     <None Include="linux-build" />
+    <None Include="push-all-packages" />
   </ItemGroup>
   <Target Name="Build">
     <!-- Intentional no-op -->
