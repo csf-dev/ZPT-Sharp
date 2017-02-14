@@ -6,7 +6,7 @@
         <PluginAssemblies>
           <Assembly Name="CSF.Zpt.DocumentProviders.XmlLinq"
                     xdt:Transform="InsertIfMissing"
-                    xdt:Locator="Match(Path)" />
+                    xdt:Locator="Match(Name)" />
         </PluginAssemblies>
       </PluginConfigurationSection>
     </Zpt>
