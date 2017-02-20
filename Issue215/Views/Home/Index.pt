@@ -22,5 +22,29 @@
     <span tal:replace="csharp:model.Name">Joe Bloggs</span>.
   </p>
 
+  <p>
+    Number
+    <span tal:replace="csharp:model.Number.ToString()">here</span>.
+  </p>
+
+  <p>
+    I see you were born in
+    <strong tal:content="csharp:model.DateOfBirth.ToString(&quot;MMMM&quot;)">November</strong>,
+    what a wonderful month!
+  </p>
+
+
+
+  <div tal:define="myName string:piglet">
+    Hello, my name is
+    <span tal:replace="csharp:myName.ToUpperInvariant()">SomeName</span>
+  </div>
+
+
+<p>
+    Hello
+    <span tal:replace="csharp:model.Name">Joe Bloggs</span>.
+  </p>
+
 </body>
 </html>
