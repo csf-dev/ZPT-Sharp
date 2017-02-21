@@ -113,7 +113,10 @@ namespace Test.CSF.Zpt.BatchRendering
     public void GetContextConfigurator_does_not_add_documents_directory_when_path_is_null()
     {
       // Arrange
-      var job = Mock.Of<IRenderingJob>(x => x.InputRootDirectory == (DirectoryInfo) null);
+      var job = new Mock<IRenderingJob>().Object;
+      Mock.Get(job)
+          .SetupGet(x => x.InputRootDirectory)
+          .Returns((DirectoryInfo) null);
 
       var model = new Mock<IModelValueStore>();
       model.Setup(x => x.AddGlobal(It.IsAny<string>(), It.IsAny<object>()));
