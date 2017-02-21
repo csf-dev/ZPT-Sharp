@@ -61,7 +61,7 @@
     </Reference>
     <Reference Include="System.Dynamic" />
     <Reference Include="System.Web.Mvc">
-      <HintPath>..\..\..\packages\Microsoft.AspNet.Mvc.5.2.3\lib\net45\System.Web.Mvc.dll</HintPath>
+      <HintPath>..\..\..\packages\Microsoft.AspNet.Mvc.5.2.0\lib\net45\System.Web.Mvc.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
