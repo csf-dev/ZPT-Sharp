@@ -18,7 +18,7 @@ namespace CSF.Zpt.ExpressionEvaluators.CSharpExpressions.Host
     private static readonly string
       SYSTEM_CORE_ASSEMBLY_NAME                   = typeof(Enumerable).Assembly.FullName,
       CSHARP_EXPRESSION_FRAMEWORK_ASSEMBLY_NAME   = typeof(IExpressionHost).Assembly.FullName,
-      CODEDOM_ASSEMBLY_NAME                       = typeof(CSharpCodeProvider).Assembly.FullName;
+      CODEDOM_ASSEMBLY_NAME                       = typeof(Microsoft.CSharp.RuntimeBinder.Binder).Assembly.FullName;
 
     /// <summary>
     /// A collection of mandatory assemblies which must always be referenced.
