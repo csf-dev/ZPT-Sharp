@@ -16,8 +16,8 @@ Information specific to **running the unit/integration tests** is available in t
 [UNIT_TESTS.md]: https://github.com/csf-dev/ZPT-Sharp/blob/master/UNIT_TESTS.md
 
 ## Current status
-The current status is that - as of `v0.9.0` - the project has reached **release candidate 1**.
-As of the `v0.9.0` release date, there are no planned code changes to the project 
+The current status is that - as of `v0.9.3` - the project has reached **release candidate 4**.
+As of the `v0.9.3` release date, there are no planned code changes to the project 
 There is good coverage of the project via integration tests and it has been used for some time now to build its own documentation website.
 
 Evaluation & exploration of the project are welcome, along with feedback and suggestions for improvement.
