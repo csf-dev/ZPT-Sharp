@@ -18,15 +18,15 @@ namespace CSF.Zpt.ExpressionEvaluators.CSharpExpressions.Host
     private static readonly string
       SYSTEM_CORE_ASSEMBLY_NAME                   = typeof(Enumerable).Assembly.FullName,
       CSHARP_EXPRESSION_FRAMEWORK_ASSEMBLY_NAME   = typeof(IExpressionHost).Assembly.FullName,
-      CODEDOM_ASSEMBLY_NAME                       = typeof(CSharpCodeProvider).Assembly.FullName;
+      CODEDOM_ASSEMBLY_NAME                       = typeof(Microsoft.CSharp.RuntimeBinder.Binder).Assembly.FullName;
 
     /// <summary>
     /// A collection of mandatory assemblies which must always be referenced.
     /// </summary>
-    private static readonly string[] MandatoryAssemblyReferences = new [] {
+    private static readonly string[] MandatoryAssemblyReferences = {
       SYSTEM_CORE_ASSEMBLY_NAME,
       CSHARP_EXPRESSION_FRAMEWORK_ASSEMBLY_NAME,
-      CODEDOM_ASSEMBLY_NAME,
+      CODEDOM_ASSEMBLY_NAME
     };
 
     #endregion
@@ -86,8 +86,8 @@ namespace CSF.Zpt.ExpressionEvaluators.CSharpExpressions.Host
     /// <param name="model">Model.</param>
     private Assembly CompileHostAssembly(ExpressionModel model)
     {
-      CSharpCodeProvider provider = new CSharpCodeProvider();
-      CompilerParameters parameters = new CompilerParameters();
+      var provider = new CSharpCodeProvider();
+      var parameters = new CompilerParameters();
 
       var references = GetAssemblyReferences(model);
       AddReferencedAssemblies(references, parameters);
@@ -186,8 +186,7 @@ namespace CSF.Zpt.ExpressionEvaluators.CSharpExpressions.Host
     #region constructor
 
     /// <summary>
-    /// Initializes a new instance of the
-    /// <see cref="CSF.Zpt.ExpressionEvaluators.CSharpExpressions.Host.ExpressionHostCompiler"/> class.
+    /// Initializes a new instance of the <see cref="ExpressionHostCompiler"/> class.
     /// </summary>
     /// <param name="assemblyFinder">Assembly finder.</param>
     public ExpressionHostCompiler(IAddOnAssemblyFinder assemblyFinder = null)
