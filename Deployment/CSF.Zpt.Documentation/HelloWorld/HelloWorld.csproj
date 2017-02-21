@@ -59,54 +59,9 @@
     <Reference Include="System.Web.WebPages.Razor">
       <HintPath>..\..\..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
     </Reference>
-    <Reference Include="CSF.Zpt.Abstractions">
-      <HintPath>..\..\..\packages\CSF.Zpt.Abstractions.0.8.1-beta\lib\net45\CSF.Zpt.Abstractions.dll</HintPath>
-    </Reference>
-    <Reference Include="CSF.Utils">
-      <HintPath>..\..\..\packages\CSF.Utils.6.0.0\lib\net45\CSF.Utils.dll</HintPath>
-    </Reference>
-    <Reference Include="CSF.Reflection">
-      <HintPath>..\..\..\packages\CSF.Reflection.1.0.1\lib\net45\CSF.Reflection.dll</HintPath>
-    </Reference>
-    <Reference Include="CSF.Configuration">
-      <HintPath>..\..\..\packages\CSF.Configuration.1.1.0\lib\net45\CSF.Configuration.dll</HintPath>
-    </Reference>
-    <Reference Include="CSF.Caches">
-      <HintPath>..\..\..\packages\CSF.Caches.1.0.0\lib\net45\CSF.Caches.dll</HintPath>
-    </Reference>
-    <Reference Include="CSF.Zpt">
-      <HintPath>..\..\..\packages\CSF.Zpt.0.8.1-beta\lib\net45\CSF.Zpt.dll</HintPath>
-    </Reference>
-    <Reference Include="HtmlAgilityPack">
-      <HintPath>..\..\..\packages\HtmlAgilityPack.1.4.9\lib\Net45\HtmlAgilityPack.dll</HintPath>
-    </Reference>
-    <Reference Include="CSF.Zpt.DocumentProviders.HtmlHAP">
-      <HintPath>..\..\..\packages\CSF.Zpt.DocumentProviders.HtmlHAP.0.8.1-beta\lib\net45\CSF.Zpt.DocumentProviders.HtmlHAP.dll</HintPath>
-    </Reference>
-    <Reference Include="CSF.Zpt.DocumentProviders.XmlLinq">
-      <HintPath>..\..\..\packages\CSF.Zpt.DocumentProviders.XmlLinq.0.8.1-beta\lib\net45\CSF.Zpt.DocumentProviders.XmlLinq.dll</HintPath>
-    </Reference>
-    <Reference Include="CSF.Zpt.ExpressionEvaluators.NotExpressions">
-      <HintPath>..\..\..\packages\CSF.Zpt.ExpressionEvaluators.NotExpressions.0.8.1-beta\lib\net45\CSF.Zpt.ExpressionEvaluators.NotExpressions.dll</HintPath>
-    </Reference>
-    <Reference Include="CSF.Zpt.ExpressionEvaluators.StringExpressions">
-      <HintPath>..\..\..\packages\CSF.Zpt.ExpressionEvaluators.StringExpressions.0.8.1-beta\lib\net45\CSF.Zpt.ExpressionEvaluators.StringExpressions.dll</HintPath>
-    </Reference>
-    <Reference Include="CSF.Zpt.ExpressionEvaluators.PathExpressions">
-      <HintPath>..\..\..\packages\CSF.Zpt.ExpressionEvaluators.PathExpressions.0.8.1-beta\lib\net45\CSF.Zpt.ExpressionEvaluators.PathExpressions.dll</HintPath>
-    </Reference>
-    <Reference Include="CSF.Zpt.ExpressionEvaluators.CSharpFramework">
-      <HintPath>..\..\..\packages\CSF.Zpt.ExpressionEvaluators.CSharpExpressions.0.8.1-beta\lib\net45\CSF.Zpt.ExpressionEvaluators.CSharpFramework.dll</HintPath>
-    </Reference>
-    <Reference Include="CSF.Zpt.ExpressionEvaluators.CSharpExpressions">
-      <HintPath>..\..\..\packages\CSF.Zpt.ExpressionEvaluators.CSharpExpressions.0.8.1-beta\lib\net45\CSF.Zpt.ExpressionEvaluators.CSharpExpressions.dll</HintPath>
-    </Reference>
     <Reference Include="System.Dynamic" />
     <Reference Include="System.Web.Mvc">
       <HintPath>..\..\..\packages\Microsoft.AspNet.Mvc.5.2.3\lib\net45\System.Web.Mvc.dll</HintPath>
-    </Reference>
-    <Reference Include="CSF.Zpt.MVC5">
-      <HintPath>..\..\..\packages\CSF.Zpt.MVC5.0.8.1-beta\lib\net45\CSF.Zpt.MVC5.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -139,5 +94,47 @@
   </ProjectExtensions>
   <ItemGroup>
     <None Include="Views\Home\Index.pt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\CSF.Zpt\CSF.Zpt.csproj">
+      <Project>{16E957BB-347C-4EE1-815F-19AC296FB9E0}</Project>
+      <Name>CSF.Zpt</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\CSF.Zpt.Abstractions\CSF.Zpt.Abstractions.csproj">
+      <Project>{8207CD9B-F1C1-4D75-B250-ACDFFBDCB071}</Project>
+      <Name>CSF.Zpt.Abstractions</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\CSF.Zpt.MVC5\CSF.Zpt.MVC5.csproj">
+      <Project>{9B4DF12E-6E04-4C25-AD16-58434C18DE8A}</Project>
+      <Name>CSF.Zpt.MVC5</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\DocumentProviders\CSF.Zpt.DocumentProviders.HtmlHAP\CSF.Zpt.DocumentProviders.HtmlHAP.csproj">
+      <Project>{BFD834D4-5724-4425-BCB3-6DEE6B03F743}</Project>
+      <Name>CSF.Zpt.DocumentProviders.HtmlHAP</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\DocumentProviders\CSF.Zpt.DocumentProviders.XmlLinq\CSF.Zpt.DocumentProviders.XmlLinq.csproj">
+      <Project>{842160E4-BDE5-4FA0-ADE5-07554090AA27}</Project>
+      <Name>CSF.Zpt.DocumentProviders.XmlLinq</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\ExpressionEvaluators\CSF.Zpt.ExpressionEvaluators.CSharpExpressions\CSF.Zpt.ExpressionEvaluators.CSharpExpressions.csproj">
+      <Project>{AA29F7A3-A259-408A-B2FC-E2EFD78BCDFC}</Project>
+      <Name>CSF.Zpt.ExpressionEvaluators.CSharpExpressions</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\ExpressionEvaluators\CSF.Zpt.ExpressionEvaluators.CSharpFramework\CSF.Zpt.ExpressionEvaluators.CSharpFramework.csproj">
+      <Project>{3D5A705B-A414-4ACA-AC01-C053047F424E}</Project>
+      <Name>CSF.Zpt.ExpressionEvaluators.CSharpFramework</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\ExpressionEvaluators\CSF.Zpt.ExpressionEvaluators.NotExpressions\CSF.Zpt.ExpressionEvaluators.NotExpressions.csproj">
+      <Project>{7B3748AD-DF11-4A80-9258-EA043CD99D7C}</Project>
+      <Name>CSF.Zpt.ExpressionEvaluators.NotExpressions</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\ExpressionEvaluators\CSF.Zpt.ExpressionEvaluators.PathExpressions\CSF.Zpt.ExpressionEvaluators.PathExpressions.csproj">
+      <Project>{B6A27567-61F7-43F7-B201-FFC7A449BDBB}</Project>
+      <Name>CSF.Zpt.ExpressionEvaluators.PathExpressions</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\ExpressionEvaluators\CSF.Zpt.ExpressionEvaluators.StringExpressions\CSF.Zpt.ExpressionEvaluators.StringExpressions.csproj">
+      <Project>{63F5FF1D-DA36-4BB4-AA99-24AA78844109}</Project>
+      <Name>CSF.Zpt.ExpressionEvaluators.StringExpressions</Name>
+    </ProjectReference>
   </ItemGroup>
 </Project>
