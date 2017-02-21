@@ -30,8 +30,8 @@ ZPT-Sharp is packaged and ready for download and installation.
 The recommended mechanism is to install one of the available [ZPT-Sharp NuGet bundles].
 There is also a [downloadable ZIP package] available.
 
-[ZPT-Sharp NuGet packages]: http://csf-dev.github.io/ZPT-Sharp/nuget-packages.html
-[downloadable Zip packages]: http://csf-dev.github.io/ZPT-Sharp/download.html
+[ZPT-Sharp NuGet bundles]: http://csf-dev.github.io/ZPT-Sharp/nuget-packages.html
+[downloadable ZIP package]: http://csf-dev.github.io/ZPT-Sharp/download.html
 
 ---
 
