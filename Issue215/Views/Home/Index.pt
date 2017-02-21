@@ -1,0 +1,50 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<title>ZPT-Sharp sample view</title>
+</head>
+<body tal:define="model here">
+
+  <h1>ZPT-Sharp sample view</h1>
+
+  <p>
+    Hello
+    <span tal:replace="here/Name">Joe Bloggs</span>.
+  </p>
+
+
+	<div tal:define="myName string:piglet">
+	  Hello, my name is
+	  <span tal:replace="csharp:myName">SomeName</span>
+	</div>
+
+<p>
+    Hello
+    <span tal:replace="csharp:model.Name">Joe Bloggs</span>.
+  </p>
+
+  <p>
+    Number
+    <span tal:replace="csharp:model.Number.ToString()">here</span>.
+  </p>
+
+  <p>
+    I see you were born in
+    <strong tal:content="csharp:model.DateOfBirth.ToString(&quot;MMMM&quot;)">November</strong>,
+    what a wonderful month!
+  </p>
+
+
+
+  <div tal:define="myName string:piglet">
+    Hello, my name is
+    <span tal:replace="csharp:myName.ToUpperInvariant()">SomeName</span>
+  </div>
+
+
+<p>
+    Hello
+    <span tal:replace="csharp:model.Name">Joe Bloggs</span>.
+  </p>
+
+</body>
+</html>
