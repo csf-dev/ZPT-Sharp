@@ -43,6 +43,7 @@
     <Compile Include="ZptHtmlElement.cs" />
     <Compile Include="HtmlZptDocumentProvider.cs" />
     <Compile Include="AssemblyInfo.cs" />
+    <Compile Include="HtmlAgilityPackConfigurator.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\CSF.Zpt.Abstractions\CSF.Zpt.Abstractions.csproj">
@@ -56,11 +57,11 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
-    <Reference Include="HtmlAgilityPack">
-      <HintPath>..\..\packages\HtmlAgilityPack.1.4.9\lib\Net45\HtmlAgilityPack.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Xml" />
+    <Reference Include="HtmlAgilityPack">
+      <HintPath>..\..\packages\HtmlAgilityPack.1.4.9.5\lib\Net45\HtmlAgilityPack.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <Target Name="BeforeBuild">
     <CallTarget Targets="StampAssemblyInfo" />
