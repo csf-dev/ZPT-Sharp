@@ -191,6 +191,21 @@ namespace CSF.Zpt.DocumentProviders
       _sourceFile = sourceFile;
     }
 
+    /// <summary>
+    /// Initializes a new instance of the <see cref="T:CSF.Zpt.DocumentProviders.ZptHtmlDocument"/> class.
+    /// </summary>
+    /// <remarks>
+    /// <para>
+    /// Beware that this method constructs a new instance of <see cref="HtmlAgilityPackConfigurator"/> and executes its
+    /// <see cref="HtmlAgilityPackConfigurator.Configure"/> method, thus influencing the standard operation of the HTML
+    /// agility pack.
+    /// </para>
+    /// </remarks>
+    static ZptHtmlDocument()
+    {
+      new HtmlAgilityPackConfigurator().Configure();
+    }
+
     #endregion
   }
 }
