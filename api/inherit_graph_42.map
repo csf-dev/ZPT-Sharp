@@ -1,3 +1,4 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="node1" href="$classCSF_1_1Zpt_1_1Metal_1_1SlotToFill.html" title="Represents a METAL slot definition, matched with the content which will be used to fill it..." alt="" coords="5,5,172,32"/>
+<area shape="rect" id="node1" href="$interfaceCSF_1_1Zpt_1_1Metal_1_1IMetalMacro.html" title="Represents a METAL macro and its name. " alt="" coords="5,5,189,32"/>
+<area shape="rect" id="node2" href="$classCSF_1_1Zpt_1_1Metal_1_1MetalMacro.html" title="Represents a METAL macro and its name. " alt="" coords="237,5,417,32"/>
 </map>

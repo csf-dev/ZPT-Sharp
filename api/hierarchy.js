@@ -43,6 +43,7 @@ var hierarchy =
     ] ],
     [ "CSF.Zpt.ExpressionEvaluators.CSharpExpressions.ExpressionModel", "classCSF_1_1Zpt_1_1ExpressionEvaluators_1_1CSharpExpressions_1_1ExpressionModel.html", null ],
     [ "CSF.Zpt.Rendering.ExpressionResult", "classCSF_1_1Zpt_1_1Rendering_1_1ExpressionResult.html", null ],
+    [ "CSF.Zpt.DocumentProviders.HtmlAgilityPackConfigurator", "classCSF_1_1Zpt_1_1DocumentProviders_1_1HtmlAgilityPackConfigurator.html", null ],
     [ "CSF.Zpt.Rendering.IActionCanceller", "interfaceCSF_1_1Zpt_1_1Rendering_1_1IActionCanceller.html", [
       [ "CSF.Zpt.Rendering.CancellationToken", "classCSF_1_1Zpt_1_1Rendering_1_1CancellationToken.html", null ]
     ] ],

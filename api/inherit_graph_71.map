@@ -1,3 +1,4 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="node1" href="$interfaceCSF_1_1Zpt_1_1Tales_1_1ITalesConvertible.html" title="Interface which may be used for types which implement custom code for conversions by the TALES system..." alt="" coords="5,5,220,32"/>
+<area shape="rect" id="node1" href="$interfaceCSF_1_1Zpt_1_1Tales_1_1IExpressionFactory.html" title="Creator for Expression instances. " alt="" coords="5,5,187,47"/>
+<area shape="rect" id="node2" href="$classCSF_1_1Zpt_1_1Tales_1_1ExpressionFactory.html" title="Creator for Expression instances. " alt="" coords="235,5,412,47"/>
 </map>

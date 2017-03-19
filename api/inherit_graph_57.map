@@ -1,4 +1,4 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="node1" href="$interfaceCSF_1_1Zpt_1_1Rendering_1_1IRenderingOptions.html" title="Represents options from which IRenderingSettings may be built. " alt="" coords="5,5,208,47"/>
-<area shape="rect" id="node2" href="$classCSF_1_1Zpt_1_1Rendering_1_1RenderingOptions.html" title="Default implementation of IRenderingOptions. " alt="" coords="256,5,455,47"/>
+<area shape="rect" id="node1" href="$interfaceCSF_1_1Zpt_1_1Rendering_1_1IRenderingContextFactoryFactory.html" title="Type which creates instances of IRenderingContextFactory via reflection. " alt="" coords="5,5,208,47"/>
+<area shape="rect" id="node2" href="$classCSF_1_1Zpt_1_1Rendering_1_1RenderingContextFactoryFactory.html" title="Type which creates instances of IRenderingContextFactory via reflection. " alt="" coords="256,5,455,47"/>
 </map>

@@ -1,5 +1,6 @@
 var namespaceCSF_1_1Zpt_1_1DocumentProviders =
 [
+    [ "HtmlAgilityPackConfigurator", "classCSF_1_1Zpt_1_1DocumentProviders_1_1HtmlAgilityPackConfigurator.html", "classCSF_1_1Zpt_1_1DocumentProviders_1_1HtmlAgilityPackConfigurator" ],
     [ "HtmlZptDocumentProvider", "classCSF_1_1Zpt_1_1DocumentProviders_1_1HtmlZptDocumentProvider.html", "classCSF_1_1Zpt_1_1DocumentProviders_1_1HtmlZptDocumentProvider" ],
     [ "LegacyXmlZptDocumentProvider", "classCSF_1_1Zpt_1_1DocumentProviders_1_1LegacyXmlZptDocumentProvider.html", "classCSF_1_1Zpt_1_1DocumentProviders_1_1LegacyXmlZptDocumentProvider" ],
     [ "XmlLinqZptDocumentProvider", "classCSF_1_1Zpt_1_1DocumentProviders_1_1XmlLinqZptDocumentProvider.html", "classCSF_1_1Zpt_1_1DocumentProviders_1_1XmlLinqZptDocumentProvider" ],

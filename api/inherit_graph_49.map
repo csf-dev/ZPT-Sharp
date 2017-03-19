@@ -1,4 +1,3 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="node1" href="$interfaceCSF_1_1Zpt_1_1Rendering_1_1IActionCanceller.html" title="Interface for a type which may &#39;cancel an action&#39;. The meaning of this is dependant upon the operatio..." alt="" coords="5,5,185,47"/>
-<area shape="rect" id="node2" href="$classCSF_1_1Zpt_1_1Rendering_1_1CancellationToken.html" title="Simple type which indicates that the action should always be cancelled. " alt="" coords="233,5,444,47"/>
+<area shape="rect" id="node1" href="$classCSF_1_1Zpt_1_1Rendering_1_1ExpressionResult.html" title="Represents the result of evaluating a TALES expression. " alt="" coords="5,5,209,47"/>
 </map>
