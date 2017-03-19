@@ -65,7 +65,7 @@
                           releaseType options/releaseType;
                           versionString string:v${version}"
               tal:on-error="string:an unknown version">
-        <span tal:replace="versionString">v0.0.0</span><span tal:condition="releaseType"
+        <span tal:replace="versionString">v0.0.0</span><span tal:condition="csharp:!String.IsNullOrEmpty(releaseType)"
                                                              tal:replace="string:-$releaseType">-alpha</span>
       </strong>
     </p>
