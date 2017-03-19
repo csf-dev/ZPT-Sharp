@@ -1,0 +1,10 @@
+language: csharp
+solution: CSF.Zpt.sln
+
+install:
+  - nuget restore CSF.Zpt.sln
+  - nuget install NUnit.Runners -Version 2.6.4 -OutputDirectory testrunner
+
+script:
+  - xbuild /p:Configuration=Debug CSF.Zpt.sln
+  - mono "./testrunner/NUnit.Runners.2.6.4/tools/nunit-console.exe" $(find ./Tests/ -type f -path "*/bin/Debug/*" -name "Test*.dll")

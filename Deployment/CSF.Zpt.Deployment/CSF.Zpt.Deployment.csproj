@@ -9,6 +9,7 @@
     <AssemblyName>CSF.Zpt.Deployment</AssemblyName>
     <PathToSolutionRoot>..\..</PathToSolutionRoot>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <ReleaseVersion>1.0.0</ReleaseVersion>
   </PropertyGroup>
   <Import Project="$(PathToSolutionRoot)\Common\SolutionProperties.targets" />
   <Import Project="$(PathToSolutionRoot)\Deployment\CSF.Zpt.DeploymentTasks\CSF.Zpt.DeploymentTasks.targets" />

@@ -11,6 +11,7 @@
     <ProjectTitle>CSF.Zpt</ProjectTitle>
     <ProjectDescription>Core ZPT-Sharp logic</ProjectDescription>
     <PathToSolutionRoot>..</PathToSolutionRoot>
+    <ReleaseVersion>1.0.0</ReleaseVersion>
   </PropertyGroup>
   <Import Project="$(PathToSolutionRoot)\Common\SolutionProperties.targets" />
   <Import Project="$(PathToSolutionRoot)\Deployment\CSF.Zpt.DeploymentTasks\CSF.Zpt.DeploymentTasks.targets" />

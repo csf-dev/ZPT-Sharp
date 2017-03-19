@@ -16,12 +16,12 @@ Information specific to **running the unit/integration tests** is available in t
 [UNIT_TESTS.md]: https://github.com/csf-dev/ZPT-Sharp/blob/master/UNIT_TESTS.md
 
 ## Current status
-The current status is that - as of `v0.9.0` - the project has reached **release candidate 1**.
-As of the `v0.9.0` release date, there are no planned code changes to the project 
-There is good coverage of the project via integration tests and it has been used for some time now to build its own documentation website.
+Stable version `v1.0.0` has been released!  Thankyou to anybody who helped test the various release candidates.
 
-Evaluation & exploration of the project are welcome, along with feedback and suggestions for improvement.
-Please report any bugs to [Github's issue tracker] if you find them.
+**[Current CI build status](https://github.com/csf-dev/ZPT-Sharp/blob/master/.travis.yml)** : [![Build Status](https://travis-ci.org/csf-dev/ZPT-Sharp.svg?branch=master)](https://travis-ci.org/csf-dev/ZPT-Sharp)
+
+Whilst a stable is now available, future enhancements and development are planned.
+Please report any suggestions, feature requests or bugs you find to [Github's issue tracker].
 
 [Github's issue tracker]: https://github.com/csf-dev/ZPT-Sharp/issues
 
@@ -30,8 +30,8 @@ ZPT-Sharp is packaged and ready for download and installation.
 The recommended mechanism is to install one of the available [ZPT-Sharp NuGet bundles].
 There is also a [downloadable ZIP package] available.
 
-[ZPT-Sharp NuGet packages]: http://csf-dev.github.io/ZPT-Sharp/nuget-packages.html
-[downloadable Zip packages]: http://csf-dev.github.io/ZPT-Sharp/download.html
+[ZPT-Sharp NuGet bundles]: http://csf-dev.github.io/ZPT-Sharp/nuget-packages.html
+[downloadable ZIP package]: http://csf-dev.github.io/ZPT-Sharp/download.html
 
 ---
 
