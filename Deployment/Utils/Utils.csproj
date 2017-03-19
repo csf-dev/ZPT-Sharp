@@ -8,6 +8,7 @@
     <RootNamespace>Utils</RootNamespace>
     <AssemblyName>Utils</AssemblyName>
     <OutputType>Exe</OutputType>
+    <ReleaseVersion>1.0.0</ReleaseVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <OutputPath>bin\Debug</OutputPath>
