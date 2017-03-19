@@ -16,14 +16,12 @@ Information specific to **running the unit/integration tests** is available in t
 [UNIT_TESTS.md]: https://github.com/csf-dev/ZPT-Sharp/blob/master/UNIT_TESTS.md
 
 ## Current status
+Stable version `v1.0.0` has been released!  Thankyou to anybody who helped test the various release candidates.
+
 **[Current CI build status](https://github.com/csf-dev/ZPT-Sharp/blob/master/.travis.yml)** : [![Build Status](https://travis-ci.org/csf-dev/ZPT-Sharp.svg?branch=master)](https://travis-ci.org/csf-dev/ZPT-Sharp)
 
-The current status is that - as of `v0.9.3` - the project has reached **release candidate 4**.
-As of the `v0.9.3` release date, there are no planned code changes to the project 
-There is good coverage of the project via integration tests and it has been used for some time now to build its own documentation website.
-
-Evaluation & exploration of the project are welcome, along with feedback and suggestions for improvement.
-Please report any bugs to [Github's issue tracker] if you find them.
+Whilst a stable is now available, future enhancements and development are planned.
+Please report any suggestions, feature requests or bugs you find to [Github's issue tracker].
 
 [Github's issue tracker]: https://github.com/csf-dev/ZPT-Sharp/issues
 
