@@ -1,0 +1,7 @@
+version: '{branch}-{build}'
+init:
+- cmd: git config --global core.autocrlf true
+before_build:
+- cmd: nuget restore
+build:
+  verbosity: minimal
