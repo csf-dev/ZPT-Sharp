@@ -1,0 +1,12 @@
+﻿<html>
+<head>
+<title>ZPT-Sharp sample view</title>
+</head>
+<body>
+  <h1>Error page</h1>
+  <p>
+    This web page creates an error, because of the following TAL attribute:
+    <span tal:replace="here/nope | here/stillnothing | here/nonexistent">ERROR!</span>
+  </p>
+</body>
+</html>

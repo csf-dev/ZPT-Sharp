@@ -114,13 +114,13 @@ namespace CSF.Zpt.Rendering
     /// <summary>
     /// Initializes a new instance of the <see cref="CSF.Zpt.Rendering.UnknownSourceFileInfo"/> class.
     /// </summary>
-    private UnknownSourceFileInfo() {}
+    public UnknownSourceFileInfo() {}
 
     /// <summary>
     /// Initializes a new instance of the <see cref="CSF.Zpt.Rendering.UnknownSourceFileInfo"/> class.
     /// </summary>
     /// <param name="discardedString">A discarded string.</param>
-    internal UnknownSourceFileInfo(string discardedString) : this() {}
+    public UnknownSourceFileInfo(string discardedString) : this() {}
 
     /// <summary>
     /// Initializes the <see cref="CSF.Zpt.Rendering.UnknownSourceFileInfo"/> class.
