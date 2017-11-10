@@ -10,9 +10,10 @@ namespace Test.CSF.Zpt.DocumentProviders.HtmlHAP
   [TestFixture]
   public class TestZptHtmlDocument
   {
-    #region sample document
+    #region sample document 1
+
     // This is a real document, taken from CSF.Screenplay
-    const string SampleDocument = @"<html>
+    const string SampleDocument1 = @"<html>
 <head>
 <title>Screenplay report</title>
 <style tal:content=""here/RenderedStyles | nothing""></style>
@@ -246,13 +247,25 @@ namespace Test.CSF.Zpt.DocumentProviders.HtmlHAP
 </body>
 </html>
 ";
+    
+    #endregion
+
+    #region sample document 2
+
+    // This sample document has a macro with an empty name
+    const string SampleDocument2 = @"<html>
+<body>
+<div metal:define-macro="""">Foo</div>
+</body>
+</html>";
+
     #endregion
 
     [Test]
     public void GetMacros_should_not_raise_an_exception_with_a_valid_document()
     {
       // Arrange
-      var doc = GetSampleDocument();
+      var doc = GetSampleDocument(SampleDocument1);
       IMetalMacroContainer result = null;
 
       // Act
@@ -262,10 +275,24 @@ namespace Test.CSF.Zpt.DocumentProviders.HtmlHAP
       Assert.NotNull(result, "Result is not null");
     }
 
-    IZptDocument GetSampleDocument()
+    [Test]
+    public void GetMacros_should_not_raise_an_exception_with_an_empty_macro_name()
+    {
+      // Arrange
+      var doc = GetSampleDocument(SampleDocument2);
+      IMetalMacroContainer result = null;
+
+      // Act
+      Assert.DoesNotThrow(() => result = doc.GetMacros(), "Getting macros does not raise an exception");
+
+      // Assert
+      Assert.NotNull(result, "Result is not null");
+    }
+
+    IZptDocument GetSampleDocument(string document)
     {
       var htmlDoc = new HtmlAgilityPack.HtmlDocument();
-      htmlDoc.LoadHtml(SampleDocument);
+      htmlDoc.LoadHtml(document);
       return new ZptHtmlDocument(htmlDoc, UnknownSourceFileInfo.Instance);
     }
   }
