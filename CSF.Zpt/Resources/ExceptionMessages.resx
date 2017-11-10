@@ -110,4 +110,8 @@ Type name:{1}</value>
     <value>The `{1}' type must exist.
 Type name:{0}</value>
   </data>
+  <data name="MustNotHaveDuplicateMacrosFormat" xml:space="preserve">
+    <value>A document must not contain multiple METAL macro definitions using the same name.
+Duplicated macro names:{0}</value>
+  </data>
 </root>

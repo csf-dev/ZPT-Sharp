@@ -10,6 +10,7 @@
 
 namespace CSF.Zpt.Resources {
     using System;
+    using System.Reflection;
     
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
@@ -223,6 +224,12 @@ namespace CSF.Zpt.Resources {
         internal static string SourceInfoTypeMustExistFormat {
             get {
                 return ResourceManager.GetString("SourceInfoTypeMustExistFormat", resourceCulture);
+            }
+        }
+        
+        internal static string MustNotHaveDuplicateMacrosFormat {
+            get {
+                return ResourceManager.GetString("MustNotHaveDuplicateMacrosFormat", resourceCulture);
             }
         }
     }

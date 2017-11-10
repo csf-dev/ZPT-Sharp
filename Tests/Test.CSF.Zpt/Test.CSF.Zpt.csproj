@@ -105,6 +105,7 @@
     <Compile Include="Metal\TestMacroSubstituter.cs" />
     <Compile Include="Metal\TestMacroExtensionSubstitutor.cs" />
     <Compile Include="SourceAnnotation\TestSourceAnnotator.cs" />
+    <Compile Include="Metal\MetalMacroContainerTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\CSF.Zpt\CSF.Zpt.csproj">

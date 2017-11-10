@@ -152,6 +152,7 @@
       <DependentUpon>SourceAnnotationFormats.resx</DependentUpon>
     </Compile>
     <Compile Include="DefaultAddOnAssemblyFinder.cs" />
+    <Compile Include="Metal\DuplicateMacroException.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
