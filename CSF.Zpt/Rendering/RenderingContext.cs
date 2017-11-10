@@ -195,7 +195,7 @@ namespace CSF.Zpt.Rendering
 
       foreach(var key in metalDefinitions.Keys)
       {
-        container.MetalModel.AddLocal(key, talDefinitions[key]);
+        container.MetalModel.AddLocal(key, metalDefinitions[key]);
       }
     }
 
