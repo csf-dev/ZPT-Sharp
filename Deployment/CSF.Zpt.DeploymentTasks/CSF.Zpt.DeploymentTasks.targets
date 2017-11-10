@@ -409,7 +409,10 @@
                           ControllerFile="$(ControllerFile)"
                           ViewFile="$(ViewFile)"
                           OutputFile="$(OutputFile)" />
-    <Exec Command="$(PathToSolutionRoot)\CSF.Zpt.Cli\bin\Release\ZptBuilder.exe &quot;$(TemporaryBuildPath)\Website\Pass1&quot; -p &quot;*.html&quot; -o &quot;$(TemporaryBuildPath)\Website\Pass2&quot; -i &quot;$(TemporaryBuildPath)\Website\Pass1\Shared&quot; --keyword-options &quot;baseUrl=$(WebsiteUrlRoot);buildDate=@(BuildTimestamp);version=@(SemanticVersion);releaseType=@(InformationalVersion);copyrightYear=@(CopyrightYear)&quot;" />
+    <Exec Command="mono $(PathToSolutionRoot)\CSF.Zpt.Cli\bin\Release\ZptBuilder.exe &quot;$(TemporaryBuildPath)\Website\Pass1&quot; -p &quot;*.html&quot; -o &quot;$(TemporaryBuildPath)\Website\Pass2&quot; -i &quot;$(TemporaryBuildPath)\Website\Pass1\Shared&quot; --keyword-options &quot;baseUrl=$(WebsiteUrlRoot);buildDate=@(BuildTimestamp);version=@(SemanticVersion);releaseType=@(InformationalVersion);copyrightYear=@(CopyrightYear)&quot;"
+          Condition="'$(OS)' == 'Unix'" />
+    <Exec Command="$(PathToSolutionRoot)\CSF.Zpt.Cli\bin\Release\ZptBuilder.exe &quot;$(TemporaryBuildPath)\Website\Pass1&quot; -p &quot;*.html&quot; -o &quot;$(TemporaryBuildPath)\Website\Pass2&quot; -i &quot;$(TemporaryBuildPath)\Website\Pass1\Shared&quot; --keyword-options &quot;baseUrl=$(WebsiteUrlRoot);buildDate=@(BuildTimestamp);version=@(SemanticVersion);releaseType=@(InformationalVersion);copyrightYear=@(CopyrightYear)&quot;"
+          Condition="'$(OS)' != 'Unix'" />
     <Copy SourceFiles="@(WebsiteSupportFiles)" DestinationFiles="@(WebsiteSupportFiles-&gt;'$(TemporaryBuildPath)\Website\Pass2\%(RecursiveDir)%(Filename)%(Extension)')" />
   </Target>
 
