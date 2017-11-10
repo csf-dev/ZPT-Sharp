@@ -51,6 +51,7 @@
   <ItemGroup>
     <Compile Include="AssemblyInfo.cs" />
     <Compile Include="TestZptHtmlElement.cs" />
+    <Compile Include="TestZptHtmlDocument.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="TestZptHtmlElement.html" />
