@@ -15,5 +15,10 @@ namespace ZptSample.Controllers
 
       return View(model);
     }
+
+    public ActionResult ErrorPage()
+    {
+      return View();
+    }
   }
 }

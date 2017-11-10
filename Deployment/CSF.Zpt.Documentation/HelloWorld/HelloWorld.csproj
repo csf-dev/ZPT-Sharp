@@ -95,6 +95,7 @@
   </ProjectExtensions>
   <ItemGroup>
     <None Include="Views\Home\Index.pt" />
+    <None Include="Views\Home\ErrorPage.pt" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\CSF.Zpt\CSF.Zpt.csproj">

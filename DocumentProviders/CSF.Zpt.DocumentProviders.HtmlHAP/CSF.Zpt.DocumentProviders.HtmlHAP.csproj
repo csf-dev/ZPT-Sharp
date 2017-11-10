@@ -45,6 +45,9 @@
     <Compile Include="HtmlZptDocumentProvider.cs" />
     <Compile Include="AssemblyInfo.cs" />
     <Compile Include="HtmlAgilityPackConfigurator.cs" />
+    <Compile Include="Resources\LogMessageFormats.Designer.cs">
+      <DependentUpon>LogMessageFormats.resx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\CSF.Zpt.Abstractions\CSF.Zpt.Abstractions.csproj">
@@ -77,5 +80,15 @@
     <None Include="app.config.uninstall.xdt" />
     <None Include="web.config.install.xdt" />
     <None Include="web.config.uninstall.xdt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Resources\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\LogMessageFormats.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LogicalName>LogMessageFormats.resources</LogicalName>
+      <LastGenOutput>LogMessageFormats.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
 </Project>

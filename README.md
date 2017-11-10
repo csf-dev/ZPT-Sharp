@@ -18,12 +18,19 @@ Information specific to **running the unit/integration tests** is available in t
 ## Current status
 Stable version `v1.0.0` has been released!  Thankyou to anybody who helped test the various release candidates.
 
-**[Current CI build status](https://github.com/csf-dev/ZPT-Sharp/blob/master/.travis.yml)** : [![Build Status](https://travis-ci.org/csf-dev/ZPT-Sharp.svg?branch=master)](https://travis-ci.org/csf-dev/ZPT-Sharp)
-
 Whilst a stable is now available, future enhancements and development are planned.
 Please report any suggestions, feature requests or bugs you find to [Github's issue tracker].
 
 [Github's issue tracker]: https://github.com/csf-dev/ZPT-Sharp/issues
+
+### Continuous integration builds
+CI builds are configured via both Travis (for build & test on Linux/Mono) and AppVeyor (Windows/.NET).
+Below are links to the most recent build statuses for these two CI platforms.
+
+Platform | Status
+-------- | ------
+Linux/Mono (Travis) | [![Travis Status](https://travis-ci.org/csf-dev/ZPT-Sharp.svg?branch=master)](https://travis-ci.org/csf-dev/ZPT-Sharp)
+Windows/.NET (AppVeyor) | [![AppVeyor status](https://ci.appveyor.com/api/projects/status/apc1gw18xjkr2fn3?svg=true)](https://ci.appveyor.com/project/craigfowler/zpt-sharp)
 
 ## Getting ZPT-Sharp
 ZPT-Sharp is packaged and ready for download and installation.

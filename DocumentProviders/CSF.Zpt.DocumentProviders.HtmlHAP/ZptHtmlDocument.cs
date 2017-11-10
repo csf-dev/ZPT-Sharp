@@ -7,6 +7,7 @@ using CSF.Zpt.Resources;
 using CSF.Zpt.Tales;
 using CSF.Zpt;
 using CSF.Zpt.Metal;
+using System.Collections.Generic;
 
 namespace CSF.Zpt.DocumentProviders
 {
@@ -98,20 +99,9 @@ namespace CSF.Zpt.DocumentProviders
     /// <returns>Elements representing the METAL macros.</returns>
     public override IMetalMacroContainer GetMacros()
     {
-      var output = this.Document
-        .DocumentNode
-        .DescendantsAndSelf()
-        .Where(ele => ele.Attributes.Any(attr => attr.Name == String.Format("{0}:{1}",
-                                                                            ZptConstants.Metal.Namespace.Prefix,
-                                                                            ZptConstants.Metal.DefineMacroAttribute)))
-        .Select(x => {
-          var element = new ZptHtmlElement(x, this.SourceFile, this, isImported: true);
-          var context = new RenderingContext(Model.Empty, Model.Empty, element, GetDefaultOptions());
-          return new Metal.MetalMacro(context.GetMetalAttribute(ZptConstants.Metal.DefineMacroAttribute).Value, element);
-        })
-        .ToArray();
-
-      return new CSF.Zpt.Metal.MetalMacroContainer(output);
+      var nodes = GetMacroNodes();
+      var macros = GetMacros(nodes);
+      return new CSF.Zpt.Metal.MetalMacroContainer(macros);
     }
 
     /// <summary>
@@ -162,6 +152,45 @@ namespace CSF.Zpt.DocumentProviders
     protected override IRenderingSettings GetDefaultOptions()
     {
       return new DefaultRenderingSettings();
+    }
+
+    IEnumerable<HtmlNode> GetMacroNodes()
+    {
+      return this.Document
+                 .DocumentNode
+                 .DescendantsAndSelf()
+                 .Where(ele => ele.Attributes.Any(attr => {
+        return attr.Name == $"{ZptConstants.Metal.Namespace.Prefix}:{ZptConstants.Metal.DefineMacroAttribute}";
+      }));
+    }
+
+    IEnumerable<IMetalMacro> GetMacros(IEnumerable<HtmlNode> macroNodes)
+    {
+      if(macroNodes == null)
+        throw new ArgumentNullException(nameof(macroNodes));
+
+      return macroNodes.Select(CreateMacro).Where(x => x != null).ToArray();
+    }
+
+    IMetalMacro CreateMacro(HtmlNode node)
+    {
+      if(node == null)
+        throw new ArgumentNullException(nameof(node));
+
+      var element = new ZptHtmlElement(node, this.SourceFile, this, isImported: true);
+      var context = new RenderingContext(Model.Empty, Model.Empty, element, GetDefaultOptions());
+      var macroName = context.GetMetalAttribute(ZptConstants.Metal.DefineMacroAttribute).Value;
+
+      if(String.IsNullOrEmpty(macroName))
+      {
+        var message = String.Format(Resources.LogMessageFormats.EmptyMacroNameIgnored, node.Name);
+        ZptConstants.TraceSource.TraceEvent(System.Diagnostics.TraceEventType.Warning,
+                                            6,
+                                            message);
+        return null;
+      }
+
+      return new MetalMacro(macroName, element);
     }
 
     #endregion

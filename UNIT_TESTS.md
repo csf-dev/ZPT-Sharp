@@ -25,6 +25,11 @@ This means, for Windows your files must be `CRLF`-terminated.
 On Linux/Mac your files must be `LF`-terminated.
 
 If you are making use of [Git] for source control then you will need to make use of [the autocrlf configuration setting] in order to ensure that this is taken-care-of.
+To initialise your git environment on a **Windows** machine, use the following command; on a **Linux** or **MacOS** machine, leave git with its default settings:
+
+```
+git config core.autocrlf true
+```
 
 [Git]: https://git-scm.com/
 [the autocrlf configuration setting]: https://git-scm.com/book/tr/v2/Customizing-Git-Git-Configuration#idp31554304

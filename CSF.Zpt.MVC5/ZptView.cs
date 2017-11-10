@@ -54,9 +54,19 @@ namespace CSF.Zpt.MVC
     public void Render(ViewContext viewContext, TextWriter writer)
     {
       var doc = CreateDocument();
-      doc.Render(writer,
-                 contextConfigurator: ConfigureContext(viewContext),
-                 options: RenderingOptions);
+      try
+      {
+        doc.Render(writer,
+                   contextConfigurator: ConfigureContext(viewContext),
+                   options: RenderingOptions);
+      }
+      catch(ZptException ex)
+      {
+        var errorPage = new ErrorPageRenderer();
+        errorPage.Render(writer, ex);
+        viewContext.HttpContext.Response.StatusCode = (int) System.Net.HttpStatusCode.InternalServerError;
+        viewContext.HttpContext.Response.StatusDescription = "Internal server error";
+      }
     }
 
     private Action<IModelValueContainer> ConfigureContext(ViewContext viewContext)

@@ -124,6 +124,7 @@
     <Compile Include="Rendering\MvcRenderingContextFactory.cs" />
     <Compile Include="IZptViewEngineConfiguration.cs" />
     <Compile Include="ZptViewEngineConfigurationSection.cs" />
+    <Compile Include="ErrorPageRenderer.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -139,6 +140,9 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LogicalName>ExceptionMessages.resx</LogicalName>
       <LastGenOutput>ExceptionMessages.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\ZptErrorPage.pt">
+      <LogicalName>ZptErrorPage.pt</LogicalName>
     </EmbeddedResource>
   </ItemGroup>
   <Target Name="BeforeBuild">
