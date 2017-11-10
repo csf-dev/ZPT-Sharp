@@ -54,6 +54,22 @@ namespace CSF.Zpt.Metal
       return result != null;
     }
 
+    void ThrowIfDuplicateMacroFound(IEnumerable<IMetalMacro> macros)
+    {
+      var duplicateNames = macros
+        .GroupBy(x => x.Name)
+        .Where(x => x.Count() > 1)
+        .Select(x => x.Key)
+        .ToArray();
+
+      if(duplicateNames.Any())
+      {
+        string message = String.Format(Resources.ExceptionMessages.MustNotHaveDuplicateMacrosFormat,
+                                       String.Join(",", duplicateNames));
+        throw new DuplicateMacroException(message);
+      }
+    }
+
     #endregion
 
     #region constructor
@@ -65,9 +81,8 @@ namespace CSF.Zpt.Metal
     public MetalMacroContainer(IEnumerable<IMetalMacro> macros)
     {
       if(macros == null)
-      {
         throw new ArgumentNullException(nameof(macros));
-      }
+      ThrowIfDuplicateMacroFound(macros);
 
       _macros = macros.ToDictionary(k => k.Name, v => v);
     }
