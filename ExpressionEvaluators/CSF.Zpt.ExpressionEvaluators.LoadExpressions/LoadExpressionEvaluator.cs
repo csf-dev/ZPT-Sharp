@@ -103,42 +103,38 @@ namespace CSF.Zpt.ExpressionEvaluators.LoadExpressions
     }
 
     /// <summary>
-    /// Renders a document and returns its result.
+    /// Renders a document, macro or element and returns its result.
     /// </summary>
-    /// <returns>The document.</returns>
-    /// <param name="document">Document.</param>
-    /// <param name="context">Context.</param>
-    protected virtual string RenderDocument(object document, IRenderingContext context)
+    /// <returns>The rendered markup.</returns>
+    /// <param name="targetToRender">The target item to render.</param>
+    /// <param name="context">The current rendering context.</param>
+    protected virtual string RenderDocument(object targetToRender, IRenderingContext context)
     {
-      if(document == null)
-      {
-        throw new ArgumentNullException(nameof(document));
-      }
+      if(targetToRender == null)
+        throw new ArgumentNullException(nameof(targetToRender));
       if(context == null)
-      {
         throw new ArgumentNullException(nameof(context));
-      }
 
-      if(document is IZptDocument)
+      if(targetToRender is IZptDocument)
       {
-        return Render((IZptDocument) document, context);
+        return Render((IZptDocument) targetToRender, context);
       }
-      else if(document is TemplateFile)
+      else if(targetToRender is TemplateFile)
       {
-        return Render((TemplateFile) document, context);
+        return Render((TemplateFile) targetToRender, context);
       }
-      else if(document is MetalMacro)
+      else if(targetToRender is IMetalMacro)
       {
-        return Render((MetalMacro) document, context);
+        return Render((IMetalMacro) targetToRender, context);
       }
-      else if(document is IZptElement)
+      else if(targetToRender is IZptElement)
       {
-        return Render((IZptElement) document, context);
+        return Render((IZptElement) targetToRender, context);
       }
       else
       {
         var message = String.Format(Resources.ExceptionMessages.UnsupportedDocumentTypeFormat,
-                                    document.GetType().FullName,
+                                    targetToRender.GetType().FullName,
                                     String.Join(", ", SupportedTypes.Select(x => x.FullName)));
         throw new UnsupportedDocumentTypeException(message);
       }
@@ -176,7 +172,8 @@ namespace CSF.Zpt.ExpressionEvaluators.LoadExpressions
         throw new ArgumentNullException(nameof(document));
       }
 
-      return Render(document.Document, context);
+      var doc = document.Document;
+      return Render(doc, context);
     }
 
     /// <summary>
@@ -184,14 +181,15 @@ namespace CSF.Zpt.ExpressionEvaluators.LoadExpressions
     /// </summary>
     /// <param name="macro">Macro.</param>
     /// <param name="context">Context.</param>
-    protected virtual string Render(MetalMacro macro, IRenderingContext context)
+    protected virtual string Render(IMetalMacro macro, IRenderingContext context)
     {
       if(macro == null)
       {
         throw new ArgumentNullException(nameof(macro));
       }
 
-      return Render(macro.Element, context);
+      var doc = macro.Element.Clone().CreateDocumentFromThisElement();
+      return Render(doc, context);
     }
 
     /// <summary>
@@ -206,7 +204,8 @@ namespace CSF.Zpt.ExpressionEvaluators.LoadExpressions
         throw new ArgumentNullException(nameof(element));
       }
 
-      return Render(element.CreateDocumentFromThisElement(), context);
+      var doc = element.Clone().CreateDocumentFromThisElement();
+      return Render(doc, context);
     }
 
     #endregion
