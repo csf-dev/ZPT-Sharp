@@ -264,6 +264,8 @@
     <None Include="Test data\LoadPluginTests\ExpectedOutputs\test04.html" />
     <None Include="Test data\ZptIntegrationTests\SourceDocuments\issue-221_form_test.html" />
     <None Include="Test data\ZptIntegrationTests\ExpectedOutputs\issue-221_form_test.html" />
+    <None Include="Test data\LoadPluginTests\SourceDocuments\test05.html" />
+    <None Include="Test data\LoadPluginTests\ExpectedOutputs\test05.html" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\CSF.Zpt\CSF.Zpt.csproj">
