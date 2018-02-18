@@ -148,8 +148,15 @@ namespace CSF.Zpt
 
     #region constructor
 
+    /// <summary>
+    /// Initializes a new instance of the <see cref="T:CSF.Zpt.Log4netTraceListener"/> class.
+    /// </summary>
     public Log4netTraceListener() : this(null) {}
 
+    /// <summary>
+    /// Initializes a new instance of the <see cref="T:CSF.Zpt.Log4netTraceListener"/> class.
+    /// </summary>
+    /// <param name="log">Log.</param>
     public Log4netTraceListener(log4net.ILog log)
     {
       _syncRoot = new object();
