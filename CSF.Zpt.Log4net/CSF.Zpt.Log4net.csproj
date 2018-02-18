@@ -23,6 +23,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Debug\CSF.Zpt.Log4net.xml</DocumentationFile>
     <ConsolePause>false</ConsolePause>
     <CheckForOverflowUnderflow>true</CheckForOverflowUnderflow>
   </PropertyGroup>
@@ -31,8 +32,14 @@
     <OutputPath>bin\Release</OutputPath>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Release\CSF.Zpt.Log4net.xml</DocumentationFile>
     <ConsolePause>false</ConsolePause>
     <DefineConstants>TRACE</DefineConstants>
+    <CheckForOverflowUnderflow>true</CheckForOverflowUnderflow>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Deploy|AnyCPU' ">
+    <Optimize>true</Optimize>
+    <DocumentationFile>..\CSF.Zpt.Log4net.xml\CSF.Zpt.Log4net.xml\CSF.Zpt.Log4net.xml\CSF.Zpt.Log4net.xml</DocumentationFile>
     <CheckForOverflowUnderflow>true</CheckForOverflowUnderflow>
   </PropertyGroup>
   <ItemGroup>
@@ -50,6 +57,11 @@
   <ItemGroup>
     <None Include="packages.config" />
     <None Include="App.config" />
+    <None Include="app.config.install.xdt" />
+    <None Include="web.config.install.xdt" />
+    <None Include="app.config.uninstall.xdt" />
+    <None Include="web.config.uninstall.xdt" />
+    <None Include="CSF.Zpt.Log4net.nuspec.pt" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CSF.Zpt.Abstractions\CSF.Zpt.Abstractions.csproj">

@@ -53,14 +53,7 @@ namespace CSF.Zpt.DeploymentTasks
         return true;
       }
         
-      var tool_path = CreateToolPath();
-
-      if(tool_path == null)
-      {
-        return false;
-      }
-
-      _exitCode = ExecuteTool(tool_path,
+      _exitCode = ExecuteTool(GenerateFullPathToTool(),
                               GenerateResponseFileCommands(),
                               GenerateCommandLineCommands());
 
@@ -80,6 +73,14 @@ namespace CSF.Zpt.DeploymentTasks
       return true;
     }
 
+    protected override string GetWorkingDirectory()
+    {
+      if(!String.IsNullOrWhiteSpace(WorkingDirectory))
+        return WorkingDirectory;
+      
+      return Environment.CurrentDirectory;
+    }
+
     private IEnumerable<int> GetIgnoredExitCodes()
     {
       return IgnoredExitCodes
@@ -96,54 +97,6 @@ namespace CSF.Zpt.DeploymentTasks
         })
         .Where(x => x > 0)
         .ToArray();
-    }
-
-    private string CreateToolPath()
-    {
-      string tp;
-
-      if(String.IsNullOrEmpty(ToolPath))
-      {
-        tp = GenerateFullPathToTool();
-
-        if(String.IsNullOrEmpty (tp))
-        {
-          return null;
-        }
-
-        if(String.IsNullOrEmpty(ToolExe))
-        {
-          return tp;
-        }
-
-        tp = Path.GetDirectoryName (tp);
-      }
-      else
-      {
-        tp = ToolPath;
-      }
-
-      var path = Path.Combine(tp, ToolExe);
-
-      if (!File.Exists(path))
-      {
-        if (Log != null)
-        {
-          Log.LogError ("Tool executable '{0}' could not be found", path);
-        }
-          
-        return null;
-      }
-
-      return path;
-    }
-
-    #endregion
-
-    #region constructor
-
-    public ExecWithIgnoredExitCodes()
-    {
     }
 
     #endregion
