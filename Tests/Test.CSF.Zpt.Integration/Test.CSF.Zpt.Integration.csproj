@@ -268,6 +268,8 @@
     <None Include="Test data\LoadPluginTests\ExpectedOutputs\test05.html" />
     <None Include="Test data\ZptIntegrationTests\SourceDocuments\UnfamiliarCharactersTest.html" />
     <None Include="Test data\ZptIntegrationTests\ExpectedOutputs\UnfamiliarCharactersTest.html" />
+    <None Include="Test data\ZptIntegrationTests\SourceDocuments\GarbageMarkupInJavascript.html" />
+    <None Include="Test data\ZptIntegrationTests\ExpectedOutputs\GarbageMarkupInJavascript.html" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\CSF.Zpt\CSF.Zpt.csproj">
