@@ -42,7 +42,7 @@ namespace Test.CSF.Zpt.Integration
                   failedTests.Count());
     }
 
-    [TestCase("document_list.html")]
+    [TestCase("UnfamiliarCharactersTest.html")]
     [Explicit("This test is covered by RunIntegrationTests - this method is for running them one at a time though.")]
     public void TestSingleIntegrationTest(string inputFileName)
     {

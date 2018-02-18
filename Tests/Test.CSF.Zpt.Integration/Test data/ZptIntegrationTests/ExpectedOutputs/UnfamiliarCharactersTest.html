@@ -1,0 +1,12 @@
+﻿<html>
+<body>
+<p>This test reproduces the first part of issue https://github.com/csf-dev/ZPT-Sharp/issues/232</p>
+<p><span>Here is that unfamiliar character in a macro: ✔</span></p>
+<p tal:define="myCharacter string:✔">
+  This document contains an unfamiliar character.
+  <span>Here is that unfamiliar character in a macro: ✔</span>
+  Also, including the character via TAL shouldn't trigger an error either.
+  <span>✔</span>
+</p>
+</body>
+</html>
