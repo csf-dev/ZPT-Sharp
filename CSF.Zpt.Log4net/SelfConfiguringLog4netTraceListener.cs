@@ -12,10 +12,20 @@ namespace CSF.Zpt
   /// </remarks>
   public class SelfConfiguringLog4netTraceListener : Log4netTraceListener
   {
+    /// <summary>
+    /// Initializes a new instance of the <see cref="T:CSF.Zpt.SelfConfiguringLog4netTraceListener"/> class.
+    /// </summary>
     public SelfConfiguringLog4netTraceListener() : base() {}
 
+    /// <summary>
+    /// Initializes a new instance of the <see cref="T:CSF.Zpt.SelfConfiguringLog4netTraceListener"/> class.
+    /// </summary>
+    /// <param name="logger">Logger.</param>
     public SelfConfiguringLog4netTraceListener(log4net.ILog logger) : base(logger) {}
 
+    /// <summary>
+    /// Initializes the <see cref="T:CSF.Zpt.SelfConfiguringLog4netTraceListener"/> class.
+    /// </summary>
     static SelfConfiguringLog4netTraceListener()
     {
       log4net.Config.XmlConfigurator.Configure();
