@@ -203,13 +203,27 @@ namespace CSF.Zpt.DocumentProviders
     /// <param name="interpretContentAsStructure">If set to <c>true</c> then the content is interpreted as structure.</param>
     public override void ReplaceChildrenWith(string content, bool interpretContentAsStructure)
     {
-      var newNodes = this.Import(content, interpretContentAsStructure);
+      var isCdataElement = IsCDataElement();
+      var newNodes = this.Import(content, interpretContentAsStructure, isCdataElement);
 
       this.RemoveAllChildren();
       foreach(var node in newNodes)
       {
         this.Node.AppendChild(node);
       }
+    }
+
+    private bool IsCDataElement()
+    {
+      if(_node.NodeType != HtmlNodeType.Element)
+        return false;
+
+      var cdataElementNames = HtmlNode.ElementsFlags
+        .Where(x => x.Value.HasFlag(HtmlElementFlag.CData))
+        .Select(x => x.Key)
+        .ToArray();
+
+      return cdataElementNames.Contains(_node.Name, StringComparer.InvariantCultureIgnoreCase);
     }
 
     /// <summary>
@@ -671,13 +685,18 @@ namespace CSF.Zpt.DocumentProviders
     /// <returns>A collection of the imported nodes.</returns>
     /// <param name="text">The text to import.</param>
     /// <param name="treatAsHtml">If set to <c>true</c> then the text is treated as HTML.</param>
-    private HtmlNode[] Import(string text, bool treatAsHtml)
+    /// <param name="treatAsCData">If set to <c>true</c> then the text is treated as CDATA and thus not parsed as HTML.</param>
+    private HtmlNode[] Import(string text, bool treatAsHtml, bool treatAsCData = false)
     {
       string toImport = text?? String.Empty;
 
       HtmlNode[] output;
 
-      if(treatAsHtml)
+      if(treatAsHtml && treatAsCData)
+      {
+        output = new HtmlNode[] { this.Node.OwnerDocument.CreateTextNode(text) };
+      }
+      else if(treatAsHtml)
       {
         var doc = new HtmlDocument();
         doc.LoadHtml(toImport);
