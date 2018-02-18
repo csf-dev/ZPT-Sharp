@@ -22,9 +22,12 @@
 
 		This sample configuration logs all messages (at the DEBUG level) from Zpt-Sharp
 		and its plugins.  It also records messages at the WARN level for any other
-		sources which write to log4net.
+		sources which write to log4net. The log file itself is written to a file
+		named MyApplication.log.
+
+		You may read more about logging ZPT-Sharp at:
 		
-		The log file itself is written to a file named MyApplication.log.
+		  http://csf-dev.github.io/ZPT-Sharp/logging.html
 		
     <root>
       <level value="WARN" />
