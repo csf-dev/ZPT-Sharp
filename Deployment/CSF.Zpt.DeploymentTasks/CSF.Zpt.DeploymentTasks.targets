@@ -214,6 +214,7 @@
       <NuspecFile Include="$(PathToSolutionRoot)\CSF.Zpt.Abstractions\CSF.Zpt.Abstractions.nuspec" />
       <NuspecFile Include="$(PathToSolutionRoot)\CSF.Zpt.Cli\CSF.Zpt.Cli.nuspec" />
       <NuspecFile Include="$(PathToSolutionRoot)\CSF.Zpt\CSF.Zpt.nuspec" />
+      <NuspecFile Include="$(PathToSolutionRoot)\CSF.Zpt.Log4net\CSF.Zpt.Log4net.nuspec" />
       <NuspecFile Include="$(PathToSolutionRoot)\CSF.Zpt.MVC5\CSF.Zpt.MVC5.nuspec" />
       <NuspecFile Include="$(PathToSolutionRoot)\Deployment\CSF.Zpt.Deployment\Zpt-Sharp-API.nuspec" />
       <NuspecFile Include="$(PathToSolutionRoot)\Deployment\CSF.Zpt.Deployment\Zpt-Sharp-MVC5.nuspec" />
