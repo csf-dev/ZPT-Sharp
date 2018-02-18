@@ -353,12 +353,6 @@
         ************************************************************************
   -->
   <Target Name="BuildApiDocumentation">
-    <ReadVersionNumber VersionFile="$(VersionIniPath)">
-      <Output TaskParameter="FullVersionNumber" ItemName="FullVersion" />
-      <Output TaskParameter="SemanticVersionNumber" ItemName="SemanticVersion" />
-      <Output TaskParameter="BuildNumber" ItemName="BuildNumber" />
-      <Output TaskParameter="InformationalVersion" ItemName="InformationalVersion" />
-    </ReadVersionNumber>
     <MakeDir Directories="$(TemporaryBuildPath)\Doxygen" />
     <Exec Command="( cat Doxygen.cfg ; echo 'PROJECT_NUMBER=v@(SemanticVersion)' ) | doxygen -"
           Condition="'$(OS)' == 'Unix'"
@@ -379,12 +373,6 @@
         ************************************************************************
   -->
   <Target Name="BuildDocumentationWebsite">
-    <ReadVersionNumber VersionFile="$(VersionIniPath)">
-      <Output TaskParameter="FullVersionNumber" ItemName="FullVersion" />
-      <Output TaskParameter="SemanticVersionNumber" ItemName="SemanticVersion" />
-      <Output TaskParameter="BuildNumber" ItemName="BuildNumber" />
-      <Output TaskParameter="InformationalVersion" ItemName="InformationalVersion" />
-    </ReadVersionNumber>
     <ItemGroup>
       <WebsiteSourceFiles Include="$(PathToSolutionRoot)\Deployment\CSF.Zpt.Documentation\Website\**\*.*" />
     </ItemGroup>
@@ -395,7 +383,6 @@
       <WebsiteSupportFiles Include="$(TemporaryBuildPath)\Website\Pass1\**\*.css" />
       <WebsiteSupportFiles Include="$(TemporaryBuildPath)\Website\Pass1\**\*.js" />
       <BuildTimestamp Include="$([System.DateTime]::Now.ToString(yyyy-MM-dd))" />
-      <CopyrightYear Include="$([System.DateTime]::Now.ToString(yyyy))" />
     </ItemGroup>
     <FixDocTag InputFile="$(TemporaryBuildPath)\Website\Pass1\Shared\cli-docs.html" MacroName="content" />
     <FixDocTag InputFile="$(TemporaryBuildPath)\Website\Pass1\Shared\config-docs.html" MacroName="content" />
@@ -409,9 +396,9 @@
                           ControllerFile="$(ControllerFile)"
                           ViewFile="$(ViewFile)"
                           OutputFile="$(OutputFile)" />
-    <Exec Command="mono $(PathToSolutionRoot)\CSF.Zpt.Cli\bin\Release\ZptBuilder.exe &quot;$(TemporaryBuildPath)\Website\Pass1&quot; -p &quot;*.html&quot; -o &quot;$(TemporaryBuildPath)\Website\Pass2&quot; -i &quot;$(TemporaryBuildPath)\Website\Pass1\Shared&quot; --keyword-options &quot;baseUrl=$(WebsiteUrlRoot);buildDate=@(BuildTimestamp);version=@(SemanticVersion);releaseType=@(InformationalVersion);copyrightYear=@(CopyrightYear)&quot;"
+    <Exec Command="mono $(PathToSolutionRoot)\CSF.Zpt.Cli\bin\Release\ZptBuilder.exe &quot;$(TemporaryBuildPath)\Website\Pass1&quot; -p &quot;*.html&quot; -o &quot;$(TemporaryBuildPath)\Website\Pass2&quot; -i &quot;$(TemporaryBuildPath)\Website\Pass1\Shared&quot; --keyword-options &quot;baseUrl=$(WebsiteUrlRoot);buildDate=$(BuildTimestamp);version=@(SemanticVersion);releaseType=@(InformationalVersion);copyrightYear=$(CopyrightYear)&quot;"
           Condition="'$(OS)' == 'Unix'" />
-    <Exec Command="$(PathToSolutionRoot)\CSF.Zpt.Cli\bin\Release\ZptBuilder.exe &quot;$(TemporaryBuildPath)\Website\Pass1&quot; -p &quot;*.html&quot; -o &quot;$(TemporaryBuildPath)\Website\Pass2&quot; -i &quot;$(TemporaryBuildPath)\Website\Pass1\Shared&quot; --keyword-options &quot;baseUrl=$(WebsiteUrlRoot);buildDate=@(BuildTimestamp);version=@(SemanticVersion);releaseType=@(InformationalVersion);copyrightYear=@(CopyrightYear)&quot;"
+    <Exec Command="$(PathToSolutionRoot)\CSF.Zpt.Cli\bin\Release\ZptBuilder.exe &quot;$(TemporaryBuildPath)\Website\Pass1&quot; -p &quot;*.html&quot; -o &quot;$(TemporaryBuildPath)\Website\Pass2&quot; -i &quot;$(TemporaryBuildPath)\Website\Pass1\Shared&quot; --keyword-options &quot;baseUrl=$(WebsiteUrlRoot);buildDate=$(BuildTimestamp);version=@(SemanticVersion);releaseType=@(InformationalVersion);copyrightYear=$(CopyrightYear)&quot;"
           Condition="'$(OS)' != 'Unix'" />
     <Copy SourceFiles="@(WebsiteSupportFiles)" DestinationFiles="@(WebsiteSupportFiles-&gt;'$(TemporaryBuildPath)\Website\Pass2\%(RecursiveDir)%(Filename)%(Extension)')" />
   </Target>
