@@ -53,14 +53,7 @@ namespace CSF.Zpt.DeploymentTasks
         return true;
       }
         
-      var tool_path = GenerateFullPathToTool();
-
-      if(tool_path == null)
-      {
-        return false;
-      }
-
-      _exitCode = ExecuteTool(tool_path,
+      _exitCode = ExecuteTool(GenerateFullPathToTool(),
                               GenerateResponseFileCommands(),
                               GenerateCommandLineCommands());
 
@@ -78,6 +71,14 @@ namespace CSF.Zpt.DeploymentTasks
       }
 
       return true;
+    }
+
+    protected override string GetWorkingDirectory()
+    {
+      if(!String.IsNullOrWhiteSpace(WorkingDirectory))
+        return WorkingDirectory;
+      
+      return Environment.CurrentDirectory;
     }
 
     private IEnumerable<int> GetIgnoredExitCodes()
