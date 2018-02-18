@@ -53,7 +53,7 @@ namespace CSF.Zpt.DeploymentTasks
         return true;
       }
         
-      var tool_path = CreateToolPath();
+      var tool_path = GenerateFullPathToTool();
 
       if(tool_path == null)
       {
@@ -96,54 +96,6 @@ namespace CSF.Zpt.DeploymentTasks
         })
         .Where(x => x > 0)
         .ToArray();
-    }
-
-    private string CreateToolPath()
-    {
-      string tp;
-
-      if(String.IsNullOrEmpty(ToolPath))
-      {
-        tp = GenerateFullPathToTool();
-
-        if(String.IsNullOrEmpty (tp))
-        {
-          return null;
-        }
-
-        if(String.IsNullOrEmpty(ToolExe))
-        {
-          return tp;
-        }
-
-        tp = Path.GetDirectoryName (tp);
-      }
-      else
-      {
-        tp = ToolPath;
-      }
-
-      var path = Path.Combine(tp, ToolExe);
-
-      if (!File.Exists(path))
-      {
-        if (Log != null)
-        {
-          Log.LogError ("Tool executable '{0}' could not be found", path);
-        }
-          
-        return null;
-      }
-
-      return path;
-    }
-
-    #endregion
-
-    #region constructor
-
-    public ExecWithIgnoredExitCodes()
-    {
     }
 
     #endregion
