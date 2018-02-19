@@ -656,7 +656,8 @@ namespace CSF.Zpt.DocumentProviders
 
       if(nSpace.Prefix != null)
       {
-        output = node.Name.StartsWith(String.Concat(nSpace.Prefix, PREFIX_SEPARATOR));
+        output = node.Name.StartsWith(String.Concat(nSpace.Prefix, PREFIX_SEPARATOR),
+                                      StringComparison.InvariantCultureIgnoreCase);
       }
       else
       {
@@ -692,7 +693,7 @@ namespace CSF.Zpt.DocumentProviders
 
       HtmlNode[] output;
 
-      if(treatAsHtml && treatAsCData)
+      if(treatAsCData && !treatAsHtml)
       {
         output = new HtmlNode[] { this.Node.OwnerDocument.CreateTextNode(text) };
       }
