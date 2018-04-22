@@ -16,7 +16,15 @@
     <value>The list of variable names provided must match the registered variable names for the current expression instance.  This likely indicates an internal plugin fault.</value>
   </data>
   <data name="MustNotBeCompileErrors" xml:space="preserve">
-    <value>The CSharp expression must be valid; there must not be any compilation errors raised.  Please check the validity of the expression code?</value>
+    <value>Errors were encountered when compiling the C# expression, please check the validity of the expression code and supporting variables.
+
+Source expression
+-----------------
+  {0}
+
+Errors
+------
+{1}</value>
   </data>
   <data name="ExpressionTypeMustExist" xml:space="preserve">
     <value>The expression type must exist in the generated assembly.  This likely indicates an internal plugin fault.</value>
