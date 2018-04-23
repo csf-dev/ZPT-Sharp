@@ -1,0 +1,19 @@
+﻿<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Profile one: Razor</title>
+</head>
+<body>
+  <p>
+    This profile is a simple page which includes no model, but has some markup processing loops.  It uses no
+    external inclusion of files (METAL in ZPT terms, Partial Views in Razor terms).
+  </p>
+  <ol>
+  @for(var i = 0; i < 100; i++)
+  {
+    <li>Iteration number @(i + 1)</li>
+  }
+  </ol>
+</body>
+</html>

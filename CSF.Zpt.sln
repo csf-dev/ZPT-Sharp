@@ -98,6 +98,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Website", "Deployment\CSF.Z
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Utils", "Deployment\Utils\Utils.csproj", "{60D30E1F-3103-48F1-94E1-04CD7E1A2407}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSF.Zpt.MVC5.Profiles", "Tests\CSF.Zpt.MVC5.Profiles\CSF.Zpt.MVC5.Profiles.csproj", "{22FABC32-0558-486B-9430-EE2E6F4B67D0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -297,6 +299,12 @@ Global
 		{60D30E1F-3103-48F1-94E1-04CD7E1A2407}.Release|Any CPU.Build.0 = Release|Any CPU
 		{60D30E1F-3103-48F1-94E1-04CD7E1A2407}.Deploy|Any CPU.ActiveCfg = Release|Any CPU
 		{60D30E1F-3103-48F1-94E1-04CD7E1A2407}.Deploy|Any CPU.Build.0 = Release|Any CPU
+		{22FABC32-0558-486B-9430-EE2E6F4B67D0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{22FABC32-0558-486B-9430-EE2E6F4B67D0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{22FABC32-0558-486B-9430-EE2E6F4B67D0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{22FABC32-0558-486B-9430-EE2E6F4B67D0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{22FABC32-0558-486B-9430-EE2E6F4B67D0}.Deploy|Any CPU.ActiveCfg = Release|Any CPU
+		{22FABC32-0558-486B-9430-EE2E6F4B67D0}.Deploy|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{BFD834D4-5724-4425-BCB3-6DEE6B03F743} = {F1251A40-9526-48DC-A665-F9AEB972AC33}
@@ -327,17 +335,16 @@ Global
 		{346CA409-C481-45A8-9504-34DE5FB15868} = {52E0E72B-7509-4268-A118-E20422DDD295}
 		{4FE5F338-3430-4EA2-A83E-78FBBD56C98A} = {52E0E72B-7509-4268-A118-E20422DDD295}
 		{60D30E1F-3103-48F1-94E1-04CD7E1A2407} = {79045B21-94A0-4984-A91C-4D95EAA10C78}
+		{22FABC32-0558-486B-9430-EE2E6F4B67D0} = {39927A41-7964-48BF-9D90-DAFA48D54F09}
 	EndGlobalSection
 	GlobalSection(MonoDevelopProperties) = preSolution
 		Policies = $0
 		$0.TextStylePolicy = $1
-		$1.FileWidth = 120
 		$1.TabWidth = 2
 		$1.IndentWidth = 2
 		$1.NoTabsAfterNonTabs = True
-		$1.inheritsSet = VisualStudio
-		$1.inheritsScope = text/plain
 		$1.scope = text/plain
+		$1.TabsToSpaces = True
 		version = 1.0.0
 	EndGlobalSection
 EndGlobal
