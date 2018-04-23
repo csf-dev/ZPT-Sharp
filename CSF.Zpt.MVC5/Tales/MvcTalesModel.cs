@@ -24,9 +24,7 @@ namespace CSF.Zpt.MVC.Tales
       }
       set {
         if(value == null)
-        {
           throw new ArgumentNullException(nameof(value));
-        }
 
         _viewContext = value;
       }

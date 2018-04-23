@@ -9,6 +9,7 @@
     <RootNamespace>CSF.Zpt.MVC5.Profiles</RootNamespace>
     <AssemblyName>CSF.Zpt.MVC5.Profiles</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <ReleaseVersion>1.0.0</ReleaseVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -67,6 +68,8 @@
     <Folder Include="Scripts\" />
     <Folder Include="Views\Shared\" />
     <Folder Include="Views\ProfileOne\" />
+    <Folder Include="Views\ProfileTwo\" />
+    <Folder Include="Views\ProfileThree\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\ProfileOneController.cs" />
@@ -74,6 +77,8 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\ProfileTwoController.cs" />
+    <Compile Include="Controllers\ProfileThreeController.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Web.config" />
@@ -81,6 +86,9 @@
     <Content Include="Global.asax" />
     <Content Include="packages.config" />
     <Content Include="Views\ProfileOne\Razor.cshtml" />
+    <Content Include="Views\ProfileTwo\Razor.cshtml" />
+    <Content Include="Views\Shared\SharedRazorComponent.cshtml" />
+    <Content Include="Views\ProfileThree\Razor.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\CSF.Zpt.MVC5\CSF.Zpt.MVC5.csproj">
@@ -126,6 +134,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Views\ProfileOne\ZopePageTemplates.pt" />
+    <None Include="Views\ProfileTwo\ZopePageTemplates.pt" />
+    <None Include="Views\Shared\SharedZptComponent.pt" />
+    <None Include="Views\ProfileThree\ZopePageTemplates.pt" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>

@@ -6,7 +6,7 @@
 </head>
 <body>
   <p>
-    This profile is a simple page which includes no model, but has some markup processing loops.  It uses no
+    This profile is a simple page which includes no model, but has a markup processing loop.  It uses no
     external inclusion of files (METAL in ZPT terms, Partial Views in Razor terms).
   </p>
   <ol tal:define="collection csharp:System.Linq.Enumerable.Range(0, 100)">
