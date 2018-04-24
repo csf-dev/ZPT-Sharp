@@ -195,8 +195,8 @@ namespace CSF.Zpt.Tales
       return new BuiltinContextsContainer(this.GetKeywordOptions(),
                                           this.GetRepetitionSummaries(),
                                           originalAttrs,
-                                          templateFileFactory: context.RenderingOptions.GetTemplateFileFactory(),
-                                          model: this.ModelObject);
+                                          context.RenderingOptions.GetTemplateFileFactory(),
+                                          this.ModelObject);
     }
 
     /// <summary>

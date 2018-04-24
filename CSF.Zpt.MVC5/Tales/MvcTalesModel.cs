@@ -41,7 +41,8 @@ namespace CSF.Zpt.MVC.Tales
       return new MvcContextsContainer(this.GetKeywordOptions(),
                                       this.GetRepetitionSummaries(),
                                       originalAttrs,
-                                      ViewContext);
+                                      ViewContext,
+                                      context.RenderingOptions.GetTemplateFileFactory());
     }
 
     /// <summary>
