@@ -83,7 +83,20 @@ namespace CSF.Zpt.MVC.Tales
       };
     }
 
-    protected override Model CreateTypedSiblingModel()
+		public override void CopyTo(IModelValueStore destination)
+		{
+      base.CopyTo(destination);
+      TryCopyViewContext(destination);
+		}
+
+    void TryCopyViewContext(IModelValueStore destination)
+    {
+      var destinationModel = destination as MvcTalesModel;
+      if(destinationModel == null) return;
+      destinationModel.ViewContext = ViewContext;
+    }
+
+		protected override Model CreateTypedSiblingModel()
     {
       return new MvcTalesModel(this.Parent, this.Root, EvaluatorRegistry, model: this.ModelObject) {
         ViewContext = ViewContext

@@ -223,6 +223,34 @@ namespace CSF.Zpt.Rendering
     public abstract ExpressionResult Evaluate(string expression, IRenderingContext context);
 
     /// <summary>
+    /// Copies the state of the current model to another instance.
+    /// </summary>
+    /// <param name="destination">The destination model.</param>
+    public virtual void CopyTo(IModelValueStore destination)
+    {
+      if(destination == null)
+        throw new ArgumentNullException(nameof(destination));
+
+      CopyAllDefinitions(destination);
+      TryCopyModelObject(destination);
+    }
+
+    void CopyAllDefinitions(IModelValueStore destination)
+    {
+      var definitions = GetAllDefinitions();
+
+      foreach(var key in definitions.Keys)
+        destination.AddLocal(key, definitions[key]);
+    }
+
+    void TryCopyModelObject(IModelValueStore destination)
+    {
+      var destinationModel = destination as Model;
+      if(destinationModel == null) return;
+      destinationModel.ModelObject = ModelObject;
+    }
+
+    /// <summary>
     /// Tries to get a named item from the current instance.
     /// </summary>
     /// <returns><c>true</c>, if an item was found, <c>false</c> otherwise.</returns>
