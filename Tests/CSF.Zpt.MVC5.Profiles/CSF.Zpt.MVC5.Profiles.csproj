@@ -61,6 +61,19 @@
       <HintPath>..\..\packages\Microsoft.AspNet.WebPages.3.2.0\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
     </Reference>
     <Reference Include="System.Dynamic" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="Ploeh.AutoFixture">
+      <HintPath>..\..\packages\AutoFixture.3.51.0\lib\net40\Ploeh.AutoFixture.dll</HintPath>
+    </Reference>
+    <Reference Include="CSF.Utils">
+      <HintPath>..\..\packages\CSF.Utils.6.1.0\lib\net45\CSF.Utils.dll</HintPath>
+    </Reference>
+    <Reference Include="Moq">
+      <HintPath>..\..\packages\Moq.4.7.25\lib\net45\Moq.dll</HintPath>
+    </Reference>
+    <Reference Include="Castle.Core">
+      <HintPath>..\..\packages\Castle.Core.4.0.0\lib\net45\Castle.Core.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Content\" />
@@ -70,6 +83,7 @@
     <Folder Include="Views\ProfileOne\" />
     <Folder Include="Views\ProfileTwo\" />
     <Folder Include="Views\ProfileThree\" />
+    <Folder Include="ScreenplayReport\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\ProfileOneController.cs" />
@@ -79,6 +93,33 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\ProfileTwoController.cs" />
     <Compile Include="Controllers\ProfileThreeController.cs" />
+    <Compile Include="ScreenplayReport\AbilityCustomisation.cs" />
+    <Compile Include="ScreenplayReport\FeatureCustomisation.cs" />
+    <Compile Include="ScreenplayReport\GainAbilityCustomisation.cs" />
+    <Compile Include="ScreenplayReport\NamedCustomisation.cs" />
+    <Compile Include="ScreenplayReport\PerformableCustomisation.cs" />
+    <Compile Include="ScreenplayReport\PerformanceCustomisation.cs" />
+    <Compile Include="ScreenplayReport\PerformanceSpecimenBuilder.cs" />
+    <Compile Include="ScreenplayReport\ReportCustomisation.cs" />
+    <Compile Include="ScreenplayReport\ScenarioCustomisation.cs" />
+    <Compile Include="ScreenplayReport\IAbility.cs" />
+    <Compile Include="ScreenplayReport\INamed.cs" />
+    <Compile Include="ScreenplayReport\Feature.cs" />
+    <Compile Include="ScreenplayReport\Scenario.cs" />
+    <Compile Include="ScreenplayReport\IPerformable.cs" />
+    <Compile Include="ScreenplayReport\IReportable.cs" />
+    <Compile Include="ScreenplayReport\IPerformer.cs" />
+    <Compile Include="ScreenplayReport\PerformanceOutcome.cs" />
+    <Compile Include="ScreenplayReport\PerformanceType.cs" />
+    <Compile Include="ScreenplayReport\GainAbility.cs" />
+    <Compile Include="ScreenplayReport\IPerformable`1.cs" />
+    <Compile Include="ScreenplayReport\Performance.cs" />
+    <Compile Include="ScreenplayReport\IPerformableWithResult.cs" />
+    <Compile Include="ScreenplayReport\Reportable.cs" />
+    <Compile Include="ScreenplayReport\Report.cs" />
+    <Compile Include="Controllers\ScreenplayReportController.cs" />
+    <Compile Include="ScreenplayReport\ReportDocument.cs" />
+    <Compile Include="ScreenplayReport\IObjectFormattingService.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Web.config" />
@@ -137,6 +178,7 @@
     <None Include="Views\ProfileTwo\ZopePageTemplates.pt" />
     <None Include="Views\Shared\SharedZptComponent.pt" />
     <None Include="Views\ProfileThree\ZopePageTemplates.pt" />
+    <None Include="Views\ScreenplayReport\Index.pt" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>
