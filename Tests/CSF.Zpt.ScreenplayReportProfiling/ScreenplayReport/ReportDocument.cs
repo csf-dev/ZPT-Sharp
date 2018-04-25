@@ -1,6 +1,4 @@
 ﻿using System;
-using CSF.Zpt;
-using CSF.Zpt.Metal;
 
 namespace CSF.Screenplay.Reporting.Models
 {
