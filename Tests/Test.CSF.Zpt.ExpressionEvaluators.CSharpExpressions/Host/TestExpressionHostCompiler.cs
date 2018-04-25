@@ -188,7 +188,7 @@ namespace Test.CSF.Zpt.ExpressionEvaluators.CSharpExpressions.Host
                   Throws.Exception.Matches<CSharpExpressionException>(x => {
         var expressionContained = x.Message.Contains("\"foo\" * \"bar\"");
         var errorCodeContained = x.Message.Contains("CS0019");
-        var errorMessageContained = x.Message.Contains("Operator `*' cannot be applied to operands of type `string' and `string'");
+        var errorMessageContained = x.Message.Contains("cannot be applied to operands");
 
         return (expressionContained && errorCodeContained && errorMessageContained);
       }),
