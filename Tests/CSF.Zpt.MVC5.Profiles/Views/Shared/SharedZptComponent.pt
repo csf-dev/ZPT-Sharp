@@ -1,0 +1,4 @@
+﻿<p metal:define-macro="shared">
+  This is a shared component.
+  It marks iteration <span tal:replace="csharp:iteration + 1">2</span>.
+</p>

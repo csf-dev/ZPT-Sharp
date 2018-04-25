@@ -181,22 +181,10 @@ namespace CSF.Zpt.Rendering
     public virtual void CopyTo(IModelValueContainer container)
     {
       if(container == null)
-      {
         throw new ArgumentNullException(nameof(container));
-      }
 
-      var talDefinitions = TalModel.GetAllDefinitions();
-      var metalDefinitions = MetalModel.GetAllDefinitions();
-
-      foreach(var key in talDefinitions.Keys)
-      {
-        container.TalModel.AddLocal(key, talDefinitions[key]);
-      }
-
-      foreach(var key in metalDefinitions.Keys)
-      {
-        container.MetalModel.AddLocal(key, metalDefinitions[key]);
-      }
+      TalModel.CopyTo(container.TalModel);
+      MetalModel.CopyTo(container.MetalModel);
     }
 
     #endregion

@@ -24,9 +24,7 @@ namespace CSF.Zpt.MVC.Tales
       }
       set {
         if(value == null)
-        {
           throw new ArgumentNullException(nameof(value));
-        }
 
         _viewContext = value;
       }
@@ -43,7 +41,8 @@ namespace CSF.Zpt.MVC.Tales
       return new MvcContextsContainer(this.GetKeywordOptions(),
                                       this.GetRepetitionSummaries(),
                                       originalAttrs,
-                                      ViewContext);
+                                      ViewContext,
+                                      context.RenderingOptions.GetTemplateFileFactory());
     }
 
     /// <summary>
@@ -85,7 +84,20 @@ namespace CSF.Zpt.MVC.Tales
       };
     }
 
-    protected override Model CreateTypedSiblingModel()
+		public override void CopyTo(IModelValueStore destination)
+		{
+      base.CopyTo(destination);
+      TryCopyViewContext(destination);
+		}
+
+    void TryCopyViewContext(IModelValueStore destination)
+    {
+      var destinationModel = destination as MvcTalesModel;
+      if(destinationModel == null) return;
+      destinationModel.ViewContext = ViewContext;
+    }
+
+		protected override Model CreateTypedSiblingModel()
     {
       return new MvcTalesModel(this.Parent, this.Root, EvaluatorRegistry, model: this.ModelObject) {
         ViewContext = ViewContext

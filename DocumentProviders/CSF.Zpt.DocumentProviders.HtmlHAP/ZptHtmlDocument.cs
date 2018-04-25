@@ -142,7 +142,9 @@ namespace CSF.Zpt.DocumentProviders
     /// <returns>The rendering model.</returns>
     protected override IZptElement GetRootElement()
     {
-      return new ZptHtmlElement(this.Document.DocumentNode, this.SourceFile, this, isRoot: true);
+      var newDoc = new HtmlDocument();
+      newDoc.LoadHtml(this.Document.DocumentNode.OuterHtml);
+      return new ZptHtmlElement(newDoc.DocumentNode, this.SourceFile, this, isRoot: true);
     }
 
     /// <summary>
