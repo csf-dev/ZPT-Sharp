@@ -56,14 +56,6 @@
       <Project>{8207CD9B-F1C1-4D75-B250-ACDFFBDCB071}</Project>
       <Name>CSF.Zpt.Abstractions</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Deployment\CSF.Zpt.Deployment\CSF.Zpt.Deployment.csproj">
-      <Project>{55308783-6072-42C1-B955-AA393157D7AD}</Project>
-      <Name>CSF.Zpt.Deployment</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Deployment\CSF.Zpt.DeploymentTasks\CSF.Zpt.DeploymentTasks.csproj">
-      <Project>{3E1DAACE-519B-4C6C-80E3-3F06A1A33C66}</Project>
-      <Name>CSF.Zpt.DeploymentTasks</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\DocumentProviders\CSF.Zpt.DocumentProviders.HtmlHAP\CSF.Zpt.DocumentProviders.HtmlHAP.csproj">
       <Project>{BFD834D4-5724-4425-BCB3-6DEE6B03F743}</Project>
       <Name>CSF.Zpt.DocumentProviders.HtmlHAP</Name>
