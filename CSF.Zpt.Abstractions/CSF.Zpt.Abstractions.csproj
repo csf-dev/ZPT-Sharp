@@ -12,6 +12,8 @@
     <ProjectDescription>Abstract types &amp; interfaces for ZPT-Sharp.</ProjectDescription>
     <PathToSolutionRoot>..</PathToSolutionRoot>
     <ReleaseVersion>1.0.0</ReleaseVersion>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>..\CSF-Software-OSS.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <Import Project="$(PathToSolutionRoot)\Common\SolutionProperties.targets" />
   <Import Project="$(PathToSolutionRoot)\Deployment\CSF.Zpt.DeploymentTasks\CSF.Zpt.DeploymentTasks.targets" />
