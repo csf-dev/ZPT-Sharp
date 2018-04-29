@@ -72,7 +72,7 @@
       <HintPath>..\..\packages\Castle.Core.4.0.0\lib\net45\Castle.Core.dll</HintPath>
     </Reference>
     <Reference Include="CSF.Utils">
-      <HintPath>..\..\packages\CSF.Utils.6.1.0\lib\net45\CSF.Utils.dll</HintPath>
+      <HintPath>..\..\packages\CSF.Utils.6.1.1\lib\net45\CSF.Utils.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
