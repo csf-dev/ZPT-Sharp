@@ -42,7 +42,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="CSF.Reflection">
-      <HintPath>..\..\packages\CSF.Reflection.1.0.2\lib\net45\CSF.Reflection.dll</HintPath>
+      <HintPath>..\..\packages\CSF.Reflection.1.0.3\lib\net45\CSF.Reflection.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -88,11 +88,12 @@
     <CallTarget Targets="RestoreStubAssemblyInfo" />
   </Target>
   <ItemGroup>
-    <None Include="packages.config" />
     <None Include="CSF.Zpt.ExpressionEvaluators.PathExpressions.nuspec.pt" />
     <None Include="app.config.install.xdt" />
     <None Include="app.config.uninstall.xdt" />
     <None Include="web.config.install.xdt" />
     <None Include="web.config.uninstall.xdt" />
+    <None Include="packages.config" />
   </ItemGroup>
+  <Import Project="..\..\packages\MSBuild.Extension.Pack.1.9.1\build\net40\MSBuild.Extension.Pack.targets" Condition="Exists('..\..\packages\MSBuild.Extension.Pack.1.9.1\build\net40\MSBuild.Extension.Pack.targets')" />
 </Project>
