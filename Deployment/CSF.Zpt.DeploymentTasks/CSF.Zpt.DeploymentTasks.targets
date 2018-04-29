@@ -436,9 +436,11 @@
           https://github.com/mono/mono/issues/8495
         ************************************************************************
   -->
-  <Target Name="StrongNamingWorkaround" AfterTargets="Build">
+  <Target Name="StrongNamingWorkaround" AfterTargets="Build" Condition="'$(SignAssembly)' == 'true'">
     <PropertyGroup>
-      <OutputAssembly>$(OutputPath)\$(AssemblyName).dll</OutputAssembly>
+      <OutputExtension Condition="'$(OutputType)' == 'Library'">dll</OutputExtension>
+      <OutputExtension Condition="'$(OutputType)' == 'Exe'">exe</OutputExtension>
+      <OutputAssembly>$(OutputPath)\$(AssemblyName).$(OutputExtension)</OutputAssembly>
     </PropertyGroup>
     <Exec Command="sn -R $(OutputAssembly) $(AssemblyOriginatorKeyFile)"
           Condition="'$(OS)' == 'Unix'" />
