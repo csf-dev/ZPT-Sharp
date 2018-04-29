@@ -20,7 +20,8 @@ namespace CSF.Zpt.SourceAnnotation
         throw new ArgumentNullException(nameof(context));
       }
 
-      context.Element.CacheSourceInformationInAttributes();
+      if((context?.RenderingOptions?.AddSourceFileAnnotation).GetValueOrDefault())
+        context.Element.CacheSourceInformationInAttributes();
 
       return base.Visit(context);
     }

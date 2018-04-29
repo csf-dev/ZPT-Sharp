@@ -9,6 +9,7 @@
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <AssemblyName>CSF.Zpt.DeploymentTasks</AssemblyName>
     <ReleaseVersion>1.0.0</ReleaseVersion>
+    <AssemblyOriginatorKeyFile>..\..\CSF-Software-OSS.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <Import Project="..\..\Common\SolutionProperties.targets" />
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">

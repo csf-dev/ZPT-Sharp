@@ -176,6 +176,25 @@ namespace Test.CSF.Zpt.ExpressionEvaluators.CSharpExpressions.Host
       Assert.AreEqual("15-25-35", result);
     }
 
+    [Test]
+    public void GetHostCreator_raises_exception_which_includes_compile_failure_when_expression_is_invalid()
+    {
+      // Arrange
+      // This should raise a compile error, you can't multiply strings, it will raise CS0019
+      var model = CreateModel("\"foo\" * \"bar\"");
+
+      // Act & assert
+      Assert.That(() => ExerciseSut(model),
+                  Throws.Exception.Matches<CSharpExpressionException>(x => {
+        var expressionContained = x.Message.Contains("\"foo\" * \"bar\"");
+        var errorCodeContained = x.Message.Contains("CS0019");
+        var errorMessageContained = x.Message.Contains("cannot be applied to operands");
+
+        return (expressionContained && errorCodeContained && errorMessageContained);
+      }),
+                 "The exception message must contain the expression and all of the error information.");
+    }
+
     #endregion
 
     #region methods

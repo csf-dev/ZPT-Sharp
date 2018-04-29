@@ -12,6 +12,8 @@
     <ProjectDescription>Implementation of IExpressionEvaluator for 'csharp' expressions</ProjectDescription>
     <PathToSolutionRoot>..\..</PathToSolutionRoot>
     <ReleaseVersion>1.0.0</ReleaseVersion>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>..\..\CSF-Software-OSS.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <Import Project="$(PathToSolutionRoot)\Common\SolutionProperties.targets" />
   <Import Project="$(PathToSolutionRoot)\Deployment\CSF.Zpt.DeploymentTasks\CSF.Zpt.DeploymentTasks.targets" />
@@ -58,14 +60,14 @@
     <Reference Include="System.Dynamic" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Configuration" />
-    <Reference Include="CSF.Utils">
-      <HintPath>..\..\packages\CSF.Utils.6.0.0\lib\net45\CSF.Utils.dll</HintPath>
+    <Reference Include="CSF.Caches">
+      <HintPath>..\..\packages\CSF.Caches.1.0.2\lib\net45\CSF.Caches.dll</HintPath>
     </Reference>
     <Reference Include="CSF.Configuration">
-      <HintPath>..\..\packages\CSF.Configuration.1.1.0\lib\net45\CSF.Configuration.dll</HintPath>
+      <HintPath>..\..\packages\CSF.Configuration.1.1.2\lib\net45\CSF.Configuration.dll</HintPath>
     </Reference>
-    <Reference Include="CSF.Caches">
-      <HintPath>..\..\packages\CSF.Caches.1.0.0\lib\net45\CSF.Caches.dll</HintPath>
+    <Reference Include="CSF.Utils">
+      <HintPath>..\..\packages\CSF.Utils.6.1.1\lib\net45\CSF.Utils.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -109,7 +111,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="CSF.Zpt.ExpressionEvaluators.CSharpExpressions.nuspec.pt" />
-    <None Include="packages.config" />
     <None Include="app.config.install.xdt" />
     <None Include="app.config.uninstall.xdt" />
     <None Include="Host\ExpressionHostTemplate.tt">
@@ -118,6 +119,7 @@
     </None>
     <None Include="web.config.install.xdt" />
     <None Include="web.config.uninstall.xdt" />
+    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\" />

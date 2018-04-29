@@ -172,7 +172,7 @@ namespace CSF.Zpt.MVC.Tales
                                 RepetitionMetadataCollectionWrapper repeat,
                                 Lazy<OriginalAttributeValuesCollection> attrs,
                                 ViewContext viewContext,
-                                ITemplateFileFactory templateFileFactory = null)
+                                ITemplateFileFactory templateFileFactory)
       : base(options, repeat, attrs, templateFileFactory, viewContext?.ViewData?.Model)
     {
       _viewContext = viewContext?? new ViewContext();

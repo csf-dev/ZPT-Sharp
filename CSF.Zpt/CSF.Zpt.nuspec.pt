@@ -18,10 +18,10 @@
       <dependency id="CSF.Zpt.Abstractions"
                   version="[0.0.0,1.0.0)"
                   tal:attributes="version string:[$fullVersion,${options/nextBreakingVersion})" />
-      <dependency id="CSF.Utils" version="[6.0.0,7.0.0)" />
-      <dependency id="CSF.Reflection" version="[1.0.1,2.0.0)" />
-      <dependency id="CSF.Configuration" version="[1.1.0,2.0.0)" />
-      <dependency id="CSF.Caches" version="[1.0.0,2.0.0)" />
+      <dependency id="CSF.Utils" version="[6.1.1,7.0.0)" />
+      <dependency id="CSF.Reflection" version="[1.0.3,2.0.0)" />
+      <dependency id="CSF.Configuration" version="[1.1.2,2.0.0)" />
+      <dependency id="CSF.Caches" version="[1.0.2,2.0.0)" />
     </dependencies>
   </metadata>
   <files>

@@ -65,7 +65,7 @@ namespace CSF.Zpt.TestUtils
     /// <summary>
     /// Initializes a new instance of the <see cref="Test.CSF.Zpt.Util.DummyModel"/> class.
     /// </summary>
-    protected DummyModel() : this((NamedObjectWrapper) null) {}
+    public DummyModel() : this(null) {}
 
     /// <summary>
     /// Initializes a new instance of the <see cref="Test.CSF.Zpt.Rendering.DummyModel"/> class.
@@ -78,7 +78,7 @@ namespace CSF.Zpt.TestUtils
     /// Initializes a new instance of the <see cref="Test.CSF.Zpt.Rendering.DummyModel"/> class.
     /// </summary>
     /// <param name="options">Keyword options.</param>
-    public DummyModel(NamedObjectWrapper options) : base(options) {}
+    public DummyModel(NamedObjectWrapper options, object modelObject = null) : base(options, modelObject) {}
 
     #endregion
   }

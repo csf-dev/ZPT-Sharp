@@ -670,8 +670,6 @@ namespace CSF.Zpt.Rendering
       this.SetAttribute(ZptConstants.SourceAnnotation.Namespace,
                         ZptConstants.SourceAnnotation.OriginalContextEndTagLineNumber,
                         originalElement.GetEndTagFileLocation());
-
-      this.CacheSourceInformationInAttributes();
     }
 
     /// <summary>

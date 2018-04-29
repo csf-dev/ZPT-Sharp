@@ -168,7 +168,8 @@ namespace CSF.Zpt.ExpressionEvaluators.CSharpExpressions.Host
                                             Resources.LogFormats.CodeWhichCausedCompileErrorFormat,
                                             code);
 
-        throw new CSharpExpressionException(Resources.ExceptionMessages.MustNotBeCompileErrors) {
+        var message = CreateCompileErrorMessage(model.Specification.Text, compilerErrors);
+        throw new CSharpExpressionException(message) {
           ExpressionText = model.Specification.Text
         };
       }
@@ -179,6 +180,17 @@ namespace CSF.Zpt.ExpressionEvaluators.CSharpExpressions.Host
                                             Resources.LogFormats.CodeToBeCompiledFormat,
                                             code);
       }
+    }
+
+    string CreateCompileErrorMessage(string expressionText, IEnumerable<CompilerError> errors)
+    {
+      var errorStrings = errors
+        .Where(x => !x.IsWarning)
+        .Select(x => $"* {x.ErrorNumber}: {x.ErrorText}");
+
+      var errorsList = String.Join(Environment.NewLine, errorStrings);
+
+      return String.Format(Resources.ExceptionMessages.MustNotBeCompileErrors, expressionText, errorsList);
     }
 
     #endregion

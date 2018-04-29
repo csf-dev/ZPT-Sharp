@@ -186,17 +186,14 @@ namespace CSF.Zpt.Tales
                                     object model = null)
     {
       if(options == null)
-      {
         throw new ArgumentNullException(nameof(options));
-      }
       if(repeat == null)
-      {
         throw new ArgumentNullException(nameof(repeat));
-      }
       if(attrs == null)
-      {
         throw new ArgumentNullException(nameof(attrs));
-      }
+      if(templateFileFactory == null)
+        throw new ArgumentNullException(nameof(templateFileFactory));
+      
 
       _nothing = null;
       _default = ZptConstants.CancellationToken;
@@ -204,9 +201,7 @@ namespace CSF.Zpt.Tales
       _repeat = repeat;
       _attrs = attrs;
       _model = model;
-
-        _templateFileFactory = templateFileFactory;
-
+      _templateFileFactory = templateFileFactory;
     }
 
     #endregion

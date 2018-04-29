@@ -32,7 +32,8 @@ namespace CSF.Zpt.Metal
     {
       var slotsToFill = GetSlotsToFill(sourceContext, macroContext, macroStack);
 
-      macroContext.Element.RecursivelyCacheSourceInformationInAttributes();
+      if((sourceContext?.RenderingOptions?.AddSourceFileAnnotation).GetValueOrDefault())
+        macroContext.Element.RecursivelyCacheSourceInformationInAttributes();
 
       FillSlots(slotsToFill);
 
@@ -49,6 +50,9 @@ namespace CSF.Zpt.Metal
                                                          IRenderingContext macroContext)
     {
       var replacement = sourceContext.Element.ReplaceWith(macroContext.Element);
+
+      if((sourceContext?.RenderingOptions?.AddSourceFileAnnotation).GetValueOrDefault())
+        replacement.CacheSourceInformationInAttributes();
 
       replacement.MarkAsImported(sourceContext.Element);
 
@@ -82,7 +86,8 @@ namespace CSF.Zpt.Metal
       var slot = slotAndFiller.Slot.Element;
       var filler = slotAndFiller.Filler.Element;
 
-      filler.RecursivelyCacheSourceInformationInAttributes();
+      if((slotAndFiller.Slot.RenderingOptions?.AddSourceFileAnnotation).GetValueOrDefault())
+        filler.RecursivelyCacheSourceInformationInAttributes();
 
       var fillSlotAttribute = slot.GetMetalAttribute(ZptConstants.Metal.FillSlotAttribute);
       var replacement = slot.ReplaceWith(filler);
