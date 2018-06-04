@@ -366,7 +366,8 @@ namespace CSF.Zpt.DocumentProviders
       }
 
       var formattedName = GetNameWithPrefix(attributeNamespace, name);
-      this.Node.SetAttributeValue(formattedName, value);
+      var sanitisedValue = HtmlEntity.Entitize(value, true, true);
+      this.Node.SetAttributeValue(formattedName, sanitisedValue);
     }
 
     /// <summary>
