@@ -13,7 +13,7 @@ namespace CSF.Zpt.ExpressionEvaluators.PathExpressions
   {
     #region constants
 
-    private static readonly string Prefix = "path";
+    public static readonly string Prefix = "path";
 
     #endregion
 

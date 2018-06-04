@@ -111,6 +111,9 @@ for(var i = 1; i<myVariable.length; i++)
       content["args"] = "yes";
       output.TalKeywordOptions.Add("content", content);
 
+      // The 'myPipe' keyword option
+      output.TalKeywordOptions.Add("myPipe", (Func<object,object>) ReplaceOCharacter);
+
       // The 'batch' keyword option
       var batch = new EnumerableObjectWrapperWithNamedItems();
       batch["previous_sequence"] = false;
@@ -159,6 +162,13 @@ for(var i = 1; i<myVariable.length; i++)
       output.TalLocalDefinitions.Add("jQuery", JQuery321);
 
       return output;
+    }
+
+    object ReplaceOCharacter(object input)
+    {
+      var str = input as string;
+      if(str == null) return null;
+      return str.Replace('o', '0');
     }
 
     #endregion

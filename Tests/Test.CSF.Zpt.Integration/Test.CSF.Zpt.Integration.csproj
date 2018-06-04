@@ -270,6 +270,8 @@
     <None Include="Test data\ZptIntegrationTests\ExpectedOutputs\UnfamiliarCharactersTest.html" />
     <None Include="Test data\ZptIntegrationTests\SourceDocuments\GarbageMarkupInJavascript.html" />
     <None Include="Test data\ZptIntegrationTests\ExpectedOutputs\GarbageMarkupInJavascript.html" />
+    <None Include="Test data\ZptIntegrationTests\SourceDocuments\PipeExpression.html" />
+    <None Include="Test data\ZptIntegrationTests\ExpectedOutputs\PipeExpression.html" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\CSF.Zpt\CSF.Zpt.csproj">
@@ -315,6 +317,10 @@
     <ProjectReference Include="..\..\ExpressionEvaluators\CSF.Zpt.ExpressionEvaluators.LoadExpressions\CSF.Zpt.ExpressionEvaluators.LoadExpressions.csproj">
       <Project>{4FEEB873-D66A-42F8-ADB9-4C2D133774F3}</Project>
       <Name>CSF.Zpt.ExpressionEvaluators.LoadExpressions</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\ExpressionEvaluators\CSF.Zpt.ExpressionEvaluators.PipeExpressions\CSF.Zpt.ExpressionEvaluators.PipeExpressions.csproj">
+      <Project>{3D708232-9C80-49E6-A163-33CC7505B890}</Project>
+      <Name>CSF.Zpt.ExpressionEvaluators.PipeExpressions</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />
