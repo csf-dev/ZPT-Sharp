@@ -80,8 +80,8 @@ namespace CSF.Zpt.ExpressionEvaluators.PipeExpressions
         };
       }
         
-      var valueExpression = ExpressionCreator.Create(PathExpressionEvaluator.Prefix, expressionMatch.Groups[1].Value);
-      var pipeExpression = ExpressionCreator.Create(PathExpressionEvaluator.Prefix, expressionMatch.Groups[2].Value);
+      var valueExpression = ExpressionCreator.Create(PathExpressionEvaluator.GetPrefix(), expressionMatch.Groups[1].Value);
+      var pipeExpression = ExpressionCreator.Create(PathExpressionEvaluator.GetPrefix(), expressionMatch.Groups[2].Value);
 
       var valueExpressionResult = model.Evaluate(valueExpression, context);
       var pipeExpressionResult = model.Evaluate(pipeExpression, context);

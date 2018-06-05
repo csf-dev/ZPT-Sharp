@@ -11,7 +11,7 @@ namespace CSF.Zpt.ExpressionEvaluators.PathExpressions
   {
     #region constants
 
-    private static readonly string Prefix = "local";
+    const string Prefix = "local";
 
     #endregion
 
