@@ -9,4 +9,4 @@ using System.Runtime.CompilerServices;
 [assembly: AssemblyCopyright("CSF Software Limited et al")]
 [assembly: AssemblyConfiguration("Release")]
 [assembly: AssemblyVersion("1.1.0.0")]
-[assembly: AssemblyFileVersion("1.1.0.3")]
+[assembly: AssemblyFileVersion("1.1.0.4")]
