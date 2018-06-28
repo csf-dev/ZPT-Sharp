@@ -75,7 +75,7 @@
     </switches>
     <sharedListeners>
       <add name="ZptLog4netListener"
-           type="CSF.Zpt.SelfConfiguringLog4netTraceListener, CSF.Zpt.Log4net, Version=1.0.6.1, Culture=neutral, PublicKeyToken=83989bab8a1a4730"
+           type="CSF.Zpt.SelfConfiguringLog4netTraceListener, CSF.Zpt.Log4net, Version=1.1.0.1, Culture=neutral, PublicKeyToken=83989bab8a1a4730"
            xdt:Transform="InsertIfMissing"
            xdt:Locator="Match(name)">
         <filter type="System.Diagnostics.EventTypeFilter" initializeData="Verbose"/>
