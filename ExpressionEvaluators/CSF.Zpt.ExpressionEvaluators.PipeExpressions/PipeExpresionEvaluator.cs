@@ -31,6 +31,9 @@ using CSF.Zpt.Tales;
 
 namespace CSF.Zpt.ExpressionEvaluators.PipeExpressions
 {
+  /// <summary>
+  /// An expression evaluator which 'pipes' a value through a transformation function and gets the result.
+  /// </summary>
   public class PipeExpresionEvaluator : ExpressionEvaluatorBase
   {
     #region constants
@@ -59,6 +62,12 @@ namespace CSF.Zpt.ExpressionEvaluators.PipeExpressions
 
     #region methods
 
+    /// <summary>
+    /// Evaluate the specified expression, for the given element and model.
+    /// </summary>
+    /// <param name="expression">The expression to evaluate.</param>
+    /// <param name="context">The rendering context for the expression being evaluated.</param>
+    /// <param name="model">The ZPT model, providing the context for evaluation.</param>
     public override ExpressionResult Evaluate(Expression expression, IRenderingContext context, ITalesModel model)
     {
       if(model == null)
