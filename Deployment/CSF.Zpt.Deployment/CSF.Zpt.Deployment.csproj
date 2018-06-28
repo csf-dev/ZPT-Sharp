@@ -81,6 +81,10 @@
       <Project>{9B4DF12E-6E04-4C25-AD16-58434C18DE8A}</Project>
       <Name>CSF.Zpt.MVC5</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\ExpressionEvaluators\CSF.Zpt.ExpressionEvaluators.PipeExpressions\CSF.Zpt.ExpressionEvaluators.PipeExpressions.csproj">
+      <Project>{3D708232-9C80-49E6-A163-33CC7505B890}</Project>
+      <Name>CSF.Zpt.ExpressionEvaluators.PipeExpressions</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="Zpt-Sharp-API.nuspec" />
