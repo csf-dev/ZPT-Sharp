@@ -228,6 +228,7 @@
       <NuspecFile Include="$(PathToSolutionRoot)\ExpressionEvaluators\CSF.Zpt.ExpressionEvaluators.PythonExpressions\CSF.Zpt.ExpressionEvaluators.PythonExpressions.nuspec" />
       <NuspecFile Include="$(PathToSolutionRoot)\ExpressionEvaluators\CSF.Zpt.ExpressionEvaluators.StringExpressions\CSF.Zpt.ExpressionEvaluators.StringExpressions.nuspec" />
       <NuspecFile Include="$(PathToSolutionRoot)\ExpressionEvaluators\CSF.Zpt.ExpressionEvaluators.LoadExpressions\CSF.Zpt.ExpressionEvaluators.LoadExpressions.nuspec" />
+      <NuspecFile Include="$(PathToSolutionRoot)\ExpressionEvaluators\CSF.Zpt.ExpressionEvaluators.PipeExpressions\CSF.Zpt.ExpressionEvaluators.PipeExpressions.nuspec" />
     </ItemGroup>
     <ItemGroup>
       <CopyrightYear Include="$([System.DateTime]::Now.ToString(yyyy))" />
@@ -261,6 +262,7 @@
       <ZptSharpCompleteZipFiles Include="$(PathToSolutionRoot)\DocumentProviders\CSF.Zpt.DocumentProviders.XmlLegacy\bin\Release\CSF.Zpt.DocumentProviders.XmlLegacy.dll" />
       <ZptSharpCompleteZipFiles Include="$(PathToSolutionRoot)\DocumentProviders\CSF.Zpt.DocumentProviders.XmlLinq\bin\Release\CSF.Zpt.DocumentProviders.XmlLinq.dll" />
       <ZptSharpCompleteZipFiles Include="$(PathToSolutionRoot)\ExpressionEvaluators\CSF.Zpt.ExpressionEvaluators.NotExpressions\bin\Release\CSF.Zpt.ExpressionEvaluators.NotExpressions.dll" />
+      <ZptSharpCompleteZipFiles Include="$(PathToSolutionRoot)\ExpressionEvaluators\CSF.Zpt.ExpressionEvaluators.PipeExpressions\bin\Release\CSF.Zpt.ExpressionEvaluators.PipeExpressions.dll" />
       <ZptSharpCompleteZipFiles Include="$(PathToSolutionRoot)\ExpressionEvaluators\CSF.Zpt.ExpressionEvaluators.PathExpressions\bin\Release\CSF.Zpt.ExpressionEvaluators.PathExpressions.dll" />
       <ZptSharpCompleteZipFiles Include="$(PathToSolutionRoot)\ExpressionEvaluators\CSF.Zpt.ExpressionEvaluators.StringExpressions\bin\Release\CSF.Zpt.ExpressionEvaluators.StringExpressions.dll" />
       <ZptSharpCompleteZipFiles Include="$(PathToSolutionRoot)\ExpressionEvaluators\CSF.Zpt.ExpressionEvaluators.CSharpExpressions\bin\Release\CSF.Zpt.ExpressionEvaluators.CSharpExpressions.dll" />
@@ -281,6 +283,7 @@
       <ZptSharpCompleteZipFiles Include="$(PathToSolutionRoot)\DocumentProviders\CSF.Zpt.DocumentProviders.XmlLegacy\bin\Release\CSF.Zpt.DocumentProviders.XmlLegacy.xml" />
       <ZptSharpCompleteZipFiles Include="$(PathToSolutionRoot)\DocumentProviders\CSF.Zpt.DocumentProviders.XmlLinq\bin\Release\CSF.Zpt.DocumentProviders.XmlLinq.xml" />
       <ZptSharpCompleteZipFiles Include="$(PathToSolutionRoot)\ExpressionEvaluators\CSF.Zpt.ExpressionEvaluators.NotExpressions\bin\Release\CSF.Zpt.ExpressionEvaluators.NotExpressions.xml" />
+      <ZptSharpCompleteZipFiles Include="$(PathToSolutionRoot)\ExpressionEvaluators\CSF.Zpt.ExpressionEvaluators.PipeExpressions\bin\Release\CSF.Zpt.ExpressionEvaluators.PipeExpressions.xml" />
       <ZptSharpCompleteZipFiles Include="$(PathToSolutionRoot)\ExpressionEvaluators\CSF.Zpt.ExpressionEvaluators.PathExpressions\bin\Release\CSF.Zpt.ExpressionEvaluators.PathExpressions.xml" />
       <ZptSharpCompleteZipFiles Include="$(PathToSolutionRoot)\ExpressionEvaluators\CSF.Zpt.ExpressionEvaluators.StringExpressions\bin\Release\CSF.Zpt.ExpressionEvaluators.StringExpressions.xml" />
       <ZptSharpCompleteZipFiles Include="$(PathToSolutionRoot)\ExpressionEvaluators\CSF.Zpt.ExpressionEvaluators.CSharpExpressions\bin\Release\CSF.Zpt.ExpressionEvaluators.CSharpExpressions.xml" />

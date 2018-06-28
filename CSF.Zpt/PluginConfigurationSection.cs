@@ -2,10 +2,8 @@
 using System.Configuration;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
 using CSF.Configuration;
-using System.IO;
-using CSF.IO;
+using System.Diagnostics;
 
 namespace CSF.Zpt
 {
@@ -135,6 +133,11 @@ namespace CSF.Zpt
     /// <returns>The default/singleton instance.</returns>
     public static IPluginConfiguration GetDefault()
     {
+      ZptConstants.TraceSource.TraceEvent(TraceEventType.Verbose,
+                                          0,
+                                          $"Getting plugin configuration from a {nameof(ConfigurationReader)}");
+      WriteStackTraceToDebug();
+
       if(_singleton == null)
       {
         var reader = new ConfigurationReader();
@@ -142,6 +145,14 @@ namespace CSF.Zpt
       }
 
       return _singleton?? new EmptyPluginConfiguration();
+    }
+
+    [Conditional("DEBUG")]
+    static void WriteStackTraceToDebug()
+    {
+      ZptConstants.TraceSource.TraceEvent(TraceEventType.Verbose,
+                                          0,
+                                          Environment.StackTrace);
     }
 
     #endregion

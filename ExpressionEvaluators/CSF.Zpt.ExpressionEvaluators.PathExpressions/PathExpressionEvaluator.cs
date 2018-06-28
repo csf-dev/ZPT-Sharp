@@ -13,7 +13,13 @@ namespace CSF.Zpt.ExpressionEvaluators.PathExpressions
   {
     #region constants
 
-    private static readonly string Prefix = "path";
+    const string Prefix = "path";
+
+    /// <summary>
+    /// Gets the expression prefix for this evaluator type.
+    /// </summary>
+    /// <returns>The prefix.</returns>
+    public static string GetPrefix() => Prefix;
 
     #endregion
 

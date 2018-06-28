@@ -8,5 +8,5 @@ using System.Runtime.CompilerServices;
 [assembly: AssemblyProduct("CSF.Zpt")]
 [assembly: AssemblyCopyright("CSF Software Limited et al")]
 [assembly: AssemblyConfiguration("Release")]
-[assembly: AssemblyVersion("1.0.6.0")]
-[assembly: AssemblyFileVersion("1.0.6.0")]
+[assembly: AssemblyVersion("1.1.0.0")]
+[assembly: AssemblyFileVersion("1.1.0.5")]

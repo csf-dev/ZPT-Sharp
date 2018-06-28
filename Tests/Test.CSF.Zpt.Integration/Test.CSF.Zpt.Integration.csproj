@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -270,6 +270,8 @@
     <None Include="Test data\ZptIntegrationTests\ExpectedOutputs\UnfamiliarCharactersTest.html" />
     <None Include="Test data\ZptIntegrationTests\SourceDocuments\GarbageMarkupInJavascript.html" />
     <None Include="Test data\ZptIntegrationTests\ExpectedOutputs\GarbageMarkupInJavascript.html" />
+    <None Include="Test data\ZptIntegrationTests\SourceDocuments\PipeExpression.html" />
+    <None Include="Test data\ZptIntegrationTests\ExpectedOutputs\PipeExpression.html" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\CSF.Zpt\CSF.Zpt.csproj">
@@ -316,10 +318,14 @@
       <Project>{4FEEB873-D66A-42F8-ADB9-4C2D133774F3}</Project>
       <Name>CSF.Zpt.ExpressionEvaluators.LoadExpressions</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\ExpressionEvaluators\CSF.Zpt.ExpressionEvaluators.PipeExpressions\CSF.Zpt.ExpressionEvaluators.PipeExpressions.csproj">
+      <Project>{3D708232-9C80-49E6-A163-33CC7505B890}</Project>
+      <Name>CSF.Zpt.ExpressionEvaluators.PipeExpressions</Name>
+    </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
-    <Folder Include="Test data\LoadPluginTests\" />
-    <Folder Include="Test data\LoadPluginTests\SourceDocuments\" />
-    <Folder Include="Test data\LoadPluginTests\ExpectedOutputs\" />
+    <Content Include="Test data\ZptIntegrationTests\ExpectedOutputs\attribute_html_encoding.html" />
+    <Content Include="Test data\ZptIntegrationTests\SourceDocuments\attribute_html_encoding.html" />
   </ItemGroup>
 </Project>
