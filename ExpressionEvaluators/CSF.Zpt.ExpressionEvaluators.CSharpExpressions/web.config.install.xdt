@@ -26,7 +26,7 @@
         <sectionGroup name="ExpressionEvaluators" xdt:Locator="Match(name)">
           <sectionGroup name="CSharpExpressions" xdt:Transform="Remove" xdt:Locator="Match(name)" />
           <sectionGroup name="CSharpExpressions" xdt:Transform="Insert">
-            <section name="ExpressionConfigurationSection" type="CSF.Zpt.ExpressionEvaluators.CSharpExpressions.ExpressionConfigurationSection, CSF.Zpt.ExpressionEvaluators.CSharpExpressions, Version=1.1.0.1, Culture=neutral, PublicKeyToken=83989bab8a1a4730" />
+            <section name="ExpressionConfigurationSection" type="CSF.Zpt.ExpressionEvaluators.CSharpExpressions.ExpressionConfigurationSection, CSF.Zpt.ExpressionEvaluators.CSharpExpressions, Version=1.1.0.0, Culture=neutral, PublicKeyToken=83989bab8a1a4730" />
           </sectionGroup>
         </sectionGroup>
       </sectionGroup>
@@ -63,7 +63,7 @@
       </ExpressionEvaluators>
       <PluginConfigurationSection>
         <PluginAssemblies>
-          <Assembly Name="CSF.Zpt.ExpressionEvaluators.CSharpExpressions, Version=1.1.0.1, Culture=neutral, PublicKeyToken=83989bab8a1a4730"
+          <Assembly Name="CSF.Zpt.ExpressionEvaluators.CSharpExpressions, Version=1.1.0.0, Culture=neutral, PublicKeyToken=83989bab8a1a4730"
                     xdt:Transform="InsertIfMissing"
                     xdt:Locator="Match(Name)" />
         </PluginAssemblies>

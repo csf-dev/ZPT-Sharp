@@ -4,7 +4,7 @@
     <Zpt>
       <PluginConfigurationSection>
         <PluginAssemblies>
-          <Assembly Name="CSF.Zpt.ExpressionEvaluators.NotExpressions, Version=1.1.0.1, Culture=neutral, PublicKeyToken=83989bab8a1a4730"
+          <Assembly Name="CSF.Zpt.ExpressionEvaluators.NotExpressions, Version=1.1.0.0, Culture=neutral, PublicKeyToken=83989bab8a1a4730"
                     xdt:Transform="Remove"
                     xdt:Locator="Match(Name)" />
         </PluginAssemblies>

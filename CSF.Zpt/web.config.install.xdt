@@ -10,7 +10,7 @@
     <sectionGroup name="CSF" xdt:Locator="Match(name)">
       <sectionGroup name="Zpt" xdt:Transform="Remove" xdt:Locator="Match(name)" />
       <sectionGroup name="Zpt" xdt:Transform="Insert">
-          <section name="PluginConfigurationSection" type="CSF.Zpt.PluginConfigurationSection, CSF.Zpt, Version=1.1.0.1, Culture=neutral, PublicKeyToken=83989bab8a1a4730" />
+          <section name="PluginConfigurationSection" type="CSF.Zpt.PluginConfigurationSection, CSF.Zpt, Version=1.1.0.0, Culture=neutral, PublicKeyToken=83989bab8a1a4730" />
       </sectionGroup>
     </sectionGroup>
   </configSections>
