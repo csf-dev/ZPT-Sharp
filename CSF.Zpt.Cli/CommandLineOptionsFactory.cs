@@ -1,5 +1,5 @@
 ﻿using System;
-using CSF.Cli.Parameters;
+using CSF.Cli;
 using CSF.Zpt.Cli.Exceptions;
 using CSF.Zpt.Cli.Resources;
 

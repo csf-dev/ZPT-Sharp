@@ -41,8 +41,8 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
-    <Reference Include="CSF.Reflection">
-      <HintPath>..\..\packages\CSF.Reflection.1.0.3\lib\net45\CSF.Reflection.dll</HintPath>
+    <Reference Include="CSF.Reflector">
+      <HintPath>..\..\packages\CSF.Reflector.3.0.0\lib\net45\CSF.Reflector.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
