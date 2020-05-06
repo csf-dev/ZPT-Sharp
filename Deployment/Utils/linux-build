@@ -46,6 +46,13 @@ then
   xbuild_properties="${xbuild_properties};WebsiteUrlRoot=${url_root}"
 fi
 
+if which msbuild > /dev/null
+then
+  TOOL="msbuild"
+else
+  TOOL="xbuild"
+fi
+
 cd "$SOLUTION_ROOT"
 nuget restore
-xbuild "$xbuild_properties"
+$TOOL "$xbuild_properties"
