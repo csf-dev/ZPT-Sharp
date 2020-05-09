@@ -254,7 +254,7 @@
       <ZptSharpCompleteZipFiles Include="$(PathToSolutionRoot)\CSF.Zpt\bin\Release\CSF.Utils.dll" />
       <ZptSharpCompleteZipFiles Include="$(PathToSolutionRoot)\CSF.Zpt\bin\Release\CSF.Caches.dll" />
       <ZptSharpCompleteZipFiles Include="$(PathToSolutionRoot)\CSF.Zpt\bin\Release\CSF.Configuration.dll" />
-      <ZptSharpCompleteZipFiles Include="$(PathToSolutionRoot)\CSF.Zpt\bin\Release\CSF.Reflection.dll" />
+      <ZptSharpCompleteZipFiles Include="$(PathToSolutionRoot)\CSF.Zpt\bin\Release\CSF.Reflector.dll" />
       <ZptSharpCompleteZipFiles Include="$(PathToSolutionRoot)\CSF.Zpt.Cli\bin\Release\CSF.Cli.Parameters.dll" />
       <ZptSharpCompleteZipFiles Include="$(PathToSolutionRoot)\CSF.Zpt\bin\Release\CSF.Zpt.Abstractions.dll" />
       <ZptSharpCompleteZipFiles Include="$(PathToSolutionRoot)\CSF.Zpt\bin\Release\CSF.Zpt.dll" />
