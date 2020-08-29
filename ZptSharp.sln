@@ -7,6 +7,14 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZptSharp.Impl", "ZptSharp.I
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZptSharp.Tests", "ZptSharp.Tests\ZptSharp.Tests.csproj", "{017A09CE-6AC4-41E7-9BC3-6AAACC750153}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DocumentProviders", "DocumentProviders", "{D565CE6B-90BF-405A-8D1D-4466DCDC6CE2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZptSharp.AngleSharp", "DocumentProviders\ZptSharp.AngleSharp\ZptSharp.AngleSharp.csproj", "{FBB9AB77-F2FB-46DB-9013-64E6123181AB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZptSharp.Xml", "DocumentProviders\ZptSharp.Xml\ZptSharp.Xml.csproj", "{44B5D603-6A7E-4185-BCCC-87BBED55CBF1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZptSharp.HtmlAgilityPack", "DocumentProviders\ZptSharp.HtmlAgilityPack\ZptSharp.HtmlAgilityPack.csproj", "{22BE1826-9A11-4379-8549-22B187683678}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -25,5 +33,22 @@ Global
 		{017A09CE-6AC4-41E7-9BC3-6AAACC750153}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{017A09CE-6AC4-41E7-9BC3-6AAACC750153}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{017A09CE-6AC4-41E7-9BC3-6AAACC750153}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FBB9AB77-F2FB-46DB-9013-64E6123181AB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FBB9AB77-F2FB-46DB-9013-64E6123181AB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FBB9AB77-F2FB-46DB-9013-64E6123181AB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FBB9AB77-F2FB-46DB-9013-64E6123181AB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{44B5D603-6A7E-4185-BCCC-87BBED55CBF1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{44B5D603-6A7E-4185-BCCC-87BBED55CBF1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{44B5D603-6A7E-4185-BCCC-87BBED55CBF1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{44B5D603-6A7E-4185-BCCC-87BBED55CBF1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{22BE1826-9A11-4379-8549-22B187683678}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{22BE1826-9A11-4379-8549-22B187683678}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{22BE1826-9A11-4379-8549-22B187683678}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{22BE1826-9A11-4379-8549-22B187683678}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{FBB9AB77-F2FB-46DB-9013-64E6123181AB} = {D565CE6B-90BF-405A-8D1D-4466DCDC6CE2}
+		{44B5D603-6A7E-4185-BCCC-87BBED55CBF1} = {D565CE6B-90BF-405A-8D1D-4466DCDC6CE2}
+		{22BE1826-9A11-4379-8549-22B187683678} = {D565CE6B-90BF-405A-8D1D-4466DCDC6CE2}
 	EndGlobalSection
 EndGlobal

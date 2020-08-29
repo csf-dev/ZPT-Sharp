@@ -1,5 +1,7 @@
 ﻿using System;
+using Microsoft.Extensions.DependencyInjection;
 using ZptSharp.Config;
+using ZptSharp.Rendering;
 
 namespace ZptSharp.Bootstrap
 {
@@ -11,7 +13,19 @@ namespace ZptSharp.Bootstrap
                 throw new ArgumentNullException(nameof(config));
             if (config.ServiceProvider != null) return config.ServiceProvider;
 
-            throw new NotImplementedException();
+            if (config.DocumentProvider == null)
+                throw new ArgumentException($"If the default service provider is to be used (IE: {nameof(RenderingConfig)}.{nameof(RenderingConfig.ServiceProvider)} is null), " +
+                	                        $"the configuration must specify a non-null {nameof(RenderingConfig.DocumentProvider)}.");
+
+            var builder = new ServiceCollection();
+            RegisterCommonServices(builder);
+            builder.AddSingleton(config.DocumentProvider);
+            return builder.BuildServiceProvider();
+        }
+
+        void RegisterCommonServices(IServiceCollection builder)
+        {
+            builder.AddTransient<ZptRequestRenderer>();
         }
     }
 }

@@ -2,6 +2,7 @@
 
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0;netstandard2.1;net461</TargetFrameworks>
+    <RootNamespace>ZptSharp.Dom</RootNamespace>
   </PropertyGroup>
     
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -12,14 +13,12 @@
     <DebugType></DebugType>
     <LangVersion>7.3</LangVersion>
   </PropertyGroup>
-    
   <ItemGroup>
-    <Folder Include="Rendering\" />
-    <Folder Include="Config\" />
-    <Folder Include="Dom\" />
+    <ProjectReference Include="..\..\ZptSharp\ZptSharp.csproj" />
   </ItemGroup>
-    
   <ItemGroup>
     <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" Version="1.0.0" PrivateAssets="All" Condition="'$(TargetFramework)' == 'net461'" />
+    <PackageReference Include="HtmlAgilityPack" Version="1.6.17" />
   </ItemGroup>
+
 </Project>

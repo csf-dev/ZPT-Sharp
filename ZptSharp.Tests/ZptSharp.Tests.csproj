@@ -22,6 +22,8 @@
   <ItemGroup>
     <ProjectReference Include="..\ZptSharp\ZptSharp.csproj" />
     <ProjectReference Include="..\ZptSharp.Impl\ZptSharp.Impl.csproj" />
+    <ProjectReference Include="..\DocumentProviders\ZptSharp.AngleSharp\ZptSharp.AngleSharp.csproj" />
+    <ProjectReference Include="..\DocumentProviders\ZptSharp.Xml\ZptSharp.Xml.csproj" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Autofixture\" />

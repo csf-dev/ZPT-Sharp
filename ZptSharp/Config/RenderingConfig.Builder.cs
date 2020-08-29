@@ -17,7 +17,7 @@ namespace ZptSharp.Config
             bool isBuilt;
 
             /// <summary>
-            /// An object which provides service-resolution/dependency injection for ZPT Sharp types.
+            /// Gets or sets an object which provides service-resolution/dependency injection for ZPT Sharp types.
             /// If this is unset or <see langword="null"/> then a default resolution service will be used.
             /// </summary>
             /// <value>The service provider.</value>
@@ -28,7 +28,8 @@ namespace ZptSharp.Config
             }
 
             /// <summary>
-            /// Gets or sets the encoding which will be used to read &amp; write all documents.
+            /// Gets or sets the encoding which will be used to read &amp; write documents, where the document
+            /// provider supports it (not all do).
             /// If this is unset then documents will be read &amp; written as UTF-8.
             /// </summary>
             /// <value>The document encoding.</value>
@@ -53,6 +54,18 @@ namespace ZptSharp.Config
             {
                 get => config.DocumentProvider;
                 set { AssertIsNotBuilt(); config.DocumentProvider = value; }
+            }
+
+
+            /// <summary>
+            /// Gets or sets a value which indicates whether the XML document declaration should be omitted when
+            /// writing XML documents.  Has no effect unless an XML-based document provider is used.
+            /// </summary>
+            /// <value><c>true</c> if the XML document declaration should be omitted; otherwise, <c>false</c>.</value>
+            public bool OmitXmlDeclaration
+            {
+                get => config.OmitXmlDeclaration;
+                set => config.OmitXmlDeclaration = value;
             }
 
             /// <summary>

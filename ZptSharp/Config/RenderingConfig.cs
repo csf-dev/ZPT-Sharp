@@ -11,14 +11,15 @@ namespace ZptSharp.Config
     public partial class RenderingConfig
     {
         /// <summary>
-        /// An object which provides service-resolution/dependency injection for ZPT Sharp types.
+        /// Gets an object which provides service-resolution/dependency injection for ZPT Sharp types.
         /// If this is unset or <see langword="null"/> then a default resolution service will be used.
         /// </summary>
         /// <value>The service provider.</value>
         public virtual IServiceProvider ServiceProvider { get; private set; }
 
         /// <summary>
-        /// Gets or sets the encoding which will be used to read &amp; write all documents.
+        /// Gets the encoding which will be used to read &amp; write documents, where the document
+        /// provider supports it (not all do).
         /// If this is unset then documents will be read &amp; written as UTF-8.
         /// </summary>
         /// <value>The document encoding.</value>
@@ -26,7 +27,7 @@ namespace ZptSharp.Config
 
         /// <summary>
         /// <para>
-        /// Gets or sets the document provider to be used for reading/writing documents.
+        /// Gets the document provider to be used for reading/writing documents.
         /// </para>
         /// <para>
         /// This property is not used if the <see cref="ServiceProvider"/> has been set to anything
@@ -36,6 +37,13 @@ namespace ZptSharp.Config
         /// </summary>
         /// <value>The document provider.</value>
         public virtual IReadsAndWritesDocument DocumentProvider { get; private set; }
+
+        /// <summary>
+        /// Gets a value which indicates whether the XML document declaration should be omitted when
+        /// writing XML documents.  Has no effect unless an XML-based document provider is used.
+        /// </summary>
+        /// <value><c>true</c> if the XML document declaration should be omitted; otherwise, <c>false</c>.</value>
+        public virtual bool OmitXmlDeclaration { get; private set; }
 
         /// <summary>
         /// <para>

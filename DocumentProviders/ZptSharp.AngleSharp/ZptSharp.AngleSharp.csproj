@@ -2,6 +2,7 @@
 
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0;netstandard2.1;net461</TargetFrameworks>
+    <RootNamespace>ZptSharp.Dom</RootNamespace>
   </PropertyGroup>
     
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -12,14 +13,11 @@
     <DebugType></DebugType>
     <LangVersion>7.3</LangVersion>
   </PropertyGroup>
-    
   <ItemGroup>
-    <Folder Include="Rendering\" />
-    <Folder Include="Config\" />
-    <Folder Include="Dom\" />
+    <ProjectReference Include="..\..\ZptSharp\ZptSharp.csproj" />
   </ItemGroup>
-    
   <ItemGroup>
+    <PackageReference Include="AngleSharp" Version="0.14.0" />
     <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" Version="1.0.0" PrivateAssets="All" Condition="'$(TargetFramework)' == 'net461'" />
   </ItemGroup>
 </Project>
