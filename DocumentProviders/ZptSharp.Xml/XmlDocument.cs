@@ -3,11 +3,11 @@ using System.Xml.Linq;
 
 namespace ZptSharp.Dom
 {
-    public class XmlZptDocument : IDocument
+    public class XmlDocument : IDocument
     {
         public XDocument Document { get; }
 
-        public XmlZptDocument(XDocument document)
+        public XmlDocument(XDocument document)
         {
             Document = document ?? throw new ArgumentNullException(nameof(document));
         }

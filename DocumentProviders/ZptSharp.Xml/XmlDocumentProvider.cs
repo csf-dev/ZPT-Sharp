@@ -15,6 +15,9 @@ namespace ZptSharp.Dom
     /// </summary>
     public class XmlDocumentProvider : IReadsAndWritesDocument
     {
+        /// <summary>This matches the default buffer size for a built-in <see cref="StreamWriter"/>.</summary>
+        const int BufferSize = 1024;
+
         /// <summary>
         /// Gets a document instance from the specified input stream.
         /// </summary>
@@ -38,7 +41,7 @@ namespace ZptSharp.Dom
                 var loadOptions = LoadOptions.PreserveWhitespace | LoadOptions.SetLineInfo;
                 token.ThrowIfCancellationRequested();
                 var doc = XDocument.Load(reader, loadOptions);
-                IDocument xmlDoc = new XmlZptDocument(doc);
+                IDocument xmlDoc = new XmlDocument(doc);
                 return Task.FromResult(xmlDoc);
             }
         }
@@ -54,12 +57,12 @@ namespace ZptSharp.Dom
         {
             if (document == null)
                 throw new ArgumentNullException(nameof(document));
-            if (!(document is XmlZptDocument xmlDocument))
-                throw new ArgumentException($"The document must be an instance of {nameof(XmlZptDocument)}.", nameof(document));
+            if (!(document is XmlDocument xmlDocument))
+                throw new ArgumentException($"The document must be an instance of {nameof(XmlDocument)}.", nameof(document));
             token.ThrowIfCancellationRequested();
 
             var stream = new MemoryStream();
-            using (var writer = new StreamWriter(stream))
+            using (var writer = new StreamWriter(stream, config.DocumentEncoding, BufferSize, true))
             using (var xmlWriter = GetXmlWriter(config, writer))
             {
                 token.ThrowIfCancellationRequested();

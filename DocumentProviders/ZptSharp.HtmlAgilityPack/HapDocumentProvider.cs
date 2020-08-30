@@ -14,6 +14,9 @@ namespace ZptSharp.Dom
     /// </summary>
     public class HapDocumentProvider : IReadsAndWritesDocument
     {
+        /// <summary>This matches the default buffer size for a built-in <see cref="StreamWriter"/>.</summary>
+        const int BufferSize = 1024;
+
         /// <summary>
         /// Gets a document instance from the specified input stream.
         /// </summary>
@@ -59,7 +62,7 @@ namespace ZptSharp.Dom
             token.ThrowIfCancellationRequested();
 
             var stream = new MemoryStream();
-            using(var writer = new StreamWriter(stream, config.DocumentEncoding))
+            using(var writer = new StreamWriter(stream, config.DocumentEncoding, BufferSize, true))
             {
                 token.ThrowIfCancellationRequested();
                 angleSharpDocument.Document.DocumentNode.WriteTo(writer);
