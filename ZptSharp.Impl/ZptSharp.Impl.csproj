@@ -17,6 +17,7 @@
   <ItemGroup>
     <Folder Include="Rendering\" />
     <Folder Include="Bootstrap\" />
+    <Folder Include="Expressions\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ZptSharp\ZptSharp.csproj" />

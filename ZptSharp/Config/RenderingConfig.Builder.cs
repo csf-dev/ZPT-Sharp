@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Text;
+using System.Collections.Generic;
 using ZptSharp.Dom;
+using ZptSharp.Expressions;
 
 namespace ZptSharp.Config
 {
@@ -66,6 +68,27 @@ namespace ZptSharp.Config
             {
                 get => config.OmitXmlDeclaration;
                 set => config.OmitXmlDeclaration = value;
+            }
+
+            /// <summary>
+            /// Gets or sets a service which provides the default/built-in root contexts for expression resolution.
+            /// If null then a default service will be used for this purpose.
+            /// </summary>
+            /// <value>The built-in contexts provider.</value>
+            public Func<ExpressionContext, IGetsNamedTalesValue> BuiltinContextsProvider
+            {
+                get => config.BuiltinContextsProvider;
+                set => config.BuiltinContextsProvider = value;
+            }
+
+            /// <summary>
+            /// Gets or sets a collection of "keyword options" which have been provided to the rendering process externally.
+            /// </summary>
+            /// <value>The keyword options collection.</value>
+            public IDictionary<string, object> KeywordOptions
+            {
+                get => config.KeywordOptions;
+                set => config.KeywordOptions = value;
             }
 
             /// <summary>

@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Text;
+using System.Collections.Generic;
 using ZptSharp.Dom;
+using ZptSharp.Expressions;
 
 namespace ZptSharp.Config
 {
@@ -44,6 +46,18 @@ namespace ZptSharp.Config
         /// </summary>
         /// <value><c>true</c> if the XML document declaration should be omitted; otherwise, <c>false</c>.</value>
         public virtual bool OmitXmlDeclaration { get; private set; }
+
+        /// <summary>
+        /// Gets a service which provides the default/built-in root contexts for expression resolution.
+        /// </summary>
+        /// <value>The built-in contexts provider.</value>
+        public virtual Func<ExpressionContext,IGetsNamedTalesValue> BuiltinContextsProvider { get; private set; }
+
+        /// <summary>
+        /// Gets a collection of "keyword options" which have been provided to the rendering process externally.
+        /// </summary>
+        /// <value>The keyword options collection.</value>
+        public virtual IDictionary<string,object> KeywordOptions { get; private set; }
 
         /// <summary>
         /// <para>

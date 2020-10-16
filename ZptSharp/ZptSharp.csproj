@@ -17,6 +17,7 @@
     <Folder Include="Rendering\" />
     <Folder Include="Config\" />
     <Folder Include="Dom\" />
+    <Folder Include="Expressions\" />
   </ItemGroup>
     
   <ItemGroup>
