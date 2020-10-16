@@ -83,7 +83,6 @@
     <Compile Include="Metal\MacroNotFoundException.cs" />
     <Compile Include="Rendering\IActionCanceller.cs" />
     <Compile Include="Rendering\CancellationToken.cs" />
-    <Compile Include="Rendering\ISourceInfo.cs" />
     <Compile Include="IXmlUrlResolverFactory.cs" />
     <Compile Include="IZptDocumentProvider.cs" />
     <Compile Include="Rendering\IZptElement.cs" />

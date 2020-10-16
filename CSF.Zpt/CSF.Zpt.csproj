@@ -89,7 +89,6 @@
     <Compile Include="Tal\TalTidyUpVisitor.cs" />
     <Compile Include="Metal\MetalTidyUpVisitor.cs" />
     <Compile Include="Rendering\NoOpVisitor.cs" />
-    <Compile Include="Rendering\UnknownSourceFileInfo.cs" />
     <Compile Include="Rendering\Model.cs" />
     <Compile Include="Rendering\RepetitionInfo.cs" />
     <Compile Include="Resources\ExceptionMessages.Designer.cs">
@@ -105,8 +104,6 @@
     <Compile Include="Resources\LogMessageFormats.Designer.cs">
       <DependentUpon>LogMessageFormats.resx</DependentUpon>
     </Compile>
-    <Compile Include="Rendering\SourceFileInfo.cs" />
-    <Compile Include="Rendering\AbstractSourceInfo.cs" />
     <Compile Include="Rendering\EmptyModel.cs" />
     <Compile Include="XmlUrlResolverFactory.cs" />
     <Compile Include="Rendering\ZptAttribute.cs" />

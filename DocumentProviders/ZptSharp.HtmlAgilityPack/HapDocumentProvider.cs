@@ -4,6 +4,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using ZptSharp.Config;
 using HtmlAgilityPack;
+using ZptSharp.Rendering;
 
 namespace ZptSharp.Dom
 {
@@ -28,15 +29,22 @@ namespace ZptSharp.Dom
         /// <returns>A task which provides the document which has been read.</returns>
         /// <param name="stream">A stream containing the source of the document.</param>
         /// <param name="config">Rendering configuration.</param>
+        /// <param name="sourceInfo">Information which identifies the source of the document.</param>
         /// <param name="token">An object used to cancel the operation if required.</param>
-        public Task<IDocument> GetDocumentAsync(Stream stream, RenderingConfig config, CancellationToken token)
+        public Task<IDocument> GetDocumentAsync(Stream stream,
+                                                RenderingConfig config,
+                                                IDocumentSourceInfo sourceInfo = null,
+                                                CancellationToken token = default)
         {
             if (stream == null)
                 throw new ArgumentNullException(nameof(stream));
 
             var htmlDoc = new HtmlDocument();
             htmlDoc.Load(stream, config.DocumentEncoding);
-            IDocument doc = new HapDocument(htmlDoc);
+            IDocument doc = new HapDocument(htmlDoc)
+            {
+                SourceInfo = sourceInfo ?? new UnknownSourceInfo()
+            };
             return Task.FromResult(doc);
         }
 
@@ -53,7 +61,7 @@ namespace ZptSharp.Dom
         /// <param name="document">The document to write.</param>
         /// <param name="config">Rendering configuration.</param>
         /// <param name="token">An object used to cancel the operation if required.</param>
-        public async Task<Stream> WriteDocumentAsync(IDocument document, RenderingConfig config, CancellationToken token)
+        public async Task<Stream> WriteDocumentAsync(IDocument document, RenderingConfig config, CancellationToken token = default)
         {
             if (document == null)
                 throw new ArgumentNullException(nameof(document));
@@ -65,7 +73,7 @@ namespace ZptSharp.Dom
             using(var writer = new StreamWriter(stream, config.DocumentEncoding, BufferSize, true))
             {
                 token.ThrowIfCancellationRequested();
-                angleSharpDocument.Document.DocumentNode.WriteTo(writer);
+                angleSharpDocument.NativeDocument.DocumentNode.WriteTo(writer);
                 token.ThrowIfCancellationRequested();
                 await writer.FlushAsync().ConfigureAwait(false);
             }

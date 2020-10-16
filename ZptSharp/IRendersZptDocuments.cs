@@ -20,6 +20,11 @@ namespace ZptSharp
         /// <param name="model">The model to use for the rendering process.</param>
         /// <param name="token">An object used to cancel the operation if required.</param>
         /// <param name="contextBuilder">The context builder action.</param>
-        Task<Stream> RenderAsync(Stream stream, object model, CancellationToken token, Action<IConfiguresRootContext> contextBuilder = null);
+        /// <param name="sourceInfo">The source info for the <paramref name="stream"/>.</param>
+        Task<Stream> RenderAsync(Stream stream,
+                                 object model,
+                                 CancellationToken token = default,
+                                 Action<IConfiguresRootContext> contextBuilder = null,
+                                 IDocumentSourceInfo sourceInfo = null);
     }
 }

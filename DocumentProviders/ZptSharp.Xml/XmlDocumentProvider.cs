@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using ZptSharp.Config;
 using System.Xml.Linq;
 using System.Xml;
+using ZptSharp.Rendering;
 
 namespace ZptSharp.Dom
 {
@@ -29,8 +30,12 @@ namespace ZptSharp.Dom
         /// <returns>A task which provides the document which has been read.</returns>
         /// <param name="stream">A stream containing the source of the document.</param>
         /// <param name="config">Rendering configuration.</param>
+        /// <param name="sourceInfo">Information which identifies the source of the document.</param>
         /// <param name="token">An object used to cancel the operation if required.</param>
-        public Task<IDocument> GetDocumentAsync(Stream stream, RenderingConfig config, CancellationToken token)
+        public Task<IDocument> GetDocumentAsync(Stream stream,
+                                                RenderingConfig config,
+                                                IDocumentSourceInfo sourceInfo = null,
+                                                CancellationToken token = default)
         {
             if (stream == null)
                 throw new ArgumentNullException(nameof(stream));
@@ -41,7 +46,10 @@ namespace ZptSharp.Dom
                 var loadOptions = LoadOptions.PreserveWhitespace | LoadOptions.SetLineInfo;
                 token.ThrowIfCancellationRequested();
                 var doc = XDocument.Load(reader, loadOptions);
-                IDocument xmlDoc = new XmlDocument(doc);
+                IDocument xmlDoc = new XmlDocument(doc)
+                {
+                    SourceInfo = sourceInfo ?? new UnknownSourceInfo()
+                };
                 return Task.FromResult(xmlDoc);
             }
         }
@@ -53,7 +61,7 @@ namespace ZptSharp.Dom
         /// <param name="document">The document to write.</param>
         /// <param name="config">Rendering configuration.</param>
         /// <param name="token">An object used to cancel the operation if required.</param>
-        public async Task<Stream> WriteDocumentAsync(IDocument document, RenderingConfig config, CancellationToken token)
+        public async Task<Stream> WriteDocumentAsync(IDocument document, RenderingConfig config, CancellationToken token = default)
         {
             if (document == null)
                 throw new ArgumentNullException(nameof(document));
@@ -66,7 +74,7 @@ namespace ZptSharp.Dom
             using (var xmlWriter = GetXmlWriter(config, writer))
             {
                 token.ThrowIfCancellationRequested();
-                xmlDocument.Document.Save(xmlWriter);
+                xmlDocument.NativeDocument.Save(xmlWriter);
                 token.ThrowIfCancellationRequested();
                 await writer.FlushAsync().ConfigureAwait(false);
             }

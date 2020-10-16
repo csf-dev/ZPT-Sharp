@@ -23,12 +23,12 @@ namespace ZptSharp.Rendering
         /// <returns>A task which provides an output stream, containing the result of the operation.</returns>
         /// <param name="request">A request to render a ZPT document.</param>
         /// <param name="token">An object used to cancel the operation if required.</param>
-        public async Task<Stream> RenderAsync(RenderZptDocumentRequest request, CancellationToken token)
+        public async Task<Stream> RenderAsync(RenderZptDocumentRequest request, CancellationToken token = default)
         {
             if (request == null)
                 throw new ArgumentNullException(nameof(request));
 
-            var document = await documentReaderWriter.GetDocumentAsync(request.DocumentStream, request.Config, token)
+            var document = await documentReaderWriter.GetDocumentAsync(request.DocumentStream, request.Config, request.SourceInfo, token)
                 .ConfigureAwait(false);
             await renderer.RenderDocumentAsync(document, request, token)
                 .ConfigureAwait(false);

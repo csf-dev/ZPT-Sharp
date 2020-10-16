@@ -12,6 +12,7 @@ namespace ZptSharp.Rendering
     {
         /// <summary>
         /// Performs the ZPT rendering process for a specified document, using the specified rendering request.
+        /// This method will manipulate the <paramref name="document"/>, according to the rules of ZPT.
         /// </summary>
         /// <returns>A task indicating when the process is complete.</returns>
         /// <param name="document">The document to render.</param>

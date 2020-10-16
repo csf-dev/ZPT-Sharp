@@ -2,6 +2,7 @@
 using System.Threading;
 using System.Threading.Tasks;
 using ZptSharp.Config;
+using ZptSharp.Rendering;
 
 namespace ZptSharp.Dom
 {
@@ -17,8 +18,12 @@ namespace ZptSharp.Dom
         /// <returns>A task which provides the document which has been read.</returns>
         /// <param name="stream">A stream containing the source of the document.</param>
         /// <param name="config">Rendering configuration.</param>
+        /// <param name="sourceInfo">Information which identifies the source of the document.</param>
         /// <param name="token">An object used to cancel the operation if required.</param>
-        Task<IDocument> GetDocumentAsync(Stream stream, RenderingConfig config, CancellationToken token);
+        Task<IDocument> GetDocumentAsync(Stream stream,
+                                         RenderingConfig config,
+                                         IDocumentSourceInfo sourceInfo = null,
+                                         CancellationToken token = default);
 
         /// <summary>
         /// Writes the specified document to a specified output stream.
@@ -27,6 +32,8 @@ namespace ZptSharp.Dom
         /// <param name="document">The document to write.</param>
         /// <param name="config">Rendering configuration.</param>
         /// <param name="token">An object used to cancel the operation if required.</param>
-        Task<Stream> WriteDocumentAsync(IDocument document, RenderingConfig config, CancellationToken token);
+        Task<Stream> WriteDocumentAsync(IDocument document,
+                                        RenderingConfig config,
+                                        CancellationToken token = default);
     }
 }

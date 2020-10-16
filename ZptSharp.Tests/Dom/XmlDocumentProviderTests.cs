@@ -25,7 +25,7 @@ namespace ZptSharp.Dom
 </html>";
             var stream = DocumentToFromStream.ToStream(doc);
 
-            var result = await sut.GetDocumentAsync(stream, config, CancellationToken.None);
+            var result = await sut.GetDocumentAsync(stream, config);
 
             Assert.That(result, Is.InstanceOf<XmlDocument>());
         }
@@ -45,8 +45,8 @@ namespace ZptSharp.Dom
 </html>";
             var inputStream = DocumentToFromStream.ToStream(doc);
 
-            var angleSharpDoc = await sut.GetDocumentAsync(inputStream, config, CancellationToken.None);
-            var outputStream = await sut.WriteDocumentAsync(angleSharpDoc, config, CancellationToken.None);
+            var angleSharpDoc = await sut.GetDocumentAsync(inputStream, config);
+            var outputStream = await sut.WriteDocumentAsync(angleSharpDoc, config);
             var outputDoc = DocumentToFromStream.FromStream(outputStream);
 
             Assert.That(outputDoc, Is.EqualTo(doc));

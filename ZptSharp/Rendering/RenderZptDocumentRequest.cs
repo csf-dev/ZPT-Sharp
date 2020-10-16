@@ -36,18 +36,30 @@ namespace ZptSharp.Rendering
         public Action<IConfiguresRootContext> ContextBuilder { get; }
 
         /// <summary>
+        /// Gets information about the source of the <see cref="DocumentStream"/>, for example its original file path.
+        /// </summary>
+        /// <value>The source info.</value>
+        public IDocumentSourceInfo SourceInfo { get; }
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="RenderZptDocumentRequest"/> class.
         /// </summary>
         /// <param name="document">The document stream.</param>
         /// <param name="model">The model.</param>
         /// <param name="config">The configuration.</param>
         /// <param name="contextBuilder">The context builder action.</param>
-        public RenderZptDocumentRequest(Stream document, object model, RenderingConfig config, Action<IConfiguresRootContext> contextBuilder)
+        /// <param name="sourceInfo">Information which identifies the source of the <paramref name="document"/>.</param>
+        public RenderZptDocumentRequest(Stream document,
+                                        object model,
+                                        RenderingConfig config,
+                                        Action<IConfiguresRootContext> contextBuilder = null,
+                                        IDocumentSourceInfo sourceInfo = null)
         {
             DocumentStream = document ?? throw new System.ArgumentNullException(nameof(document));
-            Model = model;
             Config = config ?? throw new System.ArgumentNullException(nameof(config));
-            ContextBuilder = contextBuilder ?? throw new ArgumentNullException(nameof(contextBuilder));
+            Model = model;
+            ContextBuilder = contextBuilder ?? (c => { });
+            SourceInfo = sourceInfo ?? new UnknownSourceInfo();
         }
     }
 }
