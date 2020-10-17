@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using ZptSharp.Config;
+using ZptSharp.Metal;
 
 namespace ZptSharp.Expressions
 {
@@ -36,6 +38,21 @@ namespace ZptSharp.Expressions
         public static readonly string Default = "default";
 
         /// <summary>
+        /// An identifier/alias for getting the attributes from the current <see cref="Dom.IElement"/>.
+        /// </summary>
+        public static readonly string Attributes = "attrs";
+
+        /// <summary>
+        /// An identifier/alias for getting the <see cref="Dom.IDocument"/> 
+        /// </summary>
+        public static readonly string Template = "template";
+
+        /// <summary>
+        /// An identifier/alias for getting the container of the current <see cref="Dom.IDocument"/>.
+        /// </summary>
+        public static readonly string Container = "container";
+
+        /// <summary>
         /// Attempts to get a value for a named reference, relative to the current instance.
         /// </summary>
         /// <returns>A boolean indicating whether a value was successfully retrieved or not.</returns>
@@ -64,26 +81,33 @@ namespace ZptSharp.Expressions
                     { Options, () => config.KeywordOptions},
                     { Nothing, () => null },
                     { Default, () => CancellationToken.Instance },
-
-      //              case ATTRS:
-      //  output = true;
-      //          result = this.Attrs;
-      //          break;
-
-      //case TEMPLATE:
-      //          result = _templateFileFactory.CreateTemplateFile(currentContext.Element.OwnerDocument);
-      //          output = (result != null);
-      //          break;
-
-      //case CONTAINER:
-                //var sourceInfo = currentContext.Element.OwnerDocument.GetSourceInfo();
-                //result = (sourceInfo != null) ? sourceInfo.GetContainer() : null;
-                //output = result != null;
-                //break;
+                    { Attributes, GetAttributesDictionary },
+                    { Template, GetMetalDocumentAdapter },
+                    { Container, GetTemplateContainer },
                 };
             }
         }
 
+        IDictionary<string,Dom.IAttribute> GetAttributesDictionary()
+        {
+            return context.CurrentElement.Attributes.ToDictionary(k => k.Name, v => v);
+        }
+
+        MetalDocumentAdapter GetMetalDocumentAdapter()
+        {
+            return new MetalDocumentAdapter(context.TemplateDocument);
+        }
+
+        object GetTemplateContainer()
+        {
+            return (context.TemplateDocument.SourceInfo is Rendering.IHasContainer containerProvider) ? containerProvider.GetContainer() : null;
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="BuiltinContextsProvider"/> class.
+        /// </summary>
+        /// <param name="context">The rendering context.</param>
+        /// <param name="config">The configuration.</param>
         public BuiltinContextsProvider(ExpressionContext context, RenderingConfig config)
         {
             this.context = context ?? throw new System.ArgumentNullException(nameof(context));

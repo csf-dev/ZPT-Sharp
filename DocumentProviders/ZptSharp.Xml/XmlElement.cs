@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Xml;
 using System.Xml.Linq;
 using ZptSharp.Rendering;
@@ -14,6 +15,12 @@ namespace ZptSharp.Dom
         public IElementSourceInfo SourceInfo { get; }
 
         IDocumentSourceInfo IHasDocumentSourceInfo.SourceInfo => SourceInfo.Document;
+
+        /// <summary>
+        /// Gets a collection of the element's attributes.
+        /// </summary>
+        /// <value>The attributes.</value>
+        public IList<IAttribute> Attributes { get { throw new NotImplementedException(); } }
 
         static int? GetLineNumber(XElement element)
         {

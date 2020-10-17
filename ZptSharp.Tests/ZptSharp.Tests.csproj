@@ -29,5 +29,7 @@
   <ItemGroup>
     <Folder Include="Autofixture\" />
     <Folder Include="Dom\" />
+    <Folder Include="Expressions\" />
+    <Folder Include="Rendering\" />
   </ItemGroup>
 </Project>

@@ -4,7 +4,7 @@ namespace ZptSharp.Rendering
     /// <summary>
     /// Implementation of <see cref="IDocumentSourceInfo"/> for a document which was retrieved from a file on disk.
     /// </summary>
-    public sealed class FileSourceInfo : IDocumentSourceInfo
+    public sealed class FileSourceInfo : IDocumentSourceInfo, IHasContainer
     {
         /// <summary>
         /// Gets the file path.
@@ -54,6 +54,12 @@ namespace ZptSharp.Rendering
         /// </summary>
         /// <returns>A <see cref="string"/> that represents the current <see cref="FileSourceInfo"/>.</returns>
         public override string ToString() => FilePath;
+
+        /// <summary>
+        /// Gets the parent/container object, in this case representing a <see cref="System.IO.DirectoryInfo"/>.
+        /// </summary>
+        /// <returns>The container.</returns>
+        public object GetContainer() => new System.IO.FileInfo(FilePath).Directory;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="FileSourceInfo"/> class.

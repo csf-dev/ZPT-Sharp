@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using ZptSharp.Rendering;
 
 namespace ZptSharp.Dom
@@ -19,5 +20,11 @@ namespace ZptSharp.Dom
         /// </summary>
         /// <value>The source info.</value>
         new IElementSourceInfo SourceInfo { get; }
+
+        /// <summary>
+        /// Gets a collection of the element's attributes.
+        /// </summary>
+        /// <value>The attributes.</value>
+        IList<IAttribute> Attributes { get; }
     }
 }

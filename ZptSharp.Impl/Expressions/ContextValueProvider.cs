@@ -9,7 +9,10 @@ namespace ZptSharp.Expressions
     /// </summary>
     public class ContextValueProvider : IGetsNamedTalesValue
     {
-        const string BuiltinContextsName = "CONTEXTS";
+        /// <summary>
+        /// A reserved identifier/alias which indicates that the built-in contexts should be returned.
+        /// </summary>
+        public static readonly string BuiltinContexts = "CONTEXTS";
 
         readonly ExpressionContext context;
         readonly RenderingConfig config;
@@ -22,7 +25,7 @@ namespace ZptSharp.Expressions
         /// <param name="value">Exposes the retrieved value if this method returns success.</param>
         public bool TryGetValue(string name, out object value)
         {
-            if (String.Equals(name, BuiltinContextsName, StringComparison.InvariantCulture))
+            if (String.Equals(name, BuiltinContexts, StringComparison.InvariantCulture))
             {
                 value = BuiltInContextsProvider;
                 return true;
@@ -36,7 +39,7 @@ namespace ZptSharp.Expressions
 
             if (context.GlobalDefinitions.ContainsKey(name))
             {
-                value = context.LocalDefinitions[name];
+                value = context.GlobalDefinitions[name];
                 return true;
             }
 
