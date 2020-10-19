@@ -22,6 +22,12 @@ namespace ZptSharp.Dom
         /// <value>The attributes.</value>
         public IList<IAttribute> Attributes { get { throw new NotImplementedException(); } }
 
+        /// <summary>
+        /// Gets the elements contained within the current element.
+        /// </summary>
+        /// <value>The child elements.</value>
+        public IList<IElement> ChildElements { get { throw new NotImplementedException(); } }
+
         static int? GetLineNumber(XElement element)
         {
             IXmlLineInfo lineInfo = element;

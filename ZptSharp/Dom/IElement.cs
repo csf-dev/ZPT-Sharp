@@ -26,5 +26,11 @@ namespace ZptSharp.Dom
         /// </summary>
         /// <value>The attributes.</value>
         IList<IAttribute> Attributes { get; }
+
+        /// <summary>
+        /// Gets the elements contained within the current element.
+        /// </summary>
+        /// <value>The child elements.</value>
+        IList<IElement> ChildElements { get; }
     }
 }

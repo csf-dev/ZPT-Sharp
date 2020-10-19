@@ -15,7 +15,7 @@ namespace ZptSharp.Rendering
     {
         [Test, AutoMoqData]
         public void RenderAsync_returns_stream_using_correct_process([Frozen] IReadsAndWritesDocument documentReaderWriter,
-                                                                     [Frozen] IPerformsRenderingProcess renderer,
+                                                                     [Frozen] IModifiesDocument renderer,
                                                                      ZptRequestRenderer sut,
                                                                      Stream input,
                                                                      Stream output,
@@ -36,7 +36,7 @@ namespace ZptSharp.Rendering
 
             Assert.That(result, Is.SameAs(output), "Output stream is as returned from writer");
             Mock.Get(renderer)
-                .Verify(x => x.RenderDocumentAsync(document, request, It.IsAny<System.Threading.CancellationToken>()),
+                .Verify(x => x.ModifyDocumentAsync(document, request, It.IsAny<System.Threading.CancellationToken>()),
                         Times.Once,
                         "The rendering service should have been used with the document.");
         }

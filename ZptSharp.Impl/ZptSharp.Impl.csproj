@@ -19,6 +19,7 @@
     <Folder Include="Bootstrap\" />
     <Folder Include="Expressions\" />
     <Folder Include="Metal\" />
+    <Folder Include="Dom\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ZptSharp\ZptSharp.csproj" />

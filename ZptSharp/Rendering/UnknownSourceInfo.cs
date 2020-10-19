@@ -6,7 +6,7 @@ namespace ZptSharp.Rendering
     /// </summary>
     public sealed class UnknownSourceInfo : IDocumentSourceInfo
     {
-        const string DisplayName = "<stream>";
+        const string DisplayName = "<unknown>";
 
         /// <summary>
         /// Gets the name of the source.

@@ -8,16 +8,16 @@ namespace ZptSharp.Rendering
     /// A service which coordinates and performs the modifications to a document before
     /// it is ready to be output.
     /// </summary>
-    public interface IPerformsRenderingProcess
+    public interface IModifiesDocument
     {
         /// <summary>
-        /// Performs the ZPT rendering process for a specified document, using the specified rendering request.
+        /// Performs alterations for a specified document, using the specified rendering request.
         /// This method will manipulate the <paramref name="document"/>, according to the rules of ZPT.
         /// </summary>
         /// <returns>A task indicating when the process is complete.</returns>
         /// <param name="document">The document to render.</param>
         /// <param name="request">The rendering request.</param>
         /// <param name="token">An object used to cancel the operation if required.</param>
-        Task RenderDocumentAsync(IDocument document, RenderZptDocumentRequest request, CancellationToken token);
+        Task ModifyDocumentAsync(IDocument document, RenderZptDocumentRequest request, CancellationToken token);
     }
 }
