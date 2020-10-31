@@ -13,6 +13,14 @@ namespace ZptSharp.Dom
     public interface IReadsAndWritesDocument
     {
         /// <summary>
+        /// Gets whether or not the current instance may be used to read &amp; write documents
+        /// which have the specified filename.
+        /// </summary>
+        /// <returns><c>true</c>, if this instance maybe used, <c>false</c> otherwise.</returns>
+        /// <param name="filenameOrPath">The filename of a ZPT document.</param>
+        bool CanReadWriteForFilename(string filenameOrPath);
+
+        /// <summary>
         /// Gets a document instance from the specified input stream.
         /// </summary>
         /// <returns>A task which provides the document which has been read.</returns>

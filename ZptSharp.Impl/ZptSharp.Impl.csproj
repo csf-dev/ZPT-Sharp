@@ -20,6 +20,7 @@
     <Folder Include="Expressions\" />
     <Folder Include="Metal\" />
     <Folder Include="Dom\" />
+    <Folder Include="Resources\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ZptSharp\ZptSharp.csproj" />
@@ -27,5 +28,16 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="3.0.0" />
     <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" Version="1.0.0" PrivateAssets="All" Condition="'$(TargetFramework)' == 'net461'" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Update="Resources\ExceptionMessage.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>ExceptionMessage.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Update="Resources\ExceptionMessage.Designer.cs">
+      <DependentUpon>ExceptionMessage.resx</DependentUpon>
+    </Compile>
   </ItemGroup>
 </Project>

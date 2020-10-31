@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using ZptSharp.Config;
+using ZptSharp.Dom;
 
 namespace ZptSharp.Rendering
 {
@@ -42,6 +43,14 @@ namespace ZptSharp.Rendering
         public IDocumentSourceInfo SourceInfo { get; }
 
         /// <summary>
+        /// Gets a reference to a specific implementation of <see cref="IReadsAndWritesDocument"/> which should be
+        /// used to fulfil the request.  It's perfectly normal for this to be unset/null, indicating that there is no
+        /// preference as to which reader/writer is used.
+        /// </summary>
+        /// <value>The reader writer, or a <see langword="null"/> reference.</value>
+        public IReadsAndWritesDocument ReaderWriter { get; }
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="RenderZptDocumentRequest"/> class.
         /// </summary>
         /// <param name="document">The document stream.</param>
@@ -49,17 +58,20 @@ namespace ZptSharp.Rendering
         /// <param name="config">The configuration.</param>
         /// <param name="contextBuilder">The context builder action.</param>
         /// <param name="sourceInfo">Information which identifies the source of the <paramref name="document"/>.</param>
+        /// <param name="readerWriter">The reader/writer to use with this request.</param>
         public RenderZptDocumentRequest(Stream document,
                                         object model,
                                         RenderingConfig config,
                                         Action<IConfiguresRootContext> contextBuilder = null,
-                                        IDocumentSourceInfo sourceInfo = null)
+                                        IDocumentSourceInfo sourceInfo = null,
+                                        IReadsAndWritesDocument readerWriter = null)
         {
             DocumentStream = document ?? throw new System.ArgumentNullException(nameof(document));
             Config = config ?? throw new System.ArgumentNullException(nameof(config));
             Model = model;
             ContextBuilder = contextBuilder ?? (c => { });
             SourceInfo = sourceInfo ?? new UnknownSourceInfo();
+            ReaderWriter = readerWriter;
         }
     }
 }

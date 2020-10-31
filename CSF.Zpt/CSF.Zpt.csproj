@@ -95,7 +95,6 @@
       <DependentUpon>ExceptionMessages.resx</DependentUpon>
     </Compile>
     <Compile Include="Tales\ExpressionFactory.cs" />
-    <Compile Include="ZptDocument.cs" />
     <Compile Include="Metal\MetalMacro.cs" />
     <Compile Include="Metal\MetalMacroContainer.cs" />
     <Compile Include="Rendering\RenderingContextFactoryFactory.cs" />
@@ -120,7 +119,6 @@
     <Compile Include="Rendering\RepetitionMetadataCollectionWrapper.cs" />
     <Compile Include="Tales\SimpleEvaluatorSelector.cs" />
     <Compile Include="ZptDocumentProviderService.cs" />
-    <Compile Include="ZptDocumentProviderCache.cs" />
     <Compile Include="PluginConfigurationSection.cs" />
     <Compile Include="PluginAssemblyCollection.cs" />
     <Compile Include="PluginServiceBase.cs" />

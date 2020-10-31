@@ -14,7 +14,7 @@ namespace ZptSharp.Rendering
     /// </summary>
     public class ZptRequestRenderer : IRendersRenderingRequest
     {
-        readonly IReadsAndWritesDocument documentReaderWriter;
+        readonly IServiceProvider serviceProvider;
         readonly IModifiesDocument renderer;
 
         /// <summary>
@@ -28,6 +28,8 @@ namespace ZptSharp.Rendering
             if (request == null)
                 throw new ArgumentNullException(nameof(request));
 
+            var documentReaderWriter = request.ReaderWriter ?? serviceProvider.Resolve<IReadsAndWritesDocument>();
+
             var document = await documentReaderWriter.GetDocumentAsync(request.DocumentStream, request.Config, request.SourceInfo, token)
                 .ConfigureAwait(false);
             await renderer.ModifyDocumentAsync(document, request, token)
@@ -36,9 +38,9 @@ namespace ZptSharp.Rendering
                 .ConfigureAwait(false);
         }
 
-        public ZptRequestRenderer(IReadsAndWritesDocument documentReaderWriter, IModifiesDocument renderer)
+        public ZptRequestRenderer(IServiceProvider serviceProvider, IModifiesDocument renderer)
         {
-            this.documentReaderWriter = documentReaderWriter ?? throw new ArgumentNullException(nameof(documentReaderWriter));
+            this.serviceProvider = serviceProvider ?? throw new ArgumentNullException(nameof(serviceProvider));
             this.renderer = renderer ?? throw new ArgumentNullException(nameof(renderer));
         }
     }

@@ -5,6 +5,7 @@ using ZptSharp.Config;
 using System.Threading.Tasks;
 using System.Threading;
 using ZptSharp.Bootstrap;
+using ZptSharp.Dom;
 
 namespace ZptSharp
 {
@@ -15,7 +16,8 @@ namespace ZptSharp
     public class ZptDocumentRenderer : IRendersZptDocuments
     {
         readonly RenderingConfig config;
-        readonly ServiceProviderFactory providerFactory;
+        readonly IServiceProvider serviceProvider;
+        readonly IReadsAndWritesDocument readerWriter;
 
         /// <summary>
         /// Renders a specified ZPT document from a stream using the specified model.
@@ -39,8 +41,8 @@ namespace ZptSharp
                                                        model,
                                                        config,
                                                        contextBuilder,
-                                                       sourceInfo);
-            var serviceProvider = providerFactory.GetServiceProvider(config);
+                                                       sourceInfo,
+                                                       readerWriter);
             var requestRenderer = serviceProvider.Resolve<IRendersRenderingRequest>();
             return requestRenderer.RenderAsync(request, token);
         }
@@ -49,10 +51,13 @@ namespace ZptSharp
         /// Initializes a new instance of the <see cref="ZptDocumentRenderer"/> class.
         /// </summary>
         /// <param name="config">The configuration to be used by this service.</param>
-        public ZptDocumentRenderer(RenderingConfig config)
+        public ZptDocumentRenderer(RenderingConfig config,
+                                   IServiceProvider serviceProvider,
+                                   IReadsAndWritesDocument readerWriter = null)
         {
             this.config = config ?? throw new ArgumentNullException(nameof(config));
-            providerFactory = new ServiceProviderFactory();
+            this.serviceProvider = serviceProvider ?? throw new ArgumentNullException(nameof(serviceProvider));
+            this.readerWriter = readerWriter;
         }
     }
 }

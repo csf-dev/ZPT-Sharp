@@ -6,6 +6,7 @@ using ZptSharp.Config;
 using System.Xml.Linq;
 using System.Xml;
 using ZptSharp.Rendering;
+using System.Linq;
 
 namespace ZptSharp.Dom
 {
@@ -16,8 +17,22 @@ namespace ZptSharp.Dom
     /// </summary>
     public class XmlDocumentProvider : IReadsAndWritesDocument
     {
+        static readonly string[] supportedExtensions = new[] { ".pt", ".xml", ".xhtml" };
+
         /// <summary>This matches the default buffer size for a built-in <see cref="StreamWriter"/>.</summary>
         const int BufferSize = 1024;
+
+        /// <summary>
+        /// Gets whether or not the current instance may be used to read &amp; write documents
+        /// which have the specified filename.
+        /// </summary>
+        /// <returns><c>true</c>, if this instance maybe used, <c>false</c> otherwise.</returns>
+        /// <param name="filenameOrPath">The filename of a ZPT document.</param>
+        public bool CanReadWriteForFilename(string filenameOrPath)
+        {
+            var extension = new FileInfo(filenameOrPath).Extension;
+            return supportedExtensions.Any(x => String.Equals(extension, x, StringComparison.InvariantCultureIgnoreCase));
+        }
 
         /// <summary>
         /// Gets a document instance from the specified input stream.
