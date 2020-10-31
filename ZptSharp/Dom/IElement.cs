@@ -7,7 +7,7 @@ namespace ZptSharp.Dom
     /// <summary>
     /// Abstraction for a DOM element.
     /// </summary>
-    public interface IElement : IHasDocumentSourceInfo
+    public interface IElement : IHasDocumentSourceInfo, IHasElements
     {
         /// <summary>
         /// Gets the parent document for the current element.

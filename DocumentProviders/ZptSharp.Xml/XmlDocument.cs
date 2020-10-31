@@ -1,16 +1,13 @@
 ﻿using System;
 using System.Xml.Linq;
-using ZptSharp.Rendering;
 
 namespace ZptSharp.Dom
 {
-    public class XmlDocument : IDocument
+    public class XmlDocument : DocumentBase
     {
         public XDocument NativeDocument { get; }
 
-        public IDocumentSourceInfo SourceInfo { get; set; }
-
-        public IElement GetRootElement()
+        public override IElement GetRootElement()
         {
             var native = NativeDocument.Root;
             return new XmlElement(native, this);

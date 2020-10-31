@@ -1,16 +1,13 @@
 ﻿using System;
 using AngleSharp.Html.Dom;
-using ZptSharp.Rendering;
 
 namespace ZptSharp.Dom
 {
-    public class AngleSharpDocument : IDocument
+    public class AngleSharpDocument : DocumentBase
     {
         public IHtmlDocument NativeDocument { get; }
 
-        public IDocumentSourceInfo SourceInfo { get; set; }
-
-        public IElement GetRootElement()
+        public override IElement GetRootElement()
         {
             var native = NativeDocument.DocumentElement;
             return new AngleSharpElement(native, this);

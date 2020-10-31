@@ -6,7 +6,7 @@ namespace ZptSharp.Dom
     /// <summary>
     /// Abstraction for a DOM document.
     /// </summary>
-    public interface IDocument : IHasDocumentSourceInfo
+    public interface IDocument : IHasDocumentSourceInfo, IHasElements
     {
         /// <summary>
         /// Gets the root element for the current document.

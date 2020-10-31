@@ -1,16 +1,13 @@
 ﻿using System;
 using HtmlAgilityPack;
-using ZptSharp.Rendering;
 
 namespace ZptSharp.Dom
 {
-    public class HapDocument : IDocument
+    public class HapDocument : DocumentBase
     {
         public HtmlDocument NativeDocument { get; }
 
-        public IDocumentSourceInfo SourceInfo { get; set; }
-
-        public IElement GetRootElement()
+        public override IElement GetRootElement()
         {
             var native = NativeDocument.DocumentNode;
             return new HapElement(native, this);

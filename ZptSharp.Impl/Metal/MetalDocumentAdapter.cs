@@ -9,17 +9,12 @@ namespace ZptSharp.Metal
     /// An adapter for an <see cref="IDocument"/> which allows it to be used as
     /// <see cref="IProvidesMacros"/> and <see cref="Expressions.IGetsNamedTalesValue"/>.
     /// </summary>
-    public class MetalDocumentAdapter : IProvidesMacros, IDocument, Expressions.IGetsNamedTalesValue
+    public class MetalDocumentAdapter : IProvidesMacros, Expressions.IGetsNamedTalesValue
     {
         const string Macros = "macros";
 
         readonly IDocument document;
-
-        /// <summary>
-        /// Gets information which indicates the original source of the document (for example, a file path).
-        /// </summary>
-        /// <value>The source info.</value>
-        public IDocumentSourceInfo SourceInfo => document.SourceInfo;
+        readonly ISearchesForAttributes attributeSearcher;
 
         /// <summary>
         /// Gets a collection of all of the macros
@@ -27,14 +22,10 @@ namespace ZptSharp.Metal
         /// <returns>The macros.</returns>
         public IDictionary<string, MetalMacro> GetMacros()
         {
+
+
             throw new NotImplementedException();
         }
-
-        /// <summary>
-        /// Gets the root element for the current document.
-        /// </summary>
-        /// <returns>The root element.</returns>
-        public IElement GetRootElement() => document.GetRootElement();
 
         /// <summary>
         /// Attempts to get a value for a named reference, relative to the current instance.
@@ -58,9 +49,13 @@ namespace ZptSharp.Metal
         /// Initializes a new instance of the <see cref="MetalDocumentAdapter"/> class.
         /// </summary>
         /// <param name="document">The document to be wrapped.</param>
-        public MetalDocumentAdapter(IDocument document)
+        /// <param name="attributeSearcher">A service which will search for attributes.</param>
+        public MetalDocumentAdapter(IDocument document,
+                                    ISearchesForAttributes attributeSearcher,
+                                    IGetsMetalAttributeSpecs specProvider)
         {
             this.document = document ?? throw new ArgumentNullException(nameof(document));
+            this.attributeSearcher = attributeSearcher ?? throw new System.ArgumentNullException(nameof(attributeSearcher));
         }
     }
 }
