@@ -18,6 +18,6 @@ namespace ZptSharp.Expressions
         /// <param name="token">An optional cancellation token.</param>
         Task<object> EvaluateExpressionAsync(string expression,
                                              ExpressionContext context,
-                                             CancellationToken token = default);
+                                             AbortZptActionToken token = default);
     }
 }

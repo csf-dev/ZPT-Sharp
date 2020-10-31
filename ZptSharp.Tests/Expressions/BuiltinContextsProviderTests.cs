@@ -66,7 +66,7 @@ namespace ZptSharp.Expressions
         {
             var result = sut.TryGetValue(BuiltinContextsProvider.Default, out var value);
             Assert.That(result, Is.True, "Value returned successfully");
-            Assert.That(value, Is.EqualTo(CancellationToken.Instance), "Token returned");
+            Assert.That(value, Is.EqualTo(AbortZptActionToken.Instance), "Token returned");
         }
 
         [Test, AutoMoqData]

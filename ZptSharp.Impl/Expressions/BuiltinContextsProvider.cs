@@ -80,7 +80,7 @@ namespace ZptSharp.Expressions
                     { Repeat, () => context.Repetitions },
                     { Options, () => config.KeywordOptions},
                     { Nothing, () => null },
-                    { Default, () => CancellationToken.Instance },
+                    { Default, () => AbortZptActionToken.Instance },
                     { Attributes, GetAttributesDictionary },
                     { Template, GetMetalDocumentAdapter },
                     { Container, GetTemplateContainer },
