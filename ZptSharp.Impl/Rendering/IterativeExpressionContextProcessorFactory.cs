@@ -2,10 +2,10 @@
 namespace ZptSharp.Rendering
 {
     /// <summary>
-    /// A factory implementation which creates <see cref="IIteratesExpressionContexts"/> using a
+    /// A factory implementation which creates <see cref="IIterativelyProcessesExpressionContexts"/> using a
     /// specified implementation of <see cref="IProcessesExpressionContext"/>.
     /// </summary>
-    public class ExpressionContextIteratorFactory : IGetsExpressionContextIterator
+    public class IterativeExpressionContextProcessorFactory : IGetsIterativeExpressionContextProcessor
     {
         readonly IGetsChildExpressionContexts childContextProvider;
 
@@ -14,19 +14,19 @@ namespace ZptSharp.Rendering
         /// </summary>
         /// <returns>The context iterator.</returns>
         /// <param name="processor">The processor to be used upon each iteration.</param>
-        public IIteratesExpressionContexts GetContextIterator(IProcessesExpressionContext processor)
+        public IIterativelyProcessesExpressionContexts GetContextIterator(IProcessesExpressionContext processor)
         {
             if (processor == null)
                 throw new ArgumentNullException(nameof(processor));
 
-            return new ExpressionContextIterator(processor, childContextProvider);
+            return new ExpressionContextIterativeProcessor(processor, childContextProvider);
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="ExpressionContextIteratorFactory"/> class.
+        /// Initializes a new instance of the <see cref="IterativeExpressionContextProcessorFactory"/> class.
         /// </summary>
         /// <param name="childContextProvider">Child context provider.</param>
-        public ExpressionContextIteratorFactory(IGetsChildExpressionContexts childContextProvider)
+        public IterativeExpressionContextProcessorFactory(IGetsChildExpressionContexts childContextProvider)
         {
             this.childContextProvider = childContextProvider ?? throw new ArgumentNullException(nameof(childContextProvider));
         }

@@ -8,7 +8,7 @@ namespace ZptSharp.Metal
 {
     public class MetalDocumentModifier : IModifiesDocument
     {
-        readonly IGetsExpressionContextIterator iteratorFactory;
+        readonly IGetsIterativeExpressionContextProcessor iteratorFactory;
         readonly IGetsRootExpressionContext rootContextProvider;
 
         public async Task ModifyDocumentAsync(IDocument document, RenderZptDocumentRequest request, CancellationToken token)
@@ -20,7 +20,7 @@ namespace ZptSharp.Metal
             //await iterator.IterateContextAndChildrenAsync(rootContext).ConfigureAwait(false);
         }
 
-        public MetalDocumentModifier(IGetsExpressionContextIterator iteratorFactory,
+        public MetalDocumentModifier(IGetsIterativeExpressionContextProcessor iteratorFactory,
                                      IGetsRootExpressionContext rootContextProvider)
         {
             this.iteratorFactory = iteratorFactory ?? throw new ArgumentNullException(nameof(iteratorFactory));

@@ -55,6 +55,17 @@ namespace ZptSharp.Expressions
         /// <summary>
         /// Initializes a new instance of the <see cref="ExpressionContext"/> class.
         /// </summary>
+        /// <remarks>
+        /// <para>
+        /// Both the <paramref name="localDefinitions"/> and <paramref name="repetitions"/> are shallow-copied by this constructor,
+        /// because changes to these two collections which are made inside of a rendering context should not affect any other
+        /// rendering context (except children created from this context).
+        /// </para>
+        /// <para>
+        /// On the other hand, <paramref name="globalDefinitions"/> is used directly without copying, because changes to the global
+        /// definitions should affect other contexts, including those 'outside' of this one.
+        /// </para>
+        /// </remarks>
         /// <param name="localDefinitions">Local definitions.</param>
         /// <param name="globalDefinitions">Global definitions.</param>
         /// <param name="repetitions">Repetitions.</param>
@@ -62,9 +73,9 @@ namespace ZptSharp.Expressions
                                  IDictionary<string, object> globalDefinitions = null,
                                  IDictionary<string, RepetitionInfo> repetitions = null)
         {
-            LocalDefinitions = localDefinitions ?? new Dictionary<string, object>();
+            LocalDefinitions = new Dictionary<string, object>(localDefinitions ?? new Dictionary<string, object>());
             GlobalDefinitions = globalDefinitions ?? new Dictionary<string, object>();
-            Repetitions = repetitions ?? new Dictionary<string, RepetitionInfo>();
+            Repetitions = new Dictionary<string, RepetitionInfo>(repetitions ?? new Dictionary<string, RepetitionInfo>());
         }
     }
 }
