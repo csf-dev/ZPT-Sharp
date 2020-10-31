@@ -16,11 +16,11 @@ namespace ZptSharp
     {
         [Test, AutoMoqData]
         public void RenderAsync_uses_rendering_service_from_service_provider([Frozen,MockedConfig] RenderingConfig config,
+                                                                             [Frozen] IServiceProvider serviceProvider,
                                                                              ZptDocumentRenderer sut,
                                                                              Stream stream,
                                                                              object model,
                                                                              CancellationToken token,
-                                                                             IServiceProvider serviceProvider,
                                                                              IRendersRenderingRequest renderer)
         {
             Mock.Get(config).SetupGet(x => x.ServiceProvider).Returns(serviceProvider);
@@ -40,11 +40,11 @@ namespace ZptSharp
 
         [Test, AutoMoqData]
         public void RenderAsync_uses_fallback_context_builder_if_none_provided([Frozen, MockedConfig] RenderingConfig config,
+                                                                               [Frozen] IServiceProvider serviceProvider,
                                                                                ZptDocumentRenderer sut,
                                                                                Stream stream,
                                                                                object model,
                                                                                CancellationToken token,
-                                                                               IServiceProvider serviceProvider,
                                                                                IRendersRenderingRequest renderer)
         {
             Mock.Get(config).SetupGet(x => x.ServiceProvider).Returns(serviceProvider);
@@ -59,12 +59,12 @@ namespace ZptSharp
 
         [Test, AutoMoqData]
         public void RenderAsync_returns_result_from_renderer_service([Frozen, MockedConfig] RenderingConfig config,
+                                                                     [Frozen] IServiceProvider serviceProvider,
                                                                      ZptDocumentRenderer sut,
                                                                      Stream input,
                                                                      Stream output,
                                                                      object model,
                                                                      CancellationToken token,
-                                                                     IServiceProvider serviceProvider,
                                                                      IRendersRenderingRequest renderer)
         {
             Mock.Get(config).SetupGet(x => x.ServiceProvider).Returns(serviceProvider);

@@ -10,17 +10,20 @@ namespace ZptSharp.Dom
     /// </summary>
     public abstract class ElementBase : IElement
     {
+        readonly IDocument document;
+        readonly IElementSourceInfo sourceInfo;
+
         /// <summary>
         /// Gets the parent document for the current element.
         /// </summary>
         /// <value>The document.</value>
-        public IDocument Document { get; }
+        public virtual IDocument Document => document;
 
         /// <summary>
         /// Gets information which indicates the original source of the element (for example, a file path and line number).
         /// </summary>
         /// <value>The source info.</value>
-        public IElementSourceInfo SourceInfo { get; }
+        public virtual IElementSourceInfo SourceInfo => sourceInfo;
 
         /// <summary>
         /// Gets a collection of the element's attributes.
@@ -46,8 +49,8 @@ namespace ZptSharp.Dom
         protected ElementBase(IDocument document,
                               IElementSourceInfo sourceInfo = null)
         {
-            Document = document ?? throw new ArgumentNullException(nameof(document));
-            SourceInfo = sourceInfo;
+            this.document = document ?? throw new ArgumentNullException(nameof(document));
+            this.sourceInfo = sourceInfo;
         }
     }
 }

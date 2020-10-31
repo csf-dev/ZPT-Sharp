@@ -44,6 +44,7 @@ namespace ZptSharp.Dom
                 var current = openList.First();
                 closedList.Add(current);
                 openList.AddRange(current.ChildElements);
+                openList.Remove(current);
             }
 
             return closedList;
