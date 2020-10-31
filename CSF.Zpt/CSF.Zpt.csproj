@@ -80,7 +80,6 @@
     <Compile Include="Tales\BuiltinContextsContainer.cs" />
     <Compile Include="Tales\TalesRenderingContextFactory.cs" />
     <Compile Include="Rendering\ContextVisitorBase.cs" />
-    <Compile Include="ZptDocumentFactory.cs" />
     <Compile Include="Tales\FilesystemDirectory.cs" />
     <Compile Include="Tales\TemplateDirectory.cs" />
     <Compile Include="Tales\EnumerableObjectWrapperWithNamedItems.cs" />
@@ -118,7 +117,6 @@
     <Compile Include="BatchRendering\ErrorTolerantBatchRenderer.cs" />
     <Compile Include="Rendering\RepetitionMetadataCollectionWrapper.cs" />
     <Compile Include="Tales\SimpleEvaluatorSelector.cs" />
-    <Compile Include="ZptDocumentProviderService.cs" />
     <Compile Include="PluginConfigurationSection.cs" />
     <Compile Include="PluginAssemblyCollection.cs" />
     <Compile Include="PluginServiceBase.cs" />
