@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using ZptSharp.Dom;
 using ZptSharp.Rendering;
+using System.Linq;
 
 namespace ZptSharp.Metal
 {
@@ -15,6 +16,7 @@ namespace ZptSharp.Metal
 
         readonly IDocument document;
         readonly ISearchesForAttributes attributeSearcher;
+        readonly IGetsMetalAttributeSpecs specProvider;
 
         /// <summary>
         /// Gets a collection of all of the macros
@@ -22,9 +24,11 @@ namespace ZptSharp.Metal
         /// <returns>The macros.</returns>
         public IDictionary<string, MetalMacro> GetMacros()
         {
-
-
-            throw new NotImplementedException();
+            var attributeSpec = specProvider.DefineMacro;
+            return attributeSearcher
+                .SearchForAttributes(document, attributeSpec)
+                .Select(a => new MetalMacro(a.Value, a.Element))
+                .ToDictionary(k => k.Name, v => v);
         }
 
         /// <summary>
@@ -56,6 +60,7 @@ namespace ZptSharp.Metal
         {
             this.document = document ?? throw new ArgumentNullException(nameof(document));
             this.attributeSearcher = attributeSearcher ?? throw new System.ArgumentNullException(nameof(attributeSearcher));
+            this.specProvider = specProvider ?? throw new System.ArgumentNullException(nameof(specProvider));
         }
     }
 }

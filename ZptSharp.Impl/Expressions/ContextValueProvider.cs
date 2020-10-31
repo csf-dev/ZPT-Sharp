@@ -16,6 +16,7 @@ namespace ZptSharp.Expressions
 
         readonly ExpressionContext context;
         readonly RenderingConfig config;
+        readonly IGetsBuiltinContextsProvider builtinContextsProviderFactory;
 
         /// <summary>
         /// Attempts to get a value for a named reference, relative to the current instance.
@@ -47,20 +48,19 @@ namespace ZptSharp.Expressions
         }
 
         IGetsNamedTalesValue BuiltInContextsProvider
-        {
-            get
-            {
-                if (config.BuiltinContextsProvider != null)
-                    return config.BuiltinContextsProvider(context);
+            => builtinContextsProviderFactory.GetBuiltinContextsProvider(context, config);
 
-                return new BuiltinContextsProvider(context, config);
-            }
-        }
-
-        public ContextValueProvider(ExpressionContext context, RenderingConfig config)
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ContextValueProvider"/> class.
+        /// </summary>
+        /// <param name="context">The expression context for which this provider will operate.</param>
+        /// <param name="config">Rendering configuration.</param>
+        /// <param name="builtinContextsProviderFactory">Builtin contexts provider factory.</param>
+        public ContextValueProvider(ExpressionContext context, RenderingConfig config, IGetsBuiltinContextsProvider builtinContextsProviderFactory)
         {
             this.context = context ?? throw new System.ArgumentNullException(nameof(context));
             this.config = config ?? throw new System.ArgumentNullException(nameof(config));
+            this.builtinContextsProviderFactory = builtinContextsProviderFactory ?? throw new ArgumentNullException(nameof(builtinContextsProviderFactory));
         }
     }
 }

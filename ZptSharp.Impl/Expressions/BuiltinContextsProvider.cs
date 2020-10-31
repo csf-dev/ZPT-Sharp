@@ -10,6 +10,7 @@ namespace ZptSharp.Expressions
     {
         readonly ExpressionContext context;
         readonly RenderingConfig config;
+        readonly IGetsMetalDocumentAdapter metalDocumentAdapterFactory;
 
         /// <summary>
         /// An identifier for the keyword-options presented to the rendering process.
@@ -88,15 +89,11 @@ namespace ZptSharp.Expressions
             }
         }
 
-        IDictionary<string,Dom.IAttribute> GetAttributesDictionary()
-        {
-            return context.CurrentElement.Attributes.ToDictionary(k => k.Name, v => v);
-        }
+        IDictionary<string, Dom.IAttribute> GetAttributesDictionary()
+            => context.CurrentElement.Attributes.ToDictionary(k => k.Name, v => v);
 
         MetalDocumentAdapter GetMetalDocumentAdapter()
-        {
-            return new MetalDocumentAdapter(context.TemplateDocument);
-        }
+            => metalDocumentAdapterFactory.GetMetalDocumentAdapter(context.TemplateDocument);
 
         object GetTemplateContainer()
         {
@@ -108,10 +105,11 @@ namespace ZptSharp.Expressions
         /// </summary>
         /// <param name="context">The rendering context.</param>
         /// <param name="config">The configuration.</param>
-        public BuiltinContextsProvider(ExpressionContext context, RenderingConfig config)
+        public BuiltinContextsProvider(ExpressionContext context, RenderingConfig config, IGetsMetalDocumentAdapter metalDocumentAdapterFactory)
         {
             this.context = context ?? throw new System.ArgumentNullException(nameof(context));
             this.config = config ?? throw new System.ArgumentNullException(nameof(config));
+            this.metalDocumentAdapterFactory = metalDocumentAdapterFactory ?? throw new ArgumentNullException(nameof(metalDocumentAdapterFactory));
         }
     }
 }

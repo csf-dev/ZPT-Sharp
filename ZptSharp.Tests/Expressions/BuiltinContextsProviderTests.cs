@@ -19,6 +19,7 @@ namespace ZptSharp.Expressions
         public void TryGetValue_returns_model_when_here_requested(object model,
                                                                   [Frozen, NoAutoProperties] ExpressionContext context,
                                                                   [Frozen, MockedConfig] RenderingConfig config,
+                                                                  [Frozen, MetalDocAdapter] IGetsMetalDocumentAdapter metalDocumentAdapterFactory,
                                                                   BuiltinContextsProvider sut)
         {
             context.Model = model;
@@ -30,6 +31,7 @@ namespace ZptSharp.Expressions
         [Test, AutoMoqData]
         public void TryGetValue_returns_repetitions_dictionary_when_repeat_requested([Frozen, NoAutoProperties] ExpressionContext context,
                                                                                      [Frozen, MockedConfig] RenderingConfig config,
+                                                                                     [Frozen, MetalDocAdapter] IGetsMetalDocumentAdapter metalDocumentAdapterFactory,
                                                                                      BuiltinContextsProvider sut)
         {
             var result = sut.TryGetValue(BuiltinContextsProvider.Repeat, out var value);
@@ -40,6 +42,7 @@ namespace ZptSharp.Expressions
         [Test, AutoMoqData]
         public void TryGetValue_returns_options_dictionary_when_options_requested([Frozen, NoAutoProperties] ExpressionContext context,
                                                                                   [Frozen, MockedConfig] RenderingConfig config,
+                                                                                  [Frozen, MetalDocAdapter] IGetsMetalDocumentAdapter metalDocumentAdapterFactory,
                                                                                   Dictionary<string,object> keywordOptions,
                                                                                   BuiltinContextsProvider sut)
         {
@@ -52,6 +55,7 @@ namespace ZptSharp.Expressions
         [Test, AutoMoqData]
         public void TryGetValue_returns_null_when_nothing_requested([Frozen, NoAutoProperties] ExpressionContext context,
                                                                     [Frozen, MockedConfig] RenderingConfig config,
+                                                                    [Frozen, MetalDocAdapter] IGetsMetalDocumentAdapter metalDocumentAdapterFactory,
                                                                     BuiltinContextsProvider sut)
         {
             var result = sut.TryGetValue(BuiltinContextsProvider.Nothing, out var value);
@@ -62,6 +66,7 @@ namespace ZptSharp.Expressions
         [Test, AutoMoqData]
         public void TryGetValue_returns_cancellation_token_when_default_requested([Frozen, NoAutoProperties] ExpressionContext context,
                                                                                   [Frozen, MockedConfig] RenderingConfig config,
+                                                                                  [Frozen, MetalDocAdapter] IGetsMetalDocumentAdapter metalDocumentAdapterFactory,
                                                                                   BuiltinContextsProvider sut)
         {
             var result = sut.TryGetValue(BuiltinContextsProvider.Default, out var value);
@@ -72,6 +77,7 @@ namespace ZptSharp.Expressions
         [Test, AutoMoqData]
         public void TryGetValue_returns_element_attributes_collection_when_attributes_requested([Frozen, NoAutoProperties] ExpressionContext context,
                                                                                                 [Frozen, MockedConfig] RenderingConfig config,
+                                                                                                [Frozen, MetalDocAdapter] IGetsMetalDocumentAdapter metalDocumentAdapterFactory,
                                                                                                 IElement element,
                                                                                                 IAttribute attribute1,
                                                                                                 string name1,
@@ -92,6 +98,7 @@ namespace ZptSharp.Expressions
         [Test, AutoMoqData]
         public void TryGetValue_returns_template_object_when_template_requested([Frozen, NoAutoProperties] ExpressionContext context,
                                                                                 [Frozen, MockedConfig] RenderingConfig config,
+                                                                                [Frozen, MetalDocAdapter] IGetsMetalDocumentAdapter metalDocumentAdapterFactory,
                                                                                 IDocument document,
                                                                                 BuiltinContextsProvider sut)
         {
@@ -104,6 +111,7 @@ namespace ZptSharp.Expressions
         [Test, AutoMoqData]
         public void TryGetValue_returns_directory_info_when_container_requested([Frozen, NoAutoProperties] ExpressionContext context,
                                                                                 [Frozen, MockedConfig] RenderingConfig config,
+                                                                                [Frozen, MetalDocAdapter] IGetsMetalDocumentAdapter metalDocumentAdapterFactory,
                                                                                 IDocument document,
                                                                                 BuiltinContextsProvider sut)
         {
