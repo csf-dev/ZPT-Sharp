@@ -4,7 +4,7 @@ namespace ZptSharp.Expressions
     /// <summary>
     /// An object which indicates that the current ZPT action should be cancelled/aborted.
     /// </summary>
-    public class AbortZptActionToken : IEquatable<AbortZptActionToken>
+    public sealed class AbortZptActionToken : IEquatable<AbortZptActionToken>
     {
         /// <summary>
         /// Determines whether the specified <see cref="AbortZptActionToken"/> is equal to the

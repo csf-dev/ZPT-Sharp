@@ -5,7 +5,7 @@ namespace ZptSharp.Rendering
     /// Default implementation of <see cref="IElementSourceInfo"/> which provides information about
     /// the source of a DOM element.
     /// </summary>
-    public class ElementSourceInfo : IElementSourceInfo
+    public sealed class ElementSourceInfo : IElementSourceInfo
     {
         /// <summary>
         /// Gets source information about the document where this element originated.

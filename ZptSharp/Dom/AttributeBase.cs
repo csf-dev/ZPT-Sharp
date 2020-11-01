@@ -38,7 +38,7 @@ namespace ZptSharp.Dom
         /// Initializes a new instance of the <see cref="AttributeBase"/> class.
         /// </summary>
         /// <param name="element">Element.</param>
-        public AttributeBase(IElement element)
+        protected AttributeBase(IElement element)
         {
             this.element = element ?? throw new ArgumentNullException(nameof(element));
         }

@@ -39,11 +39,7 @@ namespace ZptSharp.Dom
         }
 
         static int? GetLineNumber(XElement element)
-        {
-            IXmlLineInfo lineInfo = element;
-            if (!lineInfo.HasLineInfo()) return null;
-            return lineInfo.LineNumber;
-        }
+            => ((element is IXmlLineInfo lineInfo) && lineInfo.HasLineInfo()) ? lineInfo.LineNumber : (int?) null;
 
         public XmlElement(XElement element,
                           XmlDocument document,
