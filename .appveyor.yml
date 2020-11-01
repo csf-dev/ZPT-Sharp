@@ -11,4 +11,4 @@ build_script:
     - cmd: dotnet build ZptSharp.sln
     
 test_script:
-    - cmd: dotnet test
+    - cmd: dotnet test ZptSharp.sln
