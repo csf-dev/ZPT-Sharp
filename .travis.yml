@@ -3,5 +3,5 @@ solution: ZptSharp.sln
 
 jobs:
     include:
-        -   dotnet: latest
+        -   dotnet: 3.1.403
             mono: none

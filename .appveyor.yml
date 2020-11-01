@@ -4,3 +4,4 @@ init:
 
 build:
     verbosity: minimal
+    project: ZptSharp.sln
