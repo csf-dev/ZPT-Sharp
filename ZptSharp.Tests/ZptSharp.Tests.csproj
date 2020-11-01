@@ -31,5 +31,6 @@
     <Folder Include="Dom\" />
     <Folder Include="Expressions\" />
     <Folder Include="Rendering\" />
+    <Folder Include="Metal\" />
   </ItemGroup>
 </Project>

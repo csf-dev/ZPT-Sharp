@@ -24,9 +24,8 @@ namespace ZptSharp.Metal
         /// <returns>The macros.</returns>
         public IDictionary<string, MetalMacro> GetMacros()
         {
-            var attributeSpec = specProvider.DefineMacro;
             return attributeSearcher
-                .SearchForAttributes(document, attributeSpec)
+                .SearchForAttributes(document, specProvider.DefineMacro)
                 .Select(a => new MetalMacro(a.Value, a.Element))
                 .ToDictionary(k => k.Name, v => v);
         }
