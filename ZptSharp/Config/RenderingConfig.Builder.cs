@@ -92,6 +92,17 @@ namespace ZptSharp.Config
             }
 
             /// <summary>
+            /// Gets or sets a value which indicates whether or not source annotation should be written to the rendered document.
+            /// Source annotation adds comments to the output indicating the source file information.
+            /// </summary>
+            /// <value><c>true</c> if source annotation should be included in the output; otherwise, <c>false</c>.</value>
+            public bool IncludeSourceAnnotation
+            {
+                get => config.IncludeSourceAnnotation;
+                set => config.IncludeSourceAnnotation = value;
+            }
+
+            /// <summary>
             /// Returns an immutable configuration object.  This method may be used only once per instance of <see cref="Builder"/>.
             /// Once it has been used, the configuration is finalised.
             /// </summary>

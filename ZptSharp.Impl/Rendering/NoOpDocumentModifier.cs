@@ -19,7 +19,7 @@ namespace ZptSharp.Rendering
         /// <param name="document">The document to render.</param>
         /// <param name="request">The rendering request.</param>
         /// <param name="token">An object used to cancel the operation if required.</param>
-        public Task ModifyDocumentAsync(IDocument document, RenderZptDocumentRequest request, CancellationToken token)
+        public Task ModifyDocumentAsync(IDocument document, RenderZptDocumentRequest request, CancellationToken token = default)
             => Task.CompletedTask;
     }
 }

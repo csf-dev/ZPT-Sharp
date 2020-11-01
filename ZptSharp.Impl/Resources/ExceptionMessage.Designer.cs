@@ -52,5 +52,17 @@ namespace ZptSharp.Resources {
                 return ResourceManager.GetString("CannotGetReaderWriterForFile", resourceCulture);
             }
         }
+        
+        internal static string CannotConvertEvaluatedResult {
+            get {
+                return ResourceManager.GetString("CannotConvertEvaluatedResult", resourceCulture);
+            }
+        }
+        
+        internal static string MacroNotFound {
+            get {
+                return ResourceManager.GetString("MacroNotFound", resourceCulture);
+            }
+        }
     }
 }

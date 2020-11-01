@@ -14,6 +14,6 @@ namespace ZptSharp.Rendering
         /// Typically these contexts are created/added as a result of the processing.
         /// </summary>
         /// <value>The additional contexts.</value>
-        public IEnumerable<ExpressionContext> AdditionalContexts { get; set; }
+        public IList<ExpressionContext> AdditionalContexts { get; set; }
     }
 }

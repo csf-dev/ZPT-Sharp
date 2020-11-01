@@ -22,9 +22,9 @@ namespace ZptSharp.Rendering
         /// </summary>
         /// <remarks>
         /// <para>
-        /// This method uses an "open list" to store the contexts which are due to be processed.  After processing
-        /// a single context, further contexts may be added to the open list (queueing them for processing).
-        /// There are two ways in which we find further contexts:
+        /// This method uses an "open list" to store the contexts which are due to be processed; essentially a
+        /// list of the contexts which must still be processed.  After processing each context, further contexts
+        /// may be added to the open list. There are two ways in which we find further contexts:
         /// </para>
         /// <list type="bullet">
         /// <item>Child contexts of the currently-processed context</item>

@@ -31,20 +31,33 @@ namespace ZptSharp.Dom
                 .ToList();
         }
 
+        /// <summary>
+        /// Recursively gets every <see cref="IElement"/> contained within the
+        /// <paramref name="source"/>.  This includes the source object if it
+        /// itself is also an element.
+        /// </summary>
+        /// <remarks>
+        /// <para>
+        /// This method uses an open/closed list to search through &amp; return results.
+        /// The open list is a list/queue of the elements which are still to be searched.
+        /// The closed list is the list of results which have been found.
+        /// </para>
+        /// </remarks>
+        /// <returns>The collection of elements.</returns>
+        /// <param name="source">Source.</param>
         IEnumerable<IElement> RecursivelyGetAllElements(IHasElements source)
         {
-            List<IElement>
-                openList = new List<IElement>(source.GetChildElements()),
-                closedList = new List<IElement>();
+            IElement current;
+            var closedList = new List<IElement>();
 
             if (source is IElement element) closedList.Add(element);
 
-            while(openList.Any())
+            for (var openList = new List<IElement>(source.GetChildElements());
+                 (current = openList.FirstOrDefault()) != null;
+                 openList.Remove(current))
             {
-                var current = openList.First();
                 closedList.Add(current);
                 openList.AddRange(current.ChildElements);
-                openList.Remove(current);
             }
 
             return closedList;

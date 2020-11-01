@@ -60,6 +60,13 @@ namespace ZptSharp.Config
         public virtual IDictionary<string,object> KeywordOptions { get; private set; }
 
         /// <summary>
+        /// Gets a value which indicates whether or not source annotation should be written to the rendered document.
+        /// Source annotation adds comments to the output indicating the source file information.
+        /// </summary>
+        /// <value><c>true</c> if source annotation should be included in the output; otherwise, <c>false</c>.</value>
+        public virtual bool IncludeSourceAnnotation { get; private set; }
+
+        /// <summary>
         /// <para>
         /// The constructor for <see cref="RenderingConfig"/> is intentionally <see langword="protected"/>.
         /// Instances of this class must be created via an instance of <see cref="Builder"/>.

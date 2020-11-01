@@ -19,6 +19,8 @@
     <Folder Include="Dom\" />
     <Folder Include="Expressions\" />
     <Folder Include="Metal\" />
+    <Folder Include="Tal\" />
+    <Folder Include="SourceAnnotation\" />
   </ItemGroup>
     
   <ItemGroup>

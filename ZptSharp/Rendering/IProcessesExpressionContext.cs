@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading;
 using System.Threading.Tasks;
 using ZptSharp.Expressions;
 
@@ -14,6 +15,7 @@ namespace ZptSharp.Rendering
         /// </summary>
         /// <returns>A result object indicating the outcome of processing.</returns>
         /// <param name="context">The context to process.</param>
-        Task<ExpressionContextProcessingResult> ProcessContextAsync(ExpressionContext context);
+        /// <param name="token">An optional cancellation token.</param>
+        Task<ExpressionContextProcessingResult> ProcessContextAsync(ExpressionContext context, CancellationToken token = default);
     }
 }

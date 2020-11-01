@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using AutoFixture.NUnit3;
 using Moq;
@@ -18,7 +19,7 @@ namespace ZptSharp.Rendering
         {
             await sut.IterateContextAndChildrenAsync(context);
             Mock.Get(contextProcessor)
-                .Verify(x => x.ProcessContextAsync(context), Times.Once);
+                .Verify(x => x.ProcessContextAsync(context, CancellationToken.None), Times.Once);
         }
 
         [Test, AutoMoqData]
@@ -36,9 +37,9 @@ namespace ZptSharp.Rendering
             await sut.IterateContextAndChildrenAsync(context);
 
             Mock.Get(contextProcessor)
-                .Verify(x => x.ProcessContextAsync(child1), Times.Once, $"Processed {nameof(child1)}");
+                .Verify(x => x.ProcessContextAsync(child1, CancellationToken.None), Times.Once, $"Processed {nameof(child1)}");
             Mock.Get(contextProcessor)
-                .Verify(x => x.ProcessContextAsync(child2), Times.Once, $"Processed {nameof(child2)}");
+                .Verify(x => x.ProcessContextAsync(child2, CancellationToken.None), Times.Once, $"Processed {nameof(child2)}");
         }
 
         [Test, AutoMoqData]
@@ -49,15 +50,15 @@ namespace ZptSharp.Rendering
                                                                                             ExpressionContextIterativeProcessor sut)
         {
             Mock.Get(contextProcessor)
-                .Setup(x => x.ProcessContextAsync(context))
+                .Setup(x => x.ProcessContextAsync(context, CancellationToken.None))
                 .Returns(() => Task.FromResult(new ExpressionContextProcessingResult { AdditionalContexts = new[] { additional1, additional2 } }));
 
             await sut.IterateContextAndChildrenAsync(context);
 
             Mock.Get(contextProcessor)
-                .Verify(x => x.ProcessContextAsync(additional1), Times.Once, $"Processed {nameof(additional1)}");
+                .Verify(x => x.ProcessContextAsync(additional1, CancellationToken.None), Times.Once, $"Processed {nameof(additional1)}");
             Mock.Get(contextProcessor)
-                .Verify(x => x.ProcessContextAsync(additional2), Times.Once, $"Processed {nameof(additional2)}");
+                .Verify(x => x.ProcessContextAsync(additional2, CancellationToken.None), Times.Once, $"Processed {nameof(additional2)}");
         }
 
         [Test, AutoMoqData]
@@ -79,9 +80,9 @@ namespace ZptSharp.Rendering
             await sut.IterateContextAndChildrenAsync(context);
 
             Mock.Get(contextProcessor)
-                .Verify(x => x.ProcessContextAsync(grandchild1), Times.Once, $"Processed {nameof(grandchild1)}");
+                .Verify(x => x.ProcessContextAsync(grandchild1, CancellationToken.None), Times.Once, $"Processed {nameof(grandchild1)}");
             Mock.Get(contextProcessor)
-                .Verify(x => x.ProcessContextAsync(grandchild2), Times.Once, $"Processed {nameof(grandchild2)}");
+                .Verify(x => x.ProcessContextAsync(grandchild2, CancellationToken.None), Times.Once, $"Processed {nameof(grandchild2)}");
         }
 
         [Test, AutoMoqData]
@@ -97,15 +98,15 @@ namespace ZptSharp.Rendering
                 .Setup(x => x.GetChildContexts(context))
                 .Returns(new[] { child });
             Mock.Get(contextProcessor)
-                .Setup(x => x.ProcessContextAsync(child))
+                .Setup(x => x.ProcessContextAsync(child, CancellationToken.None))
                 .Returns(() => Task.FromResult(new ExpressionContextProcessingResult { AdditionalContexts = new[] { additional1, additional2 } }));
 
             await sut.IterateContextAndChildrenAsync(context);
 
             Mock.Get(contextProcessor)
-                .Verify(x => x.ProcessContextAsync(additional1), Times.Once, $"Processed {nameof(additional1)}");
+                .Verify(x => x.ProcessContextAsync(additional1, CancellationToken.None), Times.Once, $"Processed {nameof(additional1)}");
             Mock.Get(contextProcessor)
-                .Verify(x => x.ProcessContextAsync(additional2), Times.Once, $"Processed {nameof(additional2)}");
+                .Verify(x => x.ProcessContextAsync(additional2, CancellationToken.None), Times.Once, $"Processed {nameof(additional2)}");
         }
 
         [Test, AutoMoqData]
@@ -117,18 +118,18 @@ namespace ZptSharp.Rendering
                                                                                                     ExpressionContextIterativeProcessor sut)
         {
             Mock.Get(contextProcessor)
-                .Setup(x => x.ProcessContextAsync(context))
+                .Setup(x => x.ProcessContextAsync(context, CancellationToken.None))
                 .Returns(() => Task.FromResult(new ExpressionContextProcessingResult { AdditionalContexts = new[] { additional } }));
             Mock.Get(contextProcessor)
-                .Setup(x => x.ProcessContextAsync(additional))
+                .Setup(x => x.ProcessContextAsync(additional, CancellationToken.None))
                 .Returns(() => Task.FromResult(new ExpressionContextProcessingResult { AdditionalContexts = new[] { sibling1, sibling2 } }));
 
             await sut.IterateContextAndChildrenAsync(context);
 
             Mock.Get(contextProcessor)
-                .Verify(x => x.ProcessContextAsync(sibling1), Times.Once, $"Processed {nameof(sibling1)}");
+                .Verify(x => x.ProcessContextAsync(sibling1, CancellationToken.None), Times.Once, $"Processed {nameof(sibling1)}");
             Mock.Get(contextProcessor)
-                .Verify(x => x.ProcessContextAsync(sibling2), Times.Once, $"Processed {nameof(sibling2)}");
+                .Verify(x => x.ProcessContextAsync(sibling2, CancellationToken.None), Times.Once, $"Processed {nameof(sibling2)}");
         }
 
         [Test, AutoMoqData]
@@ -141,7 +142,7 @@ namespace ZptSharp.Rendering
                                                                                                        ExpressionContextIterativeProcessor sut)
         {
             Mock.Get(contextProcessor)
-                .Setup(x => x.ProcessContextAsync(context))
+                .Setup(x => x.ProcessContextAsync(context, CancellationToken.None))
                 .Returns(() => Task.FromResult(new ExpressionContextProcessingResult { AdditionalContexts = new[] { additional } }));
             Mock.Get(childContextProvider)
                 .Setup(x => x.GetChildContexts(additional))
@@ -150,9 +151,9 @@ namespace ZptSharp.Rendering
             await sut.IterateContextAndChildrenAsync(context);
 
             Mock.Get(contextProcessor)
-                .Verify(x => x.ProcessContextAsync(child1), Times.Once, $"Processed {nameof(child1)}");
+                .Verify(x => x.ProcessContextAsync(child1, CancellationToken.None), Times.Once, $"Processed {nameof(child1)}");
             Mock.Get(contextProcessor)
-                .Verify(x => x.ProcessContextAsync(child2), Times.Once, $"Processed {nameof(child1)}");
+                .Verify(x => x.ProcessContextAsync(child2, CancellationToken.None), Times.Once, $"Processed {nameof(child1)}");
         }
     }
 }

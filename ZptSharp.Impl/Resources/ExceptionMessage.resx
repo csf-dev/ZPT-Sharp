@@ -13,8 +13,19 @@
         <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </resheader>
     <data name="CannotGetReaderWriterForFile" xml:space="preserve">
-    <value>No registered document reader/writer is suitable for the file '{0}'.
+        <value>No registered document reader/writer is suitable for the file '{0}'.
 To render ZPT document files, a suitable document provider must first be registered using `{1}'.
 The provider is then selected based upon the file name extension of the ZPT document file to be rendered.</value>
-  </data>
+    </data>
+    <data name="CannotConvertEvaluatedResult" xml:space="preserve">
+        <value>The generic type parameter used with `{0}' must be suitable for the type of returned expression result.
+Expression:{1}
+Expected type:{2}
+Actual type:{3}</value>
+    </data>
+    <data name="MacroNotFound" xml:space="preserve">
+        <value>A '{0}' attribute indicates that the element should use a METAL macro.  The macro indicated by the expression could not be found.
+Element:{1}
+Expression:{2}</value>
+    </data>
 </root>
