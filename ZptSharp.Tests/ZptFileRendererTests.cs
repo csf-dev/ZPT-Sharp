@@ -16,7 +16,7 @@ namespace ZptSharp
     [TestFixture,Parallelizable]
     public class ZptFileRendererTests
     {
-        [Test, AutoMoqData]
+        [Test, AutoMoqData, Parallelizable(ParallelScope.None)]
         public async Task RenderAsync_can_render_a_file_using_a_detected_reader_writer([MockedConfig, Frozen] RenderingConfig config,
                                                                                        [Frozen] IServiceProvider serviceProvider,
                                                                                        ZptFileRenderer sut,
@@ -61,7 +61,7 @@ namespace ZptSharp
             Assert.That(() => sut.RenderAsync(filePath, model).Result, Throws.InstanceOf<FileNotFoundException>());
         }
 
-        [Test, AutoMoqData]
+        [Test, AutoMoqData, Parallelizable(ParallelScope.None)]
         public void RenderAsync_throws_no_matching_readerwriter_exception_if_one_cannot_be_inferred([MockedConfig, Frozen] RenderingConfig config,
                                                                                                     [Frozen] IServiceProvider serviceProvider,
                                                                                                     ZptFileRenderer sut,

@@ -32,7 +32,7 @@ namespace ZptSharp
                                         CancellationToken token = default,
                                         Action<IConfiguresRootContext> contextBuilder = null)
         {
-            var stream = new FileStream(filePath, FileMode.Open);
+            var stream = new FileStream(filePath, FileMode.Open, FileAccess.Read, FileShare.Read);
             var sourceInfo = new FileSourceInfo(filePath);
 
             var readerWriter = GetDocumentReaderWriter(filePath);
