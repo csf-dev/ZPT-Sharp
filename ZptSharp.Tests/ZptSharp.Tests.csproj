@@ -32,5 +32,7 @@
     <Folder Include="Expressions\" />
     <Folder Include="Rendering\" />
     <Folder Include="Metal\" />
+    <Folder Include="TestFiles\" />
+    <Folder Include="Util\" />
   </ItemGroup>
 </Project>
