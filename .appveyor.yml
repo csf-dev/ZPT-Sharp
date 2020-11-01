@@ -1,7 +1,13 @@
 version: '{branch}-{build}'
-init:
-- cmd: git config --global core.autocrlf true
 
-build:
-    verbosity: minimal
-    project: ZptSharp.sln
+init:
+    - cmd: git config --global core.autocrlf true
+
+before_build:
+    - cmd: dotnet --version
+    
+build_script:
+    - cmd: dotnet build ZptSharp.sln
+    
+test_script:
+    - cmd: dotnet test
