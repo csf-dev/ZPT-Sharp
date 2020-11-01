@@ -60,7 +60,7 @@ namespace ZptSharp.Dom
         /// <returns>A <see cref="String"/> that represents the current <see cref="Namespace"/>.</returns>
         public override string ToString()
         {
-            if (Uri == null && Prefix == null) return null;
+            if (Uri == null && Prefix == null) return String.Empty;
             if (Uri == null) return Prefix;
             if (Prefix == null) return Uri;
             return $"{Prefix}:{Uri}";

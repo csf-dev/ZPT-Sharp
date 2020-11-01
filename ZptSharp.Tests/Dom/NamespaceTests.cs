@@ -170,10 +170,10 @@ namespace ZptSharp.Dom
         }
 
         [Test, AutoMoqData]
-        public void ToString_returns_null_if_both_prefix_and_uri_are_null()
+        public void ToString_returns_empty_string_if_both_prefix_and_uri_are_null()
         {
             var namespace1 = new Namespace();
-            Assert.That(() => namespace1.ToString(), Is.Null);
+            Assert.That(() => namespace1.ToString(), Is.Empty);
         }
 
         #endregion

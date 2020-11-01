@@ -50,6 +50,9 @@ namespace ZptSharp.Rendering
         /// hash table.</returns>
         public override int GetHashCode()
         {
+            // If the line number info is unavailable then we only
+            // consider instances equal if they are reference equal.
+            // Hence the call to the base hashcode function.
             if (LineNumber == null) return base.GetHashCode();
 
             return Document.GetHashCode() ^ LineNumber.Value;
