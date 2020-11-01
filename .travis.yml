@@ -8,4 +8,4 @@ jobs:
 
 script:
     -   dotnet build ZptSharp.sln
-    -   dotnet test
+    -   dotnet test ZptSharp.sln
