@@ -76,7 +76,7 @@ namespace ZptSharp.Metal
         /// Initializes a new instance of the <see cref="MacroUsageContextProcessor"/> class.
         /// </summary>
         /// <param name="specProvider">Attribute spec provider.</param>
-        /// <param name="expressionEvaluator">Expression evaluator.</param>
+        /// <param name="expressionEvaluator">Expresson evaluator.</param>
         /// <param name="macroExpander">Macro expander.</param>
         public MacroUsageContextProcessor(IGetsMetalAttributeSpecs specProvider,
                                           IEvaluatesExpression expressionEvaluator,
