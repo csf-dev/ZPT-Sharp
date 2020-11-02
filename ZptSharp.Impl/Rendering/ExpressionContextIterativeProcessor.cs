@@ -38,11 +38,16 @@ namespace ZptSharp.Rendering
         /// </remarks>
         /// <returns>A task indicating when processing is complete.</returns>
         /// <param name="context">The context over which to iterate.</param>
-        public async Task IterateContextAndChildrenAsync(ExpressionContext context)
+        public Task IterateContextAndChildrenAsync(ExpressionContext context)
         {
             if (context == null)
                 throw new ArgumentNullException(nameof(context));
 
+            return IterateContextAndChildrenPrivateAsync(context);
+        }
+
+        async Task IterateContextAndChildrenPrivateAsync(ExpressionContext context)
+        {
             ExpressionContext currentContext;
             for (var openList = new List<ExpressionContext> { context };
                  (currentContext = openList.FirstOrDefault()) != null;

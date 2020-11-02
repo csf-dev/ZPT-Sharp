@@ -76,7 +76,7 @@ namespace ZptSharp.Dom
         /// <summary>
         /// Implement this method in a derived class to perform custom logic related to writing a document to a stream.
         /// Derived types should assume that the <paramref name="document"/> &amp; <paramref name="config"/> parameters
-        /// have been null-checked. The document will also already be converted to <typeparamref name="AngleSharpDocument"/>.
+        /// have been null-checked. The document will also already be converted to <see cref="AngleSharpDocument"/>.
         /// Finally, the <paramref name="token"/> parameter will have already been checked that it does not request cancellation.
         /// </summary>
         /// <remarks>

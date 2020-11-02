@@ -19,20 +19,27 @@ namespace ZptSharp.Expressions
         /// <param name="context">The expression context.</param>
         /// <param name="cancellationToken">An optional cancellation token.</param>
         /// <typeparam name="T">The desired/expected type of the result object.</typeparam>
-        public static async Task<T> EvaluateExpressionAsync<T>(this IEvaluatesExpression evaluator,
-                                                               string expression,
-                                                               ExpressionContext context,
-                                                               CancellationToken cancellationToken = default)
+        public static Task<T> EvaluateExpressionAsync<T>(this IEvaluatesExpression evaluator,
+                                                         string expression,
+                                                         ExpressionContext context,
+                                                         CancellationToken cancellationToken = default)
         {
             if (evaluator == null) throw new ArgumentNullException(nameof(evaluator));
+            return EvaluateExpressionPrivateAsync<T>(evaluator, expression, context, cancellationToken);
+        }
 
+        static async Task<T> EvaluateExpressionPrivateAsync<T>(IEvaluatesExpression evaluator,
+                                                               string expression,
+                                                               ExpressionContext context,
+                                                               CancellationToken cancellationToken)
+        {
             var result = await evaluator.EvaluateExpressionAsync(expression, context, cancellationToken);
 
             try
             {
                 return (T)result;
             }
-            catch(InvalidCastException ex)
+            catch (InvalidCastException ex)
             {
                 var message = String.Format(Resources.ExceptionMessage.CannotConvertEvaluatedResult,
                                             nameof(EvaluateExpressionAsync),
