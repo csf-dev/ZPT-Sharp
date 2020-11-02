@@ -14,7 +14,16 @@ namespace ZptSharp.Dom
     /// An implementation of <see cref="IReadsAndWritesDocument"/> which uses the AngleSharp HTML parsing library.
     /// See https://anglesharp.github.io/ for more information.
     /// </summary>
-    public class AngleSharpDocumentProvider : IReadsAndWritesDocument
+    /// <remarks>
+    /// <para>
+    /// Please note that when using <see cref="GetDocumentProtectedAsync(Stream, RenderingConfig, IDocumentSourceInfo, CancellationToken)"/>,
+    /// this implementation ignores the <see cref="RenderingConfig.DocumentEncoding"/>.  This is because AngleSharp will
+    /// always automatically detect the encoding from the document; there is no way to specify the encoding externally.
+    /// When writing a document using <see cref="WriteDocumentProtectedAsync(AngleSharpDocument, RenderingConfig, CancellationToken)"/>,
+    /// the configured encoding is honoured.
+    /// </para>
+    /// </remarks>
+    public class AngleSharpDocumentProvider : DocumentReaderWriterBase<AngleSharpDocument>
     {
         static readonly string[] supportedExtensions = new[] { ".pt", ".htm", ".html" };
 
@@ -29,19 +38,21 @@ namespace ZptSharp.Dom
         /// </summary>
         /// <returns><c>true</c>, if this instance maybe used, <c>false</c> otherwise.</returns>
         /// <param name="filenameOrPath">The filename of a ZPT document.</param>
-        public bool CanReadWriteForFilename(string filenameOrPath)
+        public override bool CanReadWriteForFilename(string filenameOrPath)
         {
             var extension = new FileInfo(filenameOrPath).Extension;
             return supportedExtensions.Any(x => String.Equals(extension, x, StringComparison.InvariantCultureIgnoreCase));
         }
 
         /// <summary>
-        /// Gets a document instance from the specified input stream.
+        /// Implement this method in a derived class to perform custom logic related to reading a document from a stream.
+        /// Derived types should assume that the <paramref name="stream"/> &amp; <paramref name="config"/> parameters have
+        /// been null-checked.  Also, they should assume that the <paramref name="token"/> parameter does not request cancellation.
         /// </summary>
         /// <remarks>
         /// <para>
-        /// This implementation ignores <see cref="RenderingConfig.DocumentEncoding"/>, the document encoding is
-        /// detected from the HTML document itself.  It is strongly advised to use UTF-8.
+        /// This implementation ignores <see cref="RenderingConfig.DocumentEncoding"/>; AngleSharp always detects
+        /// the document encoding from the HTML document itself.  It is strongly advised to use UTF-8.
         /// </para>
         /// </remarks>
         /// <returns>A task which provides the document which has been read.</returns>
@@ -49,15 +60,13 @@ namespace ZptSharp.Dom
         /// <param name="config">Rendering configuration.</param>
         /// <param name="sourceInfo">Information which identifies the source of the document.</param>
         /// <param name="token">An object used to cancel the operation if required.</param>
-        public async Task<IDocument> GetDocumentAsync(Stream stream,
-                                                      RenderingConfig config,
-                                                      IDocumentSourceInfo sourceInfo = null,
-                                                      CancellationToken token = default)
+        protected override async Task<IDocument> GetDocumentProtectedAsync(Stream stream,
+                                                                           RenderingConfig config,
+                                                                           IDocumentSourceInfo sourceInfo,
+                                                                           CancellationToken token)
         {
-            if (stream == null)
-                throw new ArgumentNullException(nameof(stream));
-
             var doc = await parser.ParseDocumentAsync(stream, token).ConfigureAwait(false);
+
             return new AngleSharpDocument(doc)
             {
                 SourceInfo = sourceInfo ?? new UnknownSourceInfo()
@@ -65,7 +74,10 @@ namespace ZptSharp.Dom
         }
 
         /// <summary>
-        /// Writes the specified document to a specified output stream.
+        /// Implement this method in a derived class to perform custom logic related to writing a document to a stream.
+        /// Derived types should assume that the <paramref name="document"/> &amp; <paramref name="config"/> parameters
+        /// have been null-checked. The document will also already be converted to <typeparamref name="AngleSharpDocument"/>.
+        /// Finally, the <paramref name="token"/> parameter will have already been checked that it does not request cancellation.
         /// </summary>
         /// <remarks>
         /// <para>
@@ -77,20 +89,13 @@ namespace ZptSharp.Dom
         /// <param name="document">The document to write.</param>
         /// <param name="config">Rendering configuration.</param>
         /// <param name="token">An object used to cancel the operation if required.</param>
-        public async Task<Stream> WriteDocumentAsync(IDocument document, RenderingConfig config, CancellationToken token = default)
+        protected override async Task<Stream> WriteDocumentProtectedAsync(AngleSharpDocument document, RenderingConfig config, CancellationToken token)
         {
-            if (document == null)
-                throw new ArgumentNullException(nameof(document));
-            if (!(document is AngleSharpDocument angleSharpDocument))
-                throw new ArgumentException($"The document must be an instance of {nameof(AngleSharpDocument)}.", nameof(document));
-            token.ThrowIfCancellationRequested();
-
             var stream = new MemoryStream();
-            using(var writer = new StreamWriter(stream, config.DocumentEncoding, BufferSize, true))
+
+            using (var writer = new StreamWriter(stream, config.DocumentEncoding, BufferSize, true))
             {
-                token.ThrowIfCancellationRequested();
-                angleSharpDocument.NativeDocument.ToHtml(writer, HtmlMarkupFormatter.Instance);
-                token.ThrowIfCancellationRequested();
+                document.NativeDocument.ToHtml(writer, HtmlMarkupFormatter.Instance);
                 await writer.FlushAsync().ConfigureAwait(false);
             }
 

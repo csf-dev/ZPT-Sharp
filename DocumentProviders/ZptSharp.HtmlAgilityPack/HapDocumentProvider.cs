@@ -14,7 +14,7 @@ namespace ZptSharp.Dom
     /// parsing library. See https://html-agility-pack.net/ and https://github.com/zzzprojects/html-agility-pack for
     /// more information.
     /// </summary>
-    public class HapDocumentProvider : IReadsAndWritesDocument
+    public class HapDocumentProvider : DocumentReaderWriterBase<HapDocument>
     {
         static readonly string[] supportedExtensions = new[] { ".pt", ".htm", ".html" };
 
@@ -27,14 +27,16 @@ namespace ZptSharp.Dom
         /// </summary>
         /// <returns><c>true</c>, if this instance maybe used, <c>false</c> otherwise.</returns>
         /// <param name="filenameOrPath">The filename of a ZPT document.</param>
-        public bool CanReadWriteForFilename(string filenameOrPath)
+        public override bool CanReadWriteForFilename(string filenameOrPath)
         {
             var extension = new FileInfo(filenameOrPath).Extension;
             return supportedExtensions.Any(x => String.Equals(extension, x, StringComparison.InvariantCultureIgnoreCase));
         }
 
         /// <summary>
-        /// Gets a document instance from the specified input stream.
+        /// Implement this method in a derived class to perform custom logic related to reading a document from a stream.
+        /// Derived types should assume that the <paramref name="stream"/> &amp; <paramref name="config"/> parameters have
+        /// been null-checked.  Also, they should assume that the <paramref name="token"/> parameter does not request cancellation.
         /// </summary>
         /// <remarks>
         /// <para>
@@ -46,16 +48,14 @@ namespace ZptSharp.Dom
         /// <param name="config">Rendering configuration.</param>
         /// <param name="sourceInfo">Information which identifies the source of the document.</param>
         /// <param name="token">An object used to cancel the operation if required.</param>
-        public Task<IDocument> GetDocumentAsync(Stream stream,
-                                                RenderingConfig config,
-                                                IDocumentSourceInfo sourceInfo = null,
-                                                CancellationToken token = default)
+        protected override Task<IDocument> GetDocumentProtectedAsync(Stream stream,
+                                                                     RenderingConfig config,
+                                                                     IDocumentSourceInfo sourceInfo,
+                                                                     CancellationToken token)
         {
-            if (stream == null)
-                throw new ArgumentNullException(nameof(stream));
-
             var htmlDoc = new HtmlDocument();
             htmlDoc.Load(stream, config.DocumentEncoding);
+
             IDocument doc = new HapDocument(htmlDoc)
             {
                 SourceInfo = sourceInfo ?? new UnknownSourceInfo()
@@ -64,7 +64,10 @@ namespace ZptSharp.Dom
         }
 
         /// <summary>
-        /// Writes the specified document to a specified output stream.
+        /// Implement this method in a derived class to perform custom logic related to writing a document to a stream.
+        /// Derived types should assume that the <paramref name="document"/> &amp; <paramref name="config"/> parameters
+        /// have been null-checked. The document will also already be converted to <typeparamref name="HapDocument"/>.
+        /// Finally, the <paramref name="token"/> parameter will have already been checked that it does not request cancellation.
         /// </summary>
         /// <remarks>
         /// <para>
@@ -76,20 +79,13 @@ namespace ZptSharp.Dom
         /// <param name="document">The document to write.</param>
         /// <param name="config">Rendering configuration.</param>
         /// <param name="token">An object used to cancel the operation if required.</param>
-        public async Task<Stream> WriteDocumentAsync(IDocument document, RenderingConfig config, CancellationToken token = default)
+        protected override async Task<Stream> WriteDocumentProtectedAsync(HapDocument document, RenderingConfig config, CancellationToken token)
         {
-            if (document == null)
-                throw new ArgumentNullException(nameof(document));
-            if (!(document is HapDocument angleSharpDocument))
-                throw new ArgumentException($"The document must be an instance of {nameof(HapDocument)}.", nameof(document));
-            token.ThrowIfCancellationRequested();
-
             var stream = new MemoryStream();
+
             using(var writer = new StreamWriter(stream, config.DocumentEncoding, BufferSize, true))
             {
-                token.ThrowIfCancellationRequested();
-                angleSharpDocument.NativeDocument.DocumentNode.WriteTo(writer);
-                token.ThrowIfCancellationRequested();
+                document.NativeDocument.DocumentNode.WriteTo(writer);
                 await writer.FlushAsync().ConfigureAwait(false);
             }
 

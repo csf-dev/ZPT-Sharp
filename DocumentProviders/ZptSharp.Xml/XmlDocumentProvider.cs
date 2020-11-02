@@ -15,7 +15,7 @@ namespace ZptSharp.Dom
     /// Framework and dotnet core.
     /// See also: <seealso cref="XDocument"/>
     /// </summary>
-    public class XmlDocumentProvider : IReadsAndWritesDocument
+    public class XmlDocumentProvider : DocumentReaderWriterBase<XmlDocument>
     {
         static readonly string[] supportedExtensions = new[] { ".pt", ".xml", ".xhtml" };
 
@@ -28,14 +28,16 @@ namespace ZptSharp.Dom
         /// </summary>
         /// <returns><c>true</c>, if this instance maybe used, <c>false</c> otherwise.</returns>
         /// <param name="filenameOrPath">The filename of a ZPT document.</param>
-        public bool CanReadWriteForFilename(string filenameOrPath)
+        public override bool CanReadWriteForFilename(string filenameOrPath)
         {
             var extension = new FileInfo(filenameOrPath).Extension;
             return supportedExtensions.Any(x => String.Equals(extension, x, StringComparison.InvariantCultureIgnoreCase));
         }
 
         /// <summary>
-        /// Gets a document instance from the specified input stream.
+        /// Implement this method in a derived class to perform custom logic related to reading a document from a stream.
+        /// Derived types should assume that the <paramref name="stream"/> &amp; <paramref name="config"/> parameters have
+        /// been null-checked.  Also, they should assume that the <paramref name="token"/> parameter does not request cancellation.
         /// </summary>
         /// <remarks>
         /// <para>
@@ -47,20 +49,16 @@ namespace ZptSharp.Dom
         /// <param name="config">Rendering configuration.</param>
         /// <param name="sourceInfo">Information which identifies the source of the document.</param>
         /// <param name="token">An object used to cancel the operation if required.</param>
-        public Task<IDocument> GetDocumentAsync(Stream stream,
-                                                RenderingConfig config,
-                                                IDocumentSourceInfo sourceInfo = null,
-                                                CancellationToken token = default)
+        protected override Task<IDocument> GetDocumentProtectedAsync(Stream stream,
+                                                                     RenderingConfig config,
+                                                                     IDocumentSourceInfo sourceInfo,
+                                                                     CancellationToken token)
         {
-            if (stream == null)
-                throw new ArgumentNullException(nameof(stream));
-            token.ThrowIfCancellationRequested();
-
             using (var reader = new StreamReader(stream, config.DocumentEncoding))
             {
                 var loadOptions = LoadOptions.PreserveWhitespace | LoadOptions.SetLineInfo;
-                token.ThrowIfCancellationRequested();
                 var doc = XDocument.Load(reader, loadOptions);
+
                 IDocument xmlDoc = new XmlDocument(doc)
                 {
                     SourceInfo = sourceInfo ?? new UnknownSourceInfo()
@@ -70,27 +68,23 @@ namespace ZptSharp.Dom
         }
 
         /// <summary>
-        /// Writes the specified document to a specified output stream.
+        /// Implement this method in a derived class to perform custom logic related to writing a document to a stream.
+        /// Derived types should assume that the <paramref name="document"/> &amp; <paramref name="config"/> parameters
+        /// have been null-checked. The document will also already be converted to <typeparamref name="XmlDocument"/>.
+        /// Finally, the <paramref name="token"/> parameter will have already been checked that it does not request cancellation.
         /// </summary>
         /// <returns>A task which provides the output stream.</returns>
         /// <param name="document">The document to write.</param>
         /// <param name="config">Rendering configuration.</param>
         /// <param name="token">An object used to cancel the operation if required.</param>
-        public async Task<Stream> WriteDocumentAsync(IDocument document, RenderingConfig config, CancellationToken token = default)
+        protected override async Task<Stream> WriteDocumentProtectedAsync(XmlDocument document, RenderingConfig config, CancellationToken token)
         {
-            if (document == null)
-                throw new ArgumentNullException(nameof(document));
-            if (!(document is XmlDocument xmlDocument))
-                throw new ArgumentException($"The document must be an instance of {nameof(XmlDocument)}.", nameof(document));
-            token.ThrowIfCancellationRequested();
-
             var stream = new MemoryStream();
+
             using (var writer = new StreamWriter(stream, config.DocumentEncoding, BufferSize, true))
             using (var xmlWriter = GetXmlWriter(config, writer))
             {
-                token.ThrowIfCancellationRequested();
-                xmlDocument.NativeDocument.Save(xmlWriter);
-                token.ThrowIfCancellationRequested();
+                document.NativeDocument.Save(xmlWriter);
                 await writer.FlushAsync().ConfigureAwait(false);
             }
 
