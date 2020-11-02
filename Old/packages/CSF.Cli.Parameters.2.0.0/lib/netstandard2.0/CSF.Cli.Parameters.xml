@@ -1,0 +1,417 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>CSF.Cli.Parameters</name>
+    </assembly>
+    <members>
+        <member name="T:CSF.Cli.IParameterParser">
+            <summary>
+            Base interface for a parameter parser.
+            </summary>
+        </member>
+        <member name="M:CSF.Cli.IParameterParser.GetRegisteredParameters">
+            <summary>
+            Gets a read-only collection of the parameters registered for the current instance.
+            </summary>
+            <returns>A read-only collection of the registered parameters.</returns>
+        </member>
+        <member name="M:CSF.Cli.IParameterParser.Parse(System.Collections.Generic.IList{System.String})">
+            <summary>
+            Parses the given command line arguments into a <see cref="T:CSF.Cli.ParsedParameters"/> instance.
+            </summary>
+            <param name="commandlineArguments">The command line arguments.</param>
+        </member>
+        <member name="T:CSF.Cli.IParameterParser`1">
+            <summary>
+            Interface for an instance of <see cref="T:CSF.Cli.IParameterParser"/> which parses parameters into an object type.
+            </summary>
+        </member>
+        <member name="M:CSF.Cli.IParameterParser`1.Parse(System.Collections.Generic.IList{System.String})">
+            <summary>
+            Parses the given command line arguments into an instance of <typeparamref name="TParsed" />.
+            </summary>
+            <param name="commandlineArguments">The command line arguments.</param>
+        </member>
+        <member name="T:CSF.Cli.ParameterBehaviour">
+            <summary>
+            Enumerates the possible behaviours for an <see cref="T:CSF.Cli.ParameterMapping"/>.
+            </summary>
+        </member>
+        <member name="F:CSF.Cli.ParameterBehaviour.Switch">
+            <summary>
+            Indicates that the parameter is a switch only and may not have an associated value.  It is either present or not
+            present.
+            </summary>
+        </member>
+        <member name="F:CSF.Cli.ParameterBehaviour.ValueOptional">
+            <summary>
+            Indicates that the parameter may have an optional value associated with it but that the value is not mandatory.
+            </summary>
+        </member>
+        <member name="F:CSF.Cli.ParameterBehaviour.ValueRequired">
+            <summary>
+            Indicates that the parameter has an associated value and that this value is mandatory.
+            </summary>
+        </member>
+        <member name="T:CSF.Cli.ParameterMapping">
+            <summary>
+            Represents the mapping of a single parameter to be used in an <see cref="T:IParameterParser{T}"/>
+            </summary>
+        </member>
+        <member name="P:CSF.Cli.ParameterMapping.Identifier">
+            <summary>
+            Gets an object by which the parameter is identified.
+            </summary>
+            <value>The identifier.</value>
+        </member>
+        <member name="P:CSF.Cli.ParameterMapping.ShortNames">
+            <summary>
+            Gets a collection of the short parameter names.
+            </summary>
+            <value>The short names.</value>
+        </member>
+        <member name="P:CSF.Cli.ParameterMapping.LongNames">
+            <summary>
+            Gets a collection of the long parameter names.
+            </summary>
+            <value>The long names.</value>
+        </member>
+        <member name="P:CSF.Cli.ParameterMapping.Behaviour">
+            <summary>
+            Gets the parameter behaviour.
+            </summary>
+            <value>The behaviour.</value>
+        </member>
+        <member name="M:CSF.Cli.ParameterMapping.#ctor(System.Object,CSF.Cli.ParameterBehaviour,System.Collections.Generic.IEnumerable{System.String},System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+            Initializes a new instance of the <see cref="T:CSF.Cli.ParameterMapping"/> class.
+            </summary>
+            <param name="identifier">An object by which the parameter is identified.</param>
+            <param name="behaviour">The parameter behaviour.</param>
+            <param name="shortNames">The paramater short names.</param>
+            <param name="longNames">The parameter long names.</param>
+        </member>
+        <member name="T:CSF.Cli.ParameterParserBuilder">
+            <summary>
+            Builder type creates an instance of the non-generic <see cref="T:CSF.Cli.IParameterParser"/> and registers parameters which
+            are to be parsed.
+            </summary>
+        </member>
+        <member name="M:CSF.Cli.ParameterParserBuilder.AddFlag(System.Object,System.String,System.String)">
+            <summary>
+            Adds a 'flag' type parameter.  This is a parameter which is either present (<c>true</c>) or not present
+            (<c>false</c>).
+            </summary>
+            <remarks>
+            <para>
+            At least one of <paramref name="shortName"/> or <paramref name="longName"/> must contain a non-null value.
+            Short names may only be a single character in length.  Long names may be multiple characters in length, and may
+            contain any alphanumeric characters, as well as the dash and underscore symbols.
+            </para>
+            </remarks>
+            <returns>The current builder instance.</returns>
+            <param name="identifier">An identifier for the parameter added.</param>
+            <param name="shortName">An optional short (single character) name for the parameter.</param>
+            <param name="longName">An optional long name (one or more characters) name for the parameter.</param>
+        </member>
+        <member name="M:CSF.Cli.ParameterParserBuilder.AddFlag(System.Object,System.Collections.Generic.IEnumerable{System.String},System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+            Adds a 'flag' type parameter.  This is a parameter which is either present (<c>true</c>) or not present
+            (<c>false</c>).
+            </summary>
+            <remarks>
+            <para>
+            At least one of <paramref name="shortNames"/> or <paramref name="longNames"/> must contain at least one non-null
+            value. Short names may only be a single character in length.  Long names may be multiple characters in length,
+            and may contain any alphanumeric characters, as well as the dash and underscore symbols.
+            </para>
+            </remarks>
+            <returns>The current builder instance.</returns>
+            <param name="identifier">An identifier for the parameter added.</param>
+            <param name="shortNames">An optional collection of short (single character) names for the parameter.</param>
+            <param name="longNames">An optional collection of long (one or more characters) names for the parameter.</param>
+        </member>
+        <member name="M:CSF.Cli.ParameterParserBuilder.AddValue(System.Object,System.String,System.String,System.Boolean)">
+            <summary>
+            Adds a 'value' type parameter.  This is a parameter which if present, has a string value stored within.
+            </summary>
+            <returns>The current builder instance.</returns>
+            <remarks>
+            <para>
+            At least one of <paramref name="shortName"/> or <paramref name="longName"/> must contain a non-null value.
+            Short names may only be a single character in length.  Long names may be multiple characters in length, and may
+            contain any alphanumeric characters, as well as the dash and underscore symbols.
+            </para>
+            </remarks>
+            <param name="identifier">An identifier for the parameter added.</param>
+            <param name="shortName">An optional short (single character) name for the parameter.</param>
+            <param name="longName">An optional long name (one or more characters) name for the parameter.</param>
+            <param name="optional">A value which indicates whether the value is optional or not (default <c>true</c>).</param>
+        </member>
+        <member name="M:CSF.Cli.ParameterParserBuilder.AddValue(System.Object,System.Collections.Generic.IEnumerable{System.String},System.Collections.Generic.IEnumerable{System.String},System.Boolean)">
+            <summary>
+            Adds a 'value' type parameter.  This is a parameter which if present, has a string value stored within.
+            </summary>
+            <remarks>
+            <para>
+            At least one of <paramref name="shortNames"/> or <paramref name="longNames"/> must contain at least one non-null
+            value. Short names may only be a single character in length.  Long names may be multiple characters in length,
+            and may contain any alphanumeric characters, as well as the dash and underscore symbols.
+            </para>
+            </remarks>
+            <returns>The current builder instance.</returns>
+            <param name="identifier">An identifier for the parameter added.</param>
+            <param name="shortNames">An optional collection of short (single character) names for the parameter.</param>
+            <param name="longNames">An optional collection of long (one or more characters) names for the parameter.</param>
+            <param name="optional">A value which indicates whether the value is optional or not (default <c>true</c>).</param>
+        </member>
+        <member name="M:CSF.Cli.ParameterParserBuilder.Build">
+            <summary>
+            Builds a parameter parser from the current instance.
+            </summary>
+        </member>
+        <member name="M:CSF.Cli.ParameterParserBuilder.CheckNotBuilt">
+            <summary>
+            Checks that the current instance has not already been used to build a parameter parser.
+            </summary>
+        </member>
+        <member name="M:CSF.Cli.ParameterParserBuilder.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:CSF.Cli.ParameterParserBuilder"/> class.
+            </summary>
+        </member>
+        <member name="T:CSF.Cli.ParameterParserBuilder`1">
+            <summary>
+            Builder type creates an instance of the generic <see cref="T:IParameterParser{T}"/> and registers mappings
+            between object properties and parameters.
+            </summary>
+        </member>
+        <member name="M:CSF.Cli.ParameterParserBuilder`1.AddFlag(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},System.String,System.String)">
+            <summary>
+            Adds a 'flag' type parameter.  This is a parameter which is either present (<c>true</c>) or not present
+            (<c>false</c>).
+            </summary>
+            <remarks>
+            <para>
+            Flag-type parameters are represented by boolean properties on the parsed object.  If the flag is present then
+            the property is set to <c>true</c>.  If the flag is not present then the property value is left unchanged.
+            </para>
+            <para>
+            At least one of <paramref name="shortName"/> or <paramref name="longName"/> must contain a non-null value.
+            Short names may only be a single character in length.  Long names may be multiple characters in length, and may
+            contain any alphanumeric characters, as well as the dash and underscore symbols.
+            </para>
+            </remarks>
+            <returns>The current builder instance.</returns>
+            <param name="propertyExpression">A property expression, indicating a property of a type with which this parameter is associated.</param>
+            <param name="shortName">An optional short (single character) name for the parameter.</param>
+            <param name="longName">An optional long name (one or more characters) name for the parameter.</param>
+        </member>
+        <member name="M:CSF.Cli.ParameterParserBuilder`1.AddFlag(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},System.Collections.Generic.IEnumerable{System.String},System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+            Adds a 'flag' type parameter.  This is a parameter which is either present (<c>true</c>) or not present
+            (<c>false</c>).
+            </summary>
+            <remarks>
+            <para>
+            Flag-type parameters are represented by boolean properties on the parsed object.  If the flag is present then
+            the property is set to <c>true</c>.  If the flag is not present then the property value is left unchanged.
+            </para>
+            <para>
+            At least one of <paramref name="shortNames"/> or <paramref name="longNames"/> must contain at least one non-null
+            value. Short names may only be a single character in length.  Long names may be multiple characters in length,
+            and may contain any alphanumeric characters, as well as the dash and underscore symbols.
+            </para>
+            </remarks>
+            <returns>The current builder instance.</returns>
+            <param name="propertyExpression">A property expression, indicating a property of a type with which this parameter is associated.</param>
+            <param name="shortNames">An optional collection of short (single character) names for the parameter.</param>
+            <param name="longNames">An optional collection of long (one or more characters) names for the parameter.</param>
+        </member>
+        <member name="M:CSF.Cli.ParameterParserBuilder`1.AddValue(System.Linq.Expressions.Expression{System.Func{`0,System.String}},System.String,System.String,System.Boolean)">
+            <summary>
+            Adds a 'value' type parameter.  This is a parameter which if present, has a string value stored within.
+            </summary>
+            <returns>The current builder instance.</returns>
+            <remarks>
+            <para>
+            Value-type parameters are represented by string properties on the parsed object.  If the parameter is present
+            with a value then the property is set to that value.  If no value is present then the behaviour depends upon
+            whether the parameter is marked <paramref name="optional"/> or not.  If the parameter is optional and no value
+            is present (the parameter is presented like a flag), then the property is set to <c>String.Empty</c>.  If the
+            parameter is not optional and no value is present then the property is left unchanged.  In any case; if the
+            parameter is not present at all then the property is lefy unchanged.  For best effect here, ensure that object
+            properties which represent value parameters are initialised in their construction to <c>null</c>.
+            </para>
+            <para>
+            At least one of <paramref name="shortName"/> or <paramref name="longName"/> must contain a non-null value.
+            Short names may only be a single character in length.  Long names may be multiple characters in length, and may
+            contain any alphanumeric characters, as well as the dash and underscore symbols.
+            </para>
+            </remarks>
+            <param name="propertyExpression">A property expression, indicating a property of a type with which this parameter is associated.</param>
+            <param name="shortName">An optional short (single character) name for the parameter.</param>
+            <param name="longName">An optional long name (one or more characters) name for the parameter.</param>
+            <param name="optional">A value which indicates whether the value is optional or not (default <c>true</c>).</param>
+        </member>
+        <member name="M:CSF.Cli.ParameterParserBuilder`1.AddValue(System.Linq.Expressions.Expression{System.Func{`0,System.String}},System.Collections.Generic.IEnumerable{System.String},System.Collections.Generic.IEnumerable{System.String},System.Boolean)">
+            <summary>
+            Adds a 'value' type parameter.  This is a parameter which if present, has a string value stored within.
+            </summary>
+            <remarks>
+            <para>
+            Value-type parameters are represented by string properties on the parsed object.  If the parameter is present
+            with a value then the property is set to that value.  If no value is present then the behaviour depends upon
+            whether the parameter is marked <paramref name="optional"/> or not.  If the parameter is optional and no value
+            is present (the parameter is presented like a flag), then the property is set to <c>String.Empty</c>.  If the
+            parameter is not optional and no value is present then the property is left unchanged.  In any case; if the
+            parameter is not present at all then the property is lefy unchanged.  For best effect here, ensure that object
+            properties which represent value parameters are initialised in their construction to <c>null</c>.
+            </para>
+            <para>
+            At least one of <paramref name="shortNames"/> or <paramref name="longNames"/> must contain at least one non-null
+            value. Short names may only be a single character in length.  Long names may be multiple characters in length,
+            and may contain any alphanumeric characters, as well as the dash and underscore symbols.
+            </para>
+            </remarks>
+            <returns>The current builder instance.</returns>
+            <param name="propertyExpression">A property expression, indicating a property of a type with which this parameter is associated.</param>
+            <param name="shortNames">An optional collection of short (single character) names for the parameter.</param>
+            <param name="longNames">An optional collection of long (one or more characters) names for the parameter.</param>
+            <param name="optional">A value which indicates whether the value is optional or not (default <c>true</c>).</param>
+        </member>
+        <member name="M:CSF.Cli.ParameterParserBuilder`1.RemainingArguments(System.Linq.Expressions.Expression{System.Func{`0,System.Collections.Generic.IList{System.String}}})">
+            <summary>
+            Indicates a property in which to store any remaining non-parameter arguments received on the commandline.
+            </summary>
+            <remarks>
+            <para>
+            Not all arguments passed on the commandline are parameters, some may be arguments with meaning based upon their
+            position.  This method indicates a property of the parsed object which will be populated with those remaining
+            arguments.  This property must be an <c>System.Collections.Generic.IList&lt;System.String&gt;</c>.
+            </para>
+            </remarks>
+            <returns>The current builder instance.</returns>
+            <param name="propertyExpression">A property expression, indicating a property of a type with which this parameter is associated.</param>
+        </member>
+        <member name="M:CSF.Cli.ParameterParserBuilder`1.Build">
+            <summary>
+            Builds a parameter parser from the current instance.
+            </summary>
+        </member>
+        <member name="M:CSF.Cli.ParameterParserBuilder`1.CheckNotBuilt">
+            <summary>
+            Checks that the current instance has not already been used to build a parameter parser.
+            </summary>
+        </member>
+        <member name="M:CSF.Cli.ParameterParserBuilder`1.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:CSF.Cli.ParameterParserBuilder{TParsed}"/> class.
+            </summary>
+        </member>
+        <member name="T:CSF.Cli.ParsedParameters">
+            <summary>
+            Represents the results of a <see cref="T:CSF.Cli.IParameterParser"/>'s parsing activity.  Contains the parameters that were
+            parsed and their values.
+            </summary>
+        </member>
+        <member name="M:CSF.Cli.ParsedParameters.HasParameter(System.Object)">
+            <summary>
+            Determines whether this instance has a parameter with the specified identifier.
+            </summary>
+            <returns><c>true</c> if this instance has a parameter with the specified identifier; otherwise, <c>false</c>.</returns>
+            <param name="identifier">Identifier.</param>
+        </member>
+        <member name="M:CSF.Cli.ParsedParameters.GetParameterValue(System.Object)">
+            <summary>
+            Gets the value for a 'value type' parameter.
+            </summary>
+            <returns>The parameter value.</returns>
+            <param name="identifier">Identifier.</param>
+        </member>
+        <member name="M:CSF.Cli.ParsedParameters.GetRemainingArguments">
+            <summary>
+            Gets a collection of the remaining <c>System.String</c> positional arguments, which are not parameters.
+            </summary>
+            <returns>The remaining arguments.</returns>
+        </member>
+        <member name="M:CSF.Cli.ParsedParameters.#ctor(System.Collections.Generic.IEnumerable{System.Object},System.Collections.Generic.IDictionary{System.Object,System.String},System.Collections.Generic.IList{System.String})">
+            <summary>
+            Initializes a new instance of the <see cref="T:CSF.Cli.ParsedParameters"/> class.
+            </summary>
+            <param name="flagParameters">Flag parameters.</param>
+            <param name="valueParameters">Value parameters.</param>
+            <param name="remainingArguments">Remaining arguments.</param>
+        </member>
+        <member name="T:CSF.Cli.PosixParameterParser">
+            <summary>
+            Implementation of an <see cref="T:CSF.Cli.IParameterParser"/> that deals with POSIX-style parameters.
+            </summary>
+        </member>
+        <member name="M:CSF.Cli.PosixParameterParser.GetRegisteredParameters">
+            <summary>
+            Gets a read-only collection of the parameters registered for the current instance.
+            </summary>
+            <returns>A read-only collection of the registered parameters.</returns>
+        </member>
+        <member name="M:CSF.Cli.PosixParameterParser.Parse(System.Collections.Generic.IList{System.String})">
+            <summary>
+            Parses the given command line arguments into a <see cref="T:CSF.Cli.ParsedParameters"/> instance.
+            </summary>
+            <param name="commandlineArguments">The command line arguments.</param>
+        </member>
+        <member name="M:CSF.Cli.PosixParameterParser.NormaliseNames(System.Collections.Generic.IEnumerable{CSF.Cli.ParameterMapping},System.Collections.Generic.IDictionary{System.String,CSF.Cli.ParameterMapping}@,System.Collections.Generic.IDictionary{System.String,CSF.Cli.ParameterMapping}@)">
+            <summary>
+            Normalises the parameter names and returns two <c>IDictionary&lt;string,ParameterMapping&gt;</c> instances,
+            indicating all of the parameter mappings by their long names and short names.
+            </summary>
+            <param name="registeredParameters">The registered parameters.</param>
+            <param name="shortNames">The parameters by their short names.</param>
+            <param name="longNames">The parameters by their long names.</param>
+        </member>
+        <member name="M:CSF.Cli.PosixParameterParser.GetMapping(System.String,System.Collections.Generic.IDictionary{System.String,CSF.Cli.ParameterMapping},System.Collections.Generic.IDictionary{System.String,CSF.Cli.ParameterMapping})">
+            <summary>
+            Gets the appropriate parameter mapping.
+            </summary>
+            <returns>The mapping, or a <c>null</c> reference if no mapping matches the argument.</returns>
+            <param name="argument">The command line argument.</param>
+            <param name="shortNames">The mappings, indexed by their short names.</param>
+            <param name="longNames">The mappings, indexed by their long names.</param>
+        </member>
+        <member name="M:CSF.Cli.PosixParameterParser.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:CSF.Cli.PosixParameterParser"/> class.
+            </summary>
+        </member>
+        <member name="M:CSF.Cli.PosixParameterParser.#ctor(System.Collections.Generic.IDictionary{System.Object,CSF.Cli.ParameterMapping})">
+            <summary>
+            Initializes a new instance of the <see cref="T:CSF.Cli.PosixParameterParser"/> class.
+            </summary>
+            <param name="mappings">The parameter mappings.</param>
+        </member>
+        <member name="T:CSF.Cli.PosixParameterParser`1">
+            <summary>
+            Generic implementation of <see cref="T:CSF.Cli.PosixParameterParser"/>, which parses parameters into object instances.
+            </summary>
+        </member>
+        <member name="M:CSF.Cli.PosixParameterParser`1.GetRegisteredParameters">
+            <summary>
+            Gets a read-only collection of the parameters registered for the current instance.
+            </summary>
+            <returns>A read-only collection of the registered parameters.</returns>
+        </member>
+        <member name="M:CSF.Cli.PosixParameterParser`1.Parse(System.Collections.Generic.IList{System.String})">
+            <summary>
+            Parses the given command line arguments into an instance of <typeparamref name="TParsed" />.
+            </summary>
+            <param name="commandlineArguments">The command line arguments.</param>
+        </member>
+        <member name="M:CSF.Cli.PosixParameterParser`1.#ctor(System.Collections.Generic.Dictionary{System.Reflection.PropertyInfo,CSF.Cli.ParameterMapping},System.Reflection.PropertyInfo)">
+            <summary>
+            Initializes a new instance of the <see cref="T:CSF.Cli.PosixParameterParser{TParsed}"/> class.
+            </summary>
+            <param name="mappings">The parameter mappings.</param>
+            <param name="remainingArguments">An optional <c>System.Reflection.PropertyInfo</c> indicating where to store the remaining arguments.</param>
+        </member>
+    </members>
+</doc>

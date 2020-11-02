@@ -1,0 +1,343 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>CSF.Reflection</name>
+    </assembly>
+    <members>
+        <member name="T:CSF.Reflection.AssemblyExtensions">
+            <summary>
+            Extension methods for the Assembly type.
+            </summary>
+        </member>
+        <member name="M:CSF.Reflection.AssemblyExtensions.GetManifestResourceText(System.Reflection.Assembly,System.String)">
+            <summary>
+            Extension method reads a text-based resource stored within an assembly.
+            </summary>
+            <returns>
+            The manifest resource text.
+            </returns>
+            <param name='assembly'>
+            The assembly
+            </param>
+            <param name='resourceName'>
+            Resource name.
+            </param>
+        </member>
+        <member name="M:CSF.Reflection.AssemblyExtensions.GetManifestResourceText(System.Reflection.Assembly,System.Type,System.String)">
+            <summary>
+            Extension method reads a text-based resource stored within an assembly.
+            </summary>
+            <returns>
+            The manifest resource text.
+            </returns>
+            <param name='assembly'>
+            The assembly.
+            </param>
+            <param name='type'>
+            A type by which to namespace the resource.
+            </param>
+            <param name='resourceName'>
+            Resource name.
+            </param>
+        </member>
+        <member name="M:CSF.Reflection.AssemblyExtensions.GetResourceText(System.IO.Stream)">
+            <summary>
+            Private helper method gets the textual content of a stream.
+            </summary>
+            <returns>
+            The text content of the stream.
+            </returns>
+            <param name='resourceStream'>
+            A resource stream.
+            </param>
+        </member>
+        <member name="T:CSF.Reflection.Reflect">
+            <summary>
+            Helper class for reflection-related tasks.
+            </summary>
+        </member>
+        <member name="M:CSF.Reflection.Reflect.Member``1(System.Linq.Expressions.Expression{System.Func{``0,System.Object}})">
+            <summary>
+            Gets a <see cref="T:System.Reflection.MemberInfo"/> from an expression that indicates a member of a specified type.
+            </summary>
+            <returns>
+            The member information.
+            </returns>
+            <param name='expression'>
+            The lambda expression that indicates a type, such as <c>x => x.MyProperty</c>.
+            </param>
+            <typeparam name='TObject'>
+            The type that contains the member which we are interested in.
+            </typeparam>
+            <exception cref='T:System.ArgumentNullException'>
+            Is thrown when an argument passed to a method is invalid because it is <see langword="null" /> .
+            </exception>
+            <exception cref='T:System.ArgumentException'>
+            Is thrown when an argument passed to a method is invalid.
+            </exception>
+        </member>
+        <member name="M:CSF.Reflection.Reflect.Member``2(System.Linq.Expressions.Expression{System.Func{``0,``1}})">
+            <summary>
+            Gets a <see cref="T:System.Reflection.MemberInfo"/> from an expression that indicates a member of a specified type.
+            </summary>
+            <returns>
+            The member information.
+            </returns>
+            <param name='expression'>
+            The lambda expression that indicates a type, such as <c>x => x.MyProperty</c>.
+            </param>
+            <typeparam name='TObject'>
+            The type that contains the member which we are interested in.
+            </typeparam>
+            <typeparam name='TReturn'>
+            The return/output type of the member.
+            </typeparam>
+            <exception cref='T:System.ArgumentNullException'>
+            Is thrown when an argument passed to a method is invalid because it is <see langword="null" /> .
+            </exception>
+            <exception cref='T:System.ArgumentException'>
+            Is thrown when an argument passed to a method is invalid.
+            </exception>
+        </member>
+        <member name="M:CSF.Reflection.Reflect.Member``1(System.Linq.Expressions.Expression{System.Action{``0}})">
+            <summary>
+            Gets a <see cref="T:System.Reflection.MemberInfo"/> from an expression that indicates a member of a specified type.
+            </summary>
+            <returns>
+            The member information.
+            </returns>
+            <param name='expression'>
+            The lambda expression that indicates a type, such as <c>x => x.MyProperty</c>.
+            </param>
+            <typeparam name='TObject'>
+            The type that contains the member which we are interested in.
+            </typeparam>
+            <exception cref='T:System.ArgumentNullException'>
+            Is thrown when an argument passed to a method is invalid because it is <see langword="null" /> .
+            </exception>
+            <exception cref='T:System.ArgumentException'>
+            Is thrown when an argument passed to a method is invalid.
+            </exception>
+        </member>
+        <member name="M:CSF.Reflection.Reflect.Property``1(System.Linq.Expressions.Expression{System.Func{``0,System.Object}})">
+            <summary>
+            Gets a <see cref="T:System.Reflection.PropertyInfo"/> from an expression that indicates a member of a specified type.
+            </summary>
+            <returns>
+            The property information.
+            </returns>
+            <param name='expression'>
+            The lambda expression that indicates a type, such as <c>x => x.MyProperty</c>.
+            </param>
+            <typeparam name='TObject'>
+            The type that contains the member which we are interested in.
+            </typeparam>
+            <exception cref='T:System.ArgumentNullException'>
+            Is thrown when an argument passed to a method is invalid because it is <see langword="null" /> .
+            </exception>
+            <exception cref='T:System.ArgumentException'>
+            Is thrown when an argument passed to a method is invalid.
+            </exception>
+        </member>
+        <member name="M:CSF.Reflection.Reflect.Property``2(System.Linq.Expressions.Expression{System.Func{``0,``1}})">
+            <summary>
+            Gets a <see cref="T:System.Reflection.PropertyInfo"/> from an expression that indicates a member of a specified type.
+            </summary>
+            <returns>
+            The property information.
+            </returns>
+            <param name='expression'>
+            The lambda expression that indicates a type, such as <c>x => x.MyProperty</c>.
+            </param>
+            <typeparam name='TObject'>
+            The type that contains the member which we are interested in.
+            </typeparam>
+            <typeparam name='TReturn'>
+            The return type of the property which we are reflecting.
+            </typeparam>
+            <exception cref='T:System.ArgumentNullException'>
+            Is thrown when an argument passed to a method is invalid because it is <see langword="null" /> .
+            </exception>
+            <exception cref='T:System.ArgumentException'>
+            Is thrown when an argument passed to a method is invalid.
+            </exception>
+        </member>
+        <member name="M:CSF.Reflection.Reflect.Field``1(System.Linq.Expressions.Expression{System.Func{``0,System.Object}})">
+            <summary>
+            Gets a <see cref="T:System.Reflection.FieldInfo"/> from an expression that indicates a member of a specified type.
+            </summary>
+            <returns>
+            The field information.
+            </returns>
+            <param name='expression'>
+            The lambda expression that indicates a type, such as <c>x => x.MyProperty</c>.
+            </param>
+            <typeparam name='TObject'>
+            The type that contains the member which we are interested in.
+            </typeparam>
+            <exception cref='T:System.ArgumentNullException'>
+            Is thrown when an argument passed to a method is invalid because it is <see langword="null" /> .
+            </exception>
+            <exception cref='T:System.ArgumentException'>
+            Is thrown when an argument passed to a method is invalid.
+            </exception>
+        </member>
+        <member name="M:CSF.Reflection.Reflect.Field``2(System.Linq.Expressions.Expression{System.Func{``0,``1}})">
+            <summary>
+            Gets a <see cref="T:System.Reflection.FieldInfo"/> from an expression that indicates a member of a specified type.
+            </summary>
+            <returns>
+            The field information.
+            </returns>
+            <param name='expression'>
+            The lambda expression that indicates a type, such as <c>x => x.MyProperty</c>.
+            </param>
+            <typeparam name='TObject'>
+            The type that contains the member which we are interested in.
+            </typeparam>
+            <typeparam name='TReturn'>
+            The return type of the field which we are reflecting.
+            </typeparam>
+            <exception cref='T:System.ArgumentNullException'>
+            Is thrown when an argument passed to a method is invalid because it is <see langword="null" /> .
+            </exception>
+            <exception cref='T:System.ArgumentException'>
+            Is thrown when an argument passed to a method is invalid.
+            </exception>
+        </member>
+        <member name="M:CSF.Reflection.Reflect.Method``1(System.Linq.Expressions.Expression{System.Func{``0,System.Object}})">
+            <summary>
+            Gets a <see cref="T:System.Reflection.MethodInfo"/> from an expression that indicates a member of a specified type.
+            </summary>
+            <returns>
+            The method information.
+            </returns>
+            <param name='expression'>
+            The lambda expression that indicates a type, such as <c>x => x.MyProperty</c>.
+            </param>
+            <typeparam name='TObject'>
+            The type that contains the member which we are interested in.
+            </typeparam>
+            <exception cref='T:System.ArgumentNullException'>
+            Is thrown when an argument passed to a method is invalid because it is <see langword="null" /> .
+            </exception>
+            <exception cref='T:System.ArgumentException'>
+            Is thrown when an argument passed to a method is invalid.
+            </exception>
+        </member>
+        <member name="M:CSF.Reflection.Reflect.Method``2(System.Linq.Expressions.Expression{System.Func{``0,``1}})">
+            <summary>
+            Gets a <see cref="T:System.Reflection.MethodInfo"/> from an expression that indicates a member of a specified type.
+            </summary>
+            <returns>
+            The method information.
+            </returns>
+            <param name='expression'>
+            The lambda expression that indicates a type, such as <c>x => x.MyProperty</c>.
+            </param>
+            <typeparam name='TObject'>
+            The type that contains the member which we are interested in.
+            </typeparam>
+            <typeparam name='TReturn'>
+            The return type of the method which we are reflecting.
+            </typeparam>
+            <exception cref='T:System.ArgumentNullException'>
+            Is thrown when an argument passed to a method is invalid because it is <see langword="null" /> .
+            </exception>
+            <exception cref='T:System.ArgumentException'>
+            Is thrown when an argument passed to a method is invalid.
+            </exception>
+        </member>
+        <member name="M:CSF.Reflection.Reflect.Method``1(System.Linq.Expressions.Expression{System.Action{``0}})">
+            <summary>
+            Gets a <see cref="T:System.Reflection.MethodInfo"/> from an expression that indicates a member of a specified type.
+            </summary>
+            <returns>
+            The method information.
+            </returns>
+            <param name='expression'>
+            The lambda expression that indicates a type, such as <c>x => x.MyProperty</c>.
+            </param>
+            <typeparam name='TObject'>
+            The type that contains the member which we are interested in.
+            </typeparam>
+            <exception cref='T:System.ArgumentNullException'>
+            Is thrown when an argument passed to a method is invalid because it is <see langword="null" /> .
+            </exception>
+            <exception cref='T:System.ArgumentException'>
+            Is thrown when an argument passed to a method is invalid.
+            </exception>
+        </member>
+        <member name="M:CSF.Reflection.Reflect.IsMono">
+            <summary>
+            Determines whether the application is executing using the Mono framework.  This uses the supported manner of
+            detecting mono.
+            </summary>
+            <returns>
+            <c>true</c> if the application is executing on the mono framework; otherwise, <c>false</c>.
+            </returns>
+        </member>
+        <member name="M:CSF.Reflection.Reflect.Member(System.Linq.Expressions.Expression)">
+            <summary>
+            Gets a <see cref="T:System.Reflection.MemberInfo"/> from the given linq expression.
+            </summary>
+            <remarks>
+            <para>
+            This private method wraps the differing mechanisms by which static reflection can be performed:
+            </para>
+            <list type="number">
+            <item>
+            Determine whether or not the expression is a unary (value type) expression or not.  If it is then use the
+            operand for further analysis.
+            </item>
+            <item>
+            Determine whether the expression-to-analyse is a member expression or a method call expression.
+            </item>
+            <item>
+            Cast the expression appropriately and retirve the member.
+            </item>
+            </list>
+            </remarks>
+            <param name='expression'>
+            The expression to parse for a member.
+            </param>
+            <exception cref="T:System.ArgumentNullException">
+            Raised if the <paramref name="expression"/> is null.
+            </exception>
+            <exception cref="T:System.ArgumentException">
+            Raised if the <paramref name="expression"/> does not reflect a single member.
+            </exception>
+        </member>
+        <member name="T:CSF.Reflection.TypeExtensions">
+            <summary>
+            Helper type containing extension methods for <see cref="T:System.Type"/>.
+            </summary>
+        </member>
+        <member name="M:CSF.Reflection.TypeExtensions.GetImplementors(System.Type,System.Reflection.Assembly)">
+            <summary>
+            Gets a collection of <c>System.Type</c> that are implementors (subclasses) of the given <paramref name="type"/>.
+            </summary>
+            <remarks>
+            <para>
+            This method only searches for subclasses within a specific given assembly.
+            </para>
+            </remarks>
+            <returns>
+            A collection of <see cref="T:System.Type"/>.
+            </returns>
+            <param name='type'>
+            The type for which to find subclasses.
+            </param>
+            <param name='searchAssembly'>
+            The <see cref="T:System.Reflection.Assembly"/> in which to search for subclasses of <paramref name="type"/>.
+            </param>
+        </member>
+        <member name="M:CSF.Reflection.TypeExtensions.GetDefaultValue(System.Type)">
+            <summary>
+            Gets the default value for the given type.
+            </summary>
+            <returns>The default value.</returns>
+            <param name="type">Type.</param>
+        </member>
+    </members>
+</doc>

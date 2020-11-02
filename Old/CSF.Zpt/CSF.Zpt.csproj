@@ -63,7 +63,6 @@
     <Compile Include="Rendering\ElementExtensions.cs" />
     <Compile Include="Metal\MacroExpander.cs" />
     <Compile Include="Metal\MacroFinder.cs" />
-    <Compile Include="Metal\MetalVisitor.cs" />
     <Compile Include="Rendering\RenderingContext.cs" />
     <Compile Include="Tal\TalVisitor.cs" />
     <Compile Include="Tal\IAttributeHandler.cs" />

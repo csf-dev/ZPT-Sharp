@@ -19,7 +19,17 @@ namespace ZptSharp.Metal
         /// </summary>
         /// <returns>The METAL context processor.</returns>
         public IProcessesExpressionContext GetMetalContextProcessor()
+        {
+            var service = GetMacroUsageContextProcessor();
+            service = GetAddDefinedMacroToGlobalScopeProcessorDecorator(service);
+            return service;
+        }
+
+        IProcessesExpressionContext GetMacroUsageContextProcessor()
             => new MacroUsageContextProcessor(specProvider, expressionEvaluator, macroExpander);
+
+        IProcessesExpressionContext GetAddDefinedMacroToGlobalScopeProcessorDecorator(IProcessesExpressionContext wrapped)
+            => new AddDefinedMacroToGlobalScopeProcessorDecorator(specProvider, wrapped);
 
         /// <summary>
         /// Initializes a new instance of the <see cref="MetalContextProcessorFactory"/> class.

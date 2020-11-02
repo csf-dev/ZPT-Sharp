@@ -1,0 +1,191 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>CSF.IniDocuments</name>
+    </assembly>
+    <members>
+        <member name="T:CSF.IniDocuments.IIniDocument">
+             <summary>
+             Interface for a document that implements the INI file specification.
+             </summary>
+            </member>
+        <member name="P:CSF.IniDocuments.IIniDocument.Sections">
+             <summary>
+             Gets or sets the sections that this document contains.
+             </summary>
+             <value>
+             A collection of the sections.
+             </value>
+            </member>
+        <member name="M:CSF.IniDocuments.IIniDocument.Write(System.String)">
+             <summary>
+             Write this instance (as an INI-formatted file) to the specified path.
+             </summary>
+             <param name="filePath">
+             The path to save the written file.
+             </param>
+            </member>
+        <member name="M:CSF.IniDocuments.IIniDocument.Write">
+             <summary>
+             Write this instance to a string (as INI-formatted data).
+             </summary>
+            </member>
+        <member name="M:CSF.IniDocuments.IIniDocument.Write(System.IO.TextWriter)">
+             <summary>
+             Write this instance (as INI-formatted data) to the specified <see cref="T:System.IO.TextWriter" />.
+             </summary>
+             <param name="writer">
+             A <see cref="T:System.IO.TextWriter" />.
+             </param>
+            </member>
+        <member name="T:CSF.IniDocuments.IIniSection">
+             <summary>
+             Interface for an INI file section.
+             </summary>
+            </member>
+        <member name="M:CSF.IniDocuments.IIniSection.WriteTo(System.IO.TextWriter,System.String)">
+             <summary>
+             Writes this instance to the given <see cref="T:System.IO.TextWriter" />.
+             </summary>
+             <param name="writer">
+             A <see cref="T:System.IO.TextWriter" /> to write the output to.
+             </param>
+             <param name="name">
+             The name of this section.
+             </param>
+            </member>
+        <member name="T:CSF.IniDocuments.IniDocument">
+             <summary>
+             <para>Represents an <c>.ini</c>-style document, such as might be used for a configuration file.</para>
+             </summary>
+            </member>
+        <member name="P:CSF.IniDocuments.IniDocument.Sections">
+             <summary>
+             <para>Gets or sets a collection of the sections contained by the current instance.</para>
+             </summary>
+            </member>
+        <member name="M:CSF.IniDocuments.IniDocument.Write(System.String)">
+             <summary>
+             Write this instance (as an INI-formatted file) to the specified path.
+             </summary>
+             <param name="filePath">
+             The path to save the written file.
+             </param>
+            </member>
+        <member name="M:CSF.IniDocuments.IniDocument.Write">
+             <summary>
+             Write this instance to a string (as INI-formatted data).
+             </summary>
+            </member>
+        <member name="M:CSF.IniDocuments.IniDocument.Write(System.IO.TextWriter)">
+             <summary>
+             Write this instance (as INI-formatted data) to the specified <see cref="T:System.IO.TextWriter" />.
+             </summary>
+             <param name="writer">
+             A <see cref="T:System.IO.TextWriter" />.
+             </param>
+            </member>
+        <member name="M:CSF.IniDocuments.IniDocument.#ctor">
+             <summary>
+             <para>Initialises the current instance.</para>
+             </summary>
+            </member>
+        <member name="M:CSF.IniDocuments.IniDocument.Read(System.IO.FileInfo)">
+             <summary>
+             Creates a new <see cref="T:CSF.IniDocuments.IIniDocument" /> using information from a file.
+             </summary>
+             <param name="path">
+             The path from which to read the data.
+             </param>
+            </member>
+        <member name="M:CSF.IniDocuments.IniDocument.Read(System.IO.TextReader)">
+             <summary>
+             Creates a new <see cref="T:CSF.IniDocuments.IIniDocument" /> using data from a <see cref="T:System.IO.TextReader" />.
+             </summary>
+             <param name="reader">
+             A <see cref="T:System.IO.TextReader" /> that will supply the input data.
+             </param>
+            </member>
+        <member name="M:CSF.IniDocuments.IniDocument.Read(System.String)">
+             <summary>
+             Creates a new <see cref="T:CSF.IniDocuments.IIniDocument" /> using data from a string.
+             </summary>
+             <param name="data">
+             The string data to read.
+             </param>
+            </member>
+        <member name="T:CSF.IniDocuments.IniSection">
+             <summary>
+             <para>Represents a section of configuration settings within an <see cref="T:CSF.IniDocuments.IniDocument" />.</para>
+             </summary>
+            </member>
+        <member name="P:CSF.IniDocuments.IniSection.Item(System.String)">
+             <summary>
+             <para>Gets and sets settings by their key.</para>
+             </summary>
+             <param name="key">
+             A <see cref="T:System.String" />
+             </param>
+            </member>
+        <member name="M:CSF.IniDocuments.IniSection.Add(System.String,System.String)">
+             <summary>
+             <para>Adds a new setting to this instance.</para>
+             </summary>
+             <param name="key">
+             A <see cref="T:System.String" />
+             </param>
+             <param name="value">
+             A <see cref="T:System.String" />
+             </param>
+            </member>
+        <member name="M:CSF.IniDocuments.IniSection.Remove(System.String)">
+             <summary>
+             <para>Removes a key from the current instance.</para>
+             </summary>
+             <param name="key">
+             A <see cref="T:System.String" />
+             </param>
+             <returns>
+             A <see cref="T:System.Boolean" />
+             </returns>
+            </member>
+        <member name="M:CSF.IniDocuments.IniSection.WriteTo(System.IO.TextWriter,System.String)">
+             <summary>
+             Writes this instance to the given <see cref="T:System.IO.TextWriter" />.
+             </summary>
+             <param name="writer">
+             A <see cref="T:System.IO.TextWriter" /> to write the output to.
+             </param>
+             <param name="name">
+             The name of this section.
+             </param>
+            </member>
+        <member name="M:CSF.IniDocuments.IniSection.WriteTo(System.IO.TextWriter)">
+             <summary>
+             Writes this instance to the given <see cref="T:System.IO.TextWriter" />.
+             </summary>
+             <param name="writer">
+             A <see cref="T:System.IO.TextWriter" /> to write the output to.
+             </param>
+            </member>
+        <member name="M:CSF.IniDocuments.IniSection.ValidateKey(System.String)">
+             <summary>
+             Validates a string key.
+             </summary>
+             <param name="key">
+             The key to validate
+             </param>
+             <exception cref="T:System.ArgumentNullException">
+             Is thrown if <paramref name="key" /> is null.
+             </exception>
+             <exception cref="T:System.ArgumentException">
+             Is thrown if <paramref name="key" /> is not a valid key within an INI document.
+             </exception>
+            </member>
+        <member name="M:CSF.IniDocuments.IniSection.#ctor">
+             <summary>
+             <para>Initialises the current instance.</para>
+             </summary>
+            </member>
+    </members>
+</doc>

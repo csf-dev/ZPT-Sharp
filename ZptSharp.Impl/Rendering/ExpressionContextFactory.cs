@@ -37,11 +37,11 @@ namespace ZptSharp.Rendering
                                                object model,
                                                ExpressionContext parentContext = null)
         {
-            return new ExpressionContext(parentContext?.LocalDefinitions,
+            return new ExpressionContext(element,
+                                         parentContext?.LocalDefinitions,
                                          parentContext?.GlobalDefinitions,
                                          parentContext?.Repetitions)
             {
-                CurrentElement = element,
                 Model = model,
                 TemplateDocument = document
             };

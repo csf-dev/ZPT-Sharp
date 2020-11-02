@@ -6,8 +6,8 @@ using ZptSharp.Expressions;
 namespace ZptSharp.Metal
 {
     /// <summary>
-    /// An object which expands a <see cref="MetalMacro"/>.  Expansion is the process of filling any slots
-    /// and applying macro extension (where applicable).
+    /// An object which expands a <see cref="MetalMacro"/>.  Expansion is the process applying macro
+    /// extension (where applicable) and of filling any defined slots.
     /// </summary>
     public interface IExpandsMacro
     {
