@@ -1,7 +1,7 @@
 ﻿using System;
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using ZptSharp.Dom;
 using ZptSharp.Expressions;
 using ZptSharp.Rendering;
 
@@ -25,7 +25,7 @@ namespace ZptSharp.Metal
     public class MacroUsageContextProcessor : IProcessesExpressionContext
     {
         readonly IGetsMetalAttributeSpecs specProvider;
-        readonly IEvaluatesExpression expressionEvaluator;
+        readonly IGetsMacro macroProvider;
         readonly IExpandsMacro macroExpander;
 
         /// <summary>
@@ -36,54 +36,35 @@ namespace ZptSharp.Metal
         /// <param name="token">An optional cancellation token.</param>
         public async Task<ExpressionContextProcessingResult> ProcessContextAsync(ExpressionContext context, CancellationToken token = default)
         {
-            var useMacroAttribute = context.CurrentElement.Attributes
-                .FirstOrDefault(x => x.Matches(specProvider.UseMacro));
+            var macro = await macroProvider.GetMacroAsync(context.CurrentElement,
+                                                          context,
+                                                          specProvider.UseMacro,
+                                                          token);
 
-            if (useMacroAttribute != null)
-                await ReplaceCurrentElementWithExpandedMacroAsync(context, useMacroAttribute.Value, token);
+            if (macro != null)
+                await ReplaceCurrentElementWithExpandedMacroAsync(context, macro, token);
 
             return new ExpressionContextProcessingResult();
         }
 
-        /// <summary>
-        /// Gets the macro using an expression in the use-macro attribute, performs expansion upon it
-        /// and then replaces the current DOM element in the expression context with the expanded
-        /// macro's root element.
-        /// </summary>
-        /// <param name="context">The expression context.</param>
-        /// <param name="macroExpression">The TALES expression which indicates the macro to use.</param>
-        /// <param name="token">A cancellation token.</param>
-        async Task ReplaceCurrentElementWithExpandedMacroAsync(ExpressionContext context, string macroExpression, CancellationToken token)
+        async Task ReplaceCurrentElementWithExpandedMacroAsync(ExpressionContext context, MetalMacro macro, CancellationToken token)
         {
-            var macro = await expressionEvaluator.EvaluateExpressionAsync<MetalMacro>(macroExpression, context, token);
-            AssertMacroIsNotNull(macro, context, macroExpression);
             var expandedMacro = await macroExpander.ExpandMacroAsync(macro, context, token);
             context.CurrentElement = expandedMacro.Element;
-        }
-
-        void AssertMacroIsNotNull(MetalMacro macro, ExpressionContext context, string macroExpression)
-        {
-            if (macro != null) return;
-
-            var message = String.Format(Resources.ExceptionMessage.MacroNotFound,
-                                        specProvider.UseMacro.Name,
-                                        context.CurrentElement,
-                                        macroExpression);
-            throw new MacroNotFoundException(message);
         }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="MacroUsageContextProcessor"/> class.
         /// </summary>
         /// <param name="specProvider">Attribute spec provider.</param>
-        /// <param name="expressionEvaluator">Expresson evaluator.</param>
+        /// <param name="macroProvider">Macro provider.</param>
         /// <param name="macroExpander">Macro expander.</param>
         public MacroUsageContextProcessor(IGetsMetalAttributeSpecs specProvider,
-                                          IEvaluatesExpression expressionEvaluator,
+                                          IGetsMacro macroProvider,
                                           IExpandsMacro macroExpander)
         {
             this.specProvider = specProvider ?? throw new ArgumentNullException(nameof(specProvider));
-            this.expressionEvaluator = expressionEvaluator ?? throw new ArgumentNullException(nameof(expressionEvaluator));
+            this.macroProvider = macroProvider ?? throw new ArgumentNullException(nameof(macroProvider));
             this.macroExpander = macroExpander ?? throw new ArgumentNullException(nameof(macroExpander));
         }
     }

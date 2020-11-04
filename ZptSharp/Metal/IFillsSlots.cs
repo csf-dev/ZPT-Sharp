@@ -9,11 +9,10 @@ namespace ZptSharp.Metal
     public interface IFillsSlots
     {
         /// <summary>
-        /// Fills all of the slots in the specified <paramref name="macro"/> using the
-        /// specified <paramref name="fillers"/>.
+        /// Fills all of the slots in the specified <paramref name="macroContext"/>.
         /// </summary>
-        /// <param name="macro">The macro.</param>
-        /// <param name="fillers">Slot fillers.</param>
-        void FillSlots(MetalMacro macro, IDictionary<string,SlotFiller> fillers);
+        /// <param name="macroContext">The macro expansion context.</param>
+        /// <param name="definedSlots">The defined slots which are available to be filled.</param>
+        void FillSlots(MacroExpansionContext macroContext, IEnumerable<Slot> definedSlots);
     }
 }

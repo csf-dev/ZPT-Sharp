@@ -11,7 +11,7 @@ namespace ZptSharp.Metal
     public class MetalContextProcessorFactory : IGetsMetalContextProcessor
     {
         readonly IGetsMetalAttributeSpecs specProvider;
-        readonly IEvaluatesExpression expressionEvaluator;
+        readonly IGetsMacro macroProvider;
         readonly IExpandsMacro macroExpander;
 
         /// <summary>
@@ -26,7 +26,7 @@ namespace ZptSharp.Metal
         }
 
         IProcessesExpressionContext GetMacroUsageContextProcessor()
-            => new MacroUsageContextProcessor(specProvider, expressionEvaluator, macroExpander);
+            => new MacroUsageContextProcessor(specProvider, macroProvider, macroExpander);
 
         IProcessesExpressionContext GetAddDefinedMacroToGlobalScopeProcessorDecorator(IProcessesExpressionContext wrapped)
             => new AddDefinedMacroToGlobalScopeProcessorDecorator(specProvider, wrapped);
@@ -35,14 +35,14 @@ namespace ZptSharp.Metal
         /// Initializes a new instance of the <see cref="MetalContextProcessorFactory"/> class.
         /// </summary>
         /// <param name="specProvider">Spec provider.</param>
-        /// <param name="expressionEvaluator">Expression evaluator.</param>
+        /// <param name="macroProvider">Macro provider.</param>
         /// <param name="macroExpander">Macro expander.</param>
         public MetalContextProcessorFactory(IGetsMetalAttributeSpecs specProvider,
-                                            IEvaluatesExpression expressionEvaluator,
+                                            IGetsMacro macroProvider,
                                             IExpandsMacro macroExpander)
         {
             this.specProvider = specProvider ?? throw new ArgumentNullException(nameof(specProvider));
-            this.expressionEvaluator = expressionEvaluator ?? throw new ArgumentNullException(nameof(expressionEvaluator));
+            this.macroProvider = macroProvider ?? throw new ArgumentNullException(nameof(macroProvider));
             this.macroExpander = macroExpander ?? throw new ArgumentNullException(nameof(macroExpander));
         }
     }
