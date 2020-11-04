@@ -114,21 +114,6 @@ namespace CSF.Zpt.Metal
     }
 
     /// <summary>
-    /// Gets a reference to the macro used by a given rendering context, if any.
-    /// </summary>
-    /// <returns>The used macro element, or a <c>null</c> reference if there is no used macro.</returns>
-    /// <param name="context">The rendering context.</param>
-    public IZptElement GetUsedMacro(IRenderingContext context)
-    {
-      if(context == null)
-      {
-        throw new ArgumentNullException(nameof(context));
-      }
-
-      return _macroFinder.GetUsedMacro(context);
-    }
-
-    /// <summary>
     /// Gets a reference to a 'parent' macro to be extended by the given context, if any.
     /// </summary>
     /// <returns>The to be extended by the current context, or a <c>null</c> reference if there is no macro extension.</returns>

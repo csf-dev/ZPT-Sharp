@@ -12,7 +12,13 @@ namespace ZptSharp.Dom
     /// </summary>
     public class MemoryDocumentReaderWriterRegistry : IRegistersDocumentReaderWriter, IGetsDocumentReaderWriterForFile
     {
-        readonly List<IReadsAndWritesDocument> registry = new List<IReadsAndWritesDocument>();
+        readonly HashSet<IReadsAndWritesDocument> registry = new HashSet<IReadsAndWritesDocument>();
+
+        /// <summary>
+        /// Gets the registry backing store.  This is intentionally not revealed via interfaces.
+        /// </summary>
+        /// <value>The underlying registry backing store.</value>
+        public IReadOnlyCollection<IReadsAndWritesDocument> Registry => registry;
 
         /// <summary>
         /// Gets the document reader/writer for the specified filename.
@@ -20,7 +26,7 @@ namespace ZptSharp.Dom
         /// <returns>The document reader/writer.</returns>
         /// <param name="filenameOrPath">A document filename (optionally with its full path).</param>
         public IReadsAndWritesDocument GetDocumentProvider(string filenameOrPath)
-            => registry.FirstOrDefault(x => x.CanReadWriteForFilename(filenameOrPath));
+            => Registry.FirstOrDefault(x => x.CanReadWriteForFilename(filenameOrPath));
 
         /// <summary>
         /// Registers an implementation of <see cref="T:ZptSharp.Dom.IReadsAndWritesDocument"/>.
@@ -29,7 +35,6 @@ namespace ZptSharp.Dom
         public void RegisterDocumentReaderWriter(IReadsAndWritesDocument readerWriter)
         {
             if (readerWriter == null) throw new ArgumentNullException(nameof(readerWriter));
-            if (registry.Contains(readerWriter)) return;
 
             registry.Add(readerWriter);
         }
