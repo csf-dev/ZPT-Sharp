@@ -3,6 +3,9 @@ using ZptSharp.Rendering;
 
 namespace ZptSharp.Dom
 {
+    /// <summary>
+    /// An object which may provide information about the source of a document (for example a file on disk).
+    /// </summary>
     public interface IHasDocumentSourceInfo
     {
         /// <summary>

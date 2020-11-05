@@ -1,6 +1,9 @@
 ﻿using System;
 namespace ZptSharp
 {
+    /// <summary>
+    /// Base class for an exception raised by the ZPT Sharp rendering process.
+    /// </summary>
     [System.Serializable]
     public class ZptRenderingException : Exception
     {

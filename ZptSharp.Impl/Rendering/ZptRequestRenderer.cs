@@ -44,6 +44,11 @@ namespace ZptSharp.Rendering
                 .ConfigureAwait(false);
         }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ZptRequestRenderer"/> class.
+        /// </summary>
+        /// <param name="serviceProvider">Service provider.</param>
+        /// <param name="rendererFactory">Renderer factory.</param>
         public ZptRequestRenderer(IServiceProvider serviceProvider, IGetsDocumentModifier rendererFactory)
         {
             this.serviceProvider = serviceProvider ?? throw new ArgumentNullException(nameof(serviceProvider));

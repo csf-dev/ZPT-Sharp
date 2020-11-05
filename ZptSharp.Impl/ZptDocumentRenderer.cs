@@ -50,6 +50,8 @@ namespace ZptSharp
         /// Initializes a new instance of the <see cref="ZptDocumentRenderer"/> class.
         /// </summary>
         /// <param name="config">The configuration to be used by this service.</param>
+        /// <param name="serviceProvider">A service provider, from which dependencies may be resolved.</param>
+        /// <param name="readerWriter">An optional document reader/writer service to use to render the current document.</param>
         public ZptDocumentRenderer(RenderingConfig config,
                                    IServiceProvider serviceProvider,
                                    IReadsAndWritesDocument readerWriter = null)

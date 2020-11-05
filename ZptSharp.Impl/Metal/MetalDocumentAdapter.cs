@@ -53,6 +53,7 @@ namespace ZptSharp.Metal
         /// </summary>
         /// <param name="document">The document to be wrapped.</param>
         /// <param name="attributeSearcher">A service which will search for attributes.</param>
+        /// <param name="specProvider">A METAL attribute spec provider.</param>
         public MetalDocumentAdapter(IDocument document,
                                     ISearchesForAttributes attributeSearcher,
                                     IGetsMetalAttributeSpecs specProvider)

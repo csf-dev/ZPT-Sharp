@@ -6,6 +6,12 @@ using ZptSharp.Metal;
 
 namespace ZptSharp.Expressions
 {
+    /// <summary>
+    /// Provides the built-in contexts which are inherent to the TALES specification.
+    /// These are generally accessible as if they were root objects within a path expression.
+    /// If, for example, their names have been overwritten they may alternatively be referenced
+    /// explicitly with the <c>CONTEXTS</c> reserved variable name.
+    /// </summary>
     public class BuiltinContextsProvider : IGetsNamedTalesValue
     {
         readonly ExpressionContext context;
@@ -105,7 +111,10 @@ namespace ZptSharp.Expressions
         /// </summary>
         /// <param name="context">The rendering context.</param>
         /// <param name="config">The configuration.</param>
-        public BuiltinContextsProvider(ExpressionContext context, RenderingConfig config, IGetsMetalDocumentAdapter metalDocumentAdapterFactory)
+        /// <param name="metalDocumentAdapterFactory">A METAL document adapter factory.</param>
+        public BuiltinContextsProvider(ExpressionContext context,
+                                       RenderingConfig config,
+                                       IGetsMetalDocumentAdapter metalDocumentAdapterFactory)
         {
             this.context = context ?? throw new System.ArgumentNullException(nameof(context));
             this.config = config ?? throw new System.ArgumentNullException(nameof(config));

@@ -5,7 +5,7 @@ namespace ZptSharp.Metal
     /// Thrown when a 'use-macro' attribute indicates that a macro should be used, but the macro to use cannot be found.
     /// </summary>
     [System.Serializable]
-    public class MacroNotFoundException : Exception
+    public class MacroNotFoundException : ZptRenderingException
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="MacroNotFoundException"/> class

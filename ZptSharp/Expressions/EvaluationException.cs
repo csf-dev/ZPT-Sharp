@@ -6,7 +6,7 @@ namespace ZptSharp.Expressions
     /// See also: <seealso cref="IEvaluatesExpression"/>.
     /// </summary>
     [System.Serializable]
-    public class EvaluationException : Exception
+    public class EvaluationException : ZptRenderingException
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="EvaluationException"/> class
