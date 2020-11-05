@@ -48,7 +48,16 @@ namespace ZptSharp.Metal
             var attribute = element.GetMatchingAttribute(attributeSpec);
             if (attribute == null) return null;
 
-            var macro = await expressionEvaluator.EvaluateExpressionAsync<MetalMacro>(attribute.Value, context, token);
+            MetalMacro macro = null;
+            try
+            {
+                macro = await expressionEvaluator.EvaluateExpressionAsync<MetalMacro>(attribute.Value, context, token);
+            }
+            catch(Exception ex)
+            {
+                AssertMacroIsNotNull(macro, element, attribute.Value, attributeSpec, ex);
+            }
+
             AssertMacroIsNotNull(macro, element, attribute.Value, attributeSpec);
             return macro;
         }
@@ -56,7 +65,8 @@ namespace ZptSharp.Metal
         void AssertMacroIsNotNull(MetalMacro macro,
                                   IElement element,
                                   string macroExpression,
-                                  AttributeSpec attributeSpec)
+                                  AttributeSpec attributeSpec,
+                                  Exception inner = null)
         {
             if (macro != null) return;
 
@@ -64,6 +74,10 @@ namespace ZptSharp.Metal
                                         attributeSpec.Name,
                                         element,
                                         macroExpression);
+
+            if(inner != null)
+                throw new MacroNotFoundException(message, inner);
+
             throw new MacroNotFoundException(message);
         }
 

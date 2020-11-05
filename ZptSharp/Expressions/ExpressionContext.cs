@@ -59,11 +59,13 @@ namespace ZptSharp.Expressions
         public IDictionary<string, RepetitionInfo> Repetitions { get; }
 
         /// <summary>
-        /// Gets a clone of the current expression context, but using the specified element.
+        /// Gets a clone of the current expression context, but using an alternative specified element.
+        /// Additionally, this is intended to be a child context, such that changes to it are not
+        /// automatically reflected in the parent context (where it is not applicable to do so).
         /// </summary>
         /// <returns>The cloned expression context.</returns>
         /// <param name="element">The element for the cloned context.</param>
-        public ExpressionContext CloneWithDifferentElement(IElement element)
+        public ExpressionContext CreateChild(IElement element)
         {
             return new ExpressionContext(element, LocalDefinitions, GlobalDefinitions, Repetitions)
             {
