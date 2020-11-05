@@ -14,6 +14,7 @@ DEBIAN/
 *.nupkg
 *.nuspec
 .vs/
+mono_crash.*.json
 
 # Archives of binaries
 CSF.Zpt-api-only.zip
