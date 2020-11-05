@@ -33,8 +33,10 @@ namespace ZptSharp.Rendering
             var useSourceAnnotation = request.Config.IncludeSourceAnnotation;
 
             var service = GetBaseService();
-            if (useSourceAnnotation) service = WrapWithSourceAnnotationDecorator(service);
-            service = WrapWithTalDecorator(service);
+            // These are commented-out because they are not yet implemented.  When they are,
+            // these two lines should be restored.
+            //if (useSourceAnnotation) service = WrapWithSourceAnnotationDecorator(service);
+            //service = WrapWithTalDecorator(service);
             service = WrapWithMetalDecorator(service);
 
             return service;
