@@ -13,6 +13,8 @@ namespace ZptSharp.Dom
 
         public override IList<IElement> ChildElements { get; } = new List<IElement>();
 
+        public override void ReplaceWith(IElement replacement) => throw new NotImplementedException();
+
         public StubElement(IDocument document) : base(document) { }
     }
 }

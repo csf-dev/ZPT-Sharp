@@ -32,5 +32,11 @@ namespace ZptSharp.Dom
         /// </summary>
         /// <value>The child elements.</value>
         IList<IElement> ChildElements { get; }
+
+        /// <summary>
+        /// Replaces the current element in the DOM using the replacement element.
+        /// </summary>
+        /// <param name="replacement">The replacement element.</param>
+        void ReplaceWith(IElement replacement);
     }
 }

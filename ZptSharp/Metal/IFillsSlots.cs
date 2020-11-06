@@ -9,7 +9,8 @@ namespace ZptSharp.Metal
     public interface IFillsSlots
     {
         /// <summary>
-        /// Fills all of the slots in the specified <paramref name="macroContext"/>.
+        /// Fills any of the <paramref name="definedSlots"/> using matching slot-fillers
+        /// from the specified <paramref name="macroContext"/>.
         /// </summary>
         /// <param name="macroContext">The macro expansion context.</param>
         /// <param name="definedSlots">The defined slots which are available to be filled.</param>

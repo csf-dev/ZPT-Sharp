@@ -6,6 +6,9 @@ using ZptSharp.Rendering;
 
 namespace ZptSharp.Dom
 {
+    /// <summary>
+    /// Implementation of <see cref="IElement"/> which is based upon an HTML Agility Pack <see cref="HtmlNode"/>.
+    /// </summary>
     public class HapElement : ElementBase
     {
         public HtmlNode NativeElement { get; }
@@ -21,6 +24,12 @@ namespace ZptSharp.Dom
         /// </summary>
         /// <value>The child elements.</value>
         public override IList<IElement> ChildElements { get { throw new NotImplementedException(); } }
+
+        /// <summary>
+        /// Replaces the current element in the DOM using the replacement element.
+        /// </summary>
+        /// <param name="replacement">The replacement element.</param>
+        public override void ReplaceWith(IElement replacement) => throw new NotImplementedException();
 
         /// <summary>
         /// Returns a <see cref="String"/> that represents the current

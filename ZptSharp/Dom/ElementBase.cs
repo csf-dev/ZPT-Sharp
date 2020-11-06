@@ -37,6 +37,12 @@ namespace ZptSharp.Dom
         /// <value>The child elements.</value>
         public abstract IList<IElement> ChildElements { get; }
 
+        /// <summary>
+        /// Replaces the current element in the DOM using the replacement element.
+        /// </summary>
+        /// <param name="replacement">The replacement element.</param>
+        public abstract void ReplaceWith(IElement replacement);
+
         IDocumentSourceInfo IHasDocumentSourceInfo.SourceInfo => SourceInfo.Document;
 
         IEnumerable<IElement> IHasElements.GetChildElements() => ChildElements;
