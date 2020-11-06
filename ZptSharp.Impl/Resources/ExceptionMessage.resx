@@ -28,4 +28,17 @@ Actual type:{3}</value>
 Element:{1}
 Expression:{2}</value>
     </data>
+    <data name="ExpressionTypeMustNotBeNullOrEmpty" xml:space="preserve">
+        <value>The expression type must not be null or an empty string.</value>
+    </data>
+    <data name="NoEvaluatorForExpressionType" xml:space="preserve">
+        <value>There is no evaluator implementation type registered for expressions of type {0}.  You must use `{1}' to register an implementation type for this expression type first.</value>
+    </data>
+    <data name="EvaluatorAlreadyRegistered" xml:space="preserve">
+        <value>There is already an evaluator implementation type registered for expressions of type {0}.  You must either avoid registering an evaluator more than once, or use `{1}' to remove this registration first.</value>
+    </data>
+    <data name="EvaluatorTypeMustImplementInterface" xml:space="preserve">
+        <value>The evaluator implementation type must be an implementation of `{0}'.
+Type registered:{1}</value>
+    </data>
 </root>

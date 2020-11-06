@@ -64,5 +64,29 @@ namespace ZptSharp.Resources {
                 return ResourceManager.GetString("MacroNotFound", resourceCulture);
             }
         }
+        
+        internal static string ExpressionTypeMustNotBeNullOrEmpty {
+            get {
+                return ResourceManager.GetString("ExpressionTypeMustNotBeNullOrEmpty", resourceCulture);
+            }
+        }
+        
+        internal static string NoEvaluatorForExpressionType {
+            get {
+                return ResourceManager.GetString("NoEvaluatorForExpressionType", resourceCulture);
+            }
+        }
+        
+        internal static string EvaluatorAlreadyRegistered {
+            get {
+                return ResourceManager.GetString("EvaluatorAlreadyRegistered", resourceCulture);
+            }
+        }
+        
+        internal static string EvaluatorTypeMustImplementInterface {
+            get {
+                return ResourceManager.GetString("EvaluatorTypeMustImplementInterface", resourceCulture);
+            }
+        }
     }
 }
