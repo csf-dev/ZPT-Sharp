@@ -16,6 +16,7 @@ namespace ZptSharp.Rendering
         readonly IGetsTalContextProcessor talProcessorFactory;
         readonly IGetsSourceAnnotationContextProcessor sourceAnnotationProcessorFactory;
         readonly IIterativelyModifiesDocument iterativeModifier;
+        readonly IGetsZptElementAndAttributeRemovalContextProcessor cleanupProcessorFactory;
 
         /// <summary>
         /// Gets the document modifier suitable for use with the specified request.
@@ -34,10 +35,11 @@ namespace ZptSharp.Rendering
 
             var service = GetBaseService();
             // These are commented-out because they are not yet implemented.  When they are,
-            // these two lines should be restored.
+            // the commented lines below should be restored.
             //if (useSourceAnnotation) service = WrapWithSourceAnnotationDecorator(service);
             //service = WrapWithTalDecorator(service);
             service = WrapWithMetalDecorator(service);
+            //service = WrapWithCleanupDecorator(service);
 
             return service;
         }
@@ -53,6 +55,9 @@ namespace ZptSharp.Rendering
         IModifiesDocument WrapWithSourceAnnotationDecorator(IModifiesDocument wrapped)
             => new SourceAnnotationDocumentModifierDecorator(sourceAnnotationProcessorFactory, iterativeModifier, wrapped);
 
+        IModifiesDocument WrapWithCleanupDecorator(IModifiesDocument wrapped)
+            => new RemoveZptAttributesModifierDecorator(cleanupProcessorFactory, iterativeModifier, wrapped);
+
         /// <summary>
         /// Initializes a new instance of the <see cref="ZptDocumentModifierFactory"/> class.
         /// </summary>
@@ -63,12 +68,14 @@ namespace ZptSharp.Rendering
         public ZptDocumentModifierFactory(IGetsMetalContextProcessor metalProcessorFactory,
                                           IGetsTalContextProcessor talProcessorFactory,
                                           IGetsSourceAnnotationContextProcessor sourceAnnotationProcessorFactory,
-                                          IIterativelyModifiesDocument iterativeModifier)
+                                          IIterativelyModifiesDocument iterativeModifier,
+                                          IGetsZptElementAndAttributeRemovalContextProcessor cleanupProcessorFactory)
         {
             this.metalProcessorFactory = metalProcessorFactory ?? throw new ArgumentNullException(nameof(metalProcessorFactory));
             this.talProcessorFactory = talProcessorFactory ?? throw new ArgumentNullException(nameof(talProcessorFactory));
             this.sourceAnnotationProcessorFactory = sourceAnnotationProcessorFactory ?? throw new ArgumentNullException(nameof(sourceAnnotationProcessorFactory));
             this.iterativeModifier = iterativeModifier ?? throw new ArgumentNullException(nameof(iterativeModifier));
+            this.cleanupProcessorFactory = cleanupProcessorFactory ?? throw new ArgumentNullException(nameof(cleanupProcessorFactory));
         }
     }
 }

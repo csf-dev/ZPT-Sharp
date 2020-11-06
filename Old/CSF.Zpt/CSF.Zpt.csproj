@@ -61,8 +61,6 @@
   <ItemGroup>
     <Compile Include="AssemblyInfo.cs" />
     <Compile Include="Rendering\ElementExtensions.cs" />
-    <Compile Include="Metal\MacroExpander.cs" />
-    <Compile Include="Metal\MacroFinder.cs" />
     <Compile Include="Rendering\RenderingContext.cs" />
     <Compile Include="Tal\TalVisitor.cs" />
     <Compile Include="Tal\IAttributeHandler.cs" />
@@ -85,7 +83,6 @@
     <Compile Include="LocalXhtmlXmlResolver.cs" />
     <Compile Include="Rendering\RenderingContextExtensions.cs" />
     <Compile Include="Tal\TalTidyUpVisitor.cs" />
-    <Compile Include="Metal\MetalTidyUpVisitor.cs" />
     <Compile Include="Rendering\NoOpVisitor.cs" />
     <Compile Include="Rendering\Model.cs" />
     <Compile Include="Rendering\RepetitionInfo.cs" />
@@ -93,8 +90,6 @@
       <DependentUpon>ExceptionMessages.resx</DependentUpon>
     </Compile>
     <Compile Include="Tales\ExpressionFactory.cs" />
-    <Compile Include="Metal\MetalMacro.cs" />
-    <Compile Include="Metal\MetalMacroContainer.cs" />
     <Compile Include="Rendering\RenderingContextFactoryFactory.cs" />
     <Compile Include="Rendering\ContextVisitorFactory.cs" />
     <Compile Include="Rendering\NamedObjectWrapper.cs" />
@@ -130,12 +125,6 @@
     <Compile Include="PluginAssemblyLoader.cs" />
     <Compile Include="BatchRendering\BatchOptionsBuilder.cs" />
     <Compile Include="BatchRendering\BatchRenderingOptionsValidator.cs" />
-    <Compile Include="Metal\IMacroExpander.cs" />
-    <Compile Include="Metal\IMacroFinder.cs" />
-    <Compile Include="Metal\IMacroSubstituter.cs" />
-    <Compile Include="Metal\MacroSubstituter.cs" />
-    <Compile Include="Metal\SlotToFill.cs" />
-    <Compile Include="Metal\MacroExtensionSubstitutor.cs" />
     <Compile Include="Rendering\SourceInfoFactory.cs" />
     <Compile Include="SourceAnnotation\SourceAnnotator.cs" />
     <Compile Include="SourceAnnotation\SourceInfoBurnInVisitor.cs" />
@@ -146,7 +135,6 @@
       <DependentUpon>SourceAnnotationFormats.resx</DependentUpon>
     </Compile>
     <Compile Include="DefaultAddOnAssemblyFinder.cs" />
-    <Compile Include="Metal\DuplicateMacroException.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
