@@ -29,5 +29,23 @@ namespace ZptSharp.Expressions
         {
             Assert.That(() => sut.GetExpressionType(null), Throws.ArgumentNullException);
         }
+
+        [Test, AutoMoqData]
+        public void GetExpressionWithoutPrefix_throws_ANE_for_a_null_expression(PrefixExpressionTypeProvider sut)
+        {
+            Assert.That(() => sut.GetExpressionWithoutPrefix(null), Throws.ArgumentNullException);
+        }
+
+        [Test, AutoMoqData]
+        public void GetExpressionWithoutPrefix_returns_an_expression_with_prefix_removed(PrefixExpressionTypeProvider sut)
+        {
+            Assert.That(() => sut.GetExpressionWithoutPrefix("foo:bar"), Is.EqualTo("bar"));
+        }
+
+        [Test, AutoMoqData]
+        public void GetExpressionWithoutPrefix_the_same_expression_if_it_has_no_prefix(PrefixExpressionTypeProvider sut)
+        {
+            Assert.That(() => sut.GetExpressionWithoutPrefix("bar"), Is.EqualTo("bar"));
+        }
     }
 }
