@@ -1,5 +1,4 @@
-﻿using System;
-namespace ZptSharp.Dom
+﻿namespace ZptSharp.Dom
 {
     /// <summary>
     /// A provider for well-known namespaces related to ZPT.

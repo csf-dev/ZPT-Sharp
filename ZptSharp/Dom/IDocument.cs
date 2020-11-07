@@ -1,7 +1,4 @@
-﻿using System;
-using ZptSharp.Rendering;
-
-namespace ZptSharp.Dom
+﻿namespace ZptSharp.Dom
 {
     /// <summary>
     /// Abstraction for a DOM document.

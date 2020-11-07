@@ -1,5 +1,4 @@
-﻿using System;
-namespace ZptSharp.Expressions
+﻿namespace ZptSharp.Expressions
 {
     /// <summary>
     /// Default implementation of <see cref="IGetsExpressionTypeProvider"/>.

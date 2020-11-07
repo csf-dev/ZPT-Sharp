@@ -1,5 +1,4 @@
-﻿using System;
-namespace ZptSharp.Expressions
+﻿namespace ZptSharp.Expressions
 {
     /// <summary>
     /// An object which may be used as a factory for instances of <see cref="IGetsExpressionType"/>.

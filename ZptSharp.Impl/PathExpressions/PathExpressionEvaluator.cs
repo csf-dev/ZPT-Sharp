@@ -78,6 +78,11 @@ namespace ZptSharp.PathExpressions
             return new AggregateException(message, exceptions);
         }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="PathExpressionEvaluator"/> class.
+        /// </summary>
+        /// <param name="expressionParser">Expression parser.</param>
+        /// <param name="pathWalker">Path walker.</param>
         public PathExpressionEvaluator(IParsesPathExpression expressionParser,
                                        IWalksAndEvaluatesPathExpression pathWalker)
         {

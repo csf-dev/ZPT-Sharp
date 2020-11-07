@@ -1,5 +1,4 @@
-﻿using System;
-namespace ZptSharp.Expressions
+﻿namespace ZptSharp.Expressions
 {
     /// <summary>
     /// An object which can determine the string identifier which indicates an expression type.

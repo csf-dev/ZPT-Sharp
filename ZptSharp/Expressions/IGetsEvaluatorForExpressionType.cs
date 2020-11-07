@@ -1,5 +1,4 @@
-﻿using System;
-namespace ZptSharp.Expressions
+﻿namespace ZptSharp.Expressions
 {
     /// <summary>
     /// An object which chooses a strategy (an appropriate implementation of <see cref="IEvaluatesExpression"/>)

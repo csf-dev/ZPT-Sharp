@@ -1,5 +1,4 @@
-﻿using System;
-namespace ZptSharp
+﻿namespace ZptSharp
 {
     /// <summary>
     /// An object which may be used to add arbitrary objects/values

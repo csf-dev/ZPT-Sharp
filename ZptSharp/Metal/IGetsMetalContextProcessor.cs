@@ -1,5 +1,4 @@
-﻿using System;
-using ZptSharp.Rendering;
+﻿using ZptSharp.Rendering;
 
 namespace ZptSharp.Metal
 {

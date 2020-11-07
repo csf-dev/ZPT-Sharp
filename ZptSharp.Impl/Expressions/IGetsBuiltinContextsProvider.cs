@@ -1,5 +1,4 @@
-﻿using System;
-using ZptSharp.Config;
+﻿using ZptSharp.Config;
 
 namespace ZptSharp.Expressions
 {

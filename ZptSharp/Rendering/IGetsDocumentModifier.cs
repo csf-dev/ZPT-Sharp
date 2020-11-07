@@ -1,5 +1,4 @@
-﻿using System;
-namespace ZptSharp.Rendering
+﻿namespace ZptSharp.Rendering
 {
     /// <summary>
     /// An object which can get an instance of <see cref="IModifiesDocument"/>, suitable for use

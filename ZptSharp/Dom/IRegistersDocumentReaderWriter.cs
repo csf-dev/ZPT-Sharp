@@ -1,5 +1,4 @@
-﻿using System;
-namespace ZptSharp.Dom
+﻿namespace ZptSharp.Dom
 {
     /// <summary>
     /// An object which maintains a registry of the currently-available implementations

@@ -1,5 +1,4 @@
-﻿using System;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using ZptSharp.Expressions;
 
 namespace ZptSharp.Rendering
