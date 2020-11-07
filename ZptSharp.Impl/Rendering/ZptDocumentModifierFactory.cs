@@ -65,6 +65,7 @@ namespace ZptSharp.Rendering
         /// <param name="talProcessorFactory">Tal processor factory.</param>
         /// <param name="sourceAnnotationProcessorFactory">Source annotation processor factory.</param>
         /// <param name="iterativeModifier">Iterative modifier.</param>
+        /// <param name="cleanupProcessorFactory">Cleanup processor factory.</param>
         public ZptDocumentModifierFactory(IGetsMetalContextProcessor metalProcessorFactory,
                                           IGetsTalContextProcessor talProcessorFactory,
                                           IGetsSourceAnnotationContextProcessor sourceAnnotationProcessorFactory,

@@ -118,5 +118,23 @@ namespace ZptSharp.Resources {
                 return ResourceManager.GetString("InvalidPathPart", resourceCulture);
             }
         }
+        
+        internal static string CannotEvaluatePathExpressionAggregate {
+            get {
+                return ResourceManager.GetString("CannotEvaluatePathExpressionAggregate", resourceCulture);
+            }
+        }
+        
+        internal static string CannotEvaluatePathExpressionSingle {
+            get {
+                return ResourceManager.GetString("CannotEvaluatePathExpressionSingle", resourceCulture);
+            }
+        }
+        
+        internal static string CannotTraversePathPart {
+            get {
+                return ResourceManager.GetString("CannotTraversePathPart", resourceCulture);
+            }
+        }
     }
 }

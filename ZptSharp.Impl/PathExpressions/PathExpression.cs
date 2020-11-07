@@ -58,49 +58,28 @@ namespace ZptSharp.PathExpressions
         /// <summary>
         /// Base type for a single part of a path expression.
         /// </summary>
-        public abstract class PathPart { }
-
-        /// <summary>
-        /// A part of a path expression which indicates a traversible name.
-        /// </summary>
-        public class NamedPathPart : PathPart
+        public class PathPart
         {
             /// <summary>
-            /// Gets the name.
+            /// Gets the name of the path part.
             /// </summary>
             /// <value>The name.</value>
             public string Name { get; }
 
             /// <summary>
+            /// Gets a value indicating whether this <see cref="PathPart"/> represents an interpolated path name.
+            /// </summary>
+            /// <value><c>true</c> if this part is interpolated; otherwise, <c>false</c>.</value>
+            public bool IsInterpolated { get; }
+
+            /// <summary>
             /// Initializes a new instance of the <see cref="NamedPathPart"/> class.
             /// </summary>
             /// <param name="name">Name.</param>
-            public NamedPathPart(string name)
+            public PathPart(string name, bool isInterpolated = false)
             {
                 Name = name ?? throw new ArgumentNullException(nameof(name));
-            }
-        }
-
-        /// <summary>
-        /// A part of a path expression which exposes a traversible name via an
-        /// interpolated value (which is, itself, a path expression).
-        /// </summary>
-        public class InterpolatedPathPart : PathPart
-        {
-            /// <summary>
-            /// The path expression used to get the interpolated part-name.
-            /// </summary>
-            /// <value>The expression.</value>
-            public PathExpression Expression { get; }
-
-            /// <summary>
-            /// Initializes a new instance of the
-            /// <see cref="InterpolatedPathPart"/> class.
-            /// </summary>
-            /// <param name="expression">Expression.</param>
-            public InterpolatedPathPart(PathExpression expression)
-            {
-                Expression = expression ?? throw new ArgumentNullException(nameof(expression));
+                IsInterpolated = isInterpolated;
             }
         }
     }

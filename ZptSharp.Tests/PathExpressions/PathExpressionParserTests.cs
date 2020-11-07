@@ -13,8 +13,10 @@ namespace ZptSharp.PathExpressions
             var result = sut.Parse("foo");
 
             Assert.That(result?.Alternates?.Single().Parts?.Single(),
-                        Is.InstanceOf<PathExpression.NamedPathPart>()
-                            .With.Property(nameof(PathExpression.NamedPathPart.Name)).EqualTo("foo"));
+                        Is.InstanceOf<PathExpression.PathPart>()
+                            .With.Property(nameof(PathExpression.PathPart.Name)).EqualTo("foo"),
+                        "Path part has correct name");
+            Assert.That(result?.Alternates?.Single().Parts?.Single().IsInterpolated, Is.False, "Path is not interpolated");
         }
 
         [Test, AutoMoqData]
@@ -22,8 +24,11 @@ namespace ZptSharp.PathExpressions
         {
             var result = sut.Parse("foo/bar/baz");
 
-            Assert.That(result?.Alternates?.Single().Parts?.Cast<PathExpression.NamedPathPart>().Select(x => x.Name),
+            Assert.That(result?.Alternates?.Single().Parts?.Select(x => x.Name),
                         Is.EqualTo(new[] { "foo", "bar", "baz" }));
+            Assert.That(result?.Alternates?.Single().Parts,
+                        Has.All.Matches<PathExpression.PathPart>(x => !x.IsInterpolated),
+                        "All parts are not interpolated");
         }
 
         [Test, AutoMoqData]
@@ -31,13 +36,13 @@ namespace ZptSharp.PathExpressions
         {
             var result = sut.Parse("foo/bar/baz | one/two | wibble/wobble");
 
-            Assert.That(result?.Alternates[0].Parts?.Cast<PathExpression.NamedPathPart>().Select(x => x.Name),
+            Assert.That(result?.Alternates[0].Parts?.Select(x => x.Name),
                         Is.EqualTo(new[] { "foo", "bar", "baz" }),
                         "Correct parts for first alternate expression");
-            Assert.That(result?.Alternates[1].Parts?.Cast<PathExpression.NamedPathPart>().Select(x => x.Name),
+            Assert.That(result?.Alternates[1].Parts?.Select(x => x.Name),
                         Is.EqualTo(new[] { "one", "two" }),
                         "Correct parts for second alternate expression");
-            Assert.That(result?.Alternates[2].Parts?.Cast<PathExpression.NamedPathPart>().Select(x => x.Name),
+            Assert.That(result?.Alternates[2].Parts?.Select(x => x.Name),
                         Is.EqualTo(new[] { "wibble", "wobble" }),
                         "Correct parts for third alternate expression");
         }
@@ -47,18 +52,9 @@ namespace ZptSharp.PathExpressions
         {
             var result = sut.Parse("foo/?bar/baz");
 
-            Assert.That(result?.Alternates?.Single().Parts[1], Is.InstanceOf<PathExpression.InterpolatedPathPart>());
-        }
-
-        [Test, AutoMoqData]
-        public void Parse_can_parse_the_correct_interpolated_expression_for_an_interpolated_part(PathExpressionParser sut)
-        {
-            var result = sut.Parse("foo/?bar/baz");
-
-            var interpolated = result?.Alternates?.Single().Parts[1] as PathExpression.InterpolatedPathPart;
-            Assert.That(interpolated?.Expression?.Alternates?.Single().Parts?.Single(),
-                        Is.InstanceOf<PathExpression.NamedPathPart>()
-                            .With.Property(nameof(PathExpression.NamedPathPart.Name)).EqualTo("bar"));
+            Assert.That(result?.Alternates?.Single().Parts[1],
+                        Has.Property(nameof(PathExpression.PathPart.IsInterpolated)).True
+                            .And.Property(nameof(PathExpression.PathPart.Name)).EqualTo("bar"));
         }
 
         [Test, AutoMoqData]

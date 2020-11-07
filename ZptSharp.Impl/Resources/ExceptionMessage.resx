@@ -59,4 +59,15 @@ Invalid name:{0}</value>
         <value>Parts of a path expression (after the first) may contain only upper/lowercase letters, digits, spaces, and the punctuation characters underscore, dash, period, comma and tilde.
 Invalid part:{0}</value>
     </data>
+    <data name="CannotEvaluatePathExpressionAggregate" xml:space="preserve">
+        <value>The TALES path expression "{0}" could not be successfully evaluated to a result.
+The contained exception instances will provide further information specific to each alternate part of the overall expression.</value>
+    </data>
+    <data name="CannotEvaluatePathExpressionSingle" xml:space="preserve">
+        <value>The TALES path expression "{0}" could not be successfully evaluated to a result.
+The inner exception will provide further information as to why.</value>
+    </data>
+    <data name="CannotTraversePathPart" xml:space="preserve">
+        <value>No value could be retrieved when attempting to get a named value '{0}' from {1}.</value>
+    </data>
 </root>

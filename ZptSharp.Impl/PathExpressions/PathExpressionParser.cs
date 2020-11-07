@@ -75,11 +75,9 @@ namespace ZptSharp.PathExpressions
 
             var isInterpolated = partString.First() == InterpolatedSignifier;
             if (!isInterpolated)
-                return new PathExpression.NamedPathPart(partString);
+                return new PathExpression.PathPart(partString);
 
-            var namedPart = new PathExpression.NamedPathPart(partString.Substring(1));
-            var partExpression = new PathExpression(namedPart);
-            return new PathExpression.InterpolatedPathPart(partExpression);
+            return new PathExpression.PathPart(partString.Substring(1), true);
         }
 
         void AssertPartIsValidVariableName(string partString)
