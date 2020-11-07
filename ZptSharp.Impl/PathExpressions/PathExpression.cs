@@ -53,6 +53,16 @@ namespace ZptSharp.PathExpressions
             {
                 Parts = parts ?? throw new ArgumentNullException(nameof(parts));
             }
+
+            /// <summary>
+            /// Initializes a new instance of the
+            /// <see cref="AlternateExpression"/> class.
+            /// </summary>
+            /// <param name="parts">The path parts.</param>
+            public AlternateExpression(params PathPart[] parts)
+            {
+                Parts = parts ?? throw new ArgumentNullException(nameof(parts));
+            }
         }
 
         /// <summary>
@@ -73,9 +83,10 @@ namespace ZptSharp.PathExpressions
             public bool IsInterpolated { get; }
 
             /// <summary>
-            /// Initializes a new instance of the <see cref="NamedPathPart"/> class.
+            /// Initializes a new instance of the <see cref="PathPart"/> class.
             /// </summary>
-            /// <param name="name">Name.</param>
+            /// <param name="name">The name of the path part.</param>
+            /// <param name="isInterpolated"><c>true</c> if this path part represents an interpolated name; <c>false</c> otherwise.</param>
             public PathPart(string name, bool isInterpolated = false)
             {
                 Name = name ?? throw new ArgumentNullException(nameof(name));

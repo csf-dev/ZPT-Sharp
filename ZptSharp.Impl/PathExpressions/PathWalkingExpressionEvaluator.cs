@@ -42,7 +42,7 @@ namespace ZptSharp.PathExpressions
 
             foreach (var part in path.Parts)
             {
-                var value = await GetValueFromPart(part, context, cancellationToken);
+                var value = await GetValueFromPart(part, ctx, cancellationToken);
                 ctx = ctx.CreateChild(value);
             }
 
@@ -53,11 +53,29 @@ namespace ZptSharp.PathExpressions
                                             PathEvaluationContext context,
                                             CancellationToken cancellationToken)
         {
-            var targetObject = part.IsInterpolated ? context.ExpressionContext : context.CurrentObject;
-            var result = await objectValueProvider.TryGetValueAsync(part.Name, targetObject, cancellationToken);
+
+
+            var targetObject = context.IsRoot? context.ExpressionContext : context.CurrentObject;
+            var valueName = await GetValueName(part, context, cancellationToken);
+
+            var result = await objectValueProvider.TryGetValueAsync(valueName, targetObject, cancellationToken);
             if (result.Success) return result.Value;
 
             var objName = ReferenceEquals(targetObject, null) ? "<null>" : targetObject.ToString();
+            var message = String.Format(Resources.ExceptionMessage.CannotTraversePathPart, part.Name, objName);
+            throw new EvaluationException(message);
+        }
+
+        async Task<string> GetValueName(PathExpression.PathPart part,
+                                        PathEvaluationContext context,
+                                        CancellationToken cancellationToken)
+        {
+            if (!part.IsInterpolated) return part.Name;
+
+            var result = await objectValueProvider.TryGetValueAsync(part.Name, context.ExpressionContext, cancellationToken);
+            if (result.Success) return (string) result.Value;
+
+            var objName = ReferenceEquals(context.ExpressionContext, null) ? "<null>" : context.ExpressionContext.ToString();
             var message = String.Format(Resources.ExceptionMessage.CannotTraversePathPart, part.Name, objName);
             throw new EvaluationException(message);
         }

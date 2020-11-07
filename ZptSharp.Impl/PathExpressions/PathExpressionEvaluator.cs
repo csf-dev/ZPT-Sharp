@@ -13,6 +13,7 @@ namespace ZptSharp.PathExpressions
     public class PathExpressionEvaluator : IEvaluatesExpression
     {
         readonly IParsesPathExpression expressionParser;
+        readonly IWalksAndEvaluatesPathExpression pathWalker;
 
         /// <summary>
         /// Evaluates the expression asynchronously and returns the result.
@@ -21,7 +22,7 @@ namespace ZptSharp.PathExpressions
         /// <param name="expression">The expression string.</param>
         /// <param name="context">The expression context.</param>
         /// <param name="cancellationToken">An optional cancellation token.</param>
-        public async Task<object> EvaluateExpressionAsync(string expression, ExpressionContext context, CancellationToken cancellationToken = default)
+        public Task<object> EvaluateExpressionAsync(string expression, ExpressionContext context, CancellationToken cancellationToken = default)
         {
             var path = expressionParser.Parse(expression);
 
@@ -31,22 +32,27 @@ namespace ZptSharp.PathExpressions
             {
                 try
                 {
-                    return await EvaluateExpressionAsync(alternateExpression, context, cancellationToken);
+                    var task = EvaluateExpressionAsync(alternateExpression, context, cancellationToken);
+                    // We must wait for the task to complete in order to force it to throw an exception here
+                    // if it throws at all.
+                    task.Wait();
+                    return task;
                 }
-                catch(AggregateException ex)
+                catch(Exception ex)
                 {
-                    exceptions.AddRange(ex.InnerExceptions);
+                    exceptions.Add(ex);
                 }
             }
 
             throw GetCannotEvaluateException(exceptions, expression);
         }
 
-        Task<object> EvaluateExpressionAsync(PathExpression.AlternateExpression expression,
+        Task<object> EvaluateExpressionAsync(PathExpression.AlternateExpression path,
                                              ExpressionContext context,
                                              CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            var pathEvaluationContext = PathEvaluationContext.CreateRoot(context);
+            return pathWalker.WalkAndEvaluatePathExpressionAsync(path, pathEvaluationContext, cancellationToken);
         }
 
         /// <summary>
@@ -72,9 +78,11 @@ namespace ZptSharp.PathExpressions
             return new AggregateException(message, exceptions);
         }
 
-        public PathExpressionEvaluator(IParsesPathExpression expressionParser)
+        public PathExpressionEvaluator(IParsesPathExpression expressionParser,
+                                       IWalksAndEvaluatesPathExpression pathWalker)
         {
             this.expressionParser = expressionParser ?? throw new ArgumentNullException(nameof(expressionParser));
+            this.pathWalker = pathWalker ?? throw new ArgumentNullException(nameof(pathWalker));
         }
     }
 }
