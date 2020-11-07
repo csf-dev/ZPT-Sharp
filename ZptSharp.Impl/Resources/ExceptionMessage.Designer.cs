@@ -88,5 +88,35 @@ namespace ZptSharp.Resources {
                 return ResourceManager.GetString("EvaluatorTypeMustImplementInterface", resourceCulture);
             }
         }
+        
+        internal static string PathPartCannotBeEmpty {
+            get {
+                return ResourceManager.GetString("PathPartCannotBeEmpty", resourceCulture);
+            }
+        }
+        
+        internal static string AlternatePathExpressionCannotBeEmpty {
+            get {
+                return ResourceManager.GetString("AlternatePathExpressionCannotBeEmpty", resourceCulture);
+            }
+        }
+        
+        internal static string CannotParsePath {
+            get {
+                return ResourceManager.GetString("CannotParsePath", resourceCulture);
+            }
+        }
+        
+        internal static string InvalidVariableName {
+            get {
+                return ResourceManager.GetString("InvalidVariableName", resourceCulture);
+            }
+        }
+        
+        internal static string InvalidPathPart {
+            get {
+                return ResourceManager.GetString("InvalidPathPart", resourceCulture);
+            }
+        }
     }
 }

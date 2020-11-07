@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using ZptSharp.Config;
 
 namespace ZptSharp.Expressions
@@ -12,7 +13,7 @@ namespace ZptSharp.Expressions
         /// <summary>
         /// A reserved identifier/alias which indicates that the built-in contexts should be returned.
         /// </summary>
-        public static readonly string BuiltinContexts = "CONTEXTS";
+        public static readonly string ContextsName = "CONTEXTS";
 
         readonly ExpressionContext context;
         readonly RenderingConfig config;
@@ -21,33 +22,23 @@ namespace ZptSharp.Expressions
         /// <summary>
         /// Attempts to get a value for a named reference, relative to the current instance.
         /// </summary>
-        /// <returns>A boolean indicating whether a value was successfully retrieved or not.</returns>
+        /// <returns>An object indicating whether a value was successfully retrieved or not, along with the retrieved value (if applicable).</returns>
         /// <param name="name">The name of the value to retrieve.</param>
-        /// <param name="value">Exposes the retrieved value if this method returns success.</param>
-        public bool TryGetValue(string name, out object value)
+        public Task<GetValueResult> TryGetValueAsync(string name)
         {
-            if (String.Equals(name, BuiltinContexts, StringComparison.InvariantCulture))
-            {
-                value = BuiltInContextsProvider;
-                return true;
-            }
+            if (String.Equals(name, ContextsName, StringComparison.InvariantCulture))
+                return Task.FromResult(GetValueResult.For(BuiltinContexts));
 
             if(context.LocalDefinitions.ContainsKey(name))
-            {
-                value = context.LocalDefinitions[name];
-                return true;
-            }
+                return Task.FromResult(GetValueResult.For(context.LocalDefinitions[name]));
 
             if (context.GlobalDefinitions.ContainsKey(name))
-            {
-                value = context.GlobalDefinitions[name];
-                return true;
-            }
+                return Task.FromResult(GetValueResult.For(context.GlobalDefinitions[name]));
 
-            return BuiltInContextsProvider.TryGetValue(name, out value);
+            return BuiltinContexts.TryGetValueAsync(name);
         }
 
-        IGetsNamedTalesValue BuiltInContextsProvider
+        IGetsNamedTalesValue BuiltinContexts
             => builtinContextsProviderFactory.GetBuiltinContextsProvider(context, config);
 
         /// <summary>

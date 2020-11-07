@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using ZptSharp.Config;
 using ZptSharp.Metal;
 
@@ -62,19 +63,14 @@ namespace ZptSharp.Expressions
         /// <summary>
         /// Attempts to get a value for a named reference, relative to the current instance.
         /// </summary>
-        /// <returns>A boolean indicating whether a value was successfully retrieved or not.</returns>
+        /// <returns>An object indicating whether a value was successfully retrieved or not, along with the retrieved value (if applicable).</returns>
         /// <param name="name">The name of the value to retrieve.</param>
-        /// <param name="value">Exposes the retrieved value if this method returns success.</param>
-        public bool TryGetValue(string name, out object value)
+        public Task<GetValueResult> TryGetValueAsync(string name)
         {
-            if(BuiltinContextsAndValues.TryGetValue(name, out var valueFunc))
-            {
-                value = valueFunc();
-                return true;
-            }
+            if (BuiltinContextsAndValues.TryGetValue(name, out var valueFunc))
+                return Task.FromResult(GetValueResult.For(valueFunc()));
 
-            value = null;
-            return false;
+            return Task.FromResult(GetValueResult.Failure);
         }
 
         Dictionary<string,Func<object>> BuiltinContextsAndValues

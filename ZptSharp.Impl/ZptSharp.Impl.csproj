@@ -23,6 +23,7 @@
     <Folder Include="Metal\" />
     <Folder Include="Dom\" />
     <Folder Include="Resources\" />
+    <Folder Include="PathExpressions\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ZptSharp\ZptSharp.csproj" />

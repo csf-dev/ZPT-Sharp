@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Threading.Tasks;
+
 namespace ZptSharp.Expressions
 {
     /// <summary>
@@ -7,8 +9,8 @@ namespace ZptSharp.Expressions
     /// <remarks>
     /// <para>
     /// General objects are traversed using common rules defined within ZPT.  However, objects implementing this
-    /// interface declare that they provide their own specific logic for traversal.  The <see cref="TryGetValue(string, out object)"/>
-    /// string method will be used instead of the usual traversal rules in order to get the value of a named reference,
+    /// interface declare that they provide their own specific logic for traversal.  The <see cref="TryGetValueAsync(string)"/>
+    /// method will be used instead of the usual traversal rules in order to get the value of a named reference,
     /// relative to the current object.
     /// </para>
     /// </remarks>
@@ -17,9 +19,8 @@ namespace ZptSharp.Expressions
         /// <summary>
         /// Attempts to get a value for a named reference, relative to the current instance.
         /// </summary>
-        /// <returns>A boolean indicating whether a value was successfully retrieved or not.</returns>
+        /// <returns>An object indicating whether a value was successfully retrieved or not, along with the retrieved value (if applicable).</returns>
         /// <param name="name">The name of the value to retrieve.</param>
-        /// <param name="value">Exposes the retrieved value if this method returns success.</param>
-        bool TryGetValue(string name, out object value);
+        Task<GetValueResult> TryGetValueAsync(string name);
     }
 }

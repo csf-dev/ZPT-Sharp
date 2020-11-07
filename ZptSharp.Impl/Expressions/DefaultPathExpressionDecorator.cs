@@ -3,12 +3,10 @@ namespace ZptSharp.Expressions
 {
     /// <summary>
     /// A decorator for <see cref="IGetsExpressionType"/> which (if the wrapped service
-    /// returns <see langword="null"/>) defaults the expression type to <c>path</c>.
+    /// returns <see langword="null"/>) defaults the expression type to <see cref="WellKnownExpressionType.Path"/>.
     /// </summary>
     public class DefaultPathExpressionDecorator : IGetsExpressionType
     {
-        const string Path = "path";
-
         readonly IGetsExpressionType wrapped;
 
         /// <summary>
@@ -17,7 +15,7 @@ namespace ZptSharp.Expressions
         /// <returns>The expression type.</returns>
         /// <param name="expression">An expression.</param>
         public string GetExpressionType(string expression)
-            => wrapped.GetExpressionType(expression) ?? Path;
+            => wrapped.GetExpressionType(expression) ?? WellKnownExpressionType.Path;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="DefaultPathExpressionDecorator"/> class.

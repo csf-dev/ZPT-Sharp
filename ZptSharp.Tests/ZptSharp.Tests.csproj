@@ -35,5 +35,6 @@
     <Folder Include="Metal\" />
     <Folder Include="TestFiles\" />
     <Folder Include="Util\" />
+    <Folder Include="PathExpressions\" />
   </ItemGroup>
 </Project>

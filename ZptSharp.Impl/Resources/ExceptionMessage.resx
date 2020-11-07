@@ -41,4 +41,22 @@ Expression:{2}</value>
         <value>The evaluator implementation type must be an implementation of `{0}'.
 Type registered:{1}</value>
     </data>
+    <data name="PathPartCannotBeEmpty" xml:space="preserve">
+        <value>No part of a path expression may be an empty string.</value>
+    </data>
+    <data name="AlternatePathExpressionCannotBeEmpty" xml:space="preserve">
+        <value>A path expression (or an alternate expression, separated by a | character) may not be empty or whitespace-only.</value>
+    </data>
+    <data name="CannotParsePath" xml:space="preserve">
+        <value>An unexpected error occurred whilst parsing a TALES path expression.  See the inner exception for more information.
+Expression:{0}</value>
+    </data>
+    <data name="InvalidVariableName" xml:space="preserve">
+        <value>The first part of a path expression must be a valid variable name; beginning with an upper/lowercase letter and consisting of only alphanumeric characters and (optionally) underscores.
+Invalid name:{0}</value>
+    </data>
+    <data name="InvalidPathPart" xml:space="preserve">
+        <value>Parts of a path expression (after the first) may contain only upper/lowercase letters, digits, spaces, and the punctuation characters underscore, dash, period, comma and tilde.
+Invalid part:{0}</value>
+    </data>
 </root>

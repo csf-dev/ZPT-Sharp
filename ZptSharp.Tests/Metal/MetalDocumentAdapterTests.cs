@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Threading.Tasks;
 using AutoFixture.NUnit3;
 using Moq;
 using NUnit.Framework;
@@ -78,19 +79,19 @@ namespace ZptSharp.Metal
         }
 
         [Test, AutoMoqData]
-        public void TryGetValue_returns_true_if_macros_requested([Frozen] ISearchesForAttributes attributeSearcher,
+        public void TryGetValueAsync_returns_true_if_macros_requested([Frozen] ISearchesForAttributes attributeSearcher,
                                                                  MetalDocumentAdapter sut)
         {
             Mock.Get(attributeSearcher)
                 .Setup(x => x.SearchForAttributes(It.IsAny<IHasElements>(), It.IsAny<AttributeSpec>()))
                 .Returns(() => Enumerable.Empty<IAttribute>());
-            Assert.That(() => sut.TryGetValue("macros", out object val), Is.True);
+            Assert.That(() => sut.TryGetValueAsync("macros")?.Result.Success, Is.True);
         }
 
         [Test, AutoMoqData]
-        public void TryGetValue_returns_false_if_other_value_requested(MetalDocumentAdapter sut)
+        public void TryGetValueAsync_returns_false_if_other_value_requested(MetalDocumentAdapter sut)
         {
-            Assert.That(() => sut.TryGetValue("something else", out object val), Is.False);
+            Assert.That(() => sut.TryGetValueAsync("something else")?.Result.Success, Is.False);
         }
     }
 }
