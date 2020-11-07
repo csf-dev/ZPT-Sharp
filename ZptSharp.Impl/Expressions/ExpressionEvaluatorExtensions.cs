@@ -33,7 +33,8 @@ namespace ZptSharp.Expressions
                                                                ExpressionContext context,
                                                                CancellationToken cancellationToken)
         {
-            var result = await evaluator.EvaluateExpressionAsync(expression, context, cancellationToken);
+            var result = await evaluator.EvaluateExpressionAsync(expression, context, cancellationToken)
+                .ConfigureAwait(false);
 
             try
             {

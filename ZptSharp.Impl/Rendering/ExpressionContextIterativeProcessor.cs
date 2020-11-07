@@ -53,7 +53,8 @@ namespace ZptSharp.Rendering
                  (currentContext = openList.FirstOrDefault()) != null;
                  openList.Remove(currentContext))
             {
-                var iterationResult = await contextProcessor.ProcessContextAsync(currentContext).ConfigureAwait(false);
+                var iterationResult = await contextProcessor.ProcessContextAsync(currentContext)
+                    .ConfigureAwait(false);
 
                 AddChildContextsToOpenList(openList, currentContext);
                 AddAdditionalContextsToOpenList(openList, iterationResult);

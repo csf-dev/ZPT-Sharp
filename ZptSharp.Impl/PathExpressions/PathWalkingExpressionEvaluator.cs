@@ -42,7 +42,8 @@ namespace ZptSharp.PathExpressions
 
             foreach (var part in path.Parts)
             {
-                var value = await GetValueFromPart(part, ctx, cancellationToken);
+                var value = await GetValueFromPart(part, ctx, cancellationToken)
+                    .ConfigureAwait(false);
                 ctx = ctx.CreateChild(value);
             }
 
@@ -56,9 +57,11 @@ namespace ZptSharp.PathExpressions
 
 
             var targetObject = context.IsRoot? context.ExpressionContext : context.CurrentObject;
-            var valueName = await GetValueName(part, context, cancellationToken);
+            var valueName = await GetValueName(part, context, cancellationToken)
+                .ConfigureAwait(false);
 
-            var result = await objectValueProvider.TryGetValueAsync(valueName, targetObject, cancellationToken);
+            var result = await objectValueProvider.TryGetValueAsync(valueName, targetObject, cancellationToken)
+                .ConfigureAwait(false);
             if (result.Success) return result.Value;
 
             var objName = ReferenceEquals(targetObject, null) ? "<null>" : targetObject.ToString();
@@ -72,7 +75,8 @@ namespace ZptSharp.PathExpressions
         {
             if (!part.IsInterpolated) return part.Name;
 
-            var result = await objectValueProvider.TryGetValueAsync(part.Name, context.ExpressionContext, cancellationToken);
+            var result = await objectValueProvider.TryGetValueAsync(part.Name, context.ExpressionContext, cancellationToken)
+                .ConfigureAwait(false);
             if (result.Success) return (string) result.Value;
 
             var objName = ReferenceEquals(context.ExpressionContext, null) ? "<null>" : context.ExpressionContext.ToString();

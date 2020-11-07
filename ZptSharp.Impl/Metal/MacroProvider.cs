@@ -51,7 +51,8 @@ namespace ZptSharp.Metal
             MetalMacro macro = null;
             try
             {
-                macro = await expressionEvaluator.EvaluateExpressionAsync<MetalMacro>(attribute.Value, context, token);
+                macro = await expressionEvaluator.EvaluateExpressionAsync<MetalMacro>(attribute.Value, context, token)
+                    .ConfigureAwait(false);
             }
             catch(Exception ex)
             {

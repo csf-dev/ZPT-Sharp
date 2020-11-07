@@ -27,8 +27,10 @@ namespace ZptSharp.Rendering
         public async Task ModifyDocumentAsync(IDocument document, RenderZptDocumentRequest request, CancellationToken token = default)
         {
             var contextProcessor = contextProcessorFactory.GetElementAndAttributeRemovalProcessor();
-            await iterativeModifier.ModifyDocumentAsync(document, request, contextProcessor, token);
-            await wrapped.ModifyDocumentAsync(document, request, token);
+            await iterativeModifier.ModifyDocumentAsync(document, request, contextProcessor, token)
+                .ConfigureAwait(false);
+            await wrapped.ModifyDocumentAsync(document, request, token)
+                .ConfigureAwait(false);
         }
 
         /// <summary>

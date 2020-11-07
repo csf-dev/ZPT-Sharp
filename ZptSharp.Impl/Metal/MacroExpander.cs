@@ -40,12 +40,18 @@ namespace ZptSharp.Metal
                                                        ExpressionContext context,
                                                        CancellationToken token)
         {
-            var extendedMacro = await macroProvider.GetMacroAsync(macroContext.Macro.Element, context, specProvider.ExtendMacro, token);
+            var extendedMacro = await macroProvider.GetMacroAsync(macroContext.Macro.Element,
+                                                                  context,
+                                                                  specProvider.ExtendMacro,
+                                                                  token)
+                .ConfigureAwait(false);
+            
             if (extendedMacro == null) return macroContext.Macro;
 
             ExtendMacro(macroContext, extendedMacro);
             macroContext.Macro = extendedMacro;
-            return await ExpandMacroPrivateAsync(macroContext, context, token);
+            return await ExpandMacroPrivateAsync(macroContext, context, token)
+                .ConfigureAwait(false);
         }
 
         void ExtendMacro(MacroExpansionContext macroContext, MetalMacro extendedMacro)

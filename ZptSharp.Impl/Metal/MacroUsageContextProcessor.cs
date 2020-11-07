@@ -39,17 +39,22 @@ namespace ZptSharp.Metal
             var macro = await macroProvider.GetMacroAsync(context.CurrentElement,
                                                           context,
                                                           specProvider.UseMacro,
-                                                          token);
+                                                          token)
+                .ConfigureAwait(false);
 
             if (macro != null)
-                await ReplaceCurrentElementWithExpandedMacroAsync(context, macro, token);
+            {
+                await ReplaceCurrentElementWithExpandedMacroAsync(context, macro, token)
+                    .ConfigureAwait(false);
+            }
 
             return new ExpressionContextProcessingResult();
         }
 
         async Task ReplaceCurrentElementWithExpandedMacroAsync(ExpressionContext context, MetalMacro macro, CancellationToken token)
         {
-            var expandedMacro = await macroExpander.ExpandMacroAsync(macro, context, token);
+            var expandedMacro = await macroExpander.ExpandMacroAsync(macro, context, token)
+                .ConfigureAwait(false);
             context.CurrentElement = expandedMacro.Element;
         }
 
