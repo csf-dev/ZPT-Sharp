@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Threading;
+using System.Threading.Tasks;
 
 namespace ZptSharp.Expressions
 {
@@ -20,6 +21,7 @@ namespace ZptSharp.Expressions
         /// </summary>
         /// <returns>An object indicating whether a value was successfully retrieved or not, along with the retrieved value (if applicable).</returns>
         /// <param name="name">The name of the value to retrieve.</param>
-        Task<GetValueResult> TryGetValueAsync(string name);
+        /// <param name="cancellationToken">An optional cancellation token.</param>
+        Task<GetValueResult> TryGetValueAsync(string name, CancellationToken cancellationToken = default);
     }
 }

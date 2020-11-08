@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading;
 using System.Threading.Tasks;
 using AutoFixture.NUnit3;
 using Moq;
@@ -9,17 +10,17 @@ using ZptSharp.Config;
 namespace ZptSharp.Expressions
 {
     [TestFixture,Parallelizable]
-    public class ContextValueProviderTests
+    public class NamedTalesValueForExpressionContextAdapterTests
     {
         [Test, AutoMoqData]
         public async Task TryGetValueAsync_returns_built_in_context_if_contexts_requested([Frozen, NoAutoProperties] ExpressionContext context,
                                                                                [Frozen, MockedConfig] RenderingConfig config,
                                                                                [Frozen] IGetsBuiltinContextsProvider builtinContextsProviderFactory,
                                                                                IGetsNamedTalesValue contextProvider,
-                                                                               ContextValueProvider sut)
+                                                                               NamedTalesValueForExpressionContextAdapter sut)
         {
             Mock.Get(builtinContextsProviderFactory).Setup(x => x.GetBuiltinContextsProvider(context, config)).Returns(contextProvider);
-            var result = await sut.TryGetValueAsync(ContextValueProvider.ContextsName);
+            var result = await sut.TryGetValueAsync(NamedTalesValueForExpressionContextAdapter.ContextsName);
             Assert.That(result.Success, Is.True, "Value returned successfully");
             Assert.That(result.Value, Is.SameAs(contextProvider), "Context provider object returned");
         }
@@ -30,11 +31,11 @@ namespace ZptSharp.Expressions
                                                                                                                  [Frozen] IGetsBuiltinContextsProvider builtinContextsProviderFactory,
                                                                                                                  IGetsNamedTalesValue contextProvider,
                                                                                                                  object localVariableValue,
-                                                                                                                 ContextValueProvider sut)
+                                                                                                                 NamedTalesValueForExpressionContextAdapter sut)
         {
-            context.LocalDefinitions.Add(ContextValueProvider.ContextsName, localVariableValue);
+            context.LocalDefinitions.Add(NamedTalesValueForExpressionContextAdapter.ContextsName, localVariableValue);
             Mock.Get(builtinContextsProviderFactory).Setup(x => x.GetBuiltinContextsProvider(context, config)).Returns(contextProvider);
-            var result = await sut.TryGetValueAsync(ContextValueProvider.ContextsName);
+            var result = await sut.TryGetValueAsync(NamedTalesValueForExpressionContextAdapter.ContextsName);
             Assert.That(result.Success, Is.True, "Value returned successfully");
             Assert.That(result.Value, Is.SameAs(contextProvider), "Context provider object returned and not local variable value");
         }
@@ -44,7 +45,7 @@ namespace ZptSharp.Expressions
                                                                                [Frozen, MockedConfig] RenderingConfig config,
                                                                                string name,
                                                                                object variableValue,
-                                                                               ContextValueProvider sut)
+                                                                               NamedTalesValueForExpressionContextAdapter sut)
         {
             context.LocalDefinitions.Add(name, variableValue);
             var result = await sut.TryGetValueAsync(name);
@@ -57,7 +58,7 @@ namespace ZptSharp.Expressions
                                                                                 [Frozen, MockedConfig] RenderingConfig config,
                                                                                 string name,
                                                                                 object variableValue,
-                                                                                ContextValueProvider sut)
+                                                                                NamedTalesValueForExpressionContextAdapter sut)
         {
             context.GlobalDefinitions.Add(name, variableValue);
             var result = await sut.TryGetValueAsync(name);
@@ -72,10 +73,10 @@ namespace ZptSharp.Expressions
                                                                                                    [Frozen] IGetsBuiltinContextsProvider builtinContextsProviderFactory,
                                                                                                    string name,
                                                                                                    object variableValue,
-                                                                                                   ContextValueProvider sut)
+                                                                                                   NamedTalesValueForExpressionContextAdapter sut)
         {
             Mock.Get(builtinContextsProviderFactory).Setup(x => x.GetBuiltinContextsProvider(context, config)).Returns(contextProvider);
-            Mock.Get(contextProvider).Setup(x => x.TryGetValueAsync(name)).Returns(Task.FromResult(GetValueResult.For(variableValue)));
+            Mock.Get(contextProvider).Setup(x => x.TryGetValueAsync(name, CancellationToken.None)).Returns(Task.FromResult(GetValueResult.For(variableValue)));
             var result = await sut.TryGetValueAsync(name);
             Assert.That(result.Success, Is.True, "Value returned successfully");
             Assert.That(result.Value, Is.SameAs(variableValue), "Variable value returned");
@@ -87,7 +88,7 @@ namespace ZptSharp.Expressions
                                                                                                           string name,
                                                                                                           object localValue,
                                                                                                           object globalValue,
-                                                                                                          ContextValueProvider sut)
+                                                                                                          NamedTalesValueForExpressionContextAdapter sut)
         {
             context.LocalDefinitions.Add(name, localValue);
             context.GlobalDefinitions.Add(name, globalValue);
@@ -104,10 +105,10 @@ namespace ZptSharp.Expressions
                                                                                                                      string name,
                                                                                                                      object globalValue,
                                                                                                                      object builtInValue,
-                                                                                                                     ContextValueProvider sut)
+                                                                                                                     NamedTalesValueForExpressionContextAdapter sut)
         {
             Mock.Get(builtinContextsProviderFactory).Setup(x => x.GetBuiltinContextsProvider(context, config)).Returns(contextProvider);
-            Mock.Get(contextProvider).Setup(x => x.TryGetValueAsync(name)).Returns(Task.FromResult(GetValueResult.For(builtInValue)));
+            Mock.Get(contextProvider).Setup(x => x.TryGetValueAsync(name, CancellationToken.None)).Returns(Task.FromResult(GetValueResult.For(builtInValue)));
             context.GlobalDefinitions.Add(name, globalValue);
             var result = await sut.TryGetValueAsync(name);
             Assert.That(result.Success, Is.True, "Value returned successfully");
