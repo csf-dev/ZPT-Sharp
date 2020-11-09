@@ -51,17 +51,17 @@ namespace ZptSharp.PathExpressions
         /// <returns>The chain of responsibility.</returns>
         IGetsValueFromObject BuildChainOfResponsibility()
         {
-            // Note that this is written "upside down".  The services are executed in
-            // last-first order, from bottom-to-top.  Each service wraps the one which precedes it.
-
+            // Note that this is written "upside down".  The services are actually executed in
+            // last-to-first order.  Each service wraps (and thus gets a chance to execute
+            // before) the one which precedes it.
             var service = GetFailureService();
-
+            service = GetReflectionValueLink(service);
+            service = GetEnumerableValueLink(service);
             service = GetDynamicValueLink(service);
             service = GetIntegerKeyedDictionaryValueLink(service);
             service = GetStringKeyedDictionaryValueLink(service);
             service = GetNamedValueLink(service);
             service = GetContextWrappingDecorator(service);
-
             return service;
         }
 
@@ -73,6 +73,14 @@ namespace ZptSharp.PathExpressions
         /// <returns>The failure service.</returns>
         IGetsValueFromObject GetFailureService() => new FailureValueProvider();
 
+        /// <summary>
+        /// Gets a decorator which pre-processes the 2nd parameter to
+        /// <see cref="IGetsValueFromObject.TryGetValueAsync(string, object, CancellationToken)"/>.
+        /// If that parameter is an <see cref="ExpressionContext"/> then it is substituted with
+        /// <see cref="NamedTalesValueForExpressionContextAdapter"/> wrapping the original context.
+        /// </summary>
+        /// <returns>The context-wrapping decorator.</returns>
+        /// <param name="service">Service.</param>
         IGetsValueFromObject GetContextWrappingDecorator(IGetsValueFromObject service)
             => new ExpressionContextWrappingDecorator(config, builtinContextsProviderFactory, service);
 
@@ -87,6 +95,12 @@ namespace ZptSharp.PathExpressions
 
         IGetsValueFromObject GetDynamicValueLink(IGetsValueFromObject service)
             => new DynamicObjectValueProvider(service);
+
+        IGetsValueFromObject GetEnumerableValueLink(IGetsValueFromObject service)
+            => new EnumerableValueProvider(service);
+
+        IGetsValueFromObject GetReflectionValueLink(IGetsValueFromObject service)
+            => new ReflectionObjectValueProvider(service);
 
         /// <summary>
         /// Initializes a new instance of the <see cref="DecoratorBasedObjectValueProvider"/> class.

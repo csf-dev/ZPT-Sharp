@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Threading.Tasks;
 using AutoFixture.NUnit3;
 using NUnit.Framework;
 using ZptSharp.Autofixture;
@@ -19,6 +18,15 @@ namespace ZptSharp.PathExpressions
                                                                                      object obj)
         {
             Assert.That(() => sut.TryGetValueAsync(name, obj).Result, Throws.Nothing);
+        }
+
+        [Test, AutoMoqData]
+        public void TryGetValueAsync_does_not_throw_if_object_is_null([MockedConfig, Frozen] RenderingConfig config,
+                                                                      [Frozen] IGetsBuiltinContextsProvider builtinContextsProviderFactory,
+                                                                      DecoratorBasedObjectValueProvider sut,
+                                                                      string name)
+        {
+            Assert.That(() => sut.TryGetValueAsync(name, null).Result, Throws.Nothing);
         }
     }
 }
