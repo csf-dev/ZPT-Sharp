@@ -80,9 +80,9 @@ namespace ZptSharp.PathExpressions.ValueProviders
         #region contained adapter type
 
         /// <summary>
-        /// An adapter/wrapper for a generic dictionary of <see cref="TKey"/> and <typeparamref name="TValue"/>.
+        /// An adapter/wrapper for a generic dictionary of <typeparamref name="TKey"/> and <typeparamref name="TValue"/>.
         /// This provides very limited read-only functionality as if the dictionary was actually
-        /// for <see cref="TKey"/> and <see cref="object"/>.
+        /// for <typeparamref name="TKey"/> and <see cref="object"/>.
         /// </summary>
         class GenericDictionaryAdapter<TKey, TValue> : IDictionary<TKey, object>
         {

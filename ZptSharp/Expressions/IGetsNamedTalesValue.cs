@@ -9,9 +9,9 @@ namespace ZptSharp.Expressions
     /// <remarks>
     /// <para>
     /// General objects are traversed using common rules defined within ZPT.  However, objects implementing this
-    /// interface declare that they provide their own specific logic for traversal.  The <see cref="TryGetValueAsync(string)"/>
-    /// method will be used instead of the usual traversal rules in order to get the value of a named reference,
-    /// relative to the current object.
+    /// interface declare that they provide their own specific logic for traversal.
+    /// The <see cref="TryGetValueAsync(string, CancellationToken)"/> method will be used instead of the usual
+    /// traversal rules in order to get the value of a named reference, relative to the current object.
     /// </para>
     /// </remarks>
     public interface IGetsNamedTalesValue

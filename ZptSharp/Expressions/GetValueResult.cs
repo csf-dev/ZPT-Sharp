@@ -1,7 +1,8 @@
 ﻿namespace ZptSharp.Expressions
 {
     /// <summary>
-    /// Represents the outcome of <see cref="IGetsNamedTalesValue.TryGetValueAsync(string)"/>
+    /// Represents the outcome of
+    /// <see cref="IGetsNamedTalesValue.TryGetValueAsync(string, System.Threading.CancellationToken)"/>
     /// </summary>
     public struct GetValueResult
     {

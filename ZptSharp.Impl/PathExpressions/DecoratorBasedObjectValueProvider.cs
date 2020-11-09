@@ -88,6 +88,11 @@ namespace ZptSharp.PathExpressions
         IGetsValueFromObject GetDynamicValueLink(IGetsValueFromObject service)
             => new DynamicObjectValueProvider(service);
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="DecoratorBasedObjectValueProvider"/> class.
+        /// </summary>
+        /// <param name="config">Config.</param>
+        /// <param name="builtinContextsProviderFactory">Builtin contexts provider factory.</param>
         public DecoratorBasedObjectValueProvider(RenderingConfig config,
                                                  IGetsBuiltinContextsProvider builtinContextsProviderFactory)
         {
