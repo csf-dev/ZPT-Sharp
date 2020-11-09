@@ -10,7 +10,7 @@ namespace ZptSharp.Dom
     /// pattern, facilitating the choosing of an appropriate implementation of
     /// <see cref="IReadsAndWritesDocument"/> for a given filename or path.
     /// </summary>
-    public class MemoryDocumentReaderWriterRegistry : IRegistersDocumentReaderWriter, IGetsDocumentReaderWriterForFile
+    public class DocumentReaderWriterRegistry : IRegistersDocumentReaderWriter, IGetsDocumentReaderWriterForFile
     {
         readonly HashSet<IReadsAndWritesDocument> registry = new HashSet<IReadsAndWritesDocument>();
 
@@ -29,7 +29,7 @@ namespace ZptSharp.Dom
             => Registry.FirstOrDefault(x => x.CanReadWriteForFilename(filenameOrPath));
 
         /// <summary>
-        /// Registers an implementation of <see cref="T:ZptSharp.Dom.IReadsAndWritesDocument"/>.
+        /// Registers an implementation of <see cref="IReadsAndWritesDocument"/>.
         /// </summary>
         /// <param name="readerWriter">Reader writer.</param>
         public void RegisterDocumentReaderWriter(IReadsAndWritesDocument readerWriter)

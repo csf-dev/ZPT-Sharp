@@ -36,5 +36,12 @@ namespace ZptSharp.Expressions
         /// </summary>
         /// <returns>The all registered types.</returns>
         IReadOnlyCollection<string> GetRegisteredExpressionTypes();
+
+        /// <summary>
+        /// Gets the evaluator type for the specified <paramref name="expressionType"/>.
+        /// </summary>
+        /// <returns>The evaluator type.</returns>
+        /// <param name="expressionType">Expression type.</param>
+        Type GetEvaluatorType(string expressionType);
     }
 }

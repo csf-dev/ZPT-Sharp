@@ -136,5 +136,11 @@ namespace ZptSharp.Resources {
                 return ResourceManager.GetString("CannotTraversePathPart", resourceCulture);
             }
         }
+        
+        internal static string MissingConfiguration {
+            get {
+                return ResourceManager.GetString("MissingConfiguration", resourceCulture);
+            }
+        }
     }
 }

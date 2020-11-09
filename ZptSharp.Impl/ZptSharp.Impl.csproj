@@ -25,6 +25,7 @@
     <Folder Include="Resources\" />
     <Folder Include="PathExpressions\" />
     <Folder Include="PathExpressions\ValueProviders\" />
+    <Folder Include="Config\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ZptSharp\ZptSharp.csproj" />

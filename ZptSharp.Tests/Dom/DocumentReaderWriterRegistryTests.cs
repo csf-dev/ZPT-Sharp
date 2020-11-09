@@ -5,10 +5,10 @@ using NUnit.Framework;
 namespace ZptSharp.Dom
 {
     [TestFixture,Parallelizable]
-    public class MemoryDocumentReaderWriterRegistryTests
+    public class DocumentReaderWriterRegistryTests
     {
         [Test, AutoMoqData]
-        public void RegisterDocumentReaderWriter_adds_instance_if_it_is_not_already_present(MemoryDocumentReaderWriterRegistry sut,
+        public void RegisterDocumentReaderWriter_adds_instance_if_it_is_not_already_present(DocumentReaderWriterRegistry sut,
                                                                                             IReadsAndWritesDocument readerWriter)
         {
             sut.RegisterDocumentReaderWriter(readerWriter);
@@ -16,7 +16,7 @@ namespace ZptSharp.Dom
         }
 
         [Test, AutoMoqData]
-        public void RegisterDocumentReaderWriter_does_not_add_anything_if_it_has_already_been_added(MemoryDocumentReaderWriterRegistry sut,
+        public void RegisterDocumentReaderWriter_does_not_add_anything_if_it_has_already_been_added(DocumentReaderWriterRegistry sut,
                                                                                                     IReadsAndWritesDocument readerWriter)
         {
             sut.RegisterDocumentReaderWriter(readerWriter);
@@ -25,7 +25,7 @@ namespace ZptSharp.Dom
         }
 
         [Test, AutoMoqData]
-        public void RegisterDocumentReaderWriter_can_add_two_different_reader_writers(MemoryDocumentReaderWriterRegistry sut,
+        public void RegisterDocumentReaderWriter_can_add_two_different_reader_writers(DocumentReaderWriterRegistry sut,
                                                                                       IReadsAndWritesDocument readerWriter1,
                                                                                       IReadsAndWritesDocument readerWriter2)
         {
@@ -35,13 +35,13 @@ namespace ZptSharp.Dom
         }
 
         [Test, AutoMoqData]
-        public void RegisterDocumentReaderWriter_throws_ANE_if_readerwriter_is_null(MemoryDocumentReaderWriterRegistry sut)
+        public void RegisterDocumentReaderWriter_throws_ANE_if_readerwriter_is_null(DocumentReaderWriterRegistry sut)
         {
             Assert.That(() => sut.RegisterDocumentReaderWriter(null), Throws.ArgumentNullException);
         }
 
         [Test, AutoMoqData]
-        public void GetDocumentProvider_returns_matching_readerwriter_if_it_is_present(MemoryDocumentReaderWriterRegistry sut,
+        public void GetDocumentProvider_returns_matching_readerwriter_if_it_is_present(DocumentReaderWriterRegistry sut,
                                                                                       IReadsAndWritesDocument readerWriter1,
                                                                                       IReadsAndWritesDocument readerWriter2,
                                                                                       string filename)
@@ -55,7 +55,7 @@ namespace ZptSharp.Dom
         }
 
         [Test, AutoMoqData]
-        public void GetDocumentProvider_returns_null_if_no_matching_instances_present(MemoryDocumentReaderWriterRegistry sut,
+        public void GetDocumentProvider_returns_null_if_no_matching_instances_present(DocumentReaderWriterRegistry sut,
                                                                                       IReadsAndWritesDocument readerWriter1,
                                                                                       IReadsAndWritesDocument readerWriter2,
                                                                                       string filename)

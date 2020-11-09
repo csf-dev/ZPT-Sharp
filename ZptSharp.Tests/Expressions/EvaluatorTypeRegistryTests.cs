@@ -58,32 +58,26 @@ namespace ZptSharp.Expressions
         #region GetEvaluator
 
         [Test, AutoMoqData]
-        public void GetEvaluator_throws_ANE_if_expression_type_is_null([Frozen] IServiceProvider resolver,
-                                                                       EvaluatorTypeRegistry sut,
+        public void GetEvaluatorType_throws_ANE_if_expression_type_is_null(EvaluatorTypeRegistry sut,
                                                                       string expressionType)
         {
-            Assert.That(() => sut.GetEvaluator(null), Throws.ArgumentNullException);
+            Assert.That(() => sut.GetEvaluatorType(null), Throws.ArgumentNullException);
         }
 
         [Test, AutoMoqData]
-        public void GetEvaluator_throws_if_expression_type_is_not_registered([Frozen] IServiceProvider resolver,
-                                                                             EvaluatorTypeRegistry sut,
+        public void GetEvaluatorType_throws_if_expression_type_is_not_registered(EvaluatorTypeRegistry sut,
                                                                              string expressionType)
         {
-            Assert.That(() => sut.GetEvaluator(expressionType), Throws.InstanceOf<NoEvaluatorForExpressionTypeException>());
+            Assert.That(() => sut.GetEvaluatorType(expressionType), Throws.InstanceOf<NoEvaluatorForExpressionTypeException>());
         }
 
         [Test, AutoMoqData]
-        public void GetEvaluator_gets_instance_of_evaluator_using_resolver_if_it_is_registered([Frozen] IServiceProvider resolver,
-                                                                                               EvaluatorTypeRegistry sut,
+        public void GetEvaluatorType_gets_type_of_evaluator_using_resolver_if_it_is_registered(EvaluatorTypeRegistry sut,
                                                                                                string expressionType,
                                                                                                StubEvaluator evaluator)
         {
-            Mock.Get(resolver)
-                .Setup(x => x.GetService(typeof(StubEvaluator)))
-                .Returns(evaluator);
             sut.RegisterEvaluatorType<StubEvaluator>(expressionType);
-            Assert.That(() => sut.GetEvaluator(expressionType), Is.InstanceOf<StubEvaluator>());
+            Assert.That(() => sut.GetEvaluatorType(expressionType), Is.EqualTo(typeof(StubEvaluator)));
         }
 
         #endregion

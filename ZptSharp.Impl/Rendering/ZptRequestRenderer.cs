@@ -2,6 +2,8 @@
 using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
+using Microsoft.Extensions.DependencyInjection;
+using ZptSharp.Config;
 using ZptSharp.Dom;
 
 namespace ZptSharp.Rendering
@@ -15,7 +17,6 @@ namespace ZptSharp.Rendering
     public class ZptRequestRenderer : IRendersRenderingRequest
     {
         readonly IServiceProvider serviceProvider;
-        readonly IGetsDocumentModifier rendererFactory;
 
         /// <summary>
         /// Gets the outcome of the specified rendering request as a stream.
@@ -33,26 +34,44 @@ namespace ZptSharp.Rendering
 
         async Task<Stream> RenderPrivateAsync(RenderZptDocumentRequest request, CancellationToken token)
         {
-            var documentReaderWriter = request.ReaderWriter ?? serviceProvider.Resolve<IReadsAndWritesDocument>();
-            var renderer = rendererFactory.GetDocumentModifier(request);
+            using (var scope = serviceProvider.CreateScope())
+            {
+                StoreConfigForLaterUse(scope, request);
 
-            var document = await documentReaderWriter.GetDocumentAsync(request.DocumentStream, request.Config, request.SourceInfo, token)
-                .ConfigureAwait(false);
-            await renderer.ModifyDocumentAsync(document, request, token)
-                .ConfigureAwait(false);
-            return await documentReaderWriter.WriteDocumentAsync(document, request.Config, token)
-                .ConfigureAwait(false);
+                var documentReaderWriter = GetDocumentReaderWriter(scope, request);
+                var renderer = GetRenderer(scope, request);
+
+                var document = await ReadDocument(documentReaderWriter, request, token).ConfigureAwait(false);
+                await renderer.ModifyDocumentAsync(document, request, token).ConfigureAwait(false);
+                return await documentReaderWriter.WriteDocumentAsync(document, request.Config, token).ConfigureAwait(false);
+            }
         }
+
+        void StoreConfigForLaterUse(IServiceScope scope, RenderZptDocumentRequest request)
+        {
+            var configServiceLocator = scope.ServiceProvider.GetRequiredService<ConfigurationServiceLocator>();
+            configServiceLocator.Configuration = request.Config;
+        }
+
+        IReadsAndWritesDocument GetDocumentReaderWriter(IServiceScope scope, RenderZptDocumentRequest request)
+            => request.ReaderWriter ?? scope.ServiceProvider.GetRequiredService<IReadsAndWritesDocument>();
+
+        IModifiesDocument GetRenderer(IServiceScope scope, RenderZptDocumentRequest request)
+        {
+            var rendererFactory = scope.ServiceProvider.GetRequiredService<IGetsDocumentModifier>();
+            return rendererFactory.GetDocumentModifier(request);
+        }
+
+        Task<IDocument> ReadDocument(IReadsAndWritesDocument documentReaderWriter, RenderZptDocumentRequest request, CancellationToken token)
+            => documentReaderWriter.GetDocumentAsync(request.DocumentStream, request.Config, request.SourceInfo, token);
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ZptRequestRenderer"/> class.
         /// </summary>
         /// <param name="serviceProvider">Service provider.</param>
-        /// <param name="rendererFactory">Renderer factory.</param>
-        public ZptRequestRenderer(IServiceProvider serviceProvider, IGetsDocumentModifier rendererFactory)
+        public ZptRequestRenderer(IServiceProvider serviceProvider)
         {
             this.serviceProvider = serviceProvider ?? throw new ArgumentNullException(nameof(serviceProvider));
-            this.rendererFactory = rendererFactory ?? throw new ArgumentNullException(nameof(rendererFactory));
         }
     }
 }

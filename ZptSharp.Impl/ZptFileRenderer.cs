@@ -2,6 +2,7 @@
 using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
+using Microsoft.Extensions.DependencyInjection;
 using ZptSharp.Config;
 using ZptSharp.Dom;
 using ZptSharp.Rendering;
@@ -43,7 +44,7 @@ namespace ZptSharp
 
         IReadsAndWritesDocument GetDocumentReaderWriter(string filePath)
         {
-            var readerWriterFactory = serviceProvider.Resolve<IGetsDocumentReaderWriterForFile>();
+            var readerWriterFactory = serviceProvider.GetRequiredService<IGetsDocumentReaderWriterForFile>();
             var readerWriter = readerWriterFactory.GetDocumentProvider(filePath);
 
             if (readerWriter != null) return readerWriter;
@@ -56,7 +57,7 @@ namespace ZptSharp
 
         IRendersZptDocuments GetDocumentRenderer(IReadsAndWritesDocument readerWriter)
         {
-            var rendererFactory = serviceProvider.Resolve<IGetsZptDocumentRenderer>();
+            var rendererFactory = serviceProvider.GetRequiredService<IGetsZptDocumentRenderer>();
             return rendererFactory.GetDocumentRenderer(config, readerWriter);
         }
 

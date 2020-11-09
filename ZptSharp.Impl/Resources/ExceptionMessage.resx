@@ -70,4 +70,7 @@ The inner exception will provide further information as to why.</value>
     <data name="CannotTraversePathPart" xml:space="preserve">
         <value>No value could be retrieved when attempting to get a named value '{0}' from {1}.</value>
     </data>
+    <data name="MissingConfiguration" xml:space="preserve">
+        <value>A rendering configuration object must be registered before it can be retrieved.</value>
+    </data>
 </root>

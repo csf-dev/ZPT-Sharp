@@ -5,28 +5,25 @@ using System.Linq;
 namespace ZptSharp.Expressions
 {
     /// <summary>
-    /// Implementation of both <see cref="IGetsEvaluatorForExpressionType"/> and
-    /// <see cref="IRegistersExpressionEvaluator"/> which uses a <see cref="IServiceProvider"/>
-    /// and in-memory dictionary to maintain registrations of evaluator types and resolve them.
+    /// Implementation of <see cref="IRegistersExpressionEvaluator"/> which uses a
+    /// in-memory dictionary to maintain registrations of evaluator types.
     /// </summary>
-    public class EvaluatorTypeRegistry : IGetsEvaluatorForExpressionType, IRegistersExpressionEvaluator
+    public class EvaluatorTypeRegistry : IRegistersExpressionEvaluator
     {
         readonly IDictionary<string, Type> registry = new Dictionary<string,Type>();
-        readonly IServiceProvider resolver;
 
         /// <summary>
-        /// Gets the evaluator which is appropriate for use with the specified <paramref name="expressionType"/>.
+        /// Gets the evaluator type for the specified <paramref name="expressionType"/>.
         /// </summary>
-        /// <returns>The evaluator.</returns>
+        /// <returns>The evaluator type.</returns>
         /// <param name="expressionType">Expression type.</param>
-        public IEvaluatesExpression GetEvaluator(string expressionType)
+        public Type GetEvaluatorType(string expressionType)
         {
             if (expressionType == null)
                 throw new ArgumentNullException(nameof(expressionType));
             AssertIsRegistered(expressionType);
 
-            var type = registry[expressionType];
-            return (IEvaluatesExpression) resolver.GetService(type);
+            return registry[expressionType];
         }
 
         /// <summary>
@@ -106,15 +103,6 @@ namespace ZptSharp.Expressions
                                            typeof(IEvaluatesExpression).FullName,
                                            evaluatorType.FullName);
             throw new ArgumentException(message, nameof(evaluatorType));
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="EvaluatorTypeRegistry"/> class.
-        /// </summary>
-        /// <param name="resolver">Resolver.</param>
-        public EvaluatorTypeRegistry(IServiceProvider resolver)
-        {
-            this.resolver = resolver ?? throw new ArgumentNullException(nameof(resolver));
         }
     }
 }

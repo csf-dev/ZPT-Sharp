@@ -5,6 +5,7 @@ using ZptSharp.Config;
 using System.Threading.Tasks;
 using System.Threading;
 using ZptSharp.Dom;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace ZptSharp
 {
@@ -42,7 +43,7 @@ namespace ZptSharp
                                                        contextBuilder,
                                                        sourceInfo,
                                                        readerWriter);
-            var requestRenderer = serviceProvider.Resolve<IRendersRenderingRequest>();
+            var requestRenderer = serviceProvider.GetRequiredService<IRendersRenderingRequest>();
             return requestRenderer.RenderAsync(request, token);
         }
 

@@ -84,7 +84,7 @@ namespace ZptSharp.PathExpressions.ValueProviders
         /// This provides very limited read-only functionality as if the dictionary was actually
         /// for <typeparamref name="TKey"/> and <see cref="object"/>.
         /// </summary>
-        class GenericDictionaryAdapter<TKey, TValue> : IDictionary<TKey, object>
+        internal class GenericDictionaryAdapter<TKey, TValue> : IDictionary<TKey, object>
         {
             readonly IDictionary<TKey, TValue> wrapped;
 
