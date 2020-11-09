@@ -16,9 +16,14 @@ namespace ZptSharp.Expressions
         /// </summary>
         public static readonly string ContextsName = "CONTEXTS";
 
-        readonly ExpressionContext context;
         readonly RenderingConfig config;
         readonly IGetsBuiltinContextsProvider builtinContextsProviderFactory;
+
+        /// <summary>
+        /// Gets the expression context wrapped by the current instance.
+        /// </summary>
+        /// <value>The expression context.</value>
+        public ExpressionContext Context { get; }
 
         /// <summary>
         /// Attempts to get a value for a named reference, relative to the current instance.
@@ -31,17 +36,17 @@ namespace ZptSharp.Expressions
             if (String.Equals(name, ContextsName, StringComparison.InvariantCulture))
                 return Task.FromResult(GetValueResult.For(BuiltinContexts));
 
-            if(context.LocalDefinitions.ContainsKey(name))
-                return Task.FromResult(GetValueResult.For(context.LocalDefinitions[name]));
+            if(Context.LocalDefinitions.ContainsKey(name))
+                return Task.FromResult(GetValueResult.For(Context.LocalDefinitions[name]));
 
-            if (context.GlobalDefinitions.ContainsKey(name))
-                return Task.FromResult(GetValueResult.For(context.GlobalDefinitions[name]));
+            if (Context.GlobalDefinitions.ContainsKey(name))
+                return Task.FromResult(GetValueResult.For(Context.GlobalDefinitions[name]));
 
             return BuiltinContexts.TryGetValueAsync(name);
         }
 
         IGetsNamedTalesValue BuiltinContexts
-            => builtinContextsProviderFactory.GetBuiltinContextsProvider(context, config);
+            => builtinContextsProviderFactory.GetBuiltinContextsProvider(Context, config);
 
         /// <summary>
         /// Initializes a new instance of the <see cref="NamedTalesValueForExpressionContextAdapter"/> class.
@@ -51,7 +56,7 @@ namespace ZptSharp.Expressions
         /// <param name="builtinContextsProviderFactory">Builtin contexts provider factory.</param>
         public NamedTalesValueForExpressionContextAdapter(ExpressionContext context, RenderingConfig config, IGetsBuiltinContextsProvider builtinContextsProviderFactory)
         {
-            this.context = context ?? throw new System.ArgumentNullException(nameof(context));
+            this.Context = context ?? throw new System.ArgumentNullException(nameof(context));
             this.config = config ?? throw new System.ArgumentNullException(nameof(config));
             this.builtinContextsProviderFactory = builtinContextsProviderFactory ?? throw new ArgumentNullException(nameof(builtinContextsProviderFactory));
         }

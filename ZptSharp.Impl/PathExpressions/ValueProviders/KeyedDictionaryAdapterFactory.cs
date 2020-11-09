@@ -84,7 +84,7 @@ namespace ZptSharp.PathExpressions.ValueProviders
         /// This provides very limited read-only functionality as if the dictionary was actually
         /// for <see cref="TKey"/> and <see cref="object"/>.
         /// </summary>
-        internal class GenericDictionaryAdapter<TKey, TValue> : IDictionary<TKey, object>
+        class GenericDictionaryAdapter<TKey, TValue> : IDictionary<TKey, object>
         {
             readonly IDictionary<TKey, TValue> wrapped;
 
@@ -96,7 +96,7 @@ namespace ZptSharp.PathExpressions.ValueProviders
 
             bool IDictionary<TKey, object>.ContainsKey(TKey key) => wrapped.ContainsKey(key);
 
-            internal GenericDictionaryAdapter(IDictionary<TKey, TValue> wrapped)
+            public GenericDictionaryAdapter(IDictionary<TKey, TValue> wrapped)
             {
                 this.wrapped = wrapped ?? throw new ArgumentNullException(nameof(wrapped));
             }

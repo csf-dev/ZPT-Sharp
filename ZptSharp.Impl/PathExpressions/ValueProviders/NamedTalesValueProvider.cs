@@ -27,9 +27,7 @@ namespace ZptSharp.PathExpressions.ValueProviders
         public Task<GetValueResult> TryGetValueAsync(string name, object @object, CancellationToken cancellationToken = default)
         {
             if(@object is IGetsNamedTalesValue valueProvider)
-            {
                 return valueProvider.TryGetValueAsync(name, cancellationToken);
-            }
 
             return wrapped.TryGetValueAsync(name, @object, cancellationToken);
         }
