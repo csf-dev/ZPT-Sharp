@@ -49,7 +49,7 @@ namespace ZptSharp.Rendering
 
         void StoreConfigForLaterUse(IServiceScope scope, RenderZptDocumentRequest request)
         {
-            var configServiceLocator = scope.ServiceProvider.GetRequiredService<ConfigurationServiceLocator>();
+            var configServiceLocator = scope.ServiceProvider.GetRequiredService<IStoresCurrentRenderingConfig>();
             configServiceLocator.Configuration = request.Config;
         }
 

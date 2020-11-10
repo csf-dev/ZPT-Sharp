@@ -13,9 +13,7 @@ namespace ZptSharp.Rendering
         /// Gets the document renderer.
         /// </summary>
         /// <returns>The document renderer.</returns>
-        /// <param name="config">Config.</param>
         /// <param name="readerWriter">A specific document reader/writer implementation.</param>
-        IRendersZptDocuments GetDocumentRenderer(RenderingConfig config,
-                                                 IReadsAndWritesDocument readerWriter = null);
+        IRendersZptDocuments GetDocumentRenderer(IReadsAndWritesDocument readerWriter = null);
     }
 }

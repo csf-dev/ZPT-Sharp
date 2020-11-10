@@ -16,13 +16,9 @@ namespace ZptSharp.Rendering
         /// Gets the document renderer.
         /// </summary>
         /// <returns>The document renderer.</returns>
-        /// <param name="config">Config.</param>
         /// <param name="readerWriter">A specific document reader/writer implementation.</param>
-        public IRendersZptDocuments GetDocumentRenderer(RenderingConfig config, IReadsAndWritesDocument readerWriter = null)
-        {
-            if (config == null) throw new ArgumentNullException(nameof(config));
-            return new ZptDocumentRenderer(config, serviceProvider, readerWriter);
-        }
+        public IRendersZptDocuments GetDocumentRenderer(IReadsAndWritesDocument readerWriter = null)
+            => new ZptDocumentRenderer(serviceProvider, readerWriter);
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ZptDocumentRendererFactory"/> class.

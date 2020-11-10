@@ -17,7 +17,6 @@ namespace ZptSharp
     /// </summary>
     public class ZptFileRenderer : IRendersZptFile
     {
-        readonly RenderingConfig config;
         readonly IServiceProvider serviceProvider;
 
         /// <summary>
@@ -26,10 +25,12 @@ namespace ZptSharp
         /// <returns>A stream containing the rendered document.</returns>
         /// <param name="filePath">The path of the document file to render.</param>
         /// <param name="model">The model to use for the rendering process.</param>
+        /// <param name="config">An optional rendering configuration object.</param>
         /// <param name="token">An object used to cancel the operation if required.</param>
         /// <param name="contextBuilder">The context builder action.</param>
         public Task<Stream> RenderAsync(string filePath,
                                         object model,
+                                        RenderingConfig config = null,
                                         CancellationToken token = default,
                                         Action<IConfiguresRootContext> contextBuilder = null)
         {
@@ -39,7 +40,7 @@ namespace ZptSharp
             var readerWriter = GetDocumentReaderWriter(filePath);
             var documentRenderer = GetDocumentRenderer(readerWriter);
 
-            return documentRenderer.RenderAsync(stream, model, token, contextBuilder, sourceInfo);
+            return documentRenderer.RenderAsync(stream, model, config, token, contextBuilder, sourceInfo);
         }
 
         IReadsAndWritesDocument GetDocumentReaderWriter(string filePath)
@@ -58,17 +59,15 @@ namespace ZptSharp
         IRendersZptDocuments GetDocumentRenderer(IReadsAndWritesDocument readerWriter)
         {
             var rendererFactory = serviceProvider.GetRequiredService<IGetsZptDocumentRenderer>();
-            return rendererFactory.GetDocumentRenderer(config, readerWriter);
+            return rendererFactory.GetDocumentRenderer(readerWriter);
         }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ZptFileRenderer"/> class.
         /// </summary>
-        /// <param name="config">Config.</param>
         /// <param name="serviceProvider">Service provider.</param>
-        public ZptFileRenderer(RenderingConfig config, IServiceProvider serviceProvider)
+        public ZptFileRenderer(IServiceProvider serviceProvider)
         {
-            this.config = config ?? throw new ArgumentNullException(nameof(config));
             this.serviceProvider = serviceProvider ?? throw new ArgumentNullException(nameof(serviceProvider));
         }
     }

@@ -2,6 +2,7 @@
 using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
+using ZptSharp.Config;
 
 namespace ZptSharp
 {
@@ -17,10 +18,12 @@ namespace ZptSharp
         /// <returns>A stream containing the rendered document.</returns>
         /// <param name="filePath">The path of the document file to render.</param>
         /// <param name="model">The model to use for the rendering process.</param>
+        /// <param name="config">An optional rendering configuration object.</param>
         /// <param name="token">An object used to cancel the operation if required.</param>
         /// <param name="contextBuilder">The context builder action.</param>
         Task<Stream> RenderAsync(string filePath,
                                  object model,
+                                 RenderingConfig config = null,
                                  CancellationToken token = default,
                                  Action<IConfiguresRootContext> contextBuilder = null);
     }

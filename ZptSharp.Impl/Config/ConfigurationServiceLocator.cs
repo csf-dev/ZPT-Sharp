@@ -7,7 +7,7 @@ namespace ZptSharp.Config
     /// No logic except for <see cref="Rendering.ZptRequestRenderer"/> and the Bootstrap DI module should
     /// actually reference this type.
     /// </summary>
-    internal class ConfigurationServiceLocator
+    internal class ConfigurationServiceLocator : IStoresCurrentRenderingConfig
     {
         /// <summary>
         /// Gets or sets the current configuration.

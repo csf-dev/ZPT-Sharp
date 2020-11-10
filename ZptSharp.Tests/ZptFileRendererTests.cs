@@ -17,7 +17,7 @@ namespace ZptSharp
     public class ZptFileRendererTests
     {
         [Test, AutoMoqData, Parallelizable(ParallelScope.None)]
-        public async Task RenderAsync_can_render_a_file_using_a_detected_reader_writer([MockedConfig, Frozen] RenderingConfig config,
+        public async Task RenderAsync_can_render_a_file_using_a_detected_reader_writer([MockedConfig] RenderingConfig config,
                                                                                        [Frozen] IServiceProvider serviceProvider,
                                                                                        ZptFileRenderer sut,
                                                                                        IGetsDocumentReaderWriterForFile readerWriterFactory,
@@ -39,20 +39,19 @@ namespace ZptSharp
                 .Setup(x => x.GetDocumentProvider(filePath))
                 .Returns(readerWriter);
             Mock.Get(rendererFactory)
-                .Setup(x => x.GetDocumentRenderer(config, readerWriter))
+                .Setup(x => x.GetDocumentRenderer(readerWriter))
                 .Returns(renderer);
             Mock.Get(renderer)
-                .Setup(x => x.RenderAsync(It.IsAny<Stream>(), model, It.IsAny<CancellationToken>(), It.IsAny<Action<IConfiguresRootContext>>(), It.IsAny<FileSourceInfo>()))
+                .Setup(x => x.RenderAsync(It.IsAny<Stream>(), model, config, It.IsAny<CancellationToken>(), It.IsAny<Action<IConfiguresRootContext>>(), It.IsAny<FileSourceInfo>()))
                 .Returns(() => Task.FromResult(outputStream));
 
-            var result = await sut.RenderAsync(filePath, model);
+            var result = await sut.RenderAsync(filePath, model, config);
 
             Assert.That(result, Is.SameAs(outputStream));
         }
 
         [Test, AutoMoqData]
-        public void RenderAsync_throws_file_not_found_exception_if_source_file_does_not_exist([MockedConfig, Frozen] RenderingConfig config,
-                                                                                              ZptFileRenderer sut,
+        public void RenderAsync_throws_file_not_found_exception_if_source_file_does_not_exist(ZptFileRenderer sut,
                                                                                               object model,
                                                                                               Stream outputStream)
         {
@@ -62,8 +61,7 @@ namespace ZptSharp
         }
 
         [Test, AutoMoqData, Parallelizable(ParallelScope.None)]
-        public void RenderAsync_throws_no_matching_readerwriter_exception_if_one_cannot_be_inferred([MockedConfig, Frozen] RenderingConfig config,
-                                                                                                    [Frozen] IServiceProvider serviceProvider,
+        public void RenderAsync_throws_no_matching_readerwriter_exception_if_one_cannot_be_inferred([Frozen] IServiceProvider serviceProvider,
                                                                                                     ZptFileRenderer sut,
                                                                                                     IGetsDocumentReaderWriterForFile readerWriterFactory,
                                                                                                     IGetsZptDocumentRenderer rendererFactory,

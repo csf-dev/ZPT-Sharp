@@ -83,5 +83,18 @@ namespace ZptSharp.Config
         /// </example>
         /// </summary>
         protected RenderingConfig() {}
+
+        /// <summary>
+        /// Gets an instance of <see cref="RenderingConfig"/> with default values.
+        /// </summary>
+        /// <value>The default rendering config.</value>
+        public static RenderingConfig Default
+        {
+            get
+            {
+                var builder = new Builder();
+                return builder.GetConfig();
+            }
+        }
     }
 }

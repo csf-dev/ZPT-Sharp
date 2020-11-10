@@ -15,7 +15,6 @@ namespace ZptSharp
     /// </summary>
     public class ZptDocumentRenderer : IRendersZptDocuments
     {
-        readonly RenderingConfig config;
         readonly IServiceProvider serviceProvider;
         readonly IReadsAndWritesDocument readerWriter;
 
@@ -25,11 +24,13 @@ namespace ZptSharp
         /// <returns>A stream containing the rendered document.</returns>
         /// <param name="stream">The stream containing the document to render.</param>
         /// <param name="model">The model to use for the rendering process.</param>
+        /// <param name="config">An optional rendering configuration object.</param>
         /// <param name="token">An object used to cancel the operation if required.</param>
         /// <param name="contextBuilder">The context builder action.</param>
         /// <param name="sourceInfo">The source info for the <paramref name="stream"/>.</param>
         public Task<Stream> RenderAsync(Stream stream,
                                         object model,
+                                        RenderingConfig config = null,
                                         CancellationToken token = default,
                                         Action<IConfiguresRootContext> contextBuilder = null,
                                         IDocumentSourceInfo sourceInfo = null)
@@ -39,7 +40,7 @@ namespace ZptSharp
 
             var request = new RenderZptDocumentRequest(stream,
                                                        model,
-                                                       config,
+                                                       config ?? RenderingConfig.Default,
                                                        contextBuilder,
                                                        sourceInfo,
                                                        readerWriter);
@@ -50,14 +51,11 @@ namespace ZptSharp
         /// <summary>
         /// Initializes a new instance of the <see cref="ZptDocumentRenderer"/> class.
         /// </summary>
-        /// <param name="config">The configuration to be used by this service.</param>
         /// <param name="serviceProvider">A service provider, from which dependencies may be resolved.</param>
         /// <param name="readerWriter">An optional document reader/writer service to use to render the current document.</param>
-        public ZptDocumentRenderer(RenderingConfig config,
-                                   IServiceProvider serviceProvider,
+        public ZptDocumentRenderer(IServiceProvider serviceProvider,
                                    IReadsAndWritesDocument readerWriter = null)
         {
-            this.config = config ?? throw new ArgumentNullException(nameof(config));
             this.serviceProvider = serviceProvider ?? throw new ArgumentNullException(nameof(serviceProvider));
             this.readerWriter = readerWriter;
         }

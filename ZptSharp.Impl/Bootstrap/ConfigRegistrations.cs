@@ -11,8 +11,8 @@ namespace ZptSharp.Bootstrap
     {
         internal void RegisterServices(IServiceCollection services)
         {
-            services.AddScoped<ConfigurationServiceLocator>();
-            services.AddScoped(s => s.GetRequiredService<ConfigurationServiceLocator>().GetConfiguration());
+            services.AddScoped<IStoresCurrentRenderingConfig, ConfigurationServiceLocator>();
+            services.AddScoped(s => s.GetRequiredService<IStoresCurrentRenderingConfig>().GetConfiguration());
         }
     }
 }
