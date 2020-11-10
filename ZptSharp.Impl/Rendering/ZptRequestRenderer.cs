@@ -10,8 +10,8 @@ namespace ZptSharp.Rendering
 {
     /// <summary>
     /// A service which coordinates the process of rendering a ZPT document from a request object.
-    /// Generally-speaking it is better to use an <see cref="IRendersZptDocuments"/> to begin the process.
-    /// <see cref="IRendersZptDocuments"/> offers a more useful API and its default implementation -
+    /// Generally-speaking it is better to use an <see cref="IRendersZptDocument"/> to begin the process.
+    /// <see cref="IRendersZptDocument"/> offers a more useful API and its default implementation -
     /// <see cref="ZptDocumentRenderer"/> - provides dependency injection as well.
     /// </summary>
     public class ZptRequestRenderer : IRendersRenderingRequest

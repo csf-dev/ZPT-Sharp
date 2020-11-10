@@ -13,7 +13,7 @@ namespace ZptSharp
     /// The main entry-point service for ZPT-Sharp.  This service renders a model to a document stream
     /// and returns the result as a stream.
     /// </summary>
-    public class ZptDocumentRenderer : IRendersZptDocuments
+    public class ZptDocumentRenderer : IRendersZptDocument
     {
         readonly IServiceProvider serviceProvider;
         readonly IReadsAndWritesDocument readerWriter;

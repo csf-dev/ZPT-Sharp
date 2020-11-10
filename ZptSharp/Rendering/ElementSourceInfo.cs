@@ -20,6 +20,15 @@ namespace ZptSharp.Rendering
         public int? LineNumber { get; }
 
         /// <summary>
+        /// Creates a child <see cref="IElementSourceInfo"/> which uses the same
+        /// document as the current instance, but the specified line number instead.
+        /// </summary>
+        /// <returns>The child source info.</returns>
+        /// <param name="lineNumber">A line number.</param>
+        public IElementSourceInfo CreateChild(int? lineNumber = null)
+            => new ElementSourceInfo(Document, lineNumber);
+
+        /// <summary>
         /// Determines whether the specified <see cref="IElementSourceInfo"/> is equal to the
         /// current <see cref="ElementSourceInfo"/>.  Will only return <c>true</c> if the objects are reference-equal.
         /// </summary>

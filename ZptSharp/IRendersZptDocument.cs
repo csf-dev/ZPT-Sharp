@@ -11,7 +11,7 @@ namespace ZptSharp
     /// An entry-point object for use by consuming logic.  Renders ZPT documents
     /// from a stream and returns the rendered document as a stream.
     /// </summary>
-    public interface IRendersZptDocuments
+    public interface IRendersZptDocument
     {
         /// <summary>
         /// Renders a specified ZPT document from a stream using the specified model.

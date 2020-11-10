@@ -21,5 +21,22 @@ namespace ZptSharp.Dom
 
             return element.Attributes.FirstOrDefault(x => x.Matches(spec));
         }
+
+        /// <summary>
+        /// Replaces the <paramref name="element"/> 'in-place' on its parent using the <paramref name="replacement"/>.
+        /// Note that this means that the current element will be detached/removed from its parent as a side-effect.
+        /// Further DOM manipulation should occur using the replacement element and not the replaced element.
+        /// </summary>
+        /// <param name="element">Element.</param>
+        /// <param name="replacement">Replacement.</param>
+        public static void ReplaceWith(this IElement element, IElement replacement)
+        {
+            if (element == null)
+                throw new ArgumentNullException(nameof(element));
+            if (element.ParentElement == null)
+                throw new ArgumentException(Resources.ExceptionMessage.ElementMustHaveAParent, nameof(element));
+
+            element.ParentElement.ReplaceChild(element, replacement);
+        }
     }
 }

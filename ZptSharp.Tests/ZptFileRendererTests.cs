@@ -23,7 +23,7 @@ namespace ZptSharp
                                                                                        IGetsDocumentReaderWriterForFile readerWriterFactory,
                                                                                        IReadsAndWritesDocument readerWriter,
                                                                                        IGetsZptDocumentRenderer rendererFactory,
-                                                                                       IRendersZptDocuments renderer,
+                                                                                       IRendersZptDocument renderer,
                                                                                        object model,
                                                                                        Stream outputStream)
         {

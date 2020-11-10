@@ -21,7 +21,7 @@ namespace ZptSharp.Dom
                                                                                                            AttributeSpec spec,
                                                                                                            AttributeSearcher sut)
         {
-            Mock.Get(doc).Setup(x => x.GetRootElement()).Returns(root);
+            Mock.Get(doc).SetupGet(x => x.RootElement).Returns(root);
             root.ChildElements.Add(child1);
             root.ChildElements.Add(child2);
             child1.ChildElements.Add(grandchild1);
@@ -41,7 +41,7 @@ namespace ZptSharp.Dom
                                                                                 AttributeSpec spec,
                                                                                 AttributeSearcher sut)
         {
-            Mock.Get(doc).Setup(x => x.GetRootElement()).Returns(root);
+            Mock.Get(doc).SetupGet(x => x.RootElement).Returns(root);
             root.Attributes.Add(nonMatchingAttrib);
 
             Mock.Get(nonMatchingAttrib).Setup(x => x.Matches(spec)).Returns(false);

@@ -59,10 +59,7 @@ namespace ZptSharp.Dom
                 var loadOptions = LoadOptions.PreserveWhitespace | LoadOptions.SetLineInfo;
                 var doc = XDocument.Load(reader, loadOptions);
 
-                IDocument xmlDoc = new XmlDocument(doc)
-                {
-                    SourceInfo = sourceInfo ?? new UnknownSourceInfo()
-                };
+                IDocument xmlDoc = new XmlDocument(doc, sourceInfo ?? new UnknownSourceInfo());
                 return Task.FromResult(xmlDoc);
             }
         }

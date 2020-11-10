@@ -12,6 +12,11 @@ namespace ZptSharp.Dom
     /// </summary>
     public class XmlElement : ElementBase
     {
+        /// <summary>
+        /// Gets the native XML <see cref="XElement"/> instance which
+        /// acts as the basis for the current element.
+        /// </summary>
+        /// <value>The native XML element object.</value>
         public XElement NativeElement { get; }
 
         /// <summary>
@@ -25,12 +30,6 @@ namespace ZptSharp.Dom
         /// </summary>
         /// <value>The child elements.</value>
         public override IList<IElement> ChildElements { get { throw new NotImplementedException(); } }
-
-        /// <summary>
-        /// Replaces the current element in the DOM using the replacement element.
-        /// </summary>
-        /// <param name="replacement">The replacement element.</param>
-        public override void ReplaceWith(IElement replacement) => throw new NotImplementedException();
 
         /// <summary>
         /// Returns a <see cref="String"/> that represents the current
@@ -47,12 +46,25 @@ namespace ZptSharp.Dom
             return $"<{NativeElement.Name}{(hasAttributes ? " " : String.Empty)}{String.Join(" ", attributes)}>";
         }
 
-        static int? GetLineNumber(XElement element)
+        /// <summary>
+        /// Gets the line number for the specified element.
+        /// </summary>
+        /// <returns>The line number.</returns>
+        /// <param name="element">The element for which to get a line number.</param>
+        internal static int? GetLineNumber(XElement element)
             => ((element is IXmlLineInfo lineInfo) && lineInfo.HasLineInfo()) ? lineInfo.LineNumber : (int?) null;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="XmlElement"/> class.
+        /// </summary>
+        /// <param name="element">The native element object.</param>
+        /// <param name="document">The containing document.</param>
+        /// <param name="parent">The parent element.</param>
+        /// <param name="sourceInfo">Source info.</param>
         public XmlElement(XElement element,
                           XmlDocument document,
-                          IElementSourceInfo sourceInfo = null) : base(document, sourceInfo)
+                          IElement parent = null,
+                          IElementSourceInfo sourceInfo = null) : base(document, parent, sourceInfo)
         {
             NativeElement = element ?? throw new ArgumentNullException(nameof(element));
         }

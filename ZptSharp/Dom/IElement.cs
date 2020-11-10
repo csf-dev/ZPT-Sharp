@@ -33,9 +33,21 @@ namespace ZptSharp.Dom
         IList<IElement> ChildElements { get; }
 
         /// <summary>
-        /// Replaces the current element in the DOM using the replacement element.
+        /// Gets or sets the parent for the current element.  This will be a <see langword="null"/>
+        /// reference if the current instance is the root element of the document or if the element
+        /// is not attached to a DOM.
         /// </summary>
+        /// <value>The parent element.</value>
+        IElement ParentElement { get; set; }
+
+        /// <summary>
+        /// Replaces the specified child element (the <paramref name="toReplace"/> parameter)
+        /// using the specified <paramref name="replacement"/> element.
+        /// Note that this means that the current element will be detached/removed from its parent as a side-effect.
+        /// Further DOM manipulation should occur using the replacement element and not the replaced element.
+        /// </summary>
+        /// <param name="toReplace">The child element to replace.</param>
         /// <param name="replacement">The replacement element.</param>
-        void ReplaceWith(IElement replacement);
+        void ReplaceChild(IElement toReplace, IElement replacement);
     }
 }

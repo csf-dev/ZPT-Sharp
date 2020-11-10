@@ -142,5 +142,11 @@ namespace ZptSharp.Resources {
                 return ResourceManager.GetString("MissingConfiguration", resourceCulture);
             }
         }
+        
+        internal static string ElementMustHaveAParent {
+            get {
+                return ResourceManager.GetString("ElementMustHaveAParent", resourceCulture);
+            }
+        }
     }
 }

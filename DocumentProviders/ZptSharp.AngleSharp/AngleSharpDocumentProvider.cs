@@ -67,10 +67,7 @@ namespace ZptSharp.Dom
         {
             var doc = await parser.ParseDocumentAsync(stream, token).ConfigureAwait(false);
 
-            return new AngleSharpDocument(doc)
-            {
-                SourceInfo = sourceInfo ?? new UnknownSourceInfo()
-            };
+            return new AngleSharpDocument(doc, sourceInfo ?? new UnknownSourceInfo());
         }
 
         /// <summary>

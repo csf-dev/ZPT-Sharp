@@ -7,7 +7,7 @@ using ZptSharp.Expressions;
 namespace ZptSharp.Config
 {
     /// <summary>
-    /// Configuration for a single instance of <see cref="IRendersZptDocuments"/>.  One configuration
+    /// Configuration for a single instance of <see cref="IRendersZptDocument"/>.  One configuration
     /// object is used for all operations of a single renderer object.
     /// </summary>
     public partial class RenderingConfig

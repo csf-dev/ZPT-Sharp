@@ -18,9 +18,9 @@ namespace ZptSharp.Autofixture
             {
                 fixture.Customize<IDocument>(x =>
                 {
-                    return x.FromFactory(() =>
+                    return x.FromFactory((Rendering.IDocumentSourceInfo src) =>
                     {
-                        var mock = new Mock<StubDocument>() { CallBase = true };
+                        var mock = new Mock<StubDocument>(src) { CallBase = true };
                         return mock.Object;
                     });
                 });

@@ -11,7 +11,7 @@ namespace ZptSharp
 {
     /// <summary>
     /// Implementation of <see cref="IRendersZptFile"/> which uses an
-    /// <see cref="IRendersZptDocuments"/> from a factory.  It also uses an
+    /// <see cref="IRendersZptDocument"/> from a factory.  It also uses an
     /// <see cref="IGetsDocumentReaderWriterForFile"/> to attempt to get the
     /// appropriate document reader/writer for the file.
     /// </summary>
@@ -56,7 +56,7 @@ namespace ZptSharp
             throw new NoMatchingReaderWriterException(message);
         }
 
-        IRendersZptDocuments GetDocumentRenderer(IReadsAndWritesDocument readerWriter)
+        IRendersZptDocument GetDocumentRenderer(IReadsAndWritesDocument readerWriter)
         {
             var rendererFactory = serviceProvider.GetRequiredService<IGetsZptDocumentRenderer>();
             return rendererFactory.GetDocumentRenderer(readerWriter);

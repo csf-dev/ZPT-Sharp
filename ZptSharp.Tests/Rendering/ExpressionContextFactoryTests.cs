@@ -17,7 +17,7 @@ namespace ZptSharp.Rendering
                                                                                                       IElement element,
                                                                                                       ExpressionContextFactory sut)
         {
-            Mock.Get(document).Setup(x => x.GetRootElement()).Returns(element);
+            Mock.Get(document).SetupGet(x => x.RootElement).Returns(element);
             var result = sut.GetExpressionContext(document, request);
 
             Assert.That(result.TemplateDocument, Is.SameAs(document), $"{nameof(ExpressionContext.TemplateDocument)} is correct");

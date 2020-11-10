@@ -11,6 +11,11 @@ namespace ZptSharp.Dom
     /// </summary>
     public class HapElement : ElementBase
     {
+        /// <summary>
+        /// Gets the native HTML Agility Pack <see cref="HtmlNode"/> instance which
+        /// acts as the basis for the current element.
+        /// </summary>
+        /// <value>The native HTML Agility Pack element object.</value>
         public HtmlNode NativeElement { get; }
 
         /// <summary>
@@ -24,12 +29,6 @@ namespace ZptSharp.Dom
         /// </summary>
         /// <value>The child elements.</value>
         public override IList<IElement> ChildElements { get { throw new NotImplementedException(); } }
-
-        /// <summary>
-        /// Replaces the current element in the DOM using the replacement element.
-        /// </summary>
-        /// <param name="replacement">The replacement element.</param>
-        public override void ReplaceWith(IElement replacement) => throw new NotImplementedException();
 
         /// <summary>
         /// Returns a <see cref="String"/> that represents the current
@@ -46,9 +45,17 @@ namespace ZptSharp.Dom
             return $"<{NativeElement.Name}{(hasAttributes ? " " : String.Empty)}{String.Join(" ", attributes)}>";
         }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="HapElement"/> class.
+        /// </summary>
+        /// <param name="element">The native element object.</param>
+        /// <param name="document">The containing document.</param>
+        /// <param name="parent">The parent element.</param>
+        /// <param name="sourceInfo">Source info.</param>
         public HapElement(HtmlNode element,
                           HapDocument document,
-                          IElementSourceInfo sourceInfo = null) : base(document, sourceInfo)
+                          IElement parent = null,
+                          IElementSourceInfo sourceInfo = null) : base(document, parent, sourceInfo)
         {
             NativeElement = element ?? throw new ArgumentNullException(nameof(element));
         }

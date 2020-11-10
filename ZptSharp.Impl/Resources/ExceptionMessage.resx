@@ -73,4 +73,7 @@ The inner exception will provide further information as to why.</value>
     <data name="MissingConfiguration" xml:space="preserve">
         <value>A rendering configuration object must be registered before it can be retrieved.</value>
     </data>
+    <data name="ElementMustHaveAParent" xml:space="preserve">
+        <value>The element must have a parent element; that is - it must not be the root element of its document.</value>
+    </data>
 </root>

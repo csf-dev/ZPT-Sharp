@@ -56,10 +56,7 @@ namespace ZptSharp.Dom
             var htmlDoc = new HtmlDocument();
             htmlDoc.Load(stream, config.DocumentEncoding);
 
-            IDocument doc = new HapDocument(htmlDoc)
-            {
-                SourceInfo = sourceInfo ?? new UnknownSourceInfo()
-            };
+            IDocument doc = new HapDocument(htmlDoc, sourceInfo ?? new UnknownSourceInfo());
             return Task.FromResult(doc);
         }
 

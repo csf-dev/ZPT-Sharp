@@ -10,29 +10,33 @@ namespace ZptSharp.Metal
     {
         [Test, AutoMoqData]
         public void FillSlots_does_not_fill_a_slot_which_has_no_filler(Slot defined,
+                                                                       IElement parent,
                                                                        MacroExpansionContext context,
                                                                        SlotFiller sut)
         {
+            Mock.Get(defined.Element).SetupProperty(x => x.ParentElement, parent);
             context.SlotFillers.Clear();
 
             sut.FillSlots(context, new[] { defined });
 
-            Mock.Get(defined.Element).Verify(x => x.ReplaceWith(It.IsAny<IElement>()), Times.Never);
+            Mock.Get(parent).Verify(x => x.ReplaceChild(It.IsAny<IElement>(), It.IsAny<IElement>()), Times.Never);
         }
 
         [Test, AutoMoqData]
         public void FillSlots_replaces_the_element_with_its_filler(IElement defineSlotElement,
                                                                    IElement fillSlotElement,
+                                                                   IElement parent,
                                                                    string slotName,
                                                                    MacroExpansionContext context,
                                                                    SlotFiller sut)
         {
+            Mock.Get(defineSlotElement).SetupProperty(x => x.ParentElement, parent);
             context.SlotFillers.Clear();
             context.SlotFillers.Add(slotName, new Slot(slotName, fillSlotElement));
 
             sut.FillSlots(context, new[] { new Slot(slotName, defineSlotElement) });
 
-            Mock.Get(defineSlotElement).Verify(x => x.ReplaceWith(fillSlotElement), Times.Once);
+            Mock.Get(parent).Verify(x => x.ReplaceChild(defineSlotElement, fillSlotElement), Times.Once);
         }
 
         [Test, AutoMoqData]
