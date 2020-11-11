@@ -21,6 +21,8 @@ namespace ZptSharp.PathExpressions
     {
         readonly RenderingConfig config;
         readonly IGetsBuiltinContextsProvider builtinContextsProviderFactory;
+        readonly Dom.IReadsAndWritesDocument readerWriter;
+        readonly Metal.IGetsMetalDocumentAdapter adapterFactory;
 
         /// <summary>
         /// Attempts to get a value for a named reference, from the specified object.
@@ -61,6 +63,7 @@ namespace ZptSharp.PathExpressions
             service = GetIntegerKeyedDictionaryValueLink(service);
             service = GetStringKeyedDictionaryValueLink(service);
             service = GetNamedValueLink(service);
+            service = GetTemplateDirectoryValueLink(service);
             service = GetContextWrappingDecorator(service);
             return service;
         }
@@ -102,16 +105,25 @@ namespace ZptSharp.PathExpressions
         IGetsValueFromObject GetReflectionValueLink(IGetsValueFromObject service)
             => new ReflectionObjectValueProvider(service);
 
+        IGetsValueFromObject GetTemplateDirectoryValueLink(IGetsValueFromObject service)
+            => new TemplateDirectoryValueProvider(service, readerWriter, config, adapterFactory);
+
         /// <summary>
         /// Initializes a new instance of the <see cref="DecoratorBasedObjectValueProvider"/> class.
         /// </summary>
         /// <param name="config">Config.</param>
         /// <param name="builtinContextsProviderFactory">Builtin contexts provider factory.</param>
+        /// <param name="readerWriter">A document reader/writer.</param>
+        /// <param name="adapterFactory">A METAL document adapter factory.</param>
         public DecoratorBasedObjectValueProvider(RenderingConfig config,
-                                                 IGetsBuiltinContextsProvider builtinContextsProviderFactory)
+                                                 IGetsBuiltinContextsProvider builtinContextsProviderFactory,
+                                                 Dom.IReadsAndWritesDocument readerWriter,
+                                                 Metal.IGetsMetalDocumentAdapter adapterFactory)
         {
             this.config = config ?? throw new ArgumentNullException(nameof(config));
             this.builtinContextsProviderFactory = builtinContextsProviderFactory ?? throw new ArgumentNullException(nameof(builtinContextsProviderFactory));
+            this.readerWriter = readerWriter ?? throw new ArgumentNullException(nameof(readerWriter));
+            this.adapterFactory = adapterFactory ?? throw new ArgumentNullException(nameof(adapterFactory));
         }
     }
 }

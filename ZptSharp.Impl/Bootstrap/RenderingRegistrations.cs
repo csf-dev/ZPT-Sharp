@@ -19,6 +19,7 @@ namespace ZptSharp.Bootstrap
             services.AddTransient<IRendersRenderingRequest, ZptRequestRenderer>();
             services.AddTransient<IRendersZptDocument, ZptDocumentRenderer>();
             services.AddTransient<IRendersZptFile, ZptFileRenderer>();
+            services.AddTransient<IGetsZptElementAndAttributeRemovalContextProcessor, ZptCleanupContextProcessorFactory>();
         }
     }
 }

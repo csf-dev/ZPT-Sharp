@@ -36,9 +36,9 @@ namespace ZptSharp.Rendering
         {
             using (var scope = serviceProvider.CreateScope())
             {
-                StoreConfigForLaterUse(scope, request);
-
+                StoreConfigForLaterUse(scope, request.Config);
                 var documentReaderWriter = GetDocumentReaderWriter(scope, request);
+                StoreReaderWriterForLaterUse(scope, documentReaderWriter);
                 var renderer = GetRenderer(scope, request);
 
                 var document = await ReadDocument(documentReaderWriter, request, token).ConfigureAwait(false);
@@ -47,10 +47,39 @@ namespace ZptSharp.Rendering
             }
         }
 
-        void StoreConfigForLaterUse(IServiceScope scope, RenderZptDocumentRequest request)
+        /// <summary>
+        /// Where a rendering operation occurs within a single service provider
+        /// scope, other services inside that scope will need to be able to dependency-inject
+        /// a configuration object.  However, at this stage it's (way) too late to modify the
+        /// service provider itself.  To get around this, ZPT-Sharp registers a per-scope service
+        /// locator for the config, resolves one of them here and adds the config to that.
+        /// Another registration will make the config injectable by using the service locator
+        /// as a factory.
+        /// </summary>
+        /// <param name="scope">Scope.</param>
+        /// <param name="config">Rendering config.</param>
+        void StoreConfigForLaterUse(IServiceScope scope, RenderingConfig config)
         {
             var configServiceLocator = scope.ServiceProvider.GetRequiredService<IStoresCurrentRenderingConfig>();
-            configServiceLocator.Configuration = request.Config;
+            configServiceLocator.Configuration = config;
+        }
+
+        /// <summary>
+        /// Where a rendering operation occurs within a single service provider
+        /// scope, other services inside that scope will need to be able to dependency-inject
+        /// that same reader/writer (mixing documents from different reader/writer implementations is unsupported).
+        /// However, at this stage it's (way) too late to modify the
+        /// service provider itself.  To get around this, ZPT-Sharp registers a per-scope service
+        /// locator for the reader/writer, resolves one of them here and adds the reader/writer to that.
+        /// Another registration will make the reader/writer injectable by using the service locator
+        /// as a factory.
+        /// </summary>
+        /// <param name="scope">Scope.</param>
+        /// <param name="readerWriter">Reader/writer.</param>
+        void StoreReaderWriterForLaterUse(IServiceScope scope, IReadsAndWritesDocument readerWriter)
+        {
+            var readerWriterServiceLocator = scope.ServiceProvider.GetRequiredService<IStoresCurrentReaderWriter>();
+            readerWriterServiceLocator.ReaderWriter = readerWriter;
         }
 
         IReadsAndWritesDocument GetDocumentReaderWriter(IServiceScope scope, RenderZptDocumentRequest request)

@@ -27,7 +27,7 @@ namespace ZptSharp
                                                                                        object model,
                                                                                        Stream outputStream)
         {
-            string filePath = TestFiles.GetFilePath("SampleZptDocument.txt");
+            string filePath = TestFiles.GetPath("SampleZptDocument.txt");
 
             Mock.Get(serviceProvider)
                 .Setup(x => x.GetService(typeof(IGetsDocumentReaderWriterForFile)))
@@ -55,7 +55,7 @@ namespace ZptSharp
                                                                                               object model,
                                                                                               Stream outputStream)
         {
-            string filePath = TestFiles.GetFilePath("NonExistentFile.txt");
+            string filePath = TestFiles.GetPath("NonExistentFile.txt");
 
             Assert.That(() => sut.RenderAsync(filePath, model).Result, Throws.InstanceOf<FileNotFoundException>());
         }
@@ -68,7 +68,7 @@ namespace ZptSharp
                                                                                                     object model,
                                                                                                     Stream outputStream)
         {
-            string filePath = TestFiles.GetFilePath("SampleZptDocument.txt");
+            string filePath = TestFiles.GetPath("SampleZptDocument.txt");
 
             Mock.Get(serviceProvider)
                 .Setup(x => x.GetService(typeof(IGetsDocumentReaderWriterForFile)))

@@ -1,6 +1,7 @@
 ﻿using System;
 using Microsoft.Extensions.DependencyInjection;
 using ZptSharp.Bootstrap;
+using ZptSharp.Expressions;
 
 namespace ZptSharp
 {
@@ -26,8 +27,22 @@ namespace ZptSharp
             new MetalServiceRegistrations().RegisterServices(serviceCollection);
             new PathExpressionsRegistrations().RegisterServices(serviceCollection);
             new RenderingRegistrations().RegisterServices(serviceCollection);
+            new SourceAnnotationServiceRegistrations().RegisterServices(serviceCollection);
+            new TalServiceRegistrations().RegisterServices(serviceCollection);
 
             return serviceCollection;
+        }
+
+        /// <summary>
+        /// Configures ZPT Sharp to read and handle TALES "path" expressions.
+        /// </summary>
+        /// <param name="provider">The service provider.</param>
+        public static void UseZptPathExpressions(this IServiceProvider provider)
+        {
+            if (provider == null)
+                throw new ArgumentNullException(nameof(provider));
+
+            provider.GetRequiredService<IRegistersExpressionEvaluator>().RegisterEvaluatorType<PathExpressions.PathExpressionEvaluator>("path");
         }
     }
 }

@@ -143,9 +143,21 @@ namespace ZptSharp.Resources {
             }
         }
         
+        internal static string MissingReaderWriter {
+            get {
+                return ResourceManager.GetString("MissingReaderWriter", resourceCulture);
+            }
+        }
+        
         internal static string ElementMustHaveAParent {
             get {
                 return ResourceManager.GetString("ElementMustHaveAParent", resourceCulture);
+            }
+        }
+        
+        internal static string DocumentNotFound {
+            get {
+                return ResourceManager.GetString("DocumentNotFound", resourceCulture);
             }
         }
     }

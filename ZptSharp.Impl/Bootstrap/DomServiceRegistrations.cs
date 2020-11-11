@@ -15,6 +15,8 @@ namespace ZptSharp.Bootstrap
             services.AddTransient<IGetsDocumentReaderWriterForFile>(s => s.GetRequiredService<DocumentReaderWriterRegistry>());
             services.AddTransient<IRegistersDocumentReaderWriter>(s => s.GetRequiredService<DocumentReaderWriterRegistry>());
             services.AddTransient<IGetsWellKnownNamespace, WellKnownNamespaceProvider>();
+            services.AddScoped<IStoresCurrentReaderWriter, ReaderWriterServiceLocator>();
+            services.AddScoped(s => s.GetRequiredService<IStoresCurrentReaderWriter>().GetReaderWriter());
         }
     }
 }
