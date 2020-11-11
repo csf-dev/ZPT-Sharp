@@ -32,7 +32,7 @@ namespace ZptSharp.Dom
         /// Initializes a new instance of the <see cref="DocumentBase"/> class.
         /// </summary>
         /// <param name="source">The source info for the document.</param>
-        public DocumentBase(IDocumentSourceInfo source)
+        protected DocumentBase(IDocumentSourceInfo source)
         {
             Source = source ?? throw new System.ArgumentNullException(nameof(source));
         }
