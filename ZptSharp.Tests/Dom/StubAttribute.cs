@@ -13,6 +13,8 @@ namespace ZptSharp.Dom
 
         public override bool Matches(AttributeSpec spec) => String.Equals(spec?.Name, Name);
 
+        public override bool IsInNamespace(Namespace @namespace) => false;
+
         public StubAttribute(IElement element, string name, string value) : base(element)
         {
             // It's OK to suppress these here, this class is not for prod usage

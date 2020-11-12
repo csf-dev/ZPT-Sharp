@@ -51,6 +51,19 @@ namespace ZptSharp.Dom
         void ReplaceChild(IElement toReplace, IElement replacement);
 
         /// <summary>
+        /// Removes the current element from the DOM but preserves all of its children.
+        /// Essentially this replaces the current element (on its parent) with the element's children.
+        /// </summary>
+        void Omit();
+
+        /// <summary>
+        /// Gets a value which indicates whether or not the current element is in the specified namespace.
+        /// </summary>
+        /// <returns><c>true</c>, if the element is in the specified namespace, <c>false</c> otherwise.</returns>
+        /// <param name="namespace">A namespace.</param>
+        bool IsInNamespace(Namespace @namespace);
+
+        /// <summary>
         /// Gets a copy of the current element and all of its children.
         /// </summary>
         /// <returns>The copied element.</returns>

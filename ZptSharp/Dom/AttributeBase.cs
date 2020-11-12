@@ -35,6 +35,13 @@ namespace ZptSharp.Dom
         public abstract bool Matches(AttributeSpec spec);
 
         /// <summary>
+        /// Gets a value indicating whether or not the current instance is in the specified namespace.
+        /// </summary>
+        /// <returns><c>true</c>, if the attribute is in the specified namespace, <c>false</c> otherwise.</returns>
+        /// <param name="namespace">The namespace.</param>
+        public abstract bool IsInNamespace(Namespace @namespace);
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="AttributeBase"/> class.
         /// </summary>
         /// <param name="element">Element.</param>

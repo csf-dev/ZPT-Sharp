@@ -36,8 +36,21 @@ namespace ZptSharp.Dom
             if (spec == null)
                 throw new ArgumentNullException(nameof(spec));
 
-            return String.Equals(spec.Namespace.Prefix, NativeAttribute.Prefix, StringComparison.CurrentCultureIgnoreCase)
-                && String.Equals(spec.Name, NativeAttribute.LocalName, StringComparison.CurrentCultureIgnoreCase);
+            return IsInNamespace(spec.Namespace)
+                && String.Equals(spec.Name, NativeAttribute.LocalName, StringComparison.InvariantCulture);
+        }
+
+        /// <summary>
+        /// Gets a value indicating whether or not the current instance is in the specified namespace.
+        /// </summary>
+        /// <returns><c>true</c>, if the attribute is in the specified namespace, <c>false</c> otherwise.</returns>
+        /// <param name="namespace">The namespace.</param>
+        public override bool IsInNamespace(Namespace @namespace)
+        {
+            if (@namespace == null)
+                throw new ArgumentNullException(nameof(@namespace));
+
+            return String.Equals(@namespace.Prefix, NativeAttribute.Prefix, StringComparison.InvariantCulture);
         }
 
         /// <summary>

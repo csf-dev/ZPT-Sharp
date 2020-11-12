@@ -40,8 +40,23 @@ namespace ZptSharp.Dom
 
             var (prefix, localName) = GetAttributeName(NativeAttribute.OriginalName);
 
-            return String.Equals(spec.Namespace.Prefix, prefix, StringComparison.CurrentCultureIgnoreCase)
-                && String.Equals(spec.Name, localName, StringComparison.CurrentCultureIgnoreCase);
+            return IsInNamespace(spec.Namespace)
+                && String.Equals(spec.Name, localName, StringComparison.InvariantCulture);
+        }
+
+        /// <summary>
+        /// Gets a value indicating whether or not the current instance is in the specified namespace.
+        /// </summary>
+        /// <returns><c>true</c>, if the attribute is in the specified namespace, <c>false</c> otherwise.</returns>
+        /// <param name="namespace">The namespace.</param>
+        public override bool IsInNamespace(Namespace @namespace)
+        {
+            if (@namespace == null)
+                throw new ArgumentNullException(nameof(@namespace));
+
+            var (prefix, localName) = GetAttributeName(NativeAttribute.OriginalName);
+
+            return String.Equals(@namespace.Prefix, prefix, StringComparison.InvariantCulture);
         }
 
         (string, string) GetAttributeName(string name)

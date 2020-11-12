@@ -52,5 +52,11 @@ namespace ZptSharp.Resources {
                 return ResourceManager.GetString("ElementMustBeAChildOfThisParent", resourceCulture);
             }
         }
+        
+        internal static string MustNotBeRootElement {
+            get {
+                return ResourceManager.GetString("MustNotBeRootElement", resourceCulture);
+            }
+        }
     }
 }

@@ -15,6 +15,8 @@ namespace ZptSharp.Dom
 
         public override IElement GetCopy() => this;
 
+        public override bool IsInNamespace(Namespace @namespace) => false;
+
         public StubElement(IDocument document) : base(document) { }
     }
 }

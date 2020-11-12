@@ -59,6 +59,19 @@ namespace ZptSharp.Dom
         }
 
         /// <summary>
+        /// Gets a value which indicates whether or not the current element is in the specified namespace.
+        /// </summary>
+        /// <returns><c>true</c>, if the element is in the specified namespace, <c>false</c> otherwise.</returns>
+        /// <param name="namespace">A namespace.</param>
+        public override bool IsInNamespace(Namespace @namespace)
+        {
+            if (@namespace == null)
+                throw new ArgumentNullException(nameof(@namespace));
+
+            return String.Equals(NativeElement.Prefix, @namespace.Prefix, StringComparison.InvariantCulture);
+        }
+
+        /// <summary>
         /// <para>
         /// Called by the constructor; initialises and returns a <see cref="EventRaisingList{IAttribute}"/>
         /// for use as the <see cref="Attributes"/> collection.

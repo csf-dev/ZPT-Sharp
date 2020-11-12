@@ -57,6 +57,19 @@ namespace ZptSharp.Dom
         }
 
         /// <summary>
+        /// Gets a value which indicates whether or not the current element is in the specified namespace.
+        /// </summary>
+        /// <returns><c>true</c>, if the element is in the specified namespace, <c>false</c> otherwise.</returns>
+        /// <param name="namespace">A namespace.</param>
+        public override bool IsInNamespace(Namespace @namespace)
+        {
+            if (@namespace == null)
+                throw new ArgumentNullException(nameof(@namespace));
+
+            return String.Equals(NativeElement.Name.NamespaceName, @namespace.Uri, StringComparison.InvariantCulture);
+        }
+
+        /// <summary>
         /// Gets the line number for the specified element.
         /// </summary>
         /// <returns>The line number.</returns>

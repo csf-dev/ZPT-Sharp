@@ -15,4 +15,7 @@
     <data name="ElementMustBeAChildOfThisParent" xml:space="preserve">
         <value>Specified element must be a child of the current element instance.</value>
     </data>
+    <data name="MustNotBeRootElement" xml:space="preserve">
+        <value>The current element instance must not be the root element of the document; it must have a parent element.</value>
+    </data>
 </root>

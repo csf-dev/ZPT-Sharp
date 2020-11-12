@@ -68,6 +68,13 @@ namespace ZptSharp.Dom
         public abstract IElement GetCopy();
 
         /// <summary>
+        /// Gets a value which indicates whether or not the current element is in the specified namespace.
+        /// </summary>
+        /// <returns><c>true</c>, if the element is in the specified namespace, <c>false</c> otherwise.</returns>
+        /// <param name="namespace">A namespace.</param>
+        public abstract bool IsInNamespace(Namespace @namespace);
+
+        /// <summary>
         /// Replaces the specified child element (the <paramref name="toReplace"/> parameter)
         /// using the specified <paramref name="replacement"/> element.
         /// Note that this means that the current element will be detached/removed from its parent as a side-effect.
@@ -89,6 +96,26 @@ namespace ZptSharp.Dom
             ChildElements.Remove(toReplace);
         }
 
+        /// <summary>
+        /// Removes the current element from the DOM but preserves all of its children.
+        /// Essentially this replaces the current element (on its parent) with the element's children.
+        /// </summary>
+        public virtual void Omit()
+        {
+            if (ParentElement == null)
+                throw new InvalidOperationException(Resources.CoreExceptionMessage.MustNotBeRootElement);
+
+            var indexOnParent = ParentElement.ChildElements.IndexOf(this);
+
+            var children = new List<IElement>(ChildElements);
+            ParentElement.ChildElements.Remove(this);
+
+            // Insert the children to the parent, at the same index, in reverse order
+            children.Reverse();
+            foreach (var child in children)
+                ParentElement.ChildElements.Insert(indexOnParent, child);
+        }
+            
         IDocumentSourceInfo IHasDocumentSourceInfo.SourceInfo => SourceInfo.Document;
 
         IEnumerable<IElement> IHasElements.GetChildElements() => ChildElements;
