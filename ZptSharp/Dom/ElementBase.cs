@@ -62,6 +62,12 @@ namespace ZptSharp.Dom
         public abstract IList<IElement> ChildElements { get; }
 
         /// <summary>
+        /// Gets a copy of the current element and all of its children.
+        /// </summary>
+        /// <returns>The copied element.</returns>
+        public abstract IElement GetCopy();
+
+        /// <summary>
         /// Replaces the specified child element (the <paramref name="toReplace"/> parameter)
         /// using the specified <paramref name="replacement"/> element.
         /// Note that this means that the current element will be detached/removed from its parent as a side-effect.

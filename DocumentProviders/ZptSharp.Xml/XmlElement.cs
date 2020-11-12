@@ -47,6 +47,16 @@ namespace ZptSharp.Dom
         }
 
         /// <summary>
+        /// Gets a copy of the current element and all of its children.
+        /// </summary>
+        /// <returns>The copied element.</returns>
+        public override IElement GetCopy()
+        {
+            var copiedElement = new XElement(NativeElement);
+            return new XmlElement(copiedElement, (XmlDocument) Document, ParentElement, SourceInfo);
+        }
+
+        /// <summary>
         /// Gets the line number for the specified element.
         /// </summary>
         /// <returns>The line number.</returns>

@@ -23,20 +23,22 @@ namespace ZptSharp.Metal
         }
 
         [Test, AutoMoqData]
-        public void FillSlots_replaces_the_element_with_its_filler(IElement defineSlotElement,
-                                                                   IElement fillSlotElement,
-                                                                   IElement parent,
-                                                                   string slotName,
-                                                                   MacroExpansionContext context,
-                                                                   SlotFiller sut)
+        public void FillSlots_replaces_the_element_with_a_copy_of_its_filler(IElement defineSlotElement,
+                                                                             IElement fillSlotElement,
+                                                                             IElement copiedFiller,
+                                                                             IElement parent,
+                                                                             string slotName,
+                                                                             MacroExpansionContext context,
+                                                                             SlotFiller sut)
         {
             Mock.Get(defineSlotElement).SetupProperty(x => x.ParentElement, parent);
+            Mock.Get(fillSlotElement).Setup(x => x.GetCopy()).Returns(copiedFiller);
             context.SlotFillers.Clear();
             context.SlotFillers.Add(slotName, new Slot(slotName, fillSlotElement));
 
             sut.FillSlots(context, new[] { new Slot(slotName, defineSlotElement) });
 
-            Mock.Get(parent).Verify(x => x.ReplaceChild(defineSlotElement, fillSlotElement), Times.Once);
+            Mock.Get(parent).Verify(x => x.ReplaceChild(defineSlotElement, copiedFiller), Times.Once);
         }
 
         [Test, AutoMoqData]

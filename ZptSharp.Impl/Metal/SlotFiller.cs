@@ -31,7 +31,7 @@ namespace ZptSharp.Metal
         {
             if (!macroContext.SlotFillers.TryGetValue(definedSlot.Name, out Slot filler)) return;
 
-            definedSlot.Element.ReplaceWith(filler.Element);
+            definedSlot.Element.ReplaceWith(filler.Element.GetCopy());
             macroContext.SlotFillers.Remove(definedSlot.Name);
         }
     }

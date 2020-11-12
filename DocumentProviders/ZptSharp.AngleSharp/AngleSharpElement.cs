@@ -49,6 +49,16 @@ namespace ZptSharp.Dom
         }
 
         /// <summary>
+        /// Gets a copy of the current element and all of its children.
+        /// </summary>
+        /// <returns>The copied element.</returns>
+        public override IElement GetCopy()
+        {
+            var copiedElement = (AngleSharp.Dom.IElement) NativeElement.Clone();
+            return new AngleSharpElement(copiedElement, (AngleSharpDocument) Document, ParentElement, SourceInfo);
+        }
+
+        /// <summary>
         /// <para>
         /// Called by the constructor; initialises and returns a <see cref="EventRaisingList{IAttribute}"/>
         /// for use as the <see cref="Attributes"/> collection.

@@ -13,6 +13,8 @@ namespace ZptSharp.Dom
 
         public override IList<IElement> ChildElements { get; } = new List<IElement>();
 
+        public override IElement GetCopy() => this;
+
         public StubElement(IDocument document) : base(document) { }
     }
 }

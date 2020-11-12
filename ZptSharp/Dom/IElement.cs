@@ -49,5 +49,11 @@ namespace ZptSharp.Dom
         /// <param name="toReplace">The child element to replace.</param>
         /// <param name="replacement">The replacement element.</param>
         void ReplaceChild(IElement toReplace, IElement replacement);
+
+        /// <summary>
+        /// Gets a copy of the current element and all of its children.
+        /// </summary>
+        /// <returns>The copied element.</returns>
+        IElement GetCopy();
     }
 }
