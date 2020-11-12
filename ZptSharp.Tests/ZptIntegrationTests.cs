@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 using NUnit.Framework;
 using ZptSharp.Util;
 
@@ -70,10 +71,23 @@ Actual
             services.AddAngleSharpZptDocuments();
             services.AddHapZptDocuments();
 
+            AddLogging(services);
+
             var provider = services.BuildServiceProvider();
             provider.UseHapZptDocuments();
             provider.UseZptPathExpressions();
             return provider;
+        }
+
+        void AddLogging(ServiceCollection services)
+        {
+            services.AddLogging(b => {
+                b.ClearProviders();
+                b.AddConsole(c => c.DisableColors = true);
+                b.SetMinimumLevel(LogLevel.Debug);
+            });
+
+            services.AddTransient(s => s.GetRequiredService<ILoggerFactory>().CreateLogger("General"));
         }
 
         object GetModel()
