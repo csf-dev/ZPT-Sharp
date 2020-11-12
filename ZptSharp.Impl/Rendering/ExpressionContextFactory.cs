@@ -17,7 +17,7 @@ namespace ZptSharp.Rendering
         /// <param name="document">Document.</param>
         /// <param name="request">Request.</param>
         public ExpressionContext GetExpressionContext(IDocument document, RenderZptDocumentRequest request)
-            => GetExpressionContext(document.RootElement, document, request.Model);
+            => GetExpressionContext(document.RootElement, document, request.Model, isRoot: true);
 
         /// <summary>
         /// Gets the child expression contexts.
@@ -34,7 +34,8 @@ namespace ZptSharp.Rendering
         ExpressionContext GetExpressionContext(IElement element,
                                                IDocument document,
                                                object model,
-                                               ExpressionContext parentContext = null)
+                                               ExpressionContext parentContext = null,
+                                               bool isRoot = false)
         {
             return new ExpressionContext(element,
                                          parentContext?.LocalDefinitions,
@@ -42,7 +43,8 @@ namespace ZptSharp.Rendering
                                          parentContext?.Repetitions)
             {
                 Model = model,
-                TemplateDocument = document
+                TemplateDocument = document,
+                IsRootContext = isRoot,
             };
         }
     }

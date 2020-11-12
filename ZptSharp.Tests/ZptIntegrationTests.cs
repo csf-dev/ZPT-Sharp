@@ -48,7 +48,7 @@ Actual
         public static IEnumerable<string> GetExpectedOutputFiles()
         {
             var expectedDocsDirectory = TestFiles.GetPath(Path.Combine(rootDirectory, expectedSubdirectory));
-            return Directory.GetFiles(expectedDocsDirectory, "*.html");
+            return Directory.GetFiles(expectedDocsDirectory);
         }
 
         [OneTimeSetUp]

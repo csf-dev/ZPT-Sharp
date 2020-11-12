@@ -16,6 +16,7 @@ namespace ZptSharp.Metal
     {
         readonly IGetsMetalAttributeSpecs specProvider;
         readonly IProcessesExpressionContext wrapped;
+        readonly ISearchesForAttributes attributeFinder;
 
         /// <summary>
         /// Processes the context using the rules defined within this object.
@@ -25,16 +26,27 @@ namespace ZptSharp.Metal
         /// <param name="token">An optional cancellation token.</param>
         public Task<ExpressionContextProcessingResult> ProcessContextAsync(ExpressionContext context, CancellationToken token = default)
         {
-            var macro = GetMacro(context);
-            if (macro != null) context.GlobalDefinitions[macro.Name] = macro;
+            if (context.IsRootContext)
+                AddAllMacrosToContext(context);
+
             return wrapped.ProcessContextAsync(context, token);
         }
 
-        MetalMacro GetMacro(ExpressionContext context)
+        /// <summary>
+        /// For ever METAL macro found in the context,
+        /// it is added as a global variable.  This should only occur once, when
+        /// processing the root expression context.
+        /// </summary>
+        /// <param name="context">Context.</param>
+        void AddAllMacrosToContext(ExpressionContext context)
         {
-            var defineMacroAttribute = context.CurrentElement.GetMatchingAttribute(specProvider.DefineMacro);
-            if (defineMacroAttribute == null) return null;
-            return new MetalMacro(defineMacroAttribute.Value, context.CurrentElement);
+            var defineMacroAttributes = attributeFinder.SearchForAttributes(context.CurrentElement, specProvider.DefineMacro);
+
+            foreach(var attribute in defineMacroAttributes)
+            {
+                var macro = new MetalMacro(attribute.Value, attribute.Element);
+                context.GlobalDefinitions[macro.Name] = macro;
+            }
         }
 
         /// <summary>
@@ -43,11 +55,14 @@ namespace ZptSharp.Metal
         /// </summary>
         /// <param name="specProvider">Spec provider.</param>
         /// <param name="wrapped">Wrapped service.</param>
+        /// <param name="attributeFinder">A service which searches for attributes.</param>
         public AddDefinedMacroToGlobalScopeProcessorDecorator(IGetsMetalAttributeSpecs specProvider,
-                                                              IProcessesExpressionContext wrapped)
+                                                              IProcessesExpressionContext wrapped,
+                                                              ISearchesForAttributes attributeFinder)
         {
             this.specProvider = specProvider ?? throw new ArgumentNullException(nameof(specProvider));
             this.wrapped = wrapped ?? throw new ArgumentNullException(nameof(wrapped));
+            this.attributeFinder = attributeFinder ?? throw new ArgumentNullException(nameof(attributeFinder));
         }
     }
 }

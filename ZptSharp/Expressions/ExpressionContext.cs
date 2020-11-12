@@ -12,6 +12,12 @@ namespace ZptSharp.Expressions
         IElement currentElement;
 
         /// <summary>
+        /// Gets or sets a value indicating whether this <see cref="ExpressionContext"/> is the root context.
+        /// </summary>
+        /// <value><c>true</c> if this is the root context; otherwise, <c>false</c>.</value>
+        public bool IsRootContext { get; set; }
+
+        /// <summary>
         /// Gets or sets an object representing an error which was encountered whilst rendering or
         /// evaluating an expression.
         /// </summary>

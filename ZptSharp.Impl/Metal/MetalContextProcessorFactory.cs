@@ -1,4 +1,5 @@
 ﻿using System;
+using ZptSharp.Dom;
 using ZptSharp.Rendering;
 
 namespace ZptSharp.Metal
@@ -12,6 +13,7 @@ namespace ZptSharp.Metal
         readonly IGetsMetalAttributeSpecs specProvider;
         readonly IGetsMacro macroProvider;
         readonly IExpandsMacro macroExpander;
+        readonly ISearchesForAttributes attributeFinder;
 
         /// <summary>
         /// Gets the METAL context processor.
@@ -20,15 +22,15 @@ namespace ZptSharp.Metal
         public IProcessesExpressionContext GetMetalContextProcessor()
         {
             var service = GetMacroUsageContextProcessor();
-            service = GetAddDefinedMacroToGlobalScopeProcessorDecorator(service);
+            service = GetMacroAddingDecorator(service);
             return service;
         }
 
         IProcessesExpressionContext GetMacroUsageContextProcessor()
             => new MacroUsageContextProcessor(specProvider, macroProvider, macroExpander);
 
-        IProcessesExpressionContext GetAddDefinedMacroToGlobalScopeProcessorDecorator(IProcessesExpressionContext wrapped)
-            => new AddDefinedMacroToGlobalScopeProcessorDecorator(specProvider, wrapped);
+        IProcessesExpressionContext GetMacroAddingDecorator(IProcessesExpressionContext service)
+            => new AddDefinedMacroToGlobalScopeProcessorDecorator(specProvider, service, attributeFinder);
 
         /// <summary>
         /// Initializes a new instance of the <see cref="MetalContextProcessorFactory"/> class.
@@ -36,13 +38,16 @@ namespace ZptSharp.Metal
         /// <param name="specProvider">Spec provider.</param>
         /// <param name="macroProvider">Macro provider.</param>
         /// <param name="macroExpander">Macro expander.</param>
+        /// <param name="attributeFinder">An attribute finder.</param>
         public MetalContextProcessorFactory(IGetsMetalAttributeSpecs specProvider,
                                             IGetsMacro macroProvider,
-                                            IExpandsMacro macroExpander)
+                                            IExpandsMacro macroExpander,
+                                            ISearchesForAttributes attributeFinder)
         {
             this.specProvider = specProvider ?? throw new ArgumentNullException(nameof(specProvider));
             this.macroProvider = macroProvider ?? throw new ArgumentNullException(nameof(macroProvider));
             this.macroExpander = macroExpander ?? throw new ArgumentNullException(nameof(macroExpander));
+            this.attributeFinder = attributeFinder ?? throw new ArgumentNullException(nameof(attributeFinder));
         }
     }
 }
