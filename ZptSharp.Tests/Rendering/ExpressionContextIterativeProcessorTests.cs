@@ -155,5 +155,53 @@ namespace ZptSharp.Rendering
             Mock.Get(contextProcessor)
                 .Verify(x => x.ProcessContextAsync(child2, CancellationToken.None), Times.Once, $"Processed {nameof(child1)}");
         }
+
+
+        [Test, AutoMoqData]
+        public async Task IterateContextAndChildrenAsync_should_process_children_before_siblings(ExpressionContext context,
+                                                                                                 ExpressionContext sibling1,
+                                                                                                 ExpressionContext sibling2,
+                                                                                                 ExpressionContext child1,
+                                                                                                 ExpressionContext child2)
+        {
+            var contextProcessor = new Mock<IProcessesExpressionContext>(MockBehavior.Strict).Object;
+            var childContextProvider = Mock.Of<IGetsChildExpressionContexts>();
+            var sut = new ExpressionContextIterativeProcessor(contextProcessor, childContextProvider);
+
+            Mock.Get(childContextProvider)
+                .Setup(x => x.GetChildContexts(context))
+                .Returns(new[] { sibling1, sibling2 });
+            Mock.Get(childContextProvider)
+                .Setup(x => x.GetChildContexts(sibling1))
+                .Returns(new[] { child1, child2 });
+
+            var sequence = new MockSequence();
+            Mock.Get(contextProcessor)
+                .InSequence(sequence)
+                .Setup(x => x.ProcessContextAsync(context, CancellationToken.None))
+                .Returns(Task.FromResult(new ExpressionContextProcessingResult()));
+            Mock.Get(contextProcessor)
+                .InSequence(sequence)
+                .Setup(x => x.ProcessContextAsync(sibling1, CancellationToken.None))
+                .Returns(Task.FromResult(new ExpressionContextProcessingResult()));
+            Mock.Get(contextProcessor)
+                .InSequence(sequence)
+                .Setup(x => x.ProcessContextAsync(child1, CancellationToken.None))
+                .Returns(Task.FromResult(new ExpressionContextProcessingResult()));
+            Mock.Get(contextProcessor)
+                .InSequence(sequence)
+                .Setup(x => x.ProcessContextAsync(child2, CancellationToken.None))
+                .Returns(Task.FromResult(new ExpressionContextProcessingResult()));
+            Mock.Get(contextProcessor)
+                .InSequence(sequence)
+                .Setup(x => x.ProcessContextAsync(sibling2, CancellationToken.None))
+                .Returns(Task.FromResult(new ExpressionContextProcessingResult()));
+
+            await sut.IterateContextAndChildrenAsync(context);
+
+            Mock.Get(contextProcessor)
+                .Verify(x => x.ProcessContextAsync(sibling2, CancellationToken.None), Times.Once);
+        }
+
     }
 }

@@ -56,21 +56,28 @@ namespace ZptSharp.Rendering
                 var iterationResult = await contextProcessor.ProcessContextAsync(currentContext)
                     .ConfigureAwait(false);
 
-                AddChildContextsToOpenList(openList, currentContext);
-                AddAdditionalContextsToOpenList(openList, iterationResult);
+                AddExtraContextsToBeginningOfOpenList(openList, currentContext, iterationResult);
             }
         }
 
-        void AddChildContextsToOpenList(List<ExpressionContext> openList, ExpressionContext context)
+        /// <summary>
+        /// Adds extra contexts (child and/or additional contexts) to the beginning of the open list.
+        /// The processing of these extra contexts should always occur before any contexts which were
+        /// already scheduled in the open list.  Of those, child contexts always come first, with
+        /// additional contexts (essentially, further generated siblings) coming next.
+        /// </summary>
+        /// <param name="openList">The open list.</param>
+        /// <param name="context">The context which was just processed.</param>
+        /// <param name="processingResult">The processing result.</param>
+        void AddExtraContextsToBeginningOfOpenList(List<ExpressionContext> openList,
+                                                   ExpressionContext context,
+                                                   ExpressionContextProcessingResult processingResult)
         {
             var childContexts = childContextProvider.GetChildContexts(context) ?? Enumerable.Empty<ExpressionContext>();
-            openList.AddRange(childContexts);
-        }
+            var additionalContexts = processingResult?.AdditionalContexts ?? Enumerable.Empty<ExpressionContext>();
 
-        void AddAdditionalContextsToOpenList(List<ExpressionContext> openList, ExpressionContextProcessingResult result)
-        {
-            var additionalContexts = result?.AdditionalContexts ?? Enumerable.Empty<ExpressionContext>();
-            openList.AddRange(additionalContexts);
+            openList.InsertRange(0, additionalContexts);
+            openList.InsertRange(0, childContexts);
         }
 
         /// <summary>
