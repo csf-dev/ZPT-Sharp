@@ -26,12 +26,13 @@ namespace ZptSharp.Rendering
         /// <param name="context">The context from which to get children.</param>
         public IEnumerable<ExpressionContext> GetChildContexts(ExpressionContext context)
         {
-            return context.CurrentElement.ChildElements
+            return context.CurrentElement.ChildNodes
+                .Where(x => x.IsElement)
                 .Select(x => GetExpressionContext(x, context.TemplateDocument, context.Model, context))
                 .ToList();
         }
 
-        ExpressionContext GetExpressionContext(IElement element,
+        ExpressionContext GetExpressionContext(INode element,
                                                IDocument document,
                                                object model,
                                                ExpressionContext parentContext = null,

@@ -21,7 +21,7 @@ namespace ZptSharp.Metal
         /// <param name="token">An optional cancellation token.</param>
         /// <exception cref="MacroNotFoundException">If the element does have an attribute matching
         /// the <paramref name="attributeSpec"/> but no macro could be resolved from the attribute's expression.</exception>
-        Task<MetalMacro> GetMacroAsync(IElement element,
+        Task<MetalMacro> GetMacroAsync(INode element,
                                        ExpressionContext context,
                                        AttributeSpec attributeSpec,
                                        CancellationToken token = default);

@@ -7,13 +7,13 @@ namespace ZptSharp.Dom
     /// </summary>
     public abstract class AttributeBase : IAttribute
     {
-        readonly IElement element;
+        readonly INode element;
 
         /// <summary>
         /// Gets the element upon which this attribute appears.
         /// </summary>
         /// <value>The element.</value>
-        public virtual IElement Element => element;
+        public virtual INode Element => element;
 
         /// <summary>
         /// Gets the attribute name, including any relevant prefix.
@@ -45,7 +45,7 @@ namespace ZptSharp.Dom
         /// Initializes a new instance of the <see cref="AttributeBase"/> class.
         /// </summary>
         /// <param name="element">Element.</param>
-        protected AttributeBase(IElement element)
+        protected AttributeBase(INode element)
         {
             this.element = element ?? throw new ArgumentNullException(nameof(element));
         }

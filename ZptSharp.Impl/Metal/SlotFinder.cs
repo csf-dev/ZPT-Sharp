@@ -19,7 +19,7 @@ namespace ZptSharp.Metal
         /// </summary>
         /// <returns>The slot fillers.</returns>
         /// <param name="element">Element.</param>
-        public IEnumerable<Slot> GetSlotFillers(IElement element)
+        public IEnumerable<Slot> GetSlotFillers(INode element)
         {
             if (element == null)
                 throw new ArgumentNullException(nameof(element));
@@ -35,7 +35,7 @@ namespace ZptSharp.Metal
         /// </summary>
         /// <returns>The defined slots.</returns>
         /// <param name="element">Element.</param>
-        public IEnumerable<Slot> GetDefinedSlots(IElement element)
+        public IEnumerable<Slot> GetDefinedSlots(INode element)
         {
             if (element == null)
                 throw new ArgumentNullException(nameof(element));

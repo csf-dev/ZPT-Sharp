@@ -5,10 +5,10 @@ using ZptSharp.Rendering;
 namespace ZptSharp.Dom
 {
     /// <summary>
-    /// Abstract base class for an <see cref="IElement"/>, containing functionality
+    /// Abstract base class for an <see cref="INode"/>, containing functionality
     /// which is neutral to the specific implementation.
     /// </summary>
-    public abstract class ElementBase : IElement
+    public abstract class ElementBase : INode
     {
         /// <summary>
         /// A field for the <see cref="IDocument"/> to which this element belongs.
@@ -23,7 +23,7 @@ namespace ZptSharp.Dom
         /// <summary>
         /// A field for the parent DOM element (which might be <see langword="null"/>).
         /// </summary>
-        protected IElement Parent;
+        protected INode Parent;
 
         /// <summary>
         /// Gets the parent document for the current element.
@@ -43,7 +43,7 @@ namespace ZptSharp.Dom
         /// is not attached to a DOM.
         /// </summary>
         /// <value>The parent element.</value>
-        public virtual IElement ParentElement
+        public virtual INode ParentElement
         {
             get => Parent;
             set => Parent = value;
@@ -59,13 +59,19 @@ namespace ZptSharp.Dom
         /// Gets the elements contained within the current element.
         /// </summary>
         /// <value>The child elements.</value>
-        public abstract IList<IElement> ChildElements { get; }
+        public abstract IList<INode> ChildNodes { get; }
+
+        /// <summary>
+        /// Gets a value indicating whether this <see cref="T:ZptSharp.Dom.INode"/> is an element node.
+        /// </summary>
+        /// <value><c>true</c> if the current instance is an element; otherwise, <c>false</c>.</value>
+        public abstract bool IsElement { get; }
 
         /// <summary>
         /// Gets a copy of the current element and all of its children.
         /// </summary>
         /// <returns>The copied element.</returns>
-        public abstract IElement GetCopy();
+        public abstract INode GetCopy();
 
         /// <summary>
         /// Gets a value which indicates whether or not the current element is in the specified namespace.
@@ -82,18 +88,18 @@ namespace ZptSharp.Dom
         /// </summary>
         /// <param name="toReplace">The child element to replace.</param>
         /// <param name="replacement">The replacement element.</param>
-        public virtual void ReplaceChild(IElement toReplace, IElement replacement)
+        public virtual void ReplaceChild(INode toReplace, INode replacement)
         {
             if (toReplace == null)
                 throw new ArgumentNullException(nameof(toReplace));
             if (replacement == null)
                 throw new ArgumentNullException(nameof(replacement));
-            if (!ChildElements.Contains(toReplace))
+            if (!ChildNodes.Contains(toReplace))
                 throw new ArgumentException(Resources.CoreExceptionMessage.ElementMustBeAChildOfThisParent, nameof(toReplace));
 
-            var index = ChildElements.IndexOf(toReplace);
-            ChildElements.Insert(index, replacement);
-            ChildElements.Remove(toReplace);
+            var index = ChildNodes.IndexOf(toReplace);
+            ChildNodes.Insert(index, replacement);
+            ChildNodes.Remove(toReplace);
         }
 
         /// <summary>
@@ -105,20 +111,20 @@ namespace ZptSharp.Dom
             if (ParentElement == null)
                 throw new InvalidOperationException(Resources.CoreExceptionMessage.MustNotBeRootElement);
 
-            var indexOnParent = ParentElement.ChildElements.IndexOf(this);
+            var indexOnParent = ParentElement.ChildNodes.IndexOf(this);
 
-            var children = new List<IElement>(ChildElements);
-            ParentElement.ChildElements.Remove(this);
+            var children = new List<INode>(ChildNodes);
+            ParentElement.ChildNodes.Remove(this);
 
             // Insert the children to the parent, at the same index, in reverse order
             children.Reverse();
             foreach (var child in children)
-                ParentElement.ChildElements.Insert(indexOnParent, child);
+                ParentElement.ChildNodes.Insert(indexOnParent, child);
         }
             
         IDocumentSourceInfo IHasDocumentSourceInfo.SourceInfo => SourceInfo.Document;
 
-        IEnumerable<IElement> IHasElements.GetChildElements() => ChildElements;
+        IEnumerable<INode> IHasElements.GetChildElements() => ChildNodes;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ElementBase"/> class.
@@ -127,7 +133,7 @@ namespace ZptSharp.Dom
         /// <param name="parent">The parent element.</param>
         /// <param name="sourceInfo">The element source info.</param>
         protected ElementBase(IDocument document,
-                              IElement parent = null,
+                              INode parent = null,
                               IElementSourceInfo sourceInfo = null)
         {
             this.Doc = document ?? throw new ArgumentNullException(nameof(document));

@@ -29,7 +29,7 @@ namespace ZptSharp.Expressions
         /// Gets or sets the element associated with the repetition.
         /// </summary>
         /// <value>The element.</value>
-        public IElement Element { get; set; }
+        public INode Element { get; set; }
 
         /// <summary>
         /// Gets or sets the value associated with the current iteration.

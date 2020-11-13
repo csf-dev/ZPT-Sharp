@@ -72,7 +72,7 @@ namespace ZptSharp.Dom
         /// </summary>
         /// <param name="nativeAttribute">Native attribute.</param>
         /// <param name="element">Element.</param>
-        public HapAttribute(HtmlAttribute nativeAttribute, IElement element) : base(element)
+        public HapAttribute(HtmlAttribute nativeAttribute, INode element) : base(element)
         {
             NativeAttribute = nativeAttribute ?? throw new ArgumentNullException(nameof(nativeAttribute));
         }

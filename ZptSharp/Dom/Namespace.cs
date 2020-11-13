@@ -2,7 +2,7 @@
 namespace ZptSharp.Dom
 {
     /// <summary>
-    /// Represents a namespace for an <see cref="IDocument"/>, <see cref="IElement"/> or <see cref="IAttribute"/>.
+    /// Represents a namespace for an <see cref="IDocument"/>, <see cref="INode"/> or <see cref="IAttribute"/>.
     /// </summary>
     public sealed class Namespace : IEquatable<Namespace>
     {

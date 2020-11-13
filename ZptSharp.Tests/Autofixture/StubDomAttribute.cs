@@ -25,7 +25,7 @@ namespace ZptSharp.Autofixture
                     });
                 });
 
-                fixture.Customize<IElement>(x =>
+                fixture.Customize<INode>(x =>
                 {
                     return x
                         .FromFactory((IDocument doc) =>
@@ -38,9 +38,9 @@ namespace ZptSharp.Autofixture
 
                 fixture.Customize<IAttribute>(x =>
                 {
-                    return x.FromFactory((string name, string value) =>
+                    return x.FromFactory((string name, string value, INode node) =>
                     {
-                        var mock = new Mock<StubAttribute>(Mock.Of<IElement>(), name, value) { CallBase = true };
+                        var mock = new Mock<StubAttribute>(node, name, value) { CallBase = true };
                         return mock.Object;
                     });
                 });

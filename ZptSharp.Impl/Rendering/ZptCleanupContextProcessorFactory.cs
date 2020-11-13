@@ -1,7 +1,4 @@
-﻿using System.Threading;
-using System.Threading.Tasks;
-using ZptSharp.Dom;
-using ZptSharp.Expressions;
+﻿using ZptSharp.Dom;
 
 namespace ZptSharp.Rendering
 {
@@ -20,6 +17,10 @@ namespace ZptSharp.Rendering
         public IProcessesExpressionContext GetElementAndAttributeRemovalProcessor()
             => new ZptCleanupContextProcessor(namespaceProvider);
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ZptCleanupContextProcessorFactory"/> class.
+        /// </summary>
+        /// <param name="namespaceProvider">Namespace provider.</param>
         public ZptCleanupContextProcessorFactory(IGetsWellKnownNamespace namespaceProvider)
         {
             this.namespaceProvider = namespaceProvider ?? throw new System.ArgumentNullException(nameof(namespaceProvider));

@@ -47,7 +47,7 @@ namespace ZptSharp.Expressions
         public static readonly string Default = "default";
 
         /// <summary>
-        /// An identifier/alias for getting the attributes from the current <see cref="Dom.IElement"/>.
+        /// An identifier/alias for getting the attributes from the current <see cref="Dom.INode"/>.
         /// </summary>
         public static readonly string Attributes = "attrs";
 

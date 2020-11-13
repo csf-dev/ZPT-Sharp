@@ -58,7 +58,7 @@ namespace ZptSharp.Dom
         /// </summary>
         /// <param name="nativeAttribute">The native DOM attribute.</param>
         /// <param name="element">The element to which this attribute belongs.</param>
-        public AngleSharpAttribute(IAttr nativeAttribute, IElement element) : base(element)
+        public AngleSharpAttribute(IAttr nativeAttribute, INode element) : base(element)
         {
             NativeAttribute = nativeAttribute ?? throw new ArgumentNullException(nameof(nativeAttribute));
         }

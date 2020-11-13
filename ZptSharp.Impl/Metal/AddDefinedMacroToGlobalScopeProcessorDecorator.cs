@@ -44,7 +44,7 @@ namespace ZptSharp.Metal
 
             foreach(var attribute in defineMacroAttributes)
             {
-                var macro = new MetalMacro(attribute.Value, attribute.Element);
+                var macro = new MetalMacro(attribute.Value, attribute.Element.GetCopy());
                 context.GlobalDefinitions[macro.Name] = macro;
             }
         }

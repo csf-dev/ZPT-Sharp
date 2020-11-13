@@ -8,7 +8,7 @@ using ZptSharp.Rendering;
 namespace ZptSharp.Dom
 {
     /// <summary>
-    /// Implementation of <see cref="IElement"/> which is based upon an XML <see cref="XElement"/>.
+    /// Implementation of <see cref="INode"/> which is based upon an XML <see cref="XElement"/>.
     /// </summary>
     public class XmlElement : ElementBase
     {
@@ -29,7 +29,13 @@ namespace ZptSharp.Dom
         /// Gets the elements contained within the current element.
         /// </summary>
         /// <value>The child elements.</value>
-        public override IList<IElement> ChildElements { get { throw new NotImplementedException(); } }
+        public override IList<INode> ChildNodes { get { throw new NotImplementedException(); } }
+
+        /// <summary>
+        /// Gets a value indicating whether this <see cref="T:ZptSharp.Dom.INode"/> is an element node.
+        /// </summary>
+        /// <value><c>true</c> if the current instance is an element; otherwise, <c>false</c>.</value>
+        public override bool IsElement => NativeElement.NodeType == XmlNodeType.Element;
 
         /// <summary>
         /// Returns a <see cref="String"/> that represents the current
@@ -50,10 +56,10 @@ namespace ZptSharp.Dom
         /// Gets a copy of the current element and all of its children.
         /// </summary>
         /// <returns>The copied element.</returns>
-        public override IElement GetCopy()
+        public override INode GetCopy()
         {
             var copiedElement = new XElement(NativeElement);
-            return new XmlElement(copiedElement, (XmlDocument) Document, ParentElement, SourceInfo);
+            return new XmlElement(copiedElement, (XmlDocument) Document, null, SourceInfo);
         }
 
         /// <summary>
@@ -86,7 +92,7 @@ namespace ZptSharp.Dom
         /// <param name="sourceInfo">Source info.</param>
         public XmlElement(XElement element,
                           XmlDocument document,
-                          IElement parent = null,
+                          INode parent = null,
                           IElementSourceInfo sourceInfo = null) : base(document, parent, sourceInfo)
         {
             NativeElement = element ?? throw new ArgumentNullException(nameof(element));

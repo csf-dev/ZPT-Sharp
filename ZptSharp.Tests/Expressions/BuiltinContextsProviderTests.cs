@@ -79,7 +79,7 @@ namespace ZptSharp.Expressions
         public async Task TryGetValueAsync_returns_element_attributes_collection_when_attributes_requested([Frozen, NoAutoProperties] ExpressionContext context,
                                                                                                 [Frozen, MockedConfig] RenderingConfig config,
                                                                                                 [Frozen, MetalDocAdapter] IGetsMetalDocumentAdapter metalDocumentAdapterFactory,
-                                                                                                IElement element,
+                                                                                                INode element,
                                                                                                 IAttribute attribute1,
                                                                                                 string name1,
                                                                                                 IAttribute attribute2,

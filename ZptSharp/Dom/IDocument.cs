@@ -9,6 +9,6 @@
         /// Gets the root element for the current document.
         /// </summary>
         /// <returns>The root element.</returns>
-        IElement RootElement { get; }
+        INode RootElement { get; }
     }
 }

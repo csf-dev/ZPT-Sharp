@@ -146,9 +146,9 @@ namespace ZptSharp.Metal
                                                                                                                                 MetalMacro extended,
                                                                                                                                 ExpressionContext context,
                                                                                                                                 string slotName,
-                                                                                                                                [StubDom] IElement element1,
-                                                                                                                                [StubDom] IElement element2,
-                                                                                                                                [StubDom] IElement element3)
+                                                                                                                                [StubDom] INode element1,
+                                                                                                                                [StubDom] INode element2,
+                                                                                                                                [StubDom] INode element3)
         {
             var parentFiller = new Slot(slotName, element1);
             var childFiller = new Slot(slotName, element2);

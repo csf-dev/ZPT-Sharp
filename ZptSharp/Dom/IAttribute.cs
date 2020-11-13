@@ -9,7 +9,7 @@
         /// Gets the element upon which this attribute appears.
         /// </summary>
         /// <value>The element.</value>
-        IElement Element { get; }
+        INode Element { get; }
 
         /// <summary>
         /// Gets the attribute name, including any relevant prefix.

@@ -11,9 +11,11 @@ namespace ZptSharp.Dom
     {
         public override IList<IAttribute> Attributes { get; } = new List<IAttribute>();
 
-        public override IList<IElement> ChildElements { get; } = new List<IElement>();
+        public override IList<INode> ChildNodes { get; } = new List<INode>();
 
-        public override IElement GetCopy() => this;
+        public override bool IsElement => true;
+
+        public override INode GetCopy() => this;
 
         public override bool IsInNamespace(Namespace @namespace) => false;
 

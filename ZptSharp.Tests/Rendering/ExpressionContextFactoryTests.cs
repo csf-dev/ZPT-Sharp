@@ -14,7 +14,7 @@ namespace ZptSharp.Rendering
         [Test, AutoMoqData]
         public void GetExpressionContext_returns_context_with_correct_document_root_element_and_model(IDocument document,
                                                                                                       [DefaultConfig] RenderZptDocumentRequest request,
-                                                                                                      IElement element,
+                                                                                                      INode element,
                                                                                                       ExpressionContextFactory sut)
         {
             Mock.Get(document).SetupGet(x => x.RootElement).Returns(element);
@@ -27,20 +27,37 @@ namespace ZptSharp.Rendering
 
         [Test, AutoMoqData]
         public void GetChildContexts_returns_a_context_for_each_child_element(ExpressionContext context,
-                                                                              IElement child1,
-                                                                              IElement child2,
+                                                                              INode child1,
+                                                                              INode child2,
                                                                               ExpressionContextFactory sut)
         {
-            Mock.Get(context.CurrentElement).SetupGet(x => x.ChildElements).Returns(() => new[] { child1, child2 });
+            Mock.Get(child1).SetupGet(x => x.IsElement).Returns(true);
+            Mock.Get(child2).SetupGet(x => x.IsElement).Returns(true);
+            Mock.Get(context.CurrentElement).SetupGet(x => x.ChildNodes).Returns(() => new[] { child1, child2 });
+
             Assert.That(() => sut.GetChildContexts(context), Has.Count.EqualTo(2));
         }
 
         [Test, AutoMoqData]
+        public void GetChildContexts_does_not_create_contexts_for_nodes_which_are_not_elements(ExpressionContext context,
+                                                                                               INode child1,
+                                                                                               INode child2,
+                                                                                               ExpressionContextFactory sut)
+        {
+            Mock.Get(child1).SetupGet(x => x.IsElement).Returns(true);
+            Mock.Get(child2).SetupGet(x => x.IsElement).Returns(false);
+            Mock.Get(context.CurrentElement).SetupGet(x => x.ChildNodes).Returns(() => new[] { child1, child2 });
+
+            Assert.That(() => sut.GetChildContexts(context), Has.Count.EqualTo(1));
+        }
+
+        [Test, AutoMoqData]
         public void GetChildContexts_returns_a_context_with_correct_properties(ExpressionContext context,
-                                                                               IElement child1,
+                                                                               INode child1,
                                                                                ExpressionContextFactory sut)
         {
-            Mock.Get(context.CurrentElement).SetupGet(x => x.ChildElements).Returns(() => new[] { child1 });
+            Mock.Get(child1).SetupGet(x => x.IsElement).Returns(true);
+            Mock.Get(context.CurrentElement).SetupGet(x => x.ChildNodes).Returns(() => new[] { child1 });
 
             var result = sut.GetChildContexts(context).Single();
 

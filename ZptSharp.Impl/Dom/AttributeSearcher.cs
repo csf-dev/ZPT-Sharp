@@ -32,7 +32,7 @@ namespace ZptSharp.Dom
         }
 
         /// <summary>
-        /// Recursively gets every <see cref="IElement"/> contained within the
+        /// Recursively gets every <see cref="INode"/> contained within the
         /// <paramref name="source"/>.  This includes the source object if it
         /// itself is also an element.
         /// </summary>
@@ -45,19 +45,19 @@ namespace ZptSharp.Dom
         /// </remarks>
         /// <returns>The collection of elements.</returns>
         /// <param name="source">Source.</param>
-        IEnumerable<IElement> RecursivelyGetAllElements(IHasElements source)
+        IEnumerable<INode> RecursivelyGetAllElements(IHasElements source)
         {
-            IElement current;
-            var closedList = new List<IElement>();
+            INode current;
+            var closedList = new List<INode>();
 
-            if (source is IElement element) closedList.Add(element);
+            if (source is INode element) closedList.Add(element);
 
-            for (var openList = new List<IElement>(source.GetChildElements());
+            for (var openList = new List<INode>(source.GetChildElements());
                  (current = openList.FirstOrDefault()) != null;
                  openList.Remove(current))
             {
                 closedList.Add(current);
-                openList.AddRange(current.ChildElements);
+                openList.AddRange(current.ChildNodes);
             }
 
             return closedList;

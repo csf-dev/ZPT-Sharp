@@ -13,30 +13,34 @@ namespace ZptSharp.Metal
     public class MacroProviderTests
     {
         [Test, AutoMoqData]
-        public async Task GetMacroAsync_returns_macro_from_expression_if_it_exists([Frozen] IEvaluatesExpression expressionEvaluator,
-                                                                                   MacroProvider sut,
-                                                                                   IElement element,
-                                                                                   IAttribute attr,
-                                                                                   string expression,
-                                                                                   ExpressionContext context,
-                                                                                   AttributeSpec attributeSpec,
-                                                                                   MetalMacro macro)
+        public async Task GetMacroAsync_returns_cloned_macro_from_expression_if_it_exists([Frozen] IEvaluatesExpression expressionEvaluator,
+                                                                                          MacroProvider sut,
+                                                                                          INode element,
+                                                                                          INode clone,
+                                                                                          IAttribute attr,
+                                                                                          string expression,
+                                                                                          ExpressionContext context,
+                                                                                          AttributeSpec attributeSpec,
+                                                                                          MetalMacro macro)
         {
             Mock.Get(expressionEvaluator)
                 .Setup(x => x.EvaluateExpressionAsync(expression, context, CancellationToken.None))
                 .Returns(() => Task.FromResult<object>(macro));
             Mock.Get(element).SetupGet(x => x.Attributes).Returns(new[] { attr });
+            Mock.Get(macro.Element).Setup(x => x.GetCopy()).Returns(clone);
             Mock.Get(attr).SetupGet(x => x.Value).Returns(expression);
             Mock.Get(attr).Setup(x => x.Matches(attributeSpec)).Returns(true);
 
             var result = await sut.GetMacroAsync(element, context, attributeSpec);
 
-            Assert.That(result, Is.SameAs(macro));
+            Assert.That(result,
+                        Has.Property(nameof(MetalMacro.Name)).EqualTo(macro.Name)
+                            .And.Property(nameof(MetalMacro.Element)).SameAs(clone));
         }
 
         [Test, AutoMoqData]
         public async Task GetMacroAsync_returns_null_if_no_attribute_matches_spec(MacroProvider sut,
-                                                                                  IElement element,
+                                                                                  INode element,
                                                                                   IAttribute attr,
                                                                                   ExpressionContext context,
                                                                                   AttributeSpec attributeSpec)
@@ -52,7 +56,7 @@ namespace ZptSharp.Metal
         [Test, AutoMoqData]
         public void GetMacroAsync_throws_MacroNotFoundException_if_macro_is_null([Frozen] IEvaluatesExpression expressionEvaluator,
                                                                                   MacroProvider sut,
-                                                                                  IElement element,
+                                                                                  INode element,
                                                                                   IAttribute attr,
                                                                                   string expression,
                                                                                   ExpressionContext context,
@@ -72,7 +76,7 @@ namespace ZptSharp.Metal
         [Test, AutoMoqData]
         public void GetMacroAsync_throws_MacroNotFoundException_if_evaluator_throws([Frozen] IEvaluatesExpression expressionEvaluator,
                                                                                     MacroProvider sut,
-                                                                                    IElement element,
+                                                                                    INode element,
                                                                                     IAttribute attr,
                                                                                     string expression,
                                                                                     ExpressionContext context,

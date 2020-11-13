@@ -20,7 +20,7 @@ namespace ZptSharp.Metal
                                                                                                  MacroUsageContextProcessor sut,
                                                                                                  AttributeSpec spec,
                                                                                                  ExpressionContext context,
-                                                                                                 IElement element)
+                                                                                                 INode element)
         {
             Mock.Get(specProvider).SetupGet(x => x.UseMacro).Returns(spec);
             Mock.Get(macroProvider)
@@ -42,7 +42,7 @@ namespace ZptSharp.Metal
                                                                                               MetalMacro expandedMacro,
                                                                                               AttributeSpec spec,
                                                                                               ExpressionContext context,
-                                                                                              IElement element,
+                                                                                              INode element,
                                                                                               IAttribute attribute,
                                                                                               string expression)
         {

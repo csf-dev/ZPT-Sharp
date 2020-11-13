@@ -19,7 +19,7 @@ namespace ZptSharp.Metal
         /// is replaced when the slot is filled, or the element which fills the slot.
         /// </summary>
         /// <value>The element.</value>
-        public IElement Element { get; }
+        public INode Element { get; }
 
         /// <summary>
         /// Determines whether the specified <see cref="Slot"/> is equal to the current <see cref="Slot"/>.
@@ -49,7 +49,7 @@ namespace ZptSharp.Metal
         /// </summary>
         /// <param name="name">Slot name.</param>
         /// <param name="element">Element.</param>
-        public Slot(string name, IElement element)
+        public Slot(string name, INode element)
         {
             Name = name ?? throw new ArgumentNullException(nameof(name));
             Element = element ?? throw new ArgumentNullException(nameof(element));

@@ -7,9 +7,9 @@ namespace ZptSharp.Dom
     /// </summary>
     public class StubDocument : DocumentBase
     {
-        public virtual IElement Root { get; set; }
+        public virtual INode Root { get; set; }
 
-        public override IElement RootElement => Root;
+        public override INode RootElement => Root;
 
         public StubDocument(Rendering.IDocumentSourceInfo source) : base(source) { }
     }

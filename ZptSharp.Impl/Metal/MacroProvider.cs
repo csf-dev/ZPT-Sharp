@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Logging;
 using ZptSharp.Dom;
 using ZptSharp.Expressions;
 
@@ -13,6 +14,7 @@ namespace ZptSharp.Metal
     public class MacroProvider : IGetsMacro
     {
         readonly IEvaluatesExpression expressionEvaluator;
+        readonly ILogger logger;
 
         /// <summary>
         /// Gets the METAL macro referenced by the specified element's attribute, if such an attribute is present.
@@ -25,7 +27,7 @@ namespace ZptSharp.Metal
         /// <param name="token">An optional cancellation token.</param>
         /// <exception cref="MacroNotFoundException">If the element does have an attribute matching
         /// the <paramref name="attributeSpec"/> but no macro could be resolved from the attribute's expression.</exception>
-        public Task<MetalMacro> GetMacroAsync(IElement element,
+        public Task<MetalMacro> GetMacroAsync(INode element,
                                               ExpressionContext context,
                                               AttributeSpec attributeSpec,
                                               CancellationToken token = default)
@@ -40,13 +42,17 @@ namespace ZptSharp.Metal
             return GetMacroPrivateAsync(element, context, attributeSpec, token);
         }
 
-        async Task<MetalMacro> GetMacroPrivateAsync(IElement element,
+        async Task<MetalMacro> GetMacroPrivateAsync(INode element,
                                                     ExpressionContext context,
                                                     AttributeSpec attributeSpec,
                                                     CancellationToken token)
         {
             var attribute = element.GetMatchingAttribute(attributeSpec);
-            if (attribute == null) return null;
+            if (attribute == null)
+            {
+                logger.LogDebug("No macro referenced by {0}", element.ToString());
+                return null;
+            }
 
             MetalMacro macro = null;
             try
@@ -60,11 +66,11 @@ namespace ZptSharp.Metal
             }
 
             AssertMacroIsNotNull(macro, element, attribute.Value, attributeSpec);
-            return macro;
+            return macro.GetCopy();
         }
 
         void AssertMacroIsNotNull(MetalMacro macro,
-                                  IElement element,
+                                  INode element,
                                   string macroExpression,
                                   AttributeSpec attributeSpec,
                                   Exception inner = null)
@@ -86,9 +92,12 @@ namespace ZptSharp.Metal
         /// Initializes a new instance of the <see cref="MacroProvider"/> class.
         /// </summary>
         /// <param name="expressionEvaluator">Expression evaluator.</param>
-        public MacroProvider(IEvaluatesExpression expressionEvaluator)
+        /// <param name="logger">A logger.</param>
+        public MacroProvider(IEvaluatesExpression expressionEvaluator,
+                             ILogger logger)
         {
             this.expressionEvaluator = expressionEvaluator ?? throw new ArgumentNullException(nameof(expressionEvaluator));
+            this.logger = logger ?? throw new ArgumentNullException(nameof(logger));
         }
 
     }

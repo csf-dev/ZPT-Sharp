@@ -7,12 +7,12 @@ using ZptSharp.Rendering;
 namespace ZptSharp.Dom
 {
     /// <summary>
-    /// Implementation of <see cref="IElement"/> which is based upon an AngleSharp <see cref="AngleSharp.Dom.IElement"/>.
+    /// Implementation of <see cref="INode"/> which is based upon an AngleSharp <see cref="AngleSharp.Dom.IElement"/>.
     /// </summary>
     public class AngleSharpElement : ElementBase
     {
         readonly EventRaisingList<IAttribute> attributes;
-        readonly EventRaisingList<IElement> childElements;
+        readonly EventRaisingList<INode> childElements;
 
         /// <summary>
         /// Gets the native AngleSharp <see cref="AngleSharp.Dom.IElement"/> instance which
@@ -31,7 +31,13 @@ namespace ZptSharp.Dom
         /// Gets the elements contained within the current element.
         /// </summary>
         /// <value>The child elements.</value>
-        public override IList<IElement> ChildElements => childElements;
+        public override IList<INode> ChildNodes => childElements;
+
+        /// <summary>
+        /// Gets a value indicating whether this <see cref="T:ZptSharp.Dom.INode"/> is an element node.
+        /// </summary>
+        /// <value><c>true</c> if the current instance is an element; otherwise, <c>false</c>.</value>
+        public override bool IsElement => NativeElement.NodeType == AngleSharp.Dom.NodeType.Element;
 
         /// <summary>
         /// Returns a <see cref="String"/> that represents the current
@@ -52,10 +58,10 @@ namespace ZptSharp.Dom
         /// Gets a copy of the current element and all of its children.
         /// </summary>
         /// <returns>The copied element.</returns>
-        public override IElement GetCopy()
+        public override INode GetCopy()
         {
             var copiedElement = (AngleSharp.Dom.IElement) NativeElement.Clone();
-            return new AngleSharpElement(copiedElement, (AngleSharpDocument) Document, ParentElement, SourceInfo);
+            return new AngleSharpElement(copiedElement, (AngleSharpDocument) Document, null, SourceInfo);
         }
 
         /// <summary>
@@ -99,7 +105,7 @@ namespace ZptSharp.Dom
         /// <summary>
         /// <para>
         /// Called by the constructor; initialises and returns a <see cref="EventRaisingList{IElement}"/>
-        /// for use as the <see cref="ChildElements"/> collection.
+        /// for use as the <see cref="ChildNodes"/> collection.
         /// </para>
         /// <para>
         /// This event-raising list is used to keep the child elements collection in-sync with the child
@@ -107,18 +113,18 @@ namespace ZptSharp.Dom
         /// </para>
         /// </summary>
         /// <returns>The child elements collection.</returns>
-        EventRaisingList<IElement> GetChildElementsCollection()
+        EventRaisingList<INode> GetChildElementsCollection()
         {
             var sourceChildElements = NativeElement.Children
                 .Select(x => new AngleSharpElement(x, (AngleSharpDocument) Doc, this, Source.CreateChild(x.SourceReference?.Position.Line)))
-                .Cast<IElement>()
+                .Cast<INode>()
                 .ToList();
 
-            var children = new EventRaisingList<IElement>(sourceChildElements);
+            var children = new EventRaisingList<INode>(sourceChildElements);
 
             children.SetupAfterActions(
                 add => {
-                    var index = ((IList<IElement>)add.Collection).IndexOf(add.Item);
+                    var index = ((IList<INode>)add.Collection).IndexOf(add.Item);
                     var ele = ((AngleSharpElement)add.Item).NativeElement;
 
                     if (index >= NativeElement.ChildElementCount)
@@ -146,7 +152,7 @@ namespace ZptSharp.Dom
         /// <param name="sourceInfo">The source info for the element.</param>
         public AngleSharpElement(AngleSharp.Dom.IElement nativeElement,
                                  AngleSharpDocument document,
-                                 IElement parent = null,
+                                 INode parent = null,
                                  IElementSourceInfo sourceInfo = null) : base(document, parent, sourceInfo)
         {
             NativeElement = nativeElement ?? throw new ArgumentNullException(nameof(nativeElement));

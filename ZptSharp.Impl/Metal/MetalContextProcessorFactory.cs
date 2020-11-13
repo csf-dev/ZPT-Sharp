@@ -14,6 +14,7 @@ namespace ZptSharp.Metal
         readonly IGetsMacro macroProvider;
         readonly IExpandsMacro macroExpander;
         readonly ISearchesForAttributes attributeFinder;
+        readonly Microsoft.Extensions.Logging.ILogger logger;
 
         /// <summary>
         /// Gets the METAL context processor.
@@ -27,7 +28,7 @@ namespace ZptSharp.Metal
         }
 
         IProcessesExpressionContext GetMacroUsageContextProcessor()
-            => new MacroUsageContextProcessor(specProvider, macroProvider, macroExpander);
+            => new MacroUsageContextProcessor(specProvider, macroProvider, macroExpander, logger);
 
         IProcessesExpressionContext GetMacroAddingDecorator(IProcessesExpressionContext service)
             => new AddDefinedMacroToGlobalScopeProcessorDecorator(specProvider, service, attributeFinder);
@@ -39,15 +40,18 @@ namespace ZptSharp.Metal
         /// <param name="macroProvider">Macro provider.</param>
         /// <param name="macroExpander">Macro expander.</param>
         /// <param name="attributeFinder">An attribute finder.</param>
+        /// <param name="logger">A logger.</param>
         public MetalContextProcessorFactory(IGetsMetalAttributeSpecs specProvider,
                                             IGetsMacro macroProvider,
                                             IExpandsMacro macroExpander,
-                                            ISearchesForAttributes attributeFinder)
+                                            ISearchesForAttributes attributeFinder,
+                                            Microsoft.Extensions.Logging.ILogger logger)
         {
             this.specProvider = specProvider ?? throw new ArgumentNullException(nameof(specProvider));
             this.macroProvider = macroProvider ?? throw new ArgumentNullException(nameof(macroProvider));
             this.macroExpander = macroExpander ?? throw new ArgumentNullException(nameof(macroExpander));
             this.attributeFinder = attributeFinder ?? throw new ArgumentNullException(nameof(attributeFinder));
+            this.logger = logger ?? throw new ArgumentNullException(nameof(logger));
         }
     }
 }

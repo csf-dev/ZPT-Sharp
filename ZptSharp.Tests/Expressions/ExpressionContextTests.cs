@@ -9,7 +9,7 @@ namespace ZptSharp.Expressions
     public class ExpressionContextTests
     {
         [Test, AutoMoqData]
-        public void Constructor_should_clone_local_definitions(IElement element, IDictionary<string,object> localDefs)
+        public void Constructor_should_clone_local_definitions(INode element, IDictionary<string,object> localDefs)
         {
             var result = new ExpressionContext(element, localDefinitions: localDefs);
             Assert.That(result.LocalDefinitions, Is.EqualTo(localDefs), "Collections are equal");
@@ -17,7 +17,7 @@ namespace ZptSharp.Expressions
         }
 
         [Test, AutoMoqData]
-        public void Constructor_should_clone_repetition_info(IElement element, IDictionary<string, RepetitionInfo> repetitions)
+        public void Constructor_should_clone_repetition_info(INode element, IDictionary<string, RepetitionInfo> repetitions)
         {
             var result = new ExpressionContext(element, repetitions: repetitions);
             Assert.That(result.Repetitions, Is.EqualTo(repetitions), "Collections are equal");
@@ -25,7 +25,7 @@ namespace ZptSharp.Expressions
         }
 
         [Test, AutoMoqData]
-        public void Constructor_should_use_same_collection_for_global_definitions(IElement element, IDictionary<string, object> globalDefs)
+        public void Constructor_should_use_same_collection_for_global_definitions(INode element, IDictionary<string, object> globalDefs)
         {
             var result = new ExpressionContext(element, globalDefinitions: globalDefs);
             Assert.That(result.GlobalDefinitions, Is.SameAs(globalDefs), "Collections are the same instance");
@@ -38,7 +38,7 @@ namespace ZptSharp.Expressions
         }
 
         [Test, AutoMoqData]
-        public void CreateChild_should_clone_local_definitions(ExpressionContext context, IElement element)
+        public void CreateChild_should_clone_local_definitions(ExpressionContext context, INode element)
         {
             var result = context.CreateChild(element);
             Assert.That(result.LocalDefinitions, Is.EqualTo(context.LocalDefinitions), "Collections are equal");
@@ -46,7 +46,7 @@ namespace ZptSharp.Expressions
         }
 
         [Test, AutoMoqData]
-        public void CreateChild_should_clone_repetition_info(ExpressionContext context, IElement element)
+        public void CreateChild_should_clone_repetition_info(ExpressionContext context, INode element)
         {
             var result = context.CreateChild(element);
             Assert.That(result.Repetitions, Is.EqualTo(context.Repetitions), "Collections are equal");
@@ -54,7 +54,7 @@ namespace ZptSharp.Expressions
         }
 
         [Test, AutoMoqData]
-        public void CreateChild_should_use_same_collection_for_global_definitions(ExpressionContext context, IElement element)
+        public void CreateChild_should_use_same_collection_for_global_definitions(ExpressionContext context, INode element)
         {
             var result = context.CreateChild(element);
             Assert.That(result.GlobalDefinitions, Is.SameAs(context.GlobalDefinitions), "Collections are not the same instance");

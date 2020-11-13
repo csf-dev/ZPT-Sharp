@@ -34,10 +34,10 @@ namespace ZptSharp.Rendering
             var useSourceAnnotation = request.Config.IncludeSourceAnnotation;
 
             var service = GetBaseService();
+            service = WrapWithCleanupDecorator(service);
             if (useSourceAnnotation) service = WrapWithSourceAnnotationDecorator(service);
             service = WrapWithTalDecorator(service);
             service = WrapWithMetalDecorator(service);
-            service = WrapWithCleanupDecorator(service);
 
             return service;
         }

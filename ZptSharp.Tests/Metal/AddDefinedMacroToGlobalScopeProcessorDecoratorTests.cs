@@ -18,7 +18,8 @@ namespace ZptSharp.Metal
                                                                                                                                    AddDefinedMacroToGlobalScopeProcessorDecorator sut,
                                                                                                                                    AttributeSpec spec,
                                                                                                                                    ExpressionContext context,
-                                                                                                                                   IElement element,
+                                                                                                                                   INode element,
+                                                                                                                                   INode clone,
                                                                                                                                    IAttribute attribute,
                                                                                                                                    string name)
         {
@@ -28,6 +29,7 @@ namespace ZptSharp.Metal
             Mock.Get(attribute).Setup(x => x.Matches(spec)).Returns(true);
             Mock.Get(attribute).SetupGet(x => x.Value).Returns(name);
             Mock.Get(attribute).SetupGet(x => x.Element).Returns(element);
+            Mock.Get(element).Setup(x => x.GetCopy()).Returns(clone);
             context.GlobalDefinitions.Clear();
             context.IsRootContext = true;
 
@@ -37,7 +39,7 @@ namespace ZptSharp.Metal
                         Has.One.Matches<KeyValuePair<string, object>>(x => x.Key == name
                                                                         && (x.Value is MetalMacro macro)
                                                                         && macro.Name == name
-                                                                        && macro.Element == element));
+                                                                        && macro.Element == clone));
         }
 
         [Test, AutoMoqData]
@@ -46,7 +48,7 @@ namespace ZptSharp.Metal
                                                                                                            AddDefinedMacroToGlobalScopeProcessorDecorator sut,
                                                                                                            AttributeSpec spec,
                                                                                                            ExpressionContext context,
-                                                                                                           IElement element,
+                                                                                                           INode element,
                                                                                                            IAttribute attribute,
                                                                                                            string name)
         {
@@ -69,7 +71,7 @@ namespace ZptSharp.Metal
                                                                                                                       AddDefinedMacroToGlobalScopeProcessorDecorator sut,
                                                                                                                       AttributeSpec spec,
                                                                                                                       ExpressionContext context,
-                                                                                                                      IElement element,
+                                                                                                                      INode element,
                                                                                                                       IAttribute attribute)
         {
             Mock.Get(specProvider).SetupGet(x => x.DefineMacro).Returns(spec);

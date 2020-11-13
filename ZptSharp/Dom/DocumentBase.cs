@@ -14,7 +14,7 @@ namespace ZptSharp.Dom
         /// </summary>
         protected readonly IDocumentSourceInfo Source;
 
-        IEnumerable<IElement> IHasElements.GetChildElements() => new[] { RootElement };
+        IEnumerable<INode> IHasElements.GetChildElements() => new[] { RootElement };
 
         /// <summary>
         /// Gets information which indicates the original source of the document (for example, a file path).
@@ -26,7 +26,7 @@ namespace ZptSharp.Dom
         /// Gets the root element for the current document.
         /// </summary>
         /// <returns>The root element.</returns>
-        public abstract IElement RootElement { get; }
+        public abstract INode RootElement { get; }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="DocumentBase"/> class.

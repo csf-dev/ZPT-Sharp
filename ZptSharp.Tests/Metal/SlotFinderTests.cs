@@ -15,12 +15,12 @@ namespace ZptSharp.Metal
         public void GetSlotFillers_gets_elements_with_fill_slot_attributes([Frozen] IGetsMetalAttributeSpecs specProvider,
                                                                            [Frozen] ISearchesForAttributes attributeFinder,
                                                                            SlotFinder sut,
-                                                                           [StubDom] IElement element,
+                                                                           [StubDom] INode element,
                                                                            AttributeSpec spec,
                                                                            [StubDom] IAttribute attr1,
-                                                                           [StubDom] IElement attr1Element,
+                                                                           [StubDom] INode attr1Element,
                                                                            [StubDom] IAttribute attr2,
-                                                                           [StubDom] IElement attr2Element)
+                                                                           [StubDom] INode attr2Element)
         {
             Mock.Get(specProvider).SetupGet(x => x.FillSlot).Returns(spec);
             Mock.Get(attributeFinder).Setup(x => x.SearchForAttributes(element, spec)).Returns(new[] { attr1, attr2 });
@@ -36,12 +36,12 @@ namespace ZptSharp.Metal
         public void GetDefinedSlots_gets_elements_with_define_slot_attributes([Frozen] IGetsMetalAttributeSpecs specProvider,
                                                                               [Frozen] ISearchesForAttributes attributeFinder,
                                                                               SlotFinder sut,
-                                                                              [StubDom] IElement element,
+                                                                              [StubDom] INode element,
                                                                               AttributeSpec spec,
                                                                               [StubDom] IAttribute attr1,
-                                                                              [StubDom] IElement attr1Element,
+                                                                              [StubDom] INode attr1Element,
                                                                               [StubDom] IAttribute attr2,
-                                                                              [StubDom] IElement attr2Element)
+                                                                              [StubDom] INode attr2Element)
         {
             Mock.Get(specProvider).SetupGet(x => x.DefineSlot).Returns(spec);
             Mock.Get(attributeFinder).Setup(x => x.SearchForAttributes(element, spec)).Returns(new[] { attr1, attr2 });

@@ -28,7 +28,7 @@ namespace ZptSharp.Metal
         {
             return attributeSearcher
                 .SearchForAttributes(document, specProvider.DefineMacro)
-                .Select(a => new MetalMacro(a.Value, a.Element))
+                .Select(a => new MetalMacro(a.Value, a.Element.GetCopy()))
                 .ToDictionary(k => k.Name, v => v);
         }
 

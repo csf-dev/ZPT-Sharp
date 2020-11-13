@@ -84,10 +84,10 @@ Actual
             services.AddLogging(b => {
                 b.ClearProviders();
                 b.AddConsole(c => c.DisableColors = true);
-                b.SetMinimumLevel(LogLevel.Debug);
+                b.SetMinimumLevel(LogLevel.Information);
             });
 
-            services.AddTransient(s => s.GetRequiredService<ILoggerFactory>().CreateLogger("General"));
+            services.AddTransient(s => s.GetRequiredService<ILoggerFactory>().CreateLogger("ZptSharp-UnitTests"));
         }
 
         object GetModel()

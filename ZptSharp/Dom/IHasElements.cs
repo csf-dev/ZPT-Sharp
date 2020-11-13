@@ -3,7 +3,7 @@
 namespace ZptSharp.Dom
 {
     /// <summary>
-    /// An object which has may contain child instances of <see cref="IElement"/>.
+    /// An object which has may contain child instances of <see cref="INode"/>.
     /// </summary>
     public interface IHasElements
     {
@@ -11,6 +11,6 @@ namespace ZptSharp.Dom
         /// Gets the child elements.
         /// </summary>
         /// <returns>The child elements.</returns>
-        IEnumerable<IElement> GetChildElements();
+        IEnumerable<INode> GetChildElements();
     }
 }

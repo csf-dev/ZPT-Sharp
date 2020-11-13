@@ -4,7 +4,7 @@ using System.Linq;
 namespace ZptSharp.Dom
 {
     /// <summary>
-    /// Extension methods for <see cref="IElement"/>.
+    /// Extension methods for <see cref="INode"/>.
     /// </summary>
     public static class ElementExtensions
     {
@@ -14,7 +14,7 @@ namespace ZptSharp.Dom
         /// <returns>The matching attribute, or a <see langword="null"/> reference if there is no match.</returns>
         /// <param name="element">The element from which to get the attribute.</param>
         /// <param name="spec">An attribute specification.</param>
-        public static IAttribute GetMatchingAttribute(this IElement element, AttributeSpec spec)
+        public static IAttribute GetMatchingAttribute(this INode element, AttributeSpec spec)
         {
             if (element == null) throw new ArgumentNullException(nameof(element));
             if (spec == null) throw new ArgumentNullException(nameof(spec));
@@ -29,7 +29,7 @@ namespace ZptSharp.Dom
         /// </summary>
         /// <param name="element">Element.</param>
         /// <param name="replacement">Replacement.</param>
-        public static void ReplaceWith(this IElement element, IElement replacement)
+        public static void ReplaceWith(this INode element, INode replacement)
         {
             if (element == null)
                 throw new ArgumentNullException(nameof(element));

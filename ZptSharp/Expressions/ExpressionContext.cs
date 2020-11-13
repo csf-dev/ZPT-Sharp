@@ -9,7 +9,7 @@ namespace ZptSharp.Expressions
     /// </summary>
     public class ExpressionContext
     {
-        IElement currentElement;
+        INode currentElement;
 
         /// <summary>
         /// Gets or sets a value indicating whether this <see cref="ExpressionContext"/> is the root context.
@@ -34,7 +34,7 @@ namespace ZptSharp.Expressions
         /// Gets or sets the current DOM element being rendered by this context.
         /// </summary>
         /// <value>The DOM element.</value>
-        public IElement CurrentElement
+        public INode CurrentElement
         {
             get => currentElement;
             set => currentElement = value ?? throw new ArgumentNullException(nameof(value));
@@ -71,7 +71,7 @@ namespace ZptSharp.Expressions
         /// </summary>
         /// <returns>The cloned expression context.</returns>
         /// <param name="element">The element for the cloned context.</param>
-        public ExpressionContext CreateChild(IElement element)
+        public ExpressionContext CreateChild(INode element)
         {
             return new ExpressionContext(element, LocalDefinitions, GlobalDefinitions, Repetitions)
             {
@@ -99,7 +99,7 @@ namespace ZptSharp.Expressions
         /// <param name="localDefinitions">Local definitions.</param>
         /// <param name="globalDefinitions">Global definitions.</param>
         /// <param name="repetitions">Repetitions.</param>
-        public ExpressionContext(IElement element,
+        public ExpressionContext(INode element,
                                  IDictionary<string, object> localDefinitions = null,
                                  IDictionary<string, object> globalDefinitions = null,
                                  IDictionary<string, RepetitionInfo> repetitions = null)

@@ -10,7 +10,7 @@ namespace ZptSharp.Dom
     /// </summary>
     public class HapDocument : DocumentBase
     {
-        readonly IElement root;
+        readonly INode root;
 
         /// <summary>
         /// Gets the native HTML Agility Pack document object.
@@ -22,7 +22,7 @@ namespace ZptSharp.Dom
         /// Gets the root element for the current document.
         /// </summary>
         /// <returns>The root element.</returns>
-        public override IElement RootElement => root;
+        public override INode RootElement => root;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="HapDocument"/> class.

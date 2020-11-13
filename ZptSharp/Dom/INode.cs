@@ -4,9 +4,9 @@ using ZptSharp.Rendering;
 namespace ZptSharp.Dom
 {
     /// <summary>
-    /// Abstraction for a DOM element.
+    /// Abstraction for a DOM node.
     /// </summary>
-    public interface IElement : IHasDocumentSourceInfo, IHasElements
+    public interface INode : IHasDocumentSourceInfo, IHasElements
     {
         /// <summary>
         /// Gets the parent document for the current element.
@@ -27,10 +27,10 @@ namespace ZptSharp.Dom
         IList<IAttribute> Attributes { get; }
 
         /// <summary>
-        /// Gets the elements contained within the current element.
+        /// Gets the children contained within the current node.
         /// </summary>
         /// <value>The child elements.</value>
-        IList<IElement> ChildElements { get; }
+        IList<INode> ChildNodes { get; }
 
         /// <summary>
         /// Gets or sets the parent for the current element.  This will be a <see langword="null"/>
@@ -38,7 +38,13 @@ namespace ZptSharp.Dom
         /// is not attached to a DOM.
         /// </summary>
         /// <value>The parent element.</value>
-        IElement ParentElement { get; set; }
+        INode ParentElement { get; set; }
+
+        /// <summary>
+        /// Gets a value indicating whether this <see cref="INode"/> is an element node.
+        /// </summary>
+        /// <value><c>true</c> if the current instance is an element; otherwise, <c>false</c>.</value>
+        bool IsElement { get; }
 
         /// <summary>
         /// Replaces the specified child element (the <paramref name="toReplace"/> parameter)
@@ -48,7 +54,7 @@ namespace ZptSharp.Dom
         /// </summary>
         /// <param name="toReplace">The child element to replace.</param>
         /// <param name="replacement">The replacement element.</param>
-        void ReplaceChild(IElement toReplace, IElement replacement);
+        void ReplaceChild(INode toReplace, INode replacement);
 
         /// <summary>
         /// Removes the current element from the DOM but preserves all of its children.
@@ -67,6 +73,6 @@ namespace ZptSharp.Dom
         /// Gets a copy of the current element and all of its children.
         /// </summary>
         /// <returns>The copied element.</returns>
-        IElement GetCopy();
+        INode GetCopy();
     }
 }

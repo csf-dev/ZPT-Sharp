@@ -15,7 +15,7 @@ namespace ZptSharp.Dom
 
         public override bool IsInNamespace(Namespace @namespace) => false;
 
-        public StubAttribute(IElement element, string name, string value) : base(element)
+        public StubAttribute(INode element, string name, string value) : base(element)
         {
             // It's OK to suppress these here, this class is not for prod usage
 

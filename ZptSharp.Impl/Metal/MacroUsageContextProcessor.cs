@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Logging;
+using ZptSharp.Dom;
 using ZptSharp.Expressions;
 using ZptSharp.Rendering;
 
@@ -26,6 +28,7 @@ namespace ZptSharp.Metal
         readonly IGetsMetalAttributeSpecs specProvider;
         readonly IGetsMacro macroProvider;
         readonly IExpandsMacro macroExpander;
+        readonly ILogger logger;
 
         /// <summary>
         /// Processes the context using the rules defined within this object.
@@ -54,7 +57,16 @@ namespace ZptSharp.Metal
         {
             var expandedMacro = await macroExpander.ExpandMacroAsync(macro, context, token)
                 .ConfigureAwait(false);
-            context.CurrentElement = expandedMacro.Element;
+
+            logger.LogDebug(@"Replacing use-macro element with expanded macro
+Macro element:{0}
+Using element:{1}",
+                            expandedMacro.Element.ToString(),
+                            context.CurrentElement.ToString());
+
+            var replacement = expandedMacro.Element;
+            context.CurrentElement.ReplaceWith(replacement);
+            context.CurrentElement = replacement;
         }
 
         /// <summary>
@@ -63,13 +75,16 @@ namespace ZptSharp.Metal
         /// <param name="specProvider">Attribute spec provider.</param>
         /// <param name="macroProvider">Macro provider.</param>
         /// <param name="macroExpander">Macro expander.</param>
+        /// <param name="logger">A logger.</param>
         public MacroUsageContextProcessor(IGetsMetalAttributeSpecs specProvider,
                                           IGetsMacro macroProvider,
-                                          IExpandsMacro macroExpander)
+                                          IExpandsMacro macroExpander,
+                                          ILogger logger)
         {
             this.specProvider = specProvider ?? throw new ArgumentNullException(nameof(specProvider));
             this.macroProvider = macroProvider ?? throw new ArgumentNullException(nameof(macroProvider));
             this.macroExpander = macroExpander ?? throw new ArgumentNullException(nameof(macroExpander));
+            this.logger = logger ?? throw new ArgumentNullException(nameof(logger));
         }
     }
 }
