@@ -21,7 +21,7 @@ build_script:
     - cmd: dotnet build ZptSharp.sln
     
 test_script:
-    - cmd: dotnet test ZptSharp.sln /p:CollectCoverage=true /p:CoverletOutputFormat=\"json,opencover\" /p:CoverletOutput=\".TestResults/\"  --test-adapter-path:. --logger:\"nunit;LogFilePath=.TestResults\TestResults.xml\"
+    - cmd: dotnet test ZptSharp.sln /p:CollectCoverage=true /p:CoverletOutputFormat=\"json,opencover\" /p:CoverletOutput=\"../.TestResults/\"  --test-adapter-path:. --logger:\"nunit;LogFilePath=../.TestResults\TestResults.xml\"
 
 after_test:
     - cmd: dotnet-sonarscanner end /d:"sonar.login=%SONARCLOUD_SECRET_KEY%"
