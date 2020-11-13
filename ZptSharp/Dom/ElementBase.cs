@@ -108,18 +108,19 @@ namespace ZptSharp.Dom
         /// </summary>
         public virtual void Omit()
         {
-            if (ParentElement == null)
+            var parent = ParentElement;
+            if (parent == null)
                 throw new InvalidOperationException(Resources.CoreExceptionMessage.MustNotBeRootElement);
 
-            var indexOnParent = ParentElement.ChildNodes.IndexOf(this);
+            var indexOnParent = parent.ChildNodes.IndexOf(this);
 
             var children = new List<INode>(ChildNodes);
-            ParentElement.ChildNodes.Remove(this);
+            parent.ChildNodes.Remove(this);
 
             // Insert the children to the parent, at the same index, in reverse order
             children.Reverse();
             foreach (var child in children)
-                ParentElement.ChildNodes.Insert(indexOnParent, child);
+                parent.ChildNodes.Insert(indexOnParent, child);
         }
             
         IDocumentSourceInfo IHasDocumentSourceInfo.SourceInfo => SourceInfo.Document;

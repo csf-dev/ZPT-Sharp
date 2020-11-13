@@ -9,21 +9,24 @@ namespace ZptSharp.Rendering
     public class ZptCleanupContextProcessorFactory : IGetsZptElementAndAttributeRemovalContextProcessor
     {
         readonly IGetsWellKnownNamespace namespaceProvider;
+        readonly Microsoft.Extensions.Logging.ILogger logger;
 
         /// <summary>
         /// Gets the source-annotation context processor.
         /// </summary>
         /// <returns>The source-annotation context processor.</returns>
         public IProcessesExpressionContext GetElementAndAttributeRemovalProcessor()
-            => new ZptCleanupContextProcessor(namespaceProvider);
+            => new ZptCleanupContextProcessor(namespaceProvider, logger);
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ZptCleanupContextProcessorFactory"/> class.
         /// </summary>
         /// <param name="namespaceProvider">Namespace provider.</param>
-        public ZptCleanupContextProcessorFactory(IGetsWellKnownNamespace namespaceProvider)
+        /// <param name="logger">A logger.</param>
+        public ZptCleanupContextProcessorFactory(IGetsWellKnownNamespace namespaceProvider, Microsoft.Extensions.Logging.ILogger logger)
         {
             this.namespaceProvider = namespaceProvider ?? throw new System.ArgumentNullException(nameof(namespaceProvider));
+            this.logger = logger ?? throw new System.ArgumentNullException(nameof(logger));
         }
     }
 }

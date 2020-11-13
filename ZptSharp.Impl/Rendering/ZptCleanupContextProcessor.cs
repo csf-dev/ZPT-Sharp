@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Logging;
 using ZptSharp.Dom;
 using ZptSharp.Expressions;
 
@@ -16,6 +17,7 @@ namespace ZptSharp.Rendering
     public class ZptCleanupContextProcessor : IProcessesExpressionContext
     {
         readonly IGetsWellKnownNamespace namespaceProvider;
+        readonly ILogger logger;
 
         /// <summary>
         /// Processes the context using the rules defined within this object.
@@ -27,6 +29,7 @@ namespace ZptSharp.Rendering
         {
             if (NeedsCleanup(context.CurrentElement))
             {
+                logger.LogDebug($"This element should be removed by {nameof(ZptCleanupContextProcessor)}: {context.CurrentElement.ToString()}");
                 context.CurrentElement.Omit();
                 return Task.FromResult(new ExpressionContextProcessingResult());
             }
@@ -36,7 +39,10 @@ namespace ZptSharp.Rendering
                 .ToList();
 
             foreach (var attribute in attributesToRemove)
+            {
+                logger.LogDebug($"The attribute \"{attribute.Name}\" should be removed by {nameof(ZptCleanupContextProcessor)} from {context.CurrentElement.ToString()}");
                 context.CurrentElement.Attributes.Remove(attribute);
+            }
 
             return Task.FromResult(new ExpressionContextProcessingResult());
         }
@@ -57,9 +63,12 @@ namespace ZptSharp.Rendering
         /// Initializes a new instance of the <see cref="ZptCleanupContextProcessor"/> class.
         /// </summary>
         /// <param name="namespaceProvider">Namespace provider.</param>
-        public ZptCleanupContextProcessor(IGetsWellKnownNamespace namespaceProvider)
+        /// <param name="logger">A logger.</param>
+        public ZptCleanupContextProcessor(IGetsWellKnownNamespace namespaceProvider,
+                                          ILogger logger)
         {
             this.namespaceProvider = namespaceProvider ?? throw new ArgumentNullException(nameof(namespaceProvider));
+            this.logger = logger ?? throw new ArgumentNullException(nameof(logger));
         }
     }
 }

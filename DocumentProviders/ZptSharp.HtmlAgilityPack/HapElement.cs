@@ -81,7 +81,7 @@ namespace ZptSharp.Dom
             if (nameParts.Length < 2)
                 return false;
 
-            return String.Equals(nameParts[1], @namespace.Prefix, StringComparison.InvariantCulture);
+            return String.Equals(nameParts[0], @namespace.Prefix, StringComparison.InvariantCulture);
         }
 
         /// <summary>
