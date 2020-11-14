@@ -50,7 +50,9 @@ namespace ZptSharp.Metal
             var attribute = element.GetMatchingAttribute(attributeSpec);
             if (attribute == null)
             {
-                logger.LogDebug("No macro referenced by {0}", element.ToString());
+                if(logger.IsEnabled(LogLevel.Trace))
+                    logger.LogTrace("No macro referenced by {element}", element);
+
                 return null;
             }
 
@@ -66,6 +68,16 @@ namespace ZptSharp.Metal
             }
 
             AssertMacroIsNotNull(macro, element, attribute.Value, attributeSpec);
+
+            if (logger.IsEnabled(LogLevel.Trace))
+                logger.LogTrace(@"An element references a METAL macro:
+Element:{element} ({element_source})
+  Macro:{macro} ({macro_source})",
+                                element,
+                                element.SourceInfo,
+                                macro.Element,
+                                macro.Element.SourceInfo);
+
             return macro.GetCopy();
         }
 
@@ -94,7 +106,7 @@ namespace ZptSharp.Metal
         /// <param name="expressionEvaluator">Expression evaluator.</param>
         /// <param name="logger">A logger.</param>
         public MacroProvider(IEvaluatesExpression expressionEvaluator,
-                             ILogger logger)
+                             ILogger<MacroProvider> logger)
         {
             this.expressionEvaluator = expressionEvaluator ?? throw new ArgumentNullException(nameof(expressionEvaluator));
             this.logger = logger ?? throw new ArgumentNullException(nameof(logger));

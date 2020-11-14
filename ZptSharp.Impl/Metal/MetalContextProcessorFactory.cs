@@ -14,7 +14,7 @@ namespace ZptSharp.Metal
         readonly IGetsMacro macroProvider;
         readonly IExpandsMacro macroExpander;
         readonly ISearchesForAttributes attributeFinder;
-        readonly Microsoft.Extensions.Logging.ILogger logger;
+        readonly Microsoft.Extensions.Logging.ILogger<MacroUsageContextProcessor> logger;
 
         /// <summary>
         /// Gets the METAL context processor.
@@ -45,7 +45,7 @@ namespace ZptSharp.Metal
                                             IGetsMacro macroProvider,
                                             IExpandsMacro macroExpander,
                                             ISearchesForAttributes attributeFinder,
-                                            Microsoft.Extensions.Logging.ILogger logger)
+                                            Microsoft.Extensions.Logging.ILogger<MacroUsageContextProcessor> logger)
         {
             this.specProvider = specProvider ?? throw new ArgumentNullException(nameof(specProvider));
             this.macroProvider = macroProvider ?? throw new ArgumentNullException(nameof(macroProvider));

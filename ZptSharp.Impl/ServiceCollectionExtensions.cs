@@ -36,6 +36,7 @@ namespace ZptSharp
         /// <summary>
         /// Configures ZPT Sharp to read and handle TALES "path" expressions.
         /// </summary>
+        /// <returns>The same service provider instance, after setting it up.</returns>
         /// <param name="provider">The service provider.</param>
         public static void UseZptPathExpressions(this IServiceProvider provider)
         {

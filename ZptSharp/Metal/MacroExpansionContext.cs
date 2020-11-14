@@ -9,23 +9,17 @@ namespace ZptSharp.Metal
     /// </summary>
     public class MacroExpansionContext
     {
-        MetalMacro macro;
-
         /// <summary>
         /// Gets or sets the macro which is being expanded.
         /// </summary>
         /// <value>The macro.</value>
-        public MetalMacro Macro
-        {
-            get => macro;
-            set => macro = value ?? throw new ArgumentNullException(nameof(value));
-        }
+        public MetalMacro Macro { get; set; }
 
         /// <summary>
         /// Gets a collection of slot-fillers which remain to be used during macro-expansion.
         /// </summary>
         /// <value>The remaining slot-fillers.</value>
-        public IDictionary<string,Slot> SlotFillers { get; }
+        public IDictionary<string,Slot> SlotFillers { get; private set; }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="MacroExpansionContext"/> class.
@@ -35,7 +29,7 @@ namespace ZptSharp.Metal
         public MacroExpansionContext(MetalMacro macro,
                                      IEnumerable<Slot> slotFillers = null)
         {
-            Macro = macro;
+            Macro = macro ?? throw new ArgumentNullException(nameof(macro));
             SlotFillers = (slotFillers ?? Enumerable.Empty<Slot>()).ToDictionary(k => k.Name, v => v);
         }
     }

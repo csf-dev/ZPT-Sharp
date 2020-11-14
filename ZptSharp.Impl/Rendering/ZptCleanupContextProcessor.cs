@@ -29,7 +29,9 @@ namespace ZptSharp.Rendering
         {
             if (NeedsCleanup(context.CurrentElement))
             {
-                logger.LogDebug($"This element should be removed by {nameof(ZptCleanupContextProcessor)}: {context.CurrentElement.ToString()}");
+                if(logger.IsEnabled(LogLevel.Trace))
+                    logger.LogTrace($"Removing {{element}}",
+                                    context.CurrentElement);
                 context.CurrentElement.Omit();
                 return Task.FromResult(new ExpressionContextProcessingResult());
             }
@@ -40,7 +42,10 @@ namespace ZptSharp.Rendering
 
             foreach (var attribute in attributesToRemove)
             {
-                logger.LogDebug($"The attribute \"{attribute.Name}\" should be removed by {nameof(ZptCleanupContextProcessor)} from {context.CurrentElement.ToString()}");
+                if (logger.IsEnabled(LogLevel.Trace))
+                    logger.LogTrace("Removing attribute \"{attribute}\" from {element}",
+                                    attribute.Name,
+                                    context.CurrentElement);
                 context.CurrentElement.Attributes.Remove(attribute);
             }
 
@@ -65,7 +70,7 @@ namespace ZptSharp.Rendering
         /// <param name="namespaceProvider">Namespace provider.</param>
         /// <param name="logger">A logger.</param>
         public ZptCleanupContextProcessor(IGetsWellKnownNamespace namespaceProvider,
-                                          ILogger logger)
+                                          ILogger<ZptCleanupContextProcessor> logger)
         {
             this.namespaceProvider = namespaceProvider ?? throw new ArgumentNullException(nameof(namespaceProvider));
             this.logger = logger ?? throw new ArgumentNullException(nameof(logger));

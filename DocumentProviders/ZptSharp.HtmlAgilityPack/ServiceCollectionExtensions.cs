@@ -34,14 +34,16 @@ namespace ZptSharp
         /// <summary>
         /// Configures ZPT Sharp to use the AngleSharp document provider when rendering HTML files.
         /// </summary>
+        /// <returns>The same service provider instance, after setting it up.</returns>
         /// <param name="provider">The service provider.</param>
-        public static void UseHapZptDocuments(this IServiceProvider provider)
+        public static IServiceProvider UseHapZptDocuments(this IServiceProvider provider)
         {
             if (provider == null)
                 throw new ArgumentNullException(nameof(provider));
 
             var registry = provider.GetRequiredService<IRegistersDocumentReaderWriter>();
             registry.RegisterDocumentReaderWriter(provider.GetRequiredService<HapDocumentProvider>());
+            return provider;
         }
     }
 }

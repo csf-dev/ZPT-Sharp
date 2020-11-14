@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Logging;
 using ZptSharp.Expressions;
 
 namespace ZptSharp.Metal
@@ -14,6 +15,7 @@ namespace ZptSharp.Metal
         readonly IGetsMetalAttributeSpecs specProvider;
         readonly IGetsSlots slotFinder;
         readonly IFillsSlots slotFiller;
+        readonly ILogger logger;
 
         /// <summary>
         /// Expands the specified macro and returns the result.
@@ -29,11 +31,14 @@ namespace ZptSharp.Metal
             if (context == null)
                 throw new ArgumentNullException(nameof(context));
 
-            var slotsWhichMacroUsageFills = slotFinder.GetSlotFillers(context.CurrentElement);
-            var macroContext = new MacroExpansionContext(macro, slotsWhichMacroUsageFills);
-            FillSlotsDefinedByMacro(macroContext, macroContext.Macro);
+            using (var logScope = logger.BeginScope("Expanding macro {element} ({source_info})", macro.Element, macro.Element.SourceInfo))
+            {
+                var slotsWhichMacroUsageFills = slotFinder.GetSlotFillers(context.CurrentElement);
+                var macroContext = new MacroExpansionContext(macro, slotsWhichMacroUsageFills);
+                FillSlotsDefinedByMacro(macroContext, macroContext.Macro);
 
-            return ExpandMacroPrivateAsync(macroContext, context, token);
+                return ExpandMacroPrivateAsync(macroContext, context, token);
+            }
         }
 
         async Task<MetalMacro> ExpandMacroPrivateAsync(MacroExpansionContext macroContext,
@@ -45,8 +50,20 @@ namespace ZptSharp.Metal
                                                                   specProvider.ExtendMacro,
                                                                   token)
                 .ConfigureAwait(false);
-            
-            if (extendedMacro == null) return macroContext.Macro;
+
+            if (extendedMacro == null)
+            {
+                if(logger.IsEnabled(LogLevel.Trace))
+                    logger.LogTrace("This macro does not extend another", macroContext.Macro.Element);
+
+                return macroContext.Macro;
+            }
+
+            if (logger.IsEnabled(LogLevel.Debug))
+                logger.LogDebug(@"This macro extends another
+Extended macro:{extended} ({extended_source})",
+                                extendedMacro.Element,
+                                extendedMacro.Element.SourceInfo);
 
             ExtendMacro(macroContext, extendedMacro);
             macroContext.Macro = extendedMacro;
@@ -66,6 +83,9 @@ namespace ZptSharp.Metal
 
             foreach (var slot in slotsFilledByExtension)
             {
+                if (logger.IsEnabled(LogLevel.Trace))
+                    logger.LogTrace("Found slot-filler in macro extension:{filler}", slot.Element);
+
                 if (macroContext.SlotFillers.ContainsKey(slot.Name))
                     macroContext.SlotFillers.Remove(slot.Name);
 
@@ -86,15 +106,18 @@ namespace ZptSharp.Metal
         /// <param name="specProvider">Spec provider.</param>
         /// <param name="slotFinder">Slot finder.</param>
         /// <param name="slotFiller">Slot filler.</param>
+        /// <param name="logger">A logger.</param>
         public MacroExpander(IGetsMacro macroProvider,
                              IGetsMetalAttributeSpecs specProvider,
                              IGetsSlots slotFinder,
-                             IFillsSlots slotFiller)
+                             IFillsSlots slotFiller,
+                             ILogger<MacroExpander> logger)
         {
             this.macroProvider = macroProvider ?? throw new ArgumentNullException(nameof(macroProvider));
             this.specProvider = specProvider ?? throw new ArgumentNullException(nameof(specProvider));
             this.slotFinder = slotFinder ?? throw new ArgumentNullException(nameof(slotFinder));
             this.slotFiller = slotFiller ?? throw new ArgumentNullException(nameof(slotFiller));
+            this.logger = logger ?? throw new ArgumentNullException(nameof(logger));
         }
     }
 }

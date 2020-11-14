@@ -1,4 +1,5 @@
 ﻿using System;
+using AutoFixture.NUnit3;
 using Moq;
 using NUnit.Framework;
 using ZptSharp.Dom;
@@ -29,12 +30,15 @@ namespace ZptSharp.Metal
                                                                              INode parent,
                                                                              string slotName,
                                                                              MacroExpansionContext context,
-                                                                             SlotFiller sut)
+                                                                             [Frozen] IGetsMetalAttributeSpecs specProvider,
+                                                                             SlotFiller sut,
+                                                                             AttributeSpec spec)
         {
             Mock.Get(defineSlotElement).SetupProperty(x => x.ParentElement, parent);
             Mock.Get(fillSlotElement).Setup(x => x.GetCopy()).Returns(copiedFiller);
             context.SlotFillers.Clear();
             context.SlotFillers.Add(slotName, new Slot(slotName, fillSlotElement));
+            Mock.Get(specProvider).SetupGet(x => x.FillSlot).Returns(spec);
 
             sut.FillSlots(context, new[] { new Slot(slotName, defineSlotElement) });
 
@@ -46,10 +50,13 @@ namespace ZptSharp.Metal
                                                                                      INode fillSlotElement,
                                                                                      string slotName,
                                                                                      MacroExpansionContext context,
-                                                                                     SlotFiller sut)
+                                                                                     [Frozen] IGetsMetalAttributeSpecs specProvider,
+                                                                                     SlotFiller sut,
+                                                                                     AttributeSpec spec)
         {
             context.SlotFillers.Clear();
             context.SlotFillers.Add(slotName, new Slot(slotName, fillSlotElement));
+            Mock.Get(specProvider).SetupGet(x => x.FillSlot).Returns(spec);
 
             sut.FillSlots(context, new[] { new Slot(slotName, defineSlotElement) });
 

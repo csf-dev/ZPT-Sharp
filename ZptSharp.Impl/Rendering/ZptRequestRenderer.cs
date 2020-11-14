@@ -3,6 +3,7 @@ using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 using ZptSharp.Config;
 using ZptSharp.Dom;
 
@@ -34,7 +35,10 @@ namespace ZptSharp.Rendering
 
         async Task<Stream> RenderPrivateAsync(RenderZptDocumentRequest request, CancellationToken token)
         {
+            var logScopeState = new ZptRequestLoggingScope(request.SourceInfo);
+
             using (var scope = serviceProvider.CreateScope())
+            using(var logScope = serviceProvider.GetRequiredService<ILogger<ZptRequestRenderer>>().BeginScope(logScopeState))
             {
                 StoreConfigForLaterUse(scope, request.Config);
                 var documentReaderWriter = GetDocumentReaderWriter(scope, request);

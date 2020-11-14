@@ -52,13 +52,13 @@ Actual
             return Directory.GetFiles(expectedDocsDirectory);
         }
 
-        [OneTimeSetUp]
+        [SetUp]
         public void InitialSetup()
         {
             serviceProvider = GetServiceProvider();
         }
 
-        [OneTimeTearDown]
+        [TearDown]
         public void FinalTeardown()
         {
             serviceProvider?.Dispose();
@@ -66,28 +66,25 @@ Actual
 
         ServiceProvider GetServiceProvider()
         {
-            var services = new ServiceCollection();
-            services.AddZptSharp();
-            services.AddAngleSharpZptDocuments();
-            services.AddHapZptDocuments();
-
-            AddLogging(services);
+            var services = new ServiceCollection()
+                .AddZptSharp()
+                .AddAngleSharpZptDocuments()
+                .AddHapZptDocuments()
+                .AddLogging(b => {
+                    b.ClearProviders();
+                    b.AddConsole(c => {
+                        c.DisableColors = true;
+                        c.IncludeScopes = true;
+                    });
+                    b.SetMinimumLevel(LogLevel.Debug);
+                });
 
             var provider = services.BuildServiceProvider();
-            provider.UseHapZptDocuments();
-            provider.UseZptPathExpressions();
+            provider
+                .UseHapZptDocuments()
+                .UseZptPathExpressions();
+
             return provider;
-        }
-
-        void AddLogging(ServiceCollection services)
-        {
-            services.AddLogging(b => {
-                b.ClearProviders();
-                b.AddConsole(c => c.DisableColors = true);
-                b.SetMinimumLevel(LogLevel.Information);
-            });
-
-            services.AddTransient(s => s.GetRequiredService<ILoggerFactory>().CreateLogger("ZptSharp-UnitTests"));
         }
 
         object GetModel()

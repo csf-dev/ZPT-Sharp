@@ -58,11 +58,14 @@ namespace ZptSharp.Metal
             var expandedMacro = await macroExpander.ExpandMacroAsync(macro, context, token)
                 .ConfigureAwait(false);
 
-            logger.LogDebug(@"Replacing use-macro element with expanded macro
-Macro element:{0}
-Using element:{1}",
-                            expandedMacro.Element.ToString(),
-                            context.CurrentElement.ToString());
+            if(logger.IsEnabled(LogLevel.Debug))
+                logger.LogDebug(@"Replacing use-macro element with expanded macro
+Macro element:{macro_element} ({macro_element_source})
+Using element:{macro_user} ({macro_user_source})",
+                                expandedMacro.Element,
+                                expandedMacro.Element.SourceInfo,
+                                context.CurrentElement,
+                                context.CurrentElement.SourceInfo);
 
             var replacement = expandedMacro.Element;
             context.CurrentElement.ReplaceWith(replacement);
@@ -79,7 +82,7 @@ Using element:{1}",
         public MacroUsageContextProcessor(IGetsMetalAttributeSpecs specProvider,
                                           IGetsMacro macroProvider,
                                           IExpandsMacro macroExpander,
-                                          ILogger logger)
+                                          ILogger<MacroUsageContextProcessor> logger)
         {
             this.specProvider = specProvider ?? throw new ArgumentNullException(nameof(specProvider));
             this.macroProvider = macroProvider ?? throw new ArgumentNullException(nameof(macroProvider));
