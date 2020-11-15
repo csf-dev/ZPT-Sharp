@@ -110,19 +110,23 @@ namespace ZptSharp.Expressions
         }
 
         [Test, AutoMoqData]
-        public async Task TryGetValueAsync_returns_directory_info_when_container_requested([Frozen, NoAutoProperties] ExpressionContext context,
-                                                                                [Frozen, MockedConfig] RenderingConfig config,
-                                                                                [Frozen, MetalDocAdapter] IGetsMetalDocumentAdapter metalDocumentAdapterFactory,
-                                                                                IDocument document,
-                                                                                BuiltinContextsProvider sut)
+        public async Task TryGetValueAsync_returns_result_from_source_info_when_container_requested([Frozen, NoAutoProperties] ExpressionContext context,
+                                                                                                    [Frozen, MockedConfig] RenderingConfig config,
+                                                                                                    [Frozen, MetalDocAdapter] IGetsMetalDocumentAdapter metalDocumentAdapterFactory,
+                                                                                                    IDocument document,
+                                                                                                    BuiltinContextsProvider sut,
+                                                                                                    object container)
         {
+            var sourceInfo = new Mock<IDocumentSourceInfo>();
+            sourceInfo.As<IHasContainer>().Setup(x => x.GetContainer()).Returns(container);
+
             context.TemplateDocument = document;
-            var documentPath = Path.Join(TestContext.CurrentContext.TestDirectory, "document.pt");
-            Mock.Get(document).SetupGet(x => x.SourceInfo).Returns(() => new FileSourceInfo(documentPath));
+            Mock.Get(document).SetupGet(x => x.SourceInfo).Returns(sourceInfo.Object);
 
             var result = await sut.TryGetValueAsync(BuiltinContextsProvider.Container);
-            Assert.That(result.Success, Is.True, "Value returned successfully");
-            Assert.That(result.Value, Is.EqualTo(new DirectoryInfo(TestContext.CurrentContext.TestDirectory)), "Directory info returned");
+
+            Assert.That(result, Has.Property(nameof(GetValueResult.Success)).True
+                                .And.Property(nameof(GetValueResult.Value)).SameAs(container));
         }
     }
 }

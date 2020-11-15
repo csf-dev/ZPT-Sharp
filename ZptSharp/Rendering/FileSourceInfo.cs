@@ -59,7 +59,7 @@ namespace ZptSharp.Rendering
         /// Gets the parent/container object, in this case representing a <see cref="System.IO.DirectoryInfo"/>.
         /// </summary>
         /// <returns>The container.</returns>
-        public object GetContainer() => new System.IO.FileInfo(FilePath).Directory;
+        public object GetContainer() => new TemplateDirectory(new System.IO.FileInfo(FilePath).Directory);
 
         /// <summary>
         /// Initializes a new instance of the <see cref="FileSourceInfo"/> class.

@@ -101,7 +101,9 @@ namespace ZptSharp.Expressions
 
         object GetTemplateContainer()
         {
-            return (context.TemplateDocument.SourceInfo is Rendering.IHasContainer containerProvider) ? containerProvider.GetContainer() : null;
+            return (context.TemplateDocument.SourceInfo is Rendering.IHasContainer containerProvider)
+                ? containerProvider.GetContainer()
+                : null;
         }
 
         /// <summary>
