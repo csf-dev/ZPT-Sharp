@@ -3,6 +3,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using AutoFixture.NUnit3;
+using Microsoft.Extensions.Logging;
 using Moq;
 using NUnit.Framework;
 using ZptSharp.Autofixture;
@@ -19,6 +20,7 @@ namespace ZptSharp.Metal
                                                                                                                        [Frozen] IGetsMetalAttributeSpecs specProvider,
                                                                                                                        [Frozen] IGetsSlots slotFinder,
                                                                                                                        [Frozen] IFillsSlots slotFiller,
+                                                                                                                       [Frozen, MockLogger] ILogger<MacroExpander> logger,
                                                                                                                        MacroExpander sut,
                                                                                                                        MetalMacro macro,
                                                                                                                        ExpressionContext context,
@@ -53,6 +55,7 @@ namespace ZptSharp.Metal
                                                                                              [Frozen] IGetsMetalAttributeSpecs specProvider,
                                                                                              [Frozen] IGetsSlots slotFinder,
                                                                                              [Frozen] IFillsSlots slotFiller,
+                                                                                             [Frozen, MockLogger] ILogger<MacroExpander> logger,
                                                                                              MacroExpander sut,
                                                                                              MetalMacro macro,
                                                                                              MetalMacro extended,
@@ -97,6 +100,7 @@ namespace ZptSharp.Metal
                                                                                                                        [Frozen] IGetsMetalAttributeSpecs specProvider,
                                                                                                                        [Frozen] IGetsSlots slotFinder,
                                                                                                                        [Frozen] IFillsSlots slotFiller,
+                                                                                                                       [Frozen, MockLogger] ILogger<MacroExpander> logger,
                                                                                                                        MacroExpander sut,
                                                                                                                        MetalMacro macro,
                                                                                                                        MetalMacro extended,
@@ -141,6 +145,7 @@ namespace ZptSharp.Metal
                                                                                                                                 [Frozen] IGetsMetalAttributeSpecs specProvider,
                                                                                                                                 [Frozen] IGetsSlots slotFinder,
                                                                                                                                 [Frozen] IFillsSlots slotFiller,
+                                                                                                                                [Frozen, MockLogger] ILogger<MacroExpander> logger,
                                                                                                                                 MacroExpander sut,
                                                                                                                                 MetalMacro macro,
                                                                                                                                 MetalMacro extended,

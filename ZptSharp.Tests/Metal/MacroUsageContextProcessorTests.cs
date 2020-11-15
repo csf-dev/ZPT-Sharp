@@ -4,8 +4,10 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using AutoFixture.NUnit3;
+using Microsoft.Extensions.Logging;
 using Moq;
 using NUnit.Framework;
+using ZptSharp.Autofixture;
 using ZptSharp.Dom;
 using ZptSharp.Expressions;
 
@@ -17,6 +19,7 @@ namespace ZptSharp.Metal
         [Test, AutoMoqData]
         public async Task ProcessContextAsync_does_not_replace_element_if_no_use_macro_attribute([Frozen] IGetsMetalAttributeSpecs specProvider,
                                                                                                  [Frozen] IGetsMacro macroProvider,
+                                                                                                 [Frozen, MockLogger] ILogger<MacroUsageContextProcessor> logger,
                                                                                                  MacroUsageContextProcessor sut,
                                                                                                  AttributeSpec spec,
                                                                                                  ExpressionContext context,
@@ -37,6 +40,7 @@ namespace ZptSharp.Metal
         public async Task ProcessContextAsync_replaces_element_in_context_with_expanded_macro([Frozen] IGetsMetalAttributeSpecs specProvider,
                                                                                               [Frozen] IGetsMacro macroProvider,
                                                                                               [Frozen] IExpandsMacro macroExpander,
+                                                                                              [Frozen, MockLogger] ILogger<MacroUsageContextProcessor> logger,
                                                                                               MacroUsageContextProcessor sut,
                                                                                               MetalMacro macro,
                                                                                               MetalMacro expandedMacro,

@@ -1,7 +1,9 @@
 ﻿using System;
 using AutoFixture.NUnit3;
+using Microsoft.Extensions.Logging;
 using Moq;
 using NUnit.Framework;
+using ZptSharp.Autofixture;
 using ZptSharp.Dom;
 
 namespace ZptSharp.Metal
@@ -13,6 +15,7 @@ namespace ZptSharp.Metal
         public void FillSlots_does_not_fill_a_slot_which_has_no_filler(Slot defined,
                                                                        INode parent,
                                                                        MacroExpansionContext context,
+                                                                       [Frozen, MockLogger] ILogger<SlotFiller> logger,
                                                                        SlotFiller sut)
         {
             Mock.Get(defined.Element).SetupProperty(x => x.ParentElement, parent);
@@ -31,6 +34,7 @@ namespace ZptSharp.Metal
                                                                              string slotName,
                                                                              MacroExpansionContext context,
                                                                              [Frozen] IGetsMetalAttributeSpecs specProvider,
+                                                                             [Frozen, MockLogger] ILogger<SlotFiller> logger,
                                                                              SlotFiller sut,
                                                                              AttributeSpec spec)
         {
@@ -51,6 +55,7 @@ namespace ZptSharp.Metal
                                                                                      string slotName,
                                                                                      MacroExpansionContext context,
                                                                                      [Frozen] IGetsMetalAttributeSpecs specProvider,
+                                                                                     [Frozen, MockLogger] ILogger<SlotFiller> logger,
                                                                                      SlotFiller sut,
                                                                                      AttributeSpec spec)
         {
