@@ -67,7 +67,7 @@ namespace ZptSharp.Config
             public bool OmitXmlDeclaration
             {
                 get => config.OmitXmlDeclaration;
-                set => config.OmitXmlDeclaration = value;
+                set { AssertIsNotBuilt(); config.OmitXmlDeclaration = value; }
             }
 
             /// <summary>
@@ -78,7 +78,7 @@ namespace ZptSharp.Config
             public Func<ExpressionContext, IGetsNamedTalesValue> BuiltinContextsProvider
             {
                 get => config.BuiltinContextsProvider;
-                set => config.BuiltinContextsProvider = value;
+                set { AssertIsNotBuilt(); config.BuiltinContextsProvider = value; }
             }
 
             /// <summary>
@@ -88,7 +88,7 @@ namespace ZptSharp.Config
             public IDictionary<string, object> KeywordOptions
             {
                 get => config.KeywordOptions;
-                set => config.KeywordOptions = value;
+                set { AssertIsNotBuilt(); config.KeywordOptions = value; }
             }
 
             /// <summary>
@@ -99,7 +99,7 @@ namespace ZptSharp.Config
             public bool IncludeSourceAnnotation
             {
                 get => config.IncludeSourceAnnotation;
-                set => config.IncludeSourceAnnotation = value;
+                set { AssertIsNotBuilt(); config.IncludeSourceAnnotation = value; }
             }
 
             /// <summary>

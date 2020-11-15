@@ -38,5 +38,6 @@
     <Folder Include="Util\" />
     <Folder Include="PathExpressions\" />
     <Folder Include="PathExpressions\ValueProviders\" />
+    <Folder Include="Config\" />
   </ItemGroup>
 </Project>
