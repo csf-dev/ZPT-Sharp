@@ -103,7 +103,10 @@ namespace ZptSharp.Dom
                 .ToList();
             var attribs = new EventRaisingList<IAttribute>(sourceAttributes);
 
-            attribs.SetupAfterActions(add => NativeElement.Attributes[add.Item.Name] = ((HapAttribute) add.Item).NativeAttribute,
+            attribs.SetupAfterActions(add => {
+                                          var attr = ((HapAttribute)add.Item).NativeAttribute;
+                                          NativeElement.SetAttributeValue(attr.OriginalName, attr.Value);
+                                      },
                                       del => NativeElement.Attributes.Remove(del.Item.Name));
 
             return attribs;
