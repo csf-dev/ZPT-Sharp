@@ -10,6 +10,8 @@ namespace ZptSharp.Dom
     [TestFixture,Parallelizable]
     public class HapElementTests
     {
+        #region ToString
+
         [Test]
         public void ToString_returns_HTML_open_tag()
         {
@@ -17,7 +19,11 @@ namespace ZptSharp.Dom
             Assert.That(() => HapDocumentUtil.GetNode(html).ToString(), Is.EqualTo(html));
         }
 
-        [Test,AutoMoqData]
+        #endregion
+
+        #region IsInNamespace
+
+        [Test, AutoMoqData]
         public void IsInNamespace_returns_false_when_element_has_no_namespace_prefix(WellKnownNamespaceProvider namespaces)
         {
             var html = @"<div class=""foo"" tal:repeat=""item items"">";
@@ -37,6 +43,10 @@ namespace ZptSharp.Dom
             var html = @"<metal:div class=""foo"" tal:repeat=""item items"">";
             Assert.That(() => HapDocumentUtil.GetNode(html).IsInNamespace(namespaces.TalNamespace), Is.False);
         }
+
+        #endregion
+
+        #region ChildNodes
 
         [Test]
         public void Adding_a_child_node_modifies_native_document()
@@ -61,6 +71,10 @@ namespace ZptSharp.Dom
             Assert.That(element.NativeElement.OuterHtml, Is.EqualTo("<div></div>"));
         }
 
+        #endregion
+
+        #region Attributes
+
         [Test]
         public void Adding_an_attribute_modifies_native_document()
         {
@@ -82,5 +96,41 @@ namespace ZptSharp.Dom
             Assert.That(element.NativeElement.OuterHtml, Is.EqualTo("<div></div>"));
         }
 
+        #endregion
+
+        #region GetCopy
+
+        [Test, AutoMoqData]
+        public void GetCopy_returns_deep_copy_of_selected_node()
+        {
+            var html = @"<html><body><div class=""foo""><p id=""test"">Hello there</p><p>Another paragraph</p></div></body></html>";
+            var htmlElement = HapDocumentUtil.GetNode(html);
+            var bodyElement = htmlElement.ChildNodes.First();
+            var result = (HapElement) bodyElement.GetCopy();
+
+            Assert.That(result.NativeElement.OuterHtml, Is.EqualTo(@"<body><div class=""foo""><p id=""test"">Hello there</p><p>Another paragraph</p></div></body>"));
+        }
+
+        [Test, AutoMoqData]
+        public void GetCopy_deep_copies_source_info_line_numbers()
+        {
+            var html = @"<html>
+<body>
+    <div class=""foo"">
+        <p id=""test"">Hello there</p>
+        <p>Another paragraph</p>
+    </div>
+</body>
+</html>";
+            var htmlElement = HapDocumentUtil.GetNode(html);
+            var bodyElement = htmlElement.ChildNodes.Skip(1).First();
+
+            var result = bodyElement.GetCopy();
+
+            var testElement = result.ChildNodes.Skip(1).First().ChildNodes.Skip(1).First();
+            Assert.That(testElement.SourceInfo?.LineNumber, Is.EqualTo(4));
+        }
+
+        #endregion
     }
 }
