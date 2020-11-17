@@ -12,8 +12,9 @@ namespace ZptSharp.Dom
     /// </summary>
     public class HapElement : ElementBase
     {
-        readonly EventRaisingList<IAttribute> attributes;
+        readonly IList<INode> sourceChildElements;
         readonly EventRaisingList<INode> childElements;
+        readonly EventRaisingList<IAttribute> attributes;
 
         /// <summary>
         /// Gets the native HTML Agility Pack <see cref="HtmlNode"/> instance which
@@ -62,7 +63,22 @@ namespace ZptSharp.Dom
         public override INode GetCopy()
         {
             var copiedElement = NativeElement.Clone();
-            return new HapElement(copiedElement, (HapDocument) Document, null, SourceInfo);
+
+            var closedList = new Dictionary<HtmlNode,HapElement>();
+            (HtmlNode, HapElement)? current;
+            for (var openList = new List<(HtmlNode, HapElement)?> { (copiedElement, this) };
+                 (current = openList.FirstOrDefault()) != null;
+                 openList.RemoveAt(0))
+            {
+                var (native, element) = current.Value;
+                var parent = ReferenceEquals(element, this) ? null : closedList[native.ParentNode];
+                var newElement = new HapElement(native, (HapDocument)Document, parent, element.SourceInfo, new List<INode>());
+                closedList.Add(native, newElement);
+                if (parent != null) parent.sourceChildElements.Add(newElement);
+                openList.AddRange(native.ChildNodes.Select((node, idx) => ((HtmlNode, HapElement)?)(node, (HapElement)element.ChildNodes[idx])));
+            }
+
+            return closedList[copiedElement];
         }
 
         /// <summary>
@@ -113,26 +129,18 @@ namespace ZptSharp.Dom
         }
 
         /// <summary>
-        /// <para>
-        /// Called by the constructor; initialises and returns a <see cref="EventRaisingList{IElement}"/>
-        /// for use as the <see cref="ChildNodes"/> collection.
-        /// </para>
-        /// <para>
-        /// This event-raising list is used to keep the child elements collection in-sync with the child
-        /// elements in the native HAP element.
-        /// </para>
+        /// Gets a list of <see cref="INode"/> which is wrapped in a list adapter that reacts to events.
         /// </summary>
+        /// <param name="elements">The source list of child elements.</param>
         /// <returns>The child elements collection.</returns>
-        EventRaisingList<INode> GetChildElementsCollection()
+        EventRaisingList<INode> WrapChildElementsCollectionWithEvents(IList<INode> elements)
         {
-            var sourceChildElements = NativeElement.ChildNodes
-                .Select(x => new HapElement(x, (HapDocument)Doc, this, Source.CreateChild(x.Line)))
-                .Cast<INode>()
-                .ToList();
+            if (elements == null)
+                throw new ArgumentNullException(nameof(elements));
 
-            var children = new EventRaisingList<INode>(sourceChildElements);
+            var eventBasedListWrapper = new EventRaisingList<INode>(elements);
 
-            children.SetupAfterActions(
+            eventBasedListWrapper.SetupAfterActions(
                 add => {
                     var index = ((IList<INode>)add.Collection).IndexOf(add.Item);
                     var ele = ((HapElement)add.Item).NativeElement;
@@ -150,7 +158,27 @@ namespace ZptSharp.Dom
                     del.Item.ParentElement = null;
                 });
 
-            return children;
+            return eventBasedListWrapper;
+        }
+
+        IList<INode> GetSourceChildElements()
+        {
+            return NativeElement.ChildNodes
+                .Select(x => new HapElement(x, (HapDocument)Doc, this, Source.CreateChild(x.Line)))
+                .Cast<INode>()
+                .ToList();
+        }
+
+        private HapElement(HtmlNode element,
+                           HapDocument document,
+                           INode parent,
+                           IElementSourceInfo sourceInfo,
+                           IList<INode> childNodes) : base(document, parent, sourceInfo)
+        {
+            NativeElement = element ?? throw new ArgumentNullException(nameof(element));
+            attributes = GetAttributesCollection();
+            sourceChildElements = childNodes ?? GetSourceChildElements();
+            childElements = WrapChildElementsCollectionWithEvents(sourceChildElements);
         }
 
         /// <summary>
@@ -163,11 +191,7 @@ namespace ZptSharp.Dom
         public HapElement(HtmlNode element,
                           HapDocument document,
                           INode parent = null,
-                          IElementSourceInfo sourceInfo = null) : base(document, parent, sourceInfo)
-        {
-            NativeElement = element ?? throw new ArgumentNullException(nameof(element));
-            attributes = GetAttributesCollection();
-            childElements = GetChildElementsCollection();
-        }
+                          IElementSourceInfo sourceInfo = null)
+            : this(element, document, parent, sourceInfo, null) { }
     }
 }
