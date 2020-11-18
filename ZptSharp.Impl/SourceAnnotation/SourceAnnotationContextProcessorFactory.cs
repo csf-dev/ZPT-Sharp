@@ -1,6 +1,7 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
 using ZptSharp.Expressions;
+using ZptSharp.Metal;
 using ZptSharp.Rendering;
 
 namespace ZptSharp.SourceAnnotation
@@ -11,24 +12,31 @@ namespace ZptSharp.SourceAnnotation
     /// </summary>
     public class SourceAnnotationContextProcessorFactory : IGetsSourceAnnotationContextProcessor
     {
+        readonly IGetsMetalAttributeSpecs metalSpecProvider;
+        readonly IGetsAnnotationForElement annotationProvider;
+        readonly IAddsComment commenter;
+
         /// <summary>
         /// Gets the source-annotation context processor.
         /// </summary>
         /// <returns>The source-annotation context processor.</returns>
-        public IProcessesExpressionContext GetSourceAnnotationContextProcessor() => new NoOpSourceAnnotationContextProcessor();
+        public IProcessesExpressionContext GetSourceAnnotationContextProcessor()
+            => new SourceAnnotationContextProcessor(metalSpecProvider, annotationProvider, commenter);
 
-        class NoOpSourceAnnotationContextProcessor : IProcessesExpressionContext
+        /// <summary>
+        /// Initializes a new instance of the
+        /// <see cref="SourceAnnotationContextProcessorFactory"/> class.
+        /// </summary>
+        /// <param name="metalSpecProvider">METAL spec provider.</param>
+        /// <param name="annotationProvider">Annotation provider.</param>
+        /// <param name="commenter">Commenter.</param>
+        public SourceAnnotationContextProcessorFactory(IGetsMetalAttributeSpecs metalSpecProvider,
+                                                       IGetsAnnotationForElement annotationProvider,
+                                                       IAddsComment commenter)
         {
-            /// <summary>
-            /// Processes the context using the rules defined within this object.
-            /// </summary>
-            /// <returns>A result object indicating the outcome of processing.</returns>
-            /// <param name="context">The context to process.</param>
-            /// <param name="token">An optional cancellation token.</param>
-            public Task<ExpressionContextProcessingResult> ProcessContextAsync(ExpressionContext context, CancellationToken token = default)
-            {
-                return Task.FromResult(new ExpressionContextProcessingResult());
-            }
+            this.metalSpecProvider = metalSpecProvider ?? throw new System.ArgumentNullException(nameof(metalSpecProvider));
+            this.annotationProvider = annotationProvider ?? throw new System.ArgumentNullException(nameof(annotationProvider));
+            this.commenter = commenter ?? throw new System.ArgumentNullException(nameof(commenter));
         }
     }
 }

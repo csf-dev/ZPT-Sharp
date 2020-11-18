@@ -14,5 +14,12 @@ namespace ZptSharp.Rendering
         /// </summary>
         /// <value>The additional contexts.</value>
         public IList<ExpressionContext> AdditionalContexts { get; set; }
+
+        /// <summary>
+        /// Gets a no-operation instance of <see cref="ExpressionContextProcessingResult"/>.  This result indicates that
+        /// context-processing completed without error, but that no particular action needs to be taken as a result.
+        /// </summary>
+        /// <value>The no-op result.</value>
+        public static ExpressionContextProcessingResult Noop => new ExpressionContextProcessingResult();
     }
 }

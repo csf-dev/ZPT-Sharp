@@ -27,7 +27,7 @@ namespace ZptSharp.Tal
             /// <param name="token">An optional cancellation token.</param>
             public Task<ExpressionContextProcessingResult> ProcessContextAsync(ExpressionContext context, CancellationToken token = default)
             {
-                return Task.FromResult(new ExpressionContextProcessingResult());
+                return Task.FromResult(ExpressionContextProcessingResult.Noop);
             }
         }
     }

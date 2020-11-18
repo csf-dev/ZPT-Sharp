@@ -179,23 +179,23 @@ namespace ZptSharp.Rendering
             Mock.Get(contextProcessor)
                 .InSequence(sequence)
                 .Setup(x => x.ProcessContextAsync(context, CancellationToken.None))
-                .Returns(Task.FromResult(new ExpressionContextProcessingResult()));
+                .Returns(Task.FromResult(ExpressionContextProcessingResult.Noop));
             Mock.Get(contextProcessor)
                 .InSequence(sequence)
                 .Setup(x => x.ProcessContextAsync(sibling1, CancellationToken.None))
-                .Returns(Task.FromResult(new ExpressionContextProcessingResult()));
+                .Returns(Task.FromResult(ExpressionContextProcessingResult.Noop));
             Mock.Get(contextProcessor)
                 .InSequence(sequence)
                 .Setup(x => x.ProcessContextAsync(child1, CancellationToken.None))
-                .Returns(Task.FromResult(new ExpressionContextProcessingResult()));
+                .Returns(Task.FromResult(ExpressionContextProcessingResult.Noop));
             Mock.Get(contextProcessor)
                 .InSequence(sequence)
                 .Setup(x => x.ProcessContextAsync(child2, CancellationToken.None))
-                .Returns(Task.FromResult(new ExpressionContextProcessingResult()));
+                .Returns(Task.FromResult(ExpressionContextProcessingResult.Noop));
             Mock.Get(contextProcessor)
                 .InSequence(sequence)
                 .Setup(x => x.ProcessContextAsync(sibling2, CancellationToken.None))
-                .Returns(Task.FromResult(new ExpressionContextProcessingResult()));
+                .Returns(Task.FromResult(ExpressionContextProcessingResult.Noop));
 
             await sut.IterateContextAndChildrenAsync(context);
 

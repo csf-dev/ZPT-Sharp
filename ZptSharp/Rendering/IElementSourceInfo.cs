@@ -14,10 +14,16 @@ namespace ZptSharp.Rendering
         IDocumentSourceInfo Document { get; }
 
         /// <summary>
-        /// Gets the line number for the beginning of the element.
+        /// Gets the line number for the start-tag/beginning of the element.
         /// </summary>
         /// <value>The line number.</value>
-        int? LineNumber { get; }
+        int? StartTagLineNumber { get; }
+
+        /// <summary>
+        /// Gets the line number for the end-tag/end of the element.
+        /// </summary>
+        /// <value>The line number.</value>
+        int? EndTagLineNumber { get; }
 
         /// <summary>
         /// Creates a child <see cref="IElementSourceInfo"/> which uses the same

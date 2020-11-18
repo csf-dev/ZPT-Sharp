@@ -143,14 +143,16 @@ namespace ZptSharp.Dom
             eventBasedListWrapper.SetupAfterActions(
                 add => {
                     var index = ((IList<INode>)add.Collection).IndexOf(add.Item);
-                    var ele = ((HapElement)add.Item).NativeElement;
+                    var item = (HapElement)add.Item;
+                    var ele = item.NativeElement;
 
                     if (index >= NativeElement.ChildNodes.Count)
                         NativeElement.AppendChild(ele);
                     else
                         NativeElement.InsertBefore(ele, NativeElement.ChildNodes[index]);
 
-                    add.Item.ParentElement = this;
+                    item.IsImportedNode = true;
+                    item.ParentElement = this;
                 },
                 del => {
                     var ele = ((HapElement)del.Item).NativeElement;

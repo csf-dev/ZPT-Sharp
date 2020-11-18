@@ -128,7 +128,7 @@ namespace ZptSharp.Dom
             var result = bodyElement.GetCopy();
 
             var testElement = result.ChildNodes.Skip(1).First().ChildNodes.Skip(1).First();
-            Assert.That(testElement.SourceInfo?.LineNumber, Is.EqualTo(4));
+            Assert.That(testElement.SourceInfo?.StartTagLineNumber, Is.EqualTo(4));
         }
 
         #endregion

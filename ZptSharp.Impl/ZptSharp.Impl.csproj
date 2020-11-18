@@ -45,6 +45,9 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <Compile Remove="Resources\SourceAnnotationStrings.Designer.cs" />
+  </ItemGroup>
+  <ItemGroup>
     <Compile Update="Resources\ExceptionMessage.Designer.cs">
       <DependentUpon>ExceptionMessage.resx</DependentUpon>
     </Compile>

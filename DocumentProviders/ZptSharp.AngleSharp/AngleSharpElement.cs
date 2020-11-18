@@ -125,14 +125,16 @@ namespace ZptSharp.Dom
             children.SetupAfterActions(
                 add => {
                     var index = ((IList<INode>)add.Collection).IndexOf(add.Item);
-                    var ele = ((AngleSharpElement)add.Item).NativeElement;
+                    var item = (AngleSharpElement)add.Item;
+                    var ele = item.NativeElement;
 
                     if (index >= NativeElement.ChildElementCount)
                         NativeElement.Append(ele);
                     else
                         NativeElement.InsertBefore(ele, NativeElement.Children[index]);
 
-                    add.Item.ParentElement = this;
+                    item.IsImportedNode = true;
+                    item.ParentElement = this;
                 },
                 del => {
                     var ele = ((AngleSharpElement)del.Item).NativeElement;

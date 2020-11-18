@@ -26,6 +26,11 @@ namespace ZptSharp.Dom
         protected INode Parent;
 
         /// <summary>
+        /// A field for whether or not the element is imported.
+        /// </summary>
+        protected bool IsImportedNode;
+
+        /// <summary>
         /// Gets the parent document for the current element.
         /// </summary>
         /// <value>The document.</value>
@@ -36,6 +41,18 @@ namespace ZptSharp.Dom
         /// </summary>
         /// <value>The source info.</value>
         public virtual IElementSourceInfo SourceInfo => Source;
+
+        /// <summary>
+        /// <para>
+        /// Gets a value indicating whether this <see cref="INode"/> is imported.  A node is imported
+        /// if it was not a part of the document, as the document was originally loaded.
+        /// </para>
+        /// <para>
+        /// For example, a node included via a METAL macro or TAL content/replace directive is imported.
+        /// </para>
+        /// </summary>
+        /// <value><c>true</c> if this node is imported; otherwise, <c>false</c>.</value>
+        public virtual bool IsImported => IsImportedNode;
 
         /// <summary>
         /// Gets or sets the parent for the current element.  This will be a <see langword="null"/>

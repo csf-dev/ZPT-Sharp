@@ -80,7 +80,6 @@
     <Compile Include="Rendering\IRenderingContextFactoryFactory.cs" />
     <Compile Include="Rendering\IContextVisitorFactory.cs" />
     <Compile Include="RenderingMode.cs" />
-    <Compile Include="Metal\MacroNotFoundException.cs" />
     <Compile Include="Rendering\IActionCanceller.cs" />
     <Compile Include="Rendering\CancellationToken.cs" />
     <Compile Include="IXmlUrlResolverFactory.cs" />
@@ -110,8 +109,6 @@
     <Compile Include="SourceAnnotation\ISourceAnnotator.cs" />
     <Compile Include="SourceAnnotation\ICommentFormatter.cs" />
     <Compile Include="IAddOnAssemblyFinder.cs" />
-    <Compile Include="Metal\IMetalMacroContainer.cs" />
-    <Compile Include="Metal\IMetalMacro.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Target Name="BeforeBuild">

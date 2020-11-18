@@ -33,7 +33,7 @@ namespace ZptSharp.Rendering
                     logger.LogTrace($"Removing {{element}}",
                                     context.CurrentElement);
                 context.CurrentElement.Omit();
-                return Task.FromResult(new ExpressionContextProcessingResult());
+                return Task.FromResult(ExpressionContextProcessingResult.Noop);
             }
 
             var attributesToRemove = context.CurrentElement.Attributes
@@ -49,7 +49,7 @@ namespace ZptSharp.Rendering
                 context.CurrentElement.Attributes.Remove(attribute);
             }
 
-            return Task.FromResult(new ExpressionContextProcessingResult());
+            return Task.FromResult(ExpressionContextProcessingResult.Noop);
         }
 
         bool NeedsCleanup(INode element)

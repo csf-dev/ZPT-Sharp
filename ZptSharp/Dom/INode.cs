@@ -47,6 +47,13 @@ namespace ZptSharp.Dom
         bool IsElement { get; }
 
         /// <summary>
+        /// Gets a value indicating whether this <see cref="INode"/> is imported.  A node is imported
+        /// if its associated <see cref="Document"/> differs from the document upon its <see cref="ParentElement"/>.
+        /// </summary>
+        /// <value><c>true</c> if this node is imported; otherwise, <c>false</c>.</value>
+        bool IsImported { get; }
+
+        /// <summary>
         /// Replaces the specified child element (the <paramref name="toReplace"/> parameter)
         /// using the specified <paramref name="replacement"/> element.
         /// Note that this means that the current element will be detached/removed from its parent as a side-effect.

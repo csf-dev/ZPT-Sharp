@@ -27,6 +27,9 @@ namespace ZptSharp.Rendering
         /// <param name="token">An object used to cancel the operation if required.</param>
         public async Task ModifyDocumentAsync(IDocument document, RenderZptDocumentRequest request, CancellationToken token = default)
         {
+            if (!request.Config.IncludeSourceAnnotation)
+                return;
+
             var contextProcessor = contextProcessorFactory.GetSourceAnnotationContextProcessor();
             await iterativeModifier.ModifyDocumentAsync(document, request, contextProcessor, token)
                 .ConfigureAwait(false);

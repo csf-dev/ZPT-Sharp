@@ -50,7 +50,7 @@ namespace ZptSharp.Metal
                     .ConfigureAwait(false);
             }
 
-            return new ExpressionContextProcessingResult();
+            return ExpressionContextProcessingResult.Noop;
         }
 
         async Task ReplaceCurrentElementWithExpandedMacroAsync(ExpressionContext context, MetalMacro macro, CancellationToken token)

@@ -17,7 +17,13 @@ namespace ZptSharp.Rendering
         /// Gets the line number for the beginning of the element.
         /// </summary>
         /// <value>The line number.</value>
-        public int? LineNumber { get; }
+        public int? StartTagLineNumber { get; }
+
+        /// <summary>
+        /// Gets the line number for the end of the element.
+        /// </summary>
+        /// <value>The line number.</value>
+        public int? EndTagLineNumber { get; }
 
         /// <summary>
         /// Creates a child <see cref="IElementSourceInfo"/> which uses the same
@@ -37,11 +43,11 @@ namespace ZptSharp.Rendering
         /// <see cref="ElementSourceInfo"/>; otherwise, <c>false</c>.</returns>
         public bool Equals(IElementSourceInfo other)
         {
-            if (LineNumber == null || other?.LineNumber == null)
+            if (StartTagLineNumber == null || other?.StartTagLineNumber == null)
                 return ReferenceEquals(this, other);
 
             return Equals(Document, other.Document)
-                && Equals(LineNumber, other.LineNumber);
+                && Equals(StartTagLineNumber, other.StartTagLineNumber);
         }
 
         /// <summary>
@@ -62,16 +68,16 @@ namespace ZptSharp.Rendering
             // If the line number info is unavailable then we only
             // consider instances equal if they are reference equal.
             // Hence the call to the base hashcode function.
-            if (LineNumber == null) return base.GetHashCode();
+            if (StartTagLineNumber == null) return base.GetHashCode();
 
-            return Document.GetHashCode() ^ LineNumber.Value;
+            return Document.GetHashCode() ^ StartTagLineNumber.Value;
         }
 
         /// <summary>
         /// Returns a <see cref="string"/> that represents the current <see cref="ElementSourceInfo"/>.
         /// </summary>
         /// <returns>A <see cref="string"/> that represents the current <see cref="ElementSourceInfo"/>.</returns>
-        public override string ToString() => LineNumber.HasValue ? $"{Document.ToString()}:{LineNumber.Value}" : Document.ToString();
+        public override string ToString() => StartTagLineNumber.HasValue ? $"{Document.ToString()}:{StartTagLineNumber.Value}" : Document.ToString();
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ElementSourceInfo"/> class.
@@ -81,7 +87,7 @@ namespace ZptSharp.Rendering
         public ElementSourceInfo(IDocumentSourceInfo document, int? lineNumber = null)
         {
             Document = document ?? throw new System.ArgumentNullException(nameof(document));
-            LineNumber = lineNumber;
+            StartTagLineNumber = lineNumber;
         }
     }
 }
