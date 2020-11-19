@@ -28,8 +28,7 @@ namespace ZptSharp.PathExpressions.ValueProviders
 
         [Test, AutoMoqData]
         public async Task ReflectionObjectValueProvider_returns_value_from_property_when_name_matches(ReflectionObjectValueProvider sut,
-                                                                                                      MyCustomType obj,
-                                                                                                      GetValueResult expected)
+                                                                                                      MyCustomType obj)
         {
             var result = await sut.TryGetValueAsync(nameof(MyCustomType.MyProperty), obj);
 
@@ -39,8 +38,7 @@ namespace ZptSharp.PathExpressions.ValueProviders
 
         [Test, AutoMoqData]
         public async Task ReflectionObjectValueProvider_returns_value_from_method_when_name_matches(ReflectionObjectValueProvider sut,
-                                                                                                    MyCustomType obj,
-                                                                                                    GetValueResult expected)
+                                                                                                    MyCustomType obj)
         {
             var result = await sut.TryGetValueAsync(nameof(MyCustomType.MyMethod), obj);
 
@@ -50,13 +48,26 @@ namespace ZptSharp.PathExpressions.ValueProviders
 
         [Test, AutoMoqData]
         public async Task ReflectionObjectValueProvider_returns_value_from_field_when_name_matches(ReflectionObjectValueProvider sut,
-                                                                                                   MyCustomType obj,
-                                                                                                   GetValueResult expected)
+                                                                                                   MyCustomType obj)
         {
             var result = await sut.TryGetValueAsync(nameof(MyCustomType.MyField), obj);
 
             Assert.That(result.Success, Is.True, "Result indicates success");
             Assert.That(result.Value, Is.EqualTo(obj.MyField), "Correct value");
+        }
+
+        [Test, AutoMoqData]
+        public async Task ReflectionObjectValueProvider_returns_value_from_anonymous_object_when_name_matches(ReflectionObjectValueProvider sut)
+        {
+            var obj = new
+            {
+                anon = "Foo bar"
+            };
+
+            var result = await sut.TryGetValueAsync("anon", obj);
+
+            Assert.That(result.Success, Is.True, "Result indicates success");
+            Assert.That(result.Value, Is.EqualTo("Foo bar"), "Correct value");
         }
 
         [Test, AutoMoqData]

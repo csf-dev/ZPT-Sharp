@@ -1,12 +1,13 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using NUnit.Framework;
 using ZptSharp.Util;
 
 namespace ZptSharp
 {
-    [TestFixture,Parallelizable]
-    public class ZptIntegrationTests
+    [TestFixture, Parallelizable]
+    public class SourceAnnotationIntegrationTests
     {
         [Test,
          Description("For every file in the 'expected output' directory of the integration test path, the file should be rendered as-expected."),
@@ -18,13 +19,15 @@ namespace ZptSharp
             Assert.That(result, Has.MatchingExpectedAndActualRenderings);
         }
 
-        public static IEnumerable<string> GetExpectedOutputFiles() => TestFiles.GetIntegrationTestExpectedFiles<ZptIntegrationTests>();
+        public static IEnumerable<string> GetExpectedOutputFiles() => TestFiles.GetIntegrationTestExpectedFiles<SourceAnnotationIntegrationTests>();
 
         object GetModel()
         {
             return new
             {
-                documents = new TemplateDirectory(TestFiles.GetIntegrationTestSourceDirectory<ZptIntegrationTests>())
+                tests = new {
+                    input = new TemplateDirectory(TestFiles.GetIntegrationTestSourceDirectory<SourceAnnotationIntegrationTests>())
+                }
             };
         }
     }

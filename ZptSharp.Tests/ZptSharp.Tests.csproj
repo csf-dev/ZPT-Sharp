@@ -40,4 +40,8 @@
     <Folder Include="PathExpressions\ValueProviders\" />
     <Folder Include="Config\" />
   </ItemGroup>
+    
+  <ItemGroup>
+    <None Remove="TestResults\**\*" />
+  </ItemGroup>
 </Project>
