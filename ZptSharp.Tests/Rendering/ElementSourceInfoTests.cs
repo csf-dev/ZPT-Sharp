@@ -22,35 +22,46 @@ namespace ZptSharp.Rendering
         }
 
         [Test, AutoMoqData]
-        public void Equals_returns_true_if_two_instances_have_same_document_and_line_number(IDocumentSourceInfo documentSource,
-                                                                                            int lineNumber)
+        public void Equals_returns_true_if_two_instances_have_same_document_and_line_numbers(IDocumentSourceInfo documentSource,
+                                                                                            int startLineNumber,
+                                                                                            int endLineNumber)
         {
-            var first = new ElementSourceInfo(documentSource, lineNumber);
-            var second = new ElementSourceInfo(documentSource, lineNumber);
+            var first = new ElementSourceInfo(documentSource, startLineNumber, endLineNumber);
+            var second = new ElementSourceInfo(documentSource, startLineNumber, endLineNumber);
             Assert.That(() => first.Equals(second), Is.True);
         }
 
         [Test, AutoMoqData]
-        public void Equals_returns_false_if_two_instances_have_different_line_numbers(IDocumentSourceInfo documentSource)
+        public void Equals_returns_false_if_two_instances_have_different_start_line_numbers(IDocumentSourceInfo documentSource,
+                                                                                            int endLineNumber)
         {
-            var first = new ElementSourceInfo(documentSource, 5);
-            var second = new ElementSourceInfo(documentSource, 6);
+            var first = new ElementSourceInfo(documentSource, 5, endLineNumber);
+            var second = new ElementSourceInfo(documentSource, 6, endLineNumber);
             Assert.That(() => first.Equals(second), Is.False);
         }
 
         [Test, AutoMoqData]
-        public void Equals_returns_false_if_line_number_is_null(IDocumentSourceInfo documentSource)
+        public void Equals_returns_false_if_two_instances_have_different_end_line_numbers(IDocumentSourceInfo documentSource,
+                                                                                          int startLineNumber)
         {
-            var first = new ElementSourceInfo(documentSource);
-            var second = new ElementSourceInfo(documentSource, 6);
+            var first = new ElementSourceInfo(documentSource, startLineNumber, 5);
+            var second = new ElementSourceInfo(documentSource, startLineNumber, 10);
             Assert.That(() => first.Equals(second), Is.False);
         }
 
         [Test, AutoMoqData]
-        public void Equals_returns_false_if_other_line_number_is_null(IDocumentSourceInfo documentSource)
+        public void Equals_returns_false_if_start_line_number_is_null(IDocumentSourceInfo documentSource)
         {
-            var first = new ElementSourceInfo(documentSource, 5);
-            var second = new ElementSourceInfo(documentSource);
+            var first = new ElementSourceInfo(documentSource, null, 10);
+            var second = new ElementSourceInfo(documentSource, 6, 10);
+            Assert.That(() => first.Equals(second), Is.False);
+        }
+
+        [Test, AutoMoqData]
+        public void Equals_returns_false_if_other_start_line_number_is_null(IDocumentSourceInfo documentSource)
+        {
+            var first = new ElementSourceInfo(documentSource, 5, 10);
+            var second = new ElementSourceInfo(documentSource, null, 10);
             Assert.That(() => first.Equals(second), Is.False);
         }
 
@@ -80,18 +91,27 @@ namespace ZptSharp.Rendering
 
         [Test, AutoMoqData]
         public void GetHashCode_with_same_document_and_line_number_is_equal(IDocumentSourceInfo documentSource,
-                                                                            int lineNumber)
+                                                                            int startLineNumber,
+                                                                            int endLineNumber)
         {
-            var first = new ElementSourceInfo(documentSource, lineNumber);
-            var second = new ElementSourceInfo(documentSource, lineNumber);
+            var first = new ElementSourceInfo(documentSource, startLineNumber, endLineNumber);
+            var second = new ElementSourceInfo(documentSource, startLineNumber, endLineNumber);
             Assert.That(() => first.GetHashCode(), Is.EqualTo(second.GetHashCode()));
         }
 
         [Test, AutoMoqData]
-        public void GetHashCode_returns_different_result_for_different_line_number(IDocumentSourceInfo documentSource)
+        public void GetHashCode_returns_different_result_for_different_start_line_numbers(IDocumentSourceInfo documentSource)
         {
-            var first = new ElementSourceInfo(documentSource, 5);
-            var second = new ElementSourceInfo(documentSource, 6);
+            var first = new ElementSourceInfo(documentSource, 5, 10);
+            var second = new ElementSourceInfo(documentSource, 6, 10);
+            Assert.That(() => first.GetHashCode(), Is.Not.EqualTo(second.GetHashCode()));
+        }
+
+        [Test, AutoMoqData]
+        public void GetHashCode_returns_different_result_for_different_end_line_numbers(IDocumentSourceInfo documentSource)
+        {
+            var first = new ElementSourceInfo(documentSource, 10, 5);
+            var second = new ElementSourceInfo(documentSource, 10, 6);
             Assert.That(() => first.GetHashCode(), Is.Not.EqualTo(second.GetHashCode()));
         }
 

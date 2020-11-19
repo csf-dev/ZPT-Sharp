@@ -36,18 +36,18 @@ namespace ZptSharp.SourceAnnotation
                 return Task.FromResult(ExpressionContextProcessingResult.Noop);
 
             if (IsRootElement(element))
-                AnnotateRootElement(element);
+                AnnotateRootOrDefineMacroElement(element);
             else if (element.IsImported)
                 AnnotateImportedElement(element);
             else if (HasDefineMacroAttribute(element))
-                AnnotateDefineMacroElement(element);
+                AnnotateRootOrDefineMacroElement(element);
             else if (HasDefineSlotAttribute(element))
                 AnnotateDefineSlotElement(element);
 
             return Task.FromResult(ExpressionContextProcessingResult.Noop);
         }
 
-        void AnnotateRootElement(INode element)
+        void AnnotateRootOrDefineMacroElement(INode element)
         {
             // Annotate before the element
             var annotation = annotationProvider.GetAnnotation(element);
@@ -63,13 +63,6 @@ namespace ZptSharp.SourceAnnotation
             // Annotate after the end tag
             var afterAnnotation = annotationProvider.GetAnnotation(element, false);
             commenter.AddCommentAfter(element, afterAnnotation);
-        }
-
-        void AnnotateDefineMacroElement(INode element)
-        {
-            // Annotate before the element
-            var annotation = annotationProvider.GetAnnotation(element);
-            commenter.AddCommentBefore(element, annotation);
         }
 
         void AnnotateDefineSlotElement(INode element)

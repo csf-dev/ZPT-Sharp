@@ -1,7 +1,4 @@
-﻿using System.Threading;
-using System.Threading.Tasks;
-using ZptSharp.Expressions;
-using ZptSharp.Metal;
+﻿using ZptSharp.Metal;
 using ZptSharp.Rendering;
 
 namespace ZptSharp.SourceAnnotation
