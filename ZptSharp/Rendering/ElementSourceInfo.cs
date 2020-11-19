@@ -2,10 +2,9 @@
 namespace ZptSharp.Rendering
 {
     /// <summary>
-    /// Default implementation of <see cref="IElementSourceInfo"/> which provides information about
-    /// the source of a DOM element.
+    /// An object which encapsulates information about the source of a single DOM element.
     /// </summary>
-    public sealed class ElementSourceInfo : IElementSourceInfo
+    public sealed class ElementSourceInfo : IEquatable<ElementSourceInfo>
     {
         /// <summary>
         /// Gets source information about the document where this element originated.
@@ -26,28 +25,31 @@ namespace ZptSharp.Rendering
         public int? EndTagLineNumber { get; }
 
         /// <summary>
-        /// Creates a child <see cref="IElementSourceInfo"/> which uses the same
-        /// document as the current instance, but the specified line number instead.
+        /// Creates a child <see cref="ElementSourceInfo"/> which uses the same
+        /// document as the current instance, but different line number(s).
         /// </summary>
         /// <returns>The child source info.</returns>
-        /// <param name="lineNumber">A line number.</param>
-        public IElementSourceInfo CreateChild(int? lineNumber = null)
-            => new ElementSourceInfo(Document, lineNumber);
+        /// <param name="startTagLineNumber">The line number for the start-tag.</param>
+        /// <param name="endTagLineNumber">The line number for the end-tag.</param>
+        public ElementSourceInfo CreateChild(int? startTagLineNumber = null, int? endTagLineNumber = null)
+            => new ElementSourceInfo(Document, startTagLineNumber, endTagLineNumber);
 
         /// <summary>
-        /// Determines whether the specified <see cref="IElementSourceInfo"/> is equal to the
+        /// Determines whether the specified <see cref="ElementSourceInfo"/> is equal to the
         /// current <see cref="ElementSourceInfo"/>.  Will only return <c>true</c> if the objects are reference-equal.
         /// </summary>
-        /// <param name="other">The <see cref="IElementSourceInfo"/> to compare with the current <see cref="ElementSourceInfo"/>.</param>
-        /// <returns><c>true</c> if the specified <see cref="IElementSourceInfo"/> is equal to the current
+        /// <param name="other">The <see cref="ElementSourceInfo"/> to compare with the current <see cref="ElementSourceInfo"/>.</param>
+        /// <returns><c>true</c> if the specified <see cref="ElementSourceInfo"/> is equal to the current
         /// <see cref="ElementSourceInfo"/>; otherwise, <c>false</c>.</returns>
-        public bool Equals(IElementSourceInfo other)
+        public bool Equals(ElementSourceInfo other)
         {
-            if (StartTagLineNumber == null || other?.StartTagLineNumber == null)
+            if (StartTagLineNumber == null || other?.StartTagLineNumber == null
+             || EndTagLineNumber == null || other?.EndTagLineNumber == null)
                 return ReferenceEquals(this, other);
 
             return Equals(Document, other.Document)
-                && Equals(StartTagLineNumber, other.StartTagLineNumber);
+                && Equals(StartTagLineNumber, other.StartTagLineNumber)
+                && Equals(EndTagLineNumber, other.EndTagLineNumber);
         }
 
         /// <summary>
@@ -68,9 +70,9 @@ namespace ZptSharp.Rendering
             // If the line number info is unavailable then we only
             // consider instances equal if they are reference equal.
             // Hence the call to the base hashcode function.
-            if (StartTagLineNumber == null) return base.GetHashCode();
+            if (StartTagLineNumber == null || EndTagLineNumber == null) return base.GetHashCode();
 
-            return Document.GetHashCode() ^ StartTagLineNumber.Value;
+            return Document.GetHashCode() ^ StartTagLineNumber.Value ^ EndTagLineNumber.Value;
         }
 
         /// <summary>
@@ -83,11 +85,13 @@ namespace ZptSharp.Rendering
         /// Initializes a new instance of the <see cref="ElementSourceInfo"/> class.
         /// </summary>
         /// <param name="document">Document.</param>
-        /// <param name="lineNumber">Line number.</param>
-        public ElementSourceInfo(IDocumentSourceInfo document, int? lineNumber = null)
+        /// <param name="startTagLineNumber">The line number for the start-tag.</param>
+        /// <param name="endTagLineNumber">The line number for the end-tag.</param>
+        public ElementSourceInfo(IDocumentSourceInfo document, int? startTagLineNumber = null, int? endTagLineNumber = null)
         {
             Document = document ?? throw new System.ArgumentNullException(nameof(document));
-            StartTagLineNumber = lineNumber;
+            StartTagLineNumber = startTagLineNumber;
+            EndTagLineNumber = endTagLineNumber;
         }
     }
 }

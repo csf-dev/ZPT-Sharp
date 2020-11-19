@@ -18,7 +18,7 @@ namespace ZptSharp.Dom
         /// Gets information which indicates the original source of the element (for example, a file path and line number).
         /// </summary>
         /// <value>The source info.</value>
-        new IElementSourceInfo SourceInfo { get; }
+        new ElementSourceInfo SourceInfo { get; }
 
         /// <summary>
         /// Gets a collection of the element's attributes.

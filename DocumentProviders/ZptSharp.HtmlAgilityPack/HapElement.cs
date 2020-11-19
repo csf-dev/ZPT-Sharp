@@ -174,7 +174,7 @@ namespace ZptSharp.Dom
         private HapElement(HtmlNode element,
                            HapDocument document,
                            INode parent,
-                           IElementSourceInfo sourceInfo,
+                           ElementSourceInfo sourceInfo,
                            IList<INode> childNodes) : base(document, parent, sourceInfo)
         {
             NativeElement = element ?? throw new ArgumentNullException(nameof(element));
@@ -193,7 +193,7 @@ namespace ZptSharp.Dom
         public HapElement(HtmlNode element,
                           HapDocument document,
                           INode parent = null,
-                          IElementSourceInfo sourceInfo = null)
+                          ElementSourceInfo sourceInfo = null)
             : this(element, document, parent, sourceInfo, null) { }
     }
 }

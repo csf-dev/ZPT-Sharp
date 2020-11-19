@@ -18,7 +18,7 @@ namespace ZptSharp.Dom
         /// <summary>
         /// A field for the source information relating to this element.
         /// </summary>
-        protected readonly IElementSourceInfo Source;
+        protected readonly ElementSourceInfo Source;
 
         /// <summary>
         /// A field for the parent DOM element (which might be <see langword="null"/>).
@@ -40,7 +40,7 @@ namespace ZptSharp.Dom
         /// Gets information which indicates the original source of the element (for example, a file path and line number).
         /// </summary>
         /// <value>The source info.</value>
-        public virtual IElementSourceInfo SourceInfo => Source;
+        public virtual ElementSourceInfo SourceInfo => Source;
 
         /// <summary>
         /// <para>
@@ -152,7 +152,7 @@ namespace ZptSharp.Dom
         /// <param name="sourceInfo">The element source info.</param>
         protected ElementBase(IDocument document,
                               INode parent = null,
-                              IElementSourceInfo sourceInfo = null)
+                              ElementSourceInfo sourceInfo = null)
         {
             this.Doc = document ?? throw new ArgumentNullException(nameof(document));
             this.Parent = parent;

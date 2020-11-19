@@ -93,7 +93,7 @@ namespace ZptSharp.Dom
         public XmlElement(XElement element,
                           XmlDocument document,
                           INode parent = null,
-                          IElementSourceInfo sourceInfo = null) : base(document, parent, sourceInfo)
+                          ElementSourceInfo sourceInfo = null) : base(document, parent, sourceInfo)
         {
             NativeElement = element ?? throw new ArgumentNullException(nameof(element));
         }

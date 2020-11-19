@@ -155,7 +155,7 @@ namespace ZptSharp.Dom
         public AngleSharpElement(AngleSharp.Dom.IElement nativeElement,
                                  AngleSharpDocument document,
                                  INode parent = null,
-                                 IElementSourceInfo sourceInfo = null) : base(document, parent, sourceInfo)
+                                 ElementSourceInfo sourceInfo = null) : base(document, parent, sourceInfo)
         {
             NativeElement = nativeElement ?? throw new ArgumentNullException(nameof(nativeElement));
             attributes = GetAttributesCollection();
