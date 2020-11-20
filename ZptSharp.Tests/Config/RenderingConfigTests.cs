@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Reflection;
 using System.Text;
 using NUnit.Framework;
 using ZptSharp.Dom;
@@ -11,17 +12,16 @@ namespace ZptSharp.Config
     public class RenderingConfigTests
     {
         [Test, AutoMoqData]
-        public void Builder_creates_config_with_correct_properties(RenderingConfig.Builder sut,
-                                                                   IReadsAndWritesDocument documentProvider,
-                                                                   IDictionary<string,object> keywordOptions,
-                                                                   IServiceProvider serviceProvider)
+        public void Builder_creates_config_with_correct_properties(IReadsAndWritesDocument documentProvider,
+                                                                   IDictionary<string,object> keywordOptions)
         {
+            var sut = RenderingConfig.CreateBuilder();
+
             sut.DocumentEncoding = Encoding.ASCII;
             sut.DocumentProvider = documentProvider;
             sut.IncludeSourceAnnotation = true;
             sut.KeywordOptions = keywordOptions;
             sut.OmitXmlDeclaration = true;
-            sut.ServiceProvider = serviceProvider;
 
             var result = sut.GetConfig();
 
@@ -29,15 +29,15 @@ namespace ZptSharp.Config
                         Has.Property(nameof(RenderingConfig.DocumentEncoding)).EqualTo(Encoding.ASCII)
                         .And.Property(nameof(RenderingConfig.DocumentProvider)).SameAs(documentProvider)
                         .And.Property(nameof(RenderingConfig.IncludeSourceAnnotation)).True
-                        .And.Property(nameof(RenderingConfig.KeywordOptions)).SameAs(keywordOptions)
-                        .And.Property(nameof(RenderingConfig.OmitXmlDeclaration)).True
-                        .And.Property(nameof(RenderingConfig.ServiceProvider)).SameAs(serviceProvider));
+                        .And.Property(nameof(RenderingConfig.KeywordOptions)).EqualTo(keywordOptions)
+                        .And.Property(nameof(RenderingConfig.OmitXmlDeclaration)).True);
         }
 
         [Test, AutoMoqData]
-        public void Builder_creates_config_with_correct_context_factory(RenderingConfig.Builder sut,
-                                                                        IGetsNamedTalesValue namedValueProvider)
+        public void Builder_creates_config_with_correct_context_factory(IGetsNamedTalesValue namedValueProvider)
         {
+            var sut = RenderingConfig.CreateBuilder();
+
             IGetsNamedTalesValue ContextFactory(ExpressionContext ctx) => namedValueProvider;
             sut.BuiltinContextsProvider = ContextFactory;
 
@@ -46,61 +46,88 @@ namespace ZptSharp.Config
             Assert.That(result, Is.SameAs(namedValueProvider));
         }
 
+        [Test, AutoMoqData]
+        public void Builder_creates_config_with_correct_context_builder_action(IGetsNamedTalesValue namedValueProvider)
+        {
+            var sut = RenderingConfig.CreateBuilder();
+
+            Action<IConfiguresRootContext> contextBuilder = c => { };
+            sut.ContextBuilder = contextBuilder;
+
+            var result = sut.GetConfig().ContextBuilder;
+
+            Assert.That(result, Is.SameAs(contextBuilder));
+        }
+
 
         [Test, AutoMoqData]
-        public void Builder_throws_if_GetConfig_called_twice(RenderingConfig.Builder sut)
+        public void Builder_throws_if_GetConfig_called_twice()
         {
+            var sut = RenderingConfig.CreateBuilder();
+
             sut.GetConfig();
             Assert.That(() => sut.GetConfig(), Throws.InvalidOperationException);
         }
 
         [Test, AutoMoqData]
-        public void Builder_throws_if_DocumentEncoding_set_after_GetConfig(RenderingConfig.Builder sut)
+        public void Builder_throws_if_DocumentEncoding_set_after_GetConfig()
         {
+            var sut = RenderingConfig.CreateBuilder();
+
             sut.GetConfig();
             Assert.That(() => sut.DocumentEncoding = null, Throws.InvalidOperationException);
         }
 
         [Test, AutoMoqData]
-        public void Builder_throws_if_DocumentProvider_set_after_GetConfig(RenderingConfig.Builder sut)
+        public void Builder_throws_if_DocumentProvider_set_after_GetConfig()
         {
+            var sut = RenderingConfig.CreateBuilder();
+
             sut.GetConfig();
             Assert.That(() => sut.DocumentProvider = null, Throws.InvalidOperationException);
         }
 
         [Test, AutoMoqData]
-        public void Builder_throws_if_IncludeSourceAnnotation_set_after_GetConfig(RenderingConfig.Builder sut)
+        public void Builder_throws_if_IncludeSourceAnnotation_set_after_GetConfig()
         {
+            var sut = RenderingConfig.CreateBuilder();
+
             sut.GetConfig();
             Assert.That(() => sut.IncludeSourceAnnotation = true, Throws.InvalidOperationException);
         }
 
         [Test, AutoMoqData]
-        public void Builder_throws_if_KeywordOptions_set_after_GetConfig(RenderingConfig.Builder sut)
+        public void Builder_throws_if_KeywordOptions_set_after_GetConfig()
         {
+            var sut = RenderingConfig.CreateBuilder();
+
             sut.GetConfig();
             Assert.That(() => sut.KeywordOptions = null, Throws.InvalidOperationException);
         }
 
         [Test, AutoMoqData]
-        public void Builder_throws_if_OmitXmlDeclaration_set_after_GetConfig(RenderingConfig.Builder sut)
+        public void Builder_throws_if_OmitXmlDeclaration_set_after_GetConfig()
         {
+            var sut = RenderingConfig.CreateBuilder();
+
             sut.GetConfig();
             Assert.That(() => sut.OmitXmlDeclaration = true, Throws.InvalidOperationException);
         }
 
         [Test, AutoMoqData]
-        public void Builder_throws_if_ServiceProvider_set_after_GetConfig(RenderingConfig.Builder sut)
+        public void Builder_throws_if_BuiltinContextsProvider_set_after_GetConfig()
         {
+            var sut = RenderingConfig.CreateBuilder();
+
             sut.GetConfig();
-            Assert.That(() => sut.ServiceProvider = null, Throws.InvalidOperationException);
+            Assert.That(() => sut.BuiltinContextsProvider = null, Throws.InvalidOperationException);
         }
 
         [Test, AutoMoqData]
-        public void Builder_throws_if_BuiltinContextsProvider_set_after_GetConfig(RenderingConfig.Builder sut)
+        public void All_configuration_instance_properties_must_be_virtual()
         {
-            sut.GetConfig();
-            Assert.That(() => sut.BuiltinContextsProvider = null, Throws.InvalidOperationException);
+            var properties = typeof(RenderingConfig).GetProperties(BindingFlags.Instance | BindingFlags.Public);
+            Assert.That(properties, Has.All.Matches<PropertyInfo>(p => p.GetMethod.IsVirtual));
         }
     }
 }

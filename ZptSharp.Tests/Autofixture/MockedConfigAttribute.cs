@@ -16,7 +16,9 @@ namespace ZptSharp.Autofixture
         {
             public void Customize(IFixture fixture)
             {
-                fixture.Customize<RenderingConfig>(x => x.FromFactory(() => Mock.Of<RenderingConfig>()));
+                fixture.Customize<RenderingConfig>(x => x.FromFactory(() => {
+                    return new Mock<RenderingConfig> { CallBase = true }.Object;
+                }));
             }
         }
     }

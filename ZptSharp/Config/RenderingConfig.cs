@@ -3,6 +3,8 @@ using System.Text;
 using System.Collections.Generic;
 using ZptSharp.Dom;
 using ZptSharp.Expressions;
+using System.Linq;
+using System.Collections.ObjectModel;
 
 namespace ZptSharp.Config
 {
@@ -12,13 +14,6 @@ namespace ZptSharp.Config
     /// </summary>
     public partial class RenderingConfig
     {
-        /// <summary>
-        /// Gets an object which provides service-resolution/dependency injection for ZPT Sharp types.
-        /// If this is unset or <see langword="null"/> then a default resolution service will be used.
-        /// </summary>
-        /// <value>The service provider.</value>
-        public virtual IServiceProvider ServiceProvider { get; private set; }
-
         /// <summary>
         /// Gets the encoding which will be used to read &amp; write documents, where the document
         /// provider supports it (not all do).
@@ -30,11 +25,6 @@ namespace ZptSharp.Config
         /// <summary>
         /// <para>
         /// Gets the document provider to be used for reading/writing documents.
-        /// </para>
-        /// <para>
-        /// This property is not used if the <see cref="ServiceProvider"/> has been set to anything
-        /// other than the default (<see langword="null"/>) value.  If a custom service provider is
-        /// used then the document provider must be resolvable from that service provider.
         /// </para>
         /// </summary>
         /// <value>The document provider.</value>
@@ -57,7 +47,7 @@ namespace ZptSharp.Config
         /// Gets a collection of "keyword options" which have been provided to the rendering process externally.
         /// </summary>
         /// <value>The keyword options collection.</value>
-        public virtual IDictionary<string,object> KeywordOptions { get; private set; }
+        public virtual IReadOnlyDictionary<string,object> KeywordOptions { get; private set; }
 
         /// <summary>
         /// Gets a value which indicates whether or not source annotation should be written to the rendered document.
@@ -65,6 +55,45 @@ namespace ZptSharp.Config
         /// </summary>
         /// <value><c>true</c> if source annotation should be included in the output; otherwise, <c>false</c>.</value>
         public virtual bool IncludeSourceAnnotation { get; private set; }
+
+        /// <summary>
+        /// Gets an action which is used to build &amp; add values to the root ZPT context.
+        /// </summary>
+        /// <value>The context builder.</value>
+        public virtual Action<IConfiguresRootContext> ContextBuilder { get; private set; }
+
+        /// <summary>
+        /// <para>
+        /// Gets a copy of the current configuration instance, returned as a
+        /// <see cref="Builder"/> object, allowing further amendments.
+        /// </para>
+        /// <para>
+        /// This does not allow alterations to the current configuration
+        /// instance; configurations are immutable once built.  Rather it creates
+        /// and returns a builder pre-populated with the same settings as the
+        /// current configuration instance.
+        /// </para>
+        /// </summary>
+        /// <returns>A configuration builder.</returns>
+        public Builder CloneToNewBuilder()
+        {
+            return new Builder
+            {
+                DocumentEncoding = DocumentEncoding,
+                DocumentProvider = DocumentProvider,
+                BuiltinContextsProvider = BuiltinContextsProvider,
+                ContextBuilder = ContextBuilder,
+                IncludeSourceAnnotation = IncludeSourceAnnotation,
+                KeywordOptions = KeywordOptions.ToDictionary(k => k.Key, v => v.Value),
+                OmitXmlDeclaration = OmitXmlDeclaration,
+            };
+        }
+
+        /// <summary>
+        /// Creates a new, empty, configuration builder object.
+        /// </summary>
+        /// <returns>A configuration builder.</returns>
+        public static Builder CreateBuilder() => new Builder();
 
         /// <summary>
         /// <para>
@@ -82,7 +111,12 @@ namespace ZptSharp.Config
         /// </code>
         /// </example>
         /// </summary>
-        protected RenderingConfig() {}
+        protected RenderingConfig()
+        {
+            DocumentEncoding = Encoding.UTF8;
+            KeywordOptions = new ReadOnlyDictionary<string, object>(new Dictionary<string, object>());
+            ContextBuilder = c => { };
+        }
 
         /// <summary>
         /// Gets an instance of <see cref="RenderingConfig"/> with default values.

@@ -1,6 +1,7 @@
 ﻿using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
+using ZptSharp.Config;
 
 namespace ZptSharp.Rendering
 {
@@ -15,7 +16,8 @@ namespace ZptSharp.Rendering
         /// </summary>
         /// <returns>A task which provides an output stream, containing the result of the operation.</returns>
         /// <param name="request">A request to render a ZPT document.</param>
+        /// <param name="config">The rendering configuration.</param>
         /// <param name="token">An object used to cancel the operation if required.</param>
-        Task<Stream> RenderAsync(RenderZptDocumentRequest request, CancellationToken token = default);
+        Task<Stream> RenderAsync(RenderZptDocumentRequest request, RenderingConfig config = null, CancellationToken token = default);
     }
 }

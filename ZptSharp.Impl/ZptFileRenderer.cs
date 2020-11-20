@@ -27,12 +27,10 @@ namespace ZptSharp
         /// <param name="model">The model to use for the rendering process.</param>
         /// <param name="config">An optional rendering configuration object.</param>
         /// <param name="token">An object used to cancel the operation if required.</param>
-        /// <param name="contextBuilder">The context builder action.</param>
         public Task<Stream> RenderAsync(string filePath,
                                         object model,
                                         RenderingConfig config = null,
-                                        CancellationToken token = default,
-                                        Action<IConfiguresRootContext> contextBuilder = null)
+                                        CancellationToken token = default)
         {
             var stream = new FileStream(filePath, FileMode.Open, FileAccess.Read, FileShare.Read);
             var sourceInfo = new FileSourceInfo(filePath);
@@ -40,7 +38,7 @@ namespace ZptSharp
             var readerWriter = GetDocumentReaderWriter(filePath);
             var documentRenderer = GetDocumentRenderer(readerWriter);
 
-            return documentRenderer.RenderAsync(stream, model, config, token, contextBuilder, sourceInfo);
+            return documentRenderer.RenderAsync(stream, model, config, token, sourceInfo);
         }
 
         IReadsAndWritesDocument GetDocumentReaderWriter(string filePath)

@@ -26,26 +26,33 @@ namespace ZptSharp
         /// <param name="model">The model to use for the rendering process.</param>
         /// <param name="config">An optional rendering configuration object.</param>
         /// <param name="token">An object used to cancel the operation if required.</param>
-        /// <param name="contextBuilder">The context builder action.</param>
         /// <param name="sourceInfo">The source info for the <paramref name="stream"/>.</param>
         public Task<Stream> RenderAsync(Stream stream,
                                         object model,
                                         RenderingConfig config = null,
                                         CancellationToken token = default,
-                                        Action<IConfiguresRootContext> contextBuilder = null,
                                         IDocumentSourceInfo sourceInfo = null)
         {
             if (stream == null)
                 throw new ArgumentNullException(nameof(stream));
 
-            var request = new RenderZptDocumentRequest(stream,
-                                                       model,
-                                                       config ?? RenderingConfig.Default,
-                                                       contextBuilder,
-                                                       sourceInfo,
-                                                       readerWriter);
+            var effectiveConfig = GetEffectiveRenderingConfig(config);
+            var request = new RenderZptDocumentRequest(stream, model, sourceInfo);
             var requestRenderer = serviceProvider.GetRequiredService<IRendersRenderingRequest>();
-            return requestRenderer.RenderAsync(request, token);
+
+            return requestRenderer.RenderAsync(request, effectiveConfig, token);
+        }
+
+        RenderingConfig GetEffectiveRenderingConfig(RenderingConfig config)
+        {
+            if (config != null && readerWriter == null) return config;
+
+            var builder = config?.CloneToNewBuilder() ?? RenderingConfig.CreateBuilder();
+
+            if (readerWriter != null)
+                builder.DocumentProvider = readerWriter;
+
+            return builder.GetConfig();
         }
 
         /// <summary>

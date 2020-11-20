@@ -7,6 +7,7 @@ using Moq;
 using NUnit.Framework;
 using ZptSharp.Autofixture;
 using ZptSharp.Config;
+using ZptSharp.Dom;
 using ZptSharp.Rendering;
 
 namespace ZptSharp
@@ -20,40 +21,56 @@ namespace ZptSharp
                                                                              ZptDocumentRenderer sut,
                                                                              Stream stream,
                                                                              object model,
-                                                                             CancellationToken token,
                                                                              IRendersRenderingRequest renderer)
         {
-            Mock.Get(config).SetupGet(x => x.ServiceProvider).Returns(serviceProvider);
             Mock.Get(serviceProvider).Setup(x => x.GetService(typeof(IRendersRenderingRequest))).Returns(renderer);
-            Action<IConfiguresRootContext> contextBuilder = c => {};
 
-            sut.RenderAsync(stream, model, config, token, contextBuilder);
+            sut.RenderAsync(stream, model, config);
 
             Mock.Get(renderer)
-                .Verify(x => x.RenderAsync(It.Is<RenderZptDocumentRequest>(r => r.Config == config
-                                                                                && r.DocumentStream == stream
-                                                                                && r.Model == model
-                                                                                && r.ContextBuilder == contextBuilder),
-                                           token),
+                .Verify(x => x.RenderAsync(It.Is<RenderZptDocumentRequest>(r => r.DocumentStream == stream
+                                                                                && r.Model == model),
+                                           It.IsAny<RenderingConfig>(),
+                                           CancellationToken.None),
                         Times.Once);
         }
 
         [Test, AutoMoqData]
-        public void RenderAsync_uses_fallback_context_builder_if_none_provided([MockedConfig] RenderingConfig config,
-                                                                               [Frozen] IServiceProvider serviceProvider,
-                                                                               ZptDocumentRenderer sut,
-                                                                               Stream stream,
-                                                                               object model,
-                                                                               CancellationToken token,
-                                                                               IRendersRenderingRequest renderer)
+        public void RenderAsync_uses_same_config_if_it_is_not_null_and_no_document_provider_specified([MockedConfig] RenderingConfig config,
+                                                                                                      IServiceProvider serviceProvider,
+                                                                                                      Stream stream,
+                                                                                                      object model,
+                                                                                                      IRendersRenderingRequest renderer)
         {
-            Mock.Get(config).SetupGet(x => x.ServiceProvider).Returns(serviceProvider);
+            var sut = new ZptDocumentRenderer(serviceProvider);
             Mock.Get(serviceProvider).Setup(x => x.GetService(typeof(IRendersRenderingRequest))).Returns(renderer);
 
-            sut.RenderAsync(stream, model, config, token);
+            sut.RenderAsync(stream, model, config);
 
             Mock.Get(renderer)
-                .Verify(x => x.RenderAsync(It.Is<RenderZptDocumentRequest>(r => r.ContextBuilder != null), token),
+                .Verify(x => x.RenderAsync(It.IsAny<RenderZptDocumentRequest>(),
+                                           config,
+                                           CancellationToken.None),
+                        Times.Once);
+        }
+
+        [Test, AutoMoqData]
+        public void RenderAsync_uses_config_with_overridden_document_provider_when_specified([MockedConfig] RenderingConfig config,
+                                                                                             [Frozen] IReadsAndWritesDocument provider,
+                                                                                             [Frozen] IServiceProvider serviceProvider,
+                                                                                             ZptDocumentRenderer sut,
+                                                                                             Stream stream,
+                                                                                             object model,
+                                                                                             IRendersRenderingRequest renderer)
+        {
+            Mock.Get(serviceProvider).Setup(x => x.GetService(typeof(IRendersRenderingRequest))).Returns(renderer);
+
+            sut.RenderAsync(stream, model, config);
+
+            Mock.Get(renderer)
+                .Verify(x => x.RenderAsync(It.IsAny<RenderZptDocumentRequest>(),
+                                           It.Is<RenderingConfig>(c => c.DocumentProvider == provider),
+                                           CancellationToken.None),
                         Times.Once);
         }
 
@@ -67,10 +84,9 @@ namespace ZptSharp
                                                                      CancellationToken token,
                                                                      IRendersRenderingRequest renderer)
         {
-            Mock.Get(config).SetupGet(x => x.ServiceProvider).Returns(serviceProvider);
             Mock.Get(serviceProvider).Setup(x => x.GetService(typeof(IRendersRenderingRequest))).Returns(renderer);
             Mock.Get(renderer)
-                .Setup(x => x.RenderAsync(It.IsAny<RenderZptDocumentRequest>(), It.IsAny<CancellationToken>()))
+                .Setup(x => x.RenderAsync(It.IsAny<RenderZptDocumentRequest>(), It.IsAny<RenderingConfig>(), It.IsAny<CancellationToken>()))
                 .Returns(Task.FromResult(output));
 
             Assert.That(() => sut.RenderAsync(input, model, config, token).Result, Is.SameAs(output));
@@ -82,7 +98,7 @@ namespace ZptSharp
                                                                  object model,
                                                                  CancellationToken token)
         {
-            Assert.That(() => sut.RenderAsync((Stream) null, model, config, token), Throws.InstanceOf<ArgumentNullException>());
+            Assert.That(() => sut.RenderAsync(null, model, config, token), Throws.InstanceOf<ArgumentNullException>());
         }
     }
 }

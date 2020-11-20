@@ -42,7 +42,7 @@ namespace ZptSharp
                 .Setup(x => x.GetDocumentRenderer(readerWriter))
                 .Returns(renderer);
             Mock.Get(renderer)
-                .Setup(x => x.RenderAsync(It.IsAny<Stream>(), model, config, It.IsAny<CancellationToken>(), It.IsAny<Action<IConfiguresRootContext>>(), It.IsAny<FileSourceInfo>()))
+                .Setup(x => x.RenderAsync(It.IsAny<Stream>(), model, config, It.IsAny<CancellationToken>(), It.IsAny<FileSourceInfo>()))
                 .Returns(() => Task.FromResult(outputStream));
 
             var result = await sut.RenderAsync(filePath, model, config);

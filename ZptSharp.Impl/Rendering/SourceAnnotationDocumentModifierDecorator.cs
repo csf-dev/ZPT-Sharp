@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
+using ZptSharp.Config;
 using ZptSharp.Dom;
 using ZptSharp.SourceAnnotation;
 
@@ -15,6 +16,7 @@ namespace ZptSharp.Rendering
     {
         readonly IGetsSourceAnnotationContextProcessor contextProcessorFactory;
         readonly IIterativelyModifiesDocument iterativeModifier;
+        readonly RenderingConfig config;
         readonly IModifiesDocument wrapped;
 
         /// <summary>
@@ -27,7 +29,7 @@ namespace ZptSharp.Rendering
         /// <param name="token">An object used to cancel the operation if required.</param>
         public async Task ModifyDocumentAsync(IDocument document, RenderZptDocumentRequest request, CancellationToken token = default)
         {
-            if (!request.Config.IncludeSourceAnnotation)
+            if (!config.IncludeSourceAnnotation)
                 return;
 
             var contextProcessor = contextProcessorFactory.GetSourceAnnotationContextProcessor();
@@ -43,13 +45,16 @@ namespace ZptSharp.Rendering
         /// </summary>
         /// <param name="contextProcessorFactory">Context processor factory.</param>
         /// <param name="iterativeModifier">Iterative modifier.</param>
+        /// <param name="config">Rendering config.</param>
         /// <param name="wrapped">Wrapped.</param>
         public SourceAnnotationDocumentModifierDecorator(IGetsSourceAnnotationContextProcessor contextProcessorFactory,
                                                          IIterativelyModifiesDocument iterativeModifier,
+                                                         RenderingConfig config,
                                                          IModifiesDocument wrapped)
         {
             this.contextProcessorFactory = contextProcessorFactory ?? throw new ArgumentNullException(nameof(contextProcessorFactory));
             this.iterativeModifier = iterativeModifier ?? throw new ArgumentNullException(nameof(iterativeModifier));
+            this.config = config ?? throw new ArgumentNullException(nameof(config));
             this.wrapped = wrapped ?? throw new ArgumentNullException(nameof(wrapped));
         }
     }

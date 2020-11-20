@@ -1,4 +1,5 @@
 ﻿using System;
+using ZptSharp.Config;
 using ZptSharp.Metal;
 using ZptSharp.SourceAnnotation;
 using ZptSharp.Tal;
@@ -17,6 +18,7 @@ namespace ZptSharp.Rendering
         readonly IGetsSourceAnnotationContextProcessor sourceAnnotationProcessorFactory;
         readonly IIterativelyModifiesDocument iterativeModifier;
         readonly IGetsZptElementAndAttributeRemovalContextProcessor cleanupProcessorFactory;
+        readonly RenderingConfig config;
 
         /// <summary>
         /// Gets the document modifier suitable for use with the specified request.
@@ -31,7 +33,7 @@ namespace ZptSharp.Rendering
         /// <param name="request">A rendering request.</param>
         public IModifiesDocument GetDocumentModifier(RenderZptDocumentRequest request)
         {
-            var useSourceAnnotation = request.Config.IncludeSourceAnnotation;
+            var useSourceAnnotation = config.IncludeSourceAnnotation;
 
             var service = GetBaseService();
             service = WrapWithCleanupDecorator(service);
@@ -51,7 +53,7 @@ namespace ZptSharp.Rendering
             => new TalDocumentModifierDecorator(talProcessorFactory, iterativeModifier, wrapped);
 
         IModifiesDocument WrapWithSourceAnnotationDecorator(IModifiesDocument wrapped)
-            => new SourceAnnotationDocumentModifierDecorator(sourceAnnotationProcessorFactory, iterativeModifier, wrapped);
+            => new SourceAnnotationDocumentModifierDecorator(sourceAnnotationProcessorFactory, iterativeModifier, config, wrapped);
 
         IModifiesDocument WrapWithCleanupDecorator(IModifiesDocument wrapped)
             => new RemoveZptAttributesModifierDecorator(cleanupProcessorFactory, iterativeModifier, wrapped);
@@ -64,17 +66,20 @@ namespace ZptSharp.Rendering
         /// <param name="sourceAnnotationProcessorFactory">Source annotation processor factory.</param>
         /// <param name="iterativeModifier">Iterative modifier.</param>
         /// <param name="cleanupProcessorFactory">Cleanup processor factory.</param>
+        /// <param name="config">Rendering config.</param>
         public ZptDocumentModifierFactory(IGetsMetalContextProcessor metalProcessorFactory,
                                           IGetsTalContextProcessor talProcessorFactory,
                                           IGetsSourceAnnotationContextProcessor sourceAnnotationProcessorFactory,
                                           IIterativelyModifiesDocument iterativeModifier,
-                                          IGetsZptElementAndAttributeRemovalContextProcessor cleanupProcessorFactory)
+                                          IGetsZptElementAndAttributeRemovalContextProcessor cleanupProcessorFactory,
+                                          RenderingConfig config)
         {
             this.metalProcessorFactory = metalProcessorFactory ?? throw new ArgumentNullException(nameof(metalProcessorFactory));
             this.talProcessorFactory = talProcessorFactory ?? throw new ArgumentNullException(nameof(talProcessorFactory));
             this.sourceAnnotationProcessorFactory = sourceAnnotationProcessorFactory ?? throw new ArgumentNullException(nameof(sourceAnnotationProcessorFactory));
             this.iterativeModifier = iterativeModifier ?? throw new ArgumentNullException(nameof(iterativeModifier));
             this.cleanupProcessorFactory = cleanupProcessorFactory ?? throw new ArgumentNullException(nameof(cleanupProcessorFactory));
+            this.config = config ?? throw new ArgumentNullException(nameof(config));
         }
     }
 }

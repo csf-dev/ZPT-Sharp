@@ -3,6 +3,7 @@ using System.Text;
 using System.Collections.Generic;
 using ZptSharp.Dom;
 using ZptSharp.Expressions;
+using System.Collections.ObjectModel;
 
 namespace ZptSharp.Config
 {
@@ -17,17 +18,7 @@ namespace ZptSharp.Config
         {
             readonly RenderingConfig config;
             bool isBuilt;
-
-            /// <summary>
-            /// Gets or sets an object which provides service-resolution/dependency injection for ZPT Sharp types.
-            /// If this is unset or <see langword="null"/> then a default resolution service will be used.
-            /// </summary>
-            /// <value>The service provider.</value>
-            public IServiceProvider ServiceProvider
-            {
-                get => config.ServiceProvider;
-                set { AssertIsNotBuilt(); config.ServiceProvider = value; }
-            }
+            IDictionary<string, object> keywordOptions = new Dictionary<string,object>();
 
             /// <summary>
             /// Gets or sets the encoding which will be used to read &amp; write documents, where the document
@@ -43,12 +34,8 @@ namespace ZptSharp.Config
 
             /// <summary>
             /// <para>
-            /// Gets or sets the document provider to be used for reading/writing documents.
-            /// </para>
-            /// <para>
-            /// This property is not used if the <see cref="ServiceProvider"/> has been set to anything
-            /// other than the default (<see langword="null"/>) value.  If a custom service provider is
-            /// used then the document provider must be resolvable from that service provider.
+            /// Gets or sets an optional document provider to be used for reading/writing documents.  If omitted/null then
+            /// a document provider implementation will be selected automatically.
             /// </para>
             /// </summary>
             /// <value>The document provider.</value>
@@ -57,7 +44,6 @@ namespace ZptSharp.Config
                 get => config.DocumentProvider;
                 set { AssertIsNotBuilt(); config.DocumentProvider = value; }
             }
-
 
             /// <summary>
             /// Gets or sets a value which indicates whether the XML document declaration should be omitted when
@@ -87,8 +73,8 @@ namespace ZptSharp.Config
             /// <value>The keyword options collection.</value>
             public IDictionary<string, object> KeywordOptions
             {
-                get => config.KeywordOptions;
-                set { AssertIsNotBuilt(); config.KeywordOptions = value; }
+                get => keywordOptions;
+                set { AssertIsNotBuilt(); keywordOptions = value ?? throw new ArgumentNullException(nameof(value)); }
             }
 
             /// <summary>
@@ -103,6 +89,16 @@ namespace ZptSharp.Config
             }
 
             /// <summary>
+            /// Gets or sets an action which is used to build &amp; add values to the root ZPT context.
+            /// </summary>
+            /// <value>The context builder.</value>
+            public Action<IConfiguresRootContext> ContextBuilder
+            {
+                get => config.ContextBuilder;
+                set { AssertIsNotBuilt(); config.ContextBuilder = value ?? throw new ArgumentNullException(nameof(value)); }
+            }
+
+            /// <summary>
             /// Returns an immutable configuration object.  This method may be used only once per instance of <see cref="Builder"/>.
             /// Once it has been used, the configuration is finalised.
             /// </summary>
@@ -111,6 +107,8 @@ namespace ZptSharp.Config
             {
                 AssertIsNotBuilt();
                 isBuilt = true;
+
+                config.KeywordOptions = new ReadOnlyDictionary<string, object>(KeywordOptions);
                 return config;
             }
 
@@ -125,12 +123,9 @@ namespace ZptSharp.Config
             /// <summary>
             /// Initializes a new instance of the <see cref="Builder"/> class.
             /// </summary>
-            public Builder()
+            internal Builder()
             {
-                config = new RenderingConfig
-                {
-                    DocumentEncoding = Encoding.UTF8,
-                };
+                config = new RenderingConfig();
             }
         }
     }

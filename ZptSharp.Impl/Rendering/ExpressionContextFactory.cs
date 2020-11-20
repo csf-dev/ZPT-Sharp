@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using ZptSharp.Config;
 using ZptSharp.Dom;
 using ZptSharp.Expressions;
 
@@ -10,6 +11,8 @@ namespace ZptSharp.Rendering
     /// </summary>
     public class ExpressionContextFactory : IGetsRootExpressionContext, IGetsChildExpressionContexts
     {
+        readonly RenderingConfig config;
+
         /// <summary>
         /// Gets the root expression context for the request.
         /// </summary>
@@ -17,7 +20,17 @@ namespace ZptSharp.Rendering
         /// <param name="document">Document.</param>
         /// <param name="request">Request.</param>
         public ExpressionContext GetExpressionContext(IDocument document, RenderZptDocumentRequest request)
-            => GetExpressionContext(document.RootElement, document, request.Model, isRoot: true);
+        {
+            var context = GetExpressionContext(document.RootElement, document, request.Model, isRoot: true);
+
+            if(config.ContextBuilder != null)
+            {
+                var helper = new RootContextConfigHelper(context);
+                config.ContextBuilder(helper);
+            }
+
+            return context;
+        }
 
         /// <summary>
         /// Gets the child expression contexts.
@@ -47,6 +60,15 @@ namespace ZptSharp.Rendering
                 TemplateDocument = document,
                 IsRootContext = isRoot,
             };
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ExpressionContextFactory"/> class.
+        /// </summary>
+        /// <param name="config">Config.</param>
+        public ExpressionContextFactory(RenderingConfig config)
+        {
+            this.config = config ?? throw new System.ArgumentNullException(nameof(config));
         }
     }
 }

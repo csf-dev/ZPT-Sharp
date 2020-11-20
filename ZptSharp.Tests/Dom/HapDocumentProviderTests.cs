@@ -11,7 +11,7 @@ namespace ZptSharp.Dom
     public class HapDocumentProviderTests
     {
         [Test,AutoMoqData]
-        public async Task GetDocumentAsync_returns_instance_of_correct_type_when_parsing_html([DefaultConfig] RenderingConfig config,
+        public async Task GetDocumentAsync_returns_instance_of_correct_type_when_parsing_html([MockedConfig] RenderingConfig config,
                                                                                               HapDocumentProvider sut)
         {
             var doc = "<html><head><title>Hello there</title></head><body><p>I am a paragraph</p></body></html>";
@@ -23,7 +23,7 @@ namespace ZptSharp.Dom
         }
 
         [Test, AutoMoqData, Description("This test ensures that reading a document from a stream, then writing it back to stream produces the same document as was input")]
-        public async Task Provider_can_roundtrip_a_valid_html_document([DefaultConfig] RenderingConfig config,
+        public async Task Provider_can_roundtrip_a_valid_html_document([MockedConfig] RenderingConfig config,
                                                                        HapDocumentProvider sut)
         {
             var doc = "<html><head><title>Hello there</title></head><body><p>I am a paragraph</p></body></html>";
