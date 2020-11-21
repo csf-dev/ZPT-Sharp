@@ -29,6 +29,15 @@ namespace ZptSharp.Dom
             Assert.That(() => sut.CreateComment(null), Throws.ArgumentNullException);
         }
 
+        [Test, AutoMoqData]
+        public void CreateComment_returns_a_comment(string commentText)
+        {
+            var html = "<html><body><div>Hello</div></body></html>";
+            var sut = GetSut(html);
+
+            Assert.That(() => sut.CreateComment(commentText), Is.Not.Null);
+        }
+
         HapDocument GetSut(string html)
         {
             var native = new HtmlAgilityPack.HtmlDocument();

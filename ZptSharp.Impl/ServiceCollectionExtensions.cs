@@ -38,12 +38,14 @@ namespace ZptSharp
         /// </summary>
         /// <returns>The same service provider instance, after setting it up.</returns>
         /// <param name="provider">The service provider.</param>
-        public static void UseZptPathExpressions(this IServiceProvider provider)
+        public static IServiceProvider UseZptPathExpressions(this IServiceProvider provider)
         {
             if (provider == null)
                 throw new ArgumentNullException(nameof(provider));
 
             provider.GetRequiredService<IRegistersExpressionEvaluator>().RegisterEvaluatorType<PathExpressions.PathExpressionEvaluator>("path");
+
+            return provider;
         }
     }
 }

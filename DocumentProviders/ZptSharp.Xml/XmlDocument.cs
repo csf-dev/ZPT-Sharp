@@ -45,7 +45,8 @@ namespace ZptSharp.Dom
         /// </summary>
         public override void AddCommentToBeginningOfDocument(string commentText)
         {
-            throw new NotImplementedException();
+            var node = new XComment(commentText);
+            NativeDocument.AddFirst(node);
         }
 
         /// <summary>

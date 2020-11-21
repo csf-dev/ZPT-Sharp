@@ -18,8 +18,8 @@ namespace ZptSharp.Util
         {
             var services = new ServiceCollection()
                 .AddZptSharp()
-                .AddAngleSharpZptDocuments()
                 .AddHapZptDocuments()
+                .AddXmlZptDocuments()
                 .AddLogging(b => {
                     b.ClearProviders();
                     b.AddConsole(c => {
@@ -32,6 +32,7 @@ namespace ZptSharp.Util
             var provider = services.BuildServiceProvider();
             provider
                 .UseHapZptDocuments()
+                .UseXmlZptDocuments()
                 .UseZptPathExpressions();
 
             return provider;

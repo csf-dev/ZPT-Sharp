@@ -40,6 +40,9 @@
     <Folder Include="PathExpressions\ValueProviders\" />
     <Folder Include="Config\" />
     <Folder Include="SourceAnnotation\" />
+    <Folder Include="Dom.HtmlAgilityPack\" />
+    <Folder Include="Dom.Xml\" />
+    <Folder Include="Dom.AngleSharp\" />
   </ItemGroup>
     
   <ItemGroup>
