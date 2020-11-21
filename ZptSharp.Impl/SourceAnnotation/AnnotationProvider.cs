@@ -1,5 +1,6 @@
 ﻿using System;
 using ZptSharp.Dom;
+using ZptSharp.Rendering;
 
 namespace ZptSharp.SourceAnnotation
 {
@@ -19,12 +20,31 @@ namespace ZptSharp.SourceAnnotation
         /// </summary>
         /// <returns>The annotation text.</returns>
         /// <param name="element">Element.</param>
-        /// <param name="useStartTag"><c>true</c> to use the line-number for the element's start-tag; <c>false</c> to use the end tag</param>
-        public string GetAnnotation(INode element, bool useStartTag = true)
+        /// <param name="tagType">The tag type to use for the annotation.</param>
+        public string GetAnnotation(INode element, TagType tagType = TagType.Start)
         {
             if (element == null)
                 throw new ArgumentNullException(nameof(element));
 
+            return GetAnnotation(element.SourceInfo, tagType);
+        }
+
+        /// <summary>
+        /// Gets the annotation text for the element, using the pre-replacement source annotation for the element.
+        /// </summary>
+        /// <returns>The annotation text.</returns>
+        /// <param name="element">Element.</param>
+        /// <param name="tagType">The tag type to use for the annotation.</param>
+        public string GetPreReplacementAnnotation(INode element, TagType tagType = TagType.Start)
+        {
+            if (element == null)
+                throw new ArgumentNullException(nameof(element));
+
+            return GetAnnotation(element.PreReplacementSourceInfo, tagType);
+        }
+
+        string GetAnnotation(ElementSourceInfo sourceInfo, TagType tagType)
+        {
             var divider = new String(dividerCharacter, dividerCharCount);
 
             /* This will look roughly like:
@@ -39,14 +59,24 @@ namespace ZptSharp.SourceAnnotation
             return String.Concat(Environment.NewLine,
                                  divider,
                                  Environment.NewLine,
-                                 GetMainAnnotation(element, useStartTag),
+                                 GetMainAnnotation(sourceInfo, tagType),
                                  Environment.NewLine,
                                  divider,
                                  Environment.NewLine);
         }
 
-        string GetMainAnnotation(INode element, bool useStartTag)
-            => useStartTag ? sourceInfoProvider.GetStartTagInfo(element.SourceInfo) : sourceInfoProvider.GetEndTagInfo(element.SourceInfo);
+        string GetMainAnnotation(ElementSourceInfo sourceInfo, TagType tagType)
+        {
+            switch(tagType)
+            {
+            case TagType.Start:
+                return sourceInfoProvider.GetStartTagInfo(sourceInfo);
+            case TagType.End:
+                return sourceInfoProvider.GetEndTagInfo(sourceInfo);
+            default:
+                return sourceInfoProvider.GetSourceInfo(sourceInfo.Document);
+            }
+        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="AnnotationProvider"/> class.

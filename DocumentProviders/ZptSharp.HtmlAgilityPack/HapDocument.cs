@@ -47,7 +47,8 @@ namespace ZptSharp.Dom
         /// </summary>
         public override void AddCommentToBeginningOfDocument(string commentText)
         {
-            throw new NotImplementedException();
+            var comment = NativeDocument.CreateComment(String.Format(commentFormat, commentText));
+            NativeDocument.DocumentNode.PrependChild(comment);
         }
 
         /// <summary>
@@ -60,7 +61,7 @@ namespace ZptSharp.Dom
             NativeDocument = document ?? throw new ArgumentNullException(nameof(document));
 
             var nativeRoot = NativeDocument.DocumentNode;
-            var src = new ElementSourceInfo(Source, nativeRoot.Line);
+            var src = new ElementSourceInfo(Source);
             root = new HapElement(nativeRoot, this, sourceInfo: src);
         }
     }

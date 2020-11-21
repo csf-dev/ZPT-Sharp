@@ -1,4 +1,5 @@
 ﻿using System;
+using Microsoft.Extensions.Logging;
 using ZptSharp.Dom;
 
 namespace ZptSharp.SourceAnnotation
@@ -8,6 +9,8 @@ namespace ZptSharp.SourceAnnotation
     /// </summary>
     public class Commenter : IAddsComment
     {
+        readonly ILogger logger;
+
         /// <summary>
         /// Adds a comment immediately before the beginning of a specified <paramref name="element"/>.
         /// </summary>
@@ -17,6 +20,9 @@ namespace ZptSharp.SourceAnnotation
         {
             if (element == null)
                 throw new ArgumentNullException(nameof(element));
+
+            if (logger.IsEnabled(LogLevel.Trace))
+                logger.LogTrace("Adding comment before element: {element}, parent: {parent}", element, element.ParentElement);
 
             if (element.ParentElement == null)
             {
@@ -44,6 +50,15 @@ namespace ZptSharp.SourceAnnotation
             var elementIndex = element.ParentElement.ChildNodes.IndexOf(element);
             var comment = element.Document.CreateComment(commentText);
             element.ParentElement.ChildNodes.Insert(elementIndex + 1, comment);
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Commenter"/> class.
+        /// </summary>
+        /// <param name="logger">Logger.</param>
+        public Commenter(ILogger<Commenter> logger)
+        {
+            this.logger = logger ?? throw new ArgumentNullException(nameof(logger));
         }
     }
 }

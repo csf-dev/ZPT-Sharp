@@ -1,4 +1,5 @@
 ﻿using ZptSharp.Dom;
+using ZptSharp.Rendering;
 
 namespace ZptSharp.SourceAnnotation
 {
@@ -12,7 +13,15 @@ namespace ZptSharp.SourceAnnotation
         /// </summary>
         /// <returns>The annotation text.</returns>
         /// <param name="element">Element.</param>
-        /// <param name="useStartTag"><c>true</c> to use the line-number for the element's start-tag; <c>false</c> to use the end tag</param>
-        string GetAnnotation(INode element, bool useStartTag = true);
+        /// <param name="tagType">The tag type to use for the annotation.</param>
+        string GetAnnotation(INode element, TagType tagType = TagType.Start);
+
+        /// <summary>
+        /// Gets the annotation text for the element, using the pre-replacement source annotation for the element.
+        /// </summary>
+        /// <returns>The annotation text.</returns>
+        /// <param name="element">Element.</param>
+        /// <param name="tagType">The tag type to use for the annotation.</param>
+        string GetPreReplacementAnnotation(INode element, TagType tagType = TagType.Start);
     }
 }

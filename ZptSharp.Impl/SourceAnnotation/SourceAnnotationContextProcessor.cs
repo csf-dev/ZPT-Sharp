@@ -31,43 +31,41 @@ namespace ZptSharp.SourceAnnotation
 
             var element = context.CurrentElement;
 
-            // Just an optimisation; if this isn't an element node then there's nothing to do
-            if(!element.IsElement)
-                return Task.FromResult(ExpressionContextProcessingResult.Noop);
-
-            if (IsRootElement(element))
-                AnnotateRootOrDefineMacroElement(element);
+            if (context.IsRootContext)
+                AnnotateRootElement(element);
             else if (element.IsImported)
                 AnnotateImportedElement(element);
             else if (HasDefineMacroAttribute(element))
-                AnnotateRootOrDefineMacroElement(element);
+                AnnotateDefineMacroElement(element);
             else if (HasDefineSlotAttribute(element))
                 AnnotateDefineSlotElement(element);
 
             return Task.FromResult(ExpressionContextProcessingResult.Noop);
         }
 
-        void AnnotateRootOrDefineMacroElement(INode element)
+        void AnnotateRootElement(INode element)
         {
-            // Annotate before the element
+            var annotation = annotationProvider.GetAnnotation(element, TagType.None);
+            commenter.AddCommentBefore(element, annotation);
+        }
+
+        void AnnotateDefineMacroElement(INode element)
+        {
             var annotation = annotationProvider.GetAnnotation(element);
             commenter.AddCommentBefore(element, annotation);
         }
 
         void AnnotateImportedElement(INode element)
         {
-            // Annotate before the start tag
             var beforeAnnotation = annotationProvider.GetAnnotation(element);
             commenter.AddCommentBefore(element, beforeAnnotation);
 
-            // Annotate after the end tag
-            var afterAnnotation = annotationProvider.GetAnnotation(element, false);
+            var afterAnnotation = annotationProvider.GetPreReplacementAnnotation(element, TagType.End);
             commenter.AddCommentAfter(element, afterAnnotation);
         }
 
         void AnnotateDefineSlotElement(INode element)
         {
-            // Annotate after the element
             var annotation = annotationProvider.GetAnnotation(element);
             commenter.AddCommentAfter(element, annotation);
         }

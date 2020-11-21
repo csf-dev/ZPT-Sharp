@@ -21,6 +21,14 @@ namespace ZptSharp.Dom
         new ElementSourceInfo SourceInfo { get; }
 
         /// <summary>
+        /// Gets or sets information about the source of the element  (for example, a file path and line number) before it was replaced.
+        /// For most elements this will be <see langword="null"/>, but when the current element is a replacement (such as METAL macro usage),
+        /// this property will contain source information for the replaced element.
+        /// </summary>
+        /// <value>The pre-replacement source info.</value>
+        ElementSourceInfo PreReplacementSourceInfo { get; set; }
+
+        /// <summary>
         /// Gets a collection of the element's attributes.
         /// </summary>
         /// <value>The attributes.</value>

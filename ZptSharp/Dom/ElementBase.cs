@@ -43,6 +43,14 @@ namespace ZptSharp.Dom
         public virtual ElementSourceInfo SourceInfo => Source;
 
         /// <summary>
+        /// Gets or sets information about the source of the element  (for example, a file path and line number) before it was replaced.
+        /// For most elements this will be <see langword="null"/>, but when the current element is a replacement (such as METAL macro usage),
+        /// this property will contain source information for the replaced element.
+        /// </summary>
+        /// <value>The pre-replacement source info.</value>
+        public virtual ElementSourceInfo PreReplacementSourceInfo { get; set; }
+
+        /// <summary>
         /// <para>
         /// Gets a value indicating whether this <see cref="INode"/> is imported.  A node is imported
         /// if it was not a part of the document, as the document was originally loaded.

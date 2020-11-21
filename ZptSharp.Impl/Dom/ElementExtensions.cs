@@ -36,6 +36,7 @@ namespace ZptSharp.Dom
             if (element.ParentElement == null)
                 throw new ArgumentException(Resources.ExceptionMessage.ElementMustHaveAParent, nameof(element));
 
+            replacement.PreReplacementSourceInfo = element.SourceInfo;
             element.ParentElement.ReplaceChild(element, replacement);
         }
     }

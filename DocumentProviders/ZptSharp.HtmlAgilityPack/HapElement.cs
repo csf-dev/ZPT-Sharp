@@ -72,7 +72,10 @@ namespace ZptSharp.Dom
             {
                 var (native, element) = current.Value;
                 var parent = ReferenceEquals(element, this) ? null : closedList[native.ParentNode];
-                var newElement = new HapElement(native, (HapDocument)Document, parent, element.SourceInfo, new List<INode>());
+                var newElement = new HapElement(native, (HapDocument)Document, parent, element.SourceInfo, new List<INode>())
+                {
+                    PreReplacementSourceInfo = element.PreReplacementSourceInfo,
+                };
                 closedList.Add(native, newElement);
                 if (parent != null) parent.sourceChildElements.Add(newElement);
                 openList.AddRange(native.ChildNodes.Select((node, idx) => ((HtmlNode, HapElement)?)(node, (HapElement)element.ChildNodes[idx])));
@@ -163,10 +166,20 @@ namespace ZptSharp.Dom
             return eventBasedListWrapper;
         }
 
+        int? GetEndTagLineNumber(HtmlNode node)
+        {
+            if (node == null) return null;
+
+            var startTagLineNumber = node.Line;
+            var lineBreakCount = node.OuterHtml.Count(x => x == '\n');
+
+            return startTagLineNumber + lineBreakCount;
+        }
+
         IList<INode> GetSourceChildElements()
         {
             return NativeElement.ChildNodes
-                .Select(x => new HapElement(x, (HapDocument)Doc, this, Source.CreateChild(x.Line)))
+                .Select(x => new HapElement(x, (HapDocument)Doc, this, Source.CreateChild(x.Line, GetEndTagLineNumber(x))))
                 .Cast<INode>()
                 .ToList();
         }
