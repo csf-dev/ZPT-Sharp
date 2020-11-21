@@ -126,11 +126,6 @@
     <Compile Include="BatchRendering\BatchOptionsBuilder.cs" />
     <Compile Include="BatchRendering\BatchRenderingOptionsValidator.cs" />
     <Compile Include="Rendering\SourceInfoFactory.cs" />
-    <Compile Include="SourceAnnotation\SourceAnnotator.cs" />
-    <Compile Include="SourceAnnotation\SourceInfoBurnInVisitor.cs" />
-    <Compile Include="SourceAnnotation\SourceInfoTidyUpVisitor.cs" />
-    <Compile Include="SourceAnnotation\SourceAnnotationVisitor.cs" />
-    <Compile Include="SourceAnnotation\CommentFormatter.cs" />
     <Compile Include="Resources\SourceAnnotationFormats.Designer.cs">
       <DependentUpon>SourceAnnotationFormats.resx</DependentUpon>
     </Compile>
@@ -191,9 +186,6 @@
     <None Include="web.config.install.xdt" />
     <None Include="web.config.uninstall.xdt" />
     <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="SourceAnnotation\" />
   </ItemGroup>
   <Import Project="..\packages\MSBuild.Extension.Pack.1.9.1\build\net40\MSBuild.Extension.Pack.targets" Condition="Exists('..\packages\MSBuild.Extension.Pack.1.9.1\build\net40\MSBuild.Extension.Pack.targets')" />
 </Project>
