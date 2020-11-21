@@ -39,6 +39,7 @@
     <Folder Include="PathExpressions\" />
     <Folder Include="PathExpressions\ValueProviders\" />
     <Folder Include="Config\" />
+    <Folder Include="SourceAnnotation\" />
   </ItemGroup>
     
   <ItemGroup>

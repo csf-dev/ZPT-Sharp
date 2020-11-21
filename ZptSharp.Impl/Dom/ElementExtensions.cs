@@ -17,7 +17,7 @@ namespace ZptSharp.Dom
         public static IAttribute GetMatchingAttribute(this INode element, AttributeSpec spec)
         {
             if (element == null) throw new ArgumentNullException(nameof(element));
-            if (spec == null) throw new ArgumentNullException(nameof(spec));
+            if (spec == null) return null;
 
             return element.Attributes.FirstOrDefault(x => x.Matches(spec));
         }

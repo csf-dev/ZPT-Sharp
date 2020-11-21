@@ -70,8 +70,6 @@ namespace ZptSharp.SourceAnnotation
             commenter.AddCommentAfter(element, annotation);
         }
 
-        bool IsRootElement(INode element) => element.ParentElement == null;
-
         bool HasDefineMacroAttribute(INode element)
             => element.GetMatchingAttribute(metalSpecProvider.DefineMacro) != null;
 

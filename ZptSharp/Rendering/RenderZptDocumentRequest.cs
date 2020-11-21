@@ -1,7 +1,4 @@
-﻿using System;
-using System.IO;
-using ZptSharp.Config;
-using ZptSharp.Dom;
+﻿using System.IO;
 
 namespace ZptSharp.Rendering
 {
