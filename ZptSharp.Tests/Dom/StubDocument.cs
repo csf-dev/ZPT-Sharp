@@ -11,6 +11,8 @@ namespace ZptSharp.Dom
 
         public override INode RootElement => Root;
 
+        public override INode CreateComment(string commentText) => null;
+
         public StubDocument(Rendering.IDocumentSourceInfo source) : base(source) { }
     }
 }

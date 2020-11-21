@@ -29,6 +29,13 @@ namespace ZptSharp.Dom
         public abstract INode RootElement { get; }
 
         /// <summary>
+        /// Creates and returns a new comment node.
+        /// </summary>
+        /// <returns>The comment node.</returns>
+        /// <param name="commentText">The text for the comment.</param>
+        public abstract INode CreateComment(string commentText);
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="DocumentBase"/> class.
         /// </summary>
         /// <param name="source">The source info for the document.</param>

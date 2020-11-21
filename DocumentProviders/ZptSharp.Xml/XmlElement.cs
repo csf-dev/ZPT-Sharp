@@ -13,11 +13,19 @@ namespace ZptSharp.Dom
     public class XmlElement : ElementBase
     {
         /// <summary>
-        /// Gets the native XML <see cref="XElement"/> instance which
+        /// Gets the native XML <see cref="XNode"/> instance which
         /// acts as the basis for the current element.
         /// </summary>
         /// <value>The native XML element object.</value>
-        public XElement NativeElement { get; }
+        public XNode NativeElement { get; }
+
+        /// <summary>
+        /// Gets a representation of <see cref="NativeElement"/> as an <see cref="XElement"/>,
+        /// if it is in fact an element node.
+        /// </summary>
+        /// <value>The element node.</value>
+        protected XElement ElementNode
+            => NativeElement as XElement;
 
         /// <summary>
         /// Gets a collection of the element's attributes.
@@ -44,12 +52,14 @@ namespace ZptSharp.Dom
         /// <returns>A <see cref="String"/> that represents the current <see cref="XmlElement"/>.</returns>
         public override string ToString()
         {
-            var attributes = NativeElement.Attributes()
+            if (!IsElement) return NativeElement.ToString();
+
+            var attributes = ElementNode.Attributes()
                 .Select(attrib => $"{attrib.Name}=\"{attrib.Value}\"")
                 .ToList();
             var hasAttributes = attributes.Count > 0;
 
-            return $"<{NativeElement.Name}{(hasAttributes ? " " : String.Empty)}{String.Join(" ", attributes)}>";
+            return $"<{ElementNode.Name}{(hasAttributes ? " " : String.Empty)}{String.Join(" ", attributes)}>";
         }
 
         /// <summary>
@@ -58,8 +68,10 @@ namespace ZptSharp.Dom
         /// <returns>The copied element.</returns>
         public override INode GetCopy()
         {
-            var copiedElement = new XElement(NativeElement);
-            return new XmlElement(copiedElement, (XmlDocument) Document, null, SourceInfo);
+            throw new NotImplementedException();
+
+            //var copiedElement = new XElement(NativeElement);
+            //return new XmlElement(copiedElement, (XmlDocument) Document, null, SourceInfo);
         }
 
         /// <summary>
@@ -71,8 +83,9 @@ namespace ZptSharp.Dom
         {
             if (@namespace == null)
                 throw new ArgumentNullException(nameof(@namespace));
+            if (!IsElement) return false;
 
-            return String.Equals(NativeElement.Name.NamespaceName, @namespace.Uri, StringComparison.InvariantCulture);
+            return String.Equals(ElementNode.Name.NamespaceName, @namespace.Uri, StringComparison.InvariantCulture);
         }
 
         /// <summary>
@@ -90,7 +103,7 @@ namespace ZptSharp.Dom
         /// <param name="document">The containing document.</param>
         /// <param name="parent">The parent element.</param>
         /// <param name="sourceInfo">Source info.</param>
-        public XmlElement(XElement element,
+        public XmlElement(XNode element,
                           XmlDocument document,
                           INode parent = null,
                           ElementSourceInfo sourceInfo = null) : base(document, parent, sourceInfo)

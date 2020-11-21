@@ -3,6 +3,7 @@ using System.IO;
 using System.Threading.Tasks;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using ZptSharp.Config;
 
 namespace ZptSharp.Util
 {
@@ -43,9 +44,11 @@ namespace ZptSharp.Util
         /// <param name="serviceProvider">Service provider.</param>
         /// <param name="expectedRenderingPath">Expected rendering path.</param>
         /// <param name="model">The model to render.</param>
+        /// <param name="config">Rendering config.</param>
         public static async Task<IntegrationTestResult> PerformIntegrationTest(string expectedRenderingPath,
                                                                                IServiceProvider serviceProvider = null,
-                                                                               object model = null)
+                                                                               object model = null,
+                                                                               RenderingConfig config = null)
         {
             bool createdServiceProvider = (serviceProvider == null);
             IServiceProvider provider = null;
@@ -60,7 +63,7 @@ namespace ZptSharp.Util
                     var expected = await TestFiles.GetString(expectedRenderingPath);
 
                     var fileRenderer = scope.ServiceProvider.GetRequiredService<IRendersZptFile>();
-                    var result = await TestFiles.GetString(await fileRenderer.RenderAsync(sourceDocument, model ?? new object()));
+                    var result = await TestFiles.GetString(await fileRenderer.RenderAsync(sourceDocument, model ?? new object(), config));
 
                     return new IntegrationTestResult
                     {

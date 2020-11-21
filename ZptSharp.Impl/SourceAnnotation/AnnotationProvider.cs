@@ -12,6 +12,8 @@ namespace ZptSharp.SourceAnnotation
         const char dividerCharacter = '=';
         const int dividerCharCount = 78;
 
+        readonly IGetsSourceAnnotationString sourceInfoProvider;
+
         /// <summary>
         /// Gets the annotation text for the element.
         /// </summary>
@@ -44,17 +46,15 @@ namespace ZptSharp.SourceAnnotation
         }
 
         string GetMainAnnotation(INode element, bool useStartTag)
+            => useStartTag ? sourceInfoProvider.GetStartTagInfo(element.SourceInfo) : sourceInfoProvider.GetEndTagInfo(element.SourceInfo);
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="AnnotationProvider"/> class.
+        /// </summary>
+        /// <param name="sourceInfoProvider">Source info provider.</param>
+        public AnnotationProvider(IGetsSourceAnnotationString sourceInfoProvider)
         {
-            var source = element.SourceInfo;
-            var docSource = source.Document.ToString();
-
-            var lineNumber = useStartTag
-                ? source.StartTagLineNumber
-                : source.EndTagLineNumber;
-
-            return lineNumber.HasValue
-                ? $"{docSource} (line {lineNumber})"
-                : docSource;
+            this.sourceInfoProvider = sourceInfoProvider ?? throw new ArgumentNullException(nameof(sourceInfoProvider));
         }
     }
 }

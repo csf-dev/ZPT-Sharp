@@ -13,6 +13,7 @@ namespace ZptSharp.Bootstrap
             services.AddTransient<IGetsSourceAnnotationContextProcessor, SourceAnnotationContextProcessorFactory>();
             services.AddTransient<IGetsAnnotationForElement, AnnotationProvider>();
             services.AddTransient<IAddsComment, Commenter>();
+            services.AddTransient<IGetsSourceAnnotationString, SourceAnnotationStringProvider>();
         }
     }
 }

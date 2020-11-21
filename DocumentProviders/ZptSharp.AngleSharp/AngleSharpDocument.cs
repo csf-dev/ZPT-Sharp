@@ -25,6 +25,20 @@ namespace ZptSharp.Dom
         public override INode RootElement => root;
 
         /// <summary>
+        /// Creates and returns a new comment node.
+        /// </summary>
+        /// <returns>The comment node.</returns>
+        /// <param name="commentText">The text for the comment.</param>
+        public override INode CreateComment(string commentText)
+        {
+            if (commentText == null)
+                throw new ArgumentNullException(nameof(commentText));
+
+            var node = NativeDocument.CreateComment(commentText);
+            return new AngleSharpElement(node, this);
+        }
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="AngleSharpDocument"/> class.
         /// </summary>
         /// <param name="document">The native document object.</param>

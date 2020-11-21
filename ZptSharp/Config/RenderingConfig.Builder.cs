@@ -99,6 +99,27 @@ namespace ZptSharp.Config
             }
 
             /// <summary>
+            /// <para>
+            /// Gets or sets a file system path which is used as the 'base' or root path for template files.
+            /// When <see cref="IncludeSourceAnnotation"/> is <see langword="true"/>, if this property is
+            /// non-null, file paths to template files are recorded as relative paths based upon this path.
+            /// </para>
+            /// <para>
+            /// If this property is <see langword="null"/> or where a template file is not a descendent of this
+            /// path, then full absolute file paths will be recorded in source annotation.
+            /// </para>
+            /// <para>
+            /// This property has no effect if <see cref="IncludeSourceAnnotation"/> is <see langword="false"/>.
+            /// </para>
+            /// </summary>
+            /// <value>The base path used for shorting the paths of source files in logs and source annotation.</value>
+            public string SourceAnnotationBasePath
+            {
+                get => config.SourceAnnotationBasePath;
+                set { AssertIsNotBuilt(); config.SourceAnnotationBasePath = value; }
+            }
+
+            /// <summary>
             /// Returns an immutable configuration object.  This method may be used only once per instance of <see cref="Builder"/>.
             /// Once it has been used, the configuration is finalised.
             /// </summary>
