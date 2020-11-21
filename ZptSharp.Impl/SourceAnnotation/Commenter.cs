@@ -15,7 +15,18 @@ namespace ZptSharp.SourceAnnotation
         /// <param name="commentText">The text of the DOM comment.</param>
         public void AddCommentBefore(INode element, string commentText)
         {
-            // TODO: Write this impl!
+            if (element == null)
+                throw new ArgumentNullException(nameof(element));
+
+            if (element.ParentElement == null)
+            {
+                element.Document.AddCommentToBeginningOfDocument(commentText);
+                return;
+            }
+
+            var elementIndex = element.ParentElement.ChildNodes.IndexOf(element);
+            var comment = element.Document.CreateComment(commentText);
+            element.ParentElement.ChildNodes.Insert(elementIndex, comment);
         }
 
         /// <summary>
@@ -25,7 +36,14 @@ namespace ZptSharp.SourceAnnotation
         /// <param name="commentText">The text of the DOM comment.</param>
         public void AddCommentAfter(INode element, string commentText)
         {
-            // TODO: Write this impl!
+            if (element == null)
+                throw new ArgumentNullException(nameof(element));
+            if (element.ParentElement == null)
+                throw new ArgumentException(Resources.ExceptionMessage.ElementMustHaveAParent, nameof(element));
+
+            var elementIndex = element.ParentElement.ChildNodes.IndexOf(element);
+            var comment = element.Document.CreateComment(commentText);
+            element.ParentElement.ChildNodes.Insert(elementIndex + 1, comment);
         }
     }
 }

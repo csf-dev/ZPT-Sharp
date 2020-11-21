@@ -10,6 +10,8 @@ namespace ZptSharp.Dom
     /// </summary>
     public class HapDocument : DocumentBase
     {
+        const string commentFormat = "<!--{0}-->";
+
         readonly INode root;
 
         /// <summary>
@@ -34,8 +36,18 @@ namespace ZptSharp.Dom
             if (commentText == null)
                 throw new ArgumentNullException(nameof(commentText));
 
-            var node = NativeDocument.CreateComment(commentText);
+            var node = NativeDocument.CreateComment(String.Format(commentFormat, commentText));
             return new HapElement(node, this);
+        }
+
+        /// <summary>
+        /// Where-supported, adds a comment before the first element node in the document.  In cases where
+        /// the underlying document implementation does not support this, a workaround is acceptable (such as
+        /// commenting immediately inside the first element).
+        /// </summary>
+        public override void AddCommentToBeginningOfDocument(string commentText)
+        {
+            throw new NotImplementedException();
         }
 
         /// <summary>

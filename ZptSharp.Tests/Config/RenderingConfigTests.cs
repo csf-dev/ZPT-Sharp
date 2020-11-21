@@ -1,8 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
 using System.Text;
+using AutoFixture;
+using AutoFixture.AutoMoq;
 using NUnit.Framework;
+using ZptSharp.Autofixture;
 using ZptSharp.Dom;
 using ZptSharp.Expressions;
 
@@ -129,5 +133,26 @@ namespace ZptSharp.Config
             var properties = typeof(RenderingConfig).GetProperties(BindingFlags.Instance | BindingFlags.Public);
             Assert.That(properties, Has.All.Matches<PropertyInfo>(p => p.GetMethod.IsVirtual));
         }
+
+        [Test]
+        public void CloneToNewBuilder_then_GetConfig_returns_config_with_equal_properties_to_original([ValueSource(nameof(GetConfigProperties))] string propertyName)
+        {
+            var fixture = new Fixture();
+            new AutoConfigBuilderCustomization().Customize(fixture);
+            new AutoMoqCustomization().Customize(fixture);
+            var builder = fixture.Create<RenderingConfig.Builder>();
+
+            var originalConfig = builder.GetConfig();
+            var clonedConfig = originalConfig.CloneToNewBuilder().GetConfig();
+
+            var property = typeof(RenderingConfig).GetProperty(propertyName);
+            var expected = property.GetValue(originalConfig);
+            var actual = property.GetValue(clonedConfig);
+
+            Assert.That(actual, Is.EqualTo(expected));
+        }
+
+        public static IEnumerable<string> GetConfigProperties()
+            => typeof(RenderingConfig).GetProperties(BindingFlags.Public | BindingFlags.Instance).Select(x => x.Name);
     }
 }

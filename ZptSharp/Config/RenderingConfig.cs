@@ -103,6 +103,7 @@ namespace ZptSharp.Config
                 IncludeSourceAnnotation = IncludeSourceAnnotation,
                 KeywordOptions = KeywordOptions.ToDictionary(k => k.Key, v => v.Value),
                 OmitXmlDeclaration = OmitXmlDeclaration,
+                SourceAnnotationBasePath = SourceAnnotationBasePath,
             };
         }
 

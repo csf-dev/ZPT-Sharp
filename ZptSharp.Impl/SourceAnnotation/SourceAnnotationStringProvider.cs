@@ -1,4 +1,6 @@
 ﻿using System;
+using System.IO;
+using Microsoft.Extensions.Logging;
 using ZptSharp.Config;
 using ZptSharp.Rendering;
 
@@ -10,6 +12,7 @@ namespace ZptSharp.SourceAnnotation
     public class SourceAnnotationStringProvider : IGetsSourceAnnotationString
     {
         readonly RenderingConfig config;
+        readonly ILogger logger;
 
         /// <summary>
         /// Gets a string which represents information about a document's source information.
@@ -19,17 +22,34 @@ namespace ZptSharp.SourceAnnotation
         public string GetSourceInfo(IDocumentSourceInfo sourceInfo)
         {
             if (sourceInfo == null) return null;
+
+            if (logger.IsEnabled(LogLevel.Trace))
+                logger.LogTrace("Source info is {info_type}: {source_info}", sourceInfo.GetType().Name, sourceInfo);
+
             if (!(sourceInfo is FileSourceInfo fileSourceInfo))
                 return sourceInfo.ToString();
+
+            if (logger.IsEnabled(LogLevel.Trace))
+                logger.LogTrace("Configuration source annotation base path: {base_path}", config.SourceAnnotationBasePath ?? "<null>");
 
             var path = fileSourceInfo.ToString();
             if (String.IsNullOrEmpty(config.SourceAnnotationBasePath))
                 return path;
 
-            if (path.StartsWith(config.SourceAnnotationBasePath, StringComparison.InvariantCulture))
-                return path.Substring(config.SourceAnnotationBasePath.Length);
+            return StripSourceAnnotationBasePathAndLeadingDirectorySeparators(path);
+        }
 
-            return path;
+        string StripSourceAnnotationBasePathAndLeadingDirectorySeparators(string path)
+        {
+            if (!path.StartsWith(config.SourceAnnotationBasePath, StringComparison.InvariantCulture))
+                return path;
+
+            var relativePath = path.Substring(config.SourceAnnotationBasePath.Length);
+
+            while (relativePath.Length > 0 && relativePath[0] == (Path.DirectorySeparatorChar))
+                relativePath = relativePath.Substring(1);
+
+            return relativePath;
         }
 
         /// <summary>
@@ -61,9 +81,11 @@ namespace ZptSharp.SourceAnnotation
         /// Initializes a new instance of the <see cref="SourceAnnotationStringProvider"/> class.
         /// </summary>
         /// <param name="config">Config.</param>
-        public SourceAnnotationStringProvider(RenderingConfig config)
+        /// <param name="logger">Logger</param>
+        public SourceAnnotationStringProvider(RenderingConfig config, ILogger<SourceAnnotationStringProvider> logger)
         {
             this.config = config ?? throw new ArgumentNullException(nameof(config));
+            this.logger = logger ?? throw new ArgumentNullException(nameof(logger));
         }
     }
 }

@@ -23,6 +23,13 @@ namespace ZptSharp.Dom
         public virtual IDocumentSourceInfo SourceInfo => Source;
 
         /// <summary>
+        /// Where-supported, adds a comment before the first element node in the document.  In cases where
+        /// the underlying document implementation does not support this, a workaround is acceptable (such as
+        /// commenting immediately inside the first element).
+        /// </summary>
+        public abstract void AddCommentToBeginningOfDocument(string commentText);
+
+        /// <summary>
         /// Gets the root element for the current document.
         /// </summary>
         /// <returns>The root element.</returns>

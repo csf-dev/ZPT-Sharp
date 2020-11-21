@@ -13,6 +13,8 @@ namespace ZptSharp.Dom
 
         public override INode CreateComment(string commentText) => null;
 
+        public override void AddCommentToBeginningOfDocument(string commentText) { }
+
         public StubDocument(Rendering.IDocumentSourceInfo source) : base(source) { }
     }
 }

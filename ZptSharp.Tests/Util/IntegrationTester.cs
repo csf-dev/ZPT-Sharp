@@ -45,17 +45,19 @@ namespace ZptSharp.Util
         /// <param name="expectedRenderingPath">Expected rendering path.</param>
         /// <param name="model">The model to render.</param>
         /// <param name="config">Rendering config.</param>
+        /// <param name="logLevel">The logging level</param>
         public static async Task<IntegrationTestResult> PerformIntegrationTest(string expectedRenderingPath,
                                                                                IServiceProvider serviceProvider = null,
                                                                                object model = null,
-                                                                               RenderingConfig config = null)
+                                                                               RenderingConfig config = null,
+                                                                               LogLevel logLevel = LogLevel.Debug)
         {
             bool createdServiceProvider = (serviceProvider == null);
             IServiceProvider provider = null;
 
             try
             {
-                provider = serviceProvider ?? GetIntegrationTestServiceProvider();
+                provider = serviceProvider ?? GetIntegrationTestServiceProvider(logLevel);
 
                 using (var scope = provider.CreateScope())
                 {

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Logging;
 using NUnit.Framework;
 using ZptSharp.Config;
 using ZptSharp.Util;
@@ -16,18 +17,24 @@ namespace ZptSharp
         ]
         public async Task Each_output_file_should_render_as_expected([ValueSource(nameof(GetExpectedOutputFiles))] string expectedPath)
         {
+            var config = GetConfig();
+            var result = await IntegrationTester.PerformIntegrationTest(expectedPath, config: config, logLevel: LogLevel.Trace);
+            Assert.That(result, Has.MatchingExpectedAndActualRenderings);
+        }
+
+        public static IEnumerable<string> GetExpectedOutputFiles()
+            => TestFiles.GetIntegrationTestExpectedFiles<SourceAnnotationIntegrationTests>();
+
+        RenderingConfig GetConfig()
+        {
             var builder = RenderingConfig.CreateBuilder();
             builder.ContextBuilder = c =>
             {
                 c.AddToRootContext("tests", new { input = new TemplateDirectory(TestFiles.GetIntegrationTestSourceDirectory<SourceAnnotationIntegrationTests>()) });
             };
             builder.IncludeSourceAnnotation = true;
-            var config = builder.GetConfig();
-
-            var result = await IntegrationTester.PerformIntegrationTest(expectedPath, config: config);
-            Assert.That(result, Has.MatchingExpectedAndActualRenderings);
+            builder.SourceAnnotationBasePath = TestFiles.GetPath(nameof(SourceAnnotationIntegrationTests));
+            return builder.GetConfig();
         }
-
-        public static IEnumerable<string> GetExpectedOutputFiles() => TestFiles.GetIntegrationTestExpectedFiles<SourceAnnotationIntegrationTests>();
     }
 }
