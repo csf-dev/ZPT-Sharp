@@ -39,5 +39,21 @@ namespace ZptSharp.Dom
             replacement.PreReplacementSourceInfo = element.SourceInfo;
             element.ParentElement.ReplaceChild(element, replacement);
         }
+
+        /// <summary>
+        /// Removes the specified <paramref name="element"/> from its parent.
+        /// From this point onwards, the element should be discarded, as it
+        /// is no longer a valid part of the document.
+        /// </summary>
+        /// <param name="element">The element to remove.</param>
+        public static void Remove(this INode element)
+        {
+            if (element == null)
+                throw new ArgumentNullException(nameof(element));
+            if (element.ParentElement == null)
+                throw new ArgumentException(Resources.ExceptionMessage.ElementMustHaveAParent, nameof(element));
+
+            element.ParentElement.ChildNodes.Remove(element);
+        }
     }
 }

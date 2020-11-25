@@ -62,7 +62,7 @@ namespace ZptSharp.Tal
             => new RepeatAttributeDecorator(service, specProvider);
 
         IProcessesExpressionContext GetConditionDecorator(IProcessesExpressionContext service)
-            => new ConditionAttributeDecorator(service, specProvider);
+            => new ConditionAttributeDecorator(service, specProvider, evaluator, resultInterpreter);
 
         IProcessesExpressionContext GetDefineDecorator(IProcessesExpressionContext service)
             => new DefineAttributeDecorator(service, specProvider, evaluator, resultInterpreter, definitionProvider);
