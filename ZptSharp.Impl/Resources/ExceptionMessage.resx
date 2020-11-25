@@ -83,4 +83,17 @@ The inner exception will provide further information as to why.</value>
         <value>Neither a directory nor a ZPT document file was found matching the specified path.
 Path:{0}</value>
     </data>
+    <data name="InvalidTalDefineAttribute" xml:space="preserve">
+        <value>The tal:define attribute value must be valid.
+Element:{0}
+Attribute value:{1}</value>
+    </data>
+    <data name="UnexpectedErrorEvaluatingDefineAttribute" xml:space="preserve">
+        <value>An unexpected error occurred whilst evaluating a tal:define attribute expression.  The inner exception will contain further information.
+Element:{0}
+Definition:{1}</value>
+    </data>
+    <data name="TalDefineAttributeMustBeWellFormed" xml:space="preserve">
+        <value>The TAL 'define' attribute value must be well-formed.</value>
+    </data>
 </root>

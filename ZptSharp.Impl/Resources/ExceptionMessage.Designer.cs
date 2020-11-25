@@ -160,5 +160,23 @@ namespace ZptSharp.Resources {
                 return ResourceManager.GetString("DocumentNotFound", resourceCulture);
             }
         }
+        
+        internal static string InvalidTalDefineAttribute {
+            get {
+                return ResourceManager.GetString("InvalidTalDefineAttribute", resourceCulture);
+            }
+        }
+        
+        internal static string UnexpectedErrorEvaluatingDefineAttribute {
+            get {
+                return ResourceManager.GetString("UnexpectedErrorEvaluatingDefineAttribute", resourceCulture);
+            }
+        }
+        
+        internal static string TalDefineAttributeMustBeWellFormed {
+            get {
+                return ResourceManager.GetString("TalDefineAttributeMustBeWellFormed", resourceCulture);
+            }
+        }
     }
 }

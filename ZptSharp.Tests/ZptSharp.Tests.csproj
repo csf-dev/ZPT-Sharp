@@ -43,6 +43,7 @@
     <Folder Include="Dom.HtmlAgilityPack\" />
     <Folder Include="Dom.Xml\" />
     <Folder Include="Dom.AngleSharp\" />
+    <Folder Include="Tal\" />
   </ItemGroup>
     
   <ItemGroup>
