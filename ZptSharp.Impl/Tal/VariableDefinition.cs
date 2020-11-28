@@ -5,7 +5,7 @@ namespace ZptSharp.Tal
     /// <summary>
     /// Model type representing a single TAL variable definition.
     /// </summary>
-    public class VariableDefinition : IEquatable<VariableDefinition>
+    public sealed class VariableDefinition : IEquatable<VariableDefinition>
     {
         const string globalScope = "global", localScope = "local";
 

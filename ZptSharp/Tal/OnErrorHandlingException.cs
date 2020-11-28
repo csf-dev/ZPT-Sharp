@@ -15,11 +15,22 @@ namespace ZptSharp.Tal
     [System.Serializable]
     public class OnErrorHandlingException : ZptRenderingException
     {
+        static readonly string originalExceptionKey = nameof(OriginalException);
+
         /// <summary>
         /// Gets or sets the original exception which was being handled when the current exception was raised..
         /// </summary>
         /// <value>The original exception.</value>
-        public Exception OriginalException { get; set; }
+        public Exception OriginalException
+        {
+            get => Data.Contains(originalExceptionKey) ? (Exception) Data[originalExceptionKey] : null;
+            set {
+                if (value != null)
+                    Data[originalExceptionKey] = value;
+                else if (Data.Contains(originalExceptionKey))
+                    Data.Remove(originalExceptionKey);
+            }
+        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="T:OnErrorHandlingException"/> class
