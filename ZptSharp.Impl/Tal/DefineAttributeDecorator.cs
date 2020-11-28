@@ -27,13 +27,11 @@ namespace ZptSharp.Tal
         /// <param name="token">An optional cancellation token.</param>
         public async Task<ExpressionContextProcessingResult> ProcessContextAsync(ExpressionContext context, CancellationToken token = default)
         {
-            var wrappedResult = await wrapped.ProcessContextAsync(context, token);
-
             var defineAttribute = context.CurrentElement.GetMatchingAttribute(specProvider.Define);
             if (defineAttribute != null)
                 await HandleDefineAttribute(defineAttribute, context, token);
 
-            return wrappedResult;
+            return await wrapped.ProcessContextAsync(context, token);
         }
 
         /// <summary>

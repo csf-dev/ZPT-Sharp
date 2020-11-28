@@ -190,5 +190,11 @@ namespace ZptSharp.Resources {
                 return ResourceManager.GetString("MustNotBeRootElement", resourceCulture);
             }
         }
+        
+        internal static string ContentAndReplaceAttributesMayNotCoexist {
+            get {
+                return ResourceManager.GetString("ContentAndReplaceAttributesMayNotCoexist", resourceCulture);
+            }
+        }
     }
 }

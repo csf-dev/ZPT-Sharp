@@ -85,9 +85,10 @@ namespace ZptSharp.Tal
             context.CurrentElement.ParentElement = parent;
             parent.ChildNodes.Add(context.CurrentElement);
 
-            var result = await sut.ProcessContextAsync(context);
+            await sut.ProcessContextAsync(context);
 
-            Assert.That(result?.AbortFurtherProcessing, Is.True);
+            Mock.Get(wrapped)
+                .Verify(x => x.ProcessContextAsync(It.IsAny<ExpressionContext>(), CancellationToken.None), Times.Never);
         }
 
         [Test, AutoMoqData]

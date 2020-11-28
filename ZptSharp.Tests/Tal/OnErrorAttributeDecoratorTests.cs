@@ -73,8 +73,7 @@ namespace ZptSharp.Tal
 
             Assert.That(() => sut.ProcessContextAsync(context).Result,
                         Is.InstanceOf<ExpressionContextProcessingResult>()
-                            .And.Property(nameof(ExpressionContextProcessingResult.AdditionalContexts)).Empty
-                            .And.Property(nameof(ExpressionContextProcessingResult.AbortFurtherProcessing)).False);
+                            .And.Property(nameof(ExpressionContextProcessingResult.AdditionalContexts)).Empty);
         }
 
         [Test, AutoMoqData]

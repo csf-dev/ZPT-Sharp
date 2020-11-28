@@ -58,7 +58,7 @@ namespace ZptSharp.Tal
                 return new DomValueExpressionResult(abortAction: true);
 
             var nodes = GetNodes(result, isStructure, context);
-            return new DomValueExpressionResult(nodes, isStructure);
+            return new DomValueExpressionResult(nodes);
         }
 
         IList<INode> GetNodes(object expressionResult, bool isStructure, ExpressionContext context)

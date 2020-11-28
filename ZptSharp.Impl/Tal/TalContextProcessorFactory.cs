@@ -1,4 +1,5 @@
-﻿using ZptSharp.Expressions;
+﻿using ZptSharp.Dom;
+using ZptSharp.Expressions;
 using ZptSharp.Rendering;
 
 namespace ZptSharp.Tal
@@ -25,7 +26,9 @@ namespace ZptSharp.Tal
         readonly IInterpretsExpressionResult resultInterpreter;
         readonly IGetsVariableDefinitionsFromAttributeValue definitionProvider;
         readonly IEvaluatesDomValueExpression domEvaluator;
-        private readonly Microsoft.Extensions.Logging.ILogger<OnErrorAttributeDecorator> onErrorlogger;
+        readonly Microsoft.Extensions.Logging.ILogger<OnErrorAttributeDecorator> onErrorlogger;
+        readonly IReplacesNode replacer;
+        readonly IOmitsNode omitter;
 
         /// <summary>
         /// Gets the TAL context processor.
@@ -58,7 +61,7 @@ namespace ZptSharp.Tal
             => new AttributesAttributeDecorator(service, specProvider);
 
         IProcessesExpressionContext GetContentOrReplaceDecorator(IProcessesExpressionContext service)
-            => new ContentOrReplaceAttributeDecorator(service, specProvider);
+            => new ContentOrReplaceAttributeDecorator(service, specProvider, domEvaluator, replacer, omitter);
 
         IProcessesExpressionContext GetRepeatDecorator(IProcessesExpressionContext service)
             => new RepeatAttributeDecorator(service, specProvider);
@@ -74,7 +77,9 @@ namespace ZptSharp.Tal
                                           IInterpretsExpressionResult resultInterpreter,
                                           IGetsVariableDefinitionsFromAttributeValue definitionProvider,
                                           IEvaluatesDomValueExpression domEvaluator,
-                                          Microsoft.Extensions.Logging.ILogger<OnErrorAttributeDecorator> onErrorlogger)
+                                          Microsoft.Extensions.Logging.ILogger<OnErrorAttributeDecorator> onErrorlogger,
+                                          IReplacesNode replacer,
+                                          IOmitsNode omitter)
         {
             this.specProvider = specProvider ?? throw new System.ArgumentNullException(nameof(specProvider));
             this.evaluator = evaluator ?? throw new System.ArgumentNullException(nameof(evaluator));
@@ -82,6 +87,8 @@ namespace ZptSharp.Tal
             this.definitionProvider = definitionProvider ?? throw new System.ArgumentNullException(nameof(definitionProvider));
             this.domEvaluator = domEvaluator ?? throw new System.ArgumentNullException(nameof(domEvaluator));
             this.onErrorlogger = onErrorlogger ?? throw new System.ArgumentNullException(nameof(onErrorlogger));
+            this.replacer = replacer ?? throw new System.ArgumentNullException(nameof(replacer));
+            this.omitter = omitter ?? throw new System.ArgumentNullException(nameof(omitter));
         }
     }
 }

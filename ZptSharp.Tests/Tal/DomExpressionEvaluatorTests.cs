@@ -36,7 +36,6 @@ namespace ZptSharp.Tal
 
             Assert.That(result,
                         Has.Property(nameof(DomValueExpressionResult.Nodes)).EqualTo(new[] { textNode })
-                           .And.Property(nameof(DomValueExpressionResult.TreatAsStructure)).False
                            .And.Property(nameof(DomValueExpressionResult.AbortAction)).False);
         }
 
@@ -63,7 +62,6 @@ namespace ZptSharp.Tal
 
             Assert.That(result,
                         Has.Property(nameof(DomValueExpressionResult.Nodes)).EqualTo(new[] { textNode })
-                           .And.Property(nameof(DomValueExpressionResult.TreatAsStructure)).False
                            .And.Property(nameof(DomValueExpressionResult.AbortAction)).False);
         }
 
@@ -90,7 +88,6 @@ namespace ZptSharp.Tal
 
             Assert.That(result,
                         Has.Property(nameof(DomValueExpressionResult.Nodes)).EqualTo(new[] { textNode })
-                           .And.Property(nameof(DomValueExpressionResult.TreatAsStructure)).True
                            .And.Property(nameof(DomValueExpressionResult.AbortAction)).False);
         }
 

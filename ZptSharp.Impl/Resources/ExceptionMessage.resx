@@ -103,4 +103,8 @@ Element:{0}</value>
     <data name="MustNotBeRootElement" xml:space="preserve">
         <value>The specified element must not be the root element of the document; it must have a parent element.</value>
     </data>
+    <data name="ContentAndReplaceAttributesMayNotCoexist" xml:space="preserve">
+        <value>A single DOM element must not have both TAL 'content' and 'replace' attributes.
+Element:{0}</value>
+    </data>
 </root>
