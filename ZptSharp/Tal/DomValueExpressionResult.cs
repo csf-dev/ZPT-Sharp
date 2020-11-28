@@ -36,10 +36,10 @@ namespace ZptSharp.Tal
         /// <summary>
         /// Initializes a new instance of the <see cref="DomValueExpressionResult"/> class.
         /// </summary>
-        /// <param name="nodes">Nodes.</param>
+        /// <param name="nodes">The nodes.</param>
         /// <param name="treatAsStructure">If set to <c>true</c> treat as structure.</param>
         /// <param name="abortAction">If set to <c>true</c> then this resul aborts the action.</param>
-        public DomValueExpressionResult(IEnumerable<INode> nodes, bool treatAsStructure = false, bool abortAction = false)
+        public DomValueExpressionResult(IList<INode> nodes = null, bool treatAsStructure = false, bool abortAction = false)
         {
             Nodes = (nodes ?? Enumerable.Empty<INode>()).ToArray();
             TreatAsStructure = treatAsStructure;

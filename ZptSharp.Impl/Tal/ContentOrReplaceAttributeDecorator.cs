@@ -15,7 +15,8 @@ namespace ZptSharp.Tal
             throw new NotImplementedException();
         }
 
-        public ContentOrReplaceAttributeDecorator(IProcessesExpressionContext wrapped, IGetsTalAttributeSpecs specProvider)
+        public ContentOrReplaceAttributeDecorator(IProcessesExpressionContext wrapped,
+                                                  IGetsTalAttributeSpecs specProvider)
         {
             this.wrapped = wrapped ?? throw new ArgumentNullException(nameof(wrapped));
         }

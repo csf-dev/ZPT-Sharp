@@ -43,6 +43,21 @@ namespace ZptSharp.Dom
         public abstract INode CreateComment(string commentText);
 
         /// <summary>
+        /// Creates and returns a new text node from the specified content.
+        /// Even if the content contains valid markup, it is strictly to be treated as text.
+        /// </summary>
+        /// <returns>A text node.</returns>
+        /// <param name="content">The text content for the node.</param>
+        public abstract INode CreateTextNode(string content);
+
+        /// <summary>
+        /// Parses the specified text <paramref name="markup"/> and returns the resulting nodes.
+        /// </summary>
+        /// <returns>The parsed nodes.</returns>
+        /// <param name="markup">Markup text.</param>
+        public abstract IList<INode> ParseAsNodes(string markup);
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="DocumentBase"/> class.
         /// </summary>
         /// <param name="source">The source info for the document.</param>

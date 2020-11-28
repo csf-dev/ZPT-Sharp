@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+
 namespace ZptSharp.Dom
 {
     /// <summary>
@@ -12,6 +14,10 @@ namespace ZptSharp.Dom
         public override INode RootElement => Root;
 
         public override INode CreateComment(string commentText) => null;
+
+        public override INode CreateTextNode(string content) => throw new NotImplementedException();
+
+        public override IList<INode> ParseAsNodes(string markup) => throw new NotImplementedException();
 
         public override void AddCommentToBeginningOfDocument(string commentText) { }
 

@@ -69,7 +69,7 @@ namespace ZptSharp.Tal
             Mock.Get(attribute).SetupGet(x => x.Value).Returns(expression);
             Mock.Get(evaluator)
                 .Setup(x => x.EvaluateExpressionAsync(expression, context, CancellationToken.None))
-                .Returns(() => Task.FromResult(new DomValueExpressionResult(Enumerable.Empty<INode>(), abortAction: true)));
+                .Returns(() => Task.FromResult(new DomValueExpressionResult(abortAction: true)));
 
             Assert.That(() => sut.ProcessContextAsync(context).Result,
                         Is.InstanceOf<ExpressionContextProcessingResult>()
