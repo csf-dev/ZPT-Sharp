@@ -36,7 +36,7 @@ namespace ZptSharp.Tal
                 .Setup(x => x.EvaluateExpressionAsync(attribute.Value, context, CancellationToken.None))
                 .Returns(() => Task.FromResult(expressionResult));
             Mock.Get(resultInterpreter)
-                .Setup(x => x.DoesResultCancelTheAction(expressionResult))
+                .Setup(x => x.DoesResultAbortTheAction(expressionResult))
                 .Returns(false);
             Mock.Get(resultInterpreter)
                 .Setup(x => x.CoerceResultToBoolean(expressionResult))
@@ -74,7 +74,7 @@ namespace ZptSharp.Tal
                 .Setup(x => x.EvaluateExpressionAsync(attribute.Value, context, CancellationToken.None))
                 .Returns(() => Task.FromResult(expressionResult));
             Mock.Get(resultInterpreter)
-                .Setup(x => x.DoesResultCancelTheAction(expressionResult))
+                .Setup(x => x.DoesResultAbortTheAction(expressionResult))
                 .Returns(false);
             Mock.Get(resultInterpreter)
                 .Setup(x => x.CoerceResultToBoolean(expressionResult))
@@ -112,7 +112,7 @@ namespace ZptSharp.Tal
                 .Setup(x => x.EvaluateExpressionAsync(attribute.Value, context, CancellationToken.None))
                 .Returns(() => Task.FromResult(expressionResult));
             Mock.Get(resultInterpreter)
-                .Setup(x => x.DoesResultCancelTheAction(expressionResult))
+                .Setup(x => x.DoesResultAbortTheAction(expressionResult))
                 .Returns(false);
             Mock.Get(resultInterpreter)
                 .Setup(x => x.CoerceResultToBoolean(expressionResult))
@@ -150,7 +150,7 @@ namespace ZptSharp.Tal
                 .Setup(x => x.EvaluateExpressionAsync(attribute.Value, context, CancellationToken.None))
                 .Returns(() => Task.FromResult(expressionResult));
             Mock.Get(resultInterpreter)
-                .Setup(x => x.DoesResultCancelTheAction(expressionResult))
+                .Setup(x => x.DoesResultAbortTheAction(expressionResult))
                 .Returns(true);
             Mock.Get(resultInterpreter)
                 .Setup(x => x.CoerceResultToBoolean(expressionResult))
@@ -188,7 +188,7 @@ namespace ZptSharp.Tal
                 .Setup(x => x.EvaluateExpressionAsync(attribute.Value, context, CancellationToken.None))
                 .Returns(() => Task.FromResult(expressionResult));
             Mock.Get(resultInterpreter)
-                .Setup(x => x.DoesResultCancelTheAction(expressionResult))
+                .Setup(x => x.DoesResultAbortTheAction(expressionResult))
                 .Returns(false);
             Mock.Get(resultInterpreter)
                 .Setup(x => x.CoerceResultToBoolean(expressionResult))

@@ -12,7 +12,7 @@ namespace ZptSharp.Tal
         /// </summary>
         /// <returns><c>true</c> if the result cancels the action; otherwise, <c>false</c>.</returns>
         /// <param name="expressionResult">Expression result.</param>
-        bool DoesResultCancelTheAction(object expressionResult);
+        bool DoesResultAbortTheAction(object expressionResult);
 
         /// <summary>
         /// Gets a value which is the boolean representation of the specified result,

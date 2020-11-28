@@ -178,5 +178,17 @@ namespace ZptSharp.Resources {
                 return ResourceManager.GetString("TalDefineAttributeMustBeWellFormed", resourceCulture);
             }
         }
+        
+        internal static string ErrorWhilstHandlingError {
+            get {
+                return ResourceManager.GetString("ErrorWhilstHandlingError", resourceCulture);
+            }
+        }
+        
+        internal static string MustNotBeRootElement {
+            get {
+                return ResourceManager.GetString("MustNotBeRootElement", resourceCulture);
+            }
+        }
     }
 }

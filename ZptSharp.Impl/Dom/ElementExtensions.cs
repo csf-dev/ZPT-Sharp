@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace ZptSharp.Dom
@@ -23,21 +24,62 @@ namespace ZptSharp.Dom
         }
 
         /// <summary>
-        /// Replaces the <paramref name="element"/> 'in-place' on its parent using the <paramref name="replacement"/>.
-        /// Note that this means that the current element will be detached/removed from its parent as a side-effect.
-        /// Further DOM manipulation should occur using the replacement element and not the replaced element.
+        /// <para>
+        /// Adds the specified <paramref name="nodesToAdd"/> to the specified <paramref name="element"/>.
+        /// </para>
+        /// <para>
+        /// By default, the nodes to add are appended to the end of the element's children.
+        /// In an <paramref name="insertIndex"/> is specified, though, the nodes to add are inserted into
+        /// element's children at the specified (zero-based) index position.
+        /// </para>
         /// </summary>
-        /// <param name="element">Element.</param>
-        /// <param name="replacement">Replacement.</param>
-        public static void ReplaceWith(this INode element, INode replacement)
+        /// <param name="element">The element to which the new children should be added.</param>
+        /// <param name="nodesToAdd">Nodes to add.</param>
+        /// <param name="insertIndex">If specified and non-null then the nodes to add are inserted into the
+        /// element's children at this index.  Otherwise the nodes to add are appended to the end of
+        /// element's children.</param>
+        public static void AddChildren(this INode element, IEnumerable<INode> nodesToAdd, int? insertIndex = null)
+            => AddChildren(element, nodesToAdd.ToList(), insertIndex);
+
+        /// <summary>
+        /// <para>
+        /// Adds the specified <paramref name="nodesToAdd"/> to the specified <paramref name="element"/>.
+        /// </para>
+        /// <para>
+        /// By default, the nodes to add are appended to the end of the element's children.
+        /// In an <paramref name="insertIndex"/> is specified, though, the nodes to add are inserted into
+        /// element's children at the specified (zero-based) index position.
+        /// </para>
+        /// </summary>
+        /// <param name="element">The element to which the new children should be added.</param>
+        /// <param name="nodesToAdd">Nodes to add.</param>
+        /// <param name="insertIndex">If specified and non-null then the nodes to add are inserted into the
+        /// element's children at this index.  Otherwise the nodes to add are appended to the end of
+        /// element's children.</param>
+        public static void AddChildren(this INode element, IList<INode> nodesToAdd, int? insertIndex = null)
         {
             if (element == null)
                 throw new ArgumentNullException(nameof(element));
-            if (element.ParentElement == null)
-                throw new ArgumentException(Resources.ExceptionMessage.ElementMustHaveAParent, nameof(element));
+            if (nodesToAdd == null)
+                throw new ArgumentNullException(nameof(nodesToAdd));
 
-            replacement.PreReplacementSourceInfo = element.SourceInfo;
-            element.ParentElement.ReplaceChild(element, replacement);
+            var targetIndex = insertIndex ?? element.ChildNodes.Count;
+
+            // By inserting in reverse order, using the same index, the nodes to add
+            // will remain in their original order.
+            var reversedNodesToAdd = GetReversedCollectionOfNodes(nodesToAdd);
+            foreach (var node in reversedNodesToAdd)
+                element.ChildNodes.Insert(targetIndex, node);
+        }
+
+        static IList<INode> GetReversedCollectionOfNodes(IList<INode> nodes)
+        {
+            if (nodes == null)
+                throw new ArgumentNullException(nameof(nodes));
+
+            var list = new List<INode>(nodes);
+            list.Reverse();
+            return list;
         }
 
         /// <summary>

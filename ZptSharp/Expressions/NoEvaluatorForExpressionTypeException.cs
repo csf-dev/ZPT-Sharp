@@ -6,7 +6,7 @@ namespace ZptSharp.Expressions
     /// appropriate evaluator for an expression type.
     /// </summary>
     [System.Serializable]
-    public class NoEvaluatorForExpressionTypeException : Exception
+    public class NoEvaluatorForExpressionTypeException : ZptRenderingException
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="T:NoEvaluatorForExpressionTypeException"/> class

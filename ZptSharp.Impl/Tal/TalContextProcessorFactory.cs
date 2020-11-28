@@ -24,6 +24,8 @@ namespace ZptSharp.Tal
         readonly IEvaluatesExpression evaluator;
         readonly IInterpretsExpressionResult resultInterpreter;
         readonly IGetsVariableDefinitionsFromAttributeValue definitionProvider;
+        readonly IEvaluatesDomValueExpression domEvaluator;
+        private readonly Microsoft.Extensions.Logging.ILogger<OnErrorAttributeDecorator> onErrorlogger;
 
         /// <summary>
         /// Gets the TAL context processor.
@@ -47,7 +49,7 @@ namespace ZptSharp.Tal
             => new NoOpTalContextProcessor();
 
         IProcessesExpressionContext GetOnErrorDecorator(IProcessesExpressionContext service)
-            => new OnErrorAttributeDecorator(service, specProvider);
+            => new OnErrorAttributeDecorator(service, specProvider, domEvaluator, onErrorlogger);
 
         IProcessesExpressionContext GetOmitTagDecorator(IProcessesExpressionContext service)
             => new OmitTagAttributeDecorator(service, specProvider);
@@ -70,12 +72,16 @@ namespace ZptSharp.Tal
         public TalContextProcessorFactory(IGetsTalAttributeSpecs specProvider,
                                           IEvaluatesExpression evaluator,
                                           IInterpretsExpressionResult resultInterpreter,
-                                          IGetsVariableDefinitionsFromAttributeValue definitionProvider)
+                                          IGetsVariableDefinitionsFromAttributeValue definitionProvider,
+                                          IEvaluatesDomValueExpression domEvaluator,
+                                          Microsoft.Extensions.Logging.ILogger<OnErrorAttributeDecorator> onErrorlogger)
         {
             this.specProvider = specProvider ?? throw new System.ArgumentNullException(nameof(specProvider));
             this.evaluator = evaluator ?? throw new System.ArgumentNullException(nameof(evaluator));
             this.resultInterpreter = resultInterpreter ?? throw new System.ArgumentNullException(nameof(resultInterpreter));
             this.definitionProvider = definitionProvider ?? throw new System.ArgumentNullException(nameof(definitionProvider));
+            this.domEvaluator = domEvaluator ?? throw new System.ArgumentNullException(nameof(domEvaluator));
+            this.onErrorlogger = onErrorlogger ?? throw new System.ArgumentNullException(nameof(onErrorlogger));
         }
     }
 }

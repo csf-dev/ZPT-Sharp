@@ -5,7 +5,7 @@ namespace ZptSharp.Tal
     /// Thrown when a TAL define-variable operation fails due to a failure when evaluating the variable value expression.
     /// </summary>
     [Serializable]
-    public class DefineVariableEvaluationException : Exception
+    public class DefineVariableEvaluationException : ZptRenderingException
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="T:DefineVariableException"/> class

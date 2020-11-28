@@ -10,25 +10,25 @@ namespace ZptSharp.Tal
         [Test, AutoMoqData]
         public void DoesResultCancelTheAction_returns_true_when_result_is_action_cancelling_token(TalExpressionResultInterpreter sut)
         {
-            Assert.That(() => sut.DoesResultCancelTheAction(AbortZptActionToken.Instance), Is.True);
+            Assert.That(() => sut.DoesResultAbortTheAction(AbortZptActionToken.Instance), Is.True);
         }
 
         [Test, AutoMoqData]
         public void DoesResultCancelTheAction_returns_true_when_result_is_new_action_cancelling_token(TalExpressionResultInterpreter sut)
         {
-            Assert.That(() => sut.DoesResultCancelTheAction(new AbortZptActionToken()), Is.True);
+            Assert.That(() => sut.DoesResultAbortTheAction(new AbortZptActionToken()), Is.True);
         }
 
         [Test, AutoMoqData]
         public void DoesResultCancelTheAction_returns_false_when_result_is_another_object(TalExpressionResultInterpreter sut, object result)
         {
-            Assert.That(() => sut.DoesResultCancelTheAction(result), Is.False);
+            Assert.That(() => sut.DoesResultAbortTheAction(result), Is.False);
         }
 
         [Test, AutoMoqData]
         public void DoesResultCancelTheAction_returns_false_when_result_is_null(TalExpressionResultInterpreter sut)
         {
-            Assert.That(() => sut.DoesResultCancelTheAction(null), Is.False);
+            Assert.That(() => sut.DoesResultAbortTheAction(null), Is.False);
         }
 
         [Test, AutoMoqData]

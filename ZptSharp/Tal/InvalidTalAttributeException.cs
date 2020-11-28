@@ -5,7 +5,7 @@ namespace ZptSharp.Tal
     /// Thrown when a TAL attribute value is improperly-formed or otherwise invalid.
     /// </summary>
     [Serializable]
-    public class InvalidTalAttributeException : Exception
+    public class InvalidTalAttributeException : ZptRenderingException
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="InvalidTalAttributeException"/> class

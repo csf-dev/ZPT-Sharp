@@ -15,7 +15,8 @@ namespace ZptSharp.Rendering
     {
         [Test, AutoMoqData]
         public async Task ProcessContextAsync_removes_entire_element_if_it_is_in_metal_namespace([Frozen] IGetsWellKnownNamespace namespaceProvider,
-                                                                                                 [MockLogger] ILogger logger,
+                                                                                                 [MockLogger, Frozen] ILogger<ZptCleanupContextProcessor> logger,
+                                                                                                 [Frozen] IOmitsNode omitter,
                                                                                                  ZptCleanupContextProcessor sut,
                                                                                                  ExpressionContext context,
                                                                                                  INode node,
@@ -27,12 +28,13 @@ namespace ZptSharp.Rendering
 
             await sut.ProcessContextAsync(context);
 
-            Mock.Get(node).Verify(x => x.Omit(), Times.Once);
+            Mock.Get(omitter).Verify(x => x.Omit(node), Times.Once);
         }
 
         [Test, AutoMoqData]
         public async Task ProcessContextAsync_removes_entire_element_if_it_is_in_tal_namespace([Frozen] IGetsWellKnownNamespace namespaceProvider,
-                                                                                               [MockLogger] ILogger logger,
+                                                                                               [MockLogger, Frozen] ILogger<ZptCleanupContextProcessor> logger,
+                                                                                               [Frozen] IOmitsNode omitter,
                                                                                                ZptCleanupContextProcessor sut,
                                                                                                ExpressionContext context,
                                                                                                INode node,
@@ -44,12 +46,13 @@ namespace ZptSharp.Rendering
 
             await sut.ProcessContextAsync(context);
 
-            Mock.Get(node).Verify(x => x.Omit(), Times.Once);
+            Mock.Get(omitter).Verify(x => x.Omit(node), Times.Once);
         }
 
         [Test, AutoMoqData]
         public async Task ProcessContextAsync_does_not_remove_element_if_it_is_not_in_tal_or_metal_namespaces([Frozen] IGetsWellKnownNamespace namespaceProvider,
-                                                                                                              [MockLogger] ILogger logger,
+                                                                                                              [MockLogger, Frozen] ILogger<ZptCleanupContextProcessor> logger,
+                                                                                                              [Frozen] IOmitsNode omitter,
                                                                                                               ZptCleanupContextProcessor sut,
                                                                                                               ExpressionContext context,
                                                                                                               INode node,
@@ -64,12 +67,12 @@ namespace ZptSharp.Rendering
 
             await sut.ProcessContextAsync(context);
 
-            Mock.Get(node).Verify(x => x.Omit(), Times.Never);
+            Mock.Get(omitter).Verify(x => x.Omit(node), Times.Never);
         }
 
         [Test, AutoMoqData]
         public async Task ProcessContextAsync_removes_an_attribute_if_it_is_in_the_metal_namespace([Frozen] IGetsWellKnownNamespace namespaceProvider,
-                                                                                                   [MockLogger] ILogger logger,
+                                                                                                   [MockLogger, Frozen] ILogger<ZptCleanupContextProcessor> logger,
                                                                                                    ZptCleanupContextProcessor sut,
                                                                                                    ExpressionContext context,
                                                                                                    [StubDom] INode node,
@@ -92,7 +95,7 @@ namespace ZptSharp.Rendering
 
         [Test, AutoMoqData]
         public async Task ProcessContextAsync_removes_an_attribute_if_it_is_in_the_tal_namespace([Frozen] IGetsWellKnownNamespace namespaceProvider,
-                                                                                                 [MockLogger] ILogger logger,
+                                                                                                 [MockLogger, Frozen] ILogger<ZptCleanupContextProcessor> logger,
                                                                                                  ZptCleanupContextProcessor sut,
                                                                                                  ExpressionContext context,
                                                                                                  [StubDom] INode node,
@@ -115,7 +118,7 @@ namespace ZptSharp.Rendering
 
         [Test, AutoMoqData]
         public async Task ProcessContextAsync_removes_an_attribute_if_it_is_not_in_either_tal_or_metal_namespaces([Frozen] IGetsWellKnownNamespace namespaceProvider,
-                                                                                                                  [MockLogger] ILogger logger,
+                                                                                                                  [MockLogger, Frozen] ILogger<ZptCleanupContextProcessor> logger,
                                                                                                                   ZptCleanupContextProcessor sut,
                                                                                                                   ExpressionContext context,
                                                                                                                   [StubDom] INode node,

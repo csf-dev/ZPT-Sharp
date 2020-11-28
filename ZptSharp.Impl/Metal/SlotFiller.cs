@@ -13,6 +13,7 @@ namespace ZptSharp.Metal
     {
         readonly ILogger logger;
         readonly IGetsMetalAttributeSpecs specProvider;
+        readonly IReplacesNode replacer;
 
         /// <summary>
         /// Fills any of the <paramref name="definedSlots"/> using matching slot-fillers
@@ -48,7 +49,7 @@ Filler:{filler}",
                                 filler.Element);
 
             var fillingElement = filler.Element.GetCopy();
-            definedSlot.Element.ReplaceWith(fillingElement);
+            replacer.Replace(definedSlot.Element, fillingElement);
             macroContext.SlotFillers.Remove(definedSlot.Name);
             RemoveFillSlotAttributeFromFiller(fillingElement);
         }
@@ -70,11 +71,14 @@ Filler:{filler}",
         /// </summary>
         /// <param name="logger">A logger.</param>
         /// <param name="specProvider">Attribute spec provider.</param>
+        /// <param name="replacer">A node replacer.</param>
         public SlotFiller(ILogger<SlotFiller> logger,
-                          IGetsMetalAttributeSpecs specProvider)
+                          IGetsMetalAttributeSpecs specProvider,
+                          IReplacesNode replacer)
         {
             this.logger = logger ?? throw new ArgumentNullException(nameof(logger));
             this.specProvider = specProvider ?? throw new ArgumentNullException(nameof(specProvider));
+            this.replacer = replacer ?? throw new ArgumentNullException(nameof(replacer));
         }
     }
 }

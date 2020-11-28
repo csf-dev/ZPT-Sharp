@@ -104,49 +104,6 @@ namespace ZptSharp.Dom
         /// <returns><c>true</c>, if the element is in the specified namespace, <c>false</c> otherwise.</returns>
         /// <param name="namespace">A namespace.</param>
         public abstract bool IsInNamespace(Namespace @namespace);
-
-        /// <summary>
-        /// Replaces the specified child element (the <paramref name="toReplace"/> parameter)
-        /// using the specified <paramref name="replacement"/> element.
-        /// Note that this means that the current element will be detached/removed from its parent as a side-effect.
-        /// Further DOM manipulation should occur using the replacement element and not the replaced element.
-        /// </summary>
-        /// <param name="toReplace">The child element to replace.</param>
-        /// <param name="replacement">The replacement element.</param>
-        public virtual void ReplaceChild(INode toReplace, INode replacement)
-        {
-            if (toReplace == null)
-                throw new ArgumentNullException(nameof(toReplace));
-            if (replacement == null)
-                throw new ArgumentNullException(nameof(replacement));
-            if (!ChildNodes.Contains(toReplace))
-                throw new ArgumentException(Resources.CoreExceptionMessage.ElementMustBeAChildOfThisParent, nameof(toReplace));
-
-            var index = ChildNodes.IndexOf(toReplace);
-            ChildNodes.Insert(index, replacement);
-            ChildNodes.Remove(toReplace);
-        }
-
-        /// <summary>
-        /// Removes the current element from the DOM but preserves all of its children.
-        /// Essentially this replaces the current element (on its parent) with the element's children.
-        /// </summary>
-        public virtual void Omit()
-        {
-            var parent = ParentElement;
-            if (parent == null)
-                throw new InvalidOperationException(Resources.CoreExceptionMessage.MustNotBeRootElement);
-
-            var indexOnParent = parent.ChildNodes.IndexOf(this);
-
-            var children = new List<INode>(ChildNodes);
-            parent.ChildNodes.Remove(this);
-
-            // Insert the children to the parent, at the same index, in reverse order
-            children.Reverse();
-            foreach (var child in children)
-                parent.ChildNodes.Insert(indexOnParent, child);
-        }
             
         IDocumentSourceInfo IHasDocumentSourceInfo.SourceInfo => SourceInfo.Document;
 

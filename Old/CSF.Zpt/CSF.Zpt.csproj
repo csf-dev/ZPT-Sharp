@@ -66,11 +66,8 @@
     <Compile Include="Tal\IAttributeHandler.cs" />
     <Compile Include="Tal\AttributesAttributeHandler.cs" />
     <Compile Include="Tal\RepeatAttributeHandler.cs" />
-    <Compile Include="Tal\OnErrorAttributeHandler.cs" />
     <Compile Include="Tal\OmitTagAttributeHandler.cs" />
-    <Compile Include="Tal\DefineAttributeHandler.cs" />
     <Compile Include="Tal\ContentOrReplaceAttributeHandler.cs" />
-    <Compile Include="Tal\ConditionAttributeHandler.cs" />
     <Compile Include="Tal\AttributeHandlingResult.cs" />
     <Compile Include="Tales\TalesModel.cs" />
     <Compile Include="Tales\ExpressionEvaluatorBase.cs" />

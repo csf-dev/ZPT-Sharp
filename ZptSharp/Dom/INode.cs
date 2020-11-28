@@ -62,22 +62,6 @@ namespace ZptSharp.Dom
         bool IsImported { get; }
 
         /// <summary>
-        /// Replaces the specified child element (the <paramref name="toReplace"/> parameter)
-        /// using the specified <paramref name="replacement"/> element.
-        /// Note that this means that the current element will be detached/removed from its parent as a side-effect.
-        /// Further DOM manipulation should occur using the replacement element and not the replaced element.
-        /// </summary>
-        /// <param name="toReplace">The child element to replace.</param>
-        /// <param name="replacement">The replacement element.</param>
-        void ReplaceChild(INode toReplace, INode replacement);
-
-        /// <summary>
-        /// Removes the current element from the DOM but preserves all of its children.
-        /// Essentially this replaces the current element (on its parent) with the element's children.
-        /// </summary>
-        void Omit();
-
-        /// <summary>
         /// Gets a value which indicates whether or not the current element is in the specified namespace.
         /// </summary>
         /// <returns><c>true</c>, if the element is in the specified namespace, <c>false</c> otherwise.</returns>

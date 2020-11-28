@@ -53,7 +53,7 @@ namespace ZptSharp.Tal
                 var result = await EvaluateDefinitionExpression(definition, context, token);
 
                 // If the result cancels the action then we ignore this partiaular definition
-                if (resultInterpreter.DoesResultCancelTheAction(result)) continue;
+                if (resultInterpreter.DoesResultAbortTheAction(result)) continue;
 
                 var scope = definition.IsGlobal ? context.GlobalDefinitions : context.LocalDefinitions;
                 scope[definition.VariableName] = result;

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using AutoFixture.NUnit3;
@@ -38,7 +39,7 @@ namespace ZptSharp.Tal
                 .Setup(x => x.EvaluateExpressionAsync(definition.Expression, context, CancellationToken.None))
                 .Returns(() => Task.FromResult(expressionResult));
             Mock.Get(resultInterpreter)
-                .Setup(x => x.DoesResultCancelTheAction(expressionResult))
+                .Setup(x => x.DoesResultAbortTheAction(expressionResult))
                 .Returns(false);
             Mock.Get(definitionProvider)
                 .Setup(x => x.GetDefinitions(attribute.Value))
@@ -76,7 +77,7 @@ namespace ZptSharp.Tal
                 .Setup(x => x.EvaluateExpressionAsync(definition.Expression, context, CancellationToken.None))
                 .Returns(() => Task.FromResult(expressionResult));
             Mock.Get(resultInterpreter)
-                .Setup(x => x.DoesResultCancelTheAction(expressionResult))
+                .Setup(x => x.DoesResultAbortTheAction(expressionResult))
                 .Returns(false);
             Mock.Get(definitionProvider)
                 .Setup(x => x.GetDefinitions(attribute.Value))
@@ -119,7 +120,7 @@ namespace ZptSharp.Tal
                 .Setup(x => x.EvaluateExpressionAsync(definition2.Expression, context, CancellationToken.None))
                 .Returns(() => Task.FromResult(expressionResult2));
             Mock.Get(resultInterpreter)
-                .Setup(x => x.DoesResultCancelTheAction(expressionResult1))
+                .Setup(x => x.DoesResultAbortTheAction(expressionResult1))
                 .Returns(false);
             Mock.Get(definitionProvider)
                 .Setup(x => x.GetDefinitions(attribute.Value))
@@ -160,7 +161,7 @@ namespace ZptSharp.Tal
                 .Setup(x => x.EvaluateExpressionAsync(definition.Expression, context, CancellationToken.None))
                 .Returns(() => Task.FromResult(expressionResult));
             Mock.Get(resultInterpreter)
-                .Setup(x => x.DoesResultCancelTheAction(expressionResult))
+                .Setup(x => x.DoesResultAbortTheAction(expressionResult))
                 .Returns(false);
             Mock.Get(definitionProvider)
                 .Setup(x => x.GetDefinitions(attribute.Value))
@@ -173,6 +174,134 @@ namespace ZptSharp.Tal
             await sut.ProcessContextAsync(context);
 
             Assert.That(context.LocalDefinitions.ContainsKey(definition.VariableName), Is.False);
+        }
+
+        [Test, AutoMoqData]
+        public async Task ProcessContextAsync_doesnt_add_to_context_if_no_definitions_found_by_service([Frozen] IProcessesExpressionContext wrapped,
+                                                                                                       [Frozen] IGetsTalAttributeSpecs specProvider,
+                                                                                                       [Frozen] IEvaluatesExpression evaluator,
+                                                                                                       [Frozen] IInterpretsExpressionResult resultInterpreter,
+                                                                                                       [Frozen] IGetsVariableDefinitionsFromAttributeValue definitionProvider,
+                                                                                                       DefineAttributeDecorator sut,
+                                                                                                       AttributeSpec spec,
+                                                                                                       [StubDom] ExpressionContext context,
+                                                                                                       [StubDom] IAttribute attribute,
+                                                                                                       object expressionResult)
+        {
+            Mock.Get(wrapped)
+                .Setup(x => x.ProcessContextAsync(context, CancellationToken.None))
+                .Returns(() => Task.FromResult(ExpressionContextProcessingResult.Noop));
+            Mock.Get(specProvider)
+                .SetupGet(x => x.Define)
+                .Returns(spec);
+            Mock.Get(definitionProvider)
+                .Setup(x => x.GetDefinitions(attribute.Value))
+                .Returns(() => Enumerable.Empty<VariableDefinition>());
+            Mock.Get(attribute).Setup(x => x.Matches(spec)).Returns(true);
+            context.CurrentElement.Attributes.Clear();
+            context.CurrentElement.Attributes.Add(attribute);
+            context.LocalDefinitions.Clear();
+
+            await sut.ProcessContextAsync(context);
+
+            Assert.That(context.LocalDefinitions, Is.Empty);
+        }
+
+        [Test, AutoMoqData]
+        public async Task ProcessContextAsync_doesnt_add_to_context_if_definition_aborts_action([Frozen] IProcessesExpressionContext wrapped,
+                                                                                                [Frozen] IGetsTalAttributeSpecs specProvider,
+                                                                                                [Frozen] IEvaluatesExpression evaluator,
+                                                                                                [Frozen] IInterpretsExpressionResult resultInterpreter,
+                                                                                                [Frozen] IGetsVariableDefinitionsFromAttributeValue definitionProvider,
+                                                                                                DefineAttributeDecorator sut,
+                                                                                                AttributeSpec spec,
+                                                                                                [StubDom] ExpressionContext context,
+                                                                                                [StubDom] IAttribute attribute,
+                                                                                                object expressionResult,
+                                                                                                VariableDefinition definition)
+        {
+            Mock.Get(wrapped)
+                .Setup(x => x.ProcessContextAsync(context, CancellationToken.None))
+                .Returns(() => Task.FromResult(ExpressionContextProcessingResult.Noop));
+            Mock.Get(specProvider)
+                .SetupGet(x => x.Define)
+                .Returns(spec);
+            Mock.Get(evaluator)
+                .Setup(x => x.EvaluateExpressionAsync(definition.Expression, context, CancellationToken.None))
+                .Returns(() => Task.FromResult(expressionResult));
+            Mock.Get(resultInterpreter)
+                .Setup(x => x.DoesResultAbortTheAction(expressionResult))
+                .Returns(true);
+            Mock.Get(definitionProvider)
+                .Setup(x => x.GetDefinitions(attribute.Value))
+                .Returns(() => new[] { definition });
+            Mock.Get(attribute).Setup(x => x.Matches(spec)).Returns(true);
+            context.CurrentElement.Attributes.Clear();
+            context.CurrentElement.Attributes.Add(attribute);
+            definition.Scope = VariableDefinition.LocalScope;
+            context.LocalDefinitions.Clear();
+
+            await sut.ProcessContextAsync(context);
+
+            Assert.That(context.LocalDefinitions, Is.Empty);
+        }
+
+        [Test, AutoMoqData]
+        public void ProcessContextAsync_throws_if_definition_provider_throws_format_exception([Frozen] IProcessesExpressionContext wrapped,
+                                                                                              [Frozen] IGetsTalAttributeSpecs specProvider,
+                                                                                              [Frozen] IGetsVariableDefinitionsFromAttributeValue definitionProvider,
+                                                                                              DefineAttributeDecorator sut,
+                                                                                              AttributeSpec spec,
+                                                                                              [StubDom] ExpressionContext context,
+                                                                                              [StubDom] IAttribute attribute)
+        {
+            Mock.Get(wrapped)
+                .Setup(x => x.ProcessContextAsync(context, CancellationToken.None))
+                .Returns(() => Task.FromResult(ExpressionContextProcessingResult.Noop));
+            Mock.Get(specProvider)
+                .SetupGet(x => x.Define)
+                .Returns(spec);
+            Mock.Get(definitionProvider)
+                .Setup(x => x.GetDefinitions(attribute.Value))
+                .Throws<FormatException>();
+            Mock.Get(attribute).Setup(x => x.Matches(spec)).Returns(true);
+            context.CurrentElement.Attributes.Clear();
+            context.CurrentElement.Attributes.Add(attribute);
+
+            Assert.That(() => sut.ProcessContextAsync(context).Result,
+                        Throws.Exception.With.InnerException.InstanceOf<InvalidTalAttributeException>());
+        }
+
+        [Test, AutoMoqData]
+        public void ProcessContextAsync_throws_if_evaluator_throws_an_exception([Frozen] IProcessesExpressionContext wrapped,
+                                                                                [Frozen] IGetsTalAttributeSpecs specProvider,
+                                                                                [Frozen] IEvaluatesExpression evaluator,
+                                                                                [Frozen] IGetsVariableDefinitionsFromAttributeValue definitionProvider,
+                                                                                DefineAttributeDecorator sut,
+                                                                                AttributeSpec spec,
+                                                                                [StubDom] ExpressionContext context,
+                                                                                [StubDom] IAttribute attribute,
+                                                                                VariableDefinition definition)
+        {
+            Mock.Get(wrapped)
+                .Setup(x => x.ProcessContextAsync(context, CancellationToken.None))
+                .Returns(() => Task.FromResult(ExpressionContextProcessingResult.Noop));
+            Mock.Get(specProvider)
+                .SetupGet(x => x.Define)
+                .Returns(spec);
+            Mock.Get(evaluator)
+                .Setup(x => x.EvaluateExpressionAsync(definition.Expression, context, CancellationToken.None))
+                .Throws<AggregateException>();
+            Mock.Get(definitionProvider)
+                .Setup(x => x.GetDefinitions(attribute.Value))
+                .Returns(() => new[] { definition });
+            Mock.Get(attribute).Setup(x => x.Matches(spec)).Returns(true);
+            context.CurrentElement.Attributes.Clear();
+            context.CurrentElement.Attributes.Add(attribute);
+            definition.Scope = VariableDefinition.LocalScope;
+
+            Assert.That(() => sut.ProcessContextAsync(context).Result,
+                        Throws.Exception.With.InnerException.InstanceOf<DefineVariableEvaluationException>());
         }
 
     }

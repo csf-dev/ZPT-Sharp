@@ -23,21 +23,9 @@
     <Folder Include="Metal\" />
     <Folder Include="Tal\" />
     <Folder Include="SourceAnnotation\" />
-    <Folder Include="Resources\" />
   </ItemGroup>
     
   <ItemGroup>
     <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" Version="1.0.0" PrivateAssets="All" Condition="'$(TargetFramework)' == 'net461'" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Update="Resources\CoreExceptionMessage.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>CoreExceptionMessage.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Update="Resources\CoreExceptionMessage.Designer.cs">
-      <DependentUpon>CoreExceptionMessage.resx</DependentUpon>
-    </Compile>
   </ItemGroup>
 </Project>

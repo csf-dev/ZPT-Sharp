@@ -15,6 +15,7 @@ namespace ZptSharp.Metal
         readonly IExpandsMacro macroExpander;
         readonly ISearchesForAttributes attributeFinder;
         readonly Microsoft.Extensions.Logging.ILogger<MacroUsageContextProcessor> logger;
+        readonly IReplacesNode replacer;
 
         /// <summary>
         /// Gets the METAL context processor.
@@ -28,7 +29,7 @@ namespace ZptSharp.Metal
         }
 
         IProcessesExpressionContext GetMacroUsageContextProcessor()
-            => new MacroUsageContextProcessor(specProvider, macroProvider, macroExpander, logger);
+            => new MacroUsageContextProcessor(specProvider, macroProvider, macroExpander, logger, replacer);
 
         IProcessesExpressionContext GetMacroAddingDecorator(IProcessesExpressionContext service)
             => new AddDefinedMacroToGlobalScopeProcessorDecorator(specProvider, service, attributeFinder);
@@ -45,13 +46,15 @@ namespace ZptSharp.Metal
                                             IGetsMacro macroProvider,
                                             IExpandsMacro macroExpander,
                                             ISearchesForAttributes attributeFinder,
-                                            Microsoft.Extensions.Logging.ILogger<MacroUsageContextProcessor> logger)
+                                            Microsoft.Extensions.Logging.ILogger<MacroUsageContextProcessor> logger,
+                                            IReplacesNode replacer)
         {
             this.specProvider = specProvider ?? throw new ArgumentNullException(nameof(specProvider));
             this.macroProvider = macroProvider ?? throw new ArgumentNullException(nameof(macroProvider));
             this.macroExpander = macroExpander ?? throw new ArgumentNullException(nameof(macroExpander));
             this.attributeFinder = attributeFinder ?? throw new ArgumentNullException(nameof(attributeFinder));
             this.logger = logger ?? throw new ArgumentNullException(nameof(logger));
+            this.replacer = replacer ?? throw new ArgumentNullException(nameof(replacer));
         }
     }
 }

@@ -6,7 +6,7 @@ namespace ZptSharp.Expressions
     /// with an expression type that is already registered.
     /// </summary>
     [System.Serializable]
-    public class EvaluatorAlreadyRegisteredException : Exception
+    public class EvaluatorAlreadyRegisteredException : ZptRenderingException
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="T:EvaluatorAlreadyRegisteredException"/> class

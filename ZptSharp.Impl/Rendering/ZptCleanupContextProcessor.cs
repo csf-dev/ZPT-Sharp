@@ -18,6 +18,7 @@ namespace ZptSharp.Rendering
     {
         readonly IGetsWellKnownNamespace namespaceProvider;
         readonly ILogger logger;
+        readonly IOmitsNode omitter;
 
         /// <summary>
         /// Processes the context using the rules defined within this object.
@@ -32,7 +33,7 @@ namespace ZptSharp.Rendering
                 if(logger.IsEnabled(LogLevel.Trace))
                     logger.LogTrace($"Removing {{element}}",
                                     context.CurrentElement);
-                context.CurrentElement.Omit();
+                omitter.Omit(context.CurrentElement);
                 return Task.FromResult(ExpressionContextProcessingResult.Noop);
             }
 
@@ -70,10 +71,12 @@ namespace ZptSharp.Rendering
         /// <param name="namespaceProvider">Namespace provider.</param>
         /// <param name="logger">A logger.</param>
         public ZptCleanupContextProcessor(IGetsWellKnownNamespace namespaceProvider,
-                                          ILogger<ZptCleanupContextProcessor> logger)
+                                          ILogger<ZptCleanupContextProcessor> logger,
+                                          IOmitsNode omitter)
         {
             this.namespaceProvider = namespaceProvider ?? throw new ArgumentNullException(nameof(namespaceProvider));
             this.logger = logger ?? throw new ArgumentNullException(nameof(logger));
+            this.omitter = omitter ?? throw new ArgumentNullException(nameof(omitter));
         }
     }
 }

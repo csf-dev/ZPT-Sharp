@@ -27,7 +27,7 @@ namespace ZptSharp.Tal
         /// </summary>
         /// <returns><c>true</c> if the result cancels the action; otherwise, <c>false</c>.</returns>
         /// <param name="expressionResult">Expression result.</param>
-        public bool DoesResultCancelTheAction(object expressionResult)
+        public bool DoesResultAbortTheAction(object expressionResult)
             => Equals(expressionResult, AbortZptActionToken.Instance);
 
         static object GetDefaultOfType(object value)

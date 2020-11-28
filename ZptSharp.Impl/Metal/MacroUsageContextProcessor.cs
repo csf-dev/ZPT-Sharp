@@ -29,6 +29,7 @@ namespace ZptSharp.Metal
         readonly IGetsMacro macroProvider;
         readonly IExpandsMacro macroExpander;
         readonly ILogger logger;
+        readonly IReplacesNode replacer;
 
         /// <summary>
         /// Processes the context using the rules defined within this object.
@@ -68,7 +69,7 @@ Using element:{macro_user} ({macro_user_source})",
                                 context.CurrentElement.SourceInfo);
 
             var replacement = expandedMacro.Element;
-            context.CurrentElement.ReplaceWith(replacement);
+            replacer.Replace(context.CurrentElement, replacement);
             context.CurrentElement = replacement;
         }
 
@@ -82,12 +83,14 @@ Using element:{macro_user} ({macro_user_source})",
         public MacroUsageContextProcessor(IGetsMetalAttributeSpecs specProvider,
                                           IGetsMacro macroProvider,
                                           IExpandsMacro macroExpander,
-                                          ILogger<MacroUsageContextProcessor> logger)
+                                          ILogger<MacroUsageContextProcessor> logger,
+                                          IReplacesNode replacer)
         {
             this.specProvider = specProvider ?? throw new ArgumentNullException(nameof(specProvider));
             this.macroProvider = macroProvider ?? throw new ArgumentNullException(nameof(macroProvider));
             this.macroExpander = macroExpander ?? throw new ArgumentNullException(nameof(macroExpander));
             this.logger = logger ?? throw new ArgumentNullException(nameof(logger));
+            this.replacer = replacer ?? throw new ArgumentNullException(nameof(replacer));
         }
     }
 }

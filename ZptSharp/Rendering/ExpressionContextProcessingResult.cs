@@ -8,12 +8,18 @@ namespace ZptSharp.Rendering
     /// </summary>
     public class ExpressionContextProcessingResult
     {
+        IList<ExpressionContext> additionalContexts = new List<ExpressionContext>();
+
         /// <summary>
         /// Gets or sets a collection of additional contexts to be iterated-over.
         /// Typically these contexts are created/added as a result of the processing.
         /// </summary>
         /// <value>The additional contexts.</value>
-        public IList<ExpressionContext> AdditionalContexts { get; set; }
+        public IList<ExpressionContext> AdditionalContexts
+        {
+            get => additionalContexts;
+            set => additionalContexts = value ?? new List<ExpressionContext>();
+        }
 
         /// <summary>
         /// Gets or sets a value indicating whether the current expression context should

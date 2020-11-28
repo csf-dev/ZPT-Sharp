@@ -42,7 +42,7 @@ namespace ZptSharp.Tal
 
         bool ShouldRemoveAttribute(object expressionResult)
         {
-            if (resultInterpreter.DoesResultCancelTheAction(expressionResult)) return false;
+            if (resultInterpreter.DoesResultAbortTheAction(expressionResult)) return false;
             return !resultInterpreter.CoerceResultToBoolean(expressionResult);
         }
 
