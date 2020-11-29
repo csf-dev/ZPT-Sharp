@@ -36,6 +36,13 @@ namespace ZptSharp.Dom
         INode CreateTextNode(string content);
 
         /// <summary>
+        /// Creates and returns a new attribute from the specified specification.
+        /// </summary>
+        /// <returns>An attribute.</returns>
+        /// <param name="spec">The attribute specification which will be used to name the attribute.</param>
+        IAttribute CreateAttribute(AttributeSpec spec);
+
+        /// <summary>
         /// Parses the specified text <paramref name="markup"/> and returns the resulting nodes.
         /// </summary>
         /// <returns>The parsed nodes.</returns>

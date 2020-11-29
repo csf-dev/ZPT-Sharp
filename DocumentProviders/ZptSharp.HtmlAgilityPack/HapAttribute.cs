@@ -26,7 +26,11 @@ namespace ZptSharp.Dom
         /// Gets the attribute value.
         /// </summary>
         /// <value>The value.</value>
-        public override string Value => NativeAttribute.Value;
+        public override string Value
+        {
+            get => NativeAttribute.Value;
+            set => NativeAttribute.Value = value;
+        }
 
         /// <summary>
         /// Gets a value indicating whether or not the current instance matches a specified attribute.
@@ -71,8 +75,7 @@ namespace ZptSharp.Dom
         /// Initializes a new instance of the <see cref="HapAttribute"/> class.
         /// </summary>
         /// <param name="nativeAttribute">Native attribute.</param>
-        /// <param name="element">Element.</param>
-        public HapAttribute(HtmlAttribute nativeAttribute, INode element) : base(element)
+        public HapAttribute(HtmlAttribute nativeAttribute)
         {
             NativeAttribute = nativeAttribute ?? throw new ArgumentNullException(nameof(nativeAttribute));
         }

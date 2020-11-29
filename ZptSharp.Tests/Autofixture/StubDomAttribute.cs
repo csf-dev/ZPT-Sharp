@@ -38,9 +38,9 @@ namespace ZptSharp.Autofixture
 
                 fixture.Customize<IAttribute>(x =>
                 {
-                    return x.FromFactory((string name, string value, INode node) =>
+                    return x.FromFactory((string name) =>
                     {
-                        var mock = new Mock<StubAttribute>(node, name, value) { CallBase = true };
+                        var mock = new Mock<StubAttribute>(name) { CallBase = true };
                         return mock.Object;
                     });
                 });

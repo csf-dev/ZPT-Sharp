@@ -105,7 +105,7 @@ namespace ZptSharp.Dom
             if(!IsElement) return new EventRaisingList<IAttribute>(new List<IAttribute>());
 
             var sourceAttributes = ElementNode.Attributes
-                .Select(x => new AngleSharpAttribute(x, this))
+                .Select(x => new AngleSharpAttribute(x) { Element = this } )
                 .Cast<IAttribute>()
                 .ToList();
             var attribs = new EventRaisingList<IAttribute>(sourceAttributes);

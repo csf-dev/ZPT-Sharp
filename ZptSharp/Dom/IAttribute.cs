@@ -6,10 +6,10 @@
     public interface IAttribute
     {
         /// <summary>
-        /// Gets the element upon which this attribute appears.
+        /// Gets or sets the element upon which this attribute appears.
         /// </summary>
         /// <value>The element.</value>
-        INode Element { get; }
+        INode Element { get; set; }
 
         /// <summary>
         /// Gets the attribute name, including any relevant prefix.
@@ -18,10 +18,10 @@
         string Name { get; }
 
         /// <summary>
-        /// Gets the attribute value.
+        /// Gets or sets the attribute value.
         /// </summary>
         /// <value>The value.</value>
-        string Value { get; }
+        string Value { get; set; }
 
         /// <summary>
         /// Gets a value indicating whether or not the current instance matches a specified attribute.

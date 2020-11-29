@@ -120,4 +120,8 @@ Actual type:{2}</value>
         <value>An unexpected exception was raised whilst enumerating a TAL 'repeat' expression.  See the inner exception for more information.
 Element:{0}</value>
     </data>
+    <data name="InvalidAttributesAttributeValue" xml:space="preserve">
+        <value>The TAL 'attributes' attribute must have valid syntax.
+Element:{0}</value>
+    </data>
 </root>

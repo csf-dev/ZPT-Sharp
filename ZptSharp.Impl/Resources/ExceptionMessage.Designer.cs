@@ -214,5 +214,11 @@ namespace ZptSharp.Resources {
                 return ResourceManager.GetString("UnexpectedExceptionEnumeratingRepetitions", resourceCulture);
             }
         }
+        
+        internal static string InvalidAttributesAttributeValue {
+            get {
+                return ResourceManager.GetString("InvalidAttributesAttributeValue", resourceCulture);
+            }
+        }
     }
 }

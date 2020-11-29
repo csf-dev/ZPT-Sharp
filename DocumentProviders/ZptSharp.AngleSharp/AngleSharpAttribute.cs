@@ -24,7 +24,11 @@ namespace ZptSharp.Dom
         /// Gets the attribute value.
         /// </summary>
         /// <value>The value.</value>
-        public override string Value => NativeAttribute.Value;
+        public override string Value
+        {
+            get => NativeAttribute.Value;
+            set => NativeAttribute.Value = value;
+        }
 
         /// <summary>
         /// Gets a value indicating whether or not the current instance matches a specified attribute.
@@ -57,8 +61,7 @@ namespace ZptSharp.Dom
         /// Initializes a new instance of the <see cref="AngleSharpAttribute"/> class.
         /// </summary>
         /// <param name="nativeAttribute">The native DOM attribute.</param>
-        /// <param name="element">The element to which this attribute belongs.</param>
-        public AngleSharpAttribute(IAttr nativeAttribute, INode element) : base(element)
+        public AngleSharpAttribute(IAttr nativeAttribute)
         {
             NativeAttribute = nativeAttribute ?? throw new ArgumentNullException(nameof(nativeAttribute));
         }

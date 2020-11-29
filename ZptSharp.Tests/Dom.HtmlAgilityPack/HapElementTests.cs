@@ -82,7 +82,7 @@ namespace ZptSharp.Dom
             var element = HapDocumentUtil.GetNode(html);
 
             var native = element.NativeElement.OwnerDocument.CreateAttribute("foo", "bar");
-            element.Attributes.Add(new HapAttribute(native, element));
+            element.Attributes.Add(new HapAttribute(native) { Element = element });
             Assert.That(element.NativeElement.OuterHtml, Is.EqualTo(@"<div foo=""bar""></div>"));
         }
 

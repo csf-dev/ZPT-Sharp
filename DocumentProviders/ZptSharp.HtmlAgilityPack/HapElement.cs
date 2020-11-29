@@ -117,7 +117,7 @@ namespace ZptSharp.Dom
         EventRaisingList<IAttribute> GetAttributesCollection()
         {
             var sourceAttributes = NativeElement.Attributes
-                .Select(x => new HapAttribute(x, this))
+                .Select(x => new HapAttribute(x) { Element = this })
                 .Cast<IAttribute>()
                 .ToList();
             var attribs = new EventRaisingList<IAttribute>(sourceAttributes);
@@ -125,8 +125,12 @@ namespace ZptSharp.Dom
             attribs.SetupAfterActions(add => {
                                           var attr = ((HapAttribute)add.Item).NativeAttribute;
                                           NativeElement.SetAttributeValue(attr.OriginalName, attr.Value);
+                                          add.Item.Element = this;
                                       },
-                                      del => NativeElement.Attributes.Remove(del.Item.Name));
+                                      del => {
+                                          NativeElement.Attributes.Remove(del.Item.Name);
+                                          del.Item.Element = null;
+                                      });
 
             return attribs;
         }

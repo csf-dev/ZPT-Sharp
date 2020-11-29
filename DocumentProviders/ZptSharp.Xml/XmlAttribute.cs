@@ -24,7 +24,11 @@ namespace ZptSharp.Dom
         /// Gets the attribute value.
         /// </summary>
         /// <value>The value.</value>
-        public override string Value => NativeAttribute.Value;
+        public override string Value
+        {
+            get => NativeAttribute.Value;
+            set => NativeAttribute.Value = value;
+        }
 
         /// <summary>
         /// Gets a value indicating whether or not the current instance is in the specified namespace.
@@ -57,8 +61,7 @@ namespace ZptSharp.Dom
         /// Initializes a new instance of the <see cref="XmlAttribute"/> class.
         /// </summary>
         /// <param name="nativeAttribute">Native attribute.</param>
-        /// <param name="element">Element.</param>
-        public XmlAttribute(XAttribute nativeAttribute, INode element) : base(element)
+        public XmlAttribute(XAttribute nativeAttribute)
         {
             NativeAttribute = nativeAttribute ?? throw new ArgumentNullException(nameof(nativeAttribute));
         }

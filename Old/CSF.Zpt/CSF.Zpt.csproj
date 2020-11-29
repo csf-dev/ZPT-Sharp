@@ -60,36 +60,22 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AssemblyInfo.cs" />
-    <Compile Include="Rendering\ElementExtensions.cs" />
-    <Compile Include="Rendering\RenderingContext.cs" />
-    <Compile Include="Tal\AttributesAttributeHandler.cs" />
     <Compile Include="Tales\TalesModel.cs" />
     <Compile Include="Tales\ExpressionEvaluatorBase.cs" />
     <Compile Include="Tales\BuiltinContextsContainer.cs" />
     <Compile Include="Tales\TalesRenderingContextFactory.cs" />
-    <Compile Include="Rendering\ContextVisitorBase.cs" />
     <Compile Include="Tales\FilesystemDirectory.cs" />
     <Compile Include="Tales\TemplateDirectory.cs" />
     <Compile Include="Tales\EnumerableObjectWrapperWithNamedItems.cs" />
     <Compile Include="LocalXhtmlXmlResolver.cs" />
-    <Compile Include="Rendering\RenderingContextExtensions.cs" />
-    <Compile Include="Rendering\NoOpVisitor.cs" />
-    <Compile Include="Rendering\Model.cs" />
-    <Compile Include="Rendering\RepetitionInfo.cs" />
     <Compile Include="Resources\ExceptionMessages.Designer.cs">
       <DependentUpon>ExceptionMessages.resx</DependentUpon>
     </Compile>
     <Compile Include="Tales\ExpressionFactory.cs" />
-    <Compile Include="Rendering\RenderingContextFactoryFactory.cs" />
-    <Compile Include="Rendering\ContextVisitorFactory.cs" />
-    <Compile Include="Rendering\NamedObjectWrapper.cs" />
     <Compile Include="Resources\LogMessageFormats.Designer.cs">
       <DependentUpon>LogMessageFormats.resx</DependentUpon>
     </Compile>
-    <Compile Include="Rendering\EmptyModel.cs" />
     <Compile Include="XmlUrlResolverFactory.cs" />
-    <Compile Include="Rendering\ZptAttribute.cs" />
-    <Compile Include="Rendering\ZptElement.cs" />
     <Compile Include="BatchRendering\BatchRenderingOptions.cs" />
     <Compile Include="BatchRendering\RenderingJob.cs" />
     <Compile Include="BatchRendering\BatchRenderer.cs" />
@@ -99,7 +85,6 @@
     <Compile Include="BatchRendering\IRenderingJob.cs" />
     <Compile Include="BatchRendering\IRenderingJobFactory.cs" />
     <Compile Include="BatchRendering\ErrorTolerantBatchRenderer.cs" />
-    <Compile Include="Rendering\RepetitionMetadataCollectionWrapper.cs" />
     <Compile Include="Tales\SimpleEvaluatorSelector.cs" />
     <Compile Include="PluginConfigurationSection.cs" />
     <Compile Include="PluginAssemblyCollection.cs" />
@@ -107,15 +92,9 @@
     <Compile Include="Tales\ExpressionEvaluatorCache.cs" />
     <Compile Include="Tales\ExpressionEvaluatorService.cs" />
     <Compile Include="EmptyPluginConfiguration.cs" />
-    <Compile Include="Rendering\RenderingSettings.cs" />
-    <Compile Include="Rendering\DefaultRenderingSettings.cs" />
-    <Compile Include="Rendering\RenderingOptions.cs" />
-    <Compile Include="Rendering\RenderingSettingsFactory.cs" />
-    <Compile Include="Rendering\ElementRenderer.cs" />
     <Compile Include="PluginAssemblyLoader.cs" />
     <Compile Include="BatchRendering\BatchOptionsBuilder.cs" />
     <Compile Include="BatchRendering\BatchRenderingOptionsValidator.cs" />
-    <Compile Include="Rendering\SourceInfoFactory.cs" />
     <Compile Include="Resources\SourceAnnotationFormats.Designer.cs">
       <DependentUpon>SourceAnnotationFormats.resx</DependentUpon>
     </Compile>

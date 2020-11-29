@@ -30,6 +30,7 @@ namespace ZptSharp.Tal
         readonly IReplacesNode replacer;
         readonly IOmitsNode omitter;
         readonly IGetsRepetitionContexts repetitionContextProvider;
+        private readonly IGetsAttributeDefinitions attributeDefinitionsProvider;
 
         /// <summary>
         /// Gets the TAL context processor.
@@ -59,7 +60,7 @@ namespace ZptSharp.Tal
             => new OmitTagAttributeDecorator(service, specProvider, omitter, evaluator, resultInterpreter);
 
         IProcessesExpressionContext GetAttributesDecorator(IProcessesExpressionContext service)
-            => new AttributesAttributeDecorator(service, specProvider);
+            => new AttributesAttributeDecorator(service, specProvider, evaluator, resultInterpreter, attributeDefinitionsProvider);
 
         IProcessesExpressionContext GetContentOrReplaceDecorator(IProcessesExpressionContext service)
             => new ContentOrReplaceAttributeDecorator(service, specProvider, domEvaluator, replacer, omitter);
@@ -85,6 +86,7 @@ namespace ZptSharp.Tal
         /// <param name="replacer">Replacer.</param>
         /// <param name="omitter">Omitter.</param>
         /// <param name="repetitionContextProvider">Repetition context provider.</param>
+        /// <param name="attributeDefinitionsProvider">The 'attributes' attribute definitions provider.</param>
         public TalContextProcessorFactory(IGetsTalAttributeSpecs specProvider,
                                           IEvaluatesExpression evaluator,
                                           IInterpretsExpressionResult resultInterpreter,
@@ -93,7 +95,8 @@ namespace ZptSharp.Tal
                                           Microsoft.Extensions.Logging.ILogger<OnErrorAttributeDecorator> onErrorlogger,
                                           IReplacesNode replacer,
                                           IOmitsNode omitter,
-                                          IGetsRepetitionContexts repetitionContextProvider)
+                                          IGetsRepetitionContexts repetitionContextProvider,
+                                          IGetsAttributeDefinitions attributeDefinitionsProvider)
         {
             this.specProvider = specProvider ?? throw new System.ArgumentNullException(nameof(specProvider));
             this.evaluator = evaluator ?? throw new System.ArgumentNullException(nameof(evaluator));
@@ -104,6 +107,7 @@ namespace ZptSharp.Tal
             this.replacer = replacer ?? throw new System.ArgumentNullException(nameof(replacer));
             this.omitter = omitter ?? throw new System.ArgumentNullException(nameof(omitter));
             this.repetitionContextProvider = repetitionContextProvider ?? throw new System.ArgumentNullException(nameof(repetitionContextProvider));
+            this.attributeDefinitionsProvider = attributeDefinitionsProvider ?? throw new System.ArgumentNullException(nameof(attributeDefinitionsProvider));
         }
     }
 }

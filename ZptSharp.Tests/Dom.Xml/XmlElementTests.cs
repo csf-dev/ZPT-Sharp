@@ -100,7 +100,7 @@ namespace ZptSharp.Dom
             var element = XmlDocumentUtil.GetNode(html);
 
             var native = new XAttribute("foo", "bar");
-            element.Attributes.Add(new XmlAttribute(native, element));
+            element.Attributes.Add(new XmlAttribute(native) { Element = element });
             Assert.That(element.NativeElement.ToString(), Is.EqualTo(@"<div foo=""bar""></div>"));
         }
 

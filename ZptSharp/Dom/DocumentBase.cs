@@ -58,6 +58,13 @@ namespace ZptSharp.Dom
         public abstract IList<INode> ParseAsNodes(string markup);
 
         /// <summary>
+        /// Creates and returns a new attribute from the specified specification.
+        /// </summary>
+        /// <returns>An attribute.</returns>
+        /// <param name="spec">The attribute specification which will be used to name the attribute.</param>
+        public abstract IAttribute CreateAttribute(AttributeSpec spec);
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="DocumentBase"/> class.
         /// </summary>
         /// <param name="source">The source info for the document.</param>

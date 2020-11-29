@@ -7,13 +7,17 @@ namespace ZptSharp.Dom
     /// </summary>
     public abstract class AttributeBase : IAttribute
     {
-        readonly INode element;
+        INode element;
 
         /// <summary>
         /// Gets the element upon which this attribute appears.
         /// </summary>
         /// <value>The element.</value>
-        public virtual INode Element => element;
+        public virtual INode Element
+        {
+            get => element;
+            set => element = value;
+        }
 
         /// <summary>
         /// Gets the attribute name, including any relevant prefix.
@@ -25,7 +29,7 @@ namespace ZptSharp.Dom
         /// Gets the attribute value.
         /// </summary>
         /// <value>The value.</value>
-        public abstract string Value { get; }
+        public abstract string Value { get; set; }
 
         /// <summary>
         /// Gets a value indicating whether or not the current instance matches a specified attribute.
@@ -40,14 +44,5 @@ namespace ZptSharp.Dom
         /// <returns><c>true</c>, if the attribute is in the specified namespace, <c>false</c> otherwise.</returns>
         /// <param name="namespace">The namespace.</param>
         public abstract bool IsInNamespace(Namespace @namespace);
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="AttributeBase"/> class.
-        /// </summary>
-        /// <param name="element">Element.</param>
-        protected AttributeBase(INode element)
-        {
-            this.element = element ?? throw new ArgumentNullException(nameof(element));
-        }
     }
 }

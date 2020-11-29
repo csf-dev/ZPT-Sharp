@@ -9,19 +9,19 @@ namespace ZptSharp.Dom
     {
         public override string Name { get; }
 
-        public override string Value { get; }
+        public override string Value { get; set; }
 
         public override bool Matches(AttributeSpec spec) => String.Equals(spec?.Name, Name);
 
         public override bool IsInNamespace(Namespace @namespace) => false;
 
-        public StubAttribute(INode element, string name, string value) : base(element)
+        public override string ToString() => $"{Name}=\"{Value}\"";
+
+        public StubAttribute(string name)
         {
             // It's OK to suppress these here, this class is not for prod usage
-
 #pragma warning disable RECS0021 // Warns about calls to virtual member functions occuring in the constructor
             Name = name ?? throw new ArgumentNullException(nameof(name));
-            Value = value ?? throw new ArgumentNullException(nameof(value));
 #pragma warning restore RECS0021 // Warns about calls to virtual member functions occuring in the constructor
         }
     }

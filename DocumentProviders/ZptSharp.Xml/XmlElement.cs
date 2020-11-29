@@ -126,16 +126,20 @@ namespace ZptSharp.Dom
             if (!IsElement) return new EventRaisingList<IAttribute>(new List<IAttribute>());
 
             var sourceAttributes = ElementNode.Attributes()
-                .Select(x => new XmlAttribute(x, this))
+                .Select(x => new XmlAttribute(x) { Element = this })
                 .Cast<IAttribute>()
                 .ToList();
             var attribs = new EventRaisingList<IAttribute>(sourceAttributes);
 
             attribs.SetupAfterActions(add => {
-                var attr = ((XmlAttribute)add.Item).NativeAttribute;
-                ElementNode.SetAttributeValue(attr.Name, attr.Value);
-            },
-                                      del => ((XmlAttribute) del.Item).NativeAttribute.Remove());
+                                          var attr = ((XmlAttribute)add.Item).NativeAttribute;
+                                          ElementNode.SetAttributeValue(attr.Name, attr.Value);
+                                          add.Item.Element = this;
+                                      },
+                                      del => {
+                                          ((XmlAttribute)del.Item).NativeAttribute.Remove();
+                                          del.Item.Element = null;
+                                      });
 
             return attribs;
         }
