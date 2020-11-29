@@ -1,5 +1,4 @@
-﻿using System;
-namespace ZptSharp.Dom
+﻿namespace ZptSharp.Dom
 {
     /// <summary>
     /// Abstract base class for an <see cref="IAttribute"/>, containing functionality
@@ -7,17 +6,11 @@ namespace ZptSharp.Dom
     /// </summary>
     public abstract class AttributeBase : IAttribute
     {
-        INode element;
-
         /// <summary>
         /// Gets the element upon which this attribute appears.
         /// </summary>
         /// <value>The element.</value>
-        public virtual INode Element
-        {
-            get => element;
-            set => element = value;
-        }
+        public virtual INode Element { get; set; }
 
         /// <summary>
         /// Gets the attribute name, including any relevant prefix.
