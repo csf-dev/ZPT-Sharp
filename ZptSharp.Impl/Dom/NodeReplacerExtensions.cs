@@ -12,6 +12,7 @@ namespace ZptSharp.Dom
         /// <summary>
         /// Replace the specified node with the specified replacement.
         /// </summary>
+        /// <param name="replacer">The node replacer.</param>
         /// <param name="toReplace">The node to replace.</param>
         /// <param name="replacement">The replacement node.</param>
         public static void Replace(this IReplacesNode replacer, INode toReplace, INode replacement)
@@ -31,6 +32,7 @@ namespace ZptSharp.Dom
         /// Further DOM manipulation should occur using the replacement elements and not the replaced element.
         /// </para>
         /// </summary>
+        /// <param name="replacer">The node replacer.</param>
         /// <param name="toReplace">The node to replace.</param>
         /// <param name="replacements">The replacement nodes.</param>
         public static void Replace(this IReplacesNode replacer, INode toReplace, IReadOnlyList<INode> replacements)

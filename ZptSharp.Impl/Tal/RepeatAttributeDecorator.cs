@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
@@ -84,6 +81,7 @@ namespace ZptSharp.Tal
         /// <param name="specProvider">Spec provider.</param>
         /// <param name="evaluator">Evaluator.</param>
         /// <param name="resultInterpreter">Result interpreter.</param>
+        /// <param name="contextProvider">Repetition contexts provider.</param>
         public RepeatAttributeDecorator(IProcessesExpressionContext wrapped,
                                         IGetsTalAttributeSpecs specProvider,
                                         IEvaluatesExpression evaluator,

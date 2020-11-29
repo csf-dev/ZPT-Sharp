@@ -70,6 +70,7 @@ namespace ZptSharp.Rendering
         /// </summary>
         /// <param name="namespaceProvider">Namespace provider.</param>
         /// <param name="logger">A logger.</param>
+        /// <param name="omitter">The node omitter.</param>
         public ZptCleanupContextProcessor(IGetsWellKnownNamespace namespaceProvider,
                                           ILogger<ZptCleanupContextProcessor> logger,
                                           IOmitsNode omitter)

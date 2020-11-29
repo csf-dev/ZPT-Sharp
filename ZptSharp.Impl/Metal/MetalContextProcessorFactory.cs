@@ -42,6 +42,7 @@ namespace ZptSharp.Metal
         /// <param name="macroExpander">Macro expander.</param>
         /// <param name="attributeFinder">An attribute finder.</param>
         /// <param name="logger">A logger.</param>
+        /// <param name="replacer">The node replacer.</param>
         public MetalContextProcessorFactory(IGetsMetalAttributeSpecs specProvider,
                                             IGetsMacro macroProvider,
                                             IExpandsMacro macroExpander,

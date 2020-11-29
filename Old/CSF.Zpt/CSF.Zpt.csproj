@@ -62,12 +62,8 @@
     <Compile Include="AssemblyInfo.cs" />
     <Compile Include="Rendering\ElementExtensions.cs" />
     <Compile Include="Rendering\RenderingContext.cs" />
-    <Compile Include="Tal\TalVisitor.cs" />
-    <Compile Include="Tal\IAttributeHandler.cs" />
     <Compile Include="Tal\AttributesAttributeHandler.cs" />
-    <Compile Include="Tal\RepeatAttributeHandler.cs" />
     <Compile Include="Tal\OmitTagAttributeHandler.cs" />
-    <Compile Include="Tal\AttributeHandlingResult.cs" />
     <Compile Include="Tales\TalesModel.cs" />
     <Compile Include="Tales\ExpressionEvaluatorBase.cs" />
     <Compile Include="Tales\BuiltinContextsContainer.cs" />
@@ -78,7 +74,6 @@
     <Compile Include="Tales\EnumerableObjectWrapperWithNamedItems.cs" />
     <Compile Include="LocalXhtmlXmlResolver.cs" />
     <Compile Include="Rendering\RenderingContextExtensions.cs" />
-    <Compile Include="Tal\TalTidyUpVisitor.cs" />
     <Compile Include="Rendering\NoOpVisitor.cs" />
     <Compile Include="Rendering\Model.cs" />
     <Compile Include="Rendering\RepetitionInfo.cs" />

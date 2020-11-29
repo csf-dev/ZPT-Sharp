@@ -80,6 +80,7 @@ Using element:{macro_user} ({macro_user_source})",
         /// <param name="macroProvider">Macro provider.</param>
         /// <param name="macroExpander">Macro expander.</param>
         /// <param name="logger">A logger.</param>
+        /// <param name="replacer">The node replacer.</param>
         public MacroUsageContextProcessor(IGetsMetalAttributeSpecs specProvider,
                                           IGetsMacro macroProvider,
                                           IExpandsMacro macroExpander,
