@@ -16,6 +16,11 @@ namespace ZptSharp.Tal
         /// <value>The variable scope.</value>
         public string Scope { get; set; }
 
+        /// <summary>
+        /// Gets a value indicating whether this <see cref="VariableDefinition"/> is a global definition.
+        /// If <see langword="false"/> then it is a local definition.
+        /// </summary>
+        /// <value><c>true</c> if is global; otherwise, <c>false</c>.</value>
         public bool IsGlobal => Scope == globalScope;
 
         /// <summary>

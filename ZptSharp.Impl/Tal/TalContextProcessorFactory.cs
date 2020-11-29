@@ -73,6 +73,18 @@ namespace ZptSharp.Tal
         IProcessesExpressionContext GetDefineDecorator(IProcessesExpressionContext service)
             => new DefineAttributeDecorator(service, specProvider, evaluator, resultInterpreter, definitionProvider);
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="TalContextProcessorFactory"/> class.
+        /// </summary>
+        /// <param name="specProvider">Spec provider.</param>
+        /// <param name="evaluator">Evaluator.</param>
+        /// <param name="resultInterpreter">Result interpreter.</param>
+        /// <param name="definitionProvider">Definition provider.</param>
+        /// <param name="domEvaluator">DOM evaluator.</param>
+        /// <param name="onErrorlogger">On errorlogger.</param>
+        /// <param name="replacer">Replacer.</param>
+        /// <param name="omitter">Omitter.</param>
+        /// <param name="repetitionContextProvider">Repetition context provider.</param>
         public TalContextProcessorFactory(IGetsTalAttributeSpecs specProvider,
                                           IEvaluatesExpression evaluator,
                                           IInterpretsExpressionResult resultInterpreter,

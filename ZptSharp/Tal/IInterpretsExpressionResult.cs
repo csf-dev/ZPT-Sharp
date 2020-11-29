@@ -1,5 +1,4 @@
-﻿using System;
-namespace ZptSharp.Tal
+﻿namespace ZptSharp.Tal
 {
     /// <summary>
     /// An object which interprets the result of a TALES expression, for the purposes of TAL.
