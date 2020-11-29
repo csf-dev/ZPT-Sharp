@@ -56,7 +56,7 @@ namespace ZptSharp.Tal
             => new OnErrorAttributeDecorator(service, specProvider, domEvaluator, onErrorlogger);
 
         IProcessesExpressionContext GetOmitTagDecorator(IProcessesExpressionContext service)
-            => new OmitTagAttributeDecorator(service, specProvider);
+            => new OmitTagAttributeDecorator(service, specProvider, omitter, evaluator, resultInterpreter);
 
         IProcessesExpressionContext GetAttributesDecorator(IProcessesExpressionContext service)
             => new AttributesAttributeDecorator(service, specProvider);
