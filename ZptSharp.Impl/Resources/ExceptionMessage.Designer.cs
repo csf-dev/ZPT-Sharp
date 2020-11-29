@@ -196,5 +196,23 @@ namespace ZptSharp.Resources {
                 return ResourceManager.GetString("ContentAndReplaceAttributesMayNotCoexist", resourceCulture);
             }
         }
+        
+        internal static string InvalidRepeatAttribute {
+            get {
+                return ResourceManager.GetString("InvalidRepeatAttribute", resourceCulture);
+            }
+        }
+        
+        internal static string RepeatExpressionResultMustBeEnumerable {
+            get {
+                return ResourceManager.GetString("RepeatExpressionResultMustBeEnumerable", resourceCulture);
+            }
+        }
+        
+        internal static string UnexpectedExceptionEnumeratingRepetitions {
+            get {
+                return ResourceManager.GetString("UnexpectedExceptionEnumeratingRepetitions", resourceCulture);
+            }
+        }
     }
 }

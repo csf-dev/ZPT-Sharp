@@ -107,4 +107,17 @@ Element:{0}</value>
         <value>A single DOM element must not have both TAL 'content' and 'replace' attributes.
 Element:{0}</value>
     </data>
+    <data name="InvalidRepeatAttribute" xml:space="preserve">
+        <value>A TAL 'repeat' attribute value must indicate a variable and an expression, separated by whitespace.
+Element:{0}</value>
+    </data>
+    <data name="RepeatExpressionResultMustBeEnumerable" xml:space="preserve">
+        <value>The result of a TAL 'repeat' expression must either be null, an action-aborting token, or must derive from `{0}'.
+    Element:{1}
+Actual type:{2}</value>
+    </data>
+    <data name="UnexpectedExceptionEnumeratingRepetitions" xml:space="preserve">
+        <value>An unexpected exception was raised whilst enumerating a TAL 'repeat' expression.  See the inner exception for more information.
+Element:{0}</value>
+    </data>
 </root>

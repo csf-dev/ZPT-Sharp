@@ -29,6 +29,7 @@ namespace ZptSharp.Tal
         readonly Microsoft.Extensions.Logging.ILogger<OnErrorAttributeDecorator> onErrorlogger;
         readonly IReplacesNode replacer;
         readonly IOmitsNode omitter;
+        readonly IGetsRepetitionContexts repetitionContextProvider;
 
         /// <summary>
         /// Gets the TAL context processor.
@@ -64,7 +65,7 @@ namespace ZptSharp.Tal
             => new ContentOrReplaceAttributeDecorator(service, specProvider, domEvaluator, replacer, omitter);
 
         IProcessesExpressionContext GetRepeatDecorator(IProcessesExpressionContext service)
-            => new RepeatAttributeDecorator(service, specProvider);
+            => new RepeatAttributeDecorator(service, specProvider, evaluator, resultInterpreter, repetitionContextProvider);
 
         IProcessesExpressionContext GetConditionDecorator(IProcessesExpressionContext service)
             => new ConditionAttributeDecorator(service, specProvider, evaluator, resultInterpreter);
@@ -79,7 +80,8 @@ namespace ZptSharp.Tal
                                           IEvaluatesDomValueExpression domEvaluator,
                                           Microsoft.Extensions.Logging.ILogger<OnErrorAttributeDecorator> onErrorlogger,
                                           IReplacesNode replacer,
-                                          IOmitsNode omitter)
+                                          IOmitsNode omitter,
+                                          IGetsRepetitionContexts repetitionContextProvider)
         {
             this.specProvider = specProvider ?? throw new System.ArgumentNullException(nameof(specProvider));
             this.evaluator = evaluator ?? throw new System.ArgumentNullException(nameof(evaluator));
@@ -89,6 +91,7 @@ namespace ZptSharp.Tal
             this.onErrorlogger = onErrorlogger ?? throw new System.ArgumentNullException(nameof(onErrorlogger));
             this.replacer = replacer ?? throw new System.ArgumentNullException(nameof(replacer));
             this.omitter = omitter ?? throw new System.ArgumentNullException(nameof(omitter));
+            this.repetitionContextProvider = repetitionContextProvider ?? throw new System.ArgumentNullException(nameof(repetitionContextProvider));
         }
     }
 }
