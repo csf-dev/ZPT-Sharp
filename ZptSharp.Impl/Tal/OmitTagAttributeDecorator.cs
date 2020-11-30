@@ -30,8 +30,8 @@ namespace ZptSharp.Tal
             if (attribute == null)
                 return await wrapped.ProcessContextAsync(context, token);
 
-            var expressionResult = await evaluator.EvaluateExpressionAsync(attribute.Value, context, token);
-            if (!ShouldOmitTag(expressionResult))
+            var shouldOmit = await ShouldOmitTag(attribute, context, token);
+            if (!shouldOmit)
                 return await wrapped.ProcessContextAsync(context, token);
 
             var childContexts = context.CreateChildren(context.CurrentElement.ChildNodes);
@@ -41,6 +41,15 @@ namespace ZptSharp.Tal
             {
                 AdditionalContexts = childContexts
             };
+        }
+
+        async Task<bool> ShouldOmitTag(IAttribute attribute, ExpressionContext context, CancellationToken token)
+        {
+            if (attribute.Value.Length == 0)
+                return true;
+
+            var expressionResult = await evaluator.EvaluateExpressionAsync(attribute.Value, context, token);
+            return ShouldOmitTag(expressionResult);
         }
 
         bool ShouldOmitTag(object expressionResult)

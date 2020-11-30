@@ -62,7 +62,9 @@ namespace ZptSharp.Rendering
         bool NeedsCleanup(IAttribute attribute)
         {
             return attribute.IsInNamespace(namespaceProvider.MetalNamespace)
-                || attribute.IsInNamespace(namespaceProvider.TalNamespace);
+                || attribute.IsInNamespace(namespaceProvider.TalNamespace)
+                || attribute.IsNamespaceDeclarationFor(namespaceProvider.MetalNamespace)
+                || attribute.IsNamespaceDeclarationFor(namespaceProvider.TalNamespace);
         }
 
         /// <summary>

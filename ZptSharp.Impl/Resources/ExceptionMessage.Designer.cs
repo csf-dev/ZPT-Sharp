@@ -107,6 +107,12 @@ namespace ZptSharp.Resources {
             }
         }
         
+        internal static string CannotParsePathExpressionAttribute {
+            get {
+                return ResourceManager.GetString("CannotParsePathExpressionAttribute", resourceCulture);
+            }
+        }
+        
         internal static string InvalidVariableName {
             get {
                 return ResourceManager.GetString("InvalidVariableName", resourceCulture);

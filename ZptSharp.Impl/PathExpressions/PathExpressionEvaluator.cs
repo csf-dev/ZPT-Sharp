@@ -24,7 +24,7 @@ namespace ZptSharp.PathExpressions
         /// <param name="cancellationToken">An optional cancellation token.</param>
         public Task<object> EvaluateExpressionAsync(string expression, ExpressionContext context, CancellationToken cancellationToken = default)
         {
-            var path = expressionParser.Parse(expression);
+            var path = ParseExpression(expression, context);
 
             var exceptions = new List<Exception>();
 
@@ -45,6 +45,19 @@ namespace ZptSharp.PathExpressions
             }
 
             throw GetCannotEvaluateException(exceptions, expression);
+        }
+
+        PathExpression ParseExpression(string expression, ExpressionContext context)
+        {
+            try
+            {
+                return expressionParser.Parse(expression);
+            }
+            catch(CannotParsePathException ex)
+            {
+                var message = String.Format(Resources.ExceptionMessage.CannotParsePathExpressionAttribute, expression, context.CurrentElement);
+                throw new CannotParsePathException(message, ex);
+            }
         }
 
         Task<object> EvaluateExpressionAsync(PathExpression.AlternateExpression path,

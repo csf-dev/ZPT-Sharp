@@ -17,6 +17,8 @@ namespace ZptSharp.Dom
 
         public override string ToString() => $"{Name}=\"{Value}\"";
 
+        public override bool IsNamespaceDeclarationFor(Namespace @namespace) => false;
+
         public StubAttribute(string name)
         {
             // It's OK to suppress these here, this class is not for prod usage

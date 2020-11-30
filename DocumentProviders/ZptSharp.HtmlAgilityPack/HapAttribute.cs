@@ -63,13 +63,19 @@ namespace ZptSharp.Dom
             return String.Equals(@namespace.Prefix, prefix, StringComparison.InvariantCulture);
         }
 
+        /// <summary>
+        /// Gets a value indicating whether or not the current instance represents a namespace declaration for the specified namespace.
+        /// </summary>
+        /// <returns><c>true</c>, if the attribute is a declaration for the specified namespace, <c>false</c> otherwise.</returns>
+        /// <param name="namespace">The namespace.</param>
+        public override bool IsNamespaceDeclarationFor(Namespace @namespace) => false;
+
         (string, string) GetAttributeName(string name)
         {
             if (name == null) return (null, null);
             var val = name?.Split(new[] { PrefixSeparator }, 2);
             return (val[0], (val.Length > 1) ? val[1] : null);
         }
-
 
         /// <summary>
         /// Initializes a new instance of the <see cref="HapAttribute"/> class.

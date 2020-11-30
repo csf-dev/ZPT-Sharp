@@ -10,7 +10,7 @@ namespace ZptSharp
     {
         [Test,
          Description("For every file in the 'expected output' directory of the integration test path, the file should be rendered as-expected."),
-         Explicit("These tests are not yet ready for prime-time because functionality isn't complete")
+         // Explicit("These tests are not yet ready for prime-time because functionality isn't complete")
         ]
         public async Task Each_output_file_should_render_as_expected([ValueSource(nameof(GetExpectedOutputFiles))] string expectedPath)
         {

@@ -130,5 +130,26 @@ namespace ZptSharp.Tal
             Mock.Get(omitter)
                 .Verify(x => x.Omit(context.CurrentElement), Times.Once);
         }
+
+        [Test, AutoMoqData]
+        public async Task ProcessContextAsync_omits_element_if_expression_is_empty_string([Frozen] IGetsTalAttributeSpecs specProvider,
+                                                                                          [Frozen] IOmitsNode omitter,
+                                                                                          OmitTagAttributeDecorator sut,
+                                                                                          [StubDom] ExpressionContext context,
+                                                                                          AttributeSpec spec,
+                                                                                          [StubDom] IAttribute attribute,
+                                                                                          object expressionResult)
+        {
+            Mock.Get(specProvider).SetupGet(x => x.OmitTag).Returns(spec);
+            Mock.Get(attribute).Setup(x => x.Matches(spec)).Returns(true);
+            context.CurrentElement.Attributes.Clear();
+            context.CurrentElement.Attributes.Add(attribute);
+            attribute.Value = String.Empty;
+
+            await sut.ProcessContextAsync(context);
+
+            Mock.Get(omitter)
+                .Verify(x => x.Omit(context.CurrentElement), Times.Once);
+        }
     }
 }
