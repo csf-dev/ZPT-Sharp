@@ -16,11 +16,33 @@ namespace ZptSharp.Dom
         /// <param name="element">The element from which to get the attribute.</param>
         /// <param name="spec">An attribute specification.</param>
         public static IAttribute GetMatchingAttribute(this INode element, AttributeSpec spec)
+            => GetMatchingAttribute(element, new[] { spec }, out _);
+
+        /// <summary>
+        /// Gets the first <see cref="IAttribute"/> from the element which matches any of the specified a <paramref name="specs"/>.
+        /// </summary>
+        /// <returns>The matching attribute, or a <see langword="null"/> reference if there is no match.</returns>
+        /// <param name="element">The element from which to get the attribute.</param>
+        /// <param name="specs">A collection of attribute specification.</param>
+        /// <param name="matchingSpec">Exposes the specification (if any) which was matched.</param>
+        public static IAttribute GetMatchingAttribute(this INode element, IEnumerable<AttributeSpec> specs, out AttributeSpec matchingSpec)
         {
             if (element == null) throw new ArgumentNullException(nameof(element));
-            if (spec == null) return null;
+            matchingSpec = null;
+            if (specs == null) return null;
 
-            return element.Attributes.FirstOrDefault(x => x.Matches(spec));
+            foreach(var spec in specs)
+            {
+                if (spec == null) continue;
+                var attribute = element.Attributes.FirstOrDefault(x => x.Matches(spec));
+                if (attribute != null)
+                {
+                    matchingSpec = spec;
+                    return attribute;
+                }
+            }
+
+            return null;
         }
 
         /// <summary>

@@ -41,7 +41,7 @@ namespace ZptSharp.Metal
         {
             var macro = await macroProvider.GetMacroAsync(context.CurrentElement,
                                                           context,
-                                                          specProvider.UseMacro,
+                                                          new[] { specProvider.UseMacro, specProvider.ExtendMacro },
                                                           token)
                 .ConfigureAwait(false);
 

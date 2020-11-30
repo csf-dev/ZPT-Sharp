@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
@@ -31,23 +32,40 @@ namespace ZptSharp.Metal
                                               ExpressionContext context,
                                               AttributeSpec attributeSpec,
                                               CancellationToken token = default)
+            => GetMacroAsync(element, context, new[] { attributeSpec }, token);
+
+        /// <summary>
+        /// Gets the METAL macro referenced by the specified element's attribute, if such an attribute is present.
+        /// </summary>
+        /// <returns>The METAL macro, or a null reference if the <paramref name="element"/>
+        /// has no attribute matching any of the <paramref name="attributeSpecs"/>.</returns>
+        /// <param name="element">The element from which to get the macro.</param>
+        /// <param name="context">The current expression context.</param>
+        /// <param name="attributeSpecs">A collection of attribute specs.</param>
+        /// <param name="token">An optional cancellation token.</param>
+        /// <exception cref="T:ZptSharp.Metal.MacroNotFoundException">If the element does have an attribute matching
+        /// the <paramref name="attributeSpecs"/> but no macro could be resolved from the attribute's expression.</exception>
+        public Task<MetalMacro> GetMacroAsync(INode element,
+                                              ExpressionContext context,
+                                              IEnumerable<AttributeSpec> attributeSpecs,
+                                              CancellationToken token = default)
         {
             if (element == null)
                 throw new ArgumentNullException(nameof(element));
             if (context == null)
                 throw new ArgumentNullException(nameof(context));
-            if (attributeSpec == null)
-                throw new ArgumentNullException(nameof(attributeSpec));
+            if (attributeSpecs == null)
+                throw new ArgumentNullException(nameof(attributeSpecs));
 
-            return GetMacroPrivateAsync(element, context, attributeSpec, token);
+            return GetMacroPrivateAsync(element, context, attributeSpecs, token);
         }
 
         async Task<MetalMacro> GetMacroPrivateAsync(INode element,
                                                     ExpressionContext context,
-                                                    AttributeSpec attributeSpec,
+                                                    IEnumerable<AttributeSpec> attributeSpecs,
                                                     CancellationToken token)
         {
-            var attribute = element.GetMatchingAttribute(attributeSpec);
+            var attribute = element.GetMatchingAttribute(attributeSpecs, out var attributeSpec);
             if (attribute == null)
             {
                 if(logger.IsEnabled(LogLevel.Trace))

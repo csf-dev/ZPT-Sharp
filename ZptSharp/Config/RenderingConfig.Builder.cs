@@ -92,7 +92,7 @@ namespace ZptSharp.Config
             /// Gets or sets an action which is used to build &amp; add values to the root ZPT context.
             /// </summary>
             /// <value>The context builder.</value>
-            public Action<IConfiguresRootContext> ContextBuilder
+            public Action<IConfiguresRootContext, IServiceProvider> ContextBuilder
             {
                 get => config.ContextBuilder;
                 set { AssertIsNotBuilt(); config.ContextBuilder = value ?? throw new ArgumentNullException(nameof(value)); }

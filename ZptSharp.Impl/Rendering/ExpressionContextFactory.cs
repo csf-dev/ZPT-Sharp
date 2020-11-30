@@ -1,5 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using Microsoft.Extensions.DependencyInjection;
 using ZptSharp.Config;
 using ZptSharp.Dom;
 using ZptSharp.Expressions;
@@ -11,7 +13,7 @@ namespace ZptSharp.Rendering
     /// </summary>
     public class ExpressionContextFactory : IGetsRootExpressionContext, IGetsChildExpressionContexts
     {
-        readonly RenderingConfig config;
+        readonly IServiceProvider serviceProvider;
 
         /// <summary>
         /// Gets the root expression context for the request.
@@ -22,11 +24,12 @@ namespace ZptSharp.Rendering
         public ExpressionContext GetExpressionContext(IDocument document, RenderZptDocumentRequest request)
         {
             var context = GetExpressionContext(document.RootElement, document, request.Model, isRoot: true);
+            var config = serviceProvider.GetRequiredService<RenderingConfig>();
 
             if(config.ContextBuilder != null)
             {
                 var helper = new RootContextConfigHelper(context);
-                config.ContextBuilder(helper);
+                config.ContextBuilder(helper, serviceProvider);
             }
 
             return context;
@@ -65,10 +68,10 @@ namespace ZptSharp.Rendering
         /// <summary>
         /// Initializes a new instance of the <see cref="ExpressionContextFactory"/> class.
         /// </summary>
-        /// <param name="config">Config.</param>
-        public ExpressionContextFactory(RenderingConfig config)
+        /// <param name="serviceProvider">DI service provider.</param>
+        public ExpressionContextFactory(IServiceProvider serviceProvider)
         {
-            this.config = config ?? throw new System.ArgumentNullException(nameof(config));
+            this.serviceProvider = serviceProvider ?? throw new System.ArgumentNullException(nameof(serviceProvider));
         }
     }
 }

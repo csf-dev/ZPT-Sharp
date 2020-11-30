@@ -60,7 +60,7 @@ namespace ZptSharp.Config
         /// Gets an action which is used to build &amp; add values to the root ZPT context.
         /// </summary>
         /// <value>The context builder.</value>
-        public virtual Action<IConfiguresRootContext> ContextBuilder { get; private set; }
+        public virtual Action<IConfiguresRootContext, IServiceProvider> ContextBuilder { get; private set; }
 
         /// <summary>
         /// <para>
@@ -133,7 +133,7 @@ namespace ZptSharp.Config
         {
             DocumentEncoding = Encoding.UTF8;
             KeywordOptions = new ReadOnlyDictionary<string, object>(new Dictionary<string, object>());
-            ContextBuilder = c => { };
+            ContextBuilder = (c, s) => { };
         }
 
         /// <summary>

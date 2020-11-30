@@ -21,13 +21,15 @@ namespace ZptSharp.Metal
                                                                                                  [Frozen] IGetsMacro macroProvider,
                                                                                                  [Frozen, MockLogger] ILogger<MacroUsageContextProcessor> logger,
                                                                                                  MacroUsageContextProcessor sut,
-                                                                                                 AttributeSpec spec,
+                                                                                                 AttributeSpec spec1,
+                                                                                                 AttributeSpec spec2,
                                                                                                  ExpressionContext context,
                                                                                                  INode element)
         {
-            Mock.Get(specProvider).SetupGet(x => x.UseMacro).Returns(spec);
+            Mock.Get(specProvider).SetupGet(x => x.UseMacro).Returns(spec1);
+            Mock.Get(specProvider).SetupGet(x => x.ExtendMacro).Returns(spec2);
             Mock.Get(macroProvider)
-                .Setup(x => x.GetMacroAsync(element, context, spec, CancellationToken.None))
+                .Setup(x => x.GetMacroAsync(element, context, new[] { spec1, spec2 }, CancellationToken.None))
                 .Returns(Task.FromResult<MetalMacro>(null));
             context.CurrentElement = element;
 
@@ -44,19 +46,21 @@ namespace ZptSharp.Metal
                                                                                               MacroUsageContextProcessor sut,
                                                                                               MetalMacro macro,
                                                                                               MetalMacro expandedMacro,
-                                                                                              AttributeSpec spec,
+                                                                                              AttributeSpec spec1,
+                                                                                              AttributeSpec spec2,
                                                                                               ExpressionContext context,
                                                                                               INode element,
                                                                                               IAttribute attribute,
                                                                                               string expression)
         {
-            Mock.Get(specProvider).SetupGet(x => x.UseMacro).Returns(spec);
+            Mock.Get(specProvider).SetupGet(x => x.UseMacro).Returns(spec1);
+            Mock.Get(specProvider).SetupGet(x => x.ExtendMacro).Returns(spec2);
             Mock.Get(element).SetupGet(x => x.Attributes).Returns(new List<IAttribute> { attribute });
-            Mock.Get(attribute).Setup(x => x.Matches(spec)).Returns(true);
+            Mock.Get(attribute).Setup(x => x.Matches(spec1)).Returns(true);
             Mock.Get(attribute).SetupGet(x => x.Value).Returns(expression);
             context.CurrentElement = element;
             Mock.Get(macroProvider)
-                .Setup(x => x.GetMacroAsync(element, context, spec, CancellationToken.None))
+                .Setup(x => x.GetMacroAsync(element, context, new[] { spec1, spec2 }, CancellationToken.None))
                 .Returns(Task.FromResult(macro));
             Mock.Get(macroExpander)
                 .Setup(x => x.ExpandMacroAsync(macro, context, CancellationToken.None))

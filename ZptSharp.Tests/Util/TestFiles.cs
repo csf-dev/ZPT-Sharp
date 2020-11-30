@@ -32,6 +32,14 @@ namespace ZptSharp.Util
         }
 
         /// <summary>
+        /// Gets the full path to a file or directory within the "TestFiles" directory.
+        /// </summary>
+        /// <returns>The full file path.</returns>
+        /// <param name="relativePathParts">The parts of the path to the desired file, relative to the TestFiles directory..</param>
+        public static string GetPath(params string[] relativePathParts)
+            => GetPath(String.Join(Path.DirectorySeparatorChar, relativePathParts));
+
+        /// <summary>
         /// Gets a string from a specified stream.
         /// </summary>
         /// <returns>The string rendering of the stream.</returns>

@@ -15,10 +15,12 @@ namespace ZptSharp.Rendering
     {
         [Test, AutoMoqData]
         public void GetExpressionContext_returns_context_with_correct_document_root_element_and_model(IDocument document,
-                                                                                                      [MockedConfig] RenderZptDocumentRequest request,
+                                                                                                      RenderZptDocumentRequest request,
+                                                                                                      [Frozen] IServiceProvider serviceProvider,
                                                                                                       INode element,
                                                                                                       ExpressionContextFactory sut)
         {
+            Mock.Get(serviceProvider).Setup(x => x.GetService(typeof(RenderingConfig))).Returns(() => RenderingConfig.Default);
             Mock.Get(document).SetupGet(x => x.RootElement).Returns(element);
             var result = sut.GetExpressionContext(document, request);
 
@@ -30,13 +32,15 @@ namespace ZptSharp.Rendering
         [Test, AutoMoqData]
         public void GetExpressionContext_returns_context_configured_with_config_action_if_it_is_specified(IDocument document,
                                                                                                           [MockedConfig, Frozen] RenderingConfig config,
+                                                                                                          [Frozen] IServiceProvider serviceProvider,
                                                                                                           RenderZptDocumentRequest request,
                                                                                                           INode element,
                                                                                                           ExpressionContextFactory sut,
                                                                                                           object val)
         {
+            Mock.Get(serviceProvider).Setup(x => x.GetService(typeof(RenderingConfig))).Returns(() => config);
             Mock.Get(document).SetupGet(x => x.RootElement).Returns(element);
-            Mock.Get(config).SetupGet(x => x.ContextBuilder).Returns(c => c.AddToRootContext("Foo", val));
+            Mock.Get(config).SetupGet(x => x.ContextBuilder).Returns((c, s) => c.AddToRootContext("Foo", val));
             var result = sut.GetExpressionContext(document, request);
 
             Assert.That(result.GlobalDefinitions["Foo"], Is.SameAs(val));

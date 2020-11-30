@@ -55,7 +55,7 @@ namespace ZptSharp.Config
         {
             var sut = RenderingConfig.CreateBuilder();
 
-            Action<IConfiguresRootContext> contextBuilder = c => { };
+            Action<IConfiguresRootContext, IServiceProvider> contextBuilder = (c, s) => { };
             sut.ContextBuilder = contextBuilder;
 
             var result = sut.GetConfig().ContextBuilder;
