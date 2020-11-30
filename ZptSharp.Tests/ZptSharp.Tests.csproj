@@ -44,6 +44,7 @@
     <Folder Include="Dom.Xml\" />
     <Folder Include="Dom.AngleSharp\" />
     <Folder Include="Tal\" />
+    <Folder Include="StringExpressions\" />
   </ItemGroup>
     
   <ItemGroup>

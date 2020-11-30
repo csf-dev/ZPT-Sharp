@@ -28,6 +28,7 @@ namespace ZptSharp
             new PathExpressionsRegistrations().RegisterServices(serviceCollection);
             new RenderingRegistrations().RegisterServices(serviceCollection);
             new SourceAnnotationServiceRegistrations().RegisterServices(serviceCollection);
+            new StringExpressionsRegistrations().RegisterServices(serviceCollection);
             new TalServiceRegistrations().RegisterServices(serviceCollection);
 
             return serviceCollection;
@@ -43,7 +44,26 @@ namespace ZptSharp
             if (provider == null)
                 throw new ArgumentNullException(nameof(provider));
 
-            provider.GetRequiredService<IRegistersExpressionEvaluator>().RegisterEvaluatorType<PathExpressions.PathExpressionEvaluator>("path");
+            provider
+                .GetRequiredService<IRegistersExpressionEvaluator>()
+                .RegisterEvaluatorType<PathExpressions.PathExpressionEvaluator>(WellKnownExpressionPrefix.Path);
+
+            return provider;
+        }
+
+        /// <summary>
+        /// Configures ZPT Sharp to read and handle TALES "string" expressions.
+        /// </summary>
+        /// <returns>The same service provider instance, after setting it up.</returns>
+        /// <param name="provider">The service provider.</param>
+        public static IServiceProvider UseZptStringExpressions(this IServiceProvider provider)
+        {
+            if (provider == null)
+                throw new ArgumentNullException(nameof(provider));
+
+            provider
+                .GetRequiredService<IRegistersExpressionEvaluator>()
+                .RegisterEvaluatorType<StringExpressions.StringExpressionEvaluator>(WellKnownExpressionPrefix.String);
 
             return provider;
         }
