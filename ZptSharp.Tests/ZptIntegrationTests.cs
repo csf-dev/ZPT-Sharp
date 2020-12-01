@@ -17,7 +17,7 @@ namespace ZptSharp
     public class ZptIntegrationTests
     {
         [Test, Description("For every file in the 'expected output' directory of the integration test path, the file should be rendered as-expected.")]
-        //[Ignore("Temporarily ignored")]
+        [Ignore("Temporarily ignored")]
         public async Task Each_output_file_should_render_as_expected([ValueSource(nameof(GetExpectedOutputFiles))] string expectedPath)
         {
             var result = await IntegrationTester.PerformIntegrationTest(expectedPath, model: GetModel(), config: GetConfig());
