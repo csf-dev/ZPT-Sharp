@@ -31,13 +31,11 @@ namespace ZptSharp.SourceAnnotation
                                                                       INode sibling1,
                                                                       INode sibling2,
                                                                       INode comment,
-                                                                      IDocument document,
                                                                       string commentText)
         {
             Mock.Get(element).SetupGet(x => x.ParentElement).Returns(parent);
             Mock.Get(parent).SetupGet(x => x.ChildNodes).Returns(new List<INode> { sibling1, element, sibling2 });
-            Mock.Get(element).SetupGet(x => x.Document).Returns(document);
-            Mock.Get(document).Setup(x => x.CreateComment(commentText)).Returns(comment);
+            Mock.Get(element).Setup(x => x.CreateComment(commentText)).Returns(comment);
 
             sut.AddCommentBefore(element, commentText);
 
@@ -51,13 +49,11 @@ namespace ZptSharp.SourceAnnotation
                                                                       INode sibling1,
                                                                       INode sibling2,
                                                                       INode comment,
-                                                                      IDocument document,
                                                                       string commentText)
         {
             Mock.Get(element).SetupGet(x => x.ParentElement).Returns(parent);
             Mock.Get(parent).SetupGet(x => x.ChildNodes).Returns(new List<INode> { sibling1, element, sibling2 });
-            Mock.Get(element).SetupGet(x => x.Document).Returns(document);
-            Mock.Get(document).Setup(x => x.CreateComment(commentText)).Returns(comment);
+            Mock.Get(element).Setup(x => x.CreateComment(commentText)).Returns(comment);
 
             sut.AddCommentAfter(element, commentText);
 

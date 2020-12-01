@@ -58,7 +58,7 @@ namespace ZptSharp.Tal
                 return;
             }
 
-            var attribute = existingAttribute ?? element.Document.CreateAttribute(spec);
+            var attribute = existingAttribute ?? element.CreateAttribute(spec);
             attribute.Value = expressionResult.ToString();
             if (!element.Attributes.Contains(attribute))
                 element.Attributes.Add(attribute);

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Linq;
 using HtmlAgilityPack;
 using NUnit.Framework;
 using ZptSharp.Rendering;
@@ -20,27 +21,9 @@ namespace ZptSharp.Dom
             Assert.That(GetHtml(sut.NativeDocument), Is.EqualTo("<!--This is a comment--><html><body><div>Hello</div></body></html>"));
         }
 
-        [Test]
-        public void CreateComment_throws_ane_if_content_is_null()
-        {
-            var html = "<html><body><div>Hello</div></body></html>";
-            var sut = GetSut(html);
-
-            Assert.That(() => sut.CreateComment(null), Throws.ArgumentNullException);
-        }
-
-        [Test, AutoMoqData]
-        public void CreateComment_returns_a_comment(string commentText)
-        {
-            var html = "<html><body><div>Hello</div></body></html>";
-            var sut = GetSut(html);
-
-            Assert.That(() => sut.CreateComment(commentText), Is.Not.Null);
-        }
-
         HapDocument GetSut(string html)
         {
-            var native = new HtmlAgilityPack.HtmlDocument();
+            var native = new HtmlDocument();
             native.LoadHtml(html);
             return new HapDocument(native, new UnknownSourceInfo());
         }

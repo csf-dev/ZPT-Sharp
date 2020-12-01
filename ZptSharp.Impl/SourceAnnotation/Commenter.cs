@@ -31,7 +31,7 @@ namespace ZptSharp.SourceAnnotation
             }
 
             var elementIndex = element.ParentElement.ChildNodes.IndexOf(element);
-            var comment = element.Document.CreateComment(commentText);
+            var comment = element.CreateComment(commentText);
             element.ParentElement.ChildNodes.Insert(elementIndex, comment);
         }
 
@@ -48,7 +48,7 @@ namespace ZptSharp.SourceAnnotation
                 throw new ArgumentException(Resources.ExceptionMessage.ElementMustHaveAParent, nameof(element));
 
             var elementIndex = element.ParentElement.ChildNodes.IndexOf(element);
-            var comment = element.Document.CreateComment(commentText);
+            var comment = element.CreateComment(commentText);
             element.ParentElement.ChildNodes.Insert(elementIndex + 1, comment);
         }
 

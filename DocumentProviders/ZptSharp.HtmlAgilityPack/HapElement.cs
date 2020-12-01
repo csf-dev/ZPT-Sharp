@@ -12,6 +12,8 @@ namespace ZptSharp.Dom
     /// </summary>
     public class HapElement : ElementBase
     {
+        internal const string CommentFormat = "<!--{0}-->";
+
         readonly IList<INode> sourceChildElements;
         readonly EventRaisingList<INode> childElements;
         readonly EventRaisingList<IAttribute> attributes;
@@ -40,6 +42,29 @@ namespace ZptSharp.Dom
         /// </summary>
         /// <value><c>true</c> if the current instance is an element; otherwise, <c>false</c>.</value>
         public override bool IsElement => NativeElement.NodeType == HtmlNodeType.Element;
+
+        /// <summary>
+        /// Gets a value which indicates whether or not the current element has "CData"-like behaviour.
+        /// One example of this is a <c>&lt;textarea&gt;</c> element.  Its contents are not HTML-encoded.
+        /// </summary>
+        /// <value><c>true</c> if the current element is treated like a <c>CData</c> element; otherwise, <c>false</c>.</value>
+        bool ShouldElementBeTreatedAsCData
+        {
+            get
+            {
+                if (NativeElement.NodeType != HtmlNodeType.Element)
+                    return false;
+
+                return (from flag in HtmlNode.ElementsFlags
+                        let behaviour = flag.Value
+                        let elementName = flag.Key
+                        where
+                            behaviour.HasFlag(HtmlElementFlag.CData)
+                            && String.Equals(elementName, NativeElement.Name, StringComparison.InvariantCultureIgnoreCase)
+                        select elementName)
+                    .Any();
+            }
+        }
 
         /// <summary>
         /// Returns a <see cref="String"/> that represents the current
@@ -82,6 +107,69 @@ namespace ZptSharp.Dom
             }
 
             return closedList[copiedElement];
+        }
+
+        /// <summary>
+        /// Creates and returns a new comment node.
+        /// </summary>
+        /// <returns>The comment node.</returns>
+        /// <param name="commentText">The text for the comment.</param>
+        public override INode CreateComment(string commentText)
+        {
+            commentText = commentText ?? String.Empty;
+            var node = NativeElement.OwnerDocument.CreateComment(String.Format(CommentFormat, commentText));
+            return new HapElement(node, (HapDocument) Document);
+        }
+
+        /// <summary>
+        /// <para>
+        /// Creates and returns a new text node from the specified content.
+        /// Even if the content contains valid markup, it is strictly to be treated as text.
+        /// </para>
+        /// <para>
+        /// The node will be created in such a way as to be suitable for inclusion within
+        /// the current element.  That means that if the current element is CDATA, then the text
+        /// will not be HTML encoded, otherwise it will.
+        /// </para>
+        /// </summary>
+        /// <returns>A text node.</returns>
+        /// <param name="content">The text content for the node.</param>
+        public override INode CreateTextNode(string content)
+        {
+            content = content ?? String.Empty;
+            var text = ShouldElementBeTreatedAsCData ? content : HtmlEntity.Entitize(content, true, true);
+            return new HapElement(NativeElement.OwnerDocument.CreateTextNode(text), (HapDocument)Document);
+        }
+
+        /// <summary>
+        /// Parses the specified text <paramref name="markup"/> and returns the resulting nodes.
+        /// </summary>
+        /// <returns>The parsed nodes.</returns>
+        /// <param name="markup">Markup text.</param>
+        public override IList<INode> ParseAsNodes(string markup)
+        {
+            if (markup == null) return new INode[0];
+
+            var doc = new HtmlDocument();
+            doc.LoadHtml(markup);
+
+            return doc.DocumentNode.ChildNodes
+                .Select(x => (INode) new HapElement(x, (HapDocument)Document))
+                .ToList();
+        }
+
+        /// <summary>
+        /// Creates and returns a new attribute from the specified specification.
+        /// </summary>
+        /// <returns>An attribute.</returns>
+        /// <param name="spec">The attribute specification which will be used to name the attribute.</param>
+        public override IAttribute CreateAttribute(AttributeSpec spec)
+        {
+            if (spec == null)
+                throw new ArgumentNullException(nameof(spec));
+
+            var name = (spec.Namespace?.Prefix != null) ? $"{spec.Namespace.Prefix}:{spec.Name}" : spec.Name;
+            return new HapAttribute(NativeElement.OwnerDocument.CreateAttribute(name));
         }
 
         /// <summary>

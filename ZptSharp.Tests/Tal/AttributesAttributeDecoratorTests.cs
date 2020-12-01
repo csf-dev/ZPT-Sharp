@@ -41,7 +41,6 @@ namespace ZptSharp.Tal
                                                                            AttributesAttributeDecorator sut,
                                                                            [StubDom] ExpressionContext context,
                                                                            [StubDom] IAttribute attribute,
-                                                                           [StubDom] IDocument doc,
                                                                            [StubDom] IAttribute existingAttribute,
                                                                            AttributeSpec spec,
                                                                            ExpressionContextProcessingResult wrappedResult)
@@ -54,8 +53,7 @@ namespace ZptSharp.Tal
             context.CurrentElement.Attributes.Clear();
             context.CurrentElement.Attributes.Add(attribute);
             context.CurrentElement.Attributes.Add(existingAttribute);
-            Mock.Get(context.CurrentElement).SetupGet(x => x.Document).Returns(doc);
-            Mock.Get(doc)
+            Mock.Get(context.CurrentElement)
                 .Setup(x => x.CreateAttribute(It.IsAny<AttributeSpec>()))
                 .Returns((AttributeSpec s) => new StubAttribute(s.Name));
             Mock.Get(existingAttribute).SetupGet(x => x.Name).Returns("style");
@@ -94,7 +92,6 @@ namespace ZptSharp.Tal
                                                                                                           AttributesAttributeDecorator sut,
                                                                                                           [StubDom] ExpressionContext context,
                                                                                                           [StubDom] IAttribute attribute,
-                                                                                                          [StubDom] IDocument doc,
                                                                                                           [StubDom] IAttribute existingAttribute,
                                                                                                           AttributeSpec spec,
                                                                                                           ExpressionContextProcessingResult wrappedResult)
@@ -107,8 +104,7 @@ namespace ZptSharp.Tal
             context.CurrentElement.Attributes.Clear();
             context.CurrentElement.Attributes.Add(attribute);
             context.CurrentElement.Attributes.Add(existingAttribute);
-            Mock.Get(context.CurrentElement).SetupGet(x => x.Document).Returns(doc);
-            Mock.Get(doc)
+            Mock.Get(context.CurrentElement)
                 .Setup(x => x.CreateAttribute(It.IsAny<AttributeSpec>()))
                 .Returns((AttributeSpec s) => new StubAttribute(s.Name));
             Mock.Get(existingAttribute).SetupGet(x => x.Name).Returns("style");
@@ -137,7 +133,6 @@ namespace ZptSharp.Tal
                                                                                                                 AttributesAttributeDecorator sut,
                                                                                                                 [StubDom] ExpressionContext context,
                                                                                                                 [StubDom] IAttribute attribute,
-                                                                                                                [StubDom] IDocument doc,
                                                                                                                 [StubDom] IAttribute existingAttribute,
                                                                                                                 AttributeSpec spec,
                                                                                                                 ExpressionContextProcessingResult wrappedResult,

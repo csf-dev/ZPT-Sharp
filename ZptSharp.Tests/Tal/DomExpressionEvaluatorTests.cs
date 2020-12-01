@@ -20,7 +20,6 @@ namespace ZptSharp.Tal
                                                                                               string expression,
                                                                                               string expressionResult,
                                                                                               [StubDom] ExpressionContext context,
-                                                                                              [StubDom] IDocument doc,
                                                                                               [StubDom] INode textNode)
         {
             Mock.Get(evaluator)
@@ -29,8 +28,7 @@ namespace ZptSharp.Tal
             Mock.Get(resultInterpreter)
                 .Setup(x => x.DoesResultAbortTheAction(expressionResult))
                 .Returns(false);
-            Mock.Get(context.CurrentElement).SetupGet(x => x.Document).Returns(doc);
-            Mock.Get(doc).Setup(x => x.CreateTextNode(expressionResult)).Returns(textNode);
+            Mock.Get(context.CurrentElement).Setup(x => x.CreateTextNode(expressionResult)).Returns(textNode);
 
             var result = await sut.EvaluateExpressionAsync(expression, context);
 
@@ -46,7 +44,6 @@ namespace ZptSharp.Tal
                                                                                              string expression,
                                                                                              string expressionResult,
                                                                                              [StubDom] ExpressionContext context,
-                                                                                             [StubDom] IDocument doc,
                                                                                              [StubDom] INode textNode)
         {
             Mock.Get(evaluator)
@@ -55,8 +52,7 @@ namespace ZptSharp.Tal
             Mock.Get(resultInterpreter)
                 .Setup(x => x.DoesResultAbortTheAction(expressionResult))
                 .Returns(false);
-            Mock.Get(context.CurrentElement).SetupGet(x => x.Document).Returns(doc);
-            Mock.Get(doc).Setup(x => x.CreateTextNode(expressionResult)).Returns(textNode);
+            Mock.Get(context.CurrentElement).Setup(x => x.CreateTextNode(expressionResult)).Returns(textNode);
 
             var result = await sut.EvaluateExpressionAsync($"text {expression}", context);
 
@@ -72,7 +68,6 @@ namespace ZptSharp.Tal
                                                                                                    string expression,
                                                                                                    string expressionResult,
                                                                                                    [StubDom] ExpressionContext context,
-                                                                                                   [StubDom] IDocument doc,
                                                                                                    [StubDom] INode textNode)
         {
             Mock.Get(evaluator)
@@ -81,8 +76,7 @@ namespace ZptSharp.Tal
             Mock.Get(resultInterpreter)
                 .Setup(x => x.DoesResultAbortTheAction(expressionResult))
                 .Returns(false);
-            Mock.Get(context.CurrentElement).SetupGet(x => x.Document).Returns(doc);
-            Mock.Get(doc).Setup(x => x.ParseAsNodes(expressionResult)).Returns(() => new[] { textNode });
+            Mock.Get(context.CurrentElement).Setup(x => x.ParseAsNodes(expressionResult)).Returns(() => new[] { textNode });
 
             var result = await sut.EvaluateExpressionAsync($"structure {expression}", context);
 

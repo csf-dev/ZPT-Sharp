@@ -19,6 +19,14 @@ namespace ZptSharp.Dom
 
         public override bool IsInNamespace(Namespace @namespace) => false;
 
+        public override INode CreateComment(string commentText) => throw new NotImplementedException();
+
+        public override INode CreateTextNode(string content) => throw new NotImplementedException();
+
+        public override IList<INode> ParseAsNodes(string markup) => throw new NotImplementedException();
+
+        public override IAttribute CreateAttribute(AttributeSpec spec) => throw new NotImplementedException();
+
         public StubElement(IDocument document) : base(document) { }
     }
 }

@@ -31,10 +31,10 @@ namespace ZptSharp.Dom
         /// </summary>
         /// <param name="name">Attribute name.</param>
         /// <param name="namespace">Attribute namespace.</param>
-        public AttributeSpec(string name, Namespace @namespace)
+        public AttributeSpec(string name, Namespace @namespace = null)
         {
             Name = name ?? throw new ArgumentNullException(nameof(name));
-            Namespace = @namespace ?? throw new ArgumentNullException(nameof(@namespace));
+            Namespace = @namespace;
         }
     }
 }

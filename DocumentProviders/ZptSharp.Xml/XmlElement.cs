@@ -97,6 +97,42 @@ namespace ZptSharp.Dom
         }
 
         /// <summary>
+        /// Creates and returns a new comment node.
+        /// </summary>
+        /// <returns>The comment node.</returns>
+        /// <param name="commentText">The text for the comment.</param>
+        public override INode CreateComment(string commentText)
+        {
+            if (commentText == null)
+                throw new ArgumentNullException(nameof(commentText));
+
+            var node = new XComment(commentText);
+            return new XmlElement(node, (XmlDocument) Document);
+        }
+
+        /// <summary>
+        /// Creates and returns a new text node from the specified content.
+        /// Even if the content contains valid markup, it is strictly to be treated as text.
+        /// </summary>
+        /// <returns>A text node.</returns>
+        /// <param name="content">The text content for the node.</param>
+        public override INode CreateTextNode(string content) => throw new NotImplementedException();
+
+        /// <summary>
+        /// Parses the specified text <paramref name="markup"/> and returns the resulting nodes.
+        /// </summary>
+        /// <returns>The parsed nodes.</returns>
+        /// <param name="markup">Markup text.</param>
+        public override IList<INode> ParseAsNodes(string markup) => throw new NotImplementedException();
+
+        /// <summary>
+        /// Creates and returns a new attribute from the specified specification.
+        /// </summary>
+        /// <returns>An attribute.</returns>
+        /// <param name="spec">The attribute specification which will be used to name the attribute.</param>
+        public override IAttribute CreateAttribute(AttributeSpec spec) => throw new NotImplementedException();
+
+        /// <summary>
         /// Gets a value which indicates whether or not the current element is in the specified namespace.
         /// </summary>
         /// <returns><c>true</c>, if the element is in the specified namespace, <c>false</c> otherwise.</returns>

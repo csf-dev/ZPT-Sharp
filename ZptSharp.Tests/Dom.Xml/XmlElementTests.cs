@@ -155,5 +155,27 @@ namespace ZptSharp.Dom
         }
 
         #endregion
+
+        #region CreateComment
+
+        [Test]
+        public void CreateComment_throws_ane_if_content_is_null()
+        {
+            var html = "<html><body><div>Hello</div></body></html>";
+            var sut = XmlDocumentUtil.GetNode(html);
+
+            Assert.That(() => sut.CreateComment(null), Throws.ArgumentNullException);
+        }
+
+        [Test, AutoMoqData]
+        public void CreateComment_returns_a_comment(string commentText)
+        {
+            var html = "<html><body><div>Hello</div></body></html>";
+            var sut = XmlDocumentUtil.GetNode(html);
+
+            Assert.That(() => sut.CreateComment(commentText), Is.Not.Null);
+        }
+
+        #endregion
     }
 }

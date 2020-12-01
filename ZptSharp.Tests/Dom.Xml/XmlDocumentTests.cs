@@ -26,24 +26,6 @@ namespace ZptSharp.Dom
 </html>"));
         }
 
-        [Test]
-        public void CreateComment_throws_ane_if_content_is_null()
-        {
-            var html = "<html><body><div>Hello</div></body></html>";
-            var sut = GetSut(html);
-
-            Assert.That(() => sut.CreateComment(null), Throws.ArgumentNullException);
-        }
-
-        [Test, AutoMoqData]
-        public void CreateComment_returns_a_comment(string commentText)
-        {
-            var html = "<html><body><div>Hello</div></body></html>";
-            var sut = GetSut(html);
-
-            Assert.That(() => sut.CreateComment(commentText), Is.Not.Null);
-        }
-
         XmlDocument GetSut(string xml)
         {
             var native = XDocument.Parse(xml);

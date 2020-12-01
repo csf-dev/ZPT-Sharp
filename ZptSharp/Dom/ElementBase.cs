@@ -104,7 +104,36 @@ namespace ZptSharp.Dom
         /// <returns><c>true</c>, if the element is in the specified namespace, <c>false</c> otherwise.</returns>
         /// <param name="namespace">A namespace.</param>
         public abstract bool IsInNamespace(Namespace @namespace);
-            
+
+        /// <summary>
+        /// Creates and returns a new comment node.
+        /// </summary>
+        /// <returns>The comment node.</returns>
+        /// <param name="commentText">The text for the comment.</param>
+        public abstract INode CreateComment(string commentText);
+
+        /// <summary>
+        /// Creates and returns a new text node from the specified content.
+        /// Even if the content contains valid markup, it is strictly to be treated as text.
+        /// </summary>
+        /// <returns>A text node.</returns>
+        /// <param name="content">The text content for the node.</param>
+        public abstract INode CreateTextNode(string content);
+
+        /// <summary>
+        /// Parses the specified text <paramref name="markup"/> and returns the resulting nodes.
+        /// </summary>
+        /// <returns>The parsed nodes.</returns>
+        /// <param name="markup">Markup text.</param>
+        public abstract IList<INode> ParseAsNodes(string markup);
+
+        /// <summary>
+        /// Creates and returns a new attribute from the specified specification.
+        /// </summary>
+        /// <returns>An attribute.</returns>
+        /// <param name="spec">The attribute specification which will be used to name the attribute.</param>
+        public abstract IAttribute CreateAttribute(AttributeSpec spec);
+
         IDocumentSourceInfo IHasDocumentSourceInfo.SourceInfo => SourceInfo.Document;
 
         IEnumerable<INode> IHasElements.GetChildElements() => ChildNodes;

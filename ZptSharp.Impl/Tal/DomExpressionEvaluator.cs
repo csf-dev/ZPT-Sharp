@@ -66,8 +66,8 @@ namespace ZptSharp.Tal
             var value = expressionResult?.ToString();
             if (value == null) return new INode[0];
 
-            var doc = context.CurrentElement.Document;
-            return isStructure ? doc.ParseAsNodes(value) : new[] { doc.CreateTextNode(value) };
+            var ele = context.CurrentElement;
+            return isStructure ? ele.ParseAsNodes(value) : new[] { ele.CreateTextNode(value) };
         }
 
         /// <summary>
