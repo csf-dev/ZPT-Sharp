@@ -34,7 +34,9 @@ namespace ZptSharp.Util
                 .UseHapZptDocuments()
                 .UseXmlZptDocuments()
                 .UseZptPathExpressions()
-                .UseZptStringExpressions();
+                .UseZptStringExpressions()
+                .UseZptNotExpressions()
+                ;
 
             return provider;
         }

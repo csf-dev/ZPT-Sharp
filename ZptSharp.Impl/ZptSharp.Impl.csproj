@@ -23,12 +23,12 @@
     <Folder Include="Metal\" />
     <Folder Include="Dom\" />
     <Folder Include="Resources\" />
-    <Folder Include="PathExpressions\" />
-    <Folder Include="PathExpressions\ValueProviders\" />
+    <Folder Include="Expressions\PathExpressions\" />
     <Folder Include="Config\" />
     <Folder Include="Tal\" />
     <Folder Include="SourceAnnotation\" />
-    <Folder Include="StringExpressions\" />
+    <Folder Include="Expressions\NotExpressions\" />
+    <Folder Include="Expressions\StringExpressions\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ZptSharp\ZptSharp.csproj" />

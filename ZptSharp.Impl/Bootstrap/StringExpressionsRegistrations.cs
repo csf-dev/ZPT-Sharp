@@ -1,5 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using ZptSharp.StringExpressions;
+using ZptSharp.Expressions.StringExpressions;
 
 namespace ZptSharp.Bootstrap
 {

@@ -36,15 +36,14 @@
     <Folder Include="Metal\" />
     <Folder Include="TestFiles\" />
     <Folder Include="Util\" />
-    <Folder Include="PathExpressions\" />
-    <Folder Include="PathExpressions\ValueProviders\" />
+    <Folder Include="Expressions\PathExpressions\" />
     <Folder Include="Config\" />
     <Folder Include="SourceAnnotation\" />
     <Folder Include="Dom.HtmlAgilityPack\" />
     <Folder Include="Dom.Xml\" />
     <Folder Include="Dom.AngleSharp\" />
     <Folder Include="Tal\" />
-    <Folder Include="StringExpressions\" />
+    <Folder Include="Expressions\StringExpressions\" />
   </ItemGroup>
     
   <ItemGroup>

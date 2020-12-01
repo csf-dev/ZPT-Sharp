@@ -69,6 +69,12 @@ namespace ZptSharp.Dom
         }
 
         /// <summary>
+        /// Returns a <see cref="String"/> that represents the current <see cref="XmlAttribute"/>.
+        /// </summary>
+        /// <returns>A <see cref="String"/> that represents the current <see cref="XmlAttribute"/>.</returns>
+        public override string ToString() => Value;
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="XmlAttribute"/> class.
         /// </summary>
         /// <param name="nativeAttribute">Native attribute.</param>

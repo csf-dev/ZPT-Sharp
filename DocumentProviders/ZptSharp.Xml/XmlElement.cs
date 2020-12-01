@@ -116,21 +116,27 @@ namespace ZptSharp.Dom
         /// </summary>
         /// <returns>A text node.</returns>
         /// <param name="content">The text content for the node.</param>
-        public override INode CreateTextNode(string content) => throw new NotImplementedException();
+        public override INode CreateTextNode(string content)
+            => new XmlElement(new XText(content ?? String.Empty), (XmlDocument) Document);
 
         /// <summary>
         /// Parses the specified text <paramref name="markup"/> and returns the resulting nodes.
         /// </summary>
         /// <returns>The parsed nodes.</returns>
         /// <param name="markup">Markup text.</param>
-        public override IList<INode> ParseAsNodes(string markup) => throw new NotImplementedException();
+        public override IList<INode> ParseAsNodes(string markup)
+            => new[] { new XmlElement(XElement.Parse(markup ?? String.Empty), (XmlDocument)Document) };
 
         /// <summary>
         /// Creates and returns a new attribute from the specified specification.
         /// </summary>
         /// <returns>An attribute.</returns>
         /// <param name="spec">The attribute specification which will be used to name the attribute.</param>
-        public override IAttribute CreateAttribute(AttributeSpec spec) => throw new NotImplementedException();
+        public override IAttribute CreateAttribute(AttributeSpec spec)
+        {
+            var name = XName.Get(spec.Name, spec.Namespace?.Uri ?? XNamespace.None.NamespaceName);
+            return new XmlAttribute(new XAttribute(name, String.Empty));
+        }
 
         /// <summary>
         /// Gets a value which indicates whether or not the current element is in the specified namespace.

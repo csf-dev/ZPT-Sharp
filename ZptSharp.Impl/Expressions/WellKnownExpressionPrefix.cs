@@ -17,5 +17,11 @@ namespace ZptSharp.Expressions
         /// </summary>
         /// <value>The string prefix.</value>
         public static string String => "string";
+
+        /// <summary>
+        /// The prefix for 'not' expressions.
+        /// </summary>
+        /// <value>The not prefix.</value>
+        public static string Not => "not";
     }
 }

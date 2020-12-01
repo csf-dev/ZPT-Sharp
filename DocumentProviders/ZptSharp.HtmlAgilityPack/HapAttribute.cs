@@ -70,6 +70,12 @@ namespace ZptSharp.Dom
         /// <param name="namespace">The namespace.</param>
         public override bool IsNamespaceDeclarationFor(Namespace @namespace) => false;
 
+        /// <summary>
+        /// Returns a <see cref="String"/> that represents the current <see cref="HapAttribute"/>.
+        /// </summary>
+        /// <returns>A <see cref="String"/> that represents the current <see cref="HapAttribute"/>.</returns>
+        public override string ToString() => Value;
+
         (string, string) GetAttributeName(string name)
         {
             if (name == null) return (null, null);

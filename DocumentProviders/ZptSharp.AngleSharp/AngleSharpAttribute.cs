@@ -65,6 +65,12 @@ namespace ZptSharp.Dom
         public override bool IsNamespaceDeclarationFor(Namespace @namespace) => false;
 
         /// <summary>
+        /// Returns a <see cref="String"/> that represents the current <see cref="AngleSharpAttribute"/>.
+        /// </summary>
+        /// <returns>A <see cref="String"/> that represents the current <see cref="AngleSharpAttribute"/>.</returns>
+        public override string ToString() => Value;
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="AngleSharpAttribute"/> class.
         /// </summary>
         /// <param name="nativeAttribute">The native DOM attribute.</param>

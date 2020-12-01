@@ -1,5 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using ZptSharp.PathExpressions;
+using ZptSharp.Expressions.PathExpressions;
 
 namespace ZptSharp.Bootstrap
 {

@@ -25,6 +25,7 @@ namespace ZptSharp
             new DomServiceRegistrations().RegisterServices(serviceCollection);
             new ExpressionServiceRegistrations().RegisterServices(serviceCollection);
             new MetalServiceRegistrations().RegisterServices(serviceCollection);
+            new NotExpressionsRegistrations().RegisterServices(serviceCollection);
             new PathExpressionsRegistrations().RegisterServices(serviceCollection);
             new RenderingRegistrations().RegisterServices(serviceCollection);
             new SourceAnnotationServiceRegistrations().RegisterServices(serviceCollection);
@@ -46,7 +47,7 @@ namespace ZptSharp
 
             provider
                 .GetRequiredService<IRegistersExpressionEvaluator>()
-                .RegisterEvaluatorType<PathExpressions.PathExpressionEvaluator>(WellKnownExpressionPrefix.Path);
+                .RegisterEvaluatorType<Expressions.PathExpressions.PathExpressionEvaluator>(WellKnownExpressionPrefix.Path);
 
             return provider;
         }
@@ -63,7 +64,24 @@ namespace ZptSharp
 
             provider
                 .GetRequiredService<IRegistersExpressionEvaluator>()
-                .RegisterEvaluatorType<StringExpressions.StringExpressionEvaluator>(WellKnownExpressionPrefix.String);
+                .RegisterEvaluatorType<Expressions.StringExpressions.StringExpressionEvaluator>(WellKnownExpressionPrefix.String);
+
+            return provider;
+        }
+
+        /// <summary>
+        /// Configures ZPT Sharp to read and handle TALES "not" expressions.
+        /// </summary>
+        /// <returns>The same service provider instance, after setting it up.</returns>
+        /// <param name="provider">The service provider.</param>
+        public static IServiceProvider UseZptNotExpressions(this IServiceProvider provider)
+        {
+            if (provider == null)
+                throw new ArgumentNullException(nameof(provider));
+
+            provider
+                .GetRequiredService<IRegistersExpressionEvaluator>()
+                .RegisterEvaluatorType<Expressions.NotExpressions.NotExpressionEvaluator>(WellKnownExpressionPrefix.Not);
 
             return provider;
         }

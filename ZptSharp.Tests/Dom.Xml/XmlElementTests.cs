@@ -177,5 +177,62 @@ namespace ZptSharp.Dom
         }
 
         #endregion
+
+        #region CreateTextNode
+
+        [Test, AutoMoqData]
+        public void CreateTextNode_returns_a_node_object_which_is_not_an_element(string content)
+        {
+            var html = "<html><body><div>Hello</div></body></html>";
+            var sut = XmlDocumentUtil.GetNode(html);
+
+            Assert.That(() => sut.CreateTextNode(content), Is.Not.Null.And.Property(nameof(INode.IsElement)).False);
+        }
+
+        #endregion
+
+        #region CreateAttribute
+
+        [Test, AutoMoqData]
+        public void CreateAttribute_returns_an_attribute_object_with_correct_name()
+        {
+            var html = "<html><body><div>Hello</div></body></html>";
+            var sut = XmlDocumentUtil.GetNode(html);
+            var spec = new AttributeSpec("class");
+
+            var result = sut.CreateAttribute(spec);
+
+            Assert.That(result?.Name, Is.EqualTo("class"));
+        }
+
+        [Test, AutoMoqData]
+        public void CreateAttribute_can_create_a_prefixed_attribute_with_namespace()
+        {
+            var html = "<html><body><div>Hello</div></body></html>";
+            var sut = XmlDocumentUtil.GetNode(html);
+            var spec = new AttributeSpec("class", new Namespace("foo", "http://example.com/foo"));
+
+            var result = sut.CreateAttribute(spec);
+
+            Assert.That(result?.Name, Is.EqualTo("class"));
+        }
+
+        #endregion
+
+        #region ParseAsNodes
+
+        [Test, AutoMoqData]
+        public void ParseAsNodes_can_create_an_HTML_structure()
+        {
+            var html = "<html><body><div>Hello</div></body></html>";
+            var sut = XmlDocumentUtil.GetNode(html);
+
+            var result = sut.ParseAsNodes("<p><span class=\"test\">Text node</span></p>");
+
+            Assert.That(result.First().ChildNodes.First().Attributes.First().Name, Is.EqualTo("class"));
+        }
+
+        #endregion
+
     }
 }
