@@ -62,9 +62,9 @@ namespace ZptSharp.Tal
         /// <returns>A <see cref="T:System.String"/> that represents the current <see cref="T:ZptSharp.Tal.AttributeDefinition"/>.</returns>
         public override string ToString()
         {
-            var output = $"{Name} {Expression}";
+            var output = $"{Name}=\"{Expression}\"";
 
-            return (Prefix != null) ? $"{Prefix}:{output}" : output;
+            return !String.IsNullOrEmpty(Prefix) ? $"{Prefix}:{output}" : output;
         }
     }
 }

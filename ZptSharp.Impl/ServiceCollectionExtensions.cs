@@ -36,6 +36,27 @@ namespace ZptSharp
         }
 
         /// <summary>
+        /// <para>
+        /// Configures ZPT Sharp to use the standard/out-of-the-box expressions which are shipped with this package.
+        /// This is equivalent to using all of the following methods:
+        /// </para>
+        /// <list type="bullet">
+        /// <item><see cref="UseZptPathExpressions"/></item>
+        /// <item><see cref="UseZptStringExpressions"/></item>
+        /// <item><see cref="UseZptNotExpressions"/></item>
+        /// </list>
+        /// </summary>
+        /// <returns>The same service provider instance, after setting it up.</returns>
+        /// <param name="provider">The service provider.</param>
+        public static IServiceProvider UseStandardZptExpressions(this IServiceProvider provider)
+        {
+            return provider
+                .UseZptPathExpressions()
+                .UseZptStringExpressions()
+                .UseZptNotExpressions();
+        }
+
+        /// <summary>
         /// Configures ZPT Sharp to read and handle TALES "path" expressions.
         /// </summary>
         /// <returns>The same service provider instance, after setting it up.</returns>

@@ -77,5 +77,19 @@ namespace ZptSharp.Dom
         }
 
         #endregion
+
+        #region IsNamespaceDeclarationFor
+
+        [Test, AutoMoqData]
+        public void IsNamespaceDeclarationFor_returns_false(string name, Namespace @namespace)
+        {
+            var html = @"<div repeat=""item items"">";
+            var element = HapDocumentUtil.GetNode(html);
+            var attrib = element.Attributes.Single();
+            Assert.That(() => attrib.IsNamespaceDeclarationFor(@namespace), Is.False);
+        }
+
+        #endregion
+
     }
 }

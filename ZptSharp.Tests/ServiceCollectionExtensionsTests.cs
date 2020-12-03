@@ -15,13 +15,13 @@ namespace ZptSharp
         }
 
         [Test]
-        public void UseZptPathExpressions_does_not_throw()
+        public void UseStandardZptExpressions_does_not_throw()
         {
             var collection = new ServiceCollection();
             collection.AddZptSharp();
             var provider = collection.BuildServiceProvider();
 
-            Assert.That(() => provider.UseZptPathExpressions(), Throws.Nothing);
+            Assert.That(() => provider.UseStandardZptExpressions(), Throws.Nothing);
         }
     }
 }

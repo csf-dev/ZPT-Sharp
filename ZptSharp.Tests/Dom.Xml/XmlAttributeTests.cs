@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Xml.Linq;
 using NUnit.Framework;
 
 namespace ZptSharp.Dom
@@ -96,6 +97,37 @@ namespace ZptSharp.Dom
             var attribute = element.Attributes.First();
 
             Assert.That(() => attribute.IsInNamespace(namespaces.TalNamespace), Is.False);
+        }
+
+        #endregion
+
+        #region IsNamespaceDeclarationFor
+
+        [Test, AutoMoqData]
+        public void IsNamespaceDeclarationFor_returns_true_if_namespace_uri_matches()
+        {
+            var name = XName.Get("foo", "http://www.w3.org/2000/xmlns/");
+            var native = new XAttribute(name, "http://example.com/foo");
+            var attrib = new XmlAttribute(native);
+            Assert.That(() => attrib.IsNamespaceDeclarationFor(new Namespace("foo", "http://example.com/foo")), Is.True);
+        }
+
+        [Test, AutoMoqData]
+        public void IsNamespaceDeclarationFor_returns_true_if_prefix_differs_if_namespace_uri_matches()
+        {
+            var name = XName.Get("foo", "http://www.w3.org/2000/xmlns/");
+            var native = new XAttribute(name, "http://example.com/foo");
+            var attrib = new XmlAttribute(native);
+            Assert.That(() => attrib.IsNamespaceDeclarationFor(new Namespace("bar", "http://example.com/foo")), Is.True);
+        }
+
+        [Test, AutoMoqData]
+        public void IsNamespaceDeclarationFor_returns_false_if_namespace_uri_differs()
+        {
+            var name = XName.Get("foo", "http://www.w3.org/2000/xmlns/");
+            var native = new XAttribute(name, "http://example.com/foo");
+            var attrib = new XmlAttribute(native);
+            Assert.That(() => attrib.IsNamespaceDeclarationFor(new Namespace("foo", "http://example.com/bar")), Is.False);
         }
 
         #endregion
