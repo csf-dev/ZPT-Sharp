@@ -85,7 +85,7 @@ namespace ZptSharp.Tal
                 var message = String.Format(Resources.ExceptionMessage.UnexpectedErrorEvaluatingDefineAttribute,
                                             context.CurrentElement,
                                             definition);
-                throw new DefineVariableEvaluationException(message, ex);
+                throw new TalExpressionEvaluationException(message, ex);
             }
         }
 

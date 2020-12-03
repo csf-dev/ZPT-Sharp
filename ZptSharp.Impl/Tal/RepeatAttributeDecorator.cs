@@ -44,12 +44,16 @@ namespace ZptSharp.Tal
                                                                  context,
                                                                  parsedAttribute.VariableName);
 
+            // With a repeat attribute, we actually don't process the
+            // current/existing context, because we end up cloning it
+            // for each repetition.  The current context is used only
+            // as a template of sorts, hence aborting processing its
+            // children.
             context.CurrentElement.Remove();
+            var result = ExpressionContextProcessingResult.WithoutChildren;
+            result.AdditionalContexts = contexts;
 
-            return new ExpressionContextProcessingResult
-            {
-                AdditionalContexts = contexts,
-            };
+            return result;
         }
 
         /// <summary>

@@ -226,5 +226,11 @@ namespace ZptSharp.Resources {
                 return ResourceManager.GetString("InvalidAttributesAttributeValue", resourceCulture);
             }
         }
+        
+        internal static string CouldNotEvaluateContentOrReplaceExpression {
+            get {
+                return ResourceManager.GetString("CouldNotEvaluateContentOrReplaceExpression", resourceCulture);
+            }
+        }
     }
 }

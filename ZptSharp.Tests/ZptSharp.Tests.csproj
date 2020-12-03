@@ -45,6 +45,8 @@
     <Folder Include="Tal\" />
     <Folder Include="Expressions\StringExpressions\" />
     <Folder Include="Expressions\NotExpressions\" />
+    <Folder Include="TestFiles\CSharpExpressionIntegrationTests\" />
+    <Folder Include="IntegrationTests\" />
   </ItemGroup>
     
   <ItemGroup>

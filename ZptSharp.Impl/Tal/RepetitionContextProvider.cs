@@ -102,9 +102,13 @@ namespace ZptSharp.Tal
             var parent = sourceContext.CurrentElement.ParentElement;
             var indexOnParent = parent.ChildNodes.IndexOf(sourceContext.CurrentElement);
 
-            return repetitions
+            var contexts = repetitions
                 .Select(repetition => GetContext(repetition, parent, indexOnParent, sourceContext))
                 .ToList();
+
+            AddContextsToParent(contexts, parent, indexOnParent);
+
+            return contexts;
         }
 
         /// <summary>
@@ -132,10 +136,28 @@ namespace ZptSharp.Tal
             if(duplicateRepeatAttribute != null)
                 context.CurrentElement.Attributes.Remove(duplicateRepeatAttribute);
 
-            // Add the context's node to the parent
-            parent.ChildNodes.Insert(indexOnParent, context.CurrentElement);
-
             return context;
+        }
+
+        /// <summary>
+        /// Adds the context element nodes to the parent node.
+        /// </summary>
+        /// <remarks>
+        /// <para>
+        /// We reverse the list of contexts before adding them, so that (when adding them
+        /// all at the same index) they are naturally restored to the original order.
+        /// </para>
+        /// </remarks>
+        /// <param name="contexts">Contexts.</param>
+        /// <param name="parent">Parent.</param>
+        /// <param name="indexOnParent">Index on parent.</param>
+        void AddContextsToParent(List<ExpressionContext> contexts, INode parent, int indexOnParent)
+        {
+            var reversedContexts = new List<ExpressionContext>(contexts);
+            reversedContexts.Reverse();
+
+            foreach (var context in reversedContexts)
+                parent.ChildNodes.Insert(indexOnParent, context.CurrentElement);
         }
 
         /// <summary>

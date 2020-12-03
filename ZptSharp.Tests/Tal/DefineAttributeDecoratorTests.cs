@@ -301,7 +301,7 @@ namespace ZptSharp.Tal
             definition.Scope = VariableDefinition.LocalScope;
 
             Assert.That(() => sut.ProcessContextAsync(context).Result,
-                        Throws.Exception.With.InnerException.InstanceOf<DefineVariableEvaluationException>());
+                        Throws.Exception.With.InnerException.InstanceOf<TalExpressionEvaluationException>());
         }
 
     }

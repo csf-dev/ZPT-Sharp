@@ -55,8 +55,7 @@ namespace ZptSharp.Tal
                                                                          ExpressionContext context,
                                                                          CancellationToken token)
         {
-            var domResult = await evaluator.EvaluateExpressionAsync(attribute.Value, context, token)
-                .ConfigureAwait(false);
+            var domResult = await GetExpressionResultAsync(attribute, context, token);
 
             if (domResult.AbortAction)
                 return await wrapped.ProcessContextAsync(context, token).ConfigureAwait(false);
@@ -78,8 +77,7 @@ namespace ZptSharp.Tal
                                                                          ExpressionContext context,
                                                                          CancellationToken token)
         {
-            var domResult = await evaluator.EvaluateExpressionAsync(attribute.Value, context, token)
-                .ConfigureAwait(false);
+            var domResult = await GetExpressionResultAsync(attribute, context, token);
 
             if (domResult.AbortAction)
             {
@@ -98,6 +96,24 @@ namespace ZptSharp.Tal
             {
                 AdditionalContexts = additionalContexts
             };
+        }
+
+        async Task<DomValueExpressionResult> GetExpressionResultAsync(IAttribute attribute,
+                                                                      ExpressionContext context,
+                                                                      CancellationToken token)
+        {
+            try
+            {
+                return await evaluator.EvaluateExpressionAsync(attribute.Value, context, token)
+                    .ConfigureAwait(false);
+            }
+            catch(EvaluationException ex)
+            {
+                var message = String.Format(Resources.ExceptionMessage.CouldNotEvaluateContentOrReplaceExpression,
+                                            context.CurrentElement,
+                                            attribute.Value);
+                throw new TalExpressionEvaluationException(message, ex);
+            }
         }
 
         /// <summary>

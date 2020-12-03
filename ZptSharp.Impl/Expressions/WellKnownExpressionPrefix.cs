@@ -12,6 +12,13 @@
         public static string Path => "path";
 
         /// <summary>
+        /// The prefix for 'local' expressions (the same as 'path'
+        /// expressions but using only a local variable as the start-point for evaluation).
+        /// </summary>
+        /// <value>The local-path prefix.</value>
+        public static string LocalVariablePath => "local";
+
+        /// <summary>
         /// The prefix for 'string' expressions.
         /// </summary>
         /// <value>The string prefix.</value>

@@ -54,7 +54,9 @@ namespace ZptSharp.Expressions
         /// <param name="context">The expression context for which this provider will operate.</param>
         /// <param name="config">Rendering configuration.</param>
         /// <param name="builtinContextsProviderFactory">Builtin contexts provider factory.</param>
-        public NamedTalesValueForExpressionContextAdapter(ExpressionContext context, RenderingConfig config, IGetsBuiltinContextsProvider builtinContextsProviderFactory)
+        public NamedTalesValueForExpressionContextAdapter(ExpressionContext context,
+                                                          RenderingConfig config,
+                                                          IGetsBuiltinContextsProvider builtinContextsProviderFactory)
         {
             this.Context = context ?? throw new System.ArgumentNullException(nameof(context));
             this.config = config ?? throw new System.ArgumentNullException(nameof(config));

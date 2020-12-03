@@ -69,6 +69,9 @@ namespace ZptSharp
             provider
                 .GetRequiredService<IRegistersExpressionEvaluator>()
                 .RegisterEvaluatorType<Expressions.PathExpressions.PathExpressionEvaluator>(WellKnownExpressionPrefix.Path);
+            provider
+                .GetRequiredService<IRegistersExpressionEvaluator>()
+                .RegisterEvaluatorType<Expressions.PathExpressions.LocalVariablesOnlyPathExpressionEvaluator>(WellKnownExpressionPrefix.LocalVariablePath);
 
             return provider;
         }

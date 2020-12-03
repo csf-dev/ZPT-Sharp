@@ -129,4 +129,9 @@ Element:{0}</value>
         <value>The TAL 'attributes' attribute must have valid syntax.
 Element:{0}</value>
     </data>
+    <data name="CouldNotEvaluateContentOrReplaceExpression" xml:space="preserve">
+        <value>The TAL 'content' or 'replace' expression must evaluate without error.
+   Element:{0}
+Expression:{1}</value>
+    </data>
 </root>

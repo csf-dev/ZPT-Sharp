@@ -17,10 +17,25 @@ namespace ZptSharp.Expressions.PathExpressions
     /// </summary>
     public class DecoratorBasedObjectValueProvider : IGetsValueFromObject
     {
-        readonly RenderingConfig config;
-        readonly IGetsBuiltinContextsProvider builtinContextsProviderFactory;
-        readonly Dom.IReadsAndWritesDocument readerWriter;
-        readonly Metal.IGetsMetalDocumentAdapter adapterFactory;
+        /// <summary>
+        /// Gets the rendering configuration.
+        /// </summary>
+        protected readonly RenderingConfig config;
+
+        /// <summary>
+        /// Gets the builtin contexts provider factory.
+        /// </summary>
+        protected readonly IGetsBuiltinContextsProvider builtinContextsProviderFactory;
+
+        /// <summary>
+        /// Gets the document reader/writer.
+        /// </summary>
+        protected readonly Dom.IReadsAndWritesDocument readerWriter;
+
+        /// <summary>
+        /// Gets the METAL document adapter factory.
+        /// </summary>
+        protected readonly Metal.IGetsMetalDocumentAdapter adapterFactory;
 
         /// <summary>
         /// Attempts to get a value for a named reference, from the specified object.
@@ -49,7 +64,7 @@ namespace ZptSharp.Expressions.PathExpressions
         /// </para>
         /// </summary>
         /// <returns>The chain of responsibility.</returns>
-        IGetsValueFromObject BuildChainOfResponsibility()
+        protected virtual IGetsValueFromObject BuildChainOfResponsibility()
         {
             // Note that this is written "upside down".  The services are actually executed in
             // last-to-first order.  Each service wraps (and thus gets a chance to execute
@@ -72,7 +87,7 @@ namespace ZptSharp.Expressions.PathExpressions
         /// other service in the chain has failed to return a conclusive result.
         /// </summary>
         /// <returns>The failure service.</returns>
-        IGetsValueFromObject GetFailureService() => new FailureValueProvider();
+        protected virtual IGetsValueFromObject GetFailureService() => new FailureValueProvider();
 
         /// <summary>
         /// Gets a decorator which pre-processes the 2nd parameter to
@@ -82,28 +97,63 @@ namespace ZptSharp.Expressions.PathExpressions
         /// </summary>
         /// <returns>The context-wrapping decorator.</returns>
         /// <param name="service">Service.</param>
-        IGetsValueFromObject GetContextWrappingDecorator(IGetsValueFromObject service)
+        protected virtual IGetsValueFromObject GetContextWrappingDecorator(IGetsValueFromObject service)
             => new ExpressionContextWrappingDecorator(config, builtinContextsProviderFactory, service);
 
-        IGetsValueFromObject GetNamedValueLink(IGetsValueFromObject service)
+        /// <summary>
+        /// Gets a chain-of-responsibility link which processes named values.
+        /// </summary>
+        /// <returns>The chain of responsibility link.</returns>
+        /// <param name="service">The service to be wrapped by this additional link.</param>
+        protected virtual IGetsValueFromObject GetNamedValueLink(IGetsValueFromObject service)
             => new NamedTalesValueProvider(service);
 
-        IGetsValueFromObject GetStringKeyedDictionaryValueLink(IGetsValueFromObject service)
+        /// <summary>
+        /// Gets a chain-of-responsibility link which processes string-keyed dictionaries.
+        /// </summary>
+        /// <returns>The chain of responsibility link.</returns>
+        /// <param name="service">The service to be wrapped by this additional link.</param>
+        protected virtual IGetsValueFromObject GetStringKeyedDictionaryValueLink(IGetsValueFromObject service)
             => new StringKeyedDictionaryValueProvider(service);
 
-        IGetsValueFromObject GetIntegerKeyedDictionaryValueLink(IGetsValueFromObject service)
+        /// <summary>
+        /// Gets a chain-of-responsibility link which processes integer-keyed dictionaries.
+        /// </summary>
+        /// <returns>The chain of responsibility link.</returns>
+        /// <param name="service">The service to be wrapped by this additional link.</param>
+        protected virtual IGetsValueFromObject GetIntegerKeyedDictionaryValueLink(IGetsValueFromObject service)
             => new IntegerKeyedDictionaryValueProvider(service);
 
-        IGetsValueFromObject GetDynamicValueLink(IGetsValueFromObject service)
+        /// <summary>
+        /// Gets a chain-of-responsibility link which processes dynamic objects.
+        /// </summary>
+        /// <returns>The chain of responsibility link.</returns>
+        /// <param name="service">The service to be wrapped by this additional link.</param>
+        protected virtual IGetsValueFromObject GetDynamicValueLink(IGetsValueFromObject service)
             => new DynamicObjectValueProvider(service);
 
-        IGetsValueFromObject GetEnumerableValueLink(IGetsValueFromObject service)
+        /// <summary>
+        /// Gets a chain-of-responsibility link which processes enumerable objects.
+        /// </summary>
+        /// <returns>The chain of responsibility link.</returns>
+        /// <param name="service">The service to be wrapped by this additional link.</param>
+        protected virtual IGetsValueFromObject GetEnumerableValueLink(IGetsValueFromObject service)
             => new EnumerableValueProvider(service);
 
-        IGetsValueFromObject GetReflectionValueLink(IGetsValueFromObject service)
+        /// <summary>
+        /// Gets a chain-of-responsibility link which processes objects using reflection.
+        /// </summary>
+        /// <returns>The chain of responsibility link.</returns>
+        /// <param name="service">The service to be wrapped by this additional link.</param>
+        protected virtual IGetsValueFromObject GetReflectionValueLink(IGetsValueFromObject service)
             => new ReflectionObjectValueProvider(service);
 
-        IGetsValueFromObject GetTemplateDirectoryValueLink(IGetsValueFromObject service)
+        /// <summary>
+        /// Gets a chain-of-responsibility link which processes template directory objects.
+        /// </summary>
+        /// <returns>The chain of responsibility link.</returns>
+        /// <param name="service">The service to be wrapped by this additional link.</param>
+        protected virtual IGetsValueFromObject GetTemplateDirectoryValueLink(IGetsValueFromObject service)
             => new TemplateDirectoryValueProvider(service, readerWriter, config, adapterFactory);
 
         /// <summary>

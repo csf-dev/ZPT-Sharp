@@ -5,7 +5,7 @@ using NUnit.Framework;
 using ZptSharp.Config;
 using ZptSharp.Util;
 
-namespace ZptSharp
+namespace ZptSharp.IntegrationTests
 {
     [TestFixture, Parallelizable]
     public class SourceAnnotationIntegrationTests
