@@ -43,6 +43,29 @@ namespace ZptSharp.Rendering
         }
 
         [Test, AutoMoqData]
+        public async Task IterateContextAndChildrenAsync_should_not_process_child_contexts_if_result_indicates_not_to([Frozen] IProcessesExpressionContext contextProcessor,
+                                                                                                                      [Frozen] IGetsChildExpressionContexts childContextProvider,
+                                                                                                                      ExpressionContext context,
+                                                                                                                      ExpressionContext child1,
+                                                                                                                      ExpressionContext child2,
+                                                                                                                      ExpressionContextIterativeProcessor sut)
+        {
+            Mock.Get(childContextProvider)
+                .Setup(x => x.GetChildContexts(context))
+                .Returns(new[] { child1, child2 });
+            Mock.Get(contextProcessor)
+                .Setup(x => x.ProcessContextAsync(context, CancellationToken.None))
+                .Returns(Task.FromResult(ExpressionContextProcessingResult.WithoutChildren));
+
+            await sut.IterateContextAndChildrenAsync(context);
+
+            Mock.Get(contextProcessor)
+                .Verify(x => x.ProcessContextAsync(child1, CancellationToken.None), Times.Never, $"Does not process {nameof(child1)}");
+            Mock.Get(contextProcessor)
+                .Verify(x => x.ProcessContextAsync(child2, CancellationToken.None), Times.Never, $"Does not process {nameof(child2)}");
+        }
+
+        [Test, AutoMoqData]
         public async Task IterateContextAndChildrenAsync_should_process_additional_contexts([Frozen] IProcessesExpressionContext contextProcessor,
                                                                                             ExpressionContext context,
                                                                                             ExpressionContext additional1,

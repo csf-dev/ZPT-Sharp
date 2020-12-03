@@ -53,16 +53,16 @@ namespace ZptSharp.Tal
         }
 
         [Test, AutoMoqData]
-        public async Task ProcessContextAsync_return_abort_processing_result_if_a_condition_attribute_evaluates_to_falsey_value([Frozen] IProcessesExpressionContext wrapped,
-                                                                                                                                [Frozen] IGetsTalAttributeSpecs specProvider,
-                                                                                                                                [Frozen] IEvaluatesExpression evaluator,
-                                                                                                                                [Frozen] IInterpretsExpressionResult resultInterpreter,
-                                                                                                                                ConditionAttributeDecorator sut,
-                                                                                                                                AttributeSpec spec,
-                                                                                                                                [StubDom] ExpressionContext context,
-                                                                                                                                [StubDom] IAttribute attribute,
-                                                                                                                                [StubDom] INode parent,
-                                                                                                                                object expressionResult)
+        public async Task ProcessContextAsync_does_not_call_wrapped_service_if_a_condition_attribute_evaluates_to_falsey_value([Frozen] IProcessesExpressionContext wrapped,
+                                                                                                                               [Frozen] IGetsTalAttributeSpecs specProvider,
+                                                                                                                               [Frozen] IEvaluatesExpression evaluator,
+                                                                                                                               [Frozen] IInterpretsExpressionResult resultInterpreter,
+                                                                                                                               ConditionAttributeDecorator sut,
+                                                                                                                               AttributeSpec spec,
+                                                                                                                               [StubDom] ExpressionContext context,
+                                                                                                                               [StubDom] IAttribute attribute,
+                                                                                                                               [StubDom] INode parent,
+                                                                                                                               object expressionResult)
         {
             Mock.Get(wrapped)
                 .Setup(x => x.ProcessContextAsync(context, CancellationToken.None))
@@ -89,6 +89,40 @@ namespace ZptSharp.Tal
 
             Mock.Get(wrapped)
                 .Verify(x => x.ProcessContextAsync(It.IsAny<ExpressionContext>(), CancellationToken.None), Times.Never);
+        }
+
+        [Test, AutoMoqData]
+        public async Task ProcessContextAsync_returns_abort_processing_result_if_a_condition_attribute_evaluates_to_falsey_value([Frozen] IGetsTalAttributeSpecs specProvider,
+                                                                                                                                 [Frozen] IEvaluatesExpression evaluator,
+                                                                                                                                 [Frozen] IInterpretsExpressionResult resultInterpreter,
+                                                                                                                                 ConditionAttributeDecorator sut,
+                                                                                                                                 AttributeSpec spec,
+                                                                                                                                 [StubDom] ExpressionContext context,
+                                                                                                                                 [StubDom] IAttribute attribute,
+                                                                                                                                 [StubDom] INode parent,
+                                                                                                                                 object expressionResult)
+        {
+            Mock.Get(specProvider)
+                .SetupGet(x => x.Condition)
+                .Returns(spec);
+            Mock.Get(evaluator)
+                .Setup(x => x.EvaluateExpressionAsync(attribute.Value, context, CancellationToken.None))
+                .Returns(() => Task.FromResult(expressionResult));
+            Mock.Get(resultInterpreter)
+                .Setup(x => x.DoesResultAbortTheAction(expressionResult))
+                .Returns(false);
+            Mock.Get(resultInterpreter)
+                .Setup(x => x.CoerceResultToBoolean(expressionResult))
+                .Returns(false);
+            Mock.Get(attribute).Setup(x => x.Matches(spec)).Returns(true);
+            context.CurrentElement.Attributes.Clear();
+            context.CurrentElement.Attributes.Add(attribute);
+            context.CurrentElement.ParentElement = parent;
+            parent.ChildNodes.Add(context.CurrentElement);
+
+            var result = await sut.ProcessContextAsync(context);
+
+            Assert.That(result?.DoNotProcessChildren, Is.True);
         }
 
         [Test, AutoMoqData]
@@ -127,6 +161,46 @@ namespace ZptSharp.Tal
             await sut.ProcessContextAsync(context);
 
             Assert.That(parent.ChildNodes, Has.One.SameAs(context.CurrentElement));
+        }
+
+        [Test, AutoMoqData]
+        public async Task ProcessContextAsync_returns_wrapped_result_if_a_condition_attribute_evaluates_to_truthy_value([Frozen] IProcessesExpressionContext wrapped,
+                                                                                                                        [Frozen] IGetsTalAttributeSpecs specProvider,
+                                                                                                                        [Frozen] IEvaluatesExpression evaluator,
+                                                                                                                        [Frozen] IInterpretsExpressionResult resultInterpreter,
+                                                                                                                        ConditionAttributeDecorator sut,
+                                                                                                                        AttributeSpec spec,
+                                                                                                                        [StubDom] ExpressionContext context,
+                                                                                                                        [StubDom] IAttribute attribute,
+                                                                                                                        [StubDom] INode parent,
+                                                                                                                        object expressionResult)
+        {
+            Mock.Get(wrapped)
+                .Setup(x => x.ProcessContextAsync(context, CancellationToken.None))
+                .Returns(() => Task.FromResult(ExpressionContextProcessingResult.Noop));
+            Mock.Get(specProvider)
+                .SetupGet(x => x.Condition)
+                .Returns(spec);
+            Mock.Get(evaluator)
+                .Setup(x => x.EvaluateExpressionAsync(attribute.Value, context, CancellationToken.None))
+                .Returns(() => Task.FromResult(expressionResult));
+            Mock.Get(resultInterpreter)
+                .Setup(x => x.DoesResultAbortTheAction(expressionResult))
+                .Returns(false);
+            Mock.Get(resultInterpreter)
+                .Setup(x => x.CoerceResultToBoolean(expressionResult))
+                .Returns(true);
+            Mock.Get(attribute).Setup(x => x.Matches(spec)).Returns(true);
+            context.CurrentElement.Attributes.Clear();
+            context.CurrentElement.Attributes.Add(attribute);
+            context.CurrentElement.ParentElement = parent;
+            parent.ChildNodes.Add(context.CurrentElement);
+
+            var result = await sut.ProcessContextAsync(context);
+
+            Mock.Get(wrapped)
+                .Verify(x => x.ProcessContextAsync(It.IsAny<ExpressionContext>(), CancellationToken.None), Times.Once, "Calls wrapped result");
+            Assert.That(result?.DoNotProcessChildren, Is.False, "Does not abort child item processing");
         }
 
         [Test, AutoMoqData]

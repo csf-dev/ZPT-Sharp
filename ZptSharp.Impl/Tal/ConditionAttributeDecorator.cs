@@ -32,7 +32,7 @@ namespace ZptSharp.Tal
             if(ShouldRemoveAttribute(expressionResult))
             {
                 context.CurrentElement.Remove();
-                return ExpressionContextProcessingResult.Noop;
+                return ExpressionContextProcessingResult.WithoutChildren;
             }
 
             return await wrapped.ProcessContextAsync(context, token);

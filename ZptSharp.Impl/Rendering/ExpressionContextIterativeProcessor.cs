@@ -77,7 +77,9 @@ namespace ZptSharp.Rendering
             var additionalContexts = processingResult?.AdditionalContexts ?? Enumerable.Empty<ExpressionContext>();
 
             openList.InsertRange(0, additionalContexts);
-            openList.InsertRange(0, childContexts);
+
+            if(!processingResult.DoNotProcessChildren)
+                openList.InsertRange(0, childContexts);
         }
 
         /// <summary>
