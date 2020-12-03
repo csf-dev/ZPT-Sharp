@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using AutoFixture.NUnit3;
+using Microsoft.Extensions.Logging;
 using Moq;
 using NUnit.Framework;
+using ZptSharp.Autofixture;
 using ZptSharp.Dom;
 
 namespace ZptSharp.SourceAnnotation
@@ -10,7 +13,8 @@ namespace ZptSharp.SourceAnnotation
     public class CommenterTests
     {
         [Test, AutoMoqData]
-        public void AddCommentBefore_adds_to_beginning_of_document_if_element_has_no_parent(Commenter sut,
+        public void AddCommentBefore_adds_to_beginning_of_document_if_element_has_no_parent([MockLogger, Frozen] ILogger<Commenter> logger,
+                                                                                            Commenter sut,
                                                                                             INode element,
                                                                                             IDocument document,
                                                                                             string commentText)
@@ -25,7 +29,8 @@ namespace ZptSharp.SourceAnnotation
         }
 
         [Test, AutoMoqData]
-        public void AddCommentBefore_adds_comment_as_previous_sibling(Commenter sut,
+        public void AddCommentBefore_adds_comment_as_previous_sibling([MockLogger, Frozen] ILogger<Commenter> logger,
+                                                                      Commenter sut,
                                                                       INode element,
                                                                       INode parent,
                                                                       INode sibling1,
@@ -43,13 +48,14 @@ namespace ZptSharp.SourceAnnotation
         }
 
         [Test, AutoMoqData]
-        public void AddCommentAfter_adds_comment_as_next_sibling(Commenter sut,
-                                                                      INode element,
-                                                                      INode parent,
-                                                                      INode sibling1,
-                                                                      INode sibling2,
-                                                                      INode comment,
-                                                                      string commentText)
+        public void AddCommentAfter_adds_comment_as_next_sibling([MockLogger, Frozen] ILogger<Commenter> logger,
+                                                                 Commenter sut,
+                                                                 INode element,
+                                                                 INode parent,
+                                                                 INode sibling1,
+                                                                 INode sibling2,
+                                                                 INode comment,
+                                                                 string commentText)
         {
             Mock.Get(element).SetupGet(x => x.ParentElement).Returns(parent);
             Mock.Get(parent).SetupGet(x => x.ChildNodes).Returns(new List<INode> { sibling1, element, sibling2 });

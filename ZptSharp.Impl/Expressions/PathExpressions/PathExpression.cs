@@ -15,16 +15,6 @@ namespace ZptSharp.Expressions.PathExpressions
         public IReadOnlyList<AlternateExpression> Alternates { get; }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="PathExpression"/> class from a collection of path parts.
-        /// </summary>
-        /// <param name="parts">The path parts.</param>
-        public PathExpression(params PathPart[] parts)
-        {
-            var alternate = new AlternateExpression(parts);
-            Alternates = new[] { alternate };
-        }
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="PathExpression"/> class from a list of alternate expressions.
         /// </summary>
         /// <param name="alternates">The alternates.</param>
