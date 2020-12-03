@@ -1,10 +1,9 @@
-﻿using System;
-namespace ZptSharp.Expressions
+﻿namespace ZptSharp.Expressions
 {
     /// <summary>
     /// A container for runtime constants representing the built-in types of TALES expression.
     /// </summary>
-    public sealed class WellKnownExpressionPrefix
+    public static class WellKnownExpressionPrefix
     {
         /// <summary>
         /// The prefix for 'path' expressions.

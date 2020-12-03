@@ -1,5 +1,4 @@
 ﻿using System;
-using ZptSharp.Expressions;
 
 namespace ZptSharp.Expressions.PathExpressions
 {

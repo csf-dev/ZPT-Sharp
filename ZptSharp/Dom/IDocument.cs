@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace ZptSharp.Dom
+﻿namespace ZptSharp.Dom
 {
     /// <summary>
     /// Abstraction for a DOM document.
