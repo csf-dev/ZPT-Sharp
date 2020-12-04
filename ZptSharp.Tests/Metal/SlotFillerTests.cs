@@ -67,5 +67,28 @@ namespace ZptSharp.Metal
 
             Assert.That(context.SlotFillers, Is.Empty);
         }
+
+        [Test, AutoMoqData]
+        public void FillSlots_copies_a_fillslot_attribute_from_the_defining_element_to_the_filler([StubDom] INode defineSlotElement,
+                                                                                                  [StubDom] INode fillSlotElement,
+                                                                                                  string slotName,
+                                                                                                  MacroExpansionContext context,
+                                                                                                  [Frozen] IGetsMetalAttributeSpecs specProvider,
+                                                                                                  [Frozen, MockLogger] ILogger<SlotFiller> logger,
+                                                                                                  [Frozen] IReplacesNode replacer,
+                                                                                                  SlotFiller sut,
+                                                                                                  [StubDom] IAttribute fillSlotAttribute,
+                                                                                                  AttributeSpec fillSlotSpec)
+        {
+            context.SlotFillers.Clear();
+            context.SlotFillers.Add(slotName, new Slot(slotName, fillSlotElement));
+            defineSlotElement.Attributes.Add(fillSlotAttribute);
+            Mock.Get(specProvider).SetupGet(x => x.FillSlot).Returns(fillSlotSpec);
+            Mock.Get(fillSlotAttribute).Setup(x => x.Matches(fillSlotSpec)).Returns(true);
+
+            sut.FillSlots(context, new[] { new Slot(slotName, defineSlotElement) });
+
+            Assert.That(fillSlotElement.Attributes, Has.One.SameAs(fillSlotAttribute));
+        }
     }
 }

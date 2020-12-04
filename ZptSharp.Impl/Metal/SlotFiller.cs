@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Microsoft.Extensions.Logging;
 using ZptSharp.Dom;
 
@@ -49,9 +50,12 @@ Filler:{filler}",
                                 filler.Element);
 
             var fillingElement = filler.Element.GetCopy();
+            var definingSlotFillerAttribute = GetFillSlotAttributeFromReplacedElement(definedSlot.Element);
             replacer.Replace(definedSlot.Element, fillingElement);
             macroContext.SlotFillers.Remove(definedSlot.Name);
             RemoveFillSlotAttributeFromFiller(fillingElement);
+            if (definingSlotFillerAttribute != null)
+                fillingElement.Attributes.Add(definingSlotFillerAttribute);
         }
 
         /// <summary>
@@ -64,6 +68,11 @@ Filler:{filler}",
             var fillSlotAttribute = element.GetMatchingAttribute(specProvider.FillSlot);
             if (fillSlotAttribute != null)
                 element.Attributes.Remove(fillSlotAttribute);
+        }
+
+        IAttribute GetFillSlotAttributeFromReplacedElement(INode element)
+        {
+            return element.Attributes.FirstOrDefault(x => x.Matches(specProvider.FillSlot));
         }
 
         /// <summary>
