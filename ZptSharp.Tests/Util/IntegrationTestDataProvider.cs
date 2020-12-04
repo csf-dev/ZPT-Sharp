@@ -35,10 +35,25 @@ namespace ZptSharp.Util
             };
         }
 
+        public static object GetPipeOptionsObject()
+        {
+            return new
+            {
+                myPipe = (Func<object, object>) ReplaceOCharacter,
+            };
+        }
+
+        static object ReplaceOCharacter(object input)
+        {
+            var str = input as string;
+            if (str == null) return null;
+            return str.Replace('o', '0');
+        }
+
         static IEnumerable<BatchItem> GetItems()
         {
             return new[] { "one", "two", "three", "four", "five" }
-                .Select((item, idx) => new BatchItem { num = idx.ToString(), str = item });
+                .Select((item, idx) => new BatchItem { num = (idx + 1).ToString(), str = item });
         }
 
         static BatchObject GetBatchObject()

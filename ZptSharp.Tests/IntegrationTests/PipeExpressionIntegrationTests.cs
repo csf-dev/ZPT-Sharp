@@ -8,30 +8,33 @@ using ZptSharp.Util;
 namespace ZptSharp.IntegrationTests
 {
     [TestFixture, Parallelizable]
-    public class SourceAnnotationIntegrationTests
+    public class PipeExpressionIntegrationTests
     {
         [Test, Description("For the 'expected rendering' file, rendering the corresponding 'source document' file via ZptSharp should produce the same output.")]
         [Ignore("Temporarily ignored")]
         public async Task Each_output_file_should_render_as_expected([ValueSource(nameof(GetExpectedOutputFiles))] string expectedPath)
         {
-            var config = GetConfig();
-            var result = await IntegrationTester.PerformIntegrationTest(expectedPath, config: config, logLevel: Microsoft.Extensions.Logging.LogLevel.Debug);
+            var result = await IntegrationTester.PerformIntegrationTest(expectedPath, model: GetModel(), config: GetConfig());
             Assert.That(result, Has.MatchingExpectedAndActualRenderings);
         }
 
-        public static IEnumerable<string> GetExpectedOutputFiles()
-            => TestFiles.GetIntegrationTestExpectedFiles<SourceAnnotationIntegrationTests>();
+        public static IEnumerable<string> GetExpectedOutputFiles() => TestFiles.GetIntegrationTestExpectedFiles<PipeExpressionIntegrationTests>();
+
+        object GetModel() => new object();
 
         RenderingConfig GetConfig()
         {
             var builder = RenderingConfig.CreateBuilder();
+
             builder.ContextBuilder = (c, s) =>
             {
-                c.AddToRootContext("tests", new { input = new TemplateDirectory(TestFiles.GetIntegrationTestSourceDirectory<SourceAnnotationIntegrationTests>()) });
+                c.AddToRootContext("options", IntegrationTestDataProvider.GetPipeOptionsObject());
             };
-            builder.IncludeSourceAnnotation = true;
-            builder.SourceAnnotationBasePath = TestFiles.GetPath(nameof(SourceAnnotationIntegrationTests));
+
             return builder.GetConfig();
         }
+
+        TemplateDirectory GetSourceTemplateDirectory()
+            => new TemplateDirectory(TestFiles.GetIntegrationTestSourceDirectory<PipeExpressionIntegrationTests>());
     }
 }

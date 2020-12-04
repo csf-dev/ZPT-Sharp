@@ -47,6 +47,9 @@
     <Folder Include="Expressions\NotExpressions\" />
     <Folder Include="TestFiles\CSharpExpressionIntegrationTests\" />
     <Folder Include="IntegrationTests\" />
+    <Folder Include="TestFiles\PipeExpressionIntegrationTests\" />
+    <Folder Include="TestFiles\PipeExpressionIntegrationTests\ExpectedOutputs\" />
+    <Folder Include="TestFiles\PipeExpressionIntegrationTests\SourceDocuments\" />
   </ItemGroup>
     
   <ItemGroup>

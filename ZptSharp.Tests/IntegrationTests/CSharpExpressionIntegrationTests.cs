@@ -10,7 +10,7 @@ namespace ZptSharp.IntegrationTests
     [TestFixture, Parallelizable]
     public class CSharpExpressionIntegrationTests
     {
-        [Test, Description("For every file in the 'expected output' directory of the integration test path, the file should be rendered as-expected.")]
+        [Test, Description("For the 'expected rendering' file, rendering the corresponding 'source document' file via ZptSharp should produce the same output.")]
         [Ignore("Temporarily ignored")]
         public async Task Each_output_file_should_render_as_expected([ValueSource(nameof(GetExpectedOutputFiles))] string expectedPath)
         {
