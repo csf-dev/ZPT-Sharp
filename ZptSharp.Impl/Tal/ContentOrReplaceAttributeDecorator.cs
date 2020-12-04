@@ -55,7 +55,7 @@ namespace ZptSharp.Tal
                                                                          ExpressionContext context,
                                                                          CancellationToken token)
         {
-            var domResult = await GetExpressionResultAsync(attribute, context, token);
+            var domResult = await GetExpressionResultAsync(attribute, context, token).ConfigureAwait(false);
 
             if (domResult.AbortAction)
                 return await wrapped.ProcessContextAsync(context, token).ConfigureAwait(false);
@@ -77,7 +77,7 @@ namespace ZptSharp.Tal
                                                                          ExpressionContext context,
                                                                          CancellationToken token)
         {
-            var domResult = await GetExpressionResultAsync(attribute, context, token);
+            var domResult = await GetExpressionResultAsync(attribute, context, token).ConfigureAwait(false);
 
             if (domResult.AbortAction)
             {

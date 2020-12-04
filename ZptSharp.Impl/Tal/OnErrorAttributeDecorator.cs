@@ -41,7 +41,7 @@ namespace ZptSharp.Tal
             {
                 var attribute = context.CurrentElement.GetMatchingAttribute(specProvider.OnError);
                 if (attribute == null) throw;
-                return await ProcessErroredContextAsync(context, ex, attribute.Value, token);
+                return await ProcessErroredContextAsync(context, ex, attribute.Value, token).ConfigureAwait(false);
             }
         }
 

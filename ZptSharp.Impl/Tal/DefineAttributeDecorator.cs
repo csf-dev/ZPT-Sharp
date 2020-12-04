@@ -29,9 +29,9 @@ namespace ZptSharp.Tal
         {
             var defineAttribute = context.CurrentElement.GetMatchingAttribute(specProvider.Define);
             if (defineAttribute != null)
-                await HandleDefineAttribute(defineAttribute, context, token);
+                await HandleDefineAttribute(defineAttribute, context, token).ConfigureAwait(false);
 
-            return await wrapped.ProcessContextAsync(context, token);
+            return await wrapped.ProcessContextAsync(context, token).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -48,7 +48,7 @@ namespace ZptSharp.Tal
 
             foreach (var definition in definitions)
             {
-                var result = await EvaluateDefinitionExpression(definition, context, token);
+                var result = await EvaluateDefinitionExpression(definition, context, token).ConfigureAwait(false);
 
                 // If the result cancels the action then we ignore this partiaular definition
                 if (resultInterpreter.DoesResultAbortTheAction(result)) continue;
@@ -78,7 +78,7 @@ namespace ZptSharp.Tal
         {
             try
             {
-                return await evaluator.EvaluateExpressionAsync(definition.Expression, context, token);
+                return await evaluator.EvaluateExpressionAsync(definition.Expression, context, token).ConfigureAwait(false);
             }
             catch (Exception ex)
             {

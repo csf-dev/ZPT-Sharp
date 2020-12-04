@@ -34,12 +34,12 @@ namespace ZptSharp.Expressions.PathExpressions
         public async Task<GetValueResult> TryGetValueAsync(string name, object @object, CancellationToken cancellationToken = default)
         {
             if (!(@object is TemplateDirectory templateDirectory))
-                return await wrapped.TryGetValueAsync(name, @object, cancellationToken);
+                return await wrapped.TryGetValueAsync(name, @object, cancellationToken).ConfigureAwait(false);
 
             var path = Path.Combine(templateDirectory.Path, name);
 
             if (File.Exists(path))
-                return GetValueResult.For(await GetMetalAdapterAsync(path, cancellationToken));
+                return GetValueResult.For(await GetMetalAdapterAsync(path, cancellationToken).ConfigureAwait(false));
 
             if (Directory.Exists(path))
                 return GetValueResult.For(new TemplateDirectory(path));
@@ -59,7 +59,8 @@ namespace ZptSharp.Expressions.PathExpressions
         /// <param name="cancellationToken">Cancellation token.</param>
         async Task<IGetsNamedTalesValue> GetMetalAdapterAsync(string path, CancellationToken cancellationToken)
         {
-            var doc = await GetDocumentAsync(path, cancellationToken);
+            var doc = await GetDocumentAsync(path, cancellationToken)
+                .ConfigureAwait(false);
             return adapterFactory.GetMetalDocumentAdapter(doc);
         }
 
@@ -68,7 +69,7 @@ namespace ZptSharp.Expressions.PathExpressions
             var source = new FileSourceInfo(path);
 
             using (var stream = new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.Read))
-                return await readerWriter.GetDocumentAsync(stream, config, source, cancellationToken);
+                return await readerWriter.GetDocumentAsync(stream, config, source, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>

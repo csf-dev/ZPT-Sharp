@@ -73,8 +73,11 @@ namespace ZptSharp.Rendering
                                                    ExpressionContext context,
                                                    ExpressionContextProcessingResult processingResult)
         {
+            if (processingResult == null)
+                throw new ArgumentNullException(nameof(processingResult));
+
             var childContexts = childContextProvider.GetChildContexts(context) ?? Enumerable.Empty<ExpressionContext>();
-            var additionalContexts = processingResult?.AdditionalContexts ?? Enumerable.Empty<ExpressionContext>();
+            var additionalContexts = processingResult.AdditionalContexts ?? Enumerable.Empty<ExpressionContext>();
 
             openList.InsertRange(0, additionalContexts);
 

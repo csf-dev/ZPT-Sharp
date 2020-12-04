@@ -32,13 +32,14 @@ namespace ZptSharp.Tal
         {
             var attribute = context.CurrentElement.GetMatchingAttribute(specProvider.Repeat);
             if (attribute == null)
-                return await wrapped.ProcessContextAsync(context, token);
+                return await wrapped.ProcessContextAsync(context, token).ConfigureAwait(false);
 
             var parsedAttribute = ParseAttribute(attribute, context);
 
-            var expressionResult = await evaluator.EvaluateExpressionAsync(parsedAttribute.Expression, context, token);
+            var expressionResult = await evaluator.EvaluateExpressionAsync(parsedAttribute.Expression, context, token)
+                .ConfigureAwait(false);
             if (resultInterpreter.DoesResultAbortTheAction(expressionResult) || expressionResult == null)
-                return await wrapped.ProcessContextAsync(context, token);
+                return await wrapped.ProcessContextAsync(context, token).ConfigureAwait(false);
 
             var contexts = contextProvider.GetRepetitionContexts(expressionResult,
                                                                  context,

@@ -26,16 +26,17 @@ namespace ZptSharp.Tal
         public async Task<ExpressionContextProcessingResult> ProcessContextAsync(ExpressionContext context, CancellationToken token = default)
         {
             var conditionAttribute = context.CurrentElement.GetMatchingAttribute(specProvider.Condition);
-            if (conditionAttribute == null) return await wrapped.ProcessContextAsync(context, token);
+            if (conditionAttribute == null) return await wrapped.ProcessContextAsync(context, token).ConfigureAwait(false);
 
-            var expressionResult = await evaluator.EvaluateExpressionAsync(conditionAttribute.Value, context, token);
-            if(ShouldRemoveAttribute(expressionResult))
+            var expressionResult = await evaluator.EvaluateExpressionAsync(conditionAttribute.Value, context, token)
+                .ConfigureAwait(false);
+            if (ShouldRemoveAttribute(expressionResult))
             {
                 context.CurrentElement.Remove();
                 return ExpressionContextProcessingResult.WithoutChildren;
             }
 
-            return await wrapped.ProcessContextAsync(context, token);
+            return await wrapped.ProcessContextAsync(context, token).ConfigureAwait(false);
         }
 
         bool ShouldRemoveAttribute(object expressionResult)

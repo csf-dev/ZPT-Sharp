@@ -103,7 +103,7 @@ namespace ZptSharp.Tal
             var indexOnParent = parent.ChildNodes.IndexOf(sourceContext.CurrentElement);
 
             var contexts = repetitions
-                .Select(repetition => GetContext(repetition, parent, indexOnParent, sourceContext))
+                .Select(repetition => GetContext(repetition, sourceContext))
                 .ToList();
 
             AddContextsToParent(contexts, parent, indexOnParent);
@@ -118,10 +118,8 @@ namespace ZptSharp.Tal
         /// </summary>
         /// <returns>The context.</returns>
         /// <param name="repetition">Repetition.</param>
-        /// <param name="parent">Parent.</param>
-        /// <param name="indexOnParent">Index on parent.</param>
         /// <param name="sourceContext">Source context.</param>
-        ExpressionContext GetContext(RepetitionInfo repetition, INode parent, int indexOnParent, ExpressionContext sourceContext)
+        ExpressionContext GetContext(RepetitionInfo repetition, ExpressionContext sourceContext)
         {
             var context = sourceContext.CreateChild(repetition.Element);
 

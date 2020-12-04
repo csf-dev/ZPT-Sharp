@@ -1,10 +1,12 @@
-﻿namespace ZptSharp.Expressions
+﻿using System;
+
+namespace ZptSharp.Expressions
 {
     /// <summary>
     /// Represents the outcome of
     /// <see cref="IGetsNamedTalesValue.TryGetValueAsync(string, System.Threading.CancellationToken)"/>
     /// </summary>
-    public struct GetValueResult
+    public struct GetValueResult : IEquatable<GetValueResult>
     {
         /// <summary>
         /// Gets a value indicating whether a value was successfully retrieved or not.
@@ -28,6 +30,15 @@
             Success = success;
             Value = result;
         }
+
+        /// <summary>
+        /// Determines whether the specified <see cref="GetValueResult"/> is equal to the current <see cref="GetValueResult"/>.
+        /// </summary>
+        /// <param name="other">The <see cref="GetValueResult"/> to compare with the current <see cref="GetValueResult"/>.</param>
+        /// <returns><c>true</c> if the specified <see cref="GetValueResult"/> is equal to the current
+        /// <see cref="GetValueResult"/>; otherwise, <c>false</c>.</returns>
+        public bool Equals(GetValueResult other)
+            => Success == other.Success && Equals(Value, other.Value);
 
         /// <summary>
         /// Gets a <see cref="GetValueResult"/> which indicates failure to retrieve a result.

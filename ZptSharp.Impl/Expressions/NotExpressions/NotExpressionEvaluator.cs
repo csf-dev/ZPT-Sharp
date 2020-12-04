@@ -21,7 +21,8 @@ namespace ZptSharp.Expressions.NotExpressions
         /// <param name="cancellationToken">An optional cancellation token.</param>
         public async Task<object> EvaluateExpressionAsync(string expression, ExpressionContext context, CancellationToken cancellationToken = default)
         {
-            var innerExpressionResult = await evaluator.EvaluateExpressionAsync(expression, context, cancellationToken);
+            var innerExpressionResult = await evaluator.EvaluateExpressionAsync(expression, context, cancellationToken)
+                .ConfigureAwait(false);
             var booleanResult = valueConverter.CoerceToBoolean(innerExpressionResult);
             return !booleanResult;
         }

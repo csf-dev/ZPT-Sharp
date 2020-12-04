@@ -28,11 +28,11 @@ namespace ZptSharp.Tal
         {
             var attribute = context.CurrentElement.GetMatchingAttribute(specProvider.OmitTag);
             if (attribute == null)
-                return await wrapped.ProcessContextAsync(context, token);
+                return await wrapped.ProcessContextAsync(context, token).ConfigureAwait(false);
 
-            var shouldOmit = await ShouldOmitTag(attribute, context, token);
+            var shouldOmit = await ShouldOmitTag(attribute, context, token).ConfigureAwait(false);
             if (!shouldOmit)
-                return await wrapped.ProcessContextAsync(context, token);
+                return await wrapped.ProcessContextAsync(context, token).ConfigureAwait(false);
 
             var childContexts = context.CreateChildren(context.CurrentElement.ChildNodes);
             omitter.Omit(context.CurrentElement);
@@ -48,7 +48,7 @@ namespace ZptSharp.Tal
             if (attribute.Value.Length == 0)
                 return true;
 
-            var expressionResult = await evaluator.EvaluateExpressionAsync(attribute.Value, context, token);
+            var expressionResult = await evaluator.EvaluateExpressionAsync(attribute.Value, context, token).ConfigureAwait(false);
             return ShouldOmitTag(expressionResult);
         }
 

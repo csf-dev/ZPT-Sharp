@@ -18,6 +18,7 @@ namespace ZptSharp.Dom
     public class XmlDocumentProvider : DocumentReaderWriterBase<XmlDocument>
     {
         static readonly string[] supportedExtensions = new[] { ".pt", ".xml", ".xhtml" };
+        const LoadOptions loadOptions = LoadOptions.PreserveWhitespace | LoadOptions.SetLineInfo;
 
         /// <summary>This matches the default buffer size for a built-in <see cref="StreamWriter"/>.</summary>
         const int BufferSize = 1024;
@@ -56,7 +57,6 @@ namespace ZptSharp.Dom
         {
             using (var reader = new StreamReader(stream, config.DocumentEncoding))
             {
-                var loadOptions = LoadOptions.PreserveWhitespace | LoadOptions.SetLineInfo;
                 var doc = XDocument.Load(reader, loadOptions);
 
                 IDocument xmlDoc = new XmlDocument(doc, sourceInfo ?? new UnknownSourceInfo());

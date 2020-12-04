@@ -28,13 +28,13 @@ namespace ZptSharp.Tal
         {
             var attribute = context.CurrentElement.GetMatchingAttribute(specProvider.Attributes);
             if (attribute == null)
-                return await wrapped.ProcessContextAsync(context, token);
+                return await wrapped.ProcessContextAsync(context, token).ConfigureAwait(false);
 
             var definitions = definitionsProvider.GetDefinitions(attribute.Value, context.CurrentElement);
             foreach(var definition in definitions)
-                await HandleAttributeDefinition(definition, context, token);
+                await HandleAttributeDefinition(definition, context, token).ConfigureAwait(false);
 
-            return await wrapped.ProcessContextAsync(context, token);
+            return await wrapped.ProcessContextAsync(context, token).ConfigureAwait(false);
         }
 
         async Task HandleAttributeDefinition(AttributeDefinition definition,
@@ -42,7 +42,8 @@ namespace ZptSharp.Tal
                                              CancellationToken token)
         {
             var element = context.CurrentElement;
-            var expressionResult = await evaluator.EvaluateExpressionAsync(definition.Expression, context, token);
+            var expressionResult = await evaluator.EvaluateExpressionAsync(definition.Expression, context, token)
+                .ConfigureAwait(false);
 
             if (resultInterpreter.DoesResultAbortTheAction(expressionResult))
                 return;
