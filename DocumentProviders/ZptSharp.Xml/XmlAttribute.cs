@@ -40,7 +40,14 @@ namespace ZptSharp.Dom
             if (@namespace == null)
                 throw new ArgumentNullException(nameof(@namespace));
 
-            return String.Equals(NativeAttribute.Name.Namespace.NamespaceName, @namespace.Uri, StringComparison.InvariantCulture);
+            var attribIsInNamespace = String.Equals(NativeAttribute.Name.Namespace.NamespaceName,
+                                                    @namespace.Uri,
+                                                    StringComparison.InvariantCulture);
+            if (attribIsInNamespace) return true;
+
+            // Another way in which the attribute is considered to be in
+            // the namespace is if the parent element is in the namespace.
+            return Element.IsInNamespace(@namespace);
         }
 
         /// <summary>

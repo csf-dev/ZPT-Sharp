@@ -57,6 +57,16 @@ namespace ZptSharp.Dom
         }
 
         [Test, AutoMoqData]
+        public void IsInNamespace_returns_true_if_element_has_same_prefix(WellKnownNamespaceProvider namespaces)
+        {
+            var html = @"<tal:block repeat=""item items"">";
+            var element = HapDocumentUtil.GetNode(html);
+            var attribute = element.Attributes.First();
+
+            Assert.That(() => attribute.IsInNamespace(namespaces.TalNamespace), Is.True);
+        }
+
+        [Test, AutoMoqData]
         public void IsInNamespace_returns_false_if_attribute_has_different_prefix(WellKnownNamespaceProvider namespaces)
         {
             var html = @"<div foo:repeat=""item items"">";

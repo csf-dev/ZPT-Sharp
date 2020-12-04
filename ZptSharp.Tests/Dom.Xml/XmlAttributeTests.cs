@@ -80,6 +80,16 @@ namespace ZptSharp.Dom
         }
 
         [Test, AutoMoqData]
+        public void IsInNamespace_returns_true_if_element_same_namespace_uri(WellKnownNamespaceProvider namespaces)
+        {
+            var html = @"<tal:block xmlns:tal=""http://xml.zope.org/namespaces/tal"" repeat=""item items"" />";
+            var element = XmlDocumentUtil.GetNode(html);
+            var attribute = element.Attributes.Skip(1).First();
+
+            Assert.That(() => attribute.IsInNamespace(namespaces.TalNamespace), Is.True);
+        }
+
+        [Test, AutoMoqData]
         public void IsInNamespace_returns_false_if_attribute_has_different_namespace_uri(WellKnownNamespaceProvider namespaces)
         {
             var html = @"<div xmlns:tal=""http://xml.zope.org/namespaces/metal"" tal:repeat=""item items"" />";
