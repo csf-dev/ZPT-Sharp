@@ -21,6 +21,17 @@ namespace ZptSharp.Dom
         }
 
         [Test, AutoMoqData]
+        public void Matches_returns_true_if_element_has_same_prefix_and_attriute_has_right_name(WellKnownNamespaceProvider namespaces)
+        {
+            var spec = new AttributeSpec("repeat", namespaces.TalNamespace);
+            var html = @"<tal:block repeat=""item items"">";
+            var element = HapDocumentUtil.GetNode(html);
+            var attribute = element.Attributes.First();
+
+            Assert.That(() => attribute.Matches(spec), Is.True);
+        }
+
+        [Test, AutoMoqData]
         public void Matches_returns_false_if_attribute_has_different_name(WellKnownNamespaceProvider namespaces)
         {
             var spec = new AttributeSpec("repeat", namespaces.TalNamespace);

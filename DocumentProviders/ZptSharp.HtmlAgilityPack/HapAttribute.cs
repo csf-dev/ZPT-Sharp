@@ -83,6 +83,7 @@ namespace ZptSharp.Dom
         (string, string) GetAttributeName(string name)
         {
             var val = name?.Split(new[] { PrefixSeparator }, 2);
+            if (val.Length == 1) return (null, val[0]);
             return (val[0], (val.Length > 1) ? val[1] : null);
         }
 

@@ -22,6 +22,17 @@ namespace ZptSharp.Dom
         }
 
         [Test, AutoMoqData]
+        public void Matches_returns_true_if_element_has_same_prefix_and_attriute_has_right_name(WellKnownNamespaceProvider namespaces)
+        {
+            var spec = new AttributeSpec("repeat", namespaces.TalNamespace);
+            var html = @"<tal:block xmlns:tal=""http://xml.zope.org/namespaces/tal"" repeat=""item items"" />";
+            var element = XmlDocumentUtil.GetNode(html);
+            var attribute = element.Attributes.Skip(1).First();
+
+            Assert.That(() => attribute.Matches(spec), Is.True);
+        }
+
+        [Test, AutoMoqData]
         public void Matches_returns_true_if_attribute_has_same_name_and_namespace_uri_but_different_alias(WellKnownNamespaceProvider namespaces)
         {
             var spec = new AttributeSpec("repeat", namespaces.TalNamespace);
