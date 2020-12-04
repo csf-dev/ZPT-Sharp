@@ -28,8 +28,8 @@ namespace ZptSharp.Dom
         /// <value>The value.</value>
         public override string Value
         {
-            get => NativeAttribute.Value;
-            set => NativeAttribute.Value = value;
+            get => HtmlEntity.DeEntitize(NativeAttribute.Value);
+            set => NativeAttribute.Value = HtmlEntity.Entitize(value, true, true);
         }
 
         /// <summary>

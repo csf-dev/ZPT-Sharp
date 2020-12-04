@@ -101,5 +101,29 @@ namespace ZptSharp.Dom
 
         #endregion
 
+        #region Value
+
+        [Test, AutoMoqData]
+        public void Value_returns_HTML_decoded_result_for_encoded_source()
+        {
+            var html = @"<div repeat=""item string:&quot;This is &gt; than that!&quot;"">";
+            var element = HapDocumentUtil.GetNode(html);
+            var attrib = element.Attributes.Single();
+            Assert.That(() => attrib.Value, Is.EqualTo("item string:\"This is > than that!\""));
+        }
+
+        [Test, AutoMoqData]
+        public void Value_can_be_set_using_HTML_entities()
+        {
+            var html = @"<div repeat=""item string:&quot;This is &gt; than that!&quot;"">";
+            var doc = HapDocumentUtil.GetDocument(html);
+            var entity = (HapElement) doc.RootElement.ChildNodes.First();
+            entity.Attributes.Single().Value = "\"Foo > Bar < Baz\"";
+
+            Assert.That(() => HapDocumentUtil.GetRendering(doc).Result,
+                        Is.EqualTo(@"<div repeat=""&quot;Foo &gt; Bar &lt; Baz&quot;""></div>"));
+        }
+
+        #endregion
     }
 }

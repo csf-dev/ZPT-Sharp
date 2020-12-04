@@ -2,12 +2,15 @@
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 using ZptSharp.Config;
 
 namespace ZptSharp.Dom
 {
     public static class HapDocumentUtil
     {
+        static readonly HapDocumentProvider provider = new HapDocumentProvider();
+
         /// <summary>
         /// Gets a single HTML element node from the first element in the specified HTML string.
         /// </summary>
@@ -24,10 +27,18 @@ namespace ZptSharp.Dom
         public static HapDocument GetDocument(string html)
         {
             using (var stream = new MemoryStream(Encoding.UTF8.GetBytes(html)))
-            {
-                var provider = new HapDocumentProvider();
                 return (HapDocument)provider.GetDocumentAsync(stream, RenderingConfig.Default).Result;
-            }
+        }
+
+        /// <summary>
+        /// Gets a rendering of a document.
+        /// </summary>
+        /// <returns>The rendering.</returns>
+        /// <param name="doc">Document.</param>
+        public static async Task<string> GetRendering(HapDocument doc)
+        {
+            using (var stream = await provider.WriteDocumentAsync(doc, RenderingConfig.Default))
+                return await Util.TestFiles.GetString(stream);
         }
     }
 }
