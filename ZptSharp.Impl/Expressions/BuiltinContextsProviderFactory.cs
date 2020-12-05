@@ -20,7 +20,7 @@ namespace ZptSharp.Expressions
         /// <returns>The builtin contexts provider.</returns>
         /// <param name="context">Expression context.</param>
         /// <param name="config">Rendering configuration.</param>
-        public IGetsNamedTalesValue GetBuiltinContextsProvider(ExpressionContext context, RenderingConfig config)
+        public IGetsDictionaryOfNamedTalesValues GetBuiltinContextsProvider(ExpressionContext context, RenderingConfig config)
         {
             if (config.BuiltinContextsProvider != null)
                 return config.BuiltinContextsProvider(context);

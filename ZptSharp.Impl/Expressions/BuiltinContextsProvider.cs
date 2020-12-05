@@ -14,7 +14,7 @@ namespace ZptSharp.Expressions
     /// If, for example, their names have been overwritten they may alternatively be referenced
     /// explicitly with the <c>CONTEXTS</c> reserved variable name.
     /// </summary>
-    public class BuiltinContextsProvider : IGetsNamedTalesValue
+    public class BuiltinContextsProvider : IGetsDictionaryOfNamedTalesValues
     {
         readonly ExpressionContext context;
         readonly RenderingConfig config;
@@ -73,6 +73,16 @@ namespace ZptSharp.Expressions
                 return Task.FromResult(GetValueResult.For(valueFunc()));
 
             return Task.FromResult(GetValueResult.Failure);
+        }
+
+        /// <summary>
+        /// Gets a dictionary of every available named TALES value, exposed by the current instance.
+        /// </summary>
+        /// <returns>The named values.</returns>
+        public Task<IDictionary<string, object>> GetAllNamedValues()
+        {
+            IDictionary<string, object> values = BuiltinContextsAndValues.ToDictionary(k => k.Key, v => v.Value());
+            return Task.FromResult(values);
         }
 
         Dictionary<string,Func<object>> BuiltinContextsAndValues

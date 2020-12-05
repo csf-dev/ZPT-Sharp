@@ -16,7 +16,7 @@ namespace ZptSharp.Expressions
         public async Task TryGetValueAsync_returns_built_in_context_if_contexts_requested([Frozen, NoAutoProperties] ExpressionContext context,
                                                                                [Frozen, MockedConfig] RenderingConfig config,
                                                                                [Frozen] IGetsBuiltinContextsProvider builtinContextsProviderFactory,
-                                                                               IGetsNamedTalesValue contextProvider,
+                                                                               IGetsDictionaryOfNamedTalesValues contextProvider,
                                                                                NamedTalesValueForExpressionContextAdapter sut)
         {
             Mock.Get(builtinContextsProviderFactory).Setup(x => x.GetBuiltinContextsProvider(context, config)).Returns(contextProvider);
@@ -29,7 +29,7 @@ namespace ZptSharp.Expressions
         public async Task TryGetValueAsync_returns_built_in_context_if_contexts_requested_even_if_there_is_a_local_variable([Frozen, NoAutoProperties] ExpressionContext context,
                                                                                                                  [Frozen, MockedConfig] RenderingConfig config,
                                                                                                                  [Frozen] IGetsBuiltinContextsProvider builtinContextsProviderFactory,
-                                                                                                                 IGetsNamedTalesValue contextProvider,
+                                                                                                                 IGetsDictionaryOfNamedTalesValues contextProvider,
                                                                                                                  object localVariableValue,
                                                                                                                  NamedTalesValueForExpressionContextAdapter sut)
         {
@@ -69,7 +69,7 @@ namespace ZptSharp.Expressions
         [Test, AutoMoqData]
         public async Task TryGetValueAsync_returns_value_from_built_in_context_if_no_local_or_global_variable([Frozen, NoAutoProperties] ExpressionContext context,
                                                                                                    [Frozen, MockedConfig] RenderingConfig config,
-                                                                                                   IGetsNamedTalesValue contextProvider,
+                                                                                                   IGetsDictionaryOfNamedTalesValues contextProvider,
                                                                                                    [Frozen] IGetsBuiltinContextsProvider builtinContextsProviderFactory,
                                                                                                    string name,
                                                                                                    object variableValue,
@@ -100,7 +100,7 @@ namespace ZptSharp.Expressions
         [Test, AutoMoqData]
         public async Task TryGetValueAsync_returns_value_from_global_variable_over_built_in_context_in_case_of_naming_collision([Frozen, NoAutoProperties] ExpressionContext context,
                                                                                                                      [Frozen, MockedConfig] RenderingConfig config,
-                                                                                                                     IGetsNamedTalesValue contextProvider,
+                                                                                                                     IGetsDictionaryOfNamedTalesValues contextProvider,
                                                                                                                      [Frozen] IGetsBuiltinContextsProvider builtinContextsProviderFactory,
                                                                                                                      string name,
                                                                                                                      object globalValue,

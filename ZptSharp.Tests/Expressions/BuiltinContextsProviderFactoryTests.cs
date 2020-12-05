@@ -13,7 +13,7 @@ namespace ZptSharp.Expressions
         [Test, AutoMoqData]
         public void GetBuiltinContextsProvider_returns_context_from_config_it_exists_there([NoAutoProperties] ExpressionContext context,
                                                                                            [MockedConfig] RenderingConfig config,
-                                                                                           IGetsNamedTalesValue contextProvider,
+                                                                                           IGetsDictionaryOfNamedTalesValues contextProvider,
                                                                                            BuiltinContextsProviderFactory sut)
         {
             Mock.Get(config).SetupGet(x => x.BuiltinContextsProvider).Returns(() => c => contextProvider);
@@ -24,7 +24,7 @@ namespace ZptSharp.Expressions
         [Test, AutoMoqData]
         public void GetBuiltinContextsProvider_creates_instance_if_not_available_on_config([NoAutoProperties] ExpressionContext context,
                                                                                            [MockedConfig] RenderingConfig config,
-                                                                                           IGetsNamedTalesValue contextProvider,
+                                                                                           IGetsDictionaryOfNamedTalesValues contextProvider,
                                                                                            BuiltinContextsProviderFactory sut)
         {
             Assert.That(() => sut.GetBuiltinContextsProvider(context, config), Is.InstanceOf<BuiltinContextsProvider>());

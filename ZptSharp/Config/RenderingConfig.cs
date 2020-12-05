@@ -41,7 +41,7 @@ namespace ZptSharp.Config
         /// Gets a service which provides the default/built-in root contexts for expression resolution.
         /// </summary>
         /// <value>The built-in contexts provider.</value>
-        public virtual Func<ExpressionContext,IGetsNamedTalesValue> BuiltinContextsProvider { get; private set; }
+        public virtual Func<ExpressionContext, IGetsDictionaryOfNamedTalesValues> BuiltinContextsProvider { get; private set; }
 
         /// <summary>
         /// Gets a collection of "keyword options" which have been provided to the rendering process externally.

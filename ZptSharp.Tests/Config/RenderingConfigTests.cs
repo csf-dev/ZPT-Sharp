@@ -38,11 +38,11 @@ namespace ZptSharp.Config
         }
 
         [Test, AutoMoqData]
-        public void Builder_creates_config_with_correct_context_factory(IGetsNamedTalesValue namedValueProvider)
+        public void Builder_creates_config_with_correct_context_factory(IGetsDictionaryOfNamedTalesValues namedValueProvider)
         {
             var sut = RenderingConfig.CreateBuilder();
 
-            IGetsNamedTalesValue ContextFactory(ExpressionContext ctx) => namedValueProvider;
+            IGetsDictionaryOfNamedTalesValues ContextFactory(ExpressionContext ctx) => namedValueProvider;
             sut.BuiltinContextsProvider = ContextFactory;
 
             var result = sut.GetConfig().BuiltinContextsProvider(null);

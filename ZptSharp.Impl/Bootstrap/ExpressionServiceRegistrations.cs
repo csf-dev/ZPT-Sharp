@@ -17,6 +17,7 @@ namespace ZptSharp.Bootstrap
             services.AddTransient<IGetsEvaluatorForExpressionType, EvaluatorTypeResolver>();
             services.AddTransient<IEvaluatesExpression, RegistryBasedExpressionEvaluator>();
             services.AddTransient<IRemovesPrefixFromExpression, PrefixExpressionTypeProvider>();
+            services.AddTransient<IGetsAllVariablesFromContext, ContextAllVariablesAndValuesProvider>();
         }
     }
 }
