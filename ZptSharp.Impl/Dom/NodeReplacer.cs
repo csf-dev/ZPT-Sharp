@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Microsoft.Extensions.Logging;
 
 namespace ZptSharp.Dom
@@ -25,18 +26,32 @@ namespace ZptSharp.Dom
                 throw new ArgumentNullException(nameof(replacements));
 
             var parent = toReplace.ParentElement;
-            if(parent == null)
+
+            if (parent == null
+                && toReplace.Document is ICanReplaceRootElement rootReplacer
+                && replacements.Count == 1)
+            {
+                rootReplacer.ReplaceRootElement(replacements.Single());
+            }
+            else if(parent == null)
             {
                 var message = String.Format(Resources.ExceptionMessage.MustNotBeRootElement, toReplace, nameof(toReplace));
                 throw new ArgumentException(message);
             }
+            else
+            {
+                ReplaceUsingParent(toReplace, replacements, parent);
+            }
+        }
 
+        void ReplaceUsingParent(INode toReplace, IList<INode> replacements, INode parent)
+        {
             var targetIndex = parent.ChildNodes.IndexOf(toReplace);
 
             foreach (var replacement in replacements)
                 replacement.PreReplacementSourceInfo = toReplace.SourceInfo;
 
-            if(logger.IsEnabled(LogLevel.Trace))
+            if (logger.IsEnabled(LogLevel.Trace))
             {
                 var replacementsString = String.Join($",{Environment.NewLine}  ", replacements);
 

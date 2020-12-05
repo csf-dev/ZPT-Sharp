@@ -8,9 +8,9 @@ namespace ZptSharp.Dom
     /// An implementation of <see cref="IDocument"/> which is based upon
     /// a <c>System.Xml.Linq</c> <see cref="XDocument"/>.
     /// </summary>
-    public class XmlDocument : DocumentBase
+    public class XmlDocument : DocumentBase, ICanReplaceRootElement
     {
-        readonly INode root;
+        INode root;
 
         /// <summary>
         /// Gets the native HTML Agility Pack document object.
@@ -33,6 +33,20 @@ namespace ZptSharp.Dom
         {
             var node = new XComment(commentText);
             NativeDocument.AddFirst(node);
+        }
+
+        /// <summary>
+        /// Replaces the root element of the DOM using the specified <paramref name="replacement"/>.
+        /// </summary>
+        /// <param name="replacement">The replacement element.</param>
+        public void ReplaceRootElement(INode replacement)
+        {
+            if (replacement == null)
+                throw new ArgumentNullException(nameof(replacement));
+            var nativeReplacement = ((XmlElement)replacement).NativeElement;
+
+            NativeDocument.Root.ReplaceWith(nativeReplacement);
+            root = replacement;
         }
 
         /// <summary>

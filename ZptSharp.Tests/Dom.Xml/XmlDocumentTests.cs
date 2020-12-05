@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Linq;
 using System.Xml.Linq;
 using NUnit.Framework;
 using ZptSharp.Rendering;
@@ -24,6 +25,21 @@ namespace ZptSharp.Dom
     <div>Hello</div>
   </body>
 </html>"));
+        }
+
+        [Test]
+        public void ReplaceRootElement_can_replace_the_root_element_in_the_doc()
+        {
+            var xml = "<html><body><div>Hello</div></body></html>";
+            var sut = GetSut(xml);
+            var replacement = sut.RootElement.ChildNodes.First();
+
+            sut.ReplaceRootElement(replacement);
+
+            Assert.That(GetXml(sut.NativeDocument), Is.EqualTo(@"<?xml version=""1.0"" encoding=""utf-8""?>
+<body>
+  <div>Hello</div>
+</body>"));
         }
 
         XmlDocument GetSut(string xml)
