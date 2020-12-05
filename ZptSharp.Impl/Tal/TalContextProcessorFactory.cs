@@ -30,7 +30,8 @@ namespace ZptSharp.Tal
         readonly IReplacesNode replacer;
         readonly IOmitsNode omitter;
         readonly IGetsRepetitionContexts repetitionContextProvider;
-        private readonly IGetsAttributeDefinitions attributeDefinitionsProvider;
+        readonly IGetsAttributeDefinitions attributeDefinitionsProvider;
+        readonly Metal.IGetsMetalAttributeSpecs metalSpecProvider;
 
         /// <summary>
         /// Gets the TAL context processor.
@@ -46,6 +47,7 @@ namespace ZptSharp.Tal
             service = GetConditionDecorator(service);
             service = GetDefineDecorator(service);
             service = GetOnErrorDecorator(service);
+            service = GetMacroNameDecorator(service);
 
             return service;
         }
@@ -74,6 +76,9 @@ namespace ZptSharp.Tal
         IProcessesExpressionContext GetDefineDecorator(IProcessesExpressionContext service)
             => new DefineAttributeDecorator(service, specProvider, evaluator, resultInterpreter, definitionProvider);
 
+        IProcessesExpressionContext GetMacroNameDecorator(IProcessesExpressionContext service)
+            => new RecordMetalMacroNameDecorator(service, metalSpecProvider);
+
         /// <summary>
         /// Initializes a new instance of the <see cref="TalContextProcessorFactory"/> class.
         /// </summary>
@@ -87,6 +92,7 @@ namespace ZptSharp.Tal
         /// <param name="omitter">Omitter.</param>
         /// <param name="repetitionContextProvider">Repetition context provider.</param>
         /// <param name="attributeDefinitionsProvider">The 'attributes' attribute definitions provider.</param>
+        /// <param name="metalSpecProvider">METAL attribute spec provider.</param>
         public TalContextProcessorFactory(IGetsTalAttributeSpecs specProvider,
                                           IEvaluatesExpression evaluator,
                                           IInterpretsExpressionResult resultInterpreter,
@@ -96,7 +102,8 @@ namespace ZptSharp.Tal
                                           IReplacesNode replacer,
                                           IOmitsNode omitter,
                                           IGetsRepetitionContexts repetitionContextProvider,
-                                          IGetsAttributeDefinitions attributeDefinitionsProvider)
+                                          IGetsAttributeDefinitions attributeDefinitionsProvider,
+                                          Metal.IGetsMetalAttributeSpecs metalSpecProvider)
         {
             this.specProvider = specProvider ?? throw new System.ArgumentNullException(nameof(specProvider));
             this.evaluator = evaluator ?? throw new System.ArgumentNullException(nameof(evaluator));
@@ -108,6 +115,7 @@ namespace ZptSharp.Tal
             this.omitter = omitter ?? throw new System.ArgumentNullException(nameof(omitter));
             this.repetitionContextProvider = repetitionContextProvider ?? throw new System.ArgumentNullException(nameof(repetitionContextProvider));
             this.attributeDefinitionsProvider = attributeDefinitionsProvider ?? throw new System.ArgumentNullException(nameof(attributeDefinitionsProvider));
+            this.metalSpecProvider = metalSpecProvider ?? throw new System.ArgumentNullException(nameof(metalSpecProvider));
         }
     }
 }

@@ -37,10 +37,9 @@ namespace ZptSharp.Tal
             var childContexts = context.CreateChildren(context.CurrentElement.ChildNodes);
             omitter.Omit(context.CurrentElement);
 
-            return new ExpressionContextProcessingResult
-            {
-                AdditionalContexts = childContexts
-            };
+            var result = ExpressionContextProcessingResult.WithoutChildren;
+            result.AdditionalContexts = childContexts;
+            return result;
         }
 
         async Task<bool> ShouldOmitTag(IAttribute attribute, ExpressionContext context, CancellationToken token)

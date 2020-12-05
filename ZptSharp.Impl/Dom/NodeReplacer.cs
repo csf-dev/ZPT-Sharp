@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Microsoft.Extensions.Logging;
 
 namespace ZptSharp.Dom
 {
@@ -9,6 +10,8 @@ namespace ZptSharp.Dom
     /// </summary>
     public class NodeReplacer : IReplacesNode
     {
+        readonly ILogger logger;
+
         /// <summary>
         /// Replace the specified node with a collection of replacements.
         /// </summary>
@@ -21,14 +24,44 @@ namespace ZptSharp.Dom
             if (replacements == null)
                 throw new ArgumentNullException(nameof(replacements));
 
-            var parent = toReplace.ParentElement ?? throw new ArgumentException(Resources.ExceptionMessage.MustNotBeRootElement, nameof(toReplace));
+            var parent = toReplace.ParentElement;
+            if(parent == null)
+            {
+                var message = String.Format(Resources.ExceptionMessage.MustNotBeRootElement, toReplace, nameof(toReplace));
+                throw new ArgumentException(message);
+            }
+
             var targetIndex = parent.ChildNodes.IndexOf(toReplace);
 
             foreach (var replacement in replacements)
                 replacement.PreReplacementSourceInfo = toReplace.SourceInfo;
 
-            parent.AddChildren(replacements, targetIndex);
+            if(logger.IsEnabled(LogLevel.Trace))
+            {
+                var replacementsString = String.Join($",{Environment.NewLine}  ", replacements);
+
+                logger.LogTrace(@"Replacing a node with {child_count} child nodes
+  Parent element:{parent}
+Replaced element:{to_replace}
+    Replacements:[
+  {replacements} ]",
+                                replacements.Count,
+                                parent,
+                                toReplace,
+                                replacementsString);
+            }
+
             parent.ChildNodes.Remove(toReplace);
+            parent.AddChildren(replacements, targetIndex);
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="NodeReplacer"/> class.
+        /// </summary>
+        /// <param name="logger">Logger.</param>
+        public NodeReplacer(ILogger<NodeReplacer> logger)
+        {
+            this.logger = logger ?? throw new ArgumentNullException(nameof(logger));
         }
     }
 }

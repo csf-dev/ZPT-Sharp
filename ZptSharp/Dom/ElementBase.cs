@@ -20,10 +20,7 @@ namespace ZptSharp.Dom
         /// </summary>
         protected readonly ElementSourceInfo Source;
 
-        /// <summary>
-        /// A field for the parent DOM element (which might be <see langword="null"/>).
-        /// </summary>
-        protected INode Parent;
+        INode Parent;
 
         /// <summary>
         /// A field for whether or not the element is imported.

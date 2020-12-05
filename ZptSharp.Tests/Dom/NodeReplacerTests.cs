@@ -8,7 +8,8 @@ namespace ZptSharp.Dom
     public class NodeReplacerTests
     {
         [Test, AutoMoqData]
-        public void Repalce_replaces_node_with_the_specified_replacements(NodeReplacer sut,
+        public void Repalce_replaces_node_with_the_specified_replacements([MockLogger] Microsoft.Extensions.Logging.ILogger<NodeReplacer> logger,
+                                                                          NodeReplacer sut,
                                                                           [StubDom] INode parent,
                                                                           [StubDom] INode toReplace,
                                                                           [StubDom] INode replacement1,
