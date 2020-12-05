@@ -3,6 +3,7 @@ using NUnit.Framework;
 using System.IO;
 using System.Threading.Tasks;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace ZptSharp.Util
 {
@@ -14,6 +15,14 @@ namespace ZptSharp.Util
         const string
             integrationTestExpectedDir = "ExpectedOutputs",
             integrationTestSourceDir = "SourceDocuments";
+
+        static readonly string[] expectedRenderingExtensions =
+        {
+            ".html",
+            ".htm",
+            ".xml",
+            ".xhtml",
+        };
 
         /// <summary>
         /// Gets the full path to a file or directory within the "TestFiles" directory.
@@ -68,7 +77,7 @@ namespace ZptSharp.Util
         /// <returns>The expected files.</returns>
         /// <param name="categoryName">The name of a category of integration tests.</param>
         public static IEnumerable<string> GetIntegrationTestExpectedFiles(string categoryName)
-            => GetFilesInDirectory(categoryName, integrationTestExpectedDir);
+            => GetExpectedRenderingsInDirectory(categoryName, integrationTestExpectedDir);
 
         /// <summary>
         /// Gets a collection of all of the files in an integration test "expected renderings"
@@ -109,6 +118,25 @@ namespace ZptSharp.Util
             var baseDirectory = expectedRenderingFile.Directory.Parent;
             return Path.Combine(baseDirectory.FullName, integrationTestSourceDir, expectedRenderingFile.Name);
         }
+
+        /// <summary>
+        /// Gets a collection of all of the files in the directory which represent expected test renderings.
+        /// The directory is identified by zero or more 'path parts' from the root of the TestFiles path.
+        /// </summary>
+        /// <returns>The files in the specified directory.</returns>
+        /// <param name="pathParts">Zero or more path parts.</param>
+        public static IEnumerable<string> GetExpectedRenderingsInDirectory(params string[] pathParts)
+        {
+            // Skip files which don't match any of the expected file extensions for
+            // "expected rendering" files.  Avoids ancilliary files like ".directory" etc.
+            return Directory.GetFiles(GetPath(Path.Combine(pathParts)))
+                .Where(HasExpectedRenderingExtension)
+                .ToList();
+        }
+
+        static bool HasExpectedRenderingExtension(string filePath)
+            => expectedRenderingExtensions.Any(filePath.EndsWith);
+
 
         /// <summary>
         /// Gets a collection of all of the files in the directory, identified by
