@@ -11,7 +11,6 @@ namespace ZptSharp.IntegrationTests
     public class SourceAnnotationIntegrationTests
     {
         [Test, Description("For the 'expected rendering' file, rendering the corresponding 'source document' file via ZptSharp should produce the same output.")]
-        [Ignore("Temporarily ignored")]
         public async Task Each_output_file_should_render_as_expected([ValueSource(nameof(GetExpectedOutputFiles))] string expectedPath)
         {
             var config = GetConfig();

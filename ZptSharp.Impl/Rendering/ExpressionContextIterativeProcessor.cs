@@ -56,33 +56,34 @@ namespace ZptSharp.Rendering
                 var iterationResult = await contextProcessor.ProcessContextAsync(currentContext)
                     .ConfigureAwait(false);
 
-                AddExtraContextsToBeginningOfOpenList(openList, currentContext, iterationResult);
+                var processNext = GetFurtherContextsToProcess(currentContext, iterationResult);
+                openList.InsertRange(0, processNext);
             }
         }
 
         /// <summary>
-        /// Adds extra contexts (child and/or additional contexts) to the beginning of the open list.
-        /// The processing of these extra contexts should always occur before any contexts which were
-        /// already scheduled in the open list.  Of those, child contexts always come first, with
-        /// additional contexts (essentially, further generated siblings) coming next.
+        /// Gets extra contexts (child and/or additional contexts) which should be processed next.
         /// </summary>
-        /// <param name="openList">The open list.</param>
         /// <param name="context">The context which was just processed.</param>
         /// <param name="processingResult">The processing result.</param>
-        void AddExtraContextsToBeginningOfOpenList(List<ExpressionContext> openList,
-                                                   ExpressionContext context,
-                                                   ExpressionContextProcessingResult processingResult)
+        List<ExpressionContext> GetFurtherContextsToProcess(ExpressionContext context,
+                                                            ExpressionContextProcessingResult processingResult)
         {
             if (processingResult == null)
                 throw new ArgumentNullException(nameof(processingResult));
 
-            var childContexts = childContextProvider.GetChildContexts(context) ?? Enumerable.Empty<ExpressionContext>();
+            var output = new List<ExpressionContext>();
+
+            if (!processingResult.DoNotProcessChildren)
+            {
+                var childContexts = childContextProvider.GetChildContexts(context) ?? Enumerable.Empty<ExpressionContext>();
+                output.AddRange(childContexts);
+            }
+
             var additionalContexts = processingResult.AdditionalContexts ?? Enumerable.Empty<ExpressionContext>();
+            output.AddRange(additionalContexts);
 
-            openList.InsertRange(0, additionalContexts);
-
-            if(!processingResult.DoNotProcessChildren)
-                openList.InsertRange(0, childContexts);
+            return output;
         }
 
         /// <summary>

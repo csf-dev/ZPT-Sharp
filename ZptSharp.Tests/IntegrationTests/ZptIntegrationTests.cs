@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Logging;
 using NUnit.Framework;
 using ZptSharp.Config;
 using ZptSharp.Util;
