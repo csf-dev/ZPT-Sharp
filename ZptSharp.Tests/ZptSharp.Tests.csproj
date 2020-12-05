@@ -27,6 +27,7 @@
     <ProjectReference Include="..\DocumentProviders\ZptSharp.AngleSharp\ZptSharp.AngleSharp.csproj" />
     <ProjectReference Include="..\DocumentProviders\ZptSharp.Xml\ZptSharp.Xml.csproj" />
     <ProjectReference Include="..\DocumentProviders\ZptSharp.HtmlAgilityPack\ZptSharp.HtmlAgilityPack.csproj" />
+    <ProjectReference Include="..\Evaluators\ZptSharp.PythonExressions\ZptSharp.PythonExressions.csproj" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Autofixture\" />
@@ -50,6 +51,7 @@
     <Folder Include="TestFiles\PipeExpressionIntegrationTests\" />
     <Folder Include="TestFiles\PipeExpressionIntegrationTests\ExpectedOutputs\" />
     <Folder Include="TestFiles\PipeExpressionIntegrationTests\SourceDocuments\" />
+    <Folder Include="Expressions\PythonExpressions\" />
   </ItemGroup>
     
   <ItemGroup>

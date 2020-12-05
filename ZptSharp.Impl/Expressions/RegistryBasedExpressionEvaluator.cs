@@ -33,9 +33,11 @@ namespace ZptSharp.Expressions
                                                     ExpressionContext context,
                                                     CancellationToken cancellationToken = default)
         {
-            var expressionType = typeProvider.GetExpressionType(expression);
+            var trimmedExpression = expression?.TrimStart();
+
+            var expressionType = typeProvider.GetExpressionType(trimmedExpression);
             var evaluator = evaluatorProvider.GetEvaluator(expressionType);
-            var expressionWithoutPrefix = prefixRemover.GetExpressionWithoutPrefix(expression);
+            var expressionWithoutPrefix = prefixRemover.GetExpressionWithoutPrefix(trimmedExpression);
 
             return evaluator.EvaluateExpressionAsync(expressionWithoutPrefix, context, cancellationToken);
         }

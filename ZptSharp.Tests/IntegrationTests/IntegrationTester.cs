@@ -1,11 +1,11 @@
 ﻿using System;
-using System.IO;
 using System.Threading.Tasks;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using ZptSharp.Config;
+using ZptSharp.Util;
 
-namespace ZptSharp.Util
+namespace ZptSharp.IntegrationTests
 {
     public static class IntegrationTester
     {
@@ -20,6 +20,7 @@ namespace ZptSharp.Util
                 .AddZptSharp()
                 .AddHapZptDocuments()
                 .AddXmlZptDocuments()
+                .AddZptPythonExpressions()
                 .AddLogging(b => {
                     b.ClearProviders();
                     b.AddConsole(c => {
@@ -34,6 +35,7 @@ namespace ZptSharp.Util
                 .UseHapZptDocuments()
                 .UseXmlZptDocuments()
                 .UseStandardZptExpressions()
+                .UseZptPythonExpressions()
                 ;
 
             return provider;

@@ -1,6 +1,6 @@
 ﻿using System;
 using NUnit.Framework.Constraints;
-using ZptSharp.Util;
+using ZptSharp.IntegrationTests;
 
 namespace ZptSharp
 {

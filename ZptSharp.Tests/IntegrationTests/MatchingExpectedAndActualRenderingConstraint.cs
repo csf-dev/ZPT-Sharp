@@ -1,7 +1,7 @@
 ﻿using System;
 using NUnit.Framework.Constraints;
 
-namespace ZptSharp.Util
+namespace ZptSharp.IntegrationTests
 {
     public class MatchingExpectedAndActualRenderingConstraint : Constraint
     {

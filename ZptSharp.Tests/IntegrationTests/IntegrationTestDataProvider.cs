@@ -6,8 +6,9 @@ using Microsoft.Extensions.DependencyInjection;
 using ZptSharp.Config;
 using ZptSharp.Dom;
 using ZptSharp.Metal;
+using ZptSharp.Util;
 
-namespace ZptSharp.Util
+namespace ZptSharp.IntegrationTests
 {
     public static class IntegrationTestDataProvider
     {
