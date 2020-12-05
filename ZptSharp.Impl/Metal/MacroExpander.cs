@@ -86,8 +86,15 @@ Extended macro:{extended} ({extended_source})",
                 if (logger.IsEnabled(LogLevel.Trace))
                     logger.LogTrace("Found slot-filler in macro extension:{filler}", slot.Element);
 
+                // If we already have a filler for the named slot then we ignore it rather than replacing it.
+                // This way consuming templates may always override the filler declared in a 'parent' template.
                 if (macroContext.SlotFillers.ContainsKey(slot.Name))
-                    macroContext.SlotFillers.Remove(slot.Name);
+                {
+                    if (logger.IsEnabled(LogLevel.Trace))
+                        logger.LogTrace("Ignoring slot-filler for {slot_name} because there is already an overriding filler", slot.Name);
+
+                    continue;
+                }
 
                 macroContext.SlotFillers.Add(slot.Name, slot);
             }

@@ -50,17 +50,19 @@ Filler:{filler}",
                                 filler.Element);
 
             var fillingElement = filler.Element.GetCopy();
-            var definingSlotFillerAttribute = GetFillSlotAttributeFromReplacedElement(definedSlot.Element);
+
+            RemoveFillSlotAttributeFromFiller(fillingElement);
+            CopyFillSlotAttributeToFiller(fillingElement,
+                                          definedSlot.Element,
+                                          definedSlot.Name);
+
             replacer.Replace(definedSlot.Element, fillingElement);
             macroContext.SlotFillers.Remove(definedSlot.Name);
-            RemoveFillSlotAttributeFromFiller(fillingElement);
-            if (definingSlotFillerAttribute != null)
-                fillingElement.Attributes.Add(definingSlotFillerAttribute);
         }
 
         /// <summary>
-        /// Removes a fill-slot attribute from the element.  Important to prevent it accidentally
-        /// being used again in its new context.
+        /// Removes a fill-slot attribute from the element (now that it has been used).
+        /// This is important, so as to prevent it accidentally being used again in its new context.
         /// </summary>
         /// <param name="element">The element from which to purge the attribute.</param>
         void RemoveFillSlotAttributeFromFiller(INode element)
@@ -70,9 +72,21 @@ Filler:{filler}",
                 element.Attributes.Remove(fillSlotAttribute);
         }
 
-        IAttribute GetFillSlotAttributeFromReplacedElement(INode element)
+        /// <summary>
+        /// If a slot-defining element also fills a slot then that fill-slot attribute needs to
+        /// be copied to the slot-filler element.  This is so that it may itself be used to fill
+        /// slots (as if it were the defining slot).
+        /// </summary>
+        /// <param name="fillerElement">The element which is being used to fill a slot.</param>
+        /// <param name="definingElement">The element which defined the slot.</param>
+        /// <param name="slotName">Slot name.</param>
+        void CopyFillSlotAttributeToFiller(INode fillerElement, INode definingElement, string slotName)
         {
-            return element.Attributes.FirstOrDefault(x => x.Matches(specProvider.FillSlot));
+            var fillSlotAttribute = definingElement.Attributes
+                .FirstOrDefault(x => x.Matches(specProvider.FillSlot));
+
+            if (fillSlotAttribute != null)
+                fillerElement.Attributes.Add(fillSlotAttribute);
         }
 
         /// <summary>
