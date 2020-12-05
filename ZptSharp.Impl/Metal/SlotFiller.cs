@@ -52,9 +52,7 @@ Filler:{filler}",
             var fillingElement = filler.Element.GetCopy();
 
             RemoveFillSlotAttributeFromFiller(fillingElement);
-            CopyFillSlotAttributeToFiller(fillingElement,
-                                          definedSlot.Element,
-                                          definedSlot.Name);
+            CopyFillSlotAttributeToFiller(fillingElement, definedSlot.Element);
 
             replacer.Replace(definedSlot.Element, fillingElement);
             macroContext.SlotFillers.Remove(definedSlot.Name);
@@ -79,8 +77,7 @@ Filler:{filler}",
         /// </summary>
         /// <param name="fillerElement">The element which is being used to fill a slot.</param>
         /// <param name="definingElement">The element which defined the slot.</param>
-        /// <param name="slotName">Slot name.</param>
-        void CopyFillSlotAttributeToFiller(INode fillerElement, INode definingElement, string slotName)
+        void CopyFillSlotAttributeToFiller(INode fillerElement, INode definingElement)
         {
             var fillSlotAttribute = definingElement.Attributes
                 .FirstOrDefault(x => x.Matches(specProvider.FillSlot));
