@@ -57,7 +57,8 @@ namespace ZptSharp.Rendering
             return new ExpressionContext(element,
                                          parentContext?.LocalDefinitions,
                                          parentContext?.GlobalDefinitions,
-                                         parentContext?.Repetitions)
+                                         parentContext?.Repetitions,
+                                         parentContext?.ErrorHandlers)
             {
                 Model = model,
                 TemplateDocument = document,
