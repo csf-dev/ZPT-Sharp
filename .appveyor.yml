@@ -1,8 +1,6 @@
 image: Visual Studio 2019
 version: '{branch}-{build}'
 
-# This version of Java is required for SonarScanner
-# the default version installed by AppVeyor is too old
 environment:
     JAVA_HOME: "C:\\Program Files\\Java\\jdk13"
 
@@ -15,4 +13,4 @@ install:
     - cmd: git submodule update --init --recursive
     - cmd: dotnet tool install --global dotnet-sonarscanner --version 4.10.0
     
-build_script: powershell.exe -file Tools\appveyor-build.ps1
+build_script: Tools\appveyor-build.ps1
