@@ -38,7 +38,7 @@ dotnet-sonarscanner end `
     /d:sonar.login=$SonarCloudKey
 
 Write-Host "Uploading artifacts"
-Get-ChildItem .TestResults\**\* | ForEach-Object { Push-AppveyorArtifact $_.FullName -FileName $_.Name }
+Get-ChildItem .TestResults\**\*.* | ForEach-Object { Push-AppveyorArtifact $_.FullName -FileName $_.Name }
 
 Write-Host "Exiting script using exit code from dotnet test"
 exit $FinalExitCode
