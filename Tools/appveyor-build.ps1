@@ -25,8 +25,8 @@ dotnet-sonarscanner begin `
 dotnet build
 dotnet test `
     /p:CollectCoverage=true `
-    /p:CoverletOutputFormat="json,opencover" `
-    /p:CoverletOutput="..\.TestResults\" `
+    "/p:CoverletOutputFormat=json,opencover" `
+    "/p:CoverletOutput=..\.TestResults\" `
     --test-adapter-path:. `
     --logger:"nunit;LogFilePath=..\.TestResults\TestResults.xml"
 
