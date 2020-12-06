@@ -7,21 +7,21 @@ $TestResultRoot = ($BuildPath + '\.TestResults\')
 $NUnitReportPaths = ($TestResultRoot + 'TestResults.xml')
 $OpenCoverReportPaths = ($TestResultRoot + 'coverage.opencover.xml')
 
-Write-Host "Using following dotnet version"
+# Just here to make it clear what build environment I'm using
 dotnet --version
 
-Write-Host "Setting up SonarScanner"
+# Set up SonarScanner
 dotnet-sonarscanner begin `
     /k:"ZptSharp" `
-    /v:"$SonarCloudBuildName" `
+    /v:$SonarCloudBuildName `
     /o:craigfowler-github `
-    /s:"$SonarScannerConfigFile" `
+    /s:$SonarScannerConfigFile `
     /d:sonar.host.url="https://sonarcloud.io" `
     /d:sonar.login=$SonarCloudKey `
-    /d:sonar.cs.nunit.reportsPaths="$NUnitReportPaths" `
-    /d:sonar.cs.opencover.reportsPaths="$OpenCoverReportPaths"
+    /d:sonar.cs.nunit.reportsPaths=$NUnitReportPaths `
+    /d:sonar.cs.opencover.reportsPaths=$OpenCoverReportPaths
 
-Write-Host "Building and testing"
+# Build & test
 # Note that "%2c" is the escape sequence for a comma
 dotnet build
 dotnet test `
@@ -33,12 +33,13 @@ dotnet test `
 
 $FinalExitCode = $LASTEXITCODE
 
-Write-Host "Completing the SonarScanner process"
+# Complete the SonarScanner process
 dotnet-sonarscanner end `
     /d:sonar.login=$SonarCloudKey
 
-Write-Host "Uploading artifacts"
+# Upload artifacts
 Get-ChildItem .TestResults\**\* | ForEach-Object { Push-AppveyorArtifact $_.FullName -FileName $_.Name }
 
-Write-Host "Exiting script using exit code from dotnet test"
+# Ensure we exit with the same exit code that dotnet test emitted,
+# so that the build fails where appropriate
 exit $FinalExitCode
