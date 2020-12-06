@@ -23,10 +23,10 @@ dotnet-sonarscanner begin `
 dotnet build
 dotnet test `
     /p:CollectCoverage=true `
-    /p:CoverletOutputFormat="json,opencover" `
-    /p:CoverletOutput="../.TestResults/" `
+    /p:CoverletOutputFormat=\"json,opencover\" `
+    /p:CoverletOutput=\"../.TestResults/\" `
     --test-adapter-path:. `
-    --logger:"nunit;LogFilePath=..\.TestResults\TestResults.xml"
+    --logger:\"nunit;LogFilePath=../.TestResults\TestResults.xml\"
 
 $FinalExitCode = $LASTEXITCODE
 
@@ -35,7 +35,7 @@ dotnet-sonarscanner end `
     /d:sonar.login=$SonarCloudKey
 
 # Upload artifacts
-Get-ChildItem .TestResults\**\* | ForEach-Object { Push-AppveyorArtifact $_.FullName -FileName $_.Name }
+Get-ChildItem "($TestResultRoot + '**\*')" | ForEach-Object { Push-AppveyorArtifact $_.FullName -FileName $_.Name }
 
 # Ensure we exit with the same exit code that dotnet test emitted,
 # so that the build fails where appropriate
