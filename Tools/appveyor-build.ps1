@@ -23,6 +23,7 @@ dotnet-sonarscanner begin `
 
 Write-Host "Building and testing"
 # Note that "%2c" is the escape sequence for a comma and "%3b" is the sequence for semicolon
+dotnet build
 dotnet test `
     /p:CollectCoverage=true `
     /p:CoverletOutputFormat="json%2copencover" `
@@ -37,8 +38,7 @@ dotnet-sonarscanner end `
     /d:sonar.login=$SonarCloudKey
 
 Write-Host "Uploading artifacts"
-Push-AppveyorArtifact $NUnitReportPaths
-Push-AppveyorArtifact $OpenCoverReportPaths
+Get-ChildItem .TestResults\**\*.* | ForEach-Object { Push-AppveyorArtifact $_.FullName -FileName $_.Name }
 
 Write-Host "Exiting script using exit code from dotnet test"
 exit $FinalExitCode
