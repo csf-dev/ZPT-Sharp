@@ -25,10 +25,10 @@ Write-Host "Building and testing"
 # Note that "%2c" is the escape sequence for a comma and "%3b" is the sequence for semicolon
 dotnet test `
     /p:CollectCoverage=true `
-    /p:CoverletOutputFormat=json%2copencover `
-    /p:CoverletOutput=$OpenCoverReportPaths `
+    /p:CoverletOutputFormat="json%2copencover" `
+    /p:CoverletOutput="..\.TestResults\" `
     --test-adapter-path:. `
-    --logger:nunit%3bLogFilePath=$NUnitReportPaths
+    --logger:"nunit%3bLogFilePath=..\.TestResults\TestResults.xml"
 
 $FinalExitCode = $LASTEXITCODE
 
