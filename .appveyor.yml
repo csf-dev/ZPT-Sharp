@@ -16,6 +16,3 @@ install:
     - cmd: dotnet tool install --global dotnet-sonarscanner --version 4.10.0
     
 build_script: powershell.exe -file Tools\appveyor-build.ps1
-
-test_script:
-  - echo "Tests already run as part of build"
