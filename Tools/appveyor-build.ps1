@@ -16,8 +16,8 @@ dotnet-sonarscanner begin `
     /s:$SonarScannerConfigFile `
     /d:sonar.host.url="https://sonarcloud.io" `
     /d:sonar.login=$SonarCloudKey `
-    /d:sonar.cs.nunit.reportsPaths=($TestResultRoot + 'TestResults.xml') `
-    /d:sonar.cs.opencover.reportsPaths=($TestResultRoot + 'coverage.opencover.xml')
+    /d:sonar.cs.nunit.reportsPaths="($TestResultRoot + 'TestResults.xml')" `
+    /d:sonar.cs.opencover.reportsPaths="($TestResultRoot + 'coverage.opencover.xml')"
 
 # Build & test
 dotnet build
@@ -35,7 +35,7 @@ dotnet-sonarscanner end `
     /d:sonar.login=$SonarCloudKey
 
 # Upload artifacts
-Get-ChildItem ($TestResultRoot + '**\*') | ForEach-Object { Push-AppveyorArtifact $_.FullName -FileName $_.Name }
+Get-ChildItem "($TestResultRoot + '**\*')" | ForEach-Object { Push-AppveyorArtifact $_.FullName -FileName $_.Name }
 
 # Ensure we exit with the same exit code that dotnet test emitted,
 # so that the build fails where appropriate
