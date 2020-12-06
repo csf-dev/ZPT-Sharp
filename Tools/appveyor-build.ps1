@@ -22,12 +22,11 @@ dotnet-sonarscanner begin `
     /d:sonar.cs.opencover.reportsPaths=$OpenCoverReportPaths
 
 # Build & test
-# Note that "%2c" is the escape sequence for a comma
 dotnet build
 dotnet test `
     /p:CollectCoverage=true `
-    /p:CoverletOutputFormat="json%2copencover" `
-    /p:CoverletOutput="..\.TestResults\" `
+    "/p:CoverletOutputFormat=json,opencover" `
+    "/p:CoverletOutput=..\.TestResults\" `
     --test-adapter-path:. `
     --logger:"nunit;LogFilePath=..\.TestResults\TestResults.xml"
 
