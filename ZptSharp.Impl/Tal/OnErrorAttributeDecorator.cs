@@ -18,7 +18,7 @@ namespace ZptSharp.Tal
     /// then this decorator will handle the error and prevent the error from halting the whole rendering process.
     /// </para>
     /// </summary>
-    public class OnErrorAttributeDecorator : IProcessesExpressionContext
+    public class OnErrorAttributeDecorator : IProcessesExpressionContext, IHandlesProcessingError
     {
         readonly IProcessesExpressionContext wrapped;
         readonly IGetsTalAttributeSpecs specProvider;
@@ -39,11 +39,63 @@ namespace ZptSharp.Tal
             }
             catch(Exception ex)
             {
-                var attribute = context.CurrentElement.GetMatchingAttribute(specProvider.OnError);
-                if (attribute == null) throw;
-                return await ProcessErroredContextAsync(context, ex, attribute.Value, token).ConfigureAwait(false);
+                var errorHandlingResult = await HandleErrorPrivateAsync(ex, context, token);
+                if (!errorHandlingResult.IsSuccess) throw;
+                return errorHandlingResult.Result;
             }
         }
+
+        /// <summary>
+        /// Handles an error which was encountered whilst processing an expression context.
+        /// </summary>
+        /// <returns>A result object indicating the outcome of error handling.</returns>
+        /// <param name="ex">The exception indicating the error.</param>
+        /// <param name="context">The context to process.</param>
+        /// <param name="token">An optional cancellation token.</param>
+        public Task<ErrorHandlingResult> HandleErrorAsync(Exception ex, ExpressionContext context, CancellationToken token = default)
+        {
+            if (ex == null)
+                throw new ArgumentNullException(nameof(ex));
+            if (context == null)
+                throw new ArgumentNullException(nameof(context));
+
+            return HandleErrorPrivateAsync(ex, context, token);
+        }
+
+        async Task<ErrorHandlingResult> HandleErrorPrivateAsync(Exception ex, ExpressionContext context, CancellationToken token)
+        {
+            var attribute = GetOnErrorAttribute(context);
+            if (attribute == null)
+                return ErrorHandlingResult.Failure;
+
+            try
+            {
+                var result = await ProcessErroredContextAsync(context, ex, attribute.Value, token)
+                    .ConfigureAwait(false);
+
+                return ErrorHandlingResult.Success(result);
+            }
+            catch(Exception handlingException)
+            {
+                if(logger.IsEnabled(LogLevel.Information))
+                {
+                    logger.LogInformation(@"Whilst attempting to handle a ZPT rendering error, a further error was raised.
+Original exception
+------------------
+{original_exception}
+
+Exception raised whilst trying to handle that
+---------------------------------------------
+{new_exception}",
+                                          ex, handlingException);
+                }
+
+                return ErrorHandlingResult.Failure;
+            }
+        }
+
+        IAttribute GetOnErrorAttribute(ExpressionContext context)
+            => context.CurrentElement.GetMatchingAttribute(specProvider.OnError);
 
         async Task<ExpressionContextProcessingResult> ProcessErroredContextAsync(ExpressionContext context,
                                                                                  Exception originalError,

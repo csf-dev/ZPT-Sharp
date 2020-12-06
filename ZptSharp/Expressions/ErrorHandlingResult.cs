@@ -37,6 +37,6 @@ namespace ZptSharp.Expressions
         /// Gets an instance which represents an unsuccessful attempt to handle an error.
         /// </summary>
         /// <returns>The failure result.</returns>
-        public static ErrorHandlingResult Failure() => new ErrorHandlingResult(null);
+        public static ErrorHandlingResult Failure => new ErrorHandlingResult(null);
     }
 }
