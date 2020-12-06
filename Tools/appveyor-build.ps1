@@ -4,8 +4,6 @@ $BuildPath = $Env:APPVEYOR_BUILD_FOLDER
 $SonarCloudBuildName = ('AppVeyor_build_' + $BuildNumber)
 $SonarScannerConfigFile = ($BuildPath + '\.SonarQube.Analysis.xml')
 $TestResultRoot = ($BuildPath + '\.TestResults\')
-$NUnitReportPaths = ($TestResultRoot + 'TestResults.xml')
-$OpenCoverReportPaths = ($TestResultRoot + 'coverage.opencover.xml')
 
 # Just here to make it clear what build environment I'm using
 dotnet --version
@@ -18,15 +16,15 @@ dotnet-sonarscanner begin `
     /s:$SonarScannerConfigFile `
     /d:sonar.host.url="https://sonarcloud.io" `
     /d:sonar.login=$SonarCloudKey `
-    /d:sonar.cs.nunit.reportsPaths=$NUnitReportPaths `
-    /d:sonar.cs.opencover.reportsPaths=$OpenCoverReportPaths
+    /d:sonar.cs.nunit.reportsPaths="($TestResultRoot + 'TestResults.xml')" `
+    /d:sonar.cs.opencover.reportsPaths="($TestResultRoot + 'coverage.opencover.xml')"
 
 # Build & test
 dotnet build
 dotnet test `
     /p:CollectCoverage=true `
     /p:CoverletOutputFormat="json,opencover" `
-    /p:CoverletOutput="..\.TestResults\" `
+    /p:CoverletOutput="../.TestResults/" `
     --test-adapter-path:. `
     --logger:"nunit;LogFilePath=..\.TestResults\TestResults.xml"
 
