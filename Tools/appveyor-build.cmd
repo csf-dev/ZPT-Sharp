@@ -1,4 +1,5 @@
-﻿dotnet --version
+﻿
+dotnet --version
 
 dotnet-sonarscanner begin ^
     /k:"ZptSharp" ^
@@ -22,6 +23,6 @@ SET exitcode=%errorlevel%
 dotnet-sonarscanner end ^
     /d:"sonar.login=%SONARCLOUD_SECRET_KEY%"
 
-for %%file in (.TestResults\**\*) do appveyor PushArtifact %%file
+FOR %%F IN (.TestResults\*.*) DO appveyor PushArtifact %%F
 
 exit /B %exitcode%
