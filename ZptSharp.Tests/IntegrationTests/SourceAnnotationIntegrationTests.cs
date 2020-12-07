@@ -15,7 +15,7 @@ namespace ZptSharp.IntegrationTests
         {
             var config = GetConfig();
             var result = await IntegrationTester.PerformIntegrationTest(expectedPath, config: config, logLevel: Microsoft.Extensions.Logging.LogLevel.Debug);
-            Assert.That(result, Has.MatchingExpectedAndActualRenderings);
+            Assert.That(result, Has.MatchingExpectedAndActualRenderingsExceptDirectorySeparators);
         }
 
         public static IEnumerable<string> GetExpectedOutputFiles()

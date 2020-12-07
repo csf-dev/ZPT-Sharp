@@ -13,5 +13,15 @@ namespace ZptSharp
         /// <value>The NUnit constraint.</value>
         public static Constraint MatchingExpectedAndActualRenderings
             => new MatchingExpectedAndActualRenderingConstraint();
+
+        /// <summary>
+        /// Gets a constraint for a <see cref="IntegrationTester.IntegrationTestResult"/>, testing
+        /// that its actual &amp; expected renderings match.  This constraint allows for differences in directory
+        /// separator characters, though.
+        /// </summary>
+        /// <value>The NUnit constraint.</value>
+        public static Constraint MatchingExpectedAndActualRenderingsExceptDirectorySeparators
+            => new MatchingExpectedAndActualRenderingExceptForSourceAnnotationPathsConstraint();
+        
     }
 }

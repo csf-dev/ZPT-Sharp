@@ -45,7 +45,7 @@ namespace ZptSharp.SourceAnnotation
 
         string GetAnnotation(ElementSourceInfo sourceInfo, TagType tagType)
         {
-            var divider = new String(dividerCharacter, dividerCharCount);
+            var divider = GetDivider();
 
             /* This will look roughly like:
              * 
@@ -77,6 +77,11 @@ namespace ZptSharp.SourceAnnotation
                 return sourceInfoProvider.GetSourceInfo(sourceInfo.Document);
             }
         }
+
+        /// <summary>
+        /// Gets a string to be used as a divider, indicating source annotation.
+        /// </summary>
+        public static string GetDivider() => new String(dividerCharacter, dividerCharCount);
 
         /// <summary>
         /// Initializes a new instance of the <see cref="AnnotationProvider"/> class.

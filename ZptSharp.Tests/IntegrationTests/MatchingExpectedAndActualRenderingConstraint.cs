@@ -20,7 +20,7 @@ namespace ZptSharp.IntegrationTests
             return GetResult((IntegrationTester.IntegrationTestResult) (object) actual);
         }
 
-        ConstraintResult GetResult(IntegrationTester.IntegrationTestResult actual)
+        protected virtual ConstraintResult GetResult(IntegrationTester.IntegrationTestResult actual)
         {
             var status = (actual.Actual != null
                        && actual.Expected != null
@@ -36,33 +36,5 @@ namespace ZptSharp.IntegrationTests
             Description = $"A non-null {nameof(IntegrationTester.IntegrationTestResult)} with matching actual/expected renderings";
         }
 
-        public class MatchingExpectedAndActualRenderingConstraintResult : ConstraintResult
-        {
-            IntegrationTester.IntegrationTestResult Result
-                => (IntegrationTester.IntegrationTestResult) ActualValue;
-
-            string Actual => Result.Actual ?? "<null>";
-
-            string Expected => Result.Expected ?? "<null>";
-
-            public override void WriteMessageTo(MessageWriter writer)
-            {
-                writer.WriteLine($@"Actual rendering does not match expected rendering.
-========
-Expected
-========
-{Expected}
-========
- Actual
-========
-{Actual}
-========");
-            }
-
-            public MatchingExpectedAndActualRenderingConstraintResult(IConstraint constraint,
-                                                                      IntegrationTester.IntegrationTestResult actual,
-                                                                      ConstraintStatus status)
-                : base(constraint, actual, status) { }
-        }
     }
 }

@@ -39,7 +39,7 @@ namespace ZptSharp.Tal
             }
             catch(Exception ex)
             {
-                var errorHandlingResult = await HandleErrorPrivateAsync(ex, context, token);
+                var errorHandlingResult = await HandleErrorPrivateAsync(ex, context, true, token);
                 if (!errorHandlingResult.IsSuccess) throw;
                 return errorHandlingResult.Result;
             }
@@ -59,10 +59,13 @@ namespace ZptSharp.Tal
             if (context == null)
                 throw new ArgumentNullException(nameof(context));
 
-            return HandleErrorPrivateAsync(ex, context, token);
+            return HandleErrorPrivateAsync(ex, context, false, token);
         }
 
-        async Task<ErrorHandlingResult> HandleErrorPrivateAsync(Exception ex, ExpressionContext context, CancellationToken token)
+        async Task<ErrorHandlingResult> HandleErrorPrivateAsync(Exception ex,
+                                                                ExpressionContext context,
+                                                                bool rethrow,
+                                                                CancellationToken token)
         {
             var attribute = GetOnErrorAttribute(context);
             if (attribute == null)
@@ -75,7 +78,7 @@ namespace ZptSharp.Tal
 
                 return ErrorHandlingResult.Success(result);
             }
-            catch(Exception handlingException)
+            catch(OnErrorHandlingException handlingException)
             {
                 if(logger.IsEnabled(LogLevel.Information))
                 {
@@ -89,6 +92,8 @@ Exception raised whilst trying to handle that
 {new_exception}",
                                           ex, handlingException);
                 }
+
+                if(rethrow) throw;
 
                 return ErrorHandlingResult.Failure;
             }
