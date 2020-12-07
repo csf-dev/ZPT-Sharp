@@ -12,19 +12,9 @@ init:
 install:
     - cmd: git submodule update --init --recursive
     - cmd: dotnet tool install --global dotnet-sonarscanner --version 4.10.0
-
-before_build:
-    - cmd: dotnet --version
-    - cmd: dotnet-sonarscanner begin /k:"ZptSharp" /v:AppVeyor_build_%APPVEYOR_BUILD_NUMBER% /o:craigfowler-github /s:%APPVEYOR_BUILD_FOLDER%\.SonarQube.Analysis.xml /d:sonar.host.url="https://sonarcloud.io" /d:sonar.login=%SONARCLOUD_SECRET_KEY% /d:sonar.cs.nunit.reportsPaths=%APPVEYOR_BUILD_FOLDER%\.TestResults\TestResults.xml /d:sonar.cs.opencover.reportsPaths=%APPVEYOR_BUILD_FOLDER%\.TestResults\coverage.opencover.xml
     
 build_script:
-    - cmd: dotnet build ZptSharp.sln
+    - cmd: Tools\appveyor-build.cmd
     
 test_script:
-    - cmd: dotnet test ZptSharp.sln /p:CollectCoverage=true /p:CoverletOutputFormat=\"json,opencover\" /p:CoverletOutput=\"../.TestResults/\"  --test-adapter-path:. --logger:\"nunit;LogFilePath=../.TestResults\TestResults.xml\"
-
-after_test:
-    - cmd: dotnet-sonarscanner end /d:"sonar.login=%SONARCLOUD_SECRET_KEY%"
-    
-artifacts:
-    - path: .TestResults\**\*
+    - cmd: echo "Tests already run"

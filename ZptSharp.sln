@@ -21,6 +21,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tools", "Tools", "{6CB27AD0
 		.travis.yml = .travis.yml
 		.gitignore = .gitignore
 		.SonarQube.Analysis.xml = .SonarQube.Analysis.xml
+		Tools\appveyor-build.cmd = Tools\appveyor-build.cmd
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Evaluators", "Evaluators", "{46999C9A-68E1-4347-81C7-5532F85A0041}"
