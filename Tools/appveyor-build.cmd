@@ -1,4 +1,3 @@
-﻿
 dotnet --version
 
 dotnet-sonarscanner begin ^
