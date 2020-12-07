@@ -30,6 +30,11 @@ namespace ZptSharp.Expressions.PythonExpressions
         /// <param name="token">Token.</param>
         public Task<object> EvaluateExpressionAsync(string expression, IList<Variable> variableDefinitions, CancellationToken token = default)
         {
+            if (expression == null)
+                throw new ArgumentNullException(nameof(expression));
+            if (variableDefinitions == null)
+                throw new ArgumentNullException(nameof(variableDefinitions));
+
             var classDefinitionScript = scriptProvider.GetScript(expression, variableDefinitions);
             var classInstance = GetInstanceOfClass(classDefinitionScript);
 
