@@ -7,7 +7,7 @@ using ZptSharp.Util;
 
 namespace ZptSharp.IntegrationTests
 {
-    [TestFixture, Parallelizable]
+    [TestFixture, Parallelizable, Category("Integration")]
     public class CSharpExpressionIntegrationTests
     {
         [Test, Description("For the 'expected rendering' file, rendering the corresponding 'source document' file via ZptSharp should produce the same output.")]

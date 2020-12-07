@@ -21,7 +21,7 @@ namespace ZptSharp
             if (serviceCollection == null)
                 throw new ArgumentNullException(nameof(serviceCollection));
 
-            serviceCollection.AddSingleton(typeof(IGetsScriptEngine), s => new ScriptEngineContainer());
+            serviceCollection.AddSingleton(typeof(IGetsScriptEngine), s => new IronPythonScriptEngineContainer());
             serviceCollection.AddTransient<IEvaluatesPythonExpression, ScriptEngineEvaluator>();
             serviceCollection.AddTransient<PythonExpressionEvaluator>();
             serviceCollection.AddTransient<IGetsClassDefinitionScript, ClassDefinitionScriptFactory>();

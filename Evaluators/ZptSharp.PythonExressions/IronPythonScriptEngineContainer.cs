@@ -9,7 +9,7 @@ namespace ZptSharp.Expressions.PythonExpressions
     /// for evaluatting python scripts.  This is the only type which directly
     /// references IronPython.
     /// </summary>
-    public class ScriptEngineContainer : IGetsScriptEngine
+    public class IronPythonScriptEngineContainer : IGetsScriptEngine
     {
         /// <summary>
         /// Gets the <see cref="ScriptEngine"/> instance.
@@ -18,9 +18,9 @@ namespace ZptSharp.Expressions.PythonExpressions
         public ScriptEngine ScriptEngine { get; }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="ScriptEngineContainer"/> class.
+        /// Initializes a new instance of the <see cref="IronPythonScriptEngineContainer"/> class.
         /// </summary>
-        public ScriptEngineContainer()
+        public IronPythonScriptEngineContainer()
         {
             ScriptEngine = Python.CreateEngine();
         }
