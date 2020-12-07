@@ -39,7 +39,7 @@ namespace ZptSharp.Tal
             }
             catch(Exception ex)
             {
-                var errorHandlingResult = await HandleErrorPrivateAsync(ex, context, true, token);
+                var errorHandlingResult = await HandleErrorPrivateAsync(ex, context, true, token).ConfigureAwait(false);
                 if (!errorHandlingResult.IsSuccess) throw;
                 return errorHandlingResult.Result;
             }

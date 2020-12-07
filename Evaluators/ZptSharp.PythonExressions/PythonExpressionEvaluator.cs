@@ -39,13 +39,14 @@ namespace ZptSharp.Expressions.PythonExpressions
                                                           ExpressionContext context,
                                                           CancellationToken cancellationToken)
         {
-            var variables = await GetVariables(context);
-            return await pythonEvaluator.EvaluateExpressionAsync(expression, variables, cancellationToken);
+            var variables = await GetVariables(context).ConfigureAwait(false);
+            return await pythonEvaluator.EvaluateExpressionAsync(expression, variables, cancellationToken)
+                .ConfigureAwait(false);
         }
 
         async Task<IList<Variable>> GetVariables(ExpressionContext context)
         {
-            var variables = await variableProvider.GetAllVariablesAsync(context);
+            var variables = await variableProvider.GetAllVariablesAsync(context).ConfigureAwait(false);
             return variables.Select(x => new Variable(x.Key, x.Value)).ToList();
         }
 

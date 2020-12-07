@@ -36,7 +36,7 @@ namespace ZptSharp.Expressions
         async Task<IDictionary<string, object>> GetAllVariablesPrivateAsync(ExpressionContext context)
         {
             var builtInContexts = builtinContextsProviderFactory.GetBuiltinContextsProvider(context, config);
-            var builtInDefinitions = await builtInContexts.GetAllNamedValues();
+            var builtInDefinitions = await builtInContexts.GetAllNamedValues().ConfigureAwait(false);
 
             return MergeDictionariesWithoutOverwriting(context.LocalDefinitions,
                                                        context.GlobalDefinitions,
