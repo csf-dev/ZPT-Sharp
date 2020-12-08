@@ -11,7 +11,6 @@ namespace ZptSharp.IntegrationTests
     public class ZptIntegrationTests
     {
         [Test, Description("For the 'expected rendering' file, rendering the corresponding 'source document' file via ZptSharp should produce the same output.")]
-        // [Ignore("Temporarily ignored")]
         public async Task Each_output_file_should_render_as_expected([ValueSource(nameof(GetExpectedOutputFiles))] string expectedPath)
         {
             var result = await IntegrationTester.PerformIntegrationTest(expectedPath, model: GetModel(), config: GetConfig());
@@ -20,7 +19,18 @@ namespace ZptSharp.IntegrationTests
 
         public static IEnumerable<string> GetExpectedOutputFiles() => TestFiles.GetIntegrationTestExpectedFiles<ZptIntegrationTests>();
 
-        object GetModel() => new object();
+        object GetModel()
+        {
+            return new
+            {
+                Sequence = new[]
+                {
+                    new { Name = "Craig", Description = "silly" },
+                    new { Name = "The sky", Description = "blue" },
+                    new { Name = "ZPT-Sharp model rendering", Description = "working" },
+                },
+            };
+        }
 
         RenderingConfig GetConfig()
         {
