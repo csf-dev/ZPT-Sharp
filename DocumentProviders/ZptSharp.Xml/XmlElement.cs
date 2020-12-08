@@ -174,8 +174,13 @@ namespace ZptSharp.Dom
             var attribs = new EventRaisingList<IAttribute>(sourceAttributes);
 
             attribs.SetupAfterActions(add => {
-                                          var attr = ((XmlAttribute)add.Item).NativeAttribute;
+                                          var xmlAttr = (XmlAttribute) add.Item;
+                                          var attr = xmlAttr.NativeAttribute;
                                           ElementNode.SetAttributeValue(attr.Name, attr.Value);
+                                          // Because we didn't directly use the native attribute, we essentially
+                                          // just created a new one.  That means we need to re-set the native
+                                          // attribute on the ZPT attribute object by way of a fixup.
+                                          xmlAttr.NativeAttribute = ElementNode.Attribute(attr.Name);
                                           add.Item.Element = this;
                                       },
                                       del => {

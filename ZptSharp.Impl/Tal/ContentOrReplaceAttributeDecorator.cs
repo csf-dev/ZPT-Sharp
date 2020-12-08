@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using ZptSharp.Dom;
@@ -83,19 +84,29 @@ namespace ZptSharp.Tal
             {
                 var childNodeContexts = context.CreateChildren(context.CurrentElement.ChildNodes);
                 omitter.Omit(context.CurrentElement);
-                return new ExpressionContextProcessingResult
-                {
-                    AdditionalContexts = childNodeContexts
-                };
+
+                return await GetReplacementResultAsync(context, childNodeContexts, token).ConfigureAwait(false);
             }
 
-            var additionalContexts = context.CreateChildren(domResult.Nodes);
+            var replacementContexts = context.CreateChildren(domResult.Nodes);
             replacer.Replace(context.CurrentElement, domResult.Nodes);
 
-            return new ExpressionContextProcessingResult
-            {
-                AdditionalContexts = additionalContexts
-            };
+            return await GetReplacementResultAsync(context, replacementContexts, token).ConfigureAwait(false);
+        }
+
+        async Task<ExpressionContextProcessingResult> GetReplacementResultAsync(ExpressionContext originalContext,
+                                                                                IList<ExpressionContext> replacementContexts,
+                                                                                CancellationToken token)
+        {
+            MoveTalAttributesToReplacementNodesWhereApplicable(replacementContexts, originalContext);
+
+            if (replacementContexts.Count != 1)
+                return new ExpressionContextProcessingResult { AdditionalContexts = replacementContexts, };
+
+            // If there is precisely one replacement context, then continue processing as if that was the current context.
+            // In that manner, further wrapped services may act upon that context.
+
+            return await wrapped.ProcessContextAsync(replacementContexts[0], token).ConfigureAwait(false);
         }
 
         async Task<DomValueExpressionResult> GetExpressionResultAsync(IAttribute attribute,
@@ -113,6 +124,31 @@ namespace ZptSharp.Tal
                                             context.CurrentElement,
                                             attribute.Value);
                 throw new TalExpressionEvaluationException(message, ex);
+            }
+        }
+
+        /// <summary>
+        /// TAL 'attributes' and 'omit-tag' attributes are still relevant on the replacement node(s) and
+        /// should still be processed.  This function copies those attributes from the current element to
+        /// the replacement elements where they are present.
+        /// </summary>
+        /// <param name="contexts">Contexts.</param>
+        /// <param name="replaceElementContext">Replace element context.</param>
+        void MoveTalAttributesToReplacementNodesWhereApplicable(IList<ExpressionContext> contexts,
+                                                                ExpressionContext replaceElementContext)
+        {
+            var attributesAttribute = replaceElementContext.CurrentElement.GetMatchingAttribute(specProvider.Attributes);
+            var omitTagAttribute = replaceElementContext.CurrentElement.GetMatchingAttribute(specProvider.OmitTag);
+
+            foreach (var context in contexts)
+            {
+                // Don't copy attributes to non-elements
+                if (!context.CurrentElement.IsElement) continue;
+
+                if (attributesAttribute != null)
+                    context.CurrentElement.Attributes.Add(attributesAttribute);
+                if (omitTagAttribute != null)
+                    context.CurrentElement.Attributes.Add(omitTagAttribute);
             }
         }
 

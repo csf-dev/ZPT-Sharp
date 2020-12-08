@@ -12,7 +12,7 @@ namespace ZptSharp.Dom
         /// Gets the native HAP attribute.
         /// </summary>
         /// <value>The native attribute.</value>
-        public XAttribute NativeAttribute { get; }
+        public XAttribute NativeAttribute { get; set; }
 
         /// <summary>
         /// Gets the attribute local name.
