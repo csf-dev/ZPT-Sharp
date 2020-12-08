@@ -133,10 +133,6 @@
       <Project>{63F5FF1D-DA36-4BB4-AA99-24AA78844109}</Project>
       <Name>CSF.Zpt.ExpressionEvaluators.StringExpressions</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\DocumentProviders\CSF.Zpt.DocumentProviders.HtmlHAP\CSF.Zpt.DocumentProviders.HtmlHAP.csproj">
-      <Project>{BFD834D4-5724-4425-BCB3-6DEE6B03F743}</Project>
-      <Name>CSF.Zpt.DocumentProviders.HtmlHAP</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\CSF.Zpt\CSF.Zpt.csproj">
       <Project>{16E957BB-347C-4EE1-815F-19AC296FB9E0}</Project>
       <Name>CSF.Zpt</Name>
@@ -144,10 +140,6 @@
     <ProjectReference Include="..\..\CSF.Zpt.Abstractions\CSF.Zpt.Abstractions.csproj">
       <Project>{8207CD9B-F1C1-4D75-B250-ACDFFBDCB071}</Project>
       <Name>CSF.Zpt.Abstractions</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\CSF.Zpt.ScreenplayReportProfiling\CSF.Zpt.ScreenplayReportProfiling.csproj">
-      <Project>{697959B1-57CC-48A2-B2E6-E7E15D5B387D}</Project>
-      <Name>CSF.Zpt.ScreenplayReportProfiling</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

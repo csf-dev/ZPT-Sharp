@@ -45,28 +45,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AssemblyInfo.cs" />
     <Compile Include="BatchRendering\IBatchOptionsInputHelper.cs" />
     <Compile Include="BatchRendering\IBatchOptionsMultipleInputOutputHelper.cs" />
     <Compile Include="BatchRendering\IBatchOptionsSingleInputOutputHelper.cs" />
     <Compile Include="BatchRendering\IBatchRenderingOptionsValidator.cs" />
-    <Compile Include="IZptDocumentFactory.cs" />
-    <Compile Include="ZptConstants.cs" />
-    <Compile Include="Tales\ITalesPathHandler.cs" />
-    <Compile Include="Tales\IExpressionEvaluator.cs" />
-    <Compile Include="Tales\ITalesConvertible.cs" />
-    <Compile Include="Tales\ITemplateFileFactory.cs" />
-    <Compile Include="Tales\Expression.cs" />
-    <Compile Include="Tales\ITalesModel.cs" />
-    <Compile Include="Tales\TemplateFile.cs" />
-    <Compile Include="Tales\InvalidExpressionException.cs" />
-    <Compile Include="Tales\TraversalException.cs" />
-    <Compile Include="Tales\IExpressionFactory.cs" />
-    <Compile Include="IZptDocument.cs" />
-    <Compile Include="ZptException.cs" />
-    <Compile Include="RenderingMode.cs" />
-    <Compile Include="IXmlUrlResolverFactory.cs" />
-    <Compile Include="IZptDocumentProvider.cs" />
     <Compile Include="BatchRendering\IBatchRenderer.cs" />
     <Compile Include="BatchRendering\IBatchRenderingOptions.cs" />
     <Compile Include="BatchRendering\InvalidBatchRenderingOptionsException.cs" />
@@ -75,12 +57,6 @@
     <Compile Include="BatchRendering\BatchRenderingFatalErrorType.cs" />
     <Compile Include="BatchRendering\IBatchRenderingResponse.cs" />
     <Compile Include="BatchRendering\IBatchRenderingDocumentResponse.cs" />
-    <Compile Include="Tales\IEvaluatorSelector.cs" />
-    <Compile Include="IPluginConfiguration.cs" />
-    <Compile Include="IZptDocumentProviderService.cs" />
-    <Compile Include="Tales\IExpressionEvaluatorService.cs" />
-    <Compile Include="IPluginAssemblyLoader.cs" />
-    <Compile Include="IAddOnAssemblyFinder.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Target Name="BeforeBuild">
@@ -90,8 +66,4 @@
   <Target Name="AfterBuild">
     <CallTarget Targets="RestoreStubAssemblyInfo" />
   </Target>
-  <ItemGroup>
-    <None Include="packages.config" />
-    <None Include="CSF.Zpt.Abstractions.nuspec.pt" />
-  </ItemGroup>
 </Project>

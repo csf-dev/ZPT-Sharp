@@ -110,14 +110,6 @@
       <Project>{9B4DF12E-6E04-4C25-AD16-58434C18DE8A}</Project>
       <Name>CSF.Zpt.MVC5</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\DocumentProviders\CSF.Zpt.DocumentProviders.HtmlHAP\CSF.Zpt.DocumentProviders.HtmlHAP.csproj">
-      <Project>{BFD834D4-5724-4425-BCB3-6DEE6B03F743}</Project>
-      <Name>CSF.Zpt.DocumentProviders.HtmlHAP</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\DocumentProviders\CSF.Zpt.DocumentProviders.XmlLinq\CSF.Zpt.DocumentProviders.XmlLinq.csproj">
-      <Project>{842160E4-BDE5-4FA0-ADE5-07554090AA27}</Project>
-      <Name>CSF.Zpt.DocumentProviders.XmlLinq</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\..\ExpressionEvaluators\CSF.Zpt.ExpressionEvaluators.CSharpExpressions\CSF.Zpt.ExpressionEvaluators.CSharpExpressions.csproj">
       <Project>{AA29F7A3-A259-408A-B2FC-E2EFD78BCDFC}</Project>
       <Name>CSF.Zpt.ExpressionEvaluators.CSharpExpressions</Name>

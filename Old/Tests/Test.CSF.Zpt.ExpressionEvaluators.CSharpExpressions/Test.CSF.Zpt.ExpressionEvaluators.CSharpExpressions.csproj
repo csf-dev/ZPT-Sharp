@@ -68,10 +68,6 @@
       <Project>{8207CD9B-F1C1-4D75-B250-ACDFFBDCB071}</Project>
       <Name>CSF.Zpt.Abstractions</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\CSF.Zpt.Log4net\CSF.Zpt.Log4net.csproj">
-      <Project>{81044439-06CF-44E2-BBF2-3800F1DEB5B1}</Project>
-      <Name>CSF.Zpt.Log4net</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Host\" />

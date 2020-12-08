@@ -49,18 +49,6 @@
       <Project>{4DD64666-DBEF-4AD5-BDB0-3EB3C70A6E83}</Project>
       <Name>CSF.Zpt.Cli</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\DocumentProviders\CSF.Zpt.DocumentProviders.HtmlHAP\CSF.Zpt.DocumentProviders.HtmlHAP.csproj">
-      <Project>{BFD834D4-5724-4425-BCB3-6DEE6B03F743}</Project>
-      <Name>CSF.Zpt.DocumentProviders.HtmlHAP</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\DocumentProviders\CSF.Zpt.DocumentProviders.XmlLegacy\CSF.Zpt.DocumentProviders.XmlLegacy.csproj">
-      <Project>{71834399-0B92-4754-9721-178872E77CFD}</Project>
-      <Name>CSF.Zpt.DocumentProviders.XmlLegacy</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\DocumentProviders\CSF.Zpt.DocumentProviders.XmlLinq\CSF.Zpt.DocumentProviders.XmlLinq.csproj">
-      <Project>{842160E4-BDE5-4FA0-ADE5-07554090AA27}</Project>
-      <Name>CSF.Zpt.DocumentProviders.XmlLinq</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\ExpressionEvaluators\CSF.Zpt.ExpressionEvaluators.NotExpressions\CSF.Zpt.ExpressionEvaluators.NotExpressions.csproj">
       <Project>{7B3748AD-DF11-4A80-9258-EA043CD99D7C}</Project>
       <Name>CSF.Zpt.ExpressionEvaluators.NotExpressions</Name>
@@ -72,10 +60,6 @@
     <ProjectReference Include="..\..\ExpressionEvaluators\CSF.Zpt.ExpressionEvaluators.StringExpressions\CSF.Zpt.ExpressionEvaluators.StringExpressions.csproj">
       <Project>{63F5FF1D-DA36-4BB4-AA99-24AA78844109}</Project>
       <Name>CSF.Zpt.ExpressionEvaluators.StringExpressions</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\CSF.Zpt.Log4net\CSF.Zpt.Log4net.csproj">
-      <Project>{81044439-06CF-44E2-BBF2-3800F1DEB5B1}</Project>
-      <Name>CSF.Zpt.Log4net</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\CSF.Zpt.MVC5\CSF.Zpt.MVC5.csproj">
       <Project>{9B4DF12E-6E04-4C25-AD16-58434C18DE8A}</Project>

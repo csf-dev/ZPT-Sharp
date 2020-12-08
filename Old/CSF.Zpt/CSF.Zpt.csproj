@@ -59,23 +59,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AssemblyInfo.cs" />
-    <Compile Include="Tales\TalesModel.cs" />
-    <Compile Include="Tales\ExpressionEvaluatorBase.cs" />
-    <Compile Include="Tales\BuiltinContextsContainer.cs" />
-    <Compile Include="Tales\TalesRenderingContextFactory.cs" />
-    <Compile Include="Tales\FilesystemDirectory.cs" />
-    <Compile Include="Tales\TemplateDirectory.cs" />
-    <Compile Include="Tales\EnumerableObjectWrapperWithNamedItems.cs" />
-    <Compile Include="LocalXhtmlXmlResolver.cs" />
-    <Compile Include="Resources\ExceptionMessages.Designer.cs">
-      <DependentUpon>ExceptionMessages.resx</DependentUpon>
-    </Compile>
-    <Compile Include="Tales\ExpressionFactory.cs" />
-    <Compile Include="Resources\LogMessageFormats.Designer.cs">
-      <DependentUpon>LogMessageFormats.resx</DependentUpon>
-    </Compile>
-    <Compile Include="XmlUrlResolverFactory.cs" />
     <Compile Include="BatchRendering\BatchRenderingOptions.cs" />
     <Compile Include="BatchRendering\RenderingJob.cs" />
     <Compile Include="BatchRendering\BatchRenderer.cs" />
@@ -85,20 +68,8 @@
     <Compile Include="BatchRendering\IRenderingJob.cs" />
     <Compile Include="BatchRendering\IRenderingJobFactory.cs" />
     <Compile Include="BatchRendering\ErrorTolerantBatchRenderer.cs" />
-    <Compile Include="Tales\SimpleEvaluatorSelector.cs" />
-    <Compile Include="PluginConfigurationSection.cs" />
-    <Compile Include="PluginAssemblyCollection.cs" />
-    <Compile Include="PluginServiceBase.cs" />
-    <Compile Include="Tales\ExpressionEvaluatorCache.cs" />
-    <Compile Include="Tales\ExpressionEvaluatorService.cs" />
-    <Compile Include="EmptyPluginConfiguration.cs" />
-    <Compile Include="PluginAssemblyLoader.cs" />
     <Compile Include="BatchRendering\BatchOptionsBuilder.cs" />
     <Compile Include="BatchRendering\BatchRenderingOptionsValidator.cs" />
-    <Compile Include="Resources\SourceAnnotationFormats.Designer.cs">
-      <DependentUpon>SourceAnnotationFormats.resx</DependentUpon>
-    </Compile>
-    <Compile Include="DefaultAddOnAssemblyFinder.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
@@ -107,54 +78,11 @@
       <Name>CSF.Zpt.Abstractions</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\xhtml1-frameset.dtd">
-      <LogicalName>xhtml1-frameset.dtd</LogicalName>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Resources\xhtml1-strict.dtd">
-      <LogicalName>xhtml1-strict.dtd</LogicalName>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Resources\xhtml1-transitional.dtd">
-      <LogicalName>xhtml1-transitional.dtd</LogicalName>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Resources\xhtml11.dtd">
-      <LogicalName>xhtml11.dtd</LogicalName>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Resources\xhtml-lat1.ent">
-      <LogicalName>xhtml-lat1.ent</LogicalName>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Resources\xhtml-special.ent">
-      <LogicalName>xhtml-special.ent</LogicalName>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Resources\xhtml-symbol.ent">
-      <LogicalName>xhtml-symbol.ent</LogicalName>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Resources\ExceptionMessages.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>ExceptionMessages.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Resources\LogMessageFormats.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>LogMessageFormats.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Resources\SourceAnnotationFormats.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>SourceAnnotationFormats.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-  </ItemGroup>
   <Target Name="BeforeBuild">
     <CallTarget Targets="StampAssemblyInfo" />
   </Target>
   <Target Name="AfterBuild">
     <CallTarget Targets="RestoreStubAssemblyInfo" />
   </Target>
-  <ItemGroup>
-    <None Include="CSF.Zpt.nuspec.pt" />
-    <None Include="app.config.install.xdt" />
-    <None Include="app.config.uninstall.xdt" />
-    <None Include="web.config.install.xdt" />
-    <None Include="web.config.uninstall.xdt" />
-    <None Include="packages.config" />
-  </ItemGroup>
   <Import Project="..\packages\MSBuild.Extension.Pack.1.9.1\build\net40\MSBuild.Extension.Pack.targets" Condition="Exists('..\packages\MSBuild.Extension.Pack.1.9.1\build\net40\MSBuild.Extension.Pack.targets')" />
 </Project>

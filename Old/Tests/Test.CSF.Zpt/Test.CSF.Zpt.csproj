@@ -61,55 +61,12 @@
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
-    <None Include="packages.config" />
-    <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Rendering\" />
-    <Folder Include="Metal\" />
-    <Folder Include="Tal\" />
-    <Folder Include="Util\" />
-    <Folder Include="Tales\" />
     <Folder Include="BatchRendering\" />
-    <Folder Include="SourceAnnotation\" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="GlobalSetupFixture.cs" />
-    <Compile Include="Rendering\TestModel.cs" />
-    <Compile Include="Metal\TestMacroExpander.cs" />
-    <Compile Include="Metal\TestMacroFinder.cs" />
-    <Compile Include="Tal\TestTalVisitor.cs" />
-    <Compile Include="Tal\TestDefineAttributeHandler.cs" />
-    <Compile Include="Tal\TestConditionAttributeHandler.cs" />
-    <Compile Include="Tal\TestRepeatAttributeHandler.cs" />
-    <Compile Include="Tal\TestContentOrReplaceAttributeHandler.cs" />
-    <Compile Include="Tal\TestAttributesAttributeHandler.cs" />
-    <Compile Include="Tal\TestOmitTagAttributeHandler.cs" />
-    <Compile Include="Tal\TestOnErrorAttributeHandler.cs" />
-    <Compile Include="Tales\TestTalesModel.cs" />
-    <Compile Include="Tales\TestExpressionFactory.cs" />
-    <Compile Include="Tales\TestFilesystemDirectory.cs" />
-    <Compile Include="AssemblyInfo.cs" />
-    <Compile Include="TestZptDocument.cs" />
-    <Compile Include="TestZptDocumentFactory.cs" />
-    <Compile Include="TestPluginAssemblyLoader.cs" />
-    <Compile Include="Rendering\TestContextVisitorBase.cs" />
-    <Compile Include="Rendering\TestRenderingContextFactoryFactory.cs" />
-    <Compile Include="Rendering\StubRenderingContextFactory.cs" />
-    <Compile Include="Rendering\StubContextVisitor.cs" />
-    <Compile Include="Rendering\TestContextVisitorFactory.cs" />
-    <Compile Include="Tales\TestSimpleEvaluatorSelector.cs" />
-    <Compile Include="Tal\TestTalTidyUpVisitor.cs" />
-    <Compile Include="Metal\TestMetalTidyUpVisitor.cs" />
-    <Compile Include="Metal\TestMetalVisitor.cs" />
     <Compile Include="BatchRendering\TestRenderingJobFactory.cs" />
     <Compile Include="BatchRendering\TestBatchRenderer.cs" />
     <Compile Include="BatchRendering\TestBatchRenderingOptionsValidator.cs" />
-    <Compile Include="Metal\TestMacroSubstituter.cs" />
-    <Compile Include="Metal\TestMacroExtensionSubstitutor.cs" />
-    <Compile Include="SourceAnnotation\TestSourceAnnotator.cs" />
-    <Compile Include="Metal\MetalMacroContainerTests.cs" />
-    <Compile Include="Rendering\RenderingContextTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\CSF.Zpt\CSF.Zpt.csproj">
@@ -119,14 +76,6 @@
     <ProjectReference Include="..\..\CSF.Zpt.Abstractions\CSF.Zpt.Abstractions.csproj">
       <Project>{8207CD9B-F1C1-4D75-B250-ACDFFBDCB071}</Project>
       <Name>CSF.Zpt.Abstractions</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\CSF.Zpt.Log4net\CSF.Zpt.Log4net.csproj">
-      <Project>{81044439-06CF-44E2-BBF2-3800F1DEB5B1}</Project>
-      <Name>CSF.Zpt.Log4net</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\CSF.Zpt.TestUtils\CSF.Zpt.TestUtils.csproj">
-      <Project>{96333809-3330-43A7-B0CB-2DBE68E1E6FE}</Project>
-      <Name>CSF.Zpt.TestUtils</Name>
     </ProjectReference>
   </ItemGroup>
 </Project>
