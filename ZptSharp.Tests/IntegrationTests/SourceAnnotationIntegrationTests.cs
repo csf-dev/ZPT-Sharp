@@ -15,6 +15,15 @@ namespace ZptSharp.IntegrationTests
         {
             var config = GetConfig();
             var result = await IntegrationTester.PerformIntegrationTest(expectedPath, config: config, logLevel: Microsoft.Extensions.Logging.LogLevel.Debug);
+
+            /* Source annotation tests are a special case; we can't do a direct text
+             * comparison with the "expected" renderings.  That is because the actual renderings
+             * include file system paths.  Depending upon which OS environment we're on, the
+             * directory separator character will differ (back-slash or forward-slash).
+             * 
+             * That's why we're using a special Constraint implementation below, which will
+             * ignore differences in directory separators when doing the actual/expected comparison.
+             */           
             Assert.That(result, Has.MatchingExpectedAndActualRenderingsExceptDirectorySeparators);
         }
 
