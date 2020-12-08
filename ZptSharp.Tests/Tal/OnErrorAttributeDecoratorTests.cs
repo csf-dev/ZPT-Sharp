@@ -16,7 +16,7 @@ namespace ZptSharp.Tal
     public class OnErrorAttributeDecoratorTests
     {
         [Test, AutoMoqData]
-        public void ProcessContextAsync_returns_wrapped_result_if_it_does_not_throw([Frozen] IProcessesExpressionContext wrapped,
+        public void ProcessContextAsync_returns_wrapped_result_if_it_does_not_throw([Frozen] IHandlesProcessingError wrapped,
                                                                                     OnErrorAttributeDecorator sut,
                                                                                     [StubDom] ExpressionContext context,
                                                                                     ExpressionContextProcessingResult wrappedResult)
@@ -28,7 +28,7 @@ namespace ZptSharp.Tal
         }
 
         [Test, AutoMoqData]
-        public void ProcessContextAsync_rethrows_if_element_has_no_onError_attribute([Frozen] IProcessesExpressionContext wrapped,
+        public void ProcessContextAsync_rethrows_if_element_has_no_onError_attribute([Frozen] IHandlesProcessingError wrapped,
                                                                                      [Frozen] IGetsTalAttributeSpecs specProvider,
                                                                                      OnErrorAttributeDecorator sut,
                                                                                      AttributeSpec spec,
@@ -50,7 +50,7 @@ namespace ZptSharp.Tal
         }
 
         [Test, AutoMoqData]
-        public void ProcessContextAsync_returns_noop_result_if_attribute_aborts_action([Frozen] IProcessesExpressionContext wrapped,
+        public void ProcessContextAsync_returns_noop_result_if_attribute_aborts_action([Frozen] IHandlesProcessingError wrapped,
                                                                                        [Frozen] IGetsTalAttributeSpecs specProvider,
                                                                                        [Frozen] IEvaluatesDomValueExpression evaluator,
                                                                                        OnErrorAttributeDecorator sut,
@@ -77,7 +77,7 @@ namespace ZptSharp.Tal
         }
 
         [Test, AutoMoqData]
-        public async Task ProcessContextAsync_replaces_children_with_error_handling_result([Frozen] IProcessesExpressionContext wrapped,
+        public async Task ProcessContextAsync_replaces_children_with_error_handling_result([Frozen] IHandlesProcessingError wrapped,
                                                                                            [Frozen] IGetsTalAttributeSpecs specProvider,
                                                                                            [Frozen] IEvaluatesDomValueExpression evaluator,
                                                                                            OnErrorAttributeDecorator sut,
@@ -108,7 +108,7 @@ namespace ZptSharp.Tal
         }
 
         [Test, AutoMoqData]
-        public void ProcessContextAsync_throws_OnErrorHandlingException_if_evaluator_throws([Frozen] IProcessesExpressionContext wrapped,
+        public void ProcessContextAsync_throws_OnErrorHandlingException_if_evaluator_throws([Frozen] IHandlesProcessingError wrapped,
                                                                                             [Frozen] IGetsTalAttributeSpecs specProvider,
                                                                                             [Frozen] IEvaluatesDomValueExpression evaluator,
                                                                                             [Frozen, MockLogger] Microsoft.Extensions.Logging.ILogger<OnErrorAttributeDecorator> logger,

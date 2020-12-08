@@ -29,7 +29,7 @@ namespace ZptSharp.Rendering
             var rootContext = rootContextProvider.GetExpressionContext(document, request);
             var iterator = iteratorFactory.GetContextIterator(contextProcessor);
 
-            await iterator.IterateContextAndChildrenAsync(rootContext)
+            await iterator.IterateContextAndChildrenAsync(rootContext, token)
                 .ConfigureAwait(false);
         }
 

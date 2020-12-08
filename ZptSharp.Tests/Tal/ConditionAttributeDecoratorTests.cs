@@ -15,7 +15,7 @@ namespace ZptSharp.Tal
     public class ConditionAttributeDecoratorTests
     {
         [Test, AutoMoqData]
-        public async Task ProcessContextAsync_removes_the_element_if_a_condition_attribute_evaluates_to_falsey_value([Frozen] IProcessesExpressionContext wrapped,
+        public async Task ProcessContextAsync_removes_the_element_if_a_condition_attribute_evaluates_to_falsey_value([Frozen] IHandlesProcessingError wrapped,
                                                                                                                      [Frozen] IGetsTalAttributeSpecs specProvider,
                                                                                                                      [Frozen] IEvaluatesExpression evaluator,
                                                                                                                      [Frozen] IInterpretsExpressionResult resultInterpreter,
@@ -53,7 +53,7 @@ namespace ZptSharp.Tal
         }
 
         [Test, AutoMoqData]
-        public async Task ProcessContextAsync_does_not_call_wrapped_service_if_a_condition_attribute_evaluates_to_falsey_value([Frozen] IProcessesExpressionContext wrapped,
+        public async Task ProcessContextAsync_does_not_call_wrapped_service_if_a_condition_attribute_evaluates_to_falsey_value([Frozen] IHandlesProcessingError wrapped,
                                                                                                                                [Frozen] IGetsTalAttributeSpecs specProvider,
                                                                                                                                [Frozen] IEvaluatesExpression evaluator,
                                                                                                                                [Frozen] IInterpretsExpressionResult resultInterpreter,
@@ -126,7 +126,7 @@ namespace ZptSharp.Tal
         }
 
         [Test, AutoMoqData]
-        public async Task ProcessContextAsync_does_not_remove_element_if_a_condition_attribute_evaluates_to_truthy_value([Frozen] IProcessesExpressionContext wrapped,
+        public async Task ProcessContextAsync_does_not_remove_element_if_a_condition_attribute_evaluates_to_truthy_value([Frozen] IHandlesProcessingError wrapped,
                                                                                                                          [Frozen] IGetsTalAttributeSpecs specProvider,
                                                                                                                          [Frozen] IEvaluatesExpression evaluator,
                                                                                                                          [Frozen] IInterpretsExpressionResult resultInterpreter,
@@ -164,7 +164,7 @@ namespace ZptSharp.Tal
         }
 
         [Test, AutoMoqData]
-        public async Task ProcessContextAsync_returns_wrapped_result_if_a_condition_attribute_evaluates_to_truthy_value([Frozen] IProcessesExpressionContext wrapped,
+        public async Task ProcessContextAsync_returns_wrapped_result_if_a_condition_attribute_evaluates_to_truthy_value([Frozen] IHandlesProcessingError wrapped,
                                                                                                                         [Frozen] IGetsTalAttributeSpecs specProvider,
                                                                                                                         [Frozen] IEvaluatesExpression evaluator,
                                                                                                                         [Frozen] IInterpretsExpressionResult resultInterpreter,
@@ -204,7 +204,7 @@ namespace ZptSharp.Tal
         }
 
         [Test, AutoMoqData]
-        public async Task ProcessContextAsync_does_not_remove_element_if_a_condition_attribute_evaluates_to_cancellation([Frozen] IProcessesExpressionContext wrapped,
+        public async Task ProcessContextAsync_does_not_remove_element_if_a_condition_attribute_evaluates_to_cancellation([Frozen] IHandlesProcessingError wrapped,
                                                                                                                          [Frozen] IGetsTalAttributeSpecs specProvider,
                                                                                                                          [Frozen] IEvaluatesExpression evaluator,
                                                                                                                          [Frozen] IInterpretsExpressionResult resultInterpreter,
@@ -242,7 +242,7 @@ namespace ZptSharp.Tal
         }
 
         [Test, AutoMoqData]
-        public async Task ProcessContextAsync_does_not_remove_element_if_attribute_does_not_match_spec([Frozen] IProcessesExpressionContext wrapped,
+        public async Task ProcessContextAsync_does_not_remove_element_if_attribute_does_not_match_spec([Frozen] IHandlesProcessingError wrapped,
                                                                                                        [Frozen] IGetsTalAttributeSpecs specProvider,
                                                                                                        [Frozen] IEvaluatesExpression evaluator,
                                                                                                        [Frozen] IInterpretsExpressionResult resultInterpreter,

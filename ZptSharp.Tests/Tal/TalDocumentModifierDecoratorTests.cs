@@ -18,7 +18,7 @@ namespace ZptSharp.Tal
                                                                                                                            [Frozen] IIterativelyModifiesDocument iterativeModifier,
                                                                                                                            [Frozen] IModifiesDocument wrapped,
                                                                                                                            TalDocumentModifierDecorator sut,
-                                                                                                                           IProcessesExpressionContext processor,
+                                                                                                                           IHandlesProcessingError processor,
                                                                                                                            [StubDom] IDocument document,
                                                                                                                            RenderZptDocumentRequest request)
         {

@@ -16,7 +16,7 @@ namespace ZptSharp.Tal
     public class RepeatAttributeDecoratorTests
     {
         [Test, AutoMoqData]
-        public void ProcessContextAsync_returns_wrapped_result_if_attribute_not_present([Frozen] IProcessesExpressionContext wrapped,
+        public void ProcessContextAsync_returns_wrapped_result_if_attribute_not_present([Frozen] IHandlesProcessingError wrapped,
                                                                                         [Frozen] IGetsTalAttributeSpecs specProvider,
                                                                                         RepeatAttributeDecorator sut,
                                                                                         AttributeSpec spec,
@@ -33,7 +33,7 @@ namespace ZptSharp.Tal
         }
 
         [Test, AutoMoqData]
-        public async Task ProcessContextAsync_returns_wrapped_result_if_attribute_value_aborts_the_action([Frozen] IProcessesExpressionContext wrapped,
+        public async Task ProcessContextAsync_returns_wrapped_result_if_attribute_value_aborts_the_action([Frozen] IHandlesProcessingError wrapped,
                                                                                                           [Frozen] IGetsTalAttributeSpecs specProvider,
                                                                                                           [Frozen] IEvaluatesExpression evaluator,
                                                                                                           [Frozen] IInterpretsExpressionResult resultInterpreter,

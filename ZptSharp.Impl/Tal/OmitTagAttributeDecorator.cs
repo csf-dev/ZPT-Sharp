@@ -8,11 +8,11 @@ using ZptSharp.Rendering;
 namespace ZptSharp.Tal
 {
     /// <summary>
-    /// Decorator for <see cref="IProcessesExpressionContext"/> which handles TAL 'omit-tag' attributes.
+    /// Decorator for <see cref="IHandlesProcessingError"/> which handles TAL 'omit-tag' attributes.
     /// </summary>
-    public class OmitTagAttributeDecorator : IProcessesExpressionContext
+    public class OmitTagAttributeDecorator : IHandlesProcessingError
     {
-        readonly IProcessesExpressionContext wrapped;
+        readonly IHandlesProcessingError wrapped;
         readonly IGetsTalAttributeSpecs specProvider;
         readonly IOmitsNode omitter;
         readonly IEvaluatesExpression evaluator;
@@ -57,6 +57,9 @@ namespace ZptSharp.Tal
                 && resultInterpreter.CoerceResultToBoolean(expressionResult);
         }
 
+        Task<ErrorHandlingResult> IHandlesProcessingError.HandleErrorAsync(Exception ex, ExpressionContext context, CancellationToken token)
+            => wrapped.HandleErrorAsync(ex, context, token);
+
         /// <summary>
         /// Initializes a new instance of the <see cref="OmitTagAttributeDecorator"/> class.
         /// </summary>
@@ -65,7 +68,7 @@ namespace ZptSharp.Tal
         /// <param name="omitter">Omitter.</param>
         /// <param name="evaluator">Evaluator.</param>
         /// <param name="resultInterpreter">Result interpreter.</param>
-        public OmitTagAttributeDecorator(IProcessesExpressionContext wrapped,
+        public OmitTagAttributeDecorator(IHandlesProcessingError wrapped,
                                          IGetsTalAttributeSpecs specProvider,
                                          IOmitsNode omitter,
                                          IEvaluatesExpression evaluator,

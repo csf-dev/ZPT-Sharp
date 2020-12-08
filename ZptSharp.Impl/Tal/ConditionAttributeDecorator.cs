@@ -8,11 +8,11 @@ using ZptSharp.Rendering;
 namespace ZptSharp.Tal
 {
     /// <summary>
-    /// Decorator for <see cref="IProcessesExpressionContext"/> which handles TAL 'condition' attributes.
+    /// Decorator for <see cref="IHandlesProcessingError"/> which handles TAL 'condition' attributes.
     /// </summary>
-    public class ConditionAttributeDecorator : IProcessesExpressionContext
+    public class ConditionAttributeDecorator : IHandlesProcessingError
     {
-        readonly IProcessesExpressionContext wrapped;
+        readonly IHandlesProcessingError wrapped;
         readonly IGetsTalAttributeSpecs specProvider;
         readonly IEvaluatesExpression evaluator;
         readonly IInterpretsExpressionResult resultInterpreter;
@@ -45,6 +45,9 @@ namespace ZptSharp.Tal
             return !resultInterpreter.CoerceResultToBoolean(expressionResult);
         }
 
+        Task<ErrorHandlingResult> IHandlesProcessingError.HandleErrorAsync(Exception ex, ExpressionContext context, CancellationToken token)
+            => wrapped.HandleErrorAsync(ex, context, token);
+
         /// <summary>
         /// Initializes a new instance of the <see cref="ConditionAttributeDecorator"/> class.
         /// </summary>
@@ -52,7 +55,7 @@ namespace ZptSharp.Tal
         /// <param name="specProvider">Spec provider.</param>
         /// <param name="evaluator">Evaluator.</param>
         /// <param name="resultInterpreter">Result interpreter.</param>
-        public ConditionAttributeDecorator(IProcessesExpressionContext wrapped,
+        public ConditionAttributeDecorator(IHandlesProcessingError wrapped,
                                            IGetsTalAttributeSpecs specProvider,
                                            IEvaluatesExpression evaluator,
                                            IInterpretsExpressionResult resultInterpreter)

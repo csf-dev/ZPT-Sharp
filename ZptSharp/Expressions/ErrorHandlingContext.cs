@@ -12,7 +12,12 @@ namespace ZptSharp.Expressions
     public class ErrorHandlingContext
     {
         readonly ExpressionContext context;
-        readonly IHandlesProcessingError handler;
+
+        /// <summary>
+        /// Gets the handler implementation which would handle exceptions.
+        /// </summary>
+        /// <value>The handler.</value>
+        public IHandlesProcessingError Handler { get; }
 
         /// <summary>
         /// Attempts to handle the error.
@@ -21,7 +26,7 @@ namespace ZptSharp.Expressions
         /// <param name="exception">Exception.</param>
         /// <param name="token">Token.</param>
         public Task<ErrorHandlingResult> HandleErrorAsync(Exception exception, CancellationToken token = default)
-            => handler.HandleErrorAsync(exception, context, token);
+            => Handler.HandleErrorAsync(exception, context, token);
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ErrorHandlingContext"/> class.
@@ -31,7 +36,7 @@ namespace ZptSharp.Expressions
         public ErrorHandlingContext(ExpressionContext context, IHandlesProcessingError handler)
         {
             this.context = context ?? throw new ArgumentNullException(nameof(context));
-            this.handler = handler ?? throw new ArgumentNullException(nameof(handler));
+            Handler = handler ?? throw new ArgumentNullException(nameof(handler));
         }
     }
 }

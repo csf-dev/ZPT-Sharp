@@ -17,7 +17,7 @@ namespace ZptSharp.Tal
     public class DefineAttributeDecoratorTests
     {
         [Test, AutoMoqData]
-        public async Task ProcessContextAsync_evaluates_and_adds_a_local_definition_to_the_context([Frozen] IProcessesExpressionContext wrapped,
+        public async Task ProcessContextAsync_evaluates_and_adds_a_local_definition_to_the_context([Frozen] IHandlesProcessingError wrapped,
                                                                                                    [Frozen] IGetsTalAttributeSpecs specProvider,
                                                                                                    [Frozen] IEvaluatesExpression evaluator,
                                                                                                    [Frozen] IInterpretsExpressionResult resultInterpreter,
@@ -55,7 +55,7 @@ namespace ZptSharp.Tal
         }
 
         [Test, AutoMoqData]
-        public async Task ProcessContextAsync_evaluates_and_adds_a_global_definition_to_the_context([Frozen] IProcessesExpressionContext wrapped,
+        public async Task ProcessContextAsync_evaluates_and_adds_a_global_definition_to_the_context([Frozen] IHandlesProcessingError wrapped,
                                                                                                     [Frozen] IGetsTalAttributeSpecs specProvider,
                                                                                                     [Frozen] IEvaluatesExpression evaluator,
                                                                                                     [Frozen] IInterpretsExpressionResult resultInterpreter,
@@ -93,7 +93,7 @@ namespace ZptSharp.Tal
         }
 
         [Test, AutoMoqData]
-        public async Task ProcessContextAsync_can_evaluate_and_add_two_local_definitions_to_the_context([Frozen] IProcessesExpressionContext wrapped,
+        public async Task ProcessContextAsync_can_evaluate_and_add_two_local_definitions_to_the_context([Frozen] IHandlesProcessingError wrapped,
                                                                                                         [Frozen] IGetsTalAttributeSpecs specProvider,
                                                                                                         [Frozen] IEvaluatesExpression evaluator,
                                                                                                         [Frozen] IInterpretsExpressionResult resultInterpreter,
@@ -139,7 +139,7 @@ namespace ZptSharp.Tal
         }
 
         [Test, AutoMoqData]
-        public async Task ProcessContextAsync_doesnt_add_to_context_if_attribute_does_not_match([Frozen] IProcessesExpressionContext wrapped,
+        public async Task ProcessContextAsync_doesnt_add_to_context_if_attribute_does_not_match([Frozen] IHandlesProcessingError wrapped,
                                                                                                 [Frozen] IGetsTalAttributeSpecs specProvider,
                                                                                                 [Frozen] IEvaluatesExpression evaluator,
                                                                                                 [Frozen] IInterpretsExpressionResult resultInterpreter,
@@ -177,7 +177,7 @@ namespace ZptSharp.Tal
         }
 
         [Test, AutoMoqData]
-        public async Task ProcessContextAsync_doesnt_add_to_context_if_no_definitions_found_by_service([Frozen] IProcessesExpressionContext wrapped,
+        public async Task ProcessContextAsync_doesnt_add_to_context_if_no_definitions_found_by_service([Frozen] IHandlesProcessingError wrapped,
                                                                                                        [Frozen] IGetsTalAttributeSpecs specProvider,
                                                                                                        [Frozen] IEvaluatesExpression evaluator,
                                                                                                        [Frozen] IInterpretsExpressionResult resultInterpreter,
@@ -208,7 +208,7 @@ namespace ZptSharp.Tal
         }
 
         [Test, AutoMoqData]
-        public async Task ProcessContextAsync_doesnt_add_to_context_if_definition_aborts_action([Frozen] IProcessesExpressionContext wrapped,
+        public async Task ProcessContextAsync_doesnt_add_to_context_if_definition_aborts_action([Frozen] IHandlesProcessingError wrapped,
                                                                                                 [Frozen] IGetsTalAttributeSpecs specProvider,
                                                                                                 [Frozen] IEvaluatesExpression evaluator,
                                                                                                 [Frozen] IInterpretsExpressionResult resultInterpreter,
@@ -247,7 +247,7 @@ namespace ZptSharp.Tal
         }
 
         [Test, AutoMoqData]
-        public void ProcessContextAsync_throws_if_definition_provider_throws_format_exception([Frozen] IProcessesExpressionContext wrapped,
+        public void ProcessContextAsync_throws_if_definition_provider_throws_format_exception([Frozen] IHandlesProcessingError wrapped,
                                                                                               [Frozen] IGetsTalAttributeSpecs specProvider,
                                                                                               [Frozen] IGetsVariableDefinitionsFromAttributeValue definitionProvider,
                                                                                               DefineAttributeDecorator sut,
@@ -273,7 +273,7 @@ namespace ZptSharp.Tal
         }
 
         [Test, AutoMoqData]
-        public void ProcessContextAsync_throws_if_evaluator_throws_an_exception([Frozen] IProcessesExpressionContext wrapped,
+        public void ProcessContextAsync_throws_if_evaluator_throws_an_exception([Frozen] IHandlesProcessingError wrapped,
                                                                                 [Frozen] IGetsTalAttributeSpecs specProvider,
                                                                                 [Frozen] IEvaluatesExpression evaluator,
                                                                                 [Frozen] IGetsVariableDefinitionsFromAttributeValue definitionProvider,

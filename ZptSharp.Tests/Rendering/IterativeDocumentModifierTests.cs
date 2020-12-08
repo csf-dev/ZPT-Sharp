@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading;
 using System.Threading.Tasks;
 using AutoFixture.NUnit3;
 using Moq;
@@ -27,7 +28,7 @@ namespace ZptSharp.Rendering
 
             await sut.ModifyDocumentAsync(document, request, contextProcessor);
 
-            Mock.Get(iterator).Verify(x => x.IterateContextAndChildrenAsync(context), Times.Once);
+            Mock.Get(iterator).Verify(x => x.IterateContextAndChildrenAsync(context, CancellationToken.None), Times.Once);
         }
     }
 }

@@ -8,13 +8,13 @@ using ZptSharp.Rendering;
 namespace ZptSharp.Tal
 {
     /// <summary>
-    /// Implementation of <see cref="IProcessesExpressionContext"/> which handles both TAL 'content' or
+    /// Implementation of <see cref="IHandlesProcessingError"/> which handles both TAL 'content' or
     /// TAL 'replace' attributes.  Their functionality is somewhat similar, and they cannot coexist on
     /// the same DOM element.
     /// </summary>
-    public class ContentOrReplaceAttributeDecorator : IProcessesExpressionContext
+    public class ContentOrReplaceAttributeDecorator : IHandlesProcessingError
     {
-        readonly IProcessesExpressionContext wrapped;
+        readonly IHandlesProcessingError wrapped;
         readonly IGetsTalAttributeSpecs specProvider;
         readonly IEvaluatesDomValueExpression evaluator;
         readonly IReplacesNode replacer;
@@ -116,6 +116,9 @@ namespace ZptSharp.Tal
             }
         }
 
+        Task<ErrorHandlingResult> IHandlesProcessingError.HandleErrorAsync(Exception ex, ExpressionContext context, CancellationToken token)
+            => wrapped.HandleErrorAsync(ex, context, token);
+
         /// <summary>
         /// Initializes a new instance of the <see cref="ContentOrReplaceAttributeDecorator"/> class.
         /// </summary>
@@ -124,7 +127,7 @@ namespace ZptSharp.Tal
         /// <param name="evaluator">Evaluator.</param>
         /// <param name="replacer">Replacer.</param>
         /// <param name="omitter">Omitter.</param>
-        public ContentOrReplaceAttributeDecorator(IProcessesExpressionContext wrapped,
+        public ContentOrReplaceAttributeDecorator(IHandlesProcessingError wrapped,
                                                   IGetsTalAttributeSpecs specProvider,
                                                   IEvaluatesDomValueExpression evaluator,
                                                   IReplacesNode replacer,

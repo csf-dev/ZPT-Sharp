@@ -9,14 +9,14 @@ using ZptSharp.Rendering;
 namespace ZptSharp.Tal
 {
     /// <summary>
-    /// Decorator for <see cref="IProcessesExpressionContext"/> which handles TAL 'repeat' attributes.
+    /// Decorator for <see cref="IHandlesProcessingError"/> which handles TAL 'repeat' attributes.
     /// </summary>
-    public class RepeatAttributeDecorator : IProcessesExpressionContext
+    public class RepeatAttributeDecorator : IHandlesProcessingError
     {
         const string attributePattern = @"^([^ ]+)\s+(.+)$";
         static readonly Regex attributeMatcher = new Regex(attributePattern, RegexOptions.Compiled | RegexOptions.CultureInvariant);
 
-        readonly IProcessesExpressionContext wrapped;
+        readonly IHandlesProcessingError wrapped;
         readonly IGetsTalAttributeSpecs specProvider;
         readonly IEvaluatesExpression evaluator;
         readonly IInterpretsExpressionResult resultInterpreter;
@@ -79,6 +79,9 @@ namespace ZptSharp.Tal
             };
         }
 
+        Task<ErrorHandlingResult> IHandlesProcessingError.HandleErrorAsync(Exception ex, ExpressionContext context, CancellationToken token)
+            => wrapped.HandleErrorAsync(ex, context, token);
+
         /// <summary>
         /// Initializes a new instance of the <see cref="RepeatAttributeDecorator"/> class.
         /// </summary>
@@ -87,7 +90,7 @@ namespace ZptSharp.Tal
         /// <param name="evaluator">Evaluator.</param>
         /// <param name="resultInterpreter">Result interpreter.</param>
         /// <param name="contextProvider">Repetition contexts provider.</param>
-        public RepeatAttributeDecorator(IProcessesExpressionContext wrapped,
+        public RepeatAttributeDecorator(IHandlesProcessingError wrapped,
                                         IGetsTalAttributeSpecs specProvider,
                                         IEvaluatesExpression evaluator,
                                         IInterpretsExpressionResult resultInterpreter,

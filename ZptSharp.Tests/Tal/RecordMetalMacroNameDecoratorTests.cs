@@ -17,7 +17,7 @@ namespace ZptSharp.Tal
     public class RecordMetalMacroNameDecoratorTests
     {
         [Test, AutoMoqData]
-        public async Task ProcessContextAsync_records_macroname_when_there_is_a_define_macro_attribute([Frozen] IProcessesExpressionContext wrapped,
+        public async Task ProcessContextAsync_records_macroname_when_there_is_a_define_macro_attribute([Frozen] IHandlesProcessingError wrapped,
                                                                                                        [Frozen] IGetsMetalAttributeSpecs metalSpecProvider,
                                                                                                        RecordMetalMacroNameDecorator sut,
                                                                                                        [StubDom] ExpressionContext context,
@@ -40,7 +40,7 @@ namespace ZptSharp.Tal
         }
 
         [Test, AutoMoqData]
-        public async Task ProcessContextAsync_does_not_record_macroname_when_there_is_no_define_macro_attribute([Frozen] IProcessesExpressionContext wrapped,
+        public async Task ProcessContextAsync_does_not_record_macroname_when_there_is_no_define_macro_attribute([Frozen] IHandlesProcessingError wrapped,
                                                                                                                 [Frozen] IGetsMetalAttributeSpecs metalSpecProvider,
                                                                                                                 RecordMetalMacroNameDecorator sut,
                                                                                                                 [StubDom] ExpressionContext context,

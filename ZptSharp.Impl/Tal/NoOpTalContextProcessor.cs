@@ -1,4 +1,5 @@
-﻿using System.Threading;
+﻿using System;
+using System.Threading;
 using System.Threading.Tasks;
 using ZptSharp.Expressions;
 using ZptSharp.Rendering;
@@ -10,7 +11,7 @@ namespace ZptSharp.Tal
     /// This is used at the centre of the decorator stack.  If no particular TAL attributes are
     /// found then an empty processing result is returned.
     /// </summary>
-    public class NoOpTalContextProcessor : IProcessesExpressionContext
+    public class NoOpTalContextProcessor : IHandlesProcessingError
     {
         /// <summary>
         /// Processes the context using the rules defined within this object.
@@ -22,5 +23,8 @@ namespace ZptSharp.Tal
         {
             return Task.FromResult(ExpressionContextProcessingResult.Noop);
         }
+
+        Task<ErrorHandlingResult> IHandlesProcessingError.HandleErrorAsync(Exception ex, ExpressionContext context, CancellationToken token)
+            => Task.FromResult(ErrorHandlingResult.Failure);
     }
 }

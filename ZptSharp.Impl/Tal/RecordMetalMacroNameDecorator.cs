@@ -9,15 +9,15 @@ using ZptSharp.Rendering;
 namespace ZptSharp.Tal
 {
     /// <summary>
-    /// A decorator for <see cref="IProcessesExpressionContext"/> which detects METAL <c>define-macro</c>
+    /// A decorator for <see cref="IHandlesProcessingError"/> which detects METAL <c>define-macro</c>
     /// attributes and adds a TALES local variable indicating the name of that macro.  This is recorded as
     /// the <c>macroname</c> variable.
     /// </summary>
-    public class RecordMetalMacroNameDecorator : IProcessesExpressionContext
+    public class RecordMetalMacroNameDecorator : IHandlesProcessingError
     {
         const string macroNameVariable = "macroname";
 
-        readonly IProcessesExpressionContext wrapped;
+        readonly IHandlesProcessingError wrapped;
         readonly IGetsMetalAttributeSpecs metalSpecProvider;
 
         /// <summary>
@@ -35,12 +35,15 @@ namespace ZptSharp.Tal
             return wrapped.ProcessContextAsync(context, token);
         }
 
+        Task<ErrorHandlingResult> IHandlesProcessingError.HandleErrorAsync(Exception ex, ExpressionContext context, CancellationToken token)
+            => wrapped.HandleErrorAsync(ex, context, token);
+
         /// <summary>
         /// Initializes a new instance of the <see cref="RecordMetalMacroNameDecorator"/> class.
         /// </summary>
         /// <param name="wrapped">Wrapped.</param>
         /// <param name="metalSpecProvider">Metal spec provider.</param>
-        public RecordMetalMacroNameDecorator(IProcessesExpressionContext wrapped,
+        public RecordMetalMacroNameDecorator(IHandlesProcessingError wrapped,
                                              IGetsMetalAttributeSpecs metalSpecProvider)
         {
             this.wrapped = wrapped ?? throw new ArgumentNullException(nameof(wrapped));

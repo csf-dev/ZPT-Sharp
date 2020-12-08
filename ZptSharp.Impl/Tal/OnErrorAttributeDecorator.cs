@@ -10,7 +10,7 @@ namespace ZptSharp.Tal
 {
     /// <summary>
     /// <para>
-    /// Decorator for <see cref="IProcessesExpressionContext"/> which handles TAL 'on-error' attributes.
+    /// Decorator for <see cref="IHandlesProcessingError"/> which handles TAL 'on-error' attributes.
     /// </para>
     /// <para>
     /// This decorator is a little unusual (compared to the others) in that it really just puts a <c>try/catch</c>
@@ -18,9 +18,9 @@ namespace ZptSharp.Tal
     /// then this decorator will handle the error and prevent the error from halting the whole rendering process.
     /// </para>
     /// </summary>
-    public class OnErrorAttributeDecorator : IProcessesExpressionContext, IHandlesProcessingError
+    public class OnErrorAttributeDecorator : IHandlesProcessingError
     {
-        readonly IProcessesExpressionContext wrapped;
+        readonly IHandlesProcessingError wrapped;
         readonly IGetsTalAttributeSpecs specProvider;
         readonly IEvaluatesDomValueExpression evaluator;
         readonly ILogger logger;
@@ -166,7 +166,7 @@ Previous exception: {original_exception}
         /// <param name="specProvider">Spec provider.</param>
         /// <param name="evaluator">Evaluator.</param>
         /// <param name="logger">Logger.</param>
-        public OnErrorAttributeDecorator(IProcessesExpressionContext wrapped,
+        public OnErrorAttributeDecorator(IHandlesProcessingError wrapped,
                                          IGetsTalAttributeSpecs specProvider,
                                          IEvaluatesDomValueExpression evaluator,
                                          ILogger<OnErrorAttributeDecorator> logger)

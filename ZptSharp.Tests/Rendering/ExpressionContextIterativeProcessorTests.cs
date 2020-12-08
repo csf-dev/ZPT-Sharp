@@ -249,8 +249,12 @@ namespace ZptSharp.Rendering
 
             await sut.IterateContextAndChildrenAsync(context);
 
-            Assert.That(child1.ErrorHandlers, Has.One.SameAs(contextProcessor), "First child context has context processor added");
-            Assert.That(child2.ErrorHandlers, Has.One.SameAs(contextProcessor), "Second child context has context processor added");
+            Assert.That(child1.ErrorHandlers,
+                        Has.One.Matches<ErrorHandlingContext>(c => c.Handler == contextProcessor),
+                        "First child context has context processor added");
+            Assert.That(child2.ErrorHandlers,
+                        Has.One.Matches<ErrorHandlingContext>(c => c.Handler == contextProcessor),
+                        "Second child context has context processor added");
         }
 
         [Test, AutoMoqData]
@@ -280,7 +284,6 @@ namespace ZptSharp.Rendering
             Assert.That(child2.ErrorHandlers, Has.None.SameAs(contextProcessor), "Second child context does not have context processor added");
         }
 
-
         [Test, AutoMoqData]
         public async Task IterateContextAndChildrenAsync_uses_error_handler_from_stack_to_handle_processing_error([Frozen] IProcessesExpressionContext contextProcessor,
                                                                                                                   [Frozen] IGetsChildExpressionContexts childContextProvider,
@@ -303,6 +306,42 @@ namespace ZptSharp.Rendering
 
             Mock.Get(handler)
                 .Verify(x => x.HandleErrorAsync(exception, handlerContext, CancellationToken.None), Times.Once);
+        }
+
+        [Test, AutoMoqData]
+        public void IterateContextAndChildrenAsync_throws_if_error_handler_from_stack_cannot_handle_processing_error([Frozen] IProcessesExpressionContext contextProcessor,
+                                                                                                                     [Frozen] IGetsChildExpressionContexts childContextProvider,
+                                                                                                                     ExpressionContextIterativeProcessor sut,
+                                                                                                                     ExpressionContext context,
+                                                                                                                     [Frozen] IHandlesProcessingError handler,
+                                                                                                                     [Frozen] ExpressionContext handlerContext,
+                                                                                                                     ErrorHandlingContext errorHandler)
+        {
+            var exception = new Exception("Sample exception");
+            context.ErrorHandlers.Push(errorHandler);
+            Mock.Get(handler)
+                .Setup(x => x.HandleErrorAsync(exception, handlerContext, CancellationToken.None))
+                .Returns(() => Task.FromResult(ErrorHandlingResult.Failure));
+            Mock.Get(contextProcessor)
+                .Setup(x => x.ProcessContextAsync(context, CancellationToken.None))
+                .Throws(exception);
+
+            Assert.That(async () => await sut.IterateContextAndChildrenAsync(context), Throws.Exception.Message.EqualTo("Sample exception"));
+        }
+
+        [Test, AutoMoqData]
+        public void IterateContextAndChildrenAsync_throws_if_no_error_handlers_in_stack([Frozen] IProcessesExpressionContext contextProcessor,
+                                                                                        [Frozen] IGetsChildExpressionContexts childContextProvider,
+                                                                                        ExpressionContextIterativeProcessor sut,
+                                                                                        ExpressionContext context)
+        {
+            var exception = new Exception("Sample exception");
+            context.ErrorHandlers.Clear();
+            Mock.Get(contextProcessor)
+                .Setup(x => x.ProcessContextAsync(context, CancellationToken.None))
+                .Throws(exception);
+
+            Assert.That(async () => await sut.IterateContextAndChildrenAsync(context), Throws.Exception.Message.EqualTo("Sample exception"));
         }
 
     }

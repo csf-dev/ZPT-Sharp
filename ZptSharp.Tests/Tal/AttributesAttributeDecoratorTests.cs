@@ -15,7 +15,7 @@ namespace ZptSharp.Tal
     public class AttributesAttributeDecoratorTests
     {
         [Test, AutoMoqData]
-        public async Task ProcessContextAsync_returns_wrapped_result_if_attribute_not_present([Frozen] IProcessesExpressionContext wrapped,
+        public async Task ProcessContextAsync_returns_wrapped_result_if_attribute_not_present([Frozen] IHandlesProcessingError wrapped,
                                                                                               [Frozen] IGetsTalAttributeSpecs specProvider,
                                                                                               AttributesAttributeDecorator sut,
                                                                                               [StubDom] ExpressionContext context,
@@ -33,7 +33,7 @@ namespace ZptSharp.Tal
         }
 
         [Test, AutoMoqData]
-        public async Task ProcessContextAsync_can_add_or_modify_attributes([Frozen] IProcessesExpressionContext wrapped,
+        public async Task ProcessContextAsync_can_add_or_modify_attributes([Frozen] IHandlesProcessingError wrapped,
                                                                            [Frozen] IGetsTalAttributeSpecs specProvider,
                                                                            [Frozen] IEvaluatesExpression evaluator,
                                                                            [Frozen] IInterpretsExpressionResult resultInterpreter,
@@ -84,7 +84,7 @@ namespace ZptSharp.Tal
         }
 
         [Test, AutoMoqData]
-        public async Task ProcessContextAsync_can_remove_an_attribute_if_its_expression_evaluates_to_null([Frozen] IProcessesExpressionContext wrapped,
+        public async Task ProcessContextAsync_can_remove_an_attribute_if_its_expression_evaluates_to_null([Frozen] IHandlesProcessingError wrapped,
                                                                                                           [Frozen] IGetsTalAttributeSpecs specProvider,
                                                                                                           [Frozen] IEvaluatesExpression evaluator,
                                                                                                           [Frozen] IInterpretsExpressionResult resultInterpreter,
@@ -125,7 +125,7 @@ namespace ZptSharp.Tal
         }
 
         [Test, AutoMoqData]
-        public async Task ProcessContextAsync_leaves_an_attribute_unchanged_if_its_expression_aborts_the_action([Frozen] IProcessesExpressionContext wrapped,
+        public async Task ProcessContextAsync_leaves_an_attribute_unchanged_if_its_expression_aborts_the_action([Frozen] IHandlesProcessingError wrapped,
                                                                                                                 [Frozen] IGetsTalAttributeSpecs specProvider,
                                                                                                                 [Frozen] IEvaluatesExpression evaluator,
                                                                                                                 [Frozen] IInterpretsExpressionResult resultInterpreter,

@@ -15,7 +15,7 @@ namespace ZptSharp.Tal
     public class ContentOrReplaceAttributeDecoratorTests
     {
         [Test, AutoMoqData]
-        public async Task ProcessContextAsync_returns_wrapped_result_if_element_has_neither_attribute([Frozen] IProcessesExpressionContext wrapped,
+        public async Task ProcessContextAsync_returns_wrapped_result_if_element_has_neither_attribute([Frozen] IHandlesProcessingError wrapped,
                                                                                                       [Frozen] IGetsTalAttributeSpecs specProvider,
                                                                                                       ContentOrReplaceAttributeDecorator sut,
                                                                                                       AttributeSpec content,
@@ -57,7 +57,7 @@ namespace ZptSharp.Tal
         }
 
         [Test, AutoMoqData]
-        public async Task ProcessContextAsync_returns_wrapped_result_if_content_attribute_aborts_action([Frozen] IProcessesExpressionContext wrapped,
+        public async Task ProcessContextAsync_returns_wrapped_result_if_content_attribute_aborts_action([Frozen] IHandlesProcessingError wrapped,
                                                                                                         [Frozen] IGetsTalAttributeSpecs specProvider,
                                                                                                         [Frozen] IEvaluatesDomValueExpression evaluator,
                                                                                                         ContentOrReplaceAttributeDecorator sut,
@@ -85,7 +85,7 @@ namespace ZptSharp.Tal
         }
 
         [Test, AutoMoqData]
-        public async Task ProcessContextAsync_replaces_children_with_DOM_expression_result_for_content_attribute([Frozen] IProcessesExpressionContext wrapped,
+        public async Task ProcessContextAsync_replaces_children_with_DOM_expression_result_for_content_attribute([Frozen] IHandlesProcessingError wrapped,
                                                                                                                  [Frozen] IGetsTalAttributeSpecs specProvider,
                                                                                                                  [Frozen] IEvaluatesDomValueExpression evaluator,
                                                                                                                  ContentOrReplaceAttributeDecorator sut,

@@ -8,11 +8,11 @@ using ZptSharp.Rendering;
 namespace ZptSharp.Tal
 {
     /// <summary>
-    /// Decorator for <see cref="IProcessesExpressionContext"/> which handles TAL 'attributes' attributes.
+    /// Decorator for <see cref="IHandlesProcessingError"/> which handles TAL 'attributes' attributes.
     /// </summary>
-    public class AttributesAttributeDecorator : IProcessesExpressionContext
+    public class AttributesAttributeDecorator : IHandlesProcessingError
     {
-        readonly IProcessesExpressionContext wrapped;
+        readonly IHandlesProcessingError wrapped;
         readonly IGetsTalAttributeSpecs specProvider;
         readonly IEvaluatesExpression evaluator;
         readonly IInterpretsExpressionResult resultInterpreter;
@@ -65,6 +65,9 @@ namespace ZptSharp.Tal
                 element.Attributes.Add(attribute);
         }
 
+        Task<ErrorHandlingResult> IHandlesProcessingError.HandleErrorAsync(Exception ex, ExpressionContext context, CancellationToken token)
+            => wrapped.HandleErrorAsync(ex, context, token);
+
         /// <summary>
         /// Initializes a new instance of the <see cref="AttributesAttributeDecorator"/> class.
         /// </summary>
@@ -73,7 +76,7 @@ namespace ZptSharp.Tal
         /// <param name="evaluator">Evaluator.</param>
         /// <param name="resultInterpreter">Result interpreter.</param>
         /// <param name="definitionsProvider">Definitions provider.</param>
-        public AttributesAttributeDecorator(IProcessesExpressionContext wrapped,
+        public AttributesAttributeDecorator(IHandlesProcessingError wrapped,
                                             IGetsTalAttributeSpecs specProvider,
                                             IEvaluatesExpression evaluator,
                                             IInterpretsExpressionResult resultInterpreter,

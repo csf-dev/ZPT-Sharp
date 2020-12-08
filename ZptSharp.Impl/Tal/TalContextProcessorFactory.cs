@@ -37,7 +37,7 @@ namespace ZptSharp.Tal
         /// Gets the TAL context processor.
         /// </summary>
         /// <returns>The TAL context processor.</returns>
-        public IProcessesExpressionContext GetTalContextProcessor()
+        public IHandlesProcessingError GetTalContextProcessor()
         {
             var service = GetNoOpService();
             service = GetOmitTagDecorator(service);
@@ -52,31 +52,31 @@ namespace ZptSharp.Tal
             return service;
         }
 
-        IProcessesExpressionContext GetNoOpService()
+        IHandlesProcessingError GetNoOpService()
             => new NoOpTalContextProcessor();
 
-        IProcessesExpressionContext GetOnErrorDecorator(IProcessesExpressionContext service)
+        IHandlesProcessingError GetOnErrorDecorator(IHandlesProcessingError service)
             => new OnErrorAttributeDecorator(service, specProvider, domEvaluator, onErrorlogger);
 
-        IProcessesExpressionContext GetOmitTagDecorator(IProcessesExpressionContext service)
+        IHandlesProcessingError GetOmitTagDecorator(IHandlesProcessingError service)
             => new OmitTagAttributeDecorator(service, specProvider, omitter, evaluator, resultInterpreter);
 
-        IProcessesExpressionContext GetAttributesDecorator(IProcessesExpressionContext service)
+        IHandlesProcessingError GetAttributesDecorator(IHandlesProcessingError service)
             => new AttributesAttributeDecorator(service, specProvider, evaluator, resultInterpreter, attributeDefinitionsProvider);
 
-        IProcessesExpressionContext GetContentOrReplaceDecorator(IProcessesExpressionContext service)
+        IHandlesProcessingError GetContentOrReplaceDecorator(IHandlesProcessingError service)
             => new ContentOrReplaceAttributeDecorator(service, specProvider, domEvaluator, replacer, omitter);
 
-        IProcessesExpressionContext GetRepeatDecorator(IProcessesExpressionContext service)
+        IHandlesProcessingError GetRepeatDecorator(IHandlesProcessingError service)
             => new RepeatAttributeDecorator(service, specProvider, evaluator, resultInterpreter, repetitionContextProvider);
 
-        IProcessesExpressionContext GetConditionDecorator(IProcessesExpressionContext service)
+        IHandlesProcessingError GetConditionDecorator(IHandlesProcessingError service)
             => new ConditionAttributeDecorator(service, specProvider, evaluator, resultInterpreter);
 
-        IProcessesExpressionContext GetDefineDecorator(IProcessesExpressionContext service)
+        IHandlesProcessingError GetDefineDecorator(IHandlesProcessingError service)
             => new DefineAttributeDecorator(service, specProvider, evaluator, resultInterpreter, definitionProvider);
 
-        IProcessesExpressionContext GetMacroNameDecorator(IProcessesExpressionContext service)
+        IHandlesProcessingError GetMacroNameDecorator(IHandlesProcessingError service)
             => new RecordMetalMacroNameDecorator(service, metalSpecProvider);
 
         /// <summary>

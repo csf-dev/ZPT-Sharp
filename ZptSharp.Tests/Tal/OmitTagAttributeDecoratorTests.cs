@@ -15,7 +15,7 @@ namespace ZptSharp.Tal
     public class OmitTagAttributeDecoratorTests
     {
         [Test, AutoMoqData]
-        public async Task ProcessContextAsync_returns_wrapped_result_if_attribute_not_present([Frozen] IProcessesExpressionContext wrapped,
+        public async Task ProcessContextAsync_returns_wrapped_result_if_attribute_not_present([Frozen] IHandlesProcessingError wrapped,
                                                                                               [Frozen] IGetsTalAttributeSpecs specProvider,
                                                                                               OmitTagAttributeDecorator sut,
                                                                                               [StubDom] ExpressionContext context,
@@ -33,7 +33,7 @@ namespace ZptSharp.Tal
         }
 
         [Test, AutoMoqData]
-        public async Task ProcessContextAsync_returns_wrapped_result_if_expression_aborts_the_action([Frozen] IProcessesExpressionContext wrapped,
+        public async Task ProcessContextAsync_returns_wrapped_result_if_expression_aborts_the_action([Frozen] IHandlesProcessingError wrapped,
                                                                                                      [Frozen] IGetsTalAttributeSpecs specProvider,
                                                                                                      [Frozen] IEvaluatesExpression evaluator,
                                                                                                      [Frozen] IInterpretsExpressionResult resultInterpreter,
@@ -67,7 +67,7 @@ namespace ZptSharp.Tal
         }
 
         [Test, AutoMoqData]
-        public async Task ProcessContextAsync_returns_wrapped_result_if_expression_is_falsey([Frozen] IProcessesExpressionContext wrapped,
+        public async Task ProcessContextAsync_returns_wrapped_result_if_expression_is_falsey([Frozen] IHandlesProcessingError wrapped,
                                                                                              [Frozen] IGetsTalAttributeSpecs specProvider,
                                                                                              [Frozen] IEvaluatesExpression evaluator,
                                                                                              [Frozen] IInterpretsExpressionResult resultInterpreter,
