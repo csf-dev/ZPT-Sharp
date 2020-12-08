@@ -179,7 +179,6 @@ namespace ZptSharp.Rendering
                 .Verify(x => x.ProcessContextAsync(child2, CancellationToken.None), Times.Once, $"Processed {nameof(child1)}");
         }
 
-
         [Test, AutoMoqData]
         public async Task IterateContextAndChildrenAsync_should_process_children_before_siblings(ExpressionContext context,
                                                                                                  ExpressionContext sibling1,
@@ -224,6 +223,86 @@ namespace ZptSharp.Rendering
 
             Mock.Get(contextProcessor)
                 .Verify(x => x.ProcessContextAsync(sibling2, CancellationToken.None), Times.Once);
+        }
+
+        [Test, AutoMoqData]
+        public async Task IterateContextAndChildrenAsync_should_add_processor_to_child_context_error_handler_stack_if_context_processor_is_error_handler(ExpressionContext context,
+                                                                                                                                                         ExpressionContext child1,
+                                                                                                                                                         ExpressionContext child2)
+        {
+            var contextProcessorMock = new Mock<IProcessesExpressionContext>();
+            contextProcessorMock.As<IHandlesProcessingError>();
+            var contextProcessor = contextProcessorMock.Object;
+            var childContextProvider = Mock.Of<IGetsChildExpressionContexts>();
+            var sut = new ExpressionContextIterativeProcessor(contextProcessor, childContextProvider);
+
+            child1.ErrorHandlers.Clear();
+            child2.ErrorHandlers.Clear();
+
+            Mock.Get(childContextProvider)
+                .Setup(x => x.GetChildContexts(context))
+                .Returns(new[] { child1, child2 });
+
+            Mock.Get(contextProcessor)
+                .Setup(x => x.ProcessContextAsync(It.IsAny<ExpressionContext>(), CancellationToken.None))
+                .Returns(Task.FromResult(ExpressionContextProcessingResult.Noop));
+
+            await sut.IterateContextAndChildrenAsync(context);
+
+            Assert.That(child1.ErrorHandlers, Has.One.SameAs(contextProcessor), "First child context has context processor added");
+            Assert.That(child2.ErrorHandlers, Has.One.SameAs(contextProcessor), "Second child context has context processor added");
+        }
+
+        [Test, AutoMoqData]
+        public async Task IterateContextAndChildrenAsync_should_not_add_processor_to_child_context_error_handler_stack_if_not_an_error_handler(ExpressionContext context,
+                                                                                                                                               ExpressionContext child1,
+                                                                                                                                               ExpressionContext child2)
+        {
+            var contextProcessorMock = new Mock<IProcessesExpressionContext>();
+            var contextProcessor = contextProcessorMock.Object;
+            var childContextProvider = Mock.Of<IGetsChildExpressionContexts>();
+            var sut = new ExpressionContextIterativeProcessor(contextProcessor, childContextProvider);
+
+            child1.ErrorHandlers.Clear();
+            child2.ErrorHandlers.Clear();
+
+            Mock.Get(childContextProvider)
+                .Setup(x => x.GetChildContexts(context))
+                .Returns(new[] { child1, child2 });
+
+            Mock.Get(contextProcessor)
+                .Setup(x => x.ProcessContextAsync(It.IsAny<ExpressionContext>(), CancellationToken.None))
+                .Returns(Task.FromResult(ExpressionContextProcessingResult.Noop));
+
+            await sut.IterateContextAndChildrenAsync(context);
+
+            Assert.That(child1.ErrorHandlers, Has.None.SameAs(contextProcessor), "First child context does not have context processor added");
+            Assert.That(child2.ErrorHandlers, Has.None.SameAs(contextProcessor), "Second child context does not have context processor added");
+        }
+
+
+        [Test, AutoMoqData]
+        public async Task IterateContextAndChildrenAsync_uses_error_handler_from_stack_to_handle_processing_error([Frozen] IProcessesExpressionContext contextProcessor,
+                                                                                                                  [Frozen] IGetsChildExpressionContexts childContextProvider,
+                                                                                                                  ExpressionContextIterativeProcessor sut,
+                                                                                                                  ExpressionContext context,
+                                                                                                                  [Frozen] IHandlesProcessingError handler,
+                                                                                                                  [Frozen] ExpressionContext handlerContext,
+                                                                                                                  ErrorHandlingContext errorHandler)
+        {
+            var exception = new Exception("Sample exception");
+            context.ErrorHandlers.Push(errorHandler);
+            Mock.Get(handler)
+                .Setup(x => x.HandleErrorAsync(exception, handlerContext, CancellationToken.None))
+                .Returns(() => Task.FromResult(ErrorHandlingResult.Success(ExpressionContextProcessingResult.Noop)));
+            Mock.Get(contextProcessor)
+                .Setup(x => x.ProcessContextAsync(context, CancellationToken.None))
+                .Throws(exception);
+
+            await sut.IterateContextAndChildrenAsync(context);
+
+            Mock.Get(handler)
+                .Verify(x => x.HandleErrorAsync(exception, handlerContext, CancellationToken.None), Times.Once);
         }
 
     }
