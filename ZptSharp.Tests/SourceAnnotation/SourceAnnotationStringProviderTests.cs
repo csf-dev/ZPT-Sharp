@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.IO;
 using AutoFixture.NUnit3;
 using Microsoft.Extensions.Logging;

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using AutoFixture.NUnit3;
 using Moq;
 using NUnit.Framework;

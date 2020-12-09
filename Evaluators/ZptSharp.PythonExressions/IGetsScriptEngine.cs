@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using Microsoft.Scripting.Hosting;
 
 namespace ZptSharp.Expressions.PythonExpressions

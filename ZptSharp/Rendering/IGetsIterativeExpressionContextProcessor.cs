@@ -1,4 +1,4 @@
-﻿namespace ZptSharp.Rendering
+namespace ZptSharp.Rendering
 {
     /// <summary>
     /// A factory service for creating instances of <see cref="IIterativelyProcessesExpressionContexts"/> which

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using ZptSharp.Rendering;
 
 namespace ZptSharp.Expressions

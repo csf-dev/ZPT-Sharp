@@ -1,4 +1,4 @@
-﻿namespace ZptSharp.Rendering
+namespace ZptSharp.Rendering
 {
     /// <summary>
     /// An object which gets an implementation of <see cref="IProcessesExpressionContext"/> which will remove

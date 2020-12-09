@@ -1,4 +1,4 @@
-﻿namespace ZptSharp.Config
+namespace ZptSharp.Config
 {
     /// <summary>
     /// An object which provides access to the rendering configuration.

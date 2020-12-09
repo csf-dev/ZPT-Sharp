@@ -1,4 +1,4 @@
-﻿using ZptSharp.Tal;
+using ZptSharp.Tal;
 
 namespace ZptSharp.Expressions.NotExpressions
 {

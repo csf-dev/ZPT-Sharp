@@ -1,4 +1,4 @@
-﻿namespace ZptSharp.Dom
+namespace ZptSharp.Dom
 {
     /// <summary>
     /// Abstract base class for an <see cref="IAttribute"/>, containing functionality

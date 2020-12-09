@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using ZptSharp.Dom;
 
 namespace ZptSharp.Metal

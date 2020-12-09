@@ -1,4 +1,4 @@
-﻿using ZptSharp.Metal;
+using ZptSharp.Metal;
 using ZptSharp.Rendering;
 
 namespace ZptSharp.SourceAnnotation

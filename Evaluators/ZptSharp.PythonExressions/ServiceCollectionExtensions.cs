@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using Microsoft.Extensions.DependencyInjection;
 using ZptSharp.Expressions;
 using ZptSharp.Expressions.PythonExpressions;

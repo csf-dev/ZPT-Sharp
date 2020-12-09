@@ -1,4 +1,4 @@
-﻿namespace ZptSharp.Expressions.PathExpressions
+namespace ZptSharp.Expressions.PathExpressions
 {
     /// <summary>
     /// An object which is able to parse a path expression string into a model.

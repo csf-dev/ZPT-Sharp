@@ -1,4 +1,4 @@
-﻿using ZptSharp.Dom;
+using ZptSharp.Dom;
 using ZptSharp.Rendering;
 
 namespace ZptSharp.SourceAnnotation

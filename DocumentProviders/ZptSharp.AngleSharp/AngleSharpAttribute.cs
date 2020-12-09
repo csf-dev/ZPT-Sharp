@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using AngleSharp.Dom;
 
 namespace ZptSharp.Dom

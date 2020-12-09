@@ -1,4 +1,4 @@
-﻿namespace ZptSharp.Rendering
+namespace ZptSharp.Rendering
 {
     /// <summary>
     /// An object which has a parent/container object.

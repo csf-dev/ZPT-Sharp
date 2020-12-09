@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using AutoFixture.NUnit3;
 using NUnit.Framework;
 

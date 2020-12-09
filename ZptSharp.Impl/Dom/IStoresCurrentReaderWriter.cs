@@ -1,4 +1,4 @@
-﻿namespace ZptSharp.Dom
+namespace ZptSharp.Dom
 {
     /// <summary>
     /// An object which provides access to the current document reader/writer.

@@ -1,4 +1,4 @@
-﻿using ZptSharp.Rendering;
+using ZptSharp.Rendering;
 
 namespace ZptSharp.Dom
 {

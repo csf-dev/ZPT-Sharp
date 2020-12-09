@@ -1,4 +1,4 @@
-﻿namespace ZptSharp.Expressions
+namespace ZptSharp.Expressions
 {
     /// <summary>
     /// An object which can get a version of a TALES expression where

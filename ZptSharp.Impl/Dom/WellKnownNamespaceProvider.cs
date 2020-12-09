@@ -1,4 +1,4 @@
-﻿namespace ZptSharp.Dom
+namespace ZptSharp.Dom
 {
     /// <summary>
     /// Implementation of <see cref="IGetsWellKnownNamespace"/> which uses string constants.

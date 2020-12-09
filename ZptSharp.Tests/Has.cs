@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using NUnit.Framework.Constraints;
 using ZptSharp.IntegrationTests;
 

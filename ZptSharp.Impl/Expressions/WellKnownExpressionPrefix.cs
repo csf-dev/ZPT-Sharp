@@ -1,4 +1,4 @@
-﻿namespace ZptSharp.Expressions
+namespace ZptSharp.Expressions
 {
     /// <summary>
     /// A container for runtime constants representing the built-in types of TALES expression.

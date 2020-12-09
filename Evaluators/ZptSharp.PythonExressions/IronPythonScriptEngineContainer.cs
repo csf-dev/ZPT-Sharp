@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using IronPython.Hosting;
 using Microsoft.Scripting.Hosting;
 

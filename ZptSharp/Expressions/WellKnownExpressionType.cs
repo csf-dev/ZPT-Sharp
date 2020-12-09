@@ -1,4 +1,4 @@
-﻿namespace ZptSharp.Expressions
+namespace ZptSharp.Expressions
 {
     /// <summary>
     /// An object which exposes the names of well-known expression types (which are core to ZPT).
