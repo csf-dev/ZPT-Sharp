@@ -17,7 +17,7 @@ namespace ZptSharp.Dom
     /// </summary>
     public class XmlDocumentProvider : DocumentReaderWriterBase<XmlDocument>
     {
-        static readonly string[] supportedExtensions = new[] { ".pt", ".xml", ".xhtml" };
+        static readonly string[] supportedExtensions = new[] { ".xml", ".xhtml" };
         const LoadOptions loadOptions = LoadOptions.PreserveWhitespace | LoadOptions.SetLineInfo;
 
         /// <summary>This matches the default buffer size for a built-in <see cref="StreamWriter"/>.</summary>
