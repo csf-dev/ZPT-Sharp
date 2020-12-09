@@ -3,6 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <RootNamespace>ZptSharp</RootNamespace>
+    <ReleaseVersion>2.0.0</ReleaseVersion>
   </PropertyGroup>
     
   <ItemGroup>
