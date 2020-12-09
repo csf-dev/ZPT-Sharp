@@ -7,5 +7,4 @@ jobs:
             mono: none
 
 script:
-    -   dotnet build ZptSharp.sln
-    -   dotnet test ZptSharp.sln
+    -   dotnet test
