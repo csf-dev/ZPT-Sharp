@@ -53,6 +53,11 @@
     <Folder Include="TestFiles\PipeExpressionIntegrationTests\SourceDocuments\" />
     <Folder Include="Expressions\PythonExpressions\" />
   </ItemGroup>
+  
+  <ItemGroup>
+      <Compile Remove="IntegrationTests\CSharpExpressionIntegrationTests.cs;IntegrationTests\LoadExpressionIntegrationTests.cs;IntegrationTests\PipeExpressionIntegrationTests.cs" />
+      <None Include="IntegrationTests\CSharpExpressionIntegrationTests.cs;IntegrationTests\LoadExpressionIntegrationTests.cs;IntegrationTests\PipeExpressionIntegrationTests.cs" />
+  </ItemGroup>
     
   <ItemGroup>
     <None Remove="TestResults\**\*" />

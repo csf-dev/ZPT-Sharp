@@ -11,7 +11,6 @@ namespace ZptSharp.IntegrationTests
     public class CSharpExpressionIntegrationTests
     {
         [Test, Description("For the 'expected rendering' file, rendering the corresponding 'source document' file via ZptSharp should produce the same output.")]
-        [Ignore("Ignored whilst this functionality is re-implemented")]
         public async Task Each_output_file_should_render_as_expected([ValueSource(nameof(GetExpectedOutputFiles))] string expectedPath)
         {
             var result = await IntegrationTester.PerformIntegrationTest(expectedPath, model: GetModel(), config: GetConfig());
