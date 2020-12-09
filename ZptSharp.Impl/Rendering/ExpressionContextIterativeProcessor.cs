@@ -39,6 +39,7 @@ namespace ZptSharp.Rendering
         /// </remarks>
         /// <returns>A task indicating when processing is complete.</returns>
         /// <param name="context">The context over which to iterate.</param>
+        /// <param name="token">An optional cancellation token.</param>
         public Task IterateContextAndChildrenAsync(ExpressionContext context, CancellationToken token = default)
         {
             if (context == null)
