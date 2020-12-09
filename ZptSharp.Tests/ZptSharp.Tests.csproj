@@ -53,6 +53,9 @@
     <Folder Include="TestFiles\PipeExpressionIntegrationTests\ExpectedOutputs\" />
     <Folder Include="TestFiles\PipeExpressionIntegrationTests\SourceDocuments\" />
     <Folder Include="Expressions\PythonExpressions\" />
+    <Folder Include="TestFiles\XmlDtdHandlingIntegrationTests\" />
+    <Folder Include="TestFiles\XmlDtdHandlingIntegrationTests\SourceDocuments\" />
+    <Folder Include="TestFiles\XmlDtdHandlingIntegrationTests\ExpectedOutputs\" />
   </ItemGroup>
   
   <ItemGroup>
