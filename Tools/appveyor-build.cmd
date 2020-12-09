@@ -8,7 +8,8 @@ dotnet-sonarscanner begin ^
     /d:sonar.host.url="https://sonarcloud.io" ^
     /d:sonar.login=%SONARCLOUD_SECRET_KEY% ^
     /d:sonar.cs.nunit.reportsPaths=%APPVEYOR_BUILD_FOLDER%\.TestResults\TestResults.xml ^
-    /d:sonar.cs.opencover.reportsPaths=%APPVEYOR_BUILD_FOLDER%\.TestResults\coverage.opencover.xml
+    /d:sonar.cs.opencover.reportsPaths=%APPVEYOR_BUILD_FOLDER%\.TestResults\coverage.opencover.xml ^
+    /d:sonar.branch.name=%APPVEYOR_REPO_BRANCH%
     
 dotnet test ^
     /p:CollectCoverage=true ^
