@@ -4,17 +4,19 @@
     <TargetFrameworks>netstandard2.0;netstandard2.1;net48;net47;net46;net45</TargetFrameworks>
     <RootNamespace>ZptSharp.Expressions.PythonExpressions</RootNamespace>
     <ReleaseVersion>2.0.0</ReleaseVersion>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>..\..\CSF-Software-OSS.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
     
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <CheckForOverflowUnderflow>true</CheckForOverflowUnderflow>
     <LangVersion>7.3</LangVersion>
-    <DocumentationFile>bin\$(Configuration)\$(TargetFramework)\ZptSharp.PythonExressions.xml</DocumentationFile>
+    <DocumentationFile>bin\$(Configuration)\$(TargetFramework)\ZptSharp.Expressions.PythonExpressions.xml</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType></DebugType>
     <LangVersion>7.3</LangVersion>
-    <DocumentationFile>bin\$(Configuration)\$(TargetFramework)\ZptSharp.PythonExressions.xml</DocumentationFile>
+    <DocumentationFile>bin\$(Configuration)\$(TargetFramework)\ZptSharp.Expressions.PythonExpressions.xml</DocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>
