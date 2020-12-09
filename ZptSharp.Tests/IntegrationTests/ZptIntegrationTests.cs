@@ -14,7 +14,7 @@ namespace ZptSharp.IntegrationTests
         public async Task Each_output_file_should_render_as_expected([ValueSource(nameof(GetExpectedOutputFiles))] string expectedPath)
         {
             var result = await IntegrationTester.PerformIntegrationTest(expectedPath, model: GetModel(), config: GetConfig());
-            Assert.That(result.Actual, Is.EqualTo(result.Expected));
+            Assert.That(result, Has.MatchingExpectedAndActualRenderings);
         }
 
         public static IEnumerable<string> GetExpectedOutputFiles() => TestFiles.GetIntegrationTestExpectedFiles<ZptIntegrationTests>();
