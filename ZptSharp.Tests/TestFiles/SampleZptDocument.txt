@@ -1,0 +1,8 @@
+<html>
+<head>
+<title>This is a sample document</title>
+</head>
+<body>
+<h1>Sample ZPT document</h1>
+</body>
+</html>

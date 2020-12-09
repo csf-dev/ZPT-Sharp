@@ -1,7 +1,20 @@
+image: Visual Studio 2019
 version: '{branch}-{build}'
+
+environment:
+    JAVA_HOME: "C:\\Program Files\\Java\\jdk13"
+
 init:
-- cmd: git config --global core.autocrlf true
-before_build:
-- cmd: nuget restore
-build:
-  verbosity: minimal
+    - cmd: git config --global core.autocrlf true
+    
+# https://github.com/SonarSource/sonar-scanner-msbuild/issues/915 means that SonarScanner v5.0.0 breaks the build.
+# Forcing it to use previous version 4.10.0 works around it.
+install:
+    - cmd: git submodule update --init --recursive
+    - cmd: dotnet tool install --global dotnet-sonarscanner --version 4.10.0
+    
+build_script:
+    - cmd: Tools\appveyor-build.cmd
+    
+test_script:
+    - cmd: echo "Tests already run"
