@@ -7,10 +7,23 @@ and impossible for some tools to work-upon.
 ZptSharp is compatible with the following framework targets.  The library
 is *multi-targeted* to avoid compatibility issues.
 
-* **.NET Framework 4.6.1** and up: `net461`
-* **.NET Standard 2.0** and up: `netstandard2.0`
-* **.NET Core 2.0** and up *(by virtue of supporting .NET Standard 2.0)*
-* **.NET 5** and up *(by virtue of supporting .NET Standard 2.0)*
+| Target                            | Target frameworks                     |
+| ------                            | -----------------                     |
+| **.NET Framework 4.5.0** and up   | `net45`, `net46`, `net47`, `net48`    |
+| **.NET Standard 2.0** and up      | `netstandard2.0`, `netstandard2.1`    |
+| **.NET Core 2.0** and up          | *Covered by netstandard, above*       |
+| **.NET 5** and up                 | *Covered by netstandard, above*       |
+
+### Exception: AngleSharp integration does not support `net45`
+The [AngleSharp] integration package does not support .NET Framework 4.5.x, due to a lack of
+support from AngleSharp itself.  It does support .NET Framework 4.6.0 (`net46`) and up, along
+with all other targets listed above.
+
+If you are limited to .NET Framework 4.5.x then you must use the [HTML Agility Pack] integration
+for processing HTML documents instead.
+
+[AngleSharp]: http://anglesharp.github.io/
+[HTML Agility Pack]: https://html-agility-pack.net/
 
 ## Continuous integration status
 In this repository the **master** branch represents the latest development code
@@ -33,5 +46,7 @@ current CI status of the master branch.
 
 ## Building & running tests
 As of the v2.x codebase, the build has been greatly simplified!  The minimal build requirements
-are a **.NET Core SDK** for .NET Core version 3.0 or higher.  Building is as simple as `dotnet build`
+are [a **.NET Core SDK** for .NET Core version 3.1] or higher.  Building is as simple as `dotnet build`
 and running tests as simple as `dotnet test`.
+
+[a **.NET Core SDK** for .NET Core version 3.1]: https://dotnet.microsoft.com/download/dotnet-core/3.1

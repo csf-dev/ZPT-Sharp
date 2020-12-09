@@ -18,7 +18,7 @@ namespace ZptSharp.Dom
         /// Gets the registry backing store.  This is intentionally not revealed via interfaces.
         /// </summary>
         /// <value>The underlying registry backing store.</value>
-        public IReadOnlyCollection<IReadsAndWritesDocument> Registry => registry;
+        public IEnumerable<IReadsAndWritesDocument> Registry => registry;
 
         /// <summary>
         /// Gets the document reader/writer for the specified filename.
