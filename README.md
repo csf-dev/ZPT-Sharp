@@ -1,6 +1,6 @@
 **ZptSharp** *(formerly ZPT-Sharp)* is a library for MVC-style binding to
 HTML and/or XML document templates. It is *attribute-based* and avoids the
-need to add ['alien markup'] which make template files hard to read/understand
+need to add 'alien markup' which make template files hard to read/understand
 and impossible for some tools to work-upon.
 
 ## Compatibility & dependencies
