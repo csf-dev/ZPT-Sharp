@@ -16,16 +16,23 @@ namespace ZptSharp.Config
     {
         /// <summary>
         /// Gets the encoding which will be used to read &amp; write documents, where the document
-        /// provider supports it (not all do).
-        /// If this is unset then documents will be read &amp; written as UTF-8.
+        /// provider supports it.
         /// </summary>
+        /// <remarks>
+        /// <para>
+        /// Not all document providers (see also: <seealso cref="IReadsAndWritesDocument"/>) will
+        /// honour this document encoding configuration setting, it is up to the individual provider used
+        /// as to how this setting is treated.
+        /// </para>
+        /// <para>
+        /// The default value for this configuration setting is <see cref="Encoding.UTF8"/>.
+        /// </para>
+        /// </remarks>
         /// <value>The document encoding.</value>
         public virtual Encoding DocumentEncoding { get; private set; }
 
         /// <summary>
-        /// <para>
-        /// Gets the document provider to be used for reading/writing documents.
-        /// </para>
+        /// Gets the document provider; this is the implementation used for reading/writing documents.
         /// </summary>
         /// <value>The document provider.</value>
         public virtual IReadsAndWritesDocument DocumentProvider { get; private set; }
@@ -34,20 +41,78 @@ namespace ZptSharp.Config
         /// Gets a value which indicates whether the XML document declaration should be omitted when
         /// writing XML documents.  Has no effect unless an XML-based document provider is used.
         /// </summary>
+        /// <remarks>
+        /// <para>
+        /// The default for this configuration option is <see langword="false"/>.
+        /// </para>
+        /// </remarks>
         /// <value><c>true</c> if the XML document declaration should be omitted; otherwise, <c>false</c>.</value>
         public virtual bool OmitXmlDeclaration { get; private set; }
 
         /// <summary>
         /// Gets a service which provides the default/built-in root contexts for expression resolution.
         /// </summary>
+        /// <remarks>
+        /// <para>
+        /// The default contexts provider is the object which is used to provide the 'root'
+        /// variables which are available to TALES path expressions.  These built-in contexts
+        /// are also accessible via the keyword <c>CONTEXTS</c> in a path expression.
+        /// </para>
+        /// <para>
+        /// For the vast majority of usages, the standard/default built-in contexts provider will be suitable.
+        /// That standard/default implementation will be used if this configuration option is either not
+        /// specified or is set to <see langword="null"/>.
+        /// </para>
+        /// <para>
+        /// Specify a built-in contexts provider when you wish to use a non-standard mechanism of
+        /// getting the 'root' variables, accessible to document templates.  Please note, though,
+        /// that you don't need to do this to pass model data or to simply add extra root variables.
+        /// Model data is easily provided by passing a model value into the rendering process.  The
+        /// passed value is accessible via the built-in context keyword <c>here</c>.
+        /// Adding additional root variables is achieved by the use of the <see cref="ContextBuilder"/>
+        /// configuration option.
+        /// </para>
+        /// <para>
+        /// Please note that if this configuration option is specified and is not null then
+        /// the <see cref="KeywordOptions"/> configuration option will be ignored
+        /// and will have no effect.  This is because those keyword options are made accessible
+        /// to templates via the built-in contexts provider.
+        /// </para>
+        /// </remarks>
         /// <value>The built-in contexts provider.</value>
         public virtual Func<ExpressionContext, IGetsDictionaryOfNamedTalesValues> BuiltinContextsProvider { get; private set; }
 
         /// <summary>
-        /// Gets a collection of "keyword options" which have been provided to the rendering process externally.
+        /// <para>
+        /// Gets a collection of "keyword options".  A typical usage of keyword options is to
+        /// represent key/value pairs passed as arguments to a command-line application.
+        /// </para>
+        /// <para>
+        /// Beware that this configuration option is ignored if <see cref="BuiltinContextsProvider"/> is
+        /// also specified and is not null.
+        /// </para>
         /// </summary>
+        /// <remarks>
+        /// <para>
+        /// 
+        /// </para>
+        /// </remarks>
         /// <value>The keyword options collection.</value>
         public virtual IReadOnlyDictionary<string,object> KeywordOptions { get; private set; }
+
+        /// <summary>
+        /// Gets an action which is used to build &amp; add values to the root ZPT context.
+        /// </summary>
+        /// <remarks>
+        /// <para>
+        /// If unset or null, then no additional variables will be added to the root context.
+        /// If this is provided then the <see cref="IConfiguresRootContext"/> may be used
+        /// to add additional data, accessible by templates as variables, to the rendering
+        /// process.
+        /// </para>
+        /// </remarks>
+        /// <value>The context builder.</value>
+        public virtual Action<IConfiguresRootContext, IServiceProvider> ContextBuilder { get; private set; }
 
         /// <summary>
         /// Gets a value which indicates whether or not source annotation should be written to the rendered document.
@@ -55,12 +120,6 @@ namespace ZptSharp.Config
         /// </summary>
         /// <value><c>true</c> if source annotation should be included in the output; otherwise, <c>false</c>.</value>
         public virtual bool IncludeSourceAnnotation { get; private set; }
-
-        /// <summary>
-        /// Gets an action which is used to build &amp; add values to the root ZPT context.
-        /// </summary>
-        /// <value>The context builder.</value>
-        public virtual Action<IConfiguresRootContext, IServiceProvider> ContextBuilder { get; private set; }
 
         /// <summary>
         /// <para>

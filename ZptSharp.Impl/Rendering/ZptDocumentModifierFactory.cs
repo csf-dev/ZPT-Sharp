@@ -33,11 +33,10 @@ namespace ZptSharp.Rendering
         /// <param name="request">A rendering request.</param>
         public IModifiesDocument GetDocumentModifier(RenderZptDocumentRequest request)
         {
-            var useSourceAnnotation = config.IncludeSourceAnnotation;
-
             var service = GetBaseService();
             service = WrapWithCleanupDecorator(service);
-            if (useSourceAnnotation) service = WrapWithSourceAnnotationDecorator(service);
+            if (config.IncludeSourceAnnotation)
+                service = WrapWithSourceAnnotationDecorator(service);
             service = WrapWithTalDecorator(service);
             service = WrapWithMetalDecorator(service);
 
