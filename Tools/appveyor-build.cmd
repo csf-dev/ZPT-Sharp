@@ -24,7 +24,7 @@ dotnet test ^
 REM ---
 REM 'Capture' the exit code from dotnet test for later use
 REM ---
-SET exitcode=%errorlevel%
+set exitcode=%errorlevel%
 
 dotnet-sonarscanner end ^
     /d:"sonar.login=%SONARCLOUD_SECRET_KEY%"
