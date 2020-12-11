@@ -6,7 +6,8 @@ IF %APPVEYOR_REPO_TAG%==true (
     dotnet pack -c Release -o .Packages -p:Version=%package_version%
 ) ELSE (
     SET version_suffix=ci-build.%APPVEYOR_BUILD_NUMBER%
-    dotnet pack -c Release -o .Packages --version-suffix %version_suffix%
+    ECHO %version_suffix%
+    dotnet pack -c Release -o .Packages --version-suffix=%version_suffix%
 )
 
 REM ---
