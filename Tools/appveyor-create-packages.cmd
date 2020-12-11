@@ -3,9 +3,9 @@ REM Create the packages
 REM ---
 IF %APPVEYOR_REPO_TAG%==true (
     SET package_version=%APPVEYOR_REPO_TAG_NAME:~1%
-    dotnet pack -c Release -o .Packages -p:PackageVersion=%package_version%
+    dotnet pack -c Release -o .Packages -p:Version=%package_version%
 ) ELSE (
-    SET version_suffix=-ci-build.%APPVEYOR_BUILD_NUMBER%
+    SET version_suffix="ci-build.%APPVEYOR_BUILD_NUMBER%"
     dotnet pack -c Release -o .Packages --version-suffix %version_suffix%
 )
 
