@@ -56,6 +56,11 @@
     <Folder Include="TestFiles\XmlDtdHandlingIntegrationTests\" />
     <Folder Include="TestFiles\XmlDtdHandlingIntegrationTests\SourceDocuments\" />
     <Folder Include="TestFiles\XmlDtdHandlingIntegrationTests\ExpectedOutputs\" />
+    <Folder Include="TestFiles\ZptIntegrationTests\Yet to be included\SourceDocuments\" />
+    <Folder Include="TestFiles\ZptIntegrationTests\Yet to be included\ExpectedOutputs\" />
+    <Folder Include="TestFiles\I18nIntegrationTests\" />
+    <Folder Include="TestFiles\I18nIntegrationTests\ExpectedOutputs\" />
+    <Folder Include="TestFiles\I18nIntegrationTests\SourceDocuments\" />
   </ItemGroup>
   
   <ItemGroup>
