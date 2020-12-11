@@ -1,3 +1,6 @@
+REM ---
+REM Emit the version info for dotnet, for debugging purposes
+REM ---
 dotnet --version
 
 dotnet-sonarscanner begin ^
@@ -18,11 +21,17 @@ dotnet test ^
     --test-adapter-path:. ^
     --logger:\"nunit;LogFilePath=../.TestResults\TestResults.xml\"
 
-SET exitcode=%errorlevel%
+REM ---
+REM 'Capture' the exit code from dotnet test for later use
+REM ---
+set exitcode=%errorlevel%
 
 dotnet-sonarscanner end ^
     /d:"sonar.login=%SONARCLOUD_SECRET_KEY%"
 
+REM ---
+REM Upload all files in the test results directory to AppVeyor as artifacts
+REM ---
 FOR %%F IN (.TestResults\*.*) DO appveyor PushArtifact %%F
 
 exit /B %exitcode%

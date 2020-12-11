@@ -10,8 +10,7 @@
     
     <PropertyGroup>
         <Authors>craigfowler</Authors>
-        <Version>$(ReleaseVersion)</Version>
-        <PackageVersion>$(ReleaseVersion)</PackageVersion>
+        <VersionPrefix>$(ReleaseVersion)</VersionPrefix>
         <PackageLicenseExpression>MIT</PackageLicenseExpression>
         <Copyright>Copyright 2020 - ZptSharp contributors</Copyright>
         <PackageProjectUrl>https://github.com/csf-dev/ZPT-Sharp/</PackageProjectUrl>
