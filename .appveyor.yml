@@ -14,7 +14,7 @@ install:
     - cmd: dotnet tool install --global dotnet-sonarscanner --version 4.10.0
     
 build_script:
-    - cmd: Tools\appveyor-build.cmd
+    # - cmd: Tools\appveyor-build.cmd
     - cmd: Tools\appveyor-create-packages.cmd
     
 test_script:
