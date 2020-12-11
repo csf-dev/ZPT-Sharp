@@ -11,7 +11,7 @@ init:
 # Forcing it to use previous version 4.10.0 works around it.
 install:
     - cmd: git submodule update --init --recursive
-    - cmd: dotnet tool install --global dotnet-sonarscanner --version 4.10.0
+    # - cmd: dotnet tool install --global dotnet-sonarscanner --version 4.10.0
     
 build_script:
     # - cmd: Tools\appveyor-build.cmd
