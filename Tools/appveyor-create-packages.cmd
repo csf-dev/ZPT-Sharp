@@ -16,5 +16,5 @@ REM ---
 REM If we built from a tag then push those packages
 REM ---
 IF %APPVEYOR_REPO_TAG%==true (
-    FOR %%F IN (.Packages\*.nupkg) DO dotnet push %%F --api-key %NUGET_SECRET_API_KEY%
+    FOR %%F IN (.Packages\*.nupkg) DO dotnet nuget push %%F --api-key %NUGET_SECRET_API_KEY%
 )
