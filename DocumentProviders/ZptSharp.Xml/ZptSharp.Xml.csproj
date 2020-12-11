@@ -8,7 +8,7 @@
     <RootNamespace>ZptSharp.Dom</RootNamespace>
     <ReleaseVersion>2.0.0</ReleaseVersion>
     <SignAssembly>true</SignAssembly>
-    <AssemblyOriginatorKeyFile>..\..\CSF-Software-OSS.snk</AssemblyOriginatorKeyFile>
+    <AssemblyOriginatorKeyFile>..\..\Tools\CSF-Software-OSS.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
     
   <Import Project="..\..\Tools\CommonSolutionProperties.targets" />

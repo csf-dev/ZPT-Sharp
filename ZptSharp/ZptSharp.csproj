@@ -7,7 +7,7 @@
     <TargetFrameworks>netstandard2.0;netstandard2.1;net48;net47;net46;net45</TargetFrameworks>
     <ReleaseVersion>2.0.0</ReleaseVersion>
     <SignAssembly>true</SignAssembly>
-    <AssemblyOriginatorKeyFile>..\CSF-Software-OSS.snk</AssemblyOriginatorKeyFile>
+    <AssemblyOriginatorKeyFile>..\Tools\CSF-Software-OSS.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
     
   <Import Project="..\Tools\CommonSolutionProperties.targets" />
