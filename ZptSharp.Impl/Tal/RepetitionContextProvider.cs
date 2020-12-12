@@ -14,6 +14,8 @@ namespace ZptSharp.Tal
     public class RepetitionContextProvider : IGetsRepetitionContexts
     {
         readonly IGetsTalAttributeSpecs specProvider;
+        private readonly IGetsAlphabeticValueForNumber alphabeticValueProvider;
+        private readonly IGetsRomanNumeralForNumber romanNumeralProvider;
 
         /// <summary>
         /// Gets the repetition contexts for the specified <paramref name="expressionResult"/>.
@@ -79,7 +81,7 @@ namespace ZptSharp.Tal
 
             return (from index in Enumerable.Range(0, itemCount)
                     let item = sequence[index]
-                    select new RepetitionInfo
+                    select new RepetitionInfo(alphabeticValueProvider, romanNumeralProvider)
                     {
                         Count = itemCount,
                         CurrentIndex = index,
@@ -162,9 +164,13 @@ namespace ZptSharp.Tal
         /// Initializes a new instance of the <see cref="RepetitionContextProvider"/> class.
         /// </summary>
         /// <param name="specProvider">Spec provider.</param>
-        public RepetitionContextProvider(IGetsTalAttributeSpecs specProvider)
+        public RepetitionContextProvider(IGetsTalAttributeSpecs specProvider,
+                                         IGetsAlphabeticValueForNumber alphabeticValueProvider,
+                                         IGetsRomanNumeralForNumber romanNumeralProvider)
         {
             this.specProvider = specProvider ?? throw new ArgumentNullException(nameof(specProvider));
+            this.alphabeticValueProvider = alphabeticValueProvider ?? throw new ArgumentNullException(nameof(alphabeticValueProvider));
+            this.romanNumeralProvider = romanNumeralProvider ?? throw new ArgumentNullException(nameof(romanNumeralProvider));
         }
     }
 }
