@@ -59,6 +59,16 @@ namespace ZptSharp
         /// <summary>
         /// Configures ZPT Sharp to read and handle TALES "path" expressions.
         /// </summary>
+        /// <remarks>
+        /// <para>
+        /// This method registers all three of:
+        /// </para>
+        /// <list type="bullet">
+        /// <item><see cref="Expressions.PathExpressions.PathExpressionEvaluator"/>, using the prefix <see cref="WellKnownExpressionPrefix.Path"/>.</item>
+        /// <item><see cref="Expressions.PathExpressions.LocalVariablesOnlyPathExpressionEvaluator"/>, using the prefix <see cref="WellKnownExpressionPrefix.LocalVariablePath"/>.</item>
+        /// <item><see cref="Expressions.PathExpressions.GlobalVariablesOnlyPathExpressionEvaluator"/>, using the prefix <see cref="WellKnownExpressionPrefix.GlobalVariablePath"/>.</item>
+        /// </list>
+        /// </remarks>
         /// <returns>The same service provider instance, after setting it up.</returns>
         /// <param name="provider">The service provider.</param>
         public static IServiceProvider UseZptPathExpressions(this IServiceProvider provider)
@@ -72,6 +82,9 @@ namespace ZptSharp
             provider
                 .GetRequiredService<IRegistersExpressionEvaluator>()
                 .RegisterEvaluatorType<Expressions.PathExpressions.LocalVariablesOnlyPathExpressionEvaluator>(WellKnownExpressionPrefix.LocalVariablePath);
+            provider
+                .GetRequiredService<IRegistersExpressionEvaluator>()
+                .RegisterEvaluatorType<Expressions.PathExpressions.GlobalVariablesOnlyPathExpressionEvaluator>(WellKnownExpressionPrefix.GlobalVariablePath);
 
             return provider;
         }
@@ -79,6 +92,12 @@ namespace ZptSharp
         /// <summary>
         /// Configures ZPT Sharp to read and handle TALES "string" expressions.
         /// </summary>
+        /// <remarks>
+        /// <para>
+        /// This method registers the <see cref="Expressions.StringExpressions.StringExpressionEvaluator"/> under both of the
+        /// prefixes <see cref="WellKnownExpressionPrefix.String"/> &amp; <see cref="WellKnownExpressionPrefix.ShortStringAlias"/>.
+        /// </para>
+        /// </remarks>
         /// <returns>The same service provider instance, after setting it up.</returns>
         /// <param name="provider">The service provider.</param>
         public static IServiceProvider UseZptStringExpressions(this IServiceProvider provider)

@@ -19,6 +19,13 @@ namespace ZptSharp.Expressions
         public static string LocalVariablePath => "local";
 
         /// <summary>
+        /// The prefix for 'global' expressions (the same as 'path'
+        /// expressions but using only a global variable as the start-point for evaluation).
+        /// </summary>
+        /// <value>The global-path prefix.</value>
+        public static string GlobalVariablePath => "global";
+
+        /// <summary>
         /// The prefix for 'string' expressions.
         /// </summary>
         /// <value>The string prefix.</value>
