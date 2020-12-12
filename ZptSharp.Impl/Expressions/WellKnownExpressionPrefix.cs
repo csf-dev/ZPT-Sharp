@@ -25,6 +25,12 @@ namespace ZptSharp.Expressions
         public static string String => "string";
 
         /// <summary>
+        /// A shortened alias for 'string' expressions.
+        /// </summary>
+        /// <value>The string prefix alias.</value>
+        public static string ShortStringAlias => "str";
+
+        /// <summary>
         /// The prefix for 'not' expressions.
         /// </summary>
         /// <value>The not prefix.</value>

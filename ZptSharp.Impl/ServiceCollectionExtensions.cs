@@ -89,6 +89,9 @@ namespace ZptSharp
             provider
                 .GetRequiredService<IRegistersExpressionEvaluator>()
                 .RegisterEvaluatorType<Expressions.StringExpressions.StringExpressionEvaluator>(WellKnownExpressionPrefix.String);
+            provider
+                .GetRequiredService<IRegistersExpressionEvaluator>()
+                .RegisterEvaluatorType<Expressions.StringExpressions.StringExpressionEvaluator>(WellKnownExpressionPrefix.ShortStringAlias);
 
             return provider;
         }
