@@ -1,4 +1,5 @@
 using System;
+using System.IO;
 using System.Threading.Tasks;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -58,6 +59,9 @@ namespace ZptSharp.IntegrationTests
         {
             bool createdServiceProvider = (serviceProvider == null);
             IServiceProvider provider = null;
+
+            if (new FileInfo(expectedRenderingPath).Name.Contains(".ignored."))
+                NUnit.Framework.Assert.Ignore("This integration test file includes the word 'ignored' in its filename.");
 
             try
             {
