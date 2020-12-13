@@ -98,6 +98,7 @@ namespace ZptSharp.Dom
             settings.Indent = true;
             settings.Encoding = config.DocumentEncoding;
             settings.OmitXmlDeclaration = config.OmitXmlDeclaration;
+            settings.NamespaceHandling = NamespaceHandling.OmitDuplicates;
 
             return XmlWriter.Create(writer, settings);
         }
