@@ -23,6 +23,8 @@ namespace ZptSharp.Dom
         /// <summary>This matches the default buffer size for a built-in <see cref="StreamWriter"/>.</summary>
         const int BufferSize = 1024;
 
+        readonly IGetsXmlReaderSettings readerSettingsProvider;
+
         /// <summary>
         /// Gets whether or not the current instance may be used to read &amp; write documents
         /// which have the specified filename.
@@ -55,9 +57,10 @@ namespace ZptSharp.Dom
                                                                      IDocumentSourceInfo sourceInfo,
                                                                      CancellationToken token)
         {
-            using (var reader = new StreamReader(stream, config.DocumentEncoding))
+            using (var streamReader = new StreamReader(stream, config.DocumentEncoding))
+            using (var xmlReader = XmlReader.Create(streamReader, readerSettingsProvider.GetReaderSettings()))
             {
-                var doc = XDocument.Load(reader, loadOptions);
+                var doc = XDocument.Load(xmlReader, loadOptions);
 
                 IDocument xmlDoc = new XmlDocument(doc, sourceInfo ?? new UnknownSourceInfo());
                 return Task.FromResult(xmlDoc);
@@ -97,6 +100,11 @@ namespace ZptSharp.Dom
             settings.OmitXmlDeclaration = config.OmitXmlDeclaration;
 
             return XmlWriter.Create(writer, settings);
+        }
+
+        public XmlDocumentProvider(IGetsXmlReaderSettings readerSettingsProvider)
+        {
+            this.readerSettingsProvider = readerSettingsProvider ?? throw new ArgumentNullException(nameof(readerSettingsProvider));
         }
     }
 }

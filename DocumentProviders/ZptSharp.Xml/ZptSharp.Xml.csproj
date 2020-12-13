@@ -33,4 +33,26 @@
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="1.1.1" />
     <PackageReference Include="System.ValueTuple" Version="4.5.0" Condition="'$(TargetFramework.TrimEnd(`45612`))' == 'net'" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Resources\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="Resources\*.dtd" />
+    <None Remove="Resources\*.ent" />
+    <None Remove="Resources\*.mod" />
+    <EmbeddedResource Include="Resources\*.dtd" />
+    <EmbeddedResource Include="Resources\*.ent" />
+    <EmbeddedResource Include="Resources\*.mod" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Update="Resources\ExceptionMessages.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>ExceptionMessages.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Update="Resources\ExceptionMessages.Designer.cs">
+      <DependentUpon>ExceptionMessages.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
 </Project>

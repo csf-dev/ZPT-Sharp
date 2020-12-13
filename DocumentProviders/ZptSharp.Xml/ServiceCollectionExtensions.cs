@@ -27,6 +27,8 @@ namespace ZptSharp
                 throw new ArgumentNullException(nameof(serviceCollection));
 
             serviceCollection.AddTransient<XmlDocumentProvider>();
+            serviceCollection.AddTransient<IGetsXhtmlDtds, Dom.Resources.EmbeddedResourceXhtmlDtdProvider>();
+            serviceCollection.AddTransient<IGetsXmlReaderSettings, XmlReaderSettingsFactory>();
 
             return serviceCollection;
         }

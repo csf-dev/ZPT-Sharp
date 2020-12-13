@@ -8,7 +8,8 @@ namespace ZptSharp.Dom
 {
     public static class XmlDocumentUtil
     {
-        static readonly XmlDocumentProvider provider = new XmlDocumentProvider();
+        static readonly XmlDocumentProvider
+            provider = new XmlDocumentProvider(new XmlReaderSettingsFactory(new Resources.EmbeddedResourceXhtmlDtdProvider()));
 
         /// <summary>
         /// Gets a single XML element node from the first element in the specified XML string.
