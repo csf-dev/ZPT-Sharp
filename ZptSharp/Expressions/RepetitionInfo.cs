@@ -88,6 +88,11 @@ namespace ZptSharp.Expressions
             }
         }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="RepetitionInfo"/> class.
+        /// </summary>
+        /// <param name="alphabeticValueProvider">Alphabetic value provider.</param>
+        /// <param name="romanNumeralProvider">Roman numeral provider.</param>
         public RepetitionInfo(IGetsAlphabeticValueForNumber alphabeticValueProvider,
                               IGetsRomanNumeralForNumber romanNumeralProvider)
         {

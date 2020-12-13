@@ -22,17 +22,17 @@ namespace ZptSharp.Dom
         /// <summary>
         /// Gets a Uri for the root of the w3.org's resolution namespace.
         /// </summary>
-        public static Uri W3BaseUri = new Uri("http://www.w3.org/");
+        public static readonly Uri W3BaseUri = new Uri("http://www.w3.org/");
 
         /// <summary>
         /// Gets a Uri for the root location where XHTML modules are found.
         /// </summary>
-        public static Uri ModuleBaseUri = new Uri(W3BaseUri, "MarkUp/DTD/");
+        public static readonly Uri ModuleBaseUri = new Uri(W3BaseUri, "MarkUp/DTD/");
 
         /// <summary>
         /// Gets a Uri for the root location where XHTML DTDs are found.
         /// </summary>
-        public static Uri DtdBaseUri = new Uri(W3BaseUri, "TR/xhtml1/DTD/");
+        public static readonly Uri DtdBaseUri = new Uri(W3BaseUri, "TR/xhtml1/DTD/");
 
         static readonly Dictionary<string, Uri> xhtmlUrisByRelativeUri = new Dictionary<string, Uri> {
             { Xhtml1StrictRelative,             new Uri(DtdBaseUri, "xhtml1-strict.dtd") },

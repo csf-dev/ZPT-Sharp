@@ -103,6 +103,10 @@ namespace ZptSharp.Dom
             return XmlWriter.Create(writer, settings);
         }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="XmlDocumentProvider"/> class.
+        /// </summary>
+        /// <param name="readerSettingsProvider">Reader settings provider.</param>
         public XmlDocumentProvider(IGetsXmlReaderSettings readerSettingsProvider)
         {
             this.readerSettingsProvider = readerSettingsProvider ?? throw new ArgumentNullException(nameof(readerSettingsProvider));

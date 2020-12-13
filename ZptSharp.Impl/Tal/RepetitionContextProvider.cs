@@ -14,8 +14,8 @@ namespace ZptSharp.Tal
     public class RepetitionContextProvider : IGetsRepetitionContexts
     {
         readonly IGetsTalAttributeSpecs specProvider;
-        private readonly IGetsAlphabeticValueForNumber alphabeticValueProvider;
-        private readonly IGetsRomanNumeralForNumber romanNumeralProvider;
+        readonly IGetsAlphabeticValueForNumber alphabeticValueProvider;
+        readonly IGetsRomanNumeralForNumber romanNumeralProvider;
 
         /// <summary>
         /// Gets the repetition contexts for the specified <paramref name="expressionResult"/>.
@@ -164,6 +164,8 @@ namespace ZptSharp.Tal
         /// Initializes a new instance of the <see cref="RepetitionContextProvider"/> class.
         /// </summary>
         /// <param name="specProvider">Spec provider.</param>
+        /// <param name="alphabeticValueProvider">A service which gets alphabetic versions of strings.</param>
+        /// <param name="romanNumeralProvider">A service which gets roman numerals.</param>
         public RepetitionContextProvider(IGetsTalAttributeSpecs specProvider,
                                          IGetsAlphabeticValueForNumber alphabeticValueProvider,
                                          IGetsRomanNumeralForNumber romanNumeralProvider)
