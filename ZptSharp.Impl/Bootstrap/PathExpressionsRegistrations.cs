@@ -14,12 +14,10 @@ namespace ZptSharp.Bootstrap
             services.AddTransient<PathExpressionEvaluator>();
             services.AddTransient<IParsesPathExpression, PathExpressionParser>();
             services.AddTransient<IWalksAndEvaluatesPathExpression, PathWalkingExpressionEvaluator>();
-            services.AddTransient<IGetsValueFromObjectWithLocalVariablesOnly, LocalVariableOnlyDecoratorBasedObjectValueProvider>();
             services.AddTransient<LocalVariablesOnlyPathExpressionEvaluator>();
-            services.AddTransient<IWalksAndEvaluatesPathExpressionWithLocalVariablesOnly, LocalVariablesOnlyPathWalkingExpressionEvaluator>();
-            services.AddTransient<IGetsValueFromObjectWithGlobalVariablesOnly, GlobalVariableOnlyDecoratorBasedObjectValueProvider>();
             services.AddTransient<GlobalVariablesOnlyPathExpressionEvaluator>();
-            services.AddTransient<IWalksAndEvaluatesPathExpressionWithGlobalVariablesOnly, GlobalVariablesOnlyPathWalkingExpressionEvaluator>();
+            services.AddTransient<IEvaluatesPathExpressionRequest, PathExpressionRequestEvaluator>();
+            services.AddTransient<IGetsPathWalkingExpressionEvaluator, PathWalkingExpressionEvaluatorFactory>();
 
             // Intentionally no registrations for anything in the ValueProviders sub-namespace.  The
             // DecoratorBasedObjectValueProvider (already registered above) creates new instances of
