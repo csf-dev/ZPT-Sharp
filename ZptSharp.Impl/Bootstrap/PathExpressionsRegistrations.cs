@@ -10,12 +10,13 @@ namespace ZptSharp.Bootstrap
     {
         internal void RegisterServices(IServiceCollection services)
         {
-            services.AddTransient<IGetsValueFromObject, DecoratorBasedObjectValueProvider>();
             services.AddTransient<PathExpressionEvaluator>();
-            services.AddTransient<IParsesPathExpression, PathExpressionParser>();
-            services.AddTransient<IWalksAndEvaluatesPathExpression, PathWalkingExpressionEvaluator>();
             services.AddTransient<LocalVariablesOnlyPathExpressionEvaluator>();
             services.AddTransient<GlobalVariablesOnlyPathExpressionEvaluator>();
+            services.AddTransient<DefinedVariablesOnlyPathExpressionEvaluator>();
+            services.AddTransient<IGetsValueFromObject, DecoratorBasedObjectValueProvider>();
+            services.AddTransient<IParsesPathExpression, PathExpressionParser>();
+            services.AddTransient<IWalksAndEvaluatesPathExpression, PathWalkingExpressionEvaluator>();
             services.AddTransient<IEvaluatesPathExpressionRequest, PathExpressionRequestEvaluator>();
             services.AddTransient<IGetsPathWalkingExpressionEvaluator, PathWalkingExpressionEvaluatorFactory>();
 

@@ -118,7 +118,7 @@ namespace ZptSharp.Tal
                 return await evaluator.EvaluateExpressionAsync(attribute.Value, context, token)
                     .ConfigureAwait(false);
             }
-            catch(EvaluationException ex)
+            catch(Exception ex)
             {
                 var message = String.Format(Resources.ExceptionMessage.CouldNotEvaluateContentOrReplaceExpression,
                                             context.CurrentElement,

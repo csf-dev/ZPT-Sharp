@@ -93,6 +93,9 @@ namespace ZptSharp.Expressions.PathExpressions
                 case RootScopeLimitation.LocalVariablesOnly:
                     return new LocalVariableOnlyExpressionContextWrappingDecorator(service);
 
+                case RootScopeLimitation.DefinedVariablesOnly:
+                    return new DefinedVariablesOnlyExpressionContextWrappingDecorator(service);
+
                 default:
                     return new ExpressionContextWrappingDecorator(config, builtinContextsProviderFactory, service);
             }
