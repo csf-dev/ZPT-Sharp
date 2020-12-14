@@ -21,7 +21,7 @@ Title">Title</h1>
 
     <span z:content="str:here/id"/>
 
-    <p z:define="x str:template/title; global five python:2+3;" z:content="text var:five"/>
+    <p z:define="x str:template/sourcename; global five python:2+3;" z:content="text var:five"/>
 
     <p z:repeat="car python:['honda', 'subaru', 'acura']">
       <span z:replace="var:car"/>
@@ -47,7 +47,7 @@ Title">Title</h1>
     <span z:replace="structure python:None" />
 
     <span z:define="global x str:&lt;h3&gt;Header Level 3&lt;/h3&gt;" />
-    <span z:define="global x python:'&amp;' + 'nbsp;;' + x" />
+    <span z:define="global x python:'&amp;' + 'quot;;' + x" />
 
     <span z:replace="structure x" />
     <span z:content="structure x" />

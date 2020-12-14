@@ -14,7 +14,9 @@ namespace ZptSharp.Metal
     /// </summary>
     public class MetalDocumentAdapter : IProvidesMacros, Expressions.IGetsNamedTalesValue
     {
-        const string Macros = "macros";
+        const string
+            MacrosVar = "macros",
+            SourceNameVar = "sourcename";
 
         readonly IDocument document;
         readonly ISearchesForAttributes attributeSearcher;
@@ -32,6 +34,11 @@ namespace ZptSharp.Metal
                 .ToDictionary(k => k.Name, v => v);
         }
 
+        /// <summary>
+        /// Gets the name of the source info for this template.
+        /// </summary>
+        /// <value>The name of the source.</value>
+        public string SourceName => document.SourceInfo.Name;
 
         /// <summary>
         /// Attempts to get a value for a named reference, relative to the current instance.
@@ -41,8 +48,11 @@ namespace ZptSharp.Metal
         /// <param name="cancellationToken">An optional cancellation token.</param>
         public Task<GetValueResult> TryGetValueAsync(string name, CancellationToken cancellationToken = default)
         {
-            if (String.Equals(name, Macros, StringComparison.InvariantCulture))
+            if (String.Equals(name, MacrosVar, StringComparison.InvariantCulture))
                 return Task.FromResult(GetValueResult.For(GetMacros()));
+
+            if (String.Equals(name, SourceNameVar, StringComparison.InvariantCulture))
+                return Task.FromResult(GetValueResult.For(SourceName));
 
             return Task.FromResult(GetValueResult.Failure);
         }
