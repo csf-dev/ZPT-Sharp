@@ -1,8 +1,6 @@
-<?xml version=1.0?>
-<!DOCTYPE html 
-  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-  "DTD/xhtml1-transitional.dtd">
-<html>
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "DTD/xhtml1-transitional.dtd"[]>
+<html xmlns="http://www.w3.org/1999/xhtml">
 
   <head>dadada</head>
 
@@ -11,7 +9,7 @@
     <h1>This Is The Replaced Title</h1>
 
   <!-- test entity references -->
-  &nbsp;&Oslash;
+  "Ø
 
   <!-- examples adapted from TemplateAttributeLanguageSyntax -->
 
@@ -21,11 +19,9 @@
 
     <p>
       honda
-    </p>
-    <p>
+    </p><p>
       subaru
-    </p>
-    <p>
+    </p><p>
       acura
     </p>
 
@@ -36,29 +32,27 @@
     <ul>
     <span>
       <li>honda</li>
-    </span>
-    <span>
+    </span><span>
       <li>subaru</li>
-    </span>
-    <span>
+    </span><span>
       <li>acura</li>
     </span>
     </ul>
 
   <!-- test attribute expansion -->
 
-    <a href="http://python.org">python</a>
-    <a href="http://python.org">python</a>
+    <a href="http://python.org" shape="rect">python</a>
+    <a shape="rect" href="http://python.org">python</a>
 
   <!-- test insert/replace structure -->
-    <span></span>
+    <span />
     
 
-    <span/>
-    <span/>
+    <span />
+    <span />
 
-    &nbsp;<h3>Header Level 3</h3>
-    <span>&nbsp;<h3>Header Level 3</h3></span>
+    <p>"<h3>Header Level 3</h3></p>
+    <span><p>"<h3>Header Level 3</h3></p></span>
 
   </body>
 

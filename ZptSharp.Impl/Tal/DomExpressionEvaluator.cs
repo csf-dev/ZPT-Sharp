@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Logging;
 using ZptSharp.Dom;
 using ZptSharp.Expressions;
 
@@ -21,6 +22,7 @@ namespace ZptSharp.Tal
 
         readonly IEvaluatesExpression evaluator;
         readonly IInterpretsExpressionResult resultInterpreter;
+        readonly ILogger logger;
 
         /// <summary>
         /// Evaluates the expression asynchronously and returns the result.
@@ -57,7 +59,27 @@ namespace ZptSharp.Tal
             if (resultInterpreter.DoesResultAbortTheAction(result))
                 return new DomValueExpressionResult(abortAction: true);
 
+            if(logger.IsEnabled(LogLevel.Trace))
+            {
+                logger.LogTrace(@"Evaluated a DOM expression.
+Expression:{expression}
+    Result:{result}
+ Structure:{isStructure}",
+                                expression,
+                                result,
+                                isStructure);
+            }
+
             var nodes = GetNodes(result, isStructure, context);
+
+            if (logger.IsEnabled(LogLevel.Trace))
+            {
+                logger.LogTrace(@"Got a collection of {node_count} node(s) for the DOM expression.
+Nodes:{nodes}",
+                                nodes.Count,
+                                nodes);
+            }
+
             return new DomValueExpressionResult(nodes);
         }
 
@@ -75,11 +97,14 @@ namespace ZptSharp.Tal
         /// </summary>
         /// <param name="evaluator">Evaluator.</param>
         /// <param name="resultInterpreter">Result interpreter.</param>
+        /// <param name="logger">A logger.</param>
         public DomExpressionEvaluator(IEvaluatesExpression evaluator, 
-                                      IInterpretsExpressionResult resultInterpreter)
+                                      IInterpretsExpressionResult resultInterpreter,
+                                      ILogger<DomExpressionEvaluator> logger)
         {
             this.evaluator = evaluator ?? throw new ArgumentNullException(nameof(evaluator));
             this.resultInterpreter = resultInterpreter ?? throw new ArgumentNullException(nameof(resultInterpreter));
+            this.logger = logger ?? throw new ArgumentNullException(nameof(logger));
         }
     }
 }

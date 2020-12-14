@@ -32,6 +32,7 @@ namespace ZptSharp.Tal
         readonly IGetsRepetitionContexts repetitionContextProvider;
         readonly IGetsAttributeDefinitions attributeDefinitionsProvider;
         readonly Metal.IGetsMetalAttributeSpecs metalSpecProvider;
+        private readonly Microsoft.Extensions.Logging.ILogger<ContentOrReplaceAttributeDecorator> contentReplaceLogger;
 
         /// <summary>
         /// Gets the TAL context processor.
@@ -65,7 +66,7 @@ namespace ZptSharp.Tal
             => new AttributesAttributeDecorator(service, specProvider, evaluator, resultInterpreter, attributeDefinitionsProvider);
 
         IHandlesProcessingError GetContentOrReplaceDecorator(IHandlesProcessingError service)
-            => new ContentOrReplaceAttributeDecorator(service, specProvider, domEvaluator, replacer, omitter);
+            => new ContentOrReplaceAttributeDecorator(service, specProvider, domEvaluator, replacer, omitter, contentReplaceLogger);
 
         IHandlesProcessingError GetRepeatDecorator(IHandlesProcessingError service)
             => new RepeatAttributeDecorator(service, specProvider, evaluator, resultInterpreter, repetitionContextProvider);
@@ -93,6 +94,7 @@ namespace ZptSharp.Tal
         /// <param name="repetitionContextProvider">Repetition context provider.</param>
         /// <param name="attributeDefinitionsProvider">The 'attributes' attribute definitions provider.</param>
         /// <param name="metalSpecProvider">METAL attribute spec provider.</param>
+        /// <param name="contentReplaceLogger">Content or replace logger.</param>
         public TalContextProcessorFactory(IGetsTalAttributeSpecs specProvider,
                                           IEvaluatesExpression evaluator,
                                           IInterpretsExpressionResult resultInterpreter,
@@ -103,7 +105,8 @@ namespace ZptSharp.Tal
                                           IOmitsNode omitter,
                                           IGetsRepetitionContexts repetitionContextProvider,
                                           IGetsAttributeDefinitions attributeDefinitionsProvider,
-                                          Metal.IGetsMetalAttributeSpecs metalSpecProvider)
+                                          Metal.IGetsMetalAttributeSpecs metalSpecProvider,
+                                          Microsoft.Extensions.Logging.ILogger<ContentOrReplaceAttributeDecorator> contentReplaceLogger)
         {
             this.specProvider = specProvider ?? throw new System.ArgumentNullException(nameof(specProvider));
             this.evaluator = evaluator ?? throw new System.ArgumentNullException(nameof(evaluator));
@@ -116,6 +119,7 @@ namespace ZptSharp.Tal
             this.repetitionContextProvider = repetitionContextProvider ?? throw new System.ArgumentNullException(nameof(repetitionContextProvider));
             this.attributeDefinitionsProvider = attributeDefinitionsProvider ?? throw new System.ArgumentNullException(nameof(attributeDefinitionsProvider));
             this.metalSpecProvider = metalSpecProvider ?? throw new System.ArgumentNullException(nameof(metalSpecProvider));
+            this.contentReplaceLogger = contentReplaceLogger ?? throw new System.ArgumentNullException(nameof(contentReplaceLogger));
         }
     }
 }

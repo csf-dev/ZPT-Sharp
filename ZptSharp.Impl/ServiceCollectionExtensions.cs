@@ -61,12 +61,13 @@ namespace ZptSharp
         /// </summary>
         /// <remarks>
         /// <para>
-        /// This method registers all three of:
+        /// This method registers all four of:
         /// </para>
         /// <list type="bullet">
         /// <item><see cref="Expressions.PathExpressions.PathExpressionEvaluator"/>, using the prefix <see cref="WellKnownExpressionPrefix.Path"/>.</item>
         /// <item><see cref="Expressions.PathExpressions.LocalVariablesOnlyPathExpressionEvaluator"/>, using the prefix <see cref="WellKnownExpressionPrefix.LocalVariablePath"/>.</item>
         /// <item><see cref="Expressions.PathExpressions.GlobalVariablesOnlyPathExpressionEvaluator"/>, using the prefix <see cref="WellKnownExpressionPrefix.GlobalVariablePath"/>.</item>
+        /// <item><see cref="Expressions.PathExpressions.DefinedVariablesOnlyPathExpressionEvaluator"/>, using the prefix <see cref="WellKnownExpressionPrefix.DefinedVariablePath"/>.</item>
         /// </list>
         /// </remarks>
         /// <returns>The same service provider instance, after setting it up.</returns>
@@ -85,6 +86,9 @@ namespace ZptSharp
             provider
                 .GetRequiredService<IRegistersExpressionEvaluator>()
                 .RegisterEvaluatorType<Expressions.PathExpressions.GlobalVariablesOnlyPathExpressionEvaluator>(WellKnownExpressionPrefix.GlobalVariablePath);
+            provider
+                .GetRequiredService<IRegistersExpressionEvaluator>()
+                .RegisterEvaluatorType<Expressions.PathExpressions.DefinedVariablesOnlyPathExpressionEvaluator>(WellKnownExpressionPrefix.DefinedVariablePath);
 
             return provider;
         }

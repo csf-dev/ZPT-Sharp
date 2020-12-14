@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Logging;
 using ZptSharp.Dom;
 using ZptSharp.Expressions;
 using ZptSharp.Rendering;
@@ -20,6 +21,7 @@ namespace ZptSharp.Tal
         readonly IEvaluatesDomValueExpression evaluator;
         readonly IReplacesNode replacer;
         readonly IOmitsNode omitter;
+        readonly ILogger logger;
 
         /// <summary>
         /// Processes the context using the rules defined within this object.
@@ -83,12 +85,14 @@ namespace ZptSharp.Tal
             if (domResult.AbortAction)
             {
                 var childNodeContexts = context.CreateChildren(context.CurrentElement.ChildNodes);
+                MoveTalAttributesToReplacementNodesWhereApplicable(childNodeContexts, context);
                 omitter.Omit(context.CurrentElement);
 
                 return await GetReplacementResultAsync(context, childNodeContexts, token).ConfigureAwait(false);
             }
 
             var replacementContexts = context.CreateChildren(domResult.Nodes);
+            MoveTalAttributesToReplacementNodesWhereApplicable(replacementContexts, context);
             replacer.Replace(context.CurrentElement, domResult.Nodes);
 
             return await GetReplacementResultAsync(context, replacementContexts, token).ConfigureAwait(false);
@@ -98,7 +102,8 @@ namespace ZptSharp.Tal
                                                                                 IList<ExpressionContext> replacementContexts,
                                                                                 CancellationToken token)
         {
-            MoveTalAttributesToReplacementNodesWhereApplicable(replacementContexts, originalContext);
+            if (logger.IsEnabled(LogLevel.Trace))
+                logger.LogTrace("{count} replacement context(s)", replacementContexts.Count);
 
             if (replacementContexts.Count != 1)
                 return new ExpressionContextProcessingResult { AdditionalContexts = replacementContexts, };
@@ -118,7 +123,7 @@ namespace ZptSharp.Tal
                 return await evaluator.EvaluateExpressionAsync(attribute.Value, context, token)
                     .ConfigureAwait(false);
             }
-            catch(EvaluationException ex)
+            catch(Exception ex)
             {
                 var message = String.Format(Resources.ExceptionMessage.CouldNotEvaluateContentOrReplaceExpression,
                                             context.CurrentElement,
@@ -142,6 +147,19 @@ namespace ZptSharp.Tal
 
             foreach (var context in contexts)
             {
+                if(logger.IsEnabled(LogLevel.Trace))
+                {
+                    logger.LogTrace(@"Moving attributes from original content element to replacement contexts.
+  Attributes attribute:{attributes_attribute}
+    Omit tag attribute:{omit_tag_attribute}
+      Replacement node:{replacement_node},
+Replacement is element:{is_element}",
+                                    attributesAttribute,
+                                    omitTagAttribute,
+                                    context.CurrentElement,
+                                    context.CurrentElement.IsElement);
+                }
+
                 // Don't copy attributes to non-elements
                 if (!context.CurrentElement.IsElement) continue;
 
@@ -163,17 +181,20 @@ namespace ZptSharp.Tal
         /// <param name="evaluator">Evaluator.</param>
         /// <param name="replacer">Replacer.</param>
         /// <param name="omitter">Omitter.</param>
+        /// <param name="logger">Logger.</param>
         public ContentOrReplaceAttributeDecorator(IHandlesProcessingError wrapped,
                                                   IGetsTalAttributeSpecs specProvider,
                                                   IEvaluatesDomValueExpression evaluator,
                                                   IReplacesNode replacer,
-                                                  IOmitsNode omitter)
+                                                  IOmitsNode omitter,
+                                                  ILogger<ContentOrReplaceAttributeDecorator> logger)
         {
             this.wrapped = wrapped ?? throw new ArgumentNullException(nameof(wrapped));
             this.specProvider = specProvider ?? throw new ArgumentNullException(nameof(specProvider));
             this.evaluator = evaluator ?? throw new ArgumentNullException(nameof(evaluator));
             this.replacer = replacer ?? throw new ArgumentNullException(nameof(replacer));
             this.omitter = omitter ?? throw new ArgumentNullException(nameof(omitter));
+            this.logger = logger ?? throw new ArgumentNullException(nameof(logger));
         }
     }
 }
