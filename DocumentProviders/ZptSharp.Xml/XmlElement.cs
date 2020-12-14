@@ -125,13 +125,7 @@ namespace ZptSharp.Dom
         /// <returns>The parsed nodes.</returns>
         /// <param name="markup">Markup text.</param>
         public override IList<INode> ParseAsNodes(string markup)
-        {
-            var rootNode = XElement.Parse(String.Concat("<ZptSharpParsingRoot>", markup ?? String.Empty, "</ZptSharpParsingRoot>"));
-            return rootNode.Nodes()
-                .Where(x => !(x is XText textNode) || textNode.Value.Length > 0)
-                .Select(x => new XmlElement(x, (XmlDocument) Document))
-                .ToArray();
-        }
+            => new[] { new XmlElement(XElement.Parse(markup ?? String.Empty), (XmlDocument)Document) };
 
         /// <summary>
         /// Creates and returns a new attribute from the specified specification.
