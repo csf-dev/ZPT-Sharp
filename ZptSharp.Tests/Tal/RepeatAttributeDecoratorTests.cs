@@ -103,11 +103,15 @@ namespace ZptSharp.Tal
 
             var result = await sut.ProcessContextAsync(context);
 
-            Assert.That(result?.AdditionalContexts,
-                        Has.Count.EqualTo(5)
-                        .And.Contains(repetition1)
-                        .And.Contains(repetition2)
-                        .And.Contains(repetition3));
+            var expected = new[] {
+                repetition1,
+                It.Is<ExpressionContext>(c => c.CurrentElement == newline),
+                repetition2,
+                It.Is<ExpressionContext>(c => c.CurrentElement == newline),
+                repetition3,
+            };
+
+            Assert.That(result?.AdditionalContexts, Is.EqualTo(expected));
         }
 
         [Test, AutoMoqData]
@@ -121,7 +125,6 @@ namespace ZptSharp.Tal
                                                                                                  [StubDom] ExpressionContext context,
                                                                                                  object expressionResult,
                                                                                                  IList<ExpressionContext> contexts,
-                                                                                                 INode newline,
                                                                                                  [StubDom] INode parent)
         {
             Mock.Get(specProvider).SetupGet(x => x.Repeat).Returns(spec);
@@ -140,9 +143,6 @@ namespace ZptSharp.Tal
             Mock.Get(contextProvider)
                 .Setup(x => x.GetRepetitionContexts(expressionResult, context, "varName"))
                 .Returns(contexts);
-            Mock.Get(context.CurrentElement)
-                .Setup(x => x.CreateTextNode(Environment.NewLine))
-                .Returns(newline);
 
             var result = await sut.ProcessContextAsync(context);
 
