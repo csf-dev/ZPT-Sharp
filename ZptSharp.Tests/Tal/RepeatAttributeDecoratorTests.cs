@@ -65,20 +65,17 @@ namespace ZptSharp.Tal
         }
 
         [Test, AutoMoqData]
-        public async Task ProcessContextAsync_returns_contexts_from_service_separated_by_newline_contexts_when_repetitions_exist([Frozen] IGetsTalAttributeSpecs specProvider,
-                                                                                                                                 [Frozen] IEvaluatesExpression evaluator,
-                                                                                                                                 [Frozen] IInterpretsExpressionResult resultInterpreter,
-                                                                                                                                 [Frozen] IGetsRepetitionContexts contextProvider,
-                                                                                                                                 RepeatAttributeDecorator sut,
-                                                                                                                                 AttributeSpec spec,
-                                                                                                                                 [StubDom] IAttribute attribute,
-                                                                                                                                 [StubDom] ExpressionContext context,
-                                                                                                                                 object expressionResult,
-                                                                                                                                 ExpressionContext repetition1,
-                                                                                                                                 ExpressionContext repetition2,
-                                                                                                                                 ExpressionContext repetition3,
-                                                                                                                                 INode newline,
-                                                                                                                                 [StubDom] INode parent)
+        public async Task ProcessContextAsync_returns_contexts_from_service_when_repetitions_exist([Frozen] IGetsTalAttributeSpecs specProvider,
+                                                                                                   [Frozen] IEvaluatesExpression evaluator,
+                                                                                                   [Frozen] IInterpretsExpressionResult resultInterpreter,
+                                                                                                   [Frozen] IGetsRepetitionContexts contextProvider,
+                                                                                                   RepeatAttributeDecorator sut,
+                                                                                                   AttributeSpec spec,
+                                                                                                   [StubDom] IAttribute attribute,
+                                                                                                   [StubDom] ExpressionContext context,
+                                                                                                   object expressionResult,
+                                                                                                   IList<ExpressionContext> contexts,
+                                                                                                   [StubDom] INode parent)
         {
             Mock.Get(specProvider).SetupGet(x => x.Repeat).Returns(spec);
             context.CurrentElement.Attributes.Clear();
@@ -93,25 +90,13 @@ namespace ZptSharp.Tal
             Mock.Get(resultInterpreter)
                 .Setup(x => x.DoesResultAbortTheAction(expressionResult))
                 .Returns(false);
-            var contexts = new[] { repetition1, repetition2, repetition3 };
             Mock.Get(contextProvider)
                 .Setup(x => x.GetRepetitionContexts(expressionResult, context, "varName"))
                 .Returns(contexts);
-            Mock.Get(context.CurrentElement)
-                .Setup(x => x.CreateTextNode(Environment.NewLine))
-                .Returns(newline);
 
             var result = await sut.ProcessContextAsync(context);
 
-            var expected = new[] {
-                repetition1,
-                It.Is<ExpressionContext>(c => c.CurrentElement == newline),
-                repetition2,
-                It.Is<ExpressionContext>(c => c.CurrentElement == newline),
-                repetition3,
-            };
-
-            Assert.That(result?.AdditionalContexts, Is.EqualTo(expected));
+            Assert.That(result?.AdditionalContexts, Is.EqualTo(contexts));
         }
 
         [Test, AutoMoqData]

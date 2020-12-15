@@ -108,6 +108,8 @@ namespace ZptSharp.Tal
                 .Select(repetition => GetContext(repetition, sourceContext))
                 .ToList();
 
+            contexts = GetWhitespaceSeparatedContexts(contexts, sourceContext, repetitions.FirstOrDefault()?.Name).ToList();
+
             AddContextsToParent(contexts, parent, indexOnParent);
 
             return contexts;
@@ -137,6 +139,31 @@ namespace ZptSharp.Tal
                 context.CurrentElement.Attributes.Remove(duplicateRepeatAttribute);
 
             return context;
+        }
+
+        /// <summary>
+        /// Contexts returned as a result of a repeat attribute need to be separated by whitespace, so that
+        /// they are not bunched up.  This doesn't usually matter for elements, which are generally
+        /// whitespace-neutral anyway, but it's important if we are omitting the element and just using
+        /// text nodes.
+        /// </summary>
+        /// <returns>The whitespace separated contexts.</returns>
+        /// <param name="contexts">Contexts.</param>
+        /// <param name="originalContext">Context.</param>
+        /// <param name="variableName">Repetition variable name</param>
+        IEnumerable<ExpressionContext> GetWhitespaceSeparatedContexts(IList<ExpressionContext> contexts,
+                                                                      ExpressionContext originalContext,
+                                                                      string variableName)
+        {
+            for (var i = 0; i < contexts.Count; i++)
+            {
+                yield return contexts[i];
+                if (i == contexts.Count - 1) continue;
+
+                var whitespace = originalContext.CreateChild(originalContext.CurrentElement.CreateTextNode(Environment.NewLine));
+                whitespace.LocalDefinitions.Add(variableName, null);
+                yield return whitespace;
+            }
         }
 
         /// <summary>

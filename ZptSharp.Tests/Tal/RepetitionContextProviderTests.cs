@@ -31,16 +31,17 @@ namespace ZptSharp.Tal
         }
 
         [Test, AutoMoqData]
-        public void GetRepetitionContexts_returns_collection_of_repetitions_with_correct_values(RepetitionContextProvider sut,
-                                                                                                [StubDom] ExpressionContext sourceContext,
-                                                                                                string repeatVariableName,
-                                                                                                string value1,
-                                                                                                string value2,
-                                                                                                string value3,
-                                                                                                [StubDom] INode node1,
-                                                                                                [StubDom] INode node2,
-                                                                                                [StubDom] INode node3,
-                                                                                                [StubDom] INode parent)
+        public void GetRepetitionContexts_returns_collection_of_repetitions_separated_by_whitespace(RepetitionContextProvider sut,
+                                                                                                    [StubDom] ExpressionContext sourceContext,
+                                                                                                    string repeatVariableName,
+                                                                                                    string value1,
+                                                                                                    string value2,
+                                                                                                    string value3,
+                                                                                                    [StubDom] INode node1,
+                                                                                                    [StubDom] INode node2,
+                                                                                                    [StubDom] INode node3,
+                                                                                                    [StubDom] INode parent,
+                                                                                                    INode newline)
         {
             Mock.Get(sourceContext.CurrentElement)
                 .SetupSequence(x => x.GetCopy())
@@ -50,14 +51,17 @@ namespace ZptSharp.Tal
             sourceContext.CurrentElement.ParentElement = parent;
             parent.ChildNodes.Add(sourceContext.CurrentElement);
             var enumerable = new[] { value1, value2, value3 };
+            Mock.Get(sourceContext.CurrentElement)
+                .Setup(x => x.CreateTextNode(Environment.NewLine))
+                .Returns(newline);
 
             var result = sut.GetRepetitionContexts(enumerable, sourceContext, repeatVariableName);
 
             Assert.That(result?.Select(x => x.LocalDefinitions[repeatVariableName]).ToList(),
-                        Is.EqualTo(new[] { value1, value2, value3 }),
+                        Is.EqualTo(new[] { value1, It.IsAny<object>(), value2, It.IsAny<object>(), value3 }),
                         "Repeat variable values are correct");
             Assert.That(result?.Select(x => x.CurrentElement).ToList(),
-                        Is.EqualTo(new[] { node1, node2, node3 }),
+                        Is.EqualTo(new[] { node1, newline, node2, newline, node3 }),
                         "Elements are correct");
         }
 
