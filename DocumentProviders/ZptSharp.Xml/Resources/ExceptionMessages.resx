@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+    <resheader name="resmimetype">
+        <value>text/microsoft-resx</value>
+    </resheader>
+    <resheader name="version">
+        <value>2.0</value>
+    </resheader>
+    <resheader name="reader">
+        <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </resheader>
+    <resheader name="writer">
+        <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </resheader>
+    <data name="InvalidUri" xml:space="preserve">
+        <value>The Uri must be for an XHTML DTD, entity or module, using w3.org's base URI.</value>
+    </data>
+    <data name="UnsupportedEntity" xml:space="preserve">
+        <value>The {0} only supports resolution for well-known XHTML DTDs and supporting resources.
+For security reasons, resolution of all other resources is prohibited; see the following for more
+information as why this decision was taken.
+
+    https://docs.microsoft.com/en-us/dotnet/api/system.xml.xmlreadersettings?view=net-5.0#security-considerations
+
+The most likely reason to see this error is because there is an error in your XML, whereby it uses an
+unsupported entity.  The second most likely is that you are trying to read an XLM document which uses a DTD
+other than XHTML.  In this case you must write &amp; provide your own implementation of {1} via the {2}.
+        </value>
+    </data>
+</root>

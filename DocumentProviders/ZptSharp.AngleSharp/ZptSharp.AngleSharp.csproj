@@ -1,17 +1,17 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
+  <Import Project="..\..\Tools\CommonSolutionProperties.props" />
+    
   <PropertyGroup>
     <PackageId>ZptSharp.AngleSharp</PackageId>
     <Title>ZptSharp AngleSharp integration</Title>
     <Description>Add-on for ZptSharp which allows it to work with HTML documents by using the AngleSharp library.</Description>
-    <TargetFrameworks>netstandard2.0;netstandard2.1;net48;net47;net46</TargetFrameworks>
+    <TargetFrameworks>$(CommonTargetFrameworks)</TargetFrameworks>
     <RootNamespace>ZptSharp.Dom</RootNamespace>
     <ReleaseVersion>2.0.0</ReleaseVersion>
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>..\..\Tools\CSF-Software-OSS.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
-    
-  <Import Project="..\..\Tools\CommonSolutionProperties.targets" />
     
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <CheckForOverflowUnderflow>true</CheckForOverflowUnderflow>

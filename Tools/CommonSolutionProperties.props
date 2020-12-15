@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    
+    <!--
+        This project file contains build properties which
+        are common amongst all of the projects in the solution.
+        It should be included by the .csproj file, anywhere AFTER
+        the ReleaseVersion property is defined.
+    -->
+    
+    <PropertyGroup>
+        <!--
+            These target frameworks are the absolute minimum
+            that all libraries in this solutions support.
+        -->
+        <CommonTargetFrameworks>netstandard2.0;netstandard2.1;net461;net46</CommonTargetFrameworks>
+        
+        <!-- Some projects also support net45 and net452 -->
+        <Net45TargetFrameworks>net45;net452</Net45TargetFrameworks>
+        
+        <Authors>craigfowler</Authors>
+        <VersionPrefix>$(ReleaseVersion)</VersionPrefix>
+        <PackageLicenseExpression>MIT</PackageLicenseExpression>
+        <Copyright>Copyright 2020 - ZptSharp contributors</Copyright>
+        <PackageProjectUrl>https://github.com/csf-dev/ZPT-Sharp/</PackageProjectUrl>
+        <RepositoryUrl>$(PackageProjectUrl)</RepositoryUrl>
+    </PropertyGroup>
+</Project>

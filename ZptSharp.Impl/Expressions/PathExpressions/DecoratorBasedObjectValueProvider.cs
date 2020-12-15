@@ -17,25 +17,11 @@ namespace ZptSharp.Expressions.PathExpressions
     /// </summary>
     public class DecoratorBasedObjectValueProvider : IGetsValueFromObject
     {
-        /// <summary>
-        /// Gets the rendering configuration.
-        /// </summary>
-        protected readonly RenderingConfig config;
-
-        /// <summary>
-        /// Gets the builtin contexts provider factory.
-        /// </summary>
-        protected readonly IGetsBuiltinContextsProvider builtinContextsProviderFactory;
-
-        /// <summary>
-        /// Gets the document reader/writer.
-        /// </summary>
-        protected readonly Dom.IReadsAndWritesDocument readerWriter;
-
-        /// <summary>
-        /// Gets the METAL document adapter factory.
-        /// </summary>
-        protected readonly Metal.IGetsMetalDocumentAdapter adapterFactory;
+        readonly RenderingConfig config;
+        readonly IGetsBuiltinContextsProvider builtinContextsProviderFactory;
+        readonly Dom.IReadsAndWritesDocument readerWriter;
+        readonly Metal.IGetsMetalDocumentAdapter adapterFactory;
+        readonly RootScopeLimitation scopeLimitation;
 
         /// <summary>
         /// Attempts to get a value for a named reference, from the specified object.
@@ -64,7 +50,7 @@ namespace ZptSharp.Expressions.PathExpressions
         /// </para>
         /// </summary>
         /// <returns>The chain of responsibility.</returns>
-        protected virtual IGetsValueFromObject BuildChainOfResponsibility()
+        IGetsValueFromObject BuildChainOfResponsibility()
         {
             // Note that this is written "upside down".  The services are actually executed in
             // last-to-first order.  Each service wraps (and thus gets a chance to execute
@@ -87,7 +73,7 @@ namespace ZptSharp.Expressions.PathExpressions
         /// other service in the chain has failed to return a conclusive result.
         /// </summary>
         /// <returns>The failure service.</returns>
-        protected virtual IGetsValueFromObject GetFailureService() => new FailureValueProvider();
+        IGetsValueFromObject GetFailureService() => new FailureValueProvider();
 
         /// <summary>
         /// Gets a decorator which pre-processes the 2nd parameter to
@@ -97,15 +83,30 @@ namespace ZptSharp.Expressions.PathExpressions
         /// </summary>
         /// <returns>The context-wrapping decorator.</returns>
         /// <param name="service">Service.</param>
-        protected virtual IGetsValueFromObject GetContextWrappingDecorator(IGetsValueFromObject service)
-            => new ExpressionContextWrappingDecorator(config, builtinContextsProviderFactory, service);
+        IGetsValueFromObject GetContextWrappingDecorator(IGetsValueFromObject service)
+        {
+            switch(scopeLimitation)
+            {
+                case RootScopeLimitation.GlobalVariablesOnly:
+                    return new GlobalVariableOnlyExpressionContextWrappingDecorator(service);
+
+                case RootScopeLimitation.LocalVariablesOnly:
+                    return new LocalVariableOnlyExpressionContextWrappingDecorator(service);
+
+                case RootScopeLimitation.DefinedVariablesOnly:
+                    return new DefinedVariablesOnlyExpressionContextWrappingDecorator(service);
+
+                default:
+                    return new ExpressionContextWrappingDecorator(config, builtinContextsProviderFactory, service);
+            }
+        }
 
         /// <summary>
         /// Gets a chain-of-responsibility link which processes named values.
         /// </summary>
         /// <returns>The chain of responsibility link.</returns>
         /// <param name="service">The service to be wrapped by this additional link.</param>
-        protected virtual IGetsValueFromObject GetNamedValueLink(IGetsValueFromObject service)
+        IGetsValueFromObject GetNamedValueLink(IGetsValueFromObject service)
             => new NamedTalesValueProvider(service);
 
         /// <summary>
@@ -113,7 +114,7 @@ namespace ZptSharp.Expressions.PathExpressions
         /// </summary>
         /// <returns>The chain of responsibility link.</returns>
         /// <param name="service">The service to be wrapped by this additional link.</param>
-        protected virtual IGetsValueFromObject GetStringKeyedDictionaryValueLink(IGetsValueFromObject service)
+        IGetsValueFromObject GetStringKeyedDictionaryValueLink(IGetsValueFromObject service)
             => new StringKeyedDictionaryValueProvider(service);
 
         /// <summary>
@@ -121,7 +122,7 @@ namespace ZptSharp.Expressions.PathExpressions
         /// </summary>
         /// <returns>The chain of responsibility link.</returns>
         /// <param name="service">The service to be wrapped by this additional link.</param>
-        protected virtual IGetsValueFromObject GetIntegerKeyedDictionaryValueLink(IGetsValueFromObject service)
+        IGetsValueFromObject GetIntegerKeyedDictionaryValueLink(IGetsValueFromObject service)
             => new IntegerKeyedDictionaryValueProvider(service);
 
         /// <summary>
@@ -129,7 +130,7 @@ namespace ZptSharp.Expressions.PathExpressions
         /// </summary>
         /// <returns>The chain of responsibility link.</returns>
         /// <param name="service">The service to be wrapped by this additional link.</param>
-        protected virtual IGetsValueFromObject GetDynamicValueLink(IGetsValueFromObject service)
+        IGetsValueFromObject GetDynamicValueLink(IGetsValueFromObject service)
             => new DynamicObjectValueProvider(service);
 
         /// <summary>
@@ -137,7 +138,7 @@ namespace ZptSharp.Expressions.PathExpressions
         /// </summary>
         /// <returns>The chain of responsibility link.</returns>
         /// <param name="service">The service to be wrapped by this additional link.</param>
-        protected virtual IGetsValueFromObject GetEnumerableValueLink(IGetsValueFromObject service)
+        IGetsValueFromObject GetEnumerableValueLink(IGetsValueFromObject service)
             => new EnumerableValueProvider(service);
 
         /// <summary>
@@ -145,7 +146,7 @@ namespace ZptSharp.Expressions.PathExpressions
         /// </summary>
         /// <returns>The chain of responsibility link.</returns>
         /// <param name="service">The service to be wrapped by this additional link.</param>
-        protected virtual IGetsValueFromObject GetReflectionValueLink(IGetsValueFromObject service)
+        IGetsValueFromObject GetReflectionValueLink(IGetsValueFromObject service)
             => new ReflectionObjectValueProvider(service);
 
         /// <summary>
@@ -153,7 +154,7 @@ namespace ZptSharp.Expressions.PathExpressions
         /// </summary>
         /// <returns>The chain of responsibility link.</returns>
         /// <param name="service">The service to be wrapped by this additional link.</param>
-        protected virtual IGetsValueFromObject GetTemplateDirectoryValueLink(IGetsValueFromObject service)
+        IGetsValueFromObject GetTemplateDirectoryValueLink(IGetsValueFromObject service)
             => new TemplateDirectoryValueProvider(service, readerWriter, config, adapterFactory);
 
         /// <summary>
@@ -163,15 +164,18 @@ namespace ZptSharp.Expressions.PathExpressions
         /// <param name="builtinContextsProviderFactory">Builtin contexts provider factory.</param>
         /// <param name="readerWriter">A document reader/writer.</param>
         /// <param name="adapterFactory">A METAL document adapter factory.</param>
+        /// <param name="scopeLimitation">The manner in which the root scope is limited</param>
         public DecoratorBasedObjectValueProvider(RenderingConfig config,
                                                  IGetsBuiltinContextsProvider builtinContextsProviderFactory,
                                                  Dom.IReadsAndWritesDocument readerWriter,
-                                                 Metal.IGetsMetalDocumentAdapter adapterFactory)
+                                                 Metal.IGetsMetalDocumentAdapter adapterFactory,
+                                                 RootScopeLimitation scopeLimitation)
         {
             this.config = config ?? throw new ArgumentNullException(nameof(config));
             this.builtinContextsProviderFactory = builtinContextsProviderFactory ?? throw new ArgumentNullException(nameof(builtinContextsProviderFactory));
             this.readerWriter = readerWriter ?? throw new ArgumentNullException(nameof(readerWriter));
             this.adapterFactory = adapterFactory ?? throw new ArgumentNullException(nameof(adapterFactory));
+            this.scopeLimitation = scopeLimitation;
         }
     }
 }

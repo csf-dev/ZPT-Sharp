@@ -71,6 +71,8 @@ namespace ZptSharp.Tal
             if (attribute == null)
                 return ErrorHandlingResult.Failure;
 
+            context.Error = new OnErrorExceptionAdapter(ex);
+
             try
             {
                 var result = await ProcessErroredContextAsync(context, ex, attribute.Value, token)

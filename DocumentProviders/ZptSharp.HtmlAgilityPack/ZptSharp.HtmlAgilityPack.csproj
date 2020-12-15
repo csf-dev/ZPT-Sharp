@@ -1,17 +1,17 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
+  <Import Project="..\..\Tools\CommonSolutionProperties.props" />
+    
   <PropertyGroup>
     <PackageId>ZptSharp.HtmlAgilityPack</PackageId>
     <Title>ZptSharp HTML Agility Pack integration</Title>
     <Description>Add-on for ZptSharp which allows it to work with HTML documents by using the HTML Agility Pack (HAP) library.</Description>
-    <TargetFrameworks>netstandard2.0;netstandard2.1;net48;net47;net46;net45</TargetFrameworks>
+    <TargetFrameworks>$(CommonTargetFrameworks);$(Net45TargetFrameworks)</TargetFrameworks>
     <RootNamespace>ZptSharp.Dom</RootNamespace>
     <ReleaseVersion>2.0.0</ReleaseVersion>
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>..\..\Tools\CSF-Software-OSS.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
-    
-  <Import Project="..\..\Tools\CommonSolutionProperties.targets" />
     
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <CheckForOverflowUnderflow>true</CheckForOverflowUnderflow>
@@ -29,7 +29,7 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" Version="1.0.0" PrivateAssets="All" Condition="'$(TargetFramework.TrimEnd(`0123456789`))' == 'net'" />
-    <PackageReference Include="HtmlAgilityPack" Version="1.6.17" />
+    <PackageReference Include="HtmlAgilityPack" Version="1.11.28" />
     <PackageReference Include="CSF.Collections.EventRaising" Version="1.1.0" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="1.1.1" />
   </ItemGroup>

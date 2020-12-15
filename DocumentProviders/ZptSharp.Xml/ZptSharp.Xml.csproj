@@ -1,17 +1,17 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
+  <Import Project="..\..\Tools\CommonSolutionProperties.props" />
+    
   <PropertyGroup>
     <PackageId>ZptSharp.Xml</PackageId>
     <Title>ZptSharp XML document support</Title>
     <Description>Add-on for ZptSharp which allows it to work with XML documents.</Description>
-    <TargetFrameworks>netstandard2.0;netstandard2.1;net48;net47;net46;net45</TargetFrameworks>
+    <TargetFrameworks>$(CommonTargetFrameworks);$(Net45TargetFrameworks)</TargetFrameworks>
     <RootNamespace>ZptSharp.Dom</RootNamespace>
     <ReleaseVersion>2.0.0</ReleaseVersion>
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>..\..\Tools\CSF-Software-OSS.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
-    
-  <Import Project="..\..\Tools\CommonSolutionProperties.targets" />
     
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <CheckForOverflowUnderflow>true</CheckForOverflowUnderflow>
@@ -32,5 +32,27 @@
     <PackageReference Include="CSF.Collections.EventRaising" Version="1.1.0" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="1.1.1" />
     <PackageReference Include="System.ValueTuple" Version="4.5.0" Condition="'$(TargetFramework.TrimEnd(`45612`))' == 'net'" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Resources\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="Resources\*.dtd" />
+    <None Remove="Resources\*.ent" />
+    <None Remove="Resources\*.mod" />
+    <EmbeddedResource Include="Resources\*.dtd" />
+    <EmbeddedResource Include="Resources\*.ent" />
+    <EmbeddedResource Include="Resources\*.mod" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Update="Resources\ExceptionMessages.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>ExceptionMessages.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Update="Resources\ExceptionMessages.Designer.cs">
+      <DependentUpon>ExceptionMessages.resx</DependentUpon>
+    </Compile>
   </ItemGroup>
 </Project>

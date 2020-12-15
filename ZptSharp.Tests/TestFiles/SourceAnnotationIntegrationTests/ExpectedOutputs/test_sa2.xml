@@ -5,7 +5,7 @@ SourceDocuments/test_sa2.xml
 ==============================================================================
 -->
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "DTD/xhtml1-transitional.dtd"[]>
-<html>
+<html xmlns="http://www.w3.org/1999/xhtml">
 <title>Simple test of source annotations</title>
 <body>
 <p>Foo!</p>

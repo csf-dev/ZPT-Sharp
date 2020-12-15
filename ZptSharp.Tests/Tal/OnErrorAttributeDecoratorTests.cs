@@ -133,5 +133,44 @@ namespace ZptSharp.Tal
             Assert.That(() => sut.ProcessContextAsync(context).Result,
                         Throws.InstanceOf<AggregateException>().And.InnerException.InstanceOf<OnErrorHandlingException>());
         }
+
+
+        [Test, AutoMoqData]
+        public async Task ProcessContextAsync_sets_error_object_into_context_when_it_catches_an_error([Frozen] IHandlesProcessingError wrapped,
+                                                                                                      [Frozen] IGetsTalAttributeSpecs specProvider,
+                                                                                                      [Frozen] IEvaluatesDomValueExpression evaluator,
+                                                                                                      OnErrorAttributeDecorator sut,
+                                                                                                      AttributeSpec spec,
+                                                                                                      [StubDom] ExpressionContext context,
+                                                                                                      [StubDom] IAttribute attribute,
+                                                                                                      string expression,
+                                                                                                      [StubDom] INode existingChild,
+                                                                                                      [StubDom] INode replacement)
+        {
+            var exception = new InvalidOperationException("Sample exception");
+
+            Mock.Get(wrapped)
+                .Setup(x => x.ProcessContextAsync(context, CancellationToken.None))
+                .Throws(exception);
+            Mock.Get(specProvider).SetupGet(x => x.OnError).Returns(spec);
+            context.CurrentElement.Attributes.Clear();
+            context.CurrentElement.Attributes.Add(attribute);
+            Mock.Get(attribute).Setup(x => x.Matches(spec)).Returns(true);
+            Mock.Get(attribute).SetupGet(x => x.Value).Returns(expression);
+            Mock.Get(evaluator)
+                .Setup(x => x.EvaluateExpressionAsync(expression, context, CancellationToken.None))
+                .Returns(() => Task.FromResult(new DomValueExpressionResult(new[] { replacement })));
+            context.CurrentElement.ChildNodes.Clear();
+            context.CurrentElement.ChildNodes.Add(existingChild);
+
+            await sut.ProcessContextAsync(context);
+
+            Assert.That(context.Error, Is.InstanceOf<OnErrorExceptionAdapter>(), "Object is of correct type");
+            Assert.That(() => (OnErrorExceptionAdapter) context.Error,
+                        Has.Property("type").EqualTo(typeof(InvalidOperationException))
+                       .And.Property("value").SameAs(exception)
+                       .And.Property("traceback").EqualTo(exception.StackTrace));
+        }
+
     }
 }

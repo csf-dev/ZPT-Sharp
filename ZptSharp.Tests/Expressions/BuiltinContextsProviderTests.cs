@@ -128,5 +128,28 @@ namespace ZptSharp.Expressions
             Assert.That(result, Has.Property(nameof(GetValueResult.Success)).True
                                 .And.Property(nameof(GetValueResult.Value)).SameAs(container));
         }
+
+        [Test, AutoMoqData]
+        public async Task TryGetValueAsync_returns_error_object_if_it_is_set_when_it_is_requested(object error,
+                                                                                            [Frozen, NoAutoProperties] ExpressionContext context,
+                                                                                            [Frozen, MockedConfig] RenderingConfig config,
+                                                                                            [Frozen, MetalDocAdapter] IGetsMetalDocumentAdapter metalDocumentAdapterFactory,
+                                                                                            BuiltinContextsProvider sut)
+        {
+            context.Error = error;
+            var result = await sut.TryGetValueAsync(BuiltinContextsProvider.Error);
+            Assert.That(result.Success, Is.True, "Value returned successfully");
+            Assert.That(result.Value, Is.SameAs(error), "Error object returned");
+        }
+
+        [Test, AutoMoqData]
+        public async Task TryGetValueAsync_returns_failure_if_it_is_unset_when_error_is_requested([Frozen, NoAutoProperties] ExpressionContext context,
+                                                                                            [Frozen, MockedConfig] RenderingConfig config,
+                                                                                            [Frozen, MetalDocAdapter] IGetsMetalDocumentAdapter metalDocumentAdapterFactory,
+                                                                                            BuiltinContextsProvider sut)
+        {
+            var result = await sut.TryGetValueAsync(BuiltinContextsProvider.Error);
+            Assert.That(result.Success, Is.False);
+        }
     }
 }

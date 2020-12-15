@@ -51,7 +51,7 @@ namespace ZptSharp.Tal
             var spec = new AttributeSpec(definition.Name, new Namespace(definition.Prefix));
             var existingAttribute = element.GetMatchingAttribute(spec);
 
-            if (expressionResult == null)
+            if (expressionResult == null || Equals(expressionResult, false))
             {
                 if(existingAttribute != null)
                     element.Attributes.Remove(existingAttribute);
@@ -60,7 +60,9 @@ namespace ZptSharp.Tal
             }
 
             var attribute = existingAttribute ?? element.CreateAttribute(spec);
-            attribute.Value = expressionResult.ToString();
+            if (Equals(expressionResult, true)) attribute.Value = attribute.Name;
+            else attribute.Value = expressionResult.ToString();
+
             if (!element.Attributes.Contains(attribute))
                 element.Attributes.Add(attribute);
         }

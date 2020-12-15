@@ -62,6 +62,11 @@ namespace ZptSharp.Expressions
         public static readonly string Container = "container";
 
         /// <summary>
+        /// An identifier/alias for getting an error object which was encountered whilst processing a context.
+        /// </summary>
+        public static readonly string Error = "error";
+
+        /// <summary>
         /// Attempts to get a value for a named reference, relative to the current instance.
         /// </summary>
         /// <returns>An object indicating whether a value was successfully retrieved or not, along with the retrieved value (if applicable).</returns>
@@ -89,7 +94,7 @@ namespace ZptSharp.Expressions
         {
             get
             {
-                return new Dictionary<string, Func<object>>
+                var output = new Dictionary<string, Func<object>>
                 {
                     { Here, () => context.Model },
                     { Repeat, () => context.Repetitions },
@@ -100,6 +105,11 @@ namespace ZptSharp.Expressions
                     { Template, GetMetalDocumentAdapter },
                     { Container, GetTemplateContainer },
                 };
+
+                if (context.Error != null)
+                    output[Error] = () => context.Error;
+
+                return output;
             }
         }
 
