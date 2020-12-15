@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
@@ -45,6 +47,8 @@ namespace ZptSharp.Tal
                                                                  context,
                                                                  parsedAttribute.VariableName);
 
+            var separatedContexts = GetWhitespaceSeparatedContexts(contexts, context).ToList();
+
             // With a repeat attribute, we actually don't process the
             // current/existing context, because we end up cloning it
             // for each repetition.  The current context is used only
@@ -52,9 +56,29 @@ namespace ZptSharp.Tal
             // children.
             context.CurrentElement.Remove();
             var result = ExpressionContextProcessingResult.WithoutChildren;
-            result.AdditionalContexts = contexts;
+            result.AdditionalContexts = separatedContexts;
 
             return result;
+        }
+
+        /// <summary>
+        /// Contexts returned as a result of a repeat attribute need to be separated by whitespace, so that
+        /// they are not bunched up.  This doesn't usually matter for elements, which are generally
+        /// whitespace-neutral anyway, but it's important if we are omitting the element and just using
+        /// text nodes.
+        /// </summary>
+        /// <returns>The whitespace separated contexts.</returns>
+        /// <param name="contexts">Contexts.</param>
+        /// <param name="context">Context.</param>
+        IEnumerable<ExpressionContext> GetWhitespaceSeparatedContexts(IList<ExpressionContext> contexts,
+                                                                      ExpressionContext context)
+        {
+            for(var i = 0; i < contexts.Count; i++)
+            {
+                yield return contexts[i];
+                if (i == contexts.Count - 1) continue;
+                yield return context.CreateChild(context.CurrentElement.CreateTextNode(Environment.NewLine));
+            }
         }
 
         /// <summary>
