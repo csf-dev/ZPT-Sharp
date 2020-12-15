@@ -61,7 +61,8 @@ namespace ZptSharp.Expressions.PathExpressions
                     var pathEvaluationContext = PathEvaluationContext.CreateRoot(context);
                     return await walkingEvaluator.WalkAndEvaluatePathExpressionAsync(alternateExpression,
                                                                                      pathEvaluationContext,
-                                                                                     token);
+                                                                                     token)
+                        .ConfigureAwait(false);
                 }
                 catch (Exception ex)
                 {

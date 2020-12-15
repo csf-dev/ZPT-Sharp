@@ -16,8 +16,6 @@ namespace ZptSharp.Expressions
             odd = "odd",
             start = "start",
             end = "end",
-            first = "first",
-            last = "last",
             length = "length",
             letter = "letter",
             Letter = "Letter",

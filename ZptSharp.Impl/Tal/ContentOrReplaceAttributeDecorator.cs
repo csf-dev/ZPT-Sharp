@@ -88,18 +88,17 @@ namespace ZptSharp.Tal
                 MoveTalAttributesToReplacementNodesWhereApplicable(childNodeContexts, context);
                 omitter.Omit(context.CurrentElement);
 
-                return await GetReplacementResultAsync(context, childNodeContexts, token).ConfigureAwait(false);
+                return await GetReplacementResultAsync(childNodeContexts, token).ConfigureAwait(false);
             }
 
             var replacementContexts = context.CreateChildren(domResult.Nodes);
             MoveTalAttributesToReplacementNodesWhereApplicable(replacementContexts, context);
             replacer.Replace(context.CurrentElement, domResult.Nodes);
 
-            return await GetReplacementResultAsync(context, replacementContexts, token).ConfigureAwait(false);
+            return await GetReplacementResultAsync(replacementContexts, token).ConfigureAwait(false);
         }
 
-        async Task<ExpressionContextProcessingResult> GetReplacementResultAsync(ExpressionContext originalContext,
-                                                                                IList<ExpressionContext> replacementContexts,
+        async Task<ExpressionContextProcessingResult> GetReplacementResultAsync(IList<ExpressionContext> replacementContexts,
                                                                                 CancellationToken token)
         {
             if (logger.IsEnabled(LogLevel.Trace))
