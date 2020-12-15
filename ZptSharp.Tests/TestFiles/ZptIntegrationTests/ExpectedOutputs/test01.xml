@@ -19,9 +19,11 @@
 
     <p>
       honda
-    </p><p>
+    </p>
+<p>
       subaru
-    </p><p>
+    </p>
+<p>
       acura
     </p>
 
@@ -32,9 +34,11 @@
     <ul>
     <span>
       <li>honda</li>
-    </span><span>
+    </span>
+<span>
       <li>subaru</li>
-    </span><span>
+    </span>
+<span>
       <li>acura</li>
     </span>
     </ul>
