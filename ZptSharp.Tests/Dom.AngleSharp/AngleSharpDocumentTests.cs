@@ -20,7 +20,7 @@ namespace ZptSharp.Dom
 
             sut.AddCommentToBeginningOfDocument("This is a comment");
 
-            Assert.That(GetHtml(sut.NativeDocument), Is.EqualTo("<!--This is a comment--><html><body><div>Hello</div></body></html>"));
+            Assert.That(GetHtml(sut.NativeDocument), Is.EqualTo("<!--This is a comment--><html><head></head><body><div>Hello</div></body></html>"));
         }
 
         AngleSharpDocument GetSut(string html)
@@ -30,6 +30,6 @@ namespace ZptSharp.Dom
             return new AngleSharpDocument(doc, new UnknownSourceInfo());
         }
 
-        string GetHtml(IHtmlDocument native) => native.DocumentElement.OuterHtml;
+        string GetHtml(IHtmlDocument native) => native.ToHtml();
     }
 }

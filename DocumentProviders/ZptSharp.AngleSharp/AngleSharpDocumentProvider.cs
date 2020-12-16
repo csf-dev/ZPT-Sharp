@@ -40,6 +40,7 @@ namespace ZptSharp.Dom
         /// <param name="filenameOrPath">The filename of a ZPT document.</param>
         public override bool CanReadWriteForFilename(string filenameOrPath)
         {
+            if (String.IsNullOrEmpty(filenameOrPath)) return false;
             var extension = new FileInfo(filenameOrPath).Extension;
             return supportedExtensions.Any(x => String.Equals(extension, x, StringComparison.InvariantCultureIgnoreCase));
         }
