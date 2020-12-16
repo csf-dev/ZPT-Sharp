@@ -19,7 +19,8 @@ namespace ZptSharp.IntegrationTests
         {
             var services = new ServiceCollection()
                 .AddZptSharp()
-                .AddHapZptDocuments()
+                // .AddHapZptDocuments()
+                .AddAngleSharpZptDocuments()
                 .AddXmlZptDocuments()
                 .AddZptPythonExpressions()
                 .AddLogging(b => {
@@ -33,7 +34,8 @@ namespace ZptSharp.IntegrationTests
 
             var provider = services.BuildServiceProvider();
             provider
-                .UseHapZptDocuments()
+                // .UseHapZptDocuments()
+                .UseAngleSharpZptDocuments()
                 .UseXmlZptDocuments()
                 .UseStandardZptExpressions()
                 .UseZptPythonExpressions()
