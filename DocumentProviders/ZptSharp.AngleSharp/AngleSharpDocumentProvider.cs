@@ -30,7 +30,7 @@ namespace ZptSharp.Dom
         /// <summary>This matches the default buffer size for a built-in <see cref="StreamWriter"/>.</summary>
         const int BufferSize = 1024;
 
-        readonly IHtmlParser parser = new HtmlParser();
+        readonly IHtmlParser parser = new HtmlParser(new HtmlParserOptions { IsKeepingSourceReferences = true });
 
         /// <summary>
         /// Gets whether or not the current instance may be used to read &amp; write documents

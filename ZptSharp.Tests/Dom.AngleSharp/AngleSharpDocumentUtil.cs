@@ -13,22 +13,19 @@ namespace ZptSharp.Dom
 {
     public static class AngleSharpDocumentUtil
     {
-        const string emptyHtml = @"<html>
-<head>
-<title></title>
-</head>
-<body>
-</body>
-</html>";
+        const string emptyHtml = @"<html><head></head><body></body></html>";
 
         static readonly AngleSharpDocumentProvider provider = new AngleSharpDocumentProvider();
 
         /// <summary>
         /// Gets a single HTML element node from the first element in the specified HTML string.
+        /// This is specifically for use when the <paramref name="html"/> is a fragment and
+        /// not a complete document, containing the basic HTML 'boilerplate' of <c>&lt;html&gt;</c>,
+        /// <c>&lt;head&gt;</c> &amp; <c>&lt;body&gt;</c> tags.
         /// </summary>
         /// <returns>The node.</returns>
         /// <param name="html">Html.</param>
-        public static AngleSharpElement GetNode(string html)
+        public static AngleSharpElement GetNodeFromFragment(string html)
         {
             var document = GetDocument(emptyHtml);
             var context = BrowsingContext.New();

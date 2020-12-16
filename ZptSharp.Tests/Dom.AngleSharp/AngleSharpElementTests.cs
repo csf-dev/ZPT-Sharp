@@ -17,7 +17,7 @@ namespace ZptSharp.Dom
         public void ToString_returns_HTML_open_tag()
         {
             var html = @"<div class=""foo"" tal:repeat=""item items"">";
-            Assert.That(() => AngleSharpDocumentUtil.GetNode(html).ToString(), Is.EqualTo(html));
+            Assert.That(() => AngleSharpDocumentUtil.GetNodeFromFragment(html).ToString(), Is.EqualTo(html));
         }
 
         #endregion
@@ -28,21 +28,21 @@ namespace ZptSharp.Dom
         public void IsInNamespace_returns_false_when_element_has_no_namespace_prefix(WellKnownNamespaceProvider namespaces)
         {
             var html = @"<div class=""foo"" tal:repeat=""item items"">";
-            Assert.That(() => AngleSharpDocumentUtil.GetNode(html).IsInNamespace(namespaces.TalNamespace), Is.False);
+            Assert.That(() => AngleSharpDocumentUtil.GetNodeFromFragment(html).IsInNamespace(namespaces.TalNamespace), Is.False);
         }
 
         [Test, AutoMoqData]
         public void IsInNamespace_returns_true_when_element_has_matching_namespace_prefix(WellKnownNamespaceProvider namespaces)
         {
             var html = @"<tal:div class=""foo"" tal:repeat=""item items"">";
-            Assert.That(() => AngleSharpDocumentUtil.GetNode(html).IsInNamespace(namespaces.TalNamespace), Is.True);
+            Assert.That(() => AngleSharpDocumentUtil.GetNodeFromFragment(html).IsInNamespace(namespaces.TalNamespace), Is.True);
         }
 
         [Test, AutoMoqData]
         public void IsInNamespace_returns_false_when_element_has_different_namespace_prefix(WellKnownNamespaceProvider namespaces)
         {
             var html = @"<metal:div class=""foo"" tal:repeat=""item items"">";
-            Assert.That(() => AngleSharpDocumentUtil.GetNode(html).IsInNamespace(namespaces.TalNamespace), Is.False);
+            Assert.That(() => AngleSharpDocumentUtil.GetNodeFromFragment(html).IsInNamespace(namespaces.TalNamespace), Is.False);
         }
 
         #endregion
@@ -53,10 +53,10 @@ namespace ZptSharp.Dom
         public void Adding_a_child_node_modifies_native_document()
         {
             var html1 = @"<div></div>";
-            var element1 = AngleSharpDocumentUtil.GetNode(html1);
+            var element1 = AngleSharpDocumentUtil.GetNodeFromFragment(html1);
 
             var html2 = @"<p>Foo bar</p>";
-            var element2 = AngleSharpDocumentUtil.GetNode(html2);
+            var element2 = AngleSharpDocumentUtil.GetNodeFromFragment(html2);
 
             element1.ChildNodes.Add(element2);
             Assert.That(((As.IElement) element1.NativeElement).OuterHtml, Is.EqualTo("<div><p>Foo bar</p></div>"));
@@ -66,7 +66,7 @@ namespace ZptSharp.Dom
         public void Removing_a_child_node_modifies_native_document()
         {
             var html = @"<div><p>Foo bar</p></div>";
-            var element = AngleSharpDocumentUtil.GetNode(html);
+            var element = AngleSharpDocumentUtil.GetNodeFromFragment(html);
 
             element.ChildNodes.RemoveAt(0);
             Assert.That(((As.IElement) element.NativeElement).OuterHtml, Is.EqualTo("<div></div>"));
@@ -80,7 +80,7 @@ namespace ZptSharp.Dom
         public void Adding_an_attribute_modifies_native_document()
         {
             var html = @"<div></div>";
-            var element = AngleSharpDocumentUtil.GetNode(html);
+            var element = AngleSharpDocumentUtil.GetNodeFromFragment(html);
 
             var native = ((As.IElement) element.NativeElement).Owner.CreateAttribute("foo");
             native.Value = "bar";
@@ -92,7 +92,7 @@ namespace ZptSharp.Dom
         public void Removing_an_attribute_node_modifies_native_document()
         {
             var html = @"<div foo=""bar""></div>";
-            var element = AngleSharpDocumentUtil.GetNode(html);
+            var element = AngleSharpDocumentUtil.GetNodeFromFragment(html);
 
             element.Attributes.RemoveAt(0);
             Assert.That(((As.IElement) element.NativeElement).OuterHtml, Is.EqualTo("<div></div>"));
@@ -105,12 +105,11 @@ namespace ZptSharp.Dom
         [Test, AutoMoqData]
         public void GetCopy_returns_deep_copy_of_selected_node()
         {
-            var html = @"<html><body><div class=""foo""><p id=""test"">Hello there</p><p>Another paragraph</p></div></body></html>";
-            var htmlElement = AngleSharpDocumentUtil.GetNode(html);
-            var bodyElement = htmlElement.ChildNodes.First();
-            var result = (AngleSharpElement) bodyElement.GetCopy();
+            var html = @"<div class=""foo""><p id=""test"">Hello there</p><p>Another <span>paragraph</span></p></div>";
+            var divElement = AngleSharpDocumentUtil.GetNodeFromFragment(html);
+            var result = (AngleSharpElement) divElement.GetCopy();
 
-            Assert.That(((As.IElement) result.NativeElement).OuterHtml, Is.EqualTo(@"<body><div class=""foo""><p id=""test"">Hello there</p><p>Another paragraph</p></div></body>"));
+            Assert.That(((As.IElement) result.NativeElement).OuterHtml, Is.EqualTo(@"<div class=""foo""><p id=""test"">Hello there</p><p>Another <span>paragraph</span></p></div>"));
         }
 
         [Test, AutoMoqData]
@@ -124,8 +123,8 @@ namespace ZptSharp.Dom
     </div>
 </body>
 </html>";
-            var htmlElement = AngleSharpDocumentUtil.GetNode(html);
-            var bodyElement = htmlElement.ChildNodes.Skip(1).First();
+            var htmlDoc = AngleSharpDocumentUtil.GetDocument(html);
+            var bodyElement = htmlDoc.RootElement.ChildNodes.Skip(1).First();
 
             var result = bodyElement.GetCopy();
 
@@ -141,7 +140,7 @@ namespace ZptSharp.Dom
         public void CreateComment_does_not_throw_if_content_is_null()
         {
             var html = "<html><body><div>Hello</div></body></html>";
-            var sut = AngleSharpDocumentUtil.GetNode(html);
+            var sut = AngleSharpDocumentUtil.GetNodeFromFragment(html);
 
             Assert.That(() => sut.CreateComment(null), Throws.Nothing);
         }
@@ -150,7 +149,7 @@ namespace ZptSharp.Dom
         public void CreateComment_returns_a_comment(string commentText)
         {
             var html = "<html><body><div>Hello</div></body></html>";
-            var sut = AngleSharpDocumentUtil.GetNode(html);
+            var sut = AngleSharpDocumentUtil.GetNodeFromFragment(html);
 
             Assert.That(() => sut.CreateComment(commentText), Is.Not.Null);
         }
@@ -163,7 +162,7 @@ namespace ZptSharp.Dom
         public void CreateTextNode_returns_a_node_object_which_is_not_an_element(string content)
         {
             var html = "<html><body><div>Hello</div></body></html>";
-            var sut = AngleSharpDocumentUtil.GetNode(html);
+            var sut = AngleSharpDocumentUtil.GetNodeFromFragment(html);
 
             Assert.That(() => sut.CreateTextNode(content), Is.Not.Null.And.Property(nameof(INode.IsElement)).False);
         }
@@ -176,7 +175,7 @@ namespace ZptSharp.Dom
         public void CreateAttribute_returns_an_attribute_object_with_correct_name()
         {
             var html = "<html><body><div>Hello</div></body></html>";
-            var sut = AngleSharpDocumentUtil.GetNode(html);
+            var sut = AngleSharpDocumentUtil.GetNodeFromFragment(html);
             var spec = new AttributeSpec("class");
 
             var result = sut.CreateAttribute(spec);
@@ -188,7 +187,7 @@ namespace ZptSharp.Dom
         public void CreateAttribute_can_create_a_prefixed_attribute_with_namespace()
         {
             var html = "<html><body><div>Hello</div></body></html>";
-            var sut = AngleSharpDocumentUtil.GetNode(html);
+            var sut = AngleSharpDocumentUtil.GetNodeFromFragment(html);
             var spec = new AttributeSpec("class", new Namespace("foo"));
 
             var result = sut.CreateAttribute(spec);
@@ -204,7 +203,7 @@ namespace ZptSharp.Dom
         public void ParseAsNodes_can_create_an_HTML_structure()
         {
             var html = "<html><body><div>Hello</div></body></html>";
-            var sut = AngleSharpDocumentUtil.GetNode(html);
+            var sut = AngleSharpDocumentUtil.GetNodeFromFragment(html);
 
             var result = sut.ParseAsNodes("<p><span class=\"test\">Text node</span></p>");
 
