@@ -128,11 +128,11 @@ namespace ZptSharp.Dom
         {
             var html = @"<div repeat=""item string:&quot;This is &gt; than that!&quot;"">";
             var doc = AngleSharpDocumentUtil.GetDocument(html);
-            var entity = (AngleSharpElement) doc.RootElement.ChildNodes.First();
+            var entity = AngleSharpDocumentUtil.GetElementsFromFragmentBasedDocument(doc).First();
             entity.Attributes.Single().Value = "\"Foo > Bar < Baz\"";
 
             Assert.That(() => AngleSharpDocumentUtil.GetRendering(doc).Result,
-                        Is.EqualTo(@"<div repeat=""&quot;Foo &gt; Bar &lt; Baz&quot;""></div>"));
+                        Is.EqualTo(@"<html><head></head><body><div repeat=""&quot;Foo > Bar < Baz&quot;""></div></body></html>"));
         }
 
         #endregion

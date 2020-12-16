@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -32,7 +33,7 @@ namespace ZptSharp.Dom
             var document = GetDocument(emptyHtml);
             var context = BrowsingContext.New();
             var parser = context.GetService<IHtmlParser>();
-            var bodyElement = document.RootElement.ChildNodes[1];
+            var bodyElement = GetBodyElement(document);
             var nativeBody = ((AngleSharpElement)bodyElement).NativeElement as IElement;
             var nodes = parser.ParseFragment(html, nativeBody);
             return new AngleSharpElement(nodes.First(), document);
@@ -48,6 +49,19 @@ namespace ZptSharp.Dom
             using (var stream = new MemoryStream(Encoding.UTF8.GetBytes(html)))
                 return (AngleSharpDocument) provider.GetDocumentAsync(stream, RenderingConfig.Default).Result;
         }
+
+        /// <summary>
+        /// Gets a collection of the elements from a parsed document.  This is for use when
+        /// the original/source document was created from a fragment which did not include
+        /// the basic HTML 'boilerplate' of <c>&lt;html&gt;</c>, <c>&lt;head&gt;</c> &amp;
+        /// <c>&lt;body&gt;</c> tags.
+        /// </summary>
+        /// <returns>The elements from the document's body element.</returns>
+        /// <param name="doc">Document.</param>
+        public static IEnumerable<AngleSharpElement> GetElementsFromFragmentBasedDocument(IDocument doc)
+            => GetBodyElement(doc).ChildNodes.Cast<AngleSharpElement>().ToList();
+
+        static AngleSharpElement GetBodyElement(IDocument doc) => doc.RootElement.ChildNodes[1] as AngleSharpElement;
 
         /// <summary>
         /// Gets a rendering of a document.

@@ -122,7 +122,13 @@ namespace ZptSharp.Dom
                 throw new ArgumentNullException(nameof(@namespace));
             if (!IsElement) return false;
 
-            return String.Equals(ElementNode.Prefix, @namespace.Prefix, StringComparison.InvariantCulture);
+            var nameParts = ElementNode.LocalName.Split(new[] { ':' }, 2);
+            if (nameParts.Length < 2 && String.IsNullOrEmpty(@namespace.Prefix))
+                return true;
+            if (nameParts.Length < 2)
+                return false;
+
+            return String.Equals(nameParts[0], @namespace.Prefix, StringComparison.InvariantCulture);
         }
 
         /// <summary>

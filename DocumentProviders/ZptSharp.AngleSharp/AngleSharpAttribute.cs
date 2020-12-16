@@ -8,6 +8,8 @@ namespace ZptSharp.Dom
     /// </summary>
     public class AngleSharpAttribute : AttributeBase
     {
+        const char PrefixSeparator = ':';
+
         /// <summary>
         /// Gets the native AngleSharp attribute.
         /// </summary>
@@ -40,8 +42,10 @@ namespace ZptSharp.Dom
             if (spec == null)
                 throw new ArgumentNullException(nameof(spec));
 
+            var (prefix, localName) = GetAttributeName(NativeAttribute.LocalName);
+
             return IsInNamespace(spec.Namespace)
-                && String.Equals(spec.Name, NativeAttribute.LocalName, StringComparison.InvariantCulture);
+                && String.Equals(spec.Name, localName, StringComparison.InvariantCulture);
         }
 
         /// <summary>
@@ -54,7 +58,13 @@ namespace ZptSharp.Dom
             if (@namespace == null)
                 throw new ArgumentNullException(nameof(@namespace));
 
-            return String.Equals(@namespace.Prefix, NativeAttribute.Prefix, StringComparison.InvariantCulture);
+            var (prefix, localName) = GetAttributeName(NativeAttribute.LocalName);
+
+            if (String.Equals(@namespace.Prefix, prefix, StringComparison.InvariantCulture)) return true;
+
+            // Another way in which the attribute is considered to be in
+            // the namespace is if the parent element is in the namespace.
+            return this.Element.IsInNamespace(@namespace);
         }
 
         /// <summary>
@@ -69,6 +79,13 @@ namespace ZptSharp.Dom
         /// </summary>
         /// <returns>A <see cref="String"/> that represents the current <see cref="AngleSharpAttribute"/>.</returns>
         public override string ToString() => Value;
+
+        (string, string) GetAttributeName(string name)
+        {
+            var val = name.Split(new[] { PrefixSeparator }, 2);
+            if (val.Length == 1) return (null, val[0]);
+            return (val[0], (val.Length > 1) ? val[1] : null);
+        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="AngleSharpAttribute"/> class.
