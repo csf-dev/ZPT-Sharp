@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<RunSettings>
+    <LoggerRunSettings>
+        <Loggers>
+            <Logger friendlyName="nunit" enabled="True">
+                <Configuration>
+                    <LogFilePath>../.TestResults/TestResults.xml</LogFilePath>
+                </Configuration>
+            </Logger>
+        </Loggers>
+    </LoggerRunSettings>
+    <NUnit>
+        <WorkDirectory>../../../../.TestResults/</WorkDirectory>
+    </NUnit>
+</RunSettings>
