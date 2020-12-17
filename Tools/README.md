@@ -8,4 +8,4 @@ related to the build process.
 * `.runsettings` files for Linux & Windows, to run unit/integration tests with standard settings
 * [A DocFx project] which generates the documentation website
 
-[A DocFx project]: ZptSharp.ApiDocumentationGenerator/README.md
+[A DocFx project]: ZptSharp.ApiDocumentationGenerator/
