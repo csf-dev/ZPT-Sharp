@@ -30,7 +30,7 @@ namespace ZptSharp.Dom
         /// <summary>This matches the default buffer size for a built-in <see cref="StreamWriter"/>.</summary>
         const int BufferSize = 1024;
 
-        readonly IHtmlParser parser = new HtmlParser();
+        readonly IHtmlParser parser = new HtmlParser(new HtmlParserOptions { IsKeepingSourceReferences = true });
 
         /// <summary>
         /// Gets whether or not the current instance may be used to read &amp; write documents
@@ -40,6 +40,7 @@ namespace ZptSharp.Dom
         /// <param name="filenameOrPath">The filename of a ZPT document.</param>
         public override bool CanReadWriteForFilename(string filenameOrPath)
         {
+            if (String.IsNullOrEmpty(filenameOrPath)) return false;
             var extension = new FileInfo(filenameOrPath).Extension;
             return supportedExtensions.Any(x => String.Equals(extension, x, StringComparison.InvariantCultureIgnoreCase));
         }

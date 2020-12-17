@@ -22,15 +22,24 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tools", "Tools", "{6CB27AD0
 		.gitignore = .gitignore
 		.SonarQube.Analysis.xml = .SonarQube.Analysis.xml
 		Tools\appveyor-build.cmd = Tools\appveyor-build.cmd
-		README.md = README.md
 		Tools\CSF-Software-OSS.snk = Tools\CSF-Software-OSS.snk
 		Tools\appveyor-create-packages.cmd = Tools\appveyor-create-packages.cmd
 		Tools\CommonSolutionProperties.props = Tools\CommonSolutionProperties.props
+		Tools\Linux.runsettings = Tools\Linux.runsettings
+		Tools\Windows.runsettings = Tools\Windows.runsettings
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Evaluators", "Evaluators", "{46999C9A-68E1-4347-81C7-5532F85A0041}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZptSharp.PythonExressions", "Evaluators\ZptSharp.PythonExressions\ZptSharp.PythonExressions.csproj", "{2EB0E8DD-D4BF-47D6-94E8-3E3236F782CA}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Docs", "Docs", "{DACAD343-4267-4DD9-BABF-53F3D6D2F3C6}"
+	ProjectSection(SolutionItems) = preProject
+		Docs\BuildAndTest.md = Docs\BuildAndTest.md
+		Docs\Compatibility.md = Docs\Compatibility.md
+		LICENSE = LICENSE
+		README.md = README.md
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

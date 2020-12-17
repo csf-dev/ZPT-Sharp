@@ -181,6 +181,7 @@ namespace ZptSharp.Dom
         {
             if (@namespace == null)
                 throw new ArgumentNullException(nameof(@namespace));
+            if (!IsElement) return false;
 
             var nameParts = NativeElement.Name.Split(new [] { ':' }, 2);
             if (nameParts.Length < 2 && String.IsNullOrEmpty(@namespace.Prefix))

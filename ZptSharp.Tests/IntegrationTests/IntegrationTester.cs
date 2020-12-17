@@ -79,6 +79,7 @@ namespace ZptSharp.IntegrationTests
                     {
                         Expected = expected,
                         Actual = result,
+                        ExpectedRenderingPath = expectedRenderingPath,
                     };
                 }
             }
@@ -94,6 +95,12 @@ namespace ZptSharp.IntegrationTests
         /// </summary>
         public class IntegrationTestResult
         {
+            /// <summary>
+            /// Gets or sets the file path to the 'expected rendering' test file.
+            /// </summary>
+            /// <value>The expected rendering path.</value>
+            public string ExpectedRenderingPath { get; set; }
+
             /// <summary>
             /// Gets the actual rendering of a ZPT document.
             /// </summary>

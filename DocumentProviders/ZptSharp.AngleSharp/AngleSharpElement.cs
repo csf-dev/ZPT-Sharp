@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using AngleSharp;
+using AngleSharp.Html.Parser;
 using CSF.Collections.EventRaising;
 using ZptSharp.Rendering;
 using As = AngleSharp.Dom;
@@ -12,6 +14,7 @@ namespace ZptSharp.Dom
     /// </summary>
     public class AngleSharpElement : ElementBase
     {
+        readonly IList<INode> sourceChildElements;
         readonly EventRaisingList<IAttribute> attributes;
         readonly EventRaisingList<INode> childElements;
 
@@ -62,7 +65,7 @@ namespace ZptSharp.Dom
                 .ToList();
             var hasAttributes = attrs.Count > 0;
 
-            return $"<{ElementNode.TagName}{(hasAttributes? " " : String.Empty)}{String.Join(" ", attrs)}>";
+            return $"<{ElementNode.LocalName}{(hasAttributes? " " : String.Empty)}{String.Join(" ", attrs)}>";
         }
 
         /// <summary>
@@ -71,8 +74,26 @@ namespace ZptSharp.Dom
         /// <returns>The copied element.</returns>
         public override INode GetCopy()
         {
-            var copiedElement = ElementNode.Clone();
-            return new AngleSharpElement(copiedElement, (AngleSharpDocument) Document, null, SourceInfo);
+            var copiedElement = NativeElement.Clone();
+
+            var closedList = new Dictionary<As.INode, AngleSharpElement>();
+            (As.INode, AngleSharpElement)? current;
+            for (var openList = new List<(As.INode, AngleSharpElement)?> { (copiedElement, this) };
+                 (current = openList.FirstOrDefault()) != null;
+                 openList.RemoveAt(0))
+            {
+                var (native, element) = current.Value;
+                var parent = ReferenceEquals(element, this) ? null : closedList[native.Parent];
+                var newElement = new AngleSharpElement(native, (AngleSharpDocument)Document, parent, element.SourceInfo, new List<INode>())
+                {
+                    PreReplacementSourceInfo = element.PreReplacementSourceInfo,
+                };
+                closedList.Add(native, newElement);
+                if (parent != null) parent.sourceChildElements.Add(newElement);
+                openList.AddRange(native.ChildNodes.Select((node, idx) => ((As.INode, AngleSharpElement)?)(node, (AngleSharpElement)element.ChildNodes[idx])));
+            }
+
+            return closedList[copiedElement];
         }
 
         /// <summary>
@@ -82,9 +103,7 @@ namespace ZptSharp.Dom
         /// <param name="commentText">The text for the comment.</param>
         public override INode CreateComment(string commentText)
         {
-            if (commentText == null)
-                throw new ArgumentNullException(nameof(commentText));
-
+            commentText = commentText ?? String.Empty;
             var node = NativeElement.Owner.CreateComment(commentText);
             return new AngleSharpElement(node, (AngleSharpDocument) Document);
         }
@@ -95,21 +114,40 @@ namespace ZptSharp.Dom
         /// </summary>
         /// <returns>A text node.</returns>
         /// <param name="content">The text content for the node.</param>
-        public override INode CreateTextNode(string content) => throw new NotImplementedException();
+        public override INode CreateTextNode(string content)
+        {
+            content = content ?? String.Empty;
+            var text = content;
+            return new AngleSharpElement(NativeElement.Owner.CreateTextNode(text), (AngleSharpDocument)Document);
+        }
 
         /// <summary>
         /// Parses the specified text <paramref name="markup"/> and returns the resulting nodes.
         /// </summary>
         /// <returns>The parsed nodes.</returns>
         /// <param name="markup">Markup text.</param>
-        public override IList<INode> ParseAsNodes(string markup) => throw new NotImplementedException();
+        public override IList<INode> ParseAsNodes(string markup)
+        {
+            var context = BrowsingContext.New();
+            var parser = context.GetService<IHtmlParser>();
+            var nativeNodes = parser.ParseFragment(markup, ElementNode);
+            return nativeNodes.Select(x => new AngleSharpElement(x, (AngleSharpDocument)Document)).Cast<INode>().ToList();
+
+        }
 
         /// <summary>
         /// Creates and returns a new attribute from the specified specification.
         /// </summary>
         /// <returns>An attribute.</returns>
         /// <param name="spec">The attribute specification which will be used to name the attribute.</param>
-        public override IAttribute CreateAttribute(AttributeSpec spec) => throw new NotImplementedException();
+        public override IAttribute CreateAttribute(AttributeSpec spec)
+        {
+            if (spec == null)
+                throw new ArgumentNullException(nameof(spec));
+
+            var name = (spec.Namespace?.Prefix != null) ? $"{spec.Namespace.Prefix}:{spec.Name}" : spec.Name;
+            return new AngleSharpAttribute(NativeElement.Owner.CreateAttribute(name));
+        }
 
         /// <summary>
         /// Gets a value which indicates whether or not the current element is in the specified namespace.
@@ -122,7 +160,13 @@ namespace ZptSharp.Dom
                 throw new ArgumentNullException(nameof(@namespace));
             if (!IsElement) return false;
 
-            return String.Equals(ElementNode.Prefix, @namespace.Prefix, StringComparison.InvariantCulture);
+            var nameParts = ElementNode.LocalName.Split(new[] { ':' }, 2);
+            if (nameParts.Length < 2 && String.IsNullOrEmpty(@namespace.Prefix))
+                return true;
+            if (nameParts.Length < 2)
+                return false;
+
+            return String.Equals(nameParts[0], @namespace.Prefix, StringComparison.InvariantCulture);
         }
 
         /// <summary>
@@ -138,80 +182,112 @@ namespace ZptSharp.Dom
         /// <returns>The attributes collection.</returns>
         EventRaisingList<IAttribute> GetAttributesCollection()
         {
-            if(!IsElement) return new EventRaisingList<IAttribute>(new List<IAttribute>());
+            if (!IsElement) return new EventRaisingList<IAttribute>(new List<IAttribute>());
 
             var sourceAttributes = ElementNode.Attributes
-                .Select(x => new AngleSharpAttribute(x) { Element = this } )
+                .Select(x => new AngleSharpAttribute(x) { Element = this })
                 .Cast<IAttribute>()
                 .ToList();
             var attribs = new EventRaisingList<IAttribute>(sourceAttributes);
 
-            attribs.SetupAfterActions(add => ElementNode.Attributes.SetNamedItem(((AngleSharpAttribute)add.Item).NativeAttribute),
-                                      del => ElementNode.Attributes.RemoveNamedItem(del.Item.Name));
+            attribs.SetupAfterActions(add => {
+                var attr = ((AngleSharpAttribute)add.Item).NativeAttribute;
+                ElementNode.Attributes.SetNamedItem(((AngleSharpAttribute)add.Item).NativeAttribute);
+                add.Item.Element = this;
+            },
+                                      del => {
+                                          ElementNode.Attributes.RemoveNamedItem(del.Item.Name);
+                                          del.Item.Element = null;
+                                      });
 
             return attribs;
         }
 
         /// <summary>
-        /// <para>
-        /// Called by the constructor; initialises and returns a <see cref="EventRaisingList{IElement}"/>
-        /// for use as the <see cref="ChildNodes"/> collection.
-        /// </para>
-        /// <para>
-        /// This event-raising list is used to keep the child elements collection in-sync with the child
-        /// elements in the native AngleSharp element.
-        /// </para>
+        /// Gets a list of <see cref="INode"/> which is wrapped in a list adapter that reacts to events.
         /// </summary>
+        /// <param name="elements">The source list of child elements.</param>
         /// <returns>The child elements collection.</returns>
-        EventRaisingList<INode> GetChildElementsCollection()
+        EventRaisingList<INode> WrapChildElementsCollectionWithEvents(IList<INode> elements)
         {
-            if(!IsElement) return new EventRaisingList<INode>(new List<INode>());
+            if (elements == null)
+                throw new ArgumentNullException(nameof(elements));
 
-            var sourceChildElements = ElementNode.Children
-                .Select(x => new AngleSharpElement(x, (AngleSharpDocument) Doc, this, Source.CreateChild(x.SourceReference?.Position.Line)))
-                .Cast<INode>()
-                .ToList();
+            var eventBasedListWrapper = new EventRaisingList<INode>(elements);
 
-            var children = new EventRaisingList<INode>(sourceChildElements);
-
-            children.SetupAfterActions(
+            eventBasedListWrapper.SetupAfterActions(
                 add => {
                     var index = ((IList<INode>)add.Collection).IndexOf(add.Item);
                     var item = (AngleSharpElement)add.Item;
                     var ele = item.NativeElement;
 
-                    if (index >= ElementNode.ChildElementCount)
-                        ElementNode.Append(ele);
+                    if (index >= NativeElement.ChildNodes.Count())
+                        NativeElement.AppendChild(ele);
                     else
-                        ElementNode.InsertBefore(ele, ElementNode.Children[index]);
+                        NativeElement.InsertBefore(ele, NativeElement.ChildNodes[index]);
 
                     item.IsImportedNode = true;
                     item.ParentElement = this;
                 },
                 del => {
-                    var ele = ((AngleSharpElement)del.Item).ElementNode;
-                    ElementNode.RemoveChild(ele);
+                    var ele = ((AngleSharpElement)del.Item).NativeElement;
+                    NativeElement.RemoveChild(ele);
                     del.Item.ParentElement = null;
                 });
 
-            return children;
+            return eventBasedListWrapper;
+        }
+
+        IList<INode> GetSourceChildElements()
+        {
+            return NativeElement.ChildNodes
+                .Select(CreateChildElement)
+                .Cast<INode>()
+                .ToList();
+        }
+
+        AngleSharpElement CreateChildElement(As.INode node)
+        {
+            var doc = (AngleSharpDocument) Doc;
+            return new AngleSharpElement(node, doc, this, GetSourceInfo(node));
+        }
+
+        ElementSourceInfo GetSourceInfo(As.INode node)
+        {
+            if (!(node is As.IElement ele)) return Source.CreateChild();
+
+            var startTagLine = ele.SourceReference?.Position.Line;
+            if(!startTagLine.HasValue) return Source.CreateChild();
+            var lineBreakCount = ele.OuterHtml.Count(x => x == '\n');
+            var endTagLine = startTagLine.Value + lineBreakCount;
+
+            return Source.CreateChild(startTagLine.Value, endTagLine);
+        }
+
+        private AngleSharpElement(As.INode element,
+                                  AngleSharpDocument document,
+                                  INode parent,
+                                  ElementSourceInfo sourceInfo,
+                                  IList<INode> childNodes) : base(document, parent, sourceInfo)
+        {
+            NativeElement = element ?? throw new ArgumentNullException(nameof(element));
+            attributes = GetAttributesCollection();
+            sourceChildElements = childNodes ?? GetSourceChildElements();
+            childElements = WrapChildElementsCollectionWithEvents(sourceChildElements);
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="AngleSharpElement"/> class.
+        /// Initializes a new instance of the <see cref="AngleSharpDocument"/> class.
         /// </summary>
-        /// <param name="nativeElement">The AngleSharp native element object.</param>
-        /// <param name="document">The AngleSharp document object.</param>
+        /// <param name="element">The native element object.</param>
+        /// <param name="document">The containing document.</param>
         /// <param name="parent">The parent element.</param>
-        /// <param name="sourceInfo">The source info for the element.</param>
-        public AngleSharpElement(As.INode nativeElement,
-                                 AngleSharpDocument document,
-                                 INode parent = null,
-                                 ElementSourceInfo sourceInfo = null) : base(document, parent, sourceInfo)
-        {
-            NativeElement = nativeElement ?? throw new ArgumentNullException(nameof(nativeElement));
-            attributes = GetAttributesCollection();
-            childElements = GetChildElementsCollection();
-        }
+        /// <param name="sourceInfo">Source info.</param>
+        public AngleSharpElement(As.INode element,
+                          AngleSharpDocument document,
+                          INode parent = null,
+                          ElementSourceInfo sourceInfo = null)
+            : this(element, document, parent, sourceInfo, null) { }
+
     }
 }
