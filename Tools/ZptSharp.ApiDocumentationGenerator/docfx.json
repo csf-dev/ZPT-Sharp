@@ -3,10 +3,17 @@
     {
       "src": [
         {
+          "src": "../../",
           "files": [
-            "ZptSharp.ApiDocumentationGenerator.csproj"
+            "ZptSharp/ZptSharp.csproj",
+            "ZptSharp.Impl/ZptSharp.Impl.csproj",
+            "DocumentProviders/**/*.csproj",
+            "Evaluators/**/*.csproj"
           ],
-          "src": "/home/craig/Projects/ZPT-Sharp/Tools/ZptSharp.ApiDocumentationGenerator"
+          "exclude": [
+            "**/bin/**",
+            "**/obj/**"
+          ]
         }
       ],
       "dest": "api",
