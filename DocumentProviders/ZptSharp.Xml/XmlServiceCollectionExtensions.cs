@@ -7,7 +7,7 @@ namespace ZptSharp
     /// <summary>
     /// Extension methods for <see cref="IServiceCollection"/> instances.
     /// </summary>
-    public static class ServiceCollectionExtensions
+    public static class XmlServiceCollectionExtensions
     {
         /// <summary>
         /// <para>

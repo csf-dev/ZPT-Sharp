@@ -8,7 +8,7 @@ namespace ZptSharp
     /// <summary>
     /// Extension methods related to the use of ZPT Python expressions.
     /// </summary>
-    public static class ServiceCollectionExtensions
+    public static class PythonServiceCollectionExtensions
     {
         /// <summary>
         /// Adds service registrations to the <paramref name="serviceCollection"/> in order
