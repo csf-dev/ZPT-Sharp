@@ -35,7 +35,8 @@
           "articles/**/toc.yml",
           "toc.yml",
           "*.md"
-        ]
+        ],
+        "exclude": ["README.md"]
       }
     ],
     "resource": [
