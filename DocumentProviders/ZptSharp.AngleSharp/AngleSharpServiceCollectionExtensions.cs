@@ -7,26 +7,26 @@ namespace ZptSharp
     /// <summary>
     /// Extension methods for <see cref="IServiceCollection"/> instances.
     /// </summary>
-    public static class ServiceCollectionExtensions
+    public static class AngleSharpServiceCollectionExtensions
     {
         /// <summary>
         /// <para>
         /// Adds service registrations to the <paramref name="serviceCollection"/> in order
-        /// to enable reading &amp; writing of HTML Agility Pack documents.
+        /// to enable reading &amp; writing of AngleSharp documents.
         /// </para>
         /// <para>
-        /// You must also call <see cref="UseHapZptDocuments(IServiceProvider)"/> in your application's
+        /// You must also call <see cref="UseAngleSharpZptDocuments(IServiceProvider)"/> in your application's
         /// startup logic, in order to register 
         /// </para>
         /// </summary>
         /// <returns>The same service collection instance, with registrations added.</returns>
         /// <param name="serviceCollection">A service collection to which registrations will be added.</param>
-        public static IServiceCollection AddHapZptDocuments(this IServiceCollection serviceCollection)
+        public static IServiceCollection AddAngleSharpZptDocuments(this IServiceCollection serviceCollection)
         {
             if (serviceCollection == null)
                 throw new ArgumentNullException(nameof(serviceCollection));
 
-            serviceCollection.AddTransient<HapDocumentProvider>();
+            serviceCollection.AddTransient<AngleSharpDocumentProvider>();
 
             return serviceCollection;
         }
@@ -36,13 +36,13 @@ namespace ZptSharp
         /// </summary>
         /// <returns>The same service provider instance, after setting it up.</returns>
         /// <param name="provider">The service provider.</param>
-        public static IServiceProvider UseHapZptDocuments(this IServiceProvider provider)
+        public static IServiceProvider UseAngleSharpZptDocuments(this IServiceProvider provider)
         {
             if (provider == null)
                 throw new ArgumentNullException(nameof(provider));
 
             var registry = provider.GetRequiredService<IRegistersDocumentReaderWriter>();
-            registry.RegisterDocumentReaderWriter(provider.GetRequiredService<HapDocumentProvider>());
+            registry.RegisterDocumentReaderWriter(provider.GetRequiredService<AngleSharpDocumentProvider>());
             return provider;
         }
     }

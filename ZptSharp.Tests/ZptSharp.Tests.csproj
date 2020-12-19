@@ -66,8 +66,4 @@
       <Compile Remove="IntegrationTests\CSharpExpressionIntegrationTests.cs;IntegrationTests\LoadExpressionIntegrationTests.cs;IntegrationTests\PipeExpressionIntegrationTests.cs" />
       <None Include="IntegrationTests\CSharpExpressionIntegrationTests.cs;IntegrationTests\LoadExpressionIntegrationTests.cs;IntegrationTests\PipeExpressionIntegrationTests.cs" />
   </ItemGroup>
-    
-  <ItemGroup>
-    <None Remove="TestResults\**\*" />
-  </ItemGroup>
 </Project>
