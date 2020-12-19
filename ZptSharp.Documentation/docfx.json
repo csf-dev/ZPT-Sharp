@@ -3,7 +3,7 @@
     {
       "src": [
         {
-          "src": "../../",
+          "src": "../",
           "files": [
             "ZptSharp/ZptSharp.csproj",
             "ZptSharp.Impl/ZptSharp.Impl.csproj",

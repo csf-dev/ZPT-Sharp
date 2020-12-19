@@ -6,6 +6,3 @@ related to the build process.
 * Some common msbuild properties used in `.csproj` files
 * A signing key for strong-naming the assemblies
 * `.runsettings` files for Linux & Windows, to run unit/integration tests with standard settings
-* [A DocFx project] which generates the documentation website
-
-[A DocFx project]: ZptSharp.ApiDocumentationGenerator/

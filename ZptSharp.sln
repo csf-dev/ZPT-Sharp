@@ -41,7 +41,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Docs", "Docs", "{DACAD343-4
 		README.md = README.md
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZptSharp.ApiDocumentationGenerator", "Tools\ZptSharp.ApiDocumentationGenerator\ZptSharp.ApiDocumentationGenerator.csproj", "{9D4C832C-34C5-48AE-A212-4522FFEE6968}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZptSharp.Documentation", "ZptSharp.Documentation\ZptSharp.Documentation.csproj", "{9D4C832C-34C5-48AE-A212-4522FFEE6968}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
