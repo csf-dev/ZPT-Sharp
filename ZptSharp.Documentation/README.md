@@ -24,4 +24,4 @@ pages of the documentation website.
 
 [DocFx API documentation]: https://dotnet.github.io/docfx/
 [Download the DocFx command-line tool]: https://dotnet.github.io/docfx/tutorial/docfx_getting_started.html#2-use-docfx-as-a-command-line-tool
-[articles directory]: articles/README.md
+[articles directory]: articles/
