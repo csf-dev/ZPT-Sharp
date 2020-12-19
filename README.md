@@ -3,7 +3,7 @@ HTML and/or XML document templates. It is *attribute-based* and avoids the
 need to add 'alien markup' which make template files hard to read/understand
 and impossible for some tools to work-upon.
 
-[a widely compatible .NET library]: Docs/Compatibility.md
+[a widely compatible .NET library]: ZptSharp.Documentation/articles/Compatibility.md
 
 ## Continuous integration status
 In this repository the **master** branch represents the latest development code
@@ -25,4 +25,4 @@ See also: [information about building and testing ZptSharp].
 
 [the v2.0.0 milestone]: https://github.com/csf-dev/ZPT-Sharp/milestone/17
 [the v1.1.0 release]: https://github.com/csf-dev/ZPT-Sharp/releases/tag/v1.1.0
-[information about building and testing ZptSharp]: Docs/BuildAndTest.md
+[information about building and testing ZptSharp]: ZptSharp.Documentation/articles/BuildAndTest.md
