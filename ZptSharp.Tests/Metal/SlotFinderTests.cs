@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Linq;
 using AutoFixture.NUnit3;
 using Moq;
@@ -12,45 +12,45 @@ namespace ZptSharp.Metal
     public class SlotFinderTests
     {
         [Test, AutoMoqData]
-        public void GetSlotFillers_gets_elements_with_fill_slot_attributes([Frozen] IGetsMetalAttributeSpecs specProvider,
+        public void GetSlotFillers_gets_nodes_with_fill_slot_attributes([Frozen] IGetsMetalAttributeSpecs specProvider,
                                                                            [Frozen] ISearchesForAttributes attributeFinder,
                                                                            SlotFinder sut,
-                                                                           [StubDom] INode element,
+                                                                           [StubDom] INode node,
                                                                            AttributeSpec spec,
                                                                            [StubDom] IAttribute attr1,
-                                                                           [StubDom] INode attr1Element,
+                                                                           [StubDom] INode attr1Node,
                                                                            [StubDom] IAttribute attr2,
-                                                                           [StubDom] INode attr2Element)
+                                                                           [StubDom] INode attr2Node)
         {
             Mock.Get(specProvider).SetupGet(x => x.FillSlot).Returns(spec);
-            Mock.Get(attributeFinder).Setup(x => x.SearchForAttributes(element, spec)).Returns(new[] { attr1, attr2 });
-            Mock.Get(attr1).SetupGet(x => x.Element).Returns(attr1Element);
-            Mock.Get(attr2).SetupGet(x => x.Element).Returns(attr2Element);
+            Mock.Get(attributeFinder).Setup(x => x.SearchForAttributes(node, spec)).Returns(new[] { attr1, attr2 });
+            Mock.Get(attr1).SetupGet(x => x.Node).Returns(attr1Node);
+            Mock.Get(attr2).SetupGet(x => x.Node).Returns(attr2Node);
 
-            var result = sut.GetSlotFillers(element);
+            var result = sut.GetSlotFillers(node);
 
-            Assert.That(result?.Select(x => x.Element), Is.EquivalentTo(new[] { attr1Element, attr2Element }));
+            Assert.That(result?.Select(x => x.Node), Is.EquivalentTo(new[] { attr1Node, attr2Node }));
         }
 
         [Test, AutoMoqData]
-        public void GetDefinedSlots_gets_elements_with_define_slot_attributes([Frozen] IGetsMetalAttributeSpecs specProvider,
+        public void GetDefinedSlots_gets_nodes_with_define_slot_attributes([Frozen] IGetsMetalAttributeSpecs specProvider,
                                                                               [Frozen] ISearchesForAttributes attributeFinder,
                                                                               SlotFinder sut,
-                                                                              [StubDom] INode element,
+                                                                              [StubDom] INode node,
                                                                               AttributeSpec spec,
                                                                               [StubDom] IAttribute attr1,
-                                                                              [StubDom] INode attr1Element,
+                                                                              [StubDom] INode attr1Node,
                                                                               [StubDom] IAttribute attr2,
-                                                                              [StubDom] INode attr2Element)
+                                                                              [StubDom] INode attr2Node)
         {
             Mock.Get(specProvider).SetupGet(x => x.DefineSlot).Returns(spec);
-            Mock.Get(attributeFinder).Setup(x => x.SearchForAttributes(element, spec)).Returns(new[] { attr1, attr2 });
-            Mock.Get(attr1).SetupGet(x => x.Element).Returns(attr1Element);
-            Mock.Get(attr2).SetupGet(x => x.Element).Returns(attr2Element);
+            Mock.Get(attributeFinder).Setup(x => x.SearchForAttributes(node, spec)).Returns(new[] { attr1, attr2 });
+            Mock.Get(attr1).SetupGet(x => x.Node).Returns(attr1Node);
+            Mock.Get(attr2).SetupGet(x => x.Node).Returns(attr2Node);
 
-            var result = sut.GetDefinedSlots(element);
+            var result = sut.GetDefinedSlots(node);
 
-            Assert.That(result?.Select(x => x.Element), Is.EquivalentTo(new[] { attr1Element, attr2Element }));
+            Assert.That(result?.Select(x => x.Node), Is.EquivalentTo(new[] { attr1Node, attr2Node }));
         }
     }
 }

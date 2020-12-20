@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using Moq;
 using NUnit.Framework;
 using ZptSharp.Autofixture;
@@ -22,7 +22,7 @@ namespace ZptSharp.Dom
             parent.ChildNodes.Add(sibling1);
             parent.ChildNodes.Add(toReplace);
             parent.ChildNodes.Add(sibling2);
-            toReplace.ParentElement = parent;
+            toReplace.ParentNode = parent;
 
             sut.Replace(toReplace, new[] { replacement1, replacement2 });
 
@@ -35,14 +35,14 @@ namespace ZptSharp.Dom
                                                                   [StubDom] INode replacement)
         {
             var doc = new Mock<IDocument>();
-            doc.As<ICanReplaceRootElement>();
+            doc.As<ICanReplaceRootNode>();
             Mock.Get(toReplace).SetupGet(x => x.Document).Returns(doc.Object);
-            Mock.Get(toReplace).SetupGet(x => x.ParentElement).Returns(() => null);
+            Mock.Get(toReplace).SetupGet(x => x.ParentNode).Returns(() => null);
 
             sut.Replace(toReplace, new[] { replacement });
 
-            doc.As<ICanReplaceRootElement>()
-                .Verify(x => x.ReplaceRootElement(replacement), Times.Once);
+            doc.As<ICanReplaceRootNode>()
+                .Verify(x => x.ReplaceRootNode(replacement), Times.Once);
         }
 
         [Test, AutoMoqData]
@@ -52,7 +52,7 @@ namespace ZptSharp.Dom
         {
             var doc = new Mock<IDocument>();
             Mock.Get(toReplace).SetupGet(x => x.Document).Returns(doc.Object);
-            Mock.Get(toReplace).SetupGet(x => x.ParentElement).Returns(() => null);
+            Mock.Get(toReplace).SetupGet(x => x.ParentNode).Returns(() => null);
 
             Assert.That(() => sut.Replace(toReplace, new[] { replacement }), Throws.ArgumentException);
         }

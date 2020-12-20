@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
 using ZptSharp.Dom;
@@ -15,7 +15,7 @@ namespace ZptSharp.SourceAnnotation
     public class SourceAnnotationContextProcessor : IProcessesExpressionContext
     {
         readonly IGetsMetalAttributeSpecs metalSpecProvider;
-        readonly IGetsAnnotationForElement annotationProvider;
+        readonly IGetsAnnotationForNode annotationProvider;
         readonly IAddsComment commenter;
 
         /// <summary>
@@ -29,52 +29,52 @@ namespace ZptSharp.SourceAnnotation
             if (context == null)
                 throw new ArgumentNullException(nameof(context));
 
-            var element = context.CurrentElement;
+            var node = context.CurrentNode;
 
             if (context.IsRootContext)
-                AnnotateRootElement(element);
-            else if (element.IsImported)
-                AnnotateImportedElement(element);
-            else if (HasDefineMacroAttribute(element))
-                AnnotateDefineMacroElement(element);
-            else if (HasDefineSlotAttribute(element))
-                AnnotateDefineSlotElement(element);
+                AnnotateRootNode(node);
+            else if (node.IsImported)
+                AnnotateImportedNode(node);
+            else if (HasDefineMacroAttribute(node))
+                AnnotateDefineMacroNode(node);
+            else if (HasDefineSlotAttribute(node))
+                AnnotateDefineSlotNode(node);
 
             return Task.FromResult(ExpressionContextProcessingResult.Noop);
         }
 
-        void AnnotateRootElement(INode element)
+        void AnnotateRootNode(INode node)
         {
-            var annotation = annotationProvider.GetAnnotation(element, TagType.None);
-            commenter.AddCommentBefore(element, annotation);
+            var annotation = annotationProvider.GetAnnotation(node, TagType.None);
+            commenter.AddCommentBefore(node, annotation);
         }
 
-        void AnnotateDefineMacroElement(INode element)
+        void AnnotateDefineMacroNode(INode node)
         {
-            var annotation = annotationProvider.GetAnnotation(element);
-            commenter.AddCommentBefore(element, annotation);
+            var annotation = annotationProvider.GetAnnotation(node);
+            commenter.AddCommentBefore(node, annotation);
         }
 
-        void AnnotateImportedElement(INode element)
+        void AnnotateImportedNode(INode node)
         {
-            var beforeAnnotation = annotationProvider.GetAnnotation(element);
-            commenter.AddCommentBefore(element, beforeAnnotation);
+            var beforeAnnotation = annotationProvider.GetAnnotation(node);
+            commenter.AddCommentBefore(node, beforeAnnotation);
 
-            var afterAnnotation = annotationProvider.GetPreReplacementAnnotation(element, TagType.End);
-            commenter.AddCommentAfter(element, afterAnnotation);
+            var afterAnnotation = annotationProvider.GetPreReplacementAnnotation(node, TagType.End);
+            commenter.AddCommentAfter(node, afterAnnotation);
         }
 
-        void AnnotateDefineSlotElement(INode element)
+        void AnnotateDefineSlotNode(INode node)
         {
-            var annotation = annotationProvider.GetAnnotation(element);
-            commenter.AddCommentAfter(element, annotation);
+            var annotation = annotationProvider.GetAnnotation(node);
+            commenter.AddCommentAfter(node, annotation);
         }
 
-        bool HasDefineMacroAttribute(INode element)
-            => element.GetMatchingAttribute(metalSpecProvider.DefineMacro) != null;
+        bool HasDefineMacroAttribute(INode node)
+            => node.GetMatchingAttribute(metalSpecProvider.DefineMacro) != null;
 
-        bool HasDefineSlotAttribute(INode element)
-            => element.GetMatchingAttribute(metalSpecProvider.DefineSlot) != null;
+        bool HasDefineSlotAttribute(INode node)
+            => node.GetMatchingAttribute(metalSpecProvider.DefineSlot) != null;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="SourceAnnotationContextProcessor"/> class.
@@ -83,7 +83,7 @@ namespace ZptSharp.SourceAnnotation
         /// <param name="annotationProvider">Annotation provider.</param>
         /// <param name="commenter">Commenter.</param>
         public SourceAnnotationContextProcessor(IGetsMetalAttributeSpecs metalSpecProvider,
-                                                IGetsAnnotationForElement annotationProvider,
+                                                IGetsAnnotationForNode annotationProvider,
                                                 IAddsComment commenter)
         {
             this.metalSpecProvider = metalSpecProvider ?? throw new ArgumentNullException(nameof(metalSpecProvider));

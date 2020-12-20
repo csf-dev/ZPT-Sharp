@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
 using ZptSharp.Dom;
@@ -7,7 +7,7 @@ namespace ZptSharp.Rendering
 {
     /// <summary>
     /// A service which which makes use of an <see cref="IIterativelyProcessesExpressionContexts"/>
-    /// in order to apply a <see cref="IProcessesExpressionContext"/> to every element exposed by a document.
+    /// in order to apply a <see cref="IProcessesExpressionContext"/> to every node exposed by a document.
     /// </summary>
     public class IterativeDocumentModifier : IIterativelyModifiesDocument
     {

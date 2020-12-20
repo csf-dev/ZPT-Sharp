@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace ZptSharp.Dom
 {
@@ -13,8 +13,8 @@ namespace ZptSharp.Dom
         /// This performs a recursive search.
         /// </summary>
         /// <returns>The matching attributes.</returns>
-        /// <param name="source">A source object which provides elements.</param>
+        /// <param name="source">A source object which provides nodes.</param>
         /// <param name="spec">A spec for an attribute.</param>
-        IEnumerable<IAttribute> SearchForAttributes(IHasElements source, AttributeSpec spec);
+        IEnumerable<IAttribute> SearchForAttributes(IHasNodes source, AttributeSpec spec);
     }
 }

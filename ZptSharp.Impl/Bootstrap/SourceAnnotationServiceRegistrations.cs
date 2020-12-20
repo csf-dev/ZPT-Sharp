@@ -1,4 +1,4 @@
-using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.DependencyInjection;
 using ZptSharp.SourceAnnotation;
 
 namespace ZptSharp.Bootstrap
@@ -11,7 +11,7 @@ namespace ZptSharp.Bootstrap
         internal void RegisterServices(IServiceCollection services)
         {
             services.AddTransient<IGetsSourceAnnotationContextProcessor, SourceAnnotationContextProcessorFactory>();
-            services.AddTransient<IGetsAnnotationForElement, AnnotationProvider>();
+            services.AddTransient<IGetsAnnotationForNode, AnnotationProvider>();
             services.AddTransient<IAddsComment, Commenter>();
             services.AddTransient<IGetsSourceAnnotationString, SourceAnnotationStringProvider>();
         }

@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
@@ -76,18 +76,18 @@ namespace ZptSharp.Expressions
         }
 
         [Test, AutoMoqData]
-        public async Task TryGetValueAsync_returns_element_attributes_collection_when_attributes_requested([Frozen, NoAutoProperties] ExpressionContext context,
+        public async Task TryGetValueAsync_returns_node_attributes_collection_when_attributes_requested([Frozen, NoAutoProperties] ExpressionContext context,
                                                                                                 [Frozen, MockedConfig] RenderingConfig config,
                                                                                                 [Frozen, MetalDocAdapter] IGetsMetalDocumentAdapter metalDocumentAdapterFactory,
-                                                                                                INode element,
+                                                                                                INode node,
                                                                                                 IAttribute attribute1,
                                                                                                 string name1,
                                                                                                 IAttribute attribute2,
                                                                                                 string name2,
                                                                                                 BuiltinContextsProvider sut)
         {
-            context.CurrentElement = element;
-            Mock.Get(element).SetupGet(x => x.Attributes).Returns(() => new[] { attribute1, attribute2 });
+            context.CurrentNode = node;
+            Mock.Get(node).SetupGet(x => x.Attributes).Returns(() => new[] { attribute1, attribute2 });
             Mock.Get(attribute1).SetupGet(x => x.Name).Returns(name1);
             Mock.Get(attribute2).SetupGet(x => x.Name).Returns(name2);
 

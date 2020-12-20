@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
 using ZptSharp.Dom;
@@ -8,7 +8,7 @@ using ZptSharp.Rendering;
 namespace ZptSharp.Metal
 {
     /// <summary>
-    /// Decorator for the <see cref="IProcessesExpressionContext"/> service which detects elements
+    /// Decorator for the <see cref="IProcessesExpressionContext"/> service which detects nodes
     /// which have 'define-macro' attributes upon them.  If such an attribute is found then the
     /// macro is stored in the current context's global scope for later usage.
     /// </summary>
@@ -40,11 +40,11 @@ namespace ZptSharp.Metal
         /// <param name="context">Context.</param>
         void AddAllMacrosToContext(ExpressionContext context)
         {
-            var defineMacroAttributes = attributeFinder.SearchForAttributes(context.CurrentElement, specProvider.DefineMacro);
+            var defineMacroAttributes = attributeFinder.SearchForAttributes(context.CurrentNode, specProvider.DefineMacro);
 
             foreach(var attribute in defineMacroAttributes)
             {
-                var macro = new MetalMacro(attribute.Value, attribute.Element.GetCopy());
+                var macro = new MetalMacro(attribute.Value, attribute.Node.GetCopy());
                 context.GlobalDefinitions[macro.Name] = macro;
             }
         }

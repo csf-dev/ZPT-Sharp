@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.IO;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,12 +12,12 @@ namespace ZptSharp.Dom
             provider = new XmlDocumentProvider(new XmlReaderSettingsFactory(new Resources.EmbeddedResourceXhtmlDtdProvider()));
 
         /// <summary>
-        /// Gets a single XML element node from the first element in the specified XML string.
+        /// Gets a single XML node node from the first node in the specified XML string.
         /// </summary>
         /// <returns>The node.</returns>
         /// <param name="xml">Xml.</param>
-        public static XmlElement GetNode(string xml)
-            => (XmlElement)GetDocument(xml).RootElement;
+        public static XmlNode GetNode(string xml)
+            => (XmlNode)GetDocument(xml).RootNode;
 
         /// <summary>
         /// Gets a document from the specified HTML string.

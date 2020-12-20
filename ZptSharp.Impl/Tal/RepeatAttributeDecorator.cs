@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
@@ -30,7 +30,7 @@ namespace ZptSharp.Tal
         /// <param name="token">An optional cancellation token.</param>
         public async Task<ExpressionContextProcessingResult> ProcessContextAsync(ExpressionContext context, CancellationToken token = default)
         {
-            var attribute = context.CurrentElement.GetMatchingAttribute(specProvider.Repeat);
+            var attribute = context.CurrentNode.GetMatchingAttribute(specProvider.Repeat);
             if (attribute == null)
                 return await wrapped.ProcessContextAsync(context, token).ConfigureAwait(false);
 
@@ -50,7 +50,7 @@ namespace ZptSharp.Tal
             // for each repetition.  The current context is used only
             // as a template of sorts, hence aborting processing its
             // children.
-            context.CurrentElement.Remove();
+            context.CurrentNode.Remove();
             var result = ExpressionContextProcessingResult.WithoutChildren;
             result.AdditionalContexts = contexts;
 
@@ -68,7 +68,7 @@ namespace ZptSharp.Tal
             var attributeMatch = attributeMatcher.Match(attribute.Value);
             if (!attributeMatch.Success)
             {
-                var message = String.Format(Resources.ExceptionMessage.InvalidRepeatAttribute, context.CurrentElement);
+                var message = String.Format(Resources.ExceptionMessage.InvalidRepeatAttribute, context.CurrentNode);
                 throw new InvalidTalAttributeException(message);
             }
 

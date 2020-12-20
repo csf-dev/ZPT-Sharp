@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using NUnit.Framework;
 
 namespace ZptSharp.Rendering
@@ -7,9 +7,9 @@ namespace ZptSharp.Rendering
     public class ZptCleanupContextProcessorFactoryTests
     {
         [Test, AutoMoqData]
-        public void GetElementAndAttributeRemovalProcessor_returns_instance(ZptCleanupContextProcessorFactory sut)
+        public void GetNodeAndAttributeRemovalProcessor_returns_instance(ZptCleanupContextProcessorFactory sut)
         {
-            Assert.That(() => sut.GetElementAndAttributeRemovalProcessor(), Is.Not.Null);
+            Assert.That(() => sut.GetNodeAndAttributeRemovalProcessor(), Is.Not.Null);
         }
     }
 }

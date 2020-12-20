@@ -1,14 +1,14 @@
-using System;
+﻿using System;
 using ZptSharp.Dom;
 using ZptSharp.Rendering;
 
 namespace ZptSharp.SourceAnnotation
 {
     /// <summary>
-    /// Implementation of <see cref="IGetsAnnotationForElement"/> which returns a string
-    /// based on the source information for the element, along with dividing lines.
+    /// Implementation of <see cref="IGetsAnnotationForNode"/> which returns a string
+    /// based on the source information for the node, along with dividing lines.
     /// </summary>
-    public class AnnotationProvider : IGetsAnnotationForElement
+    public class AnnotationProvider : IGetsAnnotationForNode
     {
         const char dividerCharacter = '=';
         const int dividerCharCount = 78;
@@ -16,34 +16,34 @@ namespace ZptSharp.SourceAnnotation
         readonly IGetsSourceAnnotationString sourceInfoProvider;
 
         /// <summary>
-        /// Gets the annotation text for the element.
+        /// Gets the annotation text for the node.
         /// </summary>
         /// <returns>The annotation text.</returns>
-        /// <param name="element">Element.</param>
+        /// <param name="node">Node.</param>
         /// <param name="tagType">The tag type to use for the annotation.</param>
-        public string GetAnnotation(INode element, TagType tagType = TagType.Start)
+        public string GetAnnotation(INode node, TagType tagType = TagType.Start)
         {
-            if (element == null)
-                throw new ArgumentNullException(nameof(element));
+            if (node == null)
+                throw new ArgumentNullException(nameof(node));
 
-            return GetAnnotation(element.SourceInfo, tagType);
+            return GetAnnotation(node.SourceInfo, tagType);
         }
 
         /// <summary>
-        /// Gets the annotation text for the element, using the pre-replacement source annotation for the element.
+        /// Gets the annotation text for the node, using the pre-replacement source annotation for the node.
         /// </summary>
         /// <returns>The annotation text.</returns>
-        /// <param name="element">Element.</param>
+        /// <param name="node">Node.</param>
         /// <param name="tagType">The tag type to use for the annotation.</param>
-        public string GetPreReplacementAnnotation(INode element, TagType tagType = TagType.Start)
+        public string GetPreReplacementAnnotation(INode node, TagType tagType = TagType.Start)
         {
-            if (element == null)
-                throw new ArgumentNullException(nameof(element));
+            if (node == null)
+                throw new ArgumentNullException(nameof(node));
 
-            return GetAnnotation(element.PreReplacementSourceInfo, tagType);
+            return GetAnnotation(node.PreReplacementSourceInfo, tagType);
         }
 
-        string GetAnnotation(ElementSourceInfo sourceInfo, TagType tagType)
+        string GetAnnotation(NodeSourceInfo sourceInfo, TagType tagType)
         {
             var divider = GetDivider();
 
@@ -65,7 +65,7 @@ namespace ZptSharp.SourceAnnotation
                                  Environment.NewLine);
         }
 
-        string GetMainAnnotation(ElementSourceInfo sourceInfo, TagType tagType)
+        string GetMainAnnotation(NodeSourceInfo sourceInfo, TagType tagType)
         {
             switch(tagType)
             {

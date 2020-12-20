@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
@@ -14,7 +14,7 @@ namespace ZptSharp.Metal
     /// </summary>
     /// <remarks>
     /// <para>
-    /// A <c>metal:use-macro</c> attribute indicates that the current DOM element should be replaced by an
+    /// A <c>metal:use-macro</c> attribute indicates that the current DOM node should be replaced by an
     /// expanded METAL macro.  The macro to use as the replacement is indicated via an expression which is the value
     /// of the use-macro attribute.
     /// </para>
@@ -39,7 +39,7 @@ namespace ZptSharp.Metal
         /// <param name="token">An optional cancellation token.</param>
         public async Task<ExpressionContextProcessingResult> ProcessContextAsync(ExpressionContext context, CancellationToken token = default)
         {
-            var macro = await macroProvider.GetMacroAsync(context.CurrentElement,
+            var macro = await macroProvider.GetMacroAsync(context.CurrentNode,
                                                           context,
                                                           new[] { specProvider.UseMacro, specProvider.ExtendMacro },
                                                           token)
@@ -47,30 +47,30 @@ namespace ZptSharp.Metal
 
             if (macro != null)
             {
-                await ReplaceCurrentElementWithExpandedMacroAsync(context, macro, token)
+                await ReplaceCurrentNodeWithExpandedMacroAsync(context, macro, token)
                     .ConfigureAwait(false);
             }
 
             return ExpressionContextProcessingResult.Noop;
         }
 
-        async Task ReplaceCurrentElementWithExpandedMacroAsync(ExpressionContext context, MetalMacro macro, CancellationToken token)
+        async Task ReplaceCurrentNodeWithExpandedMacroAsync(ExpressionContext context, MetalMacro macro, CancellationToken token)
         {
             var expandedMacro = await macroExpander.ExpandMacroAsync(macro, context, token)
                 .ConfigureAwait(false);
 
             if(logger.IsEnabled(LogLevel.Debug))
-                logger.LogDebug(@"Replacing use-macro element with expanded macro
-Macro element:{macro_element} ({macro_element_source})
-Using element:{macro_user} ({macro_user_source})",
-                                expandedMacro.Element,
-                                expandedMacro.Element.SourceInfo,
-                                context.CurrentElement,
-                                context.CurrentElement.SourceInfo);
+                logger.LogDebug(@"Replacing use-macro node with expanded macro
+Macro node:{macro_node} ({macro_node_source})
+Using node:{macro_user} ({macro_user_source})",
+                                expandedMacro.Node,
+                                expandedMacro.Node.SourceInfo,
+                                context.CurrentNode,
+                                context.CurrentNode.SourceInfo);
 
-            var replacement = expandedMacro.Element;
-            replacer.Replace(context.CurrentElement, replacement);
-            context.CurrentElement = replacement;
+            var replacement = expandedMacro.Node;
+            replacer.Replace(context.CurrentNode, replacement);
+            context.CurrentNode = replacement;
         }
 
         /// <summary>

@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
@@ -18,58 +18,58 @@ namespace ZptSharp.Metal
         readonly ILogger logger;
 
         /// <summary>
-        /// Gets the METAL macro referenced by the specified element's attribute, if such an attribute is present.
+        /// Gets the METAL macro referenced by the specified node's attribute, if such an attribute is present.
         /// </summary>
-        /// <returns>The METAL macro, or a null reference if the <paramref name="element"/>
+        /// <returns>The METAL macro, or a null reference if the <paramref name="node"/>
         /// has no attribute matching the <paramref name="attributeSpec"/>.</returns>
-        /// <param name="element">The element from which to get the macro.</param>
+        /// <param name="node">The node from which to get the macro.</param>
         /// <param name="context">The current expression context.</param>
         /// <param name="attributeSpec">An attribute spec.</param>
         /// <param name="token">An optional cancellation token.</param>
-        /// <exception cref="MacroNotFoundException">If the element does have an attribute matching
+        /// <exception cref="MacroNotFoundException">If the node does have an attribute matching
         /// the <paramref name="attributeSpec"/> but no macro could be resolved from the attribute's expression.</exception>
-        public Task<MetalMacro> GetMacroAsync(INode element,
+        public Task<MetalMacro> GetMacroAsync(INode node,
                                               ExpressionContext context,
                                               AttributeSpec attributeSpec,
                                               CancellationToken token = default)
-            => GetMacroAsync(element, context, new[] { attributeSpec }, token);
+            => GetMacroAsync(node, context, new[] { attributeSpec }, token);
 
         /// <summary>
-        /// Gets the METAL macro referenced by the specified element's attribute, if such an attribute is present.
+        /// Gets the METAL macro referenced by the specified node's attribute, if such an attribute is present.
         /// </summary>
-        /// <returns>The METAL macro, or a null reference if the <paramref name="element"/>
+        /// <returns>The METAL macro, or a null reference if the <paramref name="node"/>
         /// has no attribute matching any of the <paramref name="attributeSpecs"/>.</returns>
-        /// <param name="element">The element from which to get the macro.</param>
+        /// <param name="node">The node from which to get the macro.</param>
         /// <param name="context">The current expression context.</param>
         /// <param name="attributeSpecs">A collection of attribute specs.</param>
         /// <param name="token">An optional cancellation token.</param>
-        /// <exception cref="T:ZptSharp.Metal.MacroNotFoundException">If the element does have an attribute matching
+        /// <exception cref="T:ZptSharp.Metal.MacroNotFoundException">If the node does have an attribute matching
         /// the <paramref name="attributeSpecs"/> but no macro could be resolved from the attribute's expression.</exception>
-        public Task<MetalMacro> GetMacroAsync(INode element,
+        public Task<MetalMacro> GetMacroAsync(INode node,
                                               ExpressionContext context,
                                               IEnumerable<AttributeSpec> attributeSpecs,
                                               CancellationToken token = default)
         {
-            if (element == null)
-                throw new ArgumentNullException(nameof(element));
+            if (node == null)
+                throw new ArgumentNullException(nameof(node));
             if (context == null)
                 throw new ArgumentNullException(nameof(context));
             if (attributeSpecs == null)
                 throw new ArgumentNullException(nameof(attributeSpecs));
 
-            return GetMacroPrivateAsync(element, context, attributeSpecs, token);
+            return GetMacroPrivateAsync(node, context, attributeSpecs, token);
         }
 
-        async Task<MetalMacro> GetMacroPrivateAsync(INode element,
+        async Task<MetalMacro> GetMacroPrivateAsync(INode node,
                                                     ExpressionContext context,
                                                     IEnumerable<AttributeSpec> attributeSpecs,
                                                     CancellationToken token)
         {
-            var attribute = element.GetMatchingAttribute(attributeSpecs, out var attributeSpec);
+            var attribute = node.GetMatchingAttribute(attributeSpecs, out var attributeSpec);
             if (attribute == null)
             {
                 if(logger.IsEnabled(LogLevel.Trace))
-                    logger.LogTrace("No macro referenced by {element}", element);
+                    logger.LogTrace("No macro referenced by {node}", node);
 
                 return null;
             }
@@ -82,25 +82,25 @@ namespace ZptSharp.Metal
             }
             catch(Exception ex)
             {
-                AssertMacroIsNotNull(macro, element, attribute.Value, attributeSpec, ex);
+                AssertMacroIsNotNull(macro, node, attribute.Value, attributeSpec, ex);
             }
 
-            AssertMacroIsNotNull(macro, element, attribute.Value, attributeSpec);
+            AssertMacroIsNotNull(macro, node, attribute.Value, attributeSpec);
 
             if (logger.IsEnabled(LogLevel.Trace))
-                logger.LogTrace(@"An element references a METAL macro:
-Element:{element} ({element_source})
+                logger.LogTrace(@"An node references a METAL macro:
+Node:{node} ({node_source})
   Macro:{macro} ({macro_source})",
-                                element,
-                                element.SourceInfo,
-                                macro.Element,
-                                macro.Element.SourceInfo);
+                                node,
+                                node.SourceInfo,
+                                macro.Node,
+                                macro.Node.SourceInfo);
 
             return macro.GetCopy();
         }
 
         void AssertMacroIsNotNull(MetalMacro macro,
-                                  INode element,
+                                  INode node,
                                   string macroExpression,
                                   AttributeSpec attributeSpec,
                                   Exception inner = null)
@@ -109,7 +109,7 @@ Element:{element} ({element_source})
 
             var message = String.Format(Resources.ExceptionMessage.MacroNotFound,
                                         attributeSpec.Name,
-                                        element,
+                                        node,
                                         macroExpression);
 
             if(inner != null)

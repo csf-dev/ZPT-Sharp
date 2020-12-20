@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using ZptSharp.Dom;
@@ -10,7 +10,7 @@ namespace ZptSharp.Expressions
     /// </summary>
     public class ExpressionContext
     {
-        INode currentElement;
+        INode currentNode;
 
         /// <summary>
         /// Gets or sets a value indicating whether this <see cref="ExpressionContext"/> is the root context.
@@ -32,13 +32,13 @@ namespace ZptSharp.Expressions
         public object Model { get; set; }
 
         /// <summary>
-        /// Gets or sets the current DOM element being rendered by this context.
+        /// Gets or sets the current DOM node being rendered by this context.
         /// </summary>
-        /// <value>The DOM element.</value>
-        public INode CurrentElement
+        /// <value>The DOM node.</value>
+        public INode CurrentNode
         {
-            get => currentElement;
-            set => currentElement = value ?? throw new ArgumentNullException(nameof(value));
+            get => currentNode;
+            set => currentNode = value ?? throw new ArgumentNullException(nameof(value));
         }
 
         /// <summary>
@@ -73,15 +73,15 @@ namespace ZptSharp.Expressions
         public Stack<ErrorHandlingContext> ErrorHandlers { get; }
 
         /// <summary>
-        /// Gets a clone of the current expression context, but using an alternative specified element.
+        /// Gets a clone of the current expression context, but using an alternative specified node.
         /// Additionally, this is intended to be a child context, such that changes to it are not
         /// automatically reflected in the parent context (where it is not applicable to do so).
         /// </summary>
         /// <returns>The cloned expression context.</returns>
-        /// <param name="element">The element for the cloned context.</param>
-        public ExpressionContext CreateChild(INode element)
+        /// <param name="node">The node for the cloned context.</param>
+        public ExpressionContext CreateChild(INode node)
         {
-            return new ExpressionContext(element, LocalDefinitions, GlobalDefinitions, Repetitions, ErrorHandlers)
+            return new ExpressionContext(node, LocalDefinitions, GlobalDefinitions, Repetitions, ErrorHandlers)
             {
                 Error = Error,
                 Model = Model,
@@ -92,8 +92,8 @@ namespace ZptSharp.Expressions
         /// <summary>
         /// Initializes a new instance of the <see cref="ExpressionContext"/> class.
         /// </summary>
-        /// <param name="element">The DOM element for this context.</param>
-        public ExpressionContext(INode element) : this(element, null, null, null, null) { }
+        /// <param name="node">The DOM node for this context.</param>
+        public ExpressionContext(INode node) : this(node, null, null, null, null) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ExpressionContext"/> class; this is (to a degree)
@@ -110,18 +110,18 @@ namespace ZptSharp.Expressions
         /// definitions should affect other contexts, including those 'outside' of this one.
         /// </para>
         /// </remarks>
-        /// <param name="element">The DOM element for this context.</param>
+        /// <param name="node">The DOM node for this context.</param>
         /// <param name="localDefinitions">Local definitions.</param>
         /// <param name="globalDefinitions">Global definitions.</param>
         /// <param name="repetitions">Repetitions.</param>
         /// <param name="errorHandlers">Error handlers</param>
-        public ExpressionContext(INode element,
+        public ExpressionContext(INode node,
                                  IDictionary<string, object> localDefinitions,
                                  IDictionary<string, object> globalDefinitions,
                                  IDictionary<string, RepetitionInfo> repetitions,
                                  Stack<ErrorHandlingContext> errorHandlers)
         {
-            CurrentElement = element;
+            CurrentNode = node;
             LocalDefinitions = new Dictionary<string, object>(localDefinitions ?? new Dictionary<string, object>());
             GlobalDefinitions = globalDefinitions ?? new Dictionary<string, object>();
             Repetitions = new Dictionary<string, RepetitionInfo>(repetitions ?? new Dictionary<string, RepetitionInfo>());

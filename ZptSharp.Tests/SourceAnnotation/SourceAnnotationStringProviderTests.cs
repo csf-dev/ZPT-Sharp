@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.IO;
 using AutoFixture.NUnit3;
 using Microsoft.Extensions.Logging;
@@ -74,7 +74,7 @@ namespace ZptSharp.SourceAnnotation
                                                                              SourceAnnotationStringProvider sut, string location, int line)
         {
             var doc = new OtherSourceInfo(location);
-            var source = new ElementSourceInfo(doc, line, null);
+            var source = new NodeSourceInfo(doc, line, null);
             Assert.That(() => sut.GetStartTagInfo(source), Is.EqualTo($"{location} (line {line})"));
         }
 
@@ -83,7 +83,7 @@ namespace ZptSharp.SourceAnnotation
                                                                               SourceAnnotationStringProvider sut, string location)
         {
             var doc = new OtherSourceInfo(location);
-            var source = new ElementSourceInfo(doc);
+            var source = new NodeSourceInfo(doc);
             Assert.That(() => sut.GetStartTagInfo(source), Is.EqualTo(location));
         }
 
@@ -92,7 +92,7 @@ namespace ZptSharp.SourceAnnotation
                                                                          SourceAnnotationStringProvider sut, string location, int line)
         {
             var doc = new OtherSourceInfo(location);
-            var source = new ElementSourceInfo(doc, null, line);
+            var source = new NodeSourceInfo(doc, null, line);
             Assert.That(() => sut.GetEndTagInfo(source), Is.EqualTo($"{location} (line {line})"));
         }
 
@@ -101,7 +101,7 @@ namespace ZptSharp.SourceAnnotation
                                                                           SourceAnnotationStringProvider sut, string location)
         {
             var doc = new OtherSourceInfo(location);
-            var source = new ElementSourceInfo(doc);
+            var source = new NodeSourceInfo(doc);
             Assert.That(() => sut.GetEndTagInfo(source), Is.EqualTo(location));
         }
     }

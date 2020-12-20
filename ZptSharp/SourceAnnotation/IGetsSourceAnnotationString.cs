@@ -1,4 +1,4 @@
-using ZptSharp.Rendering;
+﻿using ZptSharp.Rendering;
 
 namespace ZptSharp.SourceAnnotation
 {
@@ -15,17 +15,17 @@ namespace ZptSharp.SourceAnnotation
         string GetSourceInfo(IDocumentSourceInfo sourceInfo);
 
         /// <summary>
-        /// Gets a string which represents information about the source of an element start-tag.
+        /// Gets a string which represents information about the source of an node start-tag.
         /// </summary>
         /// <returns>The start-tag info.</returns>
         /// <param name="sourceInfo">The source info from which to get a string.</param>
-        string GetStartTagInfo(ElementSourceInfo sourceInfo);
+        string GetStartTagInfo(NodeSourceInfo sourceInfo);
 
         /// <summary>
-        /// Gets a string which represents information about the source of an element end-tag.
+        /// Gets a string which represents information about the source of an node end-tag.
         /// </summary>
         /// <returns>The end-tag info.</returns>
         /// <param name="sourceInfo">The source info from which to get a string.</param>
-        string GetEndTagInfo(ElementSourceInfo sourceInfo);
+        string GetEndTagInfo(NodeSourceInfo sourceInfo);
     }
 }

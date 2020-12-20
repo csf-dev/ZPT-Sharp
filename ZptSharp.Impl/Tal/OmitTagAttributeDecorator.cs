@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
 using ZptSharp.Dom;
@@ -26,7 +26,7 @@ namespace ZptSharp.Tal
         /// <param name="token">An optional cancellation token.</param>
         public async Task<ExpressionContextProcessingResult> ProcessContextAsync(ExpressionContext context, CancellationToken token = default)
         {
-            var attribute = context.CurrentElement.GetMatchingAttribute(specProvider.OmitTag);
+            var attribute = context.CurrentNode.GetMatchingAttribute(specProvider.OmitTag);
             if (attribute == null)
                 return await wrapped.ProcessContextAsync(context, token).ConfigureAwait(false);
 
@@ -34,8 +34,8 @@ namespace ZptSharp.Tal
             if (!shouldOmit)
                 return await wrapped.ProcessContextAsync(context, token).ConfigureAwait(false);
 
-            var childContexts = context.CreateChildren(context.CurrentElement.ChildNodes);
-            omitter.Omit(context.CurrentElement);
+            var childContexts = context.CreateChildren(context.CurrentNode.ChildNodes);
+            omitter.Omit(context.CurrentNode);
 
             var result = ExpressionContextProcessingResult.WithoutChildren;
             result.AdditionalContexts = childContexts;

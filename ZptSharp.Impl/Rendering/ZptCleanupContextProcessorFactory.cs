@@ -1,12 +1,12 @@
-using ZptSharp.Dom;
+﻿using ZptSharp.Dom;
 
 namespace ZptSharp.Rendering
 {
     /// <summary>
-    /// Implementation of <see cref="IGetsZptElementAndAttributeRemovalContextProcessor"/> which returns
+    /// Implementation of <see cref="IGetsZptNodeAndAttributeRemovalContextProcessor"/> which returns
     /// a context processor suitable for performing cleanup on a rendered document.
     /// </summary>
-    public class ZptCleanupContextProcessorFactory : IGetsZptElementAndAttributeRemovalContextProcessor
+    public class ZptCleanupContextProcessorFactory : IGetsZptNodeAndAttributeRemovalContextProcessor
     {
         readonly IGetsWellKnownNamespace namespaceProvider;
         readonly Microsoft.Extensions.Logging.ILogger<ZptCleanupContextProcessor> logger;
@@ -16,7 +16,7 @@ namespace ZptSharp.Rendering
         /// Gets the source-annotation context processor.
         /// </summary>
         /// <returns>The source-annotation context processor.</returns>
-        public IProcessesExpressionContext GetElementAndAttributeRemovalProcessor()
+        public IProcessesExpressionContext GetNodeAndAttributeRemovalProcessor()
             => new ZptCleanupContextProcessor(namespaceProvider, logger, omitter);
 
         /// <summary>

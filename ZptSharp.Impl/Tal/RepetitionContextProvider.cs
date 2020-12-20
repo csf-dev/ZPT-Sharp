@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Collections;
 using System.Linq;
@@ -55,21 +55,21 @@ namespace ZptSharp.Tal
             {
                 var message = String.Format(Resources.ExceptionMessage.RepeatExpressionResultMustBeEnumerable,
                                             typeof(IEnumerable).FullName,
-                                            context.CurrentElement,
+                                            context.CurrentNode,
                                             expressionResult.GetType().FullName);
                 throw new EvaluationException(message, ex);
             }
             catch (Exception ex)
             {
                 var message = String.Format(Resources.ExceptionMessage.UnexpectedExceptionEnumeratingRepetitions,
-                                            context.CurrentElement);
+                                            context.CurrentNode);
                 throw new EvaluationException(message, ex);
             }
         }
 
         /// <summary>
         /// Maps a list of objects into a list of <see cref="RepetitionInfo"/> instances,
-        /// including the repeated DOM element and supporting information.
+        /// including the repeated DOM node and supporting information.
         /// </summary>
         /// <returns>The list of repetition objects.</returns>
         /// <param name="sequence">Sequence.</param>
@@ -86,7 +86,7 @@ namespace ZptSharp.Tal
                         Count = itemCount,
                         CurrentIndex = index,
                         CurrentValue = item,
-                        Element = context.CurrentElement.GetCopy(),
+                        Node = context.CurrentNode.GetCopy(),
                         Name = variableName
                     })
                 .ToList();
@@ -101,8 +101,8 @@ namespace ZptSharp.Tal
         /// <param name="sourceContext">Source context.</param>
         IList<ExpressionContext> GetContexts(IList<RepetitionInfo> repetitions, ExpressionContext sourceContext)
         {
-            var parent = sourceContext.CurrentElement.ParentElement;
-            var indexOnParent = parent.ChildNodes.IndexOf(sourceContext.CurrentElement);
+            var parent = sourceContext.CurrentNode.ParentNode;
+            var indexOnParent = parent.ChildNodes.IndexOf(sourceContext.CurrentNode);
 
             var contexts = repetitions
                 .Select(repetition => GetContext(repetition, sourceContext))
@@ -125,26 +125,26 @@ namespace ZptSharp.Tal
         /// <param name="sourceContext">Source context.</param>
         ExpressionContext GetContext(RepetitionInfo repetition, ExpressionContext sourceContext)
         {
-            var context = sourceContext.CreateChild(repetition.Element);
+            var context = sourceContext.CreateChild(repetition.Node);
 
             // Set up the repetition variable on the context
             context.Repetitions.Add(repetition.Name, repetition);
             context.LocalDefinitions.Add(repetition.Name, repetition.CurrentValue);
 
-            // The copied element will have a 'repeat' attribute, but
+            // The copied node will have a 'repeat' attribute, but
             // we don't want to process it again, so we remove it.
-            var duplicateRepeatAttribute = context.CurrentElement.Attributes
+            var duplicateRepeatAttribute = context.CurrentNode.Attributes
                 .FirstOrDefault(x => x.Matches(specProvider.Repeat));
             if(duplicateRepeatAttribute != null)
-                context.CurrentElement.Attributes.Remove(duplicateRepeatAttribute);
+                context.CurrentNode.Attributes.Remove(duplicateRepeatAttribute);
 
             return context;
         }
 
         /// <summary>
         /// Contexts returned as a result of a repeat attribute need to be separated by whitespace, so that
-        /// they are not bunched up.  This doesn't usually matter for elements, which are generally
-        /// whitespace-neutral anyway, but it's important if we are omitting the element and just using
+        /// they are not bunched up.  This doesn't usually matter for nodes, which are generally
+        /// whitespace-neutral anyway, but it's important if we are omitting the node and just using
         /// text nodes.
         /// </summary>
         /// <returns>The whitespace separated contexts.</returns>
@@ -160,14 +160,14 @@ namespace ZptSharp.Tal
                 yield return contexts[i];
                 if (i == contexts.Count - 1) continue;
 
-                var whitespace = originalContext.CreateChild(originalContext.CurrentElement.CreateTextNode(Environment.NewLine));
+                var whitespace = originalContext.CreateChild(originalContext.CurrentNode.CreateTextNode(Environment.NewLine));
                 whitespace.LocalDefinitions.Add(variableName, null);
                 yield return whitespace;
             }
         }
 
         /// <summary>
-        /// Adds the context element nodes to the parent node.
+        /// Adds the context node nodes to the parent node.
         /// </summary>
         /// <remarks>
         /// <para>
@@ -184,7 +184,7 @@ namespace ZptSharp.Tal
             reversedContexts.Reverse();
 
             foreach (var context in reversedContexts)
-                parent.ChildNodes.Insert(indexOnParent, context.CurrentElement);
+                parent.ChildNodes.Insert(indexOnParent, context.CurrentNode);
         }
 
         /// <summary>

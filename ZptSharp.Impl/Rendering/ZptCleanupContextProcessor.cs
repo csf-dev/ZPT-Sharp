@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -28,35 +28,35 @@ namespace ZptSharp.Rendering
         /// <param name="token">An optional cancellation token.</param>
         public Task<ExpressionContextProcessingResult> ProcessContextAsync(ExpressionContext context, CancellationToken token = default)
         {
-            if (NeedsCleanup(context.CurrentElement))
+            if (NeedsCleanup(context.CurrentNode))
             {
                 if(logger.IsEnabled(LogLevel.Trace))
-                    logger.LogTrace($"Removing {{element}}",
-                                    context.CurrentElement);
-                omitter.Omit(context.CurrentElement);
+                    logger.LogTrace($"Removing {{node}}",
+                                    context.CurrentNode);
+                omitter.Omit(context.CurrentNode);
                 return Task.FromResult(ExpressionContextProcessingResult.Noop);
             }
 
-            var attributesToRemove = context.CurrentElement.Attributes
+            var attributesToRemove = context.CurrentNode.Attributes
                 .Where(NeedsCleanup)
                 .ToList();
 
             foreach (var attribute in attributesToRemove)
             {
                 if (logger.IsEnabled(LogLevel.Trace))
-                    logger.LogTrace("Removing attribute \"{attribute}\" from {element}",
+                    logger.LogTrace("Removing attribute \"{attribute}\" from {node}",
                                     attribute.Name,
-                                    context.CurrentElement);
-                context.CurrentElement.Attributes.Remove(attribute);
+                                    context.CurrentNode);
+                context.CurrentNode.Attributes.Remove(attribute);
             }
 
             return Task.FromResult(ExpressionContextProcessingResult.Noop);
         }
 
-        bool NeedsCleanup(INode element)
+        bool NeedsCleanup(INode node)
         {
-            return element.IsInNamespace(namespaceProvider.MetalNamespace)
-                || element.IsInNamespace(namespaceProvider.TalNamespace);
+            return node.IsInNamespace(namespaceProvider.MetalNamespace)
+                || node.IsInNamespace(namespaceProvider.TalNamespace);
         }
 
         bool NeedsCleanup(IAttribute attribute)

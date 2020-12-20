@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -28,7 +28,7 @@ namespace ZptSharp.Tal
         }
 
         [Test, AutoMoqData]
-        public void ProcessContextAsync_rethrows_if_element_has_no_onError_attribute([Frozen] IHandlesProcessingError wrapped,
+        public void ProcessContextAsync_rethrows_if_node_has_no_onError_attribute([Frozen] IHandlesProcessingError wrapped,
                                                                                      [Frozen] IGetsTalAttributeSpecs specProvider,
                                                                                      OnErrorAttributeDecorator sut,
                                                                                      AttributeSpec spec,
@@ -40,8 +40,8 @@ namespace ZptSharp.Tal
                 .Setup(x => x.ProcessContextAsync(context, CancellationToken.None))
                 .Throws(new Exception(message));
             Mock.Get(specProvider).SetupGet(x => x.OnError).Returns(spec);
-            context.CurrentElement.Attributes.Clear();
-            context.CurrentElement.Attributes.Add(attribute);
+            context.CurrentNode.Attributes.Clear();
+            context.CurrentNode.Attributes.Add(attribute);
             Mock.Get(attribute).Setup(x => x.Matches(spec)).Returns(false);
 
             // It won't throw the exact same exception because it will be inside an aggregate exception
@@ -63,8 +63,8 @@ namespace ZptSharp.Tal
                 .Setup(x => x.ProcessContextAsync(context, CancellationToken.None))
                 .Throws<Exception>();
             Mock.Get(specProvider).SetupGet(x => x.OnError).Returns(spec);
-            context.CurrentElement.Attributes.Clear();
-            context.CurrentElement.Attributes.Add(attribute);
+            context.CurrentNode.Attributes.Clear();
+            context.CurrentNode.Attributes.Add(attribute);
             Mock.Get(attribute).Setup(x => x.Matches(spec)).Returns(true);
             Mock.Get(attribute).SetupGet(x => x.Value).Returns(expression);
             Mock.Get(evaluator)
@@ -92,19 +92,19 @@ namespace ZptSharp.Tal
                 .Setup(x => x.ProcessContextAsync(context, CancellationToken.None))
                 .Throws<Exception>();
             Mock.Get(specProvider).SetupGet(x => x.OnError).Returns(spec);
-            context.CurrentElement.Attributes.Clear();
-            context.CurrentElement.Attributes.Add(attribute);
+            context.CurrentNode.Attributes.Clear();
+            context.CurrentNode.Attributes.Add(attribute);
             Mock.Get(attribute).Setup(x => x.Matches(spec)).Returns(true);
             Mock.Get(attribute).SetupGet(x => x.Value).Returns(expression);
             Mock.Get(evaluator)
                 .Setup(x => x.EvaluateExpressionAsync(expression, context, CancellationToken.None))
                 .Returns(() => Task.FromResult(new DomValueExpressionResult(new[] { replacement })));
-            context.CurrentElement.ChildNodes.Clear();
-            context.CurrentElement.ChildNodes.Add(existingChild);
+            context.CurrentNode.ChildNodes.Clear();
+            context.CurrentNode.ChildNodes.Add(existingChild);
 
             await sut.ProcessContextAsync(context);
 
-            Assert.That(context.CurrentElement.ChildNodes, Is.EqualTo(new[] { replacement }));
+            Assert.That(context.CurrentNode.ChildNodes, Is.EqualTo(new[] { replacement }));
         }
 
         [Test, AutoMoqData]
@@ -122,8 +122,8 @@ namespace ZptSharp.Tal
                 .Setup(x => x.ProcessContextAsync(context, CancellationToken.None))
                 .Throws<Exception>();
             Mock.Get(specProvider).SetupGet(x => x.OnError).Returns(spec);
-            context.CurrentElement.Attributes.Clear();
-            context.CurrentElement.Attributes.Add(attribute);
+            context.CurrentNode.Attributes.Clear();
+            context.CurrentNode.Attributes.Add(attribute);
             Mock.Get(attribute).Setup(x => x.Matches(spec)).Returns(true);
             Mock.Get(attribute).SetupGet(x => x.Value).Returns(expression);
             Mock.Get(evaluator)
@@ -153,15 +153,15 @@ namespace ZptSharp.Tal
                 .Setup(x => x.ProcessContextAsync(context, CancellationToken.None))
                 .Throws(exception);
             Mock.Get(specProvider).SetupGet(x => x.OnError).Returns(spec);
-            context.CurrentElement.Attributes.Clear();
-            context.CurrentElement.Attributes.Add(attribute);
+            context.CurrentNode.Attributes.Clear();
+            context.CurrentNode.Attributes.Add(attribute);
             Mock.Get(attribute).Setup(x => x.Matches(spec)).Returns(true);
             Mock.Get(attribute).SetupGet(x => x.Value).Returns(expression);
             Mock.Get(evaluator)
                 .Setup(x => x.EvaluateExpressionAsync(expression, context, CancellationToken.None))
                 .Returns(() => Task.FromResult(new DomValueExpressionResult(new[] { replacement })));
-            context.CurrentElement.ChildNodes.Clear();
-            context.CurrentElement.ChildNodes.Add(existingChild);
+            context.CurrentNode.ChildNodes.Clear();
+            context.CurrentNode.ChildNodes.Add(existingChild);
 
             await sut.ProcessContextAsync(context);
 

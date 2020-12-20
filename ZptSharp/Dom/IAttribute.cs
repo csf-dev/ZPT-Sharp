@@ -1,4 +1,4 @@
-namespace ZptSharp.Dom
+﻿namespace ZptSharp.Dom
 {
     /// <summary>
     /// Abstraction for a DOM attribute.
@@ -6,10 +6,10 @@ namespace ZptSharp.Dom
     public interface IAttribute
     {
         /// <summary>
-        /// Gets or sets the element upon which this attribute appears.
+        /// Gets or sets the node upon which this attribute appears.
         /// </summary>
-        /// <value>The element.</value>
-        INode Element { get; set; }
+        /// <value>The node.</value>
+        INode Node { get; set; }
 
         /// <summary>
         /// Gets the attribute name, including any relevant prefix.

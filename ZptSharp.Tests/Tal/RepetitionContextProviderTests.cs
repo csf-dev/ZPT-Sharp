@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections;
 using System.Linq;
 using Moq;
@@ -43,15 +43,15 @@ namespace ZptSharp.Tal
                                                                                                     [StubDom] INode parent,
                                                                                                     INode newline)
         {
-            Mock.Get(sourceContext.CurrentElement)
+            Mock.Get(sourceContext.CurrentNode)
                 .SetupSequence(x => x.GetCopy())
                 .Returns(node1)
                 .Returns(node2)
                 .Returns(node3);
-            sourceContext.CurrentElement.ParentElement = parent;
-            parent.ChildNodes.Add(sourceContext.CurrentElement);
+            sourceContext.CurrentNode.ParentNode = parent;
+            parent.ChildNodes.Add(sourceContext.CurrentNode);
             var enumerable = new[] { value1, value2, value3 };
-            Mock.Get(sourceContext.CurrentElement)
+            Mock.Get(sourceContext.CurrentNode)
                 .Setup(x => x.CreateTextNode(Environment.NewLine))
                 .Returns(newline);
 
@@ -60,9 +60,9 @@ namespace ZptSharp.Tal
             Assert.That(result?.Select(x => x.LocalDefinitions[repeatVariableName]).ToList(),
                         Is.EqualTo(new[] { value1, It.IsAny<object>(), value2, It.IsAny<object>(), value3 }),
                         "Repeat variable values are correct");
-            Assert.That(result?.Select(x => x.CurrentElement).ToList(),
+            Assert.That(result?.Select(x => x.CurrentNode).ToList(),
                         Is.EqualTo(new[] { node1, newline, node2, newline, node3 }),
-                        "Elements are correct");
+                        "Nodes are correct");
         }
 
         #region contained stub type

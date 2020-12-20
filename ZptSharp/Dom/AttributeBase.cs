@@ -1,4 +1,4 @@
-namespace ZptSharp.Dom
+﻿namespace ZptSharp.Dom
 {
     /// <summary>
     /// Abstract base class for an <see cref="IAttribute"/>, containing functionality
@@ -7,10 +7,10 @@ namespace ZptSharp.Dom
     public abstract class AttributeBase : IAttribute
     {
         /// <summary>
-        /// Gets the element upon which this attribute appears.
+        /// Gets the node upon which this attribute appears.
         /// </summary>
-        /// <value>The element.</value>
-        public virtual INode Element { get; set; }
+        /// <value>The node.</value>
+        public virtual INode Node { get; set; }
 
         /// <summary>
         /// Gets the attribute name, including any relevant prefix.

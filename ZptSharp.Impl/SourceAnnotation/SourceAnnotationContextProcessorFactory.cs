@@ -1,4 +1,4 @@
-using ZptSharp.Metal;
+﻿using ZptSharp.Metal;
 using ZptSharp.Rendering;
 
 namespace ZptSharp.SourceAnnotation
@@ -10,7 +10,7 @@ namespace ZptSharp.SourceAnnotation
     public class SourceAnnotationContextProcessorFactory : IGetsSourceAnnotationContextProcessor
     {
         readonly IGetsMetalAttributeSpecs metalSpecProvider;
-        readonly IGetsAnnotationForElement annotationProvider;
+        readonly IGetsAnnotationForNode annotationProvider;
         readonly IAddsComment commenter;
 
         /// <summary>
@@ -28,7 +28,7 @@ namespace ZptSharp.SourceAnnotation
         /// <param name="annotationProvider">Annotation provider.</param>
         /// <param name="commenter">Commenter.</param>
         public SourceAnnotationContextProcessorFactory(IGetsMetalAttributeSpecs metalSpecProvider,
-                                                       IGetsAnnotationForElement annotationProvider,
+                                                       IGetsAnnotationForNode annotationProvider,
                                                        IAddsComment commenter)
         {
             this.metalSpecProvider = metalSpecProvider ?? throw new System.ArgumentNullException(nameof(metalSpecProvider));

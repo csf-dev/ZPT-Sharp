@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using ZptSharp.Expressions;
 
 namespace ZptSharp.Rendering
@@ -23,9 +23,9 @@ namespace ZptSharp.Rendering
 
         /// <summary>
         /// Gets a value indicating whether this <see cref="ExpressionContextProcessingResult"/>
-        /// indicates that children of the current element should not be processed.
+        /// indicates that children of the current node should not be processed.
         /// </summary>
-        /// <value><c>true</c> if child elements should not be processed; otherwise, <c>false</c>.</value>
+        /// <value><c>true</c> if child nodes should not be processed; otherwise, <c>false</c>.</value>
         public bool DoNotProcessChildren { get; }
 
         /// <summary>

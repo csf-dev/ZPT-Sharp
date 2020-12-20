@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.IO;
 using System.Linq;
 using System.Xml.Linq;
@@ -28,13 +28,13 @@ namespace ZptSharp.Dom
         }
 
         [Test]
-        public void ReplaceRootElement_can_replace_the_root_element_in_the_doc()
+        public void ReplaceRootNode_can_replace_the_root_node_in_the_doc()
         {
             var xml = "<html><body><div>Hello</div></body></html>";
             var sut = GetSut(xml);
-            var replacement = sut.RootElement.ChildNodes.First();
+            var replacement = sut.RootNode.ChildNodes.First();
 
-            sut.ReplaceRootElement(replacement);
+            sut.ReplaceRootNode(replacement);
 
             Assert.That(GetXml(sut.NativeDocument), Is.EqualTo(@"<?xml version=""1.0"" encoding=""utf-8""?>
 <body>

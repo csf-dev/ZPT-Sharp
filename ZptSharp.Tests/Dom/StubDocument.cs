@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 
 namespace ZptSharp.Dom
@@ -11,7 +11,7 @@ namespace ZptSharp.Dom
     {
         public virtual INode Root { get; set; }
 
-        public override INode RootElement => Root;
+        public override INode RootNode => Root;
 
         public override void AddCommentToBeginningOfDocument(string commentText) { }
 

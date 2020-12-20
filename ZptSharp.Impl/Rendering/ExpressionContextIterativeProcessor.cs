@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
@@ -32,7 +32,7 @@ namespace ZptSharp.Rendering
         /// <item>Additional contexts which have been created by the processing</item>
         /// </list>
         /// <para>
-        /// Conceptually, as an example, child contexts refer to child DOM elements.  Additional contexts are
+        /// Conceptually, as an example, child contexts refer to child DOM nodes.  Additional contexts are
         /// those which result from a processing operation.  For example a 'repetition' operation might create
         /// several copies of a context, each one containing an iteration of a collection item from the model.
         /// </para>

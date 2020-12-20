@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using ZptSharp.Dom;
 
 namespace ZptSharp.Metal
@@ -10,17 +10,17 @@ namespace ZptSharp.Metal
     public interface IGetsSlots
     {
         /// <summary>
-        /// Gets the defined slots from the specified <paramref name="element"/> and its descendents.
+        /// Gets the defined slots from the specified <paramref name="node"/> and its descendents.
         /// </summary>
         /// <returns>The defined slots.</returns>
-        /// <param name="element">Element.</param>
-        IEnumerable<Slot> GetDefinedSlots(INode element);
+        /// <param name="node">Node.</param>
+        IEnumerable<Slot> GetDefinedSlots(INode node);
 
         /// <summary>
-        /// Gets the slot fillers from the specified <paramref name="element"/> and its descendents.
+        /// Gets the slot fillers from the specified <paramref name="node"/> and its descendents.
         /// </summary>
         /// <returns>The slot fillers.</returns>
-        /// <param name="element">Element.</param>
-        IEnumerable<Slot> GetSlotFillers(INode element);
+        /// <param name="node">Node.</param>
+        IEnumerable<Slot> GetSlotFillers(INode node);
     }
 }

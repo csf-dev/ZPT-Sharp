@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using ZptSharp.Dom;
 
 namespace ZptSharp.Metal
@@ -15,11 +15,11 @@ namespace ZptSharp.Metal
         public string Name { get; }
 
         /// <summary>
-        /// Gets the DOM element associated with the slot.  This is either the element which
-        /// is replaced when the slot is filled, or the element which fills the slot.
+        /// Gets the DOM node associated with the slot.  This is either the node which
+        /// is replaced when the slot is filled, or the node which fills the slot.
         /// </summary>
-        /// <value>The element.</value>
-        public INode Element { get; }
+        /// <value>The node.</value>
+        public INode Node { get; }
 
         /// <summary>
         /// Determines whether the specified <see cref="Slot"/> is equal to the current <see cref="Slot"/>.
@@ -48,11 +48,11 @@ namespace ZptSharp.Metal
         /// Initializes a new instance of the <see cref="Slot"/> class.
         /// </summary>
         /// <param name="name">Slot name.</param>
-        /// <param name="element">Element.</param>
-        public Slot(string name, INode element)
+        /// <param name="node">Node.</param>
+        public Slot(string name, INode node)
         {
             Name = name ?? throw new ArgumentNullException(nameof(name));
-            Element = element ?? throw new ArgumentNullException(nameof(element));
+            Node = node ?? throw new ArgumentNullException(nameof(node));
         }
     }
 }

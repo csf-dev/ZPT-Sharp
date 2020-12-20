@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -18,22 +18,22 @@ namespace ZptSharp.Dom
         static readonly AngleSharpDocumentProvider provider = new AngleSharpDocumentProvider();
 
         /// <summary>
-        /// Gets a single HTML element node from the first element in the specified HTML string.
+        /// Gets a single HTML node node from the first node in the specified HTML string.
         /// This is specifically for use when the <paramref name="html"/> is a fragment and
         /// not a complete document, containing the basic HTML 'boilerplate' of <c>&lt;html&gt;</c>,
         /// <c>&lt;head&gt;</c> &amp; <c>&lt;body&gt;</c> tags.
         /// </summary>
         /// <returns>The node.</returns>
         /// <param name="html">Html.</param>
-        public static AngleSharpElement GetNodeFromFragment(string html)
+        public static AngleSharpNode GetNodeFromFragment(string html)
         {
             var document = GetDocument(emptyHtml);
             var context = BrowsingContext.New();
             var parser = context.GetService<IHtmlParser>();
-            var bodyElement = GetBodyElement(document);
-            var nativeBody = ((AngleSharpElement)bodyElement).NativeElement as IElement;
+            var bodyNode = GetBodyNode(document);
+            var nativeBody = ((AngleSharpNode)bodyNode).NativeNode as INode;
             var nodes = parser.ParseFragment(html, nativeBody);
-            return new AngleSharpElement(nodes.First(), document);
+            return new AngleSharpNode(nodes.First(), document);
         }
 
         /// <summary>
@@ -48,17 +48,17 @@ namespace ZptSharp.Dom
         }
 
         /// <summary>
-        /// Gets a collection of the elements from a parsed document.  This is for use when
+        /// Gets a collection of the nodes from a parsed document.  This is for use when
         /// the original/source document was created from a fragment which did not include
         /// the basic HTML 'boilerplate' of <c>&lt;html&gt;</c>, <c>&lt;head&gt;</c> &amp;
         /// <c>&lt;body&gt;</c> tags.
         /// </summary>
-        /// <returns>The elements from the document's body element.</returns>
+        /// <returns>The nodes from the document's body node.</returns>
         /// <param name="doc">Document.</param>
-        public static IEnumerable<AngleSharpElement> GetElementsFromFragmentBasedDocument(IDocument doc)
-            => GetBodyElement(doc).ChildNodes.Cast<AngleSharpElement>().ToList();
+        public static IEnumerable<AngleSharpNode> GetNodesFromFragmentBasedDocument(IDocument doc)
+            => GetBodyNode(doc).ChildNodes.Cast<AngleSharpNode>().ToList();
 
-        static AngleSharpElement GetBodyElement(IDocument doc) => doc.RootElement.ChildNodes[1] as AngleSharpElement;
+        static AngleSharpNode GetBodyNode(IDocument doc) => doc.RootNode.ChildNodes[1] as AngleSharpNode;
 
         /// <summary>
         /// Gets a rendering of a document.

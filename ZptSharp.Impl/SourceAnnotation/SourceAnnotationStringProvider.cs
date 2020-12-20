@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.IO;
 using Microsoft.Extensions.Logging;
 using ZptSharp.Config;
@@ -53,19 +53,19 @@ namespace ZptSharp.SourceAnnotation
         }
 
         /// <summary>
-        /// Gets a string which represents information about the source of an element start-tag.
+        /// Gets a string which represents information about the source of an node start-tag.
         /// </summary>
         /// <returns>The start-tag info.</returns>
         /// <param name="sourceInfo">The source info from which to get a string.</param>
-        public string GetStartTagInfo(ElementSourceInfo sourceInfo)
+        public string GetStartTagInfo(NodeSourceInfo sourceInfo)
             => GetSourceInfo(sourceInfo?.Document, sourceInfo?.StartTagLineNumber);
 
         /// <summary>
-        /// Gets a string which represents information about the source of an element end-tag.
+        /// Gets a string which represents information about the source of an node end-tag.
         /// </summary>
         /// <returns>The end-tag info.</returns>
         /// <param name="sourceInfo">The source info from which to get a string.</param>
-        public string GetEndTagInfo(ElementSourceInfo sourceInfo)
+        public string GetEndTagInfo(NodeSourceInfo sourceInfo)
             => GetSourceInfo(sourceInfo?.Document, sourceInfo?.EndTagLineNumber);
 
         string GetSourceInfo(IDocumentSourceInfo sourceInfo, int? lineNumber)

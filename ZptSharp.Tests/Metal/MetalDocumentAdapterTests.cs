@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoFixture.NUnit3;
@@ -64,15 +64,15 @@ namespace ZptSharp.Metal
 
             var result = sut.GetMacros();
 
-            Assert.That(() => result[attrib1.Value].Element,
-                        Is.SameAs(attrib1.Element),
-                        $"Attribute 1 macro {nameof(IAttribute.Element)} is correct");
+            Assert.That(() => result[attrib1.Value].Node,
+                        Is.SameAs(attrib1.Node),
+                        $"Attribute 1 macro {nameof(IAttribute.Node)} is correct");
             Assert.That(() => result[attrib1.Value].Name,
                         Is.SameAs(attrib1.Value),
                         $"Attribute 1 macro {nameof(IAttribute.Name)} is correct");
-            Assert.That(() => result[attrib2.Value].Element,
-                        Is.SameAs(attrib2.Element),
-                        $"Attribute 2 macro {nameof(IAttribute.Element)} is correct");
+            Assert.That(() => result[attrib2.Value].Node,
+                        Is.SameAs(attrib2.Node),
+                        $"Attribute 2 macro {nameof(IAttribute.Node)} is correct");
             Assert.That(() => result[attrib2.Value].Name,
                         Is.SameAs(attrib2.Value),
                         $"Attribute 2 macro {nameof(IAttribute.Name)} is correct");
@@ -83,7 +83,7 @@ namespace ZptSharp.Metal
                                                                  MetalDocumentAdapter sut)
         {
             Mock.Get(attributeSearcher)
-                .Setup(x => x.SearchForAttributes(It.IsAny<IHasElements>(), It.IsAny<AttributeSpec>()))
+                .Setup(x => x.SearchForAttributes(It.IsAny<IHasNodes>(), It.IsAny<AttributeSpec>()))
                 .Returns(() => Enumerable.Empty<IAttribute>());
             Assert.That(() => sut.TryGetValueAsync("macros")?.Result.Success, Is.True);
         }

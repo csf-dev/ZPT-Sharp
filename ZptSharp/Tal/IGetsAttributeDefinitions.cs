@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using ZptSharp.Dom;
 
 namespace ZptSharp.Tal
@@ -14,7 +14,7 @@ namespace ZptSharp.Tal
         /// </summary>
         /// <returns>The attribute definitions.</returns>
         /// <param name="attributesAttributeValue">The TAL 'attributes' attribute value.</param>
-        /// <param name="element">The element node upon which the attributes are defined.</param>
-        IEnumerable<AttributeDefinition> GetDefinitions(string attributesAttributeValue, INode element);
+        /// <param name="node">The node node upon which the attributes are defined.</param>
+        IEnumerable<AttributeDefinition> GetDefinitions(string attributesAttributeValue, INode node);
     }
 }

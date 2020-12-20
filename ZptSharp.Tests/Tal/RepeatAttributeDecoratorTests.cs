@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
@@ -27,7 +27,7 @@ namespace ZptSharp.Tal
                 .Setup(x => x.ProcessContextAsync(context, CancellationToken.None))
                 .Returns(() => Task.FromResult(wrappedResult));
             Mock.Get(specProvider).SetupGet(x => x.Repeat).Returns(spec);
-            context.CurrentElement.Attributes.Clear();
+            context.CurrentNode.Attributes.Clear();
 
             Assert.That(() => sut.ProcessContextAsync(context).Result, Is.SameAs(wrappedResult));
         }
@@ -48,8 +48,8 @@ namespace ZptSharp.Tal
                 .Setup(x => x.ProcessContextAsync(context, CancellationToken.None))
                 .Returns(() => Task.FromResult(wrappedResult));
             Mock.Get(specProvider).SetupGet(x => x.Repeat).Returns(spec);
-            context.CurrentElement.Attributes.Clear();
-            context.CurrentElement.Attributes.Add(attribute);
+            context.CurrentNode.Attributes.Clear();
+            context.CurrentNode.Attributes.Add(attribute);
             Mock.Get(attribute).Setup(x => x.Matches(spec)).Returns(true);
             Mock.Get(attribute).SetupGet(x => x.Value).Returns("varName expression");
             Mock.Get(evaluator)
@@ -78,10 +78,10 @@ namespace ZptSharp.Tal
                                                                                                    [StubDom] INode parent)
         {
             Mock.Get(specProvider).SetupGet(x => x.Repeat).Returns(spec);
-            context.CurrentElement.Attributes.Clear();
-            context.CurrentElement.Attributes.Add(attribute);
-            context.CurrentElement.ParentElement = parent;
-            parent.ChildNodes.Add(context.CurrentElement);
+            context.CurrentNode.Attributes.Clear();
+            context.CurrentNode.Attributes.Add(attribute);
+            context.CurrentNode.ParentNode = parent;
+            parent.ChildNodes.Add(context.CurrentNode);
             Mock.Get(attribute).Setup(x => x.Matches(spec)).Returns(true);
             Mock.Get(attribute).SetupGet(x => x.Value).Returns("varName expression");
             Mock.Get(evaluator)
@@ -113,10 +113,10 @@ namespace ZptSharp.Tal
                                                                                                  [StubDom] INode parent)
         {
             Mock.Get(specProvider).SetupGet(x => x.Repeat).Returns(spec);
-            context.CurrentElement.Attributes.Clear();
-            context.CurrentElement.Attributes.Add(attribute);
-            context.CurrentElement.ParentElement = parent;
-            parent.ChildNodes.Add(context.CurrentElement);
+            context.CurrentNode.Attributes.Clear();
+            context.CurrentNode.Attributes.Add(attribute);
+            context.CurrentNode.ParentNode = parent;
+            parent.ChildNodes.Add(context.CurrentNode);
             Mock.Get(attribute).Setup(x => x.Matches(spec)).Returns(true);
             Mock.Get(attribute).SetupGet(x => x.Value).Returns("varName expression");
             Mock.Get(evaluator)

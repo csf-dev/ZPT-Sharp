@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
@@ -12,7 +12,7 @@ namespace ZptSharp.Tal
     /// <summary>
     /// Implementation of <see cref="IHandlesProcessingError"/> which handles both TAL 'content' or
     /// TAL 'replace' attributes.  Their functionality is somewhat similar, and they cannot coexist on
-    /// the same DOM element.
+    /// the same DOM node.
     /// </summary>
     public class ContentOrReplaceAttributeDecorator : IHandlesProcessingError
     {
@@ -31,12 +31,12 @@ namespace ZptSharp.Tal
         /// <param name="token">An optional cancellation token.</param>
         public Task<ExpressionContextProcessingResult> ProcessContextAsync(ExpressionContext context, CancellationToken token = default)
         {
-            var content = context.CurrentElement.GetMatchingAttribute(specProvider.Content);
-            var replace = context.CurrentElement.GetMatchingAttribute(specProvider.Replace);
+            var content = context.CurrentNode.GetMatchingAttribute(specProvider.Content);
+            var replace = context.CurrentNode.GetMatchingAttribute(specProvider.Replace);
 
             if (content != null && replace != null)
             {
-                var message = String.Format(Resources.ExceptionMessage.ContentAndReplaceAttributesMayNotCoexist, context.CurrentElement);
+                var message = String.Format(Resources.ExceptionMessage.ContentAndReplaceAttributesMayNotCoexist, context.CurrentNode);
                 throw new InvalidTalAttributeException(message);
             }
             if (content == null && replace == null)
@@ -63,8 +63,8 @@ namespace ZptSharp.Tal
             if (domResult.AbortAction)
                 return await wrapped.ProcessContextAsync(context, token).ConfigureAwait(false);
 
-            context.CurrentElement.ChildNodes.Clear();
-            context.CurrentElement.AddChildren(domResult.Nodes);
+            context.CurrentNode.ChildNodes.Clear();
+            context.CurrentNode.AddChildren(domResult.Nodes);
 
             return await wrapped.ProcessContextAsync(context, token).ConfigureAwait(false);
         }
@@ -84,16 +84,16 @@ namespace ZptSharp.Tal
 
             if (domResult.AbortAction)
             {
-                var childNodeContexts = context.CreateChildren(context.CurrentElement.ChildNodes);
+                var childNodeContexts = context.CreateChildren(context.CurrentNode.ChildNodes);
                 MoveTalAttributesToReplacementNodesWhereApplicable(childNodeContexts, context);
-                omitter.Omit(context.CurrentElement);
+                omitter.Omit(context.CurrentNode);
 
                 return await GetReplacementResultAsync(childNodeContexts, token).ConfigureAwait(false);
             }
 
             var replacementContexts = context.CreateChildren(domResult.Nodes);
             MoveTalAttributesToReplacementNodesWhereApplicable(replacementContexts, context);
-            replacer.Replace(context.CurrentElement, domResult.Nodes);
+            replacer.Replace(context.CurrentNode, domResult.Nodes);
 
             return await GetReplacementResultAsync(replacementContexts, token).ConfigureAwait(false);
         }
@@ -125,7 +125,7 @@ namespace ZptSharp.Tal
             catch(Exception ex)
             {
                 var message = String.Format(Resources.ExceptionMessage.CouldNotEvaluateContentOrReplaceExpression,
-                                            context.CurrentElement,
+                                            context.CurrentNode,
                                             attribute.Value);
                 throw new TalExpressionEvaluationException(message, ex);
             }
@@ -133,39 +133,39 @@ namespace ZptSharp.Tal
 
         /// <summary>
         /// TAL 'attributes' and 'omit-tag' attributes are still relevant on the replacement node(s) and
-        /// should still be processed.  This function copies those attributes from the current element to
-        /// the replacement elements where they are present.
+        /// should still be processed.  This function copies those attributes from the current node to
+        /// the replacement nodes where they are present.
         /// </summary>
         /// <param name="contexts">Contexts.</param>
-        /// <param name="replaceElementContext">Replace element context.</param>
+        /// <param name="replaceNodeContext">Replace node context.</param>
         void MoveTalAttributesToReplacementNodesWhereApplicable(IList<ExpressionContext> contexts,
-                                                                ExpressionContext replaceElementContext)
+                                                                ExpressionContext replaceNodeContext)
         {
-            var attributesAttribute = replaceElementContext.CurrentElement.GetMatchingAttribute(specProvider.Attributes);
-            var omitTagAttribute = replaceElementContext.CurrentElement.GetMatchingAttribute(specProvider.OmitTag);
+            var attributesAttribute = replaceNodeContext.CurrentNode.GetMatchingAttribute(specProvider.Attributes);
+            var omitTagAttribute = replaceNodeContext.CurrentNode.GetMatchingAttribute(specProvider.OmitTag);
 
             foreach (var context in contexts)
             {
                 if(logger.IsEnabled(LogLevel.Trace))
                 {
-                    logger.LogTrace(@"Moving attributes from original content element to replacement contexts.
+                    logger.LogTrace(@"Moving attributes from original content node to replacement contexts.
   Attributes attribute:{attributes_attribute}
     Omit tag attribute:{omit_tag_attribute}
       Replacement node:{replacement_node},
-Replacement is element:{is_element}",
+Replacement is node:{is_node}",
                                     attributesAttribute,
                                     omitTagAttribute,
-                                    context.CurrentElement,
-                                    context.CurrentElement.IsElement);
+                                    context.CurrentNode,
+                                    context.CurrentNode.IsNode);
                 }
 
-                // Don't copy attributes to non-elements
-                if (!context.CurrentElement.IsElement) continue;
+                // Don't copy attributes to non-nodes
+                if (!context.CurrentNode.IsNode) continue;
 
                 if (attributesAttribute != null)
-                    context.CurrentElement.Attributes.Add(attributesAttribute);
+                    context.CurrentNode.Attributes.Add(attributesAttribute);
                 if (omitTagAttribute != null)
-                    context.CurrentElement.Attributes.Add(omitTagAttribute);
+                    context.CurrentNode.Attributes.Add(omitTagAttribute);
             }
         }
 

@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.Extensions.DependencyInjection;
@@ -23,7 +23,7 @@ namespace ZptSharp.Rendering
         /// <param name="request">Request.</param>
         public ExpressionContext GetExpressionContext(IDocument document, RenderZptDocumentRequest request)
         {
-            var context = GetExpressionContext(document.RootElement, document, request.Model, isRoot: true);
+            var context = GetExpressionContext(document.RootNode, document, request.Model, isRoot: true);
             var config = serviceProvider.GetRequiredService<RenderingConfig>();
 
             if(config.ContextBuilder != null)
@@ -42,19 +42,19 @@ namespace ZptSharp.Rendering
         /// <param name="context">The context from which to get children.</param>
         public IEnumerable<ExpressionContext> GetChildContexts(ExpressionContext context)
         {
-            return context.CurrentElement.ChildNodes
-                .Where(x => x.IsElement)
+            return context.CurrentNode.ChildNodes
+                .Where(x => x.IsNode)
                 .Select(x => GetExpressionContext(x, context.TemplateDocument, context.Model, context))
                 .ToList();
         }
 
-        ExpressionContext GetExpressionContext(INode element,
+        ExpressionContext GetExpressionContext(INode node,
                                                IDocument document,
                                                object model,
                                                ExpressionContext parentContext = null,
                                                bool isRoot = false)
         {
-            return new ExpressionContext(element,
+            return new ExpressionContext(node,
                                          parentContext?.LocalDefinitions,
                                          parentContext?.GlobalDefinitions,
                                          parentContext?.Repetitions,

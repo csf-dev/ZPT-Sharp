@@ -86,7 +86,7 @@ namespace ZptSharp.Expressions.PathExpressions
             {
                 var message = String.Format(Resources.ExceptionMessage.CannotParsePathExpressionAttribute,
                                             request.Expression,
-                                            request.ExpressionContext.CurrentElement);
+                                            request.ExpressionContext.CurrentNode);
                 throw new CannotParsePathException(message, ex);
             }
         }

@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -8,7 +8,7 @@ using ZptSharp.Config;
 namespace ZptSharp.Dom
 {
     [TestFixture,Parallelizable]
-    public class HapElementTests
+    public class HapNodeTests
     {
         #region ToString
 
@@ -24,21 +24,21 @@ namespace ZptSharp.Dom
         #region IsInNamespace
 
         [Test, AutoMoqData]
-        public void IsInNamespace_returns_false_when_element_has_no_namespace_prefix(WellKnownNamespaceProvider namespaces)
+        public void IsInNamespace_returns_false_when_node_has_no_namespace_prefix(WellKnownNamespaceProvider namespaces)
         {
             var html = @"<div class=""foo"" tal:repeat=""item items"">";
             Assert.That(() => HapDocumentUtil.GetNode(html).IsInNamespace(namespaces.TalNamespace), Is.False);
         }
 
         [Test, AutoMoqData]
-        public void IsInNamespace_returns_true_when_element_has_matching_namespace_prefix(WellKnownNamespaceProvider namespaces)
+        public void IsInNamespace_returns_true_when_node_has_matching_namespace_prefix(WellKnownNamespaceProvider namespaces)
         {
             var html = @"<tal:div class=""foo"" tal:repeat=""item items"">";
             Assert.That(() => HapDocumentUtil.GetNode(html).IsInNamespace(namespaces.TalNamespace), Is.True);
         }
 
         [Test, AutoMoqData]
-        public void IsInNamespace_returns_false_when_element_has_different_namespace_prefix(WellKnownNamespaceProvider namespaces)
+        public void IsInNamespace_returns_false_when_node_has_different_namespace_prefix(WellKnownNamespaceProvider namespaces)
         {
             var html = @"<metal:div class=""foo"" tal:repeat=""item items"">";
             Assert.That(() => HapDocumentUtil.GetNode(html).IsInNamespace(namespaces.TalNamespace), Is.False);
@@ -52,23 +52,23 @@ namespace ZptSharp.Dom
         public void Adding_a_child_node_modifies_native_document()
         {
             var html1 = @"<div></div>";
-            var element1 = HapDocumentUtil.GetNode(html1);
+            var node1 = HapDocumentUtil.GetNode(html1);
 
             var html2 = @"<p>Foo bar</p>";
-            var element2 = HapDocumentUtil.GetNode(html2);
+            var node2 = HapDocumentUtil.GetNode(html2);
 
-            element1.ChildNodes.Add(element2);
-            Assert.That(element1.NativeElement.OuterHtml, Is.EqualTo("<div><p>Foo bar</p></div>"));
+            node1.ChildNodes.Add(node2);
+            Assert.That(node1.NativeNode.OuterHtml, Is.EqualTo("<div><p>Foo bar</p></div>"));
         }
 
         [Test]
         public void Removing_a_child_node_modifies_native_document()
         {
             var html = @"<div><p>Foo bar</p></div>";
-            var element = HapDocumentUtil.GetNode(html);
+            var node = HapDocumentUtil.GetNode(html);
 
-            element.ChildNodes.RemoveAt(0);
-            Assert.That(element.NativeElement.OuterHtml, Is.EqualTo("<div></div>"));
+            node.ChildNodes.RemoveAt(0);
+            Assert.That(node.NativeNode.OuterHtml, Is.EqualTo("<div></div>"));
         }
 
         #endregion
@@ -79,21 +79,21 @@ namespace ZptSharp.Dom
         public void Adding_an_attribute_modifies_native_document()
         {
             var html = @"<div></div>";
-            var element = HapDocumentUtil.GetNode(html);
+            var node = HapDocumentUtil.GetNode(html);
 
-            var native = element.NativeElement.OwnerDocument.CreateAttribute("foo", "bar");
-            element.Attributes.Add(new HapAttribute(native) { Element = element });
-            Assert.That(element.NativeElement.OuterHtml, Is.EqualTo(@"<div foo=""bar""></div>"));
+            var native = node.NativeNode.OwnerDocument.CreateAttribute("foo", "bar");
+            node.Attributes.Add(new HapAttribute(native) { Node = node });
+            Assert.That(node.NativeNode.OuterHtml, Is.EqualTo(@"<div foo=""bar""></div>"));
         }
 
         [Test]
         public void Removing_an_attribute_node_modifies_native_document()
         {
             var html = @"<div foo=""bar""></div>";
-            var element = HapDocumentUtil.GetNode(html);
+            var node = HapDocumentUtil.GetNode(html);
 
-            element.Attributes.RemoveAt(0);
-            Assert.That(element.NativeElement.OuterHtml, Is.EqualTo("<div></div>"));
+            node.Attributes.RemoveAt(0);
+            Assert.That(node.NativeNode.OuterHtml, Is.EqualTo("<div></div>"));
         }
 
         #endregion
@@ -104,11 +104,11 @@ namespace ZptSharp.Dom
         public void GetCopy_returns_deep_copy_of_selected_node()
         {
             var html = @"<html><body><div class=""foo""><p id=""test"">Hello there</p><p>Another paragraph</p></div></body></html>";
-            var htmlElement = HapDocumentUtil.GetNode(html);
-            var bodyElement = htmlElement.ChildNodes.First();
-            var result = (HapElement) bodyElement.GetCopy();
+            var htmlNode = HapDocumentUtil.GetNode(html);
+            var bodyNode = htmlNode.ChildNodes.First();
+            var result = (HapNode) bodyNode.GetCopy();
 
-            Assert.That(result.NativeElement.OuterHtml, Is.EqualTo(@"<body><div class=""foo""><p id=""test"">Hello there</p><p>Another paragraph</p></div></body>"));
+            Assert.That(result.NativeNode.OuterHtml, Is.EqualTo(@"<body><div class=""foo""><p id=""test"">Hello there</p><p>Another paragraph</p></div></body>"));
         }
 
         [Test, AutoMoqData]
@@ -122,13 +122,13 @@ namespace ZptSharp.Dom
     </div>
 </body>
 </html>";
-            var htmlElement = HapDocumentUtil.GetNode(html);
-            var bodyElement = htmlElement.ChildNodes.Skip(1).First();
+            var htmlNode = HapDocumentUtil.GetNode(html);
+            var bodyNode = htmlNode.ChildNodes.Skip(1).First();
 
-            var result = bodyElement.GetCopy();
+            var result = bodyNode.GetCopy();
 
-            var testElement = result.ChildNodes.Skip(1).First().ChildNodes.Skip(1).First();
-            Assert.That(testElement.SourceInfo?.StartTagLineNumber, Is.EqualTo(4));
+            var testNode = result.ChildNodes.Skip(1).First().ChildNodes.Skip(1).First();
+            Assert.That(testNode.SourceInfo?.StartTagLineNumber, Is.EqualTo(4));
         }
 
         #endregion
@@ -158,12 +158,12 @@ namespace ZptSharp.Dom
         #region CreateTextNode
 
         [Test, AutoMoqData]
-        public void CreateTextNode_returns_a_node_object_which_is_not_an_element(string content)
+        public void CreateTextNode_returns_a_node_object_which_is_not_an_node(string content)
         {
             var html = "<html><body><div>Hello</div></body></html>";
             var sut = HapDocumentUtil.GetNode(html);
 
-            Assert.That(() => sut.CreateTextNode(content), Is.Not.Null.And.Property(nameof(INode.IsElement)).False);
+            Assert.That(() => sut.CreateTextNode(content), Is.Not.Null.And.Property(nameof(INode.IsNode)).False);
         }
 
         #endregion
