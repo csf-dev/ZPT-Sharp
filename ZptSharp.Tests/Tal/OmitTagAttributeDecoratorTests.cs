@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
 using AutoFixture.NUnit3;
@@ -49,8 +49,8 @@ namespace ZptSharp.Tal
                 .Setup(x => x.ProcessContextAsync(context, CancellationToken.None))
                 .Returns(() => Task.FromResult(wrappedResult));
             Mock.Get(attribute).Setup(x => x.Matches(spec)).Returns(true);
-            context.CurrentElement.Attributes.Clear();
-            context.CurrentElement.Attributes.Add(attribute);
+            context.CurrentNode.Attributes.Clear();
+            context.CurrentNode.Attributes.Add(attribute);
             Mock.Get(evaluator)
                 .Setup(x => x.EvaluateExpressionAsync(attribute.Value, context, CancellationToken.None))
                 .Returns(() => Task.FromResult(expressionResult));
@@ -83,8 +83,8 @@ namespace ZptSharp.Tal
                 .Setup(x => x.ProcessContextAsync(context, CancellationToken.None))
                 .Returns(() => Task.FromResult(wrappedResult));
             Mock.Get(attribute).Setup(x => x.Matches(spec)).Returns(true);
-            context.CurrentElement.Attributes.Clear();
-            context.CurrentElement.Attributes.Add(attribute);
+            context.CurrentNode.Attributes.Clear();
+            context.CurrentNode.Attributes.Add(attribute);
             Mock.Get(evaluator)
                 .Setup(x => x.EvaluateExpressionAsync(attribute.Value, context, CancellationToken.None))
                 .Returns(() => Task.FromResult(expressionResult));
@@ -101,7 +101,7 @@ namespace ZptSharp.Tal
         }
 
         [Test, AutoMoqData]
-        public async Task ProcessContextAsync_omits_element_if_expression_is_truthy([Frozen] IGetsTalAttributeSpecs specProvider,
+        public async Task ProcessContextAsync_omits_node_if_expression_is_truthy([Frozen] IGetsTalAttributeSpecs specProvider,
                                                                                     [Frozen] IEvaluatesExpression evaluator,
                                                                                     [Frozen] IInterpretsExpressionResult resultInterpreter,
                                                                                     [Frozen] IOmitsNode omitter,
@@ -113,8 +113,8 @@ namespace ZptSharp.Tal
         {
             Mock.Get(specProvider).SetupGet(x => x.OmitTag).Returns(spec);
             Mock.Get(attribute).Setup(x => x.Matches(spec)).Returns(true);
-            context.CurrentElement.Attributes.Clear();
-            context.CurrentElement.Attributes.Add(attribute);
+            context.CurrentNode.Attributes.Clear();
+            context.CurrentNode.Attributes.Add(attribute);
             Mock.Get(evaluator)
                 .Setup(x => x.EvaluateExpressionAsync(attribute.Value, context, CancellationToken.None))
                 .Returns(() => Task.FromResult(expressionResult));
@@ -128,11 +128,11 @@ namespace ZptSharp.Tal
             await sut.ProcessContextAsync(context);
 
             Mock.Get(omitter)
-                .Verify(x => x.Omit(context.CurrentElement), Times.Once);
+                .Verify(x => x.Omit(context.CurrentNode), Times.Once);
         }
 
         [Test, AutoMoqData]
-        public async Task ProcessContextAsync_omits_element_if_expression_is_empty_string([Frozen] IGetsTalAttributeSpecs specProvider,
+        public async Task ProcessContextAsync_omits_node_if_expression_is_empty_string([Frozen] IGetsTalAttributeSpecs specProvider,
                                                                                           [Frozen] IOmitsNode omitter,
                                                                                           OmitTagAttributeDecorator sut,
                                                                                           [StubDom] ExpressionContext context,
@@ -142,14 +142,14 @@ namespace ZptSharp.Tal
         {
             Mock.Get(specProvider).SetupGet(x => x.OmitTag).Returns(spec);
             Mock.Get(attribute).Setup(x => x.Matches(spec)).Returns(true);
-            context.CurrentElement.Attributes.Clear();
-            context.CurrentElement.Attributes.Add(attribute);
+            context.CurrentNode.Attributes.Clear();
+            context.CurrentNode.Attributes.Add(attribute);
             attribute.Value = String.Empty;
 
             await sut.ProcessContextAsync(context);
 
             Mock.Get(omitter)
-                .Verify(x => x.Omit(context.CurrentElement), Times.Once);
+                .Verify(x => x.Omit(context.CurrentNode), Times.Once);
         }
     }
 }

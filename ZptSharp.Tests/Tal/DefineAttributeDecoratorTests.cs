@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
@@ -45,8 +45,8 @@ namespace ZptSharp.Tal
                 .Setup(x => x.GetDefinitions(attribute.Value))
                 .Returns(() => new[] { definition });
             Mock.Get(attribute).Setup(x => x.Matches(spec)).Returns(true);
-            context.CurrentElement.Attributes.Clear();
-            context.CurrentElement.Attributes.Add(attribute);
+            context.CurrentNode.Attributes.Clear();
+            context.CurrentNode.Attributes.Add(attribute);
             definition.Scope = VariableDefinition.LocalScope;
 
             await sut.ProcessContextAsync(context);
@@ -83,8 +83,8 @@ namespace ZptSharp.Tal
                 .Setup(x => x.GetDefinitions(attribute.Value))
                 .Returns(() => new[] { definition });
             Mock.Get(attribute).Setup(x => x.Matches(spec)).Returns(true);
-            context.CurrentElement.Attributes.Clear();
-            context.CurrentElement.Attributes.Add(attribute);
+            context.CurrentNode.Attributes.Clear();
+            context.CurrentNode.Attributes.Add(attribute);
             definition.Scope = VariableDefinition.GlobalScope;
 
             await sut.ProcessContextAsync(context);
@@ -126,8 +126,8 @@ namespace ZptSharp.Tal
                 .Setup(x => x.GetDefinitions(attribute.Value))
                 .Returns(() => new[] { definition1, definition2 });
             Mock.Get(attribute).Setup(x => x.Matches(spec)).Returns(true);
-            context.CurrentElement.Attributes.Clear();
-            context.CurrentElement.Attributes.Add(attribute);
+            context.CurrentNode.Attributes.Clear();
+            context.CurrentNode.Attributes.Add(attribute);
             definition1.Scope = VariableDefinition.LocalScope;
             definition2.Scope = VariableDefinition.LocalScope;
 
@@ -167,8 +167,8 @@ namespace ZptSharp.Tal
                 .Setup(x => x.GetDefinitions(attribute.Value))
                 .Returns(() => new[] { definition });
             Mock.Get(attribute).Setup(x => x.Matches(spec)).Returns(false);
-            context.CurrentElement.Attributes.Clear();
-            context.CurrentElement.Attributes.Add(attribute);
+            context.CurrentNode.Attributes.Clear();
+            context.CurrentNode.Attributes.Add(attribute);
             definition.Scope = VariableDefinition.LocalScope;
 
             await sut.ProcessContextAsync(context);
@@ -198,8 +198,8 @@ namespace ZptSharp.Tal
                 .Setup(x => x.GetDefinitions(attribute.Value))
                 .Returns(() => Enumerable.Empty<VariableDefinition>());
             Mock.Get(attribute).Setup(x => x.Matches(spec)).Returns(true);
-            context.CurrentElement.Attributes.Clear();
-            context.CurrentElement.Attributes.Add(attribute);
+            context.CurrentNode.Attributes.Clear();
+            context.CurrentNode.Attributes.Add(attribute);
             context.LocalDefinitions.Clear();
 
             await sut.ProcessContextAsync(context);
@@ -236,8 +236,8 @@ namespace ZptSharp.Tal
                 .Setup(x => x.GetDefinitions(attribute.Value))
                 .Returns(() => new[] { definition });
             Mock.Get(attribute).Setup(x => x.Matches(spec)).Returns(true);
-            context.CurrentElement.Attributes.Clear();
-            context.CurrentElement.Attributes.Add(attribute);
+            context.CurrentNode.Attributes.Clear();
+            context.CurrentNode.Attributes.Add(attribute);
             definition.Scope = VariableDefinition.LocalScope;
             context.LocalDefinitions.Clear();
 
@@ -265,8 +265,8 @@ namespace ZptSharp.Tal
                 .Setup(x => x.GetDefinitions(attribute.Value))
                 .Throws<FormatException>();
             Mock.Get(attribute).Setup(x => x.Matches(spec)).Returns(true);
-            context.CurrentElement.Attributes.Clear();
-            context.CurrentElement.Attributes.Add(attribute);
+            context.CurrentNode.Attributes.Clear();
+            context.CurrentNode.Attributes.Add(attribute);
 
             Assert.That(() => sut.ProcessContextAsync(context).Result,
                         Throws.Exception.With.InnerException.InstanceOf<InvalidTalAttributeException>());
@@ -296,8 +296,8 @@ namespace ZptSharp.Tal
                 .Setup(x => x.GetDefinitions(attribute.Value))
                 .Returns(() => new[] { definition });
             Mock.Get(attribute).Setup(x => x.Matches(spec)).Returns(true);
-            context.CurrentElement.Attributes.Clear();
-            context.CurrentElement.Attributes.Add(attribute);
+            context.CurrentNode.Attributes.Clear();
+            context.CurrentNode.Attributes.Add(attribute);
             definition.Scope = VariableDefinition.LocalScope;
 
             Assert.That(() => sut.ProcessContextAsync(context).Result,

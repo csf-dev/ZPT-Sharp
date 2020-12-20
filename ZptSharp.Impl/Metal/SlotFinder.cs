@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using ZptSharp.Dom;
@@ -7,7 +7,7 @@ namespace ZptSharp.Metal
 {
     /// <summary>
     /// Default implementation of <see cref="IGetsSlots"/> which gets a
-    /// collection of slot-fillers for an element.
+    /// collection of slot-fillers for an node.
     /// </summary>
     public class SlotFinder : IGetsSlots
     {
@@ -15,34 +15,34 @@ namespace ZptSharp.Metal
         readonly ISearchesForAttributes attributeFinder;
 
         /// <summary>
-        /// Gets the slot fillers from the specified <paramref name="element"/> and its descendents.
+        /// Gets the slot fillers from the specified <paramref name="node"/> and its descendents.
         /// </summary>
         /// <returns>The slot fillers.</returns>
-        /// <param name="element">Element.</param>
-        public IEnumerable<Slot> GetSlotFillers(INode element)
+        /// <param name="node">Node.</param>
+        public IEnumerable<Slot> GetSlotFillers(INode node)
         {
-            if (element == null)
-                throw new ArgumentNullException(nameof(element));
+            if (node == null)
+                throw new ArgumentNullException(nameof(node));
 
             return attributeFinder
-                .SearchForAttributes(element, specProvider.FillSlot)
-                .Select(x => new Slot(x.Value, x.Element))
+                .SearchForAttributes(node, specProvider.FillSlot)
+                .Select(x => new Slot(x.Value, x.Node))
                 .ToList();
         }
 
         /// <summary>
-        /// Gets the defined slots from the specified <paramref name="element"/> and its descendents.
+        /// Gets the defined slots from the specified <paramref name="node"/> and its descendents.
         /// </summary>
         /// <returns>The defined slots.</returns>
-        /// <param name="element">Element.</param>
-        public IEnumerable<Slot> GetDefinedSlots(INode element)
+        /// <param name="node">Node.</param>
+        public IEnumerable<Slot> GetDefinedSlots(INode node)
         {
-            if (element == null)
-                throw new ArgumentNullException(nameof(element));
+            if (node == null)
+                throw new ArgumentNullException(nameof(node));
 
             return attributeFinder
-                .SearchForAttributes(element, specProvider.DefineSlot)
-                .Select(x => new Slot(x.Value, x.Element))
+                .SearchForAttributes(node, specProvider.DefineSlot)
+                .Select(x => new Slot(x.Value, x.Node))
                 .ToList();
         }
 

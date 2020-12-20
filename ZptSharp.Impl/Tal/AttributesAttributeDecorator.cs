@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
 using ZptSharp.Dom;
@@ -26,11 +26,11 @@ namespace ZptSharp.Tal
         /// <param name="token">An optional cancellation token.</param>
         public async Task<ExpressionContextProcessingResult> ProcessContextAsync(ExpressionContext context, CancellationToken token = default)
         {
-            var attribute = context.CurrentElement.GetMatchingAttribute(specProvider.Attributes);
+            var attribute = context.CurrentNode.GetMatchingAttribute(specProvider.Attributes);
             if (attribute == null)
                 return await wrapped.ProcessContextAsync(context, token).ConfigureAwait(false);
 
-            var definitions = definitionsProvider.GetDefinitions(attribute.Value, context.CurrentElement);
+            var definitions = definitionsProvider.GetDefinitions(attribute.Value, context.CurrentNode);
             foreach(var definition in definitions)
                 await HandleAttributeDefinition(definition, context, token).ConfigureAwait(false);
 
@@ -41,7 +41,7 @@ namespace ZptSharp.Tal
                                              ExpressionContext context,
                                              CancellationToken token)
         {
-            var element = context.CurrentElement;
+            var node = context.CurrentNode;
             var expressionResult = await evaluator.EvaluateExpressionAsync(definition.Expression, context, token)
                 .ConfigureAwait(false);
 
@@ -49,22 +49,22 @@ namespace ZptSharp.Tal
                 return;
 
             var spec = new AttributeSpec(definition.Name, new Namespace(definition.Prefix));
-            var existingAttribute = element.GetMatchingAttribute(spec);
+            var existingAttribute = node.GetMatchingAttribute(spec);
 
             if (expressionResult == null || Equals(expressionResult, false))
             {
                 if(existingAttribute != null)
-                    element.Attributes.Remove(existingAttribute);
+                    node.Attributes.Remove(existingAttribute);
 
                 return;
             }
 
-            var attribute = existingAttribute ?? element.CreateAttribute(spec);
+            var attribute = existingAttribute ?? node.CreateAttribute(spec);
             if (Equals(expressionResult, true)) attribute.Value = attribute.Name;
             else attribute.Value = expressionResult.ToString();
 
-            if (!element.Attributes.Contains(attribute))
-                element.Attributes.Add(attribute);
+            if (!node.Attributes.Contains(attribute))
+                node.Attributes.Add(attribute);
         }
 
         Task<ErrorHandlingResult> IHandlesProcessingError.HandleErrorAsync(Exception ex, ExpressionContext context, CancellationToken token)

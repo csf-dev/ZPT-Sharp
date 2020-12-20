@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
@@ -14,7 +14,7 @@ namespace ZptSharp.Tal
     /// </para>
     /// <para>
     /// This decorator is a little unusual (compared to the others) in that it really just puts a <c>try/catch</c>
-    /// around whatever it wraps.  If there is an error and there is a TAL on-error attribute present upon the element
+    /// around whatever it wraps.  If there is an error and there is a TAL on-error attribute present upon the node
     /// then this decorator will handle the error and prevent the error from halting the whole rendering process.
     /// </para>
     /// </summary>
@@ -102,14 +102,14 @@ Exception raised whilst trying to handle that
         }
 
         IAttribute GetOnErrorAttribute(ExpressionContext context)
-            => context.CurrentElement.GetMatchingAttribute(specProvider.OnError);
+            => context.CurrentNode.GetMatchingAttribute(specProvider.OnError);
 
         async Task<ExpressionContextProcessingResult> ProcessErroredContextAsync(ExpressionContext context,
                                                                                  Exception originalError,
                                                                                  string onErrorExpression,
                                                                                  CancellationToken token)
         {
-            LogOriginalError(originalError, context.CurrentElement);
+            LogOriginalError(originalError, context.CurrentNode);
 
             DomValueExpressionResult onErrorExpressionResult;
 
@@ -120,9 +120,9 @@ Exception raised whilst trying to handle that
             }
             catch(Exception errorWhilstHandlingError)
             {
-                LogErrorWhilstHandlingError(errorWhilstHandlingError, originalError, context.CurrentElement);
+                LogErrorWhilstHandlingError(errorWhilstHandlingError, originalError, context.CurrentNode);
 
-                var message = String.Format(Resources.ExceptionMessage.ErrorWhilstHandlingError, context.CurrentElement);
+                var message = String.Format(Resources.ExceptionMessage.ErrorWhilstHandlingError, context.CurrentNode);
                 throw new OnErrorHandlingException(message, errorWhilstHandlingError)
                 {
                     OriginalException = originalError
@@ -132,31 +132,31 @@ Exception raised whilst trying to handle that
             if(onErrorExpressionResult.AbortAction)
                 return ExpressionContextProcessingResult.Noop;
 
-            context.CurrentElement.ChildNodes.Clear();
-            context.CurrentElement.AddChildren(onErrorExpressionResult.Nodes);
+            context.CurrentNode.ChildNodes.Clear();
+            context.CurrentNode.AddChildren(onErrorExpressionResult.Nodes);
 
             return ExpressionContextProcessingResult.Noop;
         }
 
-        void LogOriginalError(Exception originalError, INode element)
+        void LogOriginalError(Exception originalError, INode node)
         {
             if (!logger.IsEnabled(LogLevel.Debug)) return;
 
-            logger.LogDebug(@"A TAL on-error attribute is suppressing the following exception whilst processing {element}:
+            logger.LogDebug(@"A TAL on-error attribute is suppressing the following exception whilst processing {node}:
 {exception}",
-                            element,
+                            node,
                             originalError);
         }
 
-        void LogErrorWhilstHandlingError(Exception errorWhilstHandlingError, Exception originalError, INode element)
+        void LogErrorWhilstHandlingError(Exception errorWhilstHandlingError, Exception originalError, INode node)
         {
             if (!logger.IsEnabled(LogLevel.Error)) return;
 
             logger.LogError(@"A TAL on-error attribute encountered an exception whilst attempting to deal with a previous error.
-           Element: {element}
+           Node: {node}
 Previous exception: {original_exception}
          Exception: {exception}",
-                            element,
+                            node,
                             originalError,
                             errorWhilstHandlingError);
         }

@@ -1,7 +1,7 @@
-namespace ZptSharp.Rendering
+﻿namespace ZptSharp.Rendering
 {
     /// <summary>
-    /// Enumerates the types of DOM element tags.
+    /// Enumerates the types of DOM node tags.
     /// </summary>
     public enum TagType
     {

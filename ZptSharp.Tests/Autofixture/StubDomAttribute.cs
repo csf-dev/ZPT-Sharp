@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Reflection;
 using AutoFixture;
 using AutoFixture.NUnit3;
@@ -30,7 +30,7 @@ namespace ZptSharp.Autofixture
                     return x
                         .FromFactory((IDocument doc) =>
                         {
-                            var mock = new Mock<StubElement>(doc) { CallBase = true };
+                            var mock = new Mock<StubNode>(doc) { CallBase = true };
                             return mock.Object;
                         })
                         .OmitAutoProperties();

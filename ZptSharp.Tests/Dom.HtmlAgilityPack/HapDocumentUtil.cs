@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -12,12 +12,12 @@ namespace ZptSharp.Dom
         static readonly HapDocumentProvider provider = new HapDocumentProvider();
 
         /// <summary>
-        /// Gets a single HTML element node from the first element in the specified HTML string.
+        /// Gets a single HTML node node from the first node in the specified HTML string.
         /// </summary>
         /// <returns>The node.</returns>
         /// <param name="html">Html.</param>
-        public static HapElement GetNode(string html)
-            => (HapElement)GetDocument(html).RootElement.ChildNodes.First();
+        public static HapNode GetNode(string html)
+            => (HapNode)GetDocument(html).RootNode.ChildNodes.First();
 
         /// <summary>
         /// Gets a document from the specified HTML string.

@@ -1,20 +1,20 @@
-namespace ZptSharp.Dom
+﻿namespace ZptSharp.Dom
 {
     /// <summary>
     /// Abstraction for a DOM document.
     /// </summary>
-    public interface IDocument : IHasDocumentSourceInfo, IHasElements
+    public interface IDocument : IHasDocumentSourceInfo, IHasNodes
     {
         /// <summary>
-        /// Gets the root element for the current document.
+        /// Gets the root node for the current document.
         /// </summary>
-        /// <returns>The root element.</returns>
-        INode RootElement { get; }
+        /// <returns>The root node.</returns>
+        INode RootNode { get; }
 
         /// <summary>
-        /// Where-supported, adds a comment before the first element node in the document.  In cases where
+        /// Where-supported, adds a comment before the first node node in the document.  In cases where
         /// the underlying document implementation does not support this, a workaround is acceptable (such as
-        /// commenting immediately inside the first element).
+        /// commenting immediately inside the first node).
         /// </summary>
         void AddCommentToBeginningOfDocument(string commentText);
     }

@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 
 namespace ZptSharp.Dom
@@ -12,10 +12,10 @@ namespace ZptSharp.Dom
         readonly IReplacesNode replacer;
 
         /// <summary>
-        /// Omits the specified element node from its DOM.  The node's parent and children will
-        /// still be a part of the DOM, but the element node itself will be removed.
+        /// Omits the specified node node from its DOM.  The node's parent and children will
+        /// still be a part of the DOM, but the node node itself will be removed.
         /// </summary>
-        /// <param name="node">The element node to omit.</param>
+        /// <param name="node">The node node to omit.</param>
         public void Omit(INode node)
         {
             if (node == null)

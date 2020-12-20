@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
@@ -27,10 +27,10 @@ namespace ZptSharp.Tal
         /// </summary>
         /// <returns>The attribute definitions.</returns>
         /// <param name="attributesAttributeValue">The TAL 'attributes' attribute value.</param>
-        /// <param name="element">The element node upon which the attributes are defined.</param>
-        public IEnumerable<AttributeDefinition> GetDefinitions(string attributesAttributeValue, INode element)
+        /// <param name="node">The node node upon which the attributes are defined.</param>
+        public IEnumerable<AttributeDefinition> GetDefinitions(string attributesAttributeValue, INode node)
         {
-            return GetAttributeValueMatches(attributesAttributeValue, element)
+            return GetAttributeValueMatches(attributesAttributeValue, node)
                 .Select(x => new AttributeDefinition
                 {
                     Prefix = String.IsNullOrEmpty(x.Groups[1].Value)? null : x.Groups[1].Value,
@@ -40,7 +40,7 @@ namespace ZptSharp.Tal
                 .ToList();
         }
 
-        IEnumerable<Match> GetAttributeValueMatches(string attributesAttributeValue, INode element)
+        IEnumerable<Match> GetAttributeValueMatches(string attributesAttributeValue, INode node)
         {
             var matches = attributeValue.Matches(attributesAttributeValue)
                 .Cast<Match>()
@@ -49,7 +49,7 @@ namespace ZptSharp.Tal
 
             if (matches.Any(x => !x.Success))
             {
-                var message = String.Format(Resources.ExceptionMessage.InvalidAttributesAttributeValue, element);
+                var message = String.Format(Resources.ExceptionMessage.InvalidAttributesAttributeValue, node);
                 throw new InvalidTalAttributeException(message);
             }
 

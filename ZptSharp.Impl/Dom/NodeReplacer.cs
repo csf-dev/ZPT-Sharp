@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.Extensions.Logging;
@@ -25,13 +25,13 @@ namespace ZptSharp.Dom
             if (replacements == null)
                 throw new ArgumentNullException(nameof(replacements));
 
-            var parent = toReplace.ParentElement;
+            var parent = toReplace.ParentNode;
 
             if (parent == null
-                && toReplace.Document is ICanReplaceRootElement rootReplacer
+                && toReplace.Document is ICanReplaceRootNode rootReplacer
                 && replacements.Count == 1)
             {
-                rootReplacer.ReplaceRootElement(replacements.Single());
+                rootReplacer.ReplaceRootNode(replacements.Single());
             }
             else if(parent == null)
             {
@@ -56,8 +56,8 @@ namespace ZptSharp.Dom
                 var replacementsString = String.Join($",{Environment.NewLine}  ", replacements);
 
                 logger.LogTrace(@"Replacing a node with {child_count} child nodes
-  Parent element:{parent}
-Replaced element:{to_replace}
+  Parent node:{parent}
+Replaced node:{to_replace}
     Replacements:[
   {replacements} ]",
                                 replacements.Count,

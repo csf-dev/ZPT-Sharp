@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Xml.Linq;
 using ZptSharp.Rendering;
 
@@ -8,7 +8,7 @@ namespace ZptSharp.Dom
     /// An implementation of <see cref="IDocument"/> which is based upon
     /// a <c>System.Xml.Linq</c> <see cref="XDocument"/>.
     /// </summary>
-    public class XmlDocument : DocumentBase, ICanReplaceRootElement
+    public class XmlDocument : DocumentBase, ICanReplaceRootNode
     {
         INode root;
 
@@ -21,13 +21,13 @@ namespace ZptSharp.Dom
         /// <summary>
         /// Gets the root element for the current document.
         /// </summary>
-        /// <returns>The root element.</returns>
-        public override INode RootElement => root;
+        /// <returns>The root node.</returns>
+        public override INode RootNode => root;
 
         /// <summary>
         /// Where-supported, adds a comment before the first element node in the document.  In cases where
         /// the underlying document implementation does not support this, a workaround is acceptable (such as
-        /// commenting immediately inside the first element).
+        /// commenting immediately inside the first node).
         /// </summary>
         public override void AddCommentToBeginningOfDocument(string commentText)
         {
@@ -36,14 +36,14 @@ namespace ZptSharp.Dom
         }
 
         /// <summary>
-        /// Replaces the root element of the DOM using the specified <paramref name="replacement"/>.
+        /// Replaces the root element node of the DOM using the specified <paramref name="replacement"/>.
         /// </summary>
-        /// <param name="replacement">The replacement element.</param>
-        public void ReplaceRootElement(INode replacement)
+        /// <param name="replacement">The replacement node.</param>
+        public void ReplaceRootNode(INode replacement)
         {
             if (replacement == null)
                 throw new ArgumentNullException(nameof(replacement));
-            var nativeReplacement = ((XmlElement)replacement).NativeElement;
+            var nativeReplacement = ((XmlNode)replacement).NativeNode;
 
             NativeDocument.Root.ReplaceWith(nativeReplacement);
             root = replacement;
@@ -59,8 +59,8 @@ namespace ZptSharp.Dom
             NativeDocument = document ?? throw new ArgumentNullException(nameof(document));
 
             var nativeRoot = NativeDocument.Root;
-            var src = new ElementSourceInfo(Source, XmlElement.GetLineNumber(nativeRoot));
-            root = new XmlElement(nativeRoot, this, sourceInfo: src);
+            var src = new NodeSourceInfo(Source, XmlNode.GetLineNumber(nativeRoot));
+            root = new XmlNode(nativeRoot, this, sourceInfo: src);
         }
     }
 }

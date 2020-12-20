@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using CSF.Collections.EventRaising;
@@ -10,57 +10,56 @@ namespace ZptSharp.Dom
     /// <summary>
     /// Implementation of <see cref="INode"/> which is based upon an HTML Agility Pack <see cref="HtmlNode"/>.
     /// </summary>
-    public class HapElement : ElementBase
+    public class HapNode : NodeBase
     {
         internal const string CommentFormat = "<!--{0}-->";
 
-        readonly IList<INode> sourceChildElements;
-        readonly EventRaisingList<INode> childElements;
+        readonly IList<INode> sourceChildNodes;
+        readonly EventRaisingList<INode> childNodes;
         readonly EventRaisingList<IAttribute> attributes;
 
         /// <summary>
         /// Gets the native HTML Agility Pack <see cref="HtmlNode"/> instance which
-        /// acts as the basis for the current element.
+        /// acts as the basis for the current node.
         /// </summary>
-        /// <value>The native HTML Agility Pack element object.</value>
-        public HtmlNode NativeElement { get; }
+        /// <value>The native HTML Agility Pack node object.</value>
+        public HtmlNode NativeNode { get; }
 
         /// <summary>
-        /// Gets a collection of the element's attributes.
+        /// Gets a collection of the node's attributes.
         /// </summary>
         /// <value>The attributes.</value>
         public override IList<IAttribute> Attributes => attributes;
 
         /// <summary>
-        /// Gets the elements contained within the current element.
+        /// Gets the nodes contained within the current node.
         /// </summary>
-        /// <value>The child elements.</value>
-        public override IList<INode> ChildNodes => childElements;
+        /// <value>The child nodes.</value>
+        public override IList<INode> ChildNodes => childNodes;
 
         /// <summary>
-        /// Gets a value indicating whether this <see cref="T:ZptSharp.Dom.INode"/> is an element node.
+        /// Gets a value indicating whether this <see cref="INode"/> is an element node.
         /// </summary>
         /// <value><c>true</c> if the current instance is an element; otherwise, <c>false</c>.</value>
-        public override bool IsElement => NativeElement.NodeType == HtmlNodeType.Element;
+        public override bool IsElement => NativeNode.NodeType == HtmlNodeType.Element;
 
         /// <summary>
-        /// Gets a value which indicates whether or not the current element has "CData"-like behaviour.
-        /// One example of this is a <c>&lt;textarea&gt;</c> element.  Its contents are not HTML-encoded.
+        /// Gets a value which indicates whether or not the current element node has "CData"-like behaviour.
+        /// One example of this is a <c>&lt;textarea&gt;</c> node.  Its contents are not HTML-encoded.
         /// </summary>
         /// <value><c>true</c> if the current element is treated like a <c>CData</c> element; otherwise, <c>false</c>.</value>
-        bool ShouldElementBeTreatedAsCData
+        bool ShouldNodeBeTreatedAsCData
         {
             get
             {
-                if (NativeElement.NodeType != HtmlNodeType.Element)
-                    return false;
+                if (!IsElement) return false;
 
                 return (from flag in HtmlNode.ElementsFlags
                         let behaviour = flag.Value
                         let elementName = flag.Key
                         where
                             behaviour.HasFlag(HtmlElementFlag.CData)
-                            && String.Equals(elementName, NativeElement.Name, StringComparison.InvariantCultureIgnoreCase)
+                            && String.Equals(elementName, NativeNode.Name, StringComparison.InvariantCultureIgnoreCase)
                         select elementName)
                     .Any();
             }
@@ -68,45 +67,48 @@ namespace ZptSharp.Dom
 
         /// <summary>
         /// Returns a <see cref="String"/> that represents the current
-        /// <see cref="HapElement"/>.  This shows the element's start-tag.
+        /// <see cref="HapNode"/>.  If it is an element node then this method shows the element's start-tag.
+        /// Otherwise it returns the same as the native <see cref="HtmlNode"/>'s <see cref="Object.ToString()"/> method.
         /// </summary>
-        /// <returns>A <see cref="String"/> that represents the current <see cref="HapElement"/>.</returns>
+        /// <returns>A <see cref="String"/> that represents the current <see cref="HapNode"/>.</returns>
         public override string ToString()
         {
-            var attribs = NativeElement.Attributes
+            if (!IsElement) return NativeNode.ToString();
+
+            var attribs = NativeNode.Attributes
                 .Select(attrib => $"{attrib.Name}=\"{attrib.Value}\"")
                 .ToList();
             var hasAttributes = attribs.Count > 0;
 
-            return $"<{NativeElement.Name}{(hasAttributes ? " " : String.Empty)}{String.Join(" ", attribs)}>";
+            return $"<{NativeNode.Name}{(hasAttributes ? " " : String.Empty)}{String.Join(" ", attribs)}>";
         }
 
         /// <summary>
-        /// Gets a copy of the current element and all of its children.
+        /// Gets a copy of the current node and all of its children.
         /// </summary>
-        /// <returns>The copied element.</returns>
+        /// <returns>The copied node.</returns>
         public override INode GetCopy()
         {
-            var copiedElement = NativeElement.Clone();
+            var copiedNode = NativeNode.Clone();
 
-            var closedList = new Dictionary<HtmlNode,HapElement>();
-            (HtmlNode, HapElement)? current;
-            for (var openList = new List<(HtmlNode, HapElement)?> { (copiedElement, this) };
+            var closedList = new Dictionary<HtmlNode,HapNode>();
+            (HtmlNode, HapNode)? current;
+            for (var openList = new List<(HtmlNode, HapNode)?> { (copiedNode, this) };
                  (current = openList.FirstOrDefault()) != null;
                  openList.RemoveAt(0))
             {
-                var (native, element) = current.Value;
-                var parent = ReferenceEquals(element, this) ? null : closedList[native.ParentNode];
-                var newElement = new HapElement(native, (HapDocument)Document, parent, element.SourceInfo, new List<INode>())
+                var (native, node) = current.Value;
+                var parent = ReferenceEquals(node, this) ? null : closedList[native.ParentNode];
+                var newNode = new HapNode(native, (HapDocument)Document, parent, node.SourceInfo, new List<INode>())
                 {
-                    PreReplacementSourceInfo = element.PreReplacementSourceInfo,
+                    PreReplacementSourceInfo = node.PreReplacementSourceInfo,
                 };
-                closedList.Add(native, newElement);
-                if (parent != null) parent.sourceChildElements.Add(newElement);
-                openList.AddRange(native.ChildNodes.Select((node, idx) => ((HtmlNode, HapElement)?)(node, (HapElement)element.ChildNodes[idx])));
+                closedList.Add(native, newNode);
+                if (parent != null) parent.sourceChildNodes.Add(newNode);
+                openList.AddRange(native.ChildNodes.Select((n, idx) => ((HtmlNode, HapNode)?)(n, (HapNode)node.ChildNodes[idx])));
             }
 
-            return closedList[copiedElement];
+            return closedList[copiedNode];
         }
 
         /// <summary>
@@ -117,8 +119,8 @@ namespace ZptSharp.Dom
         public override INode CreateComment(string commentText)
         {
             commentText = commentText ?? String.Empty;
-            var node = NativeElement.OwnerDocument.CreateComment(String.Format(CommentFormat, commentText));
-            return new HapElement(node, (HapDocument) Document);
+            var node = NativeNode.OwnerDocument.CreateComment(String.Format(CommentFormat, commentText));
+            return new HapNode(node, (HapDocument) Document);
         }
 
         /// <summary>
@@ -128,7 +130,7 @@ namespace ZptSharp.Dom
         /// </para>
         /// <para>
         /// The node will be created in such a way as to be suitable for inclusion within
-        /// the current element.  That means that if the current element is CDATA, then the text
+        /// the current node.  That means that if the current node is CDATA, then the text
         /// will not be HTML encoded, otherwise it will.
         /// </para>
         /// </summary>
@@ -137,8 +139,8 @@ namespace ZptSharp.Dom
         public override INode CreateTextNode(string content)
         {
             content = content ?? String.Empty;
-            var text = ShouldElementBeTreatedAsCData ? content : HtmlEntity.Entitize(content, true, true);
-            return new HapElement(NativeElement.OwnerDocument.CreateTextNode(text), (HapDocument)Document);
+            var text = ShouldNodeBeTreatedAsCData ? content : HtmlEntity.Entitize(content, true, true);
+            return new HapNode(NativeNode.OwnerDocument.CreateTextNode(text), (HapDocument)Document);
         }
 
         /// <summary>
@@ -154,7 +156,7 @@ namespace ZptSharp.Dom
             doc.LoadHtml(markup);
 
             return doc.DocumentNode.ChildNodes
-                .Select(x => (INode) new HapElement(x, (HapDocument)Document))
+                .Select(x => (INode) new HapNode(x, (HapDocument)Document))
                 .ToList();
         }
 
@@ -169,13 +171,13 @@ namespace ZptSharp.Dom
                 throw new ArgumentNullException(nameof(spec));
 
             var name = (spec.Namespace?.Prefix != null) ? $"{spec.Namespace.Prefix}:{spec.Name}" : spec.Name;
-            return new HapAttribute(NativeElement.OwnerDocument.CreateAttribute(name));
+            return new HapAttribute(NativeNode.OwnerDocument.CreateAttribute(name));
         }
 
         /// <summary>
-        /// Gets a value which indicates whether or not the current element is in the specified namespace.
+        /// Gets a value which indicates whether or not the current node is in the specified namespace.
         /// </summary>
-        /// <returns><c>true</c>, if the element is in the specified namespace, <c>false</c> otherwise.</returns>
+        /// <returns><c>true</c>, if the node is in the specified namespace, <c>false</c> otherwise.</returns>
         /// <param name="namespace">A namespace.</param>
         public override bool IsInNamespace(Namespace @namespace)
         {
@@ -183,7 +185,7 @@ namespace ZptSharp.Dom
                 throw new ArgumentNullException(nameof(@namespace));
             if (!IsElement) return false;
 
-            var nameParts = NativeElement.Name.Split(new [] { ':' }, 2);
+            var nameParts = NativeNode.Name.Split(new [] { ':' }, 2);
             if (nameParts.Length < 2 && String.IsNullOrEmpty(@namespace.Prefix))
                 return true;
             if (nameParts.Length < 2)
@@ -199,26 +201,26 @@ namespace ZptSharp.Dom
         /// </para>
         /// <para>
         /// This event-raising list is used to keep the attributes collection in-sync with the attributes
-        /// in the native HAP element.
+        /// in the native HAP node.
         /// </para>
         /// </summary>
         /// <returns>The attributes collection.</returns>
         EventRaisingList<IAttribute> GetAttributesCollection()
         {
-            var sourceAttributes = NativeElement.Attributes
-                .Select(x => new HapAttribute(x) { Element = this })
+            var sourceAttributes = NativeNode.Attributes
+                .Select(x => new HapAttribute(x) { Node = this })
                 .Cast<IAttribute>()
                 .ToList();
             var attribs = new EventRaisingList<IAttribute>(sourceAttributes);
 
             attribs.SetupAfterActions(add => {
                                           var attr = ((HapAttribute)add.Item).NativeAttribute;
-                                          NativeElement.SetAttributeValue(attr.OriginalName, attr.Value);
-                                          add.Item.Element = this;
+                                          NativeNode.SetAttributeValue(attr.OriginalName, attr.Value);
+                                          add.Item.Node = this;
                                       },
                                       del => {
-                                          NativeElement.Attributes.Remove(del.Item.Name);
-                                          del.Item.Element = null;
+                                          NativeNode.Attributes.Remove(del.Item.Name);
+                                          del.Item.Node = null;
                                       });
 
             return attribs;
@@ -227,39 +229,39 @@ namespace ZptSharp.Dom
         /// <summary>
         /// Gets a list of <see cref="INode"/> which is wrapped in a list adapter that reacts to events.
         /// </summary>
-        /// <param name="elements">The source list of child elements.</param>
-        /// <returns>The child elements collection.</returns>
-        EventRaisingList<INode> WrapChildElementsCollectionWithEvents(IList<INode> elements)
+        /// <param name="nodes">The source list of child nodes.</param>
+        /// <returns>The child nodes collection.</returns>
+        EventRaisingList<INode> WrapChildNodesCollectionWithEvents(IList<INode> nodes)
         {
-            if (elements == null)
-                throw new ArgumentNullException(nameof(elements));
+            if (nodes == null)
+                throw new ArgumentNullException(nameof(nodes));
 
-            var eventBasedListWrapper = new EventRaisingList<INode>(elements);
+            var eventBasedListWrapper = new EventRaisingList<INode>(nodes);
 
             eventBasedListWrapper.SetupAfterActions(
                 add => {
                     var index = ((IList<INode>)add.Collection).IndexOf(add.Item);
-                    var item = (HapElement)add.Item;
-                    var ele = item.NativeElement;
+                    var item = (HapNode)add.Item;
+                    var ele = item.NativeNode;
 
-                    if (index >= NativeElement.ChildNodes.Count)
-                        NativeElement.AppendChild(ele);
+                    if (index >= NativeNode.ChildNodes.Count)
+                        NativeNode.AppendChild(ele);
                     else
-                        NativeElement.InsertBefore(ele, NativeElement.ChildNodes[index]);
+                        NativeNode.InsertBefore(ele, NativeNode.ChildNodes[index]);
 
                     item.IsImportedNode = true;
-                    item.ParentElement = this;
+                    item.ParentNode = this;
                 },
                 del => {
-                    var ele = ((HapElement)del.Item).NativeElement;
-                    NativeElement.RemoveChild(ele);
-                    del.Item.ParentElement = null;
+                    var ele = ((HapNode)del.Item).NativeNode;
+                    NativeNode.RemoveChild(ele);
+                    del.Item.ParentNode = null;
                 });
 
             return eventBasedListWrapper;
         }
 
-        int? GetEndTagLineNumber(HtmlNode node)
+        static int? GetEndTagLineNumber(HtmlNode node)
         {
             if (node == null) return null;
 
@@ -269,37 +271,37 @@ namespace ZptSharp.Dom
             return startTagLineNumber + lineBreakCount;
         }
 
-        IList<INode> GetSourceChildElements()
+        IList<INode> GetSourceChildNodes()
         {
-            return NativeElement.ChildNodes
-                .Select(x => new HapElement(x, (HapDocument)Doc, this, Source.CreateChild(x.Line, GetEndTagLineNumber(x))))
+            return NativeNode.ChildNodes
+                .Select(x => new HapNode(x, (HapDocument)Doc, this, Source.CreateChild(x.Line, GetEndTagLineNumber(x))))
                 .Cast<INode>()
                 .ToList();
         }
 
-        private HapElement(HtmlNode element,
+        private HapNode(HtmlNode node,
                            HapDocument document,
                            INode parent,
-                           ElementSourceInfo sourceInfo,
+                           NodeSourceInfo sourceInfo,
                            IList<INode> childNodes) : base(document, parent, sourceInfo)
         {
-            NativeElement = element ?? throw new ArgumentNullException(nameof(element));
+            NativeNode = node ?? throw new ArgumentNullException(nameof(node));
             attributes = GetAttributesCollection();
-            sourceChildElements = childNodes ?? GetSourceChildElements();
-            childElements = WrapChildElementsCollectionWithEvents(sourceChildElements);
+            sourceChildNodes = childNodes ?? GetSourceChildNodes();
+            this.childNodes = WrapChildNodesCollectionWithEvents(sourceChildNodes);
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="HapElement"/> class.
+        /// Initializes a new instance of the <see cref="HapNode"/> class.
         /// </summary>
-        /// <param name="element">The native element object.</param>
+        /// <param name="node">The native node object.</param>
         /// <param name="document">The containing document.</param>
-        /// <param name="parent">The parent element.</param>
+        /// <param name="parent">The parent node.</param>
         /// <param name="sourceInfo">Source info.</param>
-        public HapElement(HtmlNode element,
+        public HapNode(HtmlNode node,
                           HapDocument document,
                           INode parent = null,
-                          ElementSourceInfo sourceInfo = null)
-            : this(element, document, parent, sourceInfo, null) { }
+                          NodeSourceInfo sourceInfo = null)
+            : this(node, document, parent, sourceInfo, null) { }
     }
 }

@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.Extensions.Logging;
@@ -7,7 +7,7 @@ using ZptSharp.Dom;
 namespace ZptSharp.Metal
 {
     /// <summary>
-    /// Implementation of <see cref="IFillsSlots"/> which replaces DOM elements and removes the slot
+    /// Implementation of <see cref="IFillsSlots"/> which replaces DOM nodes and removes the slot
     /// filler from the macro context when it is used.
     /// </summary>
     public class SlotFiller : IFillsSlots
@@ -38,7 +38,7 @@ namespace ZptSharp.Metal
             if (!macroContext.SlotFillers.TryGetValue(definedSlot.Name, out Slot filler))
             {
                 if (logger.IsEnabled(LogLevel.Trace))
-                    logger.LogTrace("Slot {slot} has no filler in the current context", definedSlot.Element);
+                    logger.LogTrace("Slot {slot} has no filler in the current context", definedSlot.Node);
                 return;
             }
 
@@ -46,44 +46,44 @@ namespace ZptSharp.Metal
                 logger.LogTrace(@"Filling METAL slot with filler
   Slot:{slot}
 Filler:{filler}",
-                                definedSlot.Element,
-                                filler.Element);
+                                definedSlot.Node,
+                                filler.Node);
 
-            var fillingElement = filler.Element.GetCopy();
+            var fillingNode = filler.Node.GetCopy();
 
-            RemoveFillSlotAttributeFromFiller(fillingElement);
-            CopyFillSlotAttributeToFiller(fillingElement, definedSlot.Element);
+            RemoveFillSlotAttributeFromFiller(fillingNode);
+            CopyFillSlotAttributeToFiller(fillingNode, definedSlot.Node);
 
-            replacer.Replace(definedSlot.Element, fillingElement);
+            replacer.Replace(definedSlot.Node, fillingNode);
             macroContext.SlotFillers.Remove(definedSlot.Name);
         }
 
         /// <summary>
-        /// Removes a fill-slot attribute from the element (now that it has been used).
+        /// Removes a fill-slot attribute from the node (now that it has been used).
         /// This is important, so as to prevent it accidentally being used again in its new context.
         /// </summary>
-        /// <param name="element">The element from which to purge the attribute.</param>
-        void RemoveFillSlotAttributeFromFiller(INode element)
+        /// <param name="node">The node from which to purge the attribute.</param>
+        void RemoveFillSlotAttributeFromFiller(INode node)
         {
-            var fillSlotAttribute = element.GetMatchingAttribute(specProvider.FillSlot);
+            var fillSlotAttribute = node.GetMatchingAttribute(specProvider.FillSlot);
             if (fillSlotAttribute != null)
-                element.Attributes.Remove(fillSlotAttribute);
+                node.Attributes.Remove(fillSlotAttribute);
         }
 
         /// <summary>
-        /// If a slot-defining element also fills a slot then that fill-slot attribute needs to
-        /// be copied to the slot-filler element.  This is so that it may itself be used to fill
+        /// If a slot-defining node also fills a slot then that fill-slot attribute needs to
+        /// be copied to the slot-filler node.  This is so that it may itself be used to fill
         /// slots (as if it were the defining slot).
         /// </summary>
-        /// <param name="fillerElement">The element which is being used to fill a slot.</param>
-        /// <param name="definingElement">The element which defined the slot.</param>
-        void CopyFillSlotAttributeToFiller(INode fillerElement, INode definingElement)
+        /// <param name="fillerNode">The node which is being used to fill a slot.</param>
+        /// <param name="definingNode">The node which defined the slot.</param>
+        void CopyFillSlotAttributeToFiller(INode fillerNode, INode definingNode)
         {
-            var fillSlotAttribute = definingElement.Attributes
+            var fillSlotAttribute = definingNode.Attributes
                 .FirstOrDefault(x => x.Matches(specProvider.FillSlot));
 
             if (fillSlotAttribute != null)
-                fillerElement.Attributes.Add(fillSlotAttribute);
+                fillerNode.Attributes.Add(fillSlotAttribute);
         }
 
         /// <summary>

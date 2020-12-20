@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Threading.Tasks;
 using AutoFixture.NUnit3;
 using Microsoft.Extensions.Logging;
@@ -14,7 +14,7 @@ namespace ZptSharp.Rendering
     public class ZptCleanupContextProcessorTests
     {
         [Test, AutoMoqData]
-        public async Task ProcessContextAsync_removes_entire_element_if_it_is_in_metal_namespace([Frozen] IGetsWellKnownNamespace namespaceProvider,
+        public async Task ProcessContextAsync_removes_entire_node_if_it_is_in_metal_namespace([Frozen] IGetsWellKnownNamespace namespaceProvider,
                                                                                                  [MockLogger, Frozen] ILogger<ZptCleanupContextProcessor> logger,
                                                                                                  [Frozen] IOmitsNode omitter,
                                                                                                  ZptCleanupContextProcessor sut,
@@ -22,7 +22,7 @@ namespace ZptSharp.Rendering
                                                                                                  INode node,
                                                                                                  Namespace metal)
         {
-            context.CurrentElement = node;
+            context.CurrentNode = node;
             Mock.Get(namespaceProvider).Setup(x => x.MetalNamespace).Returns(metal);
             Mock.Get(node).Setup(x => x.IsInNamespace(metal)).Returns(true);
 
@@ -32,7 +32,7 @@ namespace ZptSharp.Rendering
         }
 
         [Test, AutoMoqData]
-        public async Task ProcessContextAsync_removes_entire_element_if_it_is_in_tal_namespace([Frozen] IGetsWellKnownNamespace namespaceProvider,
+        public async Task ProcessContextAsync_removes_entire_node_if_it_is_in_tal_namespace([Frozen] IGetsWellKnownNamespace namespaceProvider,
                                                                                                [MockLogger, Frozen] ILogger<ZptCleanupContextProcessor> logger,
                                                                                                [Frozen] IOmitsNode omitter,
                                                                                                ZptCleanupContextProcessor sut,
@@ -40,7 +40,7 @@ namespace ZptSharp.Rendering
                                                                                                INode node,
                                                                                                Namespace tal)
         {
-            context.CurrentElement = node;
+            context.CurrentNode = node;
             Mock.Get(namespaceProvider).Setup(x => x.TalNamespace).Returns(tal);
             Mock.Get(node).Setup(x => x.IsInNamespace(tal)).Returns(true);
 
@@ -50,7 +50,7 @@ namespace ZptSharp.Rendering
         }
 
         [Test, AutoMoqData]
-        public async Task ProcessContextAsync_does_not_remove_element_if_it_is_not_in_tal_or_metal_namespaces([Frozen] IGetsWellKnownNamespace namespaceProvider,
+        public async Task ProcessContextAsync_does_not_remove_node_if_it_is_not_in_tal_or_metal_namespaces([Frozen] IGetsWellKnownNamespace namespaceProvider,
                                                                                                               [MockLogger, Frozen] ILogger<ZptCleanupContextProcessor> logger,
                                                                                                               [Frozen] IOmitsNode omitter,
                                                                                                               ZptCleanupContextProcessor sut,
@@ -59,7 +59,7 @@ namespace ZptSharp.Rendering
                                                                                                               Namespace metal,
                                                                                                               Namespace tal)
         {
-            context.CurrentElement = node;
+            context.CurrentNode = node;
             Mock.Get(namespaceProvider).Setup(x => x.MetalNamespace).Returns(metal);
             Mock.Get(namespaceProvider).Setup(x => x.TalNamespace).Returns(tal);
             Mock.Get(node).Setup(x => x.IsInNamespace(metal)).Returns(false);
@@ -80,7 +80,7 @@ namespace ZptSharp.Rendering
                                                                                                    Namespace metal,
                                                                                                    Namespace tal)
         {
-            context.CurrentElement = node;
+            context.CurrentNode = node;
             Mock.Get(namespaceProvider).Setup(x => x.MetalNamespace).Returns(metal);
             Mock.Get(namespaceProvider).Setup(x => x.TalNamespace).Returns(tal);
             Mock.Get(node).Setup(x => x.IsInNamespace(It.IsAny<Namespace>())).Returns(false);
@@ -103,7 +103,7 @@ namespace ZptSharp.Rendering
                                                                                                  Namespace metal,
                                                                                                  Namespace tal)
         {
-            context.CurrentElement = node;
+            context.CurrentNode = node;
             Mock.Get(namespaceProvider).Setup(x => x.MetalNamespace).Returns(metal);
             Mock.Get(namespaceProvider).Setup(x => x.TalNamespace).Returns(tal);
             Mock.Get(node).Setup(x => x.IsInNamespace(It.IsAny<Namespace>())).Returns(false);
@@ -126,7 +126,7 @@ namespace ZptSharp.Rendering
                                                                                                                   Namespace metal,
                                                                                                                   Namespace tal)
         {
-            context.CurrentElement = node;
+            context.CurrentNode = node;
             Mock.Get(namespaceProvider).Setup(x => x.MetalNamespace).Returns(metal);
             Mock.Get(namespaceProvider).Setup(x => x.TalNamespace).Returns(tal);
             Mock.Get(node).Setup(x => x.IsInNamespace(It.IsAny<Namespace>())).Returns(false);

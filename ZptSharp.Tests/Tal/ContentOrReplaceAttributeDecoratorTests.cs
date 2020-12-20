@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
 using AutoFixture.NUnit3;
@@ -15,7 +15,7 @@ namespace ZptSharp.Tal
     public class ContentOrReplaceAttributeDecoratorTests
     {
         [Test, AutoMoqData]
-        public async Task ProcessContextAsync_returns_wrapped_result_if_element_has_neither_attribute([Frozen] IHandlesProcessingError wrapped,
+        public async Task ProcessContextAsync_returns_wrapped_result_if_node_has_neither_attribute([Frozen] IHandlesProcessingError wrapped,
                                                                                                       [Frozen] IGetsTalAttributeSpecs specProvider,
                                                                                                       ContentOrReplaceAttributeDecorator sut,
                                                                                                       AttributeSpec content,
@@ -25,7 +25,7 @@ namespace ZptSharp.Tal
         {
             Mock.Get(specProvider).SetupGet(x => x.Content).Returns(content);
             Mock.Get(specProvider).SetupGet(x => x.Replace).Returns(replace);
-            context.CurrentElement.Attributes.Clear();
+            context.CurrentNode.Attributes.Clear();
             Mock.Get(wrapped)
                 .Setup(x => x.ProcessContextAsync(context, CancellationToken.None))
                 .Returns(() => Task.FromResult(wrappedResult));
@@ -36,7 +36,7 @@ namespace ZptSharp.Tal
         }
 
         [Test, AutoMoqData]
-        public void ProcessContextAsync_throws_if_element_has_both_attributes([Frozen] IGetsTalAttributeSpecs specProvider,
+        public void ProcessContextAsync_throws_if_node_has_both_attributes([Frozen] IGetsTalAttributeSpecs specProvider,
                                                                               ContentOrReplaceAttributeDecorator sut,
                                                                               AttributeSpec content,
                                                                               AttributeSpec replace,
@@ -46,9 +46,9 @@ namespace ZptSharp.Tal
         {
             Mock.Get(specProvider).SetupGet(x => x.Content).Returns(content);
             Mock.Get(specProvider).SetupGet(x => x.Replace).Returns(replace);
-            context.CurrentElement.Attributes.Clear();
-            context.CurrentElement.Attributes.Add(attrib1);
-            context.CurrentElement.Attributes.Add(attrib2);
+            context.CurrentNode.Attributes.Clear();
+            context.CurrentNode.Attributes.Add(attrib1);
+            context.CurrentNode.Attributes.Add(attrib2);
             Mock.Get(attrib1).Setup(x => x.Matches(content)).Returns(true);
             Mock.Get(attrib2).Setup(x => x.Matches(replace)).Returns(true);
 
@@ -69,8 +69,8 @@ namespace ZptSharp.Tal
         {
             Mock.Get(specProvider).SetupGet(x => x.Content).Returns(content);
             Mock.Get(specProvider).SetupGet(x => x.Replace).Returns(replace);
-            context.CurrentElement.Attributes.Clear();
-            context.CurrentElement.Attributes.Add(attrib);
+            context.CurrentNode.Attributes.Clear();
+            context.CurrentNode.Attributes.Add(attrib);
             Mock.Get(attrib).Setup(x => x.Matches(content)).Returns(true);
             Mock.Get(wrapped)
                 .Setup(x => x.ProcessContextAsync(context, CancellationToken.None))
@@ -99,8 +99,8 @@ namespace ZptSharp.Tal
         {
             Mock.Get(specProvider).SetupGet(x => x.Content).Returns(content);
             Mock.Get(specProvider).SetupGet(x => x.Replace).Returns(replace);
-            context.CurrentElement.Attributes.Clear();
-            context.CurrentElement.Attributes.Add(attrib);
+            context.CurrentNode.Attributes.Clear();
+            context.CurrentNode.Attributes.Add(attrib);
             Mock.Get(attrib).Setup(x => x.Matches(content)).Returns(true);
             Mock.Get(wrapped)
                 .Setup(x => x.ProcessContextAsync(context, CancellationToken.None))
@@ -111,11 +111,11 @@ namespace ZptSharp.Tal
 
             await sut.ProcessContextAsync(context);
 
-            Assert.That(context.CurrentElement.ChildNodes, Is.EqualTo(new[] { node1, node2 }));
+            Assert.That(context.CurrentNode.ChildNodes, Is.EqualTo(new[] { node1, node2 }));
         }
 
         [Test, AutoMoqData]
-        public async Task ProcessContextAsync_omits_element_if_replace_attribute_aborts_action([Frozen] IGetsTalAttributeSpecs specProvider,
+        public async Task ProcessContextAsync_omits_node_if_replace_attribute_aborts_action([Frozen] IGetsTalAttributeSpecs specProvider,
                                                                                                [Frozen] IEvaluatesDomValueExpression evaluator,
                                                                                                [Frozen] IOmitsNode omitter,
                                                                                                ContentOrReplaceAttributeDecorator sut,
@@ -127,8 +127,8 @@ namespace ZptSharp.Tal
         {
             Mock.Get(specProvider).SetupGet(x => x.Content).Returns(content);
             Mock.Get(specProvider).SetupGet(x => x.Replace).Returns(replace);
-            context.CurrentElement.Attributes.Clear();
-            context.CurrentElement.Attributes.Add(attrib);
+            context.CurrentNode.Attributes.Clear();
+            context.CurrentNode.Attributes.Add(attrib);
             Mock.Get(attrib).Setup(x => x.Matches(replace)).Returns(true);
             Mock.Get(evaluator)
                 .Setup(x => x.EvaluateExpressionAsync(attrib.Value, context, CancellationToken.None))
@@ -136,11 +136,11 @@ namespace ZptSharp.Tal
 
             await sut.ProcessContextAsync(context);
 
-            Mock.Get(omitter).Verify(x => x.Omit(context.CurrentElement), Times.Once);
+            Mock.Get(omitter).Verify(x => x.Omit(context.CurrentNode), Times.Once);
         }
 
         [Test, AutoMoqData]
-        public async Task ProcessContextAsync_replaces_element_with_DOM_expression_result_for_replace_attribute( [Frozen] IGetsTalAttributeSpecs specProvider,
+        public async Task ProcessContextAsync_replaces_node_with_DOM_expression_result_for_replace_attribute( [Frozen] IGetsTalAttributeSpecs specProvider,
                                                                                                                  [Frozen] IEvaluatesDomValueExpression evaluator,
                                                                                                                  [Frozen] IReplacesNode replacer,
                                                                                                                  ContentOrReplaceAttributeDecorator sut,
@@ -154,8 +154,8 @@ namespace ZptSharp.Tal
         {
             Mock.Get(specProvider).SetupGet(x => x.Content).Returns(content);
             Mock.Get(specProvider).SetupGet(x => x.Replace).Returns(replace);
-            context.CurrentElement.Attributes.Clear();
-            context.CurrentElement.Attributes.Add(attrib);
+            context.CurrentNode.Attributes.Clear();
+            context.CurrentNode.Attributes.Add(attrib);
             Mock.Get(attrib).Setup(x => x.Matches(replace)).Returns(true);
             Mock.Get(evaluator)
                 .Setup(x => x.EvaluateExpressionAsync(attrib.Value, context, CancellationToken.None))
@@ -163,7 +163,7 @@ namespace ZptSharp.Tal
 
             await sut.ProcessContextAsync(context);
 
-            Mock.Get(replacer).Verify(x => x.Replace(context.CurrentElement, new[] { node1, node2 }), Times.Once);
+            Mock.Get(replacer).Verify(x => x.Replace(context.CurrentNode, new[] { node1, node2 }), Times.Once);
         }
     }
 }

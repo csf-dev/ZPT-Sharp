@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using ZptSharp.Config;
 using ZptSharp.Metal;
 using ZptSharp.SourceAnnotation;
@@ -17,7 +17,7 @@ namespace ZptSharp.Rendering
         readonly IGetsTalContextProcessor talProcessorFactory;
         readonly IGetsSourceAnnotationContextProcessor sourceAnnotationProcessorFactory;
         readonly IIterativelyModifiesDocument iterativeModifier;
-        readonly IGetsZptElementAndAttributeRemovalContextProcessor cleanupProcessorFactory;
+        readonly IGetsZptNodeAndAttributeRemovalContextProcessor cleanupProcessorFactory;
         readonly RenderingConfig config;
 
         /// <summary>
@@ -70,7 +70,7 @@ namespace ZptSharp.Rendering
                                           IGetsTalContextProcessor talProcessorFactory,
                                           IGetsSourceAnnotationContextProcessor sourceAnnotationProcessorFactory,
                                           IIterativelyModifiesDocument iterativeModifier,
-                                          IGetsZptElementAndAttributeRemovalContextProcessor cleanupProcessorFactory,
+                                          IGetsZptNodeAndAttributeRemovalContextProcessor cleanupProcessorFactory,
                                           RenderingConfig config)
         {
             this.metalProcessorFactory = metalProcessorFactory ?? throw new ArgumentNullException(nameof(metalProcessorFactory));

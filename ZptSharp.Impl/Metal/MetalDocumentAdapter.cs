@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using ZptSharp.Dom;
 using System.Linq;
@@ -30,7 +30,7 @@ namespace ZptSharp.Metal
         {
             return attributeSearcher
                 .SearchForAttributes(document, specProvider.DefineMacro)
-                .Select(a => new MetalMacro(a.Value, a.Element.GetCopy()))
+                .Select(a => new MetalMacro(a.Value, a.Node.GetCopy()))
                 .ToDictionary(k => k.Name, v => v);
         }
 

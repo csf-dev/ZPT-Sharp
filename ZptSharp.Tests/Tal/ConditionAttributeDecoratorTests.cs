@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
 using AutoFixture.NUnit3;
@@ -15,7 +15,7 @@ namespace ZptSharp.Tal
     public class ConditionAttributeDecoratorTests
     {
         [Test, AutoMoqData]
-        public async Task ProcessContextAsync_removes_the_element_if_a_condition_attribute_evaluates_to_falsey_value([Frozen] IHandlesProcessingError wrapped,
+        public async Task ProcessContextAsync_removes_the_node_if_a_condition_attribute_evaluates_to_falsey_value([Frozen] IHandlesProcessingError wrapped,
                                                                                                                      [Frozen] IGetsTalAttributeSpecs specProvider,
                                                                                                                      [Frozen] IEvaluatesExpression evaluator,
                                                                                                                      [Frozen] IInterpretsExpressionResult resultInterpreter,
@@ -42,14 +42,14 @@ namespace ZptSharp.Tal
                 .Setup(x => x.CoerceResultToBoolean(expressionResult))
                 .Returns(false);
             Mock.Get(attribute).Setup(x => x.Matches(spec)).Returns(true);
-            context.CurrentElement.Attributes.Clear();
-            context.CurrentElement.Attributes.Add(attribute);
-            context.CurrentElement.ParentElement = parent;
-            parent.ChildNodes.Add(context.CurrentElement);
+            context.CurrentNode.Attributes.Clear();
+            context.CurrentNode.Attributes.Add(attribute);
+            context.CurrentNode.ParentNode = parent;
+            parent.ChildNodes.Add(context.CurrentNode);
 
             await sut.ProcessContextAsync(context);
 
-            Assert.That(parent.ChildNodes, Has.None.SameAs(context.CurrentElement));
+            Assert.That(parent.ChildNodes, Has.None.SameAs(context.CurrentNode));
         }
 
         [Test, AutoMoqData]
@@ -80,10 +80,10 @@ namespace ZptSharp.Tal
                 .Setup(x => x.CoerceResultToBoolean(expressionResult))
                 .Returns(false);
             Mock.Get(attribute).Setup(x => x.Matches(spec)).Returns(true);
-            context.CurrentElement.Attributes.Clear();
-            context.CurrentElement.Attributes.Add(attribute);
-            context.CurrentElement.ParentElement = parent;
-            parent.ChildNodes.Add(context.CurrentElement);
+            context.CurrentNode.Attributes.Clear();
+            context.CurrentNode.Attributes.Add(attribute);
+            context.CurrentNode.ParentNode = parent;
+            parent.ChildNodes.Add(context.CurrentNode);
 
             await sut.ProcessContextAsync(context);
 
@@ -115,10 +115,10 @@ namespace ZptSharp.Tal
                 .Setup(x => x.CoerceResultToBoolean(expressionResult))
                 .Returns(false);
             Mock.Get(attribute).Setup(x => x.Matches(spec)).Returns(true);
-            context.CurrentElement.Attributes.Clear();
-            context.CurrentElement.Attributes.Add(attribute);
-            context.CurrentElement.ParentElement = parent;
-            parent.ChildNodes.Add(context.CurrentElement);
+            context.CurrentNode.Attributes.Clear();
+            context.CurrentNode.Attributes.Add(attribute);
+            context.CurrentNode.ParentNode = parent;
+            parent.ChildNodes.Add(context.CurrentNode);
 
             var result = await sut.ProcessContextAsync(context);
 
@@ -126,7 +126,7 @@ namespace ZptSharp.Tal
         }
 
         [Test, AutoMoqData]
-        public async Task ProcessContextAsync_does_not_remove_element_if_a_condition_attribute_evaluates_to_truthy_value([Frozen] IHandlesProcessingError wrapped,
+        public async Task ProcessContextAsync_does_not_remove_node_if_a_condition_attribute_evaluates_to_truthy_value([Frozen] IHandlesProcessingError wrapped,
                                                                                                                          [Frozen] IGetsTalAttributeSpecs specProvider,
                                                                                                                          [Frozen] IEvaluatesExpression evaluator,
                                                                                                                          [Frozen] IInterpretsExpressionResult resultInterpreter,
@@ -153,14 +153,14 @@ namespace ZptSharp.Tal
                 .Setup(x => x.CoerceResultToBoolean(expressionResult))
                 .Returns(true);
             Mock.Get(attribute).Setup(x => x.Matches(spec)).Returns(true);
-            context.CurrentElement.Attributes.Clear();
-            context.CurrentElement.Attributes.Add(attribute);
-            context.CurrentElement.ParentElement = parent;
-            parent.ChildNodes.Add(context.CurrentElement);
+            context.CurrentNode.Attributes.Clear();
+            context.CurrentNode.Attributes.Add(attribute);
+            context.CurrentNode.ParentNode = parent;
+            parent.ChildNodes.Add(context.CurrentNode);
 
             await sut.ProcessContextAsync(context);
 
-            Assert.That(parent.ChildNodes, Has.One.SameAs(context.CurrentElement));
+            Assert.That(parent.ChildNodes, Has.One.SameAs(context.CurrentNode));
         }
 
         [Test, AutoMoqData]
@@ -191,10 +191,10 @@ namespace ZptSharp.Tal
                 .Setup(x => x.CoerceResultToBoolean(expressionResult))
                 .Returns(true);
             Mock.Get(attribute).Setup(x => x.Matches(spec)).Returns(true);
-            context.CurrentElement.Attributes.Clear();
-            context.CurrentElement.Attributes.Add(attribute);
-            context.CurrentElement.ParentElement = parent;
-            parent.ChildNodes.Add(context.CurrentElement);
+            context.CurrentNode.Attributes.Clear();
+            context.CurrentNode.Attributes.Add(attribute);
+            context.CurrentNode.ParentNode = parent;
+            parent.ChildNodes.Add(context.CurrentNode);
 
             var result = await sut.ProcessContextAsync(context);
 
@@ -204,7 +204,7 @@ namespace ZptSharp.Tal
         }
 
         [Test, AutoMoqData]
-        public async Task ProcessContextAsync_does_not_remove_element_if_a_condition_attribute_evaluates_to_cancellation([Frozen] IHandlesProcessingError wrapped,
+        public async Task ProcessContextAsync_does_not_remove_node_if_a_condition_attribute_evaluates_to_cancellation([Frozen] IHandlesProcessingError wrapped,
                                                                                                                          [Frozen] IGetsTalAttributeSpecs specProvider,
                                                                                                                          [Frozen] IEvaluatesExpression evaluator,
                                                                                                                          [Frozen] IInterpretsExpressionResult resultInterpreter,
@@ -231,18 +231,18 @@ namespace ZptSharp.Tal
                 .Setup(x => x.CoerceResultToBoolean(expressionResult))
                 .Returns(false);
             Mock.Get(attribute).Setup(x => x.Matches(spec)).Returns(true);
-            context.CurrentElement.Attributes.Clear();
-            context.CurrentElement.Attributes.Add(attribute);
-            context.CurrentElement.ParentElement = parent;
-            parent.ChildNodes.Add(context.CurrentElement);
+            context.CurrentNode.Attributes.Clear();
+            context.CurrentNode.Attributes.Add(attribute);
+            context.CurrentNode.ParentNode = parent;
+            parent.ChildNodes.Add(context.CurrentNode);
 
             await sut.ProcessContextAsync(context);
 
-            Assert.That(parent.ChildNodes, Has.One.SameAs(context.CurrentElement));
+            Assert.That(parent.ChildNodes, Has.One.SameAs(context.CurrentNode));
         }
 
         [Test, AutoMoqData]
-        public async Task ProcessContextAsync_does_not_remove_element_if_attribute_does_not_match_spec([Frozen] IHandlesProcessingError wrapped,
+        public async Task ProcessContextAsync_does_not_remove_node_if_attribute_does_not_match_spec([Frozen] IHandlesProcessingError wrapped,
                                                                                                        [Frozen] IGetsTalAttributeSpecs specProvider,
                                                                                                        [Frozen] IEvaluatesExpression evaluator,
                                                                                                        [Frozen] IInterpretsExpressionResult resultInterpreter,
@@ -269,14 +269,14 @@ namespace ZptSharp.Tal
                 .Setup(x => x.CoerceResultToBoolean(expressionResult))
                 .Returns(false);
             Mock.Get(attribute).Setup(x => x.Matches(spec)).Returns(false);
-            context.CurrentElement.Attributes.Clear();
-            context.CurrentElement.Attributes.Add(attribute);
-            context.CurrentElement.ParentElement = parent;
-            parent.ChildNodes.Add(context.CurrentElement);
+            context.CurrentNode.Attributes.Clear();
+            context.CurrentNode.Attributes.Add(attribute);
+            context.CurrentNode.ParentNode = parent;
+            parent.ChildNodes.Add(context.CurrentNode);
 
             await sut.ProcessContextAsync(context);
 
-            Assert.That(parent.ChildNodes, Has.One.SameAs(context.CurrentElement));
+            Assert.That(parent.ChildNodes, Has.One.SameAs(context.CurrentNode));
         }
     }
 }

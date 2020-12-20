@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using AutoFixture.NUnit3;
@@ -13,23 +13,23 @@ namespace ZptSharp.Metal
     public class AddDefinedMacroToGlobalScopeProcessorDecoratorTests
     {
         [Test, AutoMoqData]
-        public async Task ProcessContextAsync_adds_to_global_context_if_element_has_define_macro_attribute_and_is_the_root_context([Frozen] IGetsMetalAttributeSpecs specProvider,
+        public async Task ProcessContextAsync_adds_to_global_context_if_node_has_define_macro_attribute_and_is_the_root_context([Frozen] IGetsMetalAttributeSpecs specProvider,
                                                                                                                                    [Frozen] ISearchesForAttributes attributeFinder,
                                                                                                                                    AddDefinedMacroToGlobalScopeProcessorDecorator sut,
                                                                                                                                    AttributeSpec spec,
                                                                                                                                    ExpressionContext context,
-                                                                                                                                   INode element,
+                                                                                                                                   INode node,
                                                                                                                                    INode clone,
                                                                                                                                    IAttribute attribute,
                                                                                                                                    string name)
         {
             Mock.Get(specProvider).SetupGet(x => x.DefineMacro).Returns(spec);
-            context.CurrentElement = element;
-            Mock.Get(attributeFinder).Setup(x => x.SearchForAttributes(element, spec)).Returns(() => new[] { attribute });
+            context.CurrentNode = node;
+            Mock.Get(attributeFinder).Setup(x => x.SearchForAttributes(node, spec)).Returns(() => new[] { attribute });
             Mock.Get(attribute).Setup(x => x.Matches(spec)).Returns(true);
             Mock.Get(attribute).SetupGet(x => x.Value).Returns(name);
-            Mock.Get(attribute).SetupGet(x => x.Element).Returns(element);
-            Mock.Get(element).Setup(x => x.GetCopy()).Returns(clone);
+            Mock.Get(attribute).SetupGet(x => x.Node).Returns(node);
+            Mock.Get(node).Setup(x => x.GetCopy()).Returns(clone);
             context.GlobalDefinitions.Clear();
             context.IsRootContext = true;
 
@@ -39,7 +39,7 @@ namespace ZptSharp.Metal
                         Has.One.Matches<KeyValuePair<string, object>>(x => x.Key == name
                                                                         && (x.Value is MetalMacro macro)
                                                                         && macro.Name == name
-                                                                        && macro.Element == clone));
+                                                                        && macro.Node == clone));
         }
 
         [Test, AutoMoqData]
@@ -48,16 +48,16 @@ namespace ZptSharp.Metal
                                                                                                            AddDefinedMacroToGlobalScopeProcessorDecorator sut,
                                                                                                            AttributeSpec spec,
                                                                                                            ExpressionContext context,
-                                                                                                           INode element,
+                                                                                                           INode node,
                                                                                                            IAttribute attribute,
                                                                                                            string name)
         {
             Mock.Get(specProvider).SetupGet(x => x.DefineMacro).Returns(spec);
-            context.CurrentElement = element;
-            Mock.Get(attributeFinder).Setup(x => x.SearchForAttributes(element, spec)).Returns(() => new[] { attribute });
+            context.CurrentNode = node;
+            Mock.Get(attributeFinder).Setup(x => x.SearchForAttributes(node, spec)).Returns(() => new[] { attribute });
             Mock.Get(attribute).Setup(x => x.Matches(spec)).Returns(true);
             Mock.Get(attribute).SetupGet(x => x.Value).Returns(name);
-            Mock.Get(attribute).SetupGet(x => x.Element).Returns(element);
+            Mock.Get(attribute).SetupGet(x => x.Node).Returns(node);
             context.GlobalDefinitions.Clear();
             context.IsRootContext = false;
 
@@ -67,16 +67,16 @@ namespace ZptSharp.Metal
         }
 
         [Test, AutoMoqData]
-        public async Task ProcessContextAsync_does_not_add_to_global_context_if_element_has_no_define_macro_attribute([Frozen] IGetsMetalAttributeSpecs specProvider,
+        public async Task ProcessContextAsync_does_not_add_to_global_context_if_node_has_no_define_macro_attribute([Frozen] IGetsMetalAttributeSpecs specProvider,
                                                                                                                       AddDefinedMacroToGlobalScopeProcessorDecorator sut,
                                                                                                                       AttributeSpec spec,
                                                                                                                       ExpressionContext context,
-                                                                                                                      INode element,
+                                                                                                                      INode node,
                                                                                                                       IAttribute attribute)
         {
             Mock.Get(specProvider).SetupGet(x => x.DefineMacro).Returns(spec);
-            context.CurrentElement = element;
-            Mock.Get(element).SetupGet(x => x.Attributes).Returns(new List<IAttribute> { attribute });
+            context.CurrentNode = node;
+            Mock.Get(node).SetupGet(x => x.Attributes).Returns(new List<IAttribute> { attribute });
             Mock.Get(attribute).Setup(x => x.Matches(spec)).Returns(false);
             context.GlobalDefinitions.Clear();
 

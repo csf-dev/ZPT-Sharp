@@ -1,4 +1,4 @@
-using System.Threading;
+﻿using System.Threading;
 using System.Threading.Tasks;
 using ZptSharp.Dom;
 
@@ -44,10 +44,10 @@ namespace ZptSharp.Expressions
         public int CurrentIndex { get; set; }
 
         /// <summary>
-        /// Gets or sets the element associated with the repetition.
+        /// Gets or sets the node associated with the repetition.
         /// </summary>
-        /// <value>The element.</value>
-        public INode Element { get; set; }
+        /// <value>The node.</value>
+        public INode Node { get; set; }
 
         /// <summary>
         /// Gets or sets the value associated with the current iteration.

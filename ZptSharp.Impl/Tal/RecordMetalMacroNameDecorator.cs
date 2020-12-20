@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
 using ZptSharp.Dom;
@@ -28,7 +28,7 @@ namespace ZptSharp.Tal
         /// <param name="token">An optional cancellation token.</param>
         public Task<ExpressionContextProcessingResult> ProcessContextAsync(ExpressionContext context, CancellationToken token = default)
         {
-            var attribute = context.CurrentElement.GetMatchingAttribute(metalSpecProvider.DefineMacro);
+            var attribute = context.CurrentNode.GetMatchingAttribute(metalSpecProvider.DefineMacro);
             if (attribute != null)
                 context.LocalDefinitions[macroNameVariable] = attribute.Value;
 

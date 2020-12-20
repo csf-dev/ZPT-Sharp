@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
 using ZptSharp.Dom;
@@ -7,12 +7,12 @@ namespace ZptSharp.Rendering
 {
     /// <summary>
     /// Implementation of <see cref="IModifiesDocument"/> which coordinates the removal
-    /// of ZPT-related elements and attributes from a document.  This is essentially a
+    /// of ZPT-related nodes and attributes from a document.  This is essentially a
     /// clean-up process which strips processing directives from a document.
     /// </summary>
     public class RemoveZptAttributesModifierDecorator : IModifiesDocument
     {
-        readonly IGetsZptElementAndAttributeRemovalContextProcessor contextProcessorFactory;
+        readonly IGetsZptNodeAndAttributeRemovalContextProcessor contextProcessorFactory;
         readonly IIterativelyModifiesDocument iterativeModifier;
         readonly IModifiesDocument wrapped;
 
@@ -26,7 +26,7 @@ namespace ZptSharp.Rendering
         /// <param name="token">An object used to cancel the operation if required.</param>
         public async Task ModifyDocumentAsync(IDocument document, RenderZptDocumentRequest request, CancellationToken token = default)
         {
-            var contextProcessor = contextProcessorFactory.GetElementAndAttributeRemovalProcessor();
+            var contextProcessor = contextProcessorFactory.GetNodeAndAttributeRemovalProcessor();
             await iterativeModifier.ModifyDocumentAsync(document, request, contextProcessor, token)
                 .ConfigureAwait(false);
             await wrapped.ModifyDocumentAsync(document, request, token)
@@ -39,7 +39,7 @@ namespace ZptSharp.Rendering
         /// <param name="contextProcessorFactory">Context processor factory.</param>
         /// <param name="iterativeModifier">Iterative modifier.</param>
         /// <param name="wrapped">Wrapped.</param>
-        public RemoveZptAttributesModifierDecorator(IGetsZptElementAndAttributeRemovalContextProcessor contextProcessorFactory,
+        public RemoveZptAttributesModifierDecorator(IGetsZptNodeAndAttributeRemovalContextProcessor contextProcessorFactory,
                                                     IIterativelyModifiesDocument iterativeModifier,
                                                     IModifiesDocument wrapped)
         {

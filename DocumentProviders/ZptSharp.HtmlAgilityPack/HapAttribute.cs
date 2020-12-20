@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using HtmlAgilityPack;
 
 namespace ZptSharp.Dom
@@ -63,8 +63,8 @@ namespace ZptSharp.Dom
             if (String.Equals(@namespace.Prefix, prefix, StringComparison.InvariantCulture)) return true;
 
             // Another way in which the attribute is considered to be in
-            // the namespace is if the parent element is in the namespace.
-            return Element.IsInNamespace(@namespace);
+            // the namespace is if the parent node is in the namespace.
+            return Node.IsInNamespace(@namespace);
         }
 
         /// <summary>

@@ -1,4 +1,4 @@
-using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.DependencyInjection;
 using ZptSharp.Rendering;
 
 namespace ZptSharp.Bootstrap
@@ -19,7 +19,7 @@ namespace ZptSharp.Bootstrap
             services.AddTransient<IRendersRenderingRequest, ZptRequestRenderer>();
             services.AddTransient<IRendersZptDocument, ZptDocumentRenderer>();
             services.AddTransient<IRendersZptFile, ZptFileRenderer>();
-            services.AddTransient<IGetsZptElementAndAttributeRemovalContextProcessor, ZptCleanupContextProcessorFactory>();
+            services.AddTransient<IGetsZptNodeAndAttributeRemovalContextProcessor, ZptCleanupContextProcessorFactory>();
         }
     }
 }

@@ -1,13 +1,13 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 
 namespace ZptSharp.Dom
 {
     /// <summary>
-    /// A stub element with no backing implementation, for testing purposes.
+    /// A stub node with no backing implementation, for testing purposes.
     /// Members are all intentionally virtual so that this class may be mocked.
     /// </summary>
-    public class StubElement : ElementBase
+    public class StubNode : NodeBase
     {
         public override IList<IAttribute> Attributes { get; } = new List<IAttribute>();
 
@@ -27,6 +27,6 @@ namespace ZptSharp.Dom
 
         public override IAttribute CreateAttribute(AttributeSpec spec) => throw new NotImplementedException();
 
-        public StubElement(IDocument document) : base(document) { }
+        public StubNode(IDocument document) : base(document) { }
     }
 }

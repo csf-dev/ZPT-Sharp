@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
@@ -27,7 +27,7 @@ namespace ZptSharp.Tal
         /// <param name="token">An optional cancellation token.</param>
         public async Task<ExpressionContextProcessingResult> ProcessContextAsync(ExpressionContext context, CancellationToken token = default)
         {
-            var defineAttribute = context.CurrentElement.GetMatchingAttribute(specProvider.Define);
+            var defineAttribute = context.CurrentNode.GetMatchingAttribute(specProvider.Define);
             if (defineAttribute != null)
                 await HandleDefineAttribute(defineAttribute, context, token).ConfigureAwait(false);
 
@@ -67,7 +67,7 @@ namespace ZptSharp.Tal
             catch (FormatException ex)
             {
                 var message = String.Format(Resources.ExceptionMessage.InvalidTalDefineAttribute,
-                                            context.CurrentElement,
+                                            context.CurrentNode,
                                             attributeValue);
                 throw new InvalidTalAttributeException(message, ex);
             }
@@ -83,7 +83,7 @@ namespace ZptSharp.Tal
             catch (Exception ex)
             {
                 var message = String.Format(Resources.ExceptionMessage.UnexpectedErrorEvaluatingDefineAttribute,
-                                            context.CurrentElement,
+                                            context.CurrentNode,
                                             definition);
                 throw new TalExpressionEvaluationException(message, ex);
             }

@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
 using ZptSharp.Dom;
@@ -25,14 +25,14 @@ namespace ZptSharp.Tal
         /// <param name="token">An optional cancellation token.</param>
         public async Task<ExpressionContextProcessingResult> ProcessContextAsync(ExpressionContext context, CancellationToken token = default)
         {
-            var conditionAttribute = context.CurrentElement.GetMatchingAttribute(specProvider.Condition);
+            var conditionAttribute = context.CurrentNode.GetMatchingAttribute(specProvider.Condition);
             if (conditionAttribute == null) return await wrapped.ProcessContextAsync(context, token).ConfigureAwait(false);
 
             var expressionResult = await evaluator.EvaluateExpressionAsync(conditionAttribute.Value, context, token)
                 .ConfigureAwait(false);
             if (ShouldRemoveAttribute(expressionResult))
             {
-                context.CurrentElement.Remove();
+                context.CurrentNode.Remove();
                 return ExpressionContextProcessingResult.WithoutChildren;
             }
 

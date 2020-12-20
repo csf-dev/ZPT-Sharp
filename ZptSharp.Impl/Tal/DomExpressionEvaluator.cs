@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using System.Threading;
@@ -88,7 +88,7 @@ Nodes:{nodes}",
             var value = expressionResult?.ToString();
             if (value == null) return new INode[0];
 
-            var ele = context.CurrentElement;
+            var ele = context.CurrentNode;
             return isStructure ? ele.ParseAsNodes(value) : new[] { ele.CreateTextNode(value) };
         }
 

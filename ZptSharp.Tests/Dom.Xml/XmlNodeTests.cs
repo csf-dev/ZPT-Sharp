@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -9,7 +9,7 @@ using ZptSharp.Config;
 namespace ZptSharp.Dom
 {
     [TestFixture,Parallelizable]
-    public class XmlElementTests
+    public class XmlNodeTests
     {
         #region ToString
 
@@ -26,35 +26,35 @@ namespace ZptSharp.Dom
         #region IsInNamespace
 
         [Test, AutoMoqData]
-        public void IsInNamespace_returns_false_when_element_has_no_namespace_prefix(WellKnownNamespaceProvider namespaces)
+        public void IsInNamespace_returns_false_when_node_has_no_namespace_prefix(WellKnownNamespaceProvider namespaces)
         {
             var html = @"<div xmlns:tal=""http://xml.zope.org/namespaces/tal"" class=""foo"" tal:repeat=""item items"" />";
             Assert.That(() => XmlDocumentUtil.GetNode(html).IsInNamespace(namespaces.TalNamespace), Is.False);
         }
 
         [Test, AutoMoqData]
-        public void IsInNamespace_returns_true_when_element_has_matching_namespace_URI(WellKnownNamespaceProvider namespaces)
+        public void IsInNamespace_returns_true_when_node_has_matching_namespace_URI(WellKnownNamespaceProvider namespaces)
         {
             var html = @"<tal:div xmlns:tal=""http://xml.zope.org/namespaces/tal"" class=""foo"" tal:repeat=""item items"" />";
             Assert.That(() => XmlDocumentUtil.GetNode(html).IsInNamespace(namespaces.TalNamespace), Is.True);
         }
 
         [Test, AutoMoqData]
-        public void IsInNamespace_returns_true_when_element_has_matching_namespace_URI_with_different_alias(WellKnownNamespaceProvider namespaces)
+        public void IsInNamespace_returns_true_when_node_has_matching_namespace_URI_with_different_alias(WellKnownNamespaceProvider namespaces)
         {
             var html = @"<foo:div xmlns:foo=""http://xml.zope.org/namespaces/tal"" class=""foo"" foo:repeat=""item items"" />";
             Assert.That(() => XmlDocumentUtil.GetNode(html).IsInNamespace(namespaces.TalNamespace), Is.True);
         }
 
         [Test, AutoMoqData]
-        public void IsInNamespace_returns_false_when_element_has_different_namespace_URI(WellKnownNamespaceProvider namespaces)
+        public void IsInNamespace_returns_false_when_node_has_different_namespace_URI(WellKnownNamespaceProvider namespaces)
         {
             var html = @"<metal:div xmlns:tal=""http://xml.zope.org/namespaces/tal"" xmlns:metal=""http://xml.zope.org/namespaces/metal"" class=""foo"" tal:repeat=""item items"" />";
             Assert.That(() => XmlDocumentUtil.GetNode(html).IsInNamespace(namespaces.TalNamespace), Is.False);
         }
 
         [Test, AutoMoqData]
-        public void IsInNamespace_returns_false_when_element_has_different_namespace_URI_with_same_alias(WellKnownNamespaceProvider namespaces)
+        public void IsInNamespace_returns_false_when_node_has_different_namespace_URI_with_same_alias(WellKnownNamespaceProvider namespaces)
         {
             var html = @"<tal:div xmlns:tal=""http://xml.zope.org/namespaces/metal"" class=""foo"" tal:repeat=""item items"" />";
             Assert.That(() => XmlDocumentUtil.GetNode(html).IsInNamespace(namespaces.TalNamespace), Is.False);
@@ -68,13 +68,13 @@ namespace ZptSharp.Dom
         public void Adding_a_child_node_modifies_native_document()
         {
             var html1 = @"<div></div>";
-            var element1 = XmlDocumentUtil.GetNode(html1);
+            var node1 = XmlDocumentUtil.GetNode(html1);
 
             var html2 = @"<p>Foo bar</p>";
-            var element2 = XmlDocumentUtil.GetNode(html2);
+            var node2 = XmlDocumentUtil.GetNode(html2);
 
-            element1.ChildNodes.Add(element2);
-            Assert.That(element1.NativeElement.ToString(), Is.EqualTo(@"<div>
+            node1.ChildNodes.Add(node2);
+            Assert.That(node1.NativeNode.ToString(), Is.EqualTo(@"<div>
   <p>Foo bar</p>
 </div>"));
         }
@@ -83,10 +83,10 @@ namespace ZptSharp.Dom
         public void Removing_a_child_node_modifies_native_document()
         {
             var html = @"<div><p>Foo bar</p></div>";
-            var element = XmlDocumentUtil.GetNode(html);
+            var node = XmlDocumentUtil.GetNode(html);
 
-            element.ChildNodes.RemoveAt(0);
-            Assert.That(element.NativeElement.ToString(), Is.EqualTo("<div />"));
+            node.ChildNodes.RemoveAt(0);
+            Assert.That(node.NativeNode.ToString(), Is.EqualTo("<div />"));
         }
 
         #endregion
@@ -97,21 +97,21 @@ namespace ZptSharp.Dom
         public void Adding_an_attribute_modifies_native_document()
         {
             var html = @"<div></div>";
-            var element = XmlDocumentUtil.GetNode(html);
+            var node = XmlDocumentUtil.GetNode(html);
 
             var native = new XAttribute("foo", "bar");
-            element.Attributes.Add(new XmlAttribute(native) { Element = element });
-            Assert.That(element.NativeElement.ToString(), Is.EqualTo(@"<div foo=""bar""></div>"));
+            node.Attributes.Add(new XmlAttribute(native) { Node = node });
+            Assert.That(node.NativeNode.ToString(), Is.EqualTo(@"<div foo=""bar""></div>"));
         }
 
         [Test]
         public void Removing_an_attribute_node_modifies_native_document()
         {
             var html = @"<div foo=""bar""></div>";
-            var element = XmlDocumentUtil.GetNode(html);
+            var node = XmlDocumentUtil.GetNode(html);
 
-            element.Attributes.RemoveAt(0);
-            Assert.That(element.NativeElement.ToString(), Is.EqualTo("<div></div>"));
+            node.Attributes.RemoveAt(0);
+            Assert.That(node.NativeNode.ToString(), Is.EqualTo("<div></div>"));
         }
 
         #endregion
@@ -122,11 +122,11 @@ namespace ZptSharp.Dom
         public void GetCopy_returns_deep_copy_of_selected_node()
         {
             var html = @"<html><body><div class=""foo""><p id=""test"">Hello there</p><p>Another paragraph</p></div></body></html>";
-            var xmlElement = XmlDocumentUtil.GetNode(html);
-            var bodyElement = xmlElement.ChildNodes.First();
-            var result = (XmlElement) bodyElement.GetCopy();
+            var xmlNode = XmlDocumentUtil.GetNode(html);
+            var bodyNode = xmlNode.ChildNodes.First();
+            var result = (XmlNode) bodyNode.GetCopy();
 
-            Assert.That(result.NativeElement.ToString(), Is.EqualTo(@"<body>
+            Assert.That(result.NativeNode.ToString(), Is.EqualTo(@"<body>
   <div class=""foo"">
     <p id=""test"">Hello there</p>
     <p>Another paragraph</p>
@@ -145,13 +145,13 @@ namespace ZptSharp.Dom
     </div>
 </body>
 </html>";
-            var xmlElement = XmlDocumentUtil.GetNode(html);
-            var bodyElement = xmlElement.ChildNodes.Skip(1).First();
+            var xmlNode = XmlDocumentUtil.GetNode(html);
+            var bodyNode = xmlNode.ChildNodes.Skip(1).First();
 
-            var result = bodyElement.GetCopy();
+            var result = bodyNode.GetCopy();
 
-            var testElement = result.ChildNodes.Skip(1).First().ChildNodes.Skip(1).First();
-            Assert.That(testElement.SourceInfo?.StartTagLineNumber, Is.EqualTo(4));
+            var testNode = result.ChildNodes.Skip(1).First().ChildNodes.Skip(1).First();
+            Assert.That(testNode.SourceInfo?.StartTagLineNumber, Is.EqualTo(4));
         }
 
         #endregion
@@ -181,7 +181,7 @@ namespace ZptSharp.Dom
         #region CreateTextNode
 
         [Test, AutoMoqData]
-        public void CreateTextNode_returns_a_node_object_which_is_not_an_element(string content)
+        public void CreateTextNode_returns_a_node_object_which_is_not_an_node(string content)
         {
             var html = "<html><body><div>Hello</div></body></html>";
             var sut = XmlDocumentUtil.GetNode(html);

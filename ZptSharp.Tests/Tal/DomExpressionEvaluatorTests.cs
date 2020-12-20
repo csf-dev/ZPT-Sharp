@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
 using AutoFixture.NUnit3;
@@ -28,7 +28,7 @@ namespace ZptSharp.Tal
             Mock.Get(resultInterpreter)
                 .Setup(x => x.DoesResultAbortTheAction(expressionResult))
                 .Returns(false);
-            Mock.Get(context.CurrentElement).Setup(x => x.CreateTextNode(expressionResult)).Returns(textNode);
+            Mock.Get(context.CurrentNode).Setup(x => x.CreateTextNode(expressionResult)).Returns(textNode);
 
             var result = await sut.EvaluateExpressionAsync(expression, context);
 
@@ -52,7 +52,7 @@ namespace ZptSharp.Tal
             Mock.Get(resultInterpreter)
                 .Setup(x => x.DoesResultAbortTheAction(expressionResult))
                 .Returns(false);
-            Mock.Get(context.CurrentElement).Setup(x => x.CreateTextNode(expressionResult)).Returns(textNode);
+            Mock.Get(context.CurrentNode).Setup(x => x.CreateTextNode(expressionResult)).Returns(textNode);
 
             var result = await sut.EvaluateExpressionAsync($"text {expression}", context);
 
@@ -76,7 +76,7 @@ namespace ZptSharp.Tal
             Mock.Get(resultInterpreter)
                 .Setup(x => x.DoesResultAbortTheAction(expressionResult))
                 .Returns(false);
-            Mock.Get(context.CurrentElement).Setup(x => x.ParseAsNodes(expressionResult)).Returns(() => new[] { textNode });
+            Mock.Get(context.CurrentNode).Setup(x => x.ParseAsNodes(expressionResult)).Returns(() => new[] { textNode });
 
             var result = await sut.EvaluateExpressionAsync($"structure {expression}", context);
 

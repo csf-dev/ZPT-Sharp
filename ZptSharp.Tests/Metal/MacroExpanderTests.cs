@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -30,13 +30,13 @@ namespace ZptSharp.Metal
                                                                                                                        Slot defined2)
         {
             Mock.Get(slotFinder)
-                .Setup(x => x.GetSlotFillers(context.CurrentElement))
+                .Setup(x => x.GetSlotFillers(context.CurrentNode))
                 .Returns(new[] { filler1, filler2 });
             Mock.Get(slotFinder)
-                .Setup(x => x.GetDefinedSlots(macro.Element))
+                .Setup(x => x.GetDefinedSlots(macro.Node))
                 .Returns(new[] { defined1, defined2 });
             Mock.Get(macroProvider)
-                .Setup(x => x.GetMacroAsync(macro.Element, context, specProvider.ExtendMacro, CancellationToken.None))
+                .Setup(x => x.GetMacroAsync(macro.Node, context, specProvider.ExtendMacro, CancellationToken.None))
                 .Returns(Task.FromResult<MetalMacro>(null));
 
             var result = await sut.ExpandMacroAsync(macro, context);
@@ -66,22 +66,22 @@ namespace ZptSharp.Metal
                                                                                              Slot defined2)
         {
             Mock.Get(slotFinder)
-                .Setup(x => x.GetSlotFillers(context.CurrentElement))
+                .Setup(x => x.GetSlotFillers(context.CurrentNode))
                 .Returns(Enumerable.Empty<Slot>());
             Mock.Get(slotFinder)
-                .Setup(x => x.GetDefinedSlots(macro.Element))
+                .Setup(x => x.GetDefinedSlots(macro.Node))
                 .Returns(Enumerable.Empty<Slot>());
             Mock.Get(macroProvider)
-                .Setup(x => x.GetMacroAsync(macro.Element, context, specProvider.ExtendMacro, CancellationToken.None))
+                .Setup(x => x.GetMacroAsync(macro.Node, context, specProvider.ExtendMacro, CancellationToken.None))
                 .Returns(Task.FromResult(extended));
             Mock.Get(slotFinder)
-                .Setup(x => x.GetSlotFillers(macro.Element))
+                .Setup(x => x.GetSlotFillers(macro.Node))
                 .Returns(new[] { filler1, filler2 });
             Mock.Get(slotFinder)
-                .Setup(x => x.GetDefinedSlots(extended.Element))
+                .Setup(x => x.GetDefinedSlots(extended.Node))
                 .Returns(new[] { defined1, defined2 });
             Mock.Get(macroProvider)
-                .Setup(x => x.GetMacroAsync(extended.Element, context, specProvider.ExtendMacro, CancellationToken.None))
+                .Setup(x => x.GetMacroAsync(extended.Node, context, specProvider.ExtendMacro, CancellationToken.None))
                 .Returns(Task.FromResult<MetalMacro>(null));
 
             var result = await sut.ExpandMacroAsync(macro, context);
@@ -111,22 +111,22 @@ namespace ZptSharp.Metal
                                                                                                                        Slot defined2)
         {
             Mock.Get(slotFinder)
-                .Setup(x => x.GetSlotFillers(context.CurrentElement))
+                .Setup(x => x.GetSlotFillers(context.CurrentNode))
                 .Returns(new[] { filler1 });
             Mock.Get(slotFinder)
-                .Setup(x => x.GetDefinedSlots(macro.Element))
+                .Setup(x => x.GetDefinedSlots(macro.Node))
                 .Returns(Enumerable.Empty<Slot>());
             Mock.Get(macroProvider)
-                .Setup(x => x.GetMacroAsync(macro.Element, context, specProvider.ExtendMacro, CancellationToken.None))
+                .Setup(x => x.GetMacroAsync(macro.Node, context, specProvider.ExtendMacro, CancellationToken.None))
                 .Returns(Task.FromResult(extended));
             Mock.Get(slotFinder)
-                .Setup(x => x.GetSlotFillers(macro.Element))
+                .Setup(x => x.GetSlotFillers(macro.Node))
                 .Returns(new[] { filler2 });
             Mock.Get(slotFinder)
-                .Setup(x => x.GetDefinedSlots(extended.Element))
+                .Setup(x => x.GetDefinedSlots(extended.Node))
                 .Returns(new[] { defined1, defined2 });
             Mock.Get(macroProvider)
-                .Setup(x => x.GetMacroAsync(extended.Element, context, specProvider.ExtendMacro, CancellationToken.None))
+                .Setup(x => x.GetMacroAsync(extended.Node, context, specProvider.ExtendMacro, CancellationToken.None))
                 .Returns(Task.FromResult<MetalMacro>(null));
 
             var result = await sut.ExpandMacroAsync(macro, context);
@@ -151,31 +151,31 @@ namespace ZptSharp.Metal
                                                                                                                                 MetalMacro extended,
                                                                                                                                 ExpressionContext context,
                                                                                                                                 string slotName,
-                                                                                                                                [StubDom] INode element1,
-                                                                                                                                [StubDom] INode element2,
-                                                                                                                                [StubDom] INode element3)
+                                                                                                                                [StubDom] INode node1,
+                                                                                                                                [StubDom] INode node2,
+                                                                                                                                [StubDom] INode node3)
         {
-            var parentFiller = new Slot(slotName, element1);
-            var childFiller = new Slot(slotName, element2);
-            var defined = new Slot(slotName, element3);
+            var parentFiller = new Slot(slotName, node1);
+            var childFiller = new Slot(slotName, node2);
+            var defined = new Slot(slotName, node3);
 
             Mock.Get(slotFinder)
-                .Setup(x => x.GetSlotFillers(context.CurrentElement))
+                .Setup(x => x.GetSlotFillers(context.CurrentNode))
                 .Returns(new[] { childFiller });
             Mock.Get(slotFinder)
-                .Setup(x => x.GetDefinedSlots(macro.Element))
+                .Setup(x => x.GetDefinedSlots(macro.Node))
                 .Returns(Enumerable.Empty<Slot>());
             Mock.Get(macroProvider)
-                .Setup(x => x.GetMacroAsync(macro.Element, context, specProvider.ExtendMacro, CancellationToken.None))
+                .Setup(x => x.GetMacroAsync(macro.Node, context, specProvider.ExtendMacro, CancellationToken.None))
                 .Returns(Task.FromResult(extended));
             Mock.Get(slotFinder)
-                .Setup(x => x.GetSlotFillers(macro.Element))
+                .Setup(x => x.GetSlotFillers(macro.Node))
                 .Returns(new[] { parentFiller });
             Mock.Get(slotFinder)
-                .Setup(x => x.GetDefinedSlots(extended.Element))
+                .Setup(x => x.GetDefinedSlots(extended.Node))
                 .Returns(new[] { defined });
             Mock.Get(macroProvider)
-                .Setup(x => x.GetMacroAsync(extended.Element, context, specProvider.ExtendMacro, CancellationToken.None))
+                .Setup(x => x.GetMacroAsync(extended.Node, context, specProvider.ExtendMacro, CancellationToken.None))
                 .Returns(Task.FromResult<MetalMacro>(null));
 
             var result = await sut.ExpandMacroAsync(macro, context);

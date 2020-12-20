@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using ZptSharp.Rendering;
 
@@ -8,44 +8,44 @@ namespace ZptSharp.Dom
     /// Abstract base class for an <see cref="INode"/>, containing functionality
     /// which is neutral to the specific implementation.
     /// </summary>
-    public abstract class ElementBase : INode
+    public abstract class NodeBase : INode
     {
         /// <summary>
-        /// A field for the <see cref="IDocument"/> to which this element belongs.
+        /// A field for the <see cref="IDocument"/> to which this node belongs.
         /// </summary>
         protected readonly IDocument Doc;
 
         /// <summary>
-        /// A field for the source information relating to this element.
+        /// A field for the source information relating to this node.
         /// </summary>
-        protected readonly ElementSourceInfo Source;
+        protected readonly NodeSourceInfo Source;
 
         INode Parent;
 
         /// <summary>
-        /// A field for whether or not the element is imported.
+        /// A field for whether or not the node is imported.
         /// </summary>
         protected bool IsImportedNode;
 
         /// <summary>
-        /// Gets the parent document for the current element.
+        /// Gets the parent document for the current node.
         /// </summary>
         /// <value>The document.</value>
         public virtual IDocument Document => Doc;
 
         /// <summary>
-        /// Gets information which indicates the original source of the element (for example, a file path and line number).
+        /// Gets information which indicates the original source of the node (for example, a file path and line number).
         /// </summary>
         /// <value>The source info.</value>
-        public virtual ElementSourceInfo SourceInfo => Source;
+        public virtual NodeSourceInfo SourceInfo => Source;
 
         /// <summary>
-        /// Gets or sets information about the source of the element  (for example, a file path and line number) before it was replaced.
-        /// For most elements this will be <see langword="null"/>, but when the current element is a replacement (such as METAL macro usage),
-        /// this property will contain source information for the replaced element.
+        /// Gets or sets information about the source of the node  (for example, a file path and line number) before it was replaced.
+        /// For most nodes this will be <see langword="null"/>, but when the current node is a replacement (such as METAL macro usage),
+        /// this property will contain source information for the replaced node.
         /// </summary>
         /// <value>The pre-replacement source info.</value>
-        public virtual ElementSourceInfo PreReplacementSourceInfo { get; set; }
+        public virtual NodeSourceInfo PreReplacementSourceInfo { get; set; }
 
         /// <summary>
         /// <para>
@@ -60,45 +60,45 @@ namespace ZptSharp.Dom
         public virtual bool IsImported => IsImportedNode;
 
         /// <summary>
-        /// Gets or sets the parent for the current element.  This will be a <see langword="null"/>
-        /// reference if the current instance is the root element of the document or if the element
+        /// Gets or sets the parent for the current node.  This will be a <see langword="null"/>
+        /// reference if the current instance is the root node of the document or if the node
         /// is not attached to a DOM.
         /// </summary>
-        /// <value>The parent element.</value>
-        public virtual INode ParentElement
+        /// <value>The parent node.</value>
+        public virtual INode ParentNode
         {
             get => Parent;
             set => Parent = value;
         }
 
         /// <summary>
-        /// Gets a collection of the element's attributes.
+        /// Gets a collection of the node's attributes.
         /// </summary>
         /// <value>The attributes.</value>
         public abstract IList<IAttribute> Attributes { get; }
 
         /// <summary>
-        /// Gets the elements contained within the current element.
+        /// Gets the nodes contained within the current node.
         /// </summary>
-        /// <value>The child elements.</value>
+        /// <value>The child nodes.</value>
         public abstract IList<INode> ChildNodes { get; }
 
         /// <summary>
-        /// Gets a value indicating whether this <see cref="T:ZptSharp.Dom.INode"/> is an element node.
+        /// Gets a value indicating whether this <see cref="T:ZptSharp.Dom.INode"/> is an node node.
         /// </summary>
-        /// <value><c>true</c> if the current instance is an element; otherwise, <c>false</c>.</value>
+        /// <value><c>true</c> if the current instance is an node; otherwise, <c>false</c>.</value>
         public abstract bool IsElement { get; }
 
         /// <summary>
-        /// Gets a copy of the current element and all of its children.
+        /// Gets a copy of the current node and all of its children.
         /// </summary>
-        /// <returns>The copied element.</returns>
+        /// <returns>The copied node.</returns>
         public abstract INode GetCopy();
 
         /// <summary>
-        /// Gets a value which indicates whether or not the current element is in the specified namespace.
+        /// Gets a value which indicates whether or not the current node is in the specified namespace.
         /// </summary>
-        /// <returns><c>true</c>, if the element is in the specified namespace, <c>false</c> otherwise.</returns>
+        /// <returns><c>true</c>, if the node is in the specified namespace, <c>false</c> otherwise.</returns>
         /// <param name="namespace">A namespace.</param>
         public abstract bool IsInNamespace(Namespace @namespace);
 
@@ -133,21 +133,21 @@ namespace ZptSharp.Dom
 
         IDocumentSourceInfo IHasDocumentSourceInfo.SourceInfo => SourceInfo.Document;
 
-        IEnumerable<INode> IHasElements.GetChildElements() => ChildNodes;
+        IEnumerable<INode> IHasNodes.GetChildNodes() => ChildNodes;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="ElementBase"/> class.
+        /// Initializes a new instance of the <see cref="NodeBase"/> class.
         /// </summary>
-        /// <param name="document">The element's document.</param>
-        /// <param name="parent">The parent element.</param>
-        /// <param name="sourceInfo">The element source info.</param>
-        protected ElementBase(IDocument document,
+        /// <param name="document">The node's document.</param>
+        /// <param name="parent">The parent node.</param>
+        /// <param name="sourceInfo">The node source info.</param>
+        protected NodeBase(IDocument document,
                               INode parent = null,
-                              ElementSourceInfo sourceInfo = null)
+                              NodeSourceInfo sourceInfo = null)
         {
             this.Doc = document ?? throw new ArgumentNullException(nameof(document));
             this.Parent = parent;
-            this.Source = sourceInfo ?? new ElementSourceInfo(new UnknownSourceInfo());
+            this.Source = sourceInfo ?? new NodeSourceInfo(new UnknownSourceInfo());
         }
     }
 }

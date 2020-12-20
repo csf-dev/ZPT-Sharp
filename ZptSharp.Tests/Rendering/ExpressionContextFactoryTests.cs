@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Linq;
 using AutoFixture.NUnit3;
 using Moq;
@@ -14,18 +14,18 @@ namespace ZptSharp.Rendering
     public class ExpressionContextFactoryTests
     {
         [Test, AutoMoqData]
-        public void GetExpressionContext_returns_context_with_correct_document_root_element_and_model(IDocument document,
+        public void GetExpressionContext_returns_context_with_correct_document_root_node_and_model(IDocument document,
                                                                                                       RenderZptDocumentRequest request,
                                                                                                       [Frozen] IServiceProvider serviceProvider,
-                                                                                                      INode element,
+                                                                                                      INode node,
                                                                                                       ExpressionContextFactory sut)
         {
             Mock.Get(serviceProvider).Setup(x => x.GetService(typeof(RenderingConfig))).Returns(() => RenderingConfig.Default);
-            Mock.Get(document).SetupGet(x => x.RootElement).Returns(element);
+            Mock.Get(document).SetupGet(x => x.RootNode).Returns(node);
             var result = sut.GetExpressionContext(document, request);
 
             Assert.That(result.TemplateDocument, Is.SameAs(document), $"{nameof(ExpressionContext.TemplateDocument)} is correct");
-            Assert.That(result.CurrentElement, Is.SameAs(element), $"{nameof(ExpressionContext.CurrentElement)} is correct");
+            Assert.That(result.CurrentNode, Is.SameAs(node), $"{nameof(ExpressionContext.CurrentNode)} is correct");
             Assert.That(result.Model, Is.SameAs(request.Model), $"{nameof(ExpressionContext.Model)} is correct");
         }
 
@@ -34,12 +34,12 @@ namespace ZptSharp.Rendering
                                                                                                           [MockedConfig, Frozen] RenderingConfig config,
                                                                                                           [Frozen] IServiceProvider serviceProvider,
                                                                                                           RenderZptDocumentRequest request,
-                                                                                                          INode element,
+                                                                                                          INode node,
                                                                                                           ExpressionContextFactory sut,
                                                                                                           object val)
         {
             Mock.Get(serviceProvider).Setup(x => x.GetService(typeof(RenderingConfig))).Returns(() => config);
-            Mock.Get(document).SetupGet(x => x.RootElement).Returns(element);
+            Mock.Get(document).SetupGet(x => x.RootNode).Returns(node);
             Mock.Get(config).SetupGet(x => x.ContextBuilder).Returns((c, s) => c.AddToRootContext("Foo", val));
             var result = sut.GetExpressionContext(document, request);
 
@@ -47,27 +47,27 @@ namespace ZptSharp.Rendering
         }
 
         [Test, AutoMoqData]
-        public void GetChildContexts_returns_a_context_for_each_child_element(ExpressionContext context,
+        public void GetChildContexts_returns_a_context_for_each_child_node(ExpressionContext context,
                                                                               INode child1,
                                                                               INode child2,
                                                                               ExpressionContextFactory sut)
         {
             Mock.Get(child1).SetupGet(x => x.IsElement).Returns(true);
             Mock.Get(child2).SetupGet(x => x.IsElement).Returns(true);
-            Mock.Get(context.CurrentElement).SetupGet(x => x.ChildNodes).Returns(() => new[] { child1, child2 });
+            Mock.Get(context.CurrentNode).SetupGet(x => x.ChildNodes).Returns(() => new[] { child1, child2 });
 
             Assert.That(() => sut.GetChildContexts(context), Has.Count.EqualTo(2));
         }
 
         [Test, AutoMoqData]
-        public void GetChildContexts_does_not_create_contexts_for_nodes_which_are_not_elements(ExpressionContext context,
+        public void GetChildContexts_does_not_create_contexts_for_nodes_which_are_not_nodes(ExpressionContext context,
                                                                                                INode child1,
                                                                                                INode child2,
                                                                                                ExpressionContextFactory sut)
         {
             Mock.Get(child1).SetupGet(x => x.IsElement).Returns(true);
             Mock.Get(child2).SetupGet(x => x.IsElement).Returns(false);
-            Mock.Get(context.CurrentElement).SetupGet(x => x.ChildNodes).Returns(() => new[] { child1, child2 });
+            Mock.Get(context.CurrentNode).SetupGet(x => x.ChildNodes).Returns(() => new[] { child1, child2 });
 
             Assert.That(() => sut.GetChildContexts(context), Has.Count.EqualTo(1));
         }
@@ -78,11 +78,11 @@ namespace ZptSharp.Rendering
                                                                                ExpressionContextFactory sut)
         {
             Mock.Get(child1).SetupGet(x => x.IsElement).Returns(true);
-            Mock.Get(context.CurrentElement).SetupGet(x => x.ChildNodes).Returns(() => new[] { child1 });
+            Mock.Get(context.CurrentNode).SetupGet(x => x.ChildNodes).Returns(() => new[] { child1 });
 
             var result = sut.GetChildContexts(context).Single();
 
-            Assert.That(result.CurrentElement, Is.SameAs(child1), $"{nameof(ExpressionContext.CurrentElement)} is correct");
+            Assert.That(result.CurrentNode, Is.SameAs(child1), $"{nameof(ExpressionContext.CurrentNode)} is correct");
             Assert.That(result.TemplateDocument, Is.SameAs(context.TemplateDocument), $"{nameof(ExpressionContext.TemplateDocument)} is correct");
             Assert.That(result.Model, Is.SameAs(context.Model), $"{nameof(ExpressionContext.Model)} is correct");
             Assert.That(result.LocalDefinitions, Is.EqualTo(context.LocalDefinitions), $"{nameof(ExpressionContext.LocalDefinitions)} is correct");

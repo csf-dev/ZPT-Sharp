@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using AutoFixture.NUnit3;
 using Moq;
 using NUnit.Framework;
@@ -11,10 +11,10 @@ namespace ZptSharp.SourceAnnotation
     public class AnnotationProviderTests
     {
         [Test, AutoMoqData]
-        public void GetAnnotation_gets_annotation_with_element_source_info_and_start_tag([Frozen] IGetsSourceAnnotationString sourceInfoProvider,
+        public void GetAnnotation_gets_annotation_with_node_source_info_and_start_tag([Frozen] IGetsSourceAnnotationString sourceInfoProvider,
                                                                                          AnnotationProvider sut,
                                                                                          INode node,
-                                                                                         ElementSourceInfo sourceInfo,
+                                                                                         NodeSourceInfo sourceInfo,
                                                                                          string annotation)
         {
             Mock.Get(node).SetupGet(x => x.SourceInfo).Returns(sourceInfo);
@@ -30,10 +30,10 @@ namespace ZptSharp.SourceAnnotation
         }
 
         [Test, AutoMoqData]
-        public void GetAnnotation_gets_annotation_with_element_source_info_and_end_tag([Frozen] IGetsSourceAnnotationString sourceInfoProvider,
+        public void GetAnnotation_gets_annotation_with_node_source_info_and_end_tag([Frozen] IGetsSourceAnnotationString sourceInfoProvider,
                                                                                          AnnotationProvider sut,
                                                                                          INode node,
-                                                                                         ElementSourceInfo sourceInfo,
+                                                                                         NodeSourceInfo sourceInfo,
                                                                                          string annotation)
         {
             Mock.Get(node).SetupGet(x => x.SourceInfo).Returns(sourceInfo);
@@ -49,10 +49,10 @@ namespace ZptSharp.SourceAnnotation
         }
 
         [Test, AutoMoqData]
-        public void GetAnnotation_gets_annotation_with_element_source_info_and_no_tag_info([Frozen] IGetsSourceAnnotationString sourceInfoProvider,
+        public void GetAnnotation_gets_annotation_with_node_source_info_and_no_tag_info([Frozen] IGetsSourceAnnotationString sourceInfoProvider,
                                                                                            AnnotationProvider sut,
                                                                                            INode node,
-                                                                                           ElementSourceInfo sourceInfo,
+                                                                                           NodeSourceInfo sourceInfo,
                                                                                            string annotation)
         {
             Mock.Get(node).SetupGet(x => x.SourceInfo).Returns(sourceInfo);
@@ -70,7 +70,7 @@ namespace ZptSharp.SourceAnnotation
         public void GetPreReplacementAnnotation_gets_annotation_with_pre_replacement_source_info_and_start_tag([Frozen] IGetsSourceAnnotationString sourceInfoProvider,
                                                                                                                AnnotationProvider sut,
                                                                                                                INode node,
-                                                                                                               ElementSourceInfo sourceInfo,
+                                                                                                               NodeSourceInfo sourceInfo,
                                                                                                                string annotation)
         {
             Mock.Get(node).SetupGet(x => x.PreReplacementSourceInfo).Returns(sourceInfo);
@@ -89,7 +89,7 @@ namespace ZptSharp.SourceAnnotation
         public void GetPreReplacementAnnotation_gets_annotation_with_pre_replacement_source_info_and_end_tag([Frozen] IGetsSourceAnnotationString sourceInfoProvider,
                                                                                                              AnnotationProvider sut,
                                                                                                              INode node,
-                                                                                                             ElementSourceInfo sourceInfo,
+                                                                                                             NodeSourceInfo sourceInfo,
                                                                                                              string annotation)
         {
             Mock.Get(node).SetupGet(x => x.PreReplacementSourceInfo).Returns(sourceInfo);
@@ -108,7 +108,7 @@ namespace ZptSharp.SourceAnnotation
         public void GetPreReplacementAnnotation_gets_annotation_with_pre_replacement_source_info_and_no_tag_info([Frozen] IGetsSourceAnnotationString sourceInfoProvider,
                                                                                                                  AnnotationProvider sut,
                                                                                                                  INode node,
-                                                                                                                 ElementSourceInfo sourceInfo,
+                                                                                                                 NodeSourceInfo sourceInfo,
                                                                                                                  string annotation)
         {
             Mock.Get(node).SetupGet(x => x.PreReplacementSourceInfo).Returns(sourceInfo);

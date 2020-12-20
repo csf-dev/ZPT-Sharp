@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -28,8 +28,8 @@ namespace ZptSharp.Dom
         /// Replace the specified node with a collection of replacements.
         /// </para>
         /// <para>
-        /// Note that this means that the current element will be detached/removed from its parent as a side-effect.
-        /// Further DOM manipulation should occur using the replacement elements and not the replaced element.
+        /// Note that this means that the current node will be detached/removed from its parent as a side-effect.
+        /// Further DOM manipulation should occur using the replacement nodes and not the replaced node.
         /// </para>
         /// </summary>
         /// <param name="replacer">The node replacer.</param>

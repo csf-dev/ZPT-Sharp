@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
@@ -114,7 +114,7 @@ namespace ZptSharp.Expressions
         }
 
         IDictionary<string, Dom.IAttribute> GetAttributesDictionary()
-            => context.CurrentElement.Attributes.ToDictionary(k => k.Name, v => v);
+            => context.CurrentNode.Attributes.ToDictionary(k => k.Name, v => v);
 
         MetalDocumentAdapter GetMetalDocumentAdapter()
             => metalDocumentAdapterFactory.GetMetalDocumentAdapter(context.TemplateDocument);

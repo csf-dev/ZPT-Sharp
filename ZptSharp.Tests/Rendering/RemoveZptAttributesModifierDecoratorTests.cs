@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
 using AutoFixture.NUnit3;
@@ -13,7 +13,7 @@ namespace ZptSharp.Rendering
     public class RemoveZptAttributesModifierDecoratorTests
     {
         [Test, AutoMoqData]
-        public async Task ModifyDocumentAsync_uses_the_iterative_modifier_with_the_cleanup_context_processor([Frozen] IGetsZptElementAndAttributeRemovalContextProcessor contextProcessorFactory,
+        public async Task ModifyDocumentAsync_uses_the_iterative_modifier_with_the_cleanup_context_processor([Frozen] IGetsZptNodeAndAttributeRemovalContextProcessor contextProcessorFactory,
                                                                                                              [Frozen] IIterativelyModifiesDocument iterativeModifier,
                                                                                                              [Frozen] IModifiesDocument wrapped,
                                                                                                              RemoveZptAttributesModifierDecorator sut,
@@ -22,7 +22,7 @@ namespace ZptSharp.Rendering
                                                                                                              [MockedConfig] RenderZptDocumentRequest request)
         {
             Mock.Get(contextProcessorFactory)
-                .Setup(x => x.GetElementAndAttributeRemovalProcessor())
+                .Setup(x => x.GetNodeAndAttributeRemovalProcessor())
                 .Returns(processor);
             Mock.Get(iterativeModifier)
                 .Setup(x => x.ModifyDocumentAsync(document, request, processor, CancellationToken.None))

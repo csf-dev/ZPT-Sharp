@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
@@ -27,7 +27,7 @@ namespace ZptSharp.Tal
         {
             Mock.Get(metalSpecProvider).SetupGet(x => x.DefineMacro).Returns(spec);
             Mock.Get(attribute).Setup(x => x.Matches(spec)).Returns(true);
-            context.CurrentElement.Attributes.Add(attribute);
+            context.CurrentNode.Attributes.Add(attribute);
             Mock.Get(wrapped)
                 .Setup(x => x.ProcessContextAsync(context, CancellationToken.None))
                 .Returns(() => Task.FromResult(ExpressionContextProcessingResult.Noop));
@@ -50,7 +50,7 @@ namespace ZptSharp.Tal
             Mock.Get(wrapped)
                 .Setup(x => x.ProcessContextAsync(context, CancellationToken.None))
                 .Returns(() => Task.FromResult(ExpressionContextProcessingResult.Noop));
-            context.CurrentElement.Attributes.Clear();
+            context.CurrentNode.Attributes.Clear();
 
             await sut.ProcessContextAsync(context);
 

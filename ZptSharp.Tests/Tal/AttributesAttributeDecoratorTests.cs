@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
 using AutoFixture.NUnit3;
@@ -50,16 +50,16 @@ namespace ZptSharp.Tal
                 .Setup(x => x.ProcessContextAsync(context, CancellationToken.None))
                 .Returns(() => Task.FromResult(wrappedResult));
             Mock.Get(attribute).Setup(x => x.Matches(spec)).Returns(true);
-            context.CurrentElement.Attributes.Clear();
-            context.CurrentElement.Attributes.Add(attribute);
-            context.CurrentElement.Attributes.Add(existingAttribute);
-            Mock.Get(context.CurrentElement)
+            context.CurrentNode.Attributes.Clear();
+            context.CurrentNode.Attributes.Add(attribute);
+            context.CurrentNode.Attributes.Add(existingAttribute);
+            Mock.Get(context.CurrentNode)
                 .Setup(x => x.CreateAttribute(It.IsAny<AttributeSpec>()))
                 .Returns((AttributeSpec s) => new StubAttribute(s.Name));
             Mock.Get(existingAttribute).SetupGet(x => x.Name).Returns("style");
             existingAttribute.Value = "old style value";
             Mock.Get(definitionsProvider)
-                .Setup(x => x.GetDefinitions(attribute.Value, context.CurrentElement))
+                .Setup(x => x.GetDefinitions(attribute.Value, context.CurrentNode))
                 .Returns(() => new[] {
                     new AttributeDefinition { Name = "class", Expression = "abc" },
                     new AttributeDefinition { Name = "style", Expression = "def" },
@@ -77,7 +77,7 @@ namespace ZptSharp.Tal
 
             await sut.ProcessContextAsync(context);
 
-            Assert.That(context.CurrentElement.Attributes,
+            Assert.That(context.CurrentNode.Attributes,
                         Has.One.Matches<IAttribute>(x => x.Name == "class" && x.Value == "new class value")
                        .And.One.Matches<IAttribute>(x => x.Name == "style" && x.Value == "new style value")
                        .And.One.Matches<IAttribute>(x => x.Name == "id" && x.Value == "new id value"));
@@ -101,16 +101,16 @@ namespace ZptSharp.Tal
                 .Setup(x => x.ProcessContextAsync(context, CancellationToken.None))
                 .Returns(() => Task.FromResult(wrappedResult));
             Mock.Get(attribute).Setup(x => x.Matches(spec)).Returns(true);
-            context.CurrentElement.Attributes.Clear();
-            context.CurrentElement.Attributes.Add(attribute);
-            context.CurrentElement.Attributes.Add(existingAttribute);
-            Mock.Get(context.CurrentElement)
+            context.CurrentNode.Attributes.Clear();
+            context.CurrentNode.Attributes.Add(attribute);
+            context.CurrentNode.Attributes.Add(existingAttribute);
+            Mock.Get(context.CurrentNode)
                 .Setup(x => x.CreateAttribute(It.IsAny<AttributeSpec>()))
                 .Returns((AttributeSpec s) => new StubAttribute(s.Name));
             Mock.Get(existingAttribute).SetupGet(x => x.Name).Returns("style");
             existingAttribute.Value = "old style value";
             Mock.Get(definitionsProvider)
-                .Setup(x => x.GetDefinitions(attribute.Value, context.CurrentElement))
+                .Setup(x => x.GetDefinitions(attribute.Value, context.CurrentNode))
                 .Returns(() => new[] {
                     new AttributeDefinition { Name = "style", Expression = "def" },
                 });
@@ -121,7 +121,7 @@ namespace ZptSharp.Tal
             await sut.ProcessContextAsync(context);
 
             // The attributes attribute remains, but the other attribute should be removed
-            Assert.That(context.CurrentElement.Attributes, Is.EqualTo(new[] { attribute }));
+            Assert.That(context.CurrentNode.Attributes, Is.EqualTo(new[] { attribute }));
         }
 
         [Test, AutoMoqData]
@@ -143,13 +143,13 @@ namespace ZptSharp.Tal
                 .Setup(x => x.ProcessContextAsync(context, CancellationToken.None))
                 .Returns(() => Task.FromResult(wrappedResult));
             Mock.Get(attribute).Setup(x => x.Matches(spec)).Returns(true);
-            context.CurrentElement.Attributes.Clear();
-            context.CurrentElement.Attributes.Add(attribute);
-            context.CurrentElement.Attributes.Add(existingAttribute);
+            context.CurrentNode.Attributes.Clear();
+            context.CurrentNode.Attributes.Add(attribute);
+            context.CurrentNode.Attributes.Add(existingAttribute);
             Mock.Get(existingAttribute).SetupGet(x => x.Name).Returns("style");
             existingAttribute.Value = "old style value";
             Mock.Get(definitionsProvider)
-                .Setup(x => x.GetDefinitions(attribute.Value, context.CurrentElement))
+                .Setup(x => x.GetDefinitions(attribute.Value, context.CurrentNode))
                 .Returns(() => new[] {
                     new AttributeDefinition { Name = "style", Expression = "def" },
                 });
@@ -160,7 +160,7 @@ namespace ZptSharp.Tal
 
             await sut.ProcessContextAsync(context);
 
-            Assert.That(context.CurrentElement.Attributes, Has.One.Matches<IAttribute>(x => x.Name == "style" && x.Value == "old style value"));
+            Assert.That(context.CurrentNode.Attributes, Has.One.Matches<IAttribute>(x => x.Name == "style" && x.Value == "old style value"));
         }
     }
 }

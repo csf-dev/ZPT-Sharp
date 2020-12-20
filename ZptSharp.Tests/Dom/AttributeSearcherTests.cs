@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using AutoFixture.NUnit3;
 using Moq;
 using NUnit.Framework;
@@ -10,7 +10,7 @@ namespace ZptSharp.Dom
     public class AttributeSearcherTests
     {
         [Test, AutoMoqData]
-        public void SearchForAttributes_returns_all_matching_attributes_including_from_grandchild_elements([StubDom, Frozen] IDocument doc,
+        public void SearchForAttributes_returns_all_matching_attributes_including_from_grandchild_nodes([StubDom, Frozen] IDocument doc,
                                                                                                            [StubDom] INode root,
                                                                                                            [StubDom] INode child1,
                                                                                                            [StubDom] INode child2,
@@ -21,7 +21,7 @@ namespace ZptSharp.Dom
                                                                                                            AttributeSpec spec,
                                                                                                            AttributeSearcher sut)
         {
-            Mock.Get(doc).SetupGet(x => x.RootElement).Returns(root);
+            Mock.Get(doc).SetupGet(x => x.RootNode).Returns(root);
             root.ChildNodes.Add(child1);
             root.ChildNodes.Add(child2);
             child1.ChildNodes.Add(grandchild1);
@@ -41,7 +41,7 @@ namespace ZptSharp.Dom
                                                                                 AttributeSpec spec,
                                                                                 AttributeSearcher sut)
         {
-            Mock.Get(doc).SetupGet(x => x.RootElement).Returns(root);
+            Mock.Get(doc).SetupGet(x => x.RootNode).Returns(root);
             root.Attributes.Add(nonMatchingAttrib);
 
             Mock.Get(nonMatchingAttrib).Setup(x => x.Matches(spec)).Returns(false);
@@ -50,7 +50,7 @@ namespace ZptSharp.Dom
         }
 
         [Test, AutoMoqData]
-        public void SearchForAttributes_returns_an_attribute_from_the_root_element_if_used_as_the_basis_for_search([StubDom] INode root,
+        public void SearchForAttributes_returns_an_attribute_from_the_root_node_if_used_as_the_basis_for_search([StubDom] INode root,
                                                                                                                    [StubDom] IAttribute matchingAttrib,
                                                                                                                    AttributeSpec spec,
                                                                                                                    AttributeSearcher sut)
