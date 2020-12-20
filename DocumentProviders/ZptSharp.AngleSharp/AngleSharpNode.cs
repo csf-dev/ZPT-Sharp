@@ -273,7 +273,7 @@ namespace ZptSharp.Dom
             NativeNode = node ?? throw new ArgumentNullException(nameof(node));
             attributes = GetAttributesCollection();
             sourceChildNodes = childNodes ?? GetSourceChildNodes();
-            childNodes = WrapChildNodesCollectionWithEvents(sourceChildNodes);
+            this.childNodes = WrapChildNodesCollectionWithEvents(sourceChildNodes);
         }
 
         /// <summary>

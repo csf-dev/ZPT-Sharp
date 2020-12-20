@@ -58,7 +58,17 @@ namespace ZptSharp.Dom
         public static IEnumerable<AngleSharpNode> GetNodesFromFragmentBasedDocument(IDocument doc)
             => GetBodyNode(doc).ChildNodes.Cast<AngleSharpNode>().ToList();
 
-        static AngleSharpNode GetBodyNode(IDocument doc) => doc.RootNode.ChildNodes[1] as AngleSharpNode;
+        static AngleSharpNode GetBodyNode(IDocument doc)
+        {
+            if (doc == null)
+                throw new ArgumentNullException(nameof(doc));
+            if (doc.RootNode == null)
+                throw new ArgumentException("Document must have a root node", nameof(doc));
+            if (doc.RootNode.ChildNodes == null)
+                throw new ArgumentException("Document root node must have children", nameof(doc));
+
+            return doc.RootNode.ChildNodes[1] as AngleSharpNode;
+        }
 
         /// <summary>
         /// Gets a rendering of a document.

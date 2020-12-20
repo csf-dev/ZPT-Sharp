@@ -35,7 +35,7 @@ namespace ZptSharp.Dom
             }
             else if(parent == null)
             {
-                var message = String.Format(Resources.ExceptionMessage.MustNotBeRootNode, toReplace, nameof(toReplace));
+                var message = String.Format(Resources.ExceptionMessage.MustNotBeRootElement, toReplace, nameof(toReplace));
                 throw new ArgumentException(message);
             }
             else

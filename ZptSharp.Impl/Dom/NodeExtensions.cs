@@ -115,7 +115,7 @@ namespace ZptSharp.Dom
             if (node == null)
                 throw new ArgumentNullException(nameof(node));
             if (node.ParentNode == null)
-                throw new ArgumentException(Resources.ExceptionMessage.NodeMustHaveAParent, nameof(node));
+                throw new ArgumentException(Resources.ExceptionMessage.ElementMustHaveAParent, nameof(node));
 
             node.ParentNode.ChildNodes.Remove(node);
         }

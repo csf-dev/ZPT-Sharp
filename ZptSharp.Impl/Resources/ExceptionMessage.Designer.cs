@@ -155,9 +155,9 @@ namespace ZptSharp.Resources {
             }
         }
         
-        internal static string NodeMustHaveAParent {
+        internal static string ElementMustHaveAParent {
             get {
-                return ResourceManager.GetString("NodeMustHaveAParent", resourceCulture);
+                return ResourceManager.GetString("ElementMustHaveAParent", resourceCulture);
             }
         }
         
@@ -191,9 +191,9 @@ namespace ZptSharp.Resources {
             }
         }
         
-        internal static string MustNotBeRootNode {
+        internal static string MustNotBeRootElement {
             get {
-                return ResourceManager.GetString("MustNotBeRootNode", resourceCulture);
+                return ResourceManager.GetString("MustNotBeRootElement", resourceCulture);
             }
         }
         

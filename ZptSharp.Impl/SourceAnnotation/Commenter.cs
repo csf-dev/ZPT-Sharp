@@ -45,7 +45,7 @@ namespace ZptSharp.SourceAnnotation
             if (node == null)
                 throw new ArgumentNullException(nameof(node));
             if (node.ParentNode == null)
-                throw new ArgumentException(Resources.ExceptionMessage.NodeMustHaveAParent, nameof(node));
+                throw new ArgumentException(Resources.ExceptionMessage.ElementMustHaveAParent, nameof(node));
 
             var nodeIndex = node.ParentNode.ChildNodes.IndexOf(node);
             var comment = node.CreateComment(commentText);
