@@ -38,41 +38,43 @@ namespace ZptSharp.Dom
         public override IList<INode> ChildNodes => childNodes;
 
         /// <summary>
-        /// Gets a value indicating whether this <see cref="T:ZptSharp.Dom.INode"/> is an node node.
+        /// Gets a value indicating whether this <see cref="INode"/> is an element node.
         /// </summary>
-        /// <value><c>true</c> if the current instance is an node; otherwise, <c>false</c>.</value>
-        public override bool IsNode => NativeNode.NodeType == HtmlNodeType.Node;
+        /// <value><c>true</c> if the current instance is an element; otherwise, <c>false</c>.</value>
+        public override bool IsElement => NativeNode.NodeType == HtmlNodeType.Element;
 
         /// <summary>
-        /// Gets a value which indicates whether or not the current node has "CData"-like behaviour.
+        /// Gets a value which indicates whether or not the current element node has "CData"-like behaviour.
         /// One example of this is a <c>&lt;textarea&gt;</c> node.  Its contents are not HTML-encoded.
         /// </summary>
-        /// <value><c>true</c> if the current node is treated like a <c>CData</c> node; otherwise, <c>false</c>.</value>
+        /// <value><c>true</c> if the current element is treated like a <c>CData</c> element; otherwise, <c>false</c>.</value>
         bool ShouldNodeBeTreatedAsCData
         {
             get
             {
-                if (NativeNode.NodeType != HtmlNodeType.Node)
-                    return false;
+                if (!IsElement) return false;
 
-                return (from flag in HtmlNode.NodesFlags
+                return (from flag in HtmlNode.ElementsFlags
                         let behaviour = flag.Value
-                        let nodeName = flag.Key
+                        let elementName = flag.Key
                         where
-                            behaviour.HasFlag(HtmlNodeFlag.CData)
-                            && String.Equals(nodeName, NativeNode.Name, StringComparison.InvariantCultureIgnoreCase)
-                        select nodeName)
+                            behaviour.HasFlag(HtmlElementFlag.CData)
+                            && String.Equals(elementName, NativeNode.Name, StringComparison.InvariantCultureIgnoreCase)
+                        select elementName)
                     .Any();
             }
         }
 
         /// <summary>
         /// Returns a <see cref="String"/> that represents the current
-        /// <see cref="HapNode"/>.  This shows the node's start-tag.
+        /// <see cref="HapNode"/>.  If it is an element node then this method shows the element's start-tag.
+        /// Otherwise it returns the same as the native <see cref="HtmlNode"/>'s <see cref="Object.ToString()"/> method.
         /// </summary>
         /// <returns>A <see cref="String"/> that represents the current <see cref="HapNode"/>.</returns>
         public override string ToString()
         {
+            if (!IsElement) return NativeNode.ToString();
+
             var attribs = NativeNode.Attributes
                 .Select(attrib => $"{attrib.Name}=\"{attrib.Value}\"")
                 .ToList();
@@ -103,7 +105,7 @@ namespace ZptSharp.Dom
                 };
                 closedList.Add(native, newNode);
                 if (parent != null) parent.sourceChildNodes.Add(newNode);
-                openList.AddRange(native.ChildNodes.Select((node, idx) => ((HtmlNode, HapNode)?)(node, (HapNode)node.ChildNodes[idx])));
+                openList.AddRange(native.ChildNodes.Select((n, idx) => ((HtmlNode, HapNode)?)(n, (HapNode)node.ChildNodes[idx])));
             }
 
             return closedList[copiedNode];
@@ -181,7 +183,7 @@ namespace ZptSharp.Dom
         {
             if (@namespace == null)
                 throw new ArgumentNullException(nameof(@namespace));
-            if (!IsNode) return false;
+            if (!IsElement) return false;
 
             var nameParts = NativeNode.Name.Split(new [] { ':' }, 2);
             if (nameParts.Length < 2 && String.IsNullOrEmpty(@namespace.Prefix))

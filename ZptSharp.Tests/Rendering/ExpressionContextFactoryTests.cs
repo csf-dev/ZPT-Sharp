@@ -52,8 +52,8 @@ namespace ZptSharp.Rendering
                                                                               INode child2,
                                                                               ExpressionContextFactory sut)
         {
-            Mock.Get(child1).SetupGet(x => x.IsNode).Returns(true);
-            Mock.Get(child2).SetupGet(x => x.IsNode).Returns(true);
+            Mock.Get(child1).SetupGet(x => x.IsElement).Returns(true);
+            Mock.Get(child2).SetupGet(x => x.IsElement).Returns(true);
             Mock.Get(context.CurrentNode).SetupGet(x => x.ChildNodes).Returns(() => new[] { child1, child2 });
 
             Assert.That(() => sut.GetChildContexts(context), Has.Count.EqualTo(2));
@@ -65,8 +65,8 @@ namespace ZptSharp.Rendering
                                                                                                INode child2,
                                                                                                ExpressionContextFactory sut)
         {
-            Mock.Get(child1).SetupGet(x => x.IsNode).Returns(true);
-            Mock.Get(child2).SetupGet(x => x.IsNode).Returns(false);
+            Mock.Get(child1).SetupGet(x => x.IsElement).Returns(true);
+            Mock.Get(child2).SetupGet(x => x.IsElement).Returns(false);
             Mock.Get(context.CurrentNode).SetupGet(x => x.ChildNodes).Returns(() => new[] { child1, child2 });
 
             Assert.That(() => sut.GetChildContexts(context), Has.Count.EqualTo(1));
@@ -77,7 +77,7 @@ namespace ZptSharp.Rendering
                                                                                INode child1,
                                                                                ExpressionContextFactory sut)
         {
-            Mock.Get(child1).SetupGet(x => x.IsNode).Returns(true);
+            Mock.Get(child1).SetupGet(x => x.IsElement).Returns(true);
             Mock.Get(context.CurrentNode).SetupGet(x => x.ChildNodes).Returns(() => new[] { child1 });
 
             var result = sut.GetChildContexts(context).Single();

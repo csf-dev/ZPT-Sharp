@@ -25,12 +25,11 @@ namespace ZptSharp.Dom
         public XNode NativeNode { get; }
 
         /// <summary>
-        /// Gets a representation of <see cref="NativeNode"/> as an <see cref="XNode"/>,
-        /// if it is in fact an node node.
+        /// Gets a representation of <see cref="NativeNode"/> as an <see cref="XElement"/>,
+        /// if it is in fact an element node.
         /// </summary>
-        /// <value>The node node.</value>
-        protected XNode NodeNode
-            => NativeNode as XNode;
+        /// <value>The element node.</value>
+        protected XElement ElementNode => NativeNode as XElement;
 
         /// <summary>
         /// Gets a collection of the node's attributes.
@@ -45,26 +44,27 @@ namespace ZptSharp.Dom
         public override IList<INode> ChildNodes => childNodes;
 
         /// <summary>
-        /// Gets a value indicating whether this <see cref="T:ZptSharp.Dom.INode"/> is an node node.
+        /// Gets a value indicating whether this <see cref="INode"/> is an element node.
         /// </summary>
-        /// <value><c>true</c> if the current instance is an node; otherwise, <c>false</c>.</value>
-        public override bool IsNode => NativeNode.NodeType == XmlNodeType.Node;
+        /// <value><c>true</c> if the current instance is an element; otherwise, <c>false</c>.</value>
+        public override bool IsElement => NativeNode.NodeType == XmlNodeType.Element;
 
         /// <summary>
         /// Returns a <see cref="String"/> that represents the current
-        /// <see cref="XmlNode"/>.  This shows the node's start-tag.
+        /// <see cref="XmlNode"/>.  If it is an element node then this method shows the element's start-tag.
+        /// Otherwise it returns the same as the native <see cref="XNode"/>'s <see cref="Object.ToString()"/> method.
         /// </summary>
         /// <returns>A <see cref="String"/> that represents the current <see cref="XmlNode"/>.</returns>
         public override string ToString()
         {
-            if (!IsNode) return NativeNode.ToString();
+            if (!IsElement) return NativeNode.ToString();
 
-            var attribs = NodeNode.Attributes()
+            var attribs = ElementNode.Attributes()
                 .Select(attrib => $"{attrib.Name}=\"{attrib.Value}\"")
                 .ToList();
             var hasAttributes = attribs.Count > 0;
 
-            return $"<{NodeNode.Name}{(hasAttributes ? " " : String.Empty)}{String.Join(" ", attribs)}>";
+            return $"<{ElementNode.Name}{(hasAttributes ? " " : String.Empty)}{String.Join(" ", attribs)}>";
         }
 
         /// <summary>
@@ -73,7 +73,7 @@ namespace ZptSharp.Dom
         /// <returns>The copied node.</returns>
         public override INode GetCopy()
         {
-            var copiedNode = new XNode(NodeNode);
+            var copiedNode = new XElement(ElementNode);
 
             var closedList = new Dictionary<XNode, XmlNode>();
             (XNode, XmlNode)? current;
@@ -89,8 +89,8 @@ namespace ZptSharp.Dom
                 };
                 closedList.Add(native, newNode);
                 if (parent != null) parent.sourceChildNodes.Add(newNode);
-                if(native is XNode nativeNode)
-                    openList.AddRange(nativeNode.Nodes().Select((node, idx) => ((XNode, XmlNode)?)(node, (XmlNode)node.ChildNodes[idx])));
+                if(native is XElement nativeNode)
+                    openList.AddRange(nativeNode.Nodes().Select((n, idx) => ((XNode, XmlNode)?)(n, (XmlNode)node.ChildNodes[idx])));
             }
 
             return closedList[copiedNode];
@@ -125,7 +125,7 @@ namespace ZptSharp.Dom
         /// <returns>The parsed nodes.</returns>
         /// <param name="markup">Markup text.</param>
         public override IList<INode> ParseAsNodes(string markup)
-            => new[] { new XmlNode(XNode.Parse(markup ?? String.Empty), (XmlDocument)Document) };
+            => new[] { new XmlNode(XElement.Parse(markup ?? String.Empty), (XmlDocument)Document) };
 
         /// <summary>
         /// Creates and returns a new attribute from the specified specification.
@@ -147,9 +147,9 @@ namespace ZptSharp.Dom
         {
             if (@namespace == null)
                 throw new ArgumentNullException(nameof(@namespace));
-            if (!IsNode) return false;
+            if (!IsElement) return false;
 
-            return String.Equals(NodeNode.Name.NamespaceName, @namespace.Uri, StringComparison.InvariantCulture);
+            return String.Equals(ElementNode.Name.NamespaceName, @namespace.Uri, StringComparison.InvariantCulture);
         }
 
         /// <summary>
@@ -159,15 +159,15 @@ namespace ZptSharp.Dom
         /// </para>
         /// <para>
         /// This event-raising list is used to keep the attributes collection in-sync with the attributes
-        /// in the native HAP node.
+        /// in the native XML node.
         /// </para>
         /// </summary>
         /// <returns>The attributes collection.</returns>
         EventRaisingList<IAttribute> GetAttributesCollection()
         {
-            if (!IsNode) return new EventRaisingList<IAttribute>(new List<IAttribute>());
+            if (!IsElement) return new EventRaisingList<IAttribute>(new List<IAttribute>());
 
-            var sourceAttributes = NodeNode.Attributes()
+            var sourceAttributes = ElementNode.Attributes()
                 .Select(x => new XmlAttribute(x) { Node = this })
                 .Cast<IAttribute>()
                 .ToList();
@@ -176,11 +176,11 @@ namespace ZptSharp.Dom
             attribs.SetupAfterActions(add => {
                                           var xmlAttr = (XmlAttribute) add.Item;
                                           var attr = xmlAttr.NativeAttribute;
-                                          NodeNode.SetAttributeValue(attr.Name, attr.Value);
+                                          ElementNode.SetAttributeValue(attr.Name, attr.Value);
                                           // Because we didn't directly use the native attribute, we essentially
                                           // just created a new one.  That means we need to re-set the native
                                           // attribute on the ZPT attribute object by way of a fixup.
-                                          xmlAttr.NativeAttribute = NodeNode.Attribute(attr.Name);
+                                          xmlAttr.NativeAttribute = ElementNode.Attribute(attr.Name);
                                           add.Item.Node = this;
                                       },
                                       del => {
@@ -209,11 +209,11 @@ namespace ZptSharp.Dom
                     var item = (XmlNode)add.Item;
                     var ele = item.NativeNode;
 
-                    if (index >= NodeNode.Nodes().Count())
-                        NodeNode.Add(ele);
+                    if (index >= ElementNode.Nodes().Count())
+                        ElementNode.Add(ele);
                     else
                     {
-                        var toInsertBefore = NodeNode.Nodes().Skip(index).First();
+                        var toInsertBefore = ElementNode.Nodes().Skip(index).First();
                         toInsertBefore.AddBeforeSelf(ele);
                     }
 
@@ -231,9 +231,9 @@ namespace ZptSharp.Dom
 
         IList<INode> GetSourceChildNodes()
         {
-            if (!IsNode) return new INode[0];
+            if (!IsElement) return new INode[0];
 
-            return NodeNode.Nodes()
+            return ElementNode.Nodes()
                 .Select(x => new XmlNode(x, (XmlDocument)Doc, this, Source.CreateChild(GetLineNumber(x))))
                 .Cast<INode>()
                 .ToList();

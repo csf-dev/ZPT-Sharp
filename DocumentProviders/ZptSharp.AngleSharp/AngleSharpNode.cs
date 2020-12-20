@@ -26,12 +26,11 @@ namespace ZptSharp.Dom
         public As.INode NativeNode { get; }
 
         /// <summary>
-        /// Gets a representation of <see cref="NativeNode"/> as an <see cref="As.INode"/>,
-        /// if it is in fact an node node.
+        /// Gets a representation of <see cref="NativeNode"/> as an <see cref="As.IElement"/>,
+        /// if it is in fact an element node.
         /// </summary>
-        /// <value>The node node.</value>
-        protected As.INode NodeNode
-            => NativeNode as As.INode;
+        /// <value>The element node.</value>
+        protected As.IElement ElementNode => NativeNode as As.IElement;
 
         /// <summary>
         /// Gets a collection of the node's attributes.
@@ -46,26 +45,27 @@ namespace ZptSharp.Dom
         public override IList<INode> ChildNodes => childNodes;
 
         /// <summary>
-        /// Gets a value indicating whether this <see cref="T:ZptSharp.Dom.INode"/> is an node node.
+        /// Gets a value indicating whether this <see cref="INode"/> is an element node.
         /// </summary>
-        /// <value><c>true</c> if the current instance is an node; otherwise, <c>false</c>.</value>
-        public override bool IsNode => NativeNode.NodeType == As.NodeType.Node;
+        /// <value><c>true</c> if the current instance is an element; otherwise, <c>false</c>.</value>
+        public override bool IsElement => NativeNode.NodeType == As.NodeType.Element;
 
         /// <summary>
         /// Returns a <see cref="String"/> that represents the current
-        /// <see cref="AngleSharpNode"/>.  This shows the node's start-tag.
+        /// <see cref="AngleSharpNode"/>.  If it is an element node then this method shows the element's start-tag.
+        /// Otherwise it returns the same as the native <see cref="As.INode"/>'s <see cref="Object.ToString()"/> method.
         /// </summary>
         /// <returns>A <see cref="String"/> that represents the current <see cref="AngleSharpNode"/>.</returns>
         public override string ToString()
         {
-            if (!IsNode) return NativeNode.ToString();
+            if (!IsElement) return NativeNode.ToString();
 
-            var attrs = NodeNode.Attributes
+            var attrs = ElementNode.Attributes
                 .Select(attrib => $"{attrib.Name}=\"{attrib.Value}\"")
                 .ToList();
             var hasAttributes = attrs.Count > 0;
 
-            return $"<{NodeNode.LocalName}{(hasAttributes? " " : String.Empty)}{String.Join(" ", attrs)}>";
+            return $"<{ElementNode.LocalName}{(hasAttributes? " " : String.Empty)}{String.Join(" ", attrs)}>";
         }
 
         /// <summary>
@@ -90,7 +90,7 @@ namespace ZptSharp.Dom
                 };
                 closedList.Add(native, newNode);
                 if (parent != null) parent.sourceChildNodes.Add(newNode);
-                openList.AddRange(native.ChildNodes.Select((node, idx) => ((As.INode, AngleSharpNode)?)(node, (AngleSharpNode)node.ChildNodes[idx])));
+                openList.AddRange(native.ChildNodes.Select((n, idx) => ((As.INode, AngleSharpNode)?)(n, (AngleSharpNode)node.ChildNodes[idx])));
             }
 
             return closedList[copiedNode];
@@ -130,7 +130,7 @@ namespace ZptSharp.Dom
         {
             var context = BrowsingContext.New();
             var parser = context.GetService<IHtmlParser>();
-            var nativeNodes = parser.ParseFragment(markup, NodeNode);
+            var nativeNodes = parser.ParseFragment(markup, ElementNode);
             return nativeNodes.Select(x => new AngleSharpNode(x, (AngleSharpDocument)Document)).Cast<INode>().ToList();
 
         }
@@ -158,9 +158,9 @@ namespace ZptSharp.Dom
         {
             if (@namespace == null)
                 throw new ArgumentNullException(nameof(@namespace));
-            if (!IsNode) return false;
+            if (!IsElement) return false;
 
-            var nameParts = NodeNode.LocalName.Split(new[] { ':' }, 2);
+            var nameParts = ElementNode.LocalName.Split(new[] { ':' }, 2);
             if (nameParts.Length < 2 && String.IsNullOrEmpty(@namespace.Prefix))
                 return true;
             if (nameParts.Length < 2)
@@ -182,9 +182,9 @@ namespace ZptSharp.Dom
         /// <returns>The attributes collection.</returns>
         EventRaisingList<IAttribute> GetAttributesCollection()
         {
-            if (!IsNode) return new EventRaisingList<IAttribute>(new List<IAttribute>());
+            if (!IsElement) return new EventRaisingList<IAttribute>(new List<IAttribute>());
 
-            var sourceAttributes = NodeNode.Attributes
+            var sourceAttributes = ElementNode.Attributes
                 .Select(x => new AngleSharpAttribute(x) { Node = this })
                 .Cast<IAttribute>()
                 .ToList();
@@ -192,11 +192,11 @@ namespace ZptSharp.Dom
 
             attribs.SetupAfterActions(add => {
                 var attr = ((AngleSharpAttribute)add.Item).NativeAttribute;
-                NodeNode.Attributes.SetNamedItem(((AngleSharpAttribute)add.Item).NativeAttribute);
+                ElementNode.Attributes.SetNamedItem(((AngleSharpAttribute)add.Item).NativeAttribute);
                 add.Item.Node = this;
             },
                                       del => {
-                                          NodeNode.Attributes.RemoveNamedItem(del.Item.Name);
+                                          ElementNode.Attributes.RemoveNamedItem(del.Item.Name);
                                           del.Item.Node = null;
                                       });
 
@@ -254,7 +254,7 @@ namespace ZptSharp.Dom
 
         NodeSourceInfo GetSourceInfo(As.INode node)
         {
-            if (!(node is As.INode ele)) return Source.CreateChild();
+            if (!(node is As.IElement ele)) return Source.CreateChild();
 
             var startTagLine = ele.SourceReference?.Position.Line;
             if(!startTagLine.HasValue) return Source.CreateChild();

@@ -19,13 +19,13 @@ namespace ZptSharp.Dom
         public XDocument NativeDocument { get; }
 
         /// <summary>
-        /// Gets the root node for the current document.
+        /// Gets the root element for the current document.
         /// </summary>
         /// <returns>The root node.</returns>
         public override INode RootNode => root;
 
         /// <summary>
-        /// Where-supported, adds a comment before the first node node in the document.  In cases where
+        /// Where-supported, adds a comment before the first element node in the document.  In cases where
         /// the underlying document implementation does not support this, a workaround is acceptable (such as
         /// commenting immediately inside the first node).
         /// </summary>
@@ -36,7 +36,7 @@ namespace ZptSharp.Dom
         }
 
         /// <summary>
-        /// Replaces the root node of the DOM using the specified <paramref name="replacement"/>.
+        /// Replaces the root element node of the DOM using the specified <paramref name="replacement"/>.
         /// </summary>
         /// <param name="replacement">The replacement node.</param>
         public void ReplaceRootNode(INode replacement)

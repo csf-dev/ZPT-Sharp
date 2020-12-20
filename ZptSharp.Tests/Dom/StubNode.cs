@@ -13,7 +13,7 @@ namespace ZptSharp.Dom
 
         public override IList<INode> ChildNodes { get; } = new List<INode>();
 
-        public override bool IsNode => true;
+        public override bool IsElement => true;
 
         public override INode GetCopy() => this;
 

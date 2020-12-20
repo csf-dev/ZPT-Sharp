@@ -43,7 +43,7 @@ namespace ZptSharp.Rendering
         public IEnumerable<ExpressionContext> GetChildContexts(ExpressionContext context)
         {
             return context.CurrentNode.ChildNodes
-                .Where(x => x.IsNode)
+                .Where(x => x.IsElement)
                 .Select(x => GetExpressionContext(x, context.TemplateDocument, context.Model, context))
                 .ToList();
         }

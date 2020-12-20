@@ -59,7 +59,7 @@ namespace ZptSharp.Dom
             var node2 = AngleSharpDocumentUtil.GetNodeFromFragment(html2);
 
             node1.ChildNodes.Add(node2);
-            Assert.That(((As.INode) node1.NativeNode).OuterHtml, Is.EqualTo("<div><p>Foo bar</p></div>"));
+            Assert.That(((As.IElement) node1.NativeNode).OuterHtml, Is.EqualTo("<div><p>Foo bar</p></div>"));
         }
 
         [Test]
@@ -69,7 +69,7 @@ namespace ZptSharp.Dom
             var node = AngleSharpDocumentUtil.GetNodeFromFragment(html);
 
             node.ChildNodes.RemoveAt(0);
-            Assert.That(((As.INode) node.NativeNode).OuterHtml, Is.EqualTo("<div></div>"));
+            Assert.That(((As.IElement) node.NativeNode).OuterHtml, Is.EqualTo("<div></div>"));
         }
 
         #endregion
@@ -82,10 +82,10 @@ namespace ZptSharp.Dom
             var html = @"<div></div>";
             var node = AngleSharpDocumentUtil.GetNodeFromFragment(html);
 
-            var native = ((As.INode) node.NativeNode).Owner.CreateAttribute("foo");
+            var native = ((As.IElement) node.NativeNode).Owner.CreateAttribute("foo");
             native.Value = "bar";
             node.Attributes.Add(new AngleSharpAttribute(native) { Node = node });
-            Assert.That(((As.INode) node.NativeNode).OuterHtml, Is.EqualTo(@"<div foo=""bar""></div>"));
+            Assert.That(((As.IElement) node.NativeNode).OuterHtml, Is.EqualTo(@"<div foo=""bar""></div>"));
         }
 
         [Test]
@@ -95,7 +95,7 @@ namespace ZptSharp.Dom
             var node = AngleSharpDocumentUtil.GetNodeFromFragment(html);
 
             node.Attributes.RemoveAt(0);
-            Assert.That(((As.INode) node.NativeNode).OuterHtml, Is.EqualTo("<div></div>"));
+            Assert.That(((As.IElement) node.NativeNode).OuterHtml, Is.EqualTo("<div></div>"));
         }
 
         #endregion
@@ -109,7 +109,7 @@ namespace ZptSharp.Dom
             var divNode = AngleSharpDocumentUtil.GetNodeFromFragment(html);
             var result = (AngleSharpNode) divNode.GetCopy();
 
-            Assert.That(((As.INode) result.NativeNode).OuterHtml, Is.EqualTo(@"<div class=""foo""><p id=""test"">Hello there</p><p>Another <span>paragraph</span></p></div>"));
+            Assert.That(((As.IElement) result.NativeNode).OuterHtml, Is.EqualTo(@"<div class=""foo""><p id=""test"">Hello there</p><p>Another <span>paragraph</span></p></div>"));
         }
 
         [Test, AutoMoqData]
@@ -164,7 +164,7 @@ namespace ZptSharp.Dom
             var html = "<html><body><div>Hello</div></body></html>";
             var sut = AngleSharpDocumentUtil.GetNodeFromFragment(html);
 
-            Assert.That(() => sut.CreateTextNode(content), Is.Not.Null.And.Property(nameof(INode.IsNode)).False);
+            Assert.That(() => sut.CreateTextNode(content), Is.Not.Null.And.Property(nameof(INode.IsElement)).False);
         }
 
         #endregion

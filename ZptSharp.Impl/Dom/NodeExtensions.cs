@@ -90,8 +90,8 @@ namespace ZptSharp.Dom
             // By inserting in reverse order, using the same index, the nodes to add
             // will remain in their original order.
             var reversedNodesToAdd = GetReversedCollectionOfNodes(nodesToAdd);
-            foreach (var node in reversedNodesToAdd)
-                node.ChildNodes.Insert(targetIndex, node);
+            foreach (var n in reversedNodesToAdd)
+                node.ChildNodes.Insert(targetIndex, n);
         }
 
         static IList<INode> GetReversedCollectionOfNodes(IList<INode> nodes)

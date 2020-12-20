@@ -8,7 +8,7 @@ using ZptSharp.Rendering;
 namespace ZptSharp.Metal
 {
     /// <summary>
-    /// Decorator for the <see cref="IProcessesExpressionContext"/> service which detects nodes
+    /// Decorator for the <see cref="IProcessesExpressionContext"/> service which detects element nodes
     /// which have 'define-macro' attributes upon them.  If such an attribute is found then the
     /// macro is stored in the current context's global scope for later usage.
     /// </summary>

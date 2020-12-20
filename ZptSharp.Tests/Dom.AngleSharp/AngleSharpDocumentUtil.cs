@@ -31,7 +31,7 @@ namespace ZptSharp.Dom
             var context = BrowsingContext.New();
             var parser = context.GetService<IHtmlParser>();
             var bodyNode = GetBodyNode(document);
-            var nativeBody = ((AngleSharpNode)bodyNode).NativeNode as INode;
+            var nativeBody = ((AngleSharpNode)bodyNode).NativeNode as IElement;
             var nodes = parser.ParseFragment(html, nativeBody);
             return new AngleSharpNode(nodes.First(), document);
         }

@@ -156,11 +156,11 @@ Replacement is node:{is_node}",
                                     attributesAttribute,
                                     omitTagAttribute,
                                     context.CurrentNode,
-                                    context.CurrentNode.IsNode);
+                                    context.CurrentNode.IsElement);
                 }
 
                 // Don't copy attributes to non-nodes
-                if (!context.CurrentNode.IsNode) continue;
+                if (!context.CurrentNode.IsElement) continue;
 
                 if (attributesAttribute != null)
                     context.CurrentNode.Attributes.Add(attributesAttribute);

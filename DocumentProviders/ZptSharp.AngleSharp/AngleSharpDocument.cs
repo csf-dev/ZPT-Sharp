@@ -26,7 +26,7 @@ namespace ZptSharp.Dom
         public override INode RootNode => root;
 
         /// <summary>
-        /// Where-supported, adds a comment before the first node node in the document.  In cases where
+        /// Where-supported, adds a comment before the first node in the document.  In cases where
         /// the underlying document implementation does not support this, a workaround is acceptable (such as
         /// commenting immediately inside the first node).
         /// </summary>
@@ -45,7 +45,7 @@ namespace ZptSharp.Dom
         {
             NativeDocument = document ?? throw new ArgumentNullException(nameof(document));
 
-            var nativeRoot = NativeDocument.DocumentNode;
+            var nativeRoot = NativeDocument.DocumentElement;
             var src = new NodeSourceInfo(Source, nativeRoot.SourceReference?.Position.Line);
             root = new AngleSharpNode(nativeRoot, this, sourceInfo: src);
         }

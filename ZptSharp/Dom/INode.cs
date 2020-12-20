@@ -49,10 +49,10 @@ namespace ZptSharp.Dom
         INode ParentNode { get; set; }
 
         /// <summary>
-        /// Gets a value indicating whether this <see cref="INode"/> is an node node.
+        /// Gets a value indicating whether this <see cref="INode"/> is an element node.
         /// </summary>
-        /// <value><c>true</c> if the current instance is an node; otherwise, <c>false</c>.</value>
-        bool IsNode { get; }
+        /// <value><c>true</c> if the current instance is an element; otherwise, <c>false</c>.</value>
+        bool IsElement { get; }
 
         /// <summary>
         /// Gets a value indicating whether this <see cref="INode"/> is imported.  A node is imported

@@ -87,7 +87,7 @@ namespace ZptSharp.Dom
         /// Gets a value indicating whether this <see cref="T:ZptSharp.Dom.INode"/> is an node node.
         /// </summary>
         /// <value><c>true</c> if the current instance is an node; otherwise, <c>false</c>.</value>
-        public abstract bool IsNode { get; }
+        public abstract bool IsElement { get; }
 
         /// <summary>
         /// Gets a copy of the current node and all of its children.

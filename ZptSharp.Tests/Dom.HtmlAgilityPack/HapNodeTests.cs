@@ -163,7 +163,7 @@ namespace ZptSharp.Dom
             var html = "<html><body><div>Hello</div></body></html>";
             var sut = HapDocumentUtil.GetNode(html);
 
-            Assert.That(() => sut.CreateTextNode(content), Is.Not.Null.And.Property(nameof(INode.IsNode)).False);
+            Assert.That(() => sut.CreateTextNode(content), Is.Not.Null.And.Property(nameof(INode.IsElement)).False);
         }
 
         #endregion
