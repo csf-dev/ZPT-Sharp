@@ -45,7 +45,7 @@ namespace ZptSharp.Dom
         /// </remarks>
         /// <returns>The collection of nodes.</returns>
         /// <param name="source">Source.</param>
-        IEnumerable<INode> RecursivelyGetAllNodes(IHasNodes source)
+        static IEnumerable<INode> RecursivelyGetAllNodes(IHasNodes source)
         {
             INode current;
             var closedList = new List<INode>();

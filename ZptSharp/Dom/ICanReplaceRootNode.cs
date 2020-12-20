@@ -1,5 +1,4 @@
-﻿using System;
-namespace ZptSharp.Dom
+﻿namespace ZptSharp.Dom
 {
     /// <summary>
     /// Applied to a <see cref="IDocument"/> which may replace the root node of its DOM.

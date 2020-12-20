@@ -261,7 +261,7 @@ namespace ZptSharp.Dom
             return eventBasedListWrapper;
         }
 
-        int? GetEndTagLineNumber(HtmlNode node)
+        static int? GetEndTagLineNumber(HtmlNode node)
         {
             if (node == null) return null;
 

@@ -192,7 +192,7 @@ namespace ZptSharp.Dom
 
             attribs.SetupAfterActions(add => {
                 var attr = ((AngleSharpAttribute)add.Item).NativeAttribute;
-                ElementNode.Attributes.SetNamedItem(((AngleSharpAttribute)add.Item).NativeAttribute);
+                ElementNode.Attributes.SetNamedItem(attr);
                 add.Item.Node = this;
             },
                                       del => {
