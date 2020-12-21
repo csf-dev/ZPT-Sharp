@@ -19,9 +19,7 @@ namespace ZptSharp.Expressions
         /// <returns>The expression type.</returns>
         /// <param name="expression">An expression.</param>
         public string GetExpressionType(string expression)
-        {
-            throw new NotImplementedException();
-        }
+            => wrapped.GetExpressionType(expression) ?? config.DefaultExpressionType;
 
         /// <summary>
         /// Initializes a new instance of the
