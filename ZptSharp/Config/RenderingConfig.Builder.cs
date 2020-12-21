@@ -120,6 +120,17 @@ namespace ZptSharp.Config
             }
 
             /// <summary>
+            /// Gets or sets the default expression type name/prefix, used for TALES expressions which do not have a prefix.
+            /// If left unset, this defaults to <see cref="WellKnownExpressionPrefix.Path"/>.
+            /// </summary>
+            /// <value>The default expression-type prefix.</value>
+            public string DefaultExpressionType
+            {
+                get => config.DefaultExpressionType;
+                set { AssertIsNotBuilt(); config.DefaultExpressionType= value ?? throw new ArgumentNullException(nameof(value)); }
+            }
+
+            /// <summary>
             /// Returns an immutable configuration object.  This method may be used only once per instance of <see cref="Builder"/>.
             /// Once it has been used, the configuration is finalised.
             /// </summary>
