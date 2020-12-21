@@ -110,7 +110,7 @@ namespace ZptSharp.Expressions.StringExpressions
         string GetReplacementExpression(Match match)
         {
             var expressionBody = match.Groups[1].Success ? match.Groups[1].Value : match.Groups[2].Value;
-            return $"{WellKnownExpressionType.Path}:{expressionBody}";
+            return $"{WellKnownExpressionPrefix.Path}:{expressionBody}";
         }
 
         /// <summary>

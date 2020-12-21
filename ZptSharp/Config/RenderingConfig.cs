@@ -139,6 +139,13 @@ namespace ZptSharp.Config
         public virtual string SourceAnnotationBasePath { get; private set; }
 
         /// <summary>
+        /// Gets the default expression type name/prefix, used for TALES expressions which do not have a prefix.
+        /// If left unset, this defaults to <see cref="WellKnownExpressionPrefix.Path"/>.
+        /// </summary>
+        /// <value>The default expression-type prefix.</value>
+        public virtual string DefaultExpressionType { get; private set; }
+
+        /// <summary>
         /// <para>
         /// Gets a copy of the current configuration instance, returned as a
         /// <see cref="Builder"/> object, allowing further amendments.
@@ -163,6 +170,7 @@ namespace ZptSharp.Config
                 KeywordOptions = KeywordOptions.ToDictionary(k => k.Key, v => v.Value),
                 OmitXmlDeclaration = OmitXmlDeclaration,
                 SourceAnnotationBasePath = SourceAnnotationBasePath,
+                DefaultExpressionType = DefaultExpressionType,
             };
         }
 
@@ -193,6 +201,7 @@ namespace ZptSharp.Config
             DocumentEncoding = Encoding.UTF8;
             KeywordOptions = new ReadOnlyDictionary<string, object>(new Dictionary<string, object>());
             ContextBuilder = (c, s) => { };
+            DefaultExpressionType = WellKnownExpressionPrefix.Path;
         }
 
         /// <summary>
