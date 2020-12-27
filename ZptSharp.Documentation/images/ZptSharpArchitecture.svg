@@ -1,0 +1,31 @@
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+	"http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+
+<svg  width="409" height="217" viewBox="0 0 409 217" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"  version="1.1">
+  <desc>Lekh Diagram</desc>
+  <path  stroke-linecap="round"  stroke-width="2" stroke="rgb(0, 0, 0)" fill="rgb(180, 221, 255)" fill-opacity="0.901961" d=" M 140.5,12.5  L 396.5,12.5  L 396.5,124.5  L 140.5,124.5  L 140.5,12.5 "/>
+  <text  x="268.5" y="15.5" style="font-size:15;  fill:rgb(0, 0, 0);  stroke:rgb(0, 0, 0);  dominant-baseline: hanging; text-anchor: middle;">ZptSharp Core</text>
+  <path  stroke-linecap="round"  stroke-width="2" stroke="rgb(0, 0, 0)" fill="rgb(0, 180, 255)" fill-opacity="0.901961" d=" M 156.5,44.5  L 252.5,44.5  L 252.5,108.5  L 156.5,108.5  L 156.5,44.5 "/>
+  <text  x="204.5" y="76.5" style="font-size:15;  fill:rgb(0, 0, 0);  stroke:rgb(0, 0, 0);  dominant-baseline: central; text-anchor: middle;">Abstractions</text>
+  <path  stroke-linecap="round"  stroke-width="2" stroke="rgb(0, 0, 0)" fill="rgb(0, 180, 255)" fill-opacity="0.901961" d=" M 284.5,44.5  L 380.5,44.5  L 380.5,108.5  L 284.5,108.5  L 284.5,44.5 "/>
+  <text  x="332.5" y="76.5" style="font-size:15;  fill:rgb(0, 0, 0);  stroke:rgb(0, 0, 0);  dominant-baseline: central; text-anchor: middle;">Impl</text>
+  <path  stroke-linecap="round"  stroke-width="2" stroke="rgb(0, 0, 0)" fill="rgb(255, 255, 0)" fill-opacity="0.901961" d=" M 140.5,140.5  L 252.5,140.5  L 252.5,204.5  L 140.5,204.5  L 140.5,140.5 "/>
+  <text  x="196.5" y="172.5" style="font-size:15;  fill:rgb(0, 0, 0);  stroke:rgb(0, 0, 0);  dominant-baseline: central; text-anchor: middle;">
+    <tspan  x="196.5" dy="-15">Document</tspan>
+    <tspan  x="196.5" dy="15"> provider</tspan>
+    <tspan  x="196.5" dy="15"> plugin(s)</tspan>
+  </text>
+  <path  stroke-linecap="round"  stroke-width="2" stroke="rgb(0, 0, 0)" fill="rgb(255, 255, 0)" fill-opacity="0.901961" d=" M 284.5,140.5  L 396.5,140.5  L 396.5,204.5  L 284.5,204.5  L 284.5,140.5 "/>
+  <text  x="340.5" y="172.5" style="font-size:15;  fill:rgb(0, 0, 0);  stroke:rgb(0, 0, 0);  dominant-baseline: central; text-anchor: middle;">
+    <tspan  x="340.5" dy="-7.5">Expression</tspan>
+    <tspan  x="340.5" dy="15"> plugin(s)</tspan>
+  </text>
+  <path  stroke-linecap="round"  stroke-width="2" stroke="rgb(0, 0, 0)" fill="rgb(210, 186, 128)" fill-opacity="0.901961" d=" M 12.5,204.5  L 12.5,12.5  L 124.5,12.5  L 124.5,204.5  L 12.5,204.5 "/>
+  <text  x="15.5" y="108.5" style="font-size:12;  fill:rgb(0, 0, 0);  stroke:rgb(0, 0, 0);  dominant-baseline: central; text-anchor: start;">
+    <tspan  x="15.5" dy="-18">Consumer</tspan>
+    <tspan  x="15.5" dy="12">* MVC view engine</tspan>
+    <tspan  x="15.5" dy="12">* CLI app</tspan>
+    <tspan  x="15.5" dy="12">* Your own app</tspan>
+  </text>
+</svg>
