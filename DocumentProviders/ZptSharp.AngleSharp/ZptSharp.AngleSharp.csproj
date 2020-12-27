@@ -1,5 +1,9 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
+  <PropertyGroup>
+    <ReleaseVersion>2.0.0</ReleaseVersion>
+  </PropertyGroup>
+
   <Import Project="..\..\Tools\CommonSolutionProperties.props" />
     
   <PropertyGroup>
@@ -8,7 +12,6 @@
     <Description>Add-on for ZptSharp which allows it to work with HTML documents by using the AngleSharp library.</Description>
     <TargetFrameworks>$(CommonTargetFrameworks)</TargetFrameworks>
     <RootNamespace>ZptSharp.Dom</RootNamespace>
-    <ReleaseVersion>2.0.0</ReleaseVersion>
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>..\..\Tools\CSF-Software-OSS.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>

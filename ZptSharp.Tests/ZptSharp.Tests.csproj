@@ -60,6 +60,7 @@
     <Folder Include="TestFiles\I18nIntegrationTests\" />
     <Folder Include="TestFiles\I18nIntegrationTests\ExpectedOutputs\" />
     <Folder Include="TestFiles\I18nIntegrationTests\SourceDocuments\" />
+    <Folder Include="MvcCore\" />
   </ItemGroup>
   
   <ItemGroup>

@@ -19,6 +19,9 @@ namespace ZptSharp
     {
         readonly IServiceProvider serviceProvider;
 
+        IGetsZptDocumentRendererForFilePath RendererFactory
+            => serviceProvider.GetRequiredService<IGetsZptDocumentRendererForFilePath>();
+
         /// <summary>
         /// Renders a specified ZPT document file using the specified model.
         /// </summary>
@@ -35,29 +38,8 @@ namespace ZptSharp
             var stream = new FileStream(filePath, FileMode.Open, FileAccess.Read, FileShare.Read);
             var sourceInfo = new FileSourceInfo(filePath);
 
-            var readerWriter = GetDocumentReaderWriter(filePath);
-            var documentRenderer = GetDocumentRenderer(readerWriter);
-
+            var documentRenderer = RendererFactory.GetDocumentRenderer(filePath);
             return documentRenderer.RenderAsync(stream, model, config, token, sourceInfo);
-        }
-
-        IReadsAndWritesDocument GetDocumentReaderWriter(string filePath)
-        {
-            var readerWriterFactory = serviceProvider.GetRequiredService<IGetsDocumentReaderWriterForFile>();
-            var readerWriter = readerWriterFactory.GetDocumentProvider(filePath);
-
-            if (readerWriter != null) return readerWriter;
-
-            var message = String.Format(Resources.ExceptionMessage.CannotGetReaderWriterForFile,
-                                        filePath,
-                                        nameof(IRegistersDocumentReaderWriter));
-            throw new NoMatchingReaderWriterException(message);
-        }
-
-        IRendersZptDocument GetDocumentRenderer(IReadsAndWritesDocument readerWriter)
-        {
-            var rendererFactory = serviceProvider.GetRequiredService<IGetsZptDocumentRenderer>();
-            return rendererFactory.GetDocumentRenderer(readerWriter);
         }
 
         /// <summary>

@@ -43,6 +43,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Docs", "Docs", "{DACAD343-4
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZptSharp.Documentation", "ZptSharp.Documentation\ZptSharp.Documentation.csproj", "{9D4C832C-34C5-48AE-A212-4522FFEE6968}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZptSharp.Mvc5", "ZptSharp.Mvc5\ZptSharp.Mvc5.csproj", "{D3CF9054-C406-4752-BC63-86E221786219}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZptSharp.Mvc5.Tests", "ZptSharp.Mvc5.Tests\ZptSharp.Mvc5.Tests.csproj", "{FE1F13F9-0EAE-455F-911D-7CAF0489AECA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -81,6 +85,14 @@ Global
 		{9D4C832C-34C5-48AE-A212-4522FFEE6968}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9D4C832C-34C5-48AE-A212-4522FFEE6968}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9D4C832C-34C5-48AE-A212-4522FFEE6968}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D3CF9054-C406-4752-BC63-86E221786219}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D3CF9054-C406-4752-BC63-86E221786219}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D3CF9054-C406-4752-BC63-86E221786219}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D3CF9054-C406-4752-BC63-86E221786219}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FE1F13F9-0EAE-455F-911D-7CAF0489AECA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FE1F13F9-0EAE-455F-911D-7CAF0489AECA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FE1F13F9-0EAE-455F-911D-7CAF0489AECA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FE1F13F9-0EAE-455F-911D-7CAF0489AECA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{FBB9AB77-F2FB-46DB-9013-64E6123181AB} = {D565CE6B-90BF-405A-8D1D-4466DCDC6CE2}
