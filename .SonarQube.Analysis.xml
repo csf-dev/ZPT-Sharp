@@ -8,6 +8,10 @@
     
             Also, there's no need to cover any code in the Examples directory.
             This isn't actually a part of the library.
+    
+            The ZptSharpViewEngine for MVC5 is unfortuately untestable (due to
+            framework limitations).  I am not counting this class toward the
+            coverage totals.
     -->
-    <Property Name="sonar.coverage.exclusions">**/*Exception.cs;Examples/**/*</Property>
+    <Property Name="sonar.coverage.exclusions">**/*Exception.cs;Examples/**/*;ZptSharp.Mvc5/ZptSharpViewEngine.cs</Property>
 </SonarQubeAnalysisProperties>
