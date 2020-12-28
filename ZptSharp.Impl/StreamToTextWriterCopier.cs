@@ -53,7 +53,7 @@ namespace ZptSharp
             {
                 for (var buffer = new char[bufferSize]; !reader.EndOfStream;)
                 {
-                    var charactersRead = await reader.ReadAsync(buffer, 0, bufferSize);
+                    var charactersRead = await reader.ReadAsync(buffer, 0, bufferSize).ConfigureAwait(false);
                     await textWriter.WriteAsync(buffer, 0, charactersRead).ConfigureAwait(false);
                 }
 
