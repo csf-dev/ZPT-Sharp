@@ -1,5 +1,10 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
+  <PropertyGroup>
+    <ReleaseVersion>2.0.0</ReleaseVersion>
+    <ProjectGuid>{e7ff2aba-f0a8-42c5-befc-cf2ee87f2520}</ProjectGuid>
+  </PropertyGroup>
+
   <Import Project="..\Tools\CommonSolutionProperties.props" />
     
   <PropertyGroup>
@@ -7,7 +12,6 @@
     <Title>ZptSharp - abstractions</Title>
     <Description>Models &amp; service interfaces common to ZptSharp.  Install this package to reference make use of ZptSharp.</Description>
     <TargetFrameworks>$(CommonTargetFrameworks);$(Net45TargetFrameworks)</TargetFrameworks>
-    <ReleaseVersion>2.0.0</ReleaseVersion>
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>..\Tools\CSF-Software-OSS.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>

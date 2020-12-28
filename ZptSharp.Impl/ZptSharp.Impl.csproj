@@ -1,5 +1,10 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
+  <PropertyGroup>
+    <ReleaseVersion>2.0.0</ReleaseVersion>
+    <ProjectGuid>{b894d826-ac9a-4c42-9ba2-e827800ca346}</ProjectGuid>
+  </PropertyGroup>
+    
   <Import Project="..\Tools\CommonSolutionProperties.props" />
       
   <PropertyGroup>
@@ -8,7 +13,6 @@
     <Description>The core implementation logic for ZptSharp.  This provides concrete logic for the abstractions project.  Install this into your app in order to activate ZptSharp.</Description>
     <TargetFrameworks>$(CommonTargetFrameworks);$(Net45TargetFrameworks)</TargetFrameworks>
     <RootNamespace>ZptSharp</RootNamespace>
-    <ReleaseVersion>2.0.0</ReleaseVersion>
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>..\Tools\CSF-Software-OSS.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>

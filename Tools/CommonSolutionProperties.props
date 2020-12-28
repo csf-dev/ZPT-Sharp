@@ -9,14 +9,16 @@
     -->
     
     <PropertyGroup>
-        <!--
-            These target frameworks are the absolute minimum
-            that all libraries in this solutions support.
-        -->
-        <CommonTargetFrameworks>netstandard2.0;netstandard2.1;net461;net46</CommonTargetFrameworks>
-        
-        <!-- Some projects also support net45 and net452 -->
+        <NetStandardTargetFrameworks>netstandard2.0;netstandard2.1</NetStandardTargetFrameworks>
+        <Net46TargetFrameworks>net461;net46</Net46TargetFrameworks>
         <Net45TargetFrameworks>net45;net452</Net45TargetFrameworks>
+        
+        <!--
+            This is the set of target frameworks which represents the
+            'ideal minimum' that every library in this solution would support.
+            There are exceptions though (notably the MVC5 integration).
+        -->
+        <CommonTargetFrameworks>$(NetStandardTargetFrameworks);$(Net46TargetFrameworks)</CommonTargetFrameworks>
         
         <Authors>craigfowler</Authors>
         <VersionPrefix>$(ReleaseVersion)</VersionPrefix>

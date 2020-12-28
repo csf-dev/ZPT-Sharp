@@ -20,9 +20,7 @@ namespace ZptSharp
         public async Task RenderAsync_can_render_a_file_using_a_detected_reader_writer([MockedConfig] RenderingConfig config,
                                                                                        [Frozen] IServiceProvider serviceProvider,
                                                                                        ZptFileRenderer sut,
-                                                                                       IGetsDocumentReaderWriterForFile readerWriterFactory,
-                                                                                       IReadsAndWritesDocument readerWriter,
-                                                                                       IGetsZptDocumentRenderer rendererFactory,
+                                                                                       IGetsZptDocumentRendererForFilePath rendererFactory,
                                                                                        IRendersZptDocument renderer,
                                                                                        object model,
                                                                                        Stream outputStream)
@@ -30,16 +28,10 @@ namespace ZptSharp
             string filePath = TestFiles.GetPath("SampleZptDocument.txt");
 
             Mock.Get(serviceProvider)
-                .Setup(x => x.GetService(typeof(IGetsDocumentReaderWriterForFile)))
-                .Returns(readerWriterFactory);
-            Mock.Get(serviceProvider)
-                .Setup(x => x.GetService(typeof(IGetsZptDocumentRenderer)))
+                .Setup(x => x.GetService(typeof(IGetsZptDocumentRendererForFilePath)))
                 .Returns(rendererFactory);
-            Mock.Get(readerWriterFactory)
-                .Setup(x => x.GetDocumentProvider(filePath))
-                .Returns(readerWriter);
             Mock.Get(rendererFactory)
-                .Setup(x => x.GetDocumentRenderer(readerWriter))
+                .Setup(x => x.GetDocumentRenderer(filePath))
                 .Returns(renderer);
             Mock.Get(renderer)
                 .Setup(x => x.RenderAsync(It.IsAny<Stream>(), model, config, It.IsAny<CancellationToken>(), It.IsAny<FileSourceInfo>()))
@@ -58,29 +50,6 @@ namespace ZptSharp
             string filePath = TestFiles.GetPath("NonExistentFile.txt");
 
             Assert.That(() => sut.RenderAsync(filePath, model).Result, Throws.InstanceOf<FileNotFoundException>());
-        }
-
-        [Test, AutoMoqData, Parallelizable(ParallelScope.None)]
-        public void RenderAsync_throws_no_matching_readerwriter_exception_if_one_cannot_be_inferred([Frozen] IServiceProvider serviceProvider,
-                                                                                                    ZptFileRenderer sut,
-                                                                                                    IGetsDocumentReaderWriterForFile readerWriterFactory,
-                                                                                                    IGetsZptDocumentRenderer rendererFactory,
-                                                                                                    object model,
-                                                                                                    Stream outputStream)
-        {
-            string filePath = TestFiles.GetPath("SampleZptDocument.txt");
-
-            Mock.Get(serviceProvider)
-                .Setup(x => x.GetService(typeof(IGetsDocumentReaderWriterForFile)))
-                .Returns(readerWriterFactory);
-            Mock.Get(serviceProvider)
-                .Setup(x => x.GetService(typeof(IGetsZptDocumentRenderer)))
-                .Returns(rendererFactory);
-            Mock.Get(readerWriterFactory)
-                .Setup(x => x.GetDocumentProvider(filePath))
-                .Returns(() => null);
-
-            Assert.That(() => sut.RenderAsync(filePath, model).Result, Throws.InstanceOf<NoMatchingReaderWriterException>());
         }
     }
 }

@@ -4,7 +4,7 @@ namespace ZptSharp.Rendering
 {
     /// <summary>
     /// An object which may get an instance of <see cref="IRendersZptDocument"/> for a
-    /// configuration and optionally a specified implementation of <see cref="IReadsAndWritesDocument"/>.
+    /// specified implementation of <see cref="IReadsAndWritesDocument"/>.
     /// </summary>
     public interface IGetsZptDocumentRenderer
     {
