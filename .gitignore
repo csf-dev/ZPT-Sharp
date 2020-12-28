@@ -5,4 +5,5 @@ obj/
 *.directory
 *.nupkg
 .vs/
+packages/
 mono_crash.*.json
