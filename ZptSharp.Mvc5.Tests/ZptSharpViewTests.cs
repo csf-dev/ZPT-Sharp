@@ -16,10 +16,10 @@ namespace ZptSharp.Mvc
     {
         [Test, AutoMoqData]
         public void Render_gets_a_stream_using_modified_config_then_copies_it_to_the_writer([Frozen] IServiceProvider serviceProvider,
+                                                                                            [Frozen] RenderingConfig originalConfig,
                                                                                             ZptSharpView sut,
                                                                                             IRendersZptFile fileRenderer,
                                                                                             IWritesStreamToTextWriter streamCopier,
-                                                                                            RenderingConfig originalConfig,
                                                                                             IGetsMvcRenderingConfig configProvider,
                                                                                             IGetsErrorStream errorStreamProvider,
                                                                                             RenderingConfig modifiedConfig,
@@ -29,7 +29,6 @@ namespace ZptSharp.Mvc
         {
             Mock.Get(serviceProvider).Setup(x => x.GetService(typeof(IRendersZptFile))).Returns(fileRenderer);
             Mock.Get(serviceProvider).Setup(x => x.GetService(typeof(IWritesStreamToTextWriter))).Returns(streamCopier);
-            Mock.Get(serviceProvider).Setup(x => x.GetService(typeof(RenderingConfig))).Returns(originalConfig);
             Mock.Get(serviceProvider).Setup(x => x.GetService(typeof(IGetsMvcRenderingConfig))).Returns(configProvider);
             Mock.Get(serviceProvider).Setup(x => x.GetService(typeof(IGetsErrorStream))).Returns(errorStreamProvider);
 
@@ -51,10 +50,10 @@ namespace ZptSharp.Mvc
 
         [Test, AutoMoqData]
         public void Render_gets_a_stream_using_error_renderer_then_copies_it_to_the_writer_if_rendering_throws([Frozen] IServiceProvider serviceProvider,
+                                                                                                               [Frozen] RenderingConfig originalConfig,
                                                                                                                ZptSharpView sut,
                                                                                                                IRendersZptFile fileRenderer,
                                                                                                                IWritesStreamToTextWriter streamCopier,
-                                                                                                               RenderingConfig originalConfig,
                                                                                                                IGetsMvcRenderingConfig configProvider,
                                                                                                                IGetsErrorStream errorStreamProvider,
                                                                                                                RenderingConfig modifiedConfig,
@@ -64,7 +63,6 @@ namespace ZptSharp.Mvc
         {
             Mock.Get(serviceProvider).Setup(x => x.GetService(typeof(IRendersZptFile))).Returns(fileRenderer);
             Mock.Get(serviceProvider).Setup(x => x.GetService(typeof(IWritesStreamToTextWriter))).Returns(streamCopier);
-            Mock.Get(serviceProvider).Setup(x => x.GetService(typeof(RenderingConfig))).Returns(originalConfig);
             Mock.Get(serviceProvider).Setup(x => x.GetService(typeof(IGetsMvcRenderingConfig))).Returns(configProvider);
             Mock.Get(serviceProvider).Setup(x => x.GetService(typeof(IGetsErrorStream))).Returns(errorStreamProvider);
 

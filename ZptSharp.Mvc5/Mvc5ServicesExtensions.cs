@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Web.Mvc;
 using Microsoft.Extensions.DependencyInjection;
+using ZptSharp.Config;
 using ZptSharp.Mvc;
 
 namespace ZptSharp
@@ -31,11 +32,13 @@ namespace ZptSharp
         /// <param name="serviceProvider">Service provider.</param>
         /// <param name="viewLocationFormats">An optional collection of view location formats (used to find view files).</param>
         /// <param name="viewsPath">An optional virtual path which will be the location of the <c>Views</c> TALES variable.</param>
+        /// <param name="config">An optional rendering config instance.</param>
         public static IViewEngine GetZptSharpMvc5ViewEngine(this IServiceProvider serviceProvider,
                                                             string[] viewLocationFormats = null,
-                                                            string viewsPath = ZptSharpViewEngine.DefaultViewsPath)
+                                                            string viewsPath = ZptSharpViewEngine.DefaultViewsPath,
+                                                            RenderingConfig config = null)
         {
-            return new ZptSharpViewEngine(serviceProvider, viewLocationFormats, viewsPath);
+            return new ZptSharpViewEngine(serviceProvider, viewLocationFormats, viewsPath, config);
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Web.Mvc;
 using Microsoft.Extensions.DependencyInjection;
+using ZptSharp.Config;
 
 namespace ZptSharp.Mvc
 {
@@ -37,6 +38,7 @@ namespace ZptSharp.Mvc
 
         readonly IServiceProvider serviceProvider;
         readonly string viewsPath;
+        readonly RenderingConfig config;
 
         /// <summary>Creates the specified partial view by using the specified controller context.</summary>
         /// <returns>A reference to the partial view.</returns>
@@ -56,7 +58,7 @@ namespace ZptSharp.Mvc
         IView CreateView(ControllerContext controllerContext, string viewPath)
         {
             var filePath = controllerContext.HttpContext.Server.MapPath(viewPath);
-            return new ZptSharpView(filePath, serviceProvider, viewPath);
+            return new ZptSharpView(filePath, serviceProvider, viewPath, config);
         }
 
         void InitialiseViewLocations(string[] viewLocationFormats)
@@ -71,12 +73,15 @@ namespace ZptSharp.Mvc
         /// <param name="serviceProvider">Service provider.</param>
         /// <param name="viewLocationFormats">View location formats.</param>
         /// <param name="viewsPath">The virtual path for the <c>Views</c> context variable.</param>
+        /// <param name="config">An optional rendering config instance.</param>
         public ZptSharpViewEngine(IServiceProvider serviceProvider,
                                   string[] viewLocationFormats = null,
-                                  string viewsPath = DefaultViewsPath)
+                                  string viewsPath = DefaultViewsPath,
+                                  RenderingConfig config = null)
         {
             this.serviceProvider = serviceProvider ?? throw new ArgumentNullException(nameof(serviceProvider));
             this.viewsPath = viewsPath ?? throw new ArgumentNullException(nameof(viewsPath));
+            this.config = config ?? RenderingConfig.Default;
             InitialiseViewLocations(viewLocationFormats);
         }
     }

@@ -13,6 +13,8 @@ namespace ZptSharp.Mvc
     /// </summary>
     public class ZptSharpView : IView
     {
+        readonly RenderingConfig originalConfig;
+
         /// <summary>
         /// The path to the current view file.
         /// </summary>
@@ -34,8 +36,6 @@ namespace ZptSharp.Mvc
         IRendersZptFile FileRenderer => ServiceProvider.GetRequiredService<IRendersZptFile>();
 
         IWritesStreamToTextWriter StreamCopier => ServiceProvider.GetRequiredService<IWritesStreamToTextWriter>();
-
-        RenderingConfig OriginalConfig => ServiceProvider.GetRequiredService<RenderingConfig>();
 
         IGetsMvcRenderingConfig ConfigProvider => ServiceProvider.GetRequiredService<IGetsMvcRenderingConfig>();
 
@@ -78,9 +78,8 @@ namespace ZptSharp.Mvc
             }
         }
 
-
         RenderingConfig GetRenderingConfigForMvc(ViewContext viewContext)
-            => ConfigProvider.GetMvcRenderingConfig(OriginalConfig, viewContext, ViewsPath);
+            => ConfigProvider.GetMvcRenderingConfig(originalConfig, viewContext, ViewsPath);
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ZptSharpView"/> class.
@@ -88,13 +87,17 @@ namespace ZptSharp.Mvc
         /// <param name="filePath">The path to the view file which is to be rendered.</param>
         /// <param name="serviceProvider">A service provider.</param>
         /// <param name="viewsPath">The path to the root of the <c>Views</c> directory.</param>
+        /// <param name="config">A rendering config.</param>
         public ZptSharpView(string filePath,
                             IServiceProvider serviceProvider,
-                            string viewsPath)
+                            string viewsPath,
+                            RenderingConfig config)
         {
             FilePath = filePath ?? throw new ArgumentNullException(nameof(filePath));
             ServiceProvider = serviceProvider ?? throw new ArgumentNullException(nameof(serviceProvider));
             ViewsPath = viewsPath ?? throw new ArgumentNullException(nameof(viewsPath));
+
+            originalConfig = config ?? throw new ArgumentNullException(nameof(config));
         }
     }
 }
