@@ -42,11 +42,14 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="1.1.1" GeneratePathProperty="true" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="1.1.1" GeneratePathProperty="true" />
     <PackageReference Include="Microsoft.AspNet.Mvc" Version="5.2.7" GeneratePathProperty="true" />
     <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" Version="1.0.0" PrivateAssets="All" />
     <PackageReference Include="Microsoft.AspNet.Razor" Version="3.2.7" />
     <PackageReference Include="Microsoft.AspNet.WebPages" Version="3.2.7" />
     <PackageReference Include="Microsoft.Web.Infrastructure" Version="1.0.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Logging" Version="1.1.2" GeneratePathProperty="true" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="1.1.2" GeneratePathProperty="true" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System.Web.Mvc">
@@ -55,12 +58,20 @@
     <Reference Include="Microsoft.Extensions.DependencyInjection">
       <HintPath>$(PkgMicrosoft_Extensions_DependencyInjection)\lib\netstandard1.1\Microsoft.Extensions.DependencyInjection.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.Extensions.DependencyInjection.Abstractions">
+      <HintPath>$(PkgMicrosoft_Extensions_DependencyInjection_Abstractions)\lib\netstandard1.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Logging.Console">
+      <HintPath>$(PkgMicrosoft_Extensions_Logging_Console)\lib\net451\Microsoft.Extensions.Logging.Console.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Logging">
+      <HintPath>$(PkgMicrosoft_Extensions_Logging)\lib\netstandard1.1\Microsoft.Extensions.Logging.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Content\" />
     <Folder Include="Models\" />
     <Folder Include="Scripts\" />
-    <Folder Include="Views\Shared\" />
     <Folder Include="Views\Home\" />
   </ItemGroup>
   <ItemGroup>
@@ -77,21 +88,24 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\ZptSharp.Impl\ZptSharp.Impl.csproj" AdditionalProperties="TargetFramework=netstandard2.0">
-      <Project>{BDCE33E2-F720-4566-9A1F-656FF2685265}</Project>
+      <Project>{B894D826-AC9A-4C42-9BA2-E827800CA346}</Project>
       <Name>ZptSharp.Impl</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\ZptSharp\ZptSharp.csproj" AdditionalProperties="TargetFramework=netstandard2.0">
-      <Project>{F235EFAF-D58E-4FFF-8C7D-4F9C7BE6906A}</Project>
+      <Project>{E7FF2ABA-F0A8-42C5-BEFC-CF2EE87F2520}</Project>
       <Name>ZptSharp</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\ZptSharp.Mvc5\ZptSharp.Mvc5.csproj" AdditionalProperties="TargetFramework=net461">
-      <Project>{D7278698-46E1-486E-8F35-9C91F58892F6}</Project>
+      <Project>{3B005573-1505-4602-995B-D8D49599A6F0}</Project>
       <Name>ZptSharp.Mvc5</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\DocumentProviders\ZptSharp.HtmlAgilityPack\ZptSharp.HtmlAgilityPack.csproj" AdditionalProperties="TargetFramework=netstandard2.0">
-      <Project>{22BE1826-9A11-4379-8549-22B187683678}</Project>
+      <Project>{53A56241-BFD4-4765-9916-ED4880BFD946}</Project>
       <Name>ZptSharp.HtmlAgilityPack</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Views\Home\Index.pt" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>
