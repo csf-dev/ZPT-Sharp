@@ -58,7 +58,7 @@ namespace ZptSharp.Mvc
         IView CreateView(ControllerContext controllerContext, string viewPath)
         {
             var filePath = controllerContext.HttpContext.Server.MapPath(viewPath);
-            return new ZptSharpView(filePath, serviceProvider, viewPath, config);
+            return new ZptSharpView(filePath, serviceProvider, viewsPath, config);
         }
 
         void InitialiseViewLocations(string[] viewLocationFormats)

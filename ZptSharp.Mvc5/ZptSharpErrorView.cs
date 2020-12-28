@@ -39,7 +39,7 @@ namespace ZptSharp.Mvc
             };
         }
 
-        Stream GetTemplateStream() => typeof(ZptSharpErrorView).Assembly.GetManifestResourceStream(FilePath);
+        static Stream GetTemplateStream() => typeof(ZptSharpErrorView).Assembly.GetManifestResourceStream(FilePath);
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ZptSharpErrorView"/> class.
