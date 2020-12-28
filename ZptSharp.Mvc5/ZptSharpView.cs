@@ -13,15 +13,33 @@ namespace ZptSharp.Mvc
     /// </summary>
     public class ZptSharpView : IView
     {
-        readonly string filePath;
-        readonly IServiceProvider serviceProvider;
-        readonly Func<ViewContext, IGetsRootContextBuilder> contextBuilderFactory;
+        /// <summary>
+        /// The path to the current view file.
+        /// </summary>
+        /// <value>The file path.</value>
+        public string FilePath { get; }
 
-        IRendersZptFile FileRenderer => serviceProvider.GetRequiredService<IRendersZptFile>();
+        /// <summary>
+        /// The path for the <c>Views</c> TALES variable.
+        /// </summary>
+        /// <value>The views path.</value>
+        public string ViewsPath { get; }
 
-        IWritesStreamToTextWriter StreamCopier => serviceProvider.GetRequiredService<IWritesStreamToTextWriter>();
+        /// <summary>
+        /// The service provider.
+        /// </summary>
+        /// <value>The service provider.</value>
+        public IServiceProvider ServiceProvider { get; }
 
-        RenderingConfig OriginalConfig => serviceProvider.GetRequiredService<RenderingConfig>();
+        IRendersZptFile FileRenderer => ServiceProvider.GetRequiredService<IRendersZptFile>();
+
+        IWritesStreamToTextWriter StreamCopier => ServiceProvider.GetRequiredService<IWritesStreamToTextWriter>();
+
+        RenderingConfig OriginalConfig => ServiceProvider.GetRequiredService<RenderingConfig>();
+
+        IGetsMvcRenderingConfig ConfigProvider => ServiceProvider.GetRequiredService<IGetsMvcRenderingConfig>();
+
+        IGetsErrorStream ErrorStreamProvider => ServiceProvider.GetRequiredService<IGetsErrorStream>();
 
         /// <summary>Renders the specified view context by using the specified the writer object.</summary>
         /// <param name="viewContext">The view context.</param>
@@ -50,40 +68,33 @@ namespace ZptSharp.Mvc
         {
             try
             {
-                return await FileRenderer.RenderAsync(filePath, viewContext.ViewData?.Model, config).ConfigureAwait(false);
+                return await FileRenderer.RenderAsync(FilePath, viewContext.ViewData?.Model, config).ConfigureAwait(false);
             }
             catch(ZptRenderingException ex)
             {
-                var errorView = new ZptErrorView(ex, serviceProvider);
                 viewContext.HttpContext.Response.StatusCode = (int) HttpStatusCode.InternalServerError;
                 viewContext.HttpContext.Response.StatusDescription = "Internal server error";
-                return await errorView.GetErrorStreamAsync().ConfigureAwait(false);
+                return await ErrorStreamProvider.GetErrorStreamAsync(ex).ConfigureAwait(false);
             }
         }
 
 
         RenderingConfig GetRenderingConfigForMvc(ViewContext viewContext)
-        {
-            var contextBuilder = contextBuilderFactory(viewContext);
-
-            var builder = OriginalConfig.CloneToNewBuilder();
-            builder.ContextBuilder = contextBuilder.GetRootContextBuilder();
-            return builder.GetConfig();
-        }
+            => ConfigProvider.GetMvcRenderingConfig(OriginalConfig, viewContext, ViewsPath);
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ZptSharpView"/> class.
         /// </summary>
         /// <param name="filePath">The path to the view file which is to be rendered.</param>
         /// <param name="serviceProvider">A service provider.</param>
-        /// <param name="contextBuilderFactory">A context-builder factory.</param>
+        /// <param name="viewsPath">The path to the root of the <c>Views</c> directory.</param>
         public ZptSharpView(string filePath,
                             IServiceProvider serviceProvider,
-                            Func<ViewContext,IGetsRootContextBuilder> contextBuilderFactory)
+                            string viewsPath)
         {
-            this.filePath = filePath ?? throw new ArgumentNullException(nameof(filePath));
-            this.serviceProvider = serviceProvider ?? throw new ArgumentNullException(nameof(serviceProvider));
-            this.contextBuilderFactory = contextBuilderFactory ?? throw new ArgumentNullException(nameof(contextBuilderFactory));
+            FilePath = filePath ?? throw new ArgumentNullException(nameof(filePath));
+            ServiceProvider = serviceProvider ?? throw new ArgumentNullException(nameof(serviceProvider));
+            ViewsPath = viewsPath ?? throw new ArgumentNullException(nameof(viewsPath));
         }
     }
 }

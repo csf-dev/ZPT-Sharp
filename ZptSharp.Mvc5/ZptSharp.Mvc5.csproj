@@ -36,8 +36,8 @@
     <None Remove="Resources\ZptErrorView.pt" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Resources\ZptErrorView.pt">
-      <LogicalName>ZptErrorView.pt</LogicalName>
+    <EmbeddedResource Include="Resources\ZptSharpErrorView.pt">
+      <LogicalName>ZptSharpErrorView.pt</LogicalName>
     </EmbeddedResource>
   </ItemGroup>
 </Project>

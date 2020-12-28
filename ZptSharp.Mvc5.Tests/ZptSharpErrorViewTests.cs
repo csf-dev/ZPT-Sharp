@@ -4,19 +4,20 @@ using System.Threading.Tasks;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using NUnit.Framework;
+using ZptSharp.Rendering;
 
 namespace ZptSharp.Mvc
 {
     [TestFixture,Parallelizable]
-    public class ZptErrorViewTests
+    public class ZptSharpErrorViewTests
     {
         [Test, AutoMoqData, Description("This integration test verifies that the error view returns a non-null stream")]
         public async Task GetErrorStreamAsync_returns_a_readable_stream(Exception ex)
         {
             var services = GetServiceProvider();
-            var sut = new ZptErrorView(ex, services);
+            var sut = new ZptSharpErrorView(services.GetRequiredService<IGetsZptDocumentRendererForFilePath>());
 
-            using (var result = await sut.GetErrorStreamAsync())
+            using (var result = await sut.GetErrorStreamAsync(ex))
             using(var reader = new StreamReader(result))
             {
                 Assert.That(() => reader.ReadToEnd(), Is.Not.Null);

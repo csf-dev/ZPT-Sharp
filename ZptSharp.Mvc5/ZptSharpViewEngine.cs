@@ -16,6 +16,12 @@ namespace ZptSharp.Mvc
     /// Additionally, the <c>masterPath</c> parameter of <see cref="CreateView(ControllerContext, string, string)"/>
     /// is ignored and never used.
     /// </para>
+    /// <para>
+    /// Unfortunately this class has no test coverage.  That's because it is essentially impossible to provide
+    /// test coverage for an MVC5 view engine which inherits from <see cref="VirtualPathProviderViewEngine"/>.
+    /// Some of the internals of that class are tied to the MVC framework and thus to IIS.  So the barrier to
+    /// usefully substituting them with test fakes is too high.
+    /// </para>
     /// </remarks>
     public class ZptSharpViewEngine : VirtualPathProviderViewEngine
     {
@@ -27,7 +33,7 @@ namespace ZptSharp.Mvc
             "~/Views/Shared/{0}.html",
         };
 
-        const string defaultViewsPath = "~/Views/";
+        internal const string DefaultViewsPath = "~/Views/";
 
         readonly IServiceProvider serviceProvider;
         readonly string viewsPath;
@@ -50,9 +56,7 @@ namespace ZptSharp.Mvc
         IView CreateView(ControllerContext controllerContext, string viewPath)
         {
             var filePath = controllerContext.HttpContext.Server.MapPath(viewPath);
-            return new ZptSharpView(filePath,
-                                    serviceProvider,
-                                    ctx => new MvcContextBuilderProvider(ctx, viewsPath));
+            return new ZptSharpView(filePath, serviceProvider, viewPath);
         }
 
         void InitialiseViewLocations(string[] viewLocationFormats)
@@ -69,7 +73,7 @@ namespace ZptSharp.Mvc
         /// <param name="viewsPath">The virtual path for the <c>Views</c> context variable.</param>
         public ZptSharpViewEngine(IServiceProvider serviceProvider,
                                   string[] viewLocationFormats = null,
-                                  string viewsPath = defaultViewsPath)
+                                  string viewsPath = DefaultViewsPath)
         {
             this.serviceProvider = serviceProvider ?? throw new ArgumentNullException(nameof(serviceProvider));
             this.viewsPath = viewsPath ?? throw new ArgumentNullException(nameof(viewsPath));
