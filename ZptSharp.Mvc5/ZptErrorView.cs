@@ -17,19 +17,19 @@ namespace ZptSharp.Mvc
         IGetsZptDocumentRendererForFilePath RendererFactory
             => serviceProvider.GetRequiredService<IGetsZptDocumentRendererForFilePath>();
 
-        string FilePath => $"{nameof(ZptErrorView)}.pt";
+        static string FilePath => $"{nameof(ZptErrorView)}.pt";
 
         /// <summary>
         /// Gets a stream which represents the rendered error document.
         /// </summary>
         /// <returns>The error stream.</returns>
-        public async Task<Stream> GetErrorStream()
+        public async Task<Stream> GetErrorStreamAsync()
         {
             var documentRenderer = RendererFactory.GetDocumentRenderer(FilePath);
             var docStream = GetTemplateStream();
             var model = GetModel();
 
-            return await documentRenderer.RenderAsync(docStream, model);
+            return await documentRenderer.RenderAsync(docStream, model).ConfigureAwait(false);
         }
 
         object GetModel()

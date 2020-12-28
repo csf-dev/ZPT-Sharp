@@ -11,12 +11,12 @@ namespace ZptSharp.Mvc
     public class ZptErrorViewTests
     {
         [Test, AutoMoqData, Description("This integration test verifies that the error view returns a non-null stream")]
-        public async Task GetErrorStream_returns_a_readable_stream(Exception ex)
+        public async Task GetErrorStreamAsync_returns_a_readable_stream(Exception ex)
         {
             var services = GetServiceProvider();
             var sut = new ZptErrorView(ex, services);
 
-            using (var result = await sut.GetErrorStream())
+            using (var result = await sut.GetErrorStreamAsync())
             using(var reader = new StreamReader(result))
             {
                 Assert.That(() => reader.ReadToEnd(), Is.Not.Null);

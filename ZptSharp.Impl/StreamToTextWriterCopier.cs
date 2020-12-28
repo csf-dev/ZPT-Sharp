@@ -35,16 +35,16 @@ namespace ZptSharp
         async Task WriteToTextWriterPrivateAsync(Stream stream, TextWriter writer)
         {
             if (writer is StreamWriter streamWriter)
-                await CopyToStreamWriterAsync(stream, streamWriter);
+                await CopyToStreamWriterAsync(stream, streamWriter).ConfigureAwait(false);
             else
-                await CopyToTextWriterAsync(stream, writer);
+                await CopyToTextWriterAsync(stream, writer).ConfigureAwait(false);
         }
 
-        async Task CopyToStreamWriterAsync(Stream stream, StreamWriter streamWriter)
+        static async Task CopyToStreamWriterAsync(Stream stream, StreamWriter streamWriter)
         {
-            await streamWriter.FlushAsync();
-            await stream.CopyToAsync(streamWriter.BaseStream);
-            await streamWriter.FlushAsync();
+            await streamWriter.FlushAsync().ConfigureAwait(false);
+            await stream.CopyToAsync(streamWriter.BaseStream).ConfigureAwait(false);
+            await streamWriter.FlushAsync().ConfigureAwait(false);
         }
 
         async Task CopyToTextWriterAsync(Stream stream, TextWriter textWriter)
@@ -54,10 +54,10 @@ namespace ZptSharp
                 for (var buffer = new char[bufferSize]; !reader.EndOfStream;)
                 {
                     var charactersRead = await reader.ReadAsync(buffer, 0, bufferSize);
-                    await textWriter.WriteAsync(buffer, 0, charactersRead);
+                    await textWriter.WriteAsync(buffer, 0, charactersRead).ConfigureAwait(false);
                 }
 
-                await textWriter.FlushAsync();
+                await textWriter.FlushAsync().ConfigureAwait(false);
             }
         }
 

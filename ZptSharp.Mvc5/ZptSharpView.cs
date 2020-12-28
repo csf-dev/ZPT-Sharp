@@ -57,7 +57,7 @@ namespace ZptSharp.Mvc
                 var errorView = new ZptErrorView(ex, serviceProvider);
                 viewContext.HttpContext.Response.StatusCode = (int) HttpStatusCode.InternalServerError;
                 viewContext.HttpContext.Response.StatusDescription = "Internal server error";
-                return await errorView.GetErrorStream().ConfigureAwait(false);
+                return await errorView.GetErrorStreamAsync().ConfigureAwait(false);
             }
         }
 
