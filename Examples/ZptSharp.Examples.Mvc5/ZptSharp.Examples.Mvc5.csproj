@@ -9,6 +9,7 @@
     <RootNamespace>ZptSharp.Examples</RootNamespace>
     <AssemblyName>ZptSharp.Examples.Mvc5</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <ReleaseVersion>2.0.0</ReleaseVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -76,15 +77,15 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\ZptSharp.Impl\ZptSharp.Impl.csproj" AdditionalProperties="TargetFramework=netstandard2.0">
-      <Project>{B4EAD7CA-DBFB-4F36-9CFF-FBA965F4ECD7}</Project>
+      <Project>{BDCE33E2-F720-4566-9A1F-656FF2685265}</Project>
       <Name>ZptSharp.Impl</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\ZptSharp\ZptSharp.csproj" AdditionalProperties="TargetFramework=netstandard2.0">
-      <Project>{070A5C48-9099-42DD-B843-1D899F43E4A4}</Project>
+      <Project>{F235EFAF-D58E-4FFF-8C7D-4F9C7BE6906A}</Project>
       <Name>ZptSharp</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\ZptSharp.Mvc5\ZptSharp.Mvc5.csproj" AdditionalProperties="TargetFramework=net461">
-      <Project>{D3CF9054-C406-4752-BC63-86E221786219}</Project>
+      <Project>{D7278698-46E1-486E-8F35-9C91F58892F6}</Project>
       <Name>ZptSharp.Mvc5</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\DocumentProviders\ZptSharp.HtmlAgilityPack\ZptSharp.HtmlAgilityPack.csproj" AdditionalProperties="TargetFramework=netstandard2.0">

@@ -4,6 +4,7 @@
     <TargetFramework>net472</TargetFramework>
     <RootNamespace>ZptSharp.Mvc</RootNamespace>
     <ReleaseVersion>2.0.0</ReleaseVersion>
+    <ProjectGuid>{89808b2e-8975-4b89-baaf-8489fa297dd4}</ProjectGuid>
   </PropertyGroup>
     
   <ItemGroup>

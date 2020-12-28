@@ -4,6 +4,7 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <RootNamespace>ZptSharp</RootNamespace>
     <ReleaseVersion>2.0.0</ReleaseVersion>
+    <ProjectGuid>{d4f7a76d-acb1-489e-922a-ed955f436e51}</ProjectGuid>
   </PropertyGroup>
     
   <ItemGroup>

@@ -2,6 +2,7 @@
 
   <PropertyGroup>
     <ReleaseVersion>2.0.0</ReleaseVersion>
+    <ProjectGuid>{53a56241-bfd4-4765-9916-ed4880bfd946}</ProjectGuid>
   </PropertyGroup>
 
   <Import Project="..\..\Tools\CommonSolutionProperties.props" />
