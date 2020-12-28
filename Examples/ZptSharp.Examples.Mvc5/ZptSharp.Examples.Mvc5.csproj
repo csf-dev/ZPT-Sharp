@@ -41,15 +41,20 @@
     <Reference Include="Microsoft.CSharp" />
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="1.1.2" GeneratePathProperty="true" />
+    <PackageReference Include="Microsoft.Extensions.Primitives" Version="1.1.1" GeneratePathProperty="true" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="1.1.1" GeneratePathProperty="true" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="1.1.1" GeneratePathProperty="true" />
     <PackageReference Include="Microsoft.AspNet.Mvc" Version="5.2.7" GeneratePathProperty="true" />
     <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" Version="1.0.0" PrivateAssets="All" />
-    <PackageReference Include="Microsoft.AspNet.Razor" Version="3.2.7" />
-    <PackageReference Include="Microsoft.AspNet.WebPages" Version="3.2.7" />
-    <PackageReference Include="Microsoft.Web.Infrastructure" Version="1.0.0.0" />
+    <PackageReference Include="Microsoft.AspNet.Razor" Version="3.2.7" GeneratePathProperty="true" />
+    <PackageReference Include="Microsoft.AspNet.WebPages" Version="3.2.7" GeneratePathProperty="true" />
+    <PackageReference Include="Microsoft.Web.Infrastructure" Version="1.0.0.0" GeneratePathProperty="true" />
     <PackageReference Include="Microsoft.Extensions.Logging" Version="1.1.2" GeneratePathProperty="true" />
     <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="1.1.2" GeneratePathProperty="true" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="1.1.2" GeneratePathProperty="true" />
+    <PackageReference Include="HtmlAgilityPack" Version="1.11.28" GeneratePathProperty="true" />
+    <PackageReference Include="CSF.Collections.EventRaising" Version="1.1.0" GeneratePathProperty="true" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System.Web.Mvc">
@@ -58,14 +63,41 @@
     <Reference Include="Microsoft.Extensions.DependencyInjection">
       <HintPath>$(PkgMicrosoft_Extensions_DependencyInjection)\lib\netstandard1.1\Microsoft.Extensions.DependencyInjection.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.Extensions.Logging">
+      <HintPath>$(PkgMicrosoft_Extensions_Logging)\lib\netstandard1.1\Microsoft.Extensions.Logging.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Extensions.DependencyInjection.Abstractions">
       <HintPath>$(PkgMicrosoft_Extensions_DependencyInjection_Abstractions)\lib\netstandard1.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Configuration.Abstractions">
+      <HintPath>$(PkgMicrosoft_Extensions_Configuration_Abstractions)\lib\netstandard1.0\Microsoft.Extensions.Configuration.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Primitives">
+      <HintPath>$(PkgMicrosoft_Extensions_Primitives)\lib\netstandard1.0\Microsoft.Extensions.Primitives.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Extensions.Logging.Console">
       <HintPath>$(PkgMicrosoft_Extensions_Logging_Console)\lib\net451\Microsoft.Extensions.Logging.Console.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Extensions.Logging">
-      <HintPath>$(PkgMicrosoft_Extensions_Logging)\lib\netstandard1.1\Microsoft.Extensions.Logging.dll</HintPath>
+    <Reference Include="Microsoft.Extensions.Logging.Abstractions">
+      <HintPath>$(PkgMicrosoft_Extensions_Logging_Abstractions)\lib\netstandard1.1\Microsoft.Extensions.Logging.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Razor">
+      <HintPath>$(PkgMicrosoft_AspNet_Razor)\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.WebPages">
+      <HintPath>$(PkgMicrosoft_AspNet_WebPages)\lib\net45\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.WebPages.Razor">
+      <HintPath>$(PkgMicrosoft_AspNet_WebPages)\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Web.Infrastructure">
+      <HintPath>$(PkgMicrosoft_Web_Infrastructure)\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="HtmlAgilityPack">
+      <HintPath>$(PkgHtmlAgilityPack)\lib\Net45\HtmlAgilityPack.dll</HintPath>
+    </Reference>
+    <Reference Include="CSF.Collections.EventRaising">
+      <HintPath>$(PkgCSF_Collections_EventRaising)\lib\net45\CSF.Collections.EventRaising.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
