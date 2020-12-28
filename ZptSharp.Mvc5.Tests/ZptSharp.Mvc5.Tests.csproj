@@ -31,4 +31,10 @@
     <ProjectReference Include="..\DocumentProviders\ZptSharp.HtmlAgilityPack\ZptSharp.HtmlAgilityPack.csproj" />
     <ProjectReference Include="..\ZptSharp.Impl\ZptSharp.Impl.csproj" />
   </ItemGroup>
+  <ItemGroup>
+    <Reference Include="System.Web" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Autofixture\" />
+  </ItemGroup>
 </Project>
