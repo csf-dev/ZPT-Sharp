@@ -1,6 +1,7 @@
-
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.28701.123
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZptSharp", "ZptSharp\ZptSharp.csproj", "{070A5C48-9099-42DD-B843-1D899F43E4A4}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZptSharp.Impl", "ZptSharp.Impl\ZptSharp.Impl.csproj", "{B4EAD7CA-DBFB-4F36-9CFF-FBA965F4ECD7}"
