@@ -2,6 +2,7 @@ using System;
 using Microsoft.Extensions.DependencyInjection;
 using ZptSharp.Expressions;
 using ZptSharp.Expressions.PythonExpressions;
+using ZptSharp.Hosting;
 
 namespace ZptSharp
 {
@@ -47,5 +48,16 @@ namespace ZptSharp
             return provider;
         }
 
+        /// <summary>
+        /// Adds both service registrations and a usage-callback so that ZPT "python" expressions may be used.
+        /// </summary>
+        /// <param name="builder">The self-hosting builder.</param>
+        /// <returns>The self-hosting builder instance, after setting it up.</returns>
+        public static IBuildsSelfHostingEnvironment AddZptPythonExpressions(this IBuildsSelfHostingEnvironment builder)
+        {
+            builder.ServiceRegistrations.Add(s => s.AddZptPythonExpressions());
+            builder.ServiceUsages.Add(p => p.UseZptPythonExpressions());
+            return builder;
+        }
     }
 }

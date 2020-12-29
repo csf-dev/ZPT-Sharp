@@ -7,9 +7,10 @@ namespace ZptSharp.Hosting
     /// An implementation of <see cref="IHostsZptSharp" /> which wraps an
     /// <see cref="IServiceProvider" /> and uses that to provide the entry-points.
     /// </summary>
-    public class ZptSharpSelfHoster : IHostsZptSharp
+    public class ZptSharpSelfHoster : IHostsZptSharp, IDisposable
     {
         readonly IServiceProvider serviceProvider;
+        bool disposedValue;
 
         /// <summary>
         /// Gets a service which renders ZPT template files from disk paths.
@@ -22,6 +23,32 @@ namespace ZptSharp.Hosting
         /// </summary>
         /// <value>The document renderer.</value>
         public IRendersZptDocument DocumentRenderer => serviceProvider.GetRequiredService<IRendersZptDocument>();
+
+        /// <summary>
+        /// Dispose of the current instance and release its resources.
+        /// </summary>
+        public void Dispose()
+        {
+            Dispose(disposing: true);
+            GC.SuppressFinalize(this);
+        }
+
+        /// <summary>
+        /// Dispose the current instance.
+        /// </summary>
+        /// <param name="disposing">If <c>true</c> then this disposal is explicit.</param>
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!disposedValue)
+            {
+                if (disposing && serviceProvider is IDisposable disposableProvider)
+                {
+                    disposableProvider.Dispose();
+                }
+
+                disposedValue = true;
+            }
+        }
 
         /// <summary>
         /// Initializes an instance of <see cref="ZptSharpSelfHoster" />.

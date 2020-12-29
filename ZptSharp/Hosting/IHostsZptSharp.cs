@@ -13,7 +13,7 @@ namespace ZptSharp.Hosting
     /// injection.
     /// </para>
     /// </remarks>
-    public interface IHostsZptSharp
+    public interface IHostsZptSharp : IDisposable
     {
         /// <summary>
         /// Gets a service which renders ZPT template files from disk paths.

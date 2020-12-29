@@ -1,6 +1,7 @@
 using System;
 using Microsoft.Extensions.DependencyInjection;
 using ZptSharp.Dom;
+using ZptSharp.Hosting;
 
 namespace ZptSharp
 {
@@ -44,6 +45,19 @@ namespace ZptSharp
             var registry = provider.GetRequiredService<IRegistersDocumentReaderWriter>();
             registry.RegisterDocumentReaderWriter(provider.GetRequiredService<AngleSharpDocumentProvider>());
             return provider;
+        }
+
+        /// <summary>
+        /// Adds both service registrations and a usage-callback so that AngleSharp documents may be
+        /// used within a self-contained ZptSharp environment.
+        /// </summary>
+        /// <param name="builder">The self-hosting builder.</param>
+        /// <returns>The self-hosting builder instance, after setting it up.</returns>
+        public static IBuildsSelfHostingEnvironment AddAngleSharpZptDocuments(this IBuildsSelfHostingEnvironment builder)
+        {
+            builder.ServiceRegistrations.Add(s => s.AddAngleSharpZptDocuments());
+            builder.ServiceUsages.Add(p => p.UseAngleSharpZptDocuments());
+            return builder;
         }
     }
 }

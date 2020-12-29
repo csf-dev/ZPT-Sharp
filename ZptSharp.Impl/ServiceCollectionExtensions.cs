@@ -37,7 +37,7 @@ namespace ZptSharp
 
         /// <summary>
         /// <para>
-        /// Configures ZPT Sharp to use the standard/out-of-the-box expressions which are shipped with this package.
+        /// Configures ZptSharp to use the standard/out-of-the-box expressions which are shipped with this package.
         /// This is equivalent to using all of the following methods:
         /// </para>
         /// <list type="bullet">
@@ -57,7 +57,7 @@ namespace ZptSharp
         }
 
         /// <summary>
-        /// Configures ZPT Sharp to read and handle TALES "path" expressions.
+        /// Configures ZptSharp to read and handle TALES "path" expressions.
         /// </summary>
         /// <remarks>
         /// <para>
@@ -94,7 +94,7 @@ namespace ZptSharp
         }
 
         /// <summary>
-        /// Configures ZPT Sharp to read and handle TALES "string" expressions.
+        /// Configures ZptSharp to read and handle TALES "string" expressions.
         /// </summary>
         /// <remarks>
         /// <para>
@@ -120,7 +120,7 @@ namespace ZptSharp
         }
 
         /// <summary>
-        /// Configures ZPT Sharp to read and handle TALES "not" expressions.
+        /// Configures ZptSharp to read and handle TALES "not" expressions.
         /// </summary>
         /// <returns>The same service provider instance, after setting it up.</returns>
         /// <param name="provider">The service provider.</param>

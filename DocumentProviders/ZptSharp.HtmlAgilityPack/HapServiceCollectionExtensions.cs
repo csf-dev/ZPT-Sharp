@@ -1,6 +1,7 @@
 using System;
 using Microsoft.Extensions.DependencyInjection;
 using ZptSharp.Dom;
+using ZptSharp.Hosting;
 
 namespace ZptSharp
 {
@@ -32,7 +33,7 @@ namespace ZptSharp
         }
 
         /// <summary>
-        /// Configures ZPT Sharp to use the AngleSharp document provider when rendering HTML files.
+        /// Configures ZPT Sharp to use the HTML Agility Pack document provider when rendering HTML files.
         /// </summary>
         /// <returns>The same service provider instance, after setting it up.</returns>
         /// <param name="provider">The service provider.</param>
@@ -44,6 +45,19 @@ namespace ZptSharp
             var registry = provider.GetRequiredService<IRegistersDocumentReaderWriter>();
             registry.RegisterDocumentReaderWriter(provider.GetRequiredService<HapDocumentProvider>());
             return provider;
+        }
+
+        /// <summary>
+        /// Adds both service registrations and a usage-callback so that HTML Agility Pack documents may be
+        /// used within a self-contained ZptSharp environment.
+        /// </summary>
+        /// <param name="builder">The self-hosting builder.</param>
+        /// <returns>The self-hosting builder instance, after setting it up.</returns>
+        public static IBuildsSelfHostingEnvironment AddHapZptDocuments(this IBuildsSelfHostingEnvironment builder)
+        {
+            builder.ServiceRegistrations.Add(s => s.AddHapZptDocuments());
+            builder.ServiceUsages.Add(p => p.UseHapZptDocuments());
+            return builder;
         }
     }
 }
