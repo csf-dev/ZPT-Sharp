@@ -6,7 +6,6 @@ namespace ZptSharp.Examples.Controllers
     {
         public ActionResult Index()
         {
-            ViewBag.sample = 123;
             return View(new { Message = "Hello world!" });
         }
     }
