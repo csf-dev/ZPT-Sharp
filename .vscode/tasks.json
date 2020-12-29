@@ -7,8 +7,7 @@
             "type": "process",
             "args": [
                 "build",
-                "/property:GenerateFullPaths=true",
-                "/consoleloggerparameters:NoSummary"
+                "/property:GenerateFullPaths=true"
             ],
             "group": "build",
             "problemMatcher": "$msCompile"
@@ -20,8 +19,7 @@
             "args": [
                 "test",
                 "ZptSharp.Tests",
-                "/property:GenerateFullPaths=true",
-                "/consoleloggerparameters:NoSummary"
+                "/property:GenerateFullPaths=true"
             ],
             "group": "test",
             "problemMatcher": "$msCompile"
@@ -33,8 +31,7 @@
             "args": [
                 "test",
                 "ZptSharp.Mvc5.Tests",
-                "/property:GenerateFullPaths=true",
-                "/consoleloggerparameters:NoSummary"
+                "/property:GenerateFullPaths=true"
             ],
             "group": "test",
             "problemMatcher": "$msCompile"
@@ -47,8 +44,7 @@
                 "watch",
                 "test",
                 "ZptSharp.Tests",
-                "/property:GenerateFullPaths=true",
-                "/consoleloggerparameters:NoSummary"
+                "/property:GenerateFullPaths=true"
             ],
             "group": "test",
             "problemMatcher": "$msCompile"
