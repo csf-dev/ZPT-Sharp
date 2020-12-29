@@ -1,0 +1,53 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "build",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "build",
+                "/property:GenerateFullPaths=true",
+                "/consoleloggerparameters:NoSummary"
+            ],
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "test (general)",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "test",
+                "ZptSharp.Tests",
+                "/property:GenerateFullPaths=true",
+                "/consoleloggerparameters:NoSummary"
+            ],
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "test (MVC5)",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "test",
+                "ZptSharp.Mvc5.Tests",
+                "/property:GenerateFullPaths=true",
+                "/consoleloggerparameters:NoSummary"
+            ],
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "watched tests (general)",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "watch",
+                "test",
+                "ZptSharp.Tests",
+                "/property:GenerateFullPaths=true",
+                "/consoleloggerparameters:NoSummary"
+            ],
+            "problemMatcher": "$msCompile"
+        }
+    ]
+}
