@@ -4,6 +4,6 @@
 </head>
 <body>
 <h1>Example ASP.NET MVC5 web app</h1>
-<p tal:content="here/Message">The greeting message appears here.</p>
+<p tal:content="ViewBag/sample">The greeting message appears here.</p>
 </body>
 </html>
