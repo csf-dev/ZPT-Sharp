@@ -22,10 +22,7 @@ namespace ZptSharp
         /// <returns>The self-hosting builder instance, after setting it up.</returns>
         /// <param name="builder">The self-hosting builder.</param>
         public static IBuildsSelfHostingEnvironment AddStandardZptExpressions(this IBuildsSelfHostingEnvironment builder)
-        {
-            builder.ServiceUsages.Add(provider => provider.UseStandardZptExpressions());
-            return builder;
-        }
+            => builder.AddZptPathExpressions().AddZptStringExpressions().AddZptNotExpressions();
 
         /// <summary>
         /// Configures ZptSharp to read and handle TALES "path" expressions.

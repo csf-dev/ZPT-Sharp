@@ -35,6 +35,19 @@ namespace ZptSharp
         }
 
         /// <summary>
+        /// Adds both service registrations and a usage-callback so that XML documents may be
+        /// used within a self-contained ZptSharp environment.
+        /// </summary>
+        /// <param name="builder">The self-hosting builder.</param>
+        /// <returns>The self-hosting builder instance, after setting it up.</returns>
+        public static IBuildsSelfHostingEnvironment AddXmlZptDocuments(this IBuildsSelfHostingEnvironment builder)
+        {
+            builder.ServiceRegistrations.Add(s => s.AddXmlZptDocuments());
+            builder.ServiceUsages.Add(p => p.UseXmlZptDocuments());
+            return builder;
+        }
+
+        /// <summary>
         /// Configures ZPT Sharp to use the XML document provider when rendering HTML files.
         /// </summary>
         /// <returns>The same service provider instance, after setting it up.</returns>
@@ -47,19 +60,6 @@ namespace ZptSharp
             var registry = provider.GetRequiredService<IRegistersDocumentReaderWriter>();
             registry.RegisterDocumentReaderWriter(provider.GetRequiredService<XmlDocumentProvider>());
             return provider;
-        }
-
-        /// <summary>
-        /// Adds both service registrations and a usage-callback so that XML documents may be
-        /// used within a self-contained ZptSharp environment.
-        /// </summary>
-        /// <param name="builder">The self-hosting builder.</param>
-        /// <returns>The self-hosting builder instance, after setting it up.</returns>
-        public static IBuildsSelfHostingEnvironment AddXmlZptDocuments(this IBuildsSelfHostingEnvironment builder)
-        {
-            builder.ServiceRegistrations.Add(s => s.AddXmlZptDocuments());
-            builder.ServiceUsages.Add(p => p.UseXmlZptDocuments());
-            return builder;
         }
     }
 }

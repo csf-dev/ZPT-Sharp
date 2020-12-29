@@ -7,7 +7,7 @@ namespace ZptSharp.Hosting
     /// An implementation of <see cref="IHostsZptSharp" /> which wraps an
     /// <see cref="IServiceProvider" /> and uses that to provide the entry-points.
     /// </summary>
-    public class ZptSharpSelfHoster : IHostsZptSharp, IDisposable
+    public class ZptSharpSelfHoster : IHostsZptSharp
     {
         readonly IServiceProvider serviceProvider;
         bool disposedValue;
