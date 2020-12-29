@@ -1,8 +1,6 @@
 ﻿using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
 
 namespace ZptSharp.Examples
 {
@@ -13,26 +11,13 @@ namespace ZptSharp.Examples
             AreaRegistration.RegisterAllAreas();
             RouteConfig.RegisterRoutes(RouteTable.Routes);
 
-            var zptSharpViewEngine = GetZptSharpViewEngine();
+            var zptSharpViewEngine = new ZptSharp.Mvc.ZptSharpViewEngine(builder => {
+                builder
+                    .AddHapZptDocuments()
+                    .AddStandardZptExpressions();
+            });
             ViewEngines.Engines.Clear();
             ViewEngines.Engines.Add(zptSharpViewEngine);
-        }
-
-        IViewEngine GetZptSharpViewEngine()
-        {
-            var services = new ServiceCollection();
-            services
-                .AddZptSharp()
-                .AddHapZptDocuments()
-                .AddZptSharpMvc5ViewEngine()
-                .AddLogging();
-
-            var provider = services.BuildServiceProvider();
-            provider
-                .UseHapZptDocuments()
-                .UseStandardZptExpressions();
-
-            return provider.GetZptSharpMvc5ViewEngine();
         }
     }
 }

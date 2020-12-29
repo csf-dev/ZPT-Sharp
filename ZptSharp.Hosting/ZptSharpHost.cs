@@ -47,6 +47,7 @@ namespace ZptSharp
 
             var serviceCollection = new ServiceCollection();
             serviceCollection.AddZptSharp();
+            serviceCollection.AddLogging();
 
             foreach (var callback in helper.ServiceRegistrations)
                 callback(serviceCollection);

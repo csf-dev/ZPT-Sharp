@@ -2,6 +2,7 @@ using System;
 using AutoFixture.NUnit3;
 using Moq;
 using NUnit.Framework;
+using ZptSharp.Rendering;
 
 namespace ZptSharp.Hosting
 {
@@ -18,12 +19,12 @@ namespace ZptSharp.Hosting
         }
 
         [Test,AutoMoqData]
-        public void DocumentRenderer_gets_service_from_service_provider([Frozen] IServiceProvider serviceProvider,
-                                                                    ZptSharpSelfHoster sut,
-                                                                    IRendersZptDocument docRenderer)
+        public void DocumentRendererForPathFactory_gets_service_from_service_provider([Frozen] IServiceProvider serviceProvider,
+                                                                                      ZptSharpSelfHoster sut,
+                                                                                      IGetsZptDocumentRendererForFilePath docRenderer)
         {
-            Mock.Get(serviceProvider).Setup(x => x.GetService(typeof(IRendersZptDocument))).Returns(docRenderer);
-            Assert.That(() => sut.DocumentRenderer, Is.SameAs(docRenderer));
+            Mock.Get(serviceProvider).Setup(x => x.GetService(typeof(IGetsZptDocumentRendererForFilePath))).Returns(docRenderer);
+            Assert.That(() => sut.DocumentRendererForPathFactory, Is.SameAs(docRenderer));
         }
     }
 }

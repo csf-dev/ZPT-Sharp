@@ -4,7 +4,7 @@ using System.Net;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 using ZptSharp.Config;
-using Microsoft.Extensions.DependencyInjection;
+using ZptSharp.Hosting;
 
 namespace ZptSharp.Mvc
 {
@@ -14,6 +14,8 @@ namespace ZptSharp.Mvc
     public class ZptSharpView : IView
     {
         readonly RenderingConfig originalConfig;
+        readonly IGetsMvcRenderingConfig configProvider;
+        readonly IGetsErrorStream errorStreamProvider;
 
         /// <summary>
         /// The path to the current view file.
@@ -28,18 +30,14 @@ namespace ZptSharp.Mvc
         public string ViewsPath { get; }
 
         /// <summary>
-        /// The service provider.
+        /// The self-hosting environment.
         /// </summary>
-        /// <value>The service provider.</value>
-        public IServiceProvider ServiceProvider { get; }
+        /// <value>The self-hosting environment.</value>
+        public IHostsZptSharp Host { get; }
 
-        IRendersZptFile FileRenderer => ServiceProvider.GetRequiredService<IRendersZptFile>();
+        IRendersZptFile FileRenderer => Host.FileRenderer;
 
-        IWritesStreamToTextWriter StreamCopier => ServiceProvider.GetRequiredService<IWritesStreamToTextWriter>();
-
-        IGetsMvcRenderingConfig ConfigProvider => ServiceProvider.GetRequiredService<IGetsMvcRenderingConfig>();
-
-        IGetsErrorStream ErrorStreamProvider => ServiceProvider.GetRequiredService<IGetsErrorStream>();
+        IWritesStreamToTextWriter StreamCopier => Host.StreamCopier;
 
         /// <summary>Renders the specified view context by using the specified the writer object.</summary>
         /// <param name="viewContext">The view context.</param>
@@ -74,30 +72,33 @@ namespace ZptSharp.Mvc
             {
                 viewContext.HttpContext.Response.StatusCode = (int) HttpStatusCode.InternalServerError;
                 viewContext.HttpContext.Response.StatusDescription = "Internal server error";
-                return await ErrorStreamProvider.GetErrorStreamAsync(ex).ConfigureAwait(false);
+                return await errorStreamProvider.GetErrorStreamAsync(ex).ConfigureAwait(false);
             }
         }
 
         RenderingConfig GetRenderingConfigForMvc(ViewContext viewContext)
-            => ConfigProvider.GetMvcRenderingConfig(originalConfig, viewContext, ViewsPath);
+            => configProvider.GetMvcRenderingConfig(originalConfig, viewContext, ViewsPath);
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ZptSharpView"/> class.
         /// </summary>
         /// <param name="filePath">The path to the view file which is to be rendered.</param>
-        /// <param name="serviceProvider">A service provider.</param>
+        /// <param name="host">The self-hosting ZptSharp environment.</param>
         /// <param name="viewsPath">The path to the root of the <c>Views</c> directory.</param>
         /// <param name="config">A rendering config.</param>
         public ZptSharpView(string filePath,
-                            IServiceProvider serviceProvider,
+                            IHostsZptSharp host,
                             string viewsPath,
-                            RenderingConfig config)
+                            RenderingConfig config,
+                            IGetsMvcRenderingConfig configProvider,
+                            IGetsErrorStream errorStreamProvider)
         {
             FilePath = filePath ?? throw new ArgumentNullException(nameof(filePath));
-            ServiceProvider = serviceProvider ?? throw new ArgumentNullException(nameof(serviceProvider));
+            Host = host ?? throw new ArgumentNullException(nameof(host));
             ViewsPath = viewsPath ?? throw new ArgumentNullException(nameof(viewsPath));
-
             originalConfig = config ?? throw new ArgumentNullException(nameof(config));
+            this.configProvider = configProvider ?? throw new ArgumentNullException(nameof(configProvider));
+            this.errorStreamProvider = errorStreamProvider ?? throw new ArgumentNullException(nameof(errorStreamProvider));
         }
     }
 }

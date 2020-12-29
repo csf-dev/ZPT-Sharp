@@ -2,6 +2,7 @@ using System.IO;
 using System.Threading.Tasks;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using ZptSharp.Config;
 using ZptSharp.Util;
 
 namespace ZptSharp.IntegrationTests

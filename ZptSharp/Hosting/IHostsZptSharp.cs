@@ -1,4 +1,5 @@
 using System;
+using ZptSharp.Rendering;
 
 namespace ZptSharp.Hosting
 {
@@ -22,9 +23,25 @@ namespace ZptSharp.Hosting
         IRendersZptFile FileRenderer { get; }
 
         /// <summary>
-        /// Gets a service which renders ZPT templates from streams (whether they came from a file or not).
+        /// <para>
+        /// Gets a service which may be used to create an instance of <see cref="IRendersZptDocument" />,
+        /// suitable for use with a given file path.  The file path will be used to detect the type of
+        /// document.
+        /// </para>
+        /// <para>
+        /// Note that if you wish to render a template from disk, then it is easier to use
+        /// <see cref="FileRenderer" /> instead.  This service is appropriate when the file path
+        /// might not exist, but a stream is being provided for the template document anyway.
+        /// </para>
         /// </summary>
-        /// <value>The document renderer.</value>
-        IRendersZptDocument DocumentRenderer { get; }
+        /// <value>The document renderer factory for file paths.</value>
+        IGetsZptDocumentRendererForFilePath DocumentRendererForPathFactory { get; }
+
+        /// <summary>
+        /// Gets a service which copies a <see cref="System.IO.Stream" /> to a
+        /// <see cref="System.IO.TextWriter" />.
+        /// </summary>
+        /// <value>The stream-copying service.</value>
+        IWritesStreamToTextWriter StreamCopier { get; }
     }
 }

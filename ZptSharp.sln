@@ -55,6 +55,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZptSharp.Mvc5.Tests", "ZptS
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZptSharp.MvcCore", "ZptSharp.MvcCore\ZptSharp.MvcCore.csproj", "{B2F6F285-D200-4525-8761-0866F89B02FE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZptSharp.Hosting", "ZptSharp.Hosting\ZptSharp.Hosting.csproj", "{038CCFB0-3167-4F2E-8AEA-32825DBEACE6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -109,6 +111,10 @@ Global
 		{B2F6F285-D200-4525-8761-0866F89B02FE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B2F6F285-D200-4525-8761-0866F89B02FE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B2F6F285-D200-4525-8761-0866F89B02FE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{038CCFB0-3167-4F2E-8AEA-32825DBEACE6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{038CCFB0-3167-4F2E-8AEA-32825DBEACE6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{038CCFB0-3167-4F2E-8AEA-32825DBEACE6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{038CCFB0-3167-4F2E-8AEA-32825DBEACE6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{427F7982-F40E-4534-A175-5101ED6DC5C0} = {FFCDB1AA-1F9C-4399-8637-BB62064BF02F}

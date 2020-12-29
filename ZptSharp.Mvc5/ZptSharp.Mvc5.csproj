@@ -24,7 +24,12 @@
   </ItemGroup>
     
   <ItemGroup>
-    <ProjectReference Include="..\ZptSharp\ZptSharp.csproj" />
+    <ProjectReference Include="..\ZptSharp\ZptSharp.csproj">
+      <SetTargetFramework>TargetFramework=net461</SetTargetFramework>
+    </ProjectReference>
+    <ProjectReference Include="..\ZptSharp.Hosting\ZptSharp.Hosting.csproj">
+      <SetTargetFramework>TargetFramework=net461</SetTargetFramework>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System.Web" />
