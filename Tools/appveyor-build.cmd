@@ -29,6 +29,11 @@ dotnet test ZptSharp.Tests ^
     --test-adapter-path:. ^
     --logger:\"nunit;LogFilePath=../.TestResults\TestResults.xml\"
     
+REM ---
+REM 'Capture' the exit code from dotnet test for later use
+REM ---
+set generalexitcode=%errorlevel%
+    
 move .TestResults\TestResults.xml .TestResults\TestResults.ZptSharp.Tests.xml
 move .TestResults\coverage.opencover.xml .TestResults\coverage.opencover.ZptSharp.Tests.xml
     
@@ -45,7 +50,7 @@ move .TestResults\coverage.opencover.xml .TestResults\coverage.opencover.ZptShar
 REM ---
 REM 'Capture' the exit code from dotnet test for later use
 REM ---
-set exitcode=%errorlevel%
+set mvcexitcode=%errorlevel%
 
 dotnet-sonarscanner end ^
     /d:"sonar.login=%SONARCLOUD_SECRET_KEY%"
@@ -55,4 +60,6 @@ REM Upload all files in the test results directory to AppVeyor as artifacts
 REM ---
 FOR %%F IN (.TestResults\*.*) DO appveyor PushArtifact %%F
 
+REM If both exit codes are zero then this is exit 0, otherwise it will raise an error.
+set /A "exitcode=generalexitcode+mvcexitcode"
 exit /B %exitcode%
