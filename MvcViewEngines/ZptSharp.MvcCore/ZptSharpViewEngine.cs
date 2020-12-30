@@ -4,8 +4,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ViewEngines;
 using ZptSharp.Config;
 using ZptSharp.Hosting;
-using System.IO;
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
 
 namespace ZptSharp.Mvc
 {
@@ -29,6 +29,9 @@ namespace ZptSharp.Mvc
     /// </remarks>
     public class ZptSharpViewEngine : IViewEngine
     {
+        const string viewPathSanitiserPattern = "^(~/|/)";
+        static readonly Regex viewPathSanitiser = new Regex(viewPathSanitiserPattern, RegexOptions.Compiled | RegexOptions.CultureInvariant);
+
         internal const string DefaultViewsPath = "Views/";
 
         static readonly string[] defaultViewLocationFormats =
@@ -62,7 +65,12 @@ namespace ZptSharp.Mvc
             if(!context.ActionDescriptor.RouteValues.TryGetValue("controller", out var controllerName))
                 throw new ArgumentException(Resources.ExceptionMessage.ContextMustContainControllerRouteValue, nameof(context));
 
-            return FindView(controllerName, viewName);
+            var findResult = viewFinder.FindView(controllerName, viewName, viewLocationFormats);
+            if(!findResult.Success)
+                return NotFound(viewName, findResult.AttemptedLocations);
+
+            var view = new ZptSharpView(findResult.Path, host, viewsPath, config, configProvider, errorStreamProvider);
+            return Found(viewName, view);
         }
 
         /// <summary>
@@ -88,35 +96,21 @@ namespace ZptSharp.Mvc
 
         static string GetApplicationRelativeViewPath(string viewPath, string referencePath)
         {
-            if (IsAlreadyApplicationRelative(viewPath)) return viewPath.Replace("~/", String.Empty);
-            if(string.IsNullOrEmpty(referencePath)) return $"/{viewPath}";
+            if (IsAlreadyApplicationRelative(viewPath)) return viewPathSanitiser.Replace(viewPath, String.Empty);
+            if(string.IsNullOrEmpty(referencePath)) return viewPath;
 
             var index = referencePath.LastIndexOf('/');
             return referencePath.Substring(0, index + 1) + viewPath;
         }
 
         static bool IsAlreadyApplicationRelative(string name)
-            => name.StartsWith("~/") || name.StartsWith("/");
-
-        ViewEngineResult FindView(string controllerName, string viewName)
-        {
-            var findResult = viewFinder.FindView(controllerName, viewName, viewLocationFormats);
-            if(!findResult.Success)
-                return NotFound(viewName, findResult.AttemptedLocations);
-
-            var view = new ZptSharpView(findResult.Path, host, viewsPath, config, configProvider, errorStreamProvider);
-            return Found(viewName, view);
-        }
+            => viewPathSanitiser.IsMatch(name);
 
         static ViewEngineResult Found(string viewName, ZptSharpView view)
-        {
-            return ViewEngineResult.Found(viewName, view);
-        }
+            => ViewEngineResult.Found(viewName, view);
 
         static ViewEngineResult NotFound(string viewName, IEnumerable<string> attemptedLocations = null)
-        {
-            return ViewEngineResult.NotFound(viewName, attemptedLocations ?? Enumerable.Empty<string>());
-        }
+            => ViewEngineResult.NotFound(viewName, attemptedLocations ?? Enumerable.Empty<string>());
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ZptSharpViewEngine"/> class.

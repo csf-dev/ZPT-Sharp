@@ -51,6 +51,7 @@
     <EmbeddedResource Include="..\CommonSource\Resources\ExceptionMessage.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>ExceptionMessage.Designer.cs</LastGenOutput>
+      <LogicalName>ZptSharp.Mvc.Resources.ExceptionMessage.resources</LogicalName>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
