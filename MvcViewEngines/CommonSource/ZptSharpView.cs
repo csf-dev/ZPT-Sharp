@@ -63,14 +63,14 @@ namespace ZptSharp.Mvc
         /// <summary>
         /// Asynchronously renders the view using the specified context.
         /// </summary>
-        /// <param name="viewContext">The view context</param>
+        /// <param name="context">The view context</param>
         /// <returns>A task which completes when rendering is finished.</returns>
-        public Task RenderAsync(ViewContext viewContext)
+        public Task RenderAsync(ViewContext context)
         {
-            if (viewContext == null)
-                throw new ArgumentNullException(nameof(viewContext));
+            if (context == null)
+                throw new ArgumentNullException(nameof(context));
 
-            return RenderPrivateAsync(viewContext, viewContext.Writer);
+            return RenderPrivateAsync(context, context.Writer);
         }
 #endif
 

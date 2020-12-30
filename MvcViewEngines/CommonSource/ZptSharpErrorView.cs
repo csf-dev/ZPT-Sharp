@@ -15,9 +15,9 @@ namespace ZptSharp.Mvc
 
         static string ResourceName => $"{nameof(ZptSharpErrorView)}.pt";
 
-        Assembly MvcAssembly => GetType().Assembly;
+        static Assembly MvcAssembly => typeof(ZptSharpErrorView).Assembly;
 
-        Assembly ZptAssembly => typeof(IRendersZptDocument).Assembly;
+        static Assembly ZptAssembly => typeof(IRendersZptDocument).Assembly;
 
         /// <summary>
         /// Gets a stream which represents the rendered error document.
