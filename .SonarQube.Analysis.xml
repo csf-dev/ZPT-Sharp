@@ -9,5 +9,5 @@
             Also, there's no need to cover any code in the Examples directory.
             This isn't actually a part of the library.
     -->
-    <Property Name="sonar.coverage.exclusions">**/*Exception.cs;Examples/**/*</Property>
+    <Property Name="sonar.coverage.exclusions">**/*Exception.cs;Examples/**/*;**/*.Designer.cs</Property>
 </SonarQubeAnalysisProperties>
