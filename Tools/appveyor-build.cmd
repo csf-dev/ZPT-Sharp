@@ -13,6 +13,12 @@ dotnet-sonarscanner begin ^
     /d:sonar.cs.nunit.reportsPaths=%APPVEYOR_BUILD_FOLDER%\.TestResults\TestResults.*.xml ^
     /d:sonar.cs.opencover.reportsPaths=%APPVEYOR_BUILD_FOLDER%\.TestResults\coverage.opencover.*.xml ^
     /d:sonar.branch.name=%APPVEYOR_REPO_BRANCH%
+
+REM ---
+REM Build once first, which ensures that SonarScanner sees every project, even those
+REM which aren't referenced by tests.
+REM ---
+dotnet build
     
 REM ---
 REM The tests have to be run separately, otherwise the NUnit test results file
