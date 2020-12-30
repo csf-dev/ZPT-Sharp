@@ -26,7 +26,6 @@ dotnet test ZptSharp.Tests ^
     /p:CollectCoverage=true ^
     /p:CoverletOutputFormat=\"json,opencover\" ^
     /p:CoverletOutput=\"../.TestResults/\" ^
-    --test-adapter-path:. ^
     --logger:\"nunit;LogFilePath=../.TestResults\TestResults.xml\"
     
 REM ---
@@ -40,9 +39,8 @@ move .TestResults\coverage.opencover.xml .TestResults\coverage.opencover.ZptShar
 dotnet test MvcViewEngines\ZptSharp.Mvc5.Tests ^
     /p:CollectCoverage=true ^
     /p:CoverletOutputFormat=\"json,opencover\" ^
-    /p:CoverletOutput=\"../.TestResults/\" ^
-    --test-adapter-path:. ^
-    --logger:\"nunit;LogFilePath=../.TestResults\TestResults.xml\"
+    /p:CoverletOutput=\"../../.TestResults/\" ^
+    --logger:\"nunit;LogFilePath=../../.TestResults\TestResults.xml\"
       
 REM ---
 REM 'Capture' the exit code from dotnet test for later use
