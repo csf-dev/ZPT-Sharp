@@ -52,29 +52,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Include="..\CommonSource\IGetsErrorStream.cs">
-      <Link>IGetsErrorStream.cs</Link>
-    </Compile>
-    <Compile Include="..\CommonSource\IGetsMvcRenderingConfig.cs">
-      <Link>IGetsMvcRenderingConfig.cs</Link>
-    </Compile>
-    <Compile Include="..\CommonSource\MvcContextBuilderProvider.cs">
-      <Link>MvcContextBuilderProvider.cs</Link>
-    </Compile>
-    <Compile Include="..\CommonSource\ZptSharpErrorView.cs">
-      <Link>ZptSharpErrorView.cs</Link>
-    </Compile>
-    <Compile Include="..\CommonSource\MvcRenderingConfigProvider.cs">
-      <Link>MvcRenderingConfigProvider.cs</Link>
-    </Compile>
-    <Compile Include="..\CommonSource\ZptSharpView.cs">
-      <Link>ZptSharpView.cs</Link>
-    </Compile>
-    <Compile Include="..\CommonSource\ViewFinder.cs">
-      <Link>ViewFinder.cs</Link>
-    </Compile>
-    <Compile Include="..\CommonSource\ZptSharpViewEngine.cs">
-      <Link>ZptSharpViewEngine.cs</Link>
+    <Compile Include="..\CommonSource\**\*.cs">
+      <Link>%(RecursiveDir)\%(Filename).%(Extension)</Link>
     </Compile>
   </ItemGroup>
 
@@ -88,9 +67,8 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\CommonSource\Resources\ExceptionMessage.Designer.cs">
+    <Compile Update="..\CommonSource\Resources\ExceptionMessage.Designer.cs">
       <DependentUpon>ExceptionMessage.resx</DependentUpon>
-      <Link>Resources\ZptSharpViewEngine.cs</Link>
     </Compile>
   </ItemGroup>
 

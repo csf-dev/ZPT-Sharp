@@ -14,7 +14,7 @@ namespace ZptSharp.Mvc
     {
         [Test, AutoMoqData]
         public void GetRootContextBuilder_returns_builder_function_which_creates_variables_for_correct_static_properties_of_ViewContext([Frozen,MockContext] ViewContext context,
-                                                                                                                                        MvcContextBuilderProvider sut,
+                                                                                                                                        MvcContextBuilderProviderBase sut,
                                                                                                                                         IConfiguresRootContext helper,
                                                                                                                                         IServiceProvider serviceProvider)
         {
@@ -34,7 +34,7 @@ namespace ZptSharp.Mvc
         [Test, AutoMoqData]
         public void GetRootContextBuilder_returns_builder_function_which_creates_correct_views_directory([Frozen, MockContext] ViewContext context,
                                                                                                          [Frozen] string viewsPath,
-                                                                                                         MvcContextBuilderProvider sut,
+                                                                                                         MvcContextBuilderProviderBase sut,
                                                                                                          IConfiguresRootContext helper,
                                                                                                          IServiceProvider serviceProvider)
         {

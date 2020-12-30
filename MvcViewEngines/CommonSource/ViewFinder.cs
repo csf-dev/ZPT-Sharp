@@ -1,21 +1,27 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
-#if MVC5
-using System.Web.Mvc;
-using System.Web;
-#elif MVCCORE
-using Microsoft.AspNetCore.Mvc.ViewEngines;
-#endif
-using System.IO;
 
 namespace ZptSharp.Mvc
 {
-    internal static class ViewFinder
+    /// <summary>
+    /// Implementation of <see cref="IFindsView" /> which searches-for and
+    /// finds view files.
+    /// </summary>
+    public class ViewFinder : IFindsView
     {
-        internal static FindViewResult FindView(string controllerName,
-                                                string viewName,
-                                                string[] searchLocationFormats)
+        readonly IMapsLocation mapper;
+        readonly ITestForFileExistence fileTester;
+
+        /// <summary>
+        /// Attempts to find a view, and returns a result indicating the outcome of the search.
+        /// </summary>
+        /// <param name="controllerName">The controller name for the desired view.</param>
+        /// <param name="viewName">The name of the desired view.</param>
+        /// <param name="searchLocationFormats">A collection of locations to search.</param>
+        /// <returns>A result indicating success or failure.</returns>
+        public FindViewResult FindView(string controllerName,
+                                       string viewName,
+                                       string[] searchLocationFormats)
         {
             if (controllerName is null)
                 throw new System.ArgumentNullException(nameof(controllerName));
@@ -24,35 +30,31 @@ namespace ZptSharp.Mvc
             if (searchLocationFormats is null)
                 throw new System.ArgumentNullException(nameof(searchLocationFormats));
 
-            var attemptedLocations = new List<string>();
+            var unsuccessfulLocations = new List<string>();
 
             foreach(var locationFormat in searchLocationFormats)
             {
                 var location = String.Format(locationFormat, viewName, controllerName);
-                attemptedLocations.Add(location);
-                var path = GetViewPath(location);
+                var path = mapper.MapLocation(location);
 
-                if(File.Exists(path))
-                    return new FindViewResult { Success = true, Path = path };
+                if(fileTester.DoesFileExist(path))
+                    return new FindViewResult(path);
+                
+                unsuccessfulLocations.Add(location);
             }
 
-            return new FindViewResult { Success = false, AttemptedLocations = attemptedLocations.ToArray() };
+            return new FindViewResult(unsuccessfulLocations.ToArray());
         }
 
-        static string GetViewPath(string location)
+        /// <summary>
+        /// Initializes a new instance of <see cref="ViewFinder" />
+        /// </summary>
+        /// <param name="mapper">A service to map virtual paths to real ones.</param>
+        /// <param name="fileTester">A service to test for the existence of a file.</param>
+        public ViewFinder(IMapsLocation mapper, ITestForFileExistence fileTester)
         {
-#if MVCCORE
-            return location;
-#elif MVC5
-            return HttpContext.Current.Server.MapPath(location);
-#endif
-        }
-
-        internal class FindViewResult
-        {
-            internal bool Success { get; set; }
-            internal string Path { get; set; }
-            internal string[] AttemptedLocations { get; set; }
+            this.mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
+            this.fileTester = fileTester ?? throw new ArgumentNullException(nameof(fileTester));
         }
     }
 }
