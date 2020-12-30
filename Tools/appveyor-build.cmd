@@ -37,20 +37,20 @@ set generalexitcode=%errorlevel%
 move .TestResults\TestResults.xml .TestResults\TestResults.ZptSharp.Tests.xml
 move .TestResults\coverage.opencover.xml .TestResults\coverage.opencover.ZptSharp.Tests.xml
     
-dotnet test ZptSharp.Mvc5.Tests ^
+dotnet test MvcViewEngines\ZptSharp.Mvc5.Tests ^
     /p:CollectCoverage=true ^
     /p:CoverletOutputFormat=\"json,opencover\" ^
     /p:CoverletOutput=\"../.TestResults/\" ^
     --test-adapter-path:. ^
     --logger:\"nunit;LogFilePath=../.TestResults\TestResults.xml\"
-    
-move .TestResults\TestResults.xml .TestResults\TestResults.ZptSharp.Mvc5.Tests.xml
-move .TestResults\coverage.opencover.xml .TestResults\coverage.opencover.ZptSharp.Mvc5.Tests.xml
-    
+      
 REM ---
 REM 'Capture' the exit code from dotnet test for later use
 REM ---
 set mvcexitcode=%errorlevel%
+
+move .TestResults\TestResults.xml .TestResults\TestResults.ZptSharp.Mvc5.Tests.xml
+move .TestResults\coverage.opencover.xml .TestResults\coverage.opencover.ZptSharp.Mvc5.Tests.xml 
 
 dotnet-sonarscanner end ^
     /d:"sonar.login=%SONARCLOUD_SECRET_KEY%"
