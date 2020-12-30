@@ -9,7 +9,10 @@
                 "build",
                 "/property:GenerateFullPaths=true"
             ],
-            "group": "build",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
             "problemMatcher": "$msCompile"
         },
         {
@@ -21,7 +24,10 @@
                 "ZptSharp.Tests",
                 "/property:GenerateFullPaths=true"
             ],
-            "group": "test",
+            "group": {
+                "kind": "test",
+                "isDefault": true
+            },
             "problemMatcher": "$msCompile"
         },
         {
@@ -30,7 +36,7 @@
             "type": "process",
             "args": [
                 "test",
-                "ZptSharp.Mvc5.Tests",
+                "MvcViewEngines\\ZptSharp.Mvc5.Tests",
                 "/property:GenerateFullPaths=true"
             ],
             "group": "test",
@@ -48,6 +54,18 @@
             ],
             "group": "test",
             "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "run MVC5 Example app",
+            "command": "xsp4",
+            "type": "process",
+            "args": [
+                "--applications=/:Examples/ZptSharp.Examples.Mvc5",
+                "--port=8080",
+                "--root=$PWD/Examples/ZptSharp.Examples.Mvc5"
+            ],
+            "group": "none",
+            "problemMatcher": []
         }
     ]
 }

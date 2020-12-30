@@ -2,14 +2,19 @@
 using System.IO;
 using System.Net;
 using System.Threading.Tasks;
+#if MVC5
 using System.Web.Mvc;
+#elif MVCCORE
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.AspNetCore.Mvc.ViewEngines;
+#endif
 using ZptSharp.Config;
 using ZptSharp.Hosting;
 
 namespace ZptSharp.Mvc
 {
     /// <summary>
-    /// The ZptSharp implementation of an MVC5 <see cref="IView"/>.
+    /// The ZptSharp implementation of an <see cref="IView"/> for either MVC5 or MVC Core.
     /// </summary>
     public class ZptSharpView : IView
     {
@@ -18,10 +23,10 @@ namespace ZptSharp.Mvc
         readonly IGetsErrorStream errorStreamProvider;
 
         /// <summary>
-        /// The path to the current view file.
+        /// Gets the path of the view as resolved by the <see cref="ZptSharpViewEngine" />
         /// </summary>
-        /// <value>The file path.</value>
-        public string FilePath { get; }
+        /// <value>The path to the view.</value>
+        public string Path { get; }
 
         /// <summary>
         /// The path for the <c>Views</c> TALES variable.
@@ -30,7 +35,7 @@ namespace ZptSharp.Mvc
         public string ViewsPath { get; }
 
         /// <summary>
-        /// The self-hosting environment.
+        /// The ZptSharp self-hosting environment, from which dependencies are retrieved.
         /// </summary>
         /// <value>The self-hosting environment.</value>
         public IHostsZptSharp Host { get; }
@@ -39,7 +44,10 @@ namespace ZptSharp.Mvc
 
         IWritesStreamToTextWriter StreamCopier => Host.StreamCopier;
 
-        /// <summary>Renders the specified view context by using the specified the writer object.</summary>
+#if MVC5
+        /// <summary>
+        /// Renders the specified view context by using the specified the writer object.
+        /// </summary>
         /// <param name="viewContext">The view context.</param>
         /// <param name="writer">The writer object.</param>
         public void Render(ViewContext viewContext, TextWriter writer)
@@ -51,6 +59,20 @@ namespace ZptSharp.Mvc
 
             RenderPrivateAsync(viewContext, writer).Wait();
         }
+#elif MVCCORE
+        /// <summary>
+        /// Asynchronously renders the view using the specified context.
+        /// </summary>
+        /// <param name="viewContext">The view context</param>
+        /// <returns>A task which completes when rendering is finished.</returns>
+        public Task RenderAsync(ViewContext viewContext)
+        {
+            if (viewContext == null)
+                throw new ArgumentNullException(nameof(viewContext));
+
+            return RenderPrivateAsync(viewContext, viewContext.Writer);
+        }
+#endif
 
         async Task RenderPrivateAsync(ViewContext viewContext, TextWriter writer)
         {
@@ -66,12 +88,14 @@ namespace ZptSharp.Mvc
         {
             try
             {
-                return await FileRenderer.RenderAsync(FilePath, viewContext.ViewData?.Model, config).ConfigureAwait(false);
+                return await FileRenderer.RenderAsync(Path, viewContext.ViewData?.Model, config).ConfigureAwait(false);
             }
             catch(ZptRenderingException ex)
             {
                 viewContext.HttpContext.Response.StatusCode = (int) HttpStatusCode.InternalServerError;
+#if MVC5
                 viewContext.HttpContext.Response.StatusDescription = "Internal server error";
+#endif
                 return await errorStreamProvider.GetErrorStreamAsync(ex).ConfigureAwait(false);
             }
         }
@@ -86,6 +110,8 @@ namespace ZptSharp.Mvc
         /// <param name="host">The self-hosting ZptSharp environment.</param>
         /// <param name="viewsPath">The path to the root of the <c>Views</c> directory.</param>
         /// <param name="config">A rendering config.</param>
+        /// <param name="configProvider">A service which gets a modified rendering config, suitable for use with MVC.</param>
+        /// <param name="errorStreamProvider">A service which gets a stream for displaying a rendering error.</param>
         public ZptSharpView(string filePath,
                             IHostsZptSharp host,
                             string viewsPath,
@@ -93,7 +119,7 @@ namespace ZptSharp.Mvc
                             IGetsMvcRenderingConfig configProvider,
                             IGetsErrorStream errorStreamProvider)
         {
-            FilePath = filePath ?? throw new ArgumentNullException(nameof(filePath));
+            Path = filePath ?? throw new ArgumentNullException(nameof(filePath));
             Host = host ?? throw new ArgumentNullException(nameof(host));
             ViewsPath = viewsPath ?? throw new ArgumentNullException(nameof(viewsPath));
             originalConfig = config ?? throw new ArgumentNullException(nameof(config));

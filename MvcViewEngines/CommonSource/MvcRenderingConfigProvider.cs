@@ -1,5 +1,8 @@
-﻿using System;
+﻿#if MVC5
 using System.Web.Mvc;
+#elif MVCCORE
+using Microsoft.AspNetCore.Mvc.Rendering;
+#endif
 using ZptSharp.Config;
 
 namespace ZptSharp.Mvc
@@ -19,14 +22,11 @@ namespace ZptSharp.Mvc
         /// <param name="viewsPath">The path to the root of the <c>Views</c> directory.</param>
         public RenderingConfig GetMvcRenderingConfig(RenderingConfig originalConfig, ViewContext viewContext, string viewsPath)
         {
-            var contextBuilder = GetContextBuilder(viewContext, viewsPath);
+            var contextBuilder = new MvcContextBuilderProvider(viewContext, viewsPath);
 
-            var builder = originalConfig.CloneToNewBuilder();
-            builder.ContextBuilder = contextBuilder.GetRootContextBuilder();
-            return builder.GetConfig();
+            var configBuilder = originalConfig.CloneToNewBuilder();
+            configBuilder.ContextBuilder = contextBuilder.GetRootContextBuilder();
+            return configBuilder.GetConfig();
         }
-
-        static IGetsRootContextBuilder GetContextBuilder(ViewContext viewContext, string viewsPath)
-            => new MvcContextBuilderProvider(viewContext, viewsPath);
     }
 }

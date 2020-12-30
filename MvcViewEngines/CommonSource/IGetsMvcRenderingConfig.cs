@@ -1,12 +1,15 @@
-﻿using System;
+﻿#if MVC5
 using System.Web.Mvc;
+#elif MVCCORE
+using Microsoft.AspNetCore.Mvc.Rendering;
+#endif
 using ZptSharp.Config;
 
 namespace ZptSharp.Mvc
 {
     /// <summary>
     /// An object which can provide a <see cref="RenderingConfig"/> instance
-    /// which is suitable for use with ASP.NET MVC5.
+    /// which is suitable for use with ASP.NET MVC (either MVC5 or MVC Core).
     /// </summary>
     public interface IGetsMvcRenderingConfig
     {

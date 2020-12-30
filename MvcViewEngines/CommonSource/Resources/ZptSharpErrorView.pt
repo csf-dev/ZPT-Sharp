@@ -78,10 +78,10 @@ many lines</pre>
   </section>
   <footer>
     <div>
-      ZptSharp v<span tal:replace="here/ZptVersion">v1.0.0</span>
+      <span tal:replace="here/ZptAssemblyName"> v<span tal:replace="here/ZptAssemblyVersion">v1.0.0</span>
     </div>
     <div>
-      ZptSharp.Mvc5 v<span tal:replace="here/ZptMvcVersion">v1.0.0</span>
+      <span tal:replace="here/MvcAssemblyName"> v<span tal:replace="here/MvcAssemblyVersion">v1.0.0</span>
     </div>
   </footer>
 </body>

@@ -31,6 +31,7 @@
     <ProjectReference Include="..\DocumentProviders\ZptSharp.Xml\ZptSharp.Xml.csproj" />
     <ProjectReference Include="..\DocumentProviders\ZptSharp.HtmlAgilityPack\ZptSharp.HtmlAgilityPack.csproj" />
     <ProjectReference Include="..\Evaluators\ZptSharp.PythonExressions\ZptSharp.PythonExressions.csproj" />
+    <ProjectReference Include="..\MvcViewEngines\ZptSharp.MvcCore\ZptSharp.MvcCore.csproj" />
     <ProjectReference Include="..\ZptSharp.Hosting\ZptSharp.Hosting.csproj" />
   </ItemGroup>
   <ItemGroup>

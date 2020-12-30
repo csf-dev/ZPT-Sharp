@@ -1,19 +1,23 @@
 ﻿using System;
 using System.IO;
 using System.Threading.Tasks;
-using Microsoft.Extensions.DependencyInjection;
+using System.Reflection;
 using ZptSharp.Rendering;
 
 namespace ZptSharp.Mvc
 {
     /// <summary>
-    /// A provider for a view which shows a ZptSharp rendering error.
+    /// A provider for a stream which contains a web page displaying a ZptSharp rendering error to an end user.
     /// </summary>
     public class ZptSharpErrorView : IGetsErrorStream
     {
         readonly IGetsZptDocumentRendererForFilePath rendererFactory;
 
-        static string FilePath => $"{nameof(ZptSharpErrorView)}.pt";
+        static string ResourceName => $"{nameof(ZptSharpErrorView)}.pt";
+
+        Assembly MvcAssembly => GetType().Assembly;
+
+        Assembly ZptAssembly => typeof(IRendersZptDocument).Assembly;
 
         /// <summary>
         /// Gets a stream which represents the rendered error document.
@@ -22,8 +26,8 @@ namespace ZptSharp.Mvc
         /// <param name="exception">The exception which caused this error view to be displayed.</param>
         public async Task<Stream> GetErrorStreamAsync(Exception exception)
         {
-            var documentRenderer = rendererFactory.GetDocumentRenderer(FilePath);
-            var docStream = GetTemplateStream();
+            var documentRenderer = rendererFactory.GetDocumentRenderer(ResourceName);
+            var docStream = MvcAssembly.GetManifestResourceStream(ResourceName);
             var model = GetModel(exception);
 
             return await documentRenderer.RenderAsync(docStream, model).ConfigureAwait(false);
@@ -31,15 +35,18 @@ namespace ZptSharp.Mvc
 
         object GetModel(Exception exception)
         {
+            var zptAssemblyName = ZptAssembly.GetName(); 
+            var mvcAssemblyName = MvcAssembly.GetName();
+
             return new
             {
                 Exception = exception,
-                ZptVersion = typeof(IRendersZptDocument).Assembly.GetName().Version.ToString(),
-                ZptMvcVersion = typeof(ZptSharpErrorView).Assembly.GetName().Version.ToString(),
+                ZptAssemblyName = zptAssemblyName.Name,
+                ZptAssemblyVersion = zptAssemblyName.Version.ToString(),
+                MvcAssemblyName = mvcAssemblyName.Name,
+                MvcAssemblyVersion = mvcAssemblyName.Version.ToString(),
             };
         }
-
-        static Stream GetTemplateStream() => typeof(ZptSharpErrorView).Assembly.GetManifestResourceStream(FilePath);
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ZptSharpErrorView"/> class.

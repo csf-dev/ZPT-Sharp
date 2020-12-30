@@ -127,7 +127,7 @@
       <Project>{E7FF2ABA-F0A8-42C5-BEFC-CF2EE87F2520}</Project>
       <Name>ZptSharp</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\ZptSharp.Mvc5\ZptSharp.Mvc5.csproj" AdditionalProperties="TargetFramework=net461">
+    <ProjectReference Include="..\..\MvcViewEngines\ZptSharp.Mvc5\ZptSharp.Mvc5.csproj" AdditionalProperties="TargetFramework=net461">
       <Project>{3B005573-1505-4602-995B-D8D49599A6F0}</Project>
       <Name>ZptSharp.Mvc5</Name>
     </ProjectReference>

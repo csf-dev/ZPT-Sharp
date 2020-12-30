@@ -33,7 +33,6 @@ namespace ZptSharp.Mvc
             Mock.Get(helper).Verify(x => x.AddToRootContext("Session", context.HttpContext.Session), Times.Once, $"{nameof(HttpContextBase.Session)} set correctly");
             Mock.Get(helper).Verify(x => x.AddToRootContext("Model", context.ViewData.Model), Times.Once, $"{nameof(ViewDataDictionary.Model)} set correctly");
             Mock.Get(helper).Verify(x => x.AddToRootContext("request", context.HttpContext.Request), Times.Once, $"{nameof(HttpContextBase.Request)} set correctly (in lowercase)");
-            Mock.Get(helper).Verify(x => x.AddToRootContext("FormContext", context.FormContext), Times.Once, $"{nameof(ViewContext.FormContext)} set correctly");
         }
 
         [Test, AutoMoqData]
