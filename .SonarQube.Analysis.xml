@@ -2,12 +2,9 @@
 <SonarQubeAnalysisProperties xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                              xmlns:xsd="http://www.w3.org/2001/XMLSchema"
                              xmlns="http://www.sonarsource.com/msbuild/integration/2015/1">
-    <!--    Exception classes do not need code coverage,
-            their constructor signatures are boilerplate and
-            it is fine if they are not covered by tests.
-    
-            Also, there's no need to cover any code in the Examples directory.
-            This isn't actually a part of the library.
-    -->
-    <Property Name="sonar.coverage.exclusions">**/*Exception.cs;Examples/**/*;**/*.Designer.cs</Property>
+    <Property Name="sonar.coverage.exclusions">
+        **/*Exception.cs,
+        Examples/**/*,
+        **/*.Designer.cs
+    </Property>
 </SonarQubeAnalysisProperties>

@@ -45,7 +45,7 @@ namespace ZptSharp.Mvc
         readonly RenderingConfig config;
         readonly IGetsMvcRenderingConfig configProvider;
         readonly IGetsErrorStream errorStreamProvider;
-        readonly IFindsView viewFinder;
+        readonly IFindsView defaultViewFinder;
 
         /// <summary>
         /// Gets a <see cref="ViewEngineResult" /> from an attempt to find a ZptSharp view of the specified
@@ -84,25 +84,25 @@ namespace ZptSharp.Mvc
             var findResult = viewFinder.FindView(controllerName, viewName, viewLocationFormats);
             
             if(!findResult.Success)
-                return NotFound(viewName, findResult.AttemptedLocations);
+                return NotFound(findResult.AttemptedLocations);
 
             var view = new ZptSharpView(findResult.Path, host, viewsPath, config, configProvider, errorStreamProvider);
-            return Found(viewName, view);
+            return Found(view);
         }
 
-        ViewEngineResult Found(string viewName, ZptSharpView view)
+        ViewEngineResult Found(ZptSharpView view)
         {
             return new ViewEngineResult(view, this);
         }
 
-        static ViewEngineResult NotFound(string viewName, IEnumerable<string> attemptedLocations = null)
+        static ViewEngineResult NotFound(IEnumerable<string> attemptedLocations = null)
         {
             return new ViewEngineResult(attemptedLocations ?? Enumerable.Empty<string>());
         }
 
         IFindsView GetViewFinder(HttpContextBase context)
         {
-            if(viewFinder != null) return viewFinder;
+            if(defaultViewFinder != null) return defaultViewFinder;
             return new ViewFinder(new ServerLocationMapper(context), new FileExistenceTester());
         }
 
@@ -126,7 +126,7 @@ namespace ZptSharp.Mvc
         {
             this.viewsPath = viewsPath ?? throw new ArgumentNullException(nameof(viewsPath));
             this.config = config ?? RenderingConfig.Default;
-            this.viewFinder = viewFinder;
+            defaultViewFinder = viewFinder;
             this.viewLocationFormats = viewLocationFormats ?? defaultViewLocationFormats;
 
             host = ZptSharpHost.GetHost(builderAction ?? throw new ArgumentNullException(nameof(builderAction)));
