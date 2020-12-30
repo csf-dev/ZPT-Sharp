@@ -33,7 +33,8 @@ namespace ZptSharp.Mvc.Autofixture
                         var mock = new Mock<ControllerContext>();
                         mock.SetupAllProperties();
                         return mock.Object;
-                    });
+                    })
+                    .Without(x => x.DisplayMode);
             });
 
             fixture.Customize<HttpContextBase>(c => {
