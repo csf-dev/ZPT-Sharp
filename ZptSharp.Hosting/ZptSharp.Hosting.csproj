@@ -1,0 +1,40 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <ReleaseVersion>2.0.0</ReleaseVersion>
+    <ProjectGuid>{EB2FE5B5-8254-4073-9AD7-CEA8987CE060}</ProjectGuid>
+  </PropertyGroup>
+    
+  <Import Project="..\Tools\CommonSolutionProperties.props" />
+      
+  <PropertyGroup>
+    <PackageId>ZptSharp.Hosting</PackageId>
+    <Title>ZptSharp - self-hosting</Title>
+    <Description>An extension to ZptSharp, for hosting the library in its own self-contained dependency injection environment.  For use when you do not wish to/cannot integrate ZptSharp into your application's own dependency injection.</Description>
+    <TargetFrameworks>$(CommonTargetFrameworks)</TargetFrameworks>
+    <RootNamespace>ZptSharp</RootNamespace>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>..\Tools\CSF-Software-OSS.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+    
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <CheckForOverflowUnderflow>true</CheckForOverflowUnderflow>
+    <DocumentationFile>bin\$(Configuration)\$(TargetFramework)\ZptSharp.Hosting.xml</DocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType></DebugType>
+    <DocumentationFile>bin\$(Configuration)\$(TargetFramework)\ZptSharp.Hosting.xml</DocumentationFile>
+  </PropertyGroup>
+  
+  <ItemGroup>
+    <ProjectReference Include="..\ZptSharp\ZptSharp.csproj" />
+    <ProjectReference Include="..\ZptSharp.Impl\ZptSharp.Impl.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="2.0.0" />
+    <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" Version="1.0.0" PrivateAssets="All" Condition="'$(TargetFramework.TrimEnd(`0123456789`))' == 'net'" />
+    <PackageReference Include="Microsoft.Extensions.Logging" Version="1.1.2" />
+  </ItemGroup>
+
+</Project>

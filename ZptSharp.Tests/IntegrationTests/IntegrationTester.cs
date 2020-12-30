@@ -1,4 +1,3 @@
-using System;
 using System.IO;
 using System.Threading.Tasks;
 using Microsoft.Extensions.DependencyInjection;
@@ -11,38 +10,6 @@ namespace ZptSharp.IntegrationTests
     public static class IntegrationTester
     {
         /// <summary>
-        /// Gets an instance of <see cref="ServiceProvider"/>, suitable for use when integration-testing ZptSharp.
-        /// </summary>
-        /// <returns>A service provider.</returns>
-        /// <param name="logLevel">The desired log level.</param>
-        public static ServiceProvider GetIntegrationTestServiceProvider(LogLevel logLevel = LogLevel.Debug)
-        {
-            var services = new ServiceCollection()
-                .AddZptSharp()
-                .AddHapZptDocuments()
-                .AddXmlZptDocuments()
-                .AddZptPythonExpressions()
-                .AddLogging(b => {
-                    b.ClearProviders();
-                    b.AddConsole(c => {
-                        c.DisableColors = true;
-                        c.IncludeScopes = true;
-                    });
-                    b.SetMinimumLevel(logLevel);
-                });
-
-            var provider = services.BuildServiceProvider();
-            provider
-                .UseHapZptDocuments()
-                .UseXmlZptDocuments()
-                .UseStandardZptExpressions()
-                .UseZptPythonExpressions()
-                ;
-
-            return provider;
-        }
-
-        /// <summary>
         /// Performs an integration test and returns the result.
         /// </summary>
         /// <returns>The integration test result.</returns>
@@ -52,42 +19,50 @@ namespace ZptSharp.IntegrationTests
         /// <param name="config">Rendering config.</param>
         /// <param name="logLevel">The logging level</param>
         public static async Task<IntegrationTestResult> PerformIntegrationTest(string expectedRenderingPath,
-                                                                               IServiceProvider serviceProvider = null,
                                                                                object model = null,
                                                                                RenderingConfig config = null,
                                                                                LogLevel logLevel = LogLevel.Debug)
         {
-            bool createdServiceProvider = (serviceProvider == null);
-            IServiceProvider provider = null;
-
             if (new FileInfo(expectedRenderingPath).Name.Contains(".ignored."))
                 NUnit.Framework.Assert.Ignore("This integration test file includes the word 'ignored' in its filename.");
 
-            try
+            using(var host = GetZptEnvironment(logLevel))
             {
-                provider = serviceProvider ?? GetIntegrationTestServiceProvider(logLevel);
+                var sourceDocument = TestFiles.GetIntegrationTestSourceFile(expectedRenderingPath);
+                var expected = await TestFiles.GetString(expectedRenderingPath);
 
-                using (var scope = provider.CreateScope())
+                var result = await TestFiles.GetString(await host.FileRenderer.RenderAsync(sourceDocument, model ?? new object(), config));
+
+                return new IntegrationTestResult
                 {
-                    var sourceDocument = TestFiles.GetIntegrationTestSourceFile(expectedRenderingPath);
-                    var expected = await TestFiles.GetString(expectedRenderingPath);
-
-                    var fileRenderer = scope.ServiceProvider.GetRequiredService<IRendersZptFile>();
-                    var result = await TestFiles.GetString(await fileRenderer.RenderAsync(sourceDocument, model ?? new object(), config));
-
-                    return new IntegrationTestResult
-                    {
-                        Expected = expected,
-                        Actual = result,
-                        ExpectedRenderingPath = expectedRenderingPath,
-                    };
-                }
+                    Expected = expected,
+                    Actual = result,
+                    ExpectedRenderingPath = expectedRenderingPath,
+                };
             }
-            finally
-            {
-                if (createdServiceProvider && provider is ServiceProvider disposable)
-                    disposable?.Dispose();
-            }
+        }
+
+        static Hosting.IHostsZptSharp GetZptEnvironment(LogLevel logLevel)
+        {
+            return ZptSharpHost.GetHost(builder => {
+                builder
+                    .AddStandardZptExpressions()
+                    .AddHapZptDocuments()
+                    .AddXmlZptDocuments()
+                    .AddZptPythonExpressions();
+                
+                builder.ServiceRegistrations.Add(serviceCollection => {
+                    serviceCollection
+                        .AddLogging(b => {
+                            b.ClearProviders();
+                            b.AddConsole(c => {
+                                c.DisableColors = true;
+                                c.IncludeScopes = true;
+                            });
+                            b.SetMinimumLevel(logLevel);
+                        });
+                });
+            });
         }
 
         /// <summary>

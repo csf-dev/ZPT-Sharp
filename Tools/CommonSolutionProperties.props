@@ -10,8 +10,7 @@
     
     <PropertyGroup>
         <NetStandardTargetFrameworks>netstandard2.0;netstandard2.1</NetStandardTargetFrameworks>
-        <Net46TargetFrameworks>net461;net46</Net46TargetFrameworks>
-        <Net45TargetFrameworks>net45;net452</Net45TargetFrameworks>
+        <Net46TargetFrameworks>net461</Net46TargetFrameworks>
         
         <!--
             This is the set of target frameworks which represents the

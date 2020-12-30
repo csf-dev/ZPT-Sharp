@@ -1,0 +1,71 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "build",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "build",
+                "/property:GenerateFullPaths=true"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "test (general)",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "test",
+                "ZptSharp.Tests",
+                "/property:GenerateFullPaths=true"
+            ],
+            "group": {
+                "kind": "test",
+                "isDefault": true
+            },
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "test (MVC5)",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "test",
+                "MvcViewEngines\\ZptSharp.Mvc5.Tests",
+                "/property:GenerateFullPaths=true"
+            ],
+            "group": "test",
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "watched tests (general)",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "watch",
+                "test",
+                "ZptSharp.Tests",
+                "/property:GenerateFullPaths=true"
+            ],
+            "group": "test",
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "run MVC5 Example app",
+            "command": "xsp4",
+            "type": "process",
+            "args": [
+                "--applications=/:Examples/ZptSharp.Examples.Mvc5",
+                "--port=8080",
+                "--root=$PWD/Examples/ZptSharp.Examples.Mvc5"
+            ],
+            "group": "none",
+            "problemMatcher": []
+        }
+    ]
+}

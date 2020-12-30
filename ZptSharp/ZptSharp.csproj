@@ -11,19 +11,17 @@
     <PackageId>ZptSharp</PackageId>
     <Title>ZptSharp - abstractions</Title>
     <Description>Models &amp; service interfaces common to ZptSharp.  Install this package to reference make use of ZptSharp.</Description>
-    <TargetFrameworks>$(CommonTargetFrameworks);$(Net45TargetFrameworks)</TargetFrameworks>
+    <TargetFrameworks>$(CommonTargetFrameworks)</TargetFrameworks>
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>..\Tools\CSF-Software-OSS.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
     
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <CheckForOverflowUnderflow>true</CheckForOverflowUnderflow>
-    <LangVersion>7.3</LangVersion>
     <DocumentationFile>bin\$(Configuration)\$(TargetFramework)\ZptSharp.xml</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType></DebugType>
-    <LangVersion>7.3</LangVersion>
     <DocumentationFile>bin\$(Configuration)\$(TargetFramework)\ZptSharp.xml</DocumentationFile>
   </PropertyGroup>
     
@@ -38,6 +36,7 @@
   </ItemGroup>
     
   <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="2.0.0" />
     <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" Version="1.0.0" PrivateAssets="All" Condition="'$(TargetFramework.TrimEnd(`0123456789`))' == 'net'" />
     <PackageReference Include="System.ValueTuple" Version="4.5.0" Condition="'$(TargetFramework.TrimEnd(`45612`))' == 'net'" />
   </ItemGroup>

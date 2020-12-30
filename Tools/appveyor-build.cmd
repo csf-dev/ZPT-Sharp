@@ -13,6 +13,12 @@ dotnet-sonarscanner begin ^
     /d:sonar.cs.nunit.reportsPaths=%APPVEYOR_BUILD_FOLDER%\.TestResults\TestResults.*.xml ^
     /d:sonar.cs.opencover.reportsPaths=%APPVEYOR_BUILD_FOLDER%\.TestResults\coverage.opencover.*.xml ^
     /d:sonar.branch.name=%APPVEYOR_REPO_BRANCH%
+
+REM ---
+REM Build once first, which ensures that SonarScanner sees every project, even those
+REM which aren't referenced by tests.
+REM ---
+dotnet build
     
 REM ---
 REM The tests have to be run separately, otherwise the NUnit test results file
@@ -26,26 +32,29 @@ dotnet test ZptSharp.Tests ^
     /p:CollectCoverage=true ^
     /p:CoverletOutputFormat=\"json,opencover\" ^
     /p:CoverletOutput=\"../.TestResults/\" ^
-    --test-adapter-path:. ^
     --logger:\"nunit;LogFilePath=../.TestResults\TestResults.xml\"
-    
-move .TestResults\TestResults.xml .TestResults\TestResults.ZptSharp.Tests.xml
-move .TestResults\coverage.opencover.xml .TestResults\coverage.opencover.ZptSharp.Tests.xml
-    
-dotnet test ZptSharp.Mvc5.Tests ^
-    /p:CollectCoverage=true ^
-    /p:CoverletOutputFormat=\"json,opencover\" ^
-    /p:CoverletOutput=\"../.TestResults/\" ^
-    --test-adapter-path:. ^
-    --logger:\"nunit;LogFilePath=../.TestResults\TestResults.xml\"
-    
-move .TestResults\TestResults.xml .TestResults\TestResults.ZptSharp.Mvc5.Tests.xml
-move .TestResults\coverage.opencover.xml .TestResults\coverage.opencover.ZptSharp.Mvc5.Tests.xml
     
 REM ---
 REM 'Capture' the exit code from dotnet test for later use
 REM ---
-set exitcode=%errorlevel%
+set generalexitcode=%errorlevel%
+    
+move .TestResults\TestResults.xml .TestResults\TestResults.ZptSharp.Tests.xml
+move .TestResults\coverage.opencover.xml .TestResults\coverage.opencover.ZptSharp.Tests.xml
+    
+dotnet test MvcViewEngines\ZptSharp.Mvc5.Tests ^
+    /p:CollectCoverage=true ^
+    /p:CoverletOutputFormat=\"json,opencover\" ^
+    /p:CoverletOutput=\"../../.TestResults/\" ^
+    --logger:\"nunit;LogFilePath=../../.TestResults\TestResults.xml\"
+      
+REM ---
+REM 'Capture' the exit code from dotnet test for later use
+REM ---
+set mvcexitcode=%errorlevel%
+
+move .TestResults\TestResults.xml .TestResults\TestResults.ZptSharp.Mvc5.Tests.xml
+move .TestResults\coverage.opencover.xml .TestResults\coverage.opencover.ZptSharp.Mvc5.Tests.xml 
 
 dotnet-sonarscanner end ^
     /d:"sonar.login=%SONARCLOUD_SECRET_KEY%"
@@ -55,4 +64,6 @@ REM Upload all files in the test results directory to AppVeyor as artifacts
 REM ---
 FOR %%F IN (.TestResults\*.*) DO appveyor PushArtifact %%F
 
+REM If both exit codes are zero then this is exit 0, otherwise it will raise an error.
+set /A "exitcode=generalexitcode+mvcexitcode"
 exit /B %exitcode%

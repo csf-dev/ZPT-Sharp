@@ -1,6 +1,7 @@
 using System;
 using Microsoft.Extensions.DependencyInjection;
 using ZptSharp.Dom;
+using ZptSharp.Hosting;
 
 namespace ZptSharp
 {
@@ -31,6 +32,19 @@ namespace ZptSharp
             serviceCollection.AddTransient<IGetsXmlReaderSettings, XmlReaderSettingsFactory>();
 
             return serviceCollection;
+        }
+
+        /// <summary>
+        /// Adds both service registrations and a usage-callback so that XML documents may be
+        /// used within a self-contained ZptSharp environment.
+        /// </summary>
+        /// <param name="builder">The self-hosting builder.</param>
+        /// <returns>The self-hosting builder instance, after setting it up.</returns>
+        public static IBuildsSelfHostingEnvironment AddXmlZptDocuments(this IBuildsSelfHostingEnvironment builder)
+        {
+            builder.ServiceRegistrations.Add(s => s.AddXmlZptDocuments());
+            builder.ServiceUsages.Add(p => p.UseXmlZptDocuments());
+            return builder;
         }
 
         /// <summary>
