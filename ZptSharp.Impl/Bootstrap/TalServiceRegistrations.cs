@@ -8,7 +8,7 @@ namespace ZptSharp.Bootstrap
     /// </summary>
     class TalServiceRegistrations
     {
-        internal void RegisterServices(IServiceCollection services)
+        static internal void RegisterServices(IServiceCollection services)
         {
             services.AddTransient<IGetsTalContextProcessor, TalContextProcessorFactory>();
             services.AddTransient<IGetsTalAttributeSpecs, TalAttributeSpecProvider>();

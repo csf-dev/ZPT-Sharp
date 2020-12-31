@@ -21,17 +21,17 @@ namespace ZptSharp
             if (serviceCollection == null)
                 throw new ArgumentNullException(nameof(serviceCollection));
 
-            new BulkRenderingRegistrations().RegisterServices(serviceCollection);
-            new ConfigRegistrations().RegisterServices(serviceCollection);
-            new DomServiceRegistrations().RegisterServices(serviceCollection);
-            new ExpressionServiceRegistrations().RegisterServices(serviceCollection);
-            new MetalServiceRegistrations().RegisterServices(serviceCollection);
-            new NotExpressionsRegistrations().RegisterServices(serviceCollection);
-            new PathExpressionsRegistrations().RegisterServices(serviceCollection);
-            new RenderingRegistrations().RegisterServices(serviceCollection);
-            new SourceAnnotationServiceRegistrations().RegisterServices(serviceCollection);
-            new StringExpressionsRegistrations().RegisterServices(serviceCollection);
-            new TalServiceRegistrations().RegisterServices(serviceCollection);
+            BulkRenderingRegistrations.RegisterServices(serviceCollection);
+            ConfigRegistrations.RegisterServices(serviceCollection);
+            DomServiceRegistrations.RegisterServices(serviceCollection);
+            ExpressionServiceRegistrations.RegisterServices(serviceCollection);
+            MetalServiceRegistrations.RegisterServices(serviceCollection);
+            NotExpressionsRegistrations.RegisterServices(serviceCollection);
+            PathExpressionsRegistrations.RegisterServices(serviceCollection);
+            RenderingRegistrations.RegisterServices(serviceCollection);
+            SourceAnnotationServiceRegistrations.RegisterServices(serviceCollection);
+            StringExpressionsRegistrations.RegisterServices(serviceCollection);
+            TalServiceRegistrations.RegisterServices(serviceCollection);
 
             return serviceCollection;
         }

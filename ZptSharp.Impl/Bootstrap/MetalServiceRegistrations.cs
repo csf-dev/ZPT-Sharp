@@ -8,7 +8,7 @@ namespace ZptSharp.Bootstrap
     /// </summary>
     class MetalServiceRegistrations
     {
-        internal void RegisterServices(IServiceCollection services)
+        static internal void RegisterServices(IServiceCollection services)
         {
             services.AddTransient<IGetsMetalContextProcessor, MetalContextProcessorFactory>();
             services.AddTransient<IExpandsMacro, MacroExpander>();

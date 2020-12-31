@@ -8,7 +8,7 @@ namespace ZptSharp.Bootstrap
     /// </summary>
     class SourceAnnotationServiceRegistrations
     {
-        internal void RegisterServices(IServiceCollection services)
+        static internal void RegisterServices(IServiceCollection services)
         {
             services.AddTransient<IGetsSourceAnnotationContextProcessor, SourceAnnotationContextProcessorFactory>();
             services.AddTransient<IGetsAnnotationForNode, AnnotationProvider>();

@@ -8,7 +8,7 @@ namespace ZptSharp.Bootstrap
     /// </summary>
     class PathExpressionsRegistrations
     {
-        internal void RegisterServices(IServiceCollection services)
+        static internal void RegisterServices(IServiceCollection services)
         {
             services.AddTransient<PathExpressionEvaluator>();
             services.AddTransient<LocalVariablesOnlyPathExpressionEvaluator>();

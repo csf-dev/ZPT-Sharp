@@ -5,7 +5,7 @@ namespace ZptSharp.Bootstrap
 {
     internal class NotExpressionsRegistrations
     {
-        internal void RegisterServices(IServiceCollection services)
+        static internal void RegisterServices(IServiceCollection services)
         {
             services.AddTransient<NotExpressionEvaluator>();
             services.AddTransient<ICoercesValueToBoolean, BooleanValueConverter>();

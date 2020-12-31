@@ -8,7 +8,7 @@ namespace ZptSharp.Bootstrap
     /// </summary>
     class ExpressionServiceRegistrations
     {
-        internal void RegisterServices(IServiceCollection services)
+        static internal void RegisterServices(IServiceCollection services)
         {
             services.AddTransient<IGetsBuiltinContextsProvider, BuiltinContextsProviderFactory>();
             services.AddTransient<IGetsExpressionTypeProvider, ExpressionTypeProviderFactory>();

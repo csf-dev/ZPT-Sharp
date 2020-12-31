@@ -8,7 +8,7 @@ namespace ZptSharp.Bootstrap
     /// </summary>
     class ConfigRegistrations
     {
-        internal void RegisterServices(IServiceCollection services)
+        static internal void RegisterServices(IServiceCollection services)
         {
             services.AddScoped<IStoresCurrentRenderingConfig, ConfigurationServiceLocator>();
             services.AddScoped(s => s.GetRequiredService<IStoresCurrentRenderingConfig>().GetConfiguration());
