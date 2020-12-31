@@ -9,11 +9,13 @@ namespace ZptSharp.BulkRendering
     [TestFixture, Parallelizable]
     public class InputFilesProviderTests
     {
+        char Slash = Path.DirectorySeparatorChar;
+
         [Test,AutoMoqData]
         public async Task GetInputFilesAsync_returns_correct_count_of_results_for_a_single_file_match(InputFilesProvider sut)
         {
             var request = GetBaseRequest();
-            request.IncludedPaths.Add("ADirectory/AnotherFile.txt");
+            request.IncludedPaths.Add($"ADirectory{Slash}AnotherFile.txt");
 
             var result = await sut.GetInputFilesAsync(request);
 
@@ -24,7 +26,7 @@ namespace ZptSharp.BulkRendering
         public async Task GetInputFilesAsync_returns_correct_count_of_results_for_a_directory_search(InputFilesProvider sut)
         {
             var request = GetBaseRequest();
-            request.IncludedPaths.Add("ADirectory/*.txt");
+            request.IncludedPaths.Add($"ADirectory{Slash}*.txt");
 
             var result = await sut.GetInputFilesAsync(request);
 
@@ -35,7 +37,7 @@ namespace ZptSharp.BulkRendering
         public async Task GetInputFilesAsync_returns_correct_count_of_results_for_a_recursive_search(InputFilesProvider sut)
         {
             var request = GetBaseRequest();
-            request.IncludedPaths.Add("**/*.txt");
+            request.IncludedPaths.Add($"**{Slash}*.txt");
 
             var result = await sut.GetInputFilesAsync(request);
 
@@ -46,8 +48,8 @@ namespace ZptSharp.BulkRendering
         public async Task GetInputFilesAsync_returns_correct_count_of_results_for_a_recursive_search_with_an_exclusion(InputFilesProvider sut)
         {
             var request = GetBaseRequest();
-            request.IncludedPaths.Add("**/*.txt");
-            request.ExcludedPaths.Add("**/Another*.*");
+            request.IncludedPaths.Add($"**{Slash}*.txt");
+            request.ExcludedPaths.Add($"**{Slash}Another*.*");
 
             var result = await sut.GetInputFilesAsync(request);
 
@@ -58,8 +60,8 @@ namespace ZptSharp.BulkRendering
         public async Task GetInputFilesAsync_returns_correct_count_of_results_for_a_recursive_search_with_multiple_inputs(InputFilesProvider sut)
         {
             var request = GetBaseRequest();
-            request.IncludedPaths.Add("**/*.txt");
-            request.IncludedPaths.Add("**/*.xml");
+            request.IncludedPaths.Add($"**{Slash}*.txt");
+            request.IncludedPaths.Add($"**{Slash}*.xml");
 
             var result = await sut.GetInputFilesAsync(request);
 
@@ -70,7 +72,7 @@ namespace ZptSharp.BulkRendering
         public async Task GetInputFilesAsync_returns_correct_absolute_and_relative_paths_for_a_single_file_match(InputFilesProvider sut)
         {
             var request = GetBaseRequest();
-            request.IncludedPaths.Add("ADirectory/AnotherFile.txt");
+            request.IncludedPaths.Add($"ADirectory{Slash}AnotherFile.txt");
 
             var result = await sut.GetInputFilesAsync(request);
 
@@ -83,7 +85,7 @@ namespace ZptSharp.BulkRendering
         public async Task GetInputFilesAsync_returns_an_item_with_correct_absolute_and_relative_paths_for_a_recursive_search(InputFilesProvider sut)
         {
             var request = GetBaseRequest();
-            request.IncludedPaths.Add("**/*.txt");
+            request.IncludedPaths.Add($"**{Slash}*.txt");
 
             var result = await sut.GetInputFilesAsync(request);
 
