@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace ZptSharp
@@ -16,6 +17,7 @@ namespace ZptSharp
         /// <returns>A task which indicates when the work is finished.</returns>
         /// <param name="stream">The stream to write.</param>
         /// <param name="writer">The text writer.</param>
-        Task WriteToTextWriterAsync(Stream stream, TextWriter writer);
+        /// <param name="token">An optional cancellation token</param>
+        Task WriteToTextWriterAsync(Stream stream, TextWriter writer, CancellationToken token = default);
     }
 }

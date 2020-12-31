@@ -43,5 +43,12 @@ namespace ZptSharp.Hosting
         /// </summary>
         /// <value>The stream-copying service.</value>
         IWritesStreamToTextWriter StreamCopier { get; }
+
+        /// <summary>
+        /// Gets a service which renders many template files at once and
+        /// saves the output to disk.
+        /// </summary>
+        /// <value>The bulk renderer.</value>
+        BulkRendering.IRendersManyFiles BulkRenderer { get;}
     }
 }

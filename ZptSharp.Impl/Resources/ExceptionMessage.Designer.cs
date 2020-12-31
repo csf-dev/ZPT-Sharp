@@ -232,5 +232,17 @@ namespace ZptSharp.Resources {
                 return ResourceManager.GetString("CouldNotEvaluateContentOrReplaceExpression", resourceCulture);
             }
         }
+        
+        internal static string BulkRenderingMustIncludeAtLeastOnePath {
+            get {
+                return ResourceManager.GetString("BulkRenderingMustIncludeAtLeastOnePath", resourceCulture);
+            }
+        }
+        
+        internal static string BulkRenderingMustHaveOutputPath {
+            get {
+                return ResourceManager.GetString("BulkRenderingMustHaveOutputPath", resourceCulture);
+            }
+        }
     }
 }

@@ -48,6 +48,13 @@ namespace ZptSharp.Hosting
         public IWritesStreamToTextWriter StreamCopier => ServiceProvider.GetRequiredService<IWritesStreamToTextWriter>();
 
         /// <summary>
+        /// Gets a service which renders many template files at once and
+        /// saves the output to disk.
+        /// </summary>
+        /// <value>The bulk renderer.</value>
+        public BulkRendering.IRendersManyFiles BulkRenderer => ServiceProvider.GetRequiredService<BulkRendering.IRendersManyFiles>();
+
+        /// <summary>
         /// Dispose of the current instance and release its resources.
         /// </summary>
         public void Dispose()

@@ -21,6 +21,7 @@ namespace ZptSharp
             if (serviceCollection == null)
                 throw new ArgumentNullException(nameof(serviceCollection));
 
+            new BulkRenderingRegistrations().RegisterServices(serviceCollection);
             new ConfigRegistrations().RegisterServices(serviceCollection);
             new DomServiceRegistrations().RegisterServices(serviceCollection);
             new ExpressionServiceRegistrations().RegisterServices(serviceCollection);
