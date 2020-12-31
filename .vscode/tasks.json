@@ -66,6 +66,17 @@
             ],
             "group": "none",
             "problemMatcher": []
+        },
+        {
+            "label": "run MVC Core Example app",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "run",
+                "--project=Examples/ZptSharp.Examples.MvcCore/ZptSharp.Examples.MvcCore.csproj"
+            ],
+            "group": "none",
+            "problemMatcher": []
         }
     ]
 }
