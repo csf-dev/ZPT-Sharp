@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace ZptSharp
@@ -11,7 +12,8 @@ namespace ZptSharp
     /// </summary>
     public class StreamToTextWriterCopier : IWritesStreamToTextWriter
     {
-        const int defaultBufferSize = 1024;
+        // This is the same buffer size as used here https://docs.microsoft.com/en-us/dotnet/api/system.io.stream.copytoasync?view=net-5.0
+        const int defaultBufferSize = 81920;
 
         readonly int bufferSize;
 
@@ -22,37 +24,39 @@ namespace ZptSharp
         /// <returns>A task which indicates when the work is finished.</returns>
         /// <param name="stream">The stream to write.</param>
         /// <param name="writer">The text writer.</param>
-        public Task WriteToTextWriterAsync(Stream stream, TextWriter writer)
+        /// <param name="token">An optional cancellation token</param>
+        public Task WriteToTextWriterAsync(Stream stream, TextWriter writer, CancellationToken token = default)
         {
             if (stream == null)
                 throw new ArgumentNullException(nameof(stream));
             if (writer == null)
                 throw new ArgumentNullException(nameof(writer));
 
-            return WriteToTextWriterPrivateAsync(stream, writer);
+            return WriteToTextWriterPrivateAsync(stream, writer, token);
         }
 
-        async Task WriteToTextWriterPrivateAsync(Stream stream, TextWriter writer)
+        async Task WriteToTextWriterPrivateAsync(Stream stream, TextWriter writer, CancellationToken token)
         {
             if (writer is StreamWriter streamWriter)
-                await CopyToStreamWriterAsync(stream, streamWriter).ConfigureAwait(false);
+                await CopyToStreamWriterAsync(stream, streamWriter, token).ConfigureAwait(false);
             else
-                await CopyToTextWriterAsync(stream, writer).ConfigureAwait(false);
+                await CopyToTextWriterAsync(stream, writer, token).ConfigureAwait(false);
         }
 
-        static async Task CopyToStreamWriterAsync(Stream stream, StreamWriter streamWriter)
+        static async Task CopyToStreamWriterAsync(Stream stream, StreamWriter streamWriter, CancellationToken token)
         {
             await streamWriter.FlushAsync().ConfigureAwait(false);
-            await stream.CopyToAsync(streamWriter.BaseStream).ConfigureAwait(false);
+            await stream.CopyToAsync(streamWriter.BaseStream, defaultBufferSize, token).ConfigureAwait(false);
             await streamWriter.FlushAsync().ConfigureAwait(false);
         }
 
-        async Task CopyToTextWriterAsync(Stream stream, TextWriter textWriter)
+        async Task CopyToTextWriterAsync(Stream stream, TextWriter textWriter, CancellationToken token)
         {
             using (var reader = new StreamReader(stream))
             {
                 for (var buffer = new char[bufferSize]; !reader.EndOfStream;)
                 {
+                    token.ThrowIfCancellationRequested();
                     var charactersRead = await reader.ReadAsync(buffer, 0, bufferSize).ConfigureAwait(false);
                     await textWriter.WriteAsync(buffer, 0, charactersRead).ConfigureAwait(false);
                 }

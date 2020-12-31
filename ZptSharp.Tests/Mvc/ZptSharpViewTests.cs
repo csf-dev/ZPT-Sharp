@@ -38,13 +38,13 @@ namespace ZptSharp.Mvc
                 .Setup(x => x.RenderAsync(It.IsAny<string>(), It.IsAny<object>(), modifiedConfig, CancellationToken.None))
                 .Returns(() => Task.FromResult(stream));
             Mock.Get(streamCopier)
-                .Setup(x => x.WriteToTextWriterAsync(stream, viewContext.Writer))
+                .Setup(x => x.WriteToTextWriterAsync(stream, viewContext.Writer, CancellationToken.None))
                 .Returns(() => Task.CompletedTask);
 
             await sut.RenderAsync(viewContext);
 
             Mock.Get(streamCopier)
-                .Verify(x => x.WriteToTextWriterAsync(stream, viewContext.Writer), Times.Once);
+                .Verify(x => x.WriteToTextWriterAsync(stream, viewContext.Writer, CancellationToken.None), Times.Once);
         }
 
         [Test, AutoMoqData]
@@ -72,13 +72,13 @@ namespace ZptSharp.Mvc
                 .Setup(x => x.GetErrorStreamAsync(It.IsAny<Exception>()))
                 .Returns(() => Task.FromResult(stream));
             Mock.Get(streamCopier)
-                .Setup(x => x.WriteToTextWriterAsync(stream, viewContext.Writer))
+                .Setup(x => x.WriteToTextWriterAsync(stream, viewContext.Writer, CancellationToken.None))
                 .Returns(() => Task.CompletedTask);
 
             await sut.RenderAsync(viewContext);
 
             Mock.Get(streamCopier)
-                .Verify(x => x.WriteToTextWriterAsync(stream, viewContext.Writer), Times.Once);
+                .Verify(x => x.WriteToTextWriterAsync(stream, viewContext.Writer, CancellationToken.None), Times.Once);
         }
     }
 }

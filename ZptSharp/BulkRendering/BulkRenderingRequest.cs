@@ -30,8 +30,9 @@ namespace ZptSharp.BulkRendering
         /// </summary>
         /// <remarks>
         /// <para>
-        /// If left blank, then the process will attempt to infer a relative root path by finding the
-        /// 'deepest' directory path which is common to every one of the input files.
+        /// If left null or empty, then the current working directory will be used as the root path.
+        /// Note that any input files which are not descendents of the root path will not
+        /// be included in the rendering operation.
         /// </para>
         /// </remarks>
         /// <value>The root path for the input files.</value>
@@ -47,7 +48,7 @@ namespace ZptSharp.BulkRendering
         /// Gets or sets the rendering configuration to be used when rendering the templates.
         /// </summary>
         /// <value>The rendering config.</value>
-        public RenderingConfig RenderingConfig { get; set; }
+        public RenderingConfig RenderingConfig { get; set; } = RenderingConfig.Default;
         
         /// <summary>
         /// Gets the directory path to where the files shall be output once they are rendered.

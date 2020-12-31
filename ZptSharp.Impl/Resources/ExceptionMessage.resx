@@ -135,4 +135,12 @@ Element:{0}</value>
    Element:{0}
 Expression:{1}</value>
     </data>
+    <data name="BulkRenderingMustIncludeAtLeastOnePath" xml:space="preserve">
+        <value>A bulk-rendering operation must have at least one 'included' path where input files will be found.
+Use {0} to include the paths/path-patterns for input files.</value>
+    </data>
+    <data name="BulkRenderingMustHaveOutputPath" xml:space="preserve">
+        <value>A bulk-rendering operation must have an 'output' path where the results will be saved.
+Use {0} to denote the output path.</value>
+    </data>
 </root>
