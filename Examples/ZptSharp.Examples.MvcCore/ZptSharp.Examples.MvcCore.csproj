@@ -5,4 +5,10 @@
     <RootNamespace>ZptSharp.Examples</RootNamespace>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\ZptSharp\ZptSharp.csproj" />
+    <ProjectReference Include="..\..\ZptSharp.Impl\ZptSharp.Impl.csproj" />
+    <ProjectReference Include="..\..\MvcViewEngines\ZptSharp.MvcCore\ZptSharp.MvcCore.csproj" />
+    <ProjectReference Include="..\..\DocumentProviders\ZptSharp.HtmlAgilityPack\ZptSharp.HtmlAgilityPack.csproj" />
+  </ItemGroup>
 </Project>

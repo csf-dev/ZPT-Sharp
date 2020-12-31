@@ -1,0 +1,9 @@
+﻿<html>
+<head>
+<title>ZptSharp 'Hello world' example for ASP.NET Core MVC</title>
+</head>
+<body>
+<h1>Example ASP.NET Core MVC web app</h1>
+<p tal:content="here/Message">The greeting message appears here.</p>
+</body>
+</html>

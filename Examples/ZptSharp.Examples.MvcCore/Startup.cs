@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using ZptSharp.Mvc;
 
 namespace ZptSharp.Examples
 {
@@ -23,7 +24,15 @@ namespace ZptSharp.Examples
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllersWithViews();
+            var viewEngine = new ZptSharpViewEngine(builder => {
+                builder.AddStandardZptExpressions();
+                builder.AddHapZptDocuments();
+            });
+
+            services.AddControllersWithViews()
+                .AddViewOptions(opts => {
+                    opts.ViewEngines.Insert(0, viewEngine);
+                });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
