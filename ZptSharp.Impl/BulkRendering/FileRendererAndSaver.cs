@@ -44,12 +44,12 @@ namespace ZptSharp.BulkRendering
             var outputPath = Path.Combine(request.OutputPath, inputFile.RelativePath);
             EnsureOutputPathExists(outputPath);
             using(var writer = new StreamWriter(outputPath))
-                await streamCopier.WriteToTextWriterAsync(outputStream, writer, token);
+                await streamCopier.WriteToTextWriterAsync(outputStream, writer, token).ConfigureAwait(false);
 
             return BulkRenderingFileResult.Success(inputFile.AbsolutePath, outputPath);
         }
 
-        void EnsureOutputPathExists(string outputPath)
+        static void EnsureOutputPathExists(string outputPath)
         {
             var fileInfo = new FileInfo(outputPath);
             var dir = fileInfo.Directory;

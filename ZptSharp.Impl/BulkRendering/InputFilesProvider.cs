@@ -35,14 +35,14 @@ namespace ZptSharp.BulkRendering
             return Task.FromResult((IEnumerable<InputFile>) output);
         }
 
-        InputFile MapToInputFile(FilePatternMatch match, BulkRenderingRequest request)
+        static InputFile MapToInputFile(FilePatternMatch match, BulkRenderingRequest request)
         {
             var path = match.Path.Replace('/', Path.DirectorySeparatorChar);
             var absolutePath = Path.Combine(request.InputRootPath, path);
             return new InputFile(absolutePath, path);
         }
 
-        DirectoryInfoBase GetRootDirectory(BulkRenderingRequest request)
+        static DirectoryInfoBase GetRootDirectory(BulkRenderingRequest request)
             => new DirectoryInfoWrapper(new DirectoryInfo(request.InputRootPath));
     }
 }
