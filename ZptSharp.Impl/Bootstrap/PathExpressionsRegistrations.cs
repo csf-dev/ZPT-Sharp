@@ -6,7 +6,7 @@ namespace ZptSharp.Bootstrap
     /// <summary>
     /// Dependency injection registrations for types in the Path expressions namespace.
     /// </summary>
-    class PathExpressionsRegistrations
+    static class PathExpressionsRegistrations
     {
         static internal void RegisterServices(IServiceCollection services)
         {

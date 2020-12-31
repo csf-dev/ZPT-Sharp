@@ -6,7 +6,7 @@ namespace ZptSharp.Bootstrap
     /// <summary>
     /// Dependency injection registrations for types in the DOM namespace.
     /// </summary>
-    class DomServiceRegistrations
+    static class DomServiceRegistrations
     {
         static internal void RegisterServices(IServiceCollection services)
         {

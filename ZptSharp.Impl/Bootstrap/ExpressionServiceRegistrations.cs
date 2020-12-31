@@ -6,7 +6,7 @@ namespace ZptSharp.Bootstrap
     /// <summary>
     /// Dependency injection registrations for types in the Expressions namespace.
     /// </summary>
-    class ExpressionServiceRegistrations
+    static class ExpressionServiceRegistrations
     {
         static internal void RegisterServices(IServiceCollection services)
         {

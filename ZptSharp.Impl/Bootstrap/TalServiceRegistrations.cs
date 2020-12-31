@@ -6,7 +6,7 @@ namespace ZptSharp.Bootstrap
     /// <summary>
     /// Dependency injection registrations for types in the TAL namespace.
     /// </summary>
-    class TalServiceRegistrations
+    static class TalServiceRegistrations
     {
         static internal void RegisterServices(IServiceCollection services)
         {

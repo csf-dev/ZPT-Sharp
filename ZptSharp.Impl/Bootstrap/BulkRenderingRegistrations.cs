@@ -6,7 +6,7 @@ namespace ZptSharp.Bootstrap
     /// <summary>
     /// Dependency injection registrations for types in the BulkRendering namespace.
     /// </summary>
-    class BulkRenderingRegistrations
+    static class BulkRenderingRegistrations
     {
         static internal void RegisterServices(IServiceCollection services)
         {

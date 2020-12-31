@@ -6,7 +6,7 @@ namespace ZptSharp.Bootstrap
     /// <summary>
     /// Dependency injection registrations for types in the SourceAnnotation namespace.
     /// </summary>
-    class SourceAnnotationServiceRegistrations
+    static class SourceAnnotationServiceRegistrations
     {
         static internal void RegisterServices(IServiceCollection services)
         {

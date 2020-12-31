@@ -6,7 +6,7 @@ namespace ZptSharp.Bootstrap
     /// <summary>
     /// Dependency injection registrations for types in the METAL namespace.
     /// </summary>
-    class MetalServiceRegistrations
+    static class MetalServiceRegistrations
     {
         static internal void RegisterServices(IServiceCollection services)
         {

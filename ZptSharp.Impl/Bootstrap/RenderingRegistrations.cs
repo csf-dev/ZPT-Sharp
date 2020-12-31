@@ -6,7 +6,7 @@ namespace ZptSharp.Bootstrap
     /// <summary>
     /// Dependency injection registrations for types in the Rendering namespace.
     /// </summary>
-    class RenderingRegistrations
+    static class RenderingRegistrations
     {
         static internal void RegisterServices(IServiceCollection services)
         {

@@ -3,7 +3,7 @@ using ZptSharp.Expressions.NotExpressions;
 
 namespace ZptSharp.Bootstrap
 {
-    internal class NotExpressionsRegistrations
+    static class NotExpressionsRegistrations
     {
         static internal void RegisterServices(IServiceCollection services)
         {

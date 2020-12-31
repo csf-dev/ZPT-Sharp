@@ -3,7 +3,7 @@ using ZptSharp.Expressions.StringExpressions;
 
 namespace ZptSharp.Bootstrap
 {
-    class StringExpressionsRegistrations
+    static class StringExpressionsRegistrations
     {
         static internal void RegisterServices(IServiceCollection services)
         {

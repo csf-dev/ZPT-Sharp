@@ -6,7 +6,7 @@ namespace ZptSharp.Bootstrap
     /// <summary>
     /// Dependency injection registrations for types in the Config namespace.
     /// </summary>
-    class ConfigRegistrations
+    static class ConfigRegistrations
     {
         static internal void RegisterServices(IServiceCollection services)
         {
