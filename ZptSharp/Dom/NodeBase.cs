@@ -20,7 +20,7 @@ namespace ZptSharp.Dom
         /// </summary>
         protected readonly NodeSourceInfo Source;
 
-        INode Parent;
+        INode parent;
 
         /// <summary>
         /// A field for whether or not the node is imported.
@@ -67,8 +67,8 @@ namespace ZptSharp.Dom
         /// <value>The parent node.</value>
         public virtual INode ParentNode
         {
-            get => Parent;
-            set => Parent = value;
+            get => parent;
+            set => parent = value;
         }
 
         /// <summary>
@@ -146,7 +146,7 @@ namespace ZptSharp.Dom
                               NodeSourceInfo sourceInfo = null)
         {
             this.Doc = document ?? throw new ArgumentNullException(nameof(document));
-            this.Parent = parent;
+            this.parent = parent;
             this.Source = sourceInfo ?? new NodeSourceInfo(new UnknownSourceInfo());
         }
     }
