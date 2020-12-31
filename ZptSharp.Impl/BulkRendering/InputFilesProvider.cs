@@ -31,8 +31,15 @@ namespace ZptSharp.BulkRendering
             matcher.AddExcludePatterns(request.ExcludedPaths ?? Enumerable.Empty<string>());
             var result = matcher.Execute(GetRootDirectory(request));
 
-            var output = result.Files.Select(x => new InputFile(Path.Combine(request.InputRootPath, x.Path), x.Path)).ToList();
+            var output = result.Files.Select(x => MapToInputFile(x, request)).ToList();
             return Task.FromResult((IEnumerable<InputFile>) output);
+        }
+
+        InputFile MapToInputFile(FilePatternMatch match, BulkRenderingRequest request)
+        {
+            var path = match.Path.Replace('/', Path.DirectorySeparatorChar);
+            var absolutePath = Path.Combine(request.InputRootPath, path);
+            return new InputFile(absolutePath, path);
         }
 
         DirectoryInfoBase GetRootDirectory(BulkRenderingRequest request)
