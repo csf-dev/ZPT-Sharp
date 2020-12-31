@@ -10,11 +10,12 @@ This directory contains the following ViewEngine implementations:
 [ASP.NET Core MVC]: https://www.nuget.org/packages/Microsoft.AspNetCore.Mvc.Core/2.0.0
 
 ## How the source files are organised
-The C# source files for these two projects are *shared*.
+Most of the C# source files for these two projects are *shared*.
 Those files are held within the [`CommonSource`](CommonSource/) directory.
-They use *compiler flags*  (aka preprocessor directives) used to deal with the differences between frameworks.
+Some of those files use *compiler flags*  (aka preprocessor directives) used to deal with the differences between frameworks.
+The two flags used are named `MVC5` and `MVCCORE`.
 
-These source files are *linked* to the two projects for MVC5 & MVC Core.
+These shared source files are then *linked* to the two projects for MVC5 & MVC Core.
 
 ## Tests for MVC5
 The ZptSharp.Mvc5 project has its own unit tests assembly.
