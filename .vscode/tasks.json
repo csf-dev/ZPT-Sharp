@@ -16,12 +16,11 @@
             "problemMatcher": "$msCompile"
         },
         {
-            "label": "test (general)",
+            "label": "run tests (all)",
             "command": "dotnet",
             "type": "process",
             "args": [
                 "test",
-                "ZptSharp.Tests",
                 "/property:GenerateFullPaths=true"
             ],
             "group": {
@@ -31,26 +30,27 @@
             "problemMatcher": "$msCompile"
         },
         {
-            "label": "test (MVC5)",
+            "label": "run tests (.NET Standard only)",
             "command": "dotnet",
             "type": "process",
             "args": [
                 "test",
-                "MvcViewEngines\\ZptSharp.Mvc5.Tests",
-                "/property:GenerateFullPaths=true"
+                "ZptSharp.Tests",
+                "/property:GenerateFullPaths=true",
+                "--settings=Tools\\Linux.runsettings"
             ],
             "group": "test",
             "problemMatcher": "$msCompile"
         },
         {
-            "label": "watched tests (general)",
+            "label": "run tests (.NET Framework/MVC5 only)",
             "command": "dotnet",
             "type": "process",
             "args": [
-                "watch",
                 "test",
-                "ZptSharp.Tests",
-                "/property:GenerateFullPaths=true"
+                "MvcViewEngines\\ZptSharp.Mvc5.Tests",
+                "/property:GenerateFullPaths=true",
+                "--settings=Tools\\Linux.runsettings"
             ],
             "group": "test",
             "problemMatcher": "$msCompile"

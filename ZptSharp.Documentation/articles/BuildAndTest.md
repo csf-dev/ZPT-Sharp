@@ -2,7 +2,7 @@
 The build and test process for ZptSharp 2.0 has been simplified compared to 1.x.
 
 ## Dependencies
-The only dependency to build & test ZptSharp from source is [a **.NET Core SDK** for .NET Core version 3.1] or higher. All further build & test dependencies will be fetched by dotnet.
+The only dependency to build ZptSharp from source is [a **.NET Core SDK** for .NET Core version 3.1] or higher. All further build dependencies will be fetched by dotnet.
 
 [a **.NET Core SDK** for .NET Core version 3.1]: https://dotnet.microsoft.com/download/dotnet-core/3.1
 
@@ -10,21 +10,20 @@ The only dependency to build & test ZptSharp from source is [a **.NET Core SDK**
 The solution builds using `dotnet build`. Optionally, add `-c Release` for a release-configuration build.
 
 ## Running tests
-The tests are run using `dotnet test`; this is sufficient to get pass/fail information. If you would like further diagnostic output from the tests then use whichever of the following is appropriate to your environment.
+### Extra dependency
+In order to run tests, you will additionally need either [.NET Framework 4.7.2] or an equivalent [Mono Framework] version installed.
+This is because a subset of the tests cannot run in a .NET Core environment (see below).
 
-```
-dotnet test -s Tools/Linux.runsettings
-dotnet test -s Tools\Windows.runsettings
-```
+[.NET Framework 4.7.2]: https://dotnet.microsoft.com/download/dotnet-framework/net472
+[Mono Framework]: https://www.mono-project.com/
 
-*Mac users should also use the runsettings file for Linux.*
+### In short, use `dotnet test`
+The tests are run using `dotnet test`; this alone is sufficient to get pass/fail information.
+You only need consider [more advanced options] if you would like detailed logs and/or diagnostic information.
 
-These runsettings files configure the test run so that detailed diagnostic output is written to a `.TestResults` directory in the root of the solution:
+[more advanced options]: FurtherTestingInfo.md
 
-* An XML results file
-* 'Expected' and 'Actual' renderings from any failed integration tests (where applicable)
-
-### Integration tests
+## Integration tests
 The integration tests are an excellent source of information for how ZPT works. They are included in any normal test run. The integration test classes set up a model and application state, then use ZptSharp to render that using a template. This is then compared with an expected output for the test. The test passes is the actual & expected renderings match.
 
 The source for the integration tests is found at:
