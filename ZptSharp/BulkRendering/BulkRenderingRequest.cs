@@ -55,5 +55,12 @@ namespace ZptSharp.BulkRendering
         /// </summary>
         /// <value>The output path.</value>
         public string OutputPath { get; set; }
+
+        /// <summary>
+        /// If set, then output files will have their file extension replaced
+        /// with this extension, instead of their previous extension.
+        /// </summary>
+        /// <value>The output file extension.</value>
+        public string OutputFileExtension { get; set; }
     }
 }
