@@ -38,13 +38,20 @@ namespace ZptSharp
             return new BulkRenderingRequest
             {
                 InputRootPath = args.RootPath.Single(),
-                IncludedPaths = SeparateSeparatedValues(args.CommaSeparatedIncludePatterns),
+                IncludedPaths = GetIncludedPaths(args),
                 ExcludedPaths = SeparateSeparatedValues(args.CommaSeparatedExcludePatterns),
                 OutputFileExtension = args.OutputFileExtension,
                 OutputPath = args.OutputPath ?? Directory.GetCurrentDirectory(),
                 RenderingConfig = GetRenderingConfig(args),
-                Model = await GetModel(args, cancellationToken),
+                Model = await GetModel(args, cancellationToken).ConfigureAwait(false),
             };
+        }
+
+        static IList<string> GetIncludedPaths(CliArguments args)
+        {
+            var paths = SeparateSeparatedValues(args.CommaSeparatedIncludePatterns);
+            if(paths.Any()) return paths;
+            return new [] { "*.*" };
         }
 
         static IList<string> SeparateSeparatedValues(string source, char separator = ',')
@@ -92,7 +99,7 @@ namespace ZptSharp
         async Task<object> GetModel(CliArguments args, CancellationToken cancellationToken)
         {
             if(String.IsNullOrEmpty(args.PathToModelJson)) return null;
-            return await modelLoader.LoadModelAsync(args.PathToModelJson, cancellationToken);
+            return await modelLoader.LoadModelAsync(args.PathToModelJson, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>

@@ -17,52 +17,35 @@ namespace ZptSharp
         readonly IGetsBulkRenderingRequest requestFactory;
         readonly IConfiguresServices serviceConfigurator;
         readonly CliArguments args;
-
-        CancellationTokenSource cancellationSource;
-        Task completed;
+        readonly IHostApplicationLifetime appLifetime;
 
         /// <summary>
         /// Starts the application asynchronously.
         /// </summary>
         /// <param name="cancellationToken">A cancellation token.</param>
         /// <returns>A task which completes once the app has done its work.</returns>
-        public Task StartAsync(CancellationToken cancellationToken)
+        public async Task StartAsync(CancellationToken cancellationToken)
         {
-            completed = StartPrivateAsync(cancellationToken);
-            return completed;
-        }
-
-        async Task StartPrivateAsync(CancellationToken cancellationToken)
-        {
-            cancellationSource = new CancellationTokenSource();
-            cancellationToken.Register(() => cancellationSource.Cancel());
-
             serviceConfigurator.ConfigureServices(args);
-            var request = await requestFactory.GetRequestAsync(args, cancellationSource.Token);
 
             try
             {
-                await renderer.RenderAllAsync(request, cancellationSource.Token);
+                var request = await requestFactory.GetRequestAsync(args, cancellationToken)
+                    .ConfigureAwait(false);
+                await renderer.RenderAllAsync(request, cancellationToken)
+                    .ConfigureAwait(false);
             }
             catch(OperationCanceledException) {}
+
+            appLifetime.StopApplication();
         }
 
         /// <summary>
-        /// Stops the application.
+        /// Handles graceful-shutdown for the application.
         /// </summary>
         /// <param name="cancellationToken">A cancellation token.</param>
         /// <returns>A task which completes immediately.</returns>
-        public Task StopAsync(CancellationToken cancellationToken)
-        {
-            cancellationSource?.Cancel();
-            return new Task(() => WaitForCompletion(cancellationToken));
-        }
-
-        void WaitForCompletion(CancellationToken cancellationToken)
-        {
-            if(completed == null) return;
-            completed.Wait(cancellationToken);
-        }
+        public Task StopAsync(CancellationToken cancellationToken) => Task.CompletedTask;
 
         /// <summary>
         /// Initializes a new instance of <see cref="Application" />
@@ -71,15 +54,18 @@ namespace ZptSharp
         /// <param name="requestFactory">The request factory.</param>
         /// <param name="serviceConfigurator">The service configurator.</param>
         /// <param name="args">The command-line args.</param>
+        /// <param name="appLifetime">The app lifetime.</param>
         public Application(IRendersManyFiles renderer,
                            IGetsBulkRenderingRequest requestFactory,
                            IConfiguresServices serviceConfigurator,
-                           CliArguments args)
+                           CliArguments args,
+                           IHostApplicationLifetime appLifetime)
         {
             this.renderer = renderer ?? throw new System.ArgumentNullException(nameof(renderer));
             this.requestFactory = requestFactory ?? throw new System.ArgumentNullException(nameof(requestFactory));
             this.serviceConfigurator = serviceConfigurator ?? throw new System.ArgumentNullException(nameof(serviceConfigurator));
             this.args = args ?? throw new System.ArgumentNullException(nameof(args));
+            this.appLifetime = appLifetime ?? throw new ArgumentNullException(nameof(appLifetime));
         }
     }
 }

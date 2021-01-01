@@ -21,7 +21,7 @@ namespace ZptSharp
         {
             using(var streamReader = new StreamReader(path))
             using(var jsonReader = new JsonTextReader(streamReader))
-                return await JObject.LoadAsync(jsonReader, token);
+                return await JObject.LoadAsync(jsonReader, token).ConfigureAwait(false);
         }
     }
 }
