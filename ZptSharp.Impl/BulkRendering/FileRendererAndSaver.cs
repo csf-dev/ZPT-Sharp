@@ -1,6 +1,9 @@
 using System.Threading;
 using System.Threading.Tasks;
 using System.IO;
+using System;
+using CSF;
+using System.Linq;
 
 namespace ZptSharp.BulkRendering
 {
@@ -41,7 +44,7 @@ namespace ZptSharp.BulkRendering
                                                               token)
                 .ConfigureAwait(false);
 
-            var outputPath = Path.Combine(request.OutputPath, inputFile.RelativePath);
+            var outputPath = GetOutputPath(request, inputFile);
             EnsureOutputPathExists(outputPath);
             using(var writer = new StreamWriter(outputPath))
                 await streamCopier.WriteToTextWriterAsync(outputStream, writer, token).ConfigureAwait(false);
@@ -54,6 +57,23 @@ namespace ZptSharp.BulkRendering
             var fileInfo = new FileInfo(outputPath);
             var dir = fileInfo.Directory;
             Directory.CreateDirectory(dir.FullName);
+        }
+
+        static string GetOutputPath(BulkRenderingRequest request, InputFile inputFile)
+        {
+            var outputPath = Path.Combine(request.OutputPath, inputFile.RelativePath);
+            if(String.IsNullOrEmpty(request.OutputFileExtension)) return outputPath;
+
+            var file = new FileInfo(outputPath);
+            var newExtension = request.OutputFileExtension.TrimStart('.');
+
+            var extensionChanger = FilenameExtensionBuilder.Parse(file.Name);
+            if(!extensionChanger.Extensions.Any())
+                extensionChanger.Extensions.Add(newExtension);
+            else
+                extensionChanger.Extensions[extensionChanger.Extensions.Count - 1] = newExtension;
+            
+            return Path.Combine(file.Directory.FullName, extensionChanger.ToString());
         }
 
         /// <summary>

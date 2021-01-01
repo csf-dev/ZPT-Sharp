@@ -1,5 +1,7 @@
 using System;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Logging.Abstractions;
 using ZptSharp.Hosting;
 
 namespace ZptSharp
@@ -47,7 +49,7 @@ namespace ZptSharp
 
             var serviceCollection = new ServiceCollection();
             serviceCollection.AddZptSharp();
-            serviceCollection.AddLogging();
+            serviceCollection.AddLogging(b => b.AddProvider(NullLoggerProvider.Instance));
 
             foreach (var callback in helper.ServiceRegistrations)
                 callback(serviceCollection);

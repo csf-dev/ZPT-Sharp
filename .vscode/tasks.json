@@ -16,6 +16,53 @@
             "problemMatcher": "$msCompile"
         },
         {
+            "label": "pack (debug)",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "pack",
+                "-c",
+                "Debug",
+                "/property:GenerateFullPaths=true"
+            ],
+            "group": "build",
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "pack (release)",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "pack",
+                "-c",
+                "Release",
+                "/property:GenerateFullPaths=true"
+            ],
+            "group": "build",
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "dotnet clean",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "clean"
+            ],
+            "group": "none",
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "git clean",
+            "command": "git",
+            "type": "process",
+            "args": [
+                "clean",
+                "-fdx"
+            ],
+            "group": "none",
+            "problemMatcher": []
+        },
+        {
             "label": "run tests (all)",
             "command": "dotnet",
             "type": "process",
@@ -38,6 +85,20 @@
                 "ZptSharp.Tests",
                 "/property:GenerateFullPaths=true",
                 "--settings=Tools\\Linux.runsettings"
+            ],
+            "group": "test",
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "watched tests (.NET Standard only)",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "watch",
+                "--project=ZptSharp.Tests",
+                "test",
+                "/property:GenerateFullPaths=true",
+                "--settings=..\\Tools\\Linux.runsettings"
             ],
             "group": "test",
             "problemMatcher": "$msCompile"

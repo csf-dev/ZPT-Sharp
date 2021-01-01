@@ -2,6 +2,7 @@ using System.IO;
 using System.Threading.Tasks;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Logging.Console;
 using ZptSharp.Config;
 using ZptSharp.Util;
 
@@ -55,9 +56,9 @@ namespace ZptSharp.IntegrationTests
                     serviceCollection
                         .AddLogging(b => {
                             b.ClearProviders();
-                            b.AddConsole(c => {
-                                c.DisableColors = true;
-                                c.IncludeScopes = true;
+                            b.AddSimpleConsole(o => {
+                                o.ColorBehavior = LoggerColorBehavior.Disabled;
+                                o.IncludeScopes = true;
                             });
                             b.SetMinimumLevel(logLevel);
                         });
