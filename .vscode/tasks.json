@@ -42,6 +42,27 @@
             "problemMatcher": "$msCompile"
         },
         {
+            "label": "dotnet clean",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "clean"
+            ],
+            "group": "none",
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "git clean",
+            "command": "git",
+            "type": "process",
+            "args": [
+                "clean",
+                "-fdx"
+            ],
+            "group": "none",
+            "problemMatcher": []
+        },
+        {
             "label": "run tests (all)",
             "command": "dotnet",
             "type": "process",
