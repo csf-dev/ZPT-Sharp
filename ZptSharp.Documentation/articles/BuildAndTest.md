@@ -12,7 +12,7 @@ The solution builds using `dotnet build`. Optionally, add `-c Release` for a rel
 ## Running tests
 ### Extra dependency
 In order to run tests, you will additionally need either [.NET Framework 4.7.2] or an equivalent [Mono Framework] version installed.
-This is because a subset of the tests cannot run in a .NET Core environment (see below).
+This is because [a subset of the tests cannot run in a .NET Core environment].
 
 [.NET Framework 4.7.2]: https://dotnet.microsoft.com/download/dotnet-framework/net472
 [Mono Framework]: https://www.mono-project.com/
@@ -22,9 +22,10 @@ The tests are run using `dotnet test`; this alone is sufficient to get pass/fail
 You only need consider [more advanced options] if you would like detailed logs and/or diagnostic information.
 
 [more advanced options]: FurtherTestingInfo.md
+[a subset of the tests cannot run in a .NET Core environment]: FurtherTestingInfo.md
 
 ## Integration tests
-The integration tests are an excellent source of information for how ZPT works. They are included in any normal test run. The integration test classes set up a model and application state, then use ZptSharp to render that using a template. This is then compared with an expected output for the test. The test passes is the actual & expected renderings match.
+The integration tests are an excellent source of information for how ZPT works. They are included in any normal test run. The integration test classes set up a model and application state, then use ZptSharp to render that using a template. This is then compared with an expected output for the test. The test passes if the actual & expected renderings match.
 
 The source for the integration tests is found at:
 

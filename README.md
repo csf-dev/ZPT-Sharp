@@ -1,9 +1,10 @@
-**ZptSharp** *(formerly ZPT-Sharp)* is [a widely compatible .NET library], for MVC-style binding to
-HTML and/or XML document templates. It is *attribute-based* and avoids the
-need to add 'alien markup' which make template files hard to read/understand
-and impossible for some tools to work-upon.
+**ZptSharp** *(formerly ZPT-Sharp)* is [a library for .NET] which renders HTML and/or XML documents from model data.
+It is ideally suited for use in MVC applications, as the **View** technology.
 
-[a widely compatible .NET library]: ZptSharp.Documentation/articles/Compatibility.md
+ZPT is an *attribute-based* syntax; as such it avoids the need to add 'alien markup' to your source files.
+ZPT source files remain syntactically valid HTML/XML and may even be opened/previewed locally in web browsers, offline from their applications.
+
+[a library for .NET]: ZptSharp.Documentation/articles/Compatibility.md
 
 ## Continuous integration status
 In this repository the **master** branch represents the latest development code
