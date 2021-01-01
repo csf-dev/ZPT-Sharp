@@ -43,6 +43,20 @@
             "problemMatcher": "$msCompile"
         },
         {
+            "label": "watched tests (.NET Standard only)",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "watch",
+                "--project=ZptSharp.Tests",
+                "test",
+                "/property:GenerateFullPaths=true",
+                "--settings=..\\Tools\\Linux.runsettings"
+            ],
+            "group": "test",
+            "problemMatcher": "$msCompile"
+        },
+        {
             "label": "run tests (.NET Framework/MVC5 only)",
             "command": "dotnet",
             "type": "process",
