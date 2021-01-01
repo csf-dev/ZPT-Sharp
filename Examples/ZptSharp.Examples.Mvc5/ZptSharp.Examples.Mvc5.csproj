@@ -139,6 +139,9 @@
   <ItemGroup>
     <None Include="Views\Home\Index.pt" />
   </ItemGroup>
+  <Target Name="Pack">
+    <Warning Text="This project is not packable, nor should it be." />
+  </Target>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>
     <MonoDevelop>

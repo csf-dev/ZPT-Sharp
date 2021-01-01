@@ -5,6 +5,9 @@
     <TargetFrameworks>netcoreapp2.0;net461</TargetFrameworks>
     <ReleaseVersion>2.0.0</ReleaseVersion>
     <ProjectGuid>{d8349c94-582e-4160-8df2-eb8e4e115794}</ProjectGuid>
+    <NuspecFile>ZptSharp.Cli.nuspec</NuspecFile>
+    <NuspecProperties>configuration=$(Configuration)</NuspecProperties>
+    <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
   </PropertyGroup>
 
   <Import Project="..\Tools\CommonSolutionProperties.props" />
@@ -23,5 +26,5 @@
     <ProjectReference Include="..\Evaluators\ZptSharp.PythonExpressions\ZptSharp.PythonExpressions.csproj" />
     <ProjectReference Include="..\ZptSharp.Hosting\ZptSharp.Hosting.csproj" Condition="'$(TargetFramework)' == 'net461'" />
   </ItemGroup>
-
+  
 </Project>

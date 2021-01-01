@@ -16,6 +16,32 @@
             "problemMatcher": "$msCompile"
         },
         {
+            "label": "pack (debug)",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "pack",
+                "-c",
+                "Debug",
+                "/property:GenerateFullPaths=true"
+            ],
+            "group": "build",
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "pack (release)",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "pack",
+                "-c",
+                "Release",
+                "/property:GenerateFullPaths=true"
+            ],
+            "group": "build",
+            "problemMatcher": "$msCompile"
+        },
+        {
             "label": "run tests (all)",
             "command": "dotnet",
             "type": "process",
