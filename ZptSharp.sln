@@ -39,7 +39,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZptSharp.Xml", "DocumentPro
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZptSharp.HtmlAgilityPack", "DocumentProviders\ZptSharp.HtmlAgilityPack\ZptSharp.HtmlAgilityPack.csproj", "{53A56241-BFD4-4765-9916-ED4880BFD946}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZptSharp.PythonExressions", "Evaluators\ZptSharp.PythonExressions\ZptSharp.PythonExressions.csproj", "{D12D1118-3EC4-4DFA-B148-EF8D68230444}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZptSharp.PythonExpressions", "Evaluators\ZptSharp.PythonExpressions\ZptSharp.PythonExpressions.csproj", "{D12D1118-3EC4-4DFA-B148-EF8D68230444}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZptSharp.Documentation", "ZptSharp.Documentation\ZptSharp.Documentation.csproj", "{35D94430-E055-4C3D-B013-5661DE0F6907}"
 EndProject
@@ -58,6 +58,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZptSharp.Hosting", "ZptSharp.Hosting\ZptSharp.Hosting.csproj", "{038CCFB0-3167-4F2E-8AEA-32825DBEACE6}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZptSharp.Examples.MvcCore", "Examples\ZptSharp.Examples.MvcCore\ZptSharp.Examples.MvcCore.csproj", "{9709EDB4-A914-4FA4-A857-93916A2C3F2B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZptSharp.Cli", "ZptSharp.Cli\ZptSharp.Cli.csproj", "{3DA08545-A281-40A8-8CDE-2B9609507A3C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -121,6 +123,10 @@ Global
 		{9709EDB4-A914-4FA4-A857-93916A2C3F2B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9709EDB4-A914-4FA4-A857-93916A2C3F2B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9709EDB4-A914-4FA4-A857-93916A2C3F2B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3DA08545-A281-40A8-8CDE-2B9609507A3C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3DA08545-A281-40A8-8CDE-2B9609507A3C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3DA08545-A281-40A8-8CDE-2B9609507A3C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3DA08545-A281-40A8-8CDE-2B9609507A3C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{427F7982-F40E-4534-A175-5101ED6DC5C0} = {FFCDB1AA-1F9C-4399-8637-BB62064BF02F}

@@ -1,0 +1,27 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFrameworks>netcoreapp2.0;net461</TargetFrameworks>
+    <ReleaseVersion>2.0.0</ReleaseVersion>
+    <ProjectGuid>{d8349c94-582e-4160-8df2-eb8e4e115794}</ProjectGuid>
+  </PropertyGroup>
+
+  <Import Project="..\Tools\CommonSolutionProperties.props" />
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" Version="1.0.0" PrivateAssets="All" Condition="'$(TargetFramework.TrimEnd(`0123456789`))' == 'net'" />
+    <PackageReference Include="CSF.Cli.Parameters" Version="2.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ZptSharp\ZptSharp.csproj" />
+    <ProjectReference Include="..\ZptSharp.Impl\ZptSharp.Impl.csproj" />
+    <ProjectReference Include="..\DocumentProviders\ZptSharp.AngleSharp\ZptSharp.AngleSharp.csproj" />
+    <ProjectReference Include="..\DocumentProviders\ZptSharp.HtmlAgilityPack\ZptSharp.HtmlAgilityPack.csproj" />
+    <ProjectReference Include="..\DocumentProviders\ZptSharp.Xml\ZptSharp.Xml.csproj" />
+    <ProjectReference Include="..\Evaluators\ZptSharp.PythonExpressions\ZptSharp.PythonExpressions.csproj" />
+    <ProjectReference Include="..\ZptSharp.Hosting\ZptSharp.Hosting.csproj" Condition="'$(TargetFramework)' == 'net461'" />
+  </ItemGroup>
+
+</Project>
