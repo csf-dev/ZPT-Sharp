@@ -8,7 +8,7 @@
     <NuspecFile>ZptSharp.Cli.nuspec</NuspecFile>
     <NuspecProperties>configuration=$(Configuration)</NuspecProperties>
     <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
-    <RootNamespace>ZptSharp</RootNamespace>
+    <RootNamespace>ZptSharp.Cli</RootNamespace>
   </PropertyGroup>
 
   <Import Project="..\Tools\CommonSolutionProperties.props" />

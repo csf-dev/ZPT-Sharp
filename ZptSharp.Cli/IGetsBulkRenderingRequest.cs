@@ -2,7 +2,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using ZptSharp.BulkRendering;
 
-namespace ZptSharp
+namespace ZptSharp.Cli
 {
     /// <summary>
     /// An object which gets a <see cref="BulkRenderingRequest" /> from a

@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 using Microsoft.Extensions.Hosting;
 using ZptSharp.BulkRendering;
 
-namespace ZptSharp
+namespace ZptSharp.Cli
 {
     /// <summary>
     /// The main application which coordinates the logic carried out by the CLI app.

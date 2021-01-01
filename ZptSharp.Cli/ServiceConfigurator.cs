@@ -1,6 +1,6 @@
 using System;
 
-namespace ZptSharp
+namespace ZptSharp.Cli
 {
     /// <summary>
     /// Implementation of <see cref="IConfiguresServices" /> which sets up

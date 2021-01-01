@@ -1,4 +1,6 @@
-namespace ZptSharp
+using System.Collections.Generic;
+
+namespace ZptSharp.Cli
 {
     /// <summary>
     /// Represents the arguments (options) which are available to the CLI application.
@@ -15,7 +17,7 @@ namespace ZptSharp
         /// </para>
         /// </remarks>
         /// <value>The root path.</value>
-        public System.Collections.Generic.IList<string> RootPath { get; set; }
+        public IList<string> RootPath { get; set; } = new List<string>();
 
         /// <summary>
         /// Gets or sets a comma-separated list of file/path glob patterns to

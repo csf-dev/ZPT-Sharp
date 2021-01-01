@@ -30,7 +30,7 @@ namespace ZptSharp.Resources {
         internal static System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.Equals(null, resourceMan)) {
-                    System.Resources.ResourceManager temp = new System.Resources.ResourceManager("ZptSharp.Resources.ExceptionMessage", typeof(ExceptionMessage).Assembly);
+                    System.Resources.ResourceManager temp = new System.Resources.ResourceManager("ZptSharp.Cli.Resources.ExceptionMessage", typeof(ExceptionMessage).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;

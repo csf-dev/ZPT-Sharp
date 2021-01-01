@@ -1,6 +1,6 @@
 using CSF.Cli;
 
-namespace ZptSharp
+namespace ZptSharp.Cli
 {
     /// <summary>
     /// A utility which uses <see cref="ParameterParserBuilder{TArgs}" /> to parse

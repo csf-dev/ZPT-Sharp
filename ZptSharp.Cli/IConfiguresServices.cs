@@ -1,4 +1,4 @@
-namespace ZptSharp
+namespace ZptSharp.Cli
 {
     /// <summary>
     /// An object which pre-configures the services which make-up the CLI app.

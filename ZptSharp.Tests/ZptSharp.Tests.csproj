@@ -23,6 +23,7 @@
     <PackageReference Include="CSF.CollectionComparers" Version="1.1.1" />
     <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="5.0.0" />
     <PackageReference Include="CSF.IO" Version="7.0.1" />
+    <PackageReference Include="Microsoft.Extensions.Hosting" Version="5.0.0" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ZptSharp\ZptSharp.csproj" />
@@ -33,6 +34,7 @@
     <ProjectReference Include="..\Evaluators\ZptSharp.PythonExpressions\ZptSharp.PythonExpressions.csproj" />
     <ProjectReference Include="..\MvcViewEngines\ZptSharp.MvcCore\ZptSharp.MvcCore.csproj" />
     <ProjectReference Include="..\ZptSharp.Hosting\ZptSharp.Hosting.csproj" />
+    <ProjectReference Include="..\ZptSharp.Cli\ZptSharp.Cli.csproj" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Autofixture\" />

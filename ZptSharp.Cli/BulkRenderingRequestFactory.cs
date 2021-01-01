@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using ZptSharp.BulkRendering;
 using ZptSharp.Config;
 
-namespace ZptSharp
+namespace ZptSharp.Cli
 {
     /// <summary>
     /// Implementation of <see cref="IGetsBulkRenderingRequest" /> which transforms the
@@ -103,9 +103,9 @@ namespace ZptSharp
         }
 
         /// <summary>
-        /// Initializes 
+        /// Initializes a new instance of <see cref="BulkRenderingRequestFactory" />
         /// </summary>
-        /// <param name="modelLoader"></param>
+        /// <param name="modelLoader">The model loader.</param>
         public BulkRenderingRequestFactory(ILoadsModel modelLoader)
         {
             this.modelLoader = modelLoader ?? throw new ArgumentNullException(nameof(modelLoader));

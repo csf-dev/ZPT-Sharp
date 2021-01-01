@@ -1,7 +1,7 @@
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace ZptSharp
+namespace ZptSharp.Cli
 {
     /// <summary>
     /// An object which can load a model object from a file path.

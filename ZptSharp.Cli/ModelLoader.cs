@@ -4,7 +4,7 @@ using System.IO;
 using Newtonsoft.Json.Linq;
 using System.Threading;
 
-namespace ZptSharp
+namespace ZptSharp.Cli
 {
     /// <summary>
     /// Implementation of <see cref="ILoadsModel" /> which loads a model from a JSON source file.

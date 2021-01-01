@@ -1,0 +1,10 @@
+{
+    "stringProp": "Foo bar",
+    "numberProp": 42,
+    "objectProp": {
+        "items": [
+            { "name": "Joe Bloggs" },
+            { "name": "Jane Doe" }
+        ]
+    }
+}
