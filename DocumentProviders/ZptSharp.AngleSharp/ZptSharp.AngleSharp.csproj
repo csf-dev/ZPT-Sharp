@@ -30,9 +30,15 @@
     <ProjectReference Include="..\..\ZptSharp\ZptSharp.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="AngleSharp" Version="0.14.0" />
+    <PackageReference Include="AngleSharp" Version="0.14.0" GeneratePathProperty="true" ExcludeAssets="Compile" Condition="'$(TargetFramework.TrimEnd(`0123456789`))' == 'net'" />
+    <PackageReference Include="AngleSharp" Version="0.14.0" Condition="'$(TargetFramework.TrimEnd(`0123456789`))' != 'net'" />
     <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" Version="1.0.0" PrivateAssets="All" Condition="'$(TargetFramework.TrimEnd(`0123456789`))' == 'net'" />
     <PackageReference Include="CSF.Collections.EventRaising" Version="1.1.0" />
-    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="2.0.0" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="5.0.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="AngleSharp" Condition="'$(TargetFramework.TrimEnd(`0123456789`))' == 'net'">
+      <HintPath>$(PkgAngleSharp)\lib\net461\AngleSharp.dll</HintPath>
+    </Reference>
   </ItemGroup>
 </Project>

@@ -3,6 +3,7 @@ using System.IO;
 using System.Threading.Tasks;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Logging.Console;
 using NUnit.Framework;
 using ZptSharp.Rendering;
 
@@ -36,9 +37,10 @@ namespace ZptSharp.Mvc
                 .AddHapZptDocuments()
                 .AddLogging(b => {
                     b.ClearProviders();
-                    b.AddConsole(c => {
-                        c.DisableColors = true;
-                        c.IncludeScopes = true;
+                    b.AddConsole();
+                    b.AddConsoleFormatter<ConsoleFormatter, SimpleConsoleFormatterOptions>(o => {
+                        o.ColorBehavior = LoggerColorBehavior.Disabled;
+                        o.IncludeScopes = true;
                     });
                     b.SetMinimumLevel(logLevel);
                 });
