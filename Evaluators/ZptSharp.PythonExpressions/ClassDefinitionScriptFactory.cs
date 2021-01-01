@@ -47,7 +47,7 @@ namespace ZptSharp.Expressions.PythonExpressions
         /// <returns>The script body.</returns>
         /// <param name="expression">Expression.</param>
         /// <param name="variableNames">Variable names.</param>
-        string GetScriptBody(string expression, IList<string> variableNames)
+        static string GetScriptBody(string expression, IList<string> variableNames)
         {
             var variableAssignments = GetVariableAssignments(variableNames);
 
