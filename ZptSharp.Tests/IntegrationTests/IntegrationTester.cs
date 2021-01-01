@@ -56,8 +56,7 @@ namespace ZptSharp.IntegrationTests
                     serviceCollection
                         .AddLogging(b => {
                             b.ClearProviders();
-                            b.AddConsole();
-                            b.AddConsoleFormatter<ConsoleFormatter, SimpleConsoleFormatterOptions>(o => {
+                            b.AddSimpleConsole(o => {
                                 o.ColorBehavior = LoggerColorBehavior.Disabled;
                                 o.IncludeScopes = true;
                             });

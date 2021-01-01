@@ -37,8 +37,7 @@ namespace ZptSharp.Mvc
                 .AddHapZptDocuments()
                 .AddLogging(b => {
                     b.ClearProviders();
-                    b.AddConsole();
-                    b.AddConsoleFormatter<ConsoleFormatter, SimpleConsoleFormatterOptions>(o => {
+                    b.AddSimpleConsole(o => {
                         o.ColorBehavior = LoggerColorBehavior.Disabled;
                         o.IncludeScopes = true;
                     });
