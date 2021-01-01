@@ -7,7 +7,7 @@ namespace ZptSharp
     /// Entry-point to the CLI app process, hosting the <c>static void Main</c> method.
     /// This uses .NET Generic Host to wire up and run an instance of <see cref="Application" />.
     /// </summary>
-    public class Program
+    public static class Program
     {
         /// <summary>
         /// Serves as the entry point to the application process.

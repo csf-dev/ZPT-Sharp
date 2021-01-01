@@ -43,7 +43,7 @@ namespace ZptSharp
                 OutputFileExtension = args.OutputFileExtension,
                 OutputPath = args.OutputPath ?? Directory.GetCurrentDirectory(),
                 RenderingConfig = GetRenderingConfig(args),
-                Model = await GetModel(args, cancellationToken).ConfigureAwait(false),
+                Model = await GetModelAsync(args, cancellationToken).ConfigureAwait(false),
             };
         }
 
@@ -72,7 +72,7 @@ namespace ZptSharp
             return items;
         }
 
-        RenderingConfig GetRenderingConfig(CliArguments args)
+        static RenderingConfig GetRenderingConfig(CliArguments args)
         {
             var config = RenderingConfig.CreateBuilder();
             
@@ -96,7 +96,7 @@ namespace ZptSharp
             return config.GetConfig();
         }
 
-        async Task<object> GetModel(CliArguments args, CancellationToken cancellationToken)
+        async Task<object> GetModelAsync(CliArguments args, CancellationToken cancellationToken)
         {
             if(String.IsNullOrEmpty(args.PathToModelJson)) return null;
             return await modelLoader.LoadModelAsync(args.PathToModelJson, cancellationToken).ConfigureAwait(false);

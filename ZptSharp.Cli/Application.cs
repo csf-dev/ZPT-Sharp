@@ -35,7 +35,7 @@ namespace ZptSharp
                 await renderer.RenderAllAsync(request, cancellationToken)
                     .ConfigureAwait(false);
             }
-            catch(OperationCanceledException) {}
+            catch(OperationCanceledException) { /* Intentional no-op; nothing to do */ }
 
             appLifetime.StopApplication();
         }

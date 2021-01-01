@@ -11,7 +11,7 @@ namespace ZptSharp.Expressions.PythonExpressions
     {
         const string pythonClassName = "PythonExpression";
 
-        Func<dynamic, IList<object>, object> Evaluator
+        static Func<dynamic, IList<object>, object> Evaluator
             => (instance, vars) => instance.evaluate(vars);
 
         /// <summary>
@@ -58,7 +58,7 @@ class PythonExpression:
         return {expression}";
         }
 
-        string GetVariableAssignments(IList<string> variableNames)
+        static string GetVariableAssignments(IList<string> variableNames)
         {
             if (variableNames.Count == 0) return String.Empty;
             if (variableNames.Count == 1)
