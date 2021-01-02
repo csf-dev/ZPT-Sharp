@@ -52,5 +52,11 @@ namespace ZptSharp.Expressions
         /// </summary>
         /// <value>The not prefix.</value>
         public static string Not => "not";
+
+        /// <summary>
+        /// The prefix for 'pipe' expressions.
+        /// </summary>
+        /// <value>The pipe prefix.</value>
+        public static string Pipe => "pipe";
     }
 }

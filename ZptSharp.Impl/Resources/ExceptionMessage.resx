@@ -143,4 +143,34 @@ Use {0} to include the paths/path-patterns for input files.</value>
         <value>A bulk-rendering operation must have an 'output' path where the results will be saved.
 Use {0} to denote the output path.</value>
     </data>
+    <data name="PipeExpressionIsSyntacticallyInvalid" xml:space="preserve">
+        <value>A 'pipe' expression must use the correct syntax.  This is "[variable] [expression]",
+where [variable] must be a simple TALES variable and the [expression] is any valid TALES expression
+which may be used to locate the function delegate.
+   Element:{0}
+Expression:{1}</value>
+    </data>
+    <data name="CannotGetPipeExpressionSourceObject" xml:space="preserve">
+        <value>An exception occurred whilst getting the source object for a TALES 'pipe' expression.
+Refer to the inner exception for more detail.
+   Element:{0}</value>
+    </data>
+    <data name="CannotGetPipeExpressionDelegate" xml:space="preserve">
+        <value>An exception occurred whilst getting the function delegate for a TALES 'pipe' expression.
+Refer to the inner exception for more detail.
+   Element:{0}</value>
+    </data>
+    <data name="CannotExecutePipeExpressionDelegate" xml:space="preserve">
+        <value>An exception occurred whilst executing the function delegate for a TALES 'pipe' expression.
+Refer to the inner exception for more detail.
+   Element:{0}</value>
+    </data>
+    <data name="PipeExpressionDelegateObjectMustBeADelegate" xml:space="preserve">
+        <value>The pipe expression delegate object must be a {0} type, but was actually {1}.</value>
+    </data>
+    <data name="PipeExpressionDelegateMustTakeOneParameterAndReturnAnObject" xml:space="preserve">
+        <value>The pipe expression delegate must accept precisely one parameter and must return a non-void object.
+Actual parameter types:{0}
+    Actual return type:{1}</value>
+    </data>
 </root>

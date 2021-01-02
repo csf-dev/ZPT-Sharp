@@ -244,5 +244,41 @@ namespace ZptSharp.Resources {
                 return ResourceManager.GetString("BulkRenderingMustHaveOutputPath", resourceCulture);
             }
         }
+
+        internal static string PipeExpressionIsSyntacticallyInvalid {
+            get {
+                return ResourceManager.GetString("PipeExpressionIsSyntacticallyInvalid", resourceCulture);
+            }
+        }
+
+        internal static string CannotGetPipeExpressionSourceObject {
+            get {
+                return ResourceManager.GetString("CannotGetPipeExpressionSourceObject", resourceCulture);
+            }
+        }
+
+        internal static string CannotGetPipeExpressionDelegate {
+            get {
+                return ResourceManager.GetString("CannotGetPipeExpressionDelegate", resourceCulture);
+            }
+        }
+
+        internal static string CannotExecutePipeExpressionDelegate {
+            get {
+                return ResourceManager.GetString("CannotExecutePipeExpressionDelegate", resourceCulture);
+            }
+        }
+
+        internal static string PipeExpressionDelegateObjectMustBeADelegate {
+            get {
+                return ResourceManager.GetString("PipeExpressionDelegateObjectMustBeADelegate", resourceCulture);
+            }
+        }
+
+        internal static string PipeExpressionDelegateMustTakeOneParameterAndReturnAnObject {
+            get {
+                return ResourceManager.GetString("PipeExpressionDelegateMustTakeOneParameterAndReturnAnObject", resourceCulture);
+            }
+        }
     }
 }

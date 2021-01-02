@@ -18,21 +18,7 @@ namespace ZptSharp
         /// <param name="serviceCollection">A service collection to which registrations will be added.</param>
         public static IServiceCollection AddZptSharp(this IServiceCollection serviceCollection)
         {
-            if (serviceCollection == null)
-                throw new ArgumentNullException(nameof(serviceCollection));
-
-            BulkRenderingRegistrations.RegisterServices(serviceCollection);
-            ConfigRegistrations.RegisterServices(serviceCollection);
-            DomServiceRegistrations.RegisterServices(serviceCollection);
-            ExpressionServiceRegistrations.RegisterServices(serviceCollection);
-            MetalServiceRegistrations.RegisterServices(serviceCollection);
-            NotExpressionsRegistrations.RegisterServices(serviceCollection);
-            PathExpressionsRegistrations.RegisterServices(serviceCollection);
-            RenderingRegistrations.RegisterServices(serviceCollection);
-            SourceAnnotationServiceRegistrations.RegisterServices(serviceCollection);
-            StringExpressionsRegistrations.RegisterServices(serviceCollection);
-            TalServiceRegistrations.RegisterServices(serviceCollection);
-
+            ZptSharpCoreServiceRegistrations.RegisterServices(serviceCollection);
             return serviceCollection;
         }
 
@@ -133,6 +119,23 @@ namespace ZptSharp
             provider
                 .GetRequiredService<IRegistersExpressionEvaluator>()
                 .RegisterEvaluatorType<Expressions.NotExpressions.NotExpressionEvaluator>(WellKnownExpressionPrefix.Not);
+
+            return provider;
+        }
+
+        /// <summary>
+        /// Configures ZptSharp to read and handle TALES "pipe" expressions.
+        /// </summary>
+        /// <returns>The same service provider instance, after setting it up.</returns>
+        /// <param name="provider">The service provider.</param>
+        public static IServiceProvider UseZptPipeExpressions(this IServiceProvider provider)
+        {
+            if (provider == null)
+                throw new ArgumentNullException(nameof(provider));
+
+            provider
+                .GetRequiredService<IRegistersExpressionEvaluator>()
+                .RegisterEvaluatorType<Expressions.PipeExpressions.PipeExpressionEvaluator>(WellKnownExpressionPrefix.Pipe);
 
             return provider;
         }
