@@ -5,13 +5,19 @@
     <TargetFrameworks>netcoreapp2.0;net461</TargetFrameworks>
     <ReleaseVersion>2.0.0</ReleaseVersion>
     <ProjectGuid>{d8349c94-582e-4160-8df2-eb8e4e115794}</ProjectGuid>
-    <NuspecFile>ZptSharp.Cli.nuspec</NuspecFile>
-    <NuspecProperties>configuration=$(Configuration)</NuspecProperties>
     <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
     <RootNamespace>ZptSharp.Cli</RootNamespace>
   </PropertyGroup>
 
   <Import Project="..\Tools\CommonSolutionProperties.props" />
+
+  <PropertyGroup>
+    <NuspecFile>ZptSharp.Cli.nuspec</NuspecFile>
+    <NuspecVersion Condition="'$(Version)' != ''">$(Version)</NuspecVersion>
+    <NuspecVersion Condition="'$(VersionSuffix)' == '' and '$(Version)' == ''">$(VersionPrefix)</NuspecVersion>
+    <NuspecVersion Condition="'$(VersionSuffix)' != '' and '$(Version)' == ''">$(VersionPrefix)-$(VersionSuffix)</NuspecVersion>
+    <NuspecProperties>configuration=$(Configuration);version=$(NuspecVersion)</NuspecProperties>
+  </PropertyGroup>
 
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <CheckForOverflowUnderflow>true</CheckForOverflowUnderflow>

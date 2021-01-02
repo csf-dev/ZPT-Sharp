@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
     <metadata>
         <id>ZptSharp.Cli</id>
-        <version>2.0.0</version>
+        <version>0.0.0</version>
         <description>Command-line renderer for ZPT template files, outputting to HTML or XML.</description>
         <authors>craigfowler</authors>
         <projectUrl>https://github.com/csf-dev/ZPT-Sharp/</projectUrl>
