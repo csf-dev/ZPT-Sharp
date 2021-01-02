@@ -50,19 +50,19 @@ namespace ZptSharp.Expressions.PathExpressions
             return wrapped.TryGetValueAsync(name, @object, cancellationToken);
         }
 
-        bool TryGetProperty(string name, Type type, out PropertyInfo property)
+        static bool TryGetProperty(string name, Type type, out PropertyInfo property)
         {
             property = type.GetProperty(name);
             return property != null && property.CanRead;
         }
 
-        bool TryGetMethod(string name, Type type, out MethodInfo method)
+        static bool TryGetMethod(string name, Type type, out MethodInfo method)
         {
             method = type.GetMethod(name, Type.EmptyTypes);
             return method != null && method.ReturnType != typeof(void);
         }
 
-        bool TryGetField(string name, Type type, out FieldInfo field)
+        static bool TryGetField(string name, Type type, out FieldInfo field)
         {
             field = type.GetField(name);
             return field != null;

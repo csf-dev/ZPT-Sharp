@@ -73,7 +73,7 @@ namespace ZptSharp.Expressions.PathExpressions
         /// other service in the chain has failed to return a conclusive result.
         /// </summary>
         /// <returns>The failure service.</returns>
-        IGetsValueFromObject GetFailureService() => new FailureValueProvider();
+        static IGetsValueFromObject GetFailureService() => new FailureValueProvider();
 
         /// <summary>
         /// Gets a decorator which pre-processes the 2nd parameter to
@@ -106,7 +106,7 @@ namespace ZptSharp.Expressions.PathExpressions
         /// </summary>
         /// <returns>The chain of responsibility link.</returns>
         /// <param name="service">The service to be wrapped by this additional link.</param>
-        IGetsValueFromObject GetNamedValueLink(IGetsValueFromObject service)
+        static IGetsValueFromObject GetNamedValueLink(IGetsValueFromObject service)
             => new NamedTalesValueProvider(service);
 
         /// <summary>
@@ -114,7 +114,7 @@ namespace ZptSharp.Expressions.PathExpressions
         /// </summary>
         /// <returns>The chain of responsibility link.</returns>
         /// <param name="service">The service to be wrapped by this additional link.</param>
-        IGetsValueFromObject GetStringKeyedDictionaryValueLink(IGetsValueFromObject service)
+        static IGetsValueFromObject GetStringKeyedDictionaryValueLink(IGetsValueFromObject service)
             => new StringKeyedDictionaryValueProvider(service);
 
         /// <summary>
@@ -122,7 +122,7 @@ namespace ZptSharp.Expressions.PathExpressions
         /// </summary>
         /// <returns>The chain of responsibility link.</returns>
         /// <param name="service">The service to be wrapped by this additional link.</param>
-        IGetsValueFromObject GetIntegerKeyedDictionaryValueLink(IGetsValueFromObject service)
+        static IGetsValueFromObject GetIntegerKeyedDictionaryValueLink(IGetsValueFromObject service)
             => new IntegerKeyedDictionaryValueProvider(service);
 
         /// <summary>
@@ -130,7 +130,7 @@ namespace ZptSharp.Expressions.PathExpressions
         /// </summary>
         /// <returns>The chain of responsibility link.</returns>
         /// <param name="service">The service to be wrapped by this additional link.</param>
-        IGetsValueFromObject GetDynamicValueLink(IGetsValueFromObject service)
+        static IGetsValueFromObject GetDynamicValueLink(IGetsValueFromObject service)
             => new DynamicObjectValueProvider(service);
 
         /// <summary>
@@ -138,7 +138,7 @@ namespace ZptSharp.Expressions.PathExpressions
         /// </summary>
         /// <returns>The chain of responsibility link.</returns>
         /// <param name="service">The service to be wrapped by this additional link.</param>
-        IGetsValueFromObject GetEnumerableValueLink(IGetsValueFromObject service)
+        static IGetsValueFromObject GetEnumerableValueLink(IGetsValueFromObject service)
             => new EnumerableValueProvider(service);
 
         /// <summary>
@@ -146,7 +146,7 @@ namespace ZptSharp.Expressions.PathExpressions
         /// </summary>
         /// <returns>The chain of responsibility link.</returns>
         /// <param name="service">The service to be wrapped by this additional link.</param>
-        IGetsValueFromObject GetReflectionValueLink(IGetsValueFromObject service)
+        static IGetsValueFromObject GetReflectionValueLink(IGetsValueFromObject service)
             => new ReflectionObjectValueProvider(service);
 
         /// <summary>

@@ -34,7 +34,7 @@ namespace ZptSharp.Expressions.StringExpressions
         public Task<object> EvaluateExpressionAsync(string expression, ExpressionContext context, CancellationToken cancellationToken = default)
         {
             var unescapedExpression = GetUnescapedExpression(expression, out var indexesOfEscapedPlaceholders);
-            var result = GetResultWithReplacements(unescapedExpression, context, cancellationToken, indexesOfEscapedPlaceholders);
+            var result = GetResultWithReplacementsAsync(unescapedExpression, context, cancellationToken, indexesOfEscapedPlaceholders);
 
             // This use of ContinueWith is just to downcast Task<string> to Task<object>
             return result.ContinueWith(t => (object) t.Result);
@@ -48,7 +48,7 @@ namespace ZptSharp.Expressions.StringExpressions
         /// <returns>The unescaped expression.</returns>
         /// <param name="expression">Expression.</param>
         /// <param name="indexesOfEscapedPlaceholders">Indexes of escaped placeholders.</param>
-        string GetUnescapedExpression(string expression, out ICollection<int> indexesOfEscapedPlaceholders)
+        static string GetUnescapedExpression(string expression, out ICollection<int> indexesOfEscapedPlaceholders)
         {
             var indexes = new List<int>();
             var matchesFound = 0;
@@ -70,10 +70,10 @@ namespace ZptSharp.Expressions.StringExpressions
         /// <param name="context">Context.</param>
         /// <param name="cancellationToken">Cancellation token.</param>
         /// <param name="indexesOfEscapedPlaceholders">Indexes of escaped placeholders.</param>
-        async Task<string> GetResultWithReplacements(string expression,
-                                                     ExpressionContext context,
-                                                     CancellationToken cancellationToken,
-                                                     IEnumerable<int> indexesOfEscapedPlaceholders)
+        async Task<string> GetResultWithReplacementsAsync(string expression,
+                                                          ExpressionContext context,
+                                                          CancellationToken cancellationToken,
+                                                          IEnumerable<int> indexesOfEscapedPlaceholders)
         {
             var output = expression;
 
@@ -107,7 +107,7 @@ namespace ZptSharp.Expressions.StringExpressions
         /// </summary>
         /// <returns>The replacement expression.</returns>
         /// <param name="match">Match.</param>
-        string GetReplacementExpression(Match match)
+        static string GetReplacementExpression(Match match)
         {
             var expressionBody = match.Groups[1].Success ? match.Groups[1].Value : match.Groups[2].Value;
             return $"{WellKnownExpressionPrefix.Path}:{expressionBody}";

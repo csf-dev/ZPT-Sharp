@@ -45,7 +45,7 @@ namespace ZptSharp.Tal
         /// <returns>The enumerable sequence.</returns>
         /// <param name="expressionResult">Expression result.</param>
         /// <param name="context">Context.</param>
-        IList<object> GetEnumerable(object expressionResult, ExpressionContext context)
+        static IList<object> GetEnumerable(object expressionResult, ExpressionContext context)
         {
             try
             {
@@ -151,7 +151,7 @@ namespace ZptSharp.Tal
         /// <param name="contexts">Contexts.</param>
         /// <param name="originalContext">Context.</param>
         /// <param name="variableName">Repetition variable name</param>
-        IEnumerable<ExpressionContext> GetWhitespaceSeparatedContexts(IList<ExpressionContext> contexts,
+        static IEnumerable<ExpressionContext> GetWhitespaceSeparatedContexts(IList<ExpressionContext> contexts,
                                                                       ExpressionContext originalContext,
                                                                       string variableName)
         {
@@ -178,7 +178,7 @@ namespace ZptSharp.Tal
         /// <param name="contexts">Contexts.</param>
         /// <param name="parent">Parent.</param>
         /// <param name="indexOnParent">Index on parent.</param>
-        void AddContextsToParent(List<ExpressionContext> contexts, INode parent, int indexOnParent)
+        static void AddContextsToParent(List<ExpressionContext> contexts, INode parent, int indexOnParent)
         {
             var reversedContexts = new List<ExpressionContext>(contexts);
             reversedContexts.Reverse();

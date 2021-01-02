@@ -46,7 +46,7 @@ namespace ZptSharp.Rendering
                 StoreReaderWriterForLaterUse(scope, documentReaderWriter);
                 var renderer = GetRenderer(scope, request);
 
-                var document = await ReadDocument(documentReaderWriter, request, config, token).ConfigureAwait(false);
+                var document = await ReadDocumentAsync(documentReaderWriter, request, config, token).ConfigureAwait(false);
                 await renderer.ModifyDocumentAsync(document, request, token).ConfigureAwait(false);
                 return await documentReaderWriter.WriteDocumentAsync(document, config, token).ConfigureAwait(false);
             }
@@ -63,7 +63,7 @@ namespace ZptSharp.Rendering
         /// </summary>
         /// <param name="scope">Scope.</param>
         /// <param name="config">Rendering config.</param>
-        void StoreConfigForLaterUse(IServiceScope scope, RenderingConfig config)
+        static void StoreConfigForLaterUse(IServiceScope scope, RenderingConfig config)
         {
             var configServiceLocator = scope.ServiceProvider.GetRequiredService<IStoresCurrentRenderingConfig>();
             configServiceLocator.Configuration = config;
@@ -81,22 +81,22 @@ namespace ZptSharp.Rendering
         /// </summary>
         /// <param name="scope">Scope.</param>
         /// <param name="readerWriter">Reader/writer.</param>
-        void StoreReaderWriterForLaterUse(IServiceScope scope, IReadsAndWritesDocument readerWriter)
+        static void StoreReaderWriterForLaterUse(IServiceScope scope, IReadsAndWritesDocument readerWriter)
         {
             var readerWriterServiceLocator = scope.ServiceProvider.GetRequiredService<IStoresCurrentReaderWriter>();
             readerWriterServiceLocator.ReaderWriter = readerWriter;
         }
 
-        IReadsAndWritesDocument GetDocumentReaderWriter(IServiceScope scope, RenderingConfig config)
+        static IReadsAndWritesDocument GetDocumentReaderWriter(IServiceScope scope, RenderingConfig config)
             => config.DocumentProvider ?? scope.ServiceProvider.GetRequiredService<IReadsAndWritesDocument>();
 
-        IModifiesDocument GetRenderer(IServiceScope scope, RenderZptDocumentRequest request)
+        static IModifiesDocument GetRenderer(IServiceScope scope, RenderZptDocumentRequest request)
         {
             var rendererFactory = scope.ServiceProvider.GetRequiredService<IGetsDocumentModifier>();
             return rendererFactory.GetDocumentModifier(request);
         }
 
-        Task<IDocument> ReadDocument(IReadsAndWritesDocument documentReaderWriter, RenderZptDocumentRequest request, RenderingConfig config, CancellationToken token)
+        static Task<IDocument> ReadDocumentAsync(IReadsAndWritesDocument documentReaderWriter, RenderZptDocumentRequest request, RenderingConfig config, CancellationToken token)
             => documentReaderWriter.GetDocumentAsync(request.DocumentStream, config, request.SourceInfo, token);
 
         /// <summary>
