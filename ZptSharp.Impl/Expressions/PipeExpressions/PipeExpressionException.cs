@@ -3,6 +3,7 @@ namespace ZptSharp.Expressions.PipeExpressions
     /// <summary>
     /// Thrown when a TALES pipe expression raises an exception during its evaluation.
     /// </summary>
+    [System.Serializable]
     public class PipeExpressionException : EvaluationException
     {
         /// <summary>

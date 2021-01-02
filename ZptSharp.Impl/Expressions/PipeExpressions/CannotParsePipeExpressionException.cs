@@ -3,6 +3,7 @@ namespace ZptSharp.Expressions.PipeExpressions
     /// <summary>
     /// Thrown when a TALES pipe expression uses invalid syntax.
     /// </summary>
+    [System.Serializable]
     public class CannotParsePipeExpressionException : PipeExpressionException
     {
         /// <summary>

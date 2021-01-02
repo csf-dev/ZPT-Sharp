@@ -102,7 +102,7 @@ namespace ZptSharp.Expressions.PipeExpressions
             }
         }
 
-        (string,string) GetVariableAndPipeExpression(string expression, ExpressionContext context)
+        static (string,string) GetVariableAndPipeExpression(string expression, ExpressionContext context)
         {
             var pipeMatch = pipe.Match(expression);
             if(!pipeMatch.Success)
