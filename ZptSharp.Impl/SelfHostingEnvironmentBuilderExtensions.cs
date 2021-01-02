@@ -73,5 +73,16 @@ namespace ZptSharp
             builder.ServiceUsages.Add(provider => provider.UseZptNotExpressions());
             return builder;
         }
+
+        /// <summary>
+        /// Configures ZptSharp to read and handle TALES "pipe" expressions.
+        /// </summary>
+        /// <returns>The self-hosting builder instance, after setting it up.</returns>
+        /// <param name="builder">The self-hosting builder.</param>
+        public static IBuildsSelfHostingEnvironment AddZptPipeExpressions(this IBuildsSelfHostingEnvironment builder)
+        {
+            builder.ServiceUsages.Add(provider => provider.UseZptPipeExpressions());
+            return builder;
+        }
     }
 }
