@@ -40,16 +40,11 @@ namespace ZptSharp.IntegrationTests
         {
             return new
             {
-                myPipe = (Func<object, object>) ReplaceOCharacter,
+                myPipe = ReplaceOCharacter,
             };
         }
 
-        static object ReplaceOCharacter(object input)
-        {
-            var str = input as string;
-            if (str == null) return null;
-            return str.Replace('o', '0');
-        }
+        static Func<string,string> ReplaceOCharacter => (string input) => input?.Replace('o', '0');
 
         static IEnumerable<BatchItem> GetItems()
         {

@@ -1,3 +1,4 @@
+using System;
 using System.IO;
 using System.Threading.Tasks;
 using Microsoft.Extensions.DependencyInjection;
@@ -22,12 +23,13 @@ namespace ZptSharp.IntegrationTests
         public static async Task<IntegrationTestResult> PerformIntegrationTest(string expectedRenderingPath,
                                                                                object model = null,
                                                                                RenderingConfig config = null,
-                                                                               LogLevel logLevel = LogLevel.Debug)
+                                                                               LogLevel logLevel = LogLevel.Debug,
+                                                                               Action<Hosting.IBuildsSelfHostingEnvironment> extraBuilderAction = null)
         {
             if (new FileInfo(expectedRenderingPath).Name.Contains(".ignored."))
                 NUnit.Framework.Assert.Ignore("This integration test file includes the word 'ignored' in its filename.");
 
-            using(var host = GetZptEnvironment(logLevel))
+            using(var host = GetZptEnvironment(logLevel, extraBuilderAction))
             {
                 var sourceDocument = TestFiles.GetIntegrationTestSourceFile(expectedRenderingPath);
                 var expected = await TestFiles.GetString(expectedRenderingPath);
@@ -43,7 +45,7 @@ namespace ZptSharp.IntegrationTests
             }
         }
 
-        static Hosting.IHostsZptSharp GetZptEnvironment(LogLevel logLevel)
+        static Hosting.IHostsZptSharp GetZptEnvironment(LogLevel logLevel, Action<Hosting.IBuildsSelfHostingEnvironment> extraBuilderAction)
         {
             return ZptSharpHost.GetHost(builder => {
                 builder
@@ -51,6 +53,7 @@ namespace ZptSharp.IntegrationTests
                     .AddHapZptDocuments()
                     .AddXmlZptDocuments()
                     .AddZptPythonExpressions();
+                extraBuilderAction?.Invoke(builder);
                 
                 builder.ServiceRegistrations.Add(serviceCollection => {
                     serviceCollection
