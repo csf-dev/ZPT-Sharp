@@ -56,7 +56,7 @@ namespace ZptSharp.Expressions.CSharpExpressions
 }}";
         }
 
-        string GetVariableAssignments(ExpressionDescription description)
+        static string GetVariableAssignments(ExpressionDescription description)
         {
             var assignments = description.InScopeVariableNames
                 .Where(SyntaxFacts.IsValidIdentifier)
@@ -65,7 +65,7 @@ namespace ZptSharp.Expressions.CSharpExpressions
             return string.Join("\n    ", assignments);
         }
 
-        string GetVariableAssignment(string variableName, ExpressionDescription description)
+        static string GetVariableAssignment(string variableName, ExpressionDescription description)
         {
             var typeName = GetTypeName(variableName, description);
             if(typeName == null)
