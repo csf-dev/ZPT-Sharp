@@ -78,7 +78,7 @@ namespace ZptSharp.Expressions.CSharpExpressions
             return $"{typeName} {variableName} = ({typeName}) {parametersParamName}[\"{variableName}\"];";
         }
 
-        string GetTypeName(string variableName, ExpressionDescription description)
+        static string GetTypeName(string variableName, ExpressionDescription description)
             => description.TypeDesignations.FirstOrDefault(x => x.VariableName == variableName)?.Type;
     }
 }

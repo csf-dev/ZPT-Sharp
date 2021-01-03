@@ -29,7 +29,7 @@ namespace ZptSharp.Expressions.CSharpExpressions
             var assemblyReferences = allTalesValues.Values.OfType<AssemblyReference>()
                 .Union(additionalReferences ?? Enumerable.Empty<AssemblyReference>())
                 .ToList();
-            var usingNamespaces = allTalesValues.Values.OfType<UsingNamespace>().ToList()
+            var usingNamespaces = allTalesValues.Values.OfType<UsingNamespace>()
                 .Union(additionalNamespaces ?? Enumerable.Empty<UsingNamespace>())
                 .ToList();
 
