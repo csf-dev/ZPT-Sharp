@@ -2,9 +2,9 @@ using System.Web.Mvc;
 using Moq;
 using NUnit.Framework;
 using ZptSharp.Config;
-using ZptSharp.Mvc.Autofixture;
+using ZptSharp.Mvc5.Autofixture;
 
-namespace ZptSharp.Mvc
+namespace ZptSharp.Mvc5
 {
     [TestFixture, Parallelizable]
     public class ZptSharpViewEngineTests

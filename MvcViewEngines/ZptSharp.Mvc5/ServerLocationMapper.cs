@@ -1,6 +1,6 @@
 using System.Web;
 
-namespace ZptSharp.Mvc
+namespace ZptSharp.Mvc5
 {
     /// <summary>
     /// Implementation of <see cref="IMapsLocation" /> which uses <see cref="HttpServerUtility.MapPath(string)" />

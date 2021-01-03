@@ -1,4 +1,8 @@
-namespace ZptSharp.Mvc
+#if MVC5
+namespace ZptSharp.Mvc5
+#elif MVCCORE
+namespace ZptSharp.MvcCore
+#endif
 {
     /// <summary>
     /// An object which finds a view file, searching a number of provided locations.

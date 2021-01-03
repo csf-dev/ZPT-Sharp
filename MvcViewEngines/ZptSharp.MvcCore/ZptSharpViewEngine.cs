@@ -7,7 +7,7 @@ using ZptSharp.Hosting;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 
-namespace ZptSharp.Mvc
+namespace ZptSharp.MvcCore
 {
     /// <summary>
     /// The ZptSharp MVC ViewEngine, used to render MVC views using ZptSharp.

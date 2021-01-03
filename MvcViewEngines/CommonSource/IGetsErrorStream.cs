@@ -2,7 +2,11 @@
 using System.IO;
 using System.Threading.Tasks;
 
-namespace ZptSharp.Mvc
+#if MVC5
+namespace ZptSharp.Mvc5
+#elif MVCCORE
+namespace ZptSharp.MvcCore
+#endif
 {
     /// <summary>
     /// An object which can get a stream which contains an error page, to show the end user, when rendering fails.

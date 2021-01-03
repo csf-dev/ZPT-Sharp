@@ -15,4 +15,8 @@
     <RootNamespace>ZptSharp.Expressions.CSharpExpressions</RootNamespace>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\ZptSharp\ZptSharp.csproj" />
+  </ItemGroup>
+
 </Project>

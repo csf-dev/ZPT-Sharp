@@ -1,7 +1,7 @@
 using NUnit.Framework;
 using ZptSharp.Util;
 
-namespace ZptSharp.Mvc
+namespace ZptSharp.MvcCore
 {
     [TestFixture, Parallelizable]
     public class FileExistenceTesterTests

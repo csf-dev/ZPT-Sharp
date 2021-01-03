@@ -7,7 +7,7 @@ using Microsoft.Extensions.Logging.Console;
 using NUnit.Framework;
 using ZptSharp.Rendering;
 
-namespace ZptSharp.Mvc
+namespace ZptSharp.MvcCore
 {
     [TestFixture,Parallelizable]
     public class ZptSharpErrorViewTests

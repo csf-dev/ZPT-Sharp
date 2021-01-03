@@ -3,7 +3,7 @@ using AutoFixture;
 using AutoFixture.AutoMoq;
 using AutoFixture.NUnit3;
 
-namespace ZptSharp
+namespace ZptSharp.Mvc5
 {
     public class AutoMoqDataAttribute : AutoDataAttribute
     {

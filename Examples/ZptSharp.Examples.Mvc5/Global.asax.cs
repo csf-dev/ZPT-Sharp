@@ -11,7 +11,7 @@ namespace ZptSharp.Examples
             AreaRegistration.RegisterAllAreas();
             RouteConfig.RegisterRoutes(RouteTable.Routes);
 
-            var zptSharpViewEngine = new ZptSharp.Mvc.ZptSharpViewEngine(builder => {
+            var zptSharpViewEngine = new ZptSharp.Mvc5.ZptSharpViewEngine(builder => {
                 builder
                     .AddHapZptDocuments()
                     .AddStandardZptExpressions();

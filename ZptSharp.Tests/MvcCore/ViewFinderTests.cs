@@ -2,7 +2,7 @@ using AutoFixture.NUnit3;
 using Moq;
 using NUnit.Framework;
 
-namespace ZptSharp.Mvc
+namespace ZptSharp.MvcCore
 {
     [TestFixture, Parallelizable]
     public class ViewFinderTests

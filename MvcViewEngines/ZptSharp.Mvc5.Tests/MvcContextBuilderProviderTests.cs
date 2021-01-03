@@ -6,9 +6,9 @@ using System.Linq;
 using AutoFixture.NUnit3;
 using Moq;
 using NUnit.Framework;
-using ZptSharp.Mvc.Autofixture;
+using ZptSharp.Mvc5.Autofixture;
 
-namespace ZptSharp.Mvc
+namespace ZptSharp.Mvc5
 {
     [TestFixture,Parallelizable]
     public class MvcContextBuilderProviderTests

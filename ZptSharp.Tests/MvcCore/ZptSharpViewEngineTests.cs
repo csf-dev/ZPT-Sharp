@@ -5,7 +5,7 @@ using Moq;
 using NUnit.Framework;
 using ZptSharp.Autofixture;
 
-namespace ZptSharp.Mvc
+namespace ZptSharp.MvcCore
 {
     [TestFixture, Parallelizable]
     public class ZptSharpViewEngineTests

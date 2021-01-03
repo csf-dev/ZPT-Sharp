@@ -6,7 +6,11 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 #endif
 using ZptSharp.Config;
 
-namespace ZptSharp.Mvc
+#if MVC5
+namespace ZptSharp.Mvc5
+#elif MVCCORE
+namespace ZptSharp.MvcCore
+#endif
 {
     /// <summary>
     /// Base implementation of <see cref="IGetsRootContextBuilder"/> which sets up the

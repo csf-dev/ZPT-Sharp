@@ -1,7 +1,6 @@
 ﻿using System;
 using System.IO;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.AspNetCore.Mvc.ViewEngines;
 using AutoFixture.NUnit3;
 using Moq;
 using NUnit.Framework;
@@ -11,7 +10,7 @@ using System.Threading.Tasks;
 using System.Threading;
 using ZptSharp.Hosting;
 
-namespace ZptSharp.Mvc
+namespace ZptSharp.MvcCore
 {
     [TestFixture,Parallelizable]
     public class ZptSharpViewTests

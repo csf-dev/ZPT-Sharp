@@ -12,7 +12,7 @@
     <Title>ZptSharp ViewEngine for ASP.NET MVC 5</Title>
     <Description>An ASP.NET MVC5 (for .NET Framework) ViewEngine which is based upon ZptSharp</Description>
     <TargetFrameworks>$(Net46TargetFrameworks)</TargetFrameworks>
-    <RootNamespace>ZptSharp.Mvc</RootNamespace>
+    <RootNamespace>ZptSharp.Mvc5</RootNamespace>
   </PropertyGroup>
     
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">

@@ -1,4 +1,8 @@
-namespace ZptSharp.Mvc
+#if MVC5
+namespace ZptSharp.Mvc5
+#elif MVCCORE
+namespace ZptSharp.MvcCore
+#endif
 {
     /// <summary>
     /// Represents the result from <see cref="IFindsView.FindView(string, string, string[])" />.

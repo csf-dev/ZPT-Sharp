@@ -4,7 +4,11 @@ using System.Threading.Tasks;
 using System.Reflection;
 using ZptSharp.Rendering;
 
-namespace ZptSharp.Mvc
+#if MVC5
+namespace ZptSharp.Mvc5
+#elif MVCCORE
+namespace ZptSharp.MvcCore
+#endif
 {
     /// <summary>
     /// A provider for a stream which contains a web page displaying a ZptSharp rendering error to an end user.

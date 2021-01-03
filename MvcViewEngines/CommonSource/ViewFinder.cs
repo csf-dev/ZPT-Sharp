@@ -1,7 +1,11 @@
 using System;
 using System.Collections.Generic;
 
-namespace ZptSharp.Mvc
+#if MVC5
+namespace ZptSharp.Mvc5
+#elif MVCCORE
+namespace ZptSharp.MvcCore
+#endif
 {
     /// <summary>
     /// Implementation of <see cref="IFindsView" /> which searches-for and

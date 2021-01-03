@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Http.Extensions;
 using ZptSharp.Config;
 
-namespace ZptSharp.Mvc
+namespace ZptSharp.MvcCore
 {
     /// <summary>
     /// Implementation of <see cref="IGetsRootContextBuilder"/> which sets up the

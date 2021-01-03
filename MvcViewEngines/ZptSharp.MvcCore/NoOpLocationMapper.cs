@@ -1,4 +1,4 @@
-namespace ZptSharp.Mvc
+namespace ZptSharp.MvcCore
 {
     /// <summary>
     /// A no-op implementation of <see cref="IMapsLocation" />.
