@@ -23,10 +23,12 @@ namespace ZptSharp
                 throw new ArgumentNullException(nameof(serviceCollection));
 
             serviceCollection.AddSingleton<ICachesCSharpExpressions, ExpressionCache>();
-            serviceCollection.AddSingleton<CSharpExpressionEvaluator>();
-            serviceCollection.AddSingleton<IGetsExpressionDescription, ExpressionDescriptionFactory>();
-            serviceCollection.AddSingleton<ICreatesCSharpExpressions, ExpressionCompiler>();
+            serviceCollection.AddSingleton<IConfiguresCSharpExpressionGlobals, GlobalExpressionConfigStore>();
 
+            serviceCollection.AddTransient<CSharpExpressionEvaluator>();
+            serviceCollection.AddTransient<IGetsExpressionDescription, ExpressionDescriptionFactory>();
+            serviceCollection.AddTransient<ICreatesCSharpExpressions, ExpressionCompiler>();
+            serviceCollection.AddTransient<IGetsScriptBody, ScriptBodyFactory>();
             serviceCollection.AddTransient<AssemblyReferenceEvaluator>();
             serviceCollection.AddTransient<UsingNamespaceEvaluator>();
             serviceCollection.AddTransient<VariableTypeEvaluator>();
@@ -88,7 +90,7 @@ namespace ZptSharp
             registry.RegisterEvaluatorType(typeof(VariableTypeEvaluator), VariableTypeEvaluator.ExpressionPrefix);
             registry.RegisterEvaluatorType(typeof(CSharpExpressionEvaluator), CSharpExpressionEvaluator.ExpressionPrefix);
 
-            configAction?.Invoke(provider.GetRequiredService<CSharpExpressionEvaluator>());
+            configAction?.Invoke(provider.GetRequiredService<IConfiguresCSharpExpressionGlobals>());
 
             return provider;
         }

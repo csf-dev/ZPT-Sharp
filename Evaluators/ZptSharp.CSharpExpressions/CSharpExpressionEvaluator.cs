@@ -9,7 +9,7 @@ namespace ZptSharp.Expressions.CSharpExpressions
     /// <summary>
     /// An implementation of <see cref="IEvaluatesExpression"/> which evaluates TALES 'csharp' expressions.
     /// </summary>
-    public class CSharpExpressionEvaluator : IEvaluatesExpression, IConfiguresCSharpExpressionGlobals
+    public class CSharpExpressionEvaluator : IEvaluatesExpression
     {
         internal const string ExpressionPrefix = "csharp";
 
@@ -17,22 +17,7 @@ namespace ZptSharp.Expressions.CSharpExpressions
         readonly ICachesCSharpExpressions expressionCache;
         readonly ICreatesCSharpExpressions expressionFactory;
         readonly IGetsExpressionDescription identityFactory;
-
-        /// <summary>
-        /// Gets a collection of globally-available assembly references which are
-        /// added to all C# expressions and which do not need an 'assemblyref' expression
-        /// in-scope.
-        /// </summary>
-        /// <value>The global assembly references.</value>
-        public ICollection<AssemblyReference> GlobalAssemblyReferences { get; } = new List<AssemblyReference>();
-
-        /// <summary>
-        /// Gets a collection of globally-available using namespaces which are
-        /// added to all C# expressions and which do not need an 'using' expression
-        /// in-scope.
-        /// </summary>
-        /// <value>The global using namespaces.</value>
-        public ICollection<UsingNamespace> GlobalUsingNamespaces { get; } = new List<UsingNamespace>();
+        readonly IConfiguresCSharpExpressionGlobals globalConfig;
 
         /// <summary>
         /// Evaluates the expression asynchronously and returns the result.
@@ -61,8 +46,8 @@ namespace ZptSharp.Expressions.CSharpExpressions
                 .ConfigureAwait(false);
             var description = identityFactory.GetDescription(expression,
                                                              allTalesValues,
-                                                             GlobalAssemblyReferences.ToList(),
-                                                             GlobalUsingNamespaces.ToList());
+                                                             globalConfig.GlobalAssemblyReferences.ToList(),
+                                                             globalConfig.GlobalUsingNamespaces.ToList());
             var compiledExpression = await GetExpressionAsync(description, context, cancellationToken)
                 .ConfigureAwait(false);
 
@@ -121,15 +106,18 @@ namespace ZptSharp.Expressions.CSharpExpressions
         /// <param name="expressionCache">A cache for compiled C# expressions.</param>
         /// <param name="expressionFactory">A factory for compiling new C# expressions.</param>
         /// <param name="identityFactory">A factory for expression identity objects.</param>
+        /// <param name="globalConfig">Global configuration for C# expressions.</param>
         public CSharpExpressionEvaluator(IGetsAllVariablesFromContext allValuesProvider,
                                          ICachesCSharpExpressions expressionCache,
                                          ICreatesCSharpExpressions expressionFactory,
-                                         IGetsExpressionDescription identityFactory)
+                                         IGetsExpressionDescription identityFactory,
+                                         IConfiguresCSharpExpressionGlobals globalConfig)
         {
             this.allValuesProvider = allValuesProvider ?? throw new System.ArgumentNullException(nameof(allValuesProvider));
             this.expressionCache = expressionCache ?? throw new System.ArgumentNullException(nameof(expressionCache));
             this.expressionFactory = expressionFactory ?? throw new System.ArgumentNullException(nameof(expressionFactory));
             this.identityFactory = identityFactory ?? throw new ArgumentNullException(nameof(identityFactory));
+            this.globalConfig = globalConfig ?? throw new ArgumentNullException(nameof(globalConfig));
         }
     }
 }

@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Logging.Abstractions;
 using NUnit.Framework;
 
 namespace ZptSharp.Expressions.CSharpExpressions
@@ -8,9 +9,10 @@ namespace ZptSharp.Expressions.CSharpExpressions
     [TestFixture, Parallelizable]
     public class ExpressionCompilerTests
     {
-        [Test,AutoMoqData]
-        public async Task GetExpressionAsync_can_get_an_expression_which_uses_two_variables(ExpressionCompiler sut)
+        [Test]
+        public async Task GetExpressionAsync_can_get_an_expression_which_uses_two_variables()
         {
+            var sut = new ExpressionCompiler(NullLogger<ExpressionCompiler>.Instance, new ScriptBodyFactory());
             var id = new ExpressionDescription("first + second",
                                               Enumerable.Empty<AssemblyReference>(),
                                               Enumerable.Empty<UsingNamespace>(),
@@ -27,9 +29,10 @@ namespace ZptSharp.Expressions.CSharpExpressions
             Assert.That(() => expression(vars), Is.EqualTo(10));
         }
 
-        [Test,AutoMoqData]
-        public async Task GetExpressionAsync_can_get_an_expression_which_uses_an_extension_method(ExpressionCompiler sut)
+        [Test]
+        public async Task GetExpressionAsync_can_get_an_expression_which_uses_an_extension_method()
         {
+            var sut = new ExpressionCompiler(NullLogger<ExpressionCompiler>.Instance, new ScriptBodyFactory());
             var id = new ExpressionDescription("items.First()",
                                                Enumerable.Empty<AssemblyReference>(),
                                                new[] { new UsingNamespace("System.Linq") },
@@ -44,5 +47,5 @@ namespace ZptSharp.Expressions.CSharpExpressions
 
             Assert.That(() => expression(vars), Is.EqualTo("foo"));
         }
-    }
+   }
 }

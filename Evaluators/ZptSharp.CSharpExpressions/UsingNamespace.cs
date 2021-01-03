@@ -31,7 +31,7 @@ namespace ZptSharp.Expressions.CSharpExpressions
         /// </summary>
         /// <param name="obj">An object.</param>
         /// <returns><c>true</c> if the instances are equal; <c>false</c> otherwise.</returns>
-        public override bool Equals(object obj) => Equals(obj as AssemblyReference);
+        public override bool Equals(object obj) => Equals(obj as UsingNamespace);
         
         /// <summary>
         /// Gets a hash code for the current instance.
