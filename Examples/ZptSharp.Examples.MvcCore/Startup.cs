@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using ZptSharp.Mvc;
+using ZptSharp.MvcCore;
 
 namespace ZptSharp.Examples
 {

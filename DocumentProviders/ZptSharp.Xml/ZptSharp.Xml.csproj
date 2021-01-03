@@ -13,31 +13,22 @@
     <Description>Add-on for ZptSharp which allows it to work with XML documents.</Description>
     <TargetFrameworks>$(CommonTargetFrameworks)</TargetFrameworks>
     <RootNamespace>ZptSharp.Dom</RootNamespace>
-    <SignAssembly>true</SignAssembly>
-    <AssemblyOriginatorKeyFile>..\..\Tools\CSF-Software-OSS.snk</AssemblyOriginatorKeyFile>
-  </PropertyGroup>
-    
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <CheckForOverflowUnderflow>true</CheckForOverflowUnderflow>
-    <DocumentationFile>bin\$(Configuration)\$(TargetFramework)\ZptSharp.Xml.xml</DocumentationFile>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType></DebugType>
-    <DocumentationFile>bin\$(Configuration)\$(TargetFramework)\ZptSharp.Xml.xml</DocumentationFile>
   </PropertyGroup>
     
   <ItemGroup>
     <ProjectReference Include="..\..\ZptSharp\ZptSharp.csproj" />
   </ItemGroup>
+
   <ItemGroup>
-    <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" Version="1.0.0" PrivateAssets="All" Condition="'$(TargetFramework.TrimEnd(`0123456789`))' == 'net'" />
     <PackageReference Include="CSF.Collections.EventRaising" Version="1.1.0" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="5.0.0" />
     <PackageReference Include="System.ValueTuple" Version="4.5.0" Condition="'$(TargetFramework.TrimEnd(`45612`))' == 'net'" />
   </ItemGroup>
+
   <ItemGroup>
     <Folder Include="Resources\" />
   </ItemGroup>
+
   <ItemGroup>
     <None Remove="Resources\*.dtd" />
     <None Remove="Resources\*.ent" />
@@ -46,15 +37,18 @@
     <EmbeddedResource Include="Resources\*.ent" />
     <EmbeddedResource Include="Resources\*.mod" />
   </ItemGroup>
+
   <ItemGroup>
     <EmbeddedResource Update="Resources\ExceptionMessages.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>ExceptionMessages.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
+
   <ItemGroup>
     <Compile Update="Resources\ExceptionMessages.Designer.cs">
       <DependentUpon>ExceptionMessages.resx</DependentUpon>
     </Compile>
   </ItemGroup>
+  
 </Project>

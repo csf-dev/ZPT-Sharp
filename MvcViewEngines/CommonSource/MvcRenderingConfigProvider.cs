@@ -5,7 +5,11 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 #endif
 using ZptSharp.Config;
 
-namespace ZptSharp.Mvc
+#if MVC5
+namespace ZptSharp.Mvc5
+#elif MVCCORE
+namespace ZptSharp.MvcCore
+#endif
 {
     /// <summary>
     /// Implementation of <see cref="IGetsMvcRenderingConfig"/> which gets a configuration based upon another config,

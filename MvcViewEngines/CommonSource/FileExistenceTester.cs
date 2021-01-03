@@ -1,4 +1,8 @@
-namespace ZptSharp.Mvc
+#if MVC5
+namespace ZptSharp.Mvc5
+#elif MVCCORE
+namespace ZptSharp.MvcCore
+#endif
 {
     /// <summary>
     /// Default implementation of <see cref="ITestForFileExistence" /> which simply

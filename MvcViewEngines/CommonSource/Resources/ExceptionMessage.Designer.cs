@@ -8,7 +8,12 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace ZptSharp.Mvc.Resources {
+#if MVC5
+namespace ZptSharp.Mvc5.Resources
+#elif MVCCORE
+namespace ZptSharp.MvcCore.Resources
+#endif
+{
     using System;
     using System.Reflection;
     

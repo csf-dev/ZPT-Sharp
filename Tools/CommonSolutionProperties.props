@@ -25,5 +25,20 @@
         <Copyright>Copyright 2020 - ZptSharp contributors</Copyright>
         <PackageProjectUrl>https://github.com/csf-dev/ZPT-Sharp/</PackageProjectUrl>
         <RepositoryUrl>$(PackageProjectUrl)</RepositoryUrl>
+        <SignAssembly>true</SignAssembly>
+        <AssemblyOriginatorKeyFile>$(MSBuildThisFileDirectory)\CSF-Software-OSS.snk</AssemblyOriginatorKeyFile>
+        <DocumentationFile>bin\$(Configuration)\$(TargetFramework)\$(AssemblyName).xml</DocumentationFile>
     </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" Version="1.0.0" PrivateAssets="All" Condition="'$(TargetFramework.TrimEnd(`0123456789`))' == 'net'" />
+    </ItemGroup>
+    
+    <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+        <CheckForOverflowUnderflow>true</CheckForOverflowUnderflow>
+    </PropertyGroup>
+    <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+        <DebugType></DebugType>
+    </PropertyGroup>
+
 </Project>

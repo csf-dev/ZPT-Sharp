@@ -70,13 +70,13 @@ namespace ZptSharp.IntegrationTests
         {
             return new[]
             {
-                new
+                new Product
                 {
                     description = "This is the tee for those who LOVE Zope. Show your heart on your tee.",
                     image = "smlatee.jpg",
                     price = 12.99m,
                 },
-                new
+                new Product
                 {
                     description = "This is the tee for Jim Fulton. He's the Zope Pope!",
                     image = "smpztee.jpg",
@@ -84,6 +84,8 @@ namespace ZptSharp.IntegrationTests
                 }
             };
         }
+
+        public class Product { public string description; public string image; public decimal price; }
 
         static object GetLafTemplate(IServiceProvider serviceProvider)
         {

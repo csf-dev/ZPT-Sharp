@@ -1,0 +1,41 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <ReleaseVersion>2.0.0</ReleaseVersion>
+    <ProjectGuid>{c145c496-1bb4-495f-881a-4a54a11775f6}</ProjectGuid>
+  </PropertyGroup>
+
+  <Import Project="..\..\Tools\CommonSolutionProperties.props" />
+    
+  <PropertyGroup>
+    <PackageId>ZptSharp.CSharpExpressions</PackageId>
+    <Title>ZptSharp CSharp expression evaluator</Title>
+    <Description>Add-on for ZptSharp which allows it to parse and execute C# expressions.</Description>
+    <TargetFrameworks>$(CommonTargetFrameworks)</TargetFrameworks>
+    <RootNamespace>ZptSharp.Expressions.CSharpExpressions</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\ZptSharp\ZptSharp.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="System.Runtime.Caching" Version="4.7.0" />
+    <PackageReference Include="Microsoft.CodeAnalysis.Scripting" Version="3.8.0" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="5.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Resources\ExceptionMessage.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>ExceptionMessage.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Resources\ExceptionMessage.Designer.cs">
+      <DependentUpon>ExceptionMessage.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+</Project>

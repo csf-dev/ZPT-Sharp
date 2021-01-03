@@ -6,7 +6,7 @@ using AutoFixture;
 using AutoFixture.NUnit3;
 using Moq;
 
-namespace ZptSharp.Mvc.Autofixture
+namespace ZptSharp.Mvc5.Autofixture
 {
     public class MockContextAttribute : CustomizeAttribute
     {

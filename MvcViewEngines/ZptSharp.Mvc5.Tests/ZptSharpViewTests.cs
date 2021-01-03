@@ -5,12 +5,12 @@ using AutoFixture.NUnit3;
 using Moq;
 using NUnit.Framework;
 using ZptSharp.Config;
-using ZptSharp.Mvc.Autofixture;
+using ZptSharp.Mvc5.Autofixture;
 using System.Threading.Tasks;
 using System.Threading;
 using ZptSharp.Hosting;
 
-namespace ZptSharp.Mvc
+namespace ZptSharp.Mvc5
 {
     [TestFixture,Parallelizable]
     public class ZptSharpViewTests

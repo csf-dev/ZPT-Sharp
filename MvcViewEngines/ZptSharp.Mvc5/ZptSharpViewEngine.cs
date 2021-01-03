@@ -6,7 +6,7 @@ using ZptSharp.Hosting;
 using System.Collections.Generic;
 using System.Web;
 
-namespace ZptSharp.Mvc
+namespace ZptSharp.Mvc5
 {
     /// <summary>
     /// The ZptSharp MVC ViewEngine, used to render MVC views using ZptSharp.

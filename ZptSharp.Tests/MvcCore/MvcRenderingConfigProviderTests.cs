@@ -5,7 +5,7 @@ using NUnit.Framework;
 using ZptSharp.Config;
 using ZptSharp.Autofixture;
 
-namespace ZptSharp.Mvc
+namespace ZptSharp.MvcCore
 {
     [TestFixture,Parallelizable]
     public class MvcRenderingConfigProviderTests

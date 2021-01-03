@@ -12,20 +12,14 @@
     <Title>ZptSharp ViewEngine for ASP.NET MVC Core 2.x</Title>
     <Description>An ASP.NET Core MVC (for .NET Standard) ViewEngine which is based upon ZptSharp</Description>
     <TargetFrameworks>$(NetStandardTargetFrameworks)</TargetFrameworks>
-    <RootNamespace>ZptSharp.Mvc</RootNamespace>
-    <SignAssembly>true</SignAssembly>
-    <AssemblyOriginatorKeyFile>..\..\Tools\CSF-Software-OSS.snk</AssemblyOriginatorKeyFile>
+    <RootNamespace>ZptSharp.MvcCore</RootNamespace>
   </PropertyGroup>
     
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <CheckForOverflowUnderflow>true</CheckForOverflowUnderflow>
     <DefineConstants>DEBUG;MVCCORE</DefineConstants>
-    <DocumentationFile>bin\$(Configuration)\$(TargetFramework)\ZptSharp.MvcCore.xml</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType></DebugType>
     <DefineConstants>MVCCORE</DefineConstants>
-    <DocumentationFile>bin\$(Configuration)\$(TargetFramework)\ZptSharp.MvcCore.xml</DocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>
@@ -54,6 +48,7 @@
       <LogicalName>ZptSharp.Mvc.Resources.ExceptionMessage.resources</LogicalName>
     </EmbeddedResource>
   </ItemGroup>
+  
   <ItemGroup>
     <Compile Update="..\CommonSource\Resources\ExceptionMessage.Designer.cs">
       <DependentUpon>ExceptionMessage.resx</DependentUpon>

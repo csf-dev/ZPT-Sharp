@@ -11,7 +11,11 @@ using Microsoft.AspNetCore.Mvc.ViewEngines;
 using ZptSharp.Config;
 using ZptSharp.Hosting;
 
-namespace ZptSharp.Mvc
+#if MVC5
+namespace ZptSharp.Mvc5
+#elif MVCCORE
+namespace ZptSharp.MvcCore
+#endif
 {
     /// <summary>
     /// The ZptSharp implementation of an <see cref="IView"/> for either MVC5 or MVC Core.
