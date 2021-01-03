@@ -12,17 +12,6 @@
     <Title>ZptSharp - abstractions</Title>
     <Description>Models &amp; service interfaces common to ZptSharp.  Install this package to reference make use of ZptSharp.</Description>
     <TargetFrameworks>$(CommonTargetFrameworks)</TargetFrameworks>
-    <SignAssembly>true</SignAssembly>
-    <AssemblyOriginatorKeyFile>..\Tools\CSF-Software-OSS.snk</AssemblyOriginatorKeyFile>
-  </PropertyGroup>
-    
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <CheckForOverflowUnderflow>true</CheckForOverflowUnderflow>
-    <DocumentationFile>bin\$(Configuration)\$(TargetFramework)\ZptSharp.xml</DocumentationFile>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType></DebugType>
-    <DocumentationFile>bin\$(Configuration)\$(TargetFramework)\ZptSharp.xml</DocumentationFile>
   </PropertyGroup>
     
   <ItemGroup>
@@ -37,7 +26,6 @@
     
   <ItemGroup>
     <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="5.0.0" />
-    <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" Version="1.0.0" PrivateAssets="All" Condition="'$(TargetFramework.TrimEnd(`0123456789`))' == 'net'" />
     <PackageReference Include="System.ValueTuple" Version="4.5.0" Condition="'$(TargetFramework.TrimEnd(`45612`))' == 'net'" />
   </ItemGroup>
 </Project>

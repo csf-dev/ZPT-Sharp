@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <ReleaseVersion>2.0.0</ReleaseVersion>
+    <ProjectGuid>{c145c496-1bb4-495f-881a-4a54a11775f6}</ProjectGuid>
+  </PropertyGroup>
+
+  <Import Project="..\..\Tools\CommonSolutionProperties.props" />
+    
+  <PropertyGroup>
+    <PackageId>ZptSharp.CSharpExpressions</PackageId>
+    <Title>ZptSharp CSharp expression evaluator</Title>
+    <Description>Add-on for ZptSharp which allows it to parse and execute C# expressions.</Description>
+    <TargetFrameworks>$(CommonTargetFrameworks)</TargetFrameworks>
+    <RootNamespace>ZptSharp.Expressions.CSharpExpressions</RootNamespace>
+  </PropertyGroup>
+
+</Project>
