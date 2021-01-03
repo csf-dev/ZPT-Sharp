@@ -13,7 +13,7 @@ namespace ZptSharp.IntegrationTests
         [Test, Description("For the 'expected rendering' file, rendering the corresponding 'source document' file via ZptSharp should produce the same output.")]
         public async Task Each_output_file_should_render_as_expected([ValueSource(nameof(GetExpectedOutputFiles))] string expectedPath)
         {
-            var result = await IntegrationTester.PerformIntegrationTest(expectedPath, model: GetModel(), config: GetConfig());
+            var result = await IntegrationTester.PerformIntegrationTest(expectedPath, model: GetModel(), config: GetConfig(), extraBuilderAction: b => b.AddZptCSharpExpressions());
             Assert.That(result, Has.MatchingExpectedAndActualRenderings);
         }
 

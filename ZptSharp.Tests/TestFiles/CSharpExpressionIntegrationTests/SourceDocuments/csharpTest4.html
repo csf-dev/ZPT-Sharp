@@ -3,7 +3,7 @@
 <title>CSharp aliased namespace test</title>
 </head>
 <body>
-<p tal:define="throwaway csnamespace:ci System.Globalization.CultureInfo">
+<p tal:define="throwaway using:ci System.Globalization.CultureInfo">
   The current thread culture is:
   <span tal:content="csharp:ci.GetCultureInfo(&quot;en-GB&quot;).ToString()">fr-FR</span>
 </p>

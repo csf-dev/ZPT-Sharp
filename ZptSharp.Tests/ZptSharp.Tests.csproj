@@ -32,6 +32,7 @@
     <ProjectReference Include="..\DocumentProviders\ZptSharp.Xml\ZptSharp.Xml.csproj" />
     <ProjectReference Include="..\DocumentProviders\ZptSharp.HtmlAgilityPack\ZptSharp.HtmlAgilityPack.csproj" />
     <ProjectReference Include="..\Evaluators\ZptSharp.PythonExpressions\ZptSharp.PythonExpressions.csproj" />
+    <ProjectReference Include="..\Evaluators\ZptSharp.CSharpExpressions\ZptSharp.CSharpExpressions.csproj" />
     <ProjectReference Include="..\MvcViewEngines\ZptSharp.MvcCore\ZptSharp.MvcCore.csproj" />
     <ProjectReference Include="..\ZptSharp.Hosting\ZptSharp.Hosting.csproj" />
     <ProjectReference Include="..\ZptSharp.Cli\ZptSharp.Cli.csproj" />
@@ -69,7 +70,7 @@
   </ItemGroup>
   
   <ItemGroup>
-      <Compile Remove="IntegrationTests\CSharpExpressionIntegrationTests.cs;IntegrationTests\LoadExpressionIntegrationTests.cs" />
-      <None Include="IntegrationTests\CSharpExpressionIntegrationTests.cs;IntegrationTests\LoadExpressionIntegrationTests.cs" />
+      <Compile Remove="IntegrationTests\LoadExpressionIntegrationTests.cs" />
+      <None Include="IntegrationTests\LoadExpressionIntegrationTests.cs" />
   </ItemGroup>
 </Project>
