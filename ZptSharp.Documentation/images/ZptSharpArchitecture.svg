@@ -2,30 +2,34 @@
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
 	"http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
 
-<svg  width="409" height="217" viewBox="0 0 409 217" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"  version="1.1">
+<svg  width="376" height="392" viewBox="0 0 376 392" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"  version="1.1">
   <desc>Lekh Diagram</desc>
-  <path  stroke-linecap="round"  stroke-width="2" stroke="rgb(0, 0, 0)" fill="rgb(180, 221, 255)" fill-opacity="0.901961" d=" M 140.5,12.5  L 396.5,12.5  L 396.5,124.5  L 140.5,124.5  L 140.5,12.5 "/>
-  <text  x="268.5" y="15.5" style="font-size:15;  fill:rgb(0, 0, 0);  stroke:rgb(0, 0, 0);  dominant-baseline: hanging; text-anchor: middle;">ZptSharp Core</text>
-  <path  stroke-linecap="round"  stroke-width="2" stroke="rgb(0, 0, 0)" fill="rgb(0, 180, 255)" fill-opacity="0.901961" d=" M 156.5,44.5  L 252.5,44.5  L 252.5,108.5  L 156.5,108.5  L 156.5,44.5 "/>
-  <text  x="204.5" y="76.5" style="font-size:15;  fill:rgb(0, 0, 0);  stroke:rgb(0, 0, 0);  dominant-baseline: central; text-anchor: middle;">Abstractions</text>
-  <path  stroke-linecap="round"  stroke-width="2" stroke="rgb(0, 0, 0)" fill="rgb(0, 180, 255)" fill-opacity="0.901961" d=" M 284.5,44.5  L 380.5,44.5  L 380.5,108.5  L 284.5,108.5  L 284.5,44.5 "/>
-  <text  x="332.5" y="76.5" style="font-size:15;  fill:rgb(0, 0, 0);  stroke:rgb(0, 0, 0);  dominant-baseline: central; text-anchor: middle;">Impl</text>
-  <path  stroke-linecap="round"  stroke-width="2" stroke="rgb(0, 0, 0)" fill="rgb(255, 255, 0)" fill-opacity="0.901961" d=" M 140.5,140.5  L 252.5,140.5  L 252.5,204.5  L 140.5,204.5  L 140.5,140.5 "/>
-  <text  x="196.5" y="172.5" style="font-size:15;  fill:rgb(0, 0, 0);  stroke:rgb(0, 0, 0);  dominant-baseline: central; text-anchor: middle;">
-    <tspan  x="196.5" dy="-15">Document</tspan>
-    <tspan  x="196.5" dy="15"> provider</tspan>
-    <tspan  x="196.5" dy="15"> plugin(s)</tspan>
+  <path  stroke-linecap="round"  stroke-width="2" stroke="rgb(0, 0, 0)" fill="rgb(185, 216, 26)" fill-opacity="0.901961" d=" M 12,380  L 12,12  L 364,12  L 364,380  L 12,380 "/>
+  <text  x="15" y="15" style="font-size:15;  fill:rgb(0, 0, 0);  stroke:rgb(0, 0, 0);  dominant-baseline: hanging; text-anchor: start;">Consuming application</text>
+  <path  stroke-linecap="round"  stroke-width="2" stroke="rgb(0, 0, 0)" fill="rgb(180, 221, 255)" fill-opacity="0.901961" d=" M 28,156  L 348,156  L 348,364  L 28,364  L 28,156 "/>
+  <text  x="31" y="159" style="font-size:15;  fill:rgb(0, 0, 0);  stroke:rgb(0, 0, 0);  dominant-baseline: hanging; text-anchor: start;">Dependency injection</text>
+  <path  stroke-linecap="round"  stroke-width="2" stroke="rgb(0, 0, 0)" fill="rgb(0, 180, 255)" fill-opacity="0.901961" d=" M 44,188  L 172,188  L 172,252  L 44,252  L 44,188 "/>
+  <text  x="108" y="220" style="font-size:15;  fill:rgb(0, 0, 0);  stroke:rgb(0, 0, 0);  dominant-baseline: central; text-anchor: middle;">ZptSharp.Impl</text>
+  <path  stroke-linecap="round"  stroke-width="2" stroke="rgb(0, 0, 0)" fill="rgb(255, 255, 0)" fill-opacity="0.901961" d=" M 44,284  L 172,284  L 172,348  L 44,348  L 44,284 "/>
+  <text  x="108" y="316" style="font-size:15;  fill:rgb(0, 0, 0);  stroke:rgb(0, 0, 0);  dominant-baseline: central; text-anchor: middle;">
+    <tspan  x="108" dy="-7.5">Document</tspan>
+    <tspan  x="108" dy="15"> provider(s)</tspan>
   </text>
-  <path  stroke-linecap="round"  stroke-width="2" stroke="rgb(0, 0, 0)" fill="rgb(255, 255, 0)" fill-opacity="0.901961" d=" M 284.5,140.5  L 396.5,140.5  L 396.5,204.5  L 284.5,204.5  L 284.5,140.5 "/>
-  <text  x="340.5" y="172.5" style="font-size:15;  fill:rgb(0, 0, 0);  stroke:rgb(0, 0, 0);  dominant-baseline: central; text-anchor: middle;">
-    <tspan  x="340.5" dy="-7.5">Expression</tspan>
-    <tspan  x="340.5" dy="15"> plugin(s)</tspan>
+  <path  stroke-linecap="round"  stroke-width="2" stroke="rgb(0, 0, 0)" fill="rgb(255, 255, 0)" fill-opacity="0.901961" d=" M 204,284  L 332,284  L 332,348  L 204,348  L 204,284 "/>
+  <text  x="268" y="316" style="font-size:15;  fill:rgb(0, 0, 0);  stroke:rgb(0, 0, 0);  dominant-baseline: central; text-anchor: middle;">
+    <tspan  x="268" dy="-7.5">Expression</tspan>
+    <tspan  x="268" dy="15"> evaluator(s)</tspan>
   </text>
-  <path  stroke-linecap="round"  stroke-width="2" stroke="rgb(0, 0, 0)" fill="rgb(210, 186, 128)" fill-opacity="0.901961" d=" M 12.5,204.5  L 12.5,12.5  L 124.5,12.5  L 124.5,204.5  L 12.5,204.5 "/>
-  <text  x="15.5" y="108.5" style="font-size:12;  fill:rgb(0, 0, 0);  stroke:rgb(0, 0, 0);  dominant-baseline: central; text-anchor: start;">
-    <tspan  x="15.5" dy="-18">Consumer</tspan>
-    <tspan  x="15.5" dy="12">* MVC view engine</tspan>
-    <tspan  x="15.5" dy="12">* CLI app</tspan>
-    <tspan  x="15.5" dy="12">* Your own app</tspan>
-  </text>
+  <path  stroke-linecap="round"  stroke-width="2" stroke="rgb(0, 0, 0)" fill="none" d=" M 268,280  L 268,256 "/>
+  <path  stroke-linecap="round"  stroke-width="2" stroke="rgb(0, 0, 0)" fill="rgb(0, 0, 0)" d=" M 274,264  L 268,256  L 262,264  L 274,264 "/>
+  <path  stroke-linecap="round"  stroke-width="2" stroke="rgb(0, 0, 0)" fill="none" d=" M 156,281  L 200,250 "/>
+  <path  stroke-linecap="round"  stroke-width="2" stroke="rgb(0, 0, 0)" fill="rgb(0, 0, 0)" d=" M 196,258  L 200,250  L 190,250  L 196,258 "/>
+  <path  stroke-linecap="round"  stroke-width="2" stroke="rgb(0, 0, 0)" fill="none" d=" M 175,213  L 200,210 "/>
+  <path  stroke-linecap="round"  stroke-width="2" stroke="rgb(0, 0, 0)" fill="rgb(0, 0, 0)" d=" M 192,215  L 200,210  L 192,205  L 192,215 "/>
+  <path  stroke-linecap="round"  stroke-width="2" stroke="rgb(0, 0, 0)" fill="rgb(206, 118, 5)" fill-opacity="0.901961" d=" M 204,44  L 332,44  L 332,108  L 204,108  L 204,44 "/>
+  <text  x="268" y="76" style="font-size:15;  fill:rgb(0, 0, 0);  stroke:rgb(0, 0, 0);  dominant-baseline: central; text-anchor: middle;">Consuming project</text>
+  <path  stroke-linecap="round"  stroke-width="2" stroke="rgb(0, 0, 0)" fill="rgb(0, 180, 255)" fill-opacity="0.901961" d=" M 204,156  L 332,156  L 332,252  L 204,252  L 204,156 "/>
+  <text  x="268" y="204" style="font-size:15;  fill:rgb(0, 0, 0);  stroke:rgb(0, 0, 0);  dominant-baseline: central; text-anchor: middle;">ZptSharp</text>
+  <path  stroke-linecap="round"  stroke-width="2" stroke="rgb(0, 0, 0)" fill="none" d=" M 268,112  L 268,152 "/>
+  <path  stroke-linecap="round"  stroke-width="2" stroke="rgb(0, 0, 0)" fill="rgb(0, 0, 0)" d=" M 274,144  L 268,152  L 262,144  L 274,144 "/>
 </svg>
