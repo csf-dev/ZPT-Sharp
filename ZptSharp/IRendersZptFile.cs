@@ -32,19 +32,22 @@ namespace ZptSharp
         /// <para>
         /// The <paramref name="model" /> parameter is the model which will be rendered-by/bound-to
         /// the document template.  It will be available as the pre-defined TALES variable <c>here</c>
-        /// during the rendering process.
+        /// during the rendering process.  This model may be any arbitrary object, as appropriate to
+        /// your application/use-case.
         /// </para>
         /// <para>
         /// Passing a <see cref="RenderingConfig" /> in the <paramref name="config" /> parameter is
-        /// optional.  If omitted or null then this will use a default rendering configuration which
-        /// is suitable for most usages.  To create a rendering configuration object, either use
-        /// <see cref="RenderingConfig.CreateBuilder()" />, or clone an existing config to a builder
-        /// via <see cref="RenderingConfig.CloneToNewBuilder()" />.
+        /// optional.  If omitted or null then <see cref="RenderingConfig.Default" /> will be used,
+        /// which is likely to be suitable for simple usages.  To create a custom rendering
+        /// configuration object, either use <see cref="RenderingConfig.CreateBuilder()" />, or
+        /// clone an existing config to a builder via <see cref="RenderingConfig.CloneToNewBuilder()" />
+        /// and then make amendments before building a new configuration.
         /// </para>
         /// <para>
         /// The cancellation token parameter <paramref name="token" /> may be used during asynchronous
         /// operations in order to abort/cancel the operation before completion.  For more information
-        /// about task cancellation see https://docs.microsoft.com/en-us/dotnet/api/system.threading.cancellationtokensource
+        /// about task cancellation see
+        /// <see href="https://docs.microsoft.com/en-us/dotnet/api/system.threading.cancellationtokensource" />.
         /// </para>
         /// <para>
         /// The return of this method is a <c>Task</c> which exposes a <c>Stream</c>.  That stream is

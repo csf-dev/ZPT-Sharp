@@ -9,9 +9,48 @@ using System.Collections.ObjectModel;
 namespace ZptSharp.Config
 {
     /// <summary>
-    /// Configuration for a single instance of <see cref="IRendersZptDocument"/>.  One configuration
-    /// object is used for all operations of a single renderer object.
+    /// Represents per-operation configuration information which influences the behaviour of the rendering process.
+    /// This class is immutable; use a builder to prepare &amp; build configuration objects in a mutable manner.
     /// </summary>
+    /// <remarks>
+    /// <para>
+    /// Each of the methods of <see cref="IRendersZptFile" /> or <see cref="IRendersZptDocument" /> accepts an
+    /// optional rendering configuration parameter, which influences how that rendering operation will behave.
+    /// The default for both of these APIs, if configuration is omitted or <see langword="null" />, is to use
+    /// a <see cref="Default" /> configuration instance.
+    /// </para>
+    /// <para>
+    /// Because every instance of rendering configuration is immutable, a builder must be used in order to customise
+    /// the configuration before it is created.  The primary way to do this is to use the <see cref="CreateBuilder" />
+    /// method, then to set up the configuration builder via its settable properties, then finally use
+    /// <see cref="RenderingConfig.Builder.GetConfig" /> in order to build and return the rendering configuration.
+    /// </para>
+    /// <para>
+    /// An alternative way to get a customised rendering configuration is to copy the settings/state of an existing
+    /// configuration object into a builder.  This is performed via <see cref="CloneToNewBuilder" />, executed from
+    /// the configuration object which you wish to copy.  You may then use that builder in the same way as if a new
+    /// builder had been created from scratch.
+    /// </para>
+    /// </remarks>
+    /// <example>
+    /// <para>
+    /// The following logic creates a new rendering configuration which has source annotation enabled.
+    /// </para>
+    /// <code language="csharp">
+    /// var builder = RenderingConfig.CreateBuilder();
+    /// builder.IncludeSourceAnnotation = true;
+    /// var config = builder.GetConfig();
+    /// </code>
+    /// <para>
+    /// This logic then creates a second rendering configuration based upon the example above
+    /// which also uses a default expression type of <c>string</c>.
+    /// </para>
+    /// <code language="csharp">
+    /// var builder2 = config.CloneToNewBuilder();
+    /// builder2.DefaultExpressionType = "string";
+    /// var config2 = builder2.GetConfig();
+    /// </code>
+    /// </example>
     public partial class RenderingConfig
     {
         /// <summary>
@@ -20,21 +59,44 @@ namespace ZptSharp.Config
         /// </summary>
         /// <remarks>
         /// <para>
-        /// Not all document providers (see also: <seealso cref="IReadsAndWritesDocument"/>) will
-        /// honour this document encoding configuration setting, it is up to the individual provider used
-        /// as to how this setting is treated.
-        /// </para>
-        /// <para>
-        /// The default value for this configuration setting is <see cref="Encoding.UTF8"/>.
+        /// Not all document providers will honour this encoding configuration setting;
+        /// it is respected only where the underlying DOM document reader/writer supports it.
+        /// Some document providers might only support auto-detection of encoding or might
+        /// be hard-coded to always use the same encoding.  Refer to the documentation of
+        /// the document provider used - the implementation of <see cref="IReadsAndWritesDocument" /> -
+        /// to see if this configuration property is supported.
         /// </para>
         /// </remarks>
+        /// <seealso cref="IReadsAndWritesDocument"/>
         /// <value>The document encoding.</value>
         public virtual Encoding DocumentEncoding { get; private set; }
 
         /// <summary>
-        /// Gets the document provider; this is the implementation used for reading/writing documents.
+        /// Gets the document provider implementation which is to be used for the current rendering task.
         /// </summary>
-        /// <value>The document provider.</value>
+        /// <remarks>
+        /// <para>
+        /// When using <see cref="IRendersZptFile"/>, this configuration property is irrelevant.
+        /// The file-rendering service will select an appropriate document renderer based upon
+        /// the filename &amp; extension of the source file.
+        /// </para>
+        /// <para>
+        /// This configuration property is important when making use of <see cref="IRendersZptDocument"/>,
+        /// though.
+        /// Because the document-rendering service does not use a file path, there is no filename or
+        /// extension to analyse.
+        /// When using the document rendering service, this configuration property is used to specify
+        /// which document provider implementation should be used to read &amp; write the underlying DOM
+        /// document.
+        /// </para>
+        /// <para>
+        /// If the document-rendering service is used and this configuration property is unset then
+        /// there is only one other way to avoid the rendering process failing with an exception.
+        /// That way is to manually register an implementation of <see cref="IReadsAndWritesDocument"/>
+        /// with the <c>IServiceProvider</c> from which the document renderer was resolved.
+        /// </para>
+        /// </remarks>
+        /// <value>The document provider implementation to be used by the document-renderer service.</value>
         public virtual IReadsAndWritesDocument DocumentProvider { get; private set; }
 
         /// <summary>
@@ -43,81 +105,123 @@ namespace ZptSharp.Config
         /// </summary>
         /// <remarks>
         /// <para>
-        /// The default for this configuration option is <see langword="false"/>.
+        /// This controls XML-style document provider implementations and instructs them whether to write or
+        /// whether to omit the <c>&lt;?xml ... ?&gt;</c> declarations on the first line of the file.
+        /// </para>
+        /// <para>
+        /// Obviously, document providers which render HTML and not XML documents will ignore this
+        /// configuration setting.
         /// </para>
         /// </remarks>
         /// <value><c>true</c> if the XML document declaration should be omitted; otherwise, <c>false</c>.</value>
         public virtual bool OmitXmlDeclaration { get; private set; }
 
         /// <summary>
-        /// Gets a service which provides the default/built-in root contexts for expression resolution.
+        /// Gets a 'factory delegate' which provides the root contexts for expression resolution.
         /// </summary>
         /// <remarks>
         /// <para>
-        /// The default contexts provider is the object which is used to provide the 'root'
-        /// variables which are available to TALES path expressions.  These built-in contexts
-        /// are also accessible via the keyword <c>CONTEXTS</c> in a path expression.
+        /// The root contexts are the variables which are available to all TALES expressions
+        /// before any further variables are defined.
+        /// They are essentially the pre-defined variables which are already in-scope at the
+        /// root of the DOM document.
+        /// These variables are available in their own right or also as properties of a special
+        /// root contexts object, accessible via the TALES keyword <c>CONTEXTS</c>.
+        /// That contexts keyword may not be overridden by any other variable definition, meaning
+        /// that the root contexts are always available via that reference.
         /// </para>
         /// <para>
-        /// For the vast majority of usages, the standard/default built-in contexts provider will be suitable.
-        /// That standard/default implementation will be used if this configuration option is either not
-        /// specified or is set to <see langword="null"/>.
+        /// This configuration property allows the use of a customised service which gets those
+        /// root contexts.
+        /// A developer may write their own implementation of <see cref="IGetsDictionaryOfNamedTalesValues" />
+        /// which contains any arbitrary logic to retrieve those variables.
+        /// The format of this property is a 'factory delegate' (a function) taking a parameter of
+        /// type <see cref="ExpressionContext" /> and returning the implementation of
+        /// <see cref="IGetsDictionaryOfNamedTalesValues" />.
         /// </para>
         /// <para>
-        /// Specify a built-in contexts provider when you wish to use a non-standard mechanism of
-        /// getting the 'root' variables, accessible to document templates.  Please note, though,
-        /// that you don't need to do this to pass model data or to simply add extra root variables.
-        /// Model data is easily provided by passing a model value into the rendering process.  The
-        /// passed value is accessible via the built-in context keyword <c>here</c>.
-        /// Adding additional root variables is achieved by the use of the <see cref="ContextBuilder"/>
-        /// configuration option.
+        /// For the majority of foreseen usages, this configuration property does not need to be used.
+        /// If this property is <see langword="null"/> then the rendering process will use a standard
+        /// implementation of <see cref="IGetsDictionaryOfNamedTalesValues" /> to retrieve the root
+        /// contexts.
+        /// In particular, developers do not need to write their own implementation of
+        /// <see cref="IGetsDictionaryOfNamedTalesValues" /> in order to simply add extra root
+        /// contexts/variables to the rendering process.
+        /// In order to add additional variables, developers should use the <see cref="ContextBuilder"/>
+        /// configuration property instead.
+        /// Passing model data to the rendering process also does not need a customised root contexts
+        /// provider.
+        /// Model data is passed as a separate parameter to the rendering process and is accessible via
+        /// the built-in root context <c>here</c>.
         /// </para>
         /// <para>
-        /// Please note that if this configuration option is specified and is not null then
-        /// the <see cref="KeywordOptions"/> configuration option will be ignored
-        /// and will have no effect.  This is because those keyword options are made accessible
-        /// to templates via the built-in contexts provider.
+        /// Please note that if this property is specified then it is up to the custom implementation of
+        /// <see cref="IGetsDictionaryOfNamedTalesValues"/> to include the keyword options in the root
+        /// contexts, using the name <c>options</c>.
+        /// If the custom implementation does not do this, then the configuration property
+        /// <see cref="KeywordOptions"/> will not be honoured.
+        /// There are two ways in which a custom implementation may achieve this.
         /// </para>
+        /// <list type="bullet">
+        /// <item><description>
+        /// It may constructor-inject an instance of <see cref="RenderingConfig"/> and include the keyword
+        /// options in its own output.
+        /// </description></item>
+        /// <item><description>
+        /// It may derive from the standard implementation of <see cref="IGetsDictionaryOfNamedTalesValues"/>
+        /// found in the ZptSharp implementations package and override/supplement its returned results.
+        /// </description></item>
+        /// </list>
         /// </remarks>
-        /// <value>The built-in contexts provider.</value>
-        public virtual Func<ExpressionContext, IGetsDictionaryOfNamedTalesValues> BuiltinContextsProvider { get; private set; }
+        /// <value>The root contexts provider.</value>
+        public virtual Func<ExpressionContext, IGetsDictionaryOfNamedTalesValues> RootContextsProvider { get; private set; }
 
         /// <summary>
-        /// <para>
-        /// Gets a collection of "keyword options".  A typical usage of keyword options is to
-        /// represent key/value pairs passed as arguments to a command-line application.
-        /// </para>
-        /// <para>
-        /// Beware that this configuration option is ignored if <see cref="BuiltinContextsProvider"/> is
-        /// also specified and is not null.
-        /// </para>
+        /// Gets a collection of "keyword options" available at the root TALES context named <c>options</c>.
         /// </summary>
         /// <remarks>
         /// <para>
-        /// 
+        /// Keyword options are a series of arbitrary name/value pairs.
+        /// Their precise semantics is not strictly specified by the ZPT syntax specification.
+        /// Typically they could be used to represent command-line arguments in a CLI app.
+        /// They should not be used to store model data when the model itself would be more suitable.
+        /// </para>
+        /// <para>
+        /// Note that because <c>options</c> is a root TALES context, if the <see cref="RootContextsProvider"/>
+        /// configuration setting is also specified, then that could mean that this setting is not honoured.
+        /// It is up to a custom implementation of the root contexts provider to include the keyword options.
         /// </para>
         /// </remarks>
         /// <value>The keyword options collection.</value>
         public virtual IReadOnlyDictionary<string,object> KeywordOptions { get; private set; }
 
         /// <summary>
-        /// Gets an action which is used to build &amp; add values to the root ZPT context.
+        /// Gets a builder action which is used to extend the root contexts, without needing to
+        /// replace the <see cref="RootContextsProvider" />.
         /// </summary>
         /// <remarks>
         /// <para>
-        /// If unset or null, then no additional variables will be added to the root context.
-        /// If this is provided then the <see cref="IConfiguresRootContext"/> may be used
-        /// to add additional data, accessible by templates as variables, to the rendering
-        /// process.
+        /// This configuration setting provides a convenient way to add additional root contexts;
+        /// pre-defined variables which are available to the entire rendering process.
+        /// Using this setting avoids the need to use a custom <see cref="RootContextsProvider" />
+        /// implementation when all that was desired was to add extra variables.
         /// </para>
         /// </remarks>
-        /// <value>The context builder.</value>
+        /// <value>The context builder action.</value>
         public virtual Action<IConfiguresRootContext, IServiceProvider> ContextBuilder { get; private set; }
 
         /// <summary>
         /// Gets a value which indicates whether or not source annotation should be written to the rendered document.
-        /// Source annotation adds comments to the output indicating the source file information.
         /// </summary>
+        /// <remarks>
+        /// <para>
+        /// Source annotation is a useful ZPT feature used for debugging and understanding the rendering process,
+        /// such as when diagnosing a problem.
+        /// When source annotation is enabled, each time an element is included from 'elsewhere' (such as via a METAL
+        /// macro, or by filling a slot), an HTML/XML comment is added indicating the source information and source
+        /// line number from where that element originated.
+        /// </para>
+        /// </remarks>
         /// <value><c>true</c> if source annotation should be included in the output; otherwise, <c>false</c>.</value>
         public virtual bool IncludeSourceAnnotation { get; private set; }
 
@@ -164,7 +268,7 @@ namespace ZptSharp.Config
             {
                 DocumentEncoding = DocumentEncoding,
                 DocumentProvider = DocumentProvider,
-                BuiltinContextsProvider = BuiltinContextsProvider,
+                RootContextsProvider = RootContextsProvider,
                 ContextBuilder = ContextBuilder,
                 IncludeSourceAnnotation = IncludeSourceAnnotation,
                 KeywordOptions = KeywordOptions.ToDictionary(k => k.Key, v => v.Value),
@@ -175,28 +279,22 @@ namespace ZptSharp.Config
         }
 
         /// <summary>
-        /// Creates a new, empty, configuration builder object.
+        /// Creates a new configuration builder object with state equivalent to a default configuration object.
         /// </summary>
-        /// <returns>A configuration builder.</returns>
+        /// <remarks>
+        /// <para>
+        /// A builder instance created by this method will have the same initial state as <see cref="Default"/>.
+        /// See the documentation there for a summary of this default state.
+        /// </para>
+        /// </remarks>
+        /// <returns>A configuration builder with default initial state.</returns>
         public static Builder CreateBuilder() => new Builder();
 
         /// <summary>
-        /// <para>
-        /// The constructor for <see cref="RenderingConfig"/> is intentionally <see langword="protected"/>.
-        /// Instances of this class must be created via an instance of <see cref="Builder"/>.
-        /// </para>
-        /// <example>
-        /// <para>
-        /// Here is an example showing how to create a new config object.
-        /// </para>
-        /// <code>
-        /// var builder = new RenderingConfig.Builder();
-        /// /* Use the builder to set config values */
-        /// var config = builder.GetConfig();
-        /// </code>
-        /// </example>
+        /// The constructor for <see cref="RenderingConfig"/> is intentionally <see langword="private"/>.
+        /// Instances of this class must be created via a <see cref="Builder"/>.
         /// </summary>
-        protected RenderingConfig()
+        RenderingConfig()
         {
             DocumentEncoding = Encoding.UTF8;
             KeywordOptions = new ReadOnlyDictionary<string, object>(new Dictionary<string, object>());
@@ -207,6 +305,51 @@ namespace ZptSharp.Config
         /// <summary>
         /// Gets an instance of <see cref="RenderingConfig"/> with default values.
         /// </summary>
+        /// <remarks>
+        /// <para>
+        /// The property values for a default rendering configuration are as follows.  This applies
+        /// to instances created via this static property and also the 'starting' state of a builder
+        /// created via <see cref="CreateBuilder"/>.
+        /// </para>
+        /// <list type="table">
+        /// <item>
+        /// <term><see cref="DocumentEncoding"/></term>
+        /// <description><c>Encoding.UTF8</c></description>
+        /// </item>
+        /// <item>
+        /// <term><see cref="DocumentProvider"/></term>
+        /// <description><see langword="null"/></description>
+        /// </item>
+        /// <item>
+        /// <term><see cref="OmitXmlDeclaration"/></term>
+        /// <description><see langword="false"/></description>
+        /// </item>
+        /// <item>
+        /// <term><see cref="RootContextsProvider"/></term>
+        /// <description><see langword="null"/></description>
+        /// </item>
+        /// <item>
+        /// <term><see cref="KeywordOptions"/></term>
+        /// <description>An empty dictionary</description>
+        /// </item>
+        /// <item>
+        /// <term><see cref="ContextBuilder"/></term>
+        /// <description>An empty/no-op action</description>
+        /// </item>
+        /// <item>
+        /// <term><see cref="IncludeSourceAnnotation"/></term>
+        /// <description><see langword="false"/></description>
+        /// </item>
+        /// <item>
+        /// <term><see cref="SourceAnnotationBasePath"/></term>
+        /// <description><see langword="null"/></description>
+        /// </item>
+        /// <item>
+        /// <term><see cref="DefaultExpressionType"/></term>
+        /// <description>The string <c>path</c></description>
+        /// </item>
+        /// </list>
+        /// </remarks>
         /// <value>The default rendering config.</value>
         public static RenderingConfig Default
         {

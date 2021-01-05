@@ -8,7 +8,7 @@ namespace ZptSharp.Expressions
     /// Implementation of <see cref="IGetsBuiltinContextsProvider"/> which uses dependency
     /// injection to backfill the other dependencies, as well as the context &amp; config.
     /// This may also return the contexts provider from
-    /// <see cref="RenderingConfig.BuiltinContextsProvider"/> if it is not-null.
+    /// <see cref="RenderingConfig.RootContextsProvider"/> if it is not-null.
     /// </summary>
     public class BuiltinContextsProviderFactory : IGetsBuiltinContextsProvider
     {
@@ -22,8 +22,8 @@ namespace ZptSharp.Expressions
         /// <param name="config">Rendering configuration.</param>
         public IGetsDictionaryOfNamedTalesValues GetBuiltinContextsProvider(ExpressionContext context, RenderingConfig config)
         {
-            if (config.BuiltinContextsProvider != null)
-                return config.BuiltinContextsProvider(context);
+            if (config.RootContextsProvider != null)
+                return config.RootContextsProvider(context);
 
             return new BuiltinContextsProvider(context, config, metalDocumentAdapterFactory);
         }

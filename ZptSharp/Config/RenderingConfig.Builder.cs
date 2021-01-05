@@ -61,10 +61,10 @@ namespace ZptSharp.Config
             /// If null then a default service will be used for this purpose.
             /// </summary>
             /// <value>The built-in contexts provider.</value>
-            public Func<ExpressionContext, IGetsDictionaryOfNamedTalesValues> BuiltinContextsProvider
+            public Func<ExpressionContext, IGetsDictionaryOfNamedTalesValues> RootContextsProvider
             {
-                get => config.BuiltinContextsProvider;
-                set { AssertIsNotBuilt(); config.BuiltinContextsProvider = value; }
+                get => config.RootContextsProvider;
+                set { AssertIsNotBuilt(); config.RootContextsProvider = value; }
             }
 
             /// <summary>
