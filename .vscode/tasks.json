@@ -138,6 +138,17 @@
             ],
             "group": "none",
             "problemMatcher": []
+        },
+        {
+            "label": "run DocFx docs site",
+            "command": "docfx",
+            "type": "process",
+            "args": [
+                "serve",
+                "ZptSharp.Documentation/_site"
+            ],
+            "group": "none",
+            "problemMatcher": []
         }
     ]
 }
