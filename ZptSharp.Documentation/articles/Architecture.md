@@ -1,37 +1,59 @@
 # ZptSharp architecture
-The ZptSharp architecture is shown in this diagram.
+The following diagram shows the architecture of a complete application which uses ZptSharp.
 
 ![Architecture diagram](../images/ZptSharpArchitecture.svg)
 
-## ZptSharp core
-The core of ZptSharp provides the logic to coordinate the document/file rendering process. It also contains logic to evaluate the core expression types.
+The consuming application must add ZptSharp to its `IServiceCollection` (dependency injection) during **Startup**, as well as perform a few one-time configuration/registration tasks.
 
-Alone, the ZptSharp core is not sufficient to render & write documents. You must also choose and install a **document provider** plugin. **Expression** plugins, on the other hand, are optional. 
+Once ZptSharp is set up, a project which makes use of it need only take a direct reference to the ZptSharp package. Consuming projects need not reference the other packages, because all of ZptSharp's functionality is available by injecting interfaces.
 
-## Document provider plugins
-For a complete/working ZptSharp environment, you must install a document provider plugin.
+## The ZptSharp package
+The NuGet package ZptSharp contains only abstractions, model types and the API. In particular it contains the [`IRendersZptFile`] & [`IRendersZptDocument`] interfaces which are the two primary entry-points to the functionality.
 
-Each document provider contains implementation-specific logic for reading & writing either HTML or XML documents. The ZptSharp core contains only an abstraction for working with document-specific APIs.
+This package's dependencies have been kept to a minimum, so that it is as easy as possible to consume.
 
-### List of document provider plugins
-There are three officially-supported document provider plugins:
+This package forms one half of "The ZptSharp core".
 
-* **XML document provider** - facilitates reading/writing XML documents using the API from the `System.Xml.Linq` namespace.
-* **AngleSharp document provider** - facilitates reading/writing HTML documents via the open source AngleSharp library.
-* **HAP document provider** - facilitates reading/writing HTML documents via the open source HTML Agility Pack library.
+[`IRendersZptFile`]: xref:ZptSharp.IRendersZptFile
+[`IRendersZptDocument`]: xref:ZptSharp.IRendersZptDocument
 
-## Expression plugins
-Expression plugins allow ZptSharp to evaluate expression types beyond those included in the core.
+## The ZptSharp.Impl package
+The ZptSharp.Impl NuGet package contains the main logic and implementation classes for almost all of the abstractions declared in the ZptSharp package.
 
-ZptSharp includes support for a number of expression types *without need for expression plugins*. You only need to install any expression plugins if you wish to use the expression type it provides.
+This package is the other half of "The ZptSharp core".
 
-### List of expression plugins
-These are the expression plugins which are officially supported.
+ZptSharp.Impl includes the following **expression evaluators** (see below).
 
-* **Python expressions** - facilitates evaluating expressions written using Python 2 (via the open source IronPython library)
-* **CSharp expressions** - facilitates evaluating expressions written in C#
+* `path`
+* `string`
+* `not`
+* `pipe`
 
-## Wiring everything up
-ZptSharp uses dependency injection (DI) to 'wire up' the selected plugins to be used by the core. This DI should be configured by the consuming application.
+## Document providers
+_In order to have a working ZptSharp implementation, you **must** install at least one document provider plugin. The two core packages alone are not enough._
 
-ZptSharp uses `IServiceCollection` & `IServiceProvider` from **Microsoft.Extensions.DependencyInjection**. Extension methods are provided, in the `ZptSharp` namespace, for registering and activating these components/plugins in your application.
+Document providers are the way in which ZptSharp reads and writes markup documents (HTML and/or XML). The main interface which must be implemented by a document provider is [`IReadsAndWritesDocument`]. They bridge the gap between the ZptSharp core packages and the DOM.
+
+ZptSharp has three document provider packages available:
+
+| Package                  | Description |
+| -------                  | ----------- |
+| ZptSharp.Xml             | Reads/writes XML documents using the `System.Xml.Linq` API |
+| ZptSharp.HtmlAgilityPack | Reads/writes HTML documents using the HTML Agility Pack |
+| ZptSharp.AngleSharp      | Reads/writes HTML documents using AngleSharp |
+
+[`IReadsAndWritesDocument`]: xref:ZptSharp.Dom.IReadsAndWritesDocument
+
+## Expression evaluators
+An expression evaluator provides support for one or more TALES expression types. _Unlike document providers_, the core packages include support for a few expression types, which may be sufficient for your application. _Installing additional evaluators is optional_.
+
+The main interface which an expression evaluator must implement is [`IEvaluatesExpression`].
+
+The available expression evaluator add-on packages are:
+
+| Package | Description |
+| ------- | ----------- |
+| ZptSharp.PythonExpressions | Evaluates expressions written in Python 2 (via IronPython) |
+| ZptSharp.CSharpExpressions | Evaluates expressions written in C# (via Roslyn scripting API) |
+
+[`IEvaluatesExpression`]: xref:ZptSharp.Expressions.IEvaluatesExpression
