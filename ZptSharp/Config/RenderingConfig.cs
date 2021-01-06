@@ -20,16 +20,20 @@ namespace ZptSharp.Config
     /// a <see cref="Default" /> configuration instance.
     /// </para>
     /// <para>
-    /// Because every instance of rendering configuration is immutable, a builder must be used in order to customise
-    /// the configuration before it is created.  The primary way to do this is to use the <see cref="CreateBuilder" />
-    /// method, then to set up the configuration builder via its settable properties, then finally use
-    /// <see cref="RenderingConfig.Builder.GetConfig" /> in order to build and return the rendering configuration.
+    /// Because every instance of rendering configuration is immutable, a builder object must be used to set-up
+    /// the configuration object before it is used.
+    /// The primary way to do this is:
     /// </para>
+    /// <list type="number">
+    /// <item><description>Use the <see cref="CreateBuilder" /> method to get a builder</description></item>
+    /// <item><description>Alter the settings as desired upon the builder</description></item>
+    /// <item><description>Use <see cref="RenderingConfig.Builder.GetConfig" /> to build the configuration object</description></item>
+    /// </list>
     /// <para>
     /// An alternative way to get a customised rendering configuration is to copy the settings/state of an existing
-    /// configuration object into a builder.  This is performed via <see cref="CloneToNewBuilder" />, executed from
-    /// the configuration object which you wish to copy.  You may then use that builder in the same way as if a new
-    /// builder had been created from scratch.
+    /// configuration object into a builder.  This is performed via <see cref="CloneToNewBuilder" />.
+    /// You may then use that builder from step 2 onward in the process described above, except that it will be
+    /// pre-filled with the same state as in the cloned configuration.
     /// </para>
     /// </remarks>
     /// <example>
@@ -61,10 +65,15 @@ namespace ZptSharp.Config
         /// <para>
         /// Not all document providers will honour this encoding configuration setting;
         /// it is respected only where the underlying DOM document reader/writer supports it.
-        /// Some document providers might only support auto-detection of encoding or might
-        /// be hard-coded to always use the same encoding.  Refer to the documentation of
-        /// the document provider used - the implementation of <see cref="IReadsAndWritesDocument" /> -
-        /// to see if this configuration property is supported.
+        /// Refer to the documentation of the document provider used - the implementation of
+        /// <see cref="IReadsAndWritesDocument" /> - to see if this configuration property is supported.
+        /// </para>
+        /// <para>
+        /// Where supported, this configuration setting allows the reading &amp; writing of
+        /// ZPT documents which use different character encodings.
+        /// </para>
+        /// <para>
+        /// In all modern cases, of course, UTF8 is the recommended encoding.
         /// </para>
         /// </remarks>
         /// <seealso cref="IReadsAndWritesDocument"/>
@@ -76,7 +85,7 @@ namespace ZptSharp.Config
         /// </summary>
         /// <remarks>
         /// <para>
-        /// When using <see cref="IRendersZptFile"/>, this configuration property is irrelevant.
+        /// When using <see cref="IRendersZptFile"/>, this configuration property is irrelevant and ignored.
         /// The file-rendering service will select an appropriate document renderer based upon
         /// the filename &amp; extension of the source file.
         /// </para>
@@ -89,13 +98,8 @@ namespace ZptSharp.Config
         /// which document provider implementation should be used to read &amp; write the underlying DOM
         /// document.
         /// </para>
-        /// <para>
-        /// If the document-rendering service is used and this configuration property is unset then
-        /// there is only one other way to avoid the rendering process failing with an exception.
-        /// That way is to manually register an implementation of <see cref="IReadsAndWritesDocument"/>
-        /// with the <c>IServiceProvider</c> from which the document renderer was resolved.
-        /// </para>
         /// </remarks>
+        /// <seealso cref="IRendersZptDocument"/>
         /// <value>The document provider implementation to be used by the document-renderer service.</value>
         public virtual IReadsAndWritesDocument DocumentProvider { get; private set; }
 
@@ -177,14 +181,18 @@ namespace ZptSharp.Config
         public virtual Func<ExpressionContext, IGetsDictionaryOfNamedTalesValues> RootContextsProvider { get; private set; }
 
         /// <summary>
-        /// Gets a collection of "keyword options" available at the root TALES context named <c>options</c>.
+        /// Gets a collection of name/value pairs available at the root TALES context (variable) named <c>options</c>.
         /// </summary>
         /// <remarks>
         /// <para>
         /// Keyword options are a series of arbitrary name/value pairs.
-        /// Their precise semantics is not strictly specified by the ZPT syntax specification.
-        /// Typically they could be used to represent command-line arguments in a CLI app.
-        /// They should not be used to store model data when the model itself would be more suitable.
+        /// Their precise semantics are loosely-defined by the ZPT syntax specification and the functionality
+        /// is very rarely-used in real-life implementations, nor is it recommended to begin using them if not
+        /// absolutely neccesary.
+        /// Keyword options could, for example, be used to contain arbitrary name/value arguments passed to a
+        /// command-line app.
+        /// In all foreseeable use-cases though, the model is a far better way to make data available
+        /// to document templates.
         /// </para>
         /// <para>
         /// Note that because <c>options</c> is a root TALES context, if the <see cref="RootContextsProvider"/>
@@ -196,7 +204,7 @@ namespace ZptSharp.Config
         public virtual IReadOnlyDictionary<string,object> KeywordOptions { get; private set; }
 
         /// <summary>
-        /// Gets a builder action which is used to extend the root contexts, without needing to
+        /// Gets a callback which is used to extend the root contexts, without needing to
         /// replace the <see cref="RootContextsProvider" />.
         /// </summary>
         /// <remarks>
@@ -217,50 +225,145 @@ namespace ZptSharp.Config
         /// <para>
         /// Source annotation is a useful ZPT feature used for debugging and understanding the rendering process,
         /// such as when diagnosing a problem.
-        /// When source annotation is enabled, each time an element is included from 'elsewhere' (such as via a METAL
-        /// macro, or by filling a slot), an HTML/XML comment is added indicating the source information and source
-        /// line number from where that element originated.
+        /// When source annotation is enabled, each time there is an insertion of markup from a different source, an
+        /// HTML/XML comment is added indicating that source and source line number.
+        /// The insertion of markup most commonly refers to the usage of METAL macros and the filling of slots.
+        /// It helps developers confidently understand "where did this output come from"?
+        /// </para>
+        /// <para>
+        /// The "source" for any document is simplest when <see cref="IRendersZptFile"/> is used, since it
+        /// is quite simply the path to the file, relative to <see cref="SourceAnnotationBasePath"/> where applicable.
+        /// When <see cref="IRendersZptDocument"/> is used instead then a source info object would be passed (via
+        /// optional parameter) to
+        /// <see cref="IRendersZptDocument.RenderAsync(System.IO.Stream, object, RenderingConfig, System.Threading.CancellationToken, Rendering.IDocumentSourceInfo)"/>.
+        /// A custom implementation of <see cref="Rendering.IDocumentSourceInfo"/> could represent anything,
+        /// such as a database key, API URI or whatever application-specific information is applicable.
         /// </para>
         /// </remarks>
+        /// <example>
+        /// <para>
+        /// Here is a sample of what source annotation could look like the following in the rendered output.
+        /// It appears as an HTML or XML comment, designated by a block of <c>=</c> symbols.
+        /// It then shows the string representation of the source information and the line number at which
+        /// the included content originated.
+        /// </para>
+        /// <code language="html">
+        /// &lt;span&gt;This span element was originally defined in "MyMacro.pt", line 4&lt;/span&gt;&lt;!--
+        /// ==============================================================================
+        /// MySourceFiles\MyMacro.pt (line 4)
+        /// ==============================================================================
+        /// --&gt;
+        ///     This is further content in the rendered output document.
+        /// </code>
+        /// </example>
+        /// <seealso cref="Rendering.IDocumentSourceInfo"/>
+        /// <seealso cref="SourceAnnotationBasePath"/>
         /// <value><c>true</c> if source annotation should be included in the output; otherwise, <c>false</c>.</value>
         public virtual bool IncludeSourceAnnotation { get; private set; }
 
         /// <summary>
-        /// <para>
-        /// Gets a file system path which is used as the 'base' or root path for template files.
-        /// When <see cref="IncludeSourceAnnotation"/> is <see langword="true"/>, if this property is
-        /// non-null, file paths to template files are recorded as relative paths based upon this path.
-        /// </para>
-        /// <para>
-        /// If this property is <see langword="null"/> or where a template file is not a descendent of this
-        /// path, then full absolute file paths will be recorded in source annotation.
-        /// </para>
-        /// <para>
-        /// This property has no effect if <see cref="IncludeSourceAnnotation"/> is <see langword="false"/>.
-        /// </para>
+        /// Gets a file system path which is used as the base path to shorten source annotation filenames,
+        /// when <see cref="IncludeSourceAnnotation"/> is <see langword="true"/>.
         /// </summary>
+        /// <remarks>
+        /// <para>
+        /// This configuration setting is only relevant when <see cref="IncludeSourceAnnotation"/> is <see langword="true"/>
+        /// and also when documents are rendered from file system files, such as when <see cref="IRendersZptFile"/>
+        /// is being used.
+        /// In any other scenario this configuration setting will not be used and will have no effect.
+        /// </para>
+        /// <para>
+        /// When source annotation comments are added to the rendered output, if the source of a document is
+        /// a filesystem file, the comment will include the path to that file.
+        /// If this configuration setting is not specified or is <see langword="null"/> then the full,
+        /// absolute file path will be recorded in the comment.
+        /// If this configuration setting is specified, and the source file (receiving the source annotation
+        /// comment) is a descendent of this base path, then only the relative portion of the file path will
+        /// be recorded in the source annotation comment.
+        /// </para>
+        /// <para>
+        /// If the document file receiving the source annotation comment is not a descendent of this base path,
+        /// then the full absolute path will still be used.
+        /// </para>
+        /// </remarks>
+        /// <example>
+        /// <para>
+        /// These examples show a few combinations of what would be written in the source annotation comments for
+        /// various scenarios.
+        /// </para>
+        /// <list type="bullet">
+        /// <item><description>
+        /// If <see cref="IncludeSourceAnnotation"/> is <see langword="false"/> then no source annotation would be
+        /// written at all, and this setting (and all other scenarios listed here) would be meaningless.
+        /// </description></item>
+        /// <item><description>
+        /// If the source of the documents involved is not a file from a file system: <see cref="Rendering.FileSourceInfo"/>
+        /// then this configuration setting is meaningless.  The source information written to the comments would
+        /// always come directly from the implementation of <see cref="Rendering.IDocumentSourceInfo"/>.
+        /// </description></item>
+        /// <item><description>
+        /// If the source of the document were <c>C:\MyDirectory\MyFile.html</c> and this configuration setting is
+        /// <see langword="null"/> then source annotation comments would refer to that document using the path
+        /// <c>C:\MyDirectory\MyFile.html</c>.
+        /// </description></item>
+        /// <item><description>
+        /// If the source of the document were <c>C:\MyDirectory\MyFile.html</c> and this configuration setting is
+        /// <c>C:\MyDirectory</c> then source annotation comments would refer to that document using the path
+        /// <c>MyFile.html</c>.
+        /// </description></item>
+        /// <item><description>
+        /// If the source of the document were <c>C:\MyDirectory\MySubDir\MyFile.html</c> and this configuration setting is
+        /// <c>C:\MyDirectory</c> then source annotation comments would refer to that document using the path
+        /// <c>MySubDir\MyFile.html</c>.
+        /// </description></item>
+        /// <item><description>
+        /// If the source of the document were <c>C:\OtherDirectory\MyFile.html</c> and this configuration setting is
+        /// <c>C:\MyDirectory</c> then source annotation comments would refer to that document using the path
+        /// <c>C:\OtherDirectory\MyFile.html</c>.
+        /// The absolute path would be used because the source file is outside the base path.
+        /// </description></item>
+        /// </list>
+        /// </example>
+        /// <seealso cref="Rendering.IDocumentSourceInfo"/>
+        /// <seealso cref="Rendering.FileSourceInfo"/>
+        /// <seealso cref="IRendersZptFile"/>
+        /// <seealso cref="IncludeSourceAnnotation"/>
         /// <value>The base path used for shorting the paths of source files in logs and source annotation.</value>
         public virtual string SourceAnnotationBasePath { get; private set; }
 
         /// <summary>
         /// Gets the default expression type name/prefix, used for TALES expressions which do not have a prefix.
-        /// If left unset, this defaults to <see cref="WellKnownExpressionPrefix.Path"/>.
         /// </summary>
+        /// <remarks>
+        /// <para>
+        /// In TALES expressions used by the ZPT rendering process, prefixing the expression with an expression-type
+        /// is optional.  The rendering process always has a configured default expression type.  Unprefixed expressions
+        /// are assumed to be of that default type.
+        /// </para>
+        /// <para>
+        /// This configuration setting permits the changing of that default expression type.
+        /// </para>
+        /// </remarks>
         /// <value>The default expression-type prefix.</value>
         public virtual string DefaultExpressionType { get; private set; }
 
         /// <summary>
-        /// <para>
-        /// Gets a copy of the current configuration instance, returned as a
-        /// <see cref="Builder"/> object, allowing further amendments.
-        /// </para>
-        /// <para>
-        /// This does not allow alterations to the current configuration
-        /// instance; configurations are immutable once built.  Rather it creates
-        /// and returns a builder pre-populated with the same settings as the
-        /// current configuration instance.
-        /// </para>
+        /// Creates and returns a new <see cref="RenderingConfig.Builder"/> instance which has its initial
+        /// state/settings copied from the current configuration instance.
         /// </summary>
+        /// <remarks>
+        /// <para>
+        /// Use this method to create a new configuration builder which is based upon the current configuration,
+        /// but may then be modified before it is used to create a new configuration.
+        /// Rendering configuration objects are immutable and cannot be altered after they have been built/created.
+        /// This method is a convenience to allow the next-best-thing: creating a new builder, cloned from an
+        /// existing configuration.
+        /// </para>
+        /// <para>
+        /// This method does not allow editing of the configuration from which the builder was cloned.
+        /// Changes made to the returned builder object will not affect the original configuration object.
+        /// </para>
+        /// </remarks>
         /// <returns>A configuration builder.</returns>
         public Builder CloneToNewBuilder()
         {
@@ -279,14 +382,21 @@ namespace ZptSharp.Config
         }
 
         /// <summary>
-        /// Creates a new configuration builder object with state equivalent to a default configuration object.
+        /// Creates a new configuration builder object with a default set of state.
         /// </summary>
         /// <remarks>
         /// <para>
-        /// A builder instance created by this method will have the same initial state as <see cref="Default"/>.
-        /// See the documentation there for a summary of this default state.
+        /// The initial state of the builder object returned by this method will be the same as the state
+        /// which would be created by <see cref="Default"/>.  Refer to the documentation of the default
+        /// property to see what that state would be.
+        /// </para>
+        /// <para>
+        /// The builder may be used to set-up the intended state of a configuration object.
+        /// Use <see cref="Builder.GetConfig"/> to build and return a configuration object from that builder,
+        /// once the desired settings have been made.
         /// </para>
         /// </remarks>
+        /// <seealso cref="Default"/>
         /// <returns>A configuration builder with default initial state.</returns>
         public static Builder CreateBuilder() => new Builder();
 

@@ -38,10 +38,7 @@ namespace ZptSharp
         /// <para>
         /// Passing a <see cref="RenderingConfig" /> in the <paramref name="config" /> parameter is
         /// optional.  If omitted or null then <see cref="RenderingConfig.Default" /> will be used,
-        /// which is likely to be suitable for simple usages.  To create a custom rendering
-        /// configuration object, either use <see cref="RenderingConfig.CreateBuilder()" />, or
-        /// clone an existing config to a builder via <see cref="RenderingConfig.CloneToNewBuilder()" />
-        /// and then make amendments before building a new configuration.
+        /// which is likely to be suitable for simple usages.
         /// </para>
         /// <para>
         /// The cancellation token parameter <paramref name="token" /> may be used during asynchronous
@@ -56,10 +53,10 @@ namespace ZptSharp
         /// </para>
         /// </remarks>
         /// <returns>A stream containing the rendered document.</returns>
-        /// <param name="filePath">The path of the document file to render.</param>
-        /// <param name="model">The model to use for the rendering process.</param>
-        /// <param name="config">An optional rendering configuration object.</param>
-        /// <param name="token">An object used to cancel the operation if required.</param>
+        /// <param name="filePath">The relative or absolute file system path of the document to render.</param>
+        /// <param name="model">The model/data to be rendered by the document.</param>
+        /// <param name="config">An optional rendering configuration.</param>
+        /// <param name="token">An optional token used to cancel/abort the operation whilst it is in-progress.</param>
         Task<Stream> RenderAsync(string filePath,
                                  object model,
                                  RenderingConfig config = null,
