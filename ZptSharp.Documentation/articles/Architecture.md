@@ -30,7 +30,7 @@ ZptSharp.Impl includes the following **expression evaluators** (see below).
 * `pipe`
 
 ## Document providers
-_In order to have a working ZptSharp implementation, you **must** install at least one document provider plugin. The two core packages alone are not enough._
+_In order to have a working ZptSharp implementation, you **must** install at least one document provider packages. The two core packages alone are not enough._
 
 Document providers are the way in which ZptSharp reads and writes markup documents (HTML and/or XML). The main interface which must be implemented by a document provider is [`IReadsAndWritesDocument`]. They bridge the gap between the ZptSharp core packages and the DOM.
 

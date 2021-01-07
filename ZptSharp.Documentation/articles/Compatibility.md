@@ -1,7 +1,7 @@
 # ZptSharp compatibility
 ZptSharp is compatible with both .NET Framework and .NET Core/.NET 5+; the NuGet packages are *multi-targeted*.
 
-The table below shows detailed compatibility information.
+The table below shows the minimum compatible versions for a number of different frameworks/.NET environments.
 
 | Framework      | Min version |
 | -------------- | ----------- |

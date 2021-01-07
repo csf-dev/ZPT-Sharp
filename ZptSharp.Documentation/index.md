@@ -1,15 +1,10 @@
-ZptSharp is a .NET Framework/.NET Standard library for writing HTML or XML from templates, using [the ZPT syntax]. It may be used as any of:
+<div class="homepage">
 
-* An ASP.NET MVC 5 view engine
-* An ASP.NET Core MVC view engine
-* A standalone command-line app
-* A library for your own apps
+# Intuitive, Zen HTML & XML document rendering for .NET
 
-[the ZPT syntax]: articles/ZptSyntax
+<section class="sample">
 
-## Syntax example
-Here is a brief sample of ZPT syntax, as would be used in a view.
-
+## Sample ZptSharp markup
 ```html
 <ul>
   <li tal:repeat="todo here/Todos">
@@ -19,19 +14,26 @@ Here is a brief sample of ZPT syntax, as would be used in a view.
 </ul>
 ```
 
-## Learn more
-* [Quick-start: ASP.NET MVC 5]
-* [Quick-start: ASP.NET Core MVC]
-* [Quick-start: Command-line app]
-* [Quick-start: Consuming the API]
-* [Tutorial: Learning ZPT]
-* [ZPT syntax reference]
-* [API reference]
+</section>
 
-[Quick-start: ASP.NET MVC 5]: articles/QuickStart/Mvc5
-[Quick-start: ASP.NET Core MVC]: articles/QuickStart/MvcCore
-[Quick-start: Command-line app]: articles/QuickStart/CliApp
-[Quick-start: Consuming the API]: articles/QuickStart/ConsumingTheApi
-[Tutorial: Learning ZPT]: articles/ZptTutorial
-[ZPT syntax reference]: articles/ZptReference
-[API reference]: articles/ApiReference
+<section class="get_started">
+
+## Get started
+* [What is ZptSharp?]
+* Quick start
+    * [ASP.NET Core MVC]
+    * [ASP.NET MVC 5]
+    * [Consume the API]
+    * [Command line renderer]
+* [ZPT tutorial]
+
+[What is ZptSharp?]: articles/WhatIsZptSharp.md
+[ASP.NET MVC 5]: articles/QuickStart/Mvc5.md
+[ASP.NET Core MVC]: articles/QuickStart/MvcCore.md
+[Command line renderer]: articles/QuickStart/CliApp.md
+[Consume the API]: articles/QuickStart/ConsumingTheApi.md
+[ZPT tutorial]: articles/ZptTutorial/index.md
+
+</section>
+
+</div>
