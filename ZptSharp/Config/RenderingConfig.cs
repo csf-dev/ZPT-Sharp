@@ -404,7 +404,7 @@ namespace ZptSharp.Config
         /// The constructor for <see cref="RenderingConfig"/> is intentionally <see langword="private"/>.
         /// Instances of this class must be created via a <see cref="Builder"/>.
         /// </summary>
-        RenderingConfig()
+        protected RenderingConfig()
         {
             DocumentEncoding = Encoding.UTF8;
             KeywordOptions = new ReadOnlyDictionary<string, object>(new Dictionary<string, object>());
