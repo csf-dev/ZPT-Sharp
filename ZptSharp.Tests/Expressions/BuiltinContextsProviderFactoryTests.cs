@@ -16,7 +16,7 @@ namespace ZptSharp.Expressions
                                                                                            IGetsDictionaryOfNamedTalesValues contextProvider,
                                                                                            BuiltinContextsProviderFactory sut)
         {
-            Mock.Get(config).SetupGet(x => x.BuiltinContextsProvider).Returns(() => c => contextProvider);
+            Mock.Get(config).SetupGet(x => x.RootContextsProvider).Returns(() => c => contextProvider);
             var result = sut.GetBuiltinContextsProvider(context, config);
             Assert.That(result, Is.SameAs(contextProvider));
         }

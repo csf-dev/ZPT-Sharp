@@ -1,6 +1,6 @@
 <div class="homepage">
 
-# Intuitive, Zen HTML & XML document rendering for .NET
+# Intuitive HTML & XML document templates for .NET
 
 <section class="sample">
 

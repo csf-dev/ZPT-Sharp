@@ -72,7 +72,7 @@ namespace ZptSharp.Expressions
         /// <returns>An object indicating whether a value was successfully retrieved or not, along with the retrieved value (if applicable).</returns>
         /// <param name="name">The name of the value to retrieve.</param>
         /// <param name="cancellationToken">An optional cancellation token.</param>
-        public Task<GetValueResult> TryGetValueAsync(string name, CancellationToken cancellationToken = default)
+        public virtual Task<GetValueResult> TryGetValueAsync(string name, CancellationToken cancellationToken = default)
         {
             if (BuiltinContextsAndValues.TryGetValue(name, out var valueFunc))
                 return Task.FromResult(GetValueResult.For(valueFunc()));
@@ -84,7 +84,7 @@ namespace ZptSharp.Expressions
         /// Gets a dictionary of every available named TALES value, exposed by the current instance.
         /// </summary>
         /// <returns>The named values.</returns>
-        public Task<IDictionary<string, object>> GetAllNamedValues()
+        public virtual Task<IDictionary<string, object>> GetAllNamedValues()
         {
             IDictionary<string, object> values = BuiltinContextsAndValues.ToDictionary(k => k.Key, v => v.Value());
             return Task.FromResult(values);

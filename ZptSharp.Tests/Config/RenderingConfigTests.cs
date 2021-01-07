@@ -43,9 +43,9 @@ namespace ZptSharp.Config
             var sut = RenderingConfig.CreateBuilder();
 
             IGetsDictionaryOfNamedTalesValues ContextFactory(ExpressionContext ctx) => namedValueProvider;
-            sut.BuiltinContextsProvider = ContextFactory;
+            sut.RootContextsProvider = ContextFactory;
 
-            var result = sut.GetConfig().BuiltinContextsProvider(null);
+            var result = sut.GetConfig().RootContextsProvider(null);
 
             Assert.That(result, Is.SameAs(namedValueProvider));
         }
@@ -124,7 +124,7 @@ namespace ZptSharp.Config
             var sut = RenderingConfig.CreateBuilder();
 
             sut.GetConfig();
-            Assert.That(() => sut.BuiltinContextsProvider = null, Throws.InvalidOperationException);
+            Assert.That(() => sut.RootContextsProvider = null, Throws.InvalidOperationException);
         }
 
         [Test, AutoMoqData]

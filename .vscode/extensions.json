@@ -1,0 +1,12 @@
+{
+	"recommendations": [
+		"ms-dotnettools.csharp",
+		"jchannon.csharpextensions",
+		"jorgeserrano.vscode-csharp-snippets",
+		"k--kato.docomment",
+		"github.vscode-pull-request-github",
+		"heaths.vscode-guid",
+		"ms-vscode.powershell"
+	],
+	"unwantedRecommendations": []
+}
