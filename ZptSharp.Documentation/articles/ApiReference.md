@@ -1,3 +1,3 @@
-# ApiReference
+[The API documentation].
 
-[index](index.md)
+[The API documentation]: ../api/index.md

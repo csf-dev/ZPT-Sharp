@@ -12,25 +12,28 @@ namespace ZptSharp.Dom
     /// </summary>
     /// <remarks>
     /// <para>
-    /// A document provider is a required add-on for ZptSharp which allows it to read and write
+    /// A document provider is an add-on (albeit a required one) which allows ZptSharp to read &amp; write
     /// markup documents.
-    /// On its own, the ZptSharp core deals only in an abstraction, the <see cref="IDocument"/> interface
-    /// and its members.
-    /// The document provider is how a stream may be read as a document and how a modified/rendered
-    /// document may be written/saved back to a stream.
-    /// </para>
-    /// <para>
-    /// Implementations of this interface typically use other/3rd-party libraries to read/write the
-    /// markup, and "bridge the gap" between the specific document reading/writing API, and the abstractions
-    /// which the ZptSharp core uses.
+    /// The ZptSharp core manipulates DOM documents via an abstraction; this is the <see cref="IDocument"/>
+    /// interface and related types.
+    /// Implementations of this interface allow reading/writing those abstract documents from/to instances
+    /// of <see cref="Stream"/>.
+    /// In practical terms, this is the "load" and "save" logic of ZptSharp.
     /// </para>
     /// <para>
     /// In order to have a working/usable ZptSharp environment, at least one document provider
     /// must be registered with dependency injection and must also be registered for use with
     /// <see cref="IRegistersDocumentReaderWriter"/>.
-    /// This registration is usually accomplished via extension methods for
-    /// <see cref="Microsoft.Extensions.DependencyInjection.IServiceCollection"/> and
-    /// <see cref="System.IServiceProvider"/> and does not usually need to be done manually.
+    /// This registration is usually performed at application configuration &amp; start-up.
+    /// Extension methods are available for both
+    /// <see cref="Microsoft.Extensions.DependencyInjection.IServiceCollection"/> &amp;
+    /// <see cref="System.IServiceProvider"/> which take care of those registrations with a very easy-to-use API.
+    /// </para>
+    /// <para>
+    /// Document provider implementations typically use 3rd-party libraries/APIs to perform a native read &amp;
+    /// write of the DOM documents.  They then provide their own implementations of <see cref="IDocument"/>,
+    /// <see cref="INode"/> &amp; <see cref="IAttribute"/> which wrap the DOM nodes returned by that 3rd-party
+    /// implementation.  This is essentially an application of the <see href="https://en.wikipedia.org/wiki/Adapter_pattern"/>.
     /// </para>
     /// </remarks>
     /// <seealso cref="IDocument"/>
@@ -62,8 +65,27 @@ namespace ZptSharp.Dom
         bool CanReadWriteForFilename(string filenameOrPath);
 
         /// <summary>
-        /// Gets a document instance from the specified input stream.
+        /// Gets a document instance from the specified input stream which contains text markup.
         /// </summary>
+        /// <remarks>
+        /// <para>
+        /// This method is used to 'load' a ZptSharp <see cref="IDocument"/> from a <paramref name="stream"/>.
+        /// Streams are used rather than files so that ZptSharp is not limited to only loading documents
+        /// from files on disk.
+        /// In most circumstances the <paramref name="sourceInfo"/> will have been specified and this
+        /// object will indicate the source of the stream, which should be passed to the returned document.
+        /// </para>
+        /// <para>
+        /// The API of this method is asynchronous (returning a task) although it is recognised that not all
+        /// implementations will fully support asynchronous loading of documents.  This also means that there is
+        /// no certainty that implementations will honour the usage of the <paramref name="token"/> to cancel/abort
+        /// the operation before it completes.
+        /// </para>
+        /// <para>
+        /// Finally, implementations should honour the rendering <paramref name="config"/> passed to this method,
+        /// but are permitted not to honour settings which are either irrelevant or which cannot be supported.
+        /// </para>
+        /// </remarks>
         /// <returns>A task which provides the document which has been read.</returns>
         /// <param name="stream">A stream containing the source of the document.</param>
         /// <param name="config">Rendering configuration.</param>
@@ -75,8 +97,25 @@ namespace ZptSharp.Dom
                                          CancellationToken token = default);
 
         /// <summary>
-        /// Writes the specified document to a specified output stream.
+        /// Writes the document to text markup and returns a stream containing the rendered document.
         /// </summary>
+        /// <remarks>
+        /// <para>
+        /// This method is used to 'save' a ZptSharp <see cref="IDocument"/> to a <see cref="Stream"/>.
+        /// Streams are used rather than files so that ZptSharp is not limited to only saving documents
+        /// as files on disk.
+        /// </para>
+        /// <para>
+        /// The API of this method is asynchronous (returning a task) although it is recognised that not all
+        /// implementations will fully support asynchronous writing of documents.  This also means that there is
+        /// no certainty that implementations will honour the usage of the <paramref name="token"/> to cancel/abort
+        /// the operation before it completes.
+        /// </para>
+        /// <para>
+        /// Finally, implementations should honour the rendering <paramref name="config"/> passed to this method,
+        /// but are permitted not to honour settings which are either irrelevant or which cannot be supported.
+        /// </para>
+        /// </remarks>
         /// <returns>A task which provides the output stream.</returns>
         /// <param name="document">The document to write.</param>
         /// <param name="config">Rendering configuration.</param>
