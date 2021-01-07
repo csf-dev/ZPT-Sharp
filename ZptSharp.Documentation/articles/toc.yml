@@ -1,6 +1,5 @@
-- name: Introduction
-  href: intro.md
-- name: Build & test
-  href: BuildAndTest.md
+- name: Get started
+- name: Reference
+- name: Contributing & extendingldAndTest.md
 - name: Compatibility
   href: Compatibility.md

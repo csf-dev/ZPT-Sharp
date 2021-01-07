@@ -1,6 +1,6 @@
 # What is ZptSharp?
 ZptSharp is an open source [library for .NET] for writing HTML or XML documents based upon page templates.
-It is useable as a library, and packages are available for using it:
+It is useable as a library, and packages are available for use:
 
 * As an ASP.NET/ASP.NET Core MVC **View Engine**
 * As a standalone command-line application
@@ -31,7 +31,7 @@ The ZPT syntax has three fundamental parts:
 The first thing which happens in the ZPT rendering process is the processing of METAL attributes.
 With METAL you may define and consume **macros**, which are reusable pieces of markup.
 
-Macros may have **slots**, which consuming markup can fill with it's own content. Thus macros may be used as content (for example a control), or as a 'wrapper' for content (for example to surround an article with standard markup) or as a hybrid of both.
+Macros may have **slots**, which consuming markup can fill with it's own content, customising the macro on a use-by-use basis. Thus macros may be used as content (for example a control), or as a 'wrapper' for content (for example to surround an article with standard markup) or as a hybrid of both.
 
 Macros may be defined in the same source document as they are consumed, or they may be consumed from other documents.
 

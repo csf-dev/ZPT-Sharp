@@ -1,5 +1,11 @@
-- name: Articles
+- name: Documentation
   href: articles/
-- name: Api Documentation
-  href: api/
-  homepage: api/index.md
+  topicHref: articles/index.md
+- name: Source code
+  href: https://github.com/csf-dev/ZPT-Sharp
+- name: Issues
+  href: https://github.com/csf-dev/ZPT-Sharp/issues
+- name: Discussion
+  href: https://github.com/csf-dev/ZPT-Sharp/discussions
+- name: NuGet packages
+  href: articles/NuGetPackages.md
