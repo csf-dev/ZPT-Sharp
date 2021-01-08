@@ -1,0 +1,4 @@
+<map id="CSF.Zpt.Rendering.DefaultRenderingSettings" name="CSF.Zpt.Rendering.DefaultRenderingSettings">
+<area shape="rect" id="node2" href="$interfaceCSF_1_1Zpt_1_1Rendering_1_1IRenderingSettings.html" title="Encapsulates the available options for rendering a IZptDocument. " alt="" coords="5,13,139,39"/>
+<area shape="rect" id="node3" href="$interfaceCSF_1_1Zpt_1_1Rendering_1_1IRenderingContextFactory.html" title="Interface for a type which creates an instance of IRenderingContext from the IRenderingSettings. " alt="" coords="163,5,365,47"/>
+</map>

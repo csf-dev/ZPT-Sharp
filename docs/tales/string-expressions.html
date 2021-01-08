@@ -1,0 +1,181 @@
+﻿<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TALES 'string' expressions</title>
+<base href="http://csf-dev.github.io/ZPT-Sharp/">
+<style type="text/css">
+@import url(css/styles.css);
+</style>
+
+<script data-main="js/config/main" type="text/javascript" src="js/lib/require.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.4.0/styles/default.min.css">
+</head>
+<body class="page_tales_string_expressions">
+<div class="content_wrapper">
+  <header class="page_header">
+    <div class="hamburger_menu" title="Show/hide navigation">
+      <span class="hamburger_line"></span>
+      <span class="hamburger_line"></span>
+      <span class="hamburger_line"></span>
+    </div>
+    <h2>
+      <a href="index.html">ZPT Sharp</a>
+      <em>Zen HTML views</em>
+    </h2>
+  </header>
+  <div class="main_page_area">
+    <nav id="site_navigation">
+      <h2>Site navigation</h2>
+      <ul>
+				<li class="nav_section">
+          <h3>First steps</h3>
+					<ul>
+            <li>
+              <a href="advantages-of-zpt-views.html">Why use ZPT-Sharp</a>
+						</li>
+            <li>
+              <a href="hello-world.html">Hello World example</a>
+            </li>
+            <li>
+              <a href="writing-pages-using-zpt.html">Learn ZPT syntax</a>
+            </li>
+					</ul>
+				</li>
+        <li class="nav_section">
+          <h3>Usage</h3>
+          <ul>
+            <li>
+              <a href="asp-net-mvc-view-engine.html">ASP.NET MVC5</a>
+            </li>
+            <li>
+              <a href="command-line-renderer.html">Command-line app</a>
+            </li>
+            <li>
+              <a href="page-rendering-api.html">As an API</a>
+            </li>
+            <li>
+              <a href="logging.html">Diagnostics &amp; logging</a>
+            </li>
+          </ul>
+        </li>
+        <li class="nav_section">
+          <h3>Reference</h3>
+          <ul>
+            <li>
+              <a href="metal/introduction.html">METAL syntax</a>
+            </li>
+            <li>
+              <a href="tal/introduction.html">TAL syntax</a>
+            </li>
+            <li>
+              <a href="tales/introduction.html">TALES syntax</a>
+            </li>
+            <li>
+              <a href="api/index.html">API documentation</a>
+            </li>
+          </ul>
+        </li>
+        <li class="nav_section">
+          <h3>Installation</h3>
+          <ul>
+            <li>
+              <a href="nuget-packages.html">NuGet packages</a>
+            </li>
+            <li>
+              <a href="download.html">ZIP download</a>
+            </li>
+            <li>
+              <a href="plugins.html">Plugins</a>
+            </li>
+            <li>
+              <a href="configuration.html">Configuration</a>
+            </li>
+          </ul>
+        </li>
+        <li class="nav_section">
+          <h3>Contribute</h3>
+          <ul>
+            <li>
+              <a href="https://github.com/csf-dev/ZPT-Sharp">Github project</a>
+            </li>
+            <li>
+              <a href="https://github.com/csf-dev/ZPT-Sharp/issues">Issue tracker</a>
+            </li>
+            <li>
+              <a href="writing-plugins.html">Writing plugins</a>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </nav>
+    <section class="main_page_content">
+      <header>
+        <div class="expression plugin_note note">
+        <h2>Plugin note</h2>
+        <p>
+          This functionality is contained within an
+          <em><a href="plugins.html">expression evaluator plugin</a></em>.
+          As such, it is available only when the corresponding plugin is installed.
+        </p>
+        <div class="plugin_details">
+          <h3>Plugin assembly</h3>
+          <span><code>CSF.Zpt.ExpressionEvaluators.StringExpressions.dll</code></span>
+          <h3><span>Plugin class</span></h3>
+          <span><code>CSF.Zpt.ExpressionEvaluators.StringExpressions.StringExpressionEvaluator</code></span>
+          <h3><span>Expression prefix</span></h3>
+          <span><code>string:</code></span>
+        </div>
+      </div>
+        <h1>TALES 'string' expressions</h1>
+      </header>
+      <p>
+        A <code>string:</code> expression builds a literal string value, using optional placeholder replacement.
+        Placeholder are indicated using either the syntax <kbd>$PATH_EXPRESSION</kbd> or <kbd>${PATH_EXPRESSION}</kbd>,
+        where <code>PATH_EXPRESSION</code> is evaluated as if it were a
+        <a href="tales/path-expressions.html">TALES <code>path:</code> expression</a>.  If the path expression body
+        contains only alphanumeric characters, underscores and forward-slashes then the first syntax is sufficient.
+        For expressions which require more complex characters, or spaces, then the second syntax, using braces, is
+        required.
+      </p>
+      <p>
+        Literal dollar symbols may be included in the string, escaping them by doubling-them up: <kbd>$$</kbd>.
+      </p>
+      <p>
+        Otherwise, the returned value of the expression is a <code>System.String</code> literal created from the
+        expression body, with replacements from the TALES context made using the placeholder expressions.  Where
+        placeholder expressions return <code>null</code> references, they are converted to empty strings.  Where
+        placeholder expressions return non-null values which are not <code>System.String</code>, they are converted
+        using their default <code>Object.ToString()</code> method.
+      </p>
+    </section>
+  </div>
+</div>
+<footer class="page_footer">
+  <section class="copyright">
+    Copyright © 2017
+    <a href="http://csf-dev.com/">CSF Software Limited</a> et al
+  </section>
+  <section class="version">
+    <p>
+      Website built <strong>2017-03-19</strong>;
+      for version
+      <strong>
+        v1.0.0
+      </strong>
+    </p>
+  </section>
+</footer>
+<div class="cookie_statement">
+  <p>
+    This website uses analytics cookies to understand how visitors are making use of its content.
+    This helps decide where improvements can be made in the future.
+    <a href="https://ico.org.uk/for-organisations/guide-to-pecr/cookies-and-similar-technologies/">European and UK law</a>
+    requires us to ask you for your consent to this.
+  </p>
+  <button class="accept">Accept cookies</button>
+</div>
+
+</body>
+</html>

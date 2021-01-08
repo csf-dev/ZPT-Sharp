@@ -1,0 +1,6 @@
+<map id="CSF.Zpt.ZptDocument" name="CSF.Zpt.ZptDocument">
+<area shape="rect" id="node3" href="$classCSF_1_1Zpt_1_1DocumentProviders_1_1ZptHtmlDocument.html" title="Implementation of ZptDocument based on an HtmlAgilityPack.HtmlDocument. " alt="" coords="361,5,556,47"/>
+<area shape="rect" id="node4" href="$classCSF_1_1Zpt_1_1DocumentProviders_1_1ZptXmlDocument.html" title="Implementation of ZptDocument based on a System.Xml.XmlDocument. " alt="" coords="361,71,556,112"/>
+<area shape="rect" id="node5" href="$classCSF_1_1Zpt_1_1DocumentProviders_1_1ZptXmlLinqDocument.html" title="Implementation of ZptDocument based on a System.Xml.Linq.XDocument. " alt="" coords="361,136,556,177"/>
+<area shape="rect" id="node2" href="$interfaceCSF_1_1Zpt_1_1IZptDocument.html" title="Represents a ZPT document. " alt="" coords="5,78,111,105"/>
+</map>
