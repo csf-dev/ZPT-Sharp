@@ -16,6 +16,7 @@ install:
 build_script:
     - cmd: Tools\appveyor-build.cmd
     - cmd: Tools\appveyor-create-packages.cmd
+    - cmd: Tools\appveyor-publish-docs-site.cmd
     
 test_script:
     - cmd: echo "Tests already run"
