@@ -1,19 +1,32 @@
-**ZptSharp** *(formerly ZPT-Sharp)* is [a library for .NET] which renders HTML and/or XML documents from model data.
+# ZptSharp
+
+**ZptSharp** *(formerly ZPT-Sharp)* is a library for .NET which renders HTML/XML documents from model data.
 It is ideally suited for use in MVC applications, as the **View** technology.
 
 ZPT is an *attribute-based* syntax; as such it avoids the need to add 'alien markup' to your source files.
 ZPT source files remain syntactically valid HTML/XML and may even be opened/previewed locally in web browsers, offline from their applications.
 
-[a library for .NET]: ZptSharp.Documentation/articles/Compatibility.md
+## Documentation
+
+[Documentation for the current production release] of ZptSharp is all available on the ZptSharp website.
+[Documentation for the upcoming/next version] is also available, as a draft.
+
+[Documentation for the current production release]: https://csf-dev.github.io/ZPT-Sharp/
+[Documentation for the upcoming/next version]: https://csf-dev.github.io/ZPT-Sharp/_vnext/
+
+## Source control branches
+
+The main branches for this repository as as follows:
+
+* The **master** branch represents the latest development/next-release code
+* The **production** branch represents the most recent release version
+
+The master branch currently represents work toward [the v2.0.0 milestone].
 
 ## Continuous integration status
-In this repository the **master** branch represents the latest development code
-(some repositories would call this branch *develop*).  The **production** branch
-is the latest released version (some repositories would call this branch *master*).
 
-The master branch now represents the work towards [the v2.0.0 milestone].  For the
-latest v1.x code, please see [the v1.1.0 release].  The status badges below show the
-current CI status of the master branch.
+The status badges below are linked to the **master** branch.
+They provide a summary of the health of the build & test process.
 
 | Environment   | Status |
 | ------------- | ------ |
@@ -22,8 +35,5 @@ current CI status of the master branch.
 | Code quality  | [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=ZptSharp&metric=alert_status)](https://sonarcloud.io/dashboard?id=ZptSharp) |
 | Test coverage | [![Coverage](https://sonarcloud.io/api/project_badges/measure?project=ZptSharp&metric=coverage)](https://sonarcloud.io/dashboard?id=ZptSharp) |
 
-See also: [information about building and testing ZptSharp].
-
 [the v2.0.0 milestone]: https://github.com/csf-dev/ZPT-Sharp/milestone/17
 [the v1.1.0 release]: https://github.com/csf-dev/ZPT-Sharp/releases/tag/v1.1.0
-[information about building and testing ZptSharp]: ZptSharp.Documentation/articles/BuildAndTest.md
