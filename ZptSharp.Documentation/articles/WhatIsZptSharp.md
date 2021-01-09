@@ -20,38 +20,13 @@ ZPT syntax:
 
 * Does not interfere with the validity or structure of the underlying HTML/XML document
 * Allows template source files to be viewed/edited 'offline' from their applications with web browsers or WYSIWYG tools
-* Is intuitive to read and understand
+* Is intuitive to read and understand, even to non-developers
 * Encourages best-practices in separation between Model & View
 * Offers the full range of functionality to support complex MVC applications
 
 ## What are its fundamentals?
-The ZPT syntax has three fundamental parts:
+ZPT's syntax is organised into three logical 'modules' of functionality.
 
-### METAL is for reusing markup
-The first thing which happens in the ZPT rendering process is the processing of METAL attributes.
-With METAL you may define and consume **macros**, which are reusable pieces of markup.
-
-Macros may have **slots**, which consuming markup can fill with it's own content, customising the macro on a use-by-use basis. Thus macros may be used as content (for example a control), or as a 'wrapper' for content (for example to surround an article with standard markup) or as a hybrid of both.
-
-Macros may be defined in the same source document as they are consumed, or they may be consumed from other documents.
-
-### TAL binds your model data
-After METAL has assembled the source document, TAL is used to manipulate the DOM based upon your model data. This includes (but is not limited to):
-
-* Writing model data to the document
-* Adding, setting or removing attributes
-* Conditionally excluding elements and their children
-* Repeating an element and its children for every item in a collection
-
-### TALES is how expressions are written
-TALES is an intuitive syntax for accessing the model values, used by both TAL & METAL. Here are some examples.
-
-| Expression type | Sample                                         |
-| --------------- | ------                                         |
-| `path`          | `path:here/Company/Name`                       |
-| `string`        | `string:The ${group/Profession} who say "Ni!"` |
-| `not`           | `not:loan/IsOverdue`                           |
-
-Additionally *the configured default expression type* (usually path expressions) doesn't need the `type:` prefix.
-
-What's more - TALES is extensible. You may write your own expression evaluator implementations and add support for any expression syntax you wish.
+* **TALES** is an extensible expression syntax used to refer to your model values. It may also be used for limited manipulation, primarily aimed at formatting/transforming values for writing to the document. TALES is used by both TAL & METAL (below).
+* **METAL** is an attribute syntax for reusing sections of markup: "macros". The syntax also allows contextual customisation of macros, by filling placeholder "slots" which they define.
+* **TAL** is an attribute syntax for writing model content to the document, conditionally removing parts of the document, repeating sections of markup for each item in a model collection and more.
