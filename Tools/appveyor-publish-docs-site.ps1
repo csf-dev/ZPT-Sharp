@@ -1,3 +1,5 @@
+$ErrorActionPreference = "Stop";
+
 # Choose a base directory for the site to be published from,
 # if this branch is production then it's the main "docs/"" dir,
 # if master then it's "docs/_vnext/".
