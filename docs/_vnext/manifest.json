@@ -4293,7 +4293,7 @@
       "output": {
         ".html": {
           "relative_path": "articles/ApiReference.html",
-          "hash": "0mMJlYF996uwHVisqQyQ7A=="
+          "hash": "SZ/hWf7oVxN3yJgKcyLPkA=="
         }
       },
       "is_incremental": false,
@@ -4305,7 +4305,7 @@
       "output": {
         ".html": {
           "relative_path": "articles/Architecture.html",
-          "hash": "oJ+babL6ZUR2VPFhuMeX2Q=="
+          "hash": "pf7Clc3MVX0yQEEIQMHCUg=="
         }
       },
       "is_incremental": false,
@@ -4317,7 +4317,19 @@
       "output": {
         ".html": {
           "relative_path": "articles/BuildAndTest.html",
-          "hash": "bPO1CtYruAlzeP9Evo85gQ=="
+          "hash": "xqFyGPnlAGCO848nNwqoOw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "articles/CliRenderer.md",
+      "output": {
+        ".html": {
+          "relative_path": "articles/CliRenderer.html",
+          "hash": "wp36PwPYbjohVriIWBVX9Q=="
         }
       },
       "is_incremental": false,
@@ -4329,7 +4341,7 @@
       "output": {
         ".html": {
           "relative_path": "articles/Compatibility.html",
-          "hash": "rP9WjUqoKuNNVk0pMbCjTA=="
+          "hash": "tU1VvOg0OtkLVT9WxeckNg=="
         }
       },
       "is_incremental": false,
@@ -4341,7 +4353,19 @@
       "output": {
         ".html": {
           "relative_path": "articles/FurtherTestingInfo.html",
-          "hash": "wC+giUEtjaxvMqjtW+Sjog=="
+          "hash": "hi9PMcuLdys+P3cJhg2a/g=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "articles/NuGetPackages.md",
+      "output": {
+        ".html": {
+          "relative_path": "articles/NuGetPackages.html",
+          "hash": "TL71lYHPv7hThZnS/FiawQ=="
         }
       },
       "is_incremental": false,
@@ -4353,7 +4377,7 @@
       "output": {
         ".html": {
           "relative_path": "articles/QuickStart/CliApp.html",
-          "hash": "xndlE2GTagg9XcF4NuY1FQ=="
+          "hash": "LrtzgA3y9qXp4ccdM8DtuQ=="
         }
       },
       "is_incremental": false,
@@ -4365,7 +4389,7 @@
       "output": {
         ".html": {
           "relative_path": "articles/QuickStart/ConsumingTheApi.html",
-          "hash": "UC2fH5bqb0B8vbpBQhq7Mw=="
+          "hash": "MAehNMZCzwjIAxeIOVx0hw=="
         }
       },
       "is_incremental": false,
@@ -4377,7 +4401,7 @@
       "output": {
         ".html": {
           "relative_path": "articles/QuickStart/Mvc5.html",
-          "hash": "L855pr8fBmriLSW17zF6oA=="
+          "hash": "3PJOgempZYTDMfm2F6qwBw=="
         }
       },
       "is_incremental": false,
@@ -4389,7 +4413,7 @@
       "output": {
         ".html": {
           "relative_path": "articles/QuickStart/MvcCore.html",
-          "hash": "CNC6J3bCS2pBAZfyE0tNtA=="
+          "hash": "Ez5EZ8AiWNVGc4YXHG9iYA=="
         }
       },
       "is_incremental": false,
@@ -4404,7 +4428,19 @@
       "output": {
         ".html": {
           "relative_path": "articles/QuickStart/index.html",
-          "hash": "HHjuXEFzexM9COZl+/T0jA=="
+          "hash": "nvQYkHuIVMhio3k+0c7icw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "articles/ViewEngines.md",
+      "output": {
+        ".html": {
+          "relative_path": "articles/ViewEngines.html",
+          "hash": "zHZEGNQf5MyY+b2vPS/OZg=="
         }
       },
       "is_incremental": false,
@@ -4416,7 +4452,7 @@
       "output": {
         ".html": {
           "relative_path": "articles/WhatIsZptSharp.html",
-          "hash": "Gno2nCW7eRt4ZWrowINFYw=="
+          "hash": "uIKDpR7SU8U98UZvzG5Flw=="
         }
       },
       "is_incremental": false,
@@ -4431,7 +4467,31 @@
       "output": {
         ".html": {
           "relative_path": "articles/ZptReference/Index.html",
-          "hash": "w9SR5fA9u3+MJxdVfhjh9A=="
+          "hash": "2k3Ip6i+pSTOA66RSjOK1w=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "articles/ZptReference/Metal/index.md",
+      "output": {
+        ".html": {
+          "relative_path": "articles/ZptReference/Metal/index.html",
+          "hash": "WckrkyNh8Co3363pFmcFig=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "articles/ZptReference/Tal/index.md",
+      "output": {
+        ".html": {
+          "relative_path": "articles/ZptReference/Tal/index.html",
+          "hash": "BsnLH/bVAbco4bQ9HbLzew=="
         }
       },
       "is_incremental": false,
@@ -4443,7 +4503,7 @@
       "output": {
         ".html": {
           "relative_path": "articles/ZptReference/Tales/CSharpExpressionLimitations.html",
-          "hash": "yvLtI9Nza5/0/2CL48LYDA=="
+          "hash": "L+NkF566MIoOGgzehsjHlA=="
         }
       },
       "is_incremental": false,
@@ -4455,7 +4515,7 @@
       "output": {
         ".html": {
           "relative_path": "articles/ZptReference/Tales/CSharpExpressions.html",
-          "hash": "NOtc7WIsXgpQ9av4qGRkJw=="
+          "hash": "jOaJdjUndqd/0h6T5PPk/w=="
         }
       },
       "is_incremental": false,
@@ -4467,7 +4527,19 @@
       "output": {
         ".html": {
           "relative_path": "articles/ZptReference/Tales/PipeExpressions.html",
-          "hash": "AmoUPCQolbn+o5/2+HO3rA=="
+          "hash": "g7vACosLb7i9MakiLss5XA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "articles/ZptReference/Tales/index.md",
+      "output": {
+        ".html": {
+          "relative_path": "articles/ZptReference/Tales/index.html",
+          "hash": "2aYPzp3kkCAa+4jqmiWlXg=="
         }
       },
       "is_incremental": false,
@@ -4479,7 +4551,7 @@
       "output": {
         ".html": {
           "relative_path": "articles/ZptTutorial/Page2.html",
-          "hash": "ojWRO7E9XWR8Mc99ecwxog=="
+          "hash": "JpCYOqHdsJosml3F+8KRIQ=="
         }
       },
       "is_incremental": false,
@@ -4494,7 +4566,7 @@
       "output": {
         ".html": {
           "relative_path": "articles/ZptTutorial/index.html",
-          "hash": "+l/3eb4SBuJ7Oolk8pC8Yg=="
+          "hash": "M8YYWhMo4doKqw0+j5K7Rw=="
         }
       },
       "is_incremental": false,
@@ -4506,19 +4578,7 @@
       "output": {
         ".html": {
           "relative_path": "articles/index.html",
-          "hash": "L8iWd9FN/kzqdh292p7rpg=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "Toc",
-      "source_relative_path": "articles/toc.yml",
-      "output": {
-        ".html": {
-          "relative_path": "articles/toc.html",
-          "hash": "24Iv9xW0Zi8hOU4hKeoPhw=="
+          "hash": "gSSJXQx7E2vZ89lqH4uVUg=="
         }
       },
       "is_incremental": false,
@@ -4548,15 +4608,12 @@
       "version": ""
     },
     {
-      "log_codes": [
-        "InvalidFileLink"
-      ],
       "type": "Toc",
       "source_relative_path": "toc.yml",
       "output": {
         ".html": {
           "relative_path": "toc.html",
-          "hash": "vNF4VQPq3ERFUMFL0SQxIA=="
+          "hash": "RJJE/eoXiJgCKpKWjcY1Dg=="
         }
       },
       "is_incremental": false,
@@ -4577,7 +4634,7 @@
         "ConceptualDocumentProcessor": {
           "can_incremental": false,
           "incrementalPhase": "build",
-          "total_file_count": 20,
+          "total_file_count": 26,
           "skipped_file_count": 0
         },
         "ManagedReferenceDocumentProcessor": {

@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="../styles/docfx.css">
     <link rel="stylesheet" href="../styles/main.css">
     <meta property="docfx:navrel" content="../toc.html">
-    <meta property="docfx:tocrel" content="toc.html">
+    <meta property="docfx:tocrel" content="../toc.html">
     
     
     
@@ -57,14 +57,7 @@
         </div>
       </header>
       <div role="main" class="container body-content hide-when-search">
-        
-        <div class="sidenav hide-when-search">
-          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
-          <div class="sidetoggle collapse" id="sidetoggle">
-            <div id="sidetoc"></div>
-          </div>
-        </div>
-        <div class="article row grid-right">
+        <div class="article row grid">
           <div class="col-md-10">
             <article class="content wrap" id="_content" data-uid="">
 <h1 id="what-is-zptsharp">What is ZptSharp?</h1>
@@ -85,51 +78,17 @@ ZptSharp is a pure .NET implementation of just the page templates syntax from Zo
 <ul>
 <li>Does not interfere with the validity or structure of the underlying HTML/XML document</li>
 <li>Allows template source files to be viewed/edited 'offline' from their applications with web browsers or WYSIWYG tools</li>
-<li>Is intuitive to read and understand</li>
+<li>Is intuitive to read and understand, even to non-developers</li>
 <li>Encourages best-practices in separation between Model &amp; View</li>
 <li>Offers the full range of functionality to support complex MVC applications</li>
 </ul>
 <h2 id="what-are-its-fundamentals">What are its fundamentals?</h2>
-<p>The ZPT syntax has three fundamental parts:</p>
-<h3 id="metal-is-for-reusing-markup">METAL is for reusing markup</h3>
-<p>The first thing which happens in the ZPT rendering process is the processing of METAL attributes.
-With METAL you may define and consume <strong>macros</strong>, which are reusable pieces of markup.</p>
-<p>Macros may have <strong>slots</strong>, which consuming markup can fill with it's own content, customising the macro on a use-by-use basis. Thus macros may be used as content (for example a control), or as a 'wrapper' for content (for example to surround an article with standard markup) or as a hybrid of both.</p>
-<p>Macros may be defined in the same source document as they are consumed, or they may be consumed from other documents.</p>
-<h3 id="tal-binds-your-model-data">TAL binds your model data</h3>
-<p>After METAL has assembled the source document, TAL is used to manipulate the DOM based upon your model data. This includes (but is not limited to):</p>
+<p>ZPT's syntax is organised into three logical 'modules' of functionality.</p>
 <ul>
-<li>Writing model data to the document</li>
-<li>Adding, setting or removing attributes</li>
-<li>Conditionally excluding elements and their children</li>
-<li>Repeating an element and its children for every item in a collection</li>
+<li><strong>TALES</strong> is an extensible expression syntax used to refer to your model values. It may also be used for limited manipulation, primarily aimed at formatting/transforming values for writing to the document. TALES is used by both TAL &amp; METAL (below).</li>
+<li><strong>METAL</strong> is an attribute syntax for reusing sections of markup: &quot;macros&quot;. The syntax also allows contextual customisation of macros, by filling placeholder &quot;slots&quot; which they define.</li>
+<li><strong>TAL</strong> is an attribute syntax for writing model content to the document, conditionally removing parts of the document, repeating sections of markup for each item in a model collection and more.</li>
 </ul>
-<h3 id="tales-is-how-expressions-are-written">TALES is how expressions are written</h3>
-<p>TALES is an intuitive syntax for accessing the model values, used by both TAL &amp; METAL. Here are some examples.</p>
-<table>
-<thead>
-<tr>
-<th>Expression type</th>
-<th>Sample</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>path</code></td>
-<td><code>path:here/Company/Name</code></td>
-</tr>
-<tr>
-<td><code>string</code></td>
-<td><code>string:The ${group/Profession} who say &quot;Ni!&quot;</code></td>
-</tr>
-<tr>
-<td><code>not</code></td>
-<td><code>not:loan/IsOverdue</code></td>
-</tr>
-</tbody>
-</table>
-<p>Additionally <em>the configured default expression type</em> (usually path expressions) doesn't need the <code>type:</code> prefix.</p>
-<p>What's more - TALES is extensible. You may write your own expression evaluator implementations and add support for any expression syntax you wish.</p>
 </article>
           </div>
           
