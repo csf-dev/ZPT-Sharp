@@ -40,4 +40,4 @@ $ErrorActionPreference = "silentlycontinue"
 git add --all docs/
 $ErrorActionPreference = "Stop"
 git commit -m "Auto-publish docs website [skip ci]"
-git push origin $Env:APPVEYOR_REPO_BRANCH
+git push origin HEAD:$Env:APPVEYOR_REPO_BRANCH
