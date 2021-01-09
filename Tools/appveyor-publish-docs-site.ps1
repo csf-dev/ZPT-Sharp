@@ -17,7 +17,7 @@ else {
 
 # Clear the target directory except for
 # readmes, placeholders and the _vnext and _legacy directories.
-Get-ChildItem -Path $BaseDir/* -Exclude _vnext,_legacy,README.md,.placeholder | Remove-Item -Recurse
+Get-ChildItem -Path $BaseDir/* -Exclude _vnext,_legacy,README.md,.placeholder,.nojekyll | Remove-Item -Recurse
 Get-ChildItem -Path $BaseDir/ -Directory -Exclude _vnext,_legacy | Remove-Item
 
 # Copy the built site from where it built into the base directory,
