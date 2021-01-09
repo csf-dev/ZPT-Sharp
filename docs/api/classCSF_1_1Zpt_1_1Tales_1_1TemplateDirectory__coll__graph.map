@@ -1,0 +1,4 @@
+<map id="CSF.Zpt.Tales.TemplateDirectory" name="CSF.Zpt.Tales.TemplateDirectory">
+<area shape="rect" id="node2" href="$classCSF_1_1Zpt_1_1Tales_1_1FilesystemDirectory.html" title="Object which represents a System.IO.DirectoryInfo &#45; and implements ITalesPathHandler to wrap that dir..." alt="" coords="45,80,184,107"/>
+<area shape="rect" id="node3" href="$interfaceCSF_1_1Zpt_1_1Tales_1_1ITalesPathHandler.html" title="Interface for a type which provides custom handling of a TALES path fragment. " alt="" coords="49,5,180,32"/>
+</map>

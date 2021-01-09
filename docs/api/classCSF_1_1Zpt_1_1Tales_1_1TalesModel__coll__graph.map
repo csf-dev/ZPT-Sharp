@@ -1,0 +1,6 @@
+<map id="CSF.Zpt.Tales.TalesModel" name="CSF.Zpt.Tales.TalesModel">
+<area shape="rect" id="node2" href="$classCSF_1_1Zpt_1_1Rendering_1_1Model.html" title="Represents the root of an object model. " alt="" coords="17,155,74,181"/>
+<area shape="rect" id="node3" href="$interfaceCSF_1_1Zpt_1_1Rendering_1_1IModel.html" title="A model which represents and carries the state of a ZPT operation. " alt="" coords="64,80,125,107"/>
+<area shape="rect" id="node5" href="$interfaceCSF_1_1Zpt_1_1Tales_1_1ITalesModel.html" title="Represents an IModel which contains TALES&#45;specific functionality. " alt="" coords="99,155,192,181"/>
+<area shape="rect" id="node4" href="$interfaceCSF_1_1Zpt_1_1Rendering_1_1IModelValueStore.html" title="Represents a mechanism of configuring an IModel, by adding local and/or global variable definitions..." alt="" coords="32,5,157,32"/>
+</map>

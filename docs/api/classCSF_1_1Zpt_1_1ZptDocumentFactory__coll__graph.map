@@ -1,0 +1,4 @@
+<map id="CSF.Zpt.ZptDocumentFactory" name="CSF.Zpt.ZptDocumentFactory">
+<area shape="rect" id="node2" href="$interfaceCSF_1_1Zpt_1_1IZptDocumentFactory.html" title="Interface for a type which creates instances of IZptDocument. " alt="" coords="5,5,155,32"/>
+<area shape="rect" id="node3" href="$interfaceCSF_1_1Zpt_1_1Tales_1_1ITemplateFileFactory.html" title="Interface for a type which creates instances of TemplateFile. " alt="" coords="179,5,365,32"/>
+</map>

@@ -1,0 +1,4 @@
+<map id="CSF.Zpt.Tales.BuiltinContextsContainer" name="CSF.Zpt.Tales.BuiltinContextsContainer">
+<area shape="rect" id="node3" href="$classCSF_1_1Zpt_1_1MVC_1_1Tales_1_1MvcContextsContainer.html" title="CSF.Zpt.MVC.Tales.MvcContexts\lContainer" alt="" coords="5,169,229,211"/>
+<area shape="rect" id="node2" href="$interfaceCSF_1_1Zpt_1_1Tales_1_1ITalesPathHandler.html" title="Interface for a type which provides custom handling of a TALES path fragment. " alt="" coords="52,5,183,32"/>
+</map>

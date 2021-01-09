@@ -1,0 +1,268 @@
+﻿<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TALES 'csharp' expressions</title>
+<base href="https://csf-dev.github.io/ZPT-Sharp/">
+<style type="text/css">
+@import url(css/styles.css);
+</style>
+
+<script data-main="js/config/main" type="text/javascript" src="js/lib/require.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.4.0/styles/default.min.css">
+</head>
+<body class="page_csharp_expressions">
+<div class="content_wrapper">
+  <header class="page_header">
+    <div class="hamburger_menu" title="Show/hide navigation">
+      <span class="hamburger_line"></span>
+      <span class="hamburger_line"></span>
+      <span class="hamburger_line"></span>
+    </div>
+    <h2>
+      <a href="index.html">ZPT Sharp</a>
+      <em>Zen HTML views</em>
+    </h2>
+  </header>
+  <div class="main_page_area">
+    <nav id="site_navigation">
+      <h2>Site navigation</h2>
+      <ul>
+				<li class="nav_section">
+          <h3>First steps</h3>
+					<ul>
+            <li>
+              <a href="advantages-of-zpt-views.html">Why use ZPT-Sharp</a>
+						</li>
+            <li>
+              <a href="hello-world.html">Hello World example</a>
+            </li>
+            <li>
+              <a href="writing-pages-using-zpt.html">Learn ZPT syntax</a>
+            </li>
+					</ul>
+				</li>
+        <li class="nav_section">
+          <h3>Usage</h3>
+          <ul>
+            <li>
+              <a href="asp-net-mvc-view-engine.html">ASP.NET MVC5</a>
+            </li>
+            <li>
+              <a href="command-line-renderer.html">Command-line app</a>
+            </li>
+            <li>
+              <a href="page-rendering-api.html">As an API</a>
+            </li>
+            <li>
+              <a href="logging.html">Diagnostics &amp; logging</a>
+            </li>
+          </ul>
+        </li>
+        <li class="nav_section">
+          <h3>Reference</h3>
+          <ul>
+            <li>
+              <a href="metal/introduction.html">METAL syntax</a>
+            </li>
+            <li>
+              <a href="tal/introduction.html">TAL syntax</a>
+            </li>
+            <li>
+              <a href="tales/introduction.html">TALES syntax</a>
+            </li>
+            <li>
+              <a href="api/index.html">API documentation</a>
+            </li>
+          </ul>
+        </li>
+        <li class="nav_section">
+          <h3>Installation</h3>
+          <ul>
+            <li>
+              <a href="nuget-packages.html">NuGet packages</a>
+            </li>
+            <li>
+              <a href="download.html">ZIP download</a>
+            </li>
+            <li>
+              <a href="plugins.html">Plugins</a>
+            </li>
+            <li>
+              <a href="configuration.html">Configuration</a>
+            </li>
+          </ul>
+        </li>
+        <li class="nav_section">
+          <h3>Contribute</h3>
+          <ul>
+            <li>
+              <a href="https://github.com/csf-dev/ZPT-Sharp">Github project</a>
+            </li>
+            <li>
+              <a href="https://github.com/csf-dev/ZPT-Sharp/issues">Issue tracker</a>
+            </li>
+            <li>
+              <a href="writing-plugins.html">Writing plugins</a>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </nav>
+    <section class="main_page_content">
+      <header>
+        <div class="expression plugin_note note">
+        <h2>Plugin note</h2>
+        <p>
+          This functionality is contained within an
+          <em><a href="plugins.html">expression evaluator plugin</a></em>.
+          As such, it is available only when the corresponding plugin is installed.
+        </p>
+        <div class="plugin_details">
+          <h3>Plugin assembly</h3>
+          <span><code>CSF.Zpt.ExpressionEvaluators.CSharpExpressions.dll</code></span>
+          <h3><span>Plugin class</span></h3>
+          <span><code>CSF.Zpt.ExpressionEvaluators.CSharpExpressions.CSharpExpressionEvaluator</code></span>
+          <h3><span>Expression prefix</span></h3>
+          <span><code>csharp:</code></span>
+        </div>
+      </div>
+        <h1>TALES 'csharp' expressions</h1>
+      </header>
+      <p>
+        <code>csharp:</code> expressions permit the use of C♯ as a mechanism of evaluating TALES expressions.
+        The provided C♯ expression string is executed, its value determined and returned as the result of the
+        expression.
+      </p>
+      <h2>Permitted expressions</h2>
+      <p>
+        C♯ expressions supported by this plugin must be single statements.  Multiple statements (joined by semicolons)
+        are not permitted and will not compile.
+        Expressions have access to all of the variables which are available to TALES, including those created by
+        <code><a href="tal/define.html">tal:define</a></code> and <code><a href="tal/repeat.html">tal:repeat</a></code>
+        attributes.
+      <p>
+      <p>
+        In essence, to determine whether an expression is OK or not, consider whether it would be valid for
+        execution if preceded by a <code>return</code> keyword and followed by a semicolon, assuming that all of the
+        TALES variables are also available in the same scope:
+      </p>
+      <pre><code class="csharp">return YOUR_EXPRESSION_HERE;</code></pre>
+      <h2>Example</h2>
+      <pre><code class="html">&lt;div tal:define="myName string:sally"&gt;
+  Hello, my name is
+  &lt;span tal:replace="csharp:myName.ToUpperInvariant()"&gt;JOSEPH&lt;/span&gt;
+&lt;/div&gt;</code></pre>
+      <p>
+        The expression above would emit <kbd>Hello, my name is SALLY</kbd>, surrounded with HTML <code>&lt;div&gt;</code>
+        tags.
+      </p>
+      <h2>Note on variable names</h2>
+      <p>
+        If this plugin is installed <em>(by default, it is)</em> then all variable names created through
+        <code><a href="tal/define.html">tal:define</a></code> or <code><a href="tal/repeat.html">tal:repeat</a></code>
+        <em>must also be valid C♯ variable names</em>.
+      </p>
+      <p>
+        For example, on its own, the TALES specification would permit a variable named <kbd>12things</kbd>;
+        this is not a valid C♯ variable name though.
+        If such a variable is 'in scope' when a <code>csharp:</code> expression is evaluated, the expression will
+        not compile and an error will be raised.
+        <em>It does not matter whether the C♯ expression attempts to make use of such a 'bad' variable or not</em>.
+        The very presence of the variable in the TALES environment will prevent the C♯ expression from compiling.
+      </p>
+      <h2>Reminder: HTML encoding</h2>
+      <p>
+        Because TALES expressions (including C♯ expressions) are specified within the source document, in the source
+        document's own syntax, you must adhere to that document's escaping/encoding rules.  In particular this applies
+        to double-quote characters, which must be specified as <kbd>&amp;quot;</kbd>, greater-than
+        (<kbd>&amp;gt;</kbd>), less-than (<kbd>&amp;lt;</kbd>) and ampersands (<kbd>&amp;amp;</kbd>).
+      </p>
+      <p>
+        This is illustrated in the following example, where <code>DateTime.ToString</code> is used with a
+        string parameter to get a custom date format.
+      </p>
+      <pre><code class="html">&lt;p tal:define="today csharp:DateTime.Today"&gt;
+  Today's date is
+  &lt;span tal:content="csharp:today.ToString(&amp;quot;yyyy-MM-dd&amp;quot;)"&gt;2012-01-01&lt;span&gt;
+&lt;/p&gt;</code></pre>
+      <h2>Expression internals &amp; limitations</h2>
+      <p>
+        Internally, to provide C♯ expressions,
+        <a href="https://msdn.microsoft.com/en-us/library/y2k85ax6(v=vs.110).aspx">the CodeDOM API</a>
+        is used.
+        Each expression is compiled into a generated class, in an in-memory .NET assembly.
+      </p>
+      <p>
+        Each TALES variable which is in-scope for the expression is provided as a private member field
+        of that class.  To simplify variable access these private fields are typed using the <code>dynamic</code>
+        keyword.  This means that for general usage their type does not need to known.
+      </p>
+      <p>
+        A limitation of this approach is exposed when you wish to use <strong>extension methods</strong>, including
+        Linq, such as <code>.Sum()</code> or <code>.Count()</code>. These are incompatible with dynamically-typed
+        variables.  For example, if you wrote some markup such as the following example:
+      </p>
+      <pre><code class="html">&lt;p tal:define="itemCount csharp:here.Items.Count(x => x.Colour == &amp;quot;Red&amp;quot;)"&gt;
+  There are &lt;span tal:replace="itemCount"&gt;3&lt;/span&gt; red items
+&lt;p&gt;</code></pre>
+      <p>
+        <em>This expression will not compile</em> because the <code>.Count()</code> method from Linq is an extension
+        method which requires a strongly-typed (and not dynamically-typed) reference.
+        There are two available ways to work around/deal with this limitation:
+      </p>
+      <h3>Consider moving expressions into your model</h3>
+      <p>
+        The recommended and simplest way to deal with this limitation is to move that expression into your MVC model
+        class as either a property or plain method call.  This functionality in the model may then make use of
+        extension methods/linq/etc and expose the result to the view. No special code or technique need be used here,
+        simply a method on the model such as <code>public int GetItemCount(string colour)</code>.
+      </p>
+      <p>
+        This also guides you towards pushing any 'logic' of your model into the model itself, which is good practice.
+      </p>
+      <h3>Specify types, namespace imports and assembly references</h3>
+      <p>
+        For scenarios where moving the code into your model is not possible (for example, if you do not control the
+        model type), ZPT-Sharp provides an advanced mechanism for solving 'the extension method' problem.
+        This solution is a set of three special expression types (and related configuration) which allow you to
+        specify the .NET type of your TALES variables, as well as import namespaces and provide references to other
+        assemblies.
+      </p>
+      <p>
+        These advanced topics are covered in
+        <a href="tales/advanced-csharp-expressions.html">documentation for the additional expression types</a>
+        as well as
+        <a href="configuration.html">documentation for the configuration options which affect them</a>.
+      </p>
+    </section>
+  </div>
+</div>
+<footer class="page_footer">
+  <section class="copyright">
+    Copyright © 2017
+    <a href="http://csf-dev.com/">CSF Software Limited</a> et al
+  </section>
+  <section class="version">
+    <p>
+      Website built <strong>2017-03-19</strong>;
+      for version
+      <strong>
+        v1.0.0
+      </strong>
+    </p>
+  </section>
+</footer>
+<div class="cookie_statement">
+  <p>
+    This website uses analytics cookies to understand how visitors are making use of its content.
+    This helps decide where improvements can be made in the future.
+    <a href="https://ico.org.uk/for-organisations/guide-to-pecr/cookies-and-similar-technologies/">European and UK law</a>
+    requires us to ask you for your consent to this.
+  </p>
+  <button class="accept">Accept cookies</button>
+</div>
+
+</body>
+</html>

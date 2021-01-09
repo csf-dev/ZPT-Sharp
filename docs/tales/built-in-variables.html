@@ -1,0 +1,196 @@
+﻿<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TALES root variables</title>
+<base href="https://csf-dev.github.io/ZPT-Sharp/">
+<style type="text/css">
+@import url(css/styles.css);
+</style>
+
+<script data-main="js/config/main" type="text/javascript" src="js/lib/require.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.4.0/styles/default.min.css">
+</head>
+<body class="page_tales_builtin_variables">
+<div class="content_wrapper">
+  <header class="page_header">
+    <div class="hamburger_menu" title="Show/hide navigation">
+      <span class="hamburger_line"></span>
+      <span class="hamburger_line"></span>
+      <span class="hamburger_line"></span>
+    </div>
+    <h2>
+      <a href="index.html">ZPT Sharp</a>
+      <em>Zen HTML views</em>
+    </h2>
+  </header>
+  <div class="main_page_area">
+    <nav id="site_navigation">
+      <h2>Site navigation</h2>
+      <ul>
+				<li class="nav_section">
+          <h3>First steps</h3>
+					<ul>
+            <li>
+              <a href="advantages-of-zpt-views.html">Why use ZPT-Sharp</a>
+						</li>
+            <li>
+              <a href="hello-world.html">Hello World example</a>
+            </li>
+            <li>
+              <a href="writing-pages-using-zpt.html">Learn ZPT syntax</a>
+            </li>
+					</ul>
+				</li>
+        <li class="nav_section">
+          <h3>Usage</h3>
+          <ul>
+            <li>
+              <a href="asp-net-mvc-view-engine.html">ASP.NET MVC5</a>
+            </li>
+            <li>
+              <a href="command-line-renderer.html">Command-line app</a>
+            </li>
+            <li>
+              <a href="page-rendering-api.html">As an API</a>
+            </li>
+            <li>
+              <a href="logging.html">Diagnostics &amp; logging</a>
+            </li>
+          </ul>
+        </li>
+        <li class="nav_section">
+          <h3>Reference</h3>
+          <ul>
+            <li>
+              <a href="metal/introduction.html">METAL syntax</a>
+            </li>
+            <li>
+              <a href="tal/introduction.html">TAL syntax</a>
+            </li>
+            <li>
+              <a href="tales/introduction.html">TALES syntax</a>
+            </li>
+            <li>
+              <a href="api/index.html">API documentation</a>
+            </li>
+          </ul>
+        </li>
+        <li class="nav_section">
+          <h3>Installation</h3>
+          <ul>
+            <li>
+              <a href="nuget-packages.html">NuGet packages</a>
+            </li>
+            <li>
+              <a href="download.html">ZIP download</a>
+            </li>
+            <li>
+              <a href="plugins.html">Plugins</a>
+            </li>
+            <li>
+              <a href="configuration.html">Configuration</a>
+            </li>
+          </ul>
+        </li>
+        <li class="nav_section">
+          <h3>Contribute</h3>
+          <ul>
+            <li>
+              <a href="https://github.com/csf-dev/ZPT-Sharp">Github project</a>
+            </li>
+            <li>
+              <a href="https://github.com/csf-dev/ZPT-Sharp/issues">Issue tracker</a>
+            </li>
+            <li>
+              <a href="writing-plugins.html">Writing plugins</a>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </nav>
+    <section class="main_page_content">
+      <header><h1>TALES root variables</h1></header>
+      <p>
+        As described, every <a href="tales/path-expressions.html">TALES <code>path:</code> expression</a> must begin
+        with a variable from the current TALES context.  Variables may be added to the context one of a number of
+        mechanisms, such as by using <a href="tal/define.html"><code>tal:define</code></a> and/or
+        <a href="tal/repeat.html"><code>tal:repeat</code></a> attributes.  TALES itself though provides a number of
+        variables of its own - these are the root variables, available to all views:
+      </p>
+      <p class="note">
+        When using ZPT-Sharp as an ASP.NET MVC ViewEngine, a few
+        <a href="asp-net-mvc-view-engine.html#extra_variables">additional root variables</a> are provided by the
+        ViewEngine itself.
+      </p>
+      <h2>nothing</h2>
+      <p>
+        The root variable <code>nothing</code> provides a <code>null</code> value.  It is a convenient way of getting a
+        null reference.
+      </p>
+      <h2 id="default">default</h2>
+      <p>
+        The <code>default</code> root variable provides a special value which indicates that the expression result
+        should indicate <a href="tales/cancellation.html">the action is to be cancelled</a>.
+      </p>
+      <p>
+        It is a minimal object implementing
+        <code>CSF.Zpt.Rendering.IActionCanceller</code> which always returns <code>true</code> for the method
+        <code>ShouldCancelAction()</code>.
+      </p>
+      <h2>options</h2>
+      <p>
+        <code>options</code> provides access to the <strong>keyword options</strong> provided to the ZPT rendering
+        process.  Keyword options are an <code>IDictionary&lt;string,string&gt;</code> of key/value pairs. For MVC
+        views, this is generally an empty collection as they have no meaning in that environment.
+      </p>
+      <p>
+        In other rendering scenarios though, it allows the calling process to set a number of variables externally,
+        in order to provide values to the renderer.  For example, the
+        <a href="command-line-renderer.html">command-line page renderer</a> allows setting of keyword options via an
+        optional parameter.
+      </p>
+      <h2>repeat</h2>
+      <p>
+        The <code>repeat</code> root variable provides access to the special
+        <a href="tales/repeat-variables.html">repeat variables</a> which expose information about the current iteration.
+        Each repeat variable is available as a child of the repeat root-variable.  They are named identically to the
+        local variable created by the <a href="tal/repeat.html"><code>tal:repeat</code> attribute</a>.
+      </p>
+      <h2>attrs</h2>
+      <p>
+        The root variable <code>attrs</code> provides access to the original HTML/XML attributes of the element upon
+        which the TALES expression appears.  These original attributes are exposed with their values before any
+        manipulation has been performed by TAL.
+      </p>
+    </section>
+  </div>
+</div>
+<footer class="page_footer">
+  <section class="copyright">
+    Copyright © 2017
+    <a href="http://csf-dev.com/">CSF Software Limited</a> et al
+  </section>
+  <section class="version">
+    <p>
+      Website built <strong>2017-03-19</strong>;
+      for version
+      <strong>
+        v1.0.0
+      </strong>
+    </p>
+  </section>
+</footer>
+<div class="cookie_statement">
+  <p>
+    This website uses analytics cookies to understand how visitors are making use of its content.
+    This helps decide where improvements can be made in the future.
+    <a href="https://ico.org.uk/for-organisations/guide-to-pecr/cookies-and-similar-technologies/">European and UK law</a>
+    requires us to ask you for your consent to this.
+  </p>
+  <button class="accept">Accept cookies</button>
+</div>
+
+</body>
+</html>

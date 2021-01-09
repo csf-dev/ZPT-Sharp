@@ -1,0 +1,163 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Page templates tutorial </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Page templates tutorial ">
+    <meta name="generator" content="docfx 2.56.6.0">
+    
+    <link rel="shortcut icon" href="../../favicon.ico">
+    <link rel="stylesheet" href="../../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../../styles/docfx.css">
+    <link rel="stylesheet" href="../../styles/main.css">
+    <meta property="docfx:navrel" content="../../toc.html">
+    <meta property="docfx:tocrel" content="../toc.html">
+    
+    
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../../index.html">
+                <img id="logo" class="svg" src="../../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="">
+<h1 id="page-templates-tutorial">Page templates tutorial</h1>
+
+<div class="note">
+This tutorial assumes that you have followed one of the following quick-start guides. They each conclude with a functioning 'hello world' ZPT environment.
+<ul>
+<li><a href="../QuickStart/Mvc5">ASP.NET MVC 5</a></li>
+<li><a href="../QuickStart/MvcCore">ASP.NET Core MVC</a></li>
+<li><a href="../QuickStart/CliApp">ZptSharp command-line app</a></li>
+<li><a href="../QuickStart/ConsumingTheApi">Using ZptSharp API</a></li>
+</ul>
+</div>
+<h1 id="talcontent-replaces-an-elements-content"><code>tal:content</code> replaces an element's content</h1>
+<p>Let's look again at the template from the quick-start guides.</p>
+<pre><code class="lang-html">&lt;html&gt;
+&lt;head&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;h1 tal:content=&quot;here/Message&quot;&gt;A famous greeting&lt;/h1&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+<p>Notice how in the rendered document, the words &quot;A famous greeting&quot; are replaced by &quot;Hello world!&quot;. The <code>&lt;h1&gt;</code> tags remain in the rendered output though.</p>
+<h2 id="elements-are-replaced-too">Elements are replaced too</h2>
+<p>Try changing the <code>h1</code> tag (in the source document) to the following:</p>
+<pre><code class="lang-html">&lt;h1 tal:content=&quot;here/Message&quot;&gt;
+  A &lt;em&gt;very&lt;/em&gt; famous greeting
+&lt;/h1&gt;
+</code></pre>
+<p>If you render this again, the output will be the same. When a <code>tal:content</code> attribute replaces the content of an element, <em>all of its content is replaced</em>, including text and even trees of elements as applicable.</p>
+<p>This effect can be put to good use in source documents, allowing the addition of <em>sample content</em>.</p>
+<h2 id="including-markup-in-the-content">Including markup in the content</h2>
+<p>Let's try another change. This time we will change the model rather than the document.</p>
+<p>Change the value of <code>Message</code> in the model to the following string. We will see what happens if we include markup in the model value to be inserted into a document template.</p>
+<pre><code>&quot;&lt;strong&gt;Hello world!&lt;/strong&gt;&quot;
+</code></pre>
+<p>If you render the document again now, you will see that <em>the markup from the model has been HTML encoded</em>. What is actually written to the output is:</p>
+<pre><code class="lang-html">&lt;h1&gt;
+  &amp;lt;strong&amp;gt;Hello world!&amp;lt!/strong&amp;gt;
+&lt;/h1&gt;
+</code></pre>
+<p><em>By default, everything written to a document by <code>tal:content</code> is HTML (or XML) encoded.</em> This is a good thing, because it helps protect your site/app from <a href="https://wikipedia.org/wiki/Cross-site_scripting">XSS attacks</a>.</p>
+<p>It is possible to include markup within the replacement content, though, but only by altering the source document to specifically permit it. Let's change the source document now. The change is to add the <code>structure</code> keyword to the content attribute, prefixing the reference to the model value.</p>
+<pre><code class="lang-html">&lt;h1 tal:content=&quot;structure here/Message&quot;&gt;A famous greeting&lt;/h1&gt;
+</code></pre>
+<p>If we try rendering the document once more, we will see that the markup within the model value is now honoured and not HTML encoded.</p>
+<p><em>The <code>structure</code> keyword, used as the first thing within a <code>tal:content</code> attribute, causes the content to be interpreted as markup and not strictly text</em>. In case it is not obvious, it is crucial that you only use the <code>structure</code> keyword when you are certain that the value has been thoroughly sanitised.</p>
+<h2 id="talreplace-replaces-the-whole-element"><code>tal:replace</code> replaces the whole element</h2>
+<p>The last thing we will look at in this step of the tutorial is the <code>tal:replace</code> attribute. Let's swap the <code>tal:content</code> attribute in our example for a replace attribute, so that the markup looks like this now:</p>
+<pre><code class="lang-html">&lt;h1 tal:replace=&quot;here/Message&quot;&gt;A famous greeting&lt;/h1&gt;
+</code></pre>
+<p>If you render this then you will see that the model value is rendered into the document, but that the entire containing <code>h1</code> has been replaced, not just it's content/children.</p>
+<p><em><code>tal:replace</code> attributes work just like <code>tal:content</code>, except that they replace the whole element and not just the content.</em> This includes the replacement of child elements and also the HTML/XML-encoding of the replacement value, and the use of the <code>structure</code> keyword to override that.</p>
+<h2 id="next-conditions-and-repetition">Next: Conditions and repetition</h2>
+<p>In the next tutorial page, we will look into <a href="Page2">how to render elements conditionally &amp; how to repeat them for items in a collection</a>.</p>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/csf-dev/ZPT-Sharp/blob/master/ZptSharp.Documentation/articles/ZptTutorial/index.md/#L1" class="contribution-link">Improve this Doc</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In This Article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            
+            <span>Generated by <strong>DocFX</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../../styles/docfx.js"></script>
+    <script type="text/javascript" src="../../styles/main.js"></script>
+  </body>
+</html>

@@ -1,0 +1,4 @@
+<map id="CSF.Zpt.ZptDocumentProviderService" name="CSF.Zpt.ZptDocumentProviderService">
+<area shape="rect" id="node2" href="$classCSF_1_1Zpt_1_1PluginServiceBase.html" title="Abstract base type for a service which exposes plugin instances. " alt="" coords="5,5,137,32"/>
+<area shape="rect" id="node3" href="$interfaceCSF_1_1Zpt_1_1IZptDocumentProviderService.html" title="Interface for a service which provides access to the various registered IZptDocumentProvider instance..." alt="" coords="162,5,359,32"/>
+</map>

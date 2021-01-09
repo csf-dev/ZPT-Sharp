@@ -1,0 +1,4 @@
+<map id="CSF.Zpt.IPluginConfiguration" name="CSF.Zpt.IPluginConfiguration">
+<area shape="rect" id="node2" title="Represents empty/nonexistent plugin configuration. " alt="" coords="5,87,232,114"/>
+<area shape="rect" id="node3" href="$classCSF_1_1Zpt_1_1PluginConfigurationSection.html" title="Implementation of IPluginConfiguration using a System.Configuration.ConfigurationSection. " alt="" coords="256,80,445,121"/>
+</map>

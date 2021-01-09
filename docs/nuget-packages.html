@@ -1,0 +1,186 @@
+﻿<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ZPT-Sharp NuGet Bundles</title>
+<base href="https://csf-dev.github.io/ZPT-Sharp/">
+<style type="text/css">
+@import url(css/styles.css);
+</style>
+
+<script data-main="js/config/main" type="text/javascript" src="js/lib/require.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.4.0/styles/default.min.css">
+</head>
+<body class="page_nuget_packages">
+<div class="content_wrapper">
+  <header class="page_header">
+    <div class="hamburger_menu" title="Show/hide navigation">
+      <span class="hamburger_line"></span>
+      <span class="hamburger_line"></span>
+      <span class="hamburger_line"></span>
+    </div>
+    <h2>
+      <a href="index.html">ZPT Sharp</a>
+      <em>Zen HTML views</em>
+    </h2>
+  </header>
+  <div class="main_page_area">
+    <nav id="site_navigation">
+      <h2>Site navigation</h2>
+      <ul>
+				<li class="nav_section">
+          <h3>First steps</h3>
+					<ul>
+            <li>
+              <a href="advantages-of-zpt-views.html">Why use ZPT-Sharp</a>
+						</li>
+            <li>
+              <a href="hello-world.html">Hello World example</a>
+            </li>
+            <li>
+              <a href="writing-pages-using-zpt.html">Learn ZPT syntax</a>
+            </li>
+					</ul>
+				</li>
+        <li class="nav_section">
+          <h3>Usage</h3>
+          <ul>
+            <li>
+              <a href="asp-net-mvc-view-engine.html">ASP.NET MVC5</a>
+            </li>
+            <li>
+              <a href="command-line-renderer.html">Command-line app</a>
+            </li>
+            <li>
+              <a href="page-rendering-api.html">As an API</a>
+            </li>
+            <li>
+              <a href="logging.html">Diagnostics &amp; logging</a>
+            </li>
+          </ul>
+        </li>
+        <li class="nav_section">
+          <h3>Reference</h3>
+          <ul>
+            <li>
+              <a href="metal/introduction.html">METAL syntax</a>
+            </li>
+            <li>
+              <a href="tal/introduction.html">TAL syntax</a>
+            </li>
+            <li>
+              <a href="tales/introduction.html">TALES syntax</a>
+            </li>
+            <li>
+              <a href="api/index.html">API documentation</a>
+            </li>
+          </ul>
+        </li>
+        <li class="nav_section">
+          <h3>Installation</h3>
+          <ul>
+            <li>
+              <a href="nuget-packages.html">NuGet packages</a>
+            </li>
+            <li>
+              <a href="download.html">ZIP download</a>
+            </li>
+            <li>
+              <a href="plugins.html">Plugins</a>
+            </li>
+            <li>
+              <a href="configuration.html">Configuration</a>
+            </li>
+          </ul>
+        </li>
+        <li class="nav_section">
+          <h3>Contribute</h3>
+          <ul>
+            <li>
+              <a href="https://github.com/csf-dev/ZPT-Sharp">Github project</a>
+            </li>
+            <li>
+              <a href="https://github.com/csf-dev/ZPT-Sharp/issues">Issue tracker</a>
+            </li>
+            <li>
+              <a href="writing-plugins.html">Writing plugins</a>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </nav>
+    <section class="main_page_content">
+      <header><h1>ZPT-Sharp NuGet Bundles</h1></header>
+      <p>
+        The recommended way to install ZPT-Sharp into your own software project is via
+        <a href="https://www.nuget.org">the NuGet package manager</a>.
+      </p>
+			<p>
+        This page lists a number of <strong>NuGet bundle packages</strong> which are provided in order to get
+				ZPT-Sharp installed quickly and without fuss.
+			</p>
+			<p>
+				ZPT-Sharp is a customisable, <a href="plugins.html">plugin-based</a> piece of software though.
+				If you would prefer to customise the components installed then you are free to
+				<a href="all-nuget-packages.html">tailor your installation and hand-pick NuGet packages</a> instead.
+			</p>
+      <h2>The packages</h2>
+      <p>
+        Any of the following packages will install and set up ZPT-Sharp.
+				Each provides everything you would expect of 'the standard distribution'.
+      </p>
+      <h3><a href="https://www.nuget.org/packages/Zpt-Sharp-MVC5">ZPT-Sharp for ASP.NET MVC5</a></h3>
+      <p>
+        This bundle is for using ZPT-Sharp as an ASP.NET MVC5
+        <a href="https://msdn.microsoft.com/en-us/library/system.web.mvc.viewengines(v=vs.118).aspx"><code>ViewEngine</code></a>.
+      </p>
+      <p>
+				After installing the NuGet package you will need to make
+        <a href="asp-net-mvc-view-engine.html">a one-time change to your view-engine registrations</a>.
+        Then, you are ready to write views using ZPT.
+      </p>
+      <h3><a href="https://www.nuget.org/packages/Zpt-Sharp-ZptBuilder">ZPT-Sharp ZptBuilder application</a></h3>
+      <p>
+				This bundle installs
+        <a href="command-line-renderer.html">ZptBuilder.exe</a>, the command-line ZPT page-rendering application.
+      </p>
+			<p>
+        This stand-alone application renders documents based on a model provided using command-line parameters.
+			</p>
+      <h3><a href="https://www.nuget.org/packages/Zpt-Sharp-API">ZPT-Sharp API bundle</a></h3>
+      <p>
+				This bundle installs just the ZPT-Sharp API, for use in your own applications.
+				<a href="page-rendering-api.html">The API documentation</a> contains more information about how to
+				make use of ZPT to create a page-rendering application <em>with no dependencies on web components</em>.
+      </p>
+    </section>
+  </div>
+</div>
+<footer class="page_footer">
+  <section class="copyright">
+    Copyright © 2017
+    <a href="http://csf-dev.com/">CSF Software Limited</a> et al
+  </section>
+  <section class="version">
+    <p>
+      Website built <strong>2017-03-19</strong>;
+      for version
+      <strong>
+        v1.0.0
+      </strong>
+    </p>
+  </section>
+</footer>
+<div class="cookie_statement">
+  <p>
+    This website uses analytics cookies to understand how visitors are making use of its content.
+    This helps decide where improvements can be made in the future.
+    <a href="https://ico.org.uk/for-organisations/guide-to-pecr/cookies-and-similar-technologies/">European and UK law</a>
+    requires us to ask you for your consent to this.
+  </p>
+  <button class="accept">Accept cookies</button>
+</div>
+
+</body>
+</html>

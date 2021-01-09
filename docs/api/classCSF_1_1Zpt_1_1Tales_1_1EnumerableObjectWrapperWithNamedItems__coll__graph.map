@@ -1,0 +1,4 @@
+<map id="CSF.Zpt.Tales.EnumerableObjectWrapperWithNamedItems" name="CSF.Zpt.Tales.EnumerableObjectWrapperWithNamedItems">
+<area shape="rect" id="node2" href="$classCSF_1_1Zpt_1_1Rendering_1_1NamedObjectWrapper.html" title="Simple wrapper type which provides access to objects by System.String names. " alt="" coords="5,80,156,107"/>
+<area shape="rect" id="node3" href="$interfaceCSF_1_1Zpt_1_1Tales_1_1ITalesPathHandler.html" title="Interface for a type which provides custom handling of a TALES path fragment. " alt="" coords="15,5,146,32"/>
+</map>
