@@ -15,28 +15,43 @@ else {
     exit 0
 }
 
-# Clear the target directory except for
-# readmes, placeholders and the _vnext and _legacy directories.
-Get-ChildItem -Path $BaseDir/* -Exclude _vnext,_legacy,README.md,.placeholder,.nojekyll | Remove-Item -Recurse
-Get-ChildItem -Path $BaseDir/ -Directory -Exclude _vnext,_legacy | Remove-Item
+Write-Host "Publishing the docs site to $BaseDir"
 
-# Copy the built site from where it built into the base directory,
-# and if we are prod, also the Google verification page
+Write-Host "Clearing $BaseDir ..."
+Get-ChildItem -Path $BaseDir/* -Exclude _vnext,_legacy,README.md,.placeholder,.nojekyll | Remove-Item -Recurse
+if ($Env:APPVEYOR_REPO_BRANCH -eq "production") {
+    Get-ChildItem -Path $BaseDir/ -Directory -Exclude _vnext,_legacy | Remove-Item
+}
+else {
+    Get-ChildItem -Path $BaseDir/ -Directory | Remove-Item
+}
+
+Write-Host "Copying built docs site to $BaseDir ..."
 Copy-Item -Path "ZptSharp.Documentation/_site/*" -Destination $BaseDir -Recurse
 if ($Env:APPVEYOR_REPO_BRANCH -eq "production") {
+    Write-Host "Copying Google site auth file to $BaseDir ..."
     Copy-Item -Path Tools/googled08187801d097dd8.html $BaseDir
 }
 
-# Set up git so that it can push
-git config --global user.name "AppVeyor (on behalf of Craig Fowler)"
-git config --global  user.email "craig+appveyor@csf-dev.com"
-git config --global credential.helper store
-Set-Content -Path "$HOME\.git-credentials" -Value "https://$($Env:GITHUB_SECRET_KEY):x-oauth-basic@github.com`n" -NoNewline
+if($Env:APPVEYOR -eq "True") {
+    Write-Host "Setting up git to publish site"
+    git config --global user.name "AppVeyor (on behalf of Craig Fowler)"
+    git config --global  user.email "craig+appveyor@csf-dev.com"
+    git config --global credential.helper store
+    Set-Content -Path "$HOME\.git-credentials" -Value "https://$($Env:GITHUB_SECRET_KEY):x-oauth-basic@github.com`n" -NoNewline
+}
 
-# Commit & push the amended repo, using a commit message that won't cause another build
 # Because of autocrlf, the git add command could report warnings which cause the script to
 # stop unless I change the error preference first
 $ErrorActionPreference = "silentlycontinue"
+
+Write-Host "Adding content"
 git add --all docs/
+
+Write-Host "Creating commit"
 git commit -m "Auto-publish docs website [skip ci]"
-git push origin HEAD:$Env:APPVEYOR_REPO_BRANCH
+
+if($Env:APPVEYOR -eq "True") {
+    Write-Host "Pushing to origin"
+    git push origin HEAD:$Env:APPVEYOR_REPO_BRANCH
+}
