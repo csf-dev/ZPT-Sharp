@@ -1,0 +1,177 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>ZptSharp architecture </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="ZptSharp architecture ">
+    <meta name="generator" content="docfx 2.56.6.0">
+    
+    <link rel="shortcut icon" href="../favicon.ico">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="">
+<h1 id="zptsharp-architecture">ZptSharp architecture</h1>
+
+<p>The following diagram shows the architecture of a complete application which uses ZptSharp.</p>
+<p><img src="../images/ZptSharpArchitecture.svg" alt="Architecture diagram"></p>
+<p>The consuming application must add ZptSharp to its <code>IServiceCollection</code> (dependency injection) during <strong>Startup</strong>, as well as perform a few one-time configuration/registration tasks.</p>
+<p>Once ZptSharp is set up, a project which makes use of it need only take a direct reference to the ZptSharp package. Consuming projects need not reference the other packages, because all of ZptSharp's functionality is available by injecting interfaces.</p>
+<h2 id="the-zptsharp-package">The ZptSharp package</h2>
+<p>The NuGet package ZptSharp contains only abstractions, model types and the API. In particular it contains the <a class="xref" href="../api/ZptSharp.IRendersZptFile.html"><code>IRendersZptFile</code></a> &amp; <a class="xref" href="../api/ZptSharp.IRendersZptDocument.html"><code>IRendersZptDocument</code></a> interfaces which are the two primary entry-points to the functionality.</p>
+<p>This package's dependencies have been kept to a minimum, so that it is as easy as possible to consume.</p>
+<p>This package forms one half of &quot;The ZptSharp core&quot;.</p>
+<h2 id="the-zptsharpimpl-package">The ZptSharp.Impl package</h2>
+<p>The ZptSharp.Impl NuGet package contains the main logic and implementation classes for almost all of the abstractions declared in the ZptSharp package.</p>
+<p>This package is the other half of &quot;The ZptSharp core&quot;.</p>
+<p>ZptSharp.Impl includes the following <strong>expression evaluators</strong> (see below).</p>
+<ul>
+<li><code>path</code></li>
+<li><code>string</code></li>
+<li><code>not</code></li>
+<li><code>pipe</code></li>
+</ul>
+<h2 id="document-providers">Document providers</h2>
+<p><em>In order to have a working ZptSharp implementation, you <strong>must</strong> install at least one document provider packages. The two core packages alone are not enough.</em></p>
+<p>Document providers are the way in which ZptSharp reads and writes markup documents (HTML and/or XML). The main interface which must be implemented by a document provider is <a class="xref" href="../api/ZptSharp.Dom.IReadsAndWritesDocument.html"><code>IReadsAndWritesDocument</code></a>. They bridge the gap between the ZptSharp core packages and the DOM.</p>
+<p>ZptSharp has three document provider packages available:</p>
+<table>
+<thead>
+<tr>
+<th>Package</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ZptSharp.Xml</td>
+<td>Reads/writes XML documents using the <code>System.Xml.Linq</code> API</td>
+</tr>
+<tr>
+<td>ZptSharp.HtmlAgilityPack</td>
+<td>Reads/writes HTML documents using the HTML Agility Pack</td>
+</tr>
+<tr>
+<td>ZptSharp.AngleSharp</td>
+<td>Reads/writes HTML documents using AngleSharp</td>
+</tr>
+</tbody>
+</table>
+<h2 id="expression-evaluators">Expression evaluators</h2>
+<p>An expression evaluator provides support for one or more TALES expression types. <em>Unlike document providers</em>, the core packages include support for a few expression types, which may be sufficient for your application. <em>Installing additional evaluators is optional</em>.</p>
+<p>The main interface which an expression evaluator must implement is <a class="xref" href="../api/ZptSharp.Expressions.IEvaluatesExpression.html"><code>IEvaluatesExpression</code></a>.</p>
+<p>The available expression evaluator add-on packages are:</p>
+<table>
+<thead>
+<tr>
+<th>Package</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ZptSharp.PythonExpressions</td>
+<td>Evaluates expressions written in Python 2 (via IronPython)</td>
+</tr>
+<tr>
+<td>ZptSharp.CSharpExpressions</td>
+<td>Evaluates expressions written in C# (via Roslyn scripting API)</td>
+</tr>
+</tbody>
+</table>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/csf-dev/ZPT-Sharp/blob/master/ZptSharp.Documentation/articles/Architecture.md/#L1" class="contribution-link">Improve this Doc</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In This Article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            
+            <span>Generated by <strong>DocFX</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>
