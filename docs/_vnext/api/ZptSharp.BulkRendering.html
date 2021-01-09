@@ -1,0 +1,159 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Namespace ZptSharp.BulkRendering
+   </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Namespace ZptSharp.BulkRendering
+   ">
+    <meta name="generator" content="docfx 2.56.6.0">
+    
+    <link rel="shortcut icon" href="../favicon.ico">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="ZptSharp.BulkRendering">
+  
+  <h1 id="ZptSharp_BulkRendering" data-uid="ZptSharp.BulkRendering" class="text-break">Namespace ZptSharp.BulkRendering
+  </h1>
+  <div class="markdown level0 summary"></div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="markdown level0 remarks"></div>
+    <h3 id="classes">Classes
+  </h3>
+      <h4><a class="xref" href="ZptSharp.BulkRendering.BulkFileRenderer.html">BulkFileRenderer</a></h4>
+      <section><p>Implementation of <a class="xref" href="ZptSharp.BulkRendering.IRendersManyFiles.html">IRendersManyFiles</a> which handles requests to
+render &amp; write many template files at once.</p>
+</section>
+      <h4><a class="xref" href="ZptSharp.BulkRendering.BulkRenderingException.html">BulkRenderingException</a></h4>
+      <section><p>Raised when an attempt to bulk-render files fails with no files successfully output.</p>
+</section>
+      <h4><a class="xref" href="ZptSharp.BulkRendering.BulkRenderingFileResult.html">BulkRenderingFileResult</a></h4>
+      <section><p>Describes the result of a bulk-rendering operation for a single input file.</p>
+</section>
+      <h4><a class="xref" href="ZptSharp.BulkRendering.BulkRenderingRequest.html">BulkRenderingRequest</a></h4>
+      <section><p>Represents a request to render many template files in bulk.</p>
+</section>
+      <h4><a class="xref" href="ZptSharp.BulkRendering.BulkRenderingRequestValidator.html">BulkRenderingRequestValidator</a></h4>
+      <section><p>Implementation of <a class="xref" href="ZptSharp.BulkRendering.IValidatesBulkRenderingRequest.html">IValidatesBulkRenderingRequest</a> which validates a rendering request.</p>
+</section>
+      <h4><a class="xref" href="ZptSharp.BulkRendering.BulkRenderingResult.html">BulkRenderingResult</a></h4>
+      <section><p>Represents the result from <a class="xref" href="ZptSharp.BulkRendering.IRendersManyFiles.html#ZptSharp_BulkRendering_IRendersManyFiles_RenderAllAsync_ZptSharp_BulkRendering_BulkRenderingRequest_System_Threading_CancellationToken_">RenderAllAsync(BulkRenderingRequest, CancellationToken)</a>.</p>
+</section>
+      <h4><a class="xref" href="ZptSharp.BulkRendering.FileRendererAndSaver.html">FileRendererAndSaver</a></h4>
+      <section><p>Implementation of <a class="xref" href="ZptSharp.BulkRendering.IRendersInputFile.html">IRendersInputFile</a> which renders the file and
+saves the output.</p>
+</section>
+      <h4><a class="xref" href="ZptSharp.BulkRendering.InputFile.html">InputFile</a></h4>
+      <section><p>Describes a single file to be rendered in a bulk-rendering operation.</p>
+</section>
+      <h4><a class="xref" href="ZptSharp.BulkRendering.InputFilesProvider.html">InputFilesProvider</a></h4>
+      <section><p>Implementation of <a class="xref" href="ZptSharp.BulkRendering.IGetsInputFiles.html">IGetsInputFiles</a> which gets input files from a request.</p>
+</section>
+    <h3 id="interfaces">Interfaces
+  </h3>
+      <h4><a class="xref" href="ZptSharp.BulkRendering.IGetsInputFiles.html">IGetsInputFiles</a></h4>
+      <section><p>An object which can get a collection of the files to be processed by a bulk-rendering operation.</p>
+</section>
+      <h4><a class="xref" href="ZptSharp.BulkRendering.IRendersInputFile.html">IRendersInputFile</a></h4>
+      <section><p>An object which renders a single file as part of a bulk-rendering operation.</p>
+</section>
+      <h4><a class="xref" href="ZptSharp.BulkRendering.IRendersManyFiles.html">IRendersManyFiles</a></h4>
+      <section><p>An object which may be used to render many template documents in a single operation.</p>
+</section>
+      <h4><a class="xref" href="ZptSharp.BulkRendering.IValidatesBulkRenderingRequest.html">IValidatesBulkRenderingRequest</a></h4>
+      <section><p>An object which can assert that a rendering request is valid.</p>
+</section>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In This Article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            
+            <span>Generated by <strong>DocFX</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

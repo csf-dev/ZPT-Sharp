@@ -1,0 +1,198 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Namespace ZptSharp.Metal
+   </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Namespace ZptSharp.Metal
+   ">
+    <meta name="generator" content="docfx 2.56.6.0">
+    
+    <link rel="shortcut icon" href="../favicon.ico">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="ZptSharp.Metal">
+  
+  <h1 id="ZptSharp_Metal" data-uid="ZptSharp.Metal" class="text-break">Namespace ZptSharp.Metal
+  </h1>
+  <div class="markdown level0 summary"></div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="markdown level0 remarks"></div>
+    <h3 id="classes">Classes
+  </h3>
+      <h4><a class="xref" href="ZptSharp.Metal.AddDefinedMacroToGlobalScopeProcessorDecorator.html">AddDefinedMacroToGlobalScopeProcessorDecorator</a></h4>
+      <section><p>Decorator for the <a class="xref" href="ZptSharp.Rendering.IProcessesExpressionContext.html">IProcessesExpressionContext</a> service which detects element nodes
+which have 'define-macro' attributes upon them.  If such an attribute is found then the
+macro is stored in the current context's global scope for later usage.</p>
+</section>
+      <h4><a class="xref" href="ZptSharp.Metal.MacroExpander.html">MacroExpander</a></h4>
+      <section><p>Implementation of <a class="xref" href="ZptSharp.Metal.IExpandsMacro.html">IExpandsMacro</a> which first extends the macro and then fills its slots.</p>
+</section>
+      <h4><a class="xref" href="ZptSharp.Metal.MacroExpansionContext.html">MacroExpansionContext</a></h4>
+      <section><p>A model representing an in-progress macro expansion.</p>
+</section>
+      <h4><a class="xref" href="ZptSharp.Metal.MacroNotFoundException.html">MacroNotFoundException</a></h4>
+      <section><p>Thrown when a 'use-macro' attribute indicates that a macro should be used, but the macro to use cannot be found.</p>
+</section>
+      <h4><a class="xref" href="ZptSharp.Metal.MacroProvider.html">MacroProvider</a></h4>
+      <section><p>Implementation of <a class="xref" href="ZptSharp.Metal.IGetsMacro.html">IGetsMacro</a> which uses an expression evaluator
+to get macros from attributes.</p>
+</section>
+      <h4><a class="xref" href="ZptSharp.Metal.MacroUsageContextProcessor.html">MacroUsageContextProcessor</a></h4>
+      <section><p>A <a class="xref" href="ZptSharp.Rendering.IProcessesExpressionContext.html">IProcessesExpressionContext</a> which applies the METAL rendering process.
+This begins with detection of the <code>metal:use-macro</code> attribute.</p>
+</section>
+      <h4><a class="xref" href="ZptSharp.Metal.MetalAttributeSpecProvider.html">MetalAttributeSpecProvider</a></h4>
+      <section><p>Implementation of <a class="xref" href="ZptSharp.Metal.IGetsMetalAttributeSpecs.html">IGetsMetalAttributeSpecs</a> which uses string constants and
+a <a class="xref" href="ZptSharp.Dom.IGetsWellKnownNamespace.html">IGetsWellKnownNamespace</a>.</p>
+</section>
+      <h4><a class="xref" href="ZptSharp.Metal.MetalContextProcessorFactory.html">MetalContextProcessorFactory</a></h4>
+      <section><p>Implementation of <a class="xref" href="ZptSharp.Metal.IGetsMetalContextProcessor.html">IGetsMetalContextProcessor</a> which gets the
+expression-context processor for METAL.</p>
+</section>
+      <h4><a class="xref" href="ZptSharp.Metal.MetalDocumentAdapter.html">MetalDocumentAdapter</a></h4>
+      <section><p>An adapter for an <a class="xref" href="ZptSharp.Dom.IDocument.html">IDocument</a> which allows it to be used as
+<a class="xref" href="ZptSharp.Metal.IProvidesMacros.html">IProvidesMacros</a> and <a class="xref" href="ZptSharp.Expressions.IGetsNamedTalesValue.html">IGetsNamedTalesValue</a>.</p>
+</section>
+      <h4><a class="xref" href="ZptSharp.Metal.MetalDocumentAdapterFactory.html">MetalDocumentAdapterFactory</a></h4>
+      <section><p>Implementation of <a class="xref" href="ZptSharp.Metal.IGetsMetalDocumentAdapter.html">IGetsMetalDocumentAdapter</a> which uses dependency
+injection to backfill the other dependencies, as well as the document.</p>
+</section>
+      <h4><a class="xref" href="ZptSharp.Metal.MetalMacro.html">MetalMacro</a></h4>
+      <section><p>Describes a METAL macro.</p>
+</section>
+      <h4><a class="xref" href="ZptSharp.Metal.Slot.html">Slot</a></h4>
+      <section><p>A model which may represent either a defined macro slot or content which should fill a macro slot.</p>
+</section>
+      <h4><a class="xref" href="ZptSharp.Metal.SlotFiller.html">SlotFiller</a></h4>
+      <section><p>Implementation of <a class="xref" href="ZptSharp.Metal.IFillsSlots.html">IFillsSlots</a> which replaces DOM nodes and removes the slot
+filler from the macro context when it is used.</p>
+</section>
+      <h4><a class="xref" href="ZptSharp.Metal.SlotFinder.html">SlotFinder</a></h4>
+      <section><p>Default implementation of <a class="xref" href="ZptSharp.Metal.IGetsSlots.html">IGetsSlots</a> which gets a
+collection of slot-fillers for an node.</p>
+</section>
+    <h3 id="interfaces">Interfaces
+  </h3>
+      <h4><a class="xref" href="ZptSharp.Metal.IExpandsMacro.html">IExpandsMacro</a></h4>
+      <section><p>An object which expands a <a class="xref" href="ZptSharp.Metal.MetalMacro.html">MetalMacro</a>.  Expansion is the process applying macro
+extension (where applicable) and of filling any defined slots.</p>
+</section>
+      <h4><a class="xref" href="ZptSharp.Metal.IFillsSlots.html">IFillsSlots</a></h4>
+      <section><p>An object which fills slots in METAL macros.</p>
+</section>
+      <h4><a class="xref" href="ZptSharp.Metal.IGetsMacro.html">IGetsMacro</a></h4>
+      <section><p>An object which gets a METAL macro for an node which has a matching METAL attribute.</p>
+</section>
+      <h4><a class="xref" href="ZptSharp.Metal.IGetsMetalAttributeSpecs.html">IGetsMetalAttributeSpecs</a></h4>
+      <section><p>An object which gets <a class="xref" href="ZptSharp.Dom.AttributeSpec.html">AttributeSpec</a> instances for well-known METAL attributes.</p>
+</section>
+      <h4><a class="xref" href="ZptSharp.Metal.IGetsMetalContextProcessor.html">IGetsMetalContextProcessor</a></h4>
+      <section><p>An object which can get a <a class="xref" href="ZptSharp.Rendering.IProcessesExpressionContext.html">IProcessesExpressionContext</a> suitable for
+the METAL macro-expansion process.</p>
+</section>
+      <h4><a class="xref" href="ZptSharp.Metal.IGetsMetalDocumentAdapter.html">IGetsMetalDocumentAdapter</a></h4>
+      <section><p>An object which gets an instance of <a class="xref" href="ZptSharp.Metal.MetalDocumentAdapter.html">MetalDocumentAdapter</a> for a specified
+document.</p>
+</section>
+      <h4><a class="xref" href="ZptSharp.Metal.IGetsSlots.html">IGetsSlots</a></h4>
+      <section><p>An object which gets a collection of <a class="xref" href="ZptSharp.Metal.Slot.html">Slot</a> instances from a
+specified <a class="xref" href="ZptSharp.Dom.INode.html">INode</a> and its descendents.</p>
+</section>
+      <h4><a class="xref" href="ZptSharp.Metal.IProvidesMacros.html">IProvidesMacros</a></h4>
+      <section><p>An object which can get METAL macros from a document.</p>
+</section>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In This Article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            
+            <span>Generated by <strong>DocFX</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

@@ -1,0 +1,149 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Limitations of csharp expressions </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Limitations of csharp expressions ">
+    <meta name="generator" content="docfx 2.56.6.0">
+    
+    <link rel="shortcut icon" href="../../../favicon.ico">
+    <link rel="stylesheet" href="../../../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../../../styles/docfx.css">
+    <link rel="stylesheet" href="../../../styles/main.css">
+    <meta property="docfx:navrel" content="../../../toc.html">
+    <meta property="docfx:tocrel" content="../../toc.html">
+    
+    
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../../../index.html">
+                <img id="logo" class="svg" src="../../../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="">
+<h1 id="limitations-of-csharp-expressions">Limitations of <code>csharp</code> expressions</h1>
+
+<p>In short, whilst <code>csharp</code> expressions are available, to execute arbitrary .NET code <em>it is almost always better to <a href="PipeExpressions.html">use <code>pipe</code> expressions instead</a></em>.</p>
+<p>The CSharp expression type can be somewhat difficult to use, due to a number of limitations, documented here.</p>
+<h2 id="symbols-must-be-entity-encoded">Symbols must be entity-encoded</h2>
+<p>C# makes significant use of a number of symbols which are not HTML/XML-friendly. These symbols must be replaced with their entity representations in attribute values or else they will break the validity of the document. This includes (but might not be limited to):</p>
+<ul>
+<li>Double quotes: <code>&amp;quot;</code></li>
+<li>Less-than: <code>&amp;lt;</code></li>
+<li>Greater-than: <code>&amp;gt;</code></li>
+</ul>
+<h2 id="using-extension-methods">Using extension methods</h2>
+<p>In order to use any extension methods, including those associated with the <code>System.Linq</code> namespace, two further expressions are required:</p>
+<ul>
+<li>A <code>using</code> expression variable must be 'in scope', for the appropriate namespace which activates the extension method.</li>
+<li>Unless the extension method operates upon <code>object</code>, a <code>type</code> expression variable must also be 'in scope', indicating the types of any objects which are to be the target of extension methods.</li>
+</ul>
+<h3 id="example">Example</h3>
+<p>This example shows how to use <code>.FirstOrDefault()</code> with a list of string. Presume that the variable <code>myList</code> contains the list.</p>
+<pre><code class="lang-html">&lt;div tal:define=&quot;listType type:myList List&amp;lt;string &amp;gt;;
+                 usingSystemLinq using:System.Linq;
+                 firstItem csharp:myList.FirstOrDefault()&quot;&gt;
+    &lt;p&gt;
+        The first item is
+        &lt;span tal:replace=&quot;firstItem&quot;&gt;complicated&lt;/span&gt;
+    &lt;/p&gt;
+&lt;/div&gt;
+</code></pre>
+<h2 id="cannot-access-anonymous-types">Cannot access anonymous types</h2>
+<ul>
+<li>CSharp expressions are evaluated from an in-memory assembly which is compiled at runtime.</li>
+<li>When anonymous types are exported, all of their members are <code>internal</code>.</li>
+</ul>
+<p>These two phenomenon combined mean that a CSharp expression cannot 'see' any members declared upon anonymous objects. If you try to use them then you will receive compiler errors stating that the members do not exist on type <code>object</code>.</p>
+<h2 id="confusing-overload-selection">Confusing overload selection</h2>
+<p>The default behaviour of C# expressions treats every in-scope variable as a <code>dynamic</code> object. This avoids the need to provide design-time type information for every single variable.</p>
+<p>However, this makes a number of C# features behave in unusual ways. One of these is <a href="https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/types/using-type-dynamic#overload-resolution-with-arguments-of-type-dynamic">the way that method overloads are selected</a>.</p>
+<h2 id="compilation-performance">Compilation performance</h2>
+<p>CSharp expressions do not perform particularly well; they take a moment to compile before first use. This can cause a noticeable delay on first load of a page that uses CSharp expressions, particularly if the page uses several of them.</p>
+<p>This is mitigated by the use of an <em>expression cache</em>. Once an expression has been compiled, its compiled delegate is cached for the lifetime of the application. This means that subsequent executions are significantly faster.</p>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/csf-dev/ZPT-Sharp/blob/master/ZptSharp.Documentation/articles/ZptReference/Tales/CSharpExpressionLimitations.md/#L1" class="contribution-link">Improve this Doc</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In This Article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            
+            <span>Generated by <strong>DocFX</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../../../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../../../styles/docfx.js"></script>
+    <script type="text/javascript" src="../../../styles/main.js"></script>
+  </body>
+</html>
