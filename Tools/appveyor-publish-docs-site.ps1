@@ -29,7 +29,7 @@ if ($Env:APPVEYOR_REPO_BRANCH -eq "production") {
 
 # Set up git so that it can push
 git config --global user.name "AppVeyor (on behalf of Craig Fowler)"
-git config--global  user.email "craig+appveyor@csf-dev.com"
+git config --global  user.email "craig+appveyor@csf-dev.com"
 git config --global credential.helper store
 Set-Content -Path "$HOME\.git-credentials" -Value "https://$($Env:GITHUB_SECRET_KEY):x-oauth-basic@github.com`n" -NoNewline
 
