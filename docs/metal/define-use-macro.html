@@ -1,0 +1,196 @@
+﻿<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Defining and using METAL macros</title>
+<base href="http://csf-dev.github.io/ZPT-Sharp/">
+<style type="text/css">
+@import url(css/styles.css);
+</style>
+
+<script data-main="js/config/main" type="text/javascript" src="js/lib/require.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.4.0/styles/default.min.css">
+</head>
+<body class="page_define_use_macro">
+<div class="content_wrapper">
+  <header class="page_header">
+    <div class="hamburger_menu" title="Show/hide navigation">
+      <span class="hamburger_line"></span>
+      <span class="hamburger_line"></span>
+      <span class="hamburger_line"></span>
+    </div>
+    <h2>
+      <a href="index.html">ZPT Sharp</a>
+      <em>Zen HTML views</em>
+    </h2>
+  </header>
+  <div class="main_page_area">
+    <nav id="site_navigation">
+      <h2>Site navigation</h2>
+      <ul>
+				<li class="nav_section">
+          <h3>First steps</h3>
+					<ul>
+            <li>
+              <a href="advantages-of-zpt-views.html">Why use ZPT-Sharp</a>
+						</li>
+            <li>
+              <a href="hello-world.html">Hello World example</a>
+            </li>
+            <li>
+              <a href="writing-pages-using-zpt.html">Learn ZPT syntax</a>
+            </li>
+					</ul>
+				</li>
+        <li class="nav_section">
+          <h3>Usage</h3>
+          <ul>
+            <li>
+              <a href="asp-net-mvc-view-engine.html">ASP.NET MVC5</a>
+            </li>
+            <li>
+              <a href="command-line-renderer.html">Command-line app</a>
+            </li>
+            <li>
+              <a href="page-rendering-api.html">As an API</a>
+            </li>
+            <li>
+              <a href="logging.html">Diagnostics &amp; logging</a>
+            </li>
+          </ul>
+        </li>
+        <li class="nav_section">
+          <h3>Reference</h3>
+          <ul>
+            <li>
+              <a href="metal/introduction.html">METAL syntax</a>
+            </li>
+            <li>
+              <a href="tal/introduction.html">TAL syntax</a>
+            </li>
+            <li>
+              <a href="tales/introduction.html">TALES syntax</a>
+            </li>
+            <li>
+              <a href="api/index.html">API documentation</a>
+            </li>
+          </ul>
+        </li>
+        <li class="nav_section">
+          <h3>Installation</h3>
+          <ul>
+            <li>
+              <a href="nuget-packages.html">NuGet packages</a>
+            </li>
+            <li>
+              <a href="download.html">ZIP download</a>
+            </li>
+            <li>
+              <a href="plugins.html">Plugins</a>
+            </li>
+            <li>
+              <a href="configuration.html">Configuration</a>
+            </li>
+          </ul>
+        </li>
+        <li class="nav_section">
+          <h3>Contribute</h3>
+          <ul>
+            <li>
+              <a href="https://github.com/csf-dev/ZPT-Sharp">Github project</a>
+            </li>
+            <li>
+              <a href="https://github.com/csf-dev/ZPT-Sharp/issues">Issue tracker</a>
+            </li>
+            <li>
+              <a href="writing-plugins.html">Writing plugins</a>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </nav>
+    <section class="main_page_content">
+      <header>
+        <h1>Defining and using METAL macros</h1>
+      </header>
+      <h2 id="define_macro">metal:define-macro</h2>
+      <h3>Attribute syntax</h3>
+      <pre><code class="html">metal:define-macro="MACRONAME"</code></pre>
+      <h3>Remarks</h3>
+      <p>
+        Indicates that the current element and all of its child elements form a macro with the given name
+        (<kbd>MACRONAME</kbd>).  Alone this attribute does nothing, but the macro may now be referenced by either
+        <code>use-macro</code> or <a href="metal/extend-macro.html"><code>metal:extend-macro</code></a> attributes.
+      </p>
+      <h2 id="use_macro">metal:use-macro</h2>
+      <h3>Attribute syntax</h3>
+      <pre><code class="html">metal:use-macro="EXPRESSION"</code></pre>
+      <h3>Remarks</h3>
+      <p>
+        Creates a copy of the markup tree represented by the macro <kbd>EXPRESSION</kbd> ("the macro"). The macro is
+        <a href="metal/extend-macro.html">extended</a> and <a href="metal/define-fill-slot.html">slots are filled</a>
+        if appropriate.  Then the current element (the element decorated <code>use-macro</code>) and its
+        children/content is replaced with the referenced macro (the corresponding element decorated with
+        <code>define-macro</code>).
+      </p>
+      <h2>Macro definition and usage example</h2>
+      <p>
+        The following simple example shows a common page header macro:
+      </p>
+      <pre><code class="html">&lt;!-- Macro definition --&gt;
+&lt;body&gt;
+  &lt;header metal:define-macro=&quot;page_header&quot;&gt;
+    &lt;a href=&quot;homepage_url&quot;&gt;Boyd&#39;s toast&lt;/a&gt;
+    &lt;p class=&quot;strapline&quot;&gt;Our toast really &lt;em&gt;pops!&lt;/em&gt;&lt;/p&gt;
+  &lt;/header&gt;
+&lt;/body&gt;
+
+&lt;!-- Macro usage --&gt;
+&lt;body&gt;
+  &lt;header metal:use-macro=&quot;page_header&quot;&gt;Uses the common header&lt;/header&gt;
+  &lt;section class=&quot;main_content&quot;&gt;
+    &lt;p&gt;Here&#39;s the main page content&lt;/p&gt;
+  &lt;/section&gt;
+&lt;/body&gt;
+
+&lt;!-- How this renders --&gt;
+&lt;body&gt;
+  &lt;header&gt;
+    &lt;a href=&quot;homepage_url&quot;&gt;Boyd&#39;s toast&lt;/a&gt;
+    &lt;p class=&quot;strapline&quot;&gt;Our toast really &lt;em&gt;pops!&lt;/em&gt;&lt;/p&gt;
+  &lt;/header&gt;
+  &lt;section class=&quot;main_content&quot;&gt;
+    &lt;p&gt;Here&#39;s the main page content&lt;/p&gt;
+  &lt;/section&gt;
+&lt;/body&gt;</code></pre>
+    </section>
+  </div>
+</div>
+<footer class="page_footer">
+  <section class="copyright">
+    Copyright © 2017
+    <a href="http://csf-dev.com/">CSF Software Limited</a> et al
+  </section>
+  <section class="version">
+    <p>
+      Website built <strong>2017-03-19</strong>;
+      for version
+      <strong>
+        v1.0.0
+      </strong>
+    </p>
+  </section>
+</footer>
+<div class="cookie_statement">
+  <p>
+    This website uses analytics cookies to understand how visitors are making use of its content.
+    This helps decide where improvements can be made in the future.
+    <a href="https://ico.org.uk/for-organisations/guide-to-pecr/cookies-and-similar-technologies/">European and UK law</a>
+    requires us to ask you for your consent to this.
+  </p>
+  <button class="accept">Accept cookies</button>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,10 @@
+<map id="CSF.Zpt.ZptException" name="CSF.Zpt.ZptException">
+<area shape="rect" id="node3" href="$classCSF_1_1Zpt_1_1ExpressionEvaluators_1_1LoadExpressions_1_1UnsupportedDocumentTypeException.html" title="Exception raised when an unsupported document type is used with a &#39;load:&#39; expression. " alt="" coords="335,5,595,61"/>
+<area shape="rect" id="node4" href="$classCSF_1_1Zpt_1_1Rendering_1_1RenderingException.html" title="Represents an exception raised whilst rendering a ZPT document. " alt="" coords="365,85,564,126"/>
+<area shape="rect" id="node10" href="$classCSF_1_1Zpt_1_1Tales_1_1TraversalException.html" title="Represents an exception whilst traversing a TALES path. " alt="" coords="353,151,577,177"/>
+<area shape="rect" id="node5" href="$classCSF_1_1Zpt_1_1Metal_1_1MacroNotFoundException.html" title="Exception raised when a requested METAL macro is not found. " alt="" coords="657,19,863,61"/>
+<area shape="rect" id="node6" href="$classCSF_1_1Zpt_1_1Rendering_1_1ModelEvaluationException.html" title="Represents an exception which is raised whilst evaluating an expression within a IModel. " alt="" coords="643,85,877,126"/>
+<area shape="rect" id="node9" href="$classCSF_1_1Zpt_1_1Tal_1_1ParserException.html" title="Exception raised when the parsing of a TAL&#45;enabled document fails. " alt="" coords="663,151,857,177"/>
+<area shape="rect" id="node7" href="$classCSF_1_1Zpt_1_1Tales_1_1InvalidExpressionException.html" title="Exception raised when a TALES expression is invalid. " alt="" coords="925,85,1140,126"/>
+<area shape="rect" id="node8" href="$classCSF_1_1Zpt_1_1ExpressionEvaluators_1_1CSharpExpressions_1_1CSharpExpressionException.html" title="Exception raised when there is an issue evaluating a CSharp expression. " alt="" coords="1188,77,1439,133"/>
+</map>

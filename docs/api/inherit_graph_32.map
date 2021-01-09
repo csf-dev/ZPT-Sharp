@@ -1,0 +1,4 @@
+<map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
+<area shape="rect" id="node1" href="$interfaceCSF_1_1Zpt_1_1IAddOnAssemblyFinder.html" title="A service which gets the full paths for add&#45;on assemblies, given a partial name for the assembly..." alt="" coords="5,13,220,39"/>
+<area shape="rect" id="node2" href="$classCSF_1_1Zpt_1_1DefaultAddOnAssemblyFinder.html" title="Default implementation of IAddOnAssemblyFinder which uses the path of the CSF.Zpt.dll assembly as the basis for search. " alt="" coords="268,5,484,47"/>
+</map>

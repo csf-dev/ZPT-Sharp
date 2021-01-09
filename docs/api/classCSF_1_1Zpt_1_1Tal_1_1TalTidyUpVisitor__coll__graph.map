@@ -1,0 +1,5 @@
+<map id="CSF.Zpt.Tal.TalTidyUpVisitor" name="CSF.Zpt.Tal.TalTidyUpVisitor">
+<area shape="rect" id="node2" href="$classCSF_1_1Zpt_1_1Rendering_1_1NoOpVisitor.html" title="Implementation of ContextVisitorBase that performs no operation. " alt="" coords="56,155,149,181"/>
+<area shape="rect" id="node3" href="$classCSF_1_1Zpt_1_1Rendering_1_1ContextVisitorBase.html" title="Abstract base logic for implementations of IContextVisitor. " alt="" coords="35,80,170,107"/>
+<area shape="rect" id="node4" href="$interfaceCSF_1_1Zpt_1_1Rendering_1_1IContextVisitor.html" title="Interface for a type which can visit a IRenderingContext instance. " alt="" coords="48,5,157,32"/>
+</map>
