@@ -38,6 +38,5 @@ Set-Content -Path "$HOME\.git-credentials" -Value "https://$($Env:GITHUB_SECRET_
 # stop unless I change the error preference first
 $ErrorActionPreference = "silentlycontinue"
 git add --all docs/
-$ErrorActionPreference = "Stop"
 git commit -m "Auto-publish docs website [skip ci]"
 git push origin HEAD:$Env:APPVEYOR_REPO_BRANCH
