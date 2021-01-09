@@ -113,6 +113,14 @@
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">public sealed class UnknownSourceInfo : IDocumentSourceInfo, IEquatable&lt;IDocumentSourceInfo&gt;</code></pre>
   </div>
+  <h5 id="ZptSharp_Rendering_UnknownSourceInfo_remarks"><strong>Remarks</strong></h5>
+  <div class="markdown level0 remarks"><p>
+This class is used when (for any reason) the source information is not provided.
+This typically means that either an optional parameter was omitted, or a <span class="xref">null</span> was explicitly passed.
+Instances of this type will always indicate that the source is <code>&lt;unknown></code> and are only
+equal in the case that they are reference equal.
+</p>
+</div>
   <h3 id="properties">Properties
   </h3>
   <span class="small pull-right mobile-hide">
@@ -120,11 +128,11 @@
     <a href="https://github.com/csf-dev/ZPT-Sharp/new/master/apiSpec/new?filename=ZptSharp_Rendering_UnknownSourceInfo_Name.md&amp;value=---%0Auid%3A%20ZptSharp.Rendering.UnknownSourceInfo.Name%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/csf-dev/ZPT-Sharp/blob/master/ZptSharp/Rendering/UnknownSourceInfo.cs/#L15">View Source</a>
+    <a href="https://github.com/csf-dev/ZPT-Sharp/blob/master/ZptSharp/Rendering/UnknownSourceInfo.cs/#L23">View Source</a>
   </span>
   <a id="ZptSharp_Rendering_UnknownSourceInfo_Name_" data-uid="ZptSharp.Rendering.UnknownSourceInfo.Name*"></a>
   <h4 id="ZptSharp_Rendering_UnknownSourceInfo_Name" data-uid="ZptSharp.Rendering.UnknownSourceInfo.Name">Name</h4>
-  <div class="markdown level1 summary"><p>Gets the name of the source.</p>
+  <div class="markdown level1 summary"><p>Gets the name of the source, which for this type will always return the string <code>&lt;unknown&gt;</code>.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -154,7 +162,7 @@
     <a href="https://github.com/csf-dev/ZPT-Sharp/new/master/apiSpec/new?filename=ZptSharp_Rendering_UnknownSourceInfo_Equals_ZptSharp_Rendering_IDocumentSourceInfo_.md&amp;value=---%0Auid%3A%20ZptSharp.Rendering.UnknownSourceInfo.Equals(ZptSharp.Rendering.IDocumentSourceInfo)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/csf-dev/ZPT-Sharp/blob/master/ZptSharp/Rendering/UnknownSourceInfo.cs/#L24">View Source</a>
+    <a href="https://github.com/csf-dev/ZPT-Sharp/blob/master/ZptSharp/Rendering/UnknownSourceInfo.cs/#L32">View Source</a>
   </span>
   <a id="ZptSharp_Rendering_UnknownSourceInfo_Equals_" data-uid="ZptSharp.Rendering.UnknownSourceInfo.Equals*"></a>
   <h4 id="ZptSharp_Rendering_UnknownSourceInfo_Equals_ZptSharp_Rendering_IDocumentSourceInfo_" data-uid="ZptSharp.Rendering.UnknownSourceInfo.Equals(ZptSharp.Rendering.IDocumentSourceInfo)">Equals(IDocumentSourceInfo)</h4>
@@ -206,11 +214,12 @@ current <a class="xref" href="ZptSharp.Rendering.UnknownSourceInfo.html">Unknown
     <a href="https://github.com/csf-dev/ZPT-Sharp/new/master/apiSpec/new?filename=ZptSharp_Rendering_UnknownSourceInfo_ToString.md&amp;value=---%0Auid%3A%20ZptSharp.Rendering.UnknownSourceInfo.ToString%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/csf-dev/ZPT-Sharp/blob/master/ZptSharp/Rendering/UnknownSourceInfo.cs/#L30">View Source</a>
+    <a href="https://github.com/csf-dev/ZPT-Sharp/blob/master/ZptSharp/Rendering/UnknownSourceInfo.cs/#L39">View Source</a>
   </span>
   <a id="ZptSharp_Rendering_UnknownSourceInfo_ToString_" data-uid="ZptSharp.Rendering.UnknownSourceInfo.ToString*"></a>
   <h4 id="ZptSharp_Rendering_UnknownSourceInfo_ToString" data-uid="ZptSharp.Rendering.UnknownSourceInfo.ToString">ToString()</h4>
-  <div class="markdown level1 summary"><p>Returns a <span class="xref">System.String</span> that represents the current <a class="xref" href="ZptSharp.Rendering.UnknownSourceInfo.html">UnknownSourceInfo</a>.</p>
+  <div class="markdown level1 summary"><p>Returns a <span class="xref">System.String</span> that represents the current <a class="xref" href="ZptSharp.Rendering.UnknownSourceInfo.html">UnknownSourceInfo</a>.
+For this type, it will always return the string <code>&lt;unknown&gt;</code>.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -253,7 +262,7 @@ current <a class="xref" href="ZptSharp.Rendering.UnknownSourceInfo.html">Unknown
                     <a href="https://github.com/csf-dev/ZPT-Sharp/new/master/apiSpec/new?filename=ZptSharp_Rendering_UnknownSourceInfo.md&amp;value=---%0Auid%3A%20ZptSharp.Rendering.UnknownSourceInfo%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
                   </li>
                   <li>
-                    <a href="https://github.com/csf-dev/ZPT-Sharp/blob/master/ZptSharp/Rendering/UnknownSourceInfo.cs/#L7" class="contribution-link">View Source</a>
+                    <a href="https://github.com/csf-dev/ZPT-Sharp/blob/master/ZptSharp/Rendering/UnknownSourceInfo.cs/#L15" class="contribution-link">View Source</a>
                   </li>
                 </ul>
               </div>
