@@ -1,4 +1,4 @@
-$ErrorActionPreference = "Stop";
+$ErrorActionPreference = "Stop"
 
 # Choose a base directory for the site to be published from,
 # if this branch is production then it's the main "docs/"" dir,
@@ -34,6 +34,10 @@ git config --global credential.helper store
 Set-Content -Path "$HOME\.git-credentials" -Value "https://$($Env:GITHUB_SECRET_KEY):x-oauth-basic@github.com`n" -NoNewline
 
 # Commit & push the amended repo, using a commit message that won't cause another build
-git add docs/ --all
+# Because of autocrlf, the git add command could report warnings which cause the script to
+# stop unless I change the error preference first
+$ErrorActionPreference = "silentlycontinue"
+git add --all docs/
+$ErrorActionPreference = "Stop"
 git commit -m "Auto-publish docs website [skip ci]"
 git push origin $Env:APPVEYOR_REPO_BRANCH
