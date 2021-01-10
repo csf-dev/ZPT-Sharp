@@ -4269,7 +4269,7 @@
       "output": {
         ".html": {
           "relative_path": "api/index.html",
-          "hash": "XD/skidjbCrYTDm7hQuoHw=="
+          "hash": "ik9nW6VCYGkVrmK+UeFmwQ=="
         }
       },
       "is_incremental": false,
@@ -4282,18 +4282,6 @@
         ".html": {
           "relative_path": "api/toc.html",
           "hash": "unf0BZCaWhfyM8VofEUCsQ=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "Conceptual",
-      "source_relative_path": "articles/ApiReference.md",
-      "output": {
-        ".html": {
-          "relative_path": "articles/ApiReference.html",
-          "hash": "0mMJlYF996uwHVisqQyQ7A=="
         }
       },
       "is_incremental": false,
@@ -4342,6 +4330,18 @@
         ".html": {
           "relative_path": "articles/Compatibility.html",
           "hash": "rP9WjUqoKuNNVk0pMbCjTA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "articles/Contributing.md",
+      "output": {
+        ".html": {
+          "relative_path": "articles/Contributing.html",
+          "hash": "GFMcAGluQiDJQiveORpu/A=="
         }
       },
       "is_incremental": false,
@@ -4420,15 +4420,12 @@
       "version": ""
     },
     {
-      "log_codes": [
-        "InvalidFileLink"
-      ],
       "type": "Conceptual",
       "source_relative_path": "articles/QuickStart/index.md",
       "output": {
         ".html": {
           "relative_path": "articles/QuickStart/index.html",
-          "hash": "HHjuXEFzexM9COZl+/T0jA=="
+          "hash": "wrI+qDD330Lfx8SpEcSrBA=="
         }
       },
       "is_incremental": false,
@@ -4459,6 +4456,30 @@
       "version": ""
     },
     {
+      "type": "Conceptual",
+      "source_relative_path": "articles/WritingDocumentProviders.md",
+      "output": {
+        ".html": {
+          "relative_path": "articles/WritingDocumentProviders.html",
+          "hash": "KtGYtibFPWjtDRmxtQA49A=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "articles/WritingExpressionEvaluators.md",
+      "output": {
+        ".html": {
+          "relative_path": "articles/WritingExpressionEvaluators.html",
+          "hash": "japsPersLfeychMlP9wSyQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
       "log_codes": [
         "InvalidFileLink"
       ],
@@ -4467,7 +4488,7 @@
       "output": {
         ".html": {
           "relative_path": "articles/ZptReference/Index.html",
-          "hash": "w9SR5fA9u3+MJxdVfhjh9A=="
+          "hash": "TUmlkVGWRhH7/lo4YAhiHg=="
         }
       },
       "is_incremental": false,
@@ -4503,7 +4524,7 @@
       "output": {
         ".html": {
           "relative_path": "articles/ZptReference/Tales/CSharpExpressionLimitations.html",
-          "hash": "yvLtI9Nza5/0/2CL48LYDA=="
+          "hash": "Ev+QvuQlBZHhDSD+SVGmxQ=="
         }
       },
       "is_incremental": false,
@@ -4515,7 +4536,7 @@
       "output": {
         ".html": {
           "relative_path": "articles/ZptReference/Tales/CSharpExpressions.html",
-          "hash": "NOtc7WIsXgpQ9av4qGRkJw=="
+          "hash": "vbWLErkxdzGSwC7/SxWVcA=="
         }
       },
       "is_incremental": false,
@@ -4558,15 +4579,12 @@
       "version": ""
     },
     {
-      "log_codes": [
-        "InvalidFileLink"
-      ],
       "type": "Conceptual",
       "source_relative_path": "articles/ZptTutorial/index.md",
       "output": {
         ".html": {
           "relative_path": "articles/ZptTutorial/index.html",
-          "hash": "+l/3eb4SBuJ7Oolk8pC8Yg=="
+          "hash": "W/ae7MOKFkxcrha8Os3ahg=="
         }
       },
       "is_incremental": false,
@@ -4578,22 +4596,19 @@
       "output": {
         ".html": {
           "relative_path": "articles/index.html",
-          "hash": "f+7C75+7cV5PTbTOGwbNbQ=="
+          "hash": "lT7ioFEQkim3tJX64thuLw=="
         }
       },
       "is_incremental": false,
       "version": ""
     },
     {
-      "log_codes": [
-        "InvalidFileLink"
-      ],
       "type": "Toc",
       "source_relative_path": "articles/toc.yml",
       "output": {
         ".html": {
           "relative_path": "articles/toc.html",
-          "hash": "E3oEH8fW0ILfUeZEUlF3gQ=="
+          "hash": "Vpc6V8uomO9UVIdzRzSPFQ=="
         }
       },
       "is_incremental": false,
@@ -4649,7 +4664,7 @@
         "ConceptualDocumentProcessor": {
           "can_incremental": false,
           "incrementalPhase": "build",
-          "total_file_count": 26,
+          "total_file_count": 28,
           "skipped_file_count": 0
         },
         "ManagedReferenceDocumentProcessor": {

@@ -5,9 +5,9 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>PLACEHOLDER </title>
+    <title>ZptSharp API reference </title>
     <meta name="viewport" content="width=device-width">
-    <meta name="title" content="PLACEHOLDER ">
+    <meta name="title" content="ZptSharp API reference ">
     <meta name="generator" content="docfx 2.56.6.0">
     
     <link rel="shortcut icon" href="../favicon.ico">
@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="../styles/docfx.css">
     <link rel="stylesheet" href="../styles/main.css">
     <meta property="docfx:navrel" content="../toc.html">
-    <meta property="docfx:tocrel" content="../articles/toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
     
     
     
@@ -67,9 +67,54 @@
         <div class="article row grid-right">
           <div class="col-md-10">
             <article class="content wrap" id="_content" data-uid="">
-<h1 id="placeholder">PLACEHOLDER</h1>
+<h1 id="zptsharp-api-reference">ZptSharp API reference</h1>
 
-<p>TODO: Add .NET projects to the <em>src</em> folder and run <code>docfx</code> to generate <strong>REAL</strong> <em>API Documentation</em>!</p>
+<h2 id="adding-zptsharp-to-your-application">Adding ZptSharp to your application</h2>
+<h2 id="the-interfaces-to-inject">The interfaces to inject</h2>
+<p>Once ZptSharp is configured in your application's dependency injection, consuming it is a simple matter of injecting the appropriate interfaces and using them in your own classes.  For example:</p>
+<pre><code class="lang-csharp">public class MyClassWhichUsesZptSharp
+{
+    readonly ZptSharp.IRendersZptFile fileRenderer;
+
+    public async Task RenderTheFile()
+    {
+        // Use fileRenderer.RenderAsync here
+    }
+
+    public MyClassWhichUsesZptSharp(ZptSharp.IRendersZptFile fileRenderer)
+    {
+        this.fileRenderer = fileRenderer ?? throw new ArgumentNullException(nameof(fileRenderer));
+    }
+}
+</code></pre>
+<p>The recommended interfaces to inject and consume are:</p>
+<table>
+<thead>
+<tr>
+<th>Interface</th>
+<th>Summary</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a class="xref" href="ZptSharp.IRendersZptFile.html"><code>IRendersZptFile</code></a></td>
+<td>Used to render ZPT documents from file-system files</td>
+</tr>
+<tr>
+<td><a class="xref" href="ZptSharp.IRendersZptDocument.html"><code>IRendersZptDocument</code></a></td>
+<td>Used to render ZPT documents from sources <em>which are not</em> file-system files</td>
+</tr>
+<tr>
+<td><a class="xref" href="ZptSharp.IWritesStreamToTextWriter.html"><code>IWritesStreamToTextWriter</code></a></td>
+<td>Used to save the results of rendering to a <code>System.IO.TextWriter</code> where applicable</td>
+</tr>
+<tr>
+<td><a class="xref" href="ZptSharp.BulkRendering.IRendersManyFiles.html"><code>IRendersManyFiles</code></a></td>
+<td>Used to perform bulk-rendering of many source files, using the same model for all</td>
+</tr>
+</tbody>
+</table>
+<h2 id="configuring-the-rendering-operations">Configuring the rendering operations</h2>
 </article>
           </div>
           
