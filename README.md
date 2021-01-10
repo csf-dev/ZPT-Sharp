@@ -1,6 +1,6 @@
 # ZptSharp
 
-**ZptSharp** *(formerly ZPT-Sharp)* is a library for .NET which renders HTML/XML documents from model data.
+ZptSharp *(formerly ZPT-Sharp)* is a library for .NET which renders HTML/XML documents from model data.
 It is ideally suited for use in MVC applications, as the **View** technology.
 
 ZPT is an *attribute-based* syntax; as such it avoids the need to add 'alien markup' to your source files.
@@ -9,19 +9,18 @@ ZPT source files remain syntactically valid HTML/XML and may even be opened/prev
 ## Documentation
 
 [Documentation for the current production release] of ZptSharp is all available on the ZptSharp website.
-[Documentation for the upcoming/next version] is also available, as a draft.
+[Draft documentation for the upcoming/next version] is also available.
 
 [Documentation for the current production release]: https://csf-dev.github.io/ZPT-Sharp/
-[Documentation for the upcoming/next version]: https://csf-dev.github.io/ZPT-Sharp/_vnext/
+[Draft documentation for the upcoming/next version]: https://csf-dev.github.io/ZPT-Sharp/_vnext/
 
 ## Source control branches
 
 The main branches for this repository as as follows:
 
-* The **master** branch represents the latest development/next-release code
+* The **master** branch represents the latest development/next-release code 
+  * Currently this is work toward [the v2.0.0 milestone]
 * The **production** branch represents the most recent release version
-
-The master branch currently represents work toward [the v2.0.0 milestone].
 
 ## Continuous integration status
 

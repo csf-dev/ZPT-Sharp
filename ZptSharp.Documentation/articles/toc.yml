@@ -8,7 +8,7 @@
         - name: ASP.NET Core MVC
           href: QuickStart/MvcCore.md
         - name: ASP.NET MVC 5
-          href: QuickStart/MvcC5.md
+          href: QuickStart/Mvc5.md
         - name: Command line renderer
           href: QuickStart/CliApp.md
         - name: Consume the API
@@ -20,7 +20,7 @@
     - name: MVC view engines
       href: ViewEngines.md
     - name: Consuming the API
-      href: ../api/index.md
+      topicHref: ../api/index.md
     - name: ZPT syntax
       href: ZptReference/index.md
       items:

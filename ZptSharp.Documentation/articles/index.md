@@ -1,4 +1,7 @@
+# ZptSharp documentation
+
 ## Get started
+
 Those who are new to ZptSharp are recommended to follow one of four short **quick start** guides. These guides each take the developer through a 'hello world' example, giving them a working sample app using ZptSharp. You may also wish to read [a conceptual summary] of what ZptSharp is.
 
 * [Quick start for ASP.NET Core MVC]
@@ -16,17 +19,18 @@ An ideal follow-up to using a quick start guide is to follow [the ZPT tutorial].
 [the ZPT tutorial]: ZptTutorial/index.md
 
 ## Reference documentation
+
 * [ZptSharp MVC view engines]
 * [Consuming the API]
 * [ZPT syntax]
-    * [TALES]
-    * [METAL]
-    * [TAL]
+  * [TALES]
+  * [METAL]
+  * [TAL]
 * [The command line renderer]
 * [Compatibility]
 
 [ZptSharp MVC view engines]: ViewEngines.md
-[Consuming the API]: ApiReference.md
+[Consuming the API]: ../api/index.md
 [ZPT syntax]: ZPTReference/index.md
 [TALES]: ZPTReference/Tales/index.md
 [METAL]: ZPTReference/Metal/index.md
@@ -35,6 +39,7 @@ An ideal follow-up to using a quick start guide is to follow [the ZPT tutorial].
 [Compatibility]: Compatibility.md
 
 ## Contributing & extending
+
 ZptSharp is an extensible library which may be customised to your desired usage.
 
 * [Building & testing]
