@@ -69,25 +69,22 @@
             <article class="content wrap" id="_content" data-uid="">
 <h1 id="building-and-testing">Building and testing</h1>
 
-<p>The build and test process for ZptSharp 2.0 has been simplified compared to 1.x.</p>
-<h2 id="dependencies">Dependencies</h2>
-<p>The only dependency to build ZptSharp from source is <a href="https://dotnet.microsoft.com/download/dotnet-core/3.1">a <strong>.NET Core SDK</strong> for .NET Core version 3.1</a> or higher. All further build dependencies will be fetched by dotnet.</p>
-<h2 id="build">Build</h2>
-<p>The solution builds using <code>dotnet build</code>. Optionally, add <code>-c Release</code> for a release-configuration build.</p>
+<p>The build and test process for ZptSharp 2.0 has been simplified compared to 1.x.
+<em>The only dependency to build ZptSharp</em> from source is <a href="https://dotnet.microsoft.com/download/dotnet-core/3.1">a <strong>.NET Core SDK</strong> for .NET Core version 3.1</a> or higher.
+All further build dependencies will be fetched by dotnet.</p>
+<p>The solution builds using <code>dotnet build</code>.
+Optionally, add <code>-c Release</code> for a release-configuration build.</p>
 <h2 id="running-tests">Running tests</h2>
-<h3 id="extra-dependency">Extra dependency</h3>
-<p>In order to run tests, you will additionally need either <a href="https://dotnet.microsoft.com/download/dotnet-framework/net472">.NET Framework 4.7.2</a> or an equivalent <a href="https://www.mono-project.com/">Mono Framework</a> version installed.
-This is because <a href="FurtherTestingInfo.html">a subset of the tests cannot run in a .NET Core environment</a>.</p>
-<h3 id="in-short-use-dotnet-test">In short, use <code>dotnet test</code></h3>
-<p>The tests are run using <code>dotnet test</code>; this alone is sufficient to get pass/fail information.
+<p>In order to run tests, <em>you will additionally need</em> either <a href="https://dotnet.microsoft.com/download/dotnet-framework/net472">.NET Framework 4.7.2</a> or an equivalent <a href="https://www.mono-project.com/">Mono Framework</a> version installed.
+This is because <a href="FurtherTestingInfo.html">a subset of the tests cannot run in a .NET Core environment</a>.
+The tests are run using <code>dotnet test</code>; this alone is sufficient to get pass/fail information.
 You only need consider <a href="FurtherTestingInfo.html">more advanced options</a> if you would like detailed logs and/or diagnostic information.</p>
-<h2 id="integration-tests">Integration tests</h2>
-<p>The integration tests are an excellent source of information for how ZPT works. They are included in any normal test run. The integration test classes set up a model and application state, then use ZptSharp to render that using a template. This is then compared with an expected output for the test. The test passes if the actual &amp; expected renderings match.</p>
-<p>The source for the integration tests is found at:</p>
-<ul>
-<li><a href="https://github.com/csf-dev/ZPT-Sharp/tree/master/ZptSharp.Tests/IntegrationTests">The integration test classes</a></li>
-<li><a href="https://github.com/csf-dev/ZPT-Sharp/tree/master/ZptSharp.Tests/TestFiles">The test files (source and expected)</a></li>
-</ul>
+<h2 id="the-integration-tests">The integration tests</h2>
+<p><a href="https://github.com/csf-dev/ZPT-Sharp/tree/master/ZptSharp.Tests/IntegrationTests">The integration tests</a> are an excellent source of information for how ZPT works; they are included in any normal test run.
+The integration test classes work in conjunction with <a href="https://github.com/csf-dev/ZPT-Sharp/tree/master/ZptSharp.Tests/TestFiles">some files in the tests source directory</a>.
+The test first sets up a model and application state, then renders that using a source document (from the test files).
+Another test file, in a parallel directory structure, is an 'expected rendering'.
+The test compares the actual result of the rendering with the expected outcome and fails if they differ.</p>
 </article>
           </div>
           

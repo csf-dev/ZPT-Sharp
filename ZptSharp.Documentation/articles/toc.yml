@@ -20,7 +20,7 @@
     - name: MVC view engines
       href: ViewEngines.md
     - name: Consuming the API
-      href: ApiReference.md
+      href: ../api/index.md
     - name: ZPT syntax
       href: ZptReference/index.md
       items:
@@ -45,3 +45,6 @@
           href: WritingDocumentProviders.md
         - name: Expression evaluators
           href: WritingExpressionEvaluators.md
+valuators.md
+=======
+>>>>>>> 74ee9d52b9bcd33c7602bcfe0f9d366f3c33933b

@@ -73,10 +73,7 @@
   
   <h1 id="ZptSharp_IConfiguresRootContext" data-uid="ZptSharp.IConfiguresRootContext" class="text-break">Interface IConfiguresRootContext
   </h1>
-  <div class="markdown level0 summary"><p>An object which may be used to add arbitrary objects/values
-to the root ZPT context for a rendering operation.  These
-are implementation-specific values which enrich the context
-aside from the main model.</p>
+  <div class="markdown level0 summary"><p>An object which may be used to add additional named values to the root TALES context.</p>
 </div>
   <div class="markdown level0 conceptual"></div>
   <h6><strong>Namespace</strong>: <a class="xref" href="ZptSharp.html">ZptSharp</a></h6>
@@ -85,6 +82,17 @@ aside from the main model.</p>
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">public interface IConfiguresRootContext</code></pre>
   </div>
+  <h5 id="ZptSharp_IConfiguresRootContext_remarks"><strong>Remarks</strong></h5>
+  <div class="markdown level0 remarks"><p>
+Any values added by this will be available at the root TALES context of the rendering operation.
+These values are essentially additional pre-defined variables.
+</p>
+<p>
+This type is mainly used via <a class="xref" href="ZptSharp.Config.RenderingConfig.html#ZptSharp_Config_RenderingConfig_ContextBuilder">ContextBuilder</a>.
+The &apos;context builder&apos; property of a rendering configuration is the recommended mechanism of
+expanding the root rendering context with additional data.
+</p>
+</div>
   <h3 id="methods">Methods
   </h3>
   <span class="small pull-right mobile-hide">
@@ -92,7 +100,7 @@ aside from the main model.</p>
     <a href="https://github.com/csf-dev/ZPT-Sharp/new/master/apiSpec/new?filename=ZptSharp_IConfiguresRootContext_AddToRootContext_System_String_System_Object_.md&amp;value=---%0Auid%3A%20ZptSharp.IConfiguresRootContext.AddToRootContext(System.String%2CSystem.Object)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/csf-dev/ZPT-Sharp/blob/master/ZptSharp/IConfiguresRootContext.cs/#L16">View Source</a>
+    <a href="https://github.com/csf-dev/ZPT-Sharp/blob/master/ZptSharp/IConfiguresRootContext.cs/#L32">View Source</a>
   </span>
   <a id="ZptSharp_IConfiguresRootContext_AddToRootContext_" data-uid="ZptSharp.IConfiguresRootContext.AddToRootContext*"></a>
   <h4 id="ZptSharp_IConfiguresRootContext_AddToRootContext_System_String_System_Object_" data-uid="ZptSharp.IConfiguresRootContext.AddToRootContext(System.String,System.Object)">AddToRootContext(String, Object)</h4>
@@ -127,6 +135,17 @@ aside from the main model.</p>
       </tr>
     </tbody>
   </table>
+  <h5 id="ZptSharp_IConfiguresRootContext_AddToRootContext_System_String_System_Object__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>
+This named value will be available from the root context within rendering operations.
+That means that it will essentially be a pre-defined variable available throughout the
+source document.  It may also be accessed via the special <code>CONTEXTS</code> keyword.
+</p>
+</div>
+  <h3 id="seealso">See Also</h3>
+  <div class="seealso">
+      <div><a class="xref" href="ZptSharp.Config.RenderingConfig.html#ZptSharp_Config_RenderingConfig_RootContextsProvider">RootContextsProvider</a></div>
+  </div>
 </article>
           </div>
           
@@ -138,7 +157,7 @@ aside from the main model.</p>
                     <a href="https://github.com/csf-dev/ZPT-Sharp/new/master/apiSpec/new?filename=ZptSharp_IConfiguresRootContext.md&amp;value=---%0Auid%3A%20ZptSharp.IConfiguresRootContext%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
                   </li>
                   <li>
-                    <a href="https://github.com/csf-dev/ZPT-Sharp/blob/master/ZptSharp/IConfiguresRootContext.cs/#L9" class="contribution-link">View Source</a>
+                    <a href="https://github.com/csf-dev/ZPT-Sharp/blob/master/ZptSharp/IConfiguresRootContext.cs/#L18" class="contribution-link">View Source</a>
                   </li>
                 </ul>
               </div>
