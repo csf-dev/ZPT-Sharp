@@ -21,6 +21,11 @@
       href: ViewEngines.md
     - name: Consuming the API
       topicHref: ../api/index.md
+      items:
+        - name: DI setup
+          href: DiSetup.md
+        - name: Self-hosting
+          href: SelfHosting.md
     - name: ZPT syntax
       href: ZptReference/index.md
       items:
@@ -38,7 +43,10 @@
   href: Contributing.md
   items:
     - name: Build & test
-      href: BuildAndTest.md
+      topicHref: BuildAndTest.md
+      items:
+        - name: Advanced testing info
+          href: FurtherTestingInfo.md
     - name: Writing extensions
       items:
         - name: Document providers

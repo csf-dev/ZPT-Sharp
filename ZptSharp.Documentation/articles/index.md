@@ -47,3 +47,5 @@ ZptSharp is an extensible library which may be customised to your desired usage.
 * [Writing new expression evaluators]
 
 [Building & testing]: BuildAndTest.md
+[Writing new document providers]: WritingDocumentProviders.md
+[Writing new expression evaluators]: WritingExpressionEvaluators.md
