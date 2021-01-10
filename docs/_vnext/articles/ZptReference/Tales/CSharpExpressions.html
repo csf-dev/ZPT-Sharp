@@ -73,7 +73,7 @@
 <p>Please be aware that <em>using CSharp expressions in practice can be very cumbersome</em>; <a href="CSharpExpressionLimitations.html">a number of limitations are documented here</a>. For most use-cases of C# expressions, it is preferable to use <a href="PipeExpressions.html">a <code>pipe</code> expression</a> instead.</p>
 <h2 id="csharp-expressions"><code>csharp</code> expressions</h2>
 <p>The TALES <code>csharp</code> expression syntax is as follows:</p>
-<pre><code>csharp:expression_body
+<pre><code class="lang-text">csharp:expression_body
 </code></pre>
 <p>The <code>expression_body</code> is any valid C# expression which would be valid after a <code>return</code> keyword. It should not include the return keyword, nor a trailing semicolon.</p>
 <p>Remember that <em>some symbols used by the C# language may need replacing with their entities</em>, in order to preserve the validity of the HTML/XML document.</p>
@@ -88,14 +88,14 @@
 <h2 id="assemblyref-expressions"><code>assemblyref</code> expressions</h2>
 <p>In order to make use of members of types, the compiler which evaluates C# expressions must have references to the appropriate assemblies. This includes any assemblies which declare types that are to be used in expressions, as well as any assemblies that contain extension methods you wish to use.</p>
 <p>The syntax for assembly reference expressions is:</p>
-<pre><code>assemblyref:assembly_name
+<pre><code class="lang-text">assemblyref:assembly_name
 </code></pre>
 <p>The <code>assembly_name</code> is the string name of the assembly. Almost always the same as its filename, without the extension. For example: <code>assemblyref:MyProject.Models</code>.</p>
 <p>Assembly reference expressions are only useful when used in <code>tal:define</code> attributes. The assembly reference expression will evaluate to a special value, held by the defined variable. As long as this variable is in-scope, all CSharp expressions which are evaluated will benefit from the referenced assembly.</p>
 <h2 id="using-expressions"><code>using</code> expressions</h2>
 <p>Just like the C# <code>using</code> keyword, the using expression imports a namespace into scope, or makes the members of a static class available (in regular C# this would be <code>using static</code>).</p>
 <p>The syntax for both of the above usages is the same in ZptSharp:</p>
-<pre><code>using:namespace_or_type_name
+<pre><code class="lang-text">using:namespace_or_type_name
 </code></pre>
 <p>The <code>namespace_or_type_name</code> is either a namespace or the namespace-qualified name to a type.</p>
 <p>When used with a namespace it means that:</p>
@@ -113,7 +113,7 @@
 <li>Extension methods are not available, unless they would operate upon <code>object</code></li>
 </ul>
 <p>The syntax for a type expression is:</p>
-<pre><code>type:variable_name type_name
+<pre><code class="lang-text">type:variable_name type_name
 </code></pre>
 <p>The <code>variable_name</code> is the name of an already-defined TALES variable. The <code>type_name</code> is a string type name, as would be written in a C# typed variable declaration. Remember (particularly for types which use generics) that <em>greater-than/less-than symbols must be replaced by their entities</em>.</p>
 <p>Type expressions are only useful when used in <code>tal:define</code> attributes. The type expression will evaluate to a special value, held by the defined variable. As long as this variable is in-scope, all CSharp expressions which have an appropriately-named variable in-scope will treat that variable as an instance of that type, and not as a <code>dynamic</code> object.</p>

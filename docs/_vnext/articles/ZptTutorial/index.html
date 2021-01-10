@@ -70,15 +70,15 @@
 <h1 id="page-templates-tutorial">Page templates tutorial</h1>
 
 <div class="note">
-This tutorial assumes that you have followed one of the following quick-start guides. They each conclude with a functioning 'hello world' ZPT environment.
+<p>This tutorial assumes that you have followed one of the following quick-start guides. They each conclude with a functioning 'hello world' ZPT environment.</p>
 <ul>
-<li><a href="../QuickStart/Mvc5">ASP.NET MVC 5</a></li>
-<li><a href="../QuickStart/MvcCore">ASP.NET Core MVC</a></li>
-<li><a href="../QuickStart/CliApp">ZptSharp command-line app</a></li>
-<li><a href="../QuickStart/ConsumingTheApi">Using ZptSharp API</a></li>
+<li><a href="../QuickStart/Mvc5.html">ASP.NET MVC 5</a></li>
+<li><a href="../QuickStart/MvcCore.html">ASP.NET Core MVC</a></li>
+<li><a href="../QuickStart/CliApp.html">ZptSharp command-line app</a></li>
+<li><a href="../QuickStart/ConsumingTheApi.html">Using ZptSharp API</a></li>
 </ul>
 </div>
-<h1 id="talcontent-replaces-an-elements-content"><code>tal:content</code> replaces an element's content</h1>
+<h2 id="talcontent-replaces-an-elements-content"><code>tal:content</code> replaces an element's content</h2>
 <p>Let's look again at the template from the quick-start guides.</p>
 <pre><code class="lang-html">&lt;html&gt;
 &lt;head&gt;
@@ -100,7 +100,7 @@ This tutorial assumes that you have followed one of the following quick-start gu
 <h2 id="including-markup-in-the-content">Including markup in the content</h2>
 <p>Let's try another change. This time we will change the model rather than the document.</p>
 <p>Change the value of <code>Message</code> in the model to the following string. We will see what happens if we include markup in the model value to be inserted into a document template.</p>
-<pre><code>&quot;&lt;strong&gt;Hello world!&lt;/strong&gt;&quot;
+<pre><code class="lang-text">&quot;&lt;strong&gt;Hello world!&lt;/strong&gt;&quot;
 </code></pre>
 <p>If you render the document again now, you will see that <em>the markup from the model has been HTML encoded</em>. What is actually written to the output is:</p>
 <pre><code class="lang-html">&lt;h1&gt;
@@ -120,7 +120,7 @@ This tutorial assumes that you have followed one of the following quick-start gu
 <p>If you render this then you will see that the model value is rendered into the document, but that the entire containing <code>h1</code> has been replaced, not just it's content/children.</p>
 <p><em><code>tal:replace</code> attributes work just like <code>tal:content</code>, except that they replace the whole element and not just the content.</em> This includes the replacement of child elements and also the HTML/XML-encoding of the replacement value, and the use of the <code>structure</code> keyword to override that.</p>
 <h2 id="next-conditions-and-repetition">Next: Conditions and repetition</h2>
-<p>In the next tutorial page, we will look into <a href="Page2">how to render elements conditionally &amp; how to repeat them for items in a collection</a>.</p>
+<p>In the next tutorial page, we will look into <a href="Page2.html">how to render elements conditionally &amp; how to repeat them for items in a collection</a>.</p>
 </article>
           </div>
           
