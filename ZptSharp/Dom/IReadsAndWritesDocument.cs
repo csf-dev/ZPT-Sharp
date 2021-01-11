@@ -22,12 +22,8 @@ namespace ZptSharp.Dom
     /// </para>
     /// <para>
     /// In order to have a working/usable ZptSharp environment, at least one document provider
-    /// must be registered with dependency injection and must also be registered for use with
-    /// <see cref="IRegistersDocumentReaderWriter"/>.
-    /// This registration is usually performed at application configuration &amp; start-up.
-    /// Extension methods are available for both
-    /// <see cref="Microsoft.Extensions.DependencyInjection.IServiceCollection"/> &amp;
-    /// <see cref="System.IServiceProvider"/> which take care of those registrations with a very easy-to-use API.
+    /// must be registered with dependency injection.  This should be performed during application
+    /// start-up, using extension methods for <see cref="Hosting.IBuildsHostingEnvironment"/>.
     /// </para>
     /// <para>
     /// Document provider implementations typically use 3rd-party libraries/APIs to perform a native read &amp;
@@ -39,7 +35,7 @@ namespace ZptSharp.Dom
     /// <seealso cref="IDocument"/>
     /// <seealso cref="INode"/>
     /// <seealso cref="IAttribute"/>
-    /// <seealso cref="IRegistersDocumentReaderWriter"/>
+    /// <seealso cref="Hosting.IBuildsHostingEnvironment"/>
     public interface IReadsAndWritesDocument
     {
         /// <summary>

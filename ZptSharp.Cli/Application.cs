@@ -15,7 +15,6 @@ namespace ZptSharp.Cli
     {
         readonly IRendersManyFiles renderer;
         readonly IGetsBulkRenderingRequest requestFactory;
-        readonly IConfiguresServices serviceConfigurator;
         readonly CliArguments args;
         readonly IHostApplicationLifetime appLifetime;
 
@@ -26,8 +25,6 @@ namespace ZptSharp.Cli
         /// <returns>A task which completes once the app has done its work.</returns>
         public async Task StartAsync(CancellationToken cancellationToken)
         {
-            serviceConfigurator.ConfigureServices(args);
-
             try
             {
                 var request = await requestFactory.GetRequestAsync(args, cancellationToken)
@@ -52,18 +49,15 @@ namespace ZptSharp.Cli
         /// </summary>
         /// <param name="renderer">The bulk-renderer.</param>
         /// <param name="requestFactory">The request factory.</param>
-        /// <param name="serviceConfigurator">The service configurator.</param>
         /// <param name="args">The command-line args.</param>
         /// <param name="appLifetime">The app lifetime.</param>
         public Application(IRendersManyFiles renderer,
                            IGetsBulkRenderingRequest requestFactory,
-                           IConfiguresServices serviceConfigurator,
                            CliArguments args,
                            IHostApplicationLifetime appLifetime)
         {
             this.renderer = renderer ?? throw new System.ArgumentNullException(nameof(renderer));
             this.requestFactory = requestFactory ?? throw new System.ArgumentNullException(nameof(requestFactory));
-            this.serviceConfigurator = serviceConfigurator ?? throw new System.ArgumentNullException(nameof(serviceConfigurator));
             this.args = args ?? throw new System.ArgumentNullException(nameof(args));
             this.appLifetime = appLifetime ?? throw new ArgumentNullException(nameof(appLifetime));
         }

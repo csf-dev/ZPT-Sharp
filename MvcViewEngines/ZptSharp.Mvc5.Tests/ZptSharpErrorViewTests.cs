@@ -32,9 +32,12 @@ namespace ZptSharp.Mvc5
         /// <param name="logLevel">The desired log level.</param>
         static ServiceProvider GetServiceProvider(LogLevel logLevel = LogLevel.Debug)
         {
-            var services = new ServiceCollection()
+            var builder = new ServiceCollection()
                 .AddZptSharp()
-                .AddHapZptDocuments()
+                .AddStandardZptExpressions()
+                .AddHapZptDocuments();
+
+            builder.ServiceCollection
                 .AddLogging(b => {
                     b.ClearProviders();
                     b.AddSimpleConsole(o => {
@@ -44,13 +47,7 @@ namespace ZptSharp.Mvc5
                     b.SetMinimumLevel(logLevel);
                 });
 
-            var provider = services.BuildServiceProvider();
-            provider
-                .UseHapZptDocuments()
-                .UseStandardZptExpressions()
-                ;
-
-            return provider;
+            return builder.ServiceCollection.BuildServiceProvider();
         }
 
     }

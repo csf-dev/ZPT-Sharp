@@ -13,7 +13,7 @@ namespace ZptSharp.Bootstrap
             services.AddTransient<IGetsBuiltinContextsProvider, BuiltinContextsProviderFactory>();
             services.AddTransient<IGetsExpressionTypeProvider, ExpressionTypeProviderFactory>();
             services.AddTransient(s => s.GetRequiredService<IGetsExpressionTypeProvider>().GetTypeProvider());
-            services.AddSingleton<IRegistersExpressionEvaluator, EvaluatorTypeRegistry>();
+            services.AddTransient<IRegistersExpressionEvaluator, EvaluatorTypeRegistry>();
             services.AddTransient<IGetsEvaluatorForExpressionType, EvaluatorTypeResolver>();
             services.AddTransient<IEvaluatesExpression, RegistryBasedExpressionEvaluator>();
             services.AddTransient<IRemovesPrefixFromExpression, PrefixExpressionTypeProvider>();

@@ -118,7 +118,7 @@ namespace ZptSharp.Mvc5
         /// purposes; if omitted or passed as <see langword="null" /> then a default instance will
         /// be used.
         /// </param>
-        public ZptSharpViewEngine(Action<IBuildsSelfHostingEnvironment> builderAction,
+        public ZptSharpViewEngine(Action<IBuildsHostingEnvironment> builderAction,
                                   string[] viewLocationFormats = null,
                                   string viewsPath = DefaultViewsPath,
                                   RenderingConfig config = null,

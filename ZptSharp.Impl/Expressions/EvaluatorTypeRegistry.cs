@@ -10,7 +10,7 @@ namespace ZptSharp.Expressions
     /// </summary>
     public class EvaluatorTypeRegistry : IRegistersExpressionEvaluator
     {
-        readonly IDictionary<string, Type> registry = new Dictionary<string,Type>();
+        readonly Hosting.EnvironmentRegistry registry;
 
         /// <summary>
         /// Gets the evaluator type for the specified <paramref name="expressionType"/>.
@@ -23,24 +23,7 @@ namespace ZptSharp.Expressions
                 throw new ArgumentNullException(nameof(expressionType));
             AssertIsRegistered(expressionType);
 
-            return registry[expressionType];
-        }
-
-        /// <summary>
-        /// Registers the evaluator type for the specified expression type.
-        /// </summary>
-        /// <param name="evaluatorType">The evaluator implementation type.</param>
-        /// <param name="expressionType">The associated expression type.</param>
-        public void RegisterEvaluatorType(Type evaluatorType, string expressionType)
-        {
-            if (evaluatorType == null)
-                throw new ArgumentNullException(nameof(evaluatorType));
-            if (String.IsNullOrEmpty(expressionType))
-                throw new ArgumentException(Resources.ExceptionMessage.ExpressionTypeMustNotBeNullOrEmpty, nameof(expressionType));
-            AssertIsNotRegistered(expressionType);
-            AssertIsCorrectImplementationType(evaluatorType);
-
-            registry.Add(expressionType, evaluatorType);
+            return registry.ExpresionEvaluatorTypes[expressionType];
         }
 
         /// <summary>
@@ -53,19 +36,7 @@ namespace ZptSharp.Expressions
         {
             if (expressionType == null)
                 throw new ArgumentNullException(nameof(expressionType));
-            return registry.ContainsKey(expressionType);
-        }
-
-        /// <summary>
-        /// Removes the registered evaluator type for the specified expression type, if it exists.
-        /// </summary>
-        /// <returns><c>true</c> if an evaluator type was registered and has now been unregistered; <c>false</c> if the expression type did not previously have an evaluator type registered.</returns>
-        /// <param name="expressionType">Expression type.</param>
-        public bool Unregister(string expressionType)
-        {
-            if (expressionType == null)
-                throw new ArgumentNullException(nameof(expressionType));
-            return registry.Remove(expressionType);
+            return registry.ExpresionEvaluatorTypes.ContainsKey(expressionType);
         }
 
         /// <summary>
@@ -73,36 +44,25 @@ namespace ZptSharp.Expressions
         /// </summary>
         /// <returns>The all registered types.</returns>
         public IReadOnlyCollection<string> GetRegisteredExpressionTypes()
-            => registry.Keys.ToArray();
+            => registry.ExpresionEvaluatorTypes.Keys.ToArray();
 
         void AssertIsRegistered(string expressionType)
         {
-            if (registry.ContainsKey(expressionType)) return;
+            if (registry.ExpresionEvaluatorTypes.ContainsKey(expressionType)) return;
 
             string message = String.Format(Resources.ExceptionMessage.NoEvaluatorForExpressionType,
                                            expressionType,
-                                           $"{nameof(IRegistersExpressionEvaluator)}.{nameof(IRegistersExpressionEvaluator.RegisterEvaluatorType)}");
+                                           $"{nameof(IRegistersExpressionEvaluator)}.{nameof(Hosting.EnvironmentRegistry)}");
             throw new NoEvaluatorForExpressionTypeException(message);
         }
 
-        void AssertIsNotRegistered(string expressionType)
+        /// <summary>
+        /// Initializes a new instance of <see cref="EvaluatorTypeRegistry"/>.
+        /// </summary>
+        /// <param name="registry">The environment registry.</param>
+        public EvaluatorTypeRegistry(Hosting.EnvironmentRegistry registry)
         {
-            if (!registry.ContainsKey(expressionType)) return;
-
-            string message = String.Format(Resources.ExceptionMessage.EvaluatorAlreadyRegistered,
-                                           expressionType,
-                                           $"{nameof(IRegistersExpressionEvaluator)}.{nameof(IRegistersExpressionEvaluator.Unregister)}");
-            throw new ArgumentException(message, nameof(expressionType));
-        }
-
-        void AssertIsCorrectImplementationType(Type evaluatorType)
-        {
-            if (typeof(IEvaluatesExpression).IsAssignableFrom(evaluatorType)) return;
-
-            string message = String.Format(Resources.ExceptionMessage.EvaluatorTypeMustImplementInterface,
-                                           typeof(IEvaluatesExpression).FullName,
-                                           evaluatorType.FullName);
-            throw new ArgumentException(message, nameof(evaluatorType));
+            this.registry = registry ?? throw new ArgumentNullException(nameof(registry));
         }
     }
 }

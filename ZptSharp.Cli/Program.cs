@@ -22,18 +22,18 @@ namespace ZptSharp.Cli
         /// <returns>A host builder, from which the app may be started.</returns>
         public static IHostBuilder GetHostBuilder(string[] args)
         {
+            var cliArgs = GetCliArguments(args);
+
             return Host.CreateDefaultBuilder(args)
                 .ConfigureServices((hostContext, services) => {
                     services
-                        .AddZptSharp()
-                        .AddAngleSharpZptDocuments()
-                        .AddHapZptDocuments()
-                        .AddXmlZptDocuments()
-                        .AddZptPythonExpressions()
-                        .AddSingleton(typeof(CliArguments), s => GetCliArguments(args))
+                        .AddSingleton(cliArgs)
                         .AddTransient<IGetsBulkRenderingRequest, BulkRenderingRequestFactory>()
-                        .AddTransient<ILoadsModel, ModelLoader>()
-                        .AddTransient<IConfiguresServices, ServiceConfigurator>();
+                        .AddTransient<ILoadsModel, ModelLoader>();
+
+                    var builder = services.AddZptSharp();
+                    var configurator = new ServiceConfigurator(builder);
+                    configurator.ConfigureServices(cliArgs);
 
                     services.AddHostedService<Application>();
                 });

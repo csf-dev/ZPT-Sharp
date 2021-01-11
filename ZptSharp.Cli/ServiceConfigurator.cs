@@ -1,14 +1,15 @@
 using System;
+using ZptSharp.Hosting;
 
 namespace ZptSharp.Cli
 {
     /// <summary>
-    /// Implementation of <see cref="IConfiguresServices" /> which sets up
-    /// the default services to be used within a <see cref="IServiceProvider" />.
+    /// Logic which sets up the ZptSharp services to be used
+    /// within an <see cref="IBuildsHostingEnvironment" />.
     /// </summary>
-    public class ServiceConfigurator : IConfiguresServices
+    public class ServiceConfigurator
     {
-        readonly IServiceProvider serviceProvider;
+        readonly IBuildsHostingEnvironment builder;
 
         /// <summary>
         /// Configures the services.
@@ -19,24 +20,24 @@ namespace ZptSharp.Cli
             if (args is null)
                 throw new ArgumentNullException(nameof(args));
 
-            serviceProvider
-                .UseStandardZptExpressions()
-                .UseZptPythonExpressions()
-                .UseXmlZptDocuments();
+            builder
+                .AddStandardZptExpressions()
+                .AddZptPythonExpressions()
+                .AddXmlZptDocuments();
 
             if(args.UseAngleSharp)
-                serviceProvider.UseAngleSharpZptDocuments();
+                builder.AddAngleSharpZptDocuments();
             else
-                serviceProvider.UseHapZptDocuments();
+                builder.AddHapZptDocuments();
         }
         
         /// <summary>
         /// Initializes a new instance of <see cref="ServiceConfigurator" />.
         /// </summary>
-        /// <param name="serviceProvider">The service provider.</param>
-        public ServiceConfigurator(IServiceProvider serviceProvider)
+        /// <param name="builder">The environment builder.</param>
+        public ServiceConfigurator(IBuildsHostingEnvironment builder)
         {
-            this.serviceProvider = serviceProvider ?? throw new ArgumentNullException(nameof(serviceProvider));
+            this.builder = builder ?? throw new ArgumentNullException(nameof(builder));
         }
     }
 }

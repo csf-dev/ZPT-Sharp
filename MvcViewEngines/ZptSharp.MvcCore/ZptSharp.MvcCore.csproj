@@ -29,7 +29,7 @@
     
   <ItemGroup>
     <ProjectReference Include="..\..\ZptSharp\ZptSharp.csproj" />
-    <ProjectReference Include="..\..\ZptSharp.Hosting\ZptSharp.Hosting.csproj" />
+    <ProjectReference Include="..\..\ZptSharp.Impl\ZptSharp.Impl.csproj" />
   </ItemGroup>
   
   <ItemGroup>

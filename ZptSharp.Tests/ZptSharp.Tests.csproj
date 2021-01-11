@@ -34,7 +34,6 @@
     <ProjectReference Include="..\Evaluators\ZptSharp.PythonExpressions\ZptSharp.PythonExpressions.csproj" />
     <ProjectReference Include="..\Evaluators\ZptSharp.CSharpExpressions\ZptSharp.CSharpExpressions.csproj" />
     <ProjectReference Include="..\MvcViewEngines\ZptSharp.MvcCore\ZptSharp.MvcCore.csproj" />
-    <ProjectReference Include="..\ZptSharp.Hosting\ZptSharp.Hosting.csproj" />
     <ProjectReference Include="..\ZptSharp.Cli\ZptSharp.Cli.csproj" />
   </ItemGroup>
   <ItemGroup>

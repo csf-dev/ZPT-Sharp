@@ -13,20 +13,6 @@ namespace ZptSharp.Cli
     public class ApplicationTests
     {
         [Test,AutoMoqData]
-        public async Task StartAsync_configures_services([Frozen] IRendersManyFiles renderer,
-                                                         [Frozen] IGetsBulkRenderingRequest requestFactory,
-                                                         [Frozen] IConfiguresServices serviceConfigurator,
-                                                         [Frozen] CliArguments arguments,
-                                                         Application sut)
-        {
-            Mock.Get(renderer)
-                .Setup(x => x.RenderAllAsync(It.IsAny<BulkRenderingRequest>(), It.IsAny<CancellationToken>()))
-                .Returns((BulkRenderingRequest req, CancellationToken t) => Task.FromResult(new BulkRenderingResult(req, Enumerable.Empty<BulkRenderingFileResult>())));
-            await sut.StartAsync(CancellationToken.None);
-            Mock.Get(serviceConfigurator).Verify(x => x.ConfigureServices(arguments), Times.Once);
-        }
-
-        [Test,AutoMoqData]
         public async Task StartAsync_renders_all_documents_using_request([Frozen] IRendersManyFiles renderer,
                                                                          [Frozen] IGetsBulkRenderingRequest requestFactory,
                                                                          [Frozen] CliArguments arguments,

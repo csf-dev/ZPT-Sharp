@@ -24,7 +24,7 @@ namespace ZptSharp.IntegrationTests
                                                                                object model = null,
                                                                                RenderingConfig config = null,
                                                                                LogLevel logLevel = LogLevel.Debug,
-                                                                               Action<Hosting.IBuildsSelfHostingEnvironment> extraBuilderAction = null)
+                                                                               Action<Hosting.IBuildsHostingEnvironment> extraBuilderAction = null)
         {
             if (new FileInfo(expectedRenderingPath).Name.Contains(".ignored."))
                 NUnit.Framework.Assert.Ignore("This integration test file includes the word 'ignored' in its filename.");
@@ -45,7 +45,7 @@ namespace ZptSharp.IntegrationTests
             }
         }
 
-        static Hosting.IHostsZptSharp GetZptEnvironment(LogLevel logLevel, Action<Hosting.IBuildsSelfHostingEnvironment> extraBuilderAction)
+        static Hosting.IHostsZptSharp GetZptEnvironment(LogLevel logLevel, Action<Hosting.IBuildsHostingEnvironment> extraBuilderAction)
         {
             return ZptSharpHost.GetHost(builder => {
                 builder
@@ -55,17 +55,15 @@ namespace ZptSharp.IntegrationTests
                     .AddZptPythonExpressions();
                 extraBuilderAction?.Invoke(builder);
                 
-                builder.ServiceRegistrations.Add(serviceCollection => {
-                    serviceCollection
-                        .AddLogging(b => {
-                            b.ClearProviders();
-                            b.AddSimpleConsole(o => {
-                                o.ColorBehavior = LoggerColorBehavior.Disabled;
-                                o.IncludeScopes = true;
-                            });
-                            b.SetMinimumLevel(logLevel);
+                builder.ServiceCollection
+                    .AddLogging(b => {
+                        b.ClearProviders();
+                        b.AddSimpleConsole(o => {
+                            o.ColorBehavior = LoggerColorBehavior.Disabled;
+                            o.IncludeScopes = true;
                         });
-                });
+                        b.SetMinimumLevel(logLevel);
+                    });
             });
         }
 

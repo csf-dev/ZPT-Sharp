@@ -55,8 +55,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZptSharp.Mvc5.Tests", "MvcV
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZptSharp.MvcCore", "MvcViewEngines\ZptSharp.MvcCore\ZptSharp.MvcCore.csproj", "{B2F6F285-D200-4525-8761-0866F89B02FE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZptSharp.Hosting", "ZptSharp.Hosting\ZptSharp.Hosting.csproj", "{038CCFB0-3167-4F2E-8AEA-32825DBEACE6}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZptSharp.Examples.MvcCore", "Examples\ZptSharp.Examples.MvcCore\ZptSharp.Examples.MvcCore.csproj", "{9709EDB4-A914-4FA4-A857-93916A2C3F2B}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZptSharp.Cli", "ZptSharp.Cli\ZptSharp.Cli.csproj", "{3DA08545-A281-40A8-8CDE-2B9609507A3C}"
@@ -117,10 +115,6 @@ Global
 		{B2F6F285-D200-4525-8761-0866F89B02FE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B2F6F285-D200-4525-8761-0866F89B02FE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B2F6F285-D200-4525-8761-0866F89B02FE}.Release|Any CPU.Build.0 = Release|Any CPU
-		{038CCFB0-3167-4F2E-8AEA-32825DBEACE6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{038CCFB0-3167-4F2E-8AEA-32825DBEACE6}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{038CCFB0-3167-4F2E-8AEA-32825DBEACE6}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{038CCFB0-3167-4F2E-8AEA-32825DBEACE6}.Release|Any CPU.Build.0 = Release|Any CPU
 		{9709EDB4-A914-4FA4-A857-93916A2C3F2B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{9709EDB4-A914-4FA4-A857-93916A2C3F2B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9709EDB4-A914-4FA4-A857-93916A2C3F2B}.Release|Any CPU.ActiveCfg = Release|Any CPU

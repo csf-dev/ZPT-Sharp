@@ -4,6 +4,7 @@ using Moq;
 using NUnit.Framework;
 using ZptSharp.Dom;
 using ZptSharp.Expressions;
+using ZptSharp.Hosting;
 
 namespace ZptSharp.Cli
 {
@@ -11,53 +12,23 @@ namespace ZptSharp.Cli
     public class ServiceConfiguratorTests
     {
         [Test,AutoMoqData]
-        public void ConfigureServices_selects_anglesharp_if_enabled([Frozen] IServiceProvider serviceProvider,
+        public void ConfigureServices_selects_anglesharp_if_enabled([Frozen] IBuildsHostingEnvironment hostingBuilder,
                                                                     CliArguments args,
-                                                                    ServiceConfigurator sut,
-                                                                    IRegistersDocumentReaderWriter registry,
-                                                                    AngleSharpDocumentProvider anglesharp,
-                                                                    XmlDocumentProvider xml,
-                                                                    IRegistersExpressionEvaluator evaluatorRegistry)
+                                                                    ServiceConfigurator sut)
         {
-            Mock.Get(serviceProvider)
-                .Setup(x => x.GetService(typeof(IRegistersExpressionEvaluator))).Returns(evaluatorRegistry);
-            Mock.Get(serviceProvider)
-                .Setup(x => x.GetService(typeof(IRegistersDocumentReaderWriter))).Returns(registry);
-            Mock.Get(serviceProvider)
-                .Setup(x => x.GetService(typeof(AngleSharpDocumentProvider))).Returns(anglesharp);
-            Mock.Get(serviceProvider)
-                .Setup(x => x.GetService(typeof(XmlDocumentProvider))).Returns(xml);
             args.UseAngleSharp = true;
-
             sut.ConfigureServices(args);
-
-            Mock.Get(registry)
-                .Verify(x => x.RegisterDocumentReaderWriter(anglesharp), Times.Once);
+            Assert.That(hostingBuilder.ServiceRegistry.DocumentProviderTypes, Has.One.EqualTo(typeof(AngleSharpDocumentProvider)));
         }
 
         [Test,AutoMoqData]
-        public void ConfigureServices_selects_HAP_if_anglesharp_not_enabled([Frozen] IServiceProvider serviceProvider,
+        public void ConfigureServices_selects_HAP_if_anglesharp_not_enabled([Frozen] IBuildsHostingEnvironment hostingBuilder,
                                                                             CliArguments args,
-                                                                            ServiceConfigurator sut,
-                                                                            IRegistersDocumentReaderWriter registry,
-                                                                            HapDocumentProvider hap,
-                                                                            XmlDocumentProvider xml,
-                                                                            IRegistersExpressionEvaluator evaluatorRegistry)
+                                                                            ServiceConfigurator sut)
         {
-            Mock.Get(serviceProvider)
-                .Setup(x => x.GetService(typeof(IRegistersExpressionEvaluator))).Returns(evaluatorRegistry);
-            Mock.Get(serviceProvider)
-                .Setup(x => x.GetService(typeof(IRegistersDocumentReaderWriter))).Returns(registry);
-            Mock.Get(serviceProvider)
-                .Setup(x => x.GetService(typeof(HapDocumentProvider))).Returns(hap);
-            Mock.Get(serviceProvider)
-                .Setup(x => x.GetService(typeof(XmlDocumentProvider))).Returns(xml);
             args.UseAngleSharp = false;
-
             sut.ConfigureServices(args);
-
-            Mock.Get(registry)
-                .Verify(x => x.RegisterDocumentReaderWriter(hap), Times.Once);
+            Assert.That(hostingBuilder.ServiceRegistry.DocumentProviderTypes, Has.One.EqualTo(typeof(HapDocumentProvider)));
         }
     }
 }

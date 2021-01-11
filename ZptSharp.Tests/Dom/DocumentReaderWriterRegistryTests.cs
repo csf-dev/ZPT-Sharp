@@ -1,4 +1,5 @@
 using System;
+using AutoFixture.NUnit3;
 using Moq;
 using NUnit.Framework;
 
@@ -8,60 +9,39 @@ namespace ZptSharp.Dom
     public class DocumentReaderWriterRegistryTests
     {
         [Test, AutoMoqData]
-        public void RegisterDocumentReaderWriter_adds_instance_if_it_is_not_already_present(DocumentReaderWriterRegistry sut,
-                                                                                            IReadsAndWritesDocument readerWriter)
+        public void GetDocumentProvider_returns_matching_readerwriter_if_it_is_present([Frozen] Hosting.EnvironmentRegistry registry,
+                                                                                       [Frozen] IServiceProvider provider,
+                                                                                       DocumentReaderWriterRegistry sut,
+                                                                                       IReadsAndWritesDocument readerWriter1,
+                                                                                       IReadsAndWritesDocument readerWriter2,
+                                                                                       string filename)
         {
-            sut.RegisterDocumentReaderWriter(readerWriter);
-            Assert.That(sut.Registry, Is.EquivalentTo(new[] { readerWriter }));
-        }
-
-        [Test, AutoMoqData]
-        public void RegisterDocumentReaderWriter_does_not_add_anything_if_it_has_already_been_added(DocumentReaderWriterRegistry sut,
-                                                                                                    IReadsAndWritesDocument readerWriter)
-        {
-            sut.RegisterDocumentReaderWriter(readerWriter);
-            sut.RegisterDocumentReaderWriter(readerWriter);
-            Assert.That(sut.Registry, Is.EquivalentTo(new[] { readerWriter }));
-        }
-
-        [Test, AutoMoqData]
-        public void RegisterDocumentReaderWriter_can_add_two_different_reader_writers(DocumentReaderWriterRegistry sut,
-                                                                                      IReadsAndWritesDocument readerWriter1,
-                                                                                      IReadsAndWritesDocument readerWriter2)
-        {
-            sut.RegisterDocumentReaderWriter(readerWriter1);
-            sut.RegisterDocumentReaderWriter(readerWriter2);
-            Assert.That(sut.Registry, Is.EquivalentTo(new[] { readerWriter1, readerWriter2 }));
-        }
-
-        [Test, AutoMoqData]
-        public void RegisterDocumentReaderWriter_throws_ANE_if_readerwriter_is_null(DocumentReaderWriterRegistry sut)
-        {
-            Assert.That(() => sut.RegisterDocumentReaderWriter(null), Throws.ArgumentNullException);
-        }
-
-        [Test, AutoMoqData]
-        public void GetDocumentProvider_returns_matching_readerwriter_if_it_is_present(DocumentReaderWriterRegistry sut,
-                                                                                      IReadsAndWritesDocument readerWriter1,
-                                                                                      IReadsAndWritesDocument readerWriter2,
-                                                                                      string filename)
-        {
+            Mock.Get(provider).Setup(x => x.GetService(typeof(string))).Returns(readerWriter1);
+            Mock.Get(provider).Setup(x => x.GetService(typeof(int))).Returns(readerWriter2);
             Mock.Get(readerWriter1).Setup(x => x.CanReadWriteForFilename(filename)).Returns(false);
             Mock.Get(readerWriter2).Setup(x => x.CanReadWriteForFilename(filename)).Returns(true);
-            sut.RegisterDocumentReaderWriter(readerWriter1);
-            sut.RegisterDocumentReaderWriter(readerWriter2);
+            registry.DocumentProviderTypes.Clear();
+            registry.DocumentProviderTypes.Add(typeof(string));
+            registry.DocumentProviderTypes.Add(typeof(int));
 
             Assert.That(() => sut.GetDocumentProvider(filename), Is.SameAs(readerWriter2));
         }
 
         [Test, AutoMoqData]
-        public void GetDocumentProvider_returns_null_if_no_matching_instances_present(DocumentReaderWriterRegistry sut,
+        public void GetDocumentProvider_returns_null_if_no_matching_instances_present([Frozen] Hosting.EnvironmentRegistry registry,
+                                                                                      [Frozen] IServiceProvider provider,
+                                                                                      DocumentReaderWriterRegistry sut,
                                                                                       IReadsAndWritesDocument readerWriter1,
                                                                                       IReadsAndWritesDocument readerWriter2,
                                                                                       string filename)
         {
+            Mock.Get(provider).Setup(x => x.GetService(typeof(string))).Returns(readerWriter1);
+            Mock.Get(provider).Setup(x => x.GetService(typeof(int))).Returns(readerWriter2);
             Mock.Get(readerWriter1).Setup(x => x.CanReadWriteForFilename(filename)).Returns(false);
             Mock.Get(readerWriter2).Setup(x => x.CanReadWriteForFilename(filename)).Returns(false);
+            registry.DocumentProviderTypes.Clear();
+            registry.DocumentProviderTypes.Add(typeof(string));
+            registry.DocumentProviderTypes.Add(typeof(int));
 
             Assert.That(() => sut.GetDocumentProvider(filename), Is.Null);
         }

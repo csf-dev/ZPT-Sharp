@@ -37,7 +37,7 @@ namespace ZptSharp.Rendering
 
             var message = String.Format(Resources.ExceptionMessage.CannotGetReaderWriterForFile,
                                         filePath,
-                                        nameof(IRegistersDocumentReaderWriter));
+                                        nameof(Hosting.EnvironmentRegistry));
             throw new NoMatchingReaderWriterException(message);
         }
 
