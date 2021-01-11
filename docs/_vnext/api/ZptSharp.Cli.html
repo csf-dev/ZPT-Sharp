@@ -101,14 +101,11 @@ a set of source arguments into an instance of <a class="xref" href="ZptSharp.Cli
 This uses .NET Generic Host to wire up and run an instance of <a class="xref" href="ZptSharp.Cli.Application.html">Application</a>.</p>
 </section>
       <h4><a class="xref" href="ZptSharp.Cli.ServiceConfigurator.html">ServiceConfigurator</a></h4>
-      <section><p>Implementation of <a class="xref" href="ZptSharp.Cli.IConfiguresServices.html">IConfiguresServices</a> which sets up
-the default services to be used within a <span class="xref">System.IServiceProvider</span>.</p>
+      <section><p>Logic which sets up the ZptSharp services to be used
+within an <a class="xref" href="ZptSharp.Hosting.IBuildsHostingEnvironment.html">IBuildsHostingEnvironment</a>.</p>
 </section>
     <h3 id="interfaces">Interfaces
   </h3>
-      <h4><a class="xref" href="ZptSharp.Cli.IConfiguresServices.html">IConfiguresServices</a></h4>
-      <section><p>An object which pre-configures the services which make-up the CLI app.</p>
-</section>
       <h4><a class="xref" href="ZptSharp.Cli.IGetsBulkRenderingRequest.html">IGetsBulkRenderingRequest</a></h4>
       <section><p>An object which gets a <a class="xref" href="ZptSharp.BulkRendering.BulkRenderingRequest.html">BulkRenderingRequest</a> from a
 <a class="xref" href="ZptSharp.Cli.CliArguments.html">CliArguments</a></p>

@@ -7,44 +7,25 @@ references:
   commentId: N:ZptSharp
   fullName: ZptSharp
   nameWithType: ZptSharp
-- uid: ZptSharp.AngleSharpServiceCollectionExtensions
-  name: AngleSharpServiceCollectionExtensions
-  href: api/ZptSharp.AngleSharpServiceCollectionExtensions.html
-  commentId: T:ZptSharp.AngleSharpServiceCollectionExtensions
-  fullName: ZptSharp.AngleSharpServiceCollectionExtensions
-  nameWithType: AngleSharpServiceCollectionExtensions
-- uid: ZptSharp.AngleSharpServiceCollectionExtensions.AddAngleSharpZptDocuments(Microsoft.Extensions.DependencyInjection.IServiceCollection)
-  name: AddAngleSharpZptDocuments(IServiceCollection)
-  href: api/ZptSharp.AngleSharpServiceCollectionExtensions.html#ZptSharp_AngleSharpServiceCollectionExtensions_AddAngleSharpZptDocuments_Microsoft_Extensions_DependencyInjection_IServiceCollection_
-  commentId: M:ZptSharp.AngleSharpServiceCollectionExtensions.AddAngleSharpZptDocuments(Microsoft.Extensions.DependencyInjection.IServiceCollection)
-  fullName: ZptSharp.AngleSharpServiceCollectionExtensions.AddAngleSharpZptDocuments(Microsoft.Extensions.DependencyInjection.IServiceCollection)
-  nameWithType: AngleSharpServiceCollectionExtensions.AddAngleSharpZptDocuments(IServiceCollection)
-- uid: ZptSharp.AngleSharpServiceCollectionExtensions.AddAngleSharpZptDocuments(ZptSharp.Hosting.IBuildsSelfHostingEnvironment)
-  name: AddAngleSharpZptDocuments(IBuildsSelfHostingEnvironment)
-  href: api/ZptSharp.AngleSharpServiceCollectionExtensions.html#ZptSharp_AngleSharpServiceCollectionExtensions_AddAngleSharpZptDocuments_ZptSharp_Hosting_IBuildsSelfHostingEnvironment_
-  commentId: M:ZptSharp.AngleSharpServiceCollectionExtensions.AddAngleSharpZptDocuments(ZptSharp.Hosting.IBuildsSelfHostingEnvironment)
-  fullName: ZptSharp.AngleSharpServiceCollectionExtensions.AddAngleSharpZptDocuments(ZptSharp.Hosting.IBuildsSelfHostingEnvironment)
-  nameWithType: AngleSharpServiceCollectionExtensions.AddAngleSharpZptDocuments(IBuildsSelfHostingEnvironment)
-- uid: ZptSharp.AngleSharpServiceCollectionExtensions.AddAngleSharpZptDocuments*
+- uid: ZptSharp.AngleSharpHostingBuilderExtensions
+  name: AngleSharpHostingBuilderExtensions
+  href: api/ZptSharp.AngleSharpHostingBuilderExtensions.html
+  commentId: T:ZptSharp.AngleSharpHostingBuilderExtensions
+  fullName: ZptSharp.AngleSharpHostingBuilderExtensions
+  nameWithType: AngleSharpHostingBuilderExtensions
+- uid: ZptSharp.AngleSharpHostingBuilderExtensions.AddAngleSharpZptDocuments(ZptSharp.Hosting.IBuildsHostingEnvironment)
+  name: AddAngleSharpZptDocuments(IBuildsHostingEnvironment)
+  href: api/ZptSharp.AngleSharpHostingBuilderExtensions.html#ZptSharp_AngleSharpHostingBuilderExtensions_AddAngleSharpZptDocuments_ZptSharp_Hosting_IBuildsHostingEnvironment_
+  commentId: M:ZptSharp.AngleSharpHostingBuilderExtensions.AddAngleSharpZptDocuments(ZptSharp.Hosting.IBuildsHostingEnvironment)
+  fullName: ZptSharp.AngleSharpHostingBuilderExtensions.AddAngleSharpZptDocuments(ZptSharp.Hosting.IBuildsHostingEnvironment)
+  nameWithType: AngleSharpHostingBuilderExtensions.AddAngleSharpZptDocuments(IBuildsHostingEnvironment)
+- uid: ZptSharp.AngleSharpHostingBuilderExtensions.AddAngleSharpZptDocuments*
   name: AddAngleSharpZptDocuments
-  href: api/ZptSharp.AngleSharpServiceCollectionExtensions.html#ZptSharp_AngleSharpServiceCollectionExtensions_AddAngleSharpZptDocuments_
-  commentId: Overload:ZptSharp.AngleSharpServiceCollectionExtensions.AddAngleSharpZptDocuments
+  href: api/ZptSharp.AngleSharpHostingBuilderExtensions.html#ZptSharp_AngleSharpHostingBuilderExtensions_AddAngleSharpZptDocuments_
+  commentId: Overload:ZptSharp.AngleSharpHostingBuilderExtensions.AddAngleSharpZptDocuments
   isSpec: "True"
-  fullName: ZptSharp.AngleSharpServiceCollectionExtensions.AddAngleSharpZptDocuments
-  nameWithType: AngleSharpServiceCollectionExtensions.AddAngleSharpZptDocuments
-- uid: ZptSharp.AngleSharpServiceCollectionExtensions.UseAngleSharpZptDocuments(System.IServiceProvider)
-  name: UseAngleSharpZptDocuments(IServiceProvider)
-  href: api/ZptSharp.AngleSharpServiceCollectionExtensions.html#ZptSharp_AngleSharpServiceCollectionExtensions_UseAngleSharpZptDocuments_System_IServiceProvider_
-  commentId: M:ZptSharp.AngleSharpServiceCollectionExtensions.UseAngleSharpZptDocuments(System.IServiceProvider)
-  fullName: ZptSharp.AngleSharpServiceCollectionExtensions.UseAngleSharpZptDocuments(System.IServiceProvider)
-  nameWithType: AngleSharpServiceCollectionExtensions.UseAngleSharpZptDocuments(IServiceProvider)
-- uid: ZptSharp.AngleSharpServiceCollectionExtensions.UseAngleSharpZptDocuments*
-  name: UseAngleSharpZptDocuments
-  href: api/ZptSharp.AngleSharpServiceCollectionExtensions.html#ZptSharp_AngleSharpServiceCollectionExtensions_UseAngleSharpZptDocuments_
-  commentId: Overload:ZptSharp.AngleSharpServiceCollectionExtensions.UseAngleSharpZptDocuments
-  isSpec: "True"
-  fullName: ZptSharp.AngleSharpServiceCollectionExtensions.UseAngleSharpZptDocuments
-  nameWithType: AngleSharpServiceCollectionExtensions.UseAngleSharpZptDocuments
+  fullName: ZptSharp.AngleSharpHostingBuilderExtensions.AddAngleSharpZptDocuments
+  nameWithType: AngleSharpHostingBuilderExtensions.AddAngleSharpZptDocuments
 - uid: ZptSharp.BulkRendering
   name: ZptSharp.BulkRendering
   href: api/ZptSharp.BulkRendering.html
@@ -552,12 +533,12 @@ references:
   commentId: T:ZptSharp.Cli.Application
   fullName: ZptSharp.Cli.Application
   nameWithType: Application
-- uid: ZptSharp.Cli.Application.#ctor(ZptSharp.BulkRendering.IRendersManyFiles,ZptSharp.Cli.IGetsBulkRenderingRequest,ZptSharp.Cli.IConfiguresServices,ZptSharp.Cli.CliArguments,Microsoft.Extensions.Hosting.IHostApplicationLifetime)
-  name: Application(IRendersManyFiles, IGetsBulkRenderingRequest, IConfiguresServices, CliArguments, IHostApplicationLifetime)
-  href: api/ZptSharp.Cli.Application.html#ZptSharp_Cli_Application__ctor_ZptSharp_BulkRendering_IRendersManyFiles_ZptSharp_Cli_IGetsBulkRenderingRequest_ZptSharp_Cli_IConfiguresServices_ZptSharp_Cli_CliArguments_Microsoft_Extensions_Hosting_IHostApplicationLifetime_
-  commentId: M:ZptSharp.Cli.Application.#ctor(ZptSharp.BulkRendering.IRendersManyFiles,ZptSharp.Cli.IGetsBulkRenderingRequest,ZptSharp.Cli.IConfiguresServices,ZptSharp.Cli.CliArguments,Microsoft.Extensions.Hosting.IHostApplicationLifetime)
-  fullName: ZptSharp.Cli.Application.Application(ZptSharp.BulkRendering.IRendersManyFiles, ZptSharp.Cli.IGetsBulkRenderingRequest, ZptSharp.Cli.IConfiguresServices, ZptSharp.Cli.CliArguments, Microsoft.Extensions.Hosting.IHostApplicationLifetime)
-  nameWithType: Application.Application(IRendersManyFiles, IGetsBulkRenderingRequest, IConfiguresServices, CliArguments, IHostApplicationLifetime)
+- uid: ZptSharp.Cli.Application.#ctor(ZptSharp.BulkRendering.IRendersManyFiles,ZptSharp.Cli.IGetsBulkRenderingRequest,ZptSharp.Cli.CliArguments,Microsoft.Extensions.Hosting.IHostApplicationLifetime)
+  name: Application(IRendersManyFiles, IGetsBulkRenderingRequest, CliArguments, IHostApplicationLifetime)
+  href: api/ZptSharp.Cli.Application.html#ZptSharp_Cli_Application__ctor_ZptSharp_BulkRendering_IRendersManyFiles_ZptSharp_Cli_IGetsBulkRenderingRequest_ZptSharp_Cli_CliArguments_Microsoft_Extensions_Hosting_IHostApplicationLifetime_
+  commentId: M:ZptSharp.Cli.Application.#ctor(ZptSharp.BulkRendering.IRendersManyFiles,ZptSharp.Cli.IGetsBulkRenderingRequest,ZptSharp.Cli.CliArguments,Microsoft.Extensions.Hosting.IHostApplicationLifetime)
+  fullName: ZptSharp.Cli.Application.Application(ZptSharp.BulkRendering.IRendersManyFiles, ZptSharp.Cli.IGetsBulkRenderingRequest, ZptSharp.Cli.CliArguments, Microsoft.Extensions.Hosting.IHostApplicationLifetime)
+  nameWithType: Application.Application(IRendersManyFiles, IGetsBulkRenderingRequest, CliArguments, IHostApplicationLifetime)
 - uid: ZptSharp.Cli.Application.#ctor*
   name: Application
   href: api/ZptSharp.Cli.Application.html#ZptSharp_Cli_Application__ctor_
@@ -768,25 +749,6 @@ references:
   isSpec: "True"
   fullName: ZptSharp.Cli.CliArgumentsParser.Parse
   nameWithType: CliArgumentsParser.Parse
-- uid: ZptSharp.Cli.IConfiguresServices
-  name: IConfiguresServices
-  href: api/ZptSharp.Cli.IConfiguresServices.html
-  commentId: T:ZptSharp.Cli.IConfiguresServices
-  fullName: ZptSharp.Cli.IConfiguresServices
-  nameWithType: IConfiguresServices
-- uid: ZptSharp.Cli.IConfiguresServices.ConfigureServices(ZptSharp.Cli.CliArguments)
-  name: ConfigureServices(CliArguments)
-  href: api/ZptSharp.Cli.IConfiguresServices.html#ZptSharp_Cli_IConfiguresServices_ConfigureServices_ZptSharp_Cli_CliArguments_
-  commentId: M:ZptSharp.Cli.IConfiguresServices.ConfigureServices(ZptSharp.Cli.CliArguments)
-  fullName: ZptSharp.Cli.IConfiguresServices.ConfigureServices(ZptSharp.Cli.CliArguments)
-  nameWithType: IConfiguresServices.ConfigureServices(CliArguments)
-- uid: ZptSharp.Cli.IConfiguresServices.ConfigureServices*
-  name: ConfigureServices
-  href: api/ZptSharp.Cli.IConfiguresServices.html#ZptSharp_Cli_IConfiguresServices_ConfigureServices_
-  commentId: Overload:ZptSharp.Cli.IConfiguresServices.ConfigureServices
-  isSpec: "True"
-  fullName: ZptSharp.Cli.IConfiguresServices.ConfigureServices
-  nameWithType: IConfiguresServices.ConfigureServices
 - uid: ZptSharp.Cli.IGetsBulkRenderingRequest
   name: IGetsBulkRenderingRequest
   href: api/ZptSharp.Cli.IGetsBulkRenderingRequest.html
@@ -888,12 +850,12 @@ references:
   commentId: T:ZptSharp.Cli.ServiceConfigurator
   fullName: ZptSharp.Cli.ServiceConfigurator
   nameWithType: ServiceConfigurator
-- uid: ZptSharp.Cli.ServiceConfigurator.#ctor(System.IServiceProvider)
-  name: ServiceConfigurator(IServiceProvider)
-  href: api/ZptSharp.Cli.ServiceConfigurator.html#ZptSharp_Cli_ServiceConfigurator__ctor_System_IServiceProvider_
-  commentId: M:ZptSharp.Cli.ServiceConfigurator.#ctor(System.IServiceProvider)
-  fullName: ZptSharp.Cli.ServiceConfigurator.ServiceConfigurator(System.IServiceProvider)
-  nameWithType: ServiceConfigurator.ServiceConfigurator(IServiceProvider)
+- uid: ZptSharp.Cli.ServiceConfigurator.#ctor(ZptSharp.Hosting.IBuildsHostingEnvironment)
+  name: ServiceConfigurator(IBuildsHostingEnvironment)
+  href: api/ZptSharp.Cli.ServiceConfigurator.html#ZptSharp_Cli_ServiceConfigurator__ctor_ZptSharp_Hosting_IBuildsHostingEnvironment_
+  commentId: M:ZptSharp.Cli.ServiceConfigurator.#ctor(ZptSharp.Hosting.IBuildsHostingEnvironment)
+  fullName: ZptSharp.Cli.ServiceConfigurator.ServiceConfigurator(ZptSharp.Hosting.IBuildsHostingEnvironment)
+  nameWithType: ServiceConfigurator.ServiceConfigurator(IBuildsHostingEnvironment)
 - uid: ZptSharp.Cli.ServiceConfigurator.#ctor*
   name: ServiceConfigurator
   href: api/ZptSharp.Cli.ServiceConfigurator.html#ZptSharp_Cli_ServiceConfigurator__ctor_
@@ -1282,50 +1244,28 @@ references:
   isSpec: "True"
   fullName: ZptSharp.Config.RenderingConfig.SourceAnnotationBasePath
   nameWithType: RenderingConfig.SourceAnnotationBasePath
-- uid: ZptSharp.CSharpServiceCollectionExtensions
-  name: CSharpServiceCollectionExtensions
-  href: api/ZptSharp.CSharpServiceCollectionExtensions.html
-  commentId: T:ZptSharp.CSharpServiceCollectionExtensions
-  fullName: ZptSharp.CSharpServiceCollectionExtensions
-  nameWithType: CSharpServiceCollectionExtensions
-- uid: ZptSharp.CSharpServiceCollectionExtensions.AddZptCSharpExpressions(Microsoft.Extensions.DependencyInjection.IServiceCollection)
-  name: AddZptCSharpExpressions(IServiceCollection)
-  href: api/ZptSharp.CSharpServiceCollectionExtensions.html#ZptSharp_CSharpServiceCollectionExtensions_AddZptCSharpExpressions_Microsoft_Extensions_DependencyInjection_IServiceCollection_
-  commentId: M:ZptSharp.CSharpServiceCollectionExtensions.AddZptCSharpExpressions(Microsoft.Extensions.DependencyInjection.IServiceCollection)
-  fullName: ZptSharp.CSharpServiceCollectionExtensions.AddZptCSharpExpressions(Microsoft.Extensions.DependencyInjection.IServiceCollection)
-  nameWithType: CSharpServiceCollectionExtensions.AddZptCSharpExpressions(IServiceCollection)
-- uid: ZptSharp.CSharpServiceCollectionExtensions.AddZptCSharpExpressions(ZptSharp.Hosting.IBuildsSelfHostingEnvironment,System.Action{ZptSharp.Expressions.CSharpExpressions.IConfiguresCSharpExpressionGlobals})
-  name: AddZptCSharpExpressions(IBuildsSelfHostingEnvironment, Action<IConfiguresCSharpExpressionGlobals>)
-  href: api/ZptSharp.CSharpServiceCollectionExtensions.html#ZptSharp_CSharpServiceCollectionExtensions_AddZptCSharpExpressions_ZptSharp_Hosting_IBuildsSelfHostingEnvironment_System_Action_ZptSharp_Expressions_CSharpExpressions_IConfiguresCSharpExpressionGlobals__
-  commentId: M:ZptSharp.CSharpServiceCollectionExtensions.AddZptCSharpExpressions(ZptSharp.Hosting.IBuildsSelfHostingEnvironment,System.Action{ZptSharp.Expressions.CSharpExpressions.IConfiguresCSharpExpressionGlobals})
-  name.vb: AddZptCSharpExpressions(IBuildsSelfHostingEnvironment, Action(Of IConfiguresCSharpExpressionGlobals))
-  fullName: ZptSharp.CSharpServiceCollectionExtensions.AddZptCSharpExpressions(ZptSharp.Hosting.IBuildsSelfHostingEnvironment, System.Action<ZptSharp.Expressions.CSharpExpressions.IConfiguresCSharpExpressionGlobals>)
-  fullName.vb: ZptSharp.CSharpServiceCollectionExtensions.AddZptCSharpExpressions(ZptSharp.Hosting.IBuildsSelfHostingEnvironment, System.Action(Of ZptSharp.Expressions.CSharpExpressions.IConfiguresCSharpExpressionGlobals))
-  nameWithType: CSharpServiceCollectionExtensions.AddZptCSharpExpressions(IBuildsSelfHostingEnvironment, Action<IConfiguresCSharpExpressionGlobals>)
-  nameWithType.vb: CSharpServiceCollectionExtensions.AddZptCSharpExpressions(IBuildsSelfHostingEnvironment, Action(Of IConfiguresCSharpExpressionGlobals))
-- uid: ZptSharp.CSharpServiceCollectionExtensions.AddZptCSharpExpressions*
+- uid: ZptSharp.CSharpHostingBuilderExtensions
+  name: CSharpHostingBuilderExtensions
+  href: api/ZptSharp.CSharpHostingBuilderExtensions.html
+  commentId: T:ZptSharp.CSharpHostingBuilderExtensions
+  fullName: ZptSharp.CSharpHostingBuilderExtensions
+  nameWithType: CSharpHostingBuilderExtensions
+- uid: ZptSharp.CSharpHostingBuilderExtensions.AddZptCSharpExpressions(ZptSharp.Hosting.IBuildsHostingEnvironment,System.Action{ZptSharp.Expressions.CSharpExpressions.IConfiguresCSharpExpressionGlobals})
+  name: AddZptCSharpExpressions(IBuildsHostingEnvironment, Action<IConfiguresCSharpExpressionGlobals>)
+  href: api/ZptSharp.CSharpHostingBuilderExtensions.html#ZptSharp_CSharpHostingBuilderExtensions_AddZptCSharpExpressions_ZptSharp_Hosting_IBuildsHostingEnvironment_System_Action_ZptSharp_Expressions_CSharpExpressions_IConfiguresCSharpExpressionGlobals__
+  commentId: M:ZptSharp.CSharpHostingBuilderExtensions.AddZptCSharpExpressions(ZptSharp.Hosting.IBuildsHostingEnvironment,System.Action{ZptSharp.Expressions.CSharpExpressions.IConfiguresCSharpExpressionGlobals})
+  name.vb: AddZptCSharpExpressions(IBuildsHostingEnvironment, Action(Of IConfiguresCSharpExpressionGlobals))
+  fullName: ZptSharp.CSharpHostingBuilderExtensions.AddZptCSharpExpressions(ZptSharp.Hosting.IBuildsHostingEnvironment, System.Action<ZptSharp.Expressions.CSharpExpressions.IConfiguresCSharpExpressionGlobals>)
+  fullName.vb: ZptSharp.CSharpHostingBuilderExtensions.AddZptCSharpExpressions(ZptSharp.Hosting.IBuildsHostingEnvironment, System.Action(Of ZptSharp.Expressions.CSharpExpressions.IConfiguresCSharpExpressionGlobals))
+  nameWithType: CSharpHostingBuilderExtensions.AddZptCSharpExpressions(IBuildsHostingEnvironment, Action<IConfiguresCSharpExpressionGlobals>)
+  nameWithType.vb: CSharpHostingBuilderExtensions.AddZptCSharpExpressions(IBuildsHostingEnvironment, Action(Of IConfiguresCSharpExpressionGlobals))
+- uid: ZptSharp.CSharpHostingBuilderExtensions.AddZptCSharpExpressions*
   name: AddZptCSharpExpressions
-  href: api/ZptSharp.CSharpServiceCollectionExtensions.html#ZptSharp_CSharpServiceCollectionExtensions_AddZptCSharpExpressions_
-  commentId: Overload:ZptSharp.CSharpServiceCollectionExtensions.AddZptCSharpExpressions
+  href: api/ZptSharp.CSharpHostingBuilderExtensions.html#ZptSharp_CSharpHostingBuilderExtensions_AddZptCSharpExpressions_
+  commentId: Overload:ZptSharp.CSharpHostingBuilderExtensions.AddZptCSharpExpressions
   isSpec: "True"
-  fullName: ZptSharp.CSharpServiceCollectionExtensions.AddZptCSharpExpressions
-  nameWithType: CSharpServiceCollectionExtensions.AddZptCSharpExpressions
-- uid: ZptSharp.CSharpServiceCollectionExtensions.UseZptCSharpExpressions(System.IServiceProvider,System.Action{ZptSharp.Expressions.CSharpExpressions.IConfiguresCSharpExpressionGlobals})
-  name: UseZptCSharpExpressions(IServiceProvider, Action<IConfiguresCSharpExpressionGlobals>)
-  href: api/ZptSharp.CSharpServiceCollectionExtensions.html#ZptSharp_CSharpServiceCollectionExtensions_UseZptCSharpExpressions_System_IServiceProvider_System_Action_ZptSharp_Expressions_CSharpExpressions_IConfiguresCSharpExpressionGlobals__
-  commentId: M:ZptSharp.CSharpServiceCollectionExtensions.UseZptCSharpExpressions(System.IServiceProvider,System.Action{ZptSharp.Expressions.CSharpExpressions.IConfiguresCSharpExpressionGlobals})
-  name.vb: UseZptCSharpExpressions(IServiceProvider, Action(Of IConfiguresCSharpExpressionGlobals))
-  fullName: ZptSharp.CSharpServiceCollectionExtensions.UseZptCSharpExpressions(System.IServiceProvider, System.Action<ZptSharp.Expressions.CSharpExpressions.IConfiguresCSharpExpressionGlobals>)
-  fullName.vb: ZptSharp.CSharpServiceCollectionExtensions.UseZptCSharpExpressions(System.IServiceProvider, System.Action(Of ZptSharp.Expressions.CSharpExpressions.IConfiguresCSharpExpressionGlobals))
-  nameWithType: CSharpServiceCollectionExtensions.UseZptCSharpExpressions(IServiceProvider, Action<IConfiguresCSharpExpressionGlobals>)
-  nameWithType.vb: CSharpServiceCollectionExtensions.UseZptCSharpExpressions(IServiceProvider, Action(Of IConfiguresCSharpExpressionGlobals))
-- uid: ZptSharp.CSharpServiceCollectionExtensions.UseZptCSharpExpressions*
-  name: UseZptCSharpExpressions
-  href: api/ZptSharp.CSharpServiceCollectionExtensions.html#ZptSharp_CSharpServiceCollectionExtensions_UseZptCSharpExpressions_
-  commentId: Overload:ZptSharp.CSharpServiceCollectionExtensions.UseZptCSharpExpressions
-  isSpec: "True"
-  fullName: ZptSharp.CSharpServiceCollectionExtensions.UseZptCSharpExpressions
-  nameWithType: CSharpServiceCollectionExtensions.UseZptCSharpExpressions
+  fullName: ZptSharp.CSharpHostingBuilderExtensions.AddZptCSharpExpressions
+  nameWithType: CSharpHostingBuilderExtensions.AddZptCSharpExpressions
 - uid: ZptSharp.Dom
   name: ZptSharp.Dom
   href: api/ZptSharp.Dom.html
@@ -2062,6 +2002,19 @@ references:
   commentId: T:ZptSharp.Dom.DocumentReaderWriterRegistry
   fullName: ZptSharp.Dom.DocumentReaderWriterRegistry
   nameWithType: DocumentReaderWriterRegistry
+- uid: ZptSharp.Dom.DocumentReaderWriterRegistry.#ctor(ZptSharp.Hosting.EnvironmentRegistry,System.IServiceProvider)
+  name: DocumentReaderWriterRegistry(EnvironmentRegistry, IServiceProvider)
+  href: api/ZptSharp.Dom.DocumentReaderWriterRegistry.html#ZptSharp_Dom_DocumentReaderWriterRegistry__ctor_ZptSharp_Hosting_EnvironmentRegistry_System_IServiceProvider_
+  commentId: M:ZptSharp.Dom.DocumentReaderWriterRegistry.#ctor(ZptSharp.Hosting.EnvironmentRegistry,System.IServiceProvider)
+  fullName: ZptSharp.Dom.DocumentReaderWriterRegistry.DocumentReaderWriterRegistry(ZptSharp.Hosting.EnvironmentRegistry, System.IServiceProvider)
+  nameWithType: DocumentReaderWriterRegistry.DocumentReaderWriterRegistry(EnvironmentRegistry, IServiceProvider)
+- uid: ZptSharp.Dom.DocumentReaderWriterRegistry.#ctor*
+  name: DocumentReaderWriterRegistry
+  href: api/ZptSharp.Dom.DocumentReaderWriterRegistry.html#ZptSharp_Dom_DocumentReaderWriterRegistry__ctor_
+  commentId: Overload:ZptSharp.Dom.DocumentReaderWriterRegistry.#ctor
+  isSpec: "True"
+  fullName: ZptSharp.Dom.DocumentReaderWriterRegistry.DocumentReaderWriterRegistry
+  nameWithType: DocumentReaderWriterRegistry.DocumentReaderWriterRegistry
 - uid: ZptSharp.Dom.DocumentReaderWriterRegistry.GetDocumentProvider(System.String)
   name: GetDocumentProvider(String)
   href: api/ZptSharp.Dom.DocumentReaderWriterRegistry.html#ZptSharp_Dom_DocumentReaderWriterRegistry_GetDocumentProvider_System_String_
@@ -2075,32 +2028,6 @@ references:
   isSpec: "True"
   fullName: ZptSharp.Dom.DocumentReaderWriterRegistry.GetDocumentProvider
   nameWithType: DocumentReaderWriterRegistry.GetDocumentProvider
-- uid: ZptSharp.Dom.DocumentReaderWriterRegistry.RegisterDocumentReaderWriter(ZptSharp.Dom.IReadsAndWritesDocument)
-  name: RegisterDocumentReaderWriter(IReadsAndWritesDocument)
-  href: api/ZptSharp.Dom.DocumentReaderWriterRegistry.html#ZptSharp_Dom_DocumentReaderWriterRegistry_RegisterDocumentReaderWriter_ZptSharp_Dom_IReadsAndWritesDocument_
-  commentId: M:ZptSharp.Dom.DocumentReaderWriterRegistry.RegisterDocumentReaderWriter(ZptSharp.Dom.IReadsAndWritesDocument)
-  fullName: ZptSharp.Dom.DocumentReaderWriterRegistry.RegisterDocumentReaderWriter(ZptSharp.Dom.IReadsAndWritesDocument)
-  nameWithType: DocumentReaderWriterRegistry.RegisterDocumentReaderWriter(IReadsAndWritesDocument)
-- uid: ZptSharp.Dom.DocumentReaderWriterRegistry.RegisterDocumentReaderWriter*
-  name: RegisterDocumentReaderWriter
-  href: api/ZptSharp.Dom.DocumentReaderWriterRegistry.html#ZptSharp_Dom_DocumentReaderWriterRegistry_RegisterDocumentReaderWriter_
-  commentId: Overload:ZptSharp.Dom.DocumentReaderWriterRegistry.RegisterDocumentReaderWriter
-  isSpec: "True"
-  fullName: ZptSharp.Dom.DocumentReaderWriterRegistry.RegisterDocumentReaderWriter
-  nameWithType: DocumentReaderWriterRegistry.RegisterDocumentReaderWriter
-- uid: ZptSharp.Dom.DocumentReaderWriterRegistry.Registry
-  name: Registry
-  href: api/ZptSharp.Dom.DocumentReaderWriterRegistry.html#ZptSharp_Dom_DocumentReaderWriterRegistry_Registry
-  commentId: P:ZptSharp.Dom.DocumentReaderWriterRegistry.Registry
-  fullName: ZptSharp.Dom.DocumentReaderWriterRegistry.Registry
-  nameWithType: DocumentReaderWriterRegistry.Registry
-- uid: ZptSharp.Dom.DocumentReaderWriterRegistry.Registry*
-  name: Registry
-  href: api/ZptSharp.Dom.DocumentReaderWriterRegistry.html#ZptSharp_Dom_DocumentReaderWriterRegistry_Registry_
-  commentId: Overload:ZptSharp.Dom.DocumentReaderWriterRegistry.Registry
-  isSpec: "True"
-  fullName: ZptSharp.Dom.DocumentReaderWriterRegistry.Registry
-  nameWithType: DocumentReaderWriterRegistry.Registry
 - uid: ZptSharp.Dom.HapAttribute
   name: HapAttribute
   href: api/ZptSharp.Dom.HapAttribute.html
@@ -2990,25 +2917,6 @@ references:
   isSpec: "True"
   fullName: ZptSharp.Dom.IReadsAndWritesDocument.WriteDocumentAsync
   nameWithType: IReadsAndWritesDocument.WriteDocumentAsync
-- uid: ZptSharp.Dom.IRegistersDocumentReaderWriter
-  name: IRegistersDocumentReaderWriter
-  href: api/ZptSharp.Dom.IRegistersDocumentReaderWriter.html
-  commentId: T:ZptSharp.Dom.IRegistersDocumentReaderWriter
-  fullName: ZptSharp.Dom.IRegistersDocumentReaderWriter
-  nameWithType: IRegistersDocumentReaderWriter
-- uid: ZptSharp.Dom.IRegistersDocumentReaderWriter.RegisterDocumentReaderWriter(ZptSharp.Dom.IReadsAndWritesDocument)
-  name: RegisterDocumentReaderWriter(IReadsAndWritesDocument)
-  href: api/ZptSharp.Dom.IRegistersDocumentReaderWriter.html#ZptSharp_Dom_IRegistersDocumentReaderWriter_RegisterDocumentReaderWriter_ZptSharp_Dom_IReadsAndWritesDocument_
-  commentId: M:ZptSharp.Dom.IRegistersDocumentReaderWriter.RegisterDocumentReaderWriter(ZptSharp.Dom.IReadsAndWritesDocument)
-  fullName: ZptSharp.Dom.IRegistersDocumentReaderWriter.RegisterDocumentReaderWriter(ZptSharp.Dom.IReadsAndWritesDocument)
-  nameWithType: IRegistersDocumentReaderWriter.RegisterDocumentReaderWriter(IReadsAndWritesDocument)
-- uid: ZptSharp.Dom.IRegistersDocumentReaderWriter.RegisterDocumentReaderWriter*
-  name: RegisterDocumentReaderWriter
-  href: api/ZptSharp.Dom.IRegistersDocumentReaderWriter.html#ZptSharp_Dom_IRegistersDocumentReaderWriter_RegisterDocumentReaderWriter_
-  commentId: Overload:ZptSharp.Dom.IRegistersDocumentReaderWriter.RegisterDocumentReaderWriter
-  isSpec: "True"
-  fullName: ZptSharp.Dom.IRegistersDocumentReaderWriter.RegisterDocumentReaderWriter
-  nameWithType: IRegistersDocumentReaderWriter.RegisterDocumentReaderWriter
 - uid: ZptSharp.Dom.IReplacesNode
   name: IReplacesNode
   href: api/ZptSharp.Dom.IReplacesNode.html
@@ -5408,49 +5316,25 @@ references:
   isSpec: "True"
   fullName: ZptSharp.Expressions.EvaluationException.EvaluationException
   nameWithType: EvaluationException.EvaluationException
-- uid: ZptSharp.Expressions.EvaluatorAlreadyRegisteredException
-  name: EvaluatorAlreadyRegisteredException
-  href: api/ZptSharp.Expressions.EvaluatorAlreadyRegisteredException.html
-  commentId: T:ZptSharp.Expressions.EvaluatorAlreadyRegisteredException
-  fullName: ZptSharp.Expressions.EvaluatorAlreadyRegisteredException
-  nameWithType: EvaluatorAlreadyRegisteredException
-- uid: ZptSharp.Expressions.EvaluatorAlreadyRegisteredException.#ctor
-  name: EvaluatorAlreadyRegisteredException()
-  href: api/ZptSharp.Expressions.EvaluatorAlreadyRegisteredException.html#ZptSharp_Expressions_EvaluatorAlreadyRegisteredException__ctor
-  commentId: M:ZptSharp.Expressions.EvaluatorAlreadyRegisteredException.#ctor
-  fullName: ZptSharp.Expressions.EvaluatorAlreadyRegisteredException.EvaluatorAlreadyRegisteredException()
-  nameWithType: EvaluatorAlreadyRegisteredException.EvaluatorAlreadyRegisteredException()
-- uid: ZptSharp.Expressions.EvaluatorAlreadyRegisteredException.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)
-  name: EvaluatorAlreadyRegisteredException(SerializationInfo, StreamingContext)
-  href: api/ZptSharp.Expressions.EvaluatorAlreadyRegisteredException.html#ZptSharp_Expressions_EvaluatorAlreadyRegisteredException__ctor_System_Runtime_Serialization_SerializationInfo_System_Runtime_Serialization_StreamingContext_
-  commentId: M:ZptSharp.Expressions.EvaluatorAlreadyRegisteredException.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)
-  fullName: ZptSharp.Expressions.EvaluatorAlreadyRegisteredException.EvaluatorAlreadyRegisteredException(System.Runtime.Serialization.SerializationInfo, System.Runtime.Serialization.StreamingContext)
-  nameWithType: EvaluatorAlreadyRegisteredException.EvaluatorAlreadyRegisteredException(SerializationInfo, StreamingContext)
-- uid: ZptSharp.Expressions.EvaluatorAlreadyRegisteredException.#ctor(System.String)
-  name: EvaluatorAlreadyRegisteredException(String)
-  href: api/ZptSharp.Expressions.EvaluatorAlreadyRegisteredException.html#ZptSharp_Expressions_EvaluatorAlreadyRegisteredException__ctor_System_String_
-  commentId: M:ZptSharp.Expressions.EvaluatorAlreadyRegisteredException.#ctor(System.String)
-  fullName: ZptSharp.Expressions.EvaluatorAlreadyRegisteredException.EvaluatorAlreadyRegisteredException(System.String)
-  nameWithType: EvaluatorAlreadyRegisteredException.EvaluatorAlreadyRegisteredException(String)
-- uid: ZptSharp.Expressions.EvaluatorAlreadyRegisteredException.#ctor(System.String,System.Exception)
-  name: EvaluatorAlreadyRegisteredException(String, Exception)
-  href: api/ZptSharp.Expressions.EvaluatorAlreadyRegisteredException.html#ZptSharp_Expressions_EvaluatorAlreadyRegisteredException__ctor_System_String_System_Exception_
-  commentId: M:ZptSharp.Expressions.EvaluatorAlreadyRegisteredException.#ctor(System.String,System.Exception)
-  fullName: ZptSharp.Expressions.EvaluatorAlreadyRegisteredException.EvaluatorAlreadyRegisteredException(System.String, System.Exception)
-  nameWithType: EvaluatorAlreadyRegisteredException.EvaluatorAlreadyRegisteredException(String, Exception)
-- uid: ZptSharp.Expressions.EvaluatorAlreadyRegisteredException.#ctor*
-  name: EvaluatorAlreadyRegisteredException
-  href: api/ZptSharp.Expressions.EvaluatorAlreadyRegisteredException.html#ZptSharp_Expressions_EvaluatorAlreadyRegisteredException__ctor_
-  commentId: Overload:ZptSharp.Expressions.EvaluatorAlreadyRegisteredException.#ctor
-  isSpec: "True"
-  fullName: ZptSharp.Expressions.EvaluatorAlreadyRegisteredException.EvaluatorAlreadyRegisteredException
-  nameWithType: EvaluatorAlreadyRegisteredException.EvaluatorAlreadyRegisteredException
 - uid: ZptSharp.Expressions.EvaluatorTypeRegistry
   name: EvaluatorTypeRegistry
   href: api/ZptSharp.Expressions.EvaluatorTypeRegistry.html
   commentId: T:ZptSharp.Expressions.EvaluatorTypeRegistry
   fullName: ZptSharp.Expressions.EvaluatorTypeRegistry
   nameWithType: EvaluatorTypeRegistry
+- uid: ZptSharp.Expressions.EvaluatorTypeRegistry.#ctor(ZptSharp.Hosting.EnvironmentRegistry)
+  name: EvaluatorTypeRegistry(EnvironmentRegistry)
+  href: api/ZptSharp.Expressions.EvaluatorTypeRegistry.html#ZptSharp_Expressions_EvaluatorTypeRegistry__ctor_ZptSharp_Hosting_EnvironmentRegistry_
+  commentId: M:ZptSharp.Expressions.EvaluatorTypeRegistry.#ctor(ZptSharp.Hosting.EnvironmentRegistry)
+  fullName: ZptSharp.Expressions.EvaluatorTypeRegistry.EvaluatorTypeRegistry(ZptSharp.Hosting.EnvironmentRegistry)
+  nameWithType: EvaluatorTypeRegistry.EvaluatorTypeRegistry(EnvironmentRegistry)
+- uid: ZptSharp.Expressions.EvaluatorTypeRegistry.#ctor*
+  name: EvaluatorTypeRegistry
+  href: api/ZptSharp.Expressions.EvaluatorTypeRegistry.html#ZptSharp_Expressions_EvaluatorTypeRegistry__ctor_
+  commentId: Overload:ZptSharp.Expressions.EvaluatorTypeRegistry.#ctor
+  isSpec: "True"
+  fullName: ZptSharp.Expressions.EvaluatorTypeRegistry.EvaluatorTypeRegistry
+  nameWithType: EvaluatorTypeRegistry.EvaluatorTypeRegistry
 - uid: ZptSharp.Expressions.EvaluatorTypeRegistry.GetEvaluatorType(System.String)
   name: GetEvaluatorType(String)
   href: api/ZptSharp.Expressions.EvaluatorTypeRegistry.html#ZptSharp_Expressions_EvaluatorTypeRegistry_GetEvaluatorType_System_String_
@@ -5490,32 +5374,6 @@ references:
   isSpec: "True"
   fullName: ZptSharp.Expressions.EvaluatorTypeRegistry.IsRegistered
   nameWithType: EvaluatorTypeRegistry.IsRegistered
-- uid: ZptSharp.Expressions.EvaluatorTypeRegistry.RegisterEvaluatorType(System.Type,System.String)
-  name: RegisterEvaluatorType(Type, String)
-  href: api/ZptSharp.Expressions.EvaluatorTypeRegistry.html#ZptSharp_Expressions_EvaluatorTypeRegistry_RegisterEvaluatorType_System_Type_System_String_
-  commentId: M:ZptSharp.Expressions.EvaluatorTypeRegistry.RegisterEvaluatorType(System.Type,System.String)
-  fullName: ZptSharp.Expressions.EvaluatorTypeRegistry.RegisterEvaluatorType(System.Type, System.String)
-  nameWithType: EvaluatorTypeRegistry.RegisterEvaluatorType(Type, String)
-- uid: ZptSharp.Expressions.EvaluatorTypeRegistry.RegisterEvaluatorType*
-  name: RegisterEvaluatorType
-  href: api/ZptSharp.Expressions.EvaluatorTypeRegistry.html#ZptSharp_Expressions_EvaluatorTypeRegistry_RegisterEvaluatorType_
-  commentId: Overload:ZptSharp.Expressions.EvaluatorTypeRegistry.RegisterEvaluatorType
-  isSpec: "True"
-  fullName: ZptSharp.Expressions.EvaluatorTypeRegistry.RegisterEvaluatorType
-  nameWithType: EvaluatorTypeRegistry.RegisterEvaluatorType
-- uid: ZptSharp.Expressions.EvaluatorTypeRegistry.Unregister(System.String)
-  name: Unregister(String)
-  href: api/ZptSharp.Expressions.EvaluatorTypeRegistry.html#ZptSharp_Expressions_EvaluatorTypeRegistry_Unregister_System_String_
-  commentId: M:ZptSharp.Expressions.EvaluatorTypeRegistry.Unregister(System.String)
-  fullName: ZptSharp.Expressions.EvaluatorTypeRegistry.Unregister(System.String)
-  nameWithType: EvaluatorTypeRegistry.Unregister(String)
-- uid: ZptSharp.Expressions.EvaluatorTypeRegistry.Unregister*
-  name: Unregister
-  href: api/ZptSharp.Expressions.EvaluatorTypeRegistry.html#ZptSharp_Expressions_EvaluatorTypeRegistry_Unregister_
-  commentId: Overload:ZptSharp.Expressions.EvaluatorTypeRegistry.Unregister
-  isSpec: "True"
-  fullName: ZptSharp.Expressions.EvaluatorTypeRegistry.Unregister
-  nameWithType: EvaluatorTypeRegistry.Unregister
 - uid: ZptSharp.Expressions.EvaluatorTypeResolver
   name: EvaluatorTypeResolver
   href: api/ZptSharp.Expressions.EvaluatorTypeResolver.html
@@ -5759,28 +5617,6 @@ references:
   fullName.vb: ZptSharp.Expressions.ExpressionEvaluatorExtensions.EvaluateExpressionAsync(Of T)(ZptSharp.Expressions.IEvaluatesExpression, System.String, ZptSharp.Expressions.ExpressionContext, System.Threading.CancellationToken)
   nameWithType: ExpressionEvaluatorExtensions.EvaluateExpressionAsync<T>(IEvaluatesExpression, String, ExpressionContext, CancellationToken)
   nameWithType.vb: ExpressionEvaluatorExtensions.EvaluateExpressionAsync(Of T)(IEvaluatesExpression, String, ExpressionContext, CancellationToken)
-- uid: ZptSharp.Expressions.ExpressionEvaluatorRegistryExtensions
-  name: ExpressionEvaluatorRegistryExtensions
-  href: api/ZptSharp.Expressions.ExpressionEvaluatorRegistryExtensions.html
-  commentId: T:ZptSharp.Expressions.ExpressionEvaluatorRegistryExtensions
-  fullName: ZptSharp.Expressions.ExpressionEvaluatorRegistryExtensions
-  nameWithType: ExpressionEvaluatorRegistryExtensions
-- uid: ZptSharp.Expressions.ExpressionEvaluatorRegistryExtensions.RegisterEvaluatorType*
-  name: RegisterEvaluatorType
-  href: api/ZptSharp.Expressions.ExpressionEvaluatorRegistryExtensions.html#ZptSharp_Expressions_ExpressionEvaluatorRegistryExtensions_RegisterEvaluatorType_
-  commentId: Overload:ZptSharp.Expressions.ExpressionEvaluatorRegistryExtensions.RegisterEvaluatorType
-  isSpec: "True"
-  fullName: ZptSharp.Expressions.ExpressionEvaluatorRegistryExtensions.RegisterEvaluatorType
-  nameWithType: ExpressionEvaluatorRegistryExtensions.RegisterEvaluatorType
-- uid: ZptSharp.Expressions.ExpressionEvaluatorRegistryExtensions.RegisterEvaluatorType``1(ZptSharp.Expressions.IRegistersExpressionEvaluator,System.String)
-  name: RegisterEvaluatorType<T>(IRegistersExpressionEvaluator, String)
-  href: api/ZptSharp.Expressions.ExpressionEvaluatorRegistryExtensions.html#ZptSharp_Expressions_ExpressionEvaluatorRegistryExtensions_RegisterEvaluatorType__1_ZptSharp_Expressions_IRegistersExpressionEvaluator_System_String_
-  commentId: M:ZptSharp.Expressions.ExpressionEvaluatorRegistryExtensions.RegisterEvaluatorType``1(ZptSharp.Expressions.IRegistersExpressionEvaluator,System.String)
-  name.vb: RegisterEvaluatorType(Of T)(IRegistersExpressionEvaluator, String)
-  fullName: ZptSharp.Expressions.ExpressionEvaluatorRegistryExtensions.RegisterEvaluatorType<T>(ZptSharp.Expressions.IRegistersExpressionEvaluator, System.String)
-  fullName.vb: ZptSharp.Expressions.ExpressionEvaluatorRegistryExtensions.RegisterEvaluatorType(Of T)(ZptSharp.Expressions.IRegistersExpressionEvaluator, System.String)
-  nameWithType: ExpressionEvaluatorRegistryExtensions.RegisterEvaluatorType<T>(IRegistersExpressionEvaluator, String)
-  nameWithType.vb: ExpressionEvaluatorRegistryExtensions.RegisterEvaluatorType(Of T)(IRegistersExpressionEvaluator, String)
 - uid: ZptSharp.Expressions.ExpressionTypeProviderFactory
   name: ExpressionTypeProviderFactory
   href: api/ZptSharp.Expressions.ExpressionTypeProviderFactory.html
@@ -6177,32 +6013,6 @@ references:
   isSpec: "True"
   fullName: ZptSharp.Expressions.IRegistersExpressionEvaluator.IsRegistered
   nameWithType: IRegistersExpressionEvaluator.IsRegistered
-- uid: ZptSharp.Expressions.IRegistersExpressionEvaluator.RegisterEvaluatorType(System.Type,System.String)
-  name: RegisterEvaluatorType(Type, String)
-  href: api/ZptSharp.Expressions.IRegistersExpressionEvaluator.html#ZptSharp_Expressions_IRegistersExpressionEvaluator_RegisterEvaluatorType_System_Type_System_String_
-  commentId: M:ZptSharp.Expressions.IRegistersExpressionEvaluator.RegisterEvaluatorType(System.Type,System.String)
-  fullName: ZptSharp.Expressions.IRegistersExpressionEvaluator.RegisterEvaluatorType(System.Type, System.String)
-  nameWithType: IRegistersExpressionEvaluator.RegisterEvaluatorType(Type, String)
-- uid: ZptSharp.Expressions.IRegistersExpressionEvaluator.RegisterEvaluatorType*
-  name: RegisterEvaluatorType
-  href: api/ZptSharp.Expressions.IRegistersExpressionEvaluator.html#ZptSharp_Expressions_IRegistersExpressionEvaluator_RegisterEvaluatorType_
-  commentId: Overload:ZptSharp.Expressions.IRegistersExpressionEvaluator.RegisterEvaluatorType
-  isSpec: "True"
-  fullName: ZptSharp.Expressions.IRegistersExpressionEvaluator.RegisterEvaluatorType
-  nameWithType: IRegistersExpressionEvaluator.RegisterEvaluatorType
-- uid: ZptSharp.Expressions.IRegistersExpressionEvaluator.Unregister(System.String)
-  name: Unregister(String)
-  href: api/ZptSharp.Expressions.IRegistersExpressionEvaluator.html#ZptSharp_Expressions_IRegistersExpressionEvaluator_Unregister_System_String_
-  commentId: M:ZptSharp.Expressions.IRegistersExpressionEvaluator.Unregister(System.String)
-  fullName: ZptSharp.Expressions.IRegistersExpressionEvaluator.Unregister(System.String)
-  nameWithType: IRegistersExpressionEvaluator.Unregister(String)
-- uid: ZptSharp.Expressions.IRegistersExpressionEvaluator.Unregister*
-  name: Unregister
-  href: api/ZptSharp.Expressions.IRegistersExpressionEvaluator.html#ZptSharp_Expressions_IRegistersExpressionEvaluator_Unregister_
-  commentId: Overload:ZptSharp.Expressions.IRegistersExpressionEvaluator.Unregister
-  isSpec: "True"
-  fullName: ZptSharp.Expressions.IRegistersExpressionEvaluator.Unregister
-  nameWithType: IRegistersExpressionEvaluator.Unregister
 - uid: ZptSharp.Expressions.IRemovesPrefixFromExpression
   name: IRemovesPrefixFromExpression
   href: api/ZptSharp.Expressions.IRemovesPrefixFromExpression.html
@@ -8390,82 +8200,140 @@ references:
   isSpec: "True"
   fullName: ZptSharp.Expressions.WellKnownExpressionPrefix.String
   nameWithType: WellKnownExpressionPrefix.String
-- uid: ZptSharp.HapServiceCollectionExtensions
-  name: HapServiceCollectionExtensions
-  href: api/ZptSharp.HapServiceCollectionExtensions.html
-  commentId: T:ZptSharp.HapServiceCollectionExtensions
-  fullName: ZptSharp.HapServiceCollectionExtensions
-  nameWithType: HapServiceCollectionExtensions
-- uid: ZptSharp.HapServiceCollectionExtensions.AddHapZptDocuments(Microsoft.Extensions.DependencyInjection.IServiceCollection)
-  name: AddHapZptDocuments(IServiceCollection)
-  href: api/ZptSharp.HapServiceCollectionExtensions.html#ZptSharp_HapServiceCollectionExtensions_AddHapZptDocuments_Microsoft_Extensions_DependencyInjection_IServiceCollection_
-  commentId: M:ZptSharp.HapServiceCollectionExtensions.AddHapZptDocuments(Microsoft.Extensions.DependencyInjection.IServiceCollection)
-  fullName: ZptSharp.HapServiceCollectionExtensions.AddHapZptDocuments(Microsoft.Extensions.DependencyInjection.IServiceCollection)
-  nameWithType: HapServiceCollectionExtensions.AddHapZptDocuments(IServiceCollection)
-- uid: ZptSharp.HapServiceCollectionExtensions.AddHapZptDocuments(ZptSharp.Hosting.IBuildsSelfHostingEnvironment)
-  name: AddHapZptDocuments(IBuildsSelfHostingEnvironment)
-  href: api/ZptSharp.HapServiceCollectionExtensions.html#ZptSharp_HapServiceCollectionExtensions_AddHapZptDocuments_ZptSharp_Hosting_IBuildsSelfHostingEnvironment_
-  commentId: M:ZptSharp.HapServiceCollectionExtensions.AddHapZptDocuments(ZptSharp.Hosting.IBuildsSelfHostingEnvironment)
-  fullName: ZptSharp.HapServiceCollectionExtensions.AddHapZptDocuments(ZptSharp.Hosting.IBuildsSelfHostingEnvironment)
-  nameWithType: HapServiceCollectionExtensions.AddHapZptDocuments(IBuildsSelfHostingEnvironment)
-- uid: ZptSharp.HapServiceCollectionExtensions.AddHapZptDocuments*
+- uid: ZptSharp.HapHostingBuilderExtensions
+  name: HapHostingBuilderExtensions
+  href: api/ZptSharp.HapHostingBuilderExtensions.html
+  commentId: T:ZptSharp.HapHostingBuilderExtensions
+  fullName: ZptSharp.HapHostingBuilderExtensions
+  nameWithType: HapHostingBuilderExtensions
+- uid: ZptSharp.HapHostingBuilderExtensions.AddHapZptDocuments(ZptSharp.Hosting.IBuildsHostingEnvironment)
+  name: AddHapZptDocuments(IBuildsHostingEnvironment)
+  href: api/ZptSharp.HapHostingBuilderExtensions.html#ZptSharp_HapHostingBuilderExtensions_AddHapZptDocuments_ZptSharp_Hosting_IBuildsHostingEnvironment_
+  commentId: M:ZptSharp.HapHostingBuilderExtensions.AddHapZptDocuments(ZptSharp.Hosting.IBuildsHostingEnvironment)
+  fullName: ZptSharp.HapHostingBuilderExtensions.AddHapZptDocuments(ZptSharp.Hosting.IBuildsHostingEnvironment)
+  nameWithType: HapHostingBuilderExtensions.AddHapZptDocuments(IBuildsHostingEnvironment)
+- uid: ZptSharp.HapHostingBuilderExtensions.AddHapZptDocuments*
   name: AddHapZptDocuments
-  href: api/ZptSharp.HapServiceCollectionExtensions.html#ZptSharp_HapServiceCollectionExtensions_AddHapZptDocuments_
-  commentId: Overload:ZptSharp.HapServiceCollectionExtensions.AddHapZptDocuments
+  href: api/ZptSharp.HapHostingBuilderExtensions.html#ZptSharp_HapHostingBuilderExtensions_AddHapZptDocuments_
+  commentId: Overload:ZptSharp.HapHostingBuilderExtensions.AddHapZptDocuments
   isSpec: "True"
-  fullName: ZptSharp.HapServiceCollectionExtensions.AddHapZptDocuments
-  nameWithType: HapServiceCollectionExtensions.AddHapZptDocuments
-- uid: ZptSharp.HapServiceCollectionExtensions.UseHapZptDocuments(System.IServiceProvider)
-  name: UseHapZptDocuments(IServiceProvider)
-  href: api/ZptSharp.HapServiceCollectionExtensions.html#ZptSharp_HapServiceCollectionExtensions_UseHapZptDocuments_System_IServiceProvider_
-  commentId: M:ZptSharp.HapServiceCollectionExtensions.UseHapZptDocuments(System.IServiceProvider)
-  fullName: ZptSharp.HapServiceCollectionExtensions.UseHapZptDocuments(System.IServiceProvider)
-  nameWithType: HapServiceCollectionExtensions.UseHapZptDocuments(IServiceProvider)
-- uid: ZptSharp.HapServiceCollectionExtensions.UseHapZptDocuments*
-  name: UseHapZptDocuments
-  href: api/ZptSharp.HapServiceCollectionExtensions.html#ZptSharp_HapServiceCollectionExtensions_UseHapZptDocuments_
-  commentId: Overload:ZptSharp.HapServiceCollectionExtensions.UseHapZptDocuments
-  isSpec: "True"
-  fullName: ZptSharp.HapServiceCollectionExtensions.UseHapZptDocuments
-  nameWithType: HapServiceCollectionExtensions.UseHapZptDocuments
+  fullName: ZptSharp.HapHostingBuilderExtensions.AddHapZptDocuments
+  nameWithType: HapHostingBuilderExtensions.AddHapZptDocuments
 - uid: ZptSharp.Hosting
   name: ZptSharp.Hosting
   href: api/ZptSharp.Hosting.html
   commentId: N:ZptSharp.Hosting
   fullName: ZptSharp.Hosting
   nameWithType: ZptSharp.Hosting
-- uid: ZptSharp.Hosting.IBuildsSelfHostingEnvironment
-  name: IBuildsSelfHostingEnvironment
-  href: api/ZptSharp.Hosting.IBuildsSelfHostingEnvironment.html
-  commentId: T:ZptSharp.Hosting.IBuildsSelfHostingEnvironment
-  fullName: ZptSharp.Hosting.IBuildsSelfHostingEnvironment
-  nameWithType: IBuildsSelfHostingEnvironment
-- uid: ZptSharp.Hosting.IBuildsSelfHostingEnvironment.ServiceRegistrations
-  name: ServiceRegistrations
-  href: api/ZptSharp.Hosting.IBuildsSelfHostingEnvironment.html#ZptSharp_Hosting_IBuildsSelfHostingEnvironment_ServiceRegistrations
-  commentId: P:ZptSharp.Hosting.IBuildsSelfHostingEnvironment.ServiceRegistrations
-  fullName: ZptSharp.Hosting.IBuildsSelfHostingEnvironment.ServiceRegistrations
-  nameWithType: IBuildsSelfHostingEnvironment.ServiceRegistrations
-- uid: ZptSharp.Hosting.IBuildsSelfHostingEnvironment.ServiceRegistrations*
-  name: ServiceRegistrations
-  href: api/ZptSharp.Hosting.IBuildsSelfHostingEnvironment.html#ZptSharp_Hosting_IBuildsSelfHostingEnvironment_ServiceRegistrations_
-  commentId: Overload:ZptSharp.Hosting.IBuildsSelfHostingEnvironment.ServiceRegistrations
+- uid: ZptSharp.Hosting.EnvironmentRegistry
+  name: EnvironmentRegistry
+  href: api/ZptSharp.Hosting.EnvironmentRegistry.html
+  commentId: T:ZptSharp.Hosting.EnvironmentRegistry
+  fullName: ZptSharp.Hosting.EnvironmentRegistry
+  nameWithType: EnvironmentRegistry
+- uid: ZptSharp.Hosting.EnvironmentRegistry.DocumentProviderTypes
+  name: DocumentProviderTypes
+  href: api/ZptSharp.Hosting.EnvironmentRegistry.html#ZptSharp_Hosting_EnvironmentRegistry_DocumentProviderTypes
+  commentId: P:ZptSharp.Hosting.EnvironmentRegistry.DocumentProviderTypes
+  fullName: ZptSharp.Hosting.EnvironmentRegistry.DocumentProviderTypes
+  nameWithType: EnvironmentRegistry.DocumentProviderTypes
+- uid: ZptSharp.Hosting.EnvironmentRegistry.DocumentProviderTypes*
+  name: DocumentProviderTypes
+  href: api/ZptSharp.Hosting.EnvironmentRegistry.html#ZptSharp_Hosting_EnvironmentRegistry_DocumentProviderTypes_
+  commentId: Overload:ZptSharp.Hosting.EnvironmentRegistry.DocumentProviderTypes
   isSpec: "True"
-  fullName: ZptSharp.Hosting.IBuildsSelfHostingEnvironment.ServiceRegistrations
-  nameWithType: IBuildsSelfHostingEnvironment.ServiceRegistrations
-- uid: ZptSharp.Hosting.IBuildsSelfHostingEnvironment.ServiceUsages
-  name: ServiceUsages
-  href: api/ZptSharp.Hosting.IBuildsSelfHostingEnvironment.html#ZptSharp_Hosting_IBuildsSelfHostingEnvironment_ServiceUsages
-  commentId: P:ZptSharp.Hosting.IBuildsSelfHostingEnvironment.ServiceUsages
-  fullName: ZptSharp.Hosting.IBuildsSelfHostingEnvironment.ServiceUsages
-  nameWithType: IBuildsSelfHostingEnvironment.ServiceUsages
-- uid: ZptSharp.Hosting.IBuildsSelfHostingEnvironment.ServiceUsages*
-  name: ServiceUsages
-  href: api/ZptSharp.Hosting.IBuildsSelfHostingEnvironment.html#ZptSharp_Hosting_IBuildsSelfHostingEnvironment_ServiceUsages_
-  commentId: Overload:ZptSharp.Hosting.IBuildsSelfHostingEnvironment.ServiceUsages
+  fullName: ZptSharp.Hosting.EnvironmentRegistry.DocumentProviderTypes
+  nameWithType: EnvironmentRegistry.DocumentProviderTypes
+- uid: ZptSharp.Hosting.EnvironmentRegistry.ExpresionEvaluatorTypes
+  name: ExpresionEvaluatorTypes
+  href: api/ZptSharp.Hosting.EnvironmentRegistry.html#ZptSharp_Hosting_EnvironmentRegistry_ExpresionEvaluatorTypes
+  commentId: P:ZptSharp.Hosting.EnvironmentRegistry.ExpresionEvaluatorTypes
+  fullName: ZptSharp.Hosting.EnvironmentRegistry.ExpresionEvaluatorTypes
+  nameWithType: EnvironmentRegistry.ExpresionEvaluatorTypes
+- uid: ZptSharp.Hosting.EnvironmentRegistry.ExpresionEvaluatorTypes*
+  name: ExpresionEvaluatorTypes
+  href: api/ZptSharp.Hosting.EnvironmentRegistry.html#ZptSharp_Hosting_EnvironmentRegistry_ExpresionEvaluatorTypes_
+  commentId: Overload:ZptSharp.Hosting.EnvironmentRegistry.ExpresionEvaluatorTypes
   isSpec: "True"
-  fullName: ZptSharp.Hosting.IBuildsSelfHostingEnvironment.ServiceUsages
-  nameWithType: IBuildsSelfHostingEnvironment.ServiceUsages
+  fullName: ZptSharp.Hosting.EnvironmentRegistry.ExpresionEvaluatorTypes
+  nameWithType: EnvironmentRegistry.ExpresionEvaluatorTypes
+- uid: ZptSharp.Hosting.HostingBuilder
+  name: HostingBuilder
+  href: api/ZptSharp.Hosting.HostingBuilder.html
+  commentId: T:ZptSharp.Hosting.HostingBuilder
+  fullName: ZptSharp.Hosting.HostingBuilder
+  nameWithType: HostingBuilder
+- uid: ZptSharp.Hosting.HostingBuilder.#ctor(Microsoft.Extensions.DependencyInjection.IServiceCollection)
+  name: HostingBuilder(IServiceCollection)
+  href: api/ZptSharp.Hosting.HostingBuilder.html#ZptSharp_Hosting_HostingBuilder__ctor_Microsoft_Extensions_DependencyInjection_IServiceCollection_
+  commentId: M:ZptSharp.Hosting.HostingBuilder.#ctor(Microsoft.Extensions.DependencyInjection.IServiceCollection)
+  fullName: ZptSharp.Hosting.HostingBuilder.HostingBuilder(Microsoft.Extensions.DependencyInjection.IServiceCollection)
+  nameWithType: HostingBuilder.HostingBuilder(IServiceCollection)
+- uid: ZptSharp.Hosting.HostingBuilder.#ctor*
+  name: HostingBuilder
+  href: api/ZptSharp.Hosting.HostingBuilder.html#ZptSharp_Hosting_HostingBuilder__ctor_
+  commentId: Overload:ZptSharp.Hosting.HostingBuilder.#ctor
+  isSpec: "True"
+  fullName: ZptSharp.Hosting.HostingBuilder.HostingBuilder
+  nameWithType: HostingBuilder.HostingBuilder
+- uid: ZptSharp.Hosting.HostingBuilder.ServiceCollection
+  name: ServiceCollection
+  href: api/ZptSharp.Hosting.HostingBuilder.html#ZptSharp_Hosting_HostingBuilder_ServiceCollection
+  commentId: P:ZptSharp.Hosting.HostingBuilder.ServiceCollection
+  fullName: ZptSharp.Hosting.HostingBuilder.ServiceCollection
+  nameWithType: HostingBuilder.ServiceCollection
+- uid: ZptSharp.Hosting.HostingBuilder.ServiceCollection*
+  name: ServiceCollection
+  href: api/ZptSharp.Hosting.HostingBuilder.html#ZptSharp_Hosting_HostingBuilder_ServiceCollection_
+  commentId: Overload:ZptSharp.Hosting.HostingBuilder.ServiceCollection
+  isSpec: "True"
+  fullName: ZptSharp.Hosting.HostingBuilder.ServiceCollection
+  nameWithType: HostingBuilder.ServiceCollection
+- uid: ZptSharp.Hosting.HostingBuilder.ServiceRegistry
+  name: ServiceRegistry
+  href: api/ZptSharp.Hosting.HostingBuilder.html#ZptSharp_Hosting_HostingBuilder_ServiceRegistry
+  commentId: P:ZptSharp.Hosting.HostingBuilder.ServiceRegistry
+  fullName: ZptSharp.Hosting.HostingBuilder.ServiceRegistry
+  nameWithType: HostingBuilder.ServiceRegistry
+- uid: ZptSharp.Hosting.HostingBuilder.ServiceRegistry*
+  name: ServiceRegistry
+  href: api/ZptSharp.Hosting.HostingBuilder.html#ZptSharp_Hosting_HostingBuilder_ServiceRegistry_
+  commentId: Overload:ZptSharp.Hosting.HostingBuilder.ServiceRegistry
+  isSpec: "True"
+  fullName: ZptSharp.Hosting.HostingBuilder.ServiceRegistry
+  nameWithType: HostingBuilder.ServiceRegistry
+- uid: ZptSharp.Hosting.IBuildsHostingEnvironment
+  name: IBuildsHostingEnvironment
+  href: api/ZptSharp.Hosting.IBuildsHostingEnvironment.html
+  commentId: T:ZptSharp.Hosting.IBuildsHostingEnvironment
+  fullName: ZptSharp.Hosting.IBuildsHostingEnvironment
+  nameWithType: IBuildsHostingEnvironment
+- uid: ZptSharp.Hosting.IBuildsHostingEnvironment.ServiceCollection
+  name: ServiceCollection
+  href: api/ZptSharp.Hosting.IBuildsHostingEnvironment.html#ZptSharp_Hosting_IBuildsHostingEnvironment_ServiceCollection
+  commentId: P:ZptSharp.Hosting.IBuildsHostingEnvironment.ServiceCollection
+  fullName: ZptSharp.Hosting.IBuildsHostingEnvironment.ServiceCollection
+  nameWithType: IBuildsHostingEnvironment.ServiceCollection
+- uid: ZptSharp.Hosting.IBuildsHostingEnvironment.ServiceCollection*
+  name: ServiceCollection
+  href: api/ZptSharp.Hosting.IBuildsHostingEnvironment.html#ZptSharp_Hosting_IBuildsHostingEnvironment_ServiceCollection_
+  commentId: Overload:ZptSharp.Hosting.IBuildsHostingEnvironment.ServiceCollection
+  isSpec: "True"
+  fullName: ZptSharp.Hosting.IBuildsHostingEnvironment.ServiceCollection
+  nameWithType: IBuildsHostingEnvironment.ServiceCollection
+- uid: ZptSharp.Hosting.IBuildsHostingEnvironment.ServiceRegistry
+  name: ServiceRegistry
+  href: api/ZptSharp.Hosting.IBuildsHostingEnvironment.html#ZptSharp_Hosting_IBuildsHostingEnvironment_ServiceRegistry
+  commentId: P:ZptSharp.Hosting.IBuildsHostingEnvironment.ServiceRegistry
+  fullName: ZptSharp.Hosting.IBuildsHostingEnvironment.ServiceRegistry
+  nameWithType: IBuildsHostingEnvironment.ServiceRegistry
+- uid: ZptSharp.Hosting.IBuildsHostingEnvironment.ServiceRegistry*
+  name: ServiceRegistry
+  href: api/ZptSharp.Hosting.IBuildsHostingEnvironment.html#ZptSharp_Hosting_IBuildsHostingEnvironment_ServiceRegistry_
+  commentId: Overload:ZptSharp.Hosting.IBuildsHostingEnvironment.ServiceRegistry
+  isSpec: "True"
+  fullName: ZptSharp.Hosting.IBuildsHostingEnvironment.ServiceRegistry
+  nameWithType: IBuildsHostingEnvironment.ServiceRegistry
 - uid: ZptSharp.Hosting.IHostsZptSharp
   name: IHostsZptSharp
   href: api/ZptSharp.Hosting.IHostsZptSharp.html
@@ -8524,38 +8392,6 @@ references:
   isSpec: "True"
   fullName: ZptSharp.Hosting.IHostsZptSharp.StreamCopier
   nameWithType: IHostsZptSharp.StreamCopier
-- uid: ZptSharp.Hosting.SelfHostingEnvironmentBuilder
-  name: SelfHostingEnvironmentBuilder
-  href: api/ZptSharp.Hosting.SelfHostingEnvironmentBuilder.html
-  commentId: T:ZptSharp.Hosting.SelfHostingEnvironmentBuilder
-  fullName: ZptSharp.Hosting.SelfHostingEnvironmentBuilder
-  nameWithType: SelfHostingEnvironmentBuilder
-- uid: ZptSharp.Hosting.SelfHostingEnvironmentBuilder.ServiceRegistrations
-  name: ServiceRegistrations
-  href: api/ZptSharp.Hosting.SelfHostingEnvironmentBuilder.html#ZptSharp_Hosting_SelfHostingEnvironmentBuilder_ServiceRegistrations
-  commentId: P:ZptSharp.Hosting.SelfHostingEnvironmentBuilder.ServiceRegistrations
-  fullName: ZptSharp.Hosting.SelfHostingEnvironmentBuilder.ServiceRegistrations
-  nameWithType: SelfHostingEnvironmentBuilder.ServiceRegistrations
-- uid: ZptSharp.Hosting.SelfHostingEnvironmentBuilder.ServiceRegistrations*
-  name: ServiceRegistrations
-  href: api/ZptSharp.Hosting.SelfHostingEnvironmentBuilder.html#ZptSharp_Hosting_SelfHostingEnvironmentBuilder_ServiceRegistrations_
-  commentId: Overload:ZptSharp.Hosting.SelfHostingEnvironmentBuilder.ServiceRegistrations
-  isSpec: "True"
-  fullName: ZptSharp.Hosting.SelfHostingEnvironmentBuilder.ServiceRegistrations
-  nameWithType: SelfHostingEnvironmentBuilder.ServiceRegistrations
-- uid: ZptSharp.Hosting.SelfHostingEnvironmentBuilder.ServiceUsages
-  name: ServiceUsages
-  href: api/ZptSharp.Hosting.SelfHostingEnvironmentBuilder.html#ZptSharp_Hosting_SelfHostingEnvironmentBuilder_ServiceUsages
-  commentId: P:ZptSharp.Hosting.SelfHostingEnvironmentBuilder.ServiceUsages
-  fullName: ZptSharp.Hosting.SelfHostingEnvironmentBuilder.ServiceUsages
-  nameWithType: SelfHostingEnvironmentBuilder.ServiceUsages
-- uid: ZptSharp.Hosting.SelfHostingEnvironmentBuilder.ServiceUsages*
-  name: ServiceUsages
-  href: api/ZptSharp.Hosting.SelfHostingEnvironmentBuilder.html#ZptSharp_Hosting_SelfHostingEnvironmentBuilder_ServiceUsages_
-  commentId: Overload:ZptSharp.Hosting.SelfHostingEnvironmentBuilder.ServiceUsages
-  isSpec: "True"
-  fullName: ZptSharp.Hosting.SelfHostingEnvironmentBuilder.ServiceUsages
-  nameWithType: SelfHostingEnvironmentBuilder.ServiceUsages
 - uid: ZptSharp.Hosting.ZptSharpSelfHoster
   name: ZptSharpSelfHoster
   href: api/ZptSharp.Hosting.ZptSharpSelfHoster.html
@@ -10168,15 +10004,15 @@ references:
   commentId: T:ZptSharp.Mvc5.ZptSharpViewEngine
   fullName: ZptSharp.Mvc5.ZptSharpViewEngine
   nameWithType: ZptSharpViewEngine
-- uid: ZptSharp.Mvc5.ZptSharpViewEngine.#ctor(System.Action{ZptSharp.Hosting.IBuildsSelfHostingEnvironment},System.String[],System.String,ZptSharp.Config.RenderingConfig,ZptSharp.Mvc5.IFindsView)
-  name: ZptSharpViewEngine(Action<IBuildsSelfHostingEnvironment>, String[], String, RenderingConfig, IFindsView)
-  href: api/ZptSharp.Mvc5.ZptSharpViewEngine.html#ZptSharp_Mvc5_ZptSharpViewEngine__ctor_System_Action_ZptSharp_Hosting_IBuildsSelfHostingEnvironment__System_String___System_String_ZptSharp_Config_RenderingConfig_ZptSharp_Mvc5_IFindsView_
-  commentId: M:ZptSharp.Mvc5.ZptSharpViewEngine.#ctor(System.Action{ZptSharp.Hosting.IBuildsSelfHostingEnvironment},System.String[],System.String,ZptSharp.Config.RenderingConfig,ZptSharp.Mvc5.IFindsView)
-  name.vb: ZptSharpViewEngine(Action(Of IBuildsSelfHostingEnvironment), String(), String, RenderingConfig, IFindsView)
-  fullName: ZptSharp.Mvc5.ZptSharpViewEngine.ZptSharpViewEngine(System.Action<ZptSharp.Hosting.IBuildsSelfHostingEnvironment>, System.String[], System.String, ZptSharp.Config.RenderingConfig, ZptSharp.Mvc5.IFindsView)
-  fullName.vb: ZptSharp.Mvc5.ZptSharpViewEngine.ZptSharpViewEngine(System.Action(Of ZptSharp.Hosting.IBuildsSelfHostingEnvironment), System.String(), System.String, ZptSharp.Config.RenderingConfig, ZptSharp.Mvc5.IFindsView)
-  nameWithType: ZptSharpViewEngine.ZptSharpViewEngine(Action<IBuildsSelfHostingEnvironment>, String[], String, RenderingConfig, IFindsView)
-  nameWithType.vb: ZptSharpViewEngine.ZptSharpViewEngine(Action(Of IBuildsSelfHostingEnvironment), String(), String, RenderingConfig, IFindsView)
+- uid: ZptSharp.Mvc5.ZptSharpViewEngine.#ctor(System.Action{ZptSharp.Hosting.IBuildsHostingEnvironment},System.String[],System.String,ZptSharp.Config.RenderingConfig,ZptSharp.Mvc5.IFindsView)
+  name: ZptSharpViewEngine(Action<IBuildsHostingEnvironment>, String[], String, RenderingConfig, IFindsView)
+  href: api/ZptSharp.Mvc5.ZptSharpViewEngine.html#ZptSharp_Mvc5_ZptSharpViewEngine__ctor_System_Action_ZptSharp_Hosting_IBuildsHostingEnvironment__System_String___System_String_ZptSharp_Config_RenderingConfig_ZptSharp_Mvc5_IFindsView_
+  commentId: M:ZptSharp.Mvc5.ZptSharpViewEngine.#ctor(System.Action{ZptSharp.Hosting.IBuildsHostingEnvironment},System.String[],System.String,ZptSharp.Config.RenderingConfig,ZptSharp.Mvc5.IFindsView)
+  name.vb: ZptSharpViewEngine(Action(Of IBuildsHostingEnvironment), String(), String, RenderingConfig, IFindsView)
+  fullName: ZptSharp.Mvc5.ZptSharpViewEngine.ZptSharpViewEngine(System.Action<ZptSharp.Hosting.IBuildsHostingEnvironment>, System.String[], System.String, ZptSharp.Config.RenderingConfig, ZptSharp.Mvc5.IFindsView)
+  fullName.vb: ZptSharp.Mvc5.ZptSharpViewEngine.ZptSharpViewEngine(System.Action(Of ZptSharp.Hosting.IBuildsHostingEnvironment), System.String(), System.String, ZptSharp.Config.RenderingConfig, ZptSharp.Mvc5.IFindsView)
+  nameWithType: ZptSharpViewEngine.ZptSharpViewEngine(Action<IBuildsHostingEnvironment>, String[], String, RenderingConfig, IFindsView)
+  nameWithType.vb: ZptSharpViewEngine.ZptSharpViewEngine(Action(Of IBuildsHostingEnvironment), String(), String, RenderingConfig, IFindsView)
 - uid: ZptSharp.Mvc5.ZptSharpViewEngine.#ctor*
   name: ZptSharpViewEngine
   href: api/ZptSharp.Mvc5.ZptSharpViewEngine.html#ZptSharp_Mvc5_ZptSharpViewEngine__ctor_
@@ -10741,15 +10577,15 @@ references:
   commentId: T:ZptSharp.MvcCore.ZptSharpViewEngine
   fullName: ZptSharp.MvcCore.ZptSharpViewEngine
   nameWithType: ZptSharpViewEngine
-- uid: ZptSharp.MvcCore.ZptSharpViewEngine.#ctor(System.Action{ZptSharp.Hosting.IBuildsSelfHostingEnvironment},System.String[],System.String,ZptSharp.Config.RenderingConfig,ZptSharp.MvcCore.ITestForFileExistence,ZptSharp.MvcCore.IFindsView)
-  name: ZptSharpViewEngine(Action<IBuildsSelfHostingEnvironment>, String[], String, RenderingConfig, ITestForFileExistence, IFindsView)
-  href: api/ZptSharp.MvcCore.ZptSharpViewEngine.html#ZptSharp_MvcCore_ZptSharpViewEngine__ctor_System_Action_ZptSharp_Hosting_IBuildsSelfHostingEnvironment__System_String___System_String_ZptSharp_Config_RenderingConfig_ZptSharp_MvcCore_ITestForFileExistence_ZptSharp_MvcCore_IFindsView_
-  commentId: M:ZptSharp.MvcCore.ZptSharpViewEngine.#ctor(System.Action{ZptSharp.Hosting.IBuildsSelfHostingEnvironment},System.String[],System.String,ZptSharp.Config.RenderingConfig,ZptSharp.MvcCore.ITestForFileExistence,ZptSharp.MvcCore.IFindsView)
-  name.vb: ZptSharpViewEngine(Action(Of IBuildsSelfHostingEnvironment), String(), String, RenderingConfig, ITestForFileExistence, IFindsView)
-  fullName: ZptSharp.MvcCore.ZptSharpViewEngine.ZptSharpViewEngine(System.Action<ZptSharp.Hosting.IBuildsSelfHostingEnvironment>, System.String[], System.String, ZptSharp.Config.RenderingConfig, ZptSharp.MvcCore.ITestForFileExistence, ZptSharp.MvcCore.IFindsView)
-  fullName.vb: ZptSharp.MvcCore.ZptSharpViewEngine.ZptSharpViewEngine(System.Action(Of ZptSharp.Hosting.IBuildsSelfHostingEnvironment), System.String(), System.String, ZptSharp.Config.RenderingConfig, ZptSharp.MvcCore.ITestForFileExistence, ZptSharp.MvcCore.IFindsView)
-  nameWithType: ZptSharpViewEngine.ZptSharpViewEngine(Action<IBuildsSelfHostingEnvironment>, String[], String, RenderingConfig, ITestForFileExistence, IFindsView)
-  nameWithType.vb: ZptSharpViewEngine.ZptSharpViewEngine(Action(Of IBuildsSelfHostingEnvironment), String(), String, RenderingConfig, ITestForFileExistence, IFindsView)
+- uid: ZptSharp.MvcCore.ZptSharpViewEngine.#ctor(System.Action{ZptSharp.Hosting.IBuildsHostingEnvironment},System.String[],System.String,ZptSharp.Config.RenderingConfig,ZptSharp.MvcCore.ITestForFileExistence,ZptSharp.MvcCore.IFindsView)
+  name: ZptSharpViewEngine(Action<IBuildsHostingEnvironment>, String[], String, RenderingConfig, ITestForFileExistence, IFindsView)
+  href: api/ZptSharp.MvcCore.ZptSharpViewEngine.html#ZptSharp_MvcCore_ZptSharpViewEngine__ctor_System_Action_ZptSharp_Hosting_IBuildsHostingEnvironment__System_String___System_String_ZptSharp_Config_RenderingConfig_ZptSharp_MvcCore_ITestForFileExistence_ZptSharp_MvcCore_IFindsView_
+  commentId: M:ZptSharp.MvcCore.ZptSharpViewEngine.#ctor(System.Action{ZptSharp.Hosting.IBuildsHostingEnvironment},System.String[],System.String,ZptSharp.Config.RenderingConfig,ZptSharp.MvcCore.ITestForFileExistence,ZptSharp.MvcCore.IFindsView)
+  name.vb: ZptSharpViewEngine(Action(Of IBuildsHostingEnvironment), String(), String, RenderingConfig, ITestForFileExistence, IFindsView)
+  fullName: ZptSharp.MvcCore.ZptSharpViewEngine.ZptSharpViewEngine(System.Action<ZptSharp.Hosting.IBuildsHostingEnvironment>, System.String[], System.String, ZptSharp.Config.RenderingConfig, ZptSharp.MvcCore.ITestForFileExistence, ZptSharp.MvcCore.IFindsView)
+  fullName.vb: ZptSharp.MvcCore.ZptSharpViewEngine.ZptSharpViewEngine(System.Action(Of ZptSharp.Hosting.IBuildsHostingEnvironment), System.String(), System.String, ZptSharp.Config.RenderingConfig, ZptSharp.MvcCore.ITestForFileExistence, ZptSharp.MvcCore.IFindsView)
+  nameWithType: ZptSharpViewEngine.ZptSharpViewEngine(Action<IBuildsHostingEnvironment>, String[], String, RenderingConfig, ITestForFileExistence, IFindsView)
+  nameWithType.vb: ZptSharpViewEngine.ZptSharpViewEngine(Action(Of IBuildsHostingEnvironment), String(), String, RenderingConfig, ITestForFileExistence, IFindsView)
 - uid: ZptSharp.MvcCore.ZptSharpViewEngine.#ctor*
   name: ZptSharpViewEngine
   href: api/ZptSharp.MvcCore.ZptSharpViewEngine.html#ZptSharp_MvcCore_ZptSharpViewEngine__ctor_
@@ -10820,44 +10656,25 @@ references:
   isSpec: "True"
   fullName: ZptSharp.NoMatchingReaderWriterException.NoMatchingReaderWriterException
   nameWithType: NoMatchingReaderWriterException.NoMatchingReaderWriterException
-- uid: ZptSharp.PythonServiceCollectionExtensions
-  name: PythonServiceCollectionExtensions
-  href: api/ZptSharp.PythonServiceCollectionExtensions.html
-  commentId: T:ZptSharp.PythonServiceCollectionExtensions
-  fullName: ZptSharp.PythonServiceCollectionExtensions
-  nameWithType: PythonServiceCollectionExtensions
-- uid: ZptSharp.PythonServiceCollectionExtensions.AddZptPythonExpressions(Microsoft.Extensions.DependencyInjection.IServiceCollection)
-  name: AddZptPythonExpressions(IServiceCollection)
-  href: api/ZptSharp.PythonServiceCollectionExtensions.html#ZptSharp_PythonServiceCollectionExtensions_AddZptPythonExpressions_Microsoft_Extensions_DependencyInjection_IServiceCollection_
-  commentId: M:ZptSharp.PythonServiceCollectionExtensions.AddZptPythonExpressions(Microsoft.Extensions.DependencyInjection.IServiceCollection)
-  fullName: ZptSharp.PythonServiceCollectionExtensions.AddZptPythonExpressions(Microsoft.Extensions.DependencyInjection.IServiceCollection)
-  nameWithType: PythonServiceCollectionExtensions.AddZptPythonExpressions(IServiceCollection)
-- uid: ZptSharp.PythonServiceCollectionExtensions.AddZptPythonExpressions(ZptSharp.Hosting.IBuildsSelfHostingEnvironment)
-  name: AddZptPythonExpressions(IBuildsSelfHostingEnvironment)
-  href: api/ZptSharp.PythonServiceCollectionExtensions.html#ZptSharp_PythonServiceCollectionExtensions_AddZptPythonExpressions_ZptSharp_Hosting_IBuildsSelfHostingEnvironment_
-  commentId: M:ZptSharp.PythonServiceCollectionExtensions.AddZptPythonExpressions(ZptSharp.Hosting.IBuildsSelfHostingEnvironment)
-  fullName: ZptSharp.PythonServiceCollectionExtensions.AddZptPythonExpressions(ZptSharp.Hosting.IBuildsSelfHostingEnvironment)
-  nameWithType: PythonServiceCollectionExtensions.AddZptPythonExpressions(IBuildsSelfHostingEnvironment)
-- uid: ZptSharp.PythonServiceCollectionExtensions.AddZptPythonExpressions*
+- uid: ZptSharp.PythonHostingBuilderExtensions
+  name: PythonHostingBuilderExtensions
+  href: api/ZptSharp.PythonHostingBuilderExtensions.html
+  commentId: T:ZptSharp.PythonHostingBuilderExtensions
+  fullName: ZptSharp.PythonHostingBuilderExtensions
+  nameWithType: PythonHostingBuilderExtensions
+- uid: ZptSharp.PythonHostingBuilderExtensions.AddZptPythonExpressions(ZptSharp.Hosting.IBuildsHostingEnvironment)
+  name: AddZptPythonExpressions(IBuildsHostingEnvironment)
+  href: api/ZptSharp.PythonHostingBuilderExtensions.html#ZptSharp_PythonHostingBuilderExtensions_AddZptPythonExpressions_ZptSharp_Hosting_IBuildsHostingEnvironment_
+  commentId: M:ZptSharp.PythonHostingBuilderExtensions.AddZptPythonExpressions(ZptSharp.Hosting.IBuildsHostingEnvironment)
+  fullName: ZptSharp.PythonHostingBuilderExtensions.AddZptPythonExpressions(ZptSharp.Hosting.IBuildsHostingEnvironment)
+  nameWithType: PythonHostingBuilderExtensions.AddZptPythonExpressions(IBuildsHostingEnvironment)
+- uid: ZptSharp.PythonHostingBuilderExtensions.AddZptPythonExpressions*
   name: AddZptPythonExpressions
-  href: api/ZptSharp.PythonServiceCollectionExtensions.html#ZptSharp_PythonServiceCollectionExtensions_AddZptPythonExpressions_
-  commentId: Overload:ZptSharp.PythonServiceCollectionExtensions.AddZptPythonExpressions
+  href: api/ZptSharp.PythonHostingBuilderExtensions.html#ZptSharp_PythonHostingBuilderExtensions_AddZptPythonExpressions_
+  commentId: Overload:ZptSharp.PythonHostingBuilderExtensions.AddZptPythonExpressions
   isSpec: "True"
-  fullName: ZptSharp.PythonServiceCollectionExtensions.AddZptPythonExpressions
-  nameWithType: PythonServiceCollectionExtensions.AddZptPythonExpressions
-- uid: ZptSharp.PythonServiceCollectionExtensions.UseZptPythonExpressions(System.IServiceProvider)
-  name: UseZptPythonExpressions(IServiceProvider)
-  href: api/ZptSharp.PythonServiceCollectionExtensions.html#ZptSharp_PythonServiceCollectionExtensions_UseZptPythonExpressions_System_IServiceProvider_
-  commentId: M:ZptSharp.PythonServiceCollectionExtensions.UseZptPythonExpressions(System.IServiceProvider)
-  fullName: ZptSharp.PythonServiceCollectionExtensions.UseZptPythonExpressions(System.IServiceProvider)
-  nameWithType: PythonServiceCollectionExtensions.UseZptPythonExpressions(IServiceProvider)
-- uid: ZptSharp.PythonServiceCollectionExtensions.UseZptPythonExpressions*
-  name: UseZptPythonExpressions
-  href: api/ZptSharp.PythonServiceCollectionExtensions.html#ZptSharp_PythonServiceCollectionExtensions_UseZptPythonExpressions_
-  commentId: Overload:ZptSharp.PythonServiceCollectionExtensions.UseZptPythonExpressions
-  isSpec: "True"
-  fullName: ZptSharp.PythonServiceCollectionExtensions.UseZptPythonExpressions
-  nameWithType: PythonServiceCollectionExtensions.UseZptPythonExpressions
+  fullName: ZptSharp.PythonHostingBuilderExtensions.AddZptPythonExpressions
+  nameWithType: PythonHostingBuilderExtensions.AddZptPythonExpressions
 - uid: ZptSharp.Rendering
   name: ZptSharp.Rendering
   href: api/ZptSharp.Rendering.html
@@ -12209,161 +12026,6 @@ references:
   isSpec: "True"
   fullName: ZptSharp.Rendering.ZptRequestRenderer.RenderAsync
   nameWithType: ZptRequestRenderer.RenderAsync
-- uid: ZptSharp.SelfHostingEnvironmentBuilderExtensions
-  name: SelfHostingEnvironmentBuilderExtensions
-  href: api/ZptSharp.SelfHostingEnvironmentBuilderExtensions.html
-  commentId: T:ZptSharp.SelfHostingEnvironmentBuilderExtensions
-  fullName: ZptSharp.SelfHostingEnvironmentBuilderExtensions
-  nameWithType: SelfHostingEnvironmentBuilderExtensions
-- uid: ZptSharp.SelfHostingEnvironmentBuilderExtensions.AddStandardZptExpressions(ZptSharp.Hosting.IBuildsSelfHostingEnvironment)
-  name: AddStandardZptExpressions(IBuildsSelfHostingEnvironment)
-  href: api/ZptSharp.SelfHostingEnvironmentBuilderExtensions.html#ZptSharp_SelfHostingEnvironmentBuilderExtensions_AddStandardZptExpressions_ZptSharp_Hosting_IBuildsSelfHostingEnvironment_
-  commentId: M:ZptSharp.SelfHostingEnvironmentBuilderExtensions.AddStandardZptExpressions(ZptSharp.Hosting.IBuildsSelfHostingEnvironment)
-  fullName: ZptSharp.SelfHostingEnvironmentBuilderExtensions.AddStandardZptExpressions(ZptSharp.Hosting.IBuildsSelfHostingEnvironment)
-  nameWithType: SelfHostingEnvironmentBuilderExtensions.AddStandardZptExpressions(IBuildsSelfHostingEnvironment)
-- uid: ZptSharp.SelfHostingEnvironmentBuilderExtensions.AddStandardZptExpressions*
-  name: AddStandardZptExpressions
-  href: api/ZptSharp.SelfHostingEnvironmentBuilderExtensions.html#ZptSharp_SelfHostingEnvironmentBuilderExtensions_AddStandardZptExpressions_
-  commentId: Overload:ZptSharp.SelfHostingEnvironmentBuilderExtensions.AddStandardZptExpressions
-  isSpec: "True"
-  fullName: ZptSharp.SelfHostingEnvironmentBuilderExtensions.AddStandardZptExpressions
-  nameWithType: SelfHostingEnvironmentBuilderExtensions.AddStandardZptExpressions
-- uid: ZptSharp.SelfHostingEnvironmentBuilderExtensions.AddZptNotExpressions(ZptSharp.Hosting.IBuildsSelfHostingEnvironment)
-  name: AddZptNotExpressions(IBuildsSelfHostingEnvironment)
-  href: api/ZptSharp.SelfHostingEnvironmentBuilderExtensions.html#ZptSharp_SelfHostingEnvironmentBuilderExtensions_AddZptNotExpressions_ZptSharp_Hosting_IBuildsSelfHostingEnvironment_
-  commentId: M:ZptSharp.SelfHostingEnvironmentBuilderExtensions.AddZptNotExpressions(ZptSharp.Hosting.IBuildsSelfHostingEnvironment)
-  fullName: ZptSharp.SelfHostingEnvironmentBuilderExtensions.AddZptNotExpressions(ZptSharp.Hosting.IBuildsSelfHostingEnvironment)
-  nameWithType: SelfHostingEnvironmentBuilderExtensions.AddZptNotExpressions(IBuildsSelfHostingEnvironment)
-- uid: ZptSharp.SelfHostingEnvironmentBuilderExtensions.AddZptNotExpressions*
-  name: AddZptNotExpressions
-  href: api/ZptSharp.SelfHostingEnvironmentBuilderExtensions.html#ZptSharp_SelfHostingEnvironmentBuilderExtensions_AddZptNotExpressions_
-  commentId: Overload:ZptSharp.SelfHostingEnvironmentBuilderExtensions.AddZptNotExpressions
-  isSpec: "True"
-  fullName: ZptSharp.SelfHostingEnvironmentBuilderExtensions.AddZptNotExpressions
-  nameWithType: SelfHostingEnvironmentBuilderExtensions.AddZptNotExpressions
-- uid: ZptSharp.SelfHostingEnvironmentBuilderExtensions.AddZptPathExpressions(ZptSharp.Hosting.IBuildsSelfHostingEnvironment)
-  name: AddZptPathExpressions(IBuildsSelfHostingEnvironment)
-  href: api/ZptSharp.SelfHostingEnvironmentBuilderExtensions.html#ZptSharp_SelfHostingEnvironmentBuilderExtensions_AddZptPathExpressions_ZptSharp_Hosting_IBuildsSelfHostingEnvironment_
-  commentId: M:ZptSharp.SelfHostingEnvironmentBuilderExtensions.AddZptPathExpressions(ZptSharp.Hosting.IBuildsSelfHostingEnvironment)
-  fullName: ZptSharp.SelfHostingEnvironmentBuilderExtensions.AddZptPathExpressions(ZptSharp.Hosting.IBuildsSelfHostingEnvironment)
-  nameWithType: SelfHostingEnvironmentBuilderExtensions.AddZptPathExpressions(IBuildsSelfHostingEnvironment)
-- uid: ZptSharp.SelfHostingEnvironmentBuilderExtensions.AddZptPathExpressions*
-  name: AddZptPathExpressions
-  href: api/ZptSharp.SelfHostingEnvironmentBuilderExtensions.html#ZptSharp_SelfHostingEnvironmentBuilderExtensions_AddZptPathExpressions_
-  commentId: Overload:ZptSharp.SelfHostingEnvironmentBuilderExtensions.AddZptPathExpressions
-  isSpec: "True"
-  fullName: ZptSharp.SelfHostingEnvironmentBuilderExtensions.AddZptPathExpressions
-  nameWithType: SelfHostingEnvironmentBuilderExtensions.AddZptPathExpressions
-- uid: ZptSharp.SelfHostingEnvironmentBuilderExtensions.AddZptPipeExpressions(ZptSharp.Hosting.IBuildsSelfHostingEnvironment)
-  name: AddZptPipeExpressions(IBuildsSelfHostingEnvironment)
-  href: api/ZptSharp.SelfHostingEnvironmentBuilderExtensions.html#ZptSharp_SelfHostingEnvironmentBuilderExtensions_AddZptPipeExpressions_ZptSharp_Hosting_IBuildsSelfHostingEnvironment_
-  commentId: M:ZptSharp.SelfHostingEnvironmentBuilderExtensions.AddZptPipeExpressions(ZptSharp.Hosting.IBuildsSelfHostingEnvironment)
-  fullName: ZptSharp.SelfHostingEnvironmentBuilderExtensions.AddZptPipeExpressions(ZptSharp.Hosting.IBuildsSelfHostingEnvironment)
-  nameWithType: SelfHostingEnvironmentBuilderExtensions.AddZptPipeExpressions(IBuildsSelfHostingEnvironment)
-- uid: ZptSharp.SelfHostingEnvironmentBuilderExtensions.AddZptPipeExpressions*
-  name: AddZptPipeExpressions
-  href: api/ZptSharp.SelfHostingEnvironmentBuilderExtensions.html#ZptSharp_SelfHostingEnvironmentBuilderExtensions_AddZptPipeExpressions_
-  commentId: Overload:ZptSharp.SelfHostingEnvironmentBuilderExtensions.AddZptPipeExpressions
-  isSpec: "True"
-  fullName: ZptSharp.SelfHostingEnvironmentBuilderExtensions.AddZptPipeExpressions
-  nameWithType: SelfHostingEnvironmentBuilderExtensions.AddZptPipeExpressions
-- uid: ZptSharp.SelfHostingEnvironmentBuilderExtensions.AddZptStringExpressions(ZptSharp.Hosting.IBuildsSelfHostingEnvironment)
-  name: AddZptStringExpressions(IBuildsSelfHostingEnvironment)
-  href: api/ZptSharp.SelfHostingEnvironmentBuilderExtensions.html#ZptSharp_SelfHostingEnvironmentBuilderExtensions_AddZptStringExpressions_ZptSharp_Hosting_IBuildsSelfHostingEnvironment_
-  commentId: M:ZptSharp.SelfHostingEnvironmentBuilderExtensions.AddZptStringExpressions(ZptSharp.Hosting.IBuildsSelfHostingEnvironment)
-  fullName: ZptSharp.SelfHostingEnvironmentBuilderExtensions.AddZptStringExpressions(ZptSharp.Hosting.IBuildsSelfHostingEnvironment)
-  nameWithType: SelfHostingEnvironmentBuilderExtensions.AddZptStringExpressions(IBuildsSelfHostingEnvironment)
-- uid: ZptSharp.SelfHostingEnvironmentBuilderExtensions.AddZptStringExpressions*
-  name: AddZptStringExpressions
-  href: api/ZptSharp.SelfHostingEnvironmentBuilderExtensions.html#ZptSharp_SelfHostingEnvironmentBuilderExtensions_AddZptStringExpressions_
-  commentId: Overload:ZptSharp.SelfHostingEnvironmentBuilderExtensions.AddZptStringExpressions
-  isSpec: "True"
-  fullName: ZptSharp.SelfHostingEnvironmentBuilderExtensions.AddZptStringExpressions
-  nameWithType: SelfHostingEnvironmentBuilderExtensions.AddZptStringExpressions
-- uid: ZptSharp.ServiceCollectionExtensions
-  name: ServiceCollectionExtensions
-  href: api/ZptSharp.ServiceCollectionExtensions.html
-  commentId: T:ZptSharp.ServiceCollectionExtensions
-  fullName: ZptSharp.ServiceCollectionExtensions
-  nameWithType: ServiceCollectionExtensions
-- uid: ZptSharp.ServiceCollectionExtensions.AddZptSharp(Microsoft.Extensions.DependencyInjection.IServiceCollection)
-  name: AddZptSharp(IServiceCollection)
-  href: api/ZptSharp.ServiceCollectionExtensions.html#ZptSharp_ServiceCollectionExtensions_AddZptSharp_Microsoft_Extensions_DependencyInjection_IServiceCollection_
-  commentId: M:ZptSharp.ServiceCollectionExtensions.AddZptSharp(Microsoft.Extensions.DependencyInjection.IServiceCollection)
-  fullName: ZptSharp.ServiceCollectionExtensions.AddZptSharp(Microsoft.Extensions.DependencyInjection.IServiceCollection)
-  nameWithType: ServiceCollectionExtensions.AddZptSharp(IServiceCollection)
-- uid: ZptSharp.ServiceCollectionExtensions.AddZptSharp*
-  name: AddZptSharp
-  href: api/ZptSharp.ServiceCollectionExtensions.html#ZptSharp_ServiceCollectionExtensions_AddZptSharp_
-  commentId: Overload:ZptSharp.ServiceCollectionExtensions.AddZptSharp
-  isSpec: "True"
-  fullName: ZptSharp.ServiceCollectionExtensions.AddZptSharp
-  nameWithType: ServiceCollectionExtensions.AddZptSharp
-- uid: ZptSharp.ServiceCollectionExtensions.UseStandardZptExpressions(System.IServiceProvider)
-  name: UseStandardZptExpressions(IServiceProvider)
-  href: api/ZptSharp.ServiceCollectionExtensions.html#ZptSharp_ServiceCollectionExtensions_UseStandardZptExpressions_System_IServiceProvider_
-  commentId: M:ZptSharp.ServiceCollectionExtensions.UseStandardZptExpressions(System.IServiceProvider)
-  fullName: ZptSharp.ServiceCollectionExtensions.UseStandardZptExpressions(System.IServiceProvider)
-  nameWithType: ServiceCollectionExtensions.UseStandardZptExpressions(IServiceProvider)
-- uid: ZptSharp.ServiceCollectionExtensions.UseStandardZptExpressions*
-  name: UseStandardZptExpressions
-  href: api/ZptSharp.ServiceCollectionExtensions.html#ZptSharp_ServiceCollectionExtensions_UseStandardZptExpressions_
-  commentId: Overload:ZptSharp.ServiceCollectionExtensions.UseStandardZptExpressions
-  isSpec: "True"
-  fullName: ZptSharp.ServiceCollectionExtensions.UseStandardZptExpressions
-  nameWithType: ServiceCollectionExtensions.UseStandardZptExpressions
-- uid: ZptSharp.ServiceCollectionExtensions.UseZptNotExpressions(System.IServiceProvider)
-  name: UseZptNotExpressions(IServiceProvider)
-  href: api/ZptSharp.ServiceCollectionExtensions.html#ZptSharp_ServiceCollectionExtensions_UseZptNotExpressions_System_IServiceProvider_
-  commentId: M:ZptSharp.ServiceCollectionExtensions.UseZptNotExpressions(System.IServiceProvider)
-  fullName: ZptSharp.ServiceCollectionExtensions.UseZptNotExpressions(System.IServiceProvider)
-  nameWithType: ServiceCollectionExtensions.UseZptNotExpressions(IServiceProvider)
-- uid: ZptSharp.ServiceCollectionExtensions.UseZptNotExpressions*
-  name: UseZptNotExpressions
-  href: api/ZptSharp.ServiceCollectionExtensions.html#ZptSharp_ServiceCollectionExtensions_UseZptNotExpressions_
-  commentId: Overload:ZptSharp.ServiceCollectionExtensions.UseZptNotExpressions
-  isSpec: "True"
-  fullName: ZptSharp.ServiceCollectionExtensions.UseZptNotExpressions
-  nameWithType: ServiceCollectionExtensions.UseZptNotExpressions
-- uid: ZptSharp.ServiceCollectionExtensions.UseZptPathExpressions(System.IServiceProvider)
-  name: UseZptPathExpressions(IServiceProvider)
-  href: api/ZptSharp.ServiceCollectionExtensions.html#ZptSharp_ServiceCollectionExtensions_UseZptPathExpressions_System_IServiceProvider_
-  commentId: M:ZptSharp.ServiceCollectionExtensions.UseZptPathExpressions(System.IServiceProvider)
-  fullName: ZptSharp.ServiceCollectionExtensions.UseZptPathExpressions(System.IServiceProvider)
-  nameWithType: ServiceCollectionExtensions.UseZptPathExpressions(IServiceProvider)
-- uid: ZptSharp.ServiceCollectionExtensions.UseZptPathExpressions*
-  name: UseZptPathExpressions
-  href: api/ZptSharp.ServiceCollectionExtensions.html#ZptSharp_ServiceCollectionExtensions_UseZptPathExpressions_
-  commentId: Overload:ZptSharp.ServiceCollectionExtensions.UseZptPathExpressions
-  isSpec: "True"
-  fullName: ZptSharp.ServiceCollectionExtensions.UseZptPathExpressions
-  nameWithType: ServiceCollectionExtensions.UseZptPathExpressions
-- uid: ZptSharp.ServiceCollectionExtensions.UseZptPipeExpressions(System.IServiceProvider)
-  name: UseZptPipeExpressions(IServiceProvider)
-  href: api/ZptSharp.ServiceCollectionExtensions.html#ZptSharp_ServiceCollectionExtensions_UseZptPipeExpressions_System_IServiceProvider_
-  commentId: M:ZptSharp.ServiceCollectionExtensions.UseZptPipeExpressions(System.IServiceProvider)
-  fullName: ZptSharp.ServiceCollectionExtensions.UseZptPipeExpressions(System.IServiceProvider)
-  nameWithType: ServiceCollectionExtensions.UseZptPipeExpressions(IServiceProvider)
-- uid: ZptSharp.ServiceCollectionExtensions.UseZptPipeExpressions*
-  name: UseZptPipeExpressions
-  href: api/ZptSharp.ServiceCollectionExtensions.html#ZptSharp_ServiceCollectionExtensions_UseZptPipeExpressions_
-  commentId: Overload:ZptSharp.ServiceCollectionExtensions.UseZptPipeExpressions
-  isSpec: "True"
-  fullName: ZptSharp.ServiceCollectionExtensions.UseZptPipeExpressions
-  nameWithType: ServiceCollectionExtensions.UseZptPipeExpressions
-- uid: ZptSharp.ServiceCollectionExtensions.UseZptStringExpressions(System.IServiceProvider)
-  name: UseZptStringExpressions(IServiceProvider)
-  href: api/ZptSharp.ServiceCollectionExtensions.html#ZptSharp_ServiceCollectionExtensions_UseZptStringExpressions_System_IServiceProvider_
-  commentId: M:ZptSharp.ServiceCollectionExtensions.UseZptStringExpressions(System.IServiceProvider)
-  fullName: ZptSharp.ServiceCollectionExtensions.UseZptStringExpressions(System.IServiceProvider)
-  nameWithType: ServiceCollectionExtensions.UseZptStringExpressions(IServiceProvider)
-- uid: ZptSharp.ServiceCollectionExtensions.UseZptStringExpressions*
-  name: UseZptStringExpressions
-  href: api/ZptSharp.ServiceCollectionExtensions.html#ZptSharp_ServiceCollectionExtensions_UseZptStringExpressions_
-  commentId: Overload:ZptSharp.ServiceCollectionExtensions.UseZptStringExpressions
-  isSpec: "True"
-  fullName: ZptSharp.ServiceCollectionExtensions.UseZptStringExpressions
-  nameWithType: ServiceCollectionExtensions.UseZptStringExpressions
 - uid: ZptSharp.SourceAnnotation
   name: ZptSharp.SourceAnnotation
   href: api/ZptSharp.SourceAnnotation.html
@@ -14222,44 +13884,25 @@ references:
   isSpec: "True"
   fullName: ZptSharp.TemplateDirectory.Path
   nameWithType: TemplateDirectory.Path
-- uid: ZptSharp.XmlServiceCollectionExtensions
-  name: XmlServiceCollectionExtensions
-  href: api/ZptSharp.XmlServiceCollectionExtensions.html
-  commentId: T:ZptSharp.XmlServiceCollectionExtensions
-  fullName: ZptSharp.XmlServiceCollectionExtensions
-  nameWithType: XmlServiceCollectionExtensions
-- uid: ZptSharp.XmlServiceCollectionExtensions.AddXmlZptDocuments(Microsoft.Extensions.DependencyInjection.IServiceCollection)
-  name: AddXmlZptDocuments(IServiceCollection)
-  href: api/ZptSharp.XmlServiceCollectionExtensions.html#ZptSharp_XmlServiceCollectionExtensions_AddXmlZptDocuments_Microsoft_Extensions_DependencyInjection_IServiceCollection_
-  commentId: M:ZptSharp.XmlServiceCollectionExtensions.AddXmlZptDocuments(Microsoft.Extensions.DependencyInjection.IServiceCollection)
-  fullName: ZptSharp.XmlServiceCollectionExtensions.AddXmlZptDocuments(Microsoft.Extensions.DependencyInjection.IServiceCollection)
-  nameWithType: XmlServiceCollectionExtensions.AddXmlZptDocuments(IServiceCollection)
-- uid: ZptSharp.XmlServiceCollectionExtensions.AddXmlZptDocuments(ZptSharp.Hosting.IBuildsSelfHostingEnvironment)
-  name: AddXmlZptDocuments(IBuildsSelfHostingEnvironment)
-  href: api/ZptSharp.XmlServiceCollectionExtensions.html#ZptSharp_XmlServiceCollectionExtensions_AddXmlZptDocuments_ZptSharp_Hosting_IBuildsSelfHostingEnvironment_
-  commentId: M:ZptSharp.XmlServiceCollectionExtensions.AddXmlZptDocuments(ZptSharp.Hosting.IBuildsSelfHostingEnvironment)
-  fullName: ZptSharp.XmlServiceCollectionExtensions.AddXmlZptDocuments(ZptSharp.Hosting.IBuildsSelfHostingEnvironment)
-  nameWithType: XmlServiceCollectionExtensions.AddXmlZptDocuments(IBuildsSelfHostingEnvironment)
-- uid: ZptSharp.XmlServiceCollectionExtensions.AddXmlZptDocuments*
+- uid: ZptSharp.XmlHostingBuilderExtensions
+  name: XmlHostingBuilderExtensions
+  href: api/ZptSharp.XmlHostingBuilderExtensions.html
+  commentId: T:ZptSharp.XmlHostingBuilderExtensions
+  fullName: ZptSharp.XmlHostingBuilderExtensions
+  nameWithType: XmlHostingBuilderExtensions
+- uid: ZptSharp.XmlHostingBuilderExtensions.AddXmlZptDocuments(ZptSharp.Hosting.IBuildsHostingEnvironment)
+  name: AddXmlZptDocuments(IBuildsHostingEnvironment)
+  href: api/ZptSharp.XmlHostingBuilderExtensions.html#ZptSharp_XmlHostingBuilderExtensions_AddXmlZptDocuments_ZptSharp_Hosting_IBuildsHostingEnvironment_
+  commentId: M:ZptSharp.XmlHostingBuilderExtensions.AddXmlZptDocuments(ZptSharp.Hosting.IBuildsHostingEnvironment)
+  fullName: ZptSharp.XmlHostingBuilderExtensions.AddXmlZptDocuments(ZptSharp.Hosting.IBuildsHostingEnvironment)
+  nameWithType: XmlHostingBuilderExtensions.AddXmlZptDocuments(IBuildsHostingEnvironment)
+- uid: ZptSharp.XmlHostingBuilderExtensions.AddXmlZptDocuments*
   name: AddXmlZptDocuments
-  href: api/ZptSharp.XmlServiceCollectionExtensions.html#ZptSharp_XmlServiceCollectionExtensions_AddXmlZptDocuments_
-  commentId: Overload:ZptSharp.XmlServiceCollectionExtensions.AddXmlZptDocuments
+  href: api/ZptSharp.XmlHostingBuilderExtensions.html#ZptSharp_XmlHostingBuilderExtensions_AddXmlZptDocuments_
+  commentId: Overload:ZptSharp.XmlHostingBuilderExtensions.AddXmlZptDocuments
   isSpec: "True"
-  fullName: ZptSharp.XmlServiceCollectionExtensions.AddXmlZptDocuments
-  nameWithType: XmlServiceCollectionExtensions.AddXmlZptDocuments
-- uid: ZptSharp.XmlServiceCollectionExtensions.UseXmlZptDocuments(System.IServiceProvider)
-  name: UseXmlZptDocuments(IServiceProvider)
-  href: api/ZptSharp.XmlServiceCollectionExtensions.html#ZptSharp_XmlServiceCollectionExtensions_UseXmlZptDocuments_System_IServiceProvider_
-  commentId: M:ZptSharp.XmlServiceCollectionExtensions.UseXmlZptDocuments(System.IServiceProvider)
-  fullName: ZptSharp.XmlServiceCollectionExtensions.UseXmlZptDocuments(System.IServiceProvider)
-  nameWithType: XmlServiceCollectionExtensions.UseXmlZptDocuments(IServiceProvider)
-- uid: ZptSharp.XmlServiceCollectionExtensions.UseXmlZptDocuments*
-  name: UseXmlZptDocuments
-  href: api/ZptSharp.XmlServiceCollectionExtensions.html#ZptSharp_XmlServiceCollectionExtensions_UseXmlZptDocuments_
-  commentId: Overload:ZptSharp.XmlServiceCollectionExtensions.UseXmlZptDocuments
-  isSpec: "True"
-  fullName: ZptSharp.XmlServiceCollectionExtensions.UseXmlZptDocuments
-  nameWithType: XmlServiceCollectionExtensions.UseXmlZptDocuments
+  fullName: ZptSharp.XmlHostingBuilderExtensions.AddXmlZptDocuments
+  nameWithType: XmlHostingBuilderExtensions.AddXmlZptDocuments
 - uid: ZptSharp.ZptDocumentRenderer
   name: ZptDocumentRenderer
   href: api/ZptSharp.ZptDocumentRenderer.html
@@ -14367,15 +14010,15 @@ references:
   commentId: T:ZptSharp.ZptSharpHost
   fullName: ZptSharp.ZptSharpHost
   nameWithType: ZptSharpHost
-- uid: ZptSharp.ZptSharpHost.GetHost(System.Action{ZptSharp.Hosting.IBuildsSelfHostingEnvironment})
-  name: GetHost(Action<IBuildsSelfHostingEnvironment>)
-  href: api/ZptSharp.ZptSharpHost.html#ZptSharp_ZptSharpHost_GetHost_System_Action_ZptSharp_Hosting_IBuildsSelfHostingEnvironment__
-  commentId: M:ZptSharp.ZptSharpHost.GetHost(System.Action{ZptSharp.Hosting.IBuildsSelfHostingEnvironment})
-  name.vb: GetHost(Action(Of IBuildsSelfHostingEnvironment))
-  fullName: ZptSharp.ZptSharpHost.GetHost(System.Action<ZptSharp.Hosting.IBuildsSelfHostingEnvironment>)
-  fullName.vb: ZptSharp.ZptSharpHost.GetHost(System.Action(Of ZptSharp.Hosting.IBuildsSelfHostingEnvironment))
-  nameWithType: ZptSharpHost.GetHost(Action<IBuildsSelfHostingEnvironment>)
-  nameWithType.vb: ZptSharpHost.GetHost(Action(Of IBuildsSelfHostingEnvironment))
+- uid: ZptSharp.ZptSharpHost.GetHost(System.Action{ZptSharp.Hosting.IBuildsHostingEnvironment})
+  name: GetHost(Action<IBuildsHostingEnvironment>)
+  href: api/ZptSharp.ZptSharpHost.html#ZptSharp_ZptSharpHost_GetHost_System_Action_ZptSharp_Hosting_IBuildsHostingEnvironment__
+  commentId: M:ZptSharp.ZptSharpHost.GetHost(System.Action{ZptSharp.Hosting.IBuildsHostingEnvironment})
+  name.vb: GetHost(Action(Of IBuildsHostingEnvironment))
+  fullName: ZptSharp.ZptSharpHost.GetHost(System.Action<ZptSharp.Hosting.IBuildsHostingEnvironment>)
+  fullName.vb: ZptSharp.ZptSharpHost.GetHost(System.Action(Of ZptSharp.Hosting.IBuildsHostingEnvironment))
+  nameWithType: ZptSharpHost.GetHost(Action<IBuildsHostingEnvironment>)
+  nameWithType.vb: ZptSharpHost.GetHost(Action(Of IBuildsHostingEnvironment))
 - uid: ZptSharp.ZptSharpHost.GetHost*
   name: GetHost
   href: api/ZptSharp.ZptSharpHost.html#ZptSharp_ZptSharpHost_GetHost_
@@ -14383,3 +14026,93 @@ references:
   isSpec: "True"
   fullName: ZptSharp.ZptSharpHost.GetHost
   nameWithType: ZptSharpHost.GetHost
+- uid: ZptSharp.ZptSharpHostingBuilderExtensions
+  name: ZptSharpHostingBuilderExtensions
+  href: api/ZptSharp.ZptSharpHostingBuilderExtensions.html
+  commentId: T:ZptSharp.ZptSharpHostingBuilderExtensions
+  fullName: ZptSharp.ZptSharpHostingBuilderExtensions
+  nameWithType: ZptSharpHostingBuilderExtensions
+- uid: ZptSharp.ZptSharpHostingBuilderExtensions.AddStandardZptExpressions(ZptSharp.Hosting.IBuildsHostingEnvironment)
+  name: AddStandardZptExpressions(IBuildsHostingEnvironment)
+  href: api/ZptSharp.ZptSharpHostingBuilderExtensions.html#ZptSharp_ZptSharpHostingBuilderExtensions_AddStandardZptExpressions_ZptSharp_Hosting_IBuildsHostingEnvironment_
+  commentId: M:ZptSharp.ZptSharpHostingBuilderExtensions.AddStandardZptExpressions(ZptSharp.Hosting.IBuildsHostingEnvironment)
+  fullName: ZptSharp.ZptSharpHostingBuilderExtensions.AddStandardZptExpressions(ZptSharp.Hosting.IBuildsHostingEnvironment)
+  nameWithType: ZptSharpHostingBuilderExtensions.AddStandardZptExpressions(IBuildsHostingEnvironment)
+- uid: ZptSharp.ZptSharpHostingBuilderExtensions.AddStandardZptExpressions*
+  name: AddStandardZptExpressions
+  href: api/ZptSharp.ZptSharpHostingBuilderExtensions.html#ZptSharp_ZptSharpHostingBuilderExtensions_AddStandardZptExpressions_
+  commentId: Overload:ZptSharp.ZptSharpHostingBuilderExtensions.AddStandardZptExpressions
+  isSpec: "True"
+  fullName: ZptSharp.ZptSharpHostingBuilderExtensions.AddStandardZptExpressions
+  nameWithType: ZptSharpHostingBuilderExtensions.AddStandardZptExpressions
+- uid: ZptSharp.ZptSharpHostingBuilderExtensions.AddZptNotExpressions(ZptSharp.Hosting.IBuildsHostingEnvironment)
+  name: AddZptNotExpressions(IBuildsHostingEnvironment)
+  href: api/ZptSharp.ZptSharpHostingBuilderExtensions.html#ZptSharp_ZptSharpHostingBuilderExtensions_AddZptNotExpressions_ZptSharp_Hosting_IBuildsHostingEnvironment_
+  commentId: M:ZptSharp.ZptSharpHostingBuilderExtensions.AddZptNotExpressions(ZptSharp.Hosting.IBuildsHostingEnvironment)
+  fullName: ZptSharp.ZptSharpHostingBuilderExtensions.AddZptNotExpressions(ZptSharp.Hosting.IBuildsHostingEnvironment)
+  nameWithType: ZptSharpHostingBuilderExtensions.AddZptNotExpressions(IBuildsHostingEnvironment)
+- uid: ZptSharp.ZptSharpHostingBuilderExtensions.AddZptNotExpressions*
+  name: AddZptNotExpressions
+  href: api/ZptSharp.ZptSharpHostingBuilderExtensions.html#ZptSharp_ZptSharpHostingBuilderExtensions_AddZptNotExpressions_
+  commentId: Overload:ZptSharp.ZptSharpHostingBuilderExtensions.AddZptNotExpressions
+  isSpec: "True"
+  fullName: ZptSharp.ZptSharpHostingBuilderExtensions.AddZptNotExpressions
+  nameWithType: ZptSharpHostingBuilderExtensions.AddZptNotExpressions
+- uid: ZptSharp.ZptSharpHostingBuilderExtensions.AddZptPathExpressions(ZptSharp.Hosting.IBuildsHostingEnvironment)
+  name: AddZptPathExpressions(IBuildsHostingEnvironment)
+  href: api/ZptSharp.ZptSharpHostingBuilderExtensions.html#ZptSharp_ZptSharpHostingBuilderExtensions_AddZptPathExpressions_ZptSharp_Hosting_IBuildsHostingEnvironment_
+  commentId: M:ZptSharp.ZptSharpHostingBuilderExtensions.AddZptPathExpressions(ZptSharp.Hosting.IBuildsHostingEnvironment)
+  fullName: ZptSharp.ZptSharpHostingBuilderExtensions.AddZptPathExpressions(ZptSharp.Hosting.IBuildsHostingEnvironment)
+  nameWithType: ZptSharpHostingBuilderExtensions.AddZptPathExpressions(IBuildsHostingEnvironment)
+- uid: ZptSharp.ZptSharpHostingBuilderExtensions.AddZptPathExpressions*
+  name: AddZptPathExpressions
+  href: api/ZptSharp.ZptSharpHostingBuilderExtensions.html#ZptSharp_ZptSharpHostingBuilderExtensions_AddZptPathExpressions_
+  commentId: Overload:ZptSharp.ZptSharpHostingBuilderExtensions.AddZptPathExpressions
+  isSpec: "True"
+  fullName: ZptSharp.ZptSharpHostingBuilderExtensions.AddZptPathExpressions
+  nameWithType: ZptSharpHostingBuilderExtensions.AddZptPathExpressions
+- uid: ZptSharp.ZptSharpHostingBuilderExtensions.AddZptPipeExpressions(ZptSharp.Hosting.IBuildsHostingEnvironment)
+  name: AddZptPipeExpressions(IBuildsHostingEnvironment)
+  href: api/ZptSharp.ZptSharpHostingBuilderExtensions.html#ZptSharp_ZptSharpHostingBuilderExtensions_AddZptPipeExpressions_ZptSharp_Hosting_IBuildsHostingEnvironment_
+  commentId: M:ZptSharp.ZptSharpHostingBuilderExtensions.AddZptPipeExpressions(ZptSharp.Hosting.IBuildsHostingEnvironment)
+  fullName: ZptSharp.ZptSharpHostingBuilderExtensions.AddZptPipeExpressions(ZptSharp.Hosting.IBuildsHostingEnvironment)
+  nameWithType: ZptSharpHostingBuilderExtensions.AddZptPipeExpressions(IBuildsHostingEnvironment)
+- uid: ZptSharp.ZptSharpHostingBuilderExtensions.AddZptPipeExpressions*
+  name: AddZptPipeExpressions
+  href: api/ZptSharp.ZptSharpHostingBuilderExtensions.html#ZptSharp_ZptSharpHostingBuilderExtensions_AddZptPipeExpressions_
+  commentId: Overload:ZptSharp.ZptSharpHostingBuilderExtensions.AddZptPipeExpressions
+  isSpec: "True"
+  fullName: ZptSharp.ZptSharpHostingBuilderExtensions.AddZptPipeExpressions
+  nameWithType: ZptSharpHostingBuilderExtensions.AddZptPipeExpressions
+- uid: ZptSharp.ZptSharpHostingBuilderExtensions.AddZptStringExpressions(ZptSharp.Hosting.IBuildsHostingEnvironment)
+  name: AddZptStringExpressions(IBuildsHostingEnvironment)
+  href: api/ZptSharp.ZptSharpHostingBuilderExtensions.html#ZptSharp_ZptSharpHostingBuilderExtensions_AddZptStringExpressions_ZptSharp_Hosting_IBuildsHostingEnvironment_
+  commentId: M:ZptSharp.ZptSharpHostingBuilderExtensions.AddZptStringExpressions(ZptSharp.Hosting.IBuildsHostingEnvironment)
+  fullName: ZptSharp.ZptSharpHostingBuilderExtensions.AddZptStringExpressions(ZptSharp.Hosting.IBuildsHostingEnvironment)
+  nameWithType: ZptSharpHostingBuilderExtensions.AddZptStringExpressions(IBuildsHostingEnvironment)
+- uid: ZptSharp.ZptSharpHostingBuilderExtensions.AddZptStringExpressions*
+  name: AddZptStringExpressions
+  href: api/ZptSharp.ZptSharpHostingBuilderExtensions.html#ZptSharp_ZptSharpHostingBuilderExtensions_AddZptStringExpressions_
+  commentId: Overload:ZptSharp.ZptSharpHostingBuilderExtensions.AddZptStringExpressions
+  isSpec: "True"
+  fullName: ZptSharp.ZptSharpHostingBuilderExtensions.AddZptStringExpressions
+  nameWithType: ZptSharpHostingBuilderExtensions.AddZptStringExpressions
+- uid: ZptSharp.ZptSharpServiceCollectionExtensions
+  name: ZptSharpServiceCollectionExtensions
+  href: api/ZptSharp.ZptSharpServiceCollectionExtensions.html
+  commentId: T:ZptSharp.ZptSharpServiceCollectionExtensions
+  fullName: ZptSharp.ZptSharpServiceCollectionExtensions
+  nameWithType: ZptSharpServiceCollectionExtensions
+- uid: ZptSharp.ZptSharpServiceCollectionExtensions.AddZptSharp(Microsoft.Extensions.DependencyInjection.IServiceCollection)
+  name: AddZptSharp(IServiceCollection)
+  href: api/ZptSharp.ZptSharpServiceCollectionExtensions.html#ZptSharp_ZptSharpServiceCollectionExtensions_AddZptSharp_Microsoft_Extensions_DependencyInjection_IServiceCollection_
+  commentId: M:ZptSharp.ZptSharpServiceCollectionExtensions.AddZptSharp(Microsoft.Extensions.DependencyInjection.IServiceCollection)
+  fullName: ZptSharp.ZptSharpServiceCollectionExtensions.AddZptSharp(Microsoft.Extensions.DependencyInjection.IServiceCollection)
+  nameWithType: ZptSharpServiceCollectionExtensions.AddZptSharp(IServiceCollection)
+- uid: ZptSharp.ZptSharpServiceCollectionExtensions.AddZptSharp*
+  name: AddZptSharp
+  href: api/ZptSharp.ZptSharpServiceCollectionExtensions.html#ZptSharp_ZptSharpServiceCollectionExtensions_AddZptSharp_
+  commentId: Overload:ZptSharp.ZptSharpServiceCollectionExtensions.AddZptSharp
+  isSpec: "True"
+  fullName: ZptSharp.ZptSharpServiceCollectionExtensions.AddZptSharp
+  nameWithType: ZptSharpServiceCollectionExtensions.AddZptSharp

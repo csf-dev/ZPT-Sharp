@@ -5,9 +5,9 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title> </title>
+    <title>Dependency injection setup </title>
     <meta name="viewport" content="width=device-width">
-    <meta name="title" content=" ">
+    <meta name="title" content="Dependency injection setup ">
     <meta name="generator" content="docfx 2.56.6.0">
     
     <link rel="shortcut icon" href="../favicon.ico">
@@ -67,7 +67,62 @@
         <div class="article row grid-right">
           <div class="col-md-10">
             <article class="content wrap" id="_content" data-uid="">
+<h1 id="dependency-injection-setup">Dependency injection setup</h1>
 
+<p>The recommended way to consume ZptSharp from your own application is to integrate it with your dependency injection configuration.
+There are two steps to this:</p>
+<ol>
+<li>Register ZptSharp services with an <code>IServiceCollection</code></li>
+<li>Set-up the appropriate services with the <code>IServiceProvider</code></li>
+</ol>
+<p>Both of these tasks is performed using <em>extension methods</em> in the <code>ZptSharp</code> namespace.</p>
+<h2 id="registering-services">Registering services</h2>
+<p>These are the extension methods for <code>IServiceCollection</code>, used to add the ZptSharp services to the service collection.
+Each registers a specific set of services with that service collection.
+Of these, the only one which is fully mandatory is <code>AddZptSharp</code>.
+For a usable ZptSharp environment, developers <em>must also add one of the three document providers</em> as well.
+Some expression evaluators are included within the ZptSharp core, so additional ones need be added only if they are required.</p>
+<table>
+<thead>
+<tr>
+<th>Method</th>
+<th>NuGet Package</th>
+<th>Summary</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="xref:ZptSharp.ServiceCollectionExtensions.AddZptSharp(Microsoft.Extensions.DependencyInjection.IServiceCollection)"><code>AddZptSharp</code></a></td>
+<td>ZptSharp.Impl</td>
+<td>Adds the ZptSharp core logic</td>
+</tr>
+<tr>
+<td><a href="xref:ZptSharp.AngleSharpServiceCollectionExtensions.AddAngleSharpZptDocuments(Microsoft.Extensions.DependencyInjection.IServiceCollection)"><code>AddAngleSharpZptDocuments</code></a></td>
+<td>ZptSharp.AngleSharp</td>
+<td>Adds the AngleSharp document provider</td>
+</tr>
+<tr>
+<td><a href="xref:ZptSharp.HapServiceCollectionExtensions.AddHapZptDocuments(Microsoft.Extensions.DependencyInjection.IServiceCollection)"><code>AddHapZptDocuments</code></a></td>
+<td>ZptSharp.HtmlAgilityPack</td>
+<td>Adds the HTML Agility Pack document provider</td>
+</tr>
+<tr>
+<td><a href="xref:ZptSharp.XmlServiceCollectionExtensions.AddXmlZptDocuments(Microsoft.Extensions.DependencyInjection.IServiceCollection)"><code>AddXmlZptDocuments</code></a></td>
+<td>ZptSharp.Xml</td>
+<td>Adds the XML document provider</td>
+</tr>
+<tr>
+<td><a href="xref:ZptSharp.CSharpServiceCollectionExtensions.AddZptCSharpExpressions(Microsoft.Extensions.DependencyInjection.IServiceCollection)"><code>AddZptCSharpExpressions</code></a></td>
+<td>ZptSharp.CSharpExpressions</td>
+<td>Adds the C# expression evaluator</td>
+</tr>
+<tr>
+<td><a href="xref:ZptSharp.PythonServiceCollectionExtensions.AddZptPythonExpressions(Microsoft.Extensions.DependencyInjection.IServiceCollection)"><code>AddZptPythonExpressions</code></a></td>
+<td>ZptSharp.PythonExpressions</td>
+<td>Adds the Python expression evaluator</td>
+</tr>
+</tbody>
+</table>
 </article>
           </div>
           

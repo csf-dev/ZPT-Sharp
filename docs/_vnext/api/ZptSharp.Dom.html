@@ -111,10 +111,9 @@ of some boilerplate logic related to the validation of parameters and raising an
 is to be cancelled.</p>
 </section>
       <h4><a class="xref" href="ZptSharp.Dom.DocumentReaderWriterRegistry.html">DocumentReaderWriterRegistry</a></h4>
-      <section><p>An in-memory implementation of both <a class="xref" href="ZptSharp.Dom.IRegistersDocumentReaderWriter.html">IRegistersDocumentReaderWriter</a> and
-<a class="xref" href="ZptSharp.Dom.IGetsDocumentReaderWriterForFile.html">IGetsDocumentReaderWriterForFile</a>.  This essentially implements the strategy
-pattern, facilitating the choosing of an appropriate implementation of
-<a class="xref" href="ZptSharp.Dom.IReadsAndWritesDocument.html">IReadsAndWritesDocument</a> for a given filename or path.</p>
+      <section><p>An implementation of <a class="xref" href="ZptSharp.Dom.IGetsDocumentReaderWriterForFile.html">IGetsDocumentReaderWriterForFile</a> which makes use
+of <a class="xref" href="ZptSharp.Hosting.EnvironmentRegistry.html">EnvironmentRegistry</a> and a <span class="xref">System.IServiceProvider</span>
+to get instances of <a class="xref" href="ZptSharp.Dom.IReadsAndWritesDocument.html">IReadsAndWritesDocument</a> for a given filename or path.</p>
 </section>
       <h4><a class="xref" href="ZptSharp.Dom.HapAttribute.html">HapAttribute</a></h4>
       <section><p>An implementation of <a class="xref" href="ZptSharp.Dom.IAttribute.html">IAttribute</a> based upon an HTML Agility Pack <span class="xref">HtmlAgilityPack.HtmlAttribute</span>.</p>
@@ -226,10 +225,6 @@ essentially equivalent to replacing that node node with its children.</p>
       <h4><a class="xref" href="ZptSharp.Dom.IReadsAndWritesDocument.html">IReadsAndWritesDocument</a></h4>
       <section><p>An object which may read &amp; write <a class="xref" href="ZptSharp.Dom.IDocument.html">IDocument</a> instances to/from
 streams.  This is the core interface of &quot;a document provider&quot;.</p>
-</section>
-      <h4><a class="xref" href="ZptSharp.Dom.IRegistersDocumentReaderWriter.html">IRegistersDocumentReaderWriter</a></h4>
-      <section><p>An object which maintains a registry of the currently-available implementations
-of <a class="xref" href="ZptSharp.Dom.IReadsAndWritesDocument.html">IReadsAndWritesDocument</a>.</p>
 </section>
       <h4><a class="xref" href="ZptSharp.Dom.IReplacesNode.html">IReplacesNode</a></h4>
       <section><p>Replaces the specified node with a collection of replacement nodes.</p>

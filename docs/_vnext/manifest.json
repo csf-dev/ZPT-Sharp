@@ -5,11 +5,11 @@
   "files": [
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/ZptSharp.AngleSharpServiceCollectionExtensions.yml",
+      "source_relative_path": "api/ZptSharp.AngleSharpHostingBuilderExtensions.yml",
       "output": {
         ".html": {
-          "relative_path": "api/ZptSharp.AngleSharpServiceCollectionExtensions.html",
-          "hash": "YZT9uRz0o9w/q8znPFgYdQ=="
+          "relative_path": "api/ZptSharp.AngleSharpHostingBuilderExtensions.html",
+          "hash": "Cb4ZBNwaOZ7pYugBcJGL/A=="
         }
       },
       "is_incremental": false,
@@ -185,11 +185,11 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/ZptSharp.CSharpServiceCollectionExtensions.yml",
+      "source_relative_path": "api/ZptSharp.CSharpHostingBuilderExtensions.yml",
       "output": {
         ".html": {
-          "relative_path": "api/ZptSharp.CSharpServiceCollectionExtensions.html",
-          "hash": "5+kAANLL8s8R3rStMJK7Og=="
+          "relative_path": "api/ZptSharp.CSharpHostingBuilderExtensions.html",
+          "hash": "QNTOOod6fghYDtFyLCF83w=="
         }
       },
       "is_incremental": false,
@@ -201,7 +201,7 @@
       "output": {
         ".html": {
           "relative_path": "api/ZptSharp.Cli.Application.html",
-          "hash": "3ChQm82YKfQKeF44+vzsQA=="
+          "hash": "pwvBroB27+qNnNAt0VwhrA=="
         }
       },
       "is_incremental": false,
@@ -238,18 +238,6 @@
         ".html": {
           "relative_path": "api/ZptSharp.Cli.CliArgumentsParser.html",
           "hash": "W5VPXwKimiif3mtNBg/Whg=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/ZptSharp.Cli.IConfiguresServices.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/ZptSharp.Cli.IConfiguresServices.html",
-          "hash": "Iv3HtMx73kygBIg1/uQrMg=="
         }
       },
       "is_incremental": false,
@@ -309,7 +297,7 @@
       "output": {
         ".html": {
           "relative_path": "api/ZptSharp.Cli.ServiceConfigurator.html",
-          "hash": "CECnf4RKNhi6tF8JO2F/Sg=="
+          "hash": "XDekhqUmuQDOSPtfNjNnxQ=="
         }
       },
       "is_incremental": false,
@@ -321,7 +309,7 @@
       "output": {
         ".html": {
           "relative_path": "api/ZptSharp.Cli.html",
-          "hash": "Zv/E6WrYFVV5/8mTgPumaQ=="
+          "hash": "JPwmfy5vhTJ8WofuYresOQ=="
         }
       },
       "is_incremental": false,
@@ -501,7 +489,7 @@
       "output": {
         ".html": {
           "relative_path": "api/ZptSharp.Dom.DocumentReaderWriterRegistry.html",
-          "hash": "4C25u+AI7bwnbcbM/7EYeQ=="
+          "hash": "c/ENLXT/wMTCJnhq/ozJig=="
         }
       },
       "is_incremental": false,
@@ -693,19 +681,7 @@
       "output": {
         ".html": {
           "relative_path": "api/ZptSharp.Dom.IReadsAndWritesDocument.html",
-          "hash": "RT+y0mX1xISUda6NoMNXng=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/ZptSharp.Dom.IRegistersDocumentReaderWriter.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/ZptSharp.Dom.IRegistersDocumentReaderWriter.html",
-          "hash": "Kvzf7lnQJe6dFzgc/M0GdA=="
+          "hash": "6xQeEQMPIsPaqyqMzJHHAA=="
         }
       },
       "is_incremental": false,
@@ -945,7 +921,7 @@
       "output": {
         ".html": {
           "relative_path": "api/ZptSharp.Dom.html",
-          "hash": "U/K3Umh7uJGSwDbKAsNdNw=="
+          "hash": "HAsyOq3kCWmf4yEq0aP2Mg=="
         }
       },
       "is_incremental": false,
@@ -1325,23 +1301,11 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/ZptSharp.Expressions.EvaluatorAlreadyRegisteredException.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/ZptSharp.Expressions.EvaluatorAlreadyRegisteredException.html",
-          "hash": "1ehAVGr23cDGKHqikzVcrQ=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
       "source_relative_path": "api/ZptSharp.Expressions.EvaluatorTypeRegistry.yml",
       "output": {
         ".html": {
           "relative_path": "api/ZptSharp.Expressions.EvaluatorTypeRegistry.html",
-          "hash": "RMtVuLLj0lbF+D7aUv0pBg=="
+          "hash": "ef1r24qspS6wUt2EcvubXA=="
         }
       },
       "is_incremental": false,
@@ -1390,18 +1354,6 @@
         ".html": {
           "relative_path": "api/ZptSharp.Expressions.ExpressionEvaluatorExtensions.html",
           "hash": "49avBdfZ3G4HnHtrNSd4wQ=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/ZptSharp.Expressions.ExpressionEvaluatorRegistryExtensions.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/ZptSharp.Expressions.ExpressionEvaluatorRegistryExtensions.html",
-          "hash": "7ID2z80TB2n5JU8fyId3hQ=="
         }
       },
       "is_incremental": false,
@@ -1569,7 +1521,7 @@
       "output": {
         ".html": {
           "relative_path": "api/ZptSharp.Expressions.IRegistersExpressionEvaluator.html",
-          "hash": "psVv/OWoAUOZY93YJuMX+Q=="
+          "hash": "ODioeXu0ChRKP01I94vywQ=="
         }
       },
       "is_incremental": false,
@@ -2373,7 +2325,7 @@
       "output": {
         ".html": {
           "relative_path": "api/ZptSharp.Expressions.html",
-          "hash": "BKyvKE8Y2juKojeEj+9qMg=="
+          "hash": "BMJHMfHapPWAhIRtTC2bew=="
         }
       },
       "is_incremental": false,
@@ -2381,11 +2333,11 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/ZptSharp.HapServiceCollectionExtensions.yml",
+      "source_relative_path": "api/ZptSharp.HapHostingBuilderExtensions.yml",
       "output": {
         ".html": {
-          "relative_path": "api/ZptSharp.HapServiceCollectionExtensions.html",
-          "hash": "HAV9/n158jwO1ckLW8FJNA=="
+          "relative_path": "api/ZptSharp.HapHostingBuilderExtensions.html",
+          "hash": "ha7cQemHrQqldwu/msV0pg=="
         }
       },
       "is_incremental": false,
@@ -2393,11 +2345,35 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/ZptSharp.Hosting.IBuildsSelfHostingEnvironment.yml",
+      "source_relative_path": "api/ZptSharp.Hosting.EnvironmentRegistry.yml",
       "output": {
         ".html": {
-          "relative_path": "api/ZptSharp.Hosting.IBuildsSelfHostingEnvironment.html",
-          "hash": "rDpxRD5NtJON+CLZZXX4Nw=="
+          "relative_path": "api/ZptSharp.Hosting.EnvironmentRegistry.html",
+          "hash": "pLjBiAWdeC9yAOcd+/vWJA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Hosting.HostingBuilder.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Hosting.HostingBuilder.html",
+          "hash": "/xgczrBScqNHseXlQKc3ZA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Hosting.IBuildsHostingEnvironment.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Hosting.IBuildsHostingEnvironment.html",
+          "hash": "UfXZnGD2TcXBIw0ZrPW/MQ=="
         }
       },
       "is_incremental": false,
@@ -2417,23 +2393,11 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/ZptSharp.Hosting.SelfHostingEnvironmentBuilder.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/ZptSharp.Hosting.SelfHostingEnvironmentBuilder.html",
-          "hash": "Kd2aMDXWBbrCwZqAl2OuJg=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
       "source_relative_path": "api/ZptSharp.Hosting.ZptSharpSelfHoster.yml",
       "output": {
         ".html": {
           "relative_path": "api/ZptSharp.Hosting.ZptSharpSelfHoster.html",
-          "hash": "f4eJLKrNWV6zXZAdUYAXLQ=="
+          "hash": "vqcu5ZOzZSkCNfQywhjXsw=="
         }
       },
       "is_incremental": false,
@@ -2445,7 +2409,7 @@
       "output": {
         ".html": {
           "relative_path": "api/ZptSharp.Hosting.html",
-          "hash": "ufuh1F+VY75tUPpb8K1UOQ=="
+          "hash": "C/B71V4kN6pZ8jbOke6tBA=="
         }
       },
       "is_incremental": false,
@@ -2949,7 +2913,7 @@
       "output": {
         ".html": {
           "relative_path": "api/ZptSharp.Mvc5.ZptSharpViewEngine.html",
-          "hash": "dG66ELAzB84BnxtAXorGtQ=="
+          "hash": "XLct+aWH3E0MFbPZjpMcog=="
         }
       },
       "is_incremental": false,
@@ -3141,7 +3105,7 @@
       "output": {
         ".html": {
           "relative_path": "api/ZptSharp.MvcCore.ZptSharpViewEngine.html",
-          "hash": "T9aw34/ERZ4f17SSaF+2kA=="
+          "hash": "0u9bYxaqCn82qgLZwRA9JA=="
         }
       },
       "is_incremental": false,
@@ -3173,11 +3137,11 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/ZptSharp.PythonServiceCollectionExtensions.yml",
+      "source_relative_path": "api/ZptSharp.PythonHostingBuilderExtensions.yml",
       "output": {
         ".html": {
-          "relative_path": "api/ZptSharp.PythonServiceCollectionExtensions.html",
-          "hash": "yFk/tTsb0kMucO9gGsaaBg=="
+          "relative_path": "api/ZptSharp.PythonHostingBuilderExtensions.html",
+          "hash": "N9Kr4NcybuYA7MyW4i0XIQ=="
         }
       },
       "is_incremental": false,
@@ -3646,30 +3610,6 @@
         ".html": {
           "relative_path": "api/ZptSharp.Rendering.html",
           "hash": "WUIE2OaCsihzo1Z5Hy9zqQ=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/ZptSharp.SelfHostingEnvironmentBuilderExtensions.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/ZptSharp.SelfHostingEnvironmentBuilderExtensions.html",
-          "hash": "dw1VVzd00HDIb8wfbGS6rQ=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/ZptSharp.ServiceCollectionExtensions.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/ZptSharp.ServiceCollectionExtensions.html",
-          "hash": "Bgo/rGLkAU4qrlvHWEJQCw=="
         }
       },
       "is_incremental": false,
@@ -4193,11 +4133,11 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/ZptSharp.XmlServiceCollectionExtensions.yml",
+      "source_relative_path": "api/ZptSharp.XmlHostingBuilderExtensions.yml",
       "output": {
         ".html": {
-          "relative_path": "api/ZptSharp.XmlServiceCollectionExtensions.html",
-          "hash": "YPRBq5iEjIhdGxZTupzuaA=="
+          "relative_path": "api/ZptSharp.XmlHostingBuilderExtensions.html",
+          "hash": "35Hgd5w9Kwv2Senr7aLb5A=="
         }
       },
       "is_incremental": false,
@@ -4233,7 +4173,7 @@
       "output": {
         ".html": {
           "relative_path": "api/ZptSharp.ZptRenderingException.html",
-          "hash": "4YEokWHQVuE15yjEoktCpg=="
+          "hash": "vUHvQPp7yh6A5/uTvtWdpQ=="
         }
       },
       "is_incremental": false,
@@ -4245,7 +4185,31 @@
       "output": {
         ".html": {
           "relative_path": "api/ZptSharp.ZptSharpHost.html",
-          "hash": "M+PA3sloO+FHtVoi4SK9dA=="
+          "hash": "ZtnyR65ye7K2iOv0UjKztA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.ZptSharpHostingBuilderExtensions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.ZptSharpHostingBuilderExtensions.html",
+          "hash": "LfCwwgGrOSkyeH3yDiJLgA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.ZptSharpServiceCollectionExtensions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.ZptSharpServiceCollectionExtensions.html",
+          "hash": "dCmf4LF/657sAxAcakrYQQ=="
         }
       },
       "is_incremental": false,
@@ -4257,7 +4221,7 @@
       "output": {
         ".html": {
           "relative_path": "api/ZptSharp.html",
-          "hash": "iOlrYxEuXpt+a9C/EIZowg=="
+          "hash": "H4dMJ95DzuQJ2N6tvm5Ftw=="
         }
       },
       "is_incremental": false,
@@ -4281,7 +4245,7 @@
       "output": {
         ".html": {
           "relative_path": "api/toc.html",
-          "hash": "unf0BZCaWhfyM8VofEUCsQ=="
+          "hash": "+uzTKxntFkTKeAObxN7fcw=="
         }
       },
       "is_incremental": false,
@@ -4348,12 +4312,15 @@
       "version": ""
     },
     {
+      "log_codes": [
+        "UidNotFound"
+      ],
       "type": "Conceptual",
       "source_relative_path": "articles/DiSetup.md",
       "output": {
         ".html": {
           "relative_path": "articles/DiSetup.html",
-          "hash": "1mJo+Rh2LppSbTidoAYmag=="
+          "hash": "8x/h7Bu5gzAegqLzReaEIA=="
         }
       },
       "is_incremental": false,
@@ -4694,7 +4661,7 @@
         "ManagedReferenceDocumentProcessor": {
           "can_incremental": false,
           "incrementalPhase": "build",
-          "total_file_count": 355,
+          "total_file_count": 352,
           "skipped_file_count": 0
         },
         "ResourceDocumentProcessor": {
