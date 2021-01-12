@@ -4,7 +4,6 @@ using ZptSharp.Rendering;
 using ZptSharp.Config;
 using System.Threading.Tasks;
 using System.Threading;
-using ZptSharp.Dom;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace ZptSharp
@@ -28,18 +27,18 @@ namespace ZptSharp
     public class ZptDocumentRenderer : IRendersZptDocument
     {
         readonly IServiceProvider serviceProvider;
-        readonly IReadsAndWritesDocument readerWriter;
+        readonly System.Type readerWriterType;
 
         /// <summary>
         /// Renders a specified ZPT document from a stream using the specified model.
         /// </summary>
         /// <remarks>
         /// <para>
-        /// There are two ways in which an implementation of <see cref="IReadsAndWritesDocument"/>
+        /// There are two ways in which an implementation of <see cref="Dom.IReadsAndWritesDocument"/>
         /// (aka "the document provider") may be specified for use when executing this method.
         /// One way is to specify a non-null <paramref name="config"/> which has its
-        /// <see cref="RenderingConfig.DocumentProvider"/> configuration option set.
-        /// The other way is to specify a non-null instance of <see cref="IReadsAndWritesDocument"/>
+        /// <see cref="RenderingConfig.DocumentProviderType"/> configuration option set.
+        /// The other way is to specify a non-null instance of <see cref="Dom.IReadsAndWritesDocument"/>
         /// in the constructor of this <see cref="ZptDocumentRenderer"/> instance.
         /// </para>
         /// <para>
@@ -72,12 +71,12 @@ namespace ZptSharp
 
         RenderingConfig GetEffectiveRenderingConfig(RenderingConfig config)
         {
-            if (config != null && readerWriter == null) return config;
+            if (config != null && readerWriterType == null) return config;
 
             var builder = config?.CloneToNewBuilder() ?? RenderingConfig.CreateBuilder();
 
-            if (readerWriter != null)
-                builder.DocumentProvider = readerWriter;
+            if (readerWriterType != null)
+                builder.DocumentProviderType = readerWriterType;
 
             return builder.GetConfig();
         }
@@ -87,20 +86,20 @@ namespace ZptSharp
         /// </summary>
         /// <remarks>
         /// <para>
-        /// If a <paramref name="readerWriter"/> is specified in this constructor, then the
-        /// <see cref="RenderingConfig.DocumentProvider"/> specified in
+        /// If a <paramref name="readerWriterType"/> is specified in this constructor, then the
+        /// <see cref="RenderingConfig.DocumentProviderType"/> specified in
         /// <see cref="RenderAsync(Stream, object, RenderingConfig, CancellationToken, IDocumentSourceInfo)"/>
         /// will not be used.  The document provider (aka document reader/writer) provided in
         /// this constructor will be used instead.
         /// </para>
         /// </remarks>
         /// <param name="serviceProvider">A service provider, from which dependencies may be resolved.</param>
-        /// <param name="readerWriter">An optional document reader/writer service to use to render the current document.</param>
+        /// <param name="readerWriterType">Indicates the document provider implementation type to use for rendering the current document.</param>
         public ZptDocumentRenderer(IServiceProvider serviceProvider,
-                                   IReadsAndWritesDocument readerWriter = null)
+                                   System.Type readerWriterType = null)
         {
             this.serviceProvider = serviceProvider ?? throw new ArgumentNullException(nameof(serviceProvider));
-            this.readerWriter = readerWriter;
+            this.readerWriterType = readerWriterType;
         }
     }
 }

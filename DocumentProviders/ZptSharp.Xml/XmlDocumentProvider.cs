@@ -26,6 +26,19 @@ namespace ZptSharp.Dom
         readonly IGetsXmlReaderSettings readerSettingsProvider;
 
         /// <summary>
+        /// Gets the type of the current instance, for the purpose of future dependency resolution.
+        /// </summary>
+        /// <remarks>
+        /// <para>
+        /// Gets the type of the current instance, for the purpose of dependency resolution.
+        /// This is not/should not be quite the same as <see cref="System.Object.GetType()"/>, because
+        /// a derived implementation might not always be resolved as its precise type, it might be resolved
+        /// as a less-derived base type.
+        /// </para>
+        /// </remarks>
+        public override System.Type ResolvableType => typeof(XmlDocumentProvider);
+
+        /// <summary>
         /// Gets whether or not the current instance may be used to read &amp; write documents
         /// which have the specified filename.
         /// </summary>

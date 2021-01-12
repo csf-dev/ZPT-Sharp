@@ -88,7 +88,10 @@ namespace ZptSharp.Rendering
         }
 
         static IReadsAndWritesDocument GetDocumentReaderWriter(IServiceScope scope, RenderingConfig config)
-            => config.DocumentProvider ?? scope.ServiceProvider.GetRequiredService<IReadsAndWritesDocument>();
+        {
+            var type = config.DocumentProviderType ?? typeof(IReadsAndWritesDocument);
+            return (IReadsAndWritesDocument) scope.ServiceProvider.GetRequiredService(type);
+        }
 
         static IModifiesDocument GetRenderer(IServiceScope scope, RenderZptDocumentRequest request)
         {

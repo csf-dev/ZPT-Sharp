@@ -76,6 +76,8 @@ namespace ZptSharp.Dom
         /// </summary>
         public class StubDocumentReaderWriter : DocumentReaderWriterBase<StubDocument>
         {
+            public override System.Type ResolvableType => GetType();
+
             public override bool CanReadWriteForFilename(string filenameOrPath) => true;
 
             protected override Task<IDocument> GetDocumentProtectedAsync(Stream stream, RenderingConfig config, IDocumentSourceInfo sourceInfo, CancellationToken token)

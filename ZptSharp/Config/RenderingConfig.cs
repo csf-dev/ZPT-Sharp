@@ -81,12 +81,12 @@ namespace ZptSharp.Config
         public virtual Encoding DocumentEncoding { get; private set; }
 
         /// <summary>
-        /// Gets the document provider implementation which is to be used for the current rendering task.
+        /// Gets the type of document provider implementation which is to be used for the current rendering task.
         /// </summary>
         /// <remarks>
         /// <para>
         /// When using <see cref="IRendersZptFile"/>, this configuration property is irrelevant and ignored.
-        /// The file-rendering service will select an appropriate document renderer based upon
+        /// The file-rendering service will select an appropriate document renderer type based upon
         /// the filename &amp; extension of the source file.
         /// </para>
         /// <para>
@@ -100,8 +100,8 @@ namespace ZptSharp.Config
         /// </para>
         /// </remarks>
         /// <seealso cref="IRendersZptDocument"/>
-        /// <value>The document provider implementation to be used by the document-renderer service.</value>
-        public virtual IReadsAndWritesDocument DocumentProvider { get; private set; }
+        /// <value>The document provider implementation type to be used by the document-renderer service.</value>
+        public virtual Type DocumentProviderType { get; private set; }
 
         /// <summary>
         /// Gets a value which indicates whether the XML document declaration should be omitted when
@@ -348,6 +348,31 @@ namespace ZptSharp.Config
         public virtual string DefaultExpressionType { get; private set; }
 
         /// <summary>
+        /// Gets a custom XML URL resolver which should be used to resolve XML namespaces for XML-based document providers.
+        /// </summary>
+        /// <remarks>
+        /// <para>
+        /// When using an XML-based document provider (and only when using an XML-based document provider),
+        /// in order to fully validate these documents (and provide appropriate entity support), supporting
+        /// assets are required.  These can include DTDs, modules and the like.
+        /// When making use of an XML document which conforms to a DTD, it is usually desirable (for both performance
+        /// and security purposes) to use a custom XML URL resolver.  This allows techniques such as caching,
+        /// security-enforcement and perhaps even the local serving of those assets without making any
+        /// HTTP(s) requests at all.
+        /// </para>
+        /// <para>
+        /// When set, this configuration setting specifies the custom XML URL resolver which should be used by
+        /// XML-based document providers.  It has no effect at all upon HTML-based document providers.
+        /// </para>
+        /// <para>
+        /// Please note that the official ZptSharp XML document provider includes a URL provider which serves
+        /// XHTML assets from embedded resources, bypassing all HTTP requests.  This built-in URL provider will
+        /// be used if this configuration setting is <see langword="null"/>.
+        /// </para>
+        /// </remarks>
+        public virtual System.Xml.XmlUrlResolver XmlUrlResolver { get; private set; }
+
+        /// <summary>
         /// Creates and returns a new <see cref="RenderingConfig.Builder"/> instance which has its initial
         /// state/settings copied from the current configuration instance.
         /// </summary>
@@ -370,7 +395,7 @@ namespace ZptSharp.Config
             return new Builder
             {
                 DocumentEncoding = DocumentEncoding,
-                DocumentProvider = DocumentProvider,
+                DocumentProviderType = DocumentProviderType,
                 RootContextsProvider = RootContextsProvider,
                 ContextBuilder = ContextBuilder,
                 IncludeSourceAnnotation = IncludeSourceAnnotation,
@@ -378,6 +403,7 @@ namespace ZptSharp.Config
                 OmitXmlDeclaration = OmitXmlDeclaration,
                 SourceAnnotationBasePath = SourceAnnotationBasePath,
                 DefaultExpressionType = DefaultExpressionType,
+                XmlUrlResolver = XmlUrlResolver,
             };
         }
 
@@ -427,7 +453,7 @@ namespace ZptSharp.Config
         /// <description><c>Encoding.UTF8</c></description>
         /// </item>
         /// <item>
-        /// <term><see cref="DocumentProvider"/></term>
+        /// <term><see cref="DocumentProviderType"/></term>
         /// <description><see langword="null"/></description>
         /// </item>
         /// <item>
@@ -457,6 +483,10 @@ namespace ZptSharp.Config
         /// <item>
         /// <term><see cref="DefaultExpressionType"/></term>
         /// <description>The string <c>path</c></description>
+        /// </item>
+        /// <item>
+        /// <term><see cref="XmlUrlResolver"/></term>
+        /// <description><see langword="null"/></description>
         /// </item>
         /// </list>
         /// </remarks>
