@@ -36,6 +36,8 @@ void RegisterServices(IServiceCollection serviceCollection)
 }
 ```
 
+See the documentation for [the ZptSharp DI builder object] for a full list of the available extension methods.
+
 ### If you cannot use DI
 
 It is strongly recommended to consume ZptSharp via dependency injection as described above.
@@ -56,14 +58,17 @@ var host = ZptSharpHost.GetHost(builder =>
 );
 ```
 
+If using this mechanism instead of DI, then you are responsible for getting the returned host object to the class which will use it.
+
 [a more in-depth writeup of the DI & setup functionality]: ./../articles/DiSetup.md
 [ZptSharp NuGet packages]: ../articles/NuGetPackages.md
 [your application's dependency injection]: https://docs.microsoft.com/en-us/dotnet/core/extensions/dependency-injection
 [`IServiceCollection`]: https://docs.microsoft.com/en-us/dotnet/api/microsoft.extensions.dependencyinjection.iservicecollection
 [.NET Generic Host]: https://docs.microsoft.com/en-us/dotnet/core/extensions/generic-host
 [OWIN]: https://docs.microsoft.com/en-us/aspnet/aspnet/overview/owin-and-katana/getting-started-with-owin-and-katana
-[`AddZptSharp()`]: xref:ZptSharp.ServiceCollectionExtensions.AddZptSharp(Microsoft.Extensions.DependencyInjection.IServiceCollection)
-[`ZptSharp.ZptSharpHost`]: xref: ZptSharp.ZptSharpHost
+[`AddZptSharp()`]: xref:ZptSharp.ZptSharpServiceCollectionExtensions.AddZptSharp(Microsoft.Extensions.DependencyInjection.IServiceCollection)
+[the ZptSharp DI builder object]: xref:ZptSharp.Hosting.IBuildsHostingEnvironment
+[`ZptSharp.ZptSharpHost`]: xref:ZptSharp.ZptSharpHost
 
 ## Injecting and consuming ZptSharp
 

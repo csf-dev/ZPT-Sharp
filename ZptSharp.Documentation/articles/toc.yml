@@ -20,12 +20,7 @@
     - name: MVC view engines
       href: ViewEngines.md
     - name: Consuming the API
-      topicHref: ../api/index.md
-      items:
-        - name: DI setup
-          href: DiSetup.md
-        - name: Self-hosting
-          href: SelfHosting.md
+      href: ../api/index.md
     - name: ZPT syntax
       href: ZptReference/index.md
       items:
@@ -50,6 +45,10 @@
     - name: Writing extensions
       items:
         - name: Document providers
+          href: WritingDocumentProviders.md
+        - name: Expression evaluators
+          href: WritingExpressionEvaluators.md
+
           href: WritingDocumentProviders.md
         - name: Expression evaluators
           href: WritingExpressionEvaluators.md
