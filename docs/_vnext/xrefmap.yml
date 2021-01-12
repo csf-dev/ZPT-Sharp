@@ -997,19 +997,19 @@ references:
   isSpec: "True"
   fullName: ZptSharp.Config.RenderingConfig.Builder.DocumentEncoding
   nameWithType: RenderingConfig.Builder.DocumentEncoding
-- uid: ZptSharp.Config.RenderingConfig.Builder.DocumentProvider
-  name: DocumentProvider
-  href: api/ZptSharp.Config.RenderingConfig.Builder.html#ZptSharp_Config_RenderingConfig_Builder_DocumentProvider
-  commentId: P:ZptSharp.Config.RenderingConfig.Builder.DocumentProvider
-  fullName: ZptSharp.Config.RenderingConfig.Builder.DocumentProvider
-  nameWithType: RenderingConfig.Builder.DocumentProvider
-- uid: ZptSharp.Config.RenderingConfig.Builder.DocumentProvider*
-  name: DocumentProvider
-  href: api/ZptSharp.Config.RenderingConfig.Builder.html#ZptSharp_Config_RenderingConfig_Builder_DocumentProvider_
-  commentId: Overload:ZptSharp.Config.RenderingConfig.Builder.DocumentProvider
+- uid: ZptSharp.Config.RenderingConfig.Builder.DocumentProviderType
+  name: DocumentProviderType
+  href: api/ZptSharp.Config.RenderingConfig.Builder.html#ZptSharp_Config_RenderingConfig_Builder_DocumentProviderType
+  commentId: P:ZptSharp.Config.RenderingConfig.Builder.DocumentProviderType
+  fullName: ZptSharp.Config.RenderingConfig.Builder.DocumentProviderType
+  nameWithType: RenderingConfig.Builder.DocumentProviderType
+- uid: ZptSharp.Config.RenderingConfig.Builder.DocumentProviderType*
+  name: DocumentProviderType
+  href: api/ZptSharp.Config.RenderingConfig.Builder.html#ZptSharp_Config_RenderingConfig_Builder_DocumentProviderType_
+  commentId: Overload:ZptSharp.Config.RenderingConfig.Builder.DocumentProviderType
   isSpec: "True"
-  fullName: ZptSharp.Config.RenderingConfig.Builder.DocumentProvider
-  nameWithType: RenderingConfig.Builder.DocumentProvider
+  fullName: ZptSharp.Config.RenderingConfig.Builder.DocumentProviderType
+  nameWithType: RenderingConfig.Builder.DocumentProviderType
 - uid: ZptSharp.Config.RenderingConfig.Builder.GetConfig
   name: GetConfig()
   href: api/ZptSharp.Config.RenderingConfig.Builder.html#ZptSharp_Config_RenderingConfig_Builder_GetConfig
@@ -1088,6 +1088,19 @@ references:
   isSpec: "True"
   fullName: ZptSharp.Config.RenderingConfig.Builder.SourceAnnotationBasePath
   nameWithType: RenderingConfig.Builder.SourceAnnotationBasePath
+- uid: ZptSharp.Config.RenderingConfig.Builder.XmlUrlResolver
+  name: XmlUrlResolver
+  href: api/ZptSharp.Config.RenderingConfig.Builder.html#ZptSharp_Config_RenderingConfig_Builder_XmlUrlResolver
+  commentId: P:ZptSharp.Config.RenderingConfig.Builder.XmlUrlResolver
+  fullName: ZptSharp.Config.RenderingConfig.Builder.XmlUrlResolver
+  nameWithType: RenderingConfig.Builder.XmlUrlResolver
+- uid: ZptSharp.Config.RenderingConfig.Builder.XmlUrlResolver*
+  name: XmlUrlResolver
+  href: api/ZptSharp.Config.RenderingConfig.Builder.html#ZptSharp_Config_RenderingConfig_Builder_XmlUrlResolver_
+  commentId: Overload:ZptSharp.Config.RenderingConfig.Builder.XmlUrlResolver
+  isSpec: "True"
+  fullName: ZptSharp.Config.RenderingConfig.Builder.XmlUrlResolver
+  nameWithType: RenderingConfig.Builder.XmlUrlResolver
 - uid: ZptSharp.Config.RenderingConfig.CloneToNewBuilder
   name: CloneToNewBuilder()
   href: api/ZptSharp.Config.RenderingConfig.html#ZptSharp_Config_RenderingConfig_CloneToNewBuilder
@@ -1166,19 +1179,19 @@ references:
   isSpec: "True"
   fullName: ZptSharp.Config.RenderingConfig.DocumentEncoding
   nameWithType: RenderingConfig.DocumentEncoding
-- uid: ZptSharp.Config.RenderingConfig.DocumentProvider
-  name: DocumentProvider
-  href: api/ZptSharp.Config.RenderingConfig.html#ZptSharp_Config_RenderingConfig_DocumentProvider
-  commentId: P:ZptSharp.Config.RenderingConfig.DocumentProvider
-  fullName: ZptSharp.Config.RenderingConfig.DocumentProvider
-  nameWithType: RenderingConfig.DocumentProvider
-- uid: ZptSharp.Config.RenderingConfig.DocumentProvider*
-  name: DocumentProvider
-  href: api/ZptSharp.Config.RenderingConfig.html#ZptSharp_Config_RenderingConfig_DocumentProvider_
-  commentId: Overload:ZptSharp.Config.RenderingConfig.DocumentProvider
+- uid: ZptSharp.Config.RenderingConfig.DocumentProviderType
+  name: DocumentProviderType
+  href: api/ZptSharp.Config.RenderingConfig.html#ZptSharp_Config_RenderingConfig_DocumentProviderType
+  commentId: P:ZptSharp.Config.RenderingConfig.DocumentProviderType
+  fullName: ZptSharp.Config.RenderingConfig.DocumentProviderType
+  nameWithType: RenderingConfig.DocumentProviderType
+- uid: ZptSharp.Config.RenderingConfig.DocumentProviderType*
+  name: DocumentProviderType
+  href: api/ZptSharp.Config.RenderingConfig.html#ZptSharp_Config_RenderingConfig_DocumentProviderType_
+  commentId: Overload:ZptSharp.Config.RenderingConfig.DocumentProviderType
   isSpec: "True"
-  fullName: ZptSharp.Config.RenderingConfig.DocumentProvider
-  nameWithType: RenderingConfig.DocumentProvider
+  fullName: ZptSharp.Config.RenderingConfig.DocumentProviderType
+  nameWithType: RenderingConfig.DocumentProviderType
 - uid: ZptSharp.Config.RenderingConfig.IncludeSourceAnnotation
   name: IncludeSourceAnnotation
   href: api/ZptSharp.Config.RenderingConfig.html#ZptSharp_Config_RenderingConfig_IncludeSourceAnnotation
@@ -1244,6 +1257,19 @@ references:
   isSpec: "True"
   fullName: ZptSharp.Config.RenderingConfig.SourceAnnotationBasePath
   nameWithType: RenderingConfig.SourceAnnotationBasePath
+- uid: ZptSharp.Config.RenderingConfig.XmlUrlResolver
+  name: XmlUrlResolver
+  href: api/ZptSharp.Config.RenderingConfig.html#ZptSharp_Config_RenderingConfig_XmlUrlResolver
+  commentId: P:ZptSharp.Config.RenderingConfig.XmlUrlResolver
+  fullName: ZptSharp.Config.RenderingConfig.XmlUrlResolver
+  nameWithType: RenderingConfig.XmlUrlResolver
+- uid: ZptSharp.Config.RenderingConfig.XmlUrlResolver*
+  name: XmlUrlResolver
+  href: api/ZptSharp.Config.RenderingConfig.html#ZptSharp_Config_RenderingConfig_XmlUrlResolver_
+  commentId: Overload:ZptSharp.Config.RenderingConfig.XmlUrlResolver
+  isSpec: "True"
+  fullName: ZptSharp.Config.RenderingConfig.XmlUrlResolver
+  nameWithType: RenderingConfig.XmlUrlResolver
 - uid: ZptSharp.CSharpHostingBuilderExtensions
   name: CSharpHostingBuilderExtensions
   href: api/ZptSharp.CSharpHostingBuilderExtensions.html
@@ -1472,6 +1498,19 @@ references:
   isSpec: "True"
   fullName: ZptSharp.Dom.AngleSharpDocumentProvider.GetDocumentProtectedAsync
   nameWithType: AngleSharpDocumentProvider.GetDocumentProtectedAsync
+- uid: ZptSharp.Dom.AngleSharpDocumentProvider.ResolvableType
+  name: ResolvableType
+  href: api/ZptSharp.Dom.AngleSharpDocumentProvider.html#ZptSharp_Dom_AngleSharpDocumentProvider_ResolvableType
+  commentId: P:ZptSharp.Dom.AngleSharpDocumentProvider.ResolvableType
+  fullName: ZptSharp.Dom.AngleSharpDocumentProvider.ResolvableType
+  nameWithType: AngleSharpDocumentProvider.ResolvableType
+- uid: ZptSharp.Dom.AngleSharpDocumentProvider.ResolvableType*
+  name: ResolvableType
+  href: api/ZptSharp.Dom.AngleSharpDocumentProvider.html#ZptSharp_Dom_AngleSharpDocumentProvider_ResolvableType_
+  commentId: Overload:ZptSharp.Dom.AngleSharpDocumentProvider.ResolvableType
+  isSpec: "True"
+  fullName: ZptSharp.Dom.AngleSharpDocumentProvider.ResolvableType
+  nameWithType: AngleSharpDocumentProvider.ResolvableType
 - uid: ZptSharp.Dom.AngleSharpDocumentProvider.WriteDocumentProtectedAsync(ZptSharp.Dom.AngleSharpDocument,ZptSharp.Config.RenderingConfig,System.Threading.CancellationToken)
   name: WriteDocumentProtectedAsync(AngleSharpDocument, RenderingConfig, CancellationToken)
   href: api/ZptSharp.Dom.AngleSharpDocumentProvider.html#ZptSharp_Dom_AngleSharpDocumentProvider_WriteDocumentProtectedAsync_ZptSharp_Dom_AngleSharpDocument_ZptSharp_Config_RenderingConfig_System_Threading_CancellationToken_
@@ -1962,6 +2001,23 @@ references:
   fullName.vb: ZptSharp.Dom.DocumentReaderWriterBase(Of TNativeType).GetDocumentProtectedAsync
   nameWithType: DocumentReaderWriterBase<TNativeType>.GetDocumentProtectedAsync
   nameWithType.vb: DocumentReaderWriterBase(Of TNativeType).GetDocumentProtectedAsync
+- uid: ZptSharp.Dom.DocumentReaderWriterBase`1.ResolvableType
+  name: ResolvableType
+  href: api/ZptSharp.Dom.DocumentReaderWriterBase-1.html#ZptSharp_Dom_DocumentReaderWriterBase_1_ResolvableType
+  commentId: P:ZptSharp.Dom.DocumentReaderWriterBase`1.ResolvableType
+  fullName: ZptSharp.Dom.DocumentReaderWriterBase<TNativeType>.ResolvableType
+  fullName.vb: ZptSharp.Dom.DocumentReaderWriterBase(Of TNativeType).ResolvableType
+  nameWithType: DocumentReaderWriterBase<TNativeType>.ResolvableType
+  nameWithType.vb: DocumentReaderWriterBase(Of TNativeType).ResolvableType
+- uid: ZptSharp.Dom.DocumentReaderWriterBase`1.ResolvableType*
+  name: ResolvableType
+  href: api/ZptSharp.Dom.DocumentReaderWriterBase-1.html#ZptSharp_Dom_DocumentReaderWriterBase_1_ResolvableType_
+  commentId: Overload:ZptSharp.Dom.DocumentReaderWriterBase`1.ResolvableType
+  isSpec: "True"
+  fullName: ZptSharp.Dom.DocumentReaderWriterBase<TNativeType>.ResolvableType
+  fullName.vb: ZptSharp.Dom.DocumentReaderWriterBase(Of TNativeType).ResolvableType
+  nameWithType: DocumentReaderWriterBase<TNativeType>.ResolvableType
+  nameWithType.vb: DocumentReaderWriterBase(Of TNativeType).ResolvableType
 - uid: ZptSharp.Dom.DocumentReaderWriterBase`1.WriteDocumentAsync(ZptSharp.Dom.IDocument,ZptSharp.Config.RenderingConfig,System.Threading.CancellationToken)
   name: WriteDocumentAsync(IDocument, RenderingConfig, CancellationToken)
   href: api/ZptSharp.Dom.DocumentReaderWriterBase-1.html#ZptSharp_Dom_DocumentReaderWriterBase_1_WriteDocumentAsync_ZptSharp_Dom_IDocument_ZptSharp_Config_RenderingConfig_System_Threading_CancellationToken_
@@ -2228,6 +2284,19 @@ references:
   isSpec: "True"
   fullName: ZptSharp.Dom.HapDocumentProvider.GetDocumentProtectedAsync
   nameWithType: HapDocumentProvider.GetDocumentProtectedAsync
+- uid: ZptSharp.Dom.HapDocumentProvider.ResolvableType
+  name: ResolvableType
+  href: api/ZptSharp.Dom.HapDocumentProvider.html#ZptSharp_Dom_HapDocumentProvider_ResolvableType
+  commentId: P:ZptSharp.Dom.HapDocumentProvider.ResolvableType
+  fullName: ZptSharp.Dom.HapDocumentProvider.ResolvableType
+  nameWithType: HapDocumentProvider.ResolvableType
+- uid: ZptSharp.Dom.HapDocumentProvider.ResolvableType*
+  name: ResolvableType
+  href: api/ZptSharp.Dom.HapDocumentProvider.html#ZptSharp_Dom_HapDocumentProvider_ResolvableType_
+  commentId: Overload:ZptSharp.Dom.HapDocumentProvider.ResolvableType
+  isSpec: "True"
+  fullName: ZptSharp.Dom.HapDocumentProvider.ResolvableType
+  nameWithType: HapDocumentProvider.ResolvableType
 - uid: ZptSharp.Dom.HapDocumentProvider.WriteDocumentProtectedAsync(ZptSharp.Dom.HapDocument,ZptSharp.Config.RenderingConfig,System.Threading.CancellationToken)
   name: WriteDocumentProtectedAsync(HapDocument, RenderingConfig, CancellationToken)
   href: api/ZptSharp.Dom.HapDocumentProvider.html#ZptSharp_Dom_HapDocumentProvider_WriteDocumentProtectedAsync_ZptSharp_Dom_HapDocument_ZptSharp_Config_RenderingConfig_System_Threading_CancellationToken_
@@ -2904,6 +2973,19 @@ references:
   isSpec: "True"
   fullName: ZptSharp.Dom.IReadsAndWritesDocument.GetDocumentAsync
   nameWithType: IReadsAndWritesDocument.GetDocumentAsync
+- uid: ZptSharp.Dom.IReadsAndWritesDocument.ResolvableType
+  name: ResolvableType
+  href: api/ZptSharp.Dom.IReadsAndWritesDocument.html#ZptSharp_Dom_IReadsAndWritesDocument_ResolvableType
+  commentId: P:ZptSharp.Dom.IReadsAndWritesDocument.ResolvableType
+  fullName: ZptSharp.Dom.IReadsAndWritesDocument.ResolvableType
+  nameWithType: IReadsAndWritesDocument.ResolvableType
+- uid: ZptSharp.Dom.IReadsAndWritesDocument.ResolvableType*
+  name: ResolvableType
+  href: api/ZptSharp.Dom.IReadsAndWritesDocument.html#ZptSharp_Dom_IReadsAndWritesDocument_ResolvableType_
+  commentId: Overload:ZptSharp.Dom.IReadsAndWritesDocument.ResolvableType
+  isSpec: "True"
+  fullName: ZptSharp.Dom.IReadsAndWritesDocument.ResolvableType
+  nameWithType: IReadsAndWritesDocument.ResolvableType
 - uid: ZptSharp.Dom.IReadsAndWritesDocument.WriteDocumentAsync(ZptSharp.Dom.IDocument,ZptSharp.Config.RenderingConfig,System.Threading.CancellationToken)
   name: WriteDocumentAsync(IDocument, RenderingConfig, CancellationToken)
   href: api/ZptSharp.Dom.IReadsAndWritesDocument.html#ZptSharp_Dom_IReadsAndWritesDocument_WriteDocumentAsync_ZptSharp_Dom_IDocument_ZptSharp_Config_RenderingConfig_System_Threading_CancellationToken_
@@ -3901,6 +3983,19 @@ references:
   isSpec: "True"
   fullName: ZptSharp.Dom.XmlDocumentProvider.GetDocumentProtectedAsync
   nameWithType: XmlDocumentProvider.GetDocumentProtectedAsync
+- uid: ZptSharp.Dom.XmlDocumentProvider.ResolvableType
+  name: ResolvableType
+  href: api/ZptSharp.Dom.XmlDocumentProvider.html#ZptSharp_Dom_XmlDocumentProvider_ResolvableType
+  commentId: P:ZptSharp.Dom.XmlDocumentProvider.ResolvableType
+  fullName: ZptSharp.Dom.XmlDocumentProvider.ResolvableType
+  nameWithType: XmlDocumentProvider.ResolvableType
+- uid: ZptSharp.Dom.XmlDocumentProvider.ResolvableType*
+  name: ResolvableType
+  href: api/ZptSharp.Dom.XmlDocumentProvider.html#ZptSharp_Dom_XmlDocumentProvider_ResolvableType_
+  commentId: Overload:ZptSharp.Dom.XmlDocumentProvider.ResolvableType
+  isSpec: "True"
+  fullName: ZptSharp.Dom.XmlDocumentProvider.ResolvableType
+  nameWithType: XmlDocumentProvider.ResolvableType
 - uid: ZptSharp.Dom.XmlDocumentProvider.WriteDocumentProtectedAsync(ZptSharp.Dom.XmlDocument,ZptSharp.Config.RenderingConfig,System.Threading.CancellationToken)
   name: WriteDocumentProtectedAsync(XmlDocument, RenderingConfig, CancellationToken)
   href: api/ZptSharp.Dom.XmlDocumentProvider.html#ZptSharp_Dom_XmlDocumentProvider_WriteDocumentProtectedAsync_ZptSharp_Dom_XmlDocument_ZptSharp_Config_RenderingConfig_System_Threading_CancellationToken_
@@ -4095,12 +4190,12 @@ references:
   commentId: T:ZptSharp.Dom.XmlReaderSettingsFactory
   fullName: ZptSharp.Dom.XmlReaderSettingsFactory
   nameWithType: XmlReaderSettingsFactory
-- uid: ZptSharp.Dom.XmlReaderSettingsFactory.#ctor(ZptSharp.Dom.IGetsXhtmlDtds)
-  name: XmlReaderSettingsFactory(IGetsXhtmlDtds)
-  href: api/ZptSharp.Dom.XmlReaderSettingsFactory.html#ZptSharp_Dom_XmlReaderSettingsFactory__ctor_ZptSharp_Dom_IGetsXhtmlDtds_
-  commentId: M:ZptSharp.Dom.XmlReaderSettingsFactory.#ctor(ZptSharp.Dom.IGetsXhtmlDtds)
-  fullName: ZptSharp.Dom.XmlReaderSettingsFactory.XmlReaderSettingsFactory(ZptSharp.Dom.IGetsXhtmlDtds)
-  nameWithType: XmlReaderSettingsFactory.XmlReaderSettingsFactory(IGetsXhtmlDtds)
+- uid: ZptSharp.Dom.XmlReaderSettingsFactory.#ctor(ZptSharp.Dom.IGetsXhtmlDtds,System.IServiceProvider)
+  name: XmlReaderSettingsFactory(IGetsXhtmlDtds, IServiceProvider)
+  href: api/ZptSharp.Dom.XmlReaderSettingsFactory.html#ZptSharp_Dom_XmlReaderSettingsFactory__ctor_ZptSharp_Dom_IGetsXhtmlDtds_System_IServiceProvider_
+  commentId: M:ZptSharp.Dom.XmlReaderSettingsFactory.#ctor(ZptSharp.Dom.IGetsXhtmlDtds,System.IServiceProvider)
+  fullName: ZptSharp.Dom.XmlReaderSettingsFactory.XmlReaderSettingsFactory(ZptSharp.Dom.IGetsXhtmlDtds, System.IServiceProvider)
+  nameWithType: XmlReaderSettingsFactory.XmlReaderSettingsFactory(IGetsXhtmlDtds, IServiceProvider)
 - uid: ZptSharp.Dom.XmlReaderSettingsFactory.#ctor*
   name: XmlReaderSettingsFactory
   href: api/ZptSharp.Dom.XmlReaderSettingsFactory.html#ZptSharp_Dom_XmlReaderSettingsFactory__ctor_
@@ -4121,6 +4216,19 @@ references:
   isSpec: "True"
   fullName: ZptSharp.Dom.XmlReaderSettingsFactory.GetReaderSettings
   nameWithType: XmlReaderSettingsFactory.GetReaderSettings
+- uid: ZptSharp.Dom.XmlReaderSettingsFactory.Resolver
+  name: Resolver
+  href: api/ZptSharp.Dom.XmlReaderSettingsFactory.html#ZptSharp_Dom_XmlReaderSettingsFactory_Resolver
+  commentId: P:ZptSharp.Dom.XmlReaderSettingsFactory.Resolver
+  fullName: ZptSharp.Dom.XmlReaderSettingsFactory.Resolver
+  nameWithType: XmlReaderSettingsFactory.Resolver
+- uid: ZptSharp.Dom.XmlReaderSettingsFactory.Resolver*
+  name: Resolver
+  href: api/ZptSharp.Dom.XmlReaderSettingsFactory.html#ZptSharp_Dom_XmlReaderSettingsFactory_Resolver_
+  commentId: Overload:ZptSharp.Dom.XmlReaderSettingsFactory.Resolver
+  isSpec: "True"
+  fullName: ZptSharp.Dom.XmlReaderSettingsFactory.Resolver
+  nameWithType: XmlReaderSettingsFactory.Resolver
 - uid: ZptSharp.Expressions
   name: ZptSharp.Expressions
   href: api/ZptSharp.Expressions.html
@@ -11033,12 +11141,12 @@ references:
   commentId: T:ZptSharp.Rendering.IGetsZptDocumentRenderer
   fullName: ZptSharp.Rendering.IGetsZptDocumentRenderer
   nameWithType: IGetsZptDocumentRenderer
-- uid: ZptSharp.Rendering.IGetsZptDocumentRenderer.GetDocumentRenderer(ZptSharp.Dom.IReadsAndWritesDocument)
-  name: GetDocumentRenderer(IReadsAndWritesDocument)
-  href: api/ZptSharp.Rendering.IGetsZptDocumentRenderer.html#ZptSharp_Rendering_IGetsZptDocumentRenderer_GetDocumentRenderer_ZptSharp_Dom_IReadsAndWritesDocument_
-  commentId: M:ZptSharp.Rendering.IGetsZptDocumentRenderer.GetDocumentRenderer(ZptSharp.Dom.IReadsAndWritesDocument)
-  fullName: ZptSharp.Rendering.IGetsZptDocumentRenderer.GetDocumentRenderer(ZptSharp.Dom.IReadsAndWritesDocument)
-  nameWithType: IGetsZptDocumentRenderer.GetDocumentRenderer(IReadsAndWritesDocument)
+- uid: ZptSharp.Rendering.IGetsZptDocumentRenderer.GetDocumentRenderer(System.Type)
+  name: GetDocumentRenderer(Type)
+  href: api/ZptSharp.Rendering.IGetsZptDocumentRenderer.html#ZptSharp_Rendering_IGetsZptDocumentRenderer_GetDocumentRenderer_System_Type_
+  commentId: M:ZptSharp.Rendering.IGetsZptDocumentRenderer.GetDocumentRenderer(System.Type)
+  fullName: ZptSharp.Rendering.IGetsZptDocumentRenderer.GetDocumentRenderer(System.Type)
+  nameWithType: IGetsZptDocumentRenderer.GetDocumentRenderer(Type)
 - uid: ZptSharp.Rendering.IGetsZptDocumentRenderer.GetDocumentRenderer*
   name: GetDocumentRenderer
   href: api/ZptSharp.Rendering.IGetsZptDocumentRenderer.html#ZptSharp_Rendering_IGetsZptDocumentRenderer_GetDocumentRenderer_
@@ -11888,12 +11996,12 @@ references:
   isSpec: "True"
   fullName: ZptSharp.Rendering.ZptDocumentRendererFactory.ZptDocumentRendererFactory
   nameWithType: ZptDocumentRendererFactory.ZptDocumentRendererFactory
-- uid: ZptSharp.Rendering.ZptDocumentRendererFactory.GetDocumentRenderer(ZptSharp.Dom.IReadsAndWritesDocument)
-  name: GetDocumentRenderer(IReadsAndWritesDocument)
-  href: api/ZptSharp.Rendering.ZptDocumentRendererFactory.html#ZptSharp_Rendering_ZptDocumentRendererFactory_GetDocumentRenderer_ZptSharp_Dom_IReadsAndWritesDocument_
-  commentId: M:ZptSharp.Rendering.ZptDocumentRendererFactory.GetDocumentRenderer(ZptSharp.Dom.IReadsAndWritesDocument)
-  fullName: ZptSharp.Rendering.ZptDocumentRendererFactory.GetDocumentRenderer(ZptSharp.Dom.IReadsAndWritesDocument)
-  nameWithType: ZptDocumentRendererFactory.GetDocumentRenderer(IReadsAndWritesDocument)
+- uid: ZptSharp.Rendering.ZptDocumentRendererFactory.GetDocumentRenderer(System.Type)
+  name: GetDocumentRenderer(Type)
+  href: api/ZptSharp.Rendering.ZptDocumentRendererFactory.html#ZptSharp_Rendering_ZptDocumentRendererFactory_GetDocumentRenderer_System_Type_
+  commentId: M:ZptSharp.Rendering.ZptDocumentRendererFactory.GetDocumentRenderer(System.Type)
+  fullName: ZptSharp.Rendering.ZptDocumentRendererFactory.GetDocumentRenderer(System.Type)
+  nameWithType: ZptDocumentRendererFactory.GetDocumentRenderer(Type)
 - uid: ZptSharp.Rendering.ZptDocumentRendererFactory.GetDocumentRenderer*
   name: GetDocumentRenderer
   href: api/ZptSharp.Rendering.ZptDocumentRendererFactory.html#ZptSharp_Rendering_ZptDocumentRendererFactory_GetDocumentRenderer_
@@ -13909,12 +14017,12 @@ references:
   commentId: T:ZptSharp.ZptDocumentRenderer
   fullName: ZptSharp.ZptDocumentRenderer
   nameWithType: ZptDocumentRenderer
-- uid: ZptSharp.ZptDocumentRenderer.#ctor(System.IServiceProvider,ZptSharp.Dom.IReadsAndWritesDocument)
-  name: ZptDocumentRenderer(IServiceProvider, IReadsAndWritesDocument)
-  href: api/ZptSharp.ZptDocumentRenderer.html#ZptSharp_ZptDocumentRenderer__ctor_System_IServiceProvider_ZptSharp_Dom_IReadsAndWritesDocument_
-  commentId: M:ZptSharp.ZptDocumentRenderer.#ctor(System.IServiceProvider,ZptSharp.Dom.IReadsAndWritesDocument)
-  fullName: ZptSharp.ZptDocumentRenderer.ZptDocumentRenderer(System.IServiceProvider, ZptSharp.Dom.IReadsAndWritesDocument)
-  nameWithType: ZptDocumentRenderer.ZptDocumentRenderer(IServiceProvider, IReadsAndWritesDocument)
+- uid: ZptSharp.ZptDocumentRenderer.#ctor(System.IServiceProvider,System.Type)
+  name: ZptDocumentRenderer(IServiceProvider, Type)
+  href: api/ZptSharp.ZptDocumentRenderer.html#ZptSharp_ZptDocumentRenderer__ctor_System_IServiceProvider_System_Type_
+  commentId: M:ZptSharp.ZptDocumentRenderer.#ctor(System.IServiceProvider,System.Type)
+  fullName: ZptSharp.ZptDocumentRenderer.ZptDocumentRenderer(System.IServiceProvider, System.Type)
+  nameWithType: ZptDocumentRenderer.ZptDocumentRenderer(IServiceProvider, Type)
 - uid: ZptSharp.ZptDocumentRenderer.#ctor*
   name: ZptDocumentRenderer
   href: api/ZptSharp.ZptDocumentRenderer.html#ZptSharp_ZptDocumentRenderer__ctor_

@@ -120,19 +120,19 @@ parse DTDs and which uses a local set of XHTML DTDs.</p>
   </h3>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/csf-dev/ZPT-Sharp/new/master/apiSpec/new?filename=ZptSharp_Dom_XmlReaderSettingsFactory__ctor_ZptSharp_Dom_IGetsXhtmlDtds_.md&amp;value=---%0Auid%3A%20ZptSharp.Dom.XmlReaderSettingsFactory.%23ctor(ZptSharp.Dom.IGetsXhtmlDtds)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/csf-dev/ZPT-Sharp/new/master/apiSpec/new?filename=ZptSharp_Dom_XmlReaderSettingsFactory__ctor_ZptSharp_Dom_IGetsXhtmlDtds_System_IServiceProvider_.md&amp;value=---%0Auid%3A%20ZptSharp.Dom.XmlReaderSettingsFactory.%23ctor(ZptSharp.Dom.IGetsXhtmlDtds%2CSystem.IServiceProvider)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/csf-dev/ZPT-Sharp/blob/master/DocumentProviders/ZptSharp.Xml/XmlReaderSettingsFactory.cs/#L33">View Source</a>
+    <a href="https://github.com/csf-dev/ZPT-Sharp/blob/master/DocumentProviders/ZptSharp.Xml/XmlReaderSettingsFactory.cs/#L41">View Source</a>
   </span>
   <a id="ZptSharp_Dom_XmlReaderSettingsFactory__ctor_" data-uid="ZptSharp.Dom.XmlReaderSettingsFactory.#ctor*"></a>
-  <h4 id="ZptSharp_Dom_XmlReaderSettingsFactory__ctor_ZptSharp_Dom_IGetsXhtmlDtds_" data-uid="ZptSharp.Dom.XmlReaderSettingsFactory.#ctor(ZptSharp.Dom.IGetsXhtmlDtds)">XmlReaderSettingsFactory(IGetsXhtmlDtds)</h4>
+  <h4 id="ZptSharp_Dom_XmlReaderSettingsFactory__ctor_ZptSharp_Dom_IGetsXhtmlDtds_System_IServiceProvider_" data-uid="ZptSharp.Dom.XmlReaderSettingsFactory.#ctor(ZptSharp.Dom.IGetsXhtmlDtds,System.IServiceProvider)">XmlReaderSettingsFactory(IGetsXhtmlDtds, IServiceProvider)</h4>
   <div class="markdown level1 summary"><p>Initializes a new instance of the <a class="xref" href="ZptSharp.Dom.XmlReaderSettingsFactory.html">XmlReaderSettingsFactory</a> class.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public XmlReaderSettingsFactory(IGetsXhtmlDtds dtdProvider)</code></pre>
+    <pre><code class="lang-csharp hljs">public XmlReaderSettingsFactory(IGetsXhtmlDtds dtdProvider, IServiceProvider provider)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -147,8 +147,47 @@ parse DTDs and which uses a local set of XHTML DTDs.</p>
       <tr>
         <td><a class="xref" href="ZptSharp.Dom.IGetsXhtmlDtds.html">IGetsXhtmlDtds</a></td>
         <td><span class="parametername">dtdProvider</span></td>
-        <td><p>Dtd provider.</p>
+        <td><p>A DTD provider service.</p>
 </td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.IServiceProvider</span></td>
+        <td><span class="parametername">provider</span></td>
+        <td><p>The service provider.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="properties">Properties
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/csf-dev/ZPT-Sharp/new/master/apiSpec/new?filename=ZptSharp_Dom_XmlReaderSettingsFactory_Resolver.md&amp;value=---%0Auid%3A%20ZptSharp.Dom.XmlReaderSettingsFactory.Resolver%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/csf-dev/ZPT-Sharp/blob/master/DocumentProviders/ZptSharp.Xml/XmlReaderSettingsFactory.cs/#L34">View Source</a>
+  </span>
+  <a id="ZptSharp_Dom_XmlReaderSettingsFactory_Resolver_" data-uid="ZptSharp.Dom.XmlReaderSettingsFactory.Resolver*"></a>
+  <h4 id="ZptSharp_Dom_XmlReaderSettingsFactory_Resolver" data-uid="ZptSharp.Dom.XmlReaderSettingsFactory.Resolver">Resolver</h4>
+  <div class="markdown level1 summary"><p>Gets the XML resolver which will be returned within the output of <a class="xref" href="ZptSharp.Dom.XmlReaderSettingsFactory.html#ZptSharp_Dom_XmlReaderSettingsFactory_GetReaderSettings">GetReaderSettings()</a>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public XmlResolver Resolver { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Xml.XmlResolver</span></td>
+        <td></td>
       </tr>
     </tbody>
   </table>
@@ -159,7 +198,7 @@ parse DTDs and which uses a local set of XHTML DTDs.</p>
     <a href="https://github.com/csf-dev/ZPT-Sharp/new/master/apiSpec/new?filename=ZptSharp_Dom_XmlReaderSettingsFactory_GetReaderSettings.md&amp;value=---%0Auid%3A%20ZptSharp.Dom.XmlReaderSettingsFactory.GetReaderSettings%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/csf-dev/ZPT-Sharp/blob/master/DocumentProviders/ZptSharp.Xml/XmlReaderSettingsFactory.cs/#L18">View Source</a>
+    <a href="https://github.com/csf-dev/ZPT-Sharp/blob/master/DocumentProviders/ZptSharp.Xml/XmlReaderSettingsFactory.cs/#L22">View Source</a>
   </span>
   <a id="ZptSharp_Dom_XmlReaderSettingsFactory_GetReaderSettings_" data-uid="ZptSharp.Dom.XmlReaderSettingsFactory.GetReaderSettings*"></a>
   <h4 id="ZptSharp_Dom_XmlReaderSettingsFactory_GetReaderSettings" data-uid="ZptSharp.Dom.XmlReaderSettingsFactory.GetReaderSettings">GetReaderSettings()</h4>
@@ -201,7 +240,7 @@ parse DTDs and which uses a local set of XHTML DTDs.</p>
                     <a href="https://github.com/csf-dev/ZPT-Sharp/new/master/apiSpec/new?filename=ZptSharp_Dom_XmlReaderSettingsFactory.md&amp;value=---%0Auid%3A%20ZptSharp.Dom.XmlReaderSettingsFactory%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
                   </li>
                   <li>
-                    <a href="https://github.com/csf-dev/ZPT-Sharp/blob/master/DocumentProviders/ZptSharp.Xml/XmlReaderSettingsFactory.cs/#L10" class="contribution-link">View Source</a>
+                    <a href="https://github.com/csf-dev/ZPT-Sharp/blob/master/DocumentProviders/ZptSharp.Xml/XmlReaderSettingsFactory.cs/#L11" class="contribution-link">View Source</a>
                   </li>
                 </ul>
               </div>

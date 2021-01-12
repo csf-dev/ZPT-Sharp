@@ -96,7 +96,7 @@ document provider.
 This means that you must explicitly select a document provider: an implementation of
 <a class="xref" href="ZptSharp.Dom.IReadsAndWritesDocument.html">IReadsAndWritesDocument</a> and pass it to this document renderer service.
 There are two ways to achieve that; the first way is to pass a <a class="xref" href="ZptSharp.Config.RenderingConfig.html">RenderingConfig</a>
-which has the selected document provider implementation in its <a class="xref" href="ZptSharp.Config.RenderingConfig.html#ZptSharp_Config_RenderingConfig_DocumentProvider">DocumentProvider</a>
+which has the selected document provider implementation in its <a class="xref" href="ZptSharp.Config.RenderingConfig.html#ZptSharp_Config_RenderingConfig_DocumentProviderType">DocumentProviderType</a>
 property.
 The other way is to have manually-registered the document provider with the <code>IServiceProvider</code>
 from which this document-renderer instance was resolved.
@@ -197,7 +197,7 @@ your application/use-case.
 Passing a <a class="xref" href="ZptSharp.Config.RenderingConfig.html">RenderingConfig</a> in the <code data-dev-comment-type="paramref" class="paramref">config</code> parameter is
 optional but recommended.
 Because this service cannot rely upon a filename/extension to automatically select an
-appropriate document provider, using a configuration object with the <a class="xref" href="ZptSharp.Config.RenderingConfig.html#ZptSharp_Config_RenderingConfig_DocumentProvider">DocumentProvider</a>
+appropriate document provider, using a configuration object with the <a class="xref" href="ZptSharp.Config.RenderingConfig.html#ZptSharp_Config_RenderingConfig_DocumentProviderType">DocumentProviderType</a>
 property set is the easiest way to explicitly select the provider.
 The alternative is to have registered an implementation of <a class="xref" href="ZptSharp.Dom.IReadsAndWritesDocument.html">IReadsAndWritesDocument</a>
 with the same <code>IServiceProvider</code> as was used to resolve this document renderer instance.

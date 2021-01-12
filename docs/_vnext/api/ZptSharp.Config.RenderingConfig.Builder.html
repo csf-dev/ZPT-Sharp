@@ -258,19 +258,19 @@ In all modern cases, of course, UTF8 is the recommended encoding.
   </div>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/csf-dev/ZPT-Sharp/new/master/apiSpec/new?filename=ZptSharp_Config_RenderingConfig_Builder_DocumentProvider.md&amp;value=---%0Auid%3A%20ZptSharp.Config.RenderingConfig.Builder.DocumentProvider%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/csf-dev/ZPT-Sharp/new/master/apiSpec/new?filename=ZptSharp_Config_RenderingConfig_Builder_DocumentProviderType.md&amp;value=---%0Auid%3A%20ZptSharp.Config.RenderingConfig.Builder.DocumentProviderType%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
     <a href="https://github.com/csf-dev/ZPT-Sharp/blob/master/ZptSharp/Config/RenderingConfig.Builder.cs/#L77">View Source</a>
   </span>
-  <a id="ZptSharp_Config_RenderingConfig_Builder_DocumentProvider_" data-uid="ZptSharp.Config.RenderingConfig.Builder.DocumentProvider*"></a>
-  <h4 id="ZptSharp_Config_RenderingConfig_Builder_DocumentProvider" data-uid="ZptSharp.Config.RenderingConfig.Builder.DocumentProvider">DocumentProvider</h4>
-  <div class="markdown level1 summary"><p>Gets or sets the document provider implementation which is to be used for the current rendering task.</p>
+  <a id="ZptSharp_Config_RenderingConfig_Builder_DocumentProviderType_" data-uid="ZptSharp.Config.RenderingConfig.Builder.DocumentProviderType*"></a>
+  <h4 id="ZptSharp_Config_RenderingConfig_Builder_DocumentProviderType" data-uid="ZptSharp.Config.RenderingConfig.Builder.DocumentProviderType">DocumentProviderType</h4>
+  <div class="markdown level1 summary"><p>Gets or sets the type of document provider implementation which is to be used for the current rendering task.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public IReadsAndWritesDocument DocumentProvider { get; set; }</code></pre>
+    <pre><code class="lang-csharp hljs">public Type DocumentProviderType { get; set; }</code></pre>
   </div>
   <h5 class="propertyValue">Property Value</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -282,16 +282,16 @@ In all modern cases, of course, UTF8 is the recommended encoding.
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="ZptSharp.Dom.IReadsAndWritesDocument.html">IReadsAndWritesDocument</a></td>
-        <td><p>The document provider implementation to be used by the document-renderer service.</p>
+        <td><span class="xref">System.Type</span></td>
+        <td><p>The document provider implementation type to be used by the document-renderer service.</p>
 </td>
       </tr>
     </tbody>
   </table>
-  <h5 id="ZptSharp_Config_RenderingConfig_Builder_DocumentProvider_remarks">Remarks</h5>
+  <h5 id="ZptSharp_Config_RenderingConfig_Builder_DocumentProviderType_remarks">Remarks</h5>
   <div class="markdown level1 remarks"><p>
 When using <a class="xref" href="ZptSharp.IRendersZptFile.html">IRendersZptFile</a>, this configuration property is irrelevant and ignored.
-The file-rendering service will select an appropriate document renderer based upon
+The file-rendering service will select an appropriate document renderer type based upon
 the filename &amp; extension of the source file.
 </p>
 <p>
@@ -304,7 +304,7 @@ which document provider implementation should be used to read &amp; write the un
 document.
 </p>
 </div>
-  <h5 id="ZptSharp_Config_RenderingConfig_Builder_DocumentProvider_seealso">See Also</h5>
+  <h5 id="ZptSharp_Config_RenderingConfig_Builder_DocumentProviderType_seealso">See Also</h5>
   <div class="seealso">
       <div><a class="xref" href="ZptSharp.IRendersZptDocument.html">IRendersZptDocument</a></div>
   </div>
@@ -645,6 +645,58 @@ The absolute path would be used because the source file is outside the base path
       <div><a class="xref" href="ZptSharp.IRendersZptFile.html">IRendersZptFile</a></div>
       <div><a class="xref" href="ZptSharp.Config.RenderingConfig.Builder.html#ZptSharp_Config_RenderingConfig_Builder_IncludeSourceAnnotation">IncludeSourceAnnotation</a></div>
   </div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/csf-dev/ZPT-Sharp/new/master/apiSpec/new?filename=ZptSharp_Config_RenderingConfig_Builder_XmlUrlResolver.md&amp;value=---%0Auid%3A%20ZptSharp.Config.RenderingConfig.Builder.XmlUrlResolver%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/csf-dev/ZPT-Sharp/blob/master/ZptSharp/Config/RenderingConfig.Builder.cs/#L379">View Source</a>
+  </span>
+  <a id="ZptSharp_Config_RenderingConfig_Builder_XmlUrlResolver_" data-uid="ZptSharp.Config.RenderingConfig.Builder.XmlUrlResolver*"></a>
+  <h4 id="ZptSharp_Config_RenderingConfig_Builder_XmlUrlResolver" data-uid="ZptSharp.Config.RenderingConfig.Builder.XmlUrlResolver">XmlUrlResolver</h4>
+  <div class="markdown level1 summary"><p>Gets or sets a custom XML URL resolver which should be used to resolve XML namespaces
+for XML-based document providers.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public XmlUrlResolver XmlUrlResolver { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Xml.XmlUrlResolver</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="ZptSharp_Config_RenderingConfig_Builder_XmlUrlResolver_remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>
+When using an XML-based document provider (and only when using an XML-based document provider),
+in order to fully validate these documents (and provide appropriate entity support), supporting
+assets are required.  These can include DTDs, modules and the like.
+When making use of an XML document which conforms to a DTD, it is usually desirable (for both performance
+and security purposes) to use a custom XML URL resolver.  This allows techniques such as caching,
+security-enforcement and perhaps even the local serving of those assets without making any
+HTTP(s) requests at all.
+</p>
+<p>
+When set, this configuration setting specifies the custom XML URL resolver which should be used by
+XML-based document providers.  It has no effect at all upon HTML-based document providers.
+</p>
+<p>
+Please note that the official ZptSharp XML document provider includes a URL provider which serves
+XHTML assets from embedded resources, bypassing all HTTP requests.  This built-in URL provider will
+be used if this configuration setting is <span class="xref">null</span>.
+</p>
+</div>
   <h3 id="methods">Methods
   </h3>
   <span class="small pull-right mobile-hide">
@@ -652,7 +704,7 @@ The absolute path would be used because the source file is outside the base path
     <a href="https://github.com/csf-dev/ZPT-Sharp/new/master/apiSpec/new?filename=ZptSharp_Config_RenderingConfig_Builder_GetConfig.md&amp;value=---%0Auid%3A%20ZptSharp.Config.RenderingConfig.Builder.GetConfig%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/csf-dev/ZPT-Sharp/blob/master/ZptSharp/Config/RenderingConfig.Builder.cs/#L372">View Source</a>
+    <a href="https://github.com/csf-dev/ZPT-Sharp/blob/master/ZptSharp/Config/RenderingConfig.Builder.cs/#L402">View Source</a>
   </span>
   <a id="ZptSharp_Config_RenderingConfig_Builder_GetConfig_" data-uid="ZptSharp.Config.RenderingConfig.Builder.GetConfig*"></a>
   <h4 id="ZptSharp_Config_RenderingConfig_Builder_GetConfig" data-uid="ZptSharp.Config.RenderingConfig.Builder.GetConfig">GetConfig()</h4>
