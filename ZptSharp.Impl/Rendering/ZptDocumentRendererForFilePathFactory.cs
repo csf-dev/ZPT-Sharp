@@ -33,7 +33,7 @@ namespace ZptSharp.Rendering
         {
             var readerWriter = ReaderWriterFactory.GetDocumentProvider(filePath);
 
-            if (readerWriter != null) return readerWriter.GetType();
+            if (readerWriter != null) return readerWriter.ResolvableType;
 
             var message = String.Format(Resources.ExceptionMessage.CannotGetReaderWriterForFile,
                                         filePath,
