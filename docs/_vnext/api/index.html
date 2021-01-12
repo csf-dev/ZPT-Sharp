@@ -70,49 +70,52 @@
 <h1 id="zptsharp-api-reference">ZptSharp API reference</h1>
 
 <p>This guide takes you through the process of adding ZptSharp to your own application, consuming it as an API.</p>
-<h2 id="adding-zptsharp-to-your-application">Adding ZptSharp to your application</h2>
-<p>Firstly, you must install the appropriate <a href="../articles/NuGetPackages.html">ZptSharp NuGet packages</a> to your application.
-In addition to the summary below, there is also <a href="../articles/DiSetup.html">a more in-depth writeup of the DI &amp; setup functionality</a> available to read.</p>
-<h3 id="adding-zptsharp-to-dependency-injection">Adding ZptSharp to dependency injection</h3>
-<p>The best way to consume ZptSharp is <em>to include it within <a href="https://docs.microsoft.com/en-us/dotnet/core/extensions/dependency-injection">your application's dependency injection</a></em>.
-In your startup logic, add ZptSharp to the <a href="https://docs.microsoft.com/en-us/dotnet/api/microsoft.extensions.dependencyinjection.iservicecollection"><code>IServiceCollection</code></a> from which you are building your application.
+<h2 id="installing-nuget-packages">Installing NuGet packages</h2>
+<p>The first step is to add references to the appropriate <a href="../articles/NuGetPackages.html">ZptSharp NuGet packages</a> from your app.
+The project/assembly which sets up your dependency injection must reference the package <strong>ZptSharp.Impl</strong>, as well as any document provider or expression evaluator packages you wish to use.
+A working ZptSharp environment <em>requires at least one document provider</em>.</p>
+<p>If your app makes use of ZptSharp from <em>a different project/assembly</em>, then that only need reference the <strong>ZptSharp</strong> package.
+Once added to DI, ZptSharp may be consumed from only its interfaces.</p>
+<h2 id="adding-zptsharp-to-di">Adding ZptSharp to DI</h2>
+<p>The second step is to add ZptSharp to <a href="https://docs.microsoft.com/en-us/dotnet/core/extensions/dependency-injection">your application's dependency injection</a> (the <a href="https://docs.microsoft.com/en-us/dotnet/api/microsoft.extensions.dependencyinjection.iservicecollection"><code>IServiceCollection</code></a>). This should occur in your application's startup.
 Ideally, if you are using <a href="https://docs.microsoft.com/en-us/dotnet/core/extensions/generic-host">.NET Generic Host</a> then you will be using that framework to register and configure your services.
-If using <a href="https://docs.microsoft.com/en-us/aspnet/aspnet/overview/owin-and-katana/getting-started-with-owin-and-katana">OWIN</a> then you will have access to a startup class where services are registered as middleware.
+If using <a href="https://docs.microsoft.com/en-us/aspnet/aspnet/overview/owin-and-katana/getting-started-with-owin-and-katana">OWIN</a> then you will have access to a startup class where services and middleware are configured.
 Other frameworks will have their own equivalents to this process.</p>
+<p>The addition to dependency injection begins with the use of <a href="xref:ZptSharp.ServiceCollectionExtensions.AddZptSharp(Microsoft.Extensions.DependencyInjection.IServiceCollection)"><code>AddZptSharp()</code></a>.
+This returns a builder object which exposes further methods; some from the core and some made available by NuGet packages.
+With these you should add <em>at least one expression evaluator</em> and <em>at least one document provider</em>.
+Following is a typical example.</p>
 <pre><code class="lang-csharp">using Microsoft.Extensions.DependencyInjection;
 using ZptSharp;
 
 void RegisterServices(IServiceCollection serviceCollection)
 {
-    // This example uses the AngleSharp document provider; you
-    // may register any you like but register AT LEAST ONE.
-    // 
-    // This is also where you would register extra
-    // expression evaluators if you wish.
     serviceCollection
         .AddZptSharp()
+        .AddStandardZptExpressions()
         .AddAngleSharpZptDocuments();
 }
 </code></pre>
-<h3 id="one-time-services-setup">One-time services setup</h3>
-<p>Once the ZptSharp services are registered with dependency injection, the <code>IServiceCollection</code> will be used to create an <a href="https://docs.microsoft.com/en-us/dotnet/api/system.iserviceprovider"><code>IServiceProvider</code></a>.
-This service provider needs a small amount of one-time set-up for each document provider/expression evaluator you wish to use.</p>
-<pre><code class="lang-csharp">using System;
-using ZptSharp;
+<h3 id="if-you-cannot-use-di">If you cannot use DI</h3>
+<p>It is strongly recommended to consume ZptSharp via dependency injection as described above.
+If you cannot do this then it is possible to create/get an object which provides access to ZptSharp in a self-contained manner.
+This is accomplished via the class [<code>ZptSharp.ZptSharpHost</code>].</p>
+<p>The following example is equivalent to the dependency injection example above.
+The mechanisms to add expression evaluators &amp; document providers are also identical.
+Note that there is no call to <code>AddZptSharp()</code>; this is implied.</p>
+<pre><code class="lang-csharp">using ZptSharp;
 
-void SetupZptServices(IServiceProvider provider)
-{
-    provider
-        .UseStandardZptExpressions()
-        .UseAngleSharpZptDocuments();
-}
+var host = ZptSharpHost.GetHost(builder =&gt; 
+    builder
+        .AddStandardZptExpressions()
+        .AddAngleSharpZptDocuments()
+);
 </code></pre>
-<h3 id="if-you-cannot-use-dependency-injection">If you cannot use dependency injection</h3>
-<p>There is an alternative to registering ZptSharp with your application's dependency injection; that is <a href="../articles/SelfHosting.html">to use the ZptSharp.Hosting NuGet package</a>.
-This allows creation of a self-hosting object exposing the ZptSharp services, without needing to wire it up into a wider environment.</p>
+<p>[<code>ZptSharp.ZptSharpHost</code>]: xref: ZptSharp.ZptSharpHost</p>
 <h2 id="injecting-and-consuming-zptsharp">Injecting and consuming ZptSharp</h2>
-<p>Once ZptSharp is available via your application's dependency injection, you may inject &amp; consume ZptSharp's service interfaces in your app logic.
-The recommended interfaces to inject and consume are:</p>
+<p>Once ZptSharp is available via your application's dependency injection, you may inject &amp; consume ZptSharp's service interfaces in your app logic.</p>
+<p>The table below lists a few interfaces for ZptSharp services which are intended for use as entry-points into its logic.
+<a class="xref" href="ZptSharp.Hosting.IHostsZptSharp.html">The self-contained host</a> which does not use DI also makes these same interfaces available via its properties.</p>
 <table>
 <thead>
 <tr>
@@ -141,7 +144,7 @@ The recommended interfaces to inject and consume are:</p>
 </table>
 <h2 id="configuring-the-rendering-operations">Configuring the rendering operations</h2>
 <p>The methods <a class="xref" href="ZptSharp.IRendersZptFile.html#ZptSharp_IRendersZptFile_RenderAsync_System_String_System_Object_ZptSharp_Config_RenderingConfig_System_Threading_CancellationToken_"><code>IRendersZptFile.RenderAsync</code></a>, <a class="xref" href="ZptSharp.IRendersZptDocument.html#ZptSharp_IRendersZptDocument_RenderAsync_System_IO_Stream_System_Object_ZptSharp_Config_RenderingConfig_System_Threading_CancellationToken_ZptSharp_Rendering_IDocumentSourceInfo_"><code>IRendersZptDocument.RenderAsync</code></a> &amp; <a class="xref" href="ZptSharp.BulkRendering.IRendersManyFiles.html#ZptSharp_BulkRendering_IRendersManyFiles_RenderAllAsync_ZptSharp_BulkRendering_BulkRenderingRequest_System_Threading_CancellationToken_"><code>IRendersManyFiles.RenderAllAsync</code></a> all accept an instance of <a class="xref" href="ZptSharp.Config.RenderingConfig.html"><code>RenderingConfig</code></a>, either as a parameter or as part of a request object.</p>
-<p>You are advised to read the documentation for the rendering configuration object to understand how it impacts the rendering process.</p>
+<p>You are advised to read the documentation for the rendering configuration, to see the available options which may be used to customize the process.</p>
 </article>
           </div>
           
