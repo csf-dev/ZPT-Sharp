@@ -23,7 +23,7 @@ namespace ZptSharp
     /// This means that you must explicitly select a document provider: an implementation of
     /// <see cref="Dom.IReadsAndWritesDocument" /> and pass it to this document renderer service.
     /// There are two ways to achieve that; the first way is to pass a <see cref="Config.RenderingConfig" />
-    /// which has the selected document provider implementation in its <see cref="Config.RenderingConfig.DocumentProvider" />
+    /// which has the selected document provider implementation in its <see cref="Config.RenderingConfig.DocumentProviderType" />
     /// property.
     /// The other way is to have manually-registered the document provider with the <c>IServiceProvider</c>
     /// from which this document-renderer instance was resolved.
@@ -53,7 +53,7 @@ namespace ZptSharp
         /// Passing a <see cref="RenderingConfig" /> in the <paramref name="config" /> parameter is
         /// optional but recommended.
         /// Because this service cannot rely upon a filename/extension to automatically select an
-        /// appropriate document provider, using a configuration object with the <see cref="Config.RenderingConfig.DocumentProvider"/>
+        /// appropriate document provider, using a configuration object with the <see cref="Config.RenderingConfig.DocumentProviderType"/>
         /// property set is the easiest way to explicitly select the provider.
         /// The alternative is to have registered an implementation of <see cref="Dom.IReadsAndWritesDocument" />
         /// with the same <c>IServiceProvider</c> as was used to resolve this document renderer instance.

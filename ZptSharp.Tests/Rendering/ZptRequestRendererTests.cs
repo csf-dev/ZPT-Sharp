@@ -16,7 +16,8 @@ namespace ZptSharp.Rendering
     public class ZptRequestRendererTests
     {
         [Test, AutoMoqData]
-        public void RenderAsync_returns_stream_using_correct_process(IReadsAndWritesDocument documentReaderWriter,
+        public void RenderAsync_returns_stream_using_correct_process(Type documentReaderWriterType,
+                                                                     IReadsAndWritesDocument readerWriter,
                                                                      IGetsDocumentModifier rendererFactory,
                                                                      IStoresCurrentReaderWriter readerWriterServiceLocator,
                                                                      [Frozen, ServiceProvider] IServiceProvider serviceProvider,
@@ -38,11 +39,12 @@ namespace ZptSharp.Rendering
             Mock.Get(serviceProvider).Setup(x => x.GetService(typeof(IStoresCurrentReaderWriter))).Returns(readerWriterServiceLocator);
             Mock.Get(serviceProvider).Setup(x => x.GetService(typeof(ILogger<ZptRequestRenderer>))).Returns(logger);
             Mock.Get(rendererFactory).Setup(x => x.GetDocumentModifier(It.IsAny<RenderZptDocumentRequest>())).Returns(renderer);
-            Mock.Get(config).SetupGet(x => x.DocumentProvider).Returns(documentReaderWriter);
-            Mock.Get(documentReaderWriter)
+            Mock.Get(config).SetupGet(x => x.DocumentProviderType).Returns(documentReaderWriterType);
+            Mock.Get(serviceProvider).Setup(x => x.GetService(documentReaderWriterType)).Returns(readerWriter);
+            Mock.Get(readerWriter)
                 .Setup(x => x.GetDocumentAsync(input, config, sourceInfo, It.IsAny<System.Threading.CancellationToken>()))
                 .Returns(() => Task.FromResult(document));
-            Mock.Get(documentReaderWriter)
+            Mock.Get(readerWriter)
                 .Setup(x => x.WriteDocumentAsync(document, config, It.IsAny<System.Threading.CancellationToken>()))
                 .Returns(() => Task.FromResult(output));
 

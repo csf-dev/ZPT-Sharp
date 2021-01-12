@@ -2,6 +2,7 @@
 using System.IO;
 using System.Text;
 using System.Threading.Tasks;
+using Moq;
 using ZptSharp.Config;
 
 namespace ZptSharp.Dom
@@ -9,7 +10,8 @@ namespace ZptSharp.Dom
     public static class XmlDocumentUtil
     {
         static readonly XmlDocumentProvider
-            provider = new XmlDocumentProvider(new XmlReaderSettingsFactory(new Resources.EmbeddedResourceXhtmlDtdProvider()));
+            provider = new XmlDocumentProvider(new XmlReaderSettingsFactory(new Resources.EmbeddedResourceXhtmlDtdProvider(),
+                                               Mock.Of<IServiceProvider>(x => x.GetService(typeof(RenderingConfig)) == RenderingConfig.Default)));
 
         /// <summary>
         /// Gets a single XML node node from the first node in the specified XML string.

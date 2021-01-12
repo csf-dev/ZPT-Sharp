@@ -56,7 +56,7 @@ namespace ZptSharp
 
         [Test, AutoMoqData]
         public void RenderAsync_uses_config_with_overridden_document_provider_when_specified([MockedConfig] RenderingConfig config,
-                                                                                             [Frozen] IReadsAndWritesDocument provider,
+                                                                                             [Frozen] System.Type provider,
                                                                                              [Frozen] IServiceProvider serviceProvider,
                                                                                              ZptDocumentRenderer sut,
                                                                                              Stream stream,
@@ -69,7 +69,7 @@ namespace ZptSharp
 
             Mock.Get(renderer)
                 .Verify(x => x.RenderAsync(It.IsAny<RenderZptDocumentRequest>(),
-                                           It.Is<RenderingConfig>(c => c.DocumentProvider == provider),
+                                           It.Is<RenderingConfig>(c => c.DocumentProviderType == provider),
                                            CancellationToken.None),
                         Times.Once);
         }

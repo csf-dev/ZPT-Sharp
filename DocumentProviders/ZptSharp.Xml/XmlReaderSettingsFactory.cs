@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Xml;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace ZptSharp.Dom
 {
@@ -10,6 +11,9 @@ namespace ZptSharp.Dom
     public class XmlReaderSettingsFactory : IGetsXmlReaderSettings
     {
         readonly IGetsXhtmlDtds dtdProvider;
+        readonly IServiceProvider provider;
+
+        Config.RenderingConfig Config => provider.GetRequiredService<Config.RenderingConfig>();
 
         /// <summary>
         /// Gets the reader settings.
@@ -17,21 +21,26 @@ namespace ZptSharp.Dom
         /// <returns>The reader settings.</returns>
         public XmlReaderSettings GetReaderSettings()
         {
-            var resolver = new XhtmlOnlyXmlUrlResolver(dtdProvider);
-
             return new XmlReaderSettings
             {
-                XmlResolver = resolver,
+                XmlResolver = Resolver,
                 DtdProcessing = DtdProcessing.Parse,
             };
         }
 
         /// <summary>
+        /// Gets the XML resolver which will be returned within the output of <see cref="GetReaderSettings"/>.
+        /// </summary>
+        public XmlResolver Resolver => Config.XmlUrlResolver ?? new XhtmlOnlyXmlUrlResolver(dtdProvider);
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="XmlReaderSettingsFactory"/> class.
         /// </summary>
-        /// <param name="dtdProvider">Dtd provider.</param>
-        public XmlReaderSettingsFactory(IGetsXhtmlDtds dtdProvider)
+        /// <param name="dtdProvider">A DTD provider service.</param>
+        /// <param name="provider">The service provider.</param>
+        public XmlReaderSettingsFactory(IGetsXhtmlDtds dtdProvider, IServiceProvider provider)
         {
+            this.provider = provider ?? throw new ArgumentNullException(nameof(provider));
             this.dtdProvider = dtdProvider ?? throw new ArgumentNullException(nameof(dtdProvider));
         }
     }

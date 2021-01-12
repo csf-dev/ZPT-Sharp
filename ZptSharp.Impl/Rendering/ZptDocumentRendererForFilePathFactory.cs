@@ -25,15 +25,15 @@ namespace ZptSharp.Rendering
         /// <param name="filePath">The path to a file which would be rendered by the renderer.</param>
         public IRendersZptDocument GetDocumentRenderer(string filePath)
         {
-            var readerWriter = GetDocumentReaderWriter(filePath);
-            return RendererFactory.GetDocumentRenderer(readerWriter);
+            var readerWriterType = GetDocumentReaderWriterType(filePath);
+            return RendererFactory.GetDocumentRenderer(readerWriterType);
         }
 
-        IReadsAndWritesDocument GetDocumentReaderWriter(string filePath)
+        System.Type GetDocumentReaderWriterType(string filePath)
         {
             var readerWriter = ReaderWriterFactory.GetDocumentProvider(filePath);
 
-            if (readerWriter != null) return readerWriter;
+            if (readerWriter != null) return readerWriter.ResolvableType;
 
             var message = String.Format(Resources.ExceptionMessage.CannotGetReaderWriterForFile,
                                         filePath,

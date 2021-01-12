@@ -16,13 +16,13 @@ namespace ZptSharp.Config
     public class RenderingConfigTests
     {
         [Test, AutoMoqData]
-        public void Builder_creates_config_with_correct_properties(IReadsAndWritesDocument documentProvider,
+        public void Builder_creates_config_with_correct_properties(System.Type documentProvider,
                                                                    IDictionary<string,object> keywordOptions)
         {
             var sut = RenderingConfig.CreateBuilder();
 
             sut.DocumentEncoding = Encoding.ASCII;
-            sut.DocumentProvider = documentProvider;
+            sut.DocumentProviderType = documentProvider;
             sut.IncludeSourceAnnotation = true;
             sut.KeywordOptions = keywordOptions;
             sut.OmitXmlDeclaration = true;
@@ -31,7 +31,7 @@ namespace ZptSharp.Config
 
             Assert.That(result,
                         Has.Property(nameof(RenderingConfig.DocumentEncoding)).EqualTo(Encoding.ASCII)
-                        .And.Property(nameof(RenderingConfig.DocumentProvider)).SameAs(documentProvider)
+                        .And.Property(nameof(RenderingConfig.DocumentProviderType)).SameAs(documentProvider)
                         .And.Property(nameof(RenderingConfig.IncludeSourceAnnotation)).True
                         .And.Property(nameof(RenderingConfig.KeywordOptions)).EqualTo(keywordOptions)
                         .And.Property(nameof(RenderingConfig.OmitXmlDeclaration)).True);
@@ -88,7 +88,7 @@ namespace ZptSharp.Config
             var sut = RenderingConfig.CreateBuilder();
 
             sut.GetConfig();
-            Assert.That(() => sut.DocumentProvider = null, Throws.InvalidOperationException);
+            Assert.That(() => sut.DocumentProviderType = null, Throws.InvalidOperationException);
         }
 
         [Test, AutoMoqData]
