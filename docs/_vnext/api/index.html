@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="../styles/docfx.css">
     <link rel="stylesheet" href="../styles/main.css">
     <meta property="docfx:navrel" content="../toc.html">
-    <meta property="docfx:tocrel" content="toc.html">
+    <meta property="docfx:tocrel" content="../articles/toc.html">
     
     
     
@@ -81,7 +81,7 @@ Once added to DI, ZptSharp may be consumed from only its interfaces.</p>
 Ideally, if you are using <a href="https://docs.microsoft.com/en-us/dotnet/core/extensions/generic-host">.NET Generic Host</a> then you will be using that framework to register and configure your services.
 If using <a href="https://docs.microsoft.com/en-us/aspnet/aspnet/overview/owin-and-katana/getting-started-with-owin-and-katana">OWIN</a> then you will have access to a startup class where services and middleware are configured.
 Other frameworks will have their own equivalents to this process.</p>
-<p>The addition to dependency injection begins with the use of <a href="xref:ZptSharp.ServiceCollectionExtensions.AddZptSharp(Microsoft.Extensions.DependencyInjection.IServiceCollection)"><code>AddZptSharp()</code></a>.
+<p>The addition to dependency injection begins with the use of <a class="xref" href="ZptSharp.ZptSharpServiceCollectionExtensions.html#ZptSharp_ZptSharpServiceCollectionExtensions_AddZptSharp_Microsoft_Extensions_DependencyInjection_IServiceCollection_"><code>AddZptSharp()</code></a>.
 This returns a builder object which exposes further methods; some from the core and some made available by NuGet packages.
 With these you should add <em>at least one expression evaluator</em> and <em>at least one document provider</em>.
 Following is a typical example.</p>
@@ -96,10 +96,11 @@ void RegisterServices(IServiceCollection serviceCollection)
         .AddAngleSharpZptDocuments();
 }
 </code></pre>
+<p>See the documentation for <a class="xref" href="ZptSharp.Hosting.IBuildsHostingEnvironment.html">the ZptSharp DI builder object</a> for a full list of the available extension methods.</p>
 <h3 id="if-you-cannot-use-di">If you cannot use DI</h3>
 <p>It is strongly recommended to consume ZptSharp via dependency injection as described above.
 If you cannot do this then it is possible to create/get an object which provides access to ZptSharp in a self-contained manner.
-This is accomplished via the class [<code>ZptSharp.ZptSharpHost</code>].</p>
+This is accomplished via the class <a class="xref" href="ZptSharp.ZptSharpHost.html"><code>ZptSharp.ZptSharpHost</code></a>.</p>
 <p>The following example is equivalent to the dependency injection example above.
 The mechanisms to add expression evaluators &amp; document providers are also identical.
 Note that there is no call to <code>AddZptSharp()</code>; this is implied.</p>
@@ -111,7 +112,7 @@ var host = ZptSharpHost.GetHost(builder =&gt;
         .AddAngleSharpZptDocuments()
 );
 </code></pre>
-<p>[<code>ZptSharp.ZptSharpHost</code>]: xref: ZptSharp.ZptSharpHost</p>
+<p>If using this mechanism instead of DI, then you are responsible for getting the returned host object to the class which will use it.</p>
 <h2 id="injecting-and-consuming-zptsharp">Injecting and consuming ZptSharp</h2>
 <p>Once ZptSharp is available via your application's dependency injection, you may inject &amp; consume ZptSharp's service interfaces in your app logic.</p>
 <p>The table below lists a few interfaces for ZptSharp services which are intended for use as entry-points into its logic.
