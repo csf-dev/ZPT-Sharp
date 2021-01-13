@@ -69,7 +69,7 @@
 <li><strong><a href="https://www.nuget.org/packages/ZptSharp">ZptSharp</a></strong>, which has very few dependencies and contains only abstractions and interfaces for the ZptSharp functionality.</li>
 <li><strong><a href="https://www.nuget.org/packages/ZptSharp.Impl">ZptSharp.Impl</a></strong> contains the majority of the ZptSharp logic.</li>
 </ul>
-<p>A consuming application/solution must reference the <code>ZptSharp.Impl</code> package from the project/assembly <a href="../api/index.html#Adding-ZptSharp-to-DI">where it sets up dependency injection</a>.
+<p>A consuming application/solution must reference the <code>ZptSharp.Impl</code> package from the project/assembly <a href="../api/index.html#adding-zptsharp-to-di">where it sets up dependency injection</a>.
 The project which sets up dependency injection must also reference any document provider(s) &amp; extra expression evaluator packages which are desired.</p>
 <p>Using dependency injection &amp; in a multi-project solution, projects which make use of ZptSharp's functionality need only reference <code>ZptSharp</code>.
 This holds true regardless of which document providers or expression evaluators are used.

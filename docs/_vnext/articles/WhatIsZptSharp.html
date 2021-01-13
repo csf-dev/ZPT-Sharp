@@ -90,11 +90,20 @@ ZptSharp is a pure .NET implementation of just the page templates syntax from Zo
 <li>Offers the full range of functionality to support complex MVC applications</li>
 </ul>
 <h2 id="what-are-its-fundamentals">What are its fundamentals?</h2>
-<p>ZPT's syntax is organised into three logical 'modules' of functionality.</p>
+<p>ZPT's syntax is organised into three logical 'modules' of functionality.
+The first of these is an extensible expression syntax for accessing the model, which has the goal of being easy to read &amp; understand without programming knowledge.
+The default syntax looks a lot like a URL path, such as <code>here/Product/Name</code>.
+This expression syntax is named <strong>TALES</strong>.</p>
+<p>The second is a mechanism (named <strong>METAL</strong>) for reusing markup across document templates and authoring logical parts of a document as separate source files.
+Designers define <em>macros</em> of markup for re-use, which may optionally contain <em>slots</em> (placeholders).
+At the point of macro usage, markup/content may be supplied to fill the available slots.</p>
+<p>The third function of ZPT handles the actual data-binding and manipulation of the document using the model; this a syntax named <strong>TAL</strong>.
+Some aspects of that functionality include (but are not limited to):</p>
 <ul>
-<li><strong>TALES</strong> is an extensible expression syntax used to refer to your model values. It may also be used for limited manipulation, primarily aimed at formatting/transforming values for writing to the document. TALES is used by both TAL &amp; METAL (below).</li>
-<li><strong>METAL</strong> is an attribute syntax for reusing sections of markup: &quot;macros&quot;. The syntax also allows contextual customisation of macros, by filling placeholder &quot;slots&quot; which they define.</li>
-<li><strong>TAL</strong> is an attribute syntax for writing model content to the document, conditionally removing parts of the document, repeating sections of markup for each item in a model collection and more.</li>
+<li>Writing model content to the document</li>
+<li>Conditionally removing parts of the document</li>
+<li>Repeating parts of the document for items in a collection</li>
+<li>Adding/removing/updating attributes &amp; values</li>
 </ul>
 </article>
           </div>
