@@ -20,7 +20,7 @@
     - name: MVC view engines
       href: ViewEngines.md
     - name: Consuming the API
-      href: ../api/index.md
+      topicHref: ../api/index.md
     - name: ZPT syntax
       href: ZptReference/index.md
       items:

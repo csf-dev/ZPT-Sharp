@@ -19,7 +19,7 @@ A working ZptSharp environment *must include at least one document provider* pac
 
 [ZptSharp]: https://www.nuget.org/packages/ZptSharp
 [ZptSharp.Impl]: https://www.nuget.org/packages/ZptSharp.Impl
-[where it sets up dependency injection]: ../API/index.md#Adding-ZptSharp-to-DI
+[where it sets up dependency injection]: ../API/index.md#adding-zptsharp-to-di
 
 ## Document providers
 
