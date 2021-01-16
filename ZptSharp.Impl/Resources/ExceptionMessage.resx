@@ -88,6 +88,11 @@ The inner exception will provide further information as to why.</value>
         <value>Neither a directory nor a ZPT document file was found matching the specified path.
 Path:{0}</value>
     </data>
+    <data name="MultipleMatchingDocumentsFound" xml:space="preserve">
+        <value>Multiple files match the extension-less file path.  If omitting the file extension, it must indicate a single unambiguous document file.
+Directory:{0}
+ Filename:{1}</value>
+    </data>
     <data name="InvalidTalDefineAttribute" xml:space="preserve">
         <value>The tal:define attribute value must be valid.
 Element:{0}
@@ -172,5 +177,11 @@ Refer to the inner exception for more detail.
         <value>The pipe expression delegate must accept precisely one parameter and must return a non-void object.
 Actual parameter types:{0}
     Actual return type:{1}</value>
+    </data>
+    <data name="UnsupportedLoadExpressionResult" xml:space="preserve">
+        <value>A load expression must indicate an object which may be loaded.
+        Element:{0}
+    Actual type:{1}
+Supported types:{2}</value>
     </data>
 </root>

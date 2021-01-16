@@ -2,6 +2,7 @@
 using System.Threading;
 using System.Threading.Tasks;
 using ZptSharp.Dom;
+using ZptSharp.Expressions;
 
 namespace ZptSharp.Rendering
 {
@@ -12,21 +13,17 @@ namespace ZptSharp.Rendering
     public class IterativeDocumentModifier : IIterativelyModifiesDocument
     {
         readonly IGetsIterativeExpressionContextProcessor iteratorFactory;
-        readonly IGetsRootExpressionContext rootContextProvider;
 
         /// <summary>
         /// Modifies the document using the specified context processor.
         /// </summary>
-        /// <param name="document">The document to modify.</param>
-        /// <param name="request">The rendering request.</param>
+        /// <param name="rootContext">The root expression context.</param>
         /// <param name="contextProcessor">The processor to use when processing each expression context.</param>
         /// <param name="token">A cancellation token.</param>
-        public async Task ModifyDocumentAsync(IDocument document,
-                                              RenderZptDocumentRequest request,
+        public async Task ModifyDocumentAsync(ExpressionContext rootContext,
                                               IProcessesExpressionContext contextProcessor,
                                               CancellationToken token = default)
         {
-            var rootContext = rootContextProvider.GetExpressionContext(document, request);
             var iterator = iteratorFactory.GetContextIterator(contextProcessor);
 
             await iterator.IterateContextAndChildrenAsync(rootContext, token)
@@ -37,12 +34,9 @@ namespace ZptSharp.Rendering
         /// Initializes a new instance of the <see cref="IterativeDocumentModifier"/> class.
         /// </summary>
         /// <param name="iteratorFactory">Iterator factory.</param>
-        /// <param name="rootContextProvider">Root context provider.</param>
-        public IterativeDocumentModifier(IGetsIterativeExpressionContextProcessor iteratorFactory,
-                                         IGetsRootExpressionContext rootContextProvider)
+        public IterativeDocumentModifier(IGetsIterativeExpressionContextProcessor iteratorFactory)
         {
             this.iteratorFactory = iteratorFactory ?? throw new ArgumentNullException(nameof(iteratorFactory));
-            this.rootContextProvider = rootContextProvider ?? throw new ArgumentNullException(nameof(rootContextProvider));
         }
     }
 }

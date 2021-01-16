@@ -1,6 +1,6 @@
 using System.Threading;
 using System.Threading.Tasks;
-using ZptSharp.Dom;
+using ZptSharp.Expressions;
 
 namespace ZptSharp.Rendering
 {
@@ -13,12 +13,10 @@ namespace ZptSharp.Rendering
         /// <summary>
         /// Modifies the document using the specified context processor.
         /// </summary>
-        /// <param name="document">The document to modify.</param>
-        /// <param name="request">The rendering request.</param>
+        /// <param name="rootContext">The root expression context.</param>
         /// <param name="contextProcessor">The processor to use when processing each expression context.</param>
         /// <param name="token">A cancellation token.</param>
-        Task ModifyDocumentAsync(IDocument document,
-                                 RenderZptDocumentRequest request,
+        Task ModifyDocumentAsync(ExpressionContext rootContext,
                                  IProcessesExpressionContext contextProcessor,
                                  CancellationToken token = default);
     }

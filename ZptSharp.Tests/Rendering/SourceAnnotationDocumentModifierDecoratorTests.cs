@@ -7,6 +7,7 @@ using NUnit.Framework;
 using ZptSharp.Autofixture;
 using ZptSharp.Config;
 using ZptSharp.Dom;
+using ZptSharp.Expressions;
 using ZptSharp.SourceAnnotation;
 
 namespace ZptSharp.Rendering
@@ -19,26 +20,31 @@ namespace ZptSharp.Rendering
                                                                                                                                        [Frozen] IIterativelyModifiesDocument iterativeModifier,
                                                                                                                                        [Frozen] IModifiesDocument wrapped,
                                                                                                                                        [MockedConfig, Frozen] RenderingConfig config,
+                                                                                                                           [Frozen] IGetsRootExpressionContext rootContextProvider,
                                                                                                                                        SourceAnnotationDocumentModifierDecorator sut,
                                                                                                                                        IProcessesExpressionContext processor,
                                                                                                                                        IDocument document,
-                                                                                                                                       RenderZptDocumentRequest request)
+                                                                                                                                       object model,
+                                                                                                                                       ExpressionContext context)
         {
             Mock.Get(config).SetupGet(x => x.IncludeSourceAnnotation).Returns(true);
             Mock.Get(contextProcessorFactory)
                 .Setup(x => x.GetSourceAnnotationContextProcessor())
                 .Returns(processor);
+            Mock.Get(rootContextProvider)
+                .Setup(x => x.GetExpressionContext(document, model))
+                .Returns(context);
             Mock.Get(iterativeModifier)
-                .Setup(x => x.ModifyDocumentAsync(document, request, processor, CancellationToken.None))
+                .Setup(x => x.ModifyDocumentAsync(context, processor, CancellationToken.None))
                 .Returns(Task.CompletedTask);
             Mock.Get(wrapped)
-                .Setup(x => x.ModifyDocumentAsync(document, request, CancellationToken.None))
+                .Setup(x => x.ModifyDocumentAsync(document, model, CancellationToken.None))
                 .Returns(Task.CompletedTask);
 
-            await sut.ModifyDocumentAsync(document, request);
+            await sut.ModifyDocumentAsync(document, model);
 
             Mock.Get(iterativeModifier)
-                .Verify(x => x.ModifyDocumentAsync(document, request, processor, CancellationToken.None), Times.Once);
+                .Verify(x => x.ModifyDocumentAsync(context, processor, CancellationToken.None), Times.Once);
         }
 
         [Test, AutoMoqData]
@@ -46,26 +52,31 @@ namespace ZptSharp.Rendering
                                                                                     [Frozen] IIterativelyModifiesDocument iterativeModifier,
                                                                                     [Frozen] IModifiesDocument wrapped,
                                                                                     [MockedConfig, Frozen] RenderingConfig config,
+                                                                                                                           [Frozen] IGetsRootExpressionContext rootContextProvider,
                                                                                     SourceAnnotationDocumentModifierDecorator sut,
                                                                                     IProcessesExpressionContext processor,
                                                                                     IDocument document,
-                                                                                    RenderZptDocumentRequest request)
+                                                                                    object model,
+                                                                                                                                       ExpressionContext context)
         {
             Mock.Get(config).SetupGet(x => x.IncludeSourceAnnotation).Returns(false);
             Mock.Get(contextProcessorFactory)
                 .Setup(x => x.GetSourceAnnotationContextProcessor())
                 .Returns(processor);
+            Mock.Get(rootContextProvider)
+                .Setup(x => x.GetExpressionContext(document, model))
+                .Returns(context);
             Mock.Get(iterativeModifier)
-                .Setup(x => x.ModifyDocumentAsync(document, request, processor, CancellationToken.None))
+                .Setup(x => x.ModifyDocumentAsync(context, processor, CancellationToken.None))
                 .Returns(Task.CompletedTask);
             Mock.Get(wrapped)
-                .Setup(x => x.ModifyDocumentAsync(document, request, CancellationToken.None))
+                .Setup(x => x.ModifyDocumentAsync(document, model, CancellationToken.None))
                 .Returns(Task.CompletedTask);
 
-            await sut.ModifyDocumentAsync(document, request);
+            await sut.ModifyDocumentAsync(document, model);
 
             Mock.Get(iterativeModifier)
-                .Verify(x => x.ModifyDocumentAsync(document, request, processor, CancellationToken.None), Times.Never);
+                .Verify(x => x.ModifyDocumentAsync(context, processor, CancellationToken.None), Times.Never);
         }
     }
 }

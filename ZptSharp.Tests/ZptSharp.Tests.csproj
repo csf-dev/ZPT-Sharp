@@ -67,9 +67,4 @@
     <Folder Include="TestFiles\I18nIntegrationTests\SourceDocuments\" />
     <Folder Include="MvcCore\" />
   </ItemGroup>
-  
-  <ItemGroup>
-      <Compile Remove="IntegrationTests\LoadExpressionIntegrationTests.cs" />
-      <None Include="IntegrationTests\LoadExpressionIntegrationTests.cs" />
-  </ItemGroup>
 </Project>

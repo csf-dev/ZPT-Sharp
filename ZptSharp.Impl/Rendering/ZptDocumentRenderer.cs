@@ -10,12 +10,9 @@ using ZptSharp.Dom;
 namespace ZptSharp.Rendering
 {
     /// <summary>
-    /// A service which coordinates the process of rendering a ZPT document from a request object.
-    /// Generally-speaking it is better to use an <see cref="IRendersZptDocument"/> to begin the process.
-    /// <see cref="IRendersZptDocument"/> offers a more useful API and its default implementation -
-    /// <see cref="ZptDocumentRenderer"/> - provides dependency injection as well.
+    /// A service which coordinates the process of rendering a ZPT document.
     /// </summary>
-    public class ZptRequestRenderer : IRendersRenderingRequest
+    public class ZptDocumentRenderer : IRendersZptDocument
     {
         readonly IServiceProvider serviceProvider;
 
@@ -23,31 +20,33 @@ namespace ZptSharp.Rendering
         /// Gets the outcome of the specified rendering request as a stream.
         /// </summary>
         /// <returns>A task which provides an output stream, containing the result of the operation.</returns>
-        /// <param name="request">A request to render a ZPT document.</param>
+        /// <param name="model">The model to render.</param>
+        /// <param name="stream">The document stream.</param>
+        /// <param name="sourceInfo">Information about the source of the <paramref name="stream"/>.</param>
         /// <param name="config">The rendering configuration.</param>
         /// <param name="token">An object used to cancel the operation if required.</param>
-        public Task<Stream> RenderAsync(RenderZptDocumentRequest request, RenderingConfig config = null, CancellationToken token = default)
+        public Task<Stream> RenderAsync(Stream stream, object model, RenderingConfig config = null, CancellationToken token = default, IDocumentSourceInfo sourceInfo = null)
         {
-            if (request == null)
-                throw new ArgumentNullException(nameof(request));
+            if (stream == null)
+                throw new ArgumentNullException(nameof(stream));
 
-            return RenderPrivateAsync(request, config ?? RenderingConfig.Default, token);
+            return RenderPrivateAsync(model, stream, sourceInfo ?? new UnknownSourceInfo(), config ?? RenderingConfig.Default, token);
         }
 
-        async Task<Stream> RenderPrivateAsync(RenderZptDocumentRequest request, RenderingConfig config, CancellationToken token)
+        async Task<Stream> RenderPrivateAsync(object model, Stream stream, IDocumentSourceInfo sourceInfo, RenderingConfig config, CancellationToken token)
         {
-            var logScopeState = new ZptRequestLoggingScope(request.SourceInfo);
+            var logScopeState = new ZptRequestLoggingScope(sourceInfo);
 
             using (var scope = serviceProvider.CreateScope())
-            using(var logScope = serviceProvider.GetRequiredService<ILogger<ZptRequestRenderer>>().BeginScope(logScopeState))
+            using(var logScope = serviceProvider.GetRequiredService<ILogger<ZptDocumentRenderer>>().BeginScope(logScopeState))
             {
                 StoreConfigForLaterUse(scope, config);
                 var documentReaderWriter = GetDocumentReaderWriter(scope, config);
                 StoreReaderWriterForLaterUse(scope, documentReaderWriter);
-                var renderer = GetRenderer(scope, request);
+                var renderer = GetRenderer(scope);
 
-                var document = await ReadDocumentAsync(documentReaderWriter, request, config, token).ConfigureAwait(false);
-                await renderer.ModifyDocumentAsync(document, request, token).ConfigureAwait(false);
+                var document = await ReadDocumentAsync(documentReaderWriter, stream, sourceInfo, config, token).ConfigureAwait(false);
+                await renderer.ModifyDocumentAsync(document, model, token).ConfigureAwait(false);
                 return await documentReaderWriter.WriteDocumentAsync(document, config, token).ConfigureAwait(false);
             }
         }
@@ -93,20 +92,20 @@ namespace ZptSharp.Rendering
             return (IReadsAndWritesDocument) scope.ServiceProvider.GetRequiredService(type);
         }
 
-        static IModifiesDocument GetRenderer(IServiceScope scope, RenderZptDocumentRequest request)
+        static IModifiesDocument GetRenderer(IServiceScope scope)
         {
             var rendererFactory = scope.ServiceProvider.GetRequiredService<IGetsDocumentModifier>();
-            return rendererFactory.GetDocumentModifier(request);
+            return rendererFactory.GetDocumentModifier();
         }
 
-        static Task<IDocument> ReadDocumentAsync(IReadsAndWritesDocument documentReaderWriter, RenderZptDocumentRequest request, RenderingConfig config, CancellationToken token)
-            => documentReaderWriter.GetDocumentAsync(request.DocumentStream, config, request.SourceInfo, token);
+        static Task<IDocument> ReadDocumentAsync(IReadsAndWritesDocument documentReaderWriter, Stream stream, IDocumentSourceInfo source, RenderingConfig config, CancellationToken token)
+            => documentReaderWriter.GetDocumentAsync(stream, config, source, token);
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="ZptRequestRenderer"/> class.
+        /// Initializes a new instance of the <see cref="ZptDocumentRenderer"/> class.
         /// </summary>
         /// <param name="serviceProvider">Service provider.</param>
-        public ZptRequestRenderer(IServiceProvider serviceProvider)
+        public ZptDocumentRenderer(IServiceProvider serviceProvider)
         {
             this.serviceProvider = serviceProvider ?? throw new ArgumentNullException(nameof(serviceProvider));
         }

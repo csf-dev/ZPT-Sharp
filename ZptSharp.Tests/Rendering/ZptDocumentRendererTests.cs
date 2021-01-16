@@ -13,7 +13,7 @@ using ZptSharp.Dom;
 namespace ZptSharp.Rendering
 {
     [TestFixture,Parallelizable]
-    public class ZptRequestRendererTests
+    public class ZptDocumentRendererTests
     {
         [Test, AutoMoqData]
         public void RenderAsync_returns_stream_using_correct_process(Type documentReaderWriterType,
@@ -22,7 +22,7 @@ namespace ZptSharp.Rendering
                                                                      IStoresCurrentReaderWriter readerWriterServiceLocator,
                                                                      [Frozen, ServiceProvider] IServiceProvider serviceProvider,
                                                                      IModifiesDocument renderer,
-                                                                     ZptRequestRenderer sut,
+                                                                     ZptDocumentRenderer sut,
                                                                      Stream input,
                                                                      Stream output,
                                                                      object model,
@@ -30,15 +30,14 @@ namespace ZptSharp.Rendering
                                                                      IDocument document,
                                                                      [MockedConfig] RenderingConfig config,
                                                                      IStoresCurrentRenderingConfig configStore,
-                                                                     NullLogger<ZptRequestRenderer> logger)
+                                                                     NullLogger<ZptDocumentRenderer> logger)
         {
-            var request = new RenderZptDocumentRequest(input, model, sourceInfo);
-            Mock.Get(rendererFactory).Setup(x => x.GetDocumentModifier(request)).Returns(renderer);
+            Mock.Get(rendererFactory).Setup(x => x.GetDocumentModifier()).Returns(renderer);
             Mock.Get(serviceProvider).Setup(x => x.GetService(typeof(IStoresCurrentRenderingConfig))).Returns(configStore);
             Mock.Get(serviceProvider).Setup(x => x.GetService(typeof(IGetsDocumentModifier))).Returns(rendererFactory);
             Mock.Get(serviceProvider).Setup(x => x.GetService(typeof(IStoresCurrentReaderWriter))).Returns(readerWriterServiceLocator);
-            Mock.Get(serviceProvider).Setup(x => x.GetService(typeof(ILogger<ZptRequestRenderer>))).Returns(logger);
-            Mock.Get(rendererFactory).Setup(x => x.GetDocumentModifier(It.IsAny<RenderZptDocumentRequest>())).Returns(renderer);
+            Mock.Get(serviceProvider).Setup(x => x.GetService(typeof(ILogger<ZptDocumentRenderer>))).Returns(logger);
+            Mock.Get(rendererFactory).Setup(x => x.GetDocumentModifier()).Returns(renderer);
             Mock.Get(config).SetupGet(x => x.DocumentProviderType).Returns(documentReaderWriterType);
             Mock.Get(serviceProvider).Setup(x => x.GetService(documentReaderWriterType)).Returns(readerWriter);
             Mock.Get(readerWriter)
@@ -48,11 +47,11 @@ namespace ZptSharp.Rendering
                 .Setup(x => x.WriteDocumentAsync(document, config, It.IsAny<System.Threading.CancellationToken>()))
                 .Returns(() => Task.FromResult(output));
 
-            var result = sut.RenderAsync(request, config).Result;
+            var result = sut.RenderAsync(input, model, config, sourceInfo: sourceInfo).Result;
 
             Assert.That(result, Is.SameAs(output), "Output stream is as returned from writer");
             Mock.Get(renderer)
-                .Verify(x => x.ModifyDocumentAsync(document, request, It.IsAny<System.Threading.CancellationToken>()),
+                .Verify(x => x.ModifyDocumentAsync(document, model, It.IsAny<System.Threading.CancellationToken>()),
                         Times.Once,
                         "The rendering service should have been used with the document.");
         }
@@ -63,7 +62,7 @@ namespace ZptSharp.Rendering
                                                                                                     [Frozen, ServiceProvider] IServiceProvider serviceProvider,
                                                                                                     [Frozen] IGetsDocumentModifier rendererFactory,
                                                                                                     IModifiesDocument renderer,
-                                                                                                    ZptRequestRenderer sut,
+                                                                                                    ZptDocumentRenderer sut,
                                                                                                     Stream input,
                                                                                                     Stream output,
                                                                                                     object model,
@@ -71,16 +70,15 @@ namespace ZptSharp.Rendering
                                                                                                     IDocument document,
                                                                                                     [MockedConfig] RenderingConfig config,
                                                                                                     IStoresCurrentRenderingConfig configStore,
-                                                                                                    NullLogger<ZptRequestRenderer> logger)
+                                                                                                    NullLogger<ZptDocumentRenderer> logger)
         {
-            var request = new RenderZptDocumentRequest(input, model, sourceInfo);
-            Mock.Get(rendererFactory).Setup(x => x.GetDocumentModifier(request)).Returns(renderer);
+            Mock.Get(rendererFactory).Setup(x => x.GetDocumentModifier()).Returns(renderer);
             Mock.Get(serviceProvider).Setup(x => x.GetService(typeof(IReadsAndWritesDocument))).Returns(documentReaderWriter);
             Mock.Get(serviceProvider).Setup(x => x.GetService(typeof(IStoresCurrentRenderingConfig))).Returns(configStore);
             Mock.Get(serviceProvider).Setup(x => x.GetService(typeof(IGetsDocumentModifier))).Returns(rendererFactory);
             Mock.Get(serviceProvider).Setup(x => x.GetService(typeof(IStoresCurrentReaderWriter))).Returns(readerWriterServiceLocator);
-            Mock.Get(serviceProvider).Setup(x => x.GetService(typeof(ILogger<ZptRequestRenderer>))).Returns(logger);
-            Mock.Get(rendererFactory).Setup(x => x.GetDocumentModifier(It.IsAny<RenderZptDocumentRequest>())).Returns(renderer);
+            Mock.Get(serviceProvider).Setup(x => x.GetService(typeof(ILogger<ZptDocumentRenderer>))).Returns(logger);
+            Mock.Get(rendererFactory).Setup(x => x.GetDocumentModifier()).Returns(renderer);
             Mock.Get(documentReaderWriter)
                 .Setup(x => x.GetDocumentAsync(input, config, sourceInfo, It.IsAny<System.Threading.CancellationToken>()))
                 .Returns(() => Task.FromResult(document));
@@ -88,7 +86,7 @@ namespace ZptSharp.Rendering
                 .Setup(x => x.WriteDocumentAsync(document, config, It.IsAny<System.Threading.CancellationToken>()))
                 .Returns(() => Task.FromResult(output));
 
-            var result = sut.RenderAsync(request, config).Result;
+            var result = sut.RenderAsync(input, model, config, sourceInfo: sourceInfo).Result;
 
             Assert.That(result, Is.SameAs(output), "Output stream is as returned from writer");
         }

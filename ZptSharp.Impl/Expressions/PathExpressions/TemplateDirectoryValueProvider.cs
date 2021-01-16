@@ -7,6 +7,7 @@ using ZptSharp.Dom;
 using ZptSharp.Config;
 using ZptSharp.Rendering;
 using ZptSharp.Metal;
+using System.Collections.Generic;
 
 namespace ZptSharp.Expressions.PathExpressions
 {
@@ -44,6 +45,15 @@ namespace ZptSharp.Expressions.PathExpressions
             if (Directory.Exists(path))
                 return GetValueResult.For(new TemplateDirectory(path));
 
+            var candidatesForExtensionlessMatch = GetCandidatesForExtensionlessMatch(templateDirectory, name);
+            if (candidatesForExtensionlessMatch.Count == 1)
+                return GetValueResult.For(await GetMetalAdapterAsync(candidatesForExtensionlessMatch[0], cancellationToken).ConfigureAwait(false));
+            else if (candidatesForExtensionlessMatch.Count > 1)
+            {
+                string ambiguousMessage = String.Format(Resources.ExceptionMessage.MultipleMatchingDocumentsFound, templateDirectory.Path, name);
+                throw new EvaluationException(ambiguousMessage);
+            }
+
             string message = String.Format(Resources.ExceptionMessage.DocumentNotFound, path);
             throw new FileNotFoundException(message);
         }
@@ -71,6 +81,9 @@ namespace ZptSharp.Expressions.PathExpressions
             using (var stream = new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.Read))
                 return await readerWriter.GetDocumentAsync(stream, config, source, cancellationToken).ConfigureAwait(false);
         }
+
+        static IList<string> GetCandidatesForExtensionlessMatch(TemplateDirectory templateDirectory, string name)
+            => Directory.GetFiles(templateDirectory.Path, $"{name}.*", SearchOption.TopDirectoryOnly);
 
         /// <summary>
         /// Initializes a new instance of the

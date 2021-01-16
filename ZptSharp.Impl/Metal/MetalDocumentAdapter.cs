@@ -18,9 +18,13 @@ namespace ZptSharp.Metal
             MacrosVar = "macros",
             SourceNameVar = "sourcename";
 
-        readonly IDocument document;
         readonly ISearchesForAttributes attributeSearcher;
         readonly IGetsMetalAttributeSpecs specProvider;
+
+        /// <summary>
+        /// Gets the document for the current instance.
+        /// </summary>
+        public IDocument Document { get; }
 
         /// <summary>
         /// Gets a collection of all of the macros
@@ -29,7 +33,7 @@ namespace ZptSharp.Metal
         public IDictionary<string, MetalMacro> GetMacros()
         {
             return attributeSearcher
-                .SearchForAttributes(document, specProvider.DefineMacro)
+                .SearchForAttributes(Document, specProvider.DefineMacro)
                 .Select(a => new MetalMacro(a.Value, a.Node.GetCopy()))
                 .ToDictionary(k => k.Name, v => v);
         }
@@ -38,7 +42,7 @@ namespace ZptSharp.Metal
         /// Gets the name of the source info for this template.
         /// </summary>
         /// <value>The name of the source.</value>
-        public string SourceName => document.SourceInfo.Name;
+        public string SourceName => Document.SourceInfo.Name;
 
         /// <summary>
         /// Attempts to get a value for a named reference, relative to the current instance.
@@ -67,7 +71,7 @@ namespace ZptSharp.Metal
                                     ISearchesForAttributes attributeSearcher,
                                     IGetsMetalAttributeSpecs specProvider)
         {
-            this.document = document ?? throw new ArgumentNullException(nameof(document));
+            Document = document ?? throw new ArgumentNullException(nameof(document));
             this.attributeSearcher = attributeSearcher ?? throw new System.ArgumentNullException(nameof(attributeSearcher));
             this.specProvider = specProvider ?? throw new System.ArgumentNullException(nameof(specProvider));
         }

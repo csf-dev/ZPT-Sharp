@@ -16,8 +16,9 @@ namespace ZptSharp.Bootstrap
             services.AddTransient<IIterativelyModifiesDocument, IterativeDocumentModifier>();
             services.AddTransient<IGetsDocumentModifier, ZptDocumentModifierFactory>();
             services.AddTransient<IGetsZptDocumentRenderer, ZptDocumentRendererFactory>();
-            services.AddTransient<IRendersRenderingRequest, ZptRequestRenderer>();
-            services.AddTransient<IRendersZptDocument, ZptDocumentRenderer>();
+            services.AddTransient<ZptDocumentRenderer>();
+            services.AddTransient<IRendersZptDocument>(serviceProvider => new EffectiveConfigSettingZptDocumentRendererDecorator(serviceProvider.GetRequiredService<ZptDocumentRenderer>()));
+            services.AddTransient<IRendersZptDocument, EffectiveConfigSettingZptDocumentRendererDecorator>();
             services.AddTransient<IRendersZptFile, ZptFileRenderer>();
             services.AddTransient<IWritesStreamToTextWriter, StreamToTextWriterCopier>();
             services.AddTransient<IGetsZptNodeAndAttributeRemovalContextProcessor, ZptCleanupContextProcessorFactory>();
