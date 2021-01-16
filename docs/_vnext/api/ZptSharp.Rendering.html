@@ -77,6 +77,10 @@
   <div class="markdown level0 remarks"></div>
     <h3 id="classes">Classes
   </h3>
+      <h4><a class="xref" href="ZptSharp.Rendering.EffectiveConfigSettingZptDocumentRendererDecorator.html">EffectiveConfigSettingZptDocumentRendererDecorator</a></h4>
+      <section><p>An entry-point service for ZPT-Sharp.  This service renders a model to a document stream
+and returns the result as a stream.</p>
+</section>
       <h4><a class="xref" href="ZptSharp.Rendering.ExpressionContextFactory.html">ExpressionContextFactory</a></h4>
       <section><p>Factory for the creation of expression contexts.</p>
 </section>
@@ -119,9 +123,6 @@ be identified, but is not a file on disk.</p>
 of ZPT-related nodes and attributes from a document.  This is essentially a
 clean-up process which strips processing directives from a document.</p>
 </section>
-      <h4><a class="xref" href="ZptSharp.Rendering.RenderZptDocumentRequest.html">RenderZptDocumentRequest</a></h4>
-      <section><p>Represents a request to render a single ZPT document.</p>
-</section>
       <h4><a class="xref" href="ZptSharp.Rendering.SourceAnnotationDocumentModifierDecorator.html">SourceAnnotationDocumentModifierDecorator</a></h4>
       <section><p>Implementation of <a class="xref" href="ZptSharp.Rendering.IModifiesDocument.html">IModifiesDocument</a> which adds source annotation
 to the document DOM where appropriate.  Source annotation is a debugging and logging
@@ -148,8 +149,11 @@ a context processor suitable for performing cleanup on a rendered document.</p>
 <a class="xref" href="ZptSharp.Rendering.IModifiesDocument.html">IModifiesDocument</a> using the decorator pattern.  Each implementation of the service
 wraps another, augmenting its functionality.</p>
 </section>
+      <h4><a class="xref" href="ZptSharp.Rendering.ZptDocumentRenderer.html">ZptDocumentRenderer</a></h4>
+      <section><p>A service which coordinates the process of rendering a ZPT document.</p>
+</section>
       <h4><a class="xref" href="ZptSharp.Rendering.ZptDocumentRendererFactory.html">ZptDocumentRendererFactory</a></h4>
-      <section><p>A factory which creates instances of <a class="xref" href="ZptSharp.ZptDocumentRenderer.html">ZptDocumentRenderer</a> from a <a class="xref" href="ZptSharp.Config.RenderingConfig.html">RenderingConfig</a>
+      <section><p>A factory which creates instances of <a class="xref" href="ZptSharp.Rendering.EffectiveConfigSettingZptDocumentRendererDecorator.html">EffectiveConfigSettingZptDocumentRendererDecorator</a> from a <a class="xref" href="ZptSharp.Config.RenderingConfig.html">RenderingConfig</a>
 and optionally a <span class="xref">System.Type</span> which indicates the <a class="xref" href="ZptSharp.Dom.IReadsAndWritesDocument.html">IReadsAndWritesDocument</a> to
 be used.</p>
 </section>
@@ -159,12 +163,6 @@ get a suitable implementation of <a class="xref" href="ZptSharp.IRendersZptDocum
 </section>
       <h4><a class="xref" href="ZptSharp.Rendering.ZptRequestLoggingScope.html">ZptRequestLoggingScope</a></h4>
       <section><p>A type to represent the logging scope for a single ZPT rendering request.</p>
-</section>
-      <h4><a class="xref" href="ZptSharp.Rendering.ZptRequestRenderer.html">ZptRequestRenderer</a></h4>
-      <section><p>A service which coordinates the process of rendering a ZPT document from a request object.
-Generally-speaking it is better to use an <a class="xref" href="ZptSharp.IRendersZptDocument.html">IRendersZptDocument</a> to begin the process.
-<a class="xref" href="ZptSharp.IRendersZptDocument.html">IRendersZptDocument</a> offers a more useful API and its default implementation -
-<a class="xref" href="ZptSharp.ZptDocumentRenderer.html">ZptDocumentRenderer</a> - provides dependency injection as well.</p>
 </section>
     <h3 id="interfaces">Interfaces
   </h3>
@@ -221,10 +219,6 @@ it is ready to be output.</p>
 </section>
       <h4><a class="xref" href="ZptSharp.Rendering.IProcessesExpressionContext.html">IProcessesExpressionContext</a></h4>
       <section><p>A service which processes a single expression context and applies some processing rules.</p>
-</section>
-      <h4><a class="xref" href="ZptSharp.Rendering.IRendersRenderingRequest.html">IRendersRenderingRequest</a></h4>
-      <section><p>An object which gets the outcome of a <a class="xref" href="ZptSharp.Rendering.RenderZptDocumentRequest.html">RenderZptDocumentRequest</a> and outputs a stream,
-containing the resulting document.</p>
 </section>
     <h3 id="enums">Enums
   </h3>

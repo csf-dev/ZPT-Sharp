@@ -119,19 +119,19 @@
   </h3>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/csf-dev/ZPT-Sharp/new/master/apiSpec/new?filename=ZptSharp_Rendering_TalDocumentModifierDecorator__ctor_ZptSharp_Tal_IGetsTalContextProcessor_ZptSharp_Rendering_IIterativelyModifiesDocument_ZptSharp_Rendering_IModifiesDocument_.md&amp;value=---%0Auid%3A%20ZptSharp.Rendering.TalDocumentModifierDecorator.%23ctor(ZptSharp.Tal.IGetsTalContextProcessor%2CZptSharp.Rendering.IIterativelyModifiesDocument%2CZptSharp.Rendering.IModifiesDocument)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/csf-dev/ZPT-Sharp/new/master/apiSpec/new?filename=ZptSharp_Rendering_TalDocumentModifierDecorator__ctor_ZptSharp_Tal_IGetsTalContextProcessor_ZptSharp_Rendering_IIterativelyModifiesDocument_ZptSharp_Rendering_IModifiesDocument_ZptSharp_Rendering_IGetsRootExpressionContext_.md&amp;value=---%0Auid%3A%20ZptSharp.Rendering.TalDocumentModifierDecorator.%23ctor(ZptSharp.Tal.IGetsTalContextProcessor%2CZptSharp.Rendering.IIterativelyModifiesDocument%2CZptSharp.Rendering.IModifiesDocument%2CZptSharp.Rendering.IGetsRootExpressionContext)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/csf-dev/ZPT-Sharp/blob/master/ZptSharp.Impl/Rendering/TalDocumentModifierDecorator.cs/#L41">View Source</a>
+    <a href="https://github.com/csf-dev/ZPT-Sharp/blob/master/ZptSharp.Impl/Rendering/TalDocumentModifierDecorator.cs/#L44">View Source</a>
   </span>
   <a id="ZptSharp_Rendering_TalDocumentModifierDecorator__ctor_" data-uid="ZptSharp.Rendering.TalDocumentModifierDecorator.#ctor*"></a>
-  <h4 id="ZptSharp_Rendering_TalDocumentModifierDecorator__ctor_ZptSharp_Tal_IGetsTalContextProcessor_ZptSharp_Rendering_IIterativelyModifiesDocument_ZptSharp_Rendering_IModifiesDocument_" data-uid="ZptSharp.Rendering.TalDocumentModifierDecorator.#ctor(ZptSharp.Tal.IGetsTalContextProcessor,ZptSharp.Rendering.IIterativelyModifiesDocument,ZptSharp.Rendering.IModifiesDocument)">TalDocumentModifierDecorator(IGetsTalContextProcessor, IIterativelyModifiesDocument, IModifiesDocument)</h4>
+  <h4 id="ZptSharp_Rendering_TalDocumentModifierDecorator__ctor_ZptSharp_Tal_IGetsTalContextProcessor_ZptSharp_Rendering_IIterativelyModifiesDocument_ZptSharp_Rendering_IModifiesDocument_ZptSharp_Rendering_IGetsRootExpressionContext_" data-uid="ZptSharp.Rendering.TalDocumentModifierDecorator.#ctor(ZptSharp.Tal.IGetsTalContextProcessor,ZptSharp.Rendering.IIterativelyModifiesDocument,ZptSharp.Rendering.IModifiesDocument,ZptSharp.Rendering.IGetsRootExpressionContext)">TalDocumentModifierDecorator(IGetsTalContextProcessor, IIterativelyModifiesDocument, IModifiesDocument, IGetsRootExpressionContext)</h4>
   <div class="markdown level1 summary"><p>Initializes a new instance of the <a class="xref" href="ZptSharp.Rendering.TalDocumentModifierDecorator.html">TalDocumentModifierDecorator</a> class.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public TalDocumentModifierDecorator(IGetsTalContextProcessor contextProcessorFactory, IIterativelyModifiesDocument iterativeModifier, IModifiesDocument wrapped)</code></pre>
+    <pre><code class="lang-csharp hljs">public TalDocumentModifierDecorator(IGetsTalContextProcessor contextProcessorFactory, IIterativelyModifiesDocument iterativeModifier, IModifiesDocument wrapped, IGetsRootExpressionContext rootContextProvider)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -161,26 +161,32 @@
         <td><p>Wrapped.</p>
 </td>
       </tr>
+      <tr>
+        <td><a class="xref" href="ZptSharp.Rendering.IGetsRootExpressionContext.html">IGetsRootExpressionContext</a></td>
+        <td><span class="parametername">rootContextProvider</span></td>
+        <td><p>A provider for the root expression context.</p>
+</td>
+      </tr>
     </tbody>
   </table>
   <h3 id="methods">Methods
   </h3>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/csf-dev/ZPT-Sharp/new/master/apiSpec/new?filename=ZptSharp_Rendering_TalDocumentModifierDecorator_ModifyDocumentAsync_ZptSharp_Dom_IDocument_ZptSharp_Rendering_RenderZptDocumentRequest_System_Threading_CancellationToken_.md&amp;value=---%0Auid%3A%20ZptSharp.Rendering.TalDocumentModifierDecorator.ModifyDocumentAsync(ZptSharp.Dom.IDocument%2CZptSharp.Rendering.RenderZptDocumentRequest%2CSystem.Threading.CancellationToken)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/csf-dev/ZPT-Sharp/new/master/apiSpec/new?filename=ZptSharp_Rendering_TalDocumentModifierDecorator_ModifyDocumentAsync_ZptSharp_Dom_IDocument_System_Object_System_Threading_CancellationToken_.md&amp;value=---%0Auid%3A%20ZptSharp.Rendering.TalDocumentModifierDecorator.ModifyDocumentAsync(ZptSharp.Dom.IDocument%2CSystem.Object%2CSystem.Threading.CancellationToken)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/csf-dev/ZPT-Sharp/blob/master/ZptSharp.Impl/Rendering/TalDocumentModifierDecorator.cs/#L26">View Source</a>
+    <a href="https://github.com/csf-dev/ZPT-Sharp/blob/master/ZptSharp.Impl/Rendering/TalDocumentModifierDecorator.cs/#L27">View Source</a>
   </span>
   <a id="ZptSharp_Rendering_TalDocumentModifierDecorator_ModifyDocumentAsync_" data-uid="ZptSharp.Rendering.TalDocumentModifierDecorator.ModifyDocumentAsync*"></a>
-  <h4 id="ZptSharp_Rendering_TalDocumentModifierDecorator_ModifyDocumentAsync_ZptSharp_Dom_IDocument_ZptSharp_Rendering_RenderZptDocumentRequest_System_Threading_CancellationToken_" data-uid="ZptSharp.Rendering.TalDocumentModifierDecorator.ModifyDocumentAsync(ZptSharp.Dom.IDocument,ZptSharp.Rendering.RenderZptDocumentRequest,System.Threading.CancellationToken)">ModifyDocumentAsync(IDocument, RenderZptDocumentRequest, CancellationToken)</h4>
+  <h4 id="ZptSharp_Rendering_TalDocumentModifierDecorator_ModifyDocumentAsync_ZptSharp_Dom_IDocument_System_Object_System_Threading_CancellationToken_" data-uid="ZptSharp.Rendering.TalDocumentModifierDecorator.ModifyDocumentAsync(ZptSharp.Dom.IDocument,System.Object,System.Threading.CancellationToken)">ModifyDocumentAsync(IDocument, Object, CancellationToken)</h4>
   <div class="markdown level1 summary"><p>Performs alterations for a specified document, using the specified rendering request.
 This method will manipulate the <code data-dev-comment-type="paramref" class="paramref">document</code>, according to the rules of ZPT.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public Task ModifyDocumentAsync(IDocument document, RenderZptDocumentRequest request, CancellationToken token = default(CancellationToken))</code></pre>
+    <pre><code class="lang-csharp hljs">public Task ModifyDocumentAsync(IDocument document, object model, CancellationToken token = default(CancellationToken))</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -199,9 +205,9 @@ This method will manipulate the <code data-dev-comment-type="paramref" class="pa
 </td>
       </tr>
       <tr>
-        <td><a class="xref" href="ZptSharp.Rendering.RenderZptDocumentRequest.html">RenderZptDocumentRequest</a></td>
-        <td><span class="parametername">request</span></td>
-        <td><p>The rendering request.</p>
+        <td><span class="xref">System.Object</span></td>
+        <td><span class="parametername">model</span></td>
+        <td><p>The model to render.</p>
 </td>
       </tr>
       <tr>

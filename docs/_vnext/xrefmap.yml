@@ -8230,6 +8230,19 @@ references:
   isSpec: "True"
   fullName: ZptSharp.Expressions.WellKnownExpressionPrefix.GlobalVariablePath
   nameWithType: WellKnownExpressionPrefix.GlobalVariablePath
+- uid: ZptSharp.Expressions.WellKnownExpressionPrefix.Load
+  name: Load
+  href: api/ZptSharp.Expressions.WellKnownExpressionPrefix.html#ZptSharp_Expressions_WellKnownExpressionPrefix_Load
+  commentId: P:ZptSharp.Expressions.WellKnownExpressionPrefix.Load
+  fullName: ZptSharp.Expressions.WellKnownExpressionPrefix.Load
+  nameWithType: WellKnownExpressionPrefix.Load
+- uid: ZptSharp.Expressions.WellKnownExpressionPrefix.Load*
+  name: Load
+  href: api/ZptSharp.Expressions.WellKnownExpressionPrefix.html#ZptSharp_Expressions_WellKnownExpressionPrefix_Load_
+  commentId: Overload:ZptSharp.Expressions.WellKnownExpressionPrefix.Load
+  isSpec: "True"
+  fullName: ZptSharp.Expressions.WellKnownExpressionPrefix.Load
+  nameWithType: WellKnownExpressionPrefix.Load
 - uid: ZptSharp.Expressions.WellKnownExpressionPrefix.LocalVariablePath
   name: LocalVariablePath
   href: api/ZptSharp.Expressions.WellKnownExpressionPrefix.html#ZptSharp_Expressions_WellKnownExpressionPrefix_LocalVariablePath
@@ -9283,6 +9296,19 @@ references:
   isSpec: "True"
   fullName: ZptSharp.Metal.MetalDocumentAdapter.MetalDocumentAdapter
   nameWithType: MetalDocumentAdapter.MetalDocumentAdapter
+- uid: ZptSharp.Metal.MetalDocumentAdapter.Document
+  name: Document
+  href: api/ZptSharp.Metal.MetalDocumentAdapter.html#ZptSharp_Metal_MetalDocumentAdapter_Document
+  commentId: P:ZptSharp.Metal.MetalDocumentAdapter.Document
+  fullName: ZptSharp.Metal.MetalDocumentAdapter.Document
+  nameWithType: MetalDocumentAdapter.Document
+- uid: ZptSharp.Metal.MetalDocumentAdapter.Document*
+  name: Document
+  href: api/ZptSharp.Metal.MetalDocumentAdapter.html#ZptSharp_Metal_MetalDocumentAdapter_Document_
+  commentId: Overload:ZptSharp.Metal.MetalDocumentAdapter.Document
+  isSpec: "True"
+  fullName: ZptSharp.Metal.MetalDocumentAdapter.Document
+  nameWithType: MetalDocumentAdapter.Document
 - uid: ZptSharp.Metal.MetalDocumentAdapter.GetMacros
   name: GetMacros()
   href: api/ZptSharp.Metal.MetalDocumentAdapter.html#ZptSharp_Metal_MetalDocumentAdapter_GetMacros
@@ -10789,6 +10815,38 @@ references:
   commentId: N:ZptSharp.Rendering
   fullName: ZptSharp.Rendering
   nameWithType: ZptSharp.Rendering
+- uid: ZptSharp.Rendering.EffectiveConfigSettingZptDocumentRendererDecorator
+  name: EffectiveConfigSettingZptDocumentRendererDecorator
+  href: api/ZptSharp.Rendering.EffectiveConfigSettingZptDocumentRendererDecorator.html
+  commentId: T:ZptSharp.Rendering.EffectiveConfigSettingZptDocumentRendererDecorator
+  fullName: ZptSharp.Rendering.EffectiveConfigSettingZptDocumentRendererDecorator
+  nameWithType: EffectiveConfigSettingZptDocumentRendererDecorator
+- uid: ZptSharp.Rendering.EffectiveConfigSettingZptDocumentRendererDecorator.#ctor(ZptSharp.IRendersZptDocument,System.Type)
+  name: EffectiveConfigSettingZptDocumentRendererDecorator(IRendersZptDocument, Type)
+  href: api/ZptSharp.Rendering.EffectiveConfigSettingZptDocumentRendererDecorator.html#ZptSharp_Rendering_EffectiveConfigSettingZptDocumentRendererDecorator__ctor_ZptSharp_IRendersZptDocument_System_Type_
+  commentId: M:ZptSharp.Rendering.EffectiveConfigSettingZptDocumentRendererDecorator.#ctor(ZptSharp.IRendersZptDocument,System.Type)
+  fullName: ZptSharp.Rendering.EffectiveConfigSettingZptDocumentRendererDecorator.EffectiveConfigSettingZptDocumentRendererDecorator(ZptSharp.IRendersZptDocument, System.Type)
+  nameWithType: EffectiveConfigSettingZptDocumentRendererDecorator.EffectiveConfigSettingZptDocumentRendererDecorator(IRendersZptDocument, Type)
+- uid: ZptSharp.Rendering.EffectiveConfigSettingZptDocumentRendererDecorator.#ctor*
+  name: EffectiveConfigSettingZptDocumentRendererDecorator
+  href: api/ZptSharp.Rendering.EffectiveConfigSettingZptDocumentRendererDecorator.html#ZptSharp_Rendering_EffectiveConfigSettingZptDocumentRendererDecorator__ctor_
+  commentId: Overload:ZptSharp.Rendering.EffectiveConfigSettingZptDocumentRendererDecorator.#ctor
+  isSpec: "True"
+  fullName: ZptSharp.Rendering.EffectiveConfigSettingZptDocumentRendererDecorator.EffectiveConfigSettingZptDocumentRendererDecorator
+  nameWithType: EffectiveConfigSettingZptDocumentRendererDecorator.EffectiveConfigSettingZptDocumentRendererDecorator
+- uid: ZptSharp.Rendering.EffectiveConfigSettingZptDocumentRendererDecorator.RenderAsync(System.IO.Stream,System.Object,ZptSharp.Config.RenderingConfig,System.Threading.CancellationToken,ZptSharp.Rendering.IDocumentSourceInfo)
+  name: RenderAsync(Stream, Object, RenderingConfig, CancellationToken, IDocumentSourceInfo)
+  href: api/ZptSharp.Rendering.EffectiveConfigSettingZptDocumentRendererDecorator.html#ZptSharp_Rendering_EffectiveConfigSettingZptDocumentRendererDecorator_RenderAsync_System_IO_Stream_System_Object_ZptSharp_Config_RenderingConfig_System_Threading_CancellationToken_ZptSharp_Rendering_IDocumentSourceInfo_
+  commentId: M:ZptSharp.Rendering.EffectiveConfigSettingZptDocumentRendererDecorator.RenderAsync(System.IO.Stream,System.Object,ZptSharp.Config.RenderingConfig,System.Threading.CancellationToken,ZptSharp.Rendering.IDocumentSourceInfo)
+  fullName: ZptSharp.Rendering.EffectiveConfigSettingZptDocumentRendererDecorator.RenderAsync(System.IO.Stream, System.Object, ZptSharp.Config.RenderingConfig, System.Threading.CancellationToken, ZptSharp.Rendering.IDocumentSourceInfo)
+  nameWithType: EffectiveConfigSettingZptDocumentRendererDecorator.RenderAsync(Stream, Object, RenderingConfig, CancellationToken, IDocumentSourceInfo)
+- uid: ZptSharp.Rendering.EffectiveConfigSettingZptDocumentRendererDecorator.RenderAsync*
+  name: RenderAsync
+  href: api/ZptSharp.Rendering.EffectiveConfigSettingZptDocumentRendererDecorator.html#ZptSharp_Rendering_EffectiveConfigSettingZptDocumentRendererDecorator_RenderAsync_
+  commentId: Overload:ZptSharp.Rendering.EffectiveConfigSettingZptDocumentRendererDecorator.RenderAsync
+  isSpec: "True"
+  fullName: ZptSharp.Rendering.EffectiveConfigSettingZptDocumentRendererDecorator.RenderAsync
+  nameWithType: EffectiveConfigSettingZptDocumentRendererDecorator.RenderAsync
 - uid: ZptSharp.Rendering.ExpressionContextFactory
   name: ExpressionContextFactory
   href: api/ZptSharp.Rendering.ExpressionContextFactory.html
@@ -10821,12 +10879,12 @@ references:
   isSpec: "True"
   fullName: ZptSharp.Rendering.ExpressionContextFactory.GetChildContexts
   nameWithType: ExpressionContextFactory.GetChildContexts
-- uid: ZptSharp.Rendering.ExpressionContextFactory.GetExpressionContext(ZptSharp.Dom.IDocument,ZptSharp.Rendering.RenderZptDocumentRequest)
-  name: GetExpressionContext(IDocument, RenderZptDocumentRequest)
-  href: api/ZptSharp.Rendering.ExpressionContextFactory.html#ZptSharp_Rendering_ExpressionContextFactory_GetExpressionContext_ZptSharp_Dom_IDocument_ZptSharp_Rendering_RenderZptDocumentRequest_
-  commentId: M:ZptSharp.Rendering.ExpressionContextFactory.GetExpressionContext(ZptSharp.Dom.IDocument,ZptSharp.Rendering.RenderZptDocumentRequest)
-  fullName: ZptSharp.Rendering.ExpressionContextFactory.GetExpressionContext(ZptSharp.Dom.IDocument, ZptSharp.Rendering.RenderZptDocumentRequest)
-  nameWithType: ExpressionContextFactory.GetExpressionContext(IDocument, RenderZptDocumentRequest)
+- uid: ZptSharp.Rendering.ExpressionContextFactory.GetExpressionContext(ZptSharp.Dom.IDocument,System.Object)
+  name: GetExpressionContext(IDocument, Object)
+  href: api/ZptSharp.Rendering.ExpressionContextFactory.html#ZptSharp_Rendering_ExpressionContextFactory_GetExpressionContext_ZptSharp_Dom_IDocument_System_Object_
+  commentId: M:ZptSharp.Rendering.ExpressionContextFactory.GetExpressionContext(ZptSharp.Dom.IDocument,System.Object)
+  fullName: ZptSharp.Rendering.ExpressionContextFactory.GetExpressionContext(ZptSharp.Dom.IDocument, System.Object)
+  nameWithType: ExpressionContextFactory.GetExpressionContext(IDocument, Object)
 - uid: ZptSharp.Rendering.ExpressionContextFactory.GetExpressionContext*
   name: GetExpressionContext
   href: api/ZptSharp.Rendering.ExpressionContextFactory.html#ZptSharp_Rendering_ExpressionContextFactory_GetExpressionContext_
@@ -11084,12 +11142,12 @@ references:
   commentId: T:ZptSharp.Rendering.IGetsDocumentModifier
   fullName: ZptSharp.Rendering.IGetsDocumentModifier
   nameWithType: IGetsDocumentModifier
-- uid: ZptSharp.Rendering.IGetsDocumentModifier.GetDocumentModifier(ZptSharp.Rendering.RenderZptDocumentRequest)
-  name: GetDocumentModifier(RenderZptDocumentRequest)
-  href: api/ZptSharp.Rendering.IGetsDocumentModifier.html#ZptSharp_Rendering_IGetsDocumentModifier_GetDocumentModifier_ZptSharp_Rendering_RenderZptDocumentRequest_
-  commentId: M:ZptSharp.Rendering.IGetsDocumentModifier.GetDocumentModifier(ZptSharp.Rendering.RenderZptDocumentRequest)
-  fullName: ZptSharp.Rendering.IGetsDocumentModifier.GetDocumentModifier(ZptSharp.Rendering.RenderZptDocumentRequest)
-  nameWithType: IGetsDocumentModifier.GetDocumentModifier(RenderZptDocumentRequest)
+- uid: ZptSharp.Rendering.IGetsDocumentModifier.GetDocumentModifier
+  name: GetDocumentModifier()
+  href: api/ZptSharp.Rendering.IGetsDocumentModifier.html#ZptSharp_Rendering_IGetsDocumentModifier_GetDocumentModifier
+  commentId: M:ZptSharp.Rendering.IGetsDocumentModifier.GetDocumentModifier
+  fullName: ZptSharp.Rendering.IGetsDocumentModifier.GetDocumentModifier()
+  nameWithType: IGetsDocumentModifier.GetDocumentModifier()
 - uid: ZptSharp.Rendering.IGetsDocumentModifier.GetDocumentModifier*
   name: GetDocumentModifier
   href: api/ZptSharp.Rendering.IGetsDocumentModifier.html#ZptSharp_Rendering_IGetsDocumentModifier_GetDocumentModifier_
@@ -11122,12 +11180,12 @@ references:
   commentId: T:ZptSharp.Rendering.IGetsRootExpressionContext
   fullName: ZptSharp.Rendering.IGetsRootExpressionContext
   nameWithType: IGetsRootExpressionContext
-- uid: ZptSharp.Rendering.IGetsRootExpressionContext.GetExpressionContext(ZptSharp.Dom.IDocument,ZptSharp.Rendering.RenderZptDocumentRequest)
-  name: GetExpressionContext(IDocument, RenderZptDocumentRequest)
-  href: api/ZptSharp.Rendering.IGetsRootExpressionContext.html#ZptSharp_Rendering_IGetsRootExpressionContext_GetExpressionContext_ZptSharp_Dom_IDocument_ZptSharp_Rendering_RenderZptDocumentRequest_
-  commentId: M:ZptSharp.Rendering.IGetsRootExpressionContext.GetExpressionContext(ZptSharp.Dom.IDocument,ZptSharp.Rendering.RenderZptDocumentRequest)
-  fullName: ZptSharp.Rendering.IGetsRootExpressionContext.GetExpressionContext(ZptSharp.Dom.IDocument, ZptSharp.Rendering.RenderZptDocumentRequest)
-  nameWithType: IGetsRootExpressionContext.GetExpressionContext(IDocument, RenderZptDocumentRequest)
+- uid: ZptSharp.Rendering.IGetsRootExpressionContext.GetExpressionContext(ZptSharp.Dom.IDocument,System.Object)
+  name: GetExpressionContext(IDocument, Object)
+  href: api/ZptSharp.Rendering.IGetsRootExpressionContext.html#ZptSharp_Rendering_IGetsRootExpressionContext_GetExpressionContext_ZptSharp_Dom_IDocument_System_Object_
+  commentId: M:ZptSharp.Rendering.IGetsRootExpressionContext.GetExpressionContext(ZptSharp.Dom.IDocument,System.Object)
+  fullName: ZptSharp.Rendering.IGetsRootExpressionContext.GetExpressionContext(ZptSharp.Dom.IDocument, System.Object)
+  nameWithType: IGetsRootExpressionContext.GetExpressionContext(IDocument, Object)
 - uid: ZptSharp.Rendering.IGetsRootExpressionContext.GetExpressionContext*
   name: GetExpressionContext
   href: api/ZptSharp.Rendering.IGetsRootExpressionContext.html#ZptSharp_Rendering_IGetsRootExpressionContext_GetExpressionContext_
@@ -11236,12 +11294,12 @@ references:
   commentId: T:ZptSharp.Rendering.IIterativelyModifiesDocument
   fullName: ZptSharp.Rendering.IIterativelyModifiesDocument
   nameWithType: IIterativelyModifiesDocument
-- uid: ZptSharp.Rendering.IIterativelyModifiesDocument.ModifyDocumentAsync(ZptSharp.Dom.IDocument,ZptSharp.Rendering.RenderZptDocumentRequest,ZptSharp.Rendering.IProcessesExpressionContext,System.Threading.CancellationToken)
-  name: ModifyDocumentAsync(IDocument, RenderZptDocumentRequest, IProcessesExpressionContext, CancellationToken)
-  href: api/ZptSharp.Rendering.IIterativelyModifiesDocument.html#ZptSharp_Rendering_IIterativelyModifiesDocument_ModifyDocumentAsync_ZptSharp_Dom_IDocument_ZptSharp_Rendering_RenderZptDocumentRequest_ZptSharp_Rendering_IProcessesExpressionContext_System_Threading_CancellationToken_
-  commentId: M:ZptSharp.Rendering.IIterativelyModifiesDocument.ModifyDocumentAsync(ZptSharp.Dom.IDocument,ZptSharp.Rendering.RenderZptDocumentRequest,ZptSharp.Rendering.IProcessesExpressionContext,System.Threading.CancellationToken)
-  fullName: ZptSharp.Rendering.IIterativelyModifiesDocument.ModifyDocumentAsync(ZptSharp.Dom.IDocument, ZptSharp.Rendering.RenderZptDocumentRequest, ZptSharp.Rendering.IProcessesExpressionContext, System.Threading.CancellationToken)
-  nameWithType: IIterativelyModifiesDocument.ModifyDocumentAsync(IDocument, RenderZptDocumentRequest, IProcessesExpressionContext, CancellationToken)
+- uid: ZptSharp.Rendering.IIterativelyModifiesDocument.ModifyDocumentAsync(ZptSharp.Expressions.ExpressionContext,ZptSharp.Rendering.IProcessesExpressionContext,System.Threading.CancellationToken)
+  name: ModifyDocumentAsync(ExpressionContext, IProcessesExpressionContext, CancellationToken)
+  href: api/ZptSharp.Rendering.IIterativelyModifiesDocument.html#ZptSharp_Rendering_IIterativelyModifiesDocument_ModifyDocumentAsync_ZptSharp_Expressions_ExpressionContext_ZptSharp_Rendering_IProcessesExpressionContext_System_Threading_CancellationToken_
+  commentId: M:ZptSharp.Rendering.IIterativelyModifiesDocument.ModifyDocumentAsync(ZptSharp.Expressions.ExpressionContext,ZptSharp.Rendering.IProcessesExpressionContext,System.Threading.CancellationToken)
+  fullName: ZptSharp.Rendering.IIterativelyModifiesDocument.ModifyDocumentAsync(ZptSharp.Expressions.ExpressionContext, ZptSharp.Rendering.IProcessesExpressionContext, System.Threading.CancellationToken)
+  nameWithType: IIterativelyModifiesDocument.ModifyDocumentAsync(ExpressionContext, IProcessesExpressionContext, CancellationToken)
 - uid: ZptSharp.Rendering.IIterativelyModifiesDocument.ModifyDocumentAsync*
   name: ModifyDocumentAsync
   href: api/ZptSharp.Rendering.IIterativelyModifiesDocument.html#ZptSharp_Rendering_IIterativelyModifiesDocument_ModifyDocumentAsync_
@@ -11274,12 +11332,12 @@ references:
   commentId: T:ZptSharp.Rendering.IModifiesDocument
   fullName: ZptSharp.Rendering.IModifiesDocument
   nameWithType: IModifiesDocument
-- uid: ZptSharp.Rendering.IModifiesDocument.ModifyDocumentAsync(ZptSharp.Dom.IDocument,ZptSharp.Rendering.RenderZptDocumentRequest,System.Threading.CancellationToken)
-  name: ModifyDocumentAsync(IDocument, RenderZptDocumentRequest, CancellationToken)
-  href: api/ZptSharp.Rendering.IModifiesDocument.html#ZptSharp_Rendering_IModifiesDocument_ModifyDocumentAsync_ZptSharp_Dom_IDocument_ZptSharp_Rendering_RenderZptDocumentRequest_System_Threading_CancellationToken_
-  commentId: M:ZptSharp.Rendering.IModifiesDocument.ModifyDocumentAsync(ZptSharp.Dom.IDocument,ZptSharp.Rendering.RenderZptDocumentRequest,System.Threading.CancellationToken)
-  fullName: ZptSharp.Rendering.IModifiesDocument.ModifyDocumentAsync(ZptSharp.Dom.IDocument, ZptSharp.Rendering.RenderZptDocumentRequest, System.Threading.CancellationToken)
-  nameWithType: IModifiesDocument.ModifyDocumentAsync(IDocument, RenderZptDocumentRequest, CancellationToken)
+- uid: ZptSharp.Rendering.IModifiesDocument.ModifyDocumentAsync(ZptSharp.Dom.IDocument,System.Object,System.Threading.CancellationToken)
+  name: ModifyDocumentAsync(IDocument, Object, CancellationToken)
+  href: api/ZptSharp.Rendering.IModifiesDocument.html#ZptSharp_Rendering_IModifiesDocument_ModifyDocumentAsync_ZptSharp_Dom_IDocument_System_Object_System_Threading_CancellationToken_
+  commentId: M:ZptSharp.Rendering.IModifiesDocument.ModifyDocumentAsync(ZptSharp.Dom.IDocument,System.Object,System.Threading.CancellationToken)
+  fullName: ZptSharp.Rendering.IModifiesDocument.ModifyDocumentAsync(ZptSharp.Dom.IDocument, System.Object, System.Threading.CancellationToken)
+  nameWithType: IModifiesDocument.ModifyDocumentAsync(IDocument, Object, CancellationToken)
 - uid: ZptSharp.Rendering.IModifiesDocument.ModifyDocumentAsync*
   name: ModifyDocumentAsync
   href: api/ZptSharp.Rendering.IModifiesDocument.html#ZptSharp_Rendering_IModifiesDocument_ModifyDocumentAsync_
@@ -11306,37 +11364,18 @@ references:
   isSpec: "True"
   fullName: ZptSharp.Rendering.IProcessesExpressionContext.ProcessContextAsync
   nameWithType: IProcessesExpressionContext.ProcessContextAsync
-- uid: ZptSharp.Rendering.IRendersRenderingRequest
-  name: IRendersRenderingRequest
-  href: api/ZptSharp.Rendering.IRendersRenderingRequest.html
-  commentId: T:ZptSharp.Rendering.IRendersRenderingRequest
-  fullName: ZptSharp.Rendering.IRendersRenderingRequest
-  nameWithType: IRendersRenderingRequest
-- uid: ZptSharp.Rendering.IRendersRenderingRequest.RenderAsync(ZptSharp.Rendering.RenderZptDocumentRequest,ZptSharp.Config.RenderingConfig,System.Threading.CancellationToken)
-  name: RenderAsync(RenderZptDocumentRequest, RenderingConfig, CancellationToken)
-  href: api/ZptSharp.Rendering.IRendersRenderingRequest.html#ZptSharp_Rendering_IRendersRenderingRequest_RenderAsync_ZptSharp_Rendering_RenderZptDocumentRequest_ZptSharp_Config_RenderingConfig_System_Threading_CancellationToken_
-  commentId: M:ZptSharp.Rendering.IRendersRenderingRequest.RenderAsync(ZptSharp.Rendering.RenderZptDocumentRequest,ZptSharp.Config.RenderingConfig,System.Threading.CancellationToken)
-  fullName: ZptSharp.Rendering.IRendersRenderingRequest.RenderAsync(ZptSharp.Rendering.RenderZptDocumentRequest, ZptSharp.Config.RenderingConfig, System.Threading.CancellationToken)
-  nameWithType: IRendersRenderingRequest.RenderAsync(RenderZptDocumentRequest, RenderingConfig, CancellationToken)
-- uid: ZptSharp.Rendering.IRendersRenderingRequest.RenderAsync*
-  name: RenderAsync
-  href: api/ZptSharp.Rendering.IRendersRenderingRequest.html#ZptSharp_Rendering_IRendersRenderingRequest_RenderAsync_
-  commentId: Overload:ZptSharp.Rendering.IRendersRenderingRequest.RenderAsync
-  isSpec: "True"
-  fullName: ZptSharp.Rendering.IRendersRenderingRequest.RenderAsync
-  nameWithType: IRendersRenderingRequest.RenderAsync
 - uid: ZptSharp.Rendering.IterativeDocumentModifier
   name: IterativeDocumentModifier
   href: api/ZptSharp.Rendering.IterativeDocumentModifier.html
   commentId: T:ZptSharp.Rendering.IterativeDocumentModifier
   fullName: ZptSharp.Rendering.IterativeDocumentModifier
   nameWithType: IterativeDocumentModifier
-- uid: ZptSharp.Rendering.IterativeDocumentModifier.#ctor(ZptSharp.Rendering.IGetsIterativeExpressionContextProcessor,ZptSharp.Rendering.IGetsRootExpressionContext)
-  name: IterativeDocumentModifier(IGetsIterativeExpressionContextProcessor, IGetsRootExpressionContext)
-  href: api/ZptSharp.Rendering.IterativeDocumentModifier.html#ZptSharp_Rendering_IterativeDocumentModifier__ctor_ZptSharp_Rendering_IGetsIterativeExpressionContextProcessor_ZptSharp_Rendering_IGetsRootExpressionContext_
-  commentId: M:ZptSharp.Rendering.IterativeDocumentModifier.#ctor(ZptSharp.Rendering.IGetsIterativeExpressionContextProcessor,ZptSharp.Rendering.IGetsRootExpressionContext)
-  fullName: ZptSharp.Rendering.IterativeDocumentModifier.IterativeDocumentModifier(ZptSharp.Rendering.IGetsIterativeExpressionContextProcessor, ZptSharp.Rendering.IGetsRootExpressionContext)
-  nameWithType: IterativeDocumentModifier.IterativeDocumentModifier(IGetsIterativeExpressionContextProcessor, IGetsRootExpressionContext)
+- uid: ZptSharp.Rendering.IterativeDocumentModifier.#ctor(ZptSharp.Rendering.IGetsIterativeExpressionContextProcessor)
+  name: IterativeDocumentModifier(IGetsIterativeExpressionContextProcessor)
+  href: api/ZptSharp.Rendering.IterativeDocumentModifier.html#ZptSharp_Rendering_IterativeDocumentModifier__ctor_ZptSharp_Rendering_IGetsIterativeExpressionContextProcessor_
+  commentId: M:ZptSharp.Rendering.IterativeDocumentModifier.#ctor(ZptSharp.Rendering.IGetsIterativeExpressionContextProcessor)
+  fullName: ZptSharp.Rendering.IterativeDocumentModifier.IterativeDocumentModifier(ZptSharp.Rendering.IGetsIterativeExpressionContextProcessor)
+  nameWithType: IterativeDocumentModifier.IterativeDocumentModifier(IGetsIterativeExpressionContextProcessor)
 - uid: ZptSharp.Rendering.IterativeDocumentModifier.#ctor*
   name: IterativeDocumentModifier
   href: api/ZptSharp.Rendering.IterativeDocumentModifier.html#ZptSharp_Rendering_IterativeDocumentModifier__ctor_
@@ -11344,12 +11383,12 @@ references:
   isSpec: "True"
   fullName: ZptSharp.Rendering.IterativeDocumentModifier.IterativeDocumentModifier
   nameWithType: IterativeDocumentModifier.IterativeDocumentModifier
-- uid: ZptSharp.Rendering.IterativeDocumentModifier.ModifyDocumentAsync(ZptSharp.Dom.IDocument,ZptSharp.Rendering.RenderZptDocumentRequest,ZptSharp.Rendering.IProcessesExpressionContext,System.Threading.CancellationToken)
-  name: ModifyDocumentAsync(IDocument, RenderZptDocumentRequest, IProcessesExpressionContext, CancellationToken)
-  href: api/ZptSharp.Rendering.IterativeDocumentModifier.html#ZptSharp_Rendering_IterativeDocumentModifier_ModifyDocumentAsync_ZptSharp_Dom_IDocument_ZptSharp_Rendering_RenderZptDocumentRequest_ZptSharp_Rendering_IProcessesExpressionContext_System_Threading_CancellationToken_
-  commentId: M:ZptSharp.Rendering.IterativeDocumentModifier.ModifyDocumentAsync(ZptSharp.Dom.IDocument,ZptSharp.Rendering.RenderZptDocumentRequest,ZptSharp.Rendering.IProcessesExpressionContext,System.Threading.CancellationToken)
-  fullName: ZptSharp.Rendering.IterativeDocumentModifier.ModifyDocumentAsync(ZptSharp.Dom.IDocument, ZptSharp.Rendering.RenderZptDocumentRequest, ZptSharp.Rendering.IProcessesExpressionContext, System.Threading.CancellationToken)
-  nameWithType: IterativeDocumentModifier.ModifyDocumentAsync(IDocument, RenderZptDocumentRequest, IProcessesExpressionContext, CancellationToken)
+- uid: ZptSharp.Rendering.IterativeDocumentModifier.ModifyDocumentAsync(ZptSharp.Expressions.ExpressionContext,ZptSharp.Rendering.IProcessesExpressionContext,System.Threading.CancellationToken)
+  name: ModifyDocumentAsync(ExpressionContext, IProcessesExpressionContext, CancellationToken)
+  href: api/ZptSharp.Rendering.IterativeDocumentModifier.html#ZptSharp_Rendering_IterativeDocumentModifier_ModifyDocumentAsync_ZptSharp_Expressions_ExpressionContext_ZptSharp_Rendering_IProcessesExpressionContext_System_Threading_CancellationToken_
+  commentId: M:ZptSharp.Rendering.IterativeDocumentModifier.ModifyDocumentAsync(ZptSharp.Expressions.ExpressionContext,ZptSharp.Rendering.IProcessesExpressionContext,System.Threading.CancellationToken)
+  fullName: ZptSharp.Rendering.IterativeDocumentModifier.ModifyDocumentAsync(ZptSharp.Expressions.ExpressionContext, ZptSharp.Rendering.IProcessesExpressionContext, System.Threading.CancellationToken)
+  nameWithType: IterativeDocumentModifier.ModifyDocumentAsync(ExpressionContext, IProcessesExpressionContext, CancellationToken)
 - uid: ZptSharp.Rendering.IterativeDocumentModifier.ModifyDocumentAsync*
   name: ModifyDocumentAsync
   href: api/ZptSharp.Rendering.IterativeDocumentModifier.html#ZptSharp_Rendering_IterativeDocumentModifier_ModifyDocumentAsync_
@@ -11395,12 +11434,12 @@ references:
   commentId: T:ZptSharp.Rendering.MetalDocumentModifierDecorator
   fullName: ZptSharp.Rendering.MetalDocumentModifierDecorator
   nameWithType: MetalDocumentModifierDecorator
-- uid: ZptSharp.Rendering.MetalDocumentModifierDecorator.#ctor(ZptSharp.Metal.IGetsMetalContextProcessor,ZptSharp.Rendering.IIterativelyModifiesDocument,ZptSharp.Rendering.IModifiesDocument)
-  name: MetalDocumentModifierDecorator(IGetsMetalContextProcessor, IIterativelyModifiesDocument, IModifiesDocument)
-  href: api/ZptSharp.Rendering.MetalDocumentModifierDecorator.html#ZptSharp_Rendering_MetalDocumentModifierDecorator__ctor_ZptSharp_Metal_IGetsMetalContextProcessor_ZptSharp_Rendering_IIterativelyModifiesDocument_ZptSharp_Rendering_IModifiesDocument_
-  commentId: M:ZptSharp.Rendering.MetalDocumentModifierDecorator.#ctor(ZptSharp.Metal.IGetsMetalContextProcessor,ZptSharp.Rendering.IIterativelyModifiesDocument,ZptSharp.Rendering.IModifiesDocument)
-  fullName: ZptSharp.Rendering.MetalDocumentModifierDecorator.MetalDocumentModifierDecorator(ZptSharp.Metal.IGetsMetalContextProcessor, ZptSharp.Rendering.IIterativelyModifiesDocument, ZptSharp.Rendering.IModifiesDocument)
-  nameWithType: MetalDocumentModifierDecorator.MetalDocumentModifierDecorator(IGetsMetalContextProcessor, IIterativelyModifiesDocument, IModifiesDocument)
+- uid: ZptSharp.Rendering.MetalDocumentModifierDecorator.#ctor(ZptSharp.Metal.IGetsMetalContextProcessor,ZptSharp.Rendering.IIterativelyModifiesDocument,ZptSharp.Rendering.IModifiesDocument,ZptSharp.Rendering.IGetsRootExpressionContext)
+  name: MetalDocumentModifierDecorator(IGetsMetalContextProcessor, IIterativelyModifiesDocument, IModifiesDocument, IGetsRootExpressionContext)
+  href: api/ZptSharp.Rendering.MetalDocumentModifierDecorator.html#ZptSharp_Rendering_MetalDocumentModifierDecorator__ctor_ZptSharp_Metal_IGetsMetalContextProcessor_ZptSharp_Rendering_IIterativelyModifiesDocument_ZptSharp_Rendering_IModifiesDocument_ZptSharp_Rendering_IGetsRootExpressionContext_
+  commentId: M:ZptSharp.Rendering.MetalDocumentModifierDecorator.#ctor(ZptSharp.Metal.IGetsMetalContextProcessor,ZptSharp.Rendering.IIterativelyModifiesDocument,ZptSharp.Rendering.IModifiesDocument,ZptSharp.Rendering.IGetsRootExpressionContext)
+  fullName: ZptSharp.Rendering.MetalDocumentModifierDecorator.MetalDocumentModifierDecorator(ZptSharp.Metal.IGetsMetalContextProcessor, ZptSharp.Rendering.IIterativelyModifiesDocument, ZptSharp.Rendering.IModifiesDocument, ZptSharp.Rendering.IGetsRootExpressionContext)
+  nameWithType: MetalDocumentModifierDecorator.MetalDocumentModifierDecorator(IGetsMetalContextProcessor, IIterativelyModifiesDocument, IModifiesDocument, IGetsRootExpressionContext)
 - uid: ZptSharp.Rendering.MetalDocumentModifierDecorator.#ctor*
   name: MetalDocumentModifierDecorator
   href: api/ZptSharp.Rendering.MetalDocumentModifierDecorator.html#ZptSharp_Rendering_MetalDocumentModifierDecorator__ctor_
@@ -11408,12 +11447,12 @@ references:
   isSpec: "True"
   fullName: ZptSharp.Rendering.MetalDocumentModifierDecorator.MetalDocumentModifierDecorator
   nameWithType: MetalDocumentModifierDecorator.MetalDocumentModifierDecorator
-- uid: ZptSharp.Rendering.MetalDocumentModifierDecorator.ModifyDocumentAsync(ZptSharp.Dom.IDocument,ZptSharp.Rendering.RenderZptDocumentRequest,System.Threading.CancellationToken)
-  name: ModifyDocumentAsync(IDocument, RenderZptDocumentRequest, CancellationToken)
-  href: api/ZptSharp.Rendering.MetalDocumentModifierDecorator.html#ZptSharp_Rendering_MetalDocumentModifierDecorator_ModifyDocumentAsync_ZptSharp_Dom_IDocument_ZptSharp_Rendering_RenderZptDocumentRequest_System_Threading_CancellationToken_
-  commentId: M:ZptSharp.Rendering.MetalDocumentModifierDecorator.ModifyDocumentAsync(ZptSharp.Dom.IDocument,ZptSharp.Rendering.RenderZptDocumentRequest,System.Threading.CancellationToken)
-  fullName: ZptSharp.Rendering.MetalDocumentModifierDecorator.ModifyDocumentAsync(ZptSharp.Dom.IDocument, ZptSharp.Rendering.RenderZptDocumentRequest, System.Threading.CancellationToken)
-  nameWithType: MetalDocumentModifierDecorator.ModifyDocumentAsync(IDocument, RenderZptDocumentRequest, CancellationToken)
+- uid: ZptSharp.Rendering.MetalDocumentModifierDecorator.ModifyDocumentAsync(ZptSharp.Dom.IDocument,System.Object,System.Threading.CancellationToken)
+  name: ModifyDocumentAsync(IDocument, Object, CancellationToken)
+  href: api/ZptSharp.Rendering.MetalDocumentModifierDecorator.html#ZptSharp_Rendering_MetalDocumentModifierDecorator_ModifyDocumentAsync_ZptSharp_Dom_IDocument_System_Object_System_Threading_CancellationToken_
+  commentId: M:ZptSharp.Rendering.MetalDocumentModifierDecorator.ModifyDocumentAsync(ZptSharp.Dom.IDocument,System.Object,System.Threading.CancellationToken)
+  fullName: ZptSharp.Rendering.MetalDocumentModifierDecorator.ModifyDocumentAsync(ZptSharp.Dom.IDocument, System.Object, System.Threading.CancellationToken)
+  nameWithType: MetalDocumentModifierDecorator.ModifyDocumentAsync(IDocument, Object, CancellationToken)
 - uid: ZptSharp.Rendering.MetalDocumentModifierDecorator.ModifyDocumentAsync*
   name: ModifyDocumentAsync
   href: api/ZptSharp.Rendering.MetalDocumentModifierDecorator.html#ZptSharp_Rendering_MetalDocumentModifierDecorator_ModifyDocumentAsync_
@@ -11549,12 +11588,12 @@ references:
   commentId: T:ZptSharp.Rendering.NoOpDocumentModifier
   fullName: ZptSharp.Rendering.NoOpDocumentModifier
   nameWithType: NoOpDocumentModifier
-- uid: ZptSharp.Rendering.NoOpDocumentModifier.ModifyDocumentAsync(ZptSharp.Dom.IDocument,ZptSharp.Rendering.RenderZptDocumentRequest,System.Threading.CancellationToken)
-  name: ModifyDocumentAsync(IDocument, RenderZptDocumentRequest, CancellationToken)
-  href: api/ZptSharp.Rendering.NoOpDocumentModifier.html#ZptSharp_Rendering_NoOpDocumentModifier_ModifyDocumentAsync_ZptSharp_Dom_IDocument_ZptSharp_Rendering_RenderZptDocumentRequest_System_Threading_CancellationToken_
-  commentId: M:ZptSharp.Rendering.NoOpDocumentModifier.ModifyDocumentAsync(ZptSharp.Dom.IDocument,ZptSharp.Rendering.RenderZptDocumentRequest,System.Threading.CancellationToken)
-  fullName: ZptSharp.Rendering.NoOpDocumentModifier.ModifyDocumentAsync(ZptSharp.Dom.IDocument, ZptSharp.Rendering.RenderZptDocumentRequest, System.Threading.CancellationToken)
-  nameWithType: NoOpDocumentModifier.ModifyDocumentAsync(IDocument, RenderZptDocumentRequest, CancellationToken)
+- uid: ZptSharp.Rendering.NoOpDocumentModifier.ModifyDocumentAsync(ZptSharp.Dom.IDocument,System.Object,System.Threading.CancellationToken)
+  name: ModifyDocumentAsync(IDocument, Object, CancellationToken)
+  href: api/ZptSharp.Rendering.NoOpDocumentModifier.html#ZptSharp_Rendering_NoOpDocumentModifier_ModifyDocumentAsync_ZptSharp_Dom_IDocument_System_Object_System_Threading_CancellationToken_
+  commentId: M:ZptSharp.Rendering.NoOpDocumentModifier.ModifyDocumentAsync(ZptSharp.Dom.IDocument,System.Object,System.Threading.CancellationToken)
+  fullName: ZptSharp.Rendering.NoOpDocumentModifier.ModifyDocumentAsync(ZptSharp.Dom.IDocument, System.Object, System.Threading.CancellationToken)
+  nameWithType: NoOpDocumentModifier.ModifyDocumentAsync(IDocument, Object, CancellationToken)
 - uid: ZptSharp.Rendering.NoOpDocumentModifier.ModifyDocumentAsync*
   name: ModifyDocumentAsync
   href: api/ZptSharp.Rendering.NoOpDocumentModifier.html#ZptSharp_Rendering_NoOpDocumentModifier_ModifyDocumentAsync_
@@ -11658,12 +11697,12 @@ references:
   commentId: T:ZptSharp.Rendering.RemoveZptAttributesModifierDecorator
   fullName: ZptSharp.Rendering.RemoveZptAttributesModifierDecorator
   nameWithType: RemoveZptAttributesModifierDecorator
-- uid: ZptSharp.Rendering.RemoveZptAttributesModifierDecorator.#ctor(ZptSharp.Rendering.IGetsZptNodeAndAttributeRemovalContextProcessor,ZptSharp.Rendering.IIterativelyModifiesDocument,ZptSharp.Rendering.IModifiesDocument)
-  name: RemoveZptAttributesModifierDecorator(IGetsZptNodeAndAttributeRemovalContextProcessor, IIterativelyModifiesDocument, IModifiesDocument)
-  href: api/ZptSharp.Rendering.RemoveZptAttributesModifierDecorator.html#ZptSharp_Rendering_RemoveZptAttributesModifierDecorator__ctor_ZptSharp_Rendering_IGetsZptNodeAndAttributeRemovalContextProcessor_ZptSharp_Rendering_IIterativelyModifiesDocument_ZptSharp_Rendering_IModifiesDocument_
-  commentId: M:ZptSharp.Rendering.RemoveZptAttributesModifierDecorator.#ctor(ZptSharp.Rendering.IGetsZptNodeAndAttributeRemovalContextProcessor,ZptSharp.Rendering.IIterativelyModifiesDocument,ZptSharp.Rendering.IModifiesDocument)
-  fullName: ZptSharp.Rendering.RemoveZptAttributesModifierDecorator.RemoveZptAttributesModifierDecorator(ZptSharp.Rendering.IGetsZptNodeAndAttributeRemovalContextProcessor, ZptSharp.Rendering.IIterativelyModifiesDocument, ZptSharp.Rendering.IModifiesDocument)
-  nameWithType: RemoveZptAttributesModifierDecorator.RemoveZptAttributesModifierDecorator(IGetsZptNodeAndAttributeRemovalContextProcessor, IIterativelyModifiesDocument, IModifiesDocument)
+- uid: ZptSharp.Rendering.RemoveZptAttributesModifierDecorator.#ctor(ZptSharp.Rendering.IGetsZptNodeAndAttributeRemovalContextProcessor,ZptSharp.Rendering.IIterativelyModifiesDocument,ZptSharp.Rendering.IModifiesDocument,ZptSharp.Rendering.IGetsRootExpressionContext)
+  name: RemoveZptAttributesModifierDecorator(IGetsZptNodeAndAttributeRemovalContextProcessor, IIterativelyModifiesDocument, IModifiesDocument, IGetsRootExpressionContext)
+  href: api/ZptSharp.Rendering.RemoveZptAttributesModifierDecorator.html#ZptSharp_Rendering_RemoveZptAttributesModifierDecorator__ctor_ZptSharp_Rendering_IGetsZptNodeAndAttributeRemovalContextProcessor_ZptSharp_Rendering_IIterativelyModifiesDocument_ZptSharp_Rendering_IModifiesDocument_ZptSharp_Rendering_IGetsRootExpressionContext_
+  commentId: M:ZptSharp.Rendering.RemoveZptAttributesModifierDecorator.#ctor(ZptSharp.Rendering.IGetsZptNodeAndAttributeRemovalContextProcessor,ZptSharp.Rendering.IIterativelyModifiesDocument,ZptSharp.Rendering.IModifiesDocument,ZptSharp.Rendering.IGetsRootExpressionContext)
+  fullName: ZptSharp.Rendering.RemoveZptAttributesModifierDecorator.RemoveZptAttributesModifierDecorator(ZptSharp.Rendering.IGetsZptNodeAndAttributeRemovalContextProcessor, ZptSharp.Rendering.IIterativelyModifiesDocument, ZptSharp.Rendering.IModifiesDocument, ZptSharp.Rendering.IGetsRootExpressionContext)
+  nameWithType: RemoveZptAttributesModifierDecorator.RemoveZptAttributesModifierDecorator(IGetsZptNodeAndAttributeRemovalContextProcessor, IIterativelyModifiesDocument, IModifiesDocument, IGetsRootExpressionContext)
 - uid: ZptSharp.Rendering.RemoveZptAttributesModifierDecorator.#ctor*
   name: RemoveZptAttributesModifierDecorator
   href: api/ZptSharp.Rendering.RemoveZptAttributesModifierDecorator.html#ZptSharp_Rendering_RemoveZptAttributesModifierDecorator__ctor_
@@ -11671,12 +11710,12 @@ references:
   isSpec: "True"
   fullName: ZptSharp.Rendering.RemoveZptAttributesModifierDecorator.RemoveZptAttributesModifierDecorator
   nameWithType: RemoveZptAttributesModifierDecorator.RemoveZptAttributesModifierDecorator
-- uid: ZptSharp.Rendering.RemoveZptAttributesModifierDecorator.ModifyDocumentAsync(ZptSharp.Dom.IDocument,ZptSharp.Rendering.RenderZptDocumentRequest,System.Threading.CancellationToken)
-  name: ModifyDocumentAsync(IDocument, RenderZptDocumentRequest, CancellationToken)
-  href: api/ZptSharp.Rendering.RemoveZptAttributesModifierDecorator.html#ZptSharp_Rendering_RemoveZptAttributesModifierDecorator_ModifyDocumentAsync_ZptSharp_Dom_IDocument_ZptSharp_Rendering_RenderZptDocumentRequest_System_Threading_CancellationToken_
-  commentId: M:ZptSharp.Rendering.RemoveZptAttributesModifierDecorator.ModifyDocumentAsync(ZptSharp.Dom.IDocument,ZptSharp.Rendering.RenderZptDocumentRequest,System.Threading.CancellationToken)
-  fullName: ZptSharp.Rendering.RemoveZptAttributesModifierDecorator.ModifyDocumentAsync(ZptSharp.Dom.IDocument, ZptSharp.Rendering.RenderZptDocumentRequest, System.Threading.CancellationToken)
-  nameWithType: RemoveZptAttributesModifierDecorator.ModifyDocumentAsync(IDocument, RenderZptDocumentRequest, CancellationToken)
+- uid: ZptSharp.Rendering.RemoveZptAttributesModifierDecorator.ModifyDocumentAsync(ZptSharp.Dom.IDocument,System.Object,System.Threading.CancellationToken)
+  name: ModifyDocumentAsync(IDocument, Object, CancellationToken)
+  href: api/ZptSharp.Rendering.RemoveZptAttributesModifierDecorator.html#ZptSharp_Rendering_RemoveZptAttributesModifierDecorator_ModifyDocumentAsync_ZptSharp_Dom_IDocument_System_Object_System_Threading_CancellationToken_
+  commentId: M:ZptSharp.Rendering.RemoveZptAttributesModifierDecorator.ModifyDocumentAsync(ZptSharp.Dom.IDocument,System.Object,System.Threading.CancellationToken)
+  fullName: ZptSharp.Rendering.RemoveZptAttributesModifierDecorator.ModifyDocumentAsync(ZptSharp.Dom.IDocument, System.Object, System.Threading.CancellationToken)
+  nameWithType: RemoveZptAttributesModifierDecorator.ModifyDocumentAsync(IDocument, Object, CancellationToken)
 - uid: ZptSharp.Rendering.RemoveZptAttributesModifierDecorator.ModifyDocumentAsync*
   name: ModifyDocumentAsync
   href: api/ZptSharp.Rendering.RemoveZptAttributesModifierDecorator.html#ZptSharp_Rendering_RemoveZptAttributesModifierDecorator_ModifyDocumentAsync_
@@ -11684,76 +11723,18 @@ references:
   isSpec: "True"
   fullName: ZptSharp.Rendering.RemoveZptAttributesModifierDecorator.ModifyDocumentAsync
   nameWithType: RemoveZptAttributesModifierDecorator.ModifyDocumentAsync
-- uid: ZptSharp.Rendering.RenderZptDocumentRequest
-  name: RenderZptDocumentRequest
-  href: api/ZptSharp.Rendering.RenderZptDocumentRequest.html
-  commentId: T:ZptSharp.Rendering.RenderZptDocumentRequest
-  fullName: ZptSharp.Rendering.RenderZptDocumentRequest
-  nameWithType: RenderZptDocumentRequest
-- uid: ZptSharp.Rendering.RenderZptDocumentRequest.#ctor(System.IO.Stream,System.Object,ZptSharp.Rendering.IDocumentSourceInfo)
-  name: RenderZptDocumentRequest(Stream, Object, IDocumentSourceInfo)
-  href: api/ZptSharp.Rendering.RenderZptDocumentRequest.html#ZptSharp_Rendering_RenderZptDocumentRequest__ctor_System_IO_Stream_System_Object_ZptSharp_Rendering_IDocumentSourceInfo_
-  commentId: M:ZptSharp.Rendering.RenderZptDocumentRequest.#ctor(System.IO.Stream,System.Object,ZptSharp.Rendering.IDocumentSourceInfo)
-  fullName: ZptSharp.Rendering.RenderZptDocumentRequest.RenderZptDocumentRequest(System.IO.Stream, System.Object, ZptSharp.Rendering.IDocumentSourceInfo)
-  nameWithType: RenderZptDocumentRequest.RenderZptDocumentRequest(Stream, Object, IDocumentSourceInfo)
-- uid: ZptSharp.Rendering.RenderZptDocumentRequest.#ctor*
-  name: RenderZptDocumentRequest
-  href: api/ZptSharp.Rendering.RenderZptDocumentRequest.html#ZptSharp_Rendering_RenderZptDocumentRequest__ctor_
-  commentId: Overload:ZptSharp.Rendering.RenderZptDocumentRequest.#ctor
-  isSpec: "True"
-  fullName: ZptSharp.Rendering.RenderZptDocumentRequest.RenderZptDocumentRequest
-  nameWithType: RenderZptDocumentRequest.RenderZptDocumentRequest
-- uid: ZptSharp.Rendering.RenderZptDocumentRequest.DocumentStream
-  name: DocumentStream
-  href: api/ZptSharp.Rendering.RenderZptDocumentRequest.html#ZptSharp_Rendering_RenderZptDocumentRequest_DocumentStream
-  commentId: P:ZptSharp.Rendering.RenderZptDocumentRequest.DocumentStream
-  fullName: ZptSharp.Rendering.RenderZptDocumentRequest.DocumentStream
-  nameWithType: RenderZptDocumentRequest.DocumentStream
-- uid: ZptSharp.Rendering.RenderZptDocumentRequest.DocumentStream*
-  name: DocumentStream
-  href: api/ZptSharp.Rendering.RenderZptDocumentRequest.html#ZptSharp_Rendering_RenderZptDocumentRequest_DocumentStream_
-  commentId: Overload:ZptSharp.Rendering.RenderZptDocumentRequest.DocumentStream
-  isSpec: "True"
-  fullName: ZptSharp.Rendering.RenderZptDocumentRequest.DocumentStream
-  nameWithType: RenderZptDocumentRequest.DocumentStream
-- uid: ZptSharp.Rendering.RenderZptDocumentRequest.Model
-  name: Model
-  href: api/ZptSharp.Rendering.RenderZptDocumentRequest.html#ZptSharp_Rendering_RenderZptDocumentRequest_Model
-  commentId: P:ZptSharp.Rendering.RenderZptDocumentRequest.Model
-  fullName: ZptSharp.Rendering.RenderZptDocumentRequest.Model
-  nameWithType: RenderZptDocumentRequest.Model
-- uid: ZptSharp.Rendering.RenderZptDocumentRequest.Model*
-  name: Model
-  href: api/ZptSharp.Rendering.RenderZptDocumentRequest.html#ZptSharp_Rendering_RenderZptDocumentRequest_Model_
-  commentId: Overload:ZptSharp.Rendering.RenderZptDocumentRequest.Model
-  isSpec: "True"
-  fullName: ZptSharp.Rendering.RenderZptDocumentRequest.Model
-  nameWithType: RenderZptDocumentRequest.Model
-- uid: ZptSharp.Rendering.RenderZptDocumentRequest.SourceInfo
-  name: SourceInfo
-  href: api/ZptSharp.Rendering.RenderZptDocumentRequest.html#ZptSharp_Rendering_RenderZptDocumentRequest_SourceInfo
-  commentId: P:ZptSharp.Rendering.RenderZptDocumentRequest.SourceInfo
-  fullName: ZptSharp.Rendering.RenderZptDocumentRequest.SourceInfo
-  nameWithType: RenderZptDocumentRequest.SourceInfo
-- uid: ZptSharp.Rendering.RenderZptDocumentRequest.SourceInfo*
-  name: SourceInfo
-  href: api/ZptSharp.Rendering.RenderZptDocumentRequest.html#ZptSharp_Rendering_RenderZptDocumentRequest_SourceInfo_
-  commentId: Overload:ZptSharp.Rendering.RenderZptDocumentRequest.SourceInfo
-  isSpec: "True"
-  fullName: ZptSharp.Rendering.RenderZptDocumentRequest.SourceInfo
-  nameWithType: RenderZptDocumentRequest.SourceInfo
 - uid: ZptSharp.Rendering.SourceAnnotationDocumentModifierDecorator
   name: SourceAnnotationDocumentModifierDecorator
   href: api/ZptSharp.Rendering.SourceAnnotationDocumentModifierDecorator.html
   commentId: T:ZptSharp.Rendering.SourceAnnotationDocumentModifierDecorator
   fullName: ZptSharp.Rendering.SourceAnnotationDocumentModifierDecorator
   nameWithType: SourceAnnotationDocumentModifierDecorator
-- uid: ZptSharp.Rendering.SourceAnnotationDocumentModifierDecorator.#ctor(ZptSharp.SourceAnnotation.IGetsSourceAnnotationContextProcessor,ZptSharp.Rendering.IIterativelyModifiesDocument,ZptSharp.Config.RenderingConfig,ZptSharp.Rendering.IModifiesDocument)
-  name: SourceAnnotationDocumentModifierDecorator(IGetsSourceAnnotationContextProcessor, IIterativelyModifiesDocument, RenderingConfig, IModifiesDocument)
-  href: api/ZptSharp.Rendering.SourceAnnotationDocumentModifierDecorator.html#ZptSharp_Rendering_SourceAnnotationDocumentModifierDecorator__ctor_ZptSharp_SourceAnnotation_IGetsSourceAnnotationContextProcessor_ZptSharp_Rendering_IIterativelyModifiesDocument_ZptSharp_Config_RenderingConfig_ZptSharp_Rendering_IModifiesDocument_
-  commentId: M:ZptSharp.Rendering.SourceAnnotationDocumentModifierDecorator.#ctor(ZptSharp.SourceAnnotation.IGetsSourceAnnotationContextProcessor,ZptSharp.Rendering.IIterativelyModifiesDocument,ZptSharp.Config.RenderingConfig,ZptSharp.Rendering.IModifiesDocument)
-  fullName: ZptSharp.Rendering.SourceAnnotationDocumentModifierDecorator.SourceAnnotationDocumentModifierDecorator(ZptSharp.SourceAnnotation.IGetsSourceAnnotationContextProcessor, ZptSharp.Rendering.IIterativelyModifiesDocument, ZptSharp.Config.RenderingConfig, ZptSharp.Rendering.IModifiesDocument)
-  nameWithType: SourceAnnotationDocumentModifierDecorator.SourceAnnotationDocumentModifierDecorator(IGetsSourceAnnotationContextProcessor, IIterativelyModifiesDocument, RenderingConfig, IModifiesDocument)
+- uid: ZptSharp.Rendering.SourceAnnotationDocumentModifierDecorator.#ctor(ZptSharp.SourceAnnotation.IGetsSourceAnnotationContextProcessor,ZptSharp.Rendering.IIterativelyModifiesDocument,ZptSharp.Config.RenderingConfig,ZptSharp.Rendering.IModifiesDocument,ZptSharp.Rendering.IGetsRootExpressionContext)
+  name: SourceAnnotationDocumentModifierDecorator(IGetsSourceAnnotationContextProcessor, IIterativelyModifiesDocument, RenderingConfig, IModifiesDocument, IGetsRootExpressionContext)
+  href: api/ZptSharp.Rendering.SourceAnnotationDocumentModifierDecorator.html#ZptSharp_Rendering_SourceAnnotationDocumentModifierDecorator__ctor_ZptSharp_SourceAnnotation_IGetsSourceAnnotationContextProcessor_ZptSharp_Rendering_IIterativelyModifiesDocument_ZptSharp_Config_RenderingConfig_ZptSharp_Rendering_IModifiesDocument_ZptSharp_Rendering_IGetsRootExpressionContext_
+  commentId: M:ZptSharp.Rendering.SourceAnnotationDocumentModifierDecorator.#ctor(ZptSharp.SourceAnnotation.IGetsSourceAnnotationContextProcessor,ZptSharp.Rendering.IIterativelyModifiesDocument,ZptSharp.Config.RenderingConfig,ZptSharp.Rendering.IModifiesDocument,ZptSharp.Rendering.IGetsRootExpressionContext)
+  fullName: ZptSharp.Rendering.SourceAnnotationDocumentModifierDecorator.SourceAnnotationDocumentModifierDecorator(ZptSharp.SourceAnnotation.IGetsSourceAnnotationContextProcessor, ZptSharp.Rendering.IIterativelyModifiesDocument, ZptSharp.Config.RenderingConfig, ZptSharp.Rendering.IModifiesDocument, ZptSharp.Rendering.IGetsRootExpressionContext)
+  nameWithType: SourceAnnotationDocumentModifierDecorator.SourceAnnotationDocumentModifierDecorator(IGetsSourceAnnotationContextProcessor, IIterativelyModifiesDocument, RenderingConfig, IModifiesDocument, IGetsRootExpressionContext)
 - uid: ZptSharp.Rendering.SourceAnnotationDocumentModifierDecorator.#ctor*
   name: SourceAnnotationDocumentModifierDecorator
   href: api/ZptSharp.Rendering.SourceAnnotationDocumentModifierDecorator.html#ZptSharp_Rendering_SourceAnnotationDocumentModifierDecorator__ctor_
@@ -11761,12 +11742,12 @@ references:
   isSpec: "True"
   fullName: ZptSharp.Rendering.SourceAnnotationDocumentModifierDecorator.SourceAnnotationDocumentModifierDecorator
   nameWithType: SourceAnnotationDocumentModifierDecorator.SourceAnnotationDocumentModifierDecorator
-- uid: ZptSharp.Rendering.SourceAnnotationDocumentModifierDecorator.ModifyDocumentAsync(ZptSharp.Dom.IDocument,ZptSharp.Rendering.RenderZptDocumentRequest,System.Threading.CancellationToken)
-  name: ModifyDocumentAsync(IDocument, RenderZptDocumentRequest, CancellationToken)
-  href: api/ZptSharp.Rendering.SourceAnnotationDocumentModifierDecorator.html#ZptSharp_Rendering_SourceAnnotationDocumentModifierDecorator_ModifyDocumentAsync_ZptSharp_Dom_IDocument_ZptSharp_Rendering_RenderZptDocumentRequest_System_Threading_CancellationToken_
-  commentId: M:ZptSharp.Rendering.SourceAnnotationDocumentModifierDecorator.ModifyDocumentAsync(ZptSharp.Dom.IDocument,ZptSharp.Rendering.RenderZptDocumentRequest,System.Threading.CancellationToken)
-  fullName: ZptSharp.Rendering.SourceAnnotationDocumentModifierDecorator.ModifyDocumentAsync(ZptSharp.Dom.IDocument, ZptSharp.Rendering.RenderZptDocumentRequest, System.Threading.CancellationToken)
-  nameWithType: SourceAnnotationDocumentModifierDecorator.ModifyDocumentAsync(IDocument, RenderZptDocumentRequest, CancellationToken)
+- uid: ZptSharp.Rendering.SourceAnnotationDocumentModifierDecorator.ModifyDocumentAsync(ZptSharp.Dom.IDocument,System.Object,System.Threading.CancellationToken)
+  name: ModifyDocumentAsync(IDocument, Object, CancellationToken)
+  href: api/ZptSharp.Rendering.SourceAnnotationDocumentModifierDecorator.html#ZptSharp_Rendering_SourceAnnotationDocumentModifierDecorator_ModifyDocumentAsync_ZptSharp_Dom_IDocument_System_Object_System_Threading_CancellationToken_
+  commentId: M:ZptSharp.Rendering.SourceAnnotationDocumentModifierDecorator.ModifyDocumentAsync(ZptSharp.Dom.IDocument,System.Object,System.Threading.CancellationToken)
+  fullName: ZptSharp.Rendering.SourceAnnotationDocumentModifierDecorator.ModifyDocumentAsync(ZptSharp.Dom.IDocument, System.Object, System.Threading.CancellationToken)
+  nameWithType: SourceAnnotationDocumentModifierDecorator.ModifyDocumentAsync(IDocument, Object, CancellationToken)
 - uid: ZptSharp.Rendering.SourceAnnotationDocumentModifierDecorator.ModifyDocumentAsync*
   name: ModifyDocumentAsync
   href: api/ZptSharp.Rendering.SourceAnnotationDocumentModifierDecorator.html#ZptSharp_Rendering_SourceAnnotationDocumentModifierDecorator_ModifyDocumentAsync_
@@ -11804,12 +11785,12 @@ references:
   commentId: T:ZptSharp.Rendering.TalDocumentModifierDecorator
   fullName: ZptSharp.Rendering.TalDocumentModifierDecorator
   nameWithType: TalDocumentModifierDecorator
-- uid: ZptSharp.Rendering.TalDocumentModifierDecorator.#ctor(ZptSharp.Tal.IGetsTalContextProcessor,ZptSharp.Rendering.IIterativelyModifiesDocument,ZptSharp.Rendering.IModifiesDocument)
-  name: TalDocumentModifierDecorator(IGetsTalContextProcessor, IIterativelyModifiesDocument, IModifiesDocument)
-  href: api/ZptSharp.Rendering.TalDocumentModifierDecorator.html#ZptSharp_Rendering_TalDocumentModifierDecorator__ctor_ZptSharp_Tal_IGetsTalContextProcessor_ZptSharp_Rendering_IIterativelyModifiesDocument_ZptSharp_Rendering_IModifiesDocument_
-  commentId: M:ZptSharp.Rendering.TalDocumentModifierDecorator.#ctor(ZptSharp.Tal.IGetsTalContextProcessor,ZptSharp.Rendering.IIterativelyModifiesDocument,ZptSharp.Rendering.IModifiesDocument)
-  fullName: ZptSharp.Rendering.TalDocumentModifierDecorator.TalDocumentModifierDecorator(ZptSharp.Tal.IGetsTalContextProcessor, ZptSharp.Rendering.IIterativelyModifiesDocument, ZptSharp.Rendering.IModifiesDocument)
-  nameWithType: TalDocumentModifierDecorator.TalDocumentModifierDecorator(IGetsTalContextProcessor, IIterativelyModifiesDocument, IModifiesDocument)
+- uid: ZptSharp.Rendering.TalDocumentModifierDecorator.#ctor(ZptSharp.Tal.IGetsTalContextProcessor,ZptSharp.Rendering.IIterativelyModifiesDocument,ZptSharp.Rendering.IModifiesDocument,ZptSharp.Rendering.IGetsRootExpressionContext)
+  name: TalDocumentModifierDecorator(IGetsTalContextProcessor, IIterativelyModifiesDocument, IModifiesDocument, IGetsRootExpressionContext)
+  href: api/ZptSharp.Rendering.TalDocumentModifierDecorator.html#ZptSharp_Rendering_TalDocumentModifierDecorator__ctor_ZptSharp_Tal_IGetsTalContextProcessor_ZptSharp_Rendering_IIterativelyModifiesDocument_ZptSharp_Rendering_IModifiesDocument_ZptSharp_Rendering_IGetsRootExpressionContext_
+  commentId: M:ZptSharp.Rendering.TalDocumentModifierDecorator.#ctor(ZptSharp.Tal.IGetsTalContextProcessor,ZptSharp.Rendering.IIterativelyModifiesDocument,ZptSharp.Rendering.IModifiesDocument,ZptSharp.Rendering.IGetsRootExpressionContext)
+  fullName: ZptSharp.Rendering.TalDocumentModifierDecorator.TalDocumentModifierDecorator(ZptSharp.Tal.IGetsTalContextProcessor, ZptSharp.Rendering.IIterativelyModifiesDocument, ZptSharp.Rendering.IModifiesDocument, ZptSharp.Rendering.IGetsRootExpressionContext)
+  nameWithType: TalDocumentModifierDecorator.TalDocumentModifierDecorator(IGetsTalContextProcessor, IIterativelyModifiesDocument, IModifiesDocument, IGetsRootExpressionContext)
 - uid: ZptSharp.Rendering.TalDocumentModifierDecorator.#ctor*
   name: TalDocumentModifierDecorator
   href: api/ZptSharp.Rendering.TalDocumentModifierDecorator.html#ZptSharp_Rendering_TalDocumentModifierDecorator__ctor_
@@ -11817,12 +11798,12 @@ references:
   isSpec: "True"
   fullName: ZptSharp.Rendering.TalDocumentModifierDecorator.TalDocumentModifierDecorator
   nameWithType: TalDocumentModifierDecorator.TalDocumentModifierDecorator
-- uid: ZptSharp.Rendering.TalDocumentModifierDecorator.ModifyDocumentAsync(ZptSharp.Dom.IDocument,ZptSharp.Rendering.RenderZptDocumentRequest,System.Threading.CancellationToken)
-  name: ModifyDocumentAsync(IDocument, RenderZptDocumentRequest, CancellationToken)
-  href: api/ZptSharp.Rendering.TalDocumentModifierDecorator.html#ZptSharp_Rendering_TalDocumentModifierDecorator_ModifyDocumentAsync_ZptSharp_Dom_IDocument_ZptSharp_Rendering_RenderZptDocumentRequest_System_Threading_CancellationToken_
-  commentId: M:ZptSharp.Rendering.TalDocumentModifierDecorator.ModifyDocumentAsync(ZptSharp.Dom.IDocument,ZptSharp.Rendering.RenderZptDocumentRequest,System.Threading.CancellationToken)
-  fullName: ZptSharp.Rendering.TalDocumentModifierDecorator.ModifyDocumentAsync(ZptSharp.Dom.IDocument, ZptSharp.Rendering.RenderZptDocumentRequest, System.Threading.CancellationToken)
-  nameWithType: TalDocumentModifierDecorator.ModifyDocumentAsync(IDocument, RenderZptDocumentRequest, CancellationToken)
+- uid: ZptSharp.Rendering.TalDocumentModifierDecorator.ModifyDocumentAsync(ZptSharp.Dom.IDocument,System.Object,System.Threading.CancellationToken)
+  name: ModifyDocumentAsync(IDocument, Object, CancellationToken)
+  href: api/ZptSharp.Rendering.TalDocumentModifierDecorator.html#ZptSharp_Rendering_TalDocumentModifierDecorator_ModifyDocumentAsync_ZptSharp_Dom_IDocument_System_Object_System_Threading_CancellationToken_
+  commentId: M:ZptSharp.Rendering.TalDocumentModifierDecorator.ModifyDocumentAsync(ZptSharp.Dom.IDocument,System.Object,System.Threading.CancellationToken)
+  fullName: ZptSharp.Rendering.TalDocumentModifierDecorator.ModifyDocumentAsync(ZptSharp.Dom.IDocument, System.Object, System.Threading.CancellationToken)
+  nameWithType: TalDocumentModifierDecorator.ModifyDocumentAsync(IDocument, Object, CancellationToken)
 - uid: ZptSharp.Rendering.TalDocumentModifierDecorator.ModifyDocumentAsync*
   name: ModifyDocumentAsync
   href: api/ZptSharp.Rendering.TalDocumentModifierDecorator.html#ZptSharp_Rendering_TalDocumentModifierDecorator_ModifyDocumentAsync_
@@ -11951,12 +11932,12 @@ references:
   commentId: T:ZptSharp.Rendering.ZptDocumentModifierFactory
   fullName: ZptSharp.Rendering.ZptDocumentModifierFactory
   nameWithType: ZptDocumentModifierFactory
-- uid: ZptSharp.Rendering.ZptDocumentModifierFactory.#ctor(ZptSharp.Metal.IGetsMetalContextProcessor,ZptSharp.Tal.IGetsTalContextProcessor,ZptSharp.SourceAnnotation.IGetsSourceAnnotationContextProcessor,ZptSharp.Rendering.IIterativelyModifiesDocument,ZptSharp.Rendering.IGetsZptNodeAndAttributeRemovalContextProcessor,ZptSharp.Config.RenderingConfig)
-  name: ZptDocumentModifierFactory(IGetsMetalContextProcessor, IGetsTalContextProcessor, IGetsSourceAnnotationContextProcessor, IIterativelyModifiesDocument, IGetsZptNodeAndAttributeRemovalContextProcessor, RenderingConfig)
-  href: api/ZptSharp.Rendering.ZptDocumentModifierFactory.html#ZptSharp_Rendering_ZptDocumentModifierFactory__ctor_ZptSharp_Metal_IGetsMetalContextProcessor_ZptSharp_Tal_IGetsTalContextProcessor_ZptSharp_SourceAnnotation_IGetsSourceAnnotationContextProcessor_ZptSharp_Rendering_IIterativelyModifiesDocument_ZptSharp_Rendering_IGetsZptNodeAndAttributeRemovalContextProcessor_ZptSharp_Config_RenderingConfig_
-  commentId: M:ZptSharp.Rendering.ZptDocumentModifierFactory.#ctor(ZptSharp.Metal.IGetsMetalContextProcessor,ZptSharp.Tal.IGetsTalContextProcessor,ZptSharp.SourceAnnotation.IGetsSourceAnnotationContextProcessor,ZptSharp.Rendering.IIterativelyModifiesDocument,ZptSharp.Rendering.IGetsZptNodeAndAttributeRemovalContextProcessor,ZptSharp.Config.RenderingConfig)
-  fullName: ZptSharp.Rendering.ZptDocumentModifierFactory.ZptDocumentModifierFactory(ZptSharp.Metal.IGetsMetalContextProcessor, ZptSharp.Tal.IGetsTalContextProcessor, ZptSharp.SourceAnnotation.IGetsSourceAnnotationContextProcessor, ZptSharp.Rendering.IIterativelyModifiesDocument, ZptSharp.Rendering.IGetsZptNodeAndAttributeRemovalContextProcessor, ZptSharp.Config.RenderingConfig)
-  nameWithType: ZptDocumentModifierFactory.ZptDocumentModifierFactory(IGetsMetalContextProcessor, IGetsTalContextProcessor, IGetsSourceAnnotationContextProcessor, IIterativelyModifiesDocument, IGetsZptNodeAndAttributeRemovalContextProcessor, RenderingConfig)
+- uid: ZptSharp.Rendering.ZptDocumentModifierFactory.#ctor(ZptSharp.Metal.IGetsMetalContextProcessor,ZptSharp.Tal.IGetsTalContextProcessor,ZptSharp.SourceAnnotation.IGetsSourceAnnotationContextProcessor,ZptSharp.Rendering.IIterativelyModifiesDocument,ZptSharp.Rendering.IGetsZptNodeAndAttributeRemovalContextProcessor,ZptSharp.Config.RenderingConfig,ZptSharp.Rendering.IGetsRootExpressionContext)
+  name: ZptDocumentModifierFactory(IGetsMetalContextProcessor, IGetsTalContextProcessor, IGetsSourceAnnotationContextProcessor, IIterativelyModifiesDocument, IGetsZptNodeAndAttributeRemovalContextProcessor, RenderingConfig, IGetsRootExpressionContext)
+  href: api/ZptSharp.Rendering.ZptDocumentModifierFactory.html#ZptSharp_Rendering_ZptDocumentModifierFactory__ctor_ZptSharp_Metal_IGetsMetalContextProcessor_ZptSharp_Tal_IGetsTalContextProcessor_ZptSharp_SourceAnnotation_IGetsSourceAnnotationContextProcessor_ZptSharp_Rendering_IIterativelyModifiesDocument_ZptSharp_Rendering_IGetsZptNodeAndAttributeRemovalContextProcessor_ZptSharp_Config_RenderingConfig_ZptSharp_Rendering_IGetsRootExpressionContext_
+  commentId: M:ZptSharp.Rendering.ZptDocumentModifierFactory.#ctor(ZptSharp.Metal.IGetsMetalContextProcessor,ZptSharp.Tal.IGetsTalContextProcessor,ZptSharp.SourceAnnotation.IGetsSourceAnnotationContextProcessor,ZptSharp.Rendering.IIterativelyModifiesDocument,ZptSharp.Rendering.IGetsZptNodeAndAttributeRemovalContextProcessor,ZptSharp.Config.RenderingConfig,ZptSharp.Rendering.IGetsRootExpressionContext)
+  fullName: ZptSharp.Rendering.ZptDocumentModifierFactory.ZptDocumentModifierFactory(ZptSharp.Metal.IGetsMetalContextProcessor, ZptSharp.Tal.IGetsTalContextProcessor, ZptSharp.SourceAnnotation.IGetsSourceAnnotationContextProcessor, ZptSharp.Rendering.IIterativelyModifiesDocument, ZptSharp.Rendering.IGetsZptNodeAndAttributeRemovalContextProcessor, ZptSharp.Config.RenderingConfig, ZptSharp.Rendering.IGetsRootExpressionContext)
+  nameWithType: ZptDocumentModifierFactory.ZptDocumentModifierFactory(IGetsMetalContextProcessor, IGetsTalContextProcessor, IGetsSourceAnnotationContextProcessor, IIterativelyModifiesDocument, IGetsZptNodeAndAttributeRemovalContextProcessor, RenderingConfig, IGetsRootExpressionContext)
 - uid: ZptSharp.Rendering.ZptDocumentModifierFactory.#ctor*
   name: ZptDocumentModifierFactory
   href: api/ZptSharp.Rendering.ZptDocumentModifierFactory.html#ZptSharp_Rendering_ZptDocumentModifierFactory__ctor_
@@ -11964,12 +11945,12 @@ references:
   isSpec: "True"
   fullName: ZptSharp.Rendering.ZptDocumentModifierFactory.ZptDocumentModifierFactory
   nameWithType: ZptDocumentModifierFactory.ZptDocumentModifierFactory
-- uid: ZptSharp.Rendering.ZptDocumentModifierFactory.GetDocumentModifier(ZptSharp.Rendering.RenderZptDocumentRequest)
-  name: GetDocumentModifier(RenderZptDocumentRequest)
-  href: api/ZptSharp.Rendering.ZptDocumentModifierFactory.html#ZptSharp_Rendering_ZptDocumentModifierFactory_GetDocumentModifier_ZptSharp_Rendering_RenderZptDocumentRequest_
-  commentId: M:ZptSharp.Rendering.ZptDocumentModifierFactory.GetDocumentModifier(ZptSharp.Rendering.RenderZptDocumentRequest)
-  fullName: ZptSharp.Rendering.ZptDocumentModifierFactory.GetDocumentModifier(ZptSharp.Rendering.RenderZptDocumentRequest)
-  nameWithType: ZptDocumentModifierFactory.GetDocumentModifier(RenderZptDocumentRequest)
+- uid: ZptSharp.Rendering.ZptDocumentModifierFactory.GetDocumentModifier
+  name: GetDocumentModifier()
+  href: api/ZptSharp.Rendering.ZptDocumentModifierFactory.html#ZptSharp_Rendering_ZptDocumentModifierFactory_GetDocumentModifier
+  commentId: M:ZptSharp.Rendering.ZptDocumentModifierFactory.GetDocumentModifier
+  fullName: ZptSharp.Rendering.ZptDocumentModifierFactory.GetDocumentModifier()
+  nameWithType: ZptDocumentModifierFactory.GetDocumentModifier()
 - uid: ZptSharp.Rendering.ZptDocumentModifierFactory.GetDocumentModifier*
   name: GetDocumentModifier
   href: api/ZptSharp.Rendering.ZptDocumentModifierFactory.html#ZptSharp_Rendering_ZptDocumentModifierFactory_GetDocumentModifier_
@@ -11977,6 +11958,38 @@ references:
   isSpec: "True"
   fullName: ZptSharp.Rendering.ZptDocumentModifierFactory.GetDocumentModifier
   nameWithType: ZptDocumentModifierFactory.GetDocumentModifier
+- uid: ZptSharp.Rendering.ZptDocumentRenderer
+  name: ZptDocumentRenderer
+  href: api/ZptSharp.Rendering.ZptDocumentRenderer.html
+  commentId: T:ZptSharp.Rendering.ZptDocumentRenderer
+  fullName: ZptSharp.Rendering.ZptDocumentRenderer
+  nameWithType: ZptDocumentRenderer
+- uid: ZptSharp.Rendering.ZptDocumentRenderer.#ctor(System.IServiceProvider)
+  name: ZptDocumentRenderer(IServiceProvider)
+  href: api/ZptSharp.Rendering.ZptDocumentRenderer.html#ZptSharp_Rendering_ZptDocumentRenderer__ctor_System_IServiceProvider_
+  commentId: M:ZptSharp.Rendering.ZptDocumentRenderer.#ctor(System.IServiceProvider)
+  fullName: ZptSharp.Rendering.ZptDocumentRenderer.ZptDocumentRenderer(System.IServiceProvider)
+  nameWithType: ZptDocumentRenderer.ZptDocumentRenderer(IServiceProvider)
+- uid: ZptSharp.Rendering.ZptDocumentRenderer.#ctor*
+  name: ZptDocumentRenderer
+  href: api/ZptSharp.Rendering.ZptDocumentRenderer.html#ZptSharp_Rendering_ZptDocumentRenderer__ctor_
+  commentId: Overload:ZptSharp.Rendering.ZptDocumentRenderer.#ctor
+  isSpec: "True"
+  fullName: ZptSharp.Rendering.ZptDocumentRenderer.ZptDocumentRenderer
+  nameWithType: ZptDocumentRenderer.ZptDocumentRenderer
+- uid: ZptSharp.Rendering.ZptDocumentRenderer.RenderAsync(System.IO.Stream,System.Object,ZptSharp.Config.RenderingConfig,System.Threading.CancellationToken,ZptSharp.Rendering.IDocumentSourceInfo)
+  name: RenderAsync(Stream, Object, RenderingConfig, CancellationToken, IDocumentSourceInfo)
+  href: api/ZptSharp.Rendering.ZptDocumentRenderer.html#ZptSharp_Rendering_ZptDocumentRenderer_RenderAsync_System_IO_Stream_System_Object_ZptSharp_Config_RenderingConfig_System_Threading_CancellationToken_ZptSharp_Rendering_IDocumentSourceInfo_
+  commentId: M:ZptSharp.Rendering.ZptDocumentRenderer.RenderAsync(System.IO.Stream,System.Object,ZptSharp.Config.RenderingConfig,System.Threading.CancellationToken,ZptSharp.Rendering.IDocumentSourceInfo)
+  fullName: ZptSharp.Rendering.ZptDocumentRenderer.RenderAsync(System.IO.Stream, System.Object, ZptSharp.Config.RenderingConfig, System.Threading.CancellationToken, ZptSharp.Rendering.IDocumentSourceInfo)
+  nameWithType: ZptDocumentRenderer.RenderAsync(Stream, Object, RenderingConfig, CancellationToken, IDocumentSourceInfo)
+- uid: ZptSharp.Rendering.ZptDocumentRenderer.RenderAsync*
+  name: RenderAsync
+  href: api/ZptSharp.Rendering.ZptDocumentRenderer.html#ZptSharp_Rendering_ZptDocumentRenderer_RenderAsync_
+  commentId: Overload:ZptSharp.Rendering.ZptDocumentRenderer.RenderAsync
+  isSpec: "True"
+  fullName: ZptSharp.Rendering.ZptDocumentRenderer.RenderAsync
+  nameWithType: ZptDocumentRenderer.RenderAsync
 - uid: ZptSharp.Rendering.ZptDocumentRendererFactory
   name: ZptDocumentRendererFactory
   href: api/ZptSharp.Rendering.ZptDocumentRendererFactory.html
@@ -12102,38 +12115,6 @@ references:
   isSpec: "True"
   fullName: ZptSharp.Rendering.ZptRequestLoggingScope.ToString
   nameWithType: ZptRequestLoggingScope.ToString
-- uid: ZptSharp.Rendering.ZptRequestRenderer
-  name: ZptRequestRenderer
-  href: api/ZptSharp.Rendering.ZptRequestRenderer.html
-  commentId: T:ZptSharp.Rendering.ZptRequestRenderer
-  fullName: ZptSharp.Rendering.ZptRequestRenderer
-  nameWithType: ZptRequestRenderer
-- uid: ZptSharp.Rendering.ZptRequestRenderer.#ctor(System.IServiceProvider)
-  name: ZptRequestRenderer(IServiceProvider)
-  href: api/ZptSharp.Rendering.ZptRequestRenderer.html#ZptSharp_Rendering_ZptRequestRenderer__ctor_System_IServiceProvider_
-  commentId: M:ZptSharp.Rendering.ZptRequestRenderer.#ctor(System.IServiceProvider)
-  fullName: ZptSharp.Rendering.ZptRequestRenderer.ZptRequestRenderer(System.IServiceProvider)
-  nameWithType: ZptRequestRenderer.ZptRequestRenderer(IServiceProvider)
-- uid: ZptSharp.Rendering.ZptRequestRenderer.#ctor*
-  name: ZptRequestRenderer
-  href: api/ZptSharp.Rendering.ZptRequestRenderer.html#ZptSharp_Rendering_ZptRequestRenderer__ctor_
-  commentId: Overload:ZptSharp.Rendering.ZptRequestRenderer.#ctor
-  isSpec: "True"
-  fullName: ZptSharp.Rendering.ZptRequestRenderer.ZptRequestRenderer
-  nameWithType: ZptRequestRenderer.ZptRequestRenderer
-- uid: ZptSharp.Rendering.ZptRequestRenderer.RenderAsync(ZptSharp.Rendering.RenderZptDocumentRequest,ZptSharp.Config.RenderingConfig,System.Threading.CancellationToken)
-  name: RenderAsync(RenderZptDocumentRequest, RenderingConfig, CancellationToken)
-  href: api/ZptSharp.Rendering.ZptRequestRenderer.html#ZptSharp_Rendering_ZptRequestRenderer_RenderAsync_ZptSharp_Rendering_RenderZptDocumentRequest_ZptSharp_Config_RenderingConfig_System_Threading_CancellationToken_
-  commentId: M:ZptSharp.Rendering.ZptRequestRenderer.RenderAsync(ZptSharp.Rendering.RenderZptDocumentRequest,ZptSharp.Config.RenderingConfig,System.Threading.CancellationToken)
-  fullName: ZptSharp.Rendering.ZptRequestRenderer.RenderAsync(ZptSharp.Rendering.RenderZptDocumentRequest, ZptSharp.Config.RenderingConfig, System.Threading.CancellationToken)
-  nameWithType: ZptRequestRenderer.RenderAsync(RenderZptDocumentRequest, RenderingConfig, CancellationToken)
-- uid: ZptSharp.Rendering.ZptRequestRenderer.RenderAsync*
-  name: RenderAsync
-  href: api/ZptSharp.Rendering.ZptRequestRenderer.html#ZptSharp_Rendering_ZptRequestRenderer_RenderAsync_
-  commentId: Overload:ZptSharp.Rendering.ZptRequestRenderer.RenderAsync
-  isSpec: "True"
-  fullName: ZptSharp.Rendering.ZptRequestRenderer.RenderAsync
-  nameWithType: ZptRequestRenderer.RenderAsync
 - uid: ZptSharp.SourceAnnotation
   name: ZptSharp.SourceAnnotation
   href: api/ZptSharp.SourceAnnotation.html
@@ -14011,38 +13992,6 @@ references:
   isSpec: "True"
   fullName: ZptSharp.XmlHostingBuilderExtensions.AddXmlZptDocuments
   nameWithType: XmlHostingBuilderExtensions.AddXmlZptDocuments
-- uid: ZptSharp.ZptDocumentRenderer
-  name: ZptDocumentRenderer
-  href: api/ZptSharp.ZptDocumentRenderer.html
-  commentId: T:ZptSharp.ZptDocumentRenderer
-  fullName: ZptSharp.ZptDocumentRenderer
-  nameWithType: ZptDocumentRenderer
-- uid: ZptSharp.ZptDocumentRenderer.#ctor(System.IServiceProvider,System.Type)
-  name: ZptDocumentRenderer(IServiceProvider, Type)
-  href: api/ZptSharp.ZptDocumentRenderer.html#ZptSharp_ZptDocumentRenderer__ctor_System_IServiceProvider_System_Type_
-  commentId: M:ZptSharp.ZptDocumentRenderer.#ctor(System.IServiceProvider,System.Type)
-  fullName: ZptSharp.ZptDocumentRenderer.ZptDocumentRenderer(System.IServiceProvider, System.Type)
-  nameWithType: ZptDocumentRenderer.ZptDocumentRenderer(IServiceProvider, Type)
-- uid: ZptSharp.ZptDocumentRenderer.#ctor*
-  name: ZptDocumentRenderer
-  href: api/ZptSharp.ZptDocumentRenderer.html#ZptSharp_ZptDocumentRenderer__ctor_
-  commentId: Overload:ZptSharp.ZptDocumentRenderer.#ctor
-  isSpec: "True"
-  fullName: ZptSharp.ZptDocumentRenderer.ZptDocumentRenderer
-  nameWithType: ZptDocumentRenderer.ZptDocumentRenderer
-- uid: ZptSharp.ZptDocumentRenderer.RenderAsync(System.IO.Stream,System.Object,ZptSharp.Config.RenderingConfig,System.Threading.CancellationToken,ZptSharp.Rendering.IDocumentSourceInfo)
-  name: RenderAsync(Stream, Object, RenderingConfig, CancellationToken, IDocumentSourceInfo)
-  href: api/ZptSharp.ZptDocumentRenderer.html#ZptSharp_ZptDocumentRenderer_RenderAsync_System_IO_Stream_System_Object_ZptSharp_Config_RenderingConfig_System_Threading_CancellationToken_ZptSharp_Rendering_IDocumentSourceInfo_
-  commentId: M:ZptSharp.ZptDocumentRenderer.RenderAsync(System.IO.Stream,System.Object,ZptSharp.Config.RenderingConfig,System.Threading.CancellationToken,ZptSharp.Rendering.IDocumentSourceInfo)
-  fullName: ZptSharp.ZptDocumentRenderer.RenderAsync(System.IO.Stream, System.Object, ZptSharp.Config.RenderingConfig, System.Threading.CancellationToken, ZptSharp.Rendering.IDocumentSourceInfo)
-  nameWithType: ZptDocumentRenderer.RenderAsync(Stream, Object, RenderingConfig, CancellationToken, IDocumentSourceInfo)
-- uid: ZptSharp.ZptDocumentRenderer.RenderAsync*
-  name: RenderAsync
-  href: api/ZptSharp.ZptDocumentRenderer.html#ZptSharp_ZptDocumentRenderer_RenderAsync_
-  commentId: Overload:ZptSharp.ZptDocumentRenderer.RenderAsync
-  isSpec: "True"
-  fullName: ZptSharp.ZptDocumentRenderer.RenderAsync
-  nameWithType: ZptDocumentRenderer.RenderAsync
 - uid: ZptSharp.ZptFileRenderer
   name: ZptFileRenderer
   href: api/ZptSharp.ZptFileRenderer.html
