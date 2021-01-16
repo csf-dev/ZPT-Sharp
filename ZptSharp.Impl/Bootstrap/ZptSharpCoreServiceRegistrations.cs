@@ -18,6 +18,7 @@ namespace ZptSharp.Bootstrap
             ConfigRegistrations.RegisterServices(serviceCollection);
             DomServiceRegistrations.RegisterServices(serviceCollection);
             ExpressionServiceRegistrations.RegisterServices(serviceCollection);
+            LoadExpressionRegistrations.RegisterServices(serviceCollection);
             MetalServiceRegistrations.RegisterServices(serviceCollection);
             NotExpressionsRegistrations.RegisterServices(serviceCollection);
             PathExpressionsRegistrations.RegisterServices(serviceCollection);
