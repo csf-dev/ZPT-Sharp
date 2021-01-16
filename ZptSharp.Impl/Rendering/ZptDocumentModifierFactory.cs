@@ -19,9 +19,10 @@ namespace ZptSharp.Rendering
         readonly IIterativelyModifiesDocument iterativeModifier;
         readonly IGetsZptNodeAndAttributeRemovalContextProcessor cleanupProcessorFactory;
         readonly RenderingConfig config;
+        readonly IGetsRootExpressionContext rootContextProvider;
 
         /// <summary>
-        /// Gets the document modifier suitable for use with the specified request.
+        /// Gets the document modifier implementation.
         /// </summary>
         /// <remarks>
         /// <para>
@@ -30,8 +31,7 @@ namespace ZptSharp.Rendering
         /// </para>
         /// </remarks>
         /// <returns>The document modifier.</returns>
-        /// <param name="request">A rendering request.</param>
-        public IModifiesDocument GetDocumentModifier(RenderZptDocumentRequest request)
+        public IModifiesDocument GetDocumentModifier()
         {
             var service = GetBaseService();
             service = WrapWithCleanupDecorator(service);
@@ -43,19 +43,29 @@ namespace ZptSharp.Rendering
             return service;
         }
 
+        /// <summary>
+        /// Gets a document modifier implementation which uses an existing rendering context and not a new context created from a document/model pair.
+        /// </summary>
+        /// <returns>The document modifier.</returns>
+        public IModifiesDocumentUsingContext GetDocumentModifierUsingContext()
+        {
+            throw new NotImplementedException();
+        }
+
+
         IModifiesDocument GetBaseService() => new NoOpDocumentModifier();
 
         IModifiesDocument WrapWithMetalDecorator(IModifiesDocument wrapped)
-            => new MetalDocumentModifierDecorator(metalProcessorFactory, iterativeModifier, wrapped);
+            => new MetalDocumentModifierDecorator(metalProcessorFactory, iterativeModifier, wrapped, rootContextProvider);
 
         IModifiesDocument WrapWithTalDecorator(IModifiesDocument wrapped)
-            => new TalDocumentModifierDecorator(talProcessorFactory, iterativeModifier, wrapped);
+            => new TalDocumentModifierDecorator(talProcessorFactory, iterativeModifier, wrapped, rootContextProvider);
 
         IModifiesDocument WrapWithSourceAnnotationDecorator(IModifiesDocument wrapped)
-            => new SourceAnnotationDocumentModifierDecorator(sourceAnnotationProcessorFactory, iterativeModifier, config, wrapped);
+            => new SourceAnnotationDocumentModifierDecorator(sourceAnnotationProcessorFactory, iterativeModifier, config, wrapped, rootContextProvider);
 
         IModifiesDocument WrapWithCleanupDecorator(IModifiesDocument wrapped)
-            => new RemoveZptAttributesModifierDecorator(cleanupProcessorFactory, iterativeModifier, wrapped);
+            => new RemoveZptAttributesModifierDecorator(cleanupProcessorFactory, iterativeModifier, wrapped, rootContextProvider);
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ZptDocumentModifierFactory"/> class.
@@ -66,12 +76,14 @@ namespace ZptSharp.Rendering
         /// <param name="iterativeModifier">Iterative modifier.</param>
         /// <param name="cleanupProcessorFactory">Cleanup processor factory.</param>
         /// <param name="config">Rendering config.</param>
+        /// <param name="rootContextProvider">A provider for the root expression context.</param>
         public ZptDocumentModifierFactory(IGetsMetalContextProcessor metalProcessorFactory,
                                           IGetsTalContextProcessor talProcessorFactory,
                                           IGetsSourceAnnotationContextProcessor sourceAnnotationProcessorFactory,
                                           IIterativelyModifiesDocument iterativeModifier,
                                           IGetsZptNodeAndAttributeRemovalContextProcessor cleanupProcessorFactory,
-                                          RenderingConfig config)
+                                          RenderingConfig config,
+                                          IGetsRootExpressionContext rootContextProvider)
         {
             this.metalProcessorFactory = metalProcessorFactory ?? throw new ArgumentNullException(nameof(metalProcessorFactory));
             this.talProcessorFactory = talProcessorFactory ?? throw new ArgumentNullException(nameof(talProcessorFactory));
@@ -79,6 +91,7 @@ namespace ZptSharp.Rendering
             this.iterativeModifier = iterativeModifier ?? throw new ArgumentNullException(nameof(iterativeModifier));
             this.cleanupProcessorFactory = cleanupProcessorFactory ?? throw new ArgumentNullException(nameof(cleanupProcessorFactory));
             this.config = config ?? throw new ArgumentNullException(nameof(config));
+            this.rootContextProvider = rootContextProvider ?? throw new ArgumentNullException(nameof(rootContextProvider));
         }
     }
 }

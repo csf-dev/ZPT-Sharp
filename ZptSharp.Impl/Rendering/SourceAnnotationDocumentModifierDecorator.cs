@@ -18,6 +18,7 @@ namespace ZptSharp.Rendering
         readonly IIterativelyModifiesDocument iterativeModifier;
         readonly RenderingConfig config;
         readonly IModifiesDocument wrapped;
+        readonly IGetsRootExpressionContext rootContextProvider;
 
         /// <summary>
         /// Performs alterations for a specified document, using the specified rendering request.
@@ -25,17 +26,18 @@ namespace ZptSharp.Rendering
         /// </summary>
         /// <returns>A task indicating when the process is complete.</returns>
         /// <param name="document">The document to render.</param>
-        /// <param name="request">The rendering request.</param>
+        /// <param name="model">The model to render.</param>
         /// <param name="token">An object used to cancel the operation if required.</param>
-        public async Task ModifyDocumentAsync(IDocument document, RenderZptDocumentRequest request, CancellationToken token = default)
+        public async Task ModifyDocumentAsync(IDocument document, object model, CancellationToken token = default)
         {
             if (!config.IncludeSourceAnnotation)
                 return;
 
             var contextProcessor = contextProcessorFactory.GetSourceAnnotationContextProcessor();
-            await iterativeModifier.ModifyDocumentAsync(document, request, contextProcessor, token)
+            var rootContext = rootContextProvider.GetExpressionContext(document, model);
+            await iterativeModifier.ModifyDocumentAsync(rootContext, contextProcessor, token)
                 .ConfigureAwait(false);
-            await wrapped.ModifyDocumentAsync(document, request, token)
+            await wrapped.ModifyDocumentAsync(document, model, token)
                 .ConfigureAwait(false);
         }
 
@@ -47,15 +49,18 @@ namespace ZptSharp.Rendering
         /// <param name="iterativeModifier">Iterative modifier.</param>
         /// <param name="config">Rendering config.</param>
         /// <param name="wrapped">Wrapped.</param>
+        /// <param name="rootContextProvider">A provider for the root expression context.</param>
         public SourceAnnotationDocumentModifierDecorator(IGetsSourceAnnotationContextProcessor contextProcessorFactory,
                                                          IIterativelyModifiesDocument iterativeModifier,
                                                          RenderingConfig config,
-                                                         IModifiesDocument wrapped)
+                                                         IModifiesDocument wrapped,
+                                                    IGetsRootExpressionContext rootContextProvider)
         {
             this.contextProcessorFactory = contextProcessorFactory ?? throw new ArgumentNullException(nameof(contextProcessorFactory));
             this.iterativeModifier = iterativeModifier ?? throw new ArgumentNullException(nameof(iterativeModifier));
             this.config = config ?? throw new ArgumentNullException(nameof(config));
             this.wrapped = wrapped ?? throw new ArgumentNullException(nameof(wrapped));
+            this.rootContextProvider = rootContextProvider ?? throw new ArgumentNullException(nameof(rootContextProvider));
         }
     }
 }

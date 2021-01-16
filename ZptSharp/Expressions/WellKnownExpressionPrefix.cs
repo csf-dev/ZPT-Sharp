@@ -58,5 +58,11 @@ namespace ZptSharp.Expressions
         /// </summary>
         /// <value>The pipe prefix.</value>
         public static string Pipe => "pipe";
+
+        /// <summary>
+        /// The prefix for 'load' expressions.
+        /// </summary>
+        /// <value>The load prefix.</value>
+        public static string Load => "load";
     }
 }

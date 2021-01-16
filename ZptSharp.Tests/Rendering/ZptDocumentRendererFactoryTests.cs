@@ -1,7 +1,7 @@
 using System;
+using AutoFixture.NUnit3;
+using Moq;
 using NUnit.Framework;
-using ZptSharp.Autofixture;
-using ZptSharp.Config;
 
 namespace ZptSharp.Rendering
 {
@@ -9,7 +9,8 @@ namespace ZptSharp.Rendering
     public class ZptDocumentRendererFactoryTests
     {
         [Test, AutoMoqData]
-        public void GetDocumentRenderer_returns_instance(ZptDocumentRendererFactory sut)
+        public void GetDocumentRenderer_returns_instance([Frozen] IServiceProvider provider,
+                                                         ZptDocumentRendererFactory sut)
         {
             Assert.That(() => sut.GetDocumentRenderer(), Is.Not.Null);
         }

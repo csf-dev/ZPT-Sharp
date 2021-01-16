@@ -4,7 +4,7 @@ using ZptSharp.Config;
 namespace ZptSharp.Rendering
 {
     /// <summary>
-    /// A factory which creates instances of <see cref="ZptDocumentRenderer"/> from a <see cref="RenderingConfig"/>
+    /// A factory which creates instances of <see cref="EffectiveConfigSettingZptDocumentRendererDecorator"/> from a <see cref="RenderingConfig"/>
     /// and optionally a <see cref="System.Type"/> which indicates the <see cref="Dom.IReadsAndWritesDocument"/> to
     /// be used.
     /// </summary>
@@ -18,7 +18,7 @@ namespace ZptSharp.Rendering
         /// <returns>The document renderer.</returns>
         /// <param name="readerWriterType">A specific document reader/writer implementation type.</param>
         public IRendersZptDocument GetDocumentRenderer(System.Type readerWriterType = null)
-            => new ZptDocumentRenderer(serviceProvider, readerWriterType);
+            => new EffectiveConfigSettingZptDocumentRendererDecorator(new ZptDocumentRenderer(serviceProvider), readerWriterType);
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ZptDocumentRendererFactory"/> class.

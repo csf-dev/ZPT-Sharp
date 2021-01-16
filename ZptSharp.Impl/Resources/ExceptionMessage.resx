@@ -173,4 +173,10 @@ Refer to the inner exception for more detail.
 Actual parameter types:{0}
     Actual return type:{1}</value>
     </data>
+    <data name="UnsupportedLoadExpressionResult" xml:space="preserve">
+        <value>A load expression must indicate an object which may be loaded.
+        Element:{0}
+    Actual type:{1}
+Supported types:{2}</value>
+    </data>
 </root>

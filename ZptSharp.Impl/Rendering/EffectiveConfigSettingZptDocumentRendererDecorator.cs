@@ -1,12 +1,10 @@
 using System;
 using System.IO;
-using ZptSharp.Rendering;
 using ZptSharp.Config;
 using System.Threading.Tasks;
 using System.Threading;
-using Microsoft.Extensions.DependencyInjection;
 
-namespace ZptSharp
+namespace ZptSharp.Rendering
 {
     /// <summary>
     /// An entry-point service for ZPT-Sharp.  This service renders a model to a document stream
@@ -24,9 +22,9 @@ namespace ZptSharp
     /// upon the file extension.
     /// </para>
     /// </remarks>
-    public class ZptDocumentRenderer : IRendersZptDocument
+    public class EffectiveConfigSettingZptDocumentRendererDecorator : IRendersZptDocument
     {
-        readonly IServiceProvider serviceProvider;
+        readonly IRendersZptDocument wrapped;
         readonly System.Type readerWriterType;
 
         /// <summary>
@@ -39,11 +37,11 @@ namespace ZptSharp
         /// One way is to specify a non-null <paramref name="config"/> which has its
         /// <see cref="RenderingConfig.DocumentProviderType"/> configuration option set.
         /// The other way is to specify a non-null instance of <see cref="Dom.IReadsAndWritesDocument"/>
-        /// in the constructor of this <see cref="ZptDocumentRenderer"/> instance.
+        /// in the constructor of this <see cref="EffectiveConfigSettingZptDocumentRendererDecorator"/> instance.
         /// </para>
         /// <para>
         /// If both mechanisms are specified, then the document provider specified via the
-        /// <see cref="ZptDocumentRenderer"/> will take precedence (ignoring the reader/writer specified
+        /// <see cref="EffectiveConfigSettingZptDocumentRendererDecorator"/> will take precedence (ignoring the reader/writer specified
         /// in the configuration).
         /// </para>
         /// </remarks>
@@ -63,10 +61,7 @@ namespace ZptSharp
                 throw new ArgumentNullException(nameof(stream));
 
             var effectiveConfig = GetEffectiveRenderingConfig(config);
-            var request = new RenderZptDocumentRequest(stream, model, sourceInfo);
-            var requestRenderer = serviceProvider.GetRequiredService<IRendersRenderingRequest>();
-
-            return requestRenderer.RenderAsync(request, effectiveConfig, token);
+            return wrapped.RenderAsync(stream, model, effectiveConfig, token, sourceInfo);
         }
 
         RenderingConfig GetEffectiveRenderingConfig(RenderingConfig config)
@@ -82,7 +77,7 @@ namespace ZptSharp
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="ZptDocumentRenderer"/> class.
+        /// Initializes a new instance of the <see cref="EffectiveConfigSettingZptDocumentRendererDecorator"/> class.
         /// </summary>
         /// <remarks>
         /// <para>
@@ -93,12 +88,12 @@ namespace ZptSharp
         /// this constructor will be used instead.
         /// </para>
         /// </remarks>
-        /// <param name="serviceProvider">A service provider, from which dependencies may be resolved.</param>
+        /// <param name="wrapped">The wrapped implementation type.</param>
         /// <param name="readerWriterType">Indicates the document provider implementation type to use for rendering the current document.</param>
-        public ZptDocumentRenderer(IServiceProvider serviceProvider,
-                                   System.Type readerWriterType = null)
+        public EffectiveConfigSettingZptDocumentRendererDecorator(IRendersZptDocument wrapped,
+                                                                  System.Type readerWriterType = null)
         {
-            this.serviceProvider = serviceProvider ?? throw new ArgumentNullException(nameof(serviceProvider));
+            this.wrapped = wrapped ?? throw new ArgumentNullException(nameof(wrapped));
             this.readerWriterType = readerWriterType;
         }
     }

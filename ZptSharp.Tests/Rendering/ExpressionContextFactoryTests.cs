@@ -15,25 +15,25 @@ namespace ZptSharp.Rendering
     {
         [Test, AutoMoqData]
         public void GetExpressionContext_returns_context_with_correct_document_root_node_and_model(IDocument document,
-                                                                                                      RenderZptDocumentRequest request,
+                                                                                                      object model,
                                                                                                       [Frozen] IServiceProvider serviceProvider,
                                                                                                       INode node,
                                                                                                       ExpressionContextFactory sut)
         {
             Mock.Get(serviceProvider).Setup(x => x.GetService(typeof(RenderingConfig))).Returns(() => RenderingConfig.Default);
             Mock.Get(document).SetupGet(x => x.RootNode).Returns(node);
-            var result = sut.GetExpressionContext(document, request);
+            var result = sut.GetExpressionContext(document, model);
 
             Assert.That(result.TemplateDocument, Is.SameAs(document), $"{nameof(ExpressionContext.TemplateDocument)} is correct");
             Assert.That(result.CurrentNode, Is.SameAs(node), $"{nameof(ExpressionContext.CurrentNode)} is correct");
-            Assert.That(result.Model, Is.SameAs(request.Model), $"{nameof(ExpressionContext.Model)} is correct");
+            Assert.That(result.Model, Is.SameAs(model), $"{nameof(ExpressionContext.Model)} is correct");
         }
 
         [Test, AutoMoqData]
         public void GetExpressionContext_returns_context_configured_with_config_action_if_it_is_specified(IDocument document,
                                                                                                           [MockedConfig, Frozen] RenderingConfig config,
                                                                                                           [Frozen] IServiceProvider serviceProvider,
-                                                                                                          RenderZptDocumentRequest request,
+                                                                                                          object model,
                                                                                                           INode node,
                                                                                                           ExpressionContextFactory sut,
                                                                                                           object val)
@@ -41,7 +41,7 @@ namespace ZptSharp.Rendering
             Mock.Get(serviceProvider).Setup(x => x.GetService(typeof(RenderingConfig))).Returns(() => config);
             Mock.Get(document).SetupGet(x => x.RootNode).Returns(node);
             Mock.Get(config).SetupGet(x => x.ContextBuilder).Returns((c, s) => c.AddToRootContext("Foo", val));
-            var result = sut.GetExpressionContext(document, request);
+            var result = sut.GetExpressionContext(document, model);
 
             Assert.That(result.GlobalDefinitions["Foo"], Is.SameAs(val));
         }

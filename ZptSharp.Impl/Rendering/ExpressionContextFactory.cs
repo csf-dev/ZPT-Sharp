@@ -19,11 +19,11 @@ namespace ZptSharp.Rendering
         /// Gets the root expression context for the request.
         /// </summary>
         /// <returns>The expression context.</returns>
-        /// <param name="document">Document.</param>
-        /// <param name="request">Request.</param>
-        public ExpressionContext GetExpressionContext(IDocument document, RenderZptDocumentRequest request)
+        /// <param name="document">The document for which to create an expression context.</param>
+        /// <param name="model">The model for which to create an expression context.</param>
+        public ExpressionContext GetExpressionContext(IDocument document, object model)
         {
-            var context = GetExpressionContext(document.RootNode, document, request.Model, isRoot: true);
+            var context = GetExpressionContext(document.RootNode, document, model, isRoot: true);
             var config = serviceProvider.GetRequiredService<RenderingConfig>();
 
             if(config.ContextBuilder != null)

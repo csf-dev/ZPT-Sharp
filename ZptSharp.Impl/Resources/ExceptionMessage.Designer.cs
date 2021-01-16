@@ -280,5 +280,11 @@ namespace ZptSharp.Resources {
                 return ResourceManager.GetString("PipeExpressionDelegateMustTakeOneParameterAndReturnAnObject", resourceCulture);
             }
         }
+
+        internal static string UnsupportedLoadExpressionResult {
+            get {
+                return ResourceManager.GetString("UnsupportedLoadExpressionResult", resourceCulture);
+            }
+        }
     }
 }

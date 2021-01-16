@@ -7,10 +7,15 @@ namespace ZptSharp.Rendering
     public interface IGetsDocumentModifier
     {
         /// <summary>
-        /// Gets the document modifier suitable for use with the specified request.
+        /// Gets a document modifier implementation.
         /// </summary>
         /// <returns>The document modifier.</returns>
-        /// <param name="request">A rendering request.</param>
-        IModifiesDocument GetDocumentModifier(RenderZptDocumentRequest request);
+        IModifiesDocument GetDocumentModifier();
+        
+        /// <summary>
+        /// Gets a document modifier implementation which uses an existing rendering context and not a new context created from a document/model pair.
+        /// </summary>
+        /// <returns>The document modifier.</returns>
+        IModifiesDocumentUsingContext GetDocumentModifierUsingContext();
     }
 }
