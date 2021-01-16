@@ -82,7 +82,7 @@ namespace ZptSharp.Expressions.PathExpressions
                 return await readerWriter.GetDocumentAsync(stream, config, source, cancellationToken).ConfigureAwait(false);
         }
 
-        IList<string> GetCandidatesForExtensionlessMatch(TemplateDirectory templateDirectory, string name)
+        static IList<string> GetCandidatesForExtensionlessMatch(TemplateDirectory templateDirectory, string name)
             => Directory.GetFiles(templateDirectory.Path, $"{name}.*", SearchOption.TopDirectoryOnly);
 
         /// <summary>

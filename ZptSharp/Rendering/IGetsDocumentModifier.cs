@@ -11,11 +11,5 @@ namespace ZptSharp.Rendering
         /// </summary>
         /// <returns>The document modifier.</returns>
         IModifiesDocument GetDocumentModifier();
-        
-        /// <summary>
-        /// Gets a document modifier implementation which uses an existing rendering context and not a new context created from a document/model pair.
-        /// </summary>
-        /// <returns>The document modifier.</returns>
-        IModifiesDocumentUsingContext GetDocumentModifierUsingContext();
     }
 }

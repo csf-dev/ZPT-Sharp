@@ -43,14 +43,6 @@ namespace ZptSharp.Rendering
             return service;
         }
 
-        /// <summary>
-        /// Gets a document modifier implementation which uses an existing rendering context and not a new context created from a document/model pair.
-        /// </summary>
-        /// <returns>The document modifier.</returns>
-        public IModifiesDocumentUsingContext GetDocumentModifierUsingContext()
-            => new ContextBasedDocumentModifierAdapter(GetDocumentModifier());
-
-
         IModifiesDocument GetBaseService() => new NoOpDocumentModifier();
 
         IModifiesDocument WrapWithMetalDecorator(IModifiesDocument wrapped)
