@@ -48,9 +48,7 @@ namespace ZptSharp.Rendering
         /// </summary>
         /// <returns>The document modifier.</returns>
         public IModifiesDocumentUsingContext GetDocumentModifierUsingContext()
-        {
-            throw new NotImplementedException();
-        }
+            => new ContextBasedDocumentModifierAdapter(GetDocumentModifier());
 
 
         IModifiesDocument GetBaseService() => new NoOpDocumentModifier();

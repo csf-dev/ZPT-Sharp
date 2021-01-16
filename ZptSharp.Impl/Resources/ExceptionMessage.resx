@@ -88,6 +88,11 @@ The inner exception will provide further information as to why.</value>
         <value>Neither a directory nor a ZPT document file was found matching the specified path.
 Path:{0}</value>
     </data>
+    <data name="MultipleMatchingDocumentsFound" xml:space="preserve">
+        <value>Multiple files match the extension-less file path.  If omitting the file extension, it must indicate a single unambiguous document file.
+Directory:{0}
+ Filename:{1}</value>
+    </data>
     <data name="InvalidTalDefineAttribute" xml:space="preserve">
         <value>The tal:define attribute value must be valid.
 Element:{0}

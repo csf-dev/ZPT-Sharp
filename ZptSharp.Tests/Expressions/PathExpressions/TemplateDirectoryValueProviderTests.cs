@@ -69,5 +69,51 @@ namespace ZptSharp.Expressions.PathExpressions
 
             Assert.That(result.Value, Is.SameAs(adapter));
         }
+
+        [Test, AutoMoqData]
+        public async Task TryGetValueAsync_returns_document_if_result_is_an_unambiguous_file_match_if_it_is_missing_its_extension([Frozen] IReadsAndWritesDocument readerWriter,
+                                                                                                                                  [Frozen, MockedConfig] RenderingConfig config,
+                                                                                                                                  [Frozen] IGetsMetalDocumentAdapter adapterFactory,
+                                                                                                                                  TemplateDirectoryValueProvider sut,
+                                                                                                                                  IDocument document,
+                                                                                                                                  MetalDocumentAdapter adapter)
+        {
+            var path = TestFiles.GetPath("ZptIntegrationTests/SourceDocuments");
+            var obj = new TemplateDirectory(path);
+            var name = "acme_template";
+
+            Mock.Get(readerWriter)
+                .Setup(x => x.GetDocumentAsync(It.IsAny<Stream>(), config, It.IsAny<FileSourceInfo>(), CancellationToken.None))
+                .Returns(() => Task.FromResult(document));
+            Mock.Get(adapterFactory)
+                .Setup(x => x.GetMetalDocumentAdapter(document))
+                .Returns(adapter);
+
+            var result = await sut.TryGetValueAsync(name, obj);
+
+            Assert.That(result.Value, Is.SameAs(adapter));
+        }
+
+        [Test, AutoMoqData]
+        public void TryGetValueAsync_throws_if_a_filename_without_extension_is_ambiguous([Frozen] IReadsAndWritesDocument readerWriter,
+                                                                                         [Frozen, MockedConfig] RenderingConfig config,
+                                                                                         [Frozen] IGetsMetalDocumentAdapter adapterFactory,
+                                                                                         TemplateDirectoryValueProvider sut,
+                                                                                         IDocument document,
+                                                                                         MetalDocumentAdapter adapter)
+        {
+            var path = TestFiles.GetPath("ZptIntegrationTests/SourceDocuments");
+            var obj = new TemplateDirectory(path);
+            var name = "test05";
+
+            Mock.Get(readerWriter)
+                .Setup(x => x.GetDocumentAsync(It.IsAny<Stream>(), config, It.IsAny<FileSourceInfo>(), CancellationToken.None))
+                .Returns(() => Task.FromResult(document));
+            Mock.Get(adapterFactory)
+                .Setup(x => x.GetMetalDocumentAdapter(document))
+                .Returns(adapter);
+
+            Assert.That(async () => await sut.TryGetValueAsync(name, obj), Throws.InstanceOf<EvaluationException>());
+        }
     }
 }

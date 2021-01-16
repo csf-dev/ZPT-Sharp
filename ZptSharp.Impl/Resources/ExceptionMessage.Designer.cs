@@ -167,6 +167,12 @@ namespace ZptSharp.Resources {
             }
         }
         
+        internal static string MultipleMatchingDocumentsFound {
+            get {
+                return ResourceManager.GetString("MultipleMatchingDocumentsFound", resourceCulture);
+            }
+        }
+        
         internal static string InvalidTalDefineAttribute {
             get {
                 return ResourceManager.GetString("InvalidTalDefineAttribute", resourceCulture);
