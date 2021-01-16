@@ -110,20 +110,5 @@ namespace ZptSharp
 
             return builder;
         }
-
-        /// <summary>
-        /// Configures ZptSharp to read and handle TALES "load" expressions.
-        /// </summary>
-        /// <returns>The same builder instance, after setting it up.</returns>
-        /// <param name="builder">The hosting builder.</param>
-        public static IBuildsHostingEnvironment AddZptLoadExpressions(this IBuildsHostingEnvironment builder)
-        {
-            if (builder == null)
-                throw new ArgumentNullException(nameof(builder));
-
-            builder.ServiceRegistry.ExpresionEvaluatorTypes.Add(WellKnownExpressionPrefix.Load, typeof(Expressions.LoadExpressions.LoadExpressionEvaluator));
-
-            return builder;
-        }
     }
 }
