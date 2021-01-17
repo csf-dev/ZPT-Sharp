@@ -39,6 +39,7 @@
     <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
     <PackageReference Include="Microsoft.Extensions.Logging" Version="5.0.0" />
     <PackageReference Include="Microsoft.Extensions.FileSystemGlobbing" Version="5.0.0" />
+    <PackageReference Include="System.Runtime.Caching" Version="5.0.0" />
     <PackageReference Include="System.ValueTuple" Version="4.5.0" Condition="'$(TargetFramework.TrimEnd(`45612`))' == 'net'" />
     <PackageReference Include="CSF.IO" Version="7.0.1" />
   </ItemGroup>
