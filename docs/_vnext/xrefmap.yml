@@ -6388,12 +6388,12 @@ references:
   commentId: T:ZptSharp.Expressions.PathExpressions.DecoratorBasedObjectValueProvider
   fullName: ZptSharp.Expressions.PathExpressions.DecoratorBasedObjectValueProvider
   nameWithType: DecoratorBasedObjectValueProvider
-- uid: ZptSharp.Expressions.PathExpressions.DecoratorBasedObjectValueProvider.#ctor(ZptSharp.Config.RenderingConfig,ZptSharp.Expressions.IGetsBuiltinContextsProvider,ZptSharp.Dom.IReadsAndWritesDocument,ZptSharp.Metal.IGetsMetalDocumentAdapter,ZptSharp.Expressions.PathExpressions.RootScopeLimitation)
-  name: DecoratorBasedObjectValueProvider(RenderingConfig, IGetsBuiltinContextsProvider, IReadsAndWritesDocument, IGetsMetalDocumentAdapter, RootScopeLimitation)
-  href: api/ZptSharp.Expressions.PathExpressions.DecoratorBasedObjectValueProvider.html#ZptSharp_Expressions_PathExpressions_DecoratorBasedObjectValueProvider__ctor_ZptSharp_Config_RenderingConfig_ZptSharp_Expressions_IGetsBuiltinContextsProvider_ZptSharp_Dom_IReadsAndWritesDocument_ZptSharp_Metal_IGetsMetalDocumentAdapter_ZptSharp_Expressions_PathExpressions_RootScopeLimitation_
-  commentId: M:ZptSharp.Expressions.PathExpressions.DecoratorBasedObjectValueProvider.#ctor(ZptSharp.Config.RenderingConfig,ZptSharp.Expressions.IGetsBuiltinContextsProvider,ZptSharp.Dom.IReadsAndWritesDocument,ZptSharp.Metal.IGetsMetalDocumentAdapter,ZptSharp.Expressions.PathExpressions.RootScopeLimitation)
-  fullName: ZptSharp.Expressions.PathExpressions.DecoratorBasedObjectValueProvider.DecoratorBasedObjectValueProvider(ZptSharp.Config.RenderingConfig, ZptSharp.Expressions.IGetsBuiltinContextsProvider, ZptSharp.Dom.IReadsAndWritesDocument, ZptSharp.Metal.IGetsMetalDocumentAdapter, ZptSharp.Expressions.PathExpressions.RootScopeLimitation)
-  nameWithType: DecoratorBasedObjectValueProvider.DecoratorBasedObjectValueProvider(RenderingConfig, IGetsBuiltinContextsProvider, IReadsAndWritesDocument, IGetsMetalDocumentAdapter, RootScopeLimitation)
+- uid: ZptSharp.Expressions.PathExpressions.DecoratorBasedObjectValueProvider.#ctor(ZptSharp.Config.RenderingConfig,ZptSharp.Expressions.IGetsBuiltinContextsProvider,ZptSharp.Dom.IReadsAndWritesDocument,ZptSharp.Metal.IGetsMetalDocumentAdapter,ZptSharp.Expressions.PathExpressions.RootScopeLimitation,ZptSharp.Expressions.PathExpressions.IGetsValueFromReflection)
+  name: DecoratorBasedObjectValueProvider(RenderingConfig, IGetsBuiltinContextsProvider, IReadsAndWritesDocument, IGetsMetalDocumentAdapter, RootScopeLimitation, IGetsValueFromReflection)
+  href: api/ZptSharp.Expressions.PathExpressions.DecoratorBasedObjectValueProvider.html#ZptSharp_Expressions_PathExpressions_DecoratorBasedObjectValueProvider__ctor_ZptSharp_Config_RenderingConfig_ZptSharp_Expressions_IGetsBuiltinContextsProvider_ZptSharp_Dom_IReadsAndWritesDocument_ZptSharp_Metal_IGetsMetalDocumentAdapter_ZptSharp_Expressions_PathExpressions_RootScopeLimitation_ZptSharp_Expressions_PathExpressions_IGetsValueFromReflection_
+  commentId: M:ZptSharp.Expressions.PathExpressions.DecoratorBasedObjectValueProvider.#ctor(ZptSharp.Config.RenderingConfig,ZptSharp.Expressions.IGetsBuiltinContextsProvider,ZptSharp.Dom.IReadsAndWritesDocument,ZptSharp.Metal.IGetsMetalDocumentAdapter,ZptSharp.Expressions.PathExpressions.RootScopeLimitation,ZptSharp.Expressions.PathExpressions.IGetsValueFromReflection)
+  fullName: ZptSharp.Expressions.PathExpressions.DecoratorBasedObjectValueProvider.DecoratorBasedObjectValueProvider(ZptSharp.Config.RenderingConfig, ZptSharp.Expressions.IGetsBuiltinContextsProvider, ZptSharp.Dom.IReadsAndWritesDocument, ZptSharp.Metal.IGetsMetalDocumentAdapter, ZptSharp.Expressions.PathExpressions.RootScopeLimitation, ZptSharp.Expressions.PathExpressions.IGetsValueFromReflection)
+  nameWithType: DecoratorBasedObjectValueProvider.DecoratorBasedObjectValueProvider(RenderingConfig, IGetsBuiltinContextsProvider, IReadsAndWritesDocument, IGetsMetalDocumentAdapter, RootScopeLimitation, IGetsValueFromReflection)
 - uid: ZptSharp.Expressions.PathExpressions.DecoratorBasedObjectValueProvider.#ctor*
   name: DecoratorBasedObjectValueProvider
   href: api/ZptSharp.Expressions.PathExpressions.DecoratorBasedObjectValueProvider.html#ZptSharp_Expressions_PathExpressions_DecoratorBasedObjectValueProvider__ctor_
@@ -6714,6 +6714,37 @@ references:
   isSpec: "True"
   fullName: ZptSharp.Expressions.PathExpressions.IGetsValueFromObject.TryGetValueAsync
   nameWithType: IGetsValueFromObject.TryGetValueAsync
+- uid: ZptSharp.Expressions.PathExpressions.IGetsValueFromReflection
+  name: IGetsValueFromReflection
+  href: api/ZptSharp.Expressions.PathExpressions.IGetsValueFromReflection.html
+  commentId: T:ZptSharp.Expressions.PathExpressions.IGetsValueFromReflection
+  fullName: ZptSharp.Expressions.PathExpressions.IGetsValueFromReflection
+  nameWithType: IGetsValueFromReflection
+- uid: ZptSharp.Expressions.PathExpressions.IGetsValueFromReflection.GetValue(System.Reflection.FieldInfo,System.Object)
+  name: GetValue(FieldInfo, Object)
+  href: api/ZptSharp.Expressions.PathExpressions.IGetsValueFromReflection.html#ZptSharp_Expressions_PathExpressions_IGetsValueFromReflection_GetValue_System_Reflection_FieldInfo_System_Object_
+  commentId: M:ZptSharp.Expressions.PathExpressions.IGetsValueFromReflection.GetValue(System.Reflection.FieldInfo,System.Object)
+  fullName: ZptSharp.Expressions.PathExpressions.IGetsValueFromReflection.GetValue(System.Reflection.FieldInfo, System.Object)
+  nameWithType: IGetsValueFromReflection.GetValue(FieldInfo, Object)
+- uid: ZptSharp.Expressions.PathExpressions.IGetsValueFromReflection.GetValue(System.Reflection.MethodInfo,System.Object)
+  name: GetValue(MethodInfo, Object)
+  href: api/ZptSharp.Expressions.PathExpressions.IGetsValueFromReflection.html#ZptSharp_Expressions_PathExpressions_IGetsValueFromReflection_GetValue_System_Reflection_MethodInfo_System_Object_
+  commentId: M:ZptSharp.Expressions.PathExpressions.IGetsValueFromReflection.GetValue(System.Reflection.MethodInfo,System.Object)
+  fullName: ZptSharp.Expressions.PathExpressions.IGetsValueFromReflection.GetValue(System.Reflection.MethodInfo, System.Object)
+  nameWithType: IGetsValueFromReflection.GetValue(MethodInfo, Object)
+- uid: ZptSharp.Expressions.PathExpressions.IGetsValueFromReflection.GetValue(System.Reflection.PropertyInfo,System.Object)
+  name: GetValue(PropertyInfo, Object)
+  href: api/ZptSharp.Expressions.PathExpressions.IGetsValueFromReflection.html#ZptSharp_Expressions_PathExpressions_IGetsValueFromReflection_GetValue_System_Reflection_PropertyInfo_System_Object_
+  commentId: M:ZptSharp.Expressions.PathExpressions.IGetsValueFromReflection.GetValue(System.Reflection.PropertyInfo,System.Object)
+  fullName: ZptSharp.Expressions.PathExpressions.IGetsValueFromReflection.GetValue(System.Reflection.PropertyInfo, System.Object)
+  nameWithType: IGetsValueFromReflection.GetValue(PropertyInfo, Object)
+- uid: ZptSharp.Expressions.PathExpressions.IGetsValueFromReflection.GetValue*
+  name: GetValue
+  href: api/ZptSharp.Expressions.PathExpressions.IGetsValueFromReflection.html#ZptSharp_Expressions_PathExpressions_IGetsValueFromReflection_GetValue_
+  commentId: Overload:ZptSharp.Expressions.PathExpressions.IGetsValueFromReflection.GetValue
+  isSpec: "True"
+  fullName: ZptSharp.Expressions.PathExpressions.IGetsValueFromReflection.GetValue
+  nameWithType: IGetsValueFromReflection.GetValue
 - uid: ZptSharp.Expressions.PathExpressions.IntegerKeyedDictionaryValueProvider
   name: IntegerKeyedDictionaryValueProvider
   href: api/ZptSharp.Expressions.PathExpressions.IntegerKeyedDictionaryValueProvider.html
@@ -7254,12 +7285,12 @@ references:
   commentId: T:ZptSharp.Expressions.PathExpressions.PathWalkingExpressionEvaluatorFactory
   fullName: ZptSharp.Expressions.PathExpressions.PathWalkingExpressionEvaluatorFactory
   nameWithType: PathWalkingExpressionEvaluatorFactory
-- uid: ZptSharp.Expressions.PathExpressions.PathWalkingExpressionEvaluatorFactory.#ctor(ZptSharp.Config.RenderingConfig,ZptSharp.Expressions.IGetsBuiltinContextsProvider,ZptSharp.Dom.IReadsAndWritesDocument,ZptSharp.Metal.IGetsMetalDocumentAdapter)
-  name: PathWalkingExpressionEvaluatorFactory(RenderingConfig, IGetsBuiltinContextsProvider, IReadsAndWritesDocument, IGetsMetalDocumentAdapter)
-  href: api/ZptSharp.Expressions.PathExpressions.PathWalkingExpressionEvaluatorFactory.html#ZptSharp_Expressions_PathExpressions_PathWalkingExpressionEvaluatorFactory__ctor_ZptSharp_Config_RenderingConfig_ZptSharp_Expressions_IGetsBuiltinContextsProvider_ZptSharp_Dom_IReadsAndWritesDocument_ZptSharp_Metal_IGetsMetalDocumentAdapter_
-  commentId: M:ZptSharp.Expressions.PathExpressions.PathWalkingExpressionEvaluatorFactory.#ctor(ZptSharp.Config.RenderingConfig,ZptSharp.Expressions.IGetsBuiltinContextsProvider,ZptSharp.Dom.IReadsAndWritesDocument,ZptSharp.Metal.IGetsMetalDocumentAdapter)
-  fullName: ZptSharp.Expressions.PathExpressions.PathWalkingExpressionEvaluatorFactory.PathWalkingExpressionEvaluatorFactory(ZptSharp.Config.RenderingConfig, ZptSharp.Expressions.IGetsBuiltinContextsProvider, ZptSharp.Dom.IReadsAndWritesDocument, ZptSharp.Metal.IGetsMetalDocumentAdapter)
-  nameWithType: PathWalkingExpressionEvaluatorFactory.PathWalkingExpressionEvaluatorFactory(RenderingConfig, IGetsBuiltinContextsProvider, IReadsAndWritesDocument, IGetsMetalDocumentAdapter)
+- uid: ZptSharp.Expressions.PathExpressions.PathWalkingExpressionEvaluatorFactory.#ctor(ZptSharp.Config.RenderingConfig,ZptSharp.Expressions.IGetsBuiltinContextsProvider,ZptSharp.Dom.IReadsAndWritesDocument,ZptSharp.Metal.IGetsMetalDocumentAdapter,ZptSharp.Expressions.PathExpressions.IGetsValueFromReflection)
+  name: PathWalkingExpressionEvaluatorFactory(RenderingConfig, IGetsBuiltinContextsProvider, IReadsAndWritesDocument, IGetsMetalDocumentAdapter, IGetsValueFromReflection)
+  href: api/ZptSharp.Expressions.PathExpressions.PathWalkingExpressionEvaluatorFactory.html#ZptSharp_Expressions_PathExpressions_PathWalkingExpressionEvaluatorFactory__ctor_ZptSharp_Config_RenderingConfig_ZptSharp_Expressions_IGetsBuiltinContextsProvider_ZptSharp_Dom_IReadsAndWritesDocument_ZptSharp_Metal_IGetsMetalDocumentAdapter_ZptSharp_Expressions_PathExpressions_IGetsValueFromReflection_
+  commentId: M:ZptSharp.Expressions.PathExpressions.PathWalkingExpressionEvaluatorFactory.#ctor(ZptSharp.Config.RenderingConfig,ZptSharp.Expressions.IGetsBuiltinContextsProvider,ZptSharp.Dom.IReadsAndWritesDocument,ZptSharp.Metal.IGetsMetalDocumentAdapter,ZptSharp.Expressions.PathExpressions.IGetsValueFromReflection)
+  fullName: ZptSharp.Expressions.PathExpressions.PathWalkingExpressionEvaluatorFactory.PathWalkingExpressionEvaluatorFactory(ZptSharp.Config.RenderingConfig, ZptSharp.Expressions.IGetsBuiltinContextsProvider, ZptSharp.Dom.IReadsAndWritesDocument, ZptSharp.Metal.IGetsMetalDocumentAdapter, ZptSharp.Expressions.PathExpressions.IGetsValueFromReflection)
+  nameWithType: PathWalkingExpressionEvaluatorFactory.PathWalkingExpressionEvaluatorFactory(RenderingConfig, IGetsBuiltinContextsProvider, IReadsAndWritesDocument, IGetsMetalDocumentAdapter, IGetsValueFromReflection)
 - uid: ZptSharp.Expressions.PathExpressions.PathWalkingExpressionEvaluatorFactory.#ctor*
   name: PathWalkingExpressionEvaluatorFactory
   href: api/ZptSharp.Expressions.PathExpressions.PathWalkingExpressionEvaluatorFactory.html#ZptSharp_Expressions_PathExpressions_PathWalkingExpressionEvaluatorFactory__ctor_
@@ -7286,12 +7317,12 @@ references:
   commentId: T:ZptSharp.Expressions.PathExpressions.ReflectionObjectValueProvider
   fullName: ZptSharp.Expressions.PathExpressions.ReflectionObjectValueProvider
   nameWithType: ReflectionObjectValueProvider
-- uid: ZptSharp.Expressions.PathExpressions.ReflectionObjectValueProvider.#ctor(ZptSharp.Expressions.PathExpressions.IGetsValueFromObject)
-  name: ReflectionObjectValueProvider(IGetsValueFromObject)
-  href: api/ZptSharp.Expressions.PathExpressions.ReflectionObjectValueProvider.html#ZptSharp_Expressions_PathExpressions_ReflectionObjectValueProvider__ctor_ZptSharp_Expressions_PathExpressions_IGetsValueFromObject_
-  commentId: M:ZptSharp.Expressions.PathExpressions.ReflectionObjectValueProvider.#ctor(ZptSharp.Expressions.PathExpressions.IGetsValueFromObject)
-  fullName: ZptSharp.Expressions.PathExpressions.ReflectionObjectValueProvider.ReflectionObjectValueProvider(ZptSharp.Expressions.PathExpressions.IGetsValueFromObject)
-  nameWithType: ReflectionObjectValueProvider.ReflectionObjectValueProvider(IGetsValueFromObject)
+- uid: ZptSharp.Expressions.PathExpressions.ReflectionObjectValueProvider.#ctor(ZptSharp.Expressions.PathExpressions.IGetsValueFromObject,ZptSharp.Expressions.PathExpressions.IGetsValueFromReflection)
+  name: ReflectionObjectValueProvider(IGetsValueFromObject, IGetsValueFromReflection)
+  href: api/ZptSharp.Expressions.PathExpressions.ReflectionObjectValueProvider.html#ZptSharp_Expressions_PathExpressions_ReflectionObjectValueProvider__ctor_ZptSharp_Expressions_PathExpressions_IGetsValueFromObject_ZptSharp_Expressions_PathExpressions_IGetsValueFromReflection_
+  commentId: M:ZptSharp.Expressions.PathExpressions.ReflectionObjectValueProvider.#ctor(ZptSharp.Expressions.PathExpressions.IGetsValueFromObject,ZptSharp.Expressions.PathExpressions.IGetsValueFromReflection)
+  fullName: ZptSharp.Expressions.PathExpressions.ReflectionObjectValueProvider.ReflectionObjectValueProvider(ZptSharp.Expressions.PathExpressions.IGetsValueFromObject, ZptSharp.Expressions.PathExpressions.IGetsValueFromReflection)
+  nameWithType: ReflectionObjectValueProvider.ReflectionObjectValueProvider(IGetsValueFromObject, IGetsValueFromReflection)
 - uid: ZptSharp.Expressions.PathExpressions.ReflectionObjectValueProvider.#ctor*
   name: ReflectionObjectValueProvider
   href: api/ZptSharp.Expressions.PathExpressions.ReflectionObjectValueProvider.html#ZptSharp_Expressions_PathExpressions_ReflectionObjectValueProvider__ctor_
@@ -7312,6 +7343,37 @@ references:
   isSpec: "True"
   fullName: ZptSharp.Expressions.PathExpressions.ReflectionObjectValueProvider.TryGetValueAsync
   nameWithType: ReflectionObjectValueProvider.TryGetValueAsync
+- uid: ZptSharp.Expressions.PathExpressions.ReflectionValueReader
+  name: ReflectionValueReader
+  href: api/ZptSharp.Expressions.PathExpressions.ReflectionValueReader.html
+  commentId: T:ZptSharp.Expressions.PathExpressions.ReflectionValueReader
+  fullName: ZptSharp.Expressions.PathExpressions.ReflectionValueReader
+  nameWithType: ReflectionValueReader
+- uid: ZptSharp.Expressions.PathExpressions.ReflectionValueReader.GetValue(System.Reflection.FieldInfo,System.Object)
+  name: GetValue(FieldInfo, Object)
+  href: api/ZptSharp.Expressions.PathExpressions.ReflectionValueReader.html#ZptSharp_Expressions_PathExpressions_ReflectionValueReader_GetValue_System_Reflection_FieldInfo_System_Object_
+  commentId: M:ZptSharp.Expressions.PathExpressions.ReflectionValueReader.GetValue(System.Reflection.FieldInfo,System.Object)
+  fullName: ZptSharp.Expressions.PathExpressions.ReflectionValueReader.GetValue(System.Reflection.FieldInfo, System.Object)
+  nameWithType: ReflectionValueReader.GetValue(FieldInfo, Object)
+- uid: ZptSharp.Expressions.PathExpressions.ReflectionValueReader.GetValue(System.Reflection.MethodInfo,System.Object)
+  name: GetValue(MethodInfo, Object)
+  href: api/ZptSharp.Expressions.PathExpressions.ReflectionValueReader.html#ZptSharp_Expressions_PathExpressions_ReflectionValueReader_GetValue_System_Reflection_MethodInfo_System_Object_
+  commentId: M:ZptSharp.Expressions.PathExpressions.ReflectionValueReader.GetValue(System.Reflection.MethodInfo,System.Object)
+  fullName: ZptSharp.Expressions.PathExpressions.ReflectionValueReader.GetValue(System.Reflection.MethodInfo, System.Object)
+  nameWithType: ReflectionValueReader.GetValue(MethodInfo, Object)
+- uid: ZptSharp.Expressions.PathExpressions.ReflectionValueReader.GetValue(System.Reflection.PropertyInfo,System.Object)
+  name: GetValue(PropertyInfo, Object)
+  href: api/ZptSharp.Expressions.PathExpressions.ReflectionValueReader.html#ZptSharp_Expressions_PathExpressions_ReflectionValueReader_GetValue_System_Reflection_PropertyInfo_System_Object_
+  commentId: M:ZptSharp.Expressions.PathExpressions.ReflectionValueReader.GetValue(System.Reflection.PropertyInfo,System.Object)
+  fullName: ZptSharp.Expressions.PathExpressions.ReflectionValueReader.GetValue(System.Reflection.PropertyInfo, System.Object)
+  nameWithType: ReflectionValueReader.GetValue(PropertyInfo, Object)
+- uid: ZptSharp.Expressions.PathExpressions.ReflectionValueReader.GetValue*
+  name: GetValue
+  href: api/ZptSharp.Expressions.PathExpressions.ReflectionValueReader.html#ZptSharp_Expressions_PathExpressions_ReflectionValueReader_GetValue_
+  commentId: Overload:ZptSharp.Expressions.PathExpressions.ReflectionValueReader.GetValue
+  isSpec: "True"
+  fullName: ZptSharp.Expressions.PathExpressions.ReflectionValueReader.GetValue
+  nameWithType: ReflectionValueReader.GetValue
 - uid: ZptSharp.Expressions.PathExpressions.RootScopeLimitation
   name: RootScopeLimitation
   href: api/ZptSharp.Expressions.PathExpressions.RootScopeLimitation.html

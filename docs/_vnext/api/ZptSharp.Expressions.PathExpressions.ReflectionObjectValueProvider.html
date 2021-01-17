@@ -120,20 +120,20 @@ public properties, methods or fields of objects.</p>
   </h3>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/csf-dev/ZPT-Sharp/new/master/apiSpec/new?filename=ZptSharp_Expressions_PathExpressions_ReflectionObjectValueProvider__ctor_ZptSharp_Expressions_PathExpressions_IGetsValueFromObject_.md&amp;value=---%0Auid%3A%20ZptSharp.Expressions.PathExpressions.ReflectionObjectValueProvider.%23ctor(ZptSharp.Expressions.PathExpressions.IGetsValueFromObject)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/csf-dev/ZPT-Sharp/new/master/apiSpec/new?filename=ZptSharp_Expressions_PathExpressions_ReflectionObjectValueProvider__ctor_ZptSharp_Expressions_PathExpressions_IGetsValueFromObject_ZptSharp_Expressions_PathExpressions_IGetsValueFromReflection_.md&amp;value=---%0Auid%3A%20ZptSharp.Expressions.PathExpressions.ReflectionObjectValueProvider.%23ctor(ZptSharp.Expressions.PathExpressions.IGetsValueFromObject%2CZptSharp.Expressions.PathExpressions.IGetsValueFromReflection)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/csf-dev/ZPT-Sharp/blob/master/ZptSharp.Impl/Expressions/PathExpressions/ReflectionObjectValueProvider.cs/#L76">View Source</a>
+    <a href="https://github.com/csf-dev/ZPT-Sharp/blob/master/ZptSharp.Impl/Expressions/PathExpressions/ReflectionObjectValueProvider.cs/#L78">View Source</a>
   </span>
   <a id="ZptSharp_Expressions_PathExpressions_ReflectionObjectValueProvider__ctor_" data-uid="ZptSharp.Expressions.PathExpressions.ReflectionObjectValueProvider.#ctor*"></a>
-  <h4 id="ZptSharp_Expressions_PathExpressions_ReflectionObjectValueProvider__ctor_ZptSharp_Expressions_PathExpressions_IGetsValueFromObject_" data-uid="ZptSharp.Expressions.PathExpressions.ReflectionObjectValueProvider.#ctor(ZptSharp.Expressions.PathExpressions.IGetsValueFromObject)">ReflectionObjectValueProvider(IGetsValueFromObject)</h4>
+  <h4 id="ZptSharp_Expressions_PathExpressions_ReflectionObjectValueProvider__ctor_ZptSharp_Expressions_PathExpressions_IGetsValueFromObject_ZptSharp_Expressions_PathExpressions_IGetsValueFromReflection_" data-uid="ZptSharp.Expressions.PathExpressions.ReflectionObjectValueProvider.#ctor(ZptSharp.Expressions.PathExpressions.IGetsValueFromObject,ZptSharp.Expressions.PathExpressions.IGetsValueFromReflection)">ReflectionObjectValueProvider(IGetsValueFromObject, IGetsValueFromReflection)</h4>
   <div class="markdown level1 summary"><p>Initializes a new instance of the
 <a class="xref" href="ZptSharp.Expressions.PathExpressions.ReflectionObjectValueProvider.html">ReflectionObjectValueProvider</a> class.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public ReflectionObjectValueProvider(IGetsValueFromObject wrapped)</code></pre>
+    <pre><code class="lang-csharp hljs">public ReflectionObjectValueProvider(IGetsValueFromObject wrapped, IGetsValueFromReflection valueProvider)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -148,7 +148,13 @@ public properties, methods or fields of objects.</p>
       <tr>
         <td><a class="xref" href="ZptSharp.Expressions.PathExpressions.IGetsValueFromObject.html">IGetsValueFromObject</a></td>
         <td><span class="parametername">wrapped</span></td>
-        <td><p>Wrapped.</p>
+        <td><p>The wrapped service.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="ZptSharp.Expressions.PathExpressions.IGetsValueFromReflection.html">IGetsValueFromReflection</a></td>
+        <td><span class="parametername">valueProvider</span></td>
+        <td><p>The reflection value provider</p>
 </td>
       </tr>
     </tbody>
@@ -160,7 +166,7 @@ public properties, methods or fields of objects.</p>
     <a href="https://github.com/csf-dev/ZPT-Sharp/new/master/apiSpec/new?filename=ZptSharp_Expressions_PathExpressions_ReflectionObjectValueProvider_TryGetValueAsync_System_String_System_Object_System_Threading_CancellationToken_.md&amp;value=---%0Auid%3A%20ZptSharp.Expressions.PathExpressions.ReflectionObjectValueProvider.TryGetValueAsync(System.String%2CSystem.Object%2CSystem.Threading.CancellationToken)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/csf-dev/ZPT-Sharp/blob/master/ZptSharp.Impl/Expressions/PathExpressions/ReflectionObjectValueProvider.cs/#L31">View Source</a>
+    <a href="https://github.com/csf-dev/ZPT-Sharp/blob/master/ZptSharp.Impl/Expressions/PathExpressions/ReflectionObjectValueProvider.cs/#L32">View Source</a>
   </span>
   <a id="ZptSharp_Expressions_PathExpressions_ReflectionObjectValueProvider_TryGetValueAsync_" data-uid="ZptSharp.Expressions.PathExpressions.ReflectionObjectValueProvider.TryGetValueAsync*"></a>
   <h4 id="ZptSharp_Expressions_PathExpressions_ReflectionObjectValueProvider_TryGetValueAsync_System_String_System_Object_System_Threading_CancellationToken_" data-uid="ZptSharp.Expressions.PathExpressions.ReflectionObjectValueProvider.TryGetValueAsync(System.String,System.Object,System.Threading.CancellationToken)">TryGetValueAsync(String, Object, CancellationToken)</h4>

@@ -186,6 +186,9 @@ based on the provided <a class="xref" href="ZptSharp.Expressions.PathExpressions
       <section><p>Implementation of <a class="xref" href="ZptSharp.Expressions.PathExpressions.IGetsValueFromObject.html">IGetsValueFromObject</a> which uses reflection to get values from
 public properties, methods or fields of objects.</p>
 </section>
+      <h4><a class="xref" href="ZptSharp.Expressions.PathExpressions.ReflectionValueReader.html">ReflectionValueReader</a></h4>
+      <section><p>Implementation of <a class="xref" href="ZptSharp.Expressions.PathExpressions.IGetsValueFromReflection.html">IGetsValueFromReflection</a> which uses plain/uncached reflection.</p>
+</section>
       <h4><a class="xref" href="ZptSharp.Expressions.PathExpressions.StringKeyedDictionaryValueProvider.html">StringKeyedDictionaryValueProvider</a></h4>
       <section><p>A chain of responsibility class which get values from any objects which implement any form of
 <code>IDictionary&lt;string,T&gt;</code>.  If they implement a dictionary of string and 'any type' then
@@ -210,6 +213,9 @@ based upon a <a class="xref" href="ZptSharp.Expressions.PathExpressions.RootScop
 </section>
       <h4><a class="xref" href="ZptSharp.Expressions.PathExpressions.IGetsValueFromObject.html">IGetsValueFromObject</a></h4>
       <section><p>An object which traverses a specified object to get a value of a specified name.</p>
+</section>
+      <h4><a class="xref" href="ZptSharp.Expressions.PathExpressions.IGetsValueFromReflection.html">IGetsValueFromReflection</a></h4>
+      <section><p>An object which can get values from a target object by use of reflection.</p>
 </section>
       <h4><a class="xref" href="ZptSharp.Expressions.PathExpressions.IParsesPathExpression.html">IParsesPathExpression</a></h4>
       <section><p>An object which is able to parse a path expression string into a model.</p>
