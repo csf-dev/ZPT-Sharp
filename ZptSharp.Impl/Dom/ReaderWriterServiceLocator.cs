@@ -14,12 +14,5 @@ namespace ZptSharp.Dom
         /// </summary>
         /// <value>The document reader/writer.</value>
         public IReadsAndWritesDocument ReaderWriter { get; set; }
-
-        /// <summary>
-        /// Gets the document reader/writer.
-        /// </summary>
-        /// <returns>The document reader/writer.</returns>
-        public IReadsAndWritesDocument GetReaderWriter()
-            => ReaderWriter ?? throw new InvalidOperationException(Resources.ExceptionMessage.MissingReaderWriter);
     }
 }

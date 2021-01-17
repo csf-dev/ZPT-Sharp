@@ -12,11 +12,5 @@ namespace ZptSharp.Dom
         /// </summary>
         /// <value>The document reader/writer.</value>
         IReadsAndWritesDocument ReaderWriter { get; set; }
-
-        /// <summary>
-        /// Gets the document reader/writer.
-        /// </summary>
-        /// <returns>The document reader/writer.</returns>
-        IReadsAndWritesDocument GetReaderWriter();
     }
 }

@@ -79,7 +79,9 @@ The inner exception will provide further information as to why.</value>
         <value>A rendering configuration object must be registered before it can be retrieved.</value>
     </data>
     <data name="MissingReaderWriter" xml:space="preserve">
-        <value>A document reader/writer object must be registered before it can be retrieved.</value>
+        <value>It was not possible to resolve an implementation of {0}.
+Either an implementation must be stored in the current resolution scope via {1} or there must be only a single implementation
+type added to the services.  Where there is more than one implementation type added, use {2} to indicate the desired implementation.</value>
     </data>
     <data name="ElementMustHaveAParent" xml:space="preserve">
         <value>The element must have a parent element; that is - it must not be the root element of its document.</value>
