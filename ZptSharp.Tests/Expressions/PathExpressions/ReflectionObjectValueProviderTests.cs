@@ -1,4 +1,5 @@
 using System;
+using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
 using AutoFixture.NUnit3;
@@ -27,47 +28,67 @@ namespace ZptSharp.Expressions.PathExpressions
         }
 
         [Test, AutoMoqData]
-        public async Task ReflectionObjectValueProvider_returns_value_from_property_when_name_matches(ReflectionObjectValueProvider sut,
-                                                                                                      MyCustomType obj)
+        public async Task ReflectionObjectValueProvider_returns_value_from_property_when_name_matches([Frozen] IGetsValueFromReflection valueProvider,
+                                                                                                      ReflectionObjectValueProvider sut,
+                                                                                                      MyCustomType obj,
+                                                                                                      string value)
         {
+            Mock.Get(valueProvider)
+                .Setup(x => x.GetValue(It.Is<PropertyInfo>(m => m.Name == nameof(MyCustomType.MyProperty)), obj))
+                .Returns(value);
             var result = await sut.TryGetValueAsync(nameof(MyCustomType.MyProperty), obj);
 
             Assert.That(result.Success, Is.True, "Result indicates success");
-            Assert.That(result.Value, Is.EqualTo(obj.MyProperty), "Correct value");
+            Assert.That(result.Value, Is.EqualTo(value), "Correct value");
         }
 
         [Test, AutoMoqData]
-        public async Task ReflectionObjectValueProvider_returns_value_from_method_when_name_matches(ReflectionObjectValueProvider sut,
-                                                                                                    MyCustomType obj)
+        public async Task ReflectionObjectValueProvider_returns_value_from_method_when_name_matches([Frozen] IGetsValueFromReflection valueProvider,
+                                                                                                    ReflectionObjectValueProvider sut,
+                                                                                                    MyCustomType obj,
+                                                                                                    string value)
         {
+            Mock.Get(valueProvider)
+                .Setup(x => x.GetValue(It.Is<MethodInfo>(m => m.Name == nameof(MyCustomType.MyMethod)), obj))
+                .Returns(value);
             var result = await sut.TryGetValueAsync(nameof(MyCustomType.MyMethod), obj);
 
             Assert.That(result.Success, Is.True, "Result indicates success");
-            Assert.That(result.Value, Is.EqualTo(obj.MyMethod()), "Correct value");
+            Assert.That(result.Value, Is.EqualTo(value), "Correct value");
         }
 
         [Test, AutoMoqData]
-        public async Task ReflectionObjectValueProvider_returns_value_from_field_when_name_matches(ReflectionObjectValueProvider sut,
-                                                                                                   MyCustomType obj)
+        public async Task ReflectionObjectValueProvider_returns_value_from_field_when_name_matches([Frozen] IGetsValueFromReflection valueProvider,
+                                                                                                   ReflectionObjectValueProvider sut,
+                                                                                                   MyCustomType obj,
+                                                                                                   string value)
         {
+            Mock.Get(valueProvider)
+                .Setup(x => x.GetValue(It.Is<FieldInfo>(m => m.Name == nameof(MyCustomType.MyField)), obj))
+                .Returns(value);
             var result = await sut.TryGetValueAsync(nameof(MyCustomType.MyField), obj);
 
             Assert.That(result.Success, Is.True, "Result indicates success");
-            Assert.That(result.Value, Is.EqualTo(obj.MyField), "Correct value");
+            Assert.That(result.Value, Is.EqualTo(value), "Correct value");
         }
 
         [Test, AutoMoqData]
-        public async Task ReflectionObjectValueProvider_returns_value_from_anonymous_object_when_name_matches(ReflectionObjectValueProvider sut)
+        public async Task ReflectionObjectValueProvider_returns_value_from_anonymous_object_when_name_matches([Frozen] IGetsValueFromReflection valueProvider,
+                                                                                                              ReflectionObjectValueProvider sut,
+                                                                                                              string value)
         {
             var obj = new
             {
                 anon = "Foo bar"
             };
+            Mock.Get(valueProvider)
+                .Setup(x => x.GetValue(It.Is<PropertyInfo>(m => m.Name == "anon"), obj))
+                .Returns(value);
 
             var result = await sut.TryGetValueAsync("anon", obj);
 
             Assert.That(result.Success, Is.True, "Result indicates success");
-            Assert.That(result.Value, Is.EqualTo("Foo bar"), "Correct value");
+            Assert.That(result.Value, Is.EqualTo(value), "Correct value");
         }
 
         [Test, AutoMoqData]

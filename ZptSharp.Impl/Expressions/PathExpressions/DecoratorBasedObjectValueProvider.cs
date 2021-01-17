@@ -22,6 +22,7 @@ namespace ZptSharp.Expressions.PathExpressions
         readonly Dom.IReadsAndWritesDocument readerWriter;
         readonly Metal.IGetsMetalDocumentAdapter adapterFactory;
         readonly RootScopeLimitation scopeLimitation;
+        readonly IGetsValueFromReflection reflectionValueProvider;
 
         /// <summary>
         /// Attempts to get a value for a named reference, from the specified object.
@@ -146,8 +147,8 @@ namespace ZptSharp.Expressions.PathExpressions
         /// </summary>
         /// <returns>The chain of responsibility link.</returns>
         /// <param name="service">The service to be wrapped by this additional link.</param>
-        static IGetsValueFromObject GetReflectionValueLink(IGetsValueFromObject service)
-            => new ReflectionObjectValueProvider(service);
+        IGetsValueFromObject GetReflectionValueLink(IGetsValueFromObject service)
+            => new ReflectionObjectValueProvider(service, reflectionValueProvider);
 
         /// <summary>
         /// Gets a chain-of-responsibility link which processes template directory objects.
@@ -165,17 +166,20 @@ namespace ZptSharp.Expressions.PathExpressions
         /// <param name="readerWriter">A document reader/writer.</param>
         /// <param name="adapterFactory">A METAL document adapter factory.</param>
         /// <param name="scopeLimitation">The manner in which the root scope is limited</param>
+        /// <param name="reflectionValueProvider">The reflection value provider.</param>
         public DecoratorBasedObjectValueProvider(RenderingConfig config,
                                                  IGetsBuiltinContextsProvider builtinContextsProviderFactory,
                                                  Dom.IReadsAndWritesDocument readerWriter,
                                                  Metal.IGetsMetalDocumentAdapter adapterFactory,
-                                                 RootScopeLimitation scopeLimitation)
+                                                 RootScopeLimitation scopeLimitation,
+                                                 IGetsValueFromReflection reflectionValueProvider)
         {
             this.config = config ?? throw new ArgumentNullException(nameof(config));
             this.builtinContextsProviderFactory = builtinContextsProviderFactory ?? throw new ArgumentNullException(nameof(builtinContextsProviderFactory));
             this.readerWriter = readerWriter ?? throw new ArgumentNullException(nameof(readerWriter));
             this.adapterFactory = adapterFactory ?? throw new ArgumentNullException(nameof(adapterFactory));
             this.scopeLimitation = scopeLimitation;
+            this.reflectionValueProvider = reflectionValueProvider ?? throw new ArgumentNullException(nameof(reflectionValueProvider));
         }
     }
 }
