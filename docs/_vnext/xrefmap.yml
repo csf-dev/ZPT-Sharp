@@ -3046,19 +3046,6 @@ references:
   commentId: T:ZptSharp.Dom.IStoresCurrentReaderWriter
   fullName: ZptSharp.Dom.IStoresCurrentReaderWriter
   nameWithType: IStoresCurrentReaderWriter
-- uid: ZptSharp.Dom.IStoresCurrentReaderWriter.GetReaderWriter
-  name: GetReaderWriter()
-  href: api/ZptSharp.Dom.IStoresCurrentReaderWriter.html#ZptSharp_Dom_IStoresCurrentReaderWriter_GetReaderWriter
-  commentId: M:ZptSharp.Dom.IStoresCurrentReaderWriter.GetReaderWriter
-  fullName: ZptSharp.Dom.IStoresCurrentReaderWriter.GetReaderWriter()
-  nameWithType: IStoresCurrentReaderWriter.GetReaderWriter()
-- uid: ZptSharp.Dom.IStoresCurrentReaderWriter.GetReaderWriter*
-  name: GetReaderWriter
-  href: api/ZptSharp.Dom.IStoresCurrentReaderWriter.html#ZptSharp_Dom_IStoresCurrentReaderWriter_GetReaderWriter_
-  commentId: Overload:ZptSharp.Dom.IStoresCurrentReaderWriter.GetReaderWriter
-  isSpec: "True"
-  fullName: ZptSharp.Dom.IStoresCurrentReaderWriter.GetReaderWriter
-  nameWithType: IStoresCurrentReaderWriter.GetReaderWriter
 - uid: ZptSharp.Dom.IStoresCurrentReaderWriter.ReaderWriter
   name: ReaderWriter
   href: api/ZptSharp.Dom.IStoresCurrentReaderWriter.html#ZptSharp_Dom_IStoresCurrentReaderWriter_ReaderWriter
@@ -3611,19 +3598,6 @@ references:
   commentId: T:ZptSharp.Dom.ReaderWriterServiceLocator
   fullName: ZptSharp.Dom.ReaderWriterServiceLocator
   nameWithType: ReaderWriterServiceLocator
-- uid: ZptSharp.Dom.ReaderWriterServiceLocator.GetReaderWriter
-  name: GetReaderWriter()
-  href: api/ZptSharp.Dom.ReaderWriterServiceLocator.html#ZptSharp_Dom_ReaderWriterServiceLocator_GetReaderWriter
-  commentId: M:ZptSharp.Dom.ReaderWriterServiceLocator.GetReaderWriter
-  fullName: ZptSharp.Dom.ReaderWriterServiceLocator.GetReaderWriter()
-  nameWithType: ReaderWriterServiceLocator.GetReaderWriter()
-- uid: ZptSharp.Dom.ReaderWriterServiceLocator.GetReaderWriter*
-  name: GetReaderWriter
-  href: api/ZptSharp.Dom.ReaderWriterServiceLocator.html#ZptSharp_Dom_ReaderWriterServiceLocator_GetReaderWriter_
-  commentId: Overload:ZptSharp.Dom.ReaderWriterServiceLocator.GetReaderWriter
-  isSpec: "True"
-  fullName: ZptSharp.Dom.ReaderWriterServiceLocator.GetReaderWriter
-  nameWithType: ReaderWriterServiceLocator.GetReaderWriter
 - uid: ZptSharp.Dom.ReaderWriterServiceLocator.ReaderWriter
   name: ReaderWriter
   href: api/ZptSharp.Dom.ReaderWriterServiceLocator.html#ZptSharp_Dom_ReaderWriterServiceLocator_ReaderWriter
