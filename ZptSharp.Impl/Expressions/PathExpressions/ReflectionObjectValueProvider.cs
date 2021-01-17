@@ -13,6 +13,7 @@ namespace ZptSharp.Expressions.PathExpressions
     public class ReflectionObjectValueProvider : IGetsValueFromObject
     {
         readonly IGetsValueFromObject wrapped;
+        readonly IGetsValueFromReflection valueProvider;
 
         /// <summary>
         /// <para>
@@ -39,13 +40,13 @@ namespace ZptSharp.Expressions.PathExpressions
             var objectType = @object.GetType();
 
             if (TryGetProperty(name, objectType, out var property))
-                return Task.FromResult(GetValueResult.For(property.GetValue(@object)));
+                return Task.FromResult(GetValueResult.For(valueProvider.GetValue(property, @object)));
 
             if (TryGetMethod(name, objectType, out var method))
-                return Task.FromResult(GetValueResult.For(method.Invoke(@object, new object[0])));
+                return Task.FromResult(GetValueResult.For(valueProvider.GetValue(method, @object)));
 
             if (TryGetField(name, objectType, out var field))
-                return Task.FromResult(GetValueResult.For(field.GetValue(@object)));
+                return Task.FromResult(GetValueResult.For(valueProvider.GetValue(field, @object)));
 
             return wrapped.TryGetValueAsync(name, @object, cancellationToken);
         }
@@ -72,9 +73,11 @@ namespace ZptSharp.Expressions.PathExpressions
         /// Initializes a new instance of the
         /// <see cref="ReflectionObjectValueProvider"/> class.
         /// </summary>
-        /// <param name="wrapped">Wrapped.</param>
-        public ReflectionObjectValueProvider(IGetsValueFromObject wrapped)
+        /// <param name="wrapped">The wrapped service.</param>
+        /// <param name="valueProvider">The reflection value provider</param>
+        public ReflectionObjectValueProvider(IGetsValueFromObject wrapped, IGetsValueFromReflection valueProvider)
         {
+            this.valueProvider = valueProvider ?? throw new ArgumentNullException(nameof(valueProvider));
             this.wrapped = wrapped ?? throw new ArgumentNullException(nameof(wrapped));
         }
     }
