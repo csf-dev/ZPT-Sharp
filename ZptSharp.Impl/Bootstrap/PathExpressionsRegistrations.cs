@@ -16,7 +16,7 @@ namespace ZptSharp.Bootstrap
             services.AddTransient<DefinedVariablesOnlyPathExpressionEvaluator>();
             services.AddTransient<IGetsValueFromObject, DecoratorBasedObjectValueProvider>();
             services.AddTransient<IParsesPathExpression, PathExpressionParser>();
-            services.AddSingleton<IGetsValueFromReflection, CachingReflectionValueReader>();
+            services.AddTransient<IGetsValueFromReflection, ReflectionValueReader>();
             services.AddTransient<IWalksAndEvaluatesPathExpression, PathWalkingExpressionEvaluator>();
             services.AddTransient<IEvaluatesPathExpressionRequest, PathExpressionRequestEvaluator>();
             services.AddTransient<IGetsPathWalkingExpressionEvaluator, PathWalkingExpressionEvaluatorFactory>();
