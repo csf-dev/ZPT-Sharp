@@ -123,7 +123,7 @@ returning an object that contains a list of nodes and supplemental information.<
     <a href="https://github.com/csf-dev/ZPT-Sharp/new/master/apiSpec/new?filename=ZptSharp_Tal_DomExpressionEvaluator__ctor_ZptSharp_Expressions_IEvaluatesExpression_ZptSharp_Tal_IInterpretsExpressionResult_Microsoft_Extensions_Logging_ILogger_ZptSharp_Tal_DomExpressionEvaluator__.md&amp;value=---%0Auid%3A%20ZptSharp.Tal.DomExpressionEvaluator.%23ctor(ZptSharp.Expressions.IEvaluatesExpression%2CZptSharp.Tal.IInterpretsExpressionResult%2CMicrosoft.Extensions.Logging.ILogger%7BZptSharp.Tal.DomExpressionEvaluator%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/csf-dev/ZPT-Sharp/blob/master/ZptSharp.Impl/Tal/DomExpressionEvaluator.cs/#L101">View Source</a>
+    <a href="https://github.com/csf-dev/ZPT-Sharp/blob/master/ZptSharp.Impl/Tal/DomExpressionEvaluator.cs/#L133">View Source</a>
   </span>
   <a id="ZptSharp_Tal_DomExpressionEvaluator__ctor_" data-uid="ZptSharp.Tal.DomExpressionEvaluator.#ctor*"></a>
   <h4 id="ZptSharp_Tal_DomExpressionEvaluator__ctor_ZptSharp_Expressions_IEvaluatesExpression_ZptSharp_Tal_IInterpretsExpressionResult_Microsoft_Extensions_Logging_ILogger_ZptSharp_Tal_DomExpressionEvaluator__" data-uid="ZptSharp.Tal.DomExpressionEvaluator.#ctor(ZptSharp.Expressions.IEvaluatesExpression,ZptSharp.Tal.IInterpretsExpressionResult,Microsoft.Extensions.Logging.ILogger{ZptSharp.Tal.DomExpressionEvaluator})">DomExpressionEvaluator(IEvaluatesExpression, IInterpretsExpressionResult, ILogger&lt;DomExpressionEvaluator&gt;)</h4>
@@ -171,7 +171,7 @@ returning an object that contains a list of nodes and supplemental information.<
     <a href="https://github.com/csf-dev/ZPT-Sharp/new/master/apiSpec/new?filename=ZptSharp_Tal_DomExpressionEvaluator_EvaluateExpressionAsync_System_String_ZptSharp_Expressions_ExpressionContext_System_Threading_CancellationToken_.md&amp;value=---%0Auid%3A%20ZptSharp.Tal.DomExpressionEvaluator.EvaluateExpressionAsync(System.String%2CZptSharp.Expressions.ExpressionContext%2CSystem.Threading.CancellationToken)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/csf-dev/ZPT-Sharp/blob/master/ZptSharp.Impl/Tal/DomExpressionEvaluator.cs/#L34">View Source</a>
+    <a href="https://github.com/csf-dev/ZPT-Sharp/blob/master/ZptSharp.Impl/Tal/DomExpressionEvaluator.cs/#L60">View Source</a>
   </span>
   <a id="ZptSharp_Tal_DomExpressionEvaluator_EvaluateExpressionAsync_" data-uid="ZptSharp.Tal.DomExpressionEvaluator.EvaluateExpressionAsync*"></a>
   <h4 id="ZptSharp_Tal_DomExpressionEvaluator_EvaluateExpressionAsync_System_String_ZptSharp_Expressions_ExpressionContext_System_Threading_CancellationToken_" data-uid="ZptSharp.Tal.DomExpressionEvaluator.EvaluateExpressionAsync(System.String,ZptSharp.Expressions.ExpressionContext,System.Threading.CancellationToken)">EvaluateExpressionAsync(String, ExpressionContext, CancellationToken)</h4>
@@ -228,6 +228,24 @@ returning an object that contains a list of nodes and supplemental information.<
       </tr>
     </tbody>
   </table>
+  <h5 id="ZptSharp_Tal_DomExpressionEvaluator_EvaluateExpressionAsync_System_String_ZptSharp_Expressions_ExpressionContext_System_Threading_CancellationToken__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>
+This method also deals with the differentiation between <code>structure</code> and <code>text</code>
+expressions.  Structure expressions are inserted directly into the DOM without escaping or encoding.
+Text expressions are treated explicitly as text and are encoded/escaped to ensure that they are not
+accidentally treated as markup.
+</p>
+<p>
+Expressions are treated as text by default.  An expression is only treated as structure if:
+</p>
+<ul><li>It is prefixed by a keyword <code>structure</code> and a single space, for example <code>structure myExpression</code></li><li>The expression result implements <a class="xref" href="ZptSharp.IGetsStructuredMarkup.html">IGetsStructuredMarkup</a> and the expression is NOT prefixed by
+the keyword <code>text</code> and a single space, for example <code>text myExpression</code></li></ul>
+<p>
+Apart from aborting the treatment of <a class="xref" href="ZptSharp.IGetsStructuredMarkup.html">IGetsStructuredMarkup</a> as structure, the <code>text</code> prefix
+keyword for expressions is redundant, as it is the default.  It is supported though, for situations where you wish
+to be explicit.
+</p>
+</div>
   <h3 id="implements">Implements</h3>
   <div>
       <a class="xref" href="ZptSharp.Tal.IEvaluatesDomValueExpression.html">IEvaluatesDomValueExpression</a>

@@ -8234,6 +8234,76 @@ references:
   isSpec: "True"
   fullName: ZptSharp.Expressions.StringExpressions.StringExpressionEvaluator.EvaluateExpressionAsync
   nameWithType: StringExpressionEvaluator.EvaluateExpressionAsync
+- uid: ZptSharp.Expressions.StructuredMarkupObjectAdapter
+  name: StructuredMarkupObjectAdapter
+  href: api/ZptSharp.Expressions.StructuredMarkupObjectAdapter.html
+  commentId: T:ZptSharp.Expressions.StructuredMarkupObjectAdapter
+  fullName: ZptSharp.Expressions.StructuredMarkupObjectAdapter
+  nameWithType: StructuredMarkupObjectAdapter
+- uid: ZptSharp.Expressions.StructuredMarkupObjectAdapter.#ctor(System.Object)
+  name: StructuredMarkupObjectAdapter(Object)
+  href: api/ZptSharp.Expressions.StructuredMarkupObjectAdapter.html#ZptSharp_Expressions_StructuredMarkupObjectAdapter__ctor_System_Object_
+  commentId: M:ZptSharp.Expressions.StructuredMarkupObjectAdapter.#ctor(System.Object)
+  fullName: ZptSharp.Expressions.StructuredMarkupObjectAdapter.StructuredMarkupObjectAdapter(System.Object)
+  nameWithType: StructuredMarkupObjectAdapter.StructuredMarkupObjectAdapter(Object)
+- uid: ZptSharp.Expressions.StructuredMarkupObjectAdapter.#ctor*
+  name: StructuredMarkupObjectAdapter
+  href: api/ZptSharp.Expressions.StructuredMarkupObjectAdapter.html#ZptSharp_Expressions_StructuredMarkupObjectAdapter__ctor_
+  commentId: Overload:ZptSharp.Expressions.StructuredMarkupObjectAdapter.#ctor
+  isSpec: "True"
+  fullName: ZptSharp.Expressions.StructuredMarkupObjectAdapter.StructuredMarkupObjectAdapter
+  nameWithType: StructuredMarkupObjectAdapter.StructuredMarkupObjectAdapter
+- uid: ZptSharp.Expressions.StructuredMarkupObjectAdapter.GetMarkupAsync
+  name: GetMarkupAsync()
+  href: api/ZptSharp.Expressions.StructuredMarkupObjectAdapter.html#ZptSharp_Expressions_StructuredMarkupObjectAdapter_GetMarkupAsync
+  commentId: M:ZptSharp.Expressions.StructuredMarkupObjectAdapter.GetMarkupAsync
+  fullName: ZptSharp.Expressions.StructuredMarkupObjectAdapter.GetMarkupAsync()
+  nameWithType: StructuredMarkupObjectAdapter.GetMarkupAsync()
+- uid: ZptSharp.Expressions.StructuredMarkupObjectAdapter.GetMarkupAsync*
+  name: GetMarkupAsync
+  href: api/ZptSharp.Expressions.StructuredMarkupObjectAdapter.html#ZptSharp_Expressions_StructuredMarkupObjectAdapter_GetMarkupAsync_
+  commentId: Overload:ZptSharp.Expressions.StructuredMarkupObjectAdapter.GetMarkupAsync
+  isSpec: "True"
+  fullName: ZptSharp.Expressions.StructuredMarkupObjectAdapter.GetMarkupAsync
+  nameWithType: StructuredMarkupObjectAdapter.GetMarkupAsync
+- uid: ZptSharp.Expressions.StructureExpressions
+  name: ZptSharp.Expressions.StructureExpressions
+  href: api/ZptSharp.Expressions.StructureExpressions.html
+  commentId: N:ZptSharp.Expressions.StructureExpressions
+  fullName: ZptSharp.Expressions.StructureExpressions
+  nameWithType: ZptSharp.Expressions.StructureExpressions
+- uid: ZptSharp.Expressions.StructureExpressions.StructureExpressionEvaluator
+  name: StructureExpressionEvaluator
+  href: api/ZptSharp.Expressions.StructureExpressions.StructureExpressionEvaluator.html
+  commentId: T:ZptSharp.Expressions.StructureExpressions.StructureExpressionEvaluator
+  fullName: ZptSharp.Expressions.StructureExpressions.StructureExpressionEvaluator
+  nameWithType: StructureExpressionEvaluator
+- uid: ZptSharp.Expressions.StructureExpressions.StructureExpressionEvaluator.#ctor(ZptSharp.Expressions.IEvaluatesExpression)
+  name: StructureExpressionEvaluator(IEvaluatesExpression)
+  href: api/ZptSharp.Expressions.StructureExpressions.StructureExpressionEvaluator.html#ZptSharp_Expressions_StructureExpressions_StructureExpressionEvaluator__ctor_ZptSharp_Expressions_IEvaluatesExpression_
+  commentId: M:ZptSharp.Expressions.StructureExpressions.StructureExpressionEvaluator.#ctor(ZptSharp.Expressions.IEvaluatesExpression)
+  fullName: ZptSharp.Expressions.StructureExpressions.StructureExpressionEvaluator.StructureExpressionEvaluator(ZptSharp.Expressions.IEvaluatesExpression)
+  nameWithType: StructureExpressionEvaluator.StructureExpressionEvaluator(IEvaluatesExpression)
+- uid: ZptSharp.Expressions.StructureExpressions.StructureExpressionEvaluator.#ctor*
+  name: StructureExpressionEvaluator
+  href: api/ZptSharp.Expressions.StructureExpressions.StructureExpressionEvaluator.html#ZptSharp_Expressions_StructureExpressions_StructureExpressionEvaluator__ctor_
+  commentId: Overload:ZptSharp.Expressions.StructureExpressions.StructureExpressionEvaluator.#ctor
+  isSpec: "True"
+  fullName: ZptSharp.Expressions.StructureExpressions.StructureExpressionEvaluator.StructureExpressionEvaluator
+  nameWithType: StructureExpressionEvaluator.StructureExpressionEvaluator
+- uid: ZptSharp.Expressions.StructureExpressions.StructureExpressionEvaluator.EvaluateExpressionAsync(System.String,ZptSharp.Expressions.ExpressionContext,System.Threading.CancellationToken)
+  name: EvaluateExpressionAsync(String, ExpressionContext, CancellationToken)
+  href: api/ZptSharp.Expressions.StructureExpressions.StructureExpressionEvaluator.html#ZptSharp_Expressions_StructureExpressions_StructureExpressionEvaluator_EvaluateExpressionAsync_System_String_ZptSharp_Expressions_ExpressionContext_System_Threading_CancellationToken_
+  commentId: M:ZptSharp.Expressions.StructureExpressions.StructureExpressionEvaluator.EvaluateExpressionAsync(System.String,ZptSharp.Expressions.ExpressionContext,System.Threading.CancellationToken)
+  fullName: ZptSharp.Expressions.StructureExpressions.StructureExpressionEvaluator.EvaluateExpressionAsync(System.String, ZptSharp.Expressions.ExpressionContext, System.Threading.CancellationToken)
+  nameWithType: StructureExpressionEvaluator.EvaluateExpressionAsync(String, ExpressionContext, CancellationToken)
+- uid: ZptSharp.Expressions.StructureExpressions.StructureExpressionEvaluator.EvaluateExpressionAsync*
+  name: EvaluateExpressionAsync
+  href: api/ZptSharp.Expressions.StructureExpressions.StructureExpressionEvaluator.html#ZptSharp_Expressions_StructureExpressions_StructureExpressionEvaluator_EvaluateExpressionAsync_
+  commentId: Overload:ZptSharp.Expressions.StructureExpressions.StructureExpressionEvaluator.EvaluateExpressionAsync
+  isSpec: "True"
+  fullName: ZptSharp.Expressions.StructureExpressions.StructureExpressionEvaluator.EvaluateExpressionAsync
+  nameWithType: StructureExpressionEvaluator.EvaluateExpressionAsync
 - uid: ZptSharp.Expressions.WellKnownExpressionPrefix
   name: WellKnownExpressionPrefix
   href: api/ZptSharp.Expressions.WellKnownExpressionPrefix.html
@@ -8266,19 +8336,6 @@ references:
   isSpec: "True"
   fullName: ZptSharp.Expressions.WellKnownExpressionPrefix.GlobalVariablePath
   nameWithType: WellKnownExpressionPrefix.GlobalVariablePath
-- uid: ZptSharp.Expressions.WellKnownExpressionPrefix.Load
-  name: Load
-  href: api/ZptSharp.Expressions.WellKnownExpressionPrefix.html#ZptSharp_Expressions_WellKnownExpressionPrefix_Load
-  commentId: P:ZptSharp.Expressions.WellKnownExpressionPrefix.Load
-  fullName: ZptSharp.Expressions.WellKnownExpressionPrefix.Load
-  nameWithType: WellKnownExpressionPrefix.Load
-- uid: ZptSharp.Expressions.WellKnownExpressionPrefix.Load*
-  name: Load
-  href: api/ZptSharp.Expressions.WellKnownExpressionPrefix.html#ZptSharp_Expressions_WellKnownExpressionPrefix_Load_
-  commentId: Overload:ZptSharp.Expressions.WellKnownExpressionPrefix.Load
-  isSpec: "True"
-  fullName: ZptSharp.Expressions.WellKnownExpressionPrefix.Load
-  nameWithType: WellKnownExpressionPrefix.Load
 - uid: ZptSharp.Expressions.WellKnownExpressionPrefix.LocalVariablePath
   name: LocalVariablePath
   href: api/ZptSharp.Expressions.WellKnownExpressionPrefix.html#ZptSharp_Expressions_WellKnownExpressionPrefix_LocalVariablePath
@@ -8357,6 +8414,19 @@ references:
   isSpec: "True"
   fullName: ZptSharp.Expressions.WellKnownExpressionPrefix.String
   nameWithType: WellKnownExpressionPrefix.String
+- uid: ZptSharp.Expressions.WellKnownExpressionPrefix.Structure
+  name: Structure
+  href: api/ZptSharp.Expressions.WellKnownExpressionPrefix.html#ZptSharp_Expressions_WellKnownExpressionPrefix_Structure
+  commentId: P:ZptSharp.Expressions.WellKnownExpressionPrefix.Structure
+  fullName: ZptSharp.Expressions.WellKnownExpressionPrefix.Structure
+  nameWithType: WellKnownExpressionPrefix.Structure
+- uid: ZptSharp.Expressions.WellKnownExpressionPrefix.Structure*
+  name: Structure
+  href: api/ZptSharp.Expressions.WellKnownExpressionPrefix.html#ZptSharp_Expressions_WellKnownExpressionPrefix_Structure_
+  commentId: Overload:ZptSharp.Expressions.WellKnownExpressionPrefix.Structure
+  isSpec: "True"
+  fullName: ZptSharp.Expressions.WellKnownExpressionPrefix.Structure
+  nameWithType: WellKnownExpressionPrefix.Structure
 - uid: ZptSharp.HapHostingBuilderExtensions
   name: HapHostingBuilderExtensions
   href: api/ZptSharp.HapHostingBuilderExtensions.html
@@ -8671,6 +8741,25 @@ references:
   isSpec: "True"
   fullName: ZptSharp.IConfiguresRootContext.AddToRootContext
   nameWithType: IConfiguresRootContext.AddToRootContext
+- uid: ZptSharp.IGetsStructuredMarkup
+  name: IGetsStructuredMarkup
+  href: api/ZptSharp.IGetsStructuredMarkup.html
+  commentId: T:ZptSharp.IGetsStructuredMarkup
+  fullName: ZptSharp.IGetsStructuredMarkup
+  nameWithType: IGetsStructuredMarkup
+- uid: ZptSharp.IGetsStructuredMarkup.GetMarkupAsync
+  name: GetMarkupAsync()
+  href: api/ZptSharp.IGetsStructuredMarkup.html#ZptSharp_IGetsStructuredMarkup_GetMarkupAsync
+  commentId: M:ZptSharp.IGetsStructuredMarkup.GetMarkupAsync
+  fullName: ZptSharp.IGetsStructuredMarkup.GetMarkupAsync()
+  nameWithType: IGetsStructuredMarkup.GetMarkupAsync()
+- uid: ZptSharp.IGetsStructuredMarkup.GetMarkupAsync*
+  name: GetMarkupAsync
+  href: api/ZptSharp.IGetsStructuredMarkup.html#ZptSharp_IGetsStructuredMarkup_GetMarkupAsync_
+  commentId: Overload:ZptSharp.IGetsStructuredMarkup.GetMarkupAsync
+  isSpec: "True"
+  fullName: ZptSharp.IGetsStructuredMarkup.GetMarkupAsync
+  nameWithType: IGetsStructuredMarkup.GetMarkupAsync
 - uid: ZptSharp.IRendersZptDocument
   name: IRendersZptDocument
   href: api/ZptSharp.IRendersZptDocument.html
@@ -14190,6 +14279,19 @@ references:
   isSpec: "True"
   fullName: ZptSharp.ZptSharpHostingBuilderExtensions.AddZptStringExpressions
   nameWithType: ZptSharpHostingBuilderExtensions.AddZptStringExpressions
+- uid: ZptSharp.ZptSharpHostingBuilderExtensions.AddZptStructureExpressions(ZptSharp.Hosting.IBuildsHostingEnvironment)
+  name: AddZptStructureExpressions(IBuildsHostingEnvironment)
+  href: api/ZptSharp.ZptSharpHostingBuilderExtensions.html#ZptSharp_ZptSharpHostingBuilderExtensions_AddZptStructureExpressions_ZptSharp_Hosting_IBuildsHostingEnvironment_
+  commentId: M:ZptSharp.ZptSharpHostingBuilderExtensions.AddZptStructureExpressions(ZptSharp.Hosting.IBuildsHostingEnvironment)
+  fullName: ZptSharp.ZptSharpHostingBuilderExtensions.AddZptStructureExpressions(ZptSharp.Hosting.IBuildsHostingEnvironment)
+  nameWithType: ZptSharpHostingBuilderExtensions.AddZptStructureExpressions(IBuildsHostingEnvironment)
+- uid: ZptSharp.ZptSharpHostingBuilderExtensions.AddZptStructureExpressions*
+  name: AddZptStructureExpressions
+  href: api/ZptSharp.ZptSharpHostingBuilderExtensions.html#ZptSharp_ZptSharpHostingBuilderExtensions_AddZptStructureExpressions_
+  commentId: Overload:ZptSharp.ZptSharpHostingBuilderExtensions.AddZptStructureExpressions
+  isSpec: "True"
+  fullName: ZptSharp.ZptSharpHostingBuilderExtensions.AddZptStructureExpressions
+  nameWithType: ZptSharpHostingBuilderExtensions.AddZptStructureExpressions
 - uid: ZptSharp.ZptSharpServiceCollectionExtensions
   name: ZptSharpServiceCollectionExtensions
   href: api/ZptSharp.ZptSharpServiceCollectionExtensions.html
