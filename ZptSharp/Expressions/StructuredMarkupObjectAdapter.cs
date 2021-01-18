@@ -1,6 +1,6 @@
 using System.Threading.Tasks;
 
-namespace ZptSharp.Dom
+namespace ZptSharp.Expressions
 {
     /// <summary>
     /// An implementation of <see cref="IGetsStructuredMarkup"/> which wraps any <c>object</c>,

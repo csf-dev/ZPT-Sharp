@@ -25,6 +25,7 @@ namespace ZptSharp.Bootstrap
             RenderingRegistrations.RegisterServices(serviceCollection);
             SourceAnnotationServiceRegistrations.RegisterServices(serviceCollection);
             StringExpressionsRegistrations.RegisterServices(serviceCollection);
+            StructureExpressionsRegistrations.RegisterServices(serviceCollection);
             TalServiceRegistrations.RegisterServices(serviceCollection);
         }
     }

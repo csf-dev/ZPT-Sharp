@@ -110,5 +110,20 @@ namespace ZptSharp
 
             return builder;
         }
+
+        /// <summary>
+        /// Configures ZptSharp to read and handle TALES "structure" expressions.
+        /// </summary>
+        /// <returns>The same builder instance, after setting it up.</returns>
+        /// <param name="builder">The hosting builder.</param>
+        public static IBuildsHostingEnvironment AddZptStructureExpressions(this IBuildsHostingEnvironment builder)
+        {
+            if (builder == null)
+                throw new ArgumentNullException(nameof(builder));
+
+            builder.ServiceRegistry.ExpresionEvaluatorTypes.Add(WellKnownExpressionPrefix.Structure, typeof(Expressions.StructureExpressions.StructureExpressionEvaluator));
+
+            return builder;
+        }
     }
 }
