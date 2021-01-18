@@ -47,7 +47,8 @@ namespace ZptSharp.Expressions.StructureExpressions
         /// <seealso cref="ExpressionContext"/>
         public async Task<object> EvaluateExpressionAsync(string expression, ExpressionContext context, CancellationToken cancellationToken = default)
         {
-            var innerResult = await evaluator.EvaluateExpressionAsync(expression, context, cancellationToken);
+            var innerResult = await evaluator.EvaluateExpressionAsync(expression, context, cancellationToken)
+                .ConfigureAwait(false);
             return new StructuredMarkupObjectAdapter(innerResult);
         }
 
