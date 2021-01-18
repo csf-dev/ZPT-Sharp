@@ -44,6 +44,26 @@ namespace ZptSharp.Dom
         public override bool IsElement => NativeNode.NodeType == HtmlNodeType.Element;
 
         /// <summary>
+        /// Gets a value indicating whether this <see cref="INode"/> is a text node.
+        /// </summary>
+        /// <value><c>true</c> if the current instance is a text node; otherwise, <c>false</c>.</value>
+        public override bool IsTextNode => NativeNode.NodeType == HtmlNodeType.Text;
+
+        /// <summary>
+        /// Gets or sets the text content of a text node.  Returns <see langword="null"/> and throws an exception
+        /// if the current node is not a text node.
+        /// </summary>
+        /// <seealso cref="IsTextNode"/>
+        public override string Text
+        {
+            get => IsTextNode ? ((HtmlTextNode) NativeNode).Text : null;
+            set => {
+                if (!IsTextNode) throw new InvalidOperationException("This operation is not allowed on non-text nodes.");
+                ((HtmlTextNode)NativeNode).Text = value;
+            }
+        }
+
+        /// <summary>
         /// Gets a value which indicates whether or not the current element node has "CData"-like behaviour.
         /// One example of this is a <c>&lt;textarea&gt;</c> node.  Its contents are not HTML-encoded.
         /// </summary>

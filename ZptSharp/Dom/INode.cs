@@ -55,6 +55,19 @@ namespace ZptSharp.Dom
         bool IsElement { get; }
 
         /// <summary>
+        /// Gets a value indicating whether this <see cref="INode"/> is a text node.
+        /// </summary>
+        /// <value><c>true</c> if the current instance is a text node; otherwise, <c>false</c>.</value>
+        bool IsTextNode { get; }
+
+        /// <summary>
+        /// Gets or sets the text content of a text node.  Returns <see langword="null"/> and throws an exception
+        /// if the current node is not a text node.
+        /// </summary>
+        /// <seealso cref="IsTextNode"/>
+        string Text { get; set; }
+
+        /// <summary>
         /// Gets a value indicating whether this <see cref="INode"/> is imported.  A node is imported
         /// if its associated <see cref="Document"/> differs from the document upon its <see cref="ParentNode"/>.
         /// </summary>

@@ -373,6 +373,43 @@ namespace ZptSharp.Config
         public virtual System.Xml.XmlUrlResolver XmlUrlResolver { get; private set; }
 
         /// <summary>
+        /// Gets a value which indicates whether or not simple value substitutions using <c>${expression}</c>
+        /// are activated.
+        /// </summary>
+        /// <remarks>
+        /// <para>
+        /// When this configuration option is <c>true</c> then in markup text and also attribute values, substitutions
+        /// will be processed using placeholders in the format <c>${expression}</c>.  Where this pattern is detected in
+        /// text content, the whole construct will be replaced with the result of the expression, similarly to if it were
+        /// an element using a <c>tal:replace</c> attribute. This has the exception that the <c>structure</c> &amp; <c>text</c>
+        /// prefixes are not permitted.  You may use <c>structure:</c> expressions to achieve the same effect, if you wish.
+        /// </para>
+        /// <para>
+        /// Also, then this option is <c>true</c> then the same pattern will be detected and replaced in the values of
+        /// attributes.
+        /// </para>
+        /// <para>
+        /// <c>${expression}</c> replacements WILL NOT be processed in text content for the immediate text-node children of
+        /// an element which has either a <c>tal:content</c> or <c>tal:replace</c> attribute.  Additionally, replacements
+        /// will not be made in attribute values if there is a <c>tal:attributes</c> attribute present upon the same element.
+        /// This does not matter which attributes are listed/mentioned in the <c>tal:attributes</c> attribute.  The presence of
+        /// the TAL attribute prevents all simple replacements for all other attributes upon the same element.
+        /// </para>
+        /// <para>
+        /// Enabling this option may cause a performance degradation, particularly for applications which include large/long
+        /// text nodes, for example paragraphs/articles of text.  This is because these text nodes must additionally be scanned
+        /// for the replacement pattern and processed.  The same functionality may be achieved with improve performance using
+        /// <c>tal:replace</c> attributes, without activating this option.
+        /// </para>
+        /// <para>
+        /// When using simple replacements in both text and/or attribute values, the replacement sequence <c>${...}</c> may
+        /// be escaped by preceding it with a single backslash: <c>\${...}</c>.  In this case, replacements will not be made,
+        /// the backslash will be removed and that is all.
+        /// </para>
+        /// </remarks>
+        public virtual bool UseSimpleValueSubstitutions { get; private set; }
+
+        /// <summary>
         /// Creates and returns a new <see cref="RenderingConfig.Builder"/> instance which has its initial
         /// state/settings copied from the current configuration instance.
         /// </summary>
@@ -404,6 +441,7 @@ namespace ZptSharp.Config
                 SourceAnnotationBasePath = SourceAnnotationBasePath,
                 DefaultExpressionType = DefaultExpressionType,
                 XmlUrlResolver = XmlUrlResolver,
+                UseSimpleValueSubstitutions = UseSimpleValueSubstitutions,
             };
         }
 
@@ -487,6 +525,10 @@ namespace ZptSharp.Config
         /// <item>
         /// <term><see cref="XmlUrlResolver"/></term>
         /// <description><see langword="null"/></description>
+        /// </item>
+        /// <item>
+        /// <term><see cref="UseSimpleValueSubstitutions"/></term>
+        /// <description><see langword="false"/></description>
         /// </item>
         /// </list>
         /// </remarks>

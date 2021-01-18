@@ -51,6 +51,23 @@ namespace ZptSharp.Dom
         public override bool IsElement => NativeNode.NodeType == As.NodeType.Element;
 
         /// <summary>
+        /// Gets a value indicating whether this <see cref="INode"/> is a text node.
+        /// </summary>
+        /// <value><c>true</c> if the current instance is a text node; otherwise, <c>false</c>.</value>
+        public override bool IsTextNode => NativeNode.NodeType == As.NodeType.Text;
+
+        /// <summary>
+        /// Gets or sets the text content of a text node.  Returns <see langword="null"/> and throws an exception
+        /// if the current node is not a text node.
+        /// </summary>
+        /// <seealso cref="IsTextNode"/>
+        public override string Text
+        {
+            get => IsTextNode ? NativeNode.NodeValue : null;
+            set => NativeNode.NodeValue = IsTextNode ? value : throw new InvalidOperationException("This operation is not allowed on non-text nodes.");
+        }
+
+        /// <summary>
         /// Returns a <see cref="String"/> that represents the current
         /// <see cref="AngleSharpNode"/>.  If it is an element node then this method shows the element's start-tag.
         /// Otherwise it returns the same as the native <see cref="As.INode"/>'s <see cref="Object.ToString()"/> method.

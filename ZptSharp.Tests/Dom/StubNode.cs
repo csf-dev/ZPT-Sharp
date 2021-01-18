@@ -15,6 +15,10 @@ namespace ZptSharp.Dom
 
         public override bool IsElement => true;
 
+        public override bool IsTextNode => false;
+        
+        public override string Text { get; set; }
+
         public override INode GetCopy() => this;
 
         public override bool IsInNamespace(Namespace @namespace) => false;
