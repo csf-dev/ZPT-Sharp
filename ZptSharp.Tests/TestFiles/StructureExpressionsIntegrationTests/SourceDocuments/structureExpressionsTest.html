@@ -1,0 +1,11 @@
+<html>
+    <head>
+        <title>Structure expressions test</title>
+    </head>
+    <body tal:define="isNotStructure here/myMarkup;
+                      isStructure structure:here/myMarkup">
+        <h1>Structure expression test</h1>
+        <div tal:content="isNotStructure">This will be filled with encoded text.</div>
+        <div tal:content="isStructure">This will be filled with HTML.</div>
+    </body>
+</html>
