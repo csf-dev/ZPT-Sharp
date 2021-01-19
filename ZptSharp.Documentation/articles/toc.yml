@@ -34,6 +34,8 @@
       href: CliRenderer.md
     - name: Compatibility
       href: Compatibility.md
+    - name: Logging
+      href: Logging.md
 - name: Contributing & extending
   href: Contributing.md
   items:
