@@ -4373,6 +4373,18 @@
     },
     {
       "type": "Conceptual",
+      "source_relative_path": "articles/Logging.md",
+      "output": {
+        ".html": {
+          "relative_path": "articles/Logging.html",
+          "hash": "Q8y9bvjNp4G0XKPcCPYmKg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
       "source_relative_path": "articles/NuGetPackages.md",
       "output": {
         ".html": {
@@ -4620,7 +4632,7 @@
       "output": {
         ".html": {
           "relative_path": "articles/toc.html",
-          "hash": "nt2p4BCItkVcfkXm0+RN/w=="
+          "hash": "YK5MAgbHMGgEmYUIrTYRoA=="
         }
       },
       "is_incremental": false,
@@ -4676,7 +4688,7 @@
         "ConceptualDocumentProcessor": {
           "can_incremental": false,
           "incrementalPhase": "build",
-          "total_file_count": 28,
+          "total_file_count": 29,
           "skipped_file_count": 0
         },
         "ManagedReferenceDocumentProcessor": {
