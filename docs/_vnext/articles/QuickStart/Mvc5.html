@@ -5,9 +5,9 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Mvc5 </title>
+    <title>Quick-start: ZptSharp with ASP.NET MVC5 </title>
     <meta name="viewport" content="width=device-width">
-    <meta name="title" content="Mvc5 ">
+    <meta name="title" content="Quick-start: ZptSharp with ASP.NET MVC5 ">
     <meta name="generator" content="docfx 2.56.6.0">
     
     <link rel="shortcut icon" href="../../favicon.ico">
@@ -67,9 +67,65 @@
         <div class="article row grid-right">
           <div class="col-md-10">
             <article class="content wrap" id="_content" data-uid="">
-<h1 id="mvc5">Mvc5</h1>
+<h1 id="quick-start-zptsharp-with-aspnet-mvc5">Quick-start: ZptSharp with AS<span>P.N</span>ET MVC5</h1>
 
-<p><a href="index.html">index</a></p>
+<p><em>This guide is for users of .NET Framework 4.6.1 through 4.8.x, using AS<span>P.N</span>ET MVC.</em>
+For .NET Core/.NET 5+, using AS<span>P.N</span>ET Core MVC, <a href="MvcCore.html">please follow the linked guide instead</a>.</p>
+<h2 id="create-a-new-mvc-project">Create a new MVC project</h2>
+<p>From Visual Studio (or whichever IDE), create a new AS<span>P.N</span>ET MVC project from the standard template.
+This should create a minimal functional AS<span>P.N</span>ET MVC5 project.
+If in doubt about the MVC version, check the NuGet package reference for <strong>Microsoft.AspNet.Mvc</strong>; it should be version 5.x.</p>
+<h2 id="add-the-zptsharp-nuget-packages">Add the ZptSharp NuGet packages</h2>
+<p>Add the following NuGet packages to your project:</p>
+<ul>
+<li>ZptSharp.Mvc5</li>
+<li>ZptSharp.HtmlAgilityPack</li>
+</ul>
+<p><em>This represents a minimal set of packages in order for an AS<span>P.N</span>ET MVC application to serve HTML using ZptSharp.</em></p>
+<h2 id="activate-the-view-engine">Activate the view-engine</h2>
+<p>Add the following code to your <strong>Global.asax.cs</strong> <code>Application_Start</code> handler.
+Other existing content in that file should remain as-is.</p>
+<pre><code class="lang-csharp">var zptSharpViewEngine = new ZptSharp.Mvc5.ZptSharpViewEngine(builder =&gt; {
+    builder
+        .AddHapZptDocuments()
+        .AddStandardZptExpressions();
+});
+ViewEngines.Engines.Clear();
+ViewEngines.Engines.Add(zptSharpViewEngine);
+</code></pre>
+<p><em>If you wish to use OWIN instead of Global.asax.cs</em> then the above code could also be quite easily transformed into some OWIN middleware.</p>
+<h2 id="write-your-first-view">Write your first view</h2>
+<p>Create a text file in the <code>Views/Home</code> directory named <code>Index.pt</code>.
+Enter the following as the content for that file.</p>
+<pre><code class="lang-html">&lt;html&gt;
+&lt;head&gt;
+&lt;title&gt;ZptSharp 'Hello world' example for ASP.NET MVC5&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;h1&gt;Example ASP.NET MVC5 web app&lt;/h1&gt;
+&lt;p tal:content=&quot;here/Message&quot;&gt;The greeting message appears here.&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+<h2 id="write-your-controller-action">Write your controller action</h2>
+<p>The blank project should give you one controller already, named <code>HomeController</code>.
+Rewrite the controller's <code>Index</code> action to the following:</p>
+<pre><code class="lang-csharp">public ActionResult Index()
+{
+    return View(new { Message = &quot;Hello world!&quot; });
+}
+</code></pre>
+<h2 id="start-the-app--see-the-result">Start the app &amp; see the result!</h2>
+<p>You should now be able to compile and run your application.</p>
+<p>You should see that your home page has the heading <strong>Example AS<span>P.N</span>ET MVC5 web app</strong> and underneath is the text <strong>Hello world!</strong>.
+This &quot;Hello World!&quot; text came from the model supplied by the controller.
+The corresponding text in the view source file reading &quot;The greeting message appears here.&quot; has been replaced.</p>
+<p>There is <a href="https://github.com/csf-dev/ZPT-Sharp/tree/master/Examples/ZptSharp.Examples.Mvc5">a sample of what your application should look like</a> available in the source files of the solution.</p>
+<h2 id="continue-learning-in-the-tutorial">Continue learning in the tutorial</h2>
+<p>You have now completed the quick-start for AS<span>P.N</span>ET MVC5!
+You have set-up a working MVC web application with views served by ZptSharp.
+To continue learning about ZptSharp, please follow <a href="../ZptTutorial/index.html">the ZptSharp tutorial</a>, which teaches the ZPT language.
+Throughout the tutorial, <em>changes to the model</em> are performed in the <code>HomeController</code></p>
 </article>
           </div>
           
