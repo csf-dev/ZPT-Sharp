@@ -1,0 +1,3 @@
+# OmitTag
+
+[Index](Index.md)

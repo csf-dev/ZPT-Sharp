@@ -41,7 +41,7 @@ It also shows the order in which they are processed (if, for example, multiple a
 [`tal:condition`]: Tal/Condition.md
 [`tal:repeat`]: Tal/Repeat.md
 [`tal:content`]: Tal/ContentAndReplace.md
-[`tal:replace`]: Tal/Replace.md
+[`tal:replace`]: Tal/ContentAndReplace.md
 [`tal:attributes`]: Tal/Attributes.md
 [`tal:omit-tag`]: Tal/OmitTag.md
 [`tal:on-error`]: Tal/OnError.md
@@ -66,6 +66,7 @@ In the examples below all expressions are shown *using their fully qualified/pre
 | [`pipe`]      | Use a delegate to transform a value.  For example `pipe:name path:pipes/ToLowercase`                                                  |
 | [`csharp`]    | Evaluate arbitrary C# expressions (but *[please read about the limitations]*).  For example `csharp:name.ToLowerInvariant()`          |
 | [`python`]    | Evaluate arbitrary expressions written in the Python 2 language.  For example `python:2 + 2`                                          |
+| [`structure`] | Indicates that an 'inner' expression should be interpreted as structure/markup when rendered.  For example `structure:path:here/SomeMarkup`                                          |
 
 [using the configuration]: xref:ZptSharp.Config.RenderingConfig.DefaultExpressionType
 [`path`]: Tales/PathExpressions.md
@@ -75,3 +76,4 @@ In the examples below all expressions are shown *using their fully qualified/pre
 [`csharp`]: Tales/CSharpExpressions.md
 [please read about the limitations]: Tales/CSharpExpressionLimitations.md
 [`python`]: Tales/PythonExpressions.md
+[`structure`]: Tales/StructureExpressions.md
