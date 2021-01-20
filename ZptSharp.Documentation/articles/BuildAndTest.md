@@ -13,6 +13,7 @@ Optionally, add `-c Release` for a release-configuration build.
 
 In order to run tests, *you will additionally need* either [.NET Framework 4.7.2] or an equivalent [Mono Framework] version installed.
 This is because [a subset of the tests cannot run in a .NET Core environment].
+
 The tests are run using `dotnet test`; this alone is sufficient to get pass/fail information.
 You only need consider [more advanced options] if you would like detailed logs and/or diagnostic information.
 

@@ -1,13 +1,16 @@
 # Quick-start: Consuming the ZptSharp API
 
 _This guide is for those who wish to use ZptSharp within their own application._
-The guide assumes that you are .NET Core (or .NET 5+); the steps are adaptable for an app written with .NET Framework.
+The guide assumes that you are using .NET Core (or .NET 5+).
+These steps may be followed with only a few differences for an app written with .NET Framework.
 
 ## Create a project to consume the API
 
 In this tutorial, we will be creating a command-line app project.
-This makes it easy to run & test without any other assumptions about your application.
-Please adapt these instructions to your own intended usage, using information from the more detailled [reference documentation].
+This makes it easy to run & test without any other assumptions or dependencies.
+Once you have followed this guide, you are encouraged to adapt these instructions to your own intended usage.
+Further information is available in the more detailled [reference documentation] for consuming ZptSharp as an API.
+
 To begin with a new/empty project, use the following command:
 
 ```text

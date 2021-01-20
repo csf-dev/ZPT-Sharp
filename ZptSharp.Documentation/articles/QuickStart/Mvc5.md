@@ -1,4 +1,4 @@
-# Quick-start: ZptSharp with AS<span>P.N</span>ET MVC5
+# Quick-start: ZptSharp & AS<span>P.N</span>ET MVC5
 
 _This guide is for users of .NET Framework 4.6.1 through 4.8.x, using AS<span>P.N</span>ET MVC._
 For .NET Core/.NET 5+, using AS<span>P.N</span>ET Core MVC, [please follow the linked guide instead].
