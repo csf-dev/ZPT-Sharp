@@ -4401,7 +4401,7 @@
       "output": {
         ".html": {
           "relative_path": "articles/QuickStart/CliApp.html",
-          "hash": "u0goh3Hvewsm2SqfBoj3Bw=="
+          "hash": "Z6FB3860+5a0RHqdIFLa2g=="
         }
       },
       "is_incremental": false,
@@ -4606,12 +4606,15 @@
       "version": ""
     },
     {
+      "log_codes": [
+        "InvalidFileLink"
+      ],
       "type": "Conceptual",
       "source_relative_path": "articles/ZptTutorial/Page2.md",
       "output": {
         ".html": {
           "relative_path": "articles/ZptTutorial/Page2.html",
-          "hash": "ojWRO7E9XWR8Mc99ecwxog=="
+          "hash": "fwOMNZlsjRJ9hjht/VQpSg=="
         }
       },
       "is_incremental": false,
@@ -4623,7 +4626,7 @@
       "output": {
         ".html": {
           "relative_path": "articles/ZptTutorial/index.html",
-          "hash": "CgzA12U2snSApa4/0ERHVg=="
+          "hash": "v3Z2WY8gyak3SIriaGWQ+g=="
         }
       },
       "is_incremental": false,

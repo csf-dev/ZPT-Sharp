@@ -70,7 +70,8 @@
 <h1 id="page-templates-tutorial">Page templates tutorial</h1>
 
 <div class="note">
-<p>This tutorial assumes that you have followed one of the following quick-start guides. They each conclude with a functioning 'hello world' ZPT environment.</p>
+<p><em>This tutorial assumes that you have followed one of the following quick-start guides</em>.
+Each of them concludes with a functioning &quot;hello world&quot; ZPT environment which we shall build upon in this tutorial.</p>
 <ul>
 <li><a href="../QuickStart/Mvc5.html">ASP.NET MVC 5</a></li>
 <li><a href="../QuickStart/MvcCore.html">ASP.NET Core MVC</a></li>
@@ -79,7 +80,8 @@
 </ul>
 </div>
 <h2 id="talcontent-replaces-an-elements-content"><code>tal:content</code> replaces an element's content</h2>
-<p>Let's look again at the ZPT template file from the quick-start guides.</p>
+<p>Let's look again at the ZPT template file from the quick-start guides.
+If you follow the guide then it should look a little like this.</p>
 <pre><code class="lang-html">&lt;html&gt;
 &lt;head&gt;
 &lt;title&gt;ZptSharp 'Hello world' example&lt;/title&gt;
@@ -90,7 +92,9 @@
 &lt;/body&gt;
 &lt;/html&gt;
 </code></pre>
-<p>Notice how in the rendered document, the words &quot;A famous greeting&quot; are replaced by &quot;Hello world!&quot;. The <code>&lt;p&gt;</code> tags remain in the rendered output though.</p>
+<p>Notice how in the rendered document, the words &quot;A famous greeting&quot; are replaced by &quot;Hello world!&quot;.
+The <code>&lt;p&gt;</code> tags remain in the rendered output but their content is substituted.
+This is the primary function of the <code>tal:content</code> attribute.</p>
 <h2 id="elements-are-replaced-too">Elements are replaced too</h2>
 <p>Try changing the <code>p</code> tag (in the source document) to the following:</p>
 <pre><code class="lang-html">&lt;p tal:content=&quot;here/Message&quot;&gt;
@@ -98,11 +102,12 @@
 &lt;/p&gt;
 </code></pre>
 <p>If you render this again, the output will be the same. When a <code>tal:content</code> attribute replaces the content of an element, <em>all of its content is replaced</em>, including text and even trees of elements as applicable.</p>
-<p>This effect can be put to good use in source documents, allowing the addition of <em>sample content</em>.</p>
+<p>This effect can be put to good use in source documents, allowing the addition of <em>sample or placeholder content</em>.
+Sample content may be used so that a designer may see what the rendered page is expected to look like, even when the source file is 'offline' from its application logic.</p>
 <h2 id="including-markup-in-the-content">Including markup in the content</h2>
 <p>Let's try another change. This time we will change the model rather than the document.</p>
 <p>Change the value of <code>Message</code> in the model to the following string. We will see what happens if we include markup in the model value to be inserted into a document template.</p>
-<pre><code class="lang-text">&quot;&lt;strong&gt;Hello world!&lt;/strong&gt;&quot;
+<pre><code class="lang-text">&lt;strong&gt;Hello world!&lt;/strong&gt;
 </code></pre>
 <p>If you render the document again now, you will see that <em>the markup from the model has been HTML encoded</em>. What is actually written to the output is:</p>
 <pre><code class="lang-html">&lt;p&gt;
