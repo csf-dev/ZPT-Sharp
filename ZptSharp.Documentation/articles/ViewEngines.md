@@ -1,13 +1,24 @@
 # ZptSharp View Engines
 
-The ZptSharp view engines allow applications using AS<span>P.N</span>ET Core MVC (.NET Core/.NET 5+) and applications using AS<span>P.N</span>ET MVC5 (.NET Framework 4.6.1+) to display views using ZPT templates.
-These view engines are provided via the NuGet packages **ZptSharp.MvcCore** and **ZptSharp.Mvc5** respectively.
+ZptSharp provides two view engines, allowing AS<span>P.N</span>ET MVC applications to display views using ZPT document templates.
+The table below shows the applicable packages and MVC versions.
 
-## Installing & activating the view engine
+| NuGet Package         | MVC version                       | Intended usage            |
+| -------------         | -----------                       | --------------            |
+| **ZptSharp.MvcCore**  | AS<span>P.N</span>ET Core MVC 2+  | .NET Core 2.0+ or .NET 5+ |
+| **ZptSharp.Mvc5**     | AS<span>P.N</span>ET MVC5         | .NET Framework 4.6.1+     |
+
+Install the package for your MVC version/runtime (as well as at least one [document provider package], and any additional expression evaluators, if applicable) into your MVC Web Application project.
+
+[document provider package]: NuGetPackages.md#Document-providers
+
+## Activating the view engine
 
 As well as installing the appropriate package (above) to your web application, you must activate the view engine in your web app setup.
-Common to both frameworks is the use of the `ZptSharpViewEngine` which makes use of a builder object.
-Please refer to the documentation for [the ZptSharp DI builder object] for further information about which extension methods are available in order to set-up ZptSharp, including the activation of add-on packages.
+Common to both framework-specific packages is the `ZptSharpViewEngine` constructor.
+This makes use of a builder action/callback in which an object is configured with the optional/elective functionality.
+To have a useful ZptSharp environment, _at least one document provider and one expression evaluator must be activated here_.
+Full documentation for this set-up is available in the reference for [the ZptSharp DI builder object]; the examples below demonstrate a typical usage.
 
 [the ZptSharp DI builder object]: xref:ZptSharp.Hosting.IBuildsHostingEnvironment
 
