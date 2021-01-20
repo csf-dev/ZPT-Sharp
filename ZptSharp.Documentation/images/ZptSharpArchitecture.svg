@@ -9,7 +9,7 @@
   <path  stroke-linecap="round"  stroke-width="2" stroke="rgb(0, 0, 0)" fill="rgb(180, 221, 255)" fill-opacity="0.901961" d=" M 28,156  L 348,156  L 348,364  L 28,364  L 28,156 "/>
   <text  x="31" y="159" style="font-size:15;  fill:rgb(0, 0, 0);  stroke:rgb(0, 0, 0);  dominant-baseline: hanging; text-anchor: start;">Dependency injection</text>
   <path  stroke-linecap="round"  stroke-width="2" stroke="rgb(0, 0, 0)" fill="rgb(0, 180, 255)" fill-opacity="0.901961" d=" M 44,188  L 172,188  L 172,252  L 44,252  L 44,188 "/>
-  <text  x="108" y="220" style="font-size:15;  fill:rgb(0, 0, 0);  stroke:rgb(0, 0, 0);  dominant-baseline: central; text-anchor: middle;">ZptSharp.Impl</text>
+  <text  x="108" y="220" style="font-size:15;  fill:rgb(0, 0, 0);  stroke:rgb(0, 0, 0);  dominant-baseline: central; text-anchor: middle;">ZptSharp</text>
   <path  stroke-linecap="round"  stroke-width="2" stroke="rgb(0, 0, 0)" fill="rgb(255, 255, 0)" fill-opacity="0.901961" d=" M 44,284  L 172,284  L 172,348  L 44,348  L 44,284 "/>
   <text  x="108" y="316" style="font-size:15;  fill:rgb(0, 0, 0);  stroke:rgb(0, 0, 0);  dominant-baseline: central; text-anchor: middle;">
     <tspan  x="108" dy="-7.5">Document</tspan>
@@ -29,7 +29,10 @@
   <path  stroke-linecap="round"  stroke-width="2" stroke="rgb(0, 0, 0)" fill="rgb(206, 118, 5)" fill-opacity="0.901961" d=" M 204,44  L 332,44  L 332,108  L 204,108  L 204,44 "/>
   <text  x="268" y="76" style="font-size:15;  fill:rgb(0, 0, 0);  stroke:rgb(0, 0, 0);  dominant-baseline: central; text-anchor: middle;">Consuming project</text>
   <path  stroke-linecap="round"  stroke-width="2" stroke="rgb(0, 0, 0)" fill="rgb(0, 180, 255)" fill-opacity="0.901961" d=" M 204,156  L 332,156  L 332,252  L 204,252  L 204,156 "/>
-  <text  x="268" y="204" style="font-size:15;  fill:rgb(0, 0, 0);  stroke:rgb(0, 0, 0);  dominant-baseline: central; text-anchor: middle;">ZptSharp</text>
+  <text  x="268" y="204" style="font-size:15;  fill:rgb(0, 0, 0);  stroke:rgb(0, 0, 0);  dominant-baseline: central; text-anchor: middle;">
+    <tspan  x="268" dy="-7.5">ZptSharp.</tspan>
+    <tspan  x="268" dy="15">Abstractions</tspan>
+  </text>
   <path  stroke-linecap="round"  stroke-width="2" stroke="rgb(0, 0, 0)" fill="none" d=" M 268,112  L 268,152 "/>
   <path  stroke-linecap="round"  stroke-width="2" stroke="rgb(0, 0, 0)" fill="rgb(0, 0, 0)" d=" M 274,144  L 268,152  L 262,144  L 274,144 "/>
 </svg>

@@ -28,8 +28,8 @@
   </ItemGroup>
     
   <ItemGroup>
+    <ProjectReference Include="..\..\ZptSharp.Abstractions\ZptSharp.Abstractions.csproj" />
     <ProjectReference Include="..\..\ZptSharp\ZptSharp.csproj" />
-    <ProjectReference Include="..\..\ZptSharp.Impl\ZptSharp.Impl.csproj" />
   </ItemGroup>
   
   <ItemGroup>

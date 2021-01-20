@@ -5,10 +5,10 @@ This guide takes you through the process of adding ZptSharp to your own applicat
 ## Installing NuGet packages
 
 The first step is to add references to the appropriate [ZptSharp NuGet packages] from your app.
-The project/assembly which sets up your dependency injection must reference the package **ZptSharp.Impl**, as well as any document provider or expression evaluator packages you wish to use.
+The project/assembly which sets up your dependency injection must reference the package **ZptSharp**, as well as any document provider or expression evaluator packages you wish to use.
 A working ZptSharp environment *requires at least one document provider*.
 
-If your app makes use of ZptSharp from *a different project/assembly*, then that only need reference the **ZptSharp** package.
+If your app makes use of ZptSharp from *a different project/assembly*, then that only need reference the **ZptSharp.Abstractions** package.
 Once added to DI, ZptSharp may be consumed from only its interfaces.
 
 ## Adding ZptSharp to DI

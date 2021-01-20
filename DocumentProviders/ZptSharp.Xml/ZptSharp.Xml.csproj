@@ -16,7 +16,7 @@
   </PropertyGroup>
     
   <ItemGroup>
-    <ProjectReference Include="..\..\ZptSharp\ZptSharp.csproj" />
+    <ProjectReference Include="..\..\ZptSharp.Abstractions\ZptSharp.Abstractions.csproj" />
   </ItemGroup>
 
   <ItemGroup>

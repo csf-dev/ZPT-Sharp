@@ -43,9 +43,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZptSharp.PythonExpressions"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZptSharp.Documentation", "ZptSharp.Documentation\ZptSharp.Documentation.csproj", "{35D94430-E055-4C3D-B013-5661DE0F6907}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZptSharp", "ZptSharp\ZptSharp.csproj", "{E7FF2ABA-F0A8-42C5-BEFC-CF2EE87F2520}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZptSharp.Abstractions", "ZptSharp.Abstractions\ZptSharp.Abstractions.csproj", "{E7FF2ABA-F0A8-42C5-BEFC-CF2EE87F2520}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZptSharp.Impl", "ZptSharp.Impl\ZptSharp.Impl.csproj", "{B894D826-AC9A-4C42-9BA2-E827800CA346}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZptSharp", "ZptSharp\ZptSharp.csproj", "{B894D826-AC9A-4C42-9BA2-E827800CA346}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZptSharp.Tests", "ZptSharp.Tests\ZptSharp.Tests.csproj", "{D4F7A76D-ACB1-489E-922A-ED955F436E51}"
 EndProject

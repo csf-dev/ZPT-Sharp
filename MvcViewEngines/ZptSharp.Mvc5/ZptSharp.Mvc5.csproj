@@ -28,10 +28,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\ZptSharp\ZptSharp.csproj">
+    <ProjectReference Include="..\..\ZptSharp.Abstractions\ZptSharp.Abstractions.csproj">
       <SetTargetFramework>TargetFramework=net461</SetTargetFramework>
     </ProjectReference>
-    <ProjectReference Include="..\..\ZptSharp.Impl\ZptSharp.Impl.csproj">
+    <ProjectReference Include="..\..\ZptSharp\ZptSharp.csproj">
       <SetTargetFramework>TargetFramework=net461</SetTargetFramework>
     </ProjectReference>
   </ItemGroup>

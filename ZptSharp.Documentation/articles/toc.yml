@@ -50,7 +50,3 @@
           href: WritingDocumentProviders.md
         - name: Expression evaluators
           href: WritingExpressionEvaluators.md
-
-          href: WritingDocumentProviders.md
-        - name: Expression evaluators
-          href: WritingExpressionEvaluators.md

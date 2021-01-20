@@ -3,22 +3,23 @@
 ZptSharp includes a number of packages; those which comprise the **core** of the library and others which you should select based upon your intended usage.
 
 ## ZptSharp core
+
 The ZptSharp core is made of two packages:
 
-* **[ZptSharp]**, which has very few dependencies and contains only abstractions and interfaces for the ZptSharp functionality.
-* **[ZptSharp.Impl]** contains the majority of the ZptSharp logic.
+* **[ZptSharp.Abstractions]**, which has very few dependencies and contains only abstractions and interfaces for the ZptSharp functionality.
+* **[ZptSharp]** contains the majority of the ZptSharp logic.
 
-A consuming application/solution must reference the `ZptSharp.Impl` package from the project/assembly [where it sets up dependency injection].
+A consuming application/solution must reference the **ZptSharp** package from the project/assembly [where it sets up dependency injection].
 The project which sets up dependency injection must also reference any document provider(s) & extra expression evaluator packages which are desired.
 
-Using dependency injection & in a multi-project solution, projects which make use of ZptSharp's functionality need only reference `ZptSharp`.
+Using dependency injection in a multi-project solution, projects which make use of ZptSharp's functionality need only reference **ZptSharp.Abstractions**.
 This holds true regardless of which document providers or expression evaluators are used.
 Under DI, ZptSharp is injected & consumed using only interfaces and abstractions.
 
 A working ZptSharp environment *must include at least one document provider* package.
 
+[ZptSharp.Abstractions]: https://www.nuget.org/packages/ZptSharp.Abstractions
 [ZptSharp]: https://www.nuget.org/packages/ZptSharp
-[ZptSharp.Impl]: https://www.nuget.org/packages/ZptSharp.Impl
 [where it sets up dependency injection]: ../API/index.md#adding-zptsharp-to-di
 
 ## Document providers

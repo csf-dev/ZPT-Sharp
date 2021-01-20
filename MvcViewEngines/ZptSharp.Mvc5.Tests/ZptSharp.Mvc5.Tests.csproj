@@ -28,9 +28,9 @@
 
   <ItemGroup>
     <ProjectReference Include="..\ZptSharp.Mvc5\ZptSharp.Mvc5.csproj" />
-    <ProjectReference Include="..\..\ZptSharp\ZptSharp.csproj" />
+    <ProjectReference Include="..\..\ZptSharp.Abstractions\ZptSharp.Abstractions.csproj" />
     <ProjectReference Include="..\..\DocumentProviders\ZptSharp.HtmlAgilityPack\ZptSharp.HtmlAgilityPack.csproj" />
-    <ProjectReference Include="..\..\ZptSharp.Impl\ZptSharp.Impl.csproj" />
+    <ProjectReference Include="..\..\ZptSharp\ZptSharp.csproj" />
   </ItemGroup>
 
   <ItemGroup>
