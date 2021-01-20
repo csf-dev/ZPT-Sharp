@@ -4317,7 +4317,7 @@
       "output": {
         ".html": {
           "relative_path": "articles/BuildAndTest.html",
-          "hash": "SPKgznfMmtgmRvRbfux41A=="
+          "hash": "bygaBplMyYjTBU49EyrmkQ=="
         }
       },
       "is_incremental": false,
@@ -4413,7 +4413,7 @@
       "output": {
         ".html": {
           "relative_path": "articles/QuickStart/ConsumingTheApi.html",
-          "hash": "GmVm6Uz7cRTlsgQJQDLxMg=="
+          "hash": "47iYhvKT0EkKHZxBzaB1DA=="
         }
       },
       "is_incremental": false,
@@ -4425,7 +4425,7 @@
       "output": {
         ".html": {
           "relative_path": "articles/QuickStart/Mvc5.html",
-          "hash": "q5mV96b0qLjQT8PciLfbog=="
+          "hash": "Nj0NIcNJV+vKkhzg7m3faw=="
         }
       },
       "is_incremental": false,
@@ -4437,7 +4437,7 @@
       "output": {
         ".html": {
           "relative_path": "articles/QuickStart/MvcCore.html",
-          "hash": "KqmldwDOzaOJVsWREN11iQ=="
+          "hash": "aeLy5CZ843brSoFTMjXBPw=="
         }
       },
       "is_incremental": false,
@@ -4449,7 +4449,7 @@
       "output": {
         ".html": {
           "relative_path": "articles/QuickStart/index.html",
-          "hash": "wrI+qDD330Lfx8SpEcSrBA=="
+          "hash": "RO8V/uPoNzeo6/8hNubQbw=="
         }
       },
       "is_incremental": false,
@@ -4614,7 +4614,7 @@
       "output": {
         ".html": {
           "relative_path": "articles/ZptTutorial/Page2.html",
-          "hash": "fwOMNZlsjRJ9hjht/VQpSg=="
+          "hash": "SFurbwZkcHJeKyGsDGlh3g=="
         }
       },
       "is_incremental": false,
@@ -4626,7 +4626,19 @@
       "output": {
         ".html": {
           "relative_path": "articles/ZptTutorial/index.html",
-          "hash": "v3Z2WY8gyak3SIriaGWQ+g=="
+          "hash": "V0d49Q/z7EDUGa5jXCauiQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Toc",
+      "source_relative_path": "articles/ZptTutorial/toc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "articles/ZptTutorial/toc.html",
+          "hash": "ISWi65ppD4WIdIAyUOXgxw=="
         }
       },
       "is_incremental": false,
@@ -4638,7 +4650,7 @@
       "output": {
         ".html": {
           "relative_path": "articles/index.html",
-          "hash": "rwA7QAymvxz/bXVoMgjVng=="
+          "hash": "IiblHCJizev4QlS9xSvxoQ=="
         }
       },
       "is_incremental": false,

@@ -5,9 +5,9 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Page templates tutorial: Conditions &amp; repetition </title>
+    <title>Tutorial: Conditions &amp; repetition </title>
     <meta name="viewport" content="width=device-width">
-    <meta name="title" content="Page templates tutorial: Conditions &amp; repetition ">
+    <meta name="title" content="Tutorial: Conditions &amp; repetition ">
     <meta name="generator" content="docfx 2.56.6.0">
     
     <link rel="shortcut icon" href="../../favicon.ico">
@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="../../styles/docfx.css">
     <link rel="stylesheet" href="../../styles/main.css">
     <meta property="docfx:navrel" content="../../toc.html">
-    <meta property="docfx:tocrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
     
     
     
@@ -67,10 +67,10 @@
         <div class="article row grid-right">
           <div class="col-md-10">
             <article class="content wrap" id="_content" data-uid="">
-<h1 id="page-templates-tutorial-conditions--repetition">Page templates tutorial: Conditions &amp; repetition</h1>
+<h1 id="tutorial-conditions--repetition">Tutorial: Conditions &amp; repetition</h1>
 
 <p>In this step of the tutorial we will learn about the <code>tal:condition</code> and <code>tal:repeat</code> attributes and how they control the rendering of a document template.</p>
-<h2 id="talcondition-removes-an-element--descendents-if-the-expression-is-falsey"><code>tal:condition</code> removes an element &amp; descendents if the expression is <em>falsey</em></h2>
+<h2 id="talcondition-can-remove-an-element"><code>tal:condition</code> can remove an element</h2>
 <p>Let's make two changes to our one-page/one-model ZptSharp environment.
 First, let's add the following to the markup (just before the close of the <code>&lt;body&gt;</code> tag is fine):</p>
 <pre><code class="lang-html">&lt;div tal:condition=&quot;here/AmITruthy&quot;&gt;This renders if AmITruthy is true&lt;/div&gt;
@@ -85,12 +85,12 @@ When a <code>tal:condition</code> attribute removes an element it matters not if
 <p>You may experiment with different values for the <code>AmITruthy</code> model value to get a feel for what is considered 'truthy' and what is 'falsey'.
 As a start, <code>null</code> references and empty strings are falsey.
 A complete list of these may be found in the <a href="../ZptReference/Tal/Condition.md"><code>tal:condition</code> reference documentation</a>.</p>
-<h2 id="talrepeat-is-like-foreach-for-an-element--descendents"><code>tal:repeat</code> is like <code>foreach</code> for an element &amp; descendents</h2>
+<h2 id="talrepeat-is-like-foreach-for-an-element"><code>tal:repeat</code> is like <code>foreach</code> for an element</h2>
 <p>Let's make another change now, to both our document template and model.
 Let's add the following to the document:</p>
 <pre><code class="lang-html">&lt;ul&gt;
     &lt;li tal:repeat=&quot;food here/Foods&quot;&gt;
-        I like eating &lt;span tal:replace=&quot;food&quot;&gt;apples&lt;/span&gt;.
+        I &lt;em&gt;really like&lt;/em&gt; eating &lt;span tal:replace=&quot;food&quot;&gt;apples&lt;/span&gt;.
     &lt;/li&gt;
 &lt;/ul&gt;
 </code></pre>
@@ -106,7 +106,7 @@ Let's add the following to the document:</p>
 }
 </code></pre>
 <p>Let's render this; what we will see is that <code>tal:repeat</code> works a lot like a C# <code>foreach</code> statement.
-In this case we will see the <code>&lt;li&gt;</code> element repeated three times, once for each listed food.
+In this case we will see the <code>&lt;li&gt;</code> element <em>and all of its descendents</em> are repeated three times, once for each listed food.
 In each iteration a variable is created, named <code>food</code>, holding the value from the current iteration.
 We use this variable in a <code>tal:replace</code> attribute (as described in <a href="index.html">the previous tutorial page</a>) within the list item in order to show it on the rendered output.</p>
 <p>Just like the <code>foreach</code> keyword in C#, <code>tal:repeat</code> works on objects that are <code>IEnumerable</code>.</p>
