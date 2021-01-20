@@ -85,145 +85,68 @@ and returns the result as a stream.</p>
       <section><p>Factory for the creation of expression contexts.</p>
 </section>
       <h4><a class="xref" href="ZptSharp.Rendering.ExpressionContextIterativeProcessor.html">ExpressionContextIterativeProcessor</a></h4>
-      <section><p>An implementation of <a class="xref" href="ZptSharp.Rendering.IIterativelyProcessesExpressionContexts.html">IIterativelyProcessesExpressionContexts</a> which receives its
-<a class="xref" href="ZptSharp.Rendering.IProcessesExpressionContext.html">IProcessesExpressionContext</a> from the constructor.
-See also: <a class="xref" href="ZptSharp.Rendering.IGetsIterativeExpressionContextProcessor.html">IGetsIterativeExpressionContextProcessor</a> for a factory which may be
+      <section><p>An implementation of <span class="xref">ZptSharp.Rendering.IIterativelyProcessesExpressionContexts</span> which receives its
+<span class="xref">ZptSharp.Rendering.IProcessesExpressionContext</span> from the constructor.
+See also: <span class="xref">ZptSharp.Rendering.IGetsIterativeExpressionContextProcessor</span> for a factory which may be
 used to create instances of this type.</p>
 </section>
-      <h4><a class="xref" href="ZptSharp.Rendering.ExpressionContextProcessingResult.html">ExpressionContextProcessingResult</a></h4>
-      <section><p>Describes the result/outcome of an invocation of <a class="xref" href="ZptSharp.Rendering.IProcessesExpressionContext.html">IProcessesExpressionContext</a>.</p>
-</section>
-      <h4><a class="xref" href="ZptSharp.Rendering.FileSourceInfo.html">FileSourceInfo</a></h4>
-      <section><p>Implementation of <a class="xref" href="ZptSharp.Rendering.IDocumentSourceInfo.html">IDocumentSourceInfo</a> for a document which was retrieved from a file on disk.</p>
-</section>
       <h4><a class="xref" href="ZptSharp.Rendering.IterativeDocumentModifier.html">IterativeDocumentModifier</a></h4>
-      <section><p>A service which which makes use of an <a class="xref" href="ZptSharp.Rendering.IIterativelyProcessesExpressionContexts.html">IIterativelyProcessesExpressionContexts</a>
-in order to apply a <a class="xref" href="ZptSharp.Rendering.IProcessesExpressionContext.html">IProcessesExpressionContext</a> to every node exposed by a document.</p>
+      <section><p>A service which which makes use of an <span class="xref">ZptSharp.Rendering.IIterativelyProcessesExpressionContexts</span>
+in order to apply a <span class="xref">ZptSharp.Rendering.IProcessesExpressionContext</span> to every node exposed by a document.</p>
 </section>
       <h4><a class="xref" href="ZptSharp.Rendering.IterativeExpressionContextProcessorFactory.html">IterativeExpressionContextProcessorFactory</a></h4>
-      <section><p>A factory implementation which creates <a class="xref" href="ZptSharp.Rendering.IIterativelyProcessesExpressionContexts.html">IIterativelyProcessesExpressionContexts</a> using a
-specified implementation of <a class="xref" href="ZptSharp.Rendering.IProcessesExpressionContext.html">IProcessesExpressionContext</a>.</p>
+      <section><p>A factory implementation which creates <span class="xref">ZptSharp.Rendering.IIterativelyProcessesExpressionContexts</span> using a
+specified implementation of <span class="xref">ZptSharp.Rendering.IProcessesExpressionContext</span>.</p>
 </section>
       <h4><a class="xref" href="ZptSharp.Rendering.MetalDocumentModifierDecorator.html">MetalDocumentModifierDecorator</a></h4>
-      <section><p>Decorator for the interface <a class="xref" href="ZptSharp.Rendering.IModifiesDocument.html">IModifiesDocument</a> which handles
+      <section><p>Decorator for the interface <span class="xref">ZptSharp.Rendering.IModifiesDocument</span> which handles
 concerns relating to METAL.</p>
 </section>
-      <h4><a class="xref" href="ZptSharp.Rendering.NodeSourceInfo.html">NodeSourceInfo</a></h4>
-      <section><p>An object which encapsulates information about the source of a single DOM node.</p>
-</section>
       <h4><a class="xref" href="ZptSharp.Rendering.NoOpDocumentModifier.html">NoOpDocumentModifier</a></h4>
-      <section><p>A no-op implementation of <a class="xref" href="ZptSharp.Rendering.IModifiesDocument.html">IModifiesDocument</a> makes no change to the document.</p>
-</section>
-      <h4><a class="xref" href="ZptSharp.Rendering.OtherSourceInfo.html">OtherSourceInfo</a></h4>
-      <section><p>Implementation of <a class="xref" href="ZptSharp.Rendering.IDocumentSourceInfo.html">IDocumentSourceInfo</a> for a document which was retrieved from a location that may
-be identified, but is not a file on disk.</p>
+      <section><p>A no-op implementation of <span class="xref">ZptSharp.Rendering.IModifiesDocument</span> makes no change to the document.</p>
 </section>
       <h4><a class="xref" href="ZptSharp.Rendering.RemoveZptAttributesModifierDecorator.html">RemoveZptAttributesModifierDecorator</a></h4>
-      <section><p>Implementation of <a class="xref" href="ZptSharp.Rendering.IModifiesDocument.html">IModifiesDocument</a> which coordinates the removal
+      <section><p>Implementation of <span class="xref">ZptSharp.Rendering.IModifiesDocument</span> which coordinates the removal
 of ZPT-related nodes and attributes from a document.  This is essentially a
 clean-up process which strips processing directives from a document.</p>
 </section>
       <h4><a class="xref" href="ZptSharp.Rendering.SourceAnnotationDocumentModifierDecorator.html">SourceAnnotationDocumentModifierDecorator</a></h4>
-      <section><p>Implementation of <a class="xref" href="ZptSharp.Rendering.IModifiesDocument.html">IModifiesDocument</a> which adds source annotation
+      <section><p>Implementation of <span class="xref">ZptSharp.Rendering.IModifiesDocument</span> which adds source annotation
 to the document DOM where appropriate.  Source annotation is a debugging and logging
 aid which helps developers see where each part of the output DOM originates.</p>
 </section>
       <h4><a class="xref" href="ZptSharp.Rendering.TalDocumentModifierDecorator.html">TalDocumentModifierDecorator</a></h4>
-      <section><p>Implementation of <a class="xref" href="ZptSharp.Rendering.IModifiesDocument.html">IModifiesDocument</a> which handles TAL model-binding directives.</p>
-</section>
-      <h4><a class="xref" href="ZptSharp.Rendering.UnknownSourceInfo.html">UnknownSourceInfo</a></h4>
-      <section><p>Implementation of <a class="xref" href="ZptSharp.Rendering.IDocumentSourceInfo.html">IDocumentSourceInfo</a> for a document which has an unidentifiable source.</p>
+      <section><p>Implementation of <span class="xref">ZptSharp.Rendering.IModifiesDocument</span> which handles TAL model-binding directives.</p>
 </section>
       <h4><a class="xref" href="ZptSharp.Rendering.ZptCleanupContextProcessor.html">ZptCleanupContextProcessor</a></h4>
-      <section><p>An implementation of <a class="xref" href="ZptSharp.Rendering.IProcessesExpressionContext.html">IProcessesExpressionContext</a> which 'cleans up'
+      <section><p>An implementation of <span class="xref">ZptSharp.Rendering.IProcessesExpressionContext</span> which 'cleans up'
 ZPT markup from the rendered document.  This context processor would typically
 be executed last, in order to strip out all ZPT-related directives from a document
 which has already been processed.</p>
 </section>
       <h4><a class="xref" href="ZptSharp.Rendering.ZptCleanupContextProcessorFactory.html">ZptCleanupContextProcessorFactory</a></h4>
-      <section><p>Implementation of <a class="xref" href="ZptSharp.Rendering.IGetsZptNodeAndAttributeRemovalContextProcessor.html">IGetsZptNodeAndAttributeRemovalContextProcessor</a> which returns
+      <section><p>Implementation of <span class="xref">ZptSharp.Rendering.IGetsZptNodeAndAttributeRemovalContextProcessor</span> which returns
 a context processor suitable for performing cleanup on a rendered document.</p>
 </section>
       <h4><a class="xref" href="ZptSharp.Rendering.ZptDocumentModifierFactory.html">ZptDocumentModifierFactory</a></h4>
-      <section><p>An implementation of <a class="xref" href="ZptSharp.Rendering.IGetsDocumentModifier.html">IGetsDocumentModifier</a> which assembles an instance of
-<a class="xref" href="ZptSharp.Rendering.IModifiesDocument.html">IModifiesDocument</a> using the decorator pattern.  Each implementation of the service
+      <section><p>An implementation of <span class="xref">ZptSharp.Rendering.IGetsDocumentModifier</span> which assembles an instance of
+<span class="xref">ZptSharp.Rendering.IModifiesDocument</span> using the decorator pattern.  Each implementation of the service
 wraps another, augmenting its functionality.</p>
 </section>
       <h4><a class="xref" href="ZptSharp.Rendering.ZptDocumentRenderer.html">ZptDocumentRenderer</a></h4>
       <section><p>A service which coordinates the process of rendering a ZPT document.</p>
 </section>
       <h4><a class="xref" href="ZptSharp.Rendering.ZptDocumentRendererFactory.html">ZptDocumentRendererFactory</a></h4>
-      <section><p>A factory which creates instances of <a class="xref" href="ZptSharp.Rendering.EffectiveConfigSettingZptDocumentRendererDecorator.html">EffectiveConfigSettingZptDocumentRendererDecorator</a> from a <a class="xref" href="ZptSharp.Config.RenderingConfig.html">RenderingConfig</a>
-and optionally a <span class="xref">System.Type</span> which indicates the <a class="xref" href="ZptSharp.Dom.IReadsAndWritesDocument.html">IReadsAndWritesDocument</a> to
+      <section><p>A factory which creates instances of <a class="xref" href="ZptSharp.Rendering.EffectiveConfigSettingZptDocumentRendererDecorator.html">EffectiveConfigSettingZptDocumentRendererDecorator</a> from a <span class="xref">ZptSharp.Config.RenderingConfig</span>
+and optionally a <span class="xref">System.Type</span> which indicates the <span class="xref">ZptSharp.Dom.IReadsAndWritesDocument</span> to
 be used.</p>
 </section>
       <h4><a class="xref" href="ZptSharp.Rendering.ZptDocumentRendererForFilePathFactory.html">ZptDocumentRendererForFilePathFactory</a></h4>
-      <section><p>Implementation of <a class="xref" href="ZptSharp.Rendering.IGetsZptDocumentRendererForFilePath.html">IGetsZptDocumentRendererForFilePath</a> which uses a file path to
-get a suitable implementation of <a class="xref" href="ZptSharp.IRendersZptDocument.html">IRendersZptDocument</a>.</p>
+      <section><p>Implementation of <span class="xref">ZptSharp.Rendering.IGetsZptDocumentRendererForFilePath</span> which uses a file path to
+get a suitable implementation of <span class="xref">ZptSharp.IRendersZptDocument</span>.</p>
 </section>
       <h4><a class="xref" href="ZptSharp.Rendering.ZptRequestLoggingScope.html">ZptRequestLoggingScope</a></h4>
       <section><p>A type to represent the logging scope for a single ZPT rendering request.</p>
-</section>
-    <h3 id="interfaces">Interfaces
-  </h3>
-      <h4><a class="xref" href="ZptSharp.Rendering.IDocumentSourceInfo.html">IDocumentSourceInfo</a></h4>
-      <section><p>Describes the source of an <a class="xref" href="ZptSharp.Dom.IDocument.html">IDocument</a>, usable for
-debugging, diagnostic or informational purposes.</p>
-</section>
-      <h4><a class="xref" href="ZptSharp.Rendering.IGetsChildExpressionContexts.html">IGetsChildExpressionContexts</a></h4>
-      <section><p>A service which gets a collection of child expression contexts from a specified context.</p>
-</section>
-      <h4><a class="xref" href="ZptSharp.Rendering.IGetsDocumentModifier.html">IGetsDocumentModifier</a></h4>
-      <section><p>An object which can get an instance of <a class="xref" href="ZptSharp.Rendering.IModifiesDocument.html">IModifiesDocument</a>, suitable for use
-with a specified rendering request.</p>
-</section>
-      <h4><a class="xref" href="ZptSharp.Rendering.IGetsIterativeExpressionContextProcessor.html">IGetsIterativeExpressionContextProcessor</a></h4>
-      <section><p>A factory service for creating instances of <a class="xref" href="ZptSharp.Rendering.IIterativelyProcessesExpressionContexts.html">IIterativelyProcessesExpressionContexts</a> which
-use a custom expression context processor.</p>
-</section>
-      <h4><a class="xref" href="ZptSharp.Rendering.IGetsRootExpressionContext.html">IGetsRootExpressionContext</a></h4>
-      <section><p>A service which creates the root <a class="xref" href="ZptSharp.Expressions.ExpressionContext.html">ExpressionContext</a> for a document and rendering request.</p>
-</section>
-      <h4><a class="xref" href="ZptSharp.Rendering.IGetsZptDocumentRenderer.html">IGetsZptDocumentRenderer</a></h4>
-      <section><p>An object which may get an instance of <a class="xref" href="ZptSharp.IRendersZptDocument.html">IRendersZptDocument</a> for a
-specified implementation of <a class="xref" href="ZptSharp.Dom.IReadsAndWritesDocument.html">IReadsAndWritesDocument</a>.</p>
-</section>
-      <h4><a class="xref" href="ZptSharp.Rendering.IGetsZptDocumentRendererForFilePath.html">IGetsZptDocumentRendererForFilePath</a></h4>
-      <section><p>An object which may get an instance of <a class="xref" href="ZptSharp.IRendersZptDocument.html">IRendersZptDocument</a> for a
-specified file path.</p>
-</section>
-      <h4><a class="xref" href="ZptSharp.Rendering.IGetsZptNodeAndAttributeRemovalContextProcessor.html">IGetsZptNodeAndAttributeRemovalContextProcessor</a></h4>
-      <section><p>An object which gets an implementation of <a class="xref" href="ZptSharp.Rendering.IProcessesExpressionContext.html">IProcessesExpressionContext</a> which will remove
-ZPT nodes and attributes from a DOM context.</p>
-</section>
-      <h4><a class="xref" href="ZptSharp.Rendering.IHandlesProcessingError.html">IHandlesProcessingError</a></h4>
-      <section><p>A specialisation of <a class="xref" href="ZptSharp.Rendering.IProcessesExpressionContext.html">IProcessesExpressionContext</a> which is able to handle errors
-during the rendering process.</p>
-</section>
-      <h4><a class="xref" href="ZptSharp.Rendering.IHasContainer.html">IHasContainer</a></h4>
-      <section><p>An object which has a parent/container object.</p>
-</section>
-      <h4><a class="xref" href="ZptSharp.Rendering.IIterativelyModifiesDocument.html">IIterativelyModifiesDocument</a></h4>
-      <section><p>An object which uses an expression-context iterator to iteratively make
-alterations to the document, on a context-by-context basis.</p>
-</section>
-      <h4><a class="xref" href="ZptSharp.Rendering.IIterativelyProcessesExpressionContexts.html">IIterativelyProcessesExpressionContexts</a></h4>
-      <section><p>A service which iterates over expression contexts, beginning with a single context and executing a process
-over every one of its children.
-See also: <a class="xref" href="ZptSharp.Rendering.IGetsIterativeExpressionContextProcessor.html">IGetsIterativeExpressionContextProcessor</a> for a factory which may be
-used to create instances of this type.</p>
-</section>
-      <h4><a class="xref" href="ZptSharp.Rendering.IModifiesDocument.html">IModifiesDocument</a></h4>
-      <section><p>A service which coordinates and performs the modifications to a document before
-it is ready to be output.</p>
-</section>
-      <h4><a class="xref" href="ZptSharp.Rendering.IProcessesExpressionContext.html">IProcessesExpressionContext</a></h4>
-      <section><p>A service which processes a single expression context and applies some processing rules.</p>
-</section>
-    <h3 id="enums">Enums
-  </h3>
-      <h4><a class="xref" href="ZptSharp.Rendering.TagType.html">TagType</a></h4>
-      <section><p>Enumerates the types of DOM node tags.</p>
 </section>
 </article>
           </div>

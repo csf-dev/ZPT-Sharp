@@ -9,7 +9,7 @@
       "output": {
         ".html": {
           "relative_path": "api/ZptSharp.AngleSharpHostingBuilderExtensions.html",
-          "hash": "Cb4ZBNwaOZ7pYugBcJGL/A=="
+          "hash": "BoVS9EUojQgBrRe8aC+rnw=="
         }
       },
       "is_incremental": false,
@@ -21,43 +21,7 @@
       "output": {
         ".html": {
           "relative_path": "api/ZptSharp.BulkRendering.BulkFileRenderer.html",
-          "hash": "SdBqC1EbJ7bjFwTITQ6wJA=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/ZptSharp.BulkRendering.BulkRenderingException.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/ZptSharp.BulkRendering.BulkRenderingException.html",
-          "hash": "0MksRxogMgymyZF2c4r88A=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/ZptSharp.BulkRendering.BulkRenderingFileResult.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/ZptSharp.BulkRendering.BulkRenderingFileResult.html",
-          "hash": "BJEo9ki2B8kJMCQrWr0VWA=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/ZptSharp.BulkRendering.BulkRenderingRequest.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/ZptSharp.BulkRendering.BulkRenderingRequest.html",
-          "hash": "hKdfvyh3Vqm3Co5YMfC2hA=="
+          "hash": "1ZGwO/OROatj1kBG2YE84A=="
         }
       },
       "is_incremental": false,
@@ -69,19 +33,7 @@
       "output": {
         ".html": {
           "relative_path": "api/ZptSharp.BulkRendering.BulkRenderingRequestValidator.html",
-          "hash": "mS9r73G93eRWeqtMuQSKEg=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/ZptSharp.BulkRendering.BulkRenderingResult.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/ZptSharp.BulkRendering.BulkRenderingResult.html",
-          "hash": "dF0MRM4PyPSLwCKw1Rxq0Q=="
+          "hash": "XcJr20JeXDhrRDbW/XEA0w=="
         }
       },
       "is_incremental": false,
@@ -93,7 +45,7 @@
       "output": {
         ".html": {
           "relative_path": "api/ZptSharp.BulkRendering.FileRendererAndSaver.html",
-          "hash": "flA9ftjHKIVCdga7pjzljg=="
+          "hash": "Q58huIj8wZJaOiaDhus4Fw=="
         }
       },
       "is_incremental": false,
@@ -105,7 +57,7 @@
       "output": {
         ".html": {
           "relative_path": "api/ZptSharp.BulkRendering.IGetsInputFiles.html",
-          "hash": "X1qVI3B7DJ2yq3Za/0o71A=="
+          "hash": "Q45mU1OB/WKwHXWX7gh4Xw=="
         }
       },
       "is_incremental": false,
@@ -117,19 +69,7 @@
       "output": {
         ".html": {
           "relative_path": "api/ZptSharp.BulkRendering.IRendersInputFile.html",
-          "hash": "/S/wHzHCH+0NOLNSgE7/ow=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/ZptSharp.BulkRendering.IRendersManyFiles.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/ZptSharp.BulkRendering.IRendersManyFiles.html",
-          "hash": "S+Tanb4jpthZJN6f4uERFg=="
+          "hash": "AE03srMgBtCYvkcLoTdZ0A=="
         }
       },
       "is_incremental": false,
@@ -141,7 +81,7 @@
       "output": {
         ".html": {
           "relative_path": "api/ZptSharp.BulkRendering.IValidatesBulkRenderingRequest.html",
-          "hash": "ppdJmbx2iMhE215G3MMGXg=="
+          "hash": "Fs6GgBZYXCc9vjWYjfRTHg=="
         }
       },
       "is_incremental": false,
@@ -153,7 +93,7 @@
       "output": {
         ".html": {
           "relative_path": "api/ZptSharp.BulkRendering.InputFile.html",
-          "hash": "NmR/xTEpj1yJVLBnbwglog=="
+          "hash": "ELVIv7bz2zM8dvhkQv16Nw=="
         }
       },
       "is_incremental": false,
@@ -165,7 +105,7 @@
       "output": {
         ".html": {
           "relative_path": "api/ZptSharp.BulkRendering.InputFilesProvider.html",
-          "hash": "jN0EefJVDeicFp9VIZpXzA=="
+          "hash": "O8uHCSKQDJylttIfYrPwRg=="
         }
       },
       "is_incremental": false,
@@ -177,7 +117,7 @@
       "output": {
         ".html": {
           "relative_path": "api/ZptSharp.BulkRendering.html",
-          "hash": "ctcrXObwzHBWvQAKM/B+gQ=="
+          "hash": "XBHv6mgYKPAfaFjHZcvw/Q=="
         }
       },
       "is_incremental": false,
@@ -189,7 +129,7 @@
       "output": {
         ".html": {
           "relative_path": "api/ZptSharp.CSharpHostingBuilderExtensions.html",
-          "hash": "QNTOOod6fghYDtFyLCF83w=="
+          "hash": "ck/wU+GmPs3712/qw2apIg=="
         }
       },
       "is_incremental": false,
@@ -201,7 +141,7 @@
       "output": {
         ".html": {
           "relative_path": "api/ZptSharp.Cli.Application.html",
-          "hash": "pwvBroB27+qNnNAt0VwhrA=="
+          "hash": "HPPtSCd0AkGS5CN1BOQV1A=="
         }
       },
       "is_incremental": false,
@@ -213,7 +153,7 @@
       "output": {
         ".html": {
           "relative_path": "api/ZptSharp.Cli.BulkRenderingRequestFactory.html",
-          "hash": "PcdcyswBI85oIP8QX0ZBKw=="
+          "hash": "iZCwdYrgd5RMSyiCNAp+Xw=="
         }
       },
       "is_incremental": false,
@@ -249,7 +189,7 @@
       "output": {
         ".html": {
           "relative_path": "api/ZptSharp.Cli.IGetsBulkRenderingRequest.html",
-          "hash": "legGChtwl0ziGGw0wTKsDg=="
+          "hash": "onan/rFqfj+XZfakzZzsfw=="
         }
       },
       "is_incremental": false,
@@ -297,7 +237,7 @@
       "output": {
         ".html": {
           "relative_path": "api/ZptSharp.Cli.ServiceConfigurator.html",
-          "hash": "XDekhqUmuQDOSPtfNjNnxQ=="
+          "hash": "WB/M0itz0OZCosjwWqoZ3w=="
         }
       },
       "is_incremental": false,
@@ -309,19 +249,7 @@
       "output": {
         ".html": {
           "relative_path": "api/ZptSharp.Cli.html",
-          "hash": "JPwmfy5vhTJ8WofuYresOQ=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/ZptSharp.Config.IGetsRootContextBuilder.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/ZptSharp.Config.IGetsRootContextBuilder.html",
-          "hash": "ahxzVSdqhxSCpA8JyuyS+A=="
+          "hash": "rUYJUP6D0ZjPTWknVXwWBg=="
         }
       },
       "is_incremental": false,
@@ -333,31 +261,7 @@
       "output": {
         ".html": {
           "relative_path": "api/ZptSharp.Config.IStoresCurrentRenderingConfig.html",
-          "hash": "lWv2oy4kwHvYjbaH87UOIw=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/ZptSharp.Config.RenderingConfig.Builder.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/ZptSharp.Config.RenderingConfig.Builder.html",
-          "hash": "8jhVCjhSzCd3Dhim1bhESA=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/ZptSharp.Config.RenderingConfig.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/ZptSharp.Config.RenderingConfig.html",
-          "hash": "dcC2Dvg/IeYFy277e9+n2A=="
+          "hash": "eDfAnVFwesnsJu/9yxcJKg=="
         }
       },
       "is_incremental": false,
@@ -369,7 +273,7 @@
       "output": {
         ".html": {
           "relative_path": "api/ZptSharp.Config.html",
-          "hash": "GEHFHDwWp7wNTCzCFiXsbA=="
+          "hash": "Kn8rA85qoUWtBlfUgzazjw=="
         }
       },
       "is_incremental": false,
@@ -381,7 +285,7 @@
       "output": {
         ".html": {
           "relative_path": "api/ZptSharp.Dom.AngleSharpAttribute.html",
-          "hash": "A8q1/1BbmhYqRNPX60G8Kg=="
+          "hash": "BF6Gp2xDdN0mE2qIyh3qNw=="
         }
       },
       "is_incremental": false,
@@ -393,7 +297,7 @@
       "output": {
         ".html": {
           "relative_path": "api/ZptSharp.Dom.AngleSharpDocument.html",
-          "hash": "JPjC3SSHldU/+mGn0e8myg=="
+          "hash": "9m1zYawTG200qlzjHqMuWg=="
         }
       },
       "is_incremental": false,
@@ -405,7 +309,7 @@
       "output": {
         ".html": {
           "relative_path": "api/ZptSharp.Dom.AngleSharpDocumentProvider.html",
-          "hash": "SKJlx0pB7OoX7+qF+4QwGQ=="
+          "hash": "vjyxDcWE7Hhb+JrXXQw8Og=="
         }
       },
       "is_incremental": false,
@@ -417,19 +321,7 @@
       "output": {
         ".html": {
           "relative_path": "api/ZptSharp.Dom.AngleSharpNode.html",
-          "hash": "gAK/XLOSBIVhjiO4ky5grQ=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/ZptSharp.Dom.AttributeBase.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/ZptSharp.Dom.AttributeBase.html",
-          "hash": "QDnpZCTAjN0XhVvYE9mFmA=="
+          "hash": "9pH8rh0pNODIa3BJZDdZWQ=="
         }
       },
       "is_incremental": false,
@@ -441,43 +333,7 @@
       "output": {
         ".html": {
           "relative_path": "api/ZptSharp.Dom.AttributeSearcher.html",
-          "hash": "kh4pZ8otKQw3J/MmFrwRMg=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/ZptSharp.Dom.AttributeSpec.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/ZptSharp.Dom.AttributeSpec.html",
-          "hash": "pz2ScDe9aHim5knzmcd5OA=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/ZptSharp.Dom.DocumentBase.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/ZptSharp.Dom.DocumentBase.html",
-          "hash": "TGjRh1U2833OAG7Dri8bIw=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/ZptSharp.Dom.DocumentReaderWriterBase-1.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/ZptSharp.Dom.DocumentReaderWriterBase-1.html",
-          "hash": "tdoeeMsziJ+4Nt131eMyww=="
+          "hash": "j/HkOXplP6L6igf40pdajg=="
         }
       },
       "is_incremental": false,
@@ -489,7 +345,7 @@
       "output": {
         ".html": {
           "relative_path": "api/ZptSharp.Dom.DocumentReaderWriterRegistry.html",
-          "hash": "c/ENLXT/wMTCJnhq/ozJig=="
+          "hash": "YG+jXIy9jQl/hfzv72dzsQ=="
         }
       },
       "is_incremental": false,
@@ -501,7 +357,7 @@
       "output": {
         ".html": {
           "relative_path": "api/ZptSharp.Dom.HapAttribute.html",
-          "hash": "kPYEzvcjNCCmQCwvLib4FQ=="
+          "hash": "SbdQoTX6NixnkKrkdvXnOg=="
         }
       },
       "is_incremental": false,
@@ -513,7 +369,7 @@
       "output": {
         ".html": {
           "relative_path": "api/ZptSharp.Dom.HapDocument.html",
-          "hash": "AmlLq4Pu7PVdQh57t27nKA=="
+          "hash": "YtFBRWTuvLQkTMybhKEx1g=="
         }
       },
       "is_incremental": false,
@@ -525,7 +381,7 @@
       "output": {
         ".html": {
           "relative_path": "api/ZptSharp.Dom.HapDocumentProvider.html",
-          "hash": "ZGuKH+E71EE1jPK9j99s5A=="
+          "hash": "hLLuqRDoqovf70p3QVl5VA=="
         }
       },
       "is_incremental": false,
@@ -537,67 +393,7 @@
       "output": {
         ".html": {
           "relative_path": "api/ZptSharp.Dom.HapNode.html",
-          "hash": "pgSph0LvthbKEplw27NaBA=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/ZptSharp.Dom.IAttribute.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/ZptSharp.Dom.IAttribute.html",
-          "hash": "XqiV1O6F3BA0lmTFhf+0Hg=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/ZptSharp.Dom.ICanReplaceRootNode.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/ZptSharp.Dom.ICanReplaceRootNode.html",
-          "hash": "6jux6OAPZQZbr7VQ8/vGYg=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/ZptSharp.Dom.IDocument.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/ZptSharp.Dom.IDocument.html",
-          "hash": "WxnS5EVn4eec/qPAYSlJAg=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/ZptSharp.Dom.IGetsDocumentReaderWriterForFile.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/ZptSharp.Dom.IGetsDocumentReaderWriterForFile.html",
-          "hash": "VunrL59ZaCwrlDB8gUxLAw=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/ZptSharp.Dom.IGetsWellKnownNamespace.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/ZptSharp.Dom.IGetsWellKnownNamespace.html",
-          "hash": "KjHWqTAmsBt8Y9egRtaHnw=="
+          "hash": "ckNsX682QGgZli8+c9HoGQ=="
         }
       },
       "is_incremental": false,
@@ -629,119 +425,11 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/ZptSharp.Dom.IHasDocumentSourceInfo.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/ZptSharp.Dom.IHasDocumentSourceInfo.html",
-          "hash": "10Z24swKcAjsZK9m+Ssotw=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/ZptSharp.Dom.IHasNodes.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/ZptSharp.Dom.IHasNodes.html",
-          "hash": "sqYC9XLsUJsNFNqJvLWJug=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/ZptSharp.Dom.INode.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/ZptSharp.Dom.INode.html",
-          "hash": "D99D89lYoLH35f7+bFGmMA=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/ZptSharp.Dom.IOmitsNode.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/ZptSharp.Dom.IOmitsNode.html",
-          "hash": "+k8sr9SEKlVmXHARODPyCw=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/ZptSharp.Dom.IReadsAndWritesDocument.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/ZptSharp.Dom.IReadsAndWritesDocument.html",
-          "hash": "vvL3RKw5E6eDfejwmYbOSw=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/ZptSharp.Dom.IReplacesNode.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/ZptSharp.Dom.IReplacesNode.html",
-          "hash": "stY7Ow+HI8Ku7TitKV7UhQ=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/ZptSharp.Dom.ISearchesForAttributes.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/ZptSharp.Dom.ISearchesForAttributes.html",
-          "hash": "jpGW6lrhhr68sRNryOB7kA=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
       "source_relative_path": "api/ZptSharp.Dom.IStoresCurrentReaderWriter.yml",
       "output": {
         ".html": {
           "relative_path": "api/ZptSharp.Dom.IStoresCurrentReaderWriter.html",
-          "hash": "iqH2G1om0iCh58+DnqZ9BA=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/ZptSharp.Dom.Namespace.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/ZptSharp.Dom.Namespace.html",
-          "hash": "3Zt8Ka7vXGoVKZgQwCcIOQ=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/ZptSharp.Dom.NodeBase.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/ZptSharp.Dom.NodeBase.html",
-          "hash": "3j73qh9buWLgpoQ3ZXlk6w=="
+          "hash": "AlqQq7i24nhmAi6Tm5aGGQ=="
         }
       },
       "is_incremental": false,
@@ -753,7 +441,7 @@
       "output": {
         ".html": {
           "relative_path": "api/ZptSharp.Dom.NodeExtensions.html",
-          "hash": "EZ1bmK3fnYrW185ToAWTzA=="
+          "hash": "A+YDluMsv1QN6YkUGXraqg=="
         }
       },
       "is_incremental": false,
@@ -765,7 +453,7 @@
       "output": {
         ".html": {
           "relative_path": "api/ZptSharp.Dom.NodeOmitter.html",
-          "hash": "wFzKyUONTOk4JjUFaKKn6Q=="
+          "hash": "6fkGd+bRc72b9OaNwN1ryw=="
         }
       },
       "is_incremental": false,
@@ -777,7 +465,7 @@
       "output": {
         ".html": {
           "relative_path": "api/ZptSharp.Dom.NodeReplacer.html",
-          "hash": "UclAuUTiqNfkvWat+HkZ5w=="
+          "hash": "ojOPSjlc2s3XfPjyc2erBQ=="
         }
       },
       "is_incremental": false,
@@ -789,7 +477,7 @@
       "output": {
         ".html": {
           "relative_path": "api/ZptSharp.Dom.NodeReplacerExtensions.html",
-          "hash": "wwDv7t/VbIBMsMQi6vSzLw=="
+          "hash": "z0+cpR8H1SYWmyS8TzQ4Bg=="
         }
       },
       "is_incremental": false,
@@ -801,7 +489,7 @@
       "output": {
         ".html": {
           "relative_path": "api/ZptSharp.Dom.ReaderWriterServiceLocator.html",
-          "hash": "n0D6KGPJNTBF3KbETO3orA=="
+          "hash": "Q7kQN5ydJCrvuScLgXPtiA=="
         }
       },
       "is_incremental": false,
@@ -837,7 +525,7 @@
       "output": {
         ".html": {
           "relative_path": "api/ZptSharp.Dom.WellKnownNamespaceProvider.html",
-          "hash": "CwhjxRANQI6k37LWJNcAcA=="
+          "hash": "hGhblrpFginTZp8FOY4FBQ=="
         }
       },
       "is_incremental": false,
@@ -861,7 +549,7 @@
       "output": {
         ".html": {
           "relative_path": "api/ZptSharp.Dom.XmlAttribute.html",
-          "hash": "b4zFDxCWRiCyf5I/nyrakw=="
+          "hash": "jaACFxttISBxbuBebCe9gw=="
         }
       },
       "is_incremental": false,
@@ -873,7 +561,7 @@
       "output": {
         ".html": {
           "relative_path": "api/ZptSharp.Dom.XmlDocument.html",
-          "hash": "ILnUWTHm44E0F8xqEXMn2A=="
+          "hash": "cJtd1SzOfUa0gjQT23v34w=="
         }
       },
       "is_incremental": false,
@@ -885,7 +573,7 @@
       "output": {
         ".html": {
           "relative_path": "api/ZptSharp.Dom.XmlDocumentProvider.html",
-          "hash": "Fbkhguoajks6gRHvHWl3dQ=="
+          "hash": "d4bLCEobFAzuCdF99GXTXA=="
         }
       },
       "is_incremental": false,
@@ -897,7 +585,7 @@
       "output": {
         ".html": {
           "relative_path": "api/ZptSharp.Dom.XmlNode.html",
-          "hash": "Z3LSGizkmBx3Z804KfSRNA=="
+          "hash": "4wHdAa5ryYeK9z0KPzHnYw=="
         }
       },
       "is_incremental": false,
@@ -921,19 +609,7 @@
       "output": {
         ".html": {
           "relative_path": "api/ZptSharp.Dom.html",
-          "hash": "3F9A80n/Yl+kuwoaIidIqA=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/ZptSharp.Expressions.AbortZptActionToken.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/ZptSharp.Expressions.AbortZptActionToken.html",
-          "hash": "kRvNIhNDPR63DEHyo/H1bQ=="
+          "hash": "8phcXY1k7nxSsWpKWgOYvA=="
         }
       },
       "is_incremental": false,
@@ -945,7 +621,7 @@
       "output": {
         ".html": {
           "relative_path": "api/ZptSharp.Expressions.AlphabeticValueGenerator.html",
-          "hash": "M7EJOhNOYfrpi0w4R5uHYA=="
+          "hash": "Ba78Mp4yoXDRYf3NUvOvLw=="
         }
       },
       "is_incremental": false,
@@ -957,7 +633,7 @@
       "output": {
         ".html": {
           "relative_path": "api/ZptSharp.Expressions.BuiltinContextsProvider.html",
-          "hash": "ff22Y5tKk/fUhTd3T1eAMg=="
+          "hash": "sWv4w6Zcup1MICEkEHJnEg=="
         }
       },
       "is_incremental": false,
@@ -969,7 +645,7 @@
       "output": {
         ".html": {
           "relative_path": "api/ZptSharp.Expressions.BuiltinContextsProviderFactory.html",
-          "hash": "xLetdse7b4TGLexVN/uaGQ=="
+          "hash": "xYEXkRb/AiZV5TTyOZM5Xg=="
         }
       },
       "is_incremental": false,
@@ -993,7 +669,7 @@
       "output": {
         ".html": {
           "relative_path": "api/ZptSharp.Expressions.CSharpExpressions.AssemblyReferenceEvaluator.html",
-          "hash": "y51gZ6qaUQEBIU8uhd5Jjw=="
+          "hash": "i8E2Don4FIGjzS5TfznFzg=="
         }
       },
       "is_incremental": false,
@@ -1005,7 +681,7 @@
       "output": {
         ".html": {
           "relative_path": "api/ZptSharp.Expressions.CSharpExpressions.CSharpEvaluationException.html",
-          "hash": "+1Pi3LjpYCozPAVx1umIFA=="
+          "hash": "XDH67vmtRbGKUAwYYITWwA=="
         }
       },
       "is_incremental": false,
@@ -1029,7 +705,7 @@
       "output": {
         ".html": {
           "relative_path": "api/ZptSharp.Expressions.CSharpExpressions.CSharpExpressionEvaluator.html",
-          "hash": "XRoL0OFIsR4u0mo5SPI2wg=="
+          "hash": "5VgQcmLjR6pIgdZnwVd3Ew=="
         }
       },
       "is_incremental": false,
@@ -1185,7 +861,7 @@
       "output": {
         ".html": {
           "relative_path": "api/ZptSharp.Expressions.CSharpExpressions.UsingNamespaceEvaluator.html",
-          "hash": "Ukq7sc5kj2aSOoQfGc+5nQ=="
+          "hash": "TCxBdf8uwGtTujJpn8iyoQ=="
         }
       },
       "is_incremental": false,
@@ -1209,7 +885,7 @@
       "output": {
         ".html": {
           "relative_path": "api/ZptSharp.Expressions.CSharpExpressions.VariableTypeEvaluator.html",
-          "hash": "f0sVt6cq/zgmXed9vTc+8g=="
+          "hash": "ZxzZao8rVDT6XgBAurd4nA=="
         }
       },
       "is_incremental": false,
@@ -1221,7 +897,7 @@
       "output": {
         ".html": {
           "relative_path": "api/ZptSharp.Expressions.CSharpExpressions.html",
-          "hash": "qE0yxWeeFoJtRAD/YMOWuA=="
+          "hash": "q/MZZQVeGoVa2Ax0KqdnTQ=="
         }
       },
       "is_incremental": false,
@@ -1233,7 +909,7 @@
       "output": {
         ".html": {
           "relative_path": "api/ZptSharp.Expressions.ConfiguredDefaultExpressionTypeDecorator.html",
-          "hash": "PxTyeqsm93lJxQWn5I2ngw=="
+          "hash": "g3K7djCLyf3G2M7cJgB3pw=="
         }
       },
       "is_incremental": false,
@@ -1245,7 +921,7 @@
       "output": {
         ".html": {
           "relative_path": "api/ZptSharp.Expressions.ContextAllVariablesAndValuesProvider.html",
-          "hash": "0YgamqH9WpTtszC2bPvwXw=="
+          "hash": "CCHKwrMTcLWWpfF9/xKzOg=="
         }
       },
       "is_incremental": false,
@@ -1257,43 +933,7 @@
       "output": {
         ".html": {
           "relative_path": "api/ZptSharp.Expressions.DefinedVariablesOnlyTalesValueForExpressionContextAdapter.html",
-          "hash": "o2AaV9G/ljT5BnFstbSu1g=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/ZptSharp.Expressions.ErrorHandlingContext.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/ZptSharp.Expressions.ErrorHandlingContext.html",
-          "hash": "ngdhiw8LMVSi6Lhb9y5/pg=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/ZptSharp.Expressions.ErrorHandlingResult.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/ZptSharp.Expressions.ErrorHandlingResult.html",
-          "hash": "MEC04lqb7XXXnelgP0U6BA=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/ZptSharp.Expressions.EvaluationException.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/ZptSharp.Expressions.EvaluationException.html",
-          "hash": "D6cP+Ks+PdTmWrhmuvxmFA=="
+          "hash": "yUSTIIC6xh74Lv8UIDKk2g=="
         }
       },
       "is_incremental": false,
@@ -1305,7 +945,7 @@
       "output": {
         ".html": {
           "relative_path": "api/ZptSharp.Expressions.EvaluatorTypeRegistry.html",
-          "hash": "ef1r24qspS6wUt2EcvubXA=="
+          "hash": "8fhNyOxwC+lo11d1y1vZCg=="
         }
       },
       "is_incremental": false,
@@ -1317,19 +957,7 @@
       "output": {
         ".html": {
           "relative_path": "api/ZptSharp.Expressions.EvaluatorTypeResolver.html",
-          "hash": "7YouGvUwWO27F5VUdTXcow=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/ZptSharp.Expressions.ExpressionContext.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/ZptSharp.Expressions.ExpressionContext.html",
-          "hash": "Z/iUBVl3BMrnoA/A3Fjs4g=="
+          "hash": "kpSefQx56epnNGyuL18cQg=="
         }
       },
       "is_incremental": false,
@@ -1341,7 +969,7 @@
       "output": {
         ".html": {
           "relative_path": "api/ZptSharp.Expressions.ExpressionContextExtensions.html",
-          "hash": "Bsz20UrBOi+BFD5C6tlhZw=="
+          "hash": "dyapICp/jmg3b2etI4SFBg=="
         }
       },
       "is_incremental": false,
@@ -1353,7 +981,7 @@
       "output": {
         ".html": {
           "relative_path": "api/ZptSharp.Expressions.ExpressionEvaluatorExtensions.html",
-          "hash": "49avBdfZ3G4HnHtrNSd4wQ=="
+          "hash": "XaCgzQWgAwQUfOzqveX7Ag=="
         }
       },
       "is_incremental": false,
@@ -1365,19 +993,7 @@
       "output": {
         ".html": {
           "relative_path": "api/ZptSharp.Expressions.ExpressionTypeProviderFactory.html",
-          "hash": "XeLU3UCuS7c06eUfgicg/A=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/ZptSharp.Expressions.GetValueResult.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/ZptSharp.Expressions.GetValueResult.html",
-          "hash": "CQxZeFzMYWugwRt0QEgj9Q=="
+          "hash": "VQDnVEyOG1KH6p81g5pAUw=="
         }
       },
       "is_incremental": false,
@@ -1389,43 +1005,7 @@
       "output": {
         ".html": {
           "relative_path": "api/ZptSharp.Expressions.GlobalVariablesOnlyTalesValueForExpressionContextAdapter.html",
-          "hash": "0HEFnFDIkksQdHeT4Tn0Yg=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/ZptSharp.Expressions.IEvaluatesExpression.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/ZptSharp.Expressions.IEvaluatesExpression.html",
-          "hash": "Fq7ttwpCIxfyF3VgzzBMrQ=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/ZptSharp.Expressions.IGetsAllVariablesFromContext.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/ZptSharp.Expressions.IGetsAllVariablesFromContext.html",
-          "hash": "N9QewLl9z5pvIZiuvmw+aw=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/ZptSharp.Expressions.IGetsAlphabeticValueForNumber.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/ZptSharp.Expressions.IGetsAlphabeticValueForNumber.html",
-          "hash": "xgIEghXOn6WTp4J+KhQyRg=="
+          "hash": "MeX4sgYAEyaf/+My3wpOzQ=="
         }
       },
       "is_incremental": false,
@@ -1437,103 +1017,7 @@
       "output": {
         ".html": {
           "relative_path": "api/ZptSharp.Expressions.IGetsBuiltinContextsProvider.html",
-          "hash": "1/YfKYcnUqNrzrGrHcLwgg=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/ZptSharp.Expressions.IGetsDictionaryOfNamedTalesValues.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/ZptSharp.Expressions.IGetsDictionaryOfNamedTalesValues.html",
-          "hash": "3/lzFVi1KbqlHaCT5kEjog=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/ZptSharp.Expressions.IGetsEvaluatorForExpressionType.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/ZptSharp.Expressions.IGetsEvaluatorForExpressionType.html",
-          "hash": "ttNZEDeRUyAmWgOMIj19WQ=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/ZptSharp.Expressions.IGetsExpressionType.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/ZptSharp.Expressions.IGetsExpressionType.html",
-          "hash": "FvQY9cxD78nW+nrb4X3P7w=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/ZptSharp.Expressions.IGetsExpressionTypeProvider.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/ZptSharp.Expressions.IGetsExpressionTypeProvider.html",
-          "hash": "p1ThAsbL/I5szbRajfP7YQ=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/ZptSharp.Expressions.IGetsNamedTalesValue.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/ZptSharp.Expressions.IGetsNamedTalesValue.html",
-          "hash": "RMKUO1u8P+b0UufNBR+5Pw=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/ZptSharp.Expressions.IGetsRomanNumeralForNumber.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/ZptSharp.Expressions.IGetsRomanNumeralForNumber.html",
-          "hash": "saBfsnGfeGwagobdr16esw=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/ZptSharp.Expressions.IRegistersExpressionEvaluator.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/ZptSharp.Expressions.IRegistersExpressionEvaluator.html",
-          "hash": "ODioeXu0ChRKP01I94vywQ=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/ZptSharp.Expressions.IRemovesPrefixFromExpression.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/ZptSharp.Expressions.IRemovesPrefixFromExpression.html",
-          "hash": "IwmUVTBEsPfqIjyaUQRNMw=="
+          "hash": "ksfyM6F1zOQaXx5InfYk0Q=="
         }
       },
       "is_incremental": false,
@@ -1545,7 +1029,7 @@
       "output": {
         ".html": {
           "relative_path": "api/ZptSharp.Expressions.LocalVariablesOnlyTalesValueForExpressionContextAdapter.html",
-          "hash": "Y7kC+aW37XPYqUjuOnw9rA=="
+          "hash": "rgE7bLvBoLRnfeD5JSc8GQ=="
         }
       },
       "is_incremental": false,
@@ -1557,19 +1041,7 @@
       "output": {
         ".html": {
           "relative_path": "api/ZptSharp.Expressions.NamedTalesValueForExpressionContextAdapter.html",
-          "hash": "hzwDhLKBTt6LJveaJlTjYQ=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/ZptSharp.Expressions.NoEvaluatorForExpressionTypeException.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/ZptSharp.Expressions.NoEvaluatorForExpressionTypeException.html",
-          "hash": "SJ7QvX182Hij05RrHAcXEg=="
+          "hash": "6o4H95kmNVlPO5FtqDetTg=="
         }
       },
       "is_incremental": false,
@@ -1581,7 +1053,7 @@
       "output": {
         ".html": {
           "relative_path": "api/ZptSharp.Expressions.NotExpressions.BooleanValueConverter.html",
-          "hash": "s/suNmrSN0N8eH3VEmL6mw=="
+          "hash": "95zsb2NwJXtoBpQbv4OOkA=="
         }
       },
       "is_incremental": false,
@@ -1593,7 +1065,7 @@
       "output": {
         ".html": {
           "relative_path": "api/ZptSharp.Expressions.NotExpressions.ICoercesValueToBoolean.html",
-          "hash": "02Yg4ijviQ6auI14q1v5aw=="
+          "hash": "NNMykwwkDTDH5PCTkn0Ylg=="
         }
       },
       "is_incremental": false,
@@ -1605,7 +1077,7 @@
       "output": {
         ".html": {
           "relative_path": "api/ZptSharp.Expressions.NotExpressions.NotExpressionEvaluator.html",
-          "hash": "FFHB3F9KA/YsRf2MMNObTw=="
+          "hash": "rXK64Qs38ej0h34aw5mXnw=="
         }
       },
       "is_incremental": false,
@@ -1617,7 +1089,7 @@
       "output": {
         ".html": {
           "relative_path": "api/ZptSharp.Expressions.NotExpressions.html",
-          "hash": "ZK16DkT965NAiF9Z1Rawdw=="
+          "hash": "QQsu6RUbD49FjLXM/cFY9w=="
         }
       },
       "is_incremental": false,
@@ -1629,7 +1101,7 @@
       "output": {
         ".html": {
           "relative_path": "api/ZptSharp.Expressions.PathExpressions.CannotParsePathException.html",
-          "hash": "NyCE8v9e5+PxOb4YC004Fw=="
+          "hash": "vHCJT+RAX/Ds4Wua0ZIAXw=="
         }
       },
       "is_incremental": false,
@@ -1641,7 +1113,7 @@
       "output": {
         ".html": {
           "relative_path": "api/ZptSharp.Expressions.PathExpressions.DecoratorBasedObjectValueProvider.html",
-          "hash": "KzYgfjsd2oRh5x5wp4Z4EQ=="
+          "hash": "RMyqUHgpPs8UFREr56ZrJg=="
         }
       },
       "is_incremental": false,
@@ -1653,7 +1125,7 @@
       "output": {
         ".html": {
           "relative_path": "api/ZptSharp.Expressions.PathExpressions.DefinedVariablesOnlyExpressionContextWrappingDecorator.html",
-          "hash": "SMigGcbE49J/8x0fdOg2cA=="
+          "hash": "dY7B/nfLVbi0nQRY+e/r/Q=="
         }
       },
       "is_incremental": false,
@@ -1665,7 +1137,7 @@
       "output": {
         ".html": {
           "relative_path": "api/ZptSharp.Expressions.PathExpressions.DefinedVariablesOnlyPathExpressionEvaluator.html",
-          "hash": "POu7p0WrvWIlpcEFnF1DKg=="
+          "hash": "K6JS1pRRd2G1Lj+jEwwkFA=="
         }
       },
       "is_incremental": false,
@@ -1677,7 +1149,7 @@
       "output": {
         ".html": {
           "relative_path": "api/ZptSharp.Expressions.PathExpressions.DynamicObjectValueProvider.html",
-          "hash": "JaSVgVeBDYnHZUIoNLGaVQ=="
+          "hash": "2WcuyVGtD53ss11Go9O7Ig=="
         }
       },
       "is_incremental": false,
@@ -1689,7 +1161,7 @@
       "output": {
         ".html": {
           "relative_path": "api/ZptSharp.Expressions.PathExpressions.EnumerableValueProvider.html",
-          "hash": "1hnNcCdCFUNVf1DPw9HkIg=="
+          "hash": "KgPafhha/qeag2DIkbFsew=="
         }
       },
       "is_incremental": false,
@@ -1701,7 +1173,7 @@
       "output": {
         ".html": {
           "relative_path": "api/ZptSharp.Expressions.PathExpressions.ExpressionContextWrappingDecorator.html",
-          "hash": "jQOBM2GCJVnlgY5uHLSWSg=="
+          "hash": "lEn7bGkbh1msQhRUfQ2vlQ=="
         }
       },
       "is_incremental": false,
@@ -1713,7 +1185,7 @@
       "output": {
         ".html": {
           "relative_path": "api/ZptSharp.Expressions.PathExpressions.FailureValueProvider.html",
-          "hash": "UixMQMP1tQWE1CPmDzGIqw=="
+          "hash": "V0OrHJ3QqdwN+cAE/AkohA=="
         }
       },
       "is_incremental": false,
@@ -1725,7 +1197,7 @@
       "output": {
         ".html": {
           "relative_path": "api/ZptSharp.Expressions.PathExpressions.GlobalVariableOnlyExpressionContextWrappingDecorator.html",
-          "hash": "bR/F1sb/cIB2iE4IUOO9Zw=="
+          "hash": "LNyGA9WzseifkSisqnFZhw=="
         }
       },
       "is_incremental": false,
@@ -1737,7 +1209,7 @@
       "output": {
         ".html": {
           "relative_path": "api/ZptSharp.Expressions.PathExpressions.GlobalVariablesOnlyPathExpressionEvaluator.html",
-          "hash": "JbBEfqgmqbpdMHZsBsOA2w=="
+          "hash": "fHRSowAU082LVKFpfBLcnA=="
         }
       },
       "is_incremental": false,
@@ -1749,7 +1221,7 @@
       "output": {
         ".html": {
           "relative_path": "api/ZptSharp.Expressions.PathExpressions.IEvaluatesPathExpressionRequest.html",
-          "hash": "adNBf6sE+pTDsEpD/8Ajgw=="
+          "hash": "MWfDfNavkHqitkKQ6FwH/w=="
         }
       },
       "is_incremental": false,
@@ -1761,7 +1233,7 @@
       "output": {
         ".html": {
           "relative_path": "api/ZptSharp.Expressions.PathExpressions.IGetsPathWalkingExpressionEvaluator.html",
-          "hash": "+NbZKGyylJ2FgFRUBH6MkQ=="
+          "hash": "9NhojhBn/mqqXhgdIc8n0w=="
         }
       },
       "is_incremental": false,
@@ -1773,7 +1245,7 @@
       "output": {
         ".html": {
           "relative_path": "api/ZptSharp.Expressions.PathExpressions.IGetsValueFromObject.html",
-          "hash": "fz3eFICctABYA7wLjO9Avw=="
+          "hash": "M2LH4aBmm0GJM1PfZ69rXQ=="
         }
       },
       "is_incremental": false,
@@ -1785,7 +1257,7 @@
       "output": {
         ".html": {
           "relative_path": "api/ZptSharp.Expressions.PathExpressions.IGetsValueFromReflection.html",
-          "hash": "XRGxInWGOPCYDMSPGQd1Nw=="
+          "hash": "jTwZdLtVjZg2MoYtOtQOsA=="
         }
       },
       "is_incremental": false,
@@ -1797,7 +1269,7 @@
       "output": {
         ".html": {
           "relative_path": "api/ZptSharp.Expressions.PathExpressions.IParsesPathExpression.html",
-          "hash": "aCia0y7FLw2BmcQYBwYFvA=="
+          "hash": "OoEHhjf1poylJ8rkbfwfpQ=="
         }
       },
       "is_incremental": false,
@@ -1809,7 +1281,7 @@
       "output": {
         ".html": {
           "relative_path": "api/ZptSharp.Expressions.PathExpressions.IWalksAndEvaluatesPathExpression.html",
-          "hash": "HqWS25OjBrNrwmeT6mihTw=="
+          "hash": "iyigqICqC3gDXKnXqk8+iQ=="
         }
       },
       "is_incremental": false,
@@ -1821,7 +1293,7 @@
       "output": {
         ".html": {
           "relative_path": "api/ZptSharp.Expressions.PathExpressions.IntegerKeyedDictionaryValueProvider.html",
-          "hash": "ZwkrZWtnrv499uxXjbirug=="
+          "hash": "Yhus/cdY+k0HbkEsVoheiQ=="
         }
       },
       "is_incremental": false,
@@ -1833,7 +1305,7 @@
       "output": {
         ".html": {
           "relative_path": "api/ZptSharp.Expressions.PathExpressions.LocalVariableOnlyExpressionContextWrappingDecorator.html",
-          "hash": "fTqvNssry+XWLOVQKr3mqg=="
+          "hash": "wSFBviRipPo8bazHm7VnoQ=="
         }
       },
       "is_incremental": false,
@@ -1845,7 +1317,7 @@
       "output": {
         ".html": {
           "relative_path": "api/ZptSharp.Expressions.PathExpressions.LocalVariablesOnlyPathExpressionEvaluator.html",
-          "hash": "9LqRlTQoW0DH3pxlu5qJwg=="
+          "hash": "IlhTJGYb3qjBI0I3B8aREA=="
         }
       },
       "is_incremental": false,
@@ -1857,7 +1329,7 @@
       "output": {
         ".html": {
           "relative_path": "api/ZptSharp.Expressions.PathExpressions.NamedTalesValueProvider.html",
-          "hash": "CWBmaJh8v2n2zS1eZ3Q/xA=="
+          "hash": "CTayTJ+DsiW0OC4ADE9lsQ=="
         }
       },
       "is_incremental": false,
@@ -1869,7 +1341,7 @@
       "output": {
         ".html": {
           "relative_path": "api/ZptSharp.Expressions.PathExpressions.PathEvaluationContext.html",
-          "hash": "vdXPzpJMmhGue2b0HwWx+A=="
+          "hash": "1BXTBanaUUmuc2Ih0x/Ahg=="
         }
       },
       "is_incremental": false,
@@ -1881,7 +1353,7 @@
       "output": {
         ".html": {
           "relative_path": "api/ZptSharp.Expressions.PathExpressions.PathExpression.AlternateExpression.html",
-          "hash": "41vEgWEp9pUDrSmI752hhw=="
+          "hash": "58gv7nkHk5VWqWBce6omaw=="
         }
       },
       "is_incremental": false,
@@ -1893,7 +1365,7 @@
       "output": {
         ".html": {
           "relative_path": "api/ZptSharp.Expressions.PathExpressions.PathExpression.PathPart.html",
-          "hash": "u3NUEG395kkM5TvPPp4b4w=="
+          "hash": "Md2f04mqHy5PWhZj3a2CPw=="
         }
       },
       "is_incremental": false,
@@ -1905,7 +1377,7 @@
       "output": {
         ".html": {
           "relative_path": "api/ZptSharp.Expressions.PathExpressions.PathExpression.html",
-          "hash": "GUc7VYFvHax4dXUyN0BtjQ=="
+          "hash": "oCzKebnYgrEymXDTfv2W4g=="
         }
       },
       "is_incremental": false,
@@ -1917,7 +1389,7 @@
       "output": {
         ".html": {
           "relative_path": "api/ZptSharp.Expressions.PathExpressions.PathExpressionEvaluationRequest.html",
-          "hash": "RP4rVGNZ1wbYqpmbTsRRQg=="
+          "hash": "BKX8UgHE9c+1iuKwwUcAow=="
         }
       },
       "is_incremental": false,
@@ -1929,7 +1401,7 @@
       "output": {
         ".html": {
           "relative_path": "api/ZptSharp.Expressions.PathExpressions.PathExpressionEvaluator.html",
-          "hash": "6GT1Uzlc3Mb2lumd4L3CdQ=="
+          "hash": "uVZSEAchMdBSVJGAMPW0+Q=="
         }
       },
       "is_incremental": false,
@@ -1941,7 +1413,7 @@
       "output": {
         ".html": {
           "relative_path": "api/ZptSharp.Expressions.PathExpressions.PathExpressionParser.html",
-          "hash": "Ou1hjsJ3qPNyORvPukKIpA=="
+          "hash": "9Yda9wt6Zo79Z99zq1Q+JA=="
         }
       },
       "is_incremental": false,
@@ -1953,7 +1425,7 @@
       "output": {
         ".html": {
           "relative_path": "api/ZptSharp.Expressions.PathExpressions.PathExpressionRequestEvaluator.html",
-          "hash": "BFCfo6+/Gf9Fyl5aVvfxFA=="
+          "hash": "MUGtFwCCLwFxvxNhIv2Uvw=="
         }
       },
       "is_incremental": false,
@@ -1965,7 +1437,7 @@
       "output": {
         ".html": {
           "relative_path": "api/ZptSharp.Expressions.PathExpressions.PathWalkingExpressionEvaluator.html",
-          "hash": "qNL1sDv3OwtbZwadyEQl1A=="
+          "hash": "WpEsKMoteFpsovhYbPtovQ=="
         }
       },
       "is_incremental": false,
@@ -1977,7 +1449,7 @@
       "output": {
         ".html": {
           "relative_path": "api/ZptSharp.Expressions.PathExpressions.PathWalkingExpressionEvaluatorFactory.html",
-          "hash": "Q+p7yGq///lyUu7cB9Ehog=="
+          "hash": "xVzPnB4eGpydi2r9/Bjp6Q=="
         }
       },
       "is_incremental": false,
@@ -1989,7 +1461,7 @@
       "output": {
         ".html": {
           "relative_path": "api/ZptSharp.Expressions.PathExpressions.ReflectionObjectValueProvider.html",
-          "hash": "mAJNtBYuIahTX4aziJHB9w=="
+          "hash": "TSkxR8bOagA9y4Y7IMC0FQ=="
         }
       },
       "is_incremental": false,
@@ -2001,7 +1473,7 @@
       "output": {
         ".html": {
           "relative_path": "api/ZptSharp.Expressions.PathExpressions.ReflectionValueReader.html",
-          "hash": "RIEK5+Bj0evJ3Wmo7sBNrQ=="
+          "hash": "j2WAo+1tsbESWgv0X4lJvA=="
         }
       },
       "is_incremental": false,
@@ -2013,7 +1485,7 @@
       "output": {
         ".html": {
           "relative_path": "api/ZptSharp.Expressions.PathExpressions.RootScopeLimitation.html",
-          "hash": "bFdeuOPOukCeDCZbEdB9xg=="
+          "hash": "2VxG28v9xGySw8wlRWnmew=="
         }
       },
       "is_incremental": false,
@@ -2025,7 +1497,7 @@
       "output": {
         ".html": {
           "relative_path": "api/ZptSharp.Expressions.PathExpressions.StringKeyedDictionaryValueProvider.html",
-          "hash": "anRfkl2ExMvPiM6Adx2QMw=="
+          "hash": "Yi04GO/8NvWmcOtRq79orA=="
         }
       },
       "is_incremental": false,
@@ -2037,7 +1509,7 @@
       "output": {
         ".html": {
           "relative_path": "api/ZptSharp.Expressions.PathExpressions.TemplateDirectoryValueProvider.html",
-          "hash": "o1AEZjhebBlZ5QrmSf310Q=="
+          "hash": "lKpFeUMviur+d+8XjdA/SQ=="
         }
       },
       "is_incremental": false,
@@ -2049,7 +1521,7 @@
       "output": {
         ".html": {
           "relative_path": "api/ZptSharp.Expressions.PathExpressions.html",
-          "hash": "fHihKmAjdxZ2ccby6YzqBA=="
+          "hash": "55h03Oqm/PWjMZa/8zFn5g=="
         }
       },
       "is_incremental": false,
@@ -2061,7 +1533,7 @@
       "output": {
         ".html": {
           "relative_path": "api/ZptSharp.Expressions.PipeExpressions.CannotParsePipeExpressionException.html",
-          "hash": "hLA1ioVWTuZQMufSgIy/AQ=="
+          "hash": "VgbVPMle57cZUb8b9D3tLQ=="
         }
       },
       "is_incremental": false,
@@ -2073,7 +1545,7 @@
       "output": {
         ".html": {
           "relative_path": "api/ZptSharp.Expressions.PipeExpressions.IEvaluatesPipeDelegate.html",
-          "hash": "8X9ruO5C5RTGgYen51NXwQ=="
+          "hash": "Ygfq3DBCbEXJbI9EERGWOQ=="
         }
       },
       "is_incremental": false,
@@ -2085,7 +1557,7 @@
       "output": {
         ".html": {
           "relative_path": "api/ZptSharp.Expressions.PipeExpressions.PipeDelegateExecutor.html",
-          "hash": "zSw/sYJxfVw34Zj7ISAmxw=="
+          "hash": "WI00Yvd9j4U7L8d0D5jfwA=="
         }
       },
       "is_incremental": false,
@@ -2097,7 +1569,7 @@
       "output": {
         ".html": {
           "relative_path": "api/ZptSharp.Expressions.PipeExpressions.PipeExpressionEvaluator.html",
-          "hash": "kyB+f9+Pf1u6h4ZRmpXz0Q=="
+          "hash": "7H16Fjr9ZpTlFViZcEtXvw=="
         }
       },
       "is_incremental": false,
@@ -2109,7 +1581,7 @@
       "output": {
         ".html": {
           "relative_path": "api/ZptSharp.Expressions.PipeExpressions.PipeExpressionException.html",
-          "hash": "R8DkJ7SrDROmvGLvMrHnNg=="
+          "hash": "S6Zc9YFS34DbrEbQ7KVRaw=="
         }
       },
       "is_incremental": false,
@@ -2121,7 +1593,7 @@
       "output": {
         ".html": {
           "relative_path": "api/ZptSharp.Expressions.PipeExpressions.html",
-          "hash": "oa6PnWrGSNgoDuTwn7jv6g=="
+          "hash": "rbyHDyY8/uofAaGsAIjngw=="
         }
       },
       "is_incremental": false,
@@ -2133,7 +1605,7 @@
       "output": {
         ".html": {
           "relative_path": "api/ZptSharp.Expressions.PrefixExpressionTypeProvider.html",
-          "hash": "XHnY8oHLtPPi0XEpe9t9Bw=="
+          "hash": "3p03guVKMRGsTwFn0/N36Q=="
         }
       },
       "is_incremental": false,
@@ -2217,7 +1689,7 @@
       "output": {
         ".html": {
           "relative_path": "api/ZptSharp.Expressions.PythonExpressions.PythonExpressionEvaluator.html",
-          "hash": "zeou4CqvOUZoPwe3+DOeuA=="
+          "hash": "qqY9mqbWBKfTPvpbORAYKg=="
         }
       },
       "is_incremental": false,
@@ -2253,7 +1725,7 @@
       "output": {
         ".html": {
           "relative_path": "api/ZptSharp.Expressions.PythonExpressions.html",
-          "hash": "D6ekeE86rO1i5ERrc27JFg=="
+          "hash": "vrDOEuQRiGaZEoXT+xcGzg=="
         }
       },
       "is_incremental": false,
@@ -2265,19 +1737,7 @@
       "output": {
         ".html": {
           "relative_path": "api/ZptSharp.Expressions.RegistryBasedExpressionEvaluator.html",
-          "hash": "hAxIrJK63k6eTDWk1ZOBeg=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/ZptSharp.Expressions.RepetitionInfo.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/ZptSharp.Expressions.RepetitionInfo.html",
-          "hash": "1t7oYN4DpO3t1zF7Bo1sbA=="
+          "hash": "sJu8XMRPB2nI5wz4APT82w=="
         }
       },
       "is_incremental": false,
@@ -2289,7 +1749,7 @@
       "output": {
         ".html": {
           "relative_path": "api/ZptSharp.Expressions.RomanNumeralGenerator.html",
-          "hash": "DOIGux9EDH7sthVQdwsahA=="
+          "hash": "1C3tdzo4cNi47OAFa0Husw=="
         }
       },
       "is_incremental": false,
@@ -2301,7 +1761,7 @@
       "output": {
         ".html": {
           "relative_path": "api/ZptSharp.Expressions.RootContextConfigHelper.html",
-          "hash": "xlGnm9fp15Ybx2yEQ/E2WQ=="
+          "hash": "5LnWHZfuUq922cHOuhaieA=="
         }
       },
       "is_incremental": false,
@@ -2313,7 +1773,7 @@
       "output": {
         ".html": {
           "relative_path": "api/ZptSharp.Expressions.StringExpressions.StringExpressionEvaluator.html",
-          "hash": "MXEVpTP2/DziTqX3SlbG7g=="
+          "hash": "5J6kdLZK9NSVNQBQb7Hgqg=="
         }
       },
       "is_incremental": false,
@@ -2325,7 +1785,7 @@
       "output": {
         ".html": {
           "relative_path": "api/ZptSharp.Expressions.StringExpressions.html",
-          "hash": "L3YQIU25wvhwZ2/J33lw9w=="
+          "hash": "Qo/qyKycfkl6pxJaDnfsWg=="
         }
       },
       "is_incremental": false,
@@ -2337,7 +1797,7 @@
       "output": {
         ".html": {
           "relative_path": "api/ZptSharp.Expressions.StructureExpressions.StructureExpressionEvaluator.html",
-          "hash": "vOtmZC2CBNTjsdldsqFu1Q=="
+          "hash": "baw7TYQaNhWR0w92+QJttQ=="
         }
       },
       "is_incremental": false,
@@ -2349,31 +1809,7 @@
       "output": {
         ".html": {
           "relative_path": "api/ZptSharp.Expressions.StructureExpressions.html",
-          "hash": "i1FBTjxSOIKZxBFatAVw/Q=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/ZptSharp.Expressions.StructuredMarkupObjectAdapter.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/ZptSharp.Expressions.StructuredMarkupObjectAdapter.html",
-          "hash": "TFJ3+12pdB0urr7leiXhrQ=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/ZptSharp.Expressions.WellKnownExpressionPrefix.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/ZptSharp.Expressions.WellKnownExpressionPrefix.html",
-          "hash": "w8/yES1ySwvzpXagyL3PwQ=="
+          "hash": "JIefjk8kQEwDsz1Ss9O3hw=="
         }
       },
       "is_incremental": false,
@@ -2385,7 +1821,7 @@
       "output": {
         ".html": {
           "relative_path": "api/ZptSharp.Expressions.html",
-          "hash": "1G3TUJkpUCgdjkhNqUom1A=="
+          "hash": "ElkcaHztuADdWF6vjgclDw=="
         }
       },
       "is_incremental": false,
@@ -2397,19 +1833,7 @@
       "output": {
         ".html": {
           "relative_path": "api/ZptSharp.HapHostingBuilderExtensions.html",
-          "hash": "ha7cQemHrQqldwu/msV0pg=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/ZptSharp.Hosting.EnvironmentRegistry.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/ZptSharp.Hosting.EnvironmentRegistry.html",
-          "hash": "pLjBiAWdeC9yAOcd+/vWJA=="
+          "hash": "C/+eMTpwiCy8/rrPQN2Mtg=="
         }
       },
       "is_incremental": false,
@@ -2421,31 +1845,7 @@
       "output": {
         ".html": {
           "relative_path": "api/ZptSharp.Hosting.HostingBuilder.html",
-          "hash": "Rlh8cOaBOCbKcxi7wehlfw=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/ZptSharp.Hosting.IBuildsHostingEnvironment.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/ZptSharp.Hosting.IBuildsHostingEnvironment.html",
-          "hash": "710cCUXsg5N2ssHXFjWC5g=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/ZptSharp.Hosting.IHostsZptSharp.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/ZptSharp.Hosting.IHostsZptSharp.html",
-          "hash": "sZcrVPxeru46MyHtMnhH/A=="
+          "hash": "bsRWGZclvYSgSjr0I7cmbw=="
         }
       },
       "is_incremental": false,
@@ -2457,7 +1857,7 @@
       "output": {
         ".html": {
           "relative_path": "api/ZptSharp.Hosting.ZptSharpSelfHoster.html",
-          "hash": "vqcu5ZOzZSkCNfQywhjXsw=="
+          "hash": "G+BByx6TTBIzyAavYnAV0w=="
         }
       },
       "is_incremental": false,
@@ -2469,67 +1869,7 @@
       "output": {
         ".html": {
           "relative_path": "api/ZptSharp.Hosting.html",
-          "hash": "C/B71V4kN6pZ8jbOke6tBA=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/ZptSharp.IConfiguresRootContext.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/ZptSharp.IConfiguresRootContext.html",
-          "hash": "qmAo4HVRkqiuVFc3mKFl7g=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/ZptSharp.IGetsStructuredMarkup.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/ZptSharp.IGetsStructuredMarkup.html",
-          "hash": "rQ0MKKIinJuqXlNXi3pz8A=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/ZptSharp.IRendersZptDocument.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/ZptSharp.IRendersZptDocument.html",
-          "hash": "WY4ZmLqtyF0/d1Eed8Kiew=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/ZptSharp.IRendersZptFile.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/ZptSharp.IRendersZptFile.html",
-          "hash": "tKmu7YSudzzGtpwLEt3RfA=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/ZptSharp.IWritesStreamToTextWriter.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/ZptSharp.IWritesStreamToTextWriter.html",
-          "hash": "yiNop3gVY2bHxBdejaCLTA=="
+          "hash": "vkQ+MWT3hWUwQ+xBGVUIcg=="
         }
       },
       "is_incremental": false,
@@ -2541,67 +1881,7 @@
       "output": {
         ".html": {
           "relative_path": "api/ZptSharp.Metal.AddDefinedMacroToGlobalScopeProcessorDecorator.html",
-          "hash": "Dgu6parc9m9TpmrNsJlgxg=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/ZptSharp.Metal.IExpandsMacro.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/ZptSharp.Metal.IExpandsMacro.html",
-          "hash": "1VDT9YE3eTcD6LUrJ0UBAQ=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/ZptSharp.Metal.IFillsSlots.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/ZptSharp.Metal.IFillsSlots.html",
-          "hash": "QhNpA2G6kOjMoUxrTsoORQ=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/ZptSharp.Metal.IGetsMacro.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/ZptSharp.Metal.IGetsMacro.html",
-          "hash": "T9ucZ+0yvhsqRAxNwx0edw=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/ZptSharp.Metal.IGetsMetalAttributeSpecs.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/ZptSharp.Metal.IGetsMetalAttributeSpecs.html",
-          "hash": "HSpURcmImzoXBDbyYNqhIg=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/ZptSharp.Metal.IGetsMetalContextProcessor.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/ZptSharp.Metal.IGetsMetalContextProcessor.html",
-          "hash": "vA3grgxuUU5NYtxWA2BKZg=="
+          "hash": "PbW0kceZRrBv6GOarbdsvQ=="
         }
       },
       "is_incremental": false,
@@ -2613,31 +1893,7 @@
       "output": {
         ".html": {
           "relative_path": "api/ZptSharp.Metal.IGetsMetalDocumentAdapter.html",
-          "hash": "lTvHxWdjEj7r03WxCAfnww=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/ZptSharp.Metal.IGetsSlots.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/ZptSharp.Metal.IGetsSlots.html",
-          "hash": "+aFPdxcd3FcA4TgYuEiyFg=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/ZptSharp.Metal.IProvidesMacros.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/ZptSharp.Metal.IProvidesMacros.html",
-          "hash": "KwLM2uZExrRk444HHyw8xQ=="
+          "hash": "MnFGHHiYXn6qAhnwROXgyQ=="
         }
       },
       "is_incremental": false,
@@ -2649,31 +1905,7 @@
       "output": {
         ".html": {
           "relative_path": "api/ZptSharp.Metal.MacroExpander.html",
-          "hash": "XbgX57bihm0FnNjX7GtAZQ=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/ZptSharp.Metal.MacroExpansionContext.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/ZptSharp.Metal.MacroExpansionContext.html",
-          "hash": "OXwZUKkvg6fYIo3B8fIZxg=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/ZptSharp.Metal.MacroNotFoundException.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/ZptSharp.Metal.MacroNotFoundException.html",
-          "hash": "n1qDTrQrjRwJ8xySwhxP/A=="
+          "hash": "FKmINS6GM9zPpYtF4ufKmw=="
         }
       },
       "is_incremental": false,
@@ -2685,7 +1917,7 @@
       "output": {
         ".html": {
           "relative_path": "api/ZptSharp.Metal.MacroProvider.html",
-          "hash": "SeWGadJgsYBD+Ose99ENJQ=="
+          "hash": "0Dj04Ng0Aiy0rbH1upsvNw=="
         }
       },
       "is_incremental": false,
@@ -2697,7 +1929,7 @@
       "output": {
         ".html": {
           "relative_path": "api/ZptSharp.Metal.MacroUsageContextProcessor.html",
-          "hash": "tZrRTF8ElknWgsMOb1LQUw=="
+          "hash": "4Z4ZxKH625Zw2pxJko1Pow=="
         }
       },
       "is_incremental": false,
@@ -2709,7 +1941,7 @@
       "output": {
         ".html": {
           "relative_path": "api/ZptSharp.Metal.MetalAttributeSpecProvider.html",
-          "hash": "RerXvEQzATA3rNxl8a0b9A=="
+          "hash": "QQs6fxfgqGTp53VcYVkevA=="
         }
       },
       "is_incremental": false,
@@ -2721,7 +1953,7 @@
       "output": {
         ".html": {
           "relative_path": "api/ZptSharp.Metal.MetalContextProcessorFactory.html",
-          "hash": "WCn0w0H02uJLorUWY2UQPw=="
+          "hash": "twkMyjvU3WI/yWR+RY4ORQ=="
         }
       },
       "is_incremental": false,
@@ -2733,7 +1965,7 @@
       "output": {
         ".html": {
           "relative_path": "api/ZptSharp.Metal.MetalDocumentAdapter.html",
-          "hash": "WcxARAr747HAYzDZWyhV5Q=="
+          "hash": "ue0/yGzNV6rK7WgDycvdhw=="
         }
       },
       "is_incremental": false,
@@ -2745,31 +1977,7 @@
       "output": {
         ".html": {
           "relative_path": "api/ZptSharp.Metal.MetalDocumentAdapterFactory.html",
-          "hash": "d4Kb6suuC3vW5kpaqo0zjQ=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/ZptSharp.Metal.MetalMacro.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/ZptSharp.Metal.MetalMacro.html",
-          "hash": "NtoRJneZ44+Ieoh4qKyWsg=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/ZptSharp.Metal.Slot.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/ZptSharp.Metal.Slot.html",
-          "hash": "7anKf+auVPkTmyJ5++7eWA=="
+          "hash": "J1Gv2PA1Q+Z7NTv7iP7XjA=="
         }
       },
       "is_incremental": false,
@@ -2781,7 +1989,7 @@
       "output": {
         ".html": {
           "relative_path": "api/ZptSharp.Metal.SlotFiller.html",
-          "hash": "V7m1dl+TIcK8u7CHA36hwA=="
+          "hash": "HU0RDNOb4LHFMZw4VMWzXg=="
         }
       },
       "is_incremental": false,
@@ -2793,7 +2001,7 @@
       "output": {
         ".html": {
           "relative_path": "api/ZptSharp.Metal.SlotFinder.html",
-          "hash": "N5GPYJlkED4Qjbya9Oh1MA=="
+          "hash": "Bb7kV3HlDrOZJwl9uKCwVw=="
         }
       },
       "is_incremental": false,
@@ -2805,7 +2013,7 @@
       "output": {
         ".html": {
           "relative_path": "api/ZptSharp.Metal.html",
-          "hash": "22Pwtpiwl5Vqbi4phI02Eg=="
+          "hash": "RX8pTB1ZUgYk1D8aFtun2g=="
         }
       },
       "is_incremental": false,
@@ -2865,7 +2073,7 @@
       "output": {
         ".html": {
           "relative_path": "api/ZptSharp.Mvc5.IGetsMvcRenderingConfig.html",
-          "hash": "UNNXnEAyeYHnYopuVJNUEA=="
+          "hash": "Wjy/UR8XuGIz4YY1EVU3eA=="
         }
       },
       "is_incremental": false,
@@ -2901,7 +2109,7 @@
       "output": {
         ".html": {
           "relative_path": "api/ZptSharp.Mvc5.MvcContextBuilderProvider.html",
-          "hash": "z2UvzH6wiJy73WvUhevJKg=="
+          "hash": "bteyt+g5dhRqSmtyub7Slw=="
         }
       },
       "is_incremental": false,
@@ -2913,7 +2121,7 @@
       "output": {
         ".html": {
           "relative_path": "api/ZptSharp.Mvc5.MvcContextBuilderProviderBase.html",
-          "hash": "KVhuHwzogztvSbCbq+IgeQ=="
+          "hash": "fS9ibcHoagtCZa8q3UUsIw=="
         }
       },
       "is_incremental": false,
@@ -2925,7 +2133,7 @@
       "output": {
         ".html": {
           "relative_path": "api/ZptSharp.Mvc5.MvcRenderingConfigProvider.html",
-          "hash": "3ETiFMR0qh+RVYPsNWd1Rg=="
+          "hash": "8X5abwcMtW2sRIV5elwKtQ=="
         }
       },
       "is_incremental": false,
@@ -2961,7 +2169,7 @@
       "output": {
         ".html": {
           "relative_path": "api/ZptSharp.Mvc5.ZptSharpErrorView.html",
-          "hash": "PJx6eHYVZFaNUVhph1ap8A=="
+          "hash": "1VwJxLlgH010e3AZGy6+NQ=="
         }
       },
       "is_incremental": false,
@@ -2973,7 +2181,7 @@
       "output": {
         ".html": {
           "relative_path": "api/ZptSharp.Mvc5.ZptSharpView.html",
-          "hash": "6sPmGrg6ffx3fKYlYEcpEA=="
+          "hash": "kDFqzysDWvkfbUaPp92RYA=="
         }
       },
       "is_incremental": false,
@@ -2985,7 +2193,7 @@
       "output": {
         ".html": {
           "relative_path": "api/ZptSharp.Mvc5.ZptSharpViewEngine.html",
-          "hash": "XLct+aWH3E0MFbPZjpMcog=="
+          "hash": "RwT4sESo/wuOe4h1JzV6pA=="
         }
       },
       "is_incremental": false,
@@ -2997,7 +2205,7 @@
       "output": {
         ".html": {
           "relative_path": "api/ZptSharp.Mvc5.html",
-          "hash": "spnKZ3aBdoGQOV064ScdMQ=="
+          "hash": "yBYLrNpHGjB/36US6lHCsw=="
         }
       },
       "is_incremental": false,
@@ -3057,7 +2265,7 @@
       "output": {
         ".html": {
           "relative_path": "api/ZptSharp.MvcCore.IGetsMvcRenderingConfig.html",
-          "hash": "XrIqFqYcZUX9iqgtAR2MIg=="
+          "hash": "cXJFTW9feGT6ew9BD2NZfg=="
         }
       },
       "is_incremental": false,
@@ -3093,7 +2301,7 @@
       "output": {
         ".html": {
           "relative_path": "api/ZptSharp.MvcCore.MvcContextBuilderProvider.html",
-          "hash": "hauvtsRnGl4t88BExP/u0A=="
+          "hash": "tFCQfceAvEAVU8wrhWTm+A=="
         }
       },
       "is_incremental": false,
@@ -3105,7 +2313,7 @@
       "output": {
         ".html": {
           "relative_path": "api/ZptSharp.MvcCore.MvcContextBuilderProviderBase.html",
-          "hash": "iIE4AH8cuJroSdAsDvWD7A=="
+          "hash": "pqJ6/YZP8RkCens91bGBTw=="
         }
       },
       "is_incremental": false,
@@ -3117,7 +2325,7 @@
       "output": {
         ".html": {
           "relative_path": "api/ZptSharp.MvcCore.MvcRenderingConfigProvider.html",
-          "hash": "JnapS6E4+0abDa6cy70Q9Q=="
+          "hash": "m2CMRhcyNZWX3DXjBLlkcQ=="
         }
       },
       "is_incremental": false,
@@ -3153,7 +2361,7 @@
       "output": {
         ".html": {
           "relative_path": "api/ZptSharp.MvcCore.ZptSharpErrorView.html",
-          "hash": "NsI4gftHGB40hLAtGCMq8w=="
+          "hash": "AqOHpxv6hbM3UhXwEccuPQ=="
         }
       },
       "is_incremental": false,
@@ -3165,7 +2373,7 @@
       "output": {
         ".html": {
           "relative_path": "api/ZptSharp.MvcCore.ZptSharpView.html",
-          "hash": "u38UnUX0Kq1rODDozEfYQg=="
+          "hash": "I1V4tnhp32YUQlbdKywwDQ=="
         }
       },
       "is_incremental": false,
@@ -3177,7 +2385,7 @@
       "output": {
         ".html": {
           "relative_path": "api/ZptSharp.MvcCore.ZptSharpViewEngine.html",
-          "hash": "0u9bYxaqCn82qgLZwRA9JA=="
+          "hash": "nq66v7XthDpmUkWvIXLeNw=="
         }
       },
       "is_incremental": false,
@@ -3189,19 +2397,7 @@
       "output": {
         ".html": {
           "relative_path": "api/ZptSharp.MvcCore.html",
-          "hash": "fUs0QCRZMjAX2O4TBzf8wg=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/ZptSharp.NoMatchingReaderWriterException.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/ZptSharp.NoMatchingReaderWriterException.html",
-          "hash": "6It2GZC7tayarNdYXH0Wkg=="
+          "hash": "bWRpRGn8txvPz25UiokQGw=="
         }
       },
       "is_incremental": false,
@@ -3213,7 +2409,7 @@
       "output": {
         ".html": {
           "relative_path": "api/ZptSharp.PythonHostingBuilderExtensions.html",
-          "hash": "N9Kr4NcybuYA7MyW4i0XIQ=="
+          "hash": "3O/cEPwyfT4Y+h4A/f0IfA=="
         }
       },
       "is_incremental": false,
@@ -3225,7 +2421,7 @@
       "output": {
         ".html": {
           "relative_path": "api/ZptSharp.Rendering.EffectiveConfigSettingZptDocumentRendererDecorator.html",
-          "hash": "78mVAYrlrsDWx53bRVfASQ=="
+          "hash": "/D8B1SGVtLCMw6Fx/AuhtQ=="
         }
       },
       "is_incremental": false,
@@ -3237,7 +2433,7 @@
       "output": {
         ".html": {
           "relative_path": "api/ZptSharp.Rendering.ExpressionContextFactory.html",
-          "hash": "g4KhK1V0XUNlNEH63LEcUQ=="
+          "hash": "M5by4WpFJG6foln+/4U43g=="
         }
       },
       "is_incremental": false,
@@ -3249,199 +2445,7 @@
       "output": {
         ".html": {
           "relative_path": "api/ZptSharp.Rendering.ExpressionContextIterativeProcessor.html",
-          "hash": "tACYxKJtLrpxDov1y+ehpg=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/ZptSharp.Rendering.ExpressionContextProcessingResult.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/ZptSharp.Rendering.ExpressionContextProcessingResult.html",
-          "hash": "14SBxsNYDONkw/od81LgNg=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/ZptSharp.Rendering.FileSourceInfo.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/ZptSharp.Rendering.FileSourceInfo.html",
-          "hash": "3/QfWZGCIqwag5Lv6sXmwg=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/ZptSharp.Rendering.IDocumentSourceInfo.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/ZptSharp.Rendering.IDocumentSourceInfo.html",
-          "hash": "xdvKV4rVnM2SnXhda1rhCw=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/ZptSharp.Rendering.IGetsChildExpressionContexts.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/ZptSharp.Rendering.IGetsChildExpressionContexts.html",
-          "hash": "QCrH9g2+esbzDe3yod40cQ=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/ZptSharp.Rendering.IGetsDocumentModifier.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/ZptSharp.Rendering.IGetsDocumentModifier.html",
-          "hash": "gW648wqFt9ZCmmDYIYUwNw=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/ZptSharp.Rendering.IGetsIterativeExpressionContextProcessor.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/ZptSharp.Rendering.IGetsIterativeExpressionContextProcessor.html",
-          "hash": "0jTZM6PDG6xIQ2csCCaDcg=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/ZptSharp.Rendering.IGetsRootExpressionContext.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/ZptSharp.Rendering.IGetsRootExpressionContext.html",
-          "hash": "3s4YzBsD3llZTyWkw1MYFw=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/ZptSharp.Rendering.IGetsZptDocumentRenderer.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/ZptSharp.Rendering.IGetsZptDocumentRenderer.html",
-          "hash": "Tvd1Ub9h8GcvvB6e5gjD2A=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/ZptSharp.Rendering.IGetsZptDocumentRendererForFilePath.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/ZptSharp.Rendering.IGetsZptDocumentRendererForFilePath.html",
-          "hash": "/7nh91s17fgQ69HFD2BBsA=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/ZptSharp.Rendering.IGetsZptNodeAndAttributeRemovalContextProcessor.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/ZptSharp.Rendering.IGetsZptNodeAndAttributeRemovalContextProcessor.html",
-          "hash": "YqJ5mEvorK9QomsK2Rv33Q=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/ZptSharp.Rendering.IHandlesProcessingError.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/ZptSharp.Rendering.IHandlesProcessingError.html",
-          "hash": "6MjX4whXrzSa4s0/K61wqw=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/ZptSharp.Rendering.IHasContainer.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/ZptSharp.Rendering.IHasContainer.html",
-          "hash": "WV6KMRfMWXekqZr8/zG2sQ=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/ZptSharp.Rendering.IIterativelyModifiesDocument.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/ZptSharp.Rendering.IIterativelyModifiesDocument.html",
-          "hash": "jMDjQJSWpfsnidr5SdNiLw=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/ZptSharp.Rendering.IIterativelyProcessesExpressionContexts.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/ZptSharp.Rendering.IIterativelyProcessesExpressionContexts.html",
-          "hash": "2uuo+aqw+clI2NN2Cm+MsA=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/ZptSharp.Rendering.IModifiesDocument.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/ZptSharp.Rendering.IModifiesDocument.html",
-          "hash": "eLzngv2EswT52gkMqWIkrw=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/ZptSharp.Rendering.IProcessesExpressionContext.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/ZptSharp.Rendering.IProcessesExpressionContext.html",
-          "hash": "ZWCB5ofdRe5yPwwQUrxYww=="
+          "hash": "9k+9BFwZr+0aH9xnrc9Kpw=="
         }
       },
       "is_incremental": false,
@@ -3453,7 +2457,7 @@
       "output": {
         ".html": {
           "relative_path": "api/ZptSharp.Rendering.IterativeDocumentModifier.html",
-          "hash": "osCq/OzUU9WZwKtJM/F6AQ=="
+          "hash": "S3C9/RksHIRAIfOShGLeAg=="
         }
       },
       "is_incremental": false,
@@ -3465,7 +2469,7 @@
       "output": {
         ".html": {
           "relative_path": "api/ZptSharp.Rendering.IterativeExpressionContextProcessorFactory.html",
-          "hash": "fouVns2ATK/aQeGagJRALA=="
+          "hash": "8mnrkMw23kBnndhuL4+HVw=="
         }
       },
       "is_incremental": false,
@@ -3477,7 +2481,7 @@
       "output": {
         ".html": {
           "relative_path": "api/ZptSharp.Rendering.MetalDocumentModifierDecorator.html",
-          "hash": "IhKYHAIvqip1e1ITyTekJA=="
+          "hash": "xP8g7nEPD7umxJQkzlX7VQ=="
         }
       },
       "is_incremental": false,
@@ -3489,31 +2493,7 @@
       "output": {
         ".html": {
           "relative_path": "api/ZptSharp.Rendering.NoOpDocumentModifier.html",
-          "hash": "56za1BW0HwuZQP6Vwi/L8g=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/ZptSharp.Rendering.NodeSourceInfo.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/ZptSharp.Rendering.NodeSourceInfo.html",
-          "hash": "cC4eagp00e/y8q4eG9GLvQ=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/ZptSharp.Rendering.OtherSourceInfo.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/ZptSharp.Rendering.OtherSourceInfo.html",
-          "hash": "PStAFCxd6A7H6DxFfKIPtQ=="
+          "hash": "uYTaNV063wjBIJCAenvS2A=="
         }
       },
       "is_incremental": false,
@@ -3525,7 +2505,7 @@
       "output": {
         ".html": {
           "relative_path": "api/ZptSharp.Rendering.RemoveZptAttributesModifierDecorator.html",
-          "hash": "y9OfQp2RX0mER8gYtlGCLQ=="
+          "hash": "BkoFn0DKvDcGFqMP9i0tqg=="
         }
       },
       "is_incremental": false,
@@ -3537,19 +2517,7 @@
       "output": {
         ".html": {
           "relative_path": "api/ZptSharp.Rendering.SourceAnnotationDocumentModifierDecorator.html",
-          "hash": "/GFSWlDjut59M1Aq8ISm5Q=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/ZptSharp.Rendering.TagType.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/ZptSharp.Rendering.TagType.html",
-          "hash": "V4tkoX6m8KGiFmd6lqB8IQ=="
+          "hash": "oVF+7Bg6717sJLjSZg5FTA=="
         }
       },
       "is_incremental": false,
@@ -3561,19 +2529,7 @@
       "output": {
         ".html": {
           "relative_path": "api/ZptSharp.Rendering.TalDocumentModifierDecorator.html",
-          "hash": "N/KI322mEoTBfCW4bj8Gew=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/ZptSharp.Rendering.UnknownSourceInfo.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/ZptSharp.Rendering.UnknownSourceInfo.html",
-          "hash": "iC1tr+KiExsQQfvrAWl6mg=="
+          "hash": "RxDgjGLqfc0OhKpB6SLp/g=="
         }
       },
       "is_incremental": false,
@@ -3585,7 +2541,7 @@
       "output": {
         ".html": {
           "relative_path": "api/ZptSharp.Rendering.ZptCleanupContextProcessor.html",
-          "hash": "g87vmfMR0Lo3VcXeGFYtmw=="
+          "hash": "FwgtgrSoowPNxvra0SYaCw=="
         }
       },
       "is_incremental": false,
@@ -3597,7 +2553,7 @@
       "output": {
         ".html": {
           "relative_path": "api/ZptSharp.Rendering.ZptCleanupContextProcessorFactory.html",
-          "hash": "NlpxghogLe/AIDOBINL43w=="
+          "hash": "+nsCSeP3yreDuHi9+6mfLQ=="
         }
       },
       "is_incremental": false,
@@ -3609,7 +2565,7 @@
       "output": {
         ".html": {
           "relative_path": "api/ZptSharp.Rendering.ZptDocumentModifierFactory.html",
-          "hash": "jLkVLCFDBfi3J5dugbFvYA=="
+          "hash": "OX6v/9UzRAnG7uUzNtSocQ=="
         }
       },
       "is_incremental": false,
@@ -3621,7 +2577,7 @@
       "output": {
         ".html": {
           "relative_path": "api/ZptSharp.Rendering.ZptDocumentRenderer.html",
-          "hash": "oMTVhbRE2vkdxyHaDKwSYQ=="
+          "hash": "sYCkK2e9fLy+54GjQCH0AA=="
         }
       },
       "is_incremental": false,
@@ -3633,7 +2589,7 @@
       "output": {
         ".html": {
           "relative_path": "api/ZptSharp.Rendering.ZptDocumentRendererFactory.html",
-          "hash": "KWZh38jpF4L8NyHGesMs7g=="
+          "hash": "rqq9xEmwzlJk78WNQPJq1Q=="
         }
       },
       "is_incremental": false,
@@ -3645,7 +2601,7 @@
       "output": {
         ".html": {
           "relative_path": "api/ZptSharp.Rendering.ZptDocumentRendererForFilePathFactory.html",
-          "hash": "7qKvKG+cxJzMwX37ZDVfZQ=="
+          "hash": "Vv5NyaCB6YGBgktSDTn3wA=="
         }
       },
       "is_incremental": false,
@@ -3657,7 +2613,7 @@
       "output": {
         ".html": {
           "relative_path": "api/ZptSharp.Rendering.ZptRequestLoggingScope.html",
-          "hash": "y3iG7Hn0rF3ld/NKko3Vjw=="
+          "hash": "LKWfZYzEFsNciK7KLYckeA=="
         }
       },
       "is_incremental": false,
@@ -3669,7 +2625,7 @@
       "output": {
         ".html": {
           "relative_path": "api/ZptSharp.Rendering.html",
-          "hash": "TviG1lM5UqvQ08c2ly7DcA=="
+          "hash": "vLbqjW7L5/rcsqp1YeDjkg=="
         }
       },
       "is_incremental": false,
@@ -3681,7 +2637,7 @@
       "output": {
         ".html": {
           "relative_path": "api/ZptSharp.SourceAnnotation.AnnotationProvider.html",
-          "hash": "IQy5fWX036WbBZJAdNQ1Yw=="
+          "hash": "sqYHnfE308he8J6y+RaRzg=="
         }
       },
       "is_incremental": false,
@@ -3693,55 +2649,7 @@
       "output": {
         ".html": {
           "relative_path": "api/ZptSharp.SourceAnnotation.Commenter.html",
-          "hash": "Wjerpr1CnQqeYTSrmjDQ9Q=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/ZptSharp.SourceAnnotation.IAddsComment.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/ZptSharp.SourceAnnotation.IAddsComment.html",
-          "hash": "+cG2zmpl/tBFwQLDskfvfQ=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/ZptSharp.SourceAnnotation.IGetsAnnotationForNode.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/ZptSharp.SourceAnnotation.IGetsAnnotationForNode.html",
-          "hash": "1NG7wyxRG1nvKVZ3z8mPSw=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/ZptSharp.SourceAnnotation.IGetsSourceAnnotationContextProcessor.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/ZptSharp.SourceAnnotation.IGetsSourceAnnotationContextProcessor.html",
-          "hash": "vvAInxy8y3zOs362Yj1pgg=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/ZptSharp.SourceAnnotation.IGetsSourceAnnotationString.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/ZptSharp.SourceAnnotation.IGetsSourceAnnotationString.html",
-          "hash": "P+Fk25dzxf2mdidbgSeZBw=="
+          "hash": "r00EILPeqKvBy+gyBO/2DA=="
         }
       },
       "is_incremental": false,
@@ -3753,7 +2661,7 @@
       "output": {
         ".html": {
           "relative_path": "api/ZptSharp.SourceAnnotation.SourceAnnotationContextProcessor.html",
-          "hash": "SxNQ3dB2CwwQa+aqSg8tEA=="
+          "hash": "QsKxakVOLZxMngMxRoAuYQ=="
         }
       },
       "is_incremental": false,
@@ -3765,7 +2673,7 @@
       "output": {
         ".html": {
           "relative_path": "api/ZptSharp.SourceAnnotation.SourceAnnotationContextProcessorFactory.html",
-          "hash": "Vj2r2VfqSWfwLqgFvO9H/w=="
+          "hash": "LXAT4qA80qjnDEfeoSACZg=="
         }
       },
       "is_incremental": false,
@@ -3777,7 +2685,7 @@
       "output": {
         ".html": {
           "relative_path": "api/ZptSharp.SourceAnnotation.SourceAnnotationStringProvider.html",
-          "hash": "uA9Vj8FNpVx+l8sjiMdlKQ=="
+          "hash": "t2mbshsbvZUWWLnuSw3FTQ=="
         }
       },
       "is_incremental": false,
@@ -3789,7 +2697,7 @@
       "output": {
         ".html": {
           "relative_path": "api/ZptSharp.SourceAnnotation.html",
-          "hash": "6Cfsavc6QO0IlEVi9Gtd3w=="
+          "hash": "QzveN8bS+/2KNiI0/9yvjQ=="
         }
       },
       "is_incremental": false,
@@ -3801,19 +2709,7 @@
       "output": {
         ".html": {
           "relative_path": "api/ZptSharp.StreamToTextWriterCopier.html",
-          "hash": "v000vN9/48wy8S6gdh5brA=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/ZptSharp.Tal.AttributeDefinition.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/ZptSharp.Tal.AttributeDefinition.html",
-          "hash": "kDDjw788SXTWRPvdRd3r5w=="
+          "hash": "re8uk/GRA1Cfnk1amFYqnw=="
         }
       },
       "is_incremental": false,
@@ -3825,7 +2721,7 @@
       "output": {
         ".html": {
           "relative_path": "api/ZptSharp.Tal.AttributeDefinitionsProvider.html",
-          "hash": "ZCh6A/cLB9fNSmI5uIHD6g=="
+          "hash": "KHj3rMMr1jl4jxJ2mByQpw=="
         }
       },
       "is_incremental": false,
@@ -3837,7 +2733,7 @@
       "output": {
         ".html": {
           "relative_path": "api/ZptSharp.Tal.AttributesAttributeDecorator.html",
-          "hash": "ycETavrgr3eHCTbunEAF6g=="
+          "hash": "jgtyGjLVxuozarHqlvklSQ=="
         }
       },
       "is_incremental": false,
@@ -3849,7 +2745,7 @@
       "output": {
         ".html": {
           "relative_path": "api/ZptSharp.Tal.ConditionAttributeDecorator.html",
-          "hash": "MpasMDNaH0cHYhcfU5hj4Q=="
+          "hash": "AJoO2UMuY+sKG3SNZnVecg=="
         }
       },
       "is_incremental": false,
@@ -3861,7 +2757,7 @@
       "output": {
         ".html": {
           "relative_path": "api/ZptSharp.Tal.ContentOrReplaceAttributeDecorator.html",
-          "hash": "lxN63eFT8ptGSEIAZ0BjGg=="
+          "hash": "voHMQHiCxLmH1WPMafUtDA=="
         }
       },
       "is_incremental": false,
@@ -3873,7 +2769,7 @@
       "output": {
         ".html": {
           "relative_path": "api/ZptSharp.Tal.DefineAttributeDecorator.html",
-          "hash": "8hwwwnP/ZTmhc56doF1WZA=="
+          "hash": "G7yYBZT0JypslUajKrpWPA=="
         }
       },
       "is_incremental": false,
@@ -3885,43 +2781,7 @@
       "output": {
         ".html": {
           "relative_path": "api/ZptSharp.Tal.DomExpressionEvaluator.html",
-          "hash": "KYEf+ChXpqp1jLXi7Uc6vg=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/ZptSharp.Tal.DomValueExpressionResult.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/ZptSharp.Tal.DomValueExpressionResult.html",
-          "hash": "Y8vjplpuGyUETEQlEeGVoA=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/ZptSharp.Tal.IEvaluatesDomValueExpression.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/ZptSharp.Tal.IEvaluatesDomValueExpression.html",
-          "hash": "NjZmiGoieZZfdjqexyUE3A=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/ZptSharp.Tal.IGetsAttributeDefinitions.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/ZptSharp.Tal.IGetsAttributeDefinitions.html",
-          "hash": "uW7egxfif2jeDC4FlDHsMA=="
+          "hash": "kqOrTIL6MaNZtTI5D6PuIA=="
         }
       },
       "is_incremental": false,
@@ -3933,31 +2793,7 @@
       "output": {
         ".html": {
           "relative_path": "api/ZptSharp.Tal.IGetsRepetitionContexts.html",
-          "hash": "AC3FfDqyZ4gp5QTpKNP/WA=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/ZptSharp.Tal.IGetsTalAttributeSpecs.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/ZptSharp.Tal.IGetsTalAttributeSpecs.html",
-          "hash": "6xogEVtR0yaR9cbVEd/iKg=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/ZptSharp.Tal.IGetsTalContextProcessor.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/ZptSharp.Tal.IGetsTalContextProcessor.html",
-          "hash": "CyGeyYbsnJL40ZgbFwJkDw=="
+          "hash": "9bwGEsr0XFYBdAuC+WEajQ=="
         }
       },
       "is_incremental": false,
@@ -3969,31 +2805,7 @@
       "output": {
         ".html": {
           "relative_path": "api/ZptSharp.Tal.IGetsVariableDefinitionsFromAttributeValue.html",
-          "hash": "2jyFWedaEcEIpiMpnK4Jfg=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/ZptSharp.Tal.IInterpretsExpressionResult.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/ZptSharp.Tal.IInterpretsExpressionResult.html",
-          "hash": "Q6k0q+ql0f8elHIiogH77g=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/ZptSharp.Tal.InvalidTalAttributeException.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/ZptSharp.Tal.InvalidTalAttributeException.html",
-          "hash": "z9u6Ch4hxf7DqtZH6qWCJA=="
+          "hash": "7AQS398fW4LjZ1AFeE+pjg=="
         }
       },
       "is_incremental": false,
@@ -4005,7 +2817,7 @@
       "output": {
         ".html": {
           "relative_path": "api/ZptSharp.Tal.NoOpTalContextProcessor.html",
-          "hash": "YBUQuHWGVMBNkMO6XOBFlg=="
+          "hash": "a0vX2i48FYEtsh8PF/muEg=="
         }
       },
       "is_incremental": false,
@@ -4017,7 +2829,7 @@
       "output": {
         ".html": {
           "relative_path": "api/ZptSharp.Tal.OmitTagAttributeDecorator.html",
-          "hash": "VkYEoGTl7OgydP8ZlVHUlQ=="
+          "hash": "WV/Nkew/QzkMAlx1RcCMhQ=="
         }
       },
       "is_incremental": false,
@@ -4029,7 +2841,7 @@
       "output": {
         ".html": {
           "relative_path": "api/ZptSharp.Tal.OnErrorAttributeDecorator.html",
-          "hash": "0lScaCHbdRe+TQ7ancw56g=="
+          "hash": "M0SKkHtv5KllHrvnyYiwxw=="
         }
       },
       "is_incremental": false,
@@ -4041,19 +2853,7 @@
       "output": {
         ".html": {
           "relative_path": "api/ZptSharp.Tal.OnErrorExceptionAdapter.html",
-          "hash": "ChU7hODc4KuAJX1FF12ZOw=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/ZptSharp.Tal.OnErrorHandlingException.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/ZptSharp.Tal.OnErrorHandlingException.html",
-          "hash": "6eSJ8wOciwpixu32Jvyu1w=="
+          "hash": "I1I2WGvPljCiwf9M9leC9Q=="
         }
       },
       "is_incremental": false,
@@ -4065,7 +2865,7 @@
       "output": {
         ".html": {
           "relative_path": "api/ZptSharp.Tal.RecordMetalMacroNameDecorator.html",
-          "hash": "MVMikv93SbMmpRQbaoy5Dg=="
+          "hash": "adlhFjEGelOuaMOZ7+O8ZA=="
         }
       },
       "is_incremental": false,
@@ -4077,7 +2877,7 @@
       "output": {
         ".html": {
           "relative_path": "api/ZptSharp.Tal.RepeatAttributeDecorator.html",
-          "hash": "4n8bIx2IH1DK/b7Q4kIjIw=="
+          "hash": "m1ccYkaO3OJ2XxgVK4L24g=="
         }
       },
       "is_incremental": false,
@@ -4089,7 +2889,7 @@
       "output": {
         ".html": {
           "relative_path": "api/ZptSharp.Tal.RepetitionContextProvider.html",
-          "hash": "1UwBaBs2moKZjs7WxVbI3Q=="
+          "hash": "nniKXYhSAqlkhkL87x4GNg=="
         }
       },
       "is_incremental": false,
@@ -4101,7 +2901,7 @@
       "output": {
         ".html": {
           "relative_path": "api/ZptSharp.Tal.TalAttributeSpecProvider.html",
-          "hash": "P4SpQqUIl4gjDc4QjeKPiA=="
+          "hash": "936FDD6tVeX0VFW2E5RHFg=="
         }
       },
       "is_incremental": false,
@@ -4113,19 +2913,7 @@
       "output": {
         ".html": {
           "relative_path": "api/ZptSharp.Tal.TalContextProcessorFactory.html",
-          "hash": "YxwXQJeByCQ8zAcLqKQRpw=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/ZptSharp.Tal.TalExpressionEvaluationException.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/ZptSharp.Tal.TalExpressionEvaluationException.html",
-          "hash": "vpqGHbjlhxdNDYHK1c4usw=="
+          "hash": "GDUzq1j/OX3GgUy+H1OjyQ=="
         }
       },
       "is_incremental": false,
@@ -4137,7 +2925,7 @@
       "output": {
         ".html": {
           "relative_path": "api/ZptSharp.Tal.TalExpressionResultInterpreter.html",
-          "hash": "xlMSKk3G6i1xiv/Z8rsr4Q=="
+          "hash": "E4B/i+6Qi6cwWsTqlgEQ1A=="
         }
       },
       "is_incremental": false,
@@ -4149,7 +2937,7 @@
       "output": {
         ".html": {
           "relative_path": "api/ZptSharp.Tal.VariableDefinition.html",
-          "hash": "ocQmcyiqNXB+IF/szCfiZw=="
+          "hash": "GDC2zD/l8Yy2gmfBUB7ZAw=="
         }
       },
       "is_incremental": false,
@@ -4161,7 +2949,7 @@
       "output": {
         ".html": {
           "relative_path": "api/ZptSharp.Tal.VariableDefinitionProvider.html",
-          "hash": "iXZDx9J8FGlXr5hwEdxNQQ=="
+          "hash": "tU/07rXdosjgTG25znvCIA=="
         }
       },
       "is_incremental": false,
@@ -4173,19 +2961,7 @@
       "output": {
         ".html": {
           "relative_path": "api/ZptSharp.Tal.html",
-          "hash": "pmU33D8xoqt6IivL6t7cpw=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/ZptSharp.TemplateDirectory.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/ZptSharp.TemplateDirectory.html",
-          "hash": "hSOSxcVW7/0p+bzNQS+Hbg=="
+          "hash": "6M9v8BmzToLZOwySFiAkxA=="
         }
       },
       "is_incremental": false,
@@ -4197,7 +2973,7 @@
       "output": {
         ".html": {
           "relative_path": "api/ZptSharp.XmlHostingBuilderExtensions.html",
-          "hash": "35Hgd5w9Kwv2Senr7aLb5A=="
+          "hash": "5PhphoV4CB8XaOGXzXdbcw=="
         }
       },
       "is_incremental": false,
@@ -4209,19 +2985,7 @@
       "output": {
         ".html": {
           "relative_path": "api/ZptSharp.ZptFileRenderer.html",
-          "hash": "l/2Ip0KDaxUF7ZQEjurqyw=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/ZptSharp.ZptRenderingException.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/ZptSharp.ZptRenderingException.html",
-          "hash": "vUHvQPp7yh6A5/uTvtWdpQ=="
+          "hash": "TvOdZV4HeA6zomDV+PyoPQ=="
         }
       },
       "is_incremental": false,
@@ -4233,7 +2997,7 @@
       "output": {
         ".html": {
           "relative_path": "api/ZptSharp.ZptSharpHost.html",
-          "hash": "ZtnyR65ye7K2iOv0UjKztA=="
+          "hash": "BIjcOJFptJ6AxMwP5jvKxg=="
         }
       },
       "is_incremental": false,
@@ -4245,7 +3009,7 @@
       "output": {
         ".html": {
           "relative_path": "api/ZptSharp.ZptSharpHostingBuilderExtensions.html",
-          "hash": "rjBgR53NSl3I0I2FbXMQ8Q=="
+          "hash": "FtK52no4SIwbXpsAkPzeCw=="
         }
       },
       "is_incremental": false,
@@ -4257,7 +3021,7 @@
       "output": {
         ".html": {
           "relative_path": "api/ZptSharp.ZptSharpServiceCollectionExtensions.html",
-          "hash": "dCmf4LF/657sAxAcakrYQQ=="
+          "hash": "tDakT2tXCzWMef6d/LUa+g=="
         }
       },
       "is_incremental": false,
@@ -4269,7 +3033,7 @@
       "output": {
         ".html": {
           "relative_path": "api/ZptSharp.html",
-          "hash": "UXbd7AP0RjqY+SM6q3Mtxg=="
+          "hash": "bgz4TAxO8yaTbPeG44wNdA=="
         }
       },
       "is_incremental": false,
@@ -4281,7 +3045,7 @@
       "output": {
         ".html": {
           "relative_path": "api/index.html",
-          "hash": "Jz2kyw8bTbdAZe5LM6GskQ=="
+          "hash": "VC9Q/Dv4nld4/G5ZbVui7w=="
         }
       },
       "is_incremental": false,
@@ -4293,7 +3057,7 @@
       "output": {
         ".html": {
           "relative_path": "api/toc.html",
-          "hash": "LE+Av22UfSIyNZyTOqVe7A=="
+          "hash": "+o7NBWANIRGiNy1+IJFkfA=="
         }
       },
       "is_incremental": false,
@@ -4305,7 +3069,7 @@
       "output": {
         ".html": {
           "relative_path": "articles/Architecture.html",
-          "hash": "oJ+babL6ZUR2VPFhuMeX2Q=="
+          "hash": "7r+lBJf9Yv6q0JU9uNMJIQ=="
         }
       },
       "is_incremental": false,
@@ -4365,7 +3129,7 @@
       "output": {
         ".html": {
           "relative_path": "articles/FurtherTestingInfo.html",
-          "hash": "wC+giUEtjaxvMqjtW+Sjog=="
+          "hash": "jCcAKxKg7tfSCQBW2QWMsg=="
         }
       },
       "is_incremental": false,
@@ -4389,7 +3153,7 @@
       "output": {
         ".html": {
           "relative_path": "articles/NuGetPackages.html",
-          "hash": "fssB0N0sCFYKaoequ6Hapg=="
+          "hash": "YaUAuPUovZ/qMI4EUGI2+w=="
         }
       },
       "is_incremental": false,
@@ -4512,7 +3276,7 @@
       "output": {
         ".html": {
           "relative_path": "articles/ZptReference/Index.html",
-          "hash": "TUmlkVGWRhH7/lo4YAhiHg=="
+          "hash": "QgyxdrzyfAIWsVFVaKmrfg=="
         }
       },
       "is_incremental": false,
@@ -4632,7 +3396,7 @@
       "output": {
         ".html": {
           "relative_path": "articles/toc.html",
-          "hash": "YK5MAgbHMGgEmYUIrTYRoA=="
+          "hash": "DVEVFrzKIxjicLBhVMkrpg=="
         }
       },
       "is_incremental": false,
@@ -4694,7 +3458,7 @@
         "ManagedReferenceDocumentProcessor": {
           "can_incremental": false,
           "incrementalPhase": "build",
-          "total_file_count": 356,
+          "total_file_count": 253,
           "skipped_file_count": 0
         },
         "ResourceDocumentProcessor": {

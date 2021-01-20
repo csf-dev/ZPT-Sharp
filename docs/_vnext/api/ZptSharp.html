@@ -78,70 +78,40 @@
     <h3 id="classes">Classes
   </h3>
       <h4><a class="xref" href="ZptSharp.AngleSharpHostingBuilderExtensions.html">AngleSharpHostingBuilderExtensions</a></h4>
-      <section><p>Extension methods for <a class="xref" href="ZptSharp.Hosting.IBuildsHostingEnvironment.html">IBuildsHostingEnvironment</a> instances.</p>
+      <section><p>Extension methods for <span class="xref">ZptSharp.Hosting.IBuildsHostingEnvironment</span> instances.</p>
 </section>
       <h4><a class="xref" href="ZptSharp.CSharpHostingBuilderExtensions.html">CSharpHostingBuilderExtensions</a></h4>
       <section><p>Extension methods related to the use of ZPT Python expressions.</p>
 </section>
       <h4><a class="xref" href="ZptSharp.HapHostingBuilderExtensions.html">HapHostingBuilderExtensions</a></h4>
-      <section><p>Extension methods for <a class="xref" href="ZptSharp.Hosting.IBuildsHostingEnvironment.html">IBuildsHostingEnvironment</a> instances.</p>
-</section>
-      <h4><a class="xref" href="ZptSharp.NoMatchingReaderWriterException.html">NoMatchingReaderWriterException</a></h4>
-      <section><p>Raised when no suitable implementation of <a class="xref" href="ZptSharp.Dom.IReadsAndWritesDocument.html">IReadsAndWritesDocument</a> can be found,
-but an implementation is required in order to proceed.</p>
+      <section><p>Extension methods for <span class="xref">ZptSharp.Hosting.IBuildsHostingEnvironment</span> instances.</p>
 </section>
       <h4><a class="xref" href="ZptSharp.PythonHostingBuilderExtensions.html">PythonHostingBuilderExtensions</a></h4>
       <section><p>Extension methods related to the use of ZPT Python expressions.</p>
 </section>
       <h4><a class="xref" href="ZptSharp.StreamToTextWriterCopier.html">StreamToTextWriterCopier</a></h4>
-      <section><p>Implementation of <a class="xref" href="ZptSharp.IWritesStreamToTextWriter.html">IWritesStreamToTextWriter</a> which uses either a
+      <section><p>Implementation of <span class="xref">ZptSharp.IWritesStreamToTextWriter</span> which uses either a
 stream-copy (if the text writer is in fact a <span class="xref">System.IO.StreamWriter</span>),
 or otherwise a buffered read &amp; write if the text writer is any other implementation.</p>
 </section>
-      <h4><a class="xref" href="ZptSharp.TemplateDirectory.html">TemplateDirectory</a></h4>
-      <section><p>A model which indicates a filesystem directory containing ZPT documents.</p>
-</section>
       <h4><a class="xref" href="ZptSharp.XmlHostingBuilderExtensions.html">XmlHostingBuilderExtensions</a></h4>
-      <section><p>Extension methods for <a class="xref" href="ZptSharp.Hosting.IBuildsHostingEnvironment.html">IBuildsHostingEnvironment</a> instances.</p>
+      <section><p>Extension methods for <span class="xref">ZptSharp.Hosting.IBuildsHostingEnvironment</span> instances.</p>
 </section>
       <h4><a class="xref" href="ZptSharp.ZptFileRenderer.html">ZptFileRenderer</a></h4>
-      <section><p>Implementation of <a class="xref" href="ZptSharp.IRendersZptFile.html">IRendersZptFile</a> which uses an
-<a class="xref" href="ZptSharp.IRendersZptDocument.html">IRendersZptDocument</a> from a factory.  It also uses an
-<a class="xref" href="ZptSharp.Dom.IGetsDocumentReaderWriterForFile.html">IGetsDocumentReaderWriterForFile</a> to attempt to get the
+      <section><p>Implementation of <span class="xref">ZptSharp.IRendersZptFile</span> which uses an
+<span class="xref">ZptSharp.IRendersZptDocument</span> from a factory.  It also uses an
+<span class="xref">ZptSharp.Dom.IGetsDocumentReaderWriterForFile</span> to attempt to get the
 appropriate document reader/writer for the file.</p>
 </section>
-      <h4><a class="xref" href="ZptSharp.ZptRenderingException.html">ZptRenderingException</a></h4>
-      <section><p>Base class for an exception raised by the ZPT Sharp rendering process.</p>
-</section>
       <h4><a class="xref" href="ZptSharp.ZptSharpHost.html">ZptSharpHost</a></h4>
-      <section><p>A utility to get an instance of <a class="xref" href="ZptSharp.Hosting.IHostsZptSharp.html">IHostsZptSharp</a>, enabling usage of ZptSharp
+      <section><p>A utility to get an instance of <span class="xref">ZptSharp.Hosting.IHostsZptSharp</span>, enabling usage of ZptSharp
 without configuring it within your own application's dependency injection.</p>
 </section>
       <h4><a class="xref" href="ZptSharp.ZptSharpHostingBuilderExtensions.html">ZptSharpHostingBuilderExtensions</a></h4>
-      <section><p>Extension methods for <a class="xref" href="ZptSharp.Hosting.IBuildsHostingEnvironment.html">IBuildsHostingEnvironment</a> instances.</p>
+      <section><p>Extension methods for <span class="xref">ZptSharp.Hosting.IBuildsHostingEnvironment</span> instances.</p>
 </section>
       <h4><a class="xref" href="ZptSharp.ZptSharpServiceCollectionExtensions.html">ZptSharpServiceCollectionExtensions</a></h4>
       <section><p>Extension methods for <span class="xref">Microsoft.Extensions.DependencyInjection.IServiceCollection</span> instances.</p>
-</section>
-    <h3 id="interfaces">Interfaces
-  </h3>
-      <h4><a class="xref" href="ZptSharp.IConfiguresRootContext.html">IConfiguresRootContext</a></h4>
-      <section><p>An object which may be used to add additional named values to the root TALES context.</p>
-</section>
-      <h4><a class="xref" href="ZptSharp.IGetsStructuredMarkup.html">IGetsStructuredMarkup</a></h4>
-      <section><p>An object which can get a markup string, which may be inserted directly into a template
-document without any escaping or encoding.</p>
-</section>
-      <h4><a class="xref" href="ZptSharp.IRendersZptDocument.html">IRendersZptDocument</a></h4>
-      <section><p>An entry-point object for use by consuming logic.  Renders ZPT documents
-from a stream and returns the rendered document as a stream.</p>
-</section>
-      <h4><a class="xref" href="ZptSharp.IRendersZptFile.html">IRendersZptFile</a></h4>
-      <section><p>An entry-point object for use by consuming logic.  Renders ZPT documents
-from a filesystem file and returns the rendered document as a stream.</p>
-</section>
-      <h4><a class="xref" href="ZptSharp.IWritesStreamToTextWriter.html">IWritesStreamToTextWriter</a></h4>
-      <section><p>An object which writes the contents of a <span class="xref">System.IO.Stream</span> to a <span class="xref">System.IO.TextWriter</span>.</p>
 </section>
 </article>
           </div>

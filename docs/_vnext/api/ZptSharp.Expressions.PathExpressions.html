@@ -97,7 +97,7 @@ only defined (global or local) variables to resolve values from the expression c
 Similar to <a class="xref" href="ZptSharp.Expressions.PathExpressions.ExpressionContextWrappingDecorator.html">ExpressionContextWrappingDecorator</a>.</p>
 </section>
       <h4><a class="xref" href="ZptSharp.Expressions.PathExpressions.DefinedVariablesOnlyPathExpressionEvaluator.html">DefinedVariablesOnlyPathExpressionEvaluator</a></h4>
-      <section><p>An implementation of <a class="xref" href="ZptSharp.Expressions.IEvaluatesExpression.html">IEvaluatesExpression</a> which evaluates TALES 'var' expressions.</p>
+      <section><p>An implementation of <span class="xref">ZptSharp.Expressions.IEvaluatesExpression</span> which evaluates TALES 'var' expressions.</p>
 </section>
       <h4><a class="xref" href="ZptSharp.Expressions.PathExpressions.DynamicObjectValueProvider.html">DynamicObjectValueProvider</a></h4>
       <section><p>A chain of responsibility class which get values from object that implement
@@ -111,9 +111,9 @@ to the wrapped implementation.</p>
 </section>
       <h4><a class="xref" href="ZptSharp.Expressions.PathExpressions.ExpressionContextWrappingDecorator.html">ExpressionContextWrappingDecorator</a></h4>
       <section><p>A decorator class for the <a class="xref" href="ZptSharp.Expressions.PathExpressions.IGetsValueFromObject.html">IGetsValueFromObject</a> service, which detects
-instances of <a class="xref" href="ZptSharp.Expressions.ExpressionContext.html">ExpressionContext</a> and wraps them with an instance of
+instances of <span class="xref">ZptSharp.Expressions.ExpressionContext</span> and wraps them with an instance of
 <a class="xref" href="ZptSharp.Expressions.NamedTalesValueForExpressionContextAdapter.html">NamedTalesValueForExpressionContextAdapter</a>, so that subsequent classes in
-the decorator/chain may treat them as <a class="xref" href="ZptSharp.Expressions.IGetsNamedTalesValue.html">IGetsNamedTalesValue</a>.</p>
+the decorator/chain may treat them as <span class="xref">ZptSharp.Expressions.IGetsNamedTalesValue</span>.</p>
 </section>
       <h4><a class="xref" href="ZptSharp.Expressions.PathExpressions.FailureValueProvider.html">FailureValueProvider</a></h4>
       <section><p>An implementation of <a class="xref" href="ZptSharp.Expressions.PathExpressions.IGetsValueFromObject.html">IGetsValueFromObject</a> which returns a failure result.
@@ -126,7 +126,7 @@ only global variables to resolve values from the expression context.
 Similar to <a class="xref" href="ZptSharp.Expressions.PathExpressions.ExpressionContextWrappingDecorator.html">ExpressionContextWrappingDecorator</a>.</p>
 </section>
       <h4><a class="xref" href="ZptSharp.Expressions.PathExpressions.GlobalVariablesOnlyPathExpressionEvaluator.html">GlobalVariablesOnlyPathExpressionEvaluator</a></h4>
-      <section><p>An implementation of <a class="xref" href="ZptSharp.Expressions.IEvaluatesExpression.html">IEvaluatesExpression</a> which evaluates TALES 'global' expressions.</p>
+      <section><p>An implementation of <span class="xref">ZptSharp.Expressions.IEvaluatesExpression</span> which evaluates TALES 'global' expressions.</p>
 </section>
       <h4><a class="xref" href="ZptSharp.Expressions.PathExpressions.IntegerKeyedDictionaryValueProvider.html">IntegerKeyedDictionaryValueProvider</a></h4>
       <section><p>A chain of responsibility class which get values from any objects which implement any form of
@@ -139,11 +139,11 @@ only local variables to resolve values from the expression context.
 Similar to <a class="xref" href="ZptSharp.Expressions.PathExpressions.ExpressionContextWrappingDecorator.html">ExpressionContextWrappingDecorator</a>.</p>
 </section>
       <h4><a class="xref" href="ZptSharp.Expressions.PathExpressions.LocalVariablesOnlyPathExpressionEvaluator.html">LocalVariablesOnlyPathExpressionEvaluator</a></h4>
-      <section><p>An implementation of <a class="xref" href="ZptSharp.Expressions.IEvaluatesExpression.html">IEvaluatesExpression</a> which evaluates TALES 'local' expressions.</p>
+      <section><p>An implementation of <span class="xref">ZptSharp.Expressions.IEvaluatesExpression</span> which evaluates TALES 'local' expressions.</p>
 </section>
       <h4><a class="xref" href="ZptSharp.Expressions.PathExpressions.NamedTalesValueProvider.html">NamedTalesValueProvider</a></h4>
       <section><p>A chain of responsibility class which detects when the object from
-which to get a value is an implementation of <a class="xref" href="ZptSharp.Expressions.IGetsNamedTalesValue.html">IGetsNamedTalesValue</a>.
+which to get a value is an implementation of <span class="xref">ZptSharp.Expressions.IGetsNamedTalesValue</span>.
 If it is, then its built-in functionality is used to get the value.</p>
 </section>
       <h4><a class="xref" href="ZptSharp.Expressions.PathExpressions.PathEvaluationContext.html">PathEvaluationContext</a></h4>
@@ -163,7 +163,7 @@ If it is, then its built-in functionality is used to get the value.</p>
 but very similarly-behaved expression types.</p>
 </section>
       <h4><a class="xref" href="ZptSharp.Expressions.PathExpressions.PathExpressionEvaluator.html">PathExpressionEvaluator</a></h4>
-      <section><p>An implementation of <a class="xref" href="ZptSharp.Expressions.IEvaluatesExpression.html">IEvaluatesExpression</a> which evaluates TALES 'path' expressions.</p>
+      <section><p>An implementation of <span class="xref">ZptSharp.Expressions.IEvaluatesExpression</span> which evaluates TALES 'path' expressions.</p>
 </section>
       <h4><a class="xref" href="ZptSharp.Expressions.PathExpressions.PathExpressionParser.html">PathExpressionParser</a></h4>
       <section><p>Default implementation of <a class="xref" href="ZptSharp.Expressions.PathExpressions.IParsesPathExpression.html">IParsesPathExpression</a>.</p>
@@ -196,7 +196,7 @@ we may read values from them based upon their string keys.</p>
 </section>
       <h4><a class="xref" href="ZptSharp.Expressions.PathExpressions.TemplateDirectoryValueProvider.html">TemplateDirectoryValueProvider</a></h4>
       <section><p>A chain of responsibility class which get values from an objects of type
-<a class="xref" href="ZptSharp.TemplateDirectory.html">TemplateDirectory</a>.  If the input object is a template directory then
+<span class="xref">ZptSharp.TemplateDirectory</span>.  If the input object is a template directory then
 the output will either be a ZPT document adapter created via <a class="xref" href="ZptSharp.Metal.IGetsMetalDocumentAdapter.html">IGetsMetalDocumentAdapter</a>,
 or it will be another template directory (representing directory traversal) or an exception will
 be raised.</p>
@@ -227,7 +227,7 @@ and get a result.</p>
     <h3 id="enums">Enums
   </h3>
       <h4><a class="xref" href="ZptSharp.Expressions.PathExpressions.RootScopeLimitation.html">RootScopeLimitation</a></h4>
-      <section><p>Enumerates the manners in which an <a class="xref" href="ZptSharp.Expressions.ExpressionContext.html">ExpressionContext</a> may be used to
+      <section><p>Enumerates the manners in which an <span class="xref">ZptSharp.Expressions.ExpressionContext</span> may be used to
 provide the root of a path expression.</p>
 </section>
 </article>

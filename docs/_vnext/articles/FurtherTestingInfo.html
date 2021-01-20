@@ -99,7 +99,7 @@ If they are run together then one project's log with overwrite the other.
 This appears to be a limitation when using <code>dotnet test</code> combined with the NUnit test adapter &amp; the NUnit test logger.</p>
 <h3 id="command-to-run-tests">Command to run tests</h3>
 <p>To run tests and get execution logs &amp; diagnostic information, use the following command:</p>
-<pre><code>dotnet test [Project] --settings [Settings file]
+<pre><code class="lang-text">dotnet test [Project] --settings [Settings file]
 </code></pre>
 <ul>
 <li>The <code>[Project]</code> placeholder is filled by the path to a test project, as shown in the table above.</li>
@@ -111,7 +111,7 @@ This appears to be a limitation when using <code>dotnet test</code> combined wit
 </li>
 </ul>
 <p>For example, to run the MVC5 view engine tests on a Windows environment:</p>
-<pre><code>dotnet test MvcViewEngines/ZptSharp.Mvc5.Tests --settings Tools\Windows.runsettings
+<pre><code class="lang-text">dotnet test MvcViewEngines/ZptSharp.Mvc5.Tests --settings Tools\Windows.runsettings
 </code></pre>
 <h3 id="the-logs--diagnostic-output">The logs &amp; diagnostic output</h3>
 <p>These runsettings files configure the test run so that detailed diagnostic output is written to a <code>.TestResults</code> directory in the root of the solution.  This includes an <strong>XML results file</strong> from the test run and also detailed results of any failed integration tests.</p>

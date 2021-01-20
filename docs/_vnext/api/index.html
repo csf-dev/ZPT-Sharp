@@ -72,9 +72,9 @@
 <p>This guide takes you through the process of adding ZptSharp to your own application, consuming it as an API.</p>
 <h2 id="installing-nuget-packages">Installing NuGet packages</h2>
 <p>The first step is to add references to the appropriate <a href="../articles/NuGetPackages.html">ZptSharp NuGet packages</a> from your app.
-The project/assembly which sets up your dependency injection must reference the package <strong>ZptSharp.Impl</strong>, as well as any document provider or expression evaluator packages you wish to use.
+The project/assembly which sets up your dependency injection must reference the package <strong>ZptSharp</strong>, as well as any document provider or expression evaluator packages you wish to use.
 A working ZptSharp environment <em>requires at least one document provider</em>.</p>
-<p>If your app makes use of ZptSharp from <em>a different project/assembly</em>, then that only need reference the <strong>ZptSharp</strong> package.
+<p>If your app makes use of ZptSharp from <em>a different project/assembly</em>, then that only need reference the <strong>ZptSharp.Abstractions</strong> package.
 Once added to DI, ZptSharp may be consumed from only its interfaces.</p>
 <h2 id="adding-zptsharp-to-di">Adding ZptSharp to DI</h2>
 <p>The second step is to add ZptSharp to <a href="https://docs.microsoft.com/en-us/dotnet/core/extensions/dependency-injection">your application's dependency injection</a> (the <a href="https://docs.microsoft.com/en-us/dotnet/api/microsoft.extensions.dependencyinjection.iservicecollection"><code>IServiceCollection</code></a>). This should occur in your application's startup.
@@ -96,7 +96,7 @@ void RegisterServices(IServiceCollection serviceCollection)
         .AddAngleSharpZptDocuments();
 }
 </code></pre>
-<p>See the documentation for <a class="xref" href="ZptSharp.Hosting.IBuildsHostingEnvironment.html">the ZptSharp DI builder object</a> for a full list of the available extension methods.</p>
+<p>See the documentation for <a href="xref:ZptSharp.Hosting.IBuildsHostingEnvironment">the ZptSharp DI builder object</a> for a full list of the available extension methods.</p>
 <h3 id="if-you-cannot-use-di">If you cannot use DI</h3>
 <p>It is strongly recommended to consume ZptSharp via dependency injection as described above.
 If you cannot do this then it is possible to create/get an object which provides access to ZptSharp in a self-contained manner.
@@ -116,7 +116,7 @@ var host = ZptSharpHost.GetHost(builder =&gt;
 <h2 id="injecting-and-consuming-zptsharp">Injecting and consuming ZptSharp</h2>
 <p>Once ZptSharp is available via your application's dependency injection, you may inject &amp; consume ZptSharp's service interfaces in your app logic.</p>
 <p>The table below lists a few interfaces for ZptSharp services which are intended for use as entry-points into its logic.
-<a class="xref" href="ZptSharp.Hosting.IHostsZptSharp.html">The self-contained host</a> which does not use DI also makes these same interfaces available via its properties.</p>
+<a href="xref:ZptSharp.Hosting.IHostsZptSharp">The self-contained host</a> which does not use DI also makes these same interfaces available via its properties.</p>
 <table>
 <thead>
 <tr>
@@ -126,25 +126,25 @@ var host = ZptSharpHost.GetHost(builder =&gt;
 </thead>
 <tbody>
 <tr>
-<td><a class="xref" href="ZptSharp.IRendersZptFile.html"><code>IRendersZptFile</code></a></td>
+<td><a href="xref:ZptSharp.IRendersZptFile"><code>IRendersZptFile</code></a></td>
 <td>Used to render ZPT documents from file-system files</td>
 </tr>
 <tr>
-<td><a class="xref" href="ZptSharp.IRendersZptDocument.html"><code>IRendersZptDocument</code></a></td>
+<td><a href="xref:ZptSharp.IRendersZptDocument"><code>IRendersZptDocument</code></a></td>
 <td>Used to render ZPT documents from sources <em>which are not</em> file-system files</td>
 </tr>
 <tr>
-<td><a class="xref" href="ZptSharp.IWritesStreamToTextWriter.html"><code>IWritesStreamToTextWriter</code></a></td>
+<td><a href="xref:ZptSharp.IWritesStreamToTextWriter"><code>IWritesStreamToTextWriter</code></a></td>
 <td>Used to save the results of rendering to a <code>System.IO.TextWriter</code> where applicable</td>
 </tr>
 <tr>
-<td><a class="xref" href="ZptSharp.BulkRendering.IRendersManyFiles.html"><code>IRendersManyFiles</code></a></td>
+<td><a href="xref:ZptSharp.BulkRendering.IRendersManyFiles"><code>IRendersManyFiles</code></a></td>
 <td>Used to perform bulk-rendering of many source files, using the same model for all</td>
 </tr>
 </tbody>
 </table>
 <h2 id="configuring-the-rendering-operations">Configuring the rendering operations</h2>
-<p>The methods <a class="xref" href="ZptSharp.IRendersZptFile.html#ZptSharp_IRendersZptFile_RenderAsync_System_String_System_Object_ZptSharp_Config_RenderingConfig_System_Threading_CancellationToken_"><code>IRendersZptFile.RenderAsync</code></a>, <a class="xref" href="ZptSharp.IRendersZptDocument.html#ZptSharp_IRendersZptDocument_RenderAsync_System_IO_Stream_System_Object_ZptSharp_Config_RenderingConfig_System_Threading_CancellationToken_ZptSharp_Rendering_IDocumentSourceInfo_"><code>IRendersZptDocument.RenderAsync</code></a> &amp; <a class="xref" href="ZptSharp.BulkRendering.IRendersManyFiles.html#ZptSharp_BulkRendering_IRendersManyFiles_RenderAllAsync_ZptSharp_BulkRendering_BulkRenderingRequest_System_Threading_CancellationToken_"><code>IRendersManyFiles.RenderAllAsync</code></a> all accept an instance of <a class="xref" href="ZptSharp.Config.RenderingConfig.html"><code>RenderingConfig</code></a>, either as a parameter or as part of a request object.</p>
+<p>The methods <a href="xref:ZptSharp.IRendersZptFile.RenderAsync(System.String,System.Object,ZptSharp.Config.RenderingConfig,System.Threading.CancellationToken)"><code>IRendersZptFile.RenderAsync</code></a>, <a href="xref:ZptSharp.IRendersZptDocument.RenderAsync(System.IO.Stream,System.Object,ZptSharp.Config.RenderingConfig,System.Threading.CancellationToken,ZptSharp.Rendering.IDocumentSourceInfo)"><code>IRendersZptDocument.RenderAsync</code></a> &amp; <a href="xref:ZptSharp.BulkRendering.IRendersManyFiles.RenderAllAsync(ZptSharp.BulkRendering.BulkRenderingRequest,System.Threading.CancellationToken)"><code>IRendersManyFiles.RenderAllAsync</code></a> all accept an instance of <a href="xref:ZptSharp.Config.RenderingConfig"><code>RenderingConfig</code></a>, either as a parameter or as part of a request object.</p>
 <p>You are advised to read the documentation for the rendering configuration, to see the available options which may be used to customize the process.</p>
 </article>
           </div>

@@ -74,12 +74,12 @@
   <h1 id="ZptSharp_Expressions_RegistryBasedExpressionEvaluator" data-uid="ZptSharp.Expressions.RegistryBasedExpressionEvaluator" class="text-break">Class RegistryBasedExpressionEvaluator
   </h1>
   <div class="markdown level0 summary"><p>
-An implementation of <a class="xref" href="ZptSharp.Expressions.IEvaluatesExpression.html">IEvaluatesExpression</a> which makes use of
+An implementation of <span class="xref">ZptSharp.Expressions.IEvaluatesExpression</span> which makes use of
 the registry pattern to select and delegate execution to another implementation (of
 the same interface).  This selection occurs based upon the expression type.
 </p>
 <p>
-Additionally, when delegating to an implementation of <a class="xref" href="ZptSharp.Expressions.IEvaluatesExpression.html">IEvaluatesExpression</a>
+Additionally, when delegating to an implementation of <span class="xref">ZptSharp.Expressions.IEvaluatesExpression</span>
 from the registry, any expression-type prefix upon the expression is removed before
 this delegation occurs.
 </p>
@@ -92,7 +92,7 @@ this delegation occurs.
   </div>
   <div classs="implements">
     <h5>Implements</h5>
-    <div><a class="xref" href="ZptSharp.Expressions.IEvaluatesExpression.html">IEvaluatesExpression</a></div>
+    <div><span class="xref">ZptSharp.Expressions.IEvaluatesExpression</span></div>
   </div>
   <div class="inheritedMembers">
     <h5>Inherited Members</h5>
@@ -119,7 +119,7 @@ this delegation occurs.
     </div>
   </div>
   <h6><strong>Namespace</strong>: <a class="xref" href="ZptSharp.Expressions.html">ZptSharp.Expressions</a></h6>
-  <h6><strong>Assembly</strong>: ZptSharp.Impl.dll</h6>
+  <h6><strong>Assembly</strong>: ZptSharp.dll</h6>
   <h5 id="ZptSharp_Expressions_RegistryBasedExpressionEvaluator_syntax">Syntax</h5>
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">public class RegistryBasedExpressionEvaluator : IEvaluatesExpression</code></pre>
@@ -131,7 +131,7 @@ this delegation occurs.
     <a href="https://github.com/csf-dev/ZPT-Sharp/new/master/apiSpec/new?filename=ZptSharp_Expressions_RegistryBasedExpressionEvaluator__ctor_ZptSharp_Expressions_IGetsExpressionType_ZptSharp_Expressions_IGetsEvaluatorForExpressionType_ZptSharp_Expressions_IRemovesPrefixFromExpression_.md&amp;value=---%0Auid%3A%20ZptSharp.Expressions.RegistryBasedExpressionEvaluator.%23ctor(ZptSharp.Expressions.IGetsExpressionType%2CZptSharp.Expressions.IGetsEvaluatorForExpressionType%2CZptSharp.Expressions.IRemovesPrefixFromExpression)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/csf-dev/ZPT-Sharp/blob/master/ZptSharp.Impl/Expressions/RegistryBasedExpressionEvaluator.cs/#L51">View Source</a>
+    <a href="https://github.com/csf-dev/ZPT-Sharp/blob/master/ZptSharp/Expressions/RegistryBasedExpressionEvaluator.cs/#L51">View Source</a>
   </span>
   <a id="ZptSharp_Expressions_RegistryBasedExpressionEvaluator__ctor_" data-uid="ZptSharp.Expressions.RegistryBasedExpressionEvaluator.#ctor*"></a>
   <h4 id="ZptSharp_Expressions_RegistryBasedExpressionEvaluator__ctor_ZptSharp_Expressions_IGetsExpressionType_ZptSharp_Expressions_IGetsEvaluatorForExpressionType_ZptSharp_Expressions_IRemovesPrefixFromExpression_" data-uid="ZptSharp.Expressions.RegistryBasedExpressionEvaluator.#ctor(ZptSharp.Expressions.IGetsExpressionType,ZptSharp.Expressions.IGetsEvaluatorForExpressionType,ZptSharp.Expressions.IRemovesPrefixFromExpression)">RegistryBasedExpressionEvaluator(IGetsExpressionType, IGetsEvaluatorForExpressionType, IRemovesPrefixFromExpression)</h4>
@@ -153,19 +153,19 @@ this delegation occurs.
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="ZptSharp.Expressions.IGetsExpressionType.html">IGetsExpressionType</a></td>
+        <td><span class="xref">ZptSharp.Expressions.IGetsExpressionType</span></td>
         <td><span class="parametername">typeProvider</span></td>
         <td><p>Type provider.</p>
 </td>
       </tr>
       <tr>
-        <td><a class="xref" href="ZptSharp.Expressions.IGetsEvaluatorForExpressionType.html">IGetsEvaluatorForExpressionType</a></td>
+        <td><span class="xref">ZptSharp.Expressions.IGetsEvaluatorForExpressionType</span></td>
         <td><span class="parametername">evaluatorProvider</span></td>
         <td><p>Evaluator provider.</p>
 </td>
       </tr>
       <tr>
-        <td><a class="xref" href="ZptSharp.Expressions.IRemovesPrefixFromExpression.html">IRemovesPrefixFromExpression</a></td>
+        <td><span class="xref">ZptSharp.Expressions.IRemovesPrefixFromExpression</span></td>
         <td><span class="parametername">prefixRemover</span></td>
         <td><p>Prefix remover.</p>
 </td>
@@ -179,7 +179,7 @@ this delegation occurs.
     <a href="https://github.com/csf-dev/ZPT-Sharp/new/master/apiSpec/new?filename=ZptSharp_Expressions_RegistryBasedExpressionEvaluator_EvaluateExpressionAsync_System_String_ZptSharp_Expressions_ExpressionContext_System_Threading_CancellationToken_.md&amp;value=---%0Auid%3A%20ZptSharp.Expressions.RegistryBasedExpressionEvaluator.EvaluateExpressionAsync(System.String%2CZptSharp.Expressions.ExpressionContext%2CSystem.Threading.CancellationToken)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/csf-dev/ZPT-Sharp/blob/master/ZptSharp.Impl/Expressions/RegistryBasedExpressionEvaluator.cs/#L32">View Source</a>
+    <a href="https://github.com/csf-dev/ZPT-Sharp/blob/master/ZptSharp/Expressions/RegistryBasedExpressionEvaluator.cs/#L32">View Source</a>
   </span>
   <a id="ZptSharp_Expressions_RegistryBasedExpressionEvaluator_EvaluateExpressionAsync_" data-uid="ZptSharp.Expressions.RegistryBasedExpressionEvaluator.EvaluateExpressionAsync*"></a>
   <h4 id="ZptSharp_Expressions_RegistryBasedExpressionEvaluator_EvaluateExpressionAsync_System_String_ZptSharp_Expressions_ExpressionContext_System_Threading_CancellationToken_" data-uid="ZptSharp.Expressions.RegistryBasedExpressionEvaluator.EvaluateExpressionAsync(System.String,ZptSharp.Expressions.ExpressionContext,System.Threading.CancellationToken)">EvaluateExpressionAsync(String, ExpressionContext, CancellationToken)</h4>
@@ -207,7 +207,7 @@ this delegation occurs.
 </td>
       </tr>
       <tr>
-        <td><a class="xref" href="ZptSharp.Expressions.ExpressionContext.html">ExpressionContext</a></td>
+        <td><span class="xref">ZptSharp.Expressions.ExpressionContext</span></td>
         <td><span class="parametername">context</span></td>
         <td><p>The expression context.</p>
 </td>
@@ -238,7 +238,7 @@ this delegation occurs.
   </table>
   <h3 id="implements">Implements</h3>
   <div>
-      <a class="xref" href="ZptSharp.Expressions.IEvaluatesExpression.html">IEvaluatesExpression</a>
+      <span class="xref">ZptSharp.Expressions.IEvaluatesExpression</span>
   </div>
   <h3 id="extensionmethods">Extension Methods</h3>
   <div>
@@ -255,7 +255,7 @@ this delegation occurs.
                     <a href="https://github.com/csf-dev/ZPT-Sharp/new/master/apiSpec/new?filename=ZptSharp_Expressions_RegistryBasedExpressionEvaluator.md&amp;value=---%0Auid%3A%20ZptSharp.Expressions.RegistryBasedExpressionEvaluator%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
                   </li>
                   <li>
-                    <a href="https://github.com/csf-dev/ZPT-Sharp/blob/master/ZptSharp.Impl/Expressions/RegistryBasedExpressionEvaluator.cs/#L19" class="contribution-link">View Source</a>
+                    <a href="https://github.com/csf-dev/ZPT-Sharp/blob/master/ZptSharp/Expressions/RegistryBasedExpressionEvaluator.cs/#L19" class="contribution-link">View Source</a>
                   </li>
                 </ul>
               </div>
