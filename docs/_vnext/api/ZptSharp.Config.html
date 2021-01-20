@@ -75,8 +75,22 @@
   <div class="markdown level0 summary"></div>
   <div class="markdown level0 conceptual"></div>
   <div class="markdown level0 remarks"></div>
+    <h3 id="classes">Classes
+  </h3>
+      <h4><a class="xref" href="ZptSharp.Config.RenderingConfig.html">RenderingConfig</a></h4>
+      <section><p>Represents per-operation configuration information which influences the behaviour of the rendering process.
+This class is immutable; use a builder to prepare &amp; build configuration objects in a mutable manner.</p>
+</section>
+      <h4><a class="xref" href="ZptSharp.Config.RenderingConfig.Builder.html">RenderingConfig.Builder</a></h4>
+      <section><p>A mutable API with the same properties as <a class="xref" href="ZptSharp.Config.RenderingConfig.html">RenderingConfig</a>.  Allows setting up a desired state
+before being used to create an immutable configuration object via <a class="xref" href="ZptSharp.Config.RenderingConfig.Builder.html#ZptSharp_Config_RenderingConfig_Builder_GetConfig">GetConfig()</a>.</p>
+</section>
     <h3 id="interfaces">Interfaces
   </h3>
+      <h4><a class="xref" href="ZptSharp.Config.IGetsRootContextBuilder.html">IGetsRootContextBuilder</a></h4>
+      <section><p>An object which gets a 'configuration callback' of sorts, which may configure/set-up
+the root rendering context.  See also: <a class="xref" href="ZptSharp.Config.RenderingConfig.html#ZptSharp_Config_RenderingConfig_ContextBuilder">ContextBuilder</a>.</p>
+</section>
       <h4><a class="xref" href="ZptSharp.Config.IStoresCurrentRenderingConfig.html">IStoresCurrentRenderingConfig</a></h4>
       <section><p>An object which provides access to the rendering configuration.
 This interface is only used within the scope of a rendering request,

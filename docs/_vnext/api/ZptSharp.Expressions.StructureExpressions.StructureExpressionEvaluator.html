@@ -73,8 +73,8 @@
   
   <h1 id="ZptSharp_Expressions_StructureExpressions_StructureExpressionEvaluator" data-uid="ZptSharp.Expressions.StructureExpressions.StructureExpressionEvaluator" class="text-break">Class StructureExpressionEvaluator
   </h1>
-  <div class="markdown level0 summary"><p>An implementation of <span class="xref">ZptSharp.Expressions.IEvaluatesExpression</span> which evaluates TALES 'string' expressions.
-This returns all results wrapped within an instance of <span class="xref">ZptSharp.Expressions.StructuredMarkupObjectAdapter</span>,
+  <div class="markdown level0 summary"><p>An implementation of <a class="xref" href="ZptSharp.Expressions.IEvaluatesExpression.html">IEvaluatesExpression</a> which evaluates TALES 'string' expressions.
+This returns all results wrapped within an instance of <a class="xref" href="ZptSharp.Expressions.StructuredMarkupObjectAdapter.html">StructuredMarkupObjectAdapter</a>,
 so that they will be treated as markup by default.</p>
 </div>
   <div class="markdown level0 conceptual"></div>
@@ -85,7 +85,7 @@ so that they will be treated as markup by default.</p>
   </div>
   <div classs="implements">
     <h5>Implements</h5>
-    <div><span class="xref">ZptSharp.Expressions.IEvaluatesExpression</span></div>
+    <div><a class="xref" href="ZptSharp.Expressions.IEvaluatesExpression.html">IEvaluatesExpression</a></div>
   </div>
   <div class="inheritedMembers">
     <h5>Inherited Members</h5>
@@ -146,7 +146,7 @@ so that they will be treated as markup by default.</p>
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">ZptSharp.Expressions.IEvaluatesExpression</span></td>
+        <td><a class="xref" href="ZptSharp.Expressions.IEvaluatesExpression.html">IEvaluatesExpression</a></td>
         <td><span class="parametername">evaluator</span></td>
         <td><p>A wrapped expression evaluator.</p>
 </td>
@@ -188,7 +188,7 @@ so that they will be treated as markup by default.</p>
 </td>
       </tr>
       <tr>
-        <td><span class="xref">ZptSharp.Expressions.ExpressionContext</span></td>
+        <td><a class="xref" href="ZptSharp.Expressions.ExpressionContext.html">ExpressionContext</a></td>
         <td><span class="parametername">context</span></td>
         <td><p>The expression context.</p>
 </td>
@@ -220,7 +220,7 @@ so that they will be treated as markup by default.</p>
   <h5 id="ZptSharp_Expressions_StructureExpressions_StructureExpressionEvaluator_EvaluateExpressionAsync_System_String_ZptSharp_Expressions_ExpressionContext_System_Threading_CancellationToken__remarks">Remarks</h5>
   <div class="markdown level1 remarks"><p>
 This method must decisively evaluate the expression, if an expression cannot be evaluated
-to a conclusive result then this method must throw <span class="xref">ZptSharp.Expressions.EvaluationException</span> or
+to a conclusive result then this method must throw <a class="xref" href="ZptSharp.Expressions.EvaluationException.html">EvaluationException</a> or
 an exception derived from an evaluation exception.
 It is acceptable to return <span class="xref">null</span> from this method though, if that is the
 result of evaluating the expression.
@@ -234,7 +234,7 @@ Implementors are encouraged to act asynchronously when it is appropriate to do s
 choose to act synchronously and return an already-completed task.
 </p>
 <p>
-Note that any expression result might also be an <span class="xref">ZptSharp.Expressions.AbortZptActionToken</span>,
+Note that any expression result might also be an <a class="xref" href="ZptSharp.Expressions.AbortZptActionToken.html">AbortZptActionToken</a>,
 which is a special value indicating that the current ZPT operation should be aborted.
 </p>
 </div>
@@ -248,7 +248,7 @@ which is a special value indicating that the current ZPT operation should be abo
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">ZptSharp.Expressions.EvaluationException</span></td>
+        <td><a class="xref" href="ZptSharp.Expressions.EvaluationException.html">EvaluationException</a></td>
         <td><p>Thrown if evaluating the expression fails.</p>
 </td>
       </tr>
@@ -261,13 +261,13 @@ which is a special value indicating that the current ZPT operation should be abo
   </table>
   <h5 id="ZptSharp_Expressions_StructureExpressions_StructureExpressionEvaluator_EvaluateExpressionAsync_System_String_ZptSharp_Expressions_ExpressionContext_System_Threading_CancellationToken__seealso">See Also</h5>
   <div class="seealso">
-      <div><span class="xref">ZptSharp.Expressions.EvaluationException</span></div>
-      <div><span class="xref">ZptSharp.Expressions.AbortZptActionToken</span></div>
-      <div><span class="xref">ZptSharp.Expressions.ExpressionContext</span></div>
+      <div><a class="xref" href="ZptSharp.Expressions.EvaluationException.html">EvaluationException</a></div>
+      <div><a class="xref" href="ZptSharp.Expressions.AbortZptActionToken.html">AbortZptActionToken</a></div>
+      <div><a class="xref" href="ZptSharp.Expressions.ExpressionContext.html">ExpressionContext</a></div>
   </div>
   <h3 id="implements">Implements</h3>
   <div>
-      <span class="xref">ZptSharp.Expressions.IEvaluatesExpression</span>
+      <a class="xref" href="ZptSharp.Expressions.IEvaluatesExpression.html">IEvaluatesExpression</a>
   </div>
   <h3 id="extensionmethods">Extension Methods</h3>
   <div>

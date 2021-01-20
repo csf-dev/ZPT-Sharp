@@ -77,12 +77,26 @@
   <div class="markdown level0 remarks"></div>
     <h3 id="classes">Classes
   </h3>
+      <h4><a class="xref" href="ZptSharp.Hosting.EnvironmentRegistry.html">EnvironmentRegistry</a></h4>
+      <section><p>A singleton (per DI environment) registry which is used to indicate which types of
+expression evaluator and document provider are to be enabled.</p>
+</section>
       <h4><a class="xref" href="ZptSharp.Hosting.HostingBuilder.html">HostingBuilder</a></h4>
-      <section><p>Builder type used to set up a ZptSharp hosting environments.</p>
+      <section><p>A builder type which is used to activate optional/elective parts of the ZptSharp functionality,
+as part of setting up a ZptSharp environment.</p>
 </section>
       <h4><a class="xref" href="ZptSharp.Hosting.ZptSharpSelfHoster.html">ZptSharpSelfHoster</a></h4>
-      <section><p>An implementation of <span class="xref">ZptSharp.Hosting.IHostsZptSharp</span> which wraps an
+      <section><p>An implementation of <a class="xref" href="ZptSharp.Hosting.IHostsZptSharp.html">IHostsZptSharp</a> which wraps an
 <span class="xref">System.IServiceProvider</span> and uses that to provide the entry-points.</p>
+</section>
+    <h3 id="interfaces">Interfaces
+  </h3>
+      <h4><a class="xref" href="ZptSharp.Hosting.IBuildsHostingEnvironment.html">IBuildsHostingEnvironment</a></h4>
+      <section><p>A helper object which is used to activate optional/elective parts of the ZptSharp functionality.</p>
+</section>
+      <h4><a class="xref" href="ZptSharp.Hosting.IHostsZptSharp.html">IHostsZptSharp</a></h4>
+      <section><p>An object which is capable of hosting a ZptSharp environment, using its own
+dependency injection, separate from those of the containing application.</p>
 </section>
 </article>
           </div>

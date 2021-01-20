@@ -74,7 +74,7 @@
 <p>The consuming application must add ZptSharp to its <code>IServiceCollection</code> (dependency injection) during <strong>Startup</strong>, as well as perform a few one-time configuration/registration tasks.</p>
 <p>Once ZptSharp is set up, a project which makes use of it need only take a direct reference to the ZptSharp package. Consuming projects need not reference the other packages, because all of ZptSharp's functionality is available by injecting interfaces.</p>
 <h2 id="the-zptsharpabstractions-package">The ZptSharp.Abstractions package</h2>
-<p>The NuGet package <strong>ZptSharp.Abstractions</strong> contains only abstractions, model types and the API. In particular it contains the <a href="xref:ZptSharp.IRendersZptFile"><code>IRendersZptFile</code></a> &amp; <a href="xref:ZptSharp.IRendersZptDocument"><code>IRendersZptDocument</code></a> interfaces which are the two primary entry-points to the functionality.</p>
+<p>The NuGet package <strong>ZptSharp.Abstractions</strong> contains only abstractions, model types and the API. In particular it contains the <a class="xref" href="../api/ZptSharp.IRendersZptFile.html"><code>IRendersZptFile</code></a> &amp; <a class="xref" href="../api/ZptSharp.IRendersZptDocument.html"><code>IRendersZptDocument</code></a> interfaces which are the two primary entry-points to the functionality.</p>
 <p>This package's dependencies have been kept to a minimum, so that it is as easy as possible to consume.
 This package forms one half of &quot;The ZptSharp core&quot;.</p>
 <h2 id="the-zptsharp-package">The ZptSharp package</h2>
@@ -89,7 +89,7 @@ This package is the other half of &quot;The ZptSharp core&quot;.</p>
 </ul>
 <h2 id="document-providers">Document providers</h2>
 <p><em>In order to have a working ZptSharp implementation, you <strong>must</strong> install at least one document provider packages. The two core packages alone are not enough.</em></p>
-<p>Document providers are the way in which ZptSharp reads and writes markup documents (HTML and/or XML). The main interface which must be implemented by a document provider is <a href="xref:ZptSharp.Dom.IReadsAndWritesDocument"><code>IReadsAndWritesDocument</code></a>. They bridge the gap between the ZptSharp core packages and the DOM.</p>
+<p>Document providers are the way in which ZptSharp reads and writes markup documents (HTML and/or XML). The main interface which must be implemented by a document provider is <a class="xref" href="../api/ZptSharp.Dom.IReadsAndWritesDocument.html"><code>IReadsAndWritesDocument</code></a>. They bridge the gap between the ZptSharp core packages and the DOM.</p>
 <p>ZptSharp has three document provider packages available:</p>
 <table>
 <thead>
@@ -115,7 +115,7 @@ This package is the other half of &quot;The ZptSharp core&quot;.</p>
 </table>
 <h2 id="expression-evaluators">Expression evaluators</h2>
 <p>An expression evaluator provides support for one or more TALES expression types. <em>Unlike document providers</em>, the core packages include support for a few expression types, which may be sufficient for your application. <em>Installing additional evaluators is optional</em>.</p>
-<p>The main interface which an expression evaluator must implement is <a href="xref:ZptSharp.Expressions.IEvaluatesExpression"><code>IEvaluatesExpression</code></a>.</p>
+<p>The main interface which an expression evaluator must implement is <a class="xref" href="../api/ZptSharp.Expressions.IEvaluatesExpression.html"><code>IEvaluatesExpression</code></a>.</p>
 <p>The available expression evaluator add-on packages are:</p>
 <table>
 <thead>

@@ -74,7 +74,7 @@ These view engines are provided via the NuGet packages <strong>ZptSharp.MvcCore<
 <h2 id="installing--activating-the-view-engine">Installing &amp; activating the view engine</h2>
 <p>As well as installing the appropriate package (above) to your web application, you must activate the view engine in your web app setup.
 Common to both frameworks is the use of the <code>ZptSharpViewEngine</code> which makes use of a builder object.
-Please refer to the documentation for <a href="xref:ZptSharp.Hosting.IBuildsHostingEnvironment">the ZptSharp DI builder object</a> for further information about which extension methods are available in order to set-up ZptSharp, including the activation of add-on packages.</p>
+Please refer to the documentation for <a class="xref" href="../api/ZptSharp.Hosting.IBuildsHostingEnvironment.html">the ZptSharp DI builder object</a> for further information about which extension methods are available in order to set-up ZptSharp, including the activation of add-on packages.</p>
 <h3 id="aspnet-core-mvc">AS<span>P.N</span>ET Core MVC</h3>
 <p>To activate the ZptSharp view engine for AS<span>P.N</span>ET Core MVC you must add code similar to the below to your application starup, where services are configured.
 This may include a modification to an existing usage of <code>AddControllersWithViews()</code> in order to add the view options, where you add the ZptSharp view engine.</p>

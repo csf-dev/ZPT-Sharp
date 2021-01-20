@@ -78,50 +78,86 @@
     <h3 id="classes">Classes
   </h3>
       <h4><a class="xref" href="ZptSharp.Metal.AddDefinedMacroToGlobalScopeProcessorDecorator.html">AddDefinedMacroToGlobalScopeProcessorDecorator</a></h4>
-      <section><p>Decorator for the <span class="xref">ZptSharp.Rendering.IProcessesExpressionContext</span> service which detects element nodes
+      <section><p>Decorator for the <a class="xref" href="ZptSharp.Rendering.IProcessesExpressionContext.html">IProcessesExpressionContext</a> service which detects element nodes
 which have 'define-macro' attributes upon them.  If such an attribute is found then the
 macro is stored in the current context's global scope for later usage.</p>
 </section>
       <h4><a class="xref" href="ZptSharp.Metal.MacroExpander.html">MacroExpander</a></h4>
-      <section><p>Implementation of <span class="xref">ZptSharp.Metal.IExpandsMacro</span> which first extends the macro and then fills its slots.</p>
+      <section><p>Implementation of <a class="xref" href="ZptSharp.Metal.IExpandsMacro.html">IExpandsMacro</a> which first extends the macro and then fills its slots.</p>
+</section>
+      <h4><a class="xref" href="ZptSharp.Metal.MacroExpansionContext.html">MacroExpansionContext</a></h4>
+      <section><p>A model representing an in-progress macro expansion.</p>
+</section>
+      <h4><a class="xref" href="ZptSharp.Metal.MacroNotFoundException.html">MacroNotFoundException</a></h4>
+      <section><p>Thrown when a 'use-macro' attribute indicates that a macro should be used, but the macro to use cannot be found.</p>
 </section>
       <h4><a class="xref" href="ZptSharp.Metal.MacroProvider.html">MacroProvider</a></h4>
-      <section><p>Implementation of <span class="xref">ZptSharp.Metal.IGetsMacro</span> which uses an expression evaluator
+      <section><p>Implementation of <a class="xref" href="ZptSharp.Metal.IGetsMacro.html">IGetsMacro</a> which uses an expression evaluator
 to get macros from attributes.</p>
 </section>
       <h4><a class="xref" href="ZptSharp.Metal.MacroUsageContextProcessor.html">MacroUsageContextProcessor</a></h4>
-      <section><p>A <span class="xref">ZptSharp.Rendering.IProcessesExpressionContext</span> which applies the METAL rendering process.
+      <section><p>A <a class="xref" href="ZptSharp.Rendering.IProcessesExpressionContext.html">IProcessesExpressionContext</a> which applies the METAL rendering process.
 This begins with detection of the <code>metal:use-macro</code> attribute.</p>
 </section>
       <h4><a class="xref" href="ZptSharp.Metal.MetalAttributeSpecProvider.html">MetalAttributeSpecProvider</a></h4>
-      <section><p>Implementation of <span class="xref">ZptSharp.Metal.IGetsMetalAttributeSpecs</span> which uses string constants and
-a <span class="xref">ZptSharp.Dom.IGetsWellKnownNamespace</span>.</p>
+      <section><p>Implementation of <a class="xref" href="ZptSharp.Metal.IGetsMetalAttributeSpecs.html">IGetsMetalAttributeSpecs</a> which uses string constants and
+a <a class="xref" href="ZptSharp.Dom.IGetsWellKnownNamespace.html">IGetsWellKnownNamespace</a>.</p>
 </section>
       <h4><a class="xref" href="ZptSharp.Metal.MetalContextProcessorFactory.html">MetalContextProcessorFactory</a></h4>
-      <section><p>Implementation of <span class="xref">ZptSharp.Metal.IGetsMetalContextProcessor</span> which gets the
+      <section><p>Implementation of <a class="xref" href="ZptSharp.Metal.IGetsMetalContextProcessor.html">IGetsMetalContextProcessor</a> which gets the
 expression-context processor for METAL.</p>
 </section>
       <h4><a class="xref" href="ZptSharp.Metal.MetalDocumentAdapter.html">MetalDocumentAdapter</a></h4>
-      <section><p>An adapter for an <span class="xref">ZptSharp.Dom.IDocument</span> which allows it to be used as
-<span class="xref">ZptSharp.Metal.IProvidesMacros</span> and <span class="xref">ZptSharp.Expressions.IGetsNamedTalesValue</span>.</p>
+      <section><p>An adapter for an <a class="xref" href="ZptSharp.Dom.IDocument.html">IDocument</a> which allows it to be used as
+<a class="xref" href="ZptSharp.Metal.IProvidesMacros.html">IProvidesMacros</a> and <a class="xref" href="ZptSharp.Expressions.IGetsNamedTalesValue.html">IGetsNamedTalesValue</a>.</p>
 </section>
       <h4><a class="xref" href="ZptSharp.Metal.MetalDocumentAdapterFactory.html">MetalDocumentAdapterFactory</a></h4>
       <section><p>Implementation of <a class="xref" href="ZptSharp.Metal.IGetsMetalDocumentAdapter.html">IGetsMetalDocumentAdapter</a> which uses dependency
 injection to backfill the other dependencies, as well as the document.</p>
 </section>
+      <h4><a class="xref" href="ZptSharp.Metal.MetalMacro.html">MetalMacro</a></h4>
+      <section><p>Describes a METAL macro.</p>
+</section>
+      <h4><a class="xref" href="ZptSharp.Metal.Slot.html">Slot</a></h4>
+      <section><p>A model which may represent either a defined macro slot or content which should fill a macro slot.</p>
+</section>
       <h4><a class="xref" href="ZptSharp.Metal.SlotFiller.html">SlotFiller</a></h4>
-      <section><p>Implementation of <span class="xref">ZptSharp.Metal.IFillsSlots</span> which replaces DOM nodes and removes the slot
+      <section><p>Implementation of <a class="xref" href="ZptSharp.Metal.IFillsSlots.html">IFillsSlots</a> which replaces DOM nodes and removes the slot
 filler from the macro context when it is used.</p>
 </section>
       <h4><a class="xref" href="ZptSharp.Metal.SlotFinder.html">SlotFinder</a></h4>
-      <section><p>Default implementation of <span class="xref">ZptSharp.Metal.IGetsSlots</span> which gets a
+      <section><p>Default implementation of <a class="xref" href="ZptSharp.Metal.IGetsSlots.html">IGetsSlots</a> which gets a
 collection of slot-fillers for an node.</p>
 </section>
     <h3 id="interfaces">Interfaces
   </h3>
+      <h4><a class="xref" href="ZptSharp.Metal.IExpandsMacro.html">IExpandsMacro</a></h4>
+      <section><p>An object which expands a <a class="xref" href="ZptSharp.Metal.MetalMacro.html">MetalMacro</a>.  Expansion is the process applying macro
+extension (where applicable) and of filling any defined slots.</p>
+</section>
+      <h4><a class="xref" href="ZptSharp.Metal.IFillsSlots.html">IFillsSlots</a></h4>
+      <section><p>An object which fills slots in METAL macros.</p>
+</section>
+      <h4><a class="xref" href="ZptSharp.Metal.IGetsMacro.html">IGetsMacro</a></h4>
+      <section><p>An object which gets a METAL macro for an node which has a matching METAL attribute.</p>
+</section>
+      <h4><a class="xref" href="ZptSharp.Metal.IGetsMetalAttributeSpecs.html">IGetsMetalAttributeSpecs</a></h4>
+      <section><p>An object which gets <a class="xref" href="ZptSharp.Dom.AttributeSpec.html">AttributeSpec</a> instances for well-known METAL attributes.</p>
+</section>
+      <h4><a class="xref" href="ZptSharp.Metal.IGetsMetalContextProcessor.html">IGetsMetalContextProcessor</a></h4>
+      <section><p>An object which can get a <a class="xref" href="ZptSharp.Rendering.IProcessesExpressionContext.html">IProcessesExpressionContext</a> suitable for
+the METAL macro-expansion process.</p>
+</section>
       <h4><a class="xref" href="ZptSharp.Metal.IGetsMetalDocumentAdapter.html">IGetsMetalDocumentAdapter</a></h4>
       <section><p>An object which gets an instance of <a class="xref" href="ZptSharp.Metal.MetalDocumentAdapter.html">MetalDocumentAdapter</a> for a specified
 document.</p>
+</section>
+      <h4><a class="xref" href="ZptSharp.Metal.IGetsSlots.html">IGetsSlots</a></h4>
+      <section><p>An object which gets a collection of <a class="xref" href="ZptSharp.Metal.Slot.html">Slot</a> instances from a
+specified <a class="xref" href="ZptSharp.Dom.INode.html">INode</a> and its descendents.</p>
+</section>
+      <h4><a class="xref" href="ZptSharp.Metal.IProvidesMacros.html">IProvidesMacros</a></h4>
+      <section><p>An object which can get METAL macros from a document.</p>
 </section>
 </article>
           </div>

@@ -78,11 +78,23 @@
     <h3 id="classes">Classes
   </h3>
       <h4><a class="xref" href="ZptSharp.BulkRendering.BulkFileRenderer.html">BulkFileRenderer</a></h4>
-      <section><p>Implementation of <span class="xref">ZptSharp.BulkRendering.IRendersManyFiles</span> which handles requests to
+      <section><p>Implementation of <a class="xref" href="ZptSharp.BulkRendering.IRendersManyFiles.html">IRendersManyFiles</a> which handles requests to
 render &amp; write many template files at once.</p>
+</section>
+      <h4><a class="xref" href="ZptSharp.BulkRendering.BulkRenderingException.html">BulkRenderingException</a></h4>
+      <section><p>Raised when an attempt to bulk-render files fails with no files successfully output.</p>
+</section>
+      <h4><a class="xref" href="ZptSharp.BulkRendering.BulkRenderingFileResult.html">BulkRenderingFileResult</a></h4>
+      <section><p>Describes the result of a bulk-rendering operation for a single input file.</p>
+</section>
+      <h4><a class="xref" href="ZptSharp.BulkRendering.BulkRenderingRequest.html">BulkRenderingRequest</a></h4>
+      <section><p>Represents a request to render many template files in bulk.</p>
 </section>
       <h4><a class="xref" href="ZptSharp.BulkRendering.BulkRenderingRequestValidator.html">BulkRenderingRequestValidator</a></h4>
       <section><p>Implementation of <a class="xref" href="ZptSharp.BulkRendering.IValidatesBulkRenderingRequest.html">IValidatesBulkRenderingRequest</a> which validates a rendering request.</p>
+</section>
+      <h4><a class="xref" href="ZptSharp.BulkRendering.BulkRenderingResult.html">BulkRenderingResult</a></h4>
+      <section><p>Represents the result from <a class="xref" href="ZptSharp.BulkRendering.IRendersManyFiles.html#ZptSharp_BulkRendering_IRendersManyFiles_RenderAllAsync_ZptSharp_BulkRendering_BulkRenderingRequest_System_Threading_CancellationToken_">RenderAllAsync(BulkRenderingRequest, CancellationToken)</a>.</p>
 </section>
       <h4><a class="xref" href="ZptSharp.BulkRendering.FileRendererAndSaver.html">FileRendererAndSaver</a></h4>
       <section><p>Implementation of <a class="xref" href="ZptSharp.BulkRendering.IRendersInputFile.html">IRendersInputFile</a> which renders the file and
@@ -101,6 +113,9 @@ saves the output.</p>
 </section>
       <h4><a class="xref" href="ZptSharp.BulkRendering.IRendersInputFile.html">IRendersInputFile</a></h4>
       <section><p>An object which renders a single file as part of a bulk-rendering operation.</p>
+</section>
+      <h4><a class="xref" href="ZptSharp.BulkRendering.IRendersManyFiles.html">IRendersManyFiles</a></h4>
+      <section><p>An object which may be used to render many template documents in a single operation.</p>
 </section>
       <h4><a class="xref" href="ZptSharp.BulkRendering.IValidatesBulkRenderingRequest.html">IValidatesBulkRenderingRequest</a></h4>
       <section><p>An object which can assert that a rendering request is valid.</p>

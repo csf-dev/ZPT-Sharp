@@ -77,39 +77,48 @@
   <div class="markdown level0 remarks"></div>
     <h3 id="classes">Classes
   </h3>
+      <h4><a class="xref" href="ZptSharp.Tal.AttributeDefinition.html">AttributeDefinition</a></h4>
+      <section><p>Model for an attribute definition, as would be used by a TAL 'attributes' attribute.</p>
+</section>
       <h4><a class="xref" href="ZptSharp.Tal.AttributeDefinitionsProvider.html">AttributeDefinitionsProvider</a></h4>
-      <section><p>Implementation of <span class="xref">ZptSharp.Tal.IGetsAttributeDefinitions</span> which parses and returns
-a collection of <span class="xref">ZptSharp.Tal.AttributeDefinition</span> from an 'attributes' attribute value.</p>
+      <section><p>Implementation of <a class="xref" href="ZptSharp.Tal.IGetsAttributeDefinitions.html">IGetsAttributeDefinitions</a> which parses and returns
+a collection of <a class="xref" href="ZptSharp.Tal.AttributeDefinition.html">AttributeDefinition</a> from an 'attributes' attribute value.</p>
 </section>
       <h4><a class="xref" href="ZptSharp.Tal.AttributesAttributeDecorator.html">AttributesAttributeDecorator</a></h4>
-      <section><p>Decorator for <span class="xref">ZptSharp.Rendering.IHandlesProcessingError</span> which handles TAL 'attributes' attributes.</p>
+      <section><p>Decorator for <a class="xref" href="ZptSharp.Rendering.IHandlesProcessingError.html">IHandlesProcessingError</a> which handles TAL 'attributes' attributes.</p>
 </section>
       <h4><a class="xref" href="ZptSharp.Tal.ConditionAttributeDecorator.html">ConditionAttributeDecorator</a></h4>
-      <section><p>Decorator for <span class="xref">ZptSharp.Rendering.IHandlesProcessingError</span> which handles TAL 'condition' attributes.</p>
+      <section><p>Decorator for <a class="xref" href="ZptSharp.Rendering.IHandlesProcessingError.html">IHandlesProcessingError</a> which handles TAL 'condition' attributes.</p>
 </section>
       <h4><a class="xref" href="ZptSharp.Tal.ContentOrReplaceAttributeDecorator.html">ContentOrReplaceAttributeDecorator</a></h4>
-      <section><p>Implementation of <span class="xref">ZptSharp.Rendering.IHandlesProcessingError</span> which handles both TAL 'content' or
+      <section><p>Implementation of <a class="xref" href="ZptSharp.Rendering.IHandlesProcessingError.html">IHandlesProcessingError</a> which handles both TAL 'content' or
 TAL 'replace' attributes.  Their functionality is somewhat similar, and they cannot coexist on
 the same DOM node.</p>
 </section>
       <h4><a class="xref" href="ZptSharp.Tal.DefineAttributeDecorator.html">DefineAttributeDecorator</a></h4>
-      <section><p>Decorator for <span class="xref">ZptSharp.Rendering.IHandlesProcessingError</span> which handles TAL 'define' attributes.</p>
+      <section><p>Decorator for <a class="xref" href="ZptSharp.Rendering.IHandlesProcessingError.html">IHandlesProcessingError</a> which handles TAL 'define' attributes.</p>
 </section>
       <h4><a class="xref" href="ZptSharp.Tal.DomExpressionEvaluator.html">DomExpressionEvaluator</a></h4>
-      <section><p>Implementation of <span class="xref">ZptSharp.Tal.IEvaluatesDomValueExpression</span> which evaluates DOM expressions
+      <section><p>Implementation of <a class="xref" href="ZptSharp.Tal.IEvaluatesDomValueExpression.html">IEvaluatesDomValueExpression</a> which evaluates DOM expressions
 returning an object that contains a list of nodes and supplemental information.</p>
 </section>
+      <h4><a class="xref" href="ZptSharp.Tal.DomValueExpressionResult.html">DomValueExpressionResult</a></h4>
+      <section><p>Represents the result retrieved from <a class="xref" href="ZptSharp.Tal.IEvaluatesDomValueExpression.html">IEvaluatesDomValueExpression</a>.</p>
+</section>
+      <h4><a class="xref" href="ZptSharp.Tal.InvalidTalAttributeException.html">InvalidTalAttributeException</a></h4>
+      <section><p>Thrown when a TAL attribute value is improperly-formed or otherwise invalid.</p>
+</section>
       <h4><a class="xref" href="ZptSharp.Tal.NoOpTalContextProcessor.html">NoOpTalContextProcessor</a></h4>
-      <section><p>A <span class="xref">ZptSharp.Rendering.IProcessesExpressionContext</span> which performs no TAL-related activity.
+      <section><p>A <a class="xref" href="ZptSharp.Rendering.IProcessesExpressionContext.html">IProcessesExpressionContext</a> which performs no TAL-related activity.
 This is used at the centre of the decorator stack.  If no particular TAL attributes are
 found then an empty processing result is returned.</p>
 </section>
       <h4><a class="xref" href="ZptSharp.Tal.OmitTagAttributeDecorator.html">OmitTagAttributeDecorator</a></h4>
-      <section><p>Decorator for <span class="xref">ZptSharp.Rendering.IHandlesProcessingError</span> which handles TAL 'omit-tag' attributes.</p>
+      <section><p>Decorator for <a class="xref" href="ZptSharp.Rendering.IHandlesProcessingError.html">IHandlesProcessingError</a> which handles TAL 'omit-tag' attributes.</p>
 </section>
       <h4><a class="xref" href="ZptSharp.Tal.OnErrorAttributeDecorator.html">OnErrorAttributeDecorator</a></h4>
       <section><p>
-Decorator for <span class="xref">ZptSharp.Rendering.IHandlesProcessingError</span> which handles TAL &apos;on-error&apos; attributes.
+Decorator for <a class="xref" href="ZptSharp.Rendering.IHandlesProcessingError.html">IHandlesProcessingError</a> which handles TAL &apos;on-error&apos; attributes.
 </p>
 <p>
 This decorator is a little unusual (compared to the others) in that it really just puts a <code>try/catch</code>
@@ -122,28 +131,42 @@ then this decorator will handle the error and prevent the error from halting the
 the expression context by an <a class="xref" href="ZptSharp.Tal.OnErrorAttributeDecorator.html">OnErrorAttributeDecorator</a>.
 This exposes a standard API, which is part of the TAL spec.</p>
 </section>
+      <h4><a class="xref" href="ZptSharp.Tal.OnErrorHandlingException.html">OnErrorHandlingException</a></h4>
+      <section><p>
+Raised when a TAL <code>on-error</code> attribute encounters an exception whilst
+attempting to handle a different rendering exception.
+</p>
+<p>
+In this case, the <span class="xref">System.Exception.InnerException</span> will relate to the error encountered during
+the on-error handling process.  The <a class="xref" href="ZptSharp.Tal.OnErrorHandlingException.html#ZptSharp_Tal_OnErrorHandlingException_OriginalException">OriginalException</a> is the error (raised in a different
+part of the rendering process) which the on-error attribute was attempting to handle.
+</p>
+</section>
       <h4><a class="xref" href="ZptSharp.Tal.RecordMetalMacroNameDecorator.html">RecordMetalMacroNameDecorator</a></h4>
-      <section><p>A decorator for <span class="xref">ZptSharp.Rendering.IHandlesProcessingError</span> which detects METAL <code>define-macro</code>
+      <section><p>A decorator for <a class="xref" href="ZptSharp.Rendering.IHandlesProcessingError.html">IHandlesProcessingError</a> which detects METAL <code>define-macro</code>
 attributes and adds a TALES local variable indicating the name of that macro.  This is recorded as
 the <code>macroname</code> variable.</p>
 </section>
       <h4><a class="xref" href="ZptSharp.Tal.RepeatAttributeDecorator.html">RepeatAttributeDecorator</a></h4>
-      <section><p>Decorator for <span class="xref">ZptSharp.Rendering.IHandlesProcessingError</span> which handles TAL 'repeat' attributes.</p>
+      <section><p>Decorator for <a class="xref" href="ZptSharp.Rendering.IHandlesProcessingError.html">IHandlesProcessingError</a> which handles TAL 'repeat' attributes.</p>
 </section>
       <h4><a class="xref" href="ZptSharp.Tal.RepetitionContextProvider.html">RepetitionContextProvider</a></h4>
       <section><p>Implementation of <a class="xref" href="ZptSharp.Tal.IGetsRepetitionContexts.html">IGetsRepetitionContexts</a> which gets and prepares
 the repetition contexts.</p>
 </section>
       <h4><a class="xref" href="ZptSharp.Tal.TalAttributeSpecProvider.html">TalAttributeSpecProvider</a></h4>
-      <section><p>Implementation of <span class="xref">ZptSharp.Tal.IGetsTalAttributeSpecs</span> which gets attribute
+      <section><p>Implementation of <a class="xref" href="ZptSharp.Tal.IGetsTalAttributeSpecs.html">IGetsTalAttributeSpecs</a> which gets attribute
 specifications for the TAL attributes.</p>
 </section>
       <h4><a class="xref" href="ZptSharp.Tal.TalContextProcessorFactory.html">TalContextProcessorFactory</a></h4>
-      <section><p>Implementation of <span class="xref">ZptSharp.Tal.IGetsTalContextProcessor</span> which returns
+      <section><p>Implementation of <a class="xref" href="ZptSharp.Tal.IGetsTalContextProcessor.html">IGetsTalContextProcessor</a> which returns
 a context processor suitable for processing the TAL model-binding syntax.</p>
 </section>
+      <h4><a class="xref" href="ZptSharp.Tal.TalExpressionEvaluationException.html">TalExpressionEvaluationException</a></h4>
+      <section><p>Thrown when a TAL attribute operation fails due to a error when evaluating a value expression.</p>
+</section>
       <h4><a class="xref" href="ZptSharp.Tal.TalExpressionResultInterpreter.html">TalExpressionResultInterpreter</a></h4>
-      <section><p>Implementation of <span class="xref">ZptSharp.Tal.IInterpretsExpressionResult</span> which provides
+      <section><p>Implementation of <a class="xref" href="ZptSharp.Tal.IInterpretsExpressionResult.html">IInterpretsExpressionResult</a> which provides
 interpretations of expression results, following the rules of TAL.</p>
 </section>
       <h4><a class="xref" href="ZptSharp.Tal.VariableDefinition.html">VariableDefinition</a></h4>
@@ -155,12 +178,29 @@ and returns information about variable definitions from a TAL 'define' attribute
 </section>
     <h3 id="interfaces">Interfaces
   </h3>
+      <h4><a class="xref" href="ZptSharp.Tal.IEvaluatesDomValueExpression.html">IEvaluatesDomValueExpression</a></h4>
+      <section><p>An object which evaluates an expression and returns a value which may be used by the DOM.</p>
+</section>
+      <h4><a class="xref" href="ZptSharp.Tal.IGetsAttributeDefinitions.html">IGetsAttributeDefinitions</a></h4>
+      <section><p>An object which can provide a collection of <a class="xref" href="ZptSharp.Tal.AttributeDefinition.html">AttributeDefinition</a> from a string
+value.  That string is expected to be in the format of a TAL 'attributes' attribute value.</p>
+</section>
       <h4><a class="xref" href="ZptSharp.Tal.IGetsRepetitionContexts.html">IGetsRepetitionContexts</a></h4>
       <section><p>An object used by <a class="xref" href="ZptSharp.Tal.RepeatAttributeDecorator.html">RepeatAttributeDecorator</a> which gets the collection of
-<span class="xref">ZptSharp.Expressions.ExpressionContext</span> which are exposed by a specified expression result.</p>
+<a class="xref" href="ZptSharp.Expressions.ExpressionContext.html">ExpressionContext</a> which are exposed by a specified expression result.</p>
+</section>
+      <h4><a class="xref" href="ZptSharp.Tal.IGetsTalAttributeSpecs.html">IGetsTalAttributeSpecs</a></h4>
+      <section><p>An object which gets <a class="xref" href="ZptSharp.Dom.AttributeSpec.html">AttributeSpec</a> instances for well-known TAL attributes.</p>
+</section>
+      <h4><a class="xref" href="ZptSharp.Tal.IGetsTalContextProcessor.html">IGetsTalContextProcessor</a></h4>
+      <section><p>An object which can get a <a class="xref" href="ZptSharp.Rendering.IHandlesProcessingError.html">IHandlesProcessingError</a> suitable for
+the TAL document-manipulation process.</p>
 </section>
       <h4><a class="xref" href="ZptSharp.Tal.IGetsVariableDefinitionsFromAttributeValue.html">IGetsVariableDefinitionsFromAttributeValue</a></h4>
       <section><p>An object which parses an attribute value and returns a collection of variable definitions.</p>
+</section>
+      <h4><a class="xref" href="ZptSharp.Tal.IInterpretsExpressionResult.html">IInterpretsExpressionResult</a></h4>
+      <section><p>An object which interprets the result of a TALES expression, for the purposes of TAL.</p>
 </section>
 </article>
           </div>
