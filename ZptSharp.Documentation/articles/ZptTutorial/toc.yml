@@ -6,3 +6,7 @@
       href: index.md
     - name: 2. Condition & repeat
       href: Page2.md
+    - name: 3. Variables & expressions
+      href: Page3.md
+    - name: 4. Attributes & tag-omission
+      href: Page4.md

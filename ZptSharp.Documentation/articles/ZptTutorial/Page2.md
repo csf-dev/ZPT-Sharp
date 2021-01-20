@@ -66,4 +66,4 @@ Just like the `foreach` keyword in C#, `tal:repeat` works on objects that are `I
 
 ## Next: More on variables & expressions
 
-In the next tutorial page, we will [look deeper at variables & the different types of available expressions](Page3.md).
+In the next tutorial page we will [look deeper at variables & the different types of available expressions](Page3.md).
