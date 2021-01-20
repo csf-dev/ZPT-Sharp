@@ -88,7 +88,7 @@ This object facilitates addition of services, similarly to the way in which a <s
 It is intended for usage via its extension methods, each one performing a set of related set-up.
 Implementations of this hosting builder object are generally created in one of three ways:
 </p>
-<ul><li>From the <code>ZptSharpServiceCollectionExtensions.AddZptSharp(IServiceCollection)</code> method</li><li>As a parameter to the constructor of an MVC View Engine</li><li>As a parameter to the <code>ZptSharpHost.GetHost(System.Action{IBuildsHostingEnvironment})</code> method</li></ul>
+<ul><li>From the <code>ZptSharpServiceCollectionExtensions.AddZptSharp(IServiceCollection)</code> method</li><li>As a parameter to the constructor of an MVC View Engine</li><li>As a parameter to the <code>ZptSharpHost.GetHost(System.Action&lt;IBuildsHostingEnvironment>)</code> method</li></ul>
 <p>
 This object is used to set-up which parts of the ZptSharp functionality are activated, such as add-on packages
 like document providers and expression evaluators. Activating each piece of functionality is performed via an
