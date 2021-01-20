@@ -6,9 +6,8 @@
           "src": "../",
           "files": [
             "ZptSharp/ZptSharp.csproj",
-            "ZptSharp.Impl/ZptSharp.Impl.csproj",
+            "ZptSharp.Abstractions/ZptSharp.Abstractions.csproj",
             "ZptSharp.Cli/ZptSharp.Cli.csproj",
-            "ZptSharp.Hosting/ZptSharp.Hosting.csproj",
             "DocumentProviders/**/*.csproj",
             "Evaluators/**/*.csproj",
             "MvcViewEngines/ZptSharp.Mvc5/ZptSharp.Mvc5.csproj",

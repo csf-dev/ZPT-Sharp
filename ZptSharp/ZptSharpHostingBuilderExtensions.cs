@@ -10,16 +10,20 @@ namespace ZptSharp
     public static class ZptSharpHostingBuilderExtensions
     {
         /// <summary>
+        /// Configures ZptSharp to use a number of expression-types which are part of the ZPT standard.
+        /// </summary>
+        /// <remarks>
         /// <para>
-        /// Configures ZptSharp to use the standard/out-of-the-box expressions which are shipped with this package.
-        /// This is equivalent to using all of the following methods:
+        /// The expression evaluators (expression types) supported by this method are parts of the formal ZPT standard, thus
+        /// they are very frequently used within ZPT document templates.
+        /// Using this method is equivalent to using all three of the following:
         /// </para>
         /// <list type="bullet">
-        /// <item><see cref="AddZptPathExpressions"/></item>
-        /// <item><see cref="AddZptStringExpressions"/></item>
-        /// <item><see cref="AddZptNotExpressions"/></item>
+        /// <item><description><see cref="AddZptPathExpressions"/></description></item>
+        /// <item><description><see cref="AddZptStringExpressions"/></description></item>
+        /// <item><description><see cref="AddZptNotExpressions"/></description></item>
         /// </list>
-        /// </summary>
+        /// </remarks>
         /// <returns>The same builder instance, after setting it up.</returns>
         /// <param name="builder">The hosting builder.</param>
         public static IBuildsHostingEnvironment AddStandardZptExpressions(this IBuildsHostingEnvironment builder)
@@ -35,13 +39,15 @@ namespace ZptSharp
         /// </summary>
         /// <remarks>
         /// <para>
-        /// This method registers all four of:
+        /// This method primarily registers the evaluator for "path" expressions.
+        /// There are three lesser-used variants of path expressions which are also included in this method though.
+        /// The expression evaluators and expression prefixes supported by this method are:
         /// </para>
         /// <list type="bullet">
-        /// <item><see cref="Expressions.PathExpressions.PathExpressionEvaluator"/>, using the prefix <see cref="WellKnownExpressionPrefix.Path"/>.</item>
-        /// <item><see cref="Expressions.PathExpressions.LocalVariablesOnlyPathExpressionEvaluator"/>, using the prefix <see cref="WellKnownExpressionPrefix.LocalVariablePath"/>.</item>
-        /// <item><see cref="Expressions.PathExpressions.GlobalVariablesOnlyPathExpressionEvaluator"/>, using the prefix <see cref="WellKnownExpressionPrefix.GlobalVariablePath"/>.</item>
-        /// <item><see cref="Expressions.PathExpressions.DefinedVariablesOnlyPathExpressionEvaluator"/>, using the prefix <see cref="WellKnownExpressionPrefix.DefinedVariablePath"/>.</item>
+        /// <item><description><see cref="Expressions.PathExpressions.PathExpressionEvaluator"/>, using the prefix <see cref="WellKnownExpressionPrefix.Path"/>.</description></item>
+        /// <item><description><see cref="Expressions.PathExpressions.LocalVariablesOnlyPathExpressionEvaluator"/>, using the prefix <see cref="WellKnownExpressionPrefix.LocalVariablePath"/>.</description></item>
+        /// <item><description><see cref="Expressions.PathExpressions.GlobalVariablesOnlyPathExpressionEvaluator"/>, using the prefix <see cref="WellKnownExpressionPrefix.GlobalVariablePath"/>.</description></item>
+        /// <item><description><see cref="Expressions.PathExpressions.DefinedVariablesOnlyPathExpressionEvaluator"/>, using the prefix <see cref="WellKnownExpressionPrefix.DefinedVariablePath"/>.</description></item>
         /// </list>
         /// </remarks>
         /// <returns>The same builder instance, after setting it up.</returns>

@@ -14,6 +14,32 @@ namespace ZptSharp
         /// Adds service registrations to the <paramref name="builder"/> in order
         /// to enable the use of ZPT "csharp" expressions.
         /// </summary>
+        /// <remarks>
+        /// <para>
+        /// As well as the primary "csharp" expression, there are three other expression types which are activated by this method.
+        /// In total, the expression evaluators registered by this type are:
+        /// </para>
+        /// <list type="bullet">
+        /// <item>
+        /// <description><see cref="AssemblyReferenceEvaluator"/> using the prefix <see cref="AssemblyReferenceEvaluator.ExpressionPrefix"/></description>
+        /// </item>
+        /// <item>
+        /// <description><see cref="UsingNamespaceEvaluator"/> using the prefix <see cref="UsingNamespaceEvaluator.ExpressionPrefix"/></description>
+        /// </item>
+        /// <item>
+        /// <description><see cref="VariableTypeEvaluator"/> using the prefix <see cref="VariableTypeEvaluator.ExpressionPrefix"/></description>
+        /// </item>
+        /// <item>
+        /// <description><see cref="CSharpExpressionEvaluator"/> using the prefix <see cref="CSharpExpressionEvaluator.ExpressionPrefix"/></description>
+        /// </item>
+        /// </list>
+        /// <para>
+        /// Additionally, an optional configuration action/callback may be supplied.
+        /// If used, the <see cref="IConfiguresCSharpExpressionGlobals"/> may be used to add-to the lists of assembly references
+        /// and 'using' namespaces which are available to all "csharp" expressions, whether they have been added explicitly via
+        /// "assemblyref" or "using" expressions or not.
+        /// </para>
+        /// </remarks>
         /// <param name="builder">The self-hosting builder.</param>
         /// <returns>The self-hosting builder instance, after setting it up.</returns>
         /// <param name="configAction">An optional action permitting some global configuration of the C# expression evaluation.</param>
