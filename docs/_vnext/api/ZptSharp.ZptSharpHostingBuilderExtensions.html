@@ -277,7 +277,7 @@ This method primarily registers the evaluator for &quot;path&quot; expressions.
 There are three lesser-used variants of path expressions which are also included in this method though.
 The expression evaluators and expression prefixes supported by this method are:
 </p>
-<ul><li><a class="xref" href="ZptSharp.Expressions.PathExpressions.PathExpressionEvaluator.html">PathExpressionEvaluator</a>, using the prefix <a class="xref" href="ZptSharp.Expressions.WellKnownExpressionPrefix.html#ZptSharp_Expressions_WellKnownExpressionPrefix_Path">Path</a>.</li><li><a class="xref" href="ZptSharp.Expressions.PathExpressions.LocalVariablesOnlyPathExpressionEvaluator.html">LocalVariablesOnlyPathExpressionEvaluator</a>, using the prefix <a class="xref" href="ZptSharp.Expressions.WellKnownExpressionPrefix.html#ZptSharp_Expressions_WellKnownExpressionPrefix_LocalVariablePath">LocalVariablePath</a>.</li><li><a class="xref" href="ZptSharp.Expressions.PathExpressions.GlobalVariablesOnlyPathExpressionEvaluator.html">GlobalVariablesOnlyPathExpressionEvaluator</a>, using the prefix <a class="xref" href="ZptSharp.Expressions.WellKnownExpressionPrefix.html#ZptSharp_Expressions_WellKnownExpressionPrefix_GlobalVariablePath">GlobalVariablePath</a>.</li><li><a class="xref" href="ZptSharp.Expressions.PathExpressions.DefinedVariablesOnlyPathExpressionEvaluator.html">DefinedVariablesOnlyPathExpressionEvaluator</a>, using the prefix <a class="xref" href="ZptSharp.Expressions.WellKnownExpressionPrefix.html#ZptSharp_Expressions_WellKnownExpressionPrefix_DefinedVariablePath">DefinedVariablePath</a>.</li></ul>
+<ul><li><a class="xref" href="ZptSharp.Expressions.PathExpressions.PathExpressionEvaluator.html">PathExpressionEvaluator</a>, using the prefix <code>path</code>.</li><li><a class="xref" href="ZptSharp.Expressions.PathExpressions.LocalVariablesOnlyPathExpressionEvaluator.html">LocalVariablesOnlyPathExpressionEvaluator</a>, using the prefix <code>local</code>.</li><li><a class="xref" href="ZptSharp.Expressions.PathExpressions.GlobalVariablesOnlyPathExpressionEvaluator.html">GlobalVariablesOnlyPathExpressionEvaluator</a>, using the prefix <code>global</code>.</li><li><a class="xref" href="ZptSharp.Expressions.PathExpressions.DefinedVariablesOnlyPathExpressionEvaluator.html">DefinedVariablesOnlyPathExpressionEvaluator</a>, using the prefix <code>var</code>.</li></ul>
 </div>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
@@ -382,7 +382,7 @@ The expression evaluators and expression prefixes supported by this method are:
   <h5 id="ZptSharp_ZptSharpHostingBuilderExtensions_AddZptStringExpressions_ZptSharp_Hosting_IBuildsHostingEnvironment__remarks">Remarks</h5>
   <div class="markdown level1 remarks"><p>
 This method registers the <a class="xref" href="ZptSharp.Expressions.StringExpressions.StringExpressionEvaluator.html">StringExpressionEvaluator</a> under both of the
-prefixes <a class="xref" href="ZptSharp.Expressions.WellKnownExpressionPrefix.html#ZptSharp_Expressions_WellKnownExpressionPrefix_String">String</a> &amp; <a class="xref" href="ZptSharp.Expressions.WellKnownExpressionPrefix.html#ZptSharp_Expressions_WellKnownExpressionPrefix_ShortStringAlias">ShortStringAlias</a>.
+prefixes <code>string</code> &amp; a shortened alias <code>str</code>.
 </p>
 </div>
   <span class="small pull-right mobile-hide">
