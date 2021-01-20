@@ -19,7 +19,7 @@ namespace ZptSharp.Hosting
     /// <description>As a parameter to the constructor of an MVC View Engine</description>
     /// </item>
     /// <item>
-    /// <description>As a parameter to the <c>ZptSharpHost.GetHost(System.Action{IBuildsHostingEnvironment})</c> method</description>
+    /// <description>As a parameter to the <c>ZptSharpHost.GetHost(System.Action&lt;IBuildsHostingEnvironment&gt;)</c> method</description>
     /// </item>
     /// </list>
     /// <para>

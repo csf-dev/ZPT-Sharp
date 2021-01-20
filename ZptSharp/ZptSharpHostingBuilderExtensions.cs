@@ -44,10 +44,10 @@ namespace ZptSharp
         /// The expression evaluators and expression prefixes supported by this method are:
         /// </para>
         /// <list type="bullet">
-        /// <item><description><see cref="Expressions.PathExpressions.PathExpressionEvaluator"/>, using the prefix <see cref="WellKnownExpressionPrefix.Path"/>.</description></item>
-        /// <item><description><see cref="Expressions.PathExpressions.LocalVariablesOnlyPathExpressionEvaluator"/>, using the prefix <see cref="WellKnownExpressionPrefix.LocalVariablePath"/>.</description></item>
-        /// <item><description><see cref="Expressions.PathExpressions.GlobalVariablesOnlyPathExpressionEvaluator"/>, using the prefix <see cref="WellKnownExpressionPrefix.GlobalVariablePath"/>.</description></item>
-        /// <item><description><see cref="Expressions.PathExpressions.DefinedVariablesOnlyPathExpressionEvaluator"/>, using the prefix <see cref="WellKnownExpressionPrefix.DefinedVariablePath"/>.</description></item>
+        /// <item><description><see cref="Expressions.PathExpressions.PathExpressionEvaluator"/>, using the prefix <c>path</c>.</description></item>
+        /// <item><description><see cref="Expressions.PathExpressions.LocalVariablesOnlyPathExpressionEvaluator"/>, using the prefix <c>local</c>.</description></item>
+        /// <item><description><see cref="Expressions.PathExpressions.GlobalVariablesOnlyPathExpressionEvaluator"/>, using the prefix <c>global</c>.</description></item>
+        /// <item><description><see cref="Expressions.PathExpressions.DefinedVariablesOnlyPathExpressionEvaluator"/>, using the prefix <c>var</c>.</description></item>
         /// </list>
         /// </remarks>
         /// <returns>The same builder instance, after setting it up.</returns>
@@ -71,7 +71,7 @@ namespace ZptSharp
         /// <remarks>
         /// <para>
         /// This method registers the <see cref="Expressions.StringExpressions.StringExpressionEvaluator"/> under both of the
-        /// prefixes <see cref="WellKnownExpressionPrefix.String"/> &amp; <see cref="WellKnownExpressionPrefix.ShortStringAlias"/>.
+        /// prefixes <c>string</c> &amp; a shortened alias <c>str</c>.
         /// </para>
         /// </remarks>
         /// <returns>The same builder instance, after setting it up.</returns>

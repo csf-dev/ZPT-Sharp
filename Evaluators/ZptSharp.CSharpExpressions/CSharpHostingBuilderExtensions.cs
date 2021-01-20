@@ -21,16 +21,16 @@ namespace ZptSharp
         /// </para>
         /// <list type="bullet">
         /// <item>
-        /// <description><see cref="AssemblyReferenceEvaluator"/> using the prefix <see cref="AssemblyReferenceEvaluator.ExpressionPrefix"/></description>
+        /// <description><see cref="AssemblyReferenceEvaluator"/> using the prefix <c>assemblyref</c></description>
         /// </item>
         /// <item>
-        /// <description><see cref="UsingNamespaceEvaluator"/> using the prefix <see cref="UsingNamespaceEvaluator.ExpressionPrefix"/></description>
+        /// <description><see cref="UsingNamespaceEvaluator"/> using the prefix <c>using</c></description>
         /// </item>
         /// <item>
-        /// <description><see cref="VariableTypeEvaluator"/> using the prefix <see cref="VariableTypeEvaluator.ExpressionPrefix"/></description>
+        /// <description><see cref="VariableTypeEvaluator"/> using the prefix <c>type</c></description>
         /// </item>
         /// <item>
-        /// <description><see cref="CSharpExpressionEvaluator"/> using the prefix <see cref="CSharpExpressionEvaluator.ExpressionPrefix"/></description>
+        /// <description><see cref="CSharpExpressionEvaluator"/> using the prefix <c>csharp</c></description>
         /// </item>
         /// </list>
         /// <para>
