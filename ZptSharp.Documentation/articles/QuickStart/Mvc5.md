@@ -26,13 +26,12 @@ Add the following code to your **Global.asax.cs** `Application_Start` handler.
 Other existing content in that file should remain as-is.
 
 ```csharp
-var zptSharpViewEngine = new ZptSharp.Mvc5.ZptSharpViewEngine(builder => {
+var viewEngine = new ZptSharp.Mvc5.ZptSharpViewEngine(builder => {
     builder
         .AddHapZptDocuments()
         .AddStandardZptExpressions();
 });
-ViewEngines.Engines.Clear();
-ViewEngines.Engines.Add(zptSharpViewEngine);
+ViewEngines.Engines.Insert(0, viewEngine);
 ```
 
 _If you wish to use OWIN instead of Global.asax.cs_ then the above code could also be quite easily transformed into some OWIN middleware.

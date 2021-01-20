@@ -11,13 +11,12 @@ namespace ZptSharp.Examples
             AreaRegistration.RegisterAllAreas();
             RouteConfig.RegisterRoutes(RouteTable.Routes);
 
-            var zptSharpViewEngine = new ZptSharp.Mvc5.ZptSharpViewEngine(builder => {
+            var viewEngine = new ZptSharp.Mvc5.ZptSharpViewEngine(builder => {
                 builder
                     .AddHapZptDocuments()
                     .AddStandardZptExpressions();
             });
-            ViewEngines.Engines.Clear();
-            ViewEngines.Engines.Add(zptSharpViewEngine);
+            ViewEngines.Engines.Insert(0, viewEngine);
         }
     }
 }
