@@ -73,9 +73,9 @@
 Each primary mention of an attribute below is a link to its reference page.</p>
 <h2 id="metal-is-for-reusing-markup">METAL is for reusing markup</h2>
 <p>When processing a ZPT source document, the first attributes processed are METAL attributes.</p>
-<p>The concept at the heart of METAL is <strong>macros</strong>. A macro is a reusable subtree of an HTML or XML document. In other words, it is an element and all of that element's descendents &amp; content. Macros are created using the <a href="Metal/DefineMacro.md"><code>define-macro</code></a> attribute and consumed with the <a href="Metal/UseMacro.md"><code>use-macro</code></a> attribute.</p>
-<p>METAL macros may also contain zero or more <strong>slots</strong>. Slots are also single elements which may be replaced ('filled') at the point where the macro is used. Slots are created with the <a href="Metal/DefineSlot.md"><code>define-slot</code></a> attribute and are used/filled using the <a href="Metal/FillSlot.md"><code>fill-slot</code></a> attribute.</p>
-<p>An advanced usage of METAL is <em>macro extension</em>. This is somewhat similar in concept to creating a 'subclass' of a macro. The <a href="Metal/ExtendMacro.md"><code>extend-macro</code></a> attribute is how this is performed.</p>
+<p>The concept at the heart of METAL is <strong>macros</strong>. A macro is a reusable subtree of an HTML or XML document. In other words, it is an element and all of that element's descendents &amp; content. Macros are created using the <a href="Metal/DefineMacro.html"><code>define-macro</code></a> attribute and consumed with the <a href="Metal/UseMacro.html"><code>use-macro</code></a> attribute.</p>
+<p>METAL macros may also contain zero or more <strong>slots</strong>. Slots are also single elements which may be replaced ('filled') at the point where the macro is used. Slots are created with the <a href="Metal/DefineSlot.html"><code>define-slot</code></a> attribute and are used/filled using the <a href="Metal/FillSlot.html"><code>fill-slot</code></a> attribute.</p>
+<p>An advanced usage of METAL is <em>macro extension</em>. This is somewhat similar in concept to creating a 'subclass' of a macro. The <a href="Metal/ExtendMacro.html"><code>extend-macro</code></a> attribute is how this is performed.</p>
 <h2 id="tal-binds-data-to-the-template">TAL binds data to the template</h2>
 <p>TAL attributes are parsed and resolved after METAL attributes. The purpose of TAL is to bind/write your model and supporting data to the template.</p>
 <p>The table below shows and links to the various TAL attributes.
@@ -91,42 +91,42 @@ It also shows the order in which they are processed (if, for example, multiple a
 <tbody>
 <tr>
 <td>1st</td>
-<td><a href="Tal/Define.md"><code>tal:define</code></a></td>
+<td><a href="Tal/Define.html"><code>tal:define</code></a></td>
 <td>Creates variables which are usable by subsequent directives.</td>
 </tr>
 <tr>
 <td>2nd</td>
-<td><a href="Tal/Condition.md"><code>tal:condition</code></a></td>
+<td><a href="Tal/Condition.html"><code>tal:condition</code></a></td>
 <td>Removes the element if the associated expression is not &quot;truthy&quot;</td>
 </tr>
 <tr>
 <td>3rd</td>
-<td><a href="Tal/Repeat.md"><code>tal:repeat</code></a></td>
+<td><a href="Tal/Repeat.html"><code>tal:repeat</code></a></td>
 <td>Repeats the element (and contents) for each item in an <code>IEnumerable</code></td>
 </tr>
 <tr>
 <td>4th*</td>
-<td><a href="Tal/ContentAndReplace.md"><code>tal:content</code></a></td>
+<td><a href="Tal/ContentAndReplace.html"><code>tal:content</code></a></td>
 <td>Replaces the element's contents with a value from an expression</td>
 </tr>
 <tr>
 <td>4th*</td>
-<td><a href="Tal/Replace.md"><code>tal:replace</code></a></td>
+<td><a href="Tal/ContentAndReplace.html"><code>tal:replace</code></a></td>
 <td>Replaces the whole element with a value from an expression</td>
 </tr>
 <tr>
 <td>5th</td>
-<td><a href="Tal/Attributes.md"><code>tal:attributes</code></a></td>
+<td><a href="Tal/Attributes.html"><code>tal:attributes</code></a></td>
 <td>Sets attributes upon the element using expression values</td>
 </tr>
 <tr>
 <td>6th</td>
-<td><a href="Tal/OmitTag.md"><code>tal:omit-tag</code></a></td>
+<td><a href="Tal/OmitTag.html"><code>tal:omit-tag</code></a></td>
 <td>Removes the start &amp; end tags of an element, whilst preserving its content/children</td>
 </tr>
 <tr>
 <td>N/A**</td>
-<td><a href="Tal/OnError.md"><code>tal:on-error</code></a></td>
+<td><a href="Tal/OnError.html"><code>tal:on-error</code></a></td>
 <td>Handles processing errors on the current element and children (similar to a C# <code>catch</code>)</td>
 </tr>
 </tbody>
@@ -149,15 +149,15 @@ TALES is <em>an extensible syntax</em> and so plugins may add further expression
 </thead>
 <tbody>
 <tr>
-<td><a href="Tales/PathExpressions.md"><code>path</code></a></td>
+<td><a href="Tales/PathExpressions.html"><code>path</code></a></td>
 <td>Provide access to objects using a syntax which looks a lot like the path portion of a URL.  For example <code>path:here/Customers/3/Name</code></td>
 </tr>
 <tr>
-<td><a href="Tales/StringExpressions.md"><code>string</code></a></td>
+<td><a href="Tales/StringExpressions.html"><code>string</code></a></td>
 <td>Create interpolated strings including content from other expressions.  For example <code>string:Hello ${path:name}, how are you?</code></td>
 </tr>
 <tr>
-<td><a href="Tales/NotExpressions.md"><code>not</code></a></td>
+<td><a href="Tales/NotExpressions.html"><code>not</code></a></td>
 <td>Coerce another expression result to boolean, then negate it.  For example <code>not:path:loan/IsOverdue</code></td>
 </tr>
 <tr>
@@ -169,8 +169,12 @@ TALES is <em>an extensible syntax</em> and so plugins may add further expression
 <td>Evaluate arbitrary C# expressions (but <em><a href="Tales/CSharpExpressionLimitations.html">please read about the limitations</a></em>).  For example <code>csharp:name.ToLowerInvariant()</code></td>
 </tr>
 <tr>
-<td><a href="Tales/PythonExpressions.md"><code>python</code></a></td>
+<td><a href="Tales/PythonExpressions.html"><code>python</code></a></td>
 <td>Evaluate arbitrary expressions written in the Python 2 language.  For example <code>python:2 + 2</code></td>
+</tr>
+<tr>
+<td><a href="Tales/StructureExpressions.html"><code>structure</code></a></td>
+<td>Indicates that an 'inner' expression should be interpreted as structure/markup when rendered.  For example <code>structure:path:here/SomeMarkup</code></td>
 </tr>
 </tbody>
 </table>
