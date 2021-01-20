@@ -5,9 +5,9 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>ViewEngines </title>
+    <title>ZptSharp View Engines </title>
     <meta name="viewport" content="width=device-width">
-    <meta name="title" content="ViewEngines ">
+    <meta name="title" content="ZptSharp View Engines ">
     <meta name="generator" content="docfx 2.56.6.0">
     
     <link rel="shortcut icon" href="../favicon.ico">
@@ -67,9 +67,141 @@
         <div class="article row grid-right">
           <div class="col-md-10">
             <article class="content wrap" id="_content" data-uid="">
-<h1 id="viewengines">ViewEngines</h1>
+<h1 id="zptsharp-view-engines">ZptSharp View Engines</h1>
 
-<p><a href="index.html">index</a></p>
+<p>The ZptSharp view engines allow applications using AS<span>P.N</span>ET Core MVC (.NET Core/.NET 5+) and applications using AS<span>P.N</span>ET MVC5 (.NET Framework 4.6.1+) to display views using ZPT templates.
+These view engines are provided via the NuGet packages <strong>ZptSharp.MvcCore</strong> and <strong>ZptSharp.Mvc5</strong> respectively.</p>
+<h2 id="installing--activating-the-view-engine">Installing &amp; activating the view engine</h2>
+<p>As well as installing the appropriate package (above) to your web application, you must activate the view engine in your web app setup.
+Common to both frameworks is the use of the <code>ZptSharpViewEngine</code> which makes use of a builder object.
+Please refer to the documentation for <a href="xref:ZptSharp.Hosting.IBuildsHostingEnvironment">the ZptSharp DI builder object</a> for further information about which extension methods are available in order to set-up ZptSharp, including the activation of add-on packages.</p>
+<h3 id="aspnet-core-mvc">AS<span>P.N</span>ET Core MVC</h3>
+<p>To activate the ZptSharp view engine for AS<span>P.N</span>ET Core MVC you must add code similar to the below to your application starup, where services are configured.
+This may include a modification to an existing usage of <code>AddControllersWithViews()</code> in order to add the view options, where you add the ZptSharp view engine.</p>
+<pre><code class="lang-csharp">var viewEngine = new ZptSharpViewEngine(builder =&gt; {
+    builder.AddStandardZptExpressions();
+    builder.AddHapZptDocuments();
+});
+
+services.AddControllersWithViews()
+    .AddViewOptions(opts =&gt; {
+        opts.ViewEngines.Insert(0, viewEngine);
+    });
+</code></pre>
+<h3 id="aspnet-mvc5">AS<span>P.N</span>ET MVC5</h3>
+<p>To activate the ZptSharp view engine for AS<span>P.N</span>ET MVC5 you must add code similar to the below to either your <code>Global.asax.cs</code> within the <code>Application_Start</code> handler, or adapt it as middleware if you are using OWIN.</p>
+<pre><code class="lang-csharp">var viewEngine = new ZptSharp.Mvc5.ZptSharpViewEngine(builder =&gt; {
+    builder
+        .AddHapZptDocuments()
+        .AddStandardZptExpressions();
+});
+ViewEngines.Engines.Insert(0, viewEngine);
+</code></pre>
+<h2 id="writing-views">Writing views</h2>
+<p>When using the ZptSharp view engine, HTML views (using either the HTML Agility Pack or AngleSharp document providers) must have filename extensions of either <code>.pt</code> (page template), <code>.htm</code> or <code>.html</code>.
+When using XML views, they must have extensions of either <code>.xml</code> or <code>.xhtml</code>.</p>
+<p>Views are kept in the same file/directory structure as usual, so by default a subdirectory of <code>Views</code> based upon the controller name, and then a file-name which matches the Action.
+Controllers may return view results which specify other view-names, just as with other view-engines.</p>
+<h2 id="added-tales-contextsvariables-for-mvc">Added TALES contexts/variables for MVC</h2>
+<p>When using the ZptSharp view engine, a few additional TALES contexts (essentially, predefined variables) are added automatically.
+These contexts/variables are accessible to all views rendered by the view engine and <em>they are in addition to</em> <a href="ZptReference/GlobalContexts.md">the global contexts built-into Zptsharp</a>.
+The table below shows these extra contexts; the <strong>Framework</strong> column shows whether each context is available for AS<span>P.N</span>ET Core MVC, AS<span>P.N</span>ET MVC5 or <strong>both</strong> of these frameworks.</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Framework</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Context</code></td>
+<td>Both</td>
+<td>The current <code>HttpContext</code></td>
+</tr>
+<tr>
+<td><code>Model</code></td>
+<td>Both</td>
+<td>The current model, an alias for <code>here</code></td>
+</tr>
+<tr>
+<td><code>Request</code></td>
+<td>Both</td>
+<td>The HTTP request, equivalent to <code>HttpContext.Request</code></td>
+</tr>
+<tr>
+<td><code>request</code></td>
+<td>Both</td>
+<td>The HTTP request, an alias for <code>Request</code></td>
+</tr>
+<tr>
+<td><code>Response</code></td>
+<td>Both</td>
+<td>The HTTP response, equivalent to <code>HttpContext.Response</code></td>
+</tr>
+<tr>
+<td><code>RouteData</code></td>
+<td>Both</td>
+<td>The route data, equivalent to <code>ViewContext.RouteData</code></td>
+</tr>
+<tr>
+<td><code>TempData</code></td>
+<td>Both</td>
+<td>The temporary data, equivalent to <code>ViewContext.TempData</code></td>
+</tr>
+<tr>
+<td><code>Url</code></td>
+<td>Both</td>
+<td>The current request URL</td>
+</tr>
+<tr>
+<td><code>User</code></td>
+<td>Both</td>
+<td>The current user principal, equivalent to <code>HttpContext.User</code></td>
+</tr>
+<tr>
+<td><code>ViewBag</code></td>
+<td>Both</td>
+<td>The view bag, equivalent to <code>ViewContext.ViewBag</code></td>
+</tr>
+<tr>
+<td><code>ViewContext</code></td>
+<td>Both</td>
+<td>The current view context</td>
+</tr>
+<tr>
+<td><code>ViewData</code></td>
+<td>Both</td>
+<td>The view data, equivalent to <code>ViewContext.ViewData</code></td>
+</tr>
+<tr>
+<td><code>Views</code></td>
+<td>Both</td>
+<td>An object which provides access to the root directory containing views</td>
+</tr>
+<tr>
+<td><code>Application</code></td>
+<td>MVC5 only</td>
+<td>The application state, roughly equivalent to <code>HttpContext.Application</code></td>
+</tr>
+<tr>
+<td><code>Cache</code></td>
+<td>MVC5 only</td>
+<td>The cache object, equivalent to <code>HttpContext.Cache</code></td>
+</tr>
+<tr>
+<td><code>Server</code></td>
+<td>MVC5 only</td>
+<td>The server utility object, equivalent to <code>HttpContext.Server</code></td>
+</tr>
+<tr>
+<td><code>Session</code></td>
+<td>MVC5 only</td>
+<td>The session-state object, equivalent to <code>HttpContext.Session</code></td>
+</tr>
+</tbody>
+</table>
 </article>
           </div>
           

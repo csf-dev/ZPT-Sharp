@@ -3189,7 +3189,7 @@
       "output": {
         ".html": {
           "relative_path": "articles/QuickStart/Mvc5.html",
-          "hash": "OuCzAnARZGeh27t6gRkS0Q=="
+          "hash": "q5mV96b0qLjQT8PciLfbog=="
         }
       },
       "is_incremental": false,
@@ -3220,12 +3220,15 @@
       "version": ""
     },
     {
+      "log_codes": [
+        "InvalidFileLink"
+      ],
       "type": "Conceptual",
       "source_relative_path": "articles/ViewEngines.md",
       "output": {
         ".html": {
           "relative_path": "articles/ViewEngines.html",
-          "hash": "hKyXbHz1r84+wTtGq8DLKg=="
+          "hash": "R2IcB6BYhcHH8/Y5lNH8kA=="
         }
       },
       "is_incremental": false,
@@ -3325,6 +3328,18 @@
         ".html": {
           "relative_path": "articles/ZptReference/Tales/CSharpExpressions.html",
           "hash": "vbWLErkxdzGSwC7/SxWVcA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "articles/ZptReference/Tales/GlobalContexts.md",
+      "output": {
+        ".html": {
+          "relative_path": "articles/ZptReference/Tales/GlobalContexts.html",
+          "hash": "NPXmtrZryGjycW/v/FUahw=="
         }
       },
       "is_incremental": false,
@@ -3452,7 +3467,7 @@
         "ConceptualDocumentProcessor": {
           "can_incremental": false,
           "incrementalPhase": "build",
-          "total_file_count": 29,
+          "total_file_count": 30,
           "skipped_file_count": 0
         },
         "ManagedReferenceDocumentProcessor": {
