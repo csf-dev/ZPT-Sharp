@@ -2,7 +2,8 @@
 
 <div class="note">
 
-This tutorial assumes that you have followed one of the following quick-start guides. They each conclude with a functioning 'hello world' ZPT environment.
+_This tutorial assumes that you have followed one of the following quick-start guides_.
+Each of them concludes with a functioning "hello world" ZPT environment which we shall build upon in this tutorial.
 
 * [ASP.NET MVC 5]
 * [ASP.NET Core MVC]
@@ -18,6 +19,7 @@ This tutorial assumes that you have followed one of the following quick-start gu
 ## `tal:content` replaces an element's content
 
 Let's look again at the ZPT template file from the quick-start guides.
+If you follow the guide then it should look a little like this.
 
 ```html
 <html>
@@ -31,7 +33,9 @@ Let's look again at the ZPT template file from the quick-start guides.
 </html>
 ```
 
-Notice how in the rendered document, the words "A famous greeting" are replaced by "Hello world!". The `<p>` tags remain in the rendered output though.
+Notice how in the rendered document, the words "A famous greeting" are replaced by "Hello world!".
+The `<p>` tags remain in the rendered output but their content is substituted.
+This is the primary function of the `tal:content` attribute.
 
 ## Elements are replaced too
 
@@ -45,7 +49,8 @@ Try changing the `p` tag (in the source document) to the following:
 
 If you render this again, the output will be the same. When a `tal:content` attribute replaces the content of an element, *all of its content is replaced*, including text and even trees of elements as applicable.
 
-This effect can be put to good use in source documents, allowing the addition of *sample content*.
+This effect can be put to good use in source documents, allowing the addition of *sample or placeholder content*.
+Sample content may be used so that a designer may see what the rendered page is expected to look like, even when the source file is 'offline' from its application logic.
 
 ## Including markup in the content
 
@@ -54,7 +59,7 @@ Let's try another change. This time we will change the model rather than the doc
 Change the value of `Message` in the model to the following string. We will see what happens if we include markup in the model value to be inserted into a document template.
 
 ```text
-"<strong>Hello world!</strong>"
+<strong>Hello world!</strong>
 ```
 
 If you render the document again now, you will see that *the markup from the model has been HTML encoded*. What is actually written to the output is:

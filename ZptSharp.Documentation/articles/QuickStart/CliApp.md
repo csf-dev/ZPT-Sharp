@@ -75,5 +75,6 @@ You will see the rendered output saved as a file in the output directory as `qui
 You have now completed the quick-start for the command-line ZptSharp app!
 To continue learning about ZptSharp, please follow [the ZptSharp tutorial], which teaches the ZPT language.
 Throughout the tutorial, _changes to the model_ are performed in the `model.json` file.
+Throughout the tutorial, _you will need to convert_ some C# constructs (to be added to the model) into JSON.
 
 [the ZptSharp tutorial]: ../ZptTutorial/index.md
