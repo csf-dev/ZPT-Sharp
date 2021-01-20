@@ -4614,7 +4614,22 @@
       "output": {
         ".html": {
           "relative_path": "articles/ZptTutorial/Page2.html",
-          "hash": "SFurbwZkcHJeKyGsDGlh3g=="
+          "hash": "jQbNZ0Q7JYmlNY2OnPU7JA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "log_codes": [
+        "InvalidFileLink"
+      ],
+      "type": "Conceptual",
+      "source_relative_path": "articles/ZptTutorial/Page3.md",
+      "output": {
+        ".html": {
+          "relative_path": "articles/ZptTutorial/Page3.html",
+          "hash": "e1Qm2zMeDCKc9a7qOUwdYQ=="
         }
       },
       "is_incremental": false,
@@ -4633,12 +4648,15 @@
       "version": ""
     },
     {
+      "log_codes": [
+        "InvalidFileLink"
+      ],
       "type": "Toc",
       "source_relative_path": "articles/ZptTutorial/toc.yml",
       "output": {
         ".html": {
           "relative_path": "articles/ZptTutorial/toc.html",
-          "hash": "ISWi65ppD4WIdIAyUOXgxw=="
+          "hash": "PFJbAjA5KSDMuSLPTiRH0A=="
         }
       },
       "is_incremental": false,
@@ -4718,7 +4736,7 @@
         "ConceptualDocumentProcessor": {
           "can_incremental": false,
           "incrementalPhase": "build",
-          "total_file_count": 30,
+          "total_file_count": 31,
           "skipped_file_count": 0
         },
         "ManagedReferenceDocumentProcessor": {
