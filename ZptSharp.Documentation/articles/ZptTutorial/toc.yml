@@ -1,5 +1,5 @@
 - name: Documentation home
-  href: ../index.md
+  topicHref: ../index.md
 - name: ZPT tutorial
   items:
     - name: 1. Content & replace
