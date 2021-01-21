@@ -5,9 +5,9 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title> </title>
+    <title>Writing expression evaluators </title>
     <meta name="viewport" content="width=device-width">
-    <meta name="title" content=" ">
+    <meta name="title" content="Writing expression evaluators ">
     <meta name="generator" content="docfx 2.56.6.0">
     
     <link rel="shortcut icon" href="../favicon.ico">
@@ -67,7 +67,35 @@
         <div class="article row grid-right">
           <div class="col-md-10">
             <article class="content wrap" id="_content" data-uid="">
+<h1 id="writing-expression-evaluators">Writing expression evaluators</h1>
 
+<p>Expression evaluators are classes which implement the interface <a class="xref" href="../api/ZptSharp.Expressions.IEvaluatesExpression.html"><code>IEvaluatesExpression</code></a>.
+You are encouraged to read the API documentation for this interface.</p>
+<h2 id="no-need-to-deal-with-expression-prefixes">No need to deal with expression prefixes</h2>
+<p>TALES expression evaluators operate upon a prefix-basis; the prefix is used to determine which evaluator implementation should receive the expression.
+When the implementation of <code>IEvaluatesExpression</code> receives the evaluation request, the prefix which lead to that implementation class <em>will have already been removed</em> from the expression.</p>
+<p>For example, if you are creating a new <code>ruby:</code> expression type, you will register your evaluator implementation with the <code>ruby</code> prefix string.
+Once a Ruby expression reaches your evaluator, the <code>ruby:</code> prefix will have already been removed from the expression string.</p>
+<h2 id="registering-evaluators-with-their-prefixes">Registering evaluators with their prefixes</h2>
+<p>The actual registration of an evaluator implementation class and the association of that implementation type with a prefix is performed during dependency injection set-up.
+Typically, a new expression evaluator will add an extension method for <a class="xref" href="../api/ZptSharp.Hosting.IBuildsHostingEnvironment.html"><code>IBuildsHostingEnvironment</code></a> which is used to add its services to DI and also register the implementation with its prefix.
+That extension method should register the implementation type and prefix like so:</p>
+<pre><code class="lang-csharp">builder.ServiceRegistry.ExpresionEvaluatorTypes
+  .Add(&quot;myprefix&quot;, typeof(MyEvaluatorType));
+</code></pre>
+<p>Where:</p>
+<ul>
+<li><code>builder</code> is the <code>IBuildsHostingEnvironment</code></li>
+<li><code>&quot;myprefix&quot;</code> is the prefix for your expression type</li>
+<li><code>MyEvaluatorType</code> is the concrete class which implements <code>IEvaluatesExpression</code></li>
+</ul>
+<h2 id="commonly-used-services">Commonly-used services</h2>
+<p>Because ZptSharp is based upon dependency injection, any class may constructor-inject other service interfaces freely.</p>
+<ul>
+<li>Inject an <code>IEvaluatesExpression</code> in order to be able to evaluate nested expressions</li>
+<li>Inject <a class="xref" href="../api/ZptSharp.Tal.IEvaluatesDomValueExpression.html"><code>IEvaluatesDomValueExpression</code></a> to evaluate expressions which return content specifically for the DOM</li>
+<li>Add your own services to dependency injection and inject them, as required</li>
+</ul>
 </article>
           </div>
           

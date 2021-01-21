@@ -5,9 +5,9 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title> </title>
+    <title>Writing document providers </title>
     <meta name="viewport" content="width=device-width">
-    <meta name="title" content=" ">
+    <meta name="title" content="Writing document providers ">
     <meta name="generator" content="docfx 2.56.6.0">
     
     <link rel="shortcut icon" href="../favicon.ico">
@@ -67,7 +67,31 @@
         <div class="article row grid-right">
           <div class="col-md-10">
             <article class="content wrap" id="_content" data-uid="">
+<h1 id="writing-document-providers">Writing document providers</h1>
 
+<p>Document providers are classes which implement the interface <a class="xref" href="../api/ZptSharp.Dom.IReadsAndWritesDocument.html"><code>IReadsAndWritesDocument</code></a>.
+You are encouraged to read the API docs for this interface.
+As well as implementing this interface, a document provider is almost certain to require its own implementations of the following:</p>
+<ul>
+<li><a class="xref" href="../api/ZptSharp.Dom.IDocument.html"><code>IDocument</code></a></li>
+<li><a class="xref" href="../api/ZptSharp.Dom.INode.html"><code>INode</code></a></li>
+<li><a class="xref" href="../api/ZptSharp.Dom.IAttribute.html"><code>IAttribute</code></a></li>
+</ul>
+<p>The abstractions package contains minimal abstract base classes for each of these interfaces, which cater for some of the boilerplate.
+These are <a class="xref" href="../api/ZptSharp.Dom.DocumentBase.html"><code>DocumentBase</code></a>, <a class="xref" href="../api/ZptSharp.Dom.NodeBase.html"><code>NodeBase</code></a> &amp; <a class="xref" href="../api/ZptSharp.Dom.AttributeBase.html"><code>AttributeBase</code></a> respectively.
+You may use these base classes if desired, but their use is optional.</p>
+<h2 id="registeringactivating-a-document-provider">Registering/activating a document provider</h2>
+<p>In order to activate a document provider or must be added to dependency injection during start-up and it must be registered with the list of available document provider types.</p>
+<p>Typically this is all accomplished with a single extension method for the <a class="xref" href="../api/ZptSharp.Hosting.IBuildsHostingEnvironment.html"><code>IBuildsHostingEnvironment</code></a> interface.
+Here is the typical syntax for registering a document provider type:</p>
+<pre><code class="lang-csharp">builder.ServiceRegistry.DocumentProviderTypes
+  .Add(typeof(MyDocumentProvider));
+</code></pre>
+<p>Where:</p>
+<ul>
+<li><code>builder</code> is the <code>IBuildsHostingEnvironment</code></li>
+<li><code>MyDocumentProvider</code> is the concrete class which implements <code>IReadsAndWritesDocument</code></li>
+</ul>
 </article>
           </div>
           

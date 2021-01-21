@@ -5,9 +5,9 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title> </title>
+    <title>Contributing to &amp; extending ZptSharp </title>
     <meta name="viewport" content="width=device-width">
-    <meta name="title" content=" ">
+    <meta name="title" content="Contributing to &amp; extending ZptSharp ">
     <meta name="generator" content="docfx 2.56.6.0">
     
     <link rel="shortcut icon" href="../favicon.ico">
@@ -67,7 +67,23 @@
         <div class="article row grid-right">
           <div class="col-md-10">
             <article class="content wrap" id="_content" data-uid="">
+<h1 id="contributing-to--extending-zptsharp">Contributing to &amp; extending ZptSharp</h1>
 
+<p>Contributions to ZptSharp are very welcome, whatever those contributions may be.
+Good ways to contribute are:</p>
+<ul>
+<li>To <a href="https://github.com/csf-dev/ZPT-Sharp/issues">report issues and enhancement requests</a> to the GitHub issue tracker</li>
+<li>To answer <a href="https://github.com/csf-dev/ZPT-Sharp/discussions">questions and discussions</a></li>
+<li>To evaluate the documentation &amp; suggest improvements</li>
+<li>To work on any of the open issues from the tracker</li>
+</ul>
+<h2 id="extending-zptsharp">Extending ZptSharp</h2>
+<p>The two primary extension points of ZptSharp are <strong><a href="WritingDocumentProviders.html">document providers</a></strong> and <strong><a href="WritingExpressionEvaluators.html">expression evaluators</a></strong>.</p>
+<p>Document providers provide the 'bridge' between an implementation of a markup DOM, such as HTML Agility Pack, and the simplified DOM abstraction used by ZptSharp.
+If you wish to use a new DOM implementation (for example, a new HTML reading/writing library is released) then you may write a document provider to integrate it into ZptSharp.</p>
+<p>Expression evaluators add new TALES expression types.
+For example, imagine a library which supports evaluating Ruby expressions from .NET.
+This could be integrated into ZptSharp with an expression evaluator, adding support for a hypothetical <code>ruby:</code> expression-type.</p>
 </article>
           </div>
           
