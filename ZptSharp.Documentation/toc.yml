@@ -1,14 +1,12 @@
 - name: Documentation
   topicHref: articles/index.md
-- name: ZPT syntax reference
+- name: Tutorial
+  topicHref: articles/ZptTutorial/index.md
+- name: ZPT syntax
   topicHref: articles/ZptReference/index.md
-- name: API reference
+- name: API docs
   topicHref: api/index.md
-- name: Source code
+- name: GitHub repo
   href: https://github.com/csf-dev/ZPT-Sharp
-- name: Issues
-  href: https://github.com/csf-dev/ZPT-Sharp/issues
-- name: Discussion
-  href: https://github.com/csf-dev/ZPT-Sharp/discussions
 - name: NuGet packages
   topicHref: articles/NuGetPackages.md

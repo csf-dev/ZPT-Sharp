@@ -41,11 +41,13 @@ An ideal follow-up to using a quick start guide is to follow [the ZPT tutorial].
 ## Contributing & extending
 
 ZptSharp is an extensible library which may be customised to your desired usage.
+As well as the source code, [the ZptSharp GitHub repository] hosts issues & a discussion forum.
 
 * [Building & testing]
 * [Writing new document providers]
 * [Writing new expression evaluators]
 
+[the ZptSharp GitHub repository]: https://github.com/csf-dev/ZPT-Sharp
 [Building & testing]: BuildAndTest.md
 [Writing new document providers]: WritingDocumentProviders.md
 [Writing new expression evaluators]: WritingExpressionEvaluators.md
