@@ -19,17 +19,12 @@
   items:
     - name: MVC view engines
       href: ViewEngines.md
+    - name: NuGet packages
+      href: NuGetPackages.md
     - name: Consuming the API
       topicHref: ../api/index.md
     - name: ZPT syntax
-      href: ZptReference/index.md
-      items:
-        - name: TALES
-          href: ZptReference/Tales/index.md
-        - name: METAL
-          href: ZptReference/Metal/index.md
-        - name: TAL
-          href: ZptReference/Tal/index.md
+      topicHref: ZptReference/index.md
     - name: The CLI app
       href: CliRenderer.md
     - name: Compatibility
@@ -37,8 +32,9 @@
     - name: Logging
       href: Logging.md
 - name: Contributing & extending
-  href: Contributing.md
   items:
+    - name: Contributing
+      href: Contributing.md
     - name: Build & test
       topicHref: BuildAndTest.md
       items:
