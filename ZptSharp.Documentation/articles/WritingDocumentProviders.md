@@ -22,9 +22,10 @@ You may use these base classes if desired, but their use is optional.
 
 ## Registering/activating a document provider
 
-In order to activate a document provider or must be added to dependency injection during start-up and it must be registered with the list of available document provider types.
+In order to activate a document provider it must be added to dependency injection during start-up and it must be registered with the list of available document provider types.
 
-Typically this is all accomplished with a single extension method for the [`IBuildsHostingEnvironment`] interface.
+Typically both of these are performed by an extension method for the [`IBuildsHostingEnvironment`] interface.
+The hosting environment builder includes an `IServiceCollection` which is used to add relevant services to DI.
 Here is the typical syntax for registering a document provider type:
 
 ```csharp
