@@ -81,8 +81,9 @@ As well as implementing this interface, a document provider is almost certain to
 These are <a class="xref" href="../api/ZptSharp.Dom.DocumentBase.html"><code>DocumentBase</code></a>, <a class="xref" href="../api/ZptSharp.Dom.NodeBase.html"><code>NodeBase</code></a> &amp; <a class="xref" href="../api/ZptSharp.Dom.AttributeBase.html"><code>AttributeBase</code></a> respectively.
 You may use these base classes if desired, but their use is optional.</p>
 <h2 id="registeringactivating-a-document-provider">Registering/activating a document provider</h2>
-<p>In order to activate a document provider or must be added to dependency injection during start-up and it must be registered with the list of available document provider types.</p>
-<p>Typically this is all accomplished with a single extension method for the <a class="xref" href="../api/ZptSharp.Hosting.IBuildsHostingEnvironment.html"><code>IBuildsHostingEnvironment</code></a> interface.
+<p>In order to activate a document provider it must be added to dependency injection during start-up and it must be registered with the list of available document provider types.</p>
+<p>Typically both of these are performed by an extension method for the <a class="xref" href="../api/ZptSharp.Hosting.IBuildsHostingEnvironment.html"><code>IBuildsHostingEnvironment</code></a> interface.
+The hosting environment builder includes an <code>IServiceCollection</code> which is used to add relevant services to DI.
 Here is the typical syntax for registering a document provider type:</p>
 <pre><code class="lang-csharp">builder.ServiceRegistry.DocumentProviderTypes
   .Add(typeof(MyDocumentProvider));
