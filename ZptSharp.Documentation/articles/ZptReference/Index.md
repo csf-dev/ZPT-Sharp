@@ -5,7 +5,8 @@ Each primary mention of an attribute below is a link to its reference page.
 
 ## METAL is for reusing markup
 
-When processing a ZPT source document, the first attributes processed are METAL attributes.
+When processing a ZPT source document, the first attributes processed (through the entire document) are METAL attributes.
+Only once all METAL attributes are processed does ZptSharp process TAL attributes.
 
 The concept at the heart of METAL is **macros**. A macro is a reusable subtree of an HTML or XML document. In other words, it is an element and all of that element's descendents & content. Macros are created using the [`define-macro`] attribute and consumed with the [`use-macro`] attribute.
 
@@ -77,3 +78,24 @@ In the examples below all expressions are shown *using their fully qualified/pre
 [please read about the limitations]: Tales/CSharpExpressionLimitations.md
 [`python`]: Tales/PythonExpressions.md
 [`structure`]: Tales/StructureExpressions.md
+
+## In XML documents, namespaces matter
+
+The `metal` and `tal` attribute prefixes used throughout ZPT are defined with the following XML namespaces:
+
+| Prefix    | Namespace                                 |
+| ------    | ---------                                 |
+| `metal`   | `http://xml.zope.org/namespaces/metal`    |
+| `tal`     | `http://xml.zope.org/namespaces/tal`      |
+
+When working with XML document templates, these two namespaces must be declared (typically at the root of the document) via `xmlns` attributes.
+When using HTML documents _the full namespaces need not be declared_; the `metal` and `tal` prefixes are recognised by their prefix names alone.
+
+### Example
+
+```xml
+<root xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:tal="http://xml.zope.org/namespaces/tal">
+    <child>The rest of the XML ZPT document template continues here.</child>
+</root>
+```
