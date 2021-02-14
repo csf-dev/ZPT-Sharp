@@ -3981,7 +3981,7 @@
       "output": {
         ".html": {
           "relative_path": "api/ZptSharp.Tal.IInterpretsExpressionResult.html",
-          "hash": "7I2ZP4qvADUml6d7MtNFbw=="
+          "hash": "nUYyg9m8oX2Wrhsmw08ONA=="
         }
       },
       "is_incremental": false,
@@ -4137,7 +4137,7 @@
       "output": {
         ".html": {
           "relative_path": "api/ZptSharp.Tal.TalExpressionResultInterpreter.html",
-          "hash": "spMU+CIyfztoLyx3vja1Yg=="
+          "hash": "tIqUz3fWzcbJf29XlNnseA=="
         }
       },
       "is_incremental": false,
@@ -4846,15 +4846,27 @@
       "version": ""
     },
     {
-      "log_codes": [
-        "InvalidFileLink"
-      ],
       "type": "Conceptual",
       "source_relative_path": "articles/ZptTutorial/Page3.md",
       "output": {
         ".html": {
           "relative_path": "articles/ZptTutorial/Page3.html",
-          "hash": "e1Qm2zMeDCKc9a7qOUwdYQ=="
+          "hash": "jcIEgcDUThyYG69mFTFkZw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "log_codes": [
+        "InvalidFileLink"
+      ],
+      "type": "Conceptual",
+      "source_relative_path": "articles/ZptTutorial/Page4.md",
+      "output": {
+        ".html": {
+          "relative_path": "articles/ZptTutorial/Page4.html",
+          "hash": "zE90DdM4DErc2VWZbptUbQ=="
         }
       },
       "is_incremental": false,
@@ -4873,15 +4885,12 @@
       "version": ""
     },
     {
-      "log_codes": [
-        "InvalidFileLink"
-      ],
       "type": "Toc",
       "source_relative_path": "articles/ZptTutorial/toc.yml",
       "output": {
         ".html": {
           "relative_path": "articles/ZptTutorial/toc.html",
-          "hash": "PFJbAjA5KSDMuSLPTiRH0A=="
+          "hash": "PTi+9JfQvJbGZ4AdUuGaKw=="
         }
       },
       "is_incremental": false,
@@ -4964,7 +4973,7 @@
         "ConceptualDocumentProcessor": {
           "can_incremental": false,
           "incrementalPhase": "build",
-          "total_file_count": 45,
+          "total_file_count": 46,
           "skipped_file_count": 0
         },
         "ManagedReferenceDocumentProcessor": {
