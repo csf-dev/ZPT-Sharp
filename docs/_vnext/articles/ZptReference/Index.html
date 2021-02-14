@@ -72,7 +72,8 @@
 <p>The ZPT syntax/language is organised into three logical parts.
 Each primary mention of an attribute below is a link to its reference page.</p>
 <h2 id="metal-is-for-reusing-markup">METAL is for reusing markup</h2>
-<p>When processing a ZPT source document, the first attributes processed are METAL attributes.</p>
+<p>When processing a ZPT source document, the first attributes processed (through the entire document) are METAL attributes.
+Only once all METAL attributes are processed does ZptSharp process TAL attributes.</p>
 <p>The concept at the heart of METAL is <strong>macros</strong>. A macro is a reusable subtree of an HTML or XML document. In other words, it is an element and all of that element's descendents &amp; content. Macros are created using the <a href="Metal/DefineMacro.html"><code>define-macro</code></a> attribute and consumed with the <a href="Metal/UseMacro.html"><code>use-macro</code></a> attribute.</p>
 <p>METAL macros may also contain zero or more <strong>slots</strong>. Slots are also single elements which may be replaced ('filled') at the point where the macro is used. Slots are created with the <a href="Metal/DefineSlot.html"><code>define-slot</code></a> attribute and are used/filled using the <a href="Metal/FillSlot.html"><code>fill-slot</code></a> attribute.</p>
 <p>An advanced usage of METAL is <em>macro extension</em>. This is somewhat similar in concept to creating a 'subclass' of a macro. The <a href="Metal/ExtendMacro.html"><code>extend-macro</code></a> attribute is how this is performed.</p>
@@ -178,6 +179,34 @@ TALES is <em>an extensible syntax</em> and so plugins may add further expression
 </tr>
 </tbody>
 </table>
+<h2 id="in-xml-documents-namespaces-matter">In XML documents, namespaces matter</h2>
+<p>The <code>metal</code> and <code>tal</code> attribute prefixes used throughout ZPT are defined with the following XML namespaces:</p>
+<table>
+<thead>
+<tr>
+<th>Prefix</th>
+<th>Namespace</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>metal</code></td>
+<td><code>http://xml.zope.org/namespaces/metal</code></td>
+</tr>
+<tr>
+<td><code>tal</code></td>
+<td><code>http://xml.zope.org/namespaces/tal</code></td>
+</tr>
+</tbody>
+</table>
+<p>When working with XML document templates, these two namespaces must be declared (typically at the root of the document) via <code>xmlns</code> attributes.
+When using HTML documents <em>the full namespaces need not be declared</em>; the <code>metal</code> and <code>tal</code> prefixes are recognised by their prefix names alone.</p>
+<h3 id="example">Example</h3>
+<pre><code class="lang-xml">&lt;root xmlns:metal=&quot;http://xml.zope.org/namespaces/metal&quot;
+      xmlns:tal=&quot;http://xml.zope.org/namespaces/tal&quot;&gt;
+    &lt;child&gt;The rest of the XML ZPT document template continues here.&lt;/child&gt;
+&lt;/root&gt;
+</code></pre>
 </article>
           </div>
           

@@ -4185,7 +4185,7 @@
       "output": {
         ".html": {
           "relative_path": "api/ZptSharp.TemplateDirectory.html",
-          "hash": "1olqGacPr+HTjpVA9jQMNg=="
+          "hash": "wnD75tYQo835g1S2Z19elw=="
         }
       },
       "is_incremental": false,
@@ -4269,7 +4269,7 @@
       "output": {
         ".html": {
           "relative_path": "api/ZptSharp.html",
-          "hash": "UXbd7AP0RjqY+SM6q3Mtxg=="
+          "hash": "TCXNV9wCEvxnNU3olF+C0Q=="
         }
       },
       "is_incremental": false,
@@ -4377,7 +4377,7 @@
       "output": {
         ".html": {
           "relative_path": "articles/Logging.html",
-          "hash": "Q8y9bvjNp4G0XKPcCPYmKg=="
+          "hash": "7+zI+KvJCx76x14b7MgS7Q=="
         }
       },
       "is_incremental": false,
@@ -4456,15 +4456,12 @@
       "version": ""
     },
     {
-      "log_codes": [
-        "InvalidFileLink"
-      ],
       "type": "Conceptual",
       "source_relative_path": "articles/ViewEngines.md",
       "output": {
         ".html": {
           "relative_path": "articles/ViewEngines.html",
-          "hash": "7fNhnVamPw08xKFazlXnew=="
+          "hash": "mQ66gVZ7+05ueh8jUG/M2w=="
         }
       },
       "is_incremental": false,
@@ -4512,22 +4509,19 @@
       "output": {
         ".html": {
           "relative_path": "articles/ZptReference/Index.html",
-          "hash": "jKkmkfSBWL5oxQbZiHBp6A=="
+          "hash": "2RB3ROja1UkO7vlSsfFO4A=="
         }
       },
       "is_incremental": false,
       "version": ""
     },
     {
-      "log_codes": [
-        "InvalidFileLink"
-      ],
       "type": "Conceptual",
       "source_relative_path": "articles/ZptReference/Metal/DefineMacro.md",
       "output": {
         ".html": {
           "relative_path": "articles/ZptReference/Metal/DefineMacro.html",
-          "hash": "ZSjArbKxPhOwaNIIqxU83A=="
+          "hash": "Ouqv42WVdeao6DoGXLHxyA=="
         }
       },
       "is_incremental": false,
@@ -4579,15 +4573,12 @@
       "version": ""
     },
     {
-      "log_codes": [
-        "InvalidFileLink"
-      ],
       "type": "Conceptual",
       "source_relative_path": "articles/ZptReference/Metal/UseMacro.md",
       "output": {
         ".html": {
           "relative_path": "articles/ZptReference/Metal/UseMacro.html",
-          "hash": "8h/oc5xjqDVyLf/Oznyzjg=="
+          "hash": "q6BjhVICKIPk6Zu0Bs2Cgw=="
         }
       },
       "is_incremental": false,
@@ -4728,7 +4719,7 @@
       "output": {
         ".html": {
           "relative_path": "articles/ZptReference/Tales/GlobalContexts.html",
-          "hash": "lmunpwpm+gGZPspJSUIsJw=="
+          "hash": "LxnLtFZAnyqnTWbbjHIaMQ=="
         }
       },
       "is_incremental": false,
