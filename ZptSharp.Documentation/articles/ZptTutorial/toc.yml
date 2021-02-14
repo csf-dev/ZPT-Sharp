@@ -10,3 +10,7 @@
       href: Page3.md
     - name: 4. Attributes & tag-omission
       href: Page4.md
+    - name: 5. METAL macros
+      href: Page5.md
+    - name: 6. Macro slots & filling them
+      href: Page6.md
