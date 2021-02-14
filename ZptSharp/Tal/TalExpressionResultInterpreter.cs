@@ -27,9 +27,9 @@ namespace ZptSharp.Tal
         /// </para>
         /// <para>
         /// A <c>System.Int32</c> or any expression result which is a value type is coerced to <c>false</c> if it
-        /// is equal to its default value, or <c>true</c> if it is not.  For built-in numeric types that is zero,
-        /// for <c>System.DateTime</c> that is the minimum value and for <c>System.Boolean</c> that is
-        /// <c>false</c>.
+        /// is equal to its default value, or <c>true</c> if it is not.  For built-in numeric types the default
+        /// value is zero.  For <c>System.DateTime</c> the default is the <c>DateTime.MinValue</c> and for
+        /// <c>System.Boolean</c> the default is <c>false</c>.
         /// </para>
         /// </example>
         /// <returns><c>true</c>, if result should be treated as boolean truth, <c>false</c> otherwise.</returns>
