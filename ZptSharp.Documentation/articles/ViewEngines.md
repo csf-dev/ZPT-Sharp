@@ -86,4 +86,4 @@ The table below shows these extra contexts; the **Framework** column shows wheth
 | `Server`      | MVC5 only | The server utility object, equivalent to `HttpContext.Server`             |
 | `Session`     | MVC5 only | The session-state object, equivalent to `HttpContext.Session`             |
 
-[the global contexts built-into Zptsharp]: ZptReference/GlobalContexts.md
+[the global contexts built-into Zptsharp]: ZptReference/Tales/GlobalContexts.md
