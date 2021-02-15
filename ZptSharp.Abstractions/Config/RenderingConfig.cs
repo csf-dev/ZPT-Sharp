@@ -145,9 +145,9 @@ namespace ZptSharp.Config
         /// </para>
         /// <para>
         /// For the majority of foreseen usages, this configuration property does not need to be used.
-        /// If this property is <see langword="null"/> then the rendering process will use a standard
-        /// implementation of <see cref="IGetsDictionaryOfNamedTalesValues" /> to retrieve the root
-        /// contexts.
+        /// If this property is <see langword="null"/> then the rendering process will use a default
+        /// implementation of <see cref="IGetsDictionaryOfNamedTalesValues" /> which provides
+        /// <xref href="GlobalContextsArticle?text=the+standard+root+contexts"/>.
         /// In particular, developers do not need to write their own implementation of
         /// <see cref="IGetsDictionaryOfNamedTalesValues" /> in order to simply add extra root
         /// contexts/variables to the rendering process.

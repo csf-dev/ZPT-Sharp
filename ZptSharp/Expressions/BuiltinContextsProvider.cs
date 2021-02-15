@@ -14,6 +14,20 @@ namespace ZptSharp.Expressions
     /// If, for example, their names have been overwritten they may alternatively be referenced
     /// explicitly with the <c>CONTEXTS</c> reserved variable name.
     /// </summary>
+    /// <remarks>
+    /// <para>
+    /// This is the default implementation of the root contexts provider.
+    /// If <see cref="RenderingConfig.RootContextsProvider"/> has not been overridden upon the
+    /// configuration then this is the class which shall be used to provide the root contexts.
+    /// A more in-depth treatment of the root contexts which are provided by this class is available
+    /// in <xref href="GlobalContextsArticle?text=the+separate+writeup+about+global+contexts"/>.
+    /// </para>
+    /// <para>
+    /// If the configuration has been overridden and a different implementation chosen for the root
+    /// contexts provider, then there might be a very different set of root contexts available, and not
+    /// those described in the link above.
+    /// </para>
+    /// </remarks>
     public class BuiltinContextsProvider : IGetsDictionaryOfNamedTalesValues
     {
         readonly ExpressionContext context;
