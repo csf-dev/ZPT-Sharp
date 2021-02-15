@@ -1,3 +1,1 @@
 # DefineSlot
-
-[Index](Index.md)

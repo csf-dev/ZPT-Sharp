@@ -1,3 +1,1 @@
 # StructureExpressions
-
-[index](index.md)

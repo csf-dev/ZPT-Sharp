@@ -1,3 +1,1 @@
 # Define
-
-[Index](Index.md)

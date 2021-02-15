@@ -1,3 +1,1 @@
 # NotExpressions
-
-[Index](Index.md)

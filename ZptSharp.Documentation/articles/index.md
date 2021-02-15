@@ -23,18 +23,12 @@ An ideal follow-up to using a quick start guide is to follow [the ZPT tutorial].
 * [ZptSharp MVC view engines]
 * [Consuming the API]
 * [ZPT syntax]
-  * [TALES]
-  * [METAL]
-  * [TAL]
 * [The command line renderer]
 * [Compatibility]
 
 [ZptSharp MVC view engines]: ViewEngines.md
 [Consuming the API]: ../api/index.md
 [ZPT syntax]: ZPTReference/index.md
-[TALES]: ZPTReference/Tales/index.md
-[METAL]: ZPTReference/Metal/index.md
-[TAL]: ZPTReference/Tal/index.md
 [The command line renderer]: CliRenderer.md
 [Compatibility]: Compatibility.md
 

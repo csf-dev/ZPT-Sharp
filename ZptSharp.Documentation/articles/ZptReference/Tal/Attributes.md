@@ -1,3 +1,1 @@
 # Attributes
-
-[Index](Index.md)

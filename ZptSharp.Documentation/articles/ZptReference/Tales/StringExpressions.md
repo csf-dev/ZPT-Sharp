@@ -1,3 +1,1 @@
 # StringExpressions
-
-[Index](Index.md)

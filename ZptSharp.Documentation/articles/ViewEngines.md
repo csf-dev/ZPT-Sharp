@@ -10,7 +10,7 @@ The table below shows the applicable packages and MVC versions.
 
 Install the package for your MVC version/runtime (as well as at least one [document provider package], and any additional expression evaluators, if applicable) into your MVC Web Application project.
 
-[document provider package]: NuGetPackages.md#Document-providers
+[document provider package]: NuGetPackages.md#document-providers
 
 ## Activating the view engine
 

@@ -1,3 +1,1 @@
 # ExtendMacro
-
-[Index](Index.md)

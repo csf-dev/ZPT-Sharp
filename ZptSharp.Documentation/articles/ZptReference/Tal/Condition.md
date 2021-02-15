@@ -1,3 +1,1 @@
 # Condition
-
-[Index](Index.md)
