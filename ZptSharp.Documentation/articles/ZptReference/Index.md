@@ -8,17 +8,17 @@ Each primary mention of an attribute below is a link to its reference page.
 When processing a ZPT source document, the first attributes processed (through the entire document) are METAL attributes.
 Only once all METAL attributes are processed does ZptSharp process TAL attributes.
 
-The concept at the heart of METAL is **macros**. A macro is a reusable subtree of an HTML or XML document. In other words, it is an element and all of that element's descendents & content. Macros are created using the [`define-macro`] attribute and consumed with the [`use-macro`] attribute.
+The concept at the heart of METAL is **macros**. A macro is a reusable subtree of an HTML or XML document. In other words, it is an element and all of that element's descendents & content. Macros are created using the [`metal:define-macro`] attribute and consumed with the [`metal:use-macro`] attribute.
 
-METAL macros may also contain zero or more **slots**. Slots are also single elements which may be replaced ('filled') at the point where the macro is used. Slots are created with the [`define-slot`] attribute and are used/filled using the [`fill-slot`] attribute.
+METAL macros may also contain zero or more **slots**. Slots are also single elements which may be replaced ('filled') at the point where the macro is used. Slots are created with the [`metal:define-slot`] attribute and are used/filled using the [`metal:fill-slot`] attribute.
 
-An advanced usage of METAL is *macro extension*. This is somewhat similar in concept to creating a 'subclass' of a macro. The [`extend-macro`] attribute is how this is performed.
+An advanced usage of METAL is *macro extension*. This is somewhat similar in concept to creating a 'subclass' of a macro. The [`metal:extend-macro`] attribute is how this is performed.
 
-[`define-macro`]: Metal/DefineMacro.md
-[`use-macro`]: Metal/UseMacro.md
-[`define-slot`]: Metal/DefineSlot.md
-[`fill-slot`]: Metal/FillSlot.md
-[`extend-macro`]: Metal/ExtendMacro.md
+[`metal:define-macro`]: Metal/DefineMacro.md
+[`metal:use-macro`]: Metal/UseMacro.md
+[`metal:define-slot`]: Metal/DefineSlot.md
+[`metal:fill-slot`]: Metal/FillSlot.md
+[`metal:extend-macro`]: Metal/ExtendMacro.md
 
 ## TAL binds data to the template
 
