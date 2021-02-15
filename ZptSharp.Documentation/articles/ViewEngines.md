@@ -66,24 +66,24 @@ When using the ZptSharp view engine, a few additional TALES contexts (essentiall
 These contexts/variables are accessible to all views rendered by the view engine and _they are in addition to_ [the global contexts built-into Zptsharp].
 The table below shows these extra contexts; the **Framework** column shows whether each context is available for AS<span>P.N</span>ET Core MVC, AS<span>P.N</span>ET MVC5 or **both** of these frameworks.
 
-| Name          | Framework | Description                                                               |
-| ----          | --------- | -----------                                                               |
-| `Context`     | Both      | The current `HttpContext`                                                 |
-| `Model`       | Both      | The current model, an alias for `here`                                    |
-| `Request`     | Both      | The HTTP request, equivalent to `HttpContext.Request`                     |
-| `request`     | Both      | The HTTP request, an alias for `Request`                                  |
-| `Response`    | Both      | The HTTP response, equivalent to `HttpContext.Response`                   |
-| `RouteData`   | Both      | The route data, equivalent to `ViewContext.RouteData`                     |
-| `TempData`    | Both      | The temporary data, equivalent to `ViewContext.TempData`                  |
-| `Url`         | Both      | The current request URL                                                   |
-| `User`        | Both      | The current user principal, equivalent to `HttpContext.User`              |
-| `ViewBag`     | Both      | The view bag, equivalent to `ViewContext.ViewBag`                         |
-| `ViewContext` | Both      | The current view context                                                  |
-| `ViewData`    | Both      | The view data, equivalent to `ViewContext.ViewData`                       |
-| `Views`       | Both      | An object which provides access to the root directory containing views    |
-| `Application` | MVC5 only | The application state, roughly equivalent to `HttpContext.Application`    |
-| `Cache`       | MVC5 only | The cache object, equivalent to `HttpContext.Cache`                       |
-| `Server`      | MVC5 only | The server utility object, equivalent to `HttpContext.Server`             |
-| `Session`     | MVC5 only | The session-state object, equivalent to `HttpContext.Session`             |
+| Name          | Framework | Description                                                                                           |
+| ----          | --------- | -----------                                                                                           |
+| `Context`     | Both      | The current `HttpContext`                                                                             |
+| `Model`       | Both      | The current model, an alias for `here`                                                                |
+| `Request`     | Both      | The HTTP request, equivalent to `HttpContext.Request`                                                 |
+| `request`     | Both      | The HTTP request, an alias for `Request`                                                              |
+| `Response`    | Both      | The HTTP response, equivalent to `HttpContext.Response`                                               |
+| `RouteData`   | Both      | The route data, equivalent to `ViewContext.RouteData`                                                 |
+| `TempData`    | Both      | The temporary data, equivalent to `ViewContext.TempData`                                              |
+| `Url`         | Both      | The current request URL                                                                               |
+| `User`        | Both      | The current user principal, equivalent to `HttpContext.User`                                          |
+| `ViewBag`     | Both      | The view bag, equivalent to `ViewContext.ViewBag`                                                     |
+| `ViewContext` | Both      | The current view context                                                                              |
+| `ViewData`    | Both      | The view data, equivalent to `ViewContext.ViewData`                                                   |
+| `Views`       | Both      | An object which provides access to the directory containing views, typically `~/Views` in your app    |
+| `Application` | MVC5 only | The application state, roughly equivalent to `HttpContext.Application`                                |
+| `Cache`       | MVC5 only | The cache object, equivalent to `HttpContext.Cache`                                                   |
+| `Server`      | MVC5 only | The server utility object, equivalent to `HttpContext.Server`                                         |
+| `Session`     | MVC5 only | The session-state object, equivalent to `HttpContext.Session`                                         |
 
 [the global contexts built-into Zptsharp]: ZptReference/Tales/GlobalContexts.md
