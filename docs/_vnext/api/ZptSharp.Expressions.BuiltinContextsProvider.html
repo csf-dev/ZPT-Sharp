@@ -119,6 +119,20 @@ explicitly with the <code>CONTEXTS</code> reserved variable name.</p>
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">public class BuiltinContextsProvider : IGetsDictionaryOfNamedTalesValues, IGetsNamedTalesValue</code></pre>
   </div>
+  <h5 id="ZptSharp_Expressions_BuiltinContextsProvider_remarks"><strong>Remarks</strong></h5>
+  <div class="markdown level0 remarks"><p>
+This is the default implementation of the root contexts provider.
+If <a class="xref" href="ZptSharp.Config.RenderingConfig.html#ZptSharp_Config_RenderingConfig_RootContextsProvider">RootContextsProvider</a> has not been overridden upon the
+configuration then this is the class which shall be used to provide the root contexts.
+A more in-depth treatment of the root contexts which are provided by this class is available
+in <a class="xref" href="../articles/ZptReference/Tales/GlobalContexts.html">the separate writeup about global contexts</a>.
+</p>
+<p>
+If the configuration has been overridden and a different implementation chosen for the root
+contexts provider, then there might be a very different set of root contexts available, and not
+those described in the link above.
+</p>
+</div>
   <h3 id="constructors">Constructors
   </h3>
   <span class="small pull-right mobile-hide">
@@ -126,7 +140,7 @@ explicitly with the <code>CONTEXTS</code> reserved variable name.</p>
     <a href="https://github.com/csf-dev/ZPT-Sharp/new/master/apiSpec/new?filename=ZptSharp_Expressions_BuiltinContextsProvider__ctor_ZptSharp_Expressions_ExpressionContext_ZptSharp_Config_RenderingConfig_ZptSharp_Metal_IGetsMetalDocumentAdapter_.md&amp;value=---%0Auid%3A%20ZptSharp.Expressions.BuiltinContextsProvider.%23ctor(ZptSharp.Expressions.ExpressionContext%2CZptSharp.Config.RenderingConfig%2CZptSharp.Metal.IGetsMetalDocumentAdapter)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/csf-dev/ZPT-Sharp/blob/master/ZptSharp/Expressions/BuiltinContextsProvider.cs/#L135">View Source</a>
+    <a href="https://github.com/csf-dev/ZPT-Sharp/blob/master/ZptSharp/Expressions/BuiltinContextsProvider.cs/#L149">View Source</a>
   </span>
   <a id="ZptSharp_Expressions_BuiltinContextsProvider__ctor_" data-uid="ZptSharp.Expressions.BuiltinContextsProvider.#ctor*"></a>
   <h4 id="ZptSharp_Expressions_BuiltinContextsProvider__ctor_ZptSharp_Expressions_ExpressionContext_ZptSharp_Config_RenderingConfig_ZptSharp_Metal_IGetsMetalDocumentAdapter_" data-uid="ZptSharp.Expressions.BuiltinContextsProvider.#ctor(ZptSharp.Expressions.ExpressionContext,ZptSharp.Config.RenderingConfig,ZptSharp.Metal.IGetsMetalDocumentAdapter)">BuiltinContextsProvider(ExpressionContext, RenderingConfig, IGetsMetalDocumentAdapter)</h4>
@@ -174,7 +188,7 @@ explicitly with the <code>CONTEXTS</code> reserved variable name.</p>
     <a href="https://github.com/csf-dev/ZPT-Sharp/new/master/apiSpec/new?filename=ZptSharp_Expressions_BuiltinContextsProvider_Attributes.md&amp;value=---%0Auid%3A%20ZptSharp.Expressions.BuiltinContextsProvider.Attributes%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/csf-dev/ZPT-Sharp/blob/master/ZptSharp/Expressions/BuiltinContextsProvider.cs/#L52">View Source</a>
+    <a href="https://github.com/csf-dev/ZPT-Sharp/blob/master/ZptSharp/Expressions/BuiltinContextsProvider.cs/#L66">View Source</a>
   </span>
   <h4 id="ZptSharp_Expressions_BuiltinContextsProvider_Attributes" data-uid="ZptSharp.Expressions.BuiltinContextsProvider.Attributes">Attributes</h4>
   <div class="markdown level1 summary"><p>An identifier/alias for getting the attributes from the current <a class="xref" href="ZptSharp.Dom.INode.html">INode</a>.</p>
@@ -204,7 +218,7 @@ explicitly with the <code>CONTEXTS</code> reserved variable name.</p>
     <a href="https://github.com/csf-dev/ZPT-Sharp/new/master/apiSpec/new?filename=ZptSharp_Expressions_BuiltinContextsProvider_Container.md&amp;value=---%0Auid%3A%20ZptSharp.Expressions.BuiltinContextsProvider.Container%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/csf-dev/ZPT-Sharp/blob/master/ZptSharp/Expressions/BuiltinContextsProvider.cs/#L62">View Source</a>
+    <a href="https://github.com/csf-dev/ZPT-Sharp/blob/master/ZptSharp/Expressions/BuiltinContextsProvider.cs/#L76">View Source</a>
   </span>
   <h4 id="ZptSharp_Expressions_BuiltinContextsProvider_Container" data-uid="ZptSharp.Expressions.BuiltinContextsProvider.Container">Container</h4>
   <div class="markdown level1 summary"><p>An identifier/alias for getting the container of the current <a class="xref" href="ZptSharp.Dom.IDocument.html">IDocument</a>.</p>
@@ -234,7 +248,7 @@ explicitly with the <code>CONTEXTS</code> reserved variable name.</p>
     <a href="https://github.com/csf-dev/ZPT-Sharp/new/master/apiSpec/new?filename=ZptSharp_Expressions_BuiltinContextsProvider_Default.md&amp;value=---%0Auid%3A%20ZptSharp.Expressions.BuiltinContextsProvider.Default%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/csf-dev/ZPT-Sharp/blob/master/ZptSharp/Expressions/BuiltinContextsProvider.cs/#L47">View Source</a>
+    <a href="https://github.com/csf-dev/ZPT-Sharp/blob/master/ZptSharp/Expressions/BuiltinContextsProvider.cs/#L61">View Source</a>
   </span>
   <h4 id="ZptSharp_Expressions_BuiltinContextsProvider_Default" data-uid="ZptSharp.Expressions.BuiltinContextsProvider.Default">Default</h4>
   <div class="markdown level1 summary"><p>An identifier/alias for an object which indicates that the current action should be cancelled.</p>
@@ -264,7 +278,7 @@ explicitly with the <code>CONTEXTS</code> reserved variable name.</p>
     <a href="https://github.com/csf-dev/ZPT-Sharp/new/master/apiSpec/new?filename=ZptSharp_Expressions_BuiltinContextsProvider_Error.md&amp;value=---%0Auid%3A%20ZptSharp.Expressions.BuiltinContextsProvider.Error%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/csf-dev/ZPT-Sharp/blob/master/ZptSharp/Expressions/BuiltinContextsProvider.cs/#L67">View Source</a>
+    <a href="https://github.com/csf-dev/ZPT-Sharp/blob/master/ZptSharp/Expressions/BuiltinContextsProvider.cs/#L81">View Source</a>
   </span>
   <h4 id="ZptSharp_Expressions_BuiltinContextsProvider_Error" data-uid="ZptSharp.Expressions.BuiltinContextsProvider.Error">Error</h4>
   <div class="markdown level1 summary"><p>An identifier/alias for getting an error object which was encountered whilst processing a context.</p>
@@ -294,7 +308,7 @@ explicitly with the <code>CONTEXTS</code> reserved variable name.</p>
     <a href="https://github.com/csf-dev/ZPT-Sharp/new/master/apiSpec/new?filename=ZptSharp_Expressions_BuiltinContextsProvider_Here.md&amp;value=---%0Auid%3A%20ZptSharp.Expressions.BuiltinContextsProvider.Here%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/csf-dev/ZPT-Sharp/blob/master/ZptSharp/Expressions/BuiltinContextsProvider.cs/#L37">View Source</a>
+    <a href="https://github.com/csf-dev/ZPT-Sharp/blob/master/ZptSharp/Expressions/BuiltinContextsProvider.cs/#L51">View Source</a>
   </span>
   <h4 id="ZptSharp_Expressions_BuiltinContextsProvider_Here" data-uid="ZptSharp.Expressions.BuiltinContextsProvider.Here">Here</h4>
   <div class="markdown level1 summary"><p>An identifier/alias for the model object contained within the expression context.</p>
@@ -324,7 +338,7 @@ explicitly with the <code>CONTEXTS</code> reserved variable name.</p>
     <a href="https://github.com/csf-dev/ZPT-Sharp/new/master/apiSpec/new?filename=ZptSharp_Expressions_BuiltinContextsProvider_Nothing.md&amp;value=---%0Auid%3A%20ZptSharp.Expressions.BuiltinContextsProvider.Nothing%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/csf-dev/ZPT-Sharp/blob/master/ZptSharp/Expressions/BuiltinContextsProvider.cs/#L42">View Source</a>
+    <a href="https://github.com/csf-dev/ZPT-Sharp/blob/master/ZptSharp/Expressions/BuiltinContextsProvider.cs/#L56">View Source</a>
   </span>
   <h4 id="ZptSharp_Expressions_BuiltinContextsProvider_Nothing" data-uid="ZptSharp.Expressions.BuiltinContextsProvider.Nothing">Nothing</h4>
   <div class="markdown level1 summary"><p>An identifier/alias for a non-object.  This translates to <code>null</code> in C# applications.</p>
@@ -354,7 +368,7 @@ explicitly with the <code>CONTEXTS</code> reserved variable name.</p>
     <a href="https://github.com/csf-dev/ZPT-Sharp/new/master/apiSpec/new?filename=ZptSharp_Expressions_BuiltinContextsProvider_Options.md&amp;value=---%0Auid%3A%20ZptSharp.Expressions.BuiltinContextsProvider.Options%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/csf-dev/ZPT-Sharp/blob/master/ZptSharp/Expressions/BuiltinContextsProvider.cs/#L26">View Source</a>
+    <a href="https://github.com/csf-dev/ZPT-Sharp/blob/master/ZptSharp/Expressions/BuiltinContextsProvider.cs/#L40">View Source</a>
   </span>
   <h4 id="ZptSharp_Expressions_BuiltinContextsProvider_Options" data-uid="ZptSharp.Expressions.BuiltinContextsProvider.Options">Options</h4>
   <div class="markdown level1 summary"><p>An identifier for the keyword-options presented to the rendering process.</p>
@@ -384,7 +398,7 @@ explicitly with the <code>CONTEXTS</code> reserved variable name.</p>
     <a href="https://github.com/csf-dev/ZPT-Sharp/new/master/apiSpec/new?filename=ZptSharp_Expressions_BuiltinContextsProvider_Repeat.md&amp;value=---%0Auid%3A%20ZptSharp.Expressions.BuiltinContextsProvider.Repeat%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/csf-dev/ZPT-Sharp/blob/master/ZptSharp/Expressions/BuiltinContextsProvider.cs/#L32">View Source</a>
+    <a href="https://github.com/csf-dev/ZPT-Sharp/blob/master/ZptSharp/Expressions/BuiltinContextsProvider.cs/#L46">View Source</a>
   </span>
   <h4 id="ZptSharp_Expressions_BuiltinContextsProvider_Repeat" data-uid="ZptSharp.Expressions.BuiltinContextsProvider.Repeat">Repeat</h4>
   <div class="markdown level1 summary"><p>An identifier for the collection of named repetition-information objects available in the
@@ -415,7 +429,7 @@ expression context.</p>
     <a href="https://github.com/csf-dev/ZPT-Sharp/new/master/apiSpec/new?filename=ZptSharp_Expressions_BuiltinContextsProvider_Template.md&amp;value=---%0Auid%3A%20ZptSharp.Expressions.BuiltinContextsProvider.Template%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/csf-dev/ZPT-Sharp/blob/master/ZptSharp/Expressions/BuiltinContextsProvider.cs/#L57">View Source</a>
+    <a href="https://github.com/csf-dev/ZPT-Sharp/blob/master/ZptSharp/Expressions/BuiltinContextsProvider.cs/#L71">View Source</a>
   </span>
   <h4 id="ZptSharp_Expressions_BuiltinContextsProvider_Template" data-uid="ZptSharp.Expressions.BuiltinContextsProvider.Template">Template</h4>
   <div class="markdown level1 summary"><p>An identifier/alias for getting the <a class="xref" href="ZptSharp.Dom.IDocument.html">IDocument</a></p>
@@ -447,7 +461,7 @@ expression context.</p>
     <a href="https://github.com/csf-dev/ZPT-Sharp/new/master/apiSpec/new?filename=ZptSharp_Expressions_BuiltinContextsProvider_GetAllNamedValues.md&amp;value=---%0Auid%3A%20ZptSharp.Expressions.BuiltinContextsProvider.GetAllNamedValues%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/csf-dev/ZPT-Sharp/blob/master/ZptSharp/Expressions/BuiltinContextsProvider.cs/#L87">View Source</a>
+    <a href="https://github.com/csf-dev/ZPT-Sharp/blob/master/ZptSharp/Expressions/BuiltinContextsProvider.cs/#L101">View Source</a>
   </span>
   <a id="ZptSharp_Expressions_BuiltinContextsProvider_GetAllNamedValues_" data-uid="ZptSharp.Expressions.BuiltinContextsProvider.GetAllNamedValues*"></a>
   <h4 id="ZptSharp_Expressions_BuiltinContextsProvider_GetAllNamedValues" data-uid="ZptSharp.Expressions.BuiltinContextsProvider.GetAllNamedValues">GetAllNamedValues()</h4>
@@ -479,7 +493,7 @@ expression context.</p>
     <a href="https://github.com/csf-dev/ZPT-Sharp/new/master/apiSpec/new?filename=ZptSharp_Expressions_BuiltinContextsProvider_TryGetValueAsync_System_String_System_Threading_CancellationToken_.md&amp;value=---%0Auid%3A%20ZptSharp.Expressions.BuiltinContextsProvider.TryGetValueAsync(System.String%2CSystem.Threading.CancellationToken)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/csf-dev/ZPT-Sharp/blob/master/ZptSharp/Expressions/BuiltinContextsProvider.cs/#L75">View Source</a>
+    <a href="https://github.com/csf-dev/ZPT-Sharp/blob/master/ZptSharp/Expressions/BuiltinContextsProvider.cs/#L89">View Source</a>
   </span>
   <a id="ZptSharp_Expressions_BuiltinContextsProvider_TryGetValueAsync_" data-uid="ZptSharp.Expressions.BuiltinContextsProvider.TryGetValueAsync*"></a>
   <h4 id="ZptSharp_Expressions_BuiltinContextsProvider_TryGetValueAsync_System_String_System_Threading_CancellationToken_" data-uid="ZptSharp.Expressions.BuiltinContextsProvider.TryGetValueAsync(System.String,System.Threading.CancellationToken)">TryGetValueAsync(String, CancellationToken)</h4>
@@ -548,7 +562,7 @@ expression context.</p>
                     <a href="https://github.com/csf-dev/ZPT-Sharp/new/master/apiSpec/new?filename=ZptSharp_Expressions_BuiltinContextsProvider.md&amp;value=---%0Auid%3A%20ZptSharp.Expressions.BuiltinContextsProvider%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
                   </li>
                   <li>
-                    <a href="https://github.com/csf-dev/ZPT-Sharp/blob/master/ZptSharp/Expressions/BuiltinContextsProvider.cs/#L17" class="contribution-link">View Source</a>
+                    <a href="https://github.com/csf-dev/ZPT-Sharp/blob/master/ZptSharp/Expressions/BuiltinContextsProvider.cs/#L31" class="contribution-link">View Source</a>
                   </li>
                 </ul>
               </div>

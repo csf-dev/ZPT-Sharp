@@ -1,6 +1,9 @@
 ### YamlMime:XRefMap
 sorted: true
 references:
+- uid: GlobalContextsArticle
+  name: The TALES global root contexts
+  href: articles/ZptReference/Tales/GlobalContexts.html
 - uid: ZptSharp
   name: ZptSharp
   href: api/ZptSharp.html
