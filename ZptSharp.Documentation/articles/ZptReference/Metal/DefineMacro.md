@@ -31,3 +31,21 @@ This is accomplished by placing [a `metal:extend-macro` attribute] upon the same
 `metal:extend-macro` attributes _are only valid_ where they appear upon the same element as a `metal:define-macro` attribute.
 
 [a `metal:extend-macro` attribute]: ExtendMacro.md
+
+## Example
+
+This example shows the definition of a METAL macro named "myMacro".
+As noted above, this (alone) has no direct effect upon rendering.
+The macro is the entire subtree of the DOM starting at the `<div>` element which defines the macro.
+In other words, it is the `<div>` element and all of its content & descendents.
+
+```html
+<body>
+<p>This is not part of the macro.</p>
+<div metal:define-macro="myMacro">
+    <h1>This heading is part of the macro</h1>
+    <p>So is this paragraph, as well as this <em>emphasized text</em>.</p>
+</div>
+<p>This is also not part of the macro.</p>
+</body>
+```
