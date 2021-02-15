@@ -86,6 +86,20 @@ The element which has the <code>metal:define-macro</code> attribute may not also
 <p>An element which defines a METAL macro via <code>metal:define-macro</code> may optionally be declared as an extension of another existing macro.
 This is accomplished by placing <a href="ExtendMacro.html">a <code>metal:extend-macro</code> attribute</a> upon the same element.
 <code>metal:extend-macro</code> attributes <em>are only valid</em> where they appear upon the same element as a <code>metal:define-macro</code> attribute.</p>
+<h2 id="example">Example</h2>
+<p>This example shows the definition of a METAL macro named &quot;myMacro&quot;.
+As noted above, this (alone) has no direct effect upon rendering.
+The macro is the entire subtree of the DOM starting at the <code>&lt;div&gt;</code> element which defines the macro.
+In other words, it is the <code>&lt;div&gt;</code> element and all of its content &amp; descendents.</p>
+<pre><code class="lang-html">&lt;body&gt;
+&lt;p&gt;This is not part of the macro.&lt;/p&gt;
+&lt;div metal:define-macro=&quot;myMacro&quot;&gt;
+    &lt;h1&gt;This heading is part of the macro&lt;/h1&gt;
+    &lt;p&gt;So is this paragraph, as well as this &lt;em&gt;emphasized text&lt;/em&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;p&gt;This is also not part of the macro.&lt;/p&gt;
+&lt;/body&gt;
+</code></pre>
 </article>
           </div>
           
