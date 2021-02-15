@@ -4377,7 +4377,7 @@
       "output": {
         ".html": {
           "relative_path": "articles/Logging.html",
-          "hash": "7+zI+KvJCx76x14b7MgS7Q=="
+          "hash": "iVOVeqFbUXhAHxR8HtZQfQ=="
         }
       },
       "is_incremental": false,
@@ -4461,7 +4461,7 @@
       "output": {
         ".html": {
           "relative_path": "articles/ViewEngines.html",
-          "hash": "TDt0g+NuSxu1WTq1Y+AHew=="
+          "hash": "m+BAq8yGEC0XsZGShtGDqg=="
         }
       },
       "is_incremental": false,
@@ -4509,7 +4509,7 @@
       "output": {
         ".html": {
           "relative_path": "articles/ZptReference/Index.html",
-          "hash": "2RB3ROja1UkO7vlSsfFO4A=="
+          "hash": "ejEESLv95DVbwOWo6GAm9g=="
         }
       },
       "is_incremental": false,
@@ -4528,45 +4528,36 @@
       "version": ""
     },
     {
-      "log_codes": [
-        "InvalidFileLink"
-      ],
       "type": "Conceptual",
       "source_relative_path": "articles/ZptReference/Metal/DefineSlot.md",
       "output": {
         ".html": {
           "relative_path": "articles/ZptReference/Metal/DefineSlot.html",
-          "hash": "LPTHfy/QCne9LV7grAFk4A=="
+          "hash": "WT8TAFvddHR87kg/YbsM2w=="
         }
       },
       "is_incremental": false,
       "version": ""
     },
     {
-      "log_codes": [
-        "InvalidFileLink"
-      ],
       "type": "Conceptual",
       "source_relative_path": "articles/ZptReference/Metal/ExtendMacro.md",
       "output": {
         ".html": {
           "relative_path": "articles/ZptReference/Metal/ExtendMacro.html",
-          "hash": "9CX4RfbYySweCQ3iu8pF2A=="
+          "hash": "X3CQRsVwU4rxZf+wLU6hLA=="
         }
       },
       "is_incremental": false,
       "version": ""
     },
     {
-      "log_codes": [
-        "InvalidFileLink"
-      ],
       "type": "Conceptual",
       "source_relative_path": "articles/ZptReference/Metal/FillSlot.md",
       "output": {
         ".html": {
           "relative_path": "articles/ZptReference/Metal/FillSlot.html",
-          "hash": "0UaZFAZejeMgKIUcAgWtuw=="
+          "hash": "zTzHnbHxBrOHnHc88CJ37g=="
         }
       },
       "is_incremental": false,
@@ -4585,105 +4576,84 @@
       "version": ""
     },
     {
-      "log_codes": [
-        "InvalidFileLink"
-      ],
       "type": "Conceptual",
       "source_relative_path": "articles/ZptReference/Tal/Attributes.md",
       "output": {
         ".html": {
           "relative_path": "articles/ZptReference/Tal/Attributes.html",
-          "hash": "NB9u4aknXVRHRuOt9IAUQg=="
+          "hash": "zlQ1Ay59iz/vYGGzGxV3IQ=="
         }
       },
       "is_incremental": false,
       "version": ""
     },
     {
-      "log_codes": [
-        "InvalidFileLink"
-      ],
       "type": "Conceptual",
       "source_relative_path": "articles/ZptReference/Tal/Condition.md",
       "output": {
         ".html": {
           "relative_path": "articles/ZptReference/Tal/Condition.html",
-          "hash": "jrQQ7LsBAtHc419RFohpeA=="
+          "hash": "rtNlgOk2hn1zmCFHAJUJeA=="
         }
       },
       "is_incremental": false,
       "version": ""
     },
     {
-      "log_codes": [
-        "InvalidFileLink"
-      ],
       "type": "Conceptual",
       "source_relative_path": "articles/ZptReference/Tal/ContentAndReplace.md",
       "output": {
         ".html": {
           "relative_path": "articles/ZptReference/Tal/ContentAndReplace.html",
-          "hash": "2IBZrAHXD4jFIcAKt5LAUQ=="
+          "hash": "X7/4t5O51Fpo8cxgq4KJvA=="
         }
       },
       "is_incremental": false,
       "version": ""
     },
     {
-      "log_codes": [
-        "InvalidFileLink"
-      ],
       "type": "Conceptual",
       "source_relative_path": "articles/ZptReference/Tal/Define.md",
       "output": {
         ".html": {
           "relative_path": "articles/ZptReference/Tal/Define.html",
-          "hash": "YkEUFoCN3A1Ysy5zVjZuUA=="
+          "hash": "mr/3rTx+ClLwH+m31vxEkQ=="
         }
       },
       "is_incremental": false,
       "version": ""
     },
     {
-      "log_codes": [
-        "InvalidFileLink"
-      ],
       "type": "Conceptual",
       "source_relative_path": "articles/ZptReference/Tal/OmitTag.md",
       "output": {
         ".html": {
           "relative_path": "articles/ZptReference/Tal/OmitTag.html",
-          "hash": "mNHyBjL/3f6jgQ/UNDjl5w=="
+          "hash": "xTgx2UR3tJu9weJf1oNd4g=="
         }
       },
       "is_incremental": false,
       "version": ""
     },
     {
-      "log_codes": [
-        "InvalidFileLink"
-      ],
       "type": "Conceptual",
       "source_relative_path": "articles/ZptReference/Tal/OnError.md",
       "output": {
         ".html": {
           "relative_path": "articles/ZptReference/Tal/OnError.html",
-          "hash": "NpccL0DjtWGgXyj0782YpQ=="
+          "hash": "FucHenzOJsRJq0A3k+A/Ow=="
         }
       },
       "is_incremental": false,
       "version": ""
     },
     {
-      "log_codes": [
-        "InvalidFileLink"
-      ],
       "type": "Conceptual",
       "source_relative_path": "articles/ZptReference/Tal/Repeat.md",
       "output": {
         ".html": {
           "relative_path": "articles/ZptReference/Tal/Repeat.html",
-          "hash": "hOWlkIHjfyQoLLbTHz3hNg=="
+          "hash": "hZ2nev1MRdR/Hjq7bs2Hiw=="
         }
       },
       "is_incremental": false,
@@ -4726,30 +4696,24 @@
       "version": ""
     },
     {
-      "log_codes": [
-        "InvalidFileLink"
-      ],
       "type": "Conceptual",
       "source_relative_path": "articles/ZptReference/Tales/NotExpressions.md",
       "output": {
         ".html": {
           "relative_path": "articles/ZptReference/Tales/NotExpressions.html",
-          "hash": "VzJ37/KnzVSyuMtAmBKpgg=="
+          "hash": "/mwt1g0aL5iJmkk1gCuBBA=="
         }
       },
       "is_incremental": false,
       "version": ""
     },
     {
-      "log_codes": [
-        "InvalidFileLink"
-      ],
       "type": "Conceptual",
       "source_relative_path": "articles/ZptReference/Tales/PathExpressions.md",
       "output": {
         ".html": {
           "relative_path": "articles/ZptReference/Tales/PathExpressions.html",
-          "hash": "SALbKfRDre1e6es3XLe1Jg=="
+          "hash": "OCwU+8rr//TjNryvOMluPg=="
         }
       },
       "is_incremental": false,
@@ -4768,45 +4732,36 @@
       "version": ""
     },
     {
-      "log_codes": [
-        "InvalidFileLink"
-      ],
       "type": "Conceptual",
       "source_relative_path": "articles/ZptReference/Tales/PythonExpressions.md",
       "output": {
         ".html": {
           "relative_path": "articles/ZptReference/Tales/PythonExpressions.html",
-          "hash": "bNf3VIx2OsldcCxQP0hEpg=="
+          "hash": "IBcbGQ/k1WmYHROo0sMFLw=="
         }
       },
       "is_incremental": false,
       "version": ""
     },
     {
-      "log_codes": [
-        "InvalidFileLink"
-      ],
       "type": "Conceptual",
       "source_relative_path": "articles/ZptReference/Tales/StringExpressions.md",
       "output": {
         ".html": {
           "relative_path": "articles/ZptReference/Tales/StringExpressions.html",
-          "hash": "5b02X+nf0h4dvi9o2tAfFQ=="
+          "hash": "aL8M1Wwze62+iVxza4zelQ=="
         }
       },
       "is_incremental": false,
       "version": ""
     },
     {
-      "log_codes": [
-        "InvalidFileLink"
-      ],
       "type": "Conceptual",
       "source_relative_path": "articles/ZptReference/Tales/StructureExpressions.md",
       "output": {
         ".html": {
           "relative_path": "articles/ZptReference/Tales/StructureExpressions.html",
-          "hash": "v+wJ03OaxzHKnvEeLHP+Jw=="
+          "hash": "RWKkiwlfzzP3ZiUO8Q2EIg=="
         }
       },
       "is_incremental": false,
@@ -4909,15 +4864,12 @@
       "version": ""
     },
     {
-      "log_codes": [
-        "InvalidFileLink"
-      ],
       "type": "Conceptual",
       "source_relative_path": "articles/index.md",
       "output": {
         ".html": {
           "relative_path": "articles/index.html",
-          "hash": "t/XuEEkPj54ZbtwMgDw+mA=="
+          "hash": "M98+n0HQ34q9ONZv224kNw=="
         }
       },
       "is_incremental": false,

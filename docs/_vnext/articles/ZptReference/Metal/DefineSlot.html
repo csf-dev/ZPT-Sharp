@@ -5,9 +5,9 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>DefineSlot </title>
+    <title>The metal:define-slot attribute </title>
     <meta name="viewport" content="width=device-width">
-    <meta name="title" content="DefineSlot ">
+    <meta name="title" content="The metal:define-slot attribute ">
     <meta name="generator" content="docfx 2.56.6.0">
     
     <link rel="shortcut icon" href="../../../favicon.ico">
@@ -67,9 +67,35 @@
         <div class="article row grid-right">
           <div class="col-md-10">
             <article class="content wrap" id="_content" data-uid="">
-<h1 id="defineslot">DefineSlot</h1>
+<h1 id="the-metaldefine-slot-attribute">The <code>metal:define-slot</code> attribute</h1>
 
-<p><a href="Index.md">Index</a></p>
+<p>The <code>metal:define-slot</code> attribute indicates that the element upon which it appears is a slot in a METAL macro.
+The value of this attribute indicates the <em>name</em> of that slot.
+The names of slots in a METAL macro must be unique within that macro.</p>
+<p><code>metal:define-slot</code> attributes are only valid upon elements which are descendents of <a href="DefineMacro.html">a <code>metal:define-macro</code> attribute</a>.</p>
+<h2 id="macro-slots">Macro slots</h2>
+<p>A macro slot is much like a placeholder for arbitrary markup; that markup may be specified at the point where the macro is consumed.
+This is a mechanism by which macros may be customized or used to 'wrap' other content.</p>
+<p>The slot is the DOM subtree beginning with the element which has the <code>metal:define-slot</code> attribute.
+In other words, it is that element and all of its content/descendents.</p>
+<h2 id="filling-macro-slots">Filling macro slots</h2>
+<p>A <code>metal:define-slot</code> attribute on its own has no effect upon rendering.
+Its only function is to allow <a href="FillSlot.html">a <code>metal:fill-slot</code> attribute</a> to provide 'slot filler' content at the point of usage.</p>
+<h3 id="slots-which-are-unfilled">Slots which are unfilled</h3>
+<p>If - when the macro is used by <a href="UseMacro.html">a <code>metal:use-macro</code> attribute</a> - that usage does not provide <code>metal:fill-slot</code> attributes for all of the slots that are defined, then any 'unfilled slots' will render their original slot content from the macro.</p>
+<h2 id="example">Example</h2>
+<p>The following example shows only how to create a macro named <code>productItem</code> with two slots named <code>productImage</code> &amp; <code>productInfo</code>.
+It does not include the usage of the macro or the filling of these slots.
+Examples various slot-filling scenarios may be found in the documentation for <a href="FillSlot.html">the <code>metal:fill-slot</code> attribute</a>.</p>
+<pre><code class="lang-html">&lt;li metal:define-macro=&quot;productItem&quot;&gt;
+    &lt;div class=&quot;imageContainer&quot;&gt;
+        &lt;img metal:define-slot=&quot;productImage&quot; src=&quot;images/noImageAvailable.png&quot;&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;infoUnavailable&quot; metal:define-slot=&quot;productInfo&quot;&gt;
+        &lt;p&gt;Further information unavailable.&lt;/p&gt;
+    &lt;/div&gt;
+&lt;/li&gt;
+</code></pre>
 </article>
           </div>
           
