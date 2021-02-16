@@ -14,6 +14,8 @@ Additionally, by default, the expression result is treated strictly as text and 
 This means that any symbols appearing in the expression result that are reserved symbols in the markup (for example the less-than symbol `<`) are replaced by their entity-encoded equivalent (for example `&lt;`).
 This helps prevent [XSS attacks] against the application.
 
+### Inserting markup using content or replace attributes
+
 There are two ways to explicitly make a `tal:content` or `tal:replace` attribute write the expression result as markup (including elements & attributes etc).
 
 * Include the word `structure` and a space in the attribute value before the expression
