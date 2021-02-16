@@ -107,6 +107,12 @@ A global variable may be used by TAL attributes upon elements which are outside 
 Global or local variables <a href="../Tales/PathExpressions.html#explicitly-selecting-local-or-global-variables">may be explicitly used in expressions by using variants of the path expression syntax</a>.</p>
 <p>Because global variables do not follow any structured rules about their scope, if two global variable definitions exist in a document for the same name then subsequent definitions will update/redefine the variable value.
 In this case the original value will be discarded and the global variable will provide the new value from that point in the document onwards.</p>
+<h2 id="aborting-a-variable-definition">Aborting a variable definition</h2>
+<p>If the result of a variable definition expression in a <code>tal:define</code> attribute is <a class="xref" href="../../../api/ZptSharp.Expressions.AbortZptActionToken.html">an instance of <code>AbortZptActionToken</code></a>, such as via <a href="../Tales/GlobalContexts.html#default">the root context <code>default</code></a>, then that particular variable is not defined or altered.
+The behaviour is as if that variable were not included in the <code>tal:define</code> attribute.</p>
+<p>In a <code>tal:define</code> attribute which declares more than one variable, each variable definition is treated individually.
+This means that if a single variable evaluates to an abort-action token but a different variable does not then only the aborted definition is not performed.
+Other definitions in the same attribute will go-ahead and be defined as normal.</p>
 <h2 id="examples">Examples</h2>
 <h3 id="defining-a-single-local-variable">Defining a single local variable</h3>
 <p>In this example, a local variable is defined and then used by a child element.</p>
