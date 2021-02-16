@@ -15,29 +15,31 @@ namespace ZptSharp.Tal
 
         /// <summary>
         /// Gets a value which is the boolean representation of the specified result,
-        /// following the rules of boolean type coercion defined in TALES.
+        /// following the rules of boolean type coercion for ZPT.
+        /// This is used by various TAL attributes to determine whether a value is 'truthy' or 'falsey'.
         /// </summary>
         /// <remarks>
         /// <para>
-        /// A TALES expression result is considered to be <c>false</c> by this mechanism if it is
-        /// equal to the default of its data-type.  Otherwise, it is <c>true</c>.
+        /// This method will return <c>false</c> if the <paramref name="expressionResult"/> is equal
+        /// to the default of its data-type, otherwise it returns <c>true</c>.
+        /// </para>
+        /// <para>
+        /// For any data-type, the default of the type is what would be returned by <c>default(T)</c> for that
+        /// type T.
         /// </para>
         /// </remarks>
         /// <example>
         /// <para>
-        /// For example, a <c>System.String</c> or any expression result which is a reference type is coerced
-        /// to <c>true</c> if it is not-null and to <c>false</c> if it is null.  This is because <c>null</c>
-        /// is the default value for all reference types.
+        /// For <c>System.String</c> this method returns <c>false</c> if the value is <c>null</c>, otherwise
+        /// it returns <c>true</c>.
         /// </para>
         /// <para>
-        /// A <c>System.Int32</c> or any expression result which is a value type is coerced to <c>false</c> if it
-        /// is equal to its default value, or <c>true</c> if it is not.  For built-in numeric types the default
-        /// value is zero.  For <c>System.DateTime</c> the default is the <c>DateTime.MinValue</c> and for
-        /// <c>System.Boolean</c> the default is <c>false</c>.
+        /// For <c>System.Int32</c> this method returns <c>false</c> if the value is equal to zero, otherwise
+        /// it returns <c>true</c>.
         /// </para>
         /// </example>
         /// <returns><c>true</c>, if result should be treated as boolean truth, <c>false</c> otherwise.</returns>
-        /// <param name="expressionResult">Expression result.</param>
+        /// <param name="expressionResult">An expression result.</param>
         bool CoerceResultToBoolean(object expressionResult);
     }
 }

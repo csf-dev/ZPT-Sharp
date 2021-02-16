@@ -14,12 +14,13 @@ namespace ZptSharp.Expressions.NotExpressions
         readonly IInterpretsExpressionResult resultInterpreter;
 
         /// <summary>
-        /// Gets the boolean representation of the specified value, essentially determining whether it is
-        /// 'truthy' or 'falsey'.
+        /// Gets the boolean representation of the specified value, for the purpose of a <c>not</c>
+        /// expression.
         /// </summary>
         /// <remarks>
         /// <para>
-        /// The ZPT standard states that the following values are treated as <c>false</c>.
+        /// The ZPT standard states that the following values are treated as <c>false</c> by a
+        /// <c>not</c> expression.
         /// </para>
         /// <list type="bullet">
         /// <item><description>An instance of <see cref="AbortZptActionToken"/>.</description></item>

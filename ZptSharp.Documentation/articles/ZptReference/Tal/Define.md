@@ -62,6 +62,18 @@ In this case the original value will be discarded and the global variable will p
 
 [may be explicitly used in expressions by using variants of the path expression syntax]: ../Tales/PathExpressions.md#explicitly-selecting-local-or-global-variables
 
+## Aborting a variable definition
+
+If the result of a variable definition expression in a `tal:define` attribute is [an instance of `AbortZptActionToken`], such as via [the root context `default`], then that particular variable is not defined or altered.
+The behaviour is as if that variable were not included in the `tal:define` attribute.
+
+In a `tal:define` attribute which declares more than one variable, each variable definition is treated individually.
+This means that if a single variable evaluates to an abort-action token but a different variable does not then only the aborted definition is not performed.
+Other definitions in the same attribute will go-ahead and be defined as normal.
+
+[an instance of `AbortZptActionToken`]: xref:ZptSharp.Expressions.AbortZptActionToken
+[the root context `default`]: ../Tales/GlobalContexts.md#default
+
 ## Examples
 
 ### Defining a single local variable
