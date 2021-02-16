@@ -5,9 +5,9 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Condition </title>
+    <title>The tal:condition attribute </title>
     <meta name="viewport" content="width=device-width">
-    <meta name="title" content="Condition ">
+    <meta name="title" content="The tal:condition attribute ">
     <meta name="generator" content="docfx 2.56.6.0">
     
     <link rel="shortcut icon" href="../../../favicon.ico">
@@ -67,8 +67,27 @@
         <div class="article row grid-right">
           <div class="col-md-10">
             <article class="content wrap" id="_content" data-uid="">
-<h1 id="condition">Condition</h1>
+<h1 id="the-talcondition-attribute">The <code>tal:condition</code> attribute</h1>
 
+<p>The <code>tal:condition</code> attribute is used to conditionally render an element and its descendents.
+The attribute value is a TALES expression and if <a class="xref" href="../../../api/ZptSharp.Tal.IInterpretsExpressionResult.html#ZptSharp_Tal_IInterpretsExpressionResult_CoerceResultToBoolean_System_Object_">the expression result is 'truthy'</a> then the element and its content/descendents are rendered.
+If the expression result is not 'truthy' then the element, its content &amp; descendents are removed from the DOM and not rendered or further processed by ZPT.</p>
+<h2 id="aborting-a-condition-attribute">Aborting a condition attribute</h2>
+<p>If the result of an expression in a <code>tal:condition</code> attribute value is <a class="xref" href="../../../api/ZptSharp.Expressions.AbortZptActionToken.html">an instance of <code>AbortZptActionToken</code></a>, such as via <a href="../Tales/GlobalContexts.html#default">the root context <code>default</code></a>, then a <code>tal:condition</code> attribute will behave as if it were not present.
+In other words, the element and content/descendents will be rendered.</p>
+<h2 id="further-processing-is-halted-if-the-expression-is-not-truthy">Further processing is halted if the expression is not 'truthy'</h2>
+<p>If the condition expression is not 'truthy' and the element &amp; contents/descendents is to be removed then additionally, <em>further processing of TAL attributes upon that element is also halted</em>.
+Usually this is not an issue, because the element will be removed anyway, so further manipulation is irrelevant.</p>
+<p>Be aware that <a href="Define.html#variable-scope"><strong>global variable</strong> definitions</a> present upon the same element will also not be processed in this case though; this could feasibly have an impact upon other parts of the document.
+It is <em>probably best not to place global definitions upon elements that have condition attributes</em>, so as to avoid this potentially-confusing scenario.</p>
+<h2 id="example">Example</h2>
+<p>In this example, the first <code>&lt;p&gt;</code> element will be rendered but the second will not.
+This is because a non-empty-string is truthy but a null reference is not.</p>
+<pre><code class="lang-html">&lt;div tal:define=&quot;isTruthy string:I am truthy;isFalsey nothing&quot;&gt;
+    &lt;p tal:condition=&quot;isTruthy&quot;&gt;This text will be displayed.&lt;/p&gt;
+    &lt;p tal:condition=&quot;isFalsey&quot;&gt;This text &lt;em&gt;will not&lt;/em&gt; be displayed.&lt;/p&gt;
+&lt;/div&gt;
+</code></pre>
 </article>
           </div>
           

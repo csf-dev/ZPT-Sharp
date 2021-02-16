@@ -79,6 +79,7 @@ In the case of the <code>tal:replace</code> attribute, the expression result <em
 Additionally, by default, the expression result is treated strictly as text and not as markup.
 This means that any symbols appearing in the expression result that are reserved symbols in the markup (for example the less-than symbol <code>&lt;</code>) are replaced by their entity-encoded equivalent (for example <code>&amp;lt;</code>).
 This helps prevent <a href="https://en.wikipedia.org/wiki/Cross-site_scripting">XSS attacks</a> against the application.</p>
+<h3 id="inserting-markup-using-content-or-replace-attributes">Inserting markup using content or replace attributes</h3>
 <p>There are two ways to explicitly make a <code>tal:content</code> or <code>tal:replace</code> attribute write the expression result as markup (including elements &amp; attributes etc).</p>
 <ul>
 <li>Include the word <code>structure</code> and a space in the attribute value before the expression</li>
