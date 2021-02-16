@@ -5,9 +5,9 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Define </title>
+    <title>The tal:define attribute </title>
     <meta name="viewport" content="width=device-width">
-    <meta name="title" content="Define ">
+    <meta name="title" content="The tal:define attribute ">
     <meta name="generator" content="docfx 2.56.6.0">
     
     <link rel="shortcut icon" href="../../../favicon.ico">
@@ -67,9 +67,79 @@
         <div class="article row grid-right">
           <div class="col-md-10">
             <article class="content wrap" id="_content" data-uid="">
-<h1 id="define">Define</h1>
+<h1 id="the-taldefine-attribute">The <code>tal:define</code> attribute</h1>
 
+<p>The <code>tal:define</code> attribute is used to define one or more new variables within the template, using TALES expressions to provide the variable value.</p>
+<h2 id="attribute-value-syntax">Attribute value syntax</h2>
+<p>The value for a <code>tal:define</code> attribute is composed of the following space-separated parts:</p>
+<ul>
+<li>An <em>optional</em> scope signifier</li>
+<li>A variable name</li>
+<li>The TALES expression providing the variable value</li>
+</ul>
+<p>Additionally, a single <code>tal:define</code> attribute value may define more than one variable.
+Where more than one variable is defined, each definition must be separated with a semicolon <code>;</code> character.
+There may also be any amount of whitespace before or after these semicolons, as appropriate for readability.</p>
+<h2 id="variable-names">Variable names</h2>
+<p>In ZptSharp, <a href="https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/inside-a-program/identifier-names">all variable names must be valid C# variable names</a>.
+Whilst it may be possible in some cases to use names which are not valid C# variable names, this is highly discouraged.
+Particularly if the <a href="../Tales/CSharpExpressions.html"><code>csharp</code> expressions</a> or <a href="../Tales/PythonExpressions.html"><code>python</code> expressions</a> packages are installed, the presence of invalid names may cause unexpected errors.</p>
 <h2 id="variable-scope">Variable scope</h2>
+<p>Every variable which is defined is either a <strong>local</strong> variable or a <strong>global</strong> one.
+This may be chosen by including a scope signifier, either the word <code>local</code> or <code>global</code>, before the variable name.
+If a scope signifier is omitted then the variable will be a local one.</p>
+<p>The scope of a defined variable decides where it may be used and how it may be hidden or overridden by another variable of the same name.
+It is <em>strongly recommended that your own variables should be locally-scoped</em> where possible.</p>
+<h3 id="local-variables">Local variables</h3>
+<p>Local variables have a scope which follows the structure of the DOM.
+A locally-scoped variable is <strong>in-scope</strong> (may be used) for TAL attributes upon the element which defines the variable and for TAL attributes upon <em>any descendent of the element which defines it</em>.
+Outside of the element which defines it, for example sibling or parent elements, a locally-scoped variable is treated <em>as if it was not defined</em> - it is <strong>out of scope</strong>.</p>
+<p>If there is both a global and a local variable of the same name in-scope for the same element, then <em>by default the local variable takes precedence</em>.
+A local variable which is in-scope 'hides' a global variable of the same name.
+There is a workaround to this scenario if desired, using <a href="../Tales/PathExpressions.html#explicitly-selecting-local-or-global-variables">explicit <code>global:</code> or <code>local:</code> variants of the path expression syntax</a>.
+In general though, <em>it is better to avoid local and global variables with the same names</em>.</p>
+<p>Local variables may also be hidden by new local variables defined at a descendent scope.
+If a local variable is defined upon a given element and another local variable is defined using the same name upon a descendent element then the variable defined in the descendent element will 'hide' the variable from the original element as long as it is in-scope.</p>
+<h3 id="global-variables">Global variables</h3>
+<p>Global variables do not follow the structure of the DOM; they are in-scope (usable) from the point in the document where they are defined and onwards in simple document order.
+A global variable may be used by TAL attributes upon elements which are outside of the subtree of the element that defined it, as long as those attributes appear in the document after the variable definition.</p>
+<p>As noted above, any global variable will be 'hidden' by a local variable of the same name; it is advised to avoid this scenario if possible by not giving global and local variables the same names.
+Global or local variables <a href="../Tales/PathExpressions.html#explicitly-selecting-local-or-global-variables">may be explicitly used in expressions by using variants of the path expression syntax</a>.</p>
+<p>Because global variables do not follow any structured rules about their scope, if two global variable definitions exist in a document for the same name then subsequent definitions will update/redefine the variable value.
+In this case the original value will be discarded and the global variable will provide the new value from that point in the document onwards.</p>
+<h2 id="examples">Examples</h2>
+<h3 id="defining-a-single-local-variable">Defining a single local variable</h3>
+<p>In this example, a local variable is defined and then used by a child element.</p>
+<pre><code class="lang-html">&lt;div tal:define=&quot;myVariable string:This is my variable&quot;&gt;
+    &lt;p tal:content=&quot;myVariable&quot;&gt;This will read &quot;This is my variable&quot;.&lt;/p&gt;
+&lt;/div&gt;
+</code></pre>
+<h3 id="defining-a-single-global-varibale">Defining a single global varibale</h3>
+<p>In this example, a global variable is defined and then used by a subsequent sibling element.</p>
+<pre><code class="lang-html">&lt;p tal:define=&quot;global myVariable string:This is my variable&quot;&gt;This is some text.&lt;/p&gt;
+&lt;p tal:content=&quot;myVariable&quot;&gt;This will read &quot;This is my variable&quot;.&lt;/p&gt;
+</code></pre>
+<h3 id="defining-three-variables">Defining three variables</h3>
+<p>In this example, three variables are defined using the same attribute.
+This includes a mixture of both local and global variable; the prefix <code>local</code> is not required since it is the default behaviour where there is no scope signifier.
+The whitespace which puts each variable definition on a new line <em>is not required by the ZPT syntax</em>; it is allowed for readability though.</p>
+<pre><code class="lang-html">&lt;div tal:define=&quot;variableOne string:This is variable one;
+                 global variableTwo string:This is variable two;
+                 variableThree string:This is variable three&quot;&gt;
+&lt;/div&gt;
+</code></pre>
+<h3 id="demonstrating-local-variable-scope">Demonstrating local variable scope</h3>
+<p>This example demonstrates the way in which local variable scope and 'hiding' of variables with the same name works.
+In this example, the second of three <code>&lt;p&gt;</code> elements defines a new local variable of the same name (<code>varOne</code>) as was defined by an ancestor element.
+This means that the new definition will 'hide' the previous one for as long as the new definition is in-scope.
+The 'hiding' effect ends once the new definition passes out of scope, as shown by the third <code>&lt;p&gt;</code> element.</p>
+<pre><code class="lang-html">&lt;div tal:define=&quot;varOne string:I am variable one&quot;&gt;
+    &lt;p tal:content=&quot;varOne&quot;&gt;This will read &quot;I am variable one&quot;.&lt;/p&gt;
+    &lt;p tal:define=&quot;varOne string:But I am variable two&quot;
+       tal:content=&quot;varOne&quot;&gt;This will read &quot;But I am variable two&quot;.&lt;/p&gt;
+    &lt;p tal:content=&quot;varOne&quot;&gt;This will read &quot;I am variable one&quot;.&lt;/p&gt;
+&lt;/div&gt;
+</code></pre>
 </article>
           </div>
           
