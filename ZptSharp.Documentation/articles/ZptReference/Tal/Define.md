@@ -16,12 +16,11 @@ The reason for this is as described below - the semicolon character is used to s
 
 [a `string` expression]: ../Tales/StringExpressions.md
 
-### Defining more than one variable in the same attibute
+### Defining more than one variable in the same attribute
 
 A single `tal:define` attribute value may define more than one variable.
 Where more than one variable is defined, each definition must be separated with a semicolon `;` character.
 There _may_ also be any amount of whitespace before or after these semicolons, as appropriate for readability.
-
 
 ## Variable names
 
@@ -94,7 +93,6 @@ In this example, a local variable is defined and then used by a child element.
     <p tal:content="myVariable">This will read "This is my variable".</p>
 </div>
 ```
-
 
 ### Defining a single global varibale
 
