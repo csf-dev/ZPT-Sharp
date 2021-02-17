@@ -20,7 +20,7 @@ These examples use macros which are defined in the same template document; _this
 The most common usage of METAL macros sees each macro declared in a separate source file of its own.
 Slots and slot-fillers function whether the macro is declared in the same document or an external document, [as shown in this example of macro usage].
 
-[as shown in this example of macro usage]: UseMacro.md#consumption-of_a-macro-declared-in-a-different-file
+[as shown in this example of macro usage]: UseMacro.md#consumption-of-a-macro-declared-in-a-different-file
 
 ### Filling a single slot
 
