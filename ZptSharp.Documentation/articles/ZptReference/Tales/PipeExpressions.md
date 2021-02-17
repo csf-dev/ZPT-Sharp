@@ -10,6 +10,14 @@ They are more performant and are easier to write.
 
 [C# expressions]: CSharpExpressions.md
 
+## Pipe expressions must be explicitly activated
+
+Whilst support for pipe expressions is included in [the main ZptSharp NuGet package], _they are not one of the standard expression types_.
+Pipe expressions must be explicitly activated [using the method `AddZptPipeExpressions()`] before they may be used.
+
+[the main ZptSharp NuGet package]: ../../NuGetPackages.md#zptsharp-core
+[using the method `AddZptPipeExpressions()`]: xref:ZptSharp.ZptSharpHostingBuilderExtensions.AddZptPipeExpressions(ZptSharp.Hosting.IBuildsHostingEnvironment)
+
 ## Syntax
 
 The syntax of a pipe expression is as follows:

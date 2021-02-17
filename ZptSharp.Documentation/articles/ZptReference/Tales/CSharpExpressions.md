@@ -7,6 +7,14 @@ Please be aware that *using CSharp expressions in practice can be very cumbersom
 [a number of limitations are documented here]: CSharpExpressionLimitations.md
 [a `pipe` expression]: PipeExpressions.md
 
+## CSharp expressions are included in an add-on package
+
+Support for `csharp` expressions and all of the other related expressions documented on this page are included in [the ZptSharp.CSharpExpressions NuGet package].
+They are not one of the standard expression types; once the NuGet package is installed to your application they must be activated [by using the `AddZptCSharpExpressions` method].
+
+[the ZptSharp.CSharpExpressions NuGet package]: ../../NuGetPackages.md#expression-evaluators
+[by using the `AddZptCSharpExpressions` method]: xref:ZptSharp.CSharpHostingBuilderExtensions.AddZptCSharpExpressions(ZptSharp.Hosting.IBuildsHostingEnvironment,System.Action{ZptSharp.Expressions.CSharpExpressions.IConfiguresCSharpExpressionGlobals})
+
 ## `csharp` expressions
 
 The TALES `csharp` expression syntax is as follows:
