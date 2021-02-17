@@ -72,14 +72,18 @@
 <p>The <code>tal:define</code> attribute is used to define one or more new variables within the template, using TALES expressions to provide the variable value.</p>
 <h2 id="attribute-value-syntax">Attribute value syntax</h2>
 <p>The value for a <code>tal:define</code> attribute is composed of the following space-separated parts:</p>
-<ul>
+<ol>
 <li>An <em>optional</em> scope signifier</li>
 <li>A variable name</li>
 <li>The TALES expression providing the variable value</li>
-</ul>
-<p>Additionally, a single <code>tal:define</code> attribute value may define more than one variable.
+</ol>
+<p>If the expression used to define the variable needs to make use of the semicolon <code>;</code> character, then this must be escaped by doubling-it-up: <code>;;</code>.
+This could occur, for example, if a semicolon is used in <a href="../Tales/StringExpressions.html">a <code>string</code> expression</a>.
+The reason for this is as described below - the semicolon character is used to separate multiple variable definitions.</p>
+<h3 id="defining-more-than-one-variable-in-the-same-attribute">Defining more than one variable in the same attribute</h3>
+<p>A single <code>tal:define</code> attribute value may define more than one variable.
 Where more than one variable is defined, each definition must be separated with a semicolon <code>;</code> character.
-There may also be any amount of whitespace before or after these semicolons, as appropriate for readability.</p>
+There <em>may</em> also be any amount of whitespace before or after these semicolons, as appropriate for readability.</p>
 <h2 id="variable-names">Variable names</h2>
 <p>In ZptSharp, <a href="https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/inside-a-program/identifier-names">all variable names must be valid C# variable names</a>.
 Whilst it may be possible in some cases to use names which are not valid C# variable names, this is highly discouraged.
