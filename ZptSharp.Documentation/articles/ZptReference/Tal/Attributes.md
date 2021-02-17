@@ -6,8 +6,8 @@ The `tal:attributes` attribute is used to add, update and/or remove other markup
 
 The syntax of the `tal:attributes` attribute comprises of:
 
-* The attribute name, followed by one or more space characters
-* A TALES expression which indicates the new value for that attribute
+1. The attribute name, followed by one or more space characters
+2. A TALES expression which indicates the new value for that attribute
 
 If the expression the attribute value needs to make use of the semicolon `;` character, then this must be escaped by doubling-it-up: `;;`.
 This could occur, for example, if a semicolon is used in [a `string` expression].

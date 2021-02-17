@@ -6,9 +6,9 @@ The `tal:define` attribute is used to define one or more new variables within th
 
 The value for a `tal:define` attribute is composed of the following space-separated parts:
 
-* An _optional_ scope signifier
-* A variable name
-* The TALES expression providing the variable value
+1. An _optional_ scope signifier
+2. A variable name
+3. The TALES expression providing the variable value
 
 If the expression used to define the variable needs to make use of the semicolon `;` character, then this must be escaped by doubling-it-up: `;;`.
 This could occur, for example, if a semicolon is used in [a `string` expression].
