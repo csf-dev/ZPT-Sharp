@@ -5,9 +5,9 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>NotExpressions </title>
+    <title>The Not expression syntax </title>
     <meta name="viewport" content="width=device-width">
-    <meta name="title" content="NotExpressions ">
+    <meta name="title" content="The Not expression syntax ">
     <meta name="generator" content="docfx 2.56.6.0">
     
     <link rel="shortcut icon" href="../../../favicon.ico">
@@ -67,8 +67,31 @@
         <div class="article row grid-right">
           <div class="col-md-10">
             <article class="content wrap" id="_content" data-uid="">
-<h1 id="notexpressions">NotExpressions</h1>
+<h1 id="the-not-expression-syntax">The Not expression syntax</h1>
 
+<p>TALES <code>not</code> expressions convert a value to boolean and then perform a logical <code>NOT</code> on that value.
+In other words the <code>not</code> expression is true if the expression it acts upon is false, and vice-versa.</p>
+<p>The syntax of a <code>not</code> expression is another TALES expression; <a href="PathExpressions.html">typically a <code>path</code> expression</a> but it doesn't need to be:</p>
+<pre><code class="lang-text">not:other_expression
+</code></pre>
+<h2 id="not-expressions-are-included-in-the-main-zptsharp-package">Not expressions are included in the main ZptSharp package</h2>
+<p>Support for <code>not</code> expressions is included in <a href="../../NuGetPackages.html#zptsharp-core">the main ZptSharp NuGet package</a>.
+Additionally, <code>not</code> expressions are one of the standard expression types <a class="xref" href="../../../api/ZptSharp.ZptSharpHostingBuilderExtensions.html#ZptSharp_ZptSharpHostingBuilderExtensions_AddStandardZptExpressions_ZptSharp_Hosting_IBuildsHostingEnvironment_">activated by <code>AddStandardZptExpressions()</code></a>.</p>
+<h2 id="not-expressions-have-their-own-rules-for-boolean-conversion">Not expressions have their own rules for boolean conversion</h2>
+<p>The TALES <code>not</code> expression <em>does not use the same rules</em> as <a class="xref" href="../../../api/ZptSharp.Tal.IInterpretsExpressionResult.html#ZptSharp_Tal_IInterpretsExpressionResult_CoerceResultToBoolean_System_Object_">TAL does for boolean coercion</a>.
+Not expressions use <a class="xref" href="../../../api/ZptSharp.Expressions.NotExpressions.BooleanValueConverter.html#ZptSharp_Expressions_NotExpressions_BooleanValueConverter_CoerceToBoolean_System_Object_"><strong>their own logic</strong> for converting a value to boolean</a>.
+Only a very specific set of values are treated as false and for some value-types (based upon <code>struct</code>) it is impossible to provide a value which corresponds to false (<code>System.DateTime</code> comes to mind).</p>
+<h2 id="examples">Examples</h2>
+<p>This expression will evaluate to false if the path expression <code>here/anObject</code> resolves to an object created with <code>new object()</code>.
+This is because the path expression is treated as true by the rules of the <code>not</code> expression, and so the overall expression is false.</p>
+<pre><code class="lang-text">not:here/anObject
+</code></pre>
+<p>This expression will evaluate to true.
+This is because the string expression evaluates to an empty string.
+Because <code>System.String</code> implements <code>IEnumerable</code>, and an empty string is an enumerable of zero-length, the <code>not</code> expression treats it as false.
+This means that the overall expression is true.</p>
+<pre><code class="lang-text">not:string:
+</code></pre>
 </article>
           </div>
           

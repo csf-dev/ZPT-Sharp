@@ -71,6 +71,9 @@
 
 <p>ZptSharp offers an optional add-on expression evaluator for expressions written in C#. Primarily this is the <code>csharp</code> expression type, although there are a number of other related expression types, bundled in the same add-on package.</p>
 <p>Please be aware that <em>using CSharp expressions in practice can be very cumbersome</em>; <a href="CSharpExpressionLimitations.html">a number of limitations are documented here</a>. For most use-cases of C# expressions, it is preferable to use <a href="PipeExpressions.html">a <code>pipe</code> expression</a> instead.</p>
+<h2 id="csharp-expressions-are-included-in-an-add-on-package">CSharp expressions are included in an add-on package</h2>
+<p>Support for <code>csharp</code> expressions and all of the other related expressions documented on this page are included in <a href="../../NuGetPackages.html#expression-evaluators">the ZptSharp.CSharpExpressions NuGet package</a>.
+They are not one of the standard expression types; once the NuGet package is installed to your application they must be activated <a class="xref" href="../../../api/ZptSharp.CSharpHostingBuilderExtensions.html#ZptSharp_CSharpHostingBuilderExtensions_AddZptCSharpExpressions_ZptSharp_Hosting_IBuildsHostingEnvironment_System_Action_ZptSharp_Expressions_CSharpExpressions_IConfiguresCSharpExpressionGlobals__">by using the <code>AddZptCSharpExpressions</code> method</a>.</p>
 <h2 id="csharp-expressions"><code>csharp</code> expressions</h2>
 <p>The TALES <code>csharp</code> expression syntax is as follows:</p>
 <pre><code class="lang-text">csharp:expression_body

@@ -74,6 +74,9 @@
 One scenario which would be served well by pipe expressions is the formatting of dates/times.</p>
 <p>Generally-speaking, pipe expressions are preferable to <a href="CSharpExpressions.html">C# expressions</a> for the execution of arbitrary logic.
 They are more performant and are easier to write.</p>
+<h2 id="pipe-expressions-must-be-explicitly-activated">Pipe expressions must be explicitly activated</h2>
+<p>Whilst support for pipe expressions is included in <a href="../../NuGetPackages.html#zptsharp-core">the main ZptSharp NuGet package</a>, <em>they are not one of the standard expression types</em>.
+Pipe expressions must be explicitly activated <a class="xref" href="../../../api/ZptSharp.ZptSharpHostingBuilderExtensions.html#ZptSharp_ZptSharpHostingBuilderExtensions_AddZptPipeExpressions_ZptSharp_Hosting_IBuildsHostingEnvironment_">using the method <code>AddZptPipeExpressions()</code></a> before they may be used.</p>
 <h2 id="syntax">Syntax</h2>
 <p>The syntax of a pipe expression is as follows:</p>
 <pre><code class="lang-text">pipe:variable delegate_expression
