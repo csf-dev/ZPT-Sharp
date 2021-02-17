@@ -10,9 +10,18 @@ The value for a `tal:define` attribute is composed of the following space-separa
 * A variable name
 * The TALES expression providing the variable value
 
-Additionally, a single `tal:define` attribute value may define more than one variable.
+If the expression used to define the variable needs to make use of the semicolon `;` character, then this must be escaped by doubling-it-up: `;;`.
+This could occur, for example, if a semicolon is used in [a `string` expression].
+The reason for this is as described below - the semicolon character is used to separate multiple variable definitions.
+
+[a `string` expression]: ../Tales/StringExpressions.md
+
+### Defining more than one variable in the same attibute
+
+A single `tal:define` attribute value may define more than one variable.
 Where more than one variable is defined, each definition must be separated with a semicolon `;` character.
-There may also be any amount of whitespace before or after these semicolons, as appropriate for readability.
+There _may_ also be any amount of whitespace before or after these semicolons, as appropriate for readability.
+
 
 ## Variable names
 
