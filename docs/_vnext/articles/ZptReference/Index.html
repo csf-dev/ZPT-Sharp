@@ -73,10 +73,10 @@
 Each primary mention of an attribute below is a link to its reference page.</p>
 <h2 id="metal-is-for-reusing-markup">METAL is for reusing markup</h2>
 <p>When processing a ZPT source document, the first attributes processed (through the entire document) are METAL attributes.
-Only once all METAL attributes are processed does ZptSharp process TAL attributes.</p>
-<p>The concept at the heart of METAL is <strong>macros</strong>. A macro is a reusable subtree of an HTML or XML document. In other words, it is an element and all of that element's descendents &amp; content. Macros are created using the <a href="Metal/DefineMacro.html"><code>metal:define-macro</code></a> attribute and consumed with the <a href="Metal/UseMacro.html"><code>metal:use-macro</code></a> attribute.</p>
-<p>METAL macros may also contain zero or more <strong>slots</strong>. Slots are also single elements which may be replaced ('filled') at the point where the macro is used. Slots are created with the <a href="Metal/DefineSlot.html"><code>metal:define-slot</code></a> attribute and are used/filled using the <a href="Metal/FillSlot.html"><code>metal:fill-slot</code></a> attribute.</p>
-<p>An advanced usage of METAL is <em>macro extension</em>. This is somewhat similar in concept to creating a 'subclass' of a macro. The <a href="Metal/ExtendMacro.html"><code>metal:extend-macro</code></a> attribute is how this is performed.</p>
+<em>Only once all METAL attributes are processed</em> does ZptSharp process TAL attributes.</p>
+<p>The concept at the heart of METAL is <strong>macros</strong>. A macro is a reusable subtree of an HTML or XML document. In other words, it is an element and all of that element's descendents &amp; content. Macros are created using <a href="Metal/DefineMacro.html">the <code>metal:define-macro</code> attribute</a> and reused within a document with <a href="Metal/UseMacro.html">the <code>metal:use-macro</code> attribute</a>.</p>
+<p>METAL macros may also contain zero or more <strong>slots</strong>. Slots are also single elements which may be replaced ('filled') at the point where the macro is used. Slots are created with <a href="Metal/DefineSlot.html">the <code>metal:define-slot</code> attribute</a> and are used/filled using <a href="Metal/FillSlot.html">the <code>metal:fill-slot</code> attribute</a>.</p>
+<p>An advanced usage of METAL is <em>macro extension</em>. This is somewhat similar in concept to creating a 'subclass' of a macro. <a href="Metal/ExtendMacro.html">The <code>metal:extend-macro</code> attribute</a> is how this is performed.</p>
 <h2 id="tal-binds-data-to-the-template">TAL binds data to the template</h2>
 <p>TAL attributes are parsed and resolved after METAL attributes. The purpose of TAL is to bind/write your model and supporting data to the template.</p>
 <p>The table below shows and links to the various TAL attributes.
@@ -200,13 +200,34 @@ TALES is <em>an extensible syntax</em> and so plugins may add further expression
 </tbody>
 </table>
 <p>When working with XML document templates, these two namespaces must be declared (typically at the root of the document) via <code>xmlns</code> attributes.
-When using HTML documents <em>the full namespaces need not be declared</em>; the <code>metal</code> and <code>tal</code> prefixes are recognised by their prefix names alone.</p>
-<h3 id="example">Example</h3>
+Strictly-speaking, for an XML document <em>the namespaces are all that matters</em>, you could conveivably use aliases which are not <code>tal</code> or <code>metal</code>, although for readability's sake this is not advised.</p>
+<p>When using HTML documents <em>the namespaces need not be declared</em>; the <code>metal</code> and <code>tal</code> prefixes are recognised by their prefix names alone.</p>
+<h3 id="xml-namespaces-example">XML namespaces example</h3>
 <pre><code class="lang-xml">&lt;root xmlns:metal=&quot;http://xml.zope.org/namespaces/metal&quot;
       xmlns:tal=&quot;http://xml.zope.org/namespaces/tal&quot;&gt;
-    &lt;child&gt;The rest of the XML ZPT document template continues here.&lt;/child&gt;
+    &lt;child tal:content=&quot;string:Some content&quot;&gt;This content attribute will work OK.&lt;/child&gt;
 &lt;/root&gt;
 </code></pre>
+<h2 id="elements-in-the-tal-or-metal-namespace">Elements in the TAL or METAL namespace</h2>
+<p>A feature of the ZPT syntax is elements which use the <code>tal</code> or <code>metal</code> prefix (or, for XML documents, elements in the namespaces listed in the previous section).</p>
+<p>Elements which are prefixed with either <code>tal</code> or <code>metal</code> may be 'invented' by the designer, the element name after the prefix is irrelevant.
+Such elements are detected by ZptSharp during rendering and their start/end tags are <a href="Tal/OmitTag.html">always omitted from the rendered output as if they had a <code>tal:omit-tag=&quot;&quot;</code> attribute</a> present.
+What's more, all attributes upon a TAL or METAL element are automatically assumed to be TAL or METAL attributes (accordingly).
+This means that within such an element, the <code>tal:</code> or <code>metal:</code> prefixes are not required for attributes.</p>
+<p>The use-case for TAL &amp; METAL elements is to allow use of TAL &amp; METAL attributes in positions <em>where no other markup element would semantically make sense</em>.
+This scenario does not occur very often and so it is not expected that this technique will be frequently used.</p>
+<h3 id="tal-element-example">TAL element example</h3>
+<p>Here is a somewhat contrived example.
+For the purpose of this example, presume that we cannot alter the <code>&lt;ul&gt;</code> element and add attributes to it.
+Perhaps the <code>&lt;ul&gt;</code> element is part of a macro which we do not wish to alter.</p>
+<pre><code class="lang-html">&lt;ul&gt;
+  &lt;tal:defs define=&quot;items here/Items | here/OtherItems | here/EmptyArray&quot;&gt;
+    &lt;li tal:repeat=&quot;item items&quot; tal:content=&quot;item/Name&quot;&gt;Item name&lt;/li&gt;
+  &lt;/tal:defs&gt;
+&lt;/ul&gt;
+</code></pre>
+<p>In a real application, we could more likely add <a href="Tal/Define.html">the complex <code>tal:define</code> attribute</a> onto the <code>&lt;li&gt;</code> element.
+Because define attributes are processed before content attributes we would get the same result without needing a TAL element.</p>
 </article>
           </div>
           
