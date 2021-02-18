@@ -6,19 +6,19 @@ Each primary mention of an attribute below is a link to its reference page.
 ## METAL is for reusing markup
 
 When processing a ZPT source document, the first attributes processed (through the entire document) are METAL attributes.
-Only once all METAL attributes are processed does ZptSharp process TAL attributes.
+_Only once all METAL attributes are processed_ does ZptSharp process TAL attributes.
 
-The concept at the heart of METAL is **macros**. A macro is a reusable subtree of an HTML or XML document. In other words, it is an element and all of that element's descendents & content. Macros are created using the [`metal:define-macro`] attribute and consumed with the [`metal:use-macro`] attribute.
+The concept at the heart of METAL is **macros**. A macro is a reusable subtree of an HTML or XML document. In other words, it is an element and all of that element's descendents & content. Macros are created using [the `metal:define-macro` attribute] and reused within a document with [the `metal:use-macro` attribute].
 
-METAL macros may also contain zero or more **slots**. Slots are also single elements which may be replaced ('filled') at the point where the macro is used. Slots are created with the [`metal:define-slot`] attribute and are used/filled using the [`metal:fill-slot`] attribute.
+METAL macros may also contain zero or more **slots**. Slots are also single elements which may be replaced ('filled') at the point where the macro is used. Slots are created with [the `metal:define-slot` attribute] and are used/filled using [the `metal:fill-slot` attribute].
 
-An advanced usage of METAL is *macro extension*. This is somewhat similar in concept to creating a 'subclass' of a macro. The [`metal:extend-macro`] attribute is how this is performed.
+An advanced usage of METAL is *macro extension*. This is somewhat similar in concept to creating a 'subclass' of a macro. [The `metal:extend-macro` attribute] is how this is performed.
 
-[`metal:define-macro`]: Metal/DefineMacro.md
-[`metal:use-macro`]: Metal/UseMacro.md
-[`metal:define-slot`]: Metal/DefineSlot.md
-[`metal:fill-slot`]: Metal/FillSlot.md
-[`metal:extend-macro`]: Metal/ExtendMacro.md
+[the `metal:define-macro` attribute]: Metal/DefineMacro.md
+[the `metal:use-macro` attribute]: Metal/UseMacro.md
+[the `metal:define-slot` attribute]: Metal/DefineSlot.md
+[the `metal:fill-slot` attribute]: Metal/FillSlot.md
+[The `metal:extend-macro` attribute]: Metal/ExtendMacro.md
 
 ## TAL binds data to the template
 
@@ -89,13 +89,48 @@ The `metal` and `tal` attribute prefixes used throughout ZPT are defined with th
 | `tal`     | `http://xml.zope.org/namespaces/tal`      |
 
 When working with XML document templates, these two namespaces must be declared (typically at the root of the document) via `xmlns` attributes.
-When using HTML documents _the full namespaces need not be declared_; the `metal` and `tal` prefixes are recognised by their prefix names alone.
+Strictly-speaking, for an XML document _the namespaces are all that matters_, you could conveivably use aliases which are not `tal` or `metal`, although for readability's sake this is not advised.
 
-### Example
+When using HTML documents _the namespaces need not be declared_; the `metal` and `tal` prefixes are recognised by their prefix names alone.
+
+### XML namespaces example
 
 ```xml
 <root xmlns:metal="http://xml.zope.org/namespaces/metal"
       xmlns:tal="http://xml.zope.org/namespaces/tal">
-    <child>The rest of the XML ZPT document template continues here.</child>
+    <child tal:content="string:Some content">This content attribute will work OK.</child>
 </root>
 ```
+
+## Elements in the TAL or METAL namespace
+
+A feature of the ZPT syntax is elements which use the `tal` or `metal` prefix (or, for XML documents, elements in the namespaces listed in the previous section).
+
+Elements which are prefixed with either `tal` or `metal` may be 'invented' by the designer, the element name after the prefix is irrelevant.
+Such elements are detected by ZptSharp during rendering and their start/end tags are [always omitted from the rendered output as if they had a `tal:omit-tag=""` attribute] present.
+What's more, all attributes upon a TAL or METAL element are automatically assumed to be TAL or METAL attributes (accordingly).
+This means that within such an element, the `tal:` or `metal:` prefixes are not required for attributes.
+
+The use-case for TAL & METAL elements is to allow use of TAL & METAL attributes in positions _where no other markup element would semantically make sense_.
+This scenario does not occur very often and so it is not expected that this technique will be frequently used.
+
+[always omitted from the rendered output as if they had a `tal:omit-tag=""` attribute]: Tal/OmitTag.md
+
+### TAL element example
+
+Here is a somewhat contrived example.
+For the purpose of this example, presume that we cannot alter the `<ul>` element and add attributes to it.
+Perhaps the `<ul>` element is part of a macro which we do not wish to alter.
+
+```html
+<ul>
+  <tal:defs define="items here/Items | here/OtherItems | here/EmptyArray">
+    <li tal:repeat="item items" tal:content="item/Name">Item name</li>
+  </tal:defs>
+</ul>
+```
+
+In a real application, we could more likely add [the complex `tal:define` attribute] onto the `<li>` element.
+Because define attributes are processed before content attributes we would get the same result without needing a TAL element.
+
+[the complex `tal:define` attribute]: Tal/Define.md
