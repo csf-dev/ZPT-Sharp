@@ -2,7 +2,9 @@
 
 ## Get started
 
-Those who are new to ZptSharp are recommended to follow one of four short **quick start** guides. These guides each take the developer through a 'hello world' example, giving them a working sample app using ZptSharp. You may also wish to read [a conceptual summary] of what ZptSharp is.
+Those who are new to ZptSharp are recommended to follow one of four short **quick start** guides.
+These guides each take the developer through a 'hello world' example, giving them a working sample app using ZptSharp.
+It is also recommended to read [the short conceptual summary of ZptSharp], which illustrates its fundamental principles.
 
 * [Quick start for ASP.NET Core MVC]
 * [Quick start for ASP.NET MVC 5]
@@ -11,7 +13,7 @@ Those who are new to ZptSharp are recommended to follow one of four short **quic
 
 An ideal follow-up to using a quick start guide is to follow [the ZPT tutorial]. This expands upon what was learned during quick-start teaches the full range of ZptSharp functionality.
 
-[a conceptual summary]: WhatIsZptSharp.md
+[the short conceptual summary of ZptSharp]: WhatIsZptSharp.md
 [Quick start for ASP.NET MVC 5]: QuickStart/Mvc5.md
 [Quick start for ASP.NET Core MVC]: QuickStart/MvcCore.md
 [Quick start for the command line renderer]: QuickStart/CliApp.md
