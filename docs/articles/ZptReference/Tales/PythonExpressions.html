@@ -1,0 +1,140 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>The Python expression syntax </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="The Python expression syntax ">
+    <meta name="generator" content="docfx 2.56.6.0">
+    
+    <link rel="shortcut icon" href="../../../favicon.ico">
+    <link rel="stylesheet" href="../../../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../../../styles/docfx.css">
+    <link rel="stylesheet" href="../../../styles/main.css">
+    <meta property="docfx:navrel" content="../../../toc.html">
+    <meta property="docfx:tocrel" content="../toc.html">
+    
+    
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../../../index.html">
+                <img id="logo" class="svg" src="../../../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="">
+<h1 id="the-python-expression-syntax">The Python expression syntax</h1>
+
+<p>TALES python expressions allow the evaluation of arbitrary Python language expressions in your document templates.
+The syntax for this is:</p>
+<pre><code class="lang-text">python:python_expression
+</code></pre>
+<p>The python expression is any valid Python language expression.
+Python expressions have access to all of <a href="GlobalContexts.html">the same root contexts</a> and <a href="../Tal/Define.html">defined variables</a> as other expressions.</p>
+<h2 id="python-version">Python version</h2>
+<p>Python expressions make use of <a href="https://ironpython.net/">the IronPython library</a> to provide the expression backend.
+At the time of writing, IronPython supports <strong>Python version 2.7</strong>.</p>
+<p>IronPython does have an ongoing effort to add support for 3.x; at the time of writing it is not yet ready for use.</p>
+<h2 id="python-expressions-are-included-in-an-add-on-package">Python expressions are included in an add-on package</h2>
+<p>Support for <code>python</code> expressions are included in <a href="../../NuGetPackages.html#expression-evaluators">the ZptSharp.PythonExpressions NuGet package</a>.
+They are not one of the standard expression types; once the NuGet package is installed to your application they must be activated <a class="xref" href="../../../api/ZptSharp.PythonHostingBuilderExtensions.html#ZptSharp_PythonHostingBuilderExtensions_AddZptPythonExpressions_ZptSharp_Hosting_IBuildsHostingEnvironment_">by using the <code>AddZptPythonExpressions</code> method</a>.</p>
+<h2 id="reserved-markup-characters-must-be-encoded">Reserved markup characters must be encoded</h2>
+<p>As with all usage of expressions inside of markup, any usages of reserved characters must be encoded.
+For example, the python expression <code>print(&quot;%.2f&quot; % 13.946)</code> makes use of double-quote characters.
+The following usage would obviously fail, because the quote characters break the DOM when used inside of an attribute.</p>
+<pre><code class="lang-html">&lt;p&gt;The price is &lt;span tal:replace=&quot;python:print(&quot;%.2f&quot; % 13.946)&quot;&gt;0.00&lt;/span&gt;&lt;/p&gt;
+</code></pre>
+<p>The solution is to encode the reserved markup characters, replacing double-quotes with <code>&amp;quot;</code>:</p>
+<pre><code class="lang-html">&lt;p&gt;The price is &lt;span tal:replace=&quot;python:print(&amp;quot;.2f&amp;quot; % 13.946)&quot;&gt;0.00&lt;/span&gt;&lt;/p&gt;
+</code></pre>
+<h2 id="example">Example</h2>
+<p>Here is a short example of a Python expression in use.
+It is somewhat contrived but it demonstrates how a Python expression may make use of a defined variable.</p>
+<pre><code class="lang-html">&lt;p tal:define=&quot;two python:2&quot;&gt;
+    2 plus 2 equals &lt;span tal:replace=&quot;python:two + 2&quot;&gt;0&lt;/span&gt;.
+&lt;/p&gt;
+</code></pre>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/csf-dev/ZPT-Sharp/blob/production/ZptSharp.Documentation/articles/ZptReference/Tales/PythonExpressions.md/#L1" class="contribution-link">Improve this Doc</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In This Article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            
+            <span>Generated by <strong>DocFX</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../../../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../../../styles/docfx.js"></script>
+    <script type="text/javascript" src="../../../styles/main.js"></script>
+  </body>
+</html>
