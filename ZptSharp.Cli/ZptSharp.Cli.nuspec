@@ -11,7 +11,9 @@
         <copyright>Copyright 2020 - ZptSharp contributors</copyright>
     </metadata>
     <files>
-        <file src="bin\$configuration$\net461\*.*" target="tools\net461" />
-        <file src="bin\$configuration$\netcoreapp3.1\*.*" target="tools\netcoreapp3.1" />
+        <file src="bin\$configuration$\net461\**\*.*" target="tools\net461" />
+        <file src="bin\$configuration$\netcoreapp3.1\**\*.*"
+              exclude="**\*.runtimeconfig.dev.json"
+              target="tools\netcoreapp3.1" />
     </files>
 </package>

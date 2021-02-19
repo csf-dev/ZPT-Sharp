@@ -3,6 +3,7 @@
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFrameworks>netcoreapp3.1;net461</TargetFrameworks>
+    <RuntimeIdentifiers>win-x64;win-x86;linux-x64;osx-x64</RuntimeIdentifiers>
     <ReleaseVersion>2.0.0</ReleaseVersion>
     <ProjectGuid>{d8349c94-582e-4160-8df2-eb8e4e115794}</ProjectGuid>
     <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
