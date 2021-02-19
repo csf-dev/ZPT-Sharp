@@ -57,10 +57,11 @@ These packages are for particular applications of ZptSharp.
 [ASP.NET Core MVC 2] View Engine. This is for using ZptSharp as the view technology for web applications written using .NET Core or .NET 5+.
 * **[ZptSharp.Mvc5]** is an
 [ASP.NET MVC 5] View Engine. This is for using ZptSharp as the view technology for web applications written using .NET Framework.
-* **[ZptSharp.Cli]** is *a tool package* rather than a library. It's a command-line bulk/batch rendering app.
+* **[ZptSharp.Cli]** is *a tool package* rather than a library. [It's a command-line bulk/batch rendering app].
 
 [ZptSharp.MvcCore]: https://www.nuget.org/packages/ZptSharp.MvcCore
 [ASP.NET Core MVC 2]: https://docs.microsoft.com/en-us/aspnet/core/mvc/overview
 [ZptSharp.Mvc5]: https://www.nuget.org/packages/ZptSharp.Mvc5
 [ASP.NET MVC 5]: https://docs.microsoft.com/en-us/aspnet/mvc/overview/getting-started/introduction/getting-started
 [ZptSharp.Cli]: https://www.nuget.org/packages/ZptSharp.Cli
+[It's a command-line bulk/batch rendering app]: CliRenderer.md
