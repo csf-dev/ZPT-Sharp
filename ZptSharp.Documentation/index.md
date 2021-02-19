@@ -5,6 +5,7 @@
 <section class="sample">
 
 ## Sample ZptSharp markup
+
 ```html
 <ul>
   <li tal:repeat="todo here/Todos">
@@ -19,12 +20,13 @@
 <section class="get_started">
 
 ## Get started
+
 * [What is ZptSharp?]
 * Quick start
-    * [ASP.NET Core MVC]
-    * [ASP.NET MVC 5]
-    * [Consume the API]
-    * [Command line renderer]
+  * [ASP.NET Core MVC]
+  * [ASP.NET MVC 5]
+  * [Consume the API]
+  * [Command line renderer]
 * [ZPT tutorial]
 
 [What is ZptSharp?]: articles/WhatIsZptSharp.md
