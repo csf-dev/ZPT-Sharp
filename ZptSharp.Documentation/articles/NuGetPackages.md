@@ -20,7 +20,7 @@ A working ZptSharp environment *must include at least one document provider* pac
 
 [ZptSharp.Abstractions]: https://www.nuget.org/packages/ZptSharp.Abstractions
 [ZptSharp]: https://www.nuget.org/packages/ZptSharp
-[where it sets up dependency injection]: ../API/index.md#adding-zptsharp-to-di
+[where it sets up dependency injection]: ../api/index.md#adding-zptsharp-to-di
 
 ## Document providers
 

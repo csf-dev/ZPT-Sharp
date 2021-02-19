@@ -1,0 +1,434 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Interface IReadsAndWritesDocument
+   </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Interface IReadsAndWritesDocument
+   ">
+    <meta name="generator" content="docfx 2.56.6.0">
+    
+    <link rel="shortcut icon" href="../favicon.ico">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="ZptSharp.Dom.IReadsAndWritesDocument">
+  
+  
+  <h1 id="ZptSharp_Dom_IReadsAndWritesDocument" data-uid="ZptSharp.Dom.IReadsAndWritesDocument" class="text-break">Interface IReadsAndWritesDocument
+  </h1>
+  <div class="markdown level0 summary"><p>An object which may read &amp; write <a class="xref" href="ZptSharp.Dom.IDocument.html">IDocument</a> instances to/from
+streams.  This is the core interface of &quot;a document provider&quot;.</p>
+</div>
+  <div class="markdown level0 conceptual"></div>
+  <h6><strong>Namespace</strong>: <a class="xref" href="ZptSharp.Dom.html">ZptSharp.Dom</a></h6>
+  <h6><strong>Assembly</strong>: ZptSharp.Abstractions.dll</h6>
+  <h5 id="ZptSharp_Dom_IReadsAndWritesDocument_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public interface IReadsAndWritesDocument</code></pre>
+  </div>
+  <h5 id="ZptSharp_Dom_IReadsAndWritesDocument_remarks"><strong>Remarks</strong></h5>
+  <div class="markdown level0 remarks"><p>
+A document provider is an add-on (albeit a required one) which allows ZptSharp to read &amp; write
+markup documents.
+The ZptSharp core manipulates DOM documents via an abstraction; this is the <a class="xref" href="ZptSharp.Dom.IDocument.html">IDocument</a>
+interface and related types.
+Implementations of this interface allow reading/writing those abstract documents from/to instances
+of <span class="xref">System.IO.Stream</span>.
+In practical terms, this is the &quot;load&quot; and &quot;save&quot; logic of ZptSharp.
+</p>
+<p>
+In order to have a working/usable ZptSharp environment, at least one document provider
+must be registered with dependency injection.  This should be performed during application
+start-up, using extension methods for <a class="xref" href="ZptSharp.Hosting.IBuildsHostingEnvironment.html">IBuildsHostingEnvironment</a>.
+</p>
+<p>
+Document provider implementations typically use 3rd-party libraries/APIs to perform a native read &amp;
+write of the DOM documents.  They then provide their own implementations of <a class="xref" href="ZptSharp.Dom.IDocument.html">IDocument</a>,
+<a class="xref" href="ZptSharp.Dom.INode.html">INode</a> &amp; <a class="xref" href="ZptSharp.Dom.IAttribute.html">IAttribute</a> which wrap the DOM nodes returned by that 3rd-party
+implementation.  This is essentially an application of the <a href="https://en.wikipedia.org/wiki/Adapter_pattern">https://en.wikipedia.org/wiki/Adapter_pattern</a>.
+</p>
+</div>
+  <h3 id="properties">Properties
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/csf-dev/ZPT-Sharp/new/production/apiSpec/new?filename=ZptSharp_Dom_IReadsAndWritesDocument_ResolvableType.md&amp;value=---%0Auid%3A%20ZptSharp.Dom.IReadsAndWritesDocument.ResolvableType%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/csf-dev/ZPT-Sharp/blob/production/ZptSharp.Abstractions/Dom/IReadsAndWritesDocument.cs/#L52">View Source</a>
+  </span>
+  <a id="ZptSharp_Dom_IReadsAndWritesDocument_ResolvableType_" data-uid="ZptSharp.Dom.IReadsAndWritesDocument.ResolvableType*"></a>
+  <h4 id="ZptSharp_Dom_IReadsAndWritesDocument_ResolvableType" data-uid="ZptSharp.Dom.IReadsAndWritesDocument.ResolvableType">ResolvableType</h4>
+  <div class="markdown level1 summary"><p>Gets the type of the current instance, for the purpose of future dependency resolution.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">Type ResolvableType { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Type</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="ZptSharp_Dom_IReadsAndWritesDocument_ResolvableType_remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>
+Gets the type of the current instance, for the purpose of dependency resolution.
+This is not/should not be quite the same as <span class="xref">System.Object.GetType()</span>, because
+a derived implementation might not always be resolved as its precise type, it might be resolved
+as a less-derived base type.
+</p>
+</div>
+  <h3 id="methods">Methods
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/csf-dev/ZPT-Sharp/new/production/apiSpec/new?filename=ZptSharp_Dom_IReadsAndWritesDocument_CanReadWriteForFilename_System_String_.md&amp;value=---%0Auid%3A%20ZptSharp.Dom.IReadsAndWritesDocument.CanReadWriteForFilename(System.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/csf-dev/ZPT-Sharp/blob/production/ZptSharp.Abstractions/Dom/IReadsAndWritesDocument.cs/#L74">View Source</a>
+  </span>
+  <a id="ZptSharp_Dom_IReadsAndWritesDocument_CanReadWriteForFilename_" data-uid="ZptSharp.Dom.IReadsAndWritesDocument.CanReadWriteForFilename*"></a>
+  <h4 id="ZptSharp_Dom_IReadsAndWritesDocument_CanReadWriteForFilename_System_String_" data-uid="ZptSharp.Dom.IReadsAndWritesDocument.CanReadWriteForFilename(System.String)">CanReadWriteForFilename(String)</h4>
+  <div class="markdown level1 summary"><p>Gets a value which indicates whether or not the current instance may be used to read &amp; write documents
+which have the specified filename.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">bool CanReadWriteForFilename(string filenameOrPath)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">filenameOrPath</span></td>
+        <td><p>The file name or file path of a ZPT document.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><p><code>true</code>, if this instance may be used for the specified file name/file path; <code>false</code> if not.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="ZptSharp_Dom_IReadsAndWritesDocument_CanReadWriteForFilename_System_String__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>
+This is the mechanism by which an <a class="xref" href="ZptSharp.Rendering.IGetsZptDocumentRendererForFilePath.html">IGetsZptDocumentRendererForFilePath</a>
+(and ultimately an <a class="xref" href="ZptSharp.IRendersZptFile.html">IRendersZptFile</a>) selects an appropriate document provider implementation
+for a specified file.
+</p>
+<p>
+This enables document providers to be used with the strategy pattern -
+<a href="https://en.wikipedia.org/wiki/Strategy_pattern">https://en.wikipedia.org/wiki/Strategy_pattern</a> - interrogating each of the available providers
+to determine which can perform the required task.
+</p>
+</div>
+  <h5 id="ZptSharp_Dom_IReadsAndWritesDocument_CanReadWriteForFilename_System_String__seealso">See Also</h5>
+  <div class="seealso">
+      <div><a class="xref" href="ZptSharp.Rendering.IGetsZptDocumentRendererForFilePath.html">IGetsZptDocumentRendererForFilePath</a></div>
+      <div><a class="xref" href="ZptSharp.IRendersZptFile.html">IRendersZptFile</a></div>
+  </div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/csf-dev/ZPT-Sharp/new/production/apiSpec/new?filename=ZptSharp_Dom_IReadsAndWritesDocument_GetDocumentAsync_System_IO_Stream_ZptSharp_Config_RenderingConfig_ZptSharp_Rendering_IDocumentSourceInfo_System_Threading_CancellationToken_.md&amp;value=---%0Auid%3A%20ZptSharp.Dom.IReadsAndWritesDocument.GetDocumentAsync(System.IO.Stream%2CZptSharp.Config.RenderingConfig%2CZptSharp.Rendering.IDocumentSourceInfo%2CSystem.Threading.CancellationToken)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/csf-dev/ZPT-Sharp/blob/production/ZptSharp.Abstractions/Dom/IReadsAndWritesDocument.cs/#L103">View Source</a>
+  </span>
+  <a id="ZptSharp_Dom_IReadsAndWritesDocument_GetDocumentAsync_" data-uid="ZptSharp.Dom.IReadsAndWritesDocument.GetDocumentAsync*"></a>
+  <h4 id="ZptSharp_Dom_IReadsAndWritesDocument_GetDocumentAsync_System_IO_Stream_ZptSharp_Config_RenderingConfig_ZptSharp_Rendering_IDocumentSourceInfo_System_Threading_CancellationToken_" data-uid="ZptSharp.Dom.IReadsAndWritesDocument.GetDocumentAsync(System.IO.Stream,ZptSharp.Config.RenderingConfig,ZptSharp.Rendering.IDocumentSourceInfo,System.Threading.CancellationToken)">GetDocumentAsync(Stream, RenderingConfig, IDocumentSourceInfo, CancellationToken)</h4>
+  <div class="markdown level1 summary"><p>Gets a document instance from the specified input stream which contains text markup.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">Task&lt;IDocument&gt; GetDocumentAsync(Stream stream, RenderingConfig config, IDocumentSourceInfo sourceInfo = null, CancellationToken token = default(CancellationToken))</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.IO.Stream</span></td>
+        <td><span class="parametername">stream</span></td>
+        <td><p>A stream containing the source of the document.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="ZptSharp.Config.RenderingConfig.html">RenderingConfig</a></td>
+        <td><span class="parametername">config</span></td>
+        <td><p>Rendering configuration.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="ZptSharp.Rendering.IDocumentSourceInfo.html">IDocumentSourceInfo</a></td>
+        <td><span class="parametername">sourceInfo</span></td>
+        <td><p>Information which identifies the source of the document.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Threading.CancellationToken</span></td>
+        <td><span class="parametername">token</span></td>
+        <td><p>An object used to cancel the operation if required.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<a class="xref" href="ZptSharp.Dom.IDocument.html">IDocument</a>&gt;</td>
+        <td><p>A task which provides the document which has been read.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="ZptSharp_Dom_IReadsAndWritesDocument_GetDocumentAsync_System_IO_Stream_ZptSharp_Config_RenderingConfig_ZptSharp_Rendering_IDocumentSourceInfo_System_Threading_CancellationToken__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>
+This method is used to &apos;load&apos; a ZptSharp <a class="xref" href="ZptSharp.Dom.IDocument.html">IDocument</a> from a <code data-dev-comment-type="paramref" class="paramref">stream</code>.
+Streams are used rather than files so that ZptSharp is not limited to only loading documents
+from files on disk.
+In most circumstances the <code data-dev-comment-type="paramref" class="paramref">sourceInfo</code> will have been specified and this
+object will indicate the source of the stream, which should be passed to the returned document.
+</p>
+<p>
+The API of this method is asynchronous (returning a task) although it is recognised that not all
+implementations will fully support asynchronous loading of documents.  This also means that there is
+no certainty that implementations will honour the usage of the <code data-dev-comment-type="paramref" class="paramref">token</code> to cancel/abort
+the operation before it completes.
+</p>
+<p>
+Finally, implementations should honour the rendering <code data-dev-comment-type="paramref" class="paramref">config</code> passed to this method,
+but are permitted not to honour settings which are either irrelevant or which cannot be supported.
+</p>
+</div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/csf-dev/ZPT-Sharp/new/production/apiSpec/new?filename=ZptSharp_Dom_IReadsAndWritesDocument_WriteDocumentAsync_ZptSharp_Dom_IDocument_ZptSharp_Config_RenderingConfig_System_Threading_CancellationToken_.md&amp;value=---%0Auid%3A%20ZptSharp.Dom.IReadsAndWritesDocument.WriteDocumentAsync(ZptSharp.Dom.IDocument%2CZptSharp.Config.RenderingConfig%2CSystem.Threading.CancellationToken)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/csf-dev/ZPT-Sharp/blob/production/ZptSharp.Abstractions/Dom/IReadsAndWritesDocument.cs/#L132">View Source</a>
+  </span>
+  <a id="ZptSharp_Dom_IReadsAndWritesDocument_WriteDocumentAsync_" data-uid="ZptSharp.Dom.IReadsAndWritesDocument.WriteDocumentAsync*"></a>
+  <h4 id="ZptSharp_Dom_IReadsAndWritesDocument_WriteDocumentAsync_ZptSharp_Dom_IDocument_ZptSharp_Config_RenderingConfig_System_Threading_CancellationToken_" data-uid="ZptSharp.Dom.IReadsAndWritesDocument.WriteDocumentAsync(ZptSharp.Dom.IDocument,ZptSharp.Config.RenderingConfig,System.Threading.CancellationToken)">WriteDocumentAsync(IDocument, RenderingConfig, CancellationToken)</h4>
+  <div class="markdown level1 summary"><p>Writes the document to text markup and returns a stream containing the rendered document.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">Task&lt;Stream&gt; WriteDocumentAsync(IDocument document, RenderingConfig config, CancellationToken token = default(CancellationToken))</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="ZptSharp.Dom.IDocument.html">IDocument</a></td>
+        <td><span class="parametername">document</span></td>
+        <td><p>The document to write.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="ZptSharp.Config.RenderingConfig.html">RenderingConfig</a></td>
+        <td><span class="parametername">config</span></td>
+        <td><p>Rendering configuration.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Threading.CancellationToken</span></td>
+        <td><span class="parametername">token</span></td>
+        <td><p>An object used to cancel the operation if required.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<span class="xref">System.IO.Stream</span>&gt;</td>
+        <td><p>A task which provides the output stream.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="ZptSharp_Dom_IReadsAndWritesDocument_WriteDocumentAsync_ZptSharp_Dom_IDocument_ZptSharp_Config_RenderingConfig_System_Threading_CancellationToken__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>
+This method is used to &apos;save&apos; a ZptSharp <a class="xref" href="ZptSharp.Dom.IDocument.html">IDocument</a> to a <span class="xref">System.IO.Stream</span>.
+Streams are used rather than files so that ZptSharp is not limited to only saving documents
+as files on disk.
+</p>
+<p>
+The API of this method is asynchronous (returning a task) although it is recognised that not all
+implementations will fully support asynchronous writing of documents.  This also means that there is
+no certainty that implementations will honour the usage of the <code data-dev-comment-type="paramref" class="paramref">token</code> to cancel/abort
+the operation before it completes.
+</p>
+<p>
+Finally, implementations should honour the rendering <code data-dev-comment-type="paramref" class="paramref">config</code> passed to this method,
+but are permitted not to honour settings which are either irrelevant or which cannot be supported.
+</p>
+</div>
+  <h3 id="seealso">See Also</h3>
+  <div class="seealso">
+      <div><a class="xref" href="ZptSharp.Dom.IDocument.html">IDocument</a></div>
+      <div><a class="xref" href="ZptSharp.Dom.INode.html">INode</a></div>
+      <div><a class="xref" href="ZptSharp.Dom.IAttribute.html">IAttribute</a></div>
+      <div><a class="xref" href="ZptSharp.Hosting.IBuildsHostingEnvironment.html">IBuildsHostingEnvironment</a></div>
+  </div>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/csf-dev/ZPT-Sharp/new/production/apiSpec/new?filename=ZptSharp_Dom_IReadsAndWritesDocument.md&amp;value=---%0Auid%3A%20ZptSharp.Dom.IReadsAndWritesDocument%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
+                  </li>
+                  <li>
+                    <a href="https://github.com/csf-dev/ZPT-Sharp/blob/production/ZptSharp.Abstractions/Dom/IReadsAndWritesDocument.cs/#L39" class="contribution-link">View Source</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In This Article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            
+            <span>Generated by <strong>DocFX</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

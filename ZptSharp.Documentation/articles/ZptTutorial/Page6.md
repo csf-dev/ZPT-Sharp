@@ -78,10 +78,10 @@ Indeed, a slot-filler could even make use of a further `metal:use-macro` attribu
 ## End of the ZPT tutorial: What's next?
 
 You have reached the end of the ZPT syntax tutorial; all of the most important concepts have been covered.
-[The ZPT reference](../ZPTReference/index.md) has a lot more detail about many of the concepts you have learned during the tutorial.
+[The ZPT reference](../ZptReference/Index.md) has a lot more detail about many of the concepts you have learned during the tutorial.
 
 There are also a few more advanced concepts not covered in this tutorial; amongst those are:
 
-* [METAL macro extension](../ZPTReference/Metal/ExtendMacro.md) (similar to creating a subclass of a macro)
-* [TAL error handling](../ZPTReference/Tal/OnError.md) (gracefully dealing with errors)
-* [The TALES expression types](../ZPTReference/index.md#tales-is-how-expressions-are-written) (we have only touched upon path and string expressions in this tutorial, there are more!)
+* [METAL macro extension](../ZptReference/Metal/ExtendMacro.md) (similar to creating a subclass of a macro)
+* [TAL error handling](../ZptReference/Tal/OnError.md) (gracefully dealing with errors)
+* [The TALES expression types](../ZptReference/Index.md#tales-is-how-expressions-are-written) (we have only touched upon path and string expressions in this tutorial, there are more!)

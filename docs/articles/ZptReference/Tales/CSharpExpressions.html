@@ -1,0 +1,176 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>The CSharp expression syntax </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="The CSharp expression syntax ">
+    <meta name="generator" content="docfx 2.56.6.0">
+    
+    <link rel="shortcut icon" href="../../../favicon.ico">
+    <link rel="stylesheet" href="../../../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../../../styles/docfx.css">
+    <link rel="stylesheet" href="../../../styles/main.css">
+    <meta property="docfx:navrel" content="../../../toc.html">
+    <meta property="docfx:tocrel" content="../toc.html">
+    
+    
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../../../index.html">
+                <img id="logo" class="svg" src="../../../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="">
+<h1 id="the-csharp-expression-syntax">The CSharp expression syntax</h1>
+
+<p>ZptSharp offers an optional add-on expression evaluator for expressions written in C#. Primarily this is the <code>csharp</code> expression type, although there are a number of other related expression types, bundled in the same add-on package.</p>
+<p>Please be aware that <em>using CSharp expressions in practice can be very cumbersome</em>; <a href="CSharpExpressionLimitations.html">a number of limitations are documented here</a>. For most use-cases of C# expressions, it is preferable to use <a href="PipeExpressions.html">a <code>pipe</code> expression</a> instead.</p>
+<h2 id="csharp-expressions-are-included-in-an-add-on-package">CSharp expressions are included in an add-on package</h2>
+<p>Support for <code>csharp</code> expressions and all of the other related expressions documented on this page are included in <a href="../../NuGetPackages.html#expression-evaluators">the ZptSharp.CSharpExpressions NuGet package</a>.
+They are not one of the standard expression types; once the NuGet package is installed to your application they must be activated <a class="xref" href="../../../api/ZptSharp.CSharpHostingBuilderExtensions.html#ZptSharp_CSharpHostingBuilderExtensions_AddZptCSharpExpressions_ZptSharp_Hosting_IBuildsHostingEnvironment_System_Action_ZptSharp_Expressions_CSharpExpressions_IConfiguresCSharpExpressionGlobals__">by using the <code>AddZptCSharpExpressions</code> method</a>.</p>
+<h2 id="csharp-expressions"><code>csharp</code> expressions</h2>
+<p>The TALES <code>csharp</code> expression syntax is as follows:</p>
+<pre><code class="lang-text">csharp:expression_body
+</code></pre>
+<p>The <code>expression_body</code> is any valid C# expression which would be valid after a <code>return</code> keyword. It should not include the return keyword, nor a trailing semicolon.</p>
+<p>Remember that <em>some symbols used by the C# language may need replacing with their entities</em>, in order to preserve the validity of the HTML/XML document.</p>
+<h3 id="examples">Examples</h3>
+<p>Some valid CSharp expressions follow:</p>
+<pre><code class="lang-html">&lt;div tal:define=&quot;four csharp:2 + 2&quot;&gt;
+
+&lt;div tal:define=&quot;lowerName csharp:name.ToLower()&quot;&gt;
+
+&lt;div tal:define=&quot;isMoreThanThree csharp:myNumber &amp;gt; 3&quot;&gt;
+</code></pre>
+<h2 id="assemblyref-expressions"><code>assemblyref</code> expressions</h2>
+<p>In order to make use of members of types, the compiler which evaluates C# expressions must have references to the appropriate assemblies. This includes any assemblies which declare types that are to be used in expressions, as well as any assemblies that contain extension methods you wish to use.</p>
+<p>The syntax for assembly reference expressions is:</p>
+<pre><code class="lang-text">assemblyref:assembly_name
+</code></pre>
+<p>The <code>assembly_name</code> is the string name of the assembly. Almost always the same as its filename, without the extension. For example: <code>assemblyref:MyProject.Models</code>.</p>
+<p>Assembly reference expressions are only useful when used in <code>tal:define</code> attributes. The assembly reference expression will evaluate to a special value, held by the defined variable. As long as this variable is in-scope, all CSharp expressions which are evaluated will benefit from the referenced assembly.</p>
+<h2 id="using-expressions"><code>using</code> expressions</h2>
+<p>Just like the C# <code>using</code> keyword, the using expression imports a namespace into scope, or makes the members of a static class available (in regular C# this would be <code>using static</code>).</p>
+<p>The syntax for both of the above usages is the same in ZptSharp:</p>
+<pre><code class="lang-text">using:namespace_or_type_name
+</code></pre>
+<p>The <code>namespace_or_type_name</code> is either a namespace or the namespace-qualified name to a type.</p>
+<p>When used with a namespace it means that:</p>
+<ul>
+<li>Expressions may reference types in this namespace</li>
+<li>Extension methods in this namespace are activated</li>
+</ul>
+<p>When used with a type, it brings the static members of that type into scope, without needing to prefix them with their type name. This is equivalent to <code>using static</code> in regular C#.</p>
+<p>Using expressions are only useful when used in <code>tal:define</code> attributes. The using expression will evaluate to a special value, held by the defined variable. As long as this variable is in-scope, all CSharp expressions which are evaluated will benefit from the imported namespace or type.</p>
+<p>Note that any namespaces or types referenced by <code>using</code> expressions must also have their appropriate assemblies referenced using <code>assemblyref</code> expressions.</p>
+<h2 id="type-expressions"><code>type</code> expressions</h2>
+<p>Type expressions inform the compiler which evaluates C# expressions of the design-time type of a variable. By default every variable which is in-scope is treated as a <code>dynamic</code> object. This default behaviour can cause problems such as:</p>
+<ul>
+<li>Method overload selection might not function as-expected</li>
+<li>Extension methods are not available, unless they would operate upon <code>object</code></li>
+</ul>
+<p>The syntax for a type expression is:</p>
+<pre><code class="lang-text">type:variable_name type_name
+</code></pre>
+<p>The <code>variable_name</code> is the name of an already-defined TALES variable. The <code>type_name</code> is a string type name, as would be written in a C# typed variable declaration. Remember (particularly for types which use generics) that <em>greater-than/less-than symbols must be replaced by their entities</em>.</p>
+<p>Type expressions are only useful when used in <code>tal:define</code> attributes. The type expression will evaluate to a special value, held by the defined variable. As long as this variable is in-scope, all CSharp expressions which have an appropriately-named variable in-scope will treat that variable as an instance of that type, and not as a <code>dynamic</code> object.</p>
+<p>Note that any types referenced by <code>type</code> expressions must:</p>
+<ul>
+<li>Have their containing assembly referenced, via an <code>assemblyref</code> expression</li>
+<li>Have their namespace imported, via a <code>using</code> expression (unless the namespace-qualified type name is used in the type expression).</li>
+</ul>
+<h3 id="example">Example</h3>
+<p>Here is an example of a <code>type</code> expression, indicating that the variable <code>products</code> is a generic list of <code>Product</code>. Two <code>using</code> expressions are included also, because these namespaces must also be imported.</p>
+<pre><code class="lang-html">&lt;div tal:define=&quot;scgNs using:System.Collections.Generic;
+                 prodNs using:MyApp.Models&quot;&gt;
+    &lt;div tal:define=&quot;prodType type:products List&amp;lt;Product&amp;gt;&quot;&gt;
+        &lt;!-- In this and child scopes, products is strongly-typed and not dynamic --&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/csf-dev/ZPT-Sharp/blob/production/ZptSharp.Documentation/articles/ZptReference/Tales/CSharpExpressions.md/#L1" class="contribution-link">Improve this Doc</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In This Article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            
+            <span>Generated by <strong>DocFX</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../../../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../../../styles/docfx.js"></script>
+    <script type="text/javascript" src="../../../styles/main.js"></script>
+  </body>
+</html>

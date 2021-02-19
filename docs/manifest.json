@@ -1,0 +1,4982 @@
+{
+  "homepages": [],
+  "source_base_path": "C:/projects/zpt-sharp/ZptSharp.Documentation",
+  "xrefmap": "xrefmap.yml",
+  "files": [
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.AngleSharpHostingBuilderExtensions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.AngleSharpHostingBuilderExtensions.html",
+          "hash": "RmueNhOnUQGhBatPUrZRlQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.BulkRendering.BulkFileRenderer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.BulkRendering.BulkFileRenderer.html",
+          "hash": "WIQOPKvTq5Y8I6unmNjXQQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.BulkRendering.BulkRenderingException.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.BulkRendering.BulkRenderingException.html",
+          "hash": "vKobxsZchk3wHr03HG938w=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.BulkRendering.BulkRenderingFileResult.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.BulkRendering.BulkRenderingFileResult.html",
+          "hash": "SBX10QwhWjomBPJuycECCQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.BulkRendering.BulkRenderingRequest.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.BulkRendering.BulkRenderingRequest.html",
+          "hash": "ydHfsvQj1iPyIzqghhCItw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.BulkRendering.BulkRenderingRequestValidator.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.BulkRendering.BulkRenderingRequestValidator.html",
+          "hash": "MzPH/DRJWeDQKjuJ+7brbg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.BulkRendering.BulkRenderingResult.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.BulkRendering.BulkRenderingResult.html",
+          "hash": "8Bm4SyJ6CHko7JAHeFXJfQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.BulkRendering.FileRendererAndSaver.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.BulkRendering.FileRendererAndSaver.html",
+          "hash": "M/cyHgZrkbmBmHwrs3xyzQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.BulkRendering.IGetsInputFiles.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.BulkRendering.IGetsInputFiles.html",
+          "hash": "+SUZ42H8pqP6rpyLt7DlYQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.BulkRendering.IRendersInputFile.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.BulkRendering.IRendersInputFile.html",
+          "hash": "HvvtWhaMHoODWLlU48OoLw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.BulkRendering.IRendersManyFiles.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.BulkRendering.IRendersManyFiles.html",
+          "hash": "Vyr8QL3M88KFDnOLri8sAg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.BulkRendering.IValidatesBulkRenderingRequest.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.BulkRendering.IValidatesBulkRenderingRequest.html",
+          "hash": "vEUfaDNXIyBWQ5pGgTZu3w=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.BulkRendering.InputFile.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.BulkRendering.InputFile.html",
+          "hash": "Z5eLlths6gqDczXslefGOQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.BulkRendering.InputFilesProvider.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.BulkRendering.InputFilesProvider.html",
+          "hash": "8fPeFU1bhQw7+B3Kt36abg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.BulkRendering.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.BulkRendering.html",
+          "hash": "ctcrXObwzHBWvQAKM/B+gQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.CSharpHostingBuilderExtensions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.CSharpHostingBuilderExtensions.html",
+          "hash": "jQ/5ndsMWxW19huUH00dCQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Cli.Application.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Cli.Application.html",
+          "hash": "LRHb8FAGum8cY4Om1j+5Eg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Cli.BulkRenderingRequestFactory.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Cli.BulkRenderingRequestFactory.html",
+          "hash": "MajlrO210s3eC8y1+yflMA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Cli.CliArguments.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Cli.CliArguments.html",
+          "hash": "FsDb8TKc9I5hgNzKfmPzHQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Cli.CliArgumentsParser.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Cli.CliArgumentsParser.html",
+          "hash": "VTJLKp7Adwgt3CFhvUkBFQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Cli.IGetsBulkRenderingRequest.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Cli.IGetsBulkRenderingRequest.html",
+          "hash": "Vi0nQUyRgKJ8YZnQG2xUug=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Cli.ILoadsModel.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Cli.ILoadsModel.html",
+          "hash": "ryid3W0D2w2XRhiB18DGdA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Cli.ModelLoader.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Cli.ModelLoader.html",
+          "hash": "Q6sYpJgYdofSmZJIioEc6Q=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Cli.Program.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Cli.Program.html",
+          "hash": "uUL3D91iWsgxOY8g7KEUPw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Cli.ServiceConfigurator.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Cli.ServiceConfigurator.html",
+          "hash": "4RT5o1KYyT6JCMQ8YPklnA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Cli.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Cli.html",
+          "hash": "JPwmfy5vhTJ8WofuYresOQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Config.IGetsRootContextBuilder.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Config.IGetsRootContextBuilder.html",
+          "hash": "8M335nKkN5BxXYqCywZe/g=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Config.IStoresCurrentRenderingConfig.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Config.IStoresCurrentRenderingConfig.html",
+          "hash": "qX4uksPxM2lacHtor8Dduw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Config.RenderingConfig.Builder.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Config.RenderingConfig.Builder.html",
+          "hash": "KBxtiR5YE6m0Hv+His2BQQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Config.RenderingConfig.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Config.RenderingConfig.html",
+          "hash": "AdQs+zhtGtYFNlnHLRofjA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Config.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Config.html",
+          "hash": "GEHFHDwWp7wNTCzCFiXsbA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Dom.AngleSharpAttribute.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Dom.AngleSharpAttribute.html",
+          "hash": "wYTbr5Vo9q/Vlgg6yEc0pg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Dom.AngleSharpDocument.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Dom.AngleSharpDocument.html",
+          "hash": "A6zeidr/omo6GibUjxV/kA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Dom.AngleSharpDocumentProvider.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Dom.AngleSharpDocumentProvider.html",
+          "hash": "S3QxfDZH3EzebetxYVTAnA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Dom.AngleSharpNode.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Dom.AngleSharpNode.html",
+          "hash": "GdnFve9mb4/B3j3PolWJ1w=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Dom.AttributeBase.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Dom.AttributeBase.html",
+          "hash": "2/tu2XBvXZIGuLKqPsQTVg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Dom.AttributeSearcher.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Dom.AttributeSearcher.html",
+          "hash": "HtLbCdlUjVc6jYBfWW5IHQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Dom.AttributeSpec.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Dom.AttributeSpec.html",
+          "hash": "PmqqNZb2BaQLsNqAUo/jAw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Dom.DocumentBase.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Dom.DocumentBase.html",
+          "hash": "HqEY6uqNUaIghpLMvKlVaQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Dom.DocumentReaderWriterBase-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Dom.DocumentReaderWriterBase-1.html",
+          "hash": "lpPh0v4plMQdqhjuuvKyKQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Dom.DocumentReaderWriterRegistry.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Dom.DocumentReaderWriterRegistry.html",
+          "hash": "QSCc/Fqr8J+g4WJy0xwcdg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Dom.HapAttribute.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Dom.HapAttribute.html",
+          "hash": "9bHLcNxWth+ydkLLIDnQqQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Dom.HapDocument.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Dom.HapDocument.html",
+          "hash": "+GjghPVv0iRhGUKTKFj5kA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Dom.HapDocumentProvider.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Dom.HapDocumentProvider.html",
+          "hash": "fJ/98/7g8pnzprBMssTeHg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Dom.HapNode.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Dom.HapNode.html",
+          "hash": "A62jclTujvcChTQMfS3c8w=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Dom.IAttribute.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Dom.IAttribute.html",
+          "hash": "bTVbZs4N+0GRSgwVt7oghw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Dom.ICanReplaceRootNode.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Dom.ICanReplaceRootNode.html",
+          "hash": "skEdVGl/cVfUFBOv1ibaQw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Dom.IDocument.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Dom.IDocument.html",
+          "hash": "VwaIxOdDSaAmhsvPelsT6w=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Dom.IGetsDocumentReaderWriterForFile.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Dom.IGetsDocumentReaderWriterForFile.html",
+          "hash": "S6Brpn45Goe0g9fNpznDvQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Dom.IGetsWellKnownNamespace.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Dom.IGetsWellKnownNamespace.html",
+          "hash": "xW+sHTdhxBJTwOr4onoXWg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Dom.IGetsXhtmlDtds.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Dom.IGetsXhtmlDtds.html",
+          "hash": "GvwQA+obiyukJlbxAJpMdQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Dom.IGetsXmlReaderSettings.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Dom.IGetsXmlReaderSettings.html",
+          "hash": "k19IuNpodfM7snj2N+AGYg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Dom.IHasDocumentSourceInfo.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Dom.IHasDocumentSourceInfo.html",
+          "hash": "Rkv15zpyYHCUY3Cpo41bWg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Dom.IHasNodes.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Dom.IHasNodes.html",
+          "hash": "DUe3I+4o60iYOlXOQRLoYQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Dom.INode.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Dom.INode.html",
+          "hash": "FMsyXogPpUT9fsyrvrU7xA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Dom.IOmitsNode.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Dom.IOmitsNode.html",
+          "hash": "cUQZ74QPPeKd2dD0Uj5bmg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Dom.IReadsAndWritesDocument.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Dom.IReadsAndWritesDocument.html",
+          "hash": "g1eOZePZRvZOGtdKP397UQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Dom.IReplacesNode.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Dom.IReplacesNode.html",
+          "hash": "nRQmXD2/op5lgwMhy4xqzw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Dom.ISearchesForAttributes.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Dom.ISearchesForAttributes.html",
+          "hash": "yFQatI0uE1rt6h2wKWqHzA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Dom.IStoresCurrentReaderWriter.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Dom.IStoresCurrentReaderWriter.html",
+          "hash": "Pxcn6uK9rfNrLYITM8Wj3Q=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Dom.Namespace.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Dom.Namespace.html",
+          "hash": "LO+NrHZ/VB2VUUiDsj/mYw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Dom.NodeBase.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Dom.NodeBase.html",
+          "hash": "nzo1apyDTyimWwNoMdr39Q=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Dom.NodeExtensions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Dom.NodeExtensions.html",
+          "hash": "in5b29oEJqOtZjLZDvwzeA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Dom.NodeOmitter.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Dom.NodeOmitter.html",
+          "hash": "bbVr8dv9FO7akp3kUrqUvQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Dom.NodeReplacer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Dom.NodeReplacer.html",
+          "hash": "TesKJ3pZViO1EyEFDJohnA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Dom.NodeReplacerExtensions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Dom.NodeReplacerExtensions.html",
+          "hash": "jgXZA7h40erNlqNnqcQ5eA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Dom.ReaderWriterServiceLocator.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Dom.ReaderWriterServiceLocator.html",
+          "hash": "4qzEtPAfBgo/bpZJQS3tfQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Dom.Resources.EmbeddedResourceXhtmlDtdProvider.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Dom.Resources.EmbeddedResourceXhtmlDtdProvider.html",
+          "hash": "Y2JMRE+RhkAnToWGFRhthg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Dom.Resources.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Dom.Resources.html",
+          "hash": "jXZLSUY7dVn9vhgT6nn7cw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Dom.WellKnownNamespaceProvider.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Dom.WellKnownNamespaceProvider.html",
+          "hash": "+1yNugy9mwvDMGg782aA0w=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Dom.XhtmlOnlyXmlUrlResolver.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Dom.XhtmlOnlyXmlUrlResolver.html",
+          "hash": "sb4YP3UtaLtYGjfI2n2cQQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Dom.XmlAttribute.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Dom.XmlAttribute.html",
+          "hash": "rXxd1hiXL4QKbnjv0QAnEQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Dom.XmlDocument.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Dom.XmlDocument.html",
+          "hash": "eeolvmlMtRZycYF5MenZ+g=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Dom.XmlDocumentProvider.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Dom.XmlDocumentProvider.html",
+          "hash": "hlNYvY6UhCCPP5wvXE1SuQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Dom.XmlNode.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Dom.XmlNode.html",
+          "hash": "f/KBScmfDHiNdeEcFDCHhw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Dom.XmlReaderSettingsFactory.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Dom.XmlReaderSettingsFactory.html",
+          "hash": "3FBKJB0FcxoESuwk/hucAw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Dom.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Dom.html",
+          "hash": "3F9A80n/Yl+kuwoaIidIqA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Expressions.AbortZptActionToken.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Expressions.AbortZptActionToken.html",
+          "hash": "aIheCR6J+l7wLULDKZg0Yg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Expressions.AlphabeticValueGenerator.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Expressions.AlphabeticValueGenerator.html",
+          "hash": "mxKVv/8gGd+2XvHS5nzvVA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Expressions.BuiltinContextsProvider.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Expressions.BuiltinContextsProvider.html",
+          "hash": "IKsl3+RinzupwICFQ3BDTg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Expressions.BuiltinContextsProviderFactory.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Expressions.BuiltinContextsProviderFactory.html",
+          "hash": "gtOGoX30CB0Xb/vLYoeGew=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Expressions.CSharpExpressions.AssemblyReference.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Expressions.CSharpExpressions.AssemblyReference.html",
+          "hash": "OCEQN6v7pvxO2Cajf158gQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Expressions.CSharpExpressions.AssemblyReferenceEvaluator.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Expressions.CSharpExpressions.AssemblyReferenceEvaluator.html",
+          "hash": "lRqb5uXcZJ72P0dOsArjqA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Expressions.CSharpExpressions.CSharpEvaluationException.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Expressions.CSharpExpressions.CSharpEvaluationException.html",
+          "hash": "Yv/AnTw5sT83kphpnN2jyg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Expressions.CSharpExpressions.CSharpExpression.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Expressions.CSharpExpressions.CSharpExpression.html",
+          "hash": "g8Z6AUY0jk/V1inYZOULCw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Expressions.CSharpExpressions.CSharpExpressionEvaluator.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Expressions.CSharpExpressions.CSharpExpressionEvaluator.html",
+          "hash": "yDUflH5IW1CQYfAY2BSE9g=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Expressions.CSharpExpressions.ExpressionCache.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Expressions.CSharpExpressions.ExpressionCache.html",
+          "hash": "ZssLneydx6IT/anoP2IdCQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Expressions.CSharpExpressions.ExpressionCompiler.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Expressions.CSharpExpressions.ExpressionCompiler.html",
+          "hash": "F7BmrAc22I1HN2BxuTvAGQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Expressions.CSharpExpressions.ExpressionDescription.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Expressions.CSharpExpressions.ExpressionDescription.html",
+          "hash": "7e4RXl7hWB79PQWhOyXwjw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Expressions.CSharpExpressions.ExpressionDescriptionFactory.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Expressions.CSharpExpressions.ExpressionDescriptionFactory.html",
+          "hash": "OctX3xEnAcPoQ8qyvvinCg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Expressions.CSharpExpressions.GlobalExpressionConfigStore.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Expressions.CSharpExpressions.GlobalExpressionConfigStore.html",
+          "hash": "XRLiePIkZZQtdgO/EndwtQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Expressions.CSharpExpressions.ICachesCSharpExpressions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Expressions.CSharpExpressions.ICachesCSharpExpressions.html",
+          "hash": "OZVUPCm1UdWOJY93mL6+Hg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Expressions.CSharpExpressions.IConfiguresCSharpExpressionGlobals.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Expressions.CSharpExpressions.IConfiguresCSharpExpressionGlobals.html",
+          "hash": "8CU6O1UAA9MK5mm2mb8NoA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Expressions.CSharpExpressions.ICreatesCSharpExpressions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Expressions.CSharpExpressions.ICreatesCSharpExpressions.html",
+          "hash": "/h/haVa72IzsFDcUVOoyPg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Expressions.CSharpExpressions.IGetsExpressionDescription.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Expressions.CSharpExpressions.IGetsExpressionDescription.html",
+          "hash": "GBNsIiJi5jp0VmZd/3Fyrg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Expressions.CSharpExpressions.IGetsScriptBody.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Expressions.CSharpExpressions.IGetsScriptBody.html",
+          "hash": "FFh6vUL1t41Kl7OB/+wC9g=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Expressions.CSharpExpressions.ScriptBodyFactory.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Expressions.CSharpExpressions.ScriptBodyFactory.html",
+          "hash": "aMLihMARJvN/EGuqZ0Sn2g=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Expressions.CSharpExpressions.UsingNamespace.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Expressions.CSharpExpressions.UsingNamespace.html",
+          "hash": "u4qHVj0YR8i7XhngMvEImg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Expressions.CSharpExpressions.UsingNamespaceEvaluator.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Expressions.CSharpExpressions.UsingNamespaceEvaluator.html",
+          "hash": "7W+RMlkJa2Z/uNp3nPXP2w=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Expressions.CSharpExpressions.VariableType.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Expressions.CSharpExpressions.VariableType.html",
+          "hash": "jSVUrGgxorKxh//LBNNRJg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Expressions.CSharpExpressions.VariableTypeEvaluator.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Expressions.CSharpExpressions.VariableTypeEvaluator.html",
+          "hash": "ku9fmWkLNUYAFMqKBrvVLg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Expressions.CSharpExpressions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Expressions.CSharpExpressions.html",
+          "hash": "qE0yxWeeFoJtRAD/YMOWuA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Expressions.ConfiguredDefaultExpressionTypeDecorator.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Expressions.ConfiguredDefaultExpressionTypeDecorator.html",
+          "hash": "NU5RUQbzBfDZHGehwC7m7A=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Expressions.ContextAllVariablesAndValuesProvider.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Expressions.ContextAllVariablesAndValuesProvider.html",
+          "hash": "SLUF/G0j6r1QusGPu6ezWQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Expressions.DefinedVariablesOnlyTalesValueForExpressionContextAdapter.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Expressions.DefinedVariablesOnlyTalesValueForExpressionContextAdapter.html",
+          "hash": "OOILKfjUwZBQenNz9LDW2g=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Expressions.ErrorHandlingContext.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Expressions.ErrorHandlingContext.html",
+          "hash": "vSQiGgi1/LnapRJswlY55w=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Expressions.ErrorHandlingResult.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Expressions.ErrorHandlingResult.html",
+          "hash": "6MWmh4itqQHI5OdkHEH+xg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Expressions.EvaluationException.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Expressions.EvaluationException.html",
+          "hash": "y9nNWOk2nd8NzdjpIISE6w=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Expressions.EvaluatorTypeRegistry.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Expressions.EvaluatorTypeRegistry.html",
+          "hash": "kTknXd4GwB2SShcR9jDWBA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Expressions.EvaluatorTypeResolver.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Expressions.EvaluatorTypeResolver.html",
+          "hash": "Ztm4MtYi89JiF1k333UdeQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Expressions.ExpressionContext.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Expressions.ExpressionContext.html",
+          "hash": "kebsxJvHmVfm4u3dDcf1oA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Expressions.ExpressionContextExtensions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Expressions.ExpressionContextExtensions.html",
+          "hash": "oFVab4gFJ49c6b67+6k7/w=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Expressions.ExpressionEvaluatorExtensions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Expressions.ExpressionEvaluatorExtensions.html",
+          "hash": "NxBYQQHEzt2vtoiaTP299A=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Expressions.ExpressionTypeProviderFactory.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Expressions.ExpressionTypeProviderFactory.html",
+          "hash": "Z49rwt9drWnXKiLdko4wAg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Expressions.GetValueResult.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Expressions.GetValueResult.html",
+          "hash": "DL0wKzzy6VQzUxJekHpPYQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Expressions.GlobalVariablesOnlyTalesValueForExpressionContextAdapter.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Expressions.GlobalVariablesOnlyTalesValueForExpressionContextAdapter.html",
+          "hash": "K5l7rispsIMMTB6pfiHTbg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Expressions.IEvaluatesExpression.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Expressions.IEvaluatesExpression.html",
+          "hash": "AoDWlLF3FaeaYtkcKL3krg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Expressions.IGetsAllVariablesFromContext.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Expressions.IGetsAllVariablesFromContext.html",
+          "hash": "2tAPpM7RiUEQvbg4aPdF7A=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Expressions.IGetsAlphabeticValueForNumber.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Expressions.IGetsAlphabeticValueForNumber.html",
+          "hash": "JLrTXsK5AeEMaqtroKAdtg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Expressions.IGetsBuiltinContextsProvider.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Expressions.IGetsBuiltinContextsProvider.html",
+          "hash": "AMbqEGrzRui0thJQd9Uarg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Expressions.IGetsDictionaryOfNamedTalesValues.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Expressions.IGetsDictionaryOfNamedTalesValues.html",
+          "hash": "XjYwM2J+J8aIYLlpzT1jjw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Expressions.IGetsEvaluatorForExpressionType.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Expressions.IGetsEvaluatorForExpressionType.html",
+          "hash": "W5O6zfIDQ4ug5NEPwvbniA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Expressions.IGetsExpressionType.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Expressions.IGetsExpressionType.html",
+          "hash": "tGx39ZevY37BIReOV7jp6Q=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Expressions.IGetsExpressionTypeProvider.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Expressions.IGetsExpressionTypeProvider.html",
+          "hash": "jFTk/WudSYsHdk0U5oL15g=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Expressions.IGetsNamedTalesValue.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Expressions.IGetsNamedTalesValue.html",
+          "hash": "Kl2qbL8tSzOpSCjRP/vmVQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Expressions.IGetsRomanNumeralForNumber.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Expressions.IGetsRomanNumeralForNumber.html",
+          "hash": "Ulf62s5dgIiAgI96+B8Esw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Expressions.IRegistersExpressionEvaluator.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Expressions.IRegistersExpressionEvaluator.html",
+          "hash": "mEMar5/n014M8BIc75JZIg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Expressions.IRemovesPrefixFromExpression.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Expressions.IRemovesPrefixFromExpression.html",
+          "hash": "ixkxhPKPkO8fCBWbo7BZ7A=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Expressions.LocalVariablesOnlyTalesValueForExpressionContextAdapter.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Expressions.LocalVariablesOnlyTalesValueForExpressionContextAdapter.html",
+          "hash": "d+9n3x8Yu4mhoo7HgP41oQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Expressions.NamedTalesValueForExpressionContextAdapter.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Expressions.NamedTalesValueForExpressionContextAdapter.html",
+          "hash": "qFgxMBxlEvogdA5JaSM8eQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Expressions.NoEvaluatorForExpressionTypeException.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Expressions.NoEvaluatorForExpressionTypeException.html",
+          "hash": "LV9JTmzzD19qG/zfeYqfjQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Expressions.NotExpressions.BooleanValueConverter.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Expressions.NotExpressions.BooleanValueConverter.html",
+          "hash": "HUPb027kmp2B6tJV/G09Eg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Expressions.NotExpressions.ICoercesValueToBoolean.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Expressions.NotExpressions.ICoercesValueToBoolean.html",
+          "hash": "zZ9DGW/fgZ7ZmSHht5C+qw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Expressions.NotExpressions.NotExpressionEvaluator.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Expressions.NotExpressions.NotExpressionEvaluator.html",
+          "hash": "aHLDYl/u2kZ1rc2igM4qmg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Expressions.NotExpressions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Expressions.NotExpressions.html",
+          "hash": "ZK16DkT965NAiF9Z1Rawdw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Expressions.PathExpressions.CannotParsePathException.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Expressions.PathExpressions.CannotParsePathException.html",
+          "hash": "YyGb32fTRm2lazWqqZM7qA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Expressions.PathExpressions.DecoratorBasedObjectValueProvider.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Expressions.PathExpressions.DecoratorBasedObjectValueProvider.html",
+          "hash": "izz62AUdCSXu/DQA753nBQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Expressions.PathExpressions.DefinedVariablesOnlyExpressionContextWrappingDecorator.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Expressions.PathExpressions.DefinedVariablesOnlyExpressionContextWrappingDecorator.html",
+          "hash": "zE9DgbE6cJHfr63UYpiEGw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Expressions.PathExpressions.DefinedVariablesOnlyPathExpressionEvaluator.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Expressions.PathExpressions.DefinedVariablesOnlyPathExpressionEvaluator.html",
+          "hash": "h5qh51go7uVcHhxU6THsgw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Expressions.PathExpressions.DynamicObjectValueProvider.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Expressions.PathExpressions.DynamicObjectValueProvider.html",
+          "hash": "7qwOVEFzCOiXiSLvxskKsQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Expressions.PathExpressions.EnumerableValueProvider.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Expressions.PathExpressions.EnumerableValueProvider.html",
+          "hash": "04MzbcL+JuMis4B3LHCoog=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Expressions.PathExpressions.ExpressionContextWrappingDecorator.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Expressions.PathExpressions.ExpressionContextWrappingDecorator.html",
+          "hash": "aLsdmLn/FUEy1iLq0lscYw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Expressions.PathExpressions.FailureValueProvider.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Expressions.PathExpressions.FailureValueProvider.html",
+          "hash": "VJ5547krPAVn7HpcF8Nn7w=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Expressions.PathExpressions.GlobalVariableOnlyExpressionContextWrappingDecorator.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Expressions.PathExpressions.GlobalVariableOnlyExpressionContextWrappingDecorator.html",
+          "hash": "qAr5B3pwCNTFrJ2PUwGCrA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Expressions.PathExpressions.GlobalVariablesOnlyPathExpressionEvaluator.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Expressions.PathExpressions.GlobalVariablesOnlyPathExpressionEvaluator.html",
+          "hash": "c6E8/E2H3Z/g8UZ3LQLEIQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Expressions.PathExpressions.IEvaluatesPathExpressionRequest.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Expressions.PathExpressions.IEvaluatesPathExpressionRequest.html",
+          "hash": "FljUCaThHewiim9QtuV5zw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Expressions.PathExpressions.IGetsPathWalkingExpressionEvaluator.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Expressions.PathExpressions.IGetsPathWalkingExpressionEvaluator.html",
+          "hash": "NWz783OE+wz6j8YYbl7CIA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Expressions.PathExpressions.IGetsValueFromObject.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Expressions.PathExpressions.IGetsValueFromObject.html",
+          "hash": "nkbrpciTEfxvs/cEZlUr7A=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Expressions.PathExpressions.IGetsValueFromReflection.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Expressions.PathExpressions.IGetsValueFromReflection.html",
+          "hash": "YyXXWLBwjVMBVpIQWTh4kw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Expressions.PathExpressions.IParsesPathExpression.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Expressions.PathExpressions.IParsesPathExpression.html",
+          "hash": "J7JQBpR4xHuxNnJjANqeyA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Expressions.PathExpressions.IWalksAndEvaluatesPathExpression.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Expressions.PathExpressions.IWalksAndEvaluatesPathExpression.html",
+          "hash": "ANgXFFY5YQijLiZeAgpzKg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Expressions.PathExpressions.IntegerKeyedDictionaryValueProvider.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Expressions.PathExpressions.IntegerKeyedDictionaryValueProvider.html",
+          "hash": "0x9jA5PH++aUoR23CgzxgQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Expressions.PathExpressions.LocalVariableOnlyExpressionContextWrappingDecorator.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Expressions.PathExpressions.LocalVariableOnlyExpressionContextWrappingDecorator.html",
+          "hash": "/X6kECQDWwPbvSEN64v3BQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Expressions.PathExpressions.LocalVariablesOnlyPathExpressionEvaluator.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Expressions.PathExpressions.LocalVariablesOnlyPathExpressionEvaluator.html",
+          "hash": "S10JgAIwdhBcVami9rea6A=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Expressions.PathExpressions.NamedTalesValueProvider.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Expressions.PathExpressions.NamedTalesValueProvider.html",
+          "hash": "GiIoNammZJknM08cEtMxuw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Expressions.PathExpressions.PathEvaluationContext.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Expressions.PathExpressions.PathEvaluationContext.html",
+          "hash": "K5/5IHDcYOVaYk0WsD+5Kg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Expressions.PathExpressions.PathExpression.AlternateExpression.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Expressions.PathExpressions.PathExpression.AlternateExpression.html",
+          "hash": "I6zZeQVl6cPiK/kBVeMing=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Expressions.PathExpressions.PathExpression.PathPart.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Expressions.PathExpressions.PathExpression.PathPart.html",
+          "hash": "MKSeUITOnqdVCP9JWwcPjQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Expressions.PathExpressions.PathExpression.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Expressions.PathExpressions.PathExpression.html",
+          "hash": "HlvakVXy9xgfa2Dk4fcHug=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Expressions.PathExpressions.PathExpressionEvaluationRequest.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Expressions.PathExpressions.PathExpressionEvaluationRequest.html",
+          "hash": "wQzN9wgCdkMLDXkck2afBw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Expressions.PathExpressions.PathExpressionEvaluator.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Expressions.PathExpressions.PathExpressionEvaluator.html",
+          "hash": "V0yIoLCnhtqz6wfp23+VmA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Expressions.PathExpressions.PathExpressionParser.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Expressions.PathExpressions.PathExpressionParser.html",
+          "hash": "nFpO/In3LP1/lrupcqBPsw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Expressions.PathExpressions.PathExpressionRequestEvaluator.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Expressions.PathExpressions.PathExpressionRequestEvaluator.html",
+          "hash": "1hmkmEY6gpmZun2ET3F3/A=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Expressions.PathExpressions.PathWalkingExpressionEvaluator.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Expressions.PathExpressions.PathWalkingExpressionEvaluator.html",
+          "hash": "4979h/qjJBuTPd4xIYOCng=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Expressions.PathExpressions.PathWalkingExpressionEvaluatorFactory.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Expressions.PathExpressions.PathWalkingExpressionEvaluatorFactory.html",
+          "hash": "PMjLLzujRm402iTkoDWBhw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Expressions.PathExpressions.ReflectionObjectValueProvider.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Expressions.PathExpressions.ReflectionObjectValueProvider.html",
+          "hash": "EGOG7cGMAhEC8XIVrmg67A=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Expressions.PathExpressions.ReflectionValueReader.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Expressions.PathExpressions.ReflectionValueReader.html",
+          "hash": "5uKpNptZQsPjrZQCt7yGUA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Expressions.PathExpressions.RootScopeLimitation.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Expressions.PathExpressions.RootScopeLimitation.html",
+          "hash": "cqKOp6vmbool8FSFBYGWRw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Expressions.PathExpressions.StringKeyedDictionaryValueProvider.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Expressions.PathExpressions.StringKeyedDictionaryValueProvider.html",
+          "hash": "q4gBlsIJgjjrT20JDmWoFA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Expressions.PathExpressions.TemplateDirectoryValueProvider.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Expressions.PathExpressions.TemplateDirectoryValueProvider.html",
+          "hash": "FD8ADtUtfIXt4h5Bpd3F7g=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Expressions.PathExpressions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Expressions.PathExpressions.html",
+          "hash": "fHihKmAjdxZ2ccby6YzqBA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Expressions.PipeExpressions.CannotParsePipeExpressionException.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Expressions.PipeExpressions.CannotParsePipeExpressionException.html",
+          "hash": "pRD3iAv29+3tak3Q1X+MYg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Expressions.PipeExpressions.IEvaluatesPipeDelegate.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Expressions.PipeExpressions.IEvaluatesPipeDelegate.html",
+          "hash": "xYyqOjdE7RqLaHfZRoyy6w=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Expressions.PipeExpressions.PipeDelegateExecutor.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Expressions.PipeExpressions.PipeDelegateExecutor.html",
+          "hash": "AP/tpNXliA5qWs7t3f+TMQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Expressions.PipeExpressions.PipeExpressionEvaluator.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Expressions.PipeExpressions.PipeExpressionEvaluator.html",
+          "hash": "JBv5ojIIRpjTNORzFiePog=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Expressions.PipeExpressions.PipeExpressionException.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Expressions.PipeExpressions.PipeExpressionException.html",
+          "hash": "778Lr6kEHIeKvyN4A/kvnw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Expressions.PipeExpressions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Expressions.PipeExpressions.html",
+          "hash": "oa6PnWrGSNgoDuTwn7jv6g=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Expressions.PrefixExpressionTypeProvider.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Expressions.PrefixExpressionTypeProvider.html",
+          "hash": "/c1vZDItE7VAHwZQCKwQmQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Expressions.PythonExpressions.ClassDefinitionScript.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Expressions.PythonExpressions.ClassDefinitionScript.html",
+          "hash": "oqMS6ZKJROHnqxQZy+FxjA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Expressions.PythonExpressions.ClassDefinitionScriptFactory.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Expressions.PythonExpressions.ClassDefinitionScriptFactory.html",
+          "hash": "/ukpVuSY6Rhd7wAxHHyr8A=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Expressions.PythonExpressions.IEvaluatesPythonExpression.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Expressions.PythonExpressions.IEvaluatesPythonExpression.html",
+          "hash": "0rB8qQtJNcYclJNwaNB6Dg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Expressions.PythonExpressions.IGetsClassDefinitionScript.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Expressions.PythonExpressions.IGetsClassDefinitionScript.html",
+          "hash": "1V25bGUXCI8mIlfnH/33Nw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Expressions.PythonExpressions.IGetsScriptEngine.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Expressions.PythonExpressions.IGetsScriptEngine.html",
+          "hash": "poK7yUeZ3H+7U2qXZBQskg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Expressions.PythonExpressions.IronPythonScriptEngineContainer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Expressions.PythonExpressions.IronPythonScriptEngineContainer.html",
+          "hash": "x3xbawFAkvTazUbtty8MYA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Expressions.PythonExpressions.PythonExpressionEvaluator.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Expressions.PythonExpressions.PythonExpressionEvaluator.html",
+          "hash": "/3LDeoU0MTyuGwt3sNCV2g=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Expressions.PythonExpressions.ScriptEngineEvaluator.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Expressions.PythonExpressions.ScriptEngineEvaluator.html",
+          "hash": "eTdcLSbR7N746TXbuEv2jw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Expressions.PythonExpressions.Variable.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Expressions.PythonExpressions.Variable.html",
+          "hash": "vmZKA+lVCuqIEtJJXslpOA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Expressions.PythonExpressions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Expressions.PythonExpressions.html",
+          "hash": "D6ekeE86rO1i5ERrc27JFg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Expressions.RegistryBasedExpressionEvaluator.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Expressions.RegistryBasedExpressionEvaluator.html",
+          "hash": "jILOgXMnRV/k/bTQylTI4A=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Expressions.RepetitionInfo.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Expressions.RepetitionInfo.html",
+          "hash": "BE/vrfq/ZtGvCsqOCG6YNw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Expressions.RomanNumeralGenerator.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Expressions.RomanNumeralGenerator.html",
+          "hash": "8Yrc+C4KV0njF8OPCSDpWQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Expressions.RootContextConfigHelper.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Expressions.RootContextConfigHelper.html",
+          "hash": "pYvrdHkIi9oMPGI4cjzTbQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Expressions.StringExpressions.StringExpressionEvaluator.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Expressions.StringExpressions.StringExpressionEvaluator.html",
+          "hash": "mAnvbJv6u/li9aMTO5u5UA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Expressions.StringExpressions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Expressions.StringExpressions.html",
+          "hash": "L3YQIU25wvhwZ2/J33lw9w=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Expressions.StructureExpressions.StructureExpressionEvaluator.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Expressions.StructureExpressions.StructureExpressionEvaluator.html",
+          "hash": "7M3Qe9AsF2WN7xt33tJVPg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Expressions.StructureExpressions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Expressions.StructureExpressions.html",
+          "hash": "i1FBTjxSOIKZxBFatAVw/Q=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Expressions.StructuredMarkupObjectAdapter.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Expressions.StructuredMarkupObjectAdapter.html",
+          "hash": "f5GVft0JfM7h7pkuGoFguw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Expressions.WellKnownExpressionPrefix.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Expressions.WellKnownExpressionPrefix.html",
+          "hash": "AyPOrcNacw1GSoXTqfRgjw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Expressions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Expressions.html",
+          "hash": "1G3TUJkpUCgdjkhNqUom1A=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.HapHostingBuilderExtensions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.HapHostingBuilderExtensions.html",
+          "hash": "hvkdI1UJAAOfztF3oqMbAQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Hosting.EnvironmentRegistry.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Hosting.EnvironmentRegistry.html",
+          "hash": "JQJ+MWdclpGKTGQ7iRjQ2A=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Hosting.HostingBuilder.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Hosting.HostingBuilder.html",
+          "hash": "gJaCMdb+G1IA/HKr6l888g=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Hosting.IBuildsHostingEnvironment.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Hosting.IBuildsHostingEnvironment.html",
+          "hash": "JCTKmoy/aLyn7CLks5iFlA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Hosting.IHostsZptSharp.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Hosting.IHostsZptSharp.html",
+          "hash": "n8Dpn3urvvvG0yKfxODixA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Hosting.ZptSharpSelfHoster.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Hosting.ZptSharpSelfHoster.html",
+          "hash": "vrr5TfOuhCxAVph5kO44CA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Hosting.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Hosting.html",
+          "hash": "7/8U4IvJSa2f9YFKn2Pd+w=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.IConfiguresRootContext.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.IConfiguresRootContext.html",
+          "hash": "e3Nj9x1n48t/8NsMU6makA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.IGetsStructuredMarkup.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.IGetsStructuredMarkup.html",
+          "hash": "rRs7REVxr7lrTl/wwAumjQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.IRendersZptDocument.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.IRendersZptDocument.html",
+          "hash": "3hnataa/TWlXJ/GOoDqjfA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.IRendersZptFile.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.IRendersZptFile.html",
+          "hash": "Z3izqR8mGL9goAG6XlvQ0w=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.IWritesStreamToTextWriter.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.IWritesStreamToTextWriter.html",
+          "hash": "zewM+4Infhp3S4O2z9geFQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Metal.AddDefinedMacroToGlobalScopeProcessorDecorator.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Metal.AddDefinedMacroToGlobalScopeProcessorDecorator.html",
+          "hash": "rlNXc9nRJAN3uqGndHNacQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Metal.IExpandsMacro.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Metal.IExpandsMacro.html",
+          "hash": "mBv62lrS3KCk/ZnALW86xQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Metal.IFillsSlots.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Metal.IFillsSlots.html",
+          "hash": "/9aE79v6VTSDD3opQFR98g=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Metal.IGetsMacro.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Metal.IGetsMacro.html",
+          "hash": "DAol4fGyzgalxReOr/bbyA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Metal.IGetsMetalAttributeSpecs.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Metal.IGetsMetalAttributeSpecs.html",
+          "hash": "WjvuWKM1/iO5UVuau29rew=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Metal.IGetsMetalContextProcessor.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Metal.IGetsMetalContextProcessor.html",
+          "hash": "amYJwX0DFYBh2ARaw8AhoQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Metal.IGetsMetalDocumentAdapter.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Metal.IGetsMetalDocumentAdapter.html",
+          "hash": "r8voHaOzcrt9Nz0p+nTQkQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Metal.IGetsSlots.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Metal.IGetsSlots.html",
+          "hash": "oR9UGCXSRbqLrrIu1PhOCQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Metal.IProvidesMacros.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Metal.IProvidesMacros.html",
+          "hash": "6k+lmXt/YF+21kF6/EcacQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Metal.MacroExpander.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Metal.MacroExpander.html",
+          "hash": "PQvTEqGlTac0LPOCyjAy8w=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Metal.MacroExpansionContext.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Metal.MacroExpansionContext.html",
+          "hash": "VoQ1TyAE+XV9s1r9AjeNFg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Metal.MacroNotFoundException.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Metal.MacroNotFoundException.html",
+          "hash": "eYxSRvJGs8fN/vJmm0CHaw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Metal.MacroProvider.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Metal.MacroProvider.html",
+          "hash": "e+Iy4jcHWgJg/e13othpbw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Metal.MacroUsageContextProcessor.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Metal.MacroUsageContextProcessor.html",
+          "hash": "KBuiSGKJ9l4EVbR6UXj8ZA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Metal.MetalAttributeSpecProvider.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Metal.MetalAttributeSpecProvider.html",
+          "hash": "SbWIt9nsSXGV+SiSW46pXA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Metal.MetalContextProcessorFactory.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Metal.MetalContextProcessorFactory.html",
+          "hash": "UaQeDMFJWffblUD/wCrWYg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Metal.MetalDocumentAdapter.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Metal.MetalDocumentAdapter.html",
+          "hash": "+/XBq/B3HBPwh2K3syv68g=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Metal.MetalDocumentAdapterFactory.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Metal.MetalDocumentAdapterFactory.html",
+          "hash": "diBu5/J9Fqhq1iOksZYknQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Metal.MetalMacro.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Metal.MetalMacro.html",
+          "hash": "Uln6BjiRwT36+5h4xFwVUw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Metal.Slot.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Metal.Slot.html",
+          "hash": "GgLegJuCjWnZ6LBhrlpU1Q=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Metal.SlotFiller.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Metal.SlotFiller.html",
+          "hash": "/M2LB39qTFeSrFJCsDKFzg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Metal.SlotFinder.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Metal.SlotFinder.html",
+          "hash": "7czXbIyCeRuxLkKXhuZa7w=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Metal.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Metal.html",
+          "hash": "22Pwtpiwl5Vqbi4phI02Eg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Mvc5.FileExistenceTester.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Mvc5.FileExistenceTester.html",
+          "hash": "GZKpPIY9xey01XNgWVH0dA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Mvc5.FindViewResult.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Mvc5.FindViewResult.html",
+          "hash": "NALtnJjCCstwmWfaNZ3+eA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Mvc5.IFindsView.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Mvc5.IFindsView.html",
+          "hash": "xotM3WUQlQq4FnLVx3CMZQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Mvc5.IGetsErrorStream.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Mvc5.IGetsErrorStream.html",
+          "hash": "RxRk0nBKdXHDTgWdBRLCPg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Mvc5.IGetsMvcRenderingConfig.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Mvc5.IGetsMvcRenderingConfig.html",
+          "hash": "u/38mRkuMOyA8fhJ86PB5A=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Mvc5.IMapsLocation.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Mvc5.IMapsLocation.html",
+          "hash": "z7S22KgIyUgWBRNfzFHBYQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Mvc5.ITestForFileExistence.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Mvc5.ITestForFileExistence.html",
+          "hash": "3pNOnJKIBgLCa1ngT383sg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Mvc5.MvcContextBuilderProvider.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Mvc5.MvcContextBuilderProvider.html",
+          "hash": "ErJBh13Snp9iCKZWa7sdrQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Mvc5.MvcContextBuilderProviderBase.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Mvc5.MvcContextBuilderProviderBase.html",
+          "hash": "mP6e86zYNmz5+F1Grc9bfw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Mvc5.MvcRenderingConfigProvider.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Mvc5.MvcRenderingConfigProvider.html",
+          "hash": "wXYwEs22lAOqCPHXsPyWVw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Mvc5.ServerLocationMapper.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Mvc5.ServerLocationMapper.html",
+          "hash": "PziqTLu7GXYVErsmfQRGVg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Mvc5.ViewFinder.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Mvc5.ViewFinder.html",
+          "hash": "LIYwgbn+g+/Y+0jrdK2HYw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Mvc5.ZptSharpErrorView.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Mvc5.ZptSharpErrorView.html",
+          "hash": "/h0ITwDiqNZDaq3/vzwXmg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Mvc5.ZptSharpView.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Mvc5.ZptSharpView.html",
+          "hash": "53y4k44rJnymAYK0FwyjOw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Mvc5.ZptSharpViewEngine.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Mvc5.ZptSharpViewEngine.html",
+          "hash": "rwkLayN50QfYFn5hMylPVA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Mvc5.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Mvc5.html",
+          "hash": "spnKZ3aBdoGQOV064ScdMQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.MvcCore.FileExistenceTester.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.MvcCore.FileExistenceTester.html",
+          "hash": "uu2/2nfFu2LsvN0WCumq2A=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.MvcCore.FindViewResult.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.MvcCore.FindViewResult.html",
+          "hash": "bJYiJtZUFFVeNlGti6xj2A=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.MvcCore.IFindsView.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.MvcCore.IFindsView.html",
+          "hash": "n+NdPOl+qLqRRpTN00Q9Ew=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.MvcCore.IGetsErrorStream.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.MvcCore.IGetsErrorStream.html",
+          "hash": "nbA0h0dxC3OiWBTwtICN1Q=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.MvcCore.IGetsMvcRenderingConfig.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.MvcCore.IGetsMvcRenderingConfig.html",
+          "hash": "2AAgXD4dnvW1hHoXFTLHJQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.MvcCore.IMapsLocation.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.MvcCore.IMapsLocation.html",
+          "hash": "OYK5PFae+UUnd0Aijyqf6Q=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.MvcCore.ITestForFileExistence.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.MvcCore.ITestForFileExistence.html",
+          "hash": "Rym/Qyqfy7Fm3mE/NRgGJA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.MvcCore.MvcContextBuilderProvider.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.MvcCore.MvcContextBuilderProvider.html",
+          "hash": "zZ7mEG17dBCYohJT/xilcg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.MvcCore.MvcContextBuilderProviderBase.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.MvcCore.MvcContextBuilderProviderBase.html",
+          "hash": "p3u6n4+I3JfbXVnOQYgEGQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.MvcCore.MvcRenderingConfigProvider.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.MvcCore.MvcRenderingConfigProvider.html",
+          "hash": "lXPPjTryMSVs1H8Ci3qrmg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.MvcCore.NoOpLocationMapper.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.MvcCore.NoOpLocationMapper.html",
+          "hash": "rJwhNv2gTjdm0bPuxxz7FA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.MvcCore.ViewFinder.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.MvcCore.ViewFinder.html",
+          "hash": "QhM2awfp7NfxtwFNXlC/yA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.MvcCore.ZptSharpErrorView.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.MvcCore.ZptSharpErrorView.html",
+          "hash": "yK3PhfZnwJmj5u9zMaMlYw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.MvcCore.ZptSharpView.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.MvcCore.ZptSharpView.html",
+          "hash": "bb75Di7CKKIZZxjx7JNd8Q=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.MvcCore.ZptSharpViewEngine.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.MvcCore.ZptSharpViewEngine.html",
+          "hash": "LeY5o/7Jp3RcVpbRrw5qGQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.MvcCore.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.MvcCore.html",
+          "hash": "fUs0QCRZMjAX2O4TBzf8wg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.NoMatchingReaderWriterException.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.NoMatchingReaderWriterException.html",
+          "hash": "dDGs3d6Yuq9KQh5TdzsC0w=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.PythonHostingBuilderExtensions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.PythonHostingBuilderExtensions.html",
+          "hash": "XrjAEqtmWHJXZfiJuABStA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Rendering.EffectiveConfigSettingZptDocumentRendererDecorator.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Rendering.EffectiveConfigSettingZptDocumentRendererDecorator.html",
+          "hash": "uZuqIyOZBK2L/g3RN2C/qQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Rendering.ExpressionContextFactory.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Rendering.ExpressionContextFactory.html",
+          "hash": "IWYBaNx9S2oWOi1Rkss9Lw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Rendering.ExpressionContextIterativeProcessor.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Rendering.ExpressionContextIterativeProcessor.html",
+          "hash": "t0KHRnPXdxgj1Hw9LEYxCQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Rendering.ExpressionContextProcessingResult.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Rendering.ExpressionContextProcessingResult.html",
+          "hash": "THaCX+HXoI6sjJLe0NG1vQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Rendering.FileSourceInfo.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Rendering.FileSourceInfo.html",
+          "hash": "iOAkC3Fh3IEobt6VH2shHg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Rendering.IDocumentSourceInfo.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Rendering.IDocumentSourceInfo.html",
+          "hash": "2JsXum3UA73gT0CgV7pDZg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Rendering.IGetsChildExpressionContexts.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Rendering.IGetsChildExpressionContexts.html",
+          "hash": "6PBAhbG//ovuVrVhhWyaMQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Rendering.IGetsDocumentModifier.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Rendering.IGetsDocumentModifier.html",
+          "hash": "aGct6Mw5npwsjoz5f+N4AQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Rendering.IGetsIterativeExpressionContextProcessor.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Rendering.IGetsIterativeExpressionContextProcessor.html",
+          "hash": "GhWlmPrp0X+8yF5JXOVIkA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Rendering.IGetsRootExpressionContext.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Rendering.IGetsRootExpressionContext.html",
+          "hash": "NbHSJ072uJwt6gPCiGyWRw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Rendering.IGetsZptDocumentRenderer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Rendering.IGetsZptDocumentRenderer.html",
+          "hash": "FlazExT3fyKry6d6rt/AQw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Rendering.IGetsZptDocumentRendererForFilePath.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Rendering.IGetsZptDocumentRendererForFilePath.html",
+          "hash": "SJHK/MF6EESTTMc4bteXaQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Rendering.IGetsZptNodeAndAttributeRemovalContextProcessor.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Rendering.IGetsZptNodeAndAttributeRemovalContextProcessor.html",
+          "hash": "p7L0kDQyF/ndxUbuiWgkqw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Rendering.IHandlesProcessingError.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Rendering.IHandlesProcessingError.html",
+          "hash": "qQR+1GZt2PQ8M2ryxe6lEQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Rendering.IHasContainer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Rendering.IHasContainer.html",
+          "hash": "wVPXlm8PgCbAurpQwHd77A=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Rendering.IIterativelyModifiesDocument.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Rendering.IIterativelyModifiesDocument.html",
+          "hash": "z5ocOJaxobkn2Fn4mNhDEA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Rendering.IIterativelyProcessesExpressionContexts.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Rendering.IIterativelyProcessesExpressionContexts.html",
+          "hash": "1iqxdLY7GWa8vsPZDgxHaA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Rendering.IModifiesDocument.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Rendering.IModifiesDocument.html",
+          "hash": "KdNeYqY5DhoAVV7N2LIy5g=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Rendering.IProcessesExpressionContext.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Rendering.IProcessesExpressionContext.html",
+          "hash": "h/7+2UvUi5DVskFCuKm7xA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Rendering.IterativeDocumentModifier.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Rendering.IterativeDocumentModifier.html",
+          "hash": "Q6urV9ph11seOYLaePxevQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Rendering.IterativeExpressionContextProcessorFactory.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Rendering.IterativeExpressionContextProcessorFactory.html",
+          "hash": "V6BZREknNJQ1Kbrxy2EcgA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Rendering.MetalDocumentModifierDecorator.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Rendering.MetalDocumentModifierDecorator.html",
+          "hash": "wejLGahAvWmLPIbOI7/N9Q=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Rendering.NoOpDocumentModifier.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Rendering.NoOpDocumentModifier.html",
+          "hash": "LwK6o8zWzTTpajjWBWkpxw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Rendering.NodeSourceInfo.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Rendering.NodeSourceInfo.html",
+          "hash": "6rjD8+cAAFX9Sd4ZNCrYKQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Rendering.OtherSourceInfo.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Rendering.OtherSourceInfo.html",
+          "hash": "5C/vzdB30xiSQ4VHwA63fw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Rendering.RemoveZptAttributesModifierDecorator.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Rendering.RemoveZptAttributesModifierDecorator.html",
+          "hash": "UoIs1jxwV2fSHegqxXKTFg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Rendering.SourceAnnotationDocumentModifierDecorator.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Rendering.SourceAnnotationDocumentModifierDecorator.html",
+          "hash": "wwg7Sz0h9BvfgqBaxcRzRw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Rendering.TagType.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Rendering.TagType.html",
+          "hash": "LvEL712mZGN/tDQaHBeaGA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Rendering.TalDocumentModifierDecorator.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Rendering.TalDocumentModifierDecorator.html",
+          "hash": "cqo9x19wFG1U19wHQNYKEA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Rendering.UnknownSourceInfo.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Rendering.UnknownSourceInfo.html",
+          "hash": "x2tgBJF/ngNiKD3yuZ+p+A=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Rendering.ZptCleanupContextProcessor.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Rendering.ZptCleanupContextProcessor.html",
+          "hash": "cDC01Lweo45ne4JG8aiCmg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Rendering.ZptCleanupContextProcessorFactory.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Rendering.ZptCleanupContextProcessorFactory.html",
+          "hash": "BV0tnUH+TMj3T+sKb6eEbg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Rendering.ZptDocumentModifierFactory.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Rendering.ZptDocumentModifierFactory.html",
+          "hash": "wCOt7jGZLkLzV0DKT7WUgg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Rendering.ZptDocumentRenderer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Rendering.ZptDocumentRenderer.html",
+          "hash": "r9i0l7iNNW2nJ78NfOkHqQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Rendering.ZptDocumentRendererFactory.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Rendering.ZptDocumentRendererFactory.html",
+          "hash": "p6aHj0w8ygO++q1Ysapq3w=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Rendering.ZptDocumentRendererForFilePathFactory.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Rendering.ZptDocumentRendererForFilePathFactory.html",
+          "hash": "IxCHDBSuavoEnAvChOX6Lg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Rendering.ZptRequestLoggingScope.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Rendering.ZptRequestLoggingScope.html",
+          "hash": "BMkTK8uRVQC16wZjIzFd6g=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Rendering.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Rendering.html",
+          "hash": "TviG1lM5UqvQ08c2ly7DcA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.SourceAnnotation.AnnotationProvider.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.SourceAnnotation.AnnotationProvider.html",
+          "hash": "pBtRwM7EhSAStN+/SQIoLg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.SourceAnnotation.Commenter.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.SourceAnnotation.Commenter.html",
+          "hash": "Ef+MbJ6vazGX3EJ4acpfuw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.SourceAnnotation.IAddsComment.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.SourceAnnotation.IAddsComment.html",
+          "hash": "3eWUOeMZ+f1fjzMh9KMTIg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.SourceAnnotation.IGetsAnnotationForNode.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.SourceAnnotation.IGetsAnnotationForNode.html",
+          "hash": "ptpTYWg6JBsTWiDjg3M+cg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.SourceAnnotation.IGetsSourceAnnotationContextProcessor.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.SourceAnnotation.IGetsSourceAnnotationContextProcessor.html",
+          "hash": "IynA3Ns0UMF6REEqjtk0/Q=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.SourceAnnotation.IGetsSourceAnnotationString.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.SourceAnnotation.IGetsSourceAnnotationString.html",
+          "hash": "iYtugn84eCyxo7aYZHVTSQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.SourceAnnotation.SourceAnnotationContextProcessor.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.SourceAnnotation.SourceAnnotationContextProcessor.html",
+          "hash": "Of2tsNS1XJuhrzlrEcGRww=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.SourceAnnotation.SourceAnnotationContextProcessorFactory.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.SourceAnnotation.SourceAnnotationContextProcessorFactory.html",
+          "hash": "IR1zYBK1JVcsLd3+9/LO/g=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.SourceAnnotation.SourceAnnotationStringProvider.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.SourceAnnotation.SourceAnnotationStringProvider.html",
+          "hash": "YqTAkWRw/R3puguJL4YdUA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.SourceAnnotation.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.SourceAnnotation.html",
+          "hash": "6Cfsavc6QO0IlEVi9Gtd3w=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.StreamToTextWriterCopier.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.StreamToTextWriterCopier.html",
+          "hash": "ru/tb26kfiyFzqv++wJ62w=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Tal.AttributeDefinition.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Tal.AttributeDefinition.html",
+          "hash": "rmowFNSedcDxG7LrTuY0lA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Tal.AttributeDefinitionsProvider.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Tal.AttributeDefinitionsProvider.html",
+          "hash": "R6frTeJR4ago2185d95KQQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Tal.AttributesAttributeDecorator.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Tal.AttributesAttributeDecorator.html",
+          "hash": "ndCc6KOHAlq0UJRj2lDh/Q=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Tal.ConditionAttributeDecorator.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Tal.ConditionAttributeDecorator.html",
+          "hash": "a+9q6oHQdezlxIc4/BJu2g=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Tal.ContentOrReplaceAttributeDecorator.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Tal.ContentOrReplaceAttributeDecorator.html",
+          "hash": "flTCoVnXmuczaQSfI/9A4A=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Tal.DefineAttributeDecorator.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Tal.DefineAttributeDecorator.html",
+          "hash": "/vHl9IJyZAryop3yNObm3A=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Tal.DomExpressionEvaluator.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Tal.DomExpressionEvaluator.html",
+          "hash": "uRDrcCUzZ5Pwh96azfkQQg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Tal.DomValueExpressionResult.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Tal.DomValueExpressionResult.html",
+          "hash": "duJ6Qa3080ht27OKzpQUXA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Tal.IEvaluatesDomValueExpression.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Tal.IEvaluatesDomValueExpression.html",
+          "hash": "zjEifLCN9X0uKI72qxKlZQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Tal.IGetsAttributeDefinitions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Tal.IGetsAttributeDefinitions.html",
+          "hash": "3Hm9DkckquS23bWac1puWA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Tal.IGetsRepetitionContexts.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Tal.IGetsRepetitionContexts.html",
+          "hash": "CipSZ3CQTp/IJpkGjTG+bQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Tal.IGetsTalAttributeSpecs.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Tal.IGetsTalAttributeSpecs.html",
+          "hash": "IzkaMAqVpmX7PJBZadx/pQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Tal.IGetsTalContextProcessor.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Tal.IGetsTalContextProcessor.html",
+          "hash": "0waU1l2zrG3PyfgcZsFs5A=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Tal.IGetsVariableDefinitionsFromAttributeValue.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Tal.IGetsVariableDefinitionsFromAttributeValue.html",
+          "hash": "uVRwC2JUCIKACJAaB6dcTA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Tal.IInterpretsExpressionResult.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Tal.IInterpretsExpressionResult.html",
+          "hash": "DP9ZCxrV4wF0AIMk2M+hvA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Tal.InvalidTalAttributeException.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Tal.InvalidTalAttributeException.html",
+          "hash": "Cv5qqNUmI4ur6AzoDR+eXQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Tal.NoOpTalContextProcessor.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Tal.NoOpTalContextProcessor.html",
+          "hash": "28plYJ+6u4lA8on4NcaS1A=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Tal.OmitTagAttributeDecorator.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Tal.OmitTagAttributeDecorator.html",
+          "hash": "FR/eOrRSW48FCslzgsnEIQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Tal.OnErrorAttributeDecorator.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Tal.OnErrorAttributeDecorator.html",
+          "hash": "DST2L27gzLTvmquq+0XUJg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Tal.OnErrorExceptionAdapter.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Tal.OnErrorExceptionAdapter.html",
+          "hash": "PB/cyKhTXNW+fF0REOtXYw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Tal.OnErrorHandlingException.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Tal.OnErrorHandlingException.html",
+          "hash": "/VknX3PrL7OLxkMavKCUvg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Tal.RecordMetalMacroNameDecorator.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Tal.RecordMetalMacroNameDecorator.html",
+          "hash": "Bit1wzhbByDEmtBVyMK+Vw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Tal.RepeatAttributeDecorator.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Tal.RepeatAttributeDecorator.html",
+          "hash": "vG22i+aqb+PjOLqA3cfPrQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Tal.RepetitionContextProvider.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Tal.RepetitionContextProvider.html",
+          "hash": "hZqy7yVipWe/iIOzqXgCmQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Tal.TalAttributeSpecProvider.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Tal.TalAttributeSpecProvider.html",
+          "hash": "LHfaH0Y3uqQ32r5lAtN2lw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Tal.TalContextProcessorFactory.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Tal.TalContextProcessorFactory.html",
+          "hash": "WMghb6IQbxkyFDLlhitaEw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Tal.TalExpressionEvaluationException.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Tal.TalExpressionEvaluationException.html",
+          "hash": "ZGZRa+s8MQZwJecLRSU/5g=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Tal.TalExpressionResultInterpreter.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Tal.TalExpressionResultInterpreter.html",
+          "hash": "5l4DlSXw7hO+AXpyfgpRRg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Tal.VariableDefinition.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Tal.VariableDefinition.html",
+          "hash": "h2TIupd+PEVsynTNU5+Cig=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Tal.VariableDefinitionProvider.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Tal.VariableDefinitionProvider.html",
+          "hash": "L1HL0MZsK/oRSFwsbPa5FA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.Tal.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.Tal.html",
+          "hash": "pmU33D8xoqt6IivL6t7cpw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.TemplateDirectory.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.TemplateDirectory.html",
+          "hash": "2nHEZTo1zut799ZmFAS04w=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.XmlHostingBuilderExtensions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.XmlHostingBuilderExtensions.html",
+          "hash": "LxGNgSuinVpdJeNjJbHdKw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.ZptFileRenderer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.ZptFileRenderer.html",
+          "hash": "q4W1ET1qMIhNjNVSjRhFRg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.ZptRenderingException.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.ZptRenderingException.html",
+          "hash": "Sym+o35sQi4JIaI1+Lx98A=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.ZptSharpHost.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.ZptSharpHost.html",
+          "hash": "ewgfG5TTUBlATjgHZ/vdHA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.ZptSharpHostingBuilderExtensions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.ZptSharpHostingBuilderExtensions.html",
+          "hash": "b0JA7EvYcG1U6SnA0Lk/pA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.ZptSharpServiceCollectionExtensions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.ZptSharpServiceCollectionExtensions.html",
+          "hash": "PahRuxC0VMo5V2+4Xkokqw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ZptSharp.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ZptSharp.html",
+          "hash": "TCXNV9wCEvxnNU3olF+C0Q=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "api/index.md",
+      "output": {
+        ".html": {
+          "relative_path": "api/index.html",
+          "hash": "LJSmbl8NWXK2TBazR+fVxQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Toc",
+      "source_relative_path": "api/toc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/toc.html",
+          "hash": "LE+Av22UfSIyNZyTOqVe7A=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "articles/Architecture.md",
+      "output": {
+        ".html": {
+          "relative_path": "articles/Architecture.html",
+          "hash": "mOU1boFBaHgolC+lJAHqRw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "articles/BuildAndTest.md",
+      "output": {
+        ".html": {
+          "relative_path": "articles/BuildAndTest.html",
+          "hash": "NcBh4CYll8aXAi2ypn42hw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "articles/CliRenderer.md",
+      "output": {
+        ".html": {
+          "relative_path": "articles/CliRenderer.html",
+          "hash": "K5dUwMUQQa3yeXjXhQDbIA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "articles/Compatibility.md",
+      "output": {
+        ".html": {
+          "relative_path": "articles/Compatibility.html",
+          "hash": "bt5QESXGeLLnIW29g4kOfg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "articles/Contributing.md",
+      "output": {
+        ".html": {
+          "relative_path": "articles/Contributing.html",
+          "hash": "VsiFznVZYXM9pAQodoHekQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "articles/FurtherTestingInfo.md",
+      "output": {
+        ".html": {
+          "relative_path": "articles/FurtherTestingInfo.html",
+          "hash": "voT3/9MCHLOI8vudFEuqzQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "articles/Logging.md",
+      "output": {
+        ".html": {
+          "relative_path": "articles/Logging.html",
+          "hash": "GSgwBk3sm8sWDvxYUbS5MA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "articles/NuGetPackages.md",
+      "output": {
+        ".html": {
+          "relative_path": "articles/NuGetPackages.html",
+          "hash": "cfv4MDqa4Asx0N0WKS2Xuw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "articles/QuickStart/CliApp.md",
+      "output": {
+        ".html": {
+          "relative_path": "articles/QuickStart/CliApp.html",
+          "hash": "6ynxLdPb1aEyofPTfl0Ukg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "articles/QuickStart/ConsumingTheApi.md",
+      "output": {
+        ".html": {
+          "relative_path": "articles/QuickStart/ConsumingTheApi.html",
+          "hash": "LWZRFBemm5ASMX5ipDbeRA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "articles/QuickStart/Mvc5.md",
+      "output": {
+        ".html": {
+          "relative_path": "articles/QuickStart/Mvc5.html",
+          "hash": "w8QRC2YLcEttqh0ipbrBQg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "articles/QuickStart/MvcCore.md",
+      "output": {
+        ".html": {
+          "relative_path": "articles/QuickStart/MvcCore.html",
+          "hash": "+iG4e7/gxGR+bnGAIYV+EQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "articles/QuickStart/index.md",
+      "output": {
+        ".html": {
+          "relative_path": "articles/QuickStart/index.html",
+          "hash": "PyH43bbguE6eQaOeAV6Xog=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "articles/ViewEngines.md",
+      "output": {
+        ".html": {
+          "relative_path": "articles/ViewEngines.html",
+          "hash": "BYiidoEnq5syBLEwE1ksbA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "articles/WhatIsZptSharp.md",
+      "output": {
+        ".html": {
+          "relative_path": "articles/WhatIsZptSharp.html",
+          "hash": "knAOWnZ71O+AOJGO57XXQg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "articles/WritingDocumentProviders.md",
+      "output": {
+        ".html": {
+          "relative_path": "articles/WritingDocumentProviders.html",
+          "hash": "zndAyOgIJs51fxBk4QDcFw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "articles/WritingExpressionEvaluators.md",
+      "output": {
+        ".html": {
+          "relative_path": "articles/WritingExpressionEvaluators.html",
+          "hash": "iBB5HZkUoZ9B1okyWnThmg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "articles/ZptReference/Index.md",
+      "output": {
+        ".html": {
+          "relative_path": "articles/ZptReference/Index.html",
+          "hash": "gsrGnhgDQMc2kRSx1gZ5AQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "articles/ZptReference/Metal/DefineMacro.md",
+      "output": {
+        ".html": {
+          "relative_path": "articles/ZptReference/Metal/DefineMacro.html",
+          "hash": "kC0TwVyiiko+0kJQ03Qf3Q=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "articles/ZptReference/Metal/DefineSlot.md",
+      "output": {
+        ".html": {
+          "relative_path": "articles/ZptReference/Metal/DefineSlot.html",
+          "hash": "lBl+XVgAPoCR6ovur/TM3w=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "articles/ZptReference/Metal/ExtendMacro.md",
+      "output": {
+        ".html": {
+          "relative_path": "articles/ZptReference/Metal/ExtendMacro.html",
+          "hash": "sxnX5nKHuHhoiAld5B7fXg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "articles/ZptReference/Metal/FillSlot.md",
+      "output": {
+        ".html": {
+          "relative_path": "articles/ZptReference/Metal/FillSlot.html",
+          "hash": "NSEWBhGzt9Z6JOA56fn0kg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "articles/ZptReference/Metal/UseMacro.md",
+      "output": {
+        ".html": {
+          "relative_path": "articles/ZptReference/Metal/UseMacro.html",
+          "hash": "KASbwp4g3/ZybZxprB4tjA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "articles/ZptReference/Tal/Attributes.md",
+      "output": {
+        ".html": {
+          "relative_path": "articles/ZptReference/Tal/Attributes.html",
+          "hash": "jO//Q1a/++HtgJUOdRZr5Q=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "articles/ZptReference/Tal/Condition.md",
+      "output": {
+        ".html": {
+          "relative_path": "articles/ZptReference/Tal/Condition.html",
+          "hash": "kA6+3fK4FHZnVKlIHpZ1XQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "articles/ZptReference/Tal/ContentAndReplace.md",
+      "output": {
+        ".html": {
+          "relative_path": "articles/ZptReference/Tal/ContentAndReplace.html",
+          "hash": "W8QVopKxKDOZ6O6vw5C1KA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "articles/ZptReference/Tal/Define.md",
+      "output": {
+        ".html": {
+          "relative_path": "articles/ZptReference/Tal/Define.html",
+          "hash": "VqMWejjLsyia+hajW6XTPw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "articles/ZptReference/Tal/OmitTag.md",
+      "output": {
+        ".html": {
+          "relative_path": "articles/ZptReference/Tal/OmitTag.html",
+          "hash": "97E6ddilhZe4Hzk05N2Rzg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "articles/ZptReference/Tal/OnError.md",
+      "output": {
+        ".html": {
+          "relative_path": "articles/ZptReference/Tal/OnError.html",
+          "hash": "ZPhASN1E3t7IGHYU79OlaQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "articles/ZptReference/Tal/Repeat.md",
+      "output": {
+        ".html": {
+          "relative_path": "articles/ZptReference/Tal/Repeat.html",
+          "hash": "dBcYa21WXlUM8X9BHMadSQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "articles/ZptReference/Tales/CSharpExpressionLimitations.md",
+      "output": {
+        ".html": {
+          "relative_path": "articles/ZptReference/Tales/CSharpExpressionLimitations.html",
+          "hash": "G0xD5XUAcheSli2P6dz3Ew=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "articles/ZptReference/Tales/CSharpExpressions.md",
+      "output": {
+        ".html": {
+          "relative_path": "articles/ZptReference/Tales/CSharpExpressions.html",
+          "hash": "gQu1G5LyDRlHxCKauA4uRQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "articles/ZptReference/Tales/GlobalContexts.md",
+      "output": {
+        ".html": {
+          "relative_path": "articles/ZptReference/Tales/GlobalContexts.html",
+          "hash": "iCEoqg8GmQoQ9oJG7l+5QA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "articles/ZptReference/Tales/NotExpressions.md",
+      "output": {
+        ".html": {
+          "relative_path": "articles/ZptReference/Tales/NotExpressions.html",
+          "hash": "x6vyWlCPGVDMSC+X1WqDnA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "articles/ZptReference/Tales/PathExpressions.md",
+      "output": {
+        ".html": {
+          "relative_path": "articles/ZptReference/Tales/PathExpressions.html",
+          "hash": "0/seYCgangopHLFDJDPFlA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "articles/ZptReference/Tales/PipeExpressions.md",
+      "output": {
+        ".html": {
+          "relative_path": "articles/ZptReference/Tales/PipeExpressions.html",
+          "hash": "uBc3j8h9YpgiWIEiuHi3mg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "articles/ZptReference/Tales/PythonExpressions.md",
+      "output": {
+        ".html": {
+          "relative_path": "articles/ZptReference/Tales/PythonExpressions.html",
+          "hash": "gSh3qN3pKnGtSKqi8RgJTg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "articles/ZptReference/Tales/StringExpressions.md",
+      "output": {
+        ".html": {
+          "relative_path": "articles/ZptReference/Tales/StringExpressions.html",
+          "hash": "1HZKyPgpSUcjIcuyWatOqg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "articles/ZptReference/Tales/StructureExpressions.md",
+      "output": {
+        ".html": {
+          "relative_path": "articles/ZptReference/Tales/StructureExpressions.html",
+          "hash": "4O7N5RDyqgnCZz3GfyEV9g=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Toc",
+      "source_relative_path": "articles/ZptReference/toc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "articles/ZptReference/toc.html",
+          "hash": "VeE/ka7qKJJ5kJRRyvsy2g=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "articles/ZptTutorial/Page2.md",
+      "output": {
+        ".html": {
+          "relative_path": "articles/ZptTutorial/Page2.html",
+          "hash": "OT+6IUGMV7Z8W95bNPjk7A=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "articles/ZptTutorial/Page3.md",
+      "output": {
+        ".html": {
+          "relative_path": "articles/ZptTutorial/Page3.html",
+          "hash": "qmSDmwconLAHyEvYcXrwkw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "articles/ZptTutorial/Page4.md",
+      "output": {
+        ".html": {
+          "relative_path": "articles/ZptTutorial/Page4.html",
+          "hash": "OWH3XSCeYcq5WZbZPLMH4A=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "articles/ZptTutorial/Page5.md",
+      "output": {
+        ".html": {
+          "relative_path": "articles/ZptTutorial/Page5.html",
+          "hash": "uTCJ4RLboSEV1iXtMA+PyQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "articles/ZptTutorial/Page6.md",
+      "output": {
+        ".html": {
+          "relative_path": "articles/ZptTutorial/Page6.html",
+          "hash": "dB3i656edCs1r5YhEDDY7g=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "articles/ZptTutorial/index.md",
+      "output": {
+        ".html": {
+          "relative_path": "articles/ZptTutorial/index.html",
+          "hash": "18aFldumB6oafRfPXc2VHQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Toc",
+      "source_relative_path": "articles/ZptTutorial/toc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "articles/ZptTutorial/toc.html",
+          "hash": "dn7kiwRhEMfw629a13sL5Q=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "articles/index.md",
+      "output": {
+        ".html": {
+          "relative_path": "articles/index.html",
+          "hash": "J/Hs8eG2rR4T8a5gii8AOA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Toc",
+      "source_relative_path": "articles/toc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "articles/toc.html",
+          "hash": "lGj9WgxmOkZxeiIZF3HFkw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "images/ZptSharpArchitecture.svg",
+      "output": {
+        "resource": {
+          "relative_path": "images/ZptSharpArchitecture.svg"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "index.md",
+      "output": {
+        ".html": {
+          "relative_path": "index.html",
+          "hash": "T07dSwgqn6rO/LpHVS+EBw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Toc",
+      "source_relative_path": "toc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "toc.html",
+          "hash": "QxK7WajWtWR9+8T97mtaZw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    }
+  ],
+  "incremental_info": [
+    {
+      "status": {
+        "can_incremental": false,
+        "details": "Cannot build incrementally because last build info is missing.",
+        "incrementalPhase": "build",
+        "total_file_count": 0,
+        "skipped_file_count": 0,
+        "full_build_reason_code": "NoAvailableBuildCache"
+      },
+      "processors": {
+        "ConceptualDocumentProcessor": {
+          "can_incremental": false,
+          "incrementalPhase": "build",
+          "total_file_count": 48,
+          "skipped_file_count": 0
+        },
+        "ManagedReferenceDocumentProcessor": {
+          "can_incremental": false,
+          "incrementalPhase": "build",
+          "total_file_count": 356,
+          "skipped_file_count": 0
+        },
+        "ResourceDocumentProcessor": {
+          "can_incremental": false,
+          "details": "Processor ResourceDocumentProcessor cannot support incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
+          "incrementalPhase": "build",
+          "total_file_count": 0,
+          "skipped_file_count": 0
+        },
+        "TocDocumentProcessor": {
+          "can_incremental": false,
+          "details": "Processor TocDocumentProcessor cannot support incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
+          "incrementalPhase": "build",
+          "total_file_count": 0,
+          "skipped_file_count": 0
+        }
+      }
+    },
+    {
+      "status": {
+        "can_incremental": false,
+        "details": "Cannot support incremental post processing, the reason is: last post processor info is null.",
+        "incrementalPhase": "postProcessing",
+        "total_file_count": 0,
+        "skipped_file_count": 0
+      },
+      "processors": {}
+    }
+  ],
+  "version_info": {},
+  "groups": [
+    {
+      "xrefmap": "xrefmap.yml"
+    }
+  ]
+}

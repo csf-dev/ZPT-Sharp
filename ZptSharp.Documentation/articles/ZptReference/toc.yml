@@ -1,7 +1,7 @@
 - name: Documentation home
   topicHref: ../index.md
 - name: ZPT reference home
-  href: index.md
+  href: Index.md
 - name: METAL attributes
   items:
     - name: define-macro
