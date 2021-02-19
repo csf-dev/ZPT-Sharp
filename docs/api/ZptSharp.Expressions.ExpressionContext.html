@@ -1,0 +1,768 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Class ExpressionContext
+   </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Class ExpressionContext
+   ">
+    <meta name="generator" content="docfx 2.56.6.0">
+    
+    <link rel="shortcut icon" href="../favicon.ico">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="ZptSharp.Expressions.ExpressionContext">
+  
+  
+  <h1 id="ZptSharp_Expressions_ExpressionContext" data-uid="ZptSharp.Expressions.ExpressionContext" class="text-break">Class ExpressionContext
+  </h1>
+  <div class="markdown level0 summary"><p>An object which provides contextual values for the rendering of TALES expressions.</p>
+</div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="inheritance">
+    <h5>Inheritance</h5>
+    <div class="level0"><span class="xref">System.Object</span></div>
+    <div class="level1"><span class="xref">ExpressionContext</span></div>
+  </div>
+  <div class="inheritedMembers">
+    <h5>Inherited Members</h5>
+    <div>
+      <span class="xref">System.Object.Equals(System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.Equals(System.Object, System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.GetHashCode()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.GetType()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.MemberwiseClone()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.ReferenceEquals(System.Object, System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.ToString()</span>
+    </div>
+  </div>
+  <h6><strong>Namespace</strong>: <a class="xref" href="ZptSharp.Expressions.html">ZptSharp.Expressions</a></h6>
+  <h6><strong>Assembly</strong>: ZptSharp.Abstractions.dll</h6>
+  <h5 id="ZptSharp_Expressions_ExpressionContext_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public class ExpressionContext</code></pre>
+  </div>
+  <h5 id="ZptSharp_Expressions_ExpressionContext_remarks"><strong>Remarks</strong></h5>
+  <div class="markdown level0 remarks"><p>
+This class encapsulates the state for every ZPT operation performed upon a DOM node.
+That state is contextual, related to the current position in the DOM document and other operations which have occured previously.
+</p>
+<p>
+Some ZPT operations, such as <code>tal:define</code>, will make alterations to the current context.  Others might
+just read it.
+</p>
+<p>
+Apart from the root context (see <a class="xref" href="ZptSharp.Expressions.ExpressionContext.html#ZptSharp_Expressions_ExpressionContext_IsRootContext">IsRootContext</a>), every context is created by cloning its
+parent context and substituting a different &apos;current&apos; DOM node.
+The structure of parent-to-child expression contexts follows the structure of the DOM.
+</p>
+</div>
+  <h3 id="constructors">Constructors
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/csf-dev/ZPT-Sharp/new/production/apiSpec/new?filename=ZptSharp_Expressions_ExpressionContext__ctor_ZptSharp_Dom_INode_.md&amp;value=---%0Auid%3A%20ZptSharp.Expressions.ExpressionContext.%23ctor(ZptSharp.Dom.INode)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/csf-dev/ZPT-Sharp/blob/production/ZptSharp.Abstractions/Expressions/ExpressionContext.cs/#L279">View Source</a>
+  </span>
+  <a id="ZptSharp_Expressions_ExpressionContext__ctor_" data-uid="ZptSharp.Expressions.ExpressionContext.#ctor*"></a>
+  <h4 id="ZptSharp_Expressions_ExpressionContext__ctor_ZptSharp_Dom_INode_" data-uid="ZptSharp.Expressions.ExpressionContext.#ctor(ZptSharp.Dom.INode)">ExpressionContext(INode)</h4>
+  <div class="markdown level1 summary"><p>Initializes a new instance of the <a class="xref" href="ZptSharp.Expressions.ExpressionContext.html">ExpressionContext</a> class.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ExpressionContext(INode node)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="ZptSharp.Dom.INode.html">INode</a></td>
+        <td><span class="parametername">node</span></td>
+        <td><p>The DOM node for this context.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="ZptSharp_Expressions_ExpressionContext__ctor_ZptSharp_Dom_INode__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>
+This constructor is typically used for the root expression context.
+All of the other state of the context (apart from the current node) will be initialized with default/empty values.
+Even if this is for a root context, <a class="xref" href="ZptSharp.Expressions.ExpressionContext.html#ZptSharp_Expressions_ExpressionContext_IsRootContext">IsRootContext</a> must still be set manually.
+</p>
+</div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/csf-dev/ZPT-Sharp/new/production/apiSpec/new?filename=ZptSharp_Expressions_ExpressionContext__ctor_ZptSharp_Dom_INode_System_Collections_Generic_IDictionary_System_String_System_Object__System_Collections_Generic_IDictionary_System_String_System_Object__System_Collections_Generic_IDictionary_System_String_ZptSharp_Expressions_RepetitionInfo__System_Collections_Generic_Stack_ZptSharp_Expressions_ErrorHandlingContext__.md&amp;value=---%0Auid%3A%20ZptSharp.Expressions.ExpressionContext.%23ctor(ZptSharp.Dom.INode%2CSystem.Collections.Generic.IDictionary%7BSystem.String%2CSystem.Object%7D%2CSystem.Collections.Generic.IDictionary%7BSystem.String%2CSystem.Object%7D%2CSystem.Collections.Generic.IDictionary%7BSystem.String%2CZptSharp.Expressions.RepetitionInfo%7D%2CSystem.Collections.Generic.Stack%7BZptSharp.Expressions.ErrorHandlingContext%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/csf-dev/ZPT-Sharp/blob/production/ZptSharp.Abstractions/Expressions/ExpressionContext.cs/#L301">View Source</a>
+  </span>
+  <a id="ZptSharp_Expressions_ExpressionContext__ctor_" data-uid="ZptSharp.Expressions.ExpressionContext.#ctor*"></a>
+  <h4 id="ZptSharp_Expressions_ExpressionContext__ctor_ZptSharp_Dom_INode_System_Collections_Generic_IDictionary_System_String_System_Object__System_Collections_Generic_IDictionary_System_String_System_Object__System_Collections_Generic_IDictionary_System_String_ZptSharp_Expressions_RepetitionInfo__System_Collections_Generic_Stack_ZptSharp_Expressions_ErrorHandlingContext__" data-uid="ZptSharp.Expressions.ExpressionContext.#ctor(ZptSharp.Dom.INode,System.Collections.Generic.IDictionary{System.String,System.Object},System.Collections.Generic.IDictionary{System.String,System.Object},System.Collections.Generic.IDictionary{System.String,ZptSharp.Expressions.RepetitionInfo},System.Collections.Generic.Stack{ZptSharp.Expressions.ErrorHandlingContext})">ExpressionContext(INode, IDictionary&lt;String, Object&gt;, IDictionary&lt;String, Object&gt;, IDictionary&lt;String, RepetitionInfo&gt;, Stack&lt;ErrorHandlingContext&gt;)</h4>
+  <div class="markdown level1 summary"><p>Initializes a new instance of the <a class="xref" href="ZptSharp.Expressions.ExpressionContext.html">ExpressionContext</a> class; this is (to a degree)
+a copy-constructor.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ExpressionContext(INode node, IDictionary&lt;string, object&gt; localDefinitions, IDictionary&lt;string, object&gt; globalDefinitions, IDictionary&lt;string, RepetitionInfo&gt; repetitions, Stack&lt;ErrorHandlingContext&gt; errorHandlers)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="ZptSharp.Dom.INode.html">INode</a></td>
+        <td><span class="parametername">node</span></td>
+        <td><p>The DOM node for this context.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Collections.Generic.IDictionary</span>&lt;<span class="xref">System.String</span>, <span class="xref">System.Object</span>&gt;</td>
+        <td><span class="parametername">localDefinitions</span></td>
+        <td><p>Local definitions.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Collections.Generic.IDictionary</span>&lt;<span class="xref">System.String</span>, <span class="xref">System.Object</span>&gt;</td>
+        <td><span class="parametername">globalDefinitions</span></td>
+        <td><p>Global definitions.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Collections.Generic.IDictionary</span>&lt;<span class="xref">System.String</span>, <a class="xref" href="ZptSharp.Expressions.RepetitionInfo.html">RepetitionInfo</a>&gt;</td>
+        <td><span class="parametername">repetitions</span></td>
+        <td><p>Repetitions.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Collections.Generic.Stack</span>&lt;<a class="xref" href="ZptSharp.Expressions.ErrorHandlingContext.html">ErrorHandlingContext</a>&gt;</td>
+        <td><span class="parametername">errorHandlers</span></td>
+        <td><p>Error handlers</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="ZptSharp_Expressions_ExpressionContext__ctor_ZptSharp_Dom_INode_System_Collections_Generic_IDictionary_System_String_System_Object__System_Collections_Generic_IDictionary_System_String_System_Object__System_Collections_Generic_IDictionary_System_String_ZptSharp_Expressions_RepetitionInfo__System_Collections_Generic_Stack_ZptSharp_Expressions_ErrorHandlingContext___remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>
+The <code data-dev-comment-type="paramref" class="paramref">localDefinitions</code>, <code data-dev-comment-type="paramref" class="paramref">repetitions</code> &amp; <code data-dev-comment-type="paramref" class="paramref">errorHandlers</code>
+are shallow-copied by this constructor.  This is  because changes to these collections which are made
+inside of a context should not affect any other context
+</p>
+<p>
+On the other hand, <code data-dev-comment-type="paramref" class="paramref">globalDefinitions</code> is used directly without copying, because changes to the global
+definitions should affect other contexts, including those &apos;outside&apos; of this one.
+</p>
+</div>
+  <h3 id="properties">Properties
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/csf-dev/ZPT-Sharp/new/production/apiSpec/new?filename=ZptSharp_Expressions_ExpressionContext_CurrentNode.md&amp;value=---%0Auid%3A%20ZptSharp.Expressions.ExpressionContext.CurrentNode%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/csf-dev/ZPT-Sharp/blob/production/ZptSharp.Abstractions/Expressions/ExpressionContext.cs/#L78">View Source</a>
+  </span>
+  <a id="ZptSharp_Expressions_ExpressionContext_CurrentNode_" data-uid="ZptSharp.Expressions.ExpressionContext.CurrentNode*"></a>
+  <h4 id="ZptSharp_Expressions_ExpressionContext_CurrentNode" data-uid="ZptSharp.Expressions.ExpressionContext.CurrentNode">CurrentNode</h4>
+  <div class="markdown level1 summary"><p>Gets or sets the current DOM node being rendered by this context.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public INode CurrentNode { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="ZptSharp.Dom.INode.html">INode</a></td>
+        <td><p>The DOM node (typically an element node).</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="ZptSharp_Expressions_ExpressionContext_CurrentNode_remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>
+Every ZPT operation has a current DOM node, because the ZPT operations are declared within the attributes of element nodes.
+It would be very unusual for this node object not to be a DOM element node.
+</p>
+</div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/csf-dev/ZPT-Sharp/new/production/apiSpec/new?filename=ZptSharp_Expressions_ExpressionContext_Error.md&amp;value=---%0Auid%3A%20ZptSharp.Expressions.ExpressionContext.Error%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/csf-dev/ZPT-Sharp/blob/production/ZptSharp.Abstractions/Expressions/ExpressionContext.cs/#L53">View Source</a>
+  </span>
+  <a id="ZptSharp_Expressions_ExpressionContext_Error_" data-uid="ZptSharp.Expressions.ExpressionContext.Error*"></a>
+  <h4 id="ZptSharp_Expressions_ExpressionContext_Error" data-uid="ZptSharp.Expressions.ExpressionContext.Error">Error</h4>
+  <div class="markdown level1 summary"><p>Gets or sets an object representing an error which was encountered whilst rendering or
+evaluating an expression.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public object Error { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Object</span></td>
+        <td><p>The error (usually an exception).</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="ZptSharp_Expressions_ExpressionContext_Error_remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>
+The error object will almost always derive from <span class="xref">System.Exception</span>.
+If it is <span class="xref">null</span> then no error has occurred when rendering; if not then it will describe the error which is currently being handled.
+</p>
+</div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/csf-dev/ZPT-Sharp/new/production/apiSpec/new?filename=ZptSharp_Expressions_ExpressionContext_ErrorHandlers.md&amp;value=---%0Auid%3A%20ZptSharp.Expressions.ExpressionContext.ErrorHandlers%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/csf-dev/ZPT-Sharp/blob/production/ZptSharp.Abstractions/Expressions/ExpressionContext.cs/#L235">View Source</a>
+  </span>
+  <a id="ZptSharp_Expressions_ExpressionContext_ErrorHandlers_" data-uid="ZptSharp.Expressions.ExpressionContext.ErrorHandlers*"></a>
+  <h4 id="ZptSharp_Expressions_ExpressionContext_ErrorHandlers" data-uid="ZptSharp.Expressions.ExpressionContext.ErrorHandlers">ErrorHandlers</h4>
+  <div class="markdown level1 summary"><p>Gets a collection of the contexts &amp; handlers which might be able to deal
+with errors encountered whilst processing this context.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Stack&lt;ErrorHandlingContext&gt; ErrorHandlers { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Collections.Generic.Stack</span>&lt;<a class="xref" href="ZptSharp.Expressions.ErrorHandlingContext.html">ErrorHandlingContext</a>&gt;</td>
+        <td><p>The error handlers.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="ZptSharp_Expressions_ExpressionContext_ErrorHandlers_remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>
+Error handlers are added to this property by the parent contexts.
+Much like the C# <code>try</code> &amp; <code>catch</code> keywords, ZPT rendering errors &apos;propagate upwards&apos; through the DOM.
+This occurs until either they are handled by a <code>tal:on-error</code> attribute or until they &apos;escape&apos; the root of the DOM.
+In the second case, this will lead to an exception being raised for the overall rendering operation.
+A rendering error upon an element might be handled by a <code>tal:on-error</code> attribute defined upon that same
+element, its parent element, grandparent or more disatant ancestor.
+</p>
+</div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/csf-dev/ZPT-Sharp/new/production/apiSpec/new?filename=ZptSharp_Expressions_ExpressionContext_GlobalDefinitions.md&amp;value=---%0Auid%3A%20ZptSharp.Expressions.ExpressionContext.GlobalDefinitions%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/csf-dev/ZPT-Sharp/blob/production/ZptSharp.Abstractions/Expressions/ExpressionContext.cs/#L177">View Source</a>
+  </span>
+  <a id="ZptSharp_Expressions_ExpressionContext_GlobalDefinitions_" data-uid="ZptSharp.Expressions.ExpressionContext.GlobalDefinitions*"></a>
+  <h4 id="ZptSharp_Expressions_ExpressionContext_GlobalDefinitions" data-uid="ZptSharp.Expressions.ExpressionContext.GlobalDefinitions">GlobalDefinitions</h4>
+  <div class="markdown level1 summary"><p>Gets the global variable definitions for the current context.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IDictionary&lt;string, object&gt; GlobalDefinitions { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Collections.Generic.IDictionary</span>&lt;<span class="xref">System.String</span>, <span class="xref">System.Object</span>&gt;</td>
+        <td><p>The global definitions.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="ZptSharp_Expressions_ExpressionContext_GlobalDefinitions_remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>
+Definitions are the variables which are available to ZPT operations using this context.
+There are three types of definitions.
+</p>
+<ul><li><a class="xref" href="ZptSharp.Expressions.ExpressionContext.html#ZptSharp_Expressions_ExpressionContext_LocalDefinitions">LocalDefinitions</a></li><li><code>GlobalDefinitions</code> (this property)</li><li><a class="xref" href="ZptSharp.Expressions.ExpressionContext.html#ZptSharp_Expressions_ExpressionContext_Repetitions">Repetitions</a></li></ul>
+<p>
+Local definitions are scoped to the DOM element upon which they are created (via the
+<code>tal:define</code> keyword) and that DOM element&apos;s descendents.
+A locally-defined variable is not visible &apos;outside&apos; of the element where it was defined.
+</p>
+<p>
+Global definitions are in-scope from the document position at which they were defined and
+onwards in the document (in source code order).
+Globally-defined variables do not use the DOM structure; global variables are usable outside of
+the element &amp; descendents where they were defined, as long as it is after the point of
+definition in the document source code.
+</p>
+<p>
+Repetitions are a special type of variable which are created only by the <code>tal:repeat</code>
+operation.
+They behave identically to locally-defined variables except that they have a standard set of
+properties, defined by the <a class="xref" href="ZptSharp.Expressions.RepetitionInfo.html">RepetitionInfo</a> class.
+</p>
+</div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/csf-dev/ZPT-Sharp/new/production/apiSpec/new?filename=ZptSharp_Expressions_ExpressionContext_IsRootContext.md&amp;value=---%0Auid%3A%20ZptSharp.Expressions.ExpressionContext.IsRootContext%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/csf-dev/ZPT-Sharp/blob/production/ZptSharp.Abstractions/Expressions/ExpressionContext.cs/#L40">View Source</a>
+  </span>
+  <a id="ZptSharp_Expressions_ExpressionContext_IsRootContext_" data-uid="ZptSharp.Expressions.ExpressionContext.IsRootContext*"></a>
+  <h4 id="ZptSharp_Expressions_ExpressionContext_IsRootContext" data-uid="ZptSharp.Expressions.ExpressionContext.IsRootContext">IsRootContext</h4>
+  <div class="markdown level1 summary"><p>Gets or sets a value indicating whether this <a class="xref" href="ZptSharp.Expressions.ExpressionContext.html">ExpressionContext</a> is the root context.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool IsRootContext { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><p><code>true</code> if this is the root context; otherwise, <code>false</code>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="ZptSharp_Expressions_ExpressionContext_IsRootContext_remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>
+The root context is typically synonymous with the root DOM node in the document.
+The root context is one which was not created from a parent context.
+</p>
+</div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/csf-dev/ZPT-Sharp/new/production/apiSpec/new?filename=ZptSharp_Expressions_ExpressionContext_LocalDefinitions.md&amp;value=---%0Auid%3A%20ZptSharp.Expressions.ExpressionContext.LocalDefinitions%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/csf-dev/ZPT-Sharp/blob/production/ZptSharp.Abstractions/Expressions/ExpressionContext.cs/#L136">View Source</a>
+  </span>
+  <a id="ZptSharp_Expressions_ExpressionContext_LocalDefinitions_" data-uid="ZptSharp.Expressions.ExpressionContext.LocalDefinitions*"></a>
+  <h4 id="ZptSharp_Expressions_ExpressionContext_LocalDefinitions" data-uid="ZptSharp.Expressions.ExpressionContext.LocalDefinitions">LocalDefinitions</h4>
+  <div class="markdown level1 summary"><p>Gets the local variable definitions for the current context.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IDictionary&lt;string, object&gt; LocalDefinitions { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Collections.Generic.IDictionary</span>&lt;<span class="xref">System.String</span>, <span class="xref">System.Object</span>&gt;</td>
+        <td><p>The local definitions.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="ZptSharp_Expressions_ExpressionContext_LocalDefinitions_remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>
+Definitions are the variables which are available to ZPT operations using this context.
+There are three types of definitions.
+</p>
+<ul><li><code>LocalDefinitions</code> (this property)</li><li><a class="xref" href="ZptSharp.Expressions.ExpressionContext.html#ZptSharp_Expressions_ExpressionContext_GlobalDefinitions">GlobalDefinitions</a></li><li><a class="xref" href="ZptSharp.Expressions.ExpressionContext.html#ZptSharp_Expressions_ExpressionContext_Repetitions">Repetitions</a></li></ul>
+<p>
+Local definitions are scoped to the DOM element upon which they are created (via the
+<code>tal:define</code> keyword) and that DOM element&apos;s descendents.
+A locally-defined variable is not visible &apos;outside&apos; of the element where it was defined.
+</p>
+<p>
+Global definitions are in-scope from the document position at which they were defined and
+onwards in the document (in source code order).
+Globally-defined variables do not use the DOM structure; global variables are usable outside of
+the element &amp; descendents where they were defined, as long as it is after the point of
+definition in the document source code.
+</p>
+<p>
+Repetitions are a special type of variable which are created only by the <code>tal:repeat</code>
+operation.
+They behave identically to locally-defined variables except that they have a standard set of
+properties, defined by the <a class="xref" href="ZptSharp.Expressions.RepetitionInfo.html">RepetitionInfo</a> class.
+</p>
+</div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/csf-dev/ZPT-Sharp/new/production/apiSpec/new?filename=ZptSharp_Expressions_ExpressionContext_Model.md&amp;value=---%0Auid%3A%20ZptSharp.Expressions.ExpressionContext.Model%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/csf-dev/ZPT-Sharp/blob/production/ZptSharp.Abstractions/Expressions/ExpressionContext.cs/#L66">View Source</a>
+  </span>
+  <a id="ZptSharp_Expressions_ExpressionContext_Model_" data-uid="ZptSharp.Expressions.ExpressionContext.Model*"></a>
+  <h4 id="ZptSharp_Expressions_ExpressionContext_Model" data-uid="ZptSharp.Expressions.ExpressionContext.Model">Model</h4>
+  <div class="markdown level1 summary"><p>Gets or sets the model object from which this context was created.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public object Model { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Object</span></td>
+        <td><p>The model.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="ZptSharp_Expressions_ExpressionContext_Model_remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>
+This is typically the model which was initially passed to the rendering process.
+It may be of any object (and could legitimately be <span class="xref">null</span>).
+Its precise semantics depend upon the application/current usage of ZptSharp.
+</p>
+</div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/csf-dev/ZPT-Sharp/new/production/apiSpec/new?filename=ZptSharp_Expressions_ExpressionContext_Repetitions.md&amp;value=---%0Auid%3A%20ZptSharp.Expressions.ExpressionContext.Repetitions%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/csf-dev/ZPT-Sharp/blob/production/ZptSharp.Abstractions/Expressions/ExpressionContext.cs/#L218">View Source</a>
+  </span>
+  <a id="ZptSharp_Expressions_ExpressionContext_Repetitions_" data-uid="ZptSharp.Expressions.ExpressionContext.Repetitions*"></a>
+  <h4 id="ZptSharp_Expressions_ExpressionContext_Repetitions" data-uid="ZptSharp.Expressions.ExpressionContext.Repetitions">Repetitions</h4>
+  <div class="markdown level1 summary"><p>Gets the repetition variable definitions for the current context.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IDictionary&lt;string, RepetitionInfo&gt; Repetitions { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Collections.Generic.IDictionary</span>&lt;<span class="xref">System.String</span>, <a class="xref" href="ZptSharp.Expressions.RepetitionInfo.html">RepetitionInfo</a>&gt;</td>
+        <td><p>The repetition definitions.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="ZptSharp_Expressions_ExpressionContext_Repetitions_remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>
+Definitions are the variables which are available to ZPT operations using this context.
+There are three types of definitions.
+</p>
+<ul><li><a class="xref" href="ZptSharp.Expressions.ExpressionContext.html#ZptSharp_Expressions_ExpressionContext_LocalDefinitions">LocalDefinitions</a></li><li><a class="xref" href="ZptSharp.Expressions.ExpressionContext.html#ZptSharp_Expressions_ExpressionContext_GlobalDefinitions">GlobalDefinitions</a></li><li><code>Repetitions</code> (this property)</li></ul>
+<p>
+Local definitions are scoped to the DOM element upon which they are created (via the
+<code>tal:define</code> keyword) and that DOM element&apos;s descendents.
+A locally-defined variable is not visible &apos;outside&apos; of the element where it was defined.
+</p>
+<p>
+Global definitions are in-scope from the document position at which they were defined and
+onwards in the document (in source code order).
+Globally-defined variables do not use the DOM structure; global variables are usable outside of
+the element &amp; descendents where they were defined, as long as it is after the point of
+definition in the document source code.
+</p>
+<p>
+Repetitions are a special type of variable which are created only by the <code>tal:repeat</code>
+operation.
+They behave identically to locally-defined variables except that they have a standard set of
+properties, defined by the <a class="xref" href="ZptSharp.Expressions.RepetitionInfo.html">RepetitionInfo</a> class.
+</p>
+</div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/csf-dev/ZPT-Sharp/new/production/apiSpec/new?filename=ZptSharp_Expressions_ExpressionContext_TemplateDocument.md&amp;value=---%0Auid%3A%20ZptSharp.Expressions.ExpressionContext.TemplateDocument%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/csf-dev/ZPT-Sharp/blob/production/ZptSharp.Abstractions/Expressions/ExpressionContext.cs/#L95">View Source</a>
+  </span>
+  <a id="ZptSharp_Expressions_ExpressionContext_TemplateDocument_" data-uid="ZptSharp.Expressions.ExpressionContext.TemplateDocument*"></a>
+  <h4 id="ZptSharp_Expressions_ExpressionContext_TemplateDocument" data-uid="ZptSharp.Expressions.ExpressionContext.TemplateDocument">TemplateDocument</h4>
+  <div class="markdown level1 summary"><p>Gets or sets the DOM document being used as a template to render the current rendering request.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IDocument TemplateDocument { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="ZptSharp.Dom.IDocument.html">IDocument</a></td>
+        <td><p>The template document.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="ZptSharp_Expressions_ExpressionContext_TemplateDocument_remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>
+This is the document currently being rendered.
+In scenarios where a rendering request touches and draws source from many documents (METAL macro usage),
+this document is the primary/initial document which was selected as the template.
+</p>
+</div>
+  <h3 id="methods">Methods
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/csf-dev/ZPT-Sharp/new/production/apiSpec/new?filename=ZptSharp_Expressions_ExpressionContext_CreateChild_ZptSharp_Dom_INode_.md&amp;value=---%0Auid%3A%20ZptSharp.Expressions.ExpressionContext.CreateChild(ZptSharp.Dom.INode)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/csf-dev/ZPT-Sharp/blob/production/ZptSharp.Abstractions/Expressions/ExpressionContext.cs/#L258">View Source</a>
+  </span>
+  <a id="ZptSharp_Expressions_ExpressionContext_CreateChild_" data-uid="ZptSharp.Expressions.ExpressionContext.CreateChild*"></a>
+  <h4 id="ZptSharp_Expressions_ExpressionContext_CreateChild_ZptSharp_Dom_INode_" data-uid="ZptSharp.Expressions.ExpressionContext.CreateChild(ZptSharp.Dom.INode)">CreateChild(INode)</h4>
+  <div class="markdown level1 summary"><p>Gets a clone of the current expression context, using a specified node as the current node for the created context.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ExpressionContext CreateChild(INode node)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="ZptSharp.Dom.INode.html">INode</a></td>
+        <td><span class="parametername">node</span></td>
+        <td><p>The node for the cloned context.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="ZptSharp.Expressions.ExpressionContext.html">ExpressionContext</a></td>
+        <td><p>The cloned expression context.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="ZptSharp_Expressions_ExpressionContext_CreateChild_ZptSharp_Dom_INode__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>
+This method is provided for the creation of child expression contexts.  The <code data-dev-comment-type="paramref" class="paramref">node</code>
+is intended to be a child of the <a class="xref" href="ZptSharp.Expressions.ExpressionContext.html#ZptSharp_Expressions_ExpressionContext_CurrentNode">CurrentNode</a>.
+</p>
+<p>
+Because this is intended to be a child context, the local definitions, repetitions &amp; error handlers
+are cloned by this method, such that modifications to these collections upon the child context do not
+affect the parent.
+</p>
+<p>
+The exception to this, is the <a class="xref" href="ZptSharp.Expressions.ExpressionContext.html#ZptSharp_Expressions_ExpressionContext_GlobalDefinitions">GlobalDefinitions</a>.
+Global definitions are intentionally not cloned, because a child&apos;s changes to global definitions may indeed affect parent contexts.
+A global definition is in-scope from the moment it is defined, for the remainder of the document, regardless of the DOM hierarchy.
+</p>
+</div>
+  <h3 id="extensionmethods">Extension Methods</h3>
+  <div>
+      <a class="xref" href="ZptSharp.Expressions.ExpressionContextExtensions.html#ZptSharp_Expressions_ExpressionContextExtensions_CreateChildren_ZptSharp_Expressions_ExpressionContext_System_Collections_Generic_IList_ZptSharp_Dom_INode__">ExpressionContextExtensions.CreateChildren(ExpressionContext, IList&lt;INode&gt;)</a>
+  </div>
+  <div>
+      <a class="xref" href="ZptSharp.Expressions.ExpressionContextExtensions.html#ZptSharp_Expressions_ExpressionContextExtensions_CreateChildren_ZptSharp_Expressions_ExpressionContext_System_Collections_Generic_IReadOnlyList_ZptSharp_Dom_INode__">ExpressionContextExtensions.CreateChildren(ExpressionContext, IReadOnlyList&lt;INode&gt;)</a>
+  </div>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/csf-dev/ZPT-Sharp/new/production/apiSpec/new?filename=ZptSharp_Expressions_ExpressionContext.md&amp;value=---%0Auid%3A%20ZptSharp.Expressions.ExpressionContext%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
+                  </li>
+                  <li>
+                    <a href="https://github.com/csf-dev/ZPT-Sharp/blob/production/ZptSharp.Abstractions/Expressions/ExpressionContext.cs/#L26" class="contribution-link">View Source</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In This Article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            
+            <span>Generated by <strong>DocFX</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

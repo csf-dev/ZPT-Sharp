@@ -1,0 +1,374 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Class ZptSharpViewEngine
+   </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Class ZptSharpViewEngine
+   ">
+    <meta name="generator" content="docfx 2.56.6.0">
+    
+    <link rel="shortcut icon" href="../favicon.ico">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="ZptSharp.MvcCore.ZptSharpViewEngine">
+  
+  
+  <h1 id="ZptSharp_MvcCore_ZptSharpViewEngine" data-uid="ZptSharp.MvcCore.ZptSharpViewEngine" class="text-break">Class ZptSharpViewEngine
+  </h1>
+  <div class="markdown level0 summary"><p>The ZptSharp MVC ViewEngine, used to render MVC views using ZptSharp.</p>
+</div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="inheritance">
+    <h5>Inheritance</h5>
+    <div class="level0"><span class="xref">System.Object</span></div>
+    <div class="level1"><span class="xref">ZptSharpViewEngine</span></div>
+  </div>
+  <div classs="implements">
+    <h5>Implements</h5>
+    <div><span class="xref">Microsoft.AspNetCore.Mvc.ViewEngines.IViewEngine</span></div>
+  </div>
+  <div class="inheritedMembers">
+    <h5>Inherited Members</h5>
+    <div>
+      <span class="xref">System.Object.Equals(System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.Equals(System.Object, System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.GetHashCode()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.GetType()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.MemberwiseClone()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.ReferenceEquals(System.Object, System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.ToString()</span>
+    </div>
+  </div>
+  <h6><strong>Namespace</strong>: <a class="xref" href="ZptSharp.MvcCore.html">ZptSharp.MvcCore</a></h6>
+  <h6><strong>Assembly</strong>: ZptSharp.MvcCore.dll</h6>
+  <h5 id="ZptSharp_MvcCore_ZptSharpViewEngine_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public class ZptSharpViewEngine : IViewEngine</code></pre>
+  </div>
+  <h5 id="ZptSharp_MvcCore_ZptSharpViewEngine_remarks"><strong>Remarks</strong></h5>
+  <div class="markdown level0 remarks"><p>
+Please note that a number of ASP.NET MVC-related features are unsupported by ZptSharp views, as
+they are not relevant in the context of ZptSharp views.  These features includes:
+</p>
+<ul><li></li><li></li></ul>
+<p>
+Usages of parameters relating to these unsupported features will be ignored (and a normal
+view will be returned regardless).  Usages of methods relating to these unsupported features
+will return a normal view.
+</p>
+</div>
+  <h3 id="constructors">Constructors
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/csf-dev/ZPT-Sharp/new/production/apiSpec/new?filename=ZptSharp_MvcCore_ZptSharpViewEngine__ctor_System_Action_ZptSharp_Hosting_IBuildsHostingEnvironment__System_String___System_String_ZptSharp_Config_RenderingConfig_ZptSharp_MvcCore_ITestForFileExistence_ZptSharp_MvcCore_IFindsView_.md&amp;value=---%0Auid%3A%20ZptSharp.MvcCore.ZptSharpViewEngine.%23ctor(System.Action%7BZptSharp.Hosting.IBuildsHostingEnvironment%7D%2CSystem.String%5B%5D%2CSystem.String%2CZptSharp.Config.RenderingConfig%2CZptSharp.MvcCore.ITestForFileExistence%2CZptSharp.MvcCore.IFindsView)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/csf-dev/ZPT-Sharp/blob/production/MvcViewEngines/ZptSharp.MvcCore/ZptSharpViewEngine.cs/#L132">View Source</a>
+  </span>
+  <a id="ZptSharp_MvcCore_ZptSharpViewEngine__ctor_" data-uid="ZptSharp.MvcCore.ZptSharpViewEngine.#ctor*"></a>
+  <h4 id="ZptSharp_MvcCore_ZptSharpViewEngine__ctor_System_Action_ZptSharp_Hosting_IBuildsHostingEnvironment__System_String___System_String_ZptSharp_Config_RenderingConfig_ZptSharp_MvcCore_ITestForFileExistence_ZptSharp_MvcCore_IFindsView_" data-uid="ZptSharp.MvcCore.ZptSharpViewEngine.#ctor(System.Action{ZptSharp.Hosting.IBuildsHostingEnvironment},System.String[],System.String,ZptSharp.Config.RenderingConfig,ZptSharp.MvcCore.ITestForFileExistence,ZptSharp.MvcCore.IFindsView)">ZptSharpViewEngine(Action&lt;IBuildsHostingEnvironment&gt;, String[], String, RenderingConfig, ITestForFileExistence, IFindsView)</h4>
+  <div class="markdown level1 summary"><p>Initializes a new instance of the <a class="xref" href="ZptSharp.MvcCore.ZptSharpViewEngine.html">ZptSharpViewEngine</a> class.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ZptSharpViewEngine(Action&lt;IBuildsHostingEnvironment&gt; builderAction, string[] viewLocationFormats = null, string viewsPath = &quot;Views/&quot;, RenderingConfig config = null, ITestForFileExistence fileTester = null, IFindsView viewFinder = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Action</span>&lt;<a class="xref" href="ZptSharp.Hosting.IBuildsHostingEnvironment.html">IBuildsHostingEnvironment</a>&gt;</td>
+        <td><span class="parametername">builderAction</span></td>
+        <td><p>A builder action for creating the ZptSharp hosting environment.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.String</span>[]</td>
+        <td><span class="parametername">viewLocationFormats</span></td>
+        <td><p>View location formats.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">viewsPath</span></td>
+        <td><p>The virtual path for the <code>Views</code> context variable.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="ZptSharp.Config.RenderingConfig.html">RenderingConfig</a></td>
+        <td><span class="parametername">config</span></td>
+        <td><p>An optional rendering config instance.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="ZptSharp.MvcCore.ITestForFileExistence.html">ITestForFileExistence</a></td>
+        <td><span class="parametername">fileTester</span></td>
+        <td><p>An optional file-tester instance.  This parameter is provided primarily for unit-testing
+purposes; if omitted or passed as <span class="xref">null</span> then a default instance will
+be used.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="ZptSharp.MvcCore.IFindsView.html">IFindsView</a></td>
+        <td><span class="parametername">viewFinder</span></td>
+        <td><p>An optional view-finder instance.  This parameter is provided primarily for unit-testing
+purposes; if omitted or passed as <span class="xref">null</span> then a default instance will
+be used.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="methods">Methods
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/csf-dev/ZPT-Sharp/new/production/apiSpec/new?filename=ZptSharp_MvcCore_ZptSharpViewEngine_FindView_Microsoft_AspNetCore_Mvc_ActionContext_System_String_System_Boolean_.md&amp;value=---%0Auid%3A%20ZptSharp.MvcCore.ZptSharpViewEngine.FindView(Microsoft.AspNetCore.Mvc.ActionContext%2CSystem.String%2CSystem.Boolean)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/csf-dev/ZPT-Sharp/blob/production/MvcViewEngines/ZptSharp.MvcCore/ZptSharpViewEngine.cs/#L63">View Source</a>
+  </span>
+  <a id="ZptSharp_MvcCore_ZptSharpViewEngine_FindView_" data-uid="ZptSharp.MvcCore.ZptSharpViewEngine.FindView*"></a>
+  <h4 id="ZptSharp_MvcCore_ZptSharpViewEngine_FindView_Microsoft_AspNetCore_Mvc_ActionContext_System_String_System_Boolean_" data-uid="ZptSharp.MvcCore.ZptSharpViewEngine.FindView(Microsoft.AspNetCore.Mvc.ActionContext,System.String,System.Boolean)">FindView(ActionContext, String, Boolean)</h4>
+  <div class="markdown level1 summary"><p>Gets a <span class="xref">Microsoft.AspNetCore.Mvc.ViewEngines.ViewEngineResult</span> from an attempt to find a ZptSharp view of the specified
+<code data-dev-comment-type="paramref" class="paramref">viewName</code>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ViewEngineResult FindView(ActionContext context, string viewName, bool isMainPage)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Microsoft.AspNetCore.Mvc.ActionContext</span></td>
+        <td><span class="parametername">context</span></td>
+        <td><p>The current action context.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">viewName</span></td>
+        <td><p>The name of the requested view.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><span class="parametername">isMainPage</span></td>
+        <td><p>An ignored parameter indicating whether the requested view is the main page.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Microsoft.AspNetCore.Mvc.ViewEngines.ViewEngineResult</span></td>
+        <td><p>A <span class="xref">Microsoft.AspNetCore.Mvc.ViewEngines.ViewEngineResult</span> indicating whether the view was found or not.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/csf-dev/ZPT-Sharp/new/production/apiSpec/new?filename=ZptSharp_MvcCore_ZptSharpViewEngine_GetView_System_String_System_String_System_Boolean_.md&amp;value=---%0Auid%3A%20ZptSharp.MvcCore.ZptSharpViewEngine.GetView(System.String%2CSystem.String%2CSystem.Boolean)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/csf-dev/ZPT-Sharp/blob/production/MvcViewEngines/ZptSharp.MvcCore/ZptSharpViewEngine.cs/#L84">View Source</a>
+  </span>
+  <a id="ZptSharp_MvcCore_ZptSharpViewEngine_GetView_" data-uid="ZptSharp.MvcCore.ZptSharpViewEngine.GetView*"></a>
+  <h4 id="ZptSharp_MvcCore_ZptSharpViewEngine_GetView_System_String_System_String_System_Boolean_" data-uid="ZptSharp.MvcCore.ZptSharpViewEngine.GetView(System.String,System.String,System.Boolean)">GetView(String, String, Boolean)</h4>
+  <div class="markdown level1 summary"><p>Gets a <span class="xref">Microsoft.AspNetCore.Mvc.ViewEngines.ViewEngineResult</span> from an attempt to get a ZptSharp view at the specified
+<code data-dev-comment-type="paramref" class="paramref">viewPath</code>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ViewEngineResult GetView(string executingFilePath, string viewPath, bool isMainPage)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">executingFilePath</span></td>
+        <td><p>A path for the executing file.  Used as context in order to get an application-relative path for a non-rooted view path.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">viewPath</span></td>
+        <td><p>The path to the requested view.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><span class="parametername">isMainPage</span></td>
+        <td><p>An ignored parameter indicating whether the requested view is the main page.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Microsoft.AspNetCore.Mvc.ViewEngines.ViewEngineResult</span></td>
+        <td><p>A <span class="xref">Microsoft.AspNetCore.Mvc.ViewEngines.ViewEngineResult</span> indicating whether the view was found or not.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="implements">Implements</h3>
+  <div>
+      <span class="xref">Microsoft.AspNetCore.Mvc.ViewEngines.IViewEngine</span>
+  </div>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/csf-dev/ZPT-Sharp/new/production/apiSpec/new?filename=ZptSharp_MvcCore_ZptSharpViewEngine.md&amp;value=---%0Auid%3A%20ZptSharp.MvcCore.ZptSharpViewEngine%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
+                  </li>
+                  <li>
+                    <a href="https://github.com/csf-dev/ZPT-Sharp/blob/production/MvcViewEngines/ZptSharp.MvcCore/ZptSharpViewEngine.cs/#L30" class="contribution-link">View Source</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In This Article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            
+            <span>Generated by <strong>DocFX</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

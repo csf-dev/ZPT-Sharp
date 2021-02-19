@@ -1,0 +1,282 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Namespace ZptSharp.Expressions
+   </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Namespace ZptSharp.Expressions
+   ">
+    <meta name="generator" content="docfx 2.56.6.0">
+    
+    <link rel="shortcut icon" href="../favicon.ico">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="ZptSharp.Expressions">
+  
+  <h1 id="ZptSharp_Expressions" data-uid="ZptSharp.Expressions" class="text-break">Namespace ZptSharp.Expressions
+  </h1>
+  <div class="markdown level0 summary"></div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="markdown level0 remarks"></div>
+    <h3 id="classes">Classes
+  </h3>
+      <h4><a class="xref" href="ZptSharp.Expressions.AbortZptActionToken.html">AbortZptActionToken</a></h4>
+      <section><p>An object which indicates that the current ZPT action should be cancelled/aborted.</p>
+</section>
+      <h4><a class="xref" href="ZptSharp.Expressions.AlphabeticValueGenerator.html">AlphabeticValueGenerator</a></h4>
+      <section><p>Implementation of <a class="xref" href="ZptSharp.Expressions.IGetsAlphabeticValueForNumber.html">IGetsAlphabeticValueForNumber</a> which creates and returns alphabetic strings.</p>
+</section>
+      <h4><a class="xref" href="ZptSharp.Expressions.BuiltinContextsProvider.html">BuiltinContextsProvider</a></h4>
+      <section><p>Provides the built-in contexts which are inherent to the TALES specification.
+These are generally accessible as if they were root objects within a path expression.
+If, for example, their names have been overwritten they may alternatively be referenced
+explicitly with the <code>CONTEXTS</code> reserved variable name.</p>
+</section>
+      <h4><a class="xref" href="ZptSharp.Expressions.BuiltinContextsProviderFactory.html">BuiltinContextsProviderFactory</a></h4>
+      <section><p>Implementation of <a class="xref" href="ZptSharp.Expressions.IGetsBuiltinContextsProvider.html">IGetsBuiltinContextsProvider</a> which uses dependency
+injection to backfill the other dependencies, as well as the context &amp; config.
+This may also return the contexts provider from
+<a class="xref" href="ZptSharp.Config.RenderingConfig.html#ZptSharp_Config_RenderingConfig_RootContextsProvider">RootContextsProvider</a> if it is not-null.</p>
+</section>
+      <h4><a class="xref" href="ZptSharp.Expressions.ConfiguredDefaultExpressionTypeDecorator.html">ConfiguredDefaultExpressionTypeDecorator</a></h4>
+      <section><p>Decorator for the <a class="xref" href="ZptSharp.Expressions.IGetsExpressionType.html">IGetsExpressionType</a> service.  If the wrapped service
+does not produce a non-null result, then this decorator returns the
+<a class="xref" href="ZptSharp.Config.RenderingConfig.html#ZptSharp_Config_RenderingConfig_DefaultExpressionType">DefaultExpressionType</a>.</p>
+</section>
+      <h4><a class="xref" href="ZptSharp.Expressions.ContextAllVariablesAndValuesProvider.html">ContextAllVariablesAndValuesProvider</a></h4>
+      <section><p>
+Implementation of <a class="xref" href="ZptSharp.Expressions.IGetsAllVariablesFromContext.html">IGetsAllVariablesFromContext</a> which prefers definitions in the order:
+</p>
+<ol><li></li><li></li><li></li></ol>
+</section>
+      <h4><a class="xref" href="ZptSharp.Expressions.DefinedVariablesOnlyTalesValueForExpressionContextAdapter.html">DefinedVariablesOnlyTalesValueForExpressionContextAdapter</a></h4>
+      <section><p>Implementation of <a class="xref" href="ZptSharp.Expressions.IGetsNamedTalesValue.html">IGetsNamedTalesValue</a> which exposes defined (local &amp; global)
+variables from the wrapped <a class="xref" href="ZptSharp.Expressions.ExpressionContext.html">ExpressionContext</a>.</p>
+</section>
+      <h4><a class="xref" href="ZptSharp.Expressions.ErrorHandlingContext.html">ErrorHandlingContext</a></h4>
+      <section><p>A model/contaier object which represents a context and additionally a handler which may
+be able to handle errors encountered during context processing.</p>
+</section>
+      <h4><a class="xref" href="ZptSharp.Expressions.ErrorHandlingResult.html">ErrorHandlingResult</a></h4>
+      <section><p>Gets the result of an attempt to handle an error.</p>
+</section>
+      <h4><a class="xref" href="ZptSharp.Expressions.EvaluationException.html">EvaluationException</a></h4>
+      <section><p>Exception raised when there is a problem evaluating an expression.
+See also: <a class="xref" href="ZptSharp.Expressions.IEvaluatesExpression.html">IEvaluatesExpression</a>.</p>
+</section>
+      <h4><a class="xref" href="ZptSharp.Expressions.EvaluatorTypeRegistry.html">EvaluatorTypeRegistry</a></h4>
+      <section><p>Implementation of <a class="xref" href="ZptSharp.Expressions.IRegistersExpressionEvaluator.html">IRegistersExpressionEvaluator</a> which uses a
+in-memory dictionary to maintain registrations of evaluator types.</p>
+</section>
+      <h4><a class="xref" href="ZptSharp.Expressions.EvaluatorTypeResolver.html">EvaluatorTypeResolver</a></h4>
+      <section><p>Implementation of <a class="xref" href="ZptSharp.Expressions.IGetsEvaluatorForExpressionType.html">IGetsEvaluatorForExpressionType</a> which uses a
+<span class="xref">System.IServiceProvider</span> to resolve expression evaluators.</p>
+</section>
+      <h4><a class="xref" href="ZptSharp.Expressions.ExpressionContext.html">ExpressionContext</a></h4>
+      <section><p>An object which provides contextual values for the rendering of TALES expressions.</p>
+</section>
+      <h4><a class="xref" href="ZptSharp.Expressions.ExpressionContextExtensions.html">ExpressionContextExtensions</a></h4>
+      <section><p>Extension methods for <a class="xref" href="ZptSharp.Expressions.ExpressionContext.html">ExpressionContext</a>.</p>
+</section>
+      <h4><a class="xref" href="ZptSharp.Expressions.ExpressionEvaluatorExtensions.html">ExpressionEvaluatorExtensions</a></h4>
+      <section><p>Extension methods used with an <a class="xref" href="ZptSharp.Expressions.IEvaluatesExpression.html">IEvaluatesExpression</a>.</p>
+</section>
+      <h4><a class="xref" href="ZptSharp.Expressions.ExpressionTypeProviderFactory.html">ExpressionTypeProviderFactory</a></h4>
+      <section><p>Default implementation of <a class="xref" href="ZptSharp.Expressions.IGetsExpressionTypeProvider.html">IGetsExpressionTypeProvider</a>.</p>
+</section>
+      <h4><a class="xref" href="ZptSharp.Expressions.GlobalVariablesOnlyTalesValueForExpressionContextAdapter.html">GlobalVariablesOnlyTalesValueForExpressionContextAdapter</a></h4>
+      <section><p>Implementation of <a class="xref" href="ZptSharp.Expressions.IGetsNamedTalesValue.html">IGetsNamedTalesValue</a> which exposes global variables from the
+wrapped <a class="xref" href="ZptSharp.Expressions.ExpressionContext.html">ExpressionContext</a>.</p>
+</section>
+      <h4><a class="xref" href="ZptSharp.Expressions.LocalVariablesOnlyTalesValueForExpressionContextAdapter.html">LocalVariablesOnlyTalesValueForExpressionContextAdapter</a></h4>
+      <section><p>Implementation of <a class="xref" href="ZptSharp.Expressions.IGetsNamedTalesValue.html">IGetsNamedTalesValue</a> which exposes local variables from the
+wrapped <a class="xref" href="ZptSharp.Expressions.ExpressionContext.html">ExpressionContext</a>.</p>
+</section>
+      <h4><a class="xref" href="ZptSharp.Expressions.NamedTalesValueForExpressionContextAdapter.html">NamedTalesValueForExpressionContextAdapter</a></h4>
+      <section><p>A wrapper/adapter for an instance of <a class="xref" href="ZptSharp.Expressions.ExpressionContext.html">ExpressionContext</a> which allows it to be used as
+an instance of <a class="xref" href="ZptSharp.Expressions.IGetsNamedTalesValue.html">IGetsNamedTalesValue</a>.</p>
+</section>
+      <h4><a class="xref" href="ZptSharp.Expressions.NoEvaluatorForExpressionTypeException.html">NoEvaluatorForExpressionTypeException</a></h4>
+      <section><p>Raised when an implementation of <a class="xref" href="ZptSharp.Expressions.IGetsEvaluatorForExpressionType.html">IGetsEvaluatorForExpressionType</a> cannot get an
+appropriate evaluator for an expression type.</p>
+</section>
+      <h4><a class="xref" href="ZptSharp.Expressions.PrefixExpressionTypeProvider.html">PrefixExpressionTypeProvider</a></h4>
+      <section><p>Implementation of <a class="xref" href="ZptSharp.Expressions.IGetsExpressionType.html">IGetsExpressionType</a> which reads the expression prefix.
+This class also implements <a class="xref" href="ZptSharp.Expressions.IRemovesPrefixFromExpression.html">IRemovesPrefixFromExpression</a>.</p>
+</section>
+      <h4><a class="xref" href="ZptSharp.Expressions.RegistryBasedExpressionEvaluator.html">RegistryBasedExpressionEvaluator</a></h4>
+      <section><p>
+An implementation of <a class="xref" href="ZptSharp.Expressions.IEvaluatesExpression.html">IEvaluatesExpression</a> which makes use of
+the registry pattern to select and delegate execution to another implementation (of
+the same interface).  This selection occurs based upon the expression type.
+</p>
+<p>
+Additionally, when delegating to an implementation of <a class="xref" href="ZptSharp.Expressions.IEvaluatesExpression.html">IEvaluatesExpression</a>
+from the registry, any expression-type prefix upon the expression is removed before
+this delegation occurs.
+</p>
+</section>
+      <h4><a class="xref" href="ZptSharp.Expressions.RepetitionInfo.html">RepetitionInfo</a></h4>
+      <section><p>Provides contextual information about a repetition/iteration.  This is used in looping constructs.</p>
+</section>
+      <h4><a class="xref" href="ZptSharp.Expressions.RomanNumeralGenerator.html">RomanNumeralGenerator</a></h4>
+      <section><p>Implementation of <a class="xref" href="ZptSharp.Expressions.IGetsRomanNumeralForNumber.html">IGetsRomanNumeralForNumber</a> which generates roman numerals from integers.</p>
+</section>
+      <h4><a class="xref" href="ZptSharp.Expressions.RootContextConfigHelper.html">RootContextConfigHelper</a></h4>
+      <section><p>An implementation of <a class="xref" href="ZptSharp.IConfiguresRootContext.html">IConfiguresRootContext</a> which allows setting
+of global variables into an expression context.</p>
+</section>
+      <h4><a class="xref" href="ZptSharp.Expressions.StructuredMarkupObjectAdapter.html">StructuredMarkupObjectAdapter</a></h4>
+      <section><p>An implementation of <a class="xref" href="ZptSharp.IGetsStructuredMarkup.html">IGetsStructuredMarkup</a> which wraps any <code>object</code>,
+exposing its <code>Object.ToString()</code> method via <a class="xref" href="ZptSharp.Expressions.StructuredMarkupObjectAdapter.html#ZptSharp_Expressions_StructuredMarkupObjectAdapter_GetMarkupAsync">GetMarkupAsync()</a>.</p>
+</section>
+      <h4><a class="xref" href="ZptSharp.Expressions.WellKnownExpressionPrefix.html">WellKnownExpressionPrefix</a></h4>
+      <section><p>A container for runtime constants representing the built-in types of TALES expression.</p>
+</section>
+    <h3 id="structs">Structs
+  </h3>
+      <h4><a class="xref" href="ZptSharp.Expressions.GetValueResult.html">GetValueResult</a></h4>
+      <section><p>Represents the outcome of
+<a class="xref" href="ZptSharp.Expressions.IGetsNamedTalesValue.html#ZptSharp_Expressions_IGetsNamedTalesValue_TryGetValueAsync_System_String_System_Threading_CancellationToken_">TryGetValueAsync(String, CancellationToken)</a></p>
+</section>
+    <h3 id="interfaces">Interfaces
+  </h3>
+      <h4><a class="xref" href="ZptSharp.Expressions.IEvaluatesExpression.html">IEvaluatesExpression</a></h4>
+      <section><p>An object which evaluates and returns the result of a TALES expression.
+This is the core interface for an &quot;expression evaluator&quot;.</p>
+</section>
+      <h4><a class="xref" href="ZptSharp.Expressions.IGetsAllVariablesFromContext.html">IGetsAllVariablesFromContext</a></h4>
+      <section><p>An object which can get all of the variable definitions and their corresponding values
+from an <a class="xref" href="ZptSharp.Expressions.ExpressionContext.html">ExpressionContext</a>.</p>
+</section>
+      <h4><a class="xref" href="ZptSharp.Expressions.IGetsAlphabeticValueForNumber.html">IGetsAlphabeticValueForNumber</a></h4>
+      <section><p>An object which can get an alphabetic reference for a specified non-negative integer.</p>
+</section>
+      <h4><a class="xref" href="ZptSharp.Expressions.IGetsBuiltinContextsProvider.html">IGetsBuiltinContextsProvider</a></h4>
+      <section><p>An object which gets an instance of <a class="xref" href="ZptSharp.Expressions.BuiltinContextsProvider.html">BuiltinContextsProvider</a> for a specified
+expression context and rendering configuration.</p>
+</section>
+      <h4><a class="xref" href="ZptSharp.Expressions.IGetsDictionaryOfNamedTalesValues.html">IGetsDictionaryOfNamedTalesValues</a></h4>
+      <section><p>A specialisation of <a class="xref" href="ZptSharp.Expressions.IGetsNamedTalesValue.html">IGetsNamedTalesValue</a> which can provide
+a dictionary of many named TALES values.</p>
+</section>
+      <h4><a class="xref" href="ZptSharp.Expressions.IGetsEvaluatorForExpressionType.html">IGetsEvaluatorForExpressionType</a></h4>
+      <section><p>An object which chooses a strategy (an appropriate implementation of <a class="xref" href="ZptSharp.Expressions.IEvaluatesExpression.html">IEvaluatesExpression</a>)
+for a specified expression type.</p>
+</section>
+      <h4><a class="xref" href="ZptSharp.Expressions.IGetsExpressionType.html">IGetsExpressionType</a></h4>
+      <section><p>An object which can determine the string identifier which indicates an expression type.
+This is typically a prefix to the expression body.</p>
+</section>
+      <h4><a class="xref" href="ZptSharp.Expressions.IGetsExpressionTypeProvider.html">IGetsExpressionTypeProvider</a></h4>
+      <section><p>An object which may be used as a factory for instances of <a class="xref" href="ZptSharp.Expressions.IGetsExpressionType.html">IGetsExpressionType</a>.</p>
+</section>
+      <h4><a class="xref" href="ZptSharp.Expressions.IGetsNamedTalesValue.html">IGetsNamedTalesValue</a></h4>
+      <section><p>An object which provides its own logic for getting named values when resolving a TALES expression.</p>
+</section>
+      <h4><a class="xref" href="ZptSharp.Expressions.IGetsRomanNumeralForNumber.html">IGetsRomanNumeralForNumber</a></h4>
+      <section><p>An object which will get the roman numereral version of a specified non-zero, non-negative number.
+Roman numerals are generated and returned in uppercase, using the English/Latin alphabet (invariant culture).</p>
+</section>
+      <h4><a class="xref" href="ZptSharp.Expressions.IRegistersExpressionEvaluator.html">IRegistersExpressionEvaluator</a></h4>
+      <section><p>An object which is used to register implementations of <a class="xref" href="ZptSharp.Expressions.IEvaluatesExpression.html">IEvaluatesExpression</a> to be used
+for specific expression types.</p>
+</section>
+      <h4><a class="xref" href="ZptSharp.Expressions.IRemovesPrefixFromExpression.html">IRemovesPrefixFromExpression</a></h4>
+      <section><p>An object which can get a version of a TALES expression where
+its expression-type prefix (if any) has been removed.</p>
+</section>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In This Article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            
+            <span>Generated by <strong>DocFX</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>
