@@ -36,14 +36,17 @@ if ($Env:APPVEYOR_REPO_BRANCH -eq "production") {
 if($Env:APPVEYOR -eq "True") {
     Write-Host "Setting up git to publish site"
     git config --global user.name "AppVeyor (on behalf of Craig Fowler)"
-    git config --global  user.email "craig+appveyor@csf-dev.com"
+    git config --global user.email "craig+appveyor@csf-dev.com"
     git config --global credential.helper store
     Set-Content -Path "$HOME\.git-credentials" -Value "https://$($Env:GITHUB_SECRET_KEY):x-oauth-basic@github.com`n" -NoNewline
 }
 
-# Because of autocrlf, the git add command could report warnings which cause the script to
+# The git commands below could report warnings which cause the script to
 # stop unless I change the error preference first
 $ErrorActionPreference = "silentlycontinue"
+
+Write-Host "Switching to a temp branch"
+git checkout -b temp/publish-docs
 
 Write-Host "Adding content"
 git add --all docs/
@@ -51,7 +54,14 @@ git add --all docs/
 Write-Host "Creating commit"
 git commit -m "Auto-publish docs website [skip ci]"
 
-if($Env:APPVEYOR -eq "True") {
+if($Env:APPVEYOR -eq "True" -and $Env:APPVEYOR_REPO_BRANCH -eq "production") {
     Write-Host "Pushing to origin"
-    git push origin HEAD:$Env:APPVEYOR_REPO_BRANCH
+    git checkout master
+    git pull
+    git merge temp/publish-docs --no-ff -m "Merge newly-published docs [skip ci]"
+    git push origin master
+}
+elseif ($Env:APPVEYOR -eq "True") {
+    Write-Host "Pushing to origin"
+    git push origin temp/publish-docs:master
 }
