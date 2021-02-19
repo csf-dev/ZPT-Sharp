@@ -15,6 +15,9 @@ else {
     exit 0
 }
 
+Write-Host "Switching to a temp branch"
+git checkout -b temp/publish-docs
+
 Write-Host "Publishing the docs site to $BaseDir"
 
 Write-Host "Clearing $BaseDir ..."
@@ -51,7 +54,14 @@ git add --all docs/
 Write-Host "Creating commit"
 git commit -m "Auto-publish docs website [skip ci]"
 
-if($Env:APPVEYOR -eq "True") {
+if($Env:APPVEYOR -eq "True" -and $Env:APPVEYOR_REPO_BRANCH -eq "production") {
     Write-Host "Pushing to origin"
-    git push origin HEAD:$Env:APPVEYOR_REPO_BRANCH
+    git checkout master
+    git pull
+    git merge temp/publish-docs --no-ff -m "Merge newly-published docs [skip ci]"
+    git push origin master
+}
+elseif ($Env:APPVEYOR -eq "True") {
+    Write-Host "Pushing to origin"
+    git push origin temp/publish-docs:master
 }
