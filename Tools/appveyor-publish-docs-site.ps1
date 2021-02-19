@@ -15,9 +15,6 @@ else {
     exit 0
 }
 
-Write-Host "Switching to a temp branch"
-git checkout -b temp/publish-docs
-
 Write-Host "Publishing the docs site to $BaseDir"
 
 Write-Host "Clearing $BaseDir ..."
@@ -39,14 +36,17 @@ if ($Env:APPVEYOR_REPO_BRANCH -eq "production") {
 if($Env:APPVEYOR -eq "True") {
     Write-Host "Setting up git to publish site"
     git config --global user.name "AppVeyor (on behalf of Craig Fowler)"
-    git config --global  user.email "craig+appveyor@csf-dev.com"
+    git config --global user.email "craig+appveyor@csf-dev.com"
     git config --global credential.helper store
     Set-Content -Path "$HOME\.git-credentials" -Value "https://$($Env:GITHUB_SECRET_KEY):x-oauth-basic@github.com`n" -NoNewline
 }
 
-# Because of autocrlf, the git add command could report warnings which cause the script to
+# The git commands below could report warnings which cause the script to
 # stop unless I change the error preference first
 $ErrorActionPreference = "silentlycontinue"
+
+Write-Host "Switching to a temp branch"
+git checkout -b temp/publish-docs
 
 Write-Host "Adding content"
 git add --all docs/
