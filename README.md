@@ -8,18 +8,23 @@ ZPT source files remain syntactically valid HTML/XML and may even be opened/prev
 
 ## Documentation
 
-[Documentation for the current production release] of ZptSharp is all available on the ZptSharp website.
-[Draft documentation for the upcoming/next version] is also available.
+ZptSharp's extensive documentation is hosted on **[the ZptSharp website]**.
+The main website content reflects the most recent stable release of ZptSharp.
+Documentation for other versions is available though:
 
-[Documentation for the current production release]: https://csf-dev.github.io/ZPT-Sharp/
+* [Draft documentation for the upcoming/next version]
+* Documentation for legacy versions
+  * [Version 1.x]
+
+[the ZptSharp website]: https://csf-dev.github.io/ZPT-Sharp/
 [Draft documentation for the upcoming/next version]: https://csf-dev.github.io/ZPT-Sharp/_vnext/
+[Version 1.x]: https://csf-dev.github.io/ZPT-Sharp/_legacy/v1.x/
 
 ## Source control branches
 
-The main branches for this repository as as follows:
+The main branches for this repository are as follows:
 
-* The **master** branch represents the latest development/next-release code 
-  * Currently this is work toward [the v2.0.0 milestone]
+* The **master** branch represents the latest development/next-release code
 * The **production** branch represents the most recent release version
 
 ## Continuous integration status
@@ -33,6 +38,3 @@ They provide a summary of the health of the build & test process.
 | Linux         | [![Travis (Linux) build status](https://api.travis-ci.org/csf-dev/ZPT-Sharp.svg?branch=master)](https://travis-ci.org/github/csf-dev/ZPT-Sharp) |
 | Code quality  | [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=ZptSharp&metric=alert_status)](https://sonarcloud.io/dashboard?id=ZptSharp) |
 | Test coverage | [![Coverage](https://sonarcloud.io/api/project_badges/measure?project=ZptSharp&metric=coverage)](https://sonarcloud.io/dashboard?id=ZptSharp) |
-
-[the v2.0.0 milestone]: https://github.com/csf-dev/ZPT-Sharp/milestone/17
-[the v1.1.0 release]: https://github.com/csf-dev/ZPT-Sharp/releases/tag/v1.1.0

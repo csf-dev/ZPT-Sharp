@@ -51,3 +51,10 @@ As well as the source code, [the ZptSharp GitHub repository] hosts issues & a di
 [How to contribute]: Contributing.md
 [Writing new document providers]: WritingDocumentProviders.md
 [Writing new expression evaluators]: WritingExpressionEvaluators.md
+
+## Documentation for previous versions
+
+Documentation is available for previous versions of ZptSharp:
+
+* [ZPT-Sharp **version 1.x**](https://csf-dev.github.io/ZPT-Sharp/_legacy/v1.x/)
+  * _In these versions, ZptSharp was distributed under a different name and with different NuGet packages._
