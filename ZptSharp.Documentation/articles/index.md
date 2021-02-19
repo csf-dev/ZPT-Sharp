@@ -21,16 +21,20 @@ An ideal follow-up to using a quick start guide is to follow [the ZPT tutorial].
 ## Reference documentation
 
 * [ZptSharp MVC view engines]
+* [The NuGet packages]
 * [Consuming the API]
 * [ZPT syntax]
 * [The command line renderer]
 * [Compatibility]
+* [Logging]
 
 [ZptSharp MVC view engines]: ViewEngines.md
+[The NuGet packages]: NuGetPackages.md
 [Consuming the API]: ../api/index.md
 [ZPT syntax]: ZPTReference/index.md
 [The command line renderer]: CliRenderer.md
 [Compatibility]: Compatibility.md
+[Logging]: Logging.md
 
 ## Contributing & extending
 

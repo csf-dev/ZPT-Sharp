@@ -2,9 +2,13 @@
 
 # Intuitive HTML & XML document templates for .NET
 
+ZptSharp is a document template language & renderer for .NET Framework, .NET Core & .NET 5+.
+It may be used as a **View Engine** for AS<span>P.N</span>ET MVC5 or AS<span>P.N</span>ET Core MVC.
+It also comes with a command-line rendering tool and may be consumed by your own applications as an API.
+
 <section class="sample">
 
-## Sample ZptSharp markup
+## Sample ZPT markup
 
 ```html
 <ul>
@@ -21,6 +25,9 @@
 
 ## Get started
 
+Here are some recommended first steps to get learning about ZptSharp and the ZPT syntax.
+You may also visit [the documentation home page] for more links & info.
+
 * [What is ZptSharp?]
 * Quick start
   * [ASP.NET Core MVC]
@@ -35,6 +42,7 @@
 [Command line renderer]: articles/QuickStart/CliApp.md
 [Consume the API]: articles/QuickStart/ConsumingTheApi.md
 [ZPT tutorial]: articles/ZptTutorial/index.md
+[the documentation home page]: articles/index.md
 
 </section>
 
