@@ -1,0 +1,230 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Tutorial: Introducing METAL macros </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Tutorial: Introducing METAL macros ">
+    <meta name="generator" content="docfx 2.56.6.0">
+    
+    <link rel="shortcut icon" href="../../favicon.ico">
+    <link rel="stylesheet" href="../../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../../styles/docfx.css">
+    <link rel="stylesheet" href="../../styles/main.css">
+    <meta property="docfx:navrel" content="../../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../../index.html">
+                <img id="logo" class="svg" src="../../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="">
+<h1 id="tutorial-introducing-metal-macros">Tutorial: Introducing METAL macros</h1>
+
+<p>So far we have learned how to bind/connect your model data with page templates, this is a part of the ZPT syntax named &quot;TAL&quot;.
+Now we will begin looking at another part of the ZPT syntax named &quot;METAL&quot;.
+The purpose of METAL is to declare and consume reusable sections of markup named <strong>macros</strong>; you could think of macros like components of markup if you wish.</p>
+<h2 id="macros-are-defined-and-then-used">Macros are defined and then used</h2>
+<p>To keep our example markup tidy, let's replace all of the current markup (from previous tutorial steps) with the following.  Also we will <em>clear the model</em> (replace it with an empty object), we're not going to use any data from the model quite yet.</p>
+<pre><code class="lang-html">&lt;html&gt;
+&lt;head&gt;
+&lt;title&gt;ZptSharp METAL macro usage example&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;div metal:define-macro=&quot;myFirstMacro&quot;&gt;
+    &lt;h2&gt;This is a METAL macro&lt;/h2&gt;
+    &lt;p&gt;Here is some content from the macro.&lt;/p&gt;
+&lt;/div&gt;
+&lt;p&gt;This is some plain content from the template.&lt;/p&gt;
+&lt;div metal:use-macro=&quot;myFirstMacro&quot;&gt;
+    &lt;p&gt;This content will be replaced by the macro.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+<p>Let's see what happens when we render this.
+What we see is that the heading &quot;This is a METAL macro&quot; and paragraph &quot;Here is some content from the macro.&quot; <em>is displayed twice</em>, once before the line which reads &quot;This is some plain content from the template.&quot; and once again afterward.</p>
+<p>A <code>metal:define-macro</code> attribute <em>does not affect the rendering of a document template on its own</em>.
+The <code>metal:define-macro</code> attribute marks the element upon which it appears as a macro, with the name specified in the attribute value.
+Macros are only useful when they are used, such as by a <code>metal:use-macro</code> attribute.  The <code>metal:use-macro</code> attribute replaces <em>the whole current element and all of its content/descendents</em> with the markup of the macro which it uses.</p>
+<p>A macro is sometimes referred to as a <strong>subtree</strong> of the markup document.
+A subtree always begins with a single root element (the element which contains the <code>metal:define-macro</code> attribute) and includes all of that elements content &amp; descendents.</p>
+<h2 id="metal-processing-happens-before-tal">METAL processing happens before TAL</h2>
+<p>All ZPT-specific attributes (document-wide) which have the <code>metal</code> prefix are processed before any which have the <code>tal</code> prefix.
+We can demonstrate that with the following modification to the markup; we will add a <code>tal:content</code> attribute to the macro and provide some model values from variable definitions.
+Replace the entire contents of the <code>&lt;body&gt;</code> tag (from the example above) with the following.</p>
+<pre><code class="lang-html">&lt;div tal:define=&quot;time string:morning&quot;&gt;
+    &lt;div metal:define-macro=&quot;greeting&quot;&gt;
+        &lt;p tal:content=&quot;string:Good ${time}!&quot;&gt;Good afternoon!&lt;/p&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+&lt;div tal:define=&quot;time string:night&quot;&gt;
+    &lt;div metal:use-macro=&quot;greeting&quot;&gt;
+        &lt;p&gt;This will be replaced&lt;/p&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+<p>The outcome from rendering this markup is two paragraphs (surrounded in <code>&lt;div&gt;</code> elements), the first reading &quot;Good morning!&quot; and the second reading &quot;Good night!&quot;.</p>
+<h3 id="analysis">Analysis</h3>
+<p>Let's walk though this example logically to understand what has happened here:</p>
+<ol>
+<li>METAL attributes are being processed and the <code>metal:define-macro</code> attribute creates a macro named &quot;greeting&quot;.</li>
+<li>METAL attributes are being processed and the <code>metal:use-macro</code> attribute is processed.
+<ul>
+<li>The <code>&lt;div metal:use-macro=&quot;greeting&quot;&gt;</code> element (and all content/descendents) are replaced with the subtree of the document which begins with the <code>&lt;div metal:define-macro=&quot;greeting&quot;&gt;</code> element.</li>
+</ul>
+</li>
+<li>TAL attributes are now being processed and the <code>time</code> variable is defined as &quot;morning&quot; for the first <code>&lt;div&gt;</code> element.</li>
+<li>TAL attributes are being processed and the <code>&lt;p&gt;</code> element (on line 3 of the code listing above) has a <code>tal:content</code> attribute processed.
+<ul>
+<li>This writes content from the expression <code>string:Good ${time}!</code>.  Because the variable <code>time</code> has the value &quot;morning&quot;, it writes &quot;Good morning!&quot;.</li>
+</ul>
+</li>
+<li>TAL attributes are now being processed and the <code>time</code> variable is defined as &quot;night&quot; for the second-outermost <code>&lt;div&gt;</code> element.</li>
+<li>TAL attributes are being processed and the <code>tal:content</code> attribute upon the second copy of the <code>&lt;p&gt;</code> element from the macro is processed.
+<ul>
+<li><em>This element cannot be directly seen from the source markup</em>.  It is here because it was copied during the macro-usage in step 2, above.</li>
+<li>Once again it writes content using the expression <code>string:Good ${time}!</code> but in this position the <code>time</code> variable has a value of &quot;night&quot;, and so the written content is &quot;Good night!&quot;.</li>
+</ul>
+</li>
+</ol>
+<h3 id="using-this-technique">Using this technique</h3>
+<p>Whilst we have demonstrated the above with explicit variable definitions, the same principle holds true for variables created by a <code>tal:repeat</code> attribute.
+Imagine a product-listing based upon <code>tal:repeat</code>, where each listed item is shown using a macro usage.
+In each iteration the variable representing the product (which is defined via the repetition) is different.
+When the macro uses this variable in TAL attributes, it will be using that iteration's version of the variable.</p>
+<h2 id="macros-may-be-used-from-other-files">Macros may be used from other files</h2>
+<p>So far we have seen a simple example of a macro which is both defined and used within the same document.
+As reusable 'components' of markup though, macros come into their own when they are declared in a file of their own and consumed by referencing that 'shared' source file.
+This is the most common way in which macros are used; the examples shown above, whilst simple, are actually quite rare in real applications.</p>
+<h3 id="the-greeting-macro-in-its-own-file">The greeting macro in its own file</h3>
+<p>Let's try this technique out; in the same directory as your current template file, create a new text file named <code>greeting.pt</code> and set its content to the following:</p>
+<pre><code class="lang-html">&lt;html&gt;
+&lt;head&gt;
+&lt;title&gt;ZptSharp 'greeting' macro&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;div&gt;
+    &lt;div metal:define-macro=&quot;greeting&quot;&gt;
+        &lt;p tal:content=&quot;string:Good ${time}!&quot;&gt;Good afternoon!&lt;/p&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+<p>Notice that we have included HTML markup content outside of the macro itself in this source file.
+It's not neccesary to do that at all; when we come to use the macro, everything outside of the <code>&lt;div metal:define-macro=&quot;greeting&quot;&gt;</code> element will be ignored.
+It is a helpful &amp; normal technique though, because it helps the developer designing and working upon the macro's markup <em>to see it in context</em> of how it might be used.
+When writing macros in their own source files, consider adding context surrounding the macro to help remind you of the expected markup which will surround the macro.
+There is no need for this context-markup to include any TAL or METAL attributes, since they will not be processed.</p>
+<h3 id="the-macro-usage">The macro usage</h3>
+<p>Let's now change our main template document to use the macro not from the same file but from the newly-created <code>greeting.pt</code> file.
+Alter the content of the main template document (inside the <code>&lt;body&gt;</code> element) to the following:</p>
+<pre><code class="lang-html">&lt;div tal:define=&quot;time string:morning&quot;&gt;
+    &lt;div metal:use-macro=&quot;container/greeting.pt/macros/greeting&quot;&gt;Greeting here&lt;/div&gt;
+&lt;/div&gt;
+&lt;div tal:define=&quot;time string:night&quot;&gt;
+    &lt;div metal:use-macro=&quot;container/greeting.pt/macros/greeting&quot;&gt;Greeting here&lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+<h3 id="seeing-the-result">Seeing the result</h3>
+<p>When we render the main document we should see that the <code>greeting</code> macro, defined in the <code>greeting.pt</code> source file has been used twice, just as the previous example.
+The macro is now truly reusable as a self-contained component.</p>
+<h3 id="more-info-the-use-macro-expression">More info: The use-macro expression</h3>
+<p>Let's look in a little more depth at the expression which appears in the <code>metal:use-macro</code> attribute value.
+The <code>container</code> variable is a special automatic variable (a <strong>root context</strong>) which is made available by ZPT.
+Using the <code>container</code> variable is permitted when the current ZPT document template is being rendered from a file/directory path (or from somewhere which could logically be considered to be 'a container for things').
+The variable's value is the container for the current ZPT document template; in this case (because we are rendering a template from a file) it is the directory containing the file.</p>
+<p>From the directory, we may navigate to the <code>greeting.pt</code> template file in the same directory, then into that template file's collection of <code>macros</code> and finally to the macro named <code>greeting</code>.</p>
+<h2 id="next-defining--filling-macro-slots">Next: Defining &amp; filling macro slots</h2>
+<p>We have seen how macros are reusable subtrees of markup which may be consumed from other documents.
+Macros are more powerful than this, though, because they may contain extension points named <strong>slots</strong>.
+<a href="Page6.html">Slots enable the injection of markup, customizing the macro, from the point of consumption</a>.</p>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/csf-dev/ZPT-Sharp/blob/production/ZptSharp.Documentation/articles/ZptTutorial/Page5.md/#L1" class="contribution-link">Improve this Doc</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In This Article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            
+            <span>Generated by <strong>DocFX</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../../styles/docfx.js"></script>
+    <script type="text/javascript" src="../../styles/main.js"></script>
+  </body>
+</html>
