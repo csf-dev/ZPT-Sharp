@@ -1,0 +1,296 @@
+﻿<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TALES 'load' expressions</title>
+<base href="https://csf-dev.github.io/ZPT-Sharp/_legacy/v1.x/">
+<style type="text/css">
+@import url(css/styles.css);
+</style>
+
+<script data-main="js/config/main" type="text/javascript" src="js/lib/require.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.4.0/styles/default.min.css">
+</head>
+<body class="page_load_expressions">
+<div class="content_wrapper">
+  <header class="page_header">
+    <div class="hamburger_menu" title="Show/hide navigation">
+      <span class="hamburger_line"></span>
+      <span class="hamburger_line"></span>
+      <span class="hamburger_line"></span>
+    </div>
+    <h2>
+      <a href="index.html">ZPT Sharp</a>
+      <em>Zen HTML views</em>
+    </h2>
+  </header>
+  <div class="main_page_area">
+    <nav id="site_navigation">
+      <h2>Site navigation</h2>
+      <ul>
+				<li class="nav_section">
+          <h3>First steps</h3>
+					<ul>
+            <li>
+              <a href="advantages-of-zpt-views.html">Why use ZPT-Sharp</a>
+						</li>
+            <li>
+              <a href="hello-world.html">Hello World example</a>
+            </li>
+            <li>
+              <a href="writing-pages-using-zpt.html">Learn ZPT syntax</a>
+            </li>
+					</ul>
+				</li>
+        <li class="nav_section">
+          <h3>Usage</h3>
+          <ul>
+            <li>
+              <a href="asp-net-mvc-view-engine.html">ASP.NET MVC5</a>
+            </li>
+            <li>
+              <a href="command-line-renderer.html">Command-line app</a>
+            </li>
+            <li>
+              <a href="page-rendering-api.html">As an API</a>
+            </li>
+            <li>
+              <a href="logging.html">Diagnostics &amp; logging</a>
+            </li>
+          </ul>
+        </li>
+        <li class="nav_section">
+          <h3>Reference</h3>
+          <ul>
+            <li>
+              <a href="metal/introduction.html">METAL syntax</a>
+            </li>
+            <li>
+              <a href="tal/introduction.html">TAL syntax</a>
+            </li>
+            <li>
+              <a href="tales/introduction.html">TALES syntax</a>
+            </li>
+            <li>
+              <a href="api/index.html">API documentation</a>
+            </li>
+          </ul>
+        </li>
+        <li class="nav_section">
+          <h3>Installation</h3>
+          <ul>
+            <li>
+              <a href="nuget-packages.html">NuGet packages</a>
+            </li>
+            <li>
+              <a href="download.html">ZIP download</a>
+            </li>
+            <li>
+              <a href="plugins.html">Plugins</a>
+            </li>
+            <li>
+              <a href="configuration.html">Configuration</a>
+            </li>
+          </ul>
+        </li>
+        <li class="nav_section">
+          <h3>Contribute</h3>
+          <ul>
+            <li>
+              <a href="https://github.com/csf-dev/ZPT-Sharp">Github project</a>
+            </li>
+            <li>
+              <a href="https://github.com/csf-dev/ZPT-Sharp/issues">Issue tracker</a>
+            </li>
+            <li>
+              <a href="writing-plugins.html">Writing plugins</a>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </nav>
+    <section class="main_page_content">
+      <header>
+        <div class="expression plugin_note note">
+        <h2>Plugin note</h2>
+        <p>
+          This functionality is contained within an
+          <em><a href="plugins.html">expression evaluator plugin</a></em>.
+          As such, it is available only when the corresponding plugin is installed.
+        </p>
+        <div class="plugin_details">
+          <h3>Plugin assembly</h3>
+          <span><code>CSF.Zpt.ExpressionEvaluators.LoadExpressions.dll</code></span>
+          <h3><span>Plugin class</span></h3>
+          <span><code>CSF.Zpt.ExpressionEvaluators.LoadExpressions.LoadExpressionEvaluator</code></span>
+          <h3><span>Expression prefix</span></h3>
+          <span><code>load:</code></span>
+        </div>
+      </div>
+        <h1>TALES 'load' expressions</h1>
+      </header>
+      <nav id="page_navigation">
+        <h2>Page contents</h2>
+        <ol>
+          <li>
+            <a href="tales/load-expressions.html#syntax">Syntax</a>
+          </li>
+          <li>
+            <a href="tales/load-expressions.html#behaviour">Behaviour</a>
+						<ol>
+              <li>
+							  <a href="tales/load-expressions.html#rendering">Rendering loaded content</a>
+							</li>
+						</ol>
+          </li>
+          <li>
+            <a href="tales/load-expressions.html#use_case">Use case for load expressions</a>
+            <ol>
+              <li>
+                <a href="tales/load-expressions.html#non_functional_example">A non-functioning example</a>
+              </li>
+              <li>
+                <a href="tales/load-expressions.html#working_example">Using a load expression</a>
+              </li>
+            </ol>
+          </li>
+        </ol>
+      </nav>
+			<p>
+        The TALES <strong>load</strong> expression is used to render another document (or
+			  <a href="metal/introduction.html">a METAL macro within a document</a>) and return the result of that rendering.
+			</p>
+			<p>
+        Load expressions allow <a href="tal/introduction.html">TAL</a> to perform element-replacement akin to METAL,
+				<em>although in a very limited manner</em>.
+			</p>
+			<h2 id="syntax">Syntax</h2>
+      <pre><code class="nohighlight">load:EXPRESSION</code></pre>
+			<p>
+        The content of a <code>load:</code> expression is treated itself as an expression (the 'inner expression').
+				Any valid expression is acceptable, although it should generally evaluate to either
+				<strong>a ZPT document</strong> or <strong>a ZPT macro</strong>.
+			</p>
+			<h2 id="behaviour">Behaviour</h2>
+			<p>
+        The logic for the evaluation of a load expression is as follows:
+			</p>
+			<ul>
+        <li>
+          If the inner expression evaluates to
+          <strong>a ZPT document</strong> then that entire document will be rendered using ZPT.
+				</li>
+        <li>
+          If the inner expression evaluates to
+          <strong>a ZPT macro</strong> then that macro will be copied to a new (empty) ZPT document
+          and rendered.
+        </li>
+        <li>
+          If the inner expression <a href="tales/cancellation.html">cancels the action</a> then the load
+          expression will also cancel the action.
+        </li>
+        <li>
+          If the inner expression evaluates to <code>null</code> then the load expression will evaluate to null.
+        </li>
+        <li>
+          If an inner expression evaluates to anything which is not one one of the above then an error will be
+          raised.
+        </li>
+			</ul>
+			<p>
+		    In both of the cases where a document is loaded and rendered, the result of that rendering
+				(as a string) will be returned as the value of the load expression.
+			</p>
+			<h3 id="rendering">Rendering loaded content</h3>
+			<p>
+        Load expressions, even though they may reference METAL macros, are not METAL.
+				Thus, a load expression may not directly fill slots, or extend a macro.
+				When documents are rendered using a load expression, they are rendered as a 'standlone' document.
+				The one exception to this is that <em>the loaded document has access to all of the variables defined
+				within the parent</em>.
+			</p>
+			<p>
+        When a document or macro is loaded, the load expression evaluator
+				<a href="tal/define.html">defines new <strong>local</strong> TALES variables</a>
+				for every variable that is currently in-scope where the load attribute appeared.
+				Thus, documents loaded via an expression may make some use of the calling document's model.
+			</p>
+			<h2 id="use_case">Use case for load expressions</h2>
+			<p>
+        The preferred mechanism for re-using markup from other source files is METAL.
+				Macros, slots and macro extension should suffice in most cases.
+			</p>
+			<p>
+        One instance where METAL is of no use is where the content to be re-used is not known at design-time.
+				METAL is evaluated and fully resolved <em>before TAL processing begins</em>.
+			</p>
+      <h3 id="non_functional_example">A non-functioning example</h3>
+      <p>
+				Consider the following example; at face value it looks like it would dynamically select a METAL macro,
+				based upon the product used for the repetition statement.
+				However, <strong>this will not work</strong>.
+				The <strong>use-macro</strong> attribute will be evaluated and resolved before any of the TAL attributes.
+			</p>
+      <pre><code class="html">&lt;ul&gt;
+  &lt;li tal:repeat="product here/ProductList"&gt;
+    &lt;div tal:define="macroName product/GetMacroName;
+                     macro here/Documents/ProductTemplates/macros/?macroName"
+         metal:use-macro="macro"
+         class="product_summary"&gt;
+      Product summary content controlled by a dynamically-selected macro.
+    &lt;/div&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;</code></pre>
+      <h3 id="working_example">Using a load expression</h3>
+			<p>
+        Let us revisit the intention of the example above - to insert content which is dynamically-selected based upon
+				TAL variables.  Here is where the <strong>load</strong> expression becomes useful.
+			</p>
+      <pre><code class="html">&lt;ul&gt;
+  &lt;li tal:repeat="product here/ProductList"&gt;
+    &lt;div tal:define="macroName product/GetMacroName;
+                     macro here/Documents/ProductTemplates/macros/?macroName;
+                     macroContent load:macro"
+         class="product_summary"
+         tal:replace="structure macroContent"&gt;
+      Product summary content controlled by a dynamically-selected macro.
+    &lt;/div&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;</code></pre>
+      <p>
+        The document containing the reusable content is rendered and loaded into the variable
+				<strong>macroContent</strong>.
+				This is then paired with
+				<a href="tal/content-replace.html">a <code>tal:replace</code> attribute, using the <code>structure</code> keyword</a>.
+			</p>
+    </section>
+  </div>
+</div>
+<footer class="page_footer">
+  <section class="copyright">
+    Copyright © 2017
+    <a href="http://csf-dev.com/">CSF Software Limited</a> et al
+  </section>
+  <section class="version">
+    <p>
+      Website built <strong>2017-03-19</strong>;
+      for version
+      <strong>
+        v1.0.0
+      </strong>
+    </p>
+  </section>
+</footer>
+<div class="cookie_statement">
+  <p>
+    This website uses analytics cookies to understand how visitors are making use of its content.
+    This helps decide where improvements can be made in the future.
+    <a href="https://ico.org.uk/for-organisations/guide-to-pecr/cookies-and-similar-technologies/">European and UK law</a>
+    requires us to ask you for your consent to this.
+  </p>
+  <button class="accept">Accept cookies</button>
+</div>
+
+</body>
+</html>
