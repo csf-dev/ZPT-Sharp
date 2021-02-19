@@ -23,8 +23,8 @@
         <VersionPrefix>$(ReleaseVersion)</VersionPrefix>
         <PackageLicenseExpression>MIT</PackageLicenseExpression>
         <Copyright>Copyright 2020 - ZptSharp contributors</Copyright>
-        <PackageProjectUrl>https://github.com/csf-dev/ZPT-Sharp/</PackageProjectUrl>
-        <RepositoryUrl>$(PackageProjectUrl)</RepositoryUrl>
+        <PackageProjectUrl>https://csf-dev.github.io/ZPT-Sharp/</PackageProjectUrl>
+        <RepositoryUrl>https://github.com/csf-dev/ZPT-Sharp/</RepositoryUrl>
         <SignAssembly>true</SignAssembly>
         <AssemblyOriginatorKeyFile>$(MSBuildThisFileDirectory)\CSF-Software-OSS.snk</AssemblyOriginatorKeyFile>
         <DocumentationFile>bin\$(Configuration)\$(TargetFramework)\$(AssemblyName).xml</DocumentationFile>
