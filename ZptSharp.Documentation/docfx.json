@@ -61,6 +61,11 @@
       }
     ],
     "dest": "_site",
+    "globalMetadata": {
+      "_gitContribute": {
+        "branch": "master"
+      }
+    },
     "globalMetadataFiles": [],
     "fileMetadataFiles": [],
     "template": [
