@@ -1,0 +1,28 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <ReleaseVersion>2.0.0</ReleaseVersion>
+    <ProjectGuid>{53a56241-bfd4-4765-9916-ed4880bfd946}</ProjectGuid>
+  </PropertyGroup>
+
+  <Import Project="..\..\Tools\CommonSolutionProperties.props" />
+    
+  <PropertyGroup>
+    <PackageId>ZptSharp.HtmlAgilityPack</PackageId>
+    <Title>ZptSharp HTML Agility Pack integration</Title>
+    <Description>Add-on for ZptSharp which allows it to work with HTML documents by using the HTML Agility Pack (HAP) library.</Description>
+    <TargetFrameworks>$(CommonTargetFrameworks)</TargetFrameworks>
+    <RootNamespace>ZptSharp.Dom</RootNamespace>
+  </PropertyGroup>
+    
+  <ItemGroup>
+    <ProjectReference Include="..\..\ZptSharp.Abstractions\ZptSharp.Abstractions.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="HtmlAgilityPack" Version="1.11.28" />
+    <PackageReference Include="CSF.Collections.EventRaising" Version="1.1.0" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="5.0.0" />
+  </ItemGroup>
+
+</Project>

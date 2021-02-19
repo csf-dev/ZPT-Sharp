@@ -1,0 +1,336 @@
+﻿<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Learn the ZPT syntax</title>
+<base href="https://csf-dev.github.io/ZPT-Sharp/_legacy/v1.x/">
+<style type="text/css">
+@import url(css/styles.css);
+</style>
+
+<script data-main="js/config/main" type="text/javascript" src="js/lib/require.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.4.0/styles/default.min.css">
+</head>
+<body class="page_writing_pages_using_zpt">
+<div class="content_wrapper">
+  <header class="page_header">
+    <div class="hamburger_menu" title="Show/hide navigation">
+      <span class="hamburger_line"></span>
+      <span class="hamburger_line"></span>
+      <span class="hamburger_line"></span>
+    </div>
+    <h2>
+      <a href="index.html">ZPT Sharp</a>
+      <em>Zen HTML views</em>
+    </h2>
+  </header>
+  <div class="main_page_area">
+    <nav id="site_navigation">
+      <h2>Site navigation</h2>
+      <ul>
+				<li class="nav_section">
+          <h3>First steps</h3>
+					<ul>
+            <li>
+              <a href="advantages-of-zpt-views.html">Why use ZPT-Sharp</a>
+						</li>
+            <li>
+              <a href="hello-world.html">Hello World example</a>
+            </li>
+            <li>
+              <a href="writing-pages-using-zpt.html">Learn ZPT syntax</a>
+            </li>
+					</ul>
+				</li>
+        <li class="nav_section">
+          <h3>Usage</h3>
+          <ul>
+            <li>
+              <a href="asp-net-mvc-view-engine.html">ASP.NET MVC5</a>
+            </li>
+            <li>
+              <a href="command-line-renderer.html">Command-line app</a>
+            </li>
+            <li>
+              <a href="page-rendering-api.html">As an API</a>
+            </li>
+            <li>
+              <a href="logging.html">Diagnostics &amp; logging</a>
+            </li>
+          </ul>
+        </li>
+        <li class="nav_section">
+          <h3>Reference</h3>
+          <ul>
+            <li>
+              <a href="metal/introduction.html">METAL syntax</a>
+            </li>
+            <li>
+              <a href="tal/introduction.html">TAL syntax</a>
+            </li>
+            <li>
+              <a href="tales/introduction.html">TALES syntax</a>
+            </li>
+            <li>
+              <a href="api/index.html">API documentation</a>
+            </li>
+          </ul>
+        </li>
+        <li class="nav_section">
+          <h3>Installation</h3>
+          <ul>
+            <li>
+              <a href="nuget-packages.html">NuGet packages</a>
+            </li>
+            <li>
+              <a href="download.html">ZIP download</a>
+            </li>
+            <li>
+              <a href="plugins.html">Plugins</a>
+            </li>
+            <li>
+              <a href="configuration.html">Configuration</a>
+            </li>
+          </ul>
+        </li>
+        <li class="nav_section">
+          <h3>Contribute</h3>
+          <ul>
+            <li>
+              <a href="https://github.com/csf-dev/ZPT-Sharp">Github project</a>
+            </li>
+            <li>
+              <a href="https://github.com/csf-dev/ZPT-Sharp/issues">Issue tracker</a>
+            </li>
+            <li>
+              <a href="writing-plugins.html">Writing plugins</a>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </nav>
+    <section class="main_page_content">
+      <header>
+        <h1>Learn the ZPT syntax</h1>
+      </header>
+      <nav id="page_navigation">
+        <h2>Page contents</h2>
+        <ol>
+          <li>
+            <a href="writing-pages-using-zpt.html#attribute_language">ZPT is an attribute language</a>
+          </li>
+          <li>
+            <a href="writing-pages-using-zpt.html#discarded_content">Unused source content is discarded</a>
+          </li>
+          <li>
+            <a href="writing-pages-using-zpt.html#metal">METAL attributes let you reuse markup</a>
+            <ol>
+              <li>
+                <a href="writing-pages-using-zpt.html#metal_example">An example of METAL syntax at work</a>
+              </li>
+            </ol>
+          </li>
+          <li>
+            <a href="writing-pages-using-zpt.html#tal">TAL attributes bind your model data</a>
+            <ol>
+              <li>
+                <a href="writing-pages-using-zpt.html#tal_example">An example of TAL syntax at work</a>
+              </li>
+            </ol>
+          </li>
+          <li>
+            <a href="writing-pages-using-zpt.html#tales">Access your data with TALES</a>
+            <ol>
+              <li>
+                <a href="writing-pages-using-zpt.html#tales_example">Some TALES examples</a>
+              </li>
+            </ol>
+          </li>
+        </ol>
+      </nav>
+      <p>
+        ZPT-Sharp borrows its syntax from Zope Page Templates (hence ZPT).
+        It has no dependency upon Python or the Zope framework though;
+        ZPT-Sharp is a complete standalone implementation of the ZPT syntax for .NET &amp; Mono.
+      </p>
+      <h2 id="attribute_language">ZPT is an attribute language</h2>
+      <pre><code class="html">&lt;p&gt;Hello, my name is &lt;strong tal:content=&quot;name&quot;&gt;Sally Smith&lt;/strong&gt;.&lt;/p&gt;</code></pre>
+      <p>
+        As the simple example illustrates, the ZPT syntax which transforms the document is written using
+        HTML/XML attributes.
+      </p>
+      <h2 id="discarded_content">Unused source content is discarded</h2>
+      <p>
+        Let's look again at the example above; we will assume that the <strong>name</strong> variable contains the value
+        <kbd>Joseph Bloggs</kbd>.
+        The resultant rendering would look like this:
+      </p>
+      <pre><code class="html">&lt;p&gt;Hello, my name is &lt;strong&gt;Joseph Bloggs&lt;/strong&gt;.&lt;/p&gt;</code></pre>
+      <p>
+        Both the <code>tal:content</code> attribute and the text <kbd>Sally Smith</kbd> are discarded by the
+        ZPT rendering process.
+      </p>
+      <h2 id="metal">METAL attributes let you reuse markup</h2>
+      <p>
+        The first step in the ZPT-Sharp rendering process is that all <code>metal:</code> attributes are fully resolved
+        and expanded.
+        <strong>METAL</strong> stands for <em>Macro Extension Template Attribute Language</em>; it allows you to
+        define reusable trees of markup within <strong>macros</strong>.
+        When those macros are used, their markup is inserted at the point of usage;
+        <strong>slots</strong> allow for customisation.
+      </p>
+      <p>
+        Macros can be defined in the same document as they are used <em>but they definitely don't have to be</em>.
+        Usually macros will be placed in shared view files, referenced by the documents which use them.
+      </p>
+      <h3 id="metal_example">An example of METAL syntax at work</h3>
+      <p>
+        This example helps demonstrate METAL's purpose.
+        You may refer to <a href="metal/introduction.html">the METAL reference</a> to learn more about the
+        functionality METAL offers and its syntax.
+      </p>
+      <pre><code class="html">&lt;!-- Here is the macro code --&gt;
+&lt;article metal:define-macro="standard_article"&gt;
+  &lt;header&gt;
+    &lt;h2 metal:define-slot="title"&gt;Article title&lt;/h2&gt;
+  &lt;/header&gt;
+  &lt;div metal:define-slot="body"&gt;
+    Article body
+  &lt;/div&gt;
+  &lt;footer&gt;
+    &lt;p class="disclaimer"&gt;Standard disclaimer&lt;/p&gt;
+  &lt;/footer&gt;
+&lt;/article&gt;
+
+&lt;!-- Here is some markup which uses that macro --&gt;
+&lt;article metal:use-macro="standard_article"&gt;
+  &lt;h3 metal:fill-slot="title"&gt;Macros are great&lt;/h3&gt;
+  &lt;div metal:fill-slot="body"&gt;
+    &lt;p&gt;
+      This content will fill the &lt;strong&gt;body&lt;/strong&gt; slot.
+    &lt;/p&gt;
+  &lt;/div&gt;
+&lt;/article&gt;
+
+&lt;!-- Here is how this would look once rendered by ZPT-Sharp --&gt;
+&lt;article&gt;
+  &lt;header&gt;
+    &lt;h3&gt;Macros are great&lt;/h3&gt;
+  &lt;/header&gt;
+  &lt;div&gt;
+    &lt;p&gt;
+      This content will fill the &lt;strong&gt;body&lt;/strong&gt; slot.
+    &lt;/p&gt;
+  &lt;/div&gt;
+  &lt;footer&gt;
+    &lt;p class="disclaimer"&gt;Standard disclaimer&lt;/p&gt;
+  &lt;/footer&gt;
+&lt;/article&gt;</code></pre>
+      <h2 id="tal">TAL attributes bind your model data</h2>
+      <p>
+        After all of the METAL attributes have been processed, the next step is to bind an object model you have
+        provided into the document.
+        The syntax for this is <strong>TAL</strong> - <em>Template Attribute Language</em>.
+        <code>tal:</code> attributes may <strong>repeat</strong> sections of markup,
+        set HTML/XML <strong>attributes</strong> and their values,
+        <strong>conditionally</strong> determine whether elements and their contents are rendered,
+        provide <strong>content</strong> and more.
+      </p>
+      <h3 id="tal_example">An example of TAL syntax at work</h3>
+      <p>
+        Don't worry if you do not immediately understand everything which occurs in this example;
+        its purpose is to show what can be done in a very small amount of markup.
+        To learn more of its functionality and syntax, please refer to
+        <a href="tal/introduction.html">the TAL reference</a>.
+      </p>
+      <pre><code class="html">&lt;!-- Here is some source markup --&gt;
+&lt;h2&gt;Fan club members&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li tal:repeat="member here/MemberList"
+      class="activity_Unknown"
+      tal:attributes="class string:activity_${member/ActiveStatus}"&gt;
+    &lt;a href="mailto:email@example.com"
+       tal:content="member/FullName"
+       tal:attributes="href string:mailto:${member/EmailAddress}"
+       tal:omit-tag="member/IsEmailHidden"&gt;Member name&lt;/a&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;!-- Here is how that source would render if "MemberList" contains two members:
+     One inactive: "Jane Doe" with her email address hidden
+     One active: "Sammy Sullivan" with his email address shown --&gt;
+&lt;h2&gt;Fan club members&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li class="activity_Inactive"&gt;
+    Jane Doe
+  &lt;/li&gt;
+  &lt;li class="activity_Active"&gt;
+    &lt;a href="mailto:sammy.s@mailbox.net"&gt;Sammy Sullivan&lt;/a&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;</code></pre>
+      <h2 id="tales">Access your data with TALES</h2>
+      <p>
+        Complementing METAL &amp; TAL is <strong>TALES</strong>: <em>Template Attribute Language Expression Syntax</em>.
+        TALES does have any attributes; it is used within ZPT attributes and provides the syntax for referencing your object model.
+      </p>
+      <p>
+        TALES supports a number of expression types out of the box - and it is extensible via plugins.
+        The recommended default expression type is the <strong>path</strong> expression.
+        Path expressions provide a syntax which looks similar to a URL for navigating an object graph.
+        It simplifies object access, method invocation and .NET object indexers.
+      </p>
+      <h3 id="tales_examples">Some TALES examples</h3>
+      <p>
+        In each of the following examples, a C♯ expression is compared with a TALES equivalent.
+        These and other expression types are explored in detail within
+        <a href="tales/introduction.html">the TALES reference</a> section of this website.
+      </p>
+      <ul>
+        <li>
+          The C♯ expression <code>peopleList[5].GetPets().Count</code> could be represented by the
+          <strong>path</strong> expression <code>peopleList/5/GetPets/Count</code>
+        </li>
+        <li>
+          <strong>String</strong> expressions permit verbatim strings and insertion of sub-expressions.
+          The TALES expression <code>string:My name is $name</code> is equivalent to the C♯ 6 interpolated string
+          expression <code>$"My name is {name}"</code>.
+        </li>
+        <li>
+          <strong>CSharp</strong> expressions permit the evaluation of native C♯ expressions should they be required.
+          The TALES expression <code>csharp:myDateTime.ToString(&amp;quot;MMMM&amp;quot;)</code> would output a
+          month-name.
+          <em>Note the HTML-encoding of the quotation marks;</em> because TALES expressions are written inside
+          HTML/XML attributes, naked double-quotes are not permitted.
+        </li>
+      </ul>
+    </section>
+  </div>
+</div>
+<footer class="page_footer">
+  <section class="copyright">
+    Copyright © 2017
+    <a href="http://csf-dev.com/">CSF Software Limited</a> et al
+  </section>
+  <section class="version">
+    <p>
+      Website built <strong>2017-03-19</strong>;
+      for version
+      <strong>
+        v1.0.0
+      </strong>
+    </p>
+  </section>
+</footer>
+<div class="cookie_statement">
+  <p>
+    This website uses analytics cookies to understand how visitors are making use of its content.
+    This helps decide where improvements can be made in the future.
+    <a href="https://ico.org.uk/for-organisations/guide-to-pecr/cookies-and-similar-technologies/">European and UK law</a>
+    requires us to ask you for your consent to this.
+  </p>
+  <button class="accept">Accept cookies</button>
+</div>
+
+</body>
+</html>

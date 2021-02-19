@@ -1,0 +1,154 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "build",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "build",
+                "/property:GenerateFullPaths=true"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "pack (debug)",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "pack",
+                "-c",
+                "Debug",
+                "/property:GenerateFullPaths=true"
+            ],
+            "group": "build",
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "pack (release)",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "pack",
+                "-c",
+                "Release",
+                "/property:GenerateFullPaths=true"
+            ],
+            "group": "build",
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "dotnet clean",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "clean"
+            ],
+            "group": "none",
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "git clean",
+            "command": "git",
+            "type": "process",
+            "args": [
+                "clean",
+                "-fdx"
+            ],
+            "group": "none",
+            "problemMatcher": []
+        },
+        {
+            "label": "run tests (all)",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "test",
+                "/property:GenerateFullPaths=true"
+            ],
+            "group": {
+                "kind": "test",
+                "isDefault": true
+            },
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "run tests (.NET Standard only)",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "test",
+                "ZptSharp.Tests",
+                "/property:GenerateFullPaths=true",
+                "--settings=Tools\\Linux.runsettings"
+            ],
+            "group": "test",
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "watched tests (.NET Standard only)",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "watch",
+                "--project=ZptSharp.Tests",
+                "test",
+                "/property:GenerateFullPaths=true",
+                "--settings=..\\Tools\\Linux.runsettings"
+            ],
+            "group": "test",
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "run tests (.NET Framework/MVC5 only)",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "test",
+                "MvcViewEngines\\ZptSharp.Mvc5.Tests",
+                "/property:GenerateFullPaths=true",
+                "--settings=Tools\\Linux.runsettings"
+            ],
+            "group": "test",
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "run MVC5 Example app",
+            "command": "xsp4",
+            "type": "process",
+            "args": [
+                "--applications=/:Examples/ZptSharp.Examples.Mvc5",
+                "--port=8080",
+                "--root=$PWD/Examples/ZptSharp.Examples.Mvc5"
+            ],
+            "group": "none",
+            "problemMatcher": []
+        },
+        {
+            "label": "run MVC Core Example app",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "run",
+                "--project=Examples/ZptSharp.Examples.MvcCore/ZptSharp.Examples.MvcCore.csproj"
+            ],
+            "group": "none",
+            "problemMatcher": []
+        },
+        {
+            "label": "run DocFx docs site",
+            "command": "docfx",
+            "type": "process",
+            "args": [
+                "serve",
+                "ZptSharp.Documentation/_site"
+            ],
+            "group": "none",
+            "problemMatcher": []
+        }
+    ]
+}

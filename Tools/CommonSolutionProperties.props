@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    
+    <!--
+        This project file contains build properties which
+        are common amongst all of the projects in the solution.
+        It should be included by the .csproj file, anywhere AFTER
+        the ReleaseVersion property is defined.
+    -->
+    
+    <PropertyGroup>
+        <NetStandardTargetFrameworks>netstandard2.0;netstandard2.1</NetStandardTargetFrameworks>
+        <Net46TargetFrameworks>net461</Net46TargetFrameworks>
+        
+        <!--
+            This is the set of target frameworks which represents the
+            'ideal minimum' that every library in this solution would support.
+            There are exceptions though (notably the MVC5 integration).
+        -->
+        <CommonTargetFrameworks>$(NetStandardTargetFrameworks);$(Net46TargetFrameworks)</CommonTargetFrameworks>
+        
+        <Authors>craigfowler</Authors>
+        <VersionPrefix>$(ReleaseVersion)</VersionPrefix>
+        <PackageLicenseExpression>MIT</PackageLicenseExpression>
+        <Copyright>Copyright 2020 - ZptSharp contributors</Copyright>
+        <PackageProjectUrl>https://github.com/csf-dev/ZPT-Sharp/</PackageProjectUrl>
+        <RepositoryUrl>$(PackageProjectUrl)</RepositoryUrl>
+        <SignAssembly>true</SignAssembly>
+        <AssemblyOriginatorKeyFile>$(MSBuildThisFileDirectory)\CSF-Software-OSS.snk</AssemblyOriginatorKeyFile>
+        <DocumentationFile>bin\$(Configuration)\$(TargetFramework)\$(AssemblyName).xml</DocumentationFile>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" Version="1.0.0" PrivateAssets="All" Condition="'$(TargetFramework.TrimEnd(`0123456789`))' == 'net'" />
+    </ItemGroup>
+    
+    <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+        <CheckForOverflowUnderflow>true</CheckForOverflowUnderflow>
+    </PropertyGroup>
+    <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+        <DebugType></DebugType>
+    </PropertyGroup>
+
+</Project>

@@ -1,0 +1,218 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>The String expression syntax </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="The String expression syntax ">
+    <meta name="generator" content="docfx 2.56.6.0">
+    
+    <link rel="shortcut icon" href="../../../favicon.ico">
+    <link rel="stylesheet" href="../../../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../../../styles/docfx.css">
+    <link rel="stylesheet" href="../../../styles/main.css">
+    <meta property="docfx:navrel" content="../../../toc.html">
+    <meta property="docfx:tocrel" content="../toc.html">
+    
+    
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../../../index.html">
+                <img id="logo" class="svg" src="../../../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="">
+<h1 id="the-string-expression-syntax">The String expression syntax</h1>
+
+<p>String expressions are used to create string values dynamically, using a syntax <a href="https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/tokens/interpolated">that is not dissimilar in principle to C# interpolated strings</a>.
+It allows the creation of a string value using <strong>placeholders</strong> where dynamic values may be inserted using <a href="PathExpressions.html">a path expression</a>.</p>
+<p>The syntax of a string expression is:</p>
+<pre><code class="lang-text">string:A string here using zero or more $placeholders
+</code></pre>
+<h2 id="string-expressions-are-included-in-the-main-zptsharp-package">String expressions are included in the main ZptSharp package</h2>
+<p>Support for <code>string</code> expressions is included in <a href="../../NuGetPackages.html#zptsharp-core">the main ZptSharp NuGet package</a>.
+Additionally, <code>string</code> expressions are one of the standard expression types <a class="xref" href="../../../api/ZptSharp.ZptSharpHostingBuilderExtensions.html#ZptSharp_ZptSharpHostingBuilderExtensions_AddStandardZptExpressions_ZptSharp_Hosting_IBuildsHostingEnvironment_">activated by <code>AddStandardZptExpressions()</code></a>.</p>
+<h2 id="how-to-use-placeholders">How to use placeholders</h2>
+<p>A placeholder always begins with a single dollar character <code>$</code>, after which is <a href="PathExpressions.html">a TALES path expression</a> (and <em>a path expression only</em>) which provides the value to be inserted into the placeholder.
+If the TALES expression does not evaluate to a string then it will be converted to one via <code>Object.ToString()</code> unless it is null, which is interpreted as an empty string.</p>
+<p>The expression may follow directly after the dollar character, for example <code>$myVariable</code> or it may be wrapped in braces, for example <code>${myVariable}</code>.</p>
+<h3 id="braces-or-no-braces">Braces or no braces?</h3>
+<p>Whether or not braces are used impacts which characters are permitted for use in the expression.
+Without braces, expressions that are used in a string placeholder may only use a limited set of characters.
+The table below shows which characters are permitted in each scenario.
+If you wish to use any of the characters which are disallowed without braces, then your expression must be enclosed in braces.</p>
+<table>
+<thead>
+<tr>
+<th>Character(s)</th>
+<th style="text-align: center;">Without braces</th>
+<th style="text-align: center;">With braces</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Alphabetic (upper &amp; lower case)</td>
+<td style="text-align: center;">Yes</td>
+<td style="text-align: center;">Yes</td>
+</tr>
+<tr>
+<td>Numeric</td>
+<td style="text-align: center;">Yes</td>
+<td style="text-align: center;">Yes</td>
+</tr>
+<tr>
+<td>Underscore: <code>_</code></td>
+<td style="text-align: center;">Yes</td>
+<td style="text-align: center;">Yes</td>
+</tr>
+<tr>
+<td>Forward-slash: <code>/</code></td>
+<td style="text-align: center;">Yes</td>
+<td style="text-align: center;">Yes</td>
+</tr>
+<tr>
+<td>Space</td>
+<td style="text-align: center;"><strong>No</strong></td>
+<td style="text-align: center;">Yes</td>
+</tr>
+<tr>
+<td>Period: <code>.</code></td>
+<td style="text-align: center;"><strong>No</strong></td>
+<td style="text-align: center;">Yes</td>
+</tr>
+<tr>
+<td>Comma: <code>,</code></td>
+<td style="text-align: center;"><strong>No</strong></td>
+<td style="text-align: center;">Yes</td>
+</tr>
+<tr>
+<td>Tilde: <code>~</code></td>
+<td style="text-align: center;"><strong>No</strong></td>
+<td style="text-align: center;">Yes</td>
+</tr>
+<tr>
+<td>Pipe (aka &quot;Vertical bar&quot;): <code>\|</code></td>
+<td style="text-align: center;"><strong>No</strong></td>
+<td style="text-align: center;">Yes</td>
+</tr>
+<tr>
+<td>Question mark: <code>?</code></td>
+<td style="text-align: center;"><strong>No</strong></td>
+<td style="text-align: center;">Yes</td>
+</tr>
+<tr>
+<td>Hyphen-minus: <code>-</code></td>
+<td style="text-align: center;"><strong>No</strong></td>
+<td style="text-align: center;">Yes</td>
+</tr>
+</tbody>
+</table>
+<h3 id="escaping-dollar-characters">Escaping dollar characters</h3>
+<p>If you wish your string to include a literal dollar character, it must be escaped by doubling-it up: <code>$$</code>.</p>
+<h2 id="you-must-manually-encode-markup-reserved-characters">You must manually encode markup-reserved characters</h2>
+<p>Because string expressions are used exclusively in DOM attributes, this means that expressions must also follow the rules for the underlying markup.
+For example TALES itself would not raise an error for this expression:</p>
+<pre><code class="lang-text">string:He said &quot;$greeting&quot;
+</code></pre>
+<p>However, in practice this would not work because in context that expression would appear in an attribute like so.
+It will be obvious that those extra double-quote characters break the DOM because they have a special meaning within an attribute.</p>
+<pre><code class="lang-html">&lt;p tal:content=&quot;string:He said &quot;$greeting&quot;&quot;&gt;This will be replaced&lt;/p&gt;
+</code></pre>
+<p>This problem is fixed by simply encoding the reserved characters according to the rules of the markup.
+In this case those double-quote characters must be replaced with <code>&amp;quot;</code>, meaning that the final working example would look like this:</p>
+<pre><code class="lang-html">&lt;p tal:content=&quot;string:He said &amp;quot;$greeting&amp;quot;&quot;&gt;This will be replaced&lt;/p&gt;
+</code></pre>
+<h2 id="example">Example</h2>
+<p>Here is an example of a string expression in use.
+This makes use of <a href="PathExpressions.html#alternate-paths">the path expression alternation technique</a> to show where braces might be required in a placeholder.
+If the path expression <code>here/username</code> cannot be traversed, then TALES will use the alternate <code>guestUsername</code> variable instead.
+This technique requires the use of a pipe character though, forcing the whole expression to be enclosed in braces.</p>
+<pre><code class="lang-html">&lt;p tal:define=&quot;guestUsername string:a guest;
+               loginMessage string:You are logged in as ${here/username | guestUsername}.&quot;
+   tal:content=&quot;loginMessage&quot;&gt;You are logged in as JoeBloggs.&lt;/p&gt;
+</code></pre>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/csf-dev/ZPT-Sharp/blob/master/ZptSharp.Documentation/articles/ZptReference/Tales/StringExpressions.md/#L1" class="contribution-link">Improve this Doc</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In This Article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            
+            <span>Generated by <strong>DocFX</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../../../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../../../styles/docfx.js"></script>
+    <script type="text/javascript" src="../../../styles/main.js"></script>
+  </body>
+</html>

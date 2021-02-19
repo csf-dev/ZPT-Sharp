@@ -1,22 +1,10 @@
 bin/
 obj/
-logs/
-Deployment/Output/
-TestResult.xml
-TestResult.formatted.xml
-packages/*/
-*.VisualState.xml
-*.userprefs
-*.csproj.user
+.TestResults/
 *.orig
 *.directory
-DEBIAN/
 *.nupkg
-*.nuspec
 .vs/
-
-# Archives of binaries
-CSF.Zpt-api-only.zip
-CSF.Zpt-complete.zip
-CSF.Zpt.MVC.zip
-ZptBuilder.zip
+packages/
+mono_crash.*.json
+.docfx/

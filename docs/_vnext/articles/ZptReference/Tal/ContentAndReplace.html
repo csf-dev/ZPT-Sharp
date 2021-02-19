@@ -1,0 +1,173 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>The tal:content &amp; tal:replace attributes </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="The tal:content &amp; tal:replace attributes ">
+    <meta name="generator" content="docfx 2.56.6.0">
+    
+    <link rel="shortcut icon" href="../../../favicon.ico">
+    <link rel="stylesheet" href="../../../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../../../styles/docfx.css">
+    <link rel="stylesheet" href="../../../styles/main.css">
+    <meta property="docfx:navrel" content="../../../toc.html">
+    <meta property="docfx:tocrel" content="../toc.html">
+    
+    
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../../../index.html">
+                <img id="logo" class="svg" src="../../../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="">
+<h1 id="the-talcontent--talreplace-attributes">The <code>tal:content</code> &amp; <code>tal:replace</code> attributes</h1>
+
+<p>The <code>tal:content</code> and <code>tal:replace</code> attributes have very similar effects upon the rendering output.
+The two attributes <em>are also mutually exclusive</em>, no element may have both attributes.</p>
+<p>Both attributes use a TALES expression as their attribute value, this expression is evaluated and the result is written to the rendered document.
+In the case of the <code>tal:content</code> attribute, the expression result is written as the new content of the element (leaving the element start &amp; end tags intact).
+In the case of the <code>tal:replace</code> attribute, the expression result <em>fully replaces the element</em> (the start &amp; end tags are removed).</p>
+<h2 id="the-expression-result-is-treated-as-text-by-default">The expression result is treated as text by default</h2>
+<p>When a content or replace attribute evaluats a TALES expression, if the result is not a <code>string</code>, then it is converted to string via the built-in <code>Object.ToString()</code> method.
+Additionally, by default, the expression result is treated strictly as text and not as markup.
+This means that any symbols appearing in the expression result that are reserved symbols in the markup (for example the less-than symbol <code>&lt;</code>) are replaced by their entity-encoded equivalent (for example <code>&amp;lt;</code>).
+This helps prevent <a href="https://en.wikipedia.org/wiki/Cross-site_scripting">XSS attacks</a> against the application.</p>
+<h3 id="inserting-markup-using-content-or-replace-attributes">Inserting markup using content or replace attributes</h3>
+<p>There are two ways to explicitly make a <code>tal:content</code> or <code>tal:replace</code> attribute write the expression result as markup (including elements &amp; attributes etc).</p>
+<ul>
+<li>Include the word <code>structure</code> and a space in the attribute value before the expression</li>
+<li>If the expression result implements <a class="xref" href="../../../api/ZptSharp.IGetsStructuredMarkup.html">the interface <code>IGetsStructuredMarkup</code></a>, such as if it has been through <a href="../Tales/StructureExpressions.html">a <code>structure:</code> expression</a>.</li>
+</ul>
+<p>In both cases above, the expression result will instead be written to the rendered document verbatim; reserved symbols will not be encoded.</p>
+<p>Designers should be <em>very careful when permitting structure in a content or replace attribute</em>.
+Ensure that all data is appropriately sanitized, particularly if it is user-generated or has come from an untrusted source.</p>
+<h2 id="any-existing-content-of-the-element-is-removed">Any existing content of the element is removed</h2>
+<p>When a content or replace attribute is processed, any and all existing content &amp; descendents of the element which has the attribute is removed from the DOM.
+This technique may be used to provide &quot;sample content&quot; in the document template.
+This can help a designer understand the sorts of content which TAL will render into that element, without needing to see the template rendered in the full application.</p>
+<h2 id="if-the-expression-result-is-null">If the expression result is null</h2>
+<p>If the expression result for a <code>tal:content</code> attribute is <code>null</code>, then all content &amp; descendents of the element are removed and the element is left empty.
+If the expression result for a <code>tal:replace</code> attribute is <code>null</code>, then the entire element and all content &amp; descendents are removed.</p>
+<h2 id="some-tal-attributes-are-copied">Some TAL attributes are copied</h2>
+<p>For a <code>tal:replace</code> attribute only, if the element which has the attribute also has either of the following attributes, then these attributes are copied to the top-level nodes of the replacement, provided that any of these nodes are element nodes.</p>
+<ul>
+<li><a href="Attributes.html"><code>tal:attributes</code> attributes</a></li>
+<li><a href="OmitTag.html"><code>tal:omit-tag</code> attributes</a></li>
+</ul>
+<p>This occurs because these two attributes would usually be processed <em>after</em> a replace attribute.  Thus they are evaluated as if they were present upon the replacement element(s).</p>
+<h2 id="aborting-a-talcontent-attribute">Aborting a <code>tal:content</code> attribute</h2>
+<p>If the expression result is <a class="xref" href="../../../api/ZptSharp.Expressions.AbortZptActionToken.html">an instance of <code>AbortZptActionToken</code></a>, such as via <a href="../Tales/GlobalContexts.html#default">the root context <code>default</code></a>, then a <code>tal:content</code> attribute will behave as if it were not present.
+The element will be left in-place along with all of its original content &amp; descendents from the template.</p>
+<h2 id="aborting-a-talreplace-attribute">Aborting a <code>tal:replace</code> attribute</h2>
+<p>If the expression result is <a class="xref" href="../../../api/ZptSharp.Expressions.AbortZptActionToken.html">an instance of <code>AbortZptActionToken</code></a>, such as via <a href="../Tales/GlobalContexts.html#default">the root context <code>default</code></a>, then a <code>tal:replace</code> attribute is a little more complex than that of a content attribute.</p>
+<ol>
+<li>The start &amp; end tags of the element which bears the <code>tal:replace</code> attribute are omitted from the DOM, in a similar way to <a href="OmitTag.html">a <code>tal:omit-tag</code> attribute</a>.</li>
+<li>The contents &amp; descendents of the (now-omitted) element which had the <code>tal:replace</code> attribute are left intact and no further replacement is made</li>
+</ol>
+<p>This means that if the replacement is aborted, the tag which has the replace attribute is essentially &quot;replaced with its original content&quot;.
+Note that even when a replace attribute is aborted, <em>the TAL attribute copying described above still occurs</em>.</p>
+<h2 id="examples">Examples</h2>
+<h3 id="an-element-with-a-content-attribute">An element with a content attribute</h3>
+<p>This snippet would render as a <code>&lt;p&gt;</code> element with content equal to the value of the expression <code>here/message</code>.
+Any reserved symbols present in the expression result will be encoded, for example <code>&amp;</code> would become <code>&amp;amp;</code></p>
+<pre><code class="lang-html">&lt;p tal:content=&quot;here/message&quot;&gt;This will be replaced by a message&lt;/p&gt;
+</code></pre>
+<h3 id="an-element-with-a-replace-attribute">An element with a replace attribute</h3>
+<p>This snippet would render as a <code>&lt;p&gt;</code> element with the text &quot;This will show&quot;, immediately followed by the value of the expression <code>here/message</code>.
+The <code>&lt;span&gt;</code> element present in the source template will not render at all, because the whole element will be replaced by the expression result.
+Any reserved symbols present in the expression result will be encoded, for example <code>&amp;</code> would become <code>&amp;amp;</code></p>
+<pre><code class="lang-html">&lt;p&gt;This will show &lt;span tal:replace=&quot;here/message&quot;&gt;a message&lt;/span&gt;&lt;/p&gt;
+</code></pre>
+<h3 id="content-that-uses-the-structure-keyword">Content that uses the <code>structure</code> keyword</h3>
+<p>This content prefixes the TALES expression with the <code>structure</code> keyword and a space.
+This will behave as the <code>tal:content</code> example above, except that reserved symbols <em>will not be encoded</em>.
+This means that if the expression result includes markup, then it will be rendered as markup.</p>
+<pre><code class="lang-html">&lt;p tal:content=&quot;structure here/message&quot;&gt;This will be replaced by a message&lt;/p&gt;
+</code></pre>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/csf-dev/ZPT-Sharp/blob/master/ZptSharp.Documentation/articles/ZptReference/Tal/ContentAndReplace.md/#L1" class="contribution-link">Improve this Doc</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In This Article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            
+            <span>Generated by <strong>DocFX</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../../../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../../../styles/docfx.js"></script>
+    <script type="text/javascript" src="../../../styles/main.js"></script>
+  </body>
+</html>

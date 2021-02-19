@@ -1,0 +1,70 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <RootNamespace>ZptSharp</RootNamespace>
+    <ReleaseVersion>2.0.0</ReleaseVersion>
+    <ProjectGuid>{d4f7a76d-acb1-489e-922a-ed955f436e51}</ProjectGuid>
+  </PropertyGroup>
+    
+  <ItemGroup>
+    <PackageReference Include="AutoFixture" Version="4.11.0" />
+    <PackageReference Include="AutoFixture.AutoMoq" Version="4.11.0" />
+    <PackageReference Include="AutoFixture.NUnit3" Version="4.11.0" />
+    <PackageReference Include="coverlet.msbuild" Version="2.8.0">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+    <PackageReference Include="NUnit3TestAdapter" Version="3.16.1" />
+    <PackageReference Include="NUnit" Version="3.12.0" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.5.0" />
+    <PackageReference Include="Moq" Version="4.13.1" />
+    <PackageReference Include="NunitXml.TestLogger" Version="2.1.41" />
+    <PackageReference Include="CSF.CollectionComparers" Version="1.1.1" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="5.0.0" />
+    <PackageReference Include="CSF.IO" Version="7.0.1" />
+    <PackageReference Include="Microsoft.Extensions.Hosting" Version="5.0.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ZptSharp.Abstractions\ZptSharp.Abstractions.csproj" />
+    <ProjectReference Include="..\ZptSharp\ZptSharp.csproj" />
+    <ProjectReference Include="..\DocumentProviders\ZptSharp.AngleSharp\ZptSharp.AngleSharp.csproj" />
+    <ProjectReference Include="..\DocumentProviders\ZptSharp.Xml\ZptSharp.Xml.csproj" />
+    <ProjectReference Include="..\DocumentProviders\ZptSharp.HtmlAgilityPack\ZptSharp.HtmlAgilityPack.csproj" />
+    <ProjectReference Include="..\Evaluators\ZptSharp.PythonExpressions\ZptSharp.PythonExpressions.csproj" />
+    <ProjectReference Include="..\Evaluators\ZptSharp.CSharpExpressions\ZptSharp.CSharpExpressions.csproj" />
+    <ProjectReference Include="..\MvcViewEngines\ZptSharp.MvcCore\ZptSharp.MvcCore.csproj" />
+    <ProjectReference Include="..\ZptSharp.Cli\ZptSharp.Cli.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Autofixture\" />
+    <Folder Include="Dom\" />
+    <Folder Include="Expressions\" />
+    <Folder Include="Rendering\" />
+    <Folder Include="Metal\" />
+    <Folder Include="TestFiles\" />
+    <Folder Include="Util\" />
+    <Folder Include="Expressions\PathExpressions\" />
+    <Folder Include="Config\" />
+    <Folder Include="SourceAnnotation\" />
+    <Folder Include="Dom.HtmlAgilityPack\" />
+    <Folder Include="Dom.Xml\" />
+    <Folder Include="Dom.AngleSharp\" />
+    <Folder Include="Tal\" />
+    <Folder Include="Expressions\StringExpressions\" />
+    <Folder Include="Expressions\NotExpressions\" />
+    <Folder Include="TestFiles\CSharpExpressionIntegrationTests\" />
+    <Folder Include="IntegrationTests\" />
+    <Folder Include="TestFiles\PipeExpressionIntegrationTests\" />
+    <Folder Include="TestFiles\PipeExpressionIntegrationTests\ExpectedOutputs\" />
+    <Folder Include="TestFiles\PipeExpressionIntegrationTests\SourceDocuments\" />
+    <Folder Include="Expressions\PythonExpressions\" />
+    <Folder Include="TestFiles\XmlDtdHandlingIntegrationTests\" />
+    <Folder Include="TestFiles\XmlDtdHandlingIntegrationTests\SourceDocuments\" />
+    <Folder Include="TestFiles\XmlDtdHandlingIntegrationTests\ExpectedOutputs\" />
+    <Folder Include="TestFiles\I18nIntegrationTests\" />
+    <Folder Include="TestFiles\I18nIntegrationTests\ExpectedOutputs\" />
+    <Folder Include="TestFiles\I18nIntegrationTests\SourceDocuments\" />
+    <Folder Include="MvcCore\" />
+  </ItemGroup>
+</Project>

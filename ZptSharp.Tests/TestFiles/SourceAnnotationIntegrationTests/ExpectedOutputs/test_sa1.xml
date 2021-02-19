@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+==============================================================================
+SourceDocuments/test_sa1.xml
+==============================================================================
+-->
+<html>
+<title>Simple test of source annotations</title>
+<body>
+<p>Foo!</p>
+</body>
+</html>

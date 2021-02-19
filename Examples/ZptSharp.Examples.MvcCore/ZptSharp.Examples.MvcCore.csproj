@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <RootNamespace>ZptSharp.Examples</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\ZptSharp.Abstractions\ZptSharp.Abstractions.csproj" />
+    <ProjectReference Include="..\..\ZptSharp\ZptSharp.csproj" />
+    <ProjectReference Include="..\..\MvcViewEngines\ZptSharp.MvcCore\ZptSharp.MvcCore.csproj" />
+    <ProjectReference Include="..\..\DocumentProviders\ZptSharp.HtmlAgilityPack\ZptSharp.HtmlAgilityPack.csproj" />
+  </ItemGroup>
+</Project>

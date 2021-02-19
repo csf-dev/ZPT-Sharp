@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{427F7982-F40E-4534-A175-5101ED6DC5C0}</ProjectGuid>
+    <ProjectTypeGuids>{349C5851-65DF-11DA-9384-00065B846F21};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <RootNamespace>ZptSharp.Examples</RootNamespace>
+    <AssemblyName>ZptSharp.Examples.Mvc5</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <ReleaseVersion>2.0.0</ReleaseVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin</OutputPath>
+    <DefineConstants>DEBUG;</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <Optimize>true</Optimize>
+    <OutputPath>bin</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="Microsoft.CSharp" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="5.0.0" GeneratePathProperty="true" />
+    <PackageReference Include="Microsoft.Extensions.Primitives" Version="5.0.0" GeneratePathProperty="true" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="5.0.0" GeneratePathProperty="true" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="5.0.0" GeneratePathProperty="true" />
+    <PackageReference Include="Microsoft.AspNet.Mvc" Version="5.2.7" GeneratePathProperty="true" />
+    <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" Version="1.0.0" PrivateAssets="All" />
+    <PackageReference Include="Microsoft.AspNet.Razor" Version="3.2.7" GeneratePathProperty="true" />
+    <PackageReference Include="Microsoft.AspNet.WebPages" Version="3.2.7" GeneratePathProperty="true" />
+    <PackageReference Include="Microsoft.Web.Infrastructure" Version="1.0.0.0" GeneratePathProperty="true" />
+    <PackageReference Include="Microsoft.Extensions.Logging" Version="5.0.0" GeneratePathProperty="true" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="5.0.0" GeneratePathProperty="true" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="5.0.0" GeneratePathProperty="true" />
+    <PackageReference Include="HtmlAgilityPack" Version="1.11.28" GeneratePathProperty="true" />
+    <PackageReference Include="CSF.Collections.EventRaising" Version="1.1.0" GeneratePathProperty="true" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="System.Web.Mvc">
+      <HintPath>$(PkgMicrosoft_AspNet_Mvc)\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.DependencyInjection">
+      <HintPath>$(PkgMicrosoft_Extensions_DependencyInjection)\lib\net461\Microsoft.Extensions.DependencyInjection.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Logging">
+      <HintPath>$(PkgMicrosoft_Extensions_Logging)\lib\net461\Microsoft.Extensions.Logging.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.DependencyInjection.Abstractions">
+      <HintPath>$(PkgMicrosoft_Extensions_DependencyInjection_Abstractions)\lib\net461\Microsoft.Extensions.DependencyInjection.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Configuration.Abstractions">
+      <HintPath>$(PkgMicrosoft_Extensions_Configuration_Abstractions)\lib\net461\Microsoft.Extensions.Configuration.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Primitives">
+      <HintPath>$(PkgMicrosoft_Extensions_Primitives)\lib\net461\Microsoft.Extensions.Primitives.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Logging.Console">
+      <HintPath>$(PkgMicrosoft_Extensions_Logging_Console)\lib\net461\Microsoft.Extensions.Logging.Console.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Logging.Abstractions">
+      <HintPath>$(PkgMicrosoft_Extensions_Logging_Abstractions)\lib\net461\Microsoft.Extensions.Logging.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Razor">
+      <HintPath>$(PkgMicrosoft_AspNet_Razor)\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.WebPages">
+      <HintPath>$(PkgMicrosoft_AspNet_WebPages)\lib\net45\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.WebPages.Razor">
+      <HintPath>$(PkgMicrosoft_AspNet_WebPages)\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Web.Infrastructure">
+      <HintPath>$(PkgMicrosoft_Web_Infrastructure)\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="HtmlAgilityPack">
+      <HintPath>$(PkgHtmlAgilityPack)\lib\Net45\HtmlAgilityPack.dll</HintPath>
+    </Reference>
+    <Reference Include="CSF.Collections.EventRaising">
+      <HintPath>$(PkgCSF_Collections_EventRaising)\lib\net45\CSF.Collections.EventRaising.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Content\" />
+    <Folder Include="Models\" />
+    <Folder Include="Scripts\" />
+    <Folder Include="Views\Home\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="App_Start\RouteConfig.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Web.config" />
+    <Content Include="Web.config" />
+    <Content Include="Global.asax" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\ZptSharp\ZptSharp.csproj" AdditionalProperties="TargetFramework=netstandard2.0">
+      <Project>{B894D826-AC9A-4C42-9BA2-E827800CA346}</Project>
+      <Name>ZptSharp.Impl</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\ZptSharp.Abstractions\ZptSharp.Abstractions.csproj" AdditionalProperties="TargetFramework=netstandard2.0">
+      <Project>{E7FF2ABA-F0A8-42C5-BEFC-CF2EE87F2520}</Project>
+      <Name>ZptSharp</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\MvcViewEngines\ZptSharp.Mvc5\ZptSharp.Mvc5.csproj" AdditionalProperties="TargetFramework=net461">
+      <Project>{3B005573-1505-4602-995B-D8D49599A6F0}</Project>
+      <Name>ZptSharp.Mvc5</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\DocumentProviders\ZptSharp.HtmlAgilityPack\ZptSharp.HtmlAgilityPack.csproj" AdditionalProperties="TargetFramework=netstandard2.0">
+      <Project>{53A56241-BFD4-4765-9916-ED4880BFD946}</Project>
+      <Name>ZptSharp.HtmlAgilityPack</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Views\Home\Index.pt" />
+  </ItemGroup>
+  <Target Name="Pack">
+    <Warning Text="This project is not packable, nor should it be." />
+  </Target>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <ProjectExtensions>
+    <MonoDevelop>
+      <Properties>
+        <XspParameters Port="8080" Address="127.0.0.1" SslMode="None" SslProtocol="Default" KeyType="None" CertFile="" KeyFile="" PasswordOptions="None" Password="" Verbose="True" />
+      </Properties>
+    </MonoDevelop>
+  </ProjectExtensions>
+</Project>

@@ -1,0 +1,188 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>ZptSharp API reference </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="ZptSharp API reference ">
+    <meta name="generator" content="docfx 2.56.6.0">
+    
+    <link rel="shortcut icon" href="../favicon.ico">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="">
+<h1 id="zptsharp-api-reference">ZptSharp API reference</h1>
+
+<p>This guide takes you through the process of adding ZptSharp to your own application, consuming it as an API.</p>
+<h2 id="installing-nuget-packages">Installing NuGet packages</h2>
+<p>The first step is to add references to the appropriate <a href="../articles/NuGetPackages.html">ZptSharp NuGet packages</a> from your app.
+The project/assembly which sets up your dependency injection must reference the package <strong>ZptSharp</strong>, as well as any document provider or expression evaluator packages you wish to use.
+A working ZptSharp environment <em>requires at least one document provider</em>.</p>
+<p>If your app makes use of ZptSharp from <em>a different project/assembly</em>, then that only need reference the <strong>ZptSharp.Abstractions</strong> package.
+Once added to DI, ZptSharp may be consumed from only its interfaces.</p>
+<h2 id="adding-zptsharp-to-di">Adding ZptSharp to DI</h2>
+<p>The second step is to add ZptSharp to <a href="https://docs.microsoft.com/en-us/dotnet/core/extensions/dependency-injection">your application's dependency injection</a> (the <a href="https://docs.microsoft.com/en-us/dotnet/api/microsoft.extensions.dependencyinjection.iservicecollection"><code>IServiceCollection</code></a>). This should occur in your application's startup.
+Ideally, if you are using <a href="https://docs.microsoft.com/en-us/dotnet/core/extensions/generic-host">.NET Generic Host</a> then you will be using that framework to register and configure your services.
+If using <a href="https://docs.microsoft.com/en-us/aspnet/aspnet/overview/owin-and-katana/getting-started-with-owin-and-katana">OWIN</a> then you will have access to a startup class where services and middleware are configured.
+Other frameworks will have their own equivalents to this process.</p>
+<p>The addition to dependency injection begins with the use of <a class="xref" href="ZptSharp.ZptSharpServiceCollectionExtensions.html#ZptSharp_ZptSharpServiceCollectionExtensions_AddZptSharp_Microsoft_Extensions_DependencyInjection_IServiceCollection_"><code>AddZptSharp()</code></a>.
+This returns a builder object which exposes further methods; some from the core and some made available by NuGet packages.
+With these you should add <em>at least one expression evaluator</em> and <em>at least one document provider</em>.
+Following is a typical example.</p>
+<pre><code class="lang-csharp">using Microsoft.Extensions.DependencyInjection;
+using ZptSharp;
+
+void RegisterServices(IServiceCollection serviceCollection)
+{
+    serviceCollection
+        .AddZptSharp()
+        .AddStandardZptExpressions()
+        .AddAngleSharpZptDocuments();
+}
+</code></pre>
+<p>See the documentation for <a class="xref" href="ZptSharp.Hosting.IBuildsHostingEnvironment.html">the ZptSharp DI builder object</a> for a full list of the available extension methods.</p>
+<h3 id="if-you-cannot-use-di">If you cannot use DI</h3>
+<p>It is strongly recommended to consume ZptSharp via dependency injection as described above.
+If you cannot do this then it is possible to create/get an object which provides access to ZptSharp in a self-contained manner.
+This is accomplished via the class <a class="xref" href="ZptSharp.ZptSharpHost.html"><code>ZptSharp.ZptSharpHost</code></a>.</p>
+<p>The following example is equivalent to the dependency injection example above.
+The mechanisms to add expression evaluators &amp; document providers are also identical.
+Note that there is no call to <code>AddZptSharp()</code>; this is implied.</p>
+<pre><code class="lang-csharp">using ZptSharp;
+
+var host = ZptSharpHost.GetHost(builder =&gt; 
+    builder
+        .AddStandardZptExpressions()
+        .AddAngleSharpZptDocuments()
+);
+</code></pre>
+<p>If using this mechanism instead of DI, then you are responsible for getting the returned host object to the class which will use it.</p>
+<h2 id="injecting-and-consuming-zptsharp">Injecting and consuming ZptSharp</h2>
+<p>Once ZptSharp is available via your application's dependency injection, you may inject &amp; consume ZptSharp's service interfaces in your app logic.</p>
+<p>The table below lists a few interfaces for ZptSharp services which are intended for use as entry-points into its logic.
+<a class="xref" href="ZptSharp.Hosting.IHostsZptSharp.html">The self-contained host</a> which does not use DI also makes these same interfaces available via its properties.</p>
+<table>
+<thead>
+<tr>
+<th>Interface</th>
+<th>Summary</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a class="xref" href="ZptSharp.IRendersZptFile.html"><code>IRendersZptFile</code></a></td>
+<td>Used to render ZPT documents from file-system files</td>
+</tr>
+<tr>
+<td><a class="xref" href="ZptSharp.IRendersZptDocument.html"><code>IRendersZptDocument</code></a></td>
+<td>Used to render ZPT documents from sources <em>which are not</em> file-system files</td>
+</tr>
+<tr>
+<td><a class="xref" href="ZptSharp.IWritesStreamToTextWriter.html"><code>IWritesStreamToTextWriter</code></a></td>
+<td>Used to save the results of rendering to a <code>System.IO.TextWriter</code> where applicable</td>
+</tr>
+<tr>
+<td><a class="xref" href="ZptSharp.BulkRendering.IRendersManyFiles.html"><code>IRendersManyFiles</code></a></td>
+<td>Used to perform bulk-rendering of many source files, using the same model for all</td>
+</tr>
+</tbody>
+</table>
+<h2 id="configuring-the-rendering-operations">Configuring the rendering operations</h2>
+<p>The methods <a class="xref" href="ZptSharp.IRendersZptFile.html#ZptSharp_IRendersZptFile_RenderAsync_System_String_System_Object_ZptSharp_Config_RenderingConfig_System_Threading_CancellationToken_"><code>IRendersZptFile.RenderAsync</code></a>, <a class="xref" href="ZptSharp.IRendersZptDocument.html#ZptSharp_IRendersZptDocument_RenderAsync_System_IO_Stream_System_Object_ZptSharp_Config_RenderingConfig_System_Threading_CancellationToken_ZptSharp_Rendering_IDocumentSourceInfo_"><code>IRendersZptDocument.RenderAsync</code></a> &amp; <a class="xref" href="ZptSharp.BulkRendering.IRendersManyFiles.html#ZptSharp_BulkRendering_IRendersManyFiles_RenderAllAsync_ZptSharp_BulkRendering_BulkRenderingRequest_System_Threading_CancellationToken_"><code>IRendersManyFiles.RenderAllAsync</code></a> all accept an instance of <a class="xref" href="ZptSharp.Config.RenderingConfig.html"><code>RenderingConfig</code></a>, either as a parameter or as part of a request object.</p>
+<p>You are advised to read the documentation for the rendering configuration, to see the available options which may be used to customize the process.</p>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/csf-dev/ZPT-Sharp/blob/master/ZptSharp.Documentation/api/index.md/#L1" class="contribution-link">Improve this Doc</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In This Article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            
+            <span>Generated by <strong>DocFX</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

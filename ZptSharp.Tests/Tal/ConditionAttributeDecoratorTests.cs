@@ -1,0 +1,282 @@
+﻿using System;
+using System.Threading;
+using System.Threading.Tasks;
+using AutoFixture.NUnit3;
+using Moq;
+using NUnit.Framework;
+using ZptSharp.Autofixture;
+using ZptSharp.Dom;
+using ZptSharp.Expressions;
+using ZptSharp.Rendering;
+
+namespace ZptSharp.Tal
+{
+    [TestFixture,Parallelizable]
+    public class ConditionAttributeDecoratorTests
+    {
+        [Test, AutoMoqData]
+        public async Task ProcessContextAsync_removes_the_node_if_a_condition_attribute_evaluates_to_falsey_value([Frozen] IHandlesProcessingError wrapped,
+                                                                                                                     [Frozen] IGetsTalAttributeSpecs specProvider,
+                                                                                                                     [Frozen] IEvaluatesExpression evaluator,
+                                                                                                                     [Frozen] IInterpretsExpressionResult resultInterpreter,
+                                                                                                                     ConditionAttributeDecorator sut,
+                                                                                                                     AttributeSpec spec,
+                                                                                                                     [StubDom] ExpressionContext context,
+                                                                                                                     [StubDom] IAttribute attribute,
+                                                                                                                     [StubDom] INode parent,
+                                                                                                                     object expressionResult)
+        {
+            Mock.Get(wrapped)
+                .Setup(x => x.ProcessContextAsync(context, CancellationToken.None))
+                .Returns(() => Task.FromResult(ExpressionContextProcessingResult.Noop));
+            Mock.Get(specProvider)
+                .SetupGet(x => x.Condition)
+                .Returns(spec);
+            Mock.Get(evaluator)
+                .Setup(x => x.EvaluateExpressionAsync(attribute.Value, context, CancellationToken.None))
+                .Returns(() => Task.FromResult(expressionResult));
+            Mock.Get(resultInterpreter)
+                .Setup(x => x.DoesResultAbortTheAction(expressionResult))
+                .Returns(false);
+            Mock.Get(resultInterpreter)
+                .Setup(x => x.CoerceResultToBoolean(expressionResult))
+                .Returns(false);
+            Mock.Get(attribute).Setup(x => x.Matches(spec)).Returns(true);
+            context.CurrentNode.Attributes.Clear();
+            context.CurrentNode.Attributes.Add(attribute);
+            context.CurrentNode.ParentNode = parent;
+            parent.ChildNodes.Add(context.CurrentNode);
+
+            await sut.ProcessContextAsync(context);
+
+            Assert.That(parent.ChildNodes, Has.None.SameAs(context.CurrentNode));
+        }
+
+        [Test, AutoMoqData]
+        public async Task ProcessContextAsync_does_not_call_wrapped_service_if_a_condition_attribute_evaluates_to_falsey_value([Frozen] IHandlesProcessingError wrapped,
+                                                                                                                               [Frozen] IGetsTalAttributeSpecs specProvider,
+                                                                                                                               [Frozen] IEvaluatesExpression evaluator,
+                                                                                                                               [Frozen] IInterpretsExpressionResult resultInterpreter,
+                                                                                                                               ConditionAttributeDecorator sut,
+                                                                                                                               AttributeSpec spec,
+                                                                                                                               [StubDom] ExpressionContext context,
+                                                                                                                               [StubDom] IAttribute attribute,
+                                                                                                                               [StubDom] INode parent,
+                                                                                                                               object expressionResult)
+        {
+            Mock.Get(wrapped)
+                .Setup(x => x.ProcessContextAsync(context, CancellationToken.None))
+                .Returns(() => Task.FromResult(ExpressionContextProcessingResult.Noop));
+            Mock.Get(specProvider)
+                .SetupGet(x => x.Condition)
+                .Returns(spec);
+            Mock.Get(evaluator)
+                .Setup(x => x.EvaluateExpressionAsync(attribute.Value, context, CancellationToken.None))
+                .Returns(() => Task.FromResult(expressionResult));
+            Mock.Get(resultInterpreter)
+                .Setup(x => x.DoesResultAbortTheAction(expressionResult))
+                .Returns(false);
+            Mock.Get(resultInterpreter)
+                .Setup(x => x.CoerceResultToBoolean(expressionResult))
+                .Returns(false);
+            Mock.Get(attribute).Setup(x => x.Matches(spec)).Returns(true);
+            context.CurrentNode.Attributes.Clear();
+            context.CurrentNode.Attributes.Add(attribute);
+            context.CurrentNode.ParentNode = parent;
+            parent.ChildNodes.Add(context.CurrentNode);
+
+            await sut.ProcessContextAsync(context);
+
+            Mock.Get(wrapped)
+                .Verify(x => x.ProcessContextAsync(It.IsAny<ExpressionContext>(), CancellationToken.None), Times.Never);
+        }
+
+        [Test, AutoMoqData]
+        public async Task ProcessContextAsync_returns_abort_processing_result_if_a_condition_attribute_evaluates_to_falsey_value([Frozen] IGetsTalAttributeSpecs specProvider,
+                                                                                                                                 [Frozen] IEvaluatesExpression evaluator,
+                                                                                                                                 [Frozen] IInterpretsExpressionResult resultInterpreter,
+                                                                                                                                 ConditionAttributeDecorator sut,
+                                                                                                                                 AttributeSpec spec,
+                                                                                                                                 [StubDom] ExpressionContext context,
+                                                                                                                                 [StubDom] IAttribute attribute,
+                                                                                                                                 [StubDom] INode parent,
+                                                                                                                                 object expressionResult)
+        {
+            Mock.Get(specProvider)
+                .SetupGet(x => x.Condition)
+                .Returns(spec);
+            Mock.Get(evaluator)
+                .Setup(x => x.EvaluateExpressionAsync(attribute.Value, context, CancellationToken.None))
+                .Returns(() => Task.FromResult(expressionResult));
+            Mock.Get(resultInterpreter)
+                .Setup(x => x.DoesResultAbortTheAction(expressionResult))
+                .Returns(false);
+            Mock.Get(resultInterpreter)
+                .Setup(x => x.CoerceResultToBoolean(expressionResult))
+                .Returns(false);
+            Mock.Get(attribute).Setup(x => x.Matches(spec)).Returns(true);
+            context.CurrentNode.Attributes.Clear();
+            context.CurrentNode.Attributes.Add(attribute);
+            context.CurrentNode.ParentNode = parent;
+            parent.ChildNodes.Add(context.CurrentNode);
+
+            var result = await sut.ProcessContextAsync(context);
+
+            Assert.That(result?.DoNotProcessChildren, Is.True);
+        }
+
+        [Test, AutoMoqData]
+        public async Task ProcessContextAsync_does_not_remove_node_if_a_condition_attribute_evaluates_to_truthy_value([Frozen] IHandlesProcessingError wrapped,
+                                                                                                                         [Frozen] IGetsTalAttributeSpecs specProvider,
+                                                                                                                         [Frozen] IEvaluatesExpression evaluator,
+                                                                                                                         [Frozen] IInterpretsExpressionResult resultInterpreter,
+                                                                                                                         ConditionAttributeDecorator sut,
+                                                                                                                         AttributeSpec spec,
+                                                                                                                         [StubDom] ExpressionContext context,
+                                                                                                                         [StubDom] IAttribute attribute,
+                                                                                                                         [StubDom] INode parent,
+                                                                                                                         object expressionResult)
+        {
+            Mock.Get(wrapped)
+                .Setup(x => x.ProcessContextAsync(context, CancellationToken.None))
+                .Returns(() => Task.FromResult(ExpressionContextProcessingResult.Noop));
+            Mock.Get(specProvider)
+                .SetupGet(x => x.Condition)
+                .Returns(spec);
+            Mock.Get(evaluator)
+                .Setup(x => x.EvaluateExpressionAsync(attribute.Value, context, CancellationToken.None))
+                .Returns(() => Task.FromResult(expressionResult));
+            Mock.Get(resultInterpreter)
+                .Setup(x => x.DoesResultAbortTheAction(expressionResult))
+                .Returns(false);
+            Mock.Get(resultInterpreter)
+                .Setup(x => x.CoerceResultToBoolean(expressionResult))
+                .Returns(true);
+            Mock.Get(attribute).Setup(x => x.Matches(spec)).Returns(true);
+            context.CurrentNode.Attributes.Clear();
+            context.CurrentNode.Attributes.Add(attribute);
+            context.CurrentNode.ParentNode = parent;
+            parent.ChildNodes.Add(context.CurrentNode);
+
+            await sut.ProcessContextAsync(context);
+
+            Assert.That(parent.ChildNodes, Has.One.SameAs(context.CurrentNode));
+        }
+
+        [Test, AutoMoqData]
+        public async Task ProcessContextAsync_returns_wrapped_result_if_a_condition_attribute_evaluates_to_truthy_value([Frozen] IHandlesProcessingError wrapped,
+                                                                                                                        [Frozen] IGetsTalAttributeSpecs specProvider,
+                                                                                                                        [Frozen] IEvaluatesExpression evaluator,
+                                                                                                                        [Frozen] IInterpretsExpressionResult resultInterpreter,
+                                                                                                                        ConditionAttributeDecorator sut,
+                                                                                                                        AttributeSpec spec,
+                                                                                                                        [StubDom] ExpressionContext context,
+                                                                                                                        [StubDom] IAttribute attribute,
+                                                                                                                        [StubDom] INode parent,
+                                                                                                                        object expressionResult)
+        {
+            Mock.Get(wrapped)
+                .Setup(x => x.ProcessContextAsync(context, CancellationToken.None))
+                .Returns(() => Task.FromResult(ExpressionContextProcessingResult.Noop));
+            Mock.Get(specProvider)
+                .SetupGet(x => x.Condition)
+                .Returns(spec);
+            Mock.Get(evaluator)
+                .Setup(x => x.EvaluateExpressionAsync(attribute.Value, context, CancellationToken.None))
+                .Returns(() => Task.FromResult(expressionResult));
+            Mock.Get(resultInterpreter)
+                .Setup(x => x.DoesResultAbortTheAction(expressionResult))
+                .Returns(false);
+            Mock.Get(resultInterpreter)
+                .Setup(x => x.CoerceResultToBoolean(expressionResult))
+                .Returns(true);
+            Mock.Get(attribute).Setup(x => x.Matches(spec)).Returns(true);
+            context.CurrentNode.Attributes.Clear();
+            context.CurrentNode.Attributes.Add(attribute);
+            context.CurrentNode.ParentNode = parent;
+            parent.ChildNodes.Add(context.CurrentNode);
+
+            var result = await sut.ProcessContextAsync(context);
+
+            Mock.Get(wrapped)
+                .Verify(x => x.ProcessContextAsync(It.IsAny<ExpressionContext>(), CancellationToken.None), Times.Once, "Calls wrapped result");
+            Assert.That(result?.DoNotProcessChildren, Is.False, "Does not abort child item processing");
+        }
+
+        [Test, AutoMoqData]
+        public async Task ProcessContextAsync_does_not_remove_node_if_a_condition_attribute_evaluates_to_cancellation([Frozen] IHandlesProcessingError wrapped,
+                                                                                                                         [Frozen] IGetsTalAttributeSpecs specProvider,
+                                                                                                                         [Frozen] IEvaluatesExpression evaluator,
+                                                                                                                         [Frozen] IInterpretsExpressionResult resultInterpreter,
+                                                                                                                         ConditionAttributeDecorator sut,
+                                                                                                                         AttributeSpec spec,
+                                                                                                                         [StubDom] ExpressionContext context,
+                                                                                                                         [StubDom] IAttribute attribute,
+                                                                                                                         [StubDom] INode parent,
+                                                                                                                         object expressionResult)
+        {
+            Mock.Get(wrapped)
+                .Setup(x => x.ProcessContextAsync(context, CancellationToken.None))
+                .Returns(() => Task.FromResult(ExpressionContextProcessingResult.Noop));
+            Mock.Get(specProvider)
+                .SetupGet(x => x.Condition)
+                .Returns(spec);
+            Mock.Get(evaluator)
+                .Setup(x => x.EvaluateExpressionAsync(attribute.Value, context, CancellationToken.None))
+                .Returns(() => Task.FromResult(expressionResult));
+            Mock.Get(resultInterpreter)
+                .Setup(x => x.DoesResultAbortTheAction(expressionResult))
+                .Returns(true);
+            Mock.Get(resultInterpreter)
+                .Setup(x => x.CoerceResultToBoolean(expressionResult))
+                .Returns(false);
+            Mock.Get(attribute).Setup(x => x.Matches(spec)).Returns(true);
+            context.CurrentNode.Attributes.Clear();
+            context.CurrentNode.Attributes.Add(attribute);
+            context.CurrentNode.ParentNode = parent;
+            parent.ChildNodes.Add(context.CurrentNode);
+
+            await sut.ProcessContextAsync(context);
+
+            Assert.That(parent.ChildNodes, Has.One.SameAs(context.CurrentNode));
+        }
+
+        [Test, AutoMoqData]
+        public async Task ProcessContextAsync_does_not_remove_node_if_attribute_does_not_match_spec([Frozen] IHandlesProcessingError wrapped,
+                                                                                                       [Frozen] IGetsTalAttributeSpecs specProvider,
+                                                                                                       [Frozen] IEvaluatesExpression evaluator,
+                                                                                                       [Frozen] IInterpretsExpressionResult resultInterpreter,
+                                                                                                       ConditionAttributeDecorator sut,
+                                                                                                       AttributeSpec spec,
+                                                                                                       [StubDom] ExpressionContext context,
+                                                                                                       [StubDom] IAttribute attribute,
+                                                                                                       [StubDom] INode parent,
+                                                                                                       object expressionResult)
+        {
+            Mock.Get(wrapped)
+                .Setup(x => x.ProcessContextAsync(context, CancellationToken.None))
+                .Returns(() => Task.FromResult(ExpressionContextProcessingResult.Noop));
+            Mock.Get(specProvider)
+                .SetupGet(x => x.Condition)
+                .Returns(spec);
+            Mock.Get(evaluator)
+                .Setup(x => x.EvaluateExpressionAsync(attribute.Value, context, CancellationToken.None))
+                .Returns(() => Task.FromResult(expressionResult));
+            Mock.Get(resultInterpreter)
+                .Setup(x => x.DoesResultAbortTheAction(expressionResult))
+                .Returns(false);
+            Mock.Get(resultInterpreter)
+                .Setup(x => x.CoerceResultToBoolean(expressionResult))
+                .Returns(false);
+            Mock.Get(attribute).Setup(x => x.Matches(spec)).Returns(false);
+            context.CurrentNode.Attributes.Clear();
+            context.CurrentNode.Attributes.Add(attribute);
+            context.CurrentNode.ParentNode = parent;
+            parent.ChildNodes.Add(context.CurrentNode);
+
+            await sut.ProcessContextAsync(context);
+
+            Assert.That(parent.ChildNodes, Has.One.SameAs(context.CurrentNode));
+        }
+    }
+}

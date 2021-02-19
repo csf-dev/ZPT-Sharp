@@ -1,0 +1,14 @@
+{
+	"folders": [
+		{
+			"path": "."
+		}
+	],
+	"settings": {
+		"csharp.referencesCodeLens.enabled": false,
+		"files.exclude": {
+			"**/bin": true,
+			"**/obj": true
+		}
+	}
+}

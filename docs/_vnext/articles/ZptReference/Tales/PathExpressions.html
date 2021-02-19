@@ -1,0 +1,240 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>The Path expression syntax </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="The Path expression syntax ">
+    <meta name="generator" content="docfx 2.56.6.0">
+    
+    <link rel="shortcut icon" href="../../../favicon.ico">
+    <link rel="stylesheet" href="../../../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../../../styles/docfx.css">
+    <link rel="stylesheet" href="../../../styles/main.css">
+    <meta property="docfx:navrel" content="../../../toc.html">
+    <meta property="docfx:tocrel" content="../toc.html">
+    
+    
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../../../index.html">
+                <img id="logo" class="svg" src="../../../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="">
+<h1 id="the-path-expression-syntax">The Path expression syntax</h1>
+
+<p>Path expressions provide access to objects and object associations in a manner which looks similar to a URL path.
+This syntax is considerably simplified compared to full C# and thus lacks the power of a more sophisticated language.
+Despite this, because the most common use-cases involve simply &quot;getting a value from the model&quot;, it is often sufficient.</p>
+<p>At its most basic, a path expression is simply a single variable reference like <code>myName</code>, which would evaluate to the value of the <code>myName</code> variable.
+All path expressions <em>must begin with either <a href="../Tal/Define.html">a variable</a> or <a href="GlobalContexts.html">a root context</a></em>.
+Path expressions may also contain forward-slash characters <code>/</code> indicating object traversal:</p>
+<pre><code class="lang-text">variable/ChildProperty/GrandchildProperty
+</code></pre>
+<p>Each forward-slash causes the expression evaluation to traverse into a descendent member.
+The C# equivalent of the above might look like <code>variable.ChildProperty.GrandchildProperty</code>.</p>
+<h2 id="path-expressions-are-included-in-the-main-zptsharp-package">Path expressions are included in the main ZptSharp package</h2>
+<p>Support for <code>path</code> expressions is included in <a href="../../NuGetPackages.html#zptsharp-core">the main ZptSharp NuGet package</a>.
+Additionally, <code>path</code> expressions are one of the standard expression types <a class="xref" href="../../../api/ZptSharp.ZptSharpHostingBuilderExtensions.html#ZptSharp_ZptSharpHostingBuilderExtensions_AddStandardZptExpressions_ZptSharp_Hosting_IBuildsHostingEnvironment_">activated by <code>AddStandardZptExpressions()</code></a>.</p>
+<p>What's more, unless altered <a class="xref" href="../../../api/ZptSharp.Config.RenderingConfig.html#ZptSharp_Config_RenderingConfig_DefaultExpressionType">via the rendering configuration</a>, path expressions are the default TALES expression type.
+This means that they may be used without requiring the <code>path:</code> prefix.</p>
+<h2 id="rules-for-traversal">Rules for traversal</h2>
+<p>In most cases in a path expression, the forward slash character is used in the same way as a C# period is used for object/property traversal.
+For example the path expression <code>parent/Child</code> is likely to be equivalent to the C# <code>parent.Child</code>.
+This is not always the case though.</p>
+<p>This section details the rules for path expression traversal.
+Each part of the process is presented as a sub-heading, and <em>each of these rules is applied in the order in which they are listed</em>, using <a href="https://en.wikipedia.org/wiki/Chain-of-responsibility_pattern">a chain of responsibility</a>.
+If a rule fails to provide a value then the next rule is attempted, and so on until an applicable rule is found.</p>
+<h3 id="for-the-first-name-in-the-expression-the-contexts-and-variables-are-searched">For the first name in the expression, the contexts and variables are searched</h3>
+<p>For the very first name in the expression, the following locations are searched (in the following order).
+This rule is <em>only applicable</em> for the first name in the expression (the beginning of the expression).</p>
+<ol>
+<li>If the name is the special keyword <code>CONTEXTS</code> then this is used to return <a href="GlobalContexts.html#the-special-root-context-contexts">a root contexts object</a></li>
+<li>If the name matches an in-scope local variable then this variable is returned</li>
+<li>If the name matches a global variable then this variable is returned</li>
+<li>If the name matches the name of <a href="GlobalContexts.html">a root context</a> then that context is returned</li>
+<li><em>If none of the above match then evaluation fails with an error</em></li>
+</ol>
+<p>See <a href="PathExpressions.html#explicitly-selecting-local-or-global-variables">the section below titled <strong>Explicitly selecting local or global variables</strong></a> for some variants of the <code>path</code> expression type which use a modified version of the five steps above.</p>
+<h3 id="if-the-current-object-is-a-template-directory">If the current object is a template directory</h3>
+<p>If the current object being traversed is <a class="xref" href="../../../api/ZptSharp.TemplateDirectory.html">an instance of <code>TemplateDirectory</code></a> then the name following the forward-slash is interpreted as a file or directory name.
+If it matches a directory name then the result of traversal is a new <code>TemplateDirectory</code> instance for the traversed directory.</p>
+<p>If it matches a file name then that file is assumed to be a ZPT document template file.
+An <a class="xref" href="../../../api/ZptSharp.Dom.IDocument.html"><code>IDocument</code></a> is returned, reading that file using the same implementation of <a class="xref" href="../../../api/ZptSharp.Dom.IReadsAndWritesDocument.html"><code>IReadsAndWritesDocument</code></a> as was used to read the current template.</p>
+<h3 id="if-the-current-object-is-a-named-value-provider">If the current object is a named value provider</h3>
+<p>If the current object being traversed is <a class="xref" href="../../../api/ZptSharp.Expressions.IGetsNamedTalesValue.html">an object that implements <code>IGetsNamedTalesValue</code></a> then <a class="xref" href="../../../api/ZptSharp.Expressions.IGetsNamedTalesValue.html#ZptSharp_Expressions_IGetsNamedTalesValue_TryGetValueAsync_System_String_System_Threading_CancellationToken_">its <code>TryGetValueAsync</code> method</a> will be used to get the traversal result.</p>
+<h3 id="if-the-current-object-is-an-idictionary-with-string-keys">If the current object is an IDictionary with string keys</h3>
+<p>If the current object being traversed implements a generic version of <code>IDictionary&lt;TKey,TValue&gt;</code> and <code>TKey</code> is <code>string</code> then the name being traversed is treated as if it were a key of that dictionary.
+If the dictionary contains a key of that name then the expression result is the value of the item with the matching key.</p>
+<h3 id="if-the-current-object-is-an-idictionary-with-integer-keys">If the current object is an IDictionary with integer keys</h3>
+<p>As above, but if the current object being traversed implements a generic version of <code>IDictionary&lt;TKey,TValue&gt;</code> and <code>TKey</code> is <code>int</code> then the name being traversed is treated as if it were a key of that dictionary.
+If the name can be parsed as an integer and the dictionary contains a key of that nueric value then the expression result is the value of the item with the matching key.</p>
+<h3 id="if-the-current-object-is-a-dynamically-typed-object">If the current object is a dynamically-typed object</h3>
+<p>If the current object being traversed is <a href="https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/types/using-type-dynamic">a dynamic object</a>, specifically one <a href="https://docs.microsoft.com/en-us/dotnet/api/system.dynamic.idynamicmetaobjectprovider">which implements <code>IDynamicMetaObjectProvider</code></a> then an attempt will be made to get a value dynamically using the name which is being traversed.</p>
+<h3 id="if-the-current-object-is-ienumerable-and-the-name-is-an-integer">If the current object is IEnumerable and the name is an integer</h3>
+<p>If the current object being traversed implements <code>IEnumerable</code> and the name for traversal may be parsed as an integer then the name is treated as a numeric index and the <em>Nth</em> item from the enumerable is returned as the traversal result.
+Optimisations are in place so that if the object also implements <code>IList</code>, intermediate item are not enumerated.</p>
+<h3 id="an-attempt-is-made-to-use-reflection-to-traverse-the-name">An attempt is made to use reflection to traverse the name</h3>
+<p>If all of the rules above have failed to produce a result, then reflection is used to find a <strong>public</strong> member which matches the name for traversal.
+The order in which members are considered is:</p>
+<ol>
+<li>Properties which have a getter</li>
+<li>Methods which have a non-void return type and take no parameters</li>
+<li>Fields</li>
+</ol>
+<p>Please take note of the second item, which might not be obvious.
+If a name in a path expression matches a parameterless method which returns anything that is not <code>void</code> then the traversal will succeed, where the result is the returned result of having executed that method.
+In the case of properties and fields the result is simply getting the value from the member.</p>
+<h3 id="if-all-of-the-above-fails-then-traversal-fails">If all of the above fails then traversal fails</h3>
+<p>If all of the previous rules fail to provide a value then the overall traversal is considered a failure.
+If <a href="PathExpressions.html#alternate-paths">an alternate path</a> is not available then <em>this will raise an error</em>.
+If the attribute containing this expression is a METAL one then that error will cause the overall rendering to be an error.
+If the attribute containing this expression is a TAL one then it may optionally <a href="../Tal/OnError.html">be handled via a <code>tal:on-error</code> attribute</a> if one is present.</p>
+<h2 id="explicitly-selecting-local-or-global-variables">Explicitly selecting local or global variables</h2>
+<p>The primary expression prefix for path expressions is <code>path:</code>, and because this is the default expression type it may be omitted.
+There are three variations of the path expression though which are available for specialized circumstances.
+These specialized expression types provide modified rules for <a href="PathExpressions.html#for-the-first-name-in-the-expression-the-contexts-and-variables-are-searched">selecting the first name in the expression</a>.</p>
+<p>The table below shows how the process described in the section above is modified for these other expression types.
+In each case, it indicates which steps (of <a href="PathExpressions.html#for-the-first-name-in-the-expression-the-contexts-and-variables-are-searched">the five-step process for selecting the first name in the expression</a>) are skipped.</p>
+<table>
+<thead>
+<tr>
+<th>Expression prefix</th>
+<th>Steps skipped</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>local:</code></td>
+<td>Steps 1, 3 &amp; 4</td>
+</tr>
+<tr>
+<td><code>global:</code></td>
+<td>Steps 1, 2 &amp; 4</td>
+</tr>
+<tr>
+<td><code>var:</code></td>
+<td>Steps 1 &amp; 4</td>
+</tr>
+</tbody>
+</table>
+<p>This technique may be used to deal with ambiguity where a variable name is defined both locally and globally.
+The <code>global:</code> expression type would permit accessing the global variable even when there is <a href="../Tal/Define.html#local-variables">a local variable of the same name 'hiding it'</a>.</p>
+<p>Apart from the logic change described above for getting the initial value for the path expression, the <code>local:</code>, <code>global:</code> and <code>var:</code> expression types work identically to <code>path:</code> expressions.</p>
+<h2 id="alternate-paths">Alternate paths</h2>
+<p>Path expressions contain a mechanism which allows 'more than one bite at the cherry', this mechanism is called <em>alternate paths</em>.
+The syntax for alternate path is one or more path expressions, separated by pipe (aka &quot;vertical bar&quot;) characters: <code>|</code> and optional whitespace.
+Here is an example of some alternate path expressions.</p>
+<pre><code class="lang-text">here/tryThisFirst | here/tryThisSecond | here/tryThisLast
+</code></pre>
+<p>As suggested by the example, each of the individual paths is attempted in the order in which it is listed.
+The first which produces a definitive, non-error result is taken as the result of the overall path expression and any further alternates are not used.</p>
+<p>This technique is ideal for providing fallback content in order to prevent a rendering error (because a path could not be traversed).
+It is common to see constructs like the following where there is doubt that a path expression can be traversed.</p>
+<pre><code class="lang-html">&lt;p&gt;
+    You logged in as
+    &lt;span tal:replace=&quot;here/username | default&quot;&gt;a guest&lt;/span&gt;.
+&lt;/p&gt;
+</code></pre>
+<p>In this example, the <code>&lt;span&gt;</code> element will usually be replaced by the value of the path <code>here/username</code>.
+If that path cannot be traversed (for example, the user is logged in as a guest), then <a href="../Tal/ContentAndReplace.html">the <code>tal:replace</code> attribute</a> will receive <a href="../Tal/ContentAndReplace.html#aborting-a-talreplace-attribute">a value of default, which aborts it</a>.
+Aborting the replace attribute will mean that the text &quot;a guest&quot; will be left in the rendered output.</p>
+<h2 id="interpolated-paths">Interpolated paths</h2>
+<p>An advanced feature of path expressions is <em>path interpolation</em>.
+This allows a name (within a path expression) to itself be evaluated using a variable name - allowing for a path expression to include a &quot;dynamic name&quot;, so to speak.
+Here is an example of the basic syntax for a path expression which uses an interpolated part; essentially the interpolated name is designated by a question mark <code>?</code> character and then a variable name.</p>
+<pre><code class="lang-text">here/?propertyName/Value
+</code></pre>
+<p>When evaluating this path expression, the <code>propertyName</code> variable will be evaluated as a string (using <code>Object.ToString()</code> if neccesary).
+The result from the <code>propertyName</code> variable will then be placed into the path at the same position.
+The whole path is then evaluated using the normal rules.</p>
+<p>If, in the example above, the <code>propertyName</code> variable has the value &quot;MyProperty&quot; then the overall expression result will be as if the expression were <code>here/MyProperty/Value</code>.</p>
+<p>When using interpolated paths, the dynamic portion of the path must be derived from a single variable.
+It is not permitted to use full expressions to resolve the name of the path segment.
+Use <a href="../Tal/Define.html">a <code>tal:define</code> attribute</a> to define a variable if needed.</p>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/csf-dev/ZPT-Sharp/blob/master/ZptSharp.Documentation/articles/ZptReference/Tales/PathExpressions.md/#L1" class="contribution-link">Improve this Doc</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In This Article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            
+            <span>Generated by <strong>DocFX</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../../../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../../../styles/docfx.js"></script>
+    <script type="text/javascript" src="../../../styles/main.js"></script>
+  </body>
+</html>

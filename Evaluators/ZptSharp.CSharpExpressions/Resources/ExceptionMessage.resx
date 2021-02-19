@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+    <resheader name="resmimetype">
+        <value>text/microsoft-resx</value>
+    </resheader>
+    <resheader name="version">
+        <value>2.0</value>
+    </resheader>
+    <resheader name="reader">
+        <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </resheader>
+    <resheader name="writer">
+        <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </resheader>
+    <data name="ErrorCompilingCSharpExpression" xml:space="preserve">
+        <value>An exception was raised whilst compiling a TALES 'csharp' expression; see the inner exception for more detail.
+Expression:{0}
+   Element:{1}</value>
+    </data>
+    <data name="ErrorEvaluatingCSharpExpression" xml:space="preserve">
+        <value>An exception was raised whilst evaluating a TALES 'csharp' expression; see the inner exception for more detail.
+Expression:{0}
+   Element:{1}</value>
+    </data>
+    <data name="TypeDesignationMustBeSyntacticallyValid" xml:space="preserve">
+        <value>The C# 'type' expression must be syntactically valid: "varName type".  For example "myVar ICollection&lt;string&gt;".
+Expression:{0}
+   Element:{1}</value>
+    </data>
+</root>

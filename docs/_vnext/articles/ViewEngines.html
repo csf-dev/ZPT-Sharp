@@ -1,0 +1,268 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>ZptSharp View Engines </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="ZptSharp View Engines ">
+    <meta name="generator" content="docfx 2.56.6.0">
+    
+    <link rel="shortcut icon" href="../favicon.ico">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="">
+<h1 id="zptsharp-view-engines">ZptSharp View Engines</h1>
+
+<p>ZptSharp provides two view engines, allowing AS<span>P.N</span>ET MVC applications to display views using ZPT document templates.
+The table below shows the applicable packages and MVC versions.</p>
+<table>
+<thead>
+<tr>
+<th>NuGet Package</th>
+<th>MVC version</th>
+<th>Intended usage</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>ZptSharp.MvcCore</strong></td>
+<td>AS<span>P.N</span>ET Core MVC 2+</td>
+<td>.NET Core 2.0+ or .NET 5+</td>
+</tr>
+<tr>
+<td><strong>ZptSharp.Mvc5</strong></td>
+<td>AS<span>P.N</span>ET MVC5</td>
+<td>.NET Framework 4.6.1+</td>
+</tr>
+</tbody>
+</table>
+<p>Install the package for your MVC version/runtime (as well as at least one <a href="NuGetPackages.html#document-providers">document provider package</a>, and any additional expression evaluators, if applicable) into your MVC Web Application project.</p>
+<h2 id="activating-the-view-engine">Activating the view engine</h2>
+<p>As well as installing the appropriate package (above) to your web application, you must activate the view engine in your web app setup.
+Common to both framework-specific packages is the <code>ZptSharpViewEngine</code> constructor.
+This makes use of a builder action/callback in which an object is configured with the optional/elective functionality.
+To have a useful ZptSharp environment, <em>at least one document provider and one expression evaluator must be activated here</em>.
+Full documentation for this set-up is available in the reference for <a class="xref" href="../api/ZptSharp.Hosting.IBuildsHostingEnvironment.html">the ZptSharp DI builder object</a>; the examples below demonstrate a typical usage.</p>
+<h3 id="aspnet-core-mvc">AS<span>P.N</span>ET Core MVC</h3>
+<p>To activate the ZptSharp view engine for AS<span>P.N</span>ET Core MVC you must add code similar to the below to your application starup, where services are configured.
+This may include a modification to an existing usage of <code>AddControllersWithViews()</code> in order to add the view options, where you add the ZptSharp view engine.</p>
+<pre><code class="lang-csharp">var viewEngine = new ZptSharpViewEngine(builder =&gt; {
+    builder.AddStandardZptExpressions();
+    builder.AddHapZptDocuments();
+});
+
+services.AddControllersWithViews()
+    .AddViewOptions(opts =&gt; {
+        opts.ViewEngines.Insert(0, viewEngine);
+    });
+</code></pre>
+<h3 id="aspnet-mvc5">AS<span>P.N</span>ET MVC5</h3>
+<p>To activate the ZptSharp view engine for AS<span>P.N</span>ET MVC5 you must add code similar to the below to either your <code>Global.asax.cs</code> within the <code>Application_Start</code> handler, or adapt it as middleware if you are using OWIN.</p>
+<pre><code class="lang-csharp">var viewEngine = new ZptSharp.Mvc5.ZptSharpViewEngine(builder =&gt; {
+    builder
+        .AddHapZptDocuments()
+        .AddStandardZptExpressions();
+});
+ViewEngines.Engines.Insert(0, viewEngine);
+</code></pre>
+<h2 id="writing-views">Writing views</h2>
+<p>When using the ZptSharp view engine, HTML views (using either the HTML Agility Pack or AngleSharp document providers) must have filename extensions of either <code>.pt</code> (page template), <code>.htm</code> or <code>.html</code>.
+When using XML views, they must have extensions of either <code>.xml</code> or <code>.xhtml</code>.</p>
+<p>Views are kept in the same file/directory structure as usual, so by default a subdirectory of <code>Views</code> based upon the controller name, and then a file-name which matches the Action.
+Controllers may return view results which specify other view-names, just as with other view-engines.</p>
+<h2 id="added-tales-contextsvariables-for-mvc">Added TALES contexts/variables for MVC</h2>
+<p>When using the ZptSharp view engine, a few additional TALES contexts (essentially, predefined variables) are added automatically.
+These contexts/variables are accessible to all views rendered by the view engine and <em>they are in addition to</em> <a href="ZptReference/Tales/GlobalContexts.html">the global contexts built-into Zptsharp</a>.
+The table below shows these extra contexts; the <strong>Framework</strong> column shows whether each context is available for AS<span>P.N</span>ET Core MVC, AS<span>P.N</span>ET MVC5 or <strong>both</strong> of these frameworks.</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Framework</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Context</code></td>
+<td>Both</td>
+<td>The current <code>HttpContext</code></td>
+</tr>
+<tr>
+<td><code>Model</code></td>
+<td>Both</td>
+<td>The current model, an alias for <code>here</code></td>
+</tr>
+<tr>
+<td><code>Request</code></td>
+<td>Both</td>
+<td>The HTTP request, equivalent to <code>HttpContext.Request</code></td>
+</tr>
+<tr>
+<td><code>request</code></td>
+<td>Both</td>
+<td>The HTTP request, an alias for <code>Request</code></td>
+</tr>
+<tr>
+<td><code>Response</code></td>
+<td>Both</td>
+<td>The HTTP response, equivalent to <code>HttpContext.Response</code></td>
+</tr>
+<tr>
+<td><code>RouteData</code></td>
+<td>Both</td>
+<td>The route data, equivalent to <code>ViewContext.RouteData</code></td>
+</tr>
+<tr>
+<td><code>TempData</code></td>
+<td>Both</td>
+<td>The temporary data, equivalent to <code>ViewContext.TempData</code></td>
+</tr>
+<tr>
+<td><code>Url</code></td>
+<td>Both</td>
+<td>The current request URL</td>
+</tr>
+<tr>
+<td><code>User</code></td>
+<td>Both</td>
+<td>The current user principal, equivalent to <code>HttpContext.User</code></td>
+</tr>
+<tr>
+<td><code>ViewBag</code></td>
+<td>Both</td>
+<td>The view bag, equivalent to <code>ViewContext.ViewBag</code></td>
+</tr>
+<tr>
+<td><code>ViewContext</code></td>
+<td>Both</td>
+<td>The current view context</td>
+</tr>
+<tr>
+<td><code>ViewData</code></td>
+<td>Both</td>
+<td>The view data, equivalent to <code>ViewContext.ViewData</code></td>
+</tr>
+<tr>
+<td><code>Views</code></td>
+<td>Both</td>
+<td>An object which provides access to the directory containing views, typically <code>~/Views</code> in your app</td>
+</tr>
+<tr>
+<td><code>Application</code></td>
+<td>MVC5 only</td>
+<td>The application state, roughly equivalent to <code>HttpContext.Application</code></td>
+</tr>
+<tr>
+<td><code>Cache</code></td>
+<td>MVC5 only</td>
+<td>The cache object, equivalent to <code>HttpContext.Cache</code></td>
+</tr>
+<tr>
+<td><code>Server</code></td>
+<td>MVC5 only</td>
+<td>The server utility object, equivalent to <code>HttpContext.Server</code></td>
+</tr>
+<tr>
+<td><code>Session</code></td>
+<td>MVC5 only</td>
+<td>The session-state object, equivalent to <code>HttpContext.Session</code></td>
+</tr>
+</tbody>
+</table>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/csf-dev/ZPT-Sharp/blob/master/ZptSharp.Documentation/articles/ViewEngines.md/#L1" class="contribution-link">Improve this Doc</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In This Article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            
+            <span>Generated by <strong>DocFX</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

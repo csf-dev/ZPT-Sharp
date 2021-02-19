@@ -1,0 +1,54 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <ReleaseVersion>2.0.0</ReleaseVersion>
+    <ProjectGuid>{2729d125-d2e4-4166-ada7-adcf62c0af7a}</ProjectGuid>
+  </PropertyGroup>
+
+  <Import Project="..\..\Tools\CommonSolutionProperties.props" />
+    
+  <PropertyGroup>
+    <PackageId>ZptSharp.Xml</PackageId>
+    <Title>ZptSharp XML document support</Title>
+    <Description>Add-on for ZptSharp which allows it to work with XML documents.</Description>
+    <TargetFrameworks>$(CommonTargetFrameworks)</TargetFrameworks>
+    <RootNamespace>ZptSharp.Dom</RootNamespace>
+  </PropertyGroup>
+    
+  <ItemGroup>
+    <ProjectReference Include="..\..\ZptSharp.Abstractions\ZptSharp.Abstractions.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="CSF.Collections.EventRaising" Version="1.1.0" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="5.0.0" />
+    <PackageReference Include="System.ValueTuple" Version="4.5.0" Condition="'$(TargetFramework.TrimEnd(`45612`))' == 'net'" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Resources\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="Resources\*.dtd" />
+    <None Remove="Resources\*.ent" />
+    <None Remove="Resources\*.mod" />
+    <EmbeddedResource Include="Resources\*.dtd" />
+    <EmbeddedResource Include="Resources\*.ent" />
+    <EmbeddedResource Include="Resources\*.mod" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Resources\ExceptionMessages.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>ExceptionMessages.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Resources\ExceptionMessages.Designer.cs">
+      <DependentUpon>ExceptionMessages.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  
+</Project>

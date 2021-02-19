@@ -1,0 +1,29 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <ReleaseVersion>2.0.0</ReleaseVersion>
+    <ProjectGuid>{d12d1118-3ec4-4dfa-b148-ef8d68230444}</ProjectGuid>
+  </PropertyGroup>
+
+  <Import Project="..\..\Tools\CommonSolutionProperties.props" />
+    
+  <PropertyGroup>
+    <PackageId>ZptSharp.PythonExpressions</PackageId>
+    <Title>ZptSharp Python expression evaluator</Title>
+    <Description>Add-on for ZptSharp which allows it to parse and execute python expressions.</Description>
+    <TargetFrameworks>$(CommonTargetFrameworks)</TargetFrameworks>
+    <RootNamespace>ZptSharp.Expressions.PythonExpressions</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\ZptSharp.Abstractions\ZptSharp.Abstractions.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="IronPython" Version="2.7.10" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="5.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="5.0.0" />
+    <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
+  </ItemGroup>
+  
+</Project>

@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+    <resheader name="resmimetype">
+        <value>text/microsoft-resx</value>
+    </resheader>
+    <resheader name="version">
+        <value>2.0</value>
+    </resheader>
+    <resheader name="reader">
+        <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </resheader>
+    <resheader name="writer">
+        <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </resheader>
+    <data name="CannotGetReaderWriterForFile" xml:space="preserve">
+        <value>No registered document reader/writer is suitable for the file '{0}'.
+To render ZPT document files, a suitable document provider must first be registered using `{1}'.
+The provider is then selected based upon the file name extension of the ZPT document file to be rendered.</value>
+    </data>
+    <data name="CannotConvertEvaluatedResult" xml:space="preserve">
+        <value>The generic type parameter used with `{0}' must be suitable for the type of returned expression result.
+Expression:{1}
+Expected type:{2}
+Actual type:{3}</value>
+    </data>
+    <data name="MacroNotFound" xml:space="preserve">
+        <value>A '{0}' attribute indicates that the element should use a METAL macro.  The macro indicated by the expression could not be found.
+Element:{1}
+Expression:{2}</value>
+    </data>
+    <data name="ExpressionTypeMustNotBeNullOrEmpty" xml:space="preserve">
+        <value>The expression type must not be null or an empty string.</value>
+    </data>
+    <data name="NoEvaluatorForExpressionType" xml:space="preserve">
+        <value>There is no evaluator implementation type registered for expressions of type {0}.  You must use `{1}' to register an implementation type for this expression type first.</value>
+    </data>
+    <data name="EvaluatorAlreadyRegistered" xml:space="preserve">
+        <value>There is already an evaluator implementation type registered for expressions of type {0}.  You must either avoid registering an evaluator more than once, or use `{1}' to remove this registration first.</value>
+    </data>
+    <data name="EvaluatorTypeMustImplementInterface" xml:space="preserve">
+        <value>The evaluator implementation type must be an implementation of `{0}'.
+Type registered:{1}</value>
+    </data>
+    <data name="PathPartCannotBeEmpty" xml:space="preserve">
+        <value>No part of a path expression may be an empty string.</value>
+    </data>
+    <data name="AlternatePathExpressionCannotBeEmpty" xml:space="preserve">
+        <value>A path expression (or an alternate expression, separated by a | character) may not be empty or whitespace-only.</value>
+    </data>
+    <data name="CannotParsePath" xml:space="preserve">
+        <value>An unexpected error occurred whilst parsing a TALES path expression.  See the inner exception for more information.
+Expression:{0}</value>
+    </data>
+    <data name="CannotParsePathExpressionAttribute" xml:space="preserve">
+        <value>An unexpected error occurred whilst parsing a TALES path expression.  See the inner exception for more information.
+Expression:{0}
+   Element:{1}</value>
+    </data>
+    <data name="InvalidVariableName" xml:space="preserve">
+        <value>The first part of a path expression must be a valid variable name; beginning with an upper/lowercase letter and consisting of only alphanumeric characters and (optionally) underscores.
+Invalid name:{0}</value>
+    </data>
+    <data name="InvalidPathPart" xml:space="preserve">
+        <value>Parts of a path expression (after the first) may contain only upper/lowercase letters, digits, spaces, and the punctuation characters underscore, dash, period, comma and tilde.
+Invalid part:{0}</value>
+    </data>
+    <data name="CannotEvaluatePathExpressionAggregate" xml:space="preserve">
+        <value>The TALES path expression "{0}" could not be successfully evaluated to a result.
+The contained exception instances will provide further information specific to each alternate part of the overall expression.</value>
+    </data>
+    <data name="CannotEvaluatePathExpressionSingle" xml:space="preserve">
+        <value>The TALES path expression "{0}" could not be successfully evaluated to a result.
+The inner exception will provide further information as to why.</value>
+    </data>
+    <data name="CannotTraversePathPart" xml:space="preserve">
+        <value>No value could be retrieved when attempting to get a named value '{0}' from {1}.</value>
+    </data>
+    <data name="MissingConfiguration" xml:space="preserve">
+        <value>A rendering configuration object must be registered before it can be retrieved.</value>
+    </data>
+    <data name="MissingReaderWriter" xml:space="preserve">
+        <value>It was not possible to resolve an implementation of {0}.
+Either an implementation must be stored in the current resolution scope via {1} or there must be only a single implementation
+type added to the services.  Where there is more than one implementation type added, use {2} to indicate the desired implementation.</value>
+    </data>
+    <data name="ElementMustHaveAParent" xml:space="preserve">
+        <value>The element must have a parent element; that is - it must not be the root element of its document.</value>
+    </data>
+    <data name="DocumentNotFound" xml:space="preserve">
+        <value>Neither a directory nor a ZPT document file was found matching the specified path.
+Path:{0}</value>
+    </data>
+    <data name="MultipleMatchingDocumentsFound" xml:space="preserve">
+        <value>Multiple files match the extension-less file path.  If omitting the file extension, it must indicate a single unambiguous document file.
+Directory:{0}
+ Filename:{1}</value>
+    </data>
+    <data name="InvalidTalDefineAttribute" xml:space="preserve">
+        <value>The tal:define attribute value must be valid.
+Element:{0}
+Attribute value:{1}</value>
+    </data>
+    <data name="UnexpectedErrorEvaluatingDefineAttribute" xml:space="preserve">
+        <value>An unexpected error occurred whilst evaluating a tal:define attribute expression.  The inner exception will contain further information.
+Element:{0}
+Definition:{1}</value>
+    </data>
+    <data name="TalDefineAttributeMustBeWellFormed" xml:space="preserve">
+        <value>The TAL 'define' attribute value must be well-formed.</value>
+    </data>
+    <data name="ErrorWhilstHandlingError" xml:space="preserve">
+        <value>A TAL 'on-error' attribute encountered an unexpected error whilst attempting to handle an error.
+Element:{0}</value>
+    </data>
+    <data name="MustNotBeRootElement" xml:space="preserve">
+        <value>The specified element (parameter '{1}') must not be the root element of the document; it must have a parent element.
+Element:{0}</value>
+    </data>
+    <data name="ContentAndReplaceAttributesMayNotCoexist" xml:space="preserve">
+        <value>A single DOM element must not have both TAL 'content' and 'replace' attributes.
+Element:{0}</value>
+    </data>
+    <data name="InvalidRepeatAttribute" xml:space="preserve">
+        <value>A TAL 'repeat' attribute value must indicate a variable and an expression, separated by whitespace.
+Element:{0}</value>
+    </data>
+    <data name="RepeatExpressionResultMustBeEnumerable" xml:space="preserve">
+        <value>The result of a TAL 'repeat' expression must either be null, an action-aborting token, or must derive from `{0}'.
+    Element:{1}
+Actual type:{2}</value>
+    </data>
+    <data name="UnexpectedExceptionEnumeratingRepetitions" xml:space="preserve">
+        <value>An unexpected exception was raised whilst enumerating a TAL 'repeat' expression.  See the inner exception for more information.
+Element:{0}</value>
+    </data>
+    <data name="InvalidAttributesAttributeValue" xml:space="preserve">
+        <value>The TAL 'attributes' attribute must have valid syntax.
+Element:{0}</value>
+    </data>
+    <data name="CouldNotEvaluateContentOrReplaceExpression" xml:space="preserve">
+        <value>The TAL 'content' or 'replace' expression must evaluate without error.
+   Element:{0}
+Expression:{1}</value>
+    </data>
+    <data name="BulkRenderingMustIncludeAtLeastOnePath" xml:space="preserve">
+        <value>A bulk-rendering operation must have at least one 'included' path where input files will be found.
+Use {0} to include the paths/path-patterns for input files.</value>
+    </data>
+    <data name="BulkRenderingMustHaveOutputPath" xml:space="preserve">
+        <value>A bulk-rendering operation must have an 'output' path where the results will be saved.
+Use {0} to denote the output path.</value>
+    </data>
+    <data name="PipeExpressionIsSyntacticallyInvalid" xml:space="preserve">
+        <value>A 'pipe' expression must use the correct syntax.  This is "[variable] [expression]",
+where [variable] must be a simple TALES variable and the [expression] is any valid TALES expression
+which may be used to locate the function delegate.
+   Element:{0}
+Expression:{1}</value>
+    </data>
+    <data name="CannotGetPipeExpressionSourceObject" xml:space="preserve">
+        <value>An exception occurred whilst getting the source object for a TALES 'pipe' expression.
+Refer to the inner exception for more detail.
+   Element:{0}</value>
+    </data>
+    <data name="CannotGetPipeExpressionDelegate" xml:space="preserve">
+        <value>An exception occurred whilst getting the function delegate for a TALES 'pipe' expression.
+Refer to the inner exception for more detail.
+   Element:{0}</value>
+    </data>
+    <data name="CannotExecutePipeExpressionDelegate" xml:space="preserve">
+        <value>An exception occurred whilst executing the function delegate for a TALES 'pipe' expression.
+Refer to the inner exception for more detail.
+   Element:{0}</value>
+    </data>
+    <data name="PipeExpressionDelegateObjectMustBeADelegate" xml:space="preserve">
+        <value>The pipe expression delegate object must be a {0} type, but was actually {1}.</value>
+    </data>
+    <data name="PipeExpressionDelegateMustTakeOneParameterAndReturnAnObject" xml:space="preserve">
+        <value>The pipe expression delegate must accept precisely one parameter and must return a non-void object.
+Actual parameter types:{0}
+    Actual return type:{1}</value>
+    </data>
+    <data name="UnsupportedLoadExpressionResult" xml:space="preserve">
+        <value>A load expression must indicate an object which may be loaded.
+        Element:{0}
+    Actual type:{1}
+Supported types:{2}</value>
+    </data>
+</root>

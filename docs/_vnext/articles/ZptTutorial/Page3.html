@@ -1,0 +1,188 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Tutorial: Variables &amp; expressions </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Tutorial: Variables &amp; expressions ">
+    <meta name="generator" content="docfx 2.56.6.0">
+    
+    <link rel="shortcut icon" href="../../favicon.ico">
+    <link rel="stylesheet" href="../../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../../styles/docfx.css">
+    <link rel="stylesheet" href="../../styles/main.css">
+    <meta property="docfx:navrel" content="../../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../../index.html">
+                <img id="logo" class="svg" src="../../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="">
+<h1 id="tutorial-variables--expressions">Tutorial: Variables &amp; expressions</h1>
+
+<p>So far through this tutorial we have been using some simple expressions to access values from the model.
+Examples include <code>here/Message</code> and <code>here/Foods</code>.
+In this tutorial page we will look at those expressions in more depth, along with how we may declare variables.
+ZPT expressions use an extensible syntax named TALES.</p>
+<h2 id="introducing-path-expressions">Introducing path expressions</h2>
+<p>The expressions used so far in this tutorial make use of the default TALES expression type, named <strong>path</strong> expressions.
+These expressions look similar to a URL path, with forward-slashes indicating descent into a 'child' object or reference.
+Let's try another one now, make a change to the model and add the following (the rest of the model is omitted for brevity):</p>
+<pre><code class="lang-csharp">{
+    AnObject = new {
+        ChildObject = new {
+            Value = 42
+        }
+    }
+}
+</code></pre>
+<p>Now add the following the document template source file.
+When we render it, the <code>span</code> element will be replaced by the text 42.</p>
+<pre><code class="lang-html">&lt;p&gt;The answer is &lt;span tal:replace=&quot;here/AnObject/ChildObject/Value&quot;&gt;10&lt;/span&gt;.&lt;/p&gt;
+</code></pre>
+<p>Path expressions are <em>the default expression type</em> for ZptSharp.
+Strictly-speaking, in the example above, we could have written the <code>tal:replace</code> attribute value as <code>path:here/AnObject/ChildObject/Value</code>.
+Because path expressions are the default though, the <code>path:</code> prefix is not required.
+Any unprefixed expression is assumed to be a <code>path:</code> expression.</p>
+<p>Something else to point out is how both <code>tal:content</code> and <code>tal:replace</code> attributes will convert any value they receive to string.
+In this case, the integer 42 was converted to its string representation via the built-in <code>Object.ToString()</code> method.</p>
+<h2 id="introducing-string-expressions">Introducing string expressions</h2>
+<p>Another available expression type is the <strong>string</strong> expression.
+These use the prefix <code>string:</code> (or shortened <code>str:</code>) and are used for dynamically building strings, in a similar style to <a href="https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/tokens/interpolated">C# interpolated strings</a>.
+Let's try replacing the HTML we added in the above step with the following:</p>
+<pre><code class="lang-html">&lt;p tal:content=&quot;string:The answer is ${here/AnObject/ChildObject/Value}.&quot;&gt;The answer goes here.&lt;/p&gt;
+</code></pre>
+<p>When we render it, the result is the same.
+The string expression-type uses the placeholder <code>${...}</code> to insert data into a literal string value.
+Inside the placeholder is evaluated as a TALES expression in its own right.
+As you see, in this case we used a path expression to provide the placeholder value.</p>
+<h2 id="defining-variables">Defining variables</h2>
+<p>Notice how every path expression used so far has begun with the identifier <code>here</code>?
+<code>here</code> is a ZPT built-in variable (we call those variables &quot;root contexts&quot;) and it provides access to the model.
+We may define our own variables though, using the <code>tal:define</code> attribute.
+Let's make another change to the HTML that we were using above:</p>
+<pre><code class="lang-html">&lt;p tal:define=&quot;answer here/AnObject/ChildObject/Value&quot;&gt;
+    The answer is &lt;span tal:replace=&quot;answer&quot;&gt;10&lt;/span&gt;.
+&lt;/p&gt;
+</code></pre>
+<p>Once again, upon rendering the result is the same.
+The <code>tal:define</code> attribute allows us to define a variable named <code>answer</code> which has the value of the path expression <code>here/AnObject/ChildObject/Value</code>.
+Variable definitions don't have to use path expressions to get their value, they may use any TALES expression type which has been installed &amp; activated.</p>
+<h2 id="variable-scope">Variable scope</h2>
+<p>By default, variable definitions produce <strong>local variables</strong>; these variables have a scope which follows the DOM.
+Local variables are 'visible'/usable on the same element as which they are defined, as well as upon any descendent element.
+Local variables <em>are not usable</em> 'outside' of the element on which they are defined.
+Local variables may also be <em>redefined</em> upon a descendent element.
+Let's try a short experiment in the template document source:</p>
+<pre><code class="lang-html">&lt;div tal:define=&quot;varOne string:I am variable one&quot;&gt;
+    &lt;p tal:content=&quot;varOne&quot;&gt;Message from a variable.&lt;/p&gt;
+    &lt;p tal:define=&quot;varOne string:But I am variable two&quot;
+       tal:content=&quot;varOne&quot;&gt;Message from a variable.&lt;/p&gt;
+    &lt;p tal:content=&quot;varOne&quot;&gt;Message from a variable.&lt;/p&gt;
+&lt;/div&gt;
+</code></pre>
+<p>If you render the document, you will see a result similar to:</p>
+<blockquote>
+<p>I am variable one</p>
+<p>But I am variable two</p>
+<p>I am variable one</p>
+</blockquote>
+<p>When a variable is redefined, the newly-defined variable (upon the descendent element) <em>hides</em> the original variable of the same name, for the parts of the DOM where the redefined variable is in-scope.
+This is why in the second <code>&lt;p&gt;</code> element the redefined <code>varOne</code> is 'visible' and takes precedence over the original <code>varOne</code> (defined upon the containing <code>&lt;div&gt;</code> element).
+Once the redefined variable passes out-of-scope (outside the second <code>&lt;p&gt;</code>), the original <code>varOne</code> becomes visible &amp; usable again.</p>
+<h2 id="repeat-attributes-create-variables-too">Repeat attributes create variables too</h2>
+<p>We have seen how <code>tal:define</code> may be explicitly used to define (or redefine) a variable.
+<a href="Page2.html">In the previous tutorial page</a> we also saw how a <code>tal:repeat</code> attribute also defines a variable.
+In that example, the created variable is named <code>food</code>.
+The variable created by a repeat attribute holds the value of the current iteration through the <code>IEnumerable</code>.</p>
+<h2 id="next-manipulating-attributes--omitting-tags">Next: Manipulating attributes &amp; omitting tags</h2>
+<p>In the next tutorial page we learn <a href="Page4.html">how to set, unset and change attribute values within elements, as well as how to omit an element tag whilst preserving its content</a>.</p>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/csf-dev/ZPT-Sharp/blob/master/ZptSharp.Documentation/articles/ZptTutorial/Page3.md/#L1" class="contribution-link">Improve this Doc</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In This Article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            
+            <span>Generated by <strong>DocFX</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../../styles/docfx.js"></script>
+    <script type="text/javascript" src="../../styles/main.js"></script>
+  </body>
+</html>

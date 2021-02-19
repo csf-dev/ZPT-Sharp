@@ -1,0 +1,16 @@
+- name: Documentation home
+  topicHref: ../index.md
+- name: ZPT tutorial
+  items:
+    - name: 1. Content & replace
+      href: index.md
+    - name: 2. Condition & repeat
+      href: Page2.md
+    - name: 3. Variables & expressions
+      href: Page3.md
+    - name: 4. Attributes & tag-omission
+      href: Page4.md
+    - name: 5. METAL macros
+      href: Page5.md
+    - name: 6. Macro slots & filling them
+      href: Page6.md

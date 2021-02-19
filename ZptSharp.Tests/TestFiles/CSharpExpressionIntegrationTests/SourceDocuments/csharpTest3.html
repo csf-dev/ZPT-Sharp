@@ -1,0 +1,14 @@
+<html tal:define="ref1 assemblyref:ZptSharp.Tests">
+<head>
+<title>CSharp Linq test</title>
+</head>
+<body>
+<p tal:define="items options/enumerableItems;
+               itemsType type:items ICollection&lt;object&gt;;
+               scg using:System.Collections.Generic;
+               linq using:System.Linq;">
+  Here is a sequence created using Linq:
+  <span tal:content="csharp:String.Join(&quot;,&quot;, items.Select(x => x.ToString()))">contents here</span>
+</p>
+</body>
+</html>

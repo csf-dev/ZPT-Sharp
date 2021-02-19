@@ -1,0 +1,193 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>The TALES global root contexts </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="The TALES global root contexts ">
+    <meta name="generator" content="docfx 2.56.6.0">
+    
+    <link rel="shortcut icon" href="../../../favicon.ico">
+    <link rel="stylesheet" href="../../../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../../../styles/docfx.css">
+    <link rel="stylesheet" href="../../../styles/main.css">
+    <meta property="docfx:navrel" content="../../../toc.html">
+    <meta property="docfx:tocrel" content="../toc.html">
+    
+    
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../../../index.html">
+                <img id="logo" class="svg" src="../../../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="GlobalContextsArticle">
+<h1 id="the-tales-global-root-contexts">The TALES global root contexts</h1>
+
+<p>TALES root contexts could be thought of as pre-defined variables which are available to all templates.
+They may be used in expressions and have the values/meanings as described below.
+Please note that - with the exception of <code>CONTEXTS</code> - <em>none of these names are reserved words</em>.
+You may declare your own variables in templates using these names and it will have the usual effect of 'hiding' the original definition.
+See the information about the <code>CONTEXTS</code> keyword to access these pre-defined meanings, if a variable defined in a template has hidden the original meaning.</p>
+<h2 id="how-these-variables-are-provided">How these variables are provided</h2>
+<p>These variables are made available by a combination of <strong>configurable logic</strong>.
+This means that the actual list of variables which are available to your template might differ if that configuration has anything other than the default values.
+In some cases that might mean that you have a superset of the list in <a href="GlobalContexts.html#the-list-of-variables">the following section</a>, and in other cases it might mean that some/all of the variables are not present.
+This is the logic which leads to the provision of these variables.</p>
+<ol>
+<li>A <strong><a class="xref" href="../../../api/ZptSharp.Expressions.IGetsDictionaryOfNamedTalesValues.html">root contexts provider</a></strong> is used to get the baseline set of root contexts (variables).
+<ul>
+<li><a class="xref" href="../../../api/ZptSharp.Expressions.BuiltinContextsProvider.html">The default implementation of this service</a> provides the variables listed in the section below.</li>
+<li>If the <a class="xref" href="../../../api/ZptSharp.Config.RenderingConfig.html#ZptSharp_Config_RenderingConfig_RootContextsProvider"><code>RootContextsProvider</code></a> property of <a class="xref" href="../../../api/ZptSharp.Config.RenderingConfig.html">the rendering configuration</a> has been set using a non-default value then that alternative provider will be used instead.
+This could lead to a very different set of variables being made available.</li>
+<li><em>No logic in any of the production ZptSharp packages replaces this configuration property</em>. It is provided entirely as an extension point for other developers.</li>
+</ul>
+</li>
+<li>The <strong><a class="xref" href="../../../api/ZptSharp.Config.RenderingConfig.html#ZptSharp_Config_RenderingConfig_ContextBuilder">context builder function</a></strong> is then executed in order to supplement the root contexts from the previous step with additional variables.
+<ul>
+<li>The default function defined upon <a class="xref" href="../../../api/ZptSharp.Config.RenderingConfig.html">the rendering configuration</a> does nothing, and leaves the root contexts unchanged.</li>
+<li><a href="../../NuGetPackages.html#usage-specific-packages">The two MVC View Engine packages</a> make use of this technique in order to add <a href="../../ViewEngines.html#added-tales-contextsvariables-for-mvc">the additional contexts which are available to MVC document templates</a>.</li>
+</ul>
+</li>
+<li><em>Presuming step 1, above, has not been overridden</em>, the <a href="GlobalContexts.html#options"><code>options</code></a> root context is populated by <a class="xref" href="../../../api/ZptSharp.Expressions.BuiltinContextsProvider.html">the default root contexts provider</a>, using <a class="xref" href="../../../api/ZptSharp.Config.RenderingConfig.html#ZptSharp_Config_RenderingConfig_KeywordOptions">the <code>KeywordOptions</code> configuration property</a>.
+<ul>
+<li>If a different implementation was provided in step 1, then it is up to the replacement root contexts provider to populate the <code>options</code> root context (if it even provides that variable).</li>
+</ul>
+</li>
+</ol>
+<h2 id="the-list-of-variables">The list of variables</h2>
+<h3 id="options"><code>options</code></h3>
+<p>This root context makes available a collection of <strong>keyword options</strong>, which is a name/value collection of <code>string</code> names and <code>object</code> values.
+The precise meaning/semantics of keyword options is left deliberately vague by the ZPT specification.
+In practice this root context is very rarely used in favour of more suitable mechanisms which integrate into various frameworks.
+For example, in an MVC web application it is generally <em>more suitable to use the view bag</em> to hold arbitrary data which is made avilable to views.</p>
+<p>The keyword options themselves (if you wish to use them) are set up by <a class="xref" href="../../../api/ZptSharp.Config.RenderingConfig.html">the rendering configuration</a>, using <a class="xref" href="../../../api/ZptSharp.Config.RenderingConfig.html#ZptSharp_Config_RenderingConfig_KeywordOptions">the <code>KeywordOptions</code> configuration property</a>.</p>
+<h3 id="repeat"><code>repeat</code></h3>
+<p>This root context provides access to a collection of <a href="../Tal/Repeat.html#repeat-variables">the repeat variables</a> which are currently in-scope.
+Each named repeat variable is an item in this collection, exposing all of the standard properties of a repeat variable.</p>
+<h3 id="here"><code>here</code></h3>
+<p>The <code>here</code> root context provides access to the model.
+In MVC web applications using the ZptSharp view engines, the root context <code>Model</code> is an alias for <code>here</code>.</p>
+<h3 id="nothing"><code>nothing</code></h3>
+<p>This root context provides a non-object.  In .NET applications this means a <code>null</code> reference.</p>
+<h3 id="default"><code>default</code></h3>
+<p>This root context provides a singleton instance of <a class="xref" href="../../../api/ZptSharp.Expressions.AbortZptActionToken.html">the abort-action token</a>.
+The abort-action token is a special object which is interpreted by a number of TAL attributes to mean &quot;do nothing&quot;.
+Please refer to <a href="../Index.html#tal-binds-data-to-the-template">the individual TAL attributes</a> for their precise behaviour when they act upon an expression result which is the abort-action token.</p>
+<p>The general rule-of-thumb for TAL attributes operating upon an abort-action token means that the attribute is processed with the same outcome as if it were not present.</p>
+<h3 id="attrs"><code>attrs</code></h3>
+<p>The <code>attrs</code> root context provides access to <em>the attribute values</em> for the current element.
+The format of this object is a name/value collection of <code>string</code> attribute names and <code>string</code> attribute values.</p>
+<h3 id="template"><code>template</code></h3>
+<p>This root context provides access to an object which represents the current document template.
+The object returned by this context provides two values:</p>
+<ul>
+<li>The <code>macros</code> present upon the document: A name/value collection of <code>string</code> macro names and <a class="xref" href="../../../api/ZptSharp.Metal.MetalMacro.html"><code>MetalMacro</code></a> macros</li>
+<li>The <code>sourcename</code> for the document: A <code>string</code> name for the document template; typically its file path.</li>
+</ul>
+<h3 id="container"><code>container</code></h3>
+<p>The <code>container</code> root context is only available when <a class="xref" href="../../../api/ZptSharp.Rendering.IDocumentSourceInfo.html">the source of the current document template</a> is a source which may contain other templates.
+It is primarily used by METAL attributes to find &amp; reference other template documents.
+In practice, for document templates rendered from files on disk, this is the case; the container is the file system directory that contains the current template.</p>
+<p>In other cases (if the template came from a different source) then there may or may not be a logical 'container' available.
+A container is available if the document's source implements <a class="xref" href="../../../api/ZptSharp.Rendering.IHasContainer.html">the <code>IHasContainer</code> interface</a>.
+If the source does not provide a container, then the <code>container</code> root context/variable will return <code>null</code>.</p>
+<p>In the most common usage of ZptSharp (template documents rendered from files), this <code>container</code> root context may be used to navigate to other template documents relative to the current document.
+The <code>container</code> variable will provide a reference to the directory which contains the current template.</p>
+<p><em>If you are using a ZptSharp MVC view engine</em> then you may wish to use <a href="../../ViewEngines.html#added-tales-contextsvariables-for-mvc">the <code>Views</code> root context</a> instead.</p>
+<h3 id="error"><code>error</code></h3>
+<p>If ZptSharp is currently processing <a href="../Tal/OnError.html">a <code>tal:on-error</code> attribute</a> then this root context provides access to the current error object.
+This should always be an object which derives from <code>System.Exception</code> when it is present.</p>
+<p>If there is no current error (ZptSharp is not handling an error) then this variable will be <code>null</code>.</p>
+<h2 id="the-special-root-context-contexts">The special root context <code>CONTEXTS</code></h2>
+<p>As noted at the beginning of this page, none of the names of root contexts/variables listed in the previous section are reserved words.
+This means that any of these variables may be overridden/hidden by variable definitions in your templates.
+The special root context name <code>CONTEXTS</code> is a reserved word however and <em>no variable may be manually-defined with this name</em>.</p>
+<p>The <code>CONTEXTS</code> root context serves as a container for all of the other variables available in the root context.
+This means that any other root context may be used unambiguously, even if it has been hidden by another variable definition of the same name, by accessing it from the <code>CONTEXTS</code> root context.</p>
+<p>For example, even if another variable named <code>default</code> has been defined within the template, the TALES path expression <code>CONTEXTS/default</code> will provide access to the abort-action token.</p>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/csf-dev/ZPT-Sharp/blob/master/ZptSharp.Documentation/articles/ZptReference/Tales/GlobalContexts.md/#L1" class="contribution-link">Improve this Doc</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In This Article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            
+            <span>Generated by <strong>DocFX</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../../../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../../../styles/docfx.js"></script>
+    <script type="text/javascript" src="../../../styles/main.js"></script>
+  </body>
+</html>
