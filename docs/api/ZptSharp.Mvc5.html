@@ -1,0 +1,171 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Namespace ZptSharp.Mvc5
+   </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Namespace ZptSharp.Mvc5
+   ">
+    <meta name="generator" content="docfx 2.56.6.0">
+    
+    <link rel="shortcut icon" href="../favicon.ico">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="ZptSharp.Mvc5">
+  
+  <h1 id="ZptSharp_Mvc5" data-uid="ZptSharp.Mvc5" class="text-break">Namespace ZptSharp.Mvc5
+  </h1>
+  <div class="markdown level0 summary"></div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="markdown level0 remarks"></div>
+    <h3 id="classes">Classes
+  </h3>
+      <h4><a class="xref" href="ZptSharp.Mvc5.FileExistenceTester.html">FileExistenceTester</a></h4>
+      <section><p>Default implementation of <a class="xref" href="ZptSharp.Mvc5.ITestForFileExistence.html">ITestForFileExistence</a> which simply
+wraps a call to <span class="xref">System.IO.File.Exists(System.String)</span>.</p>
+</section>
+      <h4><a class="xref" href="ZptSharp.Mvc5.FindViewResult.html">FindViewResult</a></h4>
+      <section><p>Represents the result from <a class="xref" href="ZptSharp.Mvc5.IFindsView.html#ZptSharp_Mvc5_IFindsView_FindView_System_String_System_String_System_String___">FindView(String, String, String[])</a>.</p>
+</section>
+      <h4><a class="xref" href="ZptSharp.Mvc5.MvcContextBuilderProvider.html">MvcContextBuilderProvider</a></h4>
+      <section><p>Implementation of <a class="xref" href="ZptSharp.Config.IGetsRootContextBuilder.html">IGetsRootContextBuilder</a> which sets up the
+'root variables' which are made available to ZPT MVC5 views.</p>
+</section>
+      <h4><a class="xref" href="ZptSharp.Mvc5.MvcContextBuilderProviderBase.html">MvcContextBuilderProviderBase</a></h4>
+      <section><p>Base implementation of <a class="xref" href="ZptSharp.Config.IGetsRootContextBuilder.html">IGetsRootContextBuilder</a> which sets up the
+'root variables' which are made available to ZPT MVC views.</p>
+</section>
+      <h4><a class="xref" href="ZptSharp.Mvc5.MvcRenderingConfigProvider.html">MvcRenderingConfigProvider</a></h4>
+      <section><p>Implementation of <a class="xref" href="ZptSharp.Mvc5.IGetsMvcRenderingConfig.html">IGetsMvcRenderingConfig</a> which gets a configuration based upon another config,
+but with MVC-specific information added.</p>
+</section>
+      <h4><a class="xref" href="ZptSharp.Mvc5.ServerLocationMapper.html">ServerLocationMapper</a></h4>
+      <section><p>Implementation of <a class="xref" href="ZptSharp.Mvc5.IMapsLocation.html">IMapsLocation</a> which uses <span class="xref">System.Web.HttpServerUtility.MapPath(System.String)</span>
+to map between virtual locations and actual paths.</p>
+</section>
+      <h4><a class="xref" href="ZptSharp.Mvc5.ViewFinder.html">ViewFinder</a></h4>
+      <section><p>Implementation of <a class="xref" href="ZptSharp.Mvc5.IFindsView.html">IFindsView</a> which searches-for and
+finds view files.</p>
+</section>
+      <h4><a class="xref" href="ZptSharp.Mvc5.ZptSharpErrorView.html">ZptSharpErrorView</a></h4>
+      <section><p>A provider for a stream which contains a web page displaying a ZptSharp rendering error to an end user.</p>
+</section>
+      <h4><a class="xref" href="ZptSharp.Mvc5.ZptSharpView.html">ZptSharpView</a></h4>
+      <section><p>The ZptSharp implementation of an <span class="xref">System.Web.Mvc.IView</span> for either MVC5 or MVC Core.</p>
+</section>
+      <h4><a class="xref" href="ZptSharp.Mvc5.ZptSharpViewEngine.html">ZptSharpViewEngine</a></h4>
+      <section><p>The ZptSharp MVC ViewEngine, used to render MVC views using ZptSharp.</p>
+</section>
+    <h3 id="interfaces">Interfaces
+  </h3>
+      <h4><a class="xref" href="ZptSharp.Mvc5.IFindsView.html">IFindsView</a></h4>
+      <section><p>An object which finds a view file, searching a number of provided locations.</p>
+</section>
+      <h4><a class="xref" href="ZptSharp.Mvc5.IGetsErrorStream.html">IGetsErrorStream</a></h4>
+      <section><p>An object which can get a stream which contains an error page, to show the end user, when rendering fails.</p>
+</section>
+      <h4><a class="xref" href="ZptSharp.Mvc5.IGetsMvcRenderingConfig.html">IGetsMvcRenderingConfig</a></h4>
+      <section><p>An object which can provide a <a class="xref" href="ZptSharp.Config.RenderingConfig.html">RenderingConfig</a> instance
+which is suitable for use with ASP.NET MVC (either MVC5 or MVC Core).</p>
+</section>
+      <h4><a class="xref" href="ZptSharp.Mvc5.IMapsLocation.html">IMapsLocation</a></h4>
+      <section><p>An object which can map a file path (which might be a 'virtual' one)
+into an actual file path.</p>
+</section>
+      <h4><a class="xref" href="ZptSharp.Mvc5.ITestForFileExistence.html">ITestForFileExistence</a></h4>
+      <section><p>An object which tests for the existence of a file.</p>
+</section>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In This Article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            
+            <span>Generated by <strong>DocFX</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

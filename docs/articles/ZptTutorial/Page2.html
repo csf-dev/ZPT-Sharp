@@ -1,0 +1,154 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Tutorial: Conditions &amp; repetition </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Tutorial: Conditions &amp; repetition ">
+    <meta name="generator" content="docfx 2.56.6.0">
+    
+    <link rel="shortcut icon" href="../../favicon.ico">
+    <link rel="stylesheet" href="../../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../../styles/docfx.css">
+    <link rel="stylesheet" href="../../styles/main.css">
+    <meta property="docfx:navrel" content="../../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../../index.html">
+                <img id="logo" class="svg" src="../../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="">
+<h1 id="tutorial-conditions--repetition">Tutorial: Conditions &amp; repetition</h1>
+
+<p>In this step of the tutorial we will learn about the <code>tal:condition</code> and <code>tal:repeat</code> attributes and how they control the rendering of a document template.</p>
+<h2 id="talcondition-can-remove-an-element"><code>tal:condition</code> can remove an element</h2>
+<p>Let's make two changes to our one-page/one-model ZptSharp environment.
+First, let's add the following to the markup (just before the close of the <code>&lt;body&gt;</code> tag is fine):</p>
+<pre><code class="lang-html">&lt;div tal:condition=&quot;here/AmITruthy&quot;&gt;This renders if AmITruthy is true&lt;/div&gt;
+</code></pre>
+<p>Second, let's make a change to the model so that it now looks like this:</p>
+<pre><code class="lang-csharp">{ Message = &quot;Hello world!&quot;, AmITruthy = true }
+</code></pre>
+<p>Now let's render the document once again; as you might expect, boolean <code>true</code> is &quot;truthy&quot; and so the <code>div</code> element is rendered into the output document.
+Change the <code>AmITruthy</code> value in the model to <code>false</code> and render once again.
+This time, ZptSharp will have <em>removed</em> the div element <em>and all of its descendents</em>.
+When a <code>tal:condition</code> attribute removes an element it matters not if that element has no descendents, just text node descendents or if it contains entire trees of markup, <em>all descendents are removed</em>.</p>
+<p>You may experiment with different values for the <code>AmITruthy</code> model value to get a feel for what is considered 'truthy' and what is 'falsey'.
+As a start, <code>null</code> references and empty strings are falsey.
+A complete list of these may be found in the <a href="../ZptReference/Tal/Condition.html"><code>tal:condition</code> reference documentation</a>.</p>
+<h2 id="talrepeat-is-like-foreach-for-an-element"><code>tal:repeat</code> is like <code>foreach</code> for an element</h2>
+<p>Let's make another change now, to both our document template and model.
+Let's add the following to the document:</p>
+<pre><code class="lang-html">&lt;ul&gt;
+    &lt;li tal:repeat=&quot;food here/Foods&quot;&gt;
+        I &lt;em&gt;really like&lt;/em&gt; eating &lt;span tal:replace=&quot;food&quot;&gt;apples&lt;/span&gt;.
+    &lt;/li&gt;
+&lt;/ul&gt;
+</code></pre>
+<p>In our model, let's add another property so that the model now looks like this (reformatted for readability):</p>
+<pre><code class="lang-csharp">{
+    Message = &quot;Hello world!&quot;,
+    AmITruthy = true,
+    Foods = new string[] {
+        &quot;oranges&quot;,
+        &quot;bananas&quot;,
+        &quot;cucumber&quot;
+    },
+}
+</code></pre>
+<p>Let's render this; what we will see is that <code>tal:repeat</code> works a lot like a C# <code>foreach</code> statement.
+In this case we will see the <code>&lt;li&gt;</code> element <em>and all of its descendents</em> are repeated three times, once for each listed food.
+In each iteration a variable is created, named <code>food</code>, holding the value from the current iteration.
+We use this variable in a <code>tal:replace</code> attribute (as described in <a href="index.html">the previous tutorial page</a>) within the list item in order to show it on the rendered output.</p>
+<p>Just like the <code>foreach</code> keyword in C#, <code>tal:repeat</code> works on objects that are <code>IEnumerable</code>.</p>
+<h2 id="next-more-on-variables--expressions">Next: More on variables &amp; expressions</h2>
+<p>In the next tutorial page we will <a href="Page3.html">look deeper at variables &amp; the different types of available expressions</a>.</p>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/csf-dev/ZPT-Sharp/blob/production/ZptSharp.Documentation/articles/ZptTutorial/Page2.md/#L1" class="contribution-link">Improve this Doc</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In This Article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            
+            <span>Generated by <strong>DocFX</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../../styles/docfx.js"></script>
+    <script type="text/javascript" src="../../styles/main.js"></script>
+  </body>
+</html>

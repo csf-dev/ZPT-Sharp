@@ -1,0 +1,178 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Tutorial: Defining &amp; filling macro slots </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Tutorial: Defining &amp; filling macro slots ">
+    <meta name="generator" content="docfx 2.56.6.0">
+    
+    <link rel="shortcut icon" href="../../favicon.ico">
+    <link rel="stylesheet" href="../../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../../styles/docfx.css">
+    <link rel="stylesheet" href="../../styles/main.css">
+    <meta property="docfx:navrel" content="../../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../../index.html">
+                <img id="logo" class="svg" src="../../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="">
+<h1 id="tutorial-defining--filling-macro-slots">Tutorial: Defining &amp; filling macro slots</h1>
+
+<p>So far in our look at METAL macros we have defined &amp; used macros but have yet to customize them at the point of consumption.
+The way in which METAL permits macro customization is by defining <strong>slots</strong> within the defined macro and then optionally filling those slots where the macro is used.</p>
+<h2 id="a-macro-with-a-slot">A macro with a slot</h2>
+<p>Let's adapt the <code>greeting</code> macro which we created in the previous tutorial step, specifically the macro which appears in its own <code>greeting.pt</code> source file.</p>
+<h3 id="the-macro-markup">The macro markup</h3>
+<p>We will change the content of that macro (in its own <code>greeting.pt</code> source file) to the following:</p>
+<pre><code class="lang-html">&lt;html&gt;
+&lt;head&gt;
+&lt;title&gt;ZptSharp 'greeting' macro&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;div&gt;
+    &lt;div metal:define-macro=&quot;greeting&quot;&gt;
+        &lt;p&gt;Good &lt;span tal:replace=&quot;time&quot;&gt;afternoon&lt;/span&gt;!&lt;/p&gt;
+        &lt;p metal:define-slot=&quot;activity&quot;&gt;What would you like to do?&lt;/p&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+<h3 id="the-macro-usage">The macro usage</h3>
+<p>Now let's change the main document template we are rendering to the following, to use the macro:</p>
+<pre><code class="lang-html">&lt;html&gt;
+&lt;head&gt;
+&lt;title&gt;ZptSharp METAL macro usage example&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;div tal:define=&quot;time string:morning&quot;&gt;
+    &lt;div metal:use-macro=&quot;container/greeting.pt/macros/greeting&quot;&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div tal:define=&quot;time string:night;
+                 name string:Joe&quot;&gt;
+    &lt;div metal:use-macro=&quot;container/greeting.pt/macros/greeting&quot;&gt;
+        &lt;p metal:fill-slot=&quot;activity&quot;&gt;
+            It's &lt;em&gt;getting pretty late now &lt;span tal:replace=&quot;name&quot;&gt;Name&lt;/span&gt;&lt;/em&gt;,
+            let's go to bed.
+        &lt;/p&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+<h3 id="the-result">The result</h3>
+<p>Let's render this and see what happens in the output.
+We see the macro is used twice on the rendered document.</p>
+<ol>
+<li>The first time the macro appears, the <code>time</code> variable was &quot;morning&quot; and so it renders a paragraph &quot;Good morning!&quot;.  Also, it renders another paragraph which reads &quot;What would you like to do?&quot;</li>
+<li>The second time the macro appears, the <code>time</code> variable was &quot;night&quot; and so it renders a paragraph &quot;Good night!&quot;.  The &quot;What would you like to do?&quot; paragraph does not appear though.  Instead, a paragraph is rendered which reads &quot;It's <em>getting pretty late now Joe</em>, let's go to bed.&quot;</li>
+</ol>
+<h2 id="how-slots-and-slot-fillers-work">How slots and slot-fillers work</h2>
+<p>The <code>metal:define-slot</code> attribute is only permitted upon the descendents of an element which has the <code>metal:define-macro</code> attribute and it turns that element (and its descendents) into <strong>a macro slot</strong>.  Within a macro definition there may be zero or more slots defined; there is no upper limit to the number of slots a macro may have, except that each slot must have a unique name within that macro.</p>
+<p>Macro slots are much like placeholders, when the macro is used, any slots may optionally be filled with filler content.
+A slot is filled by an element which has a <code>metal:fill-slot</code> attribute (for the same slot name) which must be a descendent of the element which has the corresponding <code>metal:use-macro</code> attribute.
+This is an exception to the basic rule of METAL macros that the element with the <code>metal:use-macro</code> attribute <em>and all of its descendents</em> is replaced by the macro subtree.
+Where the macro usage contains slot fillers, the matching slots are replaced by their corresponding fillers.</p>
+<p>Slots which are not filled (do not have a matching <code>metal:fill-slot</code> attribute where the macro is used) will display the content from the macro definition.</p>
+<p>As you can see from the example above, slot filler content may include markup and even TAL processing attributes.
+Indeed, a slot-filler could even make use of a further <code>metal:use-macro</code> attribute.</p>
+<h2 id="end-of-the-zpt-tutorial-whats-next">End of the ZPT tutorial: What's next?</h2>
+<p>You have reached the end of the ZPT syntax tutorial; all of the most important concepts have been covered.
+<a href="../ZptReference/Index.html">The ZPT reference</a> has a lot more detail about many of the concepts you have learned during the tutorial.</p>
+<p>There are also a few more advanced concepts not covered in this tutorial; amongst those are:</p>
+<ul>
+<li><a href="../ZptReference/Metal/ExtendMacro.html">METAL macro extension</a> (similar to creating a subclass of a macro)</li>
+<li><a href="../ZptReference/Tal/OnError.html">TAL error handling</a> (gracefully dealing with errors)</li>
+<li><a href="../ZptReference/Index.html#tales-is-how-expressions-are-written">The TALES expression types</a> (we have only touched upon path and string expressions in this tutorial, there are more!)</li>
+</ul>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/csf-dev/ZPT-Sharp/blob/production/ZptSharp.Documentation/articles/ZptTutorial/Page6.md/#L1" class="contribution-link">Improve this Doc</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In This Article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            
+            <span>Generated by <strong>DocFX</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../../styles/docfx.js"></script>
+    <script type="text/javascript" src="../../styles/main.js"></script>
+  </body>
+</html>
