@@ -43,7 +43,7 @@ Can you see the mistake?
 Even though the `tal:repeat` attribute is written before the `tal:define` attribute, _it will be processed afterwards_.
 This means that the `tal:define` attribute will attempt to evaluate the expression `item/name` before the `item` variable has been created, and will almost surely raise an error.
 
-[As noted in the table listing all TAL attributes]: ../index.md#tal-binds-data-to-the-template
+[As noted in the table listing all TAL attributes]: ../Index.md#tal-binds-data-to-the-template
 [`tal:define` attributes]: Define.md
 [`tal:condition` attributes]: Condition.md
 

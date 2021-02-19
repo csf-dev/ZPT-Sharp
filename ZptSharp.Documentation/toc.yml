@@ -3,7 +3,7 @@
 - name: Tutorial
   topicHref: articles/ZptTutorial/index.md
 - name: ZPT syntax
-  topicHref: articles/ZptReference/index.md
+  topicHref: articles/ZptReference/Index.md
 - name: API docs
   topicHref: api/index.md
 - name: GitHub repo

@@ -24,7 +24,7 @@
     - name: Consuming the API
       topicHref: ../api/index.md
     - name: ZPT syntax
-      topicHref: ZptReference/index.md
+      topicHref: ZptReference/Index.md
     - name: The CLI app
       href: CliRenderer.md
     - name: Compatibility

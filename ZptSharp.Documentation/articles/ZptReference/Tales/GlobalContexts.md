@@ -76,7 +76,7 @@ Please refer to [the individual TAL attributes] for their precise behaviour when
 The general rule-of-thumb for TAL attributes operating upon an abort-action token means that the attribute is processed with the same outcome as if it were not present.
 
 [the abort-action token]: xref:ZptSharp.Expressions.AbortZptActionToken
-[the individual TAL attributes]: ../index.md#tal-binds-data-to-the-template
+[the individual TAL attributes]: ../Index.md#tal-binds-data-to-the-template
 
 ### `attrs`
 
