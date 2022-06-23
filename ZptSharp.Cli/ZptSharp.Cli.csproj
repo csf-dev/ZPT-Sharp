@@ -23,7 +23,7 @@
   <ItemGroup>
     <PackageReference Include="CSF.Cli.Parameters" Version="2.0.0" />
     <PackageReference Include="Microsoft.Extensions.Hosting" Version="5.0.0" />
-    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
   </ItemGroup>
 
   <ItemGroup>
