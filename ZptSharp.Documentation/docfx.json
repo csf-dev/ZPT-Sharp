@@ -69,7 +69,8 @@
     "globalMetadataFiles": [],
     "fileMetadataFiles": [],
     "template": [
-      "default"
+      "default",
+      "zptsharp-template"
     ],
     "postProcessors": [],
     "markdownEngineName": "markdig",
