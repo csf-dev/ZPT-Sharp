@@ -20,8 +20,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="AngleSharp" Version="0.14.0" GeneratePathProperty="true" ExcludeAssets="Compile" Condition="'$(TargetFramework.TrimEnd(`0123456789`))' == 'net'" />
-    <PackageReference Include="AngleSharp" Version="0.14.0" Condition="'$(TargetFramework.TrimEnd(`0123456789`))' != 'net'" />
+    <PackageReference Include="AngleSharp" Version="1.5.0" GeneratePathProperty="true" ExcludeAssets="Compile" Condition="'$(TargetFramework.TrimEnd(`0123456789`))' == 'net'" />
+    <PackageReference Include="AngleSharp" Version="1.5.0" Condition="'$(TargetFramework.TrimEnd(`0123456789`))' != 'net'" />
     <PackageReference Include="CSF.Collections.EventRaising" Version="1.1.0" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="5.0.0" />
   </ItemGroup>
